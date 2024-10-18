@@ -856,6 +856,91 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Seçenek ekle',
+                            'empty-info'        => 'Özelleştirilebilir seçenekler oluşturmak için.',
+                            'empty-title'       => 'Seçenek ekle',
+                            'info'              => 'Bu, basit ürünü özelleştirecektir.',
+                            'title'             => 'Özelleştirilebilir Öğe',
+
+                            'update-create' => [
+                                'is-required' => 'Gerekli mi',
+                                'name'        => 'Başlık',
+                                'no'          => 'Hayır',
+                                'price'       => 'Fiyat',
+                                'save-btn'    => 'Kaydet',
+                                'title'       => 'Seçenek',
+                                'type'        => 'Tür',
+                                'yes'         => 'Evet',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Seçenek ekle',
+                                'delete'      => 'Sil',
+                                'delete-btn'  => 'Sil',
+                                'edit-btn'    => 'Düzenle',
+                                'empty-info'  => 'Çeşitli ürün kombinasyonları oluşturmak için.',
+                                'empty-title' => 'Seçenek ekle',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Metin',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Metin Alanı',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Onay Kutusu',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radyo',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Seç',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Çoklu Seçim',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Tarih',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Tarih ve Saat',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Saat',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Dosya',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiket',
+                                        'price'    => 'Fiyat',
+                                        'save-btn' => 'Kaydet',
+                                        'title'    => 'Seçenek',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Bu ürün zaten başka bir ürünle ilişkilendirilmiş.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Çeşit Ekle',
                         'delete-btn'        => 'Sil',

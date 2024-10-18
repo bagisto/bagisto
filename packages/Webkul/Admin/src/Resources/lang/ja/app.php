@@ -856,6 +856,91 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'オプションを追加',
+                            'empty-info'        => 'カスタマイズ可能なオプションをすぐに作成できます。',
+                            'empty-title'       => 'オプションを追加',
+                            'info'              => 'これにより、シンプルな製品がカスタマイズされます。',
+                            'title'             => 'カスタマイズ可能なアイテム',
+
+                            'update-create' => [
+                                'is-required' => '必須',
+                                'name'        => 'タイトル',
+                                'no'          => 'いいえ',
+                                'price'       => '価格',
+                                'save-btn'    => '保存',
+                                'title'       => 'オプション',
+                                'type'        => 'タイプ',
+                                'yes'         => 'はい',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'オプションを追加',
+                                'delete'      => '削除',
+                                'delete-btn'  => '削除',
+                                'edit-btn'    => '編集',
+                                'empty-info'  => 'さまざまな製品の組み合わせをすぐに作成できます。',
+                                'empty-title' => 'オプションを追加',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'テキスト',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'テキストエリア',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'チェックボックス',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'ラジオボタン',
+                                    ],
+
+                                    'select' => [
+                                        'title' => '選択',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'マルチセレクト',
+                                    ],
+
+                                    'date' => [
+                                        'title' => '日付',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => '日付と時刻',
+                                    ],
+
+                                    'time' => [
+                                        'title' => '時間',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'ファイル',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'ラベル',
+                                        'price'    => '価格',
+                                        'save-btn' => '保存',
+                                        'title'    => 'オプション',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'この製品は既にコンフィギュラブル、グループ、またはバンドル製品に関連付けられています。',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'バリエーションを追加',
                         'delete-btn'        => '削除',

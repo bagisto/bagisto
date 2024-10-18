@@ -856,6 +856,91 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'විකල්ප එකතු කරන්න',
+                            'empty-info'        => 'ඔබට විකල්ප එකතු කිරීමට.',
+                            'empty-title'       => 'විකල්ප එකතු කරන්න',
+                            'info'              => 'මෙම විකල්පයන් නිෂ්පාදනය හැඩගැස්වීමට අවශ්‍ය වේ.',
+                            'title'             => 'අභිරුචිකරණය කළ අයිතමය',
+
+                            'update-create' => [
+                                'is-required' => 'අවශ්‍යයි',
+                                'name'        => 'ශීර්ෂය',
+                                'no'          => 'නැත',
+                                'price'       => 'මිල',
+                                'save-btn'    => 'සුරකින්න',
+                                'title'       => 'විකල්පය',
+                                'type'        => 'වර්ගය',
+                                'yes'         => 'ඔව්',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'විකල්ප එකතු කරන්න',
+                                'delete'      => 'ඉවත් කරන්න',
+                                'delete-btn'  => 'ඉවත් කරන්න',
+                                'edit-btn'    => 'සංස්කරණය කරන්න',
+                                'empty-info'  => 'විවිධ නිෂ්පාදන සංයෝජන සාදන්න.',
+                                'empty-title' => 'විකල්ප එකතු කරන්න',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'පෙළ',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'පෙළ ප්‍රදේශය',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'තෝරාගත',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'රේඩියෝ',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'තෝරන්න',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'බහුතෝරාගත',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'දිනය',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'දිනය සහ වේලාව',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'වේලාව',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'ගොනුව',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'ලේබලය',
+                                        'price'    => 'මිල',
+                                        'save-btn' => 'සුරකින්න',
+                                        'title'    => 'විකල්පය',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'නිෂ්පාදනය මීට පෙර සම්බන්ධ කර ඇත.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'විකුණන්නාගේ වෙනස් කරන්න',
                         'delete-btn'        => 'මකන්න',

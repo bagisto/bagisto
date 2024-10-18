@@ -856,6 +856,91 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Aggiungi opzione',
+                            'empty-info'        => 'Per creare opzioni personalizzabili rapidamente.',
+                            'empty-title'       => 'Aggiungi opzione',
+                            'info'              => 'Questo personalizzerà il prodotto semplice.',
+                            'title'             => 'Articolo personalizzabile',
+
+                            'update-create' => [
+                                'is-required' => 'È richiesto',
+                                'name'        => 'Titolo',
+                                'no'          => 'No',
+                                'price'       => 'Prezzo',
+                                'save-btn'    => 'Salva',
+                                'title'       => 'Opzione',
+                                'type'        => 'Tipo',
+                                'yes'         => 'Sì',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Aggiungi opzione',
+                                'delete'      => 'Elimina',
+                                'delete-btn'  => 'Elimina',
+                                'edit-btn'    => 'Modifica',
+                                'empty-info'  => 'Per creare varie combinazioni di prodotto rapidamente.',
+                                'empty-title' => 'Aggiungi opzione',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Testo',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Area di testo',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Casella di controllo',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Seleziona',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Selezione multipla',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Data',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Data e ora',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Ora',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'File',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etichetta',
+                                        'price'    => 'Prezzo',
+                                        'save-btn' => 'Salva',
+                                        'title'    => 'Opzione',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Il prodotto è già associato a un prodotto configurabile, raggruppato o in bundle.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Aggiungi Variante',
                         'delete-btn'        => 'Elimina',

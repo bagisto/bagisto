@@ -856,6 +856,91 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'إضافة خيار',
+                            'empty-info'        => 'لإنشاء خيارات قابلة للتخصيص بسهولة.',
+                            'empty-title'       => 'إضافة خيار',
+                            'info'              => 'سيقوم هذا بتخصيص المنتج البسيط.',
+                            'title'             => 'عنصر قابل للتخصيص',
+
+                            'update-create' => [
+                                'is-required' => 'مطلوب',
+                                'name'        => 'العنوان',
+                                'no'          => 'لا',
+                                'price'       => 'السعر',
+                                'save-btn'    => 'حفظ',
+                                'title'       => 'خيار',
+                                'type'        => 'النوع',
+                                'yes'         => 'نعم',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'إضافة خيار',
+                                'delete'      => 'حذف',
+                                'delete-btn'  => 'حذف',
+                                'edit-btn'    => 'تعديل',
+                                'empty-info'  => 'لإنشاء مجموعة متنوعة من المنتجات بسهولة.',
+                                'empty-title' => 'إضافة خيار',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'نص',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'منطقة نص',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'مربع اختيار',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'زر اختيار',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'قائمة اختيار',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'قائمة متعددة',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'تاريخ',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'تاريخ ووقت',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'وقت',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'ملف',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'التسمية',
+                                        'price'    => 'السعر',
+                                        'save-btn' => 'حفظ',
+                                        'title'    => 'خيار',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'المنتج مرتبط بالفعل بمنتج قابل للتكوين أو مجموعة أو حزمة.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'إضافة متغير',
                         'delete-btn'        => 'حذف',

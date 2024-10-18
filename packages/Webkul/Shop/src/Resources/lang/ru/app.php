@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Ничего',
+                        'total-amount' => 'Общая сумма',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Пожалуйста, выберите опцию',
                     'select-above-options' => 'Пожалуйста, выберите вышеуказанные опции',
