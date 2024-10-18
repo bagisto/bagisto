@@ -156,12 +156,13 @@
                     </div>
                 </template>
                 
-                 <!-- Show carousel if there is more than one image or video -->
-                <x-shop::products.mobile.carousel
-                    v-else
-                    ::options="[...media.images, ...media.videos]"
-                    @click="isImageZooming = !isImageZooming"
-                />
+                <!-- Show carousel if there is more than one image or video -->
+                <template v-else>
+                    <x-shop::products.mobile.carousel
+                        ::options="[...media.images, ...media.videos]"
+                        @click="isImageZooming = !isImageZooming"
+                    />
+                </template>
             </div>
             
             <!-- Gallery Images Zoomer -->
