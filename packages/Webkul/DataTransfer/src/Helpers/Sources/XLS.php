@@ -4,43 +4,48 @@ namespace Webkul\DataTransfer\Helpers\Sources;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Csv as CSVWriter;
+use PhpOffice\PhpSpreadsheet\Writer\Xls as XLSWriter;
 
-class CSV extends AbstractSource
+class XLS extends AbstractSource
 {
+    /**
+     * Current row number.
+     */
+    protected int $currentRowNumber = 1;
+
     /**
      * Initialize.
      */
     public function initialize(): void
     {
-        $this->reader = fopen(Storage::disk('private')->path($this->filePath), 'r');
+        $factory = IOFactory::load(Storage::disk('private')->path($this->filePath));
 
-        $this->columnNames = fgetcsv($this->reader, 4096, $this->delimiter);
+        $this->reader = $factory->getActiveSheet();
 
-        $this->totalColumns = count($this->columnNames);
+        $this->totalColumns = Coordinate::columnIndexFromString($this->reader->getHighestColumn());
+
+        $this->columnNames = $this->getNextRow();
     }
 
     /**
-     * Read next line from csv.
+     * Read next line from excel.
      */
-    protected function getNextRow(): array
+    protected function getNextRow(): array|bool
     {
-        $parsed = fgetcsv($this->reader, 4096, $this->delimiter);
-
-        if (is_array($parsed) && count($parsed) != $this->totalColumns) {
-            foreach ($parsed as $element) {
-                if ($element && strpos($element, "'") !== false) {
-                    $this->foundWrongQuoteFlag = true;
-
-                    break;
-                }
-            }
-        } else {
-            $this->foundWrongQuoteFlag = false;
+        for ($column = 1; $column <= $this->totalColumns; $column++) {
+            $rowData[] = $this->reader->getCellByColumnAndRow($column, $this->currentRowNumber)->getValue();
         }
 
-        return is_array($parsed) ? $parsed : [];
+        $filteredRowData = array_filter($rowData);
+
+        if (empty($filteredRowData)) {
+            return false;
+        }
+
+        return $rowData;
     }
 
     /**
@@ -48,9 +53,9 @@ class CSV extends AbstractSource
      */
     public function rewind(): void
     {
-        rewind($this->reader);
+        $this->currentRowNumber = 1;
 
-        parent::rewind();
+        $this->next();
     }
 
     /**
@@ -99,26 +104,10 @@ class CSV extends AbstractSource
             $this->next();
         }
 
-        $writer = new CSVWriter($spreadsheet);
-
-        $writer->setDelimiter(',');
+        $writer = new XLSWriter($spreadsheet);
 
         $writer->save(Storage::disk('private')->path($this->errorFilePath()));
 
         return $this->errorFilePath();
-    }
-
-    /**
-     * Close file handle.
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        if (! is_object($this->reader)) {
-            return;
-        }
-
-        $this->reader->close();
     }
 }
