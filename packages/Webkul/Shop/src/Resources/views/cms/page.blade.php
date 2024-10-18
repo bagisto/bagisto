@@ -16,6 +16,6 @@
 
     <!-- Page Content -->
     <div class="container mt-8 px-[60px] max-lg:px-8">
-        {!! $page->html_content !!}
+        {!! Blade::render($page->html_content) !!}
     </div>
 </x-shop::layouts>
