@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Stel sitemapopties in.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Ingeschakeld',
+                        'info'    => 'Schakel de sitemap in of uit voor uw website om de zoekmachineoptimalisatie te verbeteren en de gebruikerservaring te verbeteren.',
+                        'title'   => 'Instellingen',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Stel bestandslimietopties in.',
+                        'max-file-size'    => 'Maximale bestandsgrootte',
+                        'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
+                        'title'            => 'Bestandslimieten',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de winkel-URL.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Winkel URL',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de categorieën.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Categorieën',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de producten.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Producten',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de CMS-pagina\'s.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'CMS Pagina\'s',
+                        'priority' => 'Prioriteit',
+                    ],
+                ],
             ],
 
             'catalog' => [

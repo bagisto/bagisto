@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Sitemap-Optionen festlegen.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Aktiviert',
+                        'info'    => 'Aktivieren oder deaktivieren Sie die Sitemap für Ihre Website, um die Suchmaschinenoptimierung zu verbessern und die Benutzererfahrung zu steigern.',
+                        'title'   => 'Einstellungen',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Dateigrößenbeschränkungen festlegen.',
+                        'max-file-size'    => 'Maximale Dateigröße',
+                        'max-url-per-file' => 'Maximale Anzahl von URLs pro Datei',
+                        'title'            => 'Dateibeschränkungen',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Store-URL festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Store-URL',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Kategorien festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Kategorien',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Produkte festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Produkte',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die CMS-Seiten festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'CMS-Seiten',
+                        'priority' => 'Priorität',
+                    ],
+                ],
             ],
 
             'catalog' => [

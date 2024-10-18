@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Site haritası seçeneklerini ayarlayın.',
+                    'title' => 'Site Haritası',
+
+                    'settings' => [
+                        'enabled' => 'Etkin',
+                        'info'    => 'Arama motoru optimizasyonunu iyileştirmek ve kullanıcı deneyimini artırmak için web siteniz için site haritasını etkinleştirin veya devre dışı bırakın.',
+                        'title'   => 'Ayarlar',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Dosya limitleri seçeneklerini ayarlayın.',
+                        'max-file-size'    => 'Maksimum dosya boyutu',
+                        'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
+                        'title'            => 'Dosya Limitleri',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Mağaza URL\'si için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Mağaza URL\'si',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Kategoriler için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Kategoriler',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Ürünler için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Ürünler',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'CMS sayfaları için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'CMS Sayfaları',
+                        'priority' => 'Öncelik',
+                    ],
+                ],
             ],
 
             'catalog' => [
