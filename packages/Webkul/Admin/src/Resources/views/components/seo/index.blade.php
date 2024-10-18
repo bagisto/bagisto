@@ -44,18 +44,16 @@
             },
 
             mounted() {
-                let self = this;
+                this.metaTitle = document.getElementById('meta_title').value;
 
-                self.metaTitle = document.getElementById('meta_title').value;
+                this.metaDescription = document.getElementById('meta_description').value;
 
-                self.metaDescription = document.getElementById('meta_description').value;
-
-                document.getElementById('meta_title').addEventListener('input', function(e) {
-                    self.metaTitle = e.target.value;
+                document.getElementById('meta_title').addEventListener('input', (e) => {
+                    this.metaTitle = e.target.value;
                 });
 
-                document.getElementById('meta_description').addEventListener('input', function(e) {
-                    self.metaDescription = e.target.value;
+                document.getElementById('meta_description').addEventListener('input', (e) => {
+                    this.metaDescription = e.target.value;
                 });
             },
         });
