@@ -187,7 +187,6 @@
                                 name="is_subscribed"
                                 id="is-subscribed"
                                 class="peer hidden"
-                                onchange="switchVisibility()"
                             />
 
                             <label
