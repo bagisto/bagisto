@@ -1117,7 +1117,7 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="password"
-                                        rules="required"
+                                        rules="required|min:6"
                                         :value="old('password')"
                                         :label="trans('installer::app.installer.index.create-administrator.password')"
                                     />
