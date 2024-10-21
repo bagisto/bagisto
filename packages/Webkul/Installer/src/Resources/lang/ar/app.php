@@ -27,6 +27,7 @@ return [
                 'height'               => 'الارتفاع',
                 'length'               => 'الطول',
                 'manage-stock'         => 'إدارة المخزون',
+                'minimum-sellable-qty' => 'الحد الأدنى لكمية أمر الشراء',
                 'meta-description'     => 'الوصف الواجب',
                 'meta-keywords'        => 'الكلمات الرئيسية الواجبة',
                 'meta-title'           => 'العنوان الواجب',

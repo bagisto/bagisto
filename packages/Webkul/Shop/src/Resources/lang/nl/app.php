@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'Schrijf een beoordeling',
             ],
 
+            'min-qty'                => 'De minimale bestelhoeveelheid voor het product is :min_sellable_qty',
             'add-to-cart'            => 'Toevoegen aan winkelwagen',
             'add-to-compare'         => 'Product toegevoegd aan vergelijking.',
             'add-to-wishlist'        => 'Toevoegen aan verlanglijstje',

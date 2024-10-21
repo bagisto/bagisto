@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'Write a Review',
             ],
 
+            'min-qty'                => 'The minimum purchase order quantity for the product is :min_sellable_qty',
             'add-to-cart'            => 'Add To Cart',
             'add-to-compare'         => 'Product added in compare.',
             'add-to-wishlist'        => 'Add To Wishlist',

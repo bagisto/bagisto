@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'レビューを書く',
             ],
 
+            'min-qty'                => '製品の最小注文数量は次のとおりです。 :min_sellable_qty',
             'add-to-cart'            => 'カートに追加',
             'add-to-compare'         => '比較に追加',
             'add-to-wishlist'        => 'ウィッシュリストに追加',

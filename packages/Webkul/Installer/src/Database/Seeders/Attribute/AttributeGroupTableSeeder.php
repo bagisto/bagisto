@@ -230,6 +230,11 @@ class AttributeGroupTableSeeder extends Seeder
             [
                 'attribute_id'        => 28,
                 'attribute_group_id'  => 7,
+                'position'            => 2,
+            ],
+            [
+                'attribute_id'        => 29,
+                'attribute_group_id'  => 7,
                 'position'            => 1,
             ],
         ]);

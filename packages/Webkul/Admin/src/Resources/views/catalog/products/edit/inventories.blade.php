@@ -9,7 +9,7 @@
             @lang('admin::app.catalog.products.edit.inventories.pending-ordered-qty', [
                 'qty' => $product->ordered_inventories->pluck('qty')->first() ?? 0,
             ])
-            
+
             <i class="icon-information peer rounded-full bg-gray-700 text-lg font-bold text-white transition-all hover:bg-gray-800 ltr:ml-2.5 rtl:mr-2.5"></i>
 
             <div class="absolute bottom-6 hidden rounded-lg bg-black p-2.5 text-sm italic text-white opacity-80 peer-hover:block">
@@ -40,6 +40,7 @@
             <x-admin::form.control-group.error :control-name="'inventories[' . $inventorySource->id . ']'" />
         </x-admin::form.control-group>
     @endforeach
+
 </v-inventories>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}
