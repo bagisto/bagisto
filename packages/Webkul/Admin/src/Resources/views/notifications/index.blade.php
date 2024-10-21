@@ -153,37 +153,37 @@
                         orderType: {
                             all : {
                                 icon: 'icon',
-                                message: "@lang('admin::app.notifications.order-status-messages.all'),
+                                message: '@lang('admin::app.notifications.order-status-messages.all')',
                                 status: 'all'
                             },
 
                             pending : {
                                 icon: 'icon-information bg-amber-100 text-amber-600 dark:!text-amber-600',
-                                message: "@lang('admin::app.notifications.order-status-messages.pending')",
+                                message: '@lang('admin::app.notifications.order-status-messages.pending')',
                                 status: 'pending'
                             },
 
                             processing : {
                                 icon: 'icon-sort-right bg-green-100 text-green-600 dark:!text-green-600',
-                                message: "@lang('admin::app.notifications.order-status-messages.processing')",
+                                message: '@lang('admin::app.notifications.order-status-messages.processing')',
                                 status: 'processing'
                             },
 
                             canceled : {
                                 icon: 'icon-cancel-1 bg-red-100 text-red-600 dark:!text-red-600',
-                                message: "@lang('admin::app.notifications.order-status-messages.canceled')",
+                                message: '@lang('admin::app.notifications.order-status-messages.canceled')',
                                 status: 'canceled'
                             },
 
                             completed : {
                                 icon: 'icon-done bg-blue-100 text-blue-600 dark:!text-blue-600',
-                                message: "@lang('admin::app.notifications.order-status-messages.completed')",
+                                message: '@lang('admin::app.notifications.order-status-messages.completed')',
                                 status: 'completed'
                             },
 
                             closed : {
                                 icon: 'icon-repeat bg-red-100 text-red-600 dark:!text-red-600',
-                                message: "@lang('admin::app.notifications.order-status-messages.closed')",
+                                message: '@lang('admin::app.notifications.order-status-messages.closed')',
                                 status: 'closed'
                             },
                         },
