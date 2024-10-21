@@ -142,6 +142,7 @@ return [
                 'BDT' => 'تاکای بنگلادش',
                 'BHD' => 'دینار بحرین',
                 'BRL' => 'رئال برزیل',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'دلار کانادا',
                 'CHF' => 'فرانک سوئیس',
                 'CLP' => 'پزوی شیلی',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'عربی',
                 'bn'    => 'بنگالی',
+                'bg'    => 'Bulgarian',
                 'de'    => 'آلمانی',
                 'en'    => 'انگلیسی',
                 'es'    => 'اسپانیایی',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'بله',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'نصب Bagisto',
                 'bagisto-info' => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'یک پروژه جامعه‌ای توسط',
             'bagisto-logo'             => 'لوگوی Bagisto',
             'bengali'                  => 'بنگالی',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'چینی',
             'continue'                 => 'ادامه',
             'dutch'                    => 'هلندی',

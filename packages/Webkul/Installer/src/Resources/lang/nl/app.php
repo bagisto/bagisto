@@ -142,6 +142,7 @@ return [
                 'BDT' => 'Bangladeshische taka',
                 'BHD' => 'Bahreinse dinar',
                 'BRL' => 'Braziliaanse real',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'Canadese dollar',
                 'CHF' => 'Zwitserse frank',
                 'CLP' => 'Chileense peso',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'Arabisch',
                 'bn'    => 'Bengali',
+                'bg'    => 'Bulgarian',
                 'de'    => 'Duits',
                 'en'    => 'Engels',
                 'es'    => 'Spaans',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'Ja',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Bagisto installatie',
                 'bagisto-info'     => 'Het maken van database tabellen kan even duren',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'Een communityproject van',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => 'Bengaals',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Chinees',
             'continue'                 => 'Doorgaan',
             'dutch'                    => 'Nederlands',

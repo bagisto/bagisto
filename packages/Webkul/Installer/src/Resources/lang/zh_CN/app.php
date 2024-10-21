@@ -142,6 +142,7 @@ return [
                 'BDT' => '孟加拉塔卡',
                 'BHD' => '巴林第纳尔',
                 'BRL' => '巴西雷亚尔',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => '加拿大元',
                 'CHF' => '瑞士法郎',
                 'CLP' => '智利比索',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => '阿拉伯語',
                 'bn'    => '孟加拉語',
+                'bg'    => 'Bulgarian',
                 'de'    => '德語',
                 'en'    => '英語',
                 'es'    => '西班牙語',
@@ -724,6 +726,10 @@ return [
                 'yes'             => '是',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
                 'bagisto'      => 'Bagisto 安装',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => '由 Webkul 社区共同开发的项目',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => '孟加拉语',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => '中文',
             'continue'                 => '继续',
             'dutch'                    => '荷兰语',

@@ -142,6 +142,7 @@ return [
                 'BDT' => 'බංග්ලාදේශිය ටාකා',
                 'BHD' => 'බහරේන් ඩිනාර්',
                 'BRL' => 'බ්‍රසීල රියල්',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'කැනේඩියානු ඩොලර්',
                 'CHF' => 'ස්විස් ෆ්රෑන්ක්',
                 'CLP' => 'චිලියන් පැසෝ',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'අරාබි',
                 'bn'    => 'බෙංගාලි',
+                'bg'    => 'Bulgarian',
                 'de'    => 'ජර්මන්',
                 'en'    => 'ඉංග්රීස්',
                 'es'    => 'ස්පෙය්බ්',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'ඔව්',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Bagisto ස්තුරාකුල',
                 'bagisto-info' => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'සමුදුසමින් ව්‍යාක්රණය',
             'bagisto-logo'             => 'Bagisto ලෝගො',
             'bengali'                  => 'බෙංගාලි',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'චීන',
             'continue'                 => 'ඉදිරිපත්',
             'dutch'                    => 'ලන්දේසි',

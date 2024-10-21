@@ -142,6 +142,7 @@ return [
                 'BDT' => 'Bangladeshi Taka',
                 'BHD' => 'Bahraini Dinar',
                 'BRL' => 'Brazilian Real',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'Canadian Dollar',
                 'CHF' => 'Swiss Franc',
                 'CLP' => 'Chilean Peso',
@@ -206,6 +207,7 @@ return [
             'locales'    => [
                 'ar'    => 'Arabic',
                 'bn'    => 'Bengali',
+                'bg'    => 'Bulgarian',
                 'de'    => 'German',
                 'en'    => 'English',
                 'es'    => 'Spanish',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'Yes',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Installation Bagisto',
                 'bagisto-info' => 'Creating the database tables, this can take a few moments',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'a Community Project by',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => 'Bengali',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Chinese',
             'continue'                 => 'Continue',
             'dutch'                    => 'Dutch',

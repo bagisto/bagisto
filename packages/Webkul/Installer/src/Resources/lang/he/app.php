@@ -142,6 +142,7 @@ return [
                 'BDT' => 'טאקה בנגלדשי',
                 'BHD' => 'דינר בחרייני',
                 'BRL' => 'ריאל ברזילאי',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'דולר קנדי',
                 'CHF' => 'פרנק שוויצרי',
                 'CLP' => 'פזו צ׳יליאני',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'ערבית',
                 'bn'    => 'בנגלי',
+                'bg'    => 'Bulgarian',
                 'de'    => 'גרמנית',
                 'en'    => 'אנגלית',
                 'es'    => 'ספרדית',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'כן',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'התקנת Bagisto',
                 'bagisto-info' => 'יצירת טבלאות מסד הנתונים, זה עשוי לקחת מספר רגעים',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'פרויקט קהילתי על ידי',
             'bagisto-logo'             => 'לוגו Bagisto',
             'bengali'                  => 'בנגלי',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'סיני',
             'continue'                 => 'המשך',
             'dutch'                    => 'הולנדי',
