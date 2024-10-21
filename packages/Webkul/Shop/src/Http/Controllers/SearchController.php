@@ -25,7 +25,7 @@ class SearchController extends Controller
     public function index()
     {
         $this->validate(request(), [
-            'query' => ['required', 'string', 'regex:/^[^\\\\]+$/u'],
+            'query' => ['sometimes', 'required', 'string', 'regex:/^[^\\\\]+$/u'],
         ]);
 
         $searchTerm = $this->searchTermRepository->findOneWhere([
