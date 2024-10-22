@@ -166,7 +166,7 @@
                                     :key="index"
                                     :title="(index + 1) + '. ' + element.label + ' - ' + types[element.type].title"
                                     :option="element"
-                                    @updateOption="selectedOption = $event; $refs.updateCreateOptionModal.open()"
+                                    @updateOption="updateOption($event)"
                                     @removeOption="removeOption($event)"
                                     v-else
                                 >
@@ -381,6 +381,7 @@
                         handle=".icon-drag"
                         :list="optionItems"
                         item-key="id"
+                        @end="updateOption(false)"
                     >
                         <template #item="{ element, index }">
                             <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
@@ -630,8 +631,8 @@
                             type: 'select',
                             is_required: 1,
                             price: 0,
-                        }
-                    }
+                        },
+                    };
                 },
 
                 mounted() {
@@ -644,6 +645,7 @@
                                 is_required: option.is_required,
                                 price_id: option.customizable_option_prices[0].id,
                                 price: option.customizable_option_prices[0].price,
+                                customizable_option_prices: option.customizable_option_prices,
                             };
                         }
 
@@ -653,6 +655,7 @@
                             type: option.type,
                             is_required: option.is_required,
                             price: 0,
+                            customizable_option_prices: option.customizable_option_prices,
                         };
                     });
                 },
@@ -676,6 +679,23 @@
                         this.resetForm();
 
                         this.$refs.updateCreateOptionModal.close();
+                    },
+
+                    updateOption($event) {
+                        this.selectedOption = $event;
+
+                        if (! $event.updateModal) {
+                            const indexToUpdate = this.options.findIndex(option => option.id === this.selectedOption.id);
+
+                            this.options[indexToUpdate] = {
+                                ...this.selectedOption,
+                                customizable_option_prices: this.selectedOption.customizable_option_prices,
+                            };
+
+                            return;
+                        }
+
+                        this.$refs.updateCreateOptionModal.open();
                     },
 
                     removeOption(option) {
@@ -706,7 +726,7 @@
             app.component('v-customizable-option-item', {
                 template: '#v-customizable-option-item-template',
 
-                emits: ['updateOption', 'removeOption', 'updateOptionItems', 'removeOptionItems'],
+                emits: ['updateOption', 'removeOption'],
 
                 props: ['title', 'option'],
 
@@ -717,29 +737,39 @@
                         selectedOptionItem: {
                             label: '',
                             price: 0,
-                        }
+                        },
                     };
                 },
 
-                mounted() {
-                    if (! this.option.customizable_option_prices) {
-                        return;
-                    }
+                watch: {
+                    option: {
+                        handler: function (updatedOption) {
+                            if (! updatedOption.customizable_option_prices) {
+                                return;
+                            }
 
-                    this.optionItems = this.option.customizable_option_prices.map(optionItem => {
-                        return {
-                            id: optionItem.id,
-                            label: optionItem.label,
-                            price: optionItem.price,
-                        };
-                    });
+                            this.optionItems = updatedOption.customizable_option_prices.map(optionItem => {
+                                return {
+                                    id: optionItem.id,
+                                    label: optionItem.label,
+                                    price: optionItem.price,
+                                };
+                            });
+                        },
 
-                    this.$emit('updateOptionItems', this.optionItems);
+                        deep: true,
+
+                        immediate: true,
+                    },
                 },
 
                 methods: {
-                    updateOption() {
-                        this.$emit('updateOption', this.option);
+                    updateOption(updateModal = true) {
+                        this.$emit('updateOption', {
+                            ...this.option,
+                            customizable_option_prices: this.optionItems,
+                            updateModal,
+                        });
                     },
 
                     removeOption() {
@@ -757,11 +787,15 @@
                             this.optionItems[indexToUpdate] = this.selectedOptionItem;
                         }
 
+                        this.$emit('updateOption', {
+                            ...this.option,
+                            customizable_option_prices: this.optionItems,
+                            updateModal: false,
+                        });
+
                         this.resetForm();
 
                         this.$refs.updateCreateOptionItemModal.close();
-
-                        this.$emit('updateOptionItems', this.optionItems);
                     },
 
                     removeOptionItem(selectedOptionItem) {
@@ -769,7 +803,11 @@
                             agree: () => {
                                 this.optionItems = this.optionItems.filter(optionItem => optionItem.id != selectedOptionItem.id);
 
-                                this.$emit('removeOptionItems', this.optionItems);
+                                this.$emit('updateOption', {
+                                    ...this.option,
+                                    customizable_option_prices: this.optionItems,
+                                    updateModal: false,
+                                });
                             }
                         });
                     },
