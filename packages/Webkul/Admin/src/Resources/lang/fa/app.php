@@ -865,14 +865,15 @@ return [
                             'title'             => 'آیتم قابل سفارشی‌سازی',
 
                             'update-create' => [
-                                'is-required' => 'الزامی است',
-                                'name'        => 'عنوان',
-                                'no'          => 'خیر',
-                                'price'       => 'قیمت',
-                                'save-btn'    => 'ذخیره',
-                                'title'       => 'گزینه',
-                                'type'        => 'نوع',
-                                'yes'         => 'بله',
+                                'is-required'               => 'الزامی است',
+                                'name'                      => 'عنوان',
+                                'no'                        => 'خیر',
+                                'price'                     => 'قیمت',
+                                'save-btn'                  => 'ذخیره',
+                                'supported-file-extensions' => 'پسوند فایل‌های پشتیبانی‌شده',
+                                'title'                     => 'گزینه',
+                                'type'                      => 'نوع',
+                                'yes'                       => 'بله',
                             ],
 
                             'option' => [

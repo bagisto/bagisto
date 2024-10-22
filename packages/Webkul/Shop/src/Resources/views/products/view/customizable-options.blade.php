@@ -348,7 +348,7 @@
                         <v-field
                             type="file"
                             :name="'customizable_options[' + option.id + '][]'"
-                            :rules="{'required': Boolean(option.is_required)}"
+                            :rules="{'required': Boolean(option.is_required), ...(option.supported_file_extensions && option.supported_file_extensions.length ? {'ext': option.supported_file_extensions.split(',').map(ext => ext.trim())} : {})}"
                             :label="option.label"
                             @change="handleFileChange"
                         >
@@ -388,6 +388,7 @@
                                 label: option.label,
                                 type: option.type,
                                 is_required: option.is_required,
+                                supported_file_extensions: option.supported_file_extensions,
                                 price_id: option.customizable_option_prices[0].id,
                                 price: option.customizable_option_prices[0].price,
                             };
@@ -398,6 +399,7 @@
                             label: option.label,
                             type: option.type,
                             is_required: option.is_required,
+                            supported_file_extensions: option.supported_file_extensions,
                             price: 0,
                         };
                     });

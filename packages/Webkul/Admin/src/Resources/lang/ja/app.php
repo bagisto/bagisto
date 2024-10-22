@@ -865,14 +865,15 @@ return [
                             'title'             => 'カスタマイズ可能なアイテム',
 
                             'update-create' => [
-                                'is-required' => '必須',
-                                'name'        => 'タイトル',
-                                'no'          => 'いいえ',
-                                'price'       => '価格',
-                                'save-btn'    => '保存',
-                                'title'       => 'オプション',
-                                'type'        => 'タイプ',
-                                'yes'         => 'はい',
+                                'is-required'               => '必須',
+                                'name'                      => 'タイトル',
+                                'no'                        => 'いいえ',
+                                'price'                     => '価格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => 'サポートされているファイル拡張子',
+                                'title'                     => 'オプション',
+                                'type'                      => 'タイプ',
+                                'yes'                       => 'はい',
                             ],
 
                             'option' => [

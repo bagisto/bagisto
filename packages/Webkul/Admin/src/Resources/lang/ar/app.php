@@ -865,14 +865,15 @@ return [
                             'title'             => 'عنصر قابل للتخصيص',
 
                             'update-create' => [
-                                'is-required' => 'مطلوب',
-                                'name'        => 'العنوان',
-                                'no'          => 'لا',
-                                'price'       => 'السعر',
-                                'save-btn'    => 'حفظ',
-                                'title'       => 'خيار',
-                                'type'        => 'النوع',
-                                'yes'         => 'نعم',
+                                'is-required'               => 'مطلوب',
+                                'name'                      => 'العنوان',
+                                'no'                        => 'لا',
+                                'price'                     => 'السعر',
+                                'save-btn'                  => 'حفظ',
+                                'supported-file-extensions' => 'الامتدادات المدعومة للملفات',
+                                'title'                     => 'خيار',
+                                'type'                      => 'النوع',
+                                'yes'                       => 'نعم',
                             ],
 
                             'option' => [

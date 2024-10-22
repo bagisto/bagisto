@@ -93,6 +93,13 @@
 
                                 <input
                                     type="hidden"
+                                    :name="'customizable_options[' + element.id + '][supported_file_extensions]'"
+                                    :value="element.supported_file_extensions"
+                                    v-if="! canHaveMultiplePrices(element.type)"
+                                />
+
+                                <input
+                                    type="hidden"
                                     :name="'customizable_options[' + element.id + '][prices][' + element.price_id + '][price]'"
                                     :value="element.price"
                                     v-if="! canHaveMultiplePrices(element.type)"
@@ -289,21 +296,39 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <x-admin::form.control-group v-if="! canHaveMultiplePrices(selectedOption.type)">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')
-                                    </x-admin::form.control-group.label>
+                                <template v-if="! canHaveMultiplePrices(selectedOption.type)">
+                                    <x-admin::form.control-group v-if="selectedOption.type == 'file'">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions')
+                                        </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="price"
-                                        name="price"
-                                        rules="required"
-                                        v-model="selectedOption.price"
-                                        :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')"
-                                    />
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="supported_file_extensions"
+                                            rules="required"
+                                            v-model="selectedOption.supported_file_extensions"
+                                            :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions')"
+                                        />
 
-                                    <x-admin::form.control-group.error control-name="price" />
-                                </x-admin::form.control-group>
+                                        <x-admin::form.control-group.error control-name="supported_file_extensions" />
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="price"
+                                            name="price"
+                                            rules="required"
+                                            v-model="selectedOption.price"
+                                            :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')"
+                                        />
+
+                                        <x-admin::form.control-group.error control-name="price" />
+                                    </x-admin::form.control-group>
+                                </template>
                             </x-slot>
 
                             <!-- Option Form Modal Footer -->
@@ -630,6 +655,7 @@
                             label: '',
                             type: 'select',
                             is_required: 1,
+                            supported_file_extensions: null,
                             price: 0,
                         },
                     };
@@ -643,6 +669,7 @@
                                 label: option.label,
                                 type: option.type,
                                 is_required: option.is_required,
+                                supported_file_extensions: option.supported_file_extensions,
                                 price_id: option.customizable_option_prices[0].id,
                                 price: option.customizable_option_prices[0].price,
                                 customizable_option_prices: option.customizable_option_prices,
@@ -654,6 +681,7 @@
                             label: option.label,
                             type: option.type,
                             is_required: option.is_required,
+                            supported_file_extensions: option.supported_file_extensions,
                             price: 0,
                             customizable_option_prices: option.customizable_option_prices,
                         };

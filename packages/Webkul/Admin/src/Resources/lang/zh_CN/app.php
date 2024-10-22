@@ -865,14 +865,15 @@ return [
                             'title'             => '可定制项目',
 
                             'update-create' => [
-                                'is-required' => '是否必填',
-                                'name'        => '标题',
-                                'no'          => '否',
-                                'price'       => '价格',
-                                'save-btn'    => '保存',
-                                'title'       => '选项',
-                                'type'        => '类型',
-                                'yes'         => '是',
+                                'is-required'               => '是否必填',
+                                'name'                      => '标题',
+                                'no'                        => '否',
+                                'price'                     => '价格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => '支持的文件扩展名',
+                                'title'                     => '选项',
+                                'type'                      => '类型',
+                                'yes'                       => '是',
                             ],
 
                             'option' => [

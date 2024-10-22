@@ -865,14 +865,15 @@ return [
                             'title'             => 'Article personnalisable',
 
                             'update-create' => [
-                                'is-required' => 'Est requis',
-                                'name'        => 'Titre',
-                                'no'          => 'Non',
-                                'price'       => 'Prix',
-                                'save-btn'    => 'Enregistrer',
-                                'title'       => 'Option',
-                                'type'        => 'Type',
-                                'yes'         => 'Oui',
+                                'is-required'               => 'Est requis',
+                                'name'                      => 'Titre',
+                                'no'                        => 'Non',
+                                'price'                     => 'Prix',
+                                'save-btn'                  => 'Enregistrer',
+                                'supported-file-extensions' => 'Extensions de fichier prises en charge',
+                                'title'                     => 'Option',
+                                'type'                      => 'Type',
+                                'yes'                       => 'Oui',
                             ],
 
                             'option' => [

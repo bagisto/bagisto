@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('product_id')->unsigned();
             $table->string('type');
             $table->boolean('is_required')->default(1);
+            $table->text('supported_file_extensions')->nullable();
             $table->integer('sort_order')->default(0);
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

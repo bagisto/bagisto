@@ -865,14 +865,15 @@ return [
                             'title'             => 'Özelleştirilebilir Öğe',
 
                             'update-create' => [
-                                'is-required' => 'Gerekli mi',
-                                'name'        => 'Başlık',
-                                'no'          => 'Hayır',
-                                'price'       => 'Fiyat',
-                                'save-btn'    => 'Kaydet',
-                                'title'       => 'Seçenek',
-                                'type'        => 'Tür',
-                                'yes'         => 'Evet',
+                                'is-required'               => 'Gerekli mi',
+                                'name'                      => 'Başlık',
+                                'no'                        => 'Hayır',
+                                'price'                     => 'Fiyat',
+                                'save-btn'                  => 'Kaydet',
+                                'supported-file-extensions' => 'Desteklenen Dosya Uzantıları',
+                                'title'                     => 'Seçenek',
+                                'type'                      => 'Tür',
+                                'yes'                       => 'Evet',
                             ],
 
                             'option' => [

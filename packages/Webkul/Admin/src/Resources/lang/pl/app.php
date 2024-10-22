@@ -865,14 +865,15 @@ return [
                             'title'             => 'Element konfigurowalny',
 
                             'update-create' => [
-                                'is-required' => 'Wymagane',
-                                'name'        => 'Tytuł',
-                                'no'          => 'Nie',
-                                'price'       => 'Cena',
-                                'save-btn'    => 'Zapisz',
-                                'title'       => 'Opcja',
-                                'type'        => 'Typ',
-                                'yes'         => 'Tak',
+                                'is-required'               => 'Wymagane',
+                                'name'                      => 'Tytuł',
+                                'no'                        => 'Nie',
+                                'price'                     => 'Cena',
+                                'save-btn'                  => 'Zapisz',
+                                'supported-file-extensions' => 'Obsługiwane rozszerzenia plików',
+                                'title'                     => 'Opcja',
+                                'type'                      => 'Typ',
+                                'yes'                       => 'Tak',
                             ],
 
                             'option' => [

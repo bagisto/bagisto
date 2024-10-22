@@ -865,14 +865,15 @@ return [
                             'title'             => 'Anpassbarer Artikel',
 
                             'update-create' => [
-                                'is-required' => 'Erforderlich',
-                                'name'        => 'Titel',
-                                'no'          => 'Nein',
-                                'price'       => 'Preis',
-                                'save-btn'    => 'Speichern',
-                                'title'       => 'Option',
-                                'type'        => 'Typ',
-                                'yes'         => 'Ja',
+                                'is-required'               => 'Erforderlich',
+                                'name'                      => 'Titel',
+                                'no'                        => 'Nein',
+                                'price'                     => 'Preis',
+                                'save-btn'                  => 'Speichern',
+                                'supported-file-extensions' => 'Unterstützte Dateierweiterungen',
+                                'title'                     => 'Option',
+                                'type'                      => 'Typ',
+                                'yes'                       => 'Ja',
                             ],
 
                             'option' => [

@@ -865,14 +865,15 @@ return [
                             'title'             => 'פריט ניתן להתאמה אישית',
 
                             'update-create' => [
-                                'is-required' => 'נדרש',
-                                'name'        => 'כותרת',
-                                'no'          => 'לא',
-                                'price'       => 'מחיר',
-                                'save-btn'    => 'שמור',
-                                'title'       => 'אפשרות',
-                                'type'        => 'סוג',
-                                'yes'         => 'כן',
+                                'is-required'               => 'נדרש',
+                                'name'                      => 'כותרת',
+                                'no'                        => 'לא',
+                                'price'                     => 'מחיר',
+                                'save-btn'                  => 'שמור',
+                                'supported-file-extensions' => 'סיומות קבצים נתמכות',
+                                'title'                     => 'אפשרות',
+                                'type'                      => 'סוג',
+                                'yes'                       => 'כן',
                             ],
 
                             'option' => [

@@ -27,10 +27,11 @@ class ProductCustomizableOption extends TranslatableModel implements ProductCust
      * @var array
      */
     protected $fillable = [
-        'type',
         'is_required',
-        'sort_order',
         'product_id',
+        'sort_order',
+        'supported_file_extensions',
+        'type',
     ];
 
     /**

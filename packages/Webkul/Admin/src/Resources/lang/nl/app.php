@@ -865,14 +865,15 @@ return [
                             'title'             => 'Aanpasbaar item',
 
                             'update-create' => [
-                                'is-required' => 'Is verplicht',
-                                'name'        => 'Titel',
-                                'no'          => 'Nee',
-                                'price'       => 'Prijs',
-                                'save-btn'    => 'Opslaan',
-                                'title'       => 'Optie',
-                                'type'        => 'Type',
-                                'yes'         => 'Ja',
+                                'is-required'               => 'Is verplicht',
+                                'name'                      => 'Titel',
+                                'no'                        => 'Nee',
+                                'price'                     => 'Prijs',
+                                'save-btn'                  => 'Opslaan',
+                                'supported-file-extensions' => 'Ondersteunde bestandsextensies',
+                                'title'                     => 'Optie',
+                                'type'                      => 'Type',
+                                'yes'                       => 'Ja',
                             ],
 
                             'option' => [

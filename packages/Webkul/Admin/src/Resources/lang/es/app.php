@@ -865,14 +865,15 @@ return [
                             'title'             => 'Elemento personalizable',
 
                             'update-create' => [
-                                'is-required' => 'Es obligatorio',
-                                'name'        => 'Título',
-                                'no'          => 'No',
-                                'price'       => 'Precio',
-                                'save-btn'    => 'Guardar',
-                                'title'       => 'Opción',
-                                'type'        => 'Tipo',
-                                'yes'         => 'Sí',
+                                'is-required'               => 'Es obligatorio',
+                                'name'                      => 'Título',
+                                'no'                        => 'No',
+                                'price'                     => 'Precio',
+                                'save-btn'                  => 'Guardar',
+                                'supported-file-extensions' => 'Extensiones de archivo admitidas',
+                                'title'                     => 'Opción',
+                                'type'                      => 'Tipo',
+                                'yes'                       => 'Sí',
                             ],
 
                             'option' => [

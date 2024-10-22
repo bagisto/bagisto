@@ -211,28 +211,51 @@ class Virtual extends AbstractType
         $price = $this->getFinalPrice();
 
         if (! empty($data['customizable_options'])) {
-            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($data['customizable_options'])
-                ->map(function ($option) use ($data) {
-                    if ($option['type'] === 'file') {
-                        $file = $option['prices'][0]['label'];
+            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($data['customizable_options']);
 
-                        if (
-                            ! empty($file)
-                            && $file instanceof UploadedFile
-                        ) {
-                            $filePath = $file->store("carts/{$data['cart_id']}");
+            /**
+             * Check if the file extension is supported.
+             */
+            foreach ($formattedCustomizableOptions->where('type', 'file') as $option) {
+                if (
+                    isset($option['prices'][0]['label'])
+                    && $option['prices'][0]['label'] instanceof \Illuminate\Http\UploadedFile
+                ) {
+                    $extension = $option['prices'][0]['label']->getClientOriginalExtension();
 
-                            $option['prices'][0]['label'] = $filePath;
-                        } else {
-                            $filePath = collect($data['formatted_customizable_options'] ?? [])
-                                ->firstWhere('id', $option['id']);
-
-                            $option['prices'][0]['label'] = $filePath['prices'][0]['label'] ?? '';
-                        }
+                    if (
+                        ! empty($option['supported_file_extensions'])
+                        && ! in_array(strtolower($extension), $option['supported_file_extensions'])
+                    ) {
+                        return trans('product::app.checkout.cart.invalid-file-extension');
                     }
+                }
+            }
 
-                    return $option;
-                });
+            /**
+             * Store the files in the storage.
+             */
+            $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use ($data) {
+                if ($option['type'] === 'file') {
+                    $file = $option['prices'][0]['label'];
+
+                    if (
+                        ! empty($file)
+                        && $file instanceof UploadedFile
+                    ) {
+                        $filePath = $file->store("carts/{$data['cart_id']}");
+
+                        $option['prices'][0]['label'] = $filePath;
+                    } else {
+                        $filePath = collect($data['formatted_customizable_options'] ?? [])
+                            ->firstWhere('id', $option['id']);
+
+                        $option['prices'][0]['label'] = $filePath['prices'][0]['label'] ?? '';
+                    }
+                }
+
+                return $option;
+            });
 
             $price += $formattedCustomizableOptions->sum('total_price');
 
@@ -468,10 +491,14 @@ class Virtual extends AbstractType
                      * file path.
                      */
                     $formattedCustomizableOptions[] = [
-                        'id'          => $customizableOption->id,
-                        'type'        => $customizableOption->type,
-                        'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => [[
+                        'id'                        => $customizableOption->id,
+                        'type'                      => $customizableOption->type,
+                        'label'                     => $customizableOption->translations->pluck('label', 'locale')->toArray(),
+                        'supported_file_extensions' => collect(explode(',', $customizableOption->supported_file_extensions))
+                            ->map(fn ($extension) => trim($extension))
+                            ->filter(fn ($extension) => ! empty($extension))
+                            ->toArray(),
+                        'prices'                    => [[
                             'id'    => $optionPrice->id,
                             'label' => $requestedCustomizableOptions[$customizableOption->id][0],
                             'price' => $optionPrice->price,
