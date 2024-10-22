@@ -171,7 +171,20 @@
                                                     </p>
 
                                                     <p class="text-sm">
-                                                        @{{ option.option_label }}
+                                                        <template v-if="option?.attribute_type === 'file'">
+                                                            <a
+                                                                :href="option.file_url"
+                                                                class="text-blue-700"
+                                                                target="_blank"
+                                                                :download="option.file_name"
+                                                            >
+                                                                @{{ option.file_name }}
+                                                            </a>
+                                                        </template>
+
+                                                        <template v-else>
+                                                            @{{ option.option_label }}
+                                                        </template>
                                                     </p>
                                                 </div>
                                             </div>
