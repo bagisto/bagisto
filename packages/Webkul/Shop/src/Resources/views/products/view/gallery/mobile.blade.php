@@ -1,8 +1,24 @@
-@props(['options'])
+<div
+    class="overflow-hidden 1180:hidden"
+    v-if="isMediaLoading"
+>
+    <div class="shimmer aspect-square max-h-screen w-screen bg-zinc-200"></div>
+</div>
 
-<v-product-carousel {{ $attributes }}>
-    <x-shop::shimmer.products.gallery />
-</v-product-carousel>
+<div
+    class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden"
+    v-else
+>
+    <v-product-carousel
+        :options="[
+            ...media.images,
+            ...media.videos
+        ]"
+        @click="isImageZooming = ! isImageZooming"
+    >
+        <x-shop::shimmer.products.gallery />
+    </v-product-carousel>
+</div>
 
 @pushOnce('scripts')
     <script 
@@ -45,7 +61,10 @@
             </div>
 
             <!-- Pagination -->
-            <div class="absolute bottom-3 left-0 flex w-full justify-center max-sm:bottom-2.5">
+            <div
+                class="absolute bottom-3 left-0 flex w-full justify-center max-sm:bottom-2.5"
+                v-if="options?.length > 1"
+            >
                 <div 
                     v-for="(media, index) in options" 
                     class="mx-1 h-1.5 w-1.5 cursor-pointer rounded-full" 
@@ -221,7 +240,9 @@
                 },
                 
                 setSliderPosition() {
-                    this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
+                    if (this.slider) {
+                        this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
+                    }
                 },
                 
                 onResize() {
