@@ -170,8 +170,7 @@ class Installer extends Command
         $this->warn('Step: Linking storage directory...');
         $this->call('storage:link');
 
-        $this->warn('Step: Clearing cached bootstrap files...');
-        $this->call('optimize:clear');
+        $this->clearCacheWithPermissionCheck();
 
         if (! $this->option('skip-admin-creation')) {
             $this->warn('Step: Create admin credentials...');
@@ -607,5 +606,44 @@ class Installer extends Command
         asort($timezones);
 
         return $timezones;
+    }
+
+    /**
+     * Method will check first if the cache directories are writable or not.
+     * If not, it will skip the cache clear step.
+     * Otherwise, it will clear the cache.
+     *
+     * @return void
+     */
+    private function clearCacheWithPermissionCheck()
+    {
+        $this->warn('Step: Clearing cached bootstrap files...');
+
+        try {
+            $cacheDirectories = [
+                storage_path('framework/cache'),
+                storage_path('framework/views'),
+                storage_path('framework/sessions'),
+            ];
+
+            $errors = [];
+
+            foreach ($cacheDirectories as $directory) {
+                if (! is_writable($directory)) {
+                    $errors[] = "Cache directory {$directory} is not writable. Skipping cache clear step.";
+                }
+            }
+
+            if (empty($errors)) {
+                $this->call('optimize:clear');
+                $this->info('Cache cleared successfully.');
+            } else {
+                foreach ($errors as $error) {
+                    $this->error($error);
+                }
+            }
+        } catch (\Exception $e) {
+            $this->error('Failed to clear cache: '.$e->getMessage());
+        }
     }
 }
