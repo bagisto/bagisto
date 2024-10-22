@@ -195,9 +195,9 @@ class OrderItemRepository extends Repository
     public function manageCustomizableOptions(OrderItem $orderItem): void
     {
         if (
-            $orderItem->type !== 'simple'
+            ! $orderItem->product->getTypeInstance()->isCustomizable()
             || (
-                $orderItem->type === 'simple'
+                $orderItem->product->getTypeInstance()->isCustomizable()
                 && empty($orderItem->additional['formatted_customizable_options'])
             )
         ) {
