@@ -385,7 +385,12 @@ class Installer extends Command
         $adminPassword = text(
             label    : 'Configure the password for the admin user',
             default  : 'admin123',
-            required : true
+            required : true,
+            validate : function (string $value) {
+                if (strlen($value) < 6) {
+                    return 'The password must be at least 6 characters.';
+                }
+            }
         );
 
         $sampleProduct = select(
@@ -424,7 +429,7 @@ class Installer extends Command
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to ' . env('APP_URL') . '/' . env('APP_ADMIN_URL', 'admin') . ' and authenticate with:');
+            $this->info('Go to '.env('APP_URL').'/'.env('APP_ADMIN_URL', 'admin').' and authenticate with:');
             $this->info('Email: '.$adminEmail);
             $this->info('Password: '.$adminPassword);
             $this->info('Cheers!');

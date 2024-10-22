@@ -225,7 +225,9 @@
                 },
 
                 setSliderPosition() {
-                    this.slider.style.transform = `translateX(${this.currentTranslate}px)`
+                    if (this.slider) {
+                        this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
+                    }
                 },
 
                 visitLink(image) {
