@@ -1,47 +1,55 @@
 <?php
 
-use Webkul\Core\Acl;
-use Webkul\Core\Core;
-use Webkul\Core\Menu;
-use Webkul\Core\SystemConfig;
+use Webkul\Core\Facades\Acl;
+use Webkul\Core\Facades\Core;
+use Webkul\Core\Facades\Menu;
+use Webkul\Core\Facades\SystemConfig;
 
 if (! function_exists('core')) {
     /**
      * Core helper.
+     *
+     * @return \Webkul\Core\Core
      */
-    function core(): Core
+    function core()
     {
-        return app('core');
+        return Core::getFacadeRoot();
     }
 }
 
 if (! function_exists('menu')) {
     /**
      * Menu helper.
+     *
+     * @return \Webkul\Core\Menu
      */
-    function menu(): Menu
+    function menu()
     {
-        return app('menu');
+        return Menu::getFacadeRoot();
     }
 }
 
 if (! function_exists('acl')) {
     /**
      * Acl helper.
+     *
+     * @return \Webkul\Core\Acl
      */
-    function acl(): Acl
+    function acl()
     {
-        return app('acl');
+        return Acl::getFacadeRoot();
     }
 }
 
 if (! function_exists('system_config')) {
     /**
      * System Config helper.
+     *
+     * @return \Webkul\Core\SystemConfig
      */
-    function system_config(): SystemConfig
+    function system_config()
     {
-        return app('system_config');
+        return SystemConfig::getFacadeRoot();
     }
 }
 

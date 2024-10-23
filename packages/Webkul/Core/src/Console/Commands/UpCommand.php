@@ -2,10 +2,10 @@
 
 namespace Webkul\Core\Console\Commands;
 
-use Illuminate\Foundation\Console\UpCommand as OriginalCommand;
+use Illuminate\Foundation\Console\UpCommand as BaseUpCommand;
 use Webkul\Core\Models\Channel;
 
-class UpCommand extends OriginalCommand
+class UpCommand extends BaseUpCommand
 {
     /**
      * Execute the console command.
@@ -26,7 +26,7 @@ class UpCommand extends OriginalCommand
      */
     protected function upAllChannels()
     {
-        $this->comment('Activating all channels.');
+        $this->components->info('Activating all channels.');
 
         return Channel::query()->update(['is_maintenance_on' => 0]);
     }
