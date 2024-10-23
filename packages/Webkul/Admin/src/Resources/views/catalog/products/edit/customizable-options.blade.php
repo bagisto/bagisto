@@ -239,7 +239,7 @@
                                         type="text"
                                         name="label"
                                         rules="required"
-                                        v-model="selectedOption.label"
+                                        ::value="selectedOption.label"
                                         :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.name')"
                                     />
 
@@ -256,7 +256,7 @@
                                             type="select"
                                             name="type"
                                             rules="required"
-                                            v-model="selectedOption.type"
+                                            ::value="selectedOption.type"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.type')"
                                         >
                                             <option
@@ -280,7 +280,7 @@
                                             type="select"
                                             name="is_required"
                                             rules="required"
-                                            v-model="selectedOption.is_required"
+                                            ::value="selectedOption.is_required"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.is-required')"
                                         >
                                             <option value="1">
@@ -306,7 +306,7 @@
                                             type="text"
                                             name="supported_file_extensions"
                                             rules="required"
-                                            v-model="selectedOption.supported_file_extensions"
+                                            ::value="selectedOption.supported_file_extensions"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions')"
                                         />
 
@@ -322,7 +322,7 @@
                                             type="price"
                                             name="price"
                                             rules="required"
-                                            v-model="selectedOption.price"
+                                            ::value="selectedOption.price"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')"
                                         />
 
@@ -538,7 +538,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="label"
-                                        v-model="selectedOptionItem.label"
+                                        ::value="selectedOptionItem.label"
                                         rules="required"
                                         :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.label')"
                                     />
@@ -555,7 +555,7 @@
                                     <x-admin::form.control-group.control
                                         type="price"
                                         name="price"
-                                        v-model="selectedOptionItem.price"
+                                        ::value="selectedOptionItem.price"
                                         rules="required"
                                         :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.price')"
                                     />
@@ -699,9 +699,14 @@
 
                             this.options.push(params);
                         } else {
+                            params.id = this.selectedOption.id;
+
                             const indexToUpdate = this.options.findIndex(option => option.id === this.selectedOption.id);
 
-                            this.options[indexToUpdate] = this.selectedOption;
+                            this.options[indexToUpdate] = {
+                                ...this.options[indexToUpdate],
+                                ...params,
+                            };
                         }
 
                         this.resetForm();
@@ -812,7 +817,10 @@
                         } else {
                             const indexToUpdate = this.optionItems.findIndex(optionItem => optionItem.id === this.selectedOptionItem.id);
 
-                            this.optionItems[indexToUpdate] = this.selectedOptionItem;
+                            this.optionItems[indexToUpdate] = {
+                                ...this.optionItems[indexToUpdate],
+                                ...params,
+                            };
                         }
 
                         this.$emit('updateOption', {
