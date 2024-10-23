@@ -3,22 +3,11 @@
 namespace Webkul\Shop\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Facades\Captcha;
 
 class ContactRequest extends FormRequest
 {
-    /**
-     * Define your rules.
-     *
-     * @var array
-     */
-    private $rules = [
-        'name'    => 'string|required',
-        'email'   => 'string|required',
-        'contact' => 'integer',
-        'message' => 'required',
-    ];
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,7 +25,12 @@ class ContactRequest extends FormRequest
      */
     public function rules()
     {
-        return Captcha::getValidations($this->rules);
+        return Captcha::getValidations([
+            'name'    => 'string|required',
+            'email'   => 'string|required',
+            'contact' => new PhoneNumber,
+            'message' => 'required',
+        ]);
     }
 
     /**
