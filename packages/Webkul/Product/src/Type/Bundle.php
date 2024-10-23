@@ -245,6 +245,10 @@ class Bundle extends AbstractType
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
             $product = $this->productRepository->find($productId);
 
+            if ($product->type !== 'simple') {
+                return trans('product::app.checkout.cart.selected-products-simple');
+            }
+
             /* need to check each individual quantity as well if don't have then show error */
             if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
                 return trans('product::app.checkout.cart.inventory-warning');
@@ -549,5 +553,33 @@ class Bundle extends AbstractType
     public function getPriceIndexer()
     {
         return app(BundleIndexer::class);
+    }
+
+    /**
+     * Returns validation rules.
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            'bundle_options' => 'array',
+            'bundle_options' => function ($attribute, $value, $fail) {
+                $associatedProductIds = collect($value)
+                    ->pluck('products')
+                    ->flatten(1)
+                    ->pluck('product_id')
+                    ->toArray();
+
+                $products = $this->productRepository->findWhereIn('id', $associatedProductIds)
+                    ->pluck('type')
+                    ->filter(fn ($type) => $type !== 'simple')
+                    ->count();
+
+                if ($products) {
+                    $fail(trans('product::app.checkout.cart.selected-products-simple'));
+                }
+            },
+        ];
     }
 }
