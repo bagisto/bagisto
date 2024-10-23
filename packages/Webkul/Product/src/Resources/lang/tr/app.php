@@ -7,9 +7,10 @@ return [
                 'qty-missing'   => 'En az bir ürünün miktarı 1\'den fazla olmalıdır.',
             ],
 
-            'inventory-warning' => 'İstenen miktar mevcut değil, lütfen daha sonra tekrar deneyin.',
-            'missing-links'     => 'Bu ürün için indirilebilir bağlantılar eksik.',
-            'missing-options'   => 'Bu ürün için seçenekler eksik.',
+            'inventory-warning'        => 'İstenen miktar mevcut değil, lütfen daha sonra tekrar deneyin.',
+            'missing-links'            => 'Bu ürün için indirilebilir bağlantılar eksik.',
+            'missing-options'          => 'Bu ürün için seçenekler eksik.',
+            'selected-products-simple' => 'Seçilen ürünler basit ürün türünde olmalıdır.',
         ],
     ],
 

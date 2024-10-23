@@ -7,9 +7,10 @@ return [
                 'qty-missing'   => 'Minstens één product moet meer dan 1 hoeveelheid hebben.',
             ],
 
-            'inventory-warning' => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
-            'missing-links'     => 'Downloadbare links ontbreken voor dit product.',
-            'missing-options'   => 'Opties ontbreken voor dit product.',
+            'inventory-warning'        => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
+            'missing-links'            => 'Downloadbare links ontbreken voor dit product.',
+            'missing-options'          => 'Opties ontbreken voor dit product.',
+            'selected-products-simple' => 'Geselecteerde producten moeten van het type eenvoudig zijn.',
         ],
     ],
 

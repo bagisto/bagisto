@@ -7,9 +7,10 @@ return [
                 'qty-missing'   => 'Almeno un prodotto deve avere una quantità superiore a 1.',
             ],
 
-            'inventory-warning' => 'La quantità richiesta non è disponibile, si prega di riprovare più tardi.',
-            'missing-links'     => 'Link scaricabili mancanti per questo prodotto.',
-            'missing-options'   => 'Mancano le opzioni per questo prodotto.',
+            'inventory-warning'        => 'La quantità richiesta non è disponibile, si prega di riprovare più tardi.',
+            'missing-links'            => 'Link scaricabili mancanti per questo prodotto.',
+            'missing-options'          => 'Mancano le opzioni per questo prodotto.',
+            'selected-products-simple' => 'I prodotti selezionati devono essere di tipo prodotto semplice.',
         ],
     ],
 
