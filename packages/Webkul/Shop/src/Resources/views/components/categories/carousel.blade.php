@@ -21,7 +21,7 @@
             <div class="relative">
                 <div
                     ref="swiperContainer"
-                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4"
+                    :class="`scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4 ${categories.length <= visibleItemsCount ? 'justify-center' : 'justify-start'}`"
                 >
                     <div
                         class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5"
@@ -100,11 +100,27 @@
                     categories: [],
 
                     offset: 323,
+
+                    visibleItemsCount: 0,
                 };
             },
 
             mounted() {
                 this.getCategories();
+
+                this.$nextTick(() => {
+
+                    setTimeout(() => {
+
+                        this.calculateVisibleItems();
+
+                    }, 500);
+
+                });
+
+                window.addEventListener('resize', this.calculateVisibleItems);
+
+                window.addEventListener('load', this.calculateVisibleItems);
             },
 
             methods: {
@@ -130,6 +146,14 @@
 
                     container.scrollLeft += this.offset;
                 },
+
+                calculateVisibleItems() {
+                    if (this.$refs.swiperContainer) {
+                        const containerWidth = this.$refs.swiperContainer.offsetWidth;
+                        const itemWidth = window.innerWidth <= 480 ? 80 : window.innerWidth <= 768 ? 100 : 160;
+                        this.visibleItemsCount = Math.floor(containerWidth / itemWidth);
+                    }
+                }
             },
         });
     </script>

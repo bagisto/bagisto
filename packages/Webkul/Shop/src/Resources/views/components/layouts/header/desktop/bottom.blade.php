@@ -155,7 +155,7 @@
                         <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.before') !!}
-                        
+
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
@@ -172,7 +172,7 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
-                            
+
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 
@@ -280,13 +280,14 @@
             v-else
         >
             <div
-                class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                class="group relative flex h-[77px] items-center border-b-4 hover:border-b-4 hover:border-gray-400"
                 v-for="category in categories"
+                :class="isActive(category.url) ? 'border-navyBlue' : 'border-transparent'"
             >
                 <span>
                     <a
                         :href="category.url"
-                        class="inline-block px-5 uppercase"
+                        class="inline-block px-5"
                     >
                         @{{ category.name }}
                     </a>
@@ -359,13 +360,17 @@
 
                 pairCategoryChildren(category) {
                     return category.children.reduce((result, value, index, array) => {
-                        if (index % 2 === 0) {
-                            result.push(array.slice(index, index + 2));
+                        if (index % 4 === 0) {
+                            result.push(array.slice(index, index + 4));
                         }
 
                         return result;
                     }, []);
-                }
+                },
+
+                isActive(url) {
+                    return window.location.href.includes(url);
+                },
             },
         });
     </script>
