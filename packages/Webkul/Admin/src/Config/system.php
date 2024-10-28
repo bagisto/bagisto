@@ -819,6 +819,11 @@ return [
                 'type'    => 'boolean',
                 'default' => true,
             ], [
+                'name'    => 'censoring_reviewer_name',
+                'title'   => 'Censoring Reviewer Name',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
                 'name'    => 'summary',
                 'title'   => 'admin::app.configuration.index.catalog.products.review.summary',
                 'type'    => 'select',

@@ -35,13 +35,19 @@ class ReviewController extends APIController
      */
     public function index(int $id): JsonResource
     {
-        $product = $this->productRepository
+        $productReviews = $this->productRepository
             ->find($id)
             ->reviews()
-            ->Where('status', self::STATUS_APPROVED)
+            ->where('status', self::STATUS_APPROVED)
             ->paginate(8);
 
-        return ProductReviewResource::collection($product);
+        if (core()->getConfigData('catalog.products.review.censoring_reviewer_name')) {
+            $productReviews->getCollection()->each(function ($review) {
+                $review->name = $this->censorReviewerName($review->name);
+            });
+        }
+
+        return ProductReviewResource::collection($productReviews);
     }
 
     /**
@@ -114,5 +120,15 @@ class ReviewController extends APIController
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * Censoring the Reviewer name
+     */
+    private function censorReviewerName(string $name): string
+    {
+        return collect(explode(' ', $name))
+            ->map(fn ($part) => substr($part, 0, 1).str_repeat('*', max(strlen($part) - 1, 0)))
+            ->join(' ');
     }
 }
