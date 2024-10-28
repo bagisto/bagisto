@@ -389,7 +389,7 @@ return [
         'media' => [
             'index' => [
                 'add-attachments' => 'Ek Dosyalar Ekle',
-                'add-image'       => 'Resim ekle',
+                'add-image'       => 'Resim/Video Ekle',
             ],
         ],
 
