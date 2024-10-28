@@ -8,9 +8,15 @@
 
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta name="description" content="{{ $title }}"/>
+    <meta
+        name="description"
+        content="{{ $title }}"
+    />
 
-    <meta name="keywords" content="{{ $title }}"/>
+    <meta
+        name="keywords"
+        content="{{ $title }}"
+    />
 @endPush
 
 <x-shop::layouts :has-feature="false">
@@ -25,10 +31,8 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h1 
-                class="text-2xl font-medium max-sm:text-base" 
-                v-text="'{{ $title }}'"
-            >    
+            <h1 class="text-2xl font-medium max-sm:text-base">
+                {{ $title }}
             </h1>
         </div>
     </div>
