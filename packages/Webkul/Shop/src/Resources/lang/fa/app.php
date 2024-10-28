@@ -389,7 +389,7 @@ return [
         'media' => [
             'index' => [
                 'add-attachments' => 'افزودن پیوست',
-                'add-image'       => 'افزودن تصویر',
+                'add-image'       => 'افزودن تصویر/ویدئو',
             ],
         ],
 

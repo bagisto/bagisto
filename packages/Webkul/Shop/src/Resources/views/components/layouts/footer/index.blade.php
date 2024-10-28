@@ -11,10 +11,13 @@
     template as much as possible.
 -->
 @php
+    $channel = core()->getCurrentChannel();
+
     $customization = $themeCustomizationRepository->findOneWhere([
         'type'       => 'footer_links',
         'status'     => 1,
-        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => $channel->theme,
+        'channel_id' => $channel->id,
     ]);
 @endphp
 
