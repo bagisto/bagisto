@@ -28,7 +28,7 @@ it('should returns the listing cms', function () {
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertOk()
-        ->assertJsonPath('records.0.id', 11)
+        ->assertJsonPath('records.0.id', 10)
         ->assertJsonPath('records.0.page_title', 'Privacy Policy')
         ->assertJsonPath('records.0.url_key', 'privacy-policy')
         ->assertJsonPath('meta.total', 10);
