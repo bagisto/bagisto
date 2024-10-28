@@ -7,10 +7,13 @@
 @inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
 
 @php
+    $channel = core()->getCurrentChannel();
+
     $customization = $themeCustomizationRepository->findOneWhere([
         'type'       => 'services_content',
         'status'     => 1,
-        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => $channel->theme,
+        'channel_id' => $channel->id,
     ]); 
 @endphp
 

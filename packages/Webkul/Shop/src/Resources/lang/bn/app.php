@@ -389,7 +389,7 @@ return [
         'media' => [
             'index' => [
                 'add-attachments' => 'সংযুক্তি যোগ করুন',
-                'add-image'       => 'চিত্র যোগ করুন',
+                'add-image'       => 'ছবি / ভিডিও যোগ করুন',
             ],
         ],
 
