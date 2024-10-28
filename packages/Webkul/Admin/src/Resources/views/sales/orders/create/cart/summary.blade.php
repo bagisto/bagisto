@@ -222,15 +222,29 @@
                 </div>
             </div>
 
-            <div class="flex w-full justify-end p-4">
-                <x-admin::button
-                    type="button"
-                    class="primary-button w-max px-11 py-3"
-                    :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                    ::disabled="isPlacingOrder"
-                    ::loading="isPlacingOrder"
-                    @click="placeOrder"
-                />
+            <div
+                class="flex w-full justify-end p-4"
+                v-if="$parent.canPlaceOrder"
+            >
+                <template v-if="cart.payment_method == 'paypal_smart_button'">
+                    {{-- {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!} --}}
+                    
+                    <!-- Paypal Smart Button Vue Component -->
+                    <v-paypal-smart-button></v-paypal-smart-button>
+
+                    {{-- {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!} --}}
+                </template>
+
+                <template v-else>
+                    <x-admin::button
+                        type="button"
+                        class="primary-button w-max px-11 py-3"
+                        :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                        ::disabled="isPlacingOrder"
+                        ::loading="isPlacingOrder"
+                        @click="placeOrder"
+                    />
+                </template>
             </div>
 
             <!-- Apply Coupon Form -->

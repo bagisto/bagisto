@@ -237,8 +237,6 @@
                         if (step == 'review') {
                             this.canPlaceOrder = true;
 
-                            this.scrollToCurrentStep();
-
                             return;
                         }
 
