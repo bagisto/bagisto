@@ -35,7 +35,7 @@
 
                     <template v-if="products.length > 3">
                         <span
-                            v-if="products.length > 4 || (products.length > 3 && isScreenIsMax2xl)"
+                            v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
                             class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.previous')"
@@ -43,8 +43,9 @@
                             @click="swipeLeft"
                         >
                         </span>
+
                         <span
-                            v-if="products.length > 4 || (products.length > 3 && isScreenIsMax2xl)"
+                            v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
                             class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.next')"
@@ -95,12 +96,12 @@
             data() {
                 return {
                     isLoading: true,
-
+isScreenMax2xl
                     products: [],
 
                     offset: 323,
 
-                    isScreenIsMax2xl: window.innerWidth <= 1440,
+                    isScreenMax2xl: window.innerWidth <= 1440,
                 };
             },
 
@@ -129,7 +130,7 @@
                 },
 
                 updateScreenSize() {
-                    this.isScreenIsMax2xl = window.innerWidth <= 1440;
+                    this.isScreenMax2xl = window.innerWidth <= 1440;
                 },
 
                 swipeLeft() {
