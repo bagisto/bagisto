@@ -453,7 +453,7 @@
                             <!-- Notes List Title and Time -->
                             <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                                 @if ($comment->customer_notified)
-                                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
+                                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600"></span>
 
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
