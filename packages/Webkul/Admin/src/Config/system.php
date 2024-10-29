@@ -1914,17 +1914,19 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'shipping',
-                'title'   => 'admin::app.configuration.index.sales.taxes.categories.shipping',
-                'type'    => 'select',
-                'default' => 0,
-                'options' => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'name'          => 'shipping',
+                'title'         => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+                'type'          => 'select',
+                'default'       => 0,
+                'options'       => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'channel_based' => true,
             ], [
-                'name'    => 'product',
-                'title'   => 'admin::app.configuration.index.sales.taxes.categories.product',
-                'type'    => 'select',
-                'default' => 0,
-                'options' => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'name'          => 'product',
+                'title'         => 'admin::app.configuration.index.sales.taxes.categories.product',
+                'type'          => 'select',
+                'default'       => 0,
+                'options'       => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'channel_based' => true,
             ],
         ],
     ], [
@@ -1934,11 +1936,12 @@ return [
         'sort'   => 2,
         'fields' => [
             [
-                'name'    => 'based_on',
-                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.based-on',
-                'type'    => 'select',
-                'default' => 'shipping_address',
-                'options' => [
+                'name'          => 'based_on',
+                'title'         => 'admin::app.configuration.index.sales.taxes.calculation.based-on',
+                'type'          => 'select',
+                'default'       => 'shipping_address',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.calculation.shipping-address',
                         'value' => 'shipping_address',
@@ -1951,11 +1954,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'product_prices',
-                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.product-prices',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'product_prices',
+                'title'         => 'admin::app.configuration.index.sales.taxes.calculation.product-prices',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.calculation.excluding-tax',
                         'value' => 'excluding_tax',
@@ -1965,11 +1969,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'shipping_prices',
-                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.shipping-prices',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'shipping_prices',
+                'title'         => 'admin::app.configuration.index.sales.taxes.calculation.shipping-prices',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.calculation.excluding-tax',
                         'value' => 'excluding_tax',
@@ -1987,20 +1992,23 @@ return [
         'sort'   => 3,
         'fields' => [
             [
-                'name'    => 'country',
-                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-country',
-                'type'    => 'country',
-                'default' => '',
+                'name'          => 'country',
+                'title'         => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-country',
+                'type'          => 'country',
+                'channel_based' => true,
+                'default'       => '',
             ], [
-                'name'    => 'state',
-                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-state',
-                'type'    => 'state',
-                'default' => '',
+                'name'          => 'state',
+                'title'         => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-state',
+                'type'          => 'state',
+                'channel_based' => true,
+                'default'       => '',
             ], [
-                'name'    => 'post_code',
-                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-post-code',
-                'type'    => 'text',
-                'default' => '',
+                'name'          => 'post_code',
+                'title'         => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-post-code',
+                'type'          => 'text',
+                'channel_based' => true,
+                'default'       => '',
             ],
         ],
     ], [
@@ -2010,11 +2018,12 @@ return [
         'sort'   => 4,
         'fields' => [
             [
-                'name'    => 'display_prices',
-                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-prices',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_prices',
+                'title'         => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-prices',
+                'type'          => 'select',
+                'channel_based' => true,
+                'default'       => 'excluding_tax',
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
                         'value' => 'excluding_tax',
@@ -2027,11 +2036,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'display_subtotal',
-                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-subtotal',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_subtotal',
+                'title'         => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-subtotal',
+                'type'          => 'select',
+                'channel_based' => true,
+                'default'       => 'excluding_tax',
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
                         'value' => 'excluding_tax',
@@ -2044,11 +2054,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'display_shipping_amount',
-                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-shipping-amount',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_shipping_amount',
+                'title'         => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-shipping-amount',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
                         'value' => 'excluding_tax',
@@ -2069,11 +2080,12 @@ return [
         'sort'   => 4,
         'fields' => [
             [
-                'name'    => 'display_prices',
-                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-prices',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_prices',
+                'title'         => 'admin::app.configuration.index.sales.taxes.sales.display-prices',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
                         'value' => 'excluding_tax',
@@ -2086,11 +2098,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'display_subtotal',
-                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-subtotal',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_subtotal',
+                'title'         => 'admin::app.configuration.index.sales.taxes.sales.display-subtotal',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
                         'value' => 'excluding_tax',
@@ -2103,11 +2116,12 @@ return [
                     ],
                 ],
             ], [
-                'name'    => 'display_shipping_amount',
-                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-shipping-amount',
-                'type'    => 'select',
-                'default' => 'excluding_tax',
-                'options' => [
+                'name'          => 'display_shipping_amount',
+                'title'         => 'admin::app.configuration.index.sales.taxes.sales.display-shipping-amount',
+                'type'          => 'select',
+                'default'       => 'excluding_tax',
+                'channel_based' => true,
+                'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
                         'value' => 'excluding_tax',
