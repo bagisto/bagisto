@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Allow Customer Review',
-                        'allow-guest-review'    => 'Allow Guest Review',
-                        'display-review-count'  => 'Display the review count for ratings.',
-                        'display-star-count'    => 'Display the star count in ratings.',
-                        'summary'               => 'Summary',
-                        'title'                 => 'Review',
-                        'title-info'            => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                        'allow-customer-review'   => 'Allow Customer Review',
+                        'allow-guest-review'      => 'Allow Guest Review',
+                        'censoring-reviewer-name' => 'Censoring Reviewer Name',
+                        'display-review-count'    => 'Display the review count for ratings.',
+                        'display-star-count'      => 'Display the star count in ratings.',
+                        'summary'                 => 'Summary',
+                        'title'                   => 'Review',
+                        'title-info'              => 'Evaluation or assessment of something, often involving opinions and feedback.',
                     ],
 
                     'attribute' => [

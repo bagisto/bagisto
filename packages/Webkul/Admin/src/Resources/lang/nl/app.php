@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Klantbeoordeling toestaan',
-                        'allow-guest-review'    => 'Gastbeoordeling toestaan',
-                        'display-review-count'  => 'Geef het aantal recensies voor beoordelingen weer.',
-                        'display-star-count'    => 'Geef het aantal sterren in beoordelingen weer.',
-                        'summary'               => 'Samenvatting',
-                        'title'                 => 'Beoordeling',
-                        'title-info'            => 'Evaluatie of beoordeling van iets, vaak met meningen en feedback.',
+                        'allow-customer-review'   => 'Klantbeoordeling toestaan',
+                        'allow-guest-review'      => 'Gastbeoordeling toestaan',
+                        'censoring-reviewer-name' => 'Naam recensent censureren',
+                        'display-review-count'    => 'Geef het aantal recensies voor beoordelingen weer.',
+                        'display-star-count'      => 'Geef het aantal sterren in beoordelingen weer.',
+                        'summary'                 => 'Samenvatting',
+                        'title'                   => 'Beoordeling',
+                        'title-info'              => 'Evaluatie of beoordeling van iets, vaak met meningen en feedback.',
                     ],
 
                     'attribute' => [
