@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-cbb58df2.css",
+    "file": "assets/app-911536a8.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-c1c971d5.woff",
+    "file": "assets/bagisto-admin-37c2feba.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
@@ -17,8 +17,8 @@
     "src": "src/Resources/assets/images/customers.svg"
   },
   "src/Resources/assets/images/dark-logo.svg": {
-    "file": "assets/dark-logo-ea7984e7.svg",
-    "src": "src/Resources/assets/images/dark-logo.svg"
+    "file": "assets/logo-8ef453f8.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/empty-placeholders/customers.svg": {
     "file": "assets/customers-57f8166b.svg",
@@ -61,7 +61,7 @@
     "src": "src/Resources/assets/images/settings/shipping-method.svg"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-f02a1643.svg",
+    "file": "assets/logo-8ef453f8.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/product-placeholders/front.svg": {
@@ -96,17 +96,9 @@
     "file": "assets/captcha-061d77ab.svg",
     "src": "src/Resources/assets/images/settings/captcha.svg"
   },
-  "src/Resources/assets/images/settings/checkout.svg": {
-    "file": "assets/checkout-e5efdb8e.svg",
-    "src": "src/Resources/assets/images/settings/checkout.svg"
-  },
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5653e8d5.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
-  },
-  "src/Resources/assets/images/settings/inventory.svg": {
-    "file": "assets/inventory-d69907d8.svg",
-    "src": "src/Resources/assets/images/settings/inventory.svg"
   },
   "src/Resources/assets/images/settings/invoice.svg": {
     "file": "assets/invoice-bbc6d6a8.svg",
@@ -180,7 +172,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-7609ee4b.js",
+    "file": "assets/app-69cc7fd3.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

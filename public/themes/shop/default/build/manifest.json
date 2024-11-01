@@ -1,6 +1,26 @@
 {
+  "node_modules/@material-design-icons/font/material-icons-outlined.woff2": {
+    "file": "assets/material-icons-outlined-35dca8a7.woff2",
+    "src": "node_modules/@material-design-icons/font/material-icons-outlined.woff2"
+  },
+  "node_modules/@material-design-icons/font/material-icons-round.woff2": {
+    "file": "assets/material-icons-round-c948f126.woff2",
+    "src": "node_modules/@material-design-icons/font/material-icons-round.woff2"
+  },
+  "node_modules/@material-design-icons/font/material-icons-sharp.woff2": {
+    "file": "assets/material-icons-sharp-d31bfb81.woff2",
+    "src": "node_modules/@material-design-icons/font/material-icons-sharp.woff2"
+  },
+  "node_modules/@material-design-icons/font/material-icons-two-tone.woff2": {
+    "file": "assets/material-icons-two-tone-1e673ba8.woff2",
+    "src": "node_modules/@material-design-icons/font/material-icons-two-tone.woff2"
+  },
+  "node_modules/@material-design-icons/font/material-icons.woff2": {
+    "file": "assets/material-icons-8265f647.woff2",
+    "src": "node_modules/@material-design-icons/font/material-icons.woff2"
+  },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9ab26c42.css",
+    "file": "assets/app-dad739ea.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -12,9 +32,29 @@
     "file": "assets/cash-on-delivery-73061c49.png",
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
+  "src/Resources/assets/images/custom/contact-bg.webp": {
+    "file": "assets/contact-bg-98c03a38.webp",
+    "src": "src/Resources/assets/images/custom/contact-bg.webp"
+  },
+  "src/Resources/assets/images/custom/contact-en.webp": {
+    "file": "assets/contact-en-d0ee9276.webp",
+    "src": "src/Resources/assets/images/custom/contact-en.webp"
+  },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-6ef0ef70.svg",
     "src": "src/Resources/assets/images/default-language.svg"
+  },
+  "src/Resources/assets/images/dsk.png": {
+    "file": "assets/dsk-647bac23.png",
+    "src": "src/Resources/assets/images/dsk.png"
+  },
+  "src/Resources/assets/images/email.svg": {
+    "file": "assets/email-fef3eb45.svg",
+    "src": "src/Resources/assets/images/email.svg"
+  },
+  "src/Resources/assets/images/email2.svg": {
+    "file": "assets/email2-97483e0c.svg",
+    "src": "src/Resources/assets/images/email2.svg"
   },
   "src/Resources/assets/images/empty-dwn-product.png": {
     "file": "assets/empty-dwn-product-3c9202e1.png",
@@ -23,6 +63,14 @@
   "src/Resources/assets/images/favicon.ico": {
     "file": "assets/favicon-1b7c1fb6.ico",
     "src": "src/Resources/assets/images/favicon.ico"
+  },
+  "src/Resources/assets/images/footer-bg.webp": {
+    "file": "assets/footer-bg-12fbf76b.webp",
+    "src": "src/Resources/assets/images/footer-bg.webp"
+  },
+  "src/Resources/assets/images/header-bg.webp": {
+    "file": "assets/header-bg-41626544.webp",
+    "src": "src/Resources/assets/images/header-bg.webp"
   },
   "src/Resources/assets/images/hero-image.jpg": {
     "file": "assets/hero-image-feee3420.jpg",
@@ -37,8 +85,12 @@
     "src": "src/Resources/assets/images/large-product-placeholder.webp"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-942157c2.svg",
+    "file": "assets/logo-8ef453f8.svg",
     "src": "src/Resources/assets/images/logo.svg"
+  },
+  "src/Resources/assets/images/maps-flags.svg": {
+    "file": "assets/maps-flags-7c304018.svg",
+    "src": "src/Resources/assets/images/maps-flags.svg"
   },
   "src/Resources/assets/images/medium-product-placeholder.webp": {
     "file": "assets/medium-product-placeholder-3b1a7b7d.webp",
@@ -52,9 +104,25 @@
     "file": "assets/no-address-740c7843.png",
     "src": "src/Resources/assets/images/no-address.png"
   },
+  "src/Resources/assets/images/pay/mastercard.webp": {
+    "file": "assets/mastercard-e0b61600.webp",
+    "src": "src/Resources/assets/images/pay/mastercard.webp"
+  },
+  "src/Resources/assets/images/pay/visa.webp": {
+    "file": "assets/visa-4ec8aa41.webp",
+    "src": "src/Resources/assets/images/pay/visa.webp"
+  },
   "src/Resources/assets/images/paypal.png": {
     "file": "assets/paypal-df581855.png",
     "src": "src/Resources/assets/images/paypal.png"
+  },
+  "src/Resources/assets/images/phone-call.svg": {
+    "file": "assets/phone-call-c54b7ae5.svg",
+    "src": "src/Resources/assets/images/phone-call.svg"
+  },
+  "src/Resources/assets/images/rainbow-bg.webp": {
+    "file": "assets/rainbow-bg-98e7ce2e.webp",
+    "src": "src/Resources/assets/images/rainbow-bg.webp"
   },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-342fab8f.png",
@@ -88,7 +156,7 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-b30607f0.js",
+    "file": "assets/app-7bad911a.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
