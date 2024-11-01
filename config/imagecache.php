@@ -54,6 +54,7 @@ return [
         'small'  => 'Webkul\Shop\CacheFilters\Small',
         'medium' => 'Webkul\Shop\CacheFilters\Medium',
         'large'  => 'Webkul\Shop\CacheFilters\Large',
+        'max'    => 'Webkul\Shop\CacheFilters\Max',
     ],
 
     /*

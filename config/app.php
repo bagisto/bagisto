@@ -188,7 +188,6 @@ return [
          */
         Astrotomic\Translatable\TranslatableServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
@@ -200,7 +199,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
         /**
          * Webkul package service providers.
@@ -237,6 +238,7 @@ return [
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
+        Frosko\DSK\Providers\DSKServiceProvider::class,
     ])->toArray(),
 
     /*
