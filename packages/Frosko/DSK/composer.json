@@ -1,0 +1,26 @@
+{
+    "name": "frosko/dsk",
+    "license": "MIT",
+    "description" : "DSK Bank payments module by Frosko",
+    "authors": [
+        {
+            "name": "Frosko DSK ",
+            "email": "svetoslav.mutev@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Frosko\\DSK\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Frosko\\DSK\\Providers\\DSKServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

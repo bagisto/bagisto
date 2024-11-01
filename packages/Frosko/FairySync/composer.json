@@ -1,0 +1,26 @@
+{
+    "name": "frosko/fairy-kids-import",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Svetoslav Mutev",
+            "email": "svetoslav.mutev@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Frosko\\FairySync\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Frosko\\FairySync\\Providers\\FairySyncServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}
