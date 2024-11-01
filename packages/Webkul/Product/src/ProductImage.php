@@ -3,9 +3,13 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Image;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\Product\Jobs\GenerateProductCacheImages;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\CacheFilters\Max;
 
 class ProductImage
 {
@@ -120,20 +124,11 @@ class ProductImage
      */
     private function getCachedImageUrls($path): array
     {
-        if (! $this->isDriverLocal()) {
-            return [
-                'small_image_url'    => Storage::url($path),
-                'medium_image_url'   => Storage::url($path),
-                'large_image_url'    => Storage::url($path),
-                'original_image_url' => Storage::url($path),
-            ];
-        }
-
         return [
-            'small_image_url'    => url('cache/small/'.$path),
-            'medium_image_url'   => url('cache/medium/'.$path),
-            'large_image_url'    => url('cache/large/'.$path),
-            'original_image_url' => url('cache/original/'.$path),
+            'small_image_url'    => Storage::url('cache/small/'.$path),
+            'medium_image_url'   => Storage::url('cache/medium/'.$path),
+            'large_image_url'    => Storage::url('cache/large/'.$path),
+            'original_image_url' => Storage::url($path),
         ];
     }
 
@@ -168,5 +163,20 @@ class ProductImage
     private function isDriverLocal(): bool
     {
         return Storage::getAdapter() instanceof LocalFilesystemAdapter;
+    }
+
+    public function saveImageAndGenerateSizes(mixed $readableImage, $productId): string
+    {
+        /** @var Image $image */
+        $image = app('image')->read($readableImage);
+        $image = (new Max)->handle($image, 'product');
+
+        $path = "product/{$productId}/".Str::random(40).'.webp';
+
+        Storage::put($path, $image->toWebp());
+
+        GenerateProductCacheImages::dispatch($productId);
+
+        return $path;
     }
 }

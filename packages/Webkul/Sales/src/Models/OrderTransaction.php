@@ -8,6 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\OrderTransaction as OrderTransactionContract;
 use Webkul\Sales\Database\Factories\OrderTransactionFactory;
 
+/**
+ * OrderTransaction class
+ * @category Models
+ * @author Webkul
+ * @property int $id
+ * @property string $transaction_id
+ * @property string $status
+ * @property string $type
+ * @property float $amount
+ * @property string $payment_method
+ * @property ?int $order_id
+ * @property ?int $invoice_id
+ * @property array $data
+ * @property-read string $payment_title
+ */
 class OrderTransaction extends Model implements OrderTransactionContract
 {
     use HasFactory;
@@ -28,6 +43,17 @@ class OrderTransaction extends Model implements OrderTransactionContract
         'id',
         'created_at',
         'updated_at',
+    ];
+
+    protected $fillable = [
+        'transaction_id',
+        'status',
+        'type',
+        'amount',
+        'payment_method',
+        'order_id',
+        'invoice_id',
+        'data',
     ];
 
     /**

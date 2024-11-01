@@ -2,135 +2,141 @@
 
 namespace Webkul\Core\ImageCache;
 
-use Config;
-use Illuminate\Http\Response as IlluminateResponse;
-use Intervention\Image\ImageCacheController;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Image;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Webkul\Shop\CacheFilters\CacheFilterInterface;
 
-class Controller extends ImageCacheController
+class Controller extends \Illuminate\Routing\Controller
 {
-    /**
-     * Cache template
-     *
-     * @var string
-     */
-    protected $template;
-
     /**
      * Logo
      *
      * @var string
      */
-    const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
+    const LOGO = 'https://www.fairykids.bg/themes/shop/default/build/assets/logo-8ef453f8.svg';
 
     /**
      * Get HTTP response of either original image file or
      * template applied file.
      *
-     * @param  string  $template
-     * @param  string  $filename
-     * @return Illuminate\Http\Response
+     * @return RedirectResponse|StreamedResponse
      */
-    public function getResponse($template, $filename)
+    public function getResponse(string $template, string $filename)
     {
-        switch (strtolower($template)) {
-            case 'original':
-                return $this->getOriginal($filename);
-
-            case 'download':
-                return $this->getDownload($filename);
-
-            default:
-                return $this->getImage($template, $filename);
+        if (! Storage::exists($filename)) {
+            foreach (['jpg', 'jpeg', 'png', 'webp', 'tiff'] as $ext) {
+                if (Storage::exists(Str::beforeLast($filename, '.').'.'.$ext)) {
+                    $filename = Str::beforeLast($filename, '.').'.'.$ext;
+                    break;
+                }
+            }
+            if (! Storage::exists($filename)) {
+                return abort(404);
+            }
         }
+
+        return match ($template) {
+            'original' => $this->getOriginal($filename),
+            'download' => $this->getDownload($filename),
+            default    => $this->getImage($template, $filename),
+        };
     }
 
     /**
      * Get HTTP response of template applied image file
-     *
-     * @param  string  $template
-     * @param  string  $filename
-     * @return Illuminate\Http\Response
      */
-    public function getImage($template, $filename)
+    public function getImage(string $template, string $filename): RedirectResponse
     {
-        $this->template = $template;
-
-        $cacheTime = $template == 'logo' ? 10080 : config('imagecache.lifetime');
-
-        if ($template == 'logo') {
-            $path = self::BAGISTO_LOGO;
-        } else {
-            $template = $this->getTemplate($template);
-
-            $path = $this->getImagePath($filename);
+        $cachePath = config('imagecache.route').'/'.$template.'/'.Str::beforeLast($filename, '.').'.webp';
+        // Check if the image is already cached on storage level and just return it.
+        if (! Storage::exists($cachePath)) {
+            $image = $this->renderImage($template, $filename);
+            Storage::put($cachePath, $image->toWebp(), 'public');
         }
 
-        /**
-         * Image manipulation based on callback
-         */
-        $manager = new ImageManager(Config::get('image'));
+        return redirect()->away(Storage::url($cachePath), 301);
+    }
 
-        try {
-            $content = $manager->cache(function ($image) use ($template, $path) {
-                if ($template instanceof Closure) {
-                    /**
-                     * Build from closure callback template
-                     */
-                    $template($image->make($path));
-                } elseif (is_object($template)) {
-                    /**
-                     * Build from filter template
-                     */
-                    $image->make($path)->filter($template);
-                } else {
-                    $image->make($path);
-                }
-            }, $cacheTime);
-        } catch (\Exception $e) {
-            if ($template != 'logo') {
-                abort(404);
-            }
+    private function renderImage($template, $filename): Image
+    {
+        /** @var CacheFilterInterface $template */
+        $template = $this->getTemplate($template);
 
-            $content = '';
+        if (! $template) {
+            abort(404);
         }
 
-        return $this->buildResponse($content);
+        /** @var Image $image */
+        $image = app('image')->read(
+            $this->getImageContent($filename)
+        );
+
+        return $template->handle($image, $this->getImagePreset());
+    }
+
+    private function getImagePreset(): ?string
+    {
+        return match (true) {
+            Str::contains(request()->path(), '/product')             => 'product',
+            Str::contains(request()->path(), '/category')            => 'category',
+            Str::contains(request()->path(), '/attribute_option')    => 'attribute_option',
+            default                                                  => null,
+        };
+    }
+
+    protected function getTemplate($template)
+    {
+        $template = config("imagecache.templates.{$template}");
+
+        return match (true) {
+            class_exists($template) => new $template,
+            default                 => null,
+        };
     }
 
     /**
-     * Builds HTTP response from given image data
+     * Returns full image path from given filename
      *
-     * @param  string  $content
-     * @return Illuminate\Http\Response
+     * @param  string  $filename
+     * @return string
      */
-    protected function buildResponse($content)
+    protected function getImageContent($filename): string
     {
-        /**
-         * Define mime type
-         */
-        $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
+        if (Storage::exists($filename)) {
+            return Storage::read($filename);
+        }
 
-        /**
-         * Respond with 304 not modified if browser has the image cached
-         */
-        $eTag = md5($content);
+        // find file
+        foreach (config('imagecache.paths') as $path) {
+            // don't allow '..' in filenames
+            $image_path = $path.'/'.str_replace('..', '', $filename);
+            if (file_exists($image_path) && is_file($image_path)) {
+                // file found
+                return @file_get_contents($image_path);
+            }
+        }
 
-        $notModified = isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag;
+        // file not found
+        abort(404);
+    }
 
-        $content = $notModified ? null : $content;
+    public function getOriginal($filename): RedirectResponse
+    {
+        abort_if(! Storage::exists($filename), 404);
 
-        $statusCode = $notModified ? 304 : 200;
+        return redirect()->away(Storage::url(Storage::path($filename)));
+    }
 
-        $maxAge = ($this->template == 'logo' ? 10080 : config('imagecache.lifetime')) * 60;
+    public function getDownload($filename): StreamedResponse
+    {
+        abort_if(! Storage::exists($filename), 404);
 
-        /**
-         * Return http response
-         */
-        return new IlluminateResponse($content, $statusCode, [
-            'Content-Type'   => $mime,
-            'Cache-Control'  => 'max-age='.$maxAge.', public',
-            'Content-Length' => strlen($content),
-            'Etag'           => $eTag,
-        ]);
+        return response()->streamDownload(function () use ($filename) {
+            echo Storage::get($filename);
+        }, $filename);
     }
 }

@@ -14,9 +14,11 @@
     "vue": "^3.4.19"
   },
   "dependencies": {
+    "@material-design-icons/font": "^0.14.13",
     "@vee-validate/i18n": "^4.9.1",
     "@vee-validate/rules": "^4.9.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/compiler-sfc": "^3.5.12",
     "mitt": "^3.0.0",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0"

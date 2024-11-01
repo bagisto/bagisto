@@ -6,8 +6,9 @@ use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Image;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Shop\CacheFilters\Max;
 
 class ProductMediaRepository extends Repository
 {

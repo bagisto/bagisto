@@ -1,5 +1,6 @@
 <?php
 
+return [];
 return [
     'paypal_smart_button' => [
         'code'             => 'paypal_smart_button',
