@@ -2,41 +2,22 @@
 
 namespace Webkul\Shop\CacheFilters;
 
-use Illuminate\Support\Str;
-use Intervention\Image\Filters\FilterInterface;
 use Intervention\Image\Image;
 
-class Medium implements FilterInterface
+class Medium implements CacheFilterInterface
 {
-    /**
-     * Apply filter.
-     *
-     * @return \Intervention\Image\Image
-     */
-    public function applyFilter(Image $image)
+    public function handle(Image $image, ?string $preset = null): Image
     {
-        /**
-         * If the current url is product image
-         */
-        if (Str::contains(url()->current(), '/product')) {
-            $width = core()->getConfigData('catalog.products.cache_medium_image.width') != ''
-                ? core()->getConfigData('catalog.products.cache_medium_image.width')
-                : 350;
+        [$width, $height] = match ($preset) {
+            'product' => [
+                core()->getConfigData('catalog.products.cache_medium_image.width') ?: 350,
+                core()->getConfigData('catalog.products.cache_large_image.height') ?: 360,
+            ],
+            'category'         => [110, 110],
+            'attribute_option' => [210, 210],
+            default            => [1024, 372],
+        };
 
-            $height = core()->getConfigData('catalog.products.cache_medium_image.height') != ''
-                ? core()->getConfigData('catalog.products.cache_medium_image.height')
-                : 360;
-
-            return $image->fit($width, $height);
-        } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->fit(110, 110);
-        } elseif (Str::contains(url()->current(), '/attribute_option')) {
-            return $image->fit(210, 210);
-        }
-
-        /**
-         * Slider image dimensions
-         */
-        return $image->fit(1024, 372);
+        return $image->resize($width, $height);
     }
 }
