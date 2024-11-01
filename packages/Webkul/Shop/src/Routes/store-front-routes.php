@@ -9,12 +9,22 @@ use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 
-/**
- * CMS pages.
- */
-Route::get('page/{slug}', [PageController::class, 'view'])
-    ->name('shop.cms.page')
-    ->middleware('cacheResponse');
+Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
+    /**
+     * CMS pages.
+     */
+    Route::get('page/{slug}', [PageController::class, 'view'])
+        ->name('shop.cms.page')
+        ->middleware('cacheResponse');
+
+    Route::get('brand/{slug}', [ProductsCategoriesProxyController::class, 'brand'])
+        ->name('shop.brand.index')
+        ->middleware('cacheResponse');
+
+    Route::get('collection/{slug}', [ProductsCategoriesProxyController::class, 'collection'])
+        ->name('shop.collection.index')
+        ->middleware('cacheResponse');
+});
 
 /**
  * Fallback route.

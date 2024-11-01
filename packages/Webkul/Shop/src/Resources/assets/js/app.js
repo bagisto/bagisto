@@ -1,6 +1,8 @@
 /**
  * This will track all the images and fonts for publishing.
  */
+import VShimmerImage from "./components/VShimmerImage.vue";
+
 import.meta.glob(["../images/**", "../fonts/**"]);
 
 /**
@@ -49,6 +51,8 @@ window.app = createApp({
     },
 });
 
+app.component("v-shimmer-image", VShimmerImage);
+
 /**
  * Global plugins registration.
  */
@@ -64,6 +68,6 @@ import Flatpickr from "./plugins/flatpickr";
     Shop,
     VeeValidate,
     Flatpickr,
-].forEach((plugin) => app.use(plugin));
+].forEach((plugin) => window.app.use(plugin));
 
-export default app;
+export default window.app;

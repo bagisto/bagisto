@@ -124,4 +124,29 @@ class ProductsCategoriesProxyController extends Controller
 
         abort(404);
     }
+
+    public function brand()
+    {
+        return;
+    }
+
+    public function collection($slug)
+    {
+        $category = $this->categoryRepository->findBySlug($slug);
+
+        if ($category && $category->display_mode == 'collections') {
+            visitor()->visit($category);
+
+            return view('shop::categories.view', [
+                'category' => $category,
+                'params' => [
+                    'sort' => request()->query('sort'),
+                    'limit' => request()->query('limit'),
+                    'mode' => request()->query('mode'),
+                ],
+            ]);
+        }
+
+        abort(404);
+    }
 }
