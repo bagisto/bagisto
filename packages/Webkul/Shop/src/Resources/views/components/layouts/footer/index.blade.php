@@ -1,120 +1,100 @@
 {!! view_render_event('bagisto.shop.layout.footer.before') !!}
-
-<!--
-    The category repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
--->
 @inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
-
-<!--
-    This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
--->
 @php
     $customization = $themeCustomizationRepository->findOneWhere([
-        'type'       => 'footer_links',
-        'status'     => 1,
-        'channel_id' => core()->getCurrentChannel()->id,
-    ]);
+            'type'       => 'footer_links',
+            'status'     => 1,
+            'channel_id' => core()->getCurrentChannel()->id,
+        ]);
 @endphp
 
-<footer class="mt-9 bg-lightOrange max-sm:mt-10">
-    <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
-        <!-- For Desktop View -->
-        <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden">
-            @if ($customization?->options)
-                @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-sm">
-                        @php
-                            usort($footerLinkSection, function ($a, $b) {
-                                return $a['sort_order'] - $b['sort_order'];
-                            });
-                        @endphp
 
-                        @foreach ($footerLinkSection as $link)
-                            <li>
-                                <a href="{{ $link['url'] }}">
-                                    {{ $link['title'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endforeach
-            @endif
+<footer class="bg-footer bg-cover bg-no-repeat bg-center mt-7 ">
+    <div class="container mx-auto">
+        <div class="row mt-5 px-4 md:px-8 lg:px-12">
+            <div class="card shadow-lg p-5 border bg-white rounded-lg">
+                <div class="card-body">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- First card -->
+                        <div class="items-center col-span-1 md:col-span-1">
+                            <a href="tel:@lang('shop::app.components.layouts.footer.phone')" class="card border-0 p-4 flex items-center">
+                                <div class="flex-none items-center justify-center w-[60px] h-[60px] rounded-full border border-white fill-pelorous-600 p-2.5 bg-pelorous-600 transition hover:bg-pelorous-500">
+                                    <span class="material-icons text-4xl text-white">phone</span>
+                                </div>
+                                <div class="flex-grow ml-4 items-center">
+                                    <h5 class="card-title">@lang('shop::app.components.layouts.footer.phone-label')</h5>
+                                    <p class="card-text">@lang('shop::app.components.layouts.footer.phone')</p>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Second card -->
+                        <div class="items-center col-span-1 md:col-span-1">
+                            <div class="items-center border-0 p-3 flex">
+                                <div class="flex-none items-center justify-center w-[60px] h-[60px] rounded-full border border-white fill-pelorous-600 p-2.5 bg-pelorous-600 transition hover:bg-pelorous-500">
+                                    <span class="material-icons text-4xl text-white">location_on</span>
+                                </div>
+                                <div class="flex-grow ml-4 items-center">
+                                    <h5>@lang('shop::app.components.layouts.footer.address1')</h5>
+                                    <p>@lang('shop::app.components.layouts.footer.address2')</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Third card -->
+                        <div class="items-center col-span-1 md:col-span-1">
+                            <a href="mailto:@lang('shop::app.components.layouts.footer.mail')" class="card border-0 p-4 flex">
+                                <div class="flex-none items-center justify-center w-[60px] h-[60px] rounded-full border border-white fill-pelorous-600 p-2.5 bg-pelorous-600 transition hover:bg-pelorous-500">
+                                    <span class="material-icons text-4xl text-white">mail</span>
+                                </div>
+
+                                <div class="flex-grow ml-4 items-center">
+                                    <h5>@lang('shop::app.components.layouts.footer.mail-label')</h5>
+                                    <p>@lang('shop::app.components.layouts.footer.mail')</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- For Mobile view -->
-        <x-shop::accordion
-            :is-active="false"
-            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-lg"
-        >
-            <x-slot:header class="rounded-t-lg bg-[#F1EADF] font-medium max-md:p-2.5 max-sm:px-3 max-sm:py-2 max-sm:text-sm">
-                @lang('shop::app.components.layouts.footer.footer-content')
-            </x-slot>
+        <div class="row mt-4">
+            {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
 
-            <x-slot:content class="flex justify-between !bg-transparent !p-4">
-                @if ($customization?->options)
-                    @foreach ($customization->options as $footerLinkSection)
-                        <ul class="grid gap-5 text-sm">
-                            @php
-                                usort($footerLinkSection, function ($a, $b) {
-                                    return $a['sort_order'] - $b['sort_order'];
-                                });
-                            @endphp
+            <!-- News Letter subscription -->
+            @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                <div class="md:col-span-12 justify-center">
+                    <p class="text-3xl leading-[45px] text-navyBlue font-medium mt-5 mb-5 text-center" role="heading" aria-level="2" style="font-family:roboto; ">
+                        @lang('shop::app.components.layouts.footer.newsletter-text')
+                    </p>
+                </div>
+            @endif
 
-                            @foreach ($footerLinkSection as $link)
-                                <li>
-                                    <a
-                                        href="{{ $link['url'] }}"
-                                        class="text-sm font-medium max-sm:text-xs">
-                                        {{ $link['title'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endforeach
-                @endif
-            </x-slot>
-        </x-shop::accordion>
+            {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
 
-        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
-
-        <!-- News Letter subscription -->
-        @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5">
-                <p
-                    class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue max-md:text-2xl max-sm:text-lg"
-                    role="heading"
-                    aria-level="2"
-                >
-                    @lang('shop::app.components.layouts.footer.newsletter-text')
-                </p>
-
-                <p class="text-xs">
-                    @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
-                </p>
-
-                <div>
+        </div>
+        <div class="row">
+            <div class="md:col-span-12 sm:justify-start">
+                <div class="md:flex sm:flex-none justify-center mt-5 sm:mt-0">
                     <x-shop::form
                         :action="route('shop.subscription.store')"
-                        class="mt-2.5 rounded max-sm:mt-0"
+                        class="flex-row items-start sm:items-center sm:justify-center sm:w-full md:w-96"
                     >
-                        <div class="relative w-full">
+                        <div class="relative m-auto">
                             <x-shop::form.control-group.control
                                 type="email"
-                                class="block w-[420px] max-w-full rounded-xl border-2 border-[#e9decc] bg-[#F1EADF] px-5 py-4 text-base max-1060:w-full max-md:p-3.5 max-sm:mb-0 max-sm:rounded-lg max-sm:border-2 max-sm:p-2 max-sm:text-sm"
+                                class="w-full border-solid border-gray-100 bg-white px-5 text-xs font-medium"
                                 name="email"
                                 rules="required|email"
                                 label="Email"
                                 :aria-label="trans('shop::app.components.layouts.footer.email')"
                                 placeholder="email@example.com"
                             />
-    
+
                             <x-shop::form.control-group.error control-name="email" />
-    
+
                             <button
                                 type="submit"
-                                class="absolute top-1.5 flex w-max items-center rounded-xl bg-white px-7 py-2.5 font-medium hover:bg-zinc-100 max-md:top-1 max-md:px-5 max-md:text-xs max-sm:mt-0 max-sm:rounded-lg max-sm:px-4 max-sm:py-2 ltr:right-2 rtl:left-2"
+                                class="absolute top-0 flex w-max items-center bg-pelorous-800 px-7 py-2.5 text-white bold font-medium ltr:right-0 rtl:left-0"
                             >
                                 @lang('shop::app.components.layouts.footer.subscribe')
                             </button>
@@ -122,19 +102,70 @@
                     </x-shop::form>
                 </div>
             </div>
-        @endif
+        </div>
+        <div class="row mt-8">
+            <!-- Row 2 -->
+            <div class="col-md-6 offset-md-3 text-center mt-5">
+                @if ($customization?->options)
+                    @foreach ($customization->options as $footerLinkSection)
+                        <div class="flex flex-wrap justify-center divide-x divide-pelorous-700">
+                            @php
+                                usort($footerLinkSection, function ($a, $b) {
+                                    return $a['sort_order'] - $b['sort_order'];
+                                });
+                            @endphp
 
-        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
-    </div>
+                            @foreach ($footerLinkSection as $link)
+                                <a class="my-2 py-0 px-3 text-pelorous-800 text-gray-900 hover:text-pelorous-600" href="{{ $link['url'] }}">{{ $link['title'] }}</a>
+                            @endforeach
+                        </div>
+                    @endforeach
+                    @endif
+            </div>
+        </div>
+        <div class="row mt-8">
+            <!-- Row 3 -->
+            <div class="col-md-8 offset-md-2 text-center">
+                <div class="flex justify-center">
+                    <a href="#"
+                       class="flex items-center justify-center rounded-full p-3 bg-blue-500 hover:bg-purple-500 transition-colors duration-300"
+                       style="width: 40px; height: 40px;">
+                        <i class="fab fa-facebook text-white text-xl"></i>
+                    </a>
+                    <a href="#"
+                       class="flex items-center justify-center rounded-full p-3 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 transition-colors duration-300 ml-4"
+                       style="width: 40px; height: 40px;">
+                        <i class="fab fa-instagram text-white text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-8">
+            <!-- Row 4 -->
+            <div class="grid grid-cols-3 pb-4 mx-auto">
+                <div class="text-center place-content-end md:text-left mb-4 md:mb-0">
+                    {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
-    <div class="flex justify-between bg-[#F1EADF] px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
-        {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
+                    <p class="text-sm text-gray-500 ml-5 mt-3">
+                        @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
+                    </p>
 
-        <p class="text-sm text-zinc-600 max-md:text-center">
-            @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
-        </p>
-
-        {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}
+                    {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}
+                </div>
+                <div class="text-center mb-4 md:mb-0">
+                    <img
+                        src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                        width="320"
+                        class="mx-auto block"
+                        alt="{{ config('app.name') }}"
+                    >
+                </div>
+                <div class="flex md:justify-end items-end space-x-4">
+                    <img src="{{ bagisto_asset('images/pay/visa.webp') }}" class="w-12 h-10" alt="Visa">
+                    <img src="{{ bagisto_asset('images/pay/mastercard.webp') }}" class="w-12 h-10" alt="Mastercard">
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 
