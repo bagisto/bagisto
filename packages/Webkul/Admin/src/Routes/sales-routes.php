@@ -7,6 +7,7 @@ use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
 use Webkul\Admin\Http\Controllers\Sales\TransactionController;
+use Webkul\Paypal\Http\Controllers\SmartButtonController;
 
 /**
  * Sales routes.
@@ -47,7 +48,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('comment/{order_id}', 'comment')->name('admin.sales.orders.comment');
 
             Route::get('search', 'search')->name('admin.sales.orders.search');
+
         });
+
+        Route::get('paypal/smart-button/create-order', [SmartButtonController::class, 'createOrder'])->name('admin.paypal.smart-button.create-order');
 
         /**
          * Refunds routes.

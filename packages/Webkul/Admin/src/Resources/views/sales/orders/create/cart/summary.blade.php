@@ -1,3 +1,9 @@
+@php
+    $clientId = core()->getConfigData('sales.payment_methods.paypal_smart_button.client_id');
+
+    $acceptedCurrency = core()->getConfigData('sales.payment_methods.paypal_smart_button.accepted_currencies');
+@endphp
+    
 {!! view_render_event('bagisto.admin.sales.order.create.cart.summary.before') !!}
 
 <v-cart-summary
@@ -146,8 +152,6 @@
                         </div>
                     </template>
 
-
-
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.delivery_charges.after') !!}
 
                     <!-- Discount -->
@@ -167,7 +171,6 @@
                     </div>
 
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.discount_amount.after') !!}
-
 
                     <!-- Discount -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.coupon.before') !!}
@@ -227,12 +230,10 @@
                 v-if="$parent.canPlaceOrder"
             >
                 <template v-if="cart.payment_method == 'paypal_smart_button'">
-                    {{-- {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!} --}}
-                    
                     <!-- Paypal Smart Button Vue Component -->
-                    <v-paypal-smart-button></v-paypal-smart-button>
-
-                    {{-- {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!} --}}
+                    <template v-if="{{ (bool) core()->getConfigData('sales.payment_methods.paypal_smart_button.active') }}">
+                        <v-admin-paypal-smart-button></v-admin-paypal-smart-button>
+                    </template>
                 </template>
 
                 <template v-else>
@@ -381,6 +382,189 @@
                         });
                 }
             }
+        });
+    </script>
+{{-- 
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}"
+        data-partner-attribution-id="Bagisto_Cart"
+    >
+    </script>
+
+    <script
+        type="text/x-template"
+        id="v-admin-paypal-smart-button-template"
+    >
+        <div class="paypal-button-container w-max"></div>
+    </script>
+
+    <script type="module">
+        app.component('v-admin-paypal-smart-button', {
+            template: '#v-admin-paypal-smart-button-template',
+
+            mounted() {
+                this.register();
+            },
+
+            methods: {
+                register() {
+                    if (typeof paypal == 'undefined') {
+                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Something went wrong.')' });
+                        
+                        return;
+                    }
+
+                    paypal.Buttons(this.getOptions()).render('.paypal-button-container');
+                },
+
+                getOptions() {
+                    let options = {
+                        style: {
+                            layout: 'vertical',
+                            shape: 'rect',
+                        },
+
+                        authorizationFailed: false,
+
+                        enableStandardCardFields: false,
+
+                        alertBox: (message) => {
+                            this.$emitter.emit('add-flash', { type: 'error', message: message });
+                        },
+
+                        createOrder: (data, actions) => {                            
+                            return this.$axios.get("{{ route('paypal.smart-button.create-order') }}")
+                                .then(response => response.data.result)
+                                .then(order => order.id)
+                                .catch(error => {
+                                    if (error.response.data.error === 'invalid_client') {
+                                        options.authorizationFailed = true;
+                                        
+                                        options.alertBox('@lang('Something went wrong.')');
+                                    }
+
+                                    return error;
+                                });
+                        },
+
+                        onApprove: (data, actions) => {                            
+                            this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                                _token: "{{ csrf_token() }}",
+                                orderData: data
+                            })
+                            .then(response => {
+                                if (response.data.success) {
+                                    if (response.data.redirect_url) {
+                                        window.location.href = response.data.redirect_url;
+                                    } else {
+                                        window.location.href = "{{ route('shop.checkout.onepage.success') }}";
+                                    }
+                                }
+                            })
+                            .catch(error => window.location.href = "{{ route('shop.checkout.cart.index') }}");
+                        },
+
+                        onError: (error) => {
+                            if (! options.authorizationFailed) {
+                                console.log('3');
+                                
+                                options.alertBox('@lang('Something went wrong.')');
+                            }
+                        },
+                    };
+
+                    return options;
+                },
+            },
+        });
+    </script> --}}
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}"
+        data-partner-attribution-id="Bagisto_Cart"
+    ></script>
+
+    <script type="text/x-template" id="v-admin-paypal-smart-button-template">
+        <div class="paypal-button-container w-max"></div>
+    </script>
+
+    <script type="module">
+        app.component('v-admin-paypal-smart-button', {
+            template: '#v-admin-paypal-smart-button-template',
+
+            mounted() {
+                this.register();
+            },
+
+            methods: {
+                register() {
+                    if (typeof paypal === 'undefined') {
+                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Something went wrong.')' });
+                        return;
+                    }
+
+                    paypal.Buttons(this.getOptions()).render('.paypal-button-container');
+                },
+
+                getOptions() {
+                    let options = {
+                        style: {
+                            layout: 'vertical',
+                            shape: 'rect',
+                        },
+
+                        authorizationFailed: false,
+                        enableStandardCardFields: false,
+
+                        alertBox: (message) => {
+                            this.$emitter.emit('add-flash', { type: 'error', message: message });
+                        },
+
+                        createOrder: (data, actions) => {                            
+                            return this.$axios.get("{{ route('admin.paypal.smart-button.create-order') }}")
+                                .then(response => {  
+                                    if (response.data && response.data.result && response.data.result.id) {
+                                        return response.data.result.id;
+                                    } else {
+                                        throw new Error('Invalid order creation response');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                    
+                                    options.authorizationFailed = true;
+                                });
+                        },
+
+                        onApprove: (data, actions) => {                            
+                            this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                                _token: "{{ csrf_token() }}",
+                                orderData: data
+                            })
+                            .then(response => {
+                                if (response.data.success) {
+                                    const redirectUrl = response.data.redirect_url || "{{ route('shop.checkout.onepage.success') }}";
+                                    window.location.href = redirectUrl;
+                                } else {
+                                    throw new Error('Capture failed');
+                                }
+                            })
+                            .catch(error => {
+                                window.location.href = "{{ route('shop.checkout.cart.index') }}";
+                                console.error(error); // Log the actual error for debugging
+                            });
+                        },
+
+                        onError: (error) => {
+                            if (!options.authorizationFailed) {
+                                options.alertBox('@lang('An error occurred while processing your payment. Please try again.')');
+                            }
+                            console.error(error); // Log the actual error for debugging
+                        },
+                    };
+
+                    return options;
+                },
+            },
         });
     </script>
 @endPushOnce
