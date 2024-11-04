@@ -96,7 +96,7 @@
             data() {
                 return {
                     isLoading: true,
-isScreenMax2xl
+
                     products: [],
 
                     offset: 323,
