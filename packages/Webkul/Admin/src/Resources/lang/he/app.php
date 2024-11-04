@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'לרשום את כל ההתראות',
-        'marked-success'   => 'התראה סומנה בהצלחה',
+        'marked-success'   => 'כל ההתראות סומנו כנקראו',
         'no-record'        => 'לא נמצאו רשומות',
         'of'               => 'מתוך',
         'per-page'         => 'לעמוד',

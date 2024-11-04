@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => '列出所有通知',
-        'marked-success'   => '通知标记成功',
+        'marked-success'   => '所有通知已标记为已读',
         'no-record'        => '未找到记录',
         'of'               => '的',
         'per-page'         => '每页',
