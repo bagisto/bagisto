@@ -595,7 +595,7 @@
             template: '#v-product-review-item-template',
 
             props: ['review'],
-            
+
             data() {
                 return {
                     isLoading: false,
@@ -616,7 +616,7 @@
                     });
 
                     return data;
-                }
+                },
             },
 
             methods: {

@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Consenti recensioni dei clienti',
-                        'allow-guest-review'    => 'Consenti recensioni degli ospiti',
-                        'display-review-count'  => 'Visualizza il numero di revisioni per le valutazioni.',
-                        'display-star-count'    => 'Visualizza il numero di stelle nelle valutazioni.',
-                        'summary'               => 'Riepilogo',
-                        'title'                 => 'Recensione',
-                        'title-info'            => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
+                        'allow-customer-review'   => 'Consenti recensioni dei clienti',
+                        'allow-guest-review'      => 'Consenti recensioni degli ospiti',
+                        'censoring-reviewer-name' => 'Censura Nome del Recensore',
+                        'display-review-count'    => 'Visualizza il numero di revisioni per le valutazioni.',
+                        'display-star-count'      => 'Visualizza il numero di stelle nelle valutazioni.',
+                        'summary'                 => 'Riepilogo',
+                        'title'                   => 'Recensione',
+                        'title-info'              => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
                     ],
 
                     'attribute' => [

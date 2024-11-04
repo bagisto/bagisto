@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Müşteri İncelemesine İzin Ver',
-                        'allow-guest-review'    => 'Konuk İncelemesine İzin Ver',
-                        'display-review-count'  => 'Derecelendirmeler için inceleme sayısını görüntüleyin.',
-                        'display-star-count'    => 'Derecelendirmelerdeki yıldız sayısını görüntüleyin.',
-                        'summary'               => 'Özet',
-                        'title'                 => 'İnceleme',
-                        'title-info'            => 'Bir şeyin değerlendirilmesi veya değerlendirilmesi, genellikle görüşler ve geri bildirimler içeren bir değerlendirme sürecidir.',
+                        'allow-customer-review'   => 'Müşteri İncelemesine İzin Ver',
+                        'allow-guest-review'      => 'Konuk İncelemesine İzin Ver',
+                        'censoring-reviewer-name' => 'İnceleyen Adını Sansürleme',
+                        'display-review-count'    => 'Derecelendirmeler için inceleme sayısını görüntüleyin.',
+                        'display-star-count'      => 'Derecelendirmelerdeki yıldız sayısını görüntüleyin.',
+                        'summary'                 => 'Özet',
+                        'title'                   => 'İnceleme',
+                        'title-info'              => 'Bir şeyin değerlendirilmesi veya değerlendirilmesi, genellikle görüşler ve geri bildirimler içeren bir değerlendirme sürecidir.',
                     ],
 
                     'attribute' => [

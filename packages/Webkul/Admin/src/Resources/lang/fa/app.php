@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'اجازه بررسی مشتری',
-                        'allow-guest-review'    => 'اجازه بررسی مهمان',
-                        'display-review-count'  => 'نمایش تعداد بررسی برای رتبه بندی.',
-                        'display-star-count'    => 'نمایش تعداد ستاره در رتبه بندی.',
-                        'summary'               => 'خلاصه',
-                        'title'                 => 'بررسی',
-                        'title-info'            => 'ارزیابی یا ارزیابی چیزی، معمولاً شامل نظرات و بازخوردها است.',
+                        'allow-customer-review'   => 'اجازه بررسی مشتری',
+                        'allow-guest-review'      => 'اجازه بررسی مهمان',
+                        'censoring-reviewer-name' => 'سانسور نام بازبینی‌کننده',
+                        'display-review-count'    => 'نمایش تعداد بررسی برای رتبه بندی.',
+                        'display-star-count'      => 'نمایش تعداد ستاره در رتبه بندی.',
+                        'summary'                 => 'خلاصه',
+                        'title'                   => 'بررسی',
+                        'title-info'              => 'ارزیابی یا ارزیابی چیزی، معمولاً شامل نظرات و بازخوردها است.',
                     ],
 
                     'attribute' => [

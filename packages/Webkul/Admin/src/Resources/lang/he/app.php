@@ -3663,13 +3663,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'אפשר ביקורת מלקוח',
-                        'allow-guest-review'    => 'אפשר ביקורת מאורח',
-                        'display-review-count'  => 'הצג את ספירת הביקורות עבור דירוגים.',
-                        'display-star-count'    => 'הצג את ספירת הכוכבים בדירוגים.',
-                        'summary'               => 'סיכום',
-                        'title'                 => 'ביקורת',
-                        'title-info'            => 'הערכה או הערכה של משהו, הכוללת לעיתים דעות ומשוב.',
+                        'allow-customer-review'   => 'אפשר ביקורת מלקוח',
+                        'allow-guest-review'      => 'אפשר ביקורת מאורח',
+                        'censoring-reviewer-name' => 'צנזור שם המבקר',
+                        'display-review-count'    => 'הצג את ספירת הביקורות עבור דירוגים.',
+                        'display-star-count'      => 'הצג את ספירת הכוכבים בדירוגים.',
+                        'summary'                 => 'סיכום',
+                        'title'                   => 'ביקורת',
+                        'title-info'              => 'הערכה או הערכה של משהו, הכוללת לעיתים דעות ומשוב.',
                     ],
 
                     'attribute' => [
