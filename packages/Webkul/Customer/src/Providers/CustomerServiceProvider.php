@@ -3,7 +3,7 @@
 namespace Webkul\Customer\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\Customer\Captcha;
+use Webkul\Customer\Facades\Captcha;
 
 class CustomerServiceProvider extends ServiceProvider
 {
@@ -21,17 +21,7 @@ class CustomerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'customer');
 
         $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
-            return $this->app['captcha']->validateResponse($value);
-        });
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->app->singleton('captcha', function ($app) {
-            return new Captcha;
+            return Captcha::getFacadeRoot()->validateResponse($value);
         });
     }
 }

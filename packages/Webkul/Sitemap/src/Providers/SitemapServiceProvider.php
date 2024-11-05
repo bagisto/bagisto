@@ -13,8 +13,8 @@ class SitemapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->register(ModuleServiceProvider::class);
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
+        $this->app->register(ModuleServiceProvider::class);
     }
 }

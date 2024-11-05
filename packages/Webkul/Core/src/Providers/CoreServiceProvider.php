@@ -2,50 +2,33 @@
 
 namespace Webkul\Core\Providers;
 
-use Elastic\Elasticsearch\Client as ElasticSearchClient;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\AliasLoader;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Core\Acl;
-use Webkul\Core\Core;
-use Webkul\Core\ElasticSearch;
-use Webkul\Core\Exceptions\Handler;
-use Webkul\Core\Facades\Acl as AclFacade;
-use Webkul\Core\Facades\Core as CoreFacade;
-use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
-use Webkul\Core\Facades\Menu as MenuFacade;
-use Webkul\Core\Facades\SystemConfig as SystemConfigFacade;
-use Webkul\Core\Menu;
-use Webkul\Core\SystemConfig;
-use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        include __DIR__.'/../Http/helpers.php';
+
+        $this->registerCommands();
+
+        $this->registerOverrides();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
-
-        $this->publishes([
-            dirname(__DIR__).'/Config/concord.php'       => config_path('concord.php'),
-            dirname(__DIR__).'/Config/repository.php'    => config_path('repository.php'),
-            dirname(__DIR__).'/Config/visitor.php'       => config_path('visitor.php'),
-            dirname(__DIR__).'/Config/elasticsearch.php' => config_path('elasticsearch.php'),
-        ]);
-
-        $this->app->register(EventServiceProvider::class);
-
-        $this->app->register(VisitorServiceProvider::class);
-
-        $this->app->bind(ExceptionHandler::class, Handler::class);
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
 
@@ -57,85 +40,13 @@ class CoreServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
-        $this->app->extend('command.down', function () {
-            return new \Webkul\Core\Console\Commands\DownCommand;
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('invoice:cron')->dailyAt('3:00');
         });
 
-        $this->app->extend('command.up', function () {
-            return new \Webkul\Core\Console\Commands\UpCommand;
-        });
-
-        /**
-         * Image Cache route
-         */
-        if (is_string(config('imagecache.route'))) {
-            $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
-
-            /**
-             * Route to access template applied image file
-             */
-            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
-                'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
-                'as'   => 'imagecache',
-            ])->where(['filename' => $filenamePattern]);
-        }
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->registerFacades();
-
-        $this->registerCommands();
-
-        $this->registerBladeCompiler();
-    }
-
-    /**
-     * Register Bouncer as a singleton.
-     */
-    protected function registerFacades(): void
-    {
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias('core', CoreFacade::class);
-
-        $loader->alias('menu', MenuFacade::class);
-
-        $loader->alias('acl', AclFacade::class);
-
-        $loader->alias('system_config', SystemConfigFacade::class);
-
-        $this->app->singleton('core', function () {
-            return app()->make(Core::class);
-        });
-
-        $this->app->singleton('menu', function () {
-            return app()->make(Menu::class);
-        });
-
-        $this->app->singleton('acl', function () {
-            return app()->make(Acl::class);
-        });
-
-        $this->app->singleton('system_config', function () {
-            return app()->make(SystemConfig::class);
-        });
-
-        /**
-         * Register ElasticSearch as a singleton.
-         */
-        $this->app->singleton('elasticsearch', function () {
-            return new ElasticSearch;
-        });
-
-        $loader->alias('elasticsearch', ElasticSearchFacade::class);
-
-        $this->app->singleton(ElasticSearchClient::class, function () {
-            return app()->make('elasticsearch')->connection();
-        });
+        $this->app->register(EventServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
+        $this->app->register(VisitorServiceProvider::class);
     }
 
     /**
@@ -145,26 +56,46 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Webkul\Core\Console\Commands\BagistoPublish::class,
                 \Webkul\Core\Console\Commands\BagistoVersion::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
                 \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
             ]);
         }
-
-        $this->commands([
-            \Webkul\Core\Console\Commands\DownChannelCommand::class,
-            \Webkul\Core\Console\Commands\UpChannelCommand::class,
-        ]);
     }
 
     /**
-     * Register the Blade compiler implementation.
+     * Register the overrides.
      */
-    public function registerBladeCompiler(): void
+    protected function registerOverrides(): void
     {
-        $this->app->singleton('blade.compiler', function ($app) {
-            return new BladeCompiler($app['files'], $app['config']['view.compiled']);
-        });
+        $this->app->extend(
+            \Illuminate\Foundation\Console\DownCommand::class,
+            fn () => new \Webkul\Core\Console\Commands\UpCommand
+        );
+
+        $this->app->extend(
+            \Illuminate\Foundation\Console\DownCommand::class,
+            fn () => new \Webkul\Core\Console\Commands\DownCommand
+        );
+
+        $this->app->bind(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            \Webkul\Core\Exceptions\Handler::class
+        );
+
+        $this->app->bind(
+            \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
+            fn ($app) => new \Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance($app)
+        );
+
+        $this->app->singleton(
+            \Elastic\Elasticsearch\Client::class,
+            fn () => \Webkul\Core\Facades\ElasticSearch::getFacadeApplication()->connection()
+        );
+
+        $this->app->singleton(
+            'blade.compiler',
+            fn ($app) => new \Webkul\Core\View\Compilers\BladeCompiler($app['files'], $app['config']['view.compiled'])
+        );
     }
 }

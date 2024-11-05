@@ -14,36 +14,36 @@ use Webkul\Shop\Http\Controllers\SubscriptionController;
  */
 Route::get('page/{slug}', [PageController::class, 'view'])
     ->name('shop.cms.page')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 /**
  * Fallback route.
  */
 Route::fallback(ProductsCategoriesProxyController::class.'@index')
     ->name('shop.product_or_category.index')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 /**
  * Store front home.
  */
 Route::get('/', [HomeController::class, 'index'])
     ->name('shop.home.index')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 Route::get('contact-us', [HomeController::class, 'contactUs'])
     ->name('shop.home.contact_us')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
     ->name('shop.home.contact_us.send_mail')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 /**
  * Store front search.
  */
 Route::get('search', [SearchController::class, 'index'])
     ->name('shop.search.index')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 
@@ -61,7 +61,7 @@ Route::controller(SubscriptionController::class)->group(function () {
  */
 Route::get('compare', [CompareController::class, 'index'])
     ->name('shop.compare.index')
-    ->middleware('cacheResponse');
+    ->middleware('cache.response');
 
 /**
  * Downloadable products

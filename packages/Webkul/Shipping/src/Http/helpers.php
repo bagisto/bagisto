@@ -1,10 +1,15 @@
 <?php
 
-use Webkul\Shipping\Shipping;
+use Webkul\Shipping\Facades\Shipping;
 
 if (! function_exists('shipping')) {
+    /**
+     * Shipping helper.
+     *
+     * @return \Webkul\Shipping\Shipping
+     */
     function shipping()
     {
-        return new Shipping;
+        return Shipping::getFacadeRoot();
     }
 }
