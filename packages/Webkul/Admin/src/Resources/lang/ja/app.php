@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'すべての通知をリストアップ',
-        'marked-success'   => 'お知らせが正常にマークされました',
+        'marked-success'   => 'すべての通知が既読としてマークされました',
         'no-record'        => '記録が見つかりません',
         'of'               => 'の',
         'per-page'         => 'ページごと',
