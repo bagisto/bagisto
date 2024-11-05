@@ -54,7 +54,7 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-left -mt-px text-xl"></i>
+                                    <i class="icon-arrow-left rtl:icon-arrow-right -mt-px text-xl"></i>
                                 </a>
 
                                 <ul class="absolute top-0 z-10 hidden w-max min-w-[150px] rounded border bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block dark:border-gray-800 dark:bg-gray-900 ltr:left-full rtl:right-full">
