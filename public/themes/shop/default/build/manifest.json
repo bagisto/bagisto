@@ -1,8 +1,13 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9ab26c42.css",
+    "file": "assets/app-f45aa81d.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
+  },
+  "src/Resources/assets/css/custom.css": {
+    "file": "assets/custom-fa282005.css",
+    "isEntry": true,
+    "src": "src/Resources/assets/css/custom.css"
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
     "file": "assets/bagisto-shop-5afe0d07.woff",
@@ -88,7 +93,7 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-b30607f0.js",
+    "file": "assets/app-7a8e8886.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
