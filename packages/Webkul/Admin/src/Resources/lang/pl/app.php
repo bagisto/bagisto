@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Wypisz wszystkie powiadomienia',
-        'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
+        'marked-success'   => 'Wszystkie powiadomienia zostały oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
         'of'               => 'z',
         'per-page'         => 'na stronę',

@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'قائمة جميع الإشعارات',
-        'marked-success'   => 'تم وضع علامة على الإشعار بنجاح',
+        'marked-success'   => 'تم وضع علامة على جميع الإشعارات كمقروءة',
         'no-record'        => 'لم يتم العثور على سجلات',
         'of'               => 'من',
         'per-page'         => 'في الصفحة',

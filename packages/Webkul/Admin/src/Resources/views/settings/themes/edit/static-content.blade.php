@@ -94,7 +94,7 @@
                     v-model="options.css"
                 />
 
-                <KeepAlive class="dark:bg-white">
+                <KeepAlive class="[&>*]:dark:bg-gray-900 [&>*]:dark:!text-white">
                     <component 
                         :is="inittialEditor"
                         ref="editor"
@@ -153,15 +153,23 @@
                 }   
             },
 
+            mounted() {
+                this.applydarkColor();
+            },
+
             methods: {
                 switchEditor(editor, isActive) {
                     this.inittialEditor = editor;
 
                     this.isHtmlEditorActive = isActive;
 
-                    if (editor == 'v-static-content-previewer') {
-                        this.$refs.editor.review = this.options;
-                    }
+                    this.$nextTick(() => {
+                        this.applydarkColor();
+
+                        if (editor == 'v-static-content-previewer') {
+                            this.$refs.editor.review = this.options;
+                        }
+                    });
                 },
 
                 editorData(value) {
@@ -194,6 +202,16 @@
 
                     imageInput.files.forEach((file, index) => {
                         this.$refs.editor.storeImage($event);
+                    });
+                },
+
+                applydarkColor() {
+                    this.$nextTick(() => {
+                        const codeMirrorGutters = this.$el.querySelector('.CodeMirror-gutters');
+
+                        if (codeMirrorGutters) {
+                            codeMirrorGutters.classList.add('dark:bg-gray-900', 'dark:!text-white');
+                        }
                     });
                 },
             },

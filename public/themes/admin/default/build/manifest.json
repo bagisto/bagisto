@@ -1,8 +1,8 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-CwphHOGc.css",
-    "src": "src/Resources/assets/css/app.css",
-    "isEntry": true
+    "file": "assets/app-9b3b70ca.css",
+    "isEntry": true,
+    "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
     "file": "assets/bagisto-admin-DRpisRbe.woff",

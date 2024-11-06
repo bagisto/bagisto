@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text'      => 'List all the Notifications',
-        'marked-success'        => 'Notification Marked Successfully',
+        'marked-success'        => 'All notifications has been marked as read',
         'no-record'             => 'No Record Found',
         'of'                    => 'of',
         'per-page'              => 'Per Page',
