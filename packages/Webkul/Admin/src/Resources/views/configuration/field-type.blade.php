@@ -175,7 +175,7 @@
                     :id="name"
                     :name="`${name}[]`"
                     :rules="validations"
-                    :value="value"
+                    :value="savedSelections"
                     :label="label"
                 >
                     <select
@@ -444,6 +444,12 @@
                 return {
                     field: JSON.parse(this.fieldData),
                 };
+            },
+
+            computed: {
+                savedSelections() {
+                    return this.value ? this.value.split(',') : [];
+                }
             },
 
             mounted() {
