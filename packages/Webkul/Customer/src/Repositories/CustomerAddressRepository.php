@@ -20,10 +20,12 @@ class CustomerAddressRepository extends Repository
      */
     public function create(array $data): CustomerAddress
     {
-        $defaultAddress = $this->findOneWhere(['customer_id' => $data['customer_id'], 'default_address' => 1]);
+        if (isset($data['default_address']) && $data['default_address']) {
+            $defaultAddress = $this->findOneWhere(['customer_id' => $data['customer_id'], 'default_address' => 1]);
 
-        if ($defaultAddress) {
-            $defaultAddress->update(['default_address' => 0]);
+            if ($defaultAddress) {
+                $defaultAddress->update(['default_address' => 0]);
+            }
         }
 
         $address = $this->model->create($data);
@@ -39,15 +41,6 @@ class CustomerAddressRepository extends Repository
     public function update(array $data, $id): CustomerAddress
     {
         $address = $this->find($id);
-
-        $defaultAddress = $this->findOneWhere(['customer_id' => $address->customer_id, 'default_address' => 1]);
-
-        if (
-            $defaultAddress
-            && $defaultAddress->id != $address->id
-        ) {
-            $defaultAddress->update(['default_address' => 0]);
-        }
 
         $address->update($data);
 
