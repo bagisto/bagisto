@@ -60,7 +60,7 @@ class SearchController extends Controller
     {
         $sanitized = strip_tags($input);
 
-        $cleaned = implode('', array_filter(str_split($sanitized), function($char) {
+        $cleaned = implode('', array_filter(str_split($sanitized), function ($char) {
             return ctype_alnum($char) || $char === ' ';
         }));
 
