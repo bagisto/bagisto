@@ -1,0 +1,28 @@
+:root {
+    --primary-color: #FAD02C;
+    --secondary-color: #1A1A1A;
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.border-color-primary {
+    border-color: var(--primary-color);
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color);
+}
+
+.text-secondary {
+    color: var(--secondary-color);
+}
+
+.border-color-secondary {
+    border-color: var(--secondary-color);
+}
