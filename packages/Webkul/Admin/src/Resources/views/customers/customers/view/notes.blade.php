@@ -62,11 +62,11 @@
             <!-- Notes List Title and Time -->
             <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 @if ($note->customer_notified)
-                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
+                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @else
-                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
+                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @endif

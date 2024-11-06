@@ -335,6 +335,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
+                                                        value="0"
                                                         class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"

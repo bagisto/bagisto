@@ -281,6 +281,12 @@
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
+                                type="hidden"
+                                name="status"
+                                value="0"
+                            />
+
+                            <x-admin::form.control-group.control
                                 type="switch"
                                 name="status"
                                 value="1"

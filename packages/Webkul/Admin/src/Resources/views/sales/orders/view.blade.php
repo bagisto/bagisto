@@ -249,134 +249,205 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.sales.order.list.after', ['order' => $order]) !!}
+
                         @endforeach
                     </div>
 
-                    <div class="mt-4 flex w-full justify-end gap-2.5 p-4">
-                        <div class="flex flex-col gap-y-1.5">
-                            @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.orders.view.summary-sub-total-excl-tax')
-                                </p>
-                                
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.orders.view.summary-sub-total-incl-tax')
-                                </p>
-                            @else
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.orders.view.summary-sub-total')
-                                </p>
-                            @endif
+                    <div class="mt-4 flex flex-auto justify-end p-4">
+                        <div class="grid max-w-max gap-2 text-sm">
 
-                            @if ($haveStockableItems = $order->haveStockableItems())
-                                @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.orders.view.shipping-and-handling-excl-tax')
-                                    </p>
-                                    
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.orders.view.shipping-and-handling-incl-tax')
-                                    </p>
-                                @else
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.orders.view.shipping-and-handling')
-                                    </p>
-                                @endif
-                            @endif
+                            {!! view_render_event('bagisto.admin.sales.order.view.subtotal.before') !!}
 
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.orders.view.summary-tax')
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.orders.view.summary-discount')
-                            </p>
-
-                            <p class="text-base font-semibold !leading-5 text-gray-800 dark:text-white">
-                                @lang('admin::app.sales.orders.view.summary-grand-total')
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.orders.view.total-paid')
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.orders.view.total-refund')
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.orders.view.total-due')
-                            </p>
-                        </div>
-
-                        <div class="flex flex-col gap-y-1.5">
+                            <!-- Sub Total -->
                             @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
-                                </p>
+                                <div class="flex w-full justify-between gap-x-5">
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.orders.view.summary-sub-total-incl-tax')
+                                    </p>
+
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                    </p>
+                                </div>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total) }}
-                                </p>
-                                
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
-                                </p>
+                                <div class="flex w-full justify-between gap-x-5">
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.orders.view.summary-sub-total-excl-tax')
+                                    </p>
+
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_sub_total) }}
+                                    </p>
+                                </div>
+
+                                <div class="flex w-full justify-between gap-x-5">
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.orders.view.summary-sub-total-incl-tax')
+                                    </p>
+
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                    </p>
+                                </div>
                             @else
-                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total) }}
-                                </p>
+                                <div class="flex w-full justify-between gap-x-5">
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.orders.view.summary-sub-total')
+                                    </p>
+
+                                    <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_sub_total) }}
+                                    </p>
+                                </div>
                             @endif
 
-                            @if ($haveStockableItems)
-                                @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
-                                    </p>
+                            {!! view_render_event('bagisto.admin.sales.order.view.subtotal.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.shipping.before') !!}
+
+                            <!-- Shipping And Handling -->
+                            @if ($haveStockableItems = $order->haveStockableItems())
+                                @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.orders.view.shipping-and-handling-incl-tax')
+                                        </p>
+
+                                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                            {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                        </p>
+                                    </div>
                                 @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                    </p>
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.orders.view.shipping-and-handling-excl-tax')
+                                        </p>
+
+                                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                            {{ core()->formatBasePrice($order->base_sub_total) }}
+                                        </p>
+                                    </div>
                                     
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
-                                    </p>
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.orders.view.shipping-and-handling-incl-tax')
+                                        </p>
+
+                                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                            {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                        </p>
+                                    </div>
                                 @else
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                    </p>
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.orders.view.shipping-and-handling')
+                                        </p>
+
+                                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                            {{ core()->formatBasePrice($order->base_sub_total) }}
+                                        </p>
+                                    </div>
                                 @endif
                             @endif
 
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                {{ core()->formatBasePrice($order->base_tax_amount) }}
-                            </p>
+                            {!! view_render_event('bagisto.admin.sales.order.view.shipping.after') !!}
 
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                {{ core()->formatBasePrice($order->base_discount_amount) }}
-                            </p>
+                            {!! view_render_event('bagisto.admin.sales.order.view.tax-amount.before') !!}
 
-                            <p class="text-base font-semibold !leading-5 text-gray-800 dark:text-white">
-                                {{ core()->formatBasePrice($order->base_grand_total) }}
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                {{ core()->formatBasePrice($order->base_grand_total_invoiced) }}
-                            </p>
-
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                {{ core()->formatBasePrice($order->base_grand_total_refunded) }}
-                            </p>
-
-                            @if($order->status !== 'canceled')
+                            <!-- Tax Amount -->
+                            <div class="flex w-full justify-between gap-x-5">
                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_total_due) }}
+                                    @lang('admin::app.sales.orders.view.summary-tax')
                                 </p>
-                            @else
+
                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice(0.00) }}
+                                    {{ core()->formatBasePrice($order->base_tax_amount) }}
                                 </p>
-                            @endif
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.tax-amount.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.discount.before') !!}
+
+                            <!-- Discount -->
+                            <div class="flex w-full justify-between gap-x-5">
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.orders.view.summary-discount')
+                                </p>
+    
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($order->base_discount_amount) }}
+                                </p>
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.discount.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.grand-total.before') !!}
+
+                            <!-- Grand Total -->
+                            <div class="flex w-full justify-between gap-x-5">
+                                <p class="text-base font-semibold !leading-5 text-gray-800 dark:text-white">
+                                    @lang('admin::app.sales.orders.view.summary-grand-total')
+                                </p>
+
+                                <p class="text-base font-semibold !leading-5 text-gray-800 dark:text-white">
+                                    {{ core()->formatBasePrice($order->base_grand_total) }}
+                                </p>
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.grand-total.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-paid.before') !!}
+
+                            <!-- Total Paid -->
+                            <div class="flex w-full justify-between gap-x-5">
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.orders.view.total-paid')
+                                </p>
+                                
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($order->base_grand_total_invoiced) }}
+                                </p>
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-paid.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-refunded.before') !!}
+
+                            <!-- Total Refund -->
+                            <div class="flex w-full justify-between gap-x-5">
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.orders.view.total-refund')
+                                </p>
+                                
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($order->base_grand_total_refunded) }}
+                                </p>
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-refunded.after') !!}
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-due.before') !!}
+
+                            <!-- Total Due -->
+                            <div class="flex w-full justify-between gap-x-5 font-semibold">
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.orders.view.total-due')
+                                </p>
+                                
+                                @if($order->status !== 'canceled')
+                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_total_due) }}
+                                    </p>
+                                @else
+                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice(0.00) }}
+                                    </p>
+                                @endif
+                            </div>
+
+                            {!! view_render_event('bagisto.admin.sales.order.view.total-due.after') !!}
+
                         </div>
                     </div>
                 </div>

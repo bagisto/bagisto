@@ -63,10 +63,6 @@ class CMSPagesTableSeeder extends Seeder
                 'id'         => 10,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ], [
-                'id'         => 11,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
             ],
         ]);
 
@@ -121,7 +117,7 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'term, use',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 7,
+                    'cms_page_id'      => 6,
                     'url_key'          => 'customer-service',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.customer-service.content', [], $locale).'</div></div>',
                     'page_title'       => trans('installer::app.seeders.cms.pages.customer-service.title', [], $locale),
@@ -130,7 +126,7 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'customer, service',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 8,
+                    'cms_page_id'      => 7,
                     'url_key'          => 'whats-new',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.whats-new.content', [], $locale).'</div></div>',
                     'page_title'       => trans('installer::app.seeders.cms.pages.whats-new.title', [], $locale),
@@ -139,7 +135,7 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'new',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 9,
+                    'cms_page_id'      => 8,
                     'url_key'          => 'payment-policy',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.payment-policy.content', [], $locale).'</div></div>',
                     'page_title'       => trans('installer::app.seeders.cms.pages.payment-policy.title', [], $locale),
@@ -148,7 +144,7 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'payment, policy',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 10,
+                    'cms_page_id'      => 9,
                     'url_key'          => 'shipping-policy',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.shipping-policy.content', [], $locale).'</div></div>',
                     'page_title'       => trans('installer::app.seeders.cms.pages.shipping-policy.title', [], $locale),
@@ -157,7 +153,7 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'shipping, policy',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 11,
+                    'cms_page_id'      => 10,
                     'url_key'          => 'privacy-policy',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.privacy-policy.content', [], $locale).'</div></div>',
                     'page_title'       => trans('installer::app.seeders.cms.pages.privacy-policy.title', [], $locale),

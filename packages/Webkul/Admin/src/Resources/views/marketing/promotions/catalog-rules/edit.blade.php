@@ -18,14 +18,14 @@
                 @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
             </p>
 
-                        <div class="flex items-center gap-x-2.5">
-                            <!-- Back Button -->
-                            <a
-                                href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
-                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-                            >
-                                @lang('admin::app.marketing.promotions.catalog-rules.edit.back-btn')
-                            </a>
+            <div class="flex items-center gap-x-2.5">
+                <!-- Back Button -->
+                <a
+                    href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
+                >
+                    @lang('admin::app.marketing.promotions.catalog-rules.edit.back-btn')
+                </a>
 
                 <!-- Save buton -->
                 <button
@@ -408,7 +408,7 @@
                                         type="date"
                                         id="starts_from"
                                         name="starts_from"
-                                        :value="old('starts_from') ?? $catalogRule->starts_from"
+                                        :value="(old('starts_from') ?? $catalogRule->starts_from) ?? null"
                                         :label="trans('admin::app.marketing.promotions.catalog-rules.edit.from')"
                                         :placeholder="trans('admin::app.marketing.promotions.catalog-rules.edit.from')"
                                     />
@@ -425,7 +425,7 @@
                                         type="date"
                                         id="ends_till"
                                         name="ends_till"
-                                        :value="old('ends_till') ?? $catalogRule->ends_till"
+                                        :value="(old('ends_till') ?? $catalogRule->ends_till) ?? null"
                                         :label="trans('admin::app.marketing.promotions.catalog-rules.edit.to')"
                                         :placeholder="trans('admin::app.marketing.promotions.catalog-rules.edit.to')"
                                     />

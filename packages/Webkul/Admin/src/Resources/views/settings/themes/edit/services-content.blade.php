@@ -25,7 +25,7 @@
                     <div class="flex gap-2.5">
                         <div
                             class="secondary-button"
-                            @click="$refs.addServiceModal.toggle()"
+                            @click="add"
                         >
                             @lang('admin::app.settings.themes.edit.services-content.add-btn')
                         </div>
@@ -167,7 +167,13 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.themes.edit.services-content.update-service')
+                                <template v-if="! isUpdating">
+                                    @lang('admin::app.settings.themes.edit.services-content.add-btn')
+                                </template>
+
+                                <template v-else>
+                                    @lang('admin::app.settings.themes.edit.services-content.update-service')
+                                </template>
                             </p>
                         </x-slot>
 
@@ -308,6 +314,14 @@
                             });
                         }
                     });
+                },
+
+                add() {
+                    this.selectedService = [];
+
+                    this.isUpdating = false;
+
+                    this.$refs.addServiceModal.toggle();
                 },
 
                 edit(service_details) {

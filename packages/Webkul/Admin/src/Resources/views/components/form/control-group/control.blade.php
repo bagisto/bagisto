@@ -9,6 +9,7 @@
     @case('email')
     @case('password')
     @case('number')
+    @case('time')
         <v-field
             v-slot="{ field, errors }"
             {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
@@ -105,7 +106,7 @@
             </textarea>
 
             @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
-                <x-admin::tinymce 
+                <x-admin::tinymce
                     :selector="'textarea#' . $attributes->get('id')"
                     :prompt="stripcslashes($attributes->get('prompt', ''))"
                     ::field="field"
@@ -209,7 +210,7 @@
         </v-field>
 
         <label
-             {{ 
+             {{
                 $attributes
                     ->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key'])
                     ->merge(['class' => 'icon-uncheckbox peer-checked:icon-checked text-2xl peer-checked:text-blue-600'])
@@ -235,7 +236,7 @@
                 class="peer sr-only"
                 {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
-                
+
             <v-checked-handler
                 class="hidden"
                 :field="field"
@@ -269,7 +270,7 @@
                     v-bind="field"
                     {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 />
-                
+
                 <v-checked-handler
                     class="hidden"
                     :field="field"

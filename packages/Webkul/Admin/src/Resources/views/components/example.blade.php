@@ -206,6 +206,23 @@
     <x-admin::form.control-group.error control-name="date_of_birth" />
 </x-admin::form.control-group>
 
+<!-- Form Control Group | Time Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label class="required">
+        Time
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="time"
+        name="time"
+        placeholder="Time"
+        rules="required"
+        label="Time"
+    />
+
+    <x-admin::form.control-group.error control-name="time" />
+</x-admin::form.control-group>
+
 <!-- Form Control Group | Select Type Component -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.label>
