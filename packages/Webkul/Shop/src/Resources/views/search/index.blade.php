@@ -1,6 +1,6 @@
 @php
     if (request()->has('query')) {
-        $title = trans('shop::app.search.title', ['query' => request()->query('query')]);
+        $title = trans('shop::app.search.title', ['query' => $query]);
     } else {
         $title = trans('shop::app.search.results');
     }

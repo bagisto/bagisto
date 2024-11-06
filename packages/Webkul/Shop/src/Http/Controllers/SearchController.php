@@ -28,8 +28,10 @@ class SearchController extends Controller
             'query' => ['sometimes', 'required', 'string', 'regex:/^[^\\\\]+$/u'],
         ]);
 
+        $query = $this->sanitizeQuery(request()->query('query'));
+
         $searchTerm = $this->searchTermRepository->findOneWhere([
-            'term'       => request()->query('query'),
+            'term'       => $query,
             'channel_id' => core()->getCurrentChannel()->id,
             'locale'     => app()->getLocale(),
         ]);
@@ -38,7 +40,7 @@ class SearchController extends Controller
             return redirect()->to($searchTerm->redirect_url);
         }
 
-        return view('shop::search.index');
+        return view('shop::search.index', compact('query'));
     }
 
     /**
@@ -49,5 +51,19 @@ class SearchController extends Controller
     public function upload()
     {
         return $this->searchRepository->uploadSearchImage(request()->all());
+    }
+
+    /**
+     * Sanitize the input to remove special characters.
+     */
+    protected function sanitizeQuery(string $input): string
+    {
+        $sanitized = strip_tags($input);
+
+        $cleaned = implode('', array_filter(str_split($sanitized), function($char) {
+            return ctype_alnum($char) || $char === ' ';
+        }));
+
+        return trim($cleaned);
     }
 }
