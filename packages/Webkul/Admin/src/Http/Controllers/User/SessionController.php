@@ -56,6 +56,18 @@ class SessionController extends Controller
             return redirect()->route('admin.session.create');
         }
 
+        if (! bouncer()->hasPermission('dashboard')) {
+            $permissions = auth()->guard('admin')->user()->role->permissions;
+
+            foreach ($permissions as $permission) {
+                if (bouncer()->hasPermission($permission)) {
+                    $permissionDetails = collect(config('acl'))->firstWhere('key', $permission);
+
+                    return redirect()->route($permissionDetails['route']);
+                }
+            }
+        }
+
         return redirect()->intended(route('admin.dashboard.index'));
     }
 
