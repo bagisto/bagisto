@@ -74,7 +74,7 @@
                                     class="block cursor-pointer rounded-xl p-5 max-sm:rounded-lg"
                                     :for="`billing_address_id_${address.id}`"
                                 >
-                                    <span class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                    <span class="icon-checkout-address text-6xl text-primary max-sm:text-5xl"></span>
 
                                     <div class="flex items-center justify-between">
                                         <p class="text-base font-medium">
@@ -194,7 +194,7 @@
                                             class="block cursor-pointer rounded-xl p-5 max-md:rounded-lg"
                                             :for="`shipping_address_id_${address.id}`"
                                         >
-                                            <span class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                            <span class="icon-checkout-address text-6xl text-primary max-sm:text-5xl"></span>
 
                                             <div class="flex items-center justify-between">
                                                 <p class="text-base font-medium">
@@ -285,7 +285,7 @@
                                 @lang('shop::app.checkout.onepage.address.back')
                             </span>
                         </div>
-                        
+
                         <!-- Address Form Vue Component -->
                         <v-checkout-address-form
                             :control-name="activeAddressForm"
@@ -339,7 +339,7 @@
                 return {
                     customerSavedAddresses: {
                         'billing': [],
-                        
+
                         'shipping': [],
                     },
 
@@ -415,7 +415,7 @@
                         });
                     } else {
                         this.selectedAddresses[type + '_address_id'] = cartAddress.id;
-                        
+
                         addresses.unshift(cartAddress);
                     }
 

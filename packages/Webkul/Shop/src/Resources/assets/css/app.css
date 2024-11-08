@@ -323,7 +323,7 @@ img.lazy {
     .icon-users:before {
         content: "\e942";
     }
-      
+
 
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
@@ -346,11 +346,11 @@ img.lazy {
     }
 
     .scrollbar-width-hidden {
-        -ms-overflow-style: none; 
+        -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .scrollbar-width-hidden::-webkit-scrollbar { 
+    .scrollbar-width-hidden::-webkit-scrollbar {
         display: none;
     }
 
@@ -391,7 +391,7 @@ img.lazy {
     .direction-rtl {
         direction: rtl;
     }
-    
+
     .label-pending,
     .label-processing,
     .label-closed,
@@ -428,9 +428,9 @@ img.lazy {
     }
 
     .primary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-black bg-[#FAD02C] border border-[#FAD02C] px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
     }
-    
+
     .secondary-button {
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
@@ -459,7 +459,7 @@ img.lazy {
         0% {
             opacity: 0;
         }
-        
+
         100% {
             opacity: 1;
         }
@@ -506,7 +506,7 @@ img.lazy {
     html {
         margin-top: 0px !important;
     }
-    
+
     .break-word-custom {
         word-break: break-word;
     }
