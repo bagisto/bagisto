@@ -1409,6 +1409,7 @@ return [
                     'gender'         => 'Płeć',
                     'group'          => 'Grupa',
                     'id'             => 'ID klienta',
+                    'id-value'       => 'Identyfikator - :id',
                     'inactive'       => 'Nieaktywny',
                     'method-error'   => 'Błąd! Wykryto błędną metodę, sprawdź konfigurację masowej akcji',
                     'name'           => 'Nazwa klienta',

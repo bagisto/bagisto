@@ -1409,6 +1409,7 @@ return [
                     'gender'         => '性别',
                     'group'          => '分组',
                     'id'             => '客户 ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => '不活跃',
                     'method-error'   => '错误！检测到错误的方法，请检查大规模操作配置',
                     'name'           => '客户姓名',
