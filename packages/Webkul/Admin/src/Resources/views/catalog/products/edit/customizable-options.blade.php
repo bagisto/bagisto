@@ -256,7 +256,7 @@
                                             type="select"
                                             name="type"
                                             rules="required"
-                                            ::value="selectedOption.type"
+                                            v-model="selectedOption.type"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.type')"
                                         >
                                             <option
