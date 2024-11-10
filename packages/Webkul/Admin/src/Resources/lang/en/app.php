@@ -3012,7 +3012,7 @@ return [
                 'title'            => 'Edit User',
             ],
 
-            'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
+            'activate-warning'   => 'Your account has not been activated yet. Please contact the administrator for assistance.',
             'cannot-change'      => 'User cannot be changed',
             'create-success'     => 'User created successfully.',
             'delete-failed'      => 'User deleted failed.',
