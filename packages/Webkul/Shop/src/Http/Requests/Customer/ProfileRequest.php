@@ -24,6 +24,8 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->toArray());
+
         $id = auth()->guard('customer')->user()->id;
 
         return [
