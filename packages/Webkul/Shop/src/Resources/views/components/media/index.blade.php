@@ -1,4 +1,13 @@
-<v-media {{ $attributes }} >
+@props([
+    'width'  => '200px',
+    'height' => '200px'
+])
+
+<v-media
+    {{ $attributes }}
+    width="{{ $width }}"
+    height="{{ $height }}"
+>
     <x-shop::media.images.lazy
         class="mb-4 h-[200px] w-[200px] rounded-xl max-sm:h-[100px] max-sm:w-[100px]"
     />
@@ -38,20 +47,21 @@
                 </div>
 
                 <label 
-                    for="file-input"
+                    :for="`${$.uid}_fileInput`"
                     class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
+                    :style="{'max-width': this.width, 'max-height': this.height}"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
                     @drop="onDrop"
                 >
                     <label 
-                        for="file-input"
+                        :for="`${$.uid}_fileInput`"
                         class="icon-camera text-3xl max-sm:text-lg"
                     >
                     </label>
 
-                    <p class="font-medium max-sm:text-xs">
+                    <p class="font-medium max-md:hidden max-sm:text-xs">
                         @lang("shop::app.components.media.index.add-image")
                     </p>
 
@@ -64,7 +74,7 @@
                     <v-field
                         type="file"
                         class="hidden"
-                        id="file-input"
+                        :id="`${$.uid}_fileInput`"
                         :name="name"
                         :accept="acceptedTypes"
                         :rules="appliedRules"
@@ -168,7 +178,17 @@
                 src: {
                     type: String,
                     default: ''
-                }
+                },
+
+                height: {
+                    type: String,
+                    default: '200px',
+                },
+
+                width: {
+                    type: String,
+                    default: '200px',
+                },
             },
 
             data() {
