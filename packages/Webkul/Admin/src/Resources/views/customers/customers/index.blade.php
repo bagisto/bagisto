@@ -44,7 +44,7 @@
         ref="customerDatagrid"
         :isMultiRow="true"
     >
-        @php 
+        @php
             $hasPermission = bouncer()->hasPermission('customers.customers.edit') || bouncer()->hasPermission('customers.customers.delete');
         @endphp
 
@@ -64,7 +64,7 @@
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                     <div
                         class="flex select-none items-center gap-2.5"
-                        v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
+                        v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group', 'customer_id'], ['revenue', 'order_count', 'address_count']]"
                     >
                         @if ($hasPermission)
                             <label
@@ -199,6 +199,10 @@
 
                         <p class="text-gray-600 dark:text-gray-300">
                             @{{ record.group ?? 'N/A' }}
+                        </p>
+
+                        <p class="text-gray-600 dark:text-gray-300">
+                            @{{ "@lang('admin::app.customers.customers.index.datagrid.id-value')".replace(':id', record.customer_id) }}
                         </p>
                     </div>
 
