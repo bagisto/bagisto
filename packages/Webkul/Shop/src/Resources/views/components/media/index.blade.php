@@ -23,14 +23,14 @@
                         <img
                             class="rounded-xl object-cover max-md:rounded-full"
                             :src="uploadedFiles.url"
-                            :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
+                            :class="{ 'opacity-25' : uploadedFiles.showDeleteButton }"
                             alt="Uploaded Image"
                         >
 
                         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                             <span 
                                 class="icon-bin cursor-pointer text-2xl text-black"
-                                @click="removeFile"
+                                @click="remove"
                             >
                             </span>
                         </div>
@@ -63,7 +63,7 @@
 
                     <v-field
                         type="file"
-                        class="hidden"
+                        {{-- class="hidden" --}}
                         id="file-input"
                         :name="name"
                         :accept="acceptedTypes"
@@ -80,60 +80,90 @@
                 v-if="isMultiple"
             >
                 <ul class="justify-left mt-2 flex flex-wrap gap-2.5">
-                    <li 
+                    <template
                         v-for="(file, index) in uploadedFiles"
                         :key="index"
                     >
-                        <template v-if="isImage(file)">
-                            <div 
-                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
-                                @mouseenter="file.showDeleteButton = true"
-                                @mouseleave="file.showDeleteButton = false"
-                            >
-                                <img
-                                    :src="file.url"
-                                    :alt="file.name"
-                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
-                                    :class="{'opacity-25' : file.showDeleteButton}"
-                                >
-
-                                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
-                                    <span 
-                                        class="icon-bin cursor-pointer text-2xl text-black"
-                                        @click="removeFile(index)"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-
-                        <template v-else>
-                            <div
-                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
-                                @mouseenter="file.showDeleteButton = true"
-                                @mouseleave="file.showDeleteButton = false"
-                            >
-                                <video
-                                    :src="file.url"
-                                    :alt="file.name"
-                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
-                                    :class="{'opacity-25' : file.showDeleteButton}"
-                                >
-                                </video>
-
-                                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
-                                    <span 
-                                        class="icon-bin cursor-pointer text-2xl text-black"
-                                        @click="removeFile(index)"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-                    </li>
+                        <v-media-item
+                            :file="file"
+                            @remove="remove"
+                        ></v-media-item>
+                    </template>
                 </ul>
             </div>
         </div>
+    </script>
+
+    <script
+        type="text/x-template"
+        id="v-media-item-template"
+    >
+        <li>
+            <template v-if="isImage">
+                {{-- <div
+                    class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
+                    @mouseenter="file.showDeleteButton = true"
+                    @mouseleave="file.showDeleteButton = false"
+                >
+                    <img
+                        :src="file.url"
+                        :alt="file.name"
+                        class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
+                        :class="{'opacity-25' : file.showDeleteButton}"
+                    >
+
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
+                        <span
+                            class="icon-bin cursor-pointer text-2xl text-black"
+                            @click="$emit('remove', index)"
+                        >
+                        </span>
+                    </div>
+                </div> --}}
+                <div
+    class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
+>
+    <img
+        :src="file.url"
+        :alt="file.name"
+        class="max-h-12 min-w-12 rounded-xl group-hover:opacity-25 max-sm:max-h-[60px] max-sm:min-w-[60px]"
+    >
+
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
+        <span
+            class="icon-bin cursor-pointer text-2xl text-black"
+            @click="$emit('remove', index)"
+        >
+        </span>
+    </div>
+</div>
+
+            </template>
+
+            <template v-else>
+                <div
+                    class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
+                    @mouseenter="file.showDeleteButton = true"
+                    @mouseleave="file.showDeleteButton = false"
+                >
+                    <video
+                        :src="file.url"
+                        :alt="file.name"
+                        class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
+                        :class="{'opacity-25' : file.showDeleteButton}"
+                    >
+                    </video>
+
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
+                        <span
+                            class="icon-bin cursor-pointer text-2xl text-black"
+                            @click="$emit('remove', index)"
+                        >
+                        </span>
+                    </div>
+                </div>
+            </template>
+        </li>
     </script>
 
     <script type="module">
@@ -252,14 +282,6 @@
                     }
                 },
 
-                isImage(file) {
-                    if (! file.name) {
-                        return;
-                    }
-
-                    return file.name.match(/\.(jpg|jpeg|png|gif)$/i);
-                },
-
                 onDragOver(event) {
                     event.preventDefault();
 
@@ -282,7 +304,7 @@
                     this.handleDroppedFiles(files);
                 },
 
-                removeFile(index) {
+                remove(index) {
                     if (! this.isMultiple) {
                         this.uploadedFiles = [];
 
@@ -294,6 +316,22 @@
                     this.uploadedFiles.splice(index, 1);
                 },
             },        
+        });
+    </script>
+
+    <script type="module">
+        app.component('v-media-item', {
+            template: '#v-media-item-template',
+
+            props: ['file'],
+
+            emits: ['remove'],
+
+            computed: {
+                isImage() {
+                    return this.file.name.match(/\.(jpg|jpeg|png|gif)$/i);
+                },
+            },
         });
     </script>
 @endpushOnce
