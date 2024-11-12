@@ -517,7 +517,7 @@
                     <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-1.5 p-4">
-                            <p class="text-base leading-6 text-gray-800 dark:text-white">
+                            <p class="break-all text-base leading-6 text-gray-800 dark:text-white">
                                 {{ $comment->comment }}
                             </p>
 
