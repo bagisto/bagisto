@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Exceptions\InvalidRefundQuantityException;
 
 class RefundRepository extends Repository
 {
@@ -243,7 +244,7 @@ class RefundRepository extends Repository
             $orderItem = $this->orderItemRepository->find($orderItemId);
 
             if ($qty > $orderItem->qty_to_refund) {
-                throw new \Exception(trans('admin::app.sales.refunds.create.invalid-qty'));
+                throw new InvalidRefundQuantityException(trans('admin::app.sales.refunds.create.invalid-qty'));
             }
 
             $totals['subtotal']['price'] += $orderItem->base_price * $qty;
