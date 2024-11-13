@@ -125,6 +125,13 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                if ($row->is_required) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
+            },
         ]);
 
         $this->addColumn([
@@ -134,6 +141,13 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                if ($row->is_unique) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
+            },
         ]);
 
         $this->addColumn([
@@ -143,6 +157,13 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                if ($row->value_per_locale) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
+            },
         ]);
 
         $this->addColumn([
@@ -152,6 +173,13 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                if ($row->value_per_channel) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
+            },
         ]);
 
         $this->addColumn([
