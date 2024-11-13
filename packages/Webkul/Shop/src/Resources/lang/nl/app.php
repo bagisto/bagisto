@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Selecteer alsjeblieft een optie',
                     'select-above-options' => 'Selecteer hierboven de opties',

@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => 'Minstens één product moet meer dan 1 hoeveelheid hebben.',
             ],
 
+            'invalid-file-extension'   => 'Ongeldige bestandsextensie gevonden.',
             'inventory-warning'        => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'missing-links'            => 'Downloadbare links ontbreken voor dit product.',
             'missing-options'          => 'Opties ontbreken voor dit product.',

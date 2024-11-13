@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'कृपया एक विकल्प चुनें',
                     'select-above-options' => 'कृपया ऊपर के विकल्प चुनें',
