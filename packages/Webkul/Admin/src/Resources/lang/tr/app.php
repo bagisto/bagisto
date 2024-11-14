@@ -1433,7 +1433,7 @@ return [
                     'create-success'        => 'Müşteri başarıyla oluşturuldu',
                     'customer-group'        => 'Müşteri Grubu',
                     'channel'               => 'Kanal',
-                    'date-of-birth'         => 'Doğum Tarihi', 
+                    'date-of-birth'         => 'Doğum Tarihi',
                     'email'                 => 'E-posta',
                     'female'                => 'Kadın',
                     'first-name'            => 'Adı',
