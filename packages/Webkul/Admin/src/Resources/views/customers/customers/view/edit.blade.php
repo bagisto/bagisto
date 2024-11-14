@@ -43,6 +43,13 @@
                     <x-slot:content>
                         {!! view_render_event('bagisto.admin.customers.customers.view.edit.before', ['customer' => $customer]) !!}
 
+                        <!-- Hidden Field for channel id -->
+                        <x-admin::form.control-group.control
+                            type="hidden"
+                            name="channel_id"
+                            ::value="customer.channel_id"
+                        />
+
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!--First Name -->
                             <x-admin::form.control-group class="mb-2.5 w-full">
@@ -101,27 +108,27 @@
             
                             <x-admin::form.control-group.error control-name="email" />
                         </x-admin::form.control-group>
-            
+
+                         <!-- Phone -->
+                         <x-admin::form.control-group class="mb-2.5 w-full">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.customers.customers.view.edit.contact-number')
+                            </x-admin::form.control-group.label>
+        
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="phone"
+                                ::value="customer.phone"
+                                id="phone"
+                                rules="phone"
+                                :label="trans('admin::app.customers.customers.view.edit.contact-number')"
+                                :placeholder="trans('admin::app.customers.customers.view.edit.contact-number')"
+                            />
+        
+                            <x-admin::form.control-group.error control-name="phone" />
+                        </x-admin::form.control-group>
+
                         <div class="flex gap-4 max-sm:flex-wrap">
-                            <!-- Phone -->
-                            <x-admin::form.control-group class="mb-2.5 w-full">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.customers.customers.view.edit.contact-number')
-                                </x-admin::form.control-group.label>
-            
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="phone"
-                                    ::value="customer.phone"
-                                    id="phone"
-                                    rules="phone"
-                                    :label="trans('admin::app.customers.customers.view.edit.contact-number')"
-                                    :placeholder="trans('admin::app.customers.customers.view.edit.contact-number')"
-                                />
-            
-                                <x-admin::form.control-group.error control-name="phone" />
-                            </x-admin::form.control-group>
-            
                             <!-- Date -->
                             <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label>
@@ -138,6 +145,24 @@
                                 />
                                 
                                 <x-admin::form.control-group.error control-name="date_of_birth" />
+                            </x-admin::form.control-group>
+
+                            <!-- Channel Id -->
+                            <x-admin::form.control-group class="mb-2.5 w-full">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.customers.customers.view.edit.channel')
+                                </x-admin::form.control-group.label>
+            
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    class="cursor-not-allowed"
+                                    disabled
+                                >
+                                    <option value="{{ $channel->id }}">
+                                        {{ $channel->name }}
+                                    </option>
+                                </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
                         </div>
 
