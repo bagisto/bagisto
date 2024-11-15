@@ -131,12 +131,28 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
+                                    class="flex cursor-pointer gap-2 text-zinc-500 max-sm:text-sm"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
 
-                                    <span class="text-black">
+                                    <div
+                                        class="flex gap-2.5"
+                                        v-if="product.price.regular.price != product.price.final.price"
+                                    >
+                                        <span class="text-black">+</span>
+
+                                        <span class="text-zinc-500 line-through max-sm:text-sm">
+                                            @{{ product.price.regular.formatted_price }}
+                                        </span>
+    
+                                        <span class="text-black">@{{ product.price.final.formatted_price }}</span>
+                                    </div>
+
+                                    <span
+                                        class="text-black"
+                                        v-else
+                                    >
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
@@ -188,12 +204,28 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
+                                    class="flex cursor-pointer gap-2 text-zinc-500 max-sm:text-sm"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
 
-                                    <span class="text-black">
+                                    <span
+                                        class="flex gap-2"
+                                        v-if="product.price.regular.price != product.price.final.price"
+                                    >
+                                        <span class="text-black">+</span>
+
+                                        <span class="text-zinc-500 line-through max-sm:text-sm">
+                                            (@{{ product.price.regular.formatted_price }})
+                                        </span>
+
+                                        <span class="text-black">@{{ product.price.final.formatted_price }}</span>
+                                    </span>
+
+                                    <span
+                                        class="text-black"
+                                        v-else
+                                    >
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
