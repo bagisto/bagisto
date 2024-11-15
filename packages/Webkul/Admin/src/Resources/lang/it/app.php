@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Elenca tutte le notifiche',
-        'marked-success'   => 'Notifica contrassegnata con successo',
+        'marked-success'   => 'Tutte le notifiche sono state contrassegnate come lette',
         'no-record'        => 'Nessun Record Trovato',
         'of'               => 'di',
         'per-page'         => 'Per pagina',

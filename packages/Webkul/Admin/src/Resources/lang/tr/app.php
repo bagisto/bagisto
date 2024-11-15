@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Tüm Bildirimleri Listele',
-        'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
+        'marked-success'   => 'Tüm bildirimler okundu olarak işaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
         'of'               => 'of',
         'per-page'         => 'Sayfa Başına',

@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Все уведомления в списке',
-        'marked-success'   => 'Уведомление успешно помечено',
+        'marked-success'   => 'Все уведомления отмечены как прочитанные',
         'no-record'        => 'Нет записей',
         'of'               => 'из',
         'per-page'         => 'На странице',

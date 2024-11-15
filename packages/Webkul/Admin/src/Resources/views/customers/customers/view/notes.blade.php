@@ -55,18 +55,18 @@
     <!-- Notes List -->
     @foreach ($customer->notes as $note)
         <div class="grid gap-1.5 border-b p-4 last:border-none dark:border-gray-800">
-            <p class="text-base leading-6 text-gray-800 dark:text-white">
+            <p class="break-all text-base leading-6 text-gray-800 dark:text-white">
                 {{$note->note}}
             </p>
 
             <!-- Notes List Title and Time -->
             <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 @if ($note->customer_notified)
-                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
+                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @else
-                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
+                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @endif
