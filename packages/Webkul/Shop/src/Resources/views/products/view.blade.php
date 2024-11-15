@@ -57,7 +57,7 @@
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
-        <div class="flex justify-center max-lg:hidden">
+        <div class="flex justify-center px-7 max-lg:hidden">
             <x-shop::breadcrumbs
                 name="product"
                 :entity="$product"
