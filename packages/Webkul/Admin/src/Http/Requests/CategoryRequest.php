@@ -27,7 +27,7 @@ class CategoryRequest extends FormRequest
         $locale = core()->getRequestedLocaleCode();
 
         $rules = [
-            'position'      => 'required',
+            'position'      => 'required|integer',
             'logo_path'     => 'array',
             'logo_path.*'   => 'mimes:bmp,jpeg,jpg,png,webp',
             'banner_path'   => 'array',
