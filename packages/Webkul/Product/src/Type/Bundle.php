@@ -277,10 +277,10 @@ class Bundle extends AbstractType
             $products[0]['price_incl_tax'] += $cartProduct[0]['total'];
             $products[0]['base_price'] += $cartProduct[0]['base_total'];
             $products[0]['base_price_incl_tax'] += $cartProduct[0]['base_total'];
-            $products[0]['total'] += $cartProduct[0]['total'];
-            $products[0]['total_incl_tax'] += $cartProduct[0]['total'];
-            $products[0]['base_total'] += $cartProduct[0]['base_total'];
-            $products[0]['base_total_incl_tax'] += $cartProduct[0]['base_total'];
+            $products[0]['total'] += $cartProduct[0]['total'] * $data['quantity'];
+            $products[0]['total_incl_tax'] += $cartProduct[0]['total'] * $data['quantity'];
+            $products[0]['base_total'] += $cartProduct[0]['base_total'] * $data['quantity'];
+            $products[0]['base_total_incl_tax'] += $cartProduct[0]['base_total'] * $data['quantity'];
             $products[0]['weight'] += ($cartProduct[0]['weight'] * $products[0]['quantity']);
             $products[0]['total_weight'] += ($cartProduct[0]['total_weight'] * $products[0]['quantity']);
             $products[0]['base_total_weight'] += ($cartProduct[0]['base_total_weight'] * $products[0]['quantity']);
