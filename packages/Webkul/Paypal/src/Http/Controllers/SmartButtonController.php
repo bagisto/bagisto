@@ -7,6 +7,7 @@ use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
+use Webkul\Checkout\Repositories\CartRepository;
 
 class SmartButtonController extends Controller
 {
@@ -18,7 +19,8 @@ class SmartButtonController extends Controller
     public function __construct(
         protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected InvoiceRepository $invoiceRepository,
+        protected CartRepository $cartRepository,
     ) {}
 
     /**
@@ -28,6 +30,10 @@ class SmartButtonController extends Controller
      */
     public function createOrder()
     {
+        $cart = $this->cartRepository->findOrFail(request('order_id') ?? null);
+
+        Cart::setCart($cart);
+
         try {
             return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
         } catch (\Exception $e) {
