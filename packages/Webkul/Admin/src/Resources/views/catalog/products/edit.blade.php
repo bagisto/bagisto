@@ -141,7 +141,7 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
+            @foreach ($columns = $product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
                 <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
@@ -159,7 +159,7 @@
                                 </p>
 
                                 @if ($group->code == 'meta_description')
-                                    <!-- SEO Title & Description Blade Componnet -->
+                                    <!-- SEO Title & Description Blade Component -->
                                     <x-admin::seo />
                                 @endif
 
@@ -194,7 +194,7 @@
                                         <x-admin::form.control-group.error :control-name="$attribute->code . (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')" />
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.after', ['product' => $product]) !!}
                                 @endforeach
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
@@ -234,6 +234,18 @@
                         @include('admin::catalog.products.edit.categories')
                     @endif
                 </div>
+
+                <!-- When all data from column 2 is moved to column 1,-->
+                @if (count($columns) != 2)
+                    <!-- Display Categories in the right section -->
+                    <div class="w-[360px] max-w-full max-sm:w-full">
+                        <!-- Channels View Blade File -->
+                        @include('admin::catalog.products.edit.channels')
+
+                        <!-- Categories View Blade File -->
+                        @include('admin::catalog.products.edit.categories')
+                    </div>
+                @endif
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.after', ['product' => $product]) !!}
             @endforeach

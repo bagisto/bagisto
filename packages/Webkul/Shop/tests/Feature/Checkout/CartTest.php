@@ -1535,6 +1535,7 @@ it('should add a bundle product to the cart for guest user', function () {
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]))
+        // ->dd()
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items_qty', 1)
@@ -1553,6 +1554,7 @@ it('should add a bundle product to the cart for guest user', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
+    // dd($response['data']);
     $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
