@@ -843,6 +843,7 @@
                         </p>
                     </div>
 
+                    <!-- Error message for price attribute -->
                     <v-error-message
                         :name="'variants[' + variant.id + '].price'"
                         v-slot="{ message }"
