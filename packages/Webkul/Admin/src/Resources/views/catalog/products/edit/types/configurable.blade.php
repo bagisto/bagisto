@@ -842,6 +842,15 @@
                             </span>
                         </p>
                     </div>
+
+                    <v-error-message
+                        :name="'variants[' + variant.id + '].price'"
+                        v-slot="{ message }"
+                    >
+                        <p class="mt-1 text-xs italic text-red-600">
+                            @{{ message }}
+                        </p>
+                    </v-error-message>
                 </div>
             </div>
 
