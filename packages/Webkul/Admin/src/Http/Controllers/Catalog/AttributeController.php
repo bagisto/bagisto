@@ -183,12 +183,12 @@ class AttributeController extends Controller
             }
         }
 
-        try{
+        try {
             foreach ($indices as $index) {
                 Event::dispatch('catalog.attribute.delete.before', $index);
-    
+
                 $this->attributeRepository->delete($index);
-    
+
                 Event::dispatch('catalog.attribute.delete.after', $index);
             }
 
