@@ -198,7 +198,7 @@ class AttributeController extends Controller
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'message' => trans('admin::app.catalog.attributes.delete-failed'),
-            ], 422);
+            ], 500);
         }
     }
 
