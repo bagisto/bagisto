@@ -619,13 +619,14 @@
                                                         </div>
                                                     </div>
 
+                                                    <!-- Text type Input field -->
                                                     <div class="mb-2 mt-1.5 grid">
                                                         <input
                                                             type="text"
                                                             class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                             :name="column.index"
                                                             :placeholder="column.label"
-                                                            @keyup.enter="addFilter($event, column)"
+                                                            @change="addFilter($event, column)"
                                                         />
                                                     </div>
 
