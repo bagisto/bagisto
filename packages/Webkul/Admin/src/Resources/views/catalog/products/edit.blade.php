@@ -141,8 +141,13 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            @foreach ($columns = $product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
-                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
+            @php
+                $isSingleColumn = count($product->attribute_family->attribute_groups->groupBy('column')) != 2;
+            @endphp
+
+            @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
+
+                {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.before", ['product' => $product]) !!}
 
                 <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
                     @foreach ($groups as $group)
@@ -150,8 +155,8 @@
                             $customAttributes = $product->getEditableAttributes($group);
                         @endphp
 
-                        @if (count($customAttributes))
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.before', ['product' => $product]) !!}
+                        @if ($customAttributes->isNotEmpty())
+                            {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
                             <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
                                 <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -164,7 +169,8 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
+
+                                    {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.before", ['product' => $product]) !!}
 
                                     <x-admin::form.control-group class="last:!mb-0">
                                         <x-admin::form.control-group.label>
@@ -190,22 +196,24 @@
                                             'attribute' => $attribute,
                                             'product'   => $product,
                                         ])
-            
+
                                         <x-admin::form.control-group.error :control-name="$attribute->code . (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')" />
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.after', ['product' => $product]) !!}
+                                    {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.after", ['product' => $product]) !!}
+
                                 @endforeach
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->code == 'inventories' && ! $product->getTypeInstance()->isComposite(),
+                                    $group->code === 'inventories' && !$product->getTypeInstance()->isComposite(),
                                     'admin::catalog.products.edit.inventories'
                                 )
                             </div>
 
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.after', ['product' => $product]) !!}
+                            {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
+
                         @endif
                     @endforeach
 
@@ -226,7 +234,7 @@
                         @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
                             @includeIf($view)
                         @endforeach
-                    @else
+                    @elseif (! $isSingleColumn)
                         <!-- Channels View Blade File -->
                         @include('admin::catalog.products.edit.channels')
 
@@ -235,9 +243,7 @@
                     @endif
                 </div>
 
-                <!-- When all data from column 2 is moved to column 1,-->
-                @if (count($columns) != 2)
-                    <!-- Display Categories in the right section -->
+                @if ($isSingleColumn && $column != 1)
                     <div class="w-[360px] max-w-full max-sm:w-full">
                         <!-- Channels View Blade File -->
                         @include('admin::catalog.products.edit.channels')
@@ -247,12 +253,15 @@
                     </div>
                 @endif
 
-                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.after', ['product' => $product]) !!}
+                {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
+
             @endforeach
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.after', ['product' => $product]) !!}
+
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
+
 </x-admin::layouts>
