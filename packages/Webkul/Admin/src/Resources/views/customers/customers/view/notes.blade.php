@@ -55,7 +55,7 @@
     <!-- Notes List -->
     @foreach ($customer->notes as $note)
         <div class="grid gap-1.5 border-b p-4 last:border-none dark:border-gray-800">
-            <p class="text-base leading-6 text-gray-800 dark:text-white">
+            <p class="break-all text-base leading-6 text-gray-800 dark:text-white">
                 {{$note->note}}
             </p>
 
