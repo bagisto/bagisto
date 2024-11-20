@@ -118,7 +118,7 @@ return [
     [
         'key'   => 'catalog',
         'name'  => 'admin::app.acl.catalog',
-        'route' => 'admin.catalog.index',
+        'route' => 'admin.catalog.products.index',
         'sort'  => 3,
     ], [
         'key'   => 'catalog.products',
