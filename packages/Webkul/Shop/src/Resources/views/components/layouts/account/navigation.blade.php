@@ -14,7 +14,7 @@
         </div>
 
         <div class="flex flex-col justify-between">
-            <p class="font-mediums text-2xl max-md:text-xl">Hello! {{ $customer->first_name }}</p>
+            <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ $customer->first_name }}</p>
 
             <p class="max-md:text-md: text-zinc-500 no-underline">{{ $customer->email }}</p>
         </div>

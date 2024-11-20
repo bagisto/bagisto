@@ -129,7 +129,7 @@
 
             <template v-else>
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 gap-1.5 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-for="record in available.records"
                 >
                     <!-- Name, SKU, Attribute Family Columns -->
@@ -151,7 +151,7 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ record.name }}
                             </p>
 
