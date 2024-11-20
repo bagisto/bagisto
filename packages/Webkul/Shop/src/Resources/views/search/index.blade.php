@@ -1,9 +1,7 @@
 @php
-    if (request()->has('query')) {
-        $title = trans('shop::app.search.title', ['query' => request()->query('query')]);
-    } else {
-        $title = trans('shop::app.search.results');
-    }
+    $title = request()->has('query')
+            ? trans('shop::app.search.title', ['query' => request()->query('query')])
+            : trans('shop::app.search.results');
 @endphp
 
 <!-- SEO Meta Content -->
@@ -31,20 +29,22 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h1 class="text-2xl font-medium max-sm:text-base">
-                {{ $title }}
+            <h1
+                class="text-2xl font-medium max-sm:text-base"
+                v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'"
+            >
             </h1>
         </div>
     </div>
-        
+
     <!-- Product Listing -->
     <v-search>
         <x-shop::shimmer.categories.view />
     </v-search>
 
     @pushOnce('scripts')
-        <script 
-            type="text/x-template" 
+        <script
+            type="text/x-template"
             id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
@@ -86,7 +86,7 @@
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="Empty result"
                                         />
-                                  
+
                                         <p
                                             class="text-xl max-sm:text-sm"
                                             role="heading"
@@ -164,13 +164,13 @@
 
                         isDrawerActive: {
                             toolbar: false,
-                            
+
                             filter: false,
                         },
 
                         filters: {
                             toolbar: {},
-                            
+
                             filter: {},
                         },
 
@@ -214,12 +214,12 @@
                     getProducts() {
                         this.isDrawerActive = {
                             toolbar: false,
-                            
+
                             filter: false,
                         };
 
-                        this.$axios.get(("{{ route('shop.api.products.index') }}"), { 
-                            params: this.queryParams 
+                        this.$axios.get(("{{ route('shop.api.products.index') }}"), {
+                            params: this.queryParams
                         })
                             .then(response => {
                                 this.isLoading = false;
