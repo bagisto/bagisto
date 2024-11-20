@@ -118,7 +118,7 @@ class ProductCategoryUniqueSlug implements Rule
             $this->id,
             $attribute->id,
             $attribute->column_name,
-            request($attribute->code)
+            $slug,
         );
     }
 }
