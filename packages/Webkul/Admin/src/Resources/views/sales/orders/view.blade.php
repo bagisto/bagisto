@@ -694,7 +694,7 @@
 
                             @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
 
-                            <!-- Addtional details -->
+                            <!-- Additional details -->
                             @if (! empty($additionalDetails))
                                 <p class="pt-4 font-semibold text-gray-800 dark:text-white">
                                     {{ $additionalDetails['title'] }}

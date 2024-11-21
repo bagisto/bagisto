@@ -37,7 +37,7 @@
                 <button 
                     type="submit" 
                     class="primary-button"
-                    aria-lebel="Submit"
+                    aria-label="Submit"
                 >
                     @lang('admin::app.settings.channels.edit.save-btn')
                 </button>
@@ -345,7 +345,7 @@
 
             </div>
 
-            <!-- Right Compoenent -->
+            <!-- Right Component -->
             <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before', ['channel' => $channel]) !!}
