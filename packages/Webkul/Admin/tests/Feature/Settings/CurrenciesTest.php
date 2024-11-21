@@ -73,7 +73,6 @@ it('should fail the validation with errors when certain field not provided when 
     putJson(route('admin.settings.currencies.update'), [
         'id' => $currency->id,
     ])
-        ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')
         ->assertUnprocessable();
 });
@@ -87,7 +86,6 @@ it('should update the specified currency', function () {
 
     putJson(route('admin.settings.currencies.update'), $data = [
         'id'   => $currency->id,
-        'code' => fake()->randomElement(['EUR', 'GBP', 'JPY', 'AUD', 'CHF', 'CAD', 'CNY', 'BRL']),
         'name' => fake()->name(),
     ])
         ->assertOk()
