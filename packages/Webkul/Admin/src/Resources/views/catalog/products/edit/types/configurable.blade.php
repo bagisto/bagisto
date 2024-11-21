@@ -1508,7 +1508,7 @@
                     let totalQty = 0;
 
                     for (let key in this.variant.inventories) {
-                        totalQty += parseInt(this.variant.inventories[key]);
+                        totalQty += parseInt(this.variant.inventories[key]) || 0;
                     }
 
                     return totalQty;
