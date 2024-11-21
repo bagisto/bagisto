@@ -215,6 +215,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="decimal"
+                                    rules="integer"
                                     :value="old('decimal')"
                                     v-model="selectedCurrency.decimal"
                                     :label="trans('admin::app.settings.currencies.index.create.decimal')"
