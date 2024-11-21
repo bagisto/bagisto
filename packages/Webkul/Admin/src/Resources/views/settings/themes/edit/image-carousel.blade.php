@@ -24,7 +24,7 @@
                     <!-- Add Slider Button -->
                     <div
                         class="secondary-button"
-                        @click="$refs.addSliderModal.toggle()"
+                        @click="$refs.addOrUpdateSliderModal.toggle()"
                     >
                         @lang('admin::app.settings.themes.edit.slider-add-btn')
                     </div>
@@ -160,11 +160,11 @@
                 as="div"
             >
                 <form 
-                    @submit="handleSubmit($event, saveSliderImage)"
+                    @submit="handleSubmit($event, updateOrCreateSliderImage)"
                     enctype="multipart/form-data"
-                    ref="createSliderForm"
+                    ref="updateOrCreateSliderForm"
                 >
-                    <x-admin::modal ref="addSliderModal">
+                    <x-admin::modal ref="addOrUpdateSliderModal">
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
@@ -258,8 +258,12 @@
                     deletedSliders: [],
 
                     slider: {
-                        image: {}
-                    }
+                        title: '',
+                        link: '',
+                        image: [],
+                    },
+
+                    sliderIndex: null
                 };
             },
             
@@ -273,8 +277,8 @@
             },
 
             methods: {
-                saveSliderImage(params, { resetForm ,setErrors }) {
-                    let formData = new FormData(this.$refs.createSliderForm);
+                updateOrCreateSliderImage(params, { resetForm ,setErrors }) {
+                    let formData = new FormData(this.$refs.updateOrCreateSliderForm);
 
                     try {
                         const sliderImage = formData.get("slider_image[]");
@@ -282,6 +286,8 @@
                         if (! sliderImage) {
                             throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                         }
+
+                        this.sliders.images.splice(this.sliderIndex, 1);
 
                         this.sliders.images.push({
                             title: formData.get("{{ $currentLocale->code }}[title]"),
@@ -295,7 +301,7 @@
 
                         resetForm();
 
-                        this.$refs.addSliderModal.toggle();
+                        this.$refs.addOrUpdateSliderModal.toggle();
                     } catch (error) {
                         setErrors({'slider_image': [error.message]});
                     }
@@ -316,7 +322,10 @@
                 },
 
                 edit(image, index) {
+                    this.sliderIndex = index || 0;
+
                     const baseUrl = "{{ asset('/') }}";
+
                     this.slider = {
                         title: image.title,
                         link: image.link,
@@ -327,9 +336,8 @@
 
                     console.log(this.slider);
 
-                    this.$refs.addSliderModal.toggle();
+                    this.$refs.addOrUpdateSliderModal.toggle();
                 },
-
 
                 remove(image) {
                     this.$emitter.emit('open-confirm-modal', {
