@@ -180,6 +180,12 @@
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="{{ $currentLocale->code }}[id]"
+                                    v-model="slider.id"
+                                />
+
+                                <x-admin::form.control-group.control
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
@@ -211,18 +217,18 @@
 
                                 <div class="hidden">
                                     <x-admin::media.images
-                                        name="slider_image"
+                                        name="image"
                                         ::uploaded-images='slider.image'
                                     />
                                 </div>
 
                                 <v-media-images
-                                    name="slider_image"
+                                    name="image"
                                     :uploaded-images='slider.image'
                                 >
                                 </v-media-images>
 
-                                <x-admin::form.control-group.error control-name="slider_image" />
+                                <x-admin::form.control-group.error control-name="image" />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">
@@ -266,7 +272,7 @@
                     sliderIndex: null
                 };
             },
-            
+
             created() {
                 if (
                     this.sliders == null 
@@ -277,33 +283,57 @@
             },
 
             methods: {
-                updateOrCreateSliderImage(params, { resetForm ,setErrors }) {
+                updateOrCreateSliderImage(params, { resetForm, setErrors }) {
                     let formData = new FormData(this.$refs.updateOrCreateSliderForm);
 
                     try {
-                        const sliderImage = formData.get("slider_image[]");
+                        const sliderImage = formData.get("image[]");
 
                         if (! sliderImage) {
                             throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                         }
 
-                        this.sliders.images.splice(this.sliderIndex, 1);
+                        const formId = formData.get("{{ $currentLocale->code }}[id]");
 
-                        this.sliders.images.push({
-                            title: formData.get("{{ $currentLocale->code }}[title]"),
-                            link: formData.get("{{ $currentLocale->code }}[link]"),
-                            slider_image: sliderImage,
-                        });
+                        const foundIndex = this.sliders.images.findIndex(
+                            item => item.title === this.sliders.images[formId].title
+                        );                        
 
-                        if (sliderImage instanceof File) {
-                            this.setFile(sliderImage, this.sliders.images.length - 1);
+                        if (foundIndex !== -1) {
+                            this.sliders.images[foundIndex] = {
+                                id: formData.get("{{ $currentLocale->code }}[id]"),
+
+                                title: formData.get("{{ $currentLocale->code }}[title]"),
+
+                                link: formData.get("{{ $currentLocale->code }}[link]"),
+
+                                image: sliderImage,
+                            };
+
+                            if (sliderImage instanceof File) {
+                                this.setFile(sliderImage, foundIndex);
+                            }
+                        } else {
+                            this.sliders.images.push({
+                                id: formData.get("{{ $currentLocale->code }}[id]"),
+
+                                title: formData.get("{{ $currentLocale->code }}[title]"),
+
+                                link: formData.get("{{ $currentLocale->code }}[link]"),
+
+                                image: sliderImage,
+                            });
+
+                            if (sliderImage instanceof File) {
+                                this.setFile(sliderImage, this.sliders.images.length - 1);
+                            }
                         }
 
                         resetForm();
 
                         this.$refs.addOrUpdateSliderModal.toggle();
                     } catch (error) {
-                        setErrors({'slider_image': [error.message]});
+                        setErrors({ 'image': [error.message] });
                     }
                 },
 
@@ -327,6 +357,7 @@
                     const baseUrl = "{{ asset('/') }}";
 
                     this.slider = {
+                        id: index,
                         title: image.title,
                         link: image.link,
                         image: image.image
