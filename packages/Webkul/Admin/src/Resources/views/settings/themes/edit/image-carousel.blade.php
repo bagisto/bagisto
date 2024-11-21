@@ -114,7 +114,14 @@
                         </div>
 
                         <!-- Actions -->
-                        <div class="grid place-content-start gap-1 text-right">
+                        <div class="flex place-content-start gap-4 text-right">
+                            <p 
+                                class="cursor-pointer text-blue-600 transition-all hover:underline"
+                                @click="edit(image, index)"
+                            > 
+                                @lang('Edit')
+                            </p>
+
                             <p 
                                 class="cursor-pointer text-red-600 transition-all hover:underline"
                                 @click="remove(image)"
@@ -176,6 +183,7 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
+                                    v-model="slider.title"
                                     :placeholder="trans('admin::app.settings.themes.edit.image-title')"
                                     :label="trans('admin::app.settings.themes.edit.image-title')"
                                 />
@@ -191,6 +199,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="{{ $currentLocale->code }}[link]"
+                                    v-model="slider.link"
                                     :placeholder="trans('admin::app.settings.themes.edit.link')"
                                 />
                             </x-admin::form.control-group>
@@ -200,12 +209,18 @@
                                     @lang('admin::app.settings.themes.edit.slider-image')
                                 </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="image"
+                                <div class="hidden">
+                                    <x-admin::media.images
+                                        name="slider_image"
+                                        ::uploaded-images='slider.image'
+                                    />
+                                </div>
+
+                                <v-media-images
                                     name="slider_image"
-                                    rules="required"
-                                    :is-multiple="false"
-                                />
+                                    :uploaded-images='slider.image'
+                                >
+                                </v-media-images>
 
                                 <x-admin::form.control-group.error control-name="slider_image" />
                             </x-admin::form.control-group>
@@ -241,6 +256,10 @@
                     sliders: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                     deletedSliders: [],
+
+                    slider: {
+                        image: {}
+                    }
                 };
             },
             
@@ -295,6 +314,22 @@
                         this.$refs['imageInput_' + index][0].files = dataTransfer.files;
                     }, 0);
                 },
+
+                edit(image, index) {
+                    const baseUrl = "{{ asset('/') }}";
+                    this.slider = {
+                        title: image.title,
+                        link: image.link,
+                        image: image.image
+                            ? [{ id: 'image_url', url: `${baseUrl}${image.image}` }]
+                            : [],
+                    };
+
+                    console.log(this.slider);
+
+                    this.$refs.addSliderModal.toggle();
+                },
+
 
                 remove(image) {
                     this.$emitter.emit('open-confirm-modal', {
