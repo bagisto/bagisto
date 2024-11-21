@@ -293,11 +293,15 @@
                             throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                         }
 
-                        const formId = formData.get("{{ $currentLocale->code }}[id]");
+                        const findSliderValue = this.sliders.images[formData.get("{{ $currentLocale->code }}[id]")];
 
-                        const foundIndex = this.sliders.images.findIndex(
-                            item => item.title === this.sliders.images[formId].title
-                        );                        
+                        let foundIndex = -1;
+
+                        if (findSliderValue) {
+                            foundIndex = this.sliders.images.findIndex(
+                                item => item.title === findSliderValue.title
+                            );
+                        }
 
                         if (foundIndex !== -1) {
                             this.sliders.images[foundIndex] = {
@@ -315,8 +319,6 @@
                             }
                         } else {
                             this.sliders.images.push({
-                                id: formData.get("{{ $currentLocale->code }}[id]"),
-
                                 title: formData.get("{{ $currentLocale->code }}[title]"),
 
                                 link: formData.get("{{ $currentLocale->code }}[link]"),
