@@ -50,9 +50,9 @@ class Configurable extends AbstractType
     /**
      * These are the types which can be fillable when generating variant.
      *
-     * @var array
+     * @var \Illuminate\Database\Eloquent\Collection
      */
-    protected $fillableVariantAttributes = [];
+    protected $fillableVariantAttributes;
 
     /**
      * Is a composite product type.
@@ -150,6 +150,8 @@ class Configurable extends AbstractType
 
                 foreach ($product->super_attributes as $superAttribute) {
                     $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
+
+                    $this->fillableVariantAttributes->push($superAttribute);
                 }
 
                 $this->createVariant($product, $permutation, array_merge($variantData, [
