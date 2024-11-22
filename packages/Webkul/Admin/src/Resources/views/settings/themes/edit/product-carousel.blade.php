@@ -193,7 +193,7 @@
                 </div>
             </div>
 
-            <!-- For Fitler Form -->
+            <!-- For Filter Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"

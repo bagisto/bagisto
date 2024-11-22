@@ -50,6 +50,7 @@
                         @lang('admin::app.cms.create.description')
                     </p>
 
+                    <!-- Html Content -->
                     <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.create.content')
@@ -81,9 +82,10 @@
                         @lang('admin::app.cms.create.seo')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo/>
 
+                    <!-- Meta Title -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.create.meta-title')
@@ -101,6 +103,7 @@
                         <x-admin::form.control-group.error control-name="meta_title" />
                     </x-admin::form.control-group>
 
+                    <!-- URL Key -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.create.url-key')
@@ -119,6 +122,7 @@
                         <x-admin::form.control-group.error control-name="url_key" />
                     </x-admin::form.control-group>
 
+                    <!-- Meta Keywords -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.create.meta-keywords')
@@ -136,6 +140,7 @@
                         <x-admin::form.control-group.error control-name="meta_keywords" />
                     </x-admin::form.control-group>
 
+                    <!-- Meta Description -->
                     <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.create.meta-description')
@@ -171,6 +176,7 @@
                     </x-slot>
 
                     <x-slot:content>
+                        <!-- Page Title -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.cms.create.page-title')

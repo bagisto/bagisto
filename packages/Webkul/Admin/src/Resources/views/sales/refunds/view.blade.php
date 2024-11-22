@@ -252,7 +252,7 @@
                             </p>
                         @endif
 
-                        <!-- Base Discount Amouont -->
+                        <!-- Base Discount Amount -->
                         @if ($refund->base_discount_amount > 0)
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($refund->base_discount_amount) }}

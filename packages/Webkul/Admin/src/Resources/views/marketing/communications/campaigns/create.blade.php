@@ -33,7 +33,7 @@
                 </button>
             </div>
         </div>
-        <!-- Informations -->
+        <!-- Information -->
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left Section -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">

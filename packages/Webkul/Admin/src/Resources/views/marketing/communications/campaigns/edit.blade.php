@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <!-- Informations -->
+        <!-- Information -->
         <div class="mb-2 mt-7 flex gap-2.5">
             <!-- Left Section -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">

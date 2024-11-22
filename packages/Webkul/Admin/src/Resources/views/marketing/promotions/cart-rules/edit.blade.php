@@ -28,7 +28,7 @@
                     @lang('admin::app.marketing.promotions.cart-rules.edit.back-btn')
                 </a>
 
-                <!-- Save buton -->
+                <!-- Save burton -->
                 <button
                     type="button"
                     class="primary-button"

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <!-- Import Vue Compontent -->
+    <!-- Import Vue Component -->
     <v-import />
 
     @pushOnce('scripts')

@@ -138,7 +138,7 @@
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo slug="page"/>
 
                     <x-admin::form.control-group>

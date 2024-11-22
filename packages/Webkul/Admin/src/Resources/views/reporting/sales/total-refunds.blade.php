@@ -130,15 +130,15 @@
             },
 
             methods: {
-                getStats(filtets) {
+                getStats(filters) {
                     this.isLoading = true;
 
-                    var filtets = Object.assign({}, filtets);
+                    var filters = Object.assign({}, filters);
 
-                    filtets.type = 'refunds';
+                    filters.type = 'refunds';
 
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
-                            params: filtets
+                            params: filters
                         })
                         .then(response => {
                             this.report = response.data;

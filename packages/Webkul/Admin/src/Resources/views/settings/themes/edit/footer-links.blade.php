@@ -8,7 +8,7 @@
         type="text/x-template"
         id="v-footer-links-template"
     >
-        <!-- Left Pannel -->
+        <!-- Left Panel -->
         <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
             <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                 <!-- Add Links-->
@@ -154,7 +154,7 @@
                 </div>
             </div>
 
-            <!-- For Fitler Form -->
+            <!-- For Filter Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"

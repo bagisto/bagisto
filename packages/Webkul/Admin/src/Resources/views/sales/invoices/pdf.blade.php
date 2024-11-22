@@ -21,7 +21,7 @@
             // Get the default locale code.
             $getLocale = app()->getLocale();
 
-            // Get the current curreny code.
+            // Get the current currency code.
             $currencyCode = core()->getBaseCurrencyCode();
 
             if ($getLocale == 'en' && $currencyCode == 'INR') {

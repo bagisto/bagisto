@@ -123,15 +123,15 @@
             },
 
             methods: {
-                getStats(filtets) {
+                getStats(filters) {
                     this.isLoading = true;
 
-                    var filtets = Object.assign({}, filtets);
+                    var filters = Object.assign({}, filters);
 
-                    filtets.type = 'stock-threshold-products';
+                    filters.type = 'stock-threshold-products';
 
                     this.$axios.get("{{ route('admin.dashboard.stats') }}", {
-                            params: filtets
+                            params: filters
                         })
                         .then(response => {
                             this.report = response.data;

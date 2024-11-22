@@ -383,7 +383,7 @@
             >
             </p>
      
-            <!-- validaiton message -->
+            <!-- validation message -->
             <v-error-message
                 :name="name"
                 v-slot="{ message }"

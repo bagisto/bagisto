@@ -1,4 +1,4 @@
-<!-- Seperator -->
+<!-- Separator -->
 <span class="absolute my-1.5 block w-full border border-gray-200 ltr:left-0 rtl:right-0"></span>
 
 <v-product-customer-group-price>

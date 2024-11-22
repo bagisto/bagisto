@@ -17,14 +17,14 @@
                 @lang('admin::app.marketing.promotions.catalog-rules.create.title')
             </p>
 
-                        <div class="flex items-center gap-x-2.5">
-                            <!-- Back Button -->
-                            <a
-                                href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
-                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-                            >
-                                @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
-                            </a>
+            <div class="flex items-center gap-x-2.5">
+                <!-- Back Button -->
+                <a
+                    href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
+                >
+                    @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
+                </a>
 
                 <!-- Save Button -->
                 <button
@@ -383,6 +383,7 @@
 
                         <x-slot:content>
                             <div class="flex gap-4">
+                                <!-- Starts From -->
                                 <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.from')
@@ -400,6 +401,7 @@
                                     <x-admin::form.control-group.error control-name="starts_from" />
                                 </x-admin::form.control-group>
 
+                                <!-- Ends Till -->
                                 <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.to')

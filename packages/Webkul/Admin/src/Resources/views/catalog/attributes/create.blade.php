@@ -207,7 +207,7 @@
                                                 @lang('admin::app.catalog.attributes.create.admin-name')
                                             </x-admin::table.th>
 
-                                            <!-- Loacles tables heading -->
+                                            <!-- Locales tables heading -->
                                             @foreach ($locales as $locale)
                                                 <x-admin::table.th>
                                                     {{ $locale->name . ' (' . $locale->code . ')' }}
@@ -584,7 +584,7 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                            <!-- Use to create configuable product -->
+                            <!-- Use to create configurable product -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -602,7 +602,7 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                                <!-- Visible On Product View Page On Fornt End -->
+                                <!-- Visible On Product View Page On Front End -->
                                 <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
@@ -914,7 +914,7 @@
 
                         dataTransfer.items.add(event.swatch_value);
 
-                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        // use set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
                             this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
 

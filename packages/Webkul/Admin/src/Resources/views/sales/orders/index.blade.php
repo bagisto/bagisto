@@ -134,7 +134,7 @@
                         </div>
                     </div>
 
-                    <!-- Custoemr, Email, Location Section -->
+                    <!-- Customer, Email, Location Section -->
                     <div class="">
                         <div class="flex flex-col gap-1.5">
                             <p class="text-base text-gray-800 dark:text-white">

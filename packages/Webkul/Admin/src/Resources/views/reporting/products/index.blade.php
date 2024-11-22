@@ -42,12 +42,12 @@
             @include('admin::reporting.products.top-selling-by-quantity')
         </div>
 
-        <!-- Products With Most Reviews and Products Wiht Most Visits Sections Container -->
+        <!-- Products With Most Reviews and Products With Most Visits Sections Container -->
         <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
             <!-- Products With Most Reviews Section -->
             @include('admin::reporting.products.most-reviews')
 
-            <!-- Products Wiht Most Visits Section -->
+            <!-- Products With Most Visits Section -->
             @include('admin::reporting.products.most-visits')
         </div>
 

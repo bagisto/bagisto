@@ -43,7 +43,9 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
+
                             {!! view_render_event('bagisto.admin.customer.addresses.edit.before') !!}
+
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.control
                                     type="hidden"

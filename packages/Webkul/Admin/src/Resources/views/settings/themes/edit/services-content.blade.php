@@ -71,7 +71,7 @@
                         :value="service_details.service_icon"
                     />
                 
-                    <!-- Service  Details  Listig -->
+                    <!-- Service Details Listing -->
                     <div 
                         class="flex cursor-pointer justify-between gap-2.5 py-5"
                         :class="{
