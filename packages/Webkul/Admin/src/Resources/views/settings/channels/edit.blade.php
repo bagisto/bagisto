@@ -12,7 +12,7 @@
 
     {!! view_render_event('bagisto.admin.settings.channels.edit.before', ['channel' => $channel]) !!}
 
-    <!-- Channeld Edit Form -->
+    <!-- Channel Id Edit Form -->
     <x-admin::form  
         :action="route('admin.settings.channels.update', ['id' => $channel->id, 'locale' => $locale])"
         enctype="multipart/form-data"
@@ -367,7 +367,7 @@
                                 @lang('admin::app.settings.channels.edit.locales') 
                             </x-admin::form.control-group.label>
 
-                            @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
+                            @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray(); @endphp
                             
                             @foreach (core()->getAllLocales() as $locale)
                                 <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
@@ -424,7 +424,7 @@
                                 @lang('admin::app.settings.channels.edit.currencies')
                             </x-admin::form.control-group.label>
                         
-                            @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
+                            @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray(); @endphp
 
                             @foreach (core()->getAllCurrencies() as $currency)
                                 <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
@@ -481,7 +481,7 @@
                 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.settings.before', ['channel' => $channel]) !!}
                 
-                <!-- Maintainance Mode -->
+                <!-- Maintenance Mode -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
