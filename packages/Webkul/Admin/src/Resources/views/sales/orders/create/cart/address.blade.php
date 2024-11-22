@@ -254,11 +254,14 @@
                 as="div"
             >
                 <form @submit="handleSubmit($event, updateOrCreateAddress)">
-                    <!-- Model Form -->
-                    <x-admin::modal ref="updateCreateModal">
-                        <!-- Model Header -->
+                    <!-- Drawer Form -->
+                    <x-admin::drawer
+                        width="350px"
+                        ref="updateCreateModal"
+                    >
+                        <!-- Drawer Header -->
                         <x-slot:header>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white">
+                            <p class="py-2 text-lg font-bold text-gray-800 dark:text-white">
                                 <template v-if="activeAddressForm == 'billing'">
                                     @lang('admin::app.sales.orders.create.cart.address.billing-address')
                                 </template>
@@ -269,7 +272,7 @@
                             </p>
                         </x-slot>
 
-                        <!--Model Content -->
+                        <!--Drawer Content -->
                         <x-slot:content>
                             <!-- Address Form Vue Component -->
                             <v-checkout-address-form
@@ -278,7 +281,7 @@
                             ></v-checkout-address-form>
 
                             <!-- Save Address to Address Book Checkbox -->
-                            <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5">
+                            <x-admin::form.control-group class="flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     ::name="activeAddressForm + '.save_address'"
@@ -296,18 +299,13 @@
                                     @lang('shop::app.checkout.onepage.address.save-address')
                                 </label>
                             </x-admin::form.control-group>
-                        </x-slot>
 
-                        <!-- Model Footer -->
-                        <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <x-admin::button
-                                    class="primary-button"
-                                    :title="trans('shop::app.checkout.onepage.address.save')"
-                                    ::loading="isStoring"
-                                    ::disabled="isStoring"
-                                />
-                            </div>
+                            <x-admin::button
+                                class="primary-button w-full max-w-full"
+                                :title="trans('shop::app.checkout.onepage.address.save')"
+                                ::loading="isStoring"
+                                ::disabled="isStoring"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
