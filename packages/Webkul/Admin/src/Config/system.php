@@ -1275,7 +1275,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
                 'type'          => 'text',
                 'depends'       => 'active:1',
-                'validation'    => 'required_if:active,1',
+                'validation'    => 'required_if:active,1|numeric',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
