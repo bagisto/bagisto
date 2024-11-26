@@ -824,7 +824,7 @@ return [
                 'name'          => 'street_lines',
                 'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
-                'validation'    => 'between:1,4',
+                'validation'    => 'between:1,4|integer',
                 'channel_based' => true,
                 'default_value' => 1,
             ],
