@@ -21,7 +21,7 @@ class TransactionResource extends JsonResource
             'payment_title'   => $this->payment_title,
             'amount'          => core()->formatPrice($this->amount),
             'invoice_id'      => $this->invoice_id,
-            'status'          => $this->status,
+            'status'          => ucfirst($this->status),
             'created_at'      => $this->created_at->format('d M Y'),
         ];
     }
