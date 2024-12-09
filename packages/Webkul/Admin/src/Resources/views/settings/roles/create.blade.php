@@ -161,7 +161,7 @@
                         </option>
                     </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error control-name="permission_type" />
+                    <x-admin::form.control-group.error control-name="permissions" />
                 </x-admin::form.control-group>
 
                 <div v-if="permission_type == 'custom'">
