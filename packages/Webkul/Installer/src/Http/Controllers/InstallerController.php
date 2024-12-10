@@ -158,8 +158,7 @@ class InstallerController extends Controller
             DB::table('admins')->updateOrInsert(
                 [
                     'id' => self::USER_ID,
-                ],
-                [
+                ], [
                     'name'     => request()->input('admin'),
                     'email'    => request()->input('email'),
                     'password' => $password,
