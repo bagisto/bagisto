@@ -3702,7 +3702,7 @@ return [
                         'news-letter-info' => '在注册页面启用新闻通讯订阅选项。',
                         'title'            => '新建账户选项',
                         'title-info'       => '设置新账户的选项，包括默认顾客组的分配和注册时的新闻通讯订阅选项。',
-                        
+
                         'default-group' => [
                             'general'    => '一般',
                             'guest'      => '访客',
@@ -3723,7 +3723,6 @@ return [
                         'title'              => '电子邮件验证',
                         'title-info'         => '“电子邮件验证”通过发送确认链接来验证电子邮件地址的有效性，增强账户安全性和通信可靠性。',
                     ],
-
 
                     'social-login' => [
                         'enable-facebook'   => '启用 Facebook',
@@ -3905,7 +3904,7 @@ return [
                 'invoice-settings' => [
                     'info'  => '设置发票编号、支付条款、发票设计和提醒功能。',
                     'title' => '发票设置',
-            
+
                     'invoice-number' => [
                         'generator'  => '发票编号生成器',
                         'info'       => '生成并分配唯一的发票编号，用于组织和跟踪。',
@@ -3914,7 +3913,7 @@ return [
                         'suffix'     => '发票编号后缀',
                         'title'      => '发票编号设置',
                     ],
-            
+
                     'payment-terms' => [
                         'due-duration'      => '到期时间',
                         'due-duration-day'  => ':due-duration 天',
