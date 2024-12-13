@@ -96,7 +96,7 @@
 
                             <!-- Content Slot -->
                             <slot name="content"></slot>
-
+                            
                             <!-- Footer Slot -->
                             <slot name="footer"></slot>
                         </div>
