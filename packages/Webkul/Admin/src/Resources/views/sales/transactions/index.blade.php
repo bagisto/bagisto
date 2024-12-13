@@ -204,23 +204,17 @@
                                     </p>
 
 
-                                    <template v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.paid')'">
-                                        <p class="label-active">
-                                            @lang('admin::app.sales.transactions.index.datagrid.paid')
-                                        </p>
-                                    </template>
+                                    <p v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.paid')'" class="label-active">
+                                        @lang('admin::app.sales.transactions.index.datagrid.paid')
+                                    </p>
 
-                                    <template v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.pending')'">
-                                        <p class="label-pending">
-                                            @lang('admin::app.sales.transactions.index.datagrid.pending')
-                                        </p>
-                                    </template>
+                                    <p v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.pending')'" class="label-pending">
+                                        @lang('admin::app.sales.transactions.index.datagrid.pending')
+                                    </p>
 
-                                    <template v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.completed')'">
-                                        <p class="label-completed">
-                                            @lang('admin::app.sales.transactions.index.datagrid.completed')
-                                        </p>
-                                    </template>
+                                    <p v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.completed')'" class="label-completed">
+                                        @lang('admin::app.sales.transactions.index.datagrid.completed')
+                                    </p>
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
