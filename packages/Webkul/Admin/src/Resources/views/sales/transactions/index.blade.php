@@ -203,7 +203,6 @@
                                     >
                                     </p>
 
-
                                     <p
                                         v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.paid')'"
                                         class="label-active"
