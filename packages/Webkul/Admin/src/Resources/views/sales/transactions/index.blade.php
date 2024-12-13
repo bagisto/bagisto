@@ -204,15 +204,24 @@
                                     </p>
 
 
-                                    <p v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.paid')'" class="label-active">
+                                    <p
+                                        v-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.paid')'"
+                                        class="label-active"
+                                    >
                                         @lang('admin::app.sales.transactions.index.datagrid.paid')
                                     </p>
 
-                                    <p v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.pending')'" class="label-pending">
+                                    <p
+                                        v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.pending')'"
+                                        class="label-pending"
+                                    >
                                         @lang('admin::app.sales.transactions.index.datagrid.pending')
                                     </p>
 
-                                    <p v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.completed')'" class="label-completed">
+                                    <p
+                                        v-else-if="data.status === '@lang('admin::app.sales.transactions.index.datagrid.completed')'"
+                                        class="label-completed"
+                                    >
                                         @lang('admin::app.sales.transactions.index.datagrid.completed')
                                     </p>
 
