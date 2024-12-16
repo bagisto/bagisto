@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'mt-5 bg-white p-8 max-sm:mt-0.5 max-sm:py-4 max-sm:px-4']) }}>
+            <div {{ $footer->attributes->merge(['class' => 'mt-5 bg-white p-8 max-sm:mt-0.5 max-sm:py-4 max-sm:px-4']) }}>
                 {{ $footer }}
             </div>
         </template>

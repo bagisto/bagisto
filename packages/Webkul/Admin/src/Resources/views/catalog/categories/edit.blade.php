@@ -224,13 +224,13 @@
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
-                <!-- SEO Deatils -->
+                <!-- SEO Details -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo/>
 
                     <div class="mt-8">
@@ -278,6 +278,8 @@
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[slug]" />
+
+                            <x-admin::form.control-group.error control-name="{{$currentLocale->code}}.slug" />
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
@@ -339,7 +341,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                rules="required"
+                                rules="required|integer"
                                 :value="old('position') ?: $category->position"
                                 :label="trans('admin::app.catalog.categories.edit.position')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.enter-position')"
@@ -421,7 +423,7 @@
                         </p>
                     </x-slot>
 
-                    @php $selectedaAtributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
+                    @php $selectedAttributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
@@ -434,7 +436,7 @@
                                     :value="$attribute->id"
                                     :for="$attribute->name ?? $attribute->admin_name"
                                     :label="trans('admin::app.catalog.categories.edit.filterable-attributes')"
-                                    :checked="in_array($attribute->id, $selectedaAtributes)"
+                                    :checked="in_array($attribute->id, $selectedAttributes)"
                                 />
 
                                 <label

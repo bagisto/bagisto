@@ -67,7 +67,7 @@
                     </div>
 
                     <div
-                        class="journal-scroll scrollbar-width-hidden mt-16 grid overflow-auto max-md:mt-7"
+                        class="journal-scroll mt-16 grid overflow-auto max-md:mt-7"
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
