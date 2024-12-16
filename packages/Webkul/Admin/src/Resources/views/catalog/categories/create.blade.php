@@ -289,7 +289,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                rules="required"
+                                rules="required|integer"
                                 :value="old('position')"
                                 :label="trans('admin::app.catalog.categories.create.position')"
                                 :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
