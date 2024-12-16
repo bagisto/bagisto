@@ -1,8 +1,8 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-4192bc5a.css",
-    "isEntry": true,
-    "src": "src/Resources/assets/css/app.css"
+    "file": "assets/app-NUsDsibJ.css",
+    "src": "src/Resources/assets/css/app.css",
+    "isEntry": true
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
     "file": "assets/bagisto-admin-DRpisRbe.woff",
@@ -173,10 +173,9 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "css": [
-      "assets/app-c04ede37.css"
-    ],
-    "file": "assets/app-60d1bd5b.js",
+    "file": "assets/app-mk0lQkfR.js",
+    "name": "app",
+    "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "css": [
       "assets/app-C7s3BGlm.css"
