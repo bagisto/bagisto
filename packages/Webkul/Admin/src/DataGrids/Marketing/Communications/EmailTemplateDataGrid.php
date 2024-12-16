@@ -51,11 +51,26 @@ class EmailTemplateDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.marketing.communications.templates.index.datagrid.status'),
-            'type'       => 'boolean',
-            'searchable' => true,
-            'filterable' => true,
+            'index'              => 'status',
+            'label'              => trans('admin::app.marketing.communications.templates.index.datagrid.status'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.marketing.communications.templates.index.datagrid.active'),
+                    'value' => 'active',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.communications.templates.index.datagrid.inactive'),
+                    'value' => 'inactive',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.communications.templates.index.datagrid.draft'),
+                    'value' => 'draft',
+                ],
+            ],
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status == 'active') {
