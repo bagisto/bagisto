@@ -52,7 +52,7 @@
     
             <!-- Right Container -->
             <div class="flex w-[360px] max-w-full select-none flex-col gap-2">
-                <!-- General Pannel -->
+                <!-- General Panel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
