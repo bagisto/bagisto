@@ -562,10 +562,12 @@
                 },
 
                 store(params, { resetForm, setErrors }) {
-                    let selectedFiles = this.$refs.reviewImages.uploadedFiles.filter(obj => obj.file instanceof File).map(obj => obj.file);
+                    let selectedFiles = this.$refs.reviewImages.uploadedFiles
+                        .filter(obj => obj.file instanceof File)
+                        .map(obj => obj.file);
 
-                    params.attachments = { ...params.attachments, ...selectedFiles };
-                    
+                    params.attachments = selectedFiles;
+
                     this.$axios.post('{{ route('shop.api.products.reviews.store', $product->id) }}', params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'

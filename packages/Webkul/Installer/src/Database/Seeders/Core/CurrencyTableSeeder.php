@@ -16,6 +16,7 @@ class CurrencyTableSeeder extends Seeder
         'AED' => 'د.إ',
         'ARS' => '$',
         'AUD' => 'A$',
+        'BHD' => '.د.ب',
         'BDT' => '৳',
         'BHD' => 'BHD',
         'BRL' => 'R$',

@@ -2,8 +2,6 @@
 
 namespace Webkul\Admin\Listeners;
 
-use Illuminate\Support\Facades\Mail;
-
 class Admin
 {
     /**

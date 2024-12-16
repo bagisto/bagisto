@@ -1,9 +1,7 @@
 @php
-    if (request()->has('query')) {
-        $title = trans('shop::app.search.title', ['query' => request()->query('query')]);
-    } else {
-        $title = trans('shop::app.search.results');
-    }
+    $title = request()->has('query')
+            ? trans('shop::app.search.title', ['query' => request()->query('query')])
+            : trans('shop::app.search.results');
 @endphp
 
 <!-- SEO Meta Content -->
@@ -31,12 +29,14 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h1 class="text-2xl font-medium max-sm:text-base">
-                {{ $title }}
+            <h1
+                class="text-2xl font-medium max-sm:text-base"
+                v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'"
+            >
             </h1>
         </div>
     </div>
-        
+
     <!-- Product Listing -->
     <v-search>
         <x-shop::shimmer.categories.view />

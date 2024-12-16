@@ -175,22 +175,22 @@
                     :id="name"
                     :name="`${name}[]`"
                     :rules="validations"
-                    :value="value"
+                    :value="savedSelections"
                     :label="label"
-                    multiple
                 >
                     <select
                         :name="`${name}[]`"
                         v-bind="data.field"
-                        :class="[data.errors.length ? 'border border-red-500' : '']"
-                        class="custom-select w-full rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                        v-model="data.value"
+                        :class="['custom-select', 'w-full', 'rounded-md', 'border', 'bg-white', 'px-3', 'py-2.5', 'text-sm', 'font-normal', 'text-gray-600', 'transition-all', 'hover:border-gray-400', 'dark:border-gray-800', 'dark:bg-gray-900', 'dark:text-gray-300', 'dark:hover:border-gray-400', data.errors.length && 'border-red-500']"
                         multiple
                     >
                         <option
                             v-for="option in field.options"
+                            :key="option.value"
                             :value="option.value"
-                            v-text="option.title"
                         >
+                            @{{ option.title }}
                         </option>
                     </select>
                 </v-field>
@@ -383,7 +383,7 @@
             >
             </p>
      
-            <!-- validaiton message -->
+            <!-- validation message -->
             <v-error-message
                 :name="name"
                 v-slot="{ message }"
@@ -444,6 +444,12 @@
                 return {
                     field: JSON.parse(this.fieldData),
                 };
+            },
+
+            computed: {
+                savedSelections() {
+                    return this.value ? this.value.split(',') : [];
+                }
             },
 
             mounted() {

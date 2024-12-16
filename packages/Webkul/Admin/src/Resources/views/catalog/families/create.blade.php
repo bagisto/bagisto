@@ -42,7 +42,7 @@
 
             <!-- Right Container -->
             <div class="flex w-[360px] max-w-full select-none flex-col gap-2">
-                <!-- General Pannel -->
+                <!-- General Panel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
@@ -53,6 +53,7 @@
                 
                     <!-- Panel Content -->
                     <x-slot:content>
+                        <!-- Code -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.code')
@@ -70,6 +71,7 @@
                             <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
 
+                        <!-- Name -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.name')
