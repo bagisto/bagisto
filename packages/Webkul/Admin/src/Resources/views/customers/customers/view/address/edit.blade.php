@@ -46,7 +46,9 @@
 
                         <!-- Drawer Content -->
                         <x-slot:content>
+
                             {!! view_render_event('bagisto.admin.customer.addresses.edit.before') !!}
+
                             <!-- Company Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>

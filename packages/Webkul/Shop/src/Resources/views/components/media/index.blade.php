@@ -1,4 +1,13 @@
-<v-media {{ $attributes }} >
+@props([
+    'width'  => '200px',
+    'height' => '200px'
+])
+
+<v-media
+    {{ $attributes }}
+    width="{{ $width }}"
+    height="{{ $height }}"
+>
     <x-shop::media.images.lazy
         class="mb-4 h-[200px] w-[200px] rounded-xl max-sm:h-[100px] max-sm:w-[100px]"
     />
@@ -23,14 +32,14 @@
                         <img
                             class="rounded-xl object-cover max-md:rounded-full"
                             :src="uploadedFiles.url"
-                            :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
+                            :class="{ 'opacity-25' : uploadedFiles.showDeleteButton }"
                             alt="Uploaded Image"
                         >
 
                         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                             <span 
                                 class="icon-bin cursor-pointer text-2xl text-black"
-                                @click="removeFile"
+                                @click="remove"
                             >
                             </span>
                         </div>
@@ -38,20 +47,21 @@
                 </div>
 
                 <label 
-                    for="file-input"
+                    :for="`${$.uid}_fileInput`"
                     class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
+                    :style="{'max-width': this.width, 'max-height': this.height}"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
                     @drop="onDrop"
                 >
                     <label 
-                        for="file-input"
+                        :for="`${$.uid}_fileInput`"
                         class="icon-camera text-3xl max-sm:text-lg"
                     >
                     </label>
 
-                    <p class="font-medium max-sm:text-xs">
+                    <p class="font-medium max-md:hidden max-sm:text-xs">
                         @lang("shop::app.components.media.index.add-image")
                     </p>
 
@@ -64,7 +74,7 @@
                     <v-field
                         type="file"
                         class="hidden"
-                        id="file-input"
+                        :id="`${$.uid}_fileInput`"
                         :name="name"
                         :accept="acceptedTypes"
                         :rules="appliedRules"
@@ -80,12 +90,12 @@
                 v-if="isMultiple"
             >
                 <ul class="justify-left mt-2 flex flex-wrap gap-2.5">
-                    <li 
+                    <li
                         v-for="(file, index) in uploadedFiles"
                         :key="index"
                     >
                         <template v-if="isImage(file)">
-                            <div 
+                            <div
                                 class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
@@ -94,13 +104,12 @@
                                     :src="file.url"
                                     :alt="file.name"
                                     class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
-                                    :class="{'opacity-25' : file.showDeleteButton}"
+                                    :class="{ 'opacity-25' : file.showDeleteButton }"
                                 >
-
                                 <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
-                                    <span 
+                                    <span
                                         class="icon-bin cursor-pointer text-2xl text-black"
-                                        @click="removeFile(index)"
+                                        @click="remove(index)"
                                     >
                                     </span>
                                 </div>
@@ -120,11 +129,10 @@
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
                                 </video>
-
                                 <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                                     <span 
                                         class="icon-bin cursor-pointer text-2xl text-black"
-                                        @click="removeFile(index)"
+                                        @click="remove(index)"
                                     >
                                     </span>
                                 </div>
@@ -144,12 +152,12 @@
                 name: {
                     type: String, 
                     default: 'attachments',
-                }, 
+                },
 
                 isMultiple: {
                     type: Boolean,
                     default: false,
-                }, 
+                },
 
                 rules: {
                     type: String,
@@ -158,17 +166,27 @@
                 acceptedTypes: {
                     type: String, 
                     default: 'image/*, video/*,'
-                }, 
+                },
 
                 label: {
                     type: String, 
                     default: '@lang("shop::app.components.media.index.add-attachments")'
-                }, 
+                },
 
                 src: {
                     type: String,
                     default: ''
-                }
+                },
+
+                height: {
+                    type: String,
+                    default: '200px',
+                },
+
+                width: {
+                    type: String,
+                    default: '200px',
+                },
             },
 
             data() {
@@ -190,7 +208,7 @@
                     this.uploadedFiles = {
                         isPicked: true,
                         url: this.src,
-                    }                        
+                    }
                 }
             },
 
@@ -282,7 +300,7 @@
                     this.handleDroppedFiles(files);
                 },
 
-                removeFile(index) {
+                remove(index) {
                     if (! this.isMultiple) {
                         this.uploadedFiles = [];
 
@@ -293,7 +311,7 @@
 
                     this.uploadedFiles.splice(index, 1);
                 },
-            },        
+            },
         });
     </script>
 @endpushOnce

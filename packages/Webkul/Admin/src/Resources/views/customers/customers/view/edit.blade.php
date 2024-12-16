@@ -140,6 +140,7 @@
                                 <x-admin::form.control-group.error control-name="date_of_birth" />
                             </x-admin::form.control-group>
                         </div>
+
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Gender -->
                             <x-admin::form.control-group class="w-full">
