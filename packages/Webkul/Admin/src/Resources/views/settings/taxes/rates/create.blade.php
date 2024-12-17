@@ -46,7 +46,7 @@
 
             {!! view_render_event('bagisto.admin.settings.taxes.rates.create.create_form_controls.before') !!}
 
-            <!-- Tax Rates Informations -->
+            <!-- Tax Rates information's -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">

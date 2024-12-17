@@ -202,7 +202,7 @@
                                                     @lang('admin::app.catalog.attributes.edit.admin-name')
                                                 </x-admin::table.th>
 
-                                                <!-- Loacles tables heading -->
+                                                <!-- Locales tables heading -->
                                                 <x-admin::table.th v-for="locale in locales">
                                                     <x-admin::table.th>
                                                         @{{ locale.name + '(' + [locale.code] + ')' }}
@@ -298,7 +298,7 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- Loacles -->
+                                                    <!-- Locales -->
                                                     <x-admin::table.td v-for="locale in locales">
                                                         <p class="dark:text-white">
                                                             @{{ element['locales'][locale.code] }}
@@ -368,7 +368,7 @@
 
                 <!-- Right sub-component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.before', ['attribute' => $attribute]) !!}
 
                     <!-- General -->
                     <x-admin::accordion>
@@ -493,9 +493,9 @@
                         </x-slot>
                     </x-admin::accordion>
                     
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.after', ['attribute' => $attribute]) !!}
 
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.validations.before', ['attribute' => $attribute]) !!}
 
                     <!-- Validations -->
                     <x-admin::accordion>
@@ -621,9 +621,9 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.after', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.validations.after', ['attribute' => $attribute]) !!}
 
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.before', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.configuration.before', ['attribute' => $attribute]) !!}
 
                     <!-- Configurations -->
                     <x-admin::accordion>
@@ -806,7 +806,7 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.configuration.after', ['attribute' => $attribute]) !!}
+                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.configuration.configuration.after', ['attribute' => $attribute]) !!}
                 </div>
             </div>
 

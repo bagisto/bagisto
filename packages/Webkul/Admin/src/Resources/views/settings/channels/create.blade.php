@@ -6,7 +6,10 @@
 
     {!! view_render_event('bagisto.admin.settings.channels.create.before') !!}
 
-    <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
+    <x-admin::form
+        action="{{ route('admin.settings.channels.store') }}"
+        enctype="multipart/form-data"
+    >
 
         {!! view_render_event('admin.settings.channels.create.create_form_controls.before') !!}
 
@@ -103,7 +106,7 @@
                         <x-admin::form.control-group.error control-name="description" />
                     </x-admin::form.control-group>
 
-                    <!-- Invertory Sources -->
+                    <!-- Inventory Sources -->
                     <div class="mb-4">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.inventory-sources')
@@ -134,7 +137,7 @@
                         <x-admin::form.control-group.error control-name="inventory_sources[]" />
                     </div>
 
-                    <!-- Root Catgegory -->
+                    <!-- Root Category -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.root-category')
@@ -267,7 +270,7 @@
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo/>
 
                     <!-- SEO Title -->
@@ -331,6 +334,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.after') !!}
 
             </div>
+
             <!-- Right sub-component -->
             <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
