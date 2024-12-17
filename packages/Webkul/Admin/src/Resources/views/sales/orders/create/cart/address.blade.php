@@ -300,18 +300,14 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                        <!-- Model Footer -->
-                        <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <x-admin::button
-                                    class="primary-button"
-                                    :title="trans('shop::app.checkout.onepage.address.save')"
-                                    ::loading="isStoring"
-                                    ::disabled="isStoring"
-                                />
-                            </div>
+                            <x-admin::button
+                                class="primary-button w-full max-w-full"
+                                :title="trans('shop::app.checkout.onepage.address.save')"
+                                ::loading="isStoring"
+                                ::disabled="isStoring"
+                            />
                         </x-slot>
-                    </x-admin::modal>
+                    </x-admin::drawer>
                 </form>
             </x-admin::form>
         </div>
