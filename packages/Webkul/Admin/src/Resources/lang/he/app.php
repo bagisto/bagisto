@@ -3313,6 +3313,7 @@ return [
 
         'view' => [
             'all-channels'  => 'כל הערוצים',
+            'back-btn'      => 'חזור',
             'day'           => 'יום',
             'end-date'      => 'תאריך סיום',
             'export-csv'    => 'ייצוא ל־CSV',
