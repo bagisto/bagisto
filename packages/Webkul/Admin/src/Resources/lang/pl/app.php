@@ -3763,7 +3763,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Ustaw klucz witryny, klucz tajny i status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Klucz tajny',

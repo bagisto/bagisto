@@ -3763,7 +3763,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'साइट कुंजी, गुप्त कुंजी और स्थिति सेट करें।',
-                    'title' => 'कैप्चा',
+                    'title' => 'Google कैप्चा',
 
                     'credentials' => [
                         'secret-key' => 'गुप्त कुंजी',
