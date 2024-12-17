@@ -105,7 +105,7 @@ class CurrencyTableSeeder extends Seeder
                     'id'     => $key + 1,
                     'code'   => $currency,
                     'name'   => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
-                    'symbol' => $this->currencySymbols[$currency],
+                    'symbol' => $this->currencySymbols[$currency] ?? '',
                 ],
             ]);
         }
