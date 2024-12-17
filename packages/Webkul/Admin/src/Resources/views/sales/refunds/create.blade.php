@@ -92,7 +92,7 @@
                 
                                                 <div class="grid place-content-start gap-1.5">
                                                     <!-- Item Additional Attributes -->
-                                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                                         {{ $item->name }}
                                                     </p>
                 
