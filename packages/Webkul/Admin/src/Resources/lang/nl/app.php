@@ -3763,7 +3763,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Stel site sleutel, geheime sleutel en status in.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Geheime Sleutel',

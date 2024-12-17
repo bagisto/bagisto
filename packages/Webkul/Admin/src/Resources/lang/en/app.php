@@ -3763,7 +3763,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Set site key, secret key and status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Secret Key',

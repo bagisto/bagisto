@@ -3763,7 +3763,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Site anahtarını, gizli anahtarını ve durumunu ayarlayın.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Gizli Anahtar',
