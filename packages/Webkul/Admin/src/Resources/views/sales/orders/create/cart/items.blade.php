@@ -286,7 +286,7 @@
 
                                 <!-- Details -->
                                 <div class="grid place-content-start gap-1.5">
-                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ product.name }}
                                     </p>
 
@@ -420,7 +420,8 @@
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
                             params: {
-                                query: this.searchTerm
+                                query: this.searchTerm,
+                                customer_id: this.cart.customer_id
                             }
                         })
                         .then(function(response) {

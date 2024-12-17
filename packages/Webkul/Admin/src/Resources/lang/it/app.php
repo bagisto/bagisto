@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Elenca tutte le notifiche',
-        'marked-success'   => 'Tutte le notifiche sono state contrassegnate come lette',
+        'marked-success'   => 'Tutte le notifiche sono state segnate come lette',
         'no-record'        => 'Nessun Record Trovato',
         'of'               => 'di',
         'per-page'         => 'Per pagina',
@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Genere',
                     'group'          => 'Gruppo',
                     'id'             => 'ID Cliente',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inattivo',
                     'method-error'   => 'Errore! Rilevato un metodo errato, controllare la configurazione dell\'azione di massa',
                     'name'           => 'Nome Cliente',

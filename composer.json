@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-calendar": "*",
         "ext-curl": "*",
         "ext-intl": "*",
@@ -44,7 +44,7 @@
         "pusher/pusher-php-server": "^7.0",
         "shetabit/visitor": "^4.1",
         "spatie/laravel-responsecache": "^7.4",
-        "spatie/laravel-sitemap": "^6.2"
+        "spatie/laravel-sitemap": "^7.3"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "^2.2.0",
