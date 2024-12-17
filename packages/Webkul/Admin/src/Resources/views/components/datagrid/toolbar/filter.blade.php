@@ -194,7 +194,7 @@
                                                                 </button>
                                                             </x-slot>
 
-                                                            <x-slot:menu>
+                                                            <x-slot:menu class="max-h-[200px] overflow-auto">
                                                                 <x-admin::dropdown.menu.item
                                                                     v-for="option in column.filterable_options"
                                                                     v-text="option.label"
@@ -566,7 +566,7 @@
                                                                 </button>
                                                             </x-slot>
 
-                                                            <x-slot:menu>
+                                                            <x-slot:menu class="max-h-[200px] overflow-auto">
                                                                 <x-admin::dropdown.menu.item
                                                                     v-for="option in column.filterable_options"
                                                                     v-text="option.label"

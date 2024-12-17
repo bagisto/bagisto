@@ -99,9 +99,7 @@
                     <div class="">
                         <div class="flex gap-2.5">
                             <div class="flex flex-col gap-1.5">
-                                <p
-                                    class="text-base font-semibold text-gray-800 dark:text-white"
-                                >
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
 
