@@ -3660,7 +3660,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'تنظیم کلید سایت، کلید مخفی و وضعیت.',
-                    'title' => 'کپچا',
+                    'title' => 'Google کپچا',
 
                     'credentials' => [
                         'secret-key' => 'کلید مخفی',

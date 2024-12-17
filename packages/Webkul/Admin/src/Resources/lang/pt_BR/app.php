@@ -3660,7 +3660,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Definir chave do site, chave secreta e status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Chave Secreta',

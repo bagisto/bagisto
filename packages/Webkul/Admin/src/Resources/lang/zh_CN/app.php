@@ -3660,7 +3660,7 @@ return [
 
                 'captcha' => [
                     'info'  => '设置站点密钥、密钥和状态。',
-                    'title' => '验证码',
+                    'title' => 'Google 验证码',
 
                     'credentials' => [
                         'secret-key' => '密钥',

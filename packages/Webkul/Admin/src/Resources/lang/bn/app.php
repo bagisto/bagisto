@@ -3660,7 +3660,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'সাইট কী, সিক্রেট কী এবং স্থিতি সেট করুন।',
-                    'title' => 'ক্যাপচা',
+                    'title' => 'Google ক্যাপচা',
 
                     'credentials' => [
                         'secret-key' => 'সিক্রেট কী',

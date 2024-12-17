@@ -3660,7 +3660,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'הגדרת מפתח אתר, מפתח סודי ומצב.',
-                    'title' => 'קפצ',
+                    'title' => 'Google קפצ',
 
                     'credentials' => [
                         'secret-key' => 'מפתח סודי',
