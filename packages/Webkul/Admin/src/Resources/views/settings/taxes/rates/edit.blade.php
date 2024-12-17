@@ -165,7 +165,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="tax_rate"
-                                rules="required"
+                                rules="required|decimal|min:0|max:100"
                                 value="{{ old('tax_rate') ?: $taxRate->tax_rate }}"
                                 :label="trans('admin::app.settings.taxes.rates.edit.tax-rate')"
                                 :placeholder="trans('admin::app.settings.taxes.rates.edit.tax-rate')"

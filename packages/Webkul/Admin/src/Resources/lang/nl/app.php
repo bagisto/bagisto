@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle meldingen weergeven',
-        'marked-success'   => 'Alle meldingen zijn als gelezen gemarkeerd',
+        'marked-success'   => 'Alle meldingen zijn gemarkeerd als gelezen',
         'no-record'        => 'Geen Records Gevonden',
         'of'               => 'van',
         'per-page'         => 'Per pagina',
