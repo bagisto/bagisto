@@ -1790,7 +1790,7 @@ return [
                 'name'          => 'invoice_number_length',
                 'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.length',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'numeric|min:0|max:10',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
