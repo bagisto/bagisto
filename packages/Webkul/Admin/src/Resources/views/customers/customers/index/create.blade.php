@@ -95,21 +95,51 @@
                             <x-admin::form.control-group.error control-name="phone" />
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.customers.customers.index.create.date-of-birth')
-                            </x-admin::form.control-group.label>
+                        <div class="flex gap-4 max-sm:flex-wrap">
+                            <!-- DOB -->
+                            <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.customers.customers.index.create.date-of-birth')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="date"
-                                id="dob"
-                                name="date_of_birth"
-                                :label="trans('admin::app.customers.customers.index.create.date-of-birth')"
-                                :placeholder="trans('admin::app.customers.customers.index.create.date-of-birth')"
-                            />
+                                <x-admin::form.control-group.control
+                                    type="date"
+                                    id="dob"
+                                    name="date_of_birth"
+                                    :label="trans('admin::app.customers.customers.index.create.date-of-birth')"
+                                    :placeholder="trans('admin::app.customers.customers.index.create.date-of-birth')"
+                                />
 
-                            <x-admin::form.control-group.error control-name="date_of_birth" />
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error control-name="date_of_birth" />
+                            </x-admin::form.control-group>
+
+                            <!-- Channel Id -->
+                            <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.customers.customers.index.create.channel')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    id="channel_id"
+                                    name="channel_id"
+                                    rules="required"
+                                    :label="trans('admin::app.customers.customers.index.create.channel')"
+                                >
+                                    <option value="">
+                                        @lang('admin::app.customers.customers.index.create.select-channel')
+                                    </option>
+
+                                    @foreach (core()->getAllChannels() as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name}}
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="channel_id" />
+                            </x-admin::form.control-group>
+                        </div>
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Gender -->

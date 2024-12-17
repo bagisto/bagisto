@@ -79,6 +79,7 @@ class CustomerController extends Controller
             'email'         => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today',
             'phone'         => 'unique:customers,phone',
+            'channel_id'    => 'required|integer|min:1',
         ]);
 
         $password = rand(100000, 10000000);
@@ -88,7 +89,6 @@ class CustomerController extends Controller
         $data = array_merge([
             'password'    => bcrypt($password),
             'is_verified' => 1,
-            'channel_id'  => core()->getCurrentChannel()->id,
         ], request()->only([
             'first_name',
             'last_name',
@@ -134,6 +134,7 @@ class CustomerController extends Controller
             'email'         => 'required|unique:customers,email,'.$id,
             'date_of_birth' => 'date|before:today',
             'phone'         => 'unique:customers,phone,'.$id,
+            'channel_id'    => 'required|integer|min:1',
         ]);
 
         $data = request()->only([
@@ -146,6 +147,7 @@ class CustomerController extends Controller
             'customer_group_id',
             'status',
             'is_suspended',
+            'channel_id',
         ]);
 
         if (empty($data['phone'])) {
