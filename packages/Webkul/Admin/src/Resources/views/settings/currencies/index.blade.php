@@ -160,10 +160,10 @@
                                     type="text"
                                     name="code"
                                     rules="required|min:3|max:3"
-                                    :value="old('code')"
-                                    v-model="selectedCurrency.code"
+                                    ::value="selectedCurrency.code"
                                     :label="trans('admin::app.settings.currencies.index.create.code')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.code')"
+                                    ::disabled="selectedCurrency.code"
                                 />
 
                                 <x-admin::form.control-group.error control-name="code" />
@@ -364,9 +364,9 @@
 
                                 this.$refs.currencyUpdateOrCreateModal.close();
 
-                                this.$refs.datagrid.get();
-
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.$refs.datagrid.get();
 
                                 resetForm();
                             })

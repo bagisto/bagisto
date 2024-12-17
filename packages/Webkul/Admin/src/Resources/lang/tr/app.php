@@ -1497,6 +1497,7 @@ return [
                     'gender'         => 'Cinsiyet',
                     'group'          => 'Grup',
                     'id'             => 'Müşteri ID',
+                    'id-value'       => 'Kimlik - :id',
                     'inactive'       => 'Pasif',
                     'method-error'   => 'Hata! Yanlış yöntem algılandı, lütfen kitlesel eylem yapılandırmasını kontrol edin',
                     'name'           => 'Müşteri Adı',

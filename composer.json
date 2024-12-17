@@ -44,7 +44,7 @@
         "pusher/pusher-php-server": "^7.0",
         "shetabit/visitor": "^4.1",
         "spatie/laravel-responsecache": "^7.4",
-        "spatie/laravel-sitemap": "^7.2"
+        "spatie/laravel-sitemap": "^7.3"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "2.2.*",

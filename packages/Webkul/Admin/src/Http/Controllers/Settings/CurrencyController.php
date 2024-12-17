@@ -77,12 +77,10 @@ class CurrencyController extends Controller
         $id = request('id');
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:currencies,code,'.$id, new Code],
             'name' => 'required',
         ]);
 
         $this->currencyRepository->update(request()->only([
-            'code',
             'name',
             'symbol',
             'decimal',
