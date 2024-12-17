@@ -53,6 +53,11 @@ class Column
     protected bool $sortable = false;
 
     /**
+     * Column's exportability.
+     */
+    protected bool $exportable = true;
+
+    /**
      * Column's visibility.
      */
     protected bool $visibility = true;
@@ -97,6 +102,8 @@ class Column
         $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->allowMultipleValues);
 
         $this->setSortable($column['sortable'] ?? $this->sortable);
+
+        $this->setExportable($column['exportable'] ?? $this->exportable);
 
         $this->setVisibility($column['visibility'] ?? $this->visibility);
 
@@ -254,6 +261,22 @@ class Column
     }
 
     /**
+     * Set exportable.
+     */
+    public function setExportable(bool $exportable): void
+    {
+        $this->exportable = $exportable;
+    }
+
+    /**
+     * Get exportable.
+     */
+    public function getExportable(): bool
+    {
+        return $this->exportable;
+    }
+
+    /**
      * Set visibility.
      */
     public function setVisibility(bool $visibility): void
@@ -317,6 +340,7 @@ class Column
             'filterable_options'    => $this->filterableOptions,
             'allow_multiple_values' => $this->allowMultipleValues,
             'sortable'              => $this->sortable,
+            'exportable'            => $this->exportable,
             'visibility'            => $this->visibility,
         ];
     }

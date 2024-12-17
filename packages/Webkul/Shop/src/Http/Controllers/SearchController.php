@@ -24,6 +24,10 @@ class SearchController extends Controller
      */
     public function index()
     {
+        $this->validate(request(), [
+            'query' => ['sometimes', 'required', 'string', 'regex:/^[^\\\\]+$/u'],
+        ]);
+
         $searchTerm = $this->searchTermRepository->findOneWhere([
             'term'       => request()->query('query'),
             'channel_id' => core()->getCurrentChannel()->id,

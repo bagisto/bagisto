@@ -25,7 +25,7 @@
                     <div class="flex gap-2.5">
                         <div
                             class="secondary-button"
-                            @click="$refs.addServiceModal.toggle()"
+                            @click="add"
                         >
                             @lang('admin::app.settings.themes.edit.services-content.add-btn')
                         </div>
@@ -71,7 +71,7 @@
                         :value="service_details.service_icon"
                     />
                 
-                    <!-- Service  Details  Listig -->
+                    <!-- Service Details Listing -->
                     <div 
                         class="flex cursor-pointer justify-between gap-2.5 py-5"
                         :class="{
@@ -167,7 +167,13 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.themes.edit.services-content.update-service')
+                                <template v-if="! isUpdating">
+                                    @lang('admin::app.settings.themes.edit.services-content.add-btn')
+                                </template>
+
+                                <template v-else>
+                                    @lang('admin::app.settings.themes.edit.services-content.update-service')
+                                </template>
                             </p>
                         </x-slot>
 
@@ -229,14 +235,12 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button 
-                                    type="submit"
-                                    class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                                >
-                                    @lang('admin::app.settings.themes.edit.services-content.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="submit"
+                                class="primary-button justify-center"
+                                :title="trans('admin::app.settings.themes.edit.services-content.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -310,6 +314,14 @@
                             });
                         }
                     });
+                },
+
+                add() {
+                    this.selectedService = [];
+
+                    this.isUpdating = false;
+
+                    this.$refs.addServiceModal.toggle();
                 },
 
                 edit(service_details) {

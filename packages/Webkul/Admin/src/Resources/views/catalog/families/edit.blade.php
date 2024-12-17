@@ -52,7 +52,7 @@
     
             <!-- Right Container -->
             <div class="flex w-[360px] max-w-full select-none flex-col gap-2">
-                <!-- General Pannel -->
+                <!-- General Panel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
@@ -405,14 +405,12 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex items-center gap-x-2.5">
-                                    <button 
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.catalog.families.edit.add-group-btn')
-                                    </button>
-                                </div>
+                                <!-- Save Button -->
+                                <x-admin::button
+                                    button-type="button"
+                                    class="primary-button"
+                                    :title="trans('admin::app.catalog.families.edit.add-group-btn')"
+                                />
                             </x-slot>
                         </x-admin::modal>
                     </form>
@@ -452,9 +450,19 @@
 
                 computed: {
                     unassignedAttributes() {
+                        this.columnGroups[1] = this.columnGroups[1] || [];
+                        this.columnGroups[2] = this.columnGroups[2] || [];
+
                         return this.customAttributes.filter(attribute => {
-                            return ! this.columnGroups[1].find(group => group.custom_attributes.find(customAttribute => customAttribute.id == attribute.id))
-                                && ! this.columnGroups[2].find(group => group.custom_attributes.find(customAttribute => customAttribute.id == attribute.id));
+                            const isInGroup1 = this.columnGroups[1].some(group => 
+                                group.custom_attributes.some(customAttribute => customAttribute.id === attribute.id)
+                            );
+
+                            const isInGroup2 = this.columnGroups[2].some(group => 
+                                group.custom_attributes.some(customAttribute => customAttribute.id === attribute.id)
+                            );
+
+                            return !isInGroup1 && !isInGroup2;
                         });
                     },
                 },

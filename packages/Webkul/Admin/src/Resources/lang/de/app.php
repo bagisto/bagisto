@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle Benachrichtigungen auflisten',
-        'marked-success'   => 'Benachrichtigung erfolgreich markiert',
+        'marked-success'   => 'Alle Benachrichtigungen wurden als gelesen markiert',
         'no-record'        => 'Kein Datensatz gefunden',
         'of'               => 'von',
         'per-page'         => 'Pro Seite',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Alle anzeigen',
 
         'order-status-messages' => [
+            'all'             => 'Alle',
             'canceled'        => 'Bestellung storniert',
             'closed'          => 'Bestellung geschlossen',
             'completed'       => 'Bestellung abgeschlossen',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Datum Zeit',
                     'delete'              => 'Löschen',
                     'edit'                => 'Bearbeiten',
+                    'false'               => 'Falsch',
                     'file'                => 'Datei',
                     'id'                  => 'ID',
                     'image'               => 'Bild',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Auswählen',
                     'text'                => 'Text',
                     'textarea'            => 'Textbereich',
+                    'true'                => 'Wahr',
                     'type'                => 'Typ',
                     'unique'              => 'Einzigartig',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'Bezeichnung',
                 'multiselect'           => 'Multiselect',
                 'no'                    => 'Nein',
-                'number'                => 'Nummer',
+                'numeric'               => 'Nummer',
                 'option-deleted'        => 'Option erfolgreich gelöscht',
                 'options'               => 'Optionen',
                 'position'              => 'Position',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'Label',
                 'multiselect'           => 'Mehrfachauswahl',
                 'no'                    => 'Nein',
-                'number'                => 'Nummer',
+                'numeric'               => 'Nummer',
                 'option-deleted'        => 'Option erfolgreich gelöscht',
                 'options'               => 'Optionen',
                 'position'              => 'Position',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Geschlecht',
                     'group'          => 'Gruppe',
                     'id'             => 'Kunden-ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inaktiv',
                     'method-error'   => 'Fehler! Falsche Methode erkannt, bitte überprüfen Sie die Massenaktionskonfiguration',
                     'name'           => 'Kundenname',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Neu',
                 'no'                            => 'Nein',
                 'parent-id'                     => 'Eltern-ID',
+                'category-id'                   => 'Kategorien-ID',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Sitemap-Optionen festlegen.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Aktiviert',
+                        'info'    => 'Aktivieren oder deaktivieren Sie die Sitemap für Ihre Website, um die Suchmaschinenoptimierung zu verbessern und die Benutzererfahrung zu steigern.',
+                        'title'   => 'Einstellungen',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Dateigrößenbeschränkungen festlegen.',
+                        'max-file-size'    => 'Maximale Dateigröße',
+                        'max-url-per-file' => 'Maximale Anzahl von URLs pro Datei',
+                        'title'            => 'Dateibeschränkungen',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Store-URL festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Store-URL',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Kategorien festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Kategorien',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Produkte festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'Produkte',
+                        'priority' => 'Priorität',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Häufigkeit und Prioritätsoption für die CMS-Seiten festlegen.',
+
+                        'frequency' => [
+                            'title' => 'Häufigkeit',
+
+                            'options' => [
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
+                            ],
+                        ],
+
+                        'title'    => 'CMS-Seiten',
+                        'priority' => 'Priorität',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Setzen Sie den Gast-Checkout, die Produktansichtsseite, die Warenkorbansichtsseite, die Storefront, die Bewertung und die Attributfreigabe.',
+                    'info'  => 'Produktansichtsseite, Warenkorbansichtsseite, Storefront, Bewertung und Attribut-Sozialfreigabe.',
                     'title' => 'Produkte',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Kundenbewertungen zulassen',
-                        'allow-guest-review'    => 'Gastbewertungen zulassen',
-                        'title'                 => 'Bewertung',
-                        'title-info'            => 'Bewertung oder Einschätzung von etwas, oft mit Meinungen und Feedback.',
+                        'allow-customer-review'   => 'Kundenbewertungen zulassen',
+                        'allow-guest-review'      => 'Gastbewertungen zulassen',
+                        'censoring-reviewer-name' => 'Zensur des Rezensentennamens',
+                        'display-review-count'    => 'Zeigen Sie die Anzahl der Rezensionen für Bewertungen an.',
+                        'display-star-count'      => 'Zeigen Sie die Anzahl der Sterne in Bewertungen an.',
+                        'summary'                 => 'Zusammenfassung',
+                        'title'                   => 'Bewertung',
+                        'title-info'              => 'Bewertung oder Einschätzung von etwas, oft mit Meinungen und Feedback.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Fußzeilentext',
+                        'footer-text-info' => 'Geben Sie den Text ein, der in der Fußzeile des PDFs erscheint.',
                         'info'             => 'Konfigurieren Sie PDF-Druckausgaben, um die Rechnungs-ID, die Bestell-ID im Header anzuzeigen und das Rechnungslogo einzuschließen.',
                         'invoice-id-info'  => 'Konfigurieren Sie die Anzeige der Rechnungs-ID im Rechnungskopf.',
                         'invoice-id-title' => 'Rechnungs-ID im Header anzeigen',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Die Bildauflösung sollte etwa 131px x 30px betragen.',
                         'order-id-info'    => 'Konfigurieren Sie die Anzeige der Bestell-ID im Rechnungskopf.',
                         'order-id-title'   => 'Bestell-ID im Header anzeigen',
                         'title'            => 'PDF-Druckausgaben',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Kasse',
-                    'info'  => 'Aktivieren oder Deaktivieren des Mini-Warenkorbs und der Warenkorbübersicht.',
+                    'info'  => 'Gast-Checkout einrichten, Mini-Warenkorb aktivieren oder deaktivieren, Warenkorbzusammenfassung.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Warenkorbseite',

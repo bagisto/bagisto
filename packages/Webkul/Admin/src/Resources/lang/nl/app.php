@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle meldingen weergeven',
-        'marked-success'   => 'Melding Succesvol Gemarkeerd',
+        'marked-success'   => 'Alle meldingen zijn als gelezen gemarkeerd',
         'no-record'        => 'Geen Records Gevonden',
         'of'               => 'van',
         'per-page'         => 'Per pagina',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Alles Bekijken',
 
         'order-status-messages' => [
+            'all'             => 'Alles',
             'canceled'        => 'Bestelling Geannuleerd',
             'closed'          => 'Bestelling Gesloten',
             'completed'       => 'Bestelling Voltooid',
@@ -156,8 +157,8 @@ return [
                     'pay-by'          => 'Betaal Via - :method',
                     'pay-via'         => 'Betaal Via',
                     'pending-payment' => 'In afwachting van betaling',
-                    'pending'         => 'In behandeling',
-                    'processing'      => 'Verwerking',
+                    'pending'         => 'Wachtend',
+                    'processing'      => 'Bezig met verwerken',
                     'product-count'   => ':count + Meer producten',
                     'status'          => 'Status',
                     'success'         => 'Succes',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Datum Tijd',
                     'delete'              => 'Verwijderen',
                     'edit'                => 'Bewerken',
+                    'false'               => 'Onwaar',
                     'file'                => 'Bestand',
                     'id'                  => 'ID',
                     'image'               => 'Afbeelding',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Selecteren',
                     'text'                => 'Tekst',
                     'textarea'            => 'Tekstgebied',
+                    'true'                => 'Waar',
                     'type'                => 'Type',
                     'unique'              => 'Uniek',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                   => 'Label',
                 'multiselect'             => 'Meerdere selectie',
                 'no'                      => 'Nee',
-                'number'                  => 'Nummer',
+                'numeric'                 => 'Nummer',
                 'option-deleted'          => 'Optie succesvol verwijderd',
                 'options'                 => 'Opties',
                 'position'                => 'Positie',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'Label',
                 'multiselect'           => 'Meerdere selectie',
                 'no'                    => 'Nee',
-                'number'                => 'Nummer',
+                'numeric'               => 'Nummer',
                 'option-deleted'        => 'Optie succesvol verwijderd',
                 'options'               => 'Opties',
                 'position'              => 'Positie',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Geslacht',
                     'group'          => 'Groep',
                     'id'             => 'Klant ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactief',
                     'method-error'   => 'Fout! Verkeerde methode gedetecteerd, controleer alstublieft de mass action-configuratie',
                     'name'           => 'Klantnaam',
@@ -1544,7 +1548,7 @@ return [
                         'pay-via'         => 'Betaalwijze',
                         'pending'         => 'In behandeling',
                         'pending-payment' => 'Betaling in behandeling',
-                        'processing'      => 'Verwerking',
+                        'processing'      => 'Bezig met verwerken',
                         'status'          => 'Status',
                         'view'            => 'Bekijken',
                     ],
@@ -2771,7 +2775,7 @@ return [
                 'index' => [
                     'delete-warning' => 'Weet je zeker dat je wilt verwijderen?',
                     'tax-category'   => 'Belastingcategorie',
-                    'title'          => 'Belastingcategorieën',
+                    'title'          => 'BTW categorieën',
 
                     'datagrid' => [
                         'actions' => 'Acties',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Nieuw',
                 'no'                            => 'Nee',
                 'parent-id'                     => 'Ouder-ID',
+                'category-id'                   => 'Categorie-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Stel sitemapopties in.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Ingeschakeld',
+                        'info'    => 'Schakel de sitemap in of uit voor uw website om de zoekmachineoptimalisatie te verbeteren en de gebruikerservaring te verbeteren.',
+                        'title'   => 'Instellingen',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Stel bestandslimietopties in.',
+                        'max-file-size'    => 'Maximale bestandsgrootte',
+                        'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
+                        'title'            => 'Bestandslimieten',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de winkel-URL.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Winkel URL',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de categorieën.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Categorieën',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de producten.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'Producten',
+                        'priority' => 'Prioriteit',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de CMS-pagina\'s.',
+
+                        'frequency' => [
+                            'title' => 'Frequentie',
+
+                            'options' => [
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
+                            ],
+                        ],
+
+                        'title'    => 'CMS Pagina\'s',
+                        'priority' => 'Prioriteit',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Catalogus',
 
                 'products' => [
-                    'info'  => 'Stel gastafrekening in, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuut delen via sociale media.',
+                    'info'  => 'Productweergavepagina, winkelwagenweergavepagina, etalage, beoordeling en sociale attributendelingsoptie.',
                     'title' => 'Producten',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Klantbeoordeling toestaan',
-                        'allow-guest-review'    => 'Gastbeoordeling toestaan',
-                        'title'                 => 'Beoordeling',
-                        'title-info'            => 'Evaluatie of beoordeling van iets, vaak met meningen en feedback.',
+                        'allow-customer-review'   => 'Klantbeoordeling toestaan',
+                        'allow-guest-review'      => 'Gastbeoordeling toestaan',
+                        'censoring-reviewer-name' => 'Naam recensent censureren',
+                        'display-review-count'    => 'Geef het aantal recensies voor beoordelingen weer.',
+                        'display-star-count'      => 'Geef het aantal sterren in beoordelingen weer.',
+                        'summary'                 => 'Samenvatting',
+                        'title'                   => 'Beoordeling',
+                        'title-info'              => 'Evaluatie of beoordeling van iets, vaak met meningen en feedback.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Voettekst',
+                        'footer-text-info' => 'Voer de tekst in die in de voettekst van de PDF verschijnt.',
                         'info'             => 'Configureer PDF-afdrukken om het factuurnummer en het bestelnummer in de koptekst weer te geven en het factuurlogo op te nemen.',
                         'invoice-id-info'  => 'Configureer de weergave van het factuurnummer in de factuurkop.',
                         'invoice-id-title' => 'Toon factuurnummer in koptekst',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'De resolutie van de afbeelding moet ongeveer 131px x 30px zijn.',
                         'order-id-info'    => 'Configureer de weergave van het bestelnummer in de factuurkop.',
                         'order-id-title'   => 'Toon bestelnummer in koptekst',
                         'title'            => 'PDF-afdrukken',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Afrekenen',
-                    'info'  => 'Schakel Mini-winkelwagen, winkelwagensamenvatting in of uit.',
+                    'info'  => 'Gastafrekenen instellen, mini-winkelwagen inschakelen of uitschakelen, winkelwagensamenvatting.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Winkelwagenpagina',
@@ -4097,7 +4211,7 @@ return [
                 'settings'                 => 'Instellingen',
                 'shipments'                => 'Zendingen',
                 'sitemaps'                 => 'Sitemaps',
-                'tax-categories'           => 'Belastingcategorieën',
+                'tax-categories'           => 'BTW categorieën',
                 'tax-rates'                => 'Belastingtarieven',
                 'taxes'                    => 'Belastingen',
                 'themes'                   => 'Thema\'s',
@@ -4335,7 +4449,7 @@ return [
         'shipments'                => 'Verzendingen',
         'sitemaps'                 => 'Sitemaps',
         'subscribers'              => 'Nieuwsbrief Abonnees',
-        'tax-categories'           => 'Belastingcategorieën',
+        'tax-categories'           => 'BTW categorieën',
         'tax-rates'                => 'Belastingtarieven',
         'taxes'                    => 'Belastingen',
         'themes'                   => 'Thema\'s',

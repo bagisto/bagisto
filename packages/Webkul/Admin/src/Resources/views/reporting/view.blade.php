@@ -115,22 +115,26 @@
                             'total-sold-quantities',
                             'total-products-added-to-wishlist',
                         ]))
-                            <select
-                                class="custom-select flex min-h-[39px] w-fit rounded-md border px-3 pl-2 pr-9 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                v-model="filters.period"
-                            >
-                                <option value="day">
-                                    @lang('admin::app.reporting.view.day')
-                                </option>
-    
-                                <option value="month">
-                                    @lang('admin::app.reporting.view.month')
-                                </option>
-    
-                                <option value="year">
-                                    @lang('admin::app.reporting.view.year')
-                                </option>
-                            </select>
+                            <div class="relative inline-flex w-full max-w-max">
+                                <select
+                                    class="w-full cursor-pointer appearance-none rounded-md border bg-white px-2.5 py-1.5 pr-8 text-center leading-6 text-gray-600 transition hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    v-model="filters.period"
+                                >
+                                    <option value="day">
+                                        @lang('admin::app.reporting.view.day')
+                                    </option>
+                                    
+                                    <option value="month">
+                                        @lang('admin::app.reporting.view.month')
+                                    </option>
+                            
+                                    <option value="year">
+                                        @lang('admin::app.reporting.view.year')
+                                    </option>
+                                </select>
+                                
+                                <span class="icon-sort-down pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 transform text-2xl text-gray-600 dark:text-gray-300"></span>
+                            </div>
                         @endif
                     </div>
 
@@ -165,11 +169,11 @@
                         <!-- Table Header -->
                         <div
                             class="row grid grid-cols-4 grid-rows-1 items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
+                            :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
                                 class="flex cursor-pointer gap-2.5"
-                                v-for="column in reporing.statistics.columns"
+                                v-for="column in reporting.statistics.columns"
                             >
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @{{ column.label }}
@@ -180,11 +184,11 @@
                         <!-- Table Body -->
                         <div
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
-                            v-if="reporing.statistics.records.length"
-                            v-for="record in reporing.statistics.records"
+                            :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
+                            v-if="reporting.statistics.records.length"
+                            v-for="record in reporting.statistics.records"
                         >
-                            <p v-for="column in reporing.statistics.columns">
+                            <p v-for="column in reporting.statistics.columns">
                                 @{{ record[column.key] }}
                             </p>
                         </div>
@@ -226,7 +230,7 @@
                             end: "{{ $endDate->format('Y-m-d') }}",
                         },
 
-                        reporing: [],
+                        reporting: [],
 
                         isLoading: true,
 
@@ -256,7 +260,7 @@
                                 params: this.filters
                             })
                             .then(response => {
-                                this.reporing = response.data;
+                                this.reporting = response.data;
 
                                 this.isLoading = false;
                             })

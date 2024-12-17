@@ -116,7 +116,7 @@
                                     type="text"
                                     name="label"
                                     rules="required"
-                                    v-model="selectedOption.label"
+                                    ::value="selectedOption.label"
                                     :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
                                 />
         
@@ -124,6 +124,7 @@
                             </x-admin::form.control-group>
 
                             <div class="flex gap-4">
+                                <!-- Type -->
                                 <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
@@ -133,7 +134,7 @@
                                         type="select"
                                         name="type"
                                         rules="required"
-                                        v-model="selectedOption.type"
+                                        ::value="selectedOption.type"
                                         :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
                                     >
                                         <option value="select">
@@ -156,6 +157,7 @@
                                     <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
+                                <!-- Is Required -->
                                 <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')
@@ -165,7 +167,7 @@
                                         type="select"
                                         name="is_required"
                                         rules="required"
-                                        v-model="selectedOption.is_required"
+                                        ::value="selectedOption.is_required"
                                         :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
                                     >
                                         <option value="1">
@@ -184,15 +186,12 @@
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Modal Submission -->
-                            <div class="flex items-center gap-x-2.5">
-                                <button 
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.catalog.products.edit.types.bundle.update-create.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -469,7 +468,10 @@
                     } else {
                         const indexToUpdate = this.options.findIndex(option => option.id === this.selectedOption.id);
 
-                        this.options[indexToUpdate] = this.selectedOption;
+                        this.options[indexToUpdate] = {
+                            ...this.selectedOption,
+                            ...params
+                        };
                     }
 
                     this.resetForm();
@@ -503,31 +505,33 @@
 
             props: ['index', 'option', 'errors'],
 
+            emits: ['onEdit', 'onRemove'],
+
             data() {
                 return {
                     types: {
                         select: {
                             key: 'select',
-                            title: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.info')"
+                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.title')',
+                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.info')'
                         },
 
                         radio: {
                             key: 'radio',
-                            title: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.info')"
+                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.title')',
+                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.info')'
                         },
 
                         multiselect: {
                             key: 'multiselect',
-                            title: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.info')"
+                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.title')',
+                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.info')'
                         },
 
                         checkbox: {
                             key: 'checkbox',
-                            title: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.info')"
+                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.title')',
+                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.info')'
                         }
                     },
                 }
@@ -549,11 +553,9 @@
                 },
 
                 addSelected(selectedProducts) {
-                    let self = this;
-
-                    selectedProducts.forEach(function (product) {
-                        self.option.bundle_option_products.push({
-                            id: 'product_' + self.option.bundle_option_products.length,
+                    selectedProducts.forEach((product) => {
+                        this.option.bundle_option_products.push({
+                            id: 'product_' + this.option.bundle_option_products.length,
                             qty: 1,
                             is_default: 0,
                             product: product,
@@ -572,10 +574,11 @@
                 },
 
                 updateIsDefault: function(updatedProductOption) {
-                    let self = this;
-
-                    this.option.bundle_option_products.forEach(function(productOption) {
-                        if (self.option.type == 'radio' || self.option.type == 'select') {
+                    this.option.bundle_option_products.forEach((productOption) => {
+                        if (
+                            this.option.type == 'radio' 
+                            || this.option.type == 'select'
+                        ) {
                             productOption.is_default = productOption.product.id == updatedProductOption.product.id ? 1 : 0;
                         } else {
                             if (productOption.product.id == updatedProductOption.product.id) {

@@ -129,10 +129,9 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree.
      *
-     * @param  int  $id
      * @return \Webkul\Category\Contracts\Category
      */
-    public function getCategoryTree($id = null)
+    public function getCategoryTree(?int $id = null)
     {
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
@@ -142,10 +141,9 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree.
      *
-     * @param  int  $id
      * @return \Illuminate\Support\Collection
      */
-    public function getCategoryTreeWithoutDescendant($id = null)
+    public function getCategoryTreeWithoutDescendant(?int $id = null)
     {
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
@@ -246,7 +244,7 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    $manager = new ImageManager();
+                    $manager = new ImageManager;
 
                     $image = $manager->make(request()->file($file))->encode('webp');
 

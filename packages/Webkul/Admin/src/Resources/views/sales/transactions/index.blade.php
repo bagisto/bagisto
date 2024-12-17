@@ -322,16 +322,14 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <!-- Modal Submission -->
-                                <div class="flex items-center gap-x-2.5">
-                                    <!-- Save Button -->
-                                    <button
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.sales.transactions.index.create.save-transaction')
-                                    </button>
-                                </div>
+                                <!-- Save Button -->
+                                <x-admin::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    :title="trans('admin::app.sales.transactions.index.create.save-transaction')"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
                             </x-slot>
                         </x-admin::modal>
                     </form>
@@ -391,13 +389,19 @@
                 data() {
                     return {
                         paymentMethods: @json(payment()->getSupportedPaymentMethods()['payment_methods']),
+
+                        isLoading: false,
                     };
                 },
 
                 methods: {
                     store(params, { setErrors, resetForm }) {
+                        this.isLoading = true;
+
                         this.$axios.post('{{ route('admin.sales.transactions.store') }}', params)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$refs.transactionModel.toggle();
@@ -407,6 +411,8 @@
                                 resetForm();
                             })
                             .catch((error) => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 } else {

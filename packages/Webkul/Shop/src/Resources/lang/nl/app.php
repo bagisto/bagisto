@@ -39,7 +39,7 @@ return [
             'invalid-credentials' => 'Controleer uw referenties en probeer het opnieuw.',
             'new-customer'        => 'Nieuwe klant?',
             'not-activated'       => 'Uw activering wacht op goedkeuring van de beheerder',
-            'page-title'          => 'Klant Aanmelden',
+            'page-title'          => 'Aanmelden',
             'password'            => 'Wachtwoord',
             'show-password'       => 'Wachtwoord Weergeven',
             'title'               => 'Aanmelden',
@@ -58,7 +58,7 @@ return [
             'last-name'                   => 'Achternaam',
             'page-title'                  => 'Word Gebruiker',
             'password'                    => 'Wachtwoord',
-            'sign-in-button'              => 'Aanmelden',
+            'sign-in-button'              => 'Registreren',
             'subscribe-to-newsletter'     => 'Abonneer op nieuwsbrief',
             'success'                     => 'Account succesvol aangemaakt.',
             'success-verify'              => 'Account succesvol aangemaakt, er is een e-mail verzonden ter verificatie.',
@@ -188,7 +188,7 @@ return [
                         'fraud'           => 'Fraude',
                         'pending'         => 'In Afwachting',
                         'pending-payment' => 'In Afwachting van Betaling',
-                        'processing'      => 'Verwerking',
+                        'processing'      => 'Bezig met verwerken',
                     ],
                 ],
 
@@ -328,7 +328,7 @@ return [
                     'subtotal-incl-tax'          => 'Subtotaal (incl. BTW)',
                     'subtotal'                   => 'Subtotaal',
                     'tax-amount'                 => 'Belastingbedrag',
-                    'tax'                        => 'Belasting',
+                    'tax'                        => 'BTW',
                     'vat-number'                 => 'BTW-nummer',
                 ],
             ],
@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Bijlagen toevoegen',
+            'index' => [
+                'add-attachments' => 'Bijlagen toevoegen',
+                'add-image'       => 'Afbeelding/Video toevoegen',
+            ],
         ],
 
         'layouts' => [
@@ -396,15 +399,15 @@ return [
                 'bagisto'           => 'Bagisto',
                 'cart'              => 'Winkelwagen',
                 'compare'           => 'Vergelijken',
-                'dropdown-text'     => 'Beheer Winkelwagen, Bestellingen en Verlanglijst',
-                'logout'            => 'Uitloggen',
+                'dropdown-text'     => 'Beheer  uw Bestellingen en Verlanglijst',
+                'logout'            => 'Afmelden',
                 'no-category-found' => 'Geen categorie gevonden.',
                 'orders'            => 'Bestellingen',
                 'profile'           => 'Profiel',
                 'search'            => 'Zoeken',
                 'search-text'       => 'Zoek hier producten',
-                'sign-in'           => 'Inloggen',
-                'sign-up'           => 'Aanmelden',
+                'sign-in'           => 'Aanmelden',
+                'sign-up'           => 'Registreren',
                 'submit'            => 'Verzenden',
                 'title'             => 'Account',
                 'welcome'           => 'Welkom',
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standaardtaal',
-                        'offer'          => 'Krijg TOT 40% KORTING op je 1e bestelling',
-                        'shop-now'       => 'KOOP NU',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Valuta',
                     'locales'    => 'Taal',
+                    'login'      => 'Registreren of Inloggen',
                 ],
             ],
 
@@ -512,8 +514,8 @@ return [
                 'add-to-cart'            => 'Toevoegen aan winkelwagen',
                 'add-to-compare'         => 'Toevoegen aan vergelijkingslijst',
                 'add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
-                'add-to-wishlist'        => 'Toevoegen aan verlanglijstje',
-                'already-in-compare'     => 'Item is al toegevoegd aan vergelijkingslijst.',
+                'add-to-wishlist'        => 'Toevoegen aan verlanglijst',
+                'already-in-compare'     => 'Dit item is al toegevoegd aan vergelijkingslijst.',
                 'new'                    => 'Nieuw',
                 'review-description'     => 'Wees de eerste om dit product te beoordelen',
                 'sale'                   => 'Uitverkoop',
@@ -726,7 +728,7 @@ return [
                 'see-details'              => 'Details bekijken',
                 'select-all'               => 'Alles selecteren',
                 'select-cart-item'         => 'Selecteer winkelwagenitem',
-                'tax'                      => 'Belasting',
+                'tax'                      => 'BTW',
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
@@ -760,7 +762,7 @@ return [
                 'sub-total-excl-tax'        => 'Subtotaal (Excl. BTW)',
                 'sub-total-incl-tax'        => 'Subtotaal (Incl. BTW)',
                 'sub-total'                 => 'Subtotaal',
-                'tax'                       => 'Belasting',
+                'tax'                       => 'BTW',
 
                 'estimate-shipping' => [
                     'country'        => 'Land',
@@ -830,7 +832,7 @@ return [
                 'sub-total-excl-tax'        => 'Subtotaal (Excl. BTW)',
                 'sub-total-incl-tax'        => 'Subtotaal (Incl. BTW)',
                 'sub-total'                 => 'Subtotaal',
-                'tax'                       => 'Belasting',
+                'tax'                       => 'BTW',
             ],
         ],
 
@@ -871,7 +873,10 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
+            'categories-carousel' => 'Categorieën Carrousel',
+            'image-carousel'      => 'Afbeeldingen Carrousel',
+            'offer'               => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'product-carousel'    => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
@@ -881,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Volgende pagina',
             'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
+            'prev-page'          => 'Vorige pagina',
         ],
     ],
 

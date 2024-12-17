@@ -111,14 +111,14 @@
 
     <div
         class="flex justify-between text-right"
-        v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
+        v-if="cart.discount_amount && parseFloat(cart.discount_amount) > 0"
     >
         <p class="text-base max-sm:text-sm">
             @lang('shop::app.checkout.onepage.summary.discount-amount')
         </p>
 
         <p class="text-base font-medium max-sm:text-sm">
-            @{{ cart.formatted_base_discount_amount }}
+            @{{ cart.formatted_discount_amount }}
         </p>
     </div>
 
@@ -130,7 +130,6 @@
     @include('shop::checkout.coupon')
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.after') !!}
-    
 
     <!-- Shipping Rates -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
@@ -242,7 +241,6 @@
     </div>
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.after') !!}
-    
 
     <!-- Cart Grand Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.before') !!}

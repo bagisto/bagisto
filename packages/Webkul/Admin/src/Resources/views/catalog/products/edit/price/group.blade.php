@@ -1,4 +1,4 @@
-<!-- Seperator -->
+<!-- Separator -->
 <span class="absolute my-1.5 block w-full border border-gray-200 ltr:left-0 rtl:right-0"></span>
 
 <v-product-customer-group-price>
@@ -225,23 +225,22 @@
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Modal Submission -->
                             <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="button"
+                                <!-- Delete Button -->
+                                <x-admin::button
+                                    button-type="button"
                                     class="cursor-pointer whitespace-nowrap rounded-md border-2 border-transparent px-3 py-1.5 font-semibold text-red-600 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
-                                    @click="remove"
+                                    :title="trans('admin::app.catalog.products.edit.price.group.create.delete-btn')"
                                     v-if="selectedPrice.id"
-                                >
-                                    @lang('admin::app.catalog.products.edit.price.group.create.delete-btn')
-                                </button>
+                                    @click="remove"
+                                />
 
-                                <button 
-                                    type="submit"
+                                <!-- Save Button -->
+                                <x-admin::button
+                                    button-type="button"
                                     class="primary-button"
-                                >
-                                    @lang('admin::app.catalog.products.edit.price.group.create.save-btn')
-                                </button>
+                                    :title="trans('admin::app.catalog.products.edit.price.group.create.save-btn')"
+                                />
                             </div>
                         </x-slot>
                     </x-admin::modal>

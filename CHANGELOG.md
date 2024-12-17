@@ -2,6 +2,76 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.2.3 (27th of September 2024)** - *Release*
+
+* #10033 [Enhancement] Loader must be added when we create any product, sitemap etc, in the submit button. So that we cannot click them. Single Entry must pass.
+
+* #10072 [Enhancement] Add Footer Text to Invoice PDF.
+
+* #10022 [Fixed] [CMS MODULE] Admin Not Working on Clean Install.
+
+* #10030 [Fixed] A UI issue appears when two modals overlap each other. This occurs when the AI Image Generator is enabled.
+
+* #10080 [Fixed] not work after installation if password contains character #.
+
+* #10082 [Fixed] Getting ? Symbol rather than ₹ (Indian rupee currency in invoice).
+
+* #10094 [Fixed] Remove the state mandatory in the tax rates configuration.
+
+* #10096 [Fixed] In the condition of the cart rule and catalog rule section, float value is not accepted for weight, height, etc.
+
+* #10103 [Fixed] Issue with Language and Channel Mix-up in Admin Product Form.
+
+* #10128 [Fixed] If Automatically generate the invoice after placing status field is disabled then Set the invoice status after creating the invoice to field should be disable on the payment method configuration.
+
+## **v2.2.2 (11th of July 2024)** - *Release*
+
+* Fixed installer issue.
+
+* #9972 [improvements] - The new reviews display system does not make sense
+
+* #9963 [fixed] - When creating a product, getting console error in Number Validation when attribute created. 
+
+* #9971 [fixed] - Images are not changing in mobile view in configurable product according to the Color swatch what is selected. 
+
+* #9976 [fixed] - Added missing CSS classes for dark themes.
+
+* #9980 [fixed] - Fix the translation issue on the error page.
+
+* #9970 [fixed] - Fixed CMS page email send status issue on Update. 
+
+* #9987 [fixed] - Fixed data grid issue save filter button issue.
+
+* #9988 [fixed] - Fixed cart page exception. 
+
+* #9989 [fixed] - Fixed buy-now button issue.
+
+* #9990 [fixed] - Dark Mode UI issue is appearing in Import stock, Import Section where validate is processed. 
+
+* #9990 [fixed] - Fix notification icons for dark theme.
+
+
+## **v2.2.1 (24th of June 2024)** - *Release*
+
+* #9955 [fixed] - Cart Rule -> Category is not being retained even after we have selected and saved it.
+
+* #9960 [fixed] - Disabled filterable and add category_id filter to product carousel.
+
+* #9948 [fixed] - few fixes in CLI Installer.
+
+* #9958 [fixed] - Update summary.blade.php.
+
+* #9957 [fixed] - Prevent Template Injection.
+
+* #9950 [fixed] - Fixed multiselect issue.
+
+* #9944 [fixed] - 🐛 Fixed Cart page issue.
+
+* #9945 [fixed] - Updated customers orders view render events.
+
+* #9946 [fixed] - Improve timezone selection during cli install.
+
+
 ## **v2.2.0 (19th of June 2024)** - *Release*
 
 ### Datagrid Improvements

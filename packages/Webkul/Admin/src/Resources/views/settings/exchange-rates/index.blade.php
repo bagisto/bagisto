@@ -226,14 +226,14 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.settings.exchange-rates.index.create.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.settings.exchange-rates.index.create.save-btn')"
+                                ::loading="isLoading"
+                                ::disabled="isLoading"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -252,6 +252,8 @@
                         selectedExchangeRates: 0,
 
                         currencies: @json($currencies),
+
+                        isLoading: false,
                     }
                 },
 
@@ -273,6 +275,8 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors }) {
+                        this.isLoading = true;
+
                         let formData = new FormData(this.$refs.exchangeRateCreateForm);
 
                         if (params.id) {
@@ -281,6 +285,8 @@
 
                         this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", formData)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$refs.exchangeRateUpdateOrCreateModal.close();
@@ -290,6 +296,8 @@
                                 resetForm();
                             })
                             .catch(error => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }

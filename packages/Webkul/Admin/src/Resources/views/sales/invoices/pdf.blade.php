@@ -5,23 +5,44 @@
 >
     <head>
         <!-- meta tags -->
-        <meta http-equiv="Cache-control" content="no-cache">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+            http-equiv="Cache-control"
+            content="no-cache"
+        >
+
+        <meta
+            http-equiv="Content-Type"
+            content="text/html; charset=utf-8"
+        />
 
         @php
             $fontPath = [];
-            
-            $fontFamily = [
-                'regular' => 'Arial, sans-serif',
-                'bold'    => 'Arial, sans-serif',
-            ];
 
-            if (in_array(app()->getLocale(), ['ar', 'he', 'fa', 'tr', 'ru', 'uk'])) {
+            // Get the default locale code.
+            $getLocale = app()->getLocale();
+
+            // Get the current currency code.
+            $currencyCode = core()->getBaseCurrencyCode();
+
+            if ($getLocale == 'en' && $currencyCode == 'INR') {
                 $fontFamily = [
                     'regular' => 'DejaVu Sans',
                     'bold'    => 'DejaVu Sans',
                 ];
-            } elseif (app()->getLocale() == 'zh_CN') {
+            }  else {
+                $fontFamily = [
+                    'regular' => 'Arial, sans-serif',
+                    'bold'    => 'Arial, sans-serif',
+                ];
+            }
+
+
+            if (in_array($getLocale, ['ar', 'he', 'fa', 'tr', 'ru', 'uk'])) {
+                $fontFamily = [
+                    'regular' => 'DejaVu Sans',
+                    'bold'    => 'DejaVu Sans',
+                ];
+            } elseif ($getLocale == 'zh_CN') {
                 $fontPath = [
                     'regular' => asset('fonts/NotoSansSC-Regular.ttf'),
                     'bold'    => asset('fonts/NotoSansSC-Bold.ttf'),
@@ -31,7 +52,7 @@
                     'regular' => 'Noto Sans SC',
                     'bold'    => 'Noto Sans SC Bold',
                 ];
-            } elseif (app()->getLocale() == 'ja') {
+            } elseif ($getLocale == 'ja') {
                 $fontPath = [
                     'regular' => asset('fonts/NotoSansJP-Regular.ttf'),
                     'bold'    => asset('fonts/NotoSansJP-Bold.ttf'),
@@ -41,7 +62,7 @@
                     'regular' => 'Noto Sans JP',
                     'bold'    => 'Noto Sans JP Bold',
                 ];
-            } elseif (app()->getLocale() == 'hi_IN') {
+            } elseif ($getLocale == 'hi_IN') {
                 $fontPath = [
                     'regular' => asset('fonts/Hind-Regular.ttf'),
                     'bold'    => asset('fonts/Hind-Bold.ttf'),
@@ -51,7 +72,7 @@
                     'regular' => 'Hind',
                     'bold'    => 'Hind Bold',
                 ];
-            } elseif (app()->getLocale() == 'bn') {
+            } elseif ($getLocale == 'bn') {
                 $fontPath = [
                     'regular' => asset('fonts/NotoSansBengali-Regular.ttf'),
                     'bold'    => asset('fonts/NotoSansBengali-Bold.ttf'),
@@ -61,7 +82,7 @@
                     'regular' => 'Noto Sans Bengali',
                     'bold'    => 'Noto Sans Bengali Bold',
                 ];
-            } elseif (app()->getLocale() == 'sin') {
+            } elseif ($getLocale == 'sin') {
                 $fontPath = [
                     'regular' => asset('fonts/NotoSansSinhala-Regular.ttf'),
                     'bold'    => asset('fonts/NotoSansSinhala-Bold.ttf'),
@@ -605,6 +626,13 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Footer Content -->
+                @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text'))
+                    <div>
+                        {{ core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text') }}
+                    </div>
+                @endif
             </div>
         </div>
     </body>

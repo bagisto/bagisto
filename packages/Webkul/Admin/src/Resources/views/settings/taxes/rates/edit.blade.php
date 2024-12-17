@@ -51,7 +51,7 @@
 
             {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.before', ['taxRate' => $taxRate]) !!}
 
-            <!-- Tax Rates Informations -->
+            <!-- Tax Rates Information's -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left component -->
                 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
@@ -111,14 +111,13 @@
                         <x-admin::form.control-group>
                             <!-- Country Have States -->
                             <template v-if="haveStates()">
-                                <x-admin::form.control-group.label class="required">
+                                <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.taxes.rates.edit.state')
                                 </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="state"
-                                        rules="required"
                                         value="{{ old('state') }}"
                                         v-model="state"
                                         :label="trans('admin::app.settings.taxes.rates.edit.state')"

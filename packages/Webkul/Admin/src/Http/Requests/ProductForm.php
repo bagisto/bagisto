@@ -127,7 +127,7 @@ class ProductForm extends FormRequest
                             request($attribute->code)
                         )
                     ) {
-                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
+                        $fail(trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
                     }
                 });
             }
@@ -146,8 +146,8 @@ class ProductForm extends FormRequest
     public function messages()
     {
         return [
-            'variants.*.sku.unique' => __('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
-            'videos.files.*'        => __('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
+            'variants.*.sku.unique' => trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
+            'videos.files.*'        => trans('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
         ];
     }
 

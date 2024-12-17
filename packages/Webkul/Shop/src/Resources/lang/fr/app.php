@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Ajouter des pièces jointes',
+            'index' => [
+                'add-attachments' => 'Ajouter des pièces jointes',
+                'add-image'       => 'Ajouter une image/vidéo',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Langue par défaut',
-                        'offer'          => 'Obtenez JUSQU\'À 40% DE RÉDUCTION sur votre 1ère commande',
-                        'shop-now'       => 'ACHETER MAINTENANT',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Devises',
                     'locales'    => 'Langues',
+                    'login'      => 'S\'inscrire ou Se connecter',
                 ],
             ],
 
@@ -871,9 +873,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Profitez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
+            'categories-carousel' => 'Carrousel de catégories',
+            'image-carousel'      => 'Carrousel d\'images',
+            'offer'               => 'Obtenez JUSQU\'À 40% DE RÉDUCTION sur votre 1ère commande, ACHETEZ MAINTENANT',
+            'product-carousel'    => 'Carrousel de produits',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
-            'verify-email'        => 'Vérifiez votre adresse e-mail',
+            'verify-email'        => 'Vérifiez votre compte e-mail',
         ],
 
         'thanks-for-contact' => 'Merci de nous contacter avec vos commentaires et questions. Nous vous répondrons très bientôt.',
@@ -881,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Page suivante',
             'pagination-showing' => 'Affichage de :firstItem à :lastItem sur :total entrées',
+            'prev-page'          => 'Page précédente',
         ],
     ],
 

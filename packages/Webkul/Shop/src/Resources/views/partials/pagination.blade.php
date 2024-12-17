@@ -18,13 +18,12 @@
                         <a 
                             href="{{ urldecode($paginator->previousPageUrl()) }}" 
                             class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 font-medium leading-normal hover:bg-gray-100 ltr:rounded-l-lg rtl:rounded-r-lg" 
-                            aria-label="Previous Page"
+                            aria-label="{{ trans('shop::app.partials.pagination.prev-page') }}"
                         >
                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                         </a>
                     @endif
                 </li>
-
     
                 <!-- Pagination Elements -->
                 @foreach ($elements as $element) 
@@ -41,21 +40,12 @@
                     @if (is_array($element)) 
                         @foreach ($element as $page => $url) 
                             <li>
-                                @if ($page == $paginator->currentPage()) 
-                                        <a 
-                                            href="#" 
-                                            class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 bg-gray-100 text-center font-medium leading-normal text-black hover:bg-gray-100"
-                                        >
-                                        {{ $page }}
-                                        </a>
-                                @else 
-                                    <a 
-                                        href="{{ $url }}"
-                                        class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 text-center font-medium leading-normal text-black hover:bg-gray-100"
-                                    >
+                                <a 
+                                    href="{{ $paginator->currentPage() ? $url : '#' }}"
+                                    class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 text-center font-medium leading-normal text-black hover:bg-gray-100 {{ $paginator->currentPage() ? 'bg-gray-100' : '' }}"
+                                >
                                     {{ $page }}
-                                    </a>
-                                @endif 
+                                </a>
                             </li>
                         @endforeach 
                     @endif 
@@ -67,7 +57,7 @@
                         <a 
                             href="{{ urldecode($paginator->nextPageUrl()) }}" 
                             class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 font-medium leading-normal hover:bg-gray-100 ltr:rounded-r-lg rtl:rounded-l-lg" 
-                            aria-label="Next Page"
+                            aria-label="{{ trans('shop::app.partials.pagination.next-page') }}"
                         >
                             <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
                         </a>

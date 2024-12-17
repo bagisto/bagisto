@@ -12,7 +12,7 @@ trait ShopTestBench
      */
     public function loginAsCustomer(?CustomerContract $customer = null): CustomerContract
     {
-        $customer = $customer ?? (new CustomerFaker())->factory()->create();
+        $customer = $customer ?? (new CustomerFaker)->factory()->create();
 
         $this->actingAs($customer);
 

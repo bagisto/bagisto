@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
-        'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
+        'marked-success'   => 'सभी सूचनाओं को पढ़ा हुआ चिह्नित कर दिया गया है',
         'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
         'of'               => 'का',
         'per-page'         => 'प्रति पृष्ठ',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'सभी देखें',
 
         'order-status-messages' => [
+            'all'             => 'सभी',
             'canceled'        => 'ऑर्डर रद्द हो गया',
             'closed'          => 'ऑर्डर बंद हो गया',
             'completed'       => 'ऑर्डर पूरा हुआ',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'तारीख और समय',
                     'delete'              => 'हटाएं',
                     'edit'                => 'संपादित करें',
+                    'false'               => 'असत्य',
                     'file'                => 'फ़ाइल',
                     'id'                  => 'आईडी',
                     'image'               => 'छवि',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'चयन करें',
                     'text'                => 'पाठ',
                     'textarea'            => 'पाठ क्षेत्र',
+                    'true'                => 'सत्य',
                     'type'                => 'प्रकार',
                     'unique'              => 'अद्वितीय',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'लेबल',
                 'multiselect'           => 'मल्टीसेलेक्ट',
                 'no'                    => 'नहीं',
-                'number'                => 'संख्या',
+                'numeric'               => 'संख्या',
                 'option-deleted'        => 'विकल्प सफलतापूर्वक हटा दिया गया',
                 'options'               => 'विकल्प',
                 'position'              => 'स्थिति',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'लेबल',
                 'multiselect'           => 'मल्टीसेलेक्ट',
                 'no'                    => 'नहीं',
-                'number'                => 'संख्या',
+                'numeric'               => 'संख्या',
                 'option-deleted'        => 'विकल्प सफलतापूर्वक हटा दिया गया',
                 'options'               => 'विकल्प',
                 'position'              => 'स्थिति',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'लिंग',
                     'group'          => 'समूह',
                     'id'             => 'ग्राहक आईडी',
+                    'id-value'       => 'आईडी - :id',
                     'inactive'       => 'निष्क्रिय',
                     'method-error'   => 'त्रुटि! गलत विधि का पता लगा, कृपया मास एक्शन कॉन्फ़िगरेशन की जाँच करें',
                     'name'           => 'ग्राहक का नाम',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'नया',
                 'no'                            => 'नहीं',
                 'parent-id'                     => 'मूल आईडी',
+                'category-id'                   => 'श्रेणी आईडी',
                 'preview'                       => 'पूर्वावलोकन',
                 'product-carousel'              => 'उत्पाद कैरोसल',
                 'product-carousel-description'  => 'डायनामिक और प्रतिस्थापनीय उत्पाद कैरोसल के साथ उत्पादों का सुंदर प्रदर्शन करें।',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'विकुना',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'साइटमैप विकल्प सेट करें।',
+                    'title' => 'साइटमैप',
+
+                    'settings' => [
+                        'enabled' => 'सक्रिय',
+                        'info'    => 'अपनी वेबसाइट के लिए साइटमैप को सक्रिय या निष्क्रिय करें ताकि खोज इंजन अनुकूलन में सुधार हो सके और उपयोगकर्ता अनुभव को बढ़ाया जा सके।',
+                        'title'   => 'सेटिंग्स',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'फाइल लिमिट विकल्प सेट करें।',
+                        'max-file-size'    => 'अधिकतम फ़ाइल आकार',
+                        'max-url-per-file' => 'प्रति फ़ाइल अधिकतम URL की संख्या',
+                        'title'            => 'फ़ाइल सीमाएं',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'स्टोर URL के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
+
+                        'frequency' => [
+                            'title' => 'आवृत्ति',
+
+                            'options' => [
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
+                            ],
+                        ],
+
+                        'title'    => 'स्टोर URL',
+                        'priority' => 'प्राथमिकता',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'श्रेणियों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
+
+                        'frequency' => [
+                            'title' => 'आवृत्ति',
+
+                            'options' => [
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
+                            ],
+                        ],
+
+                        'title'    => 'श्रेणियाँ',
+                        'priority' => 'प्राथमिकता',
+                    ],
+
+                    'products' => [
+                        'info'  => 'उत्पादों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
+
+                        'frequency' => [
+                            'title' => 'आवृत्ति',
+
+                            'options' => [
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
+                            ],
+                        ],
+
+                        'title'    => 'उत्पाद',
+                        'priority' => 'प्राथमिकता',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'CMS पृष्ठों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
+
+                        'frequency' => [
+                            'title' => 'आवृत्ति',
+
+                            'options' => [
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
+                            ],
+                        ],
+
+                        'title'    => 'CMS पृष्ठ',
+                        'priority' => 'प्राथमिकता',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'कैटलॉग',
 
                 'products' => [
-                    'info'  => 'मेहमान चेकआउट, उत्पाद देखें पृष्ठ, कार्ट देखें पृष्ठ, स्टोर फ्रंट, समीक्षा और विशेषता सामाजिक साझा करें।',
+                    'info'  => 'उत्पाद दृश्य पृष्ठ, कार्ट दृश्य पृष्ठ, स्टोर फ्रंट, समीक्षा और विशेषता सामाजिक साझाकरण।',
                     'title' => 'उत्पाद',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'ग्राहक समीक्षा की अनुमति दें',
-                        'allow-guest-review'    => 'मेहमान समीक्षा की अनुमति दें',
-                        'title'                 => 'समीक्षा',
-                        'title-info'            => 'किसी चीज का मूल्यांकन या मूल्यांकन, अक्सर राय और प्रतिक्रिया को शामिल करता है।',
+                        'allow-customer-review'   => 'ग्राहक समीक्षा की अनुमति दें',
+                        'allow-guest-review'      => 'मेहमान समीक्षा की अनुमति दें',
+                        'censoring-reviewer-name' => 'समीक्षक का नाम सेंसर करें',
+                        'display-review-count'    => 'रेटिंग के लिए समीक्षा संख्या प्रदर्शित करें।',
+                        'display-star-count'      => 'रेटिंग में स्टार गिनती प्रदर्शित करें।',
+                        'summary'                 => 'सारांश',
+                        'title'                   => 'समीक्षा',
+                        'title-info'              => 'किसी चीज का मूल्यांकन या मूल्यांकन, अक्सर राय और प्रतिक्रिया को शामिल करता है।',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'फूटर टेक्स्ट',
+                        'footer-text-info' => 'वह पाठ दर्ज करें जो PDF के पाद लेख में दिखाई देगा।',
                         'info'             => 'चालान हेडर में चालान आईडी, आदेश आईडी और चालान लोगो को प्रदर्शित करने के लिए पीडीएफ प्रिंट आउट को कॉन्फ़िगर करें।',
                         'invoice-id-info'  => 'चालान हेडर में चालान आईडी को कॉन्फ़िगर करें।',
                         'invoice-id-title' => 'हेडर में चालान आईडी प्रदर्शित करें',
                         'logo'             => 'लोगो',
+                        'logo-info'        => 'छवि की रेज़ोल्यूशन 131px X 30px होनी चाहिए।',
                         'order-id-info'    => 'चालान हेडर में आदेश आईडी को कॉन्फ़िगर करें।',
                         'order-id-title'   => 'हेडर में आदेश आईडी प्रदर्शित करें',
                         'title'            => 'पीडीएफ प्रिंट आउट',
@@ -3994,34 +4108,34 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info'  => 'Enable or Disable Mini Cart, cart Summary.',
+                    'info'  => 'अतिथि चेकआउट सेट करें, मिनी कार्ट सक्षम या अक्षम करें, कार्ट सारांश।',
 
                     'shopping-cart' => [
-                        'cart-page'              => 'Cart Page',
-                        'cart-page-info'         => 'Control Cart Page visibility to enhance user shopping experience.',
-                        'cross-sell'             => 'Cross sell Products',
-                        'cross-sell-info'        => 'Enable cross-sell products to boost additional sales opportunities.',
-                        'estimate-shipping'      => 'Estimated Shipping',
-                        'estimate-shipping-info' => 'Enable estimated shipping to provide upfront shipping costs.',
-                        'guest-checkout'         => 'Allow guest checkout',
-                        'guest-checkout-info'    => 'Enable guest checkout for a faster, hassle-free purchase process.',
-                        'info'                   => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
-                        'title'                  => 'Shopping Cart',
+                        'cart-page'              => 'कार्ट पेज',
+                        'cart-page-info'         => 'उपयोगकर्ता की खरीदारी अनुभव को बेहतर बनाने के लिए कार्ट पेज की दृश्यता नियंत्रित करें।',
+                        'cross-sell'             => 'क्रॉस सेल उत्पाद',
+                        'cross-sell-info'        => 'अतिरिक्त बिक्री के अवसर बढ़ाने के लिए क्रॉस सेल उत्पाद सक्षम करें।',
+                        'estimate-shipping'      => 'अनुमानित शिपिंग',
+                        'estimate-shipping-info' => 'शिपिंग लागत पहले से देने के लिए अनुमानित शिपिंग सक्षम करें।',
+                        'guest-checkout'         => 'अतिथि चेकआउट की अनुमति दें',
+                        'guest-checkout-info'    => 'अतिथि चेकआउट को सक्षम करें ताकि तेजी से और परेशानी रहित खरीद प्रक्रिया हो सके।',
+                        'info'                   => 'उपयोगकर्ता की सुविधा बढ़ाने और बिक्री बढ़ाने के लिए अतिथि चेकआउट, कार्ट पेज, क्रॉस सेल उत्पाद और अनुमानित शिपिंग को सक्षम करें।',
+                        'title'                  => 'शॉपिंग कार्ट',
                     ],
 
                     'my-cart' => [
-                        'display-item-quantities' => 'Display item quantities',
-                        'display-number-in-cart'  => 'Display number of items in cart',
-                        'info'                    => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
-                        'summary'                 => 'Summary',
-                        'title'                   => 'My Cart',
+                        'display-item-quantities' => 'आइटम की मात्रा प्रदर्शित करें',
+                        'display-number-in-cart'  => 'कार्ट में आइटम की संख्या प्रदर्शित करें',
+                        'info'                    => 'आइटम की मात्रा का सारांश दिखाने और कार्ट में कुल आइटम की संख्या प्रदर्शित करने के लिए "माई कार्ट" सेटिंग्स सक्षम करें, जिससे ट्रैकिंग आसान हो सके।',
+                        'summary'                 => 'सारांश',
+                        'title'                   => 'माई कार्ट',
                     ],
 
                     'mini-cart' => [
-                        'display-mini-cart'    => 'Display Mini Cart',
-                        'info'                 => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
-                        'mini-cart-offer-info' => 'Mini Cart Offer Information',
-                        'title'                => 'Mini Cart',
+                        'display-mini-cart'    => 'मिनी कार्ट प्रदर्शित करें',
+                        'info'                 => 'मिनी कार्ट और मिनी कार्ट ऑफर जानकारी प्रदर्शित करने के लिए मिनी कार्ट सेटिंग्स सक्षम करें, जिससे कार्ट विवरण और प्रचारों तक त्वरित पहुंच हो सके।',
+                        'mini-cart-offer-info' => 'मिनी कार्ट ऑफर जानकारी',
+                        'title'                => 'मिनी कार्ट',
                     ],
                 ],
             ],

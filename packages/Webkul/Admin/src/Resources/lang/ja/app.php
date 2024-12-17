@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'すべての通知をリストアップ',
-        'marked-success'   => 'お知らせが正常にマークされました',
+        'marked-success'   => 'すべての通知が既読としてマークされました',
         'no-record'        => '記録が見つかりません',
         'of'               => 'の',
         'per-page'         => 'ページごと',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'すべて表示',
 
         'order-status-messages' => [
+            'all'             => 'すべて',
             'canceled'        => '注文キャンセル',
             'closed'          => '注文終了',
             'completed'       => '注文完了',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => '日付と時刻',
                     'delete'              => '削除',
                     'edit'                => '編集',
+                    'false'               => '偽',
                     'file'                => 'ファイル',
                     'id'                  => 'ID',
                     'image'               => '画像',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => '選択',
                     'text'                => 'テキスト',
                     'textarea'            => 'テキストエリア',
+                    'true'                => '真',
                     'type'                => 'タイプ',
                     'unique'              => 'ユニーク',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'ラベル',
                 'multiselect'           => 'マルチセレクト',
                 'no'                    => 'いいえ',
-                'number'                => '数値',
+                'numeric'               => '数値',
                 'option-deleted'        => 'オプションが正常に削除されました',
                 'options'               => 'オプション',
                 'position'              => '位置',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'ラベル',
                 'multiselect'           => 'マルチセレクト',
                 'no'                    => 'いいえ',
-                'number'                => '数値',
+                'numeric'               => '数値',
                 'option-deleted'        => 'オプションが正常に削除されました',
                 'options'               => 'オプション',
                 'position'              => '位置',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => '性別',
                     'group'          => 'グループ',
                     'id'             => '顧客ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => '非アクティブ',
                     'method-error'   => 'エラー！誤ったメソッドが検出されました。マスアクションの構成を確認してください',
                     'name'           => '顧客名',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => '新しい',
                 'no'                            => 'いいえ',
                 'parent-id'                     => '親ID',
+                'category-id'                   => 'カテゴリID',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'ビクーニャ',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'サイトマップのオプションを設定します。',
+                    'title' => 'サイトマップ',
+
+                    'settings' => [
+                        'enabled' => '有効',
+                        'info'    => 'サイトマップを有効または無効にして、検索エンジン最適化を改善し、ユーザーエクスペリエンスを向上させます。',
+                        'title'   => '設定',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'ファイル制限オプションを設定します。',
+                        'max-file-size'    => '最大ファイルサイズ',
+                        'max-url-per-file' => 'ファイルあたりの最大URL数',
+                        'title'            => 'ファイル制限',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'ストアURLの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'ストアURL',
+                        'priority' => '優先順位',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'カテゴリーの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'カテゴリー',
+                        'priority' => '優先順位',
+                    ],
+
+                    'products' => [
+                        'info'  => '製品の頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => '製品',
+                        'priority' => '優先順位',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'CMSページの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'CMSページ',
+                        'priority' => '優先順位',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'カタログ',
 
                 'products' => [
-                    'info'  => 'ゲストチェックアウト、製品ビューページ、カートビューページ、ストアフロント、レビュー、属性のソーシャルシェアを設定します。',
+                    'info'  => '製品表示ページ、カート表示ページ、店舗フロント、レビューおよび属性のソーシャル共有。',
                     'title' => '製品',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => '顧客レビューを許可する',
-                        'allow-guest-review'    => 'ゲストレビューを許可する',
-                        'title'                 => 'レビュー',
-                        'title-info'            => '何かを評価または評価することで、しばしば意見やフィードバックが含まれます。',
+                        'allow-customer-review'   => '顧客レビューを許可する',
+                        'allow-guest-review'      => 'ゲストレビューを許可する',
+                        'censoring-reviewer-name' => 'レビュアー名の検閲',
+                        'display-review-count'    => '評価のレビュー数を表示します。',
+                        'display-star-count'      => '評価に星の数を表示します。',
+                        'summary'                 => 'まとめ',
+                        'title'                   => 'レビュー',
+                        'title-info'              => '何かを評価または評価することで、しばしば意見やフィードバックが含まれます。',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'フッターテキスト',
+                        'footer-text-info' => 'PDFのフッターに表示されるテキストを入力してください。',
                         'info'             => 'PDF印刷アウトを設定して、ヘッダーに請求書ID、注文IDを表示し、請求書のロゴを含めます。',
                         'invoice-id-info'  => '請求書ヘッダーに請求書IDを表示するように設定します。',
                         'invoice-id-title' => 'ヘッダーに請求書IDを表示',
                         'logo'             => 'ロゴ',
+                        'logo-info'        => '画像の解像度は131px x 30pxであるべきです。',
                         'order-id-info'    => '請求書ヘッダーに注文IDを表示するように設定します。',
                         'order-id-title'   => 'ヘッダーに注文IDを表示',
                         'title'            => 'PDF印刷アウト',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'チェックアウト',
-                    'info'  => 'ミニカート、カートの概要の有効化または無効化。',
+                    'info'  => 'ゲストチェックアウトを設定、ミニカートを有効または無効にする、カートの概要。',
 
                     'shopping-cart' => [
                         'cart-page'              => 'カートページ',

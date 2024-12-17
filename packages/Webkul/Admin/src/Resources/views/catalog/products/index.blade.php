@@ -129,7 +129,7 @@
 
             <template v-else>
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 gap-1.5 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-for="record in available.records"
                 >
                     <!-- Name, SKU, Attribute Family Columns -->
@@ -151,7 +151,7 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ record.name }}
                             </p>
 
@@ -369,7 +369,7 @@
                                         <x-admin::form.control-group.error control-name="sku" />
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
+                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.after') !!}
                                 </div>
 
                                 <div v-show="attributes.length">
@@ -401,29 +401,30 @@
                                         </div>
                                     </div>
 
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
+                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.after') !!}
                                 </div>
                             </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <!-- Modal Submission -->
                                 <div class="flex items-center gap-x-2.5">
-                                    <button
-                                        type="button"
+                                    <!-- Back Button -->
+                                    <x-admin::button
+                                        button-type="button"
                                         class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
+                                        :title="trans('admin::app.catalog.products.index.create.back-btn')"
                                         v-if="attributes.length"
                                         @click="attributes = []"
-                                    >
-                                        @lang('admin::app.catalog.products.index.create.back-btn')
-                                    </button>
+                                    />
 
-                                    <button
-                                        type="submit"
+                                    <!-- Save Button -->
+                                    <x-admin::button
+                                        button-type="button"
                                         class="primary-button"
-                                    >
-                                        @lang('admin::app.catalog.products.index.create.save-btn')
-                                    </button>
+                                        :title="trans('admin::app.catalog.products.index.create.save-btn')"
+                                        ::loading="isLoading"
+                                        ::disabled="isLoading"
+                                    />
                                 </div>
                             </x-slot>
                         </x-admin::modal>
@@ -440,12 +441,16 @@
                     return {
                         attributes: [],
 
-                        superAttributes: {}
+                        superAttributes: {},
+
+                        isLoading: false,
                     };
                 },
 
                 methods: {
                     create(params, { resetForm, resetField, setErrors }) {
+                        this.isLoading = true;
+
                         this.attributes.forEach(attribute => {
                             params.super_attributes ||= {};
 
@@ -454,6 +459,8 @@
 
                         this.$axios.post("{{ route('admin.catalog.products.store') }}", params)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 if (response.data.data.redirect_url) {
                                     window.location.href = response.data.data.redirect_url;
                                 } else {
@@ -463,6 +470,8 @@
                                 }
                             })
                             .catch(error => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }

@@ -121,7 +121,7 @@
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
-                                v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
+                                v-slugify-target:{{$currentLocale->code.'[slug]'}}="setValues"
                             />
                         </v-field>
 
@@ -145,8 +145,7 @@
                                     :items="json_encode($categories)"
                                     :value="json_encode($category->parent_id)"
                                     :fallback-locale="config('app.fallback_locale')"
-                                >
-                                </x-admin::tree.view>
+                                />
                             </div>
                         </div>
                     @endif
@@ -225,13 +224,13 @@
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
-                <!-- SEO Deatils -->
+                <!-- SEO Details -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo/>
 
                     <div class="mt-8">
@@ -274,11 +273,13 @@
                                     class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
-                                    v-slugify-target:slug
+                                    v-slugify-target:{{$currentLocale->code.'[slug]'}}
                                 />
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[slug]" />
+
+                            <x-admin::form.control-group.error control-name="{{$currentLocale->code}}.slug" />
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
@@ -340,7 +341,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                rules="required"
+                                rules="required|integer"
                                 :value="old('position') ?: $category->position"
                                 :label="trans('admin::app.catalog.categories.edit.position')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.enter-position')"
@@ -422,7 +423,7 @@
                         </p>
                     </x-slot>
 
-                    @php $selectedaAtributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
+                    @php $selectedAttributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
@@ -435,7 +436,7 @@
                                     :value="$attribute->id"
                                     :for="$attribute->name ?? $attribute->admin_name"
                                     :label="trans('admin::app.catalog.categories.edit.filterable-attributes')"
-                                    :checked="in_array($attribute->id, $selectedaAtributes)"
+                                    :checked="in_array($attribute->id, $selectedAttributes)"
                                 />
 
                                 <label

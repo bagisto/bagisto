@@ -57,7 +57,7 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code()],
+            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name'    => 'required',
             'type'          => 'required',
             'default_value' => 'integer',
@@ -183,17 +183,23 @@ class AttributeController extends Controller
             }
         }
 
-        foreach ($indices as $index) {
-            Event::dispatch('catalog.attribute.delete.before', $index);
+        try {
+            foreach ($indices as $index) {
+                Event::dispatch('catalog.attribute.delete.before', $index);
 
-            $this->attributeRepository->delete($index);
+                $this->attributeRepository->delete($index);
 
-            Event::dispatch('catalog.attribute.delete.after', $index);
+                Event::dispatch('catalog.attribute.delete.after', $index);
+            }
+
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.attributes.index.datagrid.mass-delete-success'),
+            ]);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.attributes.delete-failed'),
+            ], 500);
         }
-
-        return new JsonResponse([
-            'message' => trans('admin::app.catalog.attributes.index.datagrid.mass-delete-success'),
-        ]);
     }
 
     /**

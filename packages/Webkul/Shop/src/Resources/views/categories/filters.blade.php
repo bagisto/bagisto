@@ -1,8 +1,8 @@
-{!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
+{!! view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
-<!-- Desktop Filters Naviation -->
+<!-- Desktop Filters Navigation -->
 <div v-if="! isMobile">
-    <!-- Filters Vue Compoment -->
+    <!-- Filters Vue Component -->
     <v-filters
         @filter-applied="setFilters('filter', $event)"
         @filter-clear="clearFilters('filter', $event)"
@@ -12,7 +12,7 @@
     </v-filters>
 </div>
 
-<!-- Mobile Filters Naviation -->
+<!-- Mobile Filters Navigation -->
 <div
     class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
     v-if="isMobile"
@@ -53,7 +53,7 @@
 
         <!-- Drawer Content -->
         <x-slot:content>
-            <!-- Filters Vue Compoment -->
+            <!-- Filters Vue Component -->
             <v-filters
                 @filter-applied="setFilters('filter', $event)"
                 @filter-clear="clearFilters('filter', $event)"
@@ -64,7 +64,7 @@
         </x-slot>
     </x-shop::drawer>
 
-    <!-- Seperator -->
+    <!-- Separator -->
     <span class="h-5 w-0.5 bg-zinc-200"></span>
 
     <!-- Sort Drawer -->
@@ -101,7 +101,7 @@
     </x-shop::drawer>
 </div>
 
-{!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
+{!! view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
     <!-- Filters Vue template -->
@@ -116,7 +116,7 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
+            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:ltr:pr-7 md:rtl:pl-7">
                 <!-- Filters Header Container -->
                 <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
                     <p class="text-lg font-semibold max-sm:font-medium">

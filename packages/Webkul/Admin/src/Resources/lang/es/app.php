@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Listar todas las notificaciones',
-        'marked-success'   => 'Notificación Marcada Exitosamente',
+        'marked-success'   => 'Todas las notificaciones han sido marcadas como leídas',
         'no-record'        => 'No se Encontraron Registros',
         'of'               => 'de',
         'per-page'         => 'Por página',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Ver Todas',
 
         'order-status-messages' => [
+            'all'             => 'Todos',
             'canceled'        => 'Pedido Cancelado',
             'closed'          => 'Pedido Cerrado',
             'completed'       => 'Pedido Completado',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Fecha y hora',
                     'delete'              => 'Eliminar',
                     'edit'                => 'Editar',
+                    'false'               => 'Falso',
                     'file'                => 'Archivo',
                     'id'                  => 'ID',
                     'image'               => 'Imagen',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Seleccionar',
                     'text'                => 'Texto',
                     'textarea'            => 'Área de texto',
+                    'true'                => 'Verdadero',
                     'type'                => 'Tipo',
                     'unique'              => 'Único',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'Etiqueta',
                 'multiselect'           => 'Selección Múltiple',
                 'no'                    => 'No',
-                'number'                => 'Número',
+                'numeric'               => 'Número',
                 'option-deleted'        => 'Opción eliminada exitosamente',
                 'options'               => 'Opciones',
                 'position'              => 'Posición',
@@ -1176,7 +1179,7 @@ return [
                 'label'                  => 'Etiqueta',
                 'multiselect'            => 'Selección Múltiple',
                 'no'                     => 'No',
-                'number'                 => 'Número',
+                'numeric'                => 'Número',
                 'option-deleted'         => 'Opción eliminada exitosamente',
                 'options'                => 'Opciones',
                 'position'               => 'Posición',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Género',
                     'group'          => 'Grupo',
                     'id'             => 'ID de Cliente',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactivo',
                     'method-error'   => '¡Error! Método incorrecto detectado, por favor revisa la configuración de la acción masiva',
                     'name'           => 'Nombre del Cliente',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Nuevo',
                 'no'                            => 'No',
                 'parent-id'                     => 'ID del Padre',
+                'category-id'                   => 'ID de categoría',
                 'preview'                       => 'Vista Previa',
                 'product-carousel'              => 'Carrusel de Productos',
                 'product-carousel-description'  => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuña',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Configurar opciones del mapa del sitio.',
+                    'title' => 'Mapa del Sitio',
+
+                    'settings' => [
+                        'enabled' => 'Habilitado',
+                        'info'    => 'Habilitar o deshabilitar el mapa del sitio para su sitio web para mejorar la optimización de motores de búsqueda y mejorar la experiencia del usuario.',
+                        'title'   => 'Configuraciones',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Configurar opciones de límites de archivo.',
+                        'max-file-size'    => 'Tamaño máximo de archivo',
+                        'max-url-per-file' => 'Número máximo de URLs por archivo',
+                        'title'            => 'Límites de Archivo',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Configurar opción de frecuencia y prioridad para la URL de la tienda.',
+
+                        'frequency' => [
+                            'title' => 'Frecuencia',
+
+                            'options' => [
+                                'always'  => 'Siempre',
+                                'daily'   => 'Diariamente',
+                                'hourly'  => 'Cada hora',
+                                'monthly' => 'Mensualmente',
+                                'never'   => 'Nunca',
+                                'weekly'  => 'Semanalmente',
+                                'yearly'  => 'Anualmente',
+                            ],
+                        ],
+
+                        'title'    => 'URL de la Tienda',
+                        'priority' => 'Prioridad',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Configurar opción de frecuencia y prioridad para las categorías.',
+
+                        'frequency' => [
+                            'title' => 'Frecuencia',
+
+                            'options' => [
+                                'always'  => 'Siempre',
+                                'daily'   => 'Diariamente',
+                                'hourly'  => 'Cada hora',
+                                'monthly' => 'Mensualmente',
+                                'never'   => 'Nunca',
+                                'weekly'  => 'Semanalmente',
+                                'yearly'  => 'Anualmente',
+                            ],
+                        ],
+
+                        'title'    => 'Categorías',
+                        'priority' => 'Prioridad',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Configurar opción de frecuencia y prioridad para los productos.',
+
+                        'frequency' => [
+                            'title' => 'Frecuencia',
+
+                            'options' => [
+                                'always'  => 'Siempre',
+                                'daily'   => 'Diariamente',
+                                'hourly'  => 'Cada hora',
+                                'monthly' => 'Mensualmente',
+                                'never'   => 'Nunca',
+                                'weekly'  => 'Semanalmente',
+                                'yearly'  => 'Anualmente',
+                            ],
+                        ],
+
+                        'title'    => 'Productos',
+                        'priority' => 'Prioridad',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Configurar opción de frecuencia y prioridad para las páginas CMS.',
+
+                        'frequency' => [
+                            'title' => 'Frecuencia',
+
+                            'options' => [
+                                'always'  => 'Siempre',
+                                'daily'   => 'Diariamente',
+                                'hourly'  => 'Cada hora',
+                                'monthly' => 'Mensualmente',
+                                'never'   => 'Nunca',
+                                'weekly'  => 'Semanalmente',
+                                'yearly'  => 'Anualmente',
+                            ],
+                        ],
+
+                        'title'    => 'Páginas CMS',
+                        'priority' => 'Prioridad',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Catálogo',
 
                 'products' => [
-                    'info'  => 'Configurar el pago de invitados, página de vista de producto, página de carrito, tienda en línea, reseñas y compartir en redes sociales de atributos.',
+                    'info'  => 'Página de vista del producto, página de vista del carrito, escaparate, revisión y compartir atributos en redes sociales.',
                     'title' => 'Productos',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Permitir reseñas de clientes',
-                        'allow-guest-review'    => 'Permitir reseñas de invitados',
-                        'title'                 => 'Reseña',
-                        'title-info'            => 'Evaluación o valoración de algo, a menudo involucrando opiniones y comentarios.',
+                        'allow-customer-review'   => 'Permitir reseñas de clientes',
+                        'allow-guest-review'      => 'Permitir reseñas de invitados',
+                        'censoring-reviewer-name' => 'Censurar Nombre del Reseñador',
+                        'display-review-count'    => 'Muestra el recuento de reseñas para las calificaciones.',
+                        'display-star-count'      => 'Muestra el recuento de estrellas en las calificaciones.',
+                        'summary'                 => 'Resumen',
+                        'title'                   => 'Reseña',
+                        'title-info'              => 'Evaluación o valoración de algo, a menudo involucrando opiniones y comentarios.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Texto de pie de página',
+                        'footer-text-info' => 'Introduce el texto que aparecerá en el pie de página del PDF.',
                         'info'             => 'Configurar las impresiones en PDF para mostrar el ID de la factura, el ID del pedido en el encabezado e incluir el logotipo de la factura.',
                         'invoice-id-info'  => 'Configurar la visualización del ID de la factura en el encabezado de la factura.',
                         'invoice-id-title' => 'Mostrar ID de factura en el encabezado',
                         'logo'             => 'Logotipo',
+                        'logo-info'        => 'La resolución de la imagen debe ser de 131px X 30px.',
                         'order-id-info'    => 'Configurar la visualización del ID del pedido en el encabezado de la factura.',
                         'order-id-title'   => 'Mostrar ID de pedido en el encabezado',
                         'title'            => 'Impresiones en PDF',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Finalizar compra',
-                    'info'  => 'Habilitar o deshabilitar el mini carrito, el resumen del carrito.',
+                    'info'  => 'Configurar pago como invitado, habilitar o deshabilitar el carrito mini, resumen del carrito.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Página del carrito',

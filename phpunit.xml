@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="vendor/autoload.php"
     colors="true"
 >
     <testsuites>
         <!-- Admin package testsuites. -->
         <testsuite name="Admin Feature Test">
-            <directory suffix="Test.php">./packages/Webkul/Admin/tests/Feature</directory>
+            <directory suffix="Test.php">packages/Webkul/Admin/tests/Feature</directory>
         </testsuite>
 
         <!-- Core package testsuites. -->
         <testsuite name="Core Unit Test">
-            <directory suffix="Test.php">./packages/Webkul/Core/tests/Unit</directory>
+            <directory suffix="Test.php">packages/Webkul/Core/tests/Unit</directory>
         </testsuite>
 
         <!-- DataGrid package testsuites. -->
         <testsuite name="DataGrid Unit Test">
-            <directory suffix="Test.php">./packages/Webkul/DataGrid/tests/Unit</directory>
+            <directory suffix="Test.php">packages/Webkul/DataGrid/tests/Unit</directory>
         </testsuite>
 
         <!-- Shop package testsuites. -->
         <testsuite name="Shop Feature Test">
-            <directory suffix="Test.php">./packages/Webkul/Shop/tests/Feature</directory>
+            <directory suffix="Test.php">packages/Webkul/Shop/tests/Feature</directory>
         </testsuite>
     </testsuites>
 
     <source>
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory>app</directory>
+
+            <directory>packages</directory>
         </include>
     </source>
 
     <php>
         <env name="APP_ENV" value="testing"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
+        <env name="CACHE_STORE" value="array"/>
         <env name="MAIL_MAILER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
     </php>

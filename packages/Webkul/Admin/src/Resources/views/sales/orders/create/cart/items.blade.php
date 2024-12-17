@@ -122,7 +122,7 @@
                                 >
                                     <!-- Details Toggler -->
                                     <p
-                                        class="flex cursor-pointer items-center gap-1 text-sm"
+                                        class="flex cursor-pointer items-center gap-1 text-sm text-gray-800 dark:text-white"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('admin::app.sales.orders.create.cart.items.see-details')
@@ -138,11 +138,11 @@
                                         v-show="item.option_show"
                                     >
                                         <div v-for="option in item.options">
-                                            <p class="text-sm text-gray-600">
+                                            <p class="text-sm text-gray-600 dark:text-white">
                                                 @{{ option.attribute_name + ':' }}
                                             </p>
 
-                                            <p class="text-sm font-medium text-gray-800">
+                                            <p class="text-sm font-medium text-gray-800 dark:text-white">
                                                 @{{ option.option_label }}
                                             </p>
                                         </div>
@@ -420,7 +420,8 @@
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
                             params: {
-                                query: this.searchTerm
+                                query: this.searchTerm,
+                                customer_id: this.cart.customer_id
                             }
                         })
                         .then(function(response) {

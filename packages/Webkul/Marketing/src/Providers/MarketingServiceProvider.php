@@ -9,6 +9,18 @@ use Webkul\Marketing\Console\Commands\EmailsCommand;
 class MarketingServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([EmailsCommand::class]);
+        }
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -22,17 +34,5 @@ class MarketingServiceProvider extends ServiceProvider
         });
 
         $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([EmailsCommand::class]);
-        }
     }
 }

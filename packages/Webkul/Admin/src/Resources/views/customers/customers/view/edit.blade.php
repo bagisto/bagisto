@@ -140,6 +140,7 @@
                                 <x-admin::form.control-group.error control-name="date_of_birth" />
                             </x-admin::form.control-group>
                         </div>
+
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Gender -->
                             <x-admin::form.control-group class="w-full">
@@ -243,12 +244,13 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
+                        <!-- Save Button -->
                         <x-admin::button
                             button-type="submit"
                             class="primary-button justify-center"
                             :title="trans('admin::app.customers.customers.view.edit.save-btn')"
-                            ::loading="isUpdating"
-                            ::disabled="isUpdating"
+                            ::loading="isLoading"
+                            ::disabled="isLoading"
                         />
                     </x-slot>
                 </x-admin::modal>
@@ -270,13 +272,13 @@
                 return {
                     groups: @json($groups),
 
-                    isUpdating: false,
+                    isLoading: false,
                 };
             },
 
             methods: {
                 edit(params, {resetForm, setErrors}) {
-                    this.isUpdating = true;
+                    this.isLoading = true;
 
                     let formData = new FormData(this.$refs.customerEditForm);
 
@@ -290,12 +292,12 @@
 
                             resetForm();
 
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             this.$refs.customerEditModal.close();
                         })
                         .catch(error => {
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);

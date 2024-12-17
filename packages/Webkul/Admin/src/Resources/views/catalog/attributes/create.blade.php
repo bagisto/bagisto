@@ -207,7 +207,7 @@
                                                 @lang('admin::app.catalog.attributes.create.admin-name')
                                             </x-admin::table.th>
 
-                                            <!-- Loacles tables heading -->
+                                            <!-- Locales tables heading -->
                                             @foreach ($locales as $locale)
                                                 <x-admin::table.th>
                                                     {{ $locale->name . ' (' . $locale->code . ')' }}
@@ -475,7 +475,7 @@
                                     @change="inputValidation=true"
                                 >
                                     <!-- Here! All Needed types are defined -->
-                                    @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                    @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
                                         <option value="{{ $type }}">
                                             @lang('admin::app.catalog.attributes.create.' . $type)
                                         </option>
@@ -584,7 +584,7 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                            <!-- Use to create configuable product -->
+                            <!-- Use to create configurable product -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -602,7 +602,7 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                                <!-- Visible On Product View Page On Fornt End -->
+                                <!-- Visible On Product View Page On Front End -->
                                 <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
@@ -639,20 +639,18 @@
                             </x-admin::form.control-group>
 
                             <!-- Use in Layered -->
-                            <div class="!mb-0 flex items-center gap-2.5">
-                                <input
+                            <x-admin::form.control-group
+                                class="!mb-2 flex select-none items-center gap-2.5"
+                                ::class="{ 'opacity-70' : isFilterableDisabled }"
+                            >
+                                <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_filterable"
-                                    class="peer hidden"
                                     name="is_filterable"
                                     value="1"
-                                    :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
-                                        || attributeType == 'select' || attributeType == 'multiselect'
-                                        ? false : true
-                                    "
+                                    for="is_filterable"
+                                    ::disabled="isFilterableDisabled"
                                 />
-
-                                <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
@@ -660,7 +658,7 @@
                                 >
                                     @lang('admin::app.catalog.attributes.create.is-filterable')
                                 </label>
-                            </div>
+                            </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
                 </div>
@@ -684,14 +682,14 @@
                         @toggle="listenModal"
                         ref="addOptionsRow"
                     >
-                        <!-- Modal Header !-->
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot>
 
-                        <!-- Modal Content !-->
+                        <!-- Modal Content -->
                         <x-slot:content>
                             <div
                                 class="grid"
@@ -749,7 +747,7 @@
                                 />
 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="mb-2.5 w-full">
+                                <x-admin::form.control-group class="!mb-2.5 w-full">
                                     <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
@@ -767,7 +765,7 @@
 
                                 <!-- Locales Input -->
                                 @foreach ($locales as $locale)
-                                    <x-admin::form.control-group class="mb-2.5 w-full">
+                                    <x-admin::form.control-group class="!mb-2.5 w-full">
                                         <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
@@ -786,14 +784,14 @@
                             </div>
                         </x-slot>
 
-                        <!-- Modal Footer !-->
+                        <!-- Modal Footer -->
                         <x-slot:footer>
-                            <button
-                                type="submit"
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
                                 class="primary-button"
-                            >
-                                @lang('admin::app.catalog.attributes.create.option.save-btn')
-                            </button>
+                                :title="trans('admin::app.catalog.attributes.create.option.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -832,6 +830,14 @@
                             }
                         ],
                     }
+                },
+
+                computed: {
+                    isFilterableDisabled() {
+                        return this.attributeType == 'price' || this.attributeType == 'checkbox'
+                            || this.attributeType == 'select' || this.attributeType == 'multiselect'
+                            ? false : true;
+                    },
                 },
 
                 methods: {
@@ -908,7 +914,7 @@
 
                         dataTransfer.items.add(event.swatch_value);
 
-                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        // use set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
                             this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
 

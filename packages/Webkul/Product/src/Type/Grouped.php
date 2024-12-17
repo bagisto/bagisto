@@ -208,6 +208,10 @@ class Grouped extends AbstractType
 
             $product = $this->productRepository->find($productId);
 
+            if ($product->type !== 'simple') {
+                return trans('product::app.checkout.cart.selected-products-simple');
+            }
+
             $cartProducts = $product->getTypeInstance()->prepareForCart([
                 'product_id' => $productId,
                 'quantity'   => $qty,
@@ -237,5 +241,29 @@ class Grouped extends AbstractType
     public function getPriceIndexer()
     {
         return app(GroupedIndexer::class);
+    }
+
+    /**
+     * Returns validation rules.
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            'links' => 'array',
+            'links' => function ($attribute, $value, $fail) {
+                $associatedProductIds = collect($value)->pluck('associated_product_id')->toArray();
+
+                $products = $this->productRepository->findWhereIn('id', $associatedProductIds)
+                    ->pluck('type')
+                    ->filter(fn ($type) => $type !== 'simple')
+                    ->count();
+
+                if ($products) {
+                    $fail(trans('product::app.checkout.cart.selected-products-simple'));
+                }
+            },
+        ];
     }
 }

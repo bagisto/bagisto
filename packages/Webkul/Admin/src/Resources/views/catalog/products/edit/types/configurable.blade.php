@@ -146,15 +146,12 @@
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Modal Submission -->
-                            <div class="flex items-center gap-x-2.5">
-                                <button 
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.catalog.products.edit.types.configurable.create.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.catalog.products.edit.types.configurable.create.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -338,6 +335,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
+                                                        value="0"
                                                         class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
@@ -841,6 +839,16 @@
                             </span>
                         </p>
                     </div>
+
+                    <!-- Error message for price attribute -->
+                    <v-error-message
+                        :name="'variants[' + variant.id + '].price'"
+                        v-slot="{ message }"
+                    >
+                        <p class="mt-1 text-xs italic text-red-600">
+                            @{{ message }}
+                        </p>
+                    </v-error-message>
                 </div>
             </div>
 
@@ -1482,14 +1490,16 @@
 
             created() {
                 let inventories = {};
-                
-                if (Array.isArray(this.variant.inventories)) {
-                    this.variant.inventories.forEach((inventory) => {
-                        inventories[inventory.inventory_source_id] = inventory.qty;
-                    });
 
-                    this.variant.inventories = inventories; 
-                }
+                this.inventorySources.forEach((source) => {
+                    const inventory = Array.isArray(this.variant.inventories)
+                        ? this.variant.inventories.find(inventory => inventory.inventory_source_id === source.id)
+                        : null;
+
+                    inventories[source.id] = inventory ? (inventory.qty || 0) : 0;
+                });
+
+                this.variant.inventories = inventories;
             },
 
             mounted() {
@@ -1507,7 +1517,7 @@
                     let totalQty = 0;
 
                     for (let key in this.variant.inventories) {
-                        totalQty += parseInt(this.variant.inventories[key]);
+                        totalQty += parseInt(this.variant.inventories[key]) || 0;
                     }
 
                     return totalQty;

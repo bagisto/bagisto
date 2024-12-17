@@ -775,9 +775,9 @@ abstract class AbstractType
                 'total_incl_tax'      => $convertedPrice * $data['quantity'],
                 'base_total'          => $price * $data['quantity'],
                 'base_total_incl_tax' => $price * $data['quantity'],
-                'weight'              => $this->product->weight ?? 0,
-                'total_weight'        => ($this->product->weight ?? 0) * $data['quantity'],
-                'base_total_weight'   => ($this->product->weight ?? 0) * $data['quantity'],
+                'weight'              => (float) ($this->product->weight ?? 0),
+                'total_weight'        => (float) ($this->product->weight ?? 0) * $data['quantity'],
+                'base_total_weight'   => (float) ($this->product->weight ?? 0) * $data['quantity'],
                 'type'                => $this->product->type,
                 'additional'          => $this->getAdditionalOptions($data),
             ],
@@ -880,7 +880,7 @@ abstract class AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $validation = new CartItemValidationResult();
+        $validation = new CartItemValidationResult;
 
         if ($this->isCartItemInactive($item)) {
             $validation->itemIsInactive();

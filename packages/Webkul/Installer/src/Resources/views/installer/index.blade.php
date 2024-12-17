@@ -65,6 +65,7 @@
             'ARS' => 'argentine-peso',
             'AUD' => 'australian-dollar',
             'BDT' => 'bangladeshi-taka',
+            'BHD' => 'bahraini-dinar',
             'BRL' => 'brazilian-real',
             'CAD' => 'canadian-dollar',
             'CHF' => 'swiss-franc',
@@ -233,7 +234,7 @@
 
                                     <p>@lang('installer::app.installer.index.ready-for-installation.title')</p>
                                 </div>
-                                
+
                                 <!-- Create Sample Product -->
                                 <div :class="[stepStates.createSampleProducts == 'active' ? 'font-bold' : '']">
                                     <template v-if="stepStates.createSampleProducts !== 'complete'">
@@ -249,7 +250,7 @@
                                     </template>
 
                                     <p>@lang('installer::app.installer.index.sample-products.title')</p>
-                                </div> 
+                                </div>
 
                                 <!-- Create Admin Configuration -->
                                 <div :class="[stepStates.createAdmin == 'active' ? 'font-bold' : '']">
@@ -371,7 +372,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="flex items-center justify-end px-4 py-3">
                                 <button
                                     type="button"
@@ -386,9 +387,9 @@
                     </x-installer::form>
                 </div>
 
-                <!-- Systme Requirements -->
+                <!-- System Requirements -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"   
+                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'systemRequirements'"
                 >
                     <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -491,14 +492,6 @@
                                             selected
                                         >
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
-                                        </option>
-
-                                        <option value="pgsql">
-                                            @lang('installer::app.installer.index.environment-configuration.pgsql')
-                                        </option>
-
-                                        <option value="sqlsrv">
-                                            @lang('installer::app.installer.index.environment-configuration.sqlsrv')
                                         </option>
                                     </x-installer::form.control-group.control>
 
@@ -852,7 +845,7 @@
                                         <x-installer::form.control-group.label class="required">
                                             @lang('installer::app.installer.index.environment-configuration.default-locale')
                                         </x-installer::form.control-group.label>
-    
+
                                         <x-installer::form.control-group.control
                                             type="select"
                                             name="app_locale"
@@ -867,7 +860,7 @@
                                                 </option>
                                             @endforeach
                                         </x-installer::form.control-group.control>
-    
+
                                         <x-installer::form.control-group.error control-name="app_locale" />
                                     </x-installer::form.control-group>
 
@@ -886,14 +879,14 @@
                                             :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                         >
                                             <option value="" disabled>Select Currencies</option>
-    
+
                                             @foreach ($currencies as $value => $label)
                                                 <option value="{{ $value }}" @if($value == 'USD') selected @endif>
                                                     @lang("installer::app.installer.index.environment-configuration.$label")
                                                 </option>
                                             @endforeach
                                         </x-installer::form.control-group.control>
-    
+
                                         <x-installer::form.control-group.error control-name="app_currency" />
                                     </x-installer::form.control-group>
                                 </div>
@@ -943,7 +936,7 @@
                                         <x-installer::form.control-group.label class="required">
                                             @lang('installer::app.installer.index.environment-configuration.allowed-currencies')
                                         </x-installer::form.control-group.label>
-    
+
                                         @foreach ($currencies as $key => $currency)
                                             <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-1">
                                                 @php
@@ -1009,7 +1002,7 @@
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
                                 <p class="text-xl font-bold text-gray-800">
-                                    @lang('installer::app.installer.index.sample-products.title') 
+                                    @lang('installer::app.installer.index.sample-products.title')
                                 </p>
                             </div>
 
@@ -1018,7 +1011,7 @@
                                 <x-admin::form.control-group.label>
                                     @lang("installer::app.installer.index.sample-products.sample-products")
                                 </x-admin::form.control-group.label>
-                            
+
                                 <x-installer::form.control-group.control
                                     type="select"
                                     id="sample_products"
@@ -1029,12 +1022,12 @@
                                     <option value="1">
                                         @lang('installer::app.installer.index.sample-products.yes')
                                     </option>
-                            
+
                                     <option value="0">
                                         @lang('installer::app.installer.index.sample-products.no')
                                     </option>
                                 </x-installer::form.control-group.control>
-                            
+
                                 <a
                                     href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
                                     download="products.csv"
@@ -1125,7 +1118,7 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="password"
-                                        rules="required"
+                                        rules="required|min:6"
                                         :value="old('password')"
                                         :label="trans('installer::app.installer.index.create-administrator.password')"
                                     />
@@ -1335,7 +1328,7 @@
 
                                 systemRequirements: () => {
                                     this.completeStep('systemRequirements', 'envDatabase', 'active', 'complete');
-                                    
+
                                     this.currentStep = 'envDatabase';
                                 },
 
@@ -1458,7 +1451,7 @@
                                 this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
 
                                 this.currentStep = 'createAdmin';
-                            }    
+                            }
                         },
 
                         saveAdmin(params, setErrors) {

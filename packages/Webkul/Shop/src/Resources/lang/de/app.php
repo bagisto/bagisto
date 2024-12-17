@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Anhänge hinzufügen',
+            'index' => [
+                'add-attachments' => 'Anhänge hinzufügen',
+                'add-image'       => 'Bild/Video hinzufügen',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standardsprache',
-                        'offer'          => 'Erhalten Sie bis zu 40% Rabatt auf Ihre erste Bestellung',
-                        'shop-now'       => 'JETZT KAUFEN',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Währungen',
                     'locales'    => 'Sprachen',
+                    'login'      => 'Registrieren oder Einloggen',
                 ],
             ],
 
@@ -871,9 +873,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
+            'categories-carousel' => 'Kategorien-Karussell',
+            'image-carousel'      => 'Bilder-Karussell',
+            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre erste Bestellung, JETZT einkaufen',
+            'product-carousel'    => 'Produkt-Karussell',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+            'verify-email'        => 'Bestätigen Sie Ihr E-Mail-Konto',
         ],
 
         'thanks-for-contact' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden Ihnen sehr bald antworten.',
@@ -881,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Nächste Seite',
             'pagination-showing' => 'Zeige :firstItem bis :lastItem von insgesamt :total Einträgen',
+            'prev-page'          => 'Vorherige Seite',
         ],
     ],
 

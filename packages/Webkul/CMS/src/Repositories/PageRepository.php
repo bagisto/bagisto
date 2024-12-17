@@ -52,7 +52,7 @@ class PageRepository extends Repository
 
         $data[$locale]['html_content'] = str_replace('=&gt;', '=>', $data[$locale]['html_content']);
 
-        parent::update($data, $id);
+        $page = parent::update($data, $id);
 
         $page->channels()->sync($data['channels']);
 

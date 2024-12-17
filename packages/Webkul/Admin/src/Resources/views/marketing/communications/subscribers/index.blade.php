@@ -163,14 +163,14 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex items-center gap-x-2.5">
-                                    <button
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.marketing.communications.subscribers.index.edit.save-btn')
-                                    </button>
-                                </div>
+                                <!-- Save Button -->
+                                <x-admin::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    :title="trans('admin::app.marketing.communications.subscribers.index.edit.save-btn')"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
                             </x-slot>
                         </x-admin::modal>
                     </form>
@@ -185,6 +185,8 @@
                 data() {
                     return {
                         selectedSubscriber: {},
+
+                        isLoading: false,
                     }
                 },
 
@@ -206,12 +208,16 @@
 
                 methods: {
                     update(params, { resetForm, setErrors  }) {
+                        this.isLoading = true;
+
                         let formData = new FormData(this.$refs.subscriberCreateForm);
 
                         formData.append('_method', 'put');
 
                         this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", formData)
                         .then((response) => {
+                            this.isLoading = false;
+
                             this.$refs.groupCreateModal.close();
 
                             this.$refs.datagrid.get();
@@ -221,6 +227,8 @@
                             resetForm();
                         })
                         .catch(error => {
+                            this.isLoading = false;
+
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }

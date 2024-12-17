@@ -41,11 +41,7 @@ class CatalogRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        $data = array_merge($data, [
-            'starts_from' => $data['starts_from'] ?? null,
-            'ends_till'   => $data['ends_till'] ?? null,
-            'status'      => isset($data['status']),
-        ]);
+        $data = $this->transformFormData($data);
 
         $catalogRule = parent::create($data);
 
@@ -64,12 +60,7 @@ class CatalogRuleRepository extends Repository
      */
     public function update(array $data, $id)
     {
-        $data = array_merge($data, [
-            'starts_from' => $data['starts_from'] ?? null,
-            'ends_till'   => $data['ends_till'] ?? null,
-            'status'      => isset($data['status']),
-            'conditions'  => $data['conditions'] ?? [],
-        ]);
+        $data = $this->transformFormData($data);
 
         $catalogRule = $this->find($id);
 
@@ -80,6 +71,20 @@ class CatalogRuleRepository extends Repository
         $catalogRule->customer_groups()->sync($data['customer_groups']);
 
         return $catalogRule;
+    }
+
+    /**
+     * Transform form data.
+     */
+    public function transformFormData(array $data): array
+    {
+        return [
+            ...$data,
+            'starts_from' => ! empty($data['starts_from']) ? $data['starts_from'] : null,
+            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till'] : null,
+            'status'      => isset($data['status']),
+            'conditions'  => $data['conditions'] ?? [],
+        ];
     }
 
     /**

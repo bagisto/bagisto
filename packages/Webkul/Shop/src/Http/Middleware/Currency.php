@@ -22,20 +22,19 @@ class Currency
      */
     public function handle($request, Closure $next)
     {
-        if ($currencyCode = request()->get('currency')) {
-            if ($this->currencyRepository->findOneByField('code', $currencyCode)) {
-                core()->setCurrentCurrency($currencyCode);
+        $currencies = core()->getCurrentChannel()->currencies->pluck('code')->toArray();
+        $currencyCode = core()->getRequestedLocaleCode('currency', false);
 
-                session()->put('currency', $currencyCode);
-            }
-        } else {
-            if ($currencyCode = session()->get('currency')) {
-                core()->setCurrentCurrency($currencyCode);
-            } else {
-                core()->setCurrentCurrency(core()->getChannelBaseCurrencyCode());
-            }
+        if (! $currencyCode || ! in_array($currencyCode, $currencies)) {
+            $currencyCode = session()->get('currency');
         }
 
+        if (! $currencyCode || ! in_array($currencyCode, $currencies)) {
+            $currencyCode = core()->getCurrentChannel()->base_currency->code;
+        }
+
+        core()->setCurrentCurrency($currencyCode);
+        session()->put('currency', $currencyCode);
         unset($request['currency']);
 
         return $next($request);

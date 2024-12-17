@@ -38,13 +38,23 @@
                 <!-- Product Ratings -->
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
-                <x-shop::products.ratings
-                    class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-1.5 max-sm:!py-0.5 ltr:left-1.5 rtl:right-1.5"
-                    ::average="product.ratings.average"
-                    ::total="product.ratings.total"
-                    ::rating="false"
-                    v-if="product.ratings.total"
-                />
+                @if (core()->getConfigData('catalog.products.review.summary') == 'star_counts')
+                    <x-shop::products.ratings
+                        class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-1.5 max-sm:!py-0.5 ltr:left-1.5 rtl:right-1.5"
+                        ::average="product.ratings.average"
+                        ::total="product.ratings.total"
+                        ::rating="false"
+                        v-if="product.ratings.total"
+                    />
+                @else
+                    <x-shop::products.ratings
+                        class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-1.5 max-sm:!py-0.5 ltr:left-1.5 rtl:right-1.5"
+                        ::average="product.ratings.average"
+                        ::total="product.reviews.total"
+                        ::rating="false"
+                        v-if="product.reviews.total"
+                    />
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
 
@@ -106,8 +116,8 @@
             <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-md:relative max-md:mt-0 max-md:translate-y-0 max-md:gap-0 max-md:px-0 max-md:py-1.5 max-sm:min-w-[170px] max-sm:max-w-[192px]">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
-                    
-                <p class="text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:whitespace-break-spaces max-md:leading-6 max-sm:max-w-[192px] max-sm:text-sm max-sm:leading-4">
+
+                <p class="break-all text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:whitespace-break-spaces max-md:leading-6 max-sm:max-w-[192px] max-sm:text-sm max-sm:leading-4">
                     @{{ product.name }}
                 </p>
 
@@ -122,7 +132,7 @@
                 >
                 </div>
 
-                {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
                 <!-- Product Actions Section -->
                 <div class="action-items flex items-center justify-between opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 max-md:hidden">
@@ -139,7 +149,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
                     @endif
-                    
+
                     {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
                     @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
@@ -277,8 +287,6 @@
                     </span>
                 </div>
 
-                {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
-
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
                 <p class="text-sm text-zinc-500">
@@ -289,11 +297,19 @@
                     </template>
 
                     <template v-else>
-                        <x-shop::products.ratings
-                            ::average="product.ratings.average"
-                            ::total="product.ratings.total"
-                            ::rating="false"
-                        />
+                        @if (core()->getConfigData('catalog.products.review.summary') == 'star_counts')
+                            <x-shop::products.ratings
+                                ::average="product.ratings.average"
+                                ::total="product.ratings.total"
+                                ::rating="false"
+                            />
+                        @else
+                            <x-shop::products.ratings
+                                ::average="product.ratings.average"
+                                ::total="product.reviews.total"
+                                ::rating="false"
+                            />
+                        @endif
                     </template>
                 </p>
 

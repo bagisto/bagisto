@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Tüm Bildirimleri Listele',
-        'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
+        'marked-success'   => 'Tüm bildirimler okundu olarak işaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
         'of'               => 'of',
         'per-page'         => 'Sayfa Başına',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
+            'all'             => 'Tümü',
             'canceled'        => 'Sipariş İptal Edildi',
             'closed'          => 'Sipariş Kapatıldı',
             'completed'       => 'Sipariş Tamamlandı',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Tarih Zaman',
                     'delete'              => 'Sil',
                     'edit'                => 'Düzenle',
+                    'false'               => 'Yanlış',
                     'file'                => 'Dosya',
                     'id'                  => 'Kimlik',
                     'image'               => 'Resim',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Seçiniz',
                     'text'                => 'Metin',
                     'textarea'            => 'Metin Alanı',
+                    'true'                => 'Doğru',
                     'type'                => 'Tür',
                     'unique'              => 'Benzersiz',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'Etiket',
                 'multiselect'           => 'Çoklu Seçim',
                 'no'                    => 'Hayır',
-                'number'                => 'Sayı',
+                'numeric'               => 'Sayı',
                 'option-deleted'        => 'Seçenek başarıyla silindi',
                 'options'               => 'Seçenekler',
                 'position'              => 'Konum',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'Etiket',
                 'multiselect'           => 'Çoklu Seçim',
                 'no'                    => 'Hayır',
-                'number'                => 'Sayı',
+                'numeric'               => 'Sayı',
                 'option-deleted'        => 'Seçenek başarıyla silindi',
                 'options'               => 'Seçenekler',
                 'position'              => 'Konum',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Cinsiyet',
                     'group'          => 'Grup',
                     'id'             => 'Müşteri ID',
+                    'id-value'       => 'Kimlik - :id',
                     'inactive'       => 'Pasif',
                     'method-error'   => 'Hata! Yanlış yöntem algılandı, lütfen kitlesel eylem yapılandırmasını kontrol edin',
                     'name'           => 'Müşteri Adı',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Yeni',
                 'no'                            => 'Hayır',
                 'parent-id'                     => 'Üst Kimlik',
+                'category-id'                   => 'Kategori Kimliği',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Site haritası seçeneklerini ayarlayın.',
+                    'title' => 'Site Haritası',
+
+                    'settings' => [
+                        'enabled' => 'Etkin',
+                        'info'    => 'Arama motoru optimizasyonunu iyileştirmek ve kullanıcı deneyimini artırmak için web siteniz için site haritasını etkinleştirin veya devre dışı bırakın.',
+                        'title'   => 'Ayarlar',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Dosya limitleri seçeneklerini ayarlayın.',
+                        'max-file-size'    => 'Maksimum dosya boyutu',
+                        'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
+                        'title'            => 'Dosya Limitleri',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Mağaza URL\'si için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Mağaza URL\'si',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Kategoriler için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Kategoriler',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Ürünler için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'Ürünler',
+                        'priority' => 'Öncelik',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'CMS sayfaları için frekans ve öncelik seçeneklerini ayarlayın.',
+
+                        'frequency' => [
+                            'title' => 'Frekans',
+
+                            'options' => [
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
+                            ],
+                        ],
+
+                        'title'    => 'CMS Sayfaları',
+                        'priority' => 'Öncelik',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Konuk ödeme, ürün görüntüleme sayfası, sepet görüntüleme sayfası, mağaza ön yüzü, inceleme ve öznitelik sosyal paylaşımını ayarlayın.',
+                    'info'  => 'Ürün görüntüleme sayfası, sepet görüntüleme sayfası, mağaza vitrini, inceleme ve özellik sosyal paylaşımı.',
                     'title' => 'Ürünler',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Müşteri İncelemesine İzin Ver',
-                        'allow-guest-review'    => 'Konuk İncelemesine İzin Ver',
-                        'title'                 => 'İnceleme',
-                        'title-info'            => 'Bir şeyin değerlendirilmesi veya değerlendirilmesi, genellikle görüşler ve geri bildirimler içeren bir değerlendirme sürecidir.',
+                        'allow-customer-review'   => 'Müşteri İncelemesine İzin Ver',
+                        'allow-guest-review'      => 'Konuk İncelemesine İzin Ver',
+                        'censoring-reviewer-name' => 'İnceleyen Adını Sansürleme',
+                        'display-review-count'    => 'Derecelendirmeler için inceleme sayısını görüntüleyin.',
+                        'display-star-count'      => 'Derecelendirmelerdeki yıldız sayısını görüntüleyin.',
+                        'summary'                 => 'Özet',
+                        'title'                   => 'İnceleme',
+                        'title-info'              => 'Bir şeyin değerlendirilmesi veya değerlendirilmesi, genellikle görüşler ve geri bildirimler içeren bir değerlendirme sürecidir.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Alt bilgi metni',
+                        'footer-text-info' => 'PDF\'nin altbilgisinde görünecek metni girin.',
                         'info'             => 'Fatura Kimliği, Sipariş Kimliği\'ni başlıkta görüntülemek ve fatura logosunu içermek için PDF Yazdırmalarını yapılandırın.',
                         'invoice-id-info'  => 'Fatura Başlığında Fatura Kimliği\'nin görüntülenmesini yapılandırın.',
                         'invoice-id-title' => 'Başlıkta Fatura Kimliği\'ni Göster',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Görüntü çözünürlüğü 131px X 30px olmalıdır.',
                         'order-id-info'    => 'Fatura Başlığında Sipariş Kimliği\'nin görüntülenmesini yapılandırın.',
                         'order-id-title'   => 'Başlıkta Sipariş Kimliği\'ni Göster',
                         'title'            => 'PDF Yazdırmaları',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Ödeme',
-                    'info'  => 'Mini Sepet, Sepet Özeti\'ni etkinleştirin veya devre dışı bırakın.',
+                    'info'  => 'Misafir ödeme ayarlarını yapın, Mini Sepeti etkinleştir veya devre dışı bırak, sepet özeti.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Sepet Sayfası',

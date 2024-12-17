@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\ServiceProvider;
-
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -106,18 +104,9 @@ return [
 
     'locale' => env('APP_LOCALE', 'en'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Application Fallback Locale
-    |--------------------------------------------------------------------------
-    |
-    | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
-    |
-    */
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    'fallback_locale' => 'en',
+    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,100 +156,32 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
-
     'cipher' => 'AES-256-CBC',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
-    |--------------------------------------------------------------------------
-    |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
-    |
-    */
+    'key' => env('APP_KEY'),
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /**
-         * Package service providers.
-         */
-        Astrotomic\Translatable\TranslatableServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Konekt\Concord\ConcordServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
-
-        /**
-         * Application service providers.
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-
-        /**
-         * Webkul package service providers.
-         */
-        Webkul\Admin\Providers\AdminServiceProvider::class,
-        Webkul\Attribute\Providers\AttributeServiceProvider::class,
-        Webkul\CartRule\Providers\CartRuleServiceProvider::class,
-        Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
-        Webkul\Category\Providers\CategoryServiceProvider::class,
-        Webkul\Checkout\Providers\CheckoutServiceProvider::class,
-        Webkul\CMS\Providers\CMSServiceProvider::class,
-        Webkul\Core\Providers\CoreServiceProvider::class,
-        Webkul\Core\Providers\EnvValidatorServiceProvider::class,
-        Webkul\Customer\Providers\CustomerServiceProvider::class,
-        Webkul\DataGrid\Providers\DataGridServiceProvider::class,
-        Webkul\DataTransfer\Providers\DataTransferServiceProvider::class,
-        Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
-        Webkul\FPC\Providers\FPCServiceProvider::class,
-        Webkul\Installer\Providers\InstallerServiceProvider::class,
-        Webkul\Inventory\Providers\InventoryServiceProvider::class,
-        Webkul\MagicAI\Providers\MagicAIServiceProvider::class,
-        Webkul\Marketing\Providers\MarketingServiceProvider::class,
-        Webkul\Notification\Providers\NotificationServiceProvider::class,
-        Webkul\Payment\Providers\PaymentServiceProvider::class,
-        Webkul\Paypal\Providers\PaypalServiceProvider::class,
-        Webkul\Product\Providers\ProductServiceProvider::class,
-        Webkul\Rule\Providers\RuleServiceProvider::class,
-        Webkul\Sales\Providers\SalesServiceProvider::class,
-        Webkul\Shipping\Providers\ShippingServiceProvider::class,
-        Webkul\Shop\Providers\ShopServiceProvider::class,
-        Webkul\Sitemap\Providers\SitemapServiceProvider::class,
-        Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
-        Webkul\SocialShare\Providers\SocialShareServiceProvider::class,
-        Webkul\Tax\Providers\TaxServiceProvider::class,
-        Webkul\Theme\Providers\ThemeServiceProvider::class,
-        Webkul\User\Providers\UserServiceProvider::class,
-    ])->toArray(),
+    'previous_keys' => [
+        ...array_filter(
+            explode(',', env('APP_PREVIOUS_KEYS', ''))
+        ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliases
+    | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | These configuration options determine the driver used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        'Captcha'      => Webkul\Customer\Facades\Captcha::class,
-        'Cart'         => Webkul\Checkout\Facades\Cart::class,
-        'Concord'      => Konekt\Concord\Facades\Concord::class,
-        'Core'         => Webkul\Core\Facades\Core::class,
-        'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
-        'Helper'       => Konekt\Concord\Facades\Helper::class,
-        'Image'        => Intervention\Image\Facades\Image::class,
-        'PDF'          => Barryvdh\DomPDF\Facade\Pdf::class,
-        'ProductImage' => Webkul\Product\Facades\ProductImage::class,
-        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
-        'Redis'        => Illuminate\Support\Facades\Redis::class,
-    ])->toArray(),
+    'maintenance' => [
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        'store'  => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
 ];

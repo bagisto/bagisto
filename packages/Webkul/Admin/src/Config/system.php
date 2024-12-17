@@ -326,6 +326,225 @@ return [
                 'locale_based'  => true,
             ],
         ],
+    ], [
+        'key'  => 'general.sitemap',
+        'name' => 'admin::app.configuration.index.general.sitemap.title',
+        'info' => 'admin::app.configuration.index.general.sitemap.info',
+        'icon' => 'settings/store.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'general.sitemap.settings',
+        'name'   => 'admin::app.configuration.index.general.sitemap.settings.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.settings.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.sitemap.settings.enabled',
+                'type'          => 'boolean',
+                'default'       => 1,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.file_limits',
+        'name'   => 'admin::app.configuration.index.general.sitemap.file-limits.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.file-limits.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'max_url_per_file',
+                'title'         => 'admin::app.configuration.index.general.sitemap.file-limits.max-url-per-file',
+                'type'          => 'text',
+                'default'       => 50000,
+                'validation'    => 'integer|min:1',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.store_url',
+        'name'   => 'admin::app.configuration.index.general.sitemap.store-url.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.store-url.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'frequency',
+                'title'         => 'admin::app.configuration.index.general.sitemap.store-url.frequency.title',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.never',
+                        'value' => 'never',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.yearly',
+                        'value' => 'yearly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.monthly',
+                        'value' => 'monthly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.weekly',
+                        'value' => 'weekly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.daily',
+                        'value' => 'daily',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.hourly',
+                        'value' => 'hourly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.store-url.frequency.options.always',
+                        'value' => 'always',
+                    ],
+                ],
+                'default'       => 'daily',
+                'channel_based' => true,
+            ],
+            [
+                'name'          => 'priority',
+                'title'         => 'admin::app.configuration.index.general.sitemap.store-url.priority',
+                'type'          => 'text',
+                'validation'    => 'decimal:1|min:0|max:1',
+                'default'       => '0.8',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.categories',
+        'name'   => 'admin::app.configuration.index.general.sitemap.categories.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.categories.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'frequency',
+                'title'         => 'admin::app.configuration.index.general.sitemap.categories.frequency.title',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.never',
+                        'value' => 'never',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.yearly',
+                        'value' => 'yearly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.monthly',
+                        'value' => 'monthly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.weekly',
+                        'value' => 'weekly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.daily',
+                        'value' => 'daily',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.hourly',
+                        'value' => 'hourly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.categories.frequency.options.always',
+                        'value' => 'always',
+                    ],
+                ],
+                'default'       => 'daily',
+                'channel_based' => true,
+            ],
+            [
+                'name'          => 'priority',
+                'title'         => 'admin::app.configuration.index.general.sitemap.categories.priority',
+                'type'          => 'text',
+                'validation'    => 'decimal:1|min:0|max:1',
+                'default'       => '0.8',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.products',
+        'name'   => 'admin::app.configuration.index.general.sitemap.products.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.products.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'frequency',
+                'title'         => 'admin::app.configuration.index.general.sitemap.products.frequency.title',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.never',
+                        'value' => 'never',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.yearly',
+                        'value' => 'yearly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.monthly',
+                        'value' => 'monthly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.weekly',
+                        'value' => 'weekly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.daily',
+                        'value' => 'daily',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.hourly',
+                        'value' => 'hourly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.products.frequency.options.always',
+                        'value' => 'always',
+                    ],
+                ],
+                'default'       => 'daily',
+                'channel_based' => true,
+            ],
+            [
+                'name'          => 'priority',
+                'title'         => 'admin::app.configuration.index.general.sitemap.products.priority',
+                'type'          => 'text',
+                'validation'    => 'decimal:1|min:0|max:1',
+                'default'       => '0.8',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.cms',
+        'name'   => 'admin::app.configuration.index.general.sitemap.cms.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.cms.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'frequency',
+                'title'         => 'admin::app.configuration.index.general.sitemap.cms.frequency.title',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.never',
+                        'value' => 'never',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.yearly',
+                        'value' => 'yearly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.monthly',
+                        'value' => 'monthly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.weekly',
+                        'value' => 'weekly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.daily',
+                        'value' => 'daily',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.hourly',
+                        'value' => 'hourly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.sitemap.cms.frequency.options.always',
+                        'value' => 'always',
+                    ],
+                ],
+                'default'       => 'daily',
+                'channel_based' => true,
+            ],
+            [
+                'name'          => 'priority',
+                'title'         => 'admin::app.configuration.index.general.sitemap.cms.priority',
+                'type'          => 'text',
+                'validation'    => 'decimal:1|min:0|max:1',
+                'default'       => '0.8',
+                'channel_based' => true,
+            ],
+        ],
     ],
 
     /**
@@ -599,6 +818,25 @@ return [
                 'title'   => 'admin::app.configuration.index.catalog.products.review.allow-customer-review',
                 'type'    => 'boolean',
                 'default' => true,
+            ], [
+                'name'    => 'censoring_reviewer_name',
+                'title'   => 'admin::app.configuration.index.catalog.products.review.censoring-reviewer-name',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'summary',
+                'title'   => 'admin::app.configuration.index.catalog.products.review.summary',
+                'type'    => 'select',
+                'default' => 'review_counts',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.review.display-star-count',
+                        'value' => 'star_counts',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.review.display-review-count',
+                        'value' => 'review_counts',
+                    ],
+                ],
             ],
         ],
     ], [
@@ -810,7 +1048,7 @@ return [
                 'name'          => 'street_lines',
                 'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
-                'validation'    => 'between:1,4',
+                'validation'    => 'between:1,4|integer',
                 'channel_based' => true,
                 'default_value' => 1,
             ],
@@ -1261,7 +1499,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
                 'type'          => 'text',
                 'depends'       => 'active:1',
-                'validation'    => 'required_if:active,1',
+                'validation'    => 'required_if:active,1|numeric',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1337,6 +1575,7 @@ return [
             ], [
                 'name'          => 'invoice_status',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
+                'depends'       => 'generate_invoice:1',
                 'validation'    => 'required_if:generate_invoice,1',
                 'type'          => 'select',
                 'options'       => [
@@ -1433,10 +1672,12 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
-                'name'    => 'invoice_status',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
-                'type'    => 'select',
-                'options' => [
+                'name'       => 'invoice_status',
+                'depends'    => 'generate_invoice:1',
+                'validation' => 'required_if:generate_invoice,1',
+                'title'      => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
+                'type'       => 'select',
+                'options'    => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
                         'value' => 'pending',
@@ -1773,7 +2014,7 @@ return [
                 'name'          => 'invoice_number_length',
                 'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.length',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'numeric|min:0|max:10',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
@@ -1827,9 +2068,17 @@ return [
             ], [
                 'name'          => 'logo',
                 'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo',
+                'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo-info',
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
+            ], [
+                'name'          => 'footer_text',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text',
+                'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text-info',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ], [

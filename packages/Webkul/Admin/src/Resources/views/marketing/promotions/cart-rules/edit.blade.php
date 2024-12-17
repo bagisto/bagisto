@@ -28,7 +28,7 @@
                     @lang('admin::app.marketing.promotions.cart-rules.edit.back-btn')
                 </a>
 
-                <!-- Save buton -->
+                <!-- Save burton -->
                 <button
                     type="button"
                     class="primary-button"
@@ -1147,7 +1147,12 @@
                         ) {
                             this.condition.operator = '{}';
 
-                            this.condition.value = [];
+                            if (
+                                ! this.condition.value 
+                                || ! Array.isArray(this.condition.value)
+                            ) {
+                                this.condition.value = [];
+                            }
                         }
 
                         return matchedAttribute;
@@ -1237,21 +1242,15 @@
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                         >
-                                            <option
-                                                value="alphanumeric"
-                                            >
+                                            <option value="alphanumeric">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.alphanumeric')
                                             </option>
 
-                                            <option
-                                                value="alphabetical"
-                                            >
+                                            <option value="alphabetical">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.alphabetical')
                                             </option>
 
-                                            <option
-                                                value="numeric"
-                                            >
+                                            <option value="numeric">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.numeric')
                                             </option>
                                         </x-admin::form.control-group.control>

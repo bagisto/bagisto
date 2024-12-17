@@ -50,7 +50,7 @@
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="flex text-base font-medium"
                             >
-                                @lang('Sign up or Login')
+                                @lang('shop::app.components.layouts.header.mobile.login')
 
                                 <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
                             </a>
@@ -58,7 +58,7 @@
 
                         @auth('customer')
                             <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
-                                <p class="font-mediums text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-zinc-500 no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
@@ -271,7 +271,7 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2 ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
@@ -408,7 +408,12 @@
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!px-0">
-                            <v-currency-switcher></v-currency-switcher>
+                            <div
+                                class="overflow-auto"
+                                :style="{ height: getCurrentScreenHeight }"
+                            >
+                                <v-currency-switcher></v-currency-switcher>
+                            </div>
                         </x-slot>
                     </x-shop::drawer>
 
@@ -452,7 +457,12 @@
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!px-0">
-                            <v-locale-switcher></v-locale-switcher>
+                            <div
+                                class="overflow-auto"
+                                :style="{ height: getCurrentScreenHeight }"
+                            >
+                                <v-locale-switcher></v-locale-switcher>
+                            </div>
                         </x-slot>
                     </x-shop::drawer>
                 </div>
@@ -472,6 +482,12 @@
 
             mounted() {
                 this.get();
+            },
+
+            computed: {
+                getCurrentScreenHeight() {
+                    return window.innerHeight - (window.innerWidth < 920 ? 61 : 0) + 'px';
+                },
             },
 
             methods: {

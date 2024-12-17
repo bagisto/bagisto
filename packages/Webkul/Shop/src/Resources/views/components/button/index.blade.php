@@ -42,7 +42,7 @@
                 </path>
             </svg>
 
-            <span class="realative h-full w-full opacity-0">
+            <span class="relative h-full w-full opacity-0">
                 @{{ title }}
             </span>
         </button>

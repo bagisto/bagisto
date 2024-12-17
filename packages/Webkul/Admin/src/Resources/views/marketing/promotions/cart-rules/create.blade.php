@@ -624,6 +624,7 @@
                         </x-slot>
 
                         <x-slot:content>
+                            <!-- Starts form -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.promotions.cart-rules.create.from')
@@ -641,6 +642,7 @@
                                 <x-admin::form.control-group.error control-name="starts_from" />
                             </x-admin::form.control-group>
 
+                            <!-- Ends Till -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.promotions.cart-rules.create.to')
@@ -765,8 +767,7 @@
                                 id-field="id"
                                 ::items='matchedAttribute.options'
                                 :fallback-locale="config('app.fallback_locale')"
-                            >
-                            </x-admin::tree.view>
+                            />
                         </div>
 
                         <div v-else>

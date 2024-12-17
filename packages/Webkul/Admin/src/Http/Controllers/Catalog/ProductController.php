@@ -15,6 +15,7 @@ use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\Http\Resources\ProductResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Rules\Slug;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -41,6 +42,7 @@ class ProductController extends Controller
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductRepository $productRepository,
+        protected CustomerRepository $customerRepository,
     ) {}
 
     /**
@@ -321,8 +323,6 @@ class ProductController extends Controller
      */
     public function search()
     {
-        $results = [];
-
         $searchEngine = 'database';
 
         if (
@@ -336,14 +336,23 @@ class ProductController extends Controller
             })->toArray();
         }
 
+        $channelId = $this->customerRepository->find(request('customer_id'))->channel_id ?? null;
+
+        $params = [
+            'index'      => $indexNames ?? null,
+            'name'       => request('query'),
+            'sort'       => 'created_at',
+            'order'      => 'desc',
+            'channel_id' => $channelId,
+        ];
+
+        if (request()->has('type')) {
+            $params['type'] = request('type');
+        }
+
         $products = $this->productRepository
             ->setSearchEngine($searchEngine)
-            ->getAll([
-                'index' => $indexNames ?? null,
-                'name'  => request('query'),
-                'sort'  => 'created_at',
-                'order' => 'desc',
-            ]);
+            ->getAll($params);
 
         return ProductResource::collection($products);
     }

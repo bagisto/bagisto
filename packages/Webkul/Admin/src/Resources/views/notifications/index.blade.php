@@ -72,7 +72,7 @@
                                 </span>
 
                                 <div class="grid">
-                                    <p  
+                                    <p
                                         class="text-gray-800 dark:text-white"
                                         :class="notification.read ? 'font-normal' : 'font-semibold'"
                                     >
@@ -153,37 +153,37 @@
                         orderType: {
                             all : {
                                 icon: 'icon',
-                                message: 'All',
+                                message: '@lang('admin::app.notifications.order-status-messages.all')',
                                 status: 'all'
                             },
 
                             pending : {
-                                icon: 'icon-information text-amber-600 bg-amber-100',
-                                message: "@lang('admin::app.notifications.order-status-messages.pending')",
+                                icon: 'icon-information bg-amber-100 text-amber-600 dark:!text-amber-600',
+                                message: '@lang('admin::app.notifications.order-status-messages.pending')',
                                 status: 'pending'
                             },
 
                             processing : {
-                                icon: 'icon-sort-right text-green-600 bg-green-100',
-                                message: "@lang('admin::app.notifications.order-status-messages.processing')",
+                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:!text-green-600',
+                                message: '@lang('admin::app.notifications.order-status-messages.processing')',
                                 status: 'processing'
                             },
 
                             canceled : {
-                                icon: 'icon-cancel-1 text-red-600 bg-red-100',
-                                message: "@lang('admin::app.notifications.order-status-messages.canceled')",
+                                icon: 'icon-cancel-1 bg-red-100 text-red-600 dark:!text-red-600',
+                                message: '@lang('admin::app.notifications.order-status-messages.canceled')',
                                 status: 'canceled'
                             },
 
                             completed : {
-                                icon: 'icon-done text-blue-600 bg-blue-100',
-                                message: "@lang('admin::app.notifications.order-status-messages.completed')",
+                                icon: 'icon-done bg-blue-100 text-blue-600 dark:!text-blue-600',
+                                message: '@lang('admin::app.notifications.order-status-messages.completed')',
                                 status: 'completed'
                             },
 
                             closed : {
-                                icon: 'icon-repeat text-red-600 bg-red-100',
-                                message: "@lang('admin::app.notifications.order-status-messages.closed')",
+                                icon: 'icon-repeat bg-red-100 text-red-600 dark:!text-red-600',
+                                message: '@lang('admin::app.notifications.order-status-messages.closed')',
                                 status: 'closed'
                             },
                         },

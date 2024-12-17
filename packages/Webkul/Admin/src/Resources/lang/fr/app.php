@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Lister toutes les notifications',
-        'marked-success'   => 'Notification marquée avec succès',
+        'marked-success'   => 'Toutes les notifications ont été marquées comme lues',
         'no-record'        => 'Aucun enregistrement trouvé',
         'of'               => 'de',
         'per-page'         => 'Par page',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Voir tout',
 
         'order-status-messages' => [
+            'all'             => 'Tout',
             'canceled'        => 'Commande annulée',
             'closed'          => 'Commande fermée',
             'completed'       => 'Commande terminée',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Date et heure',
                     'delete'              => 'Supprimer',
                     'edit'                => 'Éditer',
+                    'false'               => 'Faux',
                     'file'                => 'Fichier',
                     'id'                  => 'ID',
                     'image'               => 'Image',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Sélectionner',
                     'text'                => 'Texte',
                     'textarea'            => 'Zone de texte',
+                    'true'                => 'Vrai',
                     'type'                => 'Type',
                     'unique'              => 'Unique',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'Étiquette',
                 'multiselect'           => 'Sélection multiple',
                 'no'                    => 'Non',
-                'number'                => 'Nombre',
+                'numeric'               => 'Nombre',
                 'option-deleted'        => 'Option supprimée avec succès',
                 'options'               => 'Possibilités',
                 'position'              => 'Position',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'Étiquette',
                 'multiselect'           => 'Sélection multiple',
                 'no'                    => 'Non',
-                'number'                => 'Nombre',
+                'numeric'               => 'Nombre',
                 'option-deleted'        => 'Option supprimée avec succès',
                 'options'               => 'Possibilités',
                 'position'              => 'Position',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Genre',
                     'group'          => 'Groupe',
                     'id'             => 'Identifiant du client',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactif',
                     'method-error'   => 'Erreur ! Méthode incorrecte détectée, veuillez vérifier la configuration de l\'action de masse',
                     'name'           => 'Nom du client',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Nouveau',
                 'no'                            => 'Non',
                 'parent-id'                     => 'ID Parent',
+                'category-id'                   => 'ID de catégorie',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Configurer les options du plan du site.',
+                    'title' => 'Plan du Site',
+
+                    'settings' => [
+                        'enabled' => 'Activé',
+                        'info'    => 'Activer ou désactiver le plan du site pour votre site web afin d\'améliorer le référencement et d\'améliorer l\'expérience utilisateur.',
+                        'title'   => 'Paramètres',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Configurer les options de limites de fichier.',
+                        'max-file-size'    => 'Taille maximale du fichier',
+                        'max-url-per-file' => 'Nombre maximal d\'URL par fichier',
+                        'title'            => 'Limites de Fichier',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour l\'URL du magasin.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'URL du Magasin',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les catégories.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Catégories',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les produits.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Produits',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les pages CMS.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Pages CMS',
+                        'priority' => 'Priorité',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Catalogue',
 
                 'products' => [
-                    'info'  => 'Définissez la validation des invités, la page de visualisation du produit, la page de visualisation du panier, la vitrine du magasin, l\'avis et le partage social des attributs.',
+                    'info'  => 'Page de vue produit, page de vue panier, vitrine, avis et partage social des attributs.',
                     'title' => 'Produits',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Autoriser les avis des clients',
-                        'allow-guest-review'    => 'Autoriser les avis des invités',
-                        'title'                 => 'Avis',
-                        'title-info'            => 'Évaluation ou évaluation de quelque chose, impliquant souvent des opinions et des commentaires.',
+                        'allow-customer-review'   => 'Autoriser les avis des clients',
+                        'allow-guest-review'      => 'Autoriser les avis des invités',
+                        'censoring-reviewer-name' => 'Censurer le nom du critique',
+                        'display-review-count'    => 'Affichez le nombre d\'avis pour les notes.',
+                        'display-star-count'      => 'Affichez le nombre d\'étoiles dans les notes.',
+                        'summary'                 => 'Résumé',
+                        'title'                   => 'Avis',
+                        'title-info'              => 'Évaluation ou évaluation de quelque chose, impliquant souvent des opinions et des commentaires.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Texte de pied de page',
+                        'footer-text-info' => 'Saisissez le texte qui apparaîtra dans le pied de page du PDF.',
                         'info'             => 'Configurer les impressions PDF pour afficher l\'ID de la facture, l\'ID de la commande dans l\'en-tête et inclure le logo de la facture.',
                         'invoice-id-info'  => 'Configurer l\'affichage de l\'ID de la facture dans l\'en-tête de la facture.',
                         'invoice-id-title' => 'Afficher l\'ID de la facture dans l\'en-tête',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'La résolution de l\'image doit être de 131px x 30px.',
                         'order-id-info'    => 'Configurer l\'affichage de l\'ID de la commande dans l\'en-tête de la facture.',
                         'order-id-title'   => 'Afficher l\'ID de la commande dans l\'en-tête',
                         'title'            => 'Impressions PDF',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Validation de la commande',
-                    'info'  => 'Activer ou désactiver le mini panier, le résumé du panier.',
+                    'info'  => 'Définir le paiement en tant qu\'invité, activer ou désactiver le mini-panier, résumé du panier.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Page du panier',

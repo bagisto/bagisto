@@ -1,6 +1,6 @@
 <v-datagrid-export {{ $attributes }}>
     <div class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-        <span class="icon-export text-xl text-gray-600"></span>
+        <span class="icon-admin-export text-xl text-gray-600"></span>
 
         @lang('admin::app.export.export')
     </div>
@@ -13,20 +13,23 @@
     >
         <div>
             <x-admin::modal ref="exportModal">
+                <!-- Modal Toggler -->
                 <x-slot:toggle>
                     <button class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-                        <span class="icon-export text-xl text-gray-600"></span>
+                        <span class="icon-admin-export text-xl text-gray-600"></span>
 
                         @lang('admin::app.export.export')
                     </button>
                 </x-slot>
 
+                <!-- Modal Header -->
                 <x-slot:header>
                     <p class="text-lg font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.export.download')
                     </p>
                 </x-slot>
 
+                <!-- Modal Content -->
                 <x-slot:content>
                     <x-admin::form action="">
                         <x-admin::form.control-group class="!mb-0">
@@ -51,14 +54,15 @@
                     </x-admin::form>
                 </x-slot>
 
+                <!-- Modal Footer -->
                 <x-slot:footer>
-                    <button
-                        type="button"
+                    <!-- Save Button -->
+                    <x-admin::button
+                        button-type="button"
                         class="primary-button"
+                        :title="trans('admin::app.export.export')"
                         @click="download"
-                    >
-                        @lang('admin::app.export.export')
-                    </button>
+                    />
                 </x-slot>
             </x-admin::modal>
         </div>
@@ -100,7 +104,11 @@
                  * @param {object} data - Object containing available and applied properties.
                  * @returns {void}
                  */
-                updateProperties({ available, applied }) {
+                updateProperties({ src, available, applied }) {
+                    if (this.src !== src) {
+                        return;
+                    }
+
                     this.available = available;
 
                     this.applied = applied;
@@ -147,11 +155,26 @@
                                 const url = window.URL.createObjectURL(new Blob([response.data]));
 
                                 /**
+                                 * Extracting filename from content-disposition header.
+                                 */
+                                let filename = `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`;
+
+                                const contentDisposition = response.headers['content-disposition'];
+
+                                if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                                    const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+
+                                    if (filenameMatch != null && filenameMatch[1]) {
+                                        filename = filenameMatch[1].replace(/['"]/g, '');
+                                    }
+                                }
+
+                                /**
                                  * Link generation.
                                  */
                                 const link = document.createElement('a');
                                 link.href = url;
-                                link.setAttribute('download', `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`);
+                                link.setAttribute('download', filename);
 
                                 /**
                                  * Adding a link to a document, clicking on the link, and then removing the link.

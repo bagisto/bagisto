@@ -2,43 +2,26 @@
 
 namespace Webkul\Checkout\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Checkout\Facades\Cart;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     */
-    public function boot(): void
-    {
-        include __DIR__.'/../Http/helpers.php';
-
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
-
-        $this->app->register(EventServiceProvider::class);
-
-        $this->app->register(ModuleServiceProvider::class);
-    }
-
     /**
      * Register services.
      */
     public function register(): void
     {
-        $this->registerFacades();
+        include __DIR__.'/../Http/helpers.php';
     }
 
     /**
-     * Register cart as a singleton.
+     * Bootstrap services.
      */
-    protected function registerFacades(): void
+    public function boot(): void
     {
-        $loader = AliasLoader::getInstance();
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $loader->alias('cart', Cart::class);
-
-        $this->app->singleton('cart', \Webkul\Checkout\Cart::class);
+        $this->app->register(EventServiceProvider::class);
+        $this->app->register(ModuleServiceProvider::class);
     }
 }

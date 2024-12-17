@@ -102,10 +102,10 @@
                         <x-shop::form.control-group.error control-name="message" />
                     </x-shop::form.control-group>
 
-                    <!-- Recaptcha -->
+                    <!-- Re captcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="mb-5 flex">
-                            {!! Captcha::render() !!}
+                            {!! \Webkul\Customer\Facades\Captcha::render() !!}
                         </div>
                     @endif
 
@@ -124,6 +124,6 @@
     </div>
 
     @push('scripts')
-        {!! Captcha::renderJS() !!}
+        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
     @endpush
 </x-shop::layouts>

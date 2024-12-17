@@ -54,6 +54,7 @@
                 <x-shop::form :action="route('shop.customers.forgot_password.store')">
                     {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
+                    <!-- Email -->
                     <x-shop::form.control-group class="max-sm:mb-1.5">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
@@ -78,7 +79,7 @@
 
                     <div>
 
-                        {!! Captcha::render() !!}
+                        {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
                     </div>
 
@@ -118,7 +119,7 @@
 
     @push('scripts')
 
-        {!! Captcha::renderJS() !!}
+        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
 
     @endpush
 </x-shop::layouts>

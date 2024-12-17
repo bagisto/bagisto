@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Adicionar Anexos',
+            'index' => [
+                'add-attachments' => 'Adicionar Anexos',
+                'add-image'       => 'Adicionar Imagem/Vídeo',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Idioma padrão',
-                        'offer'          => 'Obtenha ATÉ 40% DE DESCONTO no seu 1º pedido',
-                        'shop-now'       => 'COMPRAR AGORA',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Moedas',
                     'locales'    => 'Localizações',
+                    'login'      => 'Inscrever-se ou Entrar',
                 ],
             ],
 
@@ -871,8 +873,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'GANHE ATÉ 40% DE DESCONTO no seu 1º pedido. COMPRE AGORA',
-            'resend-verify-email' => 'Reenviar E-mail de Verificação',
+            'categories-carousel' => 'Carrossel de Categorias',
+            'image-carousel'      => 'Carrossel de Imagens',
+            'offer'               => 'Ganhe ATÉ 40% DE DESCONTO no seu 1º pedido, COMPRE AGORA',
+            'product-carousel'    => 'Carrossel de Produtos',
+            'resend-verify-email' => 'Reenviar e-mail de verificação',
             'verify-email'        => 'Verifique sua conta de e-mail',
         ],
 
@@ -881,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Próxima página',
             'pagination-showing' => 'Mostrando :firstItem a :lastItem de :total entradas',
+            'prev-page'          => 'Página anterior',
         ],
     ],
 

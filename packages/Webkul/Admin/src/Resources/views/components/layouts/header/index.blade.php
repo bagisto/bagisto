@@ -82,7 +82,7 @@
                     <button class="flex h-9 w-9 cursor-pointer overflow-hidden rounded-full hover:opacity-80 focus:opacity-80">
                         <img
                             src="{{ $admin->image_url }}"
-                            class="w-full"
+                            class="h-full w-full"
                         />
                     </button>
                 @else
@@ -673,11 +673,11 @@
                 computed: {
                     notificationStatusIcon() {
                         return {
-                            pending: 'icon-information text-2xl text-amber-600 bg-amber-100 rounded-full',
-                            closed: 'icon-repeat text-2xl text-red-600 bg-red-100 rounded-full',
-                            completed: 'icon-done text-2xl text-blue-600 bg-blue-100 rounded-full',
-                            canceled: 'icon-cancel-1 text-2xl text-red-600 bg-red-100 rounded-full',
-                            processing: 'icon-sort-right text-2xl text-green-600 bg-green-100 rounded-full',
+                            pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:!text-amber-600',
+                            closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
+                            completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600',
+                            canceled: 'icon-cancel-1 rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
+                            processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:!text-green-600',
                         };
                     },
                 },

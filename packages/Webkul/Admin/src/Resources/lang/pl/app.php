@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Wypisz wszystkie powiadomienia',
-        'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
+        'marked-success'   => 'Wszystkie powiadomienia zostały oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
         'of'               => 'z',
         'per-page'         => 'na stronę',
@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Zobacz wszystkie',
 
         'order-status-messages' => [
+            'all'             => 'Wszystko',
             'canceled'        => 'Zamówienie anulowane',
             'closed'          => 'Zamówienie zamknięte',
             'completed'       => 'Zamówienie zakończone',
@@ -1060,6 +1061,7 @@ return [
                     'date-time'           => 'Date Time',
                     'delete'              => 'Delete',
                     'edit'                => 'Edit',
+                    'false'               => 'Fałsz',
                     'file'                => 'File',
                     'id'                  => 'ID',
                     'image'               => 'Image',
@@ -1072,6 +1074,7 @@ return [
                     'select'              => 'Select',
                     'text'                => 'Text',
                     'textarea'            => 'Textarea',
+                    'true'                => 'Prawda',
                     'type'                => 'Type',
                     'unique'              => 'Unique',
                 ],
@@ -1111,7 +1114,7 @@ return [
                 'label'                 => 'Etykieta',
                 'multiselect'           => 'Wielokrotny Wybór',
                 'no'                    => 'Nie',
-                'number'                => 'Liczba',
+                'numeric'               => 'Liczba',
                 'option-deleted'        => 'Opcja usunięta pomyślnie',
                 'options'               => 'Opcje',
                 'position'              => 'Pozycja',
@@ -1176,7 +1179,7 @@ return [
                 'label'                 => 'Etykieta',
                 'multiselect'           => 'Wielokrotny Wybór',
                 'no'                    => 'Nie',
-                'number'                => 'Liczba',
+                'numeric'               => 'Liczba',
                 'option-deleted'        => 'Opcja usunięta pomyślnie',
                 'options'               => 'Opcje',
                 'position'              => 'Pozycja',
@@ -1408,6 +1411,7 @@ return [
                     'gender'         => 'Płeć',
                     'group'          => 'Grupa',
                     'id'             => 'ID klienta',
+                    'id-value'       => 'Identyfikator - :id',
                     'inactive'       => 'Nieaktywny',
                     'method-error'   => 'Błąd! Wykryto błędną metodę, sprawdź konfigurację masowej akcji',
                     'name'           => 'Nazwa klienta',
@@ -3148,6 +3152,7 @@ return [
                 'new'                           => 'Nowy',
                 'no'                            => 'Nie',
                 'parent-id'                     => 'Identyfikator nadrzędny',
+                'category-id'                   => 'ID kategorii',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
@@ -3461,6 +3466,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Ustaw opcje mapy witryny.',
+                    'title' => 'Mapa witryny',
+
+                    'settings' => [
+                        'enabled' => 'Włączone',
+                        'info'    => 'Włącz lub wyłącz mapę witryny dla swojej strony internetowej, aby poprawić optymalizację wyszukiwarek i poprawić doświadczenia użytkowników.',
+                        'title'   => 'Ustawienia',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Ustaw opcje limitów plików.',
+                        'max-file-size'    => 'Maksymalny rozmiar pliku',
+                        'max-url-per-file' => 'Maksymalna liczba URL na plik',
+                        'title'            => 'Limity plików',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla adresu URL sklepu.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Adres URL sklepu',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla kategorii.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Kategorie',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla produktów.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Produkty',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla stron CMS.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Strony CMS',
+                        'priority' => 'Priorytet',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3468,7 +3575,7 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Ustawienia dotyczące gościnnego zamawiania, strony produktu, strony koszyka, frontu sklepu, udostępniania społecznościowego recenzji i atrybutów.',
+                    'info'  => 'Strona widoku produktu, strona widoku koszyka, strona główna sklepu, recenzja i społecznościowe udostępnianie atrybutów.',
                     'title' => 'Produkty',
 
                     'settings' => [
@@ -3558,10 +3665,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Zezwalaj na recenzje klientów',
-                        'allow-guest-review'    => 'Zezwalaj na recenzje gości',
-                        'title'                 => 'Recenzja',
-                        'title-info'            => 'Ocena lub ocena czegoś, często obejmująca opinie i informacje zwrotne.',
+                        'allow-customer-review'   => 'Zezwalaj na recenzje klientów',
+                        'allow-guest-review'      => 'Zezwalaj na recenzje gości',
+                        'censoring-reviewer-name' => 'Cenzurowanie Nazwy Recenzenta',
+                        'display-review-count'    => 'Wyświetl liczbę recenzji dla ocen.',
+                        'display-star-count'      => 'Wyświetl liczbę gwiazdek w ocenach.',
+                        'summary'                 => 'Streszczenie',
+                        'title'                   => 'Recenzja',
+                        'title-info'              => 'Ocena lub ocena czegoś, często obejmująca opinie i informacje zwrotne.',
                     ],
 
                     'attribute' => [
@@ -3919,10 +4030,13 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Tekst stopki',
+                        'footer-text-info' => 'Wprowadź tekst, który pojawi się w stopce pliku PDF.',
                         'info'             => 'Skonfiguruj wydruki PDF, aby wyświetlały identyfikator faktury, identyfikator zamówienia w nagłówku i zawierały logo faktury.',
                         'invoice-id-info'  => 'Skonfiguruj wyświetlanie identyfikatora faktury w nagłówku faktury.',
                         'invoice-id-title' => 'Wyświetl identyfikator faktury w nagłówku',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Rozdzielczość obrazu powinna wynosić 131px x 30px.',
                         'order-id-info'    => 'Skonfiguruj wyświetlanie identyfikatora zamówienia w nagłówku faktury.',
                         'order-id-title'   => 'Wyświetl identyfikator zamówienia w nagłówku',
                         'title'            => 'Wydruki PDF',
@@ -3994,7 +4108,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Kasa',
-                    'info'  => 'Włącz lub wyłącz Mini Koszyk, podsumowanie koszyka.',
+                    'info'  => 'Ustaw finalizację transakcji bez rejestracji, włącz lub wyłącz mini koszyk, podsumowanie koszyka.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Strona koszyka',

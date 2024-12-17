@@ -36,7 +36,7 @@
             </div>
         </div>
     
-        <!-- Full Pannel -->
+        <!-- Full Panel -->
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left Section -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
@@ -279,6 +279,12 @@
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.inventory-sources.create.status')
                             </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="status"
+                                value="0"
+                            />
 
                             <x-admin::form.control-group.control
                                 type="switch"
