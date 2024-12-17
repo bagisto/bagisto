@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Settings\TaxRateDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\TaxRateRequest;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxRateController extends Controller
@@ -50,21 +51,11 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(TaxRateRequest $request)
     {
-        $this->validate(request(), [
-            'identifier' => 'required|string|unique:tax_rates,identifier',
-            'is_zip'     => 'sometimes',
-            'zip_code'   => 'nullable',
-            'zip_from'   => 'nullable|required_with:is_zip',
-            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
-            'country'    => 'required|string',
-            'tax_rate'   => 'required|numeric|min:0.0001',
-        ]);
-
         Event::dispatch('tax.rate.create.before');
 
-        $taxRate = $this->taxRateRepository->create(request()->only([
+        $taxRate = $this->taxRateRepository->create($request->only([
             'identifier',
             'country',
             'state',
@@ -99,21 +90,11 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(int $id)
+    public function update(TaxRateRequest $request, int $id)
     {
-        $this->validate(request(), [
-            'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
-            'is_zip'     => 'sometimes',
-            'zip_code'   => 'nullable',
-            'zip_from'   => 'nullable|required_with:is_zip',
-            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
-            'country'    => 'required|string',
-            'tax_rate'   => 'required|numeric|min:0.0001',
-        ]);
-
         Event::dispatch('tax.rate.update.before', $id);
 
-        $taxRate = $this->taxRateRepository->update(request()->only([
+        $taxRate = $this->taxRateRepository->update($request->only([
             'identifier',
             'country',
             'state',
