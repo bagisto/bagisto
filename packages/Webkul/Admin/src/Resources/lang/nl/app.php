@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Geslacht',
                     'group'          => 'Groep',
                     'id'             => 'Klant ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactief',
                     'method-error'   => 'Fout! Verkeerde methode gedetecteerd, controleer alstublieft de mass action-configuratie',
                     'name'           => 'Klantnaam',

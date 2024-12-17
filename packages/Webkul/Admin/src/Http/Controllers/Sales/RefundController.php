@@ -108,7 +108,7 @@ class RefundController extends Controller
 
         session()->flash('success', trans('admin::app.sales.refunds.create.create-success'));
 
-        return redirect()->route('admin.sales.refunds.index');
+        return redirect()->route('admin.sales.orders.view', $orderId);
     }
 
     /**

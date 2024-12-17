@@ -420,7 +420,8 @@
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
                             params: {
-                                query: this.searchTerm
+                                query: this.searchTerm,
+                                customer_id: this.cart.customer_id
                             }
                         })
                         .then(function(response) {

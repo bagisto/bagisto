@@ -124,6 +124,7 @@
                             </x-admin::form.control-group>
 
                             <div class="flex gap-4">
+                                <!-- Type -->
                                 <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
@@ -156,6 +157,7 @@
                                     <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
+                                <!-- Is Required -->
                                 <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')

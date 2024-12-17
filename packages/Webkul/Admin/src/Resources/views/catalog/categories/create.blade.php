@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <!-- Full Pannel -->
+        <!-- Full Panel -->
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
@@ -175,13 +175,13 @@
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.seo.before') !!}
 
-                <!-- SEO Deatils -->
+                <!-- SEO Details -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
-                    <!-- SEO Title & Description Blade Componnet -->
+                    <!-- SEO Title & Description Blade Component -->
                     <x-admin::seo />
 
                     <div class="mt-8">
@@ -289,7 +289,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                rules="required"
+                                rules="required|integer"
                                 :value="old('position')"
                                 :label="trans('admin::app.catalog.categories.create.position')"
                                 :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
