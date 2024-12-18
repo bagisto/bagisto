@@ -435,16 +435,16 @@ class Virtual extends AbstractType
             ->get();
 
         foreach ($customizableOptions as $customizableOption) {
-            if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id])) {
-                continue;
-            }
-
             switch ($customizableOption->type) {
                 case 'text':
                 case 'textarea':
                 case 'date':
                 case 'datetime':
                 case 'time':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id][0])) {
+                        continue 2;
+                    }
+
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     $formattedCustomizableOptions[] = [
@@ -465,6 +465,10 @@ class Virtual extends AbstractType
                 case 'radio':
                 case 'select':
                 case 'multiselect':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id])) {
+                        continue 2;
+                    }
+
                     $optionPrices = $customizableOption->customizable_option_prices
                         ->whereIn('id', $requestedCustomizableOptions[$customizableOption->id]);
 
@@ -483,6 +487,10 @@ class Virtual extends AbstractType
                     break;
 
                 case 'file':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id][0])) {
+                        continue 2;
+                    }
+
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     /**

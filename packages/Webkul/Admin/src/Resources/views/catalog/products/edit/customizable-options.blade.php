@@ -93,6 +93,13 @@
 
                                 <input
                                     type="hidden"
+                                    :name="'customizable_options[' + element.id + '][max_characters]'"
+                                    :value="element.max_characters"
+                                    v-if="! canHaveMultiplePrices(element.type)"
+                                />
+
+                                <input
+                                    type="hidden"
                                     :name="'customizable_options[' + element.id + '][supported_file_extensions]'"
                                     :value="element.supported_file_extensions"
                                     v-if="! canHaveMultiplePrices(element.type)"
@@ -297,7 +304,23 @@
                                 </div>
 
                                 <template v-if="! canHaveMultiplePrices(selectedOption.type)">
-                                    <x-admin::form.control-group v-if="selectedOption.type == 'file'">
+                                    <x-admin::form.control-group v-if="['text', 'textarea'].includes(selectedOption.type)">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.max-characters')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="max_characters"
+                                            rules="required|numeric|min_value:1"
+                                            ::value="selectedOption.max_characters"
+                                            :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.max-characters')"
+                                        />
+
+                                        <x-admin::form.control-group.error control-name="max_characters" />
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group v-else-if="selectedOption.type == 'file'">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions')
                                         </x-admin::form.control-group.label>
@@ -321,7 +344,7 @@
                                         <x-admin::form.control-group.control
                                             type="price"
                                             name="price"
-                                            rules="required"
+                                            rules="required|decimal|min_value:0"
                                             ::value="selectedOption.price"
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')"
                                         />
@@ -556,7 +579,7 @@
                                         type="price"
                                         name="price"
                                         ::value="selectedOptionItem.price"
-                                        rules="required"
+                                        rules="required|decimal|min_value:0"
                                         :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.price')"
                                     />
 
@@ -655,6 +678,7 @@
                             label: '',
                             type: 'select',
                             is_required: 1,
+                            max_characters: null,
                             supported_file_extensions: null,
                             price: 0,
                         },
@@ -669,6 +693,7 @@
                                 label: option.label,
                                 type: option.type,
                                 is_required: option.is_required,
+                                max_characters: option.max_characters,
                                 supported_file_extensions: option.supported_file_extensions,
                                 price_id: option.customizable_option_prices[0].id,
                                 price: option.customizable_option_prices[0].price,
@@ -681,6 +706,7 @@
                             label: option.label,
                             type: option.type,
                             is_required: option.is_required,
+                            max_characters: option.max_characters,
                             supported_file_extensions: option.supported_file_extensions,
                             price: 0,
                             customizable_option_prices: option.customizable_option_prices,

@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => '必須',
+                                'max-characters'            => '最大文字数',
                                 'name'                      => 'タイトル',
                                 'no'                        => 'いいえ',
                                 'price'                     => '価格',

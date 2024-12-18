@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'الزامی است',
+                                'max-characters'            => 'حداکثر کاراکتر',
                                 'name'                      => 'عنوان',
                                 'no'                        => 'خیر',
                                 'price'                     => 'قیمت',

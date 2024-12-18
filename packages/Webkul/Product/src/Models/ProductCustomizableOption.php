@@ -28,6 +28,7 @@ class ProductCustomizableOption extends TranslatableModel implements ProductCust
      */
     protected $fillable = [
         'is_required',
+        'max_characters',
         'product_id',
         'sort_order',
         'supported_file_extensions',

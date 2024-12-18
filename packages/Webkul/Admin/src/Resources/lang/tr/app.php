@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'Gerekli mi',
+                                'max-characters'            => 'Maksimum Karakter',
                                 'name'                      => 'Başlık',
                                 'no'                        => 'Hayır',
                                 'price'                     => 'Fiyat',

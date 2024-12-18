@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'අවශ්‍යයි',
+                                'max-characters'            => 'උපරිම අකුරු',
                                 'name'                      => 'ශීර්ෂය',
                                 'no'                        => 'නැත',
                                 'price'                     => 'මිල',

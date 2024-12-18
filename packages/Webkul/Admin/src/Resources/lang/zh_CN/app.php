@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => '是否必填',
+                                'max-characters'            => '最大字符数',
                                 'name'                      => '标题',
                                 'no'                        => '否',
                                 'price'                     => '价格',

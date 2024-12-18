@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'आवश्यक है',
+                                'max-characters'            => 'अधिकतम वर्ण',
                                 'name'                      => 'शीर्षक',
                                 'no'                        => 'नहीं',
                                 'price'                     => 'मूल्य',

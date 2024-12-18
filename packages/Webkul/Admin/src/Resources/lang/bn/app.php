@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'প্রয়োজনীয়',
+                                'max-characters'            => 'সর্বোচ্চ অক্ষর',
                                 'name'                      => 'শিরোনাম',
                                 'no'                        => 'না',
                                 'price'                     => 'মূল্য',

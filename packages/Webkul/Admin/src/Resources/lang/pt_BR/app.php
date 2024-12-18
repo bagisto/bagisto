@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'É obrigatório',
+                                'max-characters'            => 'Máximo de caracteres',
                                 'name'                      => 'Título',
                                 'no'                        => 'Não',
                                 'price'                     => 'Preço',

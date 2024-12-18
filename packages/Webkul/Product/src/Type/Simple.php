@@ -342,13 +342,13 @@ class Simple extends AbstractType
                 if (in_array($option['type'], ['checkbox', 'multiselect'])) {
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
-                        'attribute_name' => $option['label'][app()->getLocale()],
+                        'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
                         'option_label'   => collect($option['prices'])->pluck('label')->join(', ', ' and '),
                     ];
                 } else {
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
-                        'attribute_name' => $option['label'][app()->getLocale()],
+                        'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
                         'option_label'   => $option['prices'][0]['label'],
                     ];
                 }
@@ -412,16 +412,16 @@ class Simple extends AbstractType
             ->get();
 
         foreach ($customizableOptions as $customizableOption) {
-            if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id])) {
-                continue;
-            }
-
             switch ($customizableOption->type) {
                 case 'text':
                 case 'textarea':
                 case 'date':
                 case 'datetime':
                 case 'time':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id][0])) {
+                        continue 2;
+                    }
+
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     $formattedCustomizableOptions[] = [
@@ -442,6 +442,17 @@ class Simple extends AbstractType
                 case 'radio':
                 case 'select':
                 case 'multiselect':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id])) {
+                        continue 2;
+                    }
+
+                    /**
+                     * If the option is not required and the user has selected the `None` option, then we will skip this option.
+                     */
+                    if (in_array(0, $requestedCustomizableOptions[$customizableOption->id])) {
+                        continue 2;
+                    }
+
                     $optionPrices = $customizableOption->customizable_option_prices
                         ->whereIn('id', $requestedCustomizableOptions[$customizableOption->id]);
 
@@ -460,6 +471,10 @@ class Simple extends AbstractType
                     break;
 
                 case 'file':
+                    if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id][0])) {
+                        continue 2;
+                    }
+
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     /**

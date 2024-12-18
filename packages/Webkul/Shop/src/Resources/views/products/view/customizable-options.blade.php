@@ -66,7 +66,7 @@
                             ::name="'customizable_options[' + option.id + '][]'"
                             ::value="option.id"
                             v-model="selectedItems"
-                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::rules="{ 'required': Boolean(option.is_required), 'max': option.max_characters }"
                             ::label="option.label"
                         />
                     </template>
@@ -89,7 +89,7 @@
                             ::name="'customizable_options[' + option.id + '][]'"
                             ::value="option.id"
                             v-model="selectedItems"
-                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::rules="{ 'required': Boolean(option.is_required), 'max': option.max_characters }"
                             ::label="option.label"
                         />
                     </template>
@@ -116,7 +116,7 @@
                                     ::id="'customizable_options[' + option.id + '][' + index + ']'"
                                     v-model="selectedItems"
                                     ::rules="{'required': Boolean(option.is_required)}"
-                                    ::label="item.label"
+                                    ::label="option.label"
                                 />
 
                                 <label
@@ -180,7 +180,7 @@
                                     ::id="'customizable_options[' + option.id + '][' + index + ']'"
                                     v-model="selectedItems"
                                     ::rules="{'required': Boolean(option.is_required)}"
-                                    ::label="item.label"
+                                    ::label="option.label"
                                 />
 
                                 <label
@@ -388,6 +388,7 @@
                                 label: option.label,
                                 type: option.type,
                                 is_required: option.is_required,
+                                max_characters: option.max_characters,
                                 supported_file_extensions: option.supported_file_extensions,
                                 price_id: option.customizable_option_prices[0].id,
                                 price: option.customizable_option_prices[0].price,
@@ -399,6 +400,7 @@
                             label: option.label,
                             type: option.type,
                             is_required: option.is_required,
+                            max_characters: option.max_characters,
                             supported_file_extensions: option.supported_file_extensions,
                             price: 0,
                         };

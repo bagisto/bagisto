@@ -866,6 +866,7 @@ return [
 
                             'update-create' => [
                                 'is-required'               => 'Обязательно',
+                                'max-characters'            => 'Максимальное количество символов',
                                 'name'                      => 'Название',
                                 'no'                        => 'Нет',
                                 'price'                     => 'Цена',
