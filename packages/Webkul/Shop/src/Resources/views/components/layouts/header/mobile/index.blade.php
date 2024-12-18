@@ -58,7 +58,7 @@
 
                         @auth('customer')
                             <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
-                                <p class="font-mediums text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-zinc-500 no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
                             </div>

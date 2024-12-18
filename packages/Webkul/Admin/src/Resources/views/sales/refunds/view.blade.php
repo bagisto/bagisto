@@ -57,7 +57,7 @@
 
                                 <!-- Product Name -->
                                 <div class="grid place-content-start gap-1.5">
-                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                         {{ $item->name }}
                                     </p>
 
@@ -252,7 +252,7 @@
                             </p>
                         @endif
 
-                        <!-- Base Discount Amouont -->
+                        <!-- Base Discount Amount -->
                         @if ($refund->base_discount_amount > 0)
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($refund->base_discount_amount) }}

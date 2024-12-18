@@ -56,6 +56,7 @@ class RoleController extends Controller
             'name'            => 'required',
             'permission_type' => 'required',
             'description'     => 'required',
+            'permissions'     => 'required',
         ]);
 
         Event::dispatch('user.role.create.before');
