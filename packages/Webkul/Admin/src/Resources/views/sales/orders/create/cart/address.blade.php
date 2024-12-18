@@ -436,15 +436,15 @@
                 },
 
                 addAddressToList(address) {
-                    this.cart[this.activeAddressForm + '_address'] = address;
+                    this.cart[`${this.activeAddressForm}_address`] = address;
 
                     this.customerSavedAddresses[this.activeAddressForm].unshift(address);
 
                     this.selectedAddresses[this.activeAddressForm + '_address_id'] = address.id;
 
-                    this.$refs.updateCreateModal.close();
+                    console.log(this.selectedAddresses);
 
-                    this.activeAddressForm = null;
+                    this.$refs.updateCreateModal.close();
                 },
 
                 updateAddressInList(params) {
@@ -455,15 +455,15 @@
                                 ...params,
                             };
 
-                            this.cart[this.activeAddressForm + '_address'] = params;
+                            this.cart[`${this.activeAddressForm}_address`] = params;
 
                             this.customerSavedAddresses[this.activeAddressForm][index] = params;
 
-                            this.selectedAddresses[this.activeAddressForm + '_address_id'] = params.id;
-
-                            this.$refs.updateCreateModal.close();
+                            this.selectedAddresses[`${this.activeAddressForm}_address_id`] = params.id;
 
                             this.activeAddressForm = null;
+
+                            this.$refs.updateCreateModal.close();
                         }
                     });
                 },
