@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Gênero',
                     'group'          => 'Grupo',
                     'id'             => 'ID do Cliente',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inativo',
                     'method-error'   => 'Erro! Método incorreto detectado, por favor, verifique a configuração da ação em massa',
                     'name'           => 'Nome do Cliente',

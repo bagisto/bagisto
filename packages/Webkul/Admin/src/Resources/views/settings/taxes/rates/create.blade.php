@@ -46,7 +46,7 @@
 
             {!! view_render_event('bagisto.admin.settings.taxes.rates.create.create_form_controls.before') !!}
 
-            <!-- Tax Rates Informations -->
+            <!-- Tax Rates information's -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
@@ -161,7 +161,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="tax_rate"
-                                rules="required"
+                                {{-- rules="required|decimal|min:0|max:100" --}}
                                 :value="old('tax_rate')"
                                 :label="trans('admin::app.settings.taxes.rates.create.tax-rate')"
                                 :placeholder="trans('admin::app.settings.taxes.rates.create.tax-rate')"

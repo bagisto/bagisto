@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text'      => 'List all the Notifications',
-        'marked-success'        => 'All notifications has been marked as read',
+        'marked-success'        => 'All notifications have been marked as read',
         'no-record'             => 'No Record Found',
         'of'                    => 'of',
         'per-page'              => 'Per Page',
@@ -751,8 +751,8 @@ return [
                     'copy-of'                => 'Copy Of :value',
                     'delete'                 => 'Delete',
                     'disable'                => 'Disable',
-                    'id-value'               => 'Id - :id',
-                    'id'                     => 'Id',
+                    'id-value'               => 'ID - :id',
+                    'id'                     => 'ID',
                     'image'                  => 'Image',
                     'mass-delete-success'    => 'Selected Products Deleted Successfully',
                     'mass-update-success'    => 'Selected Products Updated Successfully',
@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Gender',
                     'group'          => 'Group',
                     'id'             => 'Customer ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactive',
                     'method-error'   => 'Error! Wrong method detected, please check mass action configuration',
                     'name'           => 'Customer Name',

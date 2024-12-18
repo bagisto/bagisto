@@ -57,7 +57,7 @@
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
-        <div class="flex justify-center max-lg:hidden">
+        <div class="flex justify-center px-7 max-lg:hidden">
             <x-shop::breadcrumbs
                 name="product"
                 :entity="$product"
@@ -126,7 +126,7 @@
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
                                                 <img 
-                                                    class="h-5 min-h-5 w-5 min-w-5" 
+                                                    class="min-h-5 min-w-5 h-5 w-5" 
                                                     src="{{ Storage::url($customAttributeValue['value']) }}" 
                                                 />
                                             </a>
@@ -213,7 +213,7 @@
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img 
-                                                class="h-5 min-h-5 w-5 min-w-5" 
+                                                class="min-h-5 min-w-5 h-5 w-5" 
                                                 src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 alt="Product Image"
                                             />
@@ -302,13 +302,13 @@
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="text-3xl font-medium max-sm:text-xl">
+                                    <h1 class="break-all text-3xl font-medium max-sm:text-xl">
                                         {{ $product->name }}
                                     </h1>
 
                                     @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
+                                            class="max-sm:min-h-7 max-sm:min-w-7 flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -412,6 +412,8 @@
                                             :title="trans('shop::app.products.view.add-to-cart')"
                                             :disabled="! $product->isSaleable(1)"
                                             ::loading="isStoring.addToCart"
+                                            ::disabled="isStoring.addToCart"
+                                            @click="is_buy_now=0;"
                                         />
 
                                         {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
@@ -431,6 +433,7 @@
                                             :disabled="! $product->isSaleable(1)"
                                             ::loading="isStoring.buyNow"
                                             @click="is_buy_now=1;"
+                                            ::disabled="isStoring.buyNow"
                                         />
                                     @endif
 
