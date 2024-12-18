@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Створити замовлення для :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Немає',
+                        'total-amount' => 'Загальна сума',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Будь ласка, виберіть опцію',
                     ],

@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Create Order for :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'None',
+                        'total-amount' => 'Total Amount',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Please select an option',
                     ],

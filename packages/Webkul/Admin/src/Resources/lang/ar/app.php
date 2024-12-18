@@ -187,6 +187,11 @@ return [
                 'title'                   => 'إنشاء طلب لـ :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'لا شيء',
+                        'total-amount' => 'المبلغ الإجمالي',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'يرجى تحديد خيار',
                     ],

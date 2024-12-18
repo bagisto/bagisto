@@ -187,6 +187,11 @@ return [
                 'title'                   => 'צור הזמנה עבור :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'ללא',
+                        'total-amount' => 'סכום כולל',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'בחר אפשרות',
                     ],

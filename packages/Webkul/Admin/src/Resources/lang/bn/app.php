@@ -187,6 +187,11 @@ return [
                 'title'                   => ':name এর জন্য অর্ডার তৈরি করুন',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'কোনটিই নয়',
+                        'total-amount' => 'মোট পরিমাণ',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'দয়া করে একটি বিকল্প নির্বাচন করুন',
                     ],

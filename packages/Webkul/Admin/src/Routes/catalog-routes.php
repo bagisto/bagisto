@@ -8,6 +8,7 @@ use Webkul\Admin\Http\Controllers\Catalog\Product\BundleController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\ConfigurableController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\DownloadableController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\GroupedController;
+use Webkul\Admin\Http\Controllers\Catalog\Product\SimpleController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**
@@ -107,6 +108,10 @@ Route::prefix('catalog')->group(function () {
         Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
 
         Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
+
+        Route::controller(SimpleController::class)->group(function () {
+            Route::get('{id}/simple-customizable-options', 'customizableOptions')->name('admin.catalog.products.simple.customizable-options');
+        });
 
         Route::controller(ConfigurableController::class)->group(function () {
             Route::get('{id}/configurable-options', 'options')->name('admin.catalog.products.configurable.options');

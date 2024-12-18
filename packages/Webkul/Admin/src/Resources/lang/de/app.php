@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Bestellung erstellen für :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Keine',
+                        'total-amount' => 'Gesamtsumme',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Bitte eine Option auswählen',
                     ],

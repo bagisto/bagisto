@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Crea Ordine per :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Nessuno',
+                        'total-amount' => 'Importo Totale',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Seleziona un\'opzione',
                     ],

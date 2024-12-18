@@ -187,6 +187,11 @@ return [
                 'title'                   => ':name සඳහා ඇනවුම සාර්ථකයි',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'කිසිවක් නැත',
+                        'total-amount' => 'මුළු මුදල',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'කරුණාකර විකල්ප තෝරන්න',
                     ],

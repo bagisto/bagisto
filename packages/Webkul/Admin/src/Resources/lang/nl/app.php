@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Bestelling aanmaken voor :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Selecteer een optie',
                     ],

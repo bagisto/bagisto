@@ -72,7 +72,7 @@
                     </template>
 
                     <!-- Textarea Field -->
-                    <template v-if="option.type == 'textarea'">
+                    <template v-else-if="option.type == 'textarea'">
                         <x-shop::form.control-group.label
                             class="!mt-0 max-sm:!mb-2.5"
                             ::class="{ 'required': Boolean(option.is_required) }"
@@ -213,7 +213,7 @@
                             ::rules="{'required': Boolean(option.is_required)}"
                             ::label="option.label"
                         >
-                            <!-- "None" radio option for cases where the option is not required. -->
+                            <!-- "None" select option for cases where the option is not required. -->
                             <option
                                 value="0"
                                 v-if="! Boolean(option.is_required)"
@@ -411,7 +411,7 @@
                             option_id: option.id,
                             price: 0,
                         };
-                    })
+                    });
                 },
 
                 computed: {

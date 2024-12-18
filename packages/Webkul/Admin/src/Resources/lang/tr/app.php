@@ -187,6 +187,11 @@ return [
                 'title'                   => ':name için Sipariş Oluştur',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Yok',
+                        'total-amount' => 'Toplam Tutar',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Lütfen bir seçenek seçin',
                     ],

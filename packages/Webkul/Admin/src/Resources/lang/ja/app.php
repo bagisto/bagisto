@@ -187,6 +187,11 @@ return [
                 'title'                   => ':name の注文を作成',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'なし',
+                        'total-amount' => '合計金額',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'オプションを選択してください',
                     ],

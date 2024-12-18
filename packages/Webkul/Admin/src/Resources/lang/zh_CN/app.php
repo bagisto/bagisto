@@ -187,6 +187,11 @@ return [
                 'title'                   => '为 :name 创建订单',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+
                     'configurable' => [
                         'select-options' => '请选择一个选项',
                     ],

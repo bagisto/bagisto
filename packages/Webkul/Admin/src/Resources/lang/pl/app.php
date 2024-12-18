@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Utwórz zamówienie dla :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Brak',
+                        'total-amount' => 'Całkowita kwota',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Proszę wybrać opcję',
                     ],

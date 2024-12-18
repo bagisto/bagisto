@@ -101,6 +101,20 @@ class Virtual extends AbstractType
     }
 
     /**
+     * Return true if product can be added to cart without options.
+     *
+     * @return bool
+     */
+    public function canBeAddedToCartWithoutOptions()
+    {
+        if ($this->product->customizable_options->isNotEmpty()) {
+            return false;
+        }
+
+        return $this->canBeAddedToCartWithoutOptions;
+    }
+
+    /**
      * Is customizable.
      *
      * @return bool

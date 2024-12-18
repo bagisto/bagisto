@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Создать заказ для :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Нет',
+                        'total-amount' => 'Общая сумма',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Пожалуйста, выберите опцию',
                     ],

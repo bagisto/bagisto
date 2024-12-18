@@ -187,6 +187,11 @@ return [
                 'title'                   => 'ایجاد سفارش برای :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مجموع مبلغ',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'لطفاً یک گزینه را انتخاب کنید',
                     ],

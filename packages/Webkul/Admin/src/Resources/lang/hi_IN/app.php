@@ -187,6 +187,11 @@ return [
                 'title'                   => ':name के लिए आदेश बनाएं',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'कृपया एक विकल्प चुनें',
                     ],

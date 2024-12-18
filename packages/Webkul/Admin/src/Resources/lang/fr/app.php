@@ -187,6 +187,11 @@ return [
                 'title'                   => 'Créer une commande pour :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Aucun',
+                        'total-amount' => 'Montant total',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Veuillez sélectionner une option',
                     ],
