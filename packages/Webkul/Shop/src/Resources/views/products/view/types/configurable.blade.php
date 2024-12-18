@@ -353,17 +353,19 @@
 
                         let regularPrice = document.querySelector('.regular-price');
 
-                        let configVarient = this.config.variant_prices[this.possibleOptionVariant];
+                        let configVariant = this.config.variant_prices[this.possibleOptionVariant];
 
                         if (this.childAttributes.length == selectedOptionCount) {
                             document.querySelector('.price-label').style.display = 'none';
 
-                            if (parseInt(configVarient.final.price) < parseInt(configVarient.regular.price)) {
-                                finalPrice.innerHTML = configVarient.final.formatted_price;
+                            if (parseInt(configVariant.regular.price) > parseInt(configVariant.final.price)) {
+                                regularPrice.style.display = 'block';
 
-                                regularPrice.innerHTML = configVarient.regular.formatted_price;                                
+                                finalPrice.innerHTML = configVariant.final.formatted_price;
+
+                                regularPrice.innerHTML = configVariant.regular.formatted_price;
                             } else {
-                                finalPrice.innerHTML = configVarient.regular.formatted_price;
+                                finalPrice.innerHTML = configVariant.regular.formatted_price;
 
                                 regularPrice.style.display = 'none';
                             }
