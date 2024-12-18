@@ -1206,6 +1206,7 @@ return [
             ], [
                 'name'          => 'contact',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
+                'validation'    => 'numeric|min:0|max:15',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
