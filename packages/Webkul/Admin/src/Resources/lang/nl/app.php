@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle meldingen weergeven',
-        'marked-success'   => 'Melding Succesvol Gemarkeerd',
+        'marked-success'   => 'Alle meldingen zijn gemarkeerd als gelezen',
         'no-record'        => 'Geen Records Gevonden',
         'of'               => 'van',
         'per-page'         => 'Per pagina',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => 'Datum Tijd',
                     'delete'              => 'Verwijderen',
                     'edit'                => 'Bewerken',
+                    'false'               => 'Onwaar',
                     'file'                => 'Bestand',
                     'id'                  => 'ID',
                     'image'               => 'Afbeelding',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => 'Selecteren',
                     'text'                => 'Tekst',
                     'textarea'            => 'Tekstgebied',
+                    'true'                => 'Waar',
                     'type'                => 'Type',
                     'unique'              => 'Uniek',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => 'Geslacht',
                     'group'          => 'Groep',
                     'id'             => 'Klant ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactief',
                     'method-error'   => 'Fout! Verkeerde methode gedetecteerd, controleer alstublieft de mass action-configuratie',
                     'name'           => 'Klantnaam',

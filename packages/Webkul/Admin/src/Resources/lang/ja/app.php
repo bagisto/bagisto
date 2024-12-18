@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'すべての通知をリストアップ',
-        'marked-success'   => 'お知らせが正常にマークされました',
+        'marked-success'   => 'すべての通知が既読としてマークされました',
         'no-record'        => '記録が見つかりません',
         'of'               => 'の',
         'per-page'         => 'ページごと',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => '日付と時刻',
                     'delete'              => '削除',
                     'edit'                => '編集',
+                    'false'               => '偽',
                     'file'                => 'ファイル',
                     'id'                  => 'ID',
                     'image'               => '画像',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => '選択',
                     'text'                => 'テキスト',
                     'textarea'            => 'テキストエリア',
+                    'true'                => '真',
                     'type'                => 'タイプ',
                     'unique'              => 'ユニーク',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => '性別',
                     'group'          => 'グループ',
                     'id'             => '顧客ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => '非アクティブ',
                     'method-error'   => 'エラー！誤ったメソッドが検出されました。マスアクションの構成を確認してください',
                     'name'           => '顧客名',

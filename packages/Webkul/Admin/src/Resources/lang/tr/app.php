@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Tüm Bildirimleri Listele',
-        'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
+        'marked-success'   => 'Tüm bildirimler okundu olarak işaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
         'of'               => 'of',
         'per-page'         => 'Sayfa Başına',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => 'Tarih Zaman',
                     'delete'              => 'Sil',
                     'edit'                => 'Düzenle',
+                    'false'               => 'Yanlış',
                     'file'                => 'Dosya',
                     'id'                  => 'Kimlik',
                     'image'               => 'Resim',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => 'Seçiniz',
                     'text'                => 'Metin',
                     'textarea'            => 'Metin Alanı',
+                    'true'                => 'Doğru',
                     'type'                => 'Tür',
                     'unique'              => 'Benzersiz',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => 'Cinsiyet',
                     'group'          => 'Grup',
                     'id'             => 'Müşteri ID',
+                    'id-value'       => 'Kimlik - :id',
                     'inactive'       => 'Pasif',
                     'method-error'   => 'Hata! Yanlış yöntem algılandı, lütfen kitlesel eylem yapılandırmasını kontrol edin',
                     'name'           => 'Müşteri Adı',

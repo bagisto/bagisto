@@ -160,6 +160,8 @@ class OrderItemRepository extends Repository
                     $shippedQty = $shipmentItem->qty;
                 }
 
+                $shippedQty -= $orderItem->qty_invoiced;
+
                 $inventory = $orderItem->product->inventories()
                     ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
                     ->first();

@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Listar todas las notificaciones',
-        'marked-success'   => 'Notificación Marcada Exitosamente',
+        'marked-success'   => 'Todas las notificaciones han sido marcadas como leídas',
         'no-record'        => 'No se Encontraron Registros',
         'of'               => 'de',
         'per-page'         => 'Por página',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => 'Fecha y hora',
                     'delete'              => 'Eliminar',
                     'edit'                => 'Editar',
+                    'false'               => 'Falso',
                     'file'                => 'Archivo',
                     'id'                  => 'ID',
                     'image'               => 'Imagen',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => 'Seleccionar',
                     'text'                => 'Texto',
                     'textarea'            => 'Área de texto',
+                    'true'                => 'Verdadero',
                     'type'                => 'Tipo',
                     'unique'              => 'Único',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => 'Género',
                     'group'          => 'Grupo',
                     'id'             => 'ID de Cliente',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactivo',
                     'method-error'   => '¡Error! Método incorrecto detectado, por favor revisa la configuración de la acción masiva',
                     'name'           => 'Nombre del Cliente',

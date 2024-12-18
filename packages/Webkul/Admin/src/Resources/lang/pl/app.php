@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Wypisz wszystkie powiadomienia',
-        'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
+        'marked-success'   => 'Wszystkie powiadomienia zostały oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
         'of'               => 'z',
         'per-page'         => 'na stronę',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => 'Date Time',
                     'delete'              => 'Delete',
                     'edit'                => 'Edit',
+                    'false'               => 'Fałsz',
                     'file'                => 'File',
                     'id'                  => 'ID',
                     'image'               => 'Image',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => 'Select',
                     'text'                => 'Text',
                     'textarea'            => 'Textarea',
+                    'true'                => 'Prawda',
                     'type'                => 'Type',
                     'unique'              => 'Unique',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => 'Płeć',
                     'group'          => 'Grupa',
                     'id'             => 'ID klienta',
+                    'id-value'       => 'Identyfikator - :id',
                     'inactive'       => 'Nieaktywny',
                     'method-error'   => 'Błąd! Wykryto błędną metodę, sprawdź konfigurację masowej akcji',
                     'name'           => 'Nazwa klienta',

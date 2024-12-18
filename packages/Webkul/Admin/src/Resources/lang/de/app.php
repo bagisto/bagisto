@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle Benachrichtigungen auflisten',
-        'marked-success'   => 'Benachrichtigung erfolgreich markiert',
+        'marked-success'   => 'Alle Benachrichtigungen wurden als gelesen markiert',
         'no-record'        => 'Kein Datensatz gefunden',
         'of'               => 'von',
         'per-page'         => 'Pro Seite',
@@ -1061,6 +1061,7 @@ return [
                     'date-time'           => 'Datum Zeit',
                     'delete'              => 'Löschen',
                     'edit'                => 'Bearbeiten',
+                    'false'               => 'Falsch',
                     'file'                => 'Datei',
                     'id'                  => 'ID',
                     'image'               => 'Bild',
@@ -1073,6 +1074,7 @@ return [
                     'select'              => 'Auswählen',
                     'text'                => 'Text',
                     'textarea'            => 'Textbereich',
+                    'true'                => 'Wahr',
                     'type'                => 'Typ',
                     'unique'              => 'Einzigartig',
                 ],
@@ -1409,6 +1411,7 @@ return [
                     'gender'         => 'Geschlecht',
                     'group'          => 'Gruppe',
                     'id'             => 'Kunden-ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inaktiv',
                     'method-error'   => 'Fehler! Falsche Methode erkannt, bitte überprüfen Sie die Massenaktionskonfiguration',
                     'name'           => 'Kundenname',
