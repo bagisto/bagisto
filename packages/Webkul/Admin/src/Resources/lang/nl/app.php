@@ -3348,7 +3348,7 @@ return [
                 'title' => 'Algemeen',
 
                 'general' => [
-                    'info'  => 'Stel eenhedensopties in.',
+                    'info'  => 'Stel eenhedensopties in en schakel broodkruimelnavigatie in of uit.',
                     'title' => 'Algemeen',
 
                     'unit-options' => [
@@ -3366,7 +3366,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Stel vergelijkingsmogelijkheden, verlanglijstopties, afbeeldingszoekopties, voettekst, voettekst in- of uitschakelen en aangepaste scripts in.',
+                    'info'  => 'Stel de titel van de aanbieding in de koptekst en aangepaste scripts in.',
                     'title' => 'Inhoud',
 
                     'header-offer' => [
@@ -3386,7 +3386,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Stel logo en favicon-pictogram in.',
+                    'info'  => 'Stel logo en favicon-pictogram in voor het beheerderspaneel.',
                     'title' => 'Ontwerp',
 
                     'admin-logo' => [
@@ -3398,7 +3398,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Stel Magic AI-opties in.',
+                    'info'  => 'Stel Magic AI-opties in en sta enkele opties toe om de creatie van inhoud te automatiseren.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3621,7 +3621,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Voorraad',
-                    'title-info' => 'Configureer voorraadinstellingen om backorders toe te staan, minimale en maximale hoeveelheden in de winkelwagen in te stellen en de drempel voor uitverkochte producten te definiëren.',
+                    'title-info' => 'Configureer voorraadinstellingen om backorders toe te staan en de drempel voor uitverkochte producten te definiëren.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Backorders toestaan',
@@ -3677,7 +3677,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Stel nieuwsbriefabonnementen, e-mailverificaties en sociale login in.',
+                    'settings-info' => 'Stel wenslijst, inlogomleiding, nieuwsbriefabonnementen, standaard groepoptie, e-mailverificaties en sociaal inloggen in.',
                     'title'         => 'Instellingen',
 
                     'login-as-customer' => [
