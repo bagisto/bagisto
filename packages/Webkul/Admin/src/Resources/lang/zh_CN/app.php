@@ -3348,7 +3348,7 @@ return [
                 'title' => '常规',
 
                 'general' => [
-                    'info'  => '设置单位选项。',
+                    'info'  => '设置单位选项并启用或禁用面包屑导航。',
                     'title' => '常规',
 
                     'unit-options' => [
@@ -3366,7 +3366,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => '设置比较选项、心愿单选项、图像搜索选项、页脚、切换页脚和自定义脚本。',
+                    'info'  => '设置页眉优惠标题和自定义脚本。',
                     'title' => '内容',
 
                     'header-offer' => [
@@ -3386,7 +3386,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => '设置标志和网站图标。',
+                    'info'  => '为管理面板设置标志和网站图标。',
                     'title' => '设计',
 
                     'admin-logo' => [
@@ -3398,7 +3398,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => '设置魔法AI选项。',
+                    'info'  => '设置魔法AI选项，并允许一些选项自动创建内容。',
                     'title' => '魔法AI',
 
                     'settings' => [
@@ -3621,7 +3621,7 @@ return [
 
                 'inventory' => [
                     'title'      => '库存',
-                    'title-info' => '配置库存设置以允许缺货、设置购物车的最小和最大数量，并定义缺货阈值。',
+                    'title-info' => '配置库存设置以允许缺货订单并定义缺货阈值。',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => '允许缺货订单',
@@ -3677,7 +3677,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'ニュースレターの購読、メールの確認、ソーシャルログインを設定します。',
+                    'settings-info' => '设置愿望清单、登录重定向、新闻通讯订阅、默认组选项、电子邮件验证和社交登录。',
                     'title'         => '設定',
 
                     'login-as-customer' => [
