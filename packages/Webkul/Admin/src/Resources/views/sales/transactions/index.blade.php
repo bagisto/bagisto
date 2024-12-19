@@ -206,7 +206,7 @@
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.status"
+                                        v-html="data.status"
                                     >
                                     </p>
 
