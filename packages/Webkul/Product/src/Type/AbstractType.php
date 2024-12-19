@@ -393,6 +393,16 @@ abstract class AbstractType
     }
 
     /**
+     * Return true if this product type is customizable.
+     *
+     * @return bool
+     */
+    public function isCustomizable()
+    {
+        return false;
+    }
+
+    /**
      * Return true if this product type is saleable.
      *
      * @return bool

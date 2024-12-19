@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Aucun',
+                        'total-amount' => 'Montant total',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Veuillez sélectionner une option',
                     'select-above-options' => 'Veuillez sélectionner les options ci-dessus',

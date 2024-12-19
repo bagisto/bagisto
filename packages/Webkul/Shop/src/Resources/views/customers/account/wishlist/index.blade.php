@@ -45,7 +45,7 @@
                                 class="grid md:hidden"
                                 href="{{ route('shop.customers.account.index') }}"
                             >
-                                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>                                    
+                                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                             </a>
 
                             <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
@@ -68,7 +68,7 @@
 
                     <!-- Wishlist Items -->
                     <template v-if="wishlistItems.length">
-                        <v-wishlist-products-item 
+                        <v-wishlist-products-item
                             v-for="(wishlist, index) in wishlistItems"
                             :wishlist="wishlist"
                             :key="wishlist.id"
@@ -86,7 +86,7 @@
                                 src="{{ bagisto_asset('images/wishlist.png') }}"
                                 alt="Empty wishlist"
                             >
-    
+
                             <p
                                 class="text-xl max-md:text-sm"
                                 role="heading"
@@ -116,11 +116,11 @@
 
                                     <a :href="`{{ route('shop.product_or_category.index', '') }}/${wishlist.product.url_key}`">
                                         <!-- Wishlist Item Image -->
-                                        <img 
+                                        <img
                                             class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
-                                            :src="wishlist.product.base_image.small_image_url" 
+                                            :src="wishlist.product.base_image.small_image_url"
                                             alt="Product Image"
-                                        /> 
+                                        />
                                     </a>
 
                                     {!! view_render_event('bagisto.shop.customers.account.wishlist.image.after') !!}
@@ -133,7 +133,7 @@
                                         </p>
 
                                         <span
-                                            @click="remove" 
+                                            @click="remove"
                                             class="icon-bin hidden text-2xl max-md:block"
                                         ></span>
                                     </div>
@@ -162,7 +162,7 @@
                                             </div>
 
                                             <div
-                                                class="grid gap-2" 
+                                                class="grid gap-2"
                                                 v-show="wishlist.option_show"
                                             >
                                                 <div v-for="option in wishlist.options?.attributes">
@@ -171,7 +171,20 @@
                                                     </p>
 
                                                     <p class="text-sm">
-                                                        @{{ option.option_label }}
+                                                        <template v-if="option?.attribute_type === 'file'">
+                                                            <a
+                                                                :href="option.file_url"
+                                                                class="text-blue-700"
+                                                                target="_blank"
+                                                                :download="option.file_name"
+                                                            >
+                                                                @{{ option.file_name }}
+                                                            </a>
+                                                        </template>
+
+                                                        <template v-else>
+                                                            @{{ option.option_label }}
+                                                        </template>
                                                     </p>
                                                 </div>
                                             </div>
@@ -179,16 +192,16 @@
                                     </div>
 
                                     <div class="max-md:block md:hidden">
-                                        <p 
-                                            class="text-lg font-semibold max-md:text-sm" 
+                                        <p
+                                            class="text-lg font-semibold max-md:text-sm"
                                             v-html="wishlist.product.min_price"
                                         ></p>
 
                                         {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.before') !!}
 
                                         <!--Wishlist Item removed button-->
-                                        <a 
-                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden" 
+                                        <a
+                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden"
                                             @click="remove"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
@@ -224,14 +237,14 @@
                             </div>
 
                             <div class="max-md:hidden">
-                                <p 
-                                    class="text-lg font-semibold" 
+                                <p
+                                    class="text-lg font-semibold"
                                     v-html="wishlist.product.min_price"
                                 >
                                 </p>
 
-                                <a 
-                                    class="flex cursor-pointer justify-end text-base text-blue-700" 
+                                <a
+                                    class="flex cursor-pointer justify-end text-base text-blue-700"
                                     @click="remove"
                                 >
                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -309,7 +322,7 @@
                                     .delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${this.wishlist.id}`)
                                     .then(response => {
                                         this.$emit('wishlist-items', response.data.data);
-                                        
+
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                     })
                                     .catch(error => {});

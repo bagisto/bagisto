@@ -21,13 +21,13 @@
                         class="icon-sales text-2xl"
                         role="presentation"
                         tabindex="0"
-                    ></span> 
-            
-                    @lang('admin::app.sales.invoices.create.invoice')     
+                    ></span>
+
+                    @lang('admin::app.sales.invoices.create.invoice')
             </div>
 
             <!-- Invoice Create drawer -->
-            <x-admin::form  
+            <x-admin::form
                 method="POST"
                 :action="route('admin.sales.invoices.store', $order->id)"
             >
@@ -37,21 +37,21 @@
                         <div class="grid h-8 gap-3">
                             <div class="flex items-center justify-between">
                                 <p class="text-xl font-medium dark:text-white">
-                                    @lang('admin::app.sales.invoices.create.new-invoice')         
+                                    @lang('admin::app.sales.invoices.create.new-invoice')
                                 </p>
-    
+
                                 @if (bouncer()->hasPermission('sales.invoices.create'))
                                     <button
                                         type="submit"
                                         class="primary-button ltr:mr-11 rtl:ml-11"
                                     >
-                                        @lang('admin::app.sales.invoices.create.create-invoice')        
+                                        @lang('admin::app.sales.invoices.create.create-invoice')
                                     </button>
                                 @endif
                             </div>
                         </div>
                     </x-slot>
-    
+
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
                         <div class="grid p-4 !pt-0">
@@ -67,18 +67,18 @@
                                             @else
                                                 <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                                    
-                                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
+
+                                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                                         @lang('admin::app.sales.invoices.create.product-image')
                                                     </p>
                                                 </div>
                                             @endif
-            
+
                                             <div class="grid place-content-start gap-1.5">
                                                 <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
                                                     {{ $item->name }}
                                                 </p>
-            
+
                                                 <div class="flex flex-col place-items-start gap-1.5">
                                                     <p class="text-gray-600 dark:text-gray-300">
                                                         @lang('admin::app.sales.invoices.create.amount-per-unit', [
@@ -86,15 +86,30 @@
                                                             'qty'    => $item->qty_ordered,
                                                         ])
                                                     </p>
-            
+
                                                     @if (isset($item->additional['attributes']))
-                                                        <p class="text-gray-600 dark:text-gray-300">
-                                                            @foreach ($item->additional['attributes'] as $attribute)
-                                                                {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                            @endforeach
-                                                        </p>
+                                                        @foreach ($item->additional['attributes'] as $attribute)
+                                                            <p class="text-gray-600 dark:text-gray-300">
+                                                                @if (
+                                                                    ! isset($attribute['attribute_type'])
+                                                                    || $attribute['attribute_type'] !== 'file'
+                                                                )
+                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                @else
+                                                                    {{ $attribute['attribute_name'] }} :
+
+                                                                    <a
+                                                                        href="{{ Storage::url($attribute['option_label']) }}"
+                                                                        class="text-blue-600 hover:underline"
+                                                                        download="{{ File::basename($attribute['option_label']) }}"
+                                                                    >
+                                                                        {{ File::basename($attribute['option_label']) }}
+                                                                    </a>
+                                                                @endif
+                                                            </p>
+                                                        @endforeach
                                                     @endif
-            
+
                                                     <p class="text-gray-600 dark:text-gray-300">
                                                         @lang('admin::app.sales.invoices.create.sku', ['sku' => $item->sku])
                                                     </p>
@@ -108,18 +123,18 @@
                                                 <x-admin::form.control-group.label class="required !block">
                                                     @lang('admin::app.sales.invoices.create.qty-to-invoiced')
                                                 </x-admin::form.control-group.label>
-            
+
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     class="!w-[100px]"
                                                     :id="'invoice[items][' . $item->id . ']'"
                                                     :name="'invoice[items][' . $item->id . ']'"
-                                                    rules="required|numeric|min:0" 
+                                                    rules="required|numeric|min:0"
                                                     :value="$item->qty_to_invoice"
                                                     :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
                                                     :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
                                                 />
-            
+
                                                 <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
                                             </x-admin::form.control-group>
                                         </div>

@@ -35,7 +35,7 @@
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.before') !!}
-                
+
                 <div
                     class="flex flex-1 flex-col gap-2 overflow-y-auto max-xl:flex-auto"
                     id="steps-container"
@@ -77,7 +77,7 @@
                                 <x-slot:header>
                                     <div class="flex items-center justify-between">
                                         <p class="text-xl font-medium dark:text-white">
-                                        @lang('admin::app.sales.orders.create.configuration')
+                                            @lang('admin::app.sales.orders.create.configuration')
                                         </p>
 
                                         <button class="primary-button ltr:mr-11 rtl:ml-11">
@@ -89,6 +89,11 @@
                                 <!-- Drawer Content -->
                                 <x-slot:content class="!p-0">
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.before') !!}
+
+                                    <!-- Included Simple Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'simple'">
+                                        @include('admin::sales.orders.create.types.simple')
+                                    </template>
 
                                     <!-- Included Configurable Product Configuration Blade File -->
                                     <template v-if="selectedProductOptions.product.type == 'configurable'">
@@ -110,6 +115,10 @@
                                         @include('admin::sales.orders.create.types.downloadable')
                                     </template>
 
+                                    <!-- Included Virtual Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'virtual'">
+                                        @include('admin::sales.orders.create.types.virtual')
+                                    </template>
 
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.after') !!}
                                 </x-slot>
@@ -136,7 +145,7 @@
                     <!-- Recent Order Items Component -->
                     @include('admin::sales.orders.create.recent-order-items')
                 </div>
-                    
+
                 {!! view_render_event('bagisto.admin.sales.order.create.right_component.after') !!}
             </div>
         </script>

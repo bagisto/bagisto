@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Repositories\ProductCustomizableOptionRepository;
 use Webkul\Sales\Contracts\Order as OrderContract;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order;
@@ -20,6 +21,7 @@ class OrderRepository extends Repository
      */
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
+        protected ProductCustomizableOptionRepository $productCustomizableOptionRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         Container $container
     ) {
@@ -70,6 +72,8 @@ class OrderRepository extends Repository
                 }
 
                 $this->orderItemRepository->manageInventory($orderItem);
+
+                $this->orderItemRepository->manageCustomizableOptions($orderItem);
 
                 $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
 

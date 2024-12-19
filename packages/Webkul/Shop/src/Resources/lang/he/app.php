@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'אין',
+                        'total-amount' => 'סכום כולל',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'אנא בחר אפשרות',
                     'select-above-options' => 'אנא בחר אפשרויות למעלה',
