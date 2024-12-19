@@ -1,30 +1,30 @@
-{!! view_render_event('bagisto.admin.sales.order.create.types.simple.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.types.virtual.before') !!}
 
-<v-simple-product-customizable-options
+<v-virtual-product-customizable-options
     :errors="errors"
     :product-options="selectedProductOptions"
-></v-simple-product-customizable-options>
+></v-virtual-product-customizable-options>
 
-{!! view_render_event('bagisto.admin.sales.order.create.types.simple.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.types.virtual.after') !!}
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
-        id="v-simple-product-customizable-options-template"
+        id="v-virtual-product-customizable-options-template"
     >
         <div class="">
-            <v-simple-product-customizable-option-item
+            <v-virtual-product-customizable-option-item
                 :key="index"
                 :option="option"
                 v-for="(option, index) in options"
                 @priceUpdated="priceUpdated"
             >
-            </v-simple-product-customizable-option-item>
+            </v-virtual-product-customizable-option-item>
 
             <div class="p-4">
                 <div class="my-5 flex items-center justify-between">
                     <p class="text-sm dark:text-white">
-                        @lang('admin::app.sales.orders.create.types.simple.total-amount')
+                        @lang('admin::app.sales.orders.create.types.virtual.total-amount')
                     </p>
 
                     <p class="text-lg font-medium dark:text-white">
@@ -37,7 +37,7 @@
 
     <script
         type="text/x-template"
-        id="v-simple-product-customizable-option-item-template"
+        id="v-virtual-product-customizable-option-item-template"
     >
         <div class="border-b border-[#E9E9E9] p-4">
             <x-admin::form.control-group>
@@ -157,7 +157,7 @@
                                 class="cursor-pointer text-sm text-[#6E6E6E] dark:text-gray-300"
                                 :for="'customizable_options[' + option.id + '][' + index + ']'"
                             >
-                                @lang('admin::app.sales.orders.create.types.simple.none')
+                                @lang('admin::app.sales.orders.create.types.virtual.none')
                             </label>
                         </div>
 
@@ -212,7 +212,7 @@
                             value="0"
                             v-if="! Boolean(option.is_required)"
                         >
-                            @lang('admin::app.sales.orders.create.types.simple.none')
+                            @lang('admin::app.sales.orders.create.types.virtual.none')
                         </option>
 
                         <option
@@ -245,7 +245,7 @@
                             value="0"
                             v-if="! Boolean(option.is_required)"
                         >
-                            @lang('admin::app.sales.orders.create.types.simple.none')
+                            @lang('admin::app.sales.orders.create.types.virtual.none')
                         </option>
 
                         <option
@@ -356,8 +356,8 @@
     </script>
 
     <script type="module">
-        app.component('v-simple-product-customizable-options', {
-            template: '#v-simple-product-customizable-options-template',
+        app.component('v-virtual-product-customizable-options', {
+            template: '#v-virtual-product-customizable-options-template',
 
             props: ['errors', 'productOptions'],
 
@@ -393,10 +393,10 @@
                 getCustomizableOptions() {
                     this.isLoading = true;
 
-                    this.$axios.get("{{ route('admin.catalog.products.simple.customizable-options', ':replace') }}".replace(':replace', this.productOptions.product.id))
+                    this.$axios.get("{{ route('admin.catalog.products.virtual.customizable-options', ':replace') }}".replace(':replace', this.productOptions.product.id))
                         .then(response => {
                             this.initialPrice = response.data.meta.initial_price;
-
+                            
                             this.options = response.data.data.map((option) => {
                                 if (! this.canHaveMultiplePriceOptions(option.type)) {
                                     return {
@@ -424,6 +424,8 @@
                                 };
                             });
 
+                            console.log(this.options);
+
                             this.prices = this.options.map((option) => {
                                 return {
                                     option_id: option.id,
@@ -448,8 +450,8 @@
             }
         });
 
-        app.component('v-simple-product-customizable-option-item', {
-            template: '#v-simple-product-customizable-option-item-template',
+        app.component('v-virtual-product-customizable-option-item', {
+            template: '#v-virtual-product-customizable-option-item-template',
 
             emits: ['priceUpdated'],
 

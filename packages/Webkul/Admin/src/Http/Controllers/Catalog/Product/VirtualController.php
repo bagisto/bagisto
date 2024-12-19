@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Product\Repositories\ProductRepository;
 
-class SimpleController extends Controller
+class VirtualController extends Controller
 {
     /**
      * Create a new controller instance.

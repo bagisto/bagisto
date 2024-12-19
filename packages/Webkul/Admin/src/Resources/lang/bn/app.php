@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'লিঙ্কগুলি',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'কোনটিই নয়',
+                        'total-amount' => 'মোট পরিমাণ',
+                    ],
                 ],
 
                 'cart' => [

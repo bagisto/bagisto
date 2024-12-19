@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'Links',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
+                    ],
                 ],
 
                 'cart' => [

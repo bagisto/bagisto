@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => '链接',
                     ],
+
+                    'virtual' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
                 ],
 
                 'cart' => [

@@ -379,13 +379,13 @@ class Virtual extends AbstractType
                 if (in_array($option['type'], ['checkbox', 'multiselect'])) {
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
-                        'attribute_name' => $option['label'][app()->getLocale()],
+                        'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
                         'option_label'   => collect($option['prices'])->pluck('label')->join(', ', ' and '),
                     ];
                 } else {
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
-                        'attribute_name' => $option['label'][app()->getLocale()],
+                        'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
                         'option_label'   => $option['prices'][0]['label'],
                     ];
                 }
@@ -480,6 +480,13 @@ class Virtual extends AbstractType
                 case 'select':
                 case 'multiselect':
                     if (! $customizableOption->is_required && empty($requestedCustomizableOptions[$customizableOption->id])) {
+                        continue 2;
+                    }
+
+                    /**
+                     * If the option is not required and the user has selected the `None` option, then we will skip this option.
+                     */
+                    if (in_array(0, $requestedCustomizableOptions[$customizableOption->id])) {
                         continue 2;
                     }
 

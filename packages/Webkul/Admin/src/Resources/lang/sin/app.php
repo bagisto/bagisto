@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'සබැඳියාවන්',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'කිසිවක් නැත',
+                        'total-amount' => 'මුළු මුදල',
+                    ],
                 ],
 
                 'cart' => [

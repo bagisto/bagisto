@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'لینک‌ها',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مجموع مبلغ',
+                    ],
                 ],
 
                 'cart' => [

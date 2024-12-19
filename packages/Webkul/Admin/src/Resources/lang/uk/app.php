@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'Посилання',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'Немає',
+                        'total-amount' => 'Загальна сума',
+                    ],
                 ],
 
                 'cart' => [

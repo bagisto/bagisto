@@ -115,6 +115,10 @@
                                         @include('admin::sales.orders.create.types.downloadable')
                                     </template>
 
+                                    <!-- Included Virtual Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'virtual'">
+                                        @include('admin::sales.orders.create.types.virtual')
+                                    </template>
 
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.after') !!}
                                 </x-slot>

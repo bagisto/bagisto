@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'Link',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'Nessuno',
+                        'total-amount' => 'Importo Totale',
+                    ],
                 ],
 
                 'cart' => [

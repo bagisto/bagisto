@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'Bağlantılar',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'Yok',
+                        'total-amount' => 'Toplam Tutar',
+                    ],
                 ],
 
                 'cart' => [

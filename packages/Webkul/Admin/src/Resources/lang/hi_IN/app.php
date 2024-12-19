@@ -208,6 +208,11 @@ return [
                     'downloadable' => [
                         'title' => 'लिंक',
                     ],
+
+                    'virtual' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
                 ],
 
                 'cart' => [
