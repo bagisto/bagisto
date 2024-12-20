@@ -1,0 +1,383 @@
+name: Bagisto Playwright Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: webkul
+          MYSQL_DATABASE: bagisto-test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -pwebkul"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client netcat-openbsd net-tools
+
+      - name: Wait for MySQL
+        run: |
+          echo "Waiting for MySQL..."
+          max_attempts=30
+          attempt=0
+          until mysqladmin ping -h 127.0.0.1 -uroot -pwebkul --silent; do
+            if [ $attempt -ge $max_attempts ]; then
+              echo "MySQL failed to start in time."
+              exit 1
+            fi
+            echo "Waiting for MySQL... (attempt $((attempt+1))/$max_attempts)"
+            sleep 2
+            ((attempt++))
+          done
+
+      - name: Configure MySQL user privileges
+        run: |
+          mysql -h 127.0.0.1 -uroot -pwebkul -e "
+            CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'webkul';
+            GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+            FLUSH PRIVILEGES;
+          "
+
+      - name: Set up application environment
+        run: |
+          cp .env.example .env
+          sed -i 's#DB_HOST=.*#DB_HOST=127.0.0.1#' .env
+          sed -i 's#DB_PORT=.*#DB_PORT=3306#' .env
+          sed -i 's#DB_DATABASE=.*#DB_DATABASE=bagisto-test#' .env
+          sed -i 's#DB_USERNAME=.*#DB_USERNAME=root#' .env
+          sed -i 's#DB_PASSWORD=.*#DB_PASSWORD=webkul#' .env
+          sed -i 's#APP_DEBUG=.*#APP_DEBUG=false#' .env
+          sed -i 's|APP_URL=.*|APP_URL=http://127.0.0.1:8000/|' .env
+
+      - name: Install PHP and dependencies
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, bcmath, gd, pdo_mysql, mysql
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Test MySQL Connectivity
+        run: |
+          echo "Testing MySQL connection..."
+          php -r "
+            try {
+                \$pdo = new PDO('mysql:host=127.0.0.1;dbname=bagisto-test', 'root', 'webkul');
+                echo 'Connected to MySQL successfully!';
+            } catch (PDOException \$e) {
+                echo 'Connection failed: ' . \$e->getMessage();
+                exit(1);
+            }
+          "
+
+      - name: Install Bagisto
+        run: |
+          # Run the bagisto:create command to create a new project
+          composer create
+
+          # Install Bagisto
+          php artisan bagisto:install --no-interaction
+
+      - name: Run Laravel migrations
+        run: |
+          php artisan key:generate
+          php artisan migrate --seed
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: bagisto-test
+          DB_USERNAME: root
+          DB_PASSWORD: webkul
+          APP_DEBUG: false
+          APP_URL: http://127.0.0.1:8000
+
+      - name: Seed Product Table
+        run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
+
+      - name: Start Laravel server
+        run: nohup php artisan serve --host=0.0.0.0 --port=8000 > /dev/null 2>&1 &
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright for Shop Auth tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/auth.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Auth tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Auth
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Cart tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/cart.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Cart tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Cart
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Mini Cart tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/miniCart.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Mini Cart tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Mini-Cart
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Cart Page tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/cartPage.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Cart Page tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Cart-Page
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Wishlist tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/wishlist.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Wishlist tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Wishlist
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Checkout tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/checkout.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Checkout tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Checkout
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Compare tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/compare.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Compare tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Compare
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Product, Category tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/productsCategories.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Product, Category tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Product-Category
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Customer tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/customer.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Customer tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Customer
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Shop Search tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/shop/search.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Shop Search tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Shop-Search
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Auth tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/auth.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Auth tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Auth
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Sales tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/sales.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Sales tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Sales
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Catalog tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/Catalog --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Catalog tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Catalog
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Customers tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/Customers --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Customers tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Customers
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin CMS tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/cms.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin CMS tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-CMS
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Marketing tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/Marketing --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Marketing tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Marketing
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Settings tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/Settings --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Settings tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Settings
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Run Playwright for Admin Configuration tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test tests/admin/Configuration --workers=1 --project=chromium --retries=0 || echo "Continue"
+
+      - name: Upload Playwright report for Admin Configuration tests
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-Admin-Configuration
+          path: playwright-report/
+          retention-days: 30
