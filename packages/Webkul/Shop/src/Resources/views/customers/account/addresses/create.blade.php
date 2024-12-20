@@ -198,7 +198,7 @@
                             name="country"
                             rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                             v-model="country"
-                            aria-label="trans('shop::app.customers.account.addresses.create.country')"
+                            :aria-label="trans('shop::app.customers.account.addresses.create.country')"
                             :label="trans('shop::app.customers.account.addresses.create.country')"
                         >
                             <option value="">
