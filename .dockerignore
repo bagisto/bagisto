@@ -1,0 +1,46 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Dependencies
+/vendor
+/node_modules
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Development files
+.idea
+.vscode
+*.log
+*.sql
+*.sqlite
+.phpunit.result.cache
+
+# Storage and cache
+/storage/framework/cache/**
+/storage/framework/sessions/**
+/storage/framework/views/**
+/storage/logs/**
+/bootstrap/cache/**
+
+# Tests
+/tests
+phpunit.xml
+
+# Documentation
+*.md
+/docs
+
+# Docker related
+Dockerfile
+docker-compose.yml
+.docker
+.dockerignore
+
+# Other
+.DS_Store
+Thumbs.db 
