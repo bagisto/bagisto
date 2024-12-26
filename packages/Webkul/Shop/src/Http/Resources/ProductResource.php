@@ -4,9 +4,24 @@ namespace Webkul\Shop\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Helpers\Review;
+use Webkul\Product\Helpers\ConfigurableOption;
 
 class ProductResource extends JsonResource
 {
+    /**
+     * Review helper instance.
+     *
+     * @var \Webkul\Product\Helpers\Review
+     */
+    protected $reviewHelper;
+
+    /**
+     * Configurable option helper instance.
+     *
+     * @var \Webkul\Product\Helpers\ConfigurableOption
+     */
+    protected $configurableOptionHelper;
+
     /**
      * Create a new resource instance.
      *
@@ -16,6 +31,7 @@ class ProductResource extends JsonResource
     public function __construct($resource)
     {
         $this->reviewHelper = app(Review::class);
+        $this->configurableOptionHelper = app(ConfigurableOption::class);
 
         parent::__construct($resource);
     }
@@ -30,9 +46,10 @@ class ProductResource extends JsonResource
     {
         $productTypeInstance = $this->getTypeInstance();
 
-        return [
+        $data = [
             'id'          => $this->id,
             'sku'         => $this->sku,
+            'type'        => $this->type,
             'name'        => $this->name,
             'description' => $this->description,
             'url_key'     => $this->url_key,
@@ -56,5 +73,11 @@ class ProductResource extends JsonResource
                 'total'   => $this->reviewHelper->getTotalReviews($this),
             ],
         ];
+
+        if ($this->type === 'configurable') {
+            $data['configurable_config'] = $this->configurableOptionHelper->getConfigurationConfig($this);
+        }
+
+        return $data;
     }
 }
