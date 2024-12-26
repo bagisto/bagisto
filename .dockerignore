@@ -3,9 +3,7 @@
 .gitignore
 .gitattributes
 
-# Dependencies
-/vendor
-/node_modules
+
 
 # Environment files
 .env*
@@ -19,12 +17,7 @@
 *.sqlite
 .phpunit.result.cache
 
-# Storage and cache
-/storage/framework/cache/**
-/storage/framework/sessions/**
-/storage/framework/views/**
-/storage/logs/**
-/bootstrap/cache/**
+
 
 # Tests
 /tests

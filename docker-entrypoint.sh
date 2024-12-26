@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /var/www/html/bagisto
+cd /var/www/html
 
 # Install dependencies
 composer install

@@ -32,7 +32,7 @@ COPY --from=node:23 /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # setting work directory
-WORKDIR /var/www/html/bagisto
+WORKDIR /var/www/html
 
 # adding user
 RUN useradd -G www-data,root -u 1000 -d /home/bagisto bagisto
@@ -43,18 +43,19 @@ RUN mkdir -p /home/bagisto/.composer && \
 RUN mkdir -p storage/framework/{sessions,views,cache} \
     && mkdir -p storage/logs \
     && mkdir -p bootstrap/cache \
-    && mkdir -p routes
+    && mkdir -p routes \
+    && mkdir -p vendor
 
 # setting apache
 COPY ./.configs/apache.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
 # Copy application code
-COPY . /var/www/html/bagisto
+COPY . /var/www/html
 
 # setting up project permissions
-RUN chmod -R 775 /var/www/html/bagisto
-RUN chown -R bagisto:www-data /var/www/html/bagisto
+RUN chmod -R 775 /var/www/html
+RUN chown -R bagisto:www-data /var/www/html
 
 # Copy startup script
 COPY docker-entrypoint.sh /usr/local/bin/
