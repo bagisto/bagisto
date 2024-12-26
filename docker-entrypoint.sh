@@ -39,6 +39,11 @@ echo "Publishing vendor assets..."
 php artisan vendor:publish --all --force
 php artisan bagisto:publish --force
 
+# Setup GraphQL and JWT
+echo "Setting up GraphQL and JWT..."
+php artisan vendor:publish --provider="Webkul\GraphQLAPI\Providers\GraphQLAPIServiceProvider" --force
+php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider" --force
+
 # Clear all caches first
 echo "Clearing cache..."
 php artisan cache:clear

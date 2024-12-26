@@ -43,8 +43,7 @@ RUN mkdir -p /home/bagisto/.composer && \
 RUN mkdir -p storage/framework/{sessions,views,cache} \
     && mkdir -p storage/logs \
     && mkdir -p bootstrap/cache \
-    && mkdir -p routes \
-    && mkdir -p vendor
+    && mkdir -p routes
 
 # setting apache
 COPY ./.configs/apache.conf /etc/apache2/sites-available/000-default.conf
@@ -64,8 +63,10 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # changing user
 USER bagisto
 
-# Install dependencies
+# Install dependencies and GraphQL API
 RUN composer update league/flysystem-aws-s3-v3 --with-dependencies && \
+    composer require bagisto/graphql-api && \
+    composer require mll-lab/laravel-graphql-playground && \
     composer install --no-dev --optimize-autoloader
 
 # Set entrypoint
