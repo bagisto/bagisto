@@ -45,6 +45,9 @@ RUN mkdir -p storage/framework/{sessions,views,cache} \
     && mkdir -p bootstrap/cache \
     && mkdir -p routes
 
+# Configure Apache to listen on port 8080
+RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
+
 # setting apache
 COPY ./.configs/apache.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
@@ -68,6 +71,9 @@ RUN composer update league/flysystem-aws-s3-v3 --with-dependencies && \
     composer require bagisto/graphql-api && \
     composer require mll-lab/laravel-graphql-playground && \
     composer install --no-dev --optimize-autoloader
+
+# Expose port 8080
+EXPOSE 8080
 
 # Set entrypoint
 ENTRYPOINT ["docker-entrypoint.sh"] 
