@@ -3,8 +3,6 @@ name: Build and Push to ECR
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -95,7 +93,7 @@ jobs:
         # Output the version for notifications
         echo "::set-output name=image_version::${VERSION}"
         echo "::set-output name=image_sha::${SHORT_SHA}"
-      
+
     - name: Notify on Success
       if: success()
       uses: actions/github-script@v6
@@ -104,19 +102,15 @@ jobs:
           const { repo, owner } = context.repo;
           const run_id = context.runId;
           const run_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
-          const message = `✅ ECR Image build and push succeeded!
-          \nImage Tags:
-          \n- Version: \`${{ steps.build-image.outputs.image_version }}\`
-          \n- SHA: \`${{ steps.build-image.outputs.image_sha }}\`
-          \n- Latest: \`latest\`
-          \nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`
-          \nWorkflow: ${run_url}`;
-          github.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: context.issue.number,
-            body: message
-          });
+          const message = `✅ ECR Image build and push succeeded!\nImage Tags:\n- Version: \`${{ steps.build-image.outputs.image_version }}\`\n- SHA: \`${{ steps.build-image.outputs.image_sha }}\`\n- Latest: \`latest\`\nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`\nWorkflow: ${run_url}`;
+          if (context.issue.number) {
+            github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: context.issue.number,
+              body: message
+            });
+          }
 
     - name: Notify on Failure
       if: failure()
@@ -126,13 +120,12 @@ jobs:
           const { repo, owner } = context.repo;
           const run_id = context.runId;
           const run_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
-          const message = `❌ ECR Image build and push failed!
-          \nCommit: \`${{ steps.meta.outputs.short_sha }}\`
-          \nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`
-          \nSee workflow run for details: ${run_url}`;
-          github.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: context.issue.number,
-            body: message
-          }); 
+          const message = `❌ ECR Image build and push failed!\nCommit: \`${{ steps.meta.outputs.short_sha }}\`\nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`\nSee workflow run for details: ${run_url}`;
+          if (context.issue.number) {
+            github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: context.issue.number,
+              body: message
+            });
+          } 
