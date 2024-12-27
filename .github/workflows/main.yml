@@ -1,0 +1,138 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for git tags and commits
+
+    - name: Generate Docker metadata
+      id: meta
+      run: |
+        # Get the short SHA
+        SHORT_SHA=$(git rev-parse --short HEAD)
+        # Get the latest tag if it exists
+        LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        # Get commit count since last tag
+        COMMIT_COUNT=$(git rev-list ${LATEST_TAG}..HEAD --count)
+        # Generate version based on tag and commit count
+        VERSION="${LATEST_TAG}-${COMMIT_COUNT}-${SHORT_SHA}"
+        # Get branch name
+        BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')
+        # Get commit message
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        
+        echo "::set-output name=version::${VERSION}"
+        echo "::set-output name=short_sha::${SHORT_SHA}"
+        echo "::set-output name=branch::${BRANCH_NAME}"
+        echo "::set-output name=commit_msg::${COMMIT_MSG}"
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+        VERSION: ${{ steps.meta.outputs.version }}
+        SHORT_SHA: ${{ steps.meta.outputs.short_sha }}
+        BRANCH: ${{ steps.meta.outputs.branch }}
+      run: |
+        # Build using buildx with cache
+        docker buildx build \
+          --cache-from=type=local,src=/tmp/.buildx-cache \
+          --cache-to=type=local,dest=/tmp/.buildx-cache-new \
+          --load \
+          --build-arg GIT_SHA=${{ github.sha }} \
+          --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+          --build-arg VERSION=${VERSION} \
+          -t $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION} \
+          .
+        
+        # Move the cache
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+        
+        # Tag with different variations
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION} $ECR_REGISTRY/$ECR_REPOSITORY:${SHORT_SHA}
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION} $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        
+        # Push all tags
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${SHORT_SHA}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        
+        # Output the version for notifications
+        echo "::set-output name=image_version::${VERSION}"
+        echo "::set-output name=image_sha::${SHORT_SHA}"
+      
+    - name: Notify on Success
+      if: success()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { repo, owner } = context.repo;
+          const run_id = context.runId;
+          const run_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
+          const message = `✅ ECR Image build and push succeeded!
+          \nImage Tags:
+          \n- Version: \`${{ steps.build-image.outputs.image_version }}\`
+          \n- SHA: \`${{ steps.build-image.outputs.image_sha }}\`
+          \n- Latest: \`latest\`
+          \nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`
+          \nWorkflow: ${run_url}`;
+          github.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: context.issue.number,
+            body: message
+          });
+
+    - name: Notify on Failure
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { repo, owner } = context.repo;
+          const run_id = context.runId;
+          const run_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
+          const message = `❌ ECR Image build and push failed!
+          \nCommit: \`${{ steps.meta.outputs.short_sha }}\`
+          \nCommit Message: \`${{ steps.meta.outputs.commit_msg }}\`
+          \nSee workflow run for details: ${run_url}`;
+          github.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: context.issue.number,
+            body: message
+          }); 
