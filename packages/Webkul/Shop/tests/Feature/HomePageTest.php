@@ -80,13 +80,13 @@ it('displays navigation buttons when the customer is logged in', function () {
 });
 
 it('should returns the home page of the store', function () {
-    get(route('shop.home.index'))
-        ->assertOk()
-        ->assertSeeText('The game with our new additions!')
-        ->assertSeeText('Our Collections')
-        ->assertSeeText('Get Ready for our new Bold Collections!')
-        ->assertSeeText('Get UPTO 40% OFF on your 1st order SHOP NOW');
-});
+get(route('shop.home.index'))
+->assertOk()
+->assertSeeText('The game with our new additions!')
+->assertSeeText('Our Collections')
+->assertSeeText('Get Ready for our new Bold Collections!')
+->assertSeeText('Get UPTO 40% OFF on your 1st order SHOP NOW');
+    });
 
 it('should returns the search page of the products', function () {
     // Arrange.
