@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Dirección de Correo Electrónico',
-            'forget-password-link' => '¿Olvidaste tu Contraseña?',
-            'password'             => 'Contraseña',
-            'submit-btn'           => 'Iniciar Sesión',
-            'title'                => 'Iniciar Sesión',
+            'email'                  => 'Dirección de Correo Electrónico',
+            'forget-password-link'   => '¿Olvidaste tu Contraseña?',
+            'password'               => 'Contraseña',
+            'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+            'submit-btn'             => 'Iniciar Sesión',
+            'title'                  => 'Iniciar Sesión',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'Correo Electrónico Registrado',
-                'email-not-exist' => 'El Correo Electrónico no Existe',
-                'page-title'      => 'Olvidar Contraseña',
-                'reset-link-sent' => 'Enlace para Restablecer la Contraseña Enviado',
-                'sign-in-link'    => '¿Volver a Iniciar Sesión?',
-                'submit-btn'      => 'Restablecer',
-                'title'           => 'Recuperar Contraseña',
+                'email'                  => 'Correo Electrónico Registrado',
+                'email-not-exist'        => 'El Correo Electrónico no Existe',
+                'page-title'             => 'Olvidar Contraseña',
+                'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+                'reset-link-sent'        => 'Enlace para Restablecer la Contraseña Enviado',
+                'sign-in-link'           => '¿Volver a Iniciar Sesión?',
+                'submit-btn'             => 'Restablecer',
+                'title'                  => 'Recuperar Contraseña',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => '¿Volver a Iniciar Sesión?',
-            'confirm-password' => 'Confirmar Contraseña',
-            'email'            => 'Correo Electrónico Registrado',
-            'password'         => 'Contraseña',
-            'submit-btn'       => 'Restablecer Contraseña',
-            'title'            => 'Restablecer Contraseña',
+            'back-link-title'        => '¿Volver a Iniciar Sesión?',
+            'confirm-password'       => 'Confirmar Contraseña',
+            'email'                  => 'Correo Electrónico Registrado',
+            'password'               => 'Contraseña',
+            'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+            'submit-btn'             => 'Restablecer Contraseña',
+            'title'                  => 'Restablecer Contraseña',
         ],
     ],
 

@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Indirizzo Email',
-            'forget-password-link' => 'Password Dimenticata?',
-            'password'             => 'Password',
-            'submit-btn'           => 'Accedi',
-            'title'                => 'Accedi',
+            'email'                  => 'Indirizzo Email',
+            'forget-password-link'   => 'Password Dimenticata?',
+            'password'               => 'Password',
+            'powered-by-description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
+            'submit-btn'             => 'Accedi',
+            'title'                  => 'Accedi',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'Email Registrata',
-                'email-not-exist' => 'Email Non Esistente',
-                'page-title'      => 'Password Dimenticata',
-                'reset-link-sent' => 'Link per il ripristino della password inviato',
-                'sign-in-link'    => 'Torna al Login?',
-                'submit-btn'      => 'Ripristina',
-                'title'           => 'Recupera Password',
+                'email'                  => 'Email Registrata',
+                'email-not-exist'        => 'Email Non Esistente',
+                'page-title'             => 'Password Dimenticata',
+                'powered-by-description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
+                'reset-link-sent'        => 'Link per il ripristino della password inviato',
+                'sign-in-link'           => 'Torna al Login?',
+                'submit-btn'             => 'Ripristina',
+                'title'                  => 'Recupera Password',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Torna al Login?',
-            'confirm-password' => 'Conferma Password',
-            'email'            => 'Email Registrata',
-            'password'         => 'Password',
-            'submit-btn'       => 'Ripristina Password',
-            'title'            => 'Ripristina Password',
+            'back-link-title'        => 'Torna al Login?',
+            'confirm-password'       => 'Conferma Password',
+            'email'                  => 'Email Registrata',
+            'password'               => 'Password',
+            'powered-by-description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
+            'submit-btn'             => 'Ripristina Password',
+            'title'                  => 'Ripristina Password',
         ],
     ],
 

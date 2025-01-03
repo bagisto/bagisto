@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'آدرس ایمیل',
-            'forget-password-link' => 'فراموشی رمز عبور؟',
-            'password'             => 'رمز عبور',
-            'submit-btn'           => 'ورود',
-            'title'                => 'ورود',
+            'email'                  => 'آدرس ایمیل',
+            'forget-password-link'   => 'فراموشی رمز عبور؟',
+            'password'               => 'رمز عبور',
+            'powered-by-description' => 'قدرت گرفته از :bagisto، یک پروژه متن‌باز توسط :webkul.',
+            'submit-btn'             => 'ورود',
+            'title'                  => 'ورود',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'آدرس ایمیل ثبت شده',
-                'email-not-exist' => 'آدرس ایمیل وجود ندارد',
-                'page-title'      => 'فراموشی رمز عبور',
-                'reset-link-sent' => 'لینک تغییر رمز عبور ارسال شد',
-                'sign-in-link'    => 'بازگشت به صفحه ورود؟',
-                'submit-btn'      => 'تغییر رمز',
-                'title'           => 'بازیابی رمز عبور',
+                'email'                  => 'آدرس ایمیل ثبت شده',
+                'email-not-exist'        => 'آدرس ایمیل وجود ندارد',
+                'page-title'             => 'فراموشی رمز عبور',
+                'powered-by-description' => 'قدرت گرفته از :bagisto، یک پروژه متن‌باز توسط :webkul.',
+                'reset-link-sent'        => 'لینک تغییر رمز عبور ارسال شد',
+                'sign-in-link'           => 'بازگشت به صفحه ورود؟',
+                'submit-btn'             => 'تغییر رمز',
+                'title'                  => 'بازیابی رمز عبور',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'بازگشت به صفحه ورود؟',
-            'confirm-password' => 'تأیید رمز عبور',
-            'email'            => 'آدرس ایمیل ثبت شده',
-            'password'         => 'رمز عبور',
-            'submit-btn'       => 'تغییر رمز عبور',
-            'title'            => 'تغییر رمز عبور',
+            'back-link-title'        => 'بازگشت به صفحه ورود؟',
+            'confirm-password'       => 'تأیید رمز عبور',
+            'email'                  => 'آدرس ایمیل ثبت شده',
+            'password'               => 'رمز عبور',
+            'powered-by-description' => 'قدرت گرفته از :bagisto، یک پروژه متن‌باز توسط :webkul.',
+            'submit-btn'             => 'تغییر رمز عبور',
+            'title'                  => 'تغییر رمز عبور',
         ],
     ],
 

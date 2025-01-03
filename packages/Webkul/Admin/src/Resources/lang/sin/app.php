@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'ඊමේල් ලිපිනය',
-            'forget-password-link' => 'මුර මුදල් අමතකවෙනිද?',
-            'password'             => 'මුර පදය',
-            'submit-btn'           => 'පිවිසීම',
-            'title'                => 'පිවිසීම',
+            'email'                  => 'ඊමේල් ලිපිනය',
+            'forget-password-link'   => 'මුර මුදල් අමතකවෙනිද?',
+            'password'               => 'මුර පදය',
+            'powered-by-description' => ':webkul විසින් නිර්මාණය කරන ලද විවෘත මූලාශ්‍ර ව්‍යාපෘතියක් වන :bagisto විසින් බලගැන්වී ඇත.',
+            'submit-btn'             => 'පිවිසීම',
+            'title'                  => 'පිවිසීම',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'ලිපිනය',
-                'email-not-exist' => 'ලිපිනය නොපවතී',
-                'page-title'      => 'මුර මුදල් අමතකවෙනිද?',
-                'reset-link-sent' => 'මුර මුදල් අමතකවූ ලින්ක් එක යවන ලදි',
-                'sign-in-link'    => 'පිවිසීමට ආරම්භකරන්න?',
-                'submit-btn'      => 'නැවත සකසන්න',
-                'title'           => 'මුර මුදල් අමතකවෙනිද?',
+                'email'                  => 'ලිපිනය',
+                'email-not-exist'        => 'ලිපිනය නොපවතී',
+                'page-title'             => 'මුර මුදල් අමතකවෙනිද?',
+                'powered-by-description' => ':webkul විසින් නිර්මාණය කරන ලද විවෘත මූලාශ්‍ර ව්‍යාපෘතියක් වන :bagisto විසින් බලගැන්වී ඇත.',
+                'reset-link-sent'        => 'මුර මුදල් අමතකවූ ලින්ක් එක යවන ලදි',
+                'sign-in-link'           => 'පිවිසීමට ආරම්භකරන්න?',
+                'submit-btn'             => 'නැවත සකසන්න',
+                'title'                  => 'මුර මුදල් අමතකවෙනිද?',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'පිවිසීමට ආපසු?',
-            'confirm-password' => 'මුර පදය තහවුරු කරන්න',
-            'email'            => 'ලිපිනය',
-            'password'         => 'මුර පදය',
-            'submit-btn'       => 'මුර පදය නැවත සකසන්න',
-            'title'            => 'මුර පදය නැවත සකසන්න',
+            'back-link-title'        => 'පිවිසීමට ආපසු?',
+            'confirm-password'       => 'මුර පදය තහවුරු කරන්න',
+            'email'                  => 'ලිපිනය',
+            'password'               => 'මුර පදය',
+            'powered-by-description' => ':webkul විසින් නිර්මාණය කරන ලද විවෘත මූලාශ්‍ර ව්‍යාපෘතියක් වන :bagisto විසින් බලගැන්වී ඇත.',
+            'submit-btn'             => 'මුර පදය නැවත සකසන්න',
+            'title'                  => 'මුර පදය නැවත සකසන්න',
         ],
     ],
 
