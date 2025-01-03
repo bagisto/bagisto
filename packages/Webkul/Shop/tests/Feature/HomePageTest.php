@@ -12,10 +12,10 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-    // Act and Assert.
-    get(route('shop.home.index'))
-        ->assertOk();
-});
+// Act and Assert.
+get(route('shop.home.index'))
+->assertOk();
+    });
 
 it('displays the current currency code and channel code', function () {
     // Act
