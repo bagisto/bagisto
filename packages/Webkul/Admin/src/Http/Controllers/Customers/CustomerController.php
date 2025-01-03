@@ -182,7 +182,7 @@ class CustomerController extends Controller
 
 
         if (! $this->customerRepository->haveActiveOrders($customer)) {
-            Event::dispatch('customer.delete.before', $customer);
+            Event::dispatch('customer.delete.before',  $customer);
 
             $this->customerRepository->delete($id);
 
