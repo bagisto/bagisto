@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success'  => 'Nova Categoria de Imposto criada',
-                    'delete-failed'   => 'Falha ao excluir a Categoria de Imposto',
+                    'delete-failed'  => 'Categorias atribuídas às taxas de imposto não podem ser excluídas.',
                     'delete-success'  => 'Categoria de Imposto excluída com sucesso',
                     'update-success'  => 'Categoria de Imposto atualizada com sucesso',
                 ],

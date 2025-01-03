@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => 'Nueva Categoría de Impuestos Creada',
-                    'delete-failed'  => 'Error al Eliminar Categoría de Impuestos',
+                    'delete-failed'  => 'No se pueden eliminar las categorías asignadas a las tasas de impuestos.',
                     'delete-success' => 'Categoría de Impuestos Eliminada Exitosamente',
                     'update-success' => 'Categoría de Impuestos Actualizada Exitosamente',
                 ],

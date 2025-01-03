@@ -130,10 +130,9 @@ class TaxCategoryController extends Controller
                 'message' => trans('admin::app.settings.taxes.categories.index.delete-success'),
             ]);
         } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.taxes.categories.index.delete-failed'),
+            ], 500);
         }
-
-        return new JsonResponse([
-            'message' => trans('admin::app.settings.taxes.categories.index.delete-failed'),
-        ], 500);
     }
 }

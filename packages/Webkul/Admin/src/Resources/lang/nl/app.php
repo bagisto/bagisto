@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => 'Nieuwe belastingcategorie aangemaakt',
-                    'delete-failed'  => 'Verwijderen van belastingcategorie mislukt',
+                    'delete-failed'  => 'Belastingtarieven toegewezen categorieën kunnen niet worden verwijderd.',
                     'delete-success' => 'Belastingcategorie succesvol verwijderd',
                     'update-success' => 'Belastingcategorie succesvol bijgewerkt',
                 ],

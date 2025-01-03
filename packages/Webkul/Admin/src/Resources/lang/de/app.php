@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => 'Neue Steuerkategorie erstellt',
-                    'delete-failed'  => 'Steuerkategorie löschen fehlgeschlagen',
+                    'delete-failed'  => 'Steuersätze zugewiesene Kategorien können nicht gelöscht werden.',
                     'delete-success' => 'Steuerkategorie erfolgreich gelöscht',
                     'update-success' => 'Steuerkategorie erfolgreich aktualisiert',
                 ],

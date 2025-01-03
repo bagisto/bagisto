@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => 'Nowa Kategoria Podatków utworzona',
-                    'delete-failed'  => 'Usuwanie Kategorii Podatków nie powiodło się',
+                    'delete-failed'  => 'Nie można usunąć kategorii przypisanych do stawek podatkowych.',
                     'delete-success' => 'Kategoria Podatków usunięta pomyślnie',
                     'update-success' => 'Kategoria Podatków pomyślnie zaktualizowana',
                 ],

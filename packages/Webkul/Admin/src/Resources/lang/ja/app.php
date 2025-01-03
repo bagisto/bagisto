@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => '新しい税カテゴリーが作成されました',
-                    'delete-failed'  => '税カテゴリーの削除に失敗しました',
+                    'delete-failed'  => '税率が割り当てられているカテゴリは削除できません。',
                     'delete-success' => '税カテゴリーが正常に削除されました',
                     'update-success' => '税カテゴリーが正常に更新されました',
                 ],

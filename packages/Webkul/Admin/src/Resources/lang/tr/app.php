@@ -2804,7 +2804,7 @@ return [
                     ],
 
                     'create-success' => 'Yeni Vergi Kategorisi Oluşturuldu',
-                    'delete-failed'  => 'Vergi Kategorisi Silme Başarısız',
+                    'delete-failed'  => 'Vergi Oranı Atanmış Kategoriler silinemez.',
                     'delete-success' => 'Vergi Kategorisi Başarıyla Silindi',
                     'update-success' => 'Vergi Kategorisi Başarıyla Güncellendi',
                 ],
