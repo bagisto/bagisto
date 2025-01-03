@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
             ],
+
+            'powered-by' => [
+                'description' => 'Працює на платформі :bagisto, спільний проект :webkul.',
+            ],
         ],
 
         'datagrid' => [

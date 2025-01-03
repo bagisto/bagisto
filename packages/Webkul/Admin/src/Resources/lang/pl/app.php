@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
             ],
+
+            'powered-by' => [
+                'description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
+            ],
         ],
 
         'datagrid' => [

@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'بازنویسی URL',
                 'users'                    => 'کاربران',
             ],
+
+            'powered-by' => [
+                'description' => 'قدرت گرفته از :bagisto، یک پروژه متن‌باز توسط :webkul.',
+            ],
         ],
 
         'datagrid' => [

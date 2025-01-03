@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'כתיבת URL מחדש',
                 'users'                    => 'משתמשים',
             ],
+
+            'powered-by' => [
+                'description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+            ],
         ],
 
         'datagrid' => [

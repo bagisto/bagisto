@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'Перезапись URL',
                 'users'                    => 'Пользователи',
             ],
+
+            'powered-by' => [
+                'description' => 'Работает на :bagisto, проект с открытым исходным кодом от :webkul.',
+            ],
         ],
 
         'datagrid' => [

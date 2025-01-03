@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'ইউআরএল পুনর্লিখন',
                 'users'                    => 'ব্যবহারকারীগণ',
             ],
+
+            'powered-by' => [
+                'description' => ':bagisto দ্বারা চালিত, :webkul দ্বারা একটি ওপেন-সোর্স প্রকল্প।',
+            ],
         ],
 
         'datagrid' => [

@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
             ],
+
+            'powered-by' => [
+                'description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+            ],
         ],
 
         'datagrid' => [

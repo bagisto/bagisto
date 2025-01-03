@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
             ],
+
+            'powered-by' => [
+                'description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+            ],
         ],
 
         'datagrid' => [

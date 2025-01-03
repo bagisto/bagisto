@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'Riscrittura URL',
                 'users'                    => 'Utenti',
             ],
+
+            'powered-by' => [
+                'description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
+            ],
         ],
 
         'datagrid' => [

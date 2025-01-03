@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
             ],
+
+            'powered-by' => [
+                'description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+            ],
         ],
 
         'datagrid' => [

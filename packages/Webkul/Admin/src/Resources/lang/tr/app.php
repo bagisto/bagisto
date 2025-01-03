@@ -4116,6 +4116,10 @@ return [
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
             ],
+
+            'powered-by' => [
+                'description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+            ],
         ],
 
         'datagrid' => [
