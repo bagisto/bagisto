@@ -1696,7 +1696,7 @@ return [
                 'name'          => 'order_number_length',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'integer|between:1,10',
                 'channel_based' => true,
             ], [
                 'name'          => 'order_number_suffix',
