@@ -180,9 +180,13 @@ class CustomerController extends Controller
             return response()->json(['message' => trans('admin::app.customers.customers.delete-failed')], 400);
         }
 
+
         if (! $this->customerRepository->haveActiveOrders($customer)) {
+            Event::dispatch('customer.delete.before', $customer);
 
             $this->customerRepository->delete($id);
+
+            Event::dispatch('customer.delete.after', $customer);
 
             session()->flash('success', trans('admin::app.customers.customers.delete-success'));
 
