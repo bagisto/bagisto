@@ -81,13 +81,9 @@ RUN php artisan config:clear && \
     rm -f public/storage && \
     php artisan storage:link
 
-# Create startup script
-RUN echo '#!/bin/bash\n\
-echo "Setting up storage permissions..."\n\
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache\n\
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache\n\
-apache2-foreground' > /usr/local/bin/docker-entrypoint.sh && \
-    chmod +x /usr/local/bin/docker-entrypoint.sh
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose port 8080
 EXPOSE 8080
