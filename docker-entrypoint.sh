@@ -4,6 +4,11 @@ echo "Setting up storage permissions..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Ensure session directory exists and has correct permissions
+mkdir -p /var/www/html/storage/framework/sessions
+chown -R www-data:www-data /var/www/html/storage/framework/sessions
+chmod -R 775 /var/www/html/storage/framework/sessions
+
 echo "Running database migrations and seeds..."
 php artisan migrate --force
 php artisan db:seed --force
