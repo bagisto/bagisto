@@ -1,30 +1,64 @@
 #!/bin/bash
+set -e
 
-echo "Setting up storage permissions..."
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+cd /var/www/html
 
-# Ensure session directory exists and has correct permissions
-mkdir -p /var/www/html/storage/framework/sessions
-chown -R www-data:www-data /var/www/html/storage/framework/sessions
-chmod -R 775 /var/www/html/storage/framework/sessions
+# Install dependencies
+composer install
 
-echo "Running database migrations and seeds..."
+# Create required directories
+echo "Creating required directories..."
+mkdir -p storage/framework/{sessions,views,cache}
+mkdir -p storage/app/public
+mkdir -p bootstrap/cache
+
+# Set proper permissions
+echo "Setting proper permissions..."
+chown -R bagisto:www-data storage
+chown -R bagisto:www-data bootstrap/cache
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache
+
+# Create storage link
+echo "Creating storage link..."
+php artisan storage:link
+
+# Run migrations and seeds
+echo "Running migrations and seeds..."
 php artisan migrate --force
 php artisan db:seed --force
-php artisan vendor:publish --all --force
-php artisan bagisto:publish --force
 
-# Create installation marker file
+# Create installation marker
 echo "Creating installation marker..."
 touch storage/installed
 chmod 775 storage/installed
-chown www-data:www-data storage/installed
+chown bagisto:www-data storage/installed
 
+# Publish vendor assets
+echo "Publishing vendor assets..."
+php artisan vendor:publish --all --force
+php artisan bagisto:publish --force
+
+# Setup GraphQL and JWT
+echo "Setting up GraphQL and JWT..."
+php artisan vendor:publish --provider="Webkul\GraphQLAPI\Providers\GraphQLAPIServiceProvider" --force
+php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider" --force
+
+# Clear all caches first
+echo "Clearing cache..."
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Optimize and cache everything
 echo "Optimizing application..."
-php artisan optimize:clear
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+php artisan event:cache
+php artisan optimize
 
-apache2-foreground
+# Start Apache in foreground
+echo "Starting Apache..."
+exec apache2-foreground
