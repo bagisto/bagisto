@@ -16,17 +16,20 @@ start_container() {
     echo "Starting container..."
     docker run -d \
         --name bagisto-app \
-        -p 80:80 \
+        -p 8080:8080 \
         --env-file .env \
         bagisto-app
 
     echo "Waiting for container to be ready..."
-    sleep 5
+    sleep 10
 
-    echo "Running database setup..."
+    echo "Running setup steps..."
+    docker exec bagisto-app php artisan optimize:clear
+    docker exec bagisto-app php artisan config:cache
+    docker exec bagisto-app php artisan route:cache
+    docker exec bagisto-app php artisan view:cache
 
-
-    echo "Application is ready at http://localhost"
+    echo "Application is ready at http://localhost:8080"
 }
 
 case "$1" in
@@ -41,8 +44,14 @@ case "$1" in
         cleanup_container
         start_container
         ;;
+    "logs")
+        docker logs -f bagisto-app
+        ;;
+    "shell")
+        docker exec -it bagisto-app bash
+        ;;
     *)
-        echo "Usage: $0 {start|stop|restart}"
+        echo "Usage: $0 {start|stop|restart|logs|shell}"
         exit 1
         ;;
 esac 
