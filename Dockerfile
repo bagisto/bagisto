@@ -42,8 +42,10 @@ RUN mkdir -p /home/bagisto/.composer && \
 # Create necessary directories
 RUN mkdir -p storage/framework/{sessions,views,cache} \
     && mkdir -p storage/logs \
+    && mkdir -p storage/app/public/{product,cache,theme} \
     && mkdir -p bootstrap/cache \
-    && mkdir -p routes
+    && mkdir -p routes \
+    && mkdir -p public/storage
 
 # Configure Apache to listen on port 8080
 RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
@@ -58,6 +60,9 @@ COPY . /var/www/html
 # setting up project permissions
 RUN chmod -R 775 /var/www/html
 RUN chown -R bagisto:www-data /var/www/html
+
+# Create storage symlink
+RUN ln -sf /var/www/html/storage/app/public /var/www/html/public/storage
 
 # Copy startup script
 COPY docker-entrypoint.sh /usr/local/bin/

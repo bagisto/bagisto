@@ -46,6 +46,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root'   => storage_path('app'),
+            'throw'  => false,
         ],
 
         'private' => [
@@ -58,6 +59,15 @@ return [
             'root'       => storage_path('app/public'),
             'url'        => env('APP_URL').'/storage',
             'visibility' => 'public',
+            'throw'      => false,
+        ],
+
+        'cache' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/public/cache'),
+            'url'    => env('APP_URL').'/storage/cache',
+            'visibility' => 'public',
+            'throw'  => false,
         ],
 
         's3' => [

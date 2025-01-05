@@ -16,6 +16,7 @@ This guide explains how to configure Amazon S3 storage for your Bagisto installa
 Add the following to your `.env` file:
 
 ```env
+# Important: Keep FILESYSTEM_DISK as public for theme assets
 FILESYSTEM_DISK=public
 FILESYSTEM_CLOUD=s3
 
@@ -50,28 +51,69 @@ AWS_URL=https://your-bucket-name.s3.your-region.amazonaws.com
 
 ### 3. Filesystem Configuration
 
-The `config/filesystems.php` file should have the following S3 configuration:
+The `config/filesystems.php` file should have the following configuration:
 
 ```php
-'s3' => [
-    'driver' => 's3',
-    'key' => env('AWS_ACCESS_KEY_ID'),
-    'secret' => env('AWS_SECRET_ACCESS_KEY'),
-    'region' => env('AWS_DEFAULT_REGION'),
-    'bucket' => env('AWS_BUCKET'),
-    'url' => env('AWS_URL'),
-    'visibility' => 'public',
+'disks' => [
+    'local' => [
+        'driver' => 'local',
+        'root'   => storage_path('app'),
+        'throw'  => false,
+    ],
+
+    'public' => [
+        'driver'     => 'local',
+        'root'       => storage_path('app/public'),
+        'url'        => env('APP_URL').'/storage',
+        'visibility' => 'public',
+        'throw'      => false,
+    ],
+
+    'cache' => [
+        'driver' => 'local',
+        'root'   => storage_path('app/public/cache'),
+        'url'    => env('APP_URL').'/storage/cache',
+        'visibility' => 'public',
+        'throw'  => false,
+    ],
+
+    's3' => [
+        'driver' => 's3',
+        'key'    => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION'),
+        'bucket' => env('AWS_BUCKET'),
+        'url'    => env('AWS_URL'),
+        'visibility' => 'public',
+    ],
 ],
 ```
 
 ### 4. Directory Structure
 
-S3 will maintain the following directory structure:
-- `/product/` - For product images
-- `/cache/` - For cached images
-- `/theme/` - For theme assets
+The application maintains the following directory structure:
+- `/product/` - Product images (stored in S3)
+- `/cache/` - Cached images (stored locally)
+- `/theme/` - Theme assets (stored locally)
 
-### 5. Testing Configuration
+### 5. Theme Assets
+
+Theme assets are handled separately from product images:
+1. Theme assets are stored locally in `public/themes/{area}/default/build/assets/`
+2. Run `npm run build` in theme directories to compile assets:
+   ```bash
+   # Build shop theme
+   cd packages/Webkul/Shop && npm install && npm run build
+   
+   # Build admin theme
+   cd packages/Webkul/Admin && npm install && npm run build
+   ```
+3. Publish Bagisto assets:
+   ```bash
+   php artisan bagisto:publish
+   ```
+
+### 6. Testing Configuration
 
 1. Clear Laravel cache:
 ```bash
@@ -82,9 +124,12 @@ php artisan optimize:clear
 - Log into admin panel
 - Create/edit a product
 - Upload an image
-- Verify the image is accessible via S3 URL
+- Verify the image is:
+  * Uploaded to S3 in the product directory
+  * Cached locally in the cache directory
+  * Accessible via both S3 and local URLs
 
-### 6. AWS CLI Commands (Optional)
+### 7. AWS CLI Commands (Optional)
 
 Useful AWS CLI commands for maintenance:
 
@@ -115,6 +160,12 @@ aws s3 rm s3://your-bucket-name --recursive
    - Clear Laravel cache
    - Verify correct S3 URL configuration
    - Check image paths in database
+   - Ensure theme assets are built and published
+
+4. 404 Errors for Cached Images
+   - Verify cache directory exists and is writable
+   - Check cache disk configuration
+   - Clear image cache and rebuild
 
 ## Security Considerations
 
