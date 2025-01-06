@@ -35,4 +35,4 @@ docker-compose.yml
 
 # Other
 .DS_Store
-Thumbs.db 
+Thumbs.db cookies.txt
