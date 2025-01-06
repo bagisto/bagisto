@@ -12,7 +12,17 @@ use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 
-Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
+Route::group([
+    'middleware' => [
+        'locale',
+        'theme',
+        'currency',
+        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+    ],
+    'prefix' => 'api'
+], function () {
     Route::controller(CoreController::class)->prefix('core')->group(function () {
         Route::get('countries', 'getCountries')->name('shop.api.core.countries');
 

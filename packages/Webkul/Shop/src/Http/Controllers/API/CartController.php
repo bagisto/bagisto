@@ -29,6 +29,14 @@ class CartController extends APIController
      */
     public function index(): JsonResource
     {
+        if (session()->has('cart')) {
+            $cartId = session()->get('cart')->id;
+            $cart = app('Webkul\Checkout\Repositories\CartRepository')->find($cartId);
+            if ($cart) {
+                Cart::setCart($cart);
+            }
+        }
+
         Cart::collectTotals();
 
         $response = [
@@ -67,6 +75,15 @@ class CartController extends APIController
             }
 
             $cart = Cart::addProduct($product, request()->all());
+
+            // Ensure cart is set in session
+            if ($cart && ! session()->has('cart')) {
+                $cartTemp = new \stdClass;
+                $cartTemp->id = $cart->id;
+                session()->put('cart', $cartTemp);
+            }
+
+            Cart::setCart($cart);
 
             return new JsonResource(array_merge([
                 'data'    => new CartResource($cart),
