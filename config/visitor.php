@@ -12,10 +12,10 @@ return [
     */
     'default' => 'jenssegers',
 
-    //except save request or route names
+    // except save request or route names
     'except' => ['login', 'register'],
 
-    //name of the table which visit records should save in
+    // name of the table which visit records should save in
     'table_name' => 'visits',
 
     /*
