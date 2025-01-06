@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Dozwolone błędy',
                     'back-btn'            => 'Powrót',
                     'create-update'       => 'Utwórz/Aktualizuj',
+                    'current-file'        => 'Aktualnie przesłany plik',
                     'delete'              => 'Usuń',
                     'download-sample'     => 'Pobierz Przykład',
                     'field-separator'     => 'Separator pól',

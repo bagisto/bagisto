@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Erreurs Autorisées',
                     'back-btn'            => 'Retour',
                     'create-update'       => 'Créer/Mettre à Jour',
+                    'current-file'        => 'Fichier téléchargé actuel',
                     'delete'              => 'Supprimer',
                     'download-sample'     => 'Télécharger un Exemple',
                     'field-separator'     => 'Séparateur de Champ',

@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => '許可されたエラー',
                     'back-btn'            => '戻る',
                     'create-update'       => '作成/更新',
+                    'current-file'        => '現在アップロードされたファイル',
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
