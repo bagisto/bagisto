@@ -39,8 +39,7 @@
 
                         <x-slot:menu>
                             <x-admin::dropdown.menu.item
-                                v-for="(perPageOption, index) in available.meta.per_page_options"
-                                :key="index"
+                                v-for="perPageOption in available.meta.per_page_options"
                                 @click="changePerPageOption(perPageOption)"
                             >
                                 @{{ perPageOption }}
