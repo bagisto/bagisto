@@ -452,7 +452,7 @@ class ProductRepository extends Repository
             $qb = $query->distinct()
                 ->whereIn('products.id', $indices['ids']);
 
-            //Sort collection
+            // Sort collection
             $qb->orderBy(DB::raw('FIELD(id, '.implode(',', $indices['ids']).')'));
 
             return $qb;
