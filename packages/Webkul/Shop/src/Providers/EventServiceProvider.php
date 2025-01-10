@@ -28,32 +28,12 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Shop\Listeners\Customer@afterNoteCreated',
         ],
 
-        'checkout.order.save.after' => [
-            'Webkul\Shop\Listeners\Order@afterCreated',
-        ],
-
-        'sales.order.cancel.after' => [
-            'Webkul\Shop\Listeners\Order@afterCanceled',
-        ],
-
         'sales.order.comment.create.after' => [
             'Webkul\Shop\Listeners\Order@afterCommented',
         ],
 
-        'sales.invoice.save.after' => [
-            'Webkul\Shop\Listeners\Invoice@afterCreated',
-        ],
-
         'sales.invoice.send_duplicate_email' => [
             'Webkul\Shop\Listeners\Invoice@afterCreated',
-        ],
-
-        'sales.shipment.save.after' => [
-            'Webkul\Shop\Listeners\Shipment@afterCreated',
-        ],
-
-        'sales.refund.save.after' => [
-            'Webkul\Shop\Listeners\Refund@afterCreated',
         ],
     ];
 }
