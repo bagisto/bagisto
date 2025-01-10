@@ -108,7 +108,7 @@ return [
                     'other'                   => 'Altres',
                     'phone'                   => 'Telèfon',
                     'save'                    => 'Desar',
-                    'subscribe-to-newsletter' => 'Subscriure’s al butlletí',
+                    'subscribe-to-newsletter' => 'Subscriu-te al butlletí',
                 ],
             ],
 
@@ -185,7 +185,7 @@ return [
                         'canceled'        => 'Cancel·lat',
                         'closed'          => 'Tancat',
                         'completed'       => 'Completat',
-                        'fraud'           => 'Fraude',
+                        'fraud'           => 'Frau',
                         'pending'         => 'Pendent',
                         'pending-payment' => 'Pagament Pendent',
                         'processing'      => 'Processant',
@@ -217,7 +217,7 @@ return [
                     'information' => [
                         'discount'                   => 'Descompte',
                         'excl-tax'                   => 'Excl. Impostos:',
-                        'grand-total'                => 'Total General',
+                        'grand-total'                => 'Total',
                         'info'                       => 'Informació',
                         'item-canceled'              => 'Cancel·lat (:qty_canceled)',
                         'item-refunded'              => 'Reembossat (:qty_refunded)',
@@ -241,7 +241,7 @@ return [
                         'tax-percent'                => 'Percentatge d\'Impostos',
                         'total-due'                  => 'Total a Pagar',
                         'total-paid'                 => 'Total Pagat',
-                        'total-refunded'             => 'Total Reembossat',
+                        'total-refunded'             => 'Total Reemborsat',
                     ],
 
                     'invoices' => [
@@ -253,7 +253,7 @@ return [
                         'price'                      => 'Preu',
                         'print'                      => 'Imprimir',
                         'product-name'               => 'Nom',
-                        'products-ordered'           => 'Productes Comandats',
+                        'products-ordered'           => 'Productes Comprats',
                         'qty'                        => 'Quantitat',
                         'shipping-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
                         'shipping-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
@@ -278,16 +278,16 @@ return [
 
                     'refunds' => [
                         'adjustment-fee'             => 'Comissió d\'Ajust',
-                        'adjustment-refund'          => 'Reembossament d\'Ajust',
+                        'adjustment-refund'          => 'Reemborsament d\'Ajust',
                         'discount'                   => 'Descompte',
-                        'grand-total'                => 'Total General',
-                        'individual-refund'          => 'Reembossament #:refund_id',
+                        'grand-total'                => 'Total',
+                        'individual-refund'          => 'Reemborsament #:refund_id',
                         'no-result-found'            => 'No s\'han trobat registres.',
                         'order-summary'              => 'Resum de la Comanda',
                         'price'                      => 'Preu',
                         'product-name'               => 'Nom',
                         'qty'                        => 'Quantitat',
-                        'refunds'                    => 'Reembossaments',
+                        'refunds'                    => 'Reemborsaments',
                         'shipping-handling'          => 'Enviament i Manipulació',
                         'shipping-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
                         'shipping-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
@@ -319,9 +319,9 @@ return [
                     'product-name'               => 'Nom del Producte',
                     'qty'                        => 'Quantitat',
                     'ship-to'                    => 'Enviar a',
-                    'shipping-handling-excl-tax' => 'Enviament i Maneig (Excl. Impostos)',
-                    'shipping-handling-incl-tax' => 'Enviament i Maneig (Incl. Impostos)',
-                    'shipping-handling'          => 'Enviament i Maneig',
+                    'shipping-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
+                    'shipping-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
+                    'shipping-handling'          => 'Enviament i Manipulació',
                     'shipping-method'            => 'Mètode d\'Enviament',
                     'sku'                        => 'SKU',
                     'subtotal-excl-tax'          => 'Subtotal (Excl. Impostos)',
@@ -359,9 +359,9 @@ return [
                 'color'              => 'Color',
                 'delete-all'         => 'Eliminar-ho Tot',
                 'empty'              => "No s'han afegit productes a la llista de desitjos.",
-                'move-to-cart'       => 'Moure al Carret',
-                'moved'              => "Article mogut amb èxit al carret",
-                'moved-success'      => "Article mogut amb èxit al carret",
+                'move-to-cart'       => 'Moure a la Cistella',
+                'moved'              => "Article mogut amb èxit a la cistella",
+                'moved-success'      => "Article mogut amb èxit a la cistella",
                 'page-title'         => 'Llista de Desitjos',
                 'product-removed'    => 'El producte ja no està disponible, ha estat eliminat per l’administrador',
                 'profile'            => 'Perfil',
@@ -397,9 +397,9 @@ return [
             'header' => [
                 'account'           => 'Compte',
                 'bagisto'           => 'Bagisto',
-                'cart'              => 'Carret de la compra',
+                'cart'              => 'Cistella de la compra',
                 'compare'           => 'Comparar',
-                'dropdown-text'     => 'Gestiona el carret, comandes i llista de desitjos',
+                'dropdown-text'     => 'Gestiona la cistella, comandes i llista de desitjos',
                 'logout'            => 'Tancar sessió',
                 'no-category-found' => 'No s’ha trobat cap categoria.',
                 'orders'            => 'Comandes',
@@ -511,7 +511,7 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'            => 'Afegir al carret',
+                'add-to-cart'            => 'Afegir a la cistella',
                 'add-to-compare'         => 'Afegir a comparar',
                 'add-to-compare-success' => 'Element afegit correctament a la llista de comparació.',
                 'add-to-wishlist'        => 'Afegir a la llista de desitjos',
@@ -612,7 +612,7 @@ return [
                 'write-a-review'   => 'Escriure una ressenya',
             ],
 
-            'add-to-cart'            => 'Afegir al carret',
+            'add-to-cart'            => 'Afegir a la cistella',
             'add-to-compare'         => 'Producte afegit a la llista de comparació.',
             'add-to-wishlist'        => 'Afegir a la llista de desitjos',
             'additional-information' => 'Informació addicional',
@@ -685,7 +685,7 @@ return [
 
     'checkout' => [
         'success' => [
-            'info'          => 'Et enviarem els detalls de la teva comanda i la informació de seguiment per correu electrònic',
+            'info'          => 'T\'enviarem els detalls de la teva comanda i la informació de seguiment per correu electrònic',
             'order-id-info' => 'El teu número de comanda és #:order_id',
             'thanks'        => 'Gràcies per la teva comanda!',
             'title'         => 'Comanda realitzada amb èxit',
@@ -694,8 +694,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar amb el Pagament',
             'illegal'                   => 'La quantitat no pot ser inferior a un.',
-            'inactive-add'              => 'L\'article inactiu no es pot afegir al carretó.',
-            'inactive'                  => 'L\'article ha estat desactivat i posteriorment eliminat del carretó.',
+            'inactive-add'              => 'L\'article inactiu no es pot afegir a la cistella.',
+            'inactive'                  => 'L\'article ha estat desactivat i posteriorment eliminat de la cistella.',
             'inventory-warning'         => 'La quantitat sol·licitada no està disponible, si us plau intenta-ho de nou més tard.',
             'item-add-to-cart'          => 'Producte afegit correctament',
             'minimum-order-message'     => 'L\'import mínim de la comanda és',
@@ -704,16 +704,16 @@ return [
             'paypal-payment-cancelled'  => 'El pagament de Paypal ha estat cancel·lat.',
             'qty-missing'               => 'Almenys un producte ha de tenir una quantitat superior a 1.',
             'return-to-shop'            => 'Tornar a la Botiga',
-            'rule-applied'              => 'Regla de carretó aplicada',
+            'rule-applied'              => 'Regla de cistella aplicada',
             'select-hourly-duration'    => 'Selecciona una durada d\'una hora.',
-            'success-remove'            => 'L\'article s\'ha eliminat correctament del carretó.',
+            'success-remove'            => 'L\'article s\'ha eliminat correctament de la cistella.',
             'suspended-account-message' => 'El teu compte ha estat suspès.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
-                'cart'                     => 'Carretó',
+                'cart'                     => 'Cistella',
                 'continue-shopping'        => 'Continuar comprant',
-                'empty-product'            => 'No tens productes al teu carretó.',
+                'empty-product'            => 'No tens productes a la teva cistella.',
                 'excl-tax'                 => 'Excl. Impostos:',
                 'home'                     => 'Inici',
                 'items-selected'           => ':count Articles seleccionats',
@@ -724,14 +724,14 @@ return [
                 'quantity'                 => 'Quantitat',
                 'quantity-update'          => 'Quantitat actualitzada correctament',
                 'remove'                   => 'Eliminar',
-                'remove-selected-success'  => 'Els articles seleccionats s\'han eliminat correctament del carretó.',
+                'remove-selected-success'  => 'Els articles seleccionats s\'han eliminat correctament de la cistella.',
                 'see-details'              => 'Veure Detalls',
                 'select-all'               => 'Seleccionar tot',
-                'select-cart-item'         => 'Seleccionar article del carretó',
+                'select-cart-item'         => 'Seleccionar article de la cistella',
                 'tax'                      => 'Impost',
                 'total'                    => 'Total',
-                'update-cart'              => 'Actualitzar Carretó',
-                'view-cart'                => 'Veure Carretó',
+                'update-cart'              => 'Actualitzar Cistella',
+                'view-cart'                => 'Veure Cistella',
 
                 'cross-sell' => [
                     'title' => 'Més opcions',
@@ -740,18 +740,18 @@ return [
 
             'mini-cart' => [
                 'continue-to-checkout' => 'Continuar amb el Pagament',
-                'empty-cart'           => 'El teu carretó està buit',
+                'empty-cart'           => 'La teva cistella està buida',
                 'excl-tax'             => 'Excl. Impostos:',
                 'offer-on-orders'      => 'Obté fins a un 30% de DESCOMPTE en la teva primera comanda!',
                 'remove'               => 'Eliminar',
                 'see-details'          => 'Veure Detalls',
-                'shopping-cart'        => 'Carretó de Compra',
+                'shopping-cart'        => 'Cistella de Compra',
                 'subtotal'             => 'Subtotal',
-                'view-cart'            => 'Veure Carretó',
+                'view-cart'            => 'Veure Cistella',
             ],
 
             'summary' => [
-                'cart-summary'              => 'Resum del Carretó',
+                'cart-summary'              => 'Resum de la Cistella',
                 'delivery-charges'          => 'Despeses d\'enviament',
                 'delivery-charges-excl-tax' => 'Despeses d\'enviament (Excl. Impostos)',
                 'delivery-charges-incl-tax' => 'Despeses d\'enviament (Incl. Impostos)',
@@ -819,7 +819,7 @@ return [
             ],
 
             'summary' => [
-                'cart-summary'              => 'Resum del Carretó',
+                'cart-summary'              => 'Resum de la Cistella',
                 'delivery-charges'          => 'Despeses d\'enviament',
                 'delivery-charges-excl-tax' => 'Despeses d\'enviament (Excl. Impostos)',
                 'delivery-charges-incl-tax' => 'Despeses d\'enviament (Incl. Impostos)',
@@ -981,11 +981,11 @@ return [
         ],
 
         'contact-us' => [
-            'contact-from'    => 'a través del formulario de contacto del sitio web',
-            'reply-to-mail'   => 'por favor responda a este correo electrónico.',
-            'reach-via-phone' => 'Alternativamente, puede comunicarse con nosotros por teléfono al',
+            'contact-from'    => 'a través del formulari de contacte del lloc web',
+            'reply-to-mail'   => 'si us plau, respongui a aquest correu electrònic.',
+            'reach-via-phone' => 'Alternativament, pot comunicar-se amb nosaltres por telèfon al',
             'inquiry-from'    => 'Consulta de',
-            'to'              => 'Para contactar a',
+            'to'              => 'Per a contactar a',
         ],
 
         'orders' => [
