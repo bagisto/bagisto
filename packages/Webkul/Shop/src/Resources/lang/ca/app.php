@@ -253,7 +253,7 @@ return [
                         'price'                      => 'Preu',
                         'print'                      => 'Imprimir',
                         'product-name'               => 'Nom',
-                        'products-ordered'           => 'Productes Comprats',
+                        'products-ordered'           => 'Productes Encarregats',
                         'qty'                        => 'Quantitat',
                         'shipping-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
                         'shipping-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
