@@ -67,7 +67,7 @@ return [
             'profile-image'     => 'Imatge de perfil',
             'save-btn'          => 'Desar compte',
             'title'             => 'El meu compte',
-            'update-success'    => 'Compte actualitzat amb èxit',
+            'update-success'    => 'Compte actualitzat amb éxit',
             'upload-image-info' => 'Carregar una imatge de perfil (110px X 110px) en format PNG o JPG',
         ],
     ],
@@ -337,15 +337,15 @@ return [
                 'billing-address'                => 'Adreça de Facturació',
                 'cancel'                         => 'Cancel·lar',
                 'cancel-msg'                     => 'Estàs segur que vols cancel·lar aquesta comanda?',
-                'cancel-success'                 => 'Comanda cancel·lada amb èxit',
+                'cancel-success'                 => 'Comanda cancel·lada amb éxit',
                 'canceled'                       => 'Cancel·lada',
                 'channel'                        => 'Canal',
                 'closed'                         => 'Tancat',
-                'comment-success'                => 'Comentari afegit amb èxit.',
+                'comment-success'                => 'Comentari afegit amb éxit.',
                 'comments'                       => 'Comentaris',
                 'completed'                      => 'Completada',
                 'contact'                        => 'Contacte',
-                'create-success'                 => 'Comanda creada amb èxit',
+                'create-success'                 => 'Comanda creada amb éxit',
                 'currency'                       => 'Moneda',
                 'customer'                       => 'Client',
                 'customer-group'                 => 'Grup de Clients',
@@ -449,7 +449,7 @@ return [
                 'quantity-invalid' => 'Quantitat no vàlida',
                 'sku'              => 'SKU - :sku',
                 'source'           => 'Font',
-                'success'          => 'Enviament creat amb èxit',
+                'success'          => 'Enviament creat amb éxit',
                 'title'            => 'Crear nou Enviament',
                 'tracking-number'  => 'Número de Seguiment',
             ],
@@ -704,7 +704,7 @@ return [
                     'save-transaction'           => 'Guardar Transacció',
                     'transaction-amount-exceeds' => 'L\'import de la transacció excedeix',
                     'transaction-amount-zero'    => 'Import de la transacció zero',
-                    'transaction-saved'          => 'Transacció desada amb èxit.',
+                    'transaction-saved'          => 'Transacció desada amb éxit.',
                 ],
 
                 'view' => [
@@ -754,8 +754,8 @@ return [
                     'id'                     => 'ID',
                     'id-value'               => 'ID - :id',
                     'image'                  => 'Imatge',
-                    'mass-delete-success'    => 'Productes seleccionats eliminats amb èxit',
-                    'mass-update-success'    => 'Productes seleccionats actualitzats amb èxit',
+                    'mass-delete-success'    => 'Productes seleccionats eliminats amb éxit',
+                    'mass-update-success'    => 'Productes seleccionats actualitzats amb éxit',
                     'name'                   => 'Nom',
                     'out-of-stock'           => 'Exhaurit',
                     'price'                  => 'Preu',
@@ -1038,12 +1038,12 @@ return [
                 ],
             ],
 
-            'create-success'          => 'Producte creat amb èxit',
+            'create-success'          => 'Producte creat amb éxit',
             'delete-failed'           => 'Error en eliminar el producte',
-            'delete-success'          => 'Producte eliminat amb èxit',
-            'product-copied'          => 'Producte copiat amb èxit',
-            'saved-inventory-message' => 'Producte desat amb èxit',
-            'update-success'          => 'Producte actualitzat amb èxit',
+            'delete-success'          => 'Producte eliminat amb éxit',
+            'product-copied'          => 'Producte copiat amb éxit',
+            'saved-inventory-message' => 'Producte desat amb éxit',
+            'update-success'          => 'Producte actualitzat amb éxit',
         ],
 
         'attributes' => [
@@ -1066,7 +1066,7 @@ return [
                     'id'                  => 'ID',
                     'image'               => 'Imatge',
                     'locale-based'        => 'Basat en la localització',
-                    'mass-delete-success' => 'Atribut seleccionat eliminat amb èxit',
+                    'mass-delete-success' => 'Atribut seleccionat eliminat amb éxit',
                     'multiselect'         => 'Selecció múltiple',
                     'name'                => 'Nom',
                     'price'               => 'Preu',
@@ -1115,7 +1115,7 @@ return [
                 'multiselect'           => 'Selecció Múltiple',
                 'no'                    => 'No',
                 'numeric'               => 'Número',
-                'option-deleted'        => 'Opció eliminada amb èxit',
+                'option-deleted'        => 'Opció eliminada amb éxit',
                 'options'               => 'Opcions',
                 'position'              => 'Posició',
                 'price'                 => 'Preu',
@@ -1179,7 +1179,7 @@ return [
                 'multiselect'            => 'Selecció Múltiple',
                 'no'                     => 'No',
                 'numeric'                => 'Número',
-                'option-deleted'         => 'Opció eliminada amb èxit',
+                'option-deleted'         => 'Opció eliminada amb éxit',
                 'options'                => 'Opcions',
                 'position'               => 'Posició',
                 'price'                  => 'Preu',
@@ -1209,10 +1209,10 @@ return [
                 ],
             ],
 
-            'create-success'    => 'Atribut creat amb èxit',
+            'create-success'    => 'Atribut creat amb éxit',
             'delete-failed'     => 'Error en eliminar l\'atribut',
-            'delete-success'    => 'Atribut eliminat amb èxit',
-            'update-success'    => 'Atribut actualitzat amb èxit',
+            'delete-success'    => 'Atribut eliminat amb éxit',
+            'update-success'    => 'Atribut actualitzat amb éxit',
             'user-define-error' => 'No es pot eliminar l\'atribut del sistema',
         ],
 
@@ -1301,11 +1301,11 @@ return [
             ],
 
             'category'             => 'Categoria',
-            'create-success'       => 'Categoria creada amb èxit.',
+            'create-success'       => 'Categoria creada amb éxit.',
             'delete-category-root' => 'No es pot eliminar la categoria arrel.',
             'delete-failed'        => 'S\'ha produït un error en eliminar la categoria.',
-            'delete-success'       => 'La categoria s\'ha eliminat amb èxit.',
-            'update-success'       => 'Categoria actualitzada amb èxit.',
+            'delete-success'       => 'La categoria s\'ha eliminat amb éxit.',
+            'update-success'       => 'Categoria actualitzada amb éxit.',
         ],
 
         'families' => [
@@ -1383,12 +1383,12 @@ return [
 
             'attribute-family'        => 'Família d\'Atributs',
             'attribute-product-error' => 'La família s\'utilitza en productes.',
-            'create-success'          => 'Família creada amb èxit.',
+            'create-success'          => 'Família creada amb éxit.',
             'delete-failed'           => 'S\'ha produït un error en eliminar la família.',
-            'delete-success'          => 'Família eliminada amb èxit.',
+            'delete-success'          => 'Família eliminada amb éxit.',
             'family'                  => 'Família',
             'last-delete-error'       => 'Es requereix almenys una família.',
-            'update-success'          => 'Família actualitzada amb èxit.',
+            'update-success'          => 'Família actualitzada amb éxit.',
             'user-define-error'       => 'No es pot eliminar la família d\'atributs del sistema',
         ],
     ],
@@ -1430,7 +1430,7 @@ return [
                 'create' => [
                     'contact-number'        => 'Número de Contacte',
                     'create-btn'            => 'Crear Client',
-                    'create-success'        => 'Client creat amb èxit',
+                    'create-success'        => 'Client creat amb éxit',
                     'customer-group'        => 'Grup de Clients',
                     'date-of-birth'         => 'Data de Naixement',
                     'email'                 => 'Correu Electrònic',
@@ -1465,7 +1465,7 @@ return [
                 'group'                       => 'Grup - :group_code',
                 'inactive'                    => 'Inactiu',
                 'login-as-customer'           => 'Iniciar sessió com a client',
-                'note-created-success'        => 'Nota creada amb èxit',
+                'note-created-success'        => 'Nota creada amb éxit',
                 'order-create-confirmation'   => 'Estàs segur que vols crear una comanda per a aquest client?',
                 'phone'                       => 'Telèfon - :phone',
                 'set-as-default'              => 'Establir com a predeterminat',
@@ -1514,11 +1514,11 @@ return [
                         'vat-id'          => 'ID d\'IVA',
                     ],
 
-                    'address-delete-success' => 'Adreça eliminada amb èxit',
-                    'create-success'         => 'Adreça creada amb èxit',
-                    'set-default-success'    => 'Adreça per defecte actualitzada amb èxit',
-                    'success-mass-delete'    => 'Eliminació massiva d\'adreces finalitzada amb èxit',
-                    'update-success'         => 'Adreça actualitzada amb èxit',
+                    'address-delete-success' => 'Adreça eliminada amb éxit',
+                    'create-success'         => 'Adreça creada amb éxit',
+                    'set-default-success'    => 'Adreça per defecte actualitzada amb éxit',
+                    'success-mass-delete'    => 'Eliminació massiva d\'adreces finalitzada amb éxit',
+                    'update-success'         => 'Adreça actualitzada amb éxit',
                 ],
 
                 'datagrid' => [
@@ -1616,22 +1616,22 @@ return [
                 ],
 
                 'cart' => [
-                    'delete-success' => 'Element del carret eliminat amb èxit.',
+                    'delete-success' => 'Element del carret eliminat amb éxit.',
                 ],
 
                 'wishlist' => [
-                    'delete-success' => 'Element de la llista de desitjos eliminat amb èxit.',
+                    'delete-success' => 'Element de la llista de desitjos eliminat amb éxit.',
                 ],
 
                 'compare' => [
-                    'delete-success' => 'Element de comparació eliminat amb èxit.',
+                    'delete-success' => 'Element de comparació eliminat amb éxit.',
                 ],
             ],
 
             'delete-failed'  => 'S\'ha produït un error en eliminar el client',
-            'delete-success' => 'Client eliminat amb èxit',
+            'delete-success' => 'Client eliminat amb éxit',
             'order-pending'  => 'Hi ha comandes pendents',
-            'update-success' => 'Client actualitzat amb èxit',
+            'update-success' => 'Client actualitzat amb éxit',
 
         ],
 
@@ -1644,15 +1644,15 @@ return [
                     'create-btn' => 'Crear Grup',
                     'name'       => 'Nom',
                     'save-btn'   => 'Desar Grup',
-                    'success'    => 'Grup creat amb èxit',
+                    'success'    => 'Grup creat amb éxit',
                     'title'      => 'Crear Nou Grup',
                 ],
 
                 'edit'  => [
                     'delete-failed'  => 'Error en eliminar el grup',
-                    'delete-success' => 'Grup eliminat amb èxit',
+                    'delete-success' => 'Grup eliminat amb éxit',
                     'group-default'  => 'No es pot eliminar el grup per defecte',
-                    'success'        => 'Grup actualitzat amb èxit',
+                    'success'        => 'Grup actualitzat amb éxit',
                     'title'          => 'Editar Grup',
                 ],
 
@@ -1692,7 +1692,7 @@ return [
                     'save-btn'       => 'Desar',
                     'status'         => 'Estat',
                     'title'          => 'Editar Ressenya',
-                    'update-success' => 'Actualització realitzada amb èxit',
+                    'update-success' => 'Actualització realitzada amb éxit',
                 ],
 
                 'datagrid' => [
@@ -1701,13 +1701,13 @@ return [
                     'customer-names'         => 'Nom',
                     'date'                   => 'Data',
                     'delete'                 => 'Eliminar',
-                    'delete-success'         => 'Ressenya eliminada amb èxit',
+                    'delete-success'         => 'Ressenya eliminada amb éxit',
                     'disapproved'            => 'Desaprovada',
                     'edit'                   => 'Editar',
                     'id'                     => 'ID',
                     'mass-delete-error'      => 'Alguna cosa ha anat malament',
-                    'mass-delete-success'    => 'Ressenyes seleccionades eliminades amb èxit',
-                    'mass-update-success'    => 'Ressenyes seleccionades actualitzades amb èxit',
+                    'mass-delete-success'    => 'Ressenyes seleccionades eliminades amb éxit',
+                    'mass-update-success'    => 'Ressenyes seleccionades actualitzades amb éxit',
                     'pending'                => 'Pendent',
                     'product'                => 'Producte',
                     'rating'                 => 'Qualificació',
@@ -1859,7 +1859,7 @@ return [
                         'general'        => 'General',
                         'name'           => 'Nom',
                         'save-btn'       => 'Desar esdeveniment',
-                        'success'        => 'Esdeveniments creats amb èxit',
+                        'success'        => 'Esdeveniments creats amb éxit',
                         'title'          => 'Crear esdeveniments',
                     ],
 
@@ -1870,7 +1870,7 @@ return [
                 ],
 
                 'delete-failed'  => 'Eliminació de :name fallida',
-                'delete-success' => 'Esdeveniments eliminats amb èxit',
+                'delete-success' => 'Esdeveniments eliminats amb éxit',
                 'edit-error'     => 'No es pot editar l\'esdeveniment',
             ],
 
@@ -1903,7 +1903,7 @@ return [
                 ],
 
                 'delete-failed'  => 'Error en eliminar el subscriptor',
-                'delete-success' => 'Subscriptor eliminat amb èxit',
+                'delete-success' => 'Subscriptor eliminat amb éxit',
                 'delete-warning' => 'Estàs segur que vols realitzar aquesta acció?',
             ],
         ],
@@ -1964,7 +1964,7 @@ return [
                     'contains'                                  => 'Conté',
                     'coupon-code'                               => 'Codi de Cupó',
                     'coupon-type'                               => 'Tipus de Cupó',
-                    'create-success'                            => 'Regla del carro creada amb èxit',
+                    'create-success'                            => 'Regla del carro creada amb éxit',
                     'customer-groups'                           => 'Grups de Clients',
                     'description'                               => 'Descripció',
                     'discount-amount'                           => 'Quantitat de Descompte',
@@ -2090,7 +2090,7 @@ return [
                     'to'                                        => 'Fins a',
                     'total-items-qty'                           => 'Quantitat Total d\'Articles',
                     'total-weight'                              => 'Pes Total',
-                    'update-success'                            => 'Regla del carro actualitzada amb èxit',
+                    'update-success'                            => 'Regla del carro actualitzada amb éxit',
                     'uses-per-coupon'                           => 'Usos per Cupó',
                     'uses-per-customer'                         => 'Usos per Client',
                     'uses-per-customer-control-info'            => 'S\'utilitzarà només per a clients registrats.',
@@ -2205,16 +2205,16 @@ return [
                     'yes'                      => 'Sí',
                 ],
 
-                'create-success' => 'Regla del Catàleg creada amb èxit',
-                'delete-success' => 'Regla del Catàleg eliminada amb èxit',
-                'update-success' => 'Regla del Catàleg actualitzada amb èxit',
+                'create-success' => 'Regla del Catàleg creada amb éxit',
+                'delete-success' => 'Regla del Catàleg eliminada amb éxit',
+                'update-success' => 'Regla del Catàleg actualitzada amb éxit',
             ],
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'No es pot eliminar la regla de la cistella',
-                'delete-success'              => 'Cupó de regla de la cistella eliminada amb èxit',
-                'mass-delete-success'         => 'Elements seleccionats eliminats amb èxit',
-                'success'                     => ':name creat amb èxit',
+                'delete-success'              => 'Cupó de regla de la cistella eliminada amb éxit',
+                'mass-delete-success'         => 'Elements seleccionats eliminats amb éxit',
+                'success'                     => ':name creat amb éxit',
 
                 'datagrid' => [
                     'coupon-code'     => 'Códi de cupó',
@@ -2255,14 +2255,14 @@ return [
                         'results'        => 'Resultats',
                         'save-btn'       => 'Desar terme de cerca',
                         'search-query'   => 'Consulta de cerca',
-                        'success'        => 'Terme de cerca creat amb èxit',
+                        'success'        => 'Terme de cerca creat amb éxit',
                         'title'          => 'Crear terme de cerca',
                         'uses'           => 'Usos',
                     ],
 
                     'edit' => [
-                        'delete-success' => 'Terme de cerca eliminat amb èxit',
-                        'success'        => 'Terme de cerca actualitzat amb èxit',
+                        'delete-success' => 'Terme de cerca eliminat amb éxit',
+                        'success'        => 'Terme de cerca actualitzat amb éxit',
                         'title'          => 'Editar terme de cerca',
                     ],
                 ],
@@ -2287,15 +2287,15 @@ return [
                         'delete-warning' => 'Estàs segur que vols realitzar aquesta acció?',
                         'name'           => 'Nom',
                         'save-btn'       => 'Guardar Sinònim de Cerca',
-                        'success'        => 'Sinònim de Cerca creat amb èxit',
+                        'success'        => 'Sinònim de Cerca creat amb éxit',
                         'terms'          => 'Termes',
                         'terms-info'     => 'Introdueix els sinònims com una llista separada per comes, per exemple, "sabates, calçat". Això amplia la cerca per incloure tots els termes.',
                         'title'          => 'Crear Sinònim de Cerca',
                     ],
 
                     'edit' => [
-                        'delete-success' => 'Sinònim de Cerca eliminat amb èxit',
-                        'success'        => 'Sinònim de Cerca actualitzat amb èxit',
+                        'delete-success' => 'Sinònim de Cerca eliminat amb éxit',
+                        'success'        => 'Sinònim de Cerca actualitzat amb éxit',
                         'title'          => 'Editar Sinònim de Cerca',
                     ],
                 ],
@@ -2324,12 +2324,12 @@ return [
                         'path'           => 'Ruta',
                         'path-info'      => 'Exemple: "/sitemap/" o "/" per a la ruta base',
                         'save-btn'       => 'Desar Mapa del lloc',
-                        'success'        => 'Mapa del lloc creat amb èxit',
+                        'success'        => 'Mapa del lloc creat amb éxit',
                         'title'          => 'Crear Mapa del lloc',
 
                         'edit' => [
-                            'delete-success' => 'Mapa del lloc eliminat amb èxit',
-                            'success'        => 'Mapa del lloc actualitzat amb èxit',
+                            'delete-success' => 'Mapa del lloc eliminat amb éxit',
+                            'success'        => 'Mapa del lloc actualitzat amb éxit',
                             'title'          => 'Editar Mapa del lloc',
                         ],
                 ],
@@ -2490,12 +2490,12 @@ return [
                     'title'   => 'Editar Idioma',
                 ],
 
-                'create-success'    => 'Idioma creat amb èxit.',
+                'create-success'    => 'Idioma creat amb éxit.',
                 'delete-failed'     => 'Error en eliminar l\'idioma',
-                'delete-success'    => 'Idioma eliminat amb èxit.',
+                'delete-success'    => 'Idioma eliminat amb éxit.',
                 'delete-warning'    => 'Estàs segur que vols realitzar aquesta acció?',
                 'last-delete-error' => 'Es requereix almenys un idioma.',
-                'update-success'    => 'Idioma actualitzat amb èxit.',
+                'update-success'    => 'Idioma actualitzat amb éxit.',
             ],
         ],
 
@@ -2537,11 +2537,11 @@ return [
                     'title' => 'Editar Moneda',
                 ],
 
-                'create-success'    => 'Moneda creada amb èxit.',
+                'create-success'    => 'Moneda creada amb éxit.',
                 'delete-failed'     => 'Error en eliminar la Moneda',
-                'delete-success'    => 'Moneda eliminada amb èxit.',
+                'delete-success'    => 'Moneda eliminada amb éxit.',
                 'last-delete-error' => 'Es requereix almenys una Moneda.',
-                'update-success'    => 'Moneda actualitzada amb èxit.',
+                'update-success'    => 'Moneda actualitzada amb éxit.',
             ],
         ],
 
@@ -2763,11 +2763,11 @@ return [
                 'title'             => 'Editar Fonts d\'Inventari',
             ],
 
-            'create-success'    => 'Font d\'Inventari creada amb èxit',
+            'create-success'    => 'Font d\'Inventari creada amb éxit',
             'delete-failed'     => 'Error en eliminar les Fonts d\'Inventari',
-            'delete-success'    => 'Fonts d\'Inventari eliminades amb èxit',
+            'delete-success'    => 'Fonts d\'Inventari eliminades amb éxit',
             'last-delete-error' => 'No es poden eliminar les últimes Fonts d\'Inventari',
-            'update-success'    => 'Fonts d\'Inventari actualitzades amb èxit',
+            'update-success'    => 'Fonts d\'Inventari actualitzades amb éxit',
         ],
 
         'taxes' => [
@@ -2864,10 +2864,10 @@ return [
                     'zip-to'         => 'Fins a Codi Postal',
                 ],
 
-                'create-success' => 'Taxa d\'Impostos creada amb èxit.',
+                'create-success' => 'Taxa d\'Impostos creada amb éxit.',
                 'delete-failed'  => 'Error en eliminar la Taxa d\'Impostos',
-                'delete-success' => 'Taxa d\'Impostos eliminada amb èxit',
-                'update-success' => 'Taxa d\'Impostos actualitzada amb èxit',
+                'delete-success' => 'Taxa d\'Impostos eliminada amb éxit',
+                'update-success' => 'Taxa d\'Impostos actualitzada amb éxit',
             ],
         ],
 
@@ -2875,7 +2875,7 @@ return [
             'index' => [
                 'create-btn'        => 'Crear Canal',
                 'delete-failed'     => 'Error en eliminar el Canal',
-                'delete-success'    => 'Canal eliminat amb èxit.',
+                'delete-success'    => 'Canal eliminat amb éxit.',
                 'last-delete-error' => 'Error en eliminar l\'últim Canal.',
                 'title'             => 'Canals',
 
@@ -3015,14 +3015,14 @@ return [
 
             'activate-warning'   => 'El teu compte encara no ha estat activat, si us plau, contacta amb l\'administrador.',
             'cannot-change'      => 'No es pot canviar l\'usuari.',
-            'create-success'     => 'Usuari creat amb èxit.',
+            'create-success'     => 'Usuari creat amb éxit.',
             'delete-failed'      => 'Error en eliminar l\'usuari.',
-            'delete-success'     => 'Usuari eliminat amb èxit.',
+            'delete-success'     => 'Usuari eliminat amb éxit.',
             'delete-warning'     => 'Estàs segur que vols realitzar aquesta acció?',
             'incorrect-password' => 'Contrasenya incorrecta',
             'last-delete-error'  => 'Error en eliminar l\'últim usuari.',
             'login-error'        => 'Si us plau, verifica les teves credencials i intenta-ho de nou.',
-            'update-success'     => 'Usuari actualitzat amb èxit.',
+            'update-success'     => 'Usuari actualitzat amb éxit.',
         ],
 
         'roles' => [
@@ -3068,11 +3068,11 @@ return [
             ],
 
             'being-used'        => 'El Rol ja està en ús a l\'Usuari de l\'Administrador',
-            'create-success'    => 'Rols creats amb èxit',
+            'create-success'    => 'Rols creats amb éxit',
             'delete-failed'     => 'Error en eliminar el Rol',
-            'delete-success'    => 'Rol eliminat amb èxit',
+            'delete-success'    => 'Rol eliminat amb éxit',
             'last-delete-error' => 'No es pot eliminar l\'últim Rol',
-            'update-success'    => 'Rol actualitzat amb èxit',
+            'update-success'    => 'Rol actualitzat amb éxit',
         ],
 
         'themes' => [
@@ -3195,9 +3195,9 @@ return [
                 'yes'                           => 'Sí',
             ],
 
-            'create-success' => 'Tema creat amb èxit',
-            'delete-success' => 'Tema eliminat amb èxit',
-            'update-success' => 'Tema actualitzat amb èxit',
+            'create-success' => 'Tema creat amb éxit',
+            'delete-success' => 'Tema eliminat amb éxit',
+            'update-success' => 'Tema actualitzat amb éxit',
         ],
     ],
 
@@ -3647,7 +3647,7 @@ return [
                         'country'    => 'País',
                         'state'      => 'Estat',
                         'title'      => 'Requisits',
-                        'title-info' => 'Els requisits són les condicions, característiques o especificacions necessàries perquè alguna cosa es compleixi, s\'aconsegueixi o es satisfaci amb èxit.',
+                        'title-info' => 'Els requisits són les condicions, característiques o especificacions necessàries perquè alguna cosa es compleixi, s\'aconsegueixi o es satisfaci amb éxit.',
                         'zip'        => 'Codi Postal',
                     ],
 
