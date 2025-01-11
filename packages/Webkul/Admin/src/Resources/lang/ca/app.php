@@ -2332,70 +2332,70 @@ return [
                             'success'        => 'Mapa del lloc actualitzat amb éxit',
                             'title'          => 'Editar Mapa del lloc',
                         ],
-                ],
-
-                'edit' => [
-                    'back-btn'       => 'Enrere',
-                    'file-name'      => 'Nom del fitxer',
-                    'file-name-info' => 'Exemple: sitemap.xml',
-                    'general'        => 'General',
-                    'path'           => 'Ruta',
-                    'path-info'      => 'Exemple: "/sitemap/" o "/" per a la ruta base',
-                    'save-btn'       => 'Desar Mapa del lloc',
-                ],
-
-                'delete-failed' => ':name Eliminació fallada',
-            ],
-
-            'url-rewrites' => [
-                'index' => [
-                    'create-btn' => 'Crear reescritura d\'URL',
-                    'title'      => 'Reescritures d\'URL',
-
-                    'datagrid' => [
-                        'actions'             => 'Accions',
-                        'category'            => 'Categoria',
-                        'cms-page'            => 'Pàgina de CMS',
-                        'delete'              => 'Eliminar',
-                        'edit'                => 'Editar',
-                        'for'                 => 'Per a',
-                        'id'                  => 'ID',
-                        'locale'              => 'Localització',
-                        'mass-delete-success' => 'Reescritures d\'URL seleccionades eliminades correctament',
-                        'permanent-redirect'  => 'Permanent (301)',
-                        'product'             => 'Producte',
-                        'redirect-type'       => 'Tipus de redirecció',
-                        'request-path'        => 'Ruta de sol·licitud',
-                        'target-path'         => 'Ruta de destinació',
-                        'temporary-redirect'  => 'Temporal (302)',
-                    ],
-
-                    'create' => [
-                        'category'           => 'Categoria',
-                        'cms-page'           => 'Pàgina de CMS',
-                        'delete-warning'     => 'Esteu segur que voleu realitzar aquesta acció?',
-                        'for'                => 'Per a',
-                        'locale'             => 'Localització',
-                        'permanent-redirect' => 'Permanent (301)',
-                        'product'            => 'Producte',
-                        'redirect-type'      => 'Tipus de redirecció',
-                        'request-path'       => 'Ruta de sol·licitud',
-                        'save-btn'           => 'Desar reescriptura de URL',
-                        'success'            => 'Reescriptura de URL creada correctament',
-                        'target-path'        => 'Ruta de destinació',
-                        'temporary-redirect' => 'Temporal (302)',
-                        'title'              => 'Crear reescriptura de URL',
                     ],
 
                     'edit' => [
-                        'delete-success' => 'Reescriptura de URL eliminada correctament',
-                        'success'        => 'Reescriptura de URL actualitzada correctament',
-                        'title'          => 'Editar reescriptura de URL',
+                        'back-btn'       => 'Enrere',
+                        'file-name'      => 'Nom del fitxer',
+                        'file-name-info' => 'Exemple: sitemap.xml',
+                        'general'        => 'General',
+                        'path'           => 'Ruta',
+                        'path-info'      => 'Exemple: "/sitemap/" o "/" per a la ruta base',
+                        'save-btn'       => 'Desar Mapa del lloc',
+                    ],
+
+                    'delete-failed' => ':name Eliminació fallada',
+                ],
+
+                'url-rewrites' => [
+                    'index' => [
+                        'create-btn' => 'Crear reescritura d\'URL',
+                        'title'      => 'Reescritures d\'URL',
+
+                        'datagrid' => [
+                            'actions'             => 'Accions',
+                            'category'            => 'Categoria',
+                            'cms-page'            => 'Pàgina de CMS',
+                            'delete'              => 'Eliminar',
+                            'edit'                => 'Editar',
+                            'for'                 => 'Per a',
+                            'id'                  => 'ID',
+                            'locale'              => 'Localització',
+                            'mass-delete-success' => 'Reescritures d\'URL seleccionades eliminades correctament',
+                            'permanent-redirect'  => 'Permanent (301)',
+                            'product'             => 'Producte',
+                            'redirect-type'       => 'Tipus de redirecció',
+                            'request-path'        => 'Ruta de sol·licitud',
+                            'target-path'         => 'Ruta de destinació',
+                            'temporary-redirect'  => 'Temporal (302)',
+                        ],
+
+                        'create' => [
+                            'category'           => 'Categoria',
+                            'cms-page'           => 'Pàgina de CMS',
+                            'delete-warning'     => 'Esteu segur que voleu realitzar aquesta acció?',
+                            'for'                => 'Per a',
+                            'locale'             => 'Localització',
+                            'permanent-redirect' => 'Permanent (301)',
+                            'product'            => 'Producte',
+                            'redirect-type'      => 'Tipus de redirecció',
+                            'request-path'       => 'Ruta de sol·licitud',
+                            'save-btn'           => 'Desar reescriptura de URL',
+                            'success'            => 'Reescriptura de URL creada correctament',
+                            'target-path'        => 'Ruta de destinació',
+                            'temporary-redirect' => 'Temporal (302)',
+                            'title'              => 'Crear reescriptura de URL',
+                        ],
+
+                        'edit' => [
+                            'delete-success' => 'Reescriptura de URL eliminada correctament',
+                            'success'        => 'Reescriptura de URL actualitzada correctament',
+                            'title'          => 'Editar reescriptura de URL',
+                        ],
                     ],
                 ],
             ],
         ],
-    ],
     ],
 
     'cms' => [
@@ -4022,7 +4022,6 @@ return [
                 'users'                    => 'Usuaris',
             ],
         ],
-
 
         'datagrid' => [
             'index' => [

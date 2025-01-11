@@ -862,21 +862,21 @@ return [
     'home' => [
         'contact' => [
             'about'         => 'Deixa\'ns una nota i et responem el més ràpid possible',
-        'desc'          => 'En què estàs pensant?',
-        'describe-here' => 'Descriu-ho aquí',
-        'email'         => 'Correu electrònic',
-        'message'       => 'Missatge',
-        'name'          => 'Nom',
-        'phone-number'  => 'Número de telèfon',
-        'submit'        => 'Envia',
-        'title'         => 'Contacta\'ns',
-    ],
+            'desc'          => 'En què estàs pensant?',
+            'describe-here' => 'Descriu-ho aquí',
+            'email'         => 'Correu electrònic',
+            'message'       => 'Missatge',
+            'name'          => 'Nom',
+            'phone-number'  => 'Número de telèfon',
+            'submit'        => 'Envia',
+            'title'         => 'Contacta\'ns',
+        ],
 
-    'index' => [
-    'offer'               => 'Obté FINS A UN 40% DE DESCOMPTE en la teva primera compra! COMPRA ARA!',
-    'resend-verify-email' => 'Reenvia el correu de verificació',
-    'verify-email'        => 'Verifica la teva adreça de correu electrònic',
-    ],
+        'index' => [
+            'offer'               => 'Obté FINS A UN 40% DE DESCOMPTE en la teva primera compra! COMPRA ARA!',
+            'resend-verify-email' => 'Reenvia el correu de verificació',
+            'verify-email'        => 'Verifica la teva adreça de correu electrònic',
+        ],
 
         'thanks-for-contact' => 'Gràcies per contactar-nos amb els teus comentaris i preguntes. Et responem ben aviat.',
     ],

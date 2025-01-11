@@ -8,11 +8,11 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-// Act and Assert.
-get(route('shop.customer.session.index'))
-->assertOk()
-->assertSeeText(trans('shop::app.customers.login-form.page-title'));
-    });
+    // Act and Assert.
+    get(route('shop.customer.session.index'))
+        ->assertOk()
+        ->assertSeeText(trans('shop::app.customers.login-form.page-title'));
+});
 
 it('should fails validation errors when email and password not provided when login', function () {
     // Act and Assert.
