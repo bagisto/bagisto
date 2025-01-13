@@ -1,5 +1,5 @@
 <?php
-// TODO: Translate all to Catalan
+
 return [
     'seeders' => [
         'attribute' => [
