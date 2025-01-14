@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Endereço de Email',
-            'forget-password-link' => 'Esqueceu a Senha?',
-            'password'             => 'Senha',
-            'submit-btn'           => 'Entrar',
-            'title'                => 'Entrar',
+            'email'                  => 'Endereço de Email',
+            'forget-password-link'   => 'Esqueceu a Senha?',
+            'password'               => 'Senha',
+            'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+            'submit-btn'             => 'Entrar',
+            'title'                  => 'Entrar',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Email Registrado',
-                'email-not-exist' => 'Email não Existe',
-                'page-title'      => 'Esqueceu a Senha',
-                'reset-link-sent' => 'Link de Redefinição de Senha enviado',
-                'sign-in-link'    => 'Voltar para Entrar?',
-                'submit-btn'      => 'Redefinir',
-                'title'           => 'Recuperar Senha',
+                'email'                  => 'Email Registrado',
+                'email-not-exist'        => 'Email não Existe',
+                'page-title'             => 'Esqueceu a Senha',
+                'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+                'reset-link-sent'        => 'Link de Redefinição de Senha enviado',
+                'sign-in-link'           => 'Voltar para Entrar?',
+                'submit-btn'             => 'Redefinir',
+                'title'                  => 'Recuperar Senha',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Voltar para Entrar?',
-            'confirm-password' => 'Confirmar Senha',
-            'email'            => 'Email Registrado',
-            'password'         => 'Senha',
-            'submit-btn'       => 'Redefinir Senha',
-            'title'            => 'Redefinir Senha',
+            'back-link-title'        => 'Voltar para Entrar?',
+            'confirm-password'       => 'Confirmar Senha',
+            'email'                  => 'Email Registrado',
+            'password'               => 'Senha',
+            'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+            'submit-btn'             => 'Redefinir Senha',
+            'title'                  => 'Redefinir Senha',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'Transações',
                 'url-rewrites'             => 'Reescritas de URL',
                 'users'                    => 'Usuários',
+            ],
+
+            'powered-by' => [
+                'description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
             ],
         ],
 

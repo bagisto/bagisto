@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-mailadres',
-            'forget-password-link' => 'Wachtwoord Vergeten?',
-            'password'             => 'Wachtwoord',
-            'submit-btn'           => 'Aanmelden',
-            'title'                => 'Aanmelden',
+            'email'                  => 'E-mailadres',
+            'forget-password-link'   => 'Wachtwoord Vergeten?',
+            'password'               => 'Wachtwoord',
+            'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+            'submit-btn'             => 'Aanmelden',
+            'title'                  => 'Aanmelden',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Geregistreerd E-mailadres',
-                'email-not-exist' => 'E-mailadres Bestaat Niet',
-                'page-title'      => 'Wachtwoord Vergeten',
-                'reset-link-sent' => 'Reset Wachtwoordlink Verzonden',
-                'sign-in-link'    => 'Terug naar Aanmelden?',
-                'submit-btn'      => 'Herstellen',
-                'title'           => 'Wachtwoord Herstellen',
+                'email'                  => 'Geregistreerd E-mailadres',
+                'email-not-exist'        => 'E-mailadres Bestaat Niet',
+                'page-title'             => 'Wachtwoord Vergeten',
+                'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+                'reset-link-sent'        => 'Reset Wachtwoordlink Verzonden',
+                'sign-in-link'           => 'Terug naar Aanmelden?',
+                'submit-btn'             => 'Herstellen',
+                'title'                  => 'Wachtwoord Herstellen',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Terug naar Aanmelden?',
-            'confirm-password' => 'Bevestig Wachtwoord',
-            'email'            => 'Geregistreerd E-mailadres',
-            'password'         => 'Wachtwoord',
-            'submit-btn'       => 'Wachtwoord Herstellen',
-            'title'            => 'Wachtwoord Herstellen',
+            'back-link-title'        => 'Terug naar Aanmelden?',
+            'confirm-password'       => 'Bevestig Wachtwoord',
+            'email'                  => 'Geregistreerd E-mailadres',
+            'password'               => 'Wachtwoord',
+            'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+            'submit-btn'             => 'Wachtwoord Herstellen',
+            'title'                  => 'Wachtwoord Herstellen',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'Transacties',
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
+            ],
+
+            'powered-by' => [
+                'description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
             ],
         ],
 

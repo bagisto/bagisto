@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-Mail-Adresse',
-            'forget-password-link' => 'Passwort vergessen?',
-            'password'             => 'Passwort',
-            'submit-btn'           => 'Anmelden',
-            'title'                => 'Anmelden',
+            'email'                  => 'E-Mail-Adresse',
+            'forget-password-link'   => 'Passwort vergessen?',
+            'password'               => 'Passwort',
+            'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+            'submit-btn'             => 'Anmelden',
+            'title'                  => 'Anmelden',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Registrierte E-Mail',
-                'email-not-exist' => 'E-Mail existiert nicht',
-                'page-title'      => 'Passwort vergessen',
-                'reset-link-sent' => 'Link zum Zurücksetzen des Passworts gesendet',
-                'sign-in-link'    => 'Zurück zur Anmeldung?',
-                'submit-btn'      => 'Zurücksetzen',
-                'title'           => 'Passwort wiederherstellen',
+                'email'                  => 'Registrierte E-Mail',
+                'email-not-exist'        => 'E-Mail existiert nicht',
+                'page-title'             => 'Passwort vergessen',
+                'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+                'reset-link-sent'        => 'Link zum Zurücksetzen des Passworts gesendet',
+                'sign-in-link'           => 'Zurück zur Anmeldung?',
+                'submit-btn'             => 'Zurücksetzen',
+                'title'                  => 'Passwort wiederherstellen',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Zurück zur Anmeldung?',
-            'confirm-password' => 'Passwort bestätigen',
-            'email'            => 'Registrierte E-Mail',
-            'password'         => 'Passwort',
-            'submit-btn'       => 'Passwort zurücksetzen',
-            'title'            => 'Passwort zurücksetzen',
+            'back-link-title'        => 'Zurück zur Anmeldung?',
+            'confirm-password'       => 'Passwort bestätigen',
+            'email'                  => 'Registrierte E-Mail',
+            'password'               => 'Passwort',
+            'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+            'submit-btn'             => 'Passwort zurücksetzen',
+            'title'                  => 'Passwort zurücksetzen',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'Transaktionen',
                 'url-rewrites'             => 'URL-Rewrites',
                 'users'                    => 'Benutzer',
+            ],
+
+            'powered-by' => [
+                'description' => 'Bereitgestellt von :bagisto, ein Open-Source-Projekt von :webkul.',
             ],
         ],
 

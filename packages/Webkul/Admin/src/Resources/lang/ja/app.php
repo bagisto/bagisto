@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'メールアドレス',
-            'forget-password-link' => 'パスワードを忘れましたか？',
-            'password'             => 'パスワード',
-            'submit-btn'           => 'サインイン',
-            'title'                => 'サインイン',
+            'email'                  => 'メールアドレス',
+            'forget-password-link'   => 'パスワードを忘れましたか？',
+            'password'               => 'パスワード',
+            'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+            'submit-btn'             => 'サインイン',
+            'title'                  => 'サインイン',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => '登録済みメールアドレス',
-                'email-not-exist' => 'メールアドレスが存在しません',
-                'page-title'      => 'パスワードを忘れる',
-                'reset-link-sent' => 'パスワードリセットリンク送信済み',
-                'sign-in-link'    => 'サインイン画面に戻る？',
-                'submit-btn'      => 'リセット',
-                'title'           => 'パスワードを回復',
+                'email'                  => '登録済みメールアドレス',
+                'email-not-exist'        => 'メールアドレスが存在しません',
+                'page-title'             => 'パスワードを忘れる',
+                'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+                'reset-link-sent'        => 'パスワードリセットリンク送信済み',
+                'sign-in-link'           => 'サインイン画面に戻る？',
+                'submit-btn'             => 'リセット',
+                'title'                  => 'パスワードを回復',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'サインイン画面に戻る？',
-            'confirm-password' => 'パスワードを確認',
-            'email'            => '登録済みメールアドレス',
-            'password'         => 'パスワード',
-            'submit-btn'       => 'パスワードをリセット',
-            'title'            => 'パスワードをリセット',
+            'back-link-title'        => 'サインイン画面に戻る？',
+            'confirm-password'       => 'パスワードを確認',
+            'email'                  => '登録済みメールアドレス',
+            'password'               => 'パスワード',
+            'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+            'submit-btn'             => 'パスワードをリセット',
+            'title'                  => 'パスワードをリセット',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => '取引',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
+            ],
+
+            'powered-by' => [
+                'description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
             ],
         ],
 

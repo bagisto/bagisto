@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Адреса електронної пошти',
-            'forget-password-link' => 'Забули пароль?',
-            'password'             => 'Пароль',
-            'submit-btn'           => 'Увійти',
-            'title'                => 'Увійти',
+            'email'                  => 'Адреса електронної пошти',
+            'forget-password-link'   => 'Забули пароль?',
+            'password'               => 'Пароль',
+            'powered-by-description' => 'Працює на платформі :bagisto, спільний проект :webkul.',
+            'submit-btn'             => 'Увійти',
+            'title'                  => 'Увійти',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Зареєстрована електронна пошта',
-                'email-not-exist' => 'Електронна пошта не існує',
-                'page-title'      => 'Забули пароль',
-                'reset-link-sent' => 'Посилання на скидання пароля відправлено',
-                'sign-in-link'    => 'Повернутися до увійти?',
-                'submit-btn'      => 'Скинути',
-                'title'           => 'Відновити пароль',
+                'email'                  => 'Зареєстрована електронна пошта',
+                'email-not-exist'        => 'Електронна пошта не існує',
+                'page-title'             => 'Забули пароль',
+                'powered-by-description' => 'Працює на платформі :bagisto, спільний проект :webkul.',
+                'reset-link-sent'        => 'Посилання на скидання пароля відправлено',
+                'sign-in-link'           => 'Повернутися до увійти?',
+                'submit-btn'             => 'Скинути',
+                'title'                  => 'Відновити пароль',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Повернутися до увійти?',
-            'confirm-password' => 'Підтвердити пароль',
-            'email'            => 'Зареєстрована електронна пошта',
-            'password'         => 'Пароль',
-            'submit-btn'       => 'Скинути пароль',
-            'title'            => 'Скинути пароль',
+            'back-link-title'        => 'Повернутися до увійти?',
+            'confirm-password'       => 'Підтвердити пароль',
+            'email'                  => 'Зареєстрована електронна пошта',
+            'password'               => 'Пароль',
+            'powered-by-description' => 'Працює на платформі :bagisto, спільний проект :webkul.',
+            'submit-btn'             => 'Скинути пароль',
+            'title'                  => 'Скинути пароль',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'Транзакції',
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
+            ],
+
+            'powered-by' => [
+                'description' => 'Працює на платформі :bagisto, спільний проект :webkul.',
             ],
         ],
 

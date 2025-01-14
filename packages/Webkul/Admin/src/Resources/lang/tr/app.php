@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-posta Adresi',
-            'forget-password-link' => 'Şifremi Unuttum ?',
-            'password'             => 'Şifre',
-            'submit-btn'           => 'Giriş Yap',
-            'title'                => 'Giriş Yap',
+            'email'                  => 'E-posta Adresi',
+            'forget-password-link'   => 'Şifremi Unuttum ?',
+            'password'               => 'Şifre',
+            'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+            'submit-btn'             => 'Giriş Yap',
+            'title'                  => 'Giriş Yap',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Kayıtlı E-posta',
-                'email-not-exist' => 'E-posta Bulunamadı',
-                'page-title'      => 'Şifremi Unuttum',
-                'reset-link-sent' => 'Şifre Sıfırlama Bağlantısı Gönderildi',
-                'sign-in-link'    => 'Giriş Yap’a Geri Dön ?',
-                'submit-btn'      => 'Sıfırla',
-                'title'           => 'Şifre Kurtarma',
+                'email'                  => 'Kayıtlı E-posta',
+                'email-not-exist'        => 'E-posta Bulunamadı',
+                'page-title'             => 'Şifremi Unuttum',
+                'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+                'reset-link-sent'        => 'Şifre Sıfırlama Bağlantısı Gönderildi',
+                'sign-in-link'           => 'Giriş Yap’a Geri Dön ?',
+                'submit-btn'             => 'Sıfırla',
+                'title'                  => 'Şifre Kurtarma',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Giriş Yap’a Geri Dön ?',
-            'confirm-password' => 'Şifreyi Onayla',
-            'email'            => 'Kayıtlı E-posta',
-            'password'         => 'Şifre',
-            'submit-btn'       => 'Şifre Sıfırla',
-            'title'            => 'Şifre Sıfırlama',
+            'back-link-title'        => 'Giriş Yap’a Geri Dön ?',
+            'confirm-password'       => 'Şifreyi Onayla',
+            'email'                  => 'Kayıtlı E-posta',
+            'password'               => 'Şifre',
+            'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+            'submit-btn'             => 'Şifre Sıfırla',
+            'title'                  => 'Şifre Sıfırlama',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'İşlemler',
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
+            ],
+
+            'powered-by' => [
+                'description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
             ],
         ],
 
