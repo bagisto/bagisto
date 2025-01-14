@@ -143,6 +143,3 @@ jobs:
           name: playwright-report-All-Tests
           path: playwright-report/
           retention-days: 30
-
-          path: playwright-report/
-          retention-days: 30
