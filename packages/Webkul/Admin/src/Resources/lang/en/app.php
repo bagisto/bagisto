@@ -3349,7 +3349,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Set units options.',
+                    'info'  => 'Set units options and enable or disable breadcrumbs.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -3367,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
+                    'info'  => 'Set header offer title and custom scripts.',
                     'title' => 'Content',
 
                     'header-offer' => [
@@ -3387,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Set logo and favicon icon.',
+                    'info'  => 'Set logo and favicon icon for admin panel.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3399,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Set Magic AI options.',
+                    'info'  => 'Set Magic AI options and allow some options to automate the creation of content.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3622,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventory',
-                    'title-info' => 'Configure inventory settings to allow back orders, set minimum and maximum cart quantities, and define the out-of-stock threshold.',
+                    'title-info' => 'Configure inventory settings to allow back orders and define the out-of-stock threshold.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Allow Back Orders',
@@ -3678,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Set newsletter subscriptions, email verifications and social login.',
+                    'settings-info' => 'Set wishlist, login redirection, newsletter subscriptions, default group option , email verifications and social login.',
                     'title'         => 'Settings',
 
                     'login-as-customer' => [

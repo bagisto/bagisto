@@ -3349,7 +3349,7 @@ return [
                 'title' => 'Genel',
 
                 'general' => [
-                    'info'  => 'Birim seçeneklerini ayarlayın.',
+                    'info'  => 'Birim seçeneklerini ayarlayın ve breadcrumbs\'ı etkinleştirin veya devre dışı bırakın.',
                     'title' => 'Genel',
 
                     'unit-options' => [
@@ -3367,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Karşılaştırma seçeneklerini, dilek listesi seçeneklerini, görüntü arama seçeneklerini, alt bilgiyi, alt bilgiyi açma/kapatma ve özel komut dosyalarını ayarlayın.',
+                    'info'  => 'Başlık teklif başlığını ve özel komut dosyalarını ayarlayın.',
                     'title' => 'İçerik',
 
                     'header-offer' => [
@@ -3387,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Logo ve favicon simgesini ayarlayın.',
+                    'info'  => 'Yönetici paneli için logo ve favicon simgesini ayarlayın.',
                     'title' => 'Tasarım',
 
                     'admin-logo' => [
@@ -3399,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI seçeneklerini ayarlayın.',
+                    'info'  => 'Magic AI seçeneklerini ayarlayın ve içerik oluşturmayı otomatikleştirmek için bazı seçeneklere izin verin.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3622,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Envanter',
-                    'title-info' => 'Envanter ayarlarını yapılandırarak geri siparişlere izin verme, minimum ve maksimum sepet miktarlarını belirleme ve stokta olmayan eşik değerini tanımlama.',
+                    'title-info' => 'Geri siparişlere izin vermek ve stok dışı eşik değerini tanımlamak için envanter ayarlarını yapılandırın.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Geri Siparişlere İzin Ver',
@@ -3678,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Bülten aboneliklerini, e-posta doğrulamalarını ve sosyal girişi ayarlayın.',
+                    'settings-info' => 'İstek listesi, giriş yönlendirmesi, bülten abonelikleri, varsayılan grup seçeneği, e-posta doğrulamaları ve sosyal giriş ayarlarını yapılandırın.',
                     'title'         => 'Ayarlar',
 
                     'login-as-customer' => [

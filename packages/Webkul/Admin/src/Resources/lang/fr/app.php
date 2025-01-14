@@ -3349,7 +3349,7 @@ return [
                 'title' => 'Général',
 
                 'general' => [
-                    'info'  => 'Définir les options d\'unités.',
+                    'info'  => 'Définir les options d\'unités et activer ou désactiver les fils d\'Ariane.',
                     'title' => 'Général',
 
                     'unit-options' => [
@@ -3367,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Définir les options de comparaison, les options de liste de souhaits, les options de recherche d\'images, le pied de page, basculer le pied de page et les scripts personnalisés.',
+                    'info'  => 'Définir le titre de l\'offre d\'en-tête et les scripts personnalisés.',
                     'title' => 'Contenu',
 
                     'header-offer' => [
@@ -3387,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Définir le logo et l\'icône favicon.',
+                    'info'  => 'Définir le logo et l\'icône favicon pour le panneau d\'administration.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3399,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Définir les options de Magic AI.',
+                    'info'  => 'Définir les options Magic AI et permettre certaines options pour automatiser la création de contenu.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3622,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventaire',
-                    'title-info' => 'Configurez les paramètres d\'inventaire pour autoriser les commandes en attente, définir les quantités minimales et maximales du panier, et définir le seuil de rupture de stock.',
+                    'title-info' => 'Configurer les paramètres d\'inventaire pour autoriser les commandes en attente et définir le seuil de rupture de stock.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Autoriser les commandes en attente',
@@ -3678,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Définir les abonnements à la newsletter, les vérifications par e-mail et la connexion sociale.',
+                    'settings-info' => 'Définir la liste de souhaits, la redirection de connexion, les abonnements à la newsletter, l\'option de groupe par défaut, les vérifications par e-mail et la connexion sociale.',
                     'title'         => 'Paramètres',
 
                     'login-as-customer' => [
