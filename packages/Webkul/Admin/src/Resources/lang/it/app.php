@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Errori Consentiti',
                     'back-btn'            => 'Indietro',
                     'create-update'       => 'Crea/Aggiorna',
+                    'current-file'        => 'File Caricato Corrente',
                     'delete'              => 'Elimina',
                     'download-sample'     => 'Scarica Esempio',
                     'field-separator'     => 'Separatore di Campi',
@@ -3348,7 +3349,7 @@ return [
                 'title' => 'Generale',
 
                 'general' => [
-                    'info'  => 'Imposta le opzioni delle unità.',
+                    'info'  => 'Imposta le opzioni delle unità e abilita o disabilita i breadcrumbs.',
                     'title' => 'Generale',
 
                     'unit-options' => [
@@ -3366,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Imposta le opzioni di confronto, le opzioni di lista dei desideri, le opzioni di ricerca delle immagini, il piè di pagina, il piè di pagina a comparsa e gli script personalizzati.',
+                    'info'  => 'Imposta il titolo dell\'offerta dell\'intestazione e gli script personalizzati.',
                     'title' => 'Contenuto',
 
                     'header-offer' => [
@@ -3386,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Imposta il logo e l\'icona favicon.',
+                    'info'  => 'Imposta il logo e l\'icona favicon per il pannello di amministrazione.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3398,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Imposta le opzioni di Magic AI.',
+                    'info'  => 'Imposta le opzioni di Magic AI e consenti alcune opzioni per automatizzare la creazione di contenuti.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3621,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventario',
-                    'title-info' => 'Configura le impostazioni dell\'inventario per consentire ordini in sospeso, impostare quantità minime e massime nel carrello e definire la soglia di esaurimento delle scorte.',
+                    'title-info' => 'Configura le impostazioni dell\'inventario per consentire ordini arretrati e definire la soglia di esaurimento scorte.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Consenti ordini in sospeso',
@@ -3677,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Imposta iscrizioni alla newsletter, verifiche via email e accesso tramite social network.',
+                    'settings-info' => 'Imposta lista dei desideri, reindirizzamento login, iscrizioni alla newsletter, opzione gruppo predefinito, verifiche email e accesso tramite social network.',
                     'title'         => 'Impostazioni',
 
                     'login-as-customer' => [

@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Zulässige Fehler',
                     'back-btn'            => 'Zurück',
                     'create-update'       => 'Erstellen/Aktualisieren',
+                    'current-file'        => 'Aktuelle hochgeladene Datei',
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
@@ -3348,7 +3349,7 @@ return [
                 'title' => 'Allgemein',
 
                 'general' => [
-                    'info'  => 'Einheitsoptionen festlegen.',
+                    'info'  => 'Einheitsoptionen festlegen und Breadcrumbs aktivieren oder deaktivieren.',
                     'title' => 'Allgemein',
 
                     'unit-options' => [
@@ -3366,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Vergleichsoptionen, Wunschlistenoptionen, Bildsucheoptionen, Fußzeile, Fußzeile umschalten und benutzerdefinierte Skripte festlegen.',
+                    'info'  => 'Legen Sie den Titel des Header-Angebots und benutzerdefinierte Skripte fest.',
                     'title' => 'Inhalt',
 
                     'header-offer' => [
@@ -3386,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Logo und Favicon-Symbol festlegen.',
+                    'info'  => 'Legen Sie das Logo und das Favicon-Symbol für das Admin-Panel fest.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3398,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI-Optionen festlegen.',
+                    'info'  => 'Legen Sie Magic AI-Optionen fest und erlauben Sie einige Optionen, um die Erstellung von Inhalten zu automatisieren.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3621,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Bestand',
-                    'title-info' => 'Konfigurieren Sie die Bestandseinstellungen, um Rückstände zuzulassen, Mindest- und Höchstbestellmengen festzulegen und die Schwelle für nicht vorrätige Artikel zu definieren.',
+                    'title-info' => 'Konfigurieren Sie die Bestandsoptionen, um Rückstände zuzulassen und die Schwelle für nicht vorrätige Artikel festzulegen.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Rückstände zulassen',
@@ -3677,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Setzen Sie Newsletter-Abonnements, E-Mail-Verifizierungen und Social Login.',
+                    'settings-info' => 'Wunschliste, Login-Weiterleitung, Newsletter-Abonnements, Standardgruppenoption, E-Mail-Verifizierungen und Social Login festlegen.',
                     'title'         => 'Einstellungen',
 
                     'login-as-customer' => [
