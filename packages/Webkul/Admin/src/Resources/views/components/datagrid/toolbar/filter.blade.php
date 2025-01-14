@@ -43,7 +43,7 @@
                         <div>
                             <div
                                 class="relative inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-1 py-1.5 text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 ltr:pl-3 ltr:pr-5 rtl:pl-5 rtl:pr-3"
-                                :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': hasAnyAppliedColumn() }"
+                                :class="{'[&>*]:text-blue-600 border-blue-600 [&>*]:dark:text-white': hasAnyAppliedColumn() }"
                             >
                                 <span class="icon-filter text-2xl"></span>
 
