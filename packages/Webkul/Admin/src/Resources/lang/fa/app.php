@@ -716,7 +716,6 @@ return [
                     'payment-method'   => 'روش پرداخت',
                     'status'           => 'وضعیت',
                     'title'            => 'جزئیات تراکنش',
-                    'transaction-data' => 'اطلاعات تراکنش',
                     'transaction-id'   => 'شناسه تراکنش',
                 ],
             ],

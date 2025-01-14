@@ -716,7 +716,6 @@ return [
                     'payment-method'   => 'भुगतान का तरीका',
                     'status'           => 'स्थिति',
                     'title'            => 'लेन-देन का विवरण',
-                    'transaction-data' => 'लेन-देन डेटा',
                     'transaction-id'   => 'लेन-देन आईडी',
                 ],
             ],

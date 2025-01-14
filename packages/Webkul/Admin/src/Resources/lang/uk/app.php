@@ -716,7 +716,6 @@ return [
                     'payment-method'   => 'Спосіб оплати',
                     'status'           => 'Статус',
                     'title'            => 'Деталі транзакції',
-                    'transaction-data' => 'Дані транзакції',
                     'transaction-id'   => 'Ідентифікатор транзакції',
                 ],
             ],
