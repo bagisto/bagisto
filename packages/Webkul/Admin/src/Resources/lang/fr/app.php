@@ -3317,6 +3317,7 @@ return [
 
         'view' => [
             'all-channels'  => 'Tous les canaux',
+            'back-btn'      => 'Retour',
             'day'           => 'Jour',
             'end-date'      => 'Date de fin',
             'export-csv'    => 'Exporter en CSV',
