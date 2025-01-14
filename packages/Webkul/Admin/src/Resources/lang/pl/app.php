@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Dozwolone błędy',
                     'back-btn'            => 'Powrót',
                     'create-update'       => 'Utwórz/Aktualizuj',
+                    'current-file'        => 'Aktualnie przesłany plik',
                     'delete'              => 'Usuń',
                     'download-sample'     => 'Pobierz Przykład',
                     'field-separator'     => 'Separator pól',
@@ -3348,7 +3349,7 @@ return [
                 'title' => 'Ogólne',
 
                 'general' => [
-                    'info'  => 'Ustaw opcje jednostek.',
+                    'info'  => 'Ustaw opcje jednostek i włącz lub wyłącz ścieżki nawigacyjne.',
                     'title' => 'Ogólne',
 
                     'unit-options' => [
@@ -3366,7 +3367,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Ustaw opcje porównywania, opcje listy życzeń, opcje wyszukiwania obrazów, stopkę, przełącz stopkę i niestandardowe skrypty.',
+                    'info'  => 'Ustaw tytuł oferty w nagłówku i niestandardowe skrypty.',
                     'title' => 'Zawartość',
 
                     'header-offer' => [
@@ -3386,7 +3387,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Ustaw logo i ikonę favicon.',
+                    'info'  => 'Ustaw logo i ikonę favicon dla panelu administratora.',
                     'title' => 'Projektowanie',
 
                     'admin-logo' => [
@@ -3398,7 +3399,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Ustaw opcje Magic AI.',
+                    'info'  => 'Ustaw opcje Magic AI i zezwól na niektóre opcje automatyzacji tworzenia treści.',
                     'title' => 'Magiczna AI',
 
                     'settings' => [
@@ -3621,7 +3622,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Stan magazynu',
-                    'title-info' => 'Skonfiguruj ustawienia zapasów, aby umożliwić zamówienia z oczekiwaniem, ustawić minimalne i maksymalne ilości w koszyku oraz zdefiniować próg braku towaru.',
+                    'title-info' => 'Skonfiguruj ustawienia zapasów, aby umożliwić zamówienia z oczekiwaniem i zdefiniować próg braku towaru.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Zezwalaj na zamówienia z oczekiwaniem',
@@ -3677,7 +3678,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Ustaw subskrypcje newslettera, weryfikacje emaili i logowanie społecznościowe.',
+                    'settings-info' => 'Ustaw listę życzeń, przekierowanie logowania, subskrypcje newslettera, opcję domyślnej grupy, weryfikację e-maili i logowanie społecznościowe.',
                     'title'         => 'Ustawienia',
 
                     'login-as-customer' => [
