@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'अनुमatiत त्रुटियाँ',
                     'back-btn'            => 'पिछला',
                     'create-update'       => 'बनाए�/अपडेट करे',
+                    'current-file'        => 'वर्तमान अपलोड की गई फ़ाइल',
                     'delete'              => 'मिटाए',
                     'download-sample'     => 'उदाहरण डाउनलोड करे',
                     'field-separator'     => 'फ़ील्ड अलगाव',

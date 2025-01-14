@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'خطاهای مجاز',
                     'back-btn'            => 'بازگشت',
                     'create-update'       => 'ایجاد/به‌روزرسانی',
+                    'current-file'        => 'فایل آپلود شده فعلی',
                     'delete'              => 'حذف',
                     'download-sample'     => 'دانلود نمونه',
                     'field-separator'     => 'جداکننده فیلد',

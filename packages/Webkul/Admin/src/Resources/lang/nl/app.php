@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Toegestane Fouten',
                     'back-btn'            => 'Terug',
                     'create-update'       => 'Creëren/Bijwerken',
+                    'current-file'        => 'Huidig Geüpload Bestand',
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',

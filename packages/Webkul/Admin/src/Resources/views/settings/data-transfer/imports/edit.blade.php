@@ -95,6 +95,20 @@
                             :label="trans('admin::app.settings.data-transfer.imports.edit.file')"
                         />
 
+                        <!-- Display Existing File -->
+                        @if(isset($import) && $import->file_path)
+                            <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.settings.data-transfer.imports.edit.current-file'):
+                                <a 
+                                    href="{{ route('admin.settings.data_transfer.imports.download', $import->id) }}" 
+                                    class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
+                                    target="_blank"
+                                >
+                                    {{ basename($import->file_path) }}
+                                </a>
+                            </div>
+                        @endif
+
                         <x-admin::form.control-group.error control-name="file" />
                     </x-admin::form.control-group>
 

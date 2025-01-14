@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Разрешенные ошибки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Создать/Обновить',
+                    'current-file'        => 'Текущий загруженный файл',
                     'delete'              => 'Удалить',
                     'download-sample'     => 'Скачать Пример',
                     'field-separator'     => 'Разделитель Полей',

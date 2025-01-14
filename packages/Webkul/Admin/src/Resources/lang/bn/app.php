@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'অনুমোদিত ত্রুটিগুলি',
                     'back-btn'            => 'পুনরায় যান',
                     'create-update'       => 'তৈরি/আপডেট',
+                    'current-file'        => 'বর্তমান আপলোড করা ফাইল',
                     'delete'              => 'মুছুন',
                     'download-sample'     => 'নমুনা ডাউনলোড করুন',
                     'field-separator'     => 'ক্ষেত্র পৃথককরণকারী',
