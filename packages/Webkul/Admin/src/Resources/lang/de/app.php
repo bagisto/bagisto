@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-Mail-Adresse',
-            'forget-password-link' => 'Passwort vergessen?',
-            'password'             => 'Passwort',
-            'submit-btn'           => 'Anmelden',
-            'title'                => 'Anmelden',
+            'email'                  => 'E-Mail-Adresse',
+            'forget-password-link'   => 'Passwort vergessen?',
+            'password'               => 'Passwort',
+            'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+            'submit-btn'             => 'Anmelden',
+            'title'                  => 'Anmelden',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Registrierte E-Mail',
-                'email-not-exist' => 'E-Mail existiert nicht',
-                'page-title'      => 'Passwort vergessen',
-                'reset-link-sent' => 'Link zum Zurücksetzen des Passworts gesendet',
-                'sign-in-link'    => 'Zurück zur Anmeldung?',
-                'submit-btn'      => 'Zurücksetzen',
-                'title'           => 'Passwort wiederherstellen',
+                'email'                  => 'Registrierte E-Mail',
+                'email-not-exist'        => 'E-Mail existiert nicht',
+                'page-title'             => 'Passwort vergessen',
+                'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+                'reset-link-sent'        => 'Link zum Zurücksetzen des Passworts gesendet',
+                'sign-in-link'           => 'Zurück zur Anmeldung?',
+                'submit-btn'             => 'Zurücksetzen',
+                'title'                  => 'Passwort wiederherstellen',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Zurück zur Anmeldung?',
-            'confirm-password' => 'Passwort bestätigen',
-            'email'            => 'Registrierte E-Mail',
-            'password'         => 'Passwort',
-            'submit-btn'       => 'Passwort zurücksetzen',
-            'title'            => 'Passwort zurücksetzen',
+            'back-link-title'        => 'Zurück zur Anmeldung?',
+            'confirm-password'       => 'Passwort bestätigen',
+            'email'                  => 'Registrierte E-Mail',
+            'password'               => 'Passwort',
+            'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
+            'submit-btn'             => 'Passwort zurücksetzen',
+            'title'                  => 'Passwort zurücksetzen',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => 'Zulässige Fehler',
                     'back-btn'            => 'Zurück',
                     'create-update'       => 'Erstellen/Aktualisieren',
+                    'current-file'        => 'Aktuelle hochgeladene Datei',
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
@@ -3348,7 +3352,7 @@ return [
                 'title' => 'Allgemein',
 
                 'general' => [
-                    'info'  => 'Einheitsoptionen festlegen.',
+                    'info'  => 'Einheitsoptionen festlegen und Breadcrumbs aktivieren oder deaktivieren.',
                     'title' => 'Allgemein',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Vergleichsoptionen, Wunschlistenoptionen, Bildsucheoptionen, Fußzeile, Fußzeile umschalten und benutzerdefinierte Skripte festlegen.',
+                    'info'  => 'Legen Sie den Titel des Header-Angebots und benutzerdefinierte Skripte fest.',
                     'title' => 'Inhalt',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Logo und Favicon-Symbol festlegen.',
+                    'info'  => 'Legen Sie das Logo und das Favicon-Symbol für das Admin-Panel fest.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI-Optionen festlegen.',
+                    'info'  => 'Legen Sie Magic AI-Optionen fest und erlauben Sie einige Optionen, um die Erstellung von Inhalten zu automatisieren.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Bestand',
-                    'title-info' => 'Konfigurieren Sie die Bestandseinstellungen, um Rückstände zuzulassen, Mindest- und Höchstbestellmengen festzulegen und die Schwelle für nicht vorrätige Artikel zu definieren.',
+                    'title-info' => 'Konfigurieren Sie die Bestandsoptionen, um Rückstände zuzulassen und die Schwelle für nicht vorrätige Artikel festzulegen.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Rückstände zulassen',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Setzen Sie Newsletter-Abonnements, E-Mail-Verifizierungen und Social Login.',
+                    'settings-info' => 'Wunschliste, Login-Weiterleitung, Newsletter-Abonnements, Standardgruppenoption, E-Mail-Verifizierungen und Social Login festlegen.',
                     'title'         => 'Einstellungen',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => 'Transaktionen',
                 'url-rewrites'             => 'URL-Rewrites',
                 'users'                    => 'Benutzer',
+            ],
+
+            'powered-by' => [
+                'description' => 'Bereitgestellt von :bagisto, ein Open-Source-Projekt von :webkul.',
             ],
         ],
 

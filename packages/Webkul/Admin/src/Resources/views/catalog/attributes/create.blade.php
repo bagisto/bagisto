@@ -602,23 +602,23 @@
                                 </label>
                             </x-admin::form.control-group>
 
-                                <!-- Visible On Product View Page On Front End -->
-                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        id="is_visible_on_front"
-                                        name="is_visible_on_front"
-                                        value="1"
-                                        for="is_visible_on_front"
-                                    />
+                            <!-- Visible On Product View Page On Front End -->
+                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                                <x-admin::form.control-group.control
+                                    type="checkbox"
+                                    id="is_visible_on_front"
+                                    name="is_visible_on_front"
+                                    value="1"
+                                    for="is_visible_on_front"
+                                />
 
-                                    <label
-                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
-                                        for="is_visible_on_front"
-                                    >
-                                        @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
-                                    </label>
-                                </x-admin::form.control-group>
+                                <label
+                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                    for="is_visible_on_front"
+                                >
+                                    @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
+                                </label>
+                            </x-admin::form.control-group>
 
                             <!-- Attribute is Comparable -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">

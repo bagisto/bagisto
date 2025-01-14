@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'メールアドレス',
-            'forget-password-link' => 'パスワードを忘れましたか？',
-            'password'             => 'パスワード',
-            'submit-btn'           => 'サインイン',
-            'title'                => 'サインイン',
+            'email'                  => 'メールアドレス',
+            'forget-password-link'   => 'パスワードを忘れましたか？',
+            'password'               => 'パスワード',
+            'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+            'submit-btn'             => 'サインイン',
+            'title'                  => 'サインイン',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => '登録済みメールアドレス',
-                'email-not-exist' => 'メールアドレスが存在しません',
-                'page-title'      => 'パスワードを忘れる',
-                'reset-link-sent' => 'パスワードリセットリンク送信済み',
-                'sign-in-link'    => 'サインイン画面に戻る？',
-                'submit-btn'      => 'リセット',
-                'title'           => 'パスワードを回復',
+                'email'                  => '登録済みメールアドレス',
+                'email-not-exist'        => 'メールアドレスが存在しません',
+                'page-title'             => 'パスワードを忘れる',
+                'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+                'reset-link-sent'        => 'パスワードリセットリンク送信済み',
+                'sign-in-link'           => 'サインイン画面に戻る？',
+                'submit-btn'             => 'リセット',
+                'title'                  => 'パスワードを回復',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'サインイン画面に戻る？',
-            'confirm-password' => 'パスワードを確認',
-            'email'            => '登録済みメールアドレス',
-            'password'         => 'パスワード',
-            'submit-btn'       => 'パスワードをリセット',
-            'title'            => 'パスワードをリセット',
+            'back-link-title'        => 'サインイン画面に戻る？',
+            'confirm-password'       => 'パスワードを確認',
+            'email'                  => '登録済みメールアドレス',
+            'password'               => 'パスワード',
+            'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
+            'submit-btn'             => 'パスワードをリセット',
+            'title'                  => 'パスワードをリセット',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => '許可されたエラー',
                     'back-btn'            => '戻る',
                     'create-update'       => '作成/更新',
+                    'current-file'        => '現在アップロードされたファイル',
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
@@ -3348,7 +3352,7 @@ return [
                 'title' => '一般',
 
                 'general' => [
-                    'info'  => 'ユニットオプションを設定します。',
+                    'info'  => 'ユニットオプションを設定し、パンくずリストを有効または無効にします。',
                     'title' => '一般',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => '比較オプション、ウィッシュリストオプション、画像検索オプション、フッター、フッターの切り替え、カスタムスクリプトを設定します。',
+                    'info'  => 'ヘッダーオファータイトルとカスタムスクリプトを設定します。',
                     'title' => 'コンテンツ',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'ロゴとファビコンアイコンを設定します。',
+                    'info'  => '管理パネルのロゴとファビコンアイコンを設定します。',
                     'title' => 'デザイン',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AIオプションを設定します。',
+                    'info'  => 'Magic AIオプションを設定し、コンテンツの作成を自動化するためのいくつかのオプションを許可します。',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => '在庫',
-                    'title-info' => 'バックオーダーを許可し、最小および最大のカート数量を設定し、在庫切れのしきい値を定義するための在庫設定を構成します。',
+                    'title-info' => 'バックオーダーを許可し、在庫切れのしきい値を定義するために在庫設定を構成します。',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'バックオーダーを許可する',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'ニュースレターの購読、メールの確認、ソーシャルログインを設定します。',
+                    'settings-info' => 'ウィッシュリスト、ログインリダイレクト、ニュースレター購読、デフォルトグループオプション、メール確認、およびソーシャルログインを設定します。',
                     'title'         => '設定',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => '取引',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
+            ],
+
+            'powered-by' => [
+                'description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
             ],
         ],
 

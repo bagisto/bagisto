@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-posta Adresi',
-            'forget-password-link' => 'Şifremi Unuttum ?',
-            'password'             => 'Şifre',
-            'submit-btn'           => 'Giriş Yap',
-            'title'                => 'Giriş Yap',
+            'email'                  => 'E-posta Adresi',
+            'forget-password-link'   => 'Şifremi Unuttum ?',
+            'password'               => 'Şifre',
+            'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+            'submit-btn'             => 'Giriş Yap',
+            'title'                  => 'Giriş Yap',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Kayıtlı E-posta',
-                'email-not-exist' => 'E-posta Bulunamadı',
-                'page-title'      => 'Şifremi Unuttum',
-                'reset-link-sent' => 'Şifre Sıfırlama Bağlantısı Gönderildi',
-                'sign-in-link'    => 'Giriş Yap’a Geri Dön ?',
-                'submit-btn'      => 'Sıfırla',
-                'title'           => 'Şifre Kurtarma',
+                'email'                  => 'Kayıtlı E-posta',
+                'email-not-exist'        => 'E-posta Bulunamadı',
+                'page-title'             => 'Şifremi Unuttum',
+                'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+                'reset-link-sent'        => 'Şifre Sıfırlama Bağlantısı Gönderildi',
+                'sign-in-link'           => 'Giriş Yap’a Geri Dön ?',
+                'submit-btn'             => 'Sıfırla',
+                'title'                  => 'Şifre Kurtarma',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Giriş Yap’a Geri Dön ?',
-            'confirm-password' => 'Şifreyi Onayla',
-            'email'            => 'Kayıtlı E-posta',
-            'password'         => 'Şifre',
-            'submit-btn'       => 'Şifre Sıfırla',
-            'title'            => 'Şifre Sıfırlama',
+            'back-link-title'        => 'Giriş Yap’a Geri Dön ?',
+            'confirm-password'       => 'Şifreyi Onayla',
+            'email'                  => 'Kayıtlı E-posta',
+            'password'               => 'Şifre',
+            'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
+            'submit-btn'             => 'Şifre Sıfırla',
+            'title'                  => 'Şifre Sıfırlama',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => 'İzin Verilen Hatalar',
                     'back-btn'            => 'Geri',
                     'create-update'       => 'Oluştur/Güncelle',
+                    'current-file'        => 'Mevcut Yüklenen Dosya',
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',
@@ -3348,7 +3352,7 @@ return [
                 'title' => 'Genel',
 
                 'general' => [
-                    'info'  => 'Birim seçeneklerini ayarlayın.',
+                    'info'  => 'Birim seçeneklerini ayarlayın ve breadcrumbs\'ı etkinleştirin veya devre dışı bırakın.',
                     'title' => 'Genel',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Karşılaştırma seçeneklerini, dilek listesi seçeneklerini, görüntü arama seçeneklerini, alt bilgiyi, alt bilgiyi açma/kapatma ve özel komut dosyalarını ayarlayın.',
+                    'info'  => 'Başlık teklif başlığını ve özel komut dosyalarını ayarlayın.',
                     'title' => 'İçerik',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Logo ve favicon simgesini ayarlayın.',
+                    'info'  => 'Yönetici paneli için logo ve favicon simgesini ayarlayın.',
                     'title' => 'Tasarım',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI seçeneklerini ayarlayın.',
+                    'info'  => 'Magic AI seçeneklerini ayarlayın ve içerik oluşturmayı otomatikleştirmek için bazı seçeneklere izin verin.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Envanter',
-                    'title-info' => 'Envanter ayarlarını yapılandırarak geri siparişlere izin verme, minimum ve maksimum sepet miktarlarını belirleme ve stokta olmayan eşik değerini tanımlama.',
+                    'title-info' => 'Geri siparişlere izin vermek ve stok dışı eşik değerini tanımlamak için envanter ayarlarını yapılandırın.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Geri Siparişlere İzin Ver',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Bülten aboneliklerini, e-posta doğrulamalarını ve sosyal girişi ayarlayın.',
+                    'settings-info' => 'İstek listesi, giriş yönlendirmesi, bülten abonelikleri, varsayılan grup seçeneği, e-posta doğrulamaları ve sosyal giriş ayarlarını yapılandırın.',
                     'title'         => 'Ayarlar',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => 'İşlemler',
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
+            ],
+
+            'powered-by' => [
+                'description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
             ],
         ],
 

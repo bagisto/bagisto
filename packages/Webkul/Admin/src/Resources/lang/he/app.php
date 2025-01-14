@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'כתובת אימייל',
-            'forget-password-link' => 'שכחת סיסמה?',
-            'password'             => 'סיסמה',
-            'submit-btn'           => 'כניסה',
-            'title'                => 'כניסה',
+            'email'                  => 'כתובת אימייל',
+            'forget-password-link'   => 'שכחת סיסמה?',
+            'password'               => 'סיסמה',
+            'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+            'submit-btn'             => 'כניסה',
+            'title'                  => 'כניסה',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'אימייל רשום',
-                'email-not-exist' => 'אימייל לא קיים',
-                'page-title'      => 'שכחתי סיסמה',
-                'reset-link-sent' => 'קישור לאיפוס סיסמה נשלח',
-                'sign-in-link'    => 'חזור להתחברות?',
-                'submit-btn'      => 'איפוס',
-                'title'           => 'שחזור סיסמה',
+                'email'                  => 'אימייל רשום',
+                'email-not-exist'        => 'אימייל לא קיים',
+                'page-title'             => 'שכחתי סיסמה',
+                'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+                'reset-link-sent'        => 'קישור לאיפוס סיסמה נשלח',
+                'sign-in-link'           => 'חזור להתחברות?',
+                'submit-btn'             => 'איפוס',
+                'title'                  => 'שחזור סיסמה',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'חזור להתחברות?',
-            'confirm-password' => 'אימות סיסמה',
-            'email'            => 'אימייל רשום',
-            'password'         => 'סיסמה',
-            'submit-btn'       => 'איפוס סיסמה',
-            'title'            => 'איפוס סיסמה',
+            'back-link-title'        => 'חזור להתחברות?',
+            'confirm-password'       => 'אימות סיסמה',
+            'email'                  => 'אימייל רשום',
+            'password'               => 'סיסמה',
+            'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+            'submit-btn'             => 'איפוס סיסמה',
+            'title'                  => 'איפוס סיסמה',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => 'שגיאות מותרות',
                     'back-btn'            => 'חזרה',
                     'create-update'       => 'יצירה/עדכון',
+                    'current-file'        => 'קובץ שהועלה נוכחי',
                     'delete'              => 'מחיקה',
                     'download-sample'     => 'הורד דוגמא',
                     'field-separator'     => 'מפריד שדות',
@@ -3348,7 +3352,7 @@ return [
                 'title' => 'כללי',
 
                 'general' => [
-                    'info'  => 'הגדר אפשרויות יחידות.',
+                    'info'  => 'הגדר אפשרויות יחידות והפעל או השבת מסלולי ניווט.',
                     'title' => 'כללי',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'הגדר אפשרויות השוואה, אפשרויות רשימת המשאלות, אפשרויות חיפוש תמונות, תחתית, הפעל/השבת תחתית וקודים מותאמים אישית.',
+                    'info'  => 'הגדר כותרת הצעת הדף הראשי וקודים מותאמים אישית.',
                     'title' => 'תוכן',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'הגדר לוגו וסמל favicon.',
+                    'info'  => 'הגדר לוגו וסמל Favicon עבור לוח הניהול.',
                     'title' => 'עיצוב',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'הגדר אפשרויות Magic AI.',
+                    'info'  => 'הגדר אפשרויות Magic AI ואפשר אפשרויות מסוימות לאוטומציה של יצירת תוכן.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'מלאי',
-                    'title-info' => 'הגדרות מלאי לאפשר הזמנות לאחור, להגדיר כמויות מינימליות ומקסימליות בעגלת הקניות ולהגדיר את סף המוצרים שאזלו מהמלאי.',
+                    'title-info' => 'הגדר אפשרויות מלאי כדי לאפשר הזמנות מאחור ולהגדיר את סף חוסר המלאי.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'אפשר הזמנות לאחור',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'הגדרת רישומים לניוזלטר, אימותי אימייל והתחברות חברתית.',
+                    'settings-info' => 'הגדר רשימת משאלות, הפניית התחברות, הרשמות לניוזלטר, אפשרות קבוצת ברירת מחדל, אימותי אימייל והתחברות חברתית.',
                     'title'         => 'הגדרות',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => 'עסקאות',
                 'url-rewrites'             => 'כתיבת URL מחדש',
                 'users'                    => 'משתמשים',
+            ],
+
+            'powered-by' => [
+                'description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
             ],
         ],
 
