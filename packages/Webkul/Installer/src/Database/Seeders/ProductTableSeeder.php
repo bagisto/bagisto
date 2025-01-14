@@ -119,6 +119,24 @@ class ProductTableSeeder extends Seeder
                         'json_value'                                 => null,
                     ]);
 
+                    if ($attribute->id == 5 && $value == 1) {
+                        $uniqueId = implode('|', array_filter([
+                            $attribute->value_per_channel ? 'default' : null,
+                            $attribute->value_per_locale ? $locale : null,
+                            $productData['product_id'],
+                            26,
+                        ]));
+
+                        $attributeValues[] = array_merge($attributeTypeValues, [
+                            'attribute_id'                               => 26,
+                            'product_id'                                 => $productData['product_id'],
+                            $this->attributeTypeFields[$attribute->type] => $value,
+                            'channel'                                    => $attribute->value_per_channel ? 'default' : null,
+                            'locale'                                     => $attribute->value_per_locale ? $locale : null,
+                            'unique_id'                                  => $uniqueId,
+                            'json_value'                                 => null,
+                        ]);
+                    }
                 }
             }
         }
