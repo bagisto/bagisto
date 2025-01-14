@@ -31,5 +31,5 @@ jobs:
       - name: Running Composer Install
         run: composer install
 
-      - name: Running Pest Test
+      - name: Running Pint Test
         run: vendor/bin/pint --test -v
