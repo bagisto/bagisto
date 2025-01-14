@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Dirección de Correo Electrónico',
-            'forget-password-link' => '¿Olvidaste tu Contraseña?',
-            'password'             => 'Contraseña',
-            'submit-btn'           => 'Iniciar Sesión',
-            'title'                => 'Iniciar Sesión',
+            'email'                  => 'Dirección de Correo Electrónico',
+            'forget-password-link'   => '¿Olvidaste tu Contraseña?',
+            'password'               => 'Contraseña',
+            'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+            'submit-btn'             => 'Iniciar Sesión',
+            'title'                  => 'Iniciar Sesión',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'Correo Electrónico Registrado',
-                'email-not-exist' => 'El Correo Electrónico no Existe',
-                'page-title'      => 'Olvidar Contraseña',
-                'reset-link-sent' => 'Enlace para Restablecer la Contraseña Enviado',
-                'sign-in-link'    => '¿Volver a Iniciar Sesión?',
-                'submit-btn'      => 'Restablecer',
-                'title'           => 'Recuperar Contraseña',
+                'email'                  => 'Correo Electrónico Registrado',
+                'email-not-exist'        => 'El Correo Electrónico no Existe',
+                'page-title'             => 'Olvidar Contraseña',
+                'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+                'reset-link-sent'        => 'Enlace para Restablecer la Contraseña Enviado',
+                'sign-in-link'           => '¿Volver a Iniciar Sesión?',
+                'submit-btn'             => 'Restablecer',
+                'title'                  => 'Recuperar Contraseña',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => '¿Volver a Iniciar Sesión?',
-            'confirm-password' => 'Confirmar Contraseña',
-            'email'            => 'Correo Electrónico Registrado',
-            'password'         => 'Contraseña',
-            'submit-btn'       => 'Restablecer Contraseña',
-            'title'            => 'Restablecer Contraseña',
+            'back-link-title'        => '¿Volver a Iniciar Sesión?',
+            'confirm-password'       => 'Confirmar Contraseña',
+            'email'                  => 'Correo Electrónico Registrado',
+            'password'               => 'Contraseña',
+            'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
+            'submit-btn'             => 'Restablecer Contraseña',
+            'title'                  => 'Restablecer Contraseña',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => 'Errores Permitidos',
                     'back-btn'            => 'Volver',
                     'create-update'       => 'Crear/Actualizar',
+                    'current-file'        => 'Archivo Subido Actual',
                     'delete'              => 'Eliminar',
                     'download-sample'     => 'Descargar Muestra',
                     'field-separator'     => 'Separador de Campos',
@@ -3348,7 +3352,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Establecer opciones de unidades.',
+                    'info'  => 'Establecer opciones de unidades y habilitar o deshabilitar las migas de pan.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Establecer opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
+                    'info'  => 'Establecer el título de la oferta del encabezado y scripts personalizados.',
                     'title' => 'Contenido',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Establecer logotipo e icono de favicon.',
+                    'info'  => 'Configurar el logotipo y el icono de favicon para el panel de administración.',
                     'title' => 'Diseño',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Configurar opciones de Magic AI.',
+                    'info'  => 'Configurar opciones de Magic AI y permitir algunas opciones para automatizar la creación de contenido.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventario',
-                    'title-info' => 'Configurar la configuración de inventario para permitir pedidos pendientes, establecer cantidades mínimas y máximas en el carrito y definir el umbral de falta de stock.',
+                    'title-info' => 'Configure la configuración de inventario para permitir pedidos pendientes y definir el umbral de falta de stock.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Permitir pedidos pendientes',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Establecer suscripciones a boletines, verificaciones de correo electrónico y inicio de sesión social.',
+                    'settings-info' => 'Configurar lista de deseos, redirección de inicio de sesión, suscripciones al boletín, opción de grupo predeterminado, verificaciones de correo electrónico e inicio de sesión social.',
                     'title'         => 'Configuración',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => 'Transacciones',
                 'url-rewrites'             => 'Reescrituras de URL',
                 'users'                    => 'Usuarios',
+            ],
+
+            'powered-by' => [
+                'description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
             ],
         ],
 

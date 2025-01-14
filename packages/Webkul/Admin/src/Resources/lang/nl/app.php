@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'E-mailadres',
-            'forget-password-link' => 'Wachtwoord Vergeten?',
-            'password'             => 'Wachtwoord',
-            'submit-btn'           => 'Aanmelden',
-            'title'                => 'Aanmelden',
+            'email'                  => 'E-mailadres',
+            'forget-password-link'   => 'Wachtwoord Vergeten?',
+            'password'               => 'Wachtwoord',
+            'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+            'submit-btn'             => 'Aanmelden',
+            'title'                  => 'Aanmelden',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Geregistreerd E-mailadres',
-                'email-not-exist' => 'E-mailadres Bestaat Niet',
-                'page-title'      => 'Wachtwoord Vergeten',
-                'reset-link-sent' => 'Reset Wachtwoordlink Verzonden',
-                'sign-in-link'    => 'Terug naar Aanmelden?',
-                'submit-btn'      => 'Herstellen',
-                'title'           => 'Wachtwoord Herstellen',
+                'email'                  => 'Geregistreerd E-mailadres',
+                'email-not-exist'        => 'E-mailadres Bestaat Niet',
+                'page-title'             => 'Wachtwoord Vergeten',
+                'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+                'reset-link-sent'        => 'Reset Wachtwoordlink Verzonden',
+                'sign-in-link'           => 'Terug naar Aanmelden?',
+                'submit-btn'             => 'Herstellen',
+                'title'                  => 'Wachtwoord Herstellen',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Terug naar Aanmelden?',
-            'confirm-password' => 'Bevestig Wachtwoord',
-            'email'            => 'Geregistreerd E-mailadres',
-            'password'         => 'Wachtwoord',
-            'submit-btn'       => 'Wachtwoord Herstellen',
-            'title'            => 'Wachtwoord Herstellen',
+            'back-link-title'        => 'Terug naar Aanmelden?',
+            'confirm-password'       => 'Bevestig Wachtwoord',
+            'email'                  => 'Geregistreerd E-mailadres',
+            'password'               => 'Wachtwoord',
+            'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
+            'submit-btn'             => 'Wachtwoord Herstellen',
+            'title'                  => 'Wachtwoord Herstellen',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => 'Toegestane Fouten',
                     'back-btn'            => 'Terug',
                     'create-update'       => 'Creëren/Bijwerken',
+                    'current-file'        => 'Huidig Geüpload Bestand',
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',
@@ -3348,7 +3352,7 @@ return [
                 'title' => 'Algemeen',
 
                 'general' => [
-                    'info'  => 'Stel eenhedensopties in.',
+                    'info'  => 'Stel eenhedensopties in en schakel broodkruimelnavigatie in of uit.',
                     'title' => 'Algemeen',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Stel vergelijkingsmogelijkheden, verlanglijstopties, afbeeldingszoekopties, voettekst, voettekst in- of uitschakelen en aangepaste scripts in.',
+                    'info'  => 'Stel de titel van de aanbieding in de koptekst en aangepaste scripts in.',
                     'title' => 'Inhoud',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Stel logo en favicon-pictogram in.',
+                    'info'  => 'Stel logo en favicon-pictogram in voor het beheerderspaneel.',
                     'title' => 'Ontwerp',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Stel Magic AI-opties in.',
+                    'info'  => 'Stel Magic AI-opties in en sta enkele opties toe om de creatie van inhoud te automatiseren.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Voorraad',
-                    'title-info' => 'Configureer voorraadinstellingen om backorders toe te staan, minimale en maximale hoeveelheden in de winkelwagen in te stellen en de drempel voor uitverkochte producten te definiëren.',
+                    'title-info' => 'Configureer voorraadinstellingen om backorders toe te staan en de drempel voor uitverkochte producten te definiëren.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Backorders toestaan',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Stel nieuwsbriefabonnementen, e-mailverificaties en sociale login in.',
+                    'settings-info' => 'Stel wenslijst, inlogomleiding, nieuwsbriefabonnementen, standaard groepoptie, e-mailverificaties en sociaal inloggen in.',
                     'title'         => 'Instellingen',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => 'Transacties',
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
+            ],
+
+            'powered-by' => [
+                'description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
             ],
         ],
 

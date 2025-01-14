@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BNy0TW8a.css",
+    "file": "assets/app-De8onm4Q.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -173,12 +173,12 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-BcaoU75C.js",
+    "file": "assets/app-ClfYRGgd.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-C7s3BGlm.css"
+      "assets/app-BsM4JrO0.css"
     ]
   },
   "src/Resources/assets/js/chart.js": {

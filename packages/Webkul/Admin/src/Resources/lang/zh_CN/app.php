@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => '电子邮件地址',
-            'forget-password-link' => '忘记密码？',
-            'password'             => '密码',
-            'submit-btn'           => '登录',
-            'title'                => '登录',
+            'email'                  => '电子邮件地址',
+            'forget-password-link'   => '忘记密码？',
+            'password'               => '密码',
+            'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+            'submit-btn'             => '登录',
+            'title'                  => '登录',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => '注册电子邮件',
-                'email-not-exist' => '电子邮件不存在',
-                'page-title'      => '忘记密码',
-                'reset-link-sent' => '重置密码链接已发送',
-                'sign-in-link'    => '返回登录？',
-                'submit-btn'      => '重置',
-                'title'           => '找回密码',
+                'email'                  => '注册电子邮件',
+                'email-not-exist'        => '电子邮件不存在',
+                'page-title'             => '忘记密码',
+                'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+                'reset-link-sent'        => '重置密码链接已发送',
+                'sign-in-link'           => '返回登录？',
+                'submit-btn'             => '重置',
+                'title'                  => '找回密码',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => '返回登录？',
-            'confirm-password' => '确认密码',
-            'email'            => '注册电子邮件',
-            'password'         => '密码',
-            'submit-btn'       => '重置密码',
-            'title'            => '重置密码',
+            'back-link-title'        => '返回登录？',
+            'confirm-password'       => '确认密码',
+            'email'                  => '注册电子邮件',
+            'password'               => '密码',
+            'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+            'submit-btn'             => '重置密码',
+            'title'                  => '重置密码',
         ],
     ],
 
@@ -2576,6 +2579,7 @@ return [
                     'allowed-errors'      => '允許的錯誤',
                     'back-btn'            => '返回',
                     'create-update'       => '建立/更新',
+                    'current-file'        => '当前上传的文件',
                     'delete'              => '刪除',
                     'download-sample'     => '下載範例',
                     'field-separator'     => '欄位分隔符',
@@ -3348,7 +3352,7 @@ return [
                 'title' => '常规',
 
                 'general' => [
-                    'info'  => '设置单位选项。',
+                    'info'  => '设置单位选项并启用或禁用面包屑导航。',
                     'title' => '常规',
 
                     'unit-options' => [
@@ -3366,7 +3370,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => '设置比较选项、心愿单选项、图像搜索选项、页脚、切换页脚和自定义脚本。',
+                    'info'  => '设置页眉优惠标题和自定义脚本。',
                     'title' => '内容',
 
                     'header-offer' => [
@@ -3386,7 +3390,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => '设置标志和网站图标。',
+                    'info'  => '为管理面板设置标志和网站图标。',
                     'title' => '设计',
 
                     'admin-logo' => [
@@ -3398,7 +3402,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => '设置魔法AI选项。',
+                    'info'  => '设置魔法AI选项，并允许一些选项自动创建内容。',
                     'title' => '魔法AI',
 
                     'settings' => [
@@ -3724,7 +3728,7 @@ return [
 
                 'inventory' => [
                     'title'      => '库存',
-                    'title-info' => '配置库存设置以允许缺货、设置购物车的最小和最大数量，并定义缺货阈值。',
+                    'title-info' => '配置库存设置以允许缺货订单并定义缺货阈值。',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => '允许缺货订单',
@@ -3780,7 +3784,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'ニュースレターの購読、メールの確認、ソーシャルログインを設定します。',
+                    'settings-info' => '设置愿望清单、登录重定向、新闻通讯订阅、默认组选项、电子邮件验证和社交登录。',
                     'title'         => '設定',
 
                     'login-as-customer' => [
@@ -4217,6 +4221,10 @@ return [
                 'transactions'             => '交易',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
+            ],
+
+            'powered-by' => [
+                'description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
             ],
         ],
 
