@@ -95,7 +95,7 @@
                             aria-label="@lang('shop::app.categories.toolbar.grid')"
                             tabindex="0"
                             :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
-                            @click="changeMode()"
+                            @click="changeMode('grid')"
                         >
                         </span>
                     </div>
@@ -183,6 +183,8 @@
                     for (let key in this.filters.applied) {
                         if (this.filters.applied[key] != this.filters.default[key]) {
                             filters[key] = this.filters.applied[key];
+                        } else {
+                            filters= this.filters.default;
                         }
                     }
 

@@ -36,6 +36,7 @@
                                 name="search"
                                 :value="getSearchedValues('all')"
                                 class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"
+                                :class="getSearchedValues('all')?.length ? 'border-blue-600' : ''"
                                 placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                                 autocomplete="off"
                                 @keyup.enter="search"
