@@ -82,6 +82,7 @@ it('should create a new customer', function () {
         'last_name'  => fake()->lastName(),
         'gender'     => fake()->randomElement(['male', 'female', 'other']),
         'email'      => fake()->email(),
+        'channel_id' => core()->getCurrentChannel()->id,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -93,6 +94,7 @@ it('should create a new customer', function () {
                 'last_name'  => $data['last_name'],
                 'gender'     => $data['gender'],
                 'email'      => $data['email'],
+                'channel_id' => $data['channel_id'],
             ],
         ],
     ]);
@@ -115,6 +117,7 @@ it('should create a new customer and send notification to the customer', functio
         'last_name'  => fake()->lastName(),
         'gender'     => fake()->randomElement(['male', 'female', 'other']),
         'email'      => fake()->email(),
+        'channel_id' => core()->getCurrentChannel()->id,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -126,6 +129,7 @@ it('should create a new customer and send notification to the customer', functio
                 'last_name'  => $data['last_name'],
                 'gender'     => $data['gender'],
                 'email'      => $data['email'],
+                'channel_id' => $data['channel_id'],
             ],
         ],
     ]);
@@ -265,6 +269,7 @@ it('should update the the existing customer', function () {
         'last_name'  => $customer->last_name,
         'gender'     => $customer->gender,
         'email'      => fake()->email(),
+        'channel_id' => core()->getCurrentChannel()->id,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.customers.update-success'));
@@ -276,6 +281,7 @@ it('should update the the existing customer', function () {
                 'last_name'  => $customer->last_name,
                 'gender'     => $customer->gender,
                 'email'      => $data['email'],
+                'channel_id' => $data['channel_id'],
             ],
         ],
     ]);

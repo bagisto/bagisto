@@ -1,3 +1,7 @@
+@php
+    $channel = core()->getAllChannels()->where('id', $customer?->channel_id)->first();
+@endphp
+
 <x-admin::layouts>
     <v-customer-view>
         <!-- Shimmer Effect -->
@@ -217,6 +221,10 @@
 
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.group')".replace(':group_code', customer.group?.name ?? 'N/A') }}
+                                    </p>
+
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        {{ trans('admin::app.customers.customers.view.channel', ['name' => $channel->name ?? 'N/A']) }}
                                     </p>
                                 </div>
                             </x-slot:content>
