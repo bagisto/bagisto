@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'İzin Verilen Hatalar',
                     'back-btn'            => 'Geri',
                     'create-update'       => 'Oluştur/Güncelle',
+                    'current-file'        => 'Mevcut Yüklenen Dosya',
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',

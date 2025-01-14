@@ -501,6 +501,6 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        return Storage::disk('private')->download($import->error_file_path);
+        return Storage::disk('private')->download($import->error_file_path ?? $import->file_path);
     }
 }

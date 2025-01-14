@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'שגיאות מותרות',
                     'back-btn'            => 'חזרה',
                     'create-update'       => 'יצירה/עדכון',
+                    'current-file'        => 'קובץ שהועלה נוכחי',
                     'delete'              => 'מחיקה',
                     'download-sample'     => 'הורד דוגמא',
                     'field-separator'     => 'מפריד שדות',

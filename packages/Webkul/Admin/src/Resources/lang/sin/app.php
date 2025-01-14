@@ -2577,6 +2577,7 @@ return [
                     'allowed-errors'      => 'ඉඩ දෙන දෝෂ',
                     'back-btn'            => 'ආපසු',
                     'create-update'       => 'සාදන්න/යාවත්කාලීන කරන්න',
+                    'current-file'        => 'වත්මන් උඩුගත කළ ගොනුව',
                     'delete'              => 'මකන්න',
                     'download-sample'     => 'උදව් පිටපත බාගන්න',
                     'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',

@@ -181,7 +181,7 @@ class Importer extends AbstractImporter
                 'before:today',
                 'regex:/^\d{4}-\d{2}-\d{2}$/',
             ],
-            'phone'               => 'phone',
+            'phone'               => 'regex:/^\+?[0-9]{7,15}$/',
         ]);
 
         if ($validator->fails()) {
