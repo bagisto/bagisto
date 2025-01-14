@@ -25,7 +25,7 @@ npx playwright install --with-deps
 
 # Run Playwright for Shop Mini Cart tests
 ~~~
-    @npx playwright test tests/shop/miniCart.spec --workers=1 --project=chromium --retries=2 --quiet --reporter html --output=playwright-report-temp/Shop-Minicart || echo "Continue"
+    @npx playwright test tests/shop/mini-cart.spec --workers=1 --project=chromium --retries=2 --quiet --reporter html --output=playwright-report-temp/Shop-Mini-cart || echo "Continue"
 ~~~
 
 # Run Playwright for Shop Cart Page tests
@@ -50,7 +50,7 @@ npx playwright install --with-deps
 
 # Run Playwright for Shop Product, Category tests
 ~~~
-    @npx playwright test tests/shop/productsCategories.spec --workers=1 --project=chromium --retries=2 --quiet --reporter html --output=playwright-report-temp/Shop-Product&Category || echo "Continue"
+    @npx playwright test tests/shop/products-categories.spec --workers=1 --project=chromium --retries=2 --quiet --reporter html --output=playwright-report-temp/Shop-Product&Category || echo "Continue"
 ~~~
 
 # Run Playwright for Shop Customer tests

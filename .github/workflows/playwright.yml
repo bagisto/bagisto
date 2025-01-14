@@ -162,7 +162,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test tests/shop/miniCart.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+          npx playwright test tests/shop/mini-cart.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
 
       - name: Upload Playwright report for Shop Mini Cart tests
         uses: actions/upload-artifact@v4
@@ -232,7 +232,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test tests/shop/productsCategories.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
+          npx playwright test tests/shop/products-categories.spec --workers=1 --project=chromium --retries=0 || echo "Continue"
 
       - name: Upload Playwright report for Shop Product, Category tests
         uses: actions/upload-artifact@v4

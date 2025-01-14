@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import config from '../../Config/config';
+import { test, expect, config } from '../utils/setup';
 
 test('Login', async ({page}) => {
   await page.goto(`${config.baseUrl}/admin/login`);
