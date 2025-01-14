@@ -241,7 +241,7 @@ class Cart
             try {
                 $this->addProduct($guestCartItem->product, $guestCartItem->additional);
             } catch (\Exception $e) {
-                //Ignore exception
+                // Ignore exception
             }
         }
 

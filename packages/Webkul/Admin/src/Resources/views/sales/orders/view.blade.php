@@ -329,7 +329,7 @@
                                         </p>
 
                                         <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                            {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                            {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
                                         </p>
                                     </div>
                                 @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
@@ -339,7 +339,7 @@
                                         </p>
 
                                         <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                            {{ core()->formatBasePrice($order->base_sub_total) }}
+                                            {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                         </p>
                                     </div>
 
@@ -349,7 +349,7 @@
                                         </p>
 
                                         <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                            {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                            {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
                                         </p>
                                     </div>
                                 @else
@@ -359,7 +359,7 @@
                                         </p>
 
                                         <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                            {{ core()->formatBasePrice($order->base_sub_total) }}
+                                            {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                         </p>
                                     </div>
                                 @endif
