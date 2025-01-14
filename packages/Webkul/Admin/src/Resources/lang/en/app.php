@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Email Address',
-            'forget-password-link' => 'Forget Password ?',
-            'password'             => 'Password',
-            'submit-btn'           => 'Sign In',
-            'title'                => 'Sign In',
+            'email'                  => 'Email Address',
+            'forget-password-link'   => 'Forget Password ?',
+            'password'               => 'Password',
+            'powered-by-description' => 'Powered by :bagisto, an open-source project by :webkul.',
+            'submit-btn'             => 'Sign In',
+            'title'                  => 'Sign In',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Registered Email',
-                'email-not-exist' => 'Email Not Exists',
-                'page-title'      => 'Forget Password',
-                'reset-link-sent' => 'Reset Password link sent',
-                'sign-in-link'    => 'Back to Sign In ?',
-                'submit-btn'      => 'Reset',
-                'title'           => 'Recover Password',
+                'email'                  => 'Registered Email',
+                'email-not-exist'        => 'Email Not Exists',
+                'page-title'             => 'Forget Password',
+                'powered-by-description' => 'Powered by :bagisto, an open-source project by :webkul.',
+                'reset-link-sent'        => 'Reset Password link sent',
+                'sign-in-link'           => 'Back to Sign In ?',
+                'submit-btn'             => 'Reset',
+                'title'                  => 'Recover Password',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Back to Sign In ?',
-            'confirm-password' => 'Confirm Password',
-            'email'            => 'Registered Email',
-            'password'         => 'Password',
-            'submit-btn'       => 'Reset Password',
-            'title'            => 'Reset Password',
+            'back-link-title'        => 'Back to Sign In ?',
+            'confirm-password'       => 'Confirm Password',
+            'email'                  => 'Registered Email',
+            'password'               => 'Password',
+            'powered-by-description' => 'Powered by :bagisto, an open-source project by :webkul.',
+            'submit-btn'             => 'Reset Password',
+            'title'                  => 'Reset Password',
         ],
     ],
 
@@ -2580,6 +2583,7 @@ return [
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
                     'create-update'       => 'Create/Update',
+                    'current-file'        => 'Current Uploaded File',
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',
@@ -3352,7 +3356,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Set units options.',
+                    'info'  => 'Set units options and enable or disable breadcrumbs.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -3370,7 +3374,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
+                    'info'  => 'Set header offer title and custom scripts.',
                     'title' => 'Content',
 
                     'header-offer' => [
@@ -3390,7 +3394,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Set logo and favicon icon.',
+                    'info'  => 'Set logo and favicon icon for admin panel.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3402,7 +3406,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Set Magic AI options.',
+                    'info'  => 'Set Magic AI options and allow some options to automate the creation of content.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3728,7 +3732,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventory',
-                    'title-info' => 'Configure inventory settings to allow back orders, set minimum and maximum cart quantities, and define the out-of-stock threshold.',
+                    'title-info' => 'Configure inventory settings to allow back orders and define the out-of-stock threshold.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Allow Back Orders',
@@ -3784,7 +3788,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Set newsletter subscriptions, email verifications and social login.',
+                    'settings-info' => 'Set wishlist, login redirection, newsletter subscriptions, default group option , email verifications and social login.',
                     'title'         => 'Settings',
 
                     'login-as-customer' => [
@@ -4221,6 +4225,10 @@ return [
                 'transactions'             => 'Transactions',
                 'url-rewrites'             => 'URL Rewrites',
                 'users'                    => 'Users',
+            ],
+
+            'powered-by' => [
+                'description' => 'Powered by :bagisto, an open-source project by :webkul.',
             ],
         ],
 

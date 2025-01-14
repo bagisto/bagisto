@@ -665,7 +665,7 @@
                             <!-- Value Per Channel -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 opacity-70">
                                 @php
-                                    $valuePerChannel = old('value_per_channel') ?? $attribute->value_per_channel
+                                    $valuePerChannel = old('value_per_channel') ?? $attribute->value_per_channel;
                                 @endphp
 
                                 <x-admin::form.control-group.control
@@ -689,7 +689,10 @@
                             </x-admin::form.control-group>
 
                             <!-- Use in Layered -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group
+                                class="!mb-2 flex select-none items-center gap-2.5"
+                                ::class="{ 'opacity-70' : isFilterableDisabled }"
+                            >
                                 @php
                                     $isFilterable = old('is_filterable') ?? $attribute->is_filterable;
                                 @endphp
@@ -701,6 +704,7 @@
                                     value="1"
                                     for="is_filterable"
                                     :checked="(boolean) $isFilterable"
+                                    ::disabled="isFilterableDisabled"
                                 />
 
                                 <label
@@ -717,7 +721,7 @@
                                 />
                             </x-admin::form.control-group>
 
-                            <!-- Use to create configuable product -->
+                            <!-- Use to create configurable product -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                 @php
                                     $isConfigurable = old('is_configurable') ?? $attribute->is_configurable;
@@ -746,7 +750,7 @@
                                 />
                             </x-admin::form.control-group>
 
-                            <!-- Visible On Product View Page On Fornt End -->
+                            <!-- Visible On Product View Page On Front End -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                 @php
                                     $isVisibleOnFront = old('is_visible_on_front') ?? $attribute->is_visible_on_front;
@@ -954,6 +958,8 @@
                     return {
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
+                        attributeType: "{{ $attribute->type }}",
+
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
                         isNullOptionChecked: false,
@@ -972,6 +978,14 @@
 
                         optionId: 0,
                     }
+                },
+
+                computed: {
+                    isFilterableDisabled() {
+                        return this.attributeType == 'price' || this.attributeType == 'checkbox'
+                            || this.attributeType == 'select' || this.attributeType == 'multiselect'
+                            ? false : true;
+                    },
                 },
 
                 created () {

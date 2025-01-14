@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Endereço de Email',
-            'forget-password-link' => 'Esqueceu a Senha?',
-            'password'             => 'Senha',
-            'submit-btn'           => 'Entrar',
-            'title'                => 'Entrar',
+            'email'                  => 'Endereço de Email',
+            'forget-password-link'   => 'Esqueceu a Senha?',
+            'password'               => 'Senha',
+            'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+            'submit-btn'             => 'Entrar',
+            'title'                  => 'Entrar',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Email Registrado',
-                'email-not-exist' => 'Email não Existe',
-                'page-title'      => 'Esqueceu a Senha',
-                'reset-link-sent' => 'Link de Redefinição de Senha enviado',
-                'sign-in-link'    => 'Voltar para Entrar?',
-                'submit-btn'      => 'Redefinir',
-                'title'           => 'Recuperar Senha',
+                'email'                  => 'Email Registrado',
+                'email-not-exist'        => 'Email não Existe',
+                'page-title'             => 'Esqueceu a Senha',
+                'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+                'reset-link-sent'        => 'Link de Redefinição de Senha enviado',
+                'sign-in-link'           => 'Voltar para Entrar?',
+                'submit-btn'             => 'Redefinir',
+                'title'                  => 'Recuperar Senha',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Voltar para Entrar?',
-            'confirm-password' => 'Confirmar Senha',
-            'email'            => 'Email Registrado',
-            'password'         => 'Senha',
-            'submit-btn'       => 'Redefinir Senha',
-            'title'            => 'Redefinir Senha',
+            'back-link-title'        => 'Voltar para Entrar?',
+            'confirm-password'       => 'Confirmar Senha',
+            'email'                  => 'Email Registrado',
+            'password'               => 'Senha',
+            'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
+            'submit-btn'             => 'Redefinir Senha',
+            'title'                  => 'Redefinir Senha',
         ],
     ],
 
@@ -2580,6 +2583,7 @@ return [
                     'allowed-errors'      => 'Erros permitidos',
                     'back-btn'            => 'Voltar',
                     'create-update'       => 'Criar/Atualizar',
+                    'current-file'        => 'Arquivo Carregado Atual',
                     'delete'              => 'Excluir',
                     'download-sample'     => 'Baixar Exemplo',
                     'field-separator'     => 'Separador de Campos',
@@ -3352,7 +3356,7 @@ return [
                 'title' => 'Geral',
 
                 'general' => [
-                    'info'  => 'Definir opções de unidades.',
+                    'info'  => 'Definir opções de unidades e ativar ou desativar migalhas de pão.',
                     'title' => 'Geral',
 
                     'unit-options' => [
@@ -3370,7 +3374,7 @@ return [
                 ],
 
                 'content' => [
-                    'info'  => 'Definir opções de comparação, opções de lista de desejos, opções de pesquisa de imagem, rodapé, alternar rodapé e scripts personalizados.',
+                    'info'  => 'Defina o título da oferta do cabeçalho e scripts personalizados.',
                     'title' => 'Conteúdo',
 
                     'header-offer' => [
@@ -3390,7 +3394,7 @@ return [
                 ],
 
                 'design' => [
-                    'info'  => 'Definir logotipo e ícone de favicon.',
+                    'info'  => 'Defina o logotipo e o ícone favicon para o painel de administração.',
                     'title' => 'Design',
 
                     'admin-logo' => [
@@ -3402,7 +3406,7 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Definir opções de Magic AI.',
+                    'info'  => 'Defina as opções do Magic AI e permita algumas opções para automatizar a criação de conteúdo.',
                     'title' => 'Magic AI',
 
                     'settings' => [
@@ -3728,7 +3732,7 @@ return [
 
                 'inventory' => [
                     'title'      => 'Inventário',
-                    'title-info' => 'Configure as configurações de inventário para permitir pedidos pendentes, definir quantidades mínimas e máximas no carrinho e definir o limite de estoque esgotado.',
+                    'title-info' => 'Configure as configurações de inventário para permitir pedidos em atraso e definir o limite de estoque esgotado.',
 
                     'product-stock-options' => [
                         'allow-back-orders'       => 'Permitir Pedidos Pendentes',
@@ -3784,7 +3788,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Definir inscrições de newsletter, verificações de e-mail e login social.',
+                    'settings-info' => 'Defina lista de desejos, redirecionamento de login, assinaturas de newsletter, opção de grupo padrão, verificações de e-mail e login social.',
                     'title'         => 'Configurações',
 
                     'login-as-customer' => [
@@ -4221,6 +4225,10 @@ return [
                 'transactions'             => 'Transações',
                 'url-rewrites'             => 'Reescritas de URL',
                 'users'                    => 'Usuários',
+            ],
+
+            'powered-by' => [
+                'description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
             ],
         ],
 

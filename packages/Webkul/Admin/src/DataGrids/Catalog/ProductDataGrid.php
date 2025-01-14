@@ -304,13 +304,14 @@ class ProductDataGrid extends DataGrid
         $results = Elasticsearch::search([
             'index' => $indexNames,
             'body'  => [
-                'from'          => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
-                'size'          => $pagination['per_page'],
-                'stored_fields' => [],
-                'query'         => [
+                'from'             => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
+                'size'             => $pagination['per_page'],
+                'stored_fields'    => [],
+                'query'            => [
                     'bool' => $this->getElasticFilters($params['filters'] ?? []) ?: new \stdClass,
                 ],
-                'sort'          => $this->getElasticSort($params['sort'] ?? []),
+                'sort'             => $this->getElasticSort($params['sort'] ?? []),
+                'track_total_hits' => true,
             ],
         ]);
 

@@ -888,6 +888,14 @@
                                                     {{ $item->name }}
                                                 </p>
 
+                                                @if (isset($item->additional['attributes']))
+                                                    <div>
+                                                        @foreach ($item->additional['attributes'] as $attribute)
+                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+
                                                 <div class="grid gap-1.5 text-xs font-medium">
                                                     <!-- SKU -->
                                                     <div class="flex justify-between">
@@ -1161,6 +1169,14 @@
     
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.invoices.product-name')">
                                                         {{ $item->name }}
+
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div>
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                                @endforeach
+                                                            </div>
+                                                        @endif
                                                     </td>
     
                                                     <td
@@ -1399,6 +1415,14 @@
     
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.shipments.product-name')">
                                                         {{ $item->name }}
+
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div>
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                                @endforeach
+                                                            </div>
+                                                        @endif
                                                     </td>
     
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.shipments.qty')">
@@ -1522,6 +1546,14 @@
 
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.refunds.product-name')">
                                                         {{ $item->name }}
+
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div>
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                                @endforeach
+                                                            </div>
+                                                        @endif
                                                     </td>
 
                                                     <td
