@@ -32,11 +32,11 @@
                     {{ $shipment->order->shipping_address->company_name ?? '' }}<br/>
 
                     {{ $shipment->order->shipping_address->name }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->address }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->postcode . " " . $shipment->order->shipping_address->city }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->state }}<br/>
 
                     ---<br/>
@@ -56,9 +56,9 @@
                 <div style="font-size: 16px; color: #384860;">
                     <div>
                         <span>
-                            @lang('shop::app.emails.orders.carrier') : 
+                            @lang('shop::app.emails.orders.carrier') :
                         </span>
-                        
+
                         {{ $shipment->carrier_title }}
                     </div>
 
@@ -95,11 +95,11 @@
                     {{ $shipment->order->billing_address->company_name ?? '' }}<br/>
 
                     {{ $shipment->order->billing_address->name }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->address }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->postcode . " " . $shipment->order->billing_address->city }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->state }}<br/>
 
                     ---<br/>
@@ -126,7 +126,7 @@
                     @foreach (['sku', 'name', 'price', 'qty'] as $item)
                         <th style="text-align: left;padding: 15px">
                             @lang('shop::app.emails.orders.' . $item)
-                        </th>    
+                        </th>
                     @endforeach
                 </tr>
             </thead>
@@ -143,11 +143,26 @@
 
                             @if (isset($item->additional['attributes']))
                                 <div>
-
                                     @foreach ($item->additional['attributes'] as $attribute)
-                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                    @endforeach
+                                        @if (
+                                            ! isset($attribute['attribute_type'])
+                                            || $attribute['attribute_type'] !== 'file'
+                                        )
+                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                        @else
+                                            {{ $attribute['attribute_name'] }} :
 
+                                            <a
+                                                href="{{ Storage::url($attribute['option_label']) }}"
+                                                class="text-blue-600 hover:underline"
+                                                download="{{ File::basename($attribute['option_label']) }}"
+                                            >
+                                                {{ File::basename($attribute['option_label']) }}
+                                            </a>
+
+                                            <br>
+                                        @endif
+                                    @endforeach
                                 </div>
                             @endif
                         </td>

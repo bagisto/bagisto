@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => '请选择一个选项',
                     'select-above-options' => '请选择以上选项',
