@@ -198,7 +198,7 @@
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
                                     <p
-                                        class="font-semibold text-gray-800 dark:text-white"
+                                        class="break-all font-semibold text-gray-800 dark:text-white"
                                         v-text="`${customer.first_name} ${customer.last_name}`"
                                     >
                                     </p>
@@ -265,7 +265,7 @@
                                             @lang('admin::app.customers.customers.view.default-address')
                                         </p>
 
-                                        <p class="font-semibold text-gray-800 dark:text-white">
+                                        <p class="break-all font-semibold text-gray-800 dark:text-white">
                                             @{{ `${address.first_name} ${address.last_name}` }}
 
                                             <template v-if="address.company_name">

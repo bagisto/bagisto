@@ -168,11 +168,31 @@ class Installer extends Command
      */
     public function handle(): void
     {
+        $hasExistingEnv = file_exists(base_path('.env'));
+
+        if (! $hasExistingEnv) {
+            $this->components->info('Creating the environment configuration file.');
+
+            File::copy('.env.example', '.env');
+        } else {
+            $this->components->info('Great! your environment configuration file already exists.');
+        }
+
         ! $this->option('skip-env-check')
-            ? $this->checkForEnvFile()
+            ? $this->askDetailsAndUpdateEnv()
             : $this->components->warn('Skipping environment check. This will assume that the `.env` file is already configured. If not, please create it manually.');
 
-        $this->updateAndLoadEnvConfigs();
+        if (! $hasExistingEnv) {
+            $this->updateEnvVariables();
+
+            $this->reconnectDatabase();
+
+            $this->loadEnvConfigs();
+        } else {
+            $this->updateEnvVariables();
+
+            $this->loadEnvConfigs();
+        }
 
         $this->warn('Step: Generating key...');
         $this->call('key:generate');
@@ -187,45 +207,29 @@ class Installer extends Command
         $this->warn('Step: Linking storage directory...');
         $this->call('storage:link');
 
-        $this->warn('Step: Clearing cached bootstrap files...');
-        $this->call('optimize:clear');
-
         if (! $this->option('skip-admin-creation')) {
             $this->warn('Step: Create admin credentials...');
             $this->askForAdminDetails();
         }
 
+        $this->warn('Step: Clearing cached bootstrap files...');
+        $this->call('optimize:clear');
+
         ComposerEvents::postCreateProject();
     }
 
     /**
-     *  Checking .env file and if not found then create .env file.
+     * Request environment configuration details and set them in the `.env`
+     * file to facilitate the migration to our database.
      */
-    protected function checkForEnvFile(): void
-    {
-        if (! file_exists(base_path('.env'))) {
-            $this->components->info('Creating the environment configuration file.');
-
-            File::copy('.env.example', '.env');
-        } else {
-            $this->components->info('Great! your environment configuration file already exists.');
-        }
-
-        $this->createEnvFile();
-    }
-
-    /**
-     * Create a new `.env` file. Afterwards, request environment configuration details and set them
-     * in the `.env` file to facilitate the migration to our database.
-     */
-    protected function createEnvFile(): void
+    protected function askDetailsAndUpdateEnv(): void
     {
         try {
             $this->askForApplicationDetails();
 
             $this->askForDatabaseDetails();
         } catch (\Exception $e) {
-            $this->error('Error in creating `.env` file, please create it manually and then run `php artisan migrate` again.');
+            $this->error('Error in updating `.env` file, please create it manually and then run `php artisan migrate` again.');
         }
     }
 
@@ -237,13 +241,13 @@ class Installer extends Command
         $this->updateTextTypeEnv(
             'APP_NAME',
             'Please enter the application name',
-            env('APP_NAME', 'Bagisto')
+            $this->getEnvVariable('APP_NAME', 'Bagisto')
         );
 
         $this->updateTextTypeEnv(
             'APP_URL',
             'Please enter the application URL',
-            env('APP_URL', 'http://localhost:8000')
+            $this->getEnvVariable('APP_URL', 'http://localhost:8000')
         );
 
         $this->updateChoiceTypeEnv(
@@ -296,31 +300,31 @@ class Installer extends Command
 
             'DB_HOST' => text(
                 label    : 'Please enter the database host',
-                default  : env('DB_HOST', '127.0.0.1'),
+                default  : $this->getEnvVariable('DB_HOST', '127.0.0.1'),
                 required : true
             ),
 
             'DB_PORT' => text(
                 label    : 'Please enter the database port',
-                default  : env('DB_PORT', '3306'),
+                default  : $this->getEnvVariable('DB_PORT', '3306'),
                 required : true
             ),
 
             'DB_DATABASE' => text(
                 label    : 'Please enter the database name',
-                default  : env('DB_DATABASE', ''),
+                default  : $this->getEnvVariable('DB_DATABASE', ''),
                 required : true
             ),
 
             'DB_PREFIX' => text(
                 label   : 'Please enter the database prefix',
-                default : env('DB_PREFIX', ''),
+                default : $this->getEnvVariable('DB_PREFIX', ''),
                 hint    : 'or press enter to continue'
             ),
 
             'DB_USERNAME' => text(
                 label    : 'Please enter your database username',
-                default  : env('DB_USERNAME', ''),
+                default  : $this->getEnvVariable('DB_USERNAME', ''),
                 required : true
             ),
 
@@ -413,7 +417,7 @@ class Installer extends Command
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to '.env('APP_URL').'/'.env('APP_ADMIN_URL', 'admin').' and authenticate with:');
+            $this->info('Go to '.$this->getEnvVariable('APP_URL').'/'.$this->getEnvVariable('APP_ADMIN_URL', 'admin').' and authenticate with:');
             $this->info('Email: '.$adminEmail);
             $this->info('Password: '.$adminPassword);
             $this->info('Cheers!');
@@ -449,13 +453,13 @@ class Installer extends Command
             $choice = suggest(
                 label: $question,
                 options: $choices,
-                default: env($key)
+                default: $this->getEnvVariable($key, '')
             );
         } else {
             $choice = select(
                 label: $question,
                 options: $choices,
-                default: env($key)
+                default: $this->getEnvVariable($key, '')
             );
         }
 
@@ -573,16 +577,6 @@ class Installer extends Command
     }
 
     /**
-     * Update and load the `.env` file.
-     */
-    protected function updateAndLoadEnvConfigs(): void
-    {
-        $this->updateEnvVariables();
-
-        $this->loadEnvConfigs();
-    }
-
-    /**
      * Check key in `.env` file because it will help to find values at runtime.
      */
     protected function getEnvVariable(string $key, $default = null): string|bool
@@ -602,6 +596,36 @@ class Installer extends Command
         }
 
         return $default;
+    }
+
+    /**
+     * Reconnect to the database with new credentials.
+     */
+    protected function reconnectDatabase(): void
+    {
+        $connection = $this->envDetails['DB_CONNECTION'] ?? 'mysql';
+
+        config([
+            "database.connections.{$connection}.host"     => $this->envDetails['DB_HOST'] ?? '',
+            "database.connections.{$connection}.port"     => $this->envDetails['DB_PORT'] ?? '',
+            "database.connections.{$connection}.database" => $this->envDetails['DB_DATABASE'] ?? '',
+            "database.connections.{$connection}.username" => $this->envDetails['DB_USERNAME'] ?? '',
+            "database.connections.{$connection}.password" => $this->envDetails['DB_PASSWORD'] ?? '',
+            "database.connections.{$connection}.prefix"   => $this->envDetails['DB_PREFIX'] ?? '',
+        ]);
+
+        DB::purge($connection);
+        DB::reconnect($connection);
+
+        try {
+            DB::connection()->getPdo();
+
+            $this->components->info('Database connection established successfully.');
+        } catch (\Exception $e) {
+            $this->error('Database connection failed. Please check your credentials.');
+
+            abort(400);
+        }
     }
 
     /**

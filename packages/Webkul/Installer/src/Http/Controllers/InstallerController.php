@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
 use Webkul\Installer\Helpers\ServerRequirements;
@@ -168,7 +169,9 @@ class InstallerController extends Controller
 
             return true;
         } catch (\Throwable $th) {
-            dd($th);
+            Log::error('Error in Admin installer config setup'.$th->getMessage());
+
+            return false;
         }
     }
 

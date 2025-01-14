@@ -34,7 +34,7 @@ return [
 
     'notifications' => [
         'description-text' => 'Alle meldingen weergeven',
-        'marked-success'   => 'Alle meldingen zijn als gelezen gemarkeerd',
+        'marked-success'   => 'Alle meldingen zijn gemarkeerd als gelezen',
         'no-record'        => 'Geen Records Gevonden',
         'of'               => 'van',
         'per-page'         => 'Per pagina',
@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Geslacht',
                     'group'          => 'Groep',
                     'id'             => 'Klant ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inactief',
                     'method-error'   => 'Fout! Verkeerde methode gedetecteerd, controleer alstublieft de mass action-configuratie',
                     'name'           => 'Klantnaam',

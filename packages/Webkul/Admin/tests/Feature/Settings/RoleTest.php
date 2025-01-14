@@ -46,6 +46,9 @@ it('should store the newly created roles', function () {
         'name'            => fake()->name(),
         'permission_type' => fake()->randomElement(['custom', 'all']),
         'description'     => fake()->sentence(),
+        'permissions'     => [
+            0 => acl()->getRoles()->random(),
+        ],
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();

@@ -562,7 +562,7 @@ it('should store the order refund', function () {
             'adjustment_fee'    => '0',
         ],
     ])
-        ->assertRedirect(route('admin.sales.refunds.index'))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
 
     $cart->refresh();
@@ -777,7 +777,7 @@ it('should store the order refund and send email to the customer', function () {
             'adjustment_fee'    => '0',
         ],
     ])
-        ->assertRedirect(route('admin.sales.refunds.index'))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
 
     $cart->refresh();

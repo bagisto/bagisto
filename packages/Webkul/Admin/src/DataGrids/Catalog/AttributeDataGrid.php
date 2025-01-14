@@ -125,8 +125,12 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->is_required ? 'true' : 'false'));
+            'closure'    => function ($row) {
+                if ($row->is_required) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
             },
         ]);
 
@@ -137,8 +141,12 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->is_unique ? 'true' : 'false'));
+            'closure'    => function ($row) {
+                if ($row->is_unique) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
             },
         ]);
 
@@ -149,8 +157,12 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->value_per_locale ? 'true' : 'false'));
+            'closure'    => function ($row) {
+                if ($row->value_per_locale) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
             },
         ]);
 
@@ -161,8 +173,12 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->value_per_channel ? 'true' : 'false'));
+            'closure'    => function ($row) {
+                if ($row->value_per_channel) {
+                    return trans('admin::app.catalog.attributes.index.datagrid.true');
+                }
+
+                return trans('admin::app.catalog.attributes.index.datagrid.false');
             },
         ]);
 

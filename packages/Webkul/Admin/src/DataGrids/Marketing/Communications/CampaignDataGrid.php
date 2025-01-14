@@ -61,12 +61,22 @@ class CampaignDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.marketing.communications.campaigns.index.datagrid.status'),
-            'type'       => 'boolean',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
+            'index'              => 'status',
+            'label'              => trans('admin::app.marketing.communications.campaigns.index.datagrid.status'),
+            'type'               => 'boolean',
+            'searchable'         => true,
+            'sortable'           => true,
+            'filterable'         => true,
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.marketing.communications.campaigns.index.datagrid.active'),
+                    'value' => 1,
+                ],
+                [
+                    'label' => trans('admin::app.marketing.communications.campaigns.index.datagrid.inactive'),
+                    'value' => 0,
+                ],
+            ],
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.marketing.communications.campaigns.index.datagrid.active');

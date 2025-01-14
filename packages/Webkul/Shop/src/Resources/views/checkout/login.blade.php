@@ -45,6 +45,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
+                            <!-- Email -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.checkout.login.email')
@@ -64,6 +65,7 @@
                                 <x-shop::form.control-group.error control-name="email" />
                             </x-shop::form.control-group>
 
+                            <!-- Password -->
                             <x-shop::form.control-group class="!mb-0">
                                 <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.checkout.login.password')

@@ -1411,6 +1411,7 @@ return [
                     'gender'         => 'Geschlecht',
                     'group'          => 'Gruppe',
                     'id'             => 'Kunden-ID',
+                    'id-value'       => 'ID - :id',
                     'inactive'       => 'Inaktiv',
                     'method-error'   => 'Fehler! Falsche Methode erkannt, bitte überprüfen Sie die Massenaktionskonfiguration',
                     'name'           => 'Kundenname',
