@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Дозволені помилки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Створити/Оновити',
+                    'current-file'        => 'Поточний завантажений файл',
                     'delete'              => 'Видалити',
                     'download-sample'     => 'Завантажити приклад',
                     'field-separator'     => 'Роздільник полів',

@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'الأخطاء المسموح بها',
                     'back-btn'            => 'رجوع',
                     'create-update'       => 'إنشاء/تحديث',
+                    'current-file'        => 'الملف المرفوع الحالي',
                     'delete'              => 'حذف',
                     'download-sample'     => 'تحميل النموذج',
                     'field-separator'     => 'فاصل الحقل',

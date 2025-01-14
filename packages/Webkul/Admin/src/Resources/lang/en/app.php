@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
                     'create-update'       => 'Create/Update',
+                    'current-file'        => 'Current Uploaded File',
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',

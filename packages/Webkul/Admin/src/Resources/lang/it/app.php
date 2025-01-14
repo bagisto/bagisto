@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => 'Errori Consentiti',
                     'back-btn'            => 'Indietro',
                     'create-update'       => 'Crea/Aggiorna',
+                    'current-file'        => 'File Caricato Corrente',
                     'delete'              => 'Elimina',
                     'download-sample'     => 'Scarica Esempio',
                     'field-separator'     => 'Separatore di Campi',

@@ -2576,6 +2576,7 @@ return [
                     'allowed-errors'      => '允許的錯誤',
                     'back-btn'            => '返回',
                     'create-update'       => '建立/更新',
+                    'current-file'        => '当前上传的文件',
                     'delete'              => '刪除',
                     'download-sample'     => '下載範例',
                     'field-separator'     => '欄位分隔符',
