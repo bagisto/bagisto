@@ -2807,8 +2807,9 @@ return [
                         'title' => 'Edit Tax Categories',
                     ],
 
+                    'can-not-delete' => 'Tax Rates Assigned Categories cannot be deleted.',
                     'create-success' => 'New Tax Category Created.',
-                    'delete-failed'  => 'Tax Rates Assigned Categories cannot be deleted.',
+                    'delete-failed'  => 'Tax Category Deleted Failed',
                     'delete-success' => 'Tax Category Deleted Successfully.',
                     'update-success' => 'Tax Category Successfully Updated.',
                 ],

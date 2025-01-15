@@ -2807,8 +2807,9 @@ return [
                         'title'   => 'Modifier les catégories de taxe',
                     ],
 
+                    'can-not-delete' => 'Les catégories assignées aux taux de taxe ne peuvent pas être supprimées.',
                     'create-success' => 'Nouvelle catégorie de taxe créée',
-                    'delete-failed'  => 'Les catégories assignées aux taux de taxe ne peuvent pas être supprimées.',
+                    'delete-failed'  => 'Échec de la suppression de la catégorie de taxe',
                     'delete-success' => 'Catégorie de taxe supprimée avec succès',
                     'update-success' => 'Catégorie de taxe mise à jour avec succès',
                 ],

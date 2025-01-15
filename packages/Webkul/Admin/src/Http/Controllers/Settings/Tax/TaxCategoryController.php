@@ -120,15 +120,23 @@ class TaxCategoryController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Event::dispatch('tax.category.delete.before', $id);
+            $taxCategory = $this->taxCategoryRepository->findOrFail($id);
+            
+            if (! $taxCategory->tax_rates()->count()) {
+                Event::dispatch('tax.category.delete.before', $id);
 
-            $this->taxCategoryRepository->delete($id);
+                $taxCategory->delete();
 
-            Event::dispatch('tax.category.delete.after', $id);
+                Event::dispatch('tax.category.delete.after', $id);
+
+                return new JsonResponse([
+                    'message' => trans('admin::app.settings.taxes.categories.index.delete-success'),
+                ]);
+            }
 
             return new JsonResponse([
-                'message' => trans('admin::app.settings.taxes.categories.index.delete-success'),
-            ]);
+                'message' => trans('admin::app.settings.taxes.categories.index.can-not-delete'),
+            ], 400);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.taxes.categories.index.delete-failed'),
