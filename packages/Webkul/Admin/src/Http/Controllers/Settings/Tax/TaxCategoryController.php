@@ -121,7 +121,7 @@ class TaxCategoryController extends Controller
     {
         try {
             $taxCategory = $this->taxCategoryRepository->findOrFail($id);
-            
+
             if (! $taxCategory->tax_rates()->count()) {
                 Event::dispatch('tax.category.delete.before', $id);
 
