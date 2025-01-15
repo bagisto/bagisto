@@ -349,16 +349,32 @@
                     reloadPrice () {
                         let selectedOptionCount = this.childAttributes.filter(attribute => attribute.selectedValue).length;
 
+                        let finalPrice = document.querySelector('.final-price');
+
+                        let regularPrice = document.querySelector('.regular-price');
+
+                        let configVariant = this.config.variant_prices[this.possibleOptionVariant];
+
                         if (this.childAttributes.length == selectedOptionCount) {
                             document.querySelector('.price-label').style.display = 'none';
 
-                            document.querySelector('.final-price').innerHTML = this.config.variant_prices[this.possibleOptionVariant].final.formatted_price;
+                            if (parseInt(configVariant.regular.price) > parseInt(configVariant.final.price)) {
+                                regularPrice.style.display = 'block';
+
+                                finalPrice.innerHTML = configVariant.final.formatted_price;
+
+                                regularPrice.innerHTML = configVariant.regular.formatted_price;
+                            } else {
+                                finalPrice.innerHTML = configVariant.regular.formatted_price;
+
+                                regularPrice.style.display = 'none';
+                            }
 
                             this.$emitter.emit('configurable-variant-selected-event',this.possibleOptionVariant);
                         } else {
                             document.querySelector('.price-label').style.display = 'inline-block';
 
-                            document.querySelector('.final-price').innerHTML = this.config.regular.formatted_price;
+                            finalPrice.innerHTML = this.config.regular.formatted_price;
 
                             this.$emitter.emit('configurable-variant-selected-event', 0);
                         }
