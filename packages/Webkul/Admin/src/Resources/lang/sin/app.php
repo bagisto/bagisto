@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'ගෙවීමේ ක්‍රමය',
                     'status'           => 'ස්ථානය',
                     'title'            => 'සාමාජික විස්තර',
-                    'transaction-data' => 'සාමාජික දත්ත',
                     'transaction-id'   => 'සාමාජික හැඳුනුම් අංකය',
                 ],
             ],

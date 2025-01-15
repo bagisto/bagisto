@@ -719,7 +719,6 @@ return [
                     'payment-method'   => '付款方式',
                     'status'           => '状态',
                     'title'            => '交易详情',
-                    'transaction-data' => '交易数据',
                     'transaction-id'   => '交易 ID',
                 ],
             ],

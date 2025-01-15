@@ -719,7 +719,6 @@ return [
                     'payment-method'   => '支払い方法',
                     'status'           => 'ステータス',
                     'title'            => '取引の詳細',
-                    'transaction-data' => '取引データ',
                     'transaction-id'   => '取引ID',
                 ],
             ],
