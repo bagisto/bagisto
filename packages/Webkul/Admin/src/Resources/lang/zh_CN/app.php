@@ -2807,6 +2807,7 @@ return [
                         'title'   => '编辑税收分类',
                     ],
 
+                    'can-not-delete' => '分配了税率的类别无法删除。',
                     'create-success' => '新税收分类已创建',
                     'delete-failed'  => '税收分类删除失败',
                     'delete-success' => '税收分类已成功删除',

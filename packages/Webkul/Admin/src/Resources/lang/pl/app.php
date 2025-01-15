@@ -2807,6 +2807,7 @@ return [
                         'title' => 'Edytuj Kategorie Podatków',
                     ],
 
+                    'can-not-delete' => 'Nie można usunąć kategorii przypisanych do stawek podatkowych.',
                     'create-success' => 'Nowa Kategoria Podatków utworzona',
                     'delete-failed'  => 'Usuwanie Kategorii Podatków nie powiodło się',
                     'delete-success' => 'Kategoria Podatków usunięta pomyślnie',
