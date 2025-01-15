@@ -387,9 +387,7 @@
 
                             this.isLoading = false;
                         })
-                        .catch((error) => {
-                            console.error(error);
-                        });
+                        .catch((error) => {});
                 },
 
                 initializeAddresses(type, addresses) {
