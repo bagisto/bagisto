@@ -737,7 +737,7 @@ class Cart
             return [
                 'error_code' => 'MINIMUM_ORDER_AMOUNT',
                 'message'    => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
-                'amount'     => core()->formatPrice((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
+                'amount'     => core()->currency((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
             ];
         }
 
@@ -749,17 +749,17 @@ class Cart
      */
     public function getOrderAmount(): int
     {
-        $minimumOrderAmount = $this->cart->sub_total;
+        $minimumOrderAmount = $this->cart->base_sub_total;
 
         if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
-            $minimumOrderAmount += $this->cart->tax_total;
+            $minimumOrderAmount += $this->cart->base_tax_total;
         }
 
         if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
-            $minimumOrderAmount -= $this->cart->tax_total;
+            $minimumOrderAmount -= $this->cart->base_tax_total;
 
             if ($this->cart->discount_amount) {
-                $minimumOrderAmount -= $this->cart->discount_amount;
+                $minimumOrderAmount -= $this->cart->base_discount_amount;
             }
         }
 
