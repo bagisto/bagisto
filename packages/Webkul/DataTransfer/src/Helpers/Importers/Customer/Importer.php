@@ -175,8 +175,13 @@ class Importer extends AbstractImporter
             'last_name'           => 'string|required',
             'gender'              => 'required:in,Male,Female,Other',
             'email'               => 'required|email',
-            'date_of_birth'       => 'date|before:today',
-            'phone'               => 'phone',
+            'date_of_birth'       => [
+                'required',
+                'date_format:Y-m-d',
+                'before:today',
+                'regex:/^\d{4}-\d{2}-\d{2}$/',
+            ],
+            'phone'               => 'regex:/^\+?[0-9]{7,15}$/',
         ]);
 
         if ($validator->fails()) {
