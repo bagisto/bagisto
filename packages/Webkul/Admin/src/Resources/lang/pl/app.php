@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Adres e-mail',
-            'forget-password-link' => 'Zapomniałeś hasła?',
-            'password'             => 'Hasło',
-            'submit-btn'           => 'Zaloguj się',
-            'title'                => 'Zaloguj się',
+            'email'                  => 'Adres e-mail',
+            'forget-password-link'   => 'Zapomniałeś hasła?',
+            'password'               => 'Hasło',
+            'powered-by-description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
+            'submit-btn'             => 'Zaloguj się',
+            'title'                  => 'Zaloguj się',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'Zarejestrowany adres e-mail',
-                'email-not-exist' => 'E-mail nie istnieje',
-                'page-title'      => 'Zapomniałem hasła',
-                'reset-link-sent' => 'Link do resetowania hasła wysłany',
-                'sign-in-link'    => 'Powrót do logowania?',
-                'submit-btn'      => 'Resetuj',
-                'title'           => 'Odzyskaj hasło',
+                'email'                  => 'Zarejestrowany adres e-mail',
+                'email-not-exist'        => 'E-mail nie istnieje',
+                'page-title'             => 'Zapomniałem hasła',
+                'powered-by-description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
+                'reset-link-sent'        => 'Link do resetowania hasła wysłany',
+                'sign-in-link'           => 'Powrót do logowania?',
+                'submit-btn'             => 'Resetuj',
+                'title'                  => 'Odzyskaj hasło',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Powrót do logowania?',
-            'confirm-password' => 'Potwierdź hasło',
-            'email'            => 'Zarejestrowany adres e-mail',
-            'password'         => 'Hasło',
-            'submit-btn'       => 'Zresetuj hasło',
-            'title'            => 'Zresetuj hasło',
+            'back-link-title'        => 'Powrót do logowania?',
+            'confirm-password'       => 'Potwierdź hasło',
+            'email'                  => 'Zarejestrowany adres e-mail',
+            'password'               => 'Hasło',
+            'powered-by-description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
+            'submit-btn'             => 'Zresetuj hasło',
+            'title'                  => 'Zresetuj hasło',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'Transakcje',
                 'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
+            ],
+
+            'powered-by' => [
+                'description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
             ],
         ],
 

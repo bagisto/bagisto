@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'כתובת אימייל',
-            'forget-password-link' => 'שכחת סיסמה?',
-            'password'             => 'סיסמה',
-            'submit-btn'           => 'כניסה',
-            'title'                => 'כניסה',
+            'email'                  => 'כתובת אימייל',
+            'forget-password-link'   => 'שכחת סיסמה?',
+            'password'               => 'סיסמה',
+            'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+            'submit-btn'             => 'כניסה',
+            'title'                  => 'כניסה',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'אימייל רשום',
-                'email-not-exist' => 'אימייל לא קיים',
-                'page-title'      => 'שכחתי סיסמה',
-                'reset-link-sent' => 'קישור לאיפוס סיסמה נשלח',
-                'sign-in-link'    => 'חזור להתחברות?',
-                'submit-btn'      => 'איפוס',
-                'title'           => 'שחזור סיסמה',
+                'email'                  => 'אימייל רשום',
+                'email-not-exist'        => 'אימייל לא קיים',
+                'page-title'             => 'שכחתי סיסמה',
+                'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+                'reset-link-sent'        => 'קישור לאיפוס סיסמה נשלח',
+                'sign-in-link'           => 'חזור להתחברות?',
+                'submit-btn'             => 'איפוס',
+                'title'                  => 'שחזור סיסמה',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'חזור להתחברות?',
-            'confirm-password' => 'אימות סיסמה',
-            'email'            => 'אימייל רשום',
-            'password'         => 'סיסמה',
-            'submit-btn'       => 'איפוס סיסמה',
-            'title'            => 'איפוס סיסמה',
+            'back-link-title'        => 'חזור להתחברות?',
+            'confirm-password'       => 'אימות סיסמה',
+            'email'                  => 'אימייל רשום',
+            'password'               => 'סיסמה',
+            'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
+            'submit-btn'             => 'איפוס סיסמה',
+            'title'                  => 'איפוס סיסמה',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => 'עסקאות',
                 'url-rewrites'             => 'כתיבת URL מחדש',
                 'users'                    => 'משתמשים',
+            ],
+
+            'powered-by' => [
+                'description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
             ],
         ],
 

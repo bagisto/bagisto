@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => '电子邮件地址',
-            'forget-password-link' => '忘记密码？',
-            'password'             => '密码',
-            'submit-btn'           => '登录',
-            'title'                => '登录',
+            'email'                  => '电子邮件地址',
+            'forget-password-link'   => '忘记密码？',
+            'password'               => '密码',
+            'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+            'submit-btn'             => '登录',
+            'title'                  => '登录',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => '注册电子邮件',
-                'email-not-exist' => '电子邮件不存在',
-                'page-title'      => '忘记密码',
-                'reset-link-sent' => '重置密码链接已发送',
-                'sign-in-link'    => '返回登录？',
-                'submit-btn'      => '重置',
-                'title'           => '找回密码',
+                'email'                  => '注册电子邮件',
+                'email-not-exist'        => '电子邮件不存在',
+                'page-title'             => '忘记密码',
+                'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+                'reset-link-sent'        => '重置密码链接已发送',
+                'sign-in-link'           => '返回登录？',
+                'submit-btn'             => '重置',
+                'title'                  => '找回密码',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => '返回登录？',
-            'confirm-password' => '确认密码',
-            'email'            => '注册电子邮件',
-            'password'         => '密码',
-            'submit-btn'       => '重置密码',
-            'title'            => '重置密码',
+            'back-link-title'        => '返回登录？',
+            'confirm-password'       => '确认密码',
+            'email'                  => '注册电子邮件',
+            'password'               => '密码',
+            'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
+            'submit-btn'             => '重置密码',
+            'title'                  => '重置密码',
         ],
     ],
 
@@ -4113,6 +4116,10 @@ return [
                 'transactions'             => '交易',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
+            ],
+
+            'powered-by' => [
+                'description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
             ],
         ],
 
