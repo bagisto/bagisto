@@ -3664,7 +3664,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Establecer clave del sitio, clave secreta y estado.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Clave Secreta',
