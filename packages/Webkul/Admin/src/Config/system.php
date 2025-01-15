@@ -1208,8 +1208,8 @@ return [
             ], [
                 'name'          => 'contact',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
-                'validation'    => 'numeric|min:0|max:15',
                 'type'          => 'text',
+                'validation'    => 'numeric|digits_between:1,15',
                 'channel_based' => true,
             ], [
                 'name'          => 'bank_details',

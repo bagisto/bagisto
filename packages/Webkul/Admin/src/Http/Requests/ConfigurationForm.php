@@ -29,9 +29,8 @@ class ConfigurationForm extends FormRequest
             return collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
                 $key = $data['key'].'.'.$field['name'];
 
-                // Check delete key exist in the request
                 if (! $this->has($key.'.delete')) {
-                    $validation = isset($field['validation']) && $field['validation'] ? $field['validation'] : 'nullable';
+                    $validation = $field['validation'] ?? 'nullable';
 
                     return [$key => $validation];
                 }

@@ -64,7 +64,7 @@ export default {
         });
 
         defineRule("address", (value) => {
-            if (!value || !value.length) {
+            if (! value || ! value.length) {
                 return true;
             }
 
@@ -103,6 +103,22 @@ export default {
 
             return true;
         });
+
+        defineRule("digits_between", (value, { min = 1, max = 15 } = {}) => {
+            if (value === null || value === undefined || value === '') {
+                return true; 
+            }
+        
+            const numericValue = String(value);
+        
+            if (! /^\d+$/.test(numericValue)) {
+                return false;
+            }
+        
+            const length = numericValue.length;
+
+            return length >= min && length <= max;
+        });        
 
         defineRule("", () => true);
 
