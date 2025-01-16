@@ -3664,7 +3664,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'サイトキー、シークレットキー、ステータスを設定します。',
-                    'title' => 'キャプチャ',
+                    'title' => 'Google キャプチャ',
 
                     'credentials' => [
                         'secret-key' => 'シークレットキー',

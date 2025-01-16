@@ -3664,7 +3664,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'අඩවි යතුර, රහස් යතුර සහ තත්වය සකසන්න.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'රහස් යතුර',

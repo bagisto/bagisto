@@ -3664,7 +3664,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Site-Schlüssel, geheimer Schlüssel und Status festlegen.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Geheimer Schlüssel',
