@@ -2807,6 +2807,7 @@ return [
                         'title' => 'Belastingcategorieën Bewerken',
                     ],
 
+                    'can-not-delete' => 'Belastingtarieven toegewezen categorieën kunnen niet worden verwijderd.',
                     'create-success' => 'Nieuwe belastingcategorie aangemaakt',
                     'delete-failed'  => 'Verwijderen van belastingcategorie mislukt',
                     'delete-success' => 'Belastingcategorie succesvol verwijderd',

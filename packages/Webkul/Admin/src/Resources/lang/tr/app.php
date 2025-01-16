@@ -2807,6 +2807,7 @@ return [
                         'title'   => 'Vergi Kategorilerini Düzenle',
                     ],
 
+                    'can-not-delete' => 'Vergi Oranı Atanmış Kategoriler silinemez.',
                     'create-success' => 'Yeni Vergi Kategorisi Oluşturuldu',
                     'delete-failed'  => 'Vergi Kategorisi Silme Başarısız',
                     'delete-success' => 'Vergi Kategorisi Başarıyla Silindi',
