@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'אמצעי תשלום',
                     'status'           => 'סטטוס',
                     'title'            => 'פרטי התשלום',
-                    'transaction-data' => 'נתוני התשלום',
                     'transaction-id'   => 'מזהה עסקה',
                 ],
             ],

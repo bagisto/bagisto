@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Ödeme Yöntemi',
                     'status'           => 'Durum',
                     'title'            => 'İşlem Detayları',
-                    'transaction-data' => 'İşlem Verileri',
                     'transaction-id'   => 'İşlem ID',
                 ],
             ],

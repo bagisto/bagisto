@@ -138,12 +138,8 @@
 
                     <!-- Drawer Content -->
                     <x-slot:content>
-                        <div class="flex flex-col gap-4 px-1.5 py-2.5">
-                            <p class="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.transactions.index.view.transaction-data')
-                            </p>
-
-                            <div class="flex w-full justify-between p-4">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex w-full justify-between p-2">
                                 <div class="flex flex-col gap-y-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.transactions.index.view.transaction-id')
@@ -206,7 +202,7 @@
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.status"
+                                        v-html="data.status"
                                     >
                                     </p>
 

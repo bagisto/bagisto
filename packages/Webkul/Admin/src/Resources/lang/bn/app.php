@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'পেমেন্ট মেথড',
                     'status'           => 'অবস্থা',
                     'title'            => 'লেনদেনের বিস্তারিত',
-                    'transaction-data' => 'লেনদেনের তথ্য',
                     'transaction-id'   => 'লেনদেন আইডি',
                 ],
             ],

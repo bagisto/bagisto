@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Metodo di Pagamento',
                     'status'           => 'Stato',
                     'title'            => 'Dettagli Transazione',
-                    'transaction-data' => 'Dati Transazione',
                     'transaction-id'   => 'ID Transazione ',
                 ],
             ],

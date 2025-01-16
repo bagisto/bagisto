@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'طريقة الدفع',
                     'status'           => 'الحالة',
                     'title'            => 'تفاصيل العملية',
-                    'transaction-data' => 'بيانات العملية',
                     'transaction-id'   => 'رقم العملية',
                 ],
             ],
