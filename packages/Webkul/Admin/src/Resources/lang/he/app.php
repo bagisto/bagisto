@@ -729,7 +729,6 @@ return [
                     'payment-method'   => 'אמצעי תשלום',
                     'status'           => 'סטטוס',
                     'title'            => 'פרטי התשלום',
-                    'transaction-data' => 'נתוני התשלום',
                     'transaction-id'   => 'מזהה עסקה',
                 ],
             ],
@@ -2904,6 +2903,7 @@ return [
                         'title' => 'ערוך קטגוריות מס',
                     ],
 
+                    'can-not-delete' => 'לא ניתן למחוק קטגוריות שהוקצו לשערי מס.',
                     'create-success' => 'קטגוריית מס חדשה נוצרה בהצלחה',
                     'delete-failed'  => 'מחיקת קטגוריית מס נכשלה',
                     'delete-success' => 'קטגוריית מס נמחקה בהצלחה',
@@ -3864,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'הגדרת מפתח אתר, מפתח סודי ומצב.',
-                    'title' => 'קפצ',
+                    'title' => 'Google קפצ',
 
                     'credentials' => [
                         'secret-key' => 'מפתח סודי',

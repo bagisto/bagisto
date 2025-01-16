@@ -2,9 +2,6 @@ name: Linting Tests
 
 on: [push, pull_request]
 
-permissions:
-  contents: read
-
 jobs:
   linting_tests:
     runs-on: ${{ matrix.operating-systems }}
@@ -17,19 +14,9 @@ jobs:
     name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
-          ini-values: error_reporting=E_ALL
-          tools: composer:v2
-
-      - name: Running Composer Install
-        run: composer install
-
-      - name: Running Pint Test
-        run: vendor/bin/pint --test -v
+        - uses: actions/checkout@v1
+        - name: Running Pint Test
+          uses: aglipanci/laravel-pint-action@2.0.0
+          with:
+            testMode: true
+            verboseMode: true

@@ -1922,7 +1922,7 @@ return [
                 'name'          => 'order_number_length',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'between:1,10|integer',
                 'channel_based' => true,
             ], [
                 'name'          => 'order_number_suffix',

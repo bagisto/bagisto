@@ -729,7 +729,6 @@ return [
                     'payment-method'   => 'Metoda Płatności',
                     'status'           => 'Status',
                     'title'            => 'Szczegóły Transakcji',
-                    'transaction-data' => 'Dane Transakcji',
                     'transaction-id'   => 'ID Transakcji',
                 ],
             ],
@@ -2904,6 +2903,7 @@ return [
                         'title' => 'Edytuj Kategorie Podatków',
                     ],
 
+                    'can-not-delete' => 'Nie można usunąć kategorii przypisanych do stawek podatkowych.',
                     'create-success' => 'Nowa Kategoria Podatków utworzona',
                     'delete-failed'  => 'Usuwanie Kategorii Podatków nie powiodło się',
                     'delete-success' => 'Kategoria Podatków usunięta pomyślnie',
@@ -3864,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Ustaw klucz witryny, klucz tajny i status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Klucz tajny',

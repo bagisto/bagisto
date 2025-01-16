@@ -729,7 +729,6 @@ return [
                     'payment-method'   => 'Método de Pago',
                     'status'           => 'Estado',
                     'title'            => 'Detalles de la Transacción',
-                    'transaction-data' => 'Datos de la Transacción',
                     'transaction-id'   => 'ID de Transacción',
                 ],
             ],
@@ -2904,6 +2903,7 @@ return [
                         'title' => 'Editar Categorías de Impuestos',
                     ],
 
+                    'can-not-delete' => 'No se pueden eliminar las categorías asignadas a las tasas de impuestos.',
                     'create-success' => 'Nueva Categoría de Impuestos Creada',
                     'delete-failed'  => 'Error al Eliminar Categoría de Impuestos',
                     'delete-success' => 'Categoría de Impuestos Eliminada Exitosamente',
@@ -3864,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Establecer clave del sitio, clave secreta y estado.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Clave Secreta',
