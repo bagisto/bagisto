@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Payment Method',
                     'status'           => 'Status',
                     'title'            => 'Transaction Details',
-                    'transaction-data' => 'Transaction Data',
                     'transaction-id'   => 'Transaction ID ',
                 ],
             ],
@@ -2807,10 +2806,11 @@ return [
                         'title' => 'Edit Tax Categories',
                     ],
 
-                    'create-success' => 'New Tax Category Created',
+                    'can-not-delete' => 'Tax Rates Assigned Categories cannot be deleted.',
+                    'create-success' => 'New Tax Category Created.',
                     'delete-failed'  => 'Tax Category Deleted Failed',
-                    'delete-success' => 'Tax Category Deleted Successfully',
-                    'update-success' => 'Tax Category Successfully Updated',
+                    'delete-success' => 'Tax Category Deleted Successfully.',
+                    'update-success' => 'Tax Category Successfully Updated.',
                 ],
             ],
 
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Set site key, secret key and status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Secret Key',

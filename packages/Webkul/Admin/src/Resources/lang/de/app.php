@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Zahlungsmethode',
                     'status'           => 'Status',
                     'title'            => 'Transaktionsdetails',
-                    'transaction-data' => 'Transaktionsdaten',
                     'transaction-id'   => 'Transaktions-ID',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title'   => 'Steuerkategorien bearbeiten',
                     ],
 
+                    'can-not-delete' => 'Steuersätze zugewiesene Kategorien können nicht gelöscht werden.',
                     'create-success' => 'Neue Steuerkategorie erstellt',
                     'delete-failed'  => 'Steuerkategorie löschen fehlgeschlagen',
                     'delete-success' => 'Steuerkategorie erfolgreich gelöscht',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Site-Schlüssel, geheimer Schlüssel und Status festlegen.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Geheimer Schlüssel',

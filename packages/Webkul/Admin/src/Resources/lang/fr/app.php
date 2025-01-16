@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Méthode de Paiement',
                     'status'           => 'Statut',
                     'title'            => 'Détails de la Transaction',
-                    'transaction-data' => 'Données de la Transaction',
                     'transaction-id'   => 'Identifiant de la Transaction',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title'   => 'Modifier les catégories de taxe',
                     ],
 
+                    'can-not-delete' => 'Les catégories assignées aux taux de taxe ne peuvent pas être supprimées.',
                     'create-success' => 'Nouvelle catégorie de taxe créée',
                     'delete-failed'  => 'Échec de la suppression de la catégorie de taxe',
                     'delete-success' => 'Catégorie de taxe supprimée avec succès',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Définir la clé du site, la clé secrète et le statut.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Clé secrète',

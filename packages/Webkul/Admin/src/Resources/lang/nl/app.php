@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Betalingsmethode',
                     'status'           => 'Status',
                     'title'            => 'Transactiegegevens',
-                    'transaction-data' => 'Transactiegegevens',
                     'transaction-id'   => 'Transactie-ID',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title' => 'Belastingcategorieën Bewerken',
                     ],
 
+                    'can-not-delete' => 'Belastingtarieven toegewezen categorieën kunnen niet worden verwijderd.',
                     'create-success' => 'Nieuwe belastingcategorie aangemaakt',
                     'delete-failed'  => 'Verwijderen van belastingcategorie mislukt',
                     'delete-success' => 'Belastingcategorie succesvol verwijderd',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Stel site sleutel, geheime sleutel en status in.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Geheime Sleutel',

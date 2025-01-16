@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'ගෙවීමේ ක්‍රමය',
                     'status'           => 'ස්ථානය',
                     'title'            => 'සාමාජික විස්තර',
-                    'transaction-data' => 'සාමාජික දත්ත',
                     'transaction-id'   => 'සාමාජික හැඳුනුම් අංකය',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title' => 'බදා කාටිකවරු සාදන්න',
                     ],
 
+                    'can-not-delete' => 'බදා අනුපාතය පවරන ප්‍රවර්ග මකා දැමිය නොහැක.',
                     'create-success' => 'නව බදා කාටිකය සාදන්න සාර්ථකව සැකසීම',
                     'delete-failed'  => 'බදා කාටිකය සාර්ථකව මකා නොදමා ඇත',
                     'delete-success' => 'බදා කාටිකය සාර්ථකව මකා දමන ලදි',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'අඩවි යතුර, රහස් යතුර සහ තත්වය සකසන්න.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'රහස් යතුර',

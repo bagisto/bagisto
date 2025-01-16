@@ -719,7 +719,6 @@ return [
                     'payment-method'   => '支払い方法',
                     'status'           => 'ステータス',
                     'title'            => '取引の詳細',
-                    'transaction-data' => '取引データ',
                     'transaction-id'   => '取引ID',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title' => '税カテゴリーを編集',
                     ],
 
+                    'can-not-delete' => '税率が割り当てられているカテゴリは削除できません。',
                     'create-success' => '新しい税カテゴリーが作成されました',
                     'delete-failed'  => '税カテゴリーの削除に失敗しました',
                     'delete-success' => '税カテゴリーが正常に削除されました',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'サイトキー、シークレットキー、ステータスを設定します。',
-                    'title' => 'キャプチャ',
+                    'title' => 'Google キャプチャ',
 
                     'credentials' => [
                         'secret-key' => 'シークレットキー',

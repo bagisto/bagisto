@@ -719,7 +719,6 @@ return [
                     'payment-method'   => 'Metodo di Pagamento',
                     'status'           => 'Stato',
                     'title'            => 'Dettagli Transazione',
-                    'transaction-data' => 'Dati Transazione',
                     'transaction-id'   => 'ID Transazione ',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title' => 'Modifica Categorie Fiscali',
                     ],
 
+                    'can-not-delete' => 'Le categorie assegnate alle aliquote fiscali non possono essere eliminate.',
                     'create-success' => 'Nuova Categoria Fiscale Creata',
                     'delete-failed'  => 'Eliminazione Categoria Fiscale Fallita',
                     'delete-success' => 'Categoria Fiscale Eliminata con Successo',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Imposta chiave del sito, chiave segreta e stato.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Chiave segreta',

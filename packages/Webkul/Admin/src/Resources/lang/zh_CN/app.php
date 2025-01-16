@@ -719,7 +719,6 @@ return [
                     'payment-method'   => '付款方式',
                     'status'           => '状态',
                     'title'            => '交易详情',
-                    'transaction-data' => '交易数据',
                     'transaction-id'   => '交易 ID',
                 ],
             ],
@@ -2807,6 +2806,7 @@ return [
                         'title'   => '编辑税收分类',
                     ],
 
+                    'can-not-delete' => '分配了税率的类别无法删除。',
                     'create-success' => '新税收分类已创建',
                     'delete-failed'  => '税收分类删除失败',
                     'delete-success' => '税收分类已成功删除',
@@ -3767,7 +3767,7 @@ return [
 
                 'captcha' => [
                     'info'  => '设置站点密钥、密钥和状态。',
-                    'title' => '验证码',
+                    'title' => 'Google 验证码',
 
                     'credentials' => [
                         'secret-key' => '密钥',
