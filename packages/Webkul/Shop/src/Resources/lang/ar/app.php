@@ -568,6 +568,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'لا شيء',
+                        'total-amount' => 'المبلغ الإجمالي',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'يرجى اختيار خيار',
                     'select-above-options' => 'يرجى اختيار الخيارات أعلاه',

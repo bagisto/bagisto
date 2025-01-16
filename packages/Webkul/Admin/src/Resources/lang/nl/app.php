@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Bestelling aanmaken voor :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Selecteer een optie',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Links',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Optie toevoegen',
+                            'empty-info'        => 'Om snel aanpasbare opties te creëren.',
+                            'empty-title'       => 'Optie toevoegen',
+                            'info'              => 'Dit zal het eenvoudige product aanpassen.',
+                            'title'             => 'Aanpasbaar item',
+
+                            'update-create' => [
+                                'is-required'               => 'Is verplicht',
+                                'max-characters'            => 'Max. aantal tekens',
+                                'name'                      => 'Titel',
+                                'no'                        => 'Nee',
+                                'price'                     => 'Prijs',
+                                'save-btn'                  => 'Opslaan',
+                                'supported-file-extensions' => 'Ondersteunde bestandsextensies',
+                                'title'                     => 'Optie',
+                                'type'                      => 'Type',
+                                'yes'                       => 'Ja',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Optie toevoegen',
+                                'delete'      => 'Verwijderen',
+                                'delete-btn'  => 'Verwijderen',
+                                'edit-btn'    => 'Bewerken',
+                                'empty-info'  => 'Om snel verschillende productcombinaties te creëren.',
+                                'empty-title' => 'Optie toevoegen',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Tekst',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Tekstvak',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Selectievakje',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Selecteren',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Multiselect',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Datum',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Datum en tijd',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Tijd',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Bestand',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Label',
+                                        'price'    => 'Prijs',
+                                        'save-btn' => 'Opslaan',
+                                        'title'    => 'Optie',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Het product is al gekoppeld aan een configureerbaar, gegroepeerd of gebundeld product.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Variant Toevoegen',
                         'delete-btn'        => 'Verwijderen',

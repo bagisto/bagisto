@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Criar Pedido para :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Por favor, selecione uma opção',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Links',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Adicionar opção',
+                            'empty-info'        => 'Para criar opções personalizáveis rapidamente.',
+                            'empty-title'       => 'Adicionar opção',
+                            'info'              => 'Isso personalizará o produto simples.',
+                            'title'             => 'Item personalizável',
+
+                            'update-create' => [
+                                'is-required'               => 'É obrigatório',
+                                'max-characters'            => 'Máximo de caracteres',
+                                'name'                      => 'Título',
+                                'no'                        => 'Não',
+                                'price'                     => 'Preço',
+                                'save-btn'                  => 'Salvar',
+                                'supported-file-extensions' => 'Extensões de arquivo suportadas',
+                                'title'                     => 'Opção',
+                                'type'                      => 'Tipo',
+                                'yes'                       => 'Sim',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Adicionar opção',
+                                'delete'      => 'Excluir',
+                                'delete-btn'  => 'Excluir',
+                                'edit-btn'    => 'Editar',
+                                'empty-info'  => 'Para criar várias combinações de produtos rapidamente.',
+                                'empty-title' => 'Adicionar opção',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Texto',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Área de texto',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Caixa de seleção',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Rádio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Selecionar',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Seleção múltipla',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Data',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Data e hora',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Hora',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Arquivo',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiqueta',
+                                        'price'    => 'Preço',
+                                        'save-btn' => 'Salvar',
+                                        'title'    => 'Opção',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'O produto já está associado a um produto configurável, agrupado ou em pacote.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Adicionar Variante',
                         'delete-btn'        => 'Excluir',

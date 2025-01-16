@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Nessuno',
+                        'total-amount' => 'Importo Totale',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Seleziona un\'opzione',
                     'select-above-options' => 'Seleziona le opzioni sopra',

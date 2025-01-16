@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => '少なくとも1つの製品は1つ以上の数量を持っている必要があります。',
             ],
 
+            'invalid-file-extension'   => '無効なファイル拡張子が見つかりました。',
             'inventory-warning'        => '要求された数量は利用できません。後で再試行してください。',
             'missing-links'            => 'この製品にはダウンロードリンクがありません。',
             'missing-options'          => 'この製品にはオプションがありません。',

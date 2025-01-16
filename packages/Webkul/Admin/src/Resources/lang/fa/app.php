@@ -190,6 +190,11 @@ return [
                 'title'                   => 'ایجاد سفارش برای :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مجموع مبلغ',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'لطفاً یک گزینه را انتخاب کنید',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'لینک‌ها',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مجموع مبلغ',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'افزودن گزینه',
+                            'empty-info'        => 'برای ایجاد گزینه‌های سفارشی‌سازی به سرعت.',
+                            'empty-title'       => 'افزودن گزینه',
+                            'info'              => 'این محصول ساده را سفارشی می‌کند.',
+                            'title'             => 'آیتم قابل سفارشی‌سازی',
+
+                            'update-create' => [
+                                'is-required'               => 'الزامی است',
+                                'max-characters'            => 'حداکثر کاراکتر',
+                                'name'                      => 'عنوان',
+                                'no'                        => 'خیر',
+                                'price'                     => 'قیمت',
+                                'save-btn'                  => 'ذخیره',
+                                'supported-file-extensions' => 'پسوند فایل‌های پشتیبانی‌شده',
+                                'title'                     => 'گزینه',
+                                'type'                      => 'نوع',
+                                'yes'                       => 'بله',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'افزودن گزینه',
+                                'delete'      => 'حذف',
+                                'delete-btn'  => 'حذف',
+                                'edit-btn'    => 'ویرایش',
+                                'empty-info'  => 'برای ایجاد ترکیب‌های مختلف محصول به سرعت.',
+                                'empty-title' => 'افزودن گزینه',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'متن',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'منطقه متن',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'چک‌باکس',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'رادیو',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'انتخاب',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'چند انتخابی',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'تاریخ',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'تاریخ و زمان',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'زمان',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'فایل',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'برچسب',
+                                        'price'    => 'قیمت',
+                                        'save-btn' => 'ذخیره',
+                                        'title'    => 'گزینه',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'محصول قبلاً با یک محصول پیکربندی‌شده، گروهی یا بسته‌ای مرتبط است.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'افزودن نسخه',
                         'delete-btn'        => 'حذف',

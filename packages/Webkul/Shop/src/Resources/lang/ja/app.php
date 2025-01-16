@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'なし',
+                        'total-amount' => '合計金額',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'オプションを選択してください',
                     'select-above-options' => '上記のオプションを選択してください',

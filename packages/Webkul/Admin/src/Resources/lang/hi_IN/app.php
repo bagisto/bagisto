@@ -190,6 +190,11 @@ return [
                 'title'                   => ':name के लिए आदेश बनाएं',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'कृपया एक विकल्प चुनें',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'लिंक',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'विकल्प जोड़ें',
+                            'empty-info'        => 'त्वरित रूप से अनुकूलन विकल्प बनाने के लिए।',
+                            'empty-title'       => 'विकल्प जोड़ें',
+                            'info'              => 'यह साधारण उत्पाद को अनुकूलित करेगा।',
+                            'title'             => 'अनुकूलन योग्य आइटम',
+
+                            'update-create' => [
+                                'is-required'               => 'आवश्यक है',
+                                'max-characters'            => 'अधिकतम वर्ण',
+                                'name'                      => 'शीर्षक',
+                                'no'                        => 'नहीं',
+                                'price'                     => 'मूल्य',
+                                'save-btn'                  => 'सहेजें',
+                                'supported-file-extensions' => 'समर्थित फ़ाइल एक्सटेंशन्स',
+                                'title'                     => 'विकल्प',
+                                'type'                      => 'प्रकार',
+                                'yes'                       => 'हाँ',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'विकल्प जोड़ें',
+                                'delete'      => 'हटाएं',
+                                'delete-btn'  => 'हटाएं',
+                                'edit-btn'    => 'संपादित करें',
+                                'empty-info'  => 'त्वरित रूप से विभिन्न उत्पाद संयोजन बनाने के लिए।',
+                                'empty-title' => 'विकल्प जोड़ें',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'पाठ',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'पाठ क्षेत्र',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'चेकबॉक्स',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'रेडियो',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'चयन करें',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'मल्टीसेलेक्ट',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'तारीख',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'तारीख और समय',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'समय',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'फ़ाइल',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'लेबल',
+                                        'price'    => 'मूल्य',
+                                        'save-btn' => 'सहेजें',
+                                        'title'    => 'विकल्प',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'यह उत्पाद पहले से ही एक कॉन्फिगरेबल, ग्रुप्ड या बंडल उत्पाद के साथ जुड़ा हुआ है।',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'वेरिएंट जोड़ें',
                         'delete-btn'        => 'हटाएं',
