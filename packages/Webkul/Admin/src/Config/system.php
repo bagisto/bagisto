@@ -1191,7 +1191,7 @@ return [
                 'name'          => 'zipcode',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.zip',
                 'type'          => 'text',
-                'validation'    => 'required',
+                'validation'    => 'required|postcode',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
