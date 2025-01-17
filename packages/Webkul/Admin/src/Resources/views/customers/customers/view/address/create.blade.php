@@ -218,7 +218,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="postcode"
-                                rules="required|integer"
+                                rules="required|postcode"
                                 :label="trans('admin::app.customers.customers.view.address.create.post-code')"
                                 :placeholder="trans('admin::app.customers.customers.view.address.create.post-code')"
                             />
