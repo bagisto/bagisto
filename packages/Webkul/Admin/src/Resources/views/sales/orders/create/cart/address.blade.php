@@ -61,7 +61,6 @@
                                         name="billing.id"
                                         ::id="`billing_address_id_${address.id}`"
                                         ::for="`billing_address_id_${address.id}`"
-                                        ::key="`billing_address_id_${address.id}`" 
                                         ::value="address.id"
                                         v-model="selectedAddresses.billing_address_id"
                                         rules="required"
@@ -406,7 +405,8 @@
                             this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.addAddressToList(params);
                         }
@@ -436,15 +436,13 @@
                 },
 
                 addAddressToList(address) {
-                    this.cart[this.activeAddressForm + '_address'] = address;
+                    this.cart[`${this.activeAddressForm}_address`] = address;
 
                     this.customerSavedAddresses[this.activeAddressForm].unshift(address);
 
                     this.selectedAddresses[this.activeAddressForm + '_address_id'] = address.id;
 
                     this.$refs.updateCreateModal.close();
-
-                    this.activeAddressForm = null;
                 },
 
                 updateAddressInList(params) {
@@ -461,9 +459,9 @@
 
                             this.selectedAddresses[this.activeAddressForm + '_address_id'] = params.id;
 
-                            this.$refs.updateCreateModal.close();
-
                             this.activeAddressForm = null;
+
+                            this.$refs.updateCreateModal.close();
                         }
                     });
                 },
@@ -500,8 +498,6 @@
 
                 updateCustomerAddress(id, params, { setErrors }) {
                     this.isStoring = true;
-
-                    params['default_address'] = this.selectedAddressForEdit.default_address;
 
                     return this.$axios.put('{{ route('admin.customers.customers.addresses.update', ':id') }}'.replace(':id', id), params)
                         .then((response) => {
