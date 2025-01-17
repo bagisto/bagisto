@@ -256,7 +256,7 @@
                     type="text"
                     ::name="controlName + '.postcode'"
                     ::value="address.postcode"
-                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
                     :label="trans('admin::app.sales.orders.create.cart.address.postcode')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.postcode')"
                 />

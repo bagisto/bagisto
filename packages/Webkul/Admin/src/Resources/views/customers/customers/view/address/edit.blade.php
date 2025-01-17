@@ -234,7 +234,7 @@
                                     type="text"
                                     name="postcode"
                                     ::value="address.postcode"
-                                    rules="required|integer"
+                                    rules="required|postcode"
                                     :label="trans('admin::app.customers.customers.view.address.edit.post-code')"
                                     :placeholder="trans('admin::app.customers.customers.view.address.edit.post-code')"
                                 />
