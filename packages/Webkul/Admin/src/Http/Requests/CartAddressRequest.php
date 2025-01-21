@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\PhoneNumber;
+use Webkul\Core\Rules\PostCode;
 
 class CartAddressRequest extends FormRequest
 {
@@ -54,7 +55,7 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.city"         => ['required'],
             "{$addressType}.country"      => ['required'],
             "{$addressType}.state"        => ['required'],
-            "{$addressType}.postcode"     => ['required', 'numeric'],
+            "{$addressType}.postcode"     => ['required', new PostCode],
             "{$addressType}.phone"        => ['required', new PhoneNumber],
         ]);
     }

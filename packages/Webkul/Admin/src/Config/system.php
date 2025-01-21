@@ -1415,7 +1415,7 @@ return [
                 'name'          => 'zipcode',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.zip',
                 'type'          => 'text',
-                'validation'    => 'required',
+                'validation'    => 'required|postcode',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
@@ -1429,6 +1429,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.vat-number',
                 'type'          => 'text',
                 'channel_based' => true,
+                'validation'    => 'phone',
             ], [
                 'name'          => 'contact',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
