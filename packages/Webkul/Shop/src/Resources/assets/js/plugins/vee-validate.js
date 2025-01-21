@@ -79,6 +79,18 @@ export default {
             return true;
         });
 
+        defineRule("postcode", (value) => {
+            if (! value || ! value.length) {
+                return true;
+            }
+
+            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(value)) {
+                return false;
+            }
+
+            return true;
+        });
+
         defineRule(
             "decimal",
             (value, { decimals = "*", separator = "." } = {}) => {

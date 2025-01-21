@@ -444,7 +444,7 @@
                         type="text"
                         id="postcode"
                         name="postcode"
-                        rules="required"
+                        rules="required|postcode"
                         :value="old('postcode')"
                         :label="trans('admin::app.settings.inventory-sources.create.postcode')"
                         :placeholder="trans('admin::app.settings.inventory-sources.create.postcode')"
