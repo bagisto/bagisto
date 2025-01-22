@@ -385,18 +385,13 @@
                                     @lang('admin::app.catalog.attributes.edit.code')
                                 </x-admin::form.control-group.label>
 
-                                @php
-                                    $selectedOption = old('type') ?: $attribute->code;
-                                @endphp
-
                                 <x-admin::form.control-group.control
                                     type="text"
                                     class="cursor-not-allowed"
                                     name="code"
                                     rules="required"
-                                    :value="$selectedOption"
-                                    :disabled="(boolean) $selectedOption"
-                                    readonly
+                                    :value="old('code') ?? $attribute->code"
+                                    disabled="true"
                                     :label="trans('admin::app.catalog.attributes.edit.code')"
                                     :placeholder="trans('admin::app.catalog.attributes.edit.code')"
                                 />
@@ -404,7 +399,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="code"
-                                    :value="$selectedOption"
+                                    :value="$attribute->code"
                                 />
 
                                 <x-admin::form.control-group.error control-name="code" />
