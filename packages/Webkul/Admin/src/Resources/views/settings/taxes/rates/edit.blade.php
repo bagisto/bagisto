@@ -147,7 +147,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="state"
-                                    value="{{ old('state') }}"
+                                    :value="old('state') ?? $taxRate->state "
                                     :label="trans('admin::app.settings.taxes.rates.edit.state')"
                                     :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
                                 />
