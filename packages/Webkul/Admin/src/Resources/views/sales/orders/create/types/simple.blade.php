@@ -151,6 +151,7 @@
                                 v-model="selectedItems"
                                 ::rules="{ 'required': Boolean(option.is_required) }"
                                 ::label="option.label"
+                                ::checked="true"
                             />
 
                             <label
@@ -239,15 +240,7 @@
                         v-model="selectedItems"
                         ::rules="{'required': Boolean(option.is_required)}"
                         ::label="option.label"
-                        multiple
                     >
-                        <option
-                            value="0"
-                            v-if="! Boolean(option.is_required)"
-                        >
-                            @lang('admin::app.sales.orders.create.types.simple.none')
-                        </option>
-
                         <option
                             v-for="item in optionItems"
                             :value="item.id"

@@ -73,8 +73,6 @@ class CartController extends APIController
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
             ], $response));
         } catch (\Exception $exception) {
-            dd($exception);
-
             return response()->json([
                 'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
                 'message'      => $exception->getMessage(),

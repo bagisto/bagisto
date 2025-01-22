@@ -151,6 +151,7 @@
                                 v-model="selectedItems"
                                 ::rules="{ 'required': Boolean(option.is_required) }"
                                 ::label="option.label"
+                                ::checked="true"
                             />
 
                             <label
@@ -239,15 +240,7 @@
                         v-model="selectedItems"
                         ::rules="{'required': Boolean(option.is_required)}"
                         ::label="option.label"
-                        multiple
                     >
-                        <option
-                            value="0"
-                            v-if="! Boolean(option.is_required)"
-                        >
-                            @lang('admin::app.sales.orders.create.types.virtual.none')
-                        </option>
-
                         <option
                             v-for="item in optionItems"
                             :value="item.id"
@@ -396,7 +389,7 @@
                     this.$axios.get("{{ route('admin.catalog.products.virtual.customizable-options', ':replace') }}".replace(':replace', this.productOptions.product.id))
                         .then(response => {
                             this.initialPrice = response.data.meta.initial_price;
-                            
+
                             this.options = response.data.data.map((option) => {
                                 if (! this.canHaveMultiplePriceOptions(option.type)) {
                                     return {

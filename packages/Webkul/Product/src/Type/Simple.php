@@ -185,7 +185,7 @@ class Simple extends AbstractType
     public function prepareForCart($data)
     {
         if (
-            $this->product->customizable_options->isNotEmpty()
+            $this->product->customizable_options->where('is_required', 1)->isNotEmpty()
             && empty($data['customizable_options'])
         ) {
             return trans('product::app.checkout.cart.missing-options');
