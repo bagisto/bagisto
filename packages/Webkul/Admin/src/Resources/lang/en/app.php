@@ -183,7 +183,7 @@ return [
                 'error'                   => 'Something went wrong',
                 'minimum-order-error'     => 'The minimum order amount is not met.',
                 'order-placed-success'    => 'Order placed successfully.',
-                'payment-not-supported'   => 'This payment method is not supported',
+                'payment-not-supported'   => 'This payment method is not supported.',
                 'save-btn'                => 'Create Order',
                 'specify-payment-method'  => 'Payment method is missing.',
                 'specify-shipping-method' => 'Shipping method is missing.',

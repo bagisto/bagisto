@@ -25,6 +25,8 @@ class PaypalServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../Http/routes.php');
 
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'paypal');
+
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paypal');
 
         $this->app->register(EventServiceProvider::class);
