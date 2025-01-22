@@ -390,7 +390,7 @@
                                     class="cursor-not-allowed"
                                     name="code"
                                     rules="required"
-                                    value="{{ old('code') ?? $attribute->code }}"
+                                    :value="old('code') ?? $attribute->code"
                                     disabled="true"
                                     :label="trans('admin::app.catalog.attributes.edit.code')"
                                     :placeholder="trans('admin::app.catalog.attributes.edit.code')"
