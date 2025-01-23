@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => 'En az bir ürünün miktarı 1\'den fazla olmalıdır.',
             ],
 
+            'invalid-file-extension'   => 'Geçersiz dosya uzantısı bulundu.',
             'inventory-warning'        => 'İstenen miktar mevcut değil, lütfen daha sonra tekrar deneyin.',
             'missing-links'            => 'Bu ürün için indirilebilir bağlantılar eksik.',
             'missing-options'          => 'Bu ürün için seçenekler eksik.',

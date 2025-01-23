@@ -190,6 +190,11 @@ return [
                 'title'                   => 'צור הזמנה עבור :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'ללא',
+                        'total-amount' => 'סכום כולל',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'בחר אפשרות',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'קישורים',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'ללא',
+                        'total-amount' => 'סכום כולל',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'הוסף אפשרות',
+                            'empty-info'        => 'ליצירת אפשרויות מותאמות אישית במהירות.',
+                            'empty-title'       => 'הוסף אפשרות',
+                            'info'              => 'זה יתאים אישית את המוצר הפשוט.',
+                            'title'             => 'פריט ניתן להתאמה אישית',
+
+                            'update-create' => [
+                                'is-required'               => 'נדרש',
+                                'max-characters'            => 'מקסימום תווים',
+                                'name'                      => 'כותרת',
+                                'no'                        => 'לא',
+                                'price'                     => 'מחיר',
+                                'save-btn'                  => 'שמור',
+                                'supported-file-extensions' => 'סיומות קבצים נתמכות',
+                                'title'                     => 'אפשרות',
+                                'type'                      => 'סוג',
+                                'yes'                       => 'כן',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'הוסף אפשרות',
+                                'delete'      => 'מחק',
+                                'delete-btn'  => 'מחק',
+                                'edit-btn'    => 'ערוך',
+                                'empty-info'  => 'ליצירת שילובים שונים של מוצרים במהירות.',
+                                'empty-title' => 'הוסף אפשרות',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'טקסט',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'אזור טקסט',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'תיבת סימון',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'רדיו',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'בחר',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'רב-בחירה',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'תאריך',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'תאריך ושעה',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'זמן',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'קובץ',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'תווית',
+                                        'price'    => 'מחיר',
+                                        'save-btn' => 'שמור',
+                                        'title'    => 'אפשרות',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'המוצר כבר מקושר למוצר ניתן להתאמה, מקובץ או בחבילה.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'הוסף נציג',
                         'delete-btn'        => 'מחק',

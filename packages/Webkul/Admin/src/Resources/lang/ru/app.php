@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Создать заказ для :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Нет',
+                        'total-amount' => 'Общая сумма',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Пожалуйста, выберите опцию',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Ссылки',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Нет',
+                        'total-amount' => 'Общая сумма',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Добавить опцию',
+                            'empty-info'        => 'Для создания настраиваемых опций на лету.',
+                            'empty-title'       => 'Добавить опцию',
+                            'info'              => 'Это настроит простой продукт.',
+                            'title'             => 'Настраиваемый элемент',
+
+                            'update-create' => [
+                                'is-required'               => 'Обязательно',
+                                'max-characters'            => 'Максимальное количество символов',
+                                'name'                      => 'Название',
+                                'no'                        => 'Нет',
+                                'price'                     => 'Цена',
+                                'save-btn'                  => 'Сохранить',
+                                'supported-file-extensions' => 'Поддерживаемые расширения файлов',
+                                'title'                     => 'Опция',
+                                'type'                      => 'Тип',
+                                'yes'                       => 'Да',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Добавить опцию',
+                                'delete'      => 'Удалить',
+                                'delete-btn'  => 'Удалить',
+                                'edit-btn'    => 'Редактировать',
+                                'empty-info'  => 'Для создания различных комбинаций продуктов на лету.',
+                                'empty-title' => 'Добавить опцию',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Текст',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Текстовое поле',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Флажок',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Радио',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Выбрать',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Множественный выбор',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Дата',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Дата и время',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Время',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Файл',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Метка',
+                                        'price'    => 'Цена',
+                                        'save-btn' => 'Сохранить',
+                                        'title'    => 'Опция',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Продукт уже связан с настраиваемым, групповым или пакетным продуктом.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Добавить вариант',
                         'delete-btn'        => 'Удалить',

@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Створити замовлення для :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Немає',
+                        'total-amount' => 'Загальна сума',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Будь ласка, виберіть опцію',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Посилання',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Немає',
+                        'total-amount' => 'Загальна сума',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Додати опцію',
+                            'empty-info'        => 'Для створення налаштовуваних опцій швидко.',
+                            'empty-title'       => 'Додати опцію',
+                            'info'              => 'Це дозволить налаштувати простий продукт.',
+                            'title'             => 'Налаштовуваний елемент',
+
+                            'update-create' => [
+                                'is-required'               => 'Необхідно',
+                                'max-characters'            => 'Максимальна кількість символів',
+                                'name'                      => 'Назва',
+                                'no'                        => 'Ні',
+                                'price'                     => 'Ціна',
+                                'save-btn'                  => 'Зберегти',
+                                'supported-file-extensions' => 'Підтримувані розширення файлів',
+                                'title'                     => 'Опція',
+                                'type'                      => 'Тип',
+                                'yes'                       => 'Так',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Додати опцію',
+                                'delete'      => 'Видалити',
+                                'delete-btn'  => 'Видалити',
+                                'edit-btn'    => 'Редагувати',
+                                'empty-info'  => 'Для створення різних комбінацій продуктів.',
+                                'empty-title' => 'Додати опцію',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Текст',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Текстова область',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Чекбокс',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Радіо',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Вибір',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Мультивибір',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Дата',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Дата і час',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Час',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Файл',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Мітка',
+                                        'price'    => 'Ціна',
+                                        'save-btn' => 'Зберегти',
+                                        'title'    => 'Опція',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Цей продукт вже асоційований з іншим налаштовуваним продуктом.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Додати варіант',
                         'delete-btn'        => 'Видалити',

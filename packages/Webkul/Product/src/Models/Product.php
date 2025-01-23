@@ -203,6 +203,15 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the customizable options.
+     */
+    public function customizable_options(): HasMany
+    {
+        return $this->hasMany(ProductCustomizableOptionProxy::modelClass())
+            ->orderBy('sort_order');
+    }
+
+    /**
      * Get the product variants that owns the product.
      */
     public function variants(): HasMany

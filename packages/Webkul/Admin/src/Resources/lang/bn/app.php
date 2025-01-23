@@ -190,6 +190,11 @@ return [
                 'title'                   => ':name এর জন্য অর্ডার তৈরি করুন',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'কোনটিই নয়',
+                        'total-amount' => 'মোট পরিমাণ',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'দয়া করে একটি বিকল্প নির্বাচন করুন',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'লিঙ্কগুলি',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'কোনটিই নয়',
+                        'total-amount' => 'মোট পরিমাণ',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'অপশন যোগ করুন',
+                            'empty-info'        => 'চটজলদি কাস্টমাইজযোগ্য অপশন তৈরি করতে।',
+                            'empty-title'       => 'অপশন যোগ করুন',
+                            'info'              => 'এটি সাধারণ প্রোডাক্ট কাস্টমাইজ করবে।',
+                            'title'             => 'কাস্টমাইজযোগ্য আইটেম',
+
+                            'update-create' => [
+                                'is-required'               => 'প্রয়োজনীয়',
+                                'max-characters'            => 'সর্বোচ্চ অক্ষর',
+                                'name'                      => 'শিরোনাম',
+                                'no'                        => 'না',
+                                'price'                     => 'মূল্য',
+                                'save-btn'                  => 'সংরক্ষণ করুন',
+                                'supported-file-extensions' => 'সমর্থিত ফাইল এক্সটেনশনসমূহ',
+                                'title'                     => 'অপশন',
+                                'type'                      => 'প্রকার',
+                                'yes'                       => 'হ্যাঁ',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'অপশন যোগ করুন',
+                                'delete'      => 'মুছে ফেলুন',
+                                'delete-btn'  => 'মুছে ফেলুন',
+                                'edit-btn'    => 'সম্পাদনা করুন',
+                                'empty-info'  => 'চটজলদি বিভিন্ন ধরনের প্রোডাক্ট তৈরি করতে।',
+                                'empty-title' => 'অপশন যোগ করুন',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'টেক্সট',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'টেক্সটএরিয়া',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'চেকবক্স',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'রেডিও',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'সিলেক্ট',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'মাল্টিসিলেক্ট',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'তারিখ',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'তারিখ ও সময়',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'সময়',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'ফাইল',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'লেবেল',
+                                        'price'    => 'মূল্য',
+                                        'save-btn' => 'সংরক্ষণ করুন',
+                                        'title'    => 'অপশন',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'প্রোডাক্ট ইতিমধ্যেই কনফিগারেবল, গ্রুপড, বা বান্ডল প্রোডাক্টের সাথে যুক্ত রয়েছে।',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'ভ্যারিয়েন্ট যোগ করুন',
                         'delete-btn'        => 'মুছে ফেলুন',

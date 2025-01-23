@@ -3,9 +3,9 @@
     <div
         class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
     >
-        <span class="icon-ship text-2xl"></span> 
+        <span class="icon-ship text-2xl"></span>
 
-        @lang('admin::app.sales.orders.view.ship')     
+        @lang('admin::app.sales.orders.view.ship')
     </div>
 </v-create-shipment>
 
@@ -24,13 +24,13 @@
                     role="button"
                     tabindex="0"
                 >
-                </span> 
+                </span>
 
-                @lang('admin::app.sales.orders.view.ship')     
+                @lang('admin::app.sales.orders.view.ship')
             </div>
 
             <!-- Shipment Create Drawer -->
-            <x-admin::form  
+            <x-admin::form
                 method="POST"
                 :action="route('admin.sales.shipments.store', $order->id)"
             >
@@ -67,8 +67,8 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        id="shipment[carrier_title]" 
-                                        name="shipment[carrier_title]" 
+                                        id="shipment[carrier_title]"
+                                        name="shipment[carrier_title]"
                                         :label="trans('admin::app.sales.shipments.create.carrier-name')"
                                         :placeholder="trans('admin::app.sales.shipments.create.carrier-name')"
                                     />
@@ -102,8 +102,8 @@
 
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    id="shipment[source]" 
-                                    name="shipment[source]" 
+                                    id="shipment[source]"
+                                    name="shipment[source]"
                                     rules="required"
                                     v-model="source"
                                     :label="trans('admin::app.sales.shipments.create.source')"
@@ -137,19 +137,19 @@
                                                 @else
                                                     <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                                        
-                                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
-                                                            @lang('admin::app.sales.invoices.view.product-image') 
+
+                                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                            @lang('admin::app.sales.invoices.view.product-image')
                                                         </p>
                                                     </div>
                                                 @endif
-                
+
                                                 <div class="grid place-content-start gap-1.5">
                                                     <!-- Item Name -->
                                                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                                                         {{ $item->name }}
                                                     </p>
-                
+
                                                     <div class="flex flex-col place-items-start gap-1.5">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.shipments.create.amount-per-unit', [
@@ -157,14 +157,29 @@
                                                                 'qty'    => $item->qty_ordered,
                                                             ])
                                                         </p>
-                
+
                                                         <!--Additional Attributes -->
                                                         @if (isset($item->additional['attributes']))
-                                                            <p class="text-gray-600 dark:text-gray-300">
-                                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                                @endforeach
-                                                            </p>
+                                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                                <p class="text-gray-600 dark:text-gray-300">
+                                                                    @if (
+                                                                        ! isset($attribute['attribute_type'])
+                                                                        || $attribute['attribute_type'] !== 'file'
+                                                                    )
+                                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                    @else
+                                                                        {{ $attribute['attribute_name'] }} :
+
+                                                                        <a
+                                                                            href="{{ Storage::url($attribute['option_label']) }}"
+                                                                            class="text-blue-600 hover:underline"
+                                                                            download="{{ File::basename($attribute['option_label']) }}"
+                                                                        >
+                                                                            {{ File::basename($attribute['option_label']) }}
+                                                                        </a>
+                                                                    @endif
+                                                                </p>
+                                                            @endforeach
                                                         @endif
 
                                                         <!-- Item SKU -->
@@ -200,7 +215,7 @@
 
                                                     <!-- Available Quantity -->
                                                     <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.shipments.create.qty-available') :                  
+                                                        @lang('admin::app.sales.shipments.create.qty-available') :
 
                                                         @php
                                                             $product = $item->getTypeInstance()->getOrderedItem($item)->product;
@@ -222,12 +237,12 @@
                                                         <x-admin::form.control-group.label class="required !block">
                                                             @lang('admin::app.sales.shipments.create.qty-to-ship')
                                                         </x-admin::form.control-group.label>
-                                                        
+
                                                         <x-admin::form.control-group.control
                                                             type="text"
                                                             class="!w-[100px]"
-                                                            :id="$inputName" 
-                                                            :name="$inputName" 
+                                                            :id="$inputName"
+                                                            :name="$inputName"
                                                             :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
                                                             :value="$item->qty_to_ship"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
@@ -235,13 +250,13 @@
                                                             ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                             :ref="$inputName"
                                                         />
-                            
+
                                                         <x-admin::form.control-group.error :control-name="$inputName" />
                                                     </x-admin::form.control-group>
                                                 </div>
                                             </div>
                                         @endforeach
-                                    @endif    
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -263,7 +278,7 @@
 
         methods: {
             onSourceChange() {
-                this.setOriginalQuantityToAllShipmentInputElements();   
+                this.setOriginalQuantityToAllShipmentInputElements();
             },
 
             getAllShipmentInputElements() {
@@ -283,7 +298,7 @@
             setOriginalQuantityToAllShipmentInputElements() {
                 this.getAllShipmentInputElements().forEach((element) => {
                     let data = Object.assign({}, element.dataset);
-                    
+
                     element.value = data.originalQuantity;
                 });
             }

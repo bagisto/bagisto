@@ -190,6 +190,11 @@ return [
                 'title'                   => '为 :name 创建订单',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+
                     'configurable' => [
                         'select-options' => '请选择一个选项',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => '链接',
+                    ],
+
+                    'virtual' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => '添加选项',
+                            'empty-info'        => '快速创建可定制选项。',
+                            'empty-title'       => '添加选项',
+                            'info'              => '这将定制简单的产品。',
+                            'title'             => '可定制项目',
+
+                            'update-create' => [
+                                'is-required'               => '是否必填',
+                                'max-characters'            => '最大字符数',
+                                'name'                      => '标题',
+                                'no'                        => '否',
+                                'price'                     => '价格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => '支持的文件扩展名',
+                                'title'                     => '选项',
+                                'type'                      => '类型',
+                                'yes'                       => '是',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => '添加选项',
+                                'delete'      => '删除',
+                                'delete-btn'  => '删除',
+                                'edit-btn'    => '编辑',
+                                'empty-info'  => '快速创建不同产品组合。',
+                                'empty-title' => '添加选项',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => '文本',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => '文本区域',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => '复选框',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => '单选框',
+                                    ],
+
+                                    'select' => [
+                                        'title' => '选择',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => '多选',
+                                    ],
+
+                                    'date' => [
+                                        'title' => '日期',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => '日期和时间',
+                                    ],
+
+                                    'time' => [
+                                        'title' => '时间',
+                                    ],
+
+                                    'file' => [
+                                        'title' => '文件',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => '标签',
+                                        'price'    => '价格',
+                                        'save-btn' => '保存',
+                                        'title'    => '选项',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => '产品已关联到配置、组或捆绑产品。',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => '添加变体',
                         'delete-btn'        => '删除',

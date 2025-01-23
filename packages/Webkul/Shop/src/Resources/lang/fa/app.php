@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مبلغ کل',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'لطفاً یک گزینه انتخاب کنید',
                     'select-above-options' => 'لطفاً گزینه‌های بالا را انتخاب کنید',

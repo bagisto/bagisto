@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Utwórz zamówienie dla :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Brak',
+                        'total-amount' => 'Całkowita kwota',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Proszę wybrać opcję',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Linki',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Brak',
+                        'total-amount' => 'Całkowita kwota',
                     ],
                 ],
 
@@ -858,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Dodaj opcję',
+                            'empty-info'        => 'Aby szybko utworzyć opcje konfigurowalne.',
+                            'empty-title'       => 'Dodaj opcję',
+                            'info'              => 'To dostosuje prosty produkt.',
+                            'title'             => 'Element konfigurowalny',
+
+                            'update-create' => [
+                                'is-required'               => 'Wymagane',
+                                'max-characters'            => 'Maksymalna liczba znaków',
+                                'name'                      => 'Tytuł',
+                                'no'                        => 'Nie',
+                                'price'                     => 'Cena',
+                                'save-btn'                  => 'Zapisz',
+                                'supported-file-extensions' => 'Obsługiwane rozszerzenia plików',
+                                'title'                     => 'Opcja',
+                                'type'                      => 'Typ',
+                                'yes'                       => 'Tak',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Dodaj opcję',
+                                'delete'      => 'Usuń',
+                                'delete-btn'  => 'Usuń',
+                                'edit-btn'    => 'Edytuj',
+                                'empty-info'  => 'Aby szybko utworzyć różne kombinacje produktów.',
+                                'empty-title' => 'Dodaj opcję',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Tekst',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Obszar tekstu',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Pole wyboru',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Wybierz',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Wielokrotny wybór',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Data',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Data i czas',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Czas',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Plik',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etykieta',
+                                        'price'    => 'Cena',
+                                        'save-btn' => 'Zapisz',
+                                        'title'    => 'Opcja',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Produkt jest już powiązany z produktem konfigurowalnym, zgrupowanym lub zestawem.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Dodaj wariant',
                         'delete-btn'        => 'Usuń',
