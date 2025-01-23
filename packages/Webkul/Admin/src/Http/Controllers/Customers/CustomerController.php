@@ -13,7 +13,6 @@ use Webkul\Admin\DataGrids\Customers\View\ReviewDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
-use Webkul\Admin\Mail\Customer\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -106,13 +105,15 @@ class CustomerController extends Controller
 
         $customer = $this->customerRepository->create($data);
 
-        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer')) {
-            try {
-                Mail::queue(new NewCustomerNotification($customer, $password));
-            } catch (\Exception $e) {
-                report($e);
-            }
-        }
+        /**
+         * Mail to Admin for registration.
+         */
+        Event::dispatch('customer.create.after', $customer);
+
+        /**
+         * Mail to Customer for registration.
+         */
+        Event::dispatch('customer.registration.after', $customer);
 
         return new JsonResponse([
             'data'    => $customer,

@@ -12,7 +12,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'customer.registration.after' => [
+        'customer.create.after' => [
             'Webkul\Admin\Listeners\Customer@afterCreated',
         ],
 
