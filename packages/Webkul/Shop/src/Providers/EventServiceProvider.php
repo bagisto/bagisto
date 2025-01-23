@@ -4,11 +4,10 @@ namespace Webkul\Shop\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Webkul\Shop\Listeners\Customer;
-use Webkul\Shop\Listeners\Order;
 use Webkul\Shop\Listeners\Invoice;
-use Webkul\Shop\Listeners\Shipment;
+use Webkul\Shop\Listeners\Order;
 use Webkul\Shop\Listeners\Refund;
-
+use Webkul\Shop\Listeners\Shipment;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -59,7 +58,7 @@ class EventServiceProvider extends ServiceProvider
         'sales.invoice.send_duplicate_email' => [
             [Invoice::class, 'afterCreated'],
         ],
-        
+
         'sales.shipment.save.after' => [
             [Shipment::class, 'afterCreated'],
         ],
