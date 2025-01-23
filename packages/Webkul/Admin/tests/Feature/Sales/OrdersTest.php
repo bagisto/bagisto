@@ -409,7 +409,7 @@ it('should cancel the order', function () {
     ]);
 });
 
-it('should cancel the order and send the notification to the customer', function () {
+it('should cancel the order and send the notification to the customer and admin', function () {
     // Arrange.
     Mail::fake();
 
@@ -418,8 +418,7 @@ it('should cancel the order and send the notification to the customer', function
         'value' => 1,
     ]);
 
-    CoreConfig::factory()->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.cancel_order',
+    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.cancel_order_mail_to_admin')->update([
         'value' => 1,
     ]);
 
