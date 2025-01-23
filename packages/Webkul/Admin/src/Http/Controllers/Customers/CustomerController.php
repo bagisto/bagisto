@@ -103,16 +103,20 @@ class CustomerController extends Controller
             $data['phone'] = null;
         }
 
+        Event::dispatch('customer.create.before');
+
         $customer = $this->customerRepository->create($data);
 
-        /**
-         * Mail to Admin for registration.
-         */
+        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer_account_credentials')) {
+            try {
+                Mail::queue(new NewCustomerNotification($customer, $password));
+            } catch (\Exception $e) {
+                report($e);
+            }
+        }
+
         Event::dispatch('customer.create.after', $customer);
 
-        /**
-         * Mail to Customer for registration.
-         */
         Event::dispatch('customer.registration.after', $customer);
 
         return new JsonResponse([

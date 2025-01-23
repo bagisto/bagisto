@@ -52,7 +52,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 4,
-            'code'         => 'emails.general.notifications.emails.general.notifications.customer',
+            'code'         => 'emails.general.notifications.emails.general.notifications.customer_account_credentials',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -73,7 +73,7 @@ class ConfigTableSeeder extends Seeder
         DB::table('core_config')->insert([
             'id'           => 6,
             'code'         => 'emails.general.notifications.emails.general.notifications.new_order_mail_to_admin',
-            'value'        => '0',
+            'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
             'created_at'   => $now,

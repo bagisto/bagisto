@@ -1104,7 +1104,7 @@ return [
                 'title' => 'admin::app.configuration.index.email.notifications.customer-registration-confirmation-mail-to-admin',
                 'type'  => 'boolean',
             ], [
-                'name'  => 'emails.general.notifications.customer',
+                'name'  => 'emails.general.notifications.customer_account_credentials',
                 'title' => 'admin::app.configuration.index.email.notifications.customer',
                 'type'  => 'boolean',
             ], [
