@@ -103,7 +103,7 @@ it('should create a new customer and send notification to the customer', functio
     Mail::fake();
 
     CoreConfig::factory()->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.customer',
+        'code'  => 'emails.general.notifications.emails.general.notifications.customer_account_credentials',
         'value' => 1,
     ]);
 

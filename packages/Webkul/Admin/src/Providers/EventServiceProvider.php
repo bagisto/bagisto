@@ -3,6 +3,13 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Admin\Listeners\Admin;
+use Webkul\Admin\Listeners\ChannelSettingsChange;
+use Webkul\Admin\Listeners\Customer;
+use Webkul\Admin\Listeners\Invoice;
+use Webkul\Admin\Listeners\Order;
+use Webkul\Admin\Listeners\Refund;
+use Webkul\Admin\Listeners\Shipment;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,36 +19,48 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'customer.registration.after' => [
-            'Webkul\Admin\Listeners\Customer@afterCreated',
+        /**
+         * Customer related events.
+         */
+        'customer.create.after' => [
+            [Customer::class, 'afterCreated'],
         ],
 
+        /**
+         * Admin related events.
+         */
         'admin.password.update.after' => [
-            'Webkul\Admin\Listeners\Admin@afterPasswordUpdated',
+            [Admin::class, 'afterPasswordUpdated'],
         ],
 
+        /**
+         * Sales related events.
+         */
         'checkout.order.save.after' => [
-            'Webkul\Admin\Listeners\Order@afterCreated',
+            [Order::class, 'afterCreated'],
         ],
 
         'sales.order.cancel.after' => [
-            'Webkul\Admin\Listeners\Order@afterCanceled',
+            [Order::class, 'afterCanceled'],
         ],
 
         'sales.invoice.save.after' => [
-            'Webkul\Admin\Listeners\Invoice@afterCreated',
+            [Invoice::class, 'afterCreated'],
         ],
 
         'sales.shipment.save.after' => [
-            'Webkul\Admin\Listeners\Shipment@afterCreated',
+            [Shipment::class, 'afterCreated'],
         ],
 
         'sales.refund.save.after' => [
-            'Webkul\Admin\Listeners\Refund@afterCreated',
+            [Refund::class, 'afterCreated'],
         ],
 
+        /**
+         * Channel Settings related events.
+         */
         'core.channel.update.after' => [
-            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenanceMode',
+            [ChannelSettingsChange::class, 'checkForMaintenanceMode'],
         ],
     ];
 }
