@@ -71,6 +71,15 @@ it('successfully registers a customer and send mail to the customer that you hav
     // Arrange.
     Mail::fake();
 
+    CoreConfig::factory()->create([
+        'code'  => 'emails.general.notifications.emails.general.notifications.registration',
+        'value' => 1,
+    ]);
+
+    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin')->update([
+        'value' => 1,
+    ]);
+
     $requestedCustomer = [
         'first_name'            => fake()->firstName(),
         'last_name'             => fake()->lastName(),
@@ -79,22 +88,14 @@ it('successfully registers a customer and send mail to the customer that you hav
         'password_confirmation' => 'admin123',
     ];
 
-    CoreConfig::factory()->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.registration',
-        'value' => 1,
-    ])->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin',
-        'value' => 1,
-    ]);
-
     // Act and Assert.
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
 
-    Mail::assertQueued(ShopRegistrationNotification::class);
-
     Mail::assertQueued(AdminRegistrationNotification::class);
+
+    Mail::assertQueued(ShopRegistrationNotification::class);
 
     Mail::assertQueuedCount(2);
 });

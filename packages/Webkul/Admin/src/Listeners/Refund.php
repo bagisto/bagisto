@@ -18,7 +18,7 @@ class Refund extends Base
         $this->refundOrder($refund);
 
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_refund')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_refund_mail_to_admin')) {
                 return;
             }
 

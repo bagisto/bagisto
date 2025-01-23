@@ -27,8 +27,8 @@ class InvoicedNotification extends Mailable
         return new Envelope(
             to: [
                 new Address(
-                    $order->customer_email,
-                    $order->customer_full_name
+                    core()->getAdminEmailDetails()['email'],
+                    core()->getAdminEmailDetails()['name']
                 ),
             ],
             subject: trans('admin::app.emails.orders.invoiced.subject'),
@@ -41,7 +41,7 @@ class InvoicedNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'shop::emails.orders.invoiced',
+            view: 'admin::emails.orders.invoiced',
         );
     }
 }
