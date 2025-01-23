@@ -88,6 +88,8 @@ class RegistrationController extends Controller
             }
         }
 
+        Event::dispatch('customer.create.after', $customer);
+
         Event::dispatch('customer.registration.after', $customer);
 
         if (core()->getConfigData('customer.settings.email.verification')) {

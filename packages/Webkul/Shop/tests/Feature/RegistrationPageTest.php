@@ -87,7 +87,7 @@ it('successfully registers a customer and send mail to the customer that you hav
         'password'              => 'admin123',
         'password_confirmation' => 'admin123',
     ];
-    
+
     // Act and Assert.
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')

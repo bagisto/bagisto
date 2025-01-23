@@ -1,28 +1,28 @@
 <?php
 
 use Illuminate\Support\Arr;
-use function Pest\Laravel\get;
-use Webkul\Sales\Models\Order;
-use Webkul\Checkout\Models\Cart;
-use Webkul\Sales\Models\Invoice;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Sales\Models\OrderItem;
-use function Pest\Laravel\postJson;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Customer\Models\Customer;
-use Webkul\Sales\Models\InvoiceItem;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderPayment;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Sales\Models\OrderTransaction;
-use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Checkout\Models\CartShippingRate;
-
-use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Shop\Mail\Order\InvoicedNotification as ShopInvoicedNotification;
 use Webkul\Admin\Mail\Order\InvoicedNotification as AdminInvoicedNotification;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Core\Models\CoreConfig;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\InvoiceItem;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\OrderItem;
+use Webkul\Sales\Models\OrderPayment;
+use Webkul\Sales\Models\OrderTransaction;
+use Webkul\Shop\Mail\Order\InvoicedNotification as ShopInvoicedNotification;
+
+use function Pest\Laravel\get;
+use function Pest\Laravel\postJson;
 
 it('should returns the invoice index page', function () {
     // Act and Assert.
