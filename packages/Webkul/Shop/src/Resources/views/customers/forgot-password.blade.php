@@ -117,8 +117,6 @@
     </div>
 
     @push('scripts')
-
         {!! Captcha::renderJS() !!}
-
     @endpush
 </x-shop::layouts>
