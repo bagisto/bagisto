@@ -19,7 +19,7 @@ class Customer extends Base
      */
     public function afterCreated($customer)
     {
-        if (core()->getConfigData('customer.settings.email.verification')) {
+        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
             try {
                 if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
                     return;
@@ -34,15 +34,15 @@ class Customer extends Base
 
             return;
         }
-
+        
         try {
             if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
                 return;
             }
 
-            Mail::queue(new RegistrationNotification($customer));
-        } catch (\Exception $e) {
-            report($e);
+                Mail::queue(new RegistrationNotification($customer));
+            } catch (\Exception $e) {
+                report($e);
         }
     }
 
