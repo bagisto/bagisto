@@ -40,9 +40,9 @@ class Customer extends Base
                 return;
             }
 
-                Mail::queue(new RegistrationNotification($customer));
-            } catch (\Exception $e) {
-                report($e);
+            Mail::queue(new RegistrationNotification($customer));
+        } catch (\Exception $e) {
+            report($e);
         }
     }
 
