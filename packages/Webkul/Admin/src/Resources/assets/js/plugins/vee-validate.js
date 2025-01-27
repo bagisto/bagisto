@@ -116,6 +116,37 @@ export default {
             return true;
         });
 
+        defineRule("between", (value, [min, max]) => {
+            if (! value) {
+                return true;
+            }
+
+            const numericValue = Number(value);
+
+            return ! isNaN(numericValue) && numericValue >= min && numericValue <= max;
+        });
+
+        defineRule("allowOperators", (value, [allowedOperators] = []) => {
+            if (value === null || value === undefined || value === '') {
+                return true;
+            }
+
+            if (! allowedOperators) {
+                allowedOperators = ",.";
+            }
+        
+            const escapedOperators = allowedOperators.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        
+            const regexPattern = new RegExp(`^[0-9${escapedOperators}]+$`);
+        
+            if (! regexPattern.test(String(value))) {
+                return `Only the following operators are allowed: (${allowedOperators})`;
+            }
+        
+            return true;
+        });
+        
+
         defineRule("", () => true);
 
         configure({

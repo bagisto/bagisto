@@ -216,6 +216,7 @@
                                     type="text"
                                     name="decimal"
                                     :value="old('decimal')"
+                                    rules="numeric|between:0,9"
                                     v-model="selectedCurrency.decimal"
                                     :label="trans('admin::app.settings.currencies.index.create.decimal')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
@@ -237,6 +238,7 @@
                                     type="text"
                                     name="group_separator"
                                     :value="old('group_separator')"
+                                    rules="allowOperators:,."
                                     v-model="selectedCurrency.group_separator"
                                     :label="trans('admin::app.settings.currencies.index.create.group-separator')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.group-separator')"
@@ -259,11 +261,11 @@
                                     type="text"
                                     name="decimal_separator"
                                     :value="old('decimal_separator')"
+                                    rules="allowOperators:,."
                                     v-model="selectedCurrency.decimal_separator"
                                     :label="trans('admin::app.settings.currencies.index.create.decimal-separator')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.decimal-separator')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <x-admin::form.control-group.error
                                     control-name="decimal_separator"
@@ -372,6 +374,8 @@
                     },
 
                     editModal(url) {
+                        this.isEditable = 1;
+
                         this.$axios.get(url)
                             .then((response) => {
                                 this.selectedCurrency = response.data;
