@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'ऑर्डर रद्द करने के बाद एक सूचना भेजें',
+                    'cancel-order'                                     => 'एक आदेश रद्द करने के बाद ग्राहक को सूचना भेजें',
                     'cancel-order-mail-to-admin'                       => 'ऑर्डर रद्द करने के बाद प्रशासक को ई-मेल सूचना भेजें',
                     'customer'                                         => 'पंजीकरण के बाद ग्राहक खाते का विवरण भेजें',
                     'customer-registration-confirmation-mail-to-admin' => 'ग्राहक पंजीकरण के बाद प्रशासक को पुष्टिकरण ई-मेल भेजें',

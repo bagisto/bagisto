@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Invia una notifica dopo l\'annullamento di un ordine',
+                    'cancel-order'                                     => 'Invia una notifica al cliente dopo l\'annullamento di un ordine',
                     'cancel-order-mail-to-admin'                       => 'Invia una e-mail di notifica all\'amministratore dopo l\'annullamento di un ordine',
                     'customer'                                         => 'Invia al cliente le credenziali del suo account dopo la registrazione',
                     'customer-registration-confirmation-mail-to-admin' => 'Invia una e-mail di conferma all\'amministratore dopo la registrazione del cliente',

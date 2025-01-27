@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Enviar una notificación después de cancelar un pedido',
+                    'cancel-order'                                     => 'Enviar una notificación al cliente después de cancelar un pedido',
                     'cancel-order-mail-to-admin'                       => 'Enviar un correo electrónico de notificación al administrador después de cancelar un pedido',
                     'customer'                                         => 'Enviar las credenciales de la cuenta del cliente después del registro',
                     'customer-registration-confirmation-mail-to-admin' => 'Enviar un correo electrónico de confirmación al administrador después del registro del cliente',

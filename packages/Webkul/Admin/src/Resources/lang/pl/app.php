@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Wyślij powiadomienie po anulowaniu zamówienia',
+                    'cancel-order'                                     => 'Wyślij powiadomienie do klienta po anulowaniu zamówienia',
                     'cancel-order-mail-to-admin'                       => 'Wyślij powiadomienie e-mail do administratora po anulowaniu zamówienia',
                     'customer'                                         => 'Wyślij dane konta klienta po rejestracji',
                     'customer-registration-confirmation-mail-to-admin' => 'Wyślij e-mail potwierdzający do administratora po rejestracji klienta',

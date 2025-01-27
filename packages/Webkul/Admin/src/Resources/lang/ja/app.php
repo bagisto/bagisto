@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => '注文をキャンセルした後に通知を送信する',
+                    'cancel-order'                                     => '注文がキャンセルされた後、顧客に通知を送信する',
                     'cancel-order-mail-to-admin'                       => '注文キャンセル後に管理者へ通知メールを送信する',
                     'customer'                                         => '登録後に顧客のアカウント情報を送信する',
                     'customer-registration-confirmation-mail-to-admin' => '顧客登録後に管理者へ確認メールを送信する',
