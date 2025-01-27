@@ -85,10 +85,7 @@
                     v-if="isOpen"
                 >
                     <div class="flex min-h-screen items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div
-                            class="box-shadow relative z-[999] w-screen max-w-[568px] rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%]"
-                            :class="{'mt-4 mb-4': isSmallScreen}"
-                        >
+                        <div class="box-shadow relative z-[999] w-screen max-w-[568px] rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-[90%]">
                             <!-- Header Slot -->
                             <slot
                                 name="header"
@@ -119,12 +116,6 @@
                 return {
                     isOpen: this.isActive,
                 };
-            },
-
-            computed: {
-                isSmallScreen() {
-                    return window.innerHeight <= 702;
-                },
             },
 
             methods: {
