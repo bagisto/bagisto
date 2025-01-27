@@ -2,9 +2,9 @@
 
 namespace Webkul\Shop\Http\Requests;
 
-use Webkul\Core\Rules\PostCode;
-use Webkul\Core\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\PhoneNumber;
+use Webkul\Core\Rules\PostCode;
 
 class CartAddressRequest extends FormRequest
 {
