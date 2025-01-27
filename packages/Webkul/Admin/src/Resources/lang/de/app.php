@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Allgemein',
                     'group-separator'   => 'Gruppentrennzeichen',
                     'name'              => 'Name',
+                    'separator-note'    => 'Das :attribute-Feld kann nur die Operatoren Komma (,) und Punkt (.) akzeptieren',
                     'save-btn'          => 'Währung speichern',
                     'symbol'            => 'Symbol',
                     'title'             => 'Neue Währung erstellen',

@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Geral',
                     'group-separator'   => 'Separador de Grupo',
                     'name'              => 'Nome',
+                    'separator-note'    => 'O campo :attribute só pode aceitar os operadores vírgula (,) e ponto (.)',
                     'save-btn'          => 'Salvar Moeda',
                     'symbol'            => 'Símbolo',
                     'title'             => 'Criar Nova Moeda',

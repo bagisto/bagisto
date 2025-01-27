@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Algemeen',
                     'group-separator'   => 'Groepsscheidingsteken',
                     'name'              => 'Naam',
+                    'separator-note'    => 'Het :attribute veld kan alleen de komma (,) en punt (.) operators accepteren',
                     'save-btn'          => 'Valuta Opslaan',
                     'symbol'            => 'Symbool',
                     'title'             => 'Nieuwe Valuta Aanmaken',
