@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'إرسال إشعار بعد إلغاء الطلب',
+                    'cancel-order'                                     => 'إرسال إشعار للعميل بعد إلغاء الطلب',
                     'cancel-order-mail-to-admin'                       => 'إرسال بريد إلكتروني إشعاري إلى المشرف بعد إلغاء الطلب',
                     'customer'                                         => 'إرسال بيانات اعتماد حساب العميل بعد التسجيل',
                     'customer-registration-confirmation-mail-to-admin' => 'إرسال بريد إلكتروني تأكيدي إلى المشرف بعد تسجيل العميل',
