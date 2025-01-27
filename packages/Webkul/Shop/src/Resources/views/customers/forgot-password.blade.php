@@ -118,8 +118,6 @@
     </div>
 
     @push('scripts')
-
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
-
     @endpush
 </x-shop::layouts>

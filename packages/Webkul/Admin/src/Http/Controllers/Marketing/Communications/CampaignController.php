@@ -103,12 +103,14 @@ class CampaignController extends Controller
             'marketing_event_id'    => 'required',
             'channel_id'            => 'required',
             'customer_group_id'     => 'required',
-            'status'                => 'sometimes|required|in:0,1',
         ]);
 
         Event::dispatch('marketing.campaigns.update.before', $id);
 
-        $campaign = $this->campaignRepository->update($validatedData, $id);
+        $campaign = $this->campaignRepository->update([
+            ...$validatedData,
+            'status' => request()->input('status') ? 1 : 0,
+        ], $id);
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 
