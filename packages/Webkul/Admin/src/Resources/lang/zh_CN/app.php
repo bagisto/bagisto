@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => '取消订单后发送通知',
+                    'cancel-order'                                     => '取消订单后向客户发送通知',
                     'cancel-order-mail-to-admin'                       => '取消订单后向管理员发送通知邮件',
                     'customer'                                         => '注册后向客户发送账户凭证',
                     'customer-registration-confirmation-mail-to-admin' => '客户注册后向管理员发送确认邮件',

@@ -3766,7 +3766,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'ارسال اعلان پس از لغو سفارش',
+                    'cancel-order'                                     => ' ارسال اعلان به مشتری پس از لغو سفارش',
                     'cancel-order-mail-to-admin'                       => 'ارسال ایمیل اعلان به مدیر پس از لغو سفارش',
                     'customer'                                         => 'ارسال اطلاعات حساب کاربری به مشتری پس از ثبت‌نام',
                     'customer-registration-confirmation-mail-to-admin' => 'ارسال ایمیل تأیید به مدیر پس از ثبت‌نام مشتری',
