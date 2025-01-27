@@ -16,19 +16,11 @@ class Shipment extends Base
     public function afterCreated(ShipmentContract $shipment)
     {
         try {
-            $sendShipmentNotification = core()->getConfigData('emails.general.notifications.emails.general.notifications.new_shipment_mail_to_admin');
-            
-            $sendInventoryNotification = core()->getConfigData('emails.general.notifications.emails.general.notifications.new_inventory_source');
-
-            if (! $sendShipmentNotification && ! $sendInventoryNotification) {
-                return;
-            }
-
-            if ($sendShipmentNotification) {
+            if (core()->getConfigData('emails.general.notifications.emails.general.notifications.new_shipment_mail_to_admin')) {
                 $this->prepareMail($shipment, new ShippedNotification($shipment));
             }
         
-            if ($sendInventoryNotification) {
+            if (core()->getConfigData('emails.general.notifications.emails.general.notifications.new_inventory_source')) {
                 $this->prepareMail($shipment, new InventorySourceNotification($shipment));
             }
         } catch (\Exception $e) {
