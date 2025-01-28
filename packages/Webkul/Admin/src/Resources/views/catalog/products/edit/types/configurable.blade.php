@@ -764,7 +764,7 @@
                         :ref="$.uid + '_imageInput_' + index"
                     />
                 </template>
-                <!-- //Ends Form Hidden Fields -->
+                <!-- Ends Form Hidden Fields -->
 
                 <!-- Selection Checkbox -->
                 <div class="select-none">

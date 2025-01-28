@@ -1328,7 +1328,7 @@ return [
                 'title' => 'admin::app.configuration.index.email.notifications.customer-registration-confirmation-mail-to-admin',
                 'type'  => 'boolean',
             ], [
-                'name'  => 'emails.general.notifications.customer',
+                'name'  => 'emails.general.notifications.customer_account_credentials',
                 'title' => 'admin::app.configuration.index.email.notifications.customer',
                 'type'  => 'boolean',
             ], [
@@ -1336,20 +1336,32 @@ return [
                 'title' => 'admin::app.configuration.index.email.notifications.new-order',
                 'type'  => 'boolean',
             ], [
-                'name'  => 'emails.general.notifications.new_admin',
-                'title' => 'admin::app.configuration.index.email.notifications.new-admin',
+                'name'  => 'emails.general.notifications.new_order_mail_to_admin',
+                'title' => 'admin::app.configuration.index.email.notifications.new-order-mail-to-admin',
                 'type'  => 'boolean',
             ], [
                 'name'  => 'emails.general.notifications.new_invoice',
                 'title' => 'admin::app.configuration.index.email.notifications.new-invoice',
                 'type'  => 'boolean',
             ], [
+                'name'  => 'emails.general.notifications.new_invoice_mail_to_admin',
+                'title' => 'admin::app.configuration.index.email.notifications.new-invoice-mail-to-admin',
+                'type'  => 'boolean',
+            ], [
                 'name'  => 'emails.general.notifications.new_refund',
                 'title' => 'admin::app.configuration.index.email.notifications.new-refund',
                 'type'  => 'boolean',
             ], [
+                'name'  => 'emails.general.notifications.new_refund_mail_to_admin',
+                'title' => 'admin::app.configuration.index.email.notifications.new-refund-mail-to-admin',
+                'type'  => 'boolean',
+            ], [
                 'name'  => 'emails.general.notifications.new_shipment',
                 'title' => 'admin::app.configuration.index.email.notifications.new-shipment',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'emails.general.notifications.new_shipment_mail_to_admin',
+                'title' => 'admin::app.configuration.index.email.notifications.new-shipment-mail-to-admin',
                 'type'  => 'boolean',
             ], [
                 'name'  => 'emails.general.notifications.new_inventory_source',
@@ -1358,6 +1370,10 @@ return [
             ], [
                 'name'  => 'emails.general.notifications.cancel_order',
                 'title' => 'admin::app.configuration.index.email.notifications.cancel-order',
+                'type'  => 'boolean',
+            ],  [
+                'name'  => 'emails.general.notifications.cancel_order_mail_to_admin',
+                'title' => 'admin::app.configuration.index.email.notifications.cancel-order-mail-to-admin',
                 'type'  => 'boolean',
             ],
         ],
@@ -1415,7 +1431,7 @@ return [
                 'name'          => 'zipcode',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.zip',
                 'type'          => 'text',
-                'validation'    => 'required',
+                'validation'    => 'required|postcode',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
@@ -1429,6 +1445,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.vat-number',
                 'type'          => 'text',
                 'channel_based' => true,
+                'validation'    => 'phone',
             ], [
                 'name'          => 'contact',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
@@ -1922,7 +1939,7 @@ return [
                 'name'          => 'order_number_length',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'between:1,10|integer',
                 'channel_based' => true,
             ], [
                 'name'          => 'order_number_suffix',

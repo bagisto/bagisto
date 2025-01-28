@@ -113,7 +113,7 @@
                     <x-shop::form.control-group.control
                         type="text"
                         name="postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.cart.summary.estimate-shipping.postcode')"
                         :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.postcode')"
                     />

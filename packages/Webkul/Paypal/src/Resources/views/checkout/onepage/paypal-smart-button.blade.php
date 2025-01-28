@@ -41,7 +41,7 @@
                 methods: {
                     register() {
                         if (typeof paypal == 'undefined') {
-                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Something went wrong.')' });
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('paypal::app.errors.invalid-configs')' });
 
                             return;
                         }
@@ -72,7 +72,7 @@
                                         if (error.response.data.error === 'invalid_client') {
                                             options.authorizationFailed = true;
 
-                                            options.alertBox('@lang('Something went wrong.')');
+                                            options.alertBox('@lang('paypal::app.errors.invalid-configs')');
                                         }
 
                                         return error;
@@ -98,7 +98,7 @@
 
                             onError: (error) => {
                                 if (! options.authorizationFailed) {
-                                    options.alertBox('@lang('Something went wrong.')');
+                                    options.alertBox('@lang('paypal::app.errors.something-went-wrong')');
                                 }
                             },
                         };

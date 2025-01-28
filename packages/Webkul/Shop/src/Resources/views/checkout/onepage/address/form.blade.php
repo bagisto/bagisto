@@ -241,7 +241,7 @@
                         type="text"
                         ::name="controlName + '.postcode'"
                         ::value="address.postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.onepage.address.postcode')"
                         :placeholder="trans('shop::app.checkout.onepage.address.postcode')"
                     />

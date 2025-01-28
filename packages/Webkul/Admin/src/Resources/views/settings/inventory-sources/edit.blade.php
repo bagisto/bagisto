@@ -443,7 +443,7 @@
                         type="text"
                         id="postcode"
                         name="postcode"
-                        rules="required"
+                        rules="required|postcode"
                         :value="old('postcode') ?? $inventorySource->postcode"
                         :label="trans('admin::app.settings.inventory-sources.edit.postcode')"
                         :placeholder="trans('admin::app.settings.inventory-sources.edit.postcode')"

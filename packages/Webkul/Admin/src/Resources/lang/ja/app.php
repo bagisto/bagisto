@@ -190,6 +190,11 @@ return [
                 'title'                   => ':name の注文を作成',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'なし',
+                        'total-amount' => '合計金額',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'オプションを選択してください',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'リンク',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'なし',
+                        'total-amount' => '合計金額',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => '支払い方法',
                     'status'           => 'ステータス',
                     'title'            => '取引の詳細',
-                    'transaction-data' => '取引データ',
                     'transaction-id'   => '取引ID',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'オプションを追加',
+                            'empty-info'        => 'カスタマイズ可能なオプションをすぐに作成できます。',
+                            'empty-title'       => 'オプションを追加',
+                            'info'              => 'これにより、シンプルな製品がカスタマイズされます。',
+                            'title'             => 'カスタマイズ可能なアイテム',
+
+                            'update-create' => [
+                                'is-required'               => '必須',
+                                'max-characters'            => '最大文字数',
+                                'name'                      => 'タイトル',
+                                'no'                        => 'いいえ',
+                                'price'                     => '価格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => 'サポートされているファイル拡張子',
+                                'title'                     => 'オプション',
+                                'type'                      => 'タイプ',
+                                'yes'                       => 'はい',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'オプションを追加',
+                                'delete'      => '削除',
+                                'delete-btn'  => '削除',
+                                'edit-btn'    => '編集',
+                                'empty-info'  => 'さまざまな製品の組み合わせをすぐに作成できます。',
+                                'empty-title' => 'オプションを追加',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'テキスト',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'テキストエリア',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'チェックボックス',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'ラジオボタン',
+                                    ],
+
+                                    'select' => [
+                                        'title' => '選択',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'マルチセレクト',
+                                    ],
+
+                                    'date' => [
+                                        'title' => '日付',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => '日付と時刻',
+                                    ],
+
+                                    'time' => [
+                                        'title' => '時間',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'ファイル',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'ラベル',
+                                        'price'    => '価格',
+                                        'save-btn' => '保存',
+                                        'title'    => 'オプション',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'この製品は既にコンフィギュラブル、グループ、またはバンドル製品に関連付けられています。',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'バリエーションを追加',
                         'delete-btn'        => '削除',
@@ -2807,6 +2903,7 @@ return [
                         'title' => '税カテゴリーを編集',
                     ],
 
+                    'can-not-delete' => '税率が割り当てられているカテゴリは削除できません。',
                     'create-success' => '新しい税カテゴリーが作成されました',
                     'delete-failed'  => '税カテゴリーの削除に失敗しました',
                     'delete-success' => '税カテゴリーが正常に削除されました',
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'サイトキー、シークレットキー、ステータスを設定します。',
-                    'title' => 'キャプチャ',
+                    'title' => 'Google キャプチャ',
 
                     'credentials' => [
                         'secret-key' => 'シークレットキー',
@@ -3869,16 +3966,20 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => '注文をキャンセルした後に通知を送信する',
-                    'customer'                                         => '登録後に顧客アカウントの資格情報を送信する',
-                    'customer-registration-confirmation-mail-to-admin' => '顧客登録後に管理者に確認メールを送信する',
-                    'info'                                             => '製品の在庫オプションを設定し、バックオーダーを許可し、カートの最小および最大数量を設定し、在庫切れのしきい値を定義します。',
-                    'new-admin'                                        => '新しい注文後に管理者に確認メールを送信する',
+                    'cancel-order'                                     => '注文がキャンセルされた後、顧客に通知を送信する',
+                    'cancel-order-mail-to-admin'                       => '注文キャンセル後に管理者へ通知メールを送信する',
+                    'customer'                                         => '登録後に顧客のアカウント情報を送信する',
+                    'customer-registration-confirmation-mail-to-admin' => '顧客登録後に管理者へ確認メールを送信する',
+                    'info'                                             => 'アカウント確認、注文確認、請求書、払い戻し、出荷、注文キャンセルのメールを受信するように設定します。',
                     'new-inventory-source'                             => '出荷作成後に在庫ソースに通知メールを送信する',
-                    'new-invoice'                                      => '新しい請求書作成後に顧客に通知メールを送信する',
-                    'new-order'                                        => '新しい注文後に顧客に確認メールを送信する',
-                    'new-refund'                                       => '返金作成後に顧客に通知メールを送信する',
-                    'new-shipment'                                     => '出荷作成後に顧客に通知メールを送信する',
+                    'new-invoice'                                      => '新しい請求書作成後に顧客へ通知メールを送信する',
+                    'new-invoice-mail-to-admin'                        => '新しい請求書作成後に管理者へ通知メールを送信する',
+                    'new-order'                                        => '新規注文後に顧客へ確認メールを送信する',
+                    'new-order-mail-to-admin'                          => '新規注文後に管理者へ確認メールを送信する',
+                    'new-refund'                                       => '払い戻し作成後に顧客へ通知メールを送信する',
+                    'new-refund-mail-to-admin'                         => '払い戻し作成後に管理者へ通知メールを送信する',
+                    'new-shipment'                                     => '出荷作成後に顧客へ通知メールを送信する',
+                    'new-shipment-mail-to-admin'                       => '出荷作成後に管理者へ通知メールを送信する',
                     'registration'                                     => '顧客登録後に確認メールを送信する',
                     'title'                                            => '通知',
                     'verification'                                     => '顧客登録後に確認メールを送信する',

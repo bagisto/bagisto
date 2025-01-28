@@ -567,6 +567,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'කිසිවක් නැත',
+                        'total-amount' => 'මුළු මුදල',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'කරුණු තෝරන්න',
                     'select-above-options' => 'ඉහළට සහිත කරුණු තෝරන්න',

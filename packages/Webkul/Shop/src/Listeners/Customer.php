@@ -19,7 +19,7 @@ class Customer extends Base
      */
     public function afterCreated($customer)
     {
-        if (core()->getConfigData('customer.settings.email.verification')) {
+        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
             try {
                 if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
                     return;
