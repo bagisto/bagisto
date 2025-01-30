@@ -15,12 +15,22 @@ test('Create Exchange Rate', async ({page}) => {
     await page.getByPlaceholder('Rate').click();
     await page.getByPlaceholder('Rate').fill('2323');
     await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Exchange Rate', async ({page}) => {
@@ -38,12 +48,22 @@ test('Edit Exchange Rate', async ({page}) => {
     await page.getByPlaceholder('Rate').click();
     await page.getByPlaceholder('Rate').fill('2323');
     await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Exchange Rate', async ({page}) => {
@@ -57,10 +77,15 @@ test('Delete Exchange Rate', async ({page}) => {
     await page.getByRole('link', { name: 'Exchange Rates' }).click();
     await page.locator('div').filter({ hasText: /^1Canadian Dollar2323\.000000000000$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
