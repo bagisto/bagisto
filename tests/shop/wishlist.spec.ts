@@ -12,16 +12,7 @@ test('Add To Wishlist', async ({page}) => {
     await page.locator('.action-items > span').first().click();
     await page.locator('div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span').first().click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.icon-cancel');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Item Successfully Added To Wishlist', { timeout: 5000 });
 });
 
 test('Remove from Wishlist', async ({page}) => {
@@ -34,15 +25,7 @@ test('Remove from Wishlist', async ({page}) => {
     await page.getByPlaceholder('Password').fill('testUser@123');
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.locator('.action-items > span').first().click();
+    await page.locator('div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span').first().click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.icon-cancel');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Item Successfully Removed From Wishlist', { timeout: 5000 });
 });
