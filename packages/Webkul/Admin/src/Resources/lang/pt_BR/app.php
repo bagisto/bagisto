@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Geral',
                     'group-separator'   => 'Separador de Grupo',
                     'name'              => 'Nome',
+                    'separator-note'    => 'O campo :attribute só pode aceitar os operadores vírgula (,) e ponto (.)',
                     'save-btn'          => 'Salvar Moeda',
                     'symbol'            => 'Símbolo',
                     'title'             => 'Criar Nova Moeda',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Envie uma notificação após cancelar um pedido',
+                    'cancel-order'                                     => 'Enviar uma notificação ao cliente após cancelar um pedido',
                     'cancel-order-mail-to-admin'                       => 'Envie um e-mail de notificação ao administrador após cancelar um pedido',
                     'customer'                                         => 'Envie as credenciais da conta do cliente após o registro',
                     'customer-registration-confirmation-mail-to-admin' => 'Envie um e-mail de confirmação ao administrador após o registro do cliente',

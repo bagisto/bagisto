@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Ogólne',
                     'group-separator'   => 'Separator Grup',
                     'name'              => 'Nazwa',
+                    'separator-note'    => 'Pole :attribute może akceptować tylko operatory przecinka (,) i kropki (.)',
                     'save-btn'          => 'Zapisz Walutę',
                     'symbol'            => 'Symbol',
                     'title'             => 'Utwórz nową Walutę',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Wyślij powiadomienie po anulowaniu zamówienia',
+                    'cancel-order'                                     => 'Wyślij powiadomienie do klienta po anulowaniu zamówienia',
                     'cancel-order-mail-to-admin'                       => 'Wyślij powiadomienie e-mail do administratora po anulowaniu zamówienia',
                     'customer'                                         => 'Wyślij dane konta klienta po rejestracji',
                     'customer-registration-confirmation-mail-to-admin' => 'Wyślij e-mail potwierdzający do administratora po rejestracji klienta',

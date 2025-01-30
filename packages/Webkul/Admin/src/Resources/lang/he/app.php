@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'כללי',
                     'group-separator'   => 'מפריד קבוצה',
                     'name'              => 'שם',
+                    'separator-note'    => 'השדה :attribute יכול לקבל רק את המפעילים פסיק (,) ונקודה (.)',
                     'save-btn'          => 'שמור מטבע',
                     'symbol'            => 'סמל',
                     'title'             => 'צור מטבע חדש',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'שלח התראה לאחר ביטול הזמנה',
+                    'cancel-order'                                     => 'שלח התראה ללקוח לאחר ביטול הזמנה',
                     'cancel-order-mail-to-admin'                       => 'שלח דוא"ל התראה למנהל לאחר ביטול הזמנה',
                     'customer'                                         => 'שלח ללקוח פרטי חשבון לאחר הרשמה',
                     'customer-registration-confirmation-mail-to-admin' => 'שלח דוא"ל אישור למנהל לאחר הרשמת לקוח',

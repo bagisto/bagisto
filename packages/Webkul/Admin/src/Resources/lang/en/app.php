@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'General',
                     'group-separator'   => 'Group Separator',
                     'name'              => 'Name',
+                    'separator-note'    => 'The :attribute field can only accept the comma (,) and dot (.) operators',
                     'save-btn'          => 'Save Currency',
                     'symbol'            => 'Symbol',
                     'title'             => 'Create New Currency',
@@ -3766,8 +3767,8 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Send a notification after canceling an order',
-                    'cancel-order-mail-to-admin'                       => 'Send a notification e-mail  to admin after canceling an order',
+                    'cancel-order'                                     => 'Send a notification to customer after canceling an order',
+                    'cancel-order-mail-to-admin'                       => 'Send a notification e-mail to admin after canceling an order',
                     'customer'                                         => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
                     'info'                                             => 'To configure, receive emails for account verification, order confirmations, updates on invoices, refunds, shipments, and order cancellations.',

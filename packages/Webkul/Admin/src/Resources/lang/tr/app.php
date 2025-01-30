@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Genel',
                     'group-separator'   => 'Grup Ayırıcı',
                     'name'              => 'Adı',
+                    'separator-note'    => ':attribute alanı yalnızca virgül (,) ve nokta (.) operatörlerini kabul edebilir',
                     'save-btn'          => 'Para Birimini Kaydet',
                     'symbol'            => 'Sembol',
                     'title'             => 'Yeni Para Birimi Oluştur',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Sipariş iptal edildikten sonra bir bildirim gönder',
+                    'cancel-order'                                     => 'Sipariş iptal edildikten sonra müşteriye bildirim gönder',
                     'cancel-order-mail-to-admin'                       => 'Sipariş iptal edildikten sonra yöneticiye bir bildirim e-postası gönder',
                     'customer'                                         => 'Kayıttan sonra müşteri hesap bilgilerini gönder',
                     'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönder',

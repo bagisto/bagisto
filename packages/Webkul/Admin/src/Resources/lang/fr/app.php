@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Général',
                     'group-separator'   => 'Séparateur de Groupe',
                     'name'              => 'Nom',
+                    'separator-note'    => 'Le champ :attribute ne peut accepter que les opérateurs virgule (,) et point (.)',
                     'save-btn'          => 'Enregistrer la devise',
                     'symbol'            => 'Symbole',
                     'title'             => 'Créer une nouvelle devise',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Envoyer une notification après l\'annulation d\'une commande',
+                    'cancel-order'                                     => 'Envoyer une notification au client après l\'annulation d\'une commande',
                     'cancel-order-mail-to-admin'                       => 'Envoyer un e-mail de notification à l\'administrateur après l\'annulation d\'une commande',
                     'customer'                                         => 'Envoyer les identifiants du compte client après l\'inscription',
                     'customer-registration-confirmation-mail-to-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après l\'inscription d\'un client',

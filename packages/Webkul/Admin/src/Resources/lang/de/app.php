@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Allgemein',
                     'group-separator'   => 'Gruppentrennzeichen',
                     'name'              => 'Name',
+                    'separator-note'    => 'Das :attribute-Feld kann nur die Operatoren Komma (,) und Punkt (.) akzeptieren',
                     'save-btn'          => 'Währung speichern',
                     'symbol'            => 'Symbol',
                     'title'             => 'Neue Währung erstellen',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Senden Sie eine Benachrichtigung nach der Stornierung einer Bestellung',
+                    'cancel-order'                                     => 'Senden Sie eine Benachrichtigung an den Kunden, nachdem eine Bestellung storniert wurde',
                     'cancel-order-mail-to-admin'                       => 'Senden Sie eine Benachrichtigungs-E-Mail an den Administrator nach der Stornierung einer Bestellung',
                     'customer'                                         => 'Senden Sie die Anmeldeinformationen des Kundenkontos nach der Registrierung',
                     'customer-registration-confirmation-mail-to-admin' => 'Senden Sie eine Bestätigungs-E-Mail an den Administrator nach der Kundenregistrierung',

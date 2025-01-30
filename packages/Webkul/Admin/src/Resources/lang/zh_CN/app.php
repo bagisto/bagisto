@@ -2530,6 +2530,7 @@ return [
                     'general'           => '常规',
                     'group-separator'   => '分组分隔符',
                     'name'              => '名称',
+                    'separator-note'    => ':attribute 字段只能接受逗号（,）和点（.）操作符',
                     'save-btn'          => '保存货币',
                     'symbol'            => '符号',
                     'title'             => '创建新货币',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => '取消订单后发送通知',
+                    'cancel-order'                                     => '取消订单后向客户发送通知',
                     'cancel-order-mail-to-admin'                       => '取消订单后向管理员发送通知邮件',
                     'customer'                                         => '注册后向客户发送账户凭证',
                     'customer-registration-confirmation-mail-to-admin' => '客户注册后向管理员发送确认邮件',

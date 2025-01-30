@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Algemeen',
                     'group-separator'   => 'Groepsscheidingsteken',
                     'name'              => 'Naam',
+                    'separator-note'    => 'Het :attribute veld kan alleen de komma (,) en punt (.) operators accepteren',
                     'save-btn'          => 'Valuta Opslaan',
                     'symbol'            => 'Symbool',
                     'title'             => 'Nieuwe Valuta Aanmaken',
@@ -3766,7 +3767,7 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Stuur een melding na het annuleren van een bestelling',
+                    'cancel-order'                                     => 'Stuur een melding naar de klant nadat een bestelling is geannuleerd',
                     'cancel-order-mail-to-admin'                       => 'Stuur een meldingsmail naar de beheerder na het annuleren van een bestelling',
                     'customer'                                         => 'Stuur de klantaccountgegevens na registratie',
                     'customer-registration-confirmation-mail-to-admin' => 'Stuur een bevestigingsmail naar de beheerder na klantregistratie',
