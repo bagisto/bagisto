@@ -34,8 +34,6 @@ class ConfigurationForm extends FormRequest
 
                 // Check delete key exist in the request
                 if (! $this->has("{$key}.delete")) {
-                    $validation = isset($field['validation']) && $field['validation'] ? $field['validation'] : 'nullable';
-
                     return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
                 }
 
