@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Criar Pedido para :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Por favor, selecione uma opção',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Links',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => 'Método de Pagamento',
                     'status'           => 'Status',
                     'title'            => 'Detalhes da Transação',
-                    'transaction-data' => 'Dados da Transação',
                     'transaction-id'   => 'ID da Transação',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Adicionar opção',
+                            'empty-info'        => 'Para criar opções personalizáveis rapidamente.',
+                            'empty-title'       => 'Adicionar opção',
+                            'info'              => 'Isso personalizará o produto simples.',
+                            'title'             => 'Item personalizável',
+
+                            'update-create' => [
+                                'is-required'               => 'É obrigatório',
+                                'max-characters'            => 'Máximo de caracteres',
+                                'name'                      => 'Título',
+                                'no'                        => 'Não',
+                                'price'                     => 'Preço',
+                                'save-btn'                  => 'Salvar',
+                                'supported-file-extensions' => 'Extensões de arquivo suportadas',
+                                'title'                     => 'Opção',
+                                'type'                      => 'Tipo',
+                                'yes'                       => 'Sim',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Adicionar opção',
+                                'delete'      => 'Excluir',
+                                'delete-btn'  => 'Excluir',
+                                'edit-btn'    => 'Editar',
+                                'empty-info'  => 'Para criar várias combinações de produtos rapidamente.',
+                                'empty-title' => 'Adicionar opção',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Texto',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Área de texto',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Caixa de seleção',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Rádio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Selecionar',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Seleção múltipla',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Data',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Data e hora',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Hora',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Arquivo',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiqueta',
+                                        'price'    => 'Preço',
+                                        'save-btn' => 'Salvar',
+                                        'title'    => 'Opção',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'O produto já está associado a um produto configurável, agrupado ou em pacote.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Adicionar Variante',
                         'delete-btn'        => 'Excluir',
@@ -2807,10 +2903,11 @@ return [
                         'title'   => 'Editar Categorias de Imposto',
                     ],
 
-                    'create-success'  => 'Nova Categoria de Imposto criada',
-                    'delete-failed'   => 'Falha ao excluir a Categoria de Imposto',
-                    'delete-success'  => 'Categoria de Imposto excluída com sucesso',
-                    'update-success'  => 'Categoria de Imposto atualizada com sucesso',
+                    'can-not-delete' => 'Categorias atribuídas às taxas de imposto não podem ser excluídas.',
+                    'create-success' => 'Nova Categoria de Imposto criada',
+                    'delete-failed'  => 'Falha ao excluir a Categoria de Imposto',
+                    'delete-success' => 'Categoria de Imposto excluída com sucesso',
+                    'update-success' => 'Categoria de Imposto atualizada com sucesso',
                 ],
             ],
 
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Definir chave do site, chave secreta e status.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Chave Secreta',
@@ -3869,19 +3966,23 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Enviar uma notificação após cancelar um pedido',
-                    'customer'                                         => 'Enviar as credenciais da conta do cliente após o registro',
-                    'customer-registration-confirmation-mail-to-admin' => 'Enviar um e-mail de confirmação para o administrador após o registro do cliente',
-                    'info'                                             => 'Configure as opções de estoque do produto para permitir pedidos em atraso, definir quantidades mínimas e máximas no carrinho e definir limites de estoque indisponível.',
-                    'new-admin'                                        => 'Enviar um e-mail de confirmação para o administrador após fazer um novo pedido',
-                    'new-inventory-source'                             => 'Enviar um e-mail de notificação para a fonte de inventário após criar um envio',
-                    'new-invoice'                                      => 'Enviar um e-mail de notificação para o cliente após criar uma nova fatura',
-                    'new-order'                                        => 'Enviar um e-mail de confirmação para o cliente após fazer um novo pedido',
-                    'new-refund'                                       => 'Enviar um e-mail de notificação para o cliente após criar um reembolso',
-                    'new-shipment'                                     => 'Enviar um e-mail de notificação para o cliente após criar um envio',
-                    'registration'                                     => 'Enviar um e-mail de confirmação após o registro do cliente',
+                    'cancel-order'                                     => 'Enviar uma notificação ao cliente após cancelar um pedido',
+                    'cancel-order-mail-to-admin'                       => 'Envie um e-mail de notificação ao administrador após cancelar um pedido',
+                    'customer'                                         => 'Envie as credenciais da conta do cliente após o registro',
+                    'customer-registration-confirmation-mail-to-admin' => 'Envie um e-mail de confirmação ao administrador após o registro do cliente',
+                    'info'                                             => 'Configure para receber e-mails de verificação de conta, confirmações de pedidos, atualizações sobre faturas, reembolsos, remessas e cancelamentos de pedidos.',
+                    'new-inventory-source'                             => 'Envie um e-mail de notificação para a fonte de inventário após criar um envio',
+                    'new-invoice'                                      => 'Envie um e-mail de notificação ao cliente após criar uma nova fatura',
+                    'new-invoice-mail-to-admin'                        => 'Envie um e-mail de notificação ao administrador após criar uma nova fatura',
+                    'new-order'                                        => 'Envie um e-mail de confirmação ao cliente após realizar um novo pedido',
+                    'new-order-mail-to-admin'                          => 'Envie um e-mail de confirmação ao administrador após realizar um novo pedido',
+                    'new-refund'                                       => 'Envie um e-mail de notificação ao cliente após criar um reembolso',
+                    'new-refund-mail-to-admin'                         => 'Envie um e-mail de notificação ao administrador após criar um novo reembolso',
+                    'new-shipment'                                     => 'Envie um e-mail de notificação ao cliente após criar uma remessa',
+                    'new-shipment-mail-to-admin'                       => 'Envie um e-mail de notificação ao administrador após criar uma nova remessa',
+                    'registration'                                     => 'Envie um e-mail de confirmação após o registro do cliente',
                     'title'                                            => 'Notificações',
-                    'verification'                                     => 'Enviar um e-mail de verificação após o registro do cliente',
+                    'verification'                                     => 'Envie um e-mail de verificação após o registro do cliente',
                 ],
             ],
 

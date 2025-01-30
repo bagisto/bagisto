@@ -140,7 +140,6 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertJsonValidationErrorFor('marketing_event_id')
         ->assertJsonValidationErrorFor('channel_id')
         ->assertJsonValidationErrorFor('customer_group_id')
-        ->assertJsonValidationErrorFor('status')
         ->assertUnprocessable();
 });
 

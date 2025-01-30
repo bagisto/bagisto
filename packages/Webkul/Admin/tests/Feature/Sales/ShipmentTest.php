@@ -439,12 +439,19 @@ it('should store the shipment to the order', function () {
     ]);
 });
 
-it('should store the shipment to the order and send email to the admin', function () {
+it('should store the shipment to the order and send email to the customer and admin and also send a mail to inventory source', function () {
     // Arrange.
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.new_inventory_source',
+    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.new_shipment')->update([
+        'value' => 1,
+    ]);
+
+    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.new_shipment_mail_to_admin')->update([
+        'value' => 1,
+    ]);
+
+    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.new_inventory_source')->update([
         'value' => 1,
     ]);
 

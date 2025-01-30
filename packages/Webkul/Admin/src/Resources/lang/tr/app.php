@@ -190,6 +190,11 @@ return [
                 'title'                   => ':name için Sipariş Oluştur',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Yok',
+                        'total-amount' => 'Toplam Tutar',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Lütfen bir seçenek seçin',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Bağlantılar',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Yok',
+                        'total-amount' => 'Toplam Tutar',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => 'Ödeme Yöntemi',
                     'status'           => 'Durum',
                     'title'            => 'İşlem Detayları',
-                    'transaction-data' => 'İşlem Verileri',
                     'transaction-id'   => 'İşlem ID',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Seçenek ekle',
+                            'empty-info'        => 'Özelleştirilebilir seçenekler oluşturmak için.',
+                            'empty-title'       => 'Seçenek ekle',
+                            'info'              => 'Bu, basit ürünü özelleştirecektir.',
+                            'title'             => 'Özelleştirilebilir Öğe',
+
+                            'update-create' => [
+                                'is-required'               => 'Gerekli mi',
+                                'max-characters'            => 'Maksimum Karakter',
+                                'name'                      => 'Başlık',
+                                'no'                        => 'Hayır',
+                                'price'                     => 'Fiyat',
+                                'save-btn'                  => 'Kaydet',
+                                'supported-file-extensions' => 'Desteklenen Dosya Uzantıları',
+                                'title'                     => 'Seçenek',
+                                'type'                      => 'Tür',
+                                'yes'                       => 'Evet',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Seçenek ekle',
+                                'delete'      => 'Sil',
+                                'delete-btn'  => 'Sil',
+                                'edit-btn'    => 'Düzenle',
+                                'empty-info'  => 'Çeşitli ürün kombinasyonları oluşturmak için.',
+                                'empty-title' => 'Seçenek ekle',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Metin',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Metin Alanı',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Onay Kutusu',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radyo',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Seç',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Çoklu Seçim',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Tarih',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Tarih ve Saat',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Saat',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Dosya',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiket',
+                                        'price'    => 'Fiyat',
+                                        'save-btn' => 'Kaydet',
+                                        'title'    => 'Seçenek',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Bu ürün zaten başka bir ürünle ilişkilendirilmiş.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Çeşit Ekle',
                         'delete-btn'        => 'Sil',
@@ -2807,6 +2903,7 @@ return [
                         'title'   => 'Vergi Kategorilerini Düzenle',
                     ],
 
+                    'can-not-delete' => 'Vergi Oranı Atanmış Kategoriler silinemez.',
                     'create-success' => 'Yeni Vergi Kategorisi Oluşturuldu',
                     'delete-failed'  => 'Vergi Kategorisi Silme Başarısız',
                     'delete-success' => 'Vergi Kategorisi Başarıyla Silindi',
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Site anahtarını, gizli anahtarını ve durumunu ayarlayın.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Gizli Anahtar',
@@ -3869,16 +3966,20 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Bir sipariş iptal edildikten sonra bildirim gönder',
-                    'customer'                                         => 'Kayıt olduktan sonra müşteri hesap bilgilerini gönder',
+                    'cancel-order'                                     => 'Sipariş iptal edildikten sonra müşteriye bildirim gönder',
+                    'cancel-order-mail-to-admin'                       => 'Sipariş iptal edildikten sonra yöneticiye bir bildirim e-postası gönder',
+                    'customer'                                         => 'Kayıttan sonra müşteri hesap bilgilerini gönder',
                     'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönder',
-                    'info'                                             => 'Geri siparişlere izin vermek için ürün stok seçeneklerini yapılandırın, minimum ve maksimum sepet miktarlarını ayarlayın ve stok dışı eşiklerini tanımlayın.',
-                    'new-admin'                                        => 'Yeni bir sipariş verildikten sonra yöneticiye bir onay e-postası gönder',
-                    'new-inventory-source'                             => 'Bir sevkiyat oluşturduktan sonra envanter kaynağına bir bildirim e-postası gönder',
-                    'new-invoice'                                      => 'Yeni bir fatura oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'info'                                             => 'Hesap doğrulaması, sipariş onayları, faturalar, iadeler, gönderimler ve sipariş iptalleri hakkında e-postalar almak için yapılandırın.',
+                    'new-inventory-source'                             => 'Gönderim oluşturulduktan sonra envanter kaynağına bir bildirim e-postası gönder',
+                    'new-invoice'                                      => 'Yeni bir fatura oluşturulduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-invoice-mail-to-admin'                        => 'Yeni bir fatura oluşturulduktan sonra yöneticiye bir bildirim e-postası gönder',
                     'new-order'                                        => 'Yeni bir sipariş verildikten sonra müşteriye bir onay e-postası gönder',
-                    'new-refund'                                       => 'Bir iade oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
-                    'new-shipment'                                     => 'Bir sevkiyat oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-order-mail-to-admin'                          => 'Yeni bir sipariş verildikten sonra yöneticiye bir onay e-postası gönder',
+                    'new-refund'                                       => 'Bir iade oluşturulduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-refund-mail-to-admin'                         => 'Yeni bir iade oluşturulduktan sonra yöneticiye bir bildirim e-postası gönder',
+                    'new-shipment'                                     => 'Bir gönderim oluşturulduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-shipment-mail-to-admin'                       => 'Yeni bir gönderim oluşturulduktan sonra yöneticiye bir bildirim e-postası gönder',
                     'registration'                                     => 'Müşteri kaydından sonra bir onay e-postası gönder',
                     'title'                                            => 'Bildirimler',
                     'verification'                                     => 'Müşteri kaydından sonra bir doğrulama e-postası gönder',

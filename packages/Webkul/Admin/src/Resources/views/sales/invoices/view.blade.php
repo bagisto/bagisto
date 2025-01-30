@@ -155,11 +155,26 @@
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
                                             <!-- Item Additional Details -->
-                                            <p class="text-gray-600 dark:text-gray-300">
-                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                @endforeach
-                                            </p>
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @if (
+                                                        ! isset($attribute['attribute_type'])
+                                                        || $attribute['attribute_type'] !== 'file'
+                                                    )
+                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                    @else
+                                                        {{ $attribute['attribute_name'] }} :
+
+                                                        <a
+                                                            href="{{ Storage::url($attribute['option_label']) }}"
+                                                            class="text-blue-600 hover:underline"
+                                                            download="{{ File::basename($attribute['option_label']) }}"
+                                                        >
+                                                            {{ File::basename($attribute['option_label']) }}
+                                                        </a>
+                                                    @endif
+                                                </p>
+                                            @endforeach
                                         @endif
 
                                         <!--SKU -->
@@ -191,7 +206,7 @@
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.price-excl-tax', ['price' => core()->formatBasePrice($item->base_price)])
                                         </p>
-                                        
+
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.price-incl-tax', ['price' => core()->formatBasePrice($item->base_price_incl_tax)])
                                         </p>
@@ -222,7 +237,7 @@
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.sub-total-excl-tax', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                         </p>
-                                        
+
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.sub-total-incl-tax', ['sub_total' => core()->formatBasePrice($item->base_total_incl_tax)])
                                         </p>
@@ -244,7 +259,7 @@
                             <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.invoices.view.sub-total-summary-excl-tax')
                             </p>
-                            
+
                             <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.invoices.view.sub-total-summary-incl-tax')
                             </p>
@@ -256,22 +271,22 @@
 
                         @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.invoices.view.shipping-and-handling-excl-tax')                    
+                                @lang('admin::app.sales.invoices.view.shipping-and-handling-excl-tax')
                             </p>
-                            
+
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.invoices.view.shipping-and-handling-incl-tax')                    
+                                @lang('admin::app.sales.invoices.view.shipping-and-handling-incl-tax')
                             </p>
                         @else
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.invoices.view.shipping-and-handling')                    
+                                @lang('admin::app.sales.invoices.view.shipping-and-handling')
                             </p>
                         @endif
 
                         <p class="!leading-5 text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.invoices.view.summary-tax')
                         </p>
-                        
+
                         @if ($invoice->base_discount_amount > 0)
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.invoices.view.summary-discount')
@@ -293,7 +308,7 @@
                             <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_sub_total) }}
                             </p>
-                            
+
                             <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_sub_total_incl_tax) }}
                             </p>
@@ -312,7 +327,7 @@
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
                             </p>
-                            
+
                             <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_shipping_amount_incl_tax) }}
                             </p>

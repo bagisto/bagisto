@@ -3,6 +3,11 @@
 namespace Webkul\Shop\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Shop\Listeners\Customer;
+use Webkul\Shop\Listeners\Invoice;
+use Webkul\Shop\Listeners\Order;
+use Webkul\Shop\Listeners\Refund;
+use Webkul\Shop\Listeners\Shipment;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,48 +17,54 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        /**
+         * Customer related events.
+         */
         'customer.registration.after' => [
-            'Webkul\Shop\Listeners\Customer@afterCreated',
+            [Customer::class, 'afterCreated'],
         ],
 
         'customer.password.update.after' => [
-            'Webkul\Shop\Listeners\Customer@afterPasswordUpdated',
+            [Customer::class, 'afterPasswordUpdated'],
         ],
 
         'customer.subscription.after' => [
-            'Webkul\Shop\Listeners\Customer@afterSubscribed',
+            [Customer::class, 'afterSubscribed'],
         ],
 
         'customer.note.create.after' => [
-            'Webkul\Shop\Listeners\Customer@afterNoteCreated',
+            [Customer::class, 'afterNoteCreated'],
         ],
 
+        /**
+         * Sales related events.
+         */
         'checkout.order.save.after' => [
-            'Webkul\Shop\Listeners\Order@afterCreated',
+            [Order::class, 'afterCreated'],
         ],
 
         'sales.order.cancel.after' => [
-            'Webkul\Shop\Listeners\Order@afterCanceled',
+            [Order::class, 'afterCanceled'],
         ],
 
         'sales.order.comment.create.after' => [
-            'Webkul\Shop\Listeners\Order@afterCommented',
+            [Order::class, 'afterCommented'],
         ],
 
         'sales.invoice.save.after' => [
-            'Webkul\Shop\Listeners\Invoice@afterCreated',
+            [Invoice::class, 'afterCreated'],
         ],
 
         'sales.invoice.send_duplicate_email' => [
-            'Webkul\Shop\Listeners\Invoice@afterCreated',
+            [Invoice::class, 'afterCreated'],
         ],
 
         'sales.shipment.save.after' => [
-            'Webkul\Shop\Listeners\Shipment@afterCreated',
+            [Shipment::class, 'afterCreated'],
         ],
 
         'sales.refund.save.after' => [
-            'Webkul\Shop\Listeners\Refund@afterCreated',
+            [Refund::class, 'afterCreated'],
         ],
     ];
 }

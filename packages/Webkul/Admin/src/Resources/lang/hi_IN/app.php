@@ -190,6 +190,11 @@ return [
                 'title'                   => ':name के लिए आदेश बनाएं',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'कृपया एक विकल्प चुनें',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'लिंक',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => 'भुगतान का तरीका',
                     'status'           => 'स्थिति',
                     'title'            => 'लेन-देन का विवरण',
-                    'transaction-data' => 'लेन-देन डेटा',
                     'transaction-id'   => 'लेन-देन आईडी',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'विकल्प जोड़ें',
+                            'empty-info'        => 'त्वरित रूप से अनुकूलन विकल्प बनाने के लिए।',
+                            'empty-title'       => 'विकल्प जोड़ें',
+                            'info'              => 'यह साधारण उत्पाद को अनुकूलित करेगा।',
+                            'title'             => 'अनुकूलन योग्य आइटम',
+
+                            'update-create' => [
+                                'is-required'               => 'आवश्यक है',
+                                'max-characters'            => 'अधिकतम वर्ण',
+                                'name'                      => 'शीर्षक',
+                                'no'                        => 'नहीं',
+                                'price'                     => 'मूल्य',
+                                'save-btn'                  => 'सहेजें',
+                                'supported-file-extensions' => 'समर्थित फ़ाइल एक्सटेंशन्स',
+                                'title'                     => 'विकल्प',
+                                'type'                      => 'प्रकार',
+                                'yes'                       => 'हाँ',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'विकल्प जोड़ें',
+                                'delete'      => 'हटाएं',
+                                'delete-btn'  => 'हटाएं',
+                                'edit-btn'    => 'संपादित करें',
+                                'empty-info'  => 'त्वरित रूप से विभिन्न उत्पाद संयोजन बनाने के लिए।',
+                                'empty-title' => 'विकल्प जोड़ें',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'पाठ',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'पाठ क्षेत्र',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'चेकबॉक्स',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'रेडियो',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'चयन करें',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'मल्टीसेलेक्ट',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'तारीख',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'तारीख और समय',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'समय',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'फ़ाइल',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'लेबल',
+                                        'price'    => 'मूल्य',
+                                        'save-btn' => 'सहेजें',
+                                        'title'    => 'विकल्प',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'यह उत्पाद पहले से ही एक कॉन्फिगरेबल, ग्रुप्ड या बंडल उत्पाद के साथ जुड़ा हुआ है।',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'वेरिएंट जोड़ें',
                         'delete-btn'        => 'हटाएं',
@@ -2807,6 +2903,7 @@ return [
                         'title' => 'कर श्रेणियाँ संपादित करें',
                     ],
 
+                    'can-not-delete' => 'कर दर असाइन की गई श्रेणियाँ हटाई नहीं जा सकतीं।',
                     'create-success' => 'नई कर श्रेणी बनाई गई',
                     'delete-failed'  => 'कर श्रेणी हटाने में विफल हुआ',
                     'delete-success' => 'कर श्रेणी सफलतापूर्वक हटाई गई',
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'साइट कुंजी, गुप्त कुंजी और स्थिति सेट करें।',
-                    'title' => 'कैप्चा',
+                    'title' => 'Google कैप्चा',
 
                     'credentials' => [
                         'secret-key' => 'गुप्त कुंजी',
@@ -3869,19 +3966,23 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Send a notification after canceling an order',
-                    'customer'                                         => 'Send the customer account credentials after registration',
-                    'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info'                                             => 'बैक ऑर्डर्स की अनुमति देने, कार्ट के न्यूनतम और अधिकतम मात्रा सेट करने, और अस्टॉक की थ्रेशोल्ड को परिभाषित करने के लिए प्रोडक्ट स्टॉक विकल्प कॉन्फ़िगर करें।',
-                    'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
-                    'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
-                    'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',
-                    'new-order'                                        => 'Send a confirmation e-mail to the customer after placing a new order',
-                    'new-refund'                                       => 'Send a notification e-mail to the customer after creating a refund',
-                    'new-shipment'                                     => 'Send a notification e-mail to the customer after creating a shipment',
-                    'registration'                                     => 'Send a confirmation e-mail after customer registration',
-                    'title'                                            => 'Notifications',
-                    'verification'                                     => 'Send a verification e-mail after customer registration',
+                    'cancel-order'                                     => 'एक आदेश रद्द करने के बाद ग्राहक को सूचना भेजें',
+                    'cancel-order-mail-to-admin'                       => 'ऑर्डर रद्द करने के बाद प्रशासक को ई-मेल सूचना भेजें',
+                    'customer'                                         => 'पंजीकरण के बाद ग्राहक खाते का विवरण भेजें',
+                    'customer-registration-confirmation-mail-to-admin' => 'ग्राहक पंजीकरण के बाद प्रशासक को पुष्टिकरण ई-मेल भेजें',
+                    'info'                                             => 'खाता सत्यापन, ऑर्डर पुष्टिकरण, चालानों, धनवापसी, शिपमेंट्स, और ऑर्डर रद्दीकरण के लिए ईमेल प्राप्त करने के लिए कॉन्फ़िगर करें।',
+                    'new-inventory-source'                             => 'शिपमेंट बनाने के बाद इन्वेंट्री स्रोत को एक सूचना ई-मेल भेजें',
+                    'new-invoice'                                      => 'नया चालान बनाने के बाद ग्राहक को एक सूचना ई-मेल भेजें',
+                    'new-invoice-mail-to-admin'                        => 'नया चालान बनाने के बाद प्रशासक को एक सूचना ई-मेल भेजें',
+                    'new-order'                                        => 'नया ऑर्डर करने के बाद ग्राहक को पुष्टिकरण ई-मेल भेजें',
+                    'new-order-mail-to-admin'                          => 'नया ऑर्डर करने के बाद प्रशासक को पुष्टिकरण ई-मेल भेजें',
+                    'new-refund'                                       => 'रिफंड बनाने के बाद ग्राहक को एक सूचना ई-मेल भेजें',
+                    'new-refund-mail-to-admin'                         => 'नया रिफंड बनाने के बाद प्रशासक को एक सूचना ई-मेल भेजें',
+                    'new-shipment'                                     => 'शिपमेंट बनाने के बाद ग्राहक को एक सूचना ई-मेल भेजें',
+                    'new-shipment-mail-to-admin'                       => 'नया शिपमेंट बनाने के बाद प्रशासक को एक सूचना ई-मेल भेजें',
+                    'registration'                                     => 'ग्राहक पंजीकरण के बाद एक पुष्टिकरण ई-मेल भेजें',
+                    'title'                                            => 'सूचनाएं',
+                    'verification'                                     => 'ग्राहक पंजीकरण के बाद एक सत्यापन ई-मेल भेजें',
                 ],
             ],
 

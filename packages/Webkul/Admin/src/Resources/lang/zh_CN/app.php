@@ -190,6 +190,11 @@ return [
                 'title'                   => '为 :name 创建订单',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+
                     'configurable' => [
                         'select-options' => '请选择一个选项',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => '链接',
+                    ],
+
+                    'virtual' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => '付款方式',
                     'status'           => '状态',
                     'title'            => '交易详情',
-                    'transaction-data' => '交易数据',
                     'transaction-id'   => '交易 ID',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => '添加选项',
+                            'empty-info'        => '快速创建可定制选项。',
+                            'empty-title'       => '添加选项',
+                            'info'              => '这将定制简单的产品。',
+                            'title'             => '可定制项目',
+
+                            'update-create' => [
+                                'is-required'               => '是否必填',
+                                'max-characters'            => '最大字符数',
+                                'name'                      => '标题',
+                                'no'                        => '否',
+                                'price'                     => '价格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => '支持的文件扩展名',
+                                'title'                     => '选项',
+                                'type'                      => '类型',
+                                'yes'                       => '是',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => '添加选项',
+                                'delete'      => '删除',
+                                'delete-btn'  => '删除',
+                                'edit-btn'    => '编辑',
+                                'empty-info'  => '快速创建不同产品组合。',
+                                'empty-title' => '添加选项',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => '文本',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => '文本区域',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => '复选框',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => '单选框',
+                                    ],
+
+                                    'select' => [
+                                        'title' => '选择',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => '多选',
+                                    ],
+
+                                    'date' => [
+                                        'title' => '日期',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => '日期和时间',
+                                    ],
+
+                                    'time' => [
+                                        'title' => '时间',
+                                    ],
+
+                                    'file' => [
+                                        'title' => '文件',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => '标签',
+                                        'price'    => '价格',
+                                        'save-btn' => '保存',
+                                        'title'    => '选项',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => '产品已关联到配置、组或捆绑产品。',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => '添加变体',
                         'delete-btn'        => '删除',
@@ -2807,6 +2903,7 @@ return [
                         'title'   => '编辑税收分类',
                     ],
 
+                    'can-not-delete' => '分配了税率的类别无法删除。',
                     'create-success' => '新税收分类已创建',
                     'delete-failed'  => '税收分类删除失败',
                     'delete-success' => '税收分类已成功删除',
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => '设置站点密钥、密钥和状态。',
-                    'title' => '验证码',
+                    'title' => 'Google 验证码',
 
                     'credentials' => [
                         'secret-key' => '密钥',
@@ -3869,16 +3966,20 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => '订单取消后发送通知',
-                    'customer'                                         => '注册后发送客户账户信息',
-                    'customer-registration-confirmation-mail-to-admin' => '客户注册后发送确认邮件给管理员',
-                    'info'                                             => '配置产品库存选项，允许超售订单，设置购物车的最小和最大数量，并定义缺货阈值。',
-                    'new-admin'                                        => '新订单创建后发送确认邮件给管理员',
-                    'new-inventory-source'                             => '发货创建后发送通知邮件给库存来源',
-                    'new-invoice'                                      => '新发票创建后发送通知邮件给客户',
-                    'new-order'                                        => '新订单创建后发送确认邮件给客户',
-                    'new-refund'                                       => '退款创建后发送通知邮件给客户',
-                    'new-shipment'                                     => '发货创建后发送通知邮件给客户',
+                    'cancel-order'                                     => '取消订单后向客户发送通知',
+                    'cancel-order-mail-to-admin'                       => '取消订单后向管理员发送通知邮件',
+                    'customer'                                         => '注册后向客户发送账户凭证',
+                    'customer-registration-confirmation-mail-to-admin' => '客户注册后向管理员发送确认邮件',
+                    'info'                                             => '配置接收账户验证、订单确认、发票更新、退款、发货和订单取消的邮件。',
+                    'new-inventory-source'                             => '创建发货后向库存来源发送通知邮件',
+                    'new-invoice'                                      => '创建新发票后向客户发送通知邮件',
+                    'new-invoice-mail-to-admin'                        => '创建新发票后向管理员发送通知邮件',
+                    'new-order'                                        => '下新订单后向客户发送确认邮件',
+                    'new-order-mail-to-admin'                          => '下新订单后向管理员发送确认邮件',
+                    'new-refund'                                       => '创建退款后向客户发送通知邮件',
+                    'new-refund-mail-to-admin'                         => '创建新退款后向管理员发送通知邮件',
+                    'new-shipment'                                     => '创建发货后向客户发送通知邮件',
+                    'new-shipment-mail-to-admin'                       => '创建新发货后向管理员发送通知邮件',
                     'registration'                                     => '客户注册后发送确认邮件',
                     'title'                                            => '通知',
                     'verification'                                     => '客户注册后发送验证邮件',

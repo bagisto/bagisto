@@ -70,12 +70,12 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.before') !!}
 
                     <!-- Cart Item Listing -->
-                    <div 
-                        class="mt-9 grid gap-12 max-md:mt-2.5 max-md:gap-5" 
+                    <div
+                        class="mt-9 grid gap-12 max-md:mt-2.5 max-md:gap-5"
                         v-if="cart?.items?.length"
                     >
-                        <div 
-                            class="flex gap-x-5 max-md:gap-x-4" 
+                        <div
+                            class="flex gap-x-5 max-md:gap-x-4"
                             v-for="item in cart?.items"
                         >
                             <!-- Cart Item Image -->
@@ -166,14 +166,27 @@
                                         class="grid gap-2"
                                         v-show="item.option_show"
                                     >
-                                        <template v-for="option in item.options">
+                                        <template v-for="attribute in item.options">
                                             <div class="max-md:grid max-md:gap-0.5">
                                                 <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
-                                                    @{{ option.attribute_name + ':' }}
+                                                    @{{ attribute.attribute_name + ':' }}
                                                 </p>
-        
+
                                                 <p class="text-sm max-sm:text-xs">
-                                                    @{{ option.option_label }}
+                                                    <template v-if="attribute?.attribute_type === 'file'">
+                                                        <a
+                                                            :href="attribute.file_url"
+                                                            class="text-blue-700"
+                                                            target="_blank"
+                                                            :download="attribute.file_name"
+                                                        >
+                                                            @{{ attribute.file_name }}
+                                                        </a>
+                                                    </template>
+
+                                                    <template v-else>
+                                                        @{{ attribute.option_label }}
+                                                    </template>
                                                 </p>
                                             </div>
                                         </template>
@@ -196,7 +209,7 @@
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.after') !!}
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.before') !!}
-                                
+
                                 <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
@@ -251,7 +264,7 @@
                             <p class="text-sm font-medium text-zinc-500">
                                 @lang('shop::app.checkout.cart.mini-cart.subtotal')
                             </p>
-                        
+
                         <template v-if="displayTax.subtotal == 'including_tax'">
                             <p class="text-3xl font-semibold max-md:text-base">
                                 @{{ cart.formatted_sub_total_incl_tax }}
@@ -261,10 +274,10 @@
                         <template v-else-if="displayTax.subtotal == 'both'">
                             <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
                                 @{{ cart.formatted_sub_total_incl_tax }}
-                                
+
                                 <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
                                     @lang('shop::app.checkout.cart.mini-cart.excl-tax')
-                                    
+
                                     <span class="font-medium text-black">@{{ cart.formatted_sub_total }}</span>
                                 </span>
                             </p>
@@ -294,7 +307,7 @@
                                     stroke="currentColor"
                                     stroke-width="4"
                                 ></circle>
-                
+
                                 <path
                                     class="opacity-75"
                                     fill="currentColor"
@@ -431,7 +444,7 @@
                                 this.cart = response.data.data;
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                
+
                                 this.isLoading = false;
                             })
                             .catch(error => {

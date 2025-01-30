@@ -132,7 +132,7 @@ class SmartButton extends Paypal
     }
 
     /**
-     * Return paypal redirect url
+     * Return paypal redirect url.
      *
      * @return string
      */

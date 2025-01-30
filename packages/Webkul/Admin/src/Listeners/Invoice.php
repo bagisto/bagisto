@@ -40,7 +40,7 @@ class Invoice extends Base
     public function sendMail($invoice)
     {
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_invoice')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_invoice_mail_to_admin')) {
                 return;
             }
 

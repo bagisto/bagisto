@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\Address;
 use Webkul\Core\Rules\Code;
 use Webkul\Core\Rules\PhoneNumber;
+use Webkul\Core\Rules\PostCode;
 
 class InventorySourceRequest extends FormRequest
 {
@@ -39,7 +40,7 @@ class InventorySourceRequest extends FormRequest
             'country'        => ['required'],
             'state'          => ['required'],
             'city'           => ['required'],
-            'postcode'       => ['required'],
+            'postcode'       => ['required', new PostCode],
         ];
     }
 }

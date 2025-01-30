@@ -3,7 +3,7 @@ name: Linting Tests
 on: [push, pull_request]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   linting_tests:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-systems: [ubuntu-latest]
-        php-versions: ['8.2', '8.3']
+        php-versions: ['8.3']
 
     name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 
@@ -20,16 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Install Pint
+        run: composer global require laravel/pint
+        env:
+          COMPOSER_HOME: ${{ runner.temp }}/composer
+
+      - name: Run Pint
+        run: ${{ runner.temp }}/composer/vendor/bin/pint
+
+      - name: Commit Linted Files
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
-          ini-values: error_reporting=E_ALL
-          tools: composer:v2
-
-      - name: Running Composer Install
-        run: composer install
-
-      - name: Running Pint Test
-        run: vendor/bin/pint --test -v
+          commit_message: "chore: applied pint changes"

@@ -32,11 +32,11 @@
                     {{ $refund->order->shipping_address->company_name ?? '' }}<br/>
 
                     {{ $refund->order->shipping_address->name }}<br/>
-                    
+
                     {{ $refund->order->shipping_address->address }}<br/>
-                    
+
                     {{ $refund->order->shipping_address->postcode . " " . $refund->order->shipping_address->city }}<br/>
-                    
+
                     {{ $refund->order->shipping_address->state }}<br/>
 
                     ---<br/>
@@ -64,11 +64,11 @@
                     {{ $refund->order->billing_address->company_name ?? '' }}<br/>
 
                     {{ $refund->order->billing_address->name }}<br/>
-                    
+
                     {{ $refund->order->billing_address->address }}<br/>
-                    
+
                     {{ $refund->order->billing_address->postcode . " " . $refund->order->billing_address->city }}<br/>
-                    
+
                     {{ $refund->order->billing_address->state }}<br/>
 
                     ---<br/>
@@ -104,7 +104,7 @@
                     @foreach (['name', 'price', 'qty'] as $item)
                         <th style="text-align: left;padding: 15px">
                             @lang('shop::app.emails.orders.' . $item)
-                        </th>    
+                        </th>
                     @endforeach
                 </tr>
             </thead>
@@ -118,7 +118,24 @@
                             @if (isset($item->additional['attributes']))
                                 <div>
                                     @foreach ($item->additional['attributes'] as $attribute)
-                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                        @if (
+                                            ! isset($attribute['attribute_type'])
+                                            || $attribute['attribute_type'] !== 'file'
+                                        )
+                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                        @else
+                                            {{ $attribute['attribute_name'] }} :
+
+                                            <a
+                                                href="{{ Storage::url($attribute['option_label']) }}"
+                                                class="text-blue-600 hover:underline"
+                                                download="{{ File::basename($attribute['option_label']) }}"
+                                            >
+                                                {{ File::basename($attribute['option_label']) }}
+                                            </a>
+
+                                            <br>
+                                        @endif
                                     @endforeach
                                 </div>
                             @endif
@@ -216,7 +233,7 @@
                         {{ core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) }}
                     </span>
                 </div>
-                
+
                 <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                     <span>
                         @lang('shop::app.emails.orders.shipping-handling-incl-tax')

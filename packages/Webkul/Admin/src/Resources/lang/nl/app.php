@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Bestelling aanmaken voor :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Selecteer een optie',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Links',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
                     ],
                 ],
 
@@ -719,7 +729,6 @@ return [
                     'payment-method'   => 'Betalingsmethode',
                     'status'           => 'Status',
                     'title'            => 'Transactiegegevens',
-                    'transaction-data' => 'Transactiegegevens',
                     'transaction-id'   => 'Transactie-ID',
                 ],
             ],
@@ -859,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Optie toevoegen',
+                            'empty-info'        => 'Om snel aanpasbare opties te creëren.',
+                            'empty-title'       => 'Optie toevoegen',
+                            'info'              => 'Dit zal het eenvoudige product aanpassen.',
+                            'title'             => 'Aanpasbaar item',
+
+                            'update-create' => [
+                                'is-required'               => 'Is verplicht',
+                                'max-characters'            => 'Max. aantal tekens',
+                                'name'                      => 'Titel',
+                                'no'                        => 'Nee',
+                                'price'                     => 'Prijs',
+                                'save-btn'                  => 'Opslaan',
+                                'supported-file-extensions' => 'Ondersteunde bestandsextensies',
+                                'title'                     => 'Optie',
+                                'type'                      => 'Type',
+                                'yes'                       => 'Ja',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Optie toevoegen',
+                                'delete'      => 'Verwijderen',
+                                'delete-btn'  => 'Verwijderen',
+                                'edit-btn'    => 'Bewerken',
+                                'empty-info'  => 'Om snel verschillende productcombinaties te creëren.',
+                                'empty-title' => 'Optie toevoegen',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Tekst',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Tekstvak',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Selectievakje',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Selecteren',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Multiselect',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Datum',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Datum en tijd',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Tijd',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Bestand',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Label',
+                                        'price'    => 'Prijs',
+                                        'save-btn' => 'Opslaan',
+                                        'title'    => 'Optie',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'Het product is al gekoppeld aan een configureerbaar, gegroepeerd of gebundeld product.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Variant Toevoegen',
                         'delete-btn'        => 'Verwijderen',
@@ -2807,6 +2903,7 @@ return [
                         'title' => 'Belastingcategorieën Bewerken',
                     ],
 
+                    'can-not-delete' => 'Belastingtarieven toegewezen categorieën kunnen niet worden verwijderd.',
                     'create-success' => 'Nieuwe belastingcategorie aangemaakt',
                     'delete-failed'  => 'Verwijderen van belastingcategorie mislukt',
                     'delete-success' => 'Belastingcategorie succesvol verwijderd',
@@ -3767,7 +3864,7 @@ return [
 
                 'captcha' => [
                     'info'  => 'Stel site sleutel, geheime sleutel en status in.',
-                    'title' => 'Captcha',
+                    'title' => 'Google Captcha',
 
                     'credentials' => [
                         'secret-key' => 'Geheime Sleutel',
@@ -3869,19 +3966,23 @@ return [
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Stuur een melding na het annuleren van een bestelling',
+                    'cancel-order'                                     => 'Stuur een melding naar de klant nadat een bestelling is geannuleerd',
+                    'cancel-order-mail-to-admin'                       => 'Stuur een meldingsmail naar de beheerder na het annuleren van een bestelling',
                     'customer'                                         => 'Stuur de klantaccountgegevens na registratie',
                     'customer-registration-confirmation-mail-to-admin' => 'Stuur een bevestigingsmail naar de beheerder na klantregistratie',
-                    'info'                                             => 'Configureer productvoorraadopties om backorders toe te staan, stel minimale en maximale winkelwagenhoeveelheden in, en definieer drempels voor uitverkochte producten.',
-                    'new-admin'                                        => 'Stuur een bevestigingsmail naar de beheerder na het plaatsen van een nieuwe bestelling',
-                    'new-inventory-source'                             => 'Stuur een melding naar de voorraadbron na het maken van een zending',
-                    'new-invoice'                                      => 'Stuur een melding naar de klant na het maken van een nieuwe factuur',
+                    'info'                                             => 'Configureer om e-mails te ontvangen voor accountverificatie, bestelbevestigingen, updates over facturen, terugbetalingen, zendingen en orderannuleringen.',
+                    'new-inventory-source'                             => 'Stuur een meldingsmail naar de inventarisbron na het maken van een verzending',
+                    'new-invoice'                                      => 'Stuur een meldingsmail naar de klant na het aanmaken van een nieuwe factuur',
+                    'new-invoice-mail-to-admin'                        => 'Stuur een meldingsmail naar de beheerder na het aanmaken van een nieuwe factuur',
                     'new-order'                                        => 'Stuur een bevestigingsmail naar de klant na het plaatsen van een nieuwe bestelling',
-                    'new-refund'                                       => 'Stuur een melding naar de klant na het maken van een terugbetaling',
-                    'new-shipment'                                     => 'Stuur een melding naar de klant na het maken van een zending',
+                    'new-order-mail-to-admin'                          => 'Stuur een bevestigingsmail naar de beheerder na het plaatsen van een nieuwe bestelling',
+                    'new-refund'                                       => 'Stuur een meldingsmail naar de klant na het maken van een terugbetaling',
+                    'new-refund-mail-to-admin'                         => 'Stuur een meldingsmail naar de beheerder na het maken van een nieuwe terugbetaling',
+                    'new-shipment'                                     => 'Stuur een meldingsmail naar de klant na het maken van een zending',
+                    'new-shipment-mail-to-admin'                       => 'Stuur een meldingsmail naar de beheerder na het maken van een nieuwe zending',
                     'registration'                                     => 'Stuur een bevestigingsmail na klantregistratie',
                     'title'                                            => 'Meldingen',
-                    'verification'                                     => 'Stuur een verificatie-e-mail na klantregistratie',
+                    'verification'                                     => 'Stuur een verificatiemail na klantregistratie',
                 ],
             ],
 
