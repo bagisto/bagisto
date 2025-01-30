@@ -15,8 +15,5 @@
 <!--- Please specify the target branch for this pull request. -->
 - [ ] Target Branch: master 
 
-## Pint
-<!---  Please make sure all the pint tests are passed. -->
-
 ## Tailwind Reordering
 <!--- Please make sure all the Tailwind classes are reordered. -->
