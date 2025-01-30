@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\Http\Requests;
 
-use Webkul\Core\Rules\Decimal;
-use Webkul\Core\Rules\PostCode;
-use Webkul\Core\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\Decimal;
+use Webkul\Core\Rules\PhoneNumber;
+use Webkul\Core\Rules\PostCode;
 
 class ConfigurationForm extends FormRequest
 {
@@ -45,7 +45,7 @@ class ConfigurationForm extends FormRequest
     /**
      * Transform validation rules into an array and map custom validation rules
      *
-     * @param string|array $validation
+     * @param  string|array  $validation
      * @return array
      */
     protected function getValidationRules($validation)
@@ -54,10 +54,10 @@ class ConfigurationForm extends FormRequest
 
         return array_map(function ($rule) {
             return match ($rule) {
-                'phone'    => new PhoneNumber(),
-                'postcode' => new PostCode(),
-                'decimal'  => new Decimal(),
-                default => $rule,
+                'phone'    => new PhoneNumber,
+                'postcode' => new PostCode,
+                'decimal'  => new Decimal,
+                default    => $rule,
             };
         }, $validations);
     }
