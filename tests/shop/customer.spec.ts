@@ -22,7 +22,10 @@ test('Profile Edit', async ({page}) => {
     await page.getByPlaceholder('Phone').fill('987654323');
     await page.getByLabel('shop::app.customers.account.').selectOption('Male');
     await page.getByPlaceholder('Date of Birth').click();
-    await page.getByPlaceholder('Date of Birth').fill('2025-01-28');
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 1);
+    const formattedDate = date.toISOString().split('T')[0];
+    await page.getByPlaceholder('Date of Birth').fill(formattedDate);
     await page.getByRole('button', { name: 'Save' }).click();
 
     await page.waitForSelector('text=Profile updated successfully', { timeout: 5000 });
