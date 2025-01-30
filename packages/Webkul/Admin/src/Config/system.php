@@ -1221,11 +1221,11 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.vat-number',
                 'type'          => 'text',
                 'channel_based' => true,
-                'validation'    => 'phone',
             ], [
                 'name'          => 'contact',
                 'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
                 'type'          => 'text',
+                'validation'    => 'phone',
                 'channel_based' => true,
             ], [
                 'name'          => 'bank_details',
