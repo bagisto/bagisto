@@ -28,14 +28,5 @@ test('Remove', async ({ page }) => {
     await page.getByRole('button', { name: 'Remove' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.icon-cancel');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Item is successfully removed from the cart.', { timeout: 5000 });
 });
