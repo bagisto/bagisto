@@ -25,12 +25,22 @@ test('Create Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').click();
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Tax Rate', async ({page}) => {
@@ -58,12 +68,22 @@ test('Edit Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').click();
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Tax Rate', async ({page}) => {
@@ -78,12 +98,17 @@ test('Delete Tax Rate', async ({page}) => {
     await page.getByRole('link', { name: 'Tax Rates' }).click();
     await page.locator('div').filter({ hasText: /^1sasdasdweasAI2342344234423432\.0000$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Tax Category', async ({page}) => {
@@ -104,12 +129,22 @@ test('Create Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').click();
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Tax Category', async ({page}) => {
@@ -130,12 +165,22 @@ test('Edit Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').click();
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Tax Category', async ({page}) => {
@@ -149,10 +194,15 @@ test('Delete Tax Category', async ({page}) => {
     await page.getByRole('link', { name: 'Taxes' }).click();
     await page.locator('div').filter({ hasText: /^1kayuwe23w$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });

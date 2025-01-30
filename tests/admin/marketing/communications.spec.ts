@@ -16,12 +16,22 @@ test('Create Create Template', async ({page}) => {
     await page.locator('iframe[title="Rich Text Area"]').contentFrame().getByRole('paragraph').click();
     await page.locator('iframe[title="Rich Text Area"]').contentFrame().getByLabel('Rich Text Area. Press ALT-0').fill('Demo_wsdbwdhwasd');
     await page.getByRole('button', { name: 'Save Template' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Create Template', async ({page}) => {
@@ -40,12 +50,22 @@ test('Edit Create Template', async ({page}) => {
     await page.locator('iframe[title="Rich Text Area"]').contentFrame().getByRole('paragraph').click();
     await page.locator('iframe[title="Rich Text Area"]').contentFrame().getByLabel('Rich Text Area. Press ALT-0').fill('Demo_wsdbwdhwasd');
     await page.getByRole('button', { name: 'Save Template' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Create Template', async ({page}) => {
@@ -59,12 +79,17 @@ test('Delete Create Template', async ({page}) => {
     await page.getByRole('link', { name: 'Communications' }).click();
     await page.locator('div').filter({ hasText: /^1UserActive$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Event', async ({page}) => {
@@ -86,12 +111,22 @@ test('Create Event', async ({page}) => {
     await page.getByLabel('December 12,').click();
     await page.getByPlaceholder('Date').fill('2024-12-12');
     await page.getByRole('button', { name: 'Save Event' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Event', async ({page}) => {
@@ -113,12 +148,22 @@ test('Edit Event', async ({page}) => {
     await page.getByLabel('December 12,').click();
     await page.getByPlaceholder('Date').fill('2024-12-12');
     await page.getByRole('button', { name: 'Save Event' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Event', async ({page}) => {
@@ -133,12 +178,17 @@ test('Delete Event', async ({page}) => {
     await page.getByRole('link', { name: 'Events' }).click();
     await page.locator('div').filter({ hasText: /^2My2024-12-12$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Campaign', async ({page}) => {
@@ -163,12 +213,22 @@ test('Create Campaign', async ({page}) => {
     await page.locator('select[name="customer_group_id"]').selectOption('2');
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save Campaign' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Campaign', async ({page}) => {
@@ -193,12 +253,22 @@ test('Edit Campaign', async ({page}) => {
     await page.locator('select[name="customer_group_id"]').selectOption('2');
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save Campaign' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Campaign', async ({page}) => {
@@ -213,12 +283,17 @@ test('Delete Campaign', async ({page}) => {
     await page.getByRole('link', { name: 'Campaigns' }).click();
     await page.locator('div').filter({ hasText: /^1dfgsdefgdfgsdActive$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Newsletter Subscriber', async ({page}) => {
@@ -234,12 +309,22 @@ test('Edit Newsletter Subscriber', async ({page}) => {
     await page.locator('div').filter({ hasText: /^2TruetestUser@gmail\.coma$/ }).locator('a').first().click();
     await page.locator('select[name="is_subscribed"]').selectOption('0');
     await page.getByRole('button', { name: 'Save Subscriber' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Newsletter Subscriber', async ({page}) => {
@@ -254,10 +339,15 @@ test('Delete Newsletter Subscriber', async ({page}) => {
     await page.getByRole('link', { name: 'Newsletter Subscriptions' }).click();
     await page.locator('div').filter({ hasText: /^2FalsetestUser@gmail\.coma$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });

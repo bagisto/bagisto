@@ -18,12 +18,22 @@ test('Create URL Rewrite', async ({page}) => {
     await page.locator('select[name="redirect_type"]').selectOption('302');
     await page.locator('select[name="locale"]').selectOption('tr');
     await page.getByRole('button', { name: 'Save URL Rewrite' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit URL Rewrite', async ({page}) => {
@@ -45,12 +55,22 @@ test('Edit URL Rewrite', async ({page}) => {
     await page.locator('select[name="locale"]').selectOption('tr');
     await page.getByRole('button', { name: 'Save URL Rewrite' }).click();
 
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete URL Rewrite', async ({page}) => {
@@ -64,12 +84,17 @@ test('Delete URL Rewrite', async ({page}) => {
     await page.getByRole('link', { name: 'Search & SEO' }).click();
     await page.locator('.row > .flex > a:nth-child(2)').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Mass Delete URL Rewrite', async ({page}) => {
@@ -85,12 +110,17 @@ test('Mass Delete URL Rewrite', async ({page}) => {
     await page.getByRole('button', { name: 'Select Action ' }).click();
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Search Term', async ({page}) => {
@@ -111,12 +141,22 @@ test('Create Search Term', async ({page}) => {
     await page.locator('select[name="channel_id"]').selectOption('1');
     await page.locator('select[name="locale"]').selectOption('it');
     await page.getByRole('button', { name: 'Save Search Term' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Search Term', async ({page}) => {
@@ -137,12 +177,22 @@ test('Edit Search Term', async ({page}) => {
     await page.locator('select[name="channel_id"]').selectOption('1');
     await page.locator('select[name="locale"]').selectOption('it');
     await page.getByRole('button', { name: 'Save Search Term' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Search Term', async ({page}) => {
@@ -157,12 +207,17 @@ test('Delete Search Term', async ({page}) => {
     await page.getByRole('link', { name: 'Search Terms' }).click();
     await page.locator('.row > .flex > a:nth-child(2)').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Mass Delete Search Term', async ({page}) => {
@@ -179,12 +234,17 @@ test('Mass Delete Search Term', async ({page}) => {
     await page.getByRole('button', { name: 'Select Action ' }).click();
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Search Synonym', async ({page}) => {
@@ -203,12 +263,22 @@ test('Create Search Synonym', async ({page}) => {
     await page.getByPlaceholder('Terms').click();
     await page.getByPlaceholder('Terms').fill('Demo_sdjfghhfdw');
     await page.getByRole('button', { name: 'Save Search Synonym' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Search Synonym', async ({page}) => {
@@ -227,12 +297,22 @@ test('Edit Search Synonym', async ({page}) => {
     await page.getByPlaceholder('Terms').click();
     await page.getByPlaceholder('Terms').fill('Demo_sdjfghhfdw');
     await page.getByRole('button', { name: 'Save Search Synonym' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Search Synonym', async ({page}) => {
@@ -247,12 +327,17 @@ test('Delete Search Synonym', async ({page}) => {
     await page.getByRole('link', { name: 'Search Synonyms' }).click();
     await page.locator('div').filter({ hasText: /^1kahsygsdjfghhfdw$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Mass Delete Search Synonym', async ({page}) => {
@@ -270,12 +355,17 @@ test('Mass Delete Search Synonym', async ({page}) => {
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Sitemap', async ({page}) => {
@@ -294,12 +384,22 @@ test('Create Sitemap', async ({page}) => {
     await page.getByPlaceholder('Path').click();
     await page.getByPlaceholder('Path').fill('/public/');
     await page.getByRole('button', { name: 'Save Sitemap' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Sitemap', async ({page}) => {
@@ -318,12 +418,22 @@ test('Edit Sitemap', async ({page}) => {
     await page.getByPlaceholder('Path').click();
     await page.getByPlaceholder('Path').fill('/public/');
     await page.getByRole('button', { name: 'Save Sitemap' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Sitemap', async ({page}) => {
@@ -338,10 +448,15 @@ test('Delete Sitemap', async ({page}) => {
     await page.getByRole('link', { name: 'Sitemaps' }).click();
     await page.locator('div').filter({ hasText: /^1abc\.xml\/public\/http:\/\/192\.168\.15\.121\/test\/bagisto\/public\/storage\/public\/abc\.xml$/ }).locator('a').nth(2).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });

@@ -23,12 +23,22 @@ test('Create Customer', async ({page}) => {
     await page.getByLabel('December 3,').click();
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Customer', async ({page}) => {
@@ -59,12 +69,22 @@ test('Edit Customer', async ({page}) => {
     await page.getByLabel('December 3,').click();
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Add Address', async ({page}) => {
@@ -99,12 +119,22 @@ test('Add Address', async ({page}) => {
     await page.locator('#state').selectOption('DL');
     await page.locator('#default_address').nth(1).click();
     await page.getByRole('button', { name: 'Save Address' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Edit Address', async ({page}) => {
@@ -139,12 +169,22 @@ test('Edit Address', async ({page}) => {
     await page.locator('#state').selectOption('DL');
     await page.locator('#default_address').nth(1).click();
     await page.getByRole('button', { name: 'Save Address' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Set Default Address', async ({page}) => {
@@ -156,12 +196,17 @@ test('Set Default Address', async ({page}) => {
     await page.getByLabel('Sign In').click();
     await page.getByRole('link', { name: ' Customers' }).click();
     await page.getByRole('button', { name: 'Set as Default' }).first().click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Address', async ({page}) => {
@@ -175,12 +220,17 @@ test('Delete Address', async ({page}) => {
     await page.getByRole('link', { name: '' }).first().click();
     await page.getByText('Delete', { exact: true }).first().click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Add Note', async ({page}) => {
@@ -196,12 +246,22 @@ test('Add Note', async ({page}) => {
     await page.getByPlaceholder('Write Your Note here').fill('Demo_sjdhiude');
     await page.getByText('Notify Customer').click();
     await page.getByRole('button', { name: 'Submit Note' }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Delete Account', async ({page}) => {
@@ -215,12 +275,17 @@ test('Delete Account', async ({page}) => {
     await page.getByRole('link', { name: '' }).first().click();
     await page.getByText('Delete Account').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Create Order', async ({page}) => {
@@ -234,12 +299,22 @@ test('Create Order', async ({page}) => {
     await page.getByRole('link', { name: '' }).first().click();
     await page.getByText('Create Order').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('login as Customer', async ({page}) => {
@@ -254,12 +329,22 @@ test('login as Customer', async ({page}) => {
     const page3Promise = page.waitForEvent('popup');
     await page.getByRole('link', { name: ' Login as customer' }).click();
     const page3 = await page3Promise;
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
+
+        if (getError) {
+            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
+            errors.forEach(message => console.log(message));
+        } else {
+            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+            await page.click('.cursor-pointer.underline');
+            console.log(message);
+        }
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Mass Delete Customers', async ({page}) => {
@@ -276,12 +361,17 @@ test('Mass Delete Customers', async ({page}) => {
     await page.getByRole('button', { name: 'Select Action ' }).click();
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
 
 test('Mass Update Customers', async ({page}) => {
@@ -297,10 +387,15 @@ test('Mass Update Customers', async ({page}) => {
     await page.getByRole('button', { name: 'Select Action ' }).click();
     await page.getByRole('link', { name: 'Active', exact: true }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
-  try {
-    await page.waitForNavigation({ timeout: 5000 });
-    console.log(page.url());
-  } catch(e) {
-    console.log(page.url());
-  }
+
+    try {
+        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
+
+        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
+        await page.click('.cursor-pointer.underline');
+
+        console.log(message);
+    } catch(e) {
+        console.log(page.url());
+    }
 });
