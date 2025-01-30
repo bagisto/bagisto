@@ -2530,6 +2530,7 @@ return [
                     'general'           => '一般',
                     'group-separator'   => 'グループ区切り',
                     'name'              => '名前',
+                    'separator-note'    => ':attribute フィールドはカンマ (,) とドット (.) のみを受け付けます',
                     'save-btn'          => '通貨を保存',
                     'symbol'            => '記号',
                     'title'             => '新しい通貨を作成',

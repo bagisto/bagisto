@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Ogólne',
                     'group-separator'   => 'Separator Grup',
                     'name'              => 'Nazwa',
+                    'separator-note'    => 'Pole :attribute może akceptować tylko operatory przecinka (,) i kropki (.)',
                     'save-btn'          => 'Zapisz Walutę',
                     'symbol'            => 'Symbol',
                     'title'             => 'Utwórz nową Walutę',

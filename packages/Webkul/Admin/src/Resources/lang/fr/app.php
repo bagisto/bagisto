@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'Général',
                     'group-separator'   => 'Séparateur de Groupe',
                     'name'              => 'Nom',
+                    'separator-note'    => 'Le champ :attribute ne peut accepter que les opérateurs virgule (,) et point (.)',
                     'save-btn'          => 'Enregistrer la devise',
                     'symbol'            => 'Symbole',
                     'title'             => 'Créer une nouvelle devise',

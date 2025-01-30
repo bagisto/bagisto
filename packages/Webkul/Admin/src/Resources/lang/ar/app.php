@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'عام',
                     'group-separator'   => 'فاصل المجموعة',
                     'name'              => 'الاسم',
+                    'separator-note'    => 'حقل :attribute يمكنه قبول الفاصلة (,) والنقطة (.) فقط',
                     'save-btn'          => 'حفظ العملة',
                     'symbol'            => 'الرمز',
                     'title'             => 'إنشاء عملة جديدة',

@@ -2530,6 +2530,7 @@ return [
                     'general'           => 'General',
                     'group-separator'   => 'Separatore di Gruppo',
                     'name'              => 'Nombre',
+                    'separator-note'    => 'Il campo :attribute può accettare solo gli operatori virgola (,) e punto (.)',
                     'save-btn'          => 'Guardar Moneda',
                     'symbol'            => 'Símbolo',
                     'title'             => 'Crear Nueva Moneda',
