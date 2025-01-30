@@ -20,14 +20,5 @@ test('Review Product', async ({page}) => {
     await page.getByPlaceholder('Comment').fill('Great Product');
     await page.getByRole('button', { name: 'Submit Review' }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.icon-cancel');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Review submitted successfully.', { timeout: 5000 });
 });
