@@ -532,31 +532,31 @@ abstract class AbstractType
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
     {
         if ($skipSuperAttribute) {
-            $this->skipAttributes =array_merge(
+            $this->skipAttributes = array_merge(
                 $this->product->super_attributes->pluck('code')->toArray(),
                 $this->skipAttributes
             );
         }
-            
+
         if (! $group) {
             return $this->product->attribute_family->custom_attributes()->whereNotIn(
                 'attributes.code',
                 $this->skipAttributes
             )->get();
         }
-        
+
         return $group->custom_attributes()
-                ->select(
-                    'attributes.*',
-                    'attribute_translations.name as admin_name',
-                    'attribute_translations.locale',
-                )
-                ->whereNotIn('code', $this->skipAttributes)
-                ->leftJoin('attribute_translations', function ($join) {
-                    $join->on('attributes.id', '=', 'attribute_translations.attribute_id')
-                ->where('attribute_translations.locale', '=', app()->getLocale());
-                })
-                ->get();
+            ->select(
+                'attributes.*',
+                'attribute_translations.name as admin_name',
+                'attribute_translations.locale',
+            )
+            ->whereNotIn('code', $this->skipAttributes)
+            ->leftJoin('attribute_translations', function ($join) {
+                $join->on('attributes.id', '=', 'attribute_translations.attribute_id')
+                    ->where('attribute_translations.locale', '=', app()->getLocale());
+            })
+            ->get();
     }
 
     /**

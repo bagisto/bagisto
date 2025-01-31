@@ -267,9 +267,6 @@ class Bundle extends AbstractType
             }
 
             $cartProduct[0]['parent_id'] = $this->product->id;
-            $cartProduct[0]['quantity'] = $data['quantity'];
-            $cartProduct[0]['total_weight'] = $cartProduct[0]['weight'] * $data['quantity'];
-            $cartProduct[0]['base_total_weight'] = $cartProduct[0]['weight'] * $data['quantity'];
 
             $products = array_merge($products, $cartProduct);
 
@@ -281,10 +278,10 @@ class Bundle extends AbstractType
             $products[0]['total_incl_tax'] += $cartProduct[0]['total'];
             $products[0]['base_total'] += $cartProduct[0]['base_total'];
             $products[0]['base_total_incl_tax'] += $cartProduct[0]['base_total'];
-            $products[0]['weight'] += ($cartProduct[0]['weight'] * $products[0]['quantity']);
-            $products[0]['total_weight'] += ($cartProduct[0]['total_weight'] * $products[0]['quantity']);
-            $products[0]['base_total_weight'] += ($cartProduct[0]['base_total_weight'] * $products[0]['quantity']);
+            $products[0]['weight'] += $cartProduct[0]['total_weight'];
         }
+
+        $products[0]['total_weight'] = $products[0]['base_total_weight'] = $products[0]['weight'] * $products[0]['quantity'];
 
         return $products;
     }
