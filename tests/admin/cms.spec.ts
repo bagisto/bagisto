@@ -24,7 +24,7 @@ test('Create Page', async ({page}) => {
     await page.getByPlaceholder('Meta Description').fill('Demo_ew3r4434');
     await page.getByRole('button', { name: 'Save Page' }).click();
 
-    await page.waitForSelector('text=CMS created successfully.', { timeout: 5000 });
+    await expect(page.getByText('CMS created successfully.')).toBeVisible();
 });
 
 test('Edit Page', async ({page}) => {
@@ -50,7 +50,7 @@ test('Edit Page', async ({page}) => {
     await page.getByPlaceholder('Meta Description').fill('Demo_ew3r4434');
     await page.getByRole('button', { name: 'Save Page' }).click();
 
-    await page.waitForSelector('text=CMS updated successfully.', { timeout: 5000 });
+    await expect(page.getByText('CMS updated successfully.')).toBeVisible();
 });
 
 test('Delete Page', async ({page}) => {
@@ -64,7 +64,7 @@ test('Delete Page', async ({page}) => {
     await page.locator('div').locator('span.cursor-pointer.rounded-md.icon-delete').nth(2).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=CMS deleted successfully.', { timeout: 5000 });
+    await expect(page.getByText('CMS deleted successfully.')).toBeVisible();
 });
 
 test('Mass Delete Pages', async ({page}) => {
@@ -82,5 +82,5 @@ test('Mass Delete Pages', async ({page}) => {
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Selected Data Deleted Successfully', { timeout: 5000 });
+    await expect(page.getByText('Selected Data Deleted Successfully')).toBeVisible();
 });
