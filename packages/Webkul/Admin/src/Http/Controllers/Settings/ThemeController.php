@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Theme\ThemeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class ThemeController extends Controller
@@ -139,5 +141,31 @@ class ThemeController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.settings.themes.delete-success'),
         ], 200);
+    }
+
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResponse
+    {
+        $selectedThemeIds = $massUpdateRequest->input('indices');
+
+        $this->themeCustomizationRepository->massUpdateStatus([
+            'status' => $massUpdateRequest->input('value'),
+        ], $selectedThemeIds);
+
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.themes.update-success'),
+        ]);
+    }
+
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
+    {
+        $selectedThemeIds = $massDestroyRequest->input('indices');
+
+        foreach ($selectedThemeIds as $themeId) {
+            $this->themeCustomizationRepository->delete($themeId);
+        }
+
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.themes.update-success'),
+        ]);
     }
 }

@@ -3088,6 +3088,7 @@ return [
                 'datagrid' => [
                     'active'       => 'Active',
                     'channel_name' => 'Channel Name',
+                    'change-status' => 'Change Status',
                     'delete'       => 'Delete',
                     'id'           => 'Id',
                     'inactive'     => 'Inactive',
@@ -3096,7 +3097,7 @@ return [
                     'status'       => 'Status',
                     'theme'        => 'Theme',
                     'type'         => 'Type',
-                    'view'         => 'View',
+                    'view'         => 'View',                    
                 ],
             ],
 
