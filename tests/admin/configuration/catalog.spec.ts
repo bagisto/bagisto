@@ -79,7 +79,7 @@ test('Products of Catalog', async ({page}) => {
     await page.getByText('Products Back Save Configuration Default Default English Arabic Bengali').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Rich Snippets of Catalog', async ({page}) => {
@@ -101,7 +101,7 @@ test('Rich Snippets of Catalog', async ({page}) => {
     await page.locator('div:nth-child(4) > div > .mb-4 > .relative > div').first().click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Inventory of Catalog', async ({page}) => {
@@ -118,5 +118,5 @@ test('Inventory of Catalog', async ({page}) => {
     await page.getByLabel('Out-of-Stock Threshold').fill('01');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });

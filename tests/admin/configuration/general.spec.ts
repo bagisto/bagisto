@@ -13,7 +13,7 @@ test('General of General', async ({page}) => {
     await page.locator('label > div').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Content of General', async ({page}) => {
@@ -38,7 +38,7 @@ test('Content of General', async ({page}) => {
     await page.getByLabel('Custom Javascript Default').fill('Demo_wqqwqw');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Design of General', async ({page}) => {
@@ -57,7 +57,7 @@ test('Design of General', async ({page}) => {
     await page.locator('[id="general\\[design\\]\\[admin_logo\\]\\[favicon\\]\\[delete\\]"]').nth(1).click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Magic AI of General', async ({page}) => {
@@ -95,5 +95,5 @@ test('Magic AI of General', async ({page}) => {
     await page.getByLabel('Prompt DefaultEnglish').fill('Demo_qwqwasdf');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });

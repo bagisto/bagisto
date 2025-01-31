@@ -23,7 +23,7 @@ test('Settings of Email', async ({page}) => {
     await page.getByLabel('Contact Email Default').fill('Demo_User@example.com');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Notifications of Email', async ({page}) => {
@@ -44,5 +44,5 @@ test('Notifications of Email', async ({page}) => {
     await page.locator('div:nth-child(20) > .mb-4 > .relative > div').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });

@@ -18,7 +18,7 @@ test('Address of Customer', async ({page}) => {
     await page.locator('label > div').first().click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Captcha of Customer', async ({page}) => {
@@ -37,7 +37,7 @@ test('Captcha of Customer', async ({page}) => {
     await page.locator('label > div').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
 test('Settings of Customer', async ({page}) => {
@@ -61,5 +61,5 @@ test('Settings of Customer', async ({page}) => {
     await page.locator('label > div').first().click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
+    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
