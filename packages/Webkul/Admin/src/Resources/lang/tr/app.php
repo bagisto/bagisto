@@ -2627,6 +2627,7 @@ return [
                     'general'           => 'Genel',
                     'group-separator'   => 'Grup Ayırıcı',
                     'name'              => 'Adı',
+                    'separator-note'    => ':attribute alanı yalnızca virgül (,) ve nokta (.) operatörlerini kabul edebilir',
                     'save-btn'          => 'Para Birimini Kaydet',
                     'symbol'            => 'Sembol',
                     'title'             => 'Yeni Para Birimi Oluştur',

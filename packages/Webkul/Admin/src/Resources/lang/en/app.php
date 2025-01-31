@@ -2627,6 +2627,7 @@ return [
                     'general'           => 'General',
                     'group-separator'   => 'Group Separator',
                     'name'              => 'Name',
+                    'separator-note'    => 'The :attribute field can only accept the comma (,) and dot (.) operators',
                     'save-btn'          => 'Save Currency',
                     'symbol'            => 'Symbol',
                     'title'             => 'Create New Currency',

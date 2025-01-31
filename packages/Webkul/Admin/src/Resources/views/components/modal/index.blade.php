@@ -84,8 +84,8 @@
                     class="fixed inset-0 z-[10002] transform overflow-y-auto transition"
                     v-if="isOpen"
                 >
-                    <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="box-shadow absolute top-1/2 z-[999] w-full max-w-[568px] -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%] ltr:left-1/2 ltr:-translate-x-1/2 rtl:right-1/2 rtl:translate-x-1/2">
+                    <div class="flex min-h-screen items-end justify-center p-4 sm:items-center sm:p-0">
+                        <div class="box-shadow relative z-[999] w-screen max-w-[568px] rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-[90%]">
                             <!-- Header Slot -->
                             <slot
                                 name="header"
@@ -125,7 +125,7 @@
                     if (this.isOpen) {
                         document.body.style.overflow = 'hidden';
                     } else {
-                        document.body.style.overflow ='auto';
+                        document.body.style.overflow = 'auto';
                     }
 
                     this.$emit('toggle', { isActive: this.isOpen });

@@ -3,6 +3,9 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\Decimal;
+use Webkul\Core\Rules\PhoneNumber;
+use Webkul\Core\Rules\PostCode;
 
 class ConfigurationForm extends FormRequest
 {
@@ -31,13 +34,31 @@ class ConfigurationForm extends FormRequest
 
                 // Check delete key exist in the request
                 if (! $this->has("{$key}.delete")) {
-                    $validation = isset($field['validation']) && $field['validation'] ? $field['validation'] : 'nullable';
-
-                    return [$key => $validation];
+                    return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
                 }
 
                 return [];
             })->toArray();
         })->toArray();
+    }
+
+    /**
+     * Transform validation rules into an array and map custom validation rules
+     *
+     * @param  string|array  $validation
+     * @return array
+     */
+    protected function getValidationRules($validation)
+    {
+        $validations = is_array($validation) ? $validation : explode('|', $validation);
+
+        return array_map(function ($rule) {
+            return match ($rule) {
+                'phone'    => new PhoneNumber,
+                'postcode' => new PostCode,
+                'decimal'  => new Decimal,
+                default    => $rule,
+            };
+        }, $validations);
     }
 }

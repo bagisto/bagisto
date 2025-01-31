@@ -2627,6 +2627,7 @@ return [
                     'general'           => '常规',
                     'group-separator'   => '分组分隔符',
                     'name'              => '名称',
+                    'separator-note'    => ':attribute 字段只能接受逗号（,）和点（.）操作符',
                     'save-btn'          => '保存货币',
                     'symbol'            => '符号',
                     'title'             => '创建新货币',

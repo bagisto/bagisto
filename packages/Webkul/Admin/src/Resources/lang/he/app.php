@@ -2627,6 +2627,7 @@ return [
                     'general'           => 'כללי',
                     'group-separator'   => 'מפריד קבוצה',
                     'name'              => 'שם',
+                    'separator-note'    => 'השדה :attribute יכול לקבל רק את המפעילים פסיק (,) ונקודה (.)',
                     'save-btn'          => 'שמור מטבע',
                     'symbol'            => 'סמל',
                     'title'             => 'צור מטבע חדש',

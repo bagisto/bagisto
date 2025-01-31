@@ -774,13 +774,11 @@
                                                                             @{{ getFormattedDates(column) }}
                                                                         </span>
 
-                                                                        <div>
-                                                                            <span
-                                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                                @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
-                                                                            >
-                                                                            </span>
-                                                                        </div>
+                                                                        <span
+                                                                            class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                            @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
+                                                                        >
+                                                                        </span>
                                                                     </p>
                                                                 </template>
 
@@ -796,13 +794,11 @@
                                                                                 @{{ appliedColumnValue }}
                                                                             </span>
 
-                                                                            <div>
-                                                                                <span
-                                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                                    @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
-                                                                                >
-                                                                                </span>
-                                                                            </div>
+                                                                            <span
+                                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                                @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
+                                                                            >
+                                                                            </span>
                                                                         </p>
                                                                     </template>
 
@@ -813,13 +809,11 @@
                                                                                 @{{ column.value }}
                                                                             </span>
 
-                                                                            <div>
-                                                                                <span
-                                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                                    @click="removeSavedFilterColumnValue(column, column.value)"
-                                                                                >
-                                                                                </span>
-                                                                            </div>
+                                                                            <span
+                                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                                @click="removeSavedFilterColumnValue(column, column.value)"
+                                                                            >
+                                                                            </span>
                                                                         </p>
                                                                     </template>
                                                                 </template>

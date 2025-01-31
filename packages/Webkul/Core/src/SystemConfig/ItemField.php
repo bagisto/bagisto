@@ -16,6 +16,7 @@ class ItemField
             'text'   => 'max',
             'number' => 'max_value',
         ],
+
         'min' => [
             'text'   => 'min',
             'number' => 'min_value',
