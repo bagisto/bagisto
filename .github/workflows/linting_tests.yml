@@ -1,6 +1,7 @@
-name: Linting Tests
+name: Auto Commits
 
-on: [push, pull_request]
+pull_request:
+  types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
