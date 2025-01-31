@@ -202,8 +202,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'title'   => trans('installer::app.seeders.shop.theme-customizations.new-products.options.title', [], $locale),
                             'filters' => [
                                 'new'   => 1,
-                                'sort'  => 'asc',
-                                'limit' => 10,
+                                'sort'  => 'name-asc',
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
@@ -229,8 +229,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'title'   => trans('installer::app.seeders.shop.theme-customizations.featured-collections.options.title', [], $locale),
                             'filters' => [
                                 'featured' => 1,
-                                'sort'     => 'desc',
-                                'limit'    => 10,
+                                'sort'     => 'name-desc',
+                                'limit'    => 12,
                             ],
                         ]),
                     ], [
@@ -247,8 +247,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'options'                => json_encode([
                             'title'   => trans('installer::app.seeders.shop.theme-customizations.all-products.options.title', [], $locale),
                             'filters' => [
-                                'sort'  => 'desc',
-                                'limit' => 10,
+                                'sort'  => 'name-desc',
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
