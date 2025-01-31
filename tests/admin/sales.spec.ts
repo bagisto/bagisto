@@ -88,21 +88,7 @@ test('Create Orders', async ({page}) => {
     await page.locator('div').filter({ hasText: /^Free Shipping$/ }).getByRole('paragraph').click();
     await page.getByRole('button', { name: 'Place Order' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Order created successfully')).toBeVisible();
 });
 
 test('Comment on Order', async ({page}) => {
@@ -119,21 +105,7 @@ test('Comment on Order', async ({page}) => {
     await page.getByRole('button', { name: '' }).click();
     await page.getByLabel('Submit Comment').click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Comment added successfully.')).toBeVisible();
 });
 
 test('Cancel Order', async ({page}) => {
@@ -148,21 +120,7 @@ test('Cancel Order', async ({page}) => {
     await page.locator('.icon-cancel').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Order cancelled successfully')).toBeVisible();
 });
 
 test('Reorder', async ({page}) => {
@@ -176,21 +134,7 @@ test('Reorder', async ({page}) => {
     await page.locator('.row > div:nth-child(4) > a').first().click();
     await page.getByRole('link', { name: ' Reorder' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Cart Items')).toBeVisible();
 });
 
 test('Create Invoice', async ({page}) => {
@@ -206,21 +150,7 @@ test('Create Invoice', async ({page}) => {
     await page.locator('#can_create_transaction').nth(1).click();
     await page.getByRole('button', { name: 'Create Invoice' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Invoice created successfully')).toBeVisible();
 });
 
 test('Create Shipment', async ({page}) => {
@@ -240,21 +170,7 @@ test('Create Shipment', async ({page}) => {
     await page.locator('[id="shipment\\[source\\]"]').selectOption('1');
     await page.getByRole('button', { name: 'Create Shipment' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Shipment created successfully')).toBeVisible();
 });
 
 test('Create Refund', async ({page}) => {
@@ -269,21 +185,7 @@ test('Create Refund', async ({page}) => {
     await page.locator('.icon-cancel').click();
     await page.getByRole('button', { name: 'Refund' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Refund created successfully')).toBeVisible();
 });
 
 test('Mail Invoice', async ({page}) => {
@@ -295,27 +197,14 @@ test('Mail Invoice', async ({page}) => {
     await page.getByLabel('Sign In').click();
     await page.getByRole('link', { name: ' Sales' }).click();
     await page.getByRole('link', { name: 'Invoices' }).click();
-    await page.locator('div').filter({ hasText: /^42\$55\.00Paid2024-12-18 15:22:57$/ }).locator('span').click();
+    await page.waitForSelector('span.icon-view:visible');
+    await page.locator('span.icon-view:visible')[0].click();
     await page.getByRole('button', { name: ' Send Duplicate Invoice' }).click();
     await page.locator('#email').click();
     await page.locator('#email').fill('testUser@gmail.com');
     await page.getByRole('button', { name: 'Send', exact: true }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Invoice sent successfully')).toBeVisible();
 });
 
 test('Print Invoice', async ({page}) => {
@@ -327,24 +216,11 @@ test('Print Invoice', async ({page}) => {
     await page.getByLabel('Sign In').click();
     await page.getByRole('link', { name: ' Sales' }).click();
     await page.getByRole('link', { name: 'Invoices' }).click();
-    await page.locator('div').filter({ hasText: /^42\$55\.00Paid2024-12-18 15:22:57$/ }).locator('span').click();
+    await page.waitForSelector('span.icon-view:visible');
+    await page.locator('span.icon-view:visible')[0].click();
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('link', { name: ' Print' }).click();
     const download = await downloadPromise;
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(download);
 });
