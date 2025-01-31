@@ -444,6 +444,8 @@
                                     name="default_value"
                                     :label="trans('admin::app.catalog.attributes.create.default-value')"
                                 />
+
+                                <x-admin::form.control-group.error control-name="default_value" />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
