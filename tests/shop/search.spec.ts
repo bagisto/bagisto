@@ -6,6 +6,6 @@ test('Search by query', async ({page}) => {
     await page.getByLabel('Search products here').fill('arct');
     await page.getByLabel('Search products here').press('Enter');
 
-    await page.waitForSelector('text=Search results for : arct', { timeout: 5000 });
+    await expect(page.getByText('Search results for : arct').first()).toBeVisible();
 
 });

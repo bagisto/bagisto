@@ -11,7 +11,7 @@ test('Increment', async ({ page }) => {
     await page.getByLabel('Increase Quantity').first().click();
     await page.getByRole('button', { name: 'Update Cart' }).click();
 
-    await page.waitForSelector('text=Quantity updated successfully');
+    await expect(page.getByText('Quantity updated successfully').first()).toBeVisible();
 });
 
 test('Decrement', async ({ page }) => {
@@ -24,7 +24,7 @@ test('Decrement', async ({ page }) => {
     await page.getByLabel('Decrease Quantity').click();
     await page.getByRole('button', { name: 'Update Cart' }).click();
 
-    await page.waitForSelector('text=Quantity updated successfully');
+    await expect(page.getByText('Quantity updated successfully').first()).toBeVisible();
 });
 
 test('Remove One', async ({ page }) => {
@@ -36,7 +36,7 @@ test('Remove One', async ({ page }) => {
     await page.getByRole('button', { name: 'Remove' }).first().click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Item is successfully removed from the cart.');
+    await expect(page.getByText('Item is successfully removed from the cart.').first()).toBeVisible();
 });
 
 test('Remove All', async ({ page }) => {
@@ -50,7 +50,7 @@ test('Remove All', async ({ page }) => {
     await page.getByRole('button', { name: 'Remove' }).first().click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Selected items successfully removed from cart.');
+    await expect(page.getByText('Selected items successfully removed from cart.').first()).toBeVisible();
 });
 
 test('Apply Coupon', async ({ page }) => {
@@ -63,5 +63,5 @@ test('Apply Coupon', async ({ page }) => {
     await page.getByPlaceholder('Enter your code').fill('12345');
     await page.getByRole('button', { name: 'Apply', exact: true }).click();
 
-    await page.waitForSelector('text=Coupon code applied successfully.');
+    await expect(page.getByText('Coupon code applied successfully.').first()).toBeVisible();
 });

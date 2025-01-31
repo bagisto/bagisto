@@ -20,5 +20,5 @@ test('Review Product', async ({page}) => {
     await page.getByPlaceholder('Comment').fill('Great Product');
     await page.getByRole('button', { name: 'Submit Review' }).click();
 
-    await page.waitForSelector('text=Review submitted successfully.', { timeout: 5000 });
+    await expect(page.getByText('Review submitted successfully.').first()).toBeVisible();
 });

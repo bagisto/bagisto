@@ -28,7 +28,7 @@ test('Profile Edit', async ({page}) => {
     await page.getByPlaceholder('Date of Birth').fill(formattedDate);
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Profile updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Profile updated successfully').first()).toBeVisible();
 });
 
 test('Add Address', async ({page}) => {
@@ -69,7 +69,7 @@ test('Add Address', async ({page}) => {
     await page.locator('#main form div').filter({ hasText: 'Set as Default' }).locator('label').first().click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Address have been successfully added.', { timeout: 5000 });
+    await expect(page.getByText('Address have been successfully added.').first()).toBeVisible();
 });
 
 test('Edit Address', async ({page}) => {
@@ -108,7 +108,7 @@ test('Edit Address', async ({page}) => {
     await page.getByPlaceholder('Phone').fill('9876543219');
     await page.getByRole('button', { name: 'Update' }).click();
 
-    await page.waitForSelector('text=Address updated successfully.', { timeout: 5000 });
+    await expect(page.getByText('Address updated successfully.').first()).toBeVisible();
 });
 
 test('Default Address', async ({page}) => {
@@ -127,7 +127,7 @@ test('Default Address', async ({page}) => {
     await page.getByRole('button', { name: 'Set as Default' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Default Address', { timeout: 5000 });
+    await expect(page.getByText('Default Address').first()).toBeVisible();
 });
 
 test('Delete Address', async ({page}) => {
@@ -146,7 +146,7 @@ test('Delete Address', async ({page}) => {
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Address successfully deleted', { timeout: 5000 });
+    await expect(page.getByText('Address successfully deleted').first()).toBeVisible();
 });
 
 test('Reorder', async ({page}) => {
@@ -166,7 +166,7 @@ test('Reorder', async ({page}) => {
 
     await page.getByRole('button', { name: 'Update Cart' }).click();
 
-    await page.waitForSelector('text=Quantity updated successfully');
+    await expect(page.getByText('Quantity updated successfully').first()).toBeVisible();
 });
 
 test('Cancel Order', async ({page}) => {
@@ -184,7 +184,7 @@ test('Cancel Order', async ({page}) => {
     await page.getByRole('link', { name: 'Cancel' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Your order has been canceled', { timeout: 5000 });
+    await expect(page.getByText('Your order has been canceled').first()).toBeVisible();
 });
 
 test('Print Invoice', async ({page}) => {
@@ -244,7 +244,7 @@ test('Wishlist to Cart', async ({page}) => {
     await page.getByRole('link', { name: 'Wishlist', exact: true }).click();
     await page.getByRole('button', { name: 'Move To Cart' }).first().click();
 
-    await page.waitForSelector('text=Item Successfully Moved to Cart', { timeout: 5000 });
+    await expect(page.getByText('Item Successfully Moved to Cart').first()).toBeVisible();
 });
 
 test('Remove from Wishlist', async ({page}) => {
@@ -263,7 +263,7 @@ test('Remove from Wishlist', async ({page}) => {
     await page.locator('.max-md\\:hidden > .flex').first().click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Item Successfully Removed From Wishlist', { timeout: 5000 });
+    await expect(page.getByText('Item Successfully Removed From Wishlist').first()).toBeVisible();
 });
 
 test('Clear Wishlist', async ({page}) => {
@@ -281,7 +281,7 @@ test('Clear Wishlist', async ({page}) => {
     await page.getByText('Delete All', { exact: true }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Item Successfully Removed From Wishlist', { timeout: 5000 });
+    await expect(page.getByText('Item Successfully Removed From Wishlist').first()).toBeVisible();
 });
 
 test('Change Password', async ({page}) => {
@@ -304,7 +304,7 @@ test('Change Password', async ({page}) => {
     await page.getByPlaceholder('Confirm Password').fill('testUser@1234');
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Profile updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Profile updated successfully').first()).toBeVisible();
 });
 
 test('Delete Profile', async ({page}) => {
@@ -323,5 +323,5 @@ test('Delete Profile', async ({page}) => {
     await page.getByPlaceholder('Enter your password').fill('testUser@1234');
     await page.getByRole('button', { name: 'Delete' }).click();
 
-    await page.waitForSelector('text=Customer deleted successfully', { timeout: 5000 });
+    await expect(page.getByText('Customer deleted successfully').first()).toBeVisible();
 });

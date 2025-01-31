@@ -12,7 +12,7 @@ test('Add To Wishlist', async ({page}) => {
     await page.locator('.action-items > span').first().click();
     await page.locator('div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span').first().click();
 
-    await page.waitForSelector('text=Item Successfully Added To Wishlist', { timeout: 5000 });
+    await expect(page.getByText('Item Successfully Added To Wishlist').first()).toBeVisible();
 });
 
 test('Remove from Wishlist', async ({page}) => {
@@ -27,5 +27,5 @@ test('Remove from Wishlist', async ({page}) => {
     await page.locator('.action-items > span').first().click();
     await page.locator('div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span').first().click();
 
-    await page.waitForSelector('text=Item Successfully Removed From Wishlist', { timeout: 5000 });
+    await expect(page.getByText('Item Successfully Removed From Wishlist').first()).toBeVisible();
 });

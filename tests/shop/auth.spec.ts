@@ -18,7 +18,7 @@ test('register', async ({ page }) => {
     await page.locator('#main form div').filter({ hasText: 'Subscribe to newsletter' }).locator('label').first().click();
     await page.getByRole('button', { name: 'Register' }).click();
 
-    await page.waitForSelector('text=Account created successfully, an e-mail has been sent for verification.');
+    await expect(page.getByText('Account created successfully, an e-mail has been sent for verification.').first()).toBeVisible();
 });
 
 test('login', async ({ page }) => {
@@ -32,7 +32,7 @@ test('login', async ({ page }) => {
     await page.getByRole('button', { name: 'Sign In' }).click();
 
     await page.getByLabel('Profile').click();
-    await page.waitForSelector('text=Logout');
+    await expect(page.getByText('Logout').first()).toBeVisible();
 });
 
 test('logout', async ({ page }) => {
@@ -44,9 +44,12 @@ test('logout', async ({ page }) => {
     await page.getByPlaceholder('Password').click();
     await page.getByPlaceholder('Password').fill('testUser@123');
     await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.waitForTimeout(5000);
+    
     await page.getByLabel('Profile').click();
     await page.getByRole('link', { name: 'Logout' }).click();
+    await page.waitForTimeout(5000);
 
-    await page.getByLabel('Profile').click({timeout: 5000});
-    await page.waitForSelector('text=Welcome Guest');
+    await page.getByLabel('Profile').click();
+    await expect(page.getByText('Welcome Guest').first()).toBeVisible();
 });

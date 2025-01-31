@@ -6,7 +6,8 @@ test('Increment', async ({ page }) => {
     await page.getByRole('button', { name: 'Shopping Cart' }).click();
     await page.getByRole('button', { name: 'Increase Quantity' }).click();
     await page.getByRole('button', { name: 'Increase Quantity' }).click();
-    await page.waitForSelector('svg.text-blue.animate-spin.font-semibold');
+
+    await expect(page.locator('svg.text-blue.animate-spin.font-semibold')).toBeVisible();
 });
 
 test('Decrement', async ({ page }) => {
@@ -17,8 +18,8 @@ test('Decrement', async ({ page }) => {
     await page.getByRole('button', { name: 'Increase Quantity' }).click();
     await page.getByRole('button', { name: 'Decrease Quantity' }).click();
     await page.getByRole('button', { name: 'Decrease Quantity' }).click();
-    await page.getByRole('button', { name: 'Decrease Quantity' }).click();
-    await page.waitForSelector('svg.text-blue.animate-spin.font-semibold');
+
+    await expect(page.locator('svg.text-blue.animate-spin.font-semibold')).toBeVisible();
 });
 
 test('Remove', async ({ page }) => {
@@ -28,5 +29,5 @@ test('Remove', async ({ page }) => {
     await page.getByRole('button', { name: 'Remove' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Item is successfully removed from the cart.', { timeout: 5000 });
+    await expect(page.getByText('Item is successfully removed from the cart.').first()).toBeVisible();
 });
