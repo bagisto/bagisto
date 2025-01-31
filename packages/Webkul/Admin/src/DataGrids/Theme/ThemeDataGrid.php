@@ -60,14 +60,6 @@ class ThemeDataGrid extends DataGrid
         $themes = config('themes.shop');
 
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.settings.themes.index.datagrid.id'),
-            'type'       => 'integer',
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'              => 'channel_name',
             'label'              => trans('admin::app.settings.themes.index.datagrid.channel_name'),
             'type'               => 'string',
@@ -171,6 +163,39 @@ class ThemeDataGrid extends DataGrid
                 'url'    => function ($row) {
                     return route('admin.settings.themes.delete', $row->id);
                 },
+            ]);
+        }
+    }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        if (bouncer()->hasPermission('settings.themes.edit')) {
+            $this->addMassAction([
+                'title'   => trans('admin::app.settings.themes.index.datagrid.change-status'),
+                'url'     => route('admin.settings.themes.mass_update'),
+                'method'  => 'POST',
+                'options' => [
+                    [
+                        'label'  => trans('admin::app.settings.themes.index.datagrid.active'),
+                        'value'  => 1,
+                    ], [
+                        'label'  => trans('admin::app.settings.themes.index.datagrid.inactive'),
+                        'value'  => 0,
+                    ],
+                ],
+            ]);
+        }
+
+        if (bouncer()->hasPermission('settings.themes.delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
+                'url'    => route('admin.settings.themes.mass_delete'),
+                'method' => 'POST',
             ]);
         }
     }
