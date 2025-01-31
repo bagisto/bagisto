@@ -47,8 +47,9 @@ test('Customer CheckOut', async ({page}) => {
     await page.waitForSelector('text=Cash On Delivery');
     await page.getByText('Cash On Delivery').first().click();
     await page.getByRole('button', { name: 'Place Order' }).click();
+    await page.waitForSelector('text=Thank you for your order!');
 
-    await expect(page.getByText('text=Thank you for your order!').first()).toBeVisible();
+    await expect(page.locator('text=Thank you for your order!')).toBeVisible();
 });
 
 test('Guest CheckOut', async ({page}) => {
@@ -90,6 +91,7 @@ test('Guest CheckOut', async ({page}) => {
     await page.waitForSelector('text=Cash On Delivery');
     await page.getByText('Cash On Delivery').first().click();
     await page.getByRole('button', { name: 'Place Order' }).click();
+    await page.waitForSelector('text=Thank you for your order!');
 
-    await expect(page.getByText('text=Thank you for your order!').first()).toBeVisible();
+    await expect(page.locator('text=Thank you for your order!')).toBeVisible();
 });

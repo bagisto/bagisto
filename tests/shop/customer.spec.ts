@@ -160,7 +160,7 @@ test('Reorder', async ({page}) => {
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.getByLabel('Profile').click();
     await page.getByRole('link', { name: 'Orders', exact: true }).click();
-    await page.locator('div').filter({ hasText: /^42024-12-17 18:21:27\$55\.00Pending$/ }).locator('span').click();
+    await page.locator('div').locator('span.icon-eye').first().click();
     await page.getByRole('link', { name: 'Reorder' }).click();
 
 
@@ -180,7 +180,7 @@ test('Cancel Order', async ({page}) => {
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.getByLabel('Profile').click();
     await page.getByRole('link', { name: 'Orders', exact: true }).click();
-    await page.locator('div').filter({ hasText: /^42024-12-17 18:21:27\$55\.00Pending$/ }).locator('span').click();
+    await page.locator('div').locator('span.icon-eye').first().click();
     await page.getByRole('link', { name: 'Cancel' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
@@ -198,7 +198,7 @@ test('Print Invoice', async ({page}) => {
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.getByLabel('Profile').click();
     await page.getByRole('link', { name: 'Orders', exact: true }).click();
-    await page.locator('div').filter({ hasText: /^32024-12-17 18:20:44\$55\.00Processing$/ }).locator('span').click();
+    await page.locator('div').locator('span.icon-eye').first().click();
     await page.getByRole('button', { name: 'Invoices' }).click();
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('link', { name: ' Print' }).click();
