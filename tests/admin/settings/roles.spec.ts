@@ -32,7 +32,7 @@ test('Create Role', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfsdfsdsd dsf');
     await page.getByRole('button', { name: 'Save Role' }).click();
 
-    await page.waitForSelector('text=Roles Created Successfully', { timeout: 5000 });
+    await expect(page.getByText('Roles Created Successfully')).toBeVisible();
 });
 
 test('Edit Role', async ({page}) => {
@@ -68,7 +68,7 @@ test('Edit Role', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfsdfsdsd dsf');
     await page.getByRole('button', { name: 'Save Role' }).click();
 
-    await page.waitForSelector('text=Roles is updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Roles is updated successfully')).toBeVisible();
 });
 
 test('Delete Role', async ({page}) => {
@@ -84,5 +84,5 @@ test('Delete Role', async ({page}) => {
     await page.locator('div').filter({ hasText: /^2Usercustom$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Roles is deleted successfully', { timeout: 5000 });
+    await expect(page.getByText('Roles is deleted successfully')).toBeVisible();
 });

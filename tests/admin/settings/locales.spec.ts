@@ -16,7 +16,7 @@ test('Create Locale', async ({page}) => {
     await page.locator('#direction').selectOption('rtl');
     await page.getByRole('button', { name: 'Save Locale' }).click();
 
-    await page.waitForSelector('text=Locale created successfully.', { timeout: 5000 });
+    await expect(page.getByText('Locale created successfully.')).toBeVisible();
 });
 
 test('Edit Locale', async ({page}) => {
@@ -35,7 +35,7 @@ test('Edit Locale', async ({page}) => {
     await page.locator('#direction').selectOption('rtl');
     await page.getByRole('button', { name: 'Save Locale' }).click();
 
-    await page.waitForSelector('text=Locale updated successfully.', { timeout: 5000 });
+    await expect(page.getByText('Locale updated successfully.')).toBeVisible();
 });
 
 test('Delete Locale', async ({page}) => {
@@ -49,5 +49,5 @@ test('Delete Locale', async ({page}) => {
     await page.locator('div').filter({ hasText: /^20wewebRTL$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Locale deleted successfully.', { timeout: 5000 });
+    await expect(page.getByText('Locale deleted successfully.')).toBeVisible();
 });

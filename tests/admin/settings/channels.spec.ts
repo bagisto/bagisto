@@ -52,7 +52,7 @@ test('Create Channel', async ({page}) => {
     await page.getByText('Turkish').first().click();
     await page.getByRole('button', { name: 'Save Channel' }).click();
 
-    await page.waitForSelector('text=Channel created successfully.', { timeout: 5000 });
+    await expect(page.getByText('Channel created successfully.')).toBeVisible();
 });
 
 test('Edit Channel', async ({page}) => {
@@ -107,7 +107,7 @@ test('Edit Channel', async ({page}) => {
     await page.getByText('Turkish').first().click();
     await page.getByRole('button', { name: 'Save Channel' }).click();
 
-    await page.waitForSelector('text=Update Channel Successfully', { timeout: 5000 });
+    await expect(page.getByText('Update Channel Successfully')).toBeVisible();
 });
 
 test('Delete Channel', async ({page}) => {
@@ -122,5 +122,5 @@ test('Delete Channel', async ({page}) => {
     await page.locator('div').filter({ hasText: /^2sdsdfwedfsfwe wewedfsdeew$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Channel deleted successfully.', { timeout: 5000 });
+    await expect(page.getByText('Channel deleted successfully.')).toBeVisible();
 });

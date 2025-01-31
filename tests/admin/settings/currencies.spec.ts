@@ -24,7 +24,7 @@ test('Create Currency', async ({page}) => {
     await page.locator('select[name="currency_position"]').selectOption('left_with_space');
     await page.getByRole('button', { name: 'Save Currency' }).click();
 
-    await page.waitForSelector('text=Currency created successfully.', { timeout: 5000 });
+    await expect(page.getByText('Currency created successfully.')).toBeVisible();
 });
 
 test('Edit Currency', async ({page}) => {
@@ -50,7 +50,7 @@ test('Edit Currency', async ({page}) => {
     await page.locator('select[name="currency_position"]').selectOption('left_with_space');
     await page.getByRole('button', { name: 'Save Currency' }).click();
 
-    await page.waitForSelector('text=Currency updated successfully.', { timeout: 5000 });
+    await expect(page.getByText('Currency updated successfully.')).toBeVisible();
 });
 
 test('Delete Currency', async ({page}) => {
@@ -65,5 +65,5 @@ test('Delete Currency', async ({page}) => {
     await page.locator('div').filter({ hasText: /^66sassssASS$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Currency deleted successfully.', { timeout: 5000 });
+    await expect(page.getByText('Currency deleted successfully.')).toBeVisible();
 });

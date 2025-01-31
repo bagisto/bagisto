@@ -44,7 +44,7 @@ test('Create Inventory Sources', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('45');
     await page.getByRole('button', { name: 'Save Inventory Sources' }).click();
 
-    await page.waitForSelector('text=Inventory Source Created Successfully', { timeout: 5000 });
+    await expect(page.getByText('Inventory Source Created Successfully')).toBeVisible();
 });
 
 test('Edit Inventory Sources', async ({page}) => {
@@ -91,7 +91,7 @@ test('Edit Inventory Sources', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('45');
     await page.getByRole('button', { name: 'Save Inventory Sources' }).click();
 
-    await page.waitForSelector('text=Inventory Sources Updated Successfully', { timeout: 5000 });
+    await expect(page.getByText('Inventory Sources Updated Successfully')).toBeVisible();
 });
 
 test('Delete Inventory Sources', async ({page}) => {
@@ -106,5 +106,5 @@ test('Delete Inventory Sources', async ({page}) => {
     await page.locator('div').filter({ hasText: /^2sdsdsdsdsdfsdfsdfwe45Active$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Inventory Sources Deleted Successfully', { timeout: 5000 });
+    await expect(page.getByText('Inventory Sources Deleted Successfully')).toBeVisible();
 });

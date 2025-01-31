@@ -16,7 +16,7 @@ test('Create Exchange Rate', async ({page}) => {
     await page.getByPlaceholder('Rate').fill('2323');
     await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
 
-    await page.waitForSelector('text=Exchange Rate Created Successfully', { timeout: 5000 });
+    await expect(page.getByText('Exchange Rate Created Successfully')).toBeVisible();
 });
 
 test('Edit Exchange Rate', async ({page}) => {
@@ -35,7 +35,7 @@ test('Edit Exchange Rate', async ({page}) => {
     await page.getByPlaceholder('Rate').fill('2323');
     await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
 
-    await page.waitForSelector('text=Exchange Rate Updated Successfully', { timeout: 5000 });
+    await expect(page.getByText('Exchange Rate Updated Successfully')).toBeVisible();
 });
 
 test('Delete Exchange Rate', async ({page}) => {
@@ -50,5 +50,5 @@ test('Delete Exchange Rate', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1Canadian Dollar2323\.000000000000$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Exchange Rate Deleted Successfully', { timeout: 5000 });
+    await expect(page.getByText('Exchange Rate Deleted Successfully')).toBeVisible();
 });

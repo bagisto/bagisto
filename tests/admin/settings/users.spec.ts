@@ -24,7 +24,7 @@ test('Create Users', async ({page}) => {
     await page.getByRole('button', { name: 'Save User' }).click();
     await page.locator('div').filter({ hasText: /^2KUserActiveUser@gmail\.comAdministrator$/ }).locator('a').first().click();
 
-    await page.waitForSelector('text=User created successfully.', { timeout: 5000 });
+    await expect(page.getByText('User created successfully.')).toBeVisible();
 });
 
 test('Edit Users', async ({page}) => {
@@ -50,7 +50,7 @@ test('Edit Users', async ({page}) => {
     await page.locator('select[name="role_id"]').selectOption('1');
     await page.getByRole('button', { name: 'Save User' }).click();
 
-    await page.waitForSelector('text=User updated successfully.', { timeout: 5000 });
+    await expect(page.getByText('User updated successfully.')).toBeVisible();
 });
 
 test('Delete Users', async ({page}) => {
@@ -65,5 +65,5 @@ test('Delete Users', async ({page}) => {
     await page.locator('div').filter({ hasText: /^2KUserActiveUser@gmail\.comAdministrator$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=User deleted successfully.', { timeout: 5000 });
+    await expect(page.getByText('User deleted successfully.')).toBeVisible();
 });

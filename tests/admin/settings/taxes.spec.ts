@@ -26,7 +26,7 @@ test('Create Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
 
-    await page.waitForSelector('text=Tax rate created successfully.', { timeout: 5000 });
+    await expect(page.getByText('Tax rate created successfully.')).toBeVisible();
 });
 
 test('Edit Tax Rate', async ({page}) => {
@@ -55,7 +55,7 @@ test('Edit Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
 
-    await page.waitForSelector('text=Tax Rate Update Successfully', { timeout: 5000 });
+    await expect(page.getByText('Tax Rate Update Successfully')).toBeVisible();
 });
 
 test('Delete Tax Rate', async ({page}) => {
@@ -71,7 +71,7 @@ test('Delete Tax Rate', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1sasdasdweasAI2342344234423432\.0000$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Tax rate deleted successfully', { timeout: 5000 });
+    await expect(page.getByText('Tax rate deleted successfully')).toBeVisible();
 });
 
 test('Create Tax Category', async ({page}) => {
@@ -93,7 +93,7 @@ test('Create Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
 
-    await page.waitForSelector('text=New Tax Category Created.', { timeout: 5000 });
+    await expect(page.getByText('New Tax Category Created.')).toBeVisible();
 });
 
 test('Edit Tax Category', async ({page}) => {
@@ -115,7 +115,7 @@ test('Edit Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
 
-    await page.waitForSelector('text=Tax Category Successfully Updated.', { timeout: 5000 });
+    await expect(page.getByText('Tax Category Successfully Updated.')).toBeVisible();
 });
 
 test('Delete Tax Category', async ({page}) => {
@@ -130,5 +130,5 @@ test('Delete Tax Category', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1kayuwe23w$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Tax Category Deleted Successfully.', { timeout: 5000 });
+    await expect(page.getByText('Tax Category Deleted Successfully.')).toBeVisible();
 });
