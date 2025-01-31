@@ -26,21 +26,7 @@ test('Shipping Settings of Sales', async ({page}) => {
     await page.getByLabel('Bank Details DefaultEnglish').fill('Demo_sjdhjd shdgyuw');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Shipping Methods of Sales', async ({page}) => {
@@ -68,21 +54,7 @@ test('Shipping Methods of Sales', async ({page}) => {
     await page.locator('div:nth-child(10) > .mb-4 > .relative > div').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Payment Methods of Sales', async ({page}) => {
@@ -137,21 +109,7 @@ test('Payment Methods of Sales', async ({page}) => {
     await page.locator('div:nth-child(10) > .mb-4 > .relative > div').first().click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Order Settings of Sales', async ({page}) => {
@@ -187,21 +145,7 @@ test('Order Settings of Sales', async ({page}) => {
     await page.getByLabel('Shop Reorder').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Invoice Settings of Sales', async ({page}) => {
@@ -232,21 +176,7 @@ test('Invoice Settings of Sales', async ({page}) => {
     await page.getByLabel('Interval between reminders').selectOption('P2W');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Taxes of Sales', async ({page}) => {
@@ -276,21 +206,7 @@ test('Taxes of Sales', async ({page}) => {
     await page.locator('[id="sales\\[taxes\\]\\[sales\\]\\[display_shipping_amount\\]"]').selectOption('both');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Checkout of Customer', async ({page}) => {
@@ -312,19 +228,5 @@ test('Checkout of Customer', async ({page}) => {
     await page.getByLabel('Mini Cart Offer Information').fill('Get Up To 30% OFF on your 1st orderawsqw');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });

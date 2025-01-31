@@ -79,21 +79,7 @@ test('Products of Catalog', async ({page}) => {
     await page.getByText('Products Back Save Configuration Default Default English Arabic Bengali').click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Rich Snippets of Catalog', async ({page}) => {
@@ -115,21 +101,7 @@ test('Rich Snippets of Catalog', async ({page}) => {
     await page.locator('div:nth-child(4) > div > .mb-4 > .relative > div').first().click();
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
 
 test('Inventory of Catalog', async ({page}) => {
@@ -146,19 +118,5 @@ test('Inventory of Catalog', async ({page}) => {
     await page.getByLabel('Out-of-Stock Threshold').fill('01');
     await page.getByRole('button', { name: 'Save Configuration' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Configuration saved successfully', { timeout: 5000 });
 });
