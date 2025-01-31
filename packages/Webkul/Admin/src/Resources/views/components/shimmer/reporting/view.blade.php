@@ -5,10 +5,22 @@
         <div class="shimmer h-6 w-[150px]"></div>
     </div>
 
-    <!-- Actions -->
+    <!-- Back Button and Export Button -->
     <div class="flex items-center gap-1.5">
-        <div class="shimmer h-6 w-6 rounded-md"></div>
+        <div class="shimmer h-[39px] w-[65px] rounded-md"></div>
+        <div class="shimmer h-[39px] w-[104px] rounded-md"></div>
+    </div>
+</div>
+
+<div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
+    <!-- Channel and Day Filter -->
+    <div class="flex items-center gap-x-1">
+        <div class="shimmer h-[38px] w-[164px] rounded-md"></div>
         <div class="shimmer h-[39px] w-[88px] rounded-md"></div>
+    </div>
+
+    <!-- Date Filters -->
+    <div class="flex items-center gap-1.5">
         <div class="shimmer h-[39px] w-[140px] rounded-md"></div>
         <div class="shimmer h-[39px] w-[140px] rounded-md"></div>
     </div>

@@ -3416,6 +3416,7 @@ return [
 
         'view' => [
             'all-channels'  => 'সমস্ত চ্যানেল',
+            'back-btn'      => 'পিছনে',
             'day'           => 'দিন',
             'end-date'      => 'শেষ তারিখ',
             'export-csv'    => 'CSV রপ্যার্ট করুন',
