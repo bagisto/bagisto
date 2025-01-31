@@ -24,21 +24,7 @@ test('Create Customer', async ({page}) => {
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Customer created successfully')).toBeVisible();
 });
 
 test('Edit Customer', async ({page}) => {
@@ -70,21 +56,7 @@ test('Edit Customer', async ({page}) => {
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Customer Updated Successfully')).toBeVisible();
 });
 
 test('Add Address', async ({page}) => {
@@ -100,7 +72,6 @@ test('Add Address', async ({page}) => {
     await page.getByPlaceholder('Company Name').click();
     await page.getByPlaceholder('Company Name').fill('Demo_Webkul');
     await page.getByPlaceholder('Vat ID').click();
-    await page.getByPlaceholder('Vat ID').fill('Demo_32378uyd');
     await page.getByPlaceholder('First Name').click();
     await page.getByPlaceholder('First Name').fill('Demo_yhdguwyeew');
     await page.getByPlaceholder('Last Name').click();
@@ -120,21 +91,7 @@ test('Add Address', async ({page}) => {
     await page.locator('#default_address').nth(1).click();
     await page.getByRole('button', { name: 'Save Address' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Address Created Successfully')).toBeVisible();
 });
 
 test('Edit Address', async ({page}) => {
@@ -150,7 +107,6 @@ test('Edit Address', async ({page}) => {
     await page.getByPlaceholder('Company Name').click();
     await page.getByPlaceholder('Company Name').fill('Demo_Webkul');
     await page.getByPlaceholder('Vat ID').click();
-    await page.getByPlaceholder('Vat ID').fill('Demo_32378uyd');
     await page.getByPlaceholder('First Name').click();
     await page.getByPlaceholder('First Name').fill('Demo_yhdguwyeew');
     await page.getByPlaceholder('Last Name').click();
@@ -170,21 +126,7 @@ test('Edit Address', async ({page}) => {
     await page.locator('#default_address').nth(1).click();
     await page.getByRole('button', { name: 'Save Address' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Address Updated Successfully')).toBeVisible();
 });
 
 test('Set Default Address', async ({page}) => {
@@ -197,16 +139,7 @@ test('Set Default Address', async ({page}) => {
     await page.getByRole('link', { name: ' Customers' }).click();
     await page.getByRole('button', { name: 'Set as Default' }).first().click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Default Address Updated Successfully')).toBeVisible();
 });
 
 test('Delete Address', async ({page}) => {
@@ -221,16 +154,7 @@ test('Delete Address', async ({page}) => {
     await page.getByText('Delete', { exact: true }).first().click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Address Deleted Successfully')).toBeVisible();
 });
 
 test('Add Note', async ({page}) => {
@@ -247,21 +171,7 @@ test('Add Note', async ({page}) => {
     await page.getByText('Notify Customer').click();
     await page.getByRole('button', { name: 'Submit Note' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Note Created Successfully')).toBeVisible();
 });
 
 test('Delete Account', async ({page}) => {
@@ -276,16 +186,7 @@ test('Delete Account', async ({page}) => {
     await page.getByText('Delete Account').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Customer Deleted Successfully')).toBeVisible();
 });
 
 test('Create Order', async ({page}) => {
@@ -300,21 +201,7 @@ test('Create Order', async ({page}) => {
     await page.getByText('Create Order').click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Cart Items')).toBeVisible();
 });
 
 test('login as Customer', async ({page}) => {
@@ -330,21 +217,7 @@ test('login as Customer', async ({page}) => {
     await page.getByRole('link', { name: ' Login as customer' }).click();
     const page3 = await page3Promise;
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByPlaceholder('Search products here').first()).toBeVisible();
 });
 
 test('Mass Delete Customers', async ({page}) => {
@@ -355,23 +228,13 @@ test('Mass Delete Customers', async ({page}) => {
     await page.getByPlaceholder('Password').fill(config.adminPassword);
     await page.getByLabel('Sign In').click();
     await page.getByRole('link', { name: ' Customers' }).click();
-    await page.getByRole('link', { name: '' }).first().click();
     await page.locator('label').nth(1).click();
     await page.locator('label').nth(3).click();
     await page.getByRole('button', { name: 'Select Action ' }).click();
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Selected data successfully deleted')).toBeVisible();
 });
 
 test('Mass Update Customers', async ({page}) => {
@@ -382,20 +245,11 @@ test('Mass Update Customers', async ({page}) => {
     await page.getByPlaceholder('Password').fill(config.adminPassword);
     await page.getByLabel('Sign In').click();
     await page.getByRole('link', { name: ' Customers' }).click();
-    await page.getByRole('link', { name: '' }).first().click();
     await page.locator('div').filter({ hasText: /^Customer NameEmailContact Number$/ }).locator('label span').click();
     await page.getByRole('button', { name: 'Select Action ' }).click();
+    await page.getByRole('link', { name: 'Update' }).hover();
     await page.getByRole('link', { name: 'Active', exact: true }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Selected Customers successfully updated')).toBeVisible();
 });
