@@ -26,7 +26,7 @@
                                 name="qty[{{$groupedProduct->associated_product_id}}]"
                                 :value="$groupedProduct->qty"
                                 class="gap-x-4 rounded-xl px-3 py-2.5 max-sm:!py-1.5"
-                                @change="updateItem($event)"
+                                @change="updateQty($event, {{ $groupedProduct->associated_product_id }})"
                             />
                         </div>
                     @endif

@@ -126,7 +126,7 @@
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
                                                 <img 
-                                                    class="min-h-5 min-w-5 h-5 w-5" 
+                                                    class="h-5 min-h-5 w-5 min-w-5" 
                                                     src="{{ Storage::url($customAttributeValue['value']) }}" 
                                                 />
                                             </a>
@@ -212,8 +212,8 @@
                                             href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <img 
-                                                class="min-h-5 min-w-5 h-5 w-5" 
+                                            <img
+                                                class="h-5 min-h-5 w-5 min-w-5"
                                                 src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 alt="Product Image"
                                             />
@@ -308,7 +308,7 @@
 
                                     @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
-                                            class="max-sm:min-h-7 max-sm:min-w-7 flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:text-base"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -590,6 +590,25 @@
 
                             this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.view.add-to-compare')" });
                         }
+                    },
+
+                    updateQty(quantity, id) {
+                        this.isLoading = true;
+
+                        let qty = {};
+
+                        qty[id] = quantity;
+
+                        this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
+                            .then(response => {
+                                if (response.data.message) {
+                                    this.cart = response.data.data;
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                }
+
+                                this.isLoading = false;
+                            }).catch(error => this.isLoading = false);
                     },
 
                     getCompareItemsStorageKey() {
