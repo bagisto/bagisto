@@ -26,21 +26,7 @@ test('Create Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Tax rate created successfully.', { timeout: 5000 });
 });
 
 test('Edit Tax Rate', async ({page}) => {
@@ -69,21 +55,7 @@ test('Edit Tax Rate', async ({page}) => {
     await page.getByPlaceholder('Zip To').fill('2344234');
     await page.getByRole('button', { name: 'Save Tax Rate' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Tax Rate Update Successfully', { timeout: 5000 });
 });
 
 test('Delete Tax Rate', async ({page}) => {
@@ -99,16 +71,7 @@ test('Delete Tax Rate', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1sasdasdweasAI2342344234423432\.0000$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Tax rate deleted successfully', { timeout: 5000 });
 });
 
 test('Create Tax Category', async ({page}) => {
@@ -130,21 +93,7 @@ test('Create Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=New Tax Category Created.', { timeout: 5000 });
 });
 
 test('Edit Tax Category', async ({page}) => {
@@ -166,21 +115,7 @@ test('Edit Tax Category', async ({page}) => {
     await page.getByPlaceholder('Description').fill('Demo_sdfhg hsgd');
     await page.getByRole('button', { name: 'Save Theme' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Tax Category Successfully Updated.', { timeout: 5000 });
 });
 
 test('Delete Tax Category', async ({page}) => {
@@ -195,14 +130,5 @@ test('Delete Tax Category', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1kayuwe23w$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Tax Category Deleted Successfully.', { timeout: 5000 });
 });

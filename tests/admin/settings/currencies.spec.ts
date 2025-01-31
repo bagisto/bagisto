@@ -24,21 +24,7 @@ test('Create Currency', async ({page}) => {
     await page.locator('select[name="currency_position"]').selectOption('left_with_space');
     await page.getByRole('button', { name: 'Save Currency' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Currency created successfully.', { timeout: 5000 });
 });
 
 test('Edit Currency', async ({page}) => {
@@ -64,21 +50,7 @@ test('Edit Currency', async ({page}) => {
     await page.locator('select[name="currency_position"]').selectOption('left_with_space');
     await page.getByRole('button', { name: 'Save Currency' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Currency updated successfully.', { timeout: 5000 });
 });
 
 test('Delete Currency', async ({page}) => {
@@ -93,14 +65,5 @@ test('Delete Currency', async ({page}) => {
     await page.locator('div').filter({ hasText: /^66sassssASS$/ }).locator('a').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await page.waitForSelector('text=Currency deleted successfully.', { timeout: 5000 });
 });
