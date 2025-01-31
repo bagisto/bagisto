@@ -53,10 +53,8 @@ class ThemeCustomizationRepository extends Repository
      * This method updates multiple records in the database based on the provided
      * theme IDs.
      *
-     * @param  array  $data
      * @param  int  $themeIds
      * @return int The number of records updated.
-     *
      */
     public function massUpdateStatus(array $data, array $themeIds)
     {
