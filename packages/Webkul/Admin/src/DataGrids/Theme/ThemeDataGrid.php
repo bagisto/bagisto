@@ -174,25 +174,29 @@ class ThemeDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        $this->addMassAction([
-            'title'   => trans('admin::app.settings.themes.index.datagrid.change-status'),
-            'url'     => route('admin.settings.themes.mass_update'),
-            'method'  => 'POST',
-            'options' => [
-                [
-                    'label'  => trans('admin::app.settings.themes.index.datagrid.active'),
-                    'value'  => 1,
-                ], [
-                    'label'  => trans('admin::app.settings.themes.index.datagrid.inactive'),
-                    'value'  => 0,
+        if (bouncer()->hasPermission('settings.themes.edit')) {
+            $this->addMassAction([
+                'title'   => trans('admin::app.settings.themes.index.datagrid.change-status'),
+                'url'     => route('admin.settings.themes.mass_update'),
+                'method'  => 'POST',
+                'options' => [
+                    [
+                        'label'  => trans('admin::app.settings.themes.index.datagrid.active'),
+                        'value'  => 1,
+                    ], [
+                        'label'  => trans('admin::app.settings.themes.index.datagrid.inactive'),
+                        'value'  => 0,
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
-            'url'    => route('admin.settings.themes.mass_delete'),
-            'method' => 'POST',
-        ]);
+        if (bouncer()->hasPermission('settings.themes.delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
+                'url'    => route('admin.settings.themes.mass_delete'),
+                'method' => 'POST',
+            ]);
+        }
     }
 }
