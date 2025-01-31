@@ -19,8 +19,6 @@ test('Create Customer', async ({page}) => {
     await page.getByPlaceholder('Contact Number').fill('9234783632');
     await page.locator('#gender').selectOption('Other');
     await page.locator('#customerGroup').selectOption('3');
-    await page.getByPlaceholder('Date of Birth').click();
-    await page.getByLabel('December 3,').click();
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
 
@@ -51,8 +49,6 @@ test('Edit Customer', async ({page}) => {
     await page.getByPlaceholder('Contact Number').fill('9234783632');
     await page.locator('#gender').selectOption('Other');
     await page.locator('#customerGroup').selectOption('3');
-    await page.getByPlaceholder('Date of Birth').click();
-    await page.getByLabel('December 3,').click();
     await page.getByPlaceholder('Date of Birth').fill('2024-12-03');
     await page.getByRole('button', { name: 'Save customer' }).click();
 
