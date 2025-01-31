@@ -33,7 +33,7 @@ test('Create Product Carousel Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Create Category Carousel Theme', async ({page}) => {
@@ -67,7 +67,7 @@ test('Create Category Carousel Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Create Static Content Theme', async ({page}) => {
@@ -96,7 +96,7 @@ test('Create Static Content Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Create Image Slider Theme', async ({page}) => {
@@ -130,7 +130,7 @@ test('Create Image Slider Theme', async ({page}) => {
     await page.getByRole('button', { name: 'Save' }).click();
 
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Create Footer Link Theme', async ({page}) => {
@@ -162,7 +162,7 @@ test('Create Footer Link Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Create Services Content Theme', async ({page}) => {
@@ -194,7 +194,7 @@ test('Create Services Content Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Product Carousel Theme', async ({page}) => {
@@ -230,7 +230,7 @@ test('Edit Product Carousel Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Category Carousel Theme', async ({page}) => {
@@ -264,7 +264,7 @@ test('Edit Category Carousel Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Static Content Theme', async ({page}) => {
@@ -293,7 +293,7 @@ test('Edit Static Content Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Image Slider Theme', async ({page}) => {
@@ -326,7 +326,7 @@ test('Edit Image Slider Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Footer Link Theme', async ({page}) => {
@@ -358,7 +358,7 @@ test('Edit Footer Link Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Edit Services Content Theme', async ({page}) => {
@@ -390,7 +390,7 @@ test('Edit Services Content Theme', async ({page}) => {
     await page.locator('.relative > label').click();
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForSelector('text=Theme updated successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme updated successfully')).toBeVisible();
 });
 
 test('Delete Theme', async ({page}) => {
@@ -405,5 +405,5 @@ test('Delete Theme', async ({page}) => {
     await page.locator('div').filter({ hasText: /^18DefaultDefaultservices_contentaSDASSA23Active$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    await page.waitForSelector('text=Theme deleted successfully', { timeout: 5000 });
+    await expect(page.getByText('Theme deleted successfully')).toBeVisible();
 });

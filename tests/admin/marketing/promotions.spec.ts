@@ -57,21 +57,7 @@ test('Create Cart Rule', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('21');
     await page.getByRole('button', { name: 'Save Cart Rule' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Cart rule created successfully')).toBeVisible();
 });
 
 test('Edit Cart Rule', async ({page}) => {
@@ -132,21 +118,7 @@ test('Edit Cart Rule', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('21');
     await page.getByRole('button', { name: 'Save Cart Rule' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Cart rule updated successfully')).toBeVisible();
 });
 
 test('Delete Cart Rule', async ({page}) => {
@@ -161,16 +133,7 @@ test('Delete Cart Rule', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1jksdhwsdewiyduew2024-12-01 12:00:002024-12-05 12:00:00Active21$/ }).locator('span').nth(2).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Cart Rule Deleted Successfully')).toBeVisible();
 });
 
 test('Create Catalog Rule', async ({page}) => {
@@ -219,21 +182,7 @@ test('Create Catalog Rule', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('Demo_wqdqedqw');
     await page.getByRole('button', { name: 'Save Catalog Rule' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Catalog rule created successfully')).toBeVisible();
 });
 
 test('Edit Catalog Rule', async ({page}) => {
@@ -282,21 +231,7 @@ test('Edit Catalog Rule', async ({page}) => {
     await page.getByPlaceholder('Priority').fill('Demo_wqdqedqw');
     await page.getByRole('button', { name: 'Save Catalog Rule' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Catalog rule deleted successfully')).toBeVisible();
 });
 
 test('Delete Catalog Rule', async ({page}) => {
@@ -310,14 +245,5 @@ test('Delete Catalog Rule', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1User2024-12-092024-12-25Active0$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Catalog rule updated successfully')).toBeVisible();
 });
