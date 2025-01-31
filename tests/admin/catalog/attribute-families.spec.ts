@@ -12,14 +12,5 @@ test('Delete Attribute Family', async ({page}) => {
     await page.locator('div').filter({ hasText: /^1defaultDefault$/ }).locator('span').nth(1).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Family deleted successfully.')).toBeVisible();
 });

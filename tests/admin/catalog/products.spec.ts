@@ -84,21 +84,7 @@ test('Create Product(simple)', async ({page}) => {
     await page.locator('#size').selectOption('7');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Create Product(virtual)', async ({page}) => {
@@ -177,21 +163,7 @@ test('Create Product(virtual)', async ({page}) => {
     await page.locator('#size').selectOption('7');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Create Product(downloadable)', async ({page}) => {
@@ -275,21 +247,7 @@ test('Create Product(downloadable)', async ({page}) => {
     await page.getByRole('button', { name: 'Save', exact: true }).click();
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(simple)', async ({page}) => {
@@ -380,21 +338,7 @@ test('Edit Product(simple)', async ({page}) => {
     await page.locator('#size').selectOption('7');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(virtual)', async ({page}) => {
@@ -477,21 +421,7 @@ test('Edit Product(virtual)', async ({page}) => {
     await page.locator('#size').selectOption('7');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(downloadable)', async ({page}) => {
@@ -585,21 +515,7 @@ test('Edit Product(downloadable)', async ({page}) => {
     await page.getByRole('button', { name: 'Save', exact: true }).click();
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Create Product(bundle)', async ({page}) => {
@@ -675,21 +591,7 @@ test('Create Product(bundle)', async ({page}) => {
     await page.locator('div:nth-child(5) > div:nth-child(6) > div > div > div > div:nth-child(2) > .cursor-pointer').first().click();
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(bundle)', async ({page}) => {
@@ -773,21 +675,7 @@ test('Edit Product(bundle)', async ({page}) => {
     await page.locator('div:nth-child(5) > div:nth-child(6) > div > div > div > div:nth-child(2) > .cursor-pointer').first().click();
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Create Product(grouped)', async ({page}) => {
@@ -857,21 +745,7 @@ test('Create Product(grouped)', async ({page}) => {
     await page.locator('input[name="links\\[link_0\\]\\[qty\\]"]').fill('13');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(grouped)', async ({page}) => {
@@ -949,21 +823,7 @@ test('Edit Product(grouped)', async ({page}) => {
     await page.locator('input[name="links\\[link_0\\]\\[qty\\]"]').fill('13');
     await page.getByRole('button', { name: 'Save Product' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Create Product(configurable)', async ({page}) => {
@@ -1052,21 +912,7 @@ test('Create Product(configurable)', async ({page}) => {
     await page.locator('input[name="inventories\\[1\\]"]').fill('023');
     await page.getByRole('button', { name: 'Save', exact: true }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Product(configurable)', async ({page}) => {
@@ -1156,21 +1002,7 @@ test('Edit Product(configurable)', async ({page}) => {
     await page.locator('input[name="inventories\\[1\\]"]').fill('023');
     await page.getByRole('button', { name: 'Save', exact: true }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Mass Delete Products', async ({page}) => {
@@ -1192,16 +1024,7 @@ test('Mass Delete Products', async ({page}) => {
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Selected Products Deleted Successfully')).toBeVisible();
 });
 
 test('Mass Update Products', async ({page}) => {
@@ -1220,14 +1043,5 @@ test('Mass Update Products', async ({page}) => {
     await page.getByRole('link', { name: 'Active' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Selected Products Updated Successfully')).toBeVisible();
 });

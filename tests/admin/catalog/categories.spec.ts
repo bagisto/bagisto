@@ -35,21 +35,7 @@ test('Create Category', async ({page}) => {
     await page.getByPlaceholder('Enter Position').fill('34');
     await page.getByRole('button', { name: 'Save Category' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Product updated successfully')).toBeVisible();
 });
 
 test('Edit Category', async ({page}) => {
@@ -90,21 +76,7 @@ test('Edit Category', async ({page}) => {
     await page.locator('#Brand').nth(1).click();
     await page.getByRole('button', { name: 'Save Category' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('category updated successfully.')).toBeVisible();
 });
 
 test('Delete Category', async ({page}) => {
@@ -119,16 +91,7 @@ test('Delete Category', async ({page}) => {
     await page.locator('div').filter({ hasText: /^4SADASDWE34Active0$/ }).locator('span').nth(3).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('The category has been successfully deleted.')).toBeVisible();
 });
 
 test('Mass Delete Categories', async ({page}) => {
@@ -146,16 +109,7 @@ test('Mass Delete Categories', async ({page}) => {
     await page.getByRole('link', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('The category has been successfully deleted.')).toBeVisible();
 });
 
 test('Mass Update Categories', async ({page}) => {
@@ -174,14 +128,5 @@ test('Mass Update Categories', async ({page}) => {
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
     await page.getByRole('link', { name: 'Attributes' }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('category updated successfully.')).toBeVisible();
 });

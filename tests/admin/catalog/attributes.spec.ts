@@ -64,21 +64,7 @@ test('Create Attribute', async ({page}) => {
     await page.getByLabel('Value Per Channel').click();
     await page.getByRole('button', { name: 'Save Attribute' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Attribute Created Successfully')).toBeVisible();
 });
 
 test('Edit Attribute', async ({page}) => {
@@ -145,21 +131,7 @@ test('Edit Attribute', async ({page}) => {
     await page.getByLabel('Value Per Channel').click();
     await page.getByRole('button', { name: 'Save Attribute' }).click();
 
-    try {
-        const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 2000 }).catch(() => null);
-
-        if (getError) {
-            const errors = await page.$$eval('.text-red-600.text-xs.italic', els => els.map(el => el.innerText));
-            errors.forEach(message => console.log(message));
-        } else {
-            await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-            const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-            await page.click('.cursor-pointer.underline');
-            console.log(message);
-        }
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Attribute Updated Successfully')).toBeVisible();
 });
 
 test('Delete Attribute', async ({page}) => {
@@ -174,16 +146,7 @@ test('Delete Attribute', async ({page}) => {
     await page.locator('div').filter({ hasText: /^24sizeSizeselectFalseFalseFalseFalse2024-12-17 17:01:15$/ }).locator('span').nth(2).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Attribute Deleted Successfully')).toBeVisible();
 });
 
 test('Mass Delete Attributes', async ({page}) => {
@@ -202,14 +165,5 @@ test('Mass Delete Attributes', async ({page}) => {
     await page.getByRole('link', { name: ' Delete' }).click();
     await page.getByRole('button', { name: 'Agree', exact: true }).click();
 
-    try {
-        await page.waitForSelector('.icon-toast-done', { timeout: 5000 });
-
-        const message = await page.$eval('.icon-toast-done', el => el.parentNode.innerText);
-        await page.click('.cursor-pointer.underline');
-
-        console.log(message);
-    } catch(e) {
-        console.log(page.url());
-    }
+    await expect(page.getByText('Attribute Deleted Successfully')).toBeVisible();
 });
