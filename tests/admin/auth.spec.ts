@@ -8,7 +8,7 @@ test('Login', async ({page}) => {
     await page.getByPlaceholder('Password').fill(config.adminPassword);
     await page.getByLabel('Sign In').click();
 
-    await page.getByPlaceholder('Mega Search').click();
+    await expect(page.getByPlaceholder('Mega Search').first()).toBeVisible();
 });
 
 test('Logout', async ({page}) => {
@@ -20,6 +20,7 @@ test('Logout', async ({page}) => {
     await page.getByLabel('Sign In').click();
     await page.getByRole('button', { name: 'E' }).click();
     await page.getByRole('link', { name: 'Logout' }).click();
+    await page.waitForTimeout(5000);
 
-    await page.getByPlaceholder('Password').click();
+    await expect(page.getByPlaceholder('Password').first()).toBeVisible();
 });
