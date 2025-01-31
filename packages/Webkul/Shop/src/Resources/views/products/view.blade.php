@@ -125,9 +125,6 @@
                                                 href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
-                                                <img
-                                                    class="h-5 min-h-5 w-5 min-w-5"
-                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 <img 
                                                     class="h-5 min-h-5 w-5 min-w-5" 
                                                     src="{{ Storage::url($customAttributeValue['value']) }}" 
