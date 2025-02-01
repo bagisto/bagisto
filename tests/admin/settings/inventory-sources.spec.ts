@@ -1,110 +1,245 @@
 import { test, expect, config } from '../../utils/setup';
+import logIn from '../../utils/admin/loginHelper';
+import * as forms from '../../utils/admin/formHelper';
 
-test('Create Inventory Sources', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Inventory Sources' }).click();
-    await page.getByRole('link', { name: 'Create Inventory Source' }).click();
-    await page.getByPlaceholder('Code', { exact: true }).click();
-    await page.getByPlaceholder('Code', { exact: true }).fill('sdsdsds');
-    await page.locator('#name').click();
-    await page.locator('#name').fill('Demo_sdf');
-    await page.locator('#name').click();
-    await page.locator('#name').fill('Demo_sdfsdfsdfwe');
-    await page.getByPlaceholder('Description').click();
-    await page.getByPlaceholder('Description').fill('Demo_fwewefsdd');
-    await page.locator('#contact_name').click();
-    await page.locator('#contact_name').fill('Demo_sdfserw');
-    await page.getByPlaceholder('Email').click();
-    await page.getByPlaceholder('Email').fill('Demo_sfdfweer@sf.fgd');
-    await page.getByPlaceholder('Contact Number').click();
-    await page.getByPlaceholder('Contact Number').fill('9876543323');
-    await page.getByPlaceholder('Fax').click();
-    await page.getByPlaceholder('Fax').fill('3235746');
-    await page.locator('#country').selectOption('AZ');
-    await page.getByPlaceholder('State').click();
-    await page.getByPlaceholder('State').fill('Demo_tyutyu');
-    await page.getByPlaceholder('City').click();
-    await page.getByPlaceholder('City').fill('Demo_yturtyu');
-    await page.getByPlaceholder('Street').click();
-    await page.getByPlaceholder('Street').fill('Demo_5t6y456');
-    await page.getByPlaceholder('Postcode').click();
-    await page.getByPlaceholder('Postcode').fill('4565677');
-    await page.locator('.relative > label').click();
-    await page.getByPlaceholder('Latitude').click();
-    await page.getByPlaceholder('Latitude').fill('45');
-    await page.getByPlaceholder('Longitude').click();
-    await page.getByPlaceholder('Longitude').fill('54');
-    await page.getByPlaceholder('Priority').click();
-    await page.getByPlaceholder('Priority').fill('45');
-    await page.getByRole('button', { name: 'Save Inventory Sources' }).click();
+const { chromium, firefox, webkit } = await import('playwright');
+const baseUrl = config.baseUrl;
+
+let browser;
+let context;
+let page;
+
+test('Create Inventory Sources', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
+
+    console.log('Create Inventory Sources');
+
+    await page.click('div.primary-button:visible');
+
+    await page.click('select[name="country"]');
+
+    const select = await page.$('select[name="country"]');
+
+    const options = await select.$$eval('option', (options) => {
+        return options.map(option => option.value);
+    });
+
+    if (options.length > 1) {
+        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+        await select.selectOption(options[randomIndex]);
+    } else {
+        await select.selectOption(options[0]);
+    }
+
+    const state = await page.$('select[name="state"]');
+
+    if (state) {
+        const options = await state.$$eval('option', (options) => {
+            return options.map(option => option.value);
+        });
+
+        if (options.length > 1) {
+            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+            await state.selectOption(options[randomIndex]);
+        } else {
+            await select.selectOption(options[0]);
+        }
+    }
+
+    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    for (let input of inputs) {
+        await input.fill(forms.generateRandomStringWithSpaces(200));
+    }
+
+    await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+
+    await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
+
+    await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+
+    await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+
+    await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
+
+    const concatenatedNames = Array(5)
+        .fill(null)
+        .map(() => forms.generateRandomProductName())
+        .join(' ')
+        .replaceAll(' ', ', -');
+
+    await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
+
+    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
+
+    let i = Math.floor(Math.random() * 10) + 1;
+
+    if (i % 2 == 1) {
+        await page.click('input[type="checkbox"] + label.peer');
+    }
+
+    await inputs[0].press('Enter');
 
     await expect(page.getByText('Inventory Source Created Successfully')).toBeVisible();
 });
 
-test('Edit Inventory Sources', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Inventory Sources' }).click();
-    await page.locator('div').filter({ hasText: /^2sdsdsdsdsdfsdfsdfwe45Active$/ }).locator('span').first().click();
-    await page.getByPlaceholder('Code', { exact: true }).click();
-    await page.getByPlaceholder('Code', { exact: true }).fill('sdsdsds');
-    await page.locator('#name').click();
-    await page.locator('#name').fill('Demo_sdf');
-    await page.locator('#name').click();
-    await page.locator('#name').fill('Demo_sdfsdfsdfwe');
-    await page.getByPlaceholder('Description').click();
-    await page.getByPlaceholder('Description').fill('Demo_fwewefsdd');
-    await page.locator('#contact_name').click();
-    await page.locator('#contact_name').fill('Demo_sdfserw');
-    await page.getByPlaceholder('Email').click();
-    await page.getByPlaceholder('Email').fill('Demo_sfdfweer@sf.fgd');
-    await page.getByPlaceholder('Contact Number').click();
-    await page.getByPlaceholder('Contact Number').fill('9876543323');
-    await page.getByPlaceholder('Fax').click();
-    await page.getByPlaceholder('Fax').fill('3235746');
-    await page.locator('#country').selectOption('AZ');
-    await page.getByPlaceholder('State').click();
-    await page.getByPlaceholder('State').fill('Demo_tyutyu');
-    await page.getByPlaceholder('City').click();
-    await page.getByPlaceholder('City').fill('Demo_yturtyu');
-    await page.getByPlaceholder('Street').click();
-    await page.getByPlaceholder('Street').fill('Demo_5t6y456');
-    await page.getByPlaceholder('Postcode').click();
-    await page.getByPlaceholder('Postcode').fill('4565677');
-    await page.locator('.relative > label').click();
-    await page.getByPlaceholder('Latitude').click();
-    await page.getByPlaceholder('Latitude').fill('45');
-    await page.getByPlaceholder('Longitude').click();
-    await page.getByPlaceholder('Longitude').fill('54');
-    await page.getByPlaceholder('Priority').click();
-    await page.getByPlaceholder('Priority').fill('45');
-    await page.getByRole('button', { name: 'Save Inventory Sources' }).click();
+test('Edit Inventory Sources', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
+
+    console.log('Edit Inventory Sources');
+
+    await page.waitForTimeout(5000);
+
+    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+
+    await iconEdit[0].click();
+
+    await page.click('select[name="country"]');
+
+    const select = await page.$('select[name="country"]');
+
+    const options = await select.$$eval('option', (options) => {
+        return options.map(option => option.value);
+    });
+
+    if (options.length > 1) {
+        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+        await select.selectOption(options[randomIndex]);
+    } else {
+        await select.selectOption(options[0]);
+    }
+
+    const state = await page.$('select[name="state"]');
+
+    if (state) {
+        const options = await state.$$eval('option', (options) => {
+            return options.map(option => option.value);
+        });
+
+        if (options.length > 1) {
+            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+            await state.selectOption(options[randomIndex]);
+        } else {
+            await select.selectOption(options[0]);
+        }
+    }
+
+    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    for (let input of inputs) {
+        await input.fill(forms.generateRandomStringWithSpaces(200));
+    }
+
+    await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+
+    await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
+
+    await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+
+    await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+
+    await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
+
+    const concatenatedNames = Array(5)
+        .fill(null)
+        .map(() => forms.generateRandomProductName())
+        .join(' ')
+        .replaceAll(' ', ', -');
+
+    await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
+
+    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
+
+    let i = Math.floor(Math.random() * 10) + 1;
+
+    if (i % 2 == 1) {
+        await page.click('input[type="checkbox"] + label.peer');
+    }
+
+    await inputs[0].press('Enter');
 
     await expect(page.getByText('Inventory Sources Updated Successfully')).toBeVisible();
 });
 
-test('Delete Inventory Sources', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Inventory Sources' }).click();
-    await page.locator('div').filter({ hasText: /^2sdsdsdsdsdfsdfsdfwe45Active$/ }).locator('span').nth(1).click();
-    await page.getByRole('button', { name: 'Agree', exact: true }).click();
+test('Delete Inventory Sources', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
+
+    console.log('Delete Inventory Sources');
+
+    await page.waitForTimeout(5000);
+
+    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+    await iconDelete[0].click();
+
+    await page.click('button.transparent-button + button.primary-button:visible');
 
     await expect(page.getByText('Inventory Sources Deleted Successfully')).toBeVisible();
 });

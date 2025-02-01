@@ -1,65 +1,141 @@
 import { test, expect, config } from '../../utils/setup';
+import logIn from '../../utils/admin/loginHelper';
+import * as forms from '../../utils/admin/formHelper';
 
-test('Address of Customer', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Configure' }).click();
-    await page.getByRole('link', { name: 'Address Set country, state,' }).click();
-    await page.getByLabel('Lines in a Street Address').click();
-    await page.getByLabel('Lines in a Street Address').fill('2');
-    await page.locator('div:nth-child(4) > .mb-4 > .relative > div').click();
-    await page.getByLabel('State Default').click();
-    await page.locator('div:nth-child(4) > .mb-4 > .relative > div').click();
-    await page.locator('div').filter({ hasText: /^Country Default$/ }).nth(1).click();
-    await page.locator('label > div').first().click();
-    await page.getByRole('button', { name: 'Save Configuration' }).click();
+const { chromium, firefox, webkit } = await import('playwright');
+const baseUrl = config.baseUrl;
+
+let browser;
+let context;
+let page;
+
+test('Address of Customer', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/configuration/customer/address`);
+
+    console.log('Address of Customer');
+
+    let i = Math.floor(Math.random() * 10) + 1;
+
+    if (i % 3 == 1) {
+        await page.fill('input[type="number"]:visible', (Math.random() * 4).toString(), { timeout: 3000 }).catch(() => null);
+    }
+
+    await page.click('button[type="submit"].primary-button:visible');
 
     await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
-test('Captcha of Customer', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Configure' }).click();
-    await page.getByRole('link', { name: 'Captcha Set site key, secret' }).click();
-    await page.getByLabel('Site Key Default').click();
-    await page.getByLabel('Site Key Default').fill('asded@werwe/tyuyhg');
-    await page.getByLabel('Secret Key Default').click();
-    await page.getByLabel('Secret Key Default').fill('Demo_tyutyu yut');
-    await page.locator('label > div').click();
-    await page.getByRole('button', { name: 'Save Configuration' }).click();
+test('Captcha of Customer', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/configuration/customer/captcha`);
+
+    console.log('Captcha of Customer');
+
+    let i = Math.floor(Math.random() * 10) + 1;
+
+
+    const inputs = await page.$$('input[type="text"].rounded-md:visible');
+
+    for (let input of inputs) {
+
+        let i = Math.floor(Math.random() * 10) + 1;
+
+        if (i % 2 != 1) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
+    }
+
+    await page.click('button[type="submit"].primary-button:visible');
 
     await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
-test('Settings of Customer', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
+test('Settings of Customer', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
 
-    await page.getByRole('link', { name: ' Configure' }).click();
-    await page.getByRole('link', { name: 'Settings Set newsletter' }).click();
-    await page.locator('label > div').first().click();
-    await page.getByLabel('Redirect Customer to the').selectOption('account');
-    await page.getByLabel('Default Group').selectOption('wholesale');
-    await page.locator('div:nth-child(4) > .mb-4 > .relative > div').first().click();
-    await page.locator('div').filter({ hasText: /^Enable Facebook Default$/ }).nth(1).click();
-    await page.locator('div:nth-child(8) > .mb-4 > .relative > div').click();
-    await page.locator('div:nth-child(6) > .mb-4 > .relative > div').click();
-    await page.locator('div:nth-child(12) > div > .mb-4 > .relative > div').first().click();
-    await page.locator('label > div').first().click();
-    await page.getByRole('button', { name: 'Save Configuration' }).click();
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/configuration/customer/settings`);
+
+    console.log('Settings of Customer');
+
+    const selects = await page.$$('select.custom-select');
+
+    for (let select of selects) {
+        let i = Math.floor(Math.random() * 10) + 1;
+
+        if (i % 3 == 1) {
+            const options = await select.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
+
+            if (options.length > 0) {
+                const randomIndex = Math.floor(Math.random() * options.length);
+
+                await select.selectOption(options[randomIndex]);
+            }
+        }
+    }
+
+    await page.click('button[type="submit"].primary-button:visible');
 
     await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
