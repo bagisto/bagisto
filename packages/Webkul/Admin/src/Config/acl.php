@@ -761,15 +761,20 @@ return [
         'route' => 'admin.settings.themes.store',
         'sort'  => 1,
     ], [
+        'key'   => 'settings.themes.duplicate',
+        'name'  => 'admin::app.acl.copy',
+        'route' => 'admin.settings.themes.duplicate',
+        'sort'  => 2,
+    ], [
         'key'   => 'settings.themes.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.settings.themes.edit',
-        'sort'  => 2,
+        'sort'  => 3,
     ], [
         'key'   => 'settings.themes.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.settings.themes.delete',
-        'sort'  => 3,
+        'sort'  => 4,
     ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',

@@ -3,12 +3,14 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Theme\ThemeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
+use Webkul\Theme\Models\ThemeCustomizationTranslation;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class ThemeController extends Controller
@@ -143,6 +145,44 @@ class ThemeController extends Controller
         ], 200);
     }
 
+    /**
+     * Duplicate the specified theme.
+     */
+    public function duplicate(int $id): RedirectResponse
+    {
+        $theme = $this->themeCustomizationRepository->find($id);
+
+        if (! $theme) {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.themes.not-found'),
+            ], 404);
+        }
+
+        $newThemeData = $theme->toArray();
+        unset($newThemeData['id']);
+        $newThemeData['name'] = $this->themeCustomizationRepository->getUniqueName($theme->name);
+        $newThemeData['status'] = 'inactive';
+
+        Event::dispatch('theme_customization.create.before');
+
+        $newTheme = $this->themeCustomizationRepository->create($newThemeData);
+        $newTheme->save();
+
+        $translations = $theme->translations;
+        foreach ($translations as $translation) {
+            $newTranslationData = $translation->toArray();
+            unset($newTranslationData['id']);
+            $newTranslationData['theme_customization_id'] = $newTheme->id;
+
+            $translatedModel = new ThemeCustomizationTranslation($newTranslationData);
+            $translatedModel->save();
+        }
+
+        Event::dispatch('theme_customization.create.after', $newTheme);
+
+        return redirect()->route('admin.settings.themes.index')->with('success', trans('admin::app.settings.themes.duplicate-success'));
+    }
+
     public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResponse
     {
         $selectedThemeIds = $massUpdateRequest->input('indices');
@@ -165,7 +205,7 @@ class ThemeController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.themes.update-success'),
+            'message' => trans('admin::app.settings.themes.delete-success'),
         ]);
     }
 }
