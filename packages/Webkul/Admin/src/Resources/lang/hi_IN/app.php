@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'चैनल नाम',
                     'change-status' => 'स्थिति बदलें',
                     'delete'        => 'हटाएँ',
+                    'duplicate'     => 'डुप्लिकेट',
                     'id'            => 'आईडी',
                     'inactive'      => 'निष्क्रिय',
                     'name'          => 'नाम',
@@ -3203,7 +3204,9 @@ return [
 
             'create-success' => 'थीम सफलतापूर्वक बनाई गई',
             'delete-success' => 'थीम सफलतापूर्वक हटाई गई',
+            'duplicate-success' => 'थीम सफलतापूर्वक डुप्लिकेट किया गया',
             'update-success' => 'थीम सफलतापूर्वक अपडेट की गई',
+            'not-found'      => 'थीम नहीं मिला',
         ],
     ],
 

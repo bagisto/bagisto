@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'Kanalname',
                     'change-status' => 'Status ändern',
                     'delete'        => 'Löschen',
+                    'duplicate'     => 'Duplizieren',
                     'id'            => 'ID',
                     'inactive'      => 'Inaktiv',
                     'name'          => 'Name',
@@ -3203,7 +3204,9 @@ return [
 
             'create-success' => 'Thema erfolgreich erstellt',
             'delete-success' => 'Thema erfolgreich gelöscht',
+            'duplicate-success' => 'Design erfolgreich dupliziert',
             'update-success' => 'Thema erfolgreich aktualisiert',
+            'not-found'      => 'Design nicht gefunden',
         ],
     ],
 
