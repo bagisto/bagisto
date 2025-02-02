@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => '频道名称',
                     'change-status' => '更改状态',
                     'delete'        => '删除',
+                    'duplicate'     => '复制',
                     'id'            => 'ID',
                     'inactive'      => '非活动',
                     'name'          => '名称',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                           => '是',
             ],
 
-            'create-success' => '成功创建主题',
-            'delete-success' => '成功删除主题',
-            'update-success' => '成功更新主题',
+            'create-success'    => '成功创建主题',
+            'delete-success'    => '成功删除主题',
+            'duplicate-success' => '主题复制成功',
+            'update-success'    => '成功更新主题',
+            'not-found'         => '未找到主题',
         ],
     ],
 

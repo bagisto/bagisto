@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'චැනල් නම',
                     'change-status' => 'තත්ත්වය වෙනස් කරන්න',
                     'delete'        => 'මකනවා',
+                    'duplicate'     => 'අනුපිටපත් කරන්න',
                     'id'            => 'අනන්‍යතාවය',
                     'inactive'      => 'අක්‍රියාකාරී',
                     'name'          => 'නම',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                           => 'ඔව්',
             ],
 
-            'create-success' => 'තේමා සාර්ථකයි',
-            'delete-success' => 'තේමා ඉවත් කරනවා',
-            'update-success' => 'තේමා යාවත්කාලීන කරනවා',
+            'create-success'    => 'තේමා සාර්ථකයි',
+            'delete-success'    => 'තේමා ඉවත් කරනවා',
+            'duplicate-success' => 'තේමාව සාර්ථකව අනුපිටපත් කරන ලදී',
+            'update-success'    => 'තේමා යාවත්කාලීන කරනවා',
+            'not-found'         => 'තේමාව සොයාගත නොහැක',
         ],
     ],
 

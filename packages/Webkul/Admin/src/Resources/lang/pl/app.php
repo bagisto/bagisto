@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'Nazwa kanału',
                     'change-status' => 'Zmień status',
                     'delete'        => 'Usuń',
+                    'duplicate'     => 'Duplikuj',
                     'id'            => 'ID',
                     'inactive'      => 'Nieaktywny',
                     'name'          => 'Nazwa',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                           => 'Tak',
             ],
 
-            'create-success' => 'Motyw został pomyślnie utworzony',
-            'delete-success' => 'Motyw został pomyślnie usunięty',
-            'update-success' => 'Motyw został pomyślnie zaktualizowany',
+            'create-success'    => 'Motyw został pomyślnie utworzony',
+            'delete-success'    => 'Motyw został pomyślnie usunięty',
+            'duplicate-success' => 'Motyw został pomyślnie zduplikowany',
+            'update-success'    => 'Motyw został pomyślnie zaktualizowany',
+            'not-found'         => 'Motyw nie znaleziony',
         ],
     ],
 

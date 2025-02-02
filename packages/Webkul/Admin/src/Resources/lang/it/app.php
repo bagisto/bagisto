@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'Nome Canale',
                     'change-status' => 'Cambia stato',
                     'delete'        => 'Elimina',
+                    'duplicate'     => 'Duplica',
                     'id'            => 'Id',
                     'inactive'      => 'Inattivo',
                     'name'          => 'Nome',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                           => 'Sì',
             ],
 
-            'create-success' => 'Tema creato con successo',
-            'delete-success' => 'Tema eliminato con successo',
-            'update-success' => 'Tema aggiornato con successo',
+            'create-success'    => 'Tema creato con successo',
+            'delete-success'    => 'Tema eliminato con successo',
+            'duplicate-success' => 'Tema duplicato con successo',
+            'update-success'    => 'Tema aggiornato con successo',
+            'not-found'         => 'Tema non trovato',
         ],
     ],
 

@@ -174,6 +174,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.themes.edit');
 
+            Route::get('duplicate/{id}', 'duplicate')->name('admin.settings.themes.duplicate');
+
             Route::post('store', 'store')->name('admin.settings.themes.store');
 
             Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');

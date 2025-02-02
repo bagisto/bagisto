@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'Kanaalnaam',
                     'change-status' => 'Status wijzigen',
                     'delete'        => 'Verwijderen',
+                    'duplicate'     => 'Dupliceren',
                     'id'            => 'ID',
                     'inactive'      => 'Inactief',
                     'name'          => 'Naam',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                           => 'Ja',
             ],
 
-            'create-success' => 'Thema is succesvol aangemaakt',
-            'delete-success' => 'Thema is succesvol verwijderd',
-            'update-success' => 'Thema is succesvol bijgewerkt',
+            'create-success'    => 'Thema is succesvol aangemaakt',
+            'delete-success'    => 'Thema is succesvol verwijderd',
+            'duplicate-success' => 'Thema succesvol gedupliceerd',
+            'update-success'    => 'Thema is succesvol bijgewerkt',
+            'not-found'         => 'Thema niet gevonden',
         ],
     ],
 

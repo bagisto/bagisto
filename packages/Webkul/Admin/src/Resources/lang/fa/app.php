@@ -3090,6 +3090,7 @@ return [
                     'channel_name'  => 'نام کانال',
                     'change-status' => 'تغییر وضعیت',
                     'delete'        => 'حذف',
+                    'duplicate'     => 'تکراری',
                     'id'            => 'شناسه',
                     'inactive'      => 'غیرفعال',
                     'name'          => 'نام',
@@ -3201,9 +3202,11 @@ return [
                 'yes'                          => 'بله',
             ],
 
-            'create-success' => 'تم با موفقیت ایجاد شد',
-            'delete-success' => 'تم با موفقیت حذف شد',
-            'update-success' => 'تم با موفقیت به‌روزرسانی شد',
+            'create-success'    => 'تم با موفقیت ایجاد شد',
+            'delete-success'    => 'تم با موفقیت حذف شد',
+            'duplicate-success' => 'قالب با موفقیت تکرار شد',
+            'update-success'    => 'تم با موفقیت به‌روزرسانی شد',
+            'not-found'         => 'قالب یافت نشد',
         ],
     ],
 
