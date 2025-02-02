@@ -3206,6 +3206,7 @@ return [
             'delete-success'    => 'Theme deleted successfully',
             'duplicate-success' => 'Theme duplicated successfully',
             'update-success'    => 'Theme updated successfully',
+            'not-found'         => 'Theme not found',
         ],
     ],
 
