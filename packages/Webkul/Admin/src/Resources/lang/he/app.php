@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'כן',
             ],
 
-            'create-success' => 'ערכת העיצוב נוצרה בהצלחה',
-            'delete-success' => 'ערכת העיצוב נמחקה בהצלחה',
+            'create-success'    => 'ערכת העיצוב נוצרה בהצלחה',
+            'delete-success'    => 'ערכת העיצוב נמחקה בהצלחה',
             'duplicate-success' => 'הנושא שוכפל בהצלחה',
-            'update-success' => 'ערכת העיצ',
-            'not-found'      => 'הנושא לא נמצא',
+            'update-success'    => 'ערכת העיצ',
+            'not-found'         => 'הנושא לא נמצא',
         ],
     ],
 

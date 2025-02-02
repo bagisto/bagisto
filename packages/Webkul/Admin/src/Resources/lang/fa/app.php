@@ -3202,11 +3202,11 @@ return [
                 'yes'                          => 'بله',
             ],
 
-            'create-success' => 'تم با موفقیت ایجاد شد',
-            'delete-success' => 'تم با موفقیت حذف شد',
+            'create-success'    => 'تم با موفقیت ایجاد شد',
+            'delete-success'    => 'تم با موفقیت حذف شد',
             'duplicate-success' => 'قالب با موفقیت تکرار شد',
-            'update-success' => 'تم با موفقیت به‌روزرسانی شد',
-            'not-found'      => 'قالب یافت نشد',
+            'update-success'    => 'تم با موفقیت به‌روزرسانی شد',
+            'not-found'         => 'قالب یافت نشد',
         ],
     ],
 

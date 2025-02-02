@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'Tak',
             ],
 
-            'create-success' => 'Motyw został pomyślnie utworzony',
-            'delete-success' => 'Motyw został pomyślnie usunięty',
+            'create-success'    => 'Motyw został pomyślnie utworzony',
+            'delete-success'    => 'Motyw został pomyślnie usunięty',
             'duplicate-success' => 'Motyw został pomyślnie zduplikowany',
-            'update-success' => 'Motyw został pomyślnie zaktualizowany',
-            'not-found'      => 'Motyw nie znaleziony',
+            'update-success'    => 'Motyw został pomyślnie zaktualizowany',
+            'not-found'         => 'Motyw nie znaleziony',
         ],
     ],
 

@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'Да',
             ],
 
-            'create-success' => 'Тема успешно создана',
-            'delete-success' => 'Тема успешно удалена',
+            'create-success'    => 'Тема успешно создана',
+            'delete-success'    => 'Тема успешно удалена',
             'duplicate-success' => 'Тема успешно дублирована',
-            'update-success' => 'Тема успешно обновлена',
-            'not-found'      => 'Тема не найдена',
+            'update-success'    => 'Тема успешно обновлена',
+            'not-found'         => 'Тема не найдена',
         ],
     ],
 

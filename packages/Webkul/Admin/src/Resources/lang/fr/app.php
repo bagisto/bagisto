@@ -3202,11 +3202,11 @@ return [
                 'Yes'                          => 'Oui',
             ],
 
-            'create-success' => 'Thème créé avec succès',
-            'delete-success' => 'Thème supprimé avec succès',
+            'create-success'    => 'Thème créé avec succès',
+            'delete-success'    => 'Thème supprimé avec succès',
             'duplicate-success' => 'Thème dupliqué avec succès',
-            'update-success' => 'Thème mis à jour avec succès',
-            'not-found'      => 'Thème non trouvé',
+            'update-success'    => 'Thème mis à jour avec succès',
+            'not-found'         => 'Thème non trouvé',
         ],
     ],
 

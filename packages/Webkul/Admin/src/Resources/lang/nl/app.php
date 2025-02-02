@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'Ja',
             ],
 
-            'create-success' => 'Thema is succesvol aangemaakt',
-            'delete-success' => 'Thema is succesvol verwijderd',
+            'create-success'    => 'Thema is succesvol aangemaakt',
+            'delete-success'    => 'Thema is succesvol verwijderd',
             'duplicate-success' => 'Thema succesvol gedupliceerd',
-            'update-success' => 'Thema is succesvol bijgewerkt',
-            'not-found'      => 'Thema niet gevonden',
+            'update-success'    => 'Thema is succesvol bijgewerkt',
+            'not-found'         => 'Thema niet gevonden',
         ],
     ],
 

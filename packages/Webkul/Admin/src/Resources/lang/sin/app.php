@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'ඔව්',
             ],
 
-            'create-success' => 'තේමා සාර්ථකයි',
-            'delete-success' => 'තේමා ඉවත් කරනවා',
+            'create-success'    => 'තේමා සාර්ථකයි',
+            'delete-success'    => 'තේමා ඉවත් කරනවා',
             'duplicate-success' => 'තේමාව සාර්ථකව අනුපිටපත් කරන ලදී',
-            'update-success' => 'තේමා යාවත්කාලීන කරනවා',
-            'not-found'      => 'තේමාව සොයාගත නොහැක',
+            'update-success'    => 'තේමා යාවත්කාලීන කරනවා',
+            'not-found'         => 'තේමාව සොයාගත නොහැක',
         ],
     ],
 

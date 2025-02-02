@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'はい',
             ],
 
-            'create-success' => 'テーマが正常に作成されました',
-            'delete-success' => 'テーマが正常に削除されました',
+            'create-success'    => 'テーマが正常に作成されました',
+            'delete-success'    => 'テーマが正常に削除されました',
             'duplicate-success' => 'テーマが正常に複製されました',
-            'update-success' => 'テーマが正常に更新されました',
-            'not-found'      => 'テーマが見つかりません',
+            'update-success'    => 'テーマが正常に更新されました',
+            'not-found'         => 'テーマが見つかりません',
         ],
     ],
 

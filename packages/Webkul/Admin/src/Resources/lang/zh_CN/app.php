@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => '是',
             ],
 
-            'create-success' => '成功创建主题',
-            'delete-success' => '成功删除主题',
+            'create-success'    => '成功创建主题',
+            'delete-success'    => '成功删除主题',
             'duplicate-success' => '主题复制成功',
-            'update-success' => '成功更新主题',
-            'not-found'      => '未找到主题',
+            'update-success'    => '成功更新主题',
+            'not-found'         => '未找到主题',
         ],
     ],
 

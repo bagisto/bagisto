@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'Evet',
             ],
 
-            'create-success' => 'Tema başarıyla oluşturuldu',
-            'delete-success' => 'Tema başarıyla silindi',
+            'create-success'    => 'Tema başarıyla oluşturuldu',
+            'delete-success'    => 'Tema başarıyla silindi',
             'duplicate-success' => 'Tema başarıyla kopyalandı',
-            'update-success' => 'Tema başarıyla güncellendi',
-            'not-found'      => 'Tema bulunamadı',
+            'update-success'    => 'Tema başarıyla güncellendi',
+            'not-found'         => 'Tema bulunamadı',
         ],
     ],
 

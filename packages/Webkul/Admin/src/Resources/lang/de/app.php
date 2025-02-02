@@ -3202,11 +3202,11 @@ return [
                 'yes'                           => 'Ja',
             ],
 
-            'create-success' => 'Thema erfolgreich erstellt',
-            'delete-success' => 'Thema erfolgreich gelöscht',
+            'create-success'    => 'Thema erfolgreich erstellt',
+            'delete-success'    => 'Thema erfolgreich gelöscht',
             'duplicate-success' => 'Design erfolgreich dupliziert',
-            'update-success' => 'Thema erfolgreich aktualisiert',
-            'not-found'      => 'Design nicht gefunden',
+            'update-success'    => 'Thema erfolgreich aktualisiert',
+            'not-found'         => 'Design nicht gefunden',
         ],
     ],
 
