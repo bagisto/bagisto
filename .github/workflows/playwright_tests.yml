@@ -7,8 +7,14 @@ permissions:
 
 jobs:
   playwright_test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 180
+    runs-on: ${{ matrix.operating-systems }}
+
+    strategy:
+      matrix:
+        operating-systems: [ubuntu-latest]
+        php-versions: ['8.2', '8.3']
+
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 
     services:
       mysql:
