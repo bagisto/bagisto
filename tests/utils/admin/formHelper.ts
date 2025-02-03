@@ -141,6 +141,7 @@ function generateRandomUrl() {
     const protocol = protocols[Math.floor(Math.random() * protocols.length)];
     return `${protocol}://${domain}${path}`;
 }
+
 function generateRandomDateTimeRange() {
     // Generate valid "from" and "to" dates
     const fromDate = new Date(2024, 9, 29, 12, 0, 0); // Start: 2024-10-29 12:00:00
@@ -155,4 +156,5 @@ function generateRandomDateTimeRange() {
         to: randomTo.toISOString().replace("T", " ").split(".")[0],
     };
 }
+
 export { form, getRandomImageFile, testForm, generateRandomPassword, generateRandomStringWithSpaces, fillParagraphWithRandomHtml, generateRandomProductName, generateRandomUrl, generateRandomDateTimeRange};
