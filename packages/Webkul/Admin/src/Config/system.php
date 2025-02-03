@@ -1609,7 +1609,7 @@ return [
         'key'    => 'sales.payment_methods.paypal_smart_button',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
-        'sort'   => 0,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'title',
