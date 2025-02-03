@@ -1,54 +1,150 @@
 import { test, expect, config } from '../../utils/setup';
+import logIn from '../../utils/admin/loginHelper';
 
-test('Create Exchange Rate', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Exchange Rates' }).click();
-    await page.getByRole('button', { name: 'Create Exchange Rate' }).click();
-    await page.getByText('Source Currency Target').click();
-    await page.locator('select[name="target_currency"]').selectOption('8');
-    await page.getByPlaceholder('Rate').click();
-    await page.getByPlaceholder('Rate').fill('2323');
-    await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
+const { chromium, firefox, webkit } = await import('playwright');
+const baseUrl = config.baseUrl;
+
+let browser;
+let context;
+let page;
+
+test('Create Exchange Rate', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/exchange-rates`);
+
+    console.log('Create Exchange Rate');
+
+    await page.click('button[type="button"].primary-button:visible');
+
+    await page.click('select[name="target_currency"]');
+
+    const select = await page.$('select[name="target_currency"]');
+
+    const options = await select.$$eval('option', (options) => {
+        return options.map(option => option.value);
+    });
+
+    if (options.length > 1) {
+        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+        await select.selectOption(options[randomIndex]);
+    } else {
+        await select.selectOption(options[0]);
+    }
+
+    await page.fill('input[name="rate"]', (Math.random() * 500).toString());
+    await page.press('input[name="rate"]', 'Enter');
 
     await expect(page.getByText('Exchange Rate Created Successfully')).toBeVisible();
 });
 
-test('Edit Exchange Rate', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Exchange Rates' }).click();
-    await page.locator('div').filter({ hasText: /^1Canadian Dollar2323\.000000000000$/ }).locator('a').first().click();
-    await page.getByText('Source Currency Target').click();
-    await page.locator('select[name="target_currency"]').selectOption('8');
-    await page.getByPlaceholder('Rate').click();
-    await page.getByPlaceholder('Rate').fill('2323');
-    await page.getByRole('button', { name: 'Save Exchange Rate' }).click();
+test('Edit Exchange Rate', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/exchange-rates`);
+
+    console.log('Edit Exchange Rate');
+
+    await page.waitForTimeout(5000);
+
+    const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    await iconEdit[0].click();
+
+    await page.click('select[name="target_currency"]');
+
+    const select = await page.$('select[name="target_currency"]');
+
+    const options = await select.$$eval('option', (options) => {
+        return options.map(option => option.value);
+    });
+
+    if (options.length > 1) {
+        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+
+        await select.selectOption(options[randomIndex]);
+    } else {
+        await select.selectOption(options[0]);
+    }
+
+    await page.fill('input[name="rate"]', (Math.random() * 500).toString());
+    await page.press('input[name="rate"]', 'Enter');
 
     await expect(page.getByText('Exchange Rate Updated Successfully')).toBeVisible();
 });
 
-test('Delete Exchange Rate', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Exchange Rates' }).click();
-    await page.locator('div').filter({ hasText: /^1Canadian Dollar2323\.000000000000$/ }).locator('a').nth(1).click();
-    await page.getByRole('button', { name: 'Agree', exact: true }).click();
+test('Delete Exchange Rate', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/exchange-rates`);
+
+    console.log('Delete Exchange Rate');
+
+    await page.waitForTimeout(5000);
+
+    const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    await iconDelete[0].click();
+
+    await page.click('button.transparent-button + button.primary-button:visible');
 
     await expect(page.getByText('Exchange Rate Deleted Successfully')).toBeVisible();
 });

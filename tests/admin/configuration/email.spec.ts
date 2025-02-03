@@ -1,48 +1,88 @@
 import { test, expect, config } from '../../utils/setup';
+import logIn from '../../utils/admin/loginHelper';
+import * as forms from '../../utils/admin/formHelper';
 
-test('Settings of Email', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Configure' }).click();
-    await page.getByRole('link', { name: 'Email Settings Set email' }).click();
-    await page.getByLabel('Email Sender Name Default').click();
-    await page.getByLabel('Email Sender Name Default').fill('User _test');
-    await page.getByLabel('Shop Email Address Default').click();
-    await page.getByLabel('Shop Email Address Default').fill('Demo_User@gmail.com');
-    await page.getByLabel('Admin Name Default').click();
-    await page.getByLabel('Admin Name Default').fill('Admin');
-    await page.getByLabel('Admin Email Default').click();
-    await page.getByLabel('Admin Email Default').fill('Admin@gmail.com');
-    await page.getByLabel('Contact Name Default').click();
-    await page.getByLabel('Contact Name Default').fill('Name');
-    await page.getByLabel('Contact Email Default').click();
-    await page.getByLabel('Contact Email Default').fill('Demo_User@example.com');
-    await page.getByRole('button', { name: 'Save Configuration' }).click();
+const { chromium, firefox, webkit } = await import('playwright');
+const baseUrl = config.baseUrl;
+
+let browser;
+let context;
+let page;
+
+test('Settings of Email', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/configuration/emails/configure`);
+
+    console.log('Settings of Email');
+
+    await page.click('input[type="text"].rounded-md:visible');
+
+    const inputs = await page.$$('input[type="text"].rounded-md:visible');
+
+    let i = 0;
+
+    for (let input of inputs) {
+        if (i % 2 == 0) {
+            await input.fill(forms.generateRandomStringWithSpaces(50));
+        } else {
+            await input.fill(forms.form.email);
+        }
+
+        i++;
+    }
+
+    await page.click('button[type="submit"].primary-button:visible');
 
     await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
 
-test('Notifications of Email', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();await page.getByText('Dashboard Sales Orders').click();
-    await page.getByRole('link', { name: ' Configure' }).click();
-    await page.getByRole('link', { name: 'Notifications To configure,' }).click();
-    await page.locator('.mb-4 > .mb-4').first().click();
-    await page.locator('label > div').first().click();
-    await page.locator('div:nth-child(4) > .mb-4').click();
-    await page.locator('div:nth-child(6) > .mb-4 > .relative > div').click();
-    await page.locator('div:nth-child(8) > .mb-4 > .relative > div').click();
-    await page.locator('div:nth-child(12) > .mb-4 > .relative > div').click();
-    await page.locator('div:nth-child(20) > .mb-4 > .relative > div').click();
-    await page.getByRole('button', { name: 'Save Configuration' }).click();
+test('Notifications of Email', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/configuration/emails/general`);
+
+    console.log('Notifications of Email');
+
+    await page.click('button[type="submit"].primary-button:visible');
 
     await expect(page.getByText('Configuration saved successfully')).toBeVisible();
 });
