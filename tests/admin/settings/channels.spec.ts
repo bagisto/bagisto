@@ -1,126 +1,189 @@
 import { test, expect, config } from '../../utils/setup';
+import logIn from '../../utils/admin/loginHelper';
+import * as forms from '../../utils/admin/formHelper';
 
-test('Create Channel', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Channels' }).click();
-    await page.getByRole('link', { name: 'Create Channel' }).click();
-    await page.getByPlaceholder('Code').click();
-    await page.getByPlaceholder('Code').fill('sdsdfwe');
-    await page.getByPlaceholder('Name').click();
-    await page.getByPlaceholder('Name').fill('Demo_dfsfwe');
-    await page.getByPlaceholder('Name').click();
-    await page.getByPlaceholder('Name').fill('Demo_dfsfwe wewe');
-    await page.getByPlaceholder('Description', { exact: true }).click();
-    await page.getByPlaceholder('Description', { exact: true }).fill('Demo_sdfwe ewrwew');
-    await page.locator('#inventory_sources_1').nth(1).click();
-    await page.locator('#root_category_id').selectOption('1');
-    await page.getByPlaceholder('https://www.example.com (Don\'').click();
-    await page.getByPlaceholder('https://www.example.com (Don\'').fill('Demo_dfsdeew');
-    await page.getByPlaceholder('Meta title').click();
-    await page.getByPlaceholder('Meta title').fill('Demo_werewrwe');
-    await page.getByPlaceholder('Meta keywords').click();
-    await page.getByPlaceholder('Meta keywords').fill('Demo_sdfser');
-    await page.getByPlaceholder('Meta description').click();
-    await page.getByPlaceholder('Meta description').fill('Demo_dsfwerwewe');
-    await page.getByPlaceholder('Message').click();
-    await page.getByPlaceholder('Message').fill('Demo_werwewe');
-    await page.getByPlaceholder('Allowed IPs').click();
-    await page.getByPlaceholder('Allowed IPs').fill('Demo_rwe');
-    await page.locator('.relative > label').click();
-    await page.locator('#currencies_64').nth(1).click();
-    await page.locator('#currencies_62').nth(1).click();
-    await page.getByLabel('CFA Franc BEAC').click();
-    await page.locator('#base_currency_id').selectOption('18');
-    await page.locator('label').filter({ hasText: 'Russian Ruble' }).click();
-    await page.getByText('Locales Arabic Bengali').click();
-    await page.locator('label').filter({ hasText: 'Sinhala' }).click();
-    await page.getByText('Turkish').first().click();
-    await page.locator('#default_locale_id').selectOption('17');
-    await page.locator('label').filter({ hasText: 'South African Rand' }).click();
-    await page.locator('label').filter({ hasText: 'Zambian Kwacha' }).click();
-    await page.locator('label').filter({ hasText: 'CFA Franc BEAC' }).click();
-    await page.locator('label').filter({ hasText: 'Fijian Dollar' }).click();
-    await page.locator('#inventory_sources_1').nth(1).click();
-    await page.getByText('Ukrainian').first().click();
-    await page.getByLabel('Ukrainian', { exact: true }).click();
-    await page.getByText('Turkish').first().click();
-    await page.getByRole('button', { name: 'Save Channel' }).click();
+const { chromium, firefox, webkit } = await import('playwright');
+const baseUrl = config.baseUrl;
+
+let browser;
+let context;
+let page;
+
+test('Create Channel', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/channels`);
+
+    console.log('Create Channel');
+
+    await page.click('a.primary-button:visible');
+
+    await page.click('select.custom-select');
+
+    const selects = await page.$$('select.custom-select');
+
+    for (let select of selects) {
+        const options = await select.$$eval('option', (options) => {
+            return options.map(option => option.value);
+        });
+
+        if (options.length > 1) {
+            const randomIndex = Math.floor(Math.random() * options.length) + 1;
+
+            await select.selectOption(options[randomIndex]);
+        } else {
+            await select.selectOption(options[0]);
+        }
+    }
+
+    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    for (let input of inputs) {
+        await input.fill(forms.generateRandomStringWithSpaces(200));
+    }
+
+    const concatenatedNames = Array(5)
+        .fill(null)
+        .map(() => forms.generateRandomProductName())
+        .join(' ')
+        .replaceAll(' ', '');
+
+    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames);
+
+    const checkboxs = await page.$$('input[type="checkbox"] + label');
+
+    for (let checkbox of checkboxs) {
+        await checkbox.click();
+    }
+
+    await inputs[0].press('Enter');
 
     await expect(page.getByText('Channel created successfully.')).toBeVisible();
 });
 
-test('Edit Channel', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Channels' }).click();
-    await page.locator('div').filter({ hasText: /^2sdsdfwedfsfwe wewedfsdeew$/ }).locator('span').first().click();
-    await page.getByPlaceholder('Code').click();
-    await page.getByPlaceholder('Code').fill('sdsdfwe');
-    await page.getByPlaceholder('Name').click();
-    await page.getByPlaceholder('Name').fill('Demo_dfsfwe');
-    await page.getByPlaceholder('Name').click();
-    await page.getByPlaceholder('Name').fill('Demo_dfsfwe wewe');
-    await page.getByPlaceholder('Description', { exact: true }).click();
-    await page.getByPlaceholder('Description', { exact: true }).fill('Demo_sdfwe ewrwew');
-    await page.locator('#inventory_sources_1').nth(1).click();
-    await page.locator('#root_category_id').selectOption('1');
-    await page.getByPlaceholder('https://www.example.com (Don\'').click();
-    await page.getByPlaceholder('https://www.example.com (Don\'').fill('Demo_dfsdeew');
-    await page.getByPlaceholder('Meta title').click();
-    await page.getByPlaceholder('Meta title').fill('Demo_werewrwe');
-    await page.getByPlaceholder('Meta keywords').click();
-    await page.getByPlaceholder('Meta keywords').fill('Demo_sdfser');
-    await page.getByPlaceholder('Meta description').click();
-    await page.getByPlaceholder('Meta description').fill('Demo_dsfwerwewe');
-    await page.getByPlaceholder('Message').click();
-    await page.getByPlaceholder('Message').fill('Demo_werwewe');
-    await page.getByPlaceholder('Allowed IPs').click();
-    await page.getByPlaceholder('Allowed IPs').fill('Demo_rwe');
-    await page.locator('.relative > label').click();
-    await page.locator('#currencies_64').nth(1).click();
-    await page.locator('#currencies_62').nth(1).click();
-    await page.getByLabel('CFA Franc BEAC').click();
-    await page.locator('#base_currency_id').selectOption('18');
-    await page.locator('label').filter({ hasText: 'Russian Ruble' }).click();
-    await page.getByText('Locales Arabic Bengali').click();
-    await page.locator('label').filter({ hasText: 'Sinhala' }).click();
-    await page.getByText('Turkish').first().click();
-    await page.locator('#default_locale_id').selectOption('17');
-    await page.locator('label').filter({ hasText: 'South African Rand' }).click();
-    await page.locator('label').filter({ hasText: 'Zambian Kwacha' }).click();
-    await page.locator('label').filter({ hasText: 'CFA Franc BEAC' }).click();
-    await page.locator('label').filter({ hasText: 'Fijian Dollar' }).click();
-    await page.locator('#inventory_sources_1').nth(1).click();
-    await page.getByText('Ukrainian').first().click();
-    await page.getByLabel('Ukrainian', { exact: true }).click();
-    await page.getByText('Turkish').first().click();
-    await page.getByRole('button', { name: 'Save Channel' }).click();
+test('Edit Channel', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/channels`);
+
+    console.log('Edit Channel');
+
+    await page.waitForTimeout(5000);
+
+    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+
+    await iconEdit[0].click();
+
+    await page.click('select.custom-select');
+
+    const selects = await page.$$('select.custom-select');
+
+    for (let select of selects) {
+        const options = await select.$$eval('option', (options) => {
+            return options.map(option => option.value);
+        });
+
+        if (options.length > 1) {
+            const randomIndex = Math.floor(Math.random() * options.length) + 1;
+
+            await select.selectOption(options[randomIndex]);
+        } else {
+            await select.selectOption(options[0]);
+        }
+    }
+
+    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    for (let input of inputs) {
+        if (input == inputs[0]) {
+            continue;
+        }
+
+        await input.fill(forms.generateRandomStringWithSpaces(200));
+    }
+
+    const checkboxs = await page.$$('input[type="checkbox"] + label');
+
+    for (let checkbox of checkboxs) {
+        await checkbox.click();
+    }
+
+    await inputs[1].press('Enter');
 
     await expect(page.getByText('Update Channel Successfully')).toBeVisible();
 });
 
-test('Delete Channel', async ({page}) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
-    await page.getByPlaceholder('Email Address').click();
-    await page.getByPlaceholder('Email Address').fill(config.adminEmail);
-    await page.getByPlaceholder('Password').click();
-    await page.getByPlaceholder('Password').fill(config.adminPassword);
-    await page.getByLabel('Sign In').click();
-    await page.getByRole('link', { name: ' Settings' }).click();
-    await page.getByRole('link', { name: 'Channels' }).click();
-    await page.locator('div').filter({ hasText: /^2sdsdfwedfsfwe wewedfsdeew$/ }).locator('span').nth(1).click();
-    await page.getByRole('button', { name: 'Agree', exact: true }).click();
+test('Delete Channel', async () => {
+    test.setTimeout(config.mediumTimeout);
+    if (config.browser === 'firefox') {
+        browser = await firefox.launch();
+    } else if (config.browser === 'webkit') {
+        browser = await webkit.launch();
+    } else {
+        browser = await chromium.launch();
+    }
+
+    // Create a new context
+    context = await browser.newContext();
+
+    // Open a new page
+    page = await context.newPage();
+
+    // Log in once
+    const log = await logIn(page);
+    if (log == null) {
+        throw new Error('Login failed. Tests will not proceed.');
+    }
+
+    await page.goto(`${baseUrl}/admin/settings/channels`);
+
+    console.log('Delete Channel');
+
+    await page.waitForTimeout(5000);
+
+    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+    await iconDelete[0].click();
+
+    await page.click('button.transparent-button + button.primary-button:visible');
 
     await expect(page.getByText('Channel deleted successfully.')).toBeVisible();
 });
