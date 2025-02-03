@@ -814,7 +814,7 @@
 
                         inputValidation: false,
 
-                        swatchType: '',
+                        swatchType: 'dropdown',
 
                         swatchAttribute: false,
 
