@@ -12,10 +12,12 @@ jobs:
     strategy:
       matrix:
         operating-systems: [ubuntu-latest]
-        php-versions: ['8.2', '8.3']
+        php-versions: ['8.3']
         node-version: ['22.13.1']
+        shard-index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        shard-total: [10]
 
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
+    name: Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
 
     services:
       mysql:
@@ -86,7 +88,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test tests --workers=1 --project=chromium --retries=0
+          npx playwright test --config=tests/admin/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
 
       - name: Upload Playwright Report for All Tests
         uses: actions/upload-artifact@v4
