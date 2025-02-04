@@ -1,7 +1,7 @@
 import { test, expect, config } from '../../utils/setup';
-import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 import { launchBrowser } from '../../utils/admin/coreHelper';
+import * as forms from '../../utils/admin/formHelper';
+import logIn from '../../utils/admin/loginHelper';
 
 async function createAttributeFamily(page) {
     await page.click('div.primary-button:visible');
@@ -44,7 +44,7 @@ async function createAttributeFamily(page) {
         await expect(page.getByText('Family created successfully.')).toBeVisible();
 }
 
-test.describe('Attribute Family Management', () => {
+test.describe('attribute family management', () => {
     let browser;
     let context;
     let page;
@@ -63,11 +63,11 @@ test.describe('Attribute Family Management', () => {
         await browser.close();
     });
 
-    test('Create Attribute Family', async () => {
+    test('create attribute family', async () => {
         await createAttributeFamily(page);
     });
 
-    test('Edit Attribute Family', async () => {
+    test('edit attribute family', async () => {
         await createAttributeFamily(page);
 
         await page.waitForTimeout(2000);
@@ -107,7 +107,7 @@ test.describe('Attribute Family Management', () => {
         await expect(page.getByText('Family updated successfully.')).toBeVisible();
     });
 
-    test('Delete Attribute Family', async () => {
+    test('delete attribute family', async () => {
         await createAttributeFamily(page);
 
         await page.waitForTimeout(5000);

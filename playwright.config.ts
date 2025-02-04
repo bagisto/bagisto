@@ -1,49 +1,28 @@
-import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env' });
+import { defineConfig, devices } from "@playwright/test";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 
 export default defineConfig({
-  testDir: './tests',
+    testDir: "./tests",
 
-  /* Run tests in files in parallel */
-  fullyParallel: false,
+    fullyParallel: false,
 
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+    workers: 1,
 
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+    forbidOnly: !!process.env.CI,
 
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+    retries: 0,
 
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    reporter: "html",
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-  },
-
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+    use: {
+        trace: "on-first-retry",
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
+    projects: [
+        {
+            name: "chromium",
+            use: { ...devices["Desktop Chrome"] },
+        },
+    ],
 });
