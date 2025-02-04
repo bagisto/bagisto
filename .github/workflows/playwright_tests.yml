@@ -88,7 +88,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test tests -shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test tests --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
 
       - name: Upload Playwright Report for All Tests
         uses: actions/upload-artifact@v4
