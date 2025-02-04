@@ -11,7 +11,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "test": "npx playwright test"
+        "test:shop": "npx playwright test --config=tests/shop/playwright.config.ts",
+        "test:admin": "npx playwright test --config=tests/admin/playwright.config.ts --shard=${SHARD_INDEX}/${TOTAL_SHARDS}"
     },
     "devDependencies": {
         "@playwright/test": "^1.48.1",
