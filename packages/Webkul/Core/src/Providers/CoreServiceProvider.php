@@ -3,6 +3,7 @@
 namespace Webkul\Core\Providers;
 
 use Elastic\Elasticsearch\Client as ElasticSearchClient;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
@@ -156,6 +157,11 @@ class CoreServiceProvider extends ServiceProvider
             \Webkul\Core\Console\Commands\DownChannelCommand::class,
             \Webkul\Core\Console\Commands\UpChannelCommand::class,
         ]);
+
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('invoice:overdue')->daily();
+        });
     }
 
     /**
