@@ -26,10 +26,7 @@ test('Create Group', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/groups`);
 
@@ -66,10 +63,7 @@ test('Edit Group', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/groups`);
 
@@ -110,10 +104,7 @@ test('Delete Group', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/groups`);
 

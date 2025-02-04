@@ -27,10 +27,7 @@ test('Create Customer', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -65,10 +62,7 @@ test('Edit Customer', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -119,10 +113,7 @@ test('Add Address', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -172,10 +163,7 @@ test('Edit Address', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -229,10 +217,7 @@ test('Set Default Address', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -272,10 +257,7 @@ test('Delete Address', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -310,10 +292,7 @@ test('Add Note', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -350,10 +329,7 @@ test('Delete Account', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -387,10 +363,7 @@ test('Create Order', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -424,10 +397,7 @@ test('login as Customer', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -457,10 +427,7 @@ test('Mass Delete Customers', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 
@@ -497,10 +464,7 @@ test('Mass Update Customers', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/customers`);
 

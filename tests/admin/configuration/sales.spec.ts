@@ -26,10 +26,7 @@ test('Shipping Settings of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/shipping`);
 
@@ -99,10 +96,7 @@ test('Shipping Methods of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/carriers`);
 
@@ -153,10 +147,7 @@ test('Payment Methods of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/payment_methods`);
 
@@ -230,10 +221,7 @@ test('Order Settings of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/order_settings`);
 
@@ -274,10 +262,7 @@ test('Invoice Settings of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/invoice_settings`);
 
@@ -343,10 +328,7 @@ test('Taxes of Sales', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/taxes`);
 
@@ -416,10 +398,7 @@ test('Checkout of Customer', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/configuration/sales/checkout`);
 

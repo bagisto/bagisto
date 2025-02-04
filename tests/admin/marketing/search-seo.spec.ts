@@ -26,10 +26,7 @@ test('Create URL Rewrite', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/url-rewrites`);
 
@@ -83,10 +80,7 @@ test('Edit URL Rewrite', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/url-rewrites`);
 
@@ -144,10 +138,7 @@ test('Delete URL Rewrite', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/url-rewrites`);
 
@@ -181,10 +172,7 @@ test('Mass Delete URL Rewrite', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/url-rewrites`);
 
@@ -222,10 +210,7 @@ test('Create Search Term', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-terms`);
 
@@ -281,10 +266,7 @@ test('Edit Search Term', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-terms`);
 
@@ -344,10 +326,7 @@ test('Delete Search Term', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-terms`);
 
@@ -381,10 +360,7 @@ test('Mass Delete Search Term', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-terms`);
 
@@ -422,10 +398,7 @@ test('Create Search Synonym', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-synonyms`);
 
@@ -463,10 +436,7 @@ test('Edit Search Synonym', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-synonyms`);
 
@@ -508,10 +478,7 @@ test('Delete Search Synonym', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-synonyms`);
 
@@ -545,10 +512,7 @@ test('Mass Delete Search Synonym', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/search-synonyms`);
 
@@ -586,10 +550,7 @@ test('Create Sitemap', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/sitemaps`);
 
@@ -630,10 +591,7 @@ test('Edit Sitemap', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/sitemaps`);
 
@@ -678,10 +636,7 @@ test('Delete Sitemap', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/marketing/search-seo/sitemaps`);
 

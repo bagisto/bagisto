@@ -26,10 +26,7 @@ test('Create Channel', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/settings/channels`);
 
@@ -97,10 +94,7 @@ test('Edit Channel', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/settings/channels`);
 
@@ -168,10 +162,7 @@ test('Delete Channel', async () => {
     page = await context.newPage();
 
     // Log in once
-    const log = await logIn(page);
-    if (log == null) {
-        throw new Error('Login failed. Tests will not proceed.');
-    }
+    await logIn(page);
 
     await page.goto(`${baseUrl}/admin/settings/channels`);
 

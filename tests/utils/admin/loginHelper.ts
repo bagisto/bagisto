@@ -1,5 +1,4 @@
-import { config } from '../setup';
-import * as forms from '../admin/formHelper';
+import { expect, config } from '../setup';
 
 const baseUrl = config.baseUrl;
 
@@ -9,9 +8,7 @@ const logIn = async (page) => {
     await page.fill('input[name="password"]', config.adminPassword);
     await page.press('input[name="password"]', 'Enter');
 
-    return await forms.testForm(page)
-        ? true
-        : false;
+    await expect(page).toHaveURL(`${baseUrl}/admin/dashboard`);
 }
 
 export default logIn;
