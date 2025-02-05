@@ -1,340 +1,232 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Create Tax Rate', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
-
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/taxes/rates`);
-
-    console.log('Create Tax Rate');
-
-    await page.click('a.primary-button:visible');
-
-    page.click('select[name="country"]');
-
-    const select = await page.$('select[name="country"]');
-
-    const options = await select.$$eval('option', (options) => {
-        return options.map(option => option.value);
+        await logIn(page);
     });
 
-    if (options.length > 1) {
-        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-        await select.selectOption(options[randomIndex]);
-    } else {
-        await select.selectOption(options[0]);
-    }
+    test('create tax rate', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
 
-    const state = await page.$('select[name="state"]');
+        await page.click('a.primary-button:visible');
 
-    if (state) {
-        const options = await state.$$eval('option', (options) => {
+        page.click('select[name="country"]');
+
+        const select = await page.$('select[name="country"]');
+
+        const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
         });
 
         if (options.length > 1) {
             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-            await state.selectOption(options[randomIndex]);
+            await select.selectOption(options[randomIndex]);
         } else {
             await select.selectOption(options[0]);
         }
-    }
 
-    const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+        const state = await page.$('select[name="state"]');
 
-    let i = Math.floor(Math.random() * 10) + 1;
+        if (state) {
+            const options = await state.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    if (i % 2 == 1) {
-        await checkbox.click();
-    }
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+                await state.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
+        }
 
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
 
-    await page.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
+        let i = Math.floor(Math.random() * 10) + 1;
 
-    await inputs[0].press('Enter');
+        if (i % 2 == 1) {
+            await checkbox.click();
+        }
 
-    await expect(page.getByText('Tax rate created successfully.')).toBeVisible();
-});
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-test('Edit Tax Rate', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    // Create a new context
-    context = await browser.newContext();
+        await page.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
 
-    // Open a new page
-    page = await context.newPage();
+        await inputs[0].press('Enter');
 
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/taxes/rates`);
-
-    console.log('Edit Tax Rate');
-
-    await page.waitForTimeout(5000);
-
-    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-    await iconEdit[0].click();
-
-    page.click('select[name="country"]');
-
-    const select = await page.$('select[name="country"]');
-
-    const options = await select.$$eval('option', (options) => {
-        return options.map(option => option.value);
+        await expect(page.getByText('Tax rate created successfully.')).toBeVisible();
     });
 
-    if (options.length > 1) {
-        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test('edit tax rate', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
 
-        await select.selectOption(options[randomIndex]);
-    } else {
-        await select.selectOption(options[0]);
-    }
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    const state = await page.$('select[name="state"]');
+        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    if (state) {
-        const options = await state.$$eval('option', (options) => {
+        await iconEdit[0].click();
+
+        page.click('select[name="country"]');
+
+        const select = await page.$('select[name="country"]');
+
+        const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
         });
 
         if (options.length > 1) {
             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-            await state.selectOption(options[randomIndex]);
+            await select.selectOption(options[randomIndex]);
         } else {
             await select.selectOption(options[0]);
         }
-    }
 
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const state = await page.$('select[name="state"]');
 
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        if (state) {
+            const options = await state.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    await page.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-    await inputs[0].press('Enter');
+                await state.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
+        }
 
-    await expect(page.getByText('Tax Rate Update Successfully')).toBeVisible();
-});
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-test('Delete Tax Rate', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    // Create a new context
-    context = await browser.newContext();
+        await page.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
 
-    // Open a new page
-    page = await context.newPage();
+        await inputs[0].press('Enter');
 
-    // Log in once
-    await logIn(page);
+        await expect(page.getByText('Tax Rate Update Successfully')).toBeVisible();
+    });
 
-    await page.goto(`${baseUrl}/admin/settings/taxes/rates`);
+    test('delete tax rate', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
 
-    console.log('Delete Tax Rate');
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
-    await page.waitForTimeout(5000);
+        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
-    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+        await iconDelete[0].click();
 
-    await iconDelete[0].click();
+        await page.click('button.transparent-button + button.primary-button:visible');
 
-    await page.click('button.transparent-button + button.primary-button:visible');
+        await expect(page.getByText('Tax rate deleted successfully')).toBeVisible();
+    });
 
-    await expect(page.getByText('Tax rate deleted successfully')).toBeVisible();
-});
+    test('create tax category', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-test('Create Tax Category', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await page.click('button[type="button"].primary-button:visible');
 
-    // Create a new context
-    context = await browser.newContext();
+        page.click('select[name="taxrates[]"]');
 
-    // Open a new page
-    page = await context.newPage();
+        const select = await page.$('select[name="taxrates[]"]');
 
-    // Log in once
-    await logIn(page);
+        await page.evaluate((select) => {
+            const options = Array.from(select.options) as HTMLOptionElement[];
+            const randomCount = Math.floor(Math.random() * options.length) + 1;
+            const shuffled = options.sort(() => 0.5 - Math.random());
 
-    await page.goto(`${baseUrl}/admin/settings/taxes/categories`);
+            shuffled.slice(0, randomCount).forEach(option => {
+                option.selected = true;
+            });
 
-    console.log('Create Tax Category');
+            const event = new Event('change', { bubbles: true });
+            select.dispatchEvent(event);
+        }, select);
 
-    await page.click('button[type="button"].primary-button:visible');
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    page.click('select[name="taxrates[]"]');
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    const select = await page.$('select[name="taxrates[]"]');
+        await inputs[1].press('Enter');
 
-    await page.evaluate((select) => {
-        const options = Array.from(select.options) as HTMLOptionElement[];
-        const randomCount = Math.floor(Math.random() * options.length) + 1;
-        const shuffled = options.sort(() => 0.5 - Math.random());
+        await expect(page.getByText('New Tax Category Created.')).toBeVisible();
+    });
 
-        shuffled.slice(0, randomCount).forEach(option => {
-            option.selected = true;
-        });
+    test('edit tax category', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-        const event = new Event('change', { bubbles: true });
-        select.dispatchEvent(event);
-    }, select);
+        await page.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        await iconEdit[0].click();
 
-    await inputs[1].press('Enter');
+        page.click('select[name="taxrates[]"]');
 
-    await expect(page.getByText('New Tax Category Created.')).toBeVisible();
-});
+        const select = await page.$('select[name="taxrates[]"]');
 
-test('Edit Tax Category', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await page.evaluate((select) => {
+            const options = Array.from(select.options) as HTMLOptionElement[];
+            const randomCount = Math.floor(Math.random() * options.length) + 1;
+            const shuffled = options.sort(() => 0.5 - Math.random());
 
-    // Create a new context
-    context = await browser.newContext();
+            shuffled.slice(0, randomCount).forEach(option => {
+                option.selected = true;
+            });
 
-    // Open a new page
-    page = await context.newPage();
+            const event = new Event('change', { bubbles: true });
+            select.dispatchEvent(event);
+        }, select);
 
-    // Log in once
-    await logIn(page);
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    await page.goto(`${baseUrl}/admin/settings/taxes/categories`);
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    console.log('Edit Tax Category');
+        await inputs[1].press('Enter');
 
-    await page.waitForTimeout(5000);
+        await expect(page.getByText('Tax Category Successfully Updated.')).toBeVisible();
+    });
 
-    const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+    test('delete tax category', async () => {
+        await page.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-    await iconEdit[0].click();
+        await page.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    page.click('select[name="taxrates[]"]');
+        const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    const select = await page.$('select[name="taxrates[]"]');
+        await iconDelete[0].click();
 
-    await page.evaluate((select) => {
-        const options = Array.from(select.options) as HTMLOptionElement[];
-        const randomCount = Math.floor(Math.random() * options.length) + 1;
-        const shuffled = options.sort(() => 0.5 - Math.random());
+        await page.click('button.transparent-button + button.primary-button:visible');
 
-        shuffled.slice(0, randomCount).forEach(option => {
-            option.selected = true;
-        });
-
-        const event = new Event('change', { bubbles: true });
-        select.dispatchEvent(event);
-    }, select);
-
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
-
-    await inputs[1].press('Enter');
-
-    await expect(page.getByText('Tax Category Successfully Updated.')).toBeVisible();
-});
-
-test('Delete Tax Category', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
-
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/taxes/categories`);
-
-    console.log('Delete Tax Category');
-
-    await page.waitForTimeout(5000);
-
-    const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-    await iconDelete[0].click();
-
-    await page.click('button.transparent-button + button.primary-button:visible');
-
-    await expect(page.getByText('Tax Category Deleted Successfully.')).toBeVisible();
+        await expect(page.getByText('Tax Category Deleted Successfully.')).toBeVisible();
+    });
 });

@@ -1,180 +1,128 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Create Channel', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await logIn(page);
 
-    // Create a new context
-    context = await browser.newContext();
+        await page.goto(`${config.baseUrl}/admin/settings/channels`);
+    });
 
-    // Open a new page
-    page = await context.newPage();
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-    // Log in once
-    await logIn(page);
+    test('create channel', async () => {
+        await page.click('a.primary-button:visible');
 
-    await page.goto(`${baseUrl}/admin/settings/channels`);
+        await page.click('select.custom-select');
 
-    console.log('Create Channel');
+        const selects = await page.$$('select.custom-select');
 
-    await page.click('a.primary-button:visible');
+        for (let select of selects) {
+            const options = await select.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    await page.click('select.custom-select');
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * options.length) + 1;
 
-    const selects = await page.$$('select.custom-select');
-
-    for (let select of selects) {
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
-
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * options.length) + 1;
-
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
-    }
-
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
-
-    const concatenatedNames = Array(5)
-        .fill(null)
-        .map(() => forms.generateRandomProductName())
-        .join(' ')
-        .replaceAll(' ', '');
-
-    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames);
-
-    const checkboxs = await page.$$('input[type="checkbox"] + label');
-
-    for (let checkbox of checkboxs) {
-        await checkbox.click();
-    }
-
-    await inputs[0].press('Enter');
-
-    await expect(page.getByText('Channel created successfully.')).toBeVisible();
-});
-
-test('Edit Channel', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
-
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/channels`);
-
-    console.log('Edit Channel');
-
-    await page.waitForTimeout(5000);
-
-    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-    await iconEdit[0].click();
-
-    await page.click('select.custom-select');
-
-    const selects = await page.$$('select.custom-select');
-
-    for (let select of selects) {
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
-
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * options.length) + 1;
-
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
-    }
-
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (let input of inputs) {
-        if (input == inputs[0]) {
-            continue;
+                await select.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
         }
 
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    const checkboxs = await page.$$('input[type="checkbox"] + label');
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    for (let checkbox of checkboxs) {
-        await checkbox.click();
-    }
+        const concatenatedNames = Array(5)
+            .fill(null)
+            .map(() => forms.generateRandomProductName())
+            .join(' ')
+            .replaceAll(' ', '');
 
-    await inputs[1].press('Enter');
+        await page.fill('input[name="code"].rounded-md:visible', concatenatedNames);
 
-    await expect(page.getByText('Update Channel Successfully')).toBeVisible();
-});
+        const checkboxs = await page.$$('input[type="checkbox"] + label');
 
-test('Delete Channel', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        for (let checkbox of checkboxs) {
+            await checkbox.click();
+        }
 
-    // Create a new context
-    context = await browser.newContext();
+        await inputs[0].press('Enter');
 
-    // Open a new page
-    page = await context.newPage();
+        await expect(page.getByText('Channel created successfully.')).toBeVisible();
+    });
 
-    // Log in once
-    await logIn(page);
+    test('edit channel', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    await page.goto(`${baseUrl}/admin/settings/channels`);
+        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    console.log('Delete Channel');
+        await iconEdit[0].click();
 
-    await page.waitForTimeout(5000);
+        await page.click('select.custom-select');
 
-    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+        const selects = await page.$$('select.custom-select');
 
-    await iconDelete[0].click();
+        for (let select of selects) {
+            const options = await select.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    await page.click('button.transparent-button + button.primary-button:visible');
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * options.length) + 1;
 
-    await expect(page.getByText('Channel deleted successfully.')).toBeVisible();
+                await select.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
+        }
+
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+        for (let input of inputs) {
+            if (input == inputs[0]) {
+                continue;
+            }
+
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
+
+        const checkboxs = await page.$$('input[type="checkbox"] + label');
+
+        for (let checkbox of checkboxs) {
+            await checkbox.click();
+        }
+
+        await inputs[1].press('Enter');
+
+        await expect(page.getByText('Update Channel Successfully')).toBeVisible();
+    });
+
+    test('delete channel', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+        await iconDelete[0].click();
+
+        await page.click('button.transparent-button + button.primary-button:visible');
+
+        await expect(page.getByText('Channel deleted successfully.')).toBeVisible();
+    });
 });

@@ -1,152 +1,100 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Create Locale', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await logIn(page);
 
-    // Create a new context
-    context = await browser.newContext();
+        await page.goto(`${config.baseUrl}/admin/settings/locales`);
+    });
 
-    // Open a new page
-    page = await context.newPage();
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-    // Log in once
-    await logIn(page);
+    test('create locale', async () => {
+        await page.click('button[type="button"].primary-button:visible');
 
-    await page.goto(`${baseUrl}/admin/settings/locales`);
+        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
 
-    console.log('Create Locale');
+        const select = await page.$('select[name="direction"]');
 
-    await page.click('button[type="button"].primary-button:visible');
+        const option = Math.random() > 0.5 ? 'ltr' : 'rtl';
 
-    await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await select.selectOption({ value: option });
 
-    const select = await page.$('select[name="direction"]');
+        const concatenatedNames = Array(5)
+        .fill(null)
+        .map(() => forms.generateRandomProductName())
+        .join(' ')
+        .replaceAll(' ', '');
 
-    const option = Math.random() > 0.5 ? 'ltr' : 'rtl';
+        await page.fill('input[name="code"]', concatenatedNames);
 
-    await select.selectOption({ value: option });
+        await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+            el.innerHTML += content;
+        }, `<input type="file" name="logo_path[]" accept="image/*">`);
 
-    const concatenatedNames = Array(5)
-    .fill(null)
-    .map(() => forms.generateRandomProductName())
-    .join(' ')
-    .replaceAll(' ', '');
+        const image = await page.$('input[type="file"][name="logo_path[]"]');
 
-    await page.fill('input[name="code"]', concatenatedNames);
+        const filePath = forms.getRandomImageFile();
 
-    await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-        el.innerHTML += content;
-    }, `<input type="file" name="logo_path[]" accept="image/*">`);
+        await image.setInputFiles(filePath);
 
-    const image = await page.$('input[type="file"][name="logo_path[]"]');
+        await page.press('input[name="code"]', 'Enter');
 
-    const filePath = forms.getRandomImageFile();
+        await expect(page.getByText('Locale created successfully.')).toBeVisible();
+    });
 
-    await image.setInputFiles(filePath);
+    test('edit locale', async () => {
+        await page.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    await page.press('input[name="code"]', 'Enter');
+        const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    await expect(page.getByText('Locale created successfully.')).toBeVisible();
-});
+        await iconEdit[0].click();
 
-test('Edit Locale', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
 
-    // Create a new context
-    context = await browser.newContext();
+        const select = await page.$('select[name="direction"]');
 
-    // Open a new page
-    page = await context.newPage();
+        const option = Math.random() > 0.5 ? 'ltr' : 'rtl';
 
-    // Log in once
-    await logIn(page);
+        await select.selectOption({ value: option });
 
-    await page.goto(`${baseUrl}/admin/settings/locales`);
+        await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+            el.innerHTML += content;
+        }, `<input type="file" name="logo_path[]" accept="image/*">`);
 
-    console.log('Edit Locale');
+        const image = await page.$('input[type="file"][name="logo_path[]"]');
 
-    await page.waitForTimeout(5000);
+        const filePath = forms.getRandomImageFile();
 
-    const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        await image.setInputFiles(filePath);
 
-    await iconEdit[0].click();
+        await page.press('input[name="name"]', 'Enter');
 
-    await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await expect(page.getByText('Locale updated successfully.')).toBeVisible();
+    });
 
-    const select = await page.$('select[name="direction"]');
+    test('delete locale', async () => {
+        await page.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    const option = Math.random() > 0.5 ? 'ltr' : 'rtl';
+        const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    await select.selectOption({ value: option });
+        await iconDelete[0].click();
 
-    await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-        el.innerHTML += content;
-    }, `<input type="file" name="logo_path[]" accept="image/*">`);
+        await page.click('button.transparent-button + button.primary-button:visible');
 
-    const image = await page.$('input[type="file"][name="logo_path[]"]');
-
-    const filePath = forms.getRandomImageFile();
-
-    await image.setInputFiles(filePath);
-
-    await page.press('input[name="name"]', 'Enter');
-
-    await expect(page.getByText('Locale updated successfully.')).toBeVisible();
-});
-
-test('Delete Locale', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
-
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/locales`);
-
-    console.log('Delete Locale');
-
-    await page.waitForTimeout(5000);
-
-    const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-    await iconDelete[0].click();
-
-    await page.click('button.transparent-button + button.primary-button:visible');
-
-    await expect(page.getByText('Locale deleted successfully.')).toBeVisible();
+        await expect(page.getByText('Locale deleted successfully.')).toBeVisible();
+    });
 });

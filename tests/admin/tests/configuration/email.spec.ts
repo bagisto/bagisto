@@ -1,82 +1,54 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Settings of Email', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await logIn(page);
+    });
 
-    // Create a new context
-    context = await browser.newContext();
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-    // Open a new page
-    page = await context.newPage();
+    test('Settings of Email', async () => {
+        await page.goto(`${config.baseUrl}/admin/configuration/emails/configure`);
 
-    // Log in once
-    await logIn(page);
+        await page.click('input[type="text"].rounded-md:visible');
 
-    await page.goto(`${baseUrl}/admin/configuration/emails/configure`);
+        const inputs = await page.$$('input[type="text"].rounded-md:visible');
 
-    console.log('Settings of Email');
+        let i = 0;
 
-    await page.click('input[type="text"].rounded-md:visible');
+        for (let input of inputs) {
+            if (i % 2 == 0) {
+                await input.fill(forms.generateRandomStringWithSpaces(50));
+            } else {
+                await input.fill(forms.form.email);
+            }
 
-    const inputs = await page.$$('input[type="text"].rounded-md:visible');
-
-    let i = 0;
-
-    for (let input of inputs) {
-        if (i % 2 == 0) {
-            await input.fill(forms.generateRandomStringWithSpaces(50));
-        } else {
-            await input.fill(forms.form.email);
+            i++;
         }
 
-        i++;
-    }
+        await page.click('button[type="submit"].primary-button:visible');
 
-    await page.click('button[type="submit"].primary-button:visible');
+        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+    });
 
-    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
-});
+    test('Notifications of Email', async () => {
+        await page.goto(`${config.baseUrl}/admin/configuration/emails/general`);
 
-test('Notifications of Email', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await page.click('button[type="submit"].primary-button:visible');
 
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/configuration/emails/general`);
-
-    console.log('Notifications of Email');
-
-    await page.click('button[type="submit"].primary-button:visible');
-
-    await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+    });
 });
