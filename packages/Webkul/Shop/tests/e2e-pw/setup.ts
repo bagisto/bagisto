@@ -1,7 +1,7 @@
 import { test as base, expect } from '@playwright/test';
 
 const config = {
-    baseUrl: process.env.APP_URL || 'http://127.0.0.1:8000',
+    baseUrl: process.env.APP_URL,
 
     adminEmail: process.env.ADMIN_EMAIL || 'admin@example.com',
 
