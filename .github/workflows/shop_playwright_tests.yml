@@ -52,6 +52,7 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+        working-directory: packages/Webkul/Shop
 
       - name: Setting Environment
         run: |
