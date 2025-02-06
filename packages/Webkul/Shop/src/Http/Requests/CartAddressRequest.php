@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
+use Webkul\Customer\Rules\VatIdRule;
 
 class CartAddressRequest extends FormRequest
 {
@@ -58,6 +59,11 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.postcode"     => core()->isPostCodeRequired() ? ['required', new PostCode] : [new PostCode],
             "{$addressType}.phone"        => ['required', new PhoneNumber],
         ]);
+        if ($addressType == 'billing') {
+            $this->mergeWithRules([
+                "{$addressType}.vat_id"       => [new VatIdRule],
+            ]);
+        }
     }
 
     /**
