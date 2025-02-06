@@ -53,6 +53,7 @@ jobs:
 
       - name: Install Node.js Dependencies
         run: npm install
+        working-directory: packages/Webkul/Admin
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -88,7 +89,8 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test --config=tests/admin/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+        working-directory: packages/Webkul/Admin
 
       - name: Upload Playwright Report for All Tests
         uses: actions/upload-artifact@v4

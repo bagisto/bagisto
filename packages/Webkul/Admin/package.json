@@ -1,10 +1,13 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.1",
+    "@types/node": "^22.7.8",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.4",
     "laravel-vite-plugin": "^0.7.2",
@@ -17,8 +20,11 @@
     "@vee-validate/i18n": "^4.9.1",
     "@vee-validate/rules": "^4.9.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "dotenv": "^16.4.7",
     "flatpickr": "^4.6.13",
     "mitt": "^3.0.1",
+    "playwright": "^1.48.1",
+    "readline-sync": "^1.4.10",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0",
     "vuedraggable": "^4.1.0"
