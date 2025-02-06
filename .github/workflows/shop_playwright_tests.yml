@@ -33,11 +33,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mysql-client netcat-openbsd net-tools
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
