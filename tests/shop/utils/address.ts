@@ -1,4 +1,4 @@
-import * as forms from '../admin/formHelper';
+import * as forms from './form';
 
 const address = async (page) => {
     await page.fill('input[name="billing.company_name"]', forms.form.lastName);

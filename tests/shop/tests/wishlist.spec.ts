@@ -1,4 +1,4 @@
-import { test, expect, config } from '../utils/setup';
+import { test, expect, config } from '../setup';
 
 test('Add To Wishlist', async ({page}) => {
     await page.goto(`${config.baseUrl}`);

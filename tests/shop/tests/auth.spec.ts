@@ -1,4 +1,4 @@
-import { test, expect, config } from '../utils/setup';
+import { test, expect, config } from '../setup';
 
 test('register', async ({ page }) => {
     await page.goto(`${config.baseUrl}`);
@@ -45,7 +45,7 @@ test('logout', async ({ page }) => {
     await page.getByPlaceholder('Password').fill('testUser@123');
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.waitForTimeout(5000);
-    
+
     await page.getByLabel('Profile').click();
     await page.getByRole('link', { name: 'Logout' }).click();
     await page.waitForTimeout(5000);

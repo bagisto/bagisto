@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../utils/setup';
-import { launchBrowser } from '../../utils/admin/coreHelper';
-import  * as forms from '../../utils/admin/formHelper';
-import logIn from '../../utils/admin/loginHelper';
+import { test, expect, config } from '../../setup';
+import { launchBrowser } from '../../utils/core';
+import  * as forms from '../../utils/form';
+import logIn from '../../utils/login';
 
-test.describe('attribute management', () => {
+test.describe('sales configuration', () => {
     let browser;
     let context;
     let page;

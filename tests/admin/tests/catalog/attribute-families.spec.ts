@@ -1,10 +1,29 @@
-import { test, expect, config } from '../../utils/setup';
-import { launchBrowser } from '../../utils/admin/coreHelper';
-import * as forms from '../../utils/admin/formHelper';
-import logIn from '../../utils/admin/loginHelper';
+import { test, expect, config } from '../../setup';
+import { launchBrowser } from '../../utils/core';
+import * as forms from '../../utils/form';
+import logIn from '../../utils/login';
 
-async function createAttributeFamily(page) {
-    await page.click('div.primary-button:visible');
+test.describe('attribute family management', () => {
+    let browser;
+    let context;
+    let page;
+
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
+
+        await logIn(page);
+        await page.goto(`${config.baseUrl}/admin/catalog/families`);
+        await page.waitForSelector('div.primary-button', { state: 'visible' });
+    });
+
+    test.afterEach(async () => {
+        await browser.close();
+    });
+
+    test('create attribute family', async () => {
+        await page.click('div.primary-button:visible');
         await page.waitForSelector('div#not_avaliable', { timeout: 1000 }).catch(() => null);
 
         const concatenatedNames = Array(5)
@@ -42,34 +61,9 @@ async function createAttributeFamily(page) {
 
         await page.click('.primary-button:visible');
         await expect(page.getByText('Family created successfully.')).toBeVisible();
-}
-
-test.describe('attribute family management', () => {
-    let browser;
-    let context;
-    let page;
-
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
-
-        await logIn(page);
-        await page.goto(`${config.baseUrl}/admin/catalog/families`);
-        await page.waitForSelector('div.primary-button', { state: 'visible' });
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('create attribute family', async () => {
-        await createAttributeFamily(page);
     });
 
     test('edit attribute family', async () => {
-        await createAttributeFamily(page);
-
         await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
         const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
@@ -108,8 +102,6 @@ test.describe('attribute family management', () => {
     });
 
     test('delete attribute family', async () => {
-        await createAttributeFamily(page);
-
         await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
         const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');

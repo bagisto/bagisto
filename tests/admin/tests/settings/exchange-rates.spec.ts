@@ -1,8 +1,8 @@
-import { test, expect, config } from '../../utils/setup';
-import { launchBrowser } from '../../utils/admin/coreHelper';
-import logIn from '../../utils/admin/loginHelper';
+import { test, expect, config } from '../../setup';
+import { launchBrowser } from '../../utils/core';
+import logIn from '../../utils/login';
 
-test.describe('attribute management', () => {
+test.describe('exchange rate management', () => {
     let browser;
     let context;
     let page;
