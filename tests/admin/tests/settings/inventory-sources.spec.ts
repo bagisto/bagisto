@@ -1,236 +1,184 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Create Inventory Sources', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await logIn(page);
 
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
-
-    console.log('Create Inventory Sources');
-
-    await page.click('div.primary-button:visible');
-
-    await page.click('select[name="country"]');
-
-    const select = await page.$('select[name="country"]');
-
-    const options = await select.$$eval('option', (options) => {
-        return options.map(option => option.value);
+        await page.goto(`${config.baseUrl}/admin/settings/inventory-sources`);
     });
 
-    if (options.length > 1) {
-        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-        await select.selectOption(options[randomIndex]);
-    } else {
-        await select.selectOption(options[0]);
-    }
+    test('create inventory sources', async () => {
+        await page.click('div.primary-button:visible');
 
-    const state = await page.$('select[name="state"]');
+        await page.click('select[name="country"]');
 
-    if (state) {
-        const options = await state.$$eval('option', (options) => {
+        const select = await page.$('select[name="country"]');
+
+        const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
         });
 
         if (options.length > 1) {
             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-            await state.selectOption(options[randomIndex]);
+            await select.selectOption(options[randomIndex]);
         } else {
             await select.selectOption(options[0]);
         }
-    }
 
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const state = await page.$('select[name="state"]');
 
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        if (state) {
+            const options = await state.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-    await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
+                await state.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
+        }
 
-    await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
+        await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
 
-    const concatenatedNames = Array(5)
-        .fill(null)
-        .map(() => forms.generateRandomProductName())
-        .join(' ')
-        .replaceAll(' ', ', -');
+        await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
 
-    await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
+        await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
 
-    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
+        await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
 
-    let i = Math.floor(Math.random() * 10) + 1;
+        await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
 
-    if (i % 2 == 1) {
-        await page.click('input[type="checkbox"] + label.peer');
-    }
+        const concatenatedNames = Array(5)
+            .fill(null)
+            .map(() => forms.generateRandomProductName())
+            .join(' ')
+            .replaceAll(' ', ', -');
 
-    await inputs[0].press('Enter');
+        await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
 
-    await expect(page.getByText('Inventory Source Created Successfully')).toBeVisible();
-});
+        await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
 
-test('Edit Inventory Sources', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        let i = Math.floor(Math.random() * 10) + 1;
 
-    // Create a new context
-    context = await browser.newContext();
+        if (i % 2 == 1) {
+            await page.click('input[type="checkbox"] + label.peer');
+        }
 
-    // Open a new page
-    page = await context.newPage();
+        await inputs[0].press('Enter');
 
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
-
-    console.log('Edit Inventory Sources');
-
-    await page.waitForTimeout(5000);
-
-    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-    await iconEdit[0].click();
-
-    await page.click('select[name="country"]');
-
-    const select = await page.$('select[name="country"]');
-
-    const options = await select.$$eval('option', (options) => {
-        return options.map(option => option.value);
+        await expect(page.getByText('Inventory Source Created Successfully')).toBeVisible();
     });
 
-    if (options.length > 1) {
-        const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test('edit inventory sources', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-        await select.selectOption(options[randomIndex]);
-    } else {
-        await select.selectOption(options[0]);
-    }
+        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    const state = await page.$('select[name="state"]');
+        await iconEdit[0].click();
 
-    if (state) {
-        const options = await state.$$eval('option', (options) => {
+        await page.click('select[name="country"]');
+
+        const select = await page.$('select[name="country"]');
+
+        const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
         });
 
         if (options.length > 1) {
             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-            await state.selectOption(options[randomIndex]);
+            await select.selectOption(options[randomIndex]);
         } else {
             await select.selectOption(options[0]);
         }
-    }
 
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const state = await page.$('select[name="state"]');
 
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
+        if (state) {
+            const options = await state.$$eval('option', (options) => {
+                return options.map(option => option.value);
+            });
 
-    await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+            if (options.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-    await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
+                await state.selectOption(options[randomIndex]);
+            } else {
+                await select.selectOption(options[0]);
+            }
+        }
 
-    await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
+        await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
 
-    const concatenatedNames = Array(5)
-        .fill(null)
-        .map(() => forms.generateRandomProductName())
-        .join(' ')
-        .replaceAll(' ', ', -');
+        await page.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
 
-    await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
+        await page.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
 
-    await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
+        await page.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
 
-    let i = Math.floor(Math.random() * 10) + 1;
+        await page.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
 
-    if (i % 2 == 1) {
-        await page.click('input[type="checkbox"] + label.peer');
-    }
+        const concatenatedNames = Array(5)
+            .fill(null)
+            .map(() => forms.generateRandomProductName())
+            .join(' ')
+            .replaceAll(' ', ', -');
 
-    await inputs[0].press('Enter');
+        await page.fill('input[name="street"].rounded-md:visible', concatenatedNames);
 
-    await expect(page.getByText('Inventory Sources Updated Successfully')).toBeVisible();
-});
+        await page.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
 
-test('Delete Inventory Sources', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        let i = Math.floor(Math.random() * 10) + 1;
 
-    // Create a new context
-    context = await browser.newContext();
+        if (i % 2 == 1) {
+            await page.click('input[type="checkbox"] + label.peer');
+        }
 
-    // Open a new page
-    page = await context.newPage();
+        await inputs[0].press('Enter');
 
-    // Log in once
-    await logIn(page);
+        await expect(page.getByText('Inventory Sources Updated Successfully')).toBeVisible();
+    });
 
-    await page.goto(`${baseUrl}/admin/settings/inventory-sources`);
+    test('delete inventory sources', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
-    console.log('Delete Inventory Sources');
+        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
-    await page.waitForTimeout(5000);
+        await iconDelete[0].click();
 
-    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+        await page.click('button.transparent-button + button.primary-button:visible');
 
-    await iconDelete[0].click();
-
-    await page.click('button.transparent-button + button.primary-button:visible');
-
-    await expect(page.getByText('Inventory Sources Deleted Successfully')).toBeVisible();
+        await expect(page.getByText('Inventory Sources Deleted Successfully')).toBeVisible();
+    });
 });

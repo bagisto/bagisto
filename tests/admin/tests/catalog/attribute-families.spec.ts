@@ -70,12 +70,12 @@ test.describe('attribute family management', () => {
     test('edit attribute family', async () => {
         await createAttributeFamily(page);
 
-        await page.waitForTimeout(2000);
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
         const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
         await iconEdit[0].click();
 
-        await page.waitForTimeout(2000);
+        await page.waitForSelector('input[name="name"]');
         await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
         const attributes = await page.$$('i.icon-drag');
@@ -110,7 +110,7 @@ test.describe('attribute family management', () => {
     test('delete attribute family', async () => {
         await createAttributeFamily(page);
 
-        await page.waitForTimeout(5000);
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
         const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
         await iconDelete[0].click();

@@ -1,156 +1,104 @@
 import { test, expect, config } from '../../utils/setup';
+import { launchBrowser } from '../../utils/admin/coreHelper';
+import  * as forms from '../../utils/admin/formHelper';
 import logIn from '../../utils/admin/loginHelper';
-import * as forms from '../../utils/admin/formHelper';
 
-const { chromium, firefox, webkit } = await import('playwright');
-const baseUrl = config.baseUrl;
+test.describe('attribute management', () => {
+    let browser;
+    let context;
+    let page;
 
-let browser;
-let context;
-let page;
+    test.beforeEach(async () => {
+        browser = await launchBrowser();
+        context = await browser.newContext();
+        page = await context.newPage();
 
-test('Create Role', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+        await logIn(page);
 
-    // Create a new context
-    context = await browser.newContext();
+        await page.goto(`${config.baseUrl}/admin/settings/roles`);
+    });
 
-    // Open a new page
-    page = await context.newPage();
+    test.afterEach(async () => {
+        await browser.close();
+    });
 
-    // Log in once
-    await logIn(page);
+    test('create role', async () => {
+        await page.click('a.primary-button:visible');
 
-    await page.goto(`${baseUrl}/admin/settings/roles`);
+        await page.click('select[name="permission_type"]');
 
-    console.log('Create Role');
+        const select = await page.$('select[name="permission_type"]');
 
-    await page.click('a.primary-button:visible');
+        const option = Math.random() > 0.5 ? 'custom' : 'all';
 
-    await page.click('select[name="permission_type"]');
+        await select.selectOption({ value: option });
 
-    const select = await page.$('select[name="permission_type"]');
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    const option = Math.random() > 0.5 ? 'custom' : 'all';
-
-    await select.selectOption({ value: option });
-
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
-
-    const checkboxs = await page.$$('input[type="checkbox"] + span');
-
-    for (let checkbox of checkboxs) {
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 3 == 1) {
-            await checkbox.click();
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
         }
-    }
 
-    await inputs[0].press('Enter');
+        const checkboxs = await page.$$('input[type="checkbox"] + span');
 
-    await expect(page.getByText('Roles Created Successfully')).toBeVisible();
-});
+        for (let checkbox of checkboxs) {
+            let i = Math.floor(Math.random() * 10) + 1;
 
-test('Edit Role', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
-
-    // Create a new context
-    context = await browser.newContext();
-
-    // Open a new page
-    page = await context.newPage();
-
-    // Log in once
-    await logIn(page);
-
-    await page.goto(`${baseUrl}/admin/settings/roles`);
-
-    console.log('Edit Role');
-
-    await page.waitForTimeout(5000);
-
-    const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-    await iconEdit[0].click();
-
-    await page.click('select[name="permission_type"]');
-
-    const select = await page.$('select[name="permission_type"]');
-
-    const option = Math.random() > 0.5 ? 'custom' : 'all';
-
-    await select.selectOption({ value: option });
-
-    const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (let input of inputs) {
-        await input.fill(forms.generateRandomStringWithSpaces(200));
-    }
-
-    const checkboxs = await page.$$('input[type="checkbox"] + span');
-
-    for (let checkbox of checkboxs) {
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 3 == 1) {
-            await checkbox.click();
+            if (i % 3 == 1) {
+                await checkbox.click();
+            }
         }
-    }
 
-    await inputs[0].press('Enter');
+        await inputs[0].press('Enter');
 
-    await expect(page.getByText('Roles is updated successfully')).toBeVisible();
-});
+        await expect(page.getByText('Roles Created Successfully')).toBeVisible();
+    });
 
-test('Delete Role', async () => {
-    test.setTimeout(config.mediumTimeout);
-    if (config.browser === 'firefox') {
-        browser = await firefox.launch();
-    } else if (config.browser === 'webkit') {
-        browser = await webkit.launch();
-    } else {
-        browser = await chromium.launch();
-    }
+    test('edit role', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
-    // Create a new context
-    context = await browser.newContext();
+        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-    // Open a new page
-    page = await context.newPage();
+        await iconEdit[0].click();
 
-    // Log in once
-    await logIn(page);
+        await page.click('select[name="permission_type"]');
 
-    await page.goto(`${baseUrl}/admin/settings/roles`);
+        const select = await page.$('select[name="permission_type"]');
 
-    console.log('Delete Role');
+        const option = Math.random() > 0.5 ? 'custom' : 'all';
 
-    await page.waitForTimeout(5000);
+        await select.selectOption({ value: option });
 
-    const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-    await iconDelete[0].click();
+        for (let input of inputs) {
+            await input.fill(forms.generateRandomStringWithSpaces(200));
+        }
 
-    await page.click('button.transparent-button + button.primary-button:visible');
+        const checkboxs = await page.$$('input[type="checkbox"] + span');
 
-    await expect(page.getByText('Roles is deleted successfully')).toBeVisible();
+        for (let checkbox of checkboxs) {
+            let i = Math.floor(Math.random() * 10) + 1;
+
+            if (i % 3 == 1) {
+                await checkbox.click();
+            }
+        }
+
+        await inputs[0].press('Enter');
+
+        await expect(page.getByText('Roles is updated successfully')).toBeVisible();
+    });
+
+    test('delete role', async () => {
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+        await iconDelete[0].click();
+
+        await page.click('button.transparent-button + button.primary-button:visible');
+
+        await expect(page.getByText('Roles is deleted successfully')).toBeVisible();
+    });
 });

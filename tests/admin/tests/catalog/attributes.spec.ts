@@ -98,7 +98,7 @@ test.describe('attribute management', () => {
     });
 
     test('edit attribute', async () => {
-        await page.waitForTimeout(5000);
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
         const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
         await iconEdit[0].click();
@@ -156,7 +156,7 @@ test.describe('attribute management', () => {
     test('delete attribute', async () => {
         test.setTimeout(config.mediumTimeout);
 
-        await page.waitForTimeout(5000);
+        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
         const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
         await iconDelete[0].click();
@@ -167,7 +167,7 @@ test.describe('attribute management', () => {
     });
 
     test('mass delete attributes', async () => {
-        await page.waitForTimeout(5000);
+        await page.waitForSelector('.icon-uncheckbox');
 
         const checkboxs = await page.$$('.icon-uncheckbox');
 
