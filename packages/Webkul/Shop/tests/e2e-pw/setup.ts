@@ -8,10 +8,6 @@ const config = {
     adminPassword: process.env.ADMIN_PASSWORD || 'admin123',
 
     browser: process.env.BROWSER || 'chromium',
-
-    mediumTimeout: 120000,
-
-    highTimeout: 240000,
 };
 
 export const test = base.extend({});

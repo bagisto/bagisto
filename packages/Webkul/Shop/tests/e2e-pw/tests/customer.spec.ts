@@ -203,8 +203,6 @@ test('Print Invoice', async ({page}) => {
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('link', { name: ' Print' }).click();
     const download = await downloadPromise;
-
-    console.log(download);
 });
 
 test('Downloadable Orders', async ({page}) => {
@@ -224,8 +222,6 @@ test('Downloadable Orders', async ({page}) => {
     await page.getByRole('link', { name: 'file', exact: true }).click();
     const page2 = await page2Promise;
     const download1 = await download1Promise;
-
-    console.log(download1);
 });
 
 test('Wishlist to Cart', async ({page}) => {

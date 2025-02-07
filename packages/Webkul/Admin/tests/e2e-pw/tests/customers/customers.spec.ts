@@ -159,7 +159,7 @@ test.describe('customer management', () => {
         await expect(adminPage.getByText('Address Deleted Successfully')).toBeVisible();
     });
 
-    test.skip('add note', async ({ adminPage }) => {
+    test('add note', async ({ adminPage }) => {
         await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
         await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
@@ -179,7 +179,7 @@ test.describe('customer management', () => {
         await expect(adminPage.getByText('Note Created Successfully')).toBeVisible();
     });
 
-    test.skip('delete account', async ({ adminPage }) => {
+    test('delete account', async ({ adminPage }) => {
         await createCustomer(adminPage);
 
         await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
