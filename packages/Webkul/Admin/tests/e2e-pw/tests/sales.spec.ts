@@ -1,83 +1,64 @@
 import { test, expect, config } from '../setup';
-import { launchBrowser } from '../utils/core';
 import  * as forms from '../utils/form';
-import logIn from '../utils/login';
 import address from '../utils/address';
 
 test.describe('sales management', () => {
-    let browser;
-    let context;
-    let page;
+    test('create orders', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
-
-        await logIn(page);
-
-        await page.goto(`${config.baseUrl}/admin/sales/orders`);
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('create orders', async () => {
         test.setTimeout(config.highTimeout);
 
-        await page.click('button.primary-button:visible');
+        await adminPage.click('button.primary-button:visible');
 
-        await page.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'testxyat1k@example.com');
+        await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'testxyat1k@example.com');
 
-        const exists = await page.waitForSelector('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4', { timeout: 5000 }).catch(() => null);
+        const exists = await adminPage.waitForSelector('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4', { timeout: 5000 }).catch(() => null);
 
         if (exists) {
-            const users = await page.$$('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4');
+            const users = await adminPage.$$('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4');
 
             await users[Math.floor(Math.random() * ((users.length - 1) - 0 + 1)) + 0].click();
 
         } else {
-            await page.click('div.flex.flex-col.items-center > button.secondary-button:visible');
+            await adminPage.click('div.flex.flex-col.items-center > button.secondary-button:visible');
 
-            await page.fill('input[name="first_name"]:visible', forms.form.firstName);
-            await page.fill('input[name="last_name"]:visible', forms.form.lastName);
+            await adminPage.fill('input[name="first_name"]:visible', forms.form.firstName);
+            await adminPage.fill('input[name="last_name"]:visible', forms.form.lastName);
             const email = forms.form.email;
-            await page.fill('input[name="email"]:visible', email);
-            await page.fill('input[name="phone"]:visible', forms.form.phone);
-            await page.selectOption('select[name="gender"]:visible', 'Other');
+            await adminPage.fill('input[name="email"]:visible', email);
+            await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
+            await adminPage.selectOption('select[name="gender"]:visible', 'Other');
 
-            await page.press('input[name="phone"]:visible', 'Enter');
+            await adminPage.press('input[name="phone"]:visible', 'Enter');
 
-            const getError = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+            const getError = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
             var message = '';
 
             if (getError) {
-                const errors = await page.$$('.text-red-600.text-xs.italic');
+                const errors = await adminPage.$$('.text-red-600.text-xs.italic');
 
                 for (let error of errors) {
                     message = await error.evaluate(el => el.innerText);
-                    console.log(message);
                 }
             }
         }
 
-        const itemExists = await page.waitForSelector('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all', { timeout: 5000 }).catch(() => null);
+        const itemExists = await adminPage.waitForSelector('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all', { timeout: 5000 }).catch(() => null);
 
         if (itemExists) {
-            var items = await page.$$('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all');
+            var items = await adminPage.$$('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all');
             await items[Math.floor(Math.random() * ((items.length - 1) - 0 + 1)) + 0].click();
 
-            await page.click('button.primary-button:visible');
+            await adminPage.click('button.primary-button:visible');
         } else {
-            await page.click('p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button');
-            await page.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'arct');
+            await adminPage.click('p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button');
+            await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'arct');
 
-            const exists = await page.waitForSelector('button.cursor-pointer.text-sm.text-blue-600.transition-all', { timeout: 5000 }).catch(() => null);
+            const exists = await adminPage.waitForSelector('button.cursor-pointer.text-sm.text-blue-600.transition-all', { timeout: 5000 }).catch(() => null);
 
             if (exists) {
-                const cartBtns = await page.$$('.grid.place-content-start.gap-2.text-right > button.cursor-pointer.text-sm.text-blue-600.transition-all');
-                const inputQty = await page.$$('input[name="qty"]:visible');
+                const cartBtns = await adminPage.$$('.grid.place-content-start.gap-2.text-right > button.cursor-pointer.text-sm.text-blue-600.transition-all');
+                const inputQty = await adminPage.$$('input[name="qty"]:visible');
 
                 let count = 0;
                 for (let cartBtn of cartBtns) {
@@ -100,41 +81,39 @@ test.describe('sales management', () => {
             }
         }
 
-        const iconExists = await page.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
+        const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
 
         if (iconExists) {
-            const messages = await page.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
-            const icons = await page.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
+            const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
+            const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
 
             const message = await messages[0].evaluate(el => el.parentNode.innerText);
             await icons[0].click();
-            console.log(message);
         } else {
-            const checkboxs = await page.$$('input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label');
+            const checkboxs = await adminPage.$$('input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label');
 
             for (let checkbox of checkboxs) {
                 await checkbox.click();
             }
 
-            await page.click('.flex.items-center.justify-between > button.primary-button:visible');
+            await adminPage.click('.flex.items-center.justify-between > button.primary-button:visible');
 
-            const iconExists = await page.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
+            const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
 
             if (iconExists) {
-                const messages = await page.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
-                const icons = await page.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
+                const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
+                const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
 
                 const message = await messages[0].evaluate(el => el.parentNode.innerText);
                 await icons[0].click();
-                console.info(message);
             } else {
             }
         }
 
-        const radio = await page.$$('input[name="billing.id"]');
+        const radio = await adminPage.$$('input[name="billing.id"]');
 
         if (radio.length > 0) {
-            const addressNames = await page.$$('input[name="billing.id"] + label');
+            const addressNames = await adminPage.$$('input[name="billing.id"] + label');
 
             const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
 
@@ -147,27 +126,27 @@ test.describe('sales management', () => {
                 return;
             }
         } else {
-            await page.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all');
+            await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all');
 
-            if (await address(page) != 'done') {
+            if (await address(adminPage) != 'done') {
                 return;
             }
         }
-        const checkbox = await page.$$('input[name="billing.use_for_shipping"]');
+        const checkbox = await adminPage.$$('input[name="billing.use_for_shipping"]');
 
         if (Math.floor(Math.random() * 20) % 3 == 1 ? false : true) {
             if (! checkbox[0].isChecked()) {
-                await page.click('input[name="billing.use_for_shipping"] + label');
+                await adminPage.click('input[name="billing.use_for_shipping"] + label');
             }
         } else {
             if (checkbox[0].isChecked()) {
-                await page.click('input[name="billing.use_for_shipping"] + label');
+                await adminPage.click('input[name="billing.use_for_shipping"] + label');
             }
 
-            const radio = await page.$$('input[name="shipping.id"]');
+            const radio = await adminPage.$$('input[name="shipping.id"]');
 
             if (radio.length > 0) {
-                const addressNames = await page.$$('input[name="shipping.id"] + label');
+                const addressNames = await adminPage.$$('input[name="shipping.id"] + label');
 
                 const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
 
@@ -181,29 +160,29 @@ test.describe('sales management', () => {
                     return;
                 }
             } else {
-                await page.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible');
+                await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible');
 
-                await page.fill('input[name="shipping.company_name"]', forms.form.lastName);
-                await page.fill('input[name="shipping.first_name"]', forms.form.firstName);
-                await page.fill('input[name="shipping.last_name"]', forms.form.lastName);
-                await page.fill('input[name="shipping.email"]', forms.form.email);
-                await page.fill('input[name="shipping.address.[0]"]', forms.form.firstName);
-                await page.selectOption('select[name="shipping.country"]', 'IN');
-                await page.selectOption('select[name="shipping.state"]', 'UP');
-                await page.fill('input[name="shipping.city"]', forms.form.lastName);
-                await page.fill('input[name="shipping.postcode"]', '201301');
-                await page.fill('input[name="shipping.phone"]', forms.form.phone);
+                await adminPage.fill('input[name="shipping.company_name"]', forms.form.lastName);
+                await adminPage.fill('input[name="shipping.first_name"]', forms.form.firstName);
+                await adminPage.fill('input[name="shipping.last_name"]', forms.form.lastName);
+                await adminPage.fill('input[name="shipping.email"]', forms.form.email);
+                await adminPage.fill('input[name="shipping.address.[0]"]', forms.form.firstName);
+                await adminPage.selectOption('select[name="shipping.country"]', 'IN');
+                await adminPage.selectOption('select[name="shipping.state"]', 'UP');
+                await adminPage.fill('input[name="shipping.city"]', forms.form.lastName);
+                await adminPage.fill('input[name="shipping.postcode"]', '201301');
+                await adminPage.fill('input[name="shipping.phone"]', forms.form.phone);
 
-                await page.press('input[name="shipping.phone"]', 'Enter');
+                await adminPage.press('input[name="shipping.phone"]', 'Enter');
             }
         }
 
-        await page.click('.mt-4.flex.justify-end > button.primary-button:visible');
+        await adminPage.click('.mt-4.flex.justify-end > button.primary-button:visible');
 
-        const existsship = await page.waitForSelector('input[name="shipping_method"] + label', { timeout: 10000 }).catch(() => null);
+        const existsship = await adminPage.waitForSelector('input[name="shipping_method"] + label', { timeout: 10000 }).catch(() => null);
 
         if (existsship) {
-            const radio = await page.$$('input[name="shipping_method"] + label');
+            const radio = await adminPage.$$('input[name="shipping_method"] + label');
 
             const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
 
@@ -218,69 +197,72 @@ test.describe('sales management', () => {
             }
         }
 
-        const existspay = await page.waitForSelector('input[name="payment_method"] + label', { timeout: 10000 }).catch(() => null);
+        const existspay = await adminPage.waitForSelector('input[name="payment_method"] + label', { timeout: 10000 }).catch(() => null);
 
         if (existspay) {
-            const radio = await page.$$('input[name="payment_method"] + label');
+            const radio = await adminPage.$$('input[name="payment_method"] + label');
 
             await radio[1].click();
 
-            const nextButton = await page.$$('button.primary-button.w-max.px-11.py-3');
+            const nextButton = await adminPage.$$('button.primary-button.w-max.px-11.py-3');
             await nextButton[nextButton.length - 1].click();
         }
 
-        await expect(page.getByText('Order Items')).toBeVisible();
+        await expect(adminPage.getByText('Order Items')).toBeVisible();
     });
 
-    test('comment on order', async () => {
+    test('comment on order', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
 
         const lorem100 = forms.generateRandomStringWithSpaces(500);
-        page.fill('textarea[name="comment"]', lorem100);
+        adminPage.fill('textarea[name="comment"]', lorem100);
 
-        const checkbox = await page.$$('input[name="customer_notified"]');
+        const checkbox = await adminPage.$$('input[name="customer_notified"]');
 
         if (! checkbox[0].isChecked()) {
-            await page.click('input[name="customer_notified"] + label');
+            await adminPage.click('input[name="customer_notified"] + label');
         }
 
-        await page.click('button[type="submit"].secondary-button:visible');
+        await adminPage.click('button[type="submit"].secondary-button:visible');
 
-        await expect(page.getByText('Comment added successfully.')).toBeVisible();
+        await expect(adminPage.getByText('Comment added successfully.')).toBeVisible();
     });
 
-    test('reorder', async () => {
+    test('reorder', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
-        await page.waitForSelector('a.transparent-button.px-1 > .icon-cart.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.waitForSelector('a.transparent-button.px-1 > .icon-cart.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await page.click('a.transparent-button.px-1 > .icon-cart.text-2xl:visible');
+        await adminPage.click('a.transparent-button.px-1 > .icon-cart.text-2xl:visible');
 
-        await expect(page.getByText('Cart Items')).toBeVisible();
+        await expect(adminPage.getByText('Cart Items')).toBeVisible();
     });
 
-    test('create invoice', async () => {
+    test('create invoice', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
-        await page.waitForSelector('div.transparent-button.px-1 > .icon-sales.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-sales.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await page.click('div.transparent-button.px-1 > .icon-sales.text-2xl:visible');
-        await page.waitForSelector('input[placeholder="Qty to invoiced"]:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.click('div.transparent-button.px-1 > .icon-sales.text-2xl:visible');
+        await adminPage.waitForSelector('input[placeholder="Qty to invoiced"]:visible', { timeout: 1000 }).catch(() => null);
 
-        const itemQty = await page.$$('input[placeholder="Qty to invoiced"]:visible');
+        const itemQty = await adminPage.$$('input[placeholder="Qty to invoiced"]:visible');
 
         for (let element of itemQty) {
             await element.scrollIntoViewIfNeeded();
@@ -293,50 +275,52 @@ test.describe('sales management', () => {
             await element.fill(qty.toString());
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Invoice created successfully')).toBeVisible();
+        await expect(adminPage.getByText('Invoice created successfully')).toBeVisible();
     });
 
-    test('create shipment', async () => {
+    test('create shipment', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
-        const exists = await page.waitForSelector('div.transparent-button.px-1 > .icon-ship.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+        const exists = await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-ship.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await page.click('div.transparent-button.px-1 > .icon-ship.text-2xl:visible');
+        await adminPage.click('div.transparent-button.px-1 > .icon-ship.text-2xl:visible');
 
-        await page.fill('input[name="shipment[carrier_title]"]', forms.generateRandomStringWithSpaces(20));
-        await page.fill('input[name="shipment[track_number]"]', forms.generateRandomStringWithSpaces(20));
-        const options = await page.$$eval('select[name="shipment[source]"] option', (options) => {
+        await adminPage.fill('input[name="shipment[carrier_title]"]', forms.generateRandomStringWithSpaces(20));
+        await adminPage.fill('input[name="shipment[track_number]"]', forms.generateRandomStringWithSpaces(20));
+        const options = await adminPage.$$eval('select[name="shipment[source]"] option', (options) => {
             return options.map(option => option.value);
         });
 
         const randomIndex = Math.floor(Math.random() * options.length);
 
-        await page.selectOption('select[name="shipment[source]"]', options[randomIndex]);
+        await adminPage.selectOption('select[name="shipment[source]"]', options[randomIndex]);
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Shipment created successfully')).toBeVisible();
+        await expect(adminPage.getByText('Shipment created successfully')).toBeVisible();
     });
 
-    test('create refund', async () => {
+    test('create refund', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
-        await page.waitForSelector('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await page.click('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible');
-        await page.waitForSelector('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.click('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible');
+        await adminPage.waitForSelector('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible', { timeout: 1000 }).catch(() => null);
 
-        const itemQty = await page.$$('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible');
+        const itemQty = await adminPage.$$('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible');
         let i = 1;
         for (let element of itemQty) {
             await element.scrollIntoViewIfNeeded();
@@ -360,57 +344,58 @@ test.describe('sales management', () => {
             i++;
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Refund created successfully')).toBeVisible();
+        await expect(adminPage.getByText('Refund created successfully')).toBeVisible();
     });
 
-    test('cancel order', async () => {
+    test('cancel order', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await page.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        const iconRight = await page.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
         await iconRight[0].click();
-        await page.waitForSelector('.icon-cancel.text-2xl + a:visible', { timeout: 1000 }).catch(() => null);
+        await adminPage.waitForSelector('.icon-cancel.text-2xl + a:visible', { timeout: 1000 }).catch(() => null);
 
-        await page.click('.icon-cancel.text-2xl + a:visible');
-        await page.click('button.transparent-button + button.primary-button:visible');
+        await adminPage.click('.icon-cancel.text-2xl + a:visible');
+        await adminPage.click('button.transparent-button + button.primary-button:visible');
 
-        await expect(page.getByText('Order cancelled successfully')).toBeVisible();
+        await expect(adminPage.getByText('Order cancelled successfully')).toBeVisible();
     });
 
-    test('mail invoice', async () => {
-        await page.goto(`${config.baseUrl}/admin/sales/invoices`);
+    test('mail invoice', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
 
-        await page.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+        await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-        const iconEye = await page.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+        const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
         await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
 
-        await page.click('button[type="button"].inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-mail.text-2xl:visible');
+        await adminPage.click('button[type="button"].inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-mail.text-2xl:visible');
 
         const email = forms.form.email;
-        await page.fill('input[type="email"][name="email"]#email:visible', email);
+        await adminPage.fill('input[type="email"][name="email"]#email:visible', email);
 
-        await page.click('button.primary-button:visible');
+        await adminPage.click('button.primary-button:visible');
 
-        await expect(page.getByText('Invoice sent successfully')).toBeVisible();
+        await expect(adminPage.getByText('Invoice sent successfully')).toBeVisible();
     });
 
-    test('print invoice', async () => {
-        await page.goto(`${config.baseUrl}/admin/sales/invoices`);
+    test('print invoice', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
 
-        await page.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+        await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-        const iconEye = await page.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+        const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
         await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
 
-        await page.click('a.inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-printer.text-2xl:visible');
-        const downloadPromise = page.waitForEvent('download');
-        await page.getByRole('link', { name: ' Print' }).click();
+        await adminPage.click('a.inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-printer.text-2xl:visible');
+        const downloadPromise = adminPage.waitForEvent('download');
+        await adminPage.getByRole('link', { name: ' Print' }).click();
 
         const download = await downloadPromise;
 

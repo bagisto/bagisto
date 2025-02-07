@@ -1,33 +1,15 @@
 import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
 import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
 
 test.describe('channel management', () => {
-    let browser;
-    let context;
-    let page;
+    test('create channel', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+        await adminPage.click('a.primary-button:visible');
 
-        await logIn(page);
+        await adminPage.click('select.custom-select');
 
-        await page.goto(`${config.baseUrl}/admin/settings/channels`);
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('create channel', async () => {
-        await page.click('a.primary-button:visible');
-
-        await page.click('select.custom-select');
-
-        const selects = await page.$$('select.custom-select');
+        const selects = await adminPage.$$('select.custom-select');
 
         for (let select of selects) {
             const options = await select.$$eval('option', (options) => {
@@ -43,7 +25,7 @@ test.describe('channel management', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
@@ -55,9 +37,9 @@ test.describe('channel management', () => {
             .join(' ')
             .replaceAll(' ', '');
 
-        await page.fill('input[name="code"].rounded-md:visible', concatenatedNames);
+        await adminPage.fill('input[name="code"].rounded-md:visible', concatenatedNames);
 
-        const checkboxs = await page.$$('input[type="checkbox"] + label');
+        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
 
         for (let checkbox of checkboxs) {
             await checkbox.click();
@@ -65,19 +47,21 @@ test.describe('channel management', () => {
 
         await inputs[0].press('Enter');
 
-        await expect(page.getByText('Channel created successfully.')).toBeVisible();
+        await expect(adminPage.getByText('Channel created successfully.')).toBeVisible();
     });
 
-    test('edit channel', async () => {
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+    test('edit channel', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+
+        const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
         await iconEdit[0].click();
 
-        await page.click('select.custom-select');
+        await adminPage.click('select.custom-select');
 
-        const selects = await page.$$('select.custom-select');
+        const selects = await adminPage.$$('select.custom-select');
 
         for (let select of selects) {
             const options = await select.$$eval('option', (options) => {
@@ -93,7 +77,7 @@ test.describe('channel management', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             if (input == inputs[0]) {
@@ -103,7 +87,7 @@ test.describe('channel management', () => {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
-        const checkboxs = await page.$$('input[type="checkbox"] + label');
+        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
 
         for (let checkbox of checkboxs) {
             await checkbox.click();
@@ -111,18 +95,20 @@ test.describe('channel management', () => {
 
         await inputs[1].press('Enter');
 
-        await expect(page.getByText('Update Channel Successfully')).toBeVisible();
+        await expect(adminPage.getByText('Update Channel Successfully')).toBeVisible();
     });
 
-    test('delete channel', async () => {
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+    test('delete channel', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
 
-        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+        const iconDelete = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
         await iconDelete[0].click();
 
-        await page.click('button.transparent-button + button.primary-button:visible');
+        await adminPage.click('button.transparent-button + button.primary-button:visible');
 
-        await expect(page.getByText('Channel deleted successfully.')).toBeVisible();
+        await expect(adminPage.getByText('Channel deleted successfully.')).toBeVisible();
     });
 });

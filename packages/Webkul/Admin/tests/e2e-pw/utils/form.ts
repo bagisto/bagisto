@@ -36,7 +36,6 @@ const testForm = async (page) => {
 
         for (let error of errors) {
             message = await error.evaluate((el) => el.innerText);
-            console.log(message);
         }
         return null;
     } else {
@@ -59,7 +58,6 @@ const testForm = async (page) => {
                 (el) => el.parentNode.innerText
             );
             await icons[0].click();
-            console.log(message);
             return null;
         } else {
             return page.url();

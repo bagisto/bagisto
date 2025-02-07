@@ -1,33 +1,13 @@
 import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
 import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
 
 test.describe('general configuration', () => {
-    let browser;
-    let context;
-    let page;
+    test('General of General', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/general`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+        await adminPage.click('select.custom-select');
 
-        await logIn(page);
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('General of General', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/general/general`);
-
-
-
-        await page.click('select.custom-select');
-
-        const select = await page.$('select.custom-select');
+        const select = await adminPage.$('select.custom-select');
 
         let i = Math.floor(Math.random() * 10) + 1;
 
@@ -43,19 +23,19 @@ test.describe('general configuration', () => {
             }
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('Content of General', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/general/content`);
+    test('Content of General', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/content`);
 
 
 
-        await page.click('input[type="text"].rounded-md:visible');
+        await adminPage.click('input[type="text"].rounded-md:visible');
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
 
@@ -66,19 +46,17 @@ test.describe('general configuration', () => {
             }
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('Design of General', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/general/design`);
+    test('Design of General', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/design`);
 
+        await adminPage.click('input[type="file"]');
 
-
-        await page.click('input[type="file"]');
-
-        const inputs = await page.$$('input[type="file"]');
+        const inputs = await adminPage.$$('input[type="file"]');
 
         for (let input of inputs) {
             const filePath = forms.getRandomImageFile();
@@ -86,7 +64,7 @@ test.describe('general configuration', () => {
             await input.setInputFiles(filePath);
         }
 
-        const checkboxs = await page.$$('input[type="checkbox"] + label.icon-uncheckbox:visible');
+        const checkboxs = await adminPage.$$('input[type="checkbox"] + label.icon-uncheckbox:visible');
 
         for (let checkbox of checkboxs) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -96,17 +74,15 @@ test.describe('general configuration', () => {
             }
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('Magic AI of General', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/general/magic_ai`);
+    test('Magic AI of General', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/magic_ai`);
 
-
-
-        const selects = await page.$$('select.custom-select');
+        const selects = await adminPage.$$('select.custom-select');
 
         for (let select of selects) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -124,14 +100,14 @@ test.describe('general configuration', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 });

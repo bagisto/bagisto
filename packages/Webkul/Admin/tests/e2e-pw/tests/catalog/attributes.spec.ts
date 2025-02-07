@@ -65,6 +65,8 @@ test.describe('attribute management', () => {
         const iconEdit = await adminPage.$$('span.cursor-pointer.icon-edit');
         await iconEdit[0].click();
 
+        // Content will be added here. Currently just checking the general save button.
+
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.getByText('Attribute Updated Successfully')).toBeVisible();

@@ -1,31 +1,13 @@
 import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
 import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
 
 test.describe('email configuration', () => {
-    let browser;
-    let context;
-    let page;
+    test('Settings of Email', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/emails/configure`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+        await adminPage.click('input[type="text"].rounded-md:visible');
 
-        await logIn(page);
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('Settings of Email', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/emails/configure`);
-
-        await page.click('input[type="text"].rounded-md:visible');
-
-        const inputs = await page.$$('input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
         let i = 0;
 
@@ -39,16 +21,16 @@ test.describe('email configuration', () => {
             i++;
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('Notifications of Email', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/emails/general`);
+    test('Notifications of Email', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/emails/general`);
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 });

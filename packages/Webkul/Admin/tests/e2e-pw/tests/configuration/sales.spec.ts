@@ -1,33 +1,13 @@
 import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
 import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
 
 test.describe('sales configuration', () => {
-    let browser;
-    let context;
-    let page;
+    test('shipping settings of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/shipping`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+        await adminPage.click('select[name="sales[shipping][origin][country]"]');
 
-        await logIn(page);
-    });
-
-    test.afterEach(async () => {
-        await browser.close();
-    });
-
-    test('shipping settings of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/shipping`);
-
-
-
-        await page.click('select[name="sales[shipping][origin][country]"]');
-
-        const select = await page.$('select[name="sales[shipping][origin][country]"]');
+        const select = await adminPage.$('select[name="sales[shipping][origin][country]"]');
 
         const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
@@ -41,7 +21,7 @@ test.describe('sales configuration', () => {
             await select.selectOption(options[0]);
         }
 
-        const state = await page.$('select[name="sales[shipping][origin][state]"]');
+        const state = await adminPage.$('select[name="sales[shipping][origin][state]"]');
 
         if (state) {
             const options = await state.$$eval('option', (options) => {
@@ -57,33 +37,31 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
+        await adminPage.fill('input[name="sales[shipping][origin][zipcode]"]', '123456');
+        await adminPage.fill('input[name="sales[shipping][origin][vat_number]"]', '1234567890');
+        await adminPage.fill('input[name="sales[shipping][origin][contact]"]', '1234567890');
 
-        await page.fill('input[name="sales[shipping][origin][zipcode]"]', '123456');
-        await page.fill('input[name="sales[shipping][origin][vat_number]"]', '1234567890');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await page.click('button[type="submit"].primary-button:visible');
-
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('shipping methods of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/carriers`);
+    test('shipping methods of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/carriers`);
 
-
-
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
-        const select = await page.$('select.custom-select');
+        const select = await adminPage.$('select.custom-select');
 
         let i = Math.floor(Math.random() * 10) + 1;
 
@@ -98,19 +76,17 @@ test.describe('sales configuration', () => {
                 await select.selectOption(options[randomIndex]);
             }
         }
-        await page.fill('input[name="sales[carriers][flatrate][default_rate]"]', '12');
+        await adminPage.fill('input[name="sales[carriers][flatrate][default_rate]"]', '12');
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('payment methods of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/payment_methods`);
+    test('payment methods of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/payment_methods`);
 
-
-
-        const files = await page.$$('input[type="file"]');
+        const files = await adminPage.$$('input[type="file"]');
 
         for (let file of files) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -122,7 +98,7 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const deletes = await page.$$('input[type="checkbox"] + label.icon-uncheckbox:visible');
+        const deletes = await adminPage.$$('input[type="checkbox"] + label.icon-uncheckbox:visible');
 
         for (let checkbox of deletes) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -132,13 +108,13 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
-        const selects = await page.$$('select.custom-select');
+        const selects = await adminPage.$$('select.custom-select');
 
         for (let select of selects) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -156,17 +132,15 @@ test.describe('sales configuration', () => {
             }
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('order settings of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/order_settings`);
+    test('order settings of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/order_settings`);
 
-
-
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -176,20 +150,20 @@ test.describe('sales configuration', () => {
             }
         }
 
-        await page.fill('input[name="sales[order_settings][order_number][order_number_length]"]', (Math.floor(Math.random() * 100000000)).toString());
-        await page.fill('input[type="number"]', (Math.floor(Math.random() * 1000000)).toString(), { timeout: 3000 }).catch(() => null);
+        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', '5');
+        await adminPage.fill('input[type="number"]', (Math.floor(Math.random() * 1000000)).toString(), { timeout: 3000 }).catch(() => null);
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await adminPage.screenshot({ path: 'screenshot.png', fullPage: true });
+
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('invoice settings of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/invoice_settings`);
+    test('invoice settings of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/invoice_settings`);
 
-
-
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -199,13 +173,15 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const newErrors = await page.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+        await adminPage.fill('input[name="sales[invoice_settings][invoice_number][invoice_number_length]"]', '5');
+
+        const newErrors = await adminPage.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
         for (let error of newErrors) {
             await error.fill((Math.floor(Math.random() * 1000000000000000)).toString());
         }
 
-        const file = await page.$('input[type="file"]');
+        const file = await adminPage.$('input[type="file"]');
 
         let i = Math.floor(Math.random() * 10) + 1;
 
@@ -215,7 +191,7 @@ test.describe('sales configuration', () => {
             await file.setInputFiles(filePath);
         }
 
-        const select = await page.$('select.custom-select');
+        const select = await adminPage.$('select.custom-select');
 
         const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
@@ -227,19 +203,19 @@ test.describe('sales configuration', () => {
             await select.selectOption(options[randomIndex]);
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await adminPage.screenshot({ path: 'screenshot.png', fullPage: true });
+
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('taxes of sales', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/taxes`);
+    test('taxes of sales', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/taxes`);
 
+        await adminPage.click('select.custom-select');
 
-
-        await page.click('select.custom-select');
-
-        const selects = await page.$$('select.custom-select');
+        const selects = await adminPage.$$('select.custom-select');
 
         for (let select of selects) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -257,7 +233,7 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const state = await page.$('select[name="sales[taxes][default_destination_calculation][state]"]');
+        const state = await adminPage.$('select[name="sales[taxes][default_destination_calculation][state]"]');
 
         if (state) {
             const options = await state.$$eval('option', (options) => {
@@ -273,23 +249,21 @@ test.describe('sales configuration', () => {
             }
         }
 
-        const inputs = await page.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
         for (let input of inputs) {
             await input.fill(forms.generateRandomStringWithSpaces(200));
         }
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    test('checkout of customer', async () => {
-        await page.goto(`${config.baseUrl}/admin/configuration/sales/checkout`);
+    test('checkout of customer', async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/checkout`);
 
-
-
-        const select = await page.$('select.custom-select');
+        const select = await adminPage.$('select.custom-select');
 
         const options = await select.$$eval('option', (options) => {
             return options.map(option => option.value);
@@ -301,10 +275,10 @@ test.describe('sales configuration', () => {
             await select.selectOption(options[randomIndex]);
         }
 
-        await page.fill('input[name="sales[checkout][mini_cart][offer_info]"]', forms.generateRandomStringWithSpaces(200));
+        await adminPage.fill('input[name="sales[checkout][mini_cart][offer_info]"]', forms.generateRandomStringWithSpaces(200));
 
-        await page.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(page.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 });
