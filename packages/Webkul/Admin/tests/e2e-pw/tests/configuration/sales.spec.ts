@@ -155,8 +155,6 @@ test.describe('sales configuration', () => {
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await adminPage.screenshot({ path: 'screenshot.png', fullPage: true });
-
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
@@ -204,8 +202,6 @@ test.describe('sales configuration', () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        await adminPage.screenshot({ path: 'screenshot.png', fullPage: true });
 
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });

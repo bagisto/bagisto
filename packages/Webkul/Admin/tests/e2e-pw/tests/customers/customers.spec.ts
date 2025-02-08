@@ -192,8 +192,6 @@ test.describe('customer management', () => {
         await adminPage.click('.icon-cancel:visible');
         await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-        await adminPage.screenshot({ path: 'screenshot.png' });
-
         await expect(adminPage.getByText('Customer Deleted Successfully')).toBeVisible();
     });
 
@@ -238,7 +236,7 @@ test.describe('customer management', () => {
         await expect(adminPage.getByText('Selected data successfully deleted')).toBeVisible();
     });
 
-    test('mass update customers hello', async ({ adminPage }) => {
+    test('mass update customers', async ({ adminPage }) => {
         await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
         await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 

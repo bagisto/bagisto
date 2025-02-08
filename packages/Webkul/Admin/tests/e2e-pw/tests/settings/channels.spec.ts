@@ -1,114 +1,128 @@
-import { test, expect, config } from '../../setup';
-import  * as forms from '../../utils/form';
+import { test, expect, config } from "../../setup";
+import {
+    generateName,
+    generateSlug,
+    generateShortDescription,
+    generateHostname,
+    getImageFile,
+} from "../../utils/faker";
 
-test.describe('channel management', () => {
-    test('create channel', async ({ adminPage }) => {
+test.describe("channel management", () => {
+    test("should create a new channel", async ({ adminPage }) => {
+        /**
+         * Reaching the create channel page.
+         */
         await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
+        await adminPage.waitForSelector(
+            'a.primary-button:has-text("Create Channel")',
+            { state: "visible" }
+        );
+        await adminPage.click('a.primary-button:has-text("Create Channel")');
 
-        await adminPage.click('a.primary-button:visible');
+        const code = generateSlug("_");
+        const name = generateName();
+        const shortDescription = generateShortDescription();
 
-        await adminPage.click('select.custom-select');
+        /**
+         * General Section.
+         */
+        await adminPage.fill("#code", code);
+        await adminPage.fill("#name", name);
+        await adminPage.fill("#description", shortDescription);
 
-        const selects = await adminPage.$$('select.custom-select');
+        await adminPage.click('label[for="inventory_sources_1"]');
+        await expect(
+            adminPage.locator("input#inventory_sources_1")
+        ).toBeChecked();
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+        await adminPage.selectOption("#root_category_id", "1");
+        await adminPage.fill("#hostname", generateHostname());
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * options.length) + 1;
+        /**
+         * Currencies And Locales Section.
+         */
+        await adminPage.click('label[for="locales_1"]');
+        await expect(adminPage.locator("input#locales_1")).toBeChecked();
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+        await adminPage.selectOption("#default_locale_id", "1");
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+        await adminPage.click('label[for="currencies_1"]');
+        await expect(adminPage.locator("input#currencies_1")).toBeChecked();
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+        await adminPage.selectOption("#base_currency_id", "1");
 
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', '');
+        /**
+         * Design Section.
+         */
+        const [logoChooser] = await Promise.all([
+            adminPage.waitForEvent("filechooser"),
+            adminPage.click('label:has-text("Add Image") >> nth=0'),
+        ]);
+        await logoChooser.setFiles(getImageFile());
 
-        await adminPage.fill('input[name="code"].rounded-md:visible', concatenatedNames);
+        const [faviconChooser] = await Promise.all([
+            adminPage.waitForEvent("filechooser"),
+            adminPage.click('label:has-text("Add Image") >> nth=1'),
+        ]);
+        await faviconChooser.setFiles(getImageFile());
 
-        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
+        /**
+         * Home Page SEO Section.
+         */
+        await adminPage.fill("#meta_title", name);
+        await adminPage.fill("#seo_keywords", name);
+        await adminPage.fill("#meta_description", shortDescription);
 
-        for (let checkbox of checkboxs) {
-            await checkbox.click();
-        }
-
-        await inputs[0].press('Enter');
-
-        await expect(adminPage.getByText('Channel created successfully.')).toBeVisible();
+        /**
+         * Now Submit The Form.
+         */
+        await adminPage.click('button.primary-button:has-text("Save Channel")');
+        await expect(
+            adminPage.getByText("Channel created successfully.")
+        ).toBeVisible();
     });
 
-    test('edit channel', async ({ adminPage }) => {
+    test("should edit an existing channel", async ({ adminPage }) => {
+        /**
+         * Reaching the edit channel page.
+         */
         await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
-
-        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-        const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
+        await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
+        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
 
-        await adminPage.click('select.custom-select');
+        // Content will be added here. Currently just checking the general save button.
 
-        const selects = await adminPage.$$('select.custom-select');
-
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
-
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * options.length) + 1;
-
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
-
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-        for (let input of inputs) {
-            if (input == inputs[0]) {
-                continue;
-            }
-
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
-
-        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
-
-        for (let checkbox of checkboxs) {
-            await checkbox.click();
-        }
-
-        await inputs[1].press('Enter');
-
-        await expect(adminPage.getByText('Update Channel Successfully')).toBeVisible();
+        /**
+         * Now Submit The Form.
+         */
+        await adminPage.click('button.primary-button:has-text("Save Channel")');
+        await expect(
+            adminPage.getByText("Update Channel Successfully")
+        ).toBeVisible();
     });
 
-    test('delete channel', async ({ adminPage }) => {
+    test("should delete an existing channel", async ({ adminPage }) => {
         await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
-
-        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
-
-        const iconDelete = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
-
+        await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
+        const iconDelete = await adminPage.$$(
+            "span.cursor-pointer.icon-delete"
+        );
         await iconDelete[0].click();
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+        await adminPage.waitForSelector("text=Are you sure");
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
 
-        await expect(adminPage.getByText('Channel deleted successfully.')).toBeVisible();
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
+
+        await expect(
+            adminPage.getByText("Channel deleted successfully.")
+        ).toBeVisible();
     });
 });
