@@ -28,5 +28,11 @@ return [
             'build_directory'          => 'themes/installer/default/build',
             'package_assets_directory' => 'src/Resources/assets',
         ],
+
+        'booking' => [
+            'hot_file'                 => 'booking-vite.hot',
+            'build_directory'          => 'themes/booking/build',
+            'package_assets_directory' => 'src/Resources/assets',
+        ],
     ],
 ];
