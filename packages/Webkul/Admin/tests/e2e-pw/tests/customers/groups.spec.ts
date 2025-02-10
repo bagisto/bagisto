@@ -1,5 +1,5 @@
 import { test, expect, config } from '../../setup';
-import  * as forms from '../../utils/form';
+import { generateName, generateSlug } from '../../utils/faker';
 
 test.describe('group management', () => {
     test('create group', async ({ adminPage }) => {
@@ -8,14 +8,8 @@ test.describe('group management', () => {
 
         await adminPage.click('button.primary-button:visible');
 
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', '');
-
-        await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
-        await adminPage.fill('input[name="code"]', concatenatedNames);
+        await adminPage.fill('input[name="name"]', generateName());
+        await adminPage.fill('input[name="code"]', generateSlug('_'));
 
         await adminPage.press('input[name="code"]:visible', 'Enter');
 
@@ -30,14 +24,8 @@ test.describe('group management', () => {
         const iconEdit = await adminPage.$$('span.cursor-pointer.icon-edit');
         await iconEdit[0].click();
 
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', '');
-
-        await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
-        await adminPage.fill('input[name="code"]', concatenatedNames);
+        await adminPage.fill('input[name="name"]', generateName());
+        await adminPage.fill('input[name="code"]', generateSlug('_'));
 
         await adminPage.press('input[name="code"]:visible', 'Enter');
 

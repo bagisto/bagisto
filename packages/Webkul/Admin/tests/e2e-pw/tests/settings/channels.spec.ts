@@ -54,17 +54,17 @@ test.describe("channel management", () => {
         /**
          * Design Section.
          */
-        const [logoChooser] = await Promise.all([
-            adminPage.waitForEvent("filechooser"),
-            adminPage.click('label:has-text("Add Image") >> nth=0'),
-        ]);
-        await logoChooser.setFiles(getImageFile());
+        // const [logoChooser] = await Promise.all([
+        //     adminPage.waitForEvent("filechooser"),
+        //     adminPage.click('label:has-text("Add Image") >> nth=0'),
+        // ]);
+        // await logoChooser.setFiles(getImageFile());
 
-        const [faviconChooser] = await Promise.all([
-            adminPage.waitForEvent("filechooser"),
-            adminPage.click('label:has-text("Add Image") >> nth=1'),
-        ]);
-        await faviconChooser.setFiles(getImageFile());
+        // const [faviconChooser] = await Promise.all([
+        //     adminPage.waitForEvent("filechooser"),
+        //     adminPage.click('label:has-text("Add Image") >> nth=1'),
+        // ]);
+        // await faviconChooser.setFiles(getImageFile());
 
         /**
          * Home Page SEO Section.

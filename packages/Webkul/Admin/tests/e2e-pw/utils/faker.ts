@@ -2,9 +2,11 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const usedNames = new Set();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const usedNames = new Set();
+const usedEmails = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -49,6 +51,93 @@ export function generateName() {
     usedNames.add(name);
 
     return name;
+}
+
+export function generateFirstName() {
+    const firstNames = [
+        "James",
+        "Emma",
+        "Liam",
+        "Olivia",
+        "Noah",
+        "Ava",
+        "William",
+        "Sophia",
+        "Benjamin",
+        "Isabella",
+        "Lucas",
+        "Mia",
+    ];
+
+    return firstNames[Math.floor(Math.random() * firstNames.length)];
+}
+
+export function generateLastName() {
+    const lastNames = [
+        "Smith",
+        "Johnson",
+        "Brown",
+        "Williams",
+        "Jones",
+        "Garcia",
+        "Miller",
+        "Davis",
+        "Rodriguez",
+        "Martinez",
+        "Hernandez",
+        "Lopez",
+    ];
+
+    return lastNames[Math.floor(Math.random() * lastNames.length)];
+}
+
+export function generateFullName() {
+    return `${generateFirstName()} ${generateLastName()}`;
+}
+
+export function generateEmail() {
+    const adjectives = [
+        "Cool",
+        "Smart",
+        "Fast",
+        "Sleek",
+        "Innovative",
+        "Shiny",
+        "Bold",
+        "Elegant",
+        "Epic",
+        "Mystic",
+        "Brilliant",
+        "Luminous",
+    ];
+
+    const nouns = [
+        "Star",
+        "Vision",
+        "Echo",
+        "Spark",
+        "Horizon",
+        "Nova",
+        "Shadow",
+        "Wave",
+        "Pulse",
+        "Vortex",
+        "Zenith",
+        "Element",
+    ];
+
+    let email = "";
+
+    do {
+        const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const noun = nouns[Math.floor(Math.random() * nouns.length)];
+        const number = Math.floor(1000 + Math.random() * 9000);
+
+        email = `${adj}${noun}${number}@example.com`.toLowerCase();
+    } while (usedEmails.has(email));
+
+    usedEmails.add(email);
+    return email;
 }
 
 export function generateSlug(delimiter = "-") {
@@ -121,6 +210,10 @@ export function generateHostname() {
     const domain = domains[Math.floor(Math.random() * domains.length)];
 
     return `https://${part1}${part2}${domain}`;
+}
+
+export function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
 
 export function getImageFile(

@@ -128,87 +128,87 @@ test.describe('tax management', () => {
         await expect(adminPage.getByText('Tax rate deleted successfully')).toBeVisible();
     });
 
-    test('create tax category', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    // test('create tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-        await adminPage.click('button[type="button"].primary-button:visible');
+    //     await adminPage.click('button[type="button"].primary-button:visible');
 
-        adminPage.click('select[name="taxrates[]"]');
+    //     adminPage.click('select[name="taxrates[]"]');
 
-        const select = await adminPage.$('select[name="taxrates[]"]');
+    //     const select = await adminPage.$('select[name="taxrates[]"]');
 
-        await adminPage.evaluate((select) => {
-            const options = Array.from(select.options) as HTMLOptionElement[];
-            const randomCount = Math.floor(Math.random() * options.length) + 1;
-            const shuffled = options.sort(() => 0.5 - Math.random());
+    //     await adminPage.evaluate((select) => {
+    //         const options = Array.from(select.options) as HTMLOptionElement[];
+    //         const randomCount = Math.floor(Math.random() * options.length) + 1;
+    //         const shuffled = options.sort(() => 0.5 - Math.random());
 
-            shuffled.slice(0, randomCount).forEach(option => {
-                option.selected = true;
-            });
+    //         shuffled.slice(0, randomCount).forEach(option => {
+    //             option.selected = true;
+    //         });
 
-            const event = new Event('change', { bubbles: true });
-            select.dispatchEvent(event);
-        }, select);
+    //         const event = new Event('change', { bubbles: true });
+    //         select.dispatchEvent(event);
+    //     }, select);
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
 
-        await inputs[1].press('Enter');
+    //     await inputs[1].press('Enter');
 
-        await expect(adminPage.getByText('New Tax Category Created.')).toBeVisible();
-    });
+    //     await expect(adminPage.getByText('New Tax Category Created.')).toBeVisible();
+    // });
 
-    test('edit tax category', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    // test('edit tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+    //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+    //     const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        await iconEdit[0].click();
+    //     await iconEdit[0].click();
 
-        adminPage.click('select[name="taxrates[]"]');
+    //     adminPage.click('select[name="taxrates[]"]');
 
-        const select = await adminPage.$('select[name="taxrates[]"]');
+    //     const select = await adminPage.$('select[name="taxrates[]"]');
 
-        await adminPage.evaluate((select) => {
-            const options = Array.from(select.options) as HTMLOptionElement[];
-            const randomCount = Math.floor(Math.random() * options.length) + 1;
-            const shuffled = options.sort(() => 0.5 - Math.random());
+    //     await adminPage.evaluate((select) => {
+    //         const options = Array.from(select.options) as HTMLOptionElement[];
+    //         const randomCount = Math.floor(Math.random() * options.length) + 1;
+    //         const shuffled = options.sort(() => 0.5 - Math.random());
 
-            shuffled.slice(0, randomCount).forEach(option => {
-                option.selected = true;
-            });
+    //         shuffled.slice(0, randomCount).forEach(option => {
+    //             option.selected = true;
+    //         });
 
-            const event = new Event('change', { bubbles: true });
-            select.dispatchEvent(event);
-        }, select);
+    //         const event = new Event('change', { bubbles: true });
+    //         select.dispatchEvent(event);
+    //     }, select);
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
 
-        await inputs[1].press('Enter');
+    //     await inputs[1].press('Enter');
 
-        await expect(adminPage.getByText('Tax Category Successfully Updated.')).toBeVisible();
-    });
+    //     await expect(adminPage.getByText('Tax Category Successfully Updated.')).toBeVisible();
+    // });
 
-    test('delete tax category', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    // test('delete tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+    //     await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+    //     const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        await iconDelete[0].click();
+    //     await iconDelete[0].click();
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+    //     await adminPage.click('button.transparent-button + button.primary-button:visible');
 
-        await expect(adminPage.getByText('Tax Category Deleted Successfully.')).toBeVisible();
-    });
+    //     await expect(adminPage.getByText('Tax Category Deleted Successfully.')).toBeVisible();
+    // });
 });

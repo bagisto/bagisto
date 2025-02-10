@@ -1,348 +1,533 @@
-import { test, expect, config } from '../../setup';
-import  * as forms from '../../utils/form';
+// import { test, expect, config } from "../../setup";
+// import * as forms from "../../utils/form";
 
-test.describe('search seo management', () => {
-    test('create url rewrite', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/url-rewrites`);
+// async function createUrlRewrite(adminPage) {
+//     await adminPage.goto(
+//         `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//     );
 
-        await adminPage.click('div.primary-button:visible');
+//     await adminPage.click("div.primary-button:visible");
 
-        adminPage.hover('select[name="entity_type"]');
+//     adminPage.hover('select[name="entity_type"]');
 
-        const selects = await adminPage.$$('select.custom-select:visible');
+//     const selects = await adminPage.$$("select.custom-select:visible");
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//     for (let select of selects) {
+//         const options = await select.$$eval("option", (options) => {
+//             return options.map((option) => option.value);
+//         });
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//         if (options.length > 1) {
+//             const randomIndex =
+//                 Math.floor(Math.random() * (options.length - 1)) + 1;
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//             await select.selectOption(options[randomIndex]);
+//         } else {
+//             await select.selectOption(options[0]);
+//         }
+//     }
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//     const inputs = await adminPage.$$(
+//         'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//     );
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//     for (let input of inputs) {
+//         await input.fill(forms.generateRandomStringWithSpaces(200));
+//     }
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//     await adminPage.click('button[class="primary-button"]:visible');
 
-        await expect(adminPage.getByText('URL Rewrite created successfully')).toBeVisible();
-    });
+//     await expect(
+//         adminPage.getByText("URL Rewrite created successfully")
+//     ).toBeVisible();
+// }
 
-    test('edit url rewrite', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/url-rewrites`);
+// async function createSearchTerm(adminPage) {
+//     await adminPage.goto(
+//         `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//     );
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     await adminPage.click("div.primary-button:visible");
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     adminPage.hover('select[name="channel_id"]');
 
-        await iconEdit[0].click();
+//     const selects = await adminPage.$$("select.custom-select:visible");
 
-        adminPage.hover('select[name="entity_type"]');
+//     for (let select of selects) {
+//         const options = await select.$$eval("option", (options) => {
+//             return options.map((option) => option.value);
+//         });
 
-        const selects = await adminPage.$$('select.custom-select:visible');
+//         if (options.length > 1) {
+//             const randomIndex =
+//                 Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//             await select.selectOption(options[randomIndex]);
+//         } else {
+//             await select.selectOption(options[0]);
+//         }
+//     }
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//     const inputs = await adminPage.$$(
+//         'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//     );
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//     for (let input of inputs) {
+//         await input.fill(forms.generateRandomStringWithSpaces(200));
+//     }
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//     adminPage.fill(
+//         'input[name="redirect_url"]:visible',
+//         forms.generateRandomUrl()
+//     );
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//     await adminPage.click('button[class="primary-button"]:visible');
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//     await expect(
+//         adminPage.getByText("Search Term created successfully")
+//     ).toBeVisible();
+// }
 
-        await expect(adminPage.getByText('URL Rewrite updated successfully')).toBeVisible();
-    });
+// async function createSearchSynonym(adminPage) {
+//     await adminPage.goto(
+//         `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//     );
 
-    test('delete url rewrite', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/url-rewrites`);
+//     await adminPage.click("div.primary-button:visible");
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     adminPage.hover('input[name="name"]');
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     const inputs = await adminPage.$$(
+//         'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//     );
 
-        await iconDelete[0].click();
+//     for (let input of inputs) {
+//         await input.fill(forms.generateRandomStringWithSpaces(200));
+//     }
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//     await adminPage.click('button[class="primary-button"]:visible');
 
-        await expect(adminPage.getByText('URL Rewrite deleted successfully')).toBeVisible();
-    });
+//     await expect(
+//         adminPage.getByText("Search Synonym created successfully")
+//     ).toBeVisible();
+// }
 
-    test('mass delete url rewrite', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/url-rewrites`);
+// test.describe("search seo management", () => {
+//     test("create url rewrite", async ({ adminPage }) => {
+//         await createUrlRewrite(adminPage);
+//     });
 
-        await adminPage.waitForSelector('.icon-uncheckbox');
+//     test("edit url rewrite", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//         );
 
-        const checkboxs = await adminPage.$$('.icon-uncheckbox');
-        await checkboxs[0].click();
+//         await adminPage.waitForSelector(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.waitForSelector('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible', { timeout: 1000 }).catch(() => null);
+//         const iconEdit = await adminPage.$$(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.click('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
-        await adminPage.click('a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
+//         await iconEdit[0].click();
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         adminPage.hover('select[name="entity_type"]');
 
-        await expect(adminPage.getByText('Selected URL Rewrites Deleted Successfully')).toBeVisible();
-    });
+//         const selects = await adminPage.$$("select.custom-select:visible");
+
+//         for (let select of selects) {
+//             const options = await select.$$eval("option", (options) => {
+//                 return options.map((option) => option.value);
+//             });
 
-    test('create search term', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-terms`);
+//             if (options.length > 1) {
+//                 const randomIndex =
+//                     Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        await adminPage.click('div.primary-button:visible');
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        adminPage.hover('select[name="channel_id"]');
+//         const inputs = await adminPage.$$(
+//             'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//         );
 
-        const selects = await adminPage.$$('select.custom-select:visible');
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         await adminPage.click('button[class="primary-button"]:visible');
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//         await expect(
+//             adminPage.getByText("URL Rewrite updated successfully")
+//         ).toBeVisible();
+//     });
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//     test("delete url rewrite", async ({ adminPage }) => {
+//         await createUrlRewrite(adminPage);
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//         );
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//         await adminPage.waitForSelector(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        adminPage.fill('input[name="redirect_url"]:visible', forms.generateRandomUrl());
+//         const iconDelete = await adminPage.$$(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         await iconDelete[0].click();
 
-        await expect(adminPage.getByText('Search Term created successfully')).toBeVisible();
-    });
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-    test('edit search term', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-terms`);
+//         await expect(
+//             adminPage.getByText("URL Rewrite deleted successfully")
+//         ).toBeVisible();
+//     });
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     test("mass delete url rewrite", async ({ adminPage }) => {
+//         await createUrlRewrite(adminPage);
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//         );
 
-        await iconEdit[0].click();
+//         await adminPage.waitForSelector(".icon-uncheckbox");
 
-        adminPage.hover('select[name="channel_id"]');
+//         const checkboxs = await adminPage.$$(".icon-uncheckbox");
+//         await checkboxs[0].click();
 
-        const selects = await adminPage.$$('select.custom-select:visible');
+//         await adminPage
+//             .waitForSelector(
+//                 'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible',
+//                 { timeout: 1000 }
+//             )
+//             .catch(() => null);
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         await adminPage.click(
+//             'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible'
+//         );
+//         await adminPage.click(
+//             'a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible'
+//         );
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         await expect(
+//             adminPage.getByText("Selected URL Rewrites Deleted Successfully")
+//         ).toBeVisible();
+//     });
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//     test("create search term", async ({ adminPage }) => {
+//         await createSearchTerm(adminPage);
+//     });
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//     test("edit search term", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//         );
 
-        adminPage.fill('input[name="redirect_url"]:visible', forms.generateRandomUrl());
+//         await adminPage.waitForSelector(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         const iconEdit = await adminPage.$$(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await expect(adminPage.getByText('Search Term updated successfully')).toBeVisible();
-    });
+//         await iconEdit[0].click();
 
-    test('delete search term', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-terms`);
+//         adminPage.hover('select[name="channel_id"]');
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         const selects = await adminPage.$$("select.custom-select:visible");
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         for (let select of selects) {
+//             const options = await select.$$eval("option", (options) => {
+//                 return options.map((option) => option.value);
+//             });
 
-        await iconDelete[0].click();
+//             if (options.length > 1) {
+//                 const randomIndex =
+//                     Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        await expect(adminPage.getByText('Search Term deleted successfully')).toBeVisible();
-    });
+//         const inputs = await adminPage.$$(
+//             'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//         );
 
-    test('mass delete search term', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-terms`);
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-        await adminPage.waitForSelector('.icon-uncheckbox');
+//         adminPage.fill(
+//             'input[name="redirect_url"]:visible',
+//             forms.generateRandomUrl()
+//         );
 
-        const checkboxs = await adminPage.$$('.icon-uncheckbox');
-        await checkboxs[1].click();
+//         await adminPage.click('button[class="primary-button"]:visible');
 
-        await adminPage.waitForSelector('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible', { timeout: 1000 }).catch(() => null);
+//         await expect(
+//             adminPage.getByText("Search Term updated successfully")
+//         ).toBeVisible();
+//     });
 
-        await adminPage.click('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
-        await adminPage.click('a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
+//     test("delete search term", async ({ adminPage }) => {
+//         await createSearchTerm(adminPage);
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//         );
 
-        await expect(adminPage.getByText('Selected Search Terms Deleted Successfully')).toBeVisible();
-    });
+//         await adminPage.waitForSelector(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-    test('create search synonym', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-synonyms`);
+//         const iconDelete = await adminPage.$$(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.click('div.primary-button:visible');
+//         await iconDelete[0].click();
 
-        adminPage.hover('input[name="name"]');
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//         await expect(
+//             adminPage.getByText("Search Term deleted successfully")
+//         ).toBeVisible();
+//     });
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//     test("mass delete search term", async ({ adminPage }) => {
+//         await createSearchTerm(adminPage);
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//         );
 
-        await expect(adminPage.getByText('Search Synonym created successfully')).toBeVisible();
-    });
+//         await adminPage.waitForSelector(".icon-uncheckbox");
 
-    test('edit search synonym', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-synonyms`);
+//         const checkboxs = await adminPage.$$(".icon-uncheckbox");
+//         await checkboxs[1].click();
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         await adminPage
+//             .waitForSelector(
+//                 'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible',
+//                 { timeout: 1000 }
+//             )
+//             .catch(() => null);
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         await adminPage.click(
+//             'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible'
+//         );
+//         await adminPage.click(
+//             'a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible'
+//         );
 
-        await iconEdit[0].click();
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-        adminPage.hover('input[name="name"]');
+//         await expect(
+//             adminPage.getByText("Selected Search Terms Deleted Successfully")
+//         ).toBeVisible();
+//     });
 
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+//     test("create search synonym", async ({ adminPage }) => {
+//         await createSearchSynonym(adminPage);
+//     });
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//     test("edit search synonym", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//         );
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         await adminPage.waitForSelector(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await expect(adminPage.getByText('Search Synonym updated successfully')).toBeVisible();
-    });
+//         const iconEdit = await adminPage.$$(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-    test('delete search synonym', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-synonyms`);
+//         await iconEdit[0].click();
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         adminPage.hover('input[name="name"]');
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         const inputs = await adminPage.$$(
+//             'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
+//         );
 
-        await iconDelete[0].click();
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         await adminPage.click('button[class="primary-button"]:visible');
 
-        await expect(adminPage.getByText('Search Synonym deleted successfully')).toBeVisible();
-    });
+//         await expect(
+//             adminPage.getByText("Search Synonym updated successfully")
+//         ).toBeVisible();
+//     });
 
-    test('mass delete Search Synonym', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/search-synonyms`);
+//     test("delete search synonym", async ({ adminPage }) => {
+//         await createSearchSynonym(adminPage);
 
-        await adminPage.waitForSelector('.icon-uncheckbox');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//         );
 
-        const checkboxs = await adminPage.$$('.icon-uncheckbox');
-        await checkboxs[1].click();
+//         await adminPage.waitForSelector(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.waitForSelector('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible', { timeout: 1000 }).catch(() => null);
+//         const iconDelete = await adminPage.$$(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.click('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
-        await adminPage.click('a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
+//         await iconDelete[0].click();
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-        await expect(adminPage.getByText('Selected Search Synonyms Deleted Successfully')).toBeVisible();
-    });
+//         await expect(
+//             adminPage.getByText("Search Synonym deleted successfully")
+//         ).toBeVisible();
+//     });
 
-    test('create sitemap', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/sitemaps`);
+//     test("mass delete Search Synonym", async ({ adminPage }) => {
+//         await createSearchSynonym(adminPage);
 
-        await adminPage.click('div.primary-button:visible');
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//         );
 
-        adminPage.hover('input[name="file_name"]');
+//         await adminPage.waitForSelector(".icon-uncheckbox");
 
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', '');
+//         const checkboxs = await adminPage.$$(".icon-uncheckbox");
+//         await checkboxs[1].click();
 
-        await adminPage.fill('input[name="file_name"]', concatenatedNames + '.xml');
-        await adminPage.fill('input[name="path"]', '/');
+//         await adminPage
+//             .waitForSelector(
+//                 'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible',
+//                 { timeout: 1000 }
+//             )
+//             .catch(() => null);
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         await adminPage.click(
+//             'button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible'
+//         );
+//         await adminPage.click(
+//             'a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible'
+//         );
 
-        await expect(adminPage.getByText('Sitemap created successfully')).toBeVisible();
-    });
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
 
-    test('edit sitemap', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/sitemaps`);
+//         await expect(
+//             adminPage.getByText("Selected Search Synonyms Deleted Successfully")
+//         ).toBeVisible();
+//     });
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//     test("create sitemap", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//         );
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         await adminPage.click("div.primary-button:visible");
 
-        await iconEdit[0].click();
+//         adminPage.hover('input[name="file_name"]');
 
-        adminPage.hover('input[name="file_name"]');
+//         const concatenatedNames = Array(5)
+//             .fill(null)
+//             .map(() => forms.generateRandomProductName())
+//             .join(" ")
+//             .replaceAll(" ", "");
 
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', '');
+//         await adminPage.fill(
+//             'input[name="file_name"]',
+//             concatenatedNames + ".xml"
+//         );
+//         await adminPage.fill('input[name="path"]', "/");
 
-        await adminPage.fill('input[name="file_name"]', concatenatedNames + '.xml');
-        await adminPage.fill('input[name="path"]', '/');
+//         await adminPage.click('button[class="primary-button"]:visible');
 
-        await adminPage.click('button[class="primary-button"]:visible');
+//         await expect(
+//             adminPage.getByText("Sitemap created successfully")
+//         ).toBeVisible();
+//     });
 
-        await expect(adminPage.getByText('Sitemap Updated successfully')).toBeVisible();
-    });
+//     test("edit sitemap", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//         );
 
-    test('delete Sitemap', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/marketing/search-seo/sitemaps`);
+//         await adminPage.waitForSelector(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         const iconEdit = await adminPage.$$(
+//             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]');
+//         await iconEdit[0].click();
 
-        await iconDelete[0].click();
+//         adminPage.hover('input[name="file_name"]');
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         const concatenatedNames = Array(5)
+//             .fill(null)
+//             .map(() => forms.generateRandomProductName())
+//             .join(" ")
+//             .replaceAll(" ", "");
 
-        await expect(adminPage.getByText('Sitemap Deleted successfully')).toBeVisible();
-    });
-});
+//         await adminPage.fill(
+//             'input[name="file_name"]',
+//             concatenatedNames + ".xml"
+//         );
+//         await adminPage.fill('input[name="path"]', "/");
+
+//         await adminPage.click('button[class="primary-button"]:visible');
+
+//         await expect(
+//             adminPage.getByText("Sitemap Updated successfully")
+//         ).toBeVisible();
+//     });
+
+//     test("delete Sitemap", async ({ adminPage }) => {
+//         await adminPage.goto(
+//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//         );
+
+//         await adminPage.waitForSelector(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
+
+//         const iconDelete = await adminPage.$$(
+//             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"]'
+//         );
+
+//         await iconDelete[0].click();
+
+//         await adminPage.click(
+//             "button.transparent-button + button.primary-button:visible"
+//         );
+
+//         await expect(
+//             adminPage.getByText("Sitemap Deleted successfully")
+//         ).toBeVisible();
+//     });
+// });

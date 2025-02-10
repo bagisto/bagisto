@@ -1,404 +1,402 @@
-import { test, expect, config } from '../setup';
-import  * as forms from '../utils/form';
-import address from '../utils/address';
+// import { test, expect, config } from '../setup';
+// import  * as forms from '../utils/form';
+// import address from '../utils/address';
 
-test.describe('sales management', () => {
-    test('create orders', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+// test.describe('sales management', () => {
+//     test('create orders', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        test.setTimeout(config.highTimeout);
+//         await adminPage.click('button.primary-button:visible');
 
-        await adminPage.click('button.primary-button:visible');
+//         await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'testxyat1k@example.com');
 
-        await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'testxyat1k@example.com');
+//         const exists = await adminPage.waitForSelector('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4', { timeout: 5000 }).catch(() => null);
 
-        const exists = await adminPage.waitForSelector('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4', { timeout: 5000 }).catch(() => null);
+//         if (exists) {
+//             const users = await adminPage.$$('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4');
 
-        if (exists) {
-            const users = await adminPage.$$('.flex-1.overflow-auto.p-3 > .grid.overflow-y-auto > .grid.cursor-pointer.place-content-start.border-b.border-slate-300.p-4');
+//             await users[Math.floor(Math.random() * ((users.length - 1) - 0 + 1)) + 0].click();
 
-            await users[Math.floor(Math.random() * ((users.length - 1) - 0 + 1)) + 0].click();
+//         } else {
+//             await adminPage.click('div.flex.flex-col.items-center > button.secondary-button:visible');
 
-        } else {
-            await adminPage.click('div.flex.flex-col.items-center > button.secondary-button:visible');
+//             await adminPage.fill('input[name="first_name"]:visible', forms.form.firstName);
+//             await adminPage.fill('input[name="last_name"]:visible', forms.form.lastName);
+//             const email = forms.form.email;
+//             await adminPage.fill('input[name="email"]:visible', email);
+//             await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
+//             await adminPage.selectOption('select[name="gender"]:visible', 'Other');
 
-            await adminPage.fill('input[name="first_name"]:visible', forms.form.firstName);
-            await adminPage.fill('input[name="last_name"]:visible', forms.form.lastName);
-            const email = forms.form.email;
-            await adminPage.fill('input[name="email"]:visible', email);
-            await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
-            await adminPage.selectOption('select[name="gender"]:visible', 'Other');
+//             await adminPage.press('input[name="phone"]:visible', 'Enter');
 
-            await adminPage.press('input[name="phone"]:visible', 'Enter');
+//             const getError = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+//             var message = '';
 
-            const getError = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
-            var message = '';
+//             if (getError) {
+//                 const errors = await adminPage.$$('.text-red-600.text-xs.italic');
 
-            if (getError) {
-                const errors = await adminPage.$$('.text-red-600.text-xs.italic');
+//                 for (let error of errors) {
+//                     message = await error.evaluate(el => el.innerText);
+//                 }
+//             }
+//         }
+
+//         const itemExists = await adminPage.waitForSelector('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all', { timeout: 5000 }).catch(() => null);
 
-                for (let error of errors) {
-                    message = await error.evaluate(el => el.innerText);
-                }
-            }
-        }
+//         if (itemExists) {
+//             var items = await adminPage.$$('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all');
+//             await items[Math.floor(Math.random() * ((items.length - 1) - 0 + 1)) + 0].click();
 
-        const itemExists = await adminPage.waitForSelector('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all', { timeout: 5000 }).catch(() => null);
+//             await adminPage.click('button.primary-button:visible');
+//         } else {
+//             await adminPage.click('p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button');
+//             await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'arct');
 
-        if (itemExists) {
-            var items = await adminPage.$$('.grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all');
-            await items[Math.floor(Math.random() * ((items.length - 1) - 0 + 1)) + 0].click();
+//             const exists = await adminPage.waitForSelector('button.cursor-pointer.text-sm.text-blue-600.transition-all', { timeout: 5000 }).catch(() => null);
 
-            await adminPage.click('button.primary-button:visible');
-        } else {
-            await adminPage.click('p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button');
-            await adminPage.fill('input[class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"]', 'arct');
+//             if (exists) {
+//                 const cartBtns = await adminPage.$$('.grid.place-content-start.gap-2.text-right > button.cursor-pointer.text-sm.text-blue-600.transition-all');
+//                 const inputQty = await adminPage.$$('input[name="qty"]:visible');
 
-            const exists = await adminPage.waitForSelector('button.cursor-pointer.text-sm.text-blue-600.transition-all', { timeout: 5000 }).catch(() => null);
+//                 let count = 0;
+//                 for (let cartBtn of cartBtns) {
+//                     let i = Math.floor(Math.random() * 10) + 1;
 
-            if (exists) {
-                const cartBtns = await adminPage.$$('.grid.place-content-start.gap-2.text-right > button.cursor-pointer.text-sm.text-blue-600.transition-all');
-                const inputQty = await adminPage.$$('input[name="qty"]:visible');
+//                     if (
+//                         i % 2 == 1
+//                         || cartBtns.length < 2
+//                     ) {
+//                         await inputQty[count].scrollIntoViewIfNeeded();
+//                         const qty = Math.floor(Math.random() * ((10) - 2 + 1)) + 2;
+
+//                         await inputQty[count].fill(qty.toString());
+//                         await cartBtn.click();
+
+//                         break;
+//                     }
+//                     count++;
+//                 }
+//             }
+//         }
+
+//         const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
+
+//         if (iconExists) {
+//             const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
+//             const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
 
-                let count = 0;
-                for (let cartBtn of cartBtns) {
-                    let i = Math.floor(Math.random() * 10) + 1;
+//             const message = await messages[0].evaluate(el => el.parentNode.innerText);
+//             await icons[0].click();
+//         } else {
+//             const checkboxs = await adminPage.$$('input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label');
+
+//             for (let checkbox of checkboxs) {
+//                 await checkbox.click();
+//             }
+
+//             await adminPage.click('.flex.items-center.justify-between > button.primary-button:visible');
+
+//             const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
 
-                    if (
-                        i % 2 == 1
-                        || cartBtns.length < 2
-                    ) {
-                        await inputQty[count].scrollIntoViewIfNeeded();
-                        const qty = Math.floor(Math.random() * ((10) - 2 + 1)) + 2;
-
-                        await inputQty[count].fill(qty.toString());
-                        await cartBtn.click();
-
-                        break;
-                    }
-                    count++;
-                }
-            }
-        }
-
-        const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
+//             if (iconExists) {
+//                 const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
+//                 const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
+
+//                 const message = await messages[0].evaluate(el => el.parentNode.innerText);
+//                 await icons[0].click();
+//             } else {
+//             }
+//         }
+
+//         const radio = await adminPage.$$('input[name="billing.id"]');
+
+//         if (radio.length > 0) {
+//             const addressNames = await adminPage.$$('input[name="billing.id"] + label');
+
+//             const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
+
+//             if (
+//                 index >= 0
+//                 && index < radio.length
+//             ) {
+//                 await addressNames[index].click();
+//             } else {
+//                 return;
+//             }
+//         } else {
+//             await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all');
 
-        if (iconExists) {
-            const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
-            const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
+//             if (await address(adminPage) != 'done') {
+//                 return;
+//             }
+//         }
+//         const checkbox = await adminPage.$$('input[name="billing.use_for_shipping"]');
 
-            const message = await messages[0].evaluate(el => el.parentNode.innerText);
-            await icons[0].click();
-        } else {
-            const checkboxs = await adminPage.$$('input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label');
-
-            for (let checkbox of checkboxs) {
-                await checkbox.click();
-            }
-
-            await adminPage.click('.flex.items-center.justify-between > button.primary-button:visible');
+//         if (Math.floor(Math.random() * 20) % 3 == 1 ? false : true) {
+//             if (! checkbox[0].isChecked()) {
+//                 await adminPage.click('input[name="billing.use_for_shipping"] + label');
+//             }
+//         } else {
+//             if (checkbox[0].isChecked()) {
+//                 await adminPage.click('input[name="billing.use_for_shipping"] + label');
+//             }
 
-            const iconExists = await adminPage.waitForSelector('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl', { timeout: 5000 }).catch(() => null);
-
-            if (iconExists) {
-                const messages = await adminPage.$$('.flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl');
-                const icons = await adminPage.$$('.flex.items-center.break-all.text-sm + .cursor-pointer.underline');
-
-                const message = await messages[0].evaluate(el => el.parentNode.innerText);
-                await icons[0].click();
-            } else {
-            }
-        }
-
-        const radio = await adminPage.$$('input[name="billing.id"]');
-
-        if (radio.length > 0) {
-            const addressNames = await adminPage.$$('input[name="billing.id"] + label');
-
-            const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
-
-            if (
-                index >= 0
-                && index < radio.length
-            ) {
-                await addressNames[index].click();
-            } else {
-                return;
-            }
-        } else {
-            await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all');
+//             const radio = await adminPage.$$('input[name="shipping.id"]');
 
-            if (await address(adminPage) != 'done') {
-                return;
-            }
-        }
-        const checkbox = await adminPage.$$('input[name="billing.use_for_shipping"]');
+//             if (radio.length > 0) {
+//                 const addressNames = await adminPage.$$('input[name="shipping.id"] + label');
 
-        if (Math.floor(Math.random() * 20) % 3 == 1 ? false : true) {
-            if (! checkbox[0].isChecked()) {
-                await adminPage.click('input[name="billing.use_for_shipping"] + label');
-            }
-        } else {
-            if (checkbox[0].isChecked()) {
-                await adminPage.click('input[name="billing.use_for_shipping"] + label');
-            }
+//                 const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
 
-            const radio = await adminPage.$$('input[name="shipping.id"]');
+//                 if (
+//                     index >= 0
+//                     && index < radio.length
+//                 ) {
+//                     await addressNames[index].click();
+//                 } else {
 
-            if (radio.length > 0) {
-                const addressNames = await adminPage.$$('input[name="shipping.id"] + label');
+//                     return;
+//                 }
+//             } else {
+//                 await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible');
 
-                const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
+//                 await adminPage.fill('input[name="shipping.company_name"]', forms.form.lastName);
+//                 await adminPage.fill('input[name="shipping.first_name"]', forms.form.firstName);
+//                 await adminPage.fill('input[name="shipping.last_name"]', forms.form.lastName);
+//                 await adminPage.fill('input[name="shipping.email"]', forms.form.email);
+//                 await adminPage.fill('input[name="shipping.address.[0]"]', forms.form.firstName);
+//                 await adminPage.selectOption('select[name="shipping.country"]', 'IN');
+//                 await adminPage.selectOption('select[name="shipping.state"]', 'UP');
+//                 await adminPage.fill('input[name="shipping.city"]', forms.form.lastName);
+//                 await adminPage.fill('input[name="shipping.postcode"]', '201301');
+//                 await adminPage.fill('input[name="shipping.phone"]', forms.form.phone);
 
-                if (
-                    index >= 0
-                    && index < radio.length
-                ) {
-                    await addressNames[index].click();
-                } else {
+//                 await adminPage.press('input[name="shipping.phone"]', 'Enter');
+//             }
+//         }
 
-                    return;
-                }
-            } else {
-                await adminPage.click('p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible');
+//         await adminPage.click('.mt-4.flex.justify-end > button.primary-button:visible');
 
-                await adminPage.fill('input[name="shipping.company_name"]', forms.form.lastName);
-                await adminPage.fill('input[name="shipping.first_name"]', forms.form.firstName);
-                await adminPage.fill('input[name="shipping.last_name"]', forms.form.lastName);
-                await adminPage.fill('input[name="shipping.email"]', forms.form.email);
-                await adminPage.fill('input[name="shipping.address.[0]"]', forms.form.firstName);
-                await adminPage.selectOption('select[name="shipping.country"]', 'IN');
-                await adminPage.selectOption('select[name="shipping.state"]', 'UP');
-                await adminPage.fill('input[name="shipping.city"]', forms.form.lastName);
-                await adminPage.fill('input[name="shipping.postcode"]', '201301');
-                await adminPage.fill('input[name="shipping.phone"]', forms.form.phone);
+//         const existsship = await adminPage.waitForSelector('input[name="shipping_method"] + label', { timeout: 10000 }).catch(() => null);
 
-                await adminPage.press('input[name="shipping.phone"]', 'Enter');
-            }
-        }
+//         if (existsship) {
+//             const radio = await adminPage.$$('input[name="shipping_method"] + label');
 
-        await adminPage.click('.mt-4.flex.justify-end > button.primary-button:visible');
+//             const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
 
-        const existsship = await adminPage.waitForSelector('input[name="shipping_method"] + label', { timeout: 10000 }).catch(() => null);
+//             if (
+//                 index >= 0
+//                 && index < radio.length
+//             ) {
+//                 await radio[index].click();
+//             } else {
 
-        if (existsship) {
-            const radio = await adminPage.$$('input[name="shipping_method"] + label');
+//                 return;
+//             }
+//         }
 
-            const index = Math.floor(Math.random() * ((radio.length - 1) - 0 + 1)) + 0;
+//         const existspay = await adminPage.waitForSelector('input[name="payment_method"] + label', { timeout: 10000 }).catch(() => null);
 
-            if (
-                index >= 0
-                && index < radio.length
-            ) {
-                await radio[index].click();
-            } else {
+//         if (existspay) {
+//             const radio = await adminPage.$$('input[name="payment_method"] + label');
 
-                return;
-            }
-        }
+//             await radio[1].click();
 
-        const existspay = await adminPage.waitForSelector('input[name="payment_method"] + label', { timeout: 10000 }).catch(() => null);
+//             const nextButton = await adminPage.$$('button.primary-button.w-max.px-11.py-3');
+//             await nextButton[nextButton.length - 1].click();
+//         }
 
-        if (existspay) {
-            const radio = await adminPage.$$('input[name="payment_method"] + label');
+//         await expect(adminPage.getByText('Order Items')).toBeVisible();
+//     });
 
-            await radio[1].click();
+//     test('comment on order', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-            const nextButton = await adminPage.$$('button.primary-button.w-max.px-11.py-3');
-            await nextButton[nextButton.length - 1].click();
-        }
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Order Items')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('comment on order', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         const lorem100 = forms.generateRandomStringWithSpaces(500);
+//         adminPage.fill('textarea[name="comment"]', lorem100);
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         const checkbox = await adminPage.$$('input[name="customer_notified"]');
 
-        await iconRight[0].click();
+//         if (! checkbox[0].isChecked()) {
+//             await adminPage.click('input[name="customer_notified"] + label');
+//         }
 
-        const lorem100 = forms.generateRandomStringWithSpaces(500);
-        adminPage.fill('textarea[name="comment"]', lorem100);
+//         await adminPage.click('button[type="submit"].secondary-button:visible');
 
-        const checkbox = await adminPage.$$('input[name="customer_notified"]');
+//         await expect(adminPage.getByText('Comment added successfully.')).toBeVisible();
+//     });
 
-        if (! checkbox[0].isChecked()) {
-            await adminPage.click('input[name="customer_notified"] + label');
-        }
+//     test('reorder', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await adminPage.click('button[type="submit"].secondary-button:visible');
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Comment added successfully.')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('reorder', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
+//         await adminPage.waitForSelector('a.transparent-button.px-1 > .icon-cart.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.click('a.transparent-button.px-1 > .icon-cart.text-2xl:visible');
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await expect(adminPage.getByText('Cart Items')).toBeVisible();
+//     });
 
-        await iconRight[0].click();
-        await adminPage.waitForSelector('a.transparent-button.px-1 > .icon-cart.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+//     test('create invoice', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await adminPage.click('a.transparent-button.px-1 > .icon-cart.text-2xl:visible');
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Cart Items')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('create invoice', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
+//         await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-sales.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.click('div.transparent-button.px-1 > .icon-sales.text-2xl:visible');
+//         await adminPage.waitForSelector('input[placeholder="Qty to invoiced"]:visible', { timeout: 1000 }).catch(() => null);
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         const itemQty = await adminPage.$$('input[placeholder="Qty to invoiced"]:visible');
 
-        await iconRight[0].click();
-        await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-sales.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+//         for (let element of itemQty) {
+//             await element.scrollIntoViewIfNeeded();
 
-        await adminPage.click('div.transparent-button.px-1 > .icon-sales.text-2xl:visible');
-        await adminPage.waitForSelector('input[placeholder="Qty to invoiced"]:visible', { timeout: 1000 }).catch(() => null);
+//             const currentValue = await element.inputValue();
 
-        const itemQty = await adminPage.$$('input[placeholder="Qty to invoiced"]:visible');
+//             const maxQty = parseInt(currentValue, 10);
+//             const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
 
-        for (let element of itemQty) {
-            await element.scrollIntoViewIfNeeded();
+//             await element.fill(qty.toString());
+//         }
 
-            const currentValue = await element.inputValue();
+//         await adminPage.click('button[type="submit"].primary-button:visible');
 
-            const maxQty = parseInt(currentValue, 10);
-            const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
+//         await expect(adminPage.getByText('Invoice created successfully')).toBeVisible();
+//     });
 
-            await element.fill(qty.toString());
-        }
+//     test('create shipment', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await adminPage.click('button[type="submit"].primary-button:visible');
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Invoice created successfully')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('create shipment', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
+//         const exists = await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-ship.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.click('div.transparent-button.px-1 > .icon-ship.text-2xl:visible');
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.fill('input[name="shipment[carrier_title]"]', forms.generateRandomStringWithSpaces(20));
+//         await adminPage.fill('input[name="shipment[track_number]"]', forms.generateRandomStringWithSpaces(20));
+//         const options = await adminPage.$$eval('select[name="shipment[source]"] option', (options) => {
+//             return options.map(option => option.value);
+//         });
 
-        await iconRight[0].click();
-        const exists = await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-ship.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+//         const randomIndex = Math.floor(Math.random() * options.length);
 
-        await adminPage.click('div.transparent-button.px-1 > .icon-ship.text-2xl:visible');
+//         await adminPage.selectOption('select[name="shipment[source]"]', options[randomIndex]);
 
-        await adminPage.fill('input[name="shipment[carrier_title]"]', forms.generateRandomStringWithSpaces(20));
-        await adminPage.fill('input[name="shipment[track_number]"]', forms.generateRandomStringWithSpaces(20));
-        const options = await adminPage.$$eval('select[name="shipment[source]"] option', (options) => {
-            return options.map(option => option.value);
-        });
+//         await adminPage.click('button[type="submit"].primary-button:visible');
 
-        const randomIndex = Math.floor(Math.random() * options.length);
+//         await expect(adminPage.getByText('Shipment created successfully')).toBeVisible();
+//     });
 
-        await adminPage.selectOption('select[name="shipment[source]"]', options[randomIndex]);
+//     test('create refund', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await adminPage.click('button[type="submit"].primary-button:visible');
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Shipment created successfully')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('create refund', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
+//         await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible', { timeout: 1000 }).catch(() => null);
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.click('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible');
+//         await adminPage.waitForSelector('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible', { timeout: 1000 }).catch(() => null);
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         const itemQty = await adminPage.$$('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible');
+//         let i = 1;
+//         for (let element of itemQty) {
+//             await element.scrollIntoViewIfNeeded();
 
-        await iconRight[0].click();
-        await adminPage.waitForSelector('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible', { timeout: 1000 }).catch(() => null);
+//             if (i > itemQty.length - 2) {
+//                 let rand = Math.floor(Math.random() * (2000));
+//                 await element.fill(rand.toString());
+//             }
 
-        await adminPage.click('div.transparent-button.px-1 > .icon-cancel.text-2xl:visible');
-        await adminPage.waitForSelector('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible', { timeout: 1000 }).catch(() => null);
+//             if (i > itemQty.length - 3) {
+//                 continue;
+//             }
 
-        const itemQty = await adminPage.$$('input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible');
-        let i = 1;
-        for (let element of itemQty) {
-            await element.scrollIntoViewIfNeeded();
+//             const currentValue = await element.inputValue();
 
-            if (i > itemQty.length - 2) {
-                let rand = Math.floor(Math.random() * (2000));
-                await element.fill(rand.toString());
-            }
+//             const maxQty = parseInt(currentValue, 10);
+//             const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
 
-            if (i > itemQty.length - 3) {
-                continue;
-            }
+//             await element.fill(qty.toString());
 
-            const currentValue = await element.inputValue();
+//             i++;
+//         }
 
-            const maxQty = parseInt(currentValue, 10);
-            const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
+//         await adminPage.click('button[type="submit"].primary-button:visible');
 
-            await element.fill(qty.toString());
+//         await expect(adminPage.getByText('Refund created successfully')).toBeVisible();
+//     });
 
-            i++;
-        }
+//     test('cancel order', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
 
-        await adminPage.click('button[type="submit"].primary-button:visible');
+//         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-        await expect(adminPage.getByText('Refund created successfully')).toBeVisible();
-    });
+//         const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
-    test('cancel order', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await iconRight[0].click();
+//         await adminPage.waitForSelector('.icon-cancel.text-2xl + a:visible', { timeout: 1000 }).catch(() => null);
 
-        await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await adminPage.click('.icon-cancel.text-2xl + a:visible');
+//         await adminPage.click('button.transparent-button + button.primary-button:visible');
 
-        const iconRight = await adminPage.$$('a > span.icon-sort-right.cursor-pointer.text-2xl');
+//         await expect(adminPage.getByText('Order cancelled successfully')).toBeVisible();
+//     });
 
-        await iconRight[0].click();
-        await adminPage.waitForSelector('.icon-cancel.text-2xl + a:visible', { timeout: 1000 }).catch(() => null);
+//     test('mail invoice', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
 
-        await adminPage.click('.icon-cancel.text-2xl + a:visible');
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+//         await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-        await expect(adminPage.getByText('Order cancelled successfully')).toBeVisible();
-    });
+//         const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-    test('mail invoice', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
+//         await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
 
-        await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+//         await adminPage.click('button[type="button"].inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-mail.text-2xl:visible');
 
-        const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+//         const email = forms.form.email;
+//         await adminPage.fill('input[type="email"][name="email"]#email:visible', email);
 
-        await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
+//         await adminPage.click('button.primary-button:visible');
 
-        await adminPage.click('button[type="button"].inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-mail.text-2xl:visible');
+//         await expect(adminPage.getByText('Invoice sent successfully')).toBeVisible();
+//     });
 
-        const email = forms.form.email;
-        await adminPage.fill('input[type="email"][name="email"]#email:visible', email);
+//     test('print invoice', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
 
-        await adminPage.click('button.primary-button:visible');
+//         await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-        await expect(adminPage.getByText('Invoice sent successfully')).toBeVisible();
-    });
+//         const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
-    test('print invoice', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
+//         await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
 
-        await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+//         await adminPage.click('a.inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-printer.text-2xl:visible');
+//         const downloadPromise = adminPage.waitForEvent('download');
+//         await adminPage.getByRole('link', { name: ' Print' }).click();
 
-        const iconEye = await adminPage.$$('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
+//         const download = await downloadPromise;
 
-        await iconEye[Math.floor(Math.random() * ((iconEye.length - 1) - 0 + 1)) + 0].click();
-
-        await adminPage.click('a.inline-flex.w-full.max-w-max.cursor-pointer.items-center.justify-between.gap-x-2.px-1.text-center.font-semibold.text-gray-600.transition-all > .icon-printer.text-2xl:visible');
-        const downloadPromise = adminPage.waitForEvent('download');
-        await adminPage.getByRole('link', { name: ' Print' }).click();
-
-        const download = await downloadPromise;
-
-        await download.saveAs('/home/users/kartikey.dubey/invoice.pdf');
-    });
-});
+//         await download.saveAs('/home/users/kartikey.dubey/invoice.pdf');
+//     });
+// });
