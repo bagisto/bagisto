@@ -17,7 +17,7 @@ jobs:
         shard-index: [1]
         shard-total: [1]
 
-    name: Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
+    name: Shop | Playwright Tests | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
 
     services:
       mysql:
