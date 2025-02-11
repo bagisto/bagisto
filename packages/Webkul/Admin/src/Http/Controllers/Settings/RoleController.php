@@ -54,10 +54,15 @@ class RoleController extends Controller
     {
         $this->validate(request(), [
             'name'            => 'required',
-            'permission_type' => 'required',
+            'permission_type' => 'required|in:all,custom',
             'description'     => 'required',
-            'permissions'     => 'required',
         ]);
+
+        if (request('permission_type') == 'custom') {
+            $this->validate(request(), [
+                'permissions' => 'required',
+            ]);
+        }
 
         Event::dispatch('user.role.create.before');
 

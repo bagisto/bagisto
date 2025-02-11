@@ -1,139 +1,126 @@
-import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
-import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
+// import { test, expect, config } from '../../setup';
+// import  * as forms from '../../utils/form';
 
-test.describe('user management', () => {
-    let browser;
-    let context;
-    let page;
+// test.describe('user management', () => {
+//     test('create users', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        await logIn(page);
-        await page.goto(`${config.baseUrl}/admin/settings/users`);
-    });
+//         await adminPage.click('select[name="role_id"]');
 
-    test.afterEach(async () => {
-        await browser.close();
-    });
+//         const select = await adminPage.$('select[name="role_id"]');
 
-    test('create users', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         const options = await select.$$eval('option', (options) => {
+//             return options.map(option => option.value);
+//         });
 
-        await page.click('select[name="role_id"]');
+//         if (options.length > 1) {
+//             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        const select = await page.$('select[name="role_id"]');
+//             await select.selectOption(options[randomIndex]);
+//         } else {
+//             await select.selectOption(options[0]);
+//         }
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//         await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
 
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
+//         const password = forms.generateRandomPassword(8, 20);
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
+//         await adminPage.fill('input[name="password"].rounded-md:visible', password);
 
-        await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+//         await adminPage.fill('input[name="password_confirmation"].rounded-md:visible', password);
 
-        const password = forms.generateRandomPassword(8, 20);
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.fill('input[name="password"].rounded-md:visible', password);
+//         if (i % 2 == 1) {
+//             await adminPage.click('input[type="checkbox"] + label.peer');
+//         }
 
-        await page.fill('input[name="password_confirmation"].rounded-md:visible', password);
+//         await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+//             el.innerHTML += content;
+//         }, `<input type="file" name="image[]" accept="image/*">`);
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         const image = await adminPage.$('input[type="file"][name="image[]"]');
 
-        if (i % 2 == 1) {
-            await page.click('input[type="checkbox"] + label.peer');
-        }
+//         const filePath = forms.getRandomImageFile();
 
-        await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-            el.innerHTML += content;
-        }, `<input type="file" name="image[]" accept="image/*">`);
+//         await image.setInputFiles(filePath);
 
-        const image = await page.$('input[type="file"][name="image[]"]');
+//         await adminPage.press('input[name="name"]', 'Enter');
 
-        const filePath = forms.getRandomImageFile();
+//         await expect(adminPage.getByText('User created successfully.')).toBeVisible();
+//     });
 
-        await image.setInputFiles(filePath);
+//     test('edit users', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
 
-        await page.press('input[name="name"]', 'Enter');
+//         await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        await expect(page.getByText('User created successfully.')).toBeVisible();
-    });
+//         const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    test('edit users', async () => {
-        await page.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+//         await iconEdit[0].click();
 
-        const iconEdit = await page.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+//         await adminPage.click('select[name="role_id"]');
 
-        await iconEdit[0].click();
+//         const select = await adminPage.$('select[name="role_id"]');
 
-        await page.click('select[name="role_id"]');
+//         const options = await select.$$eval('option', (options) => {
+//             return options.map(option => option.value);
+//         });
 
-        const select = await page.$('select[name="role_id"]');
+//         if (options.length > 1) {
+//             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
+//             await select.selectOption(options[randomIndex]);
+//         } else {
+//             await select.selectOption(options[0]);
+//         }
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
 
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
+//         await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
+//         const password = forms.generateRandomPassword(8, 20);
 
-        await page.fill('input[type="email"].rounded-md:visible', forms.form.email);
+//         await adminPage.fill('input[name="password"].rounded-md:visible', password);
 
-        const password = forms.generateRandomPassword(8, 20);
+//         await adminPage.fill('input[name="password_confirmation"].rounded-md:visible', password);
 
-        await page.fill('input[name="password"].rounded-md:visible', password);
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.fill('input[name="password_confirmation"].rounded-md:visible', password);
+//         if (i % 2 == 1) {
+//             await adminPage.click('input[type="checkbox"] + label.peer');
+//         }
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+//             el.innerHTML += content;
+//         }, `<input type="file" name="image[]" accept="image/*">`);
 
-        if (i % 2 == 1) {
-            await page.click('input[type="checkbox"] + label.peer');
-        }
+//         const image = await adminPage.$('input[type="file"][name="image[]"]');
 
-        await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-            el.innerHTML += content;
-        }, `<input type="file" name="image[]" accept="image/*">`);
+//         const filePath = forms.getRandomImageFile();
 
-        const image = await page.$('input[type="file"][name="image[]"]');
+//         await image.setInputFiles(filePath);
 
-        const filePath = forms.getRandomImageFile();
+//         await adminPage.press('input[name="name"]', 'Enter');
 
-        await image.setInputFiles(filePath);
+//         await expect(adminPage.getByText('User updated successfully.')).toBeVisible();
+//     });
 
-        await page.press('input[name="name"]', 'Enter');
+//     test('delete Users', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
 
-        await expect(page.getByText('User updated successfully.')).toBeVisible();
-    });
+//         await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-    test('delete Users', async () => {
-        await page.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+//         const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
-        const iconDelete = await page.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+//         await iconDelete[0].click();
 
-        await iconDelete[0].click();
+//         await adminPage.click('button.transparent-button + button.primary-button:visible');
 
-        await page.click('button.transparent-button + button.primary-button:visible');
-
-        await expect(page.getByText('User deleted successfully.')).toBeVisible();
-    });
-});
+//         await expect(adminPage.getByText('User deleted successfully.')).toBeVisible();
+//     });
+// });

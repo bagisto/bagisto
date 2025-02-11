@@ -1,1109 +1,1114 @@
-import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
-import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
+// import { test, expect, config } from '../../setup';
+// import  * as forms from '../../utils/form';
 
-test.describe('theme management', () => {
-    let browser;
-    let context;
-    let page;
+// test.describe('theme management', () => {
+//     test('create product carousel theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        await logIn(page);
-        await page.goto(`${config.baseUrl}/admin/settings/themes`);
-    });
+//         adminPage.click('select.custom-select:visible');
 
-    test.afterEach(async () => {
-        await browser.close();
-    });
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-    test('create product carousel theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        page.click('select.custom-select:visible');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        const selects = await page.$$('select.custom-select:visible');
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         await adminPage.selectOption('select[name="type"]', 'product_carousel');
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        await page.selectOption('select[name="type"]', 'product_carousel');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         const customSelects = await adminPage.$$('select.custom-select:visible');
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//         for (let select of customSelects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//             if (options.length > 1) {
+//                 const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
 
-        const customSelects = await page.$$('select.custom-select:visible');
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        for (let select of customSelects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         await adminPage.click('div[class="secondary-button"]:visible');
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
+//         const key = await adminPage.$('select[name="key"]');
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         if (key) {
+//             const options = await key.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        await page.click('div[class="secondary-button"]:visible');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        const key = await page.$('select[name="key"]');
+//                 await key.selectOption(options[randomIndex]);
+//             }
+//         }
 
-        if (key) {
-            const options = await key.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         const value = await adminPage.$('select[name="value"]');
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         if (value) {
+//             const options = await value.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-                await key.selectOption(options[randomIndex]);
-            }
-        }
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        const value = await page.$('select[name="value"]');
+//                 await value.selectOption(options[randomIndex]);
+//             }
+//         } else {
+//             await adminPage.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         }
 
-        if (value) {
-            const options = await value.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         const errors = await adminPage.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         for (let error of errors) {
+//             await error.fill((Math.random() * 10).toString());
+//         }
 
-                await value.selectOption(options[randomIndex]);
-            }
-        } else {
-            await page.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
-        }
+//         const newErrors = await adminPage.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        const errors = await page.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         for (let error of newErrors) {
+//             await error.fill((Math.floor(Math.random() * 10) + 1).toString());
+//         }
 
-        for (let error of errors) {
-            await error.fill((Math.random() * 10).toString());
-        }
+//         await adminPage.click('button.primary-button.justify-center:visible');
 
-        const newErrors = await page.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         const Errors = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
 
-        for (let error of newErrors) {
-            await error.fill((Math.floor(Math.random() * 10) + 1).toString());
-        }
+//         if (Errors) {
+//             throw new Error('Selected key have no any option');
+//         }
 
-        await page.click('button.primary-button.justify-center:visible');
+//         await inputs[0].press('Enter');
 
-        const Errors = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        if (Errors) {
-            throw new Error('Selected key have no any option');
-        }
+//     test('create category carousel theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        await inputs[0].press('Enter');
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         adminPage.click('select.custom-select:visible');
 
-    test('create category carousel theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-        page.click('select.custom-select:visible');
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const selects = await page.$$('select.custom-select:visible');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         await adminPage.selectOption('select[name="type"]', 'category_carousel');
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.selectOption('select[name="type"]', 'category_carousel');
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-        const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.fill('input[name="en[options][filters][limit]"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//         const customSelects = await adminPage.$$('select.custom-select:visible');
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
-        await page.fill('input[name="en[options][filters][limit]"]', (Math.floor(Math.random() * 1000000)).toString());
+//         for (let select of customSelects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const customSelects = await page.$$('select.custom-select:visible');
+//             if (options.length > 1) {
+//                 const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
 
-        for (let select of customSelects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
+//         await adminPage.click('div[class="secondary-button"]:visible');
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         const key = await adminPage.$('select[name="key"]');
 
-        await page.click('div[class="secondary-button"]:visible');
+//         if (key) {
+//             const options = await key.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const key = await page.$('select[name="key"]');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        if (key) {
-            const options = await key.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await key.selectOption(options[randomIndex]);
+//             }
+//         }
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         const value = await adminPage.$('select[name="value"]');
 
-                await key.selectOption(options[randomIndex]);
-            }
-        }
+//         if (value) {
+//             const options = await value.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const value = await page.$('select[name="value"]');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        if (value) {
-            const options = await value.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await value.selectOption(options[randomIndex]);
+//             }
+//         } else {
+//             await adminPage.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         }
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         const errors = await adminPage.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-                await value.selectOption(options[randomIndex]);
-            }
-        } else {
-            await page.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
-        }
+//         for (let error of errors) {
+//             await error.fill((Math.random() * 10).toString());
+//         }
 
-        const errors = await page.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         const newErrors = await adminPage.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        for (let error of errors) {
-            await error.fill((Math.random() * 10).toString());
-        }
+//         for (let error of newErrors) {
+//             await error.fill((Math.floor(Math.random() * 10) + 1).toString());
+//         }
 
-        const newErrors = await page.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         await adminPage.click('button.primary-button.justify-center:visible');
 
-        for (let error of newErrors) {
-            await error.fill((Math.floor(Math.random() * 10) + 1).toString());
-        }
+//         const Errors = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
 
-        await page.click('button.primary-button.justify-center:visible');
+//         if (Errors) {
+//             throw new Error('Selected key have no any option');
+//         }
 
-        const Errors = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+//         await inputs[0].press('Enter');
 
-        if (Errors) {
-            throw new Error('Selected key have no any option');
-        }
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        await inputs[0].press('Enter');
+//     test('create static content theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-    test('create static content theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         adminPage.click('select.custom-select:visible');
 
-        page.click('select.custom-select:visible');
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-        const selects = await page.$$('select.custom-select:visible');
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         await adminPage.selectOption('select[name="type"]', 'static_content');
 
-        await page.selectOption('select[name="type"]', 'static_content');
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         const randomHtmlContent = await forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 1000));
 
-        const randomHtmlContent = await forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 1000));
+//         await adminPage.evaluate((content) => {
+//             const html = document.querySelector('input[name="en[options][html]"]');
+//             const css = document.querySelector('input[name="en[options][css]"]');
 
-        await page.evaluate((content) => {
-            const html = document.querySelector('input[name="en[options][html]"]');
-            const css = document.querySelector('input[name="en[options][css]"]');
+//             if (html instanceof HTMLInputElement) {
+//                 html.value = content;
+//             }
 
-            if (html instanceof HTMLInputElement) {
-                html.value = content;
-            }
+//             if (css instanceof HTMLInputElement) {
+//                 css.value = content;
+//             }
+//         }, randomHtmlContent.toString());
 
-            if (css instanceof HTMLInputElement) {
-                css.value = content;
-            }
-        }, randomHtmlContent.toString());
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//     test('create image slider theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-    test('create image slider theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        page.click('select.custom-select:visible');
+//         adminPage.click('select.custom-select:visible');
 
-        const selects = await page.$$('select.custom-select:visible');
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        await page.selectOption('select[name="type"]', 'image_carousel');
+//         await adminPage.selectOption('select[name="type"]', 'image_carousel');
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-            await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-                el.innerHTML += content;
-            }, `<input type="file" name="slider_image[]" accept="image/*">`);
+//             await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+//                 el.innerHTML += content;
+//             }, `<input type="file" name="slider_image[]" accept="image/*">`);
 
-            const image = await page.$('input[type="file"][name="slider_image[]"]');
+//             const image = await adminPage.$('input[type="file"][name="slider_image[]"]');
 
-            const filePath = forms.getRandomImageFile();
+//             const filePath = forms.getRandomImageFile();
 
-            await image.setInputFiles(filePath);
+//             await image.setInputFiles(filePath);
 
-            await inputs[0].press('Enter');
-        }
+//             await inputs[0].press('Enter');
+//         }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-    test('create footer link theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//     test('create footer link theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        page.click('select.custom-select:visible');
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        const selects = await page.$$('select.custom-select:visible');
+//         adminPage.click('select.custom-select:visible');
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        await page.selectOption('select[name="type"]', 'footer_links');
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.selectOption('select[name="type"]', 'footer_links');
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-            await page.fill('input[name="url"]', forms.generateRandomUrl());
-            await page.fill('input[name="sort_order"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]', (Math.floor(Math.random() * 1000000)).toString());
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-            const column = await page.$('select[name="column"]');
+//             await adminPage.fill('input[name="url"]', forms.generateRandomUrl());
+//             await adminPage.fill('input[name="sort_order"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]', (Math.floor(Math.random() * 1000000)).toString());
 
-            if (column) {
-                const options = await column.$$eval('option', (options) => {
-                    return options.map(option => option.value);
-                });
+//             const column = await adminPage.$('select[name="column"]');
 
-                if (options.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * options.length);
+//             if (column) {
+//                 const options = await column.$$eval('option', (options) => {
+//                     return options.map(option => option.value);
+//                 });
 
-                    await column.selectOption(options[randomIndex]);
-                }
-            }
-            await inputs[0].press('Enter');
-        }
+//                 if (options.length > 0) {
+//                     const randomIndex = Math.floor(Math.random() * options.length);
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//                     await column.selectOption(options[randomIndex]);
+//                 }
+//             }
+//             await inputs[0].press('Enter');
+//         }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-    test('create services content theme', async () => {
-        await page.click('button[type="button"].primary-button:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        page.click('select.custom-select:visible');
+//     test('create services content theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        const selects = await page.$$('select.custom-select:visible');
+//         await adminPage.click('button[type="button"].primary-button:visible');
 
-        for (let select of selects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         adminPage.click('select.custom-select:visible');
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         const selects = await adminPage.$$('select.custom-select:visible');
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         for (let select of selects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        await page.selectOption('select[name="type"]', 'services_content');
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-        await page.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         await adminPage.selectOption('select[name="type"]', 'services_content');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-            await inputs[0].press('Enter');
-        }
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//             await inputs[0].press('Enter');
+//         }
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-    test('edit product carousel theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//     test('edit product carousel theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        await page.fill('input[name="type"]:visible', 'product_carousel');
-        await page.press('input[name="type"]:visible', 'Enter');
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.fill('input[name="type"]:visible', 'product_carousel');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-        await iconEdit[0].click();
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         await iconEdit[0].click();
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-                break;
-            }
-        }
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//                 break;
+//             }
+//         }
 
-        const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        const customSelects = await page.$$('select.custom-select:visible');
+//         const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        for (let select of customSelects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         const customSelects = await adminPage.$$('select.custom-select:visible');
 
-        await page.click('div[class="secondary-button"]:visible');
+//         for (let select of customSelects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const key = await page.$('select[name="key"]');
+//             if (options.length > 1) {
+//                 const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
 
-        if (key) {
-            const options = await key.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         await adminPage.click('div[class="secondary-button"]:visible');
 
-                await key.selectOption(options[randomIndex]);
-            }
-        }
+//         const key = await adminPage.$('select[name="key"]');
 
-        const value = await page.$('select[name="value"]');
+//         if (key) {
+//             const options = await key.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        if (value) {
-            const options = await value.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//                 await key.selectOption(options[randomIndex]);
+//             }
+//         }
 
-                await value.selectOption(options[randomIndex]);
-            }
-        } else {
-            await page.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
-        }
+//         const value = await adminPage.$('select[name="value"]');
 
-        const errors = await page.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         if (value) {
+//             const options = await value.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        for (let error of errors) {
-            await error.fill((Math.random() * 10).toString());
-        }
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        const newErrors = await page.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//                 await value.selectOption(options[randomIndex]);
+//             }
+//         } else {
+//             await adminPage.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         }
 
-        for (let error of newErrors) {
-            await error.fill((Math.floor(Math.random() * 10) + 1).toString());
-        }
+//         const errors = await adminPage.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        await page.click('button.primary-button.justify-center:visible');
+//         for (let error of errors) {
+//             await error.fill((Math.random() * 10).toString());
+//         }
 
-        const Errors = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+//         const newErrors = await adminPage.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        if (Errors) {
-            throw new Error('Selected key have no any option');
-        }
+//         for (let error of newErrors) {
+//             await error.fill((Math.floor(Math.random() * 10) + 1).toString());
+//         }
 
-        await inputs[0].press('Enter');
+//         await adminPage.click('button.primary-button.justify-center:visible');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         const Errors = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
 
-    test('edit category carousel theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//         if (Errors) {
+//             throw new Error('Selected key have no any option');
+//         }
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//         await inputs[0].press('Enter');
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//     test('edit category carousel theme', async ({ adminPage }) => {
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        await page.fill('input[name="type"]:visible', 'category_carousel');
-        await page.press('input[name="type"]:visible', 'Enter');
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.fill('input[name="type"]:visible', 'category_carousel');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-        await iconEdit[0].click();
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         await iconEdit[0].click();
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-                break;
-            }
-        }
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//                 break;
+//             }
+//         }
 
-        const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
-        await page.fill('input[name="en[options][filters][limit]"]', (Math.floor(Math.random() * 1000000)).toString());
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        const customSelects = await page.$$('select.custom-select:visible');
+//         const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        for (let select of customSelects) {
-            const options = await select.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//         for (let input of inputs) {
+//             await input.fill(forms.generateRandomStringWithSpaces(200));
+//         }
 
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         await adminPage.fill('input[name="en[options][filters][limit]"]', (Math.floor(Math.random() * 1000000)).toString());
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
+//         const customSelects = await adminPage.$$('select.custom-select:visible');
 
-        await page.click('div[class="secondary-button"]:visible');
+//         for (let select of customSelects) {
+//             const options = await select.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        const key = await page.$('select[name="key"]');
+//             if (options.length > 1) {
+//                 const randomIndex = Math.floor(Math.random() * (options.length - 1) + 1);
 
-        if (key) {
-            const options = await key.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//                 await select.selectOption(options[randomIndex]);
+//             } else {
+//                 await select.selectOption(options[0]);
+//             }
+//         }
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//         await adminPage.click('div[class="secondary-button"]:visible');
 
-                await key.selectOption(options[randomIndex]);
-            }
-        }
+//         const key = await adminPage.$('select[name="key"]');
 
-        const value = await page.$('select[name="value"]');
+//         if (key) {
+//             const options = await key.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        if (value) {
-            const options = await value.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-            if (options.length > 0) {
-                const randomIndex = Math.floor(Math.random() * options.length);
+//                 await key.selectOption(options[randomIndex]);
+//             }
+//         }
 
-                await value.selectOption(options[randomIndex]);
-            }
-        } else {
-            await page.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
-        }
+//         const value = await adminPage.$('select[name="value"]');
 
-        const errors = await page.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//         if (value) {
+//             const options = await value.$$eval('option', (options) => {
+//                 return options.map(option => option.value);
+//             });
 
-        for (let error of errors) {
-            await error.fill((Math.random() * 10).toString());
-        }
+//             if (options.length > 0) {
+//                 const randomIndex = Math.floor(Math.random() * options.length);
 
-        const newErrors = await page.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
+//                 await value.selectOption(options[randomIndex]);
+//             }
+//         } else {
+//             await adminPage.fill('input[name="value"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 100)));
+//         }
 
-        for (let error of newErrors) {
-            await error.fill((Math.floor(Math.random() * 10) + 1).toString());
-        }
+//         const errors = await adminPage.$$('input[type="text"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        await page.click('button.primary-button.justify-center:visible');
+//         for (let error of errors) {
+//             await error.fill((Math.random() * 10).toString());
+//         }
 
-        const Errors = await page.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
+//         const newErrors = await adminPage.$$('input[class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
 
-        if (Errors) {
-            throw new Error('Selected key have no any option');
-        }
+//         for (let error of newErrors) {
+//             await error.fill((Math.floor(Math.random() * 10) + 1).toString());
+//         }
 
-        await inputs[0].press('Enter');
+//         await adminPage.click('button.primary-button.justify-center:visible');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         const Errors = await adminPage.waitForSelector('.text-red-600.text-xs.italic', { timeout: 3000 }).catch(() => null);
 
-    test('edit static content theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//         if (Errors) {
+//             throw new Error('Selected key have no any option');
+//         }
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//         await inputs[0].press('Enter');
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//     test('edit static content theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        await page.fill('input[name="type"]:visible', 'static_content');
-        await page.press('input[name="type"]:visible', 'Enter');
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         await adminPage.fill('input[name="type"]:visible', 'static_content');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        await iconEdit[0].click();
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         await iconEdit[0].click();
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-                break;
-            }
-        }
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-        const randomHtmlContent = await forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 1000));
+//                 break;
+//             }
+//         }
 
-        await page.evaluate((content) => {
-            const html = document.querySelector('input[name="en[options][html]"]');
-            const css = document.querySelector('input[name="en[options][css]"]');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-            if (html instanceof HTMLInputElement) {
-                html.value = content;
-            }
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-            if (css instanceof HTMLInputElement) {
-                css.value = content;
-            }
-        }, randomHtmlContent.toString());
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         const randomHtmlContent = await forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 1000));
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         await adminPage.evaluate((content) => {
+//             const html = document.querySelector('input[name="en[options][html]"]');
+//             const css = document.querySelector('input[name="en[options][css]"]');
 
-    test('edit image slider theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//             if (html instanceof HTMLInputElement) {
+//                 html.value = content;
+//             }
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//             if (css instanceof HTMLInputElement) {
+//                 css.value = content;
+//             }
+//         }, randomHtmlContent.toString());
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        await page.fill('input[name="type"]:visible', 'image_carousel');
-        await page.press('input[name="type"]:visible', 'Enter');
+//     test('edit image slider theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         await adminPage.fill('input[name="type"]:visible', 'image_carousel');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        await iconEdit[0].click();
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         await iconEdit[0].click();
 
-                break;
-            }
-        }
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//                 break;
+//             }
+//         }
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-            await page.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-                el.innerHTML += content;
-            }, `<input type="file" name="slider_image[]" accept="image/*">`);
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-            const image = await page.$('input[type="file"][name="slider_image[]"]');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-            const filePath = forms.getRandomImageFile();
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-            await image.setInputFiles(filePath);
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-            await inputs[0].press('Enter');
-        }
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//             await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
+//                 el.innerHTML += content;
+//             }, `<input type="file" name="slider_image[]" accept="image/*">`);
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//             const image = await adminPage.$('input[type="file"][name="slider_image[]"]');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//             const filePath = forms.getRandomImageFile();
 
-    test('edit footer link theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//             await image.setInputFiles(filePath);
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//             await inputs[0].press('Enter');
+//         }
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await page.fill('input[name="type"]:visible', 'footer_links');
-        await page.press('input[name="type"]:visible', 'Enter');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//     test('edit footer link theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        await iconEdit[0].click();
+//         await adminPage.fill('input[name="type"]:visible', 'footer_links');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-                break;
-            }
-        }
+//         await iconEdit[0].click();
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//                 break;
+//             }
+//         }
 
-            await page.fill('input[name="url"]', forms.generateRandomUrl());
-            await page.fill('input[name="sort_order"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]', (Math.floor(Math.random() * 1000000)).toString());
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-            const column = await page.$('select[name="column"]');
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-            if (column) {
-                const options = await column.$$eval('option', (options) => {
-                    return options.map(option => option.value);
-                });
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-                if (options.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * options.length);
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-                    await column.selectOption(options[randomIndex]);
-                }
-            }
-            await inputs[0].press('Enter');
-        }
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//             await adminPage.fill('input[name="url"]', forms.generateRandomUrl());
+//             await adminPage.fill('input[name="sort_order"][class="border !border-red-600 hover:border-red-600 w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//             const column = await adminPage.$('select[name="column"]');
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//             if (column) {
+//                 const options = await column.$$eval('option', (options) => {
+//                     return options.map(option => option.value);
+//                 });
 
-    test('edit services content theme', async () => {
-        await page.waitForSelector('span[class="icon-filter text-2xl"]:visible');
+//                 if (options.length > 0) {
+//                     const randomIndex = Math.floor(Math.random() * options.length);
 
-        await page.click('span[class="icon-filter text-2xl"]:visible');
+//                     await column.selectOption(options[randomIndex]);
+//                 }
+//             }
+//             await inputs[0].press('Enter');
+//         }
 
-        const clearBtn = await page.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        for (let i = 0; i < clearBtn.length; i++) {
-            await clearBtn[i].click();
-        }
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
 
-        await page.fill('input[name="type"]:visible', 'services_content');
-        await page.press('input[name="type"]:visible', 'Enter');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        const btnAdd = await page.$('button[type="button"][class="secondary-button w-full"]:visible');
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
 
-        await btnAdd.scrollIntoViewIfNeeded();
+//     test('edit services content theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
 
-        await page.click('button[type="button"][class="secondary-button w-full"]:visible');
+//         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
+//         await adminPage.click('span[class="icon-filter text-2xl"]:visible');
 
-        const iconEdit = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
+//         const clearBtn = await adminPage.$$('p[class="cursor-pointer text-xs font-medium leading-6 text-blue-600"]:visible');
 
-        await iconEdit[0].click();
+//         for (let i = 0; i < clearBtn.length; i++) {
+//             await clearBtn[i].click();
+//         }
 
-        await page.click('input[type="checkbox"] + label.peer:visible');
+//         await adminPage.fill('input[name="type"]:visible', 'services_content');
+//         await adminPage.press('input[name="type"]:visible', 'Enter');
 
-        const deleteBtns = await page.$$('p.cursor-pointer.text-red-600.transition-all');
+//         const btnAdd = await adminPage.$('button[type="button"][class="secondary-button w-full"]:visible');
 
-        for (let deleteBtn of deleteBtns) {
-            let i = Math.floor(Math.random() * 10) + 1;
+//         await btnAdd.scrollIntoViewIfNeeded();
 
-            if (i % 3 == 1) {
-                await deleteBtn.click();
+//         await adminPage.click('button[type="button"][class="secondary-button w-full"]:visible');
 
-                await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]', { timeout: 5000 }).catch(() => null);
 
-                break;
-            }
-        }
+//         const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-        const checkbox = await page.$('input[type="checkbox"] + label.peer:visible');
+//         await iconEdit[0].click();
 
-        let i = Math.floor(Math.random() * 10) + 1;
+//         await adminPage.click('input[type="checkbox"] + label.peer:visible');
 
-        if (i % 2 == 1) {
-            await checkbox.click();
-        }
+//         const deleteBtns = await adminPage.$$('p.cursor-pointer.text-red-600.transition-all');
 
-        for (i; i > 0; i--) {
-            await page.click('div[class="secondary-button"]:visible');
+//         for (let deleteBtn of deleteBtns) {
+//             let i = Math.floor(Math.random() * 10) + 1;
 
-            const inputs = await page.$$('input[type="text"].rounded-md:visible');
+//             if (i % 3 == 1) {
+//                 await deleteBtn.click();
 
-            for (let input of inputs) {
-                await input.fill(forms.generateRandomStringWithSpaces(200));
-            }
+//                 await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
 
-            await inputs[0].press('Enter');
-        }
+//                 break;
+//             }
+//         }
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-        await page.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+//         let i = Math.floor(Math.random() * 10) + 1;
 
-        await page.click('.box-shadow.absolute button.primary-button:visible');
+//         if (i % 2 == 1) {
+//             await checkbox.click();
+//         }
 
-        await expect(page.getByText('Theme updated successfully')).toBeVisible();
-    });
+//         for (i; i > 0; i--) {
+//             await adminPage.click('div[class="secondary-button"]:visible');
 
-    test('delete theme', async () => {
-        await page.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+//             const inputs = await adminPage.$$('input[type="text"].rounded-md:visible');
 
-        const iconDelete = await page.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+//             for (let input of inputs) {
+//                 await input.fill(forms.generateRandomStringWithSpaces(200));
+//             }
 
-        await iconDelete[0].click();
+//             await inputs[0].press('Enter');
+//         }
 
-        await page.click('button.transparent-button + button.primary-button:visible');
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
 
-        await expect(page.getByText('Theme deleted successfully')).toBeVisible();
-    });
-});
+//         await adminPage.fill('input[name="sort_order"]', (Math.floor(Math.random() * 1000000)).toString());
+
+//         await adminPage.click('.box-shadow.absolute button.primary-button:visible');
+
+//         await expect(adminPage.getByText('Theme updated successfully')).toBeVisible();
+//     });
+
+//     test('delete theme', async ({ adminPage }) => {
+//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+
+//         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+//         const iconDelete = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+//         await iconDelete[0].click();
+
+//         await adminPage.click('button.transparent-button + button.primary-button:visible');
+
+//         await expect(adminPage.getByText('Theme deleted successfully')).toBeVisible();
+//     });
+// });

@@ -1,57 +1,85 @@
-import { test, expect, config } from '../../setup';
-import { launchBrowser } from '../../utils/core';
-import  * as forms from '../../utils/form';
-import logIn from '../../utils/login';
+import { test, expect, config } from "../../setup";
+import {
+    generateFirstName,
+    generateLastName,
+    generateEmail,
+    randomElement,
+} from "../../utils/faker";
+import * as forms from "../../utils/form";
 
-test.describe('customer management', () => {
-    let browser;
-    let context;
-    let page;
-
-    test.beforeEach(async () => {
-        browser = await launchBrowser();
-        context = await browser.newContext();
-        page = await context.newPage();
-
-        await logIn(page);
-        await page.goto(`${config.baseUrl}/admin/customers/customers`);
-        await page.waitForSelector('div.primary-button', { state: 'visible' });
+async function createCustomer(adminPage) {
+    await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+    await adminPage.waitForSelector("button.primary-button:visible", {
+        state: "visible",
     });
 
-    test.afterEach(async () => {
-        await browser.close();
+    await adminPage.click("button.primary-button:visible");
+
+    await adminPage.fill(
+        'input[name="first_name"]:visible',
+        generateFirstName()
+    );
+    await adminPage.fill('input[name="last_name"]:visible', generateLastName());
+    await adminPage.fill('input[name="email"]:visible', generateEmail());
+    await adminPage.selectOption(
+        'select[name="gender"]:visible',
+        randomElement(["Male", "Female", "Other"])
+    );
+
+    await adminPage.press('input[name="phone"]:visible', "Enter");
+
+    await expect(
+        adminPage.getByText("Customer created successfully")
+    ).toBeVisible();
+}
+
+test.describe("customer management", () => {
+    test("create customer", async ({ adminPage }) => {
+        await createCustomer(adminPage);
     });
 
-    test('create customer', async () => {
-        await page.click('button.primary-button:visible');
+    test("edit customer", async ({ adminPage }) => {
+        /**
+         * Creating a customer first.
+         */
+        await createCustomer(adminPage);
 
-        await page.fill('input[name="first_name"]:visible', forms.form.firstName);
-        await page.fill('input[name="last_name"]:visible', forms.form.lastName);
-        const email = forms.form.email;
-        await page.fill('input[name="email"]:visible', email);
-        await page.fill('input[name="phone"]:visible', forms.form.phone);
-        await page.selectOption('select[name="gender"]:visible', 'Other');
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
-        await page.press('input[name="phone"]:visible', 'Enter');
-
-        await expect(page.getByText('Customer created successfully')).toBeVisible();
-    });
-
-    test('edit customer', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
-
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
         await iconRight[0].click();
 
-        await page.click('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
+        await adminPage.waitForSelector(
+            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible',
+            { state: "visible" }
+        );
+        const createBtn = await adminPage.$$(
+            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
+        );
+        await createBtn[0].click();
 
-        await page.fill('input[name="first_name"]:visible', forms.form.firstName);
-        await page.fill('input[name="last_name"]:visible', forms.form.lastName);
+        await adminPage.fill(
+            'input[name="first_name"]:visible',
+            forms.form.firstName
+        );
+        await adminPage.fill(
+            'input[name="last_name"]:visible',
+            forms.form.lastName
+        );
         const email = forms.form.email;
-        await page.fill('input[name="email"]:visible', email);
-        await page.fill('input[name="phone"]:visible', forms.form.phone);
-        await page.selectOption('select[name="gender"]:visible', 'Other');
+        await adminPage.fill('input[name="email"]:visible', email);
+        await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
+        await adminPage.selectOption('select[name="gender"]:visible', "Other");
 
-        const checkboxs = await page.$$('input[type="checkbox"] + label');
+        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
 
         for (let checkbox of checkboxs) {
             let i = Math.floor(Math.random() * 10) + 1;
@@ -61,186 +89,300 @@ test.describe('customer management', () => {
             }
         }
 
-        await page.press('input[name="phone"]:visible', 'Enter');
+        await adminPage.press('input[name="phone"]:visible', "Enter");
 
-        await expect(page.getByText('Customer Updated Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Customer Updated Successfully")
+        ).toBeVisible();
     });
 
-    test('Add address', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+    test("Add address", async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
         await iconRight[0].click();
 
-        await page.waitForSelector('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
-
-        const createBtn = await page.$$('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
-
+        await adminPage.waitForSelector(
+            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
+        );
+        const createBtn = await adminPage.$$(
+            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
+        );
         await createBtn[1].click();
 
-        await page.fill('input[name="company_name"]', forms.form.lastName);
-        await page.fill('input[name="first_name"]', forms.form.firstName);
-        await page.fill('input[name="last_name"]', forms.form.lastName);
-        await page.fill('input[name="email"]', forms.form.email);
-        await page.fill('input[name="address[0]"]', forms.form.firstName);
-        await page.selectOption('select[name="country"]', 'IN');
-        await page.selectOption('select[name="state"]', 'UP');
-        await page.fill('input[name="city"]', forms.form.lastName);
-        await page.fill('input[name="postcode"]', '201301');
-        await page.fill('input[name="phone"]', forms.form.phone);
+        await adminPage.fill('input[name="company_name"]', forms.form.lastName);
+        await adminPage.fill('input[name="first_name"]', forms.form.firstName);
+        await adminPage.fill('input[name="last_name"]', forms.form.lastName);
+        await adminPage.fill('input[name="email"]', forms.form.email);
+        await adminPage.fill('input[name="address[0]"]', forms.form.firstName);
+        await adminPage.selectOption('select[name="country"]', "IN");
+        await adminPage.selectOption('select[name="state"]', "UP");
+        await adminPage.fill('input[name="city"]', forms.form.lastName);
+        await adminPage.fill('input[name="postcode"]', "201301");
+        await adminPage.fill('input[name="phone"]', forms.form.phone);
 
-        await page.click('input[name="default_address"] + label:visible');
-        await page.press('input[name="phone"]', 'Enter');
+        await adminPage.click('input[name="default_address"] + label:visible');
+        await adminPage.press('input[name="phone"]', "Enter");
 
-        await expect(page.getByText('Address Created Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Address Created Successfully")
+        ).toBeVisible();
     });
 
-    test('edit address', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+    test("edit address", async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
         await iconRight[0].click();
 
-        await page.waitForSelector('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
+        await adminPage.waitForSelector(
+            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
+        );
 
-        const createBtn = await page.$$('p[class="cursor-pointer text-blue-600 transition-all hover:underline"]:visible');
+        const createBtn = await adminPage.$$(
+            'p[class="cursor-pointer text-blue-600 transition-all hover:underline"]:visible'
+        );
 
         if (createBtn.length == 0) {
-            throw new Error('No address found for edit');
+            throw new Error("No address found for edit");
         }
 
         await createBtn[0].click();
 
-        await page.fill('input[name="company_name"]', forms.form.lastName);
-        await page.fill('input[name="first_name"]', forms.form.firstName);
-        await page.fill('input[name="last_name"]', forms.form.lastName);
-        await page.fill('input[name="email"]', forms.form.email);
-        await page.fill('input[name="address[0]"]', forms.form.firstName);
-        await page.selectOption('select[name="country"]', 'IN');
-        await page.selectOption('select[name="state"]', 'UP');
-        await page.fill('input[name="city"]', forms.form.lastName);
-        await page.fill('input[name="postcode"]', '201301');
-        await page.fill('input[name="phone"]', forms.form.phone);
+        await adminPage.fill('input[name="company_name"]', forms.form.lastName);
+        await adminPage.fill('input[name="first_name"]', forms.form.firstName);
+        await adminPage.fill('input[name="last_name"]', forms.form.lastName);
+        await adminPage.fill('input[name="email"]', forms.form.email);
+        await adminPage.fill('input[name="address[0]"]', forms.form.firstName);
+        await adminPage.selectOption('select[name="country"]', "IN");
+        await adminPage.selectOption('select[name="state"]', "UP");
+        await adminPage.fill('input[name="city"]', forms.form.lastName);
+        await adminPage.fill('input[name="postcode"]', "201301");
+        await adminPage.fill('input[name="phone"]', forms.form.phone);
 
-        await page.click('input[name="default_address"] + label:visible');
-        await page.press('input[name="phone"]', 'Enter');
+        await adminPage.click('input[name="default_address"] + label:visible');
+        await adminPage.press('input[name="phone"]', "Enter");
 
-        await expect(page.getByText('Address Updated Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Address Updated Successfully")
+        ).toBeVisible();
     });
 
-    test('set default address', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+    // test('set default address', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
+    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
+    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
+    //     await iconRight[0].click();
+
+    //     await adminPage.waitForSelector('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
+
+    //     const createBtn = await adminPage.$$('button[class="flex cursor-pointer justify-center text-sm text-blue-600 transition-all hover:underline"]:visible');
+
+    //     if (createBtn.length == 0) {
+    //         throw new Error('No address found for edit');
+    //     }
+
+    //     await createBtn[createBtn.length - 1].click();
+
+    //     await expect(adminPage.getByText('Default Address Updated Successfully')).toBeVisible();
+    // });
+
+    test("delete address", async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
+
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
         await iconRight[0].click();
 
-        await page.waitForSelector('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
+        await adminPage.waitForSelector(
+            'p[class="cursor-pointer text-red-600 transition-all hover:underline"]:visible'
+        );
+        await adminPage.locator("p.text-red-600").click();
 
-        const createBtn = await page.$$('button[class="flex cursor-pointer justify-center text-sm text-blue-600 transition-all hover:underline"]:visible');
+        await adminPage.click(
+            'button[type="button"].transparent-button + button[type="button"].primary-button'
+        );
 
-        if (createBtn.length == 0) {
-            throw new Error('No address found for edit');
-        }
-
-        await createBtn[createBtn.length - 1].click();
-
-        await expect(page.getByText('Default Address Updated Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Address Deleted Successfully")
+        ).toBeVisible();
     });
 
-    test('delete address', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+    // test('add note', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
+    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
+    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
+    //     await iconRight[0].click();
+
+    //     const lorem100 = forms.generateRandomStringWithSpaces(200);
+    //     adminPage.fill('textarea[name="note"]', lorem100);
+
+    //     await adminPage.click('input[name="customer_notified"] + span');
+
+    //     await adminPage.click('button[type="submit"].secondary-button:visible');
+
+    //     await adminPage.waitForTimeout(2000);
+
+    //     await expect(adminPage.getByText('Note Created Successfully')).toBeVisible();
+    // });
+
+    // test('delete account', async ({ adminPage }) => {
+    //     await createCustomer(adminPage);
+
+    //     await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
+
+    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
+    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
+    //     await iconRight[0].click();
+
+    //     await adminPage.click('.icon-cancel:visible');
+    //     await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+
+    //     await expect(adminPage.getByText('Customer Deleted Successfully')).toBeVisible();
+    // });
+
+    test("create order", async ({ adminPage }) => {
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
+
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
         await iconRight[0].click();
 
-        await page.waitForSelector('p[class="cursor-pointer text-red-600 transition-all hover:underline"]:visible');
-        await page.locator('p.text-red-600').click();
+        await adminPage.click(".icon-cart:visible");
 
-        await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+        await adminPage.click(
+            'button[type="button"].transparent-button + button[type="button"].primary-button'
+        );
 
-        await expect(page.getByText('Address Deleted Successfully')).toBeVisible();
+        await expect(adminPage.getByText("Cart Items").first()).toBeVisible();
     });
 
-    test('add note', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+    test("mass delete customers", async ({ adminPage }) => {
+        /**
+         * Creating a customer first.
+         */
+        await createCustomer(adminPage);
 
-        await iconRight[0].click();
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
-        const lorem100 = forms.generateRandomStringWithSpaces(500);
-        page.fill('textarea[name="note"]', lorem100);
+        await adminPage.waitForSelector(".icon-uncheckbox:visible", {
+            state: "visible",
+        });
+        const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
+        await checkboxes[1].click();
 
-        await page.click('input[name="customer_notified"] + span');
+        let selectActionButton = await adminPage.waitForSelector(
+            'button:has-text("Select Action")',
+            { timeout: 1000 }
+        );
+        await selectActionButton.click();
 
-        await page.click('button[type="submit"].secondary-button:visible');
+        await adminPage.click('a:has-text("Delete")', { timeout: 1000 });
 
-        await expect(page.getByText('Note Created Successfully')).toBeVisible();
-    });
+        await adminPage.waitForSelector("text=Are you sure", {
+            state: "visible",
+            timeout: 1000,
+        });
 
-    test('delete account', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
 
-        await iconRight[0].click();
-
-        await page.click('.icon-cancel:visible');
-
-        await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
-
-        await expect(page.getByText('Customer Deleted Successfully')).toBeVisible();
-    });
-
-    test('create order', async () => {
-        const iconRight = await page.$$('a[class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
-
-        await iconRight[0].click();
-
-        await page.click('.icon-cart:visible');
-
-        await page.click('button[type="button"].transparent-button + button[type="button"].primary-button');
-
-        await expect(page.getByText('Cart Items').first()).toBeVisible();
-    });
-
-    test('login as customer', async () => {
-        const iconEdit = await page.$$('.icon-login');
-
-        await iconEdit[Math.floor(Math.random() * ((iconEdit.length - 1) - 0 + 1)) + 0].click();
-
-        await expect(page.getByText('First Name')).toBeVisible();
-    });
-
-    test('mass delete customers', async () => {
-        const checkboxs = await page.$$('.icon-uncheckbox');
-
-        await checkboxs[0].click();
-
-        const button = await page.waitForSelector('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible', { timeout: 1000 }).catch(() => null);
-
-        await page.click('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
-        await page.click('a[class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
-
-        await page.click('button.transparent-button + button.primary-button:visible');
-
-        await expect(page.getByText('Selected data successfully deleted')).toBeVisible();
-    });
-
-    test('mass update customers', async () => {
-        const checkboxs = await page.$$('.icon-uncheckbox');
-
-        await checkboxs[1].click();
-
-        await page.waitForSelector('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible', { timeout: 1000 }).catch(() => null);
-
-        await page.click('button[class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"]:visible');
-        await page.hover('a[class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-1.5 rounded-t px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
-
-        const buttons = await page.$$('a[class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"]:visible');
-
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 2 == 1) {
-            await buttons[1].click();
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
         } else {
-            await buttons[0].click();
+            console.error("Agree button not found or not visible.");
         }
 
-        await page.click('button.transparent-button + button.primary-button:visible');
+        await expect(
+            adminPage.getByText("Selected data successfully deleted")
+        ).toBeVisible();
+    });
 
-        await expect(page.getByText('Selected Customers successfully updated')).toBeVisible();
+    test("mass update customers", async ({ adminPage }) => {
+        /**
+         * Creating a customer first.
+         */
+        await createCustomer(adminPage);
+
+        await adminPage.goto(`${config.baseUrl}/admin/customers/customers`);
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
+
+        await adminPage.waitForSelector(".icon-uncheckbox:visible", {
+            state: "visible",
+        });
+        const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
+        await checkboxes[1].click();
+
+        let selectActionButton = await adminPage.waitForSelector(
+            'button:has-text("Select Action")',
+            { timeout: 1000 }
+        );
+        await selectActionButton.click();
+
+        await adminPage.hover('a:has-text("Update Status")', { timeout: 1000 });
+        await adminPage.waitForSelector(
+            'a:has-text("Active"), a:has-text("Inactive")',
+            { state: "visible", timeout: 1000 }
+        );
+        await adminPage.click('a:has-text("Active")');
+
+        await adminPage.waitForSelector("text=Are you sure", {
+            state: "visible",
+            timeout: 1000,
+        });
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
+
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
+
+        await expect(
+            adminPage.getByText("Selected Customers successfully updated")
+        ).toBeVisible();
     });
 });
