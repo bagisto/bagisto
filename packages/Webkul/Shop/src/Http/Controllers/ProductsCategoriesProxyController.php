@@ -70,7 +70,7 @@ class ProductsCategoriesProxyController extends Controller
         if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
             $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
         }
-            
+
         $product = $this->productRepository
             ->setSearchEngine($searchEngine ?? 'database')
             ->findBySlug($slugOrURLKey);
