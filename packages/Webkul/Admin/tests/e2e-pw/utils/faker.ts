@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const usedNames = new Set();
 const usedEmails = new Set();
+const usedNumbers = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -137,8 +138,20 @@ export function generateEmail() {
     } while (usedEmails.has(email));
 
     usedEmails.add(email);
-
+    
     return email;
+}
+
+export function generatePhoneNumber() {
+    let phoneNumber;
+
+    do {
+        phoneNumber = Math.floor(6000000000 + Math.random() * 4000000000);
+    } while (usedNumbers.has(phoneNumber));
+
+    usedNumbers.add(phoneNumber);
+
+    return `${phoneNumber}`;
 }
 
 export function generateSlug(delimiter = "-") {

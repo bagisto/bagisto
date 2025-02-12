@@ -25,9 +25,9 @@ async function createCategory(adminPage) {
      */
     await adminPage.fill('input[name="position"]', '1');
     await adminPage.selectOption('select[name="display_mode"]', 'products_only');
-    await adminPage.click('label[for="status"]');
 
-    // Verify the toggle state.
+    // Clicking the status and verify the toggle state.
+    await adminPage.click('label[for="status"]');
     const toggleInput = await adminPage.locator('input[name="status"]');
     await expect(toggleInput).toBeChecked();
 
@@ -140,7 +140,7 @@ test.describe('category management', () => {
 
     test('should mass delete a categories', async ({ adminPage }) => {
         await createCategory(adminPage);
-        
+
         await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
         await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
 
