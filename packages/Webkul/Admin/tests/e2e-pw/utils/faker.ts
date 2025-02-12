@@ -137,6 +137,7 @@ export function generateEmail() {
     } while (usedEmails.has(email));
 
     usedEmails.add(email);
+
     return email;
 }
 
