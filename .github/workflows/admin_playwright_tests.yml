@@ -18,8 +18,8 @@ jobs:
         operating-systems: [ubuntu-latest]
         php-versions: ['8.3']
         node-version: ['22.13.1']
-        shard-index: [1,2,3,4,5,6]
-        shard-total: [6]
+        shard-index: [1]
+        shard-total: [1]
 
     name: Admin | Playwright Tests | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
 
