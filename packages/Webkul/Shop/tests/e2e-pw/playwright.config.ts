@@ -11,7 +11,7 @@ dotenv.config({ path: path.resolve(__dirname, "../../../../../.env") });
 export default defineConfig({
     testDir: "./tests",
 
-    timeout: 120 * 1000,
+    outputDir: "./test-results",
 
     fullyParallel: false,
 
@@ -24,6 +24,12 @@ export default defineConfig({
     reportSlowTests: null,
 
     reporter: "html",
+
+    use: {
+        screenshot: { mode: 'only-on-failure', fullPage: true },
+        video: 'retain-on-failure',
+        trace: 'retain-on-failure',
+    },
 
     projects: [
         {

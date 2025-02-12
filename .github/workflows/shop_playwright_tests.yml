@@ -5,11 +5,15 @@ on: [push, pull_request]
 permissions:
   contents: read
 
+env:
+  FORCE_COLOR: 1
+
 jobs:
   shop_playwright_test:
     runs-on: ${{ matrix.operating-systems }}
 
     strategy:
+      fail-fast: false
       matrix:
         operating-systems: [ubuntu-latest]
         php-versions: ['8.3']
@@ -63,7 +67,7 @@ jobs:
           sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
           sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
           sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
-          sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000/|" .env
+          sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000|" .env
           cat .env
 
       - name: Install Composer Dependencies
@@ -85,13 +89,13 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test --reporter=list --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/Shop
 
-      - name: Upload Playwright Report for All Tests
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-All-Tests
-          path: playwright-report/
-          retention-days: 30
+          name: test-results
+          path: packages/Webkul/Shop/tests/e2e-pw/test-results
+          retention-days: 1

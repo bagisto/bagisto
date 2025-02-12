@@ -1,6 +1,4 @@
 /node_modules
 /npm-debug.log
 /package-lock.json
-/playwright-report
 /resources/lang/vendor/shop/*
-/test-results

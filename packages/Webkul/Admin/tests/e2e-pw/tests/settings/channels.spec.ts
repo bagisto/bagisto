@@ -23,6 +23,9 @@ test.describe("channel management", () => {
         const name = generateName();
         const shortDescription = generateShortDescription();
 
+        // temporary fix
+        adminPage.waitForTimeout(2000);
+
         /**
          * General Section.
          */
