@@ -1,4 +1,4 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import {
     generateSKU,
     generateName,
@@ -24,7 +24,7 @@ async function createSimpleProduct(adminPage) {
     /**
      * Reaching to the create product page.
      */
-    await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
+    await adminPage.goto('admin/catalog/products');
     await adminPage.waitForSelector(
         'button.primary-button:has-text("Create Product")'
     );
@@ -138,7 +138,7 @@ test.describe("product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
+        await adminPage.goto('admin/catalog/products');
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
@@ -168,7 +168,7 @@ test.describe("product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
+        await adminPage.goto('admin/catalog/products');
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
@@ -212,7 +212,7 @@ test.describe("product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
+        await adminPage.goto('admin/catalog/products');
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")',
             { state: "visible" }

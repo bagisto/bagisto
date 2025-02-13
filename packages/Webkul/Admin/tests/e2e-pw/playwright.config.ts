@@ -37,6 +37,7 @@ export default defineConfig({
     ],
 
     use: {
+        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",

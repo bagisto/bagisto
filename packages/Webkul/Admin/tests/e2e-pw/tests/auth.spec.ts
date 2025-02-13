@@ -1,22 +1,27 @@
-import { test, expect, config } from "../setup";
+import { test, expect } from "../setup";
+
+const adminCredentials = {
+    email: "admin@example.com",
+    password: "admin123",
+};
 
 test("should be able to login", async ({ page }) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
+    await page.goto("admin/login");
     await page.getByPlaceholder("Email Address").click();
-    await page.getByPlaceholder("Email Address").fill(config.adminEmail);
+    await page.getByPlaceholder("Email Address").fill(adminCredentials.email);
     await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(config.adminPassword);
-    await page.getByLabel("Sign In").click();
+    await page.getByPlaceholder("Password").fill(adminCredentials.password);
+    await page.getByRole("button", { name: "Sign In" }).click();
 
     await expect(page.getByPlaceholder("Mega Search").first()).toBeVisible();
 });
 
 test("should be able to logout", async ({ page }) => {
-    await page.goto(`${config.baseUrl}/admin/login`);
+    await page.goto("admin/login");
     await page.getByPlaceholder("Email Address").click();
-    await page.getByPlaceholder("Email Address").fill(config.adminEmail);
+    await page.getByPlaceholder("Email Address").fill(adminCredentials.email);
     await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(config.adminPassword);
+    await page.getByPlaceholder("Password").fill(adminCredentials.password);
     await page.getByLabel("Sign In").click();
     await page.click("button:text('E')");
     await page.getByRole("link", { name: "Logout" }).click();

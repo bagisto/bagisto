@@ -1,9 +1,9 @@
-// import { test, expect, config } from "../../setup";
+// import { test, expect } from "../../setup";
 // import * as forms from "../../utils/form";
 
 // async function createUrlRewrite(adminPage) {
 //     await adminPage.goto(
-//         `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//         `admin/marketing/search-seo/url-rewrites`
 //     );
 
 //     await adminPage.click("div.primary-button:visible");
@@ -44,7 +44,7 @@
 
 // async function createSearchTerm(adminPage) {
 //     await adminPage.goto(
-//         `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//         `admin/marketing/search-seo/search-terms`
 //     );
 
 //     await adminPage.click("div.primary-button:visible");
@@ -90,7 +90,7 @@
 
 // async function createSearchSynonym(adminPage) {
 //     await adminPage.goto(
-//         `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//         `admin/marketing/search-seo/search-synonyms`
 //     );
 
 //     await adminPage.click("div.primary-button:visible");
@@ -119,7 +119,7 @@
 
 //     test("edit url rewrite", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//             `admin/marketing/search-seo/url-rewrites`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -170,7 +170,7 @@
 //         await createUrlRewrite(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//             `admin/marketing/search-seo/url-rewrites`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -196,7 +196,7 @@
 //         await createUrlRewrite(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/url-rewrites`
+//             `admin/marketing/search-seo/url-rewrites`
 //         );
 
 //         await adminPage.waitForSelector(".icon-uncheckbox");
@@ -233,7 +233,7 @@
 
 //     test("edit search term", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//             `admin/marketing/search-seo/search-terms`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -289,7 +289,7 @@
 //         await createSearchTerm(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//             `admin/marketing/search-seo/search-terms`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -315,7 +315,7 @@
 //         await createSearchTerm(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-terms`
+//             `admin/marketing/search-seo/search-terms`
 //         );
 
 //         await adminPage.waitForSelector(".icon-uncheckbox");
@@ -352,7 +352,7 @@
 
 //     test("edit search synonym", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//             `admin/marketing/search-seo/search-synonyms`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -386,7 +386,7 @@
 //         await createSearchSynonym(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//             `admin/marketing/search-seo/search-synonyms`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -412,7 +412,7 @@
 //         await createSearchSynonym(adminPage);
 
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/search-synonyms`
+//             `admin/marketing/search-seo/search-synonyms`
 //         );
 
 //         await adminPage.waitForSelector(".icon-uncheckbox");
@@ -445,7 +445,7 @@
 
 //     test("create sitemap", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//             `admin/marketing/search-seo/sitemaps`
 //         );
 
 //         await adminPage.click("div.primary-button:visible");
@@ -473,7 +473,7 @@
 
 //     test("edit sitemap", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//             `admin/marketing/search-seo/sitemaps`
 //         );
 
 //         await adminPage.waitForSelector(
@@ -509,7 +509,7 @@
 
 //     test("delete Sitemap", async ({ adminPage }) => {
 //         await adminPage.goto(
-//             `${config.baseUrl}/admin/marketing/search-seo/sitemaps`
+//             `admin/marketing/search-seo/sitemaps`
 //         );
 
 //         await adminPage.waitForSelector(

@@ -1,9 +1,9 @@
-// import { test, expect, config } from '../../setup';
+// import { test, expect } from '../../setup';
 // import  * as forms from '../../utils/form';
 
 // test.describe('user management', () => {
 //     test('create users', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
+//         await adminPage.goto('admin/settings/users');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -55,7 +55,7 @@
 //     });
 
 //     test('edit users', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
+//         await adminPage.goto('admin/settings/users');
 
 //         await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
@@ -111,7 +111,7 @@
 //     });
 
 //     test('delete Users', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/users`);
+//         await adminPage.goto('admin/settings/users');
 
 //         await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 

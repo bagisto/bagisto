@@ -1,4 +1,4 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import {
     generateName,
     generateSlug,
@@ -11,7 +11,7 @@ async function createChannel(adminPage) {
     /**
      * Reaching the create channel page.
      */
-    await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
+    await adminPage.goto('admin/settings/channels');
     await adminPage.waitForSelector(
         'a.primary-button:has-text("Create Channel")',
         { state: "visible" }
@@ -97,7 +97,7 @@ test.describe("channel management", () => {
         /**
          * Reaching the edit channel page.
          */
-        await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
+        await adminPage.goto('admin/settings/channels');
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
         const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
@@ -119,7 +119,7 @@ test.describe("channel management", () => {
          */
         await createChannel(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/settings/channels`);
+        await adminPage.goto('admin/settings/channels');
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
         const iconDelete = await adminPage.$$(
             "span.cursor-pointer.icon-delete"

@@ -1,4 +1,4 @@
-import { test, expect, config } from "../setup";
+import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
 import { generatePhoneNumber, generateEmail } from "../utils/faker";
 
@@ -166,7 +166,7 @@ test("should add wishlist to cart", async ({ page }) => {
         )
         .first()
         .click();
-    await page.goto(`${config.baseUrl}`);
+    await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.getByRole("button", { name: "Move To Cart" }).first().click();
@@ -187,7 +187,7 @@ test("should remove product from wishlist", async ({ page }) => {
         )
         .first()
         .click();
-    await page.goto(`${config.baseUrl}`);
+    await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.locator(".max-md\\:hidden > .flex").first().click();
@@ -203,7 +203,7 @@ test("should clear all wishlist", async ({ page }) => {
 
     await addWishlist(page);
 
-    await page.goto(`${config.baseUrl}`);
+    await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.getByText("Delete All", { exact: true }).click();

@@ -1,9 +1,9 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import { generateName, generateDescription } from "../../utils/faker";
 
 test.describe("role management", () => {
     test("create role", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/roles`);
+        await adminPage.goto('admin/settings/roles');
         await adminPage.click("a.primary-button:visible");
 
         await adminPage.selectOption("#permission_type", "all");
@@ -23,7 +23,7 @@ test.describe("role management", () => {
     });
 
     test("edit role", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/roles`);
+        await adminPage.goto('admin/settings/roles');
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
         const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
@@ -40,7 +40,7 @@ test.describe("role management", () => {
     });
 
     test("delete role", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/roles`);
+        await adminPage.goto('admin/settings/roles');
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
         const iconDelete = await adminPage.$$(

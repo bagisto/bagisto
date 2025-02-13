@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('currency management', () => {
     // test('create currency', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/currencies`);
+    //     await adminPage.goto('admin/settings/currencies');
 
     //     await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -39,7 +39,7 @@ test.describe('currency management', () => {
     // });
 
     // test('edit currency', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/currencies`);
+    //     await adminPage.goto('admin/settings/currencies');
 
     //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
@@ -77,7 +77,7 @@ test.describe('currency management', () => {
     // });
 
     // test('delete currency', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/currencies`);
+    //     await adminPage.goto('admin/settings/currencies');
 
     //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 

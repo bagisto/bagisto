@@ -1,4 +1,4 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import {
     generateFirstName,
     generateLastName,
@@ -8,7 +8,7 @@ import {
 import * as forms from "../../utils/form";
 
 async function createCustomer(adminPage) {
-    await adminPage.goto(`${config.baseUrl}/admin/customers`);
+    await adminPage.goto('admin/customers');
     await adminPage.waitForSelector("button.primary-button:visible", {
         state: "visible",
     });
@@ -44,7 +44,7 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -97,7 +97,7 @@ test.describe("customer management", () => {
     });
 
     test("Add address", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -138,7 +138,7 @@ test.describe("customer management", () => {
     });
 
     test("edit address", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -185,7 +185,7 @@ test.describe("customer management", () => {
     });
 
     // test('set default address', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/customers`);
+    //     await adminPage.goto('admin/customers');
     //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
     //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
@@ -206,7 +206,7 @@ test.describe("customer management", () => {
     // });
 
     test("delete address", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -234,7 +234,7 @@ test.describe("customer management", () => {
     });
 
     // test('add note', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/customers`);
+    //     await adminPage.goto('admin/customers');
     //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
     //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
@@ -256,7 +256,7 @@ test.describe("customer management", () => {
     // test('delete account', async ({ adminPage }) => {
     //     await createCustomer(adminPage);
 
-    //     await adminPage.goto(`${config.baseUrl}/admin/customers`);
+    //     await adminPage.goto('admin/customers');
     //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
     //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
@@ -270,7 +270,7 @@ test.describe("customer management", () => {
     // });
 
     test("create order", async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -298,7 +298,7 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -343,7 +343,7 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/customers`);
+        await adminPage.goto('admin/customers');
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });

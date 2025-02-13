@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('tax management', () => {
     // test('create tax rate', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
+    //     await adminPage.goto('admin/settings/taxes/rates');
 
     //     await adminPage.click('a.primary-button:visible');
 
@@ -61,7 +61,7 @@ test.describe('tax management', () => {
     // });
 
     // test('edit tax rate', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
+    //     await adminPage.goto('admin/settings/taxes/rates');
 
     //     await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
@@ -115,7 +115,7 @@ test.describe('tax management', () => {
     // });
 
     // test('delete tax rate', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
+    //     await adminPage.goto('admin/settings/taxes/rates');
 
     //     await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 
@@ -129,7 +129,7 @@ test.describe('tax management', () => {
     // });
 
     // test('create tax category', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    //     await adminPage.goto('admin/settings/taxes/categories');
 
     //     await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -162,7 +162,7 @@ test.describe('tax management', () => {
     // });
 
     // test('edit tax category', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    //     await adminPage.goto('admin/settings/taxes/categories');
 
     //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
@@ -199,7 +199,7 @@ test.describe('tax management', () => {
     // });
 
     // test('delete tax category', async ({ adminPage }) => {
-    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+    //     await adminPage.goto('admin/settings/taxes/categories');
 
     //     await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
