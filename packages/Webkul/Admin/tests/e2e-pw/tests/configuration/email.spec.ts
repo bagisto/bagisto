@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('email configuration', () => {
     test('Settings of Email', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/emails/configure`);
+        await adminPage.goto('admin/configuration/emails/configure');
 
         await adminPage.click('input[type="text"].rounded-md:visible');
 
@@ -27,7 +27,7 @@ test.describe('email configuration', () => {
     });
 
     test('Notifications of Email', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/emails/general`);
+        await adminPage.goto('admin/configuration/emails/general');
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 

@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('customer configuration', () => {
     test('Address of Customer', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/customer/address`);
+        await adminPage.goto('admin/configuration/customer/address');
 
         let i = Math.floor(Math.random() * 10) + 1;
 
@@ -17,7 +17,7 @@ test.describe('customer configuration', () => {
     });
 
     test('Captcha of Customer', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/customer/captcha`);
+        await adminPage.goto('admin/configuration/customer/captcha');
 
         let i = Math.floor(Math.random() * 10) + 1;
 
@@ -39,7 +39,7 @@ test.describe('customer configuration', () => {
     });
 
     test('Settings of Customer', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/customer/settings`);
+        await adminPage.goto('admin/configuration/customer/settings');
 
         const selects = await adminPage.$$('select.custom-select');
 

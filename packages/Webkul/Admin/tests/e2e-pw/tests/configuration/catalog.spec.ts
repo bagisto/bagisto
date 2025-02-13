@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('catalog configuration', () => {
     test('products of catalog', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/catalog/products`);
+        await adminPage.goto('admin/configuration/catalog/products');
 
         const selects = await adminPage.$$('select.custom-select');
 
@@ -73,7 +73,7 @@ test.describe('catalog configuration', () => {
     });
 
     test('rich snippets of catalog', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/catalog/rich_snippets`);
+        await adminPage.goto('admin/configuration/catalog/rich_snippets');
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
@@ -81,7 +81,7 @@ test.describe('catalog configuration', () => {
     });
 
     test('inventory of catalog', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/catalog/inventory`);
+        await adminPage.goto('admin/configuration/catalog/inventory');
 
         let i = Math.floor(Math.random() * 10) + 1;
 

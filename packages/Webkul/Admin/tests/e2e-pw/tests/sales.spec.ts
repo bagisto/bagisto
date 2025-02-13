@@ -1,10 +1,10 @@
-// import { test, expect, config } from '../setup';
+// import { test, expect } from '../setup';
 // import  * as forms from '../utils/form';
 // import address from '../utils/address';
 
 // test.describe('sales management', () => {
 //     test('create orders', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.click('button.primary-button:visible');
 
@@ -210,7 +210,7 @@
 //     });
 
 //     test('comment on order', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -233,7 +233,7 @@
 //     });
 
 //     test('reorder', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -248,7 +248,7 @@
 //     });
 
 //     test('create invoice', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -279,7 +279,7 @@
 //     });
 
 //     test('create shipment', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -306,7 +306,7 @@
 //     });
 
 //     test('create refund', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -348,7 +348,7 @@
 //     });
 
 //     test('cancel order', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/orders`);
+//         await adminPage.goto('admin/sales/orders');
 
 //         await adminPage.waitForSelector('a > span.icon-sort-right.cursor-pointer.text-2xl');
 
@@ -364,7 +364,7 @@
 //     });
 
 //     test('mail invoice', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
+//         await adminPage.goto('admin/sales/invoices');
 
 //         await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 
@@ -383,7 +383,7 @@
 //     });
 
 //     test('print invoice', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/sales/invoices`);
+//         await adminPage.goto('admin/sales/invoices');
 
 //         await adminPage.waitForSelector('.cursor-pointer.rounded-md.text-2xl.transition-all.icon-view');
 

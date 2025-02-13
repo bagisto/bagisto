@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('locale management', () => {
     test('create locale', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/locales`);
+        await adminPage.goto('admin/settings/locales');
 
         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -39,7 +39,7 @@ test.describe('locale management', () => {
     });
 
     test('edit locale', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/locales`);
+        await adminPage.goto('admin/settings/locales');
 
         await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 
@@ -71,7 +71,7 @@ test.describe('locale management', () => {
     });
 
     test('delete locale', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/locales`);
+        await adminPage.goto('admin/settings/locales');
 
         await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
 

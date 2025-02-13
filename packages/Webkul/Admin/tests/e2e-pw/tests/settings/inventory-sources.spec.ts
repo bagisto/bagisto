@@ -1,4 +1,4 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import {
     generateName,
     generateDescription,
@@ -14,7 +14,7 @@ test.describe("inventory source management", () => {
          * Navigate to the create inventory source page.
          */
         await adminPage.goto(
-            `${config.baseUrl}/admin/settings/inventory-sources`
+            `admin/settings/inventory-sources`
         );
         await adminPage
             .getByRole("link", { name: "Create Inventory Source" })
@@ -90,7 +90,7 @@ test.describe("inventory source management", () => {
          * Navigate to the inventory source listing page.
          */
         await adminPage.goto(
-            `${config.baseUrl}/admin/settings/inventory-sources`
+            `admin/settings/inventory-sources`
         );
         await adminPage
             .getByRole("link", { name: "Create Inventory Source" })
@@ -129,7 +129,7 @@ test.describe("inventory source management", () => {
          * Navigate to the inventory source listing page.
          */
         await adminPage.goto(
-            `${config.baseUrl}/admin/settings/inventory-sources`
+            `admin/settings/inventory-sources`
         );
         await adminPage
             .getByRole("link", { name: "Create Inventory Source" })

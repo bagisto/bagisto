@@ -1,4 +1,4 @@
-import { test, expect, config } from "../../setup";
+import { test, expect } from "../../setup";
 import { generateName, generateDescription } from "../../utils/faker";
 import * as forms from "../../utils/form";
 
@@ -7,7 +7,7 @@ async function createTemplate(adminPage) {
      * Reaching the create template page.
      */
     await adminPage.goto(
-        `${config.baseUrl}/admin/marketing/communications/email-templates`
+        `admin/marketing/communications/email-templates`
     );
     await adminPage.click(
         'div.primary-button:visible:has-text("Create Template")'
@@ -53,7 +53,7 @@ test.describe("communication management", () => {
         await createTemplate(adminPage);
 
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/email-templates`
+            `admin/marketing/communications/email-templates`
         );
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
@@ -78,7 +78,7 @@ test.describe("communication management", () => {
         await createTemplate(adminPage);
 
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/email-templates`
+            `admin/marketing/communications/email-templates`
         );
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
@@ -100,7 +100,7 @@ test.describe("communication management", () => {
 
     test("create event", async ({ adminPage }) => {
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/events`
+            `admin/marketing/communications/events`
         );
 
         await adminPage.click("div.primary-button:visible");
@@ -128,7 +128,7 @@ test.describe("communication management", () => {
 
     test("edit event", async ({ adminPage }) => {
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/events`
+            `admin/marketing/communications/events`
         );
 
         await adminPage.waitForSelector(
@@ -187,7 +187,7 @@ test.describe("communication management", () => {
 
     test("delete event", async ({ adminPage }) => {
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/events`
+            `admin/marketing/communications/events`
         );
 
         await adminPage.waitForSelector(
@@ -216,7 +216,7 @@ test.describe("communication management", () => {
         await createTemplate(adminPage);
 
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/events`
+            `admin/marketing/communications/events`
         );
 
         await adminPage.click("div.primary-button:visible");
@@ -242,7 +242,7 @@ test.describe("communication management", () => {
         ).toBeVisible();
 
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/campaigns`
+            `admin/marketing/communications/campaigns`
         );
 
         await adminPage.click("div.primary-button:visible");
@@ -289,7 +289,7 @@ test.describe("communication management", () => {
 
     test("edit campaign", async ({ adminPage }) => {
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/campaigns`
+            `admin/marketing/communications/campaigns`
         );
 
         await adminPage.waitForSelector(
@@ -344,7 +344,7 @@ test.describe("communication management", () => {
 
     test("delete campaign", async ({ adminPage }) => {
         await adminPage.goto(
-            `${config.baseUrl}/admin/marketing/communications/campaigns`
+            `admin/marketing/communications/campaigns`
         );
 
         await adminPage.waitForSelector(
@@ -368,7 +368,7 @@ test.describe("communication management", () => {
 
     // test("edit newsletter subscriber", async ({ adminPage }) => {
     //     await adminPage.goto(
-    //         `${config.baseUrl}/admin/marketing/communications/subscribers`
+    //         `admin/marketing/communications/subscribers`
     //     );
 
     //     const iconEdit = await adminPage.$$(
@@ -398,7 +398,7 @@ test.describe("communication management", () => {
 
     // test("delete newsletter subscriber", async ({ adminPage }) => {
     //     await adminPage.goto(
-    //         `${config.baseUrl}/admin/marketing/communications/subscribers`
+    //         `admin/marketing/communications/subscribers`
     //     );
 
     //     await adminPage.waitForSelector(

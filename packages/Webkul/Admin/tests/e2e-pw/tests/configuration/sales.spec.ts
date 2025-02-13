@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('sales configuration', () => {
     test('shipping settings of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/shipping`);
+        await adminPage.goto('admin/configuration/sales/shipping');
 
         await adminPage.click('select[name="sales[shipping][origin][country]"]');
 
@@ -53,7 +53,7 @@ test.describe('sales configuration', () => {
     });
 
     test('shipping methods of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/carriers`);
+        await adminPage.goto('admin/configuration/sales/carriers');
 
         const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
@@ -84,7 +84,7 @@ test.describe('sales configuration', () => {
     });
 
     test('payment methods of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/payment_methods`);
+        await adminPage.goto('admin/configuration/sales/payment_methods');
 
         const files = await adminPage.$$('input[type="file"]');
 
@@ -138,7 +138,7 @@ test.describe('sales configuration', () => {
     });
 
     test('order settings of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/order_settings`);
+        await adminPage.goto('admin/configuration/sales/order_settings');
 
         const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
@@ -159,7 +159,7 @@ test.describe('sales configuration', () => {
     });
 
     test('invoice settings of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/invoice_settings`);
+        await adminPage.goto('admin/configuration/sales/invoice_settings');
 
         const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
@@ -207,7 +207,7 @@ test.describe('sales configuration', () => {
     });
 
     test('taxes of sales', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/taxes`);
+        await adminPage.goto('admin/configuration/sales/taxes');
 
         await adminPage.click('select.custom-select');
 
@@ -257,7 +257,7 @@ test.describe('sales configuration', () => {
     });
 
     test('checkout of customer', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/sales/checkout`);
+        await adminPage.goto('admin/configuration/sales/checkout');
 
         const select = await adminPage.$('select.custom-select');
 
