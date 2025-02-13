@@ -3,7 +3,7 @@ import  * as forms from '../../utils/form';
 
 test.describe('email configuration', () => {
     test('Settings of Email', async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/emails/settings');
+        await adminPage.goto('admin/configuration/emails/configure');
 
         await adminPage.click('input[type="text"].rounded-md:visible');
 
