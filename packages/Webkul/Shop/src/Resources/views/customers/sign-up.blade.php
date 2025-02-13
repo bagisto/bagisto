@@ -181,7 +181,7 @@
 
                     <!-- Subscribed Button -->
                     @if (core()->getConfigData('customer.settings.create_new_account_options.news_letter'))
-                        <div class="flex select-none items-center gap-1.5">
+                        <div class="mb-5 flex select-none items-center gap-1.5">
                             <input
                                 type="checkbox"
                                 name="is_subscribed"
@@ -190,7 +190,7 @@
                             />
 
                             <label
-                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
+                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                 for="is-subscribed"
                             ></label>
 
@@ -204,6 +204,40 @@
                     @endif
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.newsletter_subscription.after') !!}
+
+                    @if(
+                        core()->getConfigData('general.gdpr.settings.enabled')
+                        && core()->getConfigData('general.gdpr.agreement.enabled')
+                    )
+                        <div class="mb-2 flex select-none items-center gap-1.5">
+                            <x-shop::form.control-group.control
+                                type="checkbox"
+                                name="agreement"
+                                id="agreement"
+                                value="0"
+                                rules="required"
+                                for="agreement"
+                            />
+
+                            <label
+                                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm"
+                                for="agreement"
+                            >
+                                {{ core()->getConfigData('general.gdpr.agreement.agreement_label') }}
+                            </label>
+
+                            @if (core()->getConfigData('general.gdpr.agreement.agreement_content'))
+                                <span
+                                    class="cursor-pointer text-base text-navyBlue max-sm:text-sm"
+                                    @click="$refs.termsModal.open()"
+                                >
+                                    @lang('shop::app.customers.signup-form.click-here')
+                                </span>
+                            @endif
+                        </div>
+
+                        <x-shop::form.control-group.error control-name="agreement" />
+                    @endif
 
                     <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:gap-5">
                         <!-- Save Button -->
@@ -243,4 +277,18 @@
     @push('scripts')
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
     @endpush
+
+    <x-shop::modal ref="termsModal">
+        <x-slot:toggle></x-slot>
+
+        <x-slot:header class="!p-5">
+            <p>@lang('shop::app.customers.signup-form.terms-conditions')</p>
+        </x-slot>
+
+        <x-slot:content class="!p-5">
+            <div class="max-h-[500px] overflow-auto">
+                {!! core()->getConfigData('general.gdpr.agreement.agreement_content') !!}
+            </div>
+        </x-slot>
+    </x-admin::modal>
 </x-shop::layouts>

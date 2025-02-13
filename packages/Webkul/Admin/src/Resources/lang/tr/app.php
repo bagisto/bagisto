@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR Talebi',
+
+                'datagrid' => [
+                    'completed'     => 'Tamamlandı',
+                    'created-at'    => 'Oluşturulma Tarihi',
+                    'customer-name' => 'Müşteri Adı',
+                    'declined'      => 'Reddedildi',
+                    'delete'        => 'Sil',
+                    'edit'          => 'Düzenle',
+                    'id'            => 'ID',
+                    'message'       => 'Mesaj',
+                    'pending'       => 'Beklemede',
+                    'processing'    => 'İşleniyor',
+                    'status'        => 'Durum',
+                    'type'          => 'Tür',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Tamamlandı',
+                    'declined'   => 'Reddedildi',
+                    'pending'    => 'Beklemede',
+                    'processing' => 'İşleniyor',
+                    'status'     => 'Durum',
+                    'title'      => 'GDPR Veri Talebini Düzenle',
+                    'type'       => 'Tür',
+                    'message'    => 'Mesaj',
+                    'save-btn'   => 'Kaydet',
+                ],
+
+                'update-success'              => 'Veri Talebi başarıyla güncellendi ve Müşteriye E-posta Gönderildi.',
+                'delete-success'              => 'Veri Talebi başarıyla silindi.',
+                'attribute-reason-error'      => 'Silinemiyor.',
+                'update-success-unsent-email' => 'Veri Talebi başarıyla güncellendi ancak Müşteriye E-posta gönderilemedi.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Tarih',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'GDPR Ayarları',
+                    'info'    => 'GDPR Ayarları',
+                    'enabled' => 'Etkin',
+                ],
+
+                'agreement' => [
+                    'title'          => 'GDPR Anlaşması',
+                    'info'           => 'GDPR Anlaşması',
+                    'enable'         => 'Müşteri Anlaşmasını Etkinleştir',
+                    'checkbox-label' => 'Anlaşma Onay Kutusu Etiketi',
+                    'content'        => 'Anlaşma İçeriği',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Çerez Mesajı Ayarları',
+                    'info'         => 'Çerez Mesajı Ayarları',
+                    'enable'       => 'Çerez Bildirimini Etkinleştir',
+                    'position'     => 'Çerez Bloğu Görüntüleme Konumu',
+                    'bottom-left'  => 'Sol Alt',
+                    'bottom-right' => 'Sağ Alt',
+                    'identifier'   => 'Statik Blok Tanımlayıcısı',
+                    'description'  => 'Açıklama',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'Çerez İzni Tercihiniz',
+                    'info'                   => 'Çerez İzni Tercihiniz',
+                    'strictly-necessary'     => 'Kesinlikle Gerekli',
+                    'basic-interaction'      => 'Temel Etkileşimler ve İşlevsellikler',
+                    'experience-enhancement' => 'Deneyim Geliştirmeleri',
+                    'measurement'            => 'Ölçümler',
+                    'targeting-advertising'  => 'Hedefleme ve Reklam',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Katalog',
                 'title' => 'Katalog',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'İşlemler',
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
+                'gdpr-data-requests'       => 'GDPR Veri Talepleri',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Aramıza yeni kaydolan yeni müşterimiz :customer_name `e sıcak bir karşılama dileriz!',
                 'subject'     => 'Yeni Müşteri Kaydı',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'GDPR talebinizin durumu',
         ],
 
         'orders' => [

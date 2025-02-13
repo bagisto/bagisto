@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'طلب GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'مكتمل',
+                    'created-at'    => 'تم الإنشاء في',
+                    'customer-name' => 'اسم العميل',
+                    'declined'      => 'مرفوض',
+                    'delete'        => 'حذف',
+                    'edit'          => 'تعديل',
+                    'id'            => 'المعرف',
+                    'message'       => 'الرسالة',
+                    'pending'       => 'قيد الانتظار',
+                    'processing'    => 'قيد المعالجة',
+                    'status'        => 'الحالة',
+                    'type'          => 'النوع',
+                ],
+
+                'modal' => [
+                    'completed'  => 'مكتمل',
+                    'declined'   => 'مرفوض',
+                    'pending'    => 'قيد الانتظار',
+                    'processing' => 'قيد المعالجة',
+                    'status'     => 'الحالة',
+                    'title'      => 'تعديل طلب بيانات GDPR',
+                    'type'       => 'النوع',
+                    'message'    => 'الرسالة',
+                    'save-btn'   => 'حفظ',
+                ],
+
+                'update-success'              => 'تم تحديث طلب البيانات بنجاح وتم إرسال البريد الإلكتروني إلى العميل.',
+                'delete-success'              => 'تم حذف طلب البيانات بنجاح.',
+                'attribute-reason-error'      => 'غير قادر على الحذف.',
+                'update-success-unsent-email' => 'تم تحديث طلب البيانات بنجاح ولكن لم يتم إرسال البريد الإلكتروني إلى العميل.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'التاريخ',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'إعدادات GDPR',
+                    'info'    => 'إعدادات GDPR',
+                    'enabled' => 'ممكّن',
+                ],
+
+                'agreement' => [
+                    'title'          => 'اتفاقية GDPR',
+                    'info'           => 'اتفاقية GDPR',
+                    'enable'         => 'تمكين اتفاقية العميل',
+                    'checkbox-label' => 'تسمية خانة اختيار الاتفاقية',
+                    'content'        => 'محتوى الاتفاقية',
+                ],
+
+                'cookie' => [
+                    'title'        => 'إعدادات رسالة الكوكيز',
+                    'info'         => 'إعدادات رسالة الكوكيز',
+                    'enable'       => 'تمكين إشعار الكوكيز',
+                    'position'     => 'موضع عرض كتلة الكوكيز',
+                    'bottom-left'  => 'أسفل اليسار',
+                    'bottom-right' => 'أسفل اليمين',
+                    'identifier'   => 'معرف الكتلة الثابتة',
+                    'description'  => 'الوصف',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'تفضيل موافقة الكوكيز الخاصة بك',
+                    'info'                   => 'تفضيل موافقة الكوكيز الخاصة بك',
+                    'strictly-necessary'     => 'ضرورية للغاية',
+                    'basic-interaction'      => 'التفاعلات الأساسية والوظائف',
+                    'experience-enhancement' => 'تحسينات التجربة',
+                    'measurement'            => 'القياسات',
+                    'targeting-advertising'  => 'الاستهداف والإعلانات',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'الفهرس',
                 'title' => 'الفهرس',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'المعاملات',
                 'url-rewrites'             => 'إعادة كتابة عناوين URL',
                 'users'                    => 'المستخدمين',
+                'gdpr-data-requests'       => 'طلبات بيانات GDPR',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'نرحب ترحيبًا حارًا بالعميل الجديد، :customer_name الذي قام بالتسجيل معنا للتو!',
                 'subject'     => 'تسجيل العملاء الجدد',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'حالة طلب GDPR الخاص بك',
         ],
 
         'orders' => [

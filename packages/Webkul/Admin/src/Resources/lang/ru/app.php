@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'Запросы GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Завершено',
+                    'created-at'    => 'Создано',
+                    'customer-name' => 'Имя клиента',
+                    'declined'      => 'Отклонено',
+                    'delete'        => 'Удалить',
+                    'edit'          => 'Редактировать',
+                    'id'            => 'ID',
+                    'message'       => 'Сообщение',
+                    'pending'       => 'В ожидании',
+                    'processing'    => 'Обработка',
+                    'status'        => 'Статус',
+                    'type'          => 'Тип',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Завершено',
+                    'declined'   => 'Отклонено',
+                    'pending'    => 'В ожидании',
+                    'processing' => 'Обработка',
+                    'status'     => 'Статус',
+                    'title'      => 'Редактировать запрос данных GDPR',
+                    'type'       => 'Тип',
+                    'message'    => 'Сообщение',
+                    'save-btn'   => 'Сохранить',
+                ],
+
+                'update-success'              => 'Запрос данных успешно обновлен и письмо отправлено клиенту.',
+                'delete-success'              => 'Запрос данных успешно удален.',
+                'attribute-reason-error'      => 'Невозможно удалить.',
+                'update-success-unsent-email' => 'Запрос данных успешно обновлен, но письмо не отправлено клиенту.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Дата',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'Настройки GDPR',
+                    'info'    => 'Настройки GDPR',
+                    'enabled' => 'Включено',
+                ],
+
+                'agreement' => [
+                    'title'          => 'Соглашение GDPR',
+                    'info'           => 'Соглашение GDPR',
+                    'enable'         => 'Включить соглашение с клиентом',
+                    'checkbox-label' => 'Метка флажка соглашения',
+                    'content'        => 'Содержание соглашения',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Настройки сообщения о файлах cookie',
+                    'info'         => 'Настройки сообщения о файлах cookie',
+                    'enable'       => 'Включить уведомление о файлах cookie',
+                    'position'     => 'Позиция отображения блока cookie',
+                    'bottom-left'  => 'Снизу слева',
+                    'bottom-right' => 'Снизу справа',
+                    'identifier'   => 'Идентификатор статического блока',
+                    'description'  => 'Описание',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'Ваши предпочтения в отношении файлов cookie',
+                    'info'                   => 'Ваши предпочтения в отношении файлов cookie',
+                    'strictly-necessary'     => 'Строго необходимые',
+                    'basic-interaction'      => 'Основные взаимодействия и функциональность',
+                    'experience-enhancement' => 'Улучшение опыта',
+                    'measurement'            => 'Измерения',
+                    'targeting-advertising'  => 'Таргетинг и реклама',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Каталог',
                 'title' => 'Каталог',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'Транзакции',
                 'url-rewrites'             => 'Перезапись URL',
                 'users'                    => 'Пользователи',
+                'gdpr-data-requests'       => 'Запросы данных GDPR',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Мы тепло приветствуем нового клиента :customer_name, который только что зарегистрировался у нас!',
                 'subject'     => 'Регистрация нового клиента',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'Статус вашего запроса GDPR',
         ],
 
         'orders' => [

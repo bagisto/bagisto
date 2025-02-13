@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Heeft u al een account?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registreren',
+            'click-here'                  => 'Klik Hier',
             'confirm-pass'                => 'Bevestig Wachtwoord',
             'email'                       => 'E-mail',
             'first-name'                  => 'Voornaam',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Account succesvol aangemaakt.',
             'success-verify'              => 'Account succesvol aangemaakt, er is een e-mail verzonden ter verificatie.',
             'success-verify-email-unsent' => 'Account succesvol aangemaakt, maar verificatie-e-mail niet verzonden.',
+            'terms-conditions'            => 'Algemene Voorwaarden',
             'verification-not-sent'       => 'Fout! Probleem bij het verzenden van de verificatie-e-mail, probeer het later opnieuw.',
             'verification-sent'           => 'Verificatie e-mail verzonden',
             'verified'                    => 'Uw account is geverifieerd, probeer nu in te loggen.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'Item succesvol toegevoegd aan verlanglijst',
                 'title'              => 'Verlanglijst',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'Voltooid',
+                'date'                        => 'Datum',
+                'declined'                    => 'Afgewezen',
+                'id'                          => 'Id',
+                'message'                     => 'Bericht',
+                'pending'                     => 'In afwachting',
+                'processing'                  => 'Verwerken',
+                'status'                      => 'Status',
+                'success-verify'              => 'Succes! Verificatie-e-mail is verzonden.',
+                'success-verify-email-unsent' => 'Succes! Verificatie-e-mail is niet verzonden.',
+                'type'                        => 'Type',
+                'unable-to-sent'              => 'Kan e-mail niet verzenden.',
+
+                'index'   => [
+                    'create-btn' => 'Verzoek Aanmaken',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR Gegevensverzoeken',
+
+                    'modal' => [
+                        'message' => 'Bericht',
+                        'save'    => 'Opslaan',
+                        'title'   => 'Nieuw Verzoek Aanmaken',
+
+                        'type'    => [
+                            'choose' => 'Kiezen',
+                            'delete' => 'Verwijderen',
+                            'title'  => 'Type',
+                            'update' => 'Bijwerken',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Standaard Winkelweergave',
+
+                    'account-info' => [
+                        'dob'          => 'Geboortedatum',
+                        'email'        => 'E-mail',
+                        'first-name'   => 'Voornaam',
+                        'gender'       => 'Geslacht',
+                        'last-name'    => 'Achternaam',
+                        'phone'        => 'Telefoon',
+                        'title'        => 'Accountinformatie',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Adres',
+                        'address1'   => 'Adres 1',
+                        'address2'   => 'Adres 2',
+                        'city'       => 'Stad',
+                        'company'    => 'Bedrijf',
+                        'country'    => 'Land',
+                        'first-name' => 'Voornaam',
+                        'last-name'  => 'Achternaam',
+                        'phone'      => 'Telefoon',
+                        'postcode'   => 'Postcode',
+                        'state'      => 'Provincie',
+                        'title'      => 'Adresinformatie',
+                        'vat-id'     => 'BTW-nummer',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Bedrag',
+                        'order-id'     => 'Bestel-ID',
+                        'product-name' => 'Productnaam',
+                        'qty'          => 'Hoeveelheid',
+                        'shipping'     => 'Verzending',
+                        'sku'          => 'Artikelnummer',
+                        'status'       => 'Status',
+                        'title'        => 'Bestelinformatie',
+                        'type'         => 'Type',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'Abonneer op de nieuwsbrief',
                 'subscribe-stay-touch'   => 'Abonneer om in contact te blijven.',
                 'whats-new'              => 'Wat is nieuw',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Privacybeleid',
+                    'reject'                   => 'Weigeren',
+                    'accept'                   => 'Accepteren',
+                    'learn-more-and-customize' => 'Meer informatie en aanpassen',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Uw cookievoorkeuren',
+                    'save-and-continue'                      => 'Opslaan en doorgaan',
+                    'strictly-necessary'                     => 'Strikt noodzakelijk',
+                    'basic-interactions-and-functionalities' => 'Basisinteracties en functionaliteiten',
+                    'experience-enhancement'                 => 'Ervaring verbetering',
+                    'measurement'                            => 'Meting',
+                    'targeting-and-advertising'              => 'Targeting en adverteren',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'Adres',
         'downloadable-products' => 'Downloadbare Producten',
+        'gdpr-request'          => 'GDPR Verzoeken',
         'my-account'            => 'Mijn Account',
         'orders'                => 'Bestellingen',
         'profile'               => 'Profiel',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'Welkom bij onze nieuwsbrief!',
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Nieuw Verzoek Voor Gegevensverwijdering',
+                'new-update-request' => 'Nieuw Verzoek Voor Gegevensbijwerking',
+
+                'new-request' => [
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Verzoekstatus : ',
+                    'request-type'   => 'Verzoektype : ',
+                    'summary'        => 'Samenvatting van Verzoek',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Verzoekstatus : ',
+                    'request-type'   => 'Verzoektype : ',
+                    'summary'        => 'Samenvatting van Verwijderverzoek',
+                ],
+
+                'update-request' => [
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Verzoekstatus : ',
+                ],
             ],
         ],
 

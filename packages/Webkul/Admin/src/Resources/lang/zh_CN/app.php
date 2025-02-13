@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR 请求',
+
+                'datagrid' => [
+                    'completed'     => '已完成',
+                    'created-at'    => '创建时间',
+                    'customer-name' => '客户名称',
+                    'declined'      => '已拒绝',
+                    'delete'        => '删除',
+                    'edit'          => '编辑',
+                    'id'            => 'ID',
+                    'message'       => '消息',
+                    'pending'       => '待处理',
+                    'processing'    => '处理中',
+                    'status'        => '状态',
+                    'type'          => '类型',
+                ],
+
+                'modal' => [
+                    'completed'  => '已完成',
+                    'declined'   => '已拒绝',
+                    'pending'    => '待处理',
+                    'processing' => '处理中',
+                    'status'     => '状态',
+                    'title'      => '编辑 GDPR 数据请求',
+                    'type'       => '类型',
+                    'message'    => '消息',
+                    'save-btn'   => '保存',
+                ],
+
+                'update-success'              => '数据请求更新成功并已发送邮件给客户。',
+                'delete-success'              => '数据请求删除成功。',
+                'attribute-reason-error'      => '无法删除。',
+                'update-success-unsent-email' => '数据请求更新成功但邮件未发送给客户。',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => '日期',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'GDPR 设置',
+                    'info'    => 'GDPR 设置',
+                    'enabled' => '启用',
+                ],
+
+                'agreement' => [
+                    'title'          => 'GDPR 协议',
+                    'info'           => 'GDPR 协议',
+                    'enable'         => '启用客户协议',
+                    'checkbox-label' => '协议复选框标签',
+                    'content'        => '协议内容',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Cookie 消息设置',
+                    'info'         => 'Cookie 消息设置',
+                    'enable'       => '启用 Cookie 通知',
+                    'position'     => 'Cookie 块显示位置',
+                    'bottom-left'  => '左下角',
+                    'bottom-right' => '右下角',
+                    'identifier'   => '静态块标识符',
+                    'description'  => '描述',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => '您的 Cookie 同意偏好',
+                    'info'                   => '您的 Cookie 同意偏好',
+                    'strictly-necessary'     => '严格必要',
+                    'basic-interaction'      => '基本交互和功能',
+                    'experience-enhancement' => '体验增强',
+                    'measurement'            => '测量',
+                    'targeting-advertising'  => '目标广告',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => '目录',
                 'title' => '目录',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => '交易',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
+                'gdpr-data-requests'       => 'GDPR 数据请求',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => '我们热烈欢迎刚刚在我们这里注册的新客户：customer_name！',
                 'subject'     => '新客户注册',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => '您的 GDPR 请求状态',
         ],
 
         'orders' => [

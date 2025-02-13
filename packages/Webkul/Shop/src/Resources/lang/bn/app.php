@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'ইতিমধ্যে একটি অ্যাকাউন্ট আছে?',
             'bagisto'                     => 'বাগিস্তো',
             'button-title'                => 'রেজিস্টার করুন',
+            'click-here'                  => 'এখানে ক্লিক করুন',
             'confirm-pass'                => 'পাসওয়ার্ড নিশ্চিত করুন',
             'email'                       => 'ইমেইল',
             'first-name'                  => 'প্রথম নাম',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।',
             'success-verify'              => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে, একটি যাচাই ইমেইল পাঠানো হয়েছে।',
             'success-verify-email-unsent' => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে, কিন্তু যাচাই ইমেইল পাঠানো হয়নি।',
+            'terms-conditions'            => 'শর্তাবলী',
             'verification-not-sent'       => 'ত্রুটি! যাচাই ইমেইল পাঠানোর সময় সমস্যা, দয়া করে পরে আবার চেষ্টা করুন।',
             'verification-sent'           => 'যাচাই ইমেইল পাঠানো হয়েছে',
             'verified'                    => 'আপনার অ্যাকাউন্ট যাচাই করা হয়েছে, এখন লগইন চেষ্টা করুন।',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'আইটেম সফলভাবে ইচ্ছা সূচিতে যুক্ত হয়েছে',
                 'title'              => 'ইচ্ছেসূচি',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'সম্পন্ন',
+                'date'                        => 'তারিখ',
+                'declined'                    => 'প্রত্যাখ্যাত',
+                'id'                          => 'আইডি',
+                'message'                     => 'বার্তা',
+                'pending'                     => 'বিচারাধীন',
+                'processing'                  => 'প্রক্রিয়াধীন',
+                'status'                      => 'অবস্থা',
+                'success-verify'              => 'সফল! যাচাইকরণ ইমেইল পাঠানো হয়েছে।',
+                'success-verify-email-unsent' => 'সফল! যাচাইকরণ ইমেইল পাঠানো হয়নি।',
+                'type'                        => 'ধরন',
+                'unable-to-sent'              => 'ইমেইল পাঠানো সম্ভব নয়।',
+
+                'index'   => [
+                    'create-btn' => 'অনুরোধ তৈরি করুন',
+                    'html'       => 'এইচটিএমএল',
+                    'pdf'        => 'পিডিএফ',
+                    'title'      => 'জিডিপিআর ডেটা অনুরোধ',
+
+                    'modal' => [
+                        'message' => 'বার্তা',
+                        'save'    => 'সংরক্ষণ করুন',
+                        'title'   => 'নতুন অনুরোধ তৈরি করুন',
+
+                        'type'    => [
+                            'choose' => 'নির্বাচন করুন',
+                            'delete' => 'মুছুন',
+                            'title'  => 'ধরন',
+                            'update' => 'আপডেট করুন',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'ডিফল্ট স্টোর ভিউ',
+
+                    'account-info' => [
+                        'dob'          => 'জন্ম তারিখ',
+                        'email'        => 'ইমেইল',
+                        'first-name'   => 'প্রথম নাম',
+                        'gender'       => 'লিঙ্গ',
+                        'last-name'    => 'শেষ নাম',
+                        'phone'        => 'ফোন',
+                        'title'        => 'অ্যাকাউন্ট তথ্য',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'ঠিকানা',
+                        'address1'   => 'ঠিকানা ১',
+                        'address2'   => 'ঠিকানা ২',
+                        'city'       => 'শহর',
+                        'company'    => 'কোম্পানি',
+                        'country'    => 'দেশ',
+                        'first-name' => 'প্রথম নাম',
+                        'last-name'  => 'শেষ নাম',
+                        'phone'      => 'ফোন',
+                        'postcode'   => 'পোস্টকোড',
+                        'state'      => 'রাষ্ট্র',
+                        'title'      => 'ঠিকানা তথ্য',
+                        'vat-id'     => 'ভ্যাট আইডি',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'পরিমাণ',
+                        'order-id'     => 'অর্ডার আইডি',
+                        'product-name' => 'পণ্যের নাম',
+                        'qty'          => 'পরিমাণ',
+                        'shipping'     => 'শিপিং',
+                        'sku'          => 'এসকিউ',
+                        'status'       => 'অবস্থা',
+                        'title'        => 'অর্ডার তথ্য',
+                        'type'         => 'ধরন',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'নিউজলেটার সাবস্ক্রাইব করুন',
                 'subscribe-stay-touch'   => 'যোগাযোগে থাকতে সাবস্ক্রাইব করুন।',
                 'whats-new'              => 'নতুন কি',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'গোপনীয়তা নীতি',
+                    'reject'                   => 'প্রত্যাখ্যান করুন',
+                    'accept'                   => 'গ্রহণ করুন',
+                    'learn-more-and-customize' => 'আরও জানুন এবং কাস্টমাইজ করুন',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'আপনার কুকি সম্মতি পছন্দগুলি',
+                    'save-and-continue'                      => 'সংরক্ষণ করুন এবং চালিয়ে যান',
+                    'strictly-necessary'                     => 'কঠোরভাবে প্রয়োজনীয়',
+                    'basic-interactions-and-functionalities' => 'মৌলিক ইন্টারঅ্যাকশন এবং কার্যকারিতা',
+                    'experience-enhancement'                 => 'অভিজ্ঞতা উন্নতি',
+                    'measurement'                            => 'পরিমাপ',
+                    'targeting-and-advertising'              => 'টার্গেটিং এবং বিজ্ঞাপন',
+                ],
             ],
         ],
 
@@ -933,6 +1031,7 @@ return [
         'address'               => 'ঠিকানা',
         'my-account'            => 'আমার অ্যাকাউন্ট',
         'downloadable-products' => 'ডাউনলোড যোগ্য পণ্য',
+        'gdpr-request'          => 'জিডিপিআর অনুরোধ',
         'orders'                => 'আদেশ',
         'profile'               => 'প্রোফাইল',
         'reviews'               => 'পর্যালোচনা',
@@ -990,6 +1089,30 @@ return [
                 'greeting'    => 'আমাদের সংবাদপত্রে স্বাগত!',
                 'subject'     => 'আপনি! আমাদের সংবাদপত্রে সদস্য হন',
                 'unsubscribe' => 'সদস্যপত্র প্রত্যাহার করুন',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'ডেটা মুছে ফেলার জন্য নতুন অনুরোধ',
+                'new-update-request' => 'ডেটা আপডেটের জন্য নতুন অনুরোধ',
+
+                'new-request' => [
+                    'message'        => 'বার্তা : ',
+                    'request-status' => 'অনুরোধের অবস্থা : ',
+                    'request-type'   => 'অনুরোধের ধরন : ',
+                    'summary'        => 'অনুরোধের সংক্ষেপ',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'বার্তা : ',
+                    'request-status' => 'অনুরোধের অবস্থা : ',
+                    'request-type'   => 'অনুরোধের ধরন : ',
+                    'summary'        => 'মুছে ফেলার অনুরোধের সংক্ষেপ',
+                ],
+
+                'update-request' => [
+                    'message'        => 'বার্তা : ',
+                    'request-status' => 'অনুরোধের অবস্থা : ',
+                ],
             ],
         ],
 

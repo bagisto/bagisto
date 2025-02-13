@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'قبلاً حساب دارید؟',
             'bagisto'                     => 'بگیستو',
             'button-title'                => 'ثبت نام',
+            'click-here'                  => 'اینجا کلیک کنید',
             'confirm-pass'                => 'تأیید رمز عبور',
             'email'                       => 'ایمیل',
             'first-name'                  => 'نام',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'حساب با موفقیت ایجاد شد.',
             'success-verify'              => 'حساب با موفقیت ایجاد شد، یک ایمیل برای تأیید ارسال شده است.',
             'success-verify-email-unsent' => 'حساب با موفقیت ایجاد شد، اما ایمیل تأیید ارسال نشد.',
+            'terms-conditions'            => 'شرایط و ضوابط',
             'verification-not-sent'       => 'خطا! مشکل در ارسال ایمیل تأیید، لطفاً بعداً دوباره تلاش کنید.',
             'verification-sent'           => 'ایمیل تأیید ارسال شد',
             'verified'                    => 'حساب شما تأیید شده است، اکنون می‌توانید وارد شوید.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'مورد با موفقیت به لیست علاقه‌مندی‌ها اضافه شد',
                 'title'              => 'لیست علاقه‌مندی',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'تکمیل شده',
+                'date'                        => 'تاریخ',
+                'declined'                    => 'رد شده',
+                'id'                          => 'شناسه',
+                'message'                     => 'پیام',
+                'pending'                     => 'در انتظار',
+                'processing'                  => 'در حال پردازش',
+                'status'                      => 'وضعیت',
+                'success-verify'              => 'موفقیت! ایمیل تأیید ارسال شد.',
+                'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشد.',
+                'type'                        => 'نوع',
+                'unable-to-sent'              => 'امکان ارسال ایمیل وجود ندارد.',
+
+                'index'   => [
+                    'create-btn' => 'ایجاد درخواست',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'درخواست‌های داده GDPR',
+
+                    'modal' => [
+                        'message' => 'پیام',
+                        'save'    => 'ذخیره',
+                        'title'   => 'ایجاد درخواست جدید',
+
+                        'type'    => [
+                            'choose' => 'انتخاب کنید',
+                            'delete' => 'حذف',
+                            'title'  => 'نوع',
+                            'update' => 'به‌روزرسانی',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'نمای پیش‌فرض فروشگاه',
+
+                    'account-info' => [
+                        'dob'          => 'تاریخ تولد',
+                        'email'        => 'ایمیل',
+                        'first-name'   => 'نام',
+                        'gender'       => 'جنسیت',
+                        'last-name'    => 'نام خانوادگی',
+                        'phone'        => 'تلفن',
+                        'title'        => 'اطلاعات حساب',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'آدرس',
+                        'address1'   => 'آدرس 1',
+                        'address2'   => 'آدرس 2',
+                        'city'       => 'شهر',
+                        'company'    => 'شرکت',
+                        'country'    => 'کشور',
+                        'first-name' => 'نام',
+                        'last-name'  => 'نام خانوادگی',
+                        'phone'      => 'تلفن',
+                        'postcode'   => 'کد پستی',
+                        'state'      => 'استان',
+                        'title'      => 'اطلاعات آدرس',
+                        'vat-id'     => 'شناسه مالیاتی',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'مقدار',
+                        'order-id'     => 'شناسه سفارش',
+                        'product-name' => 'نام محصول',
+                        'qty'          => 'تعداد',
+                        'shipping'     => 'حمل و نقل',
+                        'sku'          => 'کد SKU',
+                        'status'       => 'وضعیت',
+                        'title'        => 'اطلاعات سفارش',
+                        'type'         => 'نوع',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'عضویت در خبرنامه',
                 'subscribe-stay-touch'   => 'برای ماندن در تماس عضو شوید.',
                 'whats-new'              => 'چه خبر است',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'سیاست حفظ حریم خصوصی',
+                    'reject'                   => 'رد کردن',
+                    'accept'                   => 'پذیرفتن',
+                    'learn-more-and-customize' => 'بیشتر بدانید و سفارشی کنید',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'ترجیحات رضایت کوکی شما',
+                    'save-and-continue'                      => 'ذخیره و ادامه',
+                    'strictly-necessary'                     => 'کاملاً ضروری',
+                    'basic-interactions-and-functionalities' => 'تعاملات و عملکردهای پایه',
+                    'experience-enhancement'                 => 'افزایش تجربه',
+                    'measurement'                            => 'اندازه‌گیری',
+                    'targeting-and-advertising'              => 'هدف‌گیری و تبلیغات',
+                ],
             ],
         ],
 
@@ -932,6 +1030,7 @@ return [
     'layouts' => [
         'address'               => 'آدرس',
         'downloadable-products' => 'محصولات قابل دانلود',
+        'gdpr-request'          => 'درخواست‌های GDPR',
         'my-account'            => 'حساب کاربری من',
         'orders'                => 'سفارش‌ها',
         'profile'               => 'پروفایل',
@@ -990,6 +1089,30 @@ return [
                 'greeting'    => 'به خبرنامه ما خوش آمدید!',
                 'subject'     => 'شما! به خبرنامه ما مشترک شدید',
                 'unsubscribe' => 'لغو اشتراک',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'درخواست جدید برای حذف داده‌ها',
+                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده‌ها',
+
+                'new-request' => [
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                    'request-type'   => 'نوع درخواست : ',
+                    'summary'        => 'خلاصه درخواست',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                    'request-type'   => 'نوع درخواست : ',
+                    'summary'        => 'خلاصه درخواست حذف',
+                ],
+
+                'update-request' => [
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                ],
             ],
         ],
 

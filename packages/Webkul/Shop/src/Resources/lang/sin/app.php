@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'දැනටමත් ගිණුමක් තිබේද?',
             'bagisto'                     => 'බගිස්ටෝ',
             'button-title'                => 'ලියාපදිංචි කරන්න',
+            'click-here'                  => 'මෙතන ක්ලික් කරන්න',
             'confirm-pass'                => 'මුරපදය තහවුර',
             'email'                       => 'ඊමේල්',
             'first-name'                  => 'මුල් නම',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'ගිණුම සාර්ථකව නිර්දේශ කරන ලදි.',
             'success-verify'              => 'ගිණුම සාර්ථකව නිර්දේශ කරන ලදි, ඉථිරිකරණය සඳහා ඊමේල් එක යවා ඇත.',
             'success-verify-email-unsent' => 'ගිණුම සාර්ථකව නිර්දේශ කරන ලදි, නරබන්න ඊමේල් එක නොයවනේ.',
+            'terms-conditions'            => ' නියමයන් සහ කොන්දේසි',
             'verification-not-sent'       => 'දෝෂයක්! තහවුරු ඊමේල් එකට යවන තැපැලක්, කරන්නේ නවත්තන්නාට නෙවෙයි.',
             'verification-sent'           => 'තහවුරු ඊමේල් එක යවන ලදි',
             'verified'                    => 'ඔබගේ ගිණුමක් සාර්ථකව වෙනස් වී ඇත, දැනට ඇතුලු වන්න.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'අයිතමය සාර්ථකව රහුල්ලෙන් එකතු කර ඇත',
                 'title'              => 'රහුල්',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'සම්පූර්ණයි',
+                'date'                        => 'දිනය',
+                'declined'                    => 'ප්‍රතික්ෂේප කරන ලදි',
+                'id'                          => 'හැඳුනුම්පත',
+                'message'                     => 'පණිවිඩය',
+                'pending'                     => 'පොරොත්තු',
+                'processing'                  => 'සැකසුම',
+                'status'                      => 'තත්ත්වය',
+                'success-verify'              => 'සාර්ථකයි! තහවුරු කිරීමේ ඊමේල් එක යවා ඇත.',
+                'success-verify-email-unsent' => 'සාර්ථකයි! තහවුරු කිරීමේ ඊමේල් එක නොයවා ඇත.',
+                'type'                        => 'වර්ගය',
+                'unable-to-sent'              => 'ඊමේල් යැවීමට නොහැක.',
+
+                'index'   => [
+                    'create-btn' => 'ඉල්ලීමක් සාදන්න',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR දත්ත ඉල්ලීම්',
+
+                    'modal' => [
+                        'message' => 'පණිවිඩය',
+                        'save'    => 'සුරකින්න',
+                        'title'   => 'නව ඉල්ලීමක් සාදන්න',
+
+                        'type'    => [
+                            'choose' => 'තෝරන්න',
+                            'delete' => 'මකන්න',
+                            'title'  => 'වර්ගය',
+                            'update' => 'යාවත්කාල කරන්න',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'පෙරනිමි ගබඩා දසුන',
+
+                    'account-info' => [
+                        'dob'          => 'උපන්දිනය',
+                        'email'        => 'ඊමේල්',
+                        'first-name'   => 'මුල් නම',
+                        'gender'       => 'ස්ත්‍රී/පුරුෂ භාවය',
+                        'last-name'    => 'අවසාන නම',
+                        'phone'        => 'දුරකථන',
+                        'title'        => 'ගිණුම් තොරතුරු',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'ලිපිනය',
+                        'address1'   => 'ලිපිනය 1',
+                        'address2'   => 'ලිපිනය 2',
+                        'city'       => 'නගරය',
+                        'company'    => 'කර්මාන්තයේ නම',
+                        'country'    => 'රටේ',
+                        'first-name' => 'මුල් නම',
+                        'last-name'  => 'අවසාන නම',
+                        'phone'      => 'දුරකථන',
+                        'postcode'   => 'තැපැල් කේතය',
+                        'state'      => 'පළාත',
+                        'title'      => 'ලිපින තොරතුරු',
+                        'vat-id'     => 'වැට් අංකය',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'මුදල',
+                        'order-id'     => 'ඇණවුම් අංකය',
+                        'product-name' => 'නිෂ්පාදන නම',
+                        'qty'          => 'ප්‍රමාණය',
+                        'shipping'     => 'නැවුම්',
+                        'sku'          => 'SKU අංකය',
+                        'status'       => 'තත්ත්වය',
+                        'title'        => 'ඇණවුම් තොරතුරු',
+                        'type'         => 'වර්ගය',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'පනස්වේර් අංශයට බලන්න',
                 'subscribe-stay-touch'   => 'අප සම්බන්ධයෙන් බලන්න.',
                 'whats-new'              => 'මොතා කුමුද?',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'පෞද්ගලිකත්ව ප්‍රතිපත්තිය',
+                    'reject'                   => 'ප්‍රතික්ෂේප කරන්න',
+                    'accept'                   => 'පිළිගන්න',
+                    'learn-more-and-customize' => 'තව දැනගන්න සහ අභිරුචි කරන්න',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'ඔබගේ කුකී එකඟතා ප්‍රියතමයන්',
+                    'save-and-continue'                      => 'සුරකින්න සහ දිගටම කරගෙන යන්න',
+                    'strictly-necessary'                     => 'අත්‍යවශ්‍ය',
+                    'basic-interactions-and-functionalities' => 'මූලික අන්තර්ක්‍රියා සහ කාර්යයන්',
+                    'experience-enhancement'                 => 'අත්දැකීම් වැඩිදියුණු කිරීම',
+                    'measurement'                            => 'මාන',
+                    'targeting-and-advertising'              => 'ඉලක්ක කිරීම සහ ප්‍රචාරණය',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'ලිපිනය',
         'downloadable-products' => 'බාගත කළ හොදමු',
+        'gdpr-request'          => 'GDPR ඉල්ලීම්',
         'my-account'            => 'මම්පොටටු',
         'orders'                => 'ඇණවුම්',
         'profile'               => 'පාරිභෝගය',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'අපව අපවේ නිළධාරාණයට සුමිතයෙකු වන්නේය!',
                 'subject'     => 'ඔබට! අපේ නිළධාරාණයට දැක්කානට',
                 'unsubscribe' => 'අවිශ්‍යවන්',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'දත්ත මකා දැමීම සඳහා නව ඉල්ලීම',
+                'new-update-request' => 'දත්ත යාවත්කාලීන කිරීම සඳහා නව ඉල්ලීම',
+
+                'new-request' => [
+                    'message'        => 'පණිවිඩය : ',
+                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
+                    'request-type'   => 'ඉල්ලීමේ වර්ගය : ',
+                    'summary'        => 'ඉල්ලීමේ සාරාංශය',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'පණිවිඩය : ',
+                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
+                    'request-type'   => 'ඉල්ලීමේ වර්ගය : ',
+                    'summary'        => 'මකා දැමීමේ ඉල්ලීමේ සාරාංශය',
+                ],
+
+                'update-request' => [
+                    'message'        => 'පණිවිඩය : ',
+                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
+                ],
             ],
         ],
 

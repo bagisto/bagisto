@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Vous avez déjà un compte ?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'S\'inscrire',
+            'click-here'                  => 'Cliquez ici',
             'confirm-pass'                => 'Confirmer le mot de passe',
             'email'                       => 'E-mail',
             'first-name'                  => 'Prénom',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Compte créé avec succès.',
             'success-verify'              => 'Compte créé avec succès, un e-mail de vérification a été envoyé.',
             'success-verify-email-unsent' => 'Compte créé avec succès, mais l\'e-mail de vérification n\'a pas été envoyé.',
+            'terms-conditions'            => 'Termes et conditions',
             'verification-not-sent'       => 'Erreur ! Problème d\'envoi de l\'e-mail de vérification, veuillez réessayer plus tard.',
             'verification-sent'           => 'E-mail de vérification envoyé',
             'verified'                    => 'Votre compte a été vérifié, essayez de vous connecter maintenant.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'Article ajouté avec succès à la liste de souhaits',
                 'title'              => 'Liste de souhaits',
             ],
+
+            'rgpd' => [
+                'completed'                   => 'Terminé',
+                'date'                        => 'Date',
+                'declined'                    => 'Refusé',
+                'id'                          => 'Id',
+                'message'                     => 'Message',
+                'pending'                     => 'En attente',
+                'processing'                  => 'En cours de traitement',
+                'status'                      => 'Statut',
+                'success-verify'              => 'Succès ! L\'e-mail de vérification a été envoyé.',
+                'success-verify-email-unsent' => 'Succès ! L\'e-mail de vérification n\'a pas été envoyé.',
+                'type'                        => 'Type',
+                'unable-to-sent'              => 'Impossible d\'envoyer l\'e-mail.',
+
+                'index'   => [
+                    'create-btn' => 'Créer une demande',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'Demandes de données RGPD',
+
+                    'modal' => [
+                        'message' => 'Message',
+                        'save'    => 'Enregistrer',
+                        'title'   => 'Créer une nouvelle demande',
+
+                        'type'    => [
+                            'choose' => 'Choisir',
+                            'delete' => 'Supprimer',
+                            'title'  => 'Type',
+                            'update' => 'Mettre à jour',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Vue de la boutique par défaut',
+
+                    'account-info' => [
+                        'dob'          => 'Date de naissance',
+                        'email'        => 'E-mail',
+                        'first-name'   => 'Prénom',
+                        'gender'       => 'Genre',
+                        'last-name'    => 'Nom de famille',
+                        'phone'        => 'Téléphone',
+                        'title'        => 'Informations sur le compte',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Adresse',
+                        'address1'   => 'Adresse 1',
+                        'address2'   => 'Adresse 2',
+                        'city'       => 'Ville',
+                        'company'    => 'Entreprise',
+                        'country'    => 'Pays',
+                        'first-name' => 'Prénom',
+                        'last-name'  => 'Nom de famille',
+                        'phone'      => 'Téléphone',
+                        'postcode'   => 'Code postal',
+                        'state'      => 'État',
+                        'title'      => 'Informations sur l\'adresse',
+                        'vat-id'     => 'Numéro de TVA',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Montant',
+                        'order-id'     => 'ID de commande',
+                        'product-name' => 'Nom du produit',
+                        'qty'          => 'Quantité',
+                        'shipping'     => 'Expédition',
+                        'sku'          => 'SKU',
+                        'status'       => 'Statut',
+                        'title'        => 'Informations sur la commande',
+                        'type'         => 'Type',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'Souscrire à la newsletter',
                 'subscribe-stay-touch'   => 'Abonnez-vous pour rester en contact.',
                 'whats-new'              => 'Quoi de neuf',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Politique de confidentialité',
+                    'reject'                   => 'Rejeter',
+                    'accept'                   => 'Accepter',
+                    'learn-more-and-customize' => 'En savoir plus et personnaliser',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Vos préférences de consentement aux cookies',
+                    'save-and-continue'                      => 'Enregistrer et continuer',
+                    'strictly-necessary'                     => 'Strictement nécessaire',
+                    'basic-interactions-and-functionalities' => 'Interactions et fonctionnalités de base',
+                    'experience-enhancement'                 => 'Amélioration de l\'expérience',
+                    'measurement'                            => 'Mesure',
+                    'targeting-and-advertising'              => 'Ciblage et publicité',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'Adresse',
         'downloadable-products' => 'Produits téléchargeables',
+        'gdpr-request'          => 'Demandes RGPD',
         'my-account'            => 'Mon compte',
         'orders'                => 'Commandes',
         'profile'               => 'Profil',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'Bienvenue à notre newsletter !',
                 'subject'     => 'Vous êtes abonné à notre newsletter',
                 'unsubscribe' => 'Se désabonner',
+            ],
+
+            'rgpd' => [
+                'nouvelle-demande-suppression' => 'Nouvelle demande de suppression de données',
+                'nouvelle-demande-mise-a-jour' => 'Nouvelle demande de mise à jour de données',
+
+                'nouvelle-demande' => [
+                    'message'        => 'Message : ',
+                    'statut-demande' => 'Statut de la demande : ',
+                    'type-demande'   => 'Type de demande : ',
+                    'résumé'         => 'Résumé de la demande',
+                ],
+
+                'demande-suppression' => [
+                    'message'        => 'Message : ',
+                    'statut-demande' => 'Statut de la demande : ',
+                    'type-demande'   => 'Type de demande : ',
+                    'résumé'         => 'Résumé de la demande de suppression',
+                ],
+
+                'update-request' => [
+                    'message'        => 'Message : ',
+                    'statut-demande' => 'Statut de la demande : ',
+                ],
             ],
         ],
 

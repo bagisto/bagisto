@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Zaten bir hesabınız var mı?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Kaydol',
+            'click-here'                  => 'Buraya Tıklayın',
             'confirm-pass'                => 'Parolayı Onayla',
             'email'                       => 'E-posta',
             'first-name'                  => 'Ad',
@@ -64,6 +65,7 @@ return [
             'success-verify'              => 'Hesap başarıyla oluşturuldu, doğrulama için bir e-posta gönderildi.',
             'success-verify-email-unsent' => 'Hesap başarıyla oluşturuldu, ancak doğrulama e-postası gönderilemedi.',
             'verification-not-sent'       => 'Hata! Doğrulama e-postası gönderme sorunu, lütfen daha sonra tekrar deneyin.',
+            'terms-conditions'            => 'Şartlar ve Koşullar',
             'verification-sent'           => 'Doğrulama e-postası gönderildi',
             'verified'                    => 'Hesabınız doğrulandı, şimdi giriş yapmayı deneyin.',
             'verify-failed'               => 'E-posta hesabınızı doğrulayamıyoruz.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'Ürün Başarıyla Dilek Listesine Eklendi',
                 'title'              => 'Dilek Listesi',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'Tamamlandı',
+                'date'                        => 'Tarih',
+                'declined'                    => 'Reddedildi',
+                'id'                          => 'Id',
+                'message'                     => 'Mesaj',
+                'pending'                     => 'Beklemede',
+                'processing'                  => 'İşleniyor',
+                'status'                      => 'Durum',
+                'success-verify'              => 'Başarılı! Doğrulama e-postası gönderildi.',
+                'success-verify-email-unsent' => 'Başarılı! Doğrulama e-postası gönderilemedi.',
+                'type'                        => 'Tür',
+                'unable-to-sent'              => 'E-posta gönderilemedi.',
+
+                'index'   => [
+                    'create-btn' => 'Talep Oluştur',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR Veri Talepleri',
+
+                    'modal' => [
+                        'message' => 'Mesaj',
+                        'save'    => 'Kaydet',
+                        'title'   => 'Yeni Talep Oluştur',
+
+                        'type'    => [
+                            'choose' => 'Seç',
+                            'delete' => 'Sil',
+                            'title'  => 'Tür',
+                            'update' => 'Güncelle',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Varsayılan Mağaza Görünümü',
+
+                    'account-info' => [
+                        'dob'          => 'Doğum Tarihi',
+                        'email'        => 'E-posta',
+                        'first-name'   => 'Ad',
+                        'gender'       => 'Cinsiyet',
+                        'last-name'    => 'Soyadı',
+                        'phone'        => 'Telefon',
+                        'title'        => 'Hesap Bilgileri',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Adres',
+                        'address1'   => 'Adres 1',
+                        'address2'   => 'Adres 2',
+                        'city'       => 'Şehir',
+                        'company'    => 'Şirket',
+                        'country'    => 'Ülke',
+                        'first-name' => 'Ad',
+                        'last-name'  => 'Soyadı',
+                        'phone'      => 'Telefon',
+                        'postcode'   => 'Posta Kodu',
+                        'state'      => 'Eyalet',
+                        'title'      => 'Adres Bilgileri',
+                        'vat-id'     => 'KDV Numarası',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Tutar',
+                        'order-id'     => 'Sipariş ID',
+                        'product-name' => 'Ürün Adı',
+                        'qty'          => 'Miktar',
+                        'shipping'     => 'Kargo',
+                        'sku'          => 'SKU',
+                        'status'       => 'Durum',
+                        'title'        => 'Sipariş Bilgileri',
+                        'type'         => 'Tür',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -446,6 +525,25 @@ return [
                 'subscribe-newsletter'   => 'Bültenimize Abone Ol',
                 'subscribe-stay-touch'   => 'İletişimde kalmak için abone olun.',
                 'whats-new'              => 'Yenilikler',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Gizlilik Politikası',
+                    'reject'                   => 'Reddet',
+                    'accept'                   => 'Kabul Et',
+                    'learn-more-and-customize' => 'Daha Fazla Bilgi ve Özelleştirme',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Çerez İzin Tercihleriniz',
+                    'save-and-continue'                      => 'Kaydet ve Devam Et',
+                    'strictly-necessary'                     => 'Kesinlikle Gerekli',
+                    'basic-interactions-and-functionalities' => 'Temel Etkileşimler ve İşlevler',
+                    'experience-enhancement'                 => 'Deneyim Geliştirme',
+                    'measurement'                            => 'Ölçüm',
+                    'targeting-and-advertising'              => 'Hedefleme ve Reklam',
+                ],
             ],
         ],
 
@@ -932,6 +1030,7 @@ return [
     'layouts' => [
         'address'               => 'Adres',
         'downloadable-products' => 'İndirilebilir Ürünler',
+        'gdpr-request'          => 'GDPR Talepleri',
         'my-account'            => 'Hesabım',
         'orders'                => 'Siparişler',
         'profile'               => 'Profil',
@@ -990,6 +1089,30 @@ return [
                 'greeting'    => 'Bültenimize hoş geldiniz!',
                 'subject'     => 'Bültenimize Abone Oldunuz',
                 'unsubscribe' => 'Aboneliği iptal et',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Yeni Veri Silme Talebi',
+                'new-update-request' => 'Yeni Veri Güncelleme Talebi',
+
+                'new-request' => [
+                    'message'        => 'Mesaj : ',
+                    'request-status' => 'Talep Durumu : ',
+                    'request-type'   => 'Talep Türü : ',
+                    'summary'        => 'Talep Özeti',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'Mesaj : ',
+                    'request-status' => 'Talep Durumu : ',
+                    'request-type'   => 'Talep Türü : ',
+                    'summary'        => 'Silme Talebi Özeti',
+                ],
+
+                'update-request' => [
+                    'message'        => 'Mesaj : ',
+                    'request-status' => 'Talep Durumu : ',
+                ],
             ],
         ],
 

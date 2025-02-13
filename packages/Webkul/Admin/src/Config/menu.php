@@ -115,6 +115,12 @@ return [
         'route'      => 'admin.customers.customers.review.index',
         'sort'       => 3,
         'icon'       => '',
+    ], [
+        'key'        => 'customers.gdpr_requests',
+        'name'       => 'admin::app.components.layouts.sidebar.gdpr-data-requests',
+        'route'      => 'admin.customers.gdpr.index',
+        'sort'       => 4,
+        'icon'       => '',
     ],
 
     /**
