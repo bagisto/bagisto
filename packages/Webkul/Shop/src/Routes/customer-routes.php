@@ -105,19 +105,19 @@ Route::prefix('customer')->group(function () {
                 Route::get('reviews', 'reviews')->name('shop.customers.account.reviews.index');
             });
 
-                Route::prefix('gdpr')->group(function () {
-                    Route::controller(GDPRController::class)->group(function () {
-                        Route::get('', 'index')->name('shop.customers.account.gdpr.index');
+            Route::prefix('gdpr')->group(function () {
+                Route::controller(GDPRController::class)->group(function () {
+                    Route::get('', 'index')->name('shop.customers.account.gdpr.index');
 
-                        Route::post('', 'store')->name('shop.customers.account.gdpr.store');
+                    Route::post('', 'store')->name('shop.customers.account.gdpr.store');
 
-                        Route::get('pdf-view', 'pdfView')->name('shop.customers.account.gdpr.pdf-view');
+                    Route::get('pdf-view', 'pdfView')->name('shop.customers.account.gdpr.pdf-view');
 
-                        Route::get('html-view', 'htmlView')->name('shop.customers.account.gdpr.html-view');
+                    Route::get('html-view', 'htmlView')->name('shop.customers.account.gdpr.html-view');
 
-                        Route::get('your-cookie-consent-preferences', 'cookieConsent')->name('shop.customers.account.gdpr.cookie-consent');
-                    });
+                    Route::get('your-cookie-consent-preferences', 'cookieConsent')->name('shop.customers.account.gdpr.cookie-consent');
                 });
+            });
 
             /**
              * Addresses.
