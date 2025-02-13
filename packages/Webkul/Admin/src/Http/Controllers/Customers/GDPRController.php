@@ -39,6 +39,18 @@ class GDPRController extends Controller
     }
 
     /**
+     * Method to show the form for updating a new Data Request.
+     */
+    public function edit()
+    {
+        $request = $this->gdprDataRequestRepository->find(request()->id);
+
+        return new JsonResponse([
+            'data' => $request,
+        ], 200);
+    }
+
+    /**
      * Method to update the Data Request information.
      */
     public function update()

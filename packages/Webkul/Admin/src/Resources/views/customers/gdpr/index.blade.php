@@ -63,7 +63,7 @@
 
                                 <!-- Actions -->
                                 <div class="flex justify-end">
-                                    <a @click="editModal(record)">
+                                    <a @click="editModal(record.actions.find(action => action.index === 'edit')?.url, record.id)">
                                         <span
                                             :class="record.actions.find(action => action.index === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
@@ -250,10 +250,13 @@
                             });
                     },
 
-                    editModal(value) {
-                        this.$refs.gdprUpdateModal.toggle();
+                    editModal(url, id) {
+                        this.$axios.get(url, { params: { id } })
+                            .then((response) => {
+                                this.$refs.gdprUpdateModal.toggle();
 
-                        this.$refs.modalForm.setValues(value);
+                                this.$refs.modalForm.setValues(response.data.data);
+                            })
                     },
                 }
             })

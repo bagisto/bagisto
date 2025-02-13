@@ -131,7 +131,7 @@ class GDPRDataGrid extends DataGrid
                 'title'  => trans('admin::app.customers.gdpr.index.datagrid.edit'),
                 'method' => 'GET',
                 'url'    => function ($row) {
-                    return '';
+                    return route('admin.customers.gdpr.edit');
                 },
             ]);
         }
