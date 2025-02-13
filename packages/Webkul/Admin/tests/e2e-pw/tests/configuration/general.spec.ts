@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('general configuration', () => {
     test('General of General', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/general`);
+        await adminPage.goto('admin/configuration/general/general');
 
         await adminPage.click('select.custom-select');
 
@@ -29,7 +29,7 @@ test.describe('general configuration', () => {
     });
 
     test('Content of General', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/content`);
+        await adminPage.goto('admin/configuration/general/content');
 
 
 
@@ -52,7 +52,7 @@ test.describe('general configuration', () => {
     });
 
     test('Design of General', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/design`);
+        await adminPage.goto('admin/configuration/general/design');
 
         await adminPage.click('input[type="file"]');
 
@@ -80,7 +80,7 @@ test.describe('general configuration', () => {
     });
 
     test('Magic AI of General', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/configuration/general/magic_ai`);
+        await adminPage.goto('admin/configuration/general/magic_ai');
 
         const selects = await adminPage.$$('select.custom-select');
 

@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import { generateName, generateSlug } from '../../utils/faker';
 
 test.describe('group management', () => {
     test('create group', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers/groups`);
+        await adminPage.goto('admin/customers/groups');
         await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
         await adminPage.click('button.primary-button:visible');
@@ -17,7 +17,7 @@ test.describe('group management', () => {
     });
 
     test('edit group', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers/groups`);
+        await adminPage.goto('admin/customers/groups');
         await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-edit');
@@ -33,7 +33,7 @@ test.describe('group management', () => {
     });
 
     test('delete group', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/customers/groups`);
+        await adminPage.goto('admin/customers/groups');
         await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-delete');

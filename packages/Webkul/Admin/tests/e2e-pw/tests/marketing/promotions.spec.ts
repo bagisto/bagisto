@@ -1,4 +1,4 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import { generateName, generateDescription } from '../../utils/faker';
 
 test.describe('promotion management', () => {
@@ -7,7 +7,7 @@ test.describe('promotion management', () => {
             /**
              * Reaching to the create cart rules page.
              */
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/cart-rules`);
+            await adminPage.goto('admin/marketing/promotions/cart-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Cart Rule")');
             await adminPage.click('a.primary-button:has-text("Create Cart Rule")');
 
@@ -70,7 +70,7 @@ test.describe('promotion management', () => {
             /**
              * Reaching to the edit cart rules page.
              */
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/cart-rules`);
+            await adminPage.goto('admin/marketing/promotions/cart-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Cart Rule")');
             await adminPage.waitForSelector('span.cursor-pointer.icon-edit', { state: 'visible' });
             const iconEdit = await adminPage.$$('span.cursor-pointer.icon-edit');
@@ -92,7 +92,7 @@ test.describe('promotion management', () => {
         });
 
         test('should delete a cart rule', async ({ adminPage }) => {
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/cart-rules`);
+            await adminPage.goto('admin/marketing/promotions/cart-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Cart Rule")');
 
             await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
@@ -121,7 +121,7 @@ test.describe('promotion management', () => {
             /**
              * Reaching to the create catalog rules page.
              */
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/catalog-rules`);
+            await adminPage.goto('admin/marketing/promotions/catalog-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Catalog Rule")');
             await adminPage.click('a.primary-button:has-text("Create Catalog Rule")');
 
@@ -184,7 +184,7 @@ test.describe('promotion management', () => {
             /**
              * Reaching to the create catalog rules page.
              */
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/catalog-rules`);
+            await adminPage.goto('admin/marketing/promotions/catalog-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Catalog Rule")');
             await adminPage.waitForSelector('span.cursor-pointer.icon-edit', { state: 'visible' });
             const iconEdit = await adminPage.$$('span.cursor-pointer.icon-edit');
@@ -206,7 +206,7 @@ test.describe('promotion management', () => {
         });
 
         test('should delete a catalog rule', async ({ adminPage }) => {
-            await adminPage.goto(`${config.baseUrl}/admin/marketing/promotions/catalog-rules`);
+            await adminPage.goto('admin/marketing/promotions/catalog-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Catalog Rule")');
 
             await adminPage.waitForSelector("span.cursor-pointer.icon-delete");

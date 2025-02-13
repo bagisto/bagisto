@@ -1,9 +1,9 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 test.describe('attribute management', () => {
     test('should create a new attribute successfully', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/attributes`);
+        await adminPage.goto('admin/catalog/attributes');
         await adminPage.click('div.primary-button:has-text("Create Attribute")');
 
         // This needs to be improve.
@@ -46,7 +46,7 @@ test.describe('attribute management', () => {
     });
 
     test('should validate required fields', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/attributes`);
+        await adminPage.goto('admin/catalog/attributes');
         await adminPage.waitForSelector('div.primary-button:has-text("Create Attribute")', { state: 'visible' });
 
         await adminPage.click('div.primary-button:has-text("Create Attribute")');
@@ -58,7 +58,7 @@ test.describe('attribute management', () => {
     });
 
     test('should edit an existing attribute successfully', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/attributes`);
+        await adminPage.goto('admin/catalog/attributes');
         await adminPage.waitForSelector('div.primary-button:has-text("Create Attribute")', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-edit');
@@ -73,7 +73,7 @@ test.describe('attribute management', () => {
     });
 
     test('should delete an existing attribute', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/attributes`);
+        await adminPage.goto('admin/catalog/attributes');
         await adminPage.waitForSelector('div.primary-button:has-text("Create Attribute")', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-delete');
@@ -86,7 +86,7 @@ test.describe('attribute management', () => {
     });
 
     test('should mass delete and existing attributes', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/attributes`);
+        await adminPage.goto('admin/catalog/attributes');
         await adminPage.waitForSelector('div.primary-button:has-text("Create Attribute")', { state: 'visible' });
 
         await adminPage.waitForSelector('.icon-uncheckbox:visible');

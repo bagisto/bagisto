@@ -1,8 +1,8 @@
-import { test, expect, config } from '../../setup';
+import { test, expect } from '../../setup';
 import  * as forms from '../../utils/form';
 
 async function createCategory(adminPage) {
-    await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
+    await adminPage.goto('admin/catalog/categories');
     await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
     await adminPage.click('div.primary-button:visible');
 
@@ -80,7 +80,7 @@ test.describe('category management', () => {
     });
 
     test('should edit a category', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
+        await adminPage.goto('admin/catalog/categories');
         await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-edit', { state: 'visible' });
@@ -99,7 +99,7 @@ test.describe('category management', () => {
     test('should delete a category', async ({ adminPage }) => {
         await createCategory(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
+        await adminPage.goto('admin/catalog/categories');
         await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
 
         await adminPage.waitForSelector('span.cursor-pointer.icon-delete', { state: 'visible' });
@@ -112,7 +112,7 @@ test.describe('category management', () => {
     });
 
     test('should mass update a categories', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
+        await adminPage.goto('admin/catalog/categories');
         await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
 
         await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });
@@ -141,7 +141,7 @@ test.describe('category management', () => {
     test('should mass delete a categories', async ({ adminPage }) => {
         await createCategory(adminPage);
 
-        await adminPage.goto(`${config.baseUrl}/admin/catalog/categories`);
+        await adminPage.goto('admin/catalog/categories');
         await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
 
         await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });

@@ -1,9 +1,9 @@
-// import { test, expect, config } from '../../setup';
+// import { test, expect } from '../../setup';
 // import  * as forms from '../../utils/form';
 
 // test.describe('theme management', () => {
 //     test('create product carousel theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -125,7 +125,7 @@
 //     });
 
 //     test('create category carousel theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -248,7 +248,7 @@
 //     });
 
 //     test('create static content theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -309,7 +309,7 @@
 //     });
 
 //     test('create image slider theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -379,7 +379,7 @@
 //     });
 
 //     test('create footer link theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -457,7 +457,7 @@
 //     });
 
 //     test('create services content theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.click('button[type="button"].primary-button:visible');
 
@@ -519,7 +519,7 @@
 //     });
 
 //     test('edit product carousel theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
@@ -784,7 +784,7 @@
 //     });
 
 //     test('edit static content theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
@@ -856,7 +856,7 @@
 //     });
 
 //     test('edit image slider theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
@@ -937,7 +937,7 @@
 //     });
 
 //     test('edit footer link theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
@@ -1026,7 +1026,7 @@
 //     });
 
 //     test('edit services content theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="icon-filter text-2xl"]:visible');
 
@@ -1099,7 +1099,7 @@
 //     });
 
 //     test('delete theme', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/settings/themes`);
+//         await adminPage.goto('admin/settings/themes');
 
 //         await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
 

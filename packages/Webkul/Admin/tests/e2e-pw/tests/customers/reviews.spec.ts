@@ -1,8 +1,8 @@
-// import { test, expect, config } from '../../setup';
+// import { test, expect } from '../../setup';
 
 // test.describe('review management', () => {
 //     test('update status of review', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/customers/reviews`);
+//         await adminPage.goto('admin/customers/reviews');
 
 //         const iconRight = await adminPage.$$('span[class="icon-sort-right rtl:icon-sort-left cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
 
@@ -31,7 +31,7 @@
 //     });
 
 //     test('mass update reviews', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/customers/reviews`);
+//         await adminPage.goto('admin/customers/reviews');
 
 //         const checkboxs = await adminPage.$$('.icon-uncheckbox');
 
@@ -52,7 +52,7 @@
 //     });
 
 //     test('delete review', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/customers/reviews`);
+//         await adminPage.goto('admin/customers/reviews');
 
 //         const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"]');
 
@@ -64,7 +64,7 @@
 //     });
 
 //     test('mass delete reviews', async ({ adminPage }) => {
-//         await adminPage.goto(`${config.baseUrl}/admin/customers/reviews`);
+//         await adminPage.goto('admin/customers/reviews');
 
 //         const checkboxs = await adminPage.$$('.icon-uncheckbox');
 
