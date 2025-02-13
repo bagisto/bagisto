@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 const usedNames = new Set();
 const usedEmails = new Set();
 const usedNumbers = new Set();
+const usedSlugs = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -154,10 +155,32 @@ export function generatePhoneNumber() {
     return `${phoneNumber}`;
 }
 
-export function generateSlug(delimiter = "-") {
-    const name = generateName();
+export function generateSKU() {
+    const letters = Array.from({ length: 3 }, () =>
+        String.fromCharCode(65 + Math.floor(Math.random() * 26))
+    ).join("");
 
-    return name.toLowerCase().replace(/\s+/g, delimiter);
+    const numbers = Math.floor(1000 + Math.random() * 9000);
+
+    return `${letters}${numbers}`;
+}
+
+export function generateSlug(delimiter = "-") {
+    let slug;
+
+    do {
+        const name = generateName();
+
+        const randomStr = Math.random().toString(36).substring(2, 8);
+
+        slug = `${name
+            .toLowerCase()
+            .replace(/\s+/g, delimiter)}${delimiter}${randomStr}`;
+    } while (usedSlugs.has(slug));
+
+    usedSlugs.add(slug);
+
+    return slug;
 }
 
 export function generateDescription(length = 255) {

@@ -1,4 +1,4 @@
-import { expect, config } from "../setup";
+import { expect } from "../setup";
 import {
     generateName,
     generateFirstName,
@@ -14,7 +14,7 @@ export async function register(page) {
         password: "admin123",
     };
 
-    await page.goto(`${config.baseUrl}`);
+    await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign Up" }).click();
     await page.getByPlaceholder("First Name").click();
@@ -51,7 +51,7 @@ export async function register(page) {
 export async function loginAsCustomer(page) {
     const credentials = await register(page);
 
-    await page.goto(`${config.baseUrl}`);
+    await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign In" }).click();
     await page.getByPlaceholder("email@example.com").click();

@@ -1,4 +1,4 @@
-import { test, expect, config } from "../setup";
+import { test, expect } from "../setup";
 import { loginAsCustomer } from "../utils/customer";
 
 // test("customer should be able to checkout", async ({ page }) => {
@@ -96,7 +96,7 @@ import { loginAsCustomer } from "../utils/customer";
 
 // for this first we need to go to admin and enable the guest checkout then this test will work, will create helper first...
 // test("guest should be able to checkout", async ({ page }) => {
-//     await page.goto(`${config.baseUrl}`);
+//     await page.goto('');
 
 //     await page
 //         .locator("#main div")
