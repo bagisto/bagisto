@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Already have an account ?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Register',
+            'click-here'                  => 'Click Here',
             'confirm-pass'                => 'Confirm Password',
             'email'                       => 'Email',
             'first-name'                  => 'First Name',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Account created successfully.',
             'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
             'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
+            'terms-conditions'            => ' Terms & Conditions',
             'verification-not-sent'       => 'Error! Problem in sending verification email, please try again later.',
             'verification-sent'           => 'Verification email sent',
             'verified'                    => 'Your account has been verified, try to login now.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'Item Successfully Added To Wishlist',
                 'title'              => 'Wishlist',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'Completed',
+                'date'                        => 'Date',
+                'declined'                    => 'Declined',
+                'id'                          => 'Id',
+                'message'                     => 'Message',
+                'pending'                     => 'Pending',
+                'processing'                  => 'Processing',
+                'status'                      => 'Status',
+                'success-verify'              => 'Success! Verification email has been sent.',
+                'success-verify-email-unsent' => 'Success! Verification email has not been sent.',
+                'type'                        => 'Type',
+                'unable-to-sent'              => 'Unable to sent email.',
+
+                'index'   => [
+                    'create-btn' => 'Create Request',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR Data Requests',
+
+                    'modal' => [
+                        'message' => 'Message',
+                        'save'    => 'Save',
+                        'title'   => 'Create New Request',
+
+                        'type'    => [
+                            'choose' => 'Choose',
+                            'delete' => 'Delete',
+                            'title'  => 'Type',
+                            'update' => 'Update',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Default Store View',
+
+                    'account-info' => [
+                        'dob'          => 'Date of Birth',
+                        'email'        => 'Email',
+                        'first-name'   => 'First Name',
+                        'gender'       => 'Gender',
+                        'last-name'    => 'Last Name',
+                        'phone'        => 'Phone',
+                        'title'        => 'Account Information',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Address',
+                        'address1'   => 'Address 1',
+                        'address2'   => 'Address 2',
+                        'city'       => 'City',
+                        'company'    => 'Company',
+                        'country'    => 'Country',
+                        'first-name' => 'First Name',
+                        'last-name'  => 'Last Name',
+                        'phone'      => 'Phone',
+                        'postcode'   => 'Postcode',
+                        'state'      => 'State',
+                        'title'      => 'Address Information',
+                        'vat-id'     => 'Vat ID',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Amount',
+                        'order-id'     => 'Order ID',
+                        'product-name' => 'Product Name',
+                        'qty'          => 'Quantity',
+                        'shipping'     => 'Shipping',
+                        'sku'          => 'SKU',
+                        'status'       => 'Status',
+                        'title'        => 'Order Information',
+                        'type'         => 'Type',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'Subscribe Newsletter',
                 'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
                 'whats-new'              => 'What’s New',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Privacy Policy',
+                    'reject'                   => 'Reject',
+                    'accept'                   => 'Accept',
+                    'learn-more-and-customize' => 'Learn More and Customize',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Your Cookie Consent Preferences',
+                    'save-and-continue'                      => 'Save and Continue',
+                    'strictly-necessary'                     => 'Strictly Necessary',
+                    'basic-interactions-and-functionalities' => 'Basic Interactions and Functionalities',
+                    'experience-enhancement'                 => 'Experience enhancement',
+                    'measurement'                            => 'Measurement',
+                    'targeting-and-advertising'              => 'Targeting and Advertising',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'Address',
         'downloadable-products' => 'Downloadable Products',
+        'gdpr-request'          => 'GDPR Requests',
         'my-account'            => 'My Account',
         'orders'                => 'Orders',
         'profile'               => 'Profile',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'Welcome to our newsletter!',
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'New Request For Data Delete',
+                'new-update-request' => 'New Request For Data Update',
+
+                'new-request' => [
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'summary'        => 'Summary of Request',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'summary'        => 'Summary of Delete Request',
+                ],
+
+                'update-request' => [
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                ],
             ],
         ],
 

@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'すでにアカウントをお持ちですか？',
             'bagisto'                     => 'バギスト',
             'button-title'                => '登録',
+            'click-here'                  => 'ここをクリック',
             'confirm-pass'                => 'パスワードの確認',
             'email'                       => 'メール',
             'first-name'                  => '名',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'アカウントは正常に作成されました。',
             'success-verify'              => 'アカウントが正常に作成されました。確認のためのメールが送信されました。',
             'success-verify-email-unsent' => 'アカウントは正常に作成されましたが、確認メールは送信されませんでした。',
+            'terms-conditions'            => '利用規約',
             'verification-not-sent'       => 'エラー！確認メールの送信に問題があります。後でもう一度お試しください。',
             'verification-sent'           => '確認メールが送信されました',
             'verified'                    => 'アカウントは確認されました。今すぐログインしてみてください。',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'アイテムが正常にウィッシュリストに追加されました',
                 'title'              => 'ウィッシュリスト',
             ],
+
+            'gdpr' => [
+                'completed'                   => '完了',
+                'date'                        => '日付',
+                'declined'                    => '拒否されました',
+                'id'                          => 'ID',
+                'message'                     => 'メッセージ',
+                'pending'                     => '保留中',
+                'processing'                  => '処理中',
+                'status'                      => 'ステータス',
+                'success-verify'              => '成功！確認メールが送信されました。',
+                'success-verify-email-unsent' => '成功！確認メールが送信されませんでした。',
+                'type'                        => 'タイプ',
+                'unable-to-sent'              => 'メールを送信できませんでした。',
+
+                'index'   => [
+                    'create-btn' => 'リクエストを作成',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPRデータリクエスト',
+
+                    'modal' => [
+                        'message' => 'メッセージ',
+                        'save'    => '保存',
+                        'title'   => '新しいリクエストを作成',
+
+                        'type'    => [
+                            'choose' => '選択',
+                            'delete' => '削除',
+                            'title'  => 'タイプ',
+                            'update' => '更新',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'デフォルトストアビュー',
+
+                    'account-info' => [
+                        'dob'          => '生年月日',
+                        'email'        => 'メール',
+                        'first-name'   => '名',
+                        'gender'       => '性別',
+                        'last-name'    => '姓',
+                        'phone'        => '電話',
+                        'title'        => 'アカウント情報',
+                    ],
+
+                    'address-info' => [
+                        'address'    => '住所',
+                        'address1'   => '住所1',
+                        'address2'   => '住所2',
+                        'city'       => '市区町村',
+                        'company'    => '会社',
+                        'country'    => '国',
+                        'first-name' => '名',
+                        'last-name'  => '姓',
+                        'phone'      => '電話',
+                        'postcode'   => '郵便番号',
+                        'state'      => '都道府県',
+                        'title'      => '住所情報',
+                        'vat-id'     => 'VAT番号',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => '金額',
+                        'order-id'     => '注文ID',
+                        'product-name' => '商品名',
+                        'qty'          => '数量',
+                        'shipping'     => '配送',
+                        'sku'          => 'SKU',
+                        'status'       => 'ステータス',
+                        'title'        => '注文情報',
+                        'type'         => 'タイプ',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'ニュースレターに登録する',
                 'subscribe-stay-touch'   => 'お知らせにご登録いただくために。',
                 'whats-new'              => '新着情報',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'プライバシーポリシー',
+                    'reject'                   => '拒否',
+                    'accept'                   => '受け入れる',
+                    'learn-more-and-customize' => '詳細とカスタマイズ',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'クッキー同意の設定',
+                    'save-and-continue'                      => '保存して続行',
+                    'strictly-necessary'                     => '厳密に必要',
+                    'basic-interactions-and-functionalities' => '基本的な操作と機能',
+                    'experience-enhancement'                 => '体験の向上',
+                    'measurement'                            => '測定',
+                    'targeting-and-advertising'              => 'ターゲティングと広告',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => '住所',
         'downloadable-products' => 'ダウンロード可能な製品',
+        'gdpr-request'          => 'GDPRリクエスト',
         'my-account'            => 'マイアカウント',
         'orders'                => '注文',
         'profile'               => 'プロフィール',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'ニュースレターへようこそ！',
                 'subject'     => 'ニュースレターに登録しました',
                 'unsubscribe' => '登録解除',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'データ削除の新しいリクエスト',
+                'new-update-request' => 'データ更新の新しいリクエスト',
+
+                'new-request' => [
+                    'message'        => 'メッセージ : ',
+                    'request-status' => 'リクエストステータス : ',
+                    'request-type'   => 'リクエストタイプ : ',
+                    'summary'        => 'リクエストの概要',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'メッセージ : ',
+                    'request-status' => 'リクエストステータス : ',
+                    'request-type'   => 'リクエストタイプ : ',
+                    'summary'        => '削除リクエストの概要',
+                ],
+
+                'update-request' => [
+                    'message'        => 'メッセージ : ',
+                    'request-status' => 'リクエストステータス : ',
+                ],
             ],
         ],
 

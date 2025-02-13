@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'هل لديك حساب بالفعل؟',
             'bagisto'                     => 'باغيستو',
             'button-title'                => 'التسجيل',
+            'click-here'                  => 'انقر هنا',
             'confirm-pass'                => 'تأكيد كلمة المرور',
             'email'                       => 'البريد الإلكتروني',
             'first-name'                  => 'الاسم الأول',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'تم إنشاء الحساب بنجاح.',
             'success-verify'              => 'تم إنشاء الحساب بنجاح، تم إرسال رسالة بريد إلكتروني للتحقق.',
             'success-verify-email-unsent' => 'تم إنشاء الحساب بنجاح، ولكن رسالة التحقق لم تتم إرسالها.',
+            'terms-conditions'            => 'الشروط والأحكام',
             'verification-not-sent'       => 'خطأ! مشكلة في إرسال رسالة التحقق البريدية، يرجى المحاولة مرة أخرى لاحقًا.',
             'verification-sent'           => 'تم إرسال رسالة التحقق',
             'verified'                    => 'تم التحقق من حسابك، حاول تسجيل الدخول الآن.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'تمت إضافة العنصر بنجاح إلى قائمة الأماني',
                 'title'              => 'قائمة الأماني',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'مكتمل',
+                'date'                        => 'التاريخ',
+                'declined'                    => 'مرفوض',
+                'id'                          => 'المعرف',
+                'message'                     => 'الرسالة',
+                'pending'                     => 'قيد الانتظار',
+                'processing'                  => 'قيد المعالجة',
+                'status'                      => 'الحالة',
+                'success-verify'              => 'نجاح! تم إرسال بريد التحقق.',
+                'success-verify-email-unsent' => 'نجاح! لم يتم إرسال بريد التحقق.',
+                'type'                        => 'النوع',
+                'unable-to-sent'              => 'غير قادر على إرسال البريد.',
+
+                'index'   => [
+                    'create-btn' => 'إنشاء طلب',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'طلبات بيانات GDPR',
+
+                    'modal' => [
+                        'message' => 'الرسالة',
+                        'save'    => 'حفظ',
+                        'title'   => 'إنشاء طلب جديد',
+
+                        'type'    => [
+                            'choose' => 'اختر',
+                            'delete' => 'حذف',
+                            'title'  => 'النوع',
+                            'update' => 'تحديث',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'عرض المتجر الافتراضي',
+
+                    'account-info' => [
+                        'dob'          => 'تاريخ الميلاد',
+                        'email'        => 'البريد الإلكتروني',
+                        'first-name'   => 'الاسم الأول',
+                        'gender'       => 'الجنس',
+                        'last-name'    => 'اسم العائلة',
+                        'phone'        => 'الهاتف',
+                        'title'        => 'معلومات الحساب',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'العنوان',
+                        'address1'   => 'العنوان 1',
+                        'address2'   => 'العنوان 2',
+                        'city'       => 'المدينة',
+                        'company'    => 'الشركة',
+                        'country'    => 'الدولة',
+                        'first-name' => 'الاسم الأول',
+                        'last-name'  => 'اسم العائلة',
+                        'phone'      => 'الهاتف',
+                        'postcode'   => 'الرمز البريدي',
+                        'state'      => 'الولاية',
+                        'title'      => 'معلومات العنوان',
+                        'vat-id'     => 'رقم الضريبة',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'المبلغ',
+                        'order-id'     => 'معرف الطلب',
+                        'product-name' => 'اسم المنتج',
+                        'qty'          => 'الكمية',
+                        'shipping'     => 'الشحن',
+                        'sku'          => 'رمز المنتج',
+                        'status'       => 'الحالة',
+                        'title'        => 'معلومات الطلب',
+                        'type'         => 'النوع',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'اشترك في النشرة الإخبارية',
                 'subscribe-stay-touch'   => 'اشترك للبقاء على اتصال.',
                 'whats-new'              => 'ما الجديد',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'سياسة الخصوصية',
+                    'reject'                   => 'رفض',
+                    'accept'                   => 'قبول',
+                    'learn-more-and-customize' => 'تعرف على المزيد وقم بالتخصيص',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'تفضيلات موافقتك على ملفات تعريف الارتباط',
+                    'save-and-continue'                      => 'حفظ ومتابعة',
+                    'strictly-necessary'                     => 'ضرورية للغاية',
+                    'basic-interactions-and-functionalities' => 'التفاعلات والوظائف الأساسية',
+                    'experience-enhancement'                 => 'تحسين التجربة',
+                    'measurement'                            => 'القياس',
+                    'targeting-and-advertising'              => 'الاستهداف والإعلانات',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'العنوان',
         'downloadable-products' => 'المنتجات القابلة للتنزيل',
+        'gdpr-request'          => 'طلبات GDPR',
         'my-account'            => 'حسابي',
         'orders'                => 'الطلبات',
         'profile'               => 'الملف الشخصي',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'مرحبًا في نشرتنا الإخبارية!',
                 'subject'     => 'أنت مشترك في نشرتنا الإخبارية',
                 'unsubscribe' => 'إلغاء الاشتراك',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'طلب جديد لحذف البيانات',
+                'new-update-request' => 'طلب جديد لتحديث البيانات',
+
+                'new-request' => [
+                    'message'        => 'الرسالة : ',
+                    'request-status' => 'حالة الطلب : ',
+                    'request-type'   => 'نوع الطلب : ',
+                    'summary'        => 'ملخص الطلب',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'الرسالة : ',
+                    'request-status' => 'حالة الطلب : ',
+                    'request-type'   => 'نوع الطلب : ',
+                    'summary'        => 'ملخص طلب الحذف',
+                ],
+
+                'update-request' => [
+                    'message'        => 'الرسالة : ',
+                    'request-status' => 'حالة الطلب : ',
+                ],
             ],
         ],
 

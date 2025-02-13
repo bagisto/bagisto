@@ -547,6 +547,132 @@ return [
                 'channel_based' => true,
             ],
         ],
+    ], [
+        'key'  => 'general.gdpr',
+        'name' => 'admin::app.configuration.index.general.gdpr.title',
+        'info' => 'admin::app.configuration.index.general.gdpr.info',
+        'icon' => 'settings/store.svg',
+        'sort' => 4,
+    ], [
+        'key'    => 'general.gdpr.settings',
+        'name'   => 'admin::app.configuration.index.general.gdpr.settings.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.settings.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.settings.enabled',
+                'type'          => 'boolean',
+                'channel_based' => false,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.agreement',
+        'name'   => 'admin::app.configuration.index.general.gdpr.agreement.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.agreement.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.enable',
+                'type'          => 'boolean',
+                'channel_based' => false,
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'text',
+                'default'       => 'I agree with the terms and conditions.',
+                'depends'       => 'enabled:true',
+                'channel_based' => false,
+            ], [
+                'name'          => 'agreement_content',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.content',
+                'type'          => 'textarea',
+                'depends'       => 'enabled:true',
+                'channel_based' => false,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.cookie',
+        'name'   => 'admin::app.configuration.index.general.gdpr.cookie.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.cookie.info',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.enable',
+                'type'          => 'boolean',
+                'channel_based' => false,
+            ], [
+                'name'          => 'position',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.position',
+                'type'          => 'select',
+                'default'       => 'bottom_left',
+                'depends'       => 'enabled:true',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-left',
+                        'value' => 'bottom_left',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-right',
+                        'value' => 'bottom_right',
+                    ],
+                ],
+                'channel_based' => false,
+            ], [
+                'name'          => 'static_block_identifier',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.identifier',
+                'type'          => 'text',
+                'default'       => 'Cookie Block',
+                'depends'       => 'enabled:true',
+                'channel_based' => false,
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.description',
+                'type'          => 'textarea',
+                'default'       => 'This website uses cookies to ensure you get the best experience on our website.',
+                'depends'       => 'enabled:true',
+                'channel_based' => false,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.cookie_consent',
+        'name'   => 'admin::app.configuration.index.general.gdpr.cookie-consent.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.cookie-consent.info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'          => 'strictly_necessary',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.strictly-necessary',
+                'type'          => 'textarea',
+                'default'       => 'I agree with the terms and conditions.',
+                'channel_based' => false,
+            ], [
+                'name'          => 'basic_interaction',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.basic-interaction',
+                'type'          => 'textarea',
+                'default'       => 'These trackers enable basic interactions and functionalities that allow you to access selected features of our service and facilitate your communication with us.',
+                'channel_based' => false,
+            ], [
+                'name'          => 'experience_enhancement',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.experience-enhancement',
+                'type'          => 'textarea',
+                'default'       => 'These trackers help us to provide a personalized user experience by improving the quality of your preference management options, and by enabling the interaction with external networks and platforms.',
+                'channel_based' => false,
+            ], [
+                'name'          => 'measurements',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.measurement',
+                'type'          => 'textarea',
+                'default'       => 'These trackers help us to measure traffic and analyze your behavior with the goal of improving our service.',
+                'channel_based' => false,
+            ], [
+                'name'          => 'targeting_advertising',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.targeting-advertising',
+                'type'          => 'textarea',
+                'default'       => 'These trackers help us to deliver personalized marketing content to you based on your behavior and to operate, serve and track ads.',
+                'channel_based' => false,
+            ],
+        ],
     ],
 
     /**

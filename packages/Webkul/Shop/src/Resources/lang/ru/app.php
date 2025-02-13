@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Уже есть аккаунт?',
             'bagisto'                     => 'Багисто',
             'button-title'                => 'Зарегистрироваться',
+            'click-here'                  => 'Нажмите здесь',
             'confirm-pass'                => 'Подтвердите пароль',
             'email'                       => 'Электронная почта',
             'first-name'                  => 'Имя',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Аккаунт успешно создан.',
             'success-verify'              => 'Аккаунт успешно создан, на вашу почту отправлено письмо с подтверждением.',
             'success-verify-email-unsent' => 'Аккаунт успешно создан, но письмо с подтверждением не отправлено.',
+            'terms-conditions'            => 'Условия и положения',
             'verification-not-sent'       => 'Ошибка! Проблема с отправкой письма с подтверждением, попробуйте позже.',
             'verification-sent'           => 'Письмо с подтверждением отправлено',
             'verified'                    => 'Ваш аккаунт подтвержден, попробуйте войти сейчас.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'Товар успешно добавлен в список желаний',
                 'title'              => 'Список желаний',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'Завершено',
+                'date'                        => 'Дата',
+                'declined'                    => 'Отклонено',
+                'id'                          => 'Идентификатор',
+                'message'                     => 'Сообщение',
+                'pending'                     => 'В ожидании',
+                'processing'                  => 'Обработка',
+                'status'                      => 'Статус',
+                'success-verify'              => 'Успех! Письмо с подтверждением отправлено.',
+                'success-verify-email-unsent' => 'Успех! Письмо с подтверждением не отправлено.',
+                'type'                        => 'Тип',
+                'unable-to-sent'              => 'Не удалось отправить письмо.',
+
+                'index'   => [
+                    'create-btn' => 'Создать запрос',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'Запросы данных GDPR',
+
+                    'modal' => [
+                        'message' => 'Сообщение',
+                        'save'    => 'Сохранить',
+                        'title'   => 'Создать новый запрос',
+
+                        'type'    => [
+                            'choose' => 'Выбрать',
+                            'delete' => 'Удалить',
+                            'title'  => 'Тип',
+                            'update' => 'Обновить',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Вид магазина по умолчанию',
+
+                    'account-info' => [
+                        'dob'          => 'Дата рождения',
+                        'email'        => 'Электронная почта',
+                        'first-name'   => 'Имя',
+                        'gender'       => 'Пол',
+                        'last-name'    => 'Фамилия',
+                        'phone'        => 'Телефон',
+                        'title'        => 'Информация об аккаунте',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Адрес',
+                        'address1'   => 'Адрес 1',
+                        'address2'   => 'Адрес 2',
+                        'city'       => 'Город',
+                        'company'    => 'Компания',
+                        'country'    => 'Страна',
+                        'first-name' => 'Имя',
+                        'last-name'  => 'Фамилия',
+                        'phone'      => 'Телефон',
+                        'postcode'   => 'Почтовый индекс',
+                        'state'      => 'Регион',
+                        'title'      => 'Информация об адресе',
+                        'vat-id'     => 'ИНН',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Сумма',
+                        'order-id'     => 'Идентификатор заказа',
+                        'product-name' => 'Название продукта',
+                        'qty'          => 'Количество',
+                        'shipping'     => 'Доставка',
+                        'sku'          => 'Артикул',
+                        'status'       => 'Статус',
+                        'title'        => 'Информация о заказе',
+                        'type'         => 'Тип',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'Подписаться на рассылку',
                 'subscribe-stay-touch'   => 'Подписаться, чтобы оставаться на связи.',
                 'whats-new'              => 'Что нового',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Политика конфиденциальности',
+                    'reject'                   => 'Отклонить',
+                    'accept'                   => 'Принять',
+                    'learn-more-and-customize' => 'Узнать больше и настроить',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Ваши предпочтения в отношении файлов cookie',
+                    'save-and-continue'                      => 'Сохранить и продолжить',
+                    'strictly-necessary'                     => 'Строго необходимые',
+                    'basic-interactions-and-functionalities' => 'Основные взаимодействия и функциональности',
+                    'experience-enhancement'                 => 'Улучшение опыта',
+                    'measurement'                            => 'Измерение',
+                    'targeting-and-advertising'              => 'Таргетинг и реклама',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'Адрес',
         'downloadable-products' => 'Загружаемые товары',
+        'gdpr-request'          => 'Запросы GDPR',
         'my-account'            => 'Мой аккаунт',
         'orders'                => 'Заказы',
         'profile'               => 'Профиль',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'Добро пожаловать в нашу рассылку!',
                 'subject'     => 'Подписка на нашу рассылку',
                 'unsubscribe' => 'Отписаться',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Новый запрос на удаление данных',
+                'new-update-request' => 'Новый запрос на обновление данных',
+
+                'new-request' => [
+                    'message'        => 'Сообщение : ',
+                    'request-status' => 'Статус запроса : ',
+                    'request-type'   => 'Тип запроса : ',
+                    'summary'        => 'Сводка запроса',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'Сообщение : ',
+                    'request-status' => 'Статус запроса : ',
+                    'request-type'   => 'Тип запроса : ',
+                    'summary'        => 'Сводка запроса на удаление',
+                ],
+
+                'update-request' => [
+                    'message'        => 'Сообщение : ',
+                    'request-status' => 'Статус запроса : ',
+                ],
             ],
         ],
 

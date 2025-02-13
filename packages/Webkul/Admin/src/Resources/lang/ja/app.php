@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPRリクエスト',
+
+                'datagrid' => [
+                    'completed'     => '完了',
+                    'created-at'    => '作成日時',
+                    'customer-name' => '顧客名',
+                    'declined'      => '拒否',
+                    'delete'        => '削除',
+                    'edit'          => '編集',
+                    'id'            => 'ID',
+                    'message'       => 'メッセージ',
+                    'pending'       => '保留中',
+                    'processing'    => '処理中',
+                    'status'        => 'ステータス',
+                    'type'          => 'タイプ',
+                ],
+
+                'modal' => [
+                    'completed'  => '完了',
+                    'declined'   => '拒否',
+                    'pending'    => '保留中',
+                    'processing' => '処理中',
+                    'status'     => 'ステータス',
+                    'title'      => 'GDPRデータリクエストを編集',
+                    'type'       => 'タイプ',
+                    'message'    => 'メッセージ',
+                    'save-btn'   => '保存',
+                ],
+
+                'update-success'              => 'データリクエストが正常に更新され、顧客にメールが送信されました。',
+                'delete-success'              => 'データリクエストが正常に削除されました。',
+                'attribute-reason-error'      => '削除できません。',
+                'update-success-unsent-email' => 'データリクエストが正常に更新されましたが、顧客にメールが送信されませんでした。',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => '日付',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'GDPR設定',
+                    'info'    => 'GDPR設定',
+                    'enabled' => '有効',
+                ],
+
+                'agreement' => [
+                    'title'          => 'GDPR同意',
+                    'info'           => 'GDPR同意',
+                    'enable'         => '顧客同意を有効にする',
+                    'checkbox-label' => '同意チェックボックスラベル',
+                    'content'        => '同意内容',
+                ],
+
+                'cookie' => [
+                    'title'        => 'クッキーメッセージ設定',
+                    'info'         => 'クッキーメッセージ設定',
+                    'enable'       => 'クッキー通知を有効にする',
+                    'position'     => 'クッキーブロック表示位置',
+                    'bottom-left'  => '左下',
+                    'bottom-right' => '右下',
+                    'identifier'   => '静的ブロック識別子',
+                    'description'  => '説明',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'クッキー同意の設定',
+                    'info'                   => 'クッキー同意の設定',
+                    'strictly-necessary'     => '厳密に必要',
+                    'basic-interaction'      => '基本的な相互作用と機能',
+                    'experience-enhancement' => '体験の向上',
+                    'measurement'            => '測定',
+                    'targeting-advertising'  => 'ターゲティングと広告',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'カタログ',
                 'title' => 'カタログ',
@@ -4290,7 +4368,7 @@ return [
                 'currencies'               => '通貨',
                 'customers'                => '顧客',
                 'dashboard'                => 'ダッシュボード',
-                'data-transfer'            => 'Data Transfer',
+                'data-transfer'            => 'データ転送',
                 'discount'                 => '割引',
                 'email-templates'          => 'メールテンプレート',
                 'events'                   => 'イベント',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => '取引',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
+                'gdpr-data-requests'       => 'GDPRデータリクエスト',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => '私たちに登録したばかりの新しい顧客、:customer_name を温かく歓迎します。',
                 'subject'     => '新規顧客登録',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'あなたのGDPRリクエストのステータス',
         ],
 
         'orders' => [

@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'Запит GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Завершено',
+                    'created-at'    => 'Створено',
+                    'customer-name' => 'Ім\'я клієнта',
+                    'declined'      => 'Відхилено',
+                    'delete'        => 'Видалити',
+                    'edit'          => 'Редагувати',
+                    'id'            => 'ID',
+                    'message'       => 'Повідомлення',
+                    'pending'       => 'В очікуванні',
+                    'processing'    => 'Обробка',
+                    'status'        => 'Статус',
+                    'type'          => 'Тип',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Завершено',
+                    'declined'   => 'Відхилено',
+                    'pending'    => 'В очікуванні',
+                    'processing' => 'Обробка',
+                    'status'     => 'Статус',
+                    'title'      => 'Редагувати запит на дані GDPR',
+                    'type'       => 'Тип',
+                    'message'    => 'Повідомлення',
+                    'save-btn'   => 'Зберегти',
+                ],
+
+                'update-success'              => 'Запит на дані успішно оновлено та електронний лист надіслано клієнту.',
+                'delete-success'              => 'Запит на дані успішно видалено.',
+                'attribute-reason-error'      => 'Не вдалося видалити.',
+                'update-success-unsent-email' => 'Запит на дані успішно оновлено, але електронний лист не надіслано клієнту.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Дата',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'Налаштування GDPR',
+                    'info'    => 'Налаштування GDPR',
+                    'enabled' => 'Увімкнено',
+                ],
+
+                'agreement' => [
+                    'title'          => 'Угода GDPR',
+                    'info'           => 'Угода GDPR',
+                    'enable'         => 'Увімкнути угоду з клієнтом',
+                    'checkbox-label' => 'Мітка прапорця угоди',
+                    'content'        => 'Зміст угоди',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Налаштування повідомлення про файли cookie',
+                    'info'         => 'Налаштування повідомлення про файли cookie',
+                    'enable'       => 'Увімкнути повідомлення про файли cookie',
+                    'position'     => 'Позиція відображення блоку файлів cookie',
+                    'bottom-left'  => 'Знизу зліва',
+                    'bottom-right' => 'Знизу справа',
+                    'identifier'   => 'Ідентифікатор статичного блоку',
+                    'description'  => 'Опис',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'Ваші налаштування згоди на файли cookie',
+                    'info'                   => 'Ваші налаштування згоди на файли cookie',
+                    'strictly-necessary'     => 'Суворо необхідні',
+                    'basic-interaction'      => 'Основні взаємодії та функціональність',
+                    'experience-enhancement' => 'Покращення досвіду',
+                    'measurement'            => 'Вимірювання',
+                    'targeting-advertising'  => 'Цільова реклама',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Каталог',
                 'title' => 'Каталог',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'Транзакції',
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
+                'gdpr-data-requests'       => 'Запити на дані GDPR',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Ми тепло вітаємо нового клієнта :customer_name, який щойно зареєструвався у нас!',
                 'subject'     => 'Реєстрація нового клієнта',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'Статус вашого запиту GDPR',
         ],
 
         'orders' => [

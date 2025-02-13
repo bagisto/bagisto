@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'Żądanie GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Zakończone',
+                    'created-at'    => 'Utworzono',
+                    'customer-name' => 'Nazwa klienta',
+                    'declined'      => 'Odrzucone',
+                    'delete'        => 'Usuń',
+                    'edit'          => 'Edytuj',
+                    'id'            => 'ID',
+                    'message'       => 'Wiadomość',
+                    'pending'       => 'Oczekujące',
+                    'processing'    => 'Przetwarzanie',
+                    'status'        => 'Status',
+                    'type'          => 'Typ',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Zakończone',
+                    'declined'   => 'Odrzucone',
+                    'pending'    => 'Oczekujące',
+                    'processing' => 'Przetwarzanie',
+                    'status'     => 'Status',
+                    'title'      => 'Edytuj żądanie danych GDPR',
+                    'type'       => 'Typ',
+                    'message'    => 'Wiadomość',
+                    'save-btn'   => 'Zapisz',
+                ],
+
+                'update-success'              => 'Żądanie danych zostało pomyślnie zaktualizowane i wysłano e-mail do klienta.',
+                'delete-success'              => 'Żądanie danych zostało pomyślnie usunięte.',
+                'attribute-reason-error'      => 'Nie można usunąć.',
+                'update-success-unsent-email' => 'Żądanie danych zostało pomyślnie zaktualizowane, ale e-mail nie został wysłany do klienta.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Data',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'Ustawienia GDPR',
+                    'info'    => 'Ustawienia GDPR',
+                    'enabled' => 'Włączone',
+                ],
+
+                'agreement' => [
+                    'title'          => 'Zgoda GDPR',
+                    'info'           => 'Zgoda GDPR',
+                    'enable'         => 'Włącz zgodę klienta',
+                    'checkbox-label' => 'Etykieta pola wyboru zgody',
+                    'content'        => 'Treść zgody',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Ustawienia komunikatu o plikach cookie',
+                    'info'         => 'Ustawienia komunikatu o plikach cookie',
+                    'enable'       => 'Włącz powiadomienie o plikach cookie',
+                    'position'     => 'Pozycja wyświetlania bloku plików cookie',
+                    'bottom-left'  => 'Dół lewo',
+                    'bottom-right' => 'Dół prawo',
+                    'identifier'   => 'Identyfikator bloku statycznego',
+                    'description'  => 'Opis',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'Twoje preferencje dotyczące zgody na pliki cookie',
+                    'info'                   => 'Twoje preferencje dotyczące zgody na pliki cookie',
+                    'strictly-necessary'     => 'Ściśle niezbędne',
+                    'basic-interaction'      => 'Podstawowe interakcje i funkcjonalności',
+                    'experience-enhancement' => 'Ulepszenia doświadczenia',
+                    'measurement'            => 'Pomiar',
+                    'targeting-advertising'  => 'Targetowanie i reklama',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Katalog',
                 'title' => 'Katalog',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'Transakcje',
                 'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
+                'gdpr-data-requests'       => 'Żądania danych GDPR',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Serdecznie witamy nowego klienta, :customer_name, który właśnie się u nas zarejestrował!',
                 'subject'     => 'Rejestracja nowego klienta',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'Status twojego żądania GDPR',
         ],
 
         'orders' => [

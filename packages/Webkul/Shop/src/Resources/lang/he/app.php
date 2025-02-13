@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'כבר יש לך חשבון?',
             'bagisto'                     => 'בַּגִּיסְטוֹ',
             'button-title'                => 'הירשם',
+            'click-here'                  => 'לחץ כאן',
             'confirm-pass'                => 'אימות סיסמה',
             'email'                       => 'אימייל',
             'first-name'                  => 'שם פרטי',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'חשבון נוצר בהצלחה.',
             'success-verify'              => 'חשבון נוצר בהצלחה, הודעת אימייל נשלחה לאימות.',
             'success-verify-email-unsent' => 'חשבון נוצר בהצלחה, אך הודעת האימייל לא נשלחה.',
+            'terms-conditions'            => 'תנאים והגבלות',
             'verification-not-sent'       => 'שגיאה! בעיה בשליחת האימייל לאימות, אנא נסה שוב מאוחר יותר.',
             'verification-sent'           => 'האימייל לאימות נשלח',
             'verified'                    => 'חשבונך אומת, נסה להתחבר כעת.',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'הפריט הוסף בהצלחה לרשימת המשאלות',
                 'title'              => 'רשימת משאלות',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'הושלם',
+                'date'                        => 'תאריך',
+                'declined'                    => 'נדחה',
+                'id'                          => 'מזהה',
+                'message'                     => 'הודעה',
+                'pending'                     => 'ממתין',
+                'processing'                  => 'מעבד',
+                'status'                      => 'סטטוס',
+                'success-verify'              => 'הצלחה! אימייל האימות נשלח.',
+                'success-verify-email-unsent' => 'הצלחה! אימייל האימות לא נשלח.',
+                'type'                        => 'סוג',
+                'unable-to-sent'              => 'לא ניתן לשלוח אימייל.',
+
+                'index'   => [
+                    'create-btn' => 'צור בקשה',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'בקשות נתוני GDPR',
+
+                    'modal' => [
+                        'message' => 'הודעה',
+                        'save'    => 'שמור',
+                        'title'   => 'צור בקשה חדשה',
+
+                        'type'    => [
+                            'choose' => 'בחר',
+                            'delete' => 'מחק',
+                            'title'  => 'סוג',
+                            'update' => 'עדכן',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'תצוגת חנות ברירת מחדל',
+
+                    'account-info' => [
+                        'dob'          => 'תאריך לידה',
+                        'email'        => 'אימייל',
+                        'first-name'   => 'שם פרטי',
+                        'gender'       => 'מין',
+                        'last-name'    => 'שם משפחה',
+                        'phone'        => 'טלפון',
+                        'title'        => 'מידע על החשבון',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'כתובת',
+                        'address1'   => 'כתובת 1',
+                        'address2'   => 'כתובת 2',
+                        'city'       => 'עיר',
+                        'company'    => 'חברה',
+                        'country'    => 'מדינה',
+                        'first-name' => 'שם פרטי',
+                        'last-name'  => 'שם משפחה',
+                        'phone'      => 'טלפון',
+                        'postcode'   => 'מיקוד',
+                        'state'      => 'מדינה',
+                        'title'      => 'מידע על הכתובת',
+                        'vat-id'     => 'מספר עוסק מורשה',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'סכום',
+                        'order-id'     => 'מספר הזמנה',
+                        'product-name' => 'שם המוצר',
+                        'qty'          => 'כמות',
+                        'shipping'     => 'משלוח',
+                        'sku'          => 'קוד SKU',
+                        'status'       => 'סטטוס',
+                        'title'        => 'מידע על ההזמנה',
+                        'type'         => 'סוג',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'הרשמו לרשימת התפוצה',
                 'subscribe-stay-touch'   => 'הירשמו לעדכונים ונשארו מעודכנים.',
                 'whats-new'              => 'מה חדש',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'מדיניות פרטיות',
+                    'reject'                   => 'דחה',
+                    'accept'                   => 'קבל',
+                    'learn-more-and-customize' => 'למד עוד והתאם אישית',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'העדפות הסכמת העוגיות שלך',
+                    'save-and-continue'                      => 'שמור והמשך',
+                    'strictly-necessary'                     => 'הכרחי בהחלט',
+                    'basic-interactions-and-functionalities' => 'אינטראקציות ותפקודים בסיסיים',
+                    'experience-enhancement'                 => 'שיפור חווית משתמש',
+                    'measurement'                            => 'מדידה',
+                    'targeting-and-advertising'              => 'מיקוד ופרסום',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'כתובת',
         'downloadable-products' => 'מוצרים להורדה',
+        'gdpr-request'          => 'בקשות GDPR',
         'my-account'            => 'החשבון שלי',
         'orders'                => 'הזמנות',
         'profile'               => 'פרופיל',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'ברוך הבא לניוזלטר שלנו!',
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'בקשה חדשה למחיקת נתונים',
+                'new-update-request' => 'בקשה חדשה לעדכון נתונים',
+
+                'new-request' => [
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                    'request-type'   => 'סוג הבקשה : ',
+                    'summary'        => 'סיכום הבקשה',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                    'request-type'   => 'סוג הבקשה : ',
+                    'summary'        => 'סיכום בקשת המחיקה',
+                ],
+
+                'update-request' => [
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                ],
             ],
         ],
 

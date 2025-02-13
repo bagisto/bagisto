@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'पहले से ही खाता है?',
             'bagisto'                     => 'बागिस्तो',
             'button-title'                => 'रजिस्टर करें',
+            'click-here'                  => 'यहां क्लिक करें',
             'confirm-pass'                => 'पासवर्ड की पुष्टि करें',
             'email'                       => 'ईमेल',
             'first-name'                  => 'पहला नाम',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'खाता सफलतापूर्वक बनाया गया है।',
             'success-verify'              => 'खाता सफलतापूर्वक बनाया गया है, सत्यापन के लिए एक ईमेल भेजा गया है।',
             'success-verify-email-unsent' => 'खाता सफलतापूर्वक बनाया गया है, लेकिन सत्यापन ईमेल अयसेंट नहीं हुआ है।',
+            'terms-conditions'            => 'नियम और शर्तें',
             'verification-not-sent'       => 'त्रुटि! सत्यापन ईमेल भेजने में समस्या है, कृपया बाद में पुनः प्रयास करें।',
             'verification-sent'           => 'सत्यापन ईमेल भेजा गया है',
             'verified'                    => 'आपका खाता सत्यापित हो गया है, अब साइन इन करने का प्रयास करें।',
@@ -373,6 +375,83 @@ return [
                 'success'            => 'आइटम सफलतापूर्वक इच्छा-सूची में जोड़ा गया',
                 'title'              => 'इच्छा सूची',
             ],
+
+            'gdpr' => [
+                'completed'                   => 'पूरा हुआ',
+                'date'                        => 'तारीख',
+                'declined'                    => 'अस्वीकृत',
+                'id'                          => 'आईडी',
+                'message'                     => 'संदेश',
+                'pending'                     => 'लंबित',
+                'processing'                  => 'प्रसंस्करण',
+                'status'                      => 'स्थिति',
+                'success-verify'              => 'सफलता! सत्यापन ईमेल भेजा गया है।',
+                'success-verify-email-unsent' => 'सफलता! सत्यापन ईमेल नहीं भेजा गया है।',
+                'type'                        => 'प्रकार',
+                'unable-to-sent'              => 'ईमेल भेजने में असमर्थ।',
+
+                'index'   => [
+                    'create-btn' => 'अनुरोध बनाएं',
+                    'html'       => 'एचटीएमएल',
+                    'pdf'        => 'पीडीएफ',
+                    'title'      => 'जीडीपीआर डेटा अनुरोध',
+
+                    'modal' => [
+                        'message' => 'संदेश',
+                        'save'    => 'सहेजें',
+                        'title'   => 'नया अनुरोध बनाएं',
+
+                        'type'    => [
+                            'choose' => 'चुनें',
+                            'delete' => 'हटाएं',
+                            'title'  => 'प्रकार',
+                            'update' => 'अपडेट करें',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'डिफ़ॉल्ट स्टोर दृश्य',
+
+                    'account-info' => [
+                        'dob'          => 'जन्म तिथि',
+                        'email'        => 'ईमेल',
+                        'first-name'   => 'पहला नाम',
+                        'gender'       => 'लिंग',
+                        'last-name'    => 'अंतिम नाम',
+                        'phone'        => 'फ़ोन',
+                        'title'        => 'खाता जानकारी',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'पता',
+                        'address1'   => 'पता 1',
+                        'address2'   => 'पता 2',
+                        'city'       => 'शहर',
+                        'company'    => 'कंपनी',
+                        'country'    => 'देश',
+                        'first-name' => 'पहला नाम',
+                        'last-name'  => 'अंतिम नाम',
+                        'phone'      => 'फ़ोन',
+                        'postcode'   => 'पिन कोड',
+                        'state'      => 'राज्य',
+                        'title'      => 'पता जानकारी',
+                        'vat-id'     => 'वैट आईडी',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'राशि',
+                        'order-id'     => 'आदेश आईडी',
+                        'product-name' => 'उत्पाद का नाम',
+                        'qty'          => 'मात्रा',
+                        'shipping'     => 'शिपिंग',
+                        'sku'          => 'एसकेयू',
+                        'status'       => 'स्थिति',
+                        'title'        => 'आदेश जानकारी',
+                        'type'         => 'प्रकार',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => 'सदस्यता लें',
                 'subscribe-stay-touch'   => 'संपर्क में रहने के लिए सदस्यता लें।',
                 'whats-new'              => 'नया क्या है',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'गोपनीयता नीति',
+                    'reject'                   => 'अस्वीकार करें',
+                    'accept'                   => 'स्वीकार करें',
+                    'learn-more-and-customize' => 'और जानें और अनुकूलित करें',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'आपकी कुकी सहमति प्राथमिकताएँ',
+                    'save-and-continue'                      => 'सहेजें और जारी रखें',
+                    'strictly-necessary'                     => 'सख्ती से आवश्यक',
+                    'basic-interactions-and-functionalities' => 'मूल इंटरैक्शन और कार्यक्षमताएँ',
+                    'experience-enhancement'                 => 'अनुभव वृद्धि',
+                    'measurement'                            => 'मापन',
+                    'targeting-and-advertising'              => 'लक्ष्यीकरण और विज्ञापन',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => 'पता',
         'downloadable-products' => 'डाउनलोड करने योग्य उत्पाद',
+        'gdpr-request'          => 'जीडीपीआर अनुरोध',
         'my-account'            => 'मेरा खाता',
         'orders'                => 'आदेश',
         'profile'               => 'प्रोफ़ाइल',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => 'हमारे समाचार पत्रिका में आपका स्वागत है!',
                 'subject'     => 'आपने हमारी समाचार पत्रिका में सदस्यता ली है!',
                 'unsubscribe' => 'सदस्यता रद्द करें',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'डेटा हटाने के लिए नया अनुरोध',
+                'new-update-request' => 'डेटा अपडेट के लिए नया अनुरोध',
+
+                'new-request' => [
+                    'message'        => 'संदेश : ',
+                    'request-status' => 'अनुरोध की स्थिति : ',
+                    'request-type'   => 'अनुरोध प्रकार : ',
+                    'summary'        => 'अनुरोध का सारांश',
+                ],
+
+                'delete-request' => [
+                    'message'        => 'संदेश : ',
+                    'request-status' => 'अनुरोध की स्थिति : ',
+                    'request-type'   => 'अनुरोध प्रकार : ',
+                    'summary'        => 'हटाने के अनुरोध का सारांश',
+                ],
+
+                'update-request' => [
+                    'message'        => 'संदेश : ',
+                    'request-status' => 'अनुरोध की स्थिति : ',
+                ],
             ],
         ],
 

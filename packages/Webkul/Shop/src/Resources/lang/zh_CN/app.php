@@ -50,6 +50,7 @@ return [
             'account-exists'              => '已经有账户？',
             'bagisto'                     => '巴基斯托',
             'button-title'                => '注册',
+            'click-here'                  => '点击这里',
             'confirm-pass'                => '确认密码',
             'email'                       => '电子邮件',
             'first-name'                  => '名字',
@@ -63,6 +64,7 @@ return [
             'success'                     => '成功创建账户。',
             'success-verify'              => '成功创建账户，已发送验证电子邮件。',
             'success-verify-email-unsent' => '成功创建账户，但未发送验证电子邮件。',
+            'terms-conditions'            => '条款和条件',
             'verification-not-sent'       => '错误！发送验证电子邮件时出现问题，请稍后再试。',
             'verification-sent'           => '已发送验证电子邮件',
             'verified'                    => '您的账户已验证，请尝试登录。',
@@ -373,6 +375,83 @@ return [
                 'success'            => '商品成功添加到愿望清单',
                 'title'              => '愿望清单',
             ],
+
+            'gdpr' => [
+                'completed'                   => '已完成',
+                'date'                        => '日期',
+                'declined'                    => '已拒绝',
+                'id'                          => '编号',
+                'message'                     => '消息',
+                'pending'                     => '待处理',
+                'processing'                  => '处理中',
+                'status'                      => '状态',
+                'success-verify'              => '成功！验证邮件已发送。',
+                'success-verify-email-unsent' => '成功！验证邮件未发送。',
+                'type'                        => '类型',
+                'unable-to-sent'              => '无法发送邮件。',
+
+                'index'   => [
+                    'create-btn' => '创建请求',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR 数据请求',
+
+                    'modal' => [
+                        'message' => '消息',
+                        'save'    => '保存',
+                        'title'   => '创建新请求',
+
+                        'type'    => [
+                            'choose' => '选择',
+                            'delete' => '删除',
+                            'title'  => '类型',
+                            'update' => '更新',
+                        ],
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => '默认商店视图',
+
+                    'account-info' => [
+                        'dob'          => '出生日期',
+                        'email'        => '电子邮件',
+                        'first-name'   => '名字',
+                        'gender'       => '性别',
+                        'last-name'    => '姓氏',
+                        'phone'        => '电话',
+                        'title'        => '账户信息',
+                    ],
+
+                    'address-info' => [
+                        'address'    => '地址',
+                        'address1'   => '地址 1',
+                        'address2'   => '地址 2',
+                        'city'       => '城市',
+                        'company'    => '公司',
+                        'country'    => '国家',
+                        'first-name' => '名字',
+                        'last-name'  => '姓氏',
+                        'phone'      => '电话',
+                        'postcode'   => '邮政编码',
+                        'state'      => '省份',
+                        'title'      => '地址信息',
+                        'vat-id'     => '增值税号',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => '金额',
+                        'order-id'     => '订单编号',
+                        'product-name' => '产品名称',
+                        'qty'          => '数量',
+                        'shipping'     => '运输',
+                        'sku'          => 'SKU',
+                        'status'       => '状态',
+                        'title'        => '订单信息',
+                        'type'         => '类型',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -445,6 +524,25 @@ return [
                 'subscribe-newsletter'   => '订阅新闻通讯',
                 'subscribe-stay-touch'   => '订阅以保持联系。',
                 'whats-new'              => '新消息',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => '隐私政策',
+                    'reject'                   => '拒绝',
+                    'accept'                   => '接受',
+                    'learn-more-and-customize' => '了解更多并自定义',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => '您的 Cookie 同意偏好',
+                    'save-and-continue'                      => '保存并继续',
+                    'strictly-necessary'                     => '严格必要',
+                    'basic-interactions-and-functionalities' => '基本交互和功能',
+                    'experience-enhancement'                 => '体验增强',
+                    'measurement'                            => '测量',
+                    'targeting-and-advertising'              => '目标和广告',
+                ],
             ],
         ],
 
@@ -931,6 +1029,7 @@ return [
     'layouts' => [
         'address'               => '地址',
         'downloadable-products' => '可下载产品',
+        'gdpr-request'          => 'GDPR 请求',
         'my-account'            => '我的帐户',
         'orders'                => '订单',
         'profile'               => '个人资料',
@@ -989,6 +1088,30 @@ return [
                 'greeting'    => '欢迎加入我们的新闻通讯！',
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => '新的数据删除请求',
+                'new-update-request' => '新的数据更新请求',
+
+                'new-request' => [
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                    'request-type'   => '请求类型：',
+                    'summary'        => '请求摘要',
+                ],
+
+                'delete-request' => [
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                    'request-type'   => '请求类型：',
+                    'summary'        => '删除请求摘要',
+                ],
+
+                'update-request' => [
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                ],
             ],
         ],
 

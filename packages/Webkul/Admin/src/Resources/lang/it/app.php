@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'Richiesta GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Completato',
+                    'created-at'    => 'Creato il',
+                    'customer-name' => 'Nome Cliente',
+                    'declined'      => 'Rifiutato',
+                    'delete'        => 'Elimina',
+                    'edit'          => 'Modifica',
+                    'id'            => 'ID',
+                    'message'       => 'Messaggio',
+                    'pending'       => 'In Attesa',
+                    'processing'    => 'In Elaborazione',
+                    'status'        => 'Stato',
+                    'type'          => 'Tipo',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Completato',
+                    'declined'   => 'Rifiutato',
+                    'pending'    => 'In Attesa',
+                    'processing' => 'In Elaborazione',
+                    'status'     => 'Stato',
+                    'title'      => 'Modifica Richiesta Dati GDPR',
+                    'type'       => 'Tipo',
+                    'message'    => 'Messaggio',
+                    'save-btn'   => 'Salva',
+                ],
+
+                'update-success'              => 'Richiesta Dati aggiornata con successo e Email inviata al Cliente.',
+                'delete-success'              => 'Richiesta Dati eliminata con successo.',
+                'attribute-reason-error'      => 'Impossibile Eliminare.',
+                'update-success-unsent-email' => 'Richiesta Dati aggiornata con successo ma Email non inviata al Cliente.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Data',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'Impostazioni GDPR',
+                    'info'    => 'Impostazioni GDPR',
+                    'enabled' => 'Abilitato',
+                ],
+
+                'agreement' => [
+                    'title'          => 'Accordo GDPR',
+                    'info'           => 'Accordo GDPR',
+                    'enable'         => 'Abilita Accordo Cliente',
+                    'checkbox-label' => 'Etichetta Casella di Controllo Accordo',
+                    'content'        => 'Contenuto dell\'Accordo',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Impostazioni Messaggio Cookie',
+                    'info'         => 'Impostazioni Messaggio Cookie',
+                    'enable'       => 'Abilita Avviso Cookie',
+                    'position'     => 'Posizione di Visualizzazione del Blocco Cookie',
+                    'bottom-left'  => 'In Basso a Sinistra',
+                    'bottom-right' => 'In Basso a Destra',
+                    'identifier'   => 'Identificatore Blocco Statico',
+                    'description'  => 'Descrizione',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'La tua Preferenza di Consenso ai Cookie',
+                    'info'                   => 'La tua Preferenza di Consenso ai Cookie',
+                    'strictly-necessary'     => 'Strettamente Necessari',
+                    'basic-interaction'      => 'Interazioni di Base e Funzionalità',
+                    'experience-enhancement' => 'Miglioramenti dell\'Esperienza',
+                    'measurement'            => 'Misurazioni',
+                    'targeting-advertising'  => 'Targeting e Pubblicità',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Catalogo',
                 'title' => 'Catalogo',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'Transazioni',
                 'url-rewrites'             => 'Riscrittura URL',
                 'users'                    => 'Utenti',
+                'gdpr-data-requests'       => 'Richieste di Dati GDPR',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Diamo un caloroso benvenuto al nuovo cliente, :customer_name che si è appena registrato con noi!',
                 'subject'     => 'Nuova registrazione cliente',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'Lo stato della tua richiesta GDPR',
         ],
 
         'orders' => [

@@ -102,6 +102,13 @@
                 <x-shop::layouts.header />
             @endif
 
+            @if(
+                core()->getConfigData('general.gdpr.settings.enabled')
+                && core()->getConfigData('general.gdpr.cookie.enabled')
+            )
+                <x-shop::layouts.cookie />
+            @endif
+
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             <!-- Page Content Blade Component -->

@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR Verzoek',
+
+                'datagrid' => [
+                    'completed'     => 'Voltooid',
+                    'created-at'    => 'Aangemaakt Op',
+                    'customer-name' => 'Klantnaam',
+                    'declined'      => 'Afgewezen',
+                    'delete'        => 'Verwijderen',
+                    'edit'          => 'Bewerken',
+                    'id'            => 'ID',
+                    'message'       => 'Bericht',
+                    'pending'       => 'In Afwachting',
+                    'processing'    => 'Verwerken',
+                    'status'        => 'Status',
+                    'type'          => 'Type',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Voltooid',
+                    'declined'   => 'Afgewezen',
+                    'pending'    => 'In Afwachting',
+                    'processing' => 'Verwerken',
+                    'status'     => 'Status',
+                    'title'      => 'Bewerk GDPR Gegevensverzoek',
+                    'type'       => 'Type',
+                    'message'    => 'Bericht',
+                    'save-btn'   => 'Opslaan',
+                ],
+
+                'update-success'              => 'Gegevensverzoek succesvol bijgewerkt en e-mail verzonden naar klant.',
+                'delete-success'              => 'Gegevensverzoek succesvol verwijderd.',
+                'attribute-reason-error'      => 'Kan niet verwijderen.',
+                'update-success-unsent-email' => 'Gegevensverzoek succesvol bijgewerkt maar e-mail niet verzonden naar klant.',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'Datum',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'GDPR Instellingen',
+                    'info'    => 'GDPR Instellingen',
+                    'enabled' => 'Ingeschakeld',
+                ],
+
+                'agreement' => [
+                    'title'          => 'GDPR Overeenkomst',
+                    'info'           => 'GDPR Overeenkomst',
+                    'enable'         => 'Klantovereenkomst Inschakelen',
+                    'checkbox-label' => 'Overeenkomst Checkbox Label',
+                    'content'        => 'Overeenkomst Inhoud',
+                ],
+
+                'cookie' => [
+                    'title'        => 'Cookie Bericht Instellingen',
+                    'info'         => 'Cookie Bericht Instellingen',
+                    'enable'       => 'Cookie Kennisgeving Inschakelen',
+                    'position'     => 'Cookie Blok Weergavepositie',
+                    'bottom-left'  => 'Linksonder',
+                    'bottom-right' => 'Rechtsonder',
+                    'identifier'   => 'Statisch Blok Identificatie',
+                    'description'  => 'Beschrijving',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'Uw Cookie Toestemming Voorkeur',
+                    'info'                   => 'Uw Cookie Toestemming Voorkeur',
+                    'strictly-necessary'     => 'Strikt Noodzakelijk',
+                    'basic-interaction'      => 'Basis Interacties & Functionaliteiten',
+                    'experience-enhancement' => 'Ervaring Verbeteringen',
+                    'measurement'            => 'Metingen',
+                    'targeting-advertising'  => 'Targeting & Adverteren',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'Catalogus',
                 'title' => 'Catalogus',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'Transacties',
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
+                'gdpr-data-requests'       => 'GDPR Data Verzoeken',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'Wij heten de nieuwe klant, :customer_name, die zich zojuist bij ons heeft geregistreerd, van harte welkom!',
                 'subject'     => 'Nieuwe klantregistratie',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'Uw GDPR-verzoekstatus',
         ],
 
         'orders' => [

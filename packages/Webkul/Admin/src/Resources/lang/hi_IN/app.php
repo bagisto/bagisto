@@ -1765,6 +1765,44 @@ return [
             ],
         ],
 
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR अनुरोध',
+
+                'datagrid' => [
+                    'completed'     => 'पूरा हुआ',
+                    'created-at'    => 'बनाया गया',
+                    'customer-name' => 'ग्राहक का नाम',
+                    'declined'      => 'अस्वीकृत',
+                    'delete'        => 'हटाएं',
+                    'edit'          => 'संपादित करें',
+                    'id'            => 'आईडी',
+                    'message'       => 'संदेश',
+                    'pending'       => 'लंबित',
+                    'processing'    => 'प्रसंस्करण',
+                    'status'        => 'स्थिति',
+                    'type'          => 'प्रकार',
+                ],
+
+                'modal' => [
+                    'completed'  => 'पूरा हुआ',
+                    'declined'   => 'अस्वीकृत',
+                    'pending'    => 'लंबित',
+                    'processing' => 'प्रसंस्करण',
+                    'status'     => 'स्थिति',
+                    'title'      => 'GDPR डेटा अनुरोध संपादित करें',
+                    'type'       => 'प्रकार',
+                    'message'    => 'संदेश',
+                    'save-btn'   => 'सहेजें',
+                ],
+
+                'update-success'              => 'डेटा अनुरोध सफलतापूर्वक अपडेट किया गया और ग्राहक को ईमेल भेजा गया।',
+                'delete-success'              => 'डेटा अनुरोध सफलतापूर्वक हटाया गया।',
+                'attribute-reason-error'      => 'हटाने में असमर्थ।',
+                'update-success-unsent-email' => 'डेटा अनुरोध सफलतापूर्वक अपडेट किया गया लेकिन ग्राहक को ईमेल नहीं भेजा गया।',
+            ],
+        ],
+
         'reviews' => [
             'index' => [
                 'date'        => 'तारीख',
@@ -3672,6 +3710,46 @@ return [
                 ],
             ],
 
+            'gdpr' => [
+                'title' => 'GDPR',
+                'info'  => 'GDPR',
+
+                'settings' => [
+                    'title'   => 'GDPR सेटिंग्स',
+                    'info'    => 'GDPR सेटिंग्स',
+                    'enabled' => 'सक्षम',
+                ],
+
+                'agreement' => [
+                    'title'          => 'GDPR समझौता',
+                    'info'           => 'GDPR समझौता',
+                    'enable'         => 'ग्राहक समझौता सक्षम करें',
+                    'checkbox-label' => 'समझौता चेकबॉक्स लेबल',
+                    'content'        => 'समझौता सामग्री',
+                ],
+
+                'cookie' => [
+                    'title'        => 'कुकी संदेश सेटिंग्स',
+                    'info'         => 'कुकी संदेश सेटिंग्स',
+                    'enable'       => 'कुकी सूचना सक्षम करें',
+                    'position'     => 'कुकी ब्लॉक प्रदर्शन स्थिति',
+                    'bottom-left'  => 'नीचे बाईं ओर',
+                    'bottom-right' => 'नीचे दाईं ओर',
+                    'identifier'   => 'स्थिर ब्लॉक पहचानकर्ता',
+                    'description'  => 'विवरण',
+                ],
+
+                'cookie-consent' => [
+                    'title'                  => 'आपकी कुकी सहमति प्राथमिकता',
+                    'info'                   => 'आपकी कुकी सहमति प्राथमिकता',
+                    'strictly-necessary'     => 'सख्ती से आवश्यक',
+                    'basic-interaction'      => 'मूल इंटरैक्शन और कार्यक्षमताएँ',
+                    'experience-enhancement' => 'अनुभव संवर्द्धन',
+                    'measurement'            => 'माप',
+                    'targeting-advertising'  => 'लक्ष्यीकरण और विज्ञापन',
+                ],
+            ],
+
             'catalog' => [
                 'info'  => 'कैटलॉग',
                 'title' => 'कैटलॉग',
@@ -4324,6 +4402,7 @@ return [
                 'transactions'             => 'लेन-देन',
                 'url-rewrites'             => 'URL पुनर्लेखन',
                 'users'                    => 'उपयोगकर्ता',
+                'gdpr-data-requests'       => 'GDPR डेटा अनुरोध',
             ],
 
             'powered-by' => [
@@ -4637,6 +4716,10 @@ return [
                 'greeting'    => 'हम नए ग्राहक का हार्दिक स्वागत करते हैं, :customer_name जिसने अभी-अभी हमारे साथ पंजीकरण कराया है!',
                 'subject'     => 'नया ग्राहक पंजीकरण',
             ],
+        ],
+
+        'gdpr' => [
+            'status' => 'आपके GDPR अनुरोध की स्थिति',
         ],
 
         'orders' => [
