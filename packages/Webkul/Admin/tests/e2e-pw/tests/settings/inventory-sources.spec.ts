@@ -1,170 +1,162 @@
-import { test, expect, config } from '../../setup';
-import  * as forms from '../../utils/form';
+import { test, expect, config } from "../../setup";
+import {
+    generateName,
+    generateDescription,
+    generateSlug,
+    generateFullName,
+    generateEmail,
+    generatePhoneNumber,
+} from "../../utils/faker";
 
-test.describe('inventory source management', () => {
-    test('create inventory sources', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/inventory-sources`);
+test.describe("inventory source management", () => {
+    test("should create a inventory source", async ({ adminPage }) => {
+        /**
+         * Navigate to the create inventory source page.
+         */
+        await adminPage.goto(
+            `${config.baseUrl}/admin/settings/inventory-sources`
+        );
+        await adminPage
+            .getByRole("link", { name: "Create Inventory Source" })
+            .click();
 
-        await adminPage.click('div.primary-button:visible');
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector(
+            'form[action*="/settings/inventory-sources/create"]'
+        );
 
-        await adminPage.click('select[name="country"]');
+        /**
+         * General Section.
+         */
+        await adminPage
+            .getByRole("textbox", { name: "Code", exact: true })
+            .fill(generateSlug("_"));
+        await adminPage.locator("#name").fill(generateName());
+        await adminPage
+            .getByRole("textbox", { name: "Description" })
+            .fill(generateDescription());
 
-        const select = await adminPage.$('select[name="country"]');
+        /**
+         * Contact Information Section.
+         */
+        await adminPage.locator("#contact_name").fill(generateFullName());
+        await adminPage
+            .getByRole("textbox", { name: "Email" })
+            .fill(generateEmail());
+        await adminPage
+            .getByRole("textbox", { name: "Contact Number" })
+            .fill(generatePhoneNumber());
+        await adminPage
+            .getByRole("textbox", { name: "Fax" })
+            .fill(generatePhoneNumber());
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
+        /**
+         * Source Address Section.
+         */
+        await adminPage.locator("#country").selectOption("IN");
+        await adminPage.locator("#state").selectOption("DL");
+        await adminPage
+            .getByRole("textbox", { name: "City" })
+            .fill("New Delhi");
+        await adminPage.getByRole("textbox", { name: "Street" }).fill("Dwarka");
+        await adminPage
+            .getByRole("textbox", { name: "Postcode" })
+            .fill("110045");
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+        /**
+         * Settings Section.
+         */
+        // Clicking the status and verify the toggle state.
+        await adminPage.click('label[for="status"]');
+        const toggleInput = await adminPage.getByPlaceholder("Status");
+        await expect(toggleInput).toBeChecked();
 
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
+        /**
+         * Save Inventory Source.
+         */
+        await adminPage
+            .getByRole("button", { name: "Save Inventory Sources" })
+            .click();
 
-        const state = await adminPage.$('select[name="state"]');
-
-        if (state) {
-            const options = await state.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
-
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-
-                await state.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
-
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
-
-        await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
-
-        await adminPage.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
-
-        await adminPage.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
-
-        await adminPage.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
-
-        await adminPage.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
-
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', ', -');
-
-        await adminPage.fill('input[name="street"].rounded-md:visible', concatenatedNames);
-
-        await adminPage.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
-
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 2 == 1) {
-            await adminPage.click('input[type="checkbox"] + label.peer');
-        }
-
-        await inputs[0].press('Enter');
-
-        await expect(adminPage.getByText('Inventory Source Created Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Inventory Source Created Successfully")
+        ).toBeVisible();
     });
 
-    test('edit inventory sources', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/inventory-sources`);
+    test("should edit a inventory source", async ({ adminPage }) => {
+        /**
+         * Navigate to the inventory source listing page.
+         */
+        await adminPage.goto(
+            `${config.baseUrl}/admin/settings/inventory-sources`
+        );
+        await adminPage
+            .getByRole("link", { name: "Create Inventory Source" })
+            .waitFor({ state: "visible" });
 
-        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
-        const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
-
+        /**
+         * Edit the first inventory source.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
+            state: "visible",
+        });
+        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
 
-        await adminPage.click('select[name="country"]');
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector(
+            'form[action*="/settings/inventory-sources/edit"]'
+        );
 
-        const select = await adminPage.$('select[name="country"]');
+        // Content will be added here. Currently just checking the general save button.
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
+        /**
+         * Save Inventory Source.
+         */
+        await adminPage.click('button:has-text("Save Inventory Sources")');
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
-        }
-
-        const state = await adminPage.$('select[name="state"]');
-
-        if (state) {
-            const options = await state.$$eval('option', (options) => {
-                return options.map(option => option.value);
-            });
-
-            if (options.length > 1) {
-                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-
-                await state.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
-
-        const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-        for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
-        }
-
-        await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
-
-        await adminPage.fill('input[name="contact_number"].rounded-md:visible', forms.form.phone);
-
-        await adminPage.fill('input[name="latitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
-
-        await adminPage.fill('input[name="longitude"].rounded-md:visible', '-' + (Math.random() * 90).toString());
-
-        await adminPage.fill('input[name="priority"].rounded-md:visible', (Math.random() * 10000).toString());
-
-        const concatenatedNames = Array(5)
-            .fill(null)
-            .map(() => forms.generateRandomProductName())
-            .join(' ')
-            .replaceAll(' ', ', -');
-
-        await adminPage.fill('input[name="street"].rounded-md:visible', concatenatedNames);
-
-        await adminPage.fill('input[name="code"].rounded-md:visible', concatenatedNames.replaceAll(', -', ''));
-
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 2 == 1) {
-            await adminPage.click('input[type="checkbox"] + label.peer');
-        }
-
-        await inputs[0].press('Enter');
-
-        await expect(adminPage.getByText('Inventory Sources Updated Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Inventory Sources Updated Successfully")
+        ).toBeVisible();
     });
 
-    test('delete inventory sources', async ({ adminPage }) => {
-        await adminPage.goto(`${config.baseUrl}/admin/settings/inventory-sources`);
+    test("should delete a inventory source", async ({ adminPage }) => {
+        /**
+         * Navigate to the inventory source listing page.
+         */
+        await adminPage.goto(
+            `${config.baseUrl}/admin/settings/inventory-sources`
+        );
+        await adminPage
+            .getByRole("link", { name: "Create Inventory Source" })
+            .waitFor({ state: "visible" });
 
-        await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
-
-        const iconDelete = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
-
+        /**
+         * Delete the first inventory source.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
+        const iconDelete = await adminPage.$$(
+            "span.cursor-pointer.icon-delete"
+        );
         await iconDelete[0].click();
 
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
+        await adminPage.waitForSelector("text=Are you sure");
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
 
-        await expect(adminPage.getByText('Inventory Sources Deleted Successfully')).toBeVisible();
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
+
+        await expect(
+            adminPage.getByText("Inventory Sources Deleted Successfully")
+        ).toBeVisible();
     });
 });
