@@ -41,6 +41,7 @@
 
                 <a
                     href="{{ route('shop.customers.account.gdpr.html-view') }}"
+                    target="_blank"
                     class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
                 >
                     @lang('shop::app.customers.account.gdpr.index.html') 

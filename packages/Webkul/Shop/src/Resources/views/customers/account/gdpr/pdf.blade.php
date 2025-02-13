@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         
         <title>
-            @lang('admin::app.customers.account.gdpr.pdf.title')
+            @lang('shop::app.customers.account.gdpr.pdf.title')
         </title>
 
         @php
@@ -151,7 +151,7 @@
         <div class="wrapper">
             <div class="page-header">
                 <h1>
-                    @lang('admin::app.customers.account.gdpr.pdf.title')
+                    @lang('shop::app.customers.account.gdpr.pdf.title')
                 </h1>
             </div>
 
@@ -159,7 +159,7 @@
                 <div class="info">
                     <div class="title">
                         <h2>
-                            @lang('admin::app.customers.account.gdpr.pdf.account-info.title')
+                            @lang('shop::app.customers.account.gdpr.pdf.account-info.title')
                         </h2>
                     </div>
 
@@ -167,37 +167,37 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.first-name')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.first-name')</td>
 
                                     <td>{{ $param['customerInformation']->first_name ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.last-name')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.last-name')</td>
 
                                     <td>{{ $param['customerInformation']->last_name ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.email')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.email')</td>
 
                                     <td>{{ $param['customerInformation']->email ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.gender')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.gender')</td>
 
                                     <td>{{ $param['customerInformation']->gender ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.dob')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.dob')</td>
 
                                     <td>{{ $param['customerInformation']->date_of_birth ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>@lang('admin::app.customers.account.gdpr.pdf.account-info.phone')</td>
+                                    <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.phone')</td>
 
                                     <td>{{ $param['customerInformation']->phone ?? 'NA' }}</td>
                                 </tr>
@@ -213,7 +213,7 @@
                 <div class="info">
                     <div class="title">
                         <h2>
-                            @lang('admin::app.customers.account.gdpr.pdf.address-info.title')
+                            @lang('shop::app.customers.account.gdpr.pdf.address-info.title')
                         </h2>
                     </div>
 
@@ -223,67 +223,67 @@
 
                             @foreach($param['address'] as $params)
                                 <h3>
-                                    @lang('admin::app.customers.account.gdpr.pdf.address-info.address') #{{$count}}
+                                    @lang('shop::app.customers.account.gdpr.pdf.address-info.address') #{{$count}}
                                 </h3>
 
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.city')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.city')</td>
 
                                             <td>{{ $params['city'] ?? 'NA' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.company')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.company')</td>
 
                                             <td>{{ $params['company_name'] ?? 'NA' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.country')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.country')</td>
 
                                             <td>{{ $params['country'] ?? 'NA' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info..first-name')</td>
+                                            <td>@lang(key: 'shop::app.customers.account.gdpr.pdf.address-info.first-name')</td>
 
                                             <td>{{ $params['first_name'] ?? 'NA' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info..last-name')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.last-name')</td>
 
                                             <td>{{ $params['last_name'] ?? 'N/A' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.postcode')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.postcode')</td>
 
                                             <td>{{ $params['postcode'] ?? 'N/A' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.address1')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.address1')</td>
 
                                             <td>{{ $params['address1'] ?? 'N/A' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.address2')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.address2')</td>
 
                                             <td>{{ $params['address2'] ?? 'N/A' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.phone')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.phone')</td>
 
                                             <td>{{ $params['phone'] ?? 'N/A' }}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>@lang('admin::app.customers.account.gdpr.pdf.address-info.vat-id')</td>
+                                            <td>@lang('shop::app.customers.account.gdpr.pdf.address-info.vat-id')</td>
 
                                             <td>{{ $params['vat_id'] ?? 'N/A' }}</td>
                                         </tr>
@@ -304,7 +304,7 @@
                 <div class="info">
                     <div class="title">
                         <h2>
-                            @lang('admin::app.customers.account.gdpr.pdf.order-info.title')
+                            @lang('shop::app.customers.account.gdpr.pdf.order-info.title')
                         </h2>
                     </div>
 
@@ -312,7 +312,7 @@
                         <thead>
                             <tr>
                                 @foreach(['order-id', 'status', 'product-name', 'sku', 'qty', 'type', 'shipping', 'amount'] as $field)
-                                    <th>@lang('admin::app.customers.account.gdpr.pdf.order-info.' . $field)</th>
+                                    <th>@lang('shop::app.customers.account.gdpr.pdf.order-info.' . $field)</th>
                                 @endforeach
                             </tr>
                         </thead>
