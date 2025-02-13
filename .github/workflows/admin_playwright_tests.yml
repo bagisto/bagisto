@@ -1,0 +1,101 @@
+name: Admin | Playwright Tests
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  admin_playwright_test:
+    runs-on: ${{ matrix.operating-systems }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-systems: [ubuntu-latest]
+        php-versions: ['8.3']
+        node-version: ['22.13.1']
+        shard-index: [1,2,3,4,5,6]
+        shard-total: [6]
+
+    name: Admin | Playwright Tests | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: bagisto
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Node.js Dependencies
+        run: npm install
+        working-directory: packages/Webkul/Admin
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        working-directory: packages/Webkul/Admin
+
+      - name: Setting Environment
+        run: |
+          cp .env.example .env
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
+          sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
+          sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000|" .env
+          cat .env
+
+      - name: Install Composer Dependencies
+        run: composer install
+
+      - name: Running Bagisto Installer
+        run: php artisan bagisto:install --skip-env-check --skip-admin-creation
+
+      - name: Seed Product Table
+        run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
+
+      - name: Start Laravel server
+        run: |
+          php artisan serve --host=0.0.0.0 --port=8000 > server.log 2>&1 &
+          echo "Waiting for server to start..."
+          timeout 30 bash -c 'until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 1; done'
+
+      - name: Run All Playwright Tests
+        env:
+          BASE_URL: 'http://127.0.0.1:8000'
+        run: |
+          npx playwright test --reporter=list --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+        working-directory: packages/Webkul/Admin
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: packages/Webkul/Admin/tests/e2e-pw/test-results
+          retention-days: 1

@@ -543,8 +543,8 @@
                                         'price': 'regex:^[0-9]+(\.[0-9]+)?$',
                                         'decimal': 'regex:^[0-9]+(\.[0-9]+)?$',
                                         'integer': 'regex:^[0-9]+$',
-                                        'text': 'regex:^[-]?\\d+(\\.\\d+)?$'
-                                    }[ matchedAttribute.type ] || ''" 
+                                        'text': 'regex:^([A-Za-z0-9_ \'\-]+)$'
+                                    }[ matchedAttribute.type ] || ''"
                                     label="@lang('admin::app.marketing.promotions.catalog-rules.create.conditions')"
                                     v-model="condition.value"
                                 >
