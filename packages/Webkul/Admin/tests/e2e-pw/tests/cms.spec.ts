@@ -2,7 +2,7 @@ import { test, expect, config } from "../setup";
 import {
     generateName,
     generateSlug,
-    generateShortDescription,
+    generateDescription,
 } from "../utils/faker";
 
 async function createPage(adminPage) {
@@ -18,7 +18,7 @@ async function createPage(adminPage) {
 
     const name = generateName();
     const slug = generateSlug();
-    const shortDescription = generateShortDescription();
+    const shortDescription = generateDescription();
 
     /**
      * Description Section.

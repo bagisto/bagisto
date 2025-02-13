@@ -1,5 +1,5 @@
 import { test, expect, config } from '../../setup';
-import { generateName, generateShortDescription } from '../../utils/faker';
+import { generateName, generateDescription } from '../../utils/faker';
 
 test.describe('promotion management', () => {
     test.describe('cart rule management', () => {
@@ -20,7 +20,7 @@ test.describe('promotion management', () => {
              * General Section.
              */
             await adminPage.fill('#name', generateName());
-            await adminPage.fill('#description', generateShortDescription());
+            await adminPage.fill('#description', generateDescription());
 
             /**
              * Conditions Section.
@@ -134,7 +134,7 @@ test.describe('promotion management', () => {
              * General Section.
              */
             await adminPage.fill('#name', generateName());
-            await adminPage.fill('#description', generateShortDescription());
+            await adminPage.fill('#description', generateDescription());
 
             /**
              * Conditions Section.

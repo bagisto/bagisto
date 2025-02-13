@@ -160,7 +160,7 @@ export function generateSlug(delimiter = "-") {
     return name.toLowerCase().replace(/\s+/g, delimiter);
 }
 
-export function generateShortDescription(length = 255) {
+export function generateDescription(length = 255) {
     const phrases = [
         "An innovative and sleek design.",
         "Built for speed and efficiency.",
