@@ -7,6 +7,8 @@ const __dirname = path.dirname(__filename);
 
 const usedNames = new Set();
 const usedEmails = new Set();
+const usedNumbers = new Set();
+const usedSlugs = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -141,13 +143,47 @@ export function generateEmail() {
     return email;
 }
 
-export function generateSlug(delimiter = "-") {
-    const name = generateName();
+export function generatePhoneNumber() {
+    let phoneNumber;
 
-    return name.toLowerCase().replace(/\s+/g, delimiter);
+    do {
+        phoneNumber = Math.floor(6000000000 + Math.random() * 4000000000);
+    } while (usedNumbers.has(phoneNumber));
+
+    usedNumbers.add(phoneNumber);
+
+    return `${phoneNumber}`;
 }
 
-export function generateShortDescription(length = 255) {
+export function generateSKU() {
+    const letters = Array.from({ length: 3 }, () =>
+        String.fromCharCode(65 + Math.floor(Math.random() * 26))
+    ).join("");
+
+    const numbers = Math.floor(1000 + Math.random() * 9000);
+
+    return `${letters}${numbers}`;
+}
+
+export function generateSlug(delimiter = "-") {
+    let slug;
+
+    do {
+        const name = generateName();
+
+        const randomStr = Math.random().toString(36).substring(2, 8);
+
+        slug = `${name
+            .toLowerCase()
+            .replace(/\s+/g, delimiter)}${delimiter}${randomStr}`;
+    } while (usedSlugs.has(slug));
+
+    usedSlugs.add(slug);
+
+    return slug;
+}
+
+export function generateDescription(length = 255) {
     const phrases = [
         "An innovative and sleek design.",
         "Built for speed and efficiency.",

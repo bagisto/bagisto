@@ -2,7 +2,7 @@ import { test, expect, config } from "../../setup";
 import {
     generateName,
     generateSlug,
-    generateShortDescription,
+    generateDescription,
     generateHostname,
     getImageFile,
 } from "../../utils/faker";
@@ -20,7 +20,7 @@ async function createChannel(adminPage) {
 
     const code = generateSlug("_");
     const name = generateName();
-    const shortDescription = generateShortDescription();
+    const description = generateDescription();
 
     await adminPage.waitForSelector(
         'form[action*="/settings/channels/create"]'
@@ -31,7 +31,7 @@ async function createChannel(adminPage) {
      */
     await adminPage.fill("#code", code);
     await adminPage.fill("#name", name);
-    await adminPage.fill("#description", shortDescription);
+    await adminPage.fill("#description", description);
 
     await adminPage.click('label[for="inventory_sources_1"]');
     await expect(adminPage.locator("input#inventory_sources_1")).toBeChecked();
@@ -72,7 +72,7 @@ async function createChannel(adminPage) {
      */
     await adminPage.fill("#meta_title", name);
     await adminPage.fill("#seo_keywords", name);
-    await adminPage.fill("#meta_description", shortDescription);
+    await adminPage.fill("#meta_description", description);
 
     /**
      * Now Submit The Form.

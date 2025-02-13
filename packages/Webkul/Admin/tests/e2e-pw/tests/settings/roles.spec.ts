@@ -1,5 +1,5 @@
 import { test, expect, config } from "../../setup";
-import { generateName, generateShortDescription } from "../../utils/faker";
+import { generateName, generateDescription } from "../../utils/faker";
 
 test.describe("role management", () => {
     test("create role", async ({ adminPage }) => {
@@ -10,7 +10,7 @@ test.describe("role management", () => {
         await adminPage.fill('input[name="name"]', generateName());
         await adminPage.fill(
             'textarea[name="description"]',
-            generateShortDescription()
+            generateDescription()
         );
 
         await adminPage.click(

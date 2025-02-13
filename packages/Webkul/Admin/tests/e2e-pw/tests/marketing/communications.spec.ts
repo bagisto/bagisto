@@ -1,5 +1,5 @@
 import { test, expect, config } from "../../setup";
-import { generateName, generateShortDescription } from "../../utils/faker";
+import { generateName, generateDescription } from "../../utils/faker";
 import * as forms from "../../utils/form";
 
 async function createTemplate(adminPage) {
@@ -14,7 +14,7 @@ async function createTemplate(adminPage) {
     );
 
     const name = generateName();
-    const description = generateShortDescription();
+    const description = generateDescription();
 
     /**
      * General Section.

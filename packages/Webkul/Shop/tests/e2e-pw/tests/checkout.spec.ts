@@ -95,7 +95,7 @@ import { loginAsCustomer } from "../utils/customer";
 // });
 
 // for this first we need to go to admin and enable the guest checkout then this test will work, will create helper first...
-// test("guest shoud be able to checkout", async ({ page }) => {
+// test("guest should be able to checkout", async ({ page }) => {
 //     await page.goto(`${config.baseUrl}`);
 
 //     await page
