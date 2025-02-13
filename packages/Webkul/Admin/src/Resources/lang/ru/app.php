@@ -3454,6 +3454,7 @@ return [
 
         'view' => [
             'all-channels'  => 'All Channels',
+            'back-btn'      => 'Назад',
             'day'           => 'День',
             'end-date'      => 'Дата окончания',
             'export-csv'    => 'Экспорт в CSV',

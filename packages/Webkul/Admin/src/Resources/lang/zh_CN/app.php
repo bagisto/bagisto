@@ -3454,6 +3454,7 @@ return [
 
         'view' => [
             'all-channels'  => '所有渠道',
+            'back-btn'      => '返回',
             'day'           => '日',
             'end-date'      => '结束日期',
             'export-csv'    => '导出CSV',

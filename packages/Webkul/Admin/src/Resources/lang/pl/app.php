@@ -3454,6 +3454,7 @@ return [
 
         'view' => [
             'all-channels'  => 'Wszystkie kanały',
+            'back-btn'      => 'Wstecz',
             'day'           => 'Dzień',
             'end-date'      => 'Data zakończenia',
             'export-csv'    => 'Eksportuj do formatu CSV',
