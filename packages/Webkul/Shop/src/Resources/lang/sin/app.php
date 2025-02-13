@@ -803,6 +803,7 @@ return [
                 'street-address'         => 'වීදි ලිපිනය',
                 'telephone'              => 'දුරකථන අංකය',
                 'title'                  => 'ලිපිනය',
+                'vat-id'                 => 'වැට් අංකය',
             ],
 
             'index' => [

@@ -803,6 +803,7 @@ return [
                 'street-address'         => 'Straatadres',
                 'telephone'              => 'Telefoon',
                 'title'                  => 'Adres',
+                'vat-id'                 => 'BTW-nummer',
             ],
 
             'index' => [
