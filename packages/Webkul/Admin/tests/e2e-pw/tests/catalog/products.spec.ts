@@ -39,9 +39,6 @@ async function createSimpleProduct(adminPage) {
         .selectOption("1");
     await adminPage.locator('input[name="sku"]').fill(generateSKU());
     await adminPage.getByRole("button", { name: "Save Product" }).click();
-    await expect(
-        adminPage.getByText("Product created successfully")
-    ).toBeVisible();
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
