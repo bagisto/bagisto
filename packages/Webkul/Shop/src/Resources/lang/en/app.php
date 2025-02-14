@@ -978,6 +978,13 @@ return [
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'If you\'ve already paid, just disregard this email.',
+                'invoice-overdue' => 'Your invoice :invoice is overdue by :time.',
+                'make-payment'    => 'Please make your payment as soon as possible.',
+                'subject'         => 'Invoice reminder',
+            ],
         ],
 
         'contact-us' => [

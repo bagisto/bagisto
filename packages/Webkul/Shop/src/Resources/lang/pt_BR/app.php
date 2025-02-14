@@ -978,6 +978,13 @@ return [
                 'subject'     => 'Você! Inscreva-se na Nossa Newsletter',
                 'unsubscribe' => 'Cancelar Inscrição',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Se você já pagou, apenas desconsidere este e-mail.',
+                'invoice-overdue' => 'Sua fatura :invoice está atrasada há :time.',
+                'make-payment'    => 'Por favor, faça seu pagamento o mais rápido possível.',
+                'subject'         => 'Lembrete de fatura',
+            ],
         ],
 
         'contact-us' => [

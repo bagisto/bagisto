@@ -978,6 +978,13 @@ return [
                 'subject'     => 'Zapisano się na nasz newsletter',
                 'unsubscribe' => 'Wypisz się',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Jeśli już zapłaciłeś, zignoruj ten e-mail.',
+                'invoice-overdue' => 'Twoja faktura :invoice jest przeterminowana o :time.',
+                'make-payment'    => 'Proszę dokonać płatności jak najszybciej.',
+                'subject'         => 'Przypomnienie o fakturze',
+            ],
         ],
 
         'contact-us' => [

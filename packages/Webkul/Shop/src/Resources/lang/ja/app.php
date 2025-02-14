@@ -978,6 +978,13 @@ return [
                 'subject'     => 'ニュースレターに登録しました',
                 'unsubscribe' => '登録解除',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'すでにお支払い済みの場合は、このメールを無視してください。',
+                'invoice-overdue' => '請求書 :invoice は :time 遅れています。',
+                'make-payment'    => 'できるだけ早くお支払いをお願いします。',
+                'subject'         => '請求書のリマインダー',
+            ],
         ],
 
         'contact-us' => [

@@ -978,6 +978,13 @@ return [
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
             ],
+
+            'reminder' => [
+                'already-paid'    => '如果您已经付款，请忽略此电子邮件。',
+                'invoice-overdue' => '您的发票 :invoice 已逾期 :time。',
+                'make-payment'    => '请尽快付款。',
+                'subject'         => '发票提醒',
+            ],
         ],
 
         'contact-us' => [
