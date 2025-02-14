@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.4 (13th of February 2025)** - *Release*
+## **v2.2.4 (14th of February 2025)** - *Release*
 
 * #10440 [fixed] - Upload File Section Appears Empty in Edit Mode of Data Transfer.
 
