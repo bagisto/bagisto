@@ -59,7 +59,7 @@ class GDPRController extends Controller
 
         $params = array_merge(request()->all(), [
             'customer_id'   => $gdprRequest->customer_id,
-            'customer_name' => $gdprRequest->customer->first_name . ' ' . $gdprRequest->customer->last_name,
+            'customer_name' => $gdprRequest->customer->first_name.' '.$gdprRequest->customer->last_name,
             'email'         => $gdprRequest->customer->email,
         ]);
 
@@ -93,7 +93,7 @@ class GDPRController extends Controller
             $gdprRequest->delete();
 
             return new JsonResponse([
-            'message' => trans('admin::app.customers.gdpr.index.delete-success'),
+                'message' => trans('admin::app.customers.gdpr.index.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
