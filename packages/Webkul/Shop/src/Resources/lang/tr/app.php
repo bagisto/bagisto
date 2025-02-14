@@ -979,6 +979,13 @@ return [
                 'subject'     => 'Bültenimize Abone Oldunuz',
                 'unsubscribe' => 'Aboneliği iptal et',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Eğer zaten ödeme yaptıysanız, bu e-postayı görmezden gelin.',
+                'invoice-overdue' => 'Faturanız :invoice :time süresi geçti.',
+                'make-payment'    => 'Lütfen ödemenizi en kısa sürede yapın.',
+                'subject'         => 'Fatura hatırlatma',
+            ],
         ],
 
         'contact-us' => [

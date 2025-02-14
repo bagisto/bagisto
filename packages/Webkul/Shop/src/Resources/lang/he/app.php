@@ -978,6 +978,13 @@ return [
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'אם כבר שילמת, פשוט התעלם מאימייל זה.',
+                'invoice-overdue' => 'החשבונית שלך :invoice מאחרת ב-:time.',
+                'make-payment'    => 'אנא בצע את התשלום בהקדם האפשרי.',
+                'subject'         => 'תזכורת חשבונית',
+            ],
         ],
 
         'contact-us' => [

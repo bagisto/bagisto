@@ -978,6 +978,13 @@ return [
                 'subject'     => 'Ti sei iscritto alla nostra newsletter!',
                 'unsubscribe' => 'Annulla iscrizione',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Se hai già pagato, ignora questa email.',
+                'invoice-overdue' => 'La tua fattura :invoice è scaduta da :time.',
+                'make-payment'    => 'Si prega di effettuare il pagamento il prima possibile.',
+                'subject'         => 'Promemoria fattura',
+            ],
         ],
 
         'contact-us' => [

@@ -978,6 +978,13 @@ return [
                 'subject'     => '¡Usted! Suscríbase a nuestro boletín',
                 'unsubscribe' => 'Darse de baja',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Si ya ha pagado, simplemente ignore este correo electrónico.',
+                'invoice-overdue' => 'Su factura :invoice está vencida por :time.',
+                'make-payment'    => 'Por favor, realice su pago lo antes posible.',
+                'subject'         => 'Recordatorio de factura',
+            ],
         ],
 
         'contact-us' => [
