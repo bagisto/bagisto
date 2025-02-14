@@ -8,7 +8,7 @@ use Webkul\GDPR\Contracts\GDPRDataRequest;
 class GDPRDataRequestRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return string
      */

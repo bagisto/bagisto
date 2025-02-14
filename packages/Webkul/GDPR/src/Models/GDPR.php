@@ -7,8 +7,14 @@ use Webkul\GDPR\Contracts\GDPR as GDPRContract;
 
 class GDPR extends Model implements GDPRContract
 {
+    /**
+     * The table associated with the model.
+     */
     protected $table = 'gdpr';
 
+    /**
+     * The attributes that are mass assignable.
+     */
     protected $fillable = [
         'gdpr_status',
         'customer_agreement_status',

@@ -7,8 +7,14 @@ use Webkul\GDPR\Contracts\GDPRDataRequest as GDPRDataRequestContract;
 
 class GDPRDataRequest extends Model implements GDPRDataRequestContract
 {
+    /**
+     * The table associated with the model.
+     */
     protected $table = 'gdpr_data_request';
 
+    /**
+     * Summary of fillable fields.
+     */
     protected $fillable = [
         'customer_id',
         'email',
