@@ -980,7 +980,7 @@ return [
             ],
 
             'reminder' => [
-                'already-paid' => 'Si vous avez déjà effectué le paiement, veuillez ignorer ce message.',
+                'already-paid'    => 'Si vous avez déjà effectué le paiement, veuillez ignorer ce message.',
                 'invoice-overdue' => 'Ceci est un rappel amical que votre facture est maintenant en retard. Nous vous prions de bien vouloir effectuer le paiement dès que possible.',
                 'subject'         => 'Rappel de facture',
             ],
