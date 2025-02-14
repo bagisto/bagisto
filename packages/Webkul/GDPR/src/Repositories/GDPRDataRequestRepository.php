@@ -3,9 +3,9 @@
 namespace Webkul\GDPR\Repositories;
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Mail\Customer\Gdpr\UpdateRequestMail;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\GDPR\Contracts\GDPRDataRequest;
-use Webkul\Admin\Mail\Customer\Gdpr\UpdateRequestMail;
 
 class GDPRDataRequestRepository extends Repository
 {
@@ -32,9 +32,9 @@ class GDPRDataRequestRepository extends Repository
             Mail::queue(new UpdateRequestMail($gdprRequest));
         } catch (\Exception $e) {
             dd($e);
-            \Log::error('Failed to send GDPR update email: ' . $e->getMessage());
+            \Log::error('Failed to send GDPR update email: '.$e->getMessage());
         }
-    
+
         return $gdprRequest;
     }
 }
