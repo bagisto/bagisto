@@ -35,10 +35,7 @@ class UpdateRequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'shop::emails.customers.gdpr.update-request',
-            with: [
-                'adminUpdateRequest' => $this->adminUpdateRequest,
-            ],
+            view: 'shop::emails.customers.gdpr.update-request'
         );
     }
 }

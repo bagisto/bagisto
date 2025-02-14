@@ -47,6 +47,11 @@ class GDPRDataGrid extends DataGrid
             );
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -122,6 +127,11 @@ class GDPRDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Add actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         if (bouncer()->hasPermission('customers.groups.edit')) {
@@ -131,7 +141,7 @@ class GDPRDataGrid extends DataGrid
                 'title'  => trans('admin::app.customers.gdpr.index.datagrid.edit'),
                 'method' => 'GET',
                 'url'    => function ($row) {
-                    return route('admin.customers.gdpr.edit');
+                    return route('admin.customers.gdpr.edit', $row->id);
                 },
             ]);
         }

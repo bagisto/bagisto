@@ -11,7 +11,10 @@
     {!! view_render_event('bagisto.shop.settings.gdpr.consent.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-cookie-consent-template">
+        <script
+            type="text/x-template"
+            id="v-cookie-consent-template"
+        >
             {!! view_render_event('bagisto.shop.settings.gdpr.consent.form.before') !!}
 
             <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">

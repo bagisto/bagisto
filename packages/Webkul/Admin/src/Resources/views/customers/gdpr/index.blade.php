@@ -11,7 +11,7 @@
 
     {!! view_render_event('bagisto.admin.customers.gdpr.list.before') !!}
 
-    <v-create-gdpr />
+    <v-create-gdpr></v-create-gdpr>
 
     {!! view_render_event('bagisto.admin.customers.gdpr.list.after') !!}
 
@@ -236,7 +236,7 @@
                             formData.append('_method', 'put');
                         }
 
-                        this.$axios.post("{{ route('admin.customers.gdpr.update') }}", formData)
+                        this.$axios.post(`{{ route('admin.customers.gdpr.update', '') }}/${params.id}`, formData)
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })

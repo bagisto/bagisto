@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Webkul\Customer\Models\Customer;
 
 class CreateGdprDataRequestTable extends Migration
 {
@@ -15,12 +14,13 @@ class CreateGdprDataRequestTable extends Migration
     public function up()
     {
         Schema::create('gdpr_data_request', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
+            $table->increments('id');
+            $table->unsignedInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
             $table->string('email');
             $table->string('status');
             $table->string('type');
-            $table->string('message', 500)->change();
+            $table->string('message', 500);
             $table->timestamps();
         });
     }
