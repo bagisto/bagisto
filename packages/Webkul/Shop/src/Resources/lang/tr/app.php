@@ -981,9 +981,8 @@ return [
             ],
 
             'reminder' => [
-                'already-paid'    => 'Eğer zaten ödeme yaptıysanız, bu e-postayı görmezden gelin.',
-                'invoice-overdue' => 'Faturanız :invoice :time süresi geçti.',
-                'make-payment'    => 'Lütfen ödemenizi en kısa sürede yapın.',
+                'already-paid'    => 'Eğer ödemeyi zaten yaptıysanız, lütfen bu mesajı dikkate almayın.',
+                'invoice-overdue' => 'Bu, faturanızın vadesinin geçtiğine dair nazik bir hatırlatmadır. Lütfen ödemeyi en kısa sürede yapınız.',
                 'subject'         => 'Fatura hatırlatma',
             ],
         ],

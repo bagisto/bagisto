@@ -980,9 +980,8 @@ return [
             ],
 
             'reminder' => [
-                'already-paid'    => 'If you\'ve already paid, just disregard this email.',
-                'invoice-overdue' => 'Your invoice :invoice is overdue by :time.',
-                'make-payment'    => 'Please make your payment as soon as possible.',
+                'already-paid'    => 'If you have already made the payment, please disregard this message.',
+                'invoice-overdue' => 'This is a gentle reminder that your invoice is now overdue. We kindly request you to make the payment at your earliest convenience.',
                 'subject'         => 'Invoice reminder',
             ],
         ],

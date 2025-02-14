@@ -12,7 +12,7 @@ class InvoiceOverdueReminder extends Mailable
 {
     /**
      * Create a new message instance.
-     * 
+     *
      * @return void
      */
     public function __construct(public Invoice $invoice) {}
@@ -41,10 +41,7 @@ class InvoiceOverdueReminder extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'shop::emails.customer.invoice-reminder',
-            with: [
-                'invoice'  => $this->invoice,
-            ]
+            view: 'shop::emails.customers.invoice-reminder',
         );
     }
 }

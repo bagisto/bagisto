@@ -980,9 +980,8 @@ return [
             ],
 
             'reminder' => [
-                'already-paid'    => 'Jeśli już zapłaciłeś, zignoruj ten e-mail.',
-                'invoice-overdue' => 'Twoja faktura :invoice jest przeterminowana o :time.',
-                'make-payment'    => 'Proszę dokonać płatności jak najszybciej.',
+                'already-paid'    => 'Jeśli już dokonałeś płatności, zignoruj tę wiadomość.',
+                'invoice-overdue' => 'To uprzejme przypomnienie, że twoja faktura jest zaległa. Prosimy o dokonanie płatności najszybciej, jak to możliwe.',
                 'subject'         => 'Przypomnienie o fakturze',
             ],
         ],
