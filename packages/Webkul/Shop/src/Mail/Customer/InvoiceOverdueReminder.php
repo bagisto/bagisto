@@ -41,10 +41,7 @@ class InvoiceOverdueReminder extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'shop::emails.customer.invoice-reminder',
-            with: [
-                'invoice'  => $this->invoice,
-            ]
+            view: 'shop::emails.customers.invoice-reminder',
         );
     }
 }

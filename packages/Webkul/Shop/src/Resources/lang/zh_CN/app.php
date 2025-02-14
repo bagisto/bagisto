@@ -980,9 +980,8 @@ return [
             ],
 
             'reminder' => [
-                'already-paid'    => '如果您已经付款，请忽略此电子邮件。',
-                'invoice-overdue' => '您的发票 :invoice 已逾期 :time。',
-                'make-payment'    => '请尽快付款。',
+                'already-paid' => '如果您已经付款，请忽略此消息。',
+                'invoice-overdue' => '这是一个友好的提醒，您的发票已逾期。请尽快付款。',
                 'subject'         => '发票提醒',
             ],
         ],

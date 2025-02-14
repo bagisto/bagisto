@@ -64,7 +64,7 @@ trait InvoiceReminder
         $date->add($interval);
         $date->setTime(0, 0, 0, 0);
 
-        $this->next_reminder_date = $date;
+        $this->next_reminder_at = $date;
 
         $this->save();
     }

@@ -980,9 +980,8 @@ return [
             ],
 
             'reminder' => [
-                'already-paid'    => 'Se hai già pagato, ignora questa email.',
-                'invoice-overdue' => 'La tua fattura :invoice è scaduta da :time.',
-                'make-payment'    => 'Si prega di effettuare il pagamento il prima possibile.',
+                'already-paid' => 'Se hai già effettuato il pagamento, ignora questo messaggio.',
+                'invoice-overdue' => 'Questo è un gentile promemoria che la tua fattura è scaduta. Ti preghiamo di effettuare il pagamento al più presto.',
                 'subject'         => 'Promemoria fattura',
             ],
         ],
