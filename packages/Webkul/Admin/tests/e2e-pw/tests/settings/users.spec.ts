@@ -1,126 +1,104 @@
-// import { test, expect } from '../../setup';
-// import  * as forms from '../../utils/form';
+import { test, expect } from "../../setup";
+import { generateFullName, generateEmail } from "../../utils/faker";
 
-// test.describe('user management', () => {
-//     test('create users', async ({ adminPage }) => {
-//         await adminPage.goto('admin/settings/users');
+test.describe("user management", () => {
+    test("should create a user", async ({ adminPage }) => {
+        /**
+         * Reaching to the user listing page.
+         */
+        await adminPage.goto("admin/settings/users");
 
-//         await adminPage.click('button[type="button"].primary-button:visible');
+        /**
+         * Opening create user form in modal.
+         */
+        await adminPage.getByRole("button", { name: "Create User" }).click();
+        await adminPage.locator('input[name="name"]').fill(generateFullName());
+        await adminPage.locator('input[name="email"]').fill(generateEmail());
+        await adminPage.locator('input[name="password"]').fill("admin123");
+        await adminPage
+            .locator('input[name="password_confirmation"]')
+            .fill("admin123");
+        await adminPage.locator('select[name="role_id"]').selectOption("1");
 
-//         await adminPage.click('select[name="role_id"]');
+        // Clicking the status and verify the toggle state.
+        await adminPage.click('label[for="status"]');
+        const toggleInput = await adminPage.locator('input[name="status"]');
+        await expect(toggleInput).toBeChecked();
 
-//         const select = await adminPage.$('select[name="role_id"]');
+        /**
+         * Saving user and closing the modal.
+         */
+        await adminPage.getByRole("button", { name: "Save User" }).click();
 
-//         const options = await select.$$eval('option', (options) => {
-//             return options.map(option => option.value);
-//         });
+        await expect(
+            adminPage.getByText("User created successfully.")
+        ).toBeVisible();
+    });
 
-//         if (options.length > 1) {
-//             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test("should edit a users", async ({ adminPage }) => {
+        /**
+         * Generating new name and email for the user.
+         */
+        const updatedName = generateFullName();
+        const updatedEmail = generateEmail();
 
-//             await select.selectOption(options[randomIndex]);
-//         } else {
-//             await select.selectOption(options[0]);
-//         }
+        /**
+         * Reaching to the user listing page.
+         */
+        await adminPage.goto("admin/settings/users");
 
-//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
+        /**
+         * Clicking on the edit button for the first user opens the modal.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
+            state: "visible",
+        });
+        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
+        await iconEdit[0].click();
 
-//         await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
+        await adminPage.locator('input[name="name"]').fill(updatedName);
+        await adminPage.locator('input[name="email"]').fill(updatedEmail);
 
-//         const password = forms.generateRandomPassword(8, 20);
+        /**
+         * Saving user and closing the modal.
+         */
+        await adminPage.getByRole("button", { name: "Save User" }).click();
 
-//         await adminPage.fill('input[name="password"].rounded-md:visible', password);
+        await expect(
+            adminPage.getByText("User updated successfully.")
+        ).toBeVisible();
+        await expect(adminPage.getByText(updatedName)).toBeVisible();
+        await expect(adminPage.getByText(updatedEmail)).toBeVisible();
+    });
 
-//         await adminPage.fill('input[name="password_confirmation"].rounded-md:visible', password);
+    test("should delete a user", async ({ adminPage }) => {
+        /**
+         * Reaching to the user listing page.
+         */
+        await adminPage.goto("admin/settings/users");
 
-//         let i = Math.floor(Math.random() * 10) + 1;
+        /**
+         * Delete the first user.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
+        const iconDelete = await adminPage.$$(
+            "span.cursor-pointer.icon-delete"
+        );
+        await iconDelete[0].click();
 
-//         if (i % 2 == 1) {
-//             await adminPage.click('input[type="checkbox"] + label.peer');
-//         }
+        await adminPage.waitForSelector("text=Are you sure");
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
 
-//         await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-//             el.innerHTML += content;
-//         }, `<input type="file" name="image[]" accept="image/*">`);
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
 
-//         const image = await adminPage.$('input[type="file"][name="image[]"]');
-
-//         const filePath = forms.getRandomImageFile();
-
-//         await image.setInputFiles(filePath);
-
-//         await adminPage.press('input[name="name"]', 'Enter');
-
-//         await expect(adminPage.getByText('User created successfully.')).toBeVisible();
-//     });
-
-//     test('edit users', async ({ adminPage }) => {
-//         await adminPage.goto('admin/settings/users');
-
-//         await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-//         const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-//         await iconEdit[0].click();
-
-//         await adminPage.click('select[name="role_id"]');
-
-//         const select = await adminPage.$('select[name="role_id"]');
-
-//         const options = await select.$$eval('option', (options) => {
-//             return options.map(option => option.value);
-//         });
-
-//         if (options.length > 1) {
-//             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-
-//             await select.selectOption(options[randomIndex]);
-//         } else {
-//             await select.selectOption(options[0]);
-//         }
-
-//         await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(200));
-
-//         await adminPage.fill('input[type="email"].rounded-md:visible', forms.form.email);
-
-//         const password = forms.generateRandomPassword(8, 20);
-
-//         await adminPage.fill('input[name="password"].rounded-md:visible', password);
-
-//         await adminPage.fill('input[name="password_confirmation"].rounded-md:visible', password);
-
-//         let i = Math.floor(Math.random() * 10) + 1;
-
-//         if (i % 2 == 1) {
-//             await adminPage.click('input[type="checkbox"] + label.peer');
-//         }
-
-//         await adminPage.$eval('label[class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white required"]', (el, content) => {
-//             el.innerHTML += content;
-//         }, `<input type="file" name="image[]" accept="image/*">`);
-
-//         const image = await adminPage.$('input[type="file"][name="image[]"]');
-
-//         const filePath = forms.getRandomImageFile();
-
-//         await image.setInputFiles(filePath);
-
-//         await adminPage.press('input[name="name"]', 'Enter');
-
-//         await expect(adminPage.getByText('User updated successfully.')).toBeVisible();
-//     });
-
-//     test('delete Users', async ({ adminPage }) => {
-//         await adminPage.goto('admin/settings/users');
-
-//         await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-//         const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-//         await iconDelete[0].click();
-
-//         await adminPage.click('button.transparent-button + button.primary-button:visible');
-
-//         await expect(adminPage.getByText('User deleted successfully.')).toBeVisible();
-//     });
-// });
+        await expect(
+            adminPage.getByText("User deleted successfully.")
+        ).toBeVisible();
+    });
+});
