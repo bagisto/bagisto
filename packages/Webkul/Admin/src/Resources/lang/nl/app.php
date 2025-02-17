@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'Weet je zeker dat je deze actie wilt uitvoeren?',
                     'general'                => 'Algemeen',
                     'group-separator'        => 'Groepsscheidingsteken',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'Het veld :attribute mag alleen de tekens komma (,), punt (.), apostrof (\') en spatie ( ) bevatten.',
                     'name'                   => 'Naam',
                     'save-btn'               => 'Valuta Opslaan',
                     'symbol'                 => 'Symbool',

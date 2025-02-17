@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'Êtes-vous sûr de vouloir effectuer cette action ?',
                     'general'                => 'Général',
                     'group-separator'        => 'Séparateur de Groupe',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'Le champ :attribute ne peut contenir que les caractères virgule (,), point (.), apostrophe (\') et espace ( ).',
                     'name'                   => 'Nom',
                     'save-btn'               => 'Enregistrer la devise',
                     'symbol'                 => 'Symbole',

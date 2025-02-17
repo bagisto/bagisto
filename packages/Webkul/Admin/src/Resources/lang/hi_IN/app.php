@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
                     'general'                => 'सामान्य',
                     'group-separator'        => 'समूह विभाजक',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => ':attribute फ़ील्ड में केवल कॉमा (,), डॉट (.), अपॉस्ट्रॉफी (\'), और स्पेस ( ) स्वीकार किए जा सकते हैं।',
                     'name'                   => 'नाम',
                     'save-btn'               => 'मुद्रा सहेजें',
                     'symbol'                 => 'प्रतीक',

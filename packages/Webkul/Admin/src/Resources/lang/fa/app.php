@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
                     'general'                => 'عمومی',
                     'group-separator'        => 'جداکننده گروه',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'فیلد :attribute فقط می‌تواند از کاراکترهای ویرگول (,)، نقطه (.)، آپاستروف (\')، و فاصله ( ) استفاده کند.',
                     'name'                   => 'نام',
                     'save-btn'               => 'ذخیره ارز',
                     'symbol'                 => 'نماد',

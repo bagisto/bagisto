@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'Ви впевнені, що хочете виконати цю дію?',
                     'general'                => 'Загальне',
                     'group-separator'        => 'Роздільник груп',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'Поле :attribute може містити лише символи кома (,), крапка (.), апостроф (\') і пробіл ( ).',
                     'name'                   => 'Назва',
                     'save-btn'               => 'Зберегти Валюту',
                     'symbol'                 => 'Символ',

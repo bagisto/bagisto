@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
                     'general'                => 'Genel',
                     'group-separator'        => 'Grup Ayırıcı',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => ':attribute alanı yalnızca virgül (,), nokta (.), kesme işareti (\') ve boşluk ( ) karakterlerini kabul edebilir.',
                     'name'                   => 'Adı',
                     'save-btn'               => 'Para Birimini Kaydet',
                     'symbol'                 => 'Sembol',

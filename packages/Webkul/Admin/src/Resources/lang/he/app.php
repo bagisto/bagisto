@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
                     'general'                => 'כללי',
                     'group-separator'        => 'מפריד קבוצה',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'השדה :attribute יכול להכיל רק את התווים פסיק (,), נקודה (.), גרש (\') ורווח ( ).',
                     'name'                   => 'שם',
                     'save-btn'               => 'שמור מטבע',
                     'symbol'                 => 'סמל',

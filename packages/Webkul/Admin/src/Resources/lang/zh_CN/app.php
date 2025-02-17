@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => '确定要执行此操作吗？',
                     'general'                => '常规',
                     'group-separator'        => '分组分隔符',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => ':attribute 字段只能接受逗号 (,)、点 (.)、撇号 (\') 和空格 ( ) 字符。',
                     'name'                   => '名称',
                     'save-btn'               => '保存货币',
                     'symbol'                 => '符号',

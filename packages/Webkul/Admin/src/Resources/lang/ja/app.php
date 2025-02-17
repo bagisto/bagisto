@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => '本当にこのアクションを実行しますか？',
                     'general'                => '一般',
                     'group-separator'        => 'グループ区切り',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => ':attribute フィールドには、カンマ (,)、ドット (.)、アポストロフィ (\')、スペース ( ) のみを使用できます。',
                     'name'                   => '名前',
                     'save-btn'               => '通貨を保存',
                     'symbol'                 => '記号',

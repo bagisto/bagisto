@@ -2531,7 +2531,7 @@ return [
                     'delete-warning'         => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
                     'general'                => 'සාමාන්ය',
                     'group-separator'        => 'කණ්ඩායම් බවට වෙනස්වීමක්',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => ':attribute ක්ෂේත්‍රය සඳහා කොමා (,), තිළිපුල (.), ඇපෝස්ට්‍රෝෆ් (\') සහ හිස් තැන ( ) පමණක් භාවිතා කළ හැක.',
                     'name'                   => 'නම',
                     'save-btn'               => 'මුදල් සුරකින්න',
                     'symbol'                 => 'සංක්‍රීයය',

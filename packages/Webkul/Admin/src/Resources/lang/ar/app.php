@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
                     'general'                => 'عام',
                     'group-separator'        => 'فاصل المجموعة',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'يمكن لحقل :attribute قبول الأحرف الفاصلة (,)، والنقطة (.)، والفاصلة العليا (\'), والمسافة ( ) فقط.',
                     'name'                   => 'الاسم',
                     'save-btn'               => 'حفظ العملة',
                     'symbol'                 => 'الرمز',

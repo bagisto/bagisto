@@ -2530,7 +2530,7 @@ return [
                     'delete-warning'         => 'Czy na pewno chcesz wykonać tę operację?',
                     'general'                => 'Ogólne',
                     'group-separator'        => 'Separator Grup',
-                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'group-separator-note'   => 'Pole :attribute może zawierać tylko znaki przecinek (,), kropka (.), apostrof (\') i spacja ( ).',
                     'name'                   => 'Nazwa',
                     'save-btn'               => 'Zapisz Walutę',
                     'symbol'                 => 'Symbol',
