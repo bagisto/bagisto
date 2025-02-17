@@ -23,14 +23,7 @@ async function createPage(adminPage) {
     /**
      * Description Section.
      */
-    await adminPage.waitForSelector("iframe.tox-edit-area__iframe");
-    const iframe = await adminPage.frameLocator(
-        "iframe.tox-edit-area__iframe"
-    );
-    const editorBody = iframe.locator("body");
-    await editorBody.click();
-    await editorBody.pressSequentially(shortDescription);
-    await expect(editorBody).toHaveText(shortDescription);
+    await adminPage.fillInTinymce("#content_ifr", shortDescription);
 
     /**
      * General Section.
