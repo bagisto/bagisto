@@ -6,9 +6,7 @@ async function createTemplate(adminPage) {
     /**
      * Reaching the create template page.
      */
-    await adminPage.goto(
-        `admin/marketing/communications/email-templates`
-    );
+    await adminPage.goto(`admin/marketing/communications/email-templates`);
     await adminPage.click(
         'div.primary-button:visible:has-text("Create Template")'
     );
@@ -25,12 +23,7 @@ async function createTemplate(adminPage) {
     /**
      * Content Section.
      */
-    await adminPage.waitForSelector("iframe.tox-edit-area__iframe");
-    const iframe = await adminPage.frameLocator("iframe.tox-edit-area__iframe");
-    const editorBody = iframe.locator("body");
-    await editorBody.click();
-    await editorBody.pressSequentially(description);
-    await expect(editorBody).toHaveText(description);
+    await adminPage.fillInTinymce("#content_ifr", description);
 
     await adminPage.click(
         'button[type="submit"][class="primary-button"]:visible:has-text("Save Template")'
@@ -52,9 +45,7 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(
-            `admin/marketing/communications/email-templates`
-        );
+        await adminPage.goto(`admin/marketing/communications/email-templates`);
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
             state: "visible",
@@ -77,9 +68,7 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(
-            `admin/marketing/communications/email-templates`
-        );
+        await adminPage.goto(`admin/marketing/communications/email-templates`);
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
             state: "visible",
@@ -99,9 +88,7 @@ test.describe("communication management", () => {
     });
 
     test("create event", async ({ adminPage }) => {
-        await adminPage.goto(
-            `admin/marketing/communications/events`
-        );
+        await adminPage.goto(`admin/marketing/communications/events`);
 
         await adminPage.click("div.primary-button:visible");
 
@@ -127,9 +114,7 @@ test.describe("communication management", () => {
     });
 
     test("edit event", async ({ adminPage }) => {
-        await adminPage.goto(
-            `admin/marketing/communications/events`
-        );
+        await adminPage.goto(`admin/marketing/communications/events`);
 
         await adminPage.waitForSelector(
             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
@@ -186,9 +171,7 @@ test.describe("communication management", () => {
     });
 
     test("delete event", async ({ adminPage }) => {
-        await adminPage.goto(
-            `admin/marketing/communications/events`
-        );
+        await adminPage.goto(`admin/marketing/communications/events`);
 
         await adminPage.waitForSelector(
             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
@@ -215,9 +198,7 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(
-            `admin/marketing/communications/events`
-        );
+        await adminPage.goto(`admin/marketing/communications/events`);
 
         await adminPage.click("div.primary-button:visible");
 
@@ -241,9 +222,7 @@ test.describe("communication management", () => {
             adminPage.getByText("Events Created Successfully")
         ).toBeVisible();
 
-        await adminPage.goto(
-            `admin/marketing/communications/campaigns`
-        );
+        await adminPage.goto(`admin/marketing/communications/campaigns`);
 
         await adminPage.click("div.primary-button:visible");
 
@@ -288,9 +267,7 @@ test.describe("communication management", () => {
     });
 
     test("edit campaign", async ({ adminPage }) => {
-        await adminPage.goto(
-            `admin/marketing/communications/campaigns`
-        );
+        await adminPage.goto(`admin/marketing/communications/campaigns`);
 
         await adminPage.waitForSelector(
             'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]'
@@ -343,9 +320,7 @@ test.describe("communication management", () => {
     });
 
     test("delete campaign", async ({ adminPage }) => {
-        await adminPage.goto(
-            `admin/marketing/communications/campaigns`
-        );
+        await adminPage.goto(`admin/marketing/communications/campaigns`);
 
         await adminPage.waitForSelector(
             'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]'

@@ -4,6 +4,7 @@ import {
     generateFirstName,
     generateLastName,
     generateEmail,
+    generateDescription,
 } from "./faker";
 
 export async function register(page) {
@@ -122,4 +123,30 @@ export async function addWishlist(page) {
     await expect(
         page.getByText("Item Successfully Added To Wishlist").first()
     ).toBeVisible();
+}
+
+export async function addReview(page) {
+    const review = {
+        title: generateName(),
+        comment: generateDescription(),
+    };
+
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .getByLabel("Arctic Touchscreen Winter")
+        .click();
+    await page.getByRole("button", { name: "Reviews" }).click();
+    await page.locator("#review-tab").getByText("Write a Review").click();
+    await page.locator("#review-tab span").nth(3).click();
+    await page.locator("#review-tab span").nth(4).click();
+    await page.getByPlaceholder("Title").fill(review.title);
+    await page.getByPlaceholder("Comment").fill(review.comment);
+    await page.getByRole("button", { name: "Submit Review" }).click();
+
+    await expect(
+        page.getByText("Review submitted successfully.").first()
+    ).toBeVisible();
+
+    return review;
 }

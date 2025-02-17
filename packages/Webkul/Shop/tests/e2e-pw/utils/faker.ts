@@ -9,6 +9,7 @@ const usedNames = new Set();
 const usedEmails = new Set();
 const usedNumbers = new Set();
 const usedSlugs = new Set();
+const usedCurrencies = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -247,6 +248,419 @@ export function generateHostname() {
     const domain = domains[Math.floor(Math.random() * domains.length)];
 
     return `https://${part1}${part2}${domain}`;
+}
+
+export function generateCurrency() {
+    const currencies = [
+        {
+            name: "US Dollar",
+            code: "USD",
+            symbol: "$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Euro",
+            code: "EUR",
+            symbol: "€",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "British Pound",
+            code: "GBP",
+            symbol: "£",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Japanese Yen",
+            code: "JPY",
+            symbol: "¥",
+            decimalDigits: "0",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Australian Dollar",
+            code: "AUD",
+            symbol: "A$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Canadian Dollar",
+            code: "CAD",
+            symbol: "C$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Swiss Franc",
+            code: "CHF",
+            symbol: "CHF",
+            decimalDigits: "2",
+            groupSeparator: "'",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Chinese Yuan",
+            code: "CNY",
+            symbol: "¥",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Indian Rupee",
+            code: "INR",
+            symbol: "₹",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "South Korean Won",
+            code: "KRW",
+            symbol: "₩",
+            decimalDigits: "0",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Mexican Peso",
+            code: "MXN",
+            symbol: "MX$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Russian Ruble",
+            code: "RUB",
+            symbol: "₽",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Brazilian Real",
+            code: "BRL",
+            symbol: "R$",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "South African Rand",
+            code: "ZAR",
+            symbol: "R",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "New Zealand Dollar",
+            code: "NZD",
+            symbol: "NZ$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Singapore Dollar",
+            code: "SGD",
+            symbol: "S$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Hong Kong Dollar",
+            code: "HKD",
+            symbol: "HK$",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Norwegian Krone",
+            code: "NOK",
+            symbol: "kr",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Swedish Krona",
+            code: "SEK",
+            symbol: "kr",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Danish Krone",
+            code: "DKK",
+            symbol: "kr",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Polish Złoty",
+            code: "PLN",
+            symbol: "zł",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Turkish Lira",
+            code: "TRY",
+            symbol: "₺",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Thai Baht",
+            code: "THB",
+            symbol: "฿",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Indonesian Rupiah",
+            code: "IDR",
+            symbol: "Rp",
+            decimalDigits: "0",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Malaysian Ringgit",
+            code: "MYR",
+            symbol: "RM",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Philippine Peso",
+            code: "PHP",
+            symbol: "₱",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Israeli Shekel",
+            code: "ILS",
+            symbol: "₪",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Saudi Riyal",
+            code: "SAR",
+            symbol: "﷼",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "UAE Dirham",
+            code: "AED",
+            symbol: "د.إ",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Czech Koruna",
+            code: "CZK",
+            symbol: "Kč",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Hungarian Forint",
+            code: "HUF",
+            symbol: "Ft",
+            decimalDigits: "0",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Romanian Leu",
+            code: "RON",
+            symbol: "lei",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Bulgarian Lev",
+            code: "BGN",
+            symbol: "лв",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Croatian Kuna",
+            code: "HRK",
+            symbol: "kn",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Icelandic Króna",
+            code: "ISK",
+            symbol: "kr",
+            decimalDigits: "0",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Ukrainian Hryvnia",
+            code: "UAH",
+            symbol: "₴",
+            decimalDigits: "2",
+            groupSeparator: " ",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Pakistani Rupee",
+            code: "PKR",
+            symbol: "₨",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Bangladeshi Taka",
+            code: "BDT",
+            symbol: "৳",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Sri Lankan Rupee",
+            code: "LKR",
+            symbol: "Rs",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Nepalese Rupee",
+            code: "NPR",
+            symbol: "₨",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Kuwaiti Dinar",
+            code: "KWD",
+            symbol: "د.ك",
+            decimalDigits: "3",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Qatari Riyal",
+            code: "QAR",
+            symbol: "ر.ق",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Omani Rial",
+            code: "OMR",
+            symbol: "ر.ع.",
+            decimalDigits: "3",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Bahraini Dinar",
+            code: "BHD",
+            symbol: "ب.د",
+            decimalDigits: "3",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Argentine Peso",
+            code: "ARS",
+            symbol: "$",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Chilean Peso",
+            code: "CLP",
+            symbol: "$",
+            decimalDigits: "0",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Colombian Peso",
+            code: "COP",
+            symbol: "$",
+            decimalDigits: "0",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+        {
+            name: "Peruvian Sol",
+            code: "PEN",
+            symbol: "S/.",
+            decimalDigits: "2",
+            groupSeparator: ",",
+            decimalSeparator: ".",
+        },
+        {
+            name: "Venezuelan Bolívar",
+            code: "VES",
+            symbol: "Bs.",
+            decimalDigits: "2",
+            groupSeparator: ".",
+            decimalSeparator: ",",
+        },
+    ];
+
+    if (usedCurrencies.size >= currencies.length) {
+        throw new Error("All currencies have been used.");
+    }
+
+    let currency;
+
+    do {
+        const randomIndex = Math.floor(Math.random() * currencies.length);
+
+        currency = currencies[randomIndex];
+    } while (usedCurrencies.has(currency.code));
+
+    usedCurrencies.add(currency.code);
+
+    return currency;
 }
 
 export function randomElement(array) {
