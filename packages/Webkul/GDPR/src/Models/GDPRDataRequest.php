@@ -26,13 +26,16 @@ class GDPRDataRequest extends Model implements GDPRDataRequestContract
     ];
 
     /**
-     * Get the customer record associated with the address.
+     * Get the customer record associated with the GDPR.
      */
     public function customer(): BelongsTo
     {
         return $this->belongsTo(CustomerProxy::modelClass());
     }
 
+    /**
+     * Get customer full name.
+     */
     public function getCustomerFullNameAttribute(): string
     {
         return $this->customer_first_name.' '.$this->customer_last_name;

@@ -11,8 +11,6 @@ class GDPRDataRequestRepository extends Repository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model()
     {
@@ -31,8 +29,7 @@ class GDPRDataRequestRepository extends Repository
         try {
             Mail::queue(new UpdateRequestMail($gdprRequest));
         } catch (\Exception $e) {
-            dd($e);
-            \Log::error('Failed to send GDPR update email: '.$e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return $gdprRequest;
