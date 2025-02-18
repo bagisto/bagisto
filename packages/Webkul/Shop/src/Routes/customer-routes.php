@@ -124,6 +124,9 @@ Route::prefix('customer')->group(function () {
             Route::get('your-cookie-consent-preferences', [GDPRController::class, 'cookieConsent'])
                 ->name('shop.customers.gdpr.cookie-consent');
 
+            Route::post('your-cookie-consent-preferences', [GDPRController::class, 'cookieConsentStore'])
+                ->name('shop.customers.gdpr.cookie_consent_store');
+
             /**
              * Addresses.
              */

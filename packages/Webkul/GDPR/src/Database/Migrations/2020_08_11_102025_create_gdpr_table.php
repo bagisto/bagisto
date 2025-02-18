@@ -15,18 +15,13 @@ class CreateGdprTable extends Migration
     {
         Schema::create('gdpr', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('gdpr_status');
-            $table->boolean('customer_agreement_status');
-            $table->string('agreement_label')->nullable();
-            $table->longText('agreement_content')->nullable();
-            $table->boolean('cookie_status');
-            $table->string('cookie_block_position');
-            $table->string('cookie_static_block_identifier')->nullable();
-            $table->longText('strictly_necessary_cookie')->nullable();
-            $table->longText('basic_interactions_and_functionalities_cookie')->nullable();
-            $table->longText('experience_enhancement_cookie')->nullable();
-            $table->longText('measurement_cookie')->nullable();
-            $table->longText('targeting_and_advertising_cookie')->nullable();
+            $table->unsignedInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
+            $table->boolean('basic_interaction')->default(0);
+            $table->boolean('strictly_necessary')->default(0);
+            $table->boolean('experience_enhancement')->default(0);
+            $table->boolean('measurements')->default(0);
+            $table->boolean('targeting_advertising')->default(0);
             $table->timestamps();
         });
     }
