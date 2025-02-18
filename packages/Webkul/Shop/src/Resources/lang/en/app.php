@@ -538,7 +538,7 @@ return [
                     'your-cookie-consent-preferences'        => 'Your Cookie Consent Preferences',
                     'save-and-continue'                      => 'Save and Continue',
                     'strictly-necessary'                     => 'Strictly Necessary',
-                    'basic-interactions' => 'Basic Interactions and Functionalities',
+                    'basic-interactions'                     => 'Basic Interactions and Functionalities',
                     'experience-enhancement'                 => 'Experience enhancement',
                     'measurements'                           => 'Measurements',
                     'targeting-and-advertising'              => 'Targeting and Advertising',

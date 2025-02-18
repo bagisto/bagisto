@@ -2,12 +2,11 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\GDPR\Repositories\GDPRRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
+use Webkul\GDPR\Repositories\GDPRRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\GDPRRequestsDatagrid;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -158,7 +157,7 @@ class GDPRController extends Controller
             'basic_interaction',
             'experience_enhancement',
             'measurements',
-            'targeting_advertising'
+            'targeting_advertising',
         ]);
 
         $consentData['customer_id'] = auth()->guard('customer')->user()->id;
@@ -175,7 +174,7 @@ class GDPRController extends Controller
 
         return new JsonResource([
             'data'    => $gdpr,
-            'message' => 'Consent has been saved successfully.'
+            'message' => 'Consent has been saved successfully.',
         ]);
     }
 }

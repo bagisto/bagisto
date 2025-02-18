@@ -21,6 +21,6 @@ class GDPR extends Model implements GDPRContract
         'basic_interaction',
         'experience_enhancement',
         'measurements',
-        'targeting_advertising'
+        'targeting_advertising',
     ];
 }
