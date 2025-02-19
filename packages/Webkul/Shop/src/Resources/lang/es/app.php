@@ -1113,6 +1113,12 @@ return [
                     'request-status' => 'Estado de la Solicitud : ',
                 ],
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Si ya ha realizado el pago, ignore este mensaje.',
+                'invoice-overdue' => 'Este es un recordatorio amable de que su factura está vencida. Le pedimos amablemente que realice el pago lo antes posible.',
+                'subject'         => 'Recordatorio de factura',
+            ],
         ],
 
         'contact-us' => [

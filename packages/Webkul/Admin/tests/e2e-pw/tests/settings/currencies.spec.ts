@@ -1,92 +1,178 @@
-import { test, expect } from '../../setup';
-import  * as forms from '../../utils/form';
+import { test, expect } from "../../setup";
+import { generateCurrency } from "../../utils/faker";
 
-test.describe('currency management', () => {
-    // test('create currency', async ({ adminPage }) => {
-    //     await adminPage.goto('admin/settings/currencies');
+async function createCurrency(adminPage, currency) {
+    /**
+     * Reaching to the currency listing page.
+     */
+    await adminPage.goto("admin/settings/currencies");
 
-    //     await adminPage.click('button[type="button"].primary-button:visible');
+    /**
+     * Opening create currency form in modal.
+     */
+    await adminPage.getByRole("button", { name: "Create Currency" }).click();
+    await adminPage.locator('input[name="code"]').fill(currency.code);
+    await adminPage.locator('input[name="name"]').fill(currency.name);
+    await adminPage.locator('input[name="symbol"]').fill(currency.symbol);
+    await adminPage
+        .locator('input[name="decimal"]')
+        .fill(currency.decimalDigits);
+    await adminPage
+        .locator('input[name="group_separator"]')
+        .fill(currency.groupSeparator);
+    await adminPage
+        .locator('input[name="decimal_separator"]')
+        .fill(currency.decimalSeparator);
 
-    //     await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+    /**
+     * Saving currency and closing the modal.
+     */
+    await adminPage.getByRole("button", { name: "Save Currency" }).click();
 
-    //     await adminPage.fill('input[name="symbol"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+    /**
+     * The USD currency code was already provided during installation in the test environment.
+     */
+    if (currency.code === "USD") {
+        await expect(
+            adminPage.getByText("The code has already been taken.")
+        ).toBeVisible();
 
-    //     await adminPage.fill('input[name="decimal"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        return;
+    }
 
-    //     await adminPage.fill('input[name="group_separator"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+    /**
+     * Verifying the success message.
+     */
+    await expect(
+        adminPage.getByText("Currency created successfully.")
+    ).toBeVisible();
 
-    //     await adminPage.fill('input[name="decimal_separator"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+    /**
+     * Verifying the currency in the listing.
+     */
+    await expect(
+        adminPage.getByText(currency.name, { exact: true })
+    ).toBeVisible();
 
-    //     await adminPage.fill('input[name="code"]', (forms.generateRandomProductName() + forms.generateRandomProductName()).slice(0, 3));
+    await expect(
+        adminPage.getByText(currency.code, { exact: true })
+    ).toBeVisible();
+}
 
-    //     const select = await adminPage.$('select[name="currency_position"]');
+test.describe("currency management", () => {
+    test("should create a currency", async ({ adminPage }) => {
+        const currency = generateCurrency();
 
-    //     const options = await select.$$eval('option', (options) => {
-    //         return options.map(option => option.value);
-    //     });
+        await createCurrency(adminPage, currency);
+    });
 
-    //     if (options.length > 1) {
-    //         const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+    test("should edit a currency", async ({ adminPage }) => {
+        /**
+         * Generating a new currency.
+         */
+        const currency = generateCurrency();
 
-    //         await select.selectOption(options[randomIndex]);
-    //     } else {
-    //         await select.selectOption(options[0]);
-    //     }
+        await createCurrency(adminPage, {
+            ...currency,
 
-    //     await adminPage.press('input[name="code"]', 'Enter');
+            /**
+             * Let's use invalid currency name and symbol at time of creation then we use
+             * valid currency name and symbol at time of edit.
+             */
+            name: "INVALID_CURRENCY_NAME",
+            symbol: "INVALID_CURRENCY_SYMBOL",
+        });
 
-    //     await expect(adminPage.getByText('Currency created successfully.')).toBeVisible();
-    // });
+        /**
+         * Reaching to the currency listing page.
+         */
+        await adminPage.goto("admin/settings/currencies");
 
-    // test('edit currency', async ({ adminPage }) => {
-    //     await adminPage.goto('admin/settings/currencies');
+        /**
+         * Clicking on the edit button for the first currency opens the modal.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
+            state: "visible",
+        });
+        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
+        await iconEdit[0].click();
 
-    //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        await adminPage.locator('input[name="name"]').fill(currency.name);
+        await adminPage.locator('input[name="symbol"]').fill(currency.symbol);
 
-    //     const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        /**
+         * Saving currency and closing the modal.
+         */
+        await adminPage.getByRole("button", { name: "Save Currency" }).click();
 
-    //     await iconEdit[0].click();
+        /**
+         * Verifying the success message.
+         */
+        await expect(
+            adminPage.getByText("Currency updated successfully.")
+        ).toBeVisible();
 
-    //     await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        /**
+         * Verifying the currency in the listing.
+         */
+        await expect(
+            adminPage.getByText(currency.name, { exact: true })
+        ).toBeVisible();
 
-    //     await adminPage.fill('input[name="symbol"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await expect(
+            adminPage.getByText(currency.code, { exact: true })
+        ).toBeVisible();
+    });
 
-    //     await adminPage.fill('input[name="decimal"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+    test("should delete a currency", async ({ adminPage }) => {
+        /**
+         * Generating a new currency.
+         */
+        const currency = generateCurrency();
 
-    //     await adminPage.fill('input[name="group_separator"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await createCurrency(adminPage, currency);
 
-    //     await adminPage.fill('input[name="decimal_separator"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        /**
+         * Reaching to the currency listing page.
+         */
+        await adminPage.goto("admin/settings/currencies");
 
-    //     const select = await adminPage.$('select[name="currency_position"]');
+        /**
+         * Delete the first currency.
+         */
+        await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
+        const iconDelete = await adminPage.$$(
+            "span.cursor-pointer.icon-delete"
+        );
+        await iconDelete[0].click();
 
-    //     const options = await select.$$eval('option', (options) => {
-    //         return options.map(option => option.value);
-    //     });
+        await adminPage.waitForSelector("text=Are you sure");
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
 
-    //     if (options.length > 1) {
-    //         const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
 
-    //         await select.selectOption(options[randomIndex]);
-    //     } else {
-    //         await select.selectOption(options[0]);
-    //     }
+        /**
+         * Verifying the success message.
+         */
+        await expect(
+            adminPage.getByText("Currency deleted successfully.")
+        ).toBeVisible();
 
-    //     await adminPage.press('input[name="code"]', 'Enter');
+        /**
+         * Verifying the currency is not in the listing anymore.
+         */
+        await expect(
+            adminPage.getByText(currency.name, { exact: true })
+        ).not.toBeVisible();
 
-    //     await expect(adminPage.getByText('Currency updated successfully.')).toBeVisible();
-    // });
-
-    // test('delete currency', async ({ adminPage }) => {
-    //     await adminPage.goto('admin/settings/currencies');
-
-    //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-    //     const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
-
-    //     await iconDelete[0].click();
-
-    //     await adminPage.click('button.transparent-button + button.primary-button:visible');
-
-    //     await expect(adminPage.getByText('Currency deleted successfully.')).toBeVisible();
-    // });
+        await expect(
+            adminPage.getByText(currency.code, { exact: true })
+        ).not.toBeVisible();
+    });
 });

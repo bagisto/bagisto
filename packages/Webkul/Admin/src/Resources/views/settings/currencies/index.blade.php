@@ -235,14 +235,14 @@
                                     type="text"
                                     name="group_separator"
                                     :value="old('group_separator')"
-                                    ::rules="{ regex: /^[,\.]+$/ }"
+                                    ::rules="{ regex: /^[,\.' ]$/ }"
                                     v-model="selectedCurrency.group_separator"
                                     :label="trans('admin::app.settings.currencies.index.create.group-separator')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.group-separator')"
                                 />
 
                                 <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.settings.currencies.index.create.separator-note', [
+                                    @lang('admin::app.settings.currencies.index.create.group-separator-note', [
                                         'attribute' => trans('admin::app.settings.currencies.index.create.group-separator')
                                     ])
                                 </p>
@@ -267,7 +267,7 @@
                                 />
 
                                 <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.settings.currencies.index.create.separator-note', [
+                                    @lang('admin::app.settings.currencies.index.create.decimal-separator-note', [
                                         'attribute' => trans('admin::app.settings.currencies.index.create.decimal-separator')
                                     ])
                                 </p>

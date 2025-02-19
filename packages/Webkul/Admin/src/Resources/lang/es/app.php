@@ -133,7 +133,7 @@ return [
         'orders' => [
             'index' => [
                 'create-btn' => 'Crear Pedido',
-                'title'      => 'Órdenes',
+                'title'      => 'Pedidos',
 
                 'search-customer' => [
                     'create-btn'  => 'Crear Cliente',
@@ -2656,19 +2656,20 @@ return [
                 ],
 
                 'create' => [
-                    'code'              => 'Código',
-                    'create-btn'        => 'Crear Moneda',
-                    'currency-position' => 'Posición de la Moneda',
-                    'decimal'           => 'Decimal',
-                    'decimal-separator' => 'Separador Decimal',
-                    'delete-warning'    => '¿Estás seguro de que deseas realizar esta acción?',
-                    'general'           => 'General',
-                    'group-separator'   => 'Separador de Grupos',
-                    'name'              => 'Nombre',
-                    'separator-note'    => 'El campo :attribute solo puede aceptar los operadores coma (,) y punto (.)',
-                    'save-btn'          => 'Guardar Moneda',
-                    'symbol'            => 'Símbolo',
-                    'title'             => 'Crear Nueva Moneda',
+                    'code'                   => 'Código',
+                    'create-btn'             => 'Crear Moneda',
+                    'currency-position'      => 'Posición de la Moneda',
+                    'decimal'                => 'Decimal',
+                    'decimal-separator'      => 'Separador Decimal',
+                    'decimal-separator-note' => 'El campo :attribute solo puede aceptar los operadores coma (,) y punto (.)',
+                    'delete-warning'         => '¿Estás seguro de que deseas realizar esta acción?',
+                    'general'                => 'General',
+                    'group-separator'        => 'Separador de Grupos',
+                    'group-separator-note'   => 'El campo :attribute solo puede aceptar los caracteres coma (,), punto (.), apóstrofe (\'), y espacio ( ).',
+                    'name'                   => 'Nombre',
+                    'save-btn'               => 'Guardar Moneda',
+                    'symbol'                 => 'Símbolo',
+                    'title'                  => 'Crear Nueva Moneda',
                 ],
 
                 'edit' => [
@@ -3472,17 +3473,17 @@ return [
 
     'configuration' => [
         'index' => [
-            'back-btn'                     => 'Back',
-            'delete'                       => 'Delete',
-            'enable-at-least-one-payment'  => 'Enable at least one payment method.',
-            'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
-            'no-result-found'              => 'No result found',
-            'save-btn'                     => 'Save Configuration',
-            'save-message'                 => 'Configuration saved successfully',
-            'search'                       => 'Search',
-            'select-country'               => 'Select Country',
-            'select-state'                 => 'Select State',
-            'title'                        => 'Configuration',
+            'back-btn'                     => 'Volver',
+            'delete'                       => 'Borrar',
+            'enable-at-least-one-payment'  => 'Activa al menos un método de pago.',
+            'enable-at-least-one-shipping' => 'Activa al menos un método de envío.',
+            'no-result-found'              => 'Sin resultados',
+            'save-btn'                     => 'Guardar Configuración',
+            'save-message'                 => 'Configuración guardada correctamente',
+            'search'                       => 'Buscar',
+            'select-country'               => 'Selecciona País',
+            'select-state'                 => 'Selecciona Provincia',
+            'title'                        => 'Configuración',
 
             'general' => [
                 'info'  => 'Establecer opciones de unidades.',

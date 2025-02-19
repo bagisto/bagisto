@@ -1113,6 +1113,12 @@ return [
                     'request-status' => 'Stato della richiesta : ',
                 ],
             ],
+            
+            'reminder' => [
+                'already-paid'    => 'Se hai già effettuato il pagamento, ignora questo messaggio.',
+                'invoice-overdue' => 'Questo è un gentile promemoria che la tua fattura è scaduta. Ti preghiamo di effettuare il pagamento al più presto.',
+                'subject'         => 'Promemoria fattura',
+            ],
         ],
 
         'contact-us' => [
