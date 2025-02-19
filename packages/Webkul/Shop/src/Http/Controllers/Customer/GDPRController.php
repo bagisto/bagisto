@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
