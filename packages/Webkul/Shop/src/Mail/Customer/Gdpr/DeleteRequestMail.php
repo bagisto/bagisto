@@ -36,9 +36,6 @@ class DeleteRequestMail extends Mailable
     {
         return new Content(
             view: 'shop::emails.customers.gdpr.delete-request',
-            with: [
-                'dataDeleteRequest' => $this->dataDeleteRequest,
-            ],
         );
     }
 }

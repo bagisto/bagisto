@@ -278,6 +278,7 @@
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
     @endpush
 
+    <!-- Terms & Conditions Modal -->
     <x-shop::modal ref="termsModal">
         <x-slot:toggle></x-slot>
 

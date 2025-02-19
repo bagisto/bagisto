@@ -3,13 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\Customers\GDPRDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Mail\Customer\Gdpr\UpdateRequestMail;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
-use Webkul\GDPR\Repositories\GDPRRepository;
 
 class GDPRController extends Controller
 {
@@ -20,7 +17,6 @@ class GDPRController extends Controller
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected GDPRRepository $gdprRepository,
         protected GDPRDataRequestRepository $gdprDataRequestRepository
     ) {}
 
@@ -41,44 +37,38 @@ class GDPRController extends Controller
     /**
      * Method to show the form for updating a new Data Request.
      */
-    public function edit()
+    public function edit(int $id)
     {
-        $request = $this->gdprDataRequestRepository->find(request()->id);
+        try {
+            $request = $this->gdprDataRequestRepository->findOrFail($id);
 
-        return new JsonResponse([
-            'data' => $request,
-        ], 200);
+            return new JsonResponse([
+                'data' => $request,
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => trans('admin::app.customers.gdpr.index.attribute-reason-error'),
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
      * Method to update the Data Request information.
      */
-    public function update()
+    public function update(int $id)
     {
-        $request = $this->gdprDataRequestRepository->find(request()->id);
+        try {
+            $this->gdprDataRequestRepository->update(request()->all(), $id);
 
-        $customer = $this->customerRepository->find($request->customer_id);
-
-        $params = request()->all() + [
-            'customer_id'   => $request->customer_id,
-            'customer_name' => $customer->first_name.' '.$customer->last_name,
-            'email'         => $request->email,
-        ];
-
-        $result = $request->update(request()->all());
-
-        if ($result) {
-            try {
-                Mail::queue(new UpdateRequestMail($params));
-
-                return response()->json([
-                    'message' => trans('admin::app.customers.gdpr.index.update-success'),
-                ], 200);
-            } catch (\Exception $e) {
-                return response()->json([
-                    'message' => trans('admin::app.customers.gdpr.index.update-success-unsent-email'),
-                ], 404);
-            }
+            return response()->json([
+                'message' => trans(key: 'admin::app.customers.gdpr.index.update-success'),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => trans('admin::app.customers.gdpr.index.update-success-unsent-email'),
+                'error'   => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -88,11 +78,13 @@ class GDPRController extends Controller
     public function delete(int $id)
     {
         try {
-            $this->gdprDataRequestRepository->delete($id);
+            $gdprRequest = $this->gdprDataRequestRepository->findOrFail($id);
+
+            $gdprRequest->delete();
 
             return new JsonResponse([
                 'message' => trans('admin::app.customers.gdpr.index.delete-success'),
-            ], 200);
+            ]);
         } catch (\Exception $e) {
         }
 

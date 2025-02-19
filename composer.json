@@ -75,6 +75,7 @@
             "Webkul\\DataTransfer\\": "packages/Webkul/DataTransfer/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\FPC\\": "packages/Webkul/FPC/src",
+            "Webkul\\GDPR\\": "packages/Webkul/GDPR/src",
             "Webkul\\Installer\\": "packages/Webkul/Installer/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
             "Webkul\\MagicAI\\": "packages/Webkul/MagicAI/src",
@@ -92,8 +93,7 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\GDPR\\": "packages/Webkul/GDPR/src"
+            "Webkul\\User\\": "packages/Webkul/User/src"
         }
     },
     "autoload-dev": {
