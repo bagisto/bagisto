@@ -1,46 +1,209 @@
-// import { test, expect } from "../../setup";
-// import * as forms from "../../utils/form";
+import { test, expect } from "../../setup";
+import * as forms from "../../utils/form";
+test.describe("search-seo management", () => {
+    test("should create SEO Search URL Rewrite", async ({ adminPage }) => {
+        /**
+         * Reaching to the URL Rewrite page
+         */
+            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
 
-// async function createUrlRewrite(adminPage) {
-//     await adminPage.goto(
-//         `admin/marketing/search-seo/url-rewrites`
-//     );
+        /**
+         * Opening create URL Rewrite URL form in modal.
+         */
+            await adminPage.getByText('Create URL Rewrite').click();
 
-//     await adminPage.click("div.primary-button:visible");
+         /**
+         * Filling the Modal form for URL Rewrite for Temporary Redirect Type.
+         */
 
-//     adminPage.hover('select[name="entity_type"]');
+         await adminPage.locator('select[name="entity_type"]').selectOption('product');
+         await adminPage.getByRole('textbox', { name: 'Request Path' })
+         await adminPage.getByRole('textbox', { name: 'Request Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-1ar');
+         await adminPage.getByRole('textbox', { name: 'Target Path' })
+         await adminPage.getByRole('textbox', { name: 'Target Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-1');
+         await adminPage.locator('select[name="redirect_type"]').selectOption('302');
+         await adminPage.locator('select[name="locale"]').selectOption('ar');
 
-//     const selects = await adminPage.$$("select.custom-select:visible");
+         /**
+         * Saving the Temporary Redirect Type URL Rewrite.
+         */
 
-//     for (let select of selects) {
-//         const options = await select.$$eval("option", (options) => {
-//             return options.map((option) => option.value);
-//         });
+         await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+         
+         await expect(
+            adminPage.getByText("URL Rewrite created successfully")
+        ).toBeVisible();
+    });
 
-//         if (options.length > 1) {
-//             const randomIndex =
-//                 Math.floor(Math.random() * (options.length - 1)) + 1;
+    test("should create another SEO Search URL Rewrite", async ({ adminPage }) => {
+        
+        /**
+         * Reaching to the URL Rewrite page
+         */
+            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
 
-//             await select.selectOption(options[randomIndex]);
-//         } else {
-//             await select.selectOption(options[0]);
-//         }
-//     }
+        /**
+         * Opening create URL Rewrite URL form in modal.
+         */
+            await adminPage.getByText('Create URL Rewrite').click();
 
-//     const inputs = await adminPage.$$(
-//         'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-//     );
+         /**
+         * Filling the Modal form for URL Rewrite for Permanent Redirect Type.
+         */
 
-//     for (let input of inputs) {
-//         await input.fill(forms.generateRandomStringWithSpaces(200));
-//     }
+         await adminPage.locator('select[name="entity_type"]').selectOption('product');
+         await adminPage.getByRole('textbox', { name: 'Request Path' })
+         await adminPage.getByRole('textbox', { name: 'Request Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-2ar');
+         await adminPage.getByRole('textbox', { name: 'Target Path' })
+         await adminPage.getByRole('textbox', { name: 'Target Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-2');
+         await adminPage.locator('select[name="redirect_type"]').selectOption('301');
+         await adminPage.locator('select[name="locale"]').selectOption('ar');
 
-//     await adminPage.click('button[class="primary-button"]:visible');
+         /**
+         * Saving the Permanent Redirect Type URL Rewrite.
+         */
 
-//     await expect(
-//         adminPage.getByText("URL Rewrite created successfully")
-//     ).toBeVisible();
-// }
+         await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+         
+         await expect(
+            adminPage.getByText("URL Rewrite created successfully")
+        ).toBeVisible();
+    });
+
+    test("should edit the URL Redirect", async ({ adminPage }) => {
+
+         /**
+         * Updating the URL for Requested Path.
+         */
+        
+         await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+         await adminPage.getByRole('link', { name: 'URL Rewrites' }).click();
+
+        /**
+         * Editing the Requested Path URL.
+         */
+
+         await adminPage.locator('.row > .flex > a').first().click();
+         await adminPage.getByRole('textbox', { name: 'Request Path' })
+         await adminPage.getByRole('textbox', { name: 'Request Path' }).press('ArrowRight');
+         await adminPage.getByRole('textbox', { name: 'Request Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-1ar');
+    
+    
+         /**
+         * Saving the Requested Path URL Rewrite after updating.
+         */
+        
+         await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+         
+         await expect(
+            adminPage.getByText("URL Rewrite updated successfully")
+        ).toBeVisible();
+
+    });
+
+        test("should edit another URL Redirect", async ({ adminPage }) => {
+
+            /**
+            * Updating the URL for Targeted Path.
+            */
+           
+            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await adminPage.getByRole('link', { name: 'URL Rewrites' }).click();
+   
+           /**
+            * Editing the Targeted URL Rewrite.
+            */
+   
+            await adminPage.locator('.row > .flex > a').first().click();
+            await adminPage.getByRole('textbox', { name: 'Target Path' })
+            await adminPage.getByRole('textbox', { name: 'Target Path' }).press('ArrowRight');
+            await adminPage.getByRole('textbox', { name: 'Target Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-1es');
+       
+       
+            /**
+            * Saving the Targeted Path URL after updating.
+            */
+           
+            await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+            
+            await expect(
+               adminPage.getByText("URL Rewrite updated successfully")
+           ).toBeVisible();
+});
+
+        test("should edit Redirect Type", async ({ adminPage }) => {
+
+            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await adminPage.getByRole('link', { name: 'URL Rewrites' }).click();
+
+        /**
+            * Editing the Redirect Type Permanent to Temporary.
+            */
+
+            await adminPage.locator('.row > .flex > a').first().click();
+            await adminPage.locator('select[name="redirect_type"]').selectOption('302');
+            await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+
+            /**
+            * Saving the Redirect Type after updating.
+            */
+        
+            await adminPage.getByRole('button', { name: 'Save URL Rewrite' })
+            
+            await expect(
+            adminPage.getByText("URL Rewrite updated successfully")
+        ).toBeVisible();       
+        
+    });
+
+    test("should edit another Redirect Type", async ({ adminPage }) => {
+
+        await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+        await adminPage.getByRole('link', { name: 'URL Rewrites' }).click();
+
+        /**
+        * Editing the Redirect Type Temporary to Permanent.
+        */
+
+        await adminPage.locator('.row > .flex > a').first().click();
+        await adminPage.locator('select[name="redirect_type"]').selectOption('301');
+        await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+
+        /**
+        * Saving the Redirect Type after updating.
+        */
+    
+        await adminPage.getByRole('button', { name: 'Save URL Rewrite' })
+        
+        await expect(
+        adminPage.getByText("URL Rewrite updated successfully")
+    ).toBeVisible();       
+
+});
+
+test("should edit locale", async ({ adminPage }) => {
+
+    await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+    await adminPage.getByRole('link', { name: 'URL Rewrites' }).click();
+
+    /**
+    * Editing the Locale for the URL Redirect.
+    */
+
+    await adminPage.locator('.row > .flex > a').first().click();
+    await adminPage.locator('select[name="locale"]').selectOption('es');
+    await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
+
+
+    /**
+    * Saving the Redirect Type after updating.
+    */
+
+    await adminPage.getByRole('button', { name: 'Save URL Rewrite' })
+    
+    await expect(
+    adminPage.getByText("URL Rewrite updated successfully")
+).toBeVisible();  
 
 // async function createSearchTerm(adminPage) {
 //     await adminPage.goto(
@@ -117,7 +280,7 @@
 //         await createUrlRewrite(adminPage);
 //     });
 
-//     test("edit url rewrite", async ({ adminPage }) => {
+//     tethest("edit url rewrite", async ({ adminPage }) => {
 //         await adminPage.goto(
 //             `admin/marketing/search-seo/url-rewrites`
 //         );
@@ -530,4 +693,5 @@
 //             adminPage.getByText("Sitemap Deleted successfully")
 //         ).toBeVisible();
 //     });
-// });
+});
+});
