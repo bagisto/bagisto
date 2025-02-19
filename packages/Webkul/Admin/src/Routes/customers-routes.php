@@ -120,9 +120,9 @@ Route::prefix('customers')->group(function () {
     Route::controller(GDPRController::class)->prefix('gdpr')->group(function () {
         Route::get('', 'index')->name('admin.customers.gdpr.index');
 
-        Route::get('edit', 'edit')->name('admin.customers.gdpr.edit');
+        Route::get('edit/{id}', 'edit')->name('admin.customers.gdpr.edit');
 
-        Route::put('edit', 'update')->name('admin.customers.gdpr.update');
+        Route::put('edit/{id}', 'update')->name('admin.customers.gdpr.update');
 
         Route::delete('delete/{id}', 'delete')->name('admin.customers.gdpr.delete');
     });

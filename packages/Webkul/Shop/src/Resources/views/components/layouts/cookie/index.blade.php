@@ -62,7 +62,7 @@
 
                         <a 
                             class="mt-2.5 box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
-                            href="{{ route('shop.customers.account.gdpr.cookie-consent') }}"
+                            href="{{ route('shop.customers.gdpr.cookie-consent') }}"
                         >
                             @lang('shop::app.components.layouts.cookie.index.learn-more-and-customize')
                         </a>
@@ -74,8 +74,8 @@
     </script>
 
     <script type="module">
-        var secureFlag = {!! json_encode(config('session.secure') ? ';secure' : '') !!};
-        var sameSiteFlag = {!! json_encode(config('session.same_site') ? ';samesite=' . config('session.same_site') : '') !!};
+        const secureFlag = {!! json_encode(config('session.secure') ? ';secure' : '') !!};
+        const sameSiteFlag = {!! json_encode(config('session.same_site') ? ';samesite=' . config('session.same_site') : '') !!};
 
         app.component('v-cookie', {
             template: '#v-cookie-template',

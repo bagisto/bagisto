@@ -47,7 +47,7 @@ return [
         'key'   => 'account.data_request',
         'name'  => 'shop::app.layouts.gdpr-request',
         'route' => 'shop.customers.account.gdpr.index',
-        'icon'  => 'icon-heart',
+        'icon'  => 'icon-gdpr-safe',
         'sort'  => 7,
     ],
 ];

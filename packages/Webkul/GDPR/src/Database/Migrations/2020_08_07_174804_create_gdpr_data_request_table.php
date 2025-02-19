@@ -15,12 +15,12 @@ class CreateGdprDataRequestTable extends Migration
     {
         Schema::create('gdpr_data_request', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->unsignedInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
             $table->string('email');
-            $table->string('request_status');
-            $table->string('request_type');
-            $table->string('message');
+            $table->string('status');
+            $table->string('type');
+            $table->string('message', 500);
             $table->timestamps();
         });
     }

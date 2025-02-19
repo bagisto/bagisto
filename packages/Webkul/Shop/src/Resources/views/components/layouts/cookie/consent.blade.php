@@ -11,7 +11,10 @@
     {!! view_render_event('bagisto.shop.settings.gdpr.consent.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-cookie-consent-template">
+        <script
+            type="text/x-template"
+            id="v-cookie-consent-template"
+        >
             {!! view_render_event('bagisto.shop.settings.gdpr.consent.form.before') !!}
 
             <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">
@@ -35,9 +38,9 @@
                         <!-- Cookie Categories -->
                         @php
                             $cookieConsentKeys = [
-                                'basic_interaction'      => 'basic-interactions-and-functionalities',
+                                'basic_interaction'      => 'basic-interactions',
                                 'experience_enhancement' => 'experience-enhancement',
-                                'measurements'           => 'measurement',
+                                'measurements'           => 'measurements',
                                 'targeting_advertising'  => 'targeting-and-advertising'
                             ];
                         @endphp
@@ -51,15 +54,15 @@
                             <div class="flex items-start gap-2">
                                 <x-shop::form.control-group.control
                                     type="checkbox"
-                                    name="strictly_necessary_cookie"
-                                    id="strictly_necessary_cookie"
+                                    name="strictly_necessary"
+                                    id="strictly_necessary"
                                     value="1"
-                                    for="strictly_necessary_cookie"
+                                    for="strictly_necessary"
                                 />
 
                                 <label
                                     class="cursor-pointer select-none max-sm:text-sm"
-                                    for="strictly_necessary_cookie"
+                                    for="strictly_necessary"
                                 >
                                     {{ core()->getConfigData('general.gdpr.cookie_consent.strictly_necessary') }}
                                 </label>
@@ -74,17 +77,22 @@
 
                                 <div class="flex items-start gap-2">
                                     <x-shop::form.control-group.control
-                                        type="checkbox"
-                                        name="{{ $key }}_cookie"
-                                        id="{{ $key }}_cookie"
+                                        type="hidden"
+                                        name="{{ $key }}"
                                         value="0"
+                                    />
+                                    <x-shop::form.control-group.control
+                                        type="checkbox"
+                                        name="{{ $key }}"
+                                        id="{{ $key }}"
+                                        value="1"
                                         rules="required"
-                                        for="{{ $key }}_cookie"
+                                        for="{{ $key }}"
                                     />
         
                                     <label
                                         class="cursor-pointer select-none max-sm:text-sm"
-                                        for="{{ $key }}_cookie"
+                                        for="{{ $key }}"
                                     >
                                         {{ core()->getConfigData('general.gdpr.cookie_consent.' . $key) }}
                                     </label>
@@ -107,11 +115,11 @@
                 data() {
                     return {
                         cookieKeys: [
-                            'strictly_necessary_cookie',
-                            'basic_interaction_cookie',
-                            'experience_enhancement_cookie',
-                            'measurement_cookie',
-                            'targeting_advertising_cookie'
+                            'strictly_necessary',
+                            'basic_interaction',
+                            'experience_enhancement',
+                            'measurement',
+                            'targeting_advertising'
                         ],
                     };
                 },

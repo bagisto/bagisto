@@ -14,9 +14,7 @@ class UpdateRequestMail extends Mailable
      *
      * @return void
      */
-    public function __construct(
-        public array $adminUpdateRequest
-    ) {}
+    public function __construct(public array $adminUpdateRequest) {}
 
     /**
      * Get the message envelope.
@@ -38,9 +36,6 @@ class UpdateRequestMail extends Mailable
     {
         return new Content(
             view: 'shop::emails.customers.gdpr.new-request',
-            with: [
-                'adminUpdateRequest' => $this->adminUpdateRequest,
-            ],
         );
     }
 }

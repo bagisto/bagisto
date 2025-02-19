@@ -47,6 +47,11 @@ img.lazy {
         -moz-osx-font-smoothing: grayscale;
     }
 
+
+    .icon-gdpr-safe:before {
+        content: "\e84f";
+    }
+
     .icon-checkout-address:before {
         content: "\e944";
     }
