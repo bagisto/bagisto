@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
-use Webkul\GDPR\Repositories\GDPRRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\GDPRRequestsDatagrid;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -22,7 +21,6 @@ class GDPRController extends Controller
      */
     public function __construct(
         protected GDPRDataRequestRepository $gdprDataRequestRepository,
-        protected GDPRRepository $gdprRepository,
         protected OrderRepository $orderRepository,
         protected CustomerAddressRepository $customerAddressRepository
     ) {}
@@ -148,33 +146,5 @@ class GDPRController extends Controller
     public function cookieConsent()
     {
         return view('shop::components.layouts.cookie.consent');
-    }
-
-    public function cookieConsentStore()
-    {
-        $consentData = request()->only([
-            'strictly_necessary',
-            'basic_interaction',
-            'experience_enhancement',
-            'measurements',
-            'targeting_advertising',
-        ]);
-
-        $consentData['customer_id'] = auth()->guard('customer')->user()->id;
-
-        dd($consentData);
-        if (! empty(request()->id)) {
-            $gdpr = $this->gdprRepository->update($consentData, request()->id);
-        } else {
-            dd($consentData);
-            $gdpr = $this->gdprRepository->create($consentData);
-        }
-
-        session()->flash('success', 'Consent has been saved successfully.');
-
-        return new JsonResource([
-            'data'    => $gdpr,
-            'message' => 'Consent has been saved successfully.',
-        ]);
     }
 }

@@ -12,7 +12,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\GDPR\Models\GDPR::class,
         \Webkul\GDPR\Models\GDPRDataRequest::class,
     ];
 }

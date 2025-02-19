@@ -7,7 +7,6 @@ use Webkul\Admin\DataGrids\Customers\GDPRDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
-use Webkul\GDPR\Repositories\GDPRRepository;
 
 class GDPRController extends Controller
 {
@@ -18,7 +17,6 @@ class GDPRController extends Controller
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected GDPRRepository $gdprRepository,
         protected GDPRDataRequestRepository $gdprDataRequestRepository
     ) {}
 
