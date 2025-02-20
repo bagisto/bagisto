@@ -116,28 +116,28 @@
             </template>
         
             <!-- Textarea Input -->
-            <template v-if="field.type == 'textarea' && field.is_visible">
+            <template v-if="field.type === 'textarea' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
                     ::id="name"
-                    ::name="name"
+                    ::name="field.name"
                     ::rules="validations"
                     ::value="value"
                     ::label="label"
                 />
             </template>
 
-            <!-- Textarea with tinymce -->
-            <template v-if="field.type == 'editor' && field.is_visible">
+            <template v-if="field.type === 'editor' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
                     ::id="name"
-                    ::name="name"
+                    ::name="field.name"
                     ::rules="validations"
                     ::value="value"
                     ::label="label"
+                    tinymce="true"
                 />
             </template>
         
@@ -438,6 +438,7 @@
                 'src',
                 'validations',
                 'value',
+                'tinymce',
             ],
 
             data() {

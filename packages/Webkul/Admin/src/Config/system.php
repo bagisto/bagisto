@@ -2,6 +2,10 @@
 
 use Webkul\Sales\Models\Order;
 
+/**
+ * Note: For TinyMCE textarea, please use the 'editor' type.
+ */
+
 return [
     /**
      * General.

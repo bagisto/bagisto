@@ -6,7 +6,7 @@
         there is an issue with relative paths in the plugins. I intend to address this task at the end.
     -->
     <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"
+        src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js"
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     ></script>
@@ -207,8 +207,8 @@
                 this.$emitter.on('change-theme', (theme) => {
                     tinymce.activeEditor.destroy();
 
-                    this.currentSkin = (theme === 'dark') ? 'oxide-dark' : 'oxide';
-                    this.currentContentCSS = (theme === 'dark') ? 'dark' : 'default';
+                    this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
+                    this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
 
                     this.init();
                 });
@@ -326,7 +326,7 @@
                     };
 
                     tinyMCEHelper.initTinyMCE({
-                        selector: this.selector,
+                        selector: "textarea",
                         plugins: 'image media wordcount save fullscreen code table lists link',
                         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
                         image_advtab: true,
