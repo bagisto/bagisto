@@ -128,6 +128,7 @@
                 />
             </template>
 
+            <!-- Textarea with tinymce -->
             <template v-if="field.type === 'editor' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
