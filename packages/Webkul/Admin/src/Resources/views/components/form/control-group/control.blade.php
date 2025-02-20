@@ -107,7 +107,8 @@
 
             @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
                 <x-admin::tinymce
-                    :selector="'textarea#' . $attributes->get(':id', 'id')"
+                    :selector="'textarea#' . $attributes->get('id')"
+                    :prompt="stripcslashes($attributes->get('prompt', ''))"
                     ::field="field"
                 />
             @endif
