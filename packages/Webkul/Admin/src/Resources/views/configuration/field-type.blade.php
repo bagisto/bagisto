@@ -116,7 +116,7 @@
             </template>
         
             <!-- Textarea Input -->
-            <template v-if="field.type === 'textarea' && field.is_visible">
+            <template v-if="field.type == 'textarea' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
@@ -129,7 +129,7 @@
             </template>
 
             <!-- Textarea with tinymce -->
-            <template v-if="field.type === 'editor' && field.is_visible">
+            <template v-if="field.type == 'editor' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
