@@ -6,7 +6,7 @@
         there is an issue with relative paths in the plugins. I intend to address this task at the end.
     -->
     <script
-        src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js"
+        src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js"
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     ></script>

@@ -121,7 +121,7 @@
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
                     ::id="name"
-                    ::name="field.name"
+                    ::name="name"
                     ::rules="validations"
                     ::value="value"
                     ::label="label"
@@ -133,7 +133,7 @@
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
                     ::id="name"
-                    ::name="field.name"
+                    ::name="name"
                     ::rules="validations"
                     ::value="value"
                     ::label="label"
@@ -438,7 +438,6 @@
                 'src',
                 'validations',
                 'value',
-                'tinymce',
             ],
 
             data() {
