@@ -978,6 +978,12 @@ return [
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
             ],
+
+            'reminder' => [
+                'already-paid'    => 'Als u de betaling al heeft gedaan, negeer dan dit bericht.',
+                'invoice-overdue' => 'Dit is een vriendelijke herinnering dat uw factuur nu achterstallig is. Wij verzoeken u vriendelijk om de betaling zo spoedig mogelijk te voldoen.',
+                'subject'         => 'Factuurherinnering',
+            ],
         ],
 
         'contact-us' => [

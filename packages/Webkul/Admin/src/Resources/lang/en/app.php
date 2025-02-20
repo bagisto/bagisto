@@ -1304,11 +1304,11 @@ return [
             ],
 
             'category'             => 'Category',
-            'create-success'       => 'category created successfully.',
+            'create-success'       => 'Category created successfully.',
             'delete-category-root' => 'The Root category can not be deleted.',
             'delete-failed'        => 'Error encountered while deleting category',
             'delete-success'       => 'The category has been successfully deleted.',
-            'update-success'       => 'category updated successfully.',
+            'update-success'       => 'Category updated successfully.',
         ],
 
         'families' => [
@@ -2521,19 +2521,20 @@ return [
                 ],
 
                 'create' => [
-                    'code'              => 'Code',
-                    'create-btn'        => 'Create Currency',
-                    'currency-position' => 'Currency Position',
-                    'decimal'           => 'Decimal',
-                    'decimal-separator' => 'Decimal Separator',
-                    'delete-warning'    => 'Are you sure you want to perform this action?',
-                    'general'           => 'General',
-                    'group-separator'   => 'Group Separator',
-                    'name'              => 'Name',
-                    'separator-note'    => 'The :attribute field can only accept the comma (,) and dot (.) operators',
-                    'save-btn'          => 'Save Currency',
-                    'symbol'            => 'Symbol',
-                    'title'             => 'Create New Currency',
+                    'code'                   => 'Code',
+                    'create-btn'             => 'Create Currency',
+                    'currency-position'      => 'Currency Position',
+                    'decimal'                => 'Decimal',
+                    'decimal-separator'      => 'Decimal Separator',
+                    'decimal-separator-note' => 'The :attribute field can only accept the comma (,) and dot (.) characters',
+                    'delete-warning'         => 'Are you sure you want to perform this action?',
+                    'general'                => 'General',
+                    'group-separator'        => 'Group Separator',
+                    'group-separator-note'   => 'The :attribute field can only accept the comma (,), dot (.), apostrophe (\'), and space ( ) characters',
+                    'name'                   => 'Name',
+                    'save-btn'               => 'Save Currency',
+                    'symbol'                 => 'Symbol',
+                    'title'                  => 'Create New Currency',
                 ],
 
                 'edit' => [

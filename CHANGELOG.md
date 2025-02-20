@@ -2,6 +2,210 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.2.4 (14th of February 2025)** - *Release*
+
+* #10440 [fixed] - Upload File Section Appears Empty in Edit Mode of Data Transfer.
+
+* #10443 [fixed] - Inappropriate Validation Message for Invalid Contact Number in Customer XLS File during Data Transfer.
+
+* #10444 [fixed] - Unable to Add or Update Contact Number in Customer via XLS or CSV File Upload in Data Transfer.
+
+* #10445 [fixed] - Proper Date of Birth Format Validation Required in Data Transfer.
+
+* #10451 [fixed] - Guest Checkout value entry should be added in Sample CSV.
+
+* #10471 [fixed] - The customer is receiving two invoice emails after an invoice is created.
+
+* #10472 [fixed] - Attribute Configuration Checkbox Saving Issue
+
+* #10475 [fixed] - Bug Report: Shipping and Handling Price Incorrect in Admin Sales Section.
+
+* #10482 [fixed] - Restrict Attribute Family Code Non-Editable Fields from Backend.
+
+* #10486 [fixed] - UK Postcode.
+
+* #10495 [fixed] - Unable to Make Campaign Inactive in Admin End.
+
+* #10497 [fixed] - Captcha v2 not working.
+
+* #10512 [fixed] - Getting Exceptional Error when saving Shipping Settings details in configurations.
+
+* #10513 [fixed] - Getting Console Errors when updating Grouped product added product QTY in shop front.
+
+* #10515 [fixed] - options table in attribute has wrong alignment.
+
+* #10517 [fixed] - Product attribute label is not translate base on Locale or .env.
+
+* #10518 [fixed] - Attribute options are in the wrong column.
+
+* #10519 [fixed] - Sort and limit is not set on New Products them.
+
+* #10380 [fixed] - Product QTY is not updating when QTY is updated from the Main Cart and Mini Cart in the Additional column of the cart_items table.
+
+* #10384 [fixed] - PayPal Standard is not working Showing return to merchant and also in console we can see the error.
+
+* #10386 [fixed] - A UI issue occurs in the Creating Invoice Drawer when the product name is too long, causing layout distortion or overflow.
+
+* #10387 [fixed] - UI can be improved in the Transaction detail drawer in Admin end and also First Letter of the Status must be Capital.
+
+* #10388 [fixed] - We can save a custom role without selecting any checkboxes for the custom options.
+
+* #10393 [fixed] - If there are more entries in the Filter's Drop-down, we can add a scroller.
+
+* #10407 [fixed] - The information in the 'Content' section of General Configuration does not align with the fields provided for customization.
+
+* #10424 [fixed] - The United Nations (UN) is not a country. It is an international organization founded in 1945 and is composed of member states.
+
+* #10425 [fixed] - Incorrect Warning Message When Deleting Tax Category with Assigned Tax Rates.
+
+* #10426 [fixed] - Default List Mode Setting for Store Front: List View Not Working, Console Errors Appear.
+
+* #10432 [fixed] - Variant or Linked Product Details Missing in Invoices and Shipments for Logged-In Users on Shop Front.
+
+* #10433 [fixed] - Ensure Modal Responsiveness for Large Content.
+
+* #10434 [fixed] - Exceptional Error Appears When Uploading Edited Error File in Data Transfer.
+
+* #10331 [fixed] - Position field in add and edit category pages should only take integer values.
+
+* #10335 [fixed] - DataGrid filter is not working.
+
+* #10341 [fixed] - Getting SQLSTATE[23000] in error msg while mass deletion of few attributes like size, color, weight.
+
+* #10347 [fixed] - Modal not showing upside data or button if the height increased.
+
+* #10349 [fixed] - Need to Add Proper Validation for the Currency Symbol, Decimal, Group Separator and Decimal Separator.
+
+* #10350 [fixed] - We should not be able to edit the currency code in Admin End Settings.
+
+* #10364 [fixed] - Adding dropdown details in a select-type input and then saving it back results in a 404 error.
+
+* #10366 [fixed] - Admin End -> Lines in a Street Address is accepting Decimal Value.
+
+* #10367 [fixed] - The Contact Number section in the Shipping Settings Address needs proper validation.
+
+* #10368 [fixed] - In the Admin Flat Rate Settings, any value can be entered in the Flat Rate Price field, resulting in console errors on the Checkout page.
+
+* #10369 [fixed] - There should be a limit in Order Number Length in Order Settings as we are facing warning message in Checkout Page.
+
+* #10370 [fixed] - We need to add proper validation in the Invoice Settings configuration in Admin End Configurations.
+
+* #10372 [fixed] - Mini Cart Offer Information must have character validation and the content when increased we are unable to see the products added to Mini Cart.
+
+* #10373 [fixed] - Need to add some sort of Limit to the Offer Title and Redirection Title for the Shop Front Header Settings.
+
+* #10375 [fixed] - language file mess up.
+
+* #10377 [fixed] - Tax Rates when created the value of Tax Rate should be in between 0 to 100%.
+
+* #10265 [fixed] - When creating a customer from the admin end, there should be an option to display the Customer ID.
+
+* #10267 [fixed] - Add Scroller in Currency and Locale drop-down for desktop view.
+
+* #10283 [fixed] - Add to cart and Buy now button.
+
+* #10294 [fixed] - Using Image Component twice in Customer Profile Edit page, Image upload issue is appearing.
+
+* #10295 [fixed] - We can save identical slugs for both categories and products. As a result, when I try to view the product page, the category page opens instead.
+
+* #10296 [fixed] - Compare Product Scroller is not appearing.
+
+* #10297 [fixed] - Add Note In the Sales and Customer sections, a character limit should be set. When data is entered without spaces, the page layout becomes distorted.
+
+* #10299 [fixed] - Long Name in Product Name is creating issue in shop front.
+
+* #10307 [fixed] - Add review from the customer end with at least 2 images and remove 1 Image save. In Admin we can see the removed image also.
+
+* #10308 [fixed] - In a configurable product, when editing a variant, the inventory box should have a default entry of zero.
+
+* #10309 [fixed] - Add validation to configurable products to prevent saving if no data is entered for the variant.
+
+* #10310 [fixed] - In the configurable product variant edit, the price appears as NaN if variant details are filled in the order of inventory, weight, and then price. #10310
+
+* #10315 [fixed] - The Header and Footer should Enabled on Checkout Success page. 
+
+* #10323 [fixed] - The product page and admin datagrid should handle long product names effectively.
+
+* #10325 [fixed] - On the bundle product page, if any options contain a special price, then it should show.
+
+* #10330 [fixed] - Categories section not showing in the product edit page when all attributes are moved to the Main column
+
+* #10206 [fixed] - We are able to add Configurable, Grouped, Configurable and Virtual Product in Bundle Product.
+
+* #10207 [fixed] - We are able to add Configurable, Grouped, Configurable and Virtual Product in Grouped Product.
+
+* #10208 [fixed] - Missing theme_code in Theme Customization Retrieval For Shop Theme #10208
+
+* #10209 [fixed] - d without marketing time and saved, after edit we can see the format issue and also we are unable to save it without marketing dates.
+
+* #10212 [fixed] - Contact Us page -> Phone Number Integer validation issue is appearing.
+
+* #10217 [fixed] - Getting Console Error when we add symbols On Search Bar on Shop Front.
+
+* #10228 [fixed] - Create a new Inventory Source -> Status must be off and save. We can see the Inventory Source Still Active.
+
+* #10229 [fixed] - In configurable product variants with multiple inventories, a default value of zero must be filled; otherwise, a validation error appears.
+
+* #10232 [fixed] - PayPal Smart Button order is working without Credentials In Admin end Reorder and Create Order.
+
+* #10234 [fixed] - An exception error occurs when attempting to refund a quantity greater than the invoiced and shipped quantity.
+
+* #10236 [fixed] - Admin Dark Theme Static Content UI issue.
+
+* #10238 [fixed] - Unable to add a Channel 2 product to the cart when logged in to the admin with Channel 1.
+
+* #10240 [fixed] - ACL: A custom role assigned without dashboard access still logs in with the dashboard by default.
+
+* #10242 [fixed] - The 'Add Note' feature for Customer, Order, etc., is not displaying the notification UI correctly in Dark Theme.
+
+* #10248 [fixed] - Add support for Multiselect field type in system configuration #10248
+
+* #10249 [fixed] - Custom Application Logo Not Displayed on Error Page #10249
+
+* #10255 [fixed] - Need to update the warning message for Notification Marked as Read.
+
+* #10256 [fixed] - Dropdown Arrow in RTL view Mass Selection is having minor UI issue.
+
+* #10262 [fixed] - While creating a configurable product from the edit product page, the size and color options appear as "undefined," causing the variant to be invisible on the storefront.
+
+* #10263 [fixed] - The status filters need to be updated to display "Active/Inactive" instead of "True/False" for consistency with the datagrid.
+
+* #10204 [fixed] - Carousel arrows must not appear when there are a limited number of products in Related, Up-Sell, and Cross-Sell products.
+
+* #10199 [fixed] - In the GUI installation, a password validation issue occurs when we enter only three characters, but it still gets saved.
+
+* #10196 [fixed] - In the Attribute, when we create a TextArea type and add a default value, we get a validation error upon saving, but the validation message does not appear.
+
+* #10193 [fixed] - Unassigned Attributes and Right Side Column Not Displaying After Moving Groups to Main Column in Attribute Families.
+
+* #10191 [fixed] - Catalog Rule -> Add Conditions -> One of the details is having translation missing.
+
+* #10189 [fixed] - Cart Rule Categories condition is having issue they are not appearing and also console errors are appearing.
+
+* #10188 [fixed] - Click on Subscribe to Newsletter text on sign-up page we can see console error.
+
+* #10179 [fixed] - while installing admin password validation issue.
+
+* #10173 [fixed] - Minimum Order Amount is not working for discounts applied by Cart Rules.
+
+* #10171 [fixed] - Meta Title is being used as a URL instead of a Slug.
+
+* #10169 [fixed] - Getting console errors, and images are not loading in the mobile view when switching configurable product variants.
+
+* #10168 [fixed] - Censoring product reviewer name.
+
+* #10166 [fixed] - The wishlist quantity issue is occurring with the product. When the quantity of a product in the wishlist is increased and then added to the cart, the quantity of other products in the wishlist is also increased.
+
+* #10163 [fixed] - In Product Review Icon, there the text must appear add image and video.
+
+* #10162 [fixed] - In CMS Pages when we enter incorrect Slug, it should redirect to 404 Page.
+
+* #10161 [fixed] - In Home Page Product Carousal, View All Button is redirect to Home Page.
+
+* #10147 [fixed] - Admin Credentials Prompts Missing During Bagisto Installation via Artisan Command.
+
+* #10144 [fixed] - Configurable product with and the variant has a promotion problem.
+
 ## **v2.2.3 (27th of September 2024)** - *Release*
 
 * #10033 [Enhancement] Loader must be added when we create any product, sitemap etc, in the submit button. So that we cannot click them. Single Entry must pass.
