@@ -74,6 +74,8 @@ class ThemeCustomizationTranslation extends Model implements ThemeCustomizationT
      * @var array
      */
     protected $fillable = [
+        'theme_customization_id',
+        'locale',
         'name',
         'options',
     ];

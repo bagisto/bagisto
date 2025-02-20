@@ -155,6 +155,17 @@ class ThemeDataGrid extends DataGrid
             ]);
         }
 
+        if (bouncer()->hasPermission('settings.themes.duplicate')) {
+            $this->addAction([
+                'icon'   => 'icon-copy',
+                'title'  => trans('admin::app.settings.themes.index.datagrid.duplicate'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.settings.themes.duplicate', $row->id);
+                },
+            ]);
+        }
+
         if (bouncer()->hasPermission('settings.themes.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',

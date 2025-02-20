@@ -3091,6 +3091,7 @@ return [
                     'channel_name'  => 'اسم القناة',
                     'change-status' => 'تغيير الحالة',
                     'delete'        => 'حذف',
+                    'duplicate'     => 'مكرر',
                     'id'            => 'المعرف',
                     'inactive'      => 'غير نشط',
                     'name'          => 'الاسم',
@@ -3202,9 +3203,11 @@ return [
                 'yes'                           => 'نعم',
             ],
 
-            'create-success' => 'تم إنشاء الموضوع بنجاح',
-            'delete-success' => 'تم حذف الموضوع بنجاح',
-            'update-success' => 'تم تحديث الموضوع بنجاح',
+            'create-success'    => 'تم إنشاء الموضوع بنجاح',
+            'delete-success'    => 'تم حذف الموضوع بنجاح',
+            'duplicate-success' => 'تم تكرار السمة بنجاح',
+            'update-success'    => 'تم تحديث الموضوع بنجاح',
+            'not-found'         => 'لم يتم العثور على السمة',
         ],
     ],
 

@@ -3091,6 +3091,7 @@ return [
                     'channel_name'  => 'チャンネル名',
                     'change-status' => 'ステータスを変更',
                     'delete'        => '削除',
+                    'duplicate'     => '複製',
                     'id'            => 'ID',
                     'inactive'      => '非アクティブ',
                     'name'          => '名前',
@@ -3202,9 +3203,11 @@ return [
                 'yes'                           => 'はい',
             ],
 
-            'create-success' => 'テーマが正常に作成されました',
-            'delete-success' => 'テーマが正常に削除されました',
-            'update-success' => 'テーマが正常に更新されました',
+            'create-success'    => 'テーマが正常に作成されました',
+            'delete-success'    => 'テーマが正常に削除されました',
+            'duplicate-success' => 'テーマが正常に複製されました',
+            'update-success'    => 'テーマが正常に更新されました',
+            'not-found'         => 'テーマが見つかりません',
         ],
     ],
 

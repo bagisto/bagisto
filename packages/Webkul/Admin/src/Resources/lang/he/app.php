@@ -3091,6 +3091,7 @@ return [
                     'channel_name'  => 'שם הערוץ',
                     'change-status' => 'שנה סטטוס',
                     'delete'        => 'מחק',
+                    'duplicate'     => 'שכפל',
                     'id'            => 'מזהה',
                     'inactive'      => 'לא פעיל',
                     'name'          => 'שם',
@@ -3202,9 +3203,11 @@ return [
                 'yes'                           => 'כן',
             ],
 
-            'create-success' => 'ערכת העיצוב נוצרה בהצלחה',
-            'delete-success' => 'ערכת העיצוב נמחקה בהצלחה',
-            'update-success' => 'ערכת העיצ',
+            'create-success'    => 'ערכת העיצוב נוצרה בהצלחה',
+            'delete-success'    => 'ערכת העיצוב נמחקה בהצלחה',
+            'duplicate-success' => 'הנושא שוכפל בהצלחה',
+            'update-success'    => 'ערכת העיצ',
+            'not-found'         => 'הנושא לא נמצא',
         ],
     ],
 

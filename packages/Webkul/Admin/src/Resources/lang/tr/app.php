@@ -3091,6 +3091,7 @@ return [
                     'channel_name'  => 'Kanal Adı',
                     'change-status' => 'Durumu değiştir',
                     'delete'        => 'Sil',
+                    'duplicate'     => 'Çoğalt',
                     'id'            => 'Kimlik',
                     'inactive'      => 'Pasif',
                     'name'          => 'Ad',
@@ -3202,9 +3203,11 @@ return [
                 'yes'                           => 'Evet',
             ],
 
-            'create-success' => 'Tema başarıyla oluşturuldu',
-            'delete-success' => 'Tema başarıyla silindi',
-            'update-success' => 'Tema başarıyla güncellendi',
+            'create-success'    => 'Tema başarıyla oluşturuldu',
+            'delete-success'    => 'Tema başarıyla silindi',
+            'duplicate-success' => 'Tema başarıyla kopyalandı',
+            'update-success'    => 'Tema başarıyla güncellendi',
+            'not-found'         => 'Tema bulunamadı',
         ],
     ],
 

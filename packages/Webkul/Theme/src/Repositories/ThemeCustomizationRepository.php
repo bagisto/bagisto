@@ -121,4 +121,20 @@ class ThemeCustomizationRepository extends Repository
         $translatedModel->theme_customization_id = $theme->id;
         $translatedModel->save();
     }
+
+    /**
+     * Get a unique name for the theme.
+     */
+    public function getUniqueName(string $baseName): string
+    {
+        $counter = 1;
+        $newName = $baseName;
+
+        while ($this->findWhere(['name' => $newName])->isNotEmpty()) {
+            $newName = $baseName.'-'.$counter;
+            $counter++;
+        }
+
+        return $newName;
+    }
 }

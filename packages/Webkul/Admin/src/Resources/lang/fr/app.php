@@ -3091,6 +3091,7 @@ return [
                     'channel_name'  => 'Nom du canal',
                     'change-status' => 'Changer le statut',
                     'delete'        => 'Supprimer',
+                    'duplicate'     => 'Dupliquer',
                     'id'            => 'ID',
                     'inactive'      => 'Inactif',
                     'name'          => 'Nom',
@@ -3202,9 +3203,11 @@ return [
                 'Yes'                          => 'Oui',
             ],
 
-            'create-success' => 'Thème créé avec succès',
-            'delete-success' => 'Thème supprimé avec succès',
-            'update-success' => 'Thème mis à jour avec succès',
+            'create-success'    => 'Thème créé avec succès',
+            'delete-success'    => 'Thème supprimé avec succès',
+            'duplicate-success' => 'Thème dupliqué avec succès',
+            'update-success'    => 'Thème mis à jour avec succès',
+            'not-found'         => 'Thème non trouvé',
         ],
     ],
 
