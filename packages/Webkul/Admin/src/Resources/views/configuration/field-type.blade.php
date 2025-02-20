@@ -130,15 +130,24 @@
 
             <!-- Textarea with tinymce -->
             <template v-if="field.type == 'editor' && field.is_visible">
-                <x-admin::form.control-group.control
-                    type="textarea"
-                    class="text-gray-600 dark:text-gray-300"
-                    ::id="name"
-                    ::name="name"
-                    ::rules="validations"
-                    ::value="value"
-                    ::label="label"
-                />
+                <v-field
+                    v-slot="{ field, errors }"
+                    :name="name"
+                >
+                    <textarea
+                        :name="name"
+                        :id="name.replaceAll('[', '_').replaceAll(']', '_').replaceAll('[]', '_')"
+                        :value="value"
+                        v-bind="{field, errors}"
+                        :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
+                        class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                    ></textarea>
+
+                    <x-admin::tinymce
+                        ::selector="`textarea#${name.replaceAll('[', '_').replaceAll(']', '_').replaceAll('[]', '_')}`"
+                        ::field="field"
+                    />
+                </v-field>
             </template>
         
             <!-- Select input -->
