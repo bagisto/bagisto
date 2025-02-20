@@ -110,7 +110,8 @@
                     :selector="'textarea#' . $attributes->get('id')"
                     :prompt="stripcslashes($attributes->get('prompt', ''))"
                     ::field="field"
-                />
+                >
+                </x-admin::tinymce>
             @endif
         </v-field>
 
