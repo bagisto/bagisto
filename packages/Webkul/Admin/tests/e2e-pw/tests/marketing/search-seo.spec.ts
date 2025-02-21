@@ -38,7 +38,7 @@ test.describe("search-seo management", () => {
         await adminPage.getByRole('textbox', { name: 'Target Path' }).click();
         await adminPage.getByRole('textbox', { name: 'Target Path' }).fill(seo.url);
         await adminPage.locator('select[name="redirect_type"]').selectOption('301');
-        await adminPage.locator('select[name="locale"]').selectOption('ru');
+        await adminPage.locator('select[name="locale"]').selectOption('en');
 
         /**
         * Saving the Temporary Redirect Type URL Rewrite.
@@ -74,7 +74,7 @@ test.describe("search-seo management", () => {
         await adminPage.getByRole('textbox', { name: 'Target Path' })
         await adminPage.getByRole('textbox', { name: 'Target Path' }).fill('http://192.168.15.17/bagisto/search-seo/public/simple-product-2');
         await adminPage.locator('select[name="redirect_type"]').selectOption('301');
-        await adminPage.locator('select[name="locale"]').selectOption('ar');
+        await adminPage.locator('select[name="locale"]').selectOption('en');
 
         /**
         * Saving the Permanent Redirect Type URL Rewrite.
@@ -208,7 +208,7 @@ test.describe("search-seo management", () => {
         */
 
         await adminPage.locator('.row > .flex > a').first().click();
-        await adminPage.locator('select[name="locale"]').selectOption('es');
+        await adminPage.locator('select[name="locale"]').selectOption('ar');
         await adminPage.getByRole('button', { name: 'Save URL Rewrite' }).click();
 
 
@@ -314,7 +314,7 @@ test.describe("search-seo management", () => {
         await adminPage.goto(`admin/marketing/search-seo/search-terms`);
 
         /**
-         * Opening create URL Rewrite URL form in modal.
+         * Opening Create Search Term form in modal.
          */
         await adminPage.getByText('Create Search Term').click();
 
@@ -392,7 +392,7 @@ test.describe("search-seo management", () => {
             adminPage.getByText("Search Term Updated")
         ).toBeVisible();
 
-    });    
+    });
 
     test("should update uses field by editing search term", async ({ adminPage }) => {
 
@@ -419,7 +419,7 @@ test.describe("search-seo management", () => {
             adminPage.getByText("Search Term Updated")
         ).toBeVisible();
 
-    });    
+    });
 
     test("should update redirect url field by editing search term", async ({ adminPage }) => {
 
@@ -445,7 +445,7 @@ test.describe("search-seo management", () => {
             adminPage.getByText("Search Term Updated")
         ).toBeVisible();
 
-    }); 
+    });
 
     test("should update channel by editing search term", async ({ adminPage }) => {
 
@@ -471,7 +471,7 @@ test.describe("search-seo management", () => {
             adminPage.getByText("Search Term Updated")
         ).toBeVisible();
 
-    }); 
+    });
 
     test("should update locale by editing search term", async ({ adminPage }) => {
 
@@ -486,7 +486,7 @@ test.describe("search-seo management", () => {
          */
 
         await adminPage.locator('.row > .flex > a').first().click();
-        await adminPage.locator('select[name="locale"]').selectOption('it');
+        await adminPage.locator('select[name="locale"]').selectOption('ar');
         await adminPage.getByRole('button', { name: 'Save Search Term' }).click();
 
         /**
@@ -497,7 +497,348 @@ test.describe("search-seo management", () => {
             adminPage.getByText("Search Term Updated")
         ).toBeVisible();
 
-    }); 
+    });
+
+    test("should delete selected search term", async ({ adminPage }) => {
+
+        /**
+        * Reaching to the Search Term Page
+        */
+
+        await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+
+        /**
+         * Selecting the Search Term for Deleting.
+         */
+
+        await adminPage.locator('div:nth-child(1) > p > label > .icon-uncheckbox').click();
+        // await adminPage.locator('div:nth-child(2) > p > label > .icon-uncheckbox').click();
+
+
+        /**
+        * Select Action to delete the selected Search Terms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Select Action ' }).click();
+        await adminPage.getByRole('link', { name: 'Delete' }).click();
+
+
+        /**
+        * Select Warning Message box for confirmation to delete selected Search Terms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        /**
+        * Saving the Updated Locale.
+        */
+
+        await expect(
+            adminPage.getByText("Selected Search Terms Deleted Successfully")
+        ).toBeVisible();
+    });
+
+    test("should delete search terms with mass delete", async ({ adminPage }) => {
+        /**
+         * Reaching to the Search Terms Page
+         */
+        await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+
+        /**
+         * Selecting All List with Mass Delete Checkbox.
+         */
+
+        await adminPage.locator('.icon-uncheckbox').first().click();
+
+        /**
+        * Select Action to delete the selected Search Terms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Select Action ' }).click();
+        await adminPage.getByRole('link', { name: 'Delete' }).click();
+        /**
+        * Select Warning Message box for confirmation to delete selected Search Terms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        await expect(
+            adminPage.getByText("Selected Search Terms Deleted Successfully")
+        ).toBeVisible();
+    });
+
+
+    /**
+     * Test Cases for Search Synonyms.
+     */
+
+    test("should create new search synonym", async ({ adminPage }) => {
+        /**
+         * Reaching to the Search Synonym Page
+         */
+        await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+
+        /**
+         * Opening create Search Synonym form in modal.
+         */
+        await adminPage.getByText('Create Search Synonym').click();
+
+        /**
+        * Filling the Modal form New Search Synonym.
+        */
+
+        await adminPage.getByRole('textbox', { name: 'Name' }).click();
+        await adminPage.getByRole('textbox', { name: 'Name' }).fill('Bottom Wear');
+        await adminPage.getByRole('textbox', { name: 'Terms' }).fill('Jeans,Lowers,Shorts,Running Shorts,Sports Leggings,Trousers');
+
+        /**
+       * Saving the Search Synonym.
+       */
+
+        await adminPage.getByRole('button', { name: 'Save Search Synonym' }).click();
+
+        await expect(
+            adminPage.getByText("Search Synonym created")
+        ).toBeVisible();
+    });
+
+    test("should update name in search synonym", async ({ adminPage }) => {
+
+        /**
+             * Reaching to the Search Synonym Page
+             */
+        await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+
+        /**
+         * Updating the Name by Editing the Search Synonym.
+         */
+
+        await adminPage.locator('.row > .flex > a').first().click();
+        await adminPage.getByRole('textbox', { name: 'Name' }).click();
+        await adminPage.getByRole('textbox', { name: 'Name' }).press('ControlOrMeta+a');
+        await adminPage.getByRole('textbox', { name: 'Name' }).fill('Top Wear');
+
+        /**
+        * Saving the Search Synonym.
+        */
+
+        await adminPage.getByRole('button', { name: 'Save Search Synonym' }).click();
+
+        await expect(
+            adminPage.getByText("Search Synonym updated successfully")
+        ).toBeVisible();
+
+    });
+
+    test("should update terms in search synonym", async ({ adminPage }) => {
+
+        /**
+             * Reaching to the Search Synonym Page
+             */
+        await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+
+        /**
+         * Updating the Terms by Editing the Search Synonym.
+         */
+
+        await adminPage.locator('.row > .flex > a').first().click();
+        await adminPage.getByRole('textbox', { name: 'Terms' }).click();
+        await adminPage.getByRole('textbox', { name: 'Terms' }).press('ControlOrMeta+a');
+        await adminPage.getByRole('textbox', { name: 'Terms' }).fill('topwear, tops, upper wear, shirts, t-shirts, blouses, tank tops, tunics, sweatshirts, hoodies, jackets, coats');
+
+        /**
+        * Saving the Search Synonym.
+        */
+
+        await adminPage.getByRole('button', { name: 'Save Search Synonym' }).click();
+
+        await expect(
+            adminPage.getByText("Search Synonym updated successfully")
+        ).toBeVisible();
+
+    });
+
+    test("should delete selected search synonym", async ({ adminPage }) => {
+
+        /**
+        * Reaching to the Search Synonym Page
+        */
+
+        await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+
+        /**
+         * Selecting the Search Synonyms for Deleting.
+         */
+
+        await adminPage.locator('div:nth-child(1) > p > label > .icon-uncheckbox').click();
+        // await adminPage.locator('div:nth-child(2) > p > label > .icon-uncheckbox').click();
+
+
+        /**
+        * Select Action to delete the selected Search Synonyms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Select Action ' }).click();
+        await adminPage.getByRole('link', { name: 'Delete' }).click();
+
+
+        /**
+        * Select Warning Message box for confirmation to delete selected Search Terms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        /**
+        * Saving the Updated Locale.
+        */
+
+        await expect(
+            adminPage.getByText("Selected Search Synonyms Deleted Successfully")
+        ).toBeVisible();
+    });
+
+    test("should delete search synonyms with mass delete", async ({ adminPage }) => {
+        /**
+         * Reaching to the Search Terms Page
+         */
+        await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+
+        /**
+         * Selecting All List with Mass Delete Checkbox.
+         */
+
+        await adminPage.locator('.icon-uncheckbox').first().click();
+
+        /**
+        * Select Action to delete the selected Search Synonyms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Select Action ' }).click();
+        await adminPage.getByRole('link', { name: 'Delete' }).click();
+        /**
+        * Select Warning Message box for confirmation to delete selected Search Synonyms.
+        */
+
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        await expect(
+            adminPage.getByText("Selected Search Synonyms Deleted Successfully")
+        ).toBeVisible();
+    });
+
+    /**
+     * Test Cases for Search Sitemaps.
+     */
+
+    test("should create new sitemap", async ({ adminPage }) => {
+        /**
+         * Reaching to the Sitemap Page
+         */
+
+        await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+
+        /**
+         * Opening Create Sitemap form in modal.
+         */
+        await adminPage.getByText('Create Sitemap').click();
+
+        /**
+        * Filling the Modal form New Sitemap.
+        */
+        await adminPage.locator('input[name="file_name"]').fill('sitemap1.xml');
+        await adminPage.locator('input[name="path"]').fill('/sitemap/');
+
+        /**
+       * Saving the Sitemap.
+       */
+
+        await adminPage.getByRole('button', { name: 'Save Sitemap' }).click();
+
+        await expect(
+            adminPage.getByText("Sitemap created successfully")
+        ).toBeVisible();
+    });
+
+    test("should update file name in sitemap", async ({ adminPage }) => {
+
+        /**
+             * Reaching to the Sitemap Page
+             */
+        await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+
+        /**
+         * Updating the File Name by Editing the Sitemaps.
+         */
+
+        await adminPage.locator('.row > .flex > a').first().click();
+        await adminPage.locator('input[name="file_name"]').fill('sitemap1.xml');
+        await adminPage.locator('input[name="file_name"]').fill('sitemap2.xml');
+
+        /**
+        * Saving the Updated Sitemap.
+        */
+
+        await adminPage.getByRole('button', { name: 'Save Sitemap' }).click();
+
+        await expect(
+            adminPage.getByText("Sitemap Updated successfully")
+        ).toBeVisible();
+
+    });
+
+    test("should update path in sitemap", async ({ adminPage }) => {
+
+        /**
+             * Reaching to the Sitemap Page
+             */
+        await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+
+        /**
+         * Updating the File Name by Editing the Sitemaps.
+         */
+
+        await adminPage.locator('.row > .flex > a').first().click();
+        await adminPage.getByRole('textbox', { name: 'Path' }).click();
+        await adminPage.getByRole('textbox', { name: 'Path' }).press('ControlOrMeta+a');
+        await adminPage.getByRole('textbox', { name: 'Path' }).fill('/new_path/');
+
+        /**
+        * Saving the Updated Sitemap.
+        */
+
+        await adminPage.getByRole('button', { name: 'Save Sitemap' }).click();
+
+        await expect(
+            adminPage.getByText("Sitemap Updated successfully")
+        ).toBeVisible();
+
+    });
+
+    test("should delete sitemap with delete icon", async ({ adminPage }) => {
+
+        /**
+        * Reaching to the Sitemap Page
+        */
+
+        await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+
+        /**
+         * Selecting the Search Synonyms for Deleting.
+         */
+
+        await adminPage.locator('.row > .flex > a:nth-child(2)').first().click();
+
+        /**
+        * Select Warning Message box for confirmation to delete selected Sitemap.
+        */
+
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        await expect(
+            adminPage.getByText("Sitemap Deleted successfully")
+        ).toBeVisible();
+    });
+
     // async function createSearchTerm(adminPage) {
     //     await adminPage.goto(
     //         `admin/marketing/search-seo/search-terms`
