@@ -1113,7 +1113,7 @@ return [
                     'request-status' => 'Anfragestatus : ',
                 ],
             ],
-            
+
             'reminder' => [
                 'already-paid'    => 'Falls Sie die Zahlung bereits vorgenommen haben, ignorieren Sie bitte diese Nachricht.',
                 'invoice-overdue' => 'Dies ist eine freundliche Erinnerung daran, dass Ihre Rechnung überfällig ist. Bitte nehmen Sie die Zahlung so bald wie möglich vor.',
