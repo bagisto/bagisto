@@ -7,7 +7,6 @@ use Webkul\Core\Eloquent\TranslatableModel;
 
 class BookingProductEventTicket extends TranslatableModel implements BookingProductEventTicketContract
 {
-
     /**
      * Indicates if the model should be timestamped.
      */
