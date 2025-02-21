@@ -4,7 +4,7 @@ import { generateDescription } from '../../../utils/faker';
 
 
 
-test.describe('Catalog Configuration', () => {
+test.describe('Product Configuration', () => {
     /**
      * Navigate to the configuration page.
      */
@@ -243,23 +243,23 @@ test.describe('Catalog Configuration', () => {
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.click('label[for="catalog[products][social_share][twitter]"]');
-        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][facebook]');
+        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][twitter]');
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.click('label[for="catalog[products][social_share][pinterest]"]');
-        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][facebook]');
+        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][pinterest]');
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.click('label[for="catalog[products][social_share][whatsapp]"]');
-        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][facebook]');
+        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][whatsapp]');
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.click('label[for="catalog[products][social_share][linkedin]"]');
-        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][facebook]');
+        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][linkedin]');
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.click('label[for="catalog[products][social_share][email]"]');
-        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][facebook]');
+        // const toggleInput = await adminPage.locator('input[name="catalog[products][social_share][email]');
         // await expect(toggleInput).toBeChecked();
 
         await adminPage.locator('input[name="catalog[products][social_share][share_message]"]').fill(generateDescription());
