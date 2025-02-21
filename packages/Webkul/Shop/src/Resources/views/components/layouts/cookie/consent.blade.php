@@ -6,7 +6,68 @@
 
     {!! view_render_event('bagisto.shop.settings.gdpr.consent.before') !!}
 
-    <v-cookie-consent ref="cookie-consent"></v-cookie-consent>
+    <v-cookie-consent ref="cookie-consent">
+        <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">
+            <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+                <!-- Header -->
+                <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                    <p class="text-xl font-bold">
+                        @lang('shop::app.components.layouts.cookie.consent.your-cookie-consent-preferences')
+                    </p>
+        
+                    <button 
+                        type="submit"
+                        class="primary-button"
+                    >
+                        @lang('shop::app.components.layouts.cookie.consent.save-and-continue')
+                    </button>
+                </div>
+                
+                <div class="mt-14 rounded max-sm:mt-8">
+                    <!-- Cookie Categories -->
+                    @php
+                        $cookieConsentKeys = [
+                            'basic_interaction'      => 'basic-interactions',
+                            'experience_enhancement' => 'experience-enhancement',
+                            'measurements'           => 'measurements',
+                            'targeting_advertising'  => 'targeting-and-advertising'
+                        ];
+                    @endphp
+
+                    <!-- Strictly Necessary -->
+                    <x-shop::form.control-group class="mb-4 border-b pb-4">
+                        <x-shop::form.control-group.label class="font-semibold">
+                            @lang('shop::app.components.layouts.cookie.consent.strictly-necessary')
+                        </x-shop::form.control-group.label>
+
+                        <div class="flex items-start gap-2">
+                            <x-shop::form.control-group.control type="checkbox" />
+
+                            <label class="cursor-pointer select-none max-sm:text-sm">
+                                {{ core()->getConfigData('general.gdpr.cookie_consent.strictly_necessary') }}
+                            </label>
+                        </div>
+                    </x-shop::form.control-group> 
+                       
+                    @foreach ($cookieConsentKeys as $key => $label)
+                        <x-shop::form.control-group class="mb-4 border-b pb-4">
+                            <x-shop::form.control-group.label class="font-semibold">
+                                @lang('shop::app.components.layouts.cookie.consent.' . $label)
+                            </x-shop::form.control-group.label>
+
+                            <div class="flex items-start gap-2">
+                                <x-shop::form.control-group.control type="checkbox" />
+    
+                                <label class="cursor-pointer select-none max-sm:text-sm">
+                                    {{ core()->getConfigData('general.gdpr.cookie_consent.' . $key) }}
+                                </label>
+                            </div>
+                        </x-shop::form.control-group>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </v-cookie-consent>
 
     {!! view_render_event('bagisto.shop.settings.gdpr.consent.after') !!}
 

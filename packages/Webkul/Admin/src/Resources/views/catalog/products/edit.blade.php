@@ -204,7 +204,7 @@
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->code === 'inventories' && !$product->getTypeInstance()->isComposite(),
+                                    $group->code === 'inventories' && ! $product->getTypeInstance()->isComposite(),
                                     'admin::catalog.products.edit.inventories'
                                 )
                             </div>

@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'සම්පූර්ණය',
+        'booking'      => 'බුකින්',
         'configurable' => 'විකල්ප කළ හැක්කේ',
         'downloadable' => 'බාගත කළ හැක්කේ',
         'grouped'      => 'සමූහ කළ හැක්කේ',

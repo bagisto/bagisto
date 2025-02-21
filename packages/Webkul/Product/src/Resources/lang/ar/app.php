@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'حزمة',
+        'booking'      => 'الحجز',
         'configurable' => 'قابل للتكوين',
         'downloadable' => 'قابل للتنزيل',
         'grouped'      => 'مجمع',

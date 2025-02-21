@@ -691,6 +691,62 @@ return [
                 'grouped' => [
                     'name' => 'الاسم',
                 ],
+
+                'booking' => [
+                    'location'    => 'الموقع',
+                    'view-on-map' => 'عرض على الخريطة',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes دقائق',
+                        'slot-duration'            => 'مدة الفتحة',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'مغلق',
+                        'see-details'              => 'عرض التفاصيل',
+                        'slot-duration'            => 'مدة الفتحة',
+                        'slot-duration-in-minutes' => ':minutes دقائق',
+                        'today-availability'       => 'التوافر اليوم',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'احجز تذكرتك',
+                        'title'            => 'الحدث في :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'اختر خيار الإيجار',
+                        'daily-basis'        => 'على أساس يومي',
+                        'from'               => 'من',
+                        'hourly-basis'       => 'على أساس الساعة',
+                        'rent-an-item'       => 'استئجار عنصر',
+                        'select-date'        => 'اختر التاريخ',
+                        'select-rent-time'   => 'اختر وقت الإيجار',
+                        'select-slot'        => 'اختر الفتحة',
+                        'select-time-slot'   => 'اختر الفتحة الزمنية',
+                        'slot'               => 'الفتحة',
+                        'no-slots-available' => 'لا توجد فتحات متاحة',
+                        'to'                 => 'إلى',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'احجز طاولة',
+                        'closed'                   => 'مغلق',
+                        'slot-duration'            => 'مدة الفتحة',
+                        'slot-duration-in-minutes' => ':minutes دقائق',
+                        'slots-for-all-days'       => 'عرض لجميع الأيام',
+                        'special-notes'            => 'طلب خاص/ملاحظات',
+                        'today-availability'       => 'التوافر اليوم',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'احجز موعدًا',
+                        'date'                => 'التاريخ',
+                        'no-slots-available'  => 'لا توجد فتحات متاحة',
+                        'select-slot'         => 'اختر الفتحة',
+                        'title'               => 'الفتحة',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -735,6 +791,38 @@ return [
             'abstract' => [
                 'offers' => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'مغلق',
+
+            'cart'             => [
+                'booking-from' => 'الحجز من',
+                'booking-till' => 'الحجز حتى',
+                'daily'        => 'على أساس يومي',
+                'event-from'   => 'الحدث من',
+                'event-ticket' => 'تذكرة الحدث',
+                'event-till'   => 'الحدث حتى',
+                'hourly'       => 'على أساس الساعة',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'لقد انتهت صلاحية هذا الحدث.',
+                    ],
+
+                    'missing_options'        => 'الخيارات مفقودة لهذا المنتج.',
+                    'inventory_warning'      => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
+                    'select_hourly_duration' => 'اختر مدة الفتحة الزمنية بساعة واحدة.',
+                ],
+
+                'rent-from'    => 'الإيجار من',
+                'rent-till'    => 'الإيجار حتى',
+                'rent-type'    => 'نوع الإيجار',
+                'renting_type' => 'نوع الإيجار',
+                'special-note' => 'طلب خاص/ملاحظات',
+            ],
+
+            'per-ticket-price' => ':price لكل تذكرة',
         ],
     ],
 
