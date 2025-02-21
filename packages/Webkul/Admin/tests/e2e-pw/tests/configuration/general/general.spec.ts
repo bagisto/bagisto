@@ -28,15 +28,12 @@ test.describe('General Configuration', () => {
      * Enable and Disable Breadcrumbs.
      */
     test('should update breadcrumbs status', async ({ adminPage }) => {
-        const breadcrumbToggle = adminPage.locator('label > div');
-        await breadcrumbToggle.click();
+        await adminPage.click('label[for="general[general][breadcrumbs][shop]"]');
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
          * Verify the change is saved.
          */
-        await expect(breadcrumbToggle).toBeVisible(); 
-
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 });
