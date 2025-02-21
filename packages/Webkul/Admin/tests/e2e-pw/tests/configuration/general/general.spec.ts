@@ -12,15 +12,15 @@ test.describe('General Configuration', () => {
      * Update the weight unit.
      */
     test('should update weight unit', async ({ adminPage }) => {
-        const weightUnitSelect = adminPage.getByLabel('Weight Unit Default');
-        await weightUnitSelect.selectOption('kgs');
+        await adminPage.selectOption('select[name="general[general][locale_options][weight_unit]"]', 'lbs');
+        const weightUnitSelect = adminPage.locator('select[name="general[general][locale_options][weight_unit]"]');
+        await expect(weightUnitSelect).toHaveValue('lbs');
+
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
          * Verify the change is saved.
          */
-        await expect(weightUnitSelect).toHaveValue('kgs');
-
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 

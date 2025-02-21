@@ -16,7 +16,7 @@ test.describe('Magic AI Configuration', () => {
      */
     test('should update openAI credential', async ({ adminPage }) => {
         await adminPage.click('label[for="general[magic_ai][settings][enabled]"]');
-        // const toggleInput = adminPage.locator('input[type="checkbox"][name="general[magic_ai][settings][enabled]"]');
+        // const toggleInput = await adminPage.locator('input[name="general[magic_ai][settings][enabled]"]');
         
         // Ensure the state is correctly toggled
         // await expect(toggleInput).toBeChecked();
@@ -37,12 +37,11 @@ test.describe('Magic AI Configuration', () => {
      */
     test('should mange content using AI', async ({ adminPage }) => {
         await adminPage.click('label[for="general[magic_ai][content_generation][enabled]"]');
-        // const toggleInput = adminPage.locator('input[type="checkbox"][name="general[magic_ai][content_generation][enabled]"]');
-        
+        // const toggleInput = await adminPage.locator('input[name="general[magic_ai][content_generation][enabled]"]');
+
         // Ensure the state is correctly toggled
         // await expect(toggleInput).toBeChecked();
 
-        await adminPage.locator('div:nth-child(4) > div > .mb-4 > .relative > div').click();
         await adminPage.locator('textarea[name="general[magic_ai][content_generation][product_short_description_prompt]"]').fill(generateDescription(100));
         await adminPage.locator('textarea[name="general[magic_ai][content_generation][product_description_prompt]"]').fill(generateDescription(100));
         await adminPage.locator('textarea[name="general[magic_ai][content_generation][category_description_prompt]"]').fill(generateDescription(100));
@@ -60,8 +59,8 @@ test.describe('Magic AI Configuration', () => {
      */
     test('should enable image generation using AI', async ({ adminPage }) => {
         await adminPage.click('label[for="general[magic_ai][image_generation][enabled]"]');
-        // const toggleInput = adminPage.locator('input[type="checkbox"][name="general[magic_ai][image_generation][enabled]');
-        
+        // const toggleInput = await adminPage.locator('input[name="general[magic_ai][image_generation][enabled]"]');
+
         // Ensure the state is correctly toggled
         // await expect(toggleInput).toBeChecked();
 
@@ -78,8 +77,8 @@ test.describe('Magic AI Configuration', () => {
      */
     test('should enable review translation using AI', async ({ adminPage }) => {
         await adminPage.click('label[for="general[magic_ai][review_translation][enabled]"]');
-        // const toggleInput = adminPage.locator('input[type="checkbox"][name="general[magic_ai][review_translation][enabled]');
-        
+        // const toggleInput = await adminPage.locator('input[name="general[magic_ai][review_translation][enabled]"]');
+
         // Ensure the state is correctly toggled
         // await expect(toggleInput).toBeChecked();
         await adminPage.selectOption('select[name="general[magic_ai][review_translation][model]"]', 'llama2');
@@ -96,11 +95,14 @@ test.describe('Magic AI Configuration', () => {
      */
     test('should craft a personalized checkout message for customers usin AI', async ({ adminPage }) => {
         await adminPage.click('label[for="general[magic_ai][checkout_message][enabled]"]');
-        // const toggleInput = adminPage.locator('input[type="checkbox"][name="general[magic_ai][review_translation][enabled]');
-        
+        // const toggleInput = await adminPage.locator('input[name="general[magic_ai][review_translation][enabled]"]');
+
         // Ensure the state is correctly toggled
         // await expect(toggleInput).toBeChecked();
         await adminPage.selectOption('select[name="general[magic_ai][checkout_message][model]"]', 'llama2');
+        const searchEngine = adminPage.locator('select[name="general[magic_ai][checkout_message][model]"]');
+        await expect(searchEngine).toHaveValue('llama2');
+
         await adminPage.locator('textarea[name="general[magic_ai][checkout_message][prompt]"]').fill(generateDescription(100));
         await adminPage.click('button[type="submit"].primary-button:visible');
 
