@@ -4,6 +4,7 @@ namespace Webkul\MagicAI;
 
 use Webkul\MagicAI\Services\Ollama;
 use Webkul\MagicAI\Services\OpenAI;
+use Webkul\MagicAI\Services\Gemini;
 
 class MagicAI
 {
@@ -116,14 +117,24 @@ class MagicAI
     /**
      * Get LLM model instance.
      */
-    public function getModelInstance(): OpenAI|Ollama
+    public function getModelInstance(): OpenAI|Ollama|Gemini
     {
-        if (in_array($this->model, ['gpt-3.5-turbo', 'dall-e-2', 'dall-e-3'])) {
+        if (in_array($this->model, ['gpt-4-turbo', 'dall-e-2', 'dall-e-3'])) {
             return new OpenAI(
                 $this->model,
                 $this->prompt,
                 $this->temperature,
                 $this->stream,
+            );
+        }
+
+        if (in_array($this->model, ['gemini-1.5-flash'])) {
+            return new Gemini(
+                $this->model,
+                $this->prompt,
+                $this->temperature,
+                $this->stream,
+                $this->raw,
             );
         }
 

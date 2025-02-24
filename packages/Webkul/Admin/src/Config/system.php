@@ -226,11 +226,8 @@ return [
                 'channel_based' => true,
                 'options'       => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
+                        'value' => 'gpt-4-turbo',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-1-5-flash',
                         'value' => 'gemini-1.5-flash',
@@ -307,41 +304,62 @@ return [
                 'channel_based' => true,
                 'options'       => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-3-5-turbo',
-                        'value' => 'open-ai-gpt-3.5-turbo',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
+                        'value' => 'gpt-4-turbo',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2',
-                        'value' => 'llama2',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-1-5-flash',
+                        'value' => 'gemini-1.5-flash',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral',
-                        'value' => 'mistral',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
+                        'value' => 'deepseek-r1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.dolphin-phi',
-                        'value' => 'dolphin-phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
+                        'value' => 'llama3.2:3b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi',
-                        'value' => 'phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
+                        'value' => 'llama3.2:1b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm',
-                        'value' => 'starling-lm',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
+                        'value' => 'llama3.1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2-uncensored',
-                        'value' => 'llama2-uncensored',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
+                        'value' => 'llama3:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:13b',
-                        'value' => 'llama2:13b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
+                        'value' => 'llava:7b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:70b',
-                        'value' => 'llama2:70b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
+                        'value' => 'vicuna:13b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
+                        'value' => 'vicuna:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
+                        'value' => 'qwen2.5:14b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
+                        'value' => 'qwen2.5:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
+                        'value' => 'qwen2.5:3b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
+                        'value' => 'qwen2.5:1.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
+                        'value' => 'qwen2.5:0.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
+                        'value' => 'mistral:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
+                        'value' => 'starling-lm:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
+                        'value' => 'phi3.5',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
                         'value' => 'orca-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna',
-                        'value' => 'vicuna',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava',
-                        'value' => 'llava',
                     ],
                 ],
             ], [
