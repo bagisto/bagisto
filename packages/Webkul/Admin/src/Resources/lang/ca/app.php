@@ -3,32 +3,35 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Adreça de correu electrònic',
-            'forget-password-link' => 'Has oblidat la contrasenya?',
-            'password'             => 'Contrasenya',
-            'submit-btn'           => 'Iniciar sessió',
-            'title'                => 'Iniciar sessió',
+            'email'                  => 'Adreça de correu electrònic',
+            'forget-password-link'   => 'Has oblidat la contrasenya?',
+            'password'               => 'Contrasenya',
+            'powered-by-description' => 'Impulsat per :bagisto, un projecte de codi obert de :webkul.',
+            'submit-btn'             => 'Iniciar sessió',
+            'title'                  => 'Iniciar sessió',
         ],
 
         'forget-password' => [
             'create'    => [
-                'email'           => 'Correu electrònic registrat',
-                'email-not-exist' => 'El correu electrònic no existeix',
-                'page-title'      => 'Oblidar contrasenya',
-                'reset-link-sent' => 'Enllaç per restablir la contrasenya enviat',
-                'sign-in-link'    => 'Tornar a iniciar sessió?',
-                'submit-btn'      => 'Restablir',
-                'title'           => 'Recuperar contrasenya',
+                'email'                  => 'Correu electrònic registrat',
+                'email-not-exist'        => 'El correu electrònic no existeix',
+                'page-title'             => 'Oblidar contrasenya',
+                'powered-by-description' => 'Impulsat per :bagisto, un projecte de codi obert de :webkul.',
+                'reset-link-sent'        => 'Enllaç per restablir la contrasenya enviat',
+                'sign-in-link'           => 'Tornar a iniciar sessió?',
+                'submit-btn'             => 'Restablir',
+                'title'                  => 'Recuperar contrasenya',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Tornar a iniciar sessió?',
-            'confirm-password' => 'Confirmar contrasenya',
-            'email'            => 'Correu electrònic registrat',
-            'password'         => 'Contrasenya',
-            'submit-btn'       => 'Restablir contrasenya',
-            'title'            => 'Restablir contrasenya',
+            'back-link-title'        => 'Tornar a iniciar sessió?',
+            'confirm-password'       => 'Confirmar contrasenya',
+            'email'                  => 'Correu electrònic registrat',
+            'password'               => 'Contrasenya',
+            'powered-by-description' => 'Impulsat per :bagisto, un projecte de codi obert de :webkul.',
+            'submit-btn'             => 'Restablir contrasenya',
+            'title'                  => 'Restablir contrasenya',
         ],
     ],
 
@@ -187,8 +190,13 @@ return [
                 'title'                   => 'Crear comanda per a :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Cap',
+                        'total-amount' => 'Suma total',
+                    ],
+
                     'configurable' => [
-                        'select-options' => 'Si us plau, sel·lecciona una opció',
+                        'select-options' => 'Si us plau, selecciona una opció',
                     ],
 
                     'bundle' => [
@@ -202,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Enllaços',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Cap',
+                        'total-amount' => 'Suma total',
                     ],
                 ],
 
@@ -716,7 +729,6 @@ return [
                     'payment-method'   => 'Mètode de Pagament',
                     'status'           => 'Estat',
                     'title'            => 'Detalls de la Transacció',
-                    'transaction-data' => 'Dades de la Transacció',
                     'transaction-id'   => 'ID de Transacció',
                 ],
             ],
@@ -856,6 +868,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Afegir Opció',
+                            'empty-info'        => 'Per crear opcions personalitzables sobre la marxa.',
+                            'empty-title'       => 'Afegir Opció',
+                            'info'              => 'Això personalitzarà el producte simple.',
+                            'title'             => 'Element Personalitzable',
+
+                            'update-create' => [
+                                'is-required'               => 'És Obligatori',
+                                'max-characters'            => 'Màxim de Caràcters',
+                                'name'                      => 'Títol',
+                                'no'                        => 'No',
+                                'price'                     => 'Preu',
+                                'save-btn'                  => 'Desar',
+                                'supported-file-extensions' => 'Extensions de Fitxer Suportades',
+                                'title'                     => 'Opció',
+                                'type'                      => 'Tipus',
+                                'yes'                       => 'Sí',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Afegir Opció',
+                                'delete'      => 'Eliminar',
+                                'delete-btn'  => 'Eliminar',
+                                'edit-btn'    => 'Editar',
+                                'empty-info'  => 'Per crear diverses combinacions de productes sobre la marxa.',
+                                'empty-title' => 'Afegir Opció',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Text',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Àrea de Text',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Casella de Verificació',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Ràdio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Seleccionar',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Selecció Múltiple',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Data',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Data i Hora',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Hora',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Fitxer',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiqueta',
+                                        'price'    => 'Preu',
+                                        'save-btn' => 'Desar',
+                                        'title'    => 'Opció',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'El producte ja està associat amb un producte configurable, agrupat o de paquet.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Afegir variant',
                         'delete-btn'        => 'Eliminar',
@@ -1134,6 +1233,7 @@ return [
                 'validations'           => 'Validacions',
                 'value-per-channel'     => 'Valor per Canal',
                 'value-per-locale'      => 'Valor per',
+                'yes'                   => 'Sí',
 
                 'option' => [
                     'color'    => 'Mostra de Color',
@@ -1632,7 +1732,6 @@ return [
             'delete-success' => 'Client eliminat amb éxit',
             'order-pending'  => 'Hi ha comandes pendents',
             'update-success' => 'Client actualitzat amb éxit',
-
         ],
 
         'groups' => [
@@ -1716,6 +1815,44 @@ return [
                     'title'                  => 'Títol',
                     'update-status'          => 'Actualitzar estat',
                 ],
+            ],
+        ],
+
+        'gdpr' => [
+            'index' => [
+                'title' => 'Sol·licitud GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Completat',
+                    'created-at'    => 'Creat el',
+                    'customer-name' => 'Nom del Client',
+                    'declined'      => 'Rebutjat',
+                    'delete'        => 'Eliminar',
+                    'edit'          => 'Editar',
+                    'id'            => 'ID',
+                    'message'       => 'Missatge',
+                    'pending'       => 'Pendent',
+                    'processing'    => 'Processant',
+                    'status'        => 'Estat',
+                    'type'          => 'Tipus',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Completat',
+                    'declined'   => 'Rebutjat',
+                    'pending'    => 'Pendent',
+                    'processing' => 'Processant',
+                    'status'     => 'Estat',
+                    'title'      => 'Editar Sol·licitud de Dades GDPR',
+                    'type'       => 'Tipus',
+                    'message'    => 'Missatge',
+                    'save-btn'   => 'Desar',
+                ],
+
+                'update-success'              => 'Sol·licitud de Dades actualitzada amb èxit i correu electrònic enviat al client.',
+                'delete-success'              => 'Sol·licitud de Dades eliminada amb èxit.',
+                'attribute-reason-error'      => 'No es pot eliminar.',
+                'update-success-unsent-email' => 'Sol·licitud de Dades actualitzada amb èxit però correu electrònic no enviat al client.',
             ],
         ],
     ],
@@ -2519,18 +2656,20 @@ return [
                 ],
 
                 'create' => [
-                    'code'              => 'Codi',
-                    'create-btn'        => 'Crear Moneda',
-                    'currency-position' => 'Posició de la Moneda',
-                    'decimal'           => 'Decimal',
-                    'decimal-separator' => 'Separador Decimal',
-                    'delete-warning'    => 'Estàs segur que vols realitzar aquesta acció?',
-                    'general'           => 'General',
-                    'group-separator'   => 'Separador de Grups',
-                    'name'              => 'Nom',
-                    'save-btn'          => 'Desa la Moneda',
-                    'symbol'            => 'Símbol',
-                    'title'             => 'Crear Nova Moneda',
+                    'code'                   => 'Codi',
+                    'create-btn'             => 'Crear Moneda',
+                    'currency-position'      => 'Posició de la Moneda',
+                    'decimal'                => 'Decimal',
+                    'decimal-separator'      => 'Separador Decimal',
+                    'decimal-separator-note' => 'El camp :attribute només pot acceptar els caràcters coma (,) i punt (.)',
+                    'delete-warning'         => 'Estàs segur que vols realitzar aquesta acció?',
+                    'general'                => 'General',
+                    'group-separator'        => 'Separador de Grups',
+                    'group-separator-note'   => 'El camp :attribute només pot acceptar els caràcters coma (,), punt (.), apòstrof (\') i espai ( )',
+                    'name'                   => 'Nom',
+                    'save-btn'               => 'Desa la Moneda',
+                    'symbol'                 => 'Símbol',
+                    'title'                  => 'Crear Nova Moneda',
                 ],
 
                 'edit' => [
