@@ -36,7 +36,7 @@ class Gemini
             ],
             'json'    => [
                 'contents' => [
-                    ['parts' => [['text' => $this->prompt]]]
+                    ['parts' => [['text' => $this->prompt]]],
                 ],
                 'temperature' => $this->temperature,
             ],
