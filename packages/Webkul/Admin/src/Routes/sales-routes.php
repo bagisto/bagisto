@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Sales\BookingController;
 use Webkul\Admin\Http\Controllers\Sales\CartController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
@@ -103,5 +104,11 @@ Route::prefix('sales')->group(function () {
         Route::post('{id}/coupon', 'storeCoupon')->name('admin.sales.cart.store_coupon');
 
         Route::delete('{id}/coupon', 'destroyCoupon')->name('admin.sales.cart.remove_coupon');
+    });
+
+    Route::controller(BookingController::class)->prefix('bookings')->group(function () {
+        Route::get('', 'index')->name('admin.sales.bookings.index');
+
+        Route::get('get', 'get')->name('admin.sales.bookings.get');
     });
 });
