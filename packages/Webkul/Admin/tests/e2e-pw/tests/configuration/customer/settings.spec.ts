@@ -47,8 +47,8 @@ test.describe('Settings Configuration', () => {
      */
     test('should update default customer group and enabling the newsletter subscription option during sign-up', async ({ adminPage }) => {
         await adminPage.selectOption('select[name="customer[settings][create_new_account_options][default_group]"]', 'general');
-        const weightUnitSelect = adminPage.locator('select[name="customer[settings][create_new_account_options][default_group]"]');
-        await expect(weightUnitSelect).toHaveValue('general');
+        const defaultGroup = adminPage.locator('select[name="customer[settings][create_new_account_options][default_group]"]');
+        await expect(defaultGroup).toHaveValue('general');
 
         await adminPage.click('label[for="customer[settings][create_new_account_options][news_letter]"]');
         // const toggleInput = await adminPage.locator('input[name="customer[settings][create_new_account_options][news_letter]"]');

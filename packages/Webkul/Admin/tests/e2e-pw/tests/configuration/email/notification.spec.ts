@@ -1,6 +1,4 @@
 import { test, expect } from '../../../setup';
-import { generateName, generateEmail } from '../../../utils/faker';
-
 
 test.describe('Email Settings Configuration', () => {
     /**
