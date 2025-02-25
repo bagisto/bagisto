@@ -11,7 +11,7 @@ test.describe('Inventory Configuration', () => {
     });
 
     /**
-     * Update the Social Share Configuration.
+     * Update the Inventory Configuration.
      */
     test('should allow back orders and define out-of-stock thresholds', async ({ adminPage }) => {
         await adminPage.click('label[for="catalog[inventory][stock_options][back_orders]"]');

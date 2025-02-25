@@ -9,7 +9,7 @@ test.describe('Rich Snippets Configuration', () => {
     });
 
     /**
-     * Update the Social Share Configuration.
+     * Update the Rich Snippets Configuration.
      */
     test('should update products settings including with sku, weight, categories, images, reviews, ratings, offers and etc.', async ({ adminPage }) => {
         await adminPage.click('label[for="catalog[rich_snippets][products][enable]"]');
