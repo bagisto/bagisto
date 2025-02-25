@@ -142,7 +142,6 @@ class MagicAI
             return new Gemini(
                 $this->model,
                 $this->prompt,
-                $this->temperature,
                 $this->stream,
                 $this->raw,
             );

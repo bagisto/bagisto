@@ -12,7 +12,6 @@ class Gemini
     public function __construct(
         protected string $model,
         protected string $prompt,
-        protected float $temperature,
         protected bool $stream,
         protected bool $raw,
     ) {}
@@ -24,26 +23,28 @@ class Gemini
     {
         $httpClient = new Client;
 
-        $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->model}:generateContent";
-
         $apiKey = core()->getConfigData('general.magic_ai.settings.api_key');
 
-        $result = $httpClient->request('POST', $endpoint, [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => "Bearer $apiKey",
-            ],
-            'json'    => [
-                'contents' => [
-                    ['parts' => [['text' => $this->prompt]]],
+        $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->model}:generateContent?key={$apiKey}";
+
+        try {
+            $result = $httpClient->request('POST', $endpoint, [
+                'headers' => [
+                    'Accept'       => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
-                'temperature' => $this->temperature,
-            ],
-        ]);
+                'json' => [
+                    'contents'    => [
+                        ['parts' => [['text' => $this->prompt]]],
+                    ],
+                ],
+            ]);
 
-        $result = json_decode($result->getBody()->getContents(), true);
+            $result = json_decode($result->getBody()->getContents(), true);
 
-        return $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
+            return $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            \Log::error($e->getMessage());
+        }
     }
 }
