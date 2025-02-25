@@ -225,6 +225,17 @@ export function generateDescription(length = 255) {
     return description.trim();
 }
 
+export function generateRandomNumericString(length = 10) {
+    if (length <= 0) {
+        throw new Error("Length must be greater than 0.");
+    }
+    
+    const digits = "0123456789";
+
+    return Array.from({ length }, () => digits[Math.floor(Math.random() * digits.length)]).join('');
+}
+
+
 export function generateHostname() {
     const words = [
         "tech",
