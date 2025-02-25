@@ -3428,7 +3428,6 @@ return [
 
                     'review-translation' => [
                         'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
-                        'dolphin-phi'         => 'Dolphin Phi',
                         'enabled'             => 'Habilitat',
                         'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
                         'gpt-4-turbo'         => 'OpenAI gpt-4 Turbo',
@@ -3458,7 +3457,6 @@ return [
 
                     'checkout-message' => [
                         'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
-                        'dolphin-phi'         => 'Dolphin Phi',
                         'enabled'             => 'Habilitat',
                         'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
                         'gpt-4-turbo'         => 'OpenAI gpt 4 Turbo',
@@ -4203,7 +4201,6 @@ return [
             'ai-generation' => [
                 'apply'                    => 'Aplicar',
                 'deepseek-r1-8b'           => 'DeepSeek R1 (8b)',
-                'dolphin-phi'              => 'Dolphin Phi',
                 'enabled'                  => 'Habilitat',
                 'gemini-2-0-flash'         => 'Gemini 2.0 Flash',
                 'generate'                 => 'Generar',
