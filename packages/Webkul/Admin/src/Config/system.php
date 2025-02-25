@@ -229,8 +229,14 @@ return [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
                         'value' => 'gpt-4-turbo',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-1-5-flash',
-                        'value' => 'gemini-1.5-flash',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
+                        'value' => 'gpt-4o',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
+                        'value' => 'gemini-2.0-flash',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
                         'value' => 'deepseek-r1:8b',
@@ -307,8 +313,14 @@ return [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
                         'value' => 'gpt-4-turbo',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-1-5-flash',
-                        'value' => 'gemini-1.5-flash',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
+                        'value' => 'gpt-4o',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
+                        'value' => 'gemini-2.0-flash',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
                         'value' => 'deepseek-r1:8b',

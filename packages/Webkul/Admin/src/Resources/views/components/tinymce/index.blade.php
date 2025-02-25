@@ -50,8 +50,16 @@
                                     @lang('admin::app.components.tinymce.ai-generation.gpt-4-turbo')
                                 </option>
 
+                                <option value="gpt-4o">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o')
+                                </option>
+
+                                <option value="gpt-4o-mini">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o-mini')
+                                </option>
+
                                 <option value="gemini-1.5-flash">
-                                    @lang('admin::app.components.tinymce.ai-generation.gemini-1-5-flash')
+                                    @lang('admin::app.components.tinymce.ai-generation.gemini-2-0-flash')
                                 </option>
 
                                 <option value="deepseek-r1:8b">

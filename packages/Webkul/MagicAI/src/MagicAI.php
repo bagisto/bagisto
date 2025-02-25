@@ -119,7 +119,7 @@ class MagicAI
      */
     public function getModelInstance(): OpenAI|Ollama|Gemini
     {
-        if (in_array($this->model, ['gpt-4-turbo', 'dall-e-2', 'dall-e-3'])) {
+        if (in_array($this->model, ['gpt-4-turbo','gpt-4o' ,'gpt-4o-mini' , 'dall-e-2', 'dall-e-3'])) {
             return new OpenAI(
                 $this->model,
                 $this->prompt,
@@ -128,7 +128,7 @@ class MagicAI
             );
         }
 
-        if (in_array($this->model, ['gemini-1.5-flash'])) {
+        if (in_array($this->model, ['gemini-2.0-flash'])) {
             return new Gemini(
                 $this->model,
                 $this->prompt,
