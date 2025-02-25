@@ -4598,7 +4598,7 @@ return [
                 'generating'             => '生成中...',
                 'gpt-4-turbo'            => 'OpenAI gpt-4 Turbo',
                 'gpt-4o-mini'            => 'OpenAI gpt-4o mini',
-                    'gpt-4o'             => 'OpenAI gpt-4o',
+                'gpt-4o'                 => 'OpenAI gpt-4o',
                 'llama3-1-8b'            => 'Llama 3.1 (8B)',
                 'llama3-2-1b'            => 'Llama 3.2 (1B)',
                 'llama3-2-3b'            => 'Llama 3.2 (3B)',
