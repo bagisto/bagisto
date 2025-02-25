@@ -66,8 +66,8 @@
                                     @lang('admin::app.components.tinymce.ai-generation.deepseek-r1-8b')
                                 </option>
 
-                                <option value="llama3.3">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama3-3')
+                                <option value="llama3-8b-8192">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama-groq')
                                 </option>
 
                                 <option value="llama3.2:3b">

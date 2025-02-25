@@ -3,6 +3,7 @@
 namespace Webkul\MagicAI;
 
 use Webkul\MagicAI\Services\Gemini;
+use Webkul\MagicAI\Services\GroqAI;
 use Webkul\MagicAI\Services\Ollama;
 use Webkul\MagicAI\Services\OpenAI;
 
@@ -117,10 +118,19 @@ class MagicAI
     /**
      * Get LLM model instance.
      */
-    public function getModelInstance(): OpenAI|Ollama|Gemini
+    public function getModelInstance(): OpenAI|Ollama|Gemini|GroqAI
     {
-        if (in_array($this->model, ['gpt-4-turbo', 'gpt-4o', 'llama-3.3', 'gpt-4o-mini', 'dall-e-2', 'dall-e-3'])) {
+        if (in_array($this->model, ['gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'dall-e-2', 'dall-e-3'])) {
             return new OpenAI(
+                $this->model,
+                $this->prompt,
+                $this->temperature,
+                $this->stream,
+            );
+        }
+
+        if (in_array($this->model, ['llama3-8b-8192'])) {
+            return new GroqAI(
                 $this->model,
                 $this->prompt,
                 $this->temperature,

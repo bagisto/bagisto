@@ -241,8 +241,8 @@ return [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
                         'value' => 'deepseek-r1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-3',
-                        'value' => 'llama3.3',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
+                        'value' => 'llama3-8b-8192',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
                         'value' => 'llama3.2:3b',
@@ -328,7 +328,7 @@ return [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
                         'value' => 'deepseek-r1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-3',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
                         'value' => 'llama3.3',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
