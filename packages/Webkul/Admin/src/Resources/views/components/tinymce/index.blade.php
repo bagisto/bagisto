@@ -58,12 +58,16 @@
                                     @lang('admin::app.components.tinymce.ai-generation.gpt-4o-mini')
                                 </option>
 
-                                <option value="gemini-1.5-flash">
+                                <option value="gemini-2.0-flash">
                                     @lang('admin::app.components.tinymce.ai-generation.gemini-2-0-flash')
                                 </option>
 
                                 <option value="deepseek-r1:8b">
                                     @lang('admin::app.components.tinymce.ai-generation.deepseek-r1-8b')
+                                </option>
+
+                                <option value="llama3.3">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama3-3')
                                 </option>
 
                                 <option value="llama3.2:3b">
