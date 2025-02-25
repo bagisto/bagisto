@@ -3645,7 +3645,6 @@ return [
                         'experience-enhancement' => 'Experience Enhancements',
                         'measurement'            => 'Measurements',
                         'targeting-advertising'  => 'Targeting & Advertising',
-
                     ],
                 ],
 
