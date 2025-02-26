@@ -206,6 +206,7 @@ return [
             'locales'    => [
                 'ar'    => 'Arabo',
                 'bn'    => 'Bengalese',
+                'ca'    => 'Canadese',
                 'de'    => 'Tedesco',
                 'en'    => 'Inglese',
                 'es'    => 'Spagnolo',
