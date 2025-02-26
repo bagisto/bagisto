@@ -225,16 +225,48 @@ export function generateDescription(length = 255) {
     return description.trim();
 }
 
-export function generateRandomNumericString(length = 10) {
-    if (length <= 0) {
-        throw new Error("Length must be greater than 0.");
+/**
+ * Generates a random numeric string with specified length or within a numeric range.
+ * 
+ * @param {number} [length=10] - The length of the random string (used only when min and max are undefined)
+ * @param {number|null|undefined} [min=undefined] - Minimum value (inclusive) when generating a number in range
+ * @param {number|null|undefined} [max=undefined] - Maximum value (inclusive) when generating a number in range
+ * @returns {string} - Random numeric string
+ */
+export function generateRandomNumericString(length: number = 10, min?: number | null, max?: number | null): string {
+    // Generate a number within range
+    if (min !== null && min !== undefined && max !== null && max !== undefined) {
+        // Input validation
+        if (!Number.isInteger(min) || !Number.isInteger(max)) {
+            throw new Error("Min and max must be integers when provided.");
+        }
+        
+        if (min > max) {
+            throw new Error("Min value cannot be greater than max value.");
+        }
+        
+        // Generate a random number within the range and convert to string
+        return Math.floor(Math.random() * (max - min + 1) + min).toString();
     }
     
-    const digits = "0123456789";
-
-    return Array.from({ length }, () => digits[Math.floor(Math.random() * digits.length)]).join('');
+    // Generate a random string of specified length
+    if (!Number.isInteger(length) || length <= 0) {
+        throw new Error("Length must be a positive integer.");
+    }
+    
+    // More efficient method for generating random digits
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += Math.floor(Math.random() * 10);
+    }
+    
+    // Ensure first character is not zero for a consistent length string
+    if (length > 1 && result[0] === '0') {
+        result = String(1 + Math.floor(Math.random() * 9)) + result.substring(1);
+    }
+    
+    return result;
 }
-
 
 export function generateHostname() {
     const words = [
