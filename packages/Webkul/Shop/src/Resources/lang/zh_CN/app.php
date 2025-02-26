@@ -1113,7 +1113,7 @@ return [
                     'request-status' => '请求状态：',
                 ],
             ],
-            
+
             'reminder' => [
                 'already-paid'    => '如果您已经付款，请忽略此消息。',
                 'invoice-overdue' => '这是一个友好的提醒，您的发票已逾期。请尽快付款。',
