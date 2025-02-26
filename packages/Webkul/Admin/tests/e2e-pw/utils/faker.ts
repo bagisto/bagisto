@@ -710,55 +710,70 @@ export function generateCurrency() {
 export function generateLocale() {
     const locales = [
         {
-            name: "English (United States)",
-            code: "en-US",
+            name: "English",
+            code: "en",
             direction: "LTR"
         },
         {
-            name: "English (United Kingdom)",
-            code: "en-GB",
+            name: "French",
+            code: "fr",
             direction: "LTR"
         },
         {
-            name: "French (France)",
-            code: "fr-FR",
+            name: "Spanish",
+            code: "es",
             direction: "LTR"
         },
         {
-            name: "French (Canada)",
-            code: "fr-CA",
-            direction: "LTR"
-        },
-        {
-            name: "Spanish (Spain)",
-            code: "es-ES",
-            direction: "LTR"
-        },
-        {
-            name: "Spanish (Mexico)",
-            code: "es-MX",
-            direction: "LTR"
-        },
-        {
-            name: "Arabic (Saudi Arabia)",
-            code: "ar-SA",
+            name: "Arabic",
+            code: "ar",
             direction: "RTL"
         },
         {
-            name: "Hebrew (Israel)",
-            code: "he-IL",
+            name: "Hebrew",
+            code: "he",
             direction: "RTL"
         },
         {
-            name: "Japanese (Japan)",
-            code: "ja-JP",
+            name: "Japanese",
+            code: "ja",
             direction: "LTR"
         },
         {
-            name: "Chinese (Simplified, China)",
-            code: "zh-CN",
+            name: "Chinese",
+            code: "zh_CN",
             direction: "LTR"
-        }
+        },
+        {
+            name: "Hindi",
+            code: "hi_IN",
+            direction: "LTR"
+        },
+        {
+            name: "Bengali",
+            code: "bn",
+            direction: "LTR"
+        },
+        {
+            name: "German",
+            code: "de",
+            direction: "LTR"
+        },
+        {
+            name: "Persian",
+            code: "fa",
+            direction: "LTR"
+        },
+        {
+            name: "Italian",
+            code: "it",
+            direction: "LTR"
+        },       
+        {
+            name: "Dutch",
+            code: "nl",
+            direction: "LTR"
+        },
     ];
 
     if (usedLocales.size >= locales.length) {
