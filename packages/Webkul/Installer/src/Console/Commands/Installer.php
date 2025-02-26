@@ -512,6 +512,8 @@ class Installer extends Command
                 continue;
             }
 
+            $value = trim($value, '"');
+
             $this->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
         }
     }
