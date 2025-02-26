@@ -10,6 +10,7 @@ const usedEmails = new Set();
 const usedNumbers = new Set();
 const usedSlugs = new Set();
 const usedCurrencies = new Set();
+const usedLocales = new Set();
 
 export function generateName() {
     const adjectives = [
@@ -704,6 +705,76 @@ export function generateCurrency() {
     usedCurrencies.add(currency.code);
 
     return currency;
+}
+
+export function generateLocale() {
+    const locales = [
+        {
+            name: "English (United States)",
+            code: "en-US",
+            direction: "LTR"
+        },
+        {
+            name: "English (United Kingdom)",
+            code: "en-GB",
+            direction: "LTR"
+        },
+        {
+            name: "French (France)",
+            code: "fr-FR",
+            direction: "LTR"
+        },
+        {
+            name: "French (Canada)",
+            code: "fr-CA",
+            direction: "LTR"
+        },
+        {
+            name: "Spanish (Spain)",
+            code: "es-ES",
+            direction: "LTR"
+        },
+        {
+            name: "Spanish (Mexico)",
+            code: "es-MX",
+            direction: "LTR"
+        },
+        {
+            name: "Arabic (Saudi Arabia)",
+            code: "ar-SA",
+            direction: "RTL"
+        },
+        {
+            name: "Hebrew (Israel)",
+            code: "he-IL",
+            direction: "RTL"
+        },
+        {
+            name: "Japanese (Japan)",
+            code: "ja-JP",
+            direction: "LTR"
+        },
+        {
+            name: "Chinese (Simplified, China)",
+            code: "zh-CN",
+            direction: "LTR"
+        }
+    ];
+
+    if (usedLocales.size >= locales.length) {
+        throw new Error("All locales have been used.");
+    }
+
+    let locale;
+
+    do {
+        const randomIndex = Math.floor(Math.random() * locales.length);
+        locale = locales[randomIndex];
+    } while (usedLocales.has(locale.code));
+
+    usedLocales.add(locale.code);
+    
+    return locale;
 }
 
 export function randomElement(array) {
