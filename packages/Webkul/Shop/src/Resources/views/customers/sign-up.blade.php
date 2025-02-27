@@ -125,7 +125,6 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.email.after') !!}
 
-
                     <!-- Password -->
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label class="required">

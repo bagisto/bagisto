@@ -18,7 +18,7 @@
                     {{ $header }}
 
                     <span
-                        :class="`${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'} text-2xl`"
+                        v-bind:class="isOpen ? 'icon-arrow-up text-2xl' : 'icon-arrow-down text-2xl'"
                         role="button"
                         aria-label="Toggle accordion"
                         tabindex="0"
