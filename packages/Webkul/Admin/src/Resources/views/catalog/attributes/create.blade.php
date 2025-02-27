@@ -587,13 +587,17 @@
                             </x-admin::form.control-group>
 
                             <!-- Use to create configurable product -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group
+                                class="!mb-2 flex select-none items-center gap-2.5"
+                                ::class="{ 'opacity-70' : isConfigurableDisabled }"
+                            >
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_configurable"
                                     name="is_configurable"
                                     value="1"
                                     for="is_configurable"
+                                    ::disabled="isConfigurableDisabled"
                                 />
 
                                 <label
@@ -840,6 +844,11 @@
                             || this.attributeType == 'select' || this.attributeType == 'multiselect'
                             ? false : true;
                     },
+
+                    isConfigurableDisabled() {
+                        return this.attributeType == 'select' || this.attributeType == 'multiselect'
+                            ? false : true;
+                    }
                 },
 
                 methods: {
