@@ -1,4 +1,5 @@
 import * as forms from './form';
+import { generateRandomNumericString }  from './faker';
 
 const address = async (page) => {
     await page.fill('input[name="billing.company_name"]', forms.form.lastName);
@@ -9,7 +10,7 @@ const address = async (page) => {
     await page.selectOption('select[name="billing.country"]', 'IN');
     await page.selectOption('select[name="billing.state"]', 'UP');
     await page.fill('input[name="billing.city"]', forms.form.lastName);
-    await page.fill('input[name="billing.postcode"]', '201301');
+    await page.fill('input[name="billing.postcode"]', generateRandomNumericString(6));
     await page.fill('input[name="billing.phone"]', forms.form.phone);
 
     const exists = await page.$$('input[name="billing.save_address"]');

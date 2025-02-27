@@ -1,6 +1,6 @@
 import { test, expect } from '../../../setup';
 import { getRandomImageFile } from '../../../utils/form';
-import { generateDescription } from '../../../utils/faker';
+import { generateDescription, generateRandomNumericString } from '../../../utils/faker';
 
 
 
@@ -48,8 +48,8 @@ test.describe('Product Configuration', () => {
         const storeFrontSearchMode = adminPage.locator('select[name="catalog[products][search][storefront_mode]"]');
         await expect(storeFrontSearchMode).toHaveValue('elastic');
 
-        await adminPage.locator('input[name="catalog[products][search][min_query_length]"]').fill('8');
-        await adminPage.locator('input[name="catalog[products][search][max_query_length]"]').fill('10');
+        await adminPage.locator('input[name="catalog[products][search][min_query_length]"]').fill(generateRandomNumericString(2));
+        await adminPage.locator('input[name="catalog[products][search][max_query_length]"]').fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
@@ -62,8 +62,8 @@ test.describe('Product Configuration', () => {
      * Update the Product view page configuration.
      */
     test('should update the product view page configuration', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][product_view_page][no_of_related_products]"]').fill('10');
-        await adminPage.locator('input[name="catalog[products][product_view_page][no_of_up_sells_products]"]').fill('10');
+        await adminPage.locator('input[name="catalog[products][product_view_page][no_of_related_products]"]').fill(generateRandomNumericString(2));
+        await adminPage.locator('input[name="catalog[products][product_view_page][no_of_up_sells_products]"]').fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
@@ -76,7 +76,7 @@ test.describe('Product Configuration', () => {
      * Update the Cart view page configuration
      */
     test('should update the cart view page configuration', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][cart_view_page][no_of_cross_sells_products]"]').fill('10');
+        await adminPage.locator('input[name="catalog[products][cart_view_page][no_of_cross_sells_products]"]').fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
@@ -93,7 +93,7 @@ test.describe('Product Configuration', () => {
         const defaultListMode = adminPage.locator('select[name="catalog[products][storefront][mode]"]');
         await expect(defaultListMode).toHaveValue('grid');
 
-        await adminPage.locator('input[name="catalog[products][storefront][products_per_page]"]').fill('10');
+        await adminPage.locator('input[name="catalog[products][storefront][products_per_page]"]').fill(generateRandomNumericString(2));
 
         await adminPage.selectOption('select[name="catalog[products][storefront][sort_by]"]', 'name-asc');
         const sortBy = adminPage.locator('select[name="catalog[products][storefront][sort_by]"]');
@@ -115,8 +115,8 @@ test.describe('Product Configuration', () => {
      * Update the Product Small Image Configuration.
      */
     test('should update the small image size and placeholder', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][cache_small_image][width]"]').fill('100');
-        await adminPage.locator('input[name="catalog[products][cache_small_image][height]"]').fill('100');
+        await adminPage.locator('input[name="catalog[products][cache_small_image][width]"]').fill(generateRandomNumericString(3));
+        await adminPage.locator('input[name="catalog[products][cache_small_image][height]"]').fill(generateRandomNumericString(3));
 
         const [fileChooser] = await Promise.all([
             adminPage.waitForEvent('filechooser'),
@@ -142,8 +142,8 @@ test.describe('Product Configuration', () => {
      * Update the Product Medium Image Configuration.
      */
     test('should update the medium image size and placeholder', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][cache_medium_image][width]"]').fill('100');
-        await adminPage.locator('input[name="catalog[products][cache_medium_image][height]"]').fill('100');
+        await adminPage.locator('input[name="catalog[products][cache_medium_image][width]"]').fill(generateRandomNumericString(3));
+        await adminPage.locator('input[name="catalog[products][cache_medium_image][height]"]').fill(generateRandomNumericString(3));
 
         const [fileChooser] = await Promise.all([
             adminPage.waitForEvent('filechooser'),
@@ -169,8 +169,8 @@ test.describe('Product Configuration', () => {
      * Update the Product Large Image Configuration.
      */
     test('should update the large image size and placeholder', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][cache_large_image][width]"]').fill('100');
-        await adminPage.locator('input[name="catalog[products][cache_large_image][height]"]').fill('100');
+        await adminPage.locator('input[name="catalog[products][cache_large_image][width]"]').fill(generateRandomNumericString(3));
+        await adminPage.locator('input[name="catalog[products][cache_large_image][height]"]').fill(generateRandomNumericString(3));
 
         const [fileChooser] = await Promise.all([
             adminPage.waitForEvent('filechooser'),
@@ -220,8 +220,8 @@ test.describe('Product Configuration', () => {
      * Update the Allowed Image and File Upload Size Configuration.
      */
     test('should update the allowed image and file upload size', async ({ adminPage }) => {
-        await adminPage.locator('input[name="catalog[products][attribute][image_attribute_upload_size]"]').fill('100');
-        await adminPage.locator('input[name="catalog[products][attribute][file_attribute_upload_size]"]').fill('100');
+        await adminPage.locator('input[name="catalog[products][attribute][image_attribute_upload_size]"]').fill(generateRandomNumericString(3));
+        await adminPage.locator('input[name="catalog[products][attribute][file_attribute_upload_size]"]').fill(generateRandomNumericString(3));
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
