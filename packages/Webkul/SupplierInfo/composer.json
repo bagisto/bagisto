@@ -1,0 +1,26 @@
+{
+    "name": "bagisto/supplierinfo-extension",
+    "license": "MIT",
+    "description" : "Elevate your product pages with our Shipping Info Extension for Bagisto, designed to provide customers with in-depth shipping and supplier details. This extension enhances transparency, allowing buyers to access crucial information that builds trust and confidence in their purchase decisions.",
+    "authors": [
+        {
+            "name": "Kishan Kanani",
+            "email": "kishan.kanani@brainstream.tech"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\SupplierInfo\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\SupplierInfo\\Providers\\SupplierInfoServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

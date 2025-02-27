@@ -106,7 +106,7 @@ class Menu
                 name: trans($menuItem['name']),
                 route: $menuItem['route'],
                 sort: $menuItem['sort'],
-                icon: $menuItem['icon'],
+                icon: $menuItem['icon'] ?? '', // Use null coalescing to avoid undefined key error
                 children: $subMenuItems,
             ));
         }

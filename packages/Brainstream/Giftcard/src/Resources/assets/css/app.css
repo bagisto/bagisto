@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .temp-icon {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        background-size: cover;
+        background-image: url("../images/icon-temp.svg");
+    }
+
+    .active {
+        .temp-icon {
+            background-image: url("../images/icon-temp-active.svg");
+        }
+
+        &.temp-icon {
+            background-image: url("../images/icon-temp-active.svg");
+        }
+    }
+}

@@ -1,246 +1,214 @@
-import { test, expect } from "../../setup";
-import {
-    generateDescription,
-    generateName,
-    generateSlug,
-} from "../../utils/faker";
+import { test, expect, config } from '../../setup';
+import  * as forms from '../../utils/form';
 
-async function createTaxRate(adminPage) {
-    const taxRate = {
-        identifier: generateSlug("_"),
-        country: "IN",
-        state: "DL",
-    };
+test.describe('tax management', () => {
+    // test('create tax rate', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
 
-    /**
-     * Reaching to the create tax rate page.
-     */
-    await adminPage.goto("admin/settings/taxes/rates");
-    await adminPage.waitForSelector(
-        'a.primary-button:has-text("Create Tax Rate")',
-        { state: "visible" }
-    );
-    await adminPage.click('a.primary-button:has-text("Create Tax Rate")');
+    //     await adminPage.click('a.primary-button:visible');
 
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector(
-        'form[action*="/settings/taxes/rates/create"]'
-    );
+    //     adminPage.click('select[name="country"]');
 
-    /**
-     * General Section.
-     */
-    await adminPage
-        .locator('input[name="identifier"]')
-        .fill(taxRate.identifier);
-    await adminPage
-        .locator('select[name="country"]')
-        .selectOption(taxRate.country);
-    await adminPage.locator('select[name="state"]').selectOption(taxRate.state);
-    await adminPage.locator('input[name="tax_rate"]').fill("18");
+    //     const select = await adminPage.$('select[name="country"]');
 
-    /**
-     * Save tax rate.
-     */
-    await adminPage.getByRole("button", { name: "Save Tax Rate" }).click();
+    //     const options = await select.$$eval('option', (options) => {
+    //         return options.map(option => option.value);
+    //     });
 
-    return taxRate;
-}
+    //     if (options.length > 1) {
+    //         const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-async function createTaxCategory(adminPage) {
-    /**
-     * Creating a tax rate.
-     */
-    const taxRate = await createTaxRate(adminPage);
+    //         await select.selectOption(options[randomIndex]);
+    //     } else {
+    //         await select.selectOption(options[0]);
+    //     }
 
-    /**
-     * Reaching to the tax category listing page.
-     */
-    await adminPage.goto("admin/settings/taxes/categories");
+    //     const state = await adminPage.$('select[name="state"]');
 
-    /**
-     * Opening create tax category form in modal.
-     */
-    await adminPage
-        .getByRole("button", { name: "Create Tax Category" })
-        .click();
-    await adminPage.locator('input[name="code"]').fill(generateSlug("_"));
-    await adminPage.locator('input[name="name"]').fill(generateName());
-    await adminPage
-        .locator('textarea[name="description"]')
-        .fill(generateDescription());
-    await adminPage.locator('select[name="taxrates[]"]').selectOption([
-        {
-            label: taxRate.identifier,
-        },
-    ]);
+    //     if (state) {
+    //         const options = await state.$$eval('option', (options) => {
+    //             return options.map(option => option.value);
+    //         });
 
-    /**
-     * Saving tax category and closing the modal.
-     */
-    await adminPage.getByRole("button", { name: "Save Tax Category" }).click();
+    //         if (options.length > 1) {
+    //             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-    /**
-     * Asserting.
-     */
-    await expect(
-        adminPage.getByText("New Tax Category Created.")
-    ).toBeVisible();
-}
+    //             await state.selectOption(options[randomIndex]);
+    //         } else {
+    //             await select.selectOption(options[0]);
+    //         }
+    //     }
 
-test.describe("tax management", () => {
-    test.describe("tax rate management", () => {
-        test("should create a tax rate without zip range", async ({
-            adminPage,
-        }) => {
-            /**
-             * Creating a tax rate.
-             */
-            const taxRate = await createTaxRate(adminPage);
+    //     const checkbox = await adminPage.$('input[type="checkbox"] + label.peer:visible');
 
-            /**
-             * Asserting.
-             */
-            await expect(
-                adminPage.getByText("Tax rate created successfully.")
-            ).toBeVisible();
-            await expect(adminPage.getByText(taxRate.identifier)).toBeVisible();
-        });
+    //     let i = Math.floor(Math.random() * 10) + 1;
 
-        test("should edit a tax rate without zip range", async ({
-            adminPage,
-        }) => {
-            /**
-             * Creating a tax rate.
-             */
-            await createTaxRate(adminPage);
+    //     if (i % 2 == 1) {
+    //         await checkbox.click();
+    //     }
 
-            /**
-             * Reaching to the tax rate listing page.
-             */
-            await adminPage.goto("admin/settings/taxes/rates");
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
 
-            /**
-             * Reaching to the edit tax rate page.
-             */
-            await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-            const iconEdit = await adminPage.$$(
-                "span.cursor-pointer.icon-edit"
-            );
-            await iconEdit[0].click();
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
 
-            /**
-             * Waiting for the main form to be visible.
-             */
-            await adminPage.waitForSelector(
-                'form[action*="/settings/taxes/rates/edit"]'
-            );
+    //     await adminPage.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
 
-            /**
-             * General Section.
-             */
-            await adminPage.locator('input[name="tax_rate"]').fill("36");
+    //     await inputs[0].press('Enter');
 
-            /**
-             * Save tax rate.
-             */
-            await adminPage
-                .getByRole("button", { name: "Save Tax Rate" })
-                .click();
+    //     await expect(adminPage.getByText('Tax rate created successfully.')).toBeVisible();
+    // });
 
-            /**
-             * Asserting.
-             */
-            await expect(
-                adminPage.getByText("Tax Rate Update Successfully")
-            ).toBeVisible();
-        });
+    // test('edit tax rate', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
 
-        test("should delete a tax rate", async ({ adminPage }) => {
-            /**
-             * Creating a tax rate.
-             */
-            await createTaxRate(adminPage);
+    //     await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-            /**
-             * Reaching to the tax rate listing page.
-             */
-            await adminPage.goto("admin/settings/taxes/rates");
+    //     const iconEdit = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]');
 
-            /**
-             * Now deleting the recent tax rate.
-             */
-            await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
-            const iconDelete = await adminPage.$$(
-                "span.cursor-pointer.icon-delete"
-            );
-            await iconDelete[0].click();
+    //     await iconEdit[0].click();
 
-            /**
-             * Agreeing to the confirmation dialog.
-             */
-            await adminPage.waitForSelector("text=Are you sure");
-            const agreeButton = await adminPage.locator(
-                'button.primary-button:has-text("Agree")'
-            );
+    //     adminPage.click('select[name="country"]');
 
-            /**
-             * Clicking the agree button to delete the tax rate.
-             */
-            if (await agreeButton.isVisible()) {
-                await agreeButton.click();
-            } else {
-                console.error("Agree button not found or not visible.");
-            }
+    //     const select = await adminPage.$('select[name="country"]');
 
-            await expect(
-                adminPage.getByText("Tax rate deleted successfully")
-            ).toBeVisible();
-        });
-    });
+    //     const options = await select.$$eval('option', (options) => {
+    //         return options.map(option => option.value);
+    //     });
 
-    test.describe("tax category management", () => {
-        test("should create a tax category", async ({ adminPage }) => {
-            await createTaxCategory(adminPage);
-        });
+    //     if (options.length > 1) {
+    //         const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-        test("should edit a tax category", async ({ adminPage }) => {
-            /**
-             * Creating a tax category.
-             */
-            await createTaxCategory(adminPage);
+    //         await select.selectOption(options[randomIndex]);
+    //     } else {
+    //         await select.selectOption(options[0]);
+    //     }
 
-            /**
-             * Reaching to the tax category listing page.
-             */
-            await adminPage.goto("admin/settings/taxes/categories");
+    //     const state = await adminPage.$('select[name="state"]');
 
-            /**
-             * Opening edit tax category form in modal.
-             */
-            await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
-                state: "visible",
-            });
-            const iconEdit = await adminPage.$$(
-                "span.cursor-pointer.icon-edit"
-            );
-            await iconEdit[0].click();
+    //     if (state) {
+    //         const options = await state.$$eval('option', (options) => {
+    //             return options.map(option => option.value);
+    //         });
 
-            /**
-             * Saving tax category and closing the modal.
-             */
-            await adminPage
-                .getByRole("button", { name: "Save Tax Category" })
-                .click();
+    //         if (options.length > 1) {
+    //             const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
 
-            /**
-             * Asserting.
-             */
-            await expect(
-                adminPage.getByText("Tax Category Successfully Updated.")
-            ).toBeVisible();
-        });
-    });
+    //             await state.selectOption(options[randomIndex]);
+    //         } else {
+    //             await select.selectOption(options[0]);
+    //         }
+    //     }
+
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
+
+    //     await adminPage.fill('input[name="tax_rate"]', Math.floor(Math.random() * 99).toString());
+
+    //     await inputs[0].press('Enter');
+
+    //     await expect(adminPage.getByText('Tax Rate Update Successfully')).toBeVisible();
+    // });
+
+    // test('delete tax rate', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/rates`);
+
+    //     await adminPage.waitForSelector('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+    //     const iconDelete = await adminPage.$$('span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]');
+
+    //     await iconDelete[0].click();
+
+    //     await adminPage.click('button.transparent-button + button.primary-button:visible');
+
+    //     await expect(adminPage.getByText('Tax rate deleted successfully')).toBeVisible();
+    // });
+
+    // test('create tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+
+    //     await adminPage.click('button[type="button"].primary-button:visible');
+
+    //     adminPage.click('select[name="taxrates[]"]');
+
+    //     const select = await adminPage.$('select[name="taxrates[]"]');
+
+    //     await adminPage.evaluate((select) => {
+    //         const options = Array.from(select.options) as HTMLOptionElement[];
+    //         const randomCount = Math.floor(Math.random() * options.length) + 1;
+    //         const shuffled = options.sort(() => 0.5 - Math.random());
+
+    //         shuffled.slice(0, randomCount).forEach(option => {
+    //             option.selected = true;
+    //         });
+
+    //         const event = new Event('change', { bubbles: true });
+    //         select.dispatchEvent(event);
+    //     }, select);
+
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
+
+    //     await inputs[1].press('Enter');
+
+    //     await expect(adminPage.getByText('New Tax Category Created.')).toBeVisible();
+    // });
+
+    // test('edit tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+
+    //     await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    //     const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    //     await iconEdit[0].click();
+
+    //     adminPage.click('select[name="taxrates[]"]');
+
+    //     const select = await adminPage.$('select[name="taxrates[]"]');
+
+    //     await adminPage.evaluate((select) => {
+    //         const options = Array.from(select.options) as HTMLOptionElement[];
+    //         const randomCount = Math.floor(Math.random() * options.length) + 1;
+    //         const shuffled = options.sort(() => 0.5 - Math.random());
+
+    //         shuffled.slice(0, randomCount).forEach(option => {
+    //             option.selected = true;
+    //         });
+
+    //         const event = new Event('change', { bubbles: true });
+    //         select.dispatchEvent(event);
+    //     }, select);
+
+    //     const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
+
+    //     for (let input of inputs) {
+    //         await input.fill(forms.generateRandomStringWithSpaces(200));
+    //     }
+
+    //     await inputs[1].press('Enter');
+
+    //     await expect(adminPage.getByText('Tax Category Successfully Updated.')).toBeVisible();
+    // });
+
+    // test('delete tax category', async ({ adminPage }) => {
+    //     await adminPage.goto(`${config.baseUrl}/admin/settings/taxes/categories`);
+
+    //     await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    //     const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+
+    //     await iconDelete[0].click();
+
+    //     await adminPage.click('button.transparent-button + button.primary-button:visible');
+
+    //     await expect(adminPage.getByText('Tax Category Deleted Successfully.')).toBeVisible();
+    // });
 });

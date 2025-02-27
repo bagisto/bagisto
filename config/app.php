@@ -237,6 +237,12 @@ return [
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
+
+        Webkul\SupplierInfo\Providers\SupplierInfoServiceProvider::class,
+        Brainstream\Giftcard\Providers\GiftcardServiceProvider::class,
+        Smartarget\WhatsappContactUs\Providers\WhatsappContactUsServiceProvider::class
+
+
     ])->toArray(),
 
     /*

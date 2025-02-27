@@ -1,4 +1,4 @@
-import { test, expect } from "../setup";
+import { test, expect, config } from "../setup";
 import {
     generateName,
     generateSlug,
@@ -9,7 +9,7 @@ async function createPage(adminPage) {
     /**
      * Reaching the create page.
      */
-    await adminPage.goto('admin/cms');
+    await adminPage.goto(`${config.baseUrl}/admin/cms`);
     await adminPage.waitForSelector(
         'a.primary-button:has-text("Create Page")',
         { state: "visible" }
@@ -23,7 +23,14 @@ async function createPage(adminPage) {
     /**
      * Description Section.
      */
-    await adminPage.fillInTinymce("#content_ifr", shortDescription);
+    await adminPage.waitForSelector("iframe.tox-edit-area__iframe");
+    const iframe = await adminPage.frameLocator(
+        "iframe.tox-edit-area__iframe"
+    );
+    const editorBody = iframe.locator("body");
+    await editorBody.click();
+    await editorBody.pressSequentially(shortDescription);
+    await expect(editorBody).toHaveText(shortDescription);
 
     /**
      * General Section.
@@ -64,7 +71,7 @@ test.describe("cms management", () => {
         /**
          * Reaching the edit channel page.
          */
-        await adminPage.goto('admin/cms');
+        await adminPage.goto(`${config.baseUrl}/admin/cms`);
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
         const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
@@ -86,7 +93,7 @@ test.describe("cms management", () => {
          */
         await createPage(adminPage);
 
-        await adminPage.goto('admin/cms');
+        await adminPage.goto(`${config.baseUrl}/admin/cms`);
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
             state: "visible",
@@ -118,7 +125,7 @@ test.describe("cms management", () => {
          */
         await createPage(adminPage);
 
-        await adminPage.goto('admin/cms');
+        await adminPage.goto(`${config.baseUrl}/admin/cms`);
 
         await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });
         const checkboxes = await adminPage.$$('.icon-uncheckbox:visible');

@@ -8,8 +8,9 @@ return [
 
         /**
          * Example:
+         *
          * VendorA\ModuleX\Providers\ModuleServiceProvider::class,
-         * VendorB\ModuleY\Providers\ModuleServiceProvider::class
+         * VendorB\ModuleY\Providers\ModuleServiceProvider::class,
          */
         \Webkul\Admin\Providers\ModuleServiceProvider::class,
         \Webkul\Attribute\Providers\ModuleServiceProvider::class,
@@ -32,10 +33,10 @@ return [
         \Webkul\Sales\Providers\ModuleServiceProvider::class,
         \Webkul\Shipping\Providers\ModuleServiceProvider::class,
         \Webkul\Shop\Providers\ModuleServiceProvider::class,
+        \Webkul\Sitemap\Providers\ModuleServiceProvider::class,
         \Webkul\SocialLogin\Providers\ModuleServiceProvider::class,
         \Webkul\Tax\Providers\ModuleServiceProvider::class,
         \Webkul\Theme\Providers\ModuleServiceProvider::class,
         \Webkul\User\Providers\ModuleServiceProvider::class,
-        \Webkul\Sitemap\Providers\ModuleServiceProvider::class,
     ],
 ];

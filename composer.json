@@ -18,6 +18,7 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "bagisto-eu/stock-notify": "^1.1",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "diglactic/laravel-breadcrumbs": "^8.0",
         "doctrine/dbal": "^3.0",
@@ -43,8 +44,10 @@
         "prettus/l5-repository": "^2.6",
         "pusher/pusher-php-server": "^7.0",
         "shetabit/visitor": "^4.1",
+        "smartarget/bagisto-whatsapp-contact-us": "^1.0",
         "spatie/laravel-responsecache": "^7.4",
-        "spatie/laravel-sitemap": "^7.3"
+        "spatie/laravel-sitemap": "^7.3",
+        "webbycrown/customization-for-bagisto": "dev-main"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "^2.2.0",
@@ -93,7 +96,9 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\SupplierInfo\\": "packages/Webkul/SupplierInfo/src",
+            "Brainstream\\Giftcard\\": "packages/Brainstream/Giftcard/src"
         }
     },
     "autoload-dev": {
@@ -122,13 +127,15 @@
             ]
         }
     },
-    "repositories": [{
-        "type": "path",
-        "url": "packages/*/*",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*/*",
+            "options": {
+                "symlink": true
+            }
         }
-    }],
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
