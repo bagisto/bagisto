@@ -689,7 +689,7 @@ return [
             ], [
                 'name'          => 'description',
                 'title'         => 'admin::app.configuration.index.general.gdpr.cookie.description',
-                'type'          => 'editor',
+                'type'          => 'textarea',
                 'default'       => 'This website uses cookies to ensure you get the best experience on our website.',
                 'depends'       => 'enabled:true',
                 'channel_based' => false,
