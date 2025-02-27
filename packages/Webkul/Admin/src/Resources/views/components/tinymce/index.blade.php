@@ -46,52 +46,92 @@
                                 v-model="ai.model"
                                 :label="trans('admin::app.components.tinymce.ai-generation.model')"
                             >
-                                <option value="gpt-3.5-turbo">
-                                    @lang('admin::app.components.tinymce.ai-generation.gpt-3-5-turbo')
+                                <option value="gpt-4-turbo">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4-turbo')
                                 </option>
 
-                                <option value="llama2">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama2')
+                                <option value="gpt-4o">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o')
                                 </option>
 
-                                <option value="mistral">
-                                    @lang('admin::app.components.tinymce.ai-generation.mistral')
+                                <option value="gpt-4o-mini">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o-mini')
                                 </option>
 
-                                <option value="dolphin-phi">
-                                    @lang('admin::app.components.tinymce.ai-generation.dolphin-phi')
+                                <option value="gemini-2.0-flash">
+                                    @lang('admin::app.components.tinymce.ai-generation.gemini-2-0-flash')
                                 </option>
 
-                                <option value="phi">
-                                    @lang('admin::app.components.tinymce.ai-generation.phi')
+                                <option value="deepseek-r1:8b">
+                                    @lang('admin::app.components.tinymce.ai-generation.deepseek-r1-8b')
                                 </option>
 
-                                <option value="starling-lm">
-                                    @lang('admin::app.components.tinymce.ai-generation.starling-lm')
+                                <option value="llama3-8b-8192">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama-groq')
                                 </option>
 
-                                <option value="llama2-uncensored">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama2-uncensored')
+                                <option value="llama3.2:3b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama3-2-3b')
                                 </option>
 
-                                <option value="llama2:13b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama2:13b')
+                                <option value="llama3.2:1b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama3-2-1b')
                                 </option>
 
-                                <option value="llama2:70b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama2:70b')
+                                <option value="llama3.1:8b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama3-1-8b')
+                                </option>
+
+                                <option value="llama3:8b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama3-8b')
+                                </option>
+
+                                <option value="llava:7b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llava-7b')
+                                </option>
+
+                                <option value="vicuna:13b">
+                                    @lang('admin::app.components.tinymce.ai-generation.vicuna-13b')
+                                </option>
+
+                                <option value="vicuna:7b">
+                                    @lang('admin::app.components.tinymce.ai-generation.vicuna-7b')
+                                </option>
+
+                                <option value="qwen2.5:14b">
+                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-14b')
+                                </option>
+
+                                <option value="qwen2.5:7b">
+                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-7b')
+                                </option>
+
+                                <option value="qwen2.5:3b">
+                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-3b')
+                                </option>
+
+                                <option value="qwen2.5:1.5b">
+                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-1-5b')
+                                </option>
+
+                                <option value="qwen2.5:0.5b">
+                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-0-5b')
+                                </option>
+
+                                <option value="mistral:7b">
+                                    @lang('admin::app.components.tinymce.ai-generation.mistral-7b')
+                                </option>
+
+                                <option value="starling-lm:7b">
+                                    @lang('admin::app.components.tinymce.ai-generation.starling-lm-7b')
+                                </option>
+
+                                <option value="phi3.5">
+                                    @lang('admin::app.components.tinymce.ai-generation.phi3-5')
                                 </option>
 
                                 <option value="orca-mini">
                                     @lang('admin::app.components.tinymce.ai-generation.orca-mini')
-                                </option>
-
-                                <option value="vicuna">
-                                    @lang('admin::app.components.tinymce.ai-generation.vicuna')
-                                </option>
-
-                                <option value="llava">
-                                    @lang('admin::app.components.tinymce.ai-generation.llava')
                                 </option>
                             </x-admin::form.control-group.control>
 
