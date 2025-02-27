@@ -1113,7 +1113,7 @@ return [
                     'request-status' => 'Status żądania : ',
                 ],
             ],
-            
+
             'reminder' => [
                 'already-paid'    => 'Jeśli już dokonałeś płatności, zignoruj tę wiadomość.',
                 'invoice-overdue' => 'To uprzejme przypomnienie, że twoja faktura jest zaległa. Prosimy o dokonanie płatności najszybciej, jak to możliwe.',
