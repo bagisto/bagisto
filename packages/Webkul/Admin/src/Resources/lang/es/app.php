@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Fecha de Creación',
+                    'from'         => 'Desde',
+                    'id'           => 'ID',
+                    'order-id'     => 'ID de Pedido',
+                    'qty'          => 'Cantidad',
+                    'to'           => 'Hasta',
+                    'view'         => 'Ver',
+                ],
+
+                'title'    => 'Reservas',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Fecha de Reserva',
+                'booking-details'  => 'Detalles de la Reserva',
+                'canceled'         => 'Cancelado',
+                'closed'           => 'Cerrado',
+                'done'             => 'Hecho',
+                'order-id'         => 'ID de Pedido',
+                'pending'          => 'Pendiente',
+                'price'            => 'Precio',
+                'status'           => 'Estado',
+                'time-slot'        => 'Franja Horaria:',
+                'view-details'     => 'Ver Detalles',
+            ],
+
+            'title' => 'Producto de Reservas',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'Seleccionar',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Disponible Desde',
+                        'available-to'   => 'Disponible Hasta',
+                        'location'       => 'Ubicación',
+                        'qty'            => 'Cantidad',
+                        'title'          => 'Tipo de Reserva',
+
+                        'available-every-week' => [
+                            'no'    => 'No',
+                            'title' => 'Disponible Cada Semana',
+                            'yes'   => 'Sí',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'slot-duration'          => 'Duración del Slot (Minutos)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Agregar',
+                            'break-duration'   => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'close'            => 'Cerrar',
+                            'description'      => 'Información de la Reserva',
+                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'edit'             => 'Editar',
+                            'many'             => 'Muchas Reservas Para Un Día',
+                            'one'              => 'Una Reserva Para Muchos Días',
+                            'open'             => 'Abrir',
+                            'slot-add'         => 'Agregar Slots',
+                            'slot-duration'    => 'Duración del Slot (Minutos)',
+                            'slot-title'       => 'Duración del Tiempo de los Slots',
+                            'title'            => 'Predeterminado',
+                            'unavailable'      => 'No Disponible',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Agregar Slots',
+                                    'close'      => 'Cerrar',
+                                    'day'        => 'Día',
+                                    'edit-title' => 'Editar Slots',
+                                    'friday'     => 'Viernes',
+                                    'from'       => 'Desde',
+                                    'from-day'   => 'Desde el Día',
+                                    'from-time'  => 'Desde la Hora',
+                                    'monday'     => 'Lunes',
+                                    'open'       => 'Abrir',
+                                    'saturday'   => 'Sábado',
+                                    'save'       => 'Guardar',
+                                    'select'     => 'Seleccionar',
+                                    'status'     => 'Estado',
+                                    'sunday'     => 'Domingo',
+                                    'thursday'   => 'Jueves',
+                                    'to'         => 'Hasta',
+                                    'to-day'     => 'Hasta el Día',
+                                    'to-time'    => 'Hasta la Hora',
+                                    'tuesday'    => 'Martes',
+                                    'wednesday'  => 'Miércoles',
+                                    'week'       => ':día',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Agregar Entradas',
+                            'delete'             => 'Eliminar',
+                            'description'        => 'Descripción',
+                            'description-info'   => 'No hay entradas disponibles.',
+                            'edit'               => 'Editar',
+                            'name'               => 'Nombre',
+                            'price'              => 'Precio',
+                            'qty'                => 'Cantidad',
+                            'special-price'      => 'Precio Especial',
+                            'special-price-from' => 'Precio Especial Desde',
+                            'special-price-to'   => 'Precio Especial Hasta',
+                            'title'              => 'Entradas',
+                            'valid-from'         => 'Válido Desde',
+                            'valid-until'        => 'Válido Hasta',
+
+                            'modal'              => [
+                                'edit' => 'Editar Entradas',
+                                'save' => 'Guardar',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Agregar Entradas',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Agregar Slots',
+                                'description' => 'Slots Disponibles con Duración de Tiempo.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => 'Base Diaria',
+                            'daily-hourly'           => 'Ambos (Base Diaria y por Hora)',
+                            'daily-price'            => 'Precio Diario',
+                            'hourly'                 => 'Base por Hora',
+                            'hourly-price'           => 'Precio por Hora',
+                            'title'                  => 'Tipo de Alquiler',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Agregar Slots',
+                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'save'             => 'Guardar',
+                            'title'            => 'Duración del Tiempo de los Slots',
+                            'unavailable'      => 'No Disponible',
+
+                            'action' => [
+                                'add' => 'Agregar',
+                            ],
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'     => 'Viernes',
+                                    'from'       => 'Desde',
+                                    'monday'     => 'Lunes',
+                                    'saturday'   => 'Sábado',
+                                    'sunday'     => 'Domingo',
+                                    'thursday'   => 'Jueves',
+                                    'to'         => 'Hasta',
+                                    'tuesday'    => 'Martes',
+                                    'wednesday'  => 'Miércoles',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'guest-capacity'            => 'Capacidad de Huéspedes',
+                            'guest-limit'               => 'Límite de Huéspedes por Mesa',
+                            'prevent-scheduling-before' => 'Prevenir Programación Antes de',
+                            'slot-duration'             => 'Duración del Slot (Minutos)',
+
+                            'charged-per' => [
+                                'guest'  => 'Huésped',
+                                'table'  => 'Mesa',
+                                'title'  => 'Cobrado Por',
+                            ],
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Reserva de Cita',
+                            'default'     => 'Reserva Predeterminada',
+                            'event'       => 'Reserva de Evento',
+                            'many'        => 'Muchas',
+                            'one'         => 'Una',
+                            'rental'      => 'Reserva de Alquiler',
+                            'table'       => 'Reserva de Mesa',
+                            'title'       => 'Tipo',
                         ],
                     ],
 

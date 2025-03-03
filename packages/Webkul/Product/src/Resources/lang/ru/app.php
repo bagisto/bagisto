@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Набор',
+        'booking'      => 'Бронирование',
         'configurable' => 'Настроенный',
         'downloadable' => 'Загружаемый',
         'grouped'      => 'Группированный',

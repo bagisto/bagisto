@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'ארגז',
+        'booking'      => 'הזמנה',
         'configurable' => 'ניתן להגדיר',
         'downloadable' => 'ניתן להוריד',
         'grouped'      => 'מקובץ',
