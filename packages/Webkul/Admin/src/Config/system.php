@@ -642,6 +642,7 @@ return [
                 'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
                 'type'          => 'text',
                 'default'       => 'I agree with the terms and conditions.',
+                'validation'    => 'max:255',
                 'depends'       => 'enabled:true',
                 'channel_based' => false,
             ], [
@@ -684,6 +685,7 @@ return [
                 'title'         => 'admin::app.configuration.index.general.gdpr.cookie.identifier',
                 'type'          => 'text',
                 'default'       => 'Cookie Block',
+                'validation'    => 'max:255',
                 'depends'       => 'enabled:true',
                 'channel_based' => false,
             ], [
@@ -691,6 +693,7 @@ return [
                 'title'         => 'admin::app.configuration.index.general.gdpr.cookie.description',
                 'type'          => 'textarea',
                 'default'       => 'This website uses cookies to ensure you get the best experience on our website.',
+                'validation'    => 'max:500',
                 'depends'       => 'enabled:true',
                 'channel_based' => false,
             ],
