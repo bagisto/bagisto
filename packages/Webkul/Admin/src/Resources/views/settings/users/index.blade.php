@@ -145,7 +145,7 @@
                                         </button>
                                     </div>
 
-                                    <div class="text-sm">
+                                    <div class="text-sm break-all">
                                         @{{ record.user_name }}
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                             <p>@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p>@{{ record.email }}</p>
+                            <p class="break-words">@{{ record.email }}</p>
 
                             <!-- Role -->
                             <p>@{{ record.role_name }}</p>

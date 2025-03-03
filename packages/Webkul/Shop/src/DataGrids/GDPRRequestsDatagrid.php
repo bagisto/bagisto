@@ -71,7 +71,7 @@ class GDPRRequestsDatagrid extends DataGrid
                     case self::STATUS_PENDING:
                         return '<span class="label-pending">'.trans('shop::app.customers.account.gdpr.pending').'</span>';
                     case self::STATUS_DECLINED:
-                        return '<span class="label-cancelled">'.trans('shop::app.customers.account.gdpr.declined').'</span>';
+                        return '<span class="label-canceled">'.trans('shop::app.customers.account.gdpr.declined').'</span>';
                     case self::STATUS_PROCESSING:
                         return '<span class="label-processing">'.trans('shop::app.customers.account.gdpr.processing').'</span>';
                 }

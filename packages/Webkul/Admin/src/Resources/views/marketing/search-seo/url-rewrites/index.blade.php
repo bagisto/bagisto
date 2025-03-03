@@ -89,22 +89,34 @@
                             </p>
 
                             <!-- Id -->
-                            <p>@{{ record.id }}</p>
+                            <p class="break-words">
+                                @{{ record.id }}
+                            </p>
 
                             <!-- For -->
-                            <p>@{{ record.entity_type }}</p>
+                            <p class="break-words">
+                                @{{ record.entity_type }}
+                            </p>
 
                             <!-- Request Path -->
-                            <p>@{{ record.request_path }}</p>
+                            <p class="break-words">
+                                @{{ record.request_path }}
+                            </p>
 
                             <!-- Target Path -->
-                            <p>@{{ record.target_path }}</p>
+                            <p class="break-words">
+                                @{{ record.target_path }}
+                            </p>
 
                             <!-- Redirect Type -->
-                            <p>@{{ record.redirect_type }}</p>
+                            <p class="break-words">
+                                @{{ record.redirect_type }}
+                            </p>
 
                             <!-- Locale -->
-                            <p>@{{ record.locale }}</p>
+                            <p class="break-words">
+                                @{{ record.locale }}
+                            </p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
