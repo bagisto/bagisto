@@ -1,9 +1,9 @@
-import { test, expect } from "../../setup";
+import { test, expect } from "../setup";
 import {
     generateName,
     generateSlug,
     generateDescription,
-} from "../../utils/faker";
+} from "../utils/faker";
 
 async function createPage(adminPage) {
     const cms = {
