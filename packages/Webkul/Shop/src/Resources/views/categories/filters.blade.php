@@ -116,7 +116,7 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:ltr:pr-7 md:rtl:pl-7">
+            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px]">
                 <!-- Filters Header Container -->
                 <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
                     <p class="text-lg font-semibold max-sm:font-medium">
@@ -155,7 +155,7 @@
                 <!-- Filter Item Header -->
                 <x-slot:header class="px-0 py-2.5 max-sm:!pb-1.5">
                     <div class="flex items-center justify-between">
-                        <p class="text-lg font-semibold max-sm:text-base max-sm:font-medium">
+                        <p class="font-semibold uppercase text-[16px] text-heading">
                             @{{ filter.name }}
                         </p>
                     </div>
@@ -192,7 +192,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
+                                    class="icon-uncheck peer-checked:icon-check-box peer-checked:text-primary cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
                                     role="checkbox"
                                     aria-checked="false"
                                     :aria-label="option.name"
@@ -203,7 +203,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
+                                    class="w-full cursor-pointer p-2 text-base peer-checked:text-primary max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"
@@ -267,7 +267,7 @@
             methods: {
                 getFilters() {
                     this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
-                            params: { 
+                            params: {
                                 category_id: "{{ isset($category) ? $category->id : ''  }}",
                             }
                         })

@@ -1,4 +1,4 @@
-<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[400px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] ltr:pr-7 rtl:pl-7">
+<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[400px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px]">
     <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 py-2.5 max-md:hidden">
         <p class="shimmer h-6 w-[30%]"></p>
         <p class="shimmer h-5 w-1/5"></p>
@@ -26,7 +26,7 @@
         <div class="z-10 grid rounded-lg bg-white pb-3">
             <div class="flex items-center gap-x-4 ltr:pl-2 rtl:pr-2">
                 <div class="shimmer h-5 w-5 rounded"></div>
-                
+
                 <div class="p-2 ltr:pl-0 rtl:pr-0">
                     <div class="shimmer h-5 w-[100px]"></div>
                 </div>
@@ -76,7 +76,7 @@
         <div class="z-10 grid rounded-lg bg-white pb-3">
             <div class="flex items-center gap-x-4 ltr:pl-2 rtl:pr-2">
                 <div class="shimmer h-5 w-5 rounded"></div>
-                
+
                 <div class="p-2 ltr:pl-0 rtl:pr-0">
                     <div class="shimmer h-5 w-[100px]"></div>
                 </div>

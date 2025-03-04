@@ -57,7 +57,7 @@
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
-        <div class="flex justify-center px-7 max-lg:hidden">
+        <div class="container">
             <x-shop::breadcrumbs
                 name="product"
                 :entity="$product"
@@ -67,7 +67,11 @@
 
     <!-- Product Information Vue Component -->
     <v-product>
-        <x-shop::shimmer.products.view />
+        <div class="container max-lg:px-5 mt-7">
+            <div class="p-10 shadow shadow-custom rounded-[24px]">
+                <x-shop::shimmer.products.view />
+            </div>
+        </div>
     </v-product>
 
     <!-- Information Section -->
@@ -114,20 +118,20 @@
                                         </div>
 
                                         @if ($customAttributeValue['type'] == 'file')
-                                            <a 
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
                                                 <span class="icon-download text-2xl"></span>
                                             </a>
                                         @elseif ($customAttributeValue['type'] == 'image')
-                                            <a 
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
-                                                <img 
-                                                    class="h-5 min-h-5 w-5 min-w-5" 
-                                                    src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                                <img
+                                                    class="h-5 min-h-5 w-5 min-w-5"
+                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 />
                                             </a>
                                         @else
@@ -292,31 +296,33 @@
                         v-model="is_buy_now"
                     >
 
-                    <div class="container px-[60px] max-1180:px-0">
-                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
+                    <div class="container max-lg:px-5 mt-7">
+                        <div class="p-10 shadow shadow-custom rounded-[24px] flex gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
                             <!-- Gallery Blade Inclusion -->
-                            @include('shop::products.view.gallery')
+                            <div class="w-[620px] max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
+                                @include('shop::products.view.gallery')
+                            </div>
 
                             <!-- Details -->
-                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
+                            <div class="relative flex-1 max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="break-all text-3xl font-medium max-sm:text-xl">
+                                    <h1 class="break-all text-[32px] leading-[1.18] font-bold text-heading max-sm:text-xl">
                                         {{ $product->name }}
                                     </h1>
 
-                                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
-                                        <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
-                                            role="button"
-                                            aria-label="@lang('shop::app.products.view.add-to-wishlist')"
-                                            tabindex="0"
-                                            :class="isWishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
-                                            @click="addToWishlist"
-                                        >
-                                        </div>
-                                    @endif
+{{--                                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))--}}
+{{--                                        <div--}}
+{{--                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"--}}
+{{--                                            role="button"--}}
+{{--                                            aria-label="@lang('shop::app.products.view.add-to-wishlist')"--}}
+{{--                                            tabindex="0"--}}
+{{--                                            :class="isWishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"--}}
+{{--                                            @click="addToWishlist"--}}
+{{--                                        >--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.name.after', ['product' => $product]) !!}
@@ -346,7 +352,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2 max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
+                                <p class="mt-[15px] leading-[1.18] flex items-center gap-2.5 text-[32px] font-bold text-heading max-sm:mt-2 max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -386,17 +392,17 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-4">
+                                <div class="mt-8 flex gap-4 max-sm:mt-4">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                                    @if ($product->getTypeInstance()->showQuantityBox())
-                                        <x-shop::quantity-changer
-                                            name="quantity"
-                                            value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4 max-md:py-3 max-sm:gap-x-5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5"
-                                        />
-                                    @endif
+{{--                                    @if ($product->getTypeInstance()->showQuantityBox())--}}
+{{--                                        <x-shop::quantity-changer--}}
+{{--                                            name="quantity"--}}
+{{--                                            value="1"--}}
+{{--                                            class="gap-x-4 rounded-xl px-7 py-4 max-md:py-3 max-sm:gap-x-5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5"--}}
+{{--                                        />--}}
+{{--                                    @endif--}}
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
@@ -406,7 +412,7 @@
 
                                         <x-shop::button
                                             type="submit"
-                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            class="primary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
                                             button-type="secondary-button"
                                             :loading="false"
                                             :title="trans('shop::app.products.view.add-to-cart')"
@@ -427,7 +433,7 @@
                                     @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                         <x-shop::button
                                             type="submit"
-                                            class="primary-button mt-5 w-full max-w-[470px] max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            class="primary-button mt-5 w-full max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
                                             button-type="primary-button"
                                             :title="trans('shop::app.products.view.buy-now')"
                                             :disabled="! $product->isSaleable(1)"
@@ -443,27 +449,27 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-3">
-                                    {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
+{{--                                <div class="mt-10 flex gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-3">--}}
+{{--                                    {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}--}}
 
-                                    <div
-                                        class="flex cursor-pointer items-center justify-center gap-2.5 max-sm:gap-1.5 max-sm:text-base"
-                                        role="button"
-                                        tabindex="0"
-                                        @click="is_buy_now=0; addToCompare({{ $product->id }})"
-                                    >
-                                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
-                                            <span
-                                                class="icon-compare text-2xl"
-                                                role="presentation"
-                                            ></span>
+{{--                                    <div--}}
+{{--                                        class="flex cursor-pointer items-center justify-center gap-2.5 max-sm:gap-1.5 max-sm:text-base"--}}
+{{--                                        role="button"--}}
+{{--                                        tabindex="0"--}}
+{{--                                        @click="is_buy_now=0; addToCompare({{ $product->id }})"--}}
+{{--                                    >--}}
+{{--                                        @if (core()->getConfigData('catalog.products.settings.compare_option'))--}}
+{{--                                            <span--}}
+{{--                                                class="icon-compare text-2xl"--}}
+{{--                                                role="presentation"--}}
+{{--                                            ></span>--}}
 
-                                            @lang('shop::app.products.view.compare')
-                                        @endif
-                                    </div>
+{{--                                            @lang('shop::app.products.view.compare')--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
 
-                                    {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}
-                                </div>
+{{--                                    {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}--}}
+{{--                                </div>--}}
 
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.after', ['product' => $product]) !!}
                             </div>
@@ -639,7 +645,7 @@
                                 behavior: 'smooth'
                             });
                         }
-                        
+
                         let tabElement = document.querySelector('#review-tab-button');
 
                         if (tabElement) {

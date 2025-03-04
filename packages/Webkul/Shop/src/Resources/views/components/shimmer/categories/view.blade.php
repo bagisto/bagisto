@@ -2,7 +2,9 @@
     <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
         <!-- Desktop Filter Shimmer Effect -->
         <div class="max-md:hidden">
-            <x-shop::shimmer.categories.filters />
+            <div class="border border-line px-6 py-4 rounded">
+                <x-shop::shimmer.categories.filters />
+            </div>
         </div>
 
         <div class="flex-1">
@@ -20,7 +22,7 @@
                 <div class="mt-8 grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:mt-5 max-md:justify-items-center max-md:gap-x-4 max-md:gap-y-5">
                     <!-- Product Card Shimmer Effect -->
                     <x-shop::shimmer.products.cards.grid count="12" />
-                </div> 
+                </div>
             @endif
 
             <button class="shimmer mx-auto mt-14 block h-12 w-[171.516px] rounded-2xl py-3"></button>

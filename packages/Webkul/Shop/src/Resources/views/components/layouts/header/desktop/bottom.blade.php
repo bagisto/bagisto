@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
-<div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
+<div class="flex justify-between container">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -14,7 +14,7 @@
             aria-label="@lang('shop::app.components.layouts.header.bagisto')"
         >
             <img
-                src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo-lam-web.svg') }}"
                 width="131"
                 height="29"
                 alt="{{ config('app.name') }}"
@@ -155,7 +155,7 @@
                         <p class="mt-3 w-full border border-zinc-200"></p>
 
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.before') !!}
-                        
+
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
@@ -172,7 +172,7 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
-                            
+
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 

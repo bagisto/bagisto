@@ -1,9 +1,8 @@
-<div class="container px-[60px] max-1180:px-0">
-    <div class="mt-12 flex gap-10 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
+<div class="flex gap-10 max-1180:flex-wrap max-sm:gap-y-6">
 
         <x-shop::shimmer.products.gallery />
 
-        <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
+        <div class="relative flex-1 max-1180:w-full max-1180:max-w-full max-1180:px-5">
             <div class="flex justify-between gap-4">
                 <h1 class="shimmer h-[46px] w-2/4"></h1>
 
@@ -64,7 +63,7 @@
 
                 <div class="flex items-center gap-6 max-sm:flex-wrap">
                     <div class="shimmer h-6 w-20"></div>
-                    
+
                     <div class="flex gap-3">
                         <span class="shimmer h-10 w-10 rounded-full"></span>
                         <span class="shimmer h-10 w-10 rounded-full"></span>
@@ -75,4 +74,3 @@
             </div>
         </div>
     </div>
-</div>
