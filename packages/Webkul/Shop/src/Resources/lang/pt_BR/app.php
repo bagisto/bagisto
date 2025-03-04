@@ -803,6 +803,7 @@ return [
                 'street-address'         => 'Endereço',
                 'telephone'              => 'Telefone',
                 'title'                  => 'Endereço',
+                'vat-id'                 => 'ID do IVA',
             ],
 
             'index' => [
