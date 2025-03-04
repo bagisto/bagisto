@@ -816,3 +816,47 @@ export function getImageFile(
 
     return path.join(directory, imageFiles[randomIndex]);
 }
+
+
+// export function generateRandomDate(end = new Date(new Date().setFullYear(new Date().getFullYear() + 10))) {
+//     const start = new Date();
+//     const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+//     return date;
+// }
+
+export function generateRandomDateTime(end = new Date(new Date().setFullYear(new Date().getFullYear() + 10))) {
+    const start = new Date();
+    const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+export function generateLocation() {
+    const location = [
+        "New York",
+        "Los Angeles",
+        "Chicago",
+        "Houston",
+        "Phoenix",
+        "Philadelphia",
+        "San Antonio",
+        "San Diego",
+        "Dallas",
+        "San Jose",
+        "Austin",
+        "Jacksonville",
+        "San Francisco",
+        "Indianapolis",
+        "Columbus",
+        "Fort Worth",
+    ];
+    return location[Math.floor(Math.random() * location.length)];
+}
+
+
