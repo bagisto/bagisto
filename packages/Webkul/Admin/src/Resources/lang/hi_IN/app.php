@@ -3455,6 +3455,7 @@ return [
 
         'view' => [
             'all-channels'  => 'सभी चैनल',
+            'back-btn'      => 'वापस',
             'day'           => 'दिन',
             'end-date'      => 'समापन तिथि',
             'export-csv'    => 'CSV पर्याप्त',
