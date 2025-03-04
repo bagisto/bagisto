@@ -22,6 +22,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "dotenv": "^16.4.7",
     "flatpickr": "^4.6.13",
+    "fs": "^0.0.1-security",
     "mitt": "^3.0.1",
     "playwright": "^1.48.1",
     "readline-sync": "^1.4.10",
