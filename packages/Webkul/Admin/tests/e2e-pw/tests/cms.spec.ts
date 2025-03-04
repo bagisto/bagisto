@@ -6,29 +6,31 @@ import {
 } from "../utils/faker";
 
 async function createPage(adminPage) {
+    const cms = {
+        name: generateName(),
+        slug: generateSlug(),
+        shortDescription: generateDescription(),
+    };
+
     /**
      * Reaching the create page.
      */
-    await adminPage.goto('admin/cms');
+    await adminPage.goto("admin/cms");
     await adminPage.waitForSelector(
         'a.primary-button:has-text("Create Page")',
         { state: "visible" }
     );
     await adminPage.click('a.primary-button:has-text("Create Page")');
 
-    const name = generateName();
-    const slug = generateSlug();
-    const shortDescription = generateDescription();
-
     /**
      * Description Section.
      */
-    await adminPage.fillInTinymce("#content_ifr", shortDescription);
+    await adminPage.fillInTinymce("#content_ifr", cms.shortDescription);
 
     /**
      * General Section.
      */
-    await adminPage.fill("#page_title", name);
+    await adminPage.fill("#page_title", cms.name);
 
     await adminPage.click('label[for="channels_1"]');
     await expect(adminPage.locator("input#channels_1")).toBeChecked();
@@ -36,10 +38,10 @@ async function createPage(adminPage) {
     /**
      * SEO Section.
      */
-    await adminPage.fill("#meta_title", name);
-    await adminPage.fill("#url_key", slug);
-    await adminPage.fill("#meta_keywords", name);
-    await adminPage.fill("#meta_description", shortDescription);
+    await adminPage.fill("#meta_title", cms.name);
+    await adminPage.fill("#url_key", cms.slug);
+    await adminPage.fill("#meta_keywords", cms.name);
+    await adminPage.fill("#meta_description", cms.shortDescription);
 
     /**
      * Now submit the form.
@@ -48,6 +50,11 @@ async function createPage(adminPage) {
     await expect(
         adminPage.getByText("CMS created successfully.")
     ).toBeVisible();
+
+    await expect(adminPage.getByText(cms.name)).toBeVisible();
+    await expect(adminPage.getByText(cms.slug)).toBeVisible();
+
+    return cms;
 }
 
 test.describe("cms management", () => {
@@ -56,20 +63,47 @@ test.describe("cms management", () => {
     });
 
     test("should edit a page", async ({ adminPage }) => {
-        /**
-         * Creating a page to edit.
-         */
-        await createPage(adminPage);
+        const cms = {
+            name: generateName(),
+            slug: generateSlug(),
+            shortDescription: generateDescription(),
+        };
 
         /**
-         * Reaching the edit channel page.
+         * Reaching the edit CMS page.
          */
-        await adminPage.goto('admin/cms');
+        await adminPage.goto("admin/cms");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
         const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
 
-        // Content will be added here. Currently just checking the general save button.
+        /**
+         * Edit General Section.
+         */
+        await adminPage.getByRole("textbox", { name: "Page Title" }).fill("");
+        await adminPage
+            .getByRole("textbox", { name: "Page Title" })
+            .fill(cms.name);
+
+        /**
+         * Edit Description Section.
+         */
+        const editorFrame = adminPage.frameLocator(
+            "iframe.tox-edit-area__iframe"
+        );
+        await editorFrame.locator("body").fill(cms.shortDescription);
+
+        /**
+         * Edit SEO Section.
+         */
+        await adminPage.fill("#meta_title", "");
+        await adminPage.fill("#meta_title", cms.name);
+        await adminPage.fill("#url_key", "");
+        await adminPage.fill("#url_key", cms.slug);
+        await adminPage.fill("#meta_keywords", "");
+        await adminPage.fill("#meta_keywords", cms.name);
+        await adminPage.fill("#meta_description", "");
+        await adminPage.fill("#meta_description", cms.shortDescription);
 
         /**
          * Now Submit The Form.
@@ -78,16 +112,20 @@ test.describe("cms management", () => {
         await expect(
             adminPage.getByText("CMS updated successfully.")
         ).toBeVisible();
+        await expect(adminPage.getByText(cms.name)).toBeVisible();
+        await expect(adminPage.getByText(cms.slug)).toBeVisible();
     });
 
     test("should delete a page", async ({ adminPage }) => {
         /**
          * Creating a page to delete.
          */
-        await createPage(adminPage);
+        const cms = await createPage(adminPage);
 
-        await adminPage.goto('admin/cms');
-
+        /**
+         * Deleting a CMS page.
+         */
+        await adminPage.goto("admin/cms");
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
             state: "visible",
         });
@@ -96,7 +134,51 @@ test.describe("cms management", () => {
         );
         await iconDelete[0].click();
 
+        /**
+         * Confirmation modal for deleting a CMS page.
+         */
         await adminPage.waitForSelector("text=Are you sure");
+        const agreeButton = await adminPage.locator(
+            'button.primary-button:has-text("Agree")'
+        );
+        if (await agreeButton.isVisible()) {
+            await agreeButton.click();
+        } else {
+            console.error("Agree button not found or not visible.");
+        }
+
+        /**
+         * Alert message for deleting a CMS page should appear.
+         */
+        await expect(
+            adminPage.getByText("CMS deleted successfully.")
+        ).toBeVisible();
+        await expect(adminPage.getByText(cms.name)).not.toBeVisible();
+    });
+
+    test("should mass delete the selected pages", async ({ adminPage }) => {
+        /**
+         * Creating CMS pages for multiselect delete.
+         */
+        await createPage(adminPage);
+
+        /**
+         * Deleting a CMS page.
+         */
+        await adminPage.goto("admin/cms");
+        await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
+            state: "visible",
+        });
+        const iconDelete = await adminPage.$$(
+            "span.cursor-pointer.icon-delete"
+        );
+        await iconDelete[0].click();
+
+        /**
+         * Confirmation modal for deleting a CMS page.
+         */
+        await adminPage.waitForSelector("text=Are you sure");
+
         const agreeButton = await adminPage.locator(
             'button.primary-button:has-text("Agree")'
         );
@@ -107,40 +189,44 @@ test.describe("cms management", () => {
             console.error("Agree button not found or not visible.");
         }
 
+        /**
+         * Alert message for deleting a CMS page should appear.
+         */
         await expect(
             adminPage.getByText("CMS deleted successfully.")
         ).toBeVisible();
     });
 
-    test("should mass delete the pages", async ({ adminPage }) => {
+    test("should mass delete all the rows of current pages", async ({
+        adminPage,
+    }) => {
         /**
          * Creating a page to delete.
          */
-        await createPage(adminPage);
+        const cms = await createPage(adminPage);
 
-        await adminPage.goto('admin/cms');
+        await adminPage.goto("admin/cms");
 
-        await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });
-        const checkboxes = await adminPage.$$('.icon-uncheckbox:visible');
-        await checkboxes[1].click();
+        /**
+         * Selecting a multiselector checkbox.
+         */
+        await adminPage.locator(".icon-uncheckbox").first().click();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Delete" }).click();
 
-        let selectActionButton = await adminPage.waitForSelector('button:has-text("Select Action")', { timeout: 1000 });
-        await selectActionButton.click();
+        /**
+         * Confirmation modal for deleting CMS pages.
+         */
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
-        await adminPage.click('a:has-text("Delete")', { timeout: 1000 });
-
-        await adminPage.waitForSelector('text=Are you sure', { state: 'visible', timeout: 1000 });
-
-        const agreeButton = await adminPage.locator('button.primary-button:has-text("Agree")');
-
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
-
-        await expect(
-            adminPage.getByText("Selected Data Deleted Successfully")
-        ).toBeVisible();
+        /**
+         * Confirmation modal for deleting CMS pages.
+         */
+        await adminPage.getByText("Selected Data Deleted").click();
+        await expect(adminPage.getByText(cms.name)).not.toBeVisible();
     });
 });
