@@ -3159,6 +3159,7 @@ return [
                 'new'                           => 'New',
                 'no'                            => 'No',
                 'parent-id'                     => 'Parent ID',
+                'parent-id-hint'                => 'You can enter multiple parent IDs as comma-separated values (e.g., 12,15,34)',
                 'category-id'                   => 'Category ID',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
