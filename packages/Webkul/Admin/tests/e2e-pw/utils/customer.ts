@@ -30,6 +30,19 @@ export async function register(page) {
         .fill(credentials.password);
     await page.getByPlaceholder("Confirm Password").click();
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
+
+        /*
+         * if agreement Button is visible 
+         */
+       const agreementLocator = page.locator('#agreement').nth(1);
+       const isVisible = await agreementLocator.isVisible();
+       if (isVisible) {
+        /*
+         * If enabled, click "I agree with this statement."
+         */
+        await page.getByText('I agree with this statement.').click();
+    }
+
     await page
         .locator("#main form div")
         .filter({ hasText: "Subscribe to newsletter" })
