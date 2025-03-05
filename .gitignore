@@ -26,5 +26,6 @@ package-lock.json
 /storage/dcc-data/
 /test-results
 /vendor
+composer.lock
 yarn.lock
 yarn-error.log
