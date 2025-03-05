@@ -8,18 +8,26 @@
         id="v-product-gallery-template"
     >
         <div>
-            <!-- Desktop Gallery -->
-            @include('shop::products.view.gallery.desktop')
+            <div
+                class=""
+                v-show="isMediaLoading"
+            >
+                <div class="shimmer min-h-[607px] rounded-xl bg-zinc-200"></div>
+            </div>
 
-            <!-- Mobile Gallery -->
-            @include('shop::products.view.gallery.mobile')
-            
-            <!-- Gallery Images Zoomer -->
-            <x-shop::image-zoomer
-                ::attachments="attachments"
-                ::is-image-zooming="isImageZooming"
-                ::initial-index="`media_${activeIndex}`"
-            />
+            <div
+                class=""
+                v-show="! isMediaLoading"
+            >
+                <img
+                    class="w-full cursor-pointer rounded-xl"
+                    :src="baseFile.path"
+                    v-if="baseFile.type == 'image'"
+                    alt="{{ $product->name }}"
+                    tabindex="0"
+                    @load="onMediaLoad()"
+                />
+            </div>
         </div>
     </script>
 
@@ -64,7 +72,7 @@
                     },
                 },
             },
-        
+
             mounted() {
                 if (this.media.images.length) {
 
@@ -89,7 +97,7 @@
                 attachments() {
                     return [...this.media.images, ...this.media.videos].map(media => ({
                         url: media.type === 'videos' ? media.video_url : media.original_image_url,
-                        
+
                         type: media.type === 'videos' ? 'video' : 'image',
                     }));
                 },
@@ -99,7 +107,7 @@
                 isActiveMedia(index) {
                     return index === this.activeIndex;
                 },
-                
+
                 onMediaLoad() {
                     this.isMediaLoading = false;
                 },

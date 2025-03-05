@@ -48,26 +48,17 @@
             href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}"
         />
 
+
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
         <link
             rel="preload"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
             as="style"
         >
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        >
-
-        <link
-            rel="preload"
-            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
-            as="style"
-        >
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         >
 
         @stack('styles')
@@ -113,9 +104,9 @@
 
 
             <!-- Page Services Blade Component -->
-            @if ($hasFeature)
-                <x-shop::layouts.services />
-            @endif
+{{--            @if ($hasFeature)--}}
+{{--                <x-shop::layouts.services />--}}
+{{--            @endif--}}
 
             <!-- Page Footer Blade Component -->
             @if ($hasFooter)

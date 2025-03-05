@@ -36,6 +36,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
         "maatwebsite/excel": "^3.1.46",
+        "mongodb/laravel-mongodb": "^5.1",
         "mpdf/mpdf": "^8.2",
         "openai-php/laravel": "^0.7.8",
         "paypal/paypal-checkout-sdk": "1.0.1",
@@ -93,7 +94,8 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\Company\\": "packages/Webkul/Company/src"
         }
     },
     "autoload-dev": {
