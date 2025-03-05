@@ -23,6 +23,7 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
+        
         $companies = $this->companyRepository->getListCompany($request->all());
         return view('company::admin.index')->with('companies', $companies);
     }
