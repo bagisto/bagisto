@@ -849,7 +849,6 @@ export function generateLocation() {
         "Columbus",
         "Fort Worth",
     ];
+
     return location[Math.floor(Math.random() * location.length)];
 }
-
-
