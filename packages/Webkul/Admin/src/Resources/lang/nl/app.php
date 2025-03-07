@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Aanmaakdatum',
+                    'from'         => 'Van',
+                    'id'           => 'ID',
+                    'order-id'     => 'Bestelnummer',
+                    'qty'          => 'Aantal',
+                    'to'           => 'Tot',
+                    'view'         => 'Bekijken',
+                ],
+
+                'title'    => 'Boekingen',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Boekingsdatum',
+                'booking-details'  => 'Boekingsdetails',
+                'canceled'         => 'Geannuleerd',
+                'closed'           => 'Gesloten',
+                'done'             => 'Voltooid',
+                'order-id'         => 'Bestelnummer',
+                'pending'          => 'In afwachting',
+                'price'            => 'Prijs',
+                'status'           => 'Status',
+                'time-slot'        => 'Tijdslot:',
+                'view-details'     => 'Details bekijken',
+            ],
+
+            'title' => 'Boekingsproducten',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,181 @@ return [
                                     'title' => 'Selecteer',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Beschikbaar Vanaf',
+                        'available-to'   => 'Beschikbaar Tot',
+                        'location'       => 'Locatie',
+                        'qty'            => 'Aantal',
+                        'title'          => 'Boekingstype',
+
+                        'available-every-week' => [
+                            'no'    => 'Nee',
+                            'title' => 'Elke Week Beschikbaar',
+                            'yes'   => 'Ja',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'Pauzeduur tussen Tijden (Minuten)',
+                            'slot-duration'          => 'Tijdsduur (Minuten)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nee',
+                                'title' => 'Zelfde Tijd Voor Alle Dagen',
+                                'yes'   => 'Ja',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Toevoegen',
+                            'break-duration'   => 'Pauzeduur tussen Tijden (Minuten)',
+                            'close'            => 'Sluiten',
+                            'description'      => 'Boekingsinformatie',
+                            'description-info' => 'De tijdsduur wordt aangemaakt en weergegeven volgens de slots. Deze zal uniek zijn voor alle slots en zichtbaar zijn in de etalage.',
+                            'edit'             => 'Bewerken',
+                            'many'             => 'Meerdere Boekingen Voor Eén Dag',
+                            'one'              => 'Eén Boeking Voor Meerdere Dagen',
+                            'open'             => 'Open',
+                            'slot-add'         => 'Tijden Toevoegen',
+                            'slot-duration'    => 'Tijdsduur (Minuten)',
+                            'slot-title'       => 'Tijden Tijdsduur',
+                            'title'            => 'Standaard',
+                            'unavailable'      => 'Niet Beschikbaar',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Tijden Toevoegen',
+                                    'close'      => 'Sluiten',
+                                    'day'        => 'Dag',
+                                    'edit-title' => 'Tijden Bewerken',
+                                    'friday'     => 'Vrijdag',
+                                    'from'       => 'Van',
+                                    'from-day'   => 'Van Dag',
+                                    'from-time'  => 'Van Tijd',
+                                    'monday'     => 'Maandag',
+                                    'open'       => 'Open',
+                                    'saturday'   => 'Zaterdag',
+                                    'save'       => 'Opslaan',
+                                    'select'     => 'Selecteren',
+                                    'status'     => 'Status',
+                                    'sunday'     => 'Zondag',
+                                    'thursday'   => 'Donderdag',
+                                    'to'         => 'Tot',
+                                    'to-day'     => 'Tot Dag',
+                                    'to-time'    => 'Tot Tijd',
+                                    'tuesday'    => 'Dinsdag',
+                                    'wednesday'  => 'Woensdag',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Tickets Toevoegen',
+                            'delete'             => 'Verwijderen',
+                            'description'        => 'Beschrijving',
+                            'description-info'   => 'Er zijn geen tickets beschikbaar.',
+                            'edit'               => 'Bewerken',
+                            'name'               => 'Naam',
+                            'price'              => 'Prijs',
+                            'qty'                => 'Aantal',
+                            'special-price'      => 'Speciale Prijs',
+                            'special-price-from' => 'Speciale Prijs Vanaf',
+                            'special-price-to'   => 'Speciale Prijs Tot',
+                            'title'              => 'Tickets',
+                            'valid-from'         => 'Geldig Vanaf',
+                            'valid-until'        => 'Geldig Tot',
+
+                            'modal'              => [
+                                'edit' => 'Tickets Bewerken',
+                                'save' => 'Opslaan',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Tickets Toevoegen',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Tijden Toevoegen',
+                                'description' => 'Beschikbare Tijden met Tijdsduur.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'Dagelijks',
+                            'daily-hourly' => 'Beide (Dagelijks en Uurlijks)',
+                            'daily-price'  => 'Dagelijkse Prijs',
+                            'hourly'       => 'Uurlijks',
+                            'hourly-price' => 'Uurprijs',
+                            'title'        => 'Verhuurtype',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nee',
+                                'title' => 'Zelfde Tijd Voor Alle Dagen',
+                                'yes'   => 'Ja',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Tijden Toevoegen',
+                            'description-info' => 'De tijdsduur wordt aangemaakt en weergegeven volgens de slots. Deze zal uniek zijn voor alle slots en zichtbaar zijn in de etalage.',
+                            'save'             => 'Opslaan',
+                            'title'            => 'Tijden Tijdsduur',
+                            'unavailable'      => 'Niet Beschikbaar',
+
+                            'action'           => [
+                                'add' => 'Toevoegen',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'Vrijdag',
+                                    'from'       => 'Van',
+                                    'monday'     => 'Maandag',
+                                    'saturday'   => 'Zaterdag',
+                                    'sunday'     => 'Zondag',
+                                    'thursday'   => 'Donderdag',
+                                    'to'         => 'Tot',
+                                    'tuesday'    => 'Dinsdag',
+                                    'wednesday'  => 'Woensdag',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Pauzeduur tussen Tijden (Minuten)',
+                            'guest-capacity'            => 'Gastcapaciteit',
+                            'guest-limit'               => 'Gastlimiet Per Tafel',
+                            'prevent-scheduling-before' => 'Voorkom Planning Voor',
+
+                            'slot-duration'             => 'Tijdsduur (Minuten)',
+
+                            'charged-per'               => [
+                                'guest'  => 'Gast',
+                                'table'  => 'Tafel',
+                                'title'  => 'In rekening gebracht per',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Nee',
+                                'title' => 'Zelfde Tijd Voor Alle Dagen',
+                                'yes'   => 'Ja',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Afspraak Boeking',
+                            'default'     => 'Standaard Boeking',
+                            'event'       => 'Evenement Boeking',
+                            'many'        => 'Veel',
+                            'one'         => 'Eén',
+                            'rental'      => 'Verhuur Boeking',
+                            'table'       => 'Tafel Boeking',
+                            'title'       => 'Type',
                         ],
                     ],
 
