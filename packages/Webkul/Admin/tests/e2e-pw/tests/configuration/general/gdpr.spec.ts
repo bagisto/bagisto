@@ -157,7 +157,7 @@ test.describe('gdpr configuration', () => {
             /**
              * Disabling GDPR.
              */
-            await disableGDPR(adminPage);
+            await disableGDPR(adminPage);   
 
             /**
              * Customer login.
@@ -491,7 +491,7 @@ test.describe('gdpr configuration', () => {
         await adminPage.locator('#measurements').nth(1).click();
         await adminPage.locator('#targeting_advertising').nth(1).click();
         await adminPage.getByRole('button', { name: 'Save and Continue' }).click();
-        await expect(adminPage).toHaveURL('http://192.168.15.192/master-gdpr/public/');
+        await expect(adminPage).toHaveURL('');
 
     });
 });
