@@ -221,6 +221,7 @@ return [
                 'sin'   => 'Cingalés',
                 'tr'    => 'Turco',
                 'uk'    => 'Ucraniano',
+                'vi'    => 'Vietnamita',
                 'zh_CN' => 'Chino',
             ],
         ],

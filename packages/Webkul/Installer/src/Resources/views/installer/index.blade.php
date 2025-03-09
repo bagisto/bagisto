@@ -57,6 +57,7 @@
             'sin'   => 'sinhala',
             'tr'    => 'turkish',
             'uk'    => 'ukrainian',
+            'vi'    => 'vietnamese',
             'zh_CN' => 'chinese',
         ];
 
