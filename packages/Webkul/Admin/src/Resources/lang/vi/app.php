@@ -3211,10 +3211,10 @@ return [
     'reporting' => [
         'sales' => [
             'index' => [
-                'abandoned-carts'               => 'Giỏ hàng bị bỏ rơi',
-                'abandoned-products'            => 'Sản phẩm bị bỏ rơi',
-                'abandoned-rate'                => 'Tỷ lệ bỏ rơi',
-                'abandoned-revenue'             => 'Doanh thu bị bỏ rơi',
+                'abandoned-carts'               => 'Giỏ hàng chưa hoàn tất',
+                'abandoned-products'            => 'Sản phẩm bị chưa hoàn tất',
+                'abandoned-rate'                => 'Tỷ lệ chưa hoàn tất',
+                'abandoned-revenue'             => 'Doanh thu bị chưa hoàn tất',
                 'added-to-cart-info'            => 'Chỉ :progress khách truy cập đã thêm sản phẩm vào giỏ',
                 'added-to-cart'                 => 'Đã thêm vào giỏ',
                 'all-channels'                  => 'Tất cả kênh',

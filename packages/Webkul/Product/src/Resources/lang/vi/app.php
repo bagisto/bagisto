@@ -26,12 +26,12 @@ return [
 
     'sort-by'  => [
         'options' => [
-            'cheapest-first'  => 'Rẻ nhất trước',
-            'expensive-first' => 'Đắt nhất trước',
+            'cheapest-first'  => 'Giá thấp - cao',
+            'expensive-first' => 'Giá cao - thấp',
             'from-a-z'        => 'Từ A-Z',
             'from-z-a'        => 'Từ Z-A',
-            'latest-first'    => 'Mới nhất trước',
-            'oldest-first'    => 'Cũ nhất trước',
+            'latest-first'    => 'Mới nhất',
+            'oldest-first'    => 'Cũ nhất',
         ],
     ],
 
