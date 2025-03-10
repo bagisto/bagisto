@@ -130,13 +130,13 @@
                                 <!-- Columns -->
                                 <template v-for="column in available.columns">
                                     <p
-                                        :class="!available.actions.length ? 'last:text-center' : ''"
+                                        class="break-words"
                                         v-html="record[column.index]"
                                         v-if="column.visibility"
                                     >
                                     </p>
                                 </template>
-
+                                
                                 <!-- Actions -->
                                 <p v-if="available.actions.length">
                                     <span
