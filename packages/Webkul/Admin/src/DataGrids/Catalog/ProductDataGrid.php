@@ -46,6 +46,14 @@ class ProductDataGrid extends DataGrid
                 $leftJoin->on('pc.category_id', '=', 'ct.category_id')
                     ->where('ct.locale', app()->getLocale());
             })
+            ->leftJoin('booking_products', function ($join) {
+                $join->on('product_flat.product_id', '=', 'booking_products.product_id')
+                    ->where('product_flat.type', 'booking');
+            })
+            ->leftJoin('booking_product_event_tickets', function ($join) {
+                $join->on('booking_products.id', '=', 'booking_product_event_tickets.booking_product_id')
+                    ->where('booking_products.type', 'event');
+            })
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
@@ -61,9 +69,16 @@ class ProductDataGrid extends DataGrid
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
+                DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'),
+                DB::raw('IF(
+                    product_flat.type = "booking", 
+                    IF(booking_products.type = "event", 
+                        SUM(booking_product_event_tickets.qty), 
+                        booking_products.qty
+                    ), 
+                    SUM(DISTINCT product_inventories.qty)
+                ) as quantity')
             )
-            ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
-            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
             ->where('product_flat.locale', app()->getLocale())
             ->groupBy('product_flat.product_id');
 

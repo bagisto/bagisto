@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'バンドル',
+        'booking'      => '予約',
         'configurable' => '設定可能',
         'downloadable' => 'ダウンロード可能',
         'grouped'      => 'グループ化',
