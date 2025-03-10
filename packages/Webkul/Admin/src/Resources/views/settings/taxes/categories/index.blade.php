@@ -245,7 +245,7 @@
                             <x-admin::button
                                 button-type="submit"
                                 class="primary-button"
-                                :title="trans('admin::app.settings.themes.create.save-btn')"
+                                :title="trans('admin::app.settings.taxes.categories.index.create.save-btn')"
                                 ::loading="isLoading"
                                 ::disabled="isLoading"
                             />
