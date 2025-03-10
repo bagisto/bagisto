@@ -1651,6 +1651,7 @@ return [
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
+                'default'       => 'CLIENT_SECRET',
             ], [
                 'name'          => 'accepted_currencies',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
@@ -1660,6 +1661,7 @@ return [
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
+                'default'       => 'USD',
             ], [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
