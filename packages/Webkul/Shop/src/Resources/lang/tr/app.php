@@ -377,17 +377,8 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Tamamlandı',
-                'date'                        => 'Tarih',
-                'declined'                    => 'Reddedildi',
-                'id'                          => 'Id',
-                'message'                     => 'Mesaj',
-                'pending'                     => 'Beklemede',
-                'processing'                  => 'İşleniyor',
-                'status'                      => 'Durum',
                 'success-verify'              => 'Başarılı! Doğrulama e-postası gönderildi.',
-                'success-verify-email-unsent' => 'Başarılı! Doğrulama e-postası gönderilemedi.',
-                'type'                        => 'Tür',
+                'success-verify-email-unsent' => 'Başarılı! Doğrulama e-postası gönderilmedi.',
                 'unable-to-sent'              => 'E-posta gönderilemedi.',
 
                 'index'   => [
@@ -402,11 +393,25 @@ return [
                         'title'   => 'Yeni Talep Oluştur',
 
                         'type'    => [
-                            'choose' => 'Seç',
+                            'choose' => 'Seçiniz',
                             'delete' => 'Sil',
                             'title'  => 'Tür',
                             'update' => 'Güncelle',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Tamamlandı',
+                        'date'       => 'Tarih',
+                        'declined'   => 'Reddedildi',
+                        'id'         => 'ID',
+                        'message'    => 'Mesaj',
+                        'pending'    => 'Beklemede',
+                        'processing' => 'İşleniyor',
+                        'status'     => 'Durum',
+                        'type'       => 'Tür',
+                        'update'     => 'Güncelle',
+                        'delete'     => 'Sil',
                     ],
                 ],
 
@@ -418,7 +423,7 @@ return [
                         'email'        => 'E-posta',
                         'first-name'   => 'Ad',
                         'gender'       => 'Cinsiyet',
-                        'last-name'    => 'Soyadı',
+                        'last-name'    => 'Soyad',
                         'phone'        => 'Telefon',
                         'title'        => 'Hesap Bilgileri',
                     ],
@@ -431,19 +436,19 @@ return [
                         'company'    => 'Şirket',
                         'country'    => 'Ülke',
                         'first-name' => 'Ad',
-                        'last-name'  => 'Soyadı',
+                        'last-name'  => 'Soyad',
                         'phone'      => 'Telefon',
                         'postcode'   => 'Posta Kodu',
                         'state'      => 'Eyalet',
                         'title'      => 'Adres Bilgileri',
-                        'vat-id'     => 'KDV Numarası',
+                        'vat-id'     => 'KDV Kimlik No',
                     ],
 
                     'order-info' => [
                         'amount'       => 'Tutar',
                         'order-id'     => 'Sipariş ID',
                         'product-name' => 'Ürün Adı',
-                        'qty'          => 'Miktar',
+                        'qty'          => 'Adet',
                         'shipping'     => 'Kargo',
                         'sku'          => 'SKU',
                         'status'       => 'Durum',

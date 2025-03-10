@@ -376,18 +376,9 @@ return [
                 'title'              => 'Liste de souhaits',
             ],
 
-            'rgpd' => [
-                'completed'                   => 'Terminé',
-                'date'                        => 'Date',
-                'declined'                    => 'Refusé',
-                'id'                          => 'Id',
-                'message'                     => 'Message',
-                'pending'                     => 'En attente',
-                'processing'                  => 'En cours de traitement',
-                'status'                      => 'Statut',
+            'gdpr' => [
                 'success-verify'              => 'Succès ! L\'e-mail de vérification a été envoyé.',
                 'success-verify-email-unsent' => 'Succès ! L\'e-mail de vérification n\'a pas été envoyé.',
-                'type'                        => 'Type',
                 'unable-to-sent'              => 'Impossible d\'envoyer l\'e-mail.',
 
                 'index'   => [
@@ -408,10 +399,24 @@ return [
                             'update' => 'Mettre à jour',
                         ],
                     ],
+
+                    'datagrid' => [
+                        'completed'  => 'Terminé',
+                        'date'       => 'Date',
+                        'declined'   => 'Refusé',
+                        'id'         => 'ID',
+                        'message'    => 'Message',
+                        'pending'    => 'En attente',
+                        'processing' => 'En cours',
+                        'status'     => 'Statut',
+                        'type'       => 'Type',
+                        'update'     => 'Mettre à jour',
+                        'delete'     => 'Supprimer',
+                    ],
                 ],
 
                 'pdf' => [
-                    'title' => 'Vue de la boutique par défaut',
+                    'title' => 'Vue par défaut du magasin',
 
                     'account-info' => [
                         'dob'          => 'Date de naissance',
@@ -420,7 +425,7 @@ return [
                         'gender'       => 'Genre',
                         'last-name'    => 'Nom de famille',
                         'phone'        => 'Téléphone',
-                        'title'        => 'Informations sur le compte',
+                        'title'        => 'Informations du compte',
                     ],
 
                     'address-info' => [
@@ -435,8 +440,8 @@ return [
                         'phone'      => 'Téléphone',
                         'postcode'   => 'Code postal',
                         'state'      => 'État',
-                        'title'      => 'Informations sur l\'adresse',
-                        'vat-id'     => 'Numéro de TVA',
+                        'title'      => 'Informations de l\'adresse',
+                        'vat-id'     => 'ID TVA',
                     ],
 
                     'order-info' => [
@@ -444,10 +449,10 @@ return [
                         'order-id'     => 'ID de commande',
                         'product-name' => 'Nom du produit',
                         'qty'          => 'Quantité',
-                        'shipping'     => 'Expédition',
+                        'shipping'     => 'Livraison',
                         'sku'          => 'SKU',
                         'status'       => 'Statut',
-                        'title'        => 'Informations sur la commande',
+                        'title'        => 'Informations de commande',
                         'type'         => 'Type',
                     ],
                 ],

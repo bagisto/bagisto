@@ -377,29 +377,20 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Voltooid',
-                'date'                        => 'Datum',
-                'declined'                    => 'Afgewezen',
-                'id'                          => 'Id',
-                'message'                     => 'Bericht',
-                'pending'                     => 'In afwachting',
-                'processing'                  => 'Verwerken',
-                'status'                      => 'Status',
                 'success-verify'              => 'Succes! Verificatie-e-mail is verzonden.',
                 'success-verify-email-unsent' => 'Succes! Verificatie-e-mail is niet verzonden.',
-                'type'                        => 'Type',
-                'unable-to-sent'              => 'Kan e-mail niet verzenden.',
+                'unable-to-sent'              => 'E-mail kon niet worden verzonden.',
 
                 'index'   => [
-                    'create-btn' => 'Verzoek Aanmaken',
+                    'create-btn' => 'Verzoek aanmaken',
                     'html'       => 'HTML',
                     'pdf'        => 'PDF',
-                    'title'      => 'GDPR Gegevensverzoeken',
+                    'title'      => 'GDPR-gegevensverzoeken',
 
                     'modal' => [
                         'message' => 'Bericht',
                         'save'    => 'Opslaan',
-                        'title'   => 'Nieuw Verzoek Aanmaken',
+                        'title'   => 'Nieuw verzoek aanmaken',
 
                         'type'    => [
                             'choose' => 'Kiezen',
@@ -407,6 +398,20 @@ return [
                             'title'  => 'Type',
                             'update' => 'Bijwerken',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Voltooid',
+                        'date'       => 'Datum',
+                        'declined'   => 'Afgewezen',
+                        'id'         => 'ID',
+                        'message'    => 'Bericht',
+                        'pending'    => 'In afwachting',
+                        'processing' => 'Verwerken',
+                        'status'     => 'Status',
+                        'type'       => 'Type',
+                        'update'     => 'Bijwerken',
+                        'delete'     => 'Verwijderen',
                     ],
                 ],
 
@@ -434,18 +439,18 @@ return [
                         'last-name'  => 'Achternaam',
                         'phone'      => 'Telefoon',
                         'postcode'   => 'Postcode',
-                        'state'      => 'Provincie',
-                        'title'      => 'Adresinformatie',
-                        'vat-id'     => 'BTW-nummer',
+                        'state'      => 'Staat',
+                        'title'      => 'Adresgegevens',
+                        'vat-id'     => 'BTW-ID',
                     ],
 
                     'order-info' => [
                         'amount'       => 'Bedrag',
                         'order-id'     => 'Bestel-ID',
                         'product-name' => 'Productnaam',
-                        'qty'          => 'Hoeveelheid',
+                        'qty'          => 'Aantal',
                         'shipping'     => 'Verzending',
-                        'sku'          => 'Artikelnummer',
+                        'sku'          => 'SKU',
                         'status'       => 'Status',
                         'title'        => 'Bestelinformatie',
                         'type'         => 'Type',

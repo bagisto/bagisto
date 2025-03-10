@@ -377,18 +377,9 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => '完了',
-                'date'                        => '日付',
-                'declined'                    => '拒否されました',
-                'id'                          => 'ID',
-                'message'                     => 'メッセージ',
-                'pending'                     => '保留中',
-                'processing'                  => '処理中',
-                'status'                      => 'ステータス',
                 'success-verify'              => '成功！確認メールが送信されました。',
-                'success-verify-email-unsent' => '成功！確認メールが送信されませんでした。',
-                'type'                        => 'タイプ',
-                'unable-to-sent'              => 'メールを送信できませんでした。',
+                'success-verify-email-unsent' => '成功！確認メールは送信されませんでした。',
+                'unable-to-sent'              => 'メールを送信できません。',
 
                 'index'   => [
                     'create-btn' => 'リクエストを作成',
@@ -399,7 +390,7 @@ return [
                     'modal' => [
                         'message' => 'メッセージ',
                         'save'    => '保存',
-                        'title'   => '新しいリクエストを作成',
+                        'title'   => '新規リクエスト作成',
 
                         'type'    => [
                             'choose' => '選択',
@@ -407,6 +398,20 @@ return [
                             'title'  => 'タイプ',
                             'update' => '更新',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => '完了',
+                        'date'       => '日付',
+                        'declined'   => '拒否',
+                        'id'         => 'ID',
+                        'message'    => 'メッセージ',
+                        'pending'    => '保留中',
+                        'processing' => '処理中',
+                        'status'     => 'ステータス',
+                        'type'       => 'タイプ',
+                        'update'     => '更新',
+                        'delete'     => '削除',
                     ],
                 ],
 
@@ -425,18 +430,18 @@ return [
 
                     'address-info' => [
                         'address'    => '住所',
-                        'address1'   => '住所1',
-                        'address2'   => '住所2',
-                        'city'       => '市区町村',
+                        'address1'   => '住所 1',
+                        'address2'   => '住所 2',
+                        'city'       => '市',
                         'company'    => '会社',
                         'country'    => '国',
                         'first-name' => '名',
                         'last-name'  => '姓',
                         'phone'      => '電話',
                         'postcode'   => '郵便番号',
-                        'state'      => '都道府県',
+                        'state'      => '州',
                         'title'      => '住所情報',
-                        'vat-id'     => 'VAT番号',
+                        'vat-id'     => 'VAT ID',
                     ],
 
                     'order-info' => [
