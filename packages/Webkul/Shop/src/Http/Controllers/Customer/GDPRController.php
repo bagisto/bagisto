@@ -29,6 +29,8 @@ class GDPRController extends Controller
      */
     public function index()
     {
+        abort_if(! core()->getConfigData('general.gdpr.settings.enabled'), 404);
+
         if (request()->ajax()) {
             return datagrid(GDPRRequestsDatagrid::class)->process();
         }
