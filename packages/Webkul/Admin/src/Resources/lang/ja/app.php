@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'クッキーメッセージ設定',
-                    'info'         => 'クッキーメッセージ設定',
-                    'enable'       => 'クッキー通知を有効にする',
-                    'position'     => 'クッキーブロック表示位置',
                     'bottom-left'  => '左下',
                     'bottom-right' => '右下',
-                    'identifier'   => '静的ブロック識別子',
+                    'center'       => '中央',
                     'description'  => '説明',
+                    'enable'       => 'クッキーの通知を有効にする',
+                    'identifier'   => '静的ブロック識別子',
+                    'info'         => 'クッキーメッセージ設定',
+                    'position'     => 'クッキーブロックの表示位置',
+                    'title'        => 'クッキーメッセージ設定',
+                    'top-left'     => '左上',
+                    'top-right'    => '右上',
                 ],
 
                 'cookie-consent' => [

@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'Configurações de Mensagem de Cookie',
-                    'info'         => 'Configurações de Mensagem de Cookie',
-                    'enable'       => 'Habilitar Aviso de Cookie',
-                    'position'     => 'Posição de Exibição do Bloco de Cookie',
-                    'bottom-left'  => 'Inferior Esquerdo',
-                    'bottom-right' => 'Inferior Direito',
-                    'identifier'   => 'Identificador do Bloco Estático',
-                    'description'  => 'Descrição',
+                    'bottom-left'  => 'inferior esquerdo',
+                    'bottom-right' => 'inferior direito',
+                    'center'       => 'centro',
+                    'description'  => 'descrição',
+                    'enable'       => 'ativar aviso de cookies',
+                    'identifier'   => 'identificador de bloco estático',
+                    'info'         => 'configurações da mensagem de cookies',
+                    'position'     => 'posição de exibição do bloco de cookies',
+                    'title'        => 'configurações da mensagem de cookies',
+                    'top-left'     => 'superior esquerdo',
+                    'top-right'    => 'superior direito',
                 ],
 
                 'cookie-consent' => [
