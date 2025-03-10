@@ -99,4 +99,3 @@ jobs:
           name: test-results-${{ github.run_id }}-${{ github.run_number }}
           path: packages/Webkul/Admin/tests/e2e-pw/test-results
           retention-days: 1
-          overwrite: true
