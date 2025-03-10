@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'Cookie 消息设置',
-                    'info'         => 'Cookie 消息设置',
-                    'enable'       => '启用 Cookie 通知',
-                    'position'     => 'Cookie 块显示位置',
                     'bottom-left'  => '左下角',
                     'bottom-right' => '右下角',
-                    'identifier'   => '静态块标识符',
+                    'center'       => '中心',
                     'description'  => '描述',
+                    'enable'       => '启用 Cookie 通知',
+                    'identifier'   => '静态块标识符',
+                    'info'         => 'Cookie 消息设置',
+                    'position'     => 'Cookie 块显示位置',
+                    'title'        => 'Cookie 消息设置',
+                    'top-left'     => '左上角',
+                    'top-right'    => '右上角',
                 ],
 
                 'cookie-consent' => [

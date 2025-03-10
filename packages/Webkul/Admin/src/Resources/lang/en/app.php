@@ -3649,14 +3649,17 @@ return [
                     ],
 
                     'cookie' => [
-                        'title'        => 'Cookie Message Settings',
-                        'info'         => 'Cookie Message Settings',
-                        'enable'       => 'Enable Cookie Notice',
-                        'position'     => 'Cookie Block Display Position',
-                        'bottom-left'  => ' Bottom Left',
-                        'bottom-right' => ' Bottom Right',
-                        'identifier'   => 'Static Block Identifier',
+                        'bottom-left'  => 'Bottom Left',
+                        'bottom-right' => 'Bottom Right',
+                        'center'       => 'Center',
                         'description'  => 'Description',
+                        'enable'       => 'Enable Cookie Notice',
+                        'identifier'   => 'Static Block Identifier',
+                        'info'         => 'Cookie Message Settings',
+                        'position'     => 'Cookie Block Display Position',
+                        'title'        => 'Cookie Message Settings',
+                        'top-left'     => 'Top Left',
+                        'top-right'    => 'Top Right',
                     ],
 
                     'cookie-consent' => [
