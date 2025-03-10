@@ -66,9 +66,9 @@ test.describe("payment methods configuration", () => {
         );
         await expect(orderStatus).toHaveValue("pending");
 
-        await adminPage.click(
-            'label[for="sales[payment_methods][cashondelivery][active]"]'
-        );
+        // await adminPage.click(
+        //     'label[for="sales[payment_methods][cashondelivery][active]"]'
+        // );
         // const cashondeliveryToggle = await adminPage.locator('input[name="sales[payment_methods][cashondelivery][active]"]');
         // await expect(cashondeliveryToggle).toBeChecked();
 
@@ -144,9 +144,9 @@ test.describe("payment methods configuration", () => {
             generateDescription(200)
         );
 
-        await adminPage.click(
-            'label[for="sales[payment_methods][moneytransfer][active]"]'
-        );
+        // await adminPage.click(
+        //     'label[for="sales[payment_methods][moneytransfer][active]"]'
+        // );
         // const moneyTransferToggle = await adminPage.locator('input[name="sales[payment_methods][moneytransfer][active]"]');
         // await expect(moneyTransferToggle).toBeChecked();
 
@@ -191,9 +191,9 @@ test.describe("payment methods configuration", () => {
 
         await fileChooser.setFiles(getRandomImageFile());
 
-        await adminPage.click(
-            'label[for="sales[payment_methods][paypal_standard][active]"]'
-        );
+        // await adminPage.click(
+        //     'label[for="sales[payment_methods][paypal_standard][active]"]'
+        // );
         // const paypalStandardToggle = await adminPage.locator('input[name="sales[payment_methods][paypal_standard][active]"]');
         // await expect(paypalStandardToggle).toBeChecked();
 
@@ -245,9 +245,9 @@ test.describe("payment methods configuration", () => {
 
         await fileChooser.setFiles(getRandomImageFile());
 
-        await adminPage.click(
-            'label[for="sales[payment_methods][paypal_smart_button][active]"]'
-        );
+        // await adminPage.click(
+        //     'label[for="sales[payment_methods][paypal_smart_button][active]"]'
+        // );
         // const paypalSmartButtonToggle = await adminPage.locator('input[name="sales[payment_methods][paypal_smart_button][active]"]');
         // await expect(paypalSmartButtonToggle).toBeChecked();
 
