@@ -17,9 +17,8 @@ test.describe('order settings configuration', () => {
      */
     test('should update order number settings', async ({ adminPage }) => {
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_prefix]"]', generateName());
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', generateRandomNumericString(1, 10));
+        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', '5');
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_suffix]"]', generateName());
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_generator]"]', generateRandomNumericString(2));
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
