@@ -44,7 +44,7 @@ return [
         'icon'  => 'icon-heart',
         'sort'  => 6,
     ], [
-        'key'   => 'account.data_request',
+        'key'   => 'account.gdpr_data_request',
         'name'  => 'shop::app.layouts.gdpr-request',
         'route' => 'shop.customers.account.gdpr.index',
         'icon'  => 'icon-gdpr-safe',
