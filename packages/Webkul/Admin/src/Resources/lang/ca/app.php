@@ -3648,14 +3648,17 @@ return [
                     ],
 
                     'cookie' => [
-                        'title'        => 'Configuració del Missatge de Cookies',
-                        'info'         => 'Configuració del Missatge de Cookies',
-                        'enable'       => 'Habilitar Avís de Cookies',
-                        'position'     => 'Posició de Visualització del Bloc de Cookies',
-                        'bottom-left'  => 'Inferior Esquerra',
-                        'bottom-right' => 'Inferior Dreta',
-                        'identifier'   => 'Identificador del Bloc Estàtic',
-                        'description'  => 'Descripció',
+                        'bottom-left'  => 'Bottom Left',
+                        'bottom-right' => 'Bottom Right',
+                        'center'       => 'Center',
+                        'description'  => 'Description',
+                        'enable'       => 'Enable Cookie Notice',
+                        'identifier'   => 'Static Block Identifier',
+                        'info'         => 'Cookie Message Settings',
+                        'position'     => 'Cookie Block Display Position',
+                        'title'        => 'Cookie Message Settings',
+                        'top-left'     => 'Top Left',
+                        'top-right'    => 'Top Right',
                     ],
 
                     'cookie-consent' => [

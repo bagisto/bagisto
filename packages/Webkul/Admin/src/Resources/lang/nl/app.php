@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'Cookie Bericht Instellingen',
-                    'info'         => 'Cookie Bericht Instellingen',
-                    'enable'       => 'Cookie Kennisgeving Inschakelen',
-                    'position'     => 'Cookie Blok Weergavepositie',
-                    'bottom-left'  => 'Linksonder',
-                    'bottom-right' => 'Rechtsonder',
-                    'identifier'   => 'Statisch Blok Identificatie',
-                    'description'  => 'Beschrijving',
+                    'bottom-left'  => 'onder links',
+                    'bottom-right' => 'onder rechts',
+                    'center'       => 'centrum',
+                    'description'  => 'beschrijving',
+                    'enable'       => 'cookie-melding inschakelen',
+                    'identifier'   => 'statische blok-id',
+                    'info'         => 'cookie-berichtinstellingen',
+                    'position'     => 'cookie-blokweergavepositie',
+                    'title'        => 'cookie-berichtinstellingen',
+                    'top-left'     => 'boven links',
+                    'top-right'    => 'boven rechts',
                 ],
 
                 'cookie-consent' => [

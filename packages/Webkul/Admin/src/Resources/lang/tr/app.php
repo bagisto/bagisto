@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'Çerez Mesajı Ayarları',
-                    'info'         => 'Çerez Mesajı Ayarları',
-                    'enable'       => 'Çerez Bildirimini Etkinleştir',
-                    'position'     => 'Çerez Bloğu Görüntüleme Konumu',
-                    'bottom-left'  => 'Sol Alt',
-                    'bottom-right' => 'Sağ Alt',
-                    'identifier'   => 'Statik Blok Tanımlayıcısı',
-                    'description'  => 'Açıklama',
+                    'bottom-left'  => 'altta solda',
+                    'bottom-right' => 'altta sağda',
+                    'center'       => 'merkez',
+                    'description'  => 'açıklama',
+                    'enable'       => 'çerez bildirisini etkinleştir',
+                    'identifier'   => 'statik blok tanımlayıcısı',
+                    'info'         => 'çerez mesaj ayarları',
+                    'position'     => 'çerez bloğu görüntüleme konumu',
+                    'title'        => 'çerez mesaj ayarları',
+                    'top-left'     => 'üstte solda',
+                    'top-right'    => 'üstte sağda',
                 ],
 
                 'cookie-consent' => [

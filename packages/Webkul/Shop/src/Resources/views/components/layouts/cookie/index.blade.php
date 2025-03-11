@@ -1,4 +1,3 @@
-
 {!! view_render_event('bagisto.shop.settings.gdpr.modal.before') !!}
 
 <v-cookie></v-cookie>
@@ -13,17 +12,10 @@
         {!! view_render_event('bagisto.shop.settings.gdpr.modal.cookie.before') !!}
 
             @if (core()->getConfigData('general.gdpr.cookie.enabled'))
-                @if (core()->getConfigData('general.gdpr.cookie.position') == 'bottom_left')
-                    <div 
-                        class="js-cookie-consent fixed bottom-9 z-[999] box-border hidden min-h-5 w-[420px] overflow-hidden rounded bg-black/90 p-7" 
-                        style="opacity: 1; left:25px;"
-                    >
-                @else
-                    <div 
-                        class="js-cookie-consent fixed bottom-9 z-[999] box-border hidden min-h-5 w-[420px] overflow-hidden rounded bg-black/90 p-7" 
-                        style="opacity: 1; right:25px;"
-                    >
-                @endif
+                <div 
+                    class="js-cookie-consent fixed z-[999] mx-4 box-border hidden min-h-5 overflow-hidden rounded bg-black/90 p-7"
+                    :class="getPositionClasses(position)"
+                >
                     <div class="cookieTitle">
                         <span class="mb-1.5 block font-sans text-xl leading-5 text-white">
                             {{ core()->getConfigData('general.gdpr.cookie.static_block_identifier') }}
@@ -44,21 +36,22 @@
                     </div>
 
                     <div class="cookieButton">
-                        <a 
-                            class="mt-2.5 box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
-                            @click="rejectCookie()"
-                            style="width:49%;"
-                        >
-                            @lang('shop::app.components.layouts.cookie.index.reject')
-                        </a>
+                        <div class="mt-2.5 flex gap-2">
+                            <a 
+                                class="box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
+                                @click="createCookie()"
+                            >
+                                @lang('shop::app.components.layouts.cookie.index.accept')
+                            </a>
+                        
+                            <a 
+                                class="box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
+                                @click="rejectCookie()"
+                            >
+                                @lang('shop::app.components.layouts.cookie.index.reject')
+                            </a>
 
-                        <a 
-                            class="mt-2.5 box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
-                            @click="createCookie()"
-                            style="width:49%; margin-left:1%;"
-                        >
-                            @lang('shop::app.components.layouts.cookie.index.accept')
-                        </a>
+                        </div>
 
                         <a 
                             class="mt-2.5 box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
@@ -83,7 +76,8 @@
             data() {
                 return {
                     cookieDomain: '{{ config('session.domain') ?? request()->getHost() }}',
-                    cookieIp: "{{ $_SERVER['REMOTE_ADDR'] }}"
+                    cookieIp: "{{ $_SERVER['REMOTE_ADDR'] }}",
+                    position: "{{ core()->getConfigData('general.gdpr.cookie.position') ?? 'center' }}"
                 };
             },
 
@@ -94,6 +88,20 @@
             },
 
             methods: {
+                getPositionClasses(position) {
+                    const positionClasses = {
+                        'center': 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[420px]',
+                        'top-center': 'top-4 left-1/2 -translate-x-1/2 max-w-[420px]',
+                        'bottom-center': 'bottom-4 left-1/2 -translate-x-1/2 max-w-[420px]',
+                        'bottom-right': 'bottom-4 right-0 sm:max-w-[420px]',
+                        'bottom-left': 'bottom-4 left-0 sm:max-w-[420px]',
+                        'top-right': 'top-4 right-0 sm:max-w-[420px]',
+                        'top-left': 'top-4 left-0 sm:max-w-[420px]',
+                    };
+
+                    return positionClasses[position] || positionClasses['center'];
+                },
+
                 createCookie() {
                     this.consentWithCookies();
 
@@ -143,5 +151,5 @@
                 },
             },
         });
-        </script>
+    </script>
 @endPushOnce

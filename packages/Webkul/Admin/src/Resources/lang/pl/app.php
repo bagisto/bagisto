@@ -3752,14 +3752,17 @@ return [
                 ],
 
                 'cookie' => [
-                    'title'        => 'Ustawienia komunikatu o plikach cookie',
-                    'info'         => 'Ustawienia komunikatu o plikach cookie',
-                    'enable'       => 'Włącz powiadomienie o plikach cookie',
-                    'position'     => 'Pozycja wyświetlania bloku plików cookie',
-                    'bottom-left'  => 'Dół lewo',
-                    'bottom-right' => 'Dół prawo',
-                    'identifier'   => 'Identyfikator bloku statycznego',
-                    'description'  => 'Opis',
+                    'bottom-left'  => 'dół po lewej',
+                    'bottom-right' => 'dół po prawej',
+                    'center'       => 'centrum',
+                    'description'  => 'opis',
+                    'enable'       => 'włącz powiadomienie o ciasteczkach',
+                    'identifier'   => 'identyfikator statycznego bloku',
+                    'info'         => 'ustawienia komunikatu o ciasteczkach',
+                    'position'     => 'pozycja wyświetlania bloku ciasteczek',
+                    'title'        => 'ustawienia komunikatu o ciasteczkach',
+                    'top-left'     => 'góra po lewej',
+                    'top-right'    => 'góra po prawej',
                 ],
 
                 'cookie-consent' => [

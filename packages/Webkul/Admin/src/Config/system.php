@@ -673,15 +673,24 @@ return [
                 'name'          => 'position',
                 'title'         => 'admin::app.configuration.index.general.gdpr.cookie.position',
                 'type'          => 'select',
-                'default'       => 'bottom_left',
+                'default'       => 'bottom-left',
                 'depends'       => 'enabled:true',
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-left',
-                        'value' => 'bottom_left',
+                        'value' => 'bottom-left',
                     ], [
                         'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-right',
-                        'value' => 'bottom_right',
+                        'value' => 'bottom-right',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.top-left',
+                        'value' => 'top-left',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.top-right',
+                        'value' => 'top-right',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.center',
+                        'value' => 'center',
                     ],
                 ],
                 'channel_based' => true,
