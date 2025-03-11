@@ -182,6 +182,5 @@ class GDPRRequestsDatagrid extends DataGrid
                     : '<button class="primary-button rounded-full px-6 py-1.5" disabled>' . trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn') . '</button>';
             },
         ]);
-        
     }
 }

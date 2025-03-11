@@ -33,12 +33,4 @@ class GDPRDataRequest extends Model implements GDPRDataRequestContract
     {
         return $this->belongsTo(CustomerProxy::modelClass());
     }
-
-    /**
-     * Get customer full name.
-     */
-    public function getCustomerFullNameAttribute(): string
-    {
-        return $this->customer_first_name.' '.$this->customer_last_name;
-    }
 }

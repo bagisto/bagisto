@@ -55,9 +55,9 @@ class GDPRController extends Controller
 
         Event::dispatch('customer.gdpr-request.create.before');
 
-        $gdprRequestData = $this->gdprDataRequestRepository->create($params);
+        $gdprRequest = $this->gdprDataRequestRepository->create($params);
 
-        Event::dispatch('customer.gdpr-request.create.after', $gdprRequestData);
+        Event::dispatch('customer.gdpr-request.create.after', $gdprRequest);
 
         session()->flash('success', trans('shop::app.customers.account.gdpr.create-success'));
 

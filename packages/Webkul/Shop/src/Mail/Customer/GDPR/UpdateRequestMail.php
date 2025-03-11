@@ -15,20 +15,20 @@ class UpdateRequestMail extends Mailable
      *
      * @return void
      */
-    public function __construct(public GDPRDataRequest $gdprRequestData) {}
+    public function __construct(public GDPRDataRequest $gdprRequest) {}
 
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
-        $subjectKey = $this->gdprRequestData['type'] === 'update'
+        $subjectKey = $this->gdprRequest->type === 'update'
             ? 'shop::app.emails.customers.gdpr.new-update-request'
             : 'shop::app.emails.customers.gdpr.new-delete-request';
 
         return new Envelope(
             to: [
-                new Address($this->gdprRequestData['email']),
+                new Address($this->gdprRequest->email),
             ],
             subject: trans($subjectKey)
         );

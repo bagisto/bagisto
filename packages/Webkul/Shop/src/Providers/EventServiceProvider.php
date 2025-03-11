@@ -45,7 +45,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'customer.gdpr-request.update.after' => [
-            [GDPR::class, 'afterGdprRequestCreated'],
+            [GDPR::class, 'afterGdprRequestUpdated'],
         ],
 
         /**

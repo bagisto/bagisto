@@ -9,14 +9,14 @@ class GDPR extends Base
     /**
      * Send mail on creating GDPR request
      *
-     * @param  \Webkul\GDPR\Models\GDPRDataRequest  $gdprRequestData
+     * @param  \Webkul\GDPR\Models\GDPRDataRequest  $gdprRequest
      * @return void
      */
-    public function afterGdprRequestCreated($gdprRequestData)
+    public function afterGdprRequestCreated($gdprRequest)
     {
-        if ($gdprRequestData) {
+        if ($gdprRequest) {
             try {
-                Mail::queue(new UpdateRequestMail($gdprRequestData));
+                Mail::queue(new UpdateRequestMail($gdprRequest));
 
                 session()->flash('success', trans('shop::app.customers.account.gdpr.success-verify'));
             } catch (\Exception) {
