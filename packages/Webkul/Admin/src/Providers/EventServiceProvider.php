@@ -9,6 +9,7 @@ use Webkul\Admin\Listeners\Invoice;
 use Webkul\Admin\Listeners\Order;
 use Webkul\Admin\Listeners\Refund;
 use Webkul\Admin\Listeners\Shipment;
+use Webkul\Admin\Listeners\GDPR;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'customer.create.after' => [
             [Customer::class, 'afterCreated'],
+        ],
+
+        'customer.gdpr-request.create.after' => [
+            [GDPR::class, 'afterGdprRequestCreated'],
         ],
 
         'admin.password.update.after' => [
