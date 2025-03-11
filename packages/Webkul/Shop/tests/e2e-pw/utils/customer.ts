@@ -32,6 +32,7 @@ export async function register(page) {
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
 
     const agreementLocator = page.locator('#agreement').nth(1);
+    
     const isVisible = await agreementLocator.isVisible();
 
     if (isVisible) {
