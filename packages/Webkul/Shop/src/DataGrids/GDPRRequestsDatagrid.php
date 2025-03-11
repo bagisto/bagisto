@@ -28,13 +28,24 @@ class GDPRRequestsDatagrid extends DataGrid
     const STATUS_PROCESSING = 'processing';
 
     /**
+     * Request status "revoked".
+     */
+    const STATUS_REVOKED = 'revoked';
+
+    /**
+     * $status Stores the status of the GDPR request.
+     */
+    private static $status = '';
+
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        return DB::table('gdpr_data_request as gdpr')
+        $queryBuilder = DB::table('gdpr_data_request as gdpr')
             ->addSelect(
                 'gdpr.id',
                 'gdpr.status',
@@ -44,6 +55,8 @@ class GDPRRequestsDatagrid extends DataGrid
                 'gdpr.updated_at'
             )
             ->where('gdpr.customer_id', auth()->guard('customer')->user()->id);
+
+        return $queryBuilder;
     }
 
     public function prepareColumns()
@@ -84,6 +97,8 @@ class GDPRRequestsDatagrid extends DataGrid
                 ],
             ],
             'closure'    => function ($row) {
+                self::$status = $row->status;
+                
                 switch ($row->status) {
                     case self::STATUS_COMPLETED:
                         return '<p class="label-active">'.trans('shop::app.customers.account.gdpr.index.datagrid.completed').'</p>';
@@ -96,6 +111,9 @@ class GDPRRequestsDatagrid extends DataGrid
 
                     case self::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('shop::app.customers.account.gdpr.index.datagrid.processing').'</p>';
+                        
+                    case self::STATUS_REVOKED:
+                        return '<span class="label-closed">'.trans('shop::app.customers.account.gdpr.index.datagrid.revoked').'</span>';
                 }
             },
         ]);
@@ -146,5 +164,24 @@ class GDPRRequestsDatagrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
         ]);
+
+        $this->addColumn([
+            'index'      => 'revoke',
+            'label'      => trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn'),
+            'type'       => 'string',
+            'sortable'   => true,
+            'searchable' => false,
+            'filterable' => true,
+            'closure'    => function ($row) {
+                $isPending = self::$status == "pending";
+                
+                $url = route('shop.customers.account.gdpr.revoke', $row->id);
+        
+                return $isPending
+                    ? '<a href="' . $url . '" class="primary-button rounded-full px-6 py-1.5">' . trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn') . '</a>'
+                    : '<button class="primary-button rounded-full px-6 py-1.5" disabled>' . trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn') . '</button>';
+            },
+        ]);
+        
     }
 }

@@ -23,6 +23,7 @@ class GDPRDataRequest extends Model implements GDPRDataRequestContract
         'status',
         'type',
         'message',
+        'revoked_at',
     ];
 
     /**
