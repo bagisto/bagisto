@@ -377,24 +377,15 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'הושלם',
-                'date'                        => 'תאריך',
-                'declined'                    => 'נדחה',
-                'id'                          => 'מזהה',
-                'message'                     => 'הודעה',
-                'pending'                     => 'ממתין',
-                'processing'                  => 'מעבד',
-                'status'                      => 'סטטוס',
                 'success-verify'              => 'הצלחה! אימייל האימות נשלח.',
                 'success-verify-email-unsent' => 'הצלחה! אימייל האימות לא נשלח.',
-                'type'                        => 'סוג',
                 'unable-to-sent'              => 'לא ניתן לשלוח אימייל.',
 
                 'index'   => [
                     'create-btn' => 'צור בקשה',
                     'html'       => 'HTML',
                     'pdf'        => 'PDF',
-                    'title'      => 'בקשות נתוני GDPR',
+                    'title'      => 'בקשות נתונים GDPR',
 
                     'modal' => [
                         'message' => 'הודעה',
@@ -408,6 +399,20 @@ return [
                             'update' => 'עדכן',
                         ],
                     ],
+
+                    'datagrid' => [
+                        'completed'  => 'הושלם',
+                        'date'       => 'תאריך',
+                        'declined'   => 'נדחה',
+                        'id'         => 'מזהה',
+                        'message'    => 'הודעה',
+                        'pending'    => 'ממתין',
+                        'processing' => 'בעיבוד',
+                        'status'     => 'סטטוס',
+                        'type'       => 'סוג',
+                        'update'     => 'עדכן',
+                        'delete'     => 'מחק',
+                    ],
                 ],
 
                 'pdf' => [
@@ -417,10 +422,10 @@ return [
                         'dob'          => 'תאריך לידה',
                         'email'        => 'אימייל',
                         'first-name'   => 'שם פרטי',
-                        'gender'       => 'מין',
+                        'gender'       => 'מגדר',
                         'last-name'    => 'שם משפחה',
                         'phone'        => 'טלפון',
-                        'title'        => 'מידע על החשבון',
+                        'title'        => 'פרטי חשבון',
                     ],
 
                     'address-info' => [
@@ -435,19 +440,19 @@ return [
                         'phone'      => 'טלפון',
                         'postcode'   => 'מיקוד',
                         'state'      => 'מדינה',
-                        'title'      => 'מידע על הכתובת',
-                        'vat-id'     => 'מספר עוסק מורשה',
+                        'title'      => 'פרטי כתובת',
+                        'vat-id'     => 'מספר מע"מ',
                     ],
 
                     'order-info' => [
                         'amount'       => 'סכום',
-                        'order-id'     => 'מספר הזמנה',
+                        'order-id'     => 'מזהה הזמנה',
                         'product-name' => 'שם המוצר',
                         'qty'          => 'כמות',
                         'shipping'     => 'משלוח',
-                        'sku'          => 'קוד SKU',
+                        'sku'          => 'מק"ט',
                         'status'       => 'סטטוס',
-                        'title'        => 'מידע על ההזמנה',
+                        'title'        => 'פרטי הזמנה',
                         'type'         => 'סוג',
                     ],
                 ],

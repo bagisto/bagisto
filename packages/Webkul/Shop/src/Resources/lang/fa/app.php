@@ -377,17 +377,8 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'تکمیل شده',
-                'date'                        => 'تاریخ',
-                'declined'                    => 'رد شده',
-                'id'                          => 'شناسه',
-                'message'                     => 'پیام',
-                'pending'                     => 'در انتظار',
-                'processing'                  => 'در حال پردازش',
-                'status'                      => 'وضعیت',
                 'success-verify'              => 'موفقیت! ایمیل تأیید ارسال شد.',
-                'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشد.',
-                'type'                        => 'نوع',
+                'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشده است.',
                 'unable-to-sent'              => 'امکان ارسال ایمیل وجود ندارد.',
 
                 'index'   => [
@@ -408,10 +399,24 @@ return [
                             'update' => 'به‌روزرسانی',
                         ],
                     ],
+
+                    'datagrid' => [
+                        'completed'  => 'تکمیل شده',
+                        'date'       => 'تاریخ',
+                        'declined'   => 'رد شده',
+                        'id'         => 'شناسه',
+                        'message'    => 'پیام',
+                        'pending'    => 'در انتظار',
+                        'processing' => 'در حال پردازش',
+                        'status'     => 'وضعیت',
+                        'type'       => 'نوع',
+                        'update'     => 'به‌روزرسانی',
+                        'delete'     => 'حذف',
+                    ],
                 ],
 
                 'pdf' => [
-                    'title' => 'نمای پیش‌فرض فروشگاه',
+                    'title' => 'نمای فروشگاه پیش‌فرض',
 
                     'account-info' => [
                         'dob'          => 'تاریخ تولد',
@@ -425,8 +430,8 @@ return [
 
                     'address-info' => [
                         'address'    => 'آدرس',
-                        'address1'   => 'آدرس 1',
-                        'address2'   => 'آدرس 2',
+                        'address1'   => 'آدرس ۱',
+                        'address2'   => 'آدرس ۲',
                         'city'       => 'شهر',
                         'company'    => 'شرکت',
                         'country'    => 'کشور',
@@ -436,7 +441,7 @@ return [
                         'postcode'   => 'کد پستی',
                         'state'      => 'استان',
                         'title'      => 'اطلاعات آدرس',
-                        'vat-id'     => 'شناسه مالیاتی',
+                        'vat-id'     => 'شناسه مالیات بر ارزش افزوده',
                     ],
 
                     'order-info' => [

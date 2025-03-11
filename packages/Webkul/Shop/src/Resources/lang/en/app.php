@@ -377,17 +377,8 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Completed',
-                'date'                        => 'Date',
-                'declined'                    => 'Declined',
-                'id'                          => 'Id',
-                'message'                     => 'Message',
-                'pending'                     => 'Pending',
-                'processing'                  => 'Processing',
-                'status'                      => 'Status',
                 'success-verify'              => 'Success! Verification email has been sent.',
                 'success-verify-email-unsent' => 'Success! Verification email has not been sent.',
-                'type'                        => 'Type',
                 'unable-to-sent'              => 'Unable to sent email.',
 
                 'index'   => [
@@ -407,6 +398,20 @@ return [
                             'title'  => 'Type',
                             'update' => 'Update',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Completed',
+                        'date'       => 'Date',
+                        'declined'   => 'Declined',
+                        'id'         => 'ID',
+                        'message'    => 'Message',
+                        'pending'    => 'Pending',
+                        'processing' => 'Processing',
+                        'status'     => 'Status',
+                        'type'       => 'Type',
+                        'update'     => 'Update',
+                        'delete'     => 'Delete',
                     ],
                 ],
 

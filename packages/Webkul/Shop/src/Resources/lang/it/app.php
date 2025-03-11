@@ -377,18 +377,9 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Completato',
-                'date'                        => 'Data',
-                'declined'                    => 'Rifiutato',
-                'id'                          => 'Id',
-                'message'                     => 'Messaggio',
-                'pending'                     => 'In sospeso',
-                'processing'                  => 'In elaborazione',
-                'status'                      => 'Stato',
-                'success-verify'              => 'Successo! Email di verifica inviata.',
-                'success-verify-email-unsent' => 'Successo! Email di verifica non inviata.',
-                'type'                        => 'Tipo',
-                'unable-to-sent'              => 'Impossibile inviare email.',
+                'success-verify'              => 'Successo! L\'email di verifica è stata inviata.',
+                'success-verify-email-unsent' => 'Successo! L\'email di verifica non è stata inviata.',
+                'unable-to-sent'              => 'Impossibile inviare l\'email.',
 
                 'index'   => [
                     'create-btn' => 'Crea richiesta',
@@ -407,6 +398,20 @@ return [
                             'title'  => 'Tipo',
                             'update' => 'Aggiorna',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Completato',
+                        'date'       => 'Data',
+                        'declined'   => 'Rifiutato',
+                        'id'         => 'ID',
+                        'message'    => 'Messaggio',
+                        'pending'    => 'In attesa',
+                        'processing' => 'Elaborazione',
+                        'status'     => 'Stato',
+                        'type'       => 'Tipo',
+                        'update'     => 'Aggiorna',
+                        'delete'     => 'Elimina',
                     ],
                 ],
 
@@ -435,7 +440,7 @@ return [
                         'phone'      => 'Telefono',
                         'postcode'   => 'CAP',
                         'state'      => 'Stato',
-                        'title'      => 'Informazioni indirizzo',
+                        'title'      => 'Informazioni sull\'indirizzo',
                         'vat-id'     => 'Partita IVA',
                     ],
 
@@ -447,7 +452,7 @@ return [
                         'shipping'     => 'Spedizione',
                         'sku'          => 'SKU',
                         'status'       => 'Stato',
-                        'title'        => 'Informazioni ordine',
+                        'title'        => 'Informazioni sull\'ordine',
                         'type'         => 'Tipo',
                     ],
                 ],

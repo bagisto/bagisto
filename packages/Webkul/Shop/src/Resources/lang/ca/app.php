@@ -377,41 +377,46 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Completat',
-                'date'                        => 'Data',
-                'declined'                    => 'Rebutjat',
-                'id'                          => 'Id',
-                'message'                     => 'Missatge',
-                'pending'                     => 'Pendent',
-                'processing'                  => 'Processant',
-                'status'                      => 'Estat',
                 'success-verify'              => 'Èxit! S\'ha enviat el correu electrònic de verificació.',
-                'success-verify-email-unsent' => 'Èxit! No s\'ha enviat el correu electrònic de verificació.',
-                'type'                        => 'Tipus',
+                'success-verify-email-unsent' => 'Èxit! El correu electrònic de verificació no s\'ha enviat.',
                 'unable-to-sent'              => 'No s\'ha pogut enviar el correu electrònic.',
 
                 'index'   => [
-                    'create-btn' => 'Crear Sol·licitud',
+                    'create-btn' => 'Crea sol·licitud',
                     'html'       => 'HTML',
                     'pdf'        => 'PDF',
-                    'title'      => 'Sol·licituds de Dades GDPR',
+                    'title'      => 'Sol·licituds de dades GDPR',
 
                     'modal' => [
                         'message' => 'Missatge',
-                        'save'    => 'Desar',
-                        'title'   => 'Crear Nova Sol·licitud',
+                        'save'    => 'Desa',
+                        'title'   => 'Crea una nova sol·licitud',
 
                         'type'    => [
                             'choose' => 'Tria',
-                            'delete' => 'Eliminar',
+                            'delete' => 'Elimina',
                             'title'  => 'Tipus',
-                            'update' => 'Actualitzar',
+                            'update' => 'Actualitza',
                         ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Completat',
+                        'date'       => 'Data',
+                        'declined'   => 'Denegat',
+                        'id'         => 'ID',
+                        'message'    => 'Missatge',
+                        'pending'    => 'Pendent',
+                        'processing' => 'En processament',
+                        'status'     => 'Estat',
+                        'type'       => 'Tipus',
+                        'update'     => 'Actualitza',
+                        'delete'     => 'Elimina',
                     ],
                 ],
 
                 'pdf' => [
-                    'title' => 'Vista de la botiga per defecte',
+                    'title' => 'Vista per defecte de la botiga',
 
                     'account-info' => [
                         'dob'          => 'Data de naixement',
@@ -435,13 +440,13 @@ return [
                         'phone'      => 'Telèfon',
                         'postcode'   => 'Codi postal',
                         'state'      => 'Estat',
-                        'title'      => 'Informació de l\'adreça',
-                        'vat-id'     => 'ID de l\'IVA',
+                        'title'      => 'Informació d\'adreça',
+                        'vat-id'     => 'ID d\'IVA',
                     ],
 
                     'order-info' => [
-                        'amount'       => 'Quantitat',
-                        'order-id'     => 'ID de la comanda',
+                        'amount'       => 'Import',
+                        'order-id'     => 'ID de comanda',
                         'product-name' => 'Nom del producte',
                         'qty'          => 'Quantitat',
                         'shipping'     => 'Enviament',
