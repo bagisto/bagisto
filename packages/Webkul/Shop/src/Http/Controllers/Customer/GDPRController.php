@@ -27,7 +27,7 @@ class GDPRController extends Controller
             if (! core()->getConfigData('general.gdpr.settings.enabled')) {
                 abort(404);
             }
-    
+
             return $next($request);
         });
     }
