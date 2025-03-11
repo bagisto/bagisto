@@ -22,7 +22,15 @@ class GDPRController extends Controller
         protected GDPRDataRequestRepository $gdprDataRequestRepository,
         protected OrderRepository $orderRepository,
         protected CustomerAddressRepository $customerAddressRepository
-    ) {}
+    ) {
+        $this->middleware(function ($request, $next) {
+            if (! core()->getConfigData('general.gdpr.settings.enabled')) {
+                abort(404);
+            }
+    
+            return $next($request);
+        });
+    }
 
     /**
      * Display a listing of the resource.
