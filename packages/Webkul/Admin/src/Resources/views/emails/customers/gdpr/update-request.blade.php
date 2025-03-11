@@ -1,7 +1,7 @@
 @component('shop::emails.layout')
     <div style="margin-bottom: 34px;">
         <p style="font-weight: bold;font-size: 20px;color: #121A26;line-height: 24px;margin-bottom: 24px">
-            @lang('shop::app.emails.dear', ['customer_name' => $adminUpdateRequest['customer_name']]), 👋
+            @lang('shop::app.emails.dear', ['customer_name' => $gdprRequestData['customer_name']]), 👋
         </p>
     </div>
 
@@ -11,7 +11,7 @@
                 @lang('shop::app.emails.customers.gdpr.update-request.request-status')
             </span>
             
-            {{ $adminUpdateRequest['status'] }}
+            {{ $gdprRequestData['status'] }}
         </spam>
 
         <div style="font-weight: bold;font-size: 16px;color: #242424;">
@@ -19,7 +19,7 @@
                 @lang('shop::app.emails.customers.gdpr.update-request.message')
             </span>
 
-            {{ $adminUpdateRequest['message'] }}
+            {{ $gdprRequestData['message'] }}
         </div>
     </div>
 @endcomponent

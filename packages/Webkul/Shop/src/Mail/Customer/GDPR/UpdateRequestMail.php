@@ -1,11 +1,12 @@
 <?php
 
-namespace Webkul\Shop\Mail\Customer\Gdpr;
+namespace Webkul\Shop\Mail\Customer\GDPR;
 
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Admin\Mail\Mailable;
+use Webkul\GDPR\Contracts\GDPRDataRequest;
 
 class UpdateRequestMail extends Mailable
 {
@@ -14,18 +15,22 @@ class UpdateRequestMail extends Mailable
      *
      * @return void
      */
-    public function __construct(public array $adminUpdateRequest) {}
+    public function __construct(public GDPRDataRequest $gdprRequestData) {}
 
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
+        $subjectKey = $this->gdprRequestData['type'] === 'update'
+            ? 'shop::app.emails.customers.gdpr.new-update-request'
+            : 'shop::app.emails.customers.gdpr.new-delete-request';
+
         return new Envelope(
             to: [
-                new Address($this->adminUpdateRequest['email']),
+                new Address($this->gdprRequestData['email']),
             ],
-            subject: trans('shop::app.emails.customers.gdpr.new-update-request'),
+            subject: trans($subjectKey)
         );
     }
 

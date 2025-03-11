@@ -8,6 +8,7 @@ use Webkul\Shop\Listeners\Invoice;
 use Webkul\Shop\Listeners\Order;
 use Webkul\Shop\Listeners\Refund;
 use Webkul\Shop\Listeners\Shipment;
+use Webkul\Shop\Listeners\GDPR;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,17 @@ class EventServiceProvider extends ServiceProvider
 
         'customer.note.create.after' => [
             [Customer::class, 'afterNoteCreated'],
+        ],
+
+        /**
+         * GDPR related events.
+         */
+        'customer.gdpr-request.create.after' => [
+            [GDPR::class, 'afterGdprRequestCreated'],
+        ],
+
+        'customer.gdpr-request.update.after' => [
+            [GDPR::class, 'afterGdprRequestCreated'],
         ],
 
         /**

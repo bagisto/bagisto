@@ -34,7 +34,7 @@ class UpdateRequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'shop::emails.customers.gdpr.update-request'
+            view: 'admin::emails.customers.gdpr.status-update'
         );
     }
 }
