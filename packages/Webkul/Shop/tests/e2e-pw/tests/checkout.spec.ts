@@ -160,6 +160,7 @@ test.describe('checkout', () => {
             .click();
         await shopPage.getByRole('button', { name: 'Add To Cart' }).click();
         await expect(shopPage.locator('#app')).toContainText('Item Added Successfully');
+        await shopPage.locator('.icon-cancel').first().click();
         await shopPage.getByRole('button', { name: 'Shopping Cart' }).click();
         await shopPage.getByRole('link', { name: 'Continue to Checkout' }).click();
 
@@ -189,12 +190,9 @@ test.describe('checkout', () => {
         await shopPage.getByPlaceholder("City").click();
         await shopPage.getByPlaceholder("City").fill("Demo");
         await shopPage.getByPlaceholder("Zip/Postcode").click();
-        await shopPage.getByPlaceholder("Zip/Postcode").fill("Demo_djsbfuweh");
+        await shopPage.getByPlaceholder("Zip/Postcode").fill("2673854");
         await shopPage.getByPlaceholder("Telephone").click();
         await shopPage.getByPlaceholder("Telephone").fill("9023723564");
-        await shopPage.getByRole("button", { name: "Proceed" }).click();
-        await shopPage.getByPlaceholder("Zip/Postcode").click();
-        await shopPage.getByPlaceholder("Zip/Postcode").fill("2673854");
         await shopPage.getByRole("button", { name: "Proceed" }).click();
 
         await shopPage.waitForSelector("text=Free Shipping");
@@ -207,7 +205,7 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForSelector("text=Thank you for your order!");
+        await shopPage.waitForSelector("text=Thank you for your order!", { timeout: 10000 });
 
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -249,6 +247,7 @@ test.describe('checkout', () => {
             .first()
             .click();
         await expect(shopPage.locator('#app')).toContainText('Item Added Successfully');
+        await shopPage.locator('.icon-cancel').first().click();
         await shopPage.getByRole('button', { name: 'Shopping Cart' }).click();
         await shopPage.getByRole('link', { name: 'Continue to Checkout' }).click();
         await shopPage
@@ -267,7 +266,7 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForSelector("text=Thank you for your order!");
+        await shopPage.waitForSelector("text=Thank you for your order!", { timeout: 10000 });
 
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -322,6 +321,7 @@ test.describe('checkout', () => {
             .first()
             .click();
         await expect(shopPage.locator('#app')).toContainText('Item Added Successfully');
+        await shopPage.locator('.icon-cancel').first().click();
         await shopPage.getByRole('button', { name: 'Shopping Cart' }).click();
         await shopPage.getByRole('link', { name: 'Continue to Checkout' }).click();
         await shopPage
@@ -361,7 +361,7 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForSelector("text=Thank you for your order!");
+        await shopPage.waitForSelector("text=Thank you for your order!", { timeout: 10000 });
 
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -423,6 +423,7 @@ test.describe('checkout', () => {
             .first()
             .click();
         await expect(shopPage.locator('#app')).toContainText('Item Added Successfully');
+        await shopPage.locator('.icon-cancel').first().click();
         await shopPage.getByRole('button', { name: 'Shopping Cart' }).click();
         await shopPage.getByRole('link', { name: 'Continue to Checkout' }).click();
         await shopPage
@@ -491,7 +492,7 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForSelector("text=Thank you for your order!");
+        await shopPage.waitForSelector("text=Thank you for your order!", { timeout: 10000 });
 
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
