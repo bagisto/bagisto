@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Nowe żądanie aktualizacji danych',
 
                 'new-request' => [
+                    'delete-summary' => 'Podsumowanie żądania usunięcia',
                     'message'        => 'Wiadomość : ',
                     'request-status' => 'Status żądania : ',
                     'request-type'   => 'Typ żądania : ',
                     'summary'        => 'Podsumowanie żądania',
+                    'update-summary' => 'Podsumowanie żądania aktualizacji',
                 ],
 
                 'status-update' => [

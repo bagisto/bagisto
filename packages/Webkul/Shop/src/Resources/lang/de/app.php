@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Neue Anfrage zur Aktualisierung von Daten',
 
                 'new-request' => [
+                    'delete-summary' => 'Resumen de la solicitud de eliminación',
                     'message'        => 'Nachricht : ',
                     'request-status' => 'Anfragestatus : ',
                     'request-type'   => 'Anfragetyp : ',
                     'summary'        => 'Zusammenfassung der Anfrage',
+                    'update-summary' => 'Resumen de la solicitud de actualización',
                 ],
 
                 'status-update' => [

@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'データ更新の新規リクエスト',
 
                 'new-request' => [
+                    'delete-summary' => '削除リクエストの概要',
                     'message'        => 'メッセージ : ',
                     'request-status' => 'リクエスト状況 : ',
                     'request-type'   => 'リクエストタイプ : ',
                     'summary'        => 'リクエストの概要',
+                    'update-summary' => '更新リクエストの概要',
                 ],
 
                 'status-update' => [

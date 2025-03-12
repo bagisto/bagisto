@@ -7,7 +7,7 @@
 
     <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
         <div style="font-weight: bold;font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 20px !important;">
-            {{ $gdprRequest->type == 'update' ? __('shop::app.emails.customers.gdpr.new-request.summary') : __('shop::app.emails.customers.gdpr.delete-request.summary') }}
+            {{ $gdprRequest->type == 'update' ? __('shop::app.emails.customers.gdpr.new-request.update-summary') : __('shop::app.emails.customers.gdpr.new-request.delete-summary') }}
         </div>
     </div>
 

@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Nuova richiesta per aggiornare dati',
 
                 'new-request' => [
+                    'delete-summary' => 'Riepilogo della richiesta di eliminazione',
                     'message'        => 'Messaggio : ',
                     'request-status' => 'Stato della richiesta : ',
                     'request-type'   => 'Tipo di richiesta : ',
                     'summary'        => 'Riepilogo della richiesta',
+                    'update-summary' => 'Riepilogo della richiesta di aggiornamento',
                 ],
 
                 'status-update' => [

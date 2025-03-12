@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
 
                 'new-request' => [
+                    'delete-summary' => 'Samenvatting van verwijderingsverzoek',
                     'message'        => 'Bericht : ',
                     'request-status' => 'Aanvraagstatus : ',
                     'request-type'   => 'Aanvraagtype : ',
                     'summary'        => 'Overzicht van de aanvraag',
+                    'update-summary' => 'Samenvatting van updateverzoek',
                 ],
 
                 'status-update' => [

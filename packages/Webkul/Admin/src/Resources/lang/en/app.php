@@ -4760,10 +4760,11 @@ return [
                 'new-update-request' => 'New Request For Data Update',
 
                 'new-request' => [
+                    'delete-summary' => 'Summary of Delete Request',
                     'message'        => 'Message : ',
                     'request-status' => 'Request Status : ',
                     'request-type'   => 'Request Type : ',
-                    'summary'        => 'Summary of Request',
+                    'update-summary' => 'Summary of Update Request',
                 ],
 
                 'status-update' => [

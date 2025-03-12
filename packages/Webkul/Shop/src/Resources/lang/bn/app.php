@@ -1105,10 +1105,12 @@ return [
                 'new-update-request' => 'ডেটা আপডেট করার জন্য নতুন অনুরোধ',
 
                 'new-request' => [
+                    'delete-summary' => 'মুছে ফেলার অনুরোধের সংক্ষিপ্তসার',
                     'message'        => 'বার্তা : ',
                     'request-status' => 'অনুরোধের অবস্থা : ',
                     'request-type'   => 'অনুরোধের ধরন : ',
                     'summary'        => 'অনুরোধের সারাংশ',
+                    'update-summary' => 'আপডেট অনুরোধের সংক্ষিপ্তসার',
                 ],
 
                 'status-update' => [

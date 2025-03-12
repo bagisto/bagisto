@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Nouvelle demande de mise à jour des données',
 
                 'new-request' => [
+                    'delete-summary' => 'Résumé de la demande de suppression',
                     'message'        => 'Message : ',
                     'request-status' => 'Statut de la demande : ',
                     'request-type'   => 'Type de demande : ',
                     'summary'        => 'Résumé de la demande',
+                    'update-summary' => 'Résumé de la demande de mise à jour',
                 ],
 
                 'status-update' => [

@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'בקשה חדשה לעדכון נתונים',
 
                 'new-request' => [
+                    'delete-summary' => 'סיכום בקשת המחיקה',
                     'message'        => 'הודעה : ',
                     'request-status' => 'סטטוס הבקשה : ',
                     'request-type'   => 'סוג הבקשה : ',
                     'summary'        => 'סיכום הבקשה',
+                    'update-summary' => 'סיכום בקשת העדכון',
                 ],
 
                 'status-update' => [

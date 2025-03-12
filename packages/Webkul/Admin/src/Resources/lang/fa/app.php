@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
 
                 'new-request' => [
+                    'delete-summary' => 'خلاصه درخواست حذف',
                     'message'        => 'پیام : ',
                     'request-status' => 'وضعیت درخواست : ',
                     'request-type'   => 'نوع درخواست : ',
                     'summary'        => 'خلاصه درخواست',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
                 ],
 
                 'status-update' => [

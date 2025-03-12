@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'Veri Güncelleme için Yeni Talep',
 
                 'new-request' => [
+                    'delete-summary' => 'Silme isteğinin özeti',
                     'message'        => 'Mesaj : ',
                     'request-status' => 'Talep Durumu : ',
                     'request-type'   => 'Talep Türü : ',
                     'summary'        => 'Talep Özeti',
+                    'update-summary' => 'Güncelleme isteğinin özeti',
                 ],
 
                 'status-update' => [

@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'Нове запит на оновлення даних',
 
                 'new-request' => [
+                    'delete-summary' => 'Резюме запиту на видалення',
                     'message'        => 'Повідомлення : ',
                     'request-status' => 'Статус запиту : ',
                     'request-type'   => 'Тип запиту : ',
                     'summary'        => 'Резюме запиту',
+                    'update-summary' => 'Резюме запиту на оновлення',
                 ],
 
                 'status-update' => [

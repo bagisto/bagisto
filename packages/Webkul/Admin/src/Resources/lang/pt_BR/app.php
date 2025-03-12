@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'Novo pedido para atualização de dados',
 
                 'new-request' => [
+                    'delete-summary' => 'Resumo do pedido de exclusão',
                     'message'        => 'Mensagem : ',
                     'request-status' => 'Status do pedido : ',
                     'request-type'   => 'Tipo de pedido : ',
                     'summary'        => 'Resumo do pedido',
+                    'update-summary' => 'Resumo do pedido de atualização',
                 ],
 
                 'status-update' => [

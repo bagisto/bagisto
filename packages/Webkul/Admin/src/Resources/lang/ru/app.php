@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'Новый запрос на обновление данных',
 
                 'new-request' => [
+                    'delete-summary' => 'Резюме запроса на удаление',
                     'message'        => 'Сообщение : ',
                     'request-status' => 'Статус запроса : ',
                     'request-type'   => 'Тип запроса : ',
                     'summary'        => 'Сводка запроса',
+                    'update-summary' => 'Резюме запроса на обновление',
                 ],
 
                 'status-update' => [

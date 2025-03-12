@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'New Request For Data Update',
 
                 'new-request' => [
+                    'delete-summary' => 'Zusammenfassung der Löschanforderung',
                     'message'        => 'Message : ',
                     'request-status' => 'Request Status : ',
                     'request-type'   => 'Request Type : ',
                     'summary'        => 'Summary of Request',
+                    'update-summary' => 'Zusammenfassung der Aktualisierungsanforderung',
                 ],
 
                 'status-update' => [

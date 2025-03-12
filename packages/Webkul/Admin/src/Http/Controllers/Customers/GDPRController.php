@@ -64,7 +64,7 @@ class GDPRController extends Controller
 
             $gdprRequest = $this->gdprDataRequestRepository->update(request()->all(), $id);
 
-            Event::dispatch('customer.gdpr-request.update.after', $gdprRequest);
+            Event::dispatch('customer.account.gdpr-request.update.after', $gdprRequest);
 
             return response()->json([
                 'message' => trans(key: 'admin::app.customers.gdpr.index.update-success'),

@@ -4760,6 +4760,8 @@ return [
                 'new-update-request' => 'Nuova richiesta per aggiornare dati',
 
                 'new-request' => [
+                    'update-summary' => 'Riepilogo della richiesta di aggiornamento',
+                    'delete-summary' => 'Riepilogo della richiesta di eliminazione',
                     'message'        => 'Messaggio : ',
                     'request-status' => 'Stato della richiesta : ',
                     'request-type'   => 'Tipo di richiesta : ',

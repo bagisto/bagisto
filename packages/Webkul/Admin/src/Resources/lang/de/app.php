@@ -4760,10 +4760,12 @@ return [
                 'new-update-request' => 'Neue Anfrage zur Aktualisierung von Daten',
 
                 'new-request' => [
+                    'delete-summary' => 'Zusammenfassung der Löschanforderung',
                     'message'        => 'Nachricht : ',
                     'request-status' => 'Anfragestatus : ',
                     'request-type'   => 'Anfragetyp : ',
                     'summary'        => 'Zusammenfassung der Anfrage',
+                    'update-summary' => 'Zusammenfassung der Aktualisierungsanforderung',
                 ],
 
                 'status-update' => [

@@ -1104,10 +1104,12 @@ return [
                 'new-update-request' => 'දත්ත යාවත්කාලීන කිරීම සඳහා නව ඉල්ලීම',
 
                 'new-request' => [
+                    'delete-summary' => 'මකාදැමීමේ ඉල්ලීම් සාරාංශය',
                     'message'        => 'පණිවිඩය : ',
                     'request-status' => 'ඉල්ලීම් තත්වය : ',
                     'request-type'   => 'ඉල්ලීම් වර්ගය : ',
                     'summary'        => 'ඉල්ලීම් සාරාංශය',
+                    'update-summary' => 'යාවත්කාලීන ඉල්ලීම් සාරාංශය',
                 ],
 
                 'status-update' => [

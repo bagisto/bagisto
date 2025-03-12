@@ -4759,10 +4759,13 @@ return [
                 'new-delete-request' => '新的数据删除请求',
                 'new-update-request' => '新的数据更新请求',
 
-                    'message'        => '信息 : ',
-                    'request-status' => '请求状态 : ',
-                    'request-type'   => '请求类型 : ',
+                'new-request' => [
+                    'delete-summary' => '删除请求摘要',
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                    'request-type'   => '请求类型：',
                     'summary'        => '请求摘要',
+                    'update-summary' => '更新请求摘要',
                 ],
 
                 'status-update' => [
