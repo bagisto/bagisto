@@ -3,7 +3,7 @@
 namespace Webkul\Shop\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\Customer\GDPR\NewRequestMail;
+use Webkul\Shop\Mail\Customer\GDPR\NewRequestNotification;
 use Webkul\Shop\Mail\Customer\GDPR\StatusUpdateNotification;
 
 class GDPR extends Base
@@ -18,7 +18,7 @@ class GDPR extends Base
     {
         if ($gdprRequest) {
             try {
-                Mail::queue(new NewRequestMail($gdprRequest));
+                Mail::queue(new NewRequestNotification($gdprRequest));
 
                 session()->flash('success', trans('shop::app.customers.account.gdpr.success-verify'));
             } catch (\Exception) {

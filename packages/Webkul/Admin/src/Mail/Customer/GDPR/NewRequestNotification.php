@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Admin\Mail\Mailable;
 use Webkul\GDPR\Contracts\GDPRDataRequest;
 
-class NewRequestMail extends Mailable
+class NewRequestNotification extends Mailable
 {
     /**
      * Create a new message instance.
