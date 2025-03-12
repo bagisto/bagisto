@@ -72,7 +72,7 @@ class GDPRRequestsDatagrid extends DataGrid
         $this->addColumn([
             'index'              => 'status',
             'label'              => trans('shop::app.customers.account.gdpr.index.datagrid.status'),
-            'type'               => 'integer',
+            'type'               => 'string',
             'searchable'         => true,
             'sortable'           => false,
             'filterable'         => true,
@@ -93,6 +93,10 @@ class GDPRRequestsDatagrid extends DataGrid
                 [
                     'label' => trans('shop::app.customers.account.gdpr.index.datagrid.declined'),
                     'value' => self::STATUS_DECLINED,
+                ],
+                [
+                    'label' => trans('shop::app.customers.account.gdpr.index.datagrid.revoked'),
+                    'value' => self::STATUS_REVOKED,
                 ],
             ],
             'closure'    => function ($row) {
@@ -156,21 +160,21 @@ class GDPRRequestsDatagrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('shop::app.customers.account.gdpr.index.datagrid.date'),
-            'type'       => 'datetime',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('shop::app.customers.account.gdpr.index.datagrid.date'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
-
+        
         $this->addColumn([
             'index'      => 'revoke',
             'label'      => trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn'),
             'type'       => 'string',
-            'sortable'   => true,
+            'sortable'   => false,
             'searchable' => false,
-            'filterable' => true,
+            'filterable' => false,
             'closure'    => function ($row) {
                 $isPending = self::$status == 'pending';
 
