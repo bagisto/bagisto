@@ -145,6 +145,10 @@
                                         <option value="completed">
                                             @lang('admin::app.customers.gdpr.index.modal.completed')
                                         </option>
+
+                                        <option value="revoked">
+                                            @lang('admin::app.customers.gdpr.index.modal.revoked')
+                                        </option>
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error control-name="status" />

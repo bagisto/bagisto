@@ -1795,6 +1795,7 @@ return [
                     'type'       => 'Type',
                     'message'    => 'Message',
                     'save-btn'   => 'Save',
+                    'revoked'    => 'Revoked',
                 ],
 
                 'update-success'              => 'Data Request updated successfully and Email Sent to Customer.',
