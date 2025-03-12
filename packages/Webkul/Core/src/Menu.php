@@ -62,8 +62,10 @@ class Menu
             case self::CUSTOMER:
                 $canShowWishlist = ! (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 
+                $canShowGdpr = ! (bool) core()->getConfigData('general.gdpr.settings.enabled');
+
                 $this->configMenu = $configMenu
-                    ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
+                    ->reject(fn ($item) => ($item['key'] == 'account.wishlist' && $canShowWishlist) || ($item['key'] == 'account.gdpr_data_request' && $canShowGdpr))
                     ->toArray();
                 break;
 
