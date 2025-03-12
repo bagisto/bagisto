@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Mail\Customer\Gdpr;
+namespace Webkul\Shop\Mail\Customer\GDPR;
 
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -8,10 +8,12 @@ use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Admin\Mail\Mailable;
 use Webkul\GDPR\Contracts\GDPRDataRequest;
 
-class UpdateRequestMail extends Mailable
+class StatusUpdateNotification extends Mailable
 {
     /**
      * Create a new message instance.
+     *
+     * @return void
      */
     public function __construct(public GDPRDataRequest $gdprRequest) {}
 
@@ -20,18 +22,11 @@ class UpdateRequestMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $subjectKey = $this->gdprRequest->type === 'update'
-            ? 'admin::app.emails.customers.gdpr.new-update-request'
-            : 'admin::app.emails.customers.gdpr.new-delete-request';
-
         return new Envelope(
             to: [
-                new Address(
-                    core()->getAdminEmailDetails()['email'],
-                    core()->getAdminEmailDetails()['name']
-                ),
+                new Address($this->gdprRequest->email),
             ],
-            subject: trans($subjectKey)
+            subject: trans('shop::app.emails.customers.gdpr.status-update.subject')
         );
     }
 
@@ -41,7 +36,7 @@ class UpdateRequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'admin::emails.customers.gdpr.new-request'
+            view: 'shop::emails.customers.gdpr.status-update-notification',
         );
     }
 }

@@ -7,6 +7,7 @@ use Webkul\Admin\DataGrids\Customers\GDPRDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
+use Illuminate\Support\Facades\Event;
 
 class GDPRController extends Controller
 {
@@ -59,7 +60,11 @@ class GDPRController extends Controller
     public function update(int $id)
     {
         try {
-            $this->gdprDataRequestRepository->update(request()->all(), $id);
+            Event::dispatch('customer.gdpr-request.update.before');
+
+            $gdprRequest = $this->gdprDataRequestRepository->update(request()->all(), $id);
+
+            Event::dispatch('customer.gdpr-request.update.after', $gdprRequest);
 
             return response()->json([
                 'message' => trans(key: 'admin::app.customers.gdpr.index.update-success'),

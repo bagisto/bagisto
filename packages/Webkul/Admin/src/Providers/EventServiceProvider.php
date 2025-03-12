@@ -27,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
             [GDPR::class, 'afterGdprRequestCreated'],
         ],
 
+        'customer.gdpr-request.update.after' => [
+            [GDPR::class, 'afterGdprRequestUpdated'],
+        ],
+
         'admin.password.update.after' => [
             [Admin::class, 'afterPasswordUpdated'],
         ],

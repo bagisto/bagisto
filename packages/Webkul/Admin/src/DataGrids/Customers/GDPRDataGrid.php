@@ -28,6 +28,11 @@ class GDPRDataGrid extends DataGrid
     const STATUS_PROCESSING = 'processing';
 
     /**
+     * Request status "revoked".
+     */
+    const STATUS_REVOKED = 'revoked';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -97,6 +102,10 @@ class GDPRDataGrid extends DataGrid
                     'label' => trans('admin::app.customers.gdpr.index.datagrid.declined'),
                     'value' => self::STATUS_DECLINED,
                 ],
+                [
+                    'label' => trans('admin::app.customers.gdpr.index.datagrid.revoked'),
+                    'value' => self::STATUS_REVOKED,
+                ],
             ],
             'closure'    => function ($row) {
                 switch ($row->status) {
@@ -111,6 +120,12 @@ class GDPRDataGrid extends DataGrid
 
                     case self::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('admin::app.customers.gdpr.index.datagrid.processing').'</p>';
+
+                    case self::STATUS_PROCESSING:
+                        return '<p class="label-processing">'.trans('admin::app.customers.gdpr.index.datagrid.processing').'</p>';
+
+                    case self::STATUS_REVOKED:
+                        return '<p class="label-closed">'.trans('admin::app.customers.gdpr.index.datagrid.revoked').'</p>';
                 }
             },
         ]);

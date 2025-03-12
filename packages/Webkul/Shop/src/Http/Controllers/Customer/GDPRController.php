@@ -2,15 +2,12 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\GDPRRequestsDatagrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\Gdpr\DeleteRequestMail;
-use Webkul\Shop\Mail\Customer\Gdpr\UpdateRequestMail;
 use Carbon\Carbon;
 
 class GDPRController extends Controller
@@ -148,13 +145,13 @@ class GDPRController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        $gdprRequest = $this->gdprDataRequestRepository->findWhere([
+        $data = $this->gdprDataRequestRepository->findWhere([
             'id'          => $id,
             'customer_id' => $customer->id,
             'status'      => 'pending',
         ])->first();
 
-        if (! $gdprRequest) {
+        if (! $data) {
             session()->flash('error', trans('shop::app.customers.account.gdpr.revoke-failed'));
 
             return redirect()->route('shop.customers.account.gdpr.index');
@@ -162,12 +159,12 @@ class GDPRController extends Controller
 
         Event::dispatch('customer.gdpr-request.update.before');
 
-        $this->gdprDataRequestRepository->update([
+        $gdprRequest = $this->gdprDataRequestRepository->update([
             'status'     => 'revoked',
             'revoked_at' => Carbon::now(), 
         ], $id);
 
-        Event::dispatch('customer.gdpr-request.update.after');
+        Event::dispatch('customer.gdpr-request.update.after', $gdprRequest);
 
         session()->flash('success', trans('shop::app.customers.account.gdpr.revoked-successfully'));
 
