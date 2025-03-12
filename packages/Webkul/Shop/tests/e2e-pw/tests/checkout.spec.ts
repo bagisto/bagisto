@@ -1,7 +1,6 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress } from '../utils/customer';
-import { generateName, generateSKU, generateDescription, generateSlug } from '../utils/faker'
-
+import { generateName, generateSKU, generateDescription } from '../utils/faker'
 
 async function createSimpleProduct(page) {
     /**
@@ -124,7 +123,6 @@ async function createSimpleProduct(page) {
 
 test.describe('checkout', () => {
     test("guest should be able to checkout", async ({ shopPage }) => {
-
         /**
          * Login to admin panel.
          */
@@ -214,7 +212,7 @@ test.describe('checkout', () => {
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
         /**
-         * check order to admin Side.
+         * Check order to admin side.
          */
         await shopPage.goto('admin/sales/orders');
         await shopPage.locator('.row > div:nth-child(4) > a').first().click();
@@ -223,19 +221,18 @@ test.describe('checkout', () => {
 
 
     test("customer should be able to checkout", async ({ shopPage }) => {
-
         /**
-         * customer login
+         * Customer login.
          */
         await loginAsCustomer(shopPage);
 
         /**
-         * fill customer default address
+         * Fill customer default address.
          */
-        const address = await addAddress(shopPage);
+        await addAddress(shopPage);
 
         /**
-         * go to the shop to buy a product
+         * Go to the shop to buy a product.
          */
         await shopPage.goto('');
         await shopPage
@@ -289,28 +286,26 @@ test.describe('checkout', () => {
         await shopPage.getByRole("button", { name: "Sign In" }).click();
 
         /**
-         * check order to admin Side.
+         * Check order to admin side.
          */
         await shopPage.goto('admin/sales/orders');
         await shopPage.locator('.row > div:nth-child(4) > a').first().click();
         await expect(shopPage.locator('.box-shadow > div:nth-child(2) > div').first()).toBeVisible();
     });
 
-
     test("if use same address for shipping", async ({ shopPage }) => {
-
         /**
-         * customer login
+         * Customer login.
          */
         await loginAsCustomer(shopPage);
 
         /**
-         * fill customer default address
+         * Fill customer default address.
          */
         await addAddress(shopPage);
 
         /**
-         * go to the shop to buy a product
+         * Go to the shop to buy a product.
          */
         await shopPage.goto('');
         await shopPage
@@ -335,7 +330,7 @@ test.describe('checkout', () => {
             .click();
 
         /**
-         * Enabled using same adress for shipping chjeckbox.
+         * Enabled using same adress for shipping checkbox.
          */
         const isEnabled = shopPage.locator('#use_for_shipping').nth(1).check();
 
@@ -385,7 +380,7 @@ test.describe('checkout', () => {
         await shopPage.getByRole("button", { name: "Sign In" }).click();
 
         /**
-         * check order to admin Side.
+         * Check order to admin side.
          */
         await shopPage.goto('admin/sales/orders');
         await shopPage.locator('.row > div:nth-child(4) > a').first().click();
@@ -394,19 +389,18 @@ test.describe('checkout', () => {
 
 
     test("if not use same address for shipping", async ({ shopPage }) => {
-
         /**
-         * customer login
+         * Customer login.
          */
         await loginAsCustomer(shopPage);
 
         /**
-         * fill customer default address
+         * Fill customer default address.
          */
         await addAddress(shopPage);
 
         /**
-         * go to the shop to buy a product
+         * Go to the shop to buy a product.
          */
         await shopPage.goto('');
         await shopPage
@@ -455,9 +449,9 @@ test.describe('checkout', () => {
          */
         const toggleInput = shopPage.locator('#use_for_shipping').nth(1).first();
         await expect(toggleInput).not.toBeChecked();
-        
+
         /**
-         * Add Shipping Address
+         * Add shipping address.
          */
         await shopPage.locator('div').filter({ hasText: /^Add new address$/ }).nth(2).click();
 
@@ -481,11 +475,11 @@ test.describe('checkout', () => {
         await shopPage.getByRole('textbox', { name: 'Telephone' }).click();
         await shopPage.getByRole('textbox', { name: 'Telephone' }).fill('123456');
         await shopPage.getByRole('button', { name: 'Save' }).click();
-       
+
         await shopPage.getByRole("button", { name: "Proceed" }).click();
 
         /**
-         * Choose Shipping method.
+         * Choose shipping method.
          */
         await shopPage.waitForSelector("text=Free Shipping");
         await shopPage.getByText("Free Shipping").first().click();
@@ -516,195 +510,10 @@ test.describe('checkout', () => {
         await shopPage.getByRole("button", { name: "Sign In" }).click();
 
         /**
-         * check order to admin Side.
+         * Check order to admin side.
          */
         await shopPage.goto('admin/sales/orders');
         await shopPage.locator('.row > div:nth-child(4) > a').first().click();
         await expect(shopPage.locator('.box-shadow > div:nth-child(2) > div').first()).toBeVisible();
     });
-
 });
-
-// import { test, expect } from "../setup";
-// import { loginAsCustomer } from "../utils/customer";
-
-// test("customer should be able to checkout", async ({ page }) => {
-//     await loginAsCustomer(page);
-
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .first()
-//         .waitFor({ state: "visible" });
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(1)
-//         .waitFor({ state: "visible" });
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(2)
-//         .waitFor({ state: "visible" });
-
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .first()
-//         .click();
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(1)
-//         .click();
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(2)
-//         .click();
-
-//     await page.getByRole("button", { name: "Shopping Cart" }).click();
-//     await page.getByRole("link", { name: "Continue to Checkout" }).click();
-
-//     try {
-//         await page.getByPlaceholder("Company Name").click({ timeout: 5000 });
-//         await page.getByPlaceholder("Company Name").fill("Example");
-//         await page.getByPlaceholder("First Name").click();
-//         await page.getByPlaceholder("First Name").fill("Test");
-//         await page.getByPlaceholder("Last Name").click();
-//         await page.getByPlaceholder("Last Name").fill("User");
-//         await page.getByPlaceholder("email@example.com").click();
-//         await page
-//             .getByPlaceholder("email@example.com")
-//             .fill("webkul@example.com");
-//         await page.getByPlaceholder("Street Address").click();
-//         await page.getByPlaceholder("Street Address").fill("demo");
-//         await page
-//             .locator('select[name="billing\\.country"]')
-//             .selectOption("AQ");
-//         await page.getByPlaceholder("State").click();
-//         await page.getByPlaceholder("State").fill("any");
-//         await page.getByPlaceholder("City").click();
-//         await page.getByPlaceholder("City").fill("any");
-//         await page.getByPlaceholder("Zip/Postcode").click();
-//         await page.getByPlaceholder("Zip/Postcode").fill("123456");
-//         await page.getByPlaceholder("Telephone").click();
-//         await page.getByPlaceholder("Telephone").fill("9876543210");
-//         await page.locator("#save_address").nth(1).click();
-//         await page.getByRole("button", { name: "Save" }).click();
-//     } catch (e) {
-//         await page
-//             .locator(
-//                 'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]'
-//             )
-//             .nth(0)
-//             .click();
-//     }
-
-//     await page.getByRole("button", { name: "Proceed" }).click();
-
-//     await page.waitForSelector("text=Free Shipping");
-//     await page.getByText("Free Shipping").first().click();
-
-//     await page.waitForSelector("text=Cash On Delivery");
-//     await page.getByText("Cash On Delivery").first().click();
-
-//     await page.getByRole("button", { name: "Place Order" }).click();
-//     await page.waitForSelector("text=Thank you for your order!");
-
-//     await expect(page.locator("text=Thank you for your order!")).toBeVisible();
-// });
-
-// for this first we need to go to admin and enable the guest checkout then this test will work, will create helper first...
-// test("guest should be able to checkout", async ({ page }) => {
-//     await page.goto('');
-
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .first()
-//         .waitFor({ state: "visible" });
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(1)
-//         .waitFor({ state: "visible" });
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(2)
-//         .waitFor({ state: "visible" });
-
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .first()
-//         .click();
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(1)
-//         .click();
-//     await page
-//         .locator("#main div")
-//         .filter({ hasText: "New Products View All New" })
-//         .locator("button")
-//         .nth(2)
-//         .click();
-
-//     await page.getByRole("button", { name: "Shopping Cart" }).click();
-//     await page.getByRole("link", { name: "Continue to Checkout" }).click();
-
-//     await page.getByPlaceholder("Company Name").waitFor({ state: "visible" });
-//     await page.getByPlaceholder("Company Name").click();
-//     await page.getByPlaceholder("Company Name").fill("WEBKUL");
-//     await page.getByPlaceholder("First Name").click();
-//     await page.getByPlaceholder("First Name").fill("Demo");
-//     await page.getByPlaceholder("First Name").press("Tab");
-//     await page.getByPlaceholder("Last Name").fill("Demo");
-//     await page.getByPlaceholder("Last Name").press("Tab");
-//     await page
-//         .getByRole("textbox", { name: "email@example.com" })
-//         .press("CapsLock");
-//     await page
-//         .getByRole("textbox", { name: "email@example.com" })
-//         .fill("Demo_ashdghsd@hjdg.sad");
-//     await page.getByRole("textbox", { name: "email@example.com" }).press("Tab");
-//     await page.getByPlaceholder("Street Address").fill("Demo2367");
-//     await page.getByPlaceholder("Street Address").press("Tab");
-//     await page.locator('select[name="billing\\.country"]').selectOption("AI");
-//     await page.getByPlaceholder("State").click();
-//     await page.getByPlaceholder("State").fill("Demo");
-//     await page.getByPlaceholder("City").click();
-//     await page.getByPlaceholder("City").fill("Demo");
-//     await page.getByPlaceholder("Zip/Postcode").click();
-//     await page.getByPlaceholder("Zip/Postcode").fill("Demo_djsbfuweh");
-//     await page.getByPlaceholder("Telephone").click();
-//     await page.getByPlaceholder("Telephone").fill("9023723564");
-//     await page.getByRole("button", { name: "Proceed" }).click();
-//     await page.getByPlaceholder("Zip/Postcode").click();
-//     await page.getByPlaceholder("Zip/Postcode").fill("2673854");
-//     await page.getByRole("button", { name: "Proceed" }).click();
-
-//     await page.waitForSelector("text=Free Shipping");
-//     await page.getByText("Free Shipping").first().click();
-
-//     await page.waitForSelector("text=Cash On Delivery");
-//     await page.getByText("Cash On Delivery").first().click();
-
-//     await page.getByRole("button", { name: "Place Order" }).click();
-//     await page.waitForSelector("text=Thank you for your order!");
-
-//     await expect(page.locator("text=Thank you for your order!")).toBeVisible();
-// });
