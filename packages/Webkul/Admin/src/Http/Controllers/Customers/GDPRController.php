@@ -3,11 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Customers\GDPRDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
-use Illuminate\Support\Facades\Event;
 
 class GDPRController extends Controller
 {

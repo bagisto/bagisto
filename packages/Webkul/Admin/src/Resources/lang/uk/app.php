@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'Повідомлення',
                     'pending'       => 'В очікуванні',
                     'processing'    => 'Обробка',
+                    'revoked'       => 'Скасовано',
                     'status'        => 'Статус',
                     'type'          => 'Тип',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'Ми тепло вітаємо нового клієнта :customer_name, який щойно зареєструвався у нас!',
                 'subject'     => 'Реєстрація нового клієнта',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Статус вашого запиту GDPR',
+            'gdpr' => [
+                'new-delete-request' => 'Нове запит на видалення даних',
+                'new-update-request' => 'Нове запит на оновлення даних',
+
+                'new-request' => [
+                    'message'        => 'Повідомлення : ',
+                    'request-status' => 'Статус запиту : ',
+                    'request-type'   => 'Тип запиту : ',
+                    'summary'        => 'Резюме запиту',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Запит GDPR оновлено',
+                    'summary'        => 'Статус запиту GDPR оновлено',
+                    'request-status' => 'Статус запиту:',
+                    'request-type'   => 'Тип запиту:',
+                    'message'        => 'Повідомлення:',
+                ],
+            ],
         ],
 
         'orders' => [

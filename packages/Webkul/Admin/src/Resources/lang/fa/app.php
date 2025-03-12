@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'پیام',
                     'pending'       => 'در انتظار',
                     'processing'    => 'در حال پردازش',
+                    'revoked'       => 'ابطال شده',
                     'status'        => 'وضعیت',
                     'type'          => 'نوع',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'ما به مشتری جدید، :customer_name که به تازگی با ما ثبت نام کرده است، خوش آمد می گوییم!',
                 'subject'     => 'ثبت نام مشتری جدید',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'وضعیت درخواست GDPR شما',
+            'gdpr' => [
+                'new-delete-request' => 'درخواست جدید برای حذف داده',
+                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
+
+                'new-request' => [
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                    'request-type'   => 'نوع درخواست : ',
+                    'summary'        => 'خلاصه درخواست',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'درخواست GDPR به‌روزرسانی شد',
+                    'summary'        => 'وضعیت درخواست GDPR به‌روزرسانی شد',
+                    'request-status' => 'وضعیت درخواست:',
+                    'request-type'   => 'نوع درخواست:',
+                    'message'        => 'پیام:',
+                ],
+            ],
         ],
 
         'orders' => [

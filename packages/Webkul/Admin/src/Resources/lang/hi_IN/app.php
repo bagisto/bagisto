@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'संदेश',
                     'pending'       => 'लंबित',
                     'processing'    => 'प्रसंस्करण',
+                    'revoked'       => 'रद्द किया गया',
                     'status'        => 'स्थिति',
                     'type'          => 'प्रकार',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'हम नए ग्राहक का हार्दिक स्वागत करते हैं, :customer_name जिसने अभी-अभी हमारे साथ पंजीकरण कराया है!',
                 'subject'     => 'नया ग्राहक पंजीकरण',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'आपके GDPR अनुरोध की स्थिति',
+            'gdpr' => [
+                'new-delete-request' => 'डेटा हटाने के लिए नया अनुरोध',
+                'new-update-request' => 'डेटा अपडेट करने के लिए नया अनुरोध',
+
+                'new-request' => [
+                    'message'        => 'संदेश : ',
+                    'request-status' => 'अनुरोध स्थिति : ',
+                    'request-type'   => 'अनुरोध प्रकार : ',
+                    'summary'        => 'अनुरोध का सारांश',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR अनुरोध अपडेट कर दिया गया है',
+                    'summary'        => 'GDPR अनुरोध की स्थिति अपडेट कर दी गई है',
+                    'request-status' => 'अनुरोध स्थिति:',
+                    'request-type'   => 'अनुरोध प्रकार:',
+                    'message'        => 'संदेश:',
+                ],
+            ],
         ],
 
         'orders' => [

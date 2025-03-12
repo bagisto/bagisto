@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'הודעה',
                     'pending'       => 'ממתין',
                     'processing'    => 'מעבד',
+                    'revoked'       => 'בוטל',
                     'status'        => 'סטטוס',
                     'type'          => 'סוג',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'אנו מקבלים בברכה את הלקוח החדש, :customer_name שזה עתה נרשם אלינו!',
                 'subject'     => 'רישום לקוח חדש',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'מצב בקשת ה-GDPR שלך',
+            'gdpr' => [
+                'new-delete-request' => 'בקשה חדשה למחיקת נתונים',
+                'new-update-request' => 'בקשה חדשה לעדכון נתונים',
+
+                'new-request' => [
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                    'request-type'   => 'סוג הבקשה : ',
+                    'summary'        => 'סיכום הבקשה',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'בקשת ה-GDPR עודכנה',
+                    'summary'        => 'סטטוס בקשת ה-GDPR עודכן',
+                    'request-status' => 'סטטוס הבקשה:',
+                    'request-type'   => 'סוג הבקשה:',
+                    'message'        => 'הודעה:',
+                ],
+            ],
         ],
 
         'orders' => [

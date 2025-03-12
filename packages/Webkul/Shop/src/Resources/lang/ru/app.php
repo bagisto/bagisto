@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Запрос успешно создан',
+                'revoked-successfully'        => 'Запрос успешно отозван',
                 'success-verify'              => 'Успех! Письмо для подтверждения отправлено.',
                 'success-verify-email-unsent' => 'Успех! Письмо для подтверждения не отправлено.',
                 'unable-to-sent'              => 'Невозможно отправить письмо.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Завершено',
                         'date'       => 'Дата',
                         'declined'   => 'Отклонено',
+                        'delete'     => 'Удалить',
                         'id'         => 'ID',
                         'message'    => 'Сообщение',
                         'pending'    => 'В ожидании',
-                        'processing' => 'Обработка',
+                        'processing' => 'В обработке',
+                        'revoke-btn' => 'Отозвать',
+                        'revoked'    => 'Отозвано',
                         'status'     => 'Статус',
                         'type'       => 'Тип',
                         'update'     => 'Обновить',
-                        'delete'     => 'Удалить',
                     ],
                 ],
 
@@ -1106,16 +1110,12 @@ return [
                     'summary'        => 'Сводка запроса',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Сообщение : ',
-                    'request-status' => 'Статус запроса : ',
-                    'request-type'   => 'Тип запроса : ',
-                    'summary'        => 'Сводка запроса на удаление',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Сообщение : ',
-                    'request-status' => 'Статус запроса : ',
+                'status-update' => [
+                    'subject'        => 'Ваш запрос GDPR был обновлён',
+                    'summary'        => 'Статус вашего запроса GDPR был обновлён',
+                    'request-status' => 'Статус запроса:',
+                    'request-type'   => 'Тип запроса:',
+                    'message'        => 'Сообщение:',
                 ],
             ],
 

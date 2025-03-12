@@ -37,7 +37,6 @@ class GDPRRequestsDatagrid extends DataGrid
      */
     private static $status = '';
 
-
     /**
      * Prepare query builder.
      *
@@ -98,7 +97,7 @@ class GDPRRequestsDatagrid extends DataGrid
             ],
             'closure'    => function ($row) {
                 self::$status = $row->status;
-                
+
                 switch ($row->status) {
                     case self::STATUS_COMPLETED:
                         return '<p class="label-active">'.trans('shop::app.customers.account.gdpr.index.datagrid.completed').'</p>';
@@ -111,7 +110,7 @@ class GDPRRequestsDatagrid extends DataGrid
 
                     case self::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('shop::app.customers.account.gdpr.index.datagrid.processing').'</p>';
-                        
+
                     case self::STATUS_REVOKED:
                         return '<span class="label-closed">'.trans('shop::app.customers.account.gdpr.index.datagrid.revoked').'</span>';
                 }
@@ -173,13 +172,13 @@ class GDPRRequestsDatagrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($row) {
-                $isPending = self::$status == "pending";
-                
+                $isPending = self::$status == 'pending';
+
                 $url = route('shop.customers.account.gdpr.revoke', $row->id);
-        
+
                 return $isPending
-                    ? '<a href="' . $url . '" class="primary-button rounded-full px-6 py-1.5">' . trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn') . '</a>'
-                    : '<button class="primary-button rounded-full px-6 py-1.5" disabled>' . trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn') . '</button>';
+                    ? '<a href="'.$url.'" class="primary-button rounded-full px-6 py-1.5">'.trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn').'</a>'
+                    : '<button class="primary-button rounded-full px-6 py-1.5" disabled>'.trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn').'</button>';
             },
         ]);
     }

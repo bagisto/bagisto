@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'පණිවිඩය',
                     'pending'       => 'බැලීම',
                     'processing'    => 'සැකසීම',
+                    'revoked'       => 'අවලංගු කරන ලදී',
                     'status'        => 'තත්ත්වය',
                     'type'          => 'වර්ගය',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'අප සමඟ ලියාපදිංචි වී ඇති නව පාරිභෝගිකයා, :customer_name වෙත අපි උණුසුම්ව සාදරයෙන් පිළිගනිමු!',
                 'subject'     => 'නව පාරිභෝගික ලියාපදිංචිය',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'ඔබගේ GDPR ඉල්ලීමේ තත්වය',
+            'gdpr' => [
+                'new-delete-request' => 'දත්ත මැකීම සඳහා නව ඉල්ලීම',
+                'new-update-request' => 'දත්ත යාවත්කාලීන කිරීම සඳහා නව ඉල්ලීම',
+
+                'new-request' => [
+                    'message'        => 'පණිවිඩය : ',
+                    'request-status' => 'ඉල්ලීම් තත්වය : ',
+                    'request-type'   => 'ඉල්ලීම් වර්ගය : ',
+                    'summary'        => 'ඉල්ලීම් සාරාංශය',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR ඉල්ලීම යාවත්කාලීන විය',
+                    'summary'        => 'GDPR ඉල්ලීමේ තත්වය යාවත්කාලීන විය',
+                    'request-status' => 'ඉල්ලීම් තත්වය:',
+                    'request-type'   => 'ඉල්ලීම් වර්ගය:',
+                    'message'        => 'පණිවිඩය:',
+                ],
+            ],
         ],
 
         'orders' => [

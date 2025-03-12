@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'Mesaj',
                     'pending'       => 'Beklemede',
                     'processing'    => 'İşleniyor',
+                    'revoked'       => 'İptal edildi',
                     'status'        => 'Durum',
                     'type'          => 'Tür',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'Aramıza yeni kaydolan yeni müşterimiz :customer_name `e sıcak bir karşılama dileriz!',
                 'subject'     => 'Yeni Müşteri Kaydı',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'GDPR talebinizin durumu',
+            'gdpr' => [
+                'new-delete-request' => 'Veri Silme için Yeni Talep',
+                'new-update-request' => 'Veri Güncelleme için Yeni Talep',
+
+                'new-request' => [
+                    'message'        => 'Mesaj : ',
+                    'request-status' => 'Talep Durumu : ',
+                    'request-type'   => 'Talep Türü : ',
+                    'summary'        => 'Talep Özeti',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR Talebi Güncellendi',
+                    'summary'        => 'GDPR Talebinin Durumu Güncellendi',
+                    'request-status' => 'Talep Durumu:',
+                    'request-type'   => 'Talep Türü:',
+                    'message'        => 'Mesaj:',
+                ],
+            ],
         ],
 
         'orders' => [

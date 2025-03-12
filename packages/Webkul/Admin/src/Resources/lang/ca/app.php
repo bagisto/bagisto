@@ -1833,6 +1833,7 @@ return [
                     'message'       => 'Missatge',
                     'pending'       => 'Pendent',
                     'processing'    => 'Processant',
+                    'revoked'       => 'Revoked',
                     'status'        => 'Estat',
                     'type'          => 'Tipus',
                 ],
@@ -4752,10 +4753,26 @@ return [
                 'greeting'    => 'Donem una càlida benvinguda al nou client, :customer_name que s\'ha registrat amb nosaltres!',
                 'subject'     => 'Registre de nou client',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Estat de la teva sol·licitud GDPR',
+            'gdpr' => [
+                'new-delete-request' => 'New Request For Data Delete',
+                'new-update-request' => 'New Request For Data Update',
+
+                'new-request' => [
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'summary'        => 'Summary of Request',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR Request Has Been Updated',
+                    'summary'        => 'The GDPR Request Status Has Been Updated',
+                    'request-status' => 'Request Status:',
+                    'request-type'   => 'Request Type:',
+                    'message'        => 'Message:',
+                ],
+            ],
         ],
 
         'orders' => [

@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Anfrage erfolgreich erstellt',
+                'revoked-successfully'        => 'Anfrage erfolgreich widerrufen',
                 'success-verify'              => 'Erfolg! Bestätigungs-E-Mail wurde gesendet.',
                 'success-verify-email-unsent' => 'Erfolg! Bestätigungs-E-Mail wurde nicht gesendet.',
                 'unable-to-sent'              => 'E-Mail konnte nicht gesendet werden.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Abgeschlossen',
                         'date'       => 'Datum',
                         'declined'   => 'Abgelehnt',
+                        'delete'     => 'Löschen',
                         'id'         => 'ID',
                         'message'    => 'Nachricht',
                         'pending'    => 'Ausstehend',
                         'processing' => 'In Bearbeitung',
+                        'revoke-btn' => 'Widerrufen',
+                        'revoked'    => 'Widerrufen',
                         'status'     => 'Status',
                         'type'       => 'Typ',
                         'update'     => 'Aktualisieren',
-                        'delete'     => 'Löschen',
                     ],
                 ],
 
@@ -1096,8 +1100,8 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Neue Anfrage zur Datenlöschung',
-                'new-update-request' => 'Neue Anfrage zur Datenaktualisierung',
+                'new-delete-request' => 'Neue Anfrage zum Löschen von Daten',
+                'new-update-request' => 'Neue Anfrage zur Aktualisierung von Daten',
 
                 'new-request' => [
                     'message'        => 'Nachricht : ',
@@ -1106,16 +1110,12 @@ return [
                     'summary'        => 'Zusammenfassung der Anfrage',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Nachricht : ',
-                    'request-status' => 'Anfragestatus : ',
-                    'request-type'   => 'Anfragetyp : ',
-                    'summary'        => 'Zusammenfassung der Löschanfrage',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Nachricht : ',
-                    'request-status' => 'Anfragestatus : ',
+                'status-update' => [
+                    'subject'        => 'Ihre GDPR-Anfrage wurde aktualisiert',
+                    'summary'        => 'Der Status Ihrer GDPR-Anfrage wurde aktualisiert',
+                    'request-status' => 'Anfragestatus:',
+                    'request-type'   => 'Anfragetyp:',
+                    'message'        => 'Nachricht:',
                 ],
             ],
 

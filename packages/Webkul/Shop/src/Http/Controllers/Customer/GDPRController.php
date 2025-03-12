@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\GDPRRequestsDatagrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 class GDPRController extends Controller
 {
@@ -161,7 +161,7 @@ class GDPRController extends Controller
 
         $gdprRequest = $this->gdprDataRequestRepository->update([
             'status'     => 'revoked',
-            'revoked_at' => Carbon::now(), 
+            'revoked_at' => Carbon::now(),
         ], $id);
 
         Event::dispatch('customer.gdpr-request.update.after', $gdprRequest);
@@ -170,5 +170,4 @@ class GDPRController extends Controller
 
         return redirect()->route('shop.customers.account.gdpr.index');
     }
-
 }

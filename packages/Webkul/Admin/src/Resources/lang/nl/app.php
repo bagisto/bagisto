@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'Bericht',
                     'pending'       => 'In Afwachting',
                     'processing'    => 'Verwerken',
+                    'revoked'       => 'Herroepen',
                     'status'        => 'Status',
                     'type'          => 'Type',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'Wij heten de nieuwe klant, :customer_name, die zich zojuist bij ons heeft geregistreerd, van harte welkom!',
                 'subject'     => 'Nieuwe klantregistratie',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Uw GDPR-verzoekstatus',
+            'gdpr' => [
+                'new-delete-request' => 'Nieuwe aanvraag voor gegevensverwijdering',
+                'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
+
+                'new-request' => [
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Aanvraagstatus : ',
+                    'request-type'   => 'Aanvraagtype : ',
+                    'summary'        => 'Overzicht van de aanvraag',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR-aanvraag is bijgewerkt',
+                    'summary'        => 'De status van de GDPR-aanvraag is bijgewerkt',
+                    'request-status' => 'Aanvraagstatus:',
+                    'request-type'   => 'Aanvraagtype:',
+                    'message'        => 'Bericht:',
+                ],
+            ],
         ],
 
         'orders' => [

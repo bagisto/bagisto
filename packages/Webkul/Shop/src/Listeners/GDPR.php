@@ -1,9 +1,10 @@
 <?php
 
 namespace Webkul\Shop\Listeners;
+
+use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\Customer\GDPR\NewRequestMail;
 use Webkul\Shop\Mail\Customer\GDPR\StatusUpdateNotification;
-use Illuminate\Support\Facades\Mail;
 
 class GDPR extends Base
 {

@@ -5,11 +5,11 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Webkul\Admin\Listeners\Admin;
 use Webkul\Admin\Listeners\Customer;
+use Webkul\Admin\Listeners\GDPR;
 use Webkul\Admin\Listeners\Invoice;
 use Webkul\Admin\Listeners\Order;
 use Webkul\Admin\Listeners\Refund;
 use Webkul\Admin\Listeners\Shipment;
-use Webkul\Admin\Listeners\GDPR;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'Nachricht',
                     'pending'       => 'Ausstehend',
                     'processing'    => 'In Bearbeitung',
+                    'revoked'       => 'Widerrufen',
                     'status'        => 'Status',
                     'type'          => 'Typ',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'Wir heißen den neuen Kunden :customer_name, der sich gerade bei uns registriert hat, herzlich willkommen!',
                 'subject'     => 'Neukundenregistrierung',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Ihr GDPR-Anfragestatus',
+            'gdpr' => [
+                'new-delete-request' => 'Neue Anfrage zum Löschen von Daten',
+                'new-update-request' => 'Neue Anfrage zur Aktualisierung von Daten',
+
+                'new-request' => [
+                    'message'        => 'Nachricht : ',
+                    'request-status' => 'Anfragestatus : ',
+                    'request-type'   => 'Anfragetyp : ',
+                    'summary'        => 'Zusammenfassung der Anfrage',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR-Anfrage wurde aktualisiert',
+                    'summary'        => 'Der Status der GDPR-Anfrage wurde aktualisiert',
+                    'request-status' => 'Anfragestatus:',
+                    'request-type'   => 'Anfragetyp:',
+                    'message'        => 'Nachricht:',
+                ],
+            ],
         ],
 
         'orders' => [

@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Żądanie zostało pomyślnie utworzone',
+                'revoked-successfully'        => 'Żądanie zostało pomyślnie cofnięte',
                 'success-verify'              => 'Sukces! E-mail weryfikacyjny został wysłany.',
                 'success-verify-email-unsent' => 'Sukces! E-mail weryfikacyjny nie został wysłany.',
                 'unable-to-sent'              => 'Nie można wysłać e-maila.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Zakończone',
                         'date'       => 'Data',
                         'declined'   => 'Odrzucone',
+                        'delete'     => 'Usuń',
                         'id'         => 'ID',
                         'message'    => 'Wiadomość',
                         'pending'    => 'Oczekujące',
                         'processing' => 'Przetwarzanie',
+                        'revoke-btn' => 'Odwołaj',
+                        'revoked'    => 'Cofnięty',
                         'status'     => 'Status',
                         'type'       => 'Typ',
                         'update'     => 'Aktualizuj',
-                        'delete'     => 'Usuń',
                     ],
                 ],
 
@@ -1106,16 +1110,12 @@ return [
                     'summary'        => 'Podsumowanie żądania',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Wiadomość : ',
-                    'request-status' => 'Status żądania : ',
-                    'request-type'   => 'Typ żądania : ',
-                    'summary'        => 'Podsumowanie żądania usunięcia',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Wiadomość : ',
-                    'request-status' => 'Status żądania : ',
+                'status-update' => [
+                    'subject'        => 'Twój wniosek GDPR został zaktualizowany',
+                    'summary'        => 'Status twojego wniosku GDPR został zaktualizowany',
+                    'request-status' => 'Status żądania:',
+                    'request-type'   => 'Typ żądania:',
+                    'message'        => 'Wiadomość:',
                 ],
             ],
 

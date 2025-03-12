@@ -1780,6 +1780,7 @@ return [
                     'message'       => 'الرسالة',
                     'pending'       => 'قيد الانتظار',
                     'processing'    => 'قيد المعالجة',
+                    'revoked'       => 'ملغى',
                     'status'        => 'الحالة',
                     'type'          => 'النوع',
                 ],
@@ -4753,10 +4754,26 @@ return [
                 'greeting'    => 'نرحب ترحيبًا حارًا بالعميل الجديد، :customer_name الذي قام بالتسجيل معنا للتو!',
                 'subject'     => 'تسجيل العملاء الجدد',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'حالة طلب GDPR الخاص بك',
+            'gdpr' => [
+                'new-delete-request' => 'طلب جديد لحذف البيانات',
+                'new-update-request' => 'طلب جديد لتحديث البيانات',
+
+                'new-request' => [
+                    'message'        => 'رسالة : ',
+                    'request-status' => 'حالة الطلب : ',
+                    'request-type'   => 'نوع الطلب : ',
+                    'summary'        => 'ملخص الطلب',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'تم تحديث طلب GDPR',
+                    'summary'        => 'تم تحديث حالة طلب GDPR',
+                    'request-status' => 'حالة الطلب:',
+                    'request-type'   => 'نوع الطلب:',
+                    'message'        => 'رسالة:',
+                ],
+            ],
         ],
 
         'orders' => [
