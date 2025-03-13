@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
 
                 'new-request' => [
+                    'customer-name'  => 'نام مشتری : ',
                     'delete-summary' => 'خلاصه درخواست حذف',
                     'message'        => 'پیام : ',
                     'request-status' => 'وضعیت درخواست : ',

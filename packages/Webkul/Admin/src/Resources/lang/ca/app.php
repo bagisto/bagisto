@@ -4760,6 +4760,7 @@ return [
                 'new-update-request' => 'New Request For Data Update',
 
                 'new-request' => [
+                    'customer-name'  => 'Nom du client : ',
                     'delete-summary' => 'Zusammenfassung der Löschanforderung',
                     'message'        => 'Message : ',
                     'request-status' => 'Request Status : ',

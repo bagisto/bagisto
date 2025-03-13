@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'Veri Güncelleme için Yeni Talep',
 
                 'new-request' => [
+                    'customer-name'  => 'Müşteri Adı : ',
                     'delete-summary' => 'Silme isteğinin özeti',
                     'message'        => 'Mesaj : ',
                     'request-status' => 'Talep Durumu : ',

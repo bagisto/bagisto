@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'בקשה חדשה לעדכון נתונים',
 
                 'new-request' => [
+                    'customer-name'  => 'שם הלקוח : ',
                     'delete-summary' => 'סיכום בקשת המחיקה',
                     'message'        => 'הודעה : ',
                     'request-status' => 'סטטוס הבקשה : ',

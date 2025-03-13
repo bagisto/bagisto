@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
 
                 'new-request' => [
+                    'customer-name'  => 'Klantnaam : ',
                     'delete-summary' => 'Samenvatting van verwijderingsverzoek',
                     'message'        => 'Bericht : ',
                     'request-status' => 'Aanvraagstatus : ',

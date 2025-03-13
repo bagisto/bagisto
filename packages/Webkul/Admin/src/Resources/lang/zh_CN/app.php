@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => '新的数据更新请求',
 
                 'new-request' => [
+                    'customer-name'  => '客户名称 : ',
                     'delete-summary' => '删除请求摘要',
                     'message'        => '消息：',
                     'request-status' => '请求状态：',

@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'डेटा अपडेट करने के लिए नया अनुरोध',
 
                 'new-request' => [
+                    'customer-name'  => 'ग्राहक का नाम : ',
                     'delete-summary' => 'हटाने के अनुरोध का सारांश',
                     'message'        => 'संदेश : ',
                     'request-status' => 'अनुरोध स्थिति : ',

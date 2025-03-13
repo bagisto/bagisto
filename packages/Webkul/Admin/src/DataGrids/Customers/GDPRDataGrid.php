@@ -56,7 +56,7 @@ class GDPRDataGrid extends DataGrid
         $this->addFilter('created_at', 'gdpr.created_at');
         $this->addFilter('status', 'gdpr.status');
         $this->addFilter('customer_name', DB::raw("CONCAT(customers.first_name, ' ', customers.last_name)"));
-                
+
         return $queryBuilder;
     }
 

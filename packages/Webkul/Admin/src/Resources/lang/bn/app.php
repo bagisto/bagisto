@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'ডেটা আপডেট করার জন্য নতুন অনুরোধ',
 
                 'new-request' => [
+                    'customer-name'  => 'গ্রাহকের নাম : ',
                     'delete-summary' => 'মুছে ফেলার অনুরোধের সংক্ষিপ্তসার',
                     'message'        => 'বার্তা : ',
                     'request-status' => 'অনুরোধের অবস্থা : ',

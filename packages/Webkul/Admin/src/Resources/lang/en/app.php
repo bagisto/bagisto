@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'New Request For Data Update',
 
                 'new-request' => [
+                    'customer-name'  => 'Customer Name : ',
                     'delete-summary' => 'Summary of Delete Request',
                     'message'        => 'Message : ',
                     'request-status' => 'Request Status : ',

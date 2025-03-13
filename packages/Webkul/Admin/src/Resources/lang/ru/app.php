@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'Новый запрос на обновление данных',
 
                 'new-request' => [
+                    'customer-name'  => 'Имя клиента : ',
                     'delete-summary' => 'Резюме запроса на удаление',
                     'message'        => 'Сообщение : ',
                     'request-status' => 'Статус запроса : ',

@@ -14,18 +14,35 @@
     <div style="flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 20px;">
         <div style="line-height: 25px;font-size: 16px;color: #242424">
             <span style="font-weight: bold;">
-                @lang('admin::app.emails.customers.gdpr.new-request.request-status')</span> {{ $gdprRequest->status }}
+                @lang('admin::app.emails.customers.gdpr.new-request.customer-name')
+            </span>
+
+            {{ $gdprRequest->customer->name }}
+        </div>
+
+        <div style="line-height: 25px;font-size: 16px;color: #242424">
+            <span style="font-weight: bold;">
+                @lang('admin::app.emails.customers.gdpr.new-request.request-status')
+            </span> 
+
+            {{ $gdprRequest->status }}
         </div>
 
         <div style="line-height: 25px; font-size: 16px;color: #242424;">
             <div>
                 <span style="font-weight: bold;">
-                    @lang('admin::app.emails.customers.gdpr.new-request.request-type')</span> {{ $gdprRequest->type }}
+                    @lang('admin::app.emails.customers.gdpr.new-request.request-type')
+                </span> 
+
+                {{ $gdprRequest->type }}
             </div>
 
             <div>
                 <span style="font-weight: bold">
-                    @lang('admin::app.emails.customers.gdpr.new-request.message')</span> {{ $gdprRequest->message }}
+                    @lang('admin::app.emails.customers.gdpr.new-request.message')
+                </span> 
+
+                {{ $gdprRequest->message }}
             </div>
         </div>
     </div>

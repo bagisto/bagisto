@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'දත්ත යාවත්කාලීන කිරීම සඳහා නව ඉල්ලීම',
 
                 'new-request' => [
+                    'customer-name'  => 'පාරිභෝගික නම : ',
                     'delete-summary' => 'මකාදැමීමේ ඉල්ලීම් සාරාංශය',
                     'message'        => 'පණිවිඩය : ',
                     'request-status' => 'ඉල්ලීම් තත්වය : ',

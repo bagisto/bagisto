@@ -167,7 +167,7 @@ class GDPRRequestsDatagrid extends DataGrid
             'filterable_type' => 'date_range',
             'sortable'        => true,
         ]);
-        
+
         $this->addColumn([
             'index'      => 'revoke',
             'label'      => trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn'),

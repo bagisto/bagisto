@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'Novo pedido para atualização de dados',
 
                 'new-request' => [
+                    'customer-name'  => 'Nome do cliente : ',
                     'delete-summary' => 'Resumo do pedido de exclusão',
                     'message'        => 'Mensagem : ',
                     'request-status' => 'Status do pedido : ',

@@ -4761,6 +4761,7 @@ return [
                 'new-update-request' => 'Nowe żądanie aktualizacji danych',
 
                 'new-request' => [
+                    'customer-name'  => 'Nazwa klienta : ',
                     'delete-summary' => 'Podsumowanie żądania usunięcia',
                     'message'        => 'Wiadomość : ',
                     'request-status' => 'Status żądania : ',
