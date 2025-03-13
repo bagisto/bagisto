@@ -3653,20 +3653,20 @@ return [
 
             'gdpr' => [
                 'title' => 'GDPR',
-                'info'  => 'GDPR',
+                'info'  => 'GDPRコンプライアンス設定',
 
                 'settings' => [
-                    'title'   => 'GDPR設定',
-                    'info'    => 'GDPR設定',
-                    'enabled' => '有効',
+                    'title'   => 'GDPRコンプライアンス設定',
+                    'info'    => 'プライバシーポリシーを含むGDPRコンプライアンス設定を管理します。必要に応じてGDPR機能を有効または無効にします。',
+                    'enabled' => 'GDPRを有効にする',
                 ],
 
                 'agreement' => [
                     'title'          => 'GDPR同意',
-                    'info'           => 'GDPR同意',
-                    'enable'         => '顧客同意を有効にする',
-                    'checkbox-label' => '同意チェックボックスラベル',
-                    'content'        => '同意内容',
+                    'info'           => 'GDPR規制に準拠して顧客の同意を管理します。データの収集と処理のために必須の同意を有効にします。',
+                    'enable'         => '顧客の同意を有効にする',
+                    'checkbox-label' => '同意のチェックボックスラベル',
+                    'content'        => '同意の内容',
                 ],
 
                 'cookie' => [
@@ -3674,18 +3674,18 @@ return [
                     'bottom-right' => '右下',
                     'center'       => '中央',
                     'description'  => '説明',
-                    'enable'       => 'クッキーの通知を有効にする',
+                    'enable'       => 'クッキー通知を有効にする',
                     'identifier'   => '静的ブロック識別子',
-                    'info'         => 'クッキーメッセージ設定',
+                    'info'         => 'データ収集についてユーザーに通知し、プライバシーポリシーを遵守するためのクッキー同意設定を行います。',
                     'position'     => 'クッキーブロックの表示位置',
-                    'title'        => 'クッキーメッセージ設定',
+                    'title'        => 'クッキー通知設定',
                     'top-left'     => '左上',
                     'top-right'    => '右上',
                 ],
 
                 'cookie-consent' => [
-                    'title'                  => 'クッキー同意の設定',
-                    'info'                   => 'クッキー同意の設定',
+                    'title'                  => 'クッキー設定を管理する',
+                    'info'                   => '希望するクッキー設定を選択してデータの使用を制御します。さまざまな種類のクッキーに対する許可を設定します。',
                     'strictly-necessary'     => '厳密に必要',
                     'basic-interaction'      => '基本的な相互作用と機能',
                     'experience-enhancement' => '体験の向上',

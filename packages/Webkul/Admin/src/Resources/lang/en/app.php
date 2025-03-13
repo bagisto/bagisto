@@ -3634,17 +3634,17 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info'  => 'GDPR',
+                    'info'  => 'GDPR Compliance Settings',
 
                     'settings' => [
-                        'title'   => 'GDPR Settings',
-                        'info'    => 'GDPR Settings',
-                        'enabled' => 'Enabled',
+                        'title'   => 'GDPR Compliance Settings',
+                        'info'    => 'Manage GDPR compliance settings, including data privacy agreement. Enable or disable GDPR features as required',
+                        'enabled' => 'Enable GDPR',
                     ],
 
                     'agreement' => [
                         'title'          => 'GDPR Agreement',
-                        'info'           => 'GDPR Agreement',
+                        'info'           => 'Manage customer consent under GDPR regulations. Enable agreement requirements for data collection and processing.',
                         'enable'         => 'Enable Customer Agreement',
                         'checkbox-label' => 'Agreement Checkbox Label',
                         'content'        => 'Agreement Content',
@@ -3657,16 +3657,16 @@ return [
                         'description'  => 'Description',
                         'enable'       => 'Enable Cookie Notice',
                         'identifier'   => 'Static Block Identifier',
-                        'info'         => 'Cookie Message Settings',
+                        'info'         => 'Configure cookie consent settings to inform users about data collection and ensure compliance with privacy regulations.',
                         'position'     => 'Cookie Block Display Position',
-                        'title'        => 'Cookie Message Settings',
+                        'title'        => 'Cookie Notice Settings',
                         'top-left'     => 'Top Left',
                         'top-right'    => 'Top Right',
                     ],
 
                     'cookie-consent' => [
-                        'title'                  => 'Your Cookie Consent Preference',
-                        'info'                   => ' Your Cookie Consent Preference',
+                        'title'                  => 'Manage Your Cookie Preferences',
+                        'info'                   => 'Control how your data is used by selecting your preferred cookie settings. Adjust permissions for different types of cookies.',
                         'strictly-necessary'     => 'Strictly Necessary',
                         'basic-interaction'      => 'Basic Interactions & Functionalities',
                         'experience-enhancement' => 'Experience Enhancements',
