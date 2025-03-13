@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'تم إنشاء الطلب بنجاح',
+                'revoked-successfully'        => 'تم إلغاء الطلب بنجاح',
                 'success-verify'              => 'نجاح! تم إرسال بريد التحقق الإلكتروني.',
                 'success-verify-email-unsent' => 'نجاح! لم يتم إرسال بريد التحقق الإلكتروني.',
                 'unable-to-sent'              => 'تعذر إرسال البريد الإلكتروني.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'مكتمل',
                         'date'       => 'التاريخ',
                         'declined'   => 'مرفوض',
-                        'id'         => 'المعرف',
+                        'delete'     => 'حذف',
+                        'id'         => 'معرّف',
                         'message'    => 'رسالة',
                         'pending'    => 'قيد الانتظار',
                         'processing' => 'قيد المعالجة',
+                        'revoke-btn' => 'إلغاء',
+                        'revoked'    => 'ملغى',
                         'status'     => 'الحالة',
                         'type'       => 'النوع',
                         'update'     => 'تحديث',
-                        'delete'     => 'حذف',
                     ],
                 ],
 
@@ -1100,22 +1104,20 @@ return [
                 'new-update-request' => 'طلب جديد لتحديث البيانات',
 
                 'new-request' => [
-                    'message'        => 'الرسالة : ',
+                    'delete-summary' => 'ملخص طلب الحذف',
+                    'message'        => 'رسالة : ',
                     'request-status' => 'حالة الطلب : ',
                     'request-type'   => 'نوع الطلب : ',
                     'summary'        => 'ملخص الطلب',
+                    'update-summary' => 'ملخص طلب التحديث',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'الرسالة : ',
-                    'request-status' => 'حالة الطلب : ',
-                    'request-type'   => 'نوع الطلب : ',
-                    'summary'        => 'ملخص طلب الحذف',
-                ],
-
-                'update-request' => [
-                    'message'        => 'الرسالة : ',
-                    'request-status' => 'حالة الطلب : ',
+                'status-update' => [
+                    'subject'        => 'تم تحديث طلب GDPR الخاص بك',
+                    'summary'        => 'تم تحديث حالة طلب GDPR الخاص بك',
+                    'request-status' => 'حالة الطلب:',
+                    'request-type'   => 'نوع الطلب:',
+                    'message'        => 'رسالة:',
                 ],
             ],
 

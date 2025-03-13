@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => '请求创建成功',
+                'revoked-successfully'        => '请求撤销成功',
                 'success-verify'              => '成功！验证邮件已发送。',
                 'success-verify-email-unsent' => '成功！验证邮件未发送。',
                 'unable-to-sent'              => '无法发送邮件。',
@@ -404,14 +406,16 @@ return [
                         'completed'  => '已完成',
                         'date'       => '日期',
                         'declined'   => '已拒绝',
+                        'delete'     => '删除',
                         'id'         => 'ID',
-                        'message'    => '信息',
+                        'message'    => '消息',
                         'pending'    => '待处理',
                         'processing' => '处理中',
+                        'revoke-btn' => '撤销',
+                        'revoked'    => '已撤销',
                         'status'     => '状态',
                         'type'       => '类型',
                         'update'     => '更新',
-                        'delete'     => '删除',
                     ],
                 ],
 
@@ -1100,22 +1104,20 @@ return [
                 'new-update-request' => '新的数据更新请求',
 
                 'new-request' => [
-                    'message'        => '消息：',
-                    'request-status' => '请求状态：',
-                    'request-type'   => '请求类型：',
+                    'delete-summary' => '删除请求摘要',
+                    'message'        => '信息 : ',
+                    'request-status' => '请求状态 : ',
+                    'request-type'   => '请求类型 : ',
                     'summary'        => '请求摘要',
+                    'update-summary' => '更新请求摘要',
                 ],
 
-                'delete-request' => [
-                    'message'        => '消息：',
-                    'request-status' => '请求状态：',
-                    'request-type'   => '请求类型：',
-                    'summary'        => '删除请求摘要',
-                ],
-
-                'update-request' => [
-                    'message'        => '消息：',
-                    'request-status' => '请求状态：',
+                'status-update' => [
+                    'subject'        => '您的GDPR请求已更新',
+                    'summary'        => '您的GDPR请求状态已更新',
+                    'request-status' => '请求状态:',
+                    'request-type'   => '请求类型:',
+                    'message'        => '信息:',
                 ],
             ],
 

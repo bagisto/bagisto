@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Solicitação criada com sucesso',
+                'revoked-successfully'        => 'Solicitação revogada com sucesso',
                 'success-verify'              => 'Sucesso! O e-mail de verificação foi enviado.',
                 'success-verify-email-unsent' => 'Sucesso! O e-mail de verificação não foi enviado.',
                 'unable-to-sent'              => 'Não foi possível enviar o e-mail.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Concluído',
                         'date'       => 'Data',
                         'declined'   => 'Recusado',
+                        'delete'     => 'Excluir',
                         'id'         => 'ID',
                         'message'    => 'Mensagem',
                         'pending'    => 'Pendente',
-                        'processing' => 'Processando',
+                        'processing' => 'Em processamento',
+                        'revoke-btn' => 'Revogar',
+                        'revoked'    => 'Revogado',
                         'status'     => 'Status',
                         'type'       => 'Tipo',
                         'update'     => 'Atualizar',
-                        'delete'     => 'Excluir',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Nova Solicitação de Exclusão de Dados',
-                'new-update-request' => 'Nova Solicitação de Atualização de Dados',
+                'new-delete-request' => 'Novo pedido para exclusão de dados',
+                'new-update-request' => 'Novo pedido para atualização de dados',
 
                 'new-request' => [
+                    'delete-summary' => 'Resumo do pedido de exclusão',
                     'message'        => 'Mensagem : ',
-                    'request-status' => 'Status da Solicitação : ',
-                    'request-type'   => 'Tipo de Solicitação : ',
-                    'summary'        => 'Resumo da Solicitação',
+                    'request-status' => 'Status do pedido : ',
+                    'request-type'   => 'Tipo de pedido : ',
+                    'summary'        => 'Resumo do pedido',
+                    'update-summary' => 'Resumo do pedido de atualização',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Mensagem : ',
-                    'request-status' => 'Status da Solicitação : ',
-                    'request-type'   => 'Tipo de Solicitação : ',
-                    'summary'        => 'Resumo da Solicitação de Exclusão',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Mensagem : ',
-                    'request-status' => 'Status da Solicitação : ',
+                'status-update' => [
+                    'subject'        => 'Seu pedido GDPR foi atualizado',
+                    'summary'        => 'O status do seu pedido GDPR foi atualizado',
+                    'request-status' => 'Status do pedido:',
+                    'request-type'   => 'Tipo de pedido:',
+                    'message'        => 'Mensagem:',
                 ],
             ],
 

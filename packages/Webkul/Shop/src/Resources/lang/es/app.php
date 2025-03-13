@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Solicitud creada con éxito',
+                'revoked-successfully'        => 'Solicitud revocada con éxito',
                 'success-verify'              => '¡Éxito! El correo de verificación ha sido enviado.',
                 'success-verify-email-unsent' => '¡Éxito! El correo de verificación no ha sido enviado.',
                 'unable-to-sent'              => 'No se pudo enviar el correo electrónico.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Completado',
                         'date'       => 'Fecha',
                         'declined'   => 'Rechazado',
+                        'delete'     => 'Eliminar',
                         'id'         => 'ID',
                         'message'    => 'Mensaje',
                         'pending'    => 'Pendiente',
                         'processing' => 'Procesando',
+                        'revoke-btn' => 'Revocar',
+                        'revoked'    => 'Revocado',
                         'status'     => 'Estado',
                         'type'       => 'Tipo',
                         'update'     => 'Actualizar',
-                        'delete'     => 'Eliminar',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Nueva Solicitud de Eliminación de Datos',
-                'new-update-request' => 'Nueva Solicitud de Actualización de Datos',
+                'new-delete-request' => 'Nueva solicitud para eliminar datos',
+                'new-update-request' => 'Nueva solicitud para actualizar datos',
 
                 'new-request' => [
+                    'delete-summary' => 'خلاصه درخواست حذف',
                     'message'        => 'Mensaje : ',
-                    'request-status' => 'Estado de la Solicitud : ',
-                    'request-type'   => 'Tipo de Solicitud : ',
-                    'summary'        => 'Resumen de la Solicitud',
+                    'request-status' => 'Estado de la solicitud : ',
+                    'request-type'   => 'Tipo de solicitud : ',
+                    'summary'        => 'Resumen de la solicitud',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Mensaje : ',
-                    'request-status' => 'Estado de la Solicitud : ',
-                    'request-type'   => 'Tipo de Solicitud : ',
-                    'summary'        => 'Resumen de la Solicitud de Eliminación',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Mensaje : ',
-                    'request-status' => 'Estado de la Solicitud : ',
+                'status-update' => [
+                    'subject'        => 'Tu solicitud GDPR ha sido actualizada',
+                    'summary'        => 'El estado de tu solicitud GDPR ha sido actualizado',
+                    'request-status' => 'Estado de la solicitud:',
+                    'request-type'   => 'Tipo de solicitud:',
+                    'message'        => 'Mensaje:',
                 ],
             ],
 

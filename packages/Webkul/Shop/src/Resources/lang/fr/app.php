@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Demande créée avec succès',
+                'revoked-successfully'        => 'Demande révoquée avec succès',
                 'success-verify'              => 'Succès ! L\'e-mail de vérification a été envoyé.',
                 'success-verify-email-unsent' => 'Succès ! L\'e-mail de vérification n\'a pas été envoyé.',
                 'unable-to-sent'              => 'Impossible d\'envoyer l\'e-mail.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Terminé',
                         'date'       => 'Date',
                         'declined'   => 'Refusé',
+                        'delete'     => 'Supprimer',
                         'id'         => 'ID',
                         'message'    => 'Message',
                         'pending'    => 'En attente',
-                        'processing' => 'En cours',
+                        'processing' => 'En traitement',
+                        'revoke-btn' => 'Révoquer',
+                        'revoked'    => 'Révoqué',
                         'status'     => 'Statut',
                         'type'       => 'Type',
                         'update'     => 'Mettre à jour',
-                        'delete'     => 'Supprimer',
                     ],
                 ],
 
@@ -1095,27 +1099,25 @@ return [
                 'unsubscribe' => 'Se désabonner',
             ],
 
-            'rgpd' => [
-                'nouvelle-demande-suppression' => 'Nouvelle demande de suppression de données',
-                'nouvelle-demande-mise-a-jour' => 'Nouvelle demande de mise à jour de données',
+            'gdpr' => [
+                'new-delete-request' => 'Nouvelle demande de suppression de données',
+                'new-update-request' => 'Nouvelle demande de mise à jour des données',
 
-                'nouvelle-demande' => [
+                'new-request' => [
+                    'delete-summary' => 'Résumé de la demande de suppression',
                     'message'        => 'Message : ',
-                    'statut-demande' => 'Statut de la demande : ',
-                    'type-demande'   => 'Type de demande : ',
-                    'résumé'         => 'Résumé de la demande',
+                    'request-status' => 'Statut de la demande : ',
+                    'request-type'   => 'Type de demande : ',
+                    'summary'        => 'Résumé de la demande',
+                    'update-summary' => 'Résumé de la demande de mise à jour',
                 ],
 
-                'demande-suppression' => [
-                    'message'        => 'Message : ',
-                    'statut-demande' => 'Statut de la demande : ',
-                    'type-demande'   => 'Type de demande : ',
-                    'résumé'         => 'Résumé de la demande de suppression',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Message : ',
-                    'statut-demande' => 'Statut de la demande : ',
+                'status-update' => [
+                    'subject'        => 'Votre demande GDPR a été mise à jour',
+                    'summary'        => 'Le statut de votre demande GDPR a été mis à jour',
+                    'request-status' => 'Statut de la demande:',
+                    'request-type'   => 'Type de demande:',
+                    'message'        => 'Message:',
                 ],
             ],
 

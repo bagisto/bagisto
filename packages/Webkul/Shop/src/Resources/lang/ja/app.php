@@ -403,15 +403,17 @@ return [
                     'datagrid' => [
                         'completed'  => '完了',
                         'date'       => '日付',
-                        'declined'   => '拒否',
+                        'declined'   => '却下',
+                        'delete'     => '削除',
                         'id'         => 'ID',
                         'message'    => 'メッセージ',
                         'pending'    => '保留中',
                         'processing' => '処理中',
+                        'revoke-btn' => '取り消す',
+                        'revoked'    => '取り消し済み',
                         'status'     => 'ステータス',
                         'type'       => 'タイプ',
                         'update'     => '更新',
-                        'delete'     => '削除',
                     ],
                 ],
 
@@ -1096,26 +1098,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'データ削除の新しいリクエスト',
-                'new-update-request' => 'データ更新の新しいリクエスト',
+                'new-delete-request' => 'データ削除の新規リクエスト',
+                'new-update-request' => 'データ更新の新規リクエスト',
 
                 'new-request' => [
+                    'delete-summary' => '削除リクエストの概要',
                     'message'        => 'メッセージ : ',
-                    'request-status' => 'リクエストステータス : ',
+                    'request-status' => 'リクエスト状況 : ',
                     'request-type'   => 'リクエストタイプ : ',
                     'summary'        => 'リクエストの概要',
+                    'update-summary' => '更新リクエストの概要',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'メッセージ : ',
-                    'request-status' => 'リクエストステータス : ',
-                    'request-type'   => 'リクエストタイプ : ',
-                    'summary'        => '削除リクエストの概要',
-                ],
-
-                'update-request' => [
-                    'message'        => 'メッセージ : ',
-                    'request-status' => 'リクエストステータス : ',
+                'status-update' => [
+                    'subject'        => 'あなたのGDPRリクエストが更新されました',
+                    'summary'        => 'あなたのGDPRリクエストの状況が更新されました',
+                    'request-status' => 'リクエスト状況:',
+                    'request-type'   => 'リクエストタイプ:',
+                    'message'        => 'メッセージ:',
                 ],
             ],
 

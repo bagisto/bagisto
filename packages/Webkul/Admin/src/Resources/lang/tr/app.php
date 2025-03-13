@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'Mesaj',
                     'pending'       => 'Beklemede',
                     'processing'    => 'İşleniyor',
+                    'revoked'       => 'İptal edildi',
                     'status'        => 'Durum',
                     'type'          => 'Tür',
                 ],
 
                 'modal' => [
-                    'completed'  => 'Tamamlandı',
-                    'declined'   => 'Reddedildi',
-                    'pending'    => 'Beklemede',
-                    'processing' => 'İşleniyor',
-                    'status'     => 'Durum',
-                    'title'      => 'GDPR Veri Talebini Düzenle',
-                    'type'       => 'Tür',
-                    'message'    => 'Mesaj',
-                    'save-btn'   => 'Kaydet',
+                    'completed'     => 'Tamamlandı',
+                    'declined'      => 'Reddedildi',
+                    'message'       => 'Mesaj',
+                    'pending'       => 'Beklemede',
+                    'processing'    => 'İşleniyor',
+                    'revoked'       => 'İptal edildi',
+                    'save-btn'      => 'Kaydet',
+                    'status'        => 'Durum',
+                    'title'         => 'GDPR Veri Talebini Düzenle',
+                    'type'          => 'Tür',
                 ],
 
                 'update-success'              => 'Veri Talebi başarıyla güncellendi ve Müşteriye E-posta Gönderildi.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'Aramıza yeni kaydolan yeni müşterimiz :customer_name `e sıcak bir karşılama dileriz!',
                 'subject'     => 'Yeni Müşteri Kaydı',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'GDPR talebinizin durumu',
+            'gdpr' => [
+                'new-delete-request' => 'Veri Silme için Yeni Talep',
+                'new-update-request' => 'Veri Güncelleme için Yeni Talep',
+
+                'new-request' => [
+                    'customer-name'  => 'Müşteri Adı : ',
+                    'delete-summary' => 'Silme isteğinin özeti',
+                    'message'        => 'Mesaj : ',
+                    'request-status' => 'Talep Durumu : ',
+                    'request-type'   => 'Talep Türü : ',
+                    'summary'        => 'Talep Özeti',
+                    'update-summary' => 'Güncelleme isteğinin özeti',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR Talebi Güncellendi',
+                    'summary'        => 'GDPR Talebinin Durumu Güncellendi',
+                    'request-status' => 'Talep Durumu:',
+                    'request-type'   => 'Talep Türü:',
+                    'message'        => 'Mesaj:',
+                ],
+            ],
         ],
 
         'orders' => [

@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'הבקשה נוצרה בהצלחה',
+                'revoked-successfully'        => 'הבקשה בוטלה בהצלחה',
                 'success-verify'              => 'הצלחה! אימייל האימות נשלח.',
                 'success-verify-email-unsent' => 'הצלחה! אימייל האימות לא נשלח.',
                 'unable-to-sent'              => 'לא ניתן לשלוח אימייל.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'הושלם',
                         'date'       => 'תאריך',
                         'declined'   => 'נדחה',
+                        'delete'     => 'מחק',
                         'id'         => 'מזהה',
                         'message'    => 'הודעה',
                         'pending'    => 'ממתין',
                         'processing' => 'בעיבוד',
+                        'revoke-btn' => 'לבטל',
+                        'revoked'    => 'בוטל',
                         'status'     => 'סטטוס',
                         'type'       => 'סוג',
                         'update'     => 'עדכן',
-                        'delete'     => 'מחק',
                     ],
                 ],
 
@@ -1100,22 +1104,20 @@ return [
                 'new-update-request' => 'בקשה חדשה לעדכון נתונים',
 
                 'new-request' => [
+                    'delete-summary' => 'סיכום בקשת המחיקה',
                     'message'        => 'הודעה : ',
                     'request-status' => 'סטטוס הבקשה : ',
                     'request-type'   => 'סוג הבקשה : ',
                     'summary'        => 'סיכום הבקשה',
+                    'update-summary' => 'סיכום בקשת העדכון',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'הודעה : ',
-                    'request-status' => 'סטטוס הבקשה : ',
-                    'request-type'   => 'סוג הבקשה : ',
-                    'summary'        => 'סיכום בקשת המחיקה',
-                ],
-
-                'update-request' => [
-                    'message'        => 'הודעה : ',
-                    'request-status' => 'סטטוס הבקשה : ',
+                'status-update' => [
+                    'subject'        => 'הבקשה GDPR שלך עודכנה',
+                    'summary'        => 'סטטוס הבקשה GDPR שלך עודכן',
+                    'request-status' => 'סטטוס הבקשה:',
+                    'request-type'   => 'סוג הבקשה:',
+                    'message'        => 'הודעה:',
                 ],
             ],
 

@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'Wiadomość',
                     'pending'       => 'Oczekujące',
                     'processing'    => 'Przetwarzanie',
+                    'revoked'       => 'Cofnięty',
                     'status'        => 'Status',
                     'type'          => 'Typ',
                 ],
 
                 'modal' => [
-                    'completed'  => 'Zakończone',
-                    'declined'   => 'Odrzucone',
-                    'pending'    => 'Oczekujące',
-                    'processing' => 'Przetwarzanie',
-                    'status'     => 'Status',
-                    'title'      => 'Edytuj żądanie danych GDPR',
-                    'type'       => 'Typ',
-                    'message'    => 'Wiadomość',
-                    'save-btn'   => 'Zapisz',
+                    'completed'     => 'Zakończone',
+                    'declined'      => 'Odrzucone',
+                    'message'       => 'Wiadomość',
+                    'pending'       => 'Oczekujące',
+                    'processing'    => 'Przetwarzanie',
+                    'revoked'       => 'Cofnięty',
+                    'save-btn'      => 'Zapisz',
+                    'status'        => 'Status',
+                    'title'         => 'Edytuj żądanie danych GDPR',
+                    'type'          => 'Typ',
                 ],
 
                 'update-success'              => 'Żądanie danych zostało pomyślnie zaktualizowane i wysłano e-mail do klienta.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'Serdecznie witamy nowego klienta, :customer_name, który właśnie się u nas zarejestrował!',
                 'subject'     => 'Rejestracja nowego klienta',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Status twojego żądania GDPR',
+            'gdpr' => [
+                'new-delete-request' => 'Nowe żądanie usunięcia danych',
+                'new-update-request' => 'Nowe żądanie aktualizacji danych',
+
+                'new-request' => [
+                    'customer-name'  => 'Nazwa klienta : ',
+                    'delete-summary' => 'Podsumowanie żądania usunięcia',
+                    'message'        => 'Wiadomość : ',
+                    'request-status' => 'Status żądania : ',
+                    'request-type'   => 'Typ żądania : ',
+                    'summary'        => 'Podsumowanie żądania',
+                    'update-summary' => 'Podsumowanie żądania aktualizacji',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Żądanie GDPR zostało zaktualizowane',
+                    'summary'        => 'Status żądania GDPR został zaktualizowany',
+                    'request-status' => 'Status żądania:',
+                    'request-type'   => 'Typ żądania:',
+                    'message'        => 'Wiadomość:',
+                ],
+            ],
         ],
 
         'orders' => [

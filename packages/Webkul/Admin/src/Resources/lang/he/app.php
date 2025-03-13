@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'הודעה',
                     'pending'       => 'ממתין',
                     'processing'    => 'מעבד',
+                    'revoked'       => 'בוטל',
                     'status'        => 'סטטוס',
                     'type'          => 'סוג',
                 ],
 
                 'modal' => [
-                    'completed'  => 'הושלם',
-                    'declined'   => 'נדחה',
-                    'pending'    => 'ממתין',
-                    'processing' => 'מעבד',
-                    'status'     => 'סטטוס',
-                    'title'      => 'ערוך בקשת נתוני GDPR',
-                    'type'       => 'סוג',
-                    'message'    => 'הודעה',
-                    'save-btn'   => 'שמור',
+                    'completed'     => 'הושלם',
+                    'declined'      => 'נדחה',
+                    'message'       => 'הודעה',
+                    'pending'       => 'ממתין',
+                    'processing'    => 'מעבד',
+                    'revoked'       => 'בוטל',
+                    'save-btn'      => 'שמור',
+                    'status'        => 'סטטוס',
+                    'title'         => 'ערוך בקשת נתוני GDPR',
+                    'type'          => 'סוג',
                 ],
 
                 'update-success'              => 'בקשת הנתונים עודכנה בהצלחה ואימייל נשלח ללקוח.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'אנו מקבלים בברכה את הלקוח החדש, :customer_name שזה עתה נרשם אלינו!',
                 'subject'     => 'רישום לקוח חדש',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'מצב בקשת ה-GDPR שלך',
+            'gdpr' => [
+                'new-delete-request' => 'בקשה חדשה למחיקת נתונים',
+                'new-update-request' => 'בקשה חדשה לעדכון נתונים',
+
+                'new-request' => [
+                    'customer-name'  => 'שם הלקוח : ',
+                    'delete-summary' => 'סיכום בקשת המחיקה',
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                    'request-type'   => 'סוג הבקשה : ',
+                    'summary'        => 'סיכום הבקשה',
+                    'update-summary' => 'סיכום בקשת העדכון',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'בקשת ה-GDPR עודכנה',
+                    'summary'        => 'סטטוס בקשת ה-GDPR עודכן',
+                    'request-status' => 'סטטוס הבקשה:',
+                    'request-type'   => 'סוג הבקשה:',
+                    'message'        => 'הודעה:',
+                ],
+            ],
         ],
 
         'orders' => [

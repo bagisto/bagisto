@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'Messaggio',
                     'pending'       => 'In Attesa',
                     'processing'    => 'In Elaborazione',
+                    'revoked'       => 'Revocato',
                     'status'        => 'Stato',
                     'type'          => 'Tipo',
                 ],
 
                 'modal' => [
-                    'completed'  => 'Completato',
-                    'declined'   => 'Rifiutato',
-                    'pending'    => 'In Attesa',
-                    'processing' => 'In Elaborazione',
-                    'status'     => 'Stato',
-                    'title'      => 'Modifica Richiesta Dati GDPR',
-                    'type'       => 'Tipo',
-                    'message'    => 'Messaggio',
-                    'save-btn'   => 'Salva',
+                    'completed'     => 'Completato',
+                    'declined'      => 'Rifiutato',
+                    'message'       => 'Messaggio',
+                    'pending'       => 'In Attesa',
+                    'processing'    => 'In Elaborazione',
+                    'revoked'       => 'Revocato',
+                    'save-btn'      => 'Salva',
+                    'status'        => 'Stato',
+                    'title'         => 'Modifica Richiesta Dati GDPR',
+                    'type'          => 'Tipo',
                 ],
 
                 'update-success'              => 'Richiesta Dati aggiornata con successo e Email inviata al Cliente.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'Diamo un caloroso benvenuto al nuovo cliente, :customer_name che si è appena registrato con noi!',
                 'subject'     => 'Nuova registrazione cliente',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Lo stato della tua richiesta GDPR',
+            'gdpr' => [
+                'new-delete-request' => 'Nuova richiesta per eliminare dati',
+                'new-update-request' => 'Nuova richiesta per aggiornare dati',
+
+                'new-request' => [
+                    'customer-name'  => 'Nome del cliente : ',
+                    'update-summary' => 'Riepilogo della richiesta di aggiornamento',
+                    'delete-summary' => 'Riepilogo della richiesta di eliminazione',
+                    'message'        => 'Messaggio : ',
+                    'request-status' => 'Stato della richiesta : ',
+                    'request-type'   => 'Tipo di richiesta : ',
+                    'summary'        => 'Riepilogo della richiesta',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'La richiesta GDPR è stata aggiornata',
+                    'summary'        => 'Lo stato della richiesta GDPR è stato aggiornato',
+                    'request-status' => 'Stato della richiesta:',
+                    'request-type'   => 'Tipo di richiesta:',
+                    'message'        => 'Messaggio:',
+                ],
+            ],
         ],
 
         'orders' => [

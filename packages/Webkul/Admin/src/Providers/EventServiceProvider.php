@@ -5,6 +5,7 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Webkul\Admin\Listeners\Admin;
 use Webkul\Admin\Listeners\Customer;
+use Webkul\Admin\Listeners\GDPR;
 use Webkul\Admin\Listeners\Invoice;
 use Webkul\Admin\Listeners\Order;
 use Webkul\Admin\Listeners\Refund;
@@ -20,6 +21,14 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'customer.create.after' => [
             [Customer::class, 'afterCreated'],
+        ],
+
+        'customer.gdpr-request.create.after' => [
+            [GDPR::class, 'afterGdprRequestCreated'],
+        ],
+
+        'customer.gdpr-request.update.after' => [
+            [GDPR::class, 'afterGdprRequestUpdated'],
         ],
 
         'admin.password.update.after' => [

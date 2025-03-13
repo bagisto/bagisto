@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'درخواست با موفقیت ایجاد شد',
+                'revoked-successfully'        => 'درخواست با موفقیت لغو شد',
                 'success-verify'              => 'موفقیت! ایمیل تأیید ارسال شد.',
                 'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشده است.',
                 'unable-to-sent'              => 'امکان ارسال ایمیل وجود ندارد.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'تکمیل شده',
                         'date'       => 'تاریخ',
                         'declined'   => 'رد شده',
+                        'delete'     => 'حذف',
                         'id'         => 'شناسه',
                         'message'    => 'پیام',
                         'pending'    => 'در انتظار',
                         'processing' => 'در حال پردازش',
+                        'revoke-btn' => 'ابطال',
+                        'revoked'    => 'ابطال شده',
                         'status'     => 'وضعیت',
                         'type'       => 'نوع',
                         'update'     => 'به‌روزرسانی',
-                        'delete'     => 'حذف',
                     ],
                 ],
 
@@ -1097,26 +1101,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'درخواست جدید برای حذف داده‌ها',
-                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده‌ها',
+                'new-delete-request' => 'درخواست جدید برای حذف داده',
+                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
 
                 'new-request' => [
+                    'delete-summary' => 'خلاصه درخواست حذف',
                     'message'        => 'پیام : ',
                     'request-status' => 'وضعیت درخواست : ',
                     'request-type'   => 'نوع درخواست : ',
                     'summary'        => 'خلاصه درخواست',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'پیام : ',
-                    'request-status' => 'وضعیت درخواست : ',
-                    'request-type'   => 'نوع درخواست : ',
-                    'summary'        => 'خلاصه درخواست حذف',
-                ],
-
-                'update-request' => [
-                    'message'        => 'پیام : ',
-                    'request-status' => 'وضعیت درخواست : ',
+                'status-update' => [
+                    'subject'        => 'درخواست GDPR شما به‌روزرسانی شد',
+                    'summary'        => 'وضعیت درخواست GDPR شما به‌روزرسانی شد',
+                    'request-status' => 'وضعیت درخواست:',
+                    'request-type'   => 'نوع درخواست:',
+                    'message'        => 'پیام:',
                 ],
             ],
 

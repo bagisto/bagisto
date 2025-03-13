@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Запит успішно створено',
+                'revoked-successfully'        => 'Запит успішно скасовано',
                 'success-verify'              => 'Успішно! Лист для підтвердження відправлено.',
                 'success-verify-email-unsent' => 'Успішно! Лист для підтвердження не відправлено.',
                 'unable-to-sent'              => 'Не вдалося надіслати листа.',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'Завершено',
                         'date'       => 'Дата',
                         'declined'   => 'Відхилено',
+                        'delete'     => 'Видалити',
                         'id'         => 'ID',
                         'message'    => 'Повідомлення',
                         'pending'    => 'В очікуванні',
-                        'processing' => 'Обробка',
+                        'processing' => 'В обробці',
+                        'revoke-btn' => 'Скасувати',
+                        'revoked'    => 'Скасовано',
                         'status'     => 'Статус',
                         'type'       => 'Тип',
                         'update'     => 'Оновити',
-                        'delete'     => 'Видалити',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Новий запит на видалення даних',
-                'new-update-request' => 'Новий запит на оновлення даних',
+                'new-delete-request' => 'Нове запит на видалення даних',
+                'new-update-request' => 'Нове запит на оновлення даних',
 
                 'new-request' => [
+                    'delete-summary' => 'Резюме запиту на видалення',
                     'message'        => 'Повідомлення : ',
                     'request-status' => 'Статус запиту : ',
                     'request-type'   => 'Тип запиту : ',
                     'summary'        => 'Резюме запиту',
+                    'update-summary' => 'Резюме запиту на оновлення',
                 ],
 
-                'update-request' => [
-                    'message'        => 'Повідомлення : ',
-                    'request-status' => 'Статус запиту : ',
-                ],
-
-                'delete-request' => [
-                    'message'        => 'Повідомлення : ',
-                    'request-status' => 'Статус запиту : ',
-                    'request-type'   => 'Тип запиту : ',
-                    'summary'        => 'Резюме запиту на видалення',
+                'status-update' => [
+                    'subject'        => 'Ваш запит GDPR оновлено',
+                    'summary'        => 'Статус вашого запиту GDPR оновлено',
+                    'request-status' => 'Статус запиту:',
+                    'request-type'   => 'Тип запиту:',
+                    'message'        => 'Повідомлення:',
                 ],
             ],
 

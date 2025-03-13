@@ -2,14 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\GDPRRequestsDatagrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\Gdpr\DeleteRequestMail;
-use Webkul\Shop\Mail\Customer\Gdpr\UpdateRequestMail;
 
 class GDPRController extends Controller
 {
@@ -55,21 +54,15 @@ class GDPRController extends Controller
             'message'       => request()->get(request()->message),
         ];
 
-        $data = $this->gdprDataRequestRepository->create($params);
+        Event::dispatch('customer.account.gdpr-request.create.before');
 
-        if ($data) {
-            $mailClass = $params['type'] == 'update' ? UpdateRequestMail::class : DeleteRequestMail::class;
+        $gdprRequest = $this->gdprDataRequestRepository->create($params);
 
-            try {
-                Mail::queue(new $mailClass($params));
+        Event::dispatch('customer.account.gdpr-request.create.after', $gdprRequest);
 
-                session()->flash('success', trans('shop::app.customers.account.gdpr.success-verify'));
-            } catch (\Exception $e) {
-                session()->flash('warning', trans('shop::app.customers.account.gdpr.success-verify-email-unsent'));
-            }
-        } else {
-            session()->flash('error', trans('shop::app.customers.account.gdpr.unable-to-sent'));
-        }
+        Event::dispatch('customer.gdpr-request.create.after', $gdprRequest);
+
+        session()->flash('success', trans('shop::app.customers.account.gdpr.create-success'));
 
         return redirect()->route('shop.customers.account.gdpr.index');
     }
@@ -149,5 +142,40 @@ class GDPRController extends Controller
     public function cookieConsent()
     {
         return view('shop::components.layouts.cookie.consent');
+    }
+
+    /**
+     * Revoke a GDPR request.
+     */
+    public function revoke($id)
+    {
+        $customer = auth()->guard('customer')->user();
+
+        $data = $this->gdprDataRequestRepository->findWhere([
+            'id'          => $id,
+            'customer_id' => $customer->id,
+            'status'      => 'pending',
+        ])->first();
+
+        if (! $data) {
+            session()->flash('error', trans('shop::app.customers.account.gdpr.revoke-failed'));
+
+            return redirect()->route('shop.customers.account.gdpr.index');
+        }
+
+        Event::dispatch('customer.account.gdpr-request.update.before');
+
+        $gdprRequest = $this->gdprDataRequestRepository->update([
+            'status'     => 'revoked',
+            'revoked_at' => Carbon::now(),
+        ], $id);
+
+        Event::dispatch('customer.account.gdpr-request.update.after', $gdprRequest);
+
+        Event::dispatch('customer.gdpr-request.update.after', $gdprRequest);
+
+        session()->flash('success', trans('shop::app.customers.account.gdpr.revoked-successfully'));
+
+        return redirect()->route('shop.customers.account.gdpr.index');
     }
 }

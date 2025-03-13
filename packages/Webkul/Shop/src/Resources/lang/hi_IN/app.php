@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'अनुरोध सफलतापूर्वक बनाया गया',
+                'revoked-successfully'        => 'अनुरोध सफलतापूर्वक रद्द किया गया',
                 'success-verify'              => 'Successo! L\'email di verifica è stata inviata.',
                 'success-verify-email-unsent' => 'Successo! L\'email di verifica non è stata inviata.',
                 'unable-to-sent'              => 'Impossibile inviare l\'email.',
@@ -401,17 +403,19 @@ return [
                     ],
 
                     'datagrid' => [
-                        'completed'  => 'Completato',
-                        'date'       => 'Data',
-                        'declined'   => 'Rifiutato',
-                        'id'         => 'ID',
-                        'message'    => 'Messaggio',
-                        'pending'    => 'In attesa',
-                        'processing' => 'Elaborazione',
-                        'status'     => 'Stato',
-                        'type'       => 'Tipo',
-                        'update'     => 'Aggiorna',
-                        'delete'     => 'Elimina',
+                        'completed'  => 'पूरा हुआ',
+                        'date'       => 'तारीख',
+                        'declined'   => 'अस्वीकृत',
+                        'delete'     => 'हटाएं',
+                        'id'         => 'आईडी',
+                        'message'    => 'संदेश',
+                        'pending'    => 'लंबित',
+                        'processing' => 'प्रक्रियाधीन',
+                        'revoke-btn' => 'रद्द करें',
+                        'revoked'    => 'रद्द किया गया',
+                        'status'     => 'स्थिति',
+                        'type'       => 'प्रकार',
+                        'update'     => 'अद्यतन करें',
                     ],
                 ],
 
@@ -1097,25 +1101,23 @@ return [
 
             'gdpr' => [
                 'new-delete-request' => 'डेटा हटाने के लिए नया अनुरोध',
-                'new-update-request' => 'डेटा अपडेट के लिए नया अनुरोध',
+                'new-update-request' => 'डेटा अपडेट करने के लिए नया अनुरोध',
 
                 'new-request' => [
+                    'delete-summary' => 'हटाने के अनुरोध का सारांश',
                     'message'        => 'संदेश : ',
-                    'request-status' => 'अनुरोध की स्थिति : ',
+                    'request-status' => 'अनुरोध स्थिति : ',
                     'request-type'   => 'अनुरोध प्रकार : ',
                     'summary'        => 'अनुरोध का सारांश',
+                    'update-summary' => 'अद्यतन अनुरोध का सारांश',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'संदेश : ',
-                    'request-status' => 'अनुरोध की स्थिति : ',
-                    'request-type'   => 'अनुरोध प्रकार : ',
-                    'summary'        => 'हटाने के अनुरोध का सारांश',
-                ],
-
-                'update-request' => [
-                    'message'        => 'संदेश : ',
-                    'request-status' => 'अनुरोध की स्थिति : ',
+                'status-update' => [
+                    'subject'        => 'आपका GDPR अनुरोध अपडेट किया गया है',
+                    'summary'        => 'आपके GDPR अनुरोध की स्थिति अपडेट की गई है',
+                    'request-status' => 'अनुरोध स्थिति:',
+                    'request-type'   => 'अनुरोध प्रकार:',
+                    'message'        => 'संदेश:',
                 ],
             ],
 

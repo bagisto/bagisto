@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'پیام',
                     'pending'       => 'در انتظار',
                     'processing'    => 'در حال پردازش',
+                    'revoked'       => 'ابطال شده',
                     'status'        => 'وضعیت',
                     'type'          => 'نوع',
                 ],
 
                 'modal' => [
-                    'completed'  => 'تکمیل شده',
-                    'declined'   => 'رد شده',
-                    'pending'    => 'در انتظار',
-                    'processing' => 'در حال پردازش',
-                    'status'     => 'وضعیت',
-                    'title'      => 'ویرایش درخواست داده GDPR',
-                    'type'       => 'نوع',
-                    'message'    => 'پیام',
-                    'save-btn'   => 'ذخیره',
+                    'completed'     => 'تکمیل شده',
+                    'declined'      => 'رد شده',
+                    'message'       => 'پیام',
+                    'pending'       => 'در انتظار',
+                    'processing'    => 'در حال پردازش',
+                    'revoked'       => 'ابطال شده',
+                    'save-btn'      => 'ذخیره',
+                    'status'        => 'وضعیت',
+                    'title'         => 'ویرایش درخواست داده GDPR',
+                    'type'          => 'نوع',
                 ],
 
                 'update-success'              => 'درخواست داده با موفقیت به‌روزرسانی شد و ایمیل به مشتری ارسال شد.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'ما به مشتری جدید، :customer_name که به تازگی با ما ثبت نام کرده است، خوش آمد می گوییم!',
                 'subject'     => 'ثبت نام مشتری جدید',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'وضعیت درخواست GDPR شما',
+            'gdpr' => [
+                'new-delete-request' => 'درخواست جدید برای حذف داده',
+                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
+
+                'new-request' => [
+                    'customer-name'  => 'نام مشتری : ',
+                    'delete-summary' => 'خلاصه درخواست حذف',
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                    'request-type'   => 'نوع درخواست : ',
+                    'summary'        => 'خلاصه درخواست',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'درخواست GDPR به‌روزرسانی شد',
+                    'summary'        => 'وضعیت درخواست GDPR به‌روزرسانی شد',
+                    'request-status' => 'وضعیت درخواست:',
+                    'request-type'   => 'نوع درخواست:',
+                    'message'        => 'پیام:',
+                ],
+            ],
         ],
 
         'orders' => [

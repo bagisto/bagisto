@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Verzoek succesvol aangemaakt',
+                'revoked-successfully'        => 'Verzoek succesvol ingetrokken',
                 'success-verify'              => 'Succes! Verificatie-e-mail is verzonden.',
                 'success-verify-email-unsent' => 'Succes! Verificatie-e-mail is niet verzonden.',
                 'unable-to-sent'              => 'E-mail kon niet worden verzonden.',
@@ -403,15 +405,17 @@ return [
                     'datagrid' => [
                         'completed'  => 'Voltooid',
                         'date'       => 'Datum',
-                        'declined'   => 'Afgewezen',
+                        'declined'   => 'Geweigerd',
+                        'delete'     => 'Verwijderen',
                         'id'         => 'ID',
                         'message'    => 'Bericht',
                         'pending'    => 'In afwachting',
-                        'processing' => 'Verwerken',
+                        'processing' => 'In verwerking',
+                        'revoke-btn' => 'Intrekken',
+                        'revoked'    => 'Ingetrokken',
                         'status'     => 'Status',
                         'type'       => 'Type',
                         'update'     => 'Bijwerken',
-                        'delete'     => 'Verwijderen',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Nieuw Verzoek Voor Gegevensverwijdering',
-                'new-update-request' => 'Nieuw Verzoek Voor Gegevensbijwerking',
+                'new-delete-request' => 'Nieuwe aanvraag voor gegevensverwijdering',
+                'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
 
                 'new-request' => [
+                    'delete-summary' => 'Samenvatting van verwijderingsverzoek',
                     'message'        => 'Bericht : ',
-                    'request-status' => 'Verzoekstatus : ',
-                    'request-type'   => 'Verzoektype : ',
-                    'summary'        => 'Samenvatting van Verzoek',
+                    'request-status' => 'Aanvraagstatus : ',
+                    'request-type'   => 'Aanvraagtype : ',
+                    'summary'        => 'Overzicht van de aanvraag',
+                    'update-summary' => 'Samenvatting van updateverzoek',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Bericht : ',
-                    'request-status' => 'Verzoekstatus : ',
-                    'request-type'   => 'Verzoektype : ',
-                    'summary'        => 'Samenvatting van Verwijderverzoek',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Bericht : ',
-                    'request-status' => 'Verzoekstatus : ',
+                'status-update' => [
+                    'subject'        => 'Uw GDPR-aanvraag is bijgewerkt',
+                    'summary'        => 'De status van uw GDPR-aanvraag is bijgewerkt',
+                    'request-status' => 'Aanvraagstatus:',
+                    'request-type'   => 'Aanvraagtype:',
+                    'message'        => 'Bericht:',
                 ],
             ],
 

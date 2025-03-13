@@ -1780,20 +1780,22 @@ return [
                     'message'       => '消息',
                     'pending'       => '待处理',
                     'processing'    => '处理中',
+                    'revoked'       => '已撤销',
                     'status'        => '状态',
                     'type'          => '类型',
                 ],
 
                 'modal' => [
-                    'completed'  => '已完成',
-                    'declined'   => '已拒绝',
-                    'pending'    => '待处理',
-                    'processing' => '处理中',
-                    'status'     => '状态',
-                    'title'      => '编辑 GDPR 数据请求',
-                    'type'       => '类型',
-                    'message'    => '消息',
-                    'save-btn'   => '保存',
+                    'completed'     => '已完成',
+                    'declined'      => '已拒绝',
+                    'message'       => '消息',
+                    'pending'       => '待处理',
+                    'processing'    => '处理中',
+                    'revoked'       => '已撤销',
+                    'save-btn'      => '保存',
+                    'status'        => '状态',
+                    'title'         => '编辑 GDPR 数据请求',
+                    'type'          => '类型',
                 ],
 
                 'update-success'              => '数据请求更新成功并已发送邮件给客户。',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => '我们热烈欢迎刚刚在我们这里注册的新客户：customer_name！',
                 'subject'     => '新客户注册',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => '您的 GDPR 请求状态',
+            'gdpr' => [
+                'new-delete-request' => '新的数据删除请求',
+                'new-update-request' => '新的数据更新请求',
+
+                'new-request' => [
+                    'customer-name'  => '客户名称 : ',
+                    'delete-summary' => '删除请求摘要',
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                    'request-type'   => '请求类型：',
+                    'summary'        => '请求摘要',
+                    'update-summary' => '更新请求摘要',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR请求已更新',
+                    'summary'        => 'GDPR请求状态已更新',
+                    'request-status' => '请求状态:',
+                    'request-type'   => '请求类型:',
+                    'message'        => '信息:',
+                ],
+            ],
         ],
 
         'orders' => [

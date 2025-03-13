@@ -1780,20 +1780,22 @@ return [
                     'message'       => 'Bericht',
                     'pending'       => 'In Afwachting',
                     'processing'    => 'Verwerken',
+                    'revoked'       => 'Herroepen',
                     'status'        => 'Status',
                     'type'          => 'Type',
                 ],
 
                 'modal' => [
-                    'completed'  => 'Voltooid',
-                    'declined'   => 'Afgewezen',
-                    'pending'    => 'In Afwachting',
-                    'processing' => 'Verwerken',
-                    'status'     => 'Status',
-                    'title'      => 'Bewerk GDPR Gegevensverzoek',
-                    'type'       => 'Type',
-                    'message'    => 'Bericht',
-                    'save-btn'   => 'Opslaan',
+                    'completed'     => 'Voltooid',
+                    'declined'      => 'Afgewezen',
+                    'message'       => 'Bericht',
+                    'pending'       => 'In Afwachting',
+                    'processing'    => 'Verwerken',
+                    'revoked'       => 'Herroepen',
+                    'save-btn'      => 'Opslaan',
+                    'status'        => 'Status',
+                    'title'         => 'Bewerk GDPR Gegevensverzoek',
+                    'type'          => 'Type',
                 ],
 
                 'update-success'              => 'Gegevensverzoek succesvol bijgewerkt en e-mail verzonden naar klant.',
@@ -4753,10 +4755,29 @@ return [
                 'greeting'    => 'Wij heten de nieuwe klant, :customer_name, die zich zojuist bij ons heeft geregistreerd, van harte welkom!',
                 'subject'     => 'Nieuwe klantregistratie',
             ],
-        ],
 
-        'gdpr' => [
-            'status' => 'Uw GDPR-verzoekstatus',
+            'gdpr' => [
+                'new-delete-request' => 'Nieuwe aanvraag voor gegevensverwijdering',
+                'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
+
+                'new-request' => [
+                    'customer-name'  => 'Klantnaam : ',
+                    'delete-summary' => 'Samenvatting van verwijderingsverzoek',
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Aanvraagstatus : ',
+                    'request-type'   => 'Aanvraagtype : ',
+                    'summary'        => 'Overzicht van de aanvraag',
+                    'update-summary' => 'Samenvatting van updateverzoek',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR-aanvraag is bijgewerkt',
+                    'summary'        => 'De status van de GDPR-aanvraag is bijgewerkt',
+                    'request-status' => 'Aanvraagstatus:',
+                    'request-type'   => 'Aanvraagtype:',
+                    'message'        => 'Bericht:',
+                ],
+            ],
         ],
 
         'orders' => [

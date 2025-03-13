@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'অনুরোধ সফলভাবে তৈরি হয়েছে',
+                'revoked-successfully'        => 'অনুরোধ সফলভাবে বাতিল হয়েছে',
                 'success-verify'              => 'সফলতা! যাচাইকরণ ইমেল পাঠানো হয়েছে।',
                 'success-verify-email-unsent' => 'সফলতা! যাচাইকরণ ইমেল পাঠানো হয়নি।',
                 'unable-to-sent'              => 'ইমেল পাঠাতে অক্ষম।',
@@ -404,14 +406,16 @@ return [
                         'completed'  => 'সম্পন্ন',
                         'date'       => 'তারিখ',
                         'declined'   => 'প্রত্যাখ্যাত',
+                        'delete'     => 'মুছে ফেলা',
                         'id'         => 'আইডি',
                         'message'    => 'বার্তা',
-                        'pending'    => 'অপেক্ষমাণ',
+                        'pending'    => 'মুলতুবি',
                         'processing' => 'প্রক্রিয়াধীন',
+                        'revoke-btn' => 'বাতিল করুন',
+                        'revoked'    => 'বাতিল',
                         'status'     => 'অবস্থা',
                         'type'       => 'ধরন',
                         'update'     => 'আপডেট',
-                        'delete'     => 'মুছুন',
                     ],
                 ],
 
@@ -1098,25 +1102,23 @@ return [
 
             'gdpr' => [
                 'new-delete-request' => 'ডেটা মুছে ফেলার জন্য নতুন অনুরোধ',
-                'new-update-request' => 'ডেটা আপডেটের জন্য নতুন অনুরোধ',
+                'new-update-request' => 'ডেটা আপডেট করার জন্য নতুন অনুরোধ',
 
                 'new-request' => [
+                    'delete-summary' => 'মুছে ফেলার অনুরোধের সংক্ষিপ্তসার',
                     'message'        => 'বার্তা : ',
                     'request-status' => 'অনুরোধের অবস্থা : ',
                     'request-type'   => 'অনুরোধের ধরন : ',
-                    'summary'        => 'অনুরোধের সংক্ষেপ',
+                    'summary'        => 'অনুরোধের সারাংশ',
+                    'update-summary' => 'আপডেট অনুরোধের সংক্ষিপ্তসার',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'বার্তা : ',
-                    'request-status' => 'অনুরোধের অবস্থা : ',
-                    'request-type'   => 'অনুরোধের ধরন : ',
-                    'summary'        => 'মুছে ফেলার অনুরোধের সংক্ষেপ',
-                ],
-
-                'update-request' => [
-                    'message'        => 'বার্তা : ',
-                    'request-status' => 'অনুরোধের অবস্থা : ',
+                'status-update' => [
+                    'subject'        => 'আপনার GDPR অনুরোধ আপডেট হয়েছে',
+                    'summary'        => 'আপনার GDPR অনুরোধের অবস্থা আপডেট হয়েছে',
+                    'request-status' => 'অনুরোধের অবস্থা:',
+                    'request-type'   => 'অনুরোধের ধরন:',
+                    'message'        => 'বার্তা:',
                 ],
             ],
 

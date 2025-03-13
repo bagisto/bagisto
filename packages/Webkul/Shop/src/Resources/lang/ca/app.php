@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'Request created successfully',
+                'revoked-successfully'        => 'Request revoked successfully',
                 'success-verify'              => 'Èxit! S\'ha enviat el correu electrònic de verificació.',
                 'success-verify-email-unsent' => 'Èxit! El correu electrònic de verificació no s\'ha enviat.',
                 'unable-to-sent'              => 'No s\'ha pogut enviar el correu electrònic.',
@@ -401,17 +403,19 @@ return [
                     ],
 
                     'datagrid' => [
-                        'completed'  => 'Completat',
-                        'date'       => 'Data',
-                        'declined'   => 'Denegat',
+                        'completed'  => 'Completed',
+                        'date'       => 'Date',
+                        'declined'   => 'Declined',
+                        'delete'     => 'Delete',
                         'id'         => 'ID',
-                        'message'    => 'Missatge',
-                        'pending'    => 'Pendent',
-                        'processing' => 'En processament',
-                        'status'     => 'Estat',
-                        'type'       => 'Tipus',
-                        'update'     => 'Actualitza',
-                        'delete'     => 'Elimina',
+                        'message'    => 'Message',
+                        'pending'    => 'Pending',
+                        'processing' => 'Processing',
+                        'revoke-btn' => 'Revoke',
+                        'revoked'    => 'Revoked',
+                        'status'     => 'Status',
+                        'type'       => 'Type',
+                        'update'     => 'Update',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'Nova sol·licitud per eliminar dades',
-                'new-update-request' => 'Nova sol·licitud per actualitzar dades',
+                'new-delete-request' => 'New Request For Data Delete',
+                'new-update-request' => 'New Request For Data Update',
 
                 'new-request' => [
-                    'message'        => 'Missatge : ',
-                    'request-status' => 'Estat de la sol·licitud : ',
-                    'request-type'   => 'Tipus de sol·licitud : ',
-                    'summary'        => 'Resum de la sol·licitud',
+                    'delete-summary' => 'Zusammenfassung der Löschanforderung',
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'summary'        => 'Summary of Request',
+                    'update-summary' => 'Zusammenfassung der Aktualisierungsanforderung',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'Missatge : ',
-                    'request-status' => 'Estat de la sol·licitud : ',
-                    'request-type'   => 'Tipus de sol·licitud : ',
-                    'summary'        => 'Resum de la sol·licitud d\'eliminació',
-                ],
-
-                'update-request' => [
-                    'message'        => 'Missatge : ',
-                    'request-status' => 'Estat de la sol·licitud : ',
+                'status-update' => [
+                    'subject'        => 'Your GDPR Request Has Been Updated',
+                    'summary'        => 'Your GDPR Request Status has been Updated',
+                    'request-status' => 'Request Status:',
+                    'request-type'   => 'Request Type:',
+                    'message'        => 'Message:',
                 ],
             ],
 

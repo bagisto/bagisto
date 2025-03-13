@@ -377,6 +377,8 @@ return [
             ],
 
             'gdpr' => [
+                'create-success'              => 'ඉල්ලීම සාර්ථකව නිර්මාණය කරන ලදී',
+                'revoked-successfully'        => 'ඉල්ලීම සාර්ථකව අවලංගු කරන ලදී',
                 'success-verify'              => 'සාර්ථකයි! තහවුරු කිරීමේ විද්‍යුත් තැපෑල යවා ඇත.',
                 'success-verify-email-unsent' => 'සාර්ථකයි! තහවුරු කිරීමේ විද්‍යුත් තැපෑල යවා නොමැත.',
                 'unable-to-sent'              => 'විද්‍යුත් තැපෑල යැවිය නොහැක.',
@@ -401,17 +403,19 @@ return [
                     ],
 
                     'datagrid' => [
-                        'completed'  => 'සම්පුර්ණ',
+                        'completed'  => 'සම්පූර්ණයි',
                         'date'       => 'දිනය',
-                        'declined'   => 'අසම්පූර්ණ',
+                        'declined'   => 'ප්‍රතික්ෂේපිත',
+                        'delete'     => 'මකන්න',
                         'id'         => 'හැඳුනුම් අංකය',
                         'message'    => 'පණිවිඩය',
-                        'pending'    => 'අදාල නොවීය',
-                        'processing' => 'සංස්කරණය කරමින්',
-                        'status'     => 'තත්ත්වය',
+                        'pending'    => 'බලා සිටී',
+                        'processing' => 'සකසමින්',
+                        'revoke-btn' => 'අවලංගු කරන්න',
+                        'revoked'    => 'අවලංගු කරන ලදී',
+                        'status'     => 'තත්වය',
                         'type'       => 'වර්ගය',
                         'update'     => 'යාවත්කාලීන කරන්න',
-                        'delete'     => 'මකන්න',
                     ],
                 ],
 
@@ -1096,26 +1100,24 @@ return [
             ],
 
             'gdpr' => [
-                'new-delete-request' => 'දත්ත මකා දැමීම සඳහා නව ඉල්ලීම',
+                'new-delete-request' => 'දත්ත මැකීම සඳහා නව ඉල්ලීම',
                 'new-update-request' => 'දත්ත යාවත්කාලීන කිරීම සඳහා නව ඉල්ලීම',
 
                 'new-request' => [
+                    'delete-summary' => 'මකාදැමීමේ ඉල්ලීම් සාරාංශය',
                     'message'        => 'පණිවිඩය : ',
-                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
-                    'request-type'   => 'ඉල්ලීමේ වර්ගය : ',
-                    'summary'        => 'ඉල්ලීමේ සාරාංශය',
+                    'request-status' => 'ඉල්ලීම් තත්වය : ',
+                    'request-type'   => 'ඉල්ලීම් වර්ගය : ',
+                    'summary'        => 'ඉල්ලීම් සාරාංශය',
+                    'update-summary' => 'යාවත්කාලීන ඉල්ලීම් සාරාංශය',
                 ],
 
-                'delete-request' => [
-                    'message'        => 'පණිවිඩය : ',
-                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
-                    'request-type'   => 'ඉල්ලීමේ වර්ගය : ',
-                    'summary'        => 'මකා දැමීමේ ඉල්ලීමේ සාරාංශය',
-                ],
-
-                'update-request' => [
-                    'message'        => 'පණිවිඩය : ',
-                    'request-status' => 'ඉල්ලීමේ තත්ත්වය : ',
+                'status-update' => [
+                    'subject'        => 'ඔබගේ GDPR ඉල්ලීම යාවත්කාලීන කරන ලදී',
+                    'summary'        => 'ඔබගේ GDPR ඉල්ලීමේ තත්වය යාවත්කාලීන කරන ලදී',
+                    'request-status' => 'ඉල්ලීම් තත්වය:',
+                    'request-type'   => 'ඉල්ලීම් වර්ගය:',
+                    'message'        => 'පණිවිඩය:',
                 ],
             ],
 

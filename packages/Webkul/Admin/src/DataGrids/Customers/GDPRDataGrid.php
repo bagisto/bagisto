@@ -28,13 +28,18 @@ class GDPRDataGrid extends DataGrid
     const STATUS_PROCESSING = 'processing';
 
     /**
+     * Request status "revoked".
+     */
+    const STATUS_REVOKED = 'revoked';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        return DB::table('gdpr_data_request as gdpr')
+        $queryBuilder = DB::table('gdpr_data_request as gdpr')
             ->leftJoin('customers', 'gdpr.customer_id', '=', 'customers.id')
             ->addSelect(
                 'gdpr.id',
@@ -45,6 +50,14 @@ class GDPRDataGrid extends DataGrid
                 'gdpr.message',
                 'gdpr.created_at'
             );
+
+        $this->addFilter('id', 'gdpr.id');
+        $this->addFilter('type', 'gdpr.type');
+        $this->addFilter('created_at', 'gdpr.created_at');
+        $this->addFilter('status', 'gdpr.status');
+        $this->addFilter('customer_name', DB::raw("CONCAT(customers.first_name, ' ', customers.last_name)"));
+
+        return $queryBuilder;
     }
 
     /**
@@ -75,7 +88,7 @@ class GDPRDataGrid extends DataGrid
         $this->addColumn([
             'index'              => 'status',
             'label'              => trans('admin::app.customers.gdpr.index.datagrid.status'),
-            'type'               => 'integer',
+            'type'               => 'string',
             'searchable'         => true,
             'sortable'           => false,
             'filterable'         => true,
@@ -97,6 +110,10 @@ class GDPRDataGrid extends DataGrid
                     'label' => trans('admin::app.customers.gdpr.index.datagrid.declined'),
                     'value' => self::STATUS_DECLINED,
                 ],
+                [
+                    'label' => trans('admin::app.customers.gdpr.index.datagrid.revoked'),
+                    'value' => self::STATUS_REVOKED,
+                ],
             ],
             'closure'    => function ($row) {
                 switch ($row->status) {
@@ -111,6 +128,9 @@ class GDPRDataGrid extends DataGrid
 
                     case self::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('admin::app.customers.gdpr.index.datagrid.processing').'</p>';
+
+                    case self::STATUS_REVOKED:
+                        return '<p class="label-closed">'.trans('admin::app.customers.gdpr.index.datagrid.revoked').'</p>';
                 }
             },
         ]);
@@ -154,12 +174,12 @@ class GDPRDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.customers.gdpr.index.datagrid.created-at'),
-            'type'       => 'datetime',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.customers.gdpr.index.datagrid.created-at'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
     }
 
