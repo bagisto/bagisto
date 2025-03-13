@@ -152,7 +152,7 @@
                             this.setCookie(id, isChecked, 365 * 20);
                         });
 
-                        window.location.reload();
+                        window.location.href = '{{ route('shop.home.index') }}';
                     },
 
                     setCookie(name, value, expirationInDays) {
