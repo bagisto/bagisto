@@ -3,7 +3,6 @@
 namespace Webkul\Core;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
@@ -25,7 +24,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = 'dev-master';
+    const BAGISTO_VERSION = '2.3.x-dev';
 
     /**
      * Current Channel.
