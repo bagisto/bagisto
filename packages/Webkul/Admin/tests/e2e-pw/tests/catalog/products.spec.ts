@@ -620,12 +620,146 @@ test.describe("product management", () => {
         await createConfigurableProduct(adminPage);
     });
 
+    test("should edit a configurable product", async ({ adminPage }) => {
+        /**
+         * Reaching to the products page.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")'
+        );
+
+        /**
+         * Opening the configurable product though edit button.
+         */
+        await adminPage.locator('div:nth-child(7) > div:nth-child(3) > div:nth-child(2) > a:nth-child(2)').click();
+
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+        /**
+        * Editing the first varient product.
+        */
+        await adminPage.getByText('Edit', { exact: true }).first().click();
+        await adminPage.locator('input[name="price"]').fill('50');
+        await adminPage.locator('input[name="inventories\\[1\\]"]').fill('12');
+
+        /**
+         * Saving the varient product.
+         */
+        await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+
+        /**
+         * Saving the product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+        /**
+         * Expecting for the product to be saved.
+         */
+        await expect(
+            adminPage.getByText("Product updated successfully")
+        ).toBeVisible();
+    });
+
     test("should create a grouped product", async ({ adminPage }) => {
         await createGroupedProduct(adminPage);
     });
 
+    test("should edit a grouped product", async ({ adminPage }) => {
+        /**
+         * Reaching to the edit product page.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")'
+        );
+        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "span.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
+
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+        /**
+         * Deleting the first product.
+         */
+        const productName = await adminPage.getByText('Arctic Touchscreen Winter Gloves').textContent();
+        await adminPage.getByText('Delete', { exact: true }).first().click();
+        await adminPage.waitForSelector('text=Are you sure', { state: 'visible' });
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
+
+        /**
+         * Expecting for the product should not be visible after delete.
+         */
+        await expect(
+            adminPage.getByText(`${productName}`)
+        ).not.toBeVisible();
+
+        /**
+         * Saving the product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+        /**
+         * Expecting for the groped product to be updated successfully.
+         */
+        await expect(
+            adminPage.getByText("Product updated successfully")
+        ).toBeVisible();
+    });
+
     test("should create a virtual product", async ({ adminPage }) => {
         await createVirtualProduct(adminPage);
+    });
+
+    test("should edit a virtual product", async ({ adminPage }) => {
+        /**
+         * Reaching to the edit product page.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")'
+        );
+        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "span.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
+
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+        /**
+         * Edit price, inverotries, description.
+         */
+        await adminPage.locator('#price').fill('100');
+        await adminPage.locator('input[name="inventories\\[1\\]"]').fill('1000');
+        await adminPage.locator('#description_ifr').contentFrame().locator('html').click();
+
+        /**
+         * Saving the product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+        /**
+         * Expecting for the product to be saved.
+         */
+        await expect(
+            adminPage.getByText("Product updated successfully")
+        ).toBeVisible();
     });
 
     test("should mass update the products", async ({ adminPage }) => {
