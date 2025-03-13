@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\EncryptCookies;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncryptCookies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -8,8 +10,6 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Installer\Http\Middleware\CanInstall;
-use App\Http\Middleware\EncryptCookies;
-use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncryptCookies;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -39,7 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
         /**
          * Add the overridden middleware at the end of the list.
          */
-        $middleware->replaceInGroup('web', BaseEncryptCookies::class,  EncryptCookies::class);
+        $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
     })
     ->withSchedule(function (Schedule $schedule) {
         //
