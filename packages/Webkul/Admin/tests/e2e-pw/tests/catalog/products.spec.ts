@@ -57,6 +57,8 @@ async function createSimpleProduct(adminPage) {
      */
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
+    const name = await adminPage.locator('input[name="name"]').inputValue();
+    console.log(name);
 
     /**
      * Description Section.
@@ -122,10 +124,21 @@ async function createSimpleProduct(adminPage) {
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
 
+    /**
+     * Expecting for the product to be saved.
+     */
     await expect(
         adminPage.getByText("Product updated successfully")
     ).toBeVisible();
-}
+
+    /**
+     * Checking the product in the list.
+     */
+    await adminPage.goto('admin/catalog/products');
+    await expect(
+        adminPage.getByText(`${name}`)
+    ).toBeVisible();
+};
 
 async function createConfigurableProduct(adminPage) {
     /**
@@ -187,6 +200,7 @@ async function createConfigurableProduct(adminPage) {
      */
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
+    const name = await adminPage.locator('input[name="name"]').inputValue();
 
     /**
      * Description Section.
@@ -288,10 +302,24 @@ async function createConfigurableProduct(adminPage) {
      * Saving the configurable product.
      */
     await adminPage.getByRole('button', { name: 'Save Product' }).click();
-}
+
+    /**
+     * Expecting for the product to be saved.
+     */
+    await expect(
+        adminPage.getByText('Product updated successfully')
+    ).toBeVisible();
+
+    /**
+     * Checking the product in the list.
+     */
+    await adminPage.goto('admin/catalog/products');
+    await expect(
+        adminPage.getByText(`${name}`)
+    ).toBeVisible();
+};
 
 async function createGroupedProduct(adminPage) {
-    createSimpleProduct(adminPage);
     /**
      * Main product data which we will use to create the Grouped product.
      */
@@ -342,6 +370,138 @@ async function createGroupedProduct(adminPage) {
      */
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
+    const name = await adminPage.locator('input[name="name"]').inputValue();
+
+    /**
+     * Description Section.
+     */
+    await adminPage.fillInTinymce(
+        "#short_description_ifr",
+        product.shortDescription
+    );
+    await adminPage.fillInTinymce("#description_ifr", product.description);
+
+    /**
+     * Meta Description Section.
+     */
+    await adminPage.locator("#meta_title").fill(product.name);
+    await adminPage.locator("#meta_keywords").fill(product.name);
+    await adminPage.locator("#meta_description").fill(product.shortDescription);
+
+    /**
+     * Image Section.
+     */
+    // Will add images later.
+
+    /**
+    * Settings Section.
+    */
+    await adminPage
+        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
+        .first()
+        .click();
+    await adminPage.locator(".relative > label").first().click();
+    await adminPage.locator("div:nth-child(3) > .relative > label").click();
+    await adminPage.locator("div:nth-child(4) > .relative > label").click();
+    await adminPage.locator("div:nth-child(5) > .relative > label").click();
+    await adminPage.locator("div:nth-child(6) > .relative > label").click();
+
+    /**
+     * Adding products to make a group of products.
+     */
+    await adminPage.locator('.secondary-button').first().click();
+    await adminPage.waitForSelector('p:has-text("Select Products")');
+    await adminPage.getByRole('textbox', { name: 'Search by name' }).click();
+    await adminPage.getByRole('textbox', { name: 'Search by name' }).fill('arc');
+    await adminPage.locator('div').filter({ hasText: /^Arctic Touchscreen Winter GlovesSKU - SP-003\$21\.00100 Available$/ }).locator('label').click();
+    await adminPage.locator('div').filter({ hasText: /^Arctic Warmth Wool Blend SocksSKU - SP-004\$21\.00100 Available$/ }).locator('label').click();
+    await adminPage.locator('div').filter({ hasText: /^Arctic Bliss Stylish Winter ScarfSKU - SP-002\$17\.00100 Available$/ }).locator('label').click();
+
+    /**
+     * Saving the added product.
+     */
+    await adminPage.getByText('Add Selected Product').click();
+
+    /**
+     * Waiting for the products to be added.
+     */
+    await adminPage.waitForSelector('p:has-text("Arctic Touchscreen Winter Gloves")');
+    await adminPage.waitForSelector('p:has-text("Arctic Warmth Wool Blend Socks")');
+    await adminPage.waitForSelector('p:has-text("Arctic Bliss Stylish Winter")');
+
+    /**
+     * Saving the configurable product.
+     */
+    await adminPage.getByRole('button', { name: 'Save Product' }).click();
+
+    /**
+     * Expecting for the product to be saved.
+     */
+    await expect(
+        adminPage.getByText('Product updated successfully')
+    ).toBeVisible();
+
+    /**
+     * Checking the product in the list.
+     */
+    await adminPage.goto('admin/catalog/products');
+    await expect(
+        adminPage.getByText(`${name}`)
+    ).toBeVisible();
+};
+
+async function createVirtualProduct(adminPage) {
+    /**
+     * Main product data which we will use to create the product.
+     */
+    const product = {
+        name: generateName(),
+        sku: generateSKU(),
+        productNumber: generateSKU(),
+        shortDescription: generateDescription(),
+        description: generateDescription(),
+        price: "199",
+        weight: "25",
+    };
+
+    /**
+     * Reaching to the create product page.
+     */
+    await adminPage.goto("admin/catalog/products");
+    await adminPage.waitForSelector(
+        'button.primary-button:has-text("Create Product")'
+    );
+    await adminPage.getByRole("button", { name: "Create Product" }).click();
+
+    /**
+     * Opening create product form in modal.
+     */
+    await adminPage.locator('select[name="type"]').selectOption("virtual");
+    await adminPage
+        .locator('select[name="attribute_family_id"]')
+        .selectOption("1");
+    await adminPage.locator('input[name="sku"]').fill(generateSKU());
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+    /**
+     * After creating the product, the page is redirected to the edit product page, where
+     * all the details need to be filled in.
+     */
+    await adminPage.waitForSelector(
+        'button.primary-button:has-text("Save Product")'
+    );
+
+    /**
+     * Waiting for the main form to be visible.
+     */
+    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+    /**
+     * General Section.
+     */
+    await adminPage.locator("#product_number").fill(product.productNumber);
+    await adminPage.locator("#name").fill(product.name);
+    const name = await adminPage.locator('input[name="name"]').inputValue();
 
     /**
      * Description Section.
@@ -369,9 +529,54 @@ async function createGroupedProduct(adminPage) {
      */
     await adminPage.locator("#price").fill(product.price);
 
+    /**
+     * Settings Section.
+     */
+    await adminPage
+        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
+        .first()
+        .click();
+    await adminPage.locator(".relative > label").first().click();
+    await adminPage.locator("div:nth-child(3) > .relative > label").click();
+    await adminPage.locator("div:nth-child(4) > .relative > label").click();
+    await adminPage.locator("div:nth-child(5) > .relative > label").click();
+    await adminPage.locator("div:nth-child(6) > .relative > label").click();
 
+    /**
+     * Inventories Section.
+     */
+    await adminPage.locator('input[name="inventories\\[1\\]"]').click();
+    await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
 
-}
+    /**
+     * Categories Section.
+     */
+    await adminPage
+        .locator("label")
+        .filter({ hasText: "Men" })
+        .locator("span")
+        .click();
+
+    /**
+     * Saving the product.
+     */
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+    /**
+     * Expecting for the product to be saved.
+     */
+    await expect(
+        adminPage.getByText("Product updated successfully")
+    ).toBeVisible();
+
+    /**
+     * Checking the product in the list.
+     */
+    await adminPage.goto('admin/catalog/products');
+    await expect(
+        adminPage.getByText(`${name}`)
+    ).toBeVisible();
+};
 
 test.describe("product management", () => {
     test("should create a simple product", async ({ adminPage }) => {
@@ -417,6 +622,10 @@ test.describe("product management", () => {
 
     test("should create a grouped product", async ({ adminPage }) => {
         await createGroupedProduct(adminPage);
+    });
+
+    test("should create a virtual product", async ({ adminPage }) => {
+        await createVirtualProduct(adminPage);
     });
 
     test("should mass update the products", async ({ adminPage }) => {
