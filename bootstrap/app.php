@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\EncryptCookies;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncryptCookies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -33,6 +35,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->append(SecureHeaders::class);
         $middleware->append(CanInstall::class);
+
+        /**
+         * Add the overridden middleware at the end of the list.
+         */
+        $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
     })
     ->withSchedule(function (Schedule $schedule) {
         //
