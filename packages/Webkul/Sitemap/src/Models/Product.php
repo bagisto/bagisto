@@ -23,8 +23,6 @@ class Product extends BaseProduct implements Sitemapable
         }
 
         return Url::create(route('shop.product_or_category.index', $this->url_key))
-            ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(core()->getConfigData('general.sitemap.products.frequency'))
-            ->setPriority(core()->getConfigData('general.sitemap.products.priority'));
+            ->setLastModificationDate(Carbon::create($this->updated_at));
     }
 }

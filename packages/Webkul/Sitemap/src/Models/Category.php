@@ -22,8 +22,6 @@ class Category extends BaseCategory implements Sitemapable
         }
 
         return Url::create(route('shop.product_or_category.index', $this->slug))
-            ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(core()->getConfigData('general.sitemap.categories.frequency'))
-            ->setPriority(core()->getConfigData('general.sitemap.categories.priority'));
+            ->setLastModificationDate(Carbon::create($this->updated_at));
     }
 }

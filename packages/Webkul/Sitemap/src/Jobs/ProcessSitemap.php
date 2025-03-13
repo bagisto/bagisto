@@ -63,11 +63,7 @@ class ProcessSitemap implements ShouldQueue
         /**
          * Process the store URL.
          */
-        $this->processItems([
-            Url::create('/')
-                ->setChangeFrequency(core()->getConfigData('general.sitemap.store_url.frequency'))
-                ->setPriority(core()->getConfigData('general.sitemap.store_url.priority')),
-        ]);
+        $this->processItems([Url::create('/')]);
 
         /**
          * Process the categories.
