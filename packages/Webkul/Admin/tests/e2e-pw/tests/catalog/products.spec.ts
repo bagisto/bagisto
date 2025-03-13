@@ -560,13 +560,13 @@ async function createVirtualProduct(adminPage) {
     /**
      * Saving the product.
      */
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await adminPage.getByRole('button', { name: 'Save Product' }).click();
 
     /**
      * Expecting for the product to be saved.
      */
     await expect(
-        adminPage.getByText("Product updated successfully")
+        adminPage.getByText('Product updated successfully')
     ).toBeVisible();
 
     /**
