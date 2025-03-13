@@ -3634,13 +3634,13 @@ return [
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info'  => 'Configuració de compliment de GDPR',
-    
+
                     'settings' => [
                         'title'   => 'Configuració de compliment de GDPR',
                         'info'    => 'Gestiona la configuració de compliment de GDPR, incloent l\'acord de privadesa de dades. Habilita o deshabilita les funcions de GDPR segons sigui necessari',
                         'enabled' => 'Habilitar GDPR',
                     ],
-    
+
                     'agreement' => [
                         'title'          => 'Acord de GDPR',
                         'info'           => 'Gestiona el consentiment del client segons les regulacions de GDPR. Habilita els requisits d\'acord per a la recopilació i processament de dades.',
@@ -3648,7 +3648,7 @@ return [
                         'checkbox-label' => 'Etiqueta del checkbox per a l\'acord',
                         'content'        => 'Contingut de l\'acord',
                     ],
-    
+
                     'cookie' => [
                         'bottom-left'  => 'Inferior esquerra',
                         'bottom-right' => 'Inferior dreta',
@@ -3662,7 +3662,7 @@ return [
                         'top-left'     => 'Superior esquerra',
                         'top-right'    => 'Superior dreta',
                     ],
-    
+
                     'cookie-consent' => [
                         'title'                  => 'Gestiona les teves preferències de cookies',
                         'info'                   => 'Controla com es farà servir les teves dades seleccionant la configuració de cookies preferida. Ajusta els permisos per a diferents tipus de cookies.',

@@ -3693,7 +3693,7 @@ return [
                     'targeting-advertising'  => 'Targeting und Werbung',
                 ],
             ],
-            
+
             'catalog' => [
                 'info'  => 'Katalog',
                 'title' => 'Katalog',

@@ -3693,7 +3693,7 @@ return [
                     'targeting-advertising'  => 'লক্ষ্যবস্তু এবং বিজ্ঞাপন',
                 ],
             ],
-            
+
             'catalog' => [
                 'info'  => 'ক্যাটালগ',
                 'title' => 'ক্যাটালগ',
