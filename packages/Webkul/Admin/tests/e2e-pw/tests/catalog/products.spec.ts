@@ -1,10 +1,15 @@
 import { test, expect } from "../../setup";
+import { fileURLToPath } from 'url';
+import path from 'path';
 import {
     generateSKU,
     generateName,
     generateDescription,
     getImageFile,
 } from "../../utils/faker";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function createSimpleProduct(adminPage) {
     /**
@@ -578,6 +583,154 @@ async function createVirtualProduct(adminPage) {
     ).toBeVisible();
 };
 
+async function createDownloadableProduct(adminPage) {
+    /**
+     * Main product data which we will use to create the product.
+     */
+    const product = {
+        name: generateName(),
+        sku: generateSKU(),
+        productNumber: generateSKU(),
+        shortDescription: generateDescription(),
+        description: generateDescription(),
+        price: "199",
+    };
+
+    /**
+     * Reaching to the create product page.
+     */
+    await adminPage.goto("admin/catalog/products");
+    await adminPage.waitForSelector(
+        'button.primary-button:has-text("Create Product")'
+    );
+    await adminPage.getByRole("button", { name: "Create Product" }).click();
+
+    /**
+     * Opening create product form in modal.
+     */
+    await adminPage.locator('select[name="type"]').selectOption("downloadable");
+    await adminPage
+        .locator('select[name="attribute_family_id"]')
+        .selectOption("1");
+    await adminPage.locator('input[name="sku"]').fill(generateSKU());
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+    /**
+     * After creating the product, the page is redirected to the edit product page, where
+     * all the details need to be filled in.
+     */
+    await adminPage.waitForSelector(
+        'button.primary-button:has-text("Save Product")'
+    );
+
+    /**
+     * Waiting for the main form to be visible.
+     */
+    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+    /**
+     * General Section.
+     */
+    await adminPage.locator("#product_number").fill(product.productNumber);
+    await adminPage.locator("#name").fill(product.name);
+    const name = await adminPage.locator('input[name="name"]').inputValue();
+    await adminPage.getByText('Close').click();
+
+    /**
+     * Description Section.
+     */
+    await adminPage.fillInTinymce(
+        "#short_description_ifr",
+        product.shortDescription
+    );
+    await adminPage.fillInTinymce("#description_ifr", product.description);
+
+    /**
+     * Meta Description Section.
+     */
+    await adminPage.locator("#meta_title").fill(product.name);
+    await adminPage.locator("#meta_keywords").fill(product.name);
+    await adminPage.locator("#meta_description").fill(product.shortDescription);
+
+    /**
+     * Image Section.
+     */
+    // Will add images later.
+
+    /**
+     * Price Section.
+     */
+    await adminPage.locator("#price").fill(product.price);
+
+    /**
+     * Settings Section.
+     */
+    await adminPage.locator(".relative > label").first().click();
+    await adminPage.locator("div:nth-child(3) > .relative > label").click();
+    await adminPage.locator("div:nth-child(4) > .relative > label").click();
+    await adminPage.locator("div:nth-child(5) > .relative > label").click();
+
+    /**
+     * Downloadable Links Section.
+     */
+    await adminPage.getByText('Add Link').first().click();
+    await adminPage.waitForSelector('.min-h-0 > div > div');
+    await adminPage.locator('input[name="title"]').fill('Link 1');
+    const linkTitle = await adminPage.locator('input[name="title"]').inputValue();
+    await adminPage.locator('input[name="price"]').first().fill('100');
+    await adminPage.locator('input[name="downloads"]').fill('2');
+    await adminPage.locator('select[name="type"]').selectOption('file');
+    await adminPage.locator('input[name="file"]').nth(1).setInputFiles(path.resolve(__dirname, '../../data/images/1.webp'));
+    await adminPage.locator('select[name="sample_type"]').selectOption('url');
+    await adminPage.waitForSelector('input[name="sample_url"]');
+    await adminPage.locator('input[name="sample_url"]').fill('https://www.google.com');
+
+    /**
+     * Saving the Downloadable Link.
+     */
+    await adminPage.getByText('Link Save').click();
+    await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+    await expect(adminPage.getByText(`${linkTitle}`)).toBeVisible();
+
+    /**
+     * Downloadable Samples Section.
+     */
+    await adminPage.getByText('Add Sample').first().click();
+    await adminPage.waitForSelector('.min-h-0 > div > div');
+    await adminPage.locator('input[name="title"]').fill('Sample 1');
+    const sampleTitle = await adminPage.locator('input[name="title"]').inputValue();
+    await adminPage.locator('select[name="type"]').selectOption('file');
+    await adminPage.locator('input[name="file"]').nth(1).setInputFiles(path.resolve(__dirname, '../../data/images/1.webp'));
+
+    /**
+     * Saving the Downloadable Sample.
+     */
+    await adminPage.getByText('Link Save').click();
+    await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+    await expect(adminPage.getByText(`${sampleTitle}`)).toBeVisible();
+
+    /**
+     * Saving the product.
+     */
+    await adminPage.getByRole('button', { name: 'Save Product' }).click();
+
+    /**
+     * Expecting for the product to be saved.
+     */
+    await expect(
+        adminPage.getByText('Product updated successfully')
+    ).toBeVisible();
+
+    /**
+     * Checking the product in the list.
+     */
+    await adminPage.goto('admin/catalog/products');
+    await expect(
+        adminPage.getByText(`${name}`)
+    ).toBeVisible();
+
+};
+
 test.describe("product management", () => {
     test("should create a simple product", async ({ adminPage }) => {
         await createSimpleProduct(adminPage);
@@ -753,6 +906,57 @@ test.describe("product management", () => {
          * Saving the product.
          */
         await adminPage.getByRole("button", { name: "Save Product" }).click();
+
+        /**
+         * Expecting for the product to be saved.
+         */
+        await expect(
+            adminPage.getByText("Product updated successfully")
+        ).toBeVisible();
+    });
+
+    test("should create a downloadable product", async ({ adminPage }) => {
+        await createDownloadableProduct(adminPage);
+    });
+
+    test("should edit a downloadable product", async ({ adminPage }) => {
+        /**
+         * Reaching to the edit product page.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")'
+        );
+        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "span.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
+
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+
+        /**
+        * Edit price, edit downloadable links.
+        */
+        await adminPage.locator('#price').fill('100');
+        await adminPage.getByText('Edit', { exact: true }).first().click();
+        await adminPage.waitForSelector('.min-h-0 > div > div');
+        await adminPage.locator('input[name="file"]').nth(1).setInputFiles(path.resolve(__dirname, '../../data/images/2.webp'));
+
+        /**
+         * Saving the downloadable link.
+         */
+        await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+
+        /**
+         * Saving the product.
+         */
+        await adminPage.getByRole('button', { name: 'Save Product' }).click();
 
         /**
          * Expecting for the product to be saved.
