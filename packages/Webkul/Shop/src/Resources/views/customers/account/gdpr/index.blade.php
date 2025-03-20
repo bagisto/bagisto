@@ -16,7 +16,7 @@
     </div>
 
     <div class="mx-4 flex-auto">
-        <div class="flex items-center justify-between gap-4 max-md:flex-col">
+        <div class="flex items-center justify-between gap-4 max-md:flex-wrap">
             <div class="flex items-center">
                 <!-- Back Button -->
                 <a
@@ -58,7 +58,100 @@
 
         {!! view_render_event('bagisto.shop.customers.account.gdpr.list.before') !!}
 
-        <x-shop::datagrid :src="route('shop.customers.account.gdpr.index')" />
+        <!-- For Desktop View -->
+        <div class="max-md:hidden">
+            <x-shop::datagrid :src="route('shop.customers.account.gdpr.index')" />
+        </div>
+
+        <!-- For Mobile View -->
+        <div class="md:hidden">
+            <x-shop::datagrid :src="route('shop.customers.account.gdpr.index')">
+                <!-- Datagrid Header -->
+                <template #header="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <div class="hidden"></div>
+                </template>
+
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-shop::shimmer.datagrid.table.body />
+                    </template>
+    
+                    <template v-else>
+                        <template v-for="record in available.records">
+                            <div class="w-full p-4 border rounded-md transition-all hover:bg-gray-50 [&>*]:border-0 mb-4 last:mb-0">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex gap-2">
+                                            <p class="text-sm text-neutral-500">
+                                                @lang('shop::app.customers.account.gdpr.index.datagrid.id'): 
+                                            </p>
+                                            
+                                            <p class="text-sm">
+                                                @{{ record.id }}
+                                            </p>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <p class="text-sm text-neutral-500">
+                                                @lang('shop::app.customers.account.gdpr.index.datagrid.type'): 
+                                            </p>
+                                            
+                                            <p class="text-sm">
+                                                @{{ record.type }}
+                                            </p>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <p class="text-sm text-neutral-500">
+                                                @lang('shop::app.customers.account.gdpr.index.datagrid.date'): 
+                                            </p>
+                                            
+                                            <p class="text-sm">
+                                                @{{ record.created_at }}
+                                            </p>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <p class="text-sm text-neutral-500">
+                                                @lang('shop::app.customers.account.gdpr.index.datagrid.message'): 
+                                            </p>
+                                            
+                                            <p class="text-sm">
+                                                @{{ record.message }}
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <p class="text-sm text-neutral-500">
+                                                @lang('shop::app.customers.account.gdpr.index.datagrid.status'): 
+                                            </p>
+                                            
+                                            <p v-html="record.status"></p>
+                                        </div>
+                                    </div>
+
+                                    <p v-html="record.revoke"></p>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </x-shop::datagrid>
+        </div>
 
         {!! view_render_event('bagisto.shop.customers.account.gdpr.list.after') !!}
     </div>
