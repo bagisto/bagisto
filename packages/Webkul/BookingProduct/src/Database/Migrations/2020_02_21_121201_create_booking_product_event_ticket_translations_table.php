@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('booking_product_event_ticket_translations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('booking_product_event_ticket_id');
+            $table->unique(['booking_product_event_ticket_id', 'locale'], 'bpet_locale_unique');
             $table->string('locale');
             $table->text('name')->nullable();
             $table->text('description')->nullable();
 
-            $table->unsignedBigInteger('booking_product_event_ticket_id');
             $table->foreign('booking_product_event_ticket_id', 'bpet_translations_fk')
                 ->references('id')
                 ->on('booking_product_event_tickets')
                 ->cascadeOnDelete();
 
-            $table->unique(['booking_product_event_ticket_id', 'locale'], 'bpet_locale_unique');
         });
     }
 

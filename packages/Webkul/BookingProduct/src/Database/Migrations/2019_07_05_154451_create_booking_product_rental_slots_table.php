@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('booking_product_rental_slots', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('booking_product_id');
             $table->string('renting_type');
             $table->decimal('daily_price', 12, 4)->default(0)->nullable();
             $table->decimal('hourly_price', 12, 4)->default(0)->nullable();
             $table->boolean('same_slot_all_days')->nullable();
             $table->json('slots')->nullable();
 
-            $table->unsignedInteger('booking_product_id');
             $table->foreign('booking_product_id')
                 ->references('id')
                 ->on('booking_products')

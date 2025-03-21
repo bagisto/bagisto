@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('order_item_id')->nullable();
+            $table->unsignedInteger('order_id')->nullable();
             $table->integer('qty')->default(0)->nullable();
             $table->integer('from')->nullable();
             $table->integer('to')->nullable();
 
-            $table->unsignedInteger('order_item_id')->nullable();
             $table->foreign('order_item_id')
                 ->references('id')
                 ->on('order_items')
@@ -30,13 +32,11 @@ return new class extends Migration
                 ->constrained('booking_product_event_tickets')
                 ->nullOnDelete();
 
-            $table->unsignedInteger('order_id')->nullable();
             $table->foreign('order_id')
                 ->references('id')
                 ->on('orders')
                 ->nullOnDelete();
 
-            $table->unsignedInteger('product_id')->nullable();
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
