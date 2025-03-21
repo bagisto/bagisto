@@ -75,5 +75,8 @@ Route::controller(ProductController::class)->group(function () {
     ])->name('shop.product.file.download');
 });
 
+/**
+ * Booking products
+ */
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking-product.slots.index');

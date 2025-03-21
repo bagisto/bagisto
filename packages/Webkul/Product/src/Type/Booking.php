@@ -43,6 +43,13 @@ class Booking extends AbstractType
     protected $isComposite = true;
 
     /**
+     * Is a stockable product type.
+     *
+     * @var bool
+     */
+    protected $isStockable = false;
+
+    /**
      * Create a new product type instance.
      *
      * @return void
