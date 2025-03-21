@@ -62,36 +62,39 @@ class BookingDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'from',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.from'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => false,
-            'closure'    => function ($value) {
+            'index'           => 'from',
+            'label'           => trans('admin::app.sales.booking.index.datagrid.from'),
+            'type'            => 'datetime',
+            'searchable'      => true,
+            'sortable'        => true,
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'closure'         => function ($value) {
                 return Carbon::createFromTimestamp($value->from)->format('d M, Y H:iA');
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'to',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.to'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => false,
-            'closure'    => function ($value) {
+            'index'           => 'to',
+            'label'           => trans('admin::app.sales.booking.index.datagrid.to'),
+            'type'            => 'datetime',
+            'searchable'      => true,
+            'sortable'        => true,
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'closure'         => function ($value) {
                 return Carbon::createFromTimestamp($value->to)->format('d M, Y H:iA');
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.created-date'),
-            'type'       => 'datetime',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.sales.booking.index.datagrid.created-date'),
+            'type'            => 'datetime',
+            'searchable'      => true,
+            'sortable'        => true,
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
         ]);
     }
 
