@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Назва',
                 ],
+
+                'booking' => [
+                    'location'    => 'Місцезнаходження',
+                    'view-on-map' => 'Переглянути на карті',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'slot-duration'            => 'Тривалість слоту',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Закрито',
+                        'see-details'              => 'Дивитися деталі',
+                        'slot-duration'            => 'Тривалість слоту',
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'today-availability'       => 'Доступність сьогодні',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Забронюйте свій квиток',
+                        'title'            => 'Подія на :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Виберіть варіант оренди',
+                        'daily-basis'        => 'Щоденна основа',
+                        'from'               => 'Від',
+                        'hourly-basis'       => 'Погодинна основа',
+                        'rent-an-item'       => 'Орендувати предмет',
+                        'select-date'        => 'Виберіть дату',
+                        'select-rent-time'   => 'Виберіть час оренди',
+                        'select-slot'        => 'Виберіть слот',
+                        'select-time-slot'   => 'Виберіть часовий слот',
+                        'slot'               => 'Слот',
+                        'no-slots-available' => 'Немає доступних слотів',
+                        'to'                 => 'До',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Забронювати стіл',
+                        'closed'                   => 'Закрито',
+                        'slot-duration'            => 'Тривалість слоту',
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'slots-for-all-days'       => 'Показати для всіх днів',
+                        'special-notes'            => 'Особливі запити/Примітки',
+                        'today-availability'       => 'Доступність сьогодні',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Записатися на прийом',
+                        'date'                => 'Дата',
+                        'no-slots-available'  => 'Немає доступних слотів',
+                        'select-slot'         => 'Виберіть слот',
+                        'title'               => 'Слот',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Купуйте :qty за :price кожний і економте :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Закрито',
+
+            'cart'             => [
+                'booking-from' => 'Бронювання з',
+                'booking-till' => 'Бронювання до',
+                'daily'        => 'Щоденна основа',
+                'event-from'   => 'Подія з',
+                'event-ticket' => 'Квиток на подію',
+                'event-till'   => 'Подія до',
+                'hourly'       => 'Погодинна основа',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Ця подія закінчилася.',
+                    ],
+
+                    'missing_options'        => 'Варіанти відсутні для цього продукту.',
+                    'inventory_warning'      => 'Запитана кількість недоступна, будь ласка, спробуйте пізніше.',
+                    'select_hourly_duration' => 'Виберіть тривалість слоту одну годину.',
+                ],
+
+                'rent-from'    => 'Оренда з',
+                'rent-till'    => 'Оренда до',
+                'rent-type'    => 'Тип оренди',
+                'renting_type' => 'Тип оренди',
+                'special-note' => 'Особливі запити/Примітки',
+            ],
+
+            'per-ticket-price' => ':price за квиток',
         ],
     ],
 

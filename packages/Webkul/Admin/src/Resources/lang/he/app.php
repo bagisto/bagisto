@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'תאריך יצירה',
+                    'from'         => 'מ',
+                    'id'           => 'מזהה',
+                    'order-id'     => 'מספר הזמנה',
+                    'qty'          => 'כמות',
+                    'to'           => 'עד',
+                    'view'         => 'צפה',
+                ],
+
+                'title'    => 'הזמנות',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'תאריך הזמנה',
+                'booking-details'  => 'פרטי הזמנה',
+                'canceled'         => 'בוטל',
+                'closed'           => 'סגור',
+                'done'             => 'בוצע',
+                'order-id'         => 'מספר הזמנה',
+                'pending'          => 'ממתין',
+                'price'            => 'מחיר',
+                'status'           => 'סטטוס',
+                'time-slot'        => 'משבצת זמן:',
+                'view-details'     => 'צפה בפרטים',
+            ],
+
+            'title' => 'מוצרי הזמנות',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'בחירה',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'זמין מ',
+                        'available-to'   => 'זמין עד',
+                        'location'       => 'מיקום',
+                        'qty'            => 'כמות',
+                        'title'          => 'סוג הזמנה',
+
+                        'available-every-week' => [
+                            'no'    => 'לא',
+                            'title' => 'זמין כל שבוע',
+                            'yes'   => 'כן',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'זמן הפסקה בין משבצות (דקות)',
+                            'slot-duration'          => 'משך משבצת (דקות)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'לא',
+                                'title' => 'אותה משבצת לכל הימים',
+                                'yes'   => 'כן',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'הוסף',
+                            'break-duration'   => 'זמן הפסקה בין משבצות (דקות)',
+                            'close'            => 'סגור',
+                            'description'      => 'מידע על הזמנה',
+                            'description-info' => 'משך הזמן ייווצר ויוצג בהתאם לחריצים. הוא יהיה ייחודי לכל החריצים וייראה בחזית החנות.',
+                            'edit'             => 'ערוך',
+                            'many'             => 'הזמנות רבות ליום אחד',
+                            'one'              => 'הזמנה אחת לימים רבים',
+                            'open'             => 'פתח',
+                            'slot-add'         => 'הוסף משבצות',
+                            'slot-duration'    => 'משך משבצת (דקות)',
+                            'slot-title'       => 'משך זמן משבצות',
+                            'title'            => 'ברירת מחדל',
+                            'unavailable'      => 'לא זמין',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'הוסף משבצות',
+                                    'close'      => 'סגור',
+                                    'day'        => 'יום',
+                                    'edit-title' => 'ערוך משבצות',
+                                    'friday'     => 'שישי',
+                                    'from'       => 'מ',
+                                    'from-day'   => 'מיום',
+                                    'from-time'  => 'משעה',
+                                    'monday'     => 'שני',
+                                    'open'       => 'פתח',
+                                    'saturday'   => 'שבת',
+                                    'save'       => 'שמור',
+                                    'select'     => 'בחר',
+                                    'status'     => 'סטטוס',
+                                    'sunday'     => 'ראשון',
+                                    'thursday'   => 'חמישי',
+                                    'to'         => 'עד',
+                                    'to-day'     => 'עד יום',
+                                    'to-time'    => 'עד שעה',
+                                    'tuesday'    => 'שלישי',
+                                    'wednesday'  => 'רביעי',
+                                    'week'       => ':יום',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'הוסף כרטיסים',
+                            'delete'             => 'מחק',
+                            'description'        => 'תיאור',
+                            'description-info'   => 'אין כרטיסים זמינים.',
+                            'edit'               => 'ערוך',
+                            'name'               => 'שם',
+                            'price'              => 'מחיר',
+                            'qty'                => 'כמות',
+                            'special-price'      => 'מחיר מיוחד',
+                            'special-price-from' => 'מחיר מיוחד מ',
+                            'special-price-to'   => 'מחיר מיוחד עד',
+                            'title'              => 'כרטיסים',
+                            'valid-from'         => 'תקף מ',
+                            'valid-until'        => 'תקף עד',
+
+                            'modal'              => [
+                                'edit' => 'ערוך כרטיסים',
+                                'save' => 'שמור',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'הוסף כרטיסים',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'הוסף משבצות',
+                                'description' => 'משבצות זמינות עם משך זמן.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'על בסיס יומי',
+                            'daily-hourly' => 'שניהם (יומי ושעתי)',
+                            'daily-price'  => 'מחיר יומי',
+                            'hourly'       => 'על בסיס שעתי',
+                            'hourly-price' => 'מחיר שעתי',
+                            'title'        => 'סוג השכרה',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'לא',
+                                'title' => 'אותה משבצת לכל הימים',
+                                'yes'   => 'כן',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'הוסף משבצות',
+                            'description-info' => 'משך הזמן ייווצר ויוצג בהתאם לחריצים. הוא יהיה ייחודי לכל החריצים וייראה בחזית החנות.',
+                            'save'             => 'שמור',
+                            'title'            => 'משך זמן משבצות',
+                            'unavailable'      => 'לא זמין',
+
+                            'action'           => [
+                                'add' => 'הוסף',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'שישי',
+                                    'from'       => 'מ',
+                                    'monday'     => 'שני',
+                                    'saturday'   => 'שבת',
+                                    'sunday'     => 'ראשון',
+                                    'thursday'   => 'חמישי',
+                                    'to'         => 'עד',
+                                    'tuesday'    => 'שלישי',
+                                    'wednesday'  => 'רביעי',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'זמן הפסקה בין משבצות (דקות)',
+                            'guest-capacity'            => 'קיבולת אורחים',
+                            'guest-limit'               => 'מגבלת אורחים לשולחן',
+                            'prevent-scheduling-before' => 'מניעת תזמון לפני',
+                            'slot-duration'             => 'משך משבצת (דקות)',
+
+                            'charged-per'               => [
+                                'guest'  => 'אורח',
+                                'table'  => 'שולחן',
+                                'title'  => 'מחויב לפי',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'לא',
+                                'title' => 'אותה משבצת לכל הימים',
+                                'yes'   => 'כן',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'הזמנת פגישה',
+                            'default'     => 'הזמנה ברירת מחדל',
+                            'event'       => 'הזמנת אירוע',
+                            'many'        => 'רבים',
+                            'one'         => 'אחד',
+                            'rental'      => 'הזמנת השכרה',
+                            'table'       => 'הזמנת שולחן',
+                            'title'       => 'סוג',
                         ],
                     ],
 

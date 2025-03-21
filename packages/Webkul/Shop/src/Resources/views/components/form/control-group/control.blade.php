@@ -86,7 +86,7 @@
             {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             name="{{ $name }}"
         >
-            <x-shop::flat-picker.date>
+            <x-shop::flat-picker.date {{ $attributes->only(['disable' , ':disable']) }}>
                 <input
                     name="{{ $name }}"
                     v-bind="field"

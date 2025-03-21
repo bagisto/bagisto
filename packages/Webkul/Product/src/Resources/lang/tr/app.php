@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Paket',
+        'booking'      => 'Rezervasyon',
         'configurable' => 'Yapılandırılabilir',
         'downloadable' => 'İndirilebilir',
         'grouped'      => 'Gruplandırılmış',

@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Nazwa',
                 ],
+
+                'booking' => [
+                    'location'    => 'Lokalizacja',
+                    'view-on-map' => 'Zobacz na mapie',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minut',
+                        'slot-duration'            => 'Czas trwania slotu',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Zamknięte',
+                        'see-details'              => 'Zobacz szczegóły',
+                        'slot-duration'            => 'Czas trwania slotu',
+                        'slot-duration-in-minutes' => ':minutes Minut',
+                        'today-availability'       => 'Dostępność dzisiaj',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Zarezerwuj bilet',
+                        'title'            => 'Wydarzenie dnia :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Wybierz opcję wynajmu',
+                        'daily-basis'        => 'Na dzień',
+                        'from'               => 'Od',
+                        'hourly-basis'       => 'Na godzinę',
+                        'rent-an-item'       => 'Wynajmij przedmiot',
+                        'select-date'        => 'Wybierz datę',
+                        'select-rent-time'   => 'Wybierz czas wynajmu',
+                        'select-slot'        => 'Wybierz slot',
+                        'select-time-slot'   => 'Wybierz przedział czasowy',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'Brak dostępnych slotów',
+                        'to'                 => 'Do',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Zarezerwuj stolik',
+                        'closed'                   => 'Zamknięte',
+                        'slot-duration'            => 'Czas trwania slotu',
+                        'slot-duration-in-minutes' => ':minutes Minut',
+                        'slots-for-all-days'       => 'Pokaż dla wszystkich dni',
+                        'special-notes'            => 'Specjalne prośby/uwagi',
+                        'today-availability'       => 'Dostępność dzisiaj',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Zarezerwuj wizytę',
+                        'date'                => 'Data',
+                        'no-slots-available'  => 'Brak dostępnych slotów',
+                        'select-slot'         => 'Wybierz slot',
+                        'title'               => 'Slot',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Kup :qty za :price każdy i zaoszczędź :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Zamknięte',
+
+            'cart'             => [
+                'booking-from' => 'Rezerwacja od',
+                'booking-till' => 'Rezerwacja do',
+                'daily'        => 'Na dzień',
+                'event-from'   => 'Wydarzenie od',
+                'event-ticket' => 'Bilet na wydarzenie',
+                'event-till'   => 'Wydarzenie do',
+                'hourly'       => 'Na godzinę',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'To wydarzenie wygasło.',
+                    ],
+
+                    'missing_options'        => 'Brakujące opcje dla tego produktu.',
+                    'inventory_warning'      => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później.',
+                    'select_hourly_duration' => 'Wybierz czas trwania jednej godziny.',
+                ],
+
+                'rent-from'    => 'Wynajem od',
+                'rent-till'    => 'Wynajem do',
+                'rent-type'    => 'Typ wynajmu',
+                'renting_type' => 'Typ wynajmu',
+                'special-note' => 'Specjalne prośby/uwagi',
+            ],
+
+            'per-ticket-price' => ':price za bilet',
         ],
     ],
 
