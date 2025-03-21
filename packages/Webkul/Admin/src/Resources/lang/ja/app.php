@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'Eメールテンプレート',
         'events'                   => 'イベント',
         'exchange-rates'           => '為替レート',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'グループ',
         'import'                   => '輸入',
         'imports'                  => '輸入品',

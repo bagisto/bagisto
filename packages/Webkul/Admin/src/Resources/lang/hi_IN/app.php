@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'ईमेल टेम्पलेट्स',
         'events'                   => 'घटनाएँ',
         'exchange-rates'           => 'विनिमय दरें',
+        'gdpr'                     => 'जीडीपीआर',
         'groups'                   => 'समूह',
         'import'                   => 'आयात',
         'imports'                  => 'आयात',

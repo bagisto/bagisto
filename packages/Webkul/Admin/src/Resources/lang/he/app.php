@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'תבניות אימייל',
         'events'                   => 'אירועים',
         'exchange-rates'           => 'שערי חליפין',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'קבוצות',
         'import'                   => 'יְבוּא',
         'imports'                  => 'יבוא',

@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'E-posta Şablonları',
         'events'                   => 'Etkinlikler',
         'exchange-rates'           => 'Döviz Kurları',
+        'gdpr'                     => 'KVKK',
         'groups'                   => 'Gruplar',
         'import'                   => 'İçe aktarmak',
         'imports'                  => 'İthalat',

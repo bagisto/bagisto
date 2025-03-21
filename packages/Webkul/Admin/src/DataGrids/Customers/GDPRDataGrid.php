@@ -190,7 +190,7 @@ class GDPRDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('customers.groups.edit')) {
+        if (bouncer()->hasPermission('customers.gdpr_requests.edit')) {
             $this->addAction([
                 'index'  => 'edit',
                 'icon'   => 'icon-edit',
@@ -202,7 +202,7 @@ class GDPRDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.categories.delete')) {
+        if (bouncer()->hasPermission('customers.gdpr_requests.delete')) {
             $this->addAction([
                 'index'  => 'delete',
                 'icon'   => 'icon-delete',

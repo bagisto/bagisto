@@ -300,6 +300,21 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.customers.review.delete',
         'sort'  => 2,
+    ], [
+        'key'   => 'customers.gdpr_requests',
+        'name'  => 'admin::app.acl.gdpr',
+        'route' => 'admin.customers.gdpr.index',
+        'sort'  => 6,
+    ], [
+        'key'   => 'customers.gdpr_requests.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.customers.gdpr.edit',
+        'sort'  => 1,
+    ], [
+        'key'   => 'customers.gdpr_requests.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.customers.gdpr.delete',
+        'sort'  => 2,
     ],
 
     /*
