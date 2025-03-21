@@ -315,7 +315,7 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.gdpr.delete',
         'sort'  => 2,
-    ], 
+    ],
 
     /*
     |--------------------------------------------------------------------------
