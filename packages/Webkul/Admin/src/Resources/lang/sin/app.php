@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'සෘක්කු පවුලේ',
                 'attributes'               => 'සෘක්කු',
+                'booking-product'          => 'මුදල් ඇණවුම්',
                 'campaigns'                => 'යාලුවන්',
                 'catalog'                  => 'කැටලුග්',
                 'categories'               => 'ප්‍රවර්ග',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'ඊමේල් අවිස්සාවේ',
                 'events'                   => 'සිහිල්',
                 'exchange-rates'           => 'මුදල් පරිමාණ',
+                'gdpr-data-requests'       => 'GDPR දත්ත ඉල්ලීම්',
                 'groups'                   => 'සමූහ',
                 'imports'                  => 'ආනයන',
                 'inventory-sources'        => 'උපාංග',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'ක්ෂේත්ර',
                 'url-rewrites'             => 'URL පුනරාලේඛනය කිරීම',
                 'users'                    => 'පරිශීලකයන්',
-                'gdpr-data-requests'       => 'GDPR දත්ත ඉල්ලීම්',
             ],
 
             'powered-by' => [

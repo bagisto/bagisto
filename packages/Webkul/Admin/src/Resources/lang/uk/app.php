@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Сімейства атрибутів',
                 'attributes'               => 'Атрибути',
+                'booking-product'          => 'Бронювання',
                 'campaigns'                => 'Кампанії',
                 'catalog'                  => 'Каталог',
                 'categories'               => 'Категорії',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'Шаблони електронних листів',
                 'events'                   => 'Події',
                 'exchange-rates'           => 'Обмінні курси',
+                'gdpr-data-requests'       => 'Запити на дані GDPR',
                 'groups'                   => 'Групи',
                 'imports'                  => 'Імпорт',
                 'inventory-sources'        => 'Джерела інвентаризації',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'Транзакції',
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
-                'gdpr-data-requests'       => 'Запити на дані GDPR',
             ],
 
             'powered-by' => [

@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'গুণগুণ পরিবার',
                 'attributes'               => 'গুণগুণ',
+                'booking-product'          => 'সংরক্ষণ',
                 'campaigns'                => 'প্রচারণাসমূহ',
                 'catalog'                  => 'ক্যাটালগ',
                 'categories'               => 'বিভাগসমূহ',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'ইমেইল টেমপ্লেটগুলি',
                 'events'                   => 'ইভেন্টগুলি',
                 'exchange-rates'           => 'এক্সচেঞ্জ হার',
+                'gdpr-data-requests'       => 'GDPR ডেটা অনুরোধ',
                 'groups'                   => 'গোষ্ঠীগণ',
                 'imports'                  => 'আমদানি',
                 'inventory-sources'        => 'মূল মদ',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'লেনদেন',
                 'url-rewrites'             => 'ইউআরএল পুনর্লিখন',
                 'users'                    => 'ব্যবহারকারীগণ',
-                'gdpr-data-requests'       => 'GDPR ডেটা অনুরোধ',
             ],
 
             'powered-by' => [

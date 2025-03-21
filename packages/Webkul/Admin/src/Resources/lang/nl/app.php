@@ -4508,6 +4508,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Attribuut Families',
                 'attributes'               => 'Attributen',
+                'booking-product'          => 'Boekingen',
                 'campaigns'                => 'Campagnes',
                 'catalog'                  => 'Catalogus',
                 'categories'               => 'Categorieën',
@@ -4524,6 +4525,7 @@ return [
                 'email-templates'          => 'E-mail Templates',
                 'events'                   => 'Gebeurtenissen',
                 'exchange-rates'           => 'Wisselkoersen',
+                'gdpr-data-requests'       => 'GDPR Data Verzoeken',
                 'groups'                   => 'Groepen',
                 'imports'                  => 'Importeert',
                 'inventory-sources'        => 'Voorraadbronnen',
@@ -4553,7 +4555,6 @@ return [
                 'transactions'             => 'Transacties',
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
-                'gdpr-data-requests'       => 'GDPR Data Verzoeken',
             ],
 
             'powered-by' => [

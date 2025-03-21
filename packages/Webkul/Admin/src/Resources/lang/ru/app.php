@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Семейства атрибутов',
                 'attributes'               => 'Атрибуты',
+                'booking-product'          => 'Бронирования',
                 'campaigns'                => 'Кампании',
                 'catalog'                  => 'Каталог',
                 'categories'               => 'Категории',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'Шаблоны электронных писем',
                 'events'                   => 'События',
                 'exchange-rates'           => 'Обменные курсы',
+                'gdpr-data-requests'       => 'Запросы данных GDPR',
                 'groups'                   => 'Группы',
                 'imports'                  => 'Импорт',
                 'inventory-sources'        => 'Источники инвентаризации',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'Транзакции',
                 'url-rewrites'             => 'Перезапись URL',
                 'users'                    => 'Пользователи',
-                'gdpr-data-requests'       => 'Запросы данных GDPR',
             ],
 
             'powered-by' => [

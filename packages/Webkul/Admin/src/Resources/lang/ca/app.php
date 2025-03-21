@@ -4506,6 +4506,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Famílies d\'atributs',
                 'attributes'               => 'Atributs',
+                'booking-product'          => 'Reserves',
                 'campaigns'                => 'Campanyes',
                 'catalog'                  => 'Catàleg',
                 'categories'               => 'Categories',
@@ -4522,6 +4523,7 @@ return [
                 'email-templates'          => 'Plantilles de correu electrònic',
                 'events'                   => 'Esdeveniments',
                 'exchange-rates'           => 'Taxes de canvi',
+                'gdpr-data-requests'       => 'Sol·licituds de dades GDPR',
                 'groups'                   => 'Grups',
                 'imports'                  => 'Importacions',
                 'inventory-sources'        => 'Fonts d\'inventari',
@@ -4551,7 +4553,6 @@ return [
                 'transactions'             => 'Transaccions',
                 'url-rewrites'             => 'Reescriptures d\'URL',
                 'users'                    => 'Usuaris',
-                'gdpr-data-requests'       => 'Sol·licituds de dades GDPR',
             ],
 
             'powered-by' => [

@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Rodziny atrybutów',
                 'attributes'               => 'Atrybuty',
+                'booking-product'          => 'Rezerwacje',
                 'campaigns'                => 'Kampanie',
                 'catalog'                  => 'Katalog',
                 'categories'               => 'Kategorie',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'Szablony e-maili',
                 'events'                   => 'Wydarzenia',
                 'exchange-rates'           => 'Kursy wymiany',
+                'gdpr-data-requests'       => 'Żądania danych GDPR',
                 'groups'                   => 'Grupy',
                 'imports'                  => 'Import',
                 'inventory-sources'        => 'Źródła inwentarza',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'Transakcje',
                 'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
-                'gdpr-data-requests'       => 'Żądania danych GDPR',
             ],
 
             'powered-by' => [

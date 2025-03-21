@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => '属性ファミリー',
                 'attributes'               => '属性',
+                'booking-product'          => '予約',
                 'campaigns'                => 'キャンペーン',
                 'catalog'                  => 'カタログ',
                 'categories'               => 'カテゴリ',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'メールテンプレート',
                 'events'                   => 'イベント',
                 'exchange-rates'           => '為替レート',
+                'gdpr-data-requests'       => 'GDPRデータリクエスト',
                 'groups'                   => 'グループ',
                 'imports'                  => '輸入品',
                 'inventory-sources'        => '在庫ソース',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => '取引',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
-                'gdpr-data-requests'       => 'GDPRデータリクエスト',
             ],
 
             'powered-by' => [

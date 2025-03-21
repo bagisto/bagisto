@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'أسر السمات',
                 'attributes'               => 'السمات',
+                'booking-product'          => 'الحجوزات',
                 'campaigns'                => 'الحملات',
                 'catalog'                  => 'الكتالوج',
                 'categories'               => 'الفئات',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'قوالب البريد الإلكتروني',
                 'events'                   => 'الأحداث',
                 'exchange-rates'           => 'أسعار الصرف',
+                'gdpr-data-requests'       => 'طلبات بيانات GDPR',
                 'groups'                   => 'المجموعات',
                 'imports'                  => 'الواردات',
                 'inventory-sources'        => 'مصادر المخزون',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'المعاملات',
                 'url-rewrites'             => 'إعادة كتابة عناوين URL',
                 'users'                    => 'المستخدمين',
-                'gdpr-data-requests'       => 'طلبات بيانات GDPR',
             ],
 
             'powered-by' => [

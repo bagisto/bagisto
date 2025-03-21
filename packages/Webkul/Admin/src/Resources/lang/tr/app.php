@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Özellik Aileleri',
                 'attributes'               => 'Özellikler',
+                'booking-product'          => 'Rezervasyonlar',
                 'campaigns'                => 'Kampanyalar',
                 'catalog'                  => 'Katalog',
                 'categories'               => 'Kategoriler',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => 'E-posta Şablonları',
                 'events'                   => 'Etkinlikler',
                 'exchange-rates'           => 'Döviz Kurları',
+                'gdpr-data-requests'       => 'GDPR Veri Talepleri',
                 'groups'                   => 'Gruplar',
                 'imports'                  => 'İthalat',
                 'inventory-sources'        => 'Envanter Kaynakları',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => 'İşlemler',
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
-                'gdpr-data-requests'       => 'GDPR Veri Talepleri',
             ],
 
             'powered-by' => [

@@ -195,7 +195,7 @@ class BookingProductRepository extends Repository
                 $filteredSlots = array_merge($filteredSlots, $this->processSlots([$slot]));
             }
         }
-    
+
         return $filteredSlots;
     }
 

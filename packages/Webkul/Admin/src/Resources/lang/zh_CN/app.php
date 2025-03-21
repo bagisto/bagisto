@@ -4507,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => '属性族',
                 'attributes'               => '属性',
+                'booking-product'          => '预订',
                 'campaigns'                => '活动',
                 'catalog'                  => '目录',
                 'categories'               => '分类',
@@ -4523,6 +4524,7 @@ return [
                 'email-templates'          => '电子邮件模板',
                 'events'                   => '事件',
                 'exchange-rates'           => '汇率',
+                'gdpr-data-requests'       => 'GDPR 数据请求',
                 'groups'                   => '分组',
                 'imports'                  => '导入',
                 'inventory-sources'        => '库存来源',
@@ -4552,7 +4554,6 @@ return [
                 'transactions'             => '交易',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
-                'gdpr-data-requests'       => 'GDPR 数据请求',
             ],
 
             'powered-by' => [
