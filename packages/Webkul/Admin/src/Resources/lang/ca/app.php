@@ -4568,6 +4568,7 @@ return [
         'email-templates'          => 'Plantilles de Correu Electrònic',
         'events'                   => 'Esdeveniments',
         'exchange-rates'           => 'Taxes de Canvi',
+        'gdpr'                     => 'RGPD',
         'groups'                   => 'Grups',
         'import'                   => 'Importar',
         'imports'                  => 'Imports',

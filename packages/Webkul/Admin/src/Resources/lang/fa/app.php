@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'قالب‌های ایمیل',
         'events'                   => 'رویدادها',
         'exchange-rates'           => 'نرخ‌های ارزی',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'گروه‌ها',
         'import'                   => 'وارد كردن',
         'imports'                  => 'واردات',

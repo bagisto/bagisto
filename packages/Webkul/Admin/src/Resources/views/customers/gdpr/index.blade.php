@@ -65,23 +65,27 @@
 
                                 <!-- Actions -->
                                 <div class="flex justify-end">
-                                    <a @click="editModal(record.actions.find(action => action.index === 'edit')?.url, record.id)">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.customers.gdpr.index.datagrid.edit')')?.title"
-                                        >
-                                        </span>
-                                    </a>
+                                    @if (bouncer()->hasPermission('customers.gdpr_requests.edit'))
+                                        <a @click="editModal(record.actions.find(action => action.index === 'edit')?.url, record.id)">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.customers.gdpr.index.datagrid.edit')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
 
-                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.customers.gdpr.index.datagrid.delete')')?.title"
-                                        >
-                                        </span>
-                                    </a>
+                                    @if (bouncer()->hasPermission('customers.gdpr_requests.delete'))
+                                        <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.customers.gdpr.index.datagrid.delete')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </template>

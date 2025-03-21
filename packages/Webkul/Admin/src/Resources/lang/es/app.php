@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => 'Plantillas de Correo Electrónico',
         'events'                   => 'Eventos',
         'exchange-rates'           => 'Tasas de Cambio',
+        'gdpr'                     => 'RGPD',
         'groups'                   => 'Grupos',
         'import'                   => 'Importar',
         'imports'                  => 'Importaciones',

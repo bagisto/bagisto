@@ -4569,6 +4569,7 @@ return [
         'email-templates'          => '电子邮件模板',
         'events'                   => '事件',
         'exchange-rates'           => '汇率',
+        'gdpr'                     => 'GDPR',
         'groups'                   => '群组',
         'import'                   => '进口',
         'imports'                  => '进口',
