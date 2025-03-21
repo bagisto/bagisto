@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'বান্ডল',
+        'booking'      => 'Booking',
         'configurable' => 'কনফিগারেবল',
         'downloadable' => 'ডাউনলোডযোগ্য',
         'grouped'      => 'গোষ্ঠীবদ্ধ',

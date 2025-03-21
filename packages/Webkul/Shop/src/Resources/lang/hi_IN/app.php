@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'नाम',
                 ],
+
+                'booking' => [
+                    'location'    => 'स्थान',
+                    'view-on-map' => 'नक्शे पर देखें',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'बंद',
+                        'see-details'              => 'विवरण देखें',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'today-availability'       => 'आज की उपलब्धता',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'अपना टिकट बुक करें',
+                        'title'            => 'कार्यक्रम :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'किराया विकल्प चुनें',
+                        'daily-basis'        => 'दैनिक आधार',
+                        'from'               => 'से',
+                        'hourly-basis'       => 'घंटे के आधार पर',
+                        'rent-an-item'       => 'एक आइटम किराए पर लें',
+                        'select-date'        => 'तारीख चुनें',
+                        'select-rent-time'   => 'किराया समय चुनें',
+                        'select-slot'        => 'स्लॉट चुनें',
+                        'select-time-slot'   => 'समय स्लॉट चुनें',
+                        'slot'               => 'स्लॉट',
+                        'no-slots-available' => 'कोई स्लॉट उपलब्ध नहीं है',
+                        'to'                 => 'तक',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'टेबल बुक करें',
+                        'closed'                   => 'बंद',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'slots-for-all-days'       => 'सभी दिनों के लिए दिखाएं',
+                        'special-notes'            => 'विशेष अनुरोध/नोट्स',
+                        'today-availability'       => 'आज की उपलब्धता',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'अपॉइंटमेंट बुक करें',
+                        'date'                => 'तारीख',
+                        'no-slots-available'  => 'कोई स्लॉट उपलब्ध नहीं है',
+                        'select-slot'         => 'स्लॉट चुनें',
+                        'title'               => 'स्लॉट',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => ':qty के लिए :price प्रति प्रति खरीदें और :discount बचाएं',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'बंद',
+
+            'cart'             => [
+                'booking-from' => 'बुकिंग से',
+                'booking-till' => 'बुकिंग तक',
+                'daily'        => 'दैनिक आधार',
+                'event-from'   => 'कार्यक्रम से',
+                'event-ticket' => 'कार्यक्रम टिकट',
+                'event-till'   => 'कार्यक्रम तक',
+                'hourly'       => 'घंटे के आधार पर',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'यह कार्यक्रम समाप्त हो गया है।',
+                    ],
+
+                    'missing_options'        => 'इस उत्पाद के लिए विकल्प गायब हैं।',
+                    'inventory_warning'      => 'अनुरोधित मात्रा उपलब्ध नहीं है, कृपया बाद में पुनः प्रयास करें।',
+                    'select_hourly_duration' => 'एक घंटे की अवधि का चयन करें।',
+                ],
+
+                'rent-from'    => 'किराया से',
+                'rent-till'    => 'किराया तक',
+                'rent-type'    => 'किराया प्रकार',
+                'renting_type' => 'किराया प्रकार',
+                'special-note' => 'विशेष अनुरोध/नोट्स',
+            ],
+
+            'per-ticket-price' => ':price प्रति टिकट',
         ],
     ],
 

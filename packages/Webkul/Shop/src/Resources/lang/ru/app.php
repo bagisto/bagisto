@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Название',
                 ],
+
+                'booking' => [
+                    'location'    => 'Местоположение',
+                    'view-on-map' => 'Посмотреть на карте',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes минут',
+                        'slot-duration'            => 'Продолжительность слота',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Закрыто',
+                        'see-details'              => 'Посмотреть детали',
+                        'slot-duration'            => 'Продолжительность слота',
+                        'slot-duration-in-minutes' => ':minutes минут',
+                        'today-availability'       => 'Доступность сегодня',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Забронируйте билет',
+                        'title'            => 'Событие на :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Выберите вариант аренды',
+                        'daily-basis'        => 'На ежедневной основе',
+                        'from'               => 'С',
+                        'hourly-basis'       => 'На почасовой основе',
+                        'rent-an-item'       => 'Арендовать предмет',
+                        'select-date'        => 'Выберите дату',
+                        'select-rent-time'   => 'Выберите время аренды',
+                        'select-slot'        => 'Выберите слот',
+                        'select-time-slot'   => 'Выберите временной слот',
+                        'slot'               => 'Слот',
+                        'no-slots-available' => 'Нет доступных слотов',
+                        'to'                 => 'До',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Забронировать столик',
+                        'closed'                   => 'Закрыто',
+                        'slot-duration'            => 'Продолжительность слота',
+                        'slot-duration-in-minutes' => ':minutes минут',
+                        'slots-for-all-days'       => 'Показать на все дни',
+                        'special-notes'            => 'Особые запросы/заметки',
+                        'today-availability'       => 'Доступность сегодня',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Записаться на прием',
+                        'date'                => 'Дата',
+                        'no-slots-available'  => 'Нет доступных слотов',
+                        'select-slot'         => 'Выберите слот',
+                        'title'               => 'Слот',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Купите :qty по цене :price каждый и сэкономьте :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Закрыто',
+
+            'cart'             => [
+                'booking-from' => 'Бронирование с',
+                'booking-till' => 'Бронирование до',
+                'daily'        => 'Ежедневно',
+                'event-from'   => 'Событие с',
+                'event-ticket' => 'Билет на событие',
+                'event-till'   => 'Событие до',
+                'hourly'       => 'Почасовая основа',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Это событие истекло.',
+                    ],
+
+                    'missing_options'        => 'Отсутствуют варианты для этого продукта.',
+                    'inventory_warning'      => 'Запрошенное количество недоступно, попробуйте позже.',
+                    'select_hourly_duration' => 'Выберите продолжительность слота в один час.',
+                ],
+
+                'rent-from'    => 'Аренда с',
+                'rent-till'    => 'Аренда до',
+                'rent-type'    => 'Тип аренды',
+                'renting_type' => 'Тип аренды',
+                'special-note' => 'Особые запросы/заметки',
+            ],
+
+            'per-ticket-price' => ':price за билет',
         ],
     ],
 

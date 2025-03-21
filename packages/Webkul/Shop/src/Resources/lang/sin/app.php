@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'නම',
                 ],
+
+                'booking' => [
+                    'location'    => 'ස්ථානය',
+                    'view-on-map' => 'සිතියම මත බලන්න',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes මිනිත්තු',
+                        'slot-duration'            => 'ස්ලොට් කාලය',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'වසන ලදි',
+                        'see-details'              => 'විස්තර බලන්න',
+                        'slot-duration'            => 'ස්ලොට් කාලය',
+                        'slot-duration-in-minutes' => ':minutes මිනිත්තු',
+                        'today-availability'       => 'අද දින ලබාගත හැකි බව',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'ඔබගේ ටිකට්පත වෙන්කරන්න',
+                        'title'            => 'සිදුවීම :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'කිරුනු විකල්පය තෝරන්න',
+                        'daily-basis'        => 'දිනපතා',
+                        'from'               => 'සිට',
+                        'hourly-basis'       => 'පැය පදනම',
+                        'rent-an-item'       => 'අයිතමයක් කුලියට ගන්න',
+                        'select-date'        => 'දිනය තෝරන්න',
+                        'select-rent-time'   => 'කිරුනු කාලය තෝරන්න',
+                        'select-slot'        => 'ස්ලොට් තෝරන්න',
+                        'select-time-slot'   => 'කාල ස්ලොට් තෝරන්න',
+                        'slot'               => 'ස්ලොට්',
+                        'no-slots-available' => 'ස්ලොට් නොමැත',
+                        'to'                 => 'දක්වා',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'මේසයක් වෙන්කරන්න',
+                        'closed'                   => 'වසන ලදි',
+                        'slot-duration'            => 'ස්ලොට් කාලය',
+                        'slot-duration-in-minutes' => ':minutes මිනිත්තු',
+                        'slots-for-all-days'       => 'සියලු දින සඳහා පෙන්වන්න',
+                        'special-notes'            => 'විශේෂ ඉල්ලීම්/සටහන්',
+                        'today-availability'       => 'අද දින ලබාගත හැකි බව',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'පත්වීමක් වෙන්කරන්න',
+                        'date'                => 'දිනය',
+                        'no-slots-available'  => 'ස්ලොට් නොමැත',
+                        'select-slot'         => 'ස්ලොට් තෝරන්න',
+                        'title'               => 'ස්ලොට්',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => ':qty සඳහා :price ටයිකල් කරන්න සහ :discount සුදුසු',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'වසන ලදි',
+
+            'cart'             => [
+                'booking-from' => 'වෙන්කිරීමේ සිට',
+                'booking-till' => 'වෙන්කිරීමේ දක්වා',
+                'daily'        => 'දිනපතා පදනම',
+                'event-from'   => 'සිදුවීමේ සිට',
+                'event-ticket' => 'සිදුවීම් ටිකට්පත',
+                'event-till'   => 'සිදුවීමේ දක්වා',
+                'hourly'       => 'පැය පදනම',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'මෙම සිදුවීම කල් ඉකුත් වී ඇත.',
+                    ],
+
+                    'missing_options'        => 'මෙම නිෂ්පාදනය සඳහා විකල්ප අතුරුදහන් වී ඇත.',
+                    'inventory_warning'      => 'අයදුම් කළ ප්‍රමාණය ලබාගත නොහැක, කරුණාකර පසුව නැවත උත්සාහ කරන්න.',
+                    'select_hourly_duration' => 'පැයක කාල පරාසයක් තෝරන්න.',
+                ],
+
+                'rent-from'    => 'කිරුනු සිට',
+                'rent-till'    => 'කිරුනු දක්වා',
+                'rent-type'    => 'කිරුනු වර්ගය',
+                'renting_type' => 'කිරුනු වර්ගය',
+                'special-note' => 'විශේෂ ඉල්ලීම්/සටහන්',
+            ],
+
+            'per-ticket-price' => ':price ටිකට්පතකට',
         ],
     ],
 

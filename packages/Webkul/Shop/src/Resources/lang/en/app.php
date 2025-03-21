@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Name',
                 ],
+
+                'booking' => [
+                    'location'    => 'Location',
+                    'view-on-map' => 'View on Map',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slot-duration'            => 'Slot Duration',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Closed',
+                        'see-details'              => 'See Details',
+                        'slot-duration'            => 'Slot Duration',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'today-availability'       => 'Today Availability',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Book Your Ticket',
+                        'title'            => 'Event on :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Choose Rent Option',
+                        'daily-basis'        => 'Daily Basis',
+                        'from'               => 'From',
+                        'hourly-basis'       => 'Hourly Basis',
+                        'rent-an-item'       => 'Rent an Item',
+                        'select-date'        => 'Select date',
+                        'select-rent-time'   => 'Select Rent Time',
+                        'select-slot'        => 'Select Slot',
+                        'select-time-slot'   => 'Select Time Slot',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'No slots available',
+                        'to'                 => 'To',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Book a Table',
+                        'closed'                   => 'Closed',
+                        'slot-duration'            => 'Slot Duration',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slots-for-all-days'       => 'Show for all days',
+                        'special-notes'            => 'Special Request/Notes',
+                        'today-availability'       => 'Today Availability',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Book an Appointment',
+                        'date'                => 'Date',
+                        'no-slots-available'  => 'No slots available',
+                        'select-slot'         => 'Select Slot',
+                        'title'               => 'Slot',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Buy :qty for :price each and save :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Closed',
+
+            'cart'             => [
+                'booking-from' => 'Booking From',
+                'booking-till' => 'Booking Till',
+                'daily'        => 'Daily Basis',
+                'event-from'   => 'Event From',
+                'event-ticket' => 'Event Ticket',
+                'event-till'   => 'Event Till',
+                'hourly'       => 'Hourly Basis',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'This event has been expired.',
+                    ],
+
+                    'missing_options'        => 'Options are missing for this product.',
+                    'inventory_warning'      => 'The requested quantity is not available, please try again later.',
+                    'select_hourly_duration' => 'Select a slot duration of one hour.',
+                ],
+
+                'rent-from'    => 'Rent From',
+                'rent-till'    => 'Rent Till',
+                'rent-type'    => 'Rent Type',
+                'renting_type' => 'Rent Type',
+                'special-note' => 'Special Request/Notes',
+            ],
+
+            'per-ticket-price' => ':price Per Ticket',
         ],
     ],
 

@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Nome',
                 ],
+
+                'booking' => [
+                    'location'    => 'Localização',
+                    'view-on-map' => 'Ver no Mapa',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'slot-duration'            => 'Duração do Intervalo',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Fechado',
+                        'see-details'              => 'Ver Detalhes',
+                        'slot-duration'            => 'Duração do Intervalo',
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'today-availability'       => 'Disponibilidade Hoje',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Reserve Seu Ingresso',
+                        'title'            => 'Evento em :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Escolha a Opção de Aluguel',
+                        'daily-basis'        => 'Diária',
+                        'from'               => 'De',
+                        'hourly-basis'       => 'Por Hora',
+                        'rent-an-item'       => 'Alugar um Item',
+                        'select-date'        => 'Selecionar Data',
+                        'select-rent-time'   => 'Selecionar Horário de Aluguel',
+                        'select-slot'        => 'Selecionar Intervalo',
+                        'select-time-slot'   => 'Selecionar Faixa de Horário',
+                        'slot'               => 'Intervalo',
+                        'no-slots-available' => 'Nenhum intervalo disponível',
+                        'to'                 => 'Até',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Reservar uma Mesa',
+                        'closed'                   => 'Fechado',
+                        'slot-duration'            => 'Duração do Intervalo',
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'slots-for-all-days'       => 'Mostrar para todos os dias',
+                        'special-notes'            => 'Solicitação/Notas Especiais',
+                        'today-availability'       => 'Disponibilidade Hoje',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Agendar um Compromisso',
+                        'date'                => 'Data',
+                        'no-slots-available'  => 'Nenhum intervalo disponível',
+                        'select-slot'         => 'Selecionar Intervalo',
+                        'title'               => 'Intervalo',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Compre :qty por :price cada e economize :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Fechado',
+
+            'cart'             => [
+                'booking-from' => 'Reserva De',
+                'booking-till' => 'Reserva Até',
+                'daily'        => 'Base Diária',
+                'event-from'   => 'Evento De',
+                'event-ticket' => 'Ingresso para Evento',
+                'event-till'   => 'Evento Até',
+                'hourly'       => 'Base Horária',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Este evento expirou.',
+                    ],
+
+                    'missing_options'        => 'Faltam opções para este produto.',
+                    'inventory_warning'      => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde.',
+                    'select_hourly_duration' => 'Selecione uma duração de intervalo de uma hora.',
+                ],
+
+                'rent-from'    => 'Alugar De',
+                'rent-till'    => 'Alugar Até',
+                'rent-type'    => 'Tipo de Aluguel',
+                'renting_type' => 'Tipo de Aluguel',
+                'special-note' => 'Solicitação/Notas Especiais',
+            ],
+
+            'per-ticket-price' => ':price Por Ingresso',
         ],
     ],
 

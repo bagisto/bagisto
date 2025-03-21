@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'שם',
                 ],
+
+                'booking' => [
+                    'location'    => 'מיקום',
+                    'view-on-map' => 'צפה במפה',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'slot-duration'            => 'משך זמן',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'סגור',
+                        'see-details'              => 'ראה פרטים',
+                        'slot-duration'            => 'משך זמן',
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'today-availability'       => 'זמינות היום',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'הזמן כרטיס',
+                        'title'            => 'אירוע ב-:',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'בחר אפשרות השכרה',
+                        'daily-basis'        => 'בסיס יומי',
+                        'from'               => 'מ',
+                        'hourly-basis'       => 'בסיס שעתי',
+                        'rent-an-item'       => 'השכר פריט',
+                        'select-date'        => 'בחר תאריך',
+                        'select-rent-time'   => 'בחר זמן השכרה',
+                        'select-slot'        => 'בחר משבצת',
+                        'select-time-slot'   => 'בחר משבצת זמן',
+                        'slot'               => 'משבצת',
+                        'no-slots-available' => 'אין משבצות זמינות',
+                        'to'                 => 'עד',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'הזמן שולחן',
+                        'closed'                   => 'סגור',
+                        'slot-duration'            => 'משך זמן',
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'slots-for-all-days'       => 'הצג לכל הימים',
+                        'special-notes'            => 'בקשה/הערות מיוחדות',
+                        'today-availability'       => 'זמינות היום',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'הזמן פגישה',
+                        'date'                => 'תאריך',
+                        'no-slots-available'  => 'אין משבצות זמינות',
+                        'select-slot'         => 'בחר משבצת',
+                        'title'               => 'משבצת',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'סגור',
+
+            'cart'             => [
+                'booking-from' => 'הזמנה מ',
+                'booking-till' => 'הזמנה עד',
+                'daily'        => 'בסיס יומי',
+                'event-from'   => 'אירוע מ',
+                'event-ticket' => 'כרטיס אירוע',
+                'event-till'   => 'אירוע עד',
+                'hourly'       => 'בסיס שעתי',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'האירוע הזה פג תוקף.',
+                    ],
+
+                    'missing_options'        => 'אפשרויות חסרות עבור מוצר זה.',
+                    'inventory_warning'      => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
+                    'select_hourly_duration' => 'בחר משבצת זמן של שעה אחת.',
+                ],
+
+                'rent-from'    => 'השכרה מ',
+                'rent-till'    => 'השכרה עד',
+                'rent-type'    => 'סוג השכרה',
+                'renting_type' => 'סוג השכרה',
+                'special-note' => 'בקשה/הערות מיוחדות',
+            ],
+
+            'per-ticket-price' => ':price לכל כרטיס',
         ],
     ],
 

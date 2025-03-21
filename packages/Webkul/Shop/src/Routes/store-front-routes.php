@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Shop\Http\Controllers\BookingProductController;
 use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\PageController;
@@ -73,3 +74,9 @@ Route::controller(ProductController::class)->group(function () {
         'view' => 'shop.products.index',
     ])->name('shop.product.file.download');
 });
+
+/**
+ * Booking products
+ */
+Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
+    ->name('shop.booking-product.slots.index');

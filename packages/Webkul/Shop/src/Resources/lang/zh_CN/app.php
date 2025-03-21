@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => '名称',
                 ],
+
+                'booking' => [
+                    'location'    => '位置',
+                    'view-on-map' => '在地图上查看',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes 分钟',
+                        'slot-duration'            => '时段持续时间',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => '关闭',
+                        'see-details'              => '查看详情',
+                        'slot-duration'            => '时段持续时间',
+                        'slot-duration-in-minutes' => ':minutes 分钟',
+                        'today-availability'       => '今日可用性',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => '预订您的票',
+                        'title'            => '活动于 :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => '选择租赁选项',
+                        'daily-basis'        => '按天计算',
+                        'from'               => '从',
+                        'hourly-basis'       => '按小时计算',
+                        'rent-an-item'       => '租一个物品',
+                        'select-date'        => '选择日期',
+                        'select-rent-time'   => '选择租赁时间',
+                        'select-slot'        => '选择时段',
+                        'select-time-slot'   => '选择时间段',
+                        'slot'               => '时段',
+                        'no-slots-available' => '没有可用时段',
+                        'to'                 => '到',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => '预订桌位',
+                        'closed'                   => '关闭',
+                        'slot-duration'            => '时段持续时间',
+                        'slot-duration-in-minutes' => ':minutes 分钟',
+                        'slots-for-all-days'       => '显示所有天的时段',
+                        'special-notes'            => '特别请求/备注',
+                        'today-availability'       => '今日可用性',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => '预约',
+                        'date'                => '日期',
+                        'no-slots-available'  => '没有可用时段',
+                        'select-slot'         => '选择时段',
+                        'title'               => '时段',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => '购买 :qty 件，每件 :price，节省 :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => '关闭',
+
+            'cart'             => [
+                'booking-from' => '预订从',
+                'booking-till' => '预订到',
+                'daily'        => '按天计算',
+                'event-from'   => '活动从',
+                'event-ticket' => '活动票',
+                'event-till'   => '活动到',
+                'hourly'       => '按小时计算',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => '此活动已过期。',
+                    ],
+
+                    'missing_options'        => '此产品缺少选项。',
+                    'inventory_warning'      => '请求的数量不可用，请稍后再试。',
+                    'select_hourly_duration' => '选择一小时的时段。',
+                ],
+
+                'rent-from'    => '租赁从',
+                'rent-till'    => '租赁到',
+                'rent-type'    => '租赁类型',
+                'renting_type' => '租赁类型',
+                'special-note' => '特别请求/备注',
+            ],
+
+            'per-ticket-price' => ':price 每张票',
         ],
     ],
 
