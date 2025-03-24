@@ -4777,6 +4777,7 @@ return [
         'email-templates'          => 'E-mail Sjablonen',
         'events'                   => 'Evenementen',
         'exchange-rates'           => 'Wisselkoersen',
+        'gdpr'                     => 'AVG',
         'groups'                   => 'Groepen',
         'import'                   => 'Importeren',
         'imports'                  => 'Importeert',

@@ -4776,6 +4776,7 @@ return [
         'email-templates'          => 'E-Mail-Vorlagen',
         'events'                   => 'Ereignisse',
         'exchange-rates'           => 'Wechselkurse',
+        'gdpr'                     => 'DSGVO',
         'groups'                   => 'Gruppen',
         'import'                   => 'Importieren',
         'imports'                  => 'Importe',

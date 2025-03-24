@@ -4776,6 +4776,7 @@ return [
         'email-templates'          => 'Шаблоны электронных писем',
         'events'                   => 'События',
         'exchange-rates'           => 'Курсы обмена',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'Группы',
         'import'                   => 'Импортировать',
         'imports'                  => 'Импорт',

@@ -4776,6 +4776,7 @@ return [
         'email-templates'          => 'Szablony Emaili',
         'events'                   => 'Zdarzenia',
         'exchange-rates'           => 'Kursy Walut',
+        'gdpr'                     => 'RODO',
         'groups'                   => 'Grupy',
         'import'                   => 'Import',
         'imports'                  => 'Import',

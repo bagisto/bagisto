@@ -4776,6 +4776,7 @@ return [
         'email-templates'          => 'Modelli di Email',
         'events'                   => 'Eventi',
         'exchange-rates'           => 'Tassi di Cambio',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'Gruppi',
         'import'                   => 'Importare',
         'imports'                  => 'Importazioni',

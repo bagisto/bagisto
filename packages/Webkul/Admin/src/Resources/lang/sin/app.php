@@ -4776,6 +4776,7 @@ return [
         'email-templates'          => 'ඉ-තැපෑල අක්ෂර ආකෘති',
         'events'                   => 'සිසුන්',
         'exchange-rates'           => 'වාරික ප්‍රතිලාභ',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'සමූහ',
         'import'                   => 'ආනයන',
         'imports'                  => 'ආනයන',
