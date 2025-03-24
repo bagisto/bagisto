@@ -69,7 +69,7 @@ class Handler extends BaseHandler
             }
 
             $viewPath = "{$path}::errors.{$errorCode}";
-            if (!view()->exists($viewPath)) {
+            if (! view()->exists($viewPath)) {
                 $viewPath = "{$path}::errors.index";
             }
 
