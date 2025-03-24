@@ -297,175 +297,160 @@
         type="text/x-template"
         id="v-mobile-category-template"
     >
-        <div>
-            <template v-for="(category) in categories">
-                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
+        <template v-for="(category) in categories">
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
 
-                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 py-3.5 max-sm:py-2.5">
-                    <a
-                        :href="category.url"
-                        class="flex items-center justify-between"
-                    >
-                        @{{ category.name }}
-                    </a>
-
-                    <span
-                        class="cursor-pointer text-2xl"
-                        :class="{'icon-arrow-down': category.isOpen, 'icon-arrow-right': ! category.isOpen}"
-                        @click="toggle(category)"
-                    >
-                    </span>
-                </div>
-
-                <div
-                    class="grid gap-2"
-                    v-if="category.isOpen"
+            <div class="flex items-center justify-between gap-4">
+                <a
+                    :href="category.url"
+                    class="flex items-center justify-between py-2 text-base font-semibold transition-all"
                 >
-                    <ul v-if="category.children.length">
-                        <li v-for="secondLevelCategory in category.children">
-                            <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 ltr:ml-3 rtl:mr-3">
-                                <a
-                                    :href="secondLevelCategory.url"
-                                    class="mt-5 flex items-center justify-between pb-5"
-                                >
-                                    @{{ secondLevelCategory.name }}
-                                </a>
+                    @{{ category.name }}
+                </a>
 
-                                <span
-                                    class="cursor-pointer text-2xl"
-                                    :class="{
-                                        'icon-arrow-down': secondLevelCategory.category_show,
-                                        'icon-arrow-right': ! secondLevelCategory.category_show
-                                    }"
-                                    @click="secondLevelCategory.category_show = ! secondLevelCategory.category_show"
-                                >
-                                </span>
-                            </div>
+                <span
+                    class="cursor-pointer text-2xl font-medium"
+                    :class="{
+                            'icon-arrow-down': category.isOpen && category.children && category.children.length > 0,
+                            'icon-arrow-right': ! category.isOpen && category.children && category.children.length > 0
+                    }"
+                    @click="toggle(category)"
+                >
+                </span>
+            </div>
 
-                            <div v-if="secondLevelCategory.category_show">
-                                <ul v-if="secondLevelCategory.children.length">
-                                    <li v-for="thirdLevelCategory in secondLevelCategory.children">
-                                        <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 ltr:ml-3 rtl:mr-3">
-                                            <a
-                                                :href="thirdLevelCategory.url"
-                                                class="mt-5 flex items-center justify-between pb-5 ltr:ml-3 rtl:mr-3"
-                                            >
-                                                @{{ thirdLevelCategory.name }}
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
+            <div
+                class="grid gap-2"
+                v-if="category.isOpen"
+            >
+                <ul v-if="category.children.length">
+                    <li v-for="secondLevelCategory in category.children">
+                        <div class="ml-5 flex items-center justify-between gap-4 border-l border-black">
+                            <a
+                                :href="secondLevelCategory.url"
+                                class="flex items-center justify-between px-6 py-1 text-base font-medium transition-all"
+                            >
+                                @{{ secondLevelCategory.name }}
+                            </a>
 
-                                <span
-                                    class="ltr:ml-2 rtl:mr-2"
-                                    v-else
-                                >
-                                    @lang('shop::app.components.layouts.header.no-category-found')
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
+                            <span
+                                class="cursor-pointer text-2xl font-medium"
+                                :class="{
+                                        'icon-arrow-down': secondLevelCategory.category_show && secondLevelCategory.children.length > 0,
+                                        'icon-arrow-right': ! secondLevelCategory.category_show && secondLevelCategory.children.length > 0
+                                }"
+                                @click="secondLevelCategory.category_show = ! secondLevelCategory.category_show"
+                            >
+                            </span>
+                        </div>
 
-                    <span
-                        class="mt-2 max-sm:my-1.5 ltr:ml-2 rtl:mr-2"
-                        v-else
-                    >
-                        @lang('shop::app.components.layouts.header.no-category-found')
-                    </span>
-                </div>
+                        <div v-if="secondLevelCategory.category_show">
+                            <ul v-if="secondLevelCategory.children.length">
+                                <li v-for="thirdLevelCategory in secondLevelCategory.children">
+                                    <div class="ml-10 grid gap-4 border-l border-black px-6">
+                                        <a
+                                            :href="thirdLevelCategory.url"
+                                            class="flex cursor-pointer items-center justify-between py-1 text-base font-normal transition-all"
+                                        >
+                                            @{{ thirdLevelCategory.name }}
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.after') !!}
-            </template>
-        </div>
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.after') !!}
+        </template>
 
         <!-- Localization & Currency Section -->
         @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1 )
-            <div class="w-full border-t bg-white">
-                <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
-                    <!-- Filter Drawer -->
-                    <x-shop::drawer
-                        position="bottom"
-                        width="100%"
-                    >
-                        <!-- Drawer Toggler -->
-                        <x-slot:toggle>
-                            <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                role="button"
-                            >
-                                {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                            </div>
-                        </x-slot>
+            <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
+                <!-- Filter Drawer -->
+                <x-shop::drawer
+                    position="bottom"
+                    width="100%"
+                >
+                    <!-- Drawer Toggler -->
+                    <x-slot:toggle>
+                        <div
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                            role="button"
+                        >
+                            {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                        </div>
+                    </x-slot>
 
-                        <!-- Drawer Header -->
-                        <x-slot:header>
-                            <div class="flex items-center justify-between">
-                                <p class="text-lg font-semibold">
-                                    @lang('shop::app.components.layouts.header.mobile.currencies')
-                                </p>
-                            </div>
-                        </x-slot>
+                    <!-- Drawer Header -->
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-semibold">
+                                @lang('shop::app.components.layouts.header.mobile.currencies')
+                            </p>
+                        </div>
+                    </x-slot>
 
-                        <!-- Drawer Content -->
-                        <x-slot:content class="!px-0">
-                            <div
-                                class="overflow-auto"
-                                :style="{ height: getCurrentScreenHeight }"
-                            >
-                                <v-currency-switcher></v-currency-switcher>
-                            </div>
-                        </x-slot>
-                    </x-shop::drawer>
+                    <!-- Drawer Content -->
+                    <x-slot:content class="!px-0">
+                        <div
+                            class="overflow-auto"
+                            :style="{ height: getCurrentScreenHeight }"
+                        >
+                            <v-currency-switcher></v-currency-switcher>
+                        </div>
+                    </x-slot>
+                </x-shop::drawer>
 
-                    <!-- Seperator -->
-                    <span class="h-5 w-0.5 bg-zinc-200"></span>
+                <!-- Seperator -->
+                <span class="h-5 w-0.5 bg-zinc-200"></span>
 
-                    <!-- Sort Drawer -->
-                    <x-shop::drawer
-                        position="bottom"
-                        width="100%"
-                    >
-                        <!-- Drawer Toggler -->
-                        <x-slot:toggle>
-                            <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                role="button"
-                            >
-                                <img
-                                    src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                                            ? core()->getCurrentLocale()->logo_url
-                                            : bagisto_asset('images/default-language.svg')
-                                        }}"
-                                    class="h-full"
-                                    alt="Default locale"
-                                    width="24"
-                                    height="16"
-                                />
+                <!-- Sort Drawer -->
+                <x-shop::drawer
+                    position="bottom"
+                    width="100%"
+                >
+                    <!-- Drawer Toggler -->
+                    <x-slot:toggle>
+                        <div
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                            role="button"
+                        >
+                            <img
+                                src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                        ? core()->getCurrentLocale()->logo_url
+                                        : bagisto_asset('images/default-language.svg')
+                                    }}"
+                                class="h-full"
+                                alt="Default locale"
+                                width="24"
+                                height="16"
+                            />
 
-                                {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                            </div>
-                        </x-slot>
+                            {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                        </div>
+                    </x-slot>
 
-                        <!-- Drawer Header -->
-                        <x-slot:header>
-                            <div class="flex items-center justify-between">
-                                <p class="text-lg font-semibold">
-                                    @lang('shop::app.components.layouts.header.mobile.locales')
-                                </p>
-                            </div>
-                        </x-slot>
+                    <!-- Drawer Header -->
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-semibold">
+                                @lang('shop::app.components.layouts.header.mobile.locales')
+                            </p>
+                        </div>
+                    </x-slot>
 
-                        <!-- Drawer Content -->
-                        <x-slot:content class="!px-0">
-                            <div
-                                class="overflow-auto"
-                                :style="{ height: getCurrentScreenHeight }"
-                            >
-                                <v-locale-switcher></v-locale-switcher>
-                            </div>
-                        </x-slot>
-                    </x-shop::drawer>
-                </div>
+                    <!-- Drawer Content -->
+                    <x-slot:content class="!px-0">
+                        <div
+                            class="overflow-auto"
+                            :style="{ height: getCurrentScreenHeight }"
+                        >
+                            <v-locale-switcher></v-locale-switcher>
+                        </div>
+                    </x-slot>
+                </x-shop::drawer>
             </div>
         @endif
     </script>

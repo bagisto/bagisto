@@ -194,7 +194,7 @@
                                     <div class="max-md:block md:hidden">
                                         <p
                                             class="text-lg font-semibold max-md:text-sm"
-                                            v-html="wishlist.product.min_price"
+                                            v-html="wishlist.product.price_html"
                                         ></p>
 
                                         {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.before') !!}
@@ -239,7 +239,7 @@
                             <div class="max-md:hidden">
                                 <p
                                     class="text-lg font-semibold"
-                                    v-html="wishlist.product.min_price"
+                                    v-html="wishlist.product.price_html"
                                 >
                                 </p>
 
