@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'निर्माण तिथि',
+                    'from'         => 'से',
+                    'id'           => 'आईडी',
+                    'order-id'     => 'आदेश आईडी',
+                    'qty'          => 'मात्रा',
+                    'to'           => 'तक',
+                    'view'         => 'देखें',
+                ],
+
+                'title'    => 'बुकिंग',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'बुकिंग तिथि',
+                'booking-details'  => 'बुकिंग विवरण',
+                'canceled'         => 'रद्द',
+                'closed'           => 'बंद',
+                'done'             => 'पूर्ण',
+                'order-id'         => 'आदेश आईडी',
+                'pending'          => 'लंबित',
+                'price'            => 'मूल्य',
+                'status'           => 'स्थिति',
+                'time-slot'        => 'समय स्लॉट:',
+                'view-details'     => 'विवरण देखें',
+            ],
+
+            'title' => 'बुकिंग उत्पाद',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'सेलेक्ट',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'उपलब्धता प्रारंभ',
+                        'available-to'   => 'उपलब्धता समाप्त',
+                        'location'       => 'स्थान',
+                        'qty'            => 'मात्रा',
+                        'title'          => 'बुकिंग प्रकार',
+
+                        'available-every-week' => [
+                            'no'    => 'नहीं',
+                            'title' => 'हर सप्ताह उपलब्ध',
+                            'yes'   => 'हाँ',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'स्लॉट्स के बीच ब्रेक समय (मिनट)',
+                            'slot-duration'          => 'स्लॉट अवधि (मिनट)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'नहीं',
+                                'title' => 'सभी दिनों के लिए समान स्लॉट',
+                                'yes'   => 'हाँ',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'जोड़ें',
+                            'break-duration'   => 'स्लॉट्स के बीच ब्रेक समय (मिनट)',
+                            'close'            => 'बंद करें',
+                            'description'      => 'बुकिंग जानकारी',
+                            'description-info' => 'स्लॉट के अनुसार समय अवधि बनाई जाएगी और प्रदर्शित की जाएगी। यह सभी स्लॉट्स में अद्वितीय होगी और स्टोरफ्रंट पर दिखाई देगी।',
+                            'edit'             => 'संपादित करें',
+                            'many'             => 'एक दिन के लिए कई बुकिंग',
+                            'one'              => 'कई दिनों के लिए एक बुकिंग',
+                            'open'             => 'खोलें',
+                            'slot-add'         => 'स्लॉट्स जोड़ें',
+                            'slot-duration'    => 'स्लॉट अवधि (मिनट)',
+                            'slot-title'       => 'स्लॉट्स समय अवधि',
+                            'title'            => 'डिफ़ॉल्ट',
+                            'unavailable'      => 'अनुपलब्ध',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'स्लॉट्स जोड़ें',
+                                    'close'      => 'बंद करें',
+                                    'day'        => 'दिन',
+                                    'edit-title' => 'स्लॉट्स संपादित करें',
+                                    'friday'     => 'शुक्रवार',
+                                    'from'       => 'से',
+                                    'from-day'   => 'दिन से',
+                                    'from-time'  => 'समय से',
+                                    'monday'     => 'सोमवार',
+                                    'open'       => 'खोलें',
+                                    'saturday'   => 'शनिवार',
+                                    'save'       => 'सहेजें',
+                                    'select'     => 'चुनें',
+                                    'status'     => 'स्थिति',
+                                    'sunday'     => 'रविवार',
+                                    'thursday'   => 'गुरुवार',
+                                    'to'         => 'तक',
+                                    'to-day'     => 'दिन तक',
+                                    'to-time'    => 'समय तक',
+                                    'tuesday'    => 'मंगलवार',
+                                    'wednesday'  => 'बुधवार',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'टिकट जोड़ें',
+                            'delete'             => 'हटाएं',
+                            'description'        => 'विवरण',
+                            'description-info'   => 'कोई टिकट उपलब्ध नहीं है।',
+                            'edit'               => 'संपादित करें',
+                            'name'               => 'नाम',
+                            'price'              => 'मूल्य',
+                            'qty'                => 'मात्रा',
+                            'special-price'      => 'विशेष मूल्य',
+                            'special-price-from' => 'विशेष मूल्य से',
+                            'special-price-to'   => 'विशेष मूल्य तक',
+                            'title'              => 'टिकट',
+                            'valid-from'         => 'से मान्य',
+                            'valid-until'        => 'तक मान्य',
+
+                            'modal'              => [
+                                'edit' => 'टिकट संपादित करें',
+                                'save' => 'सहेजें',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'टिकट जोड़ें',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'स्लॉट्स जोड़ें',
+                                'description' => 'समय अवधि के साथ उपलब्ध स्लॉट्स।',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'दैनिक आधार',
+                            'daily-hourly' => 'दोनों (दैनिक और घंटा आधार)',
+                            'daily-price'  => 'दैनिक मूल्य',
+                            'hourly'       => 'घंटा आधार',
+                            'hourly-price' => 'घंटा मूल्य',
+                            'title'        => 'किराए का प्रकार',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'नहीं',
+                                'title' => 'सभी दिनों के लिए समान स्लॉट',
+                                'yes'   => 'हाँ',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'स्लॉट्स जोड़ें',
+                            'description-info' => 'स्लॉट के अनुसार समय अवधि बनाई जाएगी और प्रदर्शित की जाएगी। यह सभी स्लॉट्स में अद्वितीय होगी और स्टोरफ्रंट पर दिखाई देगी।',
+                            'save'             => 'सहेजें',
+                            'title'            => 'स्लॉट्स समय अवधि',
+                            'unavailable'      => 'अनुपलब्ध',
+
+                            'action'           => [
+                                'add' => 'जोड़ें',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'शुक्रवार',
+                                    'from'       => 'से',
+                                    'monday'     => 'सोमवार',
+                                    'saturday'   => 'शनिवार',
+                                    'sunday'     => 'रविवार',
+                                    'thursday'   => 'गुरुवार',
+                                    'to'         => 'तक',
+                                    'tuesday'    => 'मंगलवार',
+                                    'wednesday'  => 'बुधवार',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'स्लॉट्स के बीच ब्रेक समय (मिनट)',
+                            'guest-capacity'            => 'अतिथि क्षमता',
+                            'guest-limit'               => 'प्रति टेबल अतिथि सीमा',
+                            'prevent-scheduling-before' => 'पहले से शेड्यूलिंग रोकें',
+                            'slot-duration'             => 'स्लॉट अवधि (मिनट)',
+
+                            'charged-per'               => [
+                                'guest'  => 'अतिथि',
+                                'table'  => 'टेबल',
+                                'title'  => 'प्रति चार्ज',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'नहीं',
+                                'title' => 'सभी दिनों के लिए समान स्लॉट',
+                                'yes'   => 'हाँ',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'नियुक्ति बुकिंग',
+                            'default'     => 'डिफ़ॉल्ट बुकिंग',
+                            'event'       => 'इवेंट बुकिंग',
+                            'many'        => 'कई',
+                            'one'         => 'एक',
+                            'rental'      => 'किराए की बुकिंग',
+                            'table'       => 'टेबल बुकिंग',
+                            'title'       => 'प्रकार',
                         ],
                     ],
 
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'गुण-परिवार',
                 'attributes'               => 'गुण',
+                'booking-product'          => 'बुकिंग',
                 'campaigns'                => 'कैंपेन',
                 'catalog'                  => 'कैटलॉग',
                 'categories'               => 'श्रेणियाँ',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => 'ईमेल टेम्पलेट्स',
                 'events'                   => 'इवेंट्स',
                 'exchange-rates'           => 'विनिमय दरें',
+                'gdpr-data-requests'       => 'GDPR डेटा अनुरोध',
                 'groups'                   => 'समूह',
                 'imports'                  => 'आयात',
                 'inventory-sources'        => 'सूची स्रोत',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => 'लेन-देन',
                 'url-rewrites'             => 'URL पुनर्लेखन',
                 'users'                    => 'उपयोगकर्ता',
-                'gdpr-data-requests'       => 'GDPR डेटा अनुरोध',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => 'ईमेल टेम्पलेट्स',
         'events'                   => 'घटनाएँ',
         'exchange-rates'           => 'विनिमय दरें',
+        'gdpr'                     => 'जीडीपीआर',
         'groups'                   => 'समूह',
         'import'                   => 'आयात',
         'imports'                  => 'आयात',

@@ -46,6 +46,10 @@ import Emitter from "./plugins/emitter";
 import Flatpickr from "./plugins/flatpickr";
 import VeeValidate from "./plugins/vee-validate";
 import Draggable from "./plugins/draggable";
+import VueCal from 'vue-cal';
+import 'vue-cal/dist/vuecal.css';
+
+app.component('vue-cal', VueCal);
 
 [
     Admin,

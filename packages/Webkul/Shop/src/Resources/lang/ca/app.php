@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Nom',
                 ],
+
+                'booking' => [
+                    'location'    => 'Ubicació',
+                    'view-on-map' => 'Veure al mapa',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minuts',
+                        'slot-duration'            => 'Durada del slot',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Tancat',
+                        'see-details'              => 'Veure detalls',
+                        'slot-duration'            => 'Durada del slot',
+                        'slot-duration-in-minutes' => ':minutes Minuts',
+                        'today-availability'       => 'Disponibilitat d\'avui',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Reserva la teva entrada',
+                        'title'            => 'Esdeveniment el :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Tria l\'opció de lloguer',
+                        'daily-basis'        => 'Diari',
+                        'from'               => 'Des de',
+                        'hourly-basis'       => 'Per hores',
+                        'rent-an-item'       => 'Llogar un article',
+                        'select-date'        => 'Selecciona la data',
+                        'select-rent-time'   => 'Selecciona l\'hora de lloguer',
+                        'select-slot'        => 'Selecciona el slot',
+                        'select-time-slot'   => 'Selecciona el slot de temps',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'No hi ha slots disponibles',
+                        'to'                 => 'Fins a',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Reserva una taula',
+                        'closed'                   => 'Tancat',
+                        'slot-duration'            => 'Durada del slot',
+                        'slot-duration-in-minutes' => ':minutes Minuts',
+                        'slots-for-all-days'       => 'Mostrar per a tots els dies',
+                        'special-notes'            => 'Sol·licitud/Notes especials',
+                        'today-availability'       => 'Disponibilitat d\'avui',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Reserva una cita',
+                        'date'                => 'Data',
+                        'no-slots-available'  => 'No hi ha slots disponibles',
+                        'select-slot'         => 'Selecciona el slot',
+                        'title'               => 'Slot',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Compra :qty a :price cadascun i estalvia :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Tancat',
+
+            'cart'             => [
+                'booking-from' => 'Reserva des de',
+                'booking-till' => 'Reserva fins a',
+                'daily'        => 'Diari',
+                'event-from'   => 'Esdeveniment des de',
+                'event-ticket' => 'Entrada per a l\'esdeveniment',
+                'event-till'   => 'Esdeveniment fins a',
+                'hourly'       => 'Per hores',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Aquest esdeveniment ha expirat.',
+                    ],
+
+                    'missing_options'        => 'Falten opcions per a aquest producte.',
+                    'inventory_warning'      => 'La quantitat sol·licitada no està disponible, si us plau intenta-ho més tard.',
+                    'select_hourly_duration' => 'Selecciona una durada d\'una hora.',
+                ],
+
+                'rent-from'    => 'Lloguer des de',
+                'rent-till'    => 'Lloguer fins a',
+                'rent-type'    => 'Tipus de lloguer',
+                'renting_type' => 'Tipus de lloguer',
+                'special-note' => 'Sol·licitud/Notes especials',
+            ],
+
+            'per-ticket-price' => ':price Per entrada',
         ],
     ],
 

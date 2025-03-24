@@ -4,9 +4,8 @@ namespace Webkul\Admin\Validations;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Models\CategoryTranslationProxy;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductCategoryUniqueSlug implements Rule
 {
@@ -112,13 +111,24 @@ class ProductCategoryUniqueSlug implements Rule
      */
     protected function isSlugExistsInProducts($slug)
     {
-        $attribute = app(AttributeRepository::class)->findOneByField('code', 'url_key');
+        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
+            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
+        }
 
-        return ! app(ProductAttributeValueRepository::class)->isValueUnique(
-            $this->id,
-            $attribute->id,
-            $attribute->column_name,
-            $slug,
-        );
+        $product = app(ProductRepository::class)
+            ->setSearchEngine($searchEngine ?? 'database')
+            ->findBySlug($slug);
+
+        if (
+            $product
+            && $this->tableName
+            && $this->id
+            && $this->tableName === 'products'
+            && $this->id == $product->id
+        ) {
+            $product = null;
+        }
+
+        return (bool) $product;
     }
 }

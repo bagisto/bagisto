@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Date de création',
+                    'from'         => 'De',
+                    'id'           => 'ID',
+                    'order-id'     => 'ID de commande',
+                    'qty'          => 'Quantité',
+                    'to'           => 'À',
+                    'view'         => 'Voir',
+                ],
+
+                'title'    => 'Réservations',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Date de réservation',
+                'booking-details'  => 'Détails de la réservation',
+                'canceled'         => 'Annulé',
+                'closed'           => 'Fermé',
+                'done'             => 'Terminé',
+                'order-id'         => 'ID de commande',
+                'pending'          => 'En attente',
+                'price'            => 'Prix',
+                'status'           => 'Statut',
+                'time-slot'        => 'Créneau horaire:',
+                'view-details'     => 'Voir les détails',
+            ],
+
+            'title' => 'Produits réservés',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'Sélectionner',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Disponible à partir de',
+                        'available-to'   => 'Disponible jusqu\'à',
+                        'location'       => 'Emplacement',
+                        'qty'            => 'Quantité',
+                        'title'          => 'Type de réservation',
+
+                        'available-every-week' => [
+                            'no'    => 'Non',
+                            'title' => 'Disponible chaque semaine',
+                            'yes'   => 'Oui',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => 'Temps de pause entre les créneaux (minutes)',
+                            'slot-duration'  => 'Durée du créneau (minutes)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Non',
+                                'title' => 'Même créneau pour tous les jours',
+                                'yes'   => 'Oui',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Ajouter',
+                            'break-duration'   => 'Temps de pause entre les créneaux (minutes)',
+                            'close'            => 'Fermer',
+                            'description'      => 'Informations sur la réservation',
+                            'description-info' => 'La durée sera créée et affichée en fonction des créneaux. Elle sera unique à travers tous les créneaux et visible sur la vitrine du magasin',
+                            'edit'             => 'Modifier',
+                            'many'             => 'Plusieurs réservations pour un jour',
+                            'one'              => 'Une réservation pour plusieurs jours',
+                            'open'             => 'Ouvrir',
+                            'slot-add'         => 'Ajouter des créneaux',
+                            'slot-duration'    => 'Durée du créneau (minutes)',
+                            'slot-title'       => 'Durée des créneaux',
+                            'title'            => 'Par défaut',
+                            'unavailable'      => 'Indisponible',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Ajouter des créneaux',
+                                    'close'      => 'Fermer',
+                                    'day'        => 'Jour',
+                                    'edit-title' => 'Modifier les créneaux',
+                                    'friday'     => 'Vendredi',
+                                    'from'       => 'De',
+                                    'from-day'   => 'Du jour',
+                                    'from-time'  => 'De l\'heure',
+                                    'monday'     => 'Lundi',
+                                    'open'       => 'Ouvrir',
+                                    'saturday'   => 'Samedi',
+                                    'save'       => 'Enregistrer',
+                                    'select'     => 'Sélectionner',
+                                    'status'     => 'Statut',
+                                    'sunday'     => 'Dimanche',
+                                    'thursday'   => 'Jeudi',
+                                    'to'         => 'À',
+                                    'to-day'     => 'Au jour',
+                                    'to-time'    => 'À l\'heure',
+                                    'tuesday'    => 'Mardi',
+                                    'wednesday'  => 'Mercredi',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Ajouter des billets',
+                            'delete'             => 'Supprimer',
+                            'description'        => 'Description',
+                            'description-info'   => 'Aucun billet disponible.',
+                            'edit'               => 'Modifier',
+                            'name'               => 'Nom',
+                            'price'              => 'Prix',
+                            'qty'                => 'Quantité',
+                            'special-price'      => 'Prix spécial',
+                            'special-price-from' => 'Prix spécial à partir de',
+                            'special-price-to'   => 'Prix spécial jusqu\'à',
+                            'title'              => 'Billets',
+                            'valid-from'         => 'Valide à partir de',
+                            'valid-until'        => 'Valide jusqu\'à',
+
+                            'modal'              => [
+                                'edit' => 'Modifier les billets',
+                                'save' => 'Enregistrer',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Ajouter des billets',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Ajouter des créneaux',
+                                'description' => 'Créneaux disponibles avec durée.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => 'Base quotidienne',
+                            'daily-hourly'           => 'Les deux (quotidienne et horaire)',
+                            'daily-price'            => 'Prix quotidien',
+                            'hourly'                 => 'Base horaire',
+                            'hourly-price'           => 'Prix horaire',
+                            'title'                  => 'Type de location',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Non',
+                                'title' => 'Même créneau pour tous les jours',
+                                'yes'   => 'Oui',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Ajouter des créneaux',
+                            'description-info' => 'La durée sera créée et affichée en fonction des créneaux. Elle sera unique à travers tous les créneaux et visible sur la vitrine du magasin',
+                            'save'             => 'Enregistrer',
+                            'title'            => 'Durée des créneaux',
+                            'unavailable'      => 'Indisponible',
+
+                            'action'           => [
+                                'add' => 'Ajouter',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'Vendredi',
+                                    'from'       => 'De',
+                                    'monday'     => 'Lundi',
+                                    'saturday'   => 'Samedi',
+                                    'sunday'     => 'Dimanche',
+                                    'thursday'   => 'Jeudi',
+                                    'to'         => 'À',
+                                    'tuesday'    => 'Mardi',
+                                    'wednesday'  => 'Mercredi',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Temps de pause entre les créneaux (minutes)',
+                            'guest-capacity'            => 'Capacité d\'invités',
+                            'guest-limit'               => 'Limite d\'invités par table',
+                            'prevent-scheduling-before' => 'Empêcher la planification avant',
+                            'slot-duration'             => 'Durée du créneau (minutes)',
+
+                            'charged-per'               => [
+                                'guest'  => 'Invité',
+                                'table'  => 'Table',
+                                'title'  => 'Facturé par',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Non',
+                                'title' => 'Même créneau pour tous les jours',
+                                'yes'   => 'Oui',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Réservation de rendez-vous',
+                            'default'     => 'Réservation par défaut',
+                            'event'       => 'Réservation d\'événement',
+                            'many'        => 'Plusieurs',
+                            'one'         => 'Un',
+                            'rental'      => 'Réservation de location',
+                            'table'       => 'Réservation de table',
+                            'title'       => 'Type',
                         ],
                     ],
 
@@ -1767,7 +1973,7 @@ return [
 
         'gdpr' => [
             'index' => [
-                'title' => 'Demande RGPD',
+                'title' => 'Demande GDPR',
 
                 'datagrid' => [
                     'completed'     => 'Terminé',
@@ -1794,7 +2000,7 @@ return [
                     'revoked'       => 'Révoqué',
                     'save-btn'      => 'Enregistrer',
                     'status'        => 'Statut',
-                    'title'         => 'Modifier la demande de données RGPD',
+                    'title'         => 'Modifier la demande de données GDPR',
                     'type'          => 'Type',
                 ],
 
@@ -3652,18 +3858,18 @@ return [
             ],
 
             'gdpr' => [
-                'title' => 'RGPD',
-                'info'  => 'Paramètres de conformité au RGPD',
+                'title' => 'GDPR',
+                'info'  => 'Paramètres de conformité au GDPR',
 
                 'settings' => [
-                    'title'   => 'Paramètres de conformité au RGPD',
-                    'info'    => 'Gérer les paramètres de conformité au RGPD, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du RGPD selon les besoins.',
-                    'enabled' => 'Activer le RGPD',
+                    'title'   => 'Paramètres de conformité au GDPR',
+                    'info'    => 'Gérer les paramètres de conformité au GDPR, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du GDPR selon les besoins.',
+                    'enabled' => 'Activer le GDPR',
                 ],
 
                 'agreement' => [
-                    'title'          => 'Accord RGPD',
-                    'info'           => 'Gérer le consentement des clients conformément aux réglementations RGPD. Activer le consentement obligatoire pour la collecte et le traitement des données.',
+                    'title'          => 'Accord GDPR',
+                    'info'           => 'Gérer le consentement des clients conformément aux réglementations GDPR. Activer le consentement obligatoire pour la collecte et le traitement des données.',
                     'enable'         => 'Activer le consentement des clients',
                     'checkbox-label' => 'Étiquette de la case à cocher pour le consentement',
                     'content'        => 'Contenu du consentement',
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Familles d\'attributs',
                 'attributes'               => 'Attributs',
+                'booking-product'          => 'Réservations',
                 'campaigns'                => 'Campagnes',
                 'catalog'                  => 'Catalogue',
                 'categories'               => 'Catégories',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => 'Modèles d\'email',
                 'events'                   => 'Événements',
                 'exchange-rates'           => 'Taux de change',
+                'gdpr-data-requests'       => 'Demandes de données GDPR',
                 'groups'                   => 'Groupes',
                 'imports'                  => 'Importations',
                 'inventory-sources'        => 'Sources de l\'inventaire',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => 'Transactions',
                 'url-rewrites'             => 'Réécritures d\'URL',
                 'users'                    => 'Utilisateurs',
-                'gdpr-data-requests'       => 'Demandes de données GDPR',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => 'Modèles d\'e-mail',
         'events'                   => 'Événements',
         'exchange-rates'           => 'Taux de change',
+        'gdpr'                     => 'RGPD',
         'groups'                   => 'Groupes',
         'import'                   => 'Importer',
         'imports'                  => 'Importations',

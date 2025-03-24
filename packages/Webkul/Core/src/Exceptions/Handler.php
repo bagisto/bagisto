@@ -68,7 +68,13 @@ class Handler extends BaseHandler
                 ], $errorCode);
             }
 
-            return response()->view("{$namespace}::errors.index", compact('errorCode'));
+            $viewPath = "{$namespace}::errors.{$errorCode}";
+
+            if (! view()->exists($viewPath)) {
+                $viewPath = "{$namespace}::errors.index";
+            }
+
+            return response()->view($viewPath, compact('errorCode'));
         });
     }
 
@@ -99,7 +105,13 @@ class Handler extends BaseHandler
                 ], $errorCode);
             }
 
-            return response()->view("{$namespace}::errors.index", compact('errorCode'));
+            $viewPath = "{$namespace}::errors.{$errorCode}";
+
+            if (! view()->exists($viewPath)) {
+                $viewPath = "{$namespace}::errors.index";
+            }
+
+            return response()->view($viewPath, compact('errorCode'));
         });
     }
 }

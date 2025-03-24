@@ -14,6 +14,7 @@ use Shetabit\Visitor\Traits\Visitable;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\BookingProduct\Models\BookingProductProxy;
 use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Core\Models\ChannelProxy;
@@ -225,6 +226,14 @@ class Product extends Model implements ProductContract
     public function grouped_products(): HasMany
     {
         return $this->hasMany(ProductGroupedProductProxy::modelClass());
+    }
+
+    /**
+     * Get the grouped products that owns the product.
+     */
+    public function booking_products(): HasMany
+    {
+        return $this->hasMany(BookingProductProxy::modelClass());
     }
 
     /**
