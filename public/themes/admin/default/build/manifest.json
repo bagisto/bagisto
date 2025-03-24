@@ -1,6 +1,270 @@
 {
+  "node_modules/vue-cal/dist/drag-and-drop.es.js": {
+    "file": "assets/drag-and-drop.es-JkAdgoaa.js",
+    "name": "drag-and-drop.es",
+    "src": "node_modules/vue-cal/dist/drag-and-drop.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ar.es.js": {
+    "file": "assets/ar.es-CfdTYgcp.js",
+    "name": "ar.es",
+    "src": "node_modules/vue-cal/dist/i18n/ar.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bg.es.js": {
+    "file": "assets/bg.es-Ce0T19Qg.js",
+    "name": "bg.es",
+    "src": "node_modules/vue-cal/dist/i18n/bg.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bn.es.js": {
+    "file": "assets/bn.es-iWyup8_3.js",
+    "name": "bn.es",
+    "src": "node_modules/vue-cal/dist/i18n/bn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bs.es.js": {
+    "file": "assets/bs.es-Cz58hpHx.js",
+    "name": "bs.es",
+    "src": "node_modules/vue-cal/dist/i18n/bs.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ca.es.js": {
+    "file": "assets/ca.es-CujU75Im.js",
+    "name": "ca.es",
+    "src": "node_modules/vue-cal/dist/i18n/ca.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/cs.es.js": {
+    "file": "assets/cs.es-BHhRbaip.js",
+    "name": "cs.es",
+    "src": "node_modules/vue-cal/dist/i18n/cs.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/da.es.js": {
+    "file": "assets/da.es-DglD7fV2.js",
+    "name": "da.es",
+    "src": "node_modules/vue-cal/dist/i18n/da.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/de.es.js": {
+    "file": "assets/de.es-D_4ZyLTN.js",
+    "name": "de.es",
+    "src": "node_modules/vue-cal/dist/i18n/de.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/el.es.js": {
+    "file": "assets/el.es-BC26X5xm.js",
+    "name": "el.es",
+    "src": "node_modules/vue-cal/dist/i18n/el.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/en.es.js": {
+    "file": "assets/en.es-DDTuV2po.js",
+    "name": "en.es",
+    "src": "node_modules/vue-cal/dist/i18n/en.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/es.es.js": {
+    "file": "assets/es.es-BvvfjN-O.js",
+    "name": "es.es",
+    "src": "node_modules/vue-cal/dist/i18n/es.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/et.es.js": {
+    "file": "assets/et.es-C0rF9HtR.js",
+    "name": "et.es",
+    "src": "node_modules/vue-cal/dist/i18n/et.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fa.es.js": {
+    "file": "assets/fa.es-CibKJjgz.js",
+    "name": "fa.es",
+    "src": "node_modules/vue-cal/dist/i18n/fa.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fi.es.js": {
+    "file": "assets/fi.es-B0Iy6aas.js",
+    "name": "fi.es",
+    "src": "node_modules/vue-cal/dist/i18n/fi.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fr.es.js": {
+    "file": "assets/fr.es-B7WXlprl.js",
+    "name": "fr.es",
+    "src": "node_modules/vue-cal/dist/i18n/fr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/he.es.js": {
+    "file": "assets/he.es-K9Fk8xhK.js",
+    "name": "he.es",
+    "src": "node_modules/vue-cal/dist/i18n/he.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/hr.es.js": {
+    "file": "assets/hr.es-ef5bxYFj.js",
+    "name": "hr.es",
+    "src": "node_modules/vue-cal/dist/i18n/hr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/hu.es.js": {
+    "file": "assets/hu.es-nZ65MV0n.js",
+    "name": "hu.es",
+    "src": "node_modules/vue-cal/dist/i18n/hu.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/id.es.js": {
+    "file": "assets/id.es-CzHAK-XV.js",
+    "name": "id.es",
+    "src": "node_modules/vue-cal/dist/i18n/id.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/is.es.js": {
+    "file": "assets/is.es-Dz07gBgt.js",
+    "name": "is.es",
+    "src": "node_modules/vue-cal/dist/i18n/is.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/it.es.js": {
+    "file": "assets/it.es-CquQA5xx.js",
+    "name": "it.es",
+    "src": "node_modules/vue-cal/dist/i18n/it.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ja.es.js": {
+    "file": "assets/ja.es-D6pL26k_.js",
+    "name": "ja.es",
+    "src": "node_modules/vue-cal/dist/i18n/ja.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ka.es.js": {
+    "file": "assets/ka.es-Cb9X-eNS.js",
+    "name": "ka.es",
+    "src": "node_modules/vue-cal/dist/i18n/ka.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ko.es.js": {
+    "file": "assets/ko.es-CTpJlj0A.js",
+    "name": "ko.es",
+    "src": "node_modules/vue-cal/dist/i18n/ko.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/lt.es.js": {
+    "file": "assets/lt.es-vqgjGyMx.js",
+    "name": "lt.es",
+    "src": "node_modules/vue-cal/dist/i18n/lt.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/mn.es.js": {
+    "file": "assets/mn.es-YZet1as4.js",
+    "name": "mn.es",
+    "src": "node_modules/vue-cal/dist/i18n/mn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/nl.es.js": {
+    "file": "assets/nl.es-COp8PWbT.js",
+    "name": "nl.es",
+    "src": "node_modules/vue-cal/dist/i18n/nl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/no.es.js": {
+    "file": "assets/no.es-_2m-F2FS.js",
+    "name": "no.es",
+    "src": "node_modules/vue-cal/dist/i18n/no.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pl.es.js": {
+    "file": "assets/pl.es-jjNeJM5X.js",
+    "name": "pl.es",
+    "src": "node_modules/vue-cal/dist/i18n/pl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pt-br.es.js": {
+    "file": "assets/pt-br.es-D8ojES2d.js",
+    "name": "pt-br.es",
+    "src": "node_modules/vue-cal/dist/i18n/pt-br.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pt-pt.es.js": {
+    "file": "assets/pt-pt.es-D8ojES2d.js",
+    "name": "pt-pt.es",
+    "src": "node_modules/vue-cal/dist/i18n/pt-pt.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ro.es.js": {
+    "file": "assets/ro.es-B6_ATXom.js",
+    "name": "ro.es",
+    "src": "node_modules/vue-cal/dist/i18n/ro.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ru.es.js": {
+    "file": "assets/ru.es-BGEpmv_x.js",
+    "name": "ru.es",
+    "src": "node_modules/vue-cal/dist/i18n/ru.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sk.es.js": {
+    "file": "assets/sk.es-V3h-1af8.js",
+    "name": "sk.es",
+    "src": "node_modules/vue-cal/dist/i18n/sk.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sl.es.js": {
+    "file": "assets/sl.es-mZjm0YDT.js",
+    "name": "sl.es",
+    "src": "node_modules/vue-cal/dist/i18n/sl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sq.es.js": {
+    "file": "assets/sq.es-_6B4UQXy.js",
+    "name": "sq.es",
+    "src": "node_modules/vue-cal/dist/i18n/sq.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sr.es.js": {
+    "file": "assets/sr.es-BmdOpTOG.js",
+    "name": "sr.es",
+    "src": "node_modules/vue-cal/dist/i18n/sr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sv.es.js": {
+    "file": "assets/sv.es-LwrPWbzy.js",
+    "name": "sv.es",
+    "src": "node_modules/vue-cal/dist/i18n/sv.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/tr.es.js": {
+    "file": "assets/tr.es-CS80t-Rq.js",
+    "name": "tr.es",
+    "src": "node_modules/vue-cal/dist/i18n/tr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/uk.es.js": {
+    "file": "assets/uk.es-BVYlda65.js",
+    "name": "uk.es",
+    "src": "node_modules/vue-cal/dist/i18n/uk.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/vi.es.js": {
+    "file": "assets/vi.es-B5CIRCK5.js",
+    "name": "vi.es",
+    "src": "node_modules/vue-cal/dist/i18n/vi.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/zh-cn.es.js": {
+    "file": "assets/zh-cn.es-DKz-yscG.js",
+    "name": "zh-cn.es",
+    "src": "node_modules/vue-cal/dist/i18n/zh-cn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/zh-hk.es.js": {
+    "file": "assets/zh-hk.es-CFZP5Cvd.js",
+    "name": "zh-hk.es",
+    "src": "node_modules/vue-cal/dist/i18n/zh-hk.es.js",
+    "isDynamicEntry": true
+  },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-GEBeXV2u.css",
+    "file": "assets/app-Df3Oa6K7.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -173,12 +437,58 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-CnTdsFOn.js",
+    "file": "assets/app-Dmd6a3Jp.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
+    "dynamicImports": [
+      "node_modules/vue-cal/dist/i18n/ar.es.js",
+      "node_modules/vue-cal/dist/i18n/bg.es.js",
+      "node_modules/vue-cal/dist/i18n/bn.es.js",
+      "node_modules/vue-cal/dist/i18n/bs.es.js",
+      "node_modules/vue-cal/dist/i18n/ca.es.js",
+      "node_modules/vue-cal/dist/i18n/cs.es.js",
+      "node_modules/vue-cal/dist/i18n/da.es.js",
+      "node_modules/vue-cal/dist/i18n/de.es.js",
+      "node_modules/vue-cal/dist/i18n/el.es.js",
+      "node_modules/vue-cal/dist/i18n/en.es.js",
+      "node_modules/vue-cal/dist/i18n/es.es.js",
+      "node_modules/vue-cal/dist/i18n/et.es.js",
+      "node_modules/vue-cal/dist/i18n/fa.es.js",
+      "node_modules/vue-cal/dist/i18n/fi.es.js",
+      "node_modules/vue-cal/dist/i18n/fr.es.js",
+      "node_modules/vue-cal/dist/i18n/he.es.js",
+      "node_modules/vue-cal/dist/i18n/hr.es.js",
+      "node_modules/vue-cal/dist/i18n/hu.es.js",
+      "node_modules/vue-cal/dist/i18n/id.es.js",
+      "node_modules/vue-cal/dist/i18n/is.es.js",
+      "node_modules/vue-cal/dist/i18n/it.es.js",
+      "node_modules/vue-cal/dist/i18n/ja.es.js",
+      "node_modules/vue-cal/dist/i18n/ka.es.js",
+      "node_modules/vue-cal/dist/i18n/ko.es.js",
+      "node_modules/vue-cal/dist/i18n/lt.es.js",
+      "node_modules/vue-cal/dist/i18n/mn.es.js",
+      "node_modules/vue-cal/dist/i18n/nl.es.js",
+      "node_modules/vue-cal/dist/i18n/no.es.js",
+      "node_modules/vue-cal/dist/i18n/pl.es.js",
+      "node_modules/vue-cal/dist/i18n/pt-br.es.js",
+      "node_modules/vue-cal/dist/i18n/pt-pt.es.js",
+      "node_modules/vue-cal/dist/i18n/ro.es.js",
+      "node_modules/vue-cal/dist/i18n/ru.es.js",
+      "node_modules/vue-cal/dist/i18n/sk.es.js",
+      "node_modules/vue-cal/dist/i18n/sl.es.js",
+      "node_modules/vue-cal/dist/i18n/sq.es.js",
+      "node_modules/vue-cal/dist/i18n/sr.es.js",
+      "node_modules/vue-cal/dist/i18n/sv.es.js",
+      "node_modules/vue-cal/dist/i18n/tr.es.js",
+      "node_modules/vue-cal/dist/i18n/uk.es.js",
+      "node_modules/vue-cal/dist/i18n/vi.es.js",
+      "node_modules/vue-cal/dist/i18n/zh-cn.es.js",
+      "node_modules/vue-cal/dist/i18n/zh-hk.es.js",
+      "node_modules/vue-cal/dist/drag-and-drop.es.js"
+    ],
     "css": [
-      "assets/app-BsM4JrO0.css"
+      "assets/app-C2Wq9G4i.css"
     ]
   },
   "src/Resources/assets/js/chart.js": {

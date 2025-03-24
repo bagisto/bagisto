@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Naam',
                 ],
+
+                'booking' => [
+                    'location'    => 'Locatie',
+                    'view-on-map' => 'Bekijk op Kaart',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'slot-duration'            => 'Slotduur',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Gesloten',
+                        'see-details'              => 'Bekijk Details',
+                        'slot-duration'            => 'Slotduur',
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'today-availability'       => 'Beschikbaarheid Vandaag',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Boek Uw Ticket',
+                        'title'            => 'Evenement op :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Kies Huur Optie',
+                        'daily-basis'        => 'Dagelijks',
+                        'from'               => 'Van',
+                        'hourly-basis'       => 'Per Uur',
+                        'rent-an-item'       => 'Huur een Item',
+                        'select-date'        => 'Selecteer Datum',
+                        'select-rent-time'   => 'Selecteer Huur Tijd',
+                        'select-slot'        => 'Selecteer Slot',
+                        'select-time-slot'   => 'Selecteer Tijdslot',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'Geen slots beschikbaar',
+                        'to'                 => 'Tot',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Reserveer een Tafel',
+                        'closed'                   => 'Gesloten',
+                        'slot-duration'            => 'Slotduur',
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'slots-for-all-days'       => 'Toon voor alle dagen',
+                        'special-notes'            => 'Speciale Verzoeken/Opmerkingen',
+                        'today-availability'       => 'Beschikbaarheid Vandaag',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Maak een Afspraak',
+                        'date'                => 'Datum',
+                        'no-slots-available'  => 'Geen slots beschikbaar',
+                        'select-slot'         => 'Selecteer Slot',
+                        'title'               => 'Slot',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Koop :qty voor :price per stuk en bespaar :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Gesloten',
+
+            'cart'             => [
+                'booking-from' => 'Boeking Van',
+                'booking-till' => 'Boeking Tot',
+                'daily'        => 'Dagelijks',
+                'event-from'   => 'Evenement Van',
+                'event-ticket' => 'Evenement Ticket',
+                'event-till'   => 'Evenement Tot',
+                'hourly'       => 'Per Uur',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Dit evenement is verlopen.',
+                    ],
+
+                    'missing_options'        => 'Opties ontbreken voor dit product.',
+                    'inventory_warning'      => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
+                    'select_hourly_duration' => 'Selecteer een tijdsduur van één uur.',
+                ],
+
+                'rent-from'    => 'Huur Van',
+                'rent-till'    => 'Huur Tot',
+                'rent-type'    => 'Huur Type',
+                'renting_type' => 'Huur Type',
+                'special-note' => 'Speciale Verzoeken/Opmerkingen',
+            ],
+
+            'per-ticket-price' => ':price Per Ticket',
         ],
     ],
 

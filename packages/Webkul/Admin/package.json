@@ -14,7 +14,8 @@
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
     "vite": "^5.4.12",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+     "vue-cal": "^4.9.0"
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.9.1",

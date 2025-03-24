@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Bundel',
+        'booking'      => 'Boeking',
         'configurable' => 'Configureerbaar',
         'downloadable' => 'Downloadbaar',
         'grouped'      => 'Gegroepeerd',

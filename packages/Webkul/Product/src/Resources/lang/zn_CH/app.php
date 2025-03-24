@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => '捆绑销售',
+        'booking'      => '预订',
         'configurable' => '可配置的',
         'downloadable' => '可下载的',
         'grouped'      => '分组的',
