@@ -698,6 +698,62 @@ return [
                 'grouped' => [
                     'name' => '名前',
                 ],
+
+                'booking' => [
+                    'location'    => '場所',
+                    'view-on-map' => '地図で見る',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes 分',
+                        'slot-duration'            => 'スロットの期間',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => '閉店',
+                        'see-details'              => '詳細を見る',
+                        'slot-duration'            => 'スロットの期間',
+                        'slot-duration-in-minutes' => ':minutes 分',
+                        'today-availability'       => '今日の空き状況',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'チケットを予約する',
+                        'title'            => 'イベント：',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'レンタルオプションを選択',
+                        'daily-basis'        => '日単位',
+                        'from'               => 'から',
+                        'hourly-basis'       => '時間単位',
+                        'rent-an-item'       => 'アイテムをレンタル',
+                        'select-date'        => '日付を選択',
+                        'select-rent-time'   => 'レンタル時間を選択',
+                        'select-slot'        => 'スロットを選択',
+                        'select-time-slot'   => '時間スロットを選択',
+                        'slot'               => 'スロット',
+                        'no-slots-available' => '利用可能なスロットがありません',
+                        'to'                 => 'まで',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'テーブルを予約する',
+                        'closed'                   => '閉店',
+                        'slot-duration'            => 'スロットの期間',
+                        'slot-duration-in-minutes' => ':minutes 分',
+                        'slots-for-all-days'       => 'すべての日のスロットを表示',
+                        'special-notes'            => '特別なリクエスト/メモ',
+                        'today-availability'       => '今日の空き状況',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => '予約をする',
+                        'date'                => '日付',
+                        'no-slots-available'  => '利用可能なスロットがありません',
+                        'select-slot'         => 'スロットを選択',
+                        'title'               => 'スロット',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -742,6 +798,38 @@ return [
             'abstract' => [
                 'offers' => ':qty 個を :price で購入し、:discount 節約',
             ],
+        ],
+
+        'booking' => [
+            'closed' => '閉店',
+
+            'cart'             => [
+                'booking-from' => '予約開始',
+                'booking-till' => '予約終了',
+                'daily'        => '日単位',
+                'event-from'   => 'イベント開始',
+                'event-ticket' => 'イベントチケット',
+                'event-till'   => 'イベント終了',
+                'hourly'       => '時間単位',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'このイベントは終了しました。',
+                    ],
+
+                    'missing_options'        => 'この製品にはオプションがありません。',
+                    'inventory_warning'      => '要求された数量は利用できません。後でやり直してください。',
+                    'select_hourly_duration' => '1時間のスロット期間を選択してください。',
+                ],
+
+                'rent-from'    => 'レンタル開始',
+                'rent-till'    => 'レンタル終了',
+                'rent-type'    => 'レンタルタイプ',
+                'renting_type' => 'レンタルタイプ',
+                'special-note' => '特別なリクエスト/メモ',
+            ],
+
+            'per-ticket-price' => 'チケット1枚あたり :price',
         ],
     ],
 

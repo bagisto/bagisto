@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Nome',
                 ],
+
+                'booking' => [
+                    'location'    => 'Posizione',
+                    'view-on-map' => 'Visualizza sulla mappa',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minuti',
+                        'slot-duration'            => 'Durata Slot',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Chiuso',
+                        'see-details'              => 'Vedi Dettagli',
+                        'slot-duration'            => 'Durata Slot',
+                        'slot-duration-in-minutes' => ':minutes Minuti',
+                        'today-availability'       => 'Disponibilità di Oggi',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Prenota il tuo biglietto',
+                        'title'            => 'Evento il :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Scegli l\'opzione di noleggio',
+                        'daily-basis'        => 'Base Giornaliera',
+                        'from'               => 'Da',
+                        'hourly-basis'       => 'Base Oraria',
+                        'rent-an-item'       => 'Noleggia un articolo',
+                        'select-date'        => 'Seleziona data',
+                        'select-rent-time'   => 'Seleziona l\'orario di noleggio',
+                        'select-slot'        => 'Seleziona Slot',
+                        'select-time-slot'   => 'Seleziona Fascia Oraria',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'Nessuno slot disponibile',
+                        'to'                 => 'A',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Prenota un Tavolo',
+                        'closed'                   => 'Chiuso',
+                        'slot-duration'            => 'Durata Slot',
+                        'slot-duration-in-minutes' => ':minutes Minuti',
+                        'slots-for-all-days'       => 'Mostra per tutti i giorni',
+                        'special-notes'            => 'Richiesta/Note Speciali',
+                        'today-availability'       => 'Disponibilità di Oggi',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Prenota un Appuntamento',
+                        'date'                => 'Data',
+                        'no-slots-available'  => 'Nessuno slot disponibile',
+                        'select-slot'         => 'Seleziona Slot',
+                        'title'               => 'Slot',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => 'Acquista :qty per :price ciascuno e risparmia :discount',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Chiuso',
+
+            'cart'             => [
+                'booking-from' => 'Prenotazione Da',
+                'booking-till' => 'Prenotazione Fino',
+                'daily'        => 'Base Giornaliera',
+                'event-from'   => 'Evento Da',
+                'event-ticket' => 'Biglietto Evento',
+                'event-till'   => 'Evento Fino',
+                'hourly'       => 'Base Oraria',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Questo evento è scaduto.',
+                    ],
+
+                    'missing_options'        => 'Mancano opzioni per questo prodotto.',
+                    'inventory_warning'      => 'La quantità richiesta non è disponibile, riprova più tardi.',
+                    'select_hourly_duration' => 'Seleziona una durata di slot di un\'ora.',
+                ],
+
+                'rent-from'    => 'Noleggio Da',
+                'rent-till'    => 'Noleggio Fino',
+                'rent-type'    => 'Tipo di Noleggio',
+                'renting_type' => 'Tipo di Noleggio',
+                'special-note' => 'Richiesta/Note Speciali',
+            ],
+
+            'per-ticket-price' => ':price Per Biglietto',
         ],
     ],
 

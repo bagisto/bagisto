@@ -11,6 +11,7 @@ return [
      */
     Webkul\Admin\Providers\AdminServiceProvider::class,
     Webkul\Attribute\Providers\AttributeServiceProvider::class,
+    Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
     Webkul\CMS\Providers\CMSServiceProvider::class,
     Webkul\CartRule\Providers\CartRuleServiceProvider::class,
     Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,

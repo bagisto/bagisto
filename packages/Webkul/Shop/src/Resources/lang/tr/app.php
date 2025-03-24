@@ -700,6 +700,62 @@ return [
                 'grouped' => [
                     'name' => 'Ad',
                 ],
+
+                'booking' => [
+                    'location'    => 'Konum',
+                    'view-on-map' => 'Haritada Görüntüle',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Dakika',
+                        'slot-duration'            => 'Zaman Aralığı',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Kapalı',
+                        'see-details'              => 'Detayları Gör',
+                        'slot-duration'            => 'Zaman Aralığı',
+                        'slot-duration-in-minutes' => ':minutes Dakika',
+                        'today-availability'       => 'Bugünkü Uygunluk',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Biletinizi Ayırtın',
+                        'title'            => 'Etkinlik :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Kiralama Seçeneğini Seçin',
+                        'daily-basis'        => 'Günlük',
+                        'from'               => 'Başlangıç',
+                        'hourly-basis'       => 'Saatlik',
+                        'rent-an-item'       => 'Bir Ürün Kiralayın',
+                        'select-date'        => 'Tarih Seçin',
+                        'select-rent-time'   => 'Kiralama Zamanını Seçin',
+                        'select-slot'        => 'Zaman Aralığını Seçin',
+                        'select-time-slot'   => 'Zaman Dilimini Seçin',
+                        'slot'               => 'Zaman Aralığı',
+                        'no-slots-available' => 'Uygun zaman aralığı yok',
+                        'to'                 => 'Bitiş',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Masa Ayırtın',
+                        'closed'                   => 'Kapalı',
+                        'slot-duration'            => 'Zaman Aralığı',
+                        'slot-duration-in-minutes' => ':minutes Dakika',
+                        'slots-for-all-days'       => 'Tüm günler için göster',
+                        'special-notes'            => 'Özel İstek/Notlar',
+                        'today-availability'       => 'Bugünkü Uygunluk',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Randevu Ayırtın',
+                        'date'                => 'Tarih',
+                        'no-slots-available'  => 'Uygun zaman aralığı yok',
+                        'select-slot'         => 'Zaman Aralığını Seçin',
+                        'title'               => 'Zaman Aralığı',
+                    ],
+                ],
             ],
 
             'gallery' => [
@@ -744,6 +800,38 @@ return [
             'abstract' => [
                 'offers' => ':qty adet için :price her biri ve :discount tasarruf edin',
             ],
+        ],
+
+        'booking' => [
+            'closed' => 'Kapalı',
+
+            'cart'             => [
+                'booking-from' => 'Rezervasyon Başlangıcı',
+                'booking-till' => 'Rezervasyon Bitişi',
+                'daily'        => 'Günlük',
+                'event-from'   => 'Etkinlik Başlangıcı',
+                'event-ticket' => 'Etkinlik Bileti',
+                'event-till'   => 'Etkinlik Bitişi',
+                'hourly'       => 'Saatlik',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Bu etkinliğin süresi doldu.',
+                    ],
+
+                    'missing_options'        => 'Bu ürün için seçenekler eksik.',
+                    'inventory_warning'      => 'İstenen miktar mevcut değil, lütfen daha sonra tekrar deneyin.',
+                    'select_hourly_duration' => 'Bir saatlik süre aralığı seçin.',
+                ],
+
+                'rent-from'    => 'Kiralama Başlangıcı',
+                'rent-till'    => 'Kiralama Bitişi',
+                'rent-type'    => 'Kiralama Türü',
+                'renting_type' => 'Kiralama Türü',
+                'special-note' => 'Özel İstek/Notlar',
+            ],
+
+            'per-ticket-price' => ':price Bilet Başına',
         ],
     ],
 

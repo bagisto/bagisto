@@ -386,6 +386,7 @@
 
                                 @include('shop::products.view.types.downloadable')
 
+                                @include('shop::products.view.types.booking')
 
                                 <!-- Product Actions and Quantity Box -->
                                 <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-4">
