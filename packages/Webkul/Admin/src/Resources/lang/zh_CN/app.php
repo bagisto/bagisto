@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => '创建日期',
+                    'from'         => '从',
+                    'id'           => 'ID',
+                    'order-id'     => '订单ID',
+                    'qty'          => '数量',
+                    'to'           => '至',
+                    'view'         => '查看',
+                ],
+
+                'title'    => '预订',
+            ],
+
+            'calendar' => [
+                'booking-date'     => '预订日期',
+                'booking-details'  => '预订详情',
+                'canceled'         => '已取消',
+                'closed'           => '已关闭',
+                'done'             => '已完成',
+                'order-id'         => '订单ID',
+                'pending'          => '待处理',
+                'price'            => '价格',
+                'status'           => '状态',
+                'time-slot'        => '时间段：',
+                'view-details'     => '查看详情',
+            ],
+
+            'title' => '预订产品',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => '选择',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => '可用起始日期',
+                        'available-to'   => '可用结束日期',
+                        'location'       => '位置',
+                        'qty'            => '数量',
+                        'title'          => '预订类型',
+
+                        'available-every-week' => [
+                            'no'    => '否',
+                            'title' => '每周可用',
+                            'yes'   => '是',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => '每个时段之间的休息时间（分钟）',
+                            'slot-duration'  => '时段持续时间（分钟）',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => '添加',
+                            'break-duration'   => '每个时段之间的休息时间（分钟）',
+                            'close'            => '关闭',
+                            'description'      => '预订信息',
+                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'edit'             => '编辑',
+                            'many'             => '一天多次预订',
+                            'one'              => '多天一次预订',
+                            'open'             => '打开',
+                            'slot-add'         => '添加时段',
+                            'slot-duration'    => '时段持续时间（分钟）',
+                            'slot-title'       => '时段时间持续时间',
+                            'title'            => '默认',
+                            'unavailable'      => '不可用',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => '添加时段',
+                                    'close'      => '关闭',
+                                    'day'        => '天',
+                                    'edit-title' => '编辑时段',
+                                    'friday'     => '星期五',
+                                    'from'       => '从',
+                                    'from-day'   => '从天',
+                                    'from-time'  => '从时间',
+                                    'monday'     => '星期一',
+                                    'open'       => '打开',
+                                    'saturday'   => '星期六',
+                                    'save'       => '保存',
+                                    'select'     => '选择',
+                                    'status'     => '状态',
+                                    'sunday'     => '星期天',
+                                    'thursday'   => '星期四',
+                                    'to'         => '到',
+                                    'to-day'     => '到天',
+                                    'to-time'    => '到时间',
+                                    'tuesday'    => '星期二',
+                                    'wednesday'  => '星期三',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => '添加票',
+                            'delete'             => '删除',
+                            'description'        => '描述',
+                            'description-info'   => '没有可用的票。',
+                            'edit'               => '编辑',
+                            'name'               => '名称',
+                            'price'              => '价格',
+                            'qty'                => '数量',
+                            'special-price'      => '特价',
+                            'special-price-from' => '特价起始日期',
+                            'special-price-to'   => '特价结束日期',
+                            'title'              => '票',
+                            'valid-from'         => '有效起始日期',
+                            'valid-until'        => '有效结束日期',
+
+                            'modal'              => [
+                                'edit' => '编辑票',
+                                'save' => '保存',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => '添加票',
+                            ],
+
+                            'slots'   => [
+                                'add'         => '添加时段',
+                                'description' => '可用时段和时间持续时间。',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => '按天计费',
+                            'daily-hourly'           => '按天和按小时计费',
+                            'daily-price'            => '每日价格',
+                            'hourly'                 => '按小时计费',
+                            'hourly-price'           => '每小时价格',
+                            'title'                  => '租赁类型',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => '添加时段',
+                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'save'             => '保存',
+                            'title'            => '时段时间持续时间',
+                            'unavailable'      => '不可用',
+
+                            'action'           => [
+                                'add' => '添加',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => '星期五',
+                                    'from'       => '从',
+                                    'monday'     => '星期一',
+                                    'saturday'   => '星期六',
+                                    'sunday'     => '星期天',
+                                    'thursday'   => '星期四',
+                                    'to'         => '到',
+                                    'tuesday'    => '星期二',
+                                    'wednesday'  => '星期三',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => '每个时段之间的休息时间（分钟）',
+                            'guest-capacity'            => '客人容量',
+                            'guest-limit'               => '每桌客人限制',
+                            'prevent-scheduling-before' => '防止提前安排',
+                            'slot-duration'             => '时段持续时间（分钟）',
+
+                            'charged-per'               => [
+                                'guest'  => '客人',
+                                'table'  => '桌子',
+                                'title'  => '按每个收费',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => '预约预订',
+                            'default'     => '默认预订',
+                            'event'       => '活动预订',
+                            'many'        => '多个',
+                            'one'         => '一个',
+                            'rental'      => '租赁预订',
+                            'table'       => '桌子预订',
+                            'title'       => '类型',
                         ],
                     ],
 
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => '属性族',
                 'attributes'               => '属性',
+                'booking-product'          => '预订',
                 'campaigns'                => '活动',
                 'catalog'                  => '目录',
                 'categories'               => '分类',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => '电子邮件模板',
                 'events'                   => '事件',
                 'exchange-rates'           => '汇率',
+                'gdpr-data-requests'       => 'GDPR 数据请求',
                 'groups'                   => '分组',
                 'imports'                  => '导入',
                 'inventory-sources'        => '库存来源',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => '交易',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
-                'gdpr-data-requests'       => 'GDPR 数据请求',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => '电子邮件模板',
         'events'                   => '事件',
         'exchange-rates'           => '汇率',
+        'gdpr'                     => 'GDPR',
         'groups'                   => '群组',
         'import'                   => '进口',
         'imports'                  => '进口',

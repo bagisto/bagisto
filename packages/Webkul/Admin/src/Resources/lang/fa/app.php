@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'تاریخ ایجاد',
+                    'from'         => 'از',
+                    'id'           => 'شناسه',
+                    'order-id'     => 'شناسه سفارش',
+                    'qty'          => 'تعداد',
+                    'to'           => 'تا',
+                    'view'         => 'مشاهده',
+                ],
+
+                'title'    => 'رزروها',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'تاریخ رزرو',
+                'booking-details'  => 'جزئیات رزرو',
+                'canceled'         => 'لغو شده',
+                'closed'           => 'بسته شده',
+                'done'             => 'انجام شده',
+                'order-id'         => 'شناسه سفارش',
+                'pending'          => 'در انتظار',
+                'price'            => 'قیمت',
+                'status'           => 'وضعیت',
+                'time-slot'        => 'بازه زمانی:',
+                'view-details'     => 'مشاهده جزئیات',
+            ],
+
+            'title' => 'محصولات رزرو',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'انتخاب',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'در دسترس از',
+                        'available-to'   => 'در دسترس تا',
+                        'location'       => 'موقعیت',
+                        'qty'            => 'تعداد',
+                        'title'          => 'نوع رزرو',
+
+                        'available-every-week' => [
+                            'no'    => 'خیر',
+                            'title' => 'در دسترس هر هفته',
+                            'yes'   => 'بله',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => 'مدت زمان استراحت بین اسلات‌ها (دقیقه)',
+                            'slot-duration'  => 'مدت زمان اسلات (دقیقه)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'خیر',
+                                'title' => 'همان اسلات برای همه روزها',
+                                'yes'   => 'بله',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'افزودن',
+                            'break-duration'   => 'مدت زمان استراحت بین اسلات‌ها (دقیقه)',
+                            'close'            => 'بستن',
+                            'description'      => 'اطلاعات رزرو',
+                            'description-info' => 'مدت زمان بر اساس اسلات‌ها ایجاد و نمایش داده خواهد شد. این مدت زمان در تمام اسلات‌ها منحصر به فرد خواهد بود و در فروشگاه قابل مشاهده خواهد بود.',
+                            'edit'             => 'ویرایش',
+                            'many'             => 'چندین رزرو برای یک روز',
+                            'one'              => 'یک رزرو برای چندین روز',
+                            'open'             => 'باز کردن',
+                            'slot-add'         => 'افزودن اسلات‌ها',
+                            'slot-duration'    => 'مدت زمان اسلات (دقیقه)',
+                            'slot-title'       => 'مدت زمان اسلات‌ها',
+                            'title'            => 'پیش‌فرض',
+                            'unavailable'      => 'غیر قابل دسترس',
+
+                            'modal' => [
+                                'slot' => [
+                                    'add-title'  => 'افزودن اسلات‌ها',
+                                    'close'      => 'بستن',
+                                    'day'        => 'روز',
+                                    'edit-title' => 'ویرایش اسلات‌ها',
+                                    'friday'     => 'جمعه',
+                                    'from'       => 'از',
+                                    'from-day'   => 'از روز',
+                                    'from-time'  => 'از زمان',
+                                    'monday'     => 'دوشنبه',
+                                    'open'       => 'باز کردن',
+                                    'saturday'   => 'شنبه',
+                                    'save'       => 'ذخیره',
+                                    'select'     => 'انتخاب',
+                                    'status'     => 'وضعیت',
+                                    'sunday'     => 'یکشنبه',
+                                    'thursday'   => 'پنجشنبه',
+                                    'to'         => 'تا',
+                                    'to-day'     => 'تا روز',
+                                    'to-time'    => 'تا زمان',
+                                    'tuesday'    => 'سه‌شنبه',
+                                    'wednesday'  => 'چهارشنبه',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'افزودن بلیط‌ها',
+                            'delete'             => 'حذف',
+                            'description'        => 'توضیحات',
+                            'description-info'   => 'بلیطی موجود نیست.',
+                            'edit'               => 'ویرایش',
+                            'name'               => 'نام',
+                            'price'              => 'قیمت',
+                            'qty'                => 'تعداد',
+                            'special-price'      => 'قیمت ویژه',
+                            'special-price-from' => 'قیمت ویژه از',
+                            'special-price-to'   => 'قیمت ویژه تا',
+                            'title'              => 'بلیط‌ها',
+                            'valid-from'         => 'معتبر از',
+                            'valid-until'        => 'معتبر تا',
+
+                            'modal'              => [
+                                'edit' => 'ویرایش بلیط‌ها',
+                                'save' => 'ذخیره',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'افزودن بلیط‌ها',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'افزودن اسلات‌ها',
+                                'description' => 'اسلات‌های موجود با مدت زمان.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'بر اساس روزانه',
+                            'daily-hourly' => 'هر دو (روزانه و ساعتی)',
+                            'daily-price'  => 'قیمت روزانه',
+                            'hourly'       => 'بر اساس ساعتی',
+                            'hourly-price' => 'قیمت ساعتی',
+                            'title'        => 'نوع اجاره',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'خیر',
+                                'title' => 'همان اسلات برای همه روزها',
+                                'yes'   => 'بله',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'افزودن اسلات‌ها',
+                            'description-info' => 'مدت زمان بر اساس اسلات‌ها ایجاد و نمایش داده خواهد شد. این مدت زمان در تمام اسلات‌ها منحصر به فرد خواهد بود و در فروشگاه قابل مشاهده خواهد بود.',
+                            'save'             => 'ذخیره',
+                            'title'            => 'مدت زمان اسلات‌ها',
+                            'unavailable'      => 'غیر قابل دسترس',
+
+                            'action'           => [
+                                'add' => 'افزودن',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'جمعه',
+                                    'from'       => 'از',
+                                    'monday'     => 'دوشنبه',
+                                    'saturday'   => 'شنبه',
+                                    'sunday'     => 'یکشنبه',
+                                    'thursday'   => 'پنجشنبه',
+                                    'to'         => 'تا',
+                                    'tuesday'    => 'سه‌شنبه',
+                                    'wednesday'  => 'چهارشنبه',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'مدت زمان استراحت بین اسلات‌ها (دقیقه)',
+                            'guest-capacity'            => 'ظرفیت مهمان',
+                            'guest-limit'               => 'محدودیت مهمان در هر میز',
+                            'prevent-scheduling-before' => 'جلوگیری از برنامه‌ریزی قبل از',
+                            'slot-duration'             => 'مدت زمان اسلات (دقیقه)',
+
+                            'charged-per' => [
+                                'guest'  => 'مهمان',
+                                'table'  => 'میز',
+                                'title'  => 'شارژ بر اساس',
+                            ],
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'خیر',
+                                'title' => 'همان اسلات برای همه روزها',
+                                'yes'   => 'بله',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'رزرو وقت ملاقات',
+                            'default'     => 'رزرو پیش‌فرض',
+                            'event'       => 'رزرو رویداد',
+                            'many'        => 'چندین',
+                            'one'         => 'یک',
+                            'rental'      => 'رزرو اجاره',
+                            'table'       => 'رزرو میز',
+                            'title'       => 'نوع',
                         ],
                     ],
 
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'خانواده‌های ویژگی',
                 'attributes'               => 'ویژگی‌ها',
+                'booking-product'          => 'رزروها',
                 'campaigns'                => 'کمپین‌ها',
                 'catalog'                  => 'کاتالوگ',
                 'categories'               => 'دسته‌بندی‌ها',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => 'قالب‌های ایمیل',
                 'events'                   => 'رویدادها',
                 'exchange-rates'           => 'نرخ‌های تبادل',
+                'gdpr-data-requests'       => 'درخواست‌های داده GDPR',
                 'groups'                   => 'گروه‌ها',
                 'imports'                  => 'واردات',
                 'inventory-sources'        => 'منابع موجودی',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => 'تراکنش‌ها',
                 'url-rewrites'             => 'بازنویسی URL',
                 'users'                    => 'کاربران',
-                'gdpr-data-requests'       => 'درخواست‌های داده GDPR',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => 'قالب‌های ایمیل',
         'events'                   => 'رویدادها',
         'exchange-rates'           => 'نرخ‌های ارزی',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'گروه‌ها',
         'import'                   => 'وارد كردن',
         'imports'                  => 'واردات',

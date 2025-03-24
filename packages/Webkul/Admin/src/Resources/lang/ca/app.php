@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Data de Creació',
+                    'from'         => 'Des de',
+                    'id'           => 'ID',
+                    'order-id'     => 'ID de Comanda',
+                    'qty'          => 'Quantitat',
+                    'to'           => 'Fins a',
+                    'view'         => 'Veure',
+                ],
+
+                'title'    => 'Reserves',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Data de Reserva',
+                'booking-details'  => 'Detalls de la Reserva',
+                'canceled'         => 'Cancel·lat',
+                'closed'           => 'Tancat',
+                'done'             => 'Fet',
+                'order-id'         => 'ID de Comanda',
+                'pending'          => 'Pendent',
+                'price'            => 'Preu',
+                'status'           => 'Estat',
+                'time-slot'        => 'Franja Horària:',
+                'view-details'     => 'Veure Detalls',
+            ],
+
+            'title' => 'Producte de Reserves',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'Seleccionar',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Disponible Des de',
+                        'available-to'   => 'Disponible Fins a',
+                        'location'       => 'Ubicació',
+                        'qty'            => 'Quantitat',
+                        'title'          => 'Tipus de Reserva',
+
+                        'available-every-week' => [
+                            'no'    => 'No',
+                            'title' => 'Disponible Cada Setmana',
+                            'yes'   => 'Sí',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'Temps de Descans entre Franges (Mins)',
+                            'slot-duration'          => 'Durada de la Franja (Mins)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mateixa Franja per a Tots els Dies',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Afegir',
+                            'break-duration'   => 'Temps de Descans entre Franges (Mins)',
+                            'close'            => 'Tancar',
+                            'description'      => 'Informació de la Reserva',
+                            'description-info' => 'Segons les franges horàries, es crearà i es mostrarà la durada del temps. Serà única a totes les franges i es mostrarà a la botiga en línia.',
+                            'edit'             => 'Editar',
+                            'many'             => 'Moltes Reserves per a Un Dia',
+                            'one'              => 'Una Reserva per a Molts Dies',
+                            'open'             => 'Obrir',
+                            'slot-add'         => 'Afegir Franges',
+                            'slot-duration'    => 'Durada de la Franja (Mins)',
+                            'slot-title'       => 'Durada de les Franges',
+                            'title'            => 'Per Defecte',
+                            'unavailable'      => 'No Disponible',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Afegir Franges',
+                                    'close'      => 'Tancar',
+                                    'day'        => 'Dia',
+                                    'edit-title' => 'Editar Franges',
+                                    'friday'     => 'Divendres',
+                                    'from'       => 'Des de',
+                                    'from-day'   => 'Des del Dia',
+                                    'from-time'  => 'Des de l\'Hora',
+                                    'monday'     => 'Dilluns',
+                                    'open'       => 'Obrir',
+                                    'saturday'   => 'Dissabte',
+                                    'save'       => 'Desar',
+                                    'select'     => 'Seleccionar',
+                                    'status'     => 'Estat',
+                                    'sunday'     => 'Diumenge',
+                                    'thursday'   => 'Dijous',
+                                    'to'         => 'Fins a',
+                                    'to-day'     => 'Fins al Dia',
+                                    'to-time'    => 'Fins a l\'Hora',
+                                    'tuesday'    => 'Dimarts',
+                                    'wednesday'  => 'Dimecres',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Afegir Entrades',
+                            'delete'             => 'Eliminar',
+                            'description'        => 'Descripció',
+                            'description-info'   => 'No hi ha entrades disponibles.',
+                            'edit'               => 'Editar',
+                            'name'               => 'Nom',
+                            'price'              => 'Preu',
+                            'qty'                => 'Quantitat',
+                            'special-price'      => 'Preu Especial',
+                            'special-price-from' => 'Preu Especial Des de',
+                            'special-price-to'   => 'Preu Especial Fins a',
+                            'title'              => 'Entrades',
+                            'valid-from'         => 'Vàlid Des de',
+                            'valid-until'        => 'Vàlid Fins a',
+
+                            'modal'              => [
+                                'edit' => 'Editar Entrades',
+                                'save' => 'Desar',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Afegir Entrades',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Afegir Franges',
+                                'description' => 'Franges Disponibles amb Durada de Temps.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => 'Base Diària',
+                            'daily-hourly'           => 'Ambdues (Base Diària i Horària)',
+                            'daily-price'            => 'Preu Diari',
+                            'hourly'                 => 'Base Horària',
+                            'hourly-price'           => 'Preu Horari',
+                            'title'                  => 'Tipus de Lloguer',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mateixa Franja per a Tots els Dies',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Afegir Franges',
+                            'description-info' => 'Segons les franges horàries, es crearà i es mostrarà la durada del temps. Serà única a totes les franges i es mostrarà a la botiga en línia.',
+                            'save'             => 'Desar',
+                            'title'            => 'Durada de les Franges',
+                            'unavailable'      => 'No Disponible',
+
+                            'action' => [
+                                'add' => 'Afegir',
+                            ],
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'     => 'Divendres',
+                                    'from'       => 'Des de',
+                                    'monday'     => 'Dilluns',
+                                    'saturday'   => 'Dissabte',
+                                    'sunday'     => 'Diumenge',
+                                    'thursday'   => 'Dijous',
+                                    'to'         => 'Fins a',
+                                    'tuesday'    => 'Dimarts',
+                                    'wednesday'  => 'Dimecres',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Temps de Descans entre Franges (Mins)',
+                            'guest-capacity'            => 'Capacitat de Convidats',
+                            'guest-limit'               => 'Límit de Convidats per Taula',
+                            'prevent-scheduling-before' => 'Evitar Programació Abans de',
+                            'slot-duration'             => 'Durada de la Franja (Mins)',
+
+                            'charged-per' => [
+                                'guest'  => 'Convidat',
+                                'table'  => 'Taula',
+                                'title'  => 'Cobrat Per',
+                            ],
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mateixa Franja per a Tots els Dies',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Reserva de Cita',
+                            'default'     => 'Reserva per Defecte',
+                            'event'       => 'Reserva d\'Esdeveniment',
+                            'many'        => 'Molts',
+                            'one'         => 'Un',
+                            'rental'      => 'Reserva de Lloguer',
+                            'table'       => 'Reserva de Taula',
+                            'title'       => 'Tipus',
                         ],
                     ],
 
@@ -4300,6 +4506,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Famílies d\'atributs',
                 'attributes'               => 'Atributs',
+                'booking-product'          => 'Reserves',
                 'campaigns'                => 'Campanyes',
                 'catalog'                  => 'Catàleg',
                 'categories'               => 'Categories',
@@ -4316,6 +4523,7 @@ return [
                 'email-templates'          => 'Plantilles de correu electrònic',
                 'events'                   => 'Esdeveniments',
                 'exchange-rates'           => 'Taxes de canvi',
+                'gdpr-data-requests'       => 'Sol·licituds de dades GDPR',
                 'groups'                   => 'Grups',
                 'imports'                  => 'Importacions',
                 'inventory-sources'        => 'Fonts d\'inventari',
@@ -4345,7 +4553,6 @@ return [
                 'transactions'             => 'Transaccions',
                 'url-rewrites'             => 'Reescriptures d\'URL',
                 'users'                    => 'Usuaris',
-                'gdpr-data-requests'       => 'Sol·licituds de dades GDPR',
             ],
 
             'powered-by' => [
@@ -4568,6 +4775,7 @@ return [
         'email-templates'          => 'Plantilles de Correu Electrònic',
         'events'                   => 'Esdeveniments',
         'exchange-rates'           => 'Taxes de Canvi',
+        'gdpr'                     => 'RGPD',
         'groups'                   => 'Grups',
         'import'                   => 'Importar',
         'imports'                  => 'Imports',

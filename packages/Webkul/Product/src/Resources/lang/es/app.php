@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Paquete',
+        'booking'      => 'Reserva',
         'configurable' => 'Configurable',
         'downloadable' => 'Descargable',
         'grouped'      => 'Agrupado',

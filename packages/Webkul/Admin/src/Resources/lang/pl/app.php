@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Data utworzenia',
+                    'from'         => 'Od',
+                    'id'           => 'ID',
+                    'order-id'     => 'ID zamówienia',
+                    'qty'          => 'Ilość',
+                    'to'           => 'Do',
+                    'view'         => 'Zobacz',
+                ],
+
+                'title'    => 'Rezerwacje',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Data rezerwacji',
+                'booking-details'  => 'Szczegóły rezerwacji',
+                'canceled'         => 'Anulowane',
+                'closed'           => 'Zamknięte',
+                'done'             => 'Zakończone',
+                'order-id'         => 'ID zamówienia',
+                'pending'          => 'Oczekujące',
+                'price'            => 'Cena',
+                'status'           => 'Status',
+                'time-slot'        => 'Przedział czasowy:',
+                'view-details'     => 'Zobacz szczegóły',
+            ],
+
+            'title' => 'Produkty rezerwacyjne',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => 'Wybór',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Dostępne od',
+                        'available-to'   => 'Dostępne do',
+                        'location'       => 'Lokalizacja',
+                        'qty'            => 'Ilość',
+                        'title'          => 'Typ rezerwacji',
+
+                        'available-every-week' => [
+                            'no'    => 'Nie',
+                            'title' => 'Dostępne co tydzień',
+                            'yes'   => 'Tak',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => 'Czas przerwy między slotami (minuty)',
+                            'slot-duration'  => 'Czas trwania slotu (minuty)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nie',
+                                'title' => 'Ten sam slot na wszystkie dni',
+                                'yes'   => 'Tak',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Dodaj',
+                            'break-duration'   => 'Czas przerwy między slotami (minuty)',
+                            'close'            => 'Zamknij',
+                            'description'      => 'Informacje o rezerwacji',
+                            'description-info' => 'Czas trwania zostanie utworzony i wyświetlony zgodnie ze slotami. Będzie unikalny dla wszystkich slotów i widoczny na witrynie sklepowej',
+                            'edit'             => 'Edytuj',
+                            'many'             => 'Wiele rezerwacji na jeden dzień',
+                            'one'              => 'Jedna rezerwacja na wiele dni',
+                            'open'             => 'Otwórz',
+                            'slot-add'         => 'Dodaj sloty',
+                            'slot-duration'    => 'Czas trwania slotu (minuty)',
+                            'slot-title'       => 'Czas trwania slotów',
+                            'title'            => 'Domyślny',
+                            'unavailable'      => 'Niedostępne',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Dodaj sloty',
+                                    'close'      => 'Zamknij',
+                                    'day'        => 'Dzień',
+                                    'edit-title' => 'Edytuj sloty',
+                                    'friday'     => 'Piątek',
+                                    'from'       => 'Od',
+                                    'from-day'   => 'Od dnia',
+                                    'from-time'  => 'Od godziny',
+                                    'monday'     => 'Poniedziałek',
+                                    'open'       => 'Otwórz',
+                                    'saturday'   => 'Sobota',
+                                    'save'       => 'Zapisz',
+                                    'select'     => 'Wybierz',
+                                    'status'     => 'Status',
+                                    'sunday'     => 'Niedziela',
+                                    'thursday'   => 'Czwartek',
+                                    'to'         => 'Do',
+                                    'to-day'     => 'Do dnia',
+                                    'to-time'    => 'Do godziny',
+                                    'tuesday'    => 'Wtorek',
+                                    'wednesday'  => 'Środa',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Dodaj bilety',
+                            'delete'             => 'Usuń',
+                            'description'        => 'Opis',
+                            'description-info'   => 'Brak dostępnych biletów.',
+                            'edit'               => 'Edytuj',
+                            'name'               => 'Nazwa',
+                            'price'              => 'Cena',
+                            'qty'                => 'Ilość',
+                            'special-price'      => 'Cena specjalna',
+                            'special-price-from' => 'Cena specjalna od',
+                            'special-price-to'   => 'Cena specjalna do',
+                            'title'              => 'Bilety',
+                            'valid-from'         => 'Ważne od',
+                            'valid-until'        => 'Ważne do',
+
+                            'modal'              => [
+                                'edit' => 'Edytuj bilety',
+                                'save' => 'Zapisz',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Dodaj bilety',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Dodaj sloty',
+                                'description' => 'Dostępne sloty z czasem trwania.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => 'Na dzień',
+                            'daily-hourly'           => 'Oba (na dzień i na godzinę)',
+                            'daily-price'            => 'Cena dzienna',
+                            'hourly'                 => 'Na godzinę',
+                            'hourly-price'           => 'Cena godzinowa',
+                            'title'                  => 'Typ wynajmu',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nie',
+                                'title' => 'Ten sam slot na wszystkie dni',
+                                'yes'   => 'Tak',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Dodaj sloty',
+                            'description-info' => 'Czas trwania zostanie utworzony i wyświetlony zgodnie ze slotami. Będzie unikalny dla wszystkich slotów i widoczny na witrynie sklepowej',
+                            'save'             => 'Zapisz',
+                            'title'            => 'Czas trwania slotów',
+                            'unavailable'      => 'Niedostępne',
+
+                            'action'           => [
+                                'add' => 'Dodaj',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'Piątek',
+                                    'from'       => 'Od',
+                                    'monday'     => 'Poniedziałek',
+                                    'saturday'   => 'Sobota',
+                                    'sunday'     => 'Niedziela',
+                                    'thursday'   => 'Czwartek',
+                                    'to'         => 'Do',
+                                    'tuesday'    => 'Wtorek',
+                                    'wednesday'  => 'Środa',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Czas przerwy między slotami (minuty)',
+                            'guest-capacity'            => 'Pojemność gości',
+                            'guest-limit'               => 'Limit gości na stół',
+                            'prevent-scheduling-before' => 'Zapobiegaj planowaniu przed',
+                            'slot-duration'             => 'Czas trwania slotu (minuty)',
+
+                            'charged-per'               => [
+                                'guest'  => 'Gość',
+                                'table'  => 'Stół',
+                                'title'  => 'Opłata za',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Nie',
+                                'title' => 'Ten sam slot na wszystkie dni',
+                                'yes'   => 'Tak',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Rezerwacja wizyty',
+                            'default'     => 'Domyślna rezerwacja',
+                            'event'       => 'Rezerwacja wydarzenia',
+                            'many'        => 'Wiele',
+                            'one'         => 'Jedna',
+                            'rental'      => 'Rezerwacja wynajmu',
+                            'table'       => 'Rezerwacja stołu',
+                            'title'       => 'Typ',
                         ],
                     ],
 
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Rodziny atrybutów',
                 'attributes'               => 'Atrybuty',
+                'booking-product'          => 'Rezerwacje',
                 'campaigns'                => 'Kampanie',
                 'catalog'                  => 'Katalog',
                 'categories'               => 'Kategorie',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => 'Szablony e-maili',
                 'events'                   => 'Wydarzenia',
                 'exchange-rates'           => 'Kursy wymiany',
+                'gdpr-data-requests'       => 'Żądania danych GDPR',
                 'groups'                   => 'Grupy',
                 'imports'                  => 'Import',
                 'inventory-sources'        => 'Źródła inwentarza',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => 'Transakcje',
                 'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
-                'gdpr-data-requests'       => 'Żądania danych GDPR',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => 'Szablony Emaili',
         'events'                   => 'Zdarzenia',
         'exchange-rates'           => 'Kursy Walut',
+        'gdpr'                     => 'RODO',
         'groups'                   => 'Grupy',
         'import'                   => 'Import',
         'imports'                  => 'Import',

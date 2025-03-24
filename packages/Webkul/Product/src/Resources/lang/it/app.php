@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Pacchetto',
+        'booking'      => 'Prenotazione',
         'configurable' => 'Configurabile',
         'downloadable' => 'Scaricabile',
         'grouped'      => 'Raggruppato',

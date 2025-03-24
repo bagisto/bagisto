@@ -42,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'بسته',
+        'booking'      => 'رزرو',
         'configurable' => 'پیکربندی‌پذیر',
         'downloadable' => 'قابل دانلود',
         'grouped'      => 'گروه‌بندی‌شده',

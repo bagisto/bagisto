@@ -29,12 +29,10 @@ class CategoryDataGrid extends DataGrid
                 'categories.status',
                 'category_translations.locale',
             )
-            ->addSelect(DB::raw('COUNT(DISTINCT '.DB::getTablePrefix().'product_categories.product_id) as count'))
             ->leftJoin('category_translations', function ($join) {
                 $join->on('categories.id', '=', 'category_translations.category_id')
                     ->where('category_translations.locale', '=', app()->getLocale());
             })
-            ->leftJoin('product_categories', 'categories.id', '=', 'product_categories.category_id')
             ->where('category_translations.locale', app()->getLocale())
             ->groupBy('categories.id');
 
@@ -98,13 +96,6 @@ class CategoryDataGrid extends DataGrid
 
                 return '<span class="badge badge-md badge-danger">'.trans('admin::app.catalog.categories.index.datagrid.inactive').'</span>';
             },
-        ]);
-
-        $this->addColumn([
-            'index'      => 'count',
-            'label'      => trans('admin::app.catalog.categories.index.datagrid.no-of-products'),
-            'type'       => 'integer',
-            'sortable'   => true,
         ]);
     }
 

@@ -733,6 +733,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => '作成日',
+                    'from'         => '開始',
+                    'id'           => 'ID',
+                    'order-id'     => '注文ID',
+                    'qty'          => '数量',
+                    'to'           => '終了',
+                    'view'         => '表示',
+                ],
+
+                'title'    => '予約',
+            ],
+
+            'calendar' => [
+                'booking-date'     => '予約日',
+                'booking-details'  => '予約詳細',
+                'canceled'         => 'キャンセル済み',
+                'closed'           => '終了',
+                'done'             => '完了',
+                'order-id'         => '注文ID',
+                'pending'          => '保留中',
+                'price'            => '価格',
+                'status'           => 'ステータス',
+                'time-slot'        => '時間枠:',
+                'view-details'     => '詳細を見る',
+            ],
+
+            'title' => '予約商品',
+        ],
     ],
 
     'catalog' => [
@@ -1082,6 +1114,180 @@ return [
                                     'title' => '選択',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => '利用可能開始日',
+                        'available-to'   => '利用可能終了日',
+                        'location'       => '場所',
+                        'qty'            => '数量',
+                        'title'          => '予約タイプ',
+
+                        'available-every-week' => [
+                            'no'    => 'いいえ',
+                            'title' => '毎週利用可能',
+                            'yes'   => 'はい',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => 'スロット間の休憩時間（分）',
+                            'slot-duration'  => 'スロットの期間（分）',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'いいえ',
+                                'title' => 'すべての日に同じスロット',
+                                'yes'   => 'はい',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => '追加',
+                            'break-duration'   => 'スロット間の休憩時間（分）',
+                            'close'            => '閉じる',
+                            'description'      => '予約情報',
+                            'description-info' => 'スロットに応じて時間の長さが作成され、表示されます。時間の長さはすべてのスロットで一意であり、ストアフロントに表示されます。',
+                            'edit'             => '編集',
+                            'many'             => '1日に複数の予約',
+                            'one'              => '複数日に1つの予約',
+                            'open'             => '開く',
+                            'slot-add'         => 'スロットを追加',
+                            'slot-duration'    => 'スロットの期間（分）',
+                            'slot-title'       => 'スロットの時間期間',
+                            'title'            => 'デフォルト',
+                            'unavailable'      => '利用不可',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'スロットを追加',
+                                    'close'      => '閉じる',
+                                    'day'        => '日',
+                                    'edit-title' => 'スロットを編集',
+                                    'friday'     => '金曜日',
+                                    'from'       => '開始',
+                                    'from-day'   => '開始日',
+                                    'from-time'  => '開始時間',
+                                    'monday'     => '月曜日',
+                                    'open'       => '開く',
+                                    'saturday'   => '土曜日',
+                                    'save'       => '保存',
+                                    'select'     => '選択',
+                                    'status'     => 'ステータス',
+                                    'sunday'     => '日曜日',
+                                    'thursday'   => '木曜日',
+                                    'to'         => '終了',
+                                    'to-day'     => '終了日',
+                                    'to-time'    => '終了時間',
+                                    'tuesday'    => '火曜日',
+                                    'wednesday'  => '水曜日',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'チケットを追加',
+                            'delete'             => '削除',
+                            'description'        => '説明',
+                            'description-info'   => 'チケットは利用できません。',
+                            'edit'               => '編集',
+                            'name'               => '名前',
+                            'price'              => '価格',
+                            'qty'                => '数量',
+                            'special-price'      => '特別価格',
+                            'special-price-from' => '特別価格開始日',
+                            'special-price-to'   => '特別価格終了日',
+                            'title'              => 'チケット',
+                            'valid-from'         => '有効開始日',
+                            'valid-until'        => '有効終了日',
+
+                            'modal'              => [
+                                'edit' => 'チケットを編集',
+                                'save' => '保存',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'チケットを追加',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'スロットを追加',
+                                'description' => '利用可能なスロットと時間の期間。',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => '日単位',
+                            'daily-hourly' => '日単位と時間単位の両方',
+                            'daily-price'  => '日単位の価格',
+                            'hourly'       => '時間単位',
+                            'hourly-price' => '時間単位の価格',
+                            'title'        => 'レンタルタイプ',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'いいえ',
+                                'title' => 'すべての日に同じスロット',
+                                'yes'   => 'はい',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'スロットを追加',
+                            'description-info' => 'スロットに応じて時間の長さが作成され、表示されます。時間の長さはすべてのスロットで一意であり、ストアフロントに表示されます。',
+                            'save'             => '保存',
+                            'title'            => 'スロットの時間期間',
+                            'unavailable'      => '利用不可',
+
+                            'action'           => [
+                                'add' => '追加',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => '金曜日',
+                                    'from'       => '開始',
+                                    'monday'     => '月曜日',
+                                    'saturday'   => '土曜日',
+                                    'sunday'     => '日曜日',
+                                    'thursday'   => '木曜日',
+                                    'to'         => '終了',
+                                    'tuesday'    => '火曜日',
+                                    'wednesday'  => '水曜日',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'スロット間の休憩時間（分）',
+                            'guest-capacity'            => 'ゲスト収容人数',
+                            'guest-limit'               => 'テーブルごとのゲスト制限',
+                            'prevent-scheduling-before' => 'スケジュールを防ぐ',
+                            'slot-duration'             => 'スロットの期間（分）',
+
+                            'charged-per'               => [
+                                'guest'  => 'ゲスト',
+                                'table'  => 'テーブル',
+                                'title'  => '課金単位',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'いいえ',
+                                'title' => 'すべての日に同じスロット',
+                                'yes'   => 'はい',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => '予約',
+                            'default'     => 'デフォルト予約',
+                            'event'       => 'イベント予約',
+                            'many'        => '複数',
+                            'one'         => '1つ',
+                            'rental'      => 'レンタル予約',
+                            'table'       => 'テーブル予約',
+                            'title'       => 'タイプ',
                         ],
                     ],
 
@@ -4301,6 +4507,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => '属性ファミリー',
                 'attributes'               => '属性',
+                'booking-product'          => '予約',
                 'campaigns'                => 'キャンペーン',
                 'catalog'                  => 'カタログ',
                 'categories'               => 'カテゴリ',
@@ -4317,6 +4524,7 @@ return [
                 'email-templates'          => 'メールテンプレート',
                 'events'                   => 'イベント',
                 'exchange-rates'           => '為替レート',
+                'gdpr-data-requests'       => 'GDPRデータリクエスト',
                 'groups'                   => 'グループ',
                 'imports'                  => '輸入品',
                 'inventory-sources'        => '在庫ソース',
@@ -4346,7 +4554,6 @@ return [
                 'transactions'             => '取引',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
-                'gdpr-data-requests'       => 'GDPRデータリクエスト',
             ],
 
             'powered-by' => [
@@ -4569,6 +4776,7 @@ return [
         'email-templates'          => 'Eメールテンプレート',
         'events'                   => 'イベント',
         'exchange-rates'           => '為替レート',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'グループ',
         'import'                   => '輸入',
         'imports'                  => '輸入品',
