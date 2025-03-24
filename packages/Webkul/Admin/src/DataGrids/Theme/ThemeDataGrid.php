@@ -17,7 +17,7 @@ class ThemeDataGrid extends DataGrid
         $whereInLocales = core()->getRequestedLocaleCode() === 'all'
         ? core()->getAllLocales()->pluck('code')->toArray()
         : [core()->getRequestedLocaleCode()];
-    
+
         $queryBuilder = DB::table('theme_customizations')
             ->distinct()
             ->leftJoin('theme_customization_translations', function ($join) use ($whereInLocales) {
@@ -38,15 +38,15 @@ class ThemeDataGrid extends DataGrid
                 'theme_customizations.channel_id',
                 'channel_translations.name as channel_name'
             );
-        
+
         $this->addFilter('id', 'theme_customizations.id');
         $this->addFilter('type', 'theme_customizations.type');
         $this->addFilter('name', 'theme_customizations.name');
         $this->addFilter('sort_order', 'theme_customizations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
-        $this->addFilter('channel_name', 'channel_translations.name'); 
+        $this->addFilter('channel_name', 'channel_translations.name');
         $this->addFilter('theme_code', 'theme_customizations.theme_code');
-        
+
         return $queryBuilder;
     }
 
