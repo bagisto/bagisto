@@ -68,7 +68,12 @@ class Handler extends BaseHandler
                 ], $errorCode);
             }
 
-            return response()->view("{$path}::errors.index", compact('errorCode'));
+            $viewPath = "{$path}::errors.{$errorCode}";
+            if (! view()->exists($viewPath)) {
+                $viewPath = "{$path}::errors.index";
+            }
+
+            return response()->view($viewPath, compact('errorCode'));
         });
     }
 
