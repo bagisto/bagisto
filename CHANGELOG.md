@@ -4,6 +4,44 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.3.0 (26th of March 2025)** - *Release*
 
+### Features:
+
+**Booking Product**
+
+* Integrated the Booking Product module into the core of Bagisto, allowing native support for booking-based products.
+
+**GDPR Compliance Features**
+
+* Integrated GDPR compliance functionalities into the core of Bagisto, enabling users to manage data protection requests and cookie consent preferences directly within the platform.
+
+**Canadian Locale Support**
+
+* Introduced support for the Canadian locale, enabling users to view the store interface in Canadian Locale.
+
+**AI Model Options Update**
+
+* Revised the available AI models for review translation, replacing older models with the latest versions to enhance performance and accuracy.
+
+**Sitemap Enhancement**
+
+* Introduced new settings to enable or disable the website's sitemap, aiming to improve search engine optimization and enhance user experience.
+
+* Implemented configurable file limit options for the sitemap, providing greater control over its structure and performance.
+
+**Laravel 11 Support**
+
+* Updated the project to be compatible with Laravel 11, ensuring alignment with the latest framework features and improvements.
+
+**Customizable Item Feature for Simple Products**
+
+* Introduced the ability to customize simple products, allowing for enhanced flexibility and personalization options.
+
+* Customer can add the customized content with the product.
+
+**Enhanced Playwright Test Cases**
+
+* Improved test stability and maintainability by implementing best practices,
+
 * #10596 [feature] - In Shop Front, we should have an option to revoke the request which is added.  
 
 * #9953 [enhancement] - Need to have "Back Button" in each view all sections of Reporting Side Menu Options.
@@ -55,6 +93,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #10633 [fixed] - GDPR Data Request Page is Not Responsive on All Devices.
 
 * #10645 [fixed] - ThemeDataGrid Query optimization.
+
+* #10641 [fixed] - Last Product's Quantity Becomes Blank After Deleting a Product from Grouped Productuser.
+
 
 ## **v2.2.4 (14th of February 2025)** - *Release*
 
