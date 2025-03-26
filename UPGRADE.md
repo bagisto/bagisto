@@ -1,6 +1,6 @@
 # UPGRADE Guide
 
-- [Upgrading To master From v2.2](#upgrading-to-master-from-v22)
+- [Upgrading To v2.3 From v2.2](#upgrading-to-v23-from-v22)
 
 ## High Impact Changes
 
@@ -20,7 +20,7 @@
 
 - [Schedule Commands Moved To Package](#schedule-commands-moved-to-package)
 
-## Upgrading To master From v2.2
+## Upgrading To v2.3 From v2.2
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
