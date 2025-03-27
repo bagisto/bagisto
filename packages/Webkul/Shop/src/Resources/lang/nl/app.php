@@ -1196,7 +1196,6 @@ return [
                     'message'        => 'Bericht : ',
                     'request-status' => 'Aanvraagstatus : ',
                     'request-type'   => 'Aanvraagtype : ',
-                    'summary'        => 'Overzicht van de aanvraag',
                     'update-summary' => 'Samenvatting van updateverzoek',
                 ],
 

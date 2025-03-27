@@ -4890,7 +4890,6 @@ return [
                     'message'        => 'پیام : ',
                     'request-status' => 'وضعیت درخواست : ',
                     'request-type'   => 'نوع درخواست : ',
-                    'summary'        => 'خلاصه درخواست',
                     'update-summary' => 'خلاصه درخواست به‌روزرسانی',
                 ],
 

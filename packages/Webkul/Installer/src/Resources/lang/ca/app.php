@@ -140,6 +140,7 @@ return [
                 'ARS' => 'Peso Argentí',
                 'AUD' => 'Dòlar Australià',
                 'BDT' => 'Taka de Bangladesh',
+                'BHD' => 'Dinar bahreïnien',
                 'BRL' => 'Real Brasiler',
                 'CAD' => 'Dòlar Canadenc',
                 'CHF' => 'Franc Suís',
@@ -205,6 +206,7 @@ return [
             'locales' => [
                 'ar'    => 'Àrab',
                 'bn'    => 'Bengalí',
+                'ca'    => 'Canada',
                 'de'    => 'Alemany',
                 'en'    => 'Anglès',
                 'es'    => 'Espanyol',
@@ -634,6 +636,7 @@ return [
                 'australian-dollar'           => 'Dòlar Australià (AUD)',
                 'bagisto'                     => 'Bagisto',
                 'bangladeshi-taka'            => 'Taka de Bangladesh (BDT)',
+                'bahraini-dinar'              => 'Dinar bahreïnien (BHD)',
                 'brazilian-real'              => 'Real Brasiler (BRL)',
                 'british-pound-sterling'      => 'Lliura Esterlina Britànica (GBP)',
                 'canadian-dollar'             => 'Dòlar Canadenc (CAD)',

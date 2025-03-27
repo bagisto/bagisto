@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => 'Al menys un producte ha de tenir més d\'1 quantitat.',
             ],
 
+            'invalid-file-extension'   => 'Extension de fichier invalide trouvée.',
             'inventory-warning'        => 'La quantitat solicitada no està disponible, si us plau, intenti-ho de nou més tard.',
             'missing-links'            => 'Falten enllaços descarregables per a aquest producte.',
             'missing-options'          => 'Falten opcions per a aquest producte.',

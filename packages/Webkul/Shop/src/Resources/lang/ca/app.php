@@ -1196,7 +1196,6 @@ return [
                     'message'        => 'Message : ',
                     'request-status' => 'Request Status : ',
                     'request-type'   => 'Request Type : ',
-                    'summary'        => 'Summary of Request',
                     'update-summary' => 'Zusammenfassung der Aktualisierungsanforderung',
                 ],
 

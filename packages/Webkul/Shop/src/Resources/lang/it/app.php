@@ -1196,7 +1196,6 @@ return [
                     'message'        => 'Messaggio : ',
                     'request-status' => 'Stato della richiesta : ',
                     'request-type'   => 'Tipo di richiesta : ',
-                    'summary'        => 'Riepilogo della richiesta',
                     'update-summary' => 'Riepilogo della richiesta di aggiornamento',
                 ],
 

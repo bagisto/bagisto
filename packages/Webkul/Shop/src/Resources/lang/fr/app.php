@@ -377,14 +377,6 @@ return [
             ],
 
             'gdpr' => [
-                'completed'                   => 'Terminé',
-                'date'                        => 'Date',
-                'declined'                    => 'Refusé',
-                'id'                          => 'Id',
-                'message'                     => 'Message',
-                'pending'                     => 'En attente',
-                'processing'                  => 'En cours de traitement',
-                'status'                      => 'Statut',
                 'create-success'              => 'Demande créée avec succès',
                 'revoked-successfully'        => 'Demande révoquée avec succès',
                 'success-verify'              => 'Succès ! L\'e-mail de vérification a été envoyé.',
@@ -1204,7 +1196,6 @@ return [
                     'message'        => 'Message : ',
                     'request-status' => 'Statut de la demande : ',
                     'request-type'   => 'Type de demande : ',
-                    'summary'        => 'Résumé de la demande',
                     'update-summary' => 'Résumé de la demande de mise à jour',
                 ],
 

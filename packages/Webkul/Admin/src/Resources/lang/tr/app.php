@@ -4890,7 +4890,6 @@ return [
                     'message'        => 'Mesaj : ',
                     'request-status' => 'Talep Durumu : ',
                     'request-type'   => 'Talep Türü : ',
-                    'summary'        => 'Talep Özeti',
                     'update-summary' => 'Güncelleme isteğinin özeti',
                 ],
 

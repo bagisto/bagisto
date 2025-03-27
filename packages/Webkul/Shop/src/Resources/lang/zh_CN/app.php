@@ -1196,7 +1196,6 @@ return [
                     'message'        => '信息 : ',
                     'request-status' => '请求状态 : ',
                     'request-type'   => '请求类型 : ',
-                    'summary'        => '请求摘要',
                     'update-summary' => '更新请求摘要',
                 ],
 

@@ -1196,7 +1196,6 @@ return [
                     'message'        => 'הודעה : ',
                     'request-status' => 'סטטוס הבקשה : ',
                     'request-type'   => 'סוג הבקשה : ',
-                    'summary'        => 'סיכום הבקשה',
                     'update-summary' => 'סיכום בקשת העדכון',
                 ],
 

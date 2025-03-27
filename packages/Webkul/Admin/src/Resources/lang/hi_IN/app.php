@@ -4890,7 +4890,6 @@ return [
                     'message'        => 'संदेश : ',
                     'request-status' => 'अनुरोध स्थिति : ',
                     'request-type'   => 'अनुरोध प्रकार : ',
-                    'summary'        => 'अनुरोध का सारांश',
                     'update-summary' => 'अद्यतन अनुरोध का सारांश',
                 ],
 

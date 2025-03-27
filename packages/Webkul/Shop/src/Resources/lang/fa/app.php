@@ -1091,7 +1091,6 @@ return [
             'next-page'          => 'صفحه بعدی',
             'pagination-showing' => 'نمایش :firstItem تا :lastItem از مجموع :total مورد',
             'prev-page'          => 'صفحه قبلی',
-
         ],
     ],
 
@@ -1197,7 +1196,6 @@ return [
                     'message'        => 'پیام : ',
                     'request-status' => 'وضعیت درخواست : ',
                     'request-type'   => 'نوع درخواست : ',
-                    'summary'        => 'خلاصه درخواست',
                     'update-summary' => 'خلاصه درخواست به‌روزرسانی',
                 ],
 

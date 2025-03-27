@@ -4890,7 +4890,6 @@ return [
                     'message'        => 'Nachricht : ',
                     'request-status' => 'Anfragestatus : ',
                     'request-type'   => 'Anfragetyp : ',
-                    'summary'        => 'Zusammenfassung der Anfrage',
                     'update-summary' => 'Zusammenfassung der Aktualisierungsanforderung',
                 ],
 

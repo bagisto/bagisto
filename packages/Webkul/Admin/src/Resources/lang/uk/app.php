@@ -4890,7 +4890,6 @@ return [
                     'message'        => 'Повідомлення : ',
                     'request-status' => 'Статус запиту : ',
                     'request-type'   => 'Тип запиту : ',
-                    'summary'        => 'Резюме запиту',
                     'update-summary' => 'Резюме запиту на оновлення',
                 ],
 

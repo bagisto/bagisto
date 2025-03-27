@@ -1091,7 +1091,6 @@ return [
             'next-page'          => 'পরবর্তী পৃষ্ঠা',
             'pagination-showing' => ':firstItem থেকে :lastItem পর্যন্ত মোট :total নির্দেশিকা দেখানো হচ্ছে',
             'prev-page'          => 'পূর্ববর্তী পৃষ্ঠা',
-
         ],
     ],
 
@@ -1197,7 +1196,6 @@ return [
                     'message'        => 'বার্তা : ',
                     'request-status' => 'অনুরোধের অবস্থা : ',
                     'request-type'   => 'অনুরোধের ধরন : ',
-                    'summary'        => 'অনুরোধের সারাংশ',
                     'update-summary' => 'আপডেট অনুরোধের সংক্ষিপ্তসার',
                 ],
 
