@@ -44,7 +44,7 @@
                     handle=".icon-drag"
                     v-bind="{animation: 200}"
                     :list="groupProducts"
-                    item-key="id"
+                    item-key="associated_product.id"
                 >
                     <template #item="{ element, index }">
                         <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
@@ -89,17 +89,16 @@
                                     @{{ $admin.formatPrice(element.associated_product.price) }}
                                 </p>
 
-
                                 <!-- Hidden Input -->
                                 <input
                                     type="hidden"
-                                    :name="'links[' + (element.id ? element.id : 'link_' + index) + '][associated_product_id]'"
+                                    :name="'links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][associated_product_id]'"
                                     :value="element.associated_product.id"
                                 />
 
                                 <input
                                     type="hidden"
-                                    :name="'links[' + (element.id ? element.id : 'link_' + index) + '][sort_order]'"
+                                    :name="'links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][sort_order]'"
                                     :value="index"
                                 />
 
@@ -110,17 +109,17 @@
 
                                     <v-field
                                         type="text"
-                                        :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
+                                        :name="'links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][qty]'"
                                         v-model="element.qty"
                                         class="min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                                        :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        :class="[errors['links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                         label="@lang('admin::app.catalog.products.edit.types.grouped.default-qty')"
                                     >
                                     </v-field>
 
                                     <v-error-message
-                                        :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
+                                        :name="'links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][qty]'"
                                         v-slot="{ message }"
                                     >
                                         <p class="mt-1 text-xs italic text-red-600">
@@ -213,11 +212,13 @@
                 },
 
                 remove(product) {
+                    console.log(this.groupProducts);
+
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            let index = this.groupProducts.indexOf(product)
+                            this.groupProducts = this.groupProducts.filter(item => item.associated_product.id !== product.associated_product.id);
 
-                            this.groupProducts.splice(index, 1);
+                            console.log(this.groupProducts);
                         }
                     });
                 },
