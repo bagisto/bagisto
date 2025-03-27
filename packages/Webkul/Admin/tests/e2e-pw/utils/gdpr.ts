@@ -107,10 +107,13 @@ export async function enableGDPRAgreement(adminPage) {
             name: "Agreement Checkbox Label",
         })
         .fill(agreement.checkboxLabel);
+    await adminPage.click('button[type="submit"].primary-button:visible');
 
     /**
      * Fill the agreement content.
      */
+    await adminPage.waitForSelector('#general_gdpr__agreement__agreement_content__ifr', { state: 'visible' });
+    await adminPage.frameLocator('#general_gdpr__agreement__agreement_content__ifr').locator('body').clear();
     await adminPage.fillInTinymce(
         "#general_gdpr__agreement__agreement_content__ifr",
         agreement.content
@@ -215,3 +218,4 @@ export async function enableCookiesNotice(adminPage, position = "bottom-left") {
      */
     await adminPage.click('button[type="submit"].primary-button:visible');
 }
+

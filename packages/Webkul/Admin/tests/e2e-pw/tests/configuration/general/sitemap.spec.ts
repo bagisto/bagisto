@@ -28,7 +28,7 @@ async function disableSitemap(adminPage) {
     /**
      * Navigating to the gdpr configuration page.
      */
-    await adminPage.goto("admin/configuration/general/gdpr");
+    await adminPage.goto("admin/configuration/general/sitemap");
 
     const isDisabled = adminPage.locator("label > div").uncheck();
 
