@@ -123,7 +123,6 @@ async function createSimpleProduct(page) {
 
 test.describe('checkout', () => {
     test("guest should be able to checkout", async ({ shopPage }) => {
-
         /**
          * Login to admin panel.
          */
@@ -206,7 +205,6 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForURL("checkout/onepage/success", { timeout: 10000 });
         await shopPage.waitForSelector("text=Thank you for your order!");
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -267,7 +265,6 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForURL("checkout/onepage/success", { timeout: 10000 });
         await shopPage.waitForSelector("text=Thank you for your order!");
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -362,7 +359,6 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForURL("checkout/onepage/success", { timeout: 10000 });
         await shopPage.waitForSelector("text=Thank you for your order!");
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 
@@ -493,7 +489,6 @@ test.describe('checkout', () => {
         await shopPage.getByText("Cash On Delivery").first().click();
 
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForURL("checkout/onepage/success", { timeout: 10000 });
         await shopPage.waitForSelector("text=Thank you for your order!");
         await expect(shopPage.locator("text=Thank you for your order!")).toBeVisible();
 

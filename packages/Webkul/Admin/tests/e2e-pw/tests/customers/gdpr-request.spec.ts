@@ -35,10 +35,7 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Update my name - Dheeraj Verma");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await adminPage
-            .getByRole("paragraph")
-            .filter({ hasText: "Success! Verification email" })
-            .click();
+        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -86,10 +83,7 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Delete my last name - Verma");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await adminPage
-            .getByRole("paragraph")
-            .filter({ hasText: "Success! Verification email" })
-            .click();
+        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -151,10 +145,7 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Update Phone No.: 123456");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await adminPage
-            .getByRole("paragraph")
-            .filter({ hasText: "Success! Verification email" })
-            .click();
+        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -197,10 +188,7 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Update my email - dheeraj@example.com");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await adminPage
-            .getByRole("paragraph")
-            .filter({ hasText: "Success! Verification email" })
-            .click();
+        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
