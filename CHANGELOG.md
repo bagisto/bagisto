@@ -1,8 +1,8 @@
-# CHANGELOG for v2.x.x
+# CHANGELOG for v2.3.0
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.3.0 (26th of March 2025)** - *Release*
+## **v2.3.0 (27th of March 2025)** - *Release*
 
 ### Features:
 

@@ -2,16 +2,41 @@ import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
 import { generatePhoneNumber, generateEmail } from "../utils/faker";
 
+function generateRandomDate() {
+    const today = new Date();
+    const endDate = new Date(
+        today.getFullYear() - 1,
+        today.getMonth(),
+        today.getDate()
+    );
+    const startDate = new Date(1925, 0, 1);
+
+    const randomDate = new Date(
+        startDate.getTime() +
+            Math.random() * (endDate.getTime() - startDate.getTime())
+    );
+
+    const year = randomDate.getFullYear();
+    const month = String(randomDate.getMonth() + 1).padStart(2, "0");
+    const day = String(randomDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
 test("should edit a profile", async ({ page }) => {
     const credentials = await loginAsCustomer(page);
 
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
     await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByPlaceholder("First Name").click();
-    await page.getByPlaceholder("First Name").fill(credentials.firstName);
-    await page.getByPlaceholder("Last Name").click();
-    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
+    await page.getByRole("textbox", { name: "First Name" }).click();
+    await page
+        .getByRole("textbox", { name: "First Name" })
+        .fill(credentials.firstName);
+    await page.getByRole("textbox", { name: "Last Name" }).click();
+    await page
+        .getByRole("textbox", { name: "Last Name" })
+        .fill(credentials.lastName);
     await page.getByPlaceholder("Email", { exact: true }).click();
     await page
         .getByPlaceholder("Email", { exact: true })
@@ -19,11 +44,10 @@ test("should edit a profile", async ({ page }) => {
     await page.getByPlaceholder("Phone").click();
     await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
     await page.getByLabel("shop::app.customers.account.").selectOption("Male");
-    await page.getByPlaceholder("Date of Birth").click();
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - 1);
-    const formattedDate = date.toISOString().split("T")[0];
-    await page.getByPlaceholder("Date of Birth").fill(formattedDate);
+    await page.getByRole("textbox", { name: "Date of Birth" }).click();
+    await page
+        .getByRole("textbox", { name: "Date of Birth" })
+        .fill(generateRandomDate());
     await page.getByRole("button", { name: "Save" }).click();
 
     await expect(
