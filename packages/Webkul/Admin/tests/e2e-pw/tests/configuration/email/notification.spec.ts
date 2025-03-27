@@ -1,6 +1,6 @@
 import { test, expect } from '../../../setup';
 
-test.describe('Email Settings Configuration', () => {
+test.describe('email notification configuration', () => {
     /**
      * Navigate to the configuration page.
      */

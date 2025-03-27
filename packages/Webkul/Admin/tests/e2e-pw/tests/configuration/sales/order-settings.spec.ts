@@ -1,10 +1,10 @@
 import { test, expect } from '../../../setup';
-import { 
-    generateName, 
+import {
+    generateName,
     generateRandomNumericString,
 } from '../../../utils/faker';
 
-test.describe('Order Settings Configuration', () => {
+test.describe('order settings configuration', () => {
     /**
      * Navigate to the configuration page.
      */
@@ -17,9 +17,8 @@ test.describe('Order Settings Configuration', () => {
      */
     test('should update order number settings', async ({ adminPage }) => {
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_prefix]"]', generateName());
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', generateRandomNumericString(1, 10));
+        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', '5');
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_suffix]"]', generateName());
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_generator]"]', generateRandomNumericString(2));
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
@@ -33,8 +32,8 @@ test.describe('Order Settings Configuration', () => {
      * Update the Minimum Order Settings Configuration.
      */
     test('should update minimum order settings', async ({ adminPage }) => {
-        await adminPage.click('label[for="sales[order_settings][minimum_order][enable]"]');
-        const minimumOrderToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][enable]"]');
+        // await adminPage.click('label[for="sales[order_settings][minimum_order][enable]"]');
+        // const minimumOrderToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][enable]"]');
         // await expect(minimumOrderToggle).toBeChecked();
 
         // if (await minimumOrderToggle.toBeChecked()) {

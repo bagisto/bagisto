@@ -52,8 +52,8 @@ class Date extends Column
 
             foreach ($requestedDates as $value) {
                 $scopeQueryBuilder->whereBetween($this->columnName, [
-                    $value[0] ? (str_contains($value[0], ' ') ? $value[0] : $value[0] . ' 00:00:01') : '',
-                    $value[1] ? (str_contains($value[1], ' ') ? $value[1] : $value[1] . ' 23:59:59') : '',
+                    $value[0] ? (str_contains($value[0], ' ') ? $value[0] : $value[0].' 00:00:01') : '',
+                    $value[1] ? (str_contains($value[1], ' ') ? $value[1] : $value[1].' 23:59:59') : '',
                 ]);
             }
         });

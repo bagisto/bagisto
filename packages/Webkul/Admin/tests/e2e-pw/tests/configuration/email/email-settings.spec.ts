@@ -2,12 +2,12 @@ import { test, expect } from '../../../setup';
 import { generateName, generateEmail } from '../../../utils/faker';
 
 
-test.describe('Email Settings Configuration', () => {
+test.describe('email settings configuration', () => {
     /**
      * Navigate to the configuration page.
      */
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/emails/general');
+        await adminPage.goto('admin/configuration/emails/configure');
     });
 
     /**
