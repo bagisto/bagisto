@@ -1,6 +1,6 @@
 import { test, expect } from "../setup";
 
-test("Increment", async ({ page }) => {
+test("add different product", async ({ page }) => {
     await page.goto("");
     await page
         .locator("#main div")
@@ -38,7 +38,7 @@ test("Increment", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("Decrement", async ({ page }) => {
+test("decrement the quantity of product", async ({ page }) => {
     await page.goto("");
     await page
         .locator("#main div")
