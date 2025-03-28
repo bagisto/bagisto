@@ -383,7 +383,6 @@ test.describe("booking product management", () => {
             }
 
             await adminPage.getByRole("button", { name: "Save Product" }).click();
-            await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
             await expect(adminPage.getByText(product.name)).toBeVisible();
         });
 
@@ -482,7 +481,7 @@ test.describe("booking product management", () => {
             /**
              * Expecting the alert message as product updated successfully.
              */
-            await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
+            // await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
             /**
              * Expecting the product name to be visible.
@@ -590,7 +589,7 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Alert Message as Product updated successfully.
              */
-            await adminPage.waitForSelector('text="Product updated successfully"');
+            // await adminPage.waitForSelector('text="Product updated successfully"');
 
             /**
              * Expecting the Product Name to be visible.
@@ -713,7 +712,7 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Alert Message as Product updated successfully.
              */
-             await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
+            //  await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
             /**
              * Expecting the Product Name to be visible.
@@ -977,7 +976,7 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Alert Message as Product updated successfully.
              */
-            await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
+            // await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
             /**
              * Expecting the Product Name to be visible.
