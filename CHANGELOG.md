@@ -96,6 +96,23 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10641 [fixed] - Last Product's Quantity Becomes Blank After Deleting a Product from Grouped Productuser.
 
+## **v2.2.5 (28th of March 2025)** - *Release*
+
+* Grouped product and bundle product exception fixings.
+
+* Admin panel refinements.
+
+* #10645 [fixed] - ThemeDataGrid Query optimization
+
+* #10641 [fixed] - Last Product's Quantity Becomes Blank After Deleting a Product from Grouped Product
+
+* #10610 [fixed] - Customize Error Page to Replace the Default Index Page
+
+* #10604 [fixed] - Date filter in shop front for logged in customer is not working properly with System Dark Theme.
+
+* #10501 [fixed] - Drop down menu showing on mobile screens or reducing the browser window when no drop down available
+
+* #10566 [fixed] - Wishlist Price Display Issue with Currency Exchange in Bagisto
 
 ## **v2.2.4 (14th of February 2025)** - *Release*
 
