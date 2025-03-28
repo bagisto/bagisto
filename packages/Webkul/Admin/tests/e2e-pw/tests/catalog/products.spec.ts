@@ -634,7 +634,6 @@ async function createDownloadableProduct(adminPage) {
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
     const name = await adminPage.locator('input[name="name"]').inputValue();
-    await adminPage.getByText('Close').click();
 
     /**
      * Description Section.
@@ -941,8 +940,8 @@ test.describe("product management", () => {
         await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
 
         /**
-        * Edit price, edit downloadable links.
-        */
+         * Edit price, edit downloadable links.
+         */
         await adminPage.locator('#price').fill('100');
         await adminPage.getByText('Edit', { exact: true }).first().click();
         await adminPage.waitForSelector('.min-h-0 > div > div');
