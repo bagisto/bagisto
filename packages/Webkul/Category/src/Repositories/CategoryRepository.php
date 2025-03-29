@@ -50,13 +50,8 @@ class CategoryRepository extends Repository
 
                     break;
                 case 'parent_id':
-                    // Check if the value contains commas (multiple parent IDs)
-                    if (strpos($value, ',') !== false) {
-                        $parentIds = array_map('trim', explode(',', $value));
-                        $queryBuilder->whereIn('categories.parent_id', $parentIds);
-                    } else {
-                        $queryBuilder->where('categories.parent_id', $value);
-                    }                    
+                    $parentIds = array_filter(array_map('trim', explode(',', $value)));
+                    $queryBuilder->whereIn('categories.parent_id', $parentIds);
 
                     break;
                 case 'locale':
