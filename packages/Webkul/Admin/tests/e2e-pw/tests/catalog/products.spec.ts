@@ -132,9 +132,7 @@ async function createSimpleProduct(adminPage) {
     /**
      * Expecting for the product to be saved.
      */
-    await expect(
-        adminPage.getByText("Product updated successfully")
-    ).toBeVisible();
+    await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
     /**
      * Checking the product in the list.
@@ -311,9 +309,7 @@ async function createConfigurableProduct(adminPage) {
     /**
      * Expecting for the product to be saved.
      */
-    await expect(
-        adminPage.getByText('Product updated successfully')
-    ).toBeVisible();
+    await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
     /**
      * Checking the product in the list.
@@ -442,9 +438,7 @@ async function createGroupedProduct(adminPage) {
     /**
      * Expecting for the product to be saved.
      */
-    await expect(
-        adminPage.getByText('Product updated successfully')
-    ).toBeVisible();
+    await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
     /**
      * Checking the product in the list.
@@ -570,9 +564,7 @@ async function createVirtualProduct(adminPage) {
     /**
      * Expecting for the product to be saved.
      */
-    await expect(
-        adminPage.getByText('Product updated successfully')
-    ).toBeVisible();
+    await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
 
     /**
      * Checking the product in the list.
@@ -762,9 +754,7 @@ test.describe("product management", () => {
          */
         await adminPage.getByRole("button", { name: "Save Product" }).click();
 
-        await expect(
-            adminPage.getByText("Product updated successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
     });
 
     test("should create a configurable product", async ({ adminPage }) => {
@@ -810,9 +800,7 @@ test.describe("product management", () => {
         /**
          * Expecting for the product to be saved.
          */
-        await expect(
-            adminPage.getByText("Product updated successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
     });
 
     test("should create a grouped product", async ({ adminPage }) => {
@@ -863,9 +851,7 @@ test.describe("product management", () => {
         /**
          * Expecting for the groped product to be updated successfully.
          */
-        await expect(
-            adminPage.getByText("Product updated successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
     });
 
     test("should create a virtual product", async ({ adminPage }) => {
@@ -908,9 +894,7 @@ test.describe("product management", () => {
         /**
          * Expecting for the product to be saved.
          */
-        await expect(
-            adminPage.getByText("Product updated successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Product updated successfully');
     });
 
     test("should create a downloadable product", async ({ adminPage }) => {
