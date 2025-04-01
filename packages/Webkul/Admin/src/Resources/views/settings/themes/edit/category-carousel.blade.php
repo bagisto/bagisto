@@ -246,6 +246,14 @@
                                         :label="trans('admin::app.settings.themes.edit.value-input')"
                                         :placeholder="trans('admin::app.settings.themes.edit.value-input')" 
                                     />
+                                   
+                                    <!-- Hint for parent_id -->
+                                    <p 
+                                        class="mt-1 text-xs text-gray-500" 
+                                        v-if="filters.applied.code === 'parent_id' || filters.applied.code === undefined"
+                                    >
+                                        @lang('admin::app.settings.themes.edit.parent-id-hint')
+                                    </p>
                                 </template>
 
                                 <x-admin::form.control-group.error control-name="value" />
