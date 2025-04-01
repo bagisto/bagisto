@@ -50,7 +50,8 @@ class CategoryRepository extends Repository
 
                     break;
                 case 'parent_id':
-                    $queryBuilder->where('categories.parent_id', $value);
+                    $parentIds = array_filter(array_map('trim', explode(',', $value)));
+                    $queryBuilder->whereIn('categories.parent_id', $parentIds);
 
                     break;
                 case 'locale':

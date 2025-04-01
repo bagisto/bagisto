@@ -3502,6 +3502,7 @@ return [
                 'new'                           => 'Yeni',
                 'no'                            => 'Hayır',
                 'parent-id'                     => 'Üst Kimlik',
+                'parent-id-hint'                => 'Birden fazla üst kimlik girmek için virgülle ayırarak (örneğin: 12,15,34) değerlerini girin.',
                 'category-id'                   => 'Kategori Kimliği',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',

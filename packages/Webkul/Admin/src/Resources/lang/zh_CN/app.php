@@ -3502,6 +3502,7 @@ return [
                 'no'                            => '不',
                 'new'                           => '新',
                 'parent-id'                     => '父ID',
+                'parent-id-hint'                => '您可以输入多个父ID作为逗号分隔的值（例如：12,15,34）',
                 'category-id'                   => '类别ID',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',

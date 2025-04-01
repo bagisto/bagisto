@@ -3502,6 +3502,7 @@ return [
                 'new'                           => 'Nuovo',
                 'no'                            => 'No',
                 'parent-id'                     => 'ID Genitore',
+                'parent-id-hint'                => 'Puoi inserire più ID genitori come valori separati da virgole (ad esempio: 12,15,34)',
                 'category-id'                   => 'ID categoria',
                 'preview'                       => 'Anteprima',
                 'product-carousel'              => 'Carosello Prodotti',

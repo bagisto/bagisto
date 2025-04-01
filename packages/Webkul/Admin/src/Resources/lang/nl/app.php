@@ -3503,6 +3503,7 @@ return [
                 'new'                           => 'Nieuw',
                 'no'                            => 'Nee',
                 'parent-id'                     => 'Ouder-ID',
+                'parent-id-hint'                => 'U kunt meerdere ouder-IDs als gescheiden waarden invoeren (bijvoorbeeld: 12,15,34)',
                 'category-id'                   => 'Categorie-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',

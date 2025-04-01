@@ -3502,6 +3502,7 @@ return [
                 'new'                           => '新しい',
                 'no'                            => 'いいえ',
                 'parent-id'                     => '親ID',
+                'parent-id-hint'                => '複数の親IDをカンマ区切りの値として入力できます（例：12,15,34）',
                 'category-id'                   => 'カテゴリID',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',

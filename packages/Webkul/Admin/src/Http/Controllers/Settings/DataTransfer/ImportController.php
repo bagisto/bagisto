@@ -92,12 +92,16 @@ class ImportController extends Controller
             $data['process_in_queue'] = true;
         }
 
+        $file = request()->file('file');
+        $safeFilename = uniqid().'_'.hash('sha256', $file->getClientOriginalName());
+        $extension = $file->guessExtension();
+
         $import = $this->importRepository->create(
             array_merge(
                 [
                     'file_path' => request()->file('file')->storeAs(
                         'imports',
-                        time().'-'.request()->file('file')->getClientOriginalName(),
+                        $safeFilename.'.'.$extension,
                         'private'
                     ),
                 ],
@@ -175,12 +179,20 @@ class ImportController extends Controller
 
         Storage::disk('private')->delete($import->error_file_path ?? '');
 
-        if (request()->file('file') && request()->file('file')->isValid()) {
+        $file = request()->file('file');
+
+        if (
+            $file
+            && $file->isValid()
+        ) {
+            $safeFilename = uniqid().'_'.hash('sha256', $file->getClientOriginalName());
+            $extension = $file->guessExtension();
+
             Storage::disk('private')->delete($import->file_path);
 
-            $data['file_path'] = request()->file('file')->storeAs(
+            $data['file_path'] = $file->storeAs(
                 'imports',
-                time().'-'.request()->file('file')->getClientOriginalName(),
+                $safeFilename.'.'.$extension,
                 'private'
             );
         }

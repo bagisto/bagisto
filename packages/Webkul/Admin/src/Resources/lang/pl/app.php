@@ -3502,6 +3502,7 @@ return [
                 'new'                           => 'Nowy',
                 'no'                            => 'Nie',
                 'parent-id'                     => 'Identyfikator nadrzędny',
+                'parent-id-hint'                => 'Możesz wprowadzić wiele identyfikatorów nadrzędnych jako wartości oddzielone przecinkami (np. 12,15,34)',
                 'category-id'                   => 'ID kategorii',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',

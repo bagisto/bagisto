@@ -3502,6 +3502,7 @@ return [
                 'new'                           => 'Novo',
                 'no'                            => 'Não',
                 'parent-id'                     => 'ID do Pai',
+                'parent-id-hint'                => 'Você pode inserir vários IDs pai como valores separados por vírgula (ex.: 12,15,34)',
                 'category-id'                   => 'ID de categoria',
                 'preview'                       => 'Visualização',
                 'product-carousel'              => 'Carrossel de Produtos',

@@ -3502,6 +3502,7 @@ return [
                 'new'                           => 'Nuevo',
                 'no'                            => 'No',
                 'parent-id'                     => 'ID del Padre',
+                'parent-id-hint'                => 'Puedes introducir múltiples IDs de padres como valores separados por comas (por ejemplo: 12,15,34)',
                 'category-id'                   => 'ID de categoría',
                 'preview'                       => 'Vista Previa',
                 'product-carousel'              => 'Carrusel de Productos',
