@@ -688,12 +688,10 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText('Add Sample').first().click();
     await adminPage.waitForSelector('.min-h-0 > div > div');
-    await adminPage.locator('input[name="title"]').click();
     await adminPage.locator('input[name="title"]').fill('Sample 1');
     const sampleTitle = await adminPage.locator('input[name="title"]').inputValue();
     await adminPage.locator('select[name="type"]').selectOption('url');
     await adminPage.locator('input[name="url"]').fill('https://www.google.com');
-    await adminPage.locator('input[name="url"]').click();
 
     /**
      * Saving the Downloadable Sample.
