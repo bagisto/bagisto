@@ -5,7 +5,6 @@ import {
     generateSKU,
     generateName,
     generateDescription,
-    generateTitle,
     generateHostname
 } from "../../utils/faker";
 
@@ -667,7 +666,7 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText('Add Link').first().click();
     await adminPage.waitForSelector('.min-h-0 > div > div');
-    await adminPage.locator('input[name="title"]').first().fill(generateTitle());
+    await adminPage.locator('input[name="title"]').first().fill(generateName());
     const linkTitle = await adminPage.locator('input[name="title"]').inputValue();
     await adminPage.locator('input[name="price"]').first().fill('100');
     await adminPage.locator('input[name="downloads"]').fill('2');
@@ -689,7 +688,7 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText('Add Sample').first().click();
     await adminPage.waitForSelector('.min-h-0 > div > div');
-    await adminPage.locator('input[name="title"]').fill(generateTitle());
+    await adminPage.locator('input[name="title"]').fill(generateName());
     const sampleTitle = await adminPage.locator('input[name="title"]').inputValue();
     await adminPage.locator('select[name="type"]').selectOption('url');
     await adminPage.locator('input[name="url"]').fill(generateHostname());

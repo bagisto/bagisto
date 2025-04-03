@@ -57,16 +57,6 @@ export function generateName() {
     return name;
 }
 
-export function generateTitle() {
-    const words1 = ["Ultimate", "Essential", "Smart", "Quick", "Simple", "Advanced"];
-    const words2 = ["Guide", "Plan", "Tips", "Tricks", "Steps", "Formula"];
-    
-    const word1 = words1[Math.floor(Math.random() * words1.length)];
-    const word2 = words2[Math.floor(Math.random() * words2.length)];
-    
-    return `${word1} ${word2}`;
-}
-
 export function generateFirstName() {
     const firstNames = [
         "James",
