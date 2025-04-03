@@ -61,12 +61,8 @@ test.describe("attribute management", () => {
 
         await adminPage.click('button[type="submit"]');
 
-        await expect(
-            adminPage.locator("text=The Admin field is required")
-        ).toBeVisible();
-        await expect(
-            adminPage.locator("text=The Attribute Code field is required")
-        ).toBeVisible();
+        await expect(adminPage.getByText('The Admin field is required')).toBeVisible();
+        await expect(adminPage.getByText('The Attribute Code field is')).toBeVisible();
     });
 
     test("should edit an existing attribute successfully", async ({
