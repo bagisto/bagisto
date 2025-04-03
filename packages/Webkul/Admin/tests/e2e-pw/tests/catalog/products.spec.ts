@@ -5,9 +5,9 @@ import {
     generateSKU,
     generateName,
     generateDescription,
-    getImageFile,
     generateLocation,
     generateRandomDateTime,
+    generateHostname
 } from "../../utils/faker";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -668,7 +668,7 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText('Add Link').first().click();
     await adminPage.waitForSelector('.min-h-0 > div > div');
-    await adminPage.locator('input[name="title"]').fill('Link 1');
+    await adminPage.locator('input[name="title"]').first().fill(generateName());
     const linkTitle = await adminPage.locator('input[name="title"]').inputValue();
     await adminPage.locator('input[name="price"]').first().fill('100');
     await adminPage.locator('input[name="downloads"]').fill('2');
@@ -676,7 +676,7 @@ async function createDownloadableProduct(adminPage) {
     await adminPage.locator('input[name="file"]').nth(1).setInputFiles(path.resolve(__dirname, '../../data/images/1.webp'));
     await adminPage.locator('select[name="sample_type"]').selectOption('url');
     await adminPage.waitForSelector('input[name="sample_url"]');
-    await adminPage.locator('input[name="sample_url"]').fill('https://www.google.com');
+    await adminPage.locator('input[name="sample_url"]').fill(generateHostname());
 
     /**
      * Saving the Downloadable Link.
@@ -690,12 +690,10 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText('Add Sample').first().click();
     await adminPage.waitForSelector('.min-h-0 > div > div');
-    await adminPage.locator('input[name="title"]').click();
-    await adminPage.locator('input[name="title"]').fill('Sample 1');
+    await adminPage.locator('input[name="title"]').fill(generateName());
     const sampleTitle = await adminPage.locator('input[name="title"]').inputValue();
     await adminPage.locator('select[name="type"]').selectOption('url');
-    await adminPage.locator('input[name="url"]').fill('https://www.google.com');
-    await adminPage.locator('input[name="url"]').click();
+    await adminPage.locator('input[name="url"]').fill(generateHostname());
 
     /**
      * Saving the Downloadable Sample.
