@@ -534,6 +534,10 @@ class ProductRepository extends Repository
      */
     public function getMaxPrice($params = [])
     {
+        if ($this->searchEngine == 'elastic') {
+            return $this->elasticSearchRepository->getMaxPrice($params);
+        }
+
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $query = $this->model
