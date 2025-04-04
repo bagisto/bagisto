@@ -77,7 +77,13 @@ class CategoryController extends APIController
      */
     public function getProductMaxPrice($categoryId = null): JsonResource
     {
-        $maxPrice = $this->productRepository->getMaxPrice(['category_id' => $categoryId]);
+        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
+            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
+        }
+
+        $maxPrice = $this->productRepository
+            ->setSearchEngine($searchEngine ?? 'database')
+            ->getMaxPrice(['category_id' => $categoryId]);
 
         return new JsonResource([
             'max_price' => core()->convertPrice($maxPrice),

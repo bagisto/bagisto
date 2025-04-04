@@ -206,4 +206,78 @@ class ElasticSearchRepository
             ],
         ];
     }
+
+    /**
+     * Get product maximum price from the product indexes.
+     */
+    public function getMaxPrice(array $params = [])
+    {
+        $filters = $this->getFilters($params);
+
+        if (! empty($params['category_id'])) {
+            $filters['filter'][]['term']['category_ids'] = $params['category_id'];
+        }
+
+        if (! empty($params['type'])) {
+            $filters['filter'][]['term']['type'] = $params['type'];
+        }
+
+        $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
+
+        $results = Elasticsearch::search([
+            'index'         => $params['index'] ?? $this->getIndexName(),
+            'body'          => [
+                'size'  => 0,
+                'query' => [
+                    'bool' => $filters ?: new \stdClass,
+                ],
+                'aggs' => [
+                    'max_price' => [
+                        'max' => [
+                            'field' => 'price_'.$customerGroupId,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        return $results['aggregations']['max_price']['value'] ?? 0;
+    }
+
+    /**
+     * Get product minimum price from the product indexes.
+     */
+    public function getMinPrice(array $params = [])
+    {
+        $filters = $this->getFilters($params);
+
+        if (! empty($params['category_id'])) {
+            $filters['filter'][]['term']['category_ids'] = $params['category_id'];
+        }
+
+        if (! empty($params['type'])) {
+            $filters['filter'][]['term']['type'] = $params['type'];
+        }
+
+        $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
+
+        $results = Elasticsearch::search([
+            'index'         => $params['index'] ?? $this->getIndexName(),
+            'body'          => [
+                'size'  => 0,
+                'query' => [
+                    'bool' => $filters ?: new \stdClass,
+                ],
+                'aggs' => [
+                    'min_price' => [
+                        'min' => [
+                            'field' => 'price_'.$customerGroupId,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        return $results['aggregations']['min_price']['value'] ?? 0;
+    }
 }
