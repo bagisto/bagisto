@@ -31,25 +31,12 @@ class Themes
     protected $laravelViewsPath;
 
     /**
-     * Contains default theme code.
-     *
-     * @var string
-     */
-    protected $defaultThemeCode = 'default';
-
-    /**
      * Create a new themes instance.
      *
      * @return void
      */
     public function __construct()
     {
-        if (! Str::contains(request()->url(), config('app.admin_url').'/')) {
-            $this->defaultThemeCode = Config::get('themes.admin-default', null);
-        } else {
-            $this->defaultThemeCode = Config::get('themes.shop-default', null);
-        }
-
         $this->laravelViewsPath = Config::get('view.paths');
 
         $this->loadThemes();
