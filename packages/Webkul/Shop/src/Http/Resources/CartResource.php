@@ -48,6 +48,11 @@ class CartResource extends JsonResource
             'have_stockable_items'               => $this->haveStockableItems(),
             'payment_method'                     => $this->payment?->method,
             'payment_method_title'               => core()->getConfigData('sales.payment_methods.'.$this->payment?->method.'.title'),
+            $this->mergeWhen($this->giftcard_number, [
+                'giftcard_number'           => $this->giftcard_number,
+                'giftcard_amount'           => $this->giftcard_amount,
+                'remaining_giftcard_amount' => $this->remaining_giftcard_amount,
+            ]),
         ];
     }
 }

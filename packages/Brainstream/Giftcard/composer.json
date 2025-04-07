@@ -1,0 +1,26 @@
+{
+    "name": "bagisto/giftcard-extension",
+    "license": "MIT",
+    "description" : "Customers can purchase gift cards for specific amounts, which can be shared using a unique code. Another customer can then use this code to redeem the gift card.",
+    "authors": [
+        {
+            "name": "Kishan Kanani",
+            "email": "kishan.kanani@brainstream.tech"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Brainstream\\Giftcard\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brainstream\\Giftcard\\Providers\\GiftcardServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -3,7 +3,7 @@
 namespace Webkul\Sales\Traits;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\Customer\InvoiceOverdueReminder;
+use Webkul\Admin\Mail\InvoiceOverdueReminder;
 
 trait InvoiceReminder
 {
@@ -52,7 +52,10 @@ trait InvoiceReminder
             }
         }
 
-        Mail::queue(new InvoiceOverdueReminder($this));
+        /** @var Webkul\Customer\Models\Customer $customer */
+        $customer = $this->customer;
+
+        Mail::queue(new InvoiceOverdueReminder($customer, $this));
 
         $this->reminders++;
 
@@ -64,7 +67,7 @@ trait InvoiceReminder
         $date->add($interval);
         $date->setTime(0, 0, 0, 0);
 
-        $this->next_reminder_at = $date;
+        $this->next_reminder_date = $date;
 
         $this->save();
     }

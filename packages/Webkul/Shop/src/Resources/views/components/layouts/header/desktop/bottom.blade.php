@@ -155,7 +155,7 @@
                         <p class="mt-3 w-full border border-zinc-200"></p>
 
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.before') !!}
-                        
+
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
@@ -172,7 +172,7 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
-                            
+
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 

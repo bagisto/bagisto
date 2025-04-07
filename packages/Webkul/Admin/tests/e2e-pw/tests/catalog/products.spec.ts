@@ -1,10 +1,11 @@
-import { test, expect } from "../../setup";
+import { test, expect, config } from "../../setup";
 import {
     generateSKU,
     generateName,
     generateDescription,
     getImageFile,
 } from "../../utils/faker";
+import { fillInTinymce } from "../../utils/tinymce";
 
 async function createSimpleProduct(adminPage) {
     /**
@@ -23,7 +24,7 @@ async function createSimpleProduct(adminPage) {
     /**
      * Reaching to the create product page.
      */
-    await adminPage.goto("admin/catalog/products");
+    await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
     await adminPage.waitForSelector(
         'button.primary-button:has-text("Create Product")'
     );
@@ -38,6 +39,9 @@ async function createSimpleProduct(adminPage) {
         .selectOption("1");
     await adminPage.locator('input[name="sku"]').fill(generateSKU());
     await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await expect(
+        adminPage.getByText("Product created successfully")
+    ).toBeVisible();
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
@@ -61,11 +65,12 @@ async function createSimpleProduct(adminPage) {
     /**
      * Description Section.
      */
-    await adminPage.fillInTinymce(
+    await fillInTinymce(
+        adminPage,
         "#short_description_ifr",
         product.shortDescription
     );
-    await adminPage.fillInTinymce("#description_ifr", product.description);
+    await fillInTinymce(adminPage, "#description_ifr", product.description);
 
     /**
      * Meta Description Section.
@@ -136,7 +141,7 @@ test.describe("product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto("admin/catalog/products");
+        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
@@ -166,7 +171,7 @@ test.describe("product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
+        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
@@ -210,7 +215,7 @@ test.describe("product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
+        await adminPage.goto(`${config.baseUrl}/admin/catalog/products`);
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")',
             { state: "visible" }

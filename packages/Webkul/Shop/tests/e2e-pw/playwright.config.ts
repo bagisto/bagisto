@@ -13,8 +13,6 @@ export default defineConfig({
 
     timeout: 30 * 1000,
 
-    expect: { timeout: 20 * 1000 },
-
     outputDir: "./test-results",
 
     fullyParallel: false,
@@ -37,7 +35,6 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",
