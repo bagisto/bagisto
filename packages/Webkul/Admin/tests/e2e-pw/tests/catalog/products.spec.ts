@@ -2103,38 +2103,266 @@ test.describe("booking product management", () => {
     });
 
     test.describe("booking product for rental booking type", () => {
-        test("should create rental booking product for daily basis", async ({ adminPage }) => {
+        test("should create rental booking product for daily basis with not available for every week", async ({ adminPage }) => {
             /**
              * Create the product.
              */
             const product = await createBookingProduct(adminPage);
+
             /**
              * Selecting Rental booking type.
              */
             await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
             await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+
             /**
              * Adding product quantity.
              */
               await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
 
             /**
-             * Selecting `Yes` in available every week.
+             * Selecting `No` in available every week.
              */
-            await adminPage.locator('select[name="booking[available_every_week]"]').selectOption('1');
+            await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "0"});
 
             /**
              * Time slot .
              */
-            await adminPage.getByRole('textbox', { name: 'Available From' }).click();
             await adminPage.getByRole('textbox', { name: 'Available From' }).fill('2027-04-08 16:00:00');
             await adminPage.getByRole('textbox', { name: 'Available From' }).press('Enter');
-            await adminPage.getByRole('textbox', { name: 'Available To' }).click();
             await adminPage.getByRole('textbox', { name: 'Available To' }).fill('2027-04-25 18:00');
             await adminPage.getByRole('textbox', { name: 'Available To' }).press('Enter');
-            await adminPage.getByRole('textbox', { name: 'Daily Price' }).click();
+            await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('daily');
             await adminPage.getByRole('textbox', { name: 'Daily Price' }).fill('3000');
             await adminPage.getByRole("button", { name: "Save Product" }).click();
     });
+
+    test("should create rental booking product for daily basis with available for every week", async ({ adminPage }) => {
+        /**
+         * Create the product.
+         */
+        const product = await createBookingProduct(adminPage);
+        
+        /**
+         * Selecting Rental booking type.
+         */
+        await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
+        await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+
+        /**
+         * Adding product quantity.
+         */
+          await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
+
+        /**
+         * Selecting `Yes` in available every week.
+         */
+        await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "1"});
+        await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('daily');
+        await adminPage.getByRole('textbox', { name: 'Daily Price' }).fill('3000');
+
+        /**
+         * Saving the booking product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+    });
+
+    test("should create rental booking product for hourly basis available for same slot for All days", async ({ adminPage }) => {
+         /**
+         * Create the product.
+         */
+         const product = await createBookingProduct(adminPage);
+        
+         /**
+          * Selecting Rental booking type.
+          */
+         await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
+         await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+ 
+         /**
+          * Adding product quantity.
+          */
+           await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
+ 
+         /**
+          * Selecting `Yes` in available every week.
+          */
+         await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "1"});
+         await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('hourly');
+         await adminPage.getByRole('textbox', { name: 'Hourly Price' }).fill('300');
+         await adminPage.locator('select[name="booking\\[same_slot_all_days\\]"]').selectOption('1');
+
+         /**
+         * Saving the booking product.
+         */
+         await adminPage.getByRole("button", { name: "Save Product" }).click();
+    });
+
+    test("should create rental booking product for hourly basis available for not same slot for All days", async ({ adminPage }) => {
+        /**
+        * Create the product.
+        */
+        const product = await createBookingProduct(adminPage);
+       
+        /**
+         * Selecting Rental booking type.
+         */
+        await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
+        await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+
+        /**
+         * Adding product quantity.
+         */
+          await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
+
+        /**
+         * Selecting `Yes` in available every week.
+         */
+        await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "1"});
+        await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('hourly');
+        await adminPage.getByRole('textbox', { name: 'Hourly Price' }).fill('300');
+        await adminPage.locator('select[name="booking\\[same_slot_all_days\\]"]').selectOption('0');
+
+        /**
+         * Time slot .
+         */       
+        await adminPage.locator('.overflow-x-auto > div > div > .cursor-pointer').first().click();
+        await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('10');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('35');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('13');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('45');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+        await adminPage.locator('.overflow-x-auto > div:nth-child(2) > div > .cursor-pointer').click();
+        await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('09');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('13');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+        await adminPage.locator('div:nth-child(3) > div > .cursor-pointer').click();
+        await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('45');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+        await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('18');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+        await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+        await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+        
+        /**
+         * Saving the booking product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+   });
+
+   
+   test("should create rental booking product for Both(hourly or day) basis available for same slot for All days", async ({ adminPage }) => {
+     
+     /**
+        * Create the product.
+        */
+     const product = await createBookingProduct(adminPage);
+       
+     /**
+      * Selecting Rental booking type.
+      */
+     await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
+     await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+
+     /**
+      * Adding product quantity.
+      */
+       await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
+
+     /**
+      * Selecting `Yes` in available every week.
+      */
+     await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "1"});
+     await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('daily_hourly');
+     await adminPage.getByRole('textbox', { name: 'Daily Price' }).fill('3000');
+     await adminPage.getByRole('textbox', { name: 'Hourly Price' }).fill('300');
+     await adminPage.locator('select[name="booking\\[same_slot_all_days\\]"]').selectOption('1');
+
+     /**
+      * Saving the booking product.
+      */
+     await adminPage.getByRole("button", { name: "Save Product" }).click();
+   });
+   
+   test("should create rental booking product for Both(hourly or day) basis not available for same slot for All days", async ({ adminPage }) => {
+     
+    /**
+       * Create the product.
+       */
+    const product = await createBookingProduct(adminPage);
+      
+    /**
+     * Selecting Rental booking type.
+     */
+    await adminPage.locator('select[name="booking[type]"]').selectOption('rental');
+    await adminPage.locator('input[name="booking[location]"]').fill(product.location);
+
+    /**
+     * Adding product quantity.
+     */
+      await adminPage.locator('input[name="booking[qty]"]').fill(product.weight);
+
+    /**
+     * Selecting `Yes` in available every week.
+     */
+    await adminPage.selectOption('//select[@name="booking[available_every_week]"]', {value: "1"});
+    await adminPage.locator('select[name="booking\\[renting_type\\]"]').selectOption('daily_hourly');
+    await adminPage.getByRole('textbox', { name: 'Daily Price' }).fill('3000');
+    await adminPage.getByRole('textbox', { name: 'Hourly Price' }).fill('300');
+    await adminPage.locator('select[name="booking\\[same_slot_all_days\\]"]').selectOption('0');
+
+    /**
+     * Time slot .
+     */       
+    await adminPage.locator('.overflow-x-auto > div > div > .cursor-pointer').first().click();
+    await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('10');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('35');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('13');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('45');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+    await adminPage.locator('.overflow-x-auto > div:nth-child(2) > div > .cursor-pointer').click();
+    await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('09');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('13');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+    await adminPage.locator('div:nth-child(3) > div > .cursor-pointer').click();
+    await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('45');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('textbox', { name: 'To', exact: true }).click();
+    await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('18');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).fill('25');
+    await adminPage.getByRole('spinbutton', { name: 'Minute' }).press('Enter');
+    await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
+
+    /**
+     * Saving the booking product.
+     */
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+  });
+
 });
 });
