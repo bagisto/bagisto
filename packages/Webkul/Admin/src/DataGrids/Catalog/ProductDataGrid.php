@@ -207,7 +207,7 @@ class ProductDataGrid extends DataGrid
             $this->addAction([
                 'icon'   => 'icon-copy',
                 'title'  => trans('admin::app.catalog.products.index.datagrid.copy'),
-                'method' => 'GET',
+                'method' => 'POST',
                 'url'    => function ($row) {
                     return route('admin.catalog.products.copy', $row->product_id);
                 },
