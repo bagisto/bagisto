@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Inicio de sesión social" permite a los usuarios acceder a sitios web utilizando sus cuentas de redes sociales, simplificando los procesos de registro e inicio de sesión para mayor comodidad.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Inicio de sesión social',
+                    'info'  => 'Configurar inicio de sesión social',
+
+                    'google-details' => [
+                        'title'      => 'Detalles de Google',
+                        'title-info' => 'Configura tus credenciales de autenticación de Google para habilitar el inicio de sesión con Google.',
+
+                        'client-id' => [
+                            'title'      => 'ID de cliente',
+                            'title-info' => 'El identificador único proporcionado por Google al crear tu aplicación de autenticación.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Secreto de cliente',
+                            'title-info' => 'La clave secreta asociada a tu cliente de Google. Mantén esta información confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirección',
+                            'title-info' => 'La URL de retorno a la que se redirige a los usuarios después de autenticarse con Google. Debe coincidir con la configurada en tu consola de Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Detalles de Facebook',
+                        'title-info' => 'Configura tus credenciales de autenticación de Facebook para habilitar el inicio de sesión con Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'ID de cliente',
+                            'title-info' => 'El ID de la aplicación proporcionado por Facebook al crear una app en la consola de desarrolladores de Facebook.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Secreto de cliente',
+                            'title-info' => 'La clave secreta asociada a tu aplicación de Facebook. Mantén esta información segura y privada.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirección',
+                            'title-info' => 'La URL de retorno a la que se redirige a los usuarios después de autenticarse con Facebook. Debe coincidir con la configurada en tu aplicación de Facebook.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Detalles de GitHub',
+                        'title-info' => 'Configura tus credenciales de autenticación de GitHub para habilitar el inicio de sesión con GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'ID de cliente',
+                            'title-info' => 'El identificador único proporcionado por GitHub al crear tu aplicación de autenticación.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Secreto de cliente',
+                            'title-info' => 'La clave secreta asociada a tu cliente de GitHub. Mantén esta información confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirección',
+                            'title-info' => 'La URL de retorno a la que se redirige a los usuarios después de autenticarse con GitHub. Debe coincidir con la configurada en tu consola de GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Detalles de LinkedIn',
+                        'title-info' => 'Configura tus credenciales de autenticación de LinkedIn para habilitar el inicio de sesión con LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'ID de cliente',
+                            'title-info' => 'El identificador único proporcionado por LinkedIn al crear tu aplicación de autenticación.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Secreto de cliente',
+                            'title-info' => 'La clave secreta asociada a tu cliente de LinkedIn. Mantén esta información confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirección',
+                            'title-info' => 'La URL de retorno a la que se redirige a los usuarios después de autenticarse con LinkedIn. Debe coincidir con la configurada en tu consola de LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Detalles de Twitter',
+                        'title-info' => 'Configura tus credenciales de autenticación de Twitter para habilitar el inicio de sesión con Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'ID de cliente',
+                            'title-info' => 'El identificador único proporcionado por Twitter al crear tu aplicación de autenticación.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Secreto de cliente',
+                            'title-info' => 'La clave secreta asociada a tu cliente de Twitter. Mantén esta información confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirección',
+                            'title-info' => 'La URL de retorno a la que se redirige a los usuarios después de autenticarse con Twitter. Debe coincidir con la configurada en tu consola de Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

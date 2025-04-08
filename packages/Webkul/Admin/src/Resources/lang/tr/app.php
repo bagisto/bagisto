@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Sosyal giriş", kullanıcıların sosyal medya hesaplarını kullanarak web sitelerine erişmelerini sağlar, kayıt ve giriş işlemlerini kolaylık sağlamak için basitleştirir.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Sosyal Giriş',
+                    'info'  => 'Sosyal Giriş Ayarlarını Yapılandır',
+
+                    'google-details' => [
+                        'title'      => 'Google Bilgileri',
+                        'title-info' => 'Google ile sosyal giriş özelliğini etkinleştirmek için Google kimlik doğrulama bilgilerinizi yapılandırın.',
+
+                        'client-id' => [
+                            'title'      => 'İstemci Kimliği (Client ID)',
+                            'title-info' => 'Kimlik doğrulama uygulamanızı oluşturduğunuzda Google tarafından sağlanan benzersiz tanımlayıcı.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'İstemci Gizli Anahtarı (Client Secret)',
+                            'title-info' => 'Google istemcinize ait gizli anahtar. Güvende tutun ve paylaşmayın.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Yönlendirme URL\'si',
+                            'title-info' => 'Kullanıcıların Google ile kimlik doğrulama yaptıktan sonra yönlendirileceği geri dönüş URL\'si. Google Konsolu\'nda tanımlı olanla eşleşmelidir.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook Bilgileri',
+                        'title-info' => 'Facebook ile giriş yapmayı etkinleştirmek için Facebook kimlik doğrulama bilgilerinizi yapılandırın.',
+
+                        'client-id' => [
+                            'title'      => 'Uygulama Kimliği (Client ID)',
+                            'title-info' => 'Facebook Geliştirici Konsolu üzerinden uygulama oluşturduğunuzda verilen App ID.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Uygulama Gizli Anahtarı (Client Secret)',
+                            'title-info' => 'Facebook uygulamanıza ait gizli anahtar. Güvenli ve gizli tutun.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Yönlendirme URL\'si',
+                            'title-info' => 'Kullanıcıların Facebook ile giriş yaptıktan sonra yönlendirileceği geri dönüş URL\'si. Facebook ayarlarınızla birebir uyumlu olmalıdır.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub Bilgileri',
+                        'title-info' => 'GitHub ile giriş yapmayı etkinleştirmek için GitHub kimlik doğrulama bilgilerinizi yapılandırın.',
+
+                        'client-id' => [
+                            'title'      => 'İstemci Kimliği',
+                            'title-info' => 'GitHub tarafından uygulamanızı oluşturduğunuzda sağlanan benzersiz tanımlayıcı.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'İstemci Gizli Anahtarı',
+                            'title-info' => 'GitHub istemcinize ait gizli anahtar. Bu bilgiyi gizli tutun.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Yönlendirme URL\'si',
+                            'title-info' => 'GitHub kimlik doğrulamasından sonra kullanıcıların yönlendirileceği geri dönüş URL\'si. GitHub Konsolu\'ndaki ayarlarla eşleşmelidir.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn Bilgileri',
+                        'title-info' => 'LinkedIn ile giriş yapmayı etkinleştirmek için LinkedIn kimlik doğrulama bilgilerinizi yapılandırın.',
+
+                        'client-id' => [
+                            'title'      => 'İstemci Kimliği',
+                            'title-info' => 'LinkedIn uygulamanız için sağlanan benzersiz tanımlayıcı.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'İstemci Gizli Anahtarı',
+                            'title-info' => 'LinkedIn istemcinize ait gizli anahtar. Güvende tutun.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Yönlendirme URL\'si',
+                            'title-info' => 'Kullanıcıların LinkedIn ile giriş yaptıktan sonra yönlendirileceği geri dönüş URL\'si. LinkedIn ayarlarınızla eşleşmelidir.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter Bilgileri',
+                        'title-info' => 'Twitter ile giriş yapmayı etkinleştirmek için Twitter kimlik doğrulama bilgilerinizi yapılandırın.',
+
+                        'client-id' => [
+                            'title'      => 'İstemci Kimliği',
+                            'title-info' => 'Twitter tarafından sağlanan benzersiz uygulama tanımlayıcısı.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'İstemci Gizli Anahtarı',
+                            'title-info' => 'Twitter istemcinize ait gizli anahtar. Gizli tutun ve paylaşmayın.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Yönlendirme URL\'si',
+                            'title-info' => 'Twitter ile kimlik doğrulama sonrası kullanıcıların yönlendirileceği geri dönüş adresi. Twitter Konsolu ayarları ile birebir aynı olmalıdır.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

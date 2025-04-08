@@ -4173,6 +4173,111 @@ return [
                         'social-login-info' => '"Sociaal inloggen" stelt gebruikers in staat om websites te openen met behulp van hun sociale media-accounts, waardoor registratie- en inlogprocessen worden gestroomlijnd voor gemak.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Sociale Login',
+                    'info'  => 'Stel sociale login in',
+
+                    'google-details' => [
+                        'title'      => 'Google Details',
+                        'title-info' => 'Configureer je Google Auth-gegevens om inloggen via Google mogelijk te maken.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'De unieke ID die je van Google ontvangt bij het aanmaken van een Auth-applicatie.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clientgeheim',
+                            'title-info' => 'De geheime sleutel gekoppeld aan je Google Auth-client. Houd deze vertrouwelijk.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect-URL',
+                            'title-info' => 'De callback-URL waar gebruikers na authenticatie met Google naartoe worden geleid. Moet overeenkomen met wat in je Google Console is ingesteld.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook Details',
+                        'title-info' => 'Configureer je Facebook Auth-gegevens om inloggen via Facebook mogelijk te maken.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'De App-ID die je ontvangt bij het aanmaken van een Facebook-app.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clientgeheim',
+                            'title-info' => 'De geheime sleutel gekoppeld aan je Facebook-app. Houd deze veilig en privé.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect-URL',
+                            'title-info' => 'De callback-URL na authenticatie met Facebook. Moet overeenkomen met je Facebook-appinstellingen.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub Details',
+                        'title-info' => 'Configureer je GitHub Auth-gegevens om inloggen via GitHub mogelijk te maken.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'De unieke ID die je van GitHub ontvangt bij het aanmaken van een Auth-applicatie.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clientgeheim',
+                            'title-info' => 'De geheime sleutel gekoppeld aan je GitHub Auth-client. Houd deze vertrouwelijk.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect-URL',
+                            'title-info' => 'De callback-URL waar gebruikers na authenticatie met GitHub naartoe worden geleid. Moet overeenkomen met je GitHub Console.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn Details',
+                        'title-info' => 'Configureer je LinkedIn Auth-gegevens om inloggen via LinkedIn mogelijk te maken.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'De unieke ID die je van LinkedIn ontvangt bij het aanmaken van een Auth-applicatie.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clientgeheim',
+                            'title-info' => 'De geheime sleutel gekoppeld aan je LinkedIn Auth-client. Houd deze vertrouwelijk.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect-URL',
+                            'title-info' => 'De callback-URL na authenticatie met LinkedIn. Moet overeenkomen met wat is ingesteld in de LinkedIn Console.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter Details',
+                        'title-info' => 'Configureer je Twitter Auth-gegevens om inloggen via Twitter mogelijk te maken.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'De unieke ID die je van Twitter ontvangt bij het aanmaken van een Auth-applicatie.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clientgeheim',
+                            'title-info' => 'De geheime sleutel gekoppeld aan je Twitter Auth-client. Houd deze vertrouwelijk.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect-URL',
+                            'title-info' => 'De callback-URL na authenticatie met Twitter. Moet overeenkomen met wat is ingesteld in de Twitter Console.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

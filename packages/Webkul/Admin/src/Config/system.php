@@ -1258,6 +1258,129 @@ return [
                 'channel_based' => true,
             ],
         ],
+    ], [
+        'key'    => 'customer.social_login',
+        'name'   => 'admin::app.configuration.index.customer.social-login.title',
+        'info'   => 'admin::app.configuration.index.customer.social-login.info',
+        'icon'   => 'settings/store.svg',
+        'sort'   => 4,
+        [
+            'key'    => 'customer.social_login.google_details',
+            'name'   => 'admin::app.configuration.index.customer.social-login.google-details.title',
+            'info'   => 'admin::app.configuration.index.customer.social-login.google-details.title-info',
+            'sort'   => 1,
+            'fields' => [
+                [
+                    'name'    => 'client_id',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.google-details.client-id.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.google-details.client-id.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'client_secret',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.google-details.client-secret.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.google-details.client-secret.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'redirect',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.google-details.redirect.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.google-details.redirect.title-info',
+                    'type'    => 'text',
+                ],
+            ],
+        ], [
+            'key'    => 'customer.social_login.facebook_details',
+            'name'   => 'admin::app.configuration.index.customer.social-login.facebook-details.title',
+            'info'   => 'admin::app.configuration.index.customer.social-login.facebook-details.title-info',
+            'sort'   => 2,
+            'fields' => [
+                [
+                    'name'    => 'client_id',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.facebook-details.client-id.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.facebook-details.client-id.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'client_secret',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.facebook-details.client-secret.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.facebook-details.client-secret.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'redirect',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.facebook-details.redirect.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.facebook-details.redirect.title-info',
+                    'type'    => 'text',
+                ],
+            ],
+        ], [
+            'key'    => 'customer.social_login.github_details',
+            'name'   => 'admin::app.configuration.index.customer.social-login.github-details.title',
+            'info'   => 'admin::app.configuration.index.customer.social-login.github-details.title-info',
+            'sort'   => 3,
+            'fields' => [
+                [
+                    'name'    => 'client_id',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.github-details.client-id.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.github-details.client-id.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'client_secret',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.github-details.client-secret.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.github-details.client-secret.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'redirect',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.github-details.redirect.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.github-details.redirect.title-info',
+                    'type'    => 'text',
+                ],
+            ],
+        ], [
+            'key'    => 'customer.social_login.linkedin_openid_details',
+            'name'   => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.title',
+            'info'   => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.title-info',
+            'sort'   => 4,
+            'fields' => [
+                [
+                    'name'    => 'client_id',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.client-id.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.client-id.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'client_secret',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.client-secret.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.client-secret.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'redirect',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.redirect.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.linkedin-openid-details.redirect.title-info',
+                    'type'    => 'text',
+                ],
+            ],
+        ], [
+            'key'    => 'customer.social_login.twitter_details',
+            'name'   => 'admin::app.configuration.index.customer.social-login.twitter-details.title',
+            'info'   => 'admin::app.configuration.index.customer.social-login.twitter-details.title-info',
+            'sort'   => 5,
+            'fields' => [
+                [
+                    'name'    => 'client_id',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.twitter-details.client-id.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.twitter-details.client-id.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'client_secret',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.twitter-details.client-secret.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.twitter-details.client-secret.title-info',
+                    'type'    => 'text',
+                ], [
+                    'name'    => 'redirect',
+                    'title'   => 'admin::app.configuration.index.customer.social-login.twitter-details.redirect.title',
+                    'info'    => 'admin::app.configuration.index.customer.social-login.twitter-details.redirect.title-info',
+                    'type'    => 'text',
+                ],
+            ],
+        ],
+
     ],
 
     /**

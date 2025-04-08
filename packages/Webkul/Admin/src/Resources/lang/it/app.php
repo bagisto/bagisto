@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Accesso tramite social network" consente agli utenti di accedere ai siti web utilizzando i loro account dei social media, semplificando i processi di registrazione e accesso per comodità.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Accesso Social',
+                    'info'  => 'Configura l’accesso tramite social network',
+
+                    'google-details' => [
+                        'title'      => 'Dettagli Google',
+                        'title-info' => 'Configura le credenziali di autenticazione Google per abilitare l’accesso tramite Google.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'L’identificativo univoco fornito da Google quando crei la tua applicazione di autenticazione.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'La chiave segreta associata al tuo client Google. Mantienila riservata.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL di reindirizzamento',
+                            'title-info' => 'L’URL a cui gli utenti vengono reindirizzati dopo l’autenticazione con Google. Deve corrispondere a quello impostato nella Console Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Dettagli Facebook',
+                        'title-info' => 'Configura le credenziali di autenticazione Facebook per abilitare l’accesso tramite Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'L’App ID fornito da Facebook quando crei un’app nella Console per sviluppatori.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'La chiave segreta associata alla tua app Facebook. Mantienila sicura e privata.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL di reindirizzamento',
+                            'title-info' => 'L’URL a cui gli utenti vengono reindirizzati dopo l’autenticazione con Facebook. Deve corrispondere a quello configurato nelle impostazioni della tua app Facebook.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Dettagli GitHub',
+                        'title-info' => 'Configura le credenziali di autenticazione GitHub per abilitare l’accesso tramite GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'L’identificativo univoco fornito da GitHub quando crei la tua applicazione di autenticazione.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'La chiave segreta associata al tuo client GitHub. Mantienila riservata.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL di reindirizzamento',
+                            'title-info' => 'L’URL a cui gli utenti vengono reindirizzati dopo l’autenticazione con GitHub. Deve corrispondere a quello impostato nella Console GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Dettagli LinkedIn',
+                        'title-info' => 'Configura le credenziali di autenticazione LinkedIn per abilitare l’accesso tramite LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'L’identificativo univoco fornito da LinkedIn quando crei la tua applicazione di autenticazione.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'La chiave segreta associata al tuo client LinkedIn. Mantienila riservata.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL di reindirizzamento',
+                            'title-info' => 'L’URL a cui gli utenti vengono reindirizzati dopo l’autenticazione con LinkedIn. Deve corrispondere a quello impostato nella Console LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Dettagli Twitter',
+                        'title-info' => 'Configura le credenziali di autenticazione Twitter per abilitare l’accesso tramite Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'L’identificativo univoco fornito da Twitter quando crei la tua applicazione di autenticazione.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'La chiave segreta associata al tuo client Twitter. Mantienila riservata.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL di reindirizzamento',
+                            'title-info' => 'L’URL a cui gli utenti vengono reindirizzati dopo l’autenticazione con Twitter. Deve corrispondere a quello impostato nella Console Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

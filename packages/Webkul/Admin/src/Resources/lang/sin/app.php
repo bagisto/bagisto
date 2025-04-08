@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"සමාජ පිවිසුම" යනු පරිශීලකයින්ට ඔවුන්ගේ සමාජ මාධ්‍ය ගිණුම් භාවිතයෙන් වෙබ් අඩවිවලට පිවිසීමට ඉඩ දෙයි, ලියාපදිංචි සහ පිවිසුම් ක්‍රියාවලි පහසු කිරීම.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'සමාජ පිවිසුම',
+                    'info'  => 'සමාජ පිවිසුම සකසන්න',
+
+                    'google-details' => [
+                        'title'      => 'Google විස්තර',
+                        'title-info' => 'Google හරහා සමාජ පිවිසුම සක්‍රීය කිරීමට ඔබගේ Google Auth නියෝජිත විස්තර සකසන්න.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'ඔබේ Auth යෙදුම සෑදීමේදී Google විසින් සපයනු ලබන අනන්‍ය හඳුනාගැනීමක්.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'ඔබගේ Google Auth සේවාදායකය සම්බන්ධ රහසිගත යතුරකි. මෙය රහසිගතව තබා ගන්න.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'Google හරහා සත්‍යාපනයෙන් පසු පරිශීලකයින් යොමු වන ආපසු ඇමතුම් URL එක. මෙය ඔබේ Google Console හි සකසා ඇති URL එකට අනුකූල විය යුතුය.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook විස්තර',
+                        'title-info' => 'Facebook හරහා පිවිසුම සක්‍රීය කිරීමට ඔබගේ Facebook Auth නියෝජිත විස්තර සකසන්න.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Facebook Developer Console එකේ යෙදුමක් සාදන විට Facebook විසින් සපයන යෙදුම් හැඳුනුම්පත.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'ඔබේ Facebook යෙදුමට අදාළ රහසිගත යතුරකි. මෙය ආරක්ෂිතව තබා ගන්න.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'Facebook හරහා සත්‍යාපනයෙන් පසු පරිශීලකයින් යොමු වන ආපසු ඇමතුම් URL එක. ඔබේ Facebook යෙදුම් සැකසුම් වල සකසා ඇති URL එකට අනුකූල විය යුතුය.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub විස්තර',
+                        'title-info' => 'GitHub හරහා පිවිසුම සක්‍රීය කිරීමට ඔබගේ GitHub Auth නියෝජිත විස්තර සකසන්න.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'GitHub විසින් Auth යෙදුමක් සාදන විට සපයන අනන්‍ය හැඳුනුම්පත.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'ඔබේ GitHub Auth සේවාදායකය සම්බන්ධ රහසිගත යතුරකි. මෙය රහසිගතව තබා ගන්න.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'GitHub හරහා සත්‍යාපනයෙන් පසු පරිශීලකයින් යොමු වන ආපසු ඇමතුම් URL එක. මෙය GitHub Console හි සකසා ඇති URL එකට ගැලපිය යුතුය.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn විස්තර',
+                        'title-info' => 'LinkedIn හරහා පිවිසුම සක්‍රීය කිරීමට ඔබගේ LinkedIn Auth නියෝජිත විස්තර සකසන්න.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'LinkedIn විසින් Auth යෙදුමක් සාදන විට සපයන අනන්‍ය හැඳුනුම්පත.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'ඔබේ LinkedIn Auth සේවාදායකය සම්බන්ධ රහසිගත යතුරකි. මෙය රහසිගතව තබා ගන්න.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'LinkedIn හරහා සත්‍යාපනයෙන් පසු පරිශීලකයින් යොමු වන ආපසු ඇමතුම් URL එක. මෙය LinkedIn Console හි සකසා ඇති URL එකට ගැලපිය යුතුය.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter විස්තර',
+                        'title-info' => 'Twitter හරහා පිවිසුම සක්‍රීය කිරීමට ඔබගේ Twitter Auth නියෝජිත විස්තර සකසන්න.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Twitter විසින් Auth යෙදුමක් සාදන විට සපයන අනන්‍ය හැඳුනුම්පත.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'ඔබේ Twitter Auth සේවාදායකය සම්බන්ධ රහසිගත යතුරකි. මෙය රහසිගතව තබා ගන්න.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'Twitter හරහා සත්‍යාපනයෙන් පසු පරිශීලකයින් යොමු වන ආපසු ඇමතුම් URL එක. මෙය Twitter Console හි සකසා ඇති URL එකට ගැලපිය යුතුය.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

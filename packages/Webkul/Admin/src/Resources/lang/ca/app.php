@@ -4170,6 +4170,111 @@ return [
                         'social-login-info' => '"Inici de sessió social" permet als usuaris accedir a llocs web utilitzant els seus comptes de xarxes socials, simplificant els processos de registre i inici de sessió per una major comoditat.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Connexion sociale',
+                    'info'  => 'Configurer la connexion sociale',
+
+                    'google-details' => [
+                        'title'      => 'Détails Google',
+                        'title-info' => 'Configurez vos identifiants d’authentification Google pour activer la connexion via Google.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par Google lorsque vous créez votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète',
+                            'title-info' => 'Clé secrète associée à votre client d’authentification Google. Gardez-la confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'L’URL de rappel vers laquelle les utilisateurs sont redirigés après l’authentification avec Google. Elle doit correspondre à celle configurée dans votre console Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Détails Facebook',
+                        'title-info' => 'Configurez vos identifiants d’authentification Facebook pour activer la connexion via Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'L’ID de l’application fourni par Facebook lorsque vous créez une application dans la console développeur de Facebook.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète',
+                            'title-info' => 'Clé secrète associée à votre application Facebook. Gardez-la sécurisée et privée.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'L’URL de rappel après l’authentification Facebook. Elle doit correspondre à celle configurée dans votre application Facebook.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Détails GitHub',
+                        'title-info' => 'Configurez vos identifiants d’authentification GitHub pour activer la connexion via GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par GitHub lorsque vous créez votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète',
+                            'title-info' => 'Clé secrète associée à votre client GitHub. Gardez-la confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'L’URL de rappel après l’authentification GitHub. Elle doit correspondre à celle configurée dans votre console GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Détails LinkedIn',
+                        'title-info' => 'Configurez vos identifiants d’authentification LinkedIn pour activer la connexion via LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par LinkedIn lorsque vous créez votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète',
+                            'title-info' => 'Clé secrète associée à votre client LinkedIn. Gardez-la confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'L’URL de rappel après l’authentification LinkedIn. Elle doit correspondre à celle configurée dans votre console LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Détails Twitter',
+                        'title-info' => 'Configurez vos identifiants d’authentification Twitter pour activer la connexion via Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par Twitter lorsque vous créez votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète',
+                            'title-info' => 'Clé secrète associée à votre client Twitter. Gardez-la confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'L’URL de rappel après l’authentification Twitter. Elle doit correspondre à celle configurée dans votre console Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

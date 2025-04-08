@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"La connexion sociale" permet aux utilisateurs d\'accéder aux sites Web en utilisant leurs comptes de médias sociaux, simplifiant ainsi les processus d\'inscription et de connexion pour plus de commodité.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Connexion sociale',
+                    'info'  => 'Configurer la connexion sociale',
+
+                    'google-details' => [
+                        'title'      => 'Détails Google',
+                        'title-info' => 'Configurez vos identifiants d’authentification Google pour activer la connexion via Google.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par Google lors de la création de votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète du client',
+                            'title-info' => 'Clé secrète associée à votre client Google. Gardez cette information confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'URL vers laquelle les utilisateurs sont redirigés après l’authentification via Google. Elle doit correspondre à celle définie dans votre console Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Détails Facebook',
+                        'title-info' => 'Configurez vos identifiants d’authentification Facebook pour activer la connexion via Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'ID de l’application fourni par Facebook lors de la création dans la console développeur.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète du client',
+                            'title-info' => 'Clé secrète associée à votre application Facebook. Gardez cette information sécurisée et privée.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'URL vers laquelle les utilisateurs sont redirigés après l’authentification via Facebook. Elle doit correspondre à celle configurée dans votre application Facebook.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Détails GitHub',
+                        'title-info' => 'Configurez vos identifiants d’authentification GitHub pour activer la connexion via GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par GitHub lors de la création de votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète du client',
+                            'title-info' => 'Clé secrète associée à votre client GitHub. Gardez cette information confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'URL vers laquelle les utilisateurs sont redirigés après l’authentification via GitHub. Elle doit correspondre à celle définie dans votre console GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Détails LinkedIn',
+                        'title-info' => 'Configurez vos identifiants d’authentification LinkedIn pour activer la connexion via LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par LinkedIn lors de la création de votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète du client',
+                            'title-info' => 'Clé secrète associée à votre client LinkedIn. Gardez cette information confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'URL vers laquelle les utilisateurs sont redirigés après l’authentification via LinkedIn. Elle doit correspondre à celle définie dans votre console LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Détails Twitter',
+                        'title-info' => 'Configurez vos identifiants d’authentification Twitter pour activer la connexion via Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'ID client',
+                            'title-info' => 'Identifiant unique fourni par Twitter lors de la création de votre application d’authentification.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Clé secrète du client',
+                            'title-info' => 'Clé secrète associée à votre client Twitter. Gardez cette information confidentielle.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de redirection',
+                            'title-info' => 'URL vers laquelle les utilisateurs sont redirigés après l’authentification via Twitter. Elle doit correspondre à celle définie dans votre console Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

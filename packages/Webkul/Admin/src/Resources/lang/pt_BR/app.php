@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Login social" permite que os usuários acessem sites usando suas contas de mídia social, simplificando os processos de registro e login para maior conveniência.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Login Social',
+                    'info'  => 'Configurar login social',
+
+                    'google-details' => [
+                        'title'      => 'Detalhes do Google',
+                        'title-info' => 'Configure suas credenciais do Google Auth para habilitar o login social via Google.',
+
+                        'client-id' => [
+                            'title'      => 'ID do Cliente',
+                            'title-info' => 'O identificador único fornecido pelo Google ao criar seu aplicativo de autenticação.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Segredo do Cliente',
+                            'title-info' => 'A chave secreta associada ao seu cliente do Google Auth. Mantenha-a confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de Redirecionamento',
+                            'title-info' => 'A URL de retorno para onde os usuários são redirecionados após autenticação com o Google. Deve coincidir com a configurada no seu Console do Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Detalhes do Facebook',
+                        'title-info' => 'Configure suas credenciais do Facebook Auth para habilitar o login via Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'ID do Cliente',
+                            'title-info' => 'O ID do aplicativo fornecido pelo Facebook ao criar um app na Central de Desenvolvedores.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Segredo do Cliente',
+                            'title-info' => 'A chave secreta associada ao seu aplicativo do Facebook. Mantenha-a segura e privada.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de Redirecionamento',
+                            'title-info' => 'A URL de retorno para onde os usuários são redirecionados após autenticação com o Facebook. Deve coincidir com as configurações do seu aplicativo.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Detalhes do GitHub',
+                        'title-info' => 'Configure suas credenciais do GitHub Auth para habilitar o login via GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'ID do Cliente',
+                            'title-info' => 'O identificador único fornecido pelo GitHub ao criar seu aplicativo de autenticação.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Segredo do Cliente',
+                            'title-info' => 'A chave secreta associada ao seu cliente do GitHub Auth. Mantenha-a confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de Redirecionamento',
+                            'title-info' => 'A URL de retorno para onde os usuários são redirecionados após autenticação com o GitHub. Deve coincidir com a configurada no seu Console do GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Detalhes do LinkedIn',
+                        'title-info' => 'Configure suas credenciais do LinkedIn Auth para habilitar o login via LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'ID do Cliente',
+                            'title-info' => 'O identificador único fornecido pelo LinkedIn ao criar seu aplicativo de autenticação.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Segredo do Cliente',
+                            'title-info' => 'A chave secreta associada ao seu cliente do LinkedIn Auth. Mantenha-a confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de Redirecionamento',
+                            'title-info' => 'A URL de retorno para onde os usuários são redirecionados após autenticação com o LinkedIn. Deve coincidir com a configurada no seu Console do LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Detalhes do Twitter',
+                        'title-info' => 'Configure suas credenciais do Twitter Auth para habilitar o login via Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'ID do Cliente',
+                            'title-info' => 'O identificador único fornecido pelo Twitter ao criar seu aplicativo de autenticação.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Segredo do Cliente',
+                            'title-info' => 'A chave secreta associada ao seu cliente do Twitter Auth. Mantenha-a confidencial.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL de Redirecionamento',
+                            'title-info' => 'A URL de retorno para onde os usuários são redirecionados após autenticação com o Twitter. Deve coincidir com a configurada no seu Console do Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

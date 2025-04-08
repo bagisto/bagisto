@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"התחברות חברתית" מאפשרת למשתמשים לגשת לאתרים באמצעות חשבונות המדיה החברתית שלהם, מקלה על הרשמה והתחברות למערכות לקוחות לנוחות.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'התחברות חברתית',
+                    'info'  => 'הגדר התחברות דרך רשתות חברתיות',
+
+                    'google-details' => [
+                        'title'      => 'פרטי Google',
+                        'title-info' => 'הגדר את פרטי ההתחברות של Google כדי לאפשר התחברות דרך חשבון גוגל.',
+
+                        'client-id' => [
+                            'title'      => 'מזהה לקוח (Client ID)',
+                            'title-info' => 'מזהה ייחודי שמתקבל מ-Google כאשר יוצרים אפליקציית התחברות.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'סוד לקוח (Client Secret)',
+                            'title-info' => 'מפתח סודי המשויך ללקוח שלך ב-Google. שמור על פרטיותו.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'כתובת הפנייה (Redirect URL)',
+                            'title-info' => 'כתובת ההפנייה שאליה המשתמשים מועברים לאחר התחברות דרך Google. חייבת להתאים למה שהוגדר בקונסולת Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'פרטי Facebook',
+                        'title-info' => 'הגדר את פרטי ההתחברות של Facebook כדי לאפשר התחברות דרך פייסבוק.',
+
+                        'client-id' => [
+                            'title'      => 'מזהה לקוח (Client ID)',
+                            'title-info' => 'מזהה אפליקציה שמתקבל מפייסבוק כשאתה יוצר אפליקציה בקונסולה למפתחים.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'סוד לקוח (Client Secret)',
+                            'title-info' => 'מפתח סודי המשויך לאפליקציה שלך בפייסבוק. שמור עליו באופן פרטי ובטוח.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'כתובת הפנייה (Redirect URL)',
+                            'title-info' => 'כתובת ההפנייה שאליה המשתמשים מועברים לאחר התחברות דרך פייסבוק. חייבת להתאים למה שהוגדר באפליקציה שלך בפייסבוק.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'פרטי GitHub',
+                        'title-info' => 'הגדר את פרטי ההתחברות של GitHub כדי לאפשר התחברות דרך גיטהאב.',
+
+                        'client-id' => [
+                            'title'      => 'מזהה לקוח (Client ID)',
+                            'title-info' => 'מזהה ייחודי שמתקבל מ-GitHub כאשר יוצרים אפליקציית התחברות.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'סוד לקוח (Client Secret)',
+                            'title-info' => 'מפתח סודי המשויך ללקוח שלך ב-GitHub. שמור עליו חסוי.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'כתובת הפנייה (Redirect URL)',
+                            'title-info' => 'כתובת ההפנייה שאליה המשתמשים מועברים לאחר התחברות דרך GitHub. חייבת להתאים למה שהוגדר בקונסולת GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'פרטי LinkedIn',
+                        'title-info' => 'הגדר את פרטי ההתחברות של LinkedIn כדי לאפשר התחברות דרך לינקדאין.',
+
+                        'client-id' => [
+                            'title'      => 'מזהה לקוח (Client ID)',
+                            'title-info' => 'מזהה ייחודי שמתקבל מ-LinkedIn כאשר יוצרים אפליקציית התחברות.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'סוד לקוח (Client Secret)',
+                            'title-info' => 'מפתח סודי המשויך ללקוח שלך ב-LinkedIn. שמור עליו חסוי.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'כתובת הפנייה (Redirect URL)',
+                            'title-info' => 'כתובת ההפנייה שאליה המשתמשים מועברים לאחר התחברות דרך LinkedIn. חייבת להתאים למה שהוגדר בקונסולת LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'פרטי Twitter',
+                        'title-info' => 'הגדר את פרטי ההתחברות של Twitter כדי לאפשר התחברות דרך טוויטר.',
+
+                        'client-id' => [
+                            'title'      => 'מזהה לקוח (Client ID)',
+                            'title-info' => 'מזהה ייחודי שמתקבל מ-Twitter כאשר יוצרים אפליקציית התחברות.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'סוד לקוח (Client Secret)',
+                            'title-info' => 'מפתח סודי המשויך ללקוח שלך ב-Twitter. שמור עליו חסוי.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'כתובת הפנייה (Redirect URL)',
+                            'title-info' => 'כתובת ההפנייה שאליה המשתמשים מועברים לאחר התחברות דרך Twitter. חייבת להתאים למה שהוגדר בקונסולת Twitter.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

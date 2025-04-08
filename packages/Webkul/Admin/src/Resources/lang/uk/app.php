@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Соціальний вхід" дозволяє користувачам отримувати доступ до веб-сайтів за допомогою своїх облікових записів у соціальних мережах, спрощуючи реєстрацію та вхід для зручності.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Соціальний вхід',
+                    'info'  => 'Налаштування соціального входу',
+
+                    'google-details' => [
+                        'title'      => 'Деталі Google',
+                        'title-info' => 'Налаштуйте облікові дані Google Auth для активації входу через Google.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Унікальний ідентифікатор, наданий Google під час створення вашого додатка для аутентифікації.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'Секретний ключ, пов’язаний із вашим клієнтом Google Auth. Тримайте його в таємниці.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL перенаправлення',
+                            'title-info' => 'URL-адреса зворотного виклику, куди перенаправляються користувачі після входу через Google. Повинна відповідати тій, що вказана в консолі Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Деталі Facebook',
+                        'title-info' => 'Налаштуйте облікові дані Facebook Auth для активації входу через Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'App ID, наданий Facebook під час створення додатка в Facebook Developer Console.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'Секретний ключ вашого додатка Facebook. Зберігайте його в безпеці.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL перенаправлення',
+                            'title-info' => 'URL-адреса зворотного виклику після аутентифікації через Facebook. Має відповідати налаштуванням у Facebook.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Деталі GitHub',
+                        'title-info' => 'Налаштуйте облікові дані GitHub Auth для активації входу через GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Унікальний ідентифікатор, наданий GitHub під час створення вашого додатка.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'Секретний ключ для клієнта GitHub. Тримайте його в таємниці.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL перенаправлення',
+                            'title-info' => 'URL-адреса зворотного виклику після входу через GitHub. Має відповідати налаштуванням у GitHub Console.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Деталі LinkedIn',
+                        'title-info' => 'Налаштуйте облікові дані LinkedIn Auth для активації входу через LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Унікальний ідентифікатор, наданий LinkedIn під час створення додатка.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'Секретний ключ клієнта LinkedIn. Тримайте його в безпеці.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL перенаправлення',
+                            'title-info' => 'URL-адреса, куди перенаправляються користувачі після входу через LinkedIn. Повинна збігатися з тією, що вказана в консолі LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Деталі Twitter',
+                        'title-info' => 'Налаштуйте облікові дані Twitter Auth для активації входу через Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'Унікальний ідентифікатор, наданий Twitter під час створення додатка.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'Секретний ключ вашого клієнта Twitter. Зберігайте його конфіденційно.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL перенаправлення',
+                            'title-info' => 'URL-адреса зворотного виклику після входу через Twitter. Має відповідати налаштуванням у Twitter Console.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

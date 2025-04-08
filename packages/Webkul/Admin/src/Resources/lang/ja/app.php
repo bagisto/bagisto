@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '「ソーシャルログイン」は、ユーザーがソーシャルメディアアカウントを使用してウェブサイトにアクセスできるようにすることで、登録とログインのプロセスを簡素化します。',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'ソーシャルログイン',
+                    'info'  => 'ソーシャルログインの設定',
+
+                    'google-details' => [
+                        'title'      => 'Google の詳細',
+                        'title-info' => 'Google 認証のクレデンシャルを設定して、Google を通じたソーシャルログインを有効にします。',
+
+                        'client-id' => [
+                            'title'      => 'クライアント ID',
+                            'title-info' => 'Google 認証アプリケーションを作成するときに Google から提供される一意の識別子です。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'クライアントシークレット',
+                            'title-info' => 'Google 認証クライアントに関連付けられた秘密鍵です。秘密にしておいてください。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'リダイレクト URL',
+                            'title-info' => 'Google で認証後、ユーザーがリダイレクトされるコールバック URL。Google コンソールに設定されたものと一致している必要があります。',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook の詳細',
+                        'title-info' => 'Facebook 認証のクレデンシャルを設定して、Facebook ログインを有効にします。',
+
+                        'client-id' => [
+                            'title'      => 'クライアント ID',
+                            'title-info' => 'Facebook 開発者コンソールでアプリを作成するときに提供される App ID。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'クライアントシークレット',
+                            'title-info' => 'あなたの Facebook アプリに関連付けられたシークレットキー。安全かつ秘密に保管してください。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'リダイレクト URL',
+                            'title-info' => 'Facebook で認証後、ユーザーがリダイレクトされる URL。Facebook アプリの設定と一致している必要があります。',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub の詳細',
+                        'title-info' => 'GitHub 認証のクレデンシャルを設定して、GitHub ログインを有効にします。',
+
+                        'client-id' => [
+                            'title'      => 'クライアント ID',
+                            'title-info' => 'GitHub 認証アプリケーションを作成するときに提供される一意の識別子。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'クライアントシークレット',
+                            'title-info' => 'あなたの GitHub クライアントに関連するシークレットキー。秘密にしておいてください。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'リダイレクト URL',
+                            'title-info' => 'GitHub で認証後、ユーザーがリダイレクトされる URL。GitHub コンソールに設定されたものと一致している必要があります。',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn の詳細',
+                        'title-info' => 'LinkedIn 認証のクレデンシャルを設定して、LinkedIn ログインを有効にします。',
+
+                        'client-id' => [
+                            'title'      => 'クライアント ID',
+                            'title-info' => 'LinkedIn 認証アプリケーションを作成するときに提供される一意の識別子。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'クライアントシークレット',
+                            'title-info' => 'あなたの LinkedIn クライアントに関連付けられたシークレットキー。秘密にしておいてください。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'リダイレクト URL',
+                            'title-info' => 'LinkedIn で認証後、ユーザーがリダイレクトされる URL。LinkedIn コンソールに設定されたものと一致している必要があります。',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter の詳細',
+                        'title-info' => 'Twitter 認証のクレデンシャルを設定して、Twitter ログインを有効にします。',
+
+                        'client-id' => [
+                            'title'      => 'クライアント ID',
+                            'title-info' => 'Twitter 認証アプリケーションを作成するときに提供される一意の識別子。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'クライアントシークレット',
+                            'title-info' => 'あなたの Twitter クライアントに関連するシークレットキー。秘密にしておいてください。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'リダイレクト URL',
+                            'title-info' => 'Twitter で認証後、ユーザーがリダイレクトされる URL。Twitter コンソールに設定されたものと一致している必要があります。',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [
