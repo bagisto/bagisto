@@ -84,19 +84,6 @@ async function createSimpleProduct(page) {
     await page.locator("#weight").fill(product.weight);
 
     /**
-     * Settings Section.
-     */
-    await page
-        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
-        .first()
-        .click();
-    await page.locator(".relative > label").first().click();
-    await page.locator("div:nth-child(3) > .relative > label").click();
-    await page.locator("div:nth-child(4) > .relative > label").click();
-    await page.locator("div:nth-child(5) > .relative > label").click();
-    await page.locator("div:nth-child(6) > .relative > label").click();
-
-    /**
      * Inventories Section.
      */
     await page.locator('input[name="inventories\\[1\\]"]').click();
