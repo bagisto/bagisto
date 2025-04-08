@@ -211,9 +211,9 @@ class ProductController extends Controller
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
-        session()->flash('success', trans('admin::app.catalog.products.product-copied'));
-
-        return redirect()->route('admin.catalog.products.edit', $product->id);
+        return response()->json([
+            'message' => trans('admin::app.catalog.products.product-copied'),
+        ]);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Contracts\ProductFlat;
-use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -24,14 +23,14 @@ it('should copy the existing product', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    get(route('admin.catalog.products.copy', $product->id))
-        ->assertRedirect(route('admin.catalog.products.edit', $productId = $product->id + 1))
-        ->isRedirection();
+    postJson(route('admin.catalog.products.copy', $product->id), [
+        'message' => trans('admin::app.catalog.products.product-copied'),
+    ]);
 
     $this->assertModelWise([
-        Product::class => [
+        ProductFlat::class => [
             [
-                'id' => $productId,
+                'id' => $product->id + 1,
             ],
         ],
     ]);
