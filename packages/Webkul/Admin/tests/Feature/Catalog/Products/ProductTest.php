@@ -2,7 +2,6 @@
 
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Contracts\ProductFlat;
-use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
