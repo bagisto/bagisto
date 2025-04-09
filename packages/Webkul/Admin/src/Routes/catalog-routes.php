@@ -92,7 +92,7 @@ Route::prefix('catalog')->group(function () {
 
         Route::post('create', 'store')->name('admin.catalog.products.store');
 
-        Route::get('copy/{id}', 'copy')->name('admin.catalog.products.copy');
+        Route::post('copy/{id}', 'copy')->name('admin.catalog.products.copy');
 
         Route::get('edit/{id}', 'edit')->name('admin.catalog.products.edit');
 
