@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '“社交登录”通过让用户使用社交媒体账户访问网站，从而简化了注册和登录流程。',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => '社交登录',
+                    'info'  => '设置社交登录',
+
+                    'google-details' => [
+                        'title'      => 'Google 详细信息',
+                        'title-info' => '配置您的 Google 身份验证凭据以启用通过 Google 的社交登录。',
+
+                        'client-id' => [
+                            'title'      => '客户端 ID',
+                            'title-info' => '创建 Google 身份验证应用时 Google 提供的唯一标识符。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => '客户端密钥',
+                            'title-info' => '与您的 Google 身份验证客户端相关的密钥。请务必保密。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => '回调地址',
+                            'title-info' => '用户通过 Google 登录后将被重定向的回调 URL。必须与 Google 控制台中设置的地址一致。',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook 详细信息',
+                        'title-info' => '配置您的 Facebook 身份验证凭据以启用通过 Facebook 的登录。',
+
+                        'client-id' => [
+                            'title'      => '客户端 ID',
+                            'title-info' => '在 Facebook 开发者控制台创建应用时提供的 App ID。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => '客户端密钥',
+                            'title-info' => '与您的 Facebook 应用关联的 App Secret。请妥善保管并保密。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => '回调地址',
+                            'title-info' => '用户通过 Facebook 登录后将被重定向的回调 URL。必须与 Facebook 应用设置中配置的一致。',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub 详细信息',
+                        'title-info' => '配置您的 GitHub 身份验证凭据以启用通过 GitHub 的登录。',
+
+                        'client-id' => [
+                            'title'      => '客户端 ID',
+                            'title-info' => '创建 GitHub 身份验证应用时 GitHub 提供的唯一标识符。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => '客户端密钥',
+                            'title-info' => '与您的 GitHub 身份验证客户端相关的密钥。请务必保密。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => '回调地址',
+                            'title-info' => '用户通过 GitHub 登录后将被重定向的回调 URL。必须与 GitHub 控制台中设置的地址一致。',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn 详细信息',
+                        'title-info' => '配置您的 LinkedIn 身份验证凭据以启用通过 LinkedIn 的登录。',
+
+                        'client-id' => [
+                            'title'      => '客户端 ID',
+                            'title-info' => '创建 LinkedIn 应用时提供的唯一标识符。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => '客户端密钥',
+                            'title-info' => '与您的 LinkedIn 身份验证客户端相关的密钥。请妥善保管。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => '回调地址',
+                            'title-info' => '用户通过 LinkedIn 登录后将被重定向的回调 URL。必须与 LinkedIn 控制台中配置的一致。',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter 详细信息',
+                        'title-info' => '配置您的 Twitter 身份验证凭据以启用通过 Twitter 的登录。',
+
+                        'client-id' => [
+                            'title'      => '客户端 ID',
+                            'title-info' => '创建 Twitter 应用时提供的唯一标识符。',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => '客户端密钥',
+                            'title-info' => '与您的 Twitter 身份验证客户端相关的密钥。请务必保密。',
+                        ],
+
+                        'redirect' => [
+                            'title'      => '回调地址',
+                            'title-info' => '用户通过 Twitter 登录后将被重定向的回调 URL。必须与 Twitter 控制台中配置的一致。',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Social Login" ermöglicht es Benutzern, Websites mit ihren Social-Media-Konten zu nutzen und vereinfacht so die Registrierungs- und Anmeldeprozesse für mehr Komfort.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Soziale Anmeldung',
+                    'info'  => 'Soziale Anmeldung einrichten',
+
+                    'google-details' => [
+                        'title'      => 'Google-Details',
+                        'title-info' => 'Konfigurieren Sie Ihre Google-Authentifizierungsdaten, um die Anmeldung über Google zu ermöglichen.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'Die eindeutige Kennung, die von Google bereitgestellt wird, wenn Sie Ihre Authentifizierungsanwendung erstellen.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client-Secret',
+                            'title-info' => 'Der geheime Schlüssel, der mit Ihrem Google-Client verbunden ist. Bitte vertraulich behandeln.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Weiterleitungs-URL',
+                            'title-info' => 'Die Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Google weitergeleitet werden. Muss mit der in der Google-Konsole festgelegten URL übereinstimmen.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook-Details',
+                        'title-info' => 'Konfigurieren Sie Ihre Facebook-Authentifizierungsdaten, um die Anmeldung über Facebook zu ermöglichen.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'Die App-ID, die von Facebook bereitgestellt wird, wenn Sie eine App in der Facebook Developer Console erstellen.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client-Secret',
+                            'title-info' => 'Der App-Schlüssel, der mit Ihrer Facebook-App verbunden ist. Bitte sicher und privat aufbewahren.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Weiterleitungs-URL',
+                            'title-info' => 'Die Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Facebook weitergeleitet werden. Muss mit den Einstellungen in Ihrer Facebook-App übereinstimmen.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'GitHub-Details',
+                        'title-info' => 'Konfigurieren Sie Ihre GitHub-Authentifizierungsdaten, um die Anmeldung über GitHub zu ermöglichen.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'Die eindeutige Kennung, die von GitHub bereitgestellt wird, wenn Sie Ihre Authentifizierungsanwendung erstellen.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client-Secret',
+                            'title-info' => 'Der geheime Schlüssel, der mit Ihrem GitHub-Client verbunden ist. Bitte vertraulich behandeln.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Weiterleitungs-URL',
+                            'title-info' => 'Die Rückruf-URL, zu der Benutzer nach der Authentifizierung mit GitHub weitergeleitet werden. Muss mit der in Ihrer GitHub-Konsole festgelegten URL übereinstimmen.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'LinkedIn-Details',
+                        'title-info' => 'Konfigurieren Sie Ihre LinkedIn-Authentifizierungsdaten, um die Anmeldung über LinkedIn zu ermöglichen.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'Die eindeutige Kennung, die von LinkedIn bereitgestellt wird, wenn Sie Ihre Authentifizierungsanwendung erstellen.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client-Secret',
+                            'title-info' => 'Der geheime Schlüssel, der mit Ihrem LinkedIn-Client verbunden ist. Bitte vertraulich behandeln.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Weiterleitungs-URL',
+                            'title-info' => 'Die Rückruf-URL, zu der Benutzer nach der Authentifizierung mit LinkedIn weitergeleitet werden. Muss mit der in Ihrer LinkedIn-Konsole festgelegten URL übereinstimmen.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter-Details',
+                        'title-info' => 'Konfigurieren Sie Ihre Twitter-Authentifizierungsdaten, um die Anmeldung über Twitter zu ermöglichen.',
+
+                        'client-id' => [
+                            'title'      => 'Client-ID',
+                            'title-info' => 'Die eindeutige Kennung, die von Twitter bereitgestellt wird, wenn Sie Ihre Authentifizierungsanwendung erstellen.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client-Secret',
+                            'title-info' => 'Der geheime Schlüssel, der mit Ihrem Twitter-Client verbunden ist. Bitte vertraulich behandeln.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Weiterleitungs-URL',
+                            'title-info' => 'Die Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Twitter weitergeleitet werden. Muss mit der in Ihrer Twitter-Konsole festgelegten URL übereinstimmen.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

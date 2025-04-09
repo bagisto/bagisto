@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Social Login',
+                    'info'  => 'Setup Social Login',
+
+                    'google-details' => [
+                        'title'          => 'Google Details',
+                        'title-info'     => 'Configure your Google Auth credentials to enable social login through Google.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'The unique identifier provided by Google when you create your Auth application.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'The secret key associated with your Google Auth client. Keep this confidential.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect',
+                            'title-info' => 'The callback URL where users are redirected after authenticating with Google. Must match the one set in your Google Console.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Facebook Details',
+                        'title-info' => 'Configure your Facebook Auth credentials to enable login via Facebook.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'The App ID provided by Facebook when you create an app in Facebook Developer Console.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'The App Secret associated with your Facebook app. Keep this secure and private.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'The callback URL users are redirected to after authenticating with Facebook. Must match what’s configured in your Facebook app settings.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Github Details',
+                        'title-info' => 'Configure your Github Auth credentials to enable login via Github.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'The unique identifier provided by Github when you create your Auth application.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'The secret key associated with your Github Auth client. Keep this confidential.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'The callback URL where users are redirected after authenticating with Github. Must match the one set in your Github Console.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Linkedin Details',
+                        'title-info' => 'Configure your Linkedin Auth credentials to enable login via Linkedin.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'The unique identifier provided by Linkedin when you create your Auth application.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'The secret key associated with your Linkedin Auth client. Keep this confidential.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'The callback URL where users are redirected after authenticating with Linkedin. Must match the one set in your Linkedin Console.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Twitter Details',
+                        'title-info' => 'Configure your Twitter Auth credentials to enable login via Twitter.',
+
+                        'client-id' => [
+                            'title'      => 'Client ID',
+                            'title-info' => 'The unique identifier provided by Twitter when you create your Auth application.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Client Secret',
+                            'title-info' => 'The secret key associated with your Twitter Auth client. Keep this confidential.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'Redirect URL',
+                            'title-info' => 'The callback URL where users are redirected after authenticating with Twitter. Must match the one set in your Twitter Console.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [

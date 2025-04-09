@@ -4172,6 +4172,111 @@ return [
                         'social-login-info' => '"Logowanie społecznościowe" umożliwia użytkownikom dostęp do witryn za pomocą swoich kont w mediach społecznościowych, upraszczając proces rejestracji i logowania dla wygody.',
                     ],
                 ],
+
+                'social-login' => [
+                    'title' => 'Logowanie społecznościowe',
+                    'info'  => 'Skonfiguruj logowanie społecznościowe',
+
+                    'google-details' => [
+                        'title'      => 'Szczegóły Google',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające Google, aby umożliwić logowanie przez Google.',
+
+                        'client-id' => [
+                            'title'      => 'ID klienta',
+                            'title-info' => 'Unikalny identyfikator nadany przez Google podczas tworzenia aplikacji uwierzytelniającej.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Tajny klucz klienta',
+                            'title-info' => 'Tajny klucz przypisany do klienta Google Auth. Zachowaj poufność tych danych.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL przekierowania',
+                            'title-info' => 'Adres URL, na który użytkownicy są przekierowywani po uwierzytelnieniu przez Google. Musi zgadzać się z konfiguracją w konsoli Google.',
+                        ],
+                    ],
+
+                    'facebook-details' => [
+                        'title'      => 'Szczegóły Facebooka',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające Facebooka, aby umożliwić logowanie przez Facebooka.',
+
+                        'client-id' => [
+                            'title'      => 'ID klienta',
+                            'title-info' => 'ID aplikacji przyznane przez Facebooka podczas tworzenia aplikacji w konsoli deweloperskiej.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Tajny klucz klienta',
+                            'title-info' => 'Tajny klucz przypisany do Twojej aplikacji Facebook. Zachowaj poufność.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL przekierowania',
+                            'title-info' => 'Adres URL, na który użytkownicy są przekierowywani po uwierzytelnieniu przez Facebooka. Musi zgadzać się z konfiguracją w ustawieniach aplikacji.',
+                        ],
+                    ],
+
+                    'github-details' => [
+                        'title'      => 'Szczegóły GitHub',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające GitHub, aby umożliwić logowanie przez GitHub.',
+
+                        'client-id' => [
+                            'title'      => 'ID klienta',
+                            'title-info' => 'Unikalny identyfikator przyznany przez GitHub podczas tworzenia aplikacji uwierzytelniającej.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Tajny klucz klienta',
+                            'title-info' => 'Tajny klucz przypisany do klienta GitHub Auth. Zachowaj poufność tych danych.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL przekierowania',
+                            'title-info' => 'Adres URL, na który użytkownicy są przekierowywani po uwierzytelnieniu przez GitHub. Musi zgadzać się z konfiguracją w konsoli GitHub.',
+                        ],
+                    ],
+
+                    'linkedin-openid-details' => [
+                        'title'      => 'Szczegóły LinkedIn',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające LinkedIn, aby umożliwić logowanie przez LinkedIn.',
+
+                        'client-id' => [
+                            'title'      => 'ID klienta',
+                            'title-info' => 'Unikalny identyfikator przyznany przez LinkedIn podczas tworzenia aplikacji uwierzytelniającej.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Tajny klucz klienta',
+                            'title-info' => 'Tajny klucz przypisany do klienta LinkedIn Auth. Zachowaj poufność tych danych.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL przekierowania',
+                            'title-info' => 'Adres URL, na który użytkownicy są przekierowywani po uwierzytelnieniu przez LinkedIn. Musi zgadzać się z konfiguracją w konsoli LinkedIn.',
+                        ],
+                    ],
+
+                    'twitter-details' => [
+                        'title'      => 'Szczegóły Twittera',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające Twittera, aby umożliwić logowanie przez Twittera.',
+
+                        'client-id' => [
+                            'title'      => 'ID klienta',
+                            'title-info' => 'Unikalny identyfikator przyznany przez Twittera podczas tworzenia aplikacji uwierzytelniającej.',
+                        ],
+
+                        'client-secret' => [
+                            'title'      => 'Tajny klucz klienta',
+                            'title-info' => 'Tajny klucz przypisany do klienta Twitter Auth. Zachowaj poufność tych danych.',
+                        ],
+
+                        'redirect' => [
+                            'title'      => 'URL przekierowania',
+                            'title-info' => 'Adres URL, na który użytkownicy są przekierowywani po uwierzytelnieniu przez Twittera. Musi zgadzać się z konfiguracją w konsoli Twittera.',
+                        ],
+                    ],
+                ],
             ],
 
             'email' => [
