@@ -85,7 +85,7 @@ Breadcrumbs::for('checkout', function (BreadcrumbTrail $trail) {
     $trail->push(trans('shop::app.checkout.onepage.index.checkout'), route('shop.checkout.onepage.index'));
 });
 
-// Home > Comapre
+// Home > Compare
 Breadcrumbs::for('compare', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push(trans('shop::app.compare.product-compare'), route('shop.compare.index'));
