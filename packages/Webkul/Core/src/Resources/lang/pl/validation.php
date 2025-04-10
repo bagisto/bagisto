@@ -8,4 +8,5 @@ return [
     'phone-number'            => 'Pole :attribute musi być ważnym numerem telefonu.',
     'slug'                    => 'Pole :attribute musi być ważnym slugiem.',
     'comma-separated-integer' => 'Pole :attribute musi być numeryczne i może zawierać przecinki.',
+    'postcode'                => 'Pole :attribute musi być prawidłowym kodem pocztowym.',
 ];
