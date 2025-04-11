@@ -165,15 +165,12 @@ class CMSPagesTableSeeder extends Seeder
         }
 
         $cmsPageIds = DB::table('cms_pages')->pluck('id');
-        
+
         foreach ($cmsPageIds as $pageId) {
             DB::table('cms_page_channels')->insert([
                 'cms_page_id' => $pageId,
                 'channel_id'  => 1,
             ]);
         }
-        
-
-
     }
 }
