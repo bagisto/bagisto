@@ -648,7 +648,7 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.getByText("Add Link").first().click();
     await adminPage.waitForSelector(".min-h-0 > div > div");
-    await adminPage.locator('input[name="title"]').fill("Link 1");
+    await adminPage.locator('input[name="title"]').first().fill(generateName());
     const linkTitle = await adminPage
         .locator('input[name="title"]')
         .inputValue();
