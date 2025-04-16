@@ -959,11 +959,7 @@ test.describe("configurable product management", () => {
         /**
          * Opening the configurable product though edit button.
          */
-        await adminPage
-            .locator(
-                "div:nth-child(7) > div:nth-child(3) > div:nth-child(2) > a:nth-child(2)"
-            )
-            .click();
+        await adminPage.locator('div:nth-child(7) > div:nth-child(3) > p > span:nth-child(2)').click();
 
         /**
          * Waiting for the main form to be visible.
