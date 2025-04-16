@@ -266,4 +266,6 @@ export async function downloadableOrder(page) {
     await page.locator('#can_create_transaction').nth(1).click();
     await page.getByRole('button', { name: 'Create Invoice' }).click();
     await expect(page.getByText('Invoice created successfully Close')).toBeVisible();
+
+    return product.name;
 }

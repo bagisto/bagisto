@@ -146,10 +146,7 @@ test("Cancel Order", async ({ page }) => {
     await page.locator("div").locator("span.icon-eye").first().click();
     await page.getByRole("link", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
-
-    await expect(
-        page.getByText("Your order has been canceled").first()
-    ).toBeVisible();
+    await expect(page.getByRole('paragraph').filter({ hasText: 'Your order has been canceled' })).toBeVisible();
 });
 
 test("Print Invoice", async ({ page }) => {
@@ -217,17 +214,20 @@ test("Downloadable Orders", async ({ shopPage }) => {
      * Create downloadable product.
      */
 
-    await downloadableOrder(shopPage);
+    const productName = await downloadableOrder(shopPage);
 
+    /**
+     * go to shop for download a product.
+     */   
     await shopPage.goto("");
     await shopPage.getByLabel("Profile").click();
     await shopPage.getByRole("link", { name: "Profile", exact: true }).click();
     await shopPage.getByRole("link", { name: " Downloadable Products " }).click();
-    const page2Promise = shopPage.waitForEvent("popup");
-    const download1Promise = shopPage.waitForEvent("download");
-    await shopPage.getByRole("link", { name: "file", exact: true }).click();
-    const page2 = await page2Promise;
-    const download1 = await download1Promise;
+    const page1Promise = shopPage.waitForEvent('popup');
+    const downloadPromise = shopPage.waitForEvent('download');
+    await shopPage.getByRole('link', { name: productName }).click();
+    const page1 = await page1Promise;
+    const download = await downloadPromise;
 });
 
 // need wishlist helper first...
@@ -248,9 +248,7 @@ test("should add wishlist to cart", async ({ page }) => {
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.getByRole("button", { name: "Move To Cart" }).first().click();
 
-    await expect(
-        page.getByText("Item Successfully Moved to Cart").first()
-    ).toBeVisible();
+    await expect(page.getByRole('paragraph').filter({ hasText: 'Item Successfully Moved to Cart' })).toBeVisible();
 });
 
 test("should remove product from wishlist", async ({ page }) => {
