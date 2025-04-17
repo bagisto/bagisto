@@ -3,10 +3,7 @@
 <!-- Desktop Filters Navigation -->
 <div v-if="! isMobile">
     <!-- Filters Vue Component -->
-    <v-filters
-        @filter-applied="setFilters('filter', $event)"
-        @filter-clear="clearFilters('filter', $event)"
-    >
+    <v-filters @filter-applied="setFilters('filter', $event)">
         <!-- Category Filter Shimmer Effect -->
         <x-shop::shimmer.categories.filters />
     </v-filters>
@@ -44,7 +41,7 @@
 
                 <p
                     class="cursor-pointer text-sm font-medium ltr:mr-[50px] rtl:ml-[50px]"
-                    @click="clearFilters('filter', '')"
+                    @click="clearFilters()"
                 >
                     @lang('shop::app.categories.filters.clear-all')
                 </p>
@@ -54,10 +51,7 @@
         <!-- Drawer Content -->
         <x-slot:content>
             <!-- Filters Vue Component -->
-            <v-filters
-                @filter-applied="setFilters('filter', $event)"
-                @filter-clear="clearFilters('filter', $event)"
-            >
+            <v-filters @filter-applied="setFilters('filter', $event)">
                 <!-- Category Filter Shimmer Effect -->
                 <x-shop::shimmer.categories.filters />
             </v-filters>
@@ -262,6 +256,8 @@
                 this.getFilters();
 
                 this.setFilters();
+
+                this.clearFilterEvent();
             },
 
             methods: {
@@ -324,6 +320,10 @@
                     });
 
                     this.$emit('filter-applied', this.filters.applied);
+                },
+
+                clearFilterEvent() {
+                    this.$emitter.on('clear-filters', this.clear);
                 },
             },
         });
