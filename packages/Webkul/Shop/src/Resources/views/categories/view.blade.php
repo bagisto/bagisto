@@ -250,8 +250,8 @@
                         this.filters[type] = filters;
                     },
 
-                    clearFilters(type, filters) {
-                        this.filters[type] = {};
+                    clearFilters() {                        
+                        this.$emitter.emit('clear-filters');
                     },
 
                     getProducts() {
