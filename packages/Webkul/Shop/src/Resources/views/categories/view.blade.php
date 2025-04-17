@@ -250,7 +250,9 @@
                         this.filters[type] = filters;
                     },
 
-                    clearFilters() {                        
+                    clearFilters() {
+                        this.filters[type] = {};
+                                                
                         this.$emitter.emit('clear-filters');
                     },
 
