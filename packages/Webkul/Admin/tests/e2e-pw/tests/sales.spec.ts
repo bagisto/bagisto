@@ -330,8 +330,7 @@ test.describe("sales management", () => {
     test("cancel order", async ({ adminPage }) => {
 
         await generateOrder(adminPage); 
-        await adminPage.goto("admin/sales/orders");
-        await adminPage.waitForTimeout(6000); 
+        await adminPage.waitForTimeout(3000); 
         await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage.locator('.icon-cancel').click();
         await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
