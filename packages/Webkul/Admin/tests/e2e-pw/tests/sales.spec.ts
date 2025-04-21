@@ -528,20 +528,6 @@ test.describe("sales management", () => {
     test("cancel order", async ({ adminPage }) => {
 
         await generateOrder(adminPage); 
-        await adminPage.waitForLoadState('networkidle');
-        await adminPage.goto("admin/sales/orders");
-        await adminPage.reload({ waitUntil: 'networkidle' });
-        await adminPage.reload();
-
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        await iconRight[0].click();
         await adminPage
             .waitForSelector(".icon-cancel.text-2xl + a:visible", {
                 timeout: 1000,
