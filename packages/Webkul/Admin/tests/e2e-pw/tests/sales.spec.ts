@@ -324,21 +324,25 @@ test.describe("sales management", () => {
 
     test("reorder", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
+        await adminPage.waitForTimeout(3000); 
+        // const iconRight = await adminPage.$$(
+        //     "a > span.icon-sort-right.cursor-pointer.text-2xl"
+        // );
 
-        await iconRight[0].click();
-        await adminPage
-            .waitForSelector(
-                "a.transparent-button.px-1 > .icon-cart.text-2xl:visible",
-                { timeout: 1000 }
-            )
-            .catch(() => null);
+        // await iconRight[0].click();
+        // await adminPage
+        //     .waitForSelector(
+        //         "a.transparent-button.px-1 > .icon-cart.text-2xl:visible",
+        //         { timeout: 1000 }
+        //     )
+        //     .catch(() => null);
 
-        await adminPage.click(
-            "a.transparent-button.px-1 > .icon-cart.text-2xl:visible"
-        );
+        // await adminPage.click(
+        //     "a.transparent-button.px-1 > .icon-cart.text-2xl:visible"
+        // );
+
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
+        await adminPage.getByRole('link', { name: ' Reorder' }).click();
 
         await expect(adminPage.getByText("Cart Items")).toBeVisible();
         await adminPage.locator('label.icon-radio-normal').first().click(); 
@@ -528,16 +532,9 @@ test.describe("sales management", () => {
     test("cancel order", async ({ adminPage }) => {
 
         await generateOrder(adminPage); 
-        await adminPage
-            .waitForSelector(".icon-cancel.text-2xl + a:visible", {
-                timeout: 1000,
-            })
-            .catch(() => null);
-
-        await adminPage.click(".icon-cancel.text-2xl + a:visible");
-        await adminPage.click(
-            "button.transparent-button + button.primary-button:visible"
-        );
+        // await adminPage.locator('.flex > div:nth-child(5)').first().click();
+        await adminPage.locator('.icon-cancel').click();
+        await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
         await expect(adminPage.locator('#app')).toContainText('Order cancelled successfully');
     });
 });
