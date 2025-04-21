@@ -353,9 +353,7 @@ test.describe("sales management", () => {
             .filter({ hasText: "Cash On Delivery" })
             .click();
         await adminPage.getByRole("button", { name: "Place Order" }).click();
-        await expect(
-            adminPage.locator("span").filter({ hasText: "Pending" })
-        ).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Pending');
     });
 
     test("create invoice", async ({ adminPage }) => {
@@ -533,6 +531,9 @@ test.describe("sales management", () => {
 
         await generateOrder(adminPage); 
         // await adminPage.locator('.flex > div:nth-child(5)').first().click();
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.waitForTimeout(3000); 
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage.locator('.icon-cancel').click();
         await adminPage.getByRole('button', { name: 'Agree', exact: true }).click();
         await expect(adminPage.locator('#app')).toContainText('Order cancelled successfully');
