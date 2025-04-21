@@ -119,7 +119,7 @@ export async function generateOrder(adminPage) {
         await adminPage.fill('input[name="shipping.address.[0]"]', generateFirstName());
         await adminPage.selectOption('select[name="shipping.country"]', "IN");
         await adminPage.selectOption('select[name="shipping.state"]', "UP");
-        await adminPage.fill('input[name="shipping.city"]', generateLastName);
+        await adminPage.fill('input[name="shipping.city"]', generateLastName());
         await adminPage.fill('input[name="shipping.postcode"]', "201301");
         await adminPage.fill('input[name="shipping.phone"]', generatePhoneNumber());
         await adminPage.press('input[name="shipping.phone"]', "Enter");
