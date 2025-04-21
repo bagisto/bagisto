@@ -2,295 +2,158 @@ import { test, expect } from "../setup";
 import * as forms from "../utils/form";
 import address from "../utils/address";
 
-export async function generateOrder(adminPage){
+export async function generateOrder(adminPage) {
     await adminPage.goto("admin/sales/orders");
-
-        await adminPage.click("button.primary-button:visible");
-
-        await adminPage.click(
-            "div.flex.flex-col.items-center > button.secondary-button:visible"
-        );
-
-        await adminPage.fill(
-            'input[name="first_name"]:visible',
-            forms.form.firstName
-        );
-        await adminPage.fill(
-            'input[name="last_name"]:visible',
-            forms.form.lastName
-        );
-        const email = forms.form.email;
-        await adminPage.fill('input[name="email"]:visible', email);
-        await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
-        await adminPage.selectOption('select[name="gender"]:visible', "Other");
-
-        await adminPage.press('input[name="phone"]:visible', "Enter");
-
-        const itemExists = await adminPage
-            .waitForSelector(
-                ".grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all",
-                { timeout: 5000 }
-            )
-            .catch(() => null);
-
-        if (itemExists) {
-            var items = await adminPage.$$(
-                ".grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all"
-            );
-            await items[
-                Math.floor(Math.random() * (items.length - 1 - 0 + 1)) + 0
-            ].click();
-
-            await adminPage.click("button.primary-button:visible");
-        } else {
-            await adminPage.click(
-                "p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button"
-            );
-            await adminPage
-            .getByRole("textbox", { name: "Search by name" })
-            .fill("arct");
-
-            const exists = await adminPage
-                .waitForSelector(
-                    "button.cursor-pointer.text-sm.text-blue-600.transition-all",
-                    { timeout: 5000 }
-                )
-                .catch(() => null);
-
-            if (exists) {
-                const cartBtns = await adminPage.$$(
-                    ".grid.place-content-start.gap-2.text-right > button.cursor-pointer.text-sm.text-blue-600.transition-all"
-                );
-                const inputQty = await adminPage.$$(
-                    'input[name="qty"]:visible'
-                );
-
-                let count = 0;
-                for (let cartBtn of cartBtns) {
-                    let i = Math.floor(Math.random() * 10) + 1;
-
-                    if (i % 2 == 1 || cartBtns.length < 2) {
-                        await inputQty[count].scrollIntoViewIfNeeded();
-                        const qty =
-                            Math.floor(Math.random() * (10 - 2 + 1)) + 2;
-
-                        await inputQty[count].fill(qty.toString());
-                        await cartBtn.click();
-
-                        break;
-                    }
-                    count++;
-                }
-            }
+    await adminPage.click("button.primary-button:visible");
+    await adminPage.click("div.flex.flex-col.items-center > button.secondary-button:visible");
+  
+    /**
+     * Fill customer details
+     */
+    const { firstName, lastName, email, phone } = forms.form;
+    await adminPage.fill('input[name="first_name"]:visible', firstName);
+    await adminPage.fill('input[name="last_name"]:visible', lastName);
+    await adminPage.fill('input[name="email"]:visible', email);
+    await adminPage.fill('input[name="phone"]:visible', phone);
+    await adminPage.selectOption('select[name="gender"]:visible', "Other");
+    await adminPage.press('input[name="phone"]:visible', "Enter");
+  
+    /**
+     * selecting product
+     */ 
+    const productSelector = ".grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all";
+    const itemExists = await adminPage.waitForSelector(productSelector, { timeout: 5000 }).catch(() => null);
+  
+    if (itemExists) {
+      const items = await adminPage.$$(productSelector);
+      const randomItem = items[Math.floor(Math.random() * items.length)];
+      await randomItem.click();
+      await adminPage.click("button.primary-button:visible");
+    } else {
+      await adminPage.click("p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button");
+      await adminPage.getByRole("textbox", { name: "Search by name" }).fill("arct");
+  
+      const searchResult = await adminPage.waitForSelector(
+        "button.cursor-pointer.text-sm.text-blue-600.transition-all",
+        { timeout: 5000 }
+      ).catch(() => null);
+  
+      if (searchResult) {
+        const cartBtns = await adminPage.$$(".grid.place-content-start.gap-2.text-right > button.text-blue-600");
+        const inputQty = await adminPage.$$('input[name="qty"]:visible');
+  
+        for (let i = 0; i < cartBtns.length; i++) {
+          const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
+          if (shouldClick) {
+            const qty = Math.floor(Math.random() * 9) + 2;
+            await inputQty[i].scrollIntoViewIfNeeded();
+            await inputQty[i].fill(qty.toString());
+            await cartBtns[i].click();
+            break;
+          }
         }
-
-        const iconExists = await adminPage
-            .waitForSelector(
-                ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl",
-                { timeout: 5000 }
-            )
-            .catch(() => null);
-
-        if (iconExists) {
-            const messages = await adminPage.$$(
-                ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl"
-            );
-            const icons = await adminPage.$$(
-                ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-            );
-
-            const message = await messages[0].evaluate(
-                (el) => el.parentNode.innerText
-            );
-            await icons[0].click();
-        } else {
-            const checkboxs = await adminPage.$$(
-                'input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label'
-            );
-
-            for (let checkbox of checkboxs) {
-                await checkbox.click();
-            }
-
-            await adminPage.click(
-                ".flex.items-center.justify-between > button.primary-button:visible"
-            );
-
-            const iconExists = await adminPage
-                .waitForSelector(
-                    ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl",
-                    { timeout: 5000 }
-                )
-                .catch(() => null);
-
-            if (iconExists) {
-                const messages = await adminPage.$$(
-                    ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl"
-                );
-                const icons = await adminPage.$$(
-                    ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-                );
-
-                const message = await messages[0].evaluate(
-                    (el) => el.parentNode.innerText
-                );
-                await icons[0].click();
-            } else {
-            }
-        }
-
-        const radio = await adminPage.$$('input[name="billing.id"]');
-
-        if (radio.length > 0) {
-            const addressNames = await adminPage.$$(
-                'input[name="billing.id"] + label'
-            );
-
-            const index =
-                Math.floor(Math.random() * (radio.length - 1 - 0 + 1)) + 0;
-
-            if (index >= 0 && index < radio.length) {
-                await addressNames[index].click();
-            } else {
-                return;
-            }
-        } else {
-            await adminPage.click(
-                "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all"
-            );
-
-            if ((await address(adminPage)) != "done") {
-                return;
-            }
-        }
-        const checkbox = await adminPage.$$(
-            'input[name="billing.use_for_shipping"]'
-        );
-
-        if (Math.floor(Math.random() * 20) % 3 == 1 ? false : true) {
-            if (!checkbox[0].isChecked()) {
-                await adminPage.click(
-                    'input[name="billing.use_for_shipping"] + label'
-                );
-            }
-        } else {
-            if (checkbox[0].isChecked()) {
-                await adminPage.click(
-                    'input[name="billing.use_for_shipping"] + label'
-                );
-            }
-
-            const radio = await adminPage.$$('input[name="shipping.id"]');
-
-            if (radio.length > 0) {
-                const addressNames = await adminPage.$$(
-                    'input[name="shipping.id"] + label'
-                );
-
-                const index =
-                    Math.floor(Math.random() * (radio.length - 1 - 0 + 1)) + 0;
-
-                if (index >= 0 && index < radio.length) {
-                    await addressNames[index].click();
-                } else {
-                    return;
-                }
-            } else {
-                await adminPage.click(
-                    "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible"
-                );
-
-                await adminPage.fill(
-                    'input[name="shipping.company_name"]',
-                    forms.form.lastName
-                );
-                await adminPage.fill(
-                    'input[name="shipping.first_name"]',
-                    forms.form.firstName
-                );
-                await adminPage.fill(
-                    'input[name="shipping.last_name"]',
-                    forms.form.lastName
-                );
-                await adminPage.fill(
-                    'input[name="shipping.email"]',
-                    forms.form.email
-                );
-                await adminPage.fill(
-                    'input[name="shipping.address.[0]"]',
-                    forms.form.firstName
-                );
-                await adminPage.selectOption(
-                    'select[name="shipping.country"]',
-                    "IN"
-                );
-                await adminPage.selectOption(
-                    'select[name="shipping.state"]',
-                    "UP"
-                );
-                await adminPage.fill(
-                    'input[name="shipping.city"]',
-                    forms.form.lastName
-                );
-                await adminPage.fill(
-                    'input[name="shipping.postcode"]',
-                    "201301"
-                );
-                await adminPage.fill(
-                    'input[name="shipping.phone"]',
-                    forms.form.phone
-                );
-
-                await adminPage.press('input[name="shipping.phone"]', "Enter");
-            }
-        }
-
-        await adminPage.click(
-            ".mt-4.flex.justify-end > button.primary-button:visible"
-        );
-
-        const existsship = await adminPage
-            .waitForSelector('input[name="shipping_method"] + label', {
-                timeout: 10000,
-            })
-            .catch(() => null);
-
-        if (existsship) {
-            const radio = await adminPage.$$(
-                'input[name="shipping_method"] + label'
-            );
-
-            const index =
-                Math.floor(Math.random() * (radio.length - 1 - 0 + 1)) + 0;
-
-            if (index >= 0 && index < radio.length) {
-                await radio[index].click();
-            } else {
-                return;
-            }
-        }
-
-        const existspay = await adminPage
-            .waitForSelector('input[name="payment_method"] + label', {
-                timeout: 10000,
-            })
-            .catch(() => null);
-
-        if (existspay) {
-            const radio = await adminPage.$$(
-                'input[name="payment_method"] + label'
-            );
-
-            await radio[1].click();
-
-            const nextButton = await adminPage.$$(
-                "button.primary-button.w-max.px-11.py-3"
-            );
-            await nextButton[nextButton.length - 1].click();
-        }
-
-        await expect(adminPage.getByText("Order Items")).toBeVisible();
-}
+      }
+    }
+  
+    const toastSelector = ".flex.items-center.break-all.text-sm > .icon-toast-done";
+    const iconExists = await adminPage.waitForSelector(toastSelector, { timeout: 5000 }).catch(() => null);
+  
+    if (iconExists) {
+      const icons = await adminPage.$$(".flex.items-center.break-all.text-sm + .cursor-pointer.underline");
+      await icons[0].click();
+    } else {
+      const uncheckedOptions = await adminPage.$$(
+        'input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label'
+      );
+      for (let checkbox of uncheckedOptions) {
+        await checkbox.click();
+      }
+  
+      await adminPage.click(".flex.items-center.justify-between > button.primary-button:visible");
+  
+      const iconAfterRetry = await adminPage.waitForSelector(toastSelector, { timeout: 5000 }).catch(() => null);
+      if (iconAfterRetry) {
+        const icons = await adminPage.$$(".flex.items-center.break-all.text-sm + .cursor-pointer.underline");
+        await icons[0].click();
+      }
+    }
+  
+    /**
+     * Billing address selection or creation
+     */ 
+    const billingRadios = await adminPage.$$('input[name="billing.id"]');
+    if (billingRadios.length > 0) {
+      const addressLabels = await adminPage.$$(`input[name="billing.id"] + label`);
+      const randomIndex = Math.floor(Math.random() * billingRadios.length);
+      await addressLabels[randomIndex].click();
+    } else {
+      await adminPage.click("p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all");
+      if ((await address(adminPage)) !== "done") return;
+    }
+  
+    const useForShipping = await adminPage.$('input[name="billing.use_for_shipping"]');
+    const shouldUseBilling = Math.floor(Math.random() * 20) % 3 !== 1;
+    const isShippingChecked = await useForShipping?.isChecked();
+  
+    if (shouldUseBilling !== isShippingChecked) {
+      await adminPage.click('input[name="billing.use_for_shipping"] + label');
+    }
+  
+    /**
+     * Shipping address logic (if different from billing)
+     */ 
+    if (!shouldUseBilling) {
+      const shippingRadios = await adminPage.$$('input[name="shipping.id"]');
+      if (shippingRadios.length > 0) {
+        const shippingLabels = await adminPage.$$(`input[name="shipping.id"] + label`);
+        const randomIndex = Math.floor(Math.random() * shippingRadios.length);
+        await shippingLabels[randomIndex].click();
+      } else {
+        await adminPage.click("p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible");
+  
+        await adminPage.fill('input[name="shipping.company_name"]', lastName);
+        await adminPage.fill('input[name="shipping.first_name"]', firstName);
+        await adminPage.fill('input[name="shipping.last_name"]', lastName);
+        await adminPage.fill('input[name="shipping.email"]', email);
+        await adminPage.fill('input[name="shipping.address.[0]"]', firstName);
+        await adminPage.selectOption('select[name="shipping.country"]', "IN");
+        await adminPage.selectOption('select[name="shipping.state"]', "UP");
+        await adminPage.fill('input[name="shipping.city"]', lastName);
+        await adminPage.fill('input[name="shipping.postcode"]', "201301");
+        await adminPage.fill('input[name="shipping.phone"]', phone);
+        await adminPage.press('input[name="shipping.phone"]', "Enter");
+      }
+    }
+  
+    /**
+     * shipping method
+     */ 
+    await adminPage.click(".mt-4.flex.justify-end > button.primary-button:visible");
+  
+    const shippingMethods = await adminPage.waitForSelector('input[name="shipping_method"] + label', {
+      timeout: 10000,
+    }).catch(() => null);
+  
+    if (shippingMethods) {
+      const options = await adminPage.$$('input[name="shipping_method"] + label');
+      await options[Math.floor(Math.random() * options.length)].click();
+    }
+  
+    const paymentMethods = await adminPage.waitForSelector('input[name="payment_method"] + label', {
+      timeout: 10000,
+    }).catch(() => null);
+  
+    if (paymentMethods) {
+      const radios = await adminPage.$$('input[name="payment_method"] + label');
+      await radios[1].click();
+  
+      const nextBtn = await adminPage.$$("button.primary-button.w-max.px-11.py-3");
+      await nextBtn[nextBtn.length - 1].click();
+    }
+  
+    await expect(adminPage.getByText("Order Items")).toBeVisible();
+  }
+  
 
 test.describe("sales management", () => {
     test("create orders", async ({ adminPage }) => {
@@ -300,15 +163,7 @@ test.describe("sales management", () => {
     test("comment on order", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
 
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        await iconRight[0].click();
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
 
         const lorem100 = forms.generateRandomStringWithSpaces(500);
         adminPage.fill('textarea[name="comment"]', lorem100);
@@ -343,15 +198,7 @@ test.describe("sales management", () => {
     test("create invoice", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
 
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        await iconRight[0].click();
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage
             .waitForSelector(
                 "div.transparent-button.px-1 > .icon-sales.text-2xl:visible"
@@ -370,16 +217,8 @@ test.describe("sales management", () => {
 
     test("create shipment", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
-
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        await iconRight[0].click();
+        
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         const exists = await adminPage
             .waitForSelector(
                 "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
@@ -399,39 +238,17 @@ test.describe("sales management", () => {
             'input[name="shipment[track_number]"]',
             forms.generateRandomStringWithSpaces(20)
         );
-        const options = await adminPage.$$eval(
-            'select[name="shipment[source]"] option',
-            (options) => {
-                return options.map((option) => option.value);
-            }
-        );
 
-        const randomIndex = Math.floor(Math.random() * options.length);
-
-        await adminPage.selectOption(
-            'select[name="shipment[source]"]',
-            options[randomIndex]
-        );
+        await adminPage.locator('[id="shipment\\[source\\]"]').selectOption('1');
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
-        await expect(adminPage.locator("#app")).toContainText(
-            "Shipment created successfully"
-        );
+        await expect(adminPage.locator('#app')).toContainText('Shipment created successfully');
     });
 
     test("create refund", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
-
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        const iconRight = await adminPage.$$(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
-        await iconRight[0].click();
+        await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage
             .waitForSelector(
                 "div.transparent-button.px-1 > .icon-cancel.text-2xl:visible",
@@ -439,9 +256,7 @@ test.describe("sales management", () => {
             )
             .catch(() => null);
 
-        await adminPage.click(
-            "div.transparent-button.px-1 > .icon-cancel.text-2xl:visible"
-        );
+        await adminPage.locator('div.transparent-button.px-1 > .icon-cancel.text-2xl').click();
         await adminPage
             .waitForSelector(
                 'input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible',
@@ -478,8 +293,8 @@ test.describe("sales management", () => {
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         await expect(
-            adminPage.getByText("Refund created successfully")
-        ).toBeVisible();
+            adminPage.locator("p", { hasText: "Refund created successfully" })
+        ).toBeVisible();        
     });
 
 
@@ -515,6 +330,7 @@ test.describe("sales management", () => {
 
         await generateOrder(adminPage); 
         await adminPage.goto("admin/sales/orders");
+        await adminPage.reload();
         await adminPage.waitForTimeout(3000); 
         await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage.locator('.icon-cancel').click();
