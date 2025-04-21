@@ -325,22 +325,6 @@ test.describe("sales management", () => {
     test("reorder", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
         await adminPage.waitForTimeout(3000); 
-        // const iconRight = await adminPage.$$(
-        //     "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        // );
-
-        // await iconRight[0].click();
-        // await adminPage
-        //     .waitForSelector(
-        //         "a.transparent-button.px-1 > .icon-cart.text-2xl:visible",
-        //         { timeout: 1000 }
-        //     )
-        //     .catch(() => null);
-
-        // await adminPage.click(
-        //     "a.transparent-button.px-1 > .icon-cart.text-2xl:visible"
-        // );
-
         await adminPage.locator('.row > div:nth-child(4) > a').first().click();
         await adminPage.getByRole('link', { name: ' Reorder' }).click();
 
@@ -530,7 +514,6 @@ test.describe("sales management", () => {
     test("cancel order", async ({ adminPage }) => {
 
         await generateOrder(adminPage); 
-        // await adminPage.locator('.flex > div:nth-child(5)').first().click();
         await adminPage.goto("admin/sales/orders");
         await adminPage.waitForTimeout(3000); 
         await adminPage.locator('.row > div:nth-child(4) > a').first().click();
