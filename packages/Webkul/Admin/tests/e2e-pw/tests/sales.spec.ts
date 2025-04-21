@@ -527,8 +527,10 @@ test.describe("sales management", () => {
 
     test("cancel order", async ({ adminPage }) => {
 
-        await generateOrder(adminPage);  
+        await generateOrder(adminPage); 
+        await adminPage.waitForLoadState('networkidle');
         await adminPage.goto("admin/sales/orders");
+        await adminPage.reload({ waitUntil: 'networkidle' });
         await adminPage.reload();
 
         await adminPage.waitForSelector(
