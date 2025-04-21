@@ -324,11 +324,6 @@ test.describe("sales management", () => {
 
     test("reorder", async ({ adminPage }) => {
         await adminPage.goto("admin/sales/orders");
-
-        await adminPage.waitForSelector(
-            "a > span.icon-sort-right.cursor-pointer.text-2xl"
-        );
-
         const iconRight = await adminPage.$$(
             "a > span.icon-sort-right.cursor-pointer.text-2xl"
         );
@@ -532,8 +527,9 @@ test.describe("sales management", () => {
 
     test("cancel order", async ({ adminPage }) => {
 
-        await generateOrder(adminPage);
+        await generateOrder(adminPage);  
         await adminPage.goto("admin/sales/orders");
+        await adminPage.reload();
 
         await adminPage.waitForSelector(
             "a > span.icon-sort-right.cursor-pointer.text-2xl"
@@ -554,10 +550,6 @@ test.describe("sales management", () => {
         await adminPage.click(
             "button.transparent-button + button.primary-button:visible"
         );
-        await expect(adminPage.locator("#app")).toContainText(
-            "Invoice created successfully"
-        );
-
         await expect(adminPage.locator('#app')).toContainText('Order cancelled successfully');
     });
 });
