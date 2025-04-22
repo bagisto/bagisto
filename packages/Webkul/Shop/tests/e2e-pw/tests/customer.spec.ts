@@ -123,7 +123,7 @@ test("should delete the address", async ({ page }) => {
 
 // for these testing we need order helper.. first we create order then we will test the reorder,
 // cancel order, print invoice, downloadable orders, etc and also these test needs improvements...
-test("Reorder", async ({ page }) => {
+test("should be able to reorder", async ({ page }) => {
     await generateOrder(page);
     await page.goto("");
     await page.getByLabel("Profile").click();
@@ -138,7 +138,7 @@ test("Reorder", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("Cancel Order", async ({ page }) => {
+test("should be able to cancel order", async ({ page }) => {
     await generateOrder(page);
     await page.goto("");
     await page.getByLabel("Profile").click();
@@ -149,7 +149,7 @@ test("Cancel Order", async ({ page }) => {
     await expect(page.getByRole('paragraph').filter({ hasText: 'Your order has been canceled' })).toBeVisible();
 });
 
-test("Print Invoice", async ({ page }) => {
+test("should be able to print invoice", async ({ page }) => {
     await generateOrder(page);
 
     /**
@@ -194,7 +194,8 @@ test("Print Invoice", async ({ page }) => {
     const download = await downloadPromise;
 });
 
-test("Downloadable Orders", async ({ shopPage }) => {
+test("should able to download downloadable orders", async ({ shopPage }) => {
+    
     /**
      * Login to admin panel.
      */
