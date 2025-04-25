@@ -4163,13 +4163,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Facebook aktivieren',
-                        'enable-github'     => 'Github aktivieren',
-                        'enable-google'     => 'Google aktivieren',
-                        'enable-linkedin'   => 'LinkedIn aktivieren',
-                        'enable-twitter'    => 'Twitter aktivieren',
-                        'social-login'      => 'Social Login',
-                        'social-login-info' => '"Social Login" ermöglicht es Benutzern, Websites mit ihren Social-Media-Konten zu nutzen und vereinfacht so die Registrierungs- und Anmeldeprozesse für mehr Komfort.',
+                        'title' => 'Soziale Anmeldung',
+                        'info'  => '"Soziale Anmeldung" ermöglicht es Benutzern, eine Website mit ihren Social-Media-Konten zu betreten und vereinfacht so den Registrierungs- und Anmeldeprozess.',
+
+                        'google' => [
+                            'enable-google' => 'Google aktivieren',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Eindeutige Kennung, die von Google beim Erstellen Ihrer OAuth-Anwendung bereitgestellt wird.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client-Geheimnis',
+                                'title-info' => 'Geheimer Schlüssel, der mit Ihrem Google-OAuth-Client verknüpft ist. Bewahren Sie ihn vertraulich auf.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Weiterleitungs-URL',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Google weitergeleitet werden. Muss mit der in Ihrer Google-Konsole konfigurierten URL übereinstimmen.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Facebook aktivieren',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'App-ID, die von Facebook beim Erstellen einer Anwendung in der Facebook-Entwicklerkonsole bereitgestellt wird.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client-Geheimnis',
+                                'title-info' => 'App-Geheimnis, das mit Ihrer Facebook-Anwendung verknüpft ist. Bewahren Sie es sicher und privat auf.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Weiterleitungs-URL',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Facebook weitergeleitet werden. Muss mit der in den App-Einstellungen von Facebook konfigurierten URL übereinstimmen.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'GitHub aktivieren',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Eindeutige Kennung, die von GitHub beim Erstellen Ihrer OAuth-Anwendung bereitgestellt wird.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client-Geheimnis',
+                                'title-info' => 'Geheimer Schlüssel, der mit Ihrem GitHub-OAuth-Client verknüpft ist. Bewahren Sie ihn vertraulich auf.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Weiterleitungs-URL',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit GitHub weitergeleitet werden. Muss mit der in Ihrer GitHub-Konsole konfigurierten URL übereinstimmen.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'LinkedIn aktivieren',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Eindeutige Kennung, die von LinkedIn beim Erstellen Ihrer OAuth-Anwendung bereitgestellt wird.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client-Geheimnis',
+                                'title-info' => 'Geheimer Schlüssel, der mit Ihrem LinkedIn-OAuth-Client verknüpft ist. Bewahren Sie ihn vertraulich auf.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Weiterleitungs-URL',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit LinkedIn weitergeleitet werden. Muss mit der in Ihrer LinkedIn-Konsole konfigurierten URL übereinstimmen.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Twitter aktivieren',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Eindeutige Kennung, die von Twitter beim Erstellen Ihrer OAuth-Anwendung bereitgestellt wird.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client-Geheimnis',
+                                'title-info' => 'Geheimer Schlüssel, der mit Ihrem Twitter-OAuth-Client verknüpft ist. Bewahren Sie ihn vertraulich auf.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Weiterleitungs-URL',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Twitter weitergeleitet werden. Muss mit der in Ihrer Twitter-Konsole konfigurierten URL übereinstimmen.',
+                            ],
+                        ],
                     ],
                 ],
             ],

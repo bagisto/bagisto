@@ -1348,7 +1348,7 @@ return [
                 'depends' => 'enable_github:1',
             ],
         ],
-    ], 
+    ],
 
     /**
      * Emails.

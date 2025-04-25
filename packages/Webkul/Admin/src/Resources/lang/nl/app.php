@@ -4164,13 +4164,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Facebook inschakelen',
-                        'enable-github'     => 'Github inschakelen',
-                        'enable-google'     => 'Google inschakelen',
-                        'enable-linkedin'   => 'LinkedIn inschakelen',
-                        'enable-twitter'    => 'Twitter inschakelen',
-                        'social-login'      => 'Sociaal inloggen',
-                        'social-login-info' => '"Sociaal inloggen" stelt gebruikers in staat om websites te openen met behulp van hun sociale media-accounts, waardoor registratie- en inlogprocessen worden gestroomlijnd voor gemak.',
+                        'title' => 'Sociale Login',
+                        'info'  => '"Sociale login" stelt gebruikers in staat om een website te betreden met hun sociale media-accounts, waardoor registratie en inloggen eenvoudiger worden.',
+
+                        'google' => [
+                            'enable-google' => 'Google inschakelen',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Unieke identificatiecode verstrekt door Google bij het aanmaken van jouw OAuth-applicatie.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Clientgeheim',
+                                'title-info' => 'Geheime sleutel gekoppeld aan je Google OAuth-client. Houd deze vertrouwelijk.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect-URL',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Google. Moet overeenkomen met de URL in de Google-console.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Facebook inschakelen',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'App-ID verstrekt door Facebook bij het aanmaken van een app in de Facebook Developer Console.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Clientgeheim',
+                                'title-info' => 'Geheime sleutel gekoppeld aan je Facebook-app. Houd deze veilig en privé.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect-URL',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Facebook. Moet overeenkomen met de URL in de app-instellingen van Facebook.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'GitHub inschakelen',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Unieke identificatiecode verstrekt door GitHub bij het aanmaken van jouw OAuth-applicatie.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Clientgeheim',
+                                'title-info' => 'Geheime sleutel gekoppeld aan je GitHub OAuth-client. Houd deze vertrouwelijk.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect-URL',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via GitHub. Moet overeenkomen met de URL in de GitHub-console.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'LinkedIn inschakelen',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Unieke identificatiecode verstrekt door LinkedIn bij het aanmaken van jouw OAuth-applicatie.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Clientgeheim',
+                                'title-info' => 'Geheime sleutel gekoppeld aan je LinkedIn OAuth-client. Houd deze vertrouwelijk.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect-URL',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via LinkedIn. Moet overeenkomen met de URL in de LinkedIn-console.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Twitter inschakelen',
+
+                            'client-id' => [
+                                'title'      => 'Client-ID',
+                                'title-info' => 'Unieke identificatiecode verstrekt door Twitter bij het aanmaken van jouw OAuth-applicatie.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Clientgeheim',
+                                'title-info' => 'Geheime sleutel gekoppeld aan je Twitter OAuth-client. Houd deze vertrouwelijk.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect-URL',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Twitter. Moet overeenkomen met de URL in de Twitter-console.',
+                            ],
+                        ],
                     ],
                 ],
             ],
