@@ -195,7 +195,7 @@ class CMSPagesTableSeeder extends Seeder
             ], [
                 'cms_page_id' => 10,
                 'channel_id'  => 1,
-            ]
+            ],
         ]);
     }
 }
