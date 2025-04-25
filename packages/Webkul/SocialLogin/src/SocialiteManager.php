@@ -2,12 +2,12 @@
 
 namespace Webkul\SocialLogin;
 
+use Laravel\Socialite\One\TwitterProvider;
 use Laravel\Socialite\SocialiteManager as BaseSocialiteManager;
-use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\FacebookProvider;
+use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\GoogleProvider;
 use Laravel\Socialite\Two\LinkedInOpenIdProvider;
-use Laravel\Socialite\One\TwitterProvider;
 use League\OAuth1\Client\Server\Twitter as TwitterServer;
 
 class SocialiteManager extends BaseSocialiteManager
