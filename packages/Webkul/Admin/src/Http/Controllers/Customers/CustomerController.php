@@ -14,10 +14,10 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Admin\Mail\Customer\NewCustomerNotification;
+use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Core\Rules\PhoneNumber;
 
 class CustomerController extends Controller
 {
@@ -79,7 +79,7 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today',
-            'phone'         => ['unique:customers,phone', new PhoneNumber]
+            'phone'         => ['unique:customers,phone', new PhoneNumber],
         ]);
 
         $password = rand(100000, 10000000);
@@ -140,7 +140,7 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email,'.$id,
             'date_of_birth' => 'date|before:today',
-            'phone'         => ['unique:customers,phone,'.$id, new PhoneNumber]
+            'phone'         => ['unique:customers,phone,'.$id, new PhoneNumber],
         ]);
 
         $data = request()->only([
