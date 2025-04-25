@@ -4110,64 +4110,154 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Establir subscripcions a butlletins, verificacions de correu electrònic i inici de sessió social.',
-                    'title'         => 'Configuració',
+                    'settings-info' => 'Configurer les abonnements aux bulletins, les vérifications par courriel et la connexion sociale.',
+                    'title'         => 'Paramètres',
 
                     'login-as-customer' => [
-                        'allow-option' => 'Permetre iniciar sessió com a client',
-                        'title'        => 'Iniciar sessió com a client',
-                        'title-info'   => 'Habilitar la funcionalitat "Iniciar sessió com a client".',
+                        'allow-option' => 'Autoriser la connexion en tant que client',
+                        'title'        => 'Connexion en tant que client',
+                        'title-info'   => 'Activer la fonctionnalité "Connexion en tant que client".',
                     ],
 
                     'wishlist' => [
-                        'allow-option' => 'Permetre opció de llista de desitjos',
-                        'title'        => 'Llista de desitjos',
-                        'title-info'   => 'Habilitar o deshabilitar l\'opció de llista de desitjos.',
+                        'allow-option' => 'Autoriser l\'option de liste de souhaits',
+                        'title'        => 'Liste de souhaits',
+                        'title-info'   => 'Activer ou désactiver l\'option de liste de souhaits.',
                     ],
 
                     'login-options' => [
                         'account'          => 'Compte',
-                        'home'             => 'Inici',
-                        'redirect-to-page' => 'Redirigir el client a la pàgina seleccionada',
-                        'title'            => 'Opcions d\'inici de sessió',
-                        'title-info'       => 'Configura les opcions d\'inici de sessió per determinar la pàgina de redirecció per als clients després d\'iniciar sessió.',
+                        'home'             => 'Accueil',
+                        'redirect-to-page' => 'Rediriger le client vers la page sélectionnée',
+                        'title'            => 'Options de connexion',
+                        'title-info'       => 'Configurer les options de connexion pour déterminer la page de redirection pour les clients après la connexion.',
                     ],
 
                     'create-new-account-option' => [
-                        'news-letter'      => 'Permetre butlletí informatiu',
-                        'news-letter-info' => 'Habilitar l\'opció de subscripció al butlletí a la pàgina de registre.',
-                        'title'            => 'Opcions de creació de comptes nous',
-                        'title-info'       => 'Estableix opcions per als comptes nous, incloent assignar un grup de clients per defecte i habilitar l\'opció de subscripció al butlletí durant el registre.',
+                        'news-letter'      => 'Autoriser le bulletin',
+                        'news-letter-info' => 'Activer l\'option d\'abonnement au bulletin sur la page d\'inscription.',
+                        'title'            => 'Options de création de nouveaux comptes',
+                        'title-info'       => 'Configurer les options pour les nouveaux comptes, y compris l\'attribution d\'un groupe de clients par défaut et l\'activation de l\'option d\'abonnement au bulletin lors de l\'inscription.',
 
                         'default-group' => [
-                            'general'    => 'General',
-                            'guest'      => 'Convidat',
-                            'title'      => 'Grup per defecte',
-                            'title-info' => 'Assigna un grup de clients específic com a predeterminat per als nous clients.',
-                            'wholesale'  => 'Majorista',
+                            'general'    => 'Général',
+                            'guest'      => 'Invité',
+                            'title'      => 'Groupe par défaut',
+                            'title-info' => 'Attribuer un groupe de clients spécifique comme par défaut pour les nouveaux clients.',
+                            'wholesale'  => 'Grossiste',
                         ],
                     ],
 
                     'newsletter' => [
-                        'subscription' => 'Permetre subscripció al butlletí',
-                        'title'        => 'Subscripció al butlletí',
-                        'title-info'   => '"Informació del butlletí" conté actualitzacions, ofertes o contingut compartit regularment a través de correus electrònics als subscriptors, mantenint-los informats i compromesos.',
+                        'subscription' => 'Autoriser l\'abonnement au bulletin',
+                        'title'        => 'Abonnement au bulletin',
+                        'title-info'   => '"Informations sur le bulletin" contient des mises à jour, des offres ou du contenu partagé régulièrement par courriel aux abonnés, les tenant informés et engagés.',
                     ],
 
                     'email' => [
-                        'email-verification' => 'Permetre verificació de correu electrònic',
-                        'title'              => 'Verificació de correu electrònic',
-                        'title-info'         => '"Verificació de correu electrònic" confirma l\'autenticitat d\'una adreça de correu electrònic, sovint enviant un enllaç de confirmació, millorant la seguretat del compte i la fiabilitat de la comunicació.',
+                        'email-verification' => 'Autoriser la vérification par courriel',
+                        'title'              => 'Vérification par courriel',
+                        'title-info'         => '"Vérification par courriel" confirme l\'authenticité d\'une adresse courriel, souvent en envoyant un lien de confirmation, améliorant la sécurité du compte et la fiabilité de la communication.',
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Habilitar Facebook',
-                        'enable-github'     => 'Habilitar Github',
-                        'enable-google'     => 'Habilitar Google',
-                        'enable-linkedin'   => 'Habilitar LinkedIn',
-                        'enable-twitter'    => 'Habilitar Twitter',
-                        'social-login'      => 'Inici de sessió social',
-                        'social-login-info' => '"Inici de sessió social" permet als usuaris accedir a llocs web utilitzant els seus comptes de xarxes socials, simplificant els processos de registre i inici de sessió per una major comoditat.',
+                        'title' => 'Connexion sociale',
+                        'info'  => '"Connexion sociale" permet aux utilisateurs d\'accéder à un site Web en utilisant leurs comptes de médias sociaux, simplifiant les processus d\'inscription et de connexion.',
+
+                        'google' => [
+                            'enable-google' => 'Activer Google',
+
+                            'client-id' => [
+                                'title'      => 'ID client',
+                                'title-info' => 'Identifiant unique fourni par Google lors de la création de votre application OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secret client',
+                                'title-info' => 'Clé secrète associée à votre client OAuth Google. Gardez-la confidentielle.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirection',
+                                'title-info' => 'URL de rappel où les utilisateurs sont redirigés après s\'être authentifiés avec Google. Cela doit correspondre à l\'URL configurée dans votre console Google.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Activer Facebook',
+
+                            'client-id' => [
+                                'title'      => 'ID client',
+                                'title-info' => 'ID d\'application fourni par Facebook lors de la création d\'une application dans la console développeur Facebook.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secret client',
+                                'title-info' => 'Secret d\'application associé à votre application Facebook. Gardez-le sécurisé et privé.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirection',
+                                'title-info' => 'URL de rappel où les utilisateurs sont redirigés après s\'être authentifiés avec Facebook. Cela doit correspondre à l\'URL configurée dans les paramètres de votre application Facebook.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Activer GitHub',
+
+                            'client-id' => [
+                                'title'      => 'ID client',
+                                'title-info' => 'Identifiant unique fourni par GitHub lors de la création de votre application OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secret client',
+                                'title-info' => 'Clé secrète associée à votre client OAuth GitHub. Gardez-la confidentielle.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirection',
+                                'title-info' => 'URL de rappel où les utilisateurs sont redirigés après s\'être authentifiés avec GitHub. Cela doit correspondre à l\'URL configurée dans votre console GitHub.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Activer LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'ID client',
+                                'title-info' => 'Identifiant unique fourni par LinkedIn lors de la création de votre application OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secret client',
+                                'title-info' => 'Clé secrète associée à votre client OAuth LinkedIn. Gardez-la confidentielle.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirection',
+                                'title-info' => 'URL de rappel où les utilisateurs sont redirigés après s\'être authentifiés avec LinkedIn. Cela doit correspondre à l\'URL configurée dans votre console LinkedIn.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Activer Twitter',
+
+                            'client-id' => [
+                                'title'      => 'ID client',
+                                'title-info' => 'Identifiant unique fourni par Twitter lors de la création de votre application OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secret client',
+                                'title-info' => 'Clé secrète associée à votre client OAuth Twitter. Gardez-la confidentielle.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirection',
+                                'title-info' => 'URL de rappel où les utilisateurs sont redirigés après s\'être authentifiés avec Twitter. Cela doit correspondre à l\'URL configurée dans votre console Twitter.',
+                            ],
+                        ],
                     ],
                 ],
             ],
