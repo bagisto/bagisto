@@ -1041,11 +1041,7 @@ test.describe("configurable product management", () => {
         /**
          * Opening the configurable product though edit button.
          */
-        await adminPage
-            .locator(
-                "div:nth-child(7) > div:nth-child(3) > div:nth-child(2) > a:nth-child(2)"
-            )
-            .click();
+        await adminPage.locator('div:nth-child(7) > div:nth-child(3) > p > span:nth-child(2)').click();
 
         /**
          * Waiting for the main form to be visible.
@@ -2030,8 +2026,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`
                     )
                     .first()
@@ -2204,8 +2199,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`
                     )
                     .first()
@@ -2504,7 +2498,7 @@ test.describe("booking product management", () => {
             await adminPage.getByRole('textbox', { name: 'Description' }).click();
             await adminPage.getByRole('textbox', { name: 'Description' }).fill(generateDescription());
             await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
-            
+
             /**
              * Saving the Booking Product.
              */
@@ -2576,7 +2570,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("textbox", { name: "Available To" })
                 .press("Enter");
-            
+
             /**
              * select Daily renting Type.
              */
@@ -2691,10 +2685,10 @@ test.describe("booking product management", () => {
             await adminPage
                 .locator('select[name="booking\\[same_slot_all_days\\]"]')
                 .selectOption("1");
-            
+
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -2916,7 +2910,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -3161,7 +3155,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -3419,7 +3413,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
