@@ -120,6 +120,7 @@
         "laravel": {
             "dont-discover": [
                 "intervention/image",
+                "laravel/socialite",
                 "shetabit/visitor"
             ]
         }

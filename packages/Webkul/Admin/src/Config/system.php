@@ -1249,7 +1249,7 @@ return [
                 'type'    => 'text',
                 'depends' => 'enable_facebook:1',
             ], [
-                'name'    => 'facebook_redirect',
+                'name'    => 'facebook_callback_url',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title-info',
                 'type'    => 'text',
@@ -1272,7 +1272,7 @@ return [
                 'type'    => 'text',
                 'depends' => 'enable_twitter:1',
             ], [
-                'name'    => 'twitter_redirect',
+                'name'    => 'twitter_callback_url',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title-info',
                 'type'    => 'text',
@@ -1295,13 +1295,13 @@ return [
                 'type'    => 'text',
                 'depends' => 'enable_google:1',
             ], [
-                'name'    => 'google_redirect',
+                'name'    => 'google_callback_url',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title-info',
                 'type'    => 'text',
                 'depends' => 'enable_google:1',
             ], [
-                'name'          => 'enable_linkedin',
+                'name'          => 'enable_linkedin-openid',
                 'title'         => 'admin::app.configuration.index.customer.settings.social-login.linkedin.enable-linkedin',
                 'type'          => 'boolean',
                 'channel_based' => true,
@@ -1310,19 +1310,19 @@ return [
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title-info',
                 'type'    => 'text',
-                'depends' => 'enable_linkedin:1',
+                'depends' => 'enable_linkedin-openid:1',
             ], [
                 'name'    => 'linkedin_client_secret',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title-info',
                 'type'    => 'text',
-                'depends' => 'enable_linkedin:1',
+                'depends' => 'enable_linkedin-openid:1',
             ], [
-                'name'    => 'linkedin_redirect',
+                'name'    => 'linkedin_callback_url',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title-info',
                 'type'    => 'text',
-                'depends' => 'enable_linkedin:1',
+                'depends' => 'enable_linkedin-openid:1',
             ], [
                 'name'          => 'enable_github',
                 'title'         => 'admin::app.configuration.index.customer.settings.social-login.github.enable-github',
@@ -1341,7 +1341,7 @@ return [
                 'type'    => 'text',
                 'depends' => 'enable_github:1',
             ], [
-                'name'    => 'github_redirect',
+                'name'    => 'github_callback_url',
                 'title'   => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title-info',
                 'type'    => 'text',

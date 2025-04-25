@@ -4180,7 +4180,7 @@ return [
                             ],
 
                             'redirect' => [
-                                'title'      => 'Redirect',
+                                'title'      => 'Redirect URL',
                                 'title-info' => 'Callback URL where users are redirected after authenticating with Google. Must match the URL configured in your Google console.',
                             ],
                         ],
