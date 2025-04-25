@@ -99,19 +99,6 @@ async function createSimpleProduct(adminPage) {
     await adminPage.locator("#weight").fill(product.weight);
 
     /**
-     * Settings Section.
-     */
-    await adminPage
-        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
-        .first()
-        .click();
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
-    await adminPage.locator("div:nth-child(6) > .relative > label").click();
-
-    /**
      * Inventories Section.
      */
     await adminPage.locator('input[name="inventories\\[1\\]"]').click();
@@ -242,28 +229,6 @@ async function createConfigurableProduct(adminPage) {
     await adminPage.locator("#meta_title").fill(product.name);
     await adminPage.locator("#meta_keywords").fill(product.name);
     await adminPage.locator("#meta_description").fill(product.shortDescription);
-
-    /**
-     * Image Section.
-     */
-    // Will add images later.
-
-    /**
-     * Settings Section.
-     */
-    await adminPage
-        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
-        .first()
-        .click();
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
-    await adminPage.locator("div:nth-child(6) > .relative > label").click();
-
-    /**
-     * Variations Section.
-     */
 
     /**
      * Adding new varient.
@@ -417,24 +382,6 @@ async function createGroupedProduct(adminPage) {
     await adminPage.locator("#meta_description").fill(product.shortDescription);
 
     /**
-     * Image Section.
-     */
-    // Will add images later.
-
-    /**
-     * Settings Section.
-     */
-    await adminPage
-        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
-        .first()
-        .click();
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
-    await adminPage.locator("div:nth-child(6) > .relative > label").click();
-
-    /**
      * Adding products to make a group of products.
      */
     await adminPage.locator(".secondary-button").first().click();
@@ -585,19 +532,6 @@ async function createVirtualProduct(adminPage) {
     await adminPage.locator("#price").fill(product.price);
 
     /**
-     * Settings Section.
-     */
-    await adminPage
-        .locator(".mt-3\\.5 > div:nth-child(2) > div:nth-child(3) > div")
-        .first()
-        .click();
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
-    await adminPage.locator("div:nth-child(6) > .relative > label").click();
-
-    /**
      * Inventories Section.
      */
     await adminPage.locator('input[name="inventories\\[1\\]"]').click();
@@ -710,19 +644,11 @@ async function createDownloadableProduct(adminPage) {
     await adminPage.locator("#price").fill(product.price);
 
     /**
-     * Settings Section.
-     */
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
-
-    /**
      * Downloadable Links Section.
      */
     await adminPage.getByText("Add Link").first().click();
     await adminPage.waitForSelector(".min-h-0 > div > div");
-    await adminPage.locator('input[name="title"]').fill("Link 1");
+    await adminPage.locator('input[name="title"]').first().fill(generateName());
     const linkTitle = await adminPage
         .locator('input[name="title"]')
         .inputValue();
@@ -869,14 +795,6 @@ async function createBookingProduct(adminPage) {
      * Price Section.
      */
     await adminPage.locator("#price").fill(product.price);
-
-    /**
-     * Settings Section.
-     */
-    await adminPage.locator(".relative > label").first().click();
-    await adminPage.locator("div:nth-child(3) > .relative > label").click();
-    await adminPage.locator("div:nth-child(4) > .relative > label").click();
-    await adminPage.locator("div:nth-child(5) > .relative > label").click();
 
     /**
      * Default Booking Section.
@@ -1041,11 +959,7 @@ test.describe("configurable product management", () => {
         /**
          * Opening the configurable product though edit button.
          */
-        await adminPage
-            .locator(
-                "div:nth-child(7) > div:nth-child(3) > div:nth-child(2) > a:nth-child(2)"
-            )
-            .click();
+        await adminPage.locator('div:nth-child(7) > div:nth-child(3) > p > span:nth-child(2)').click();
 
         /**
          * Waiting for the main form to be visible.
@@ -2030,8 +1944,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`
                     )
                     .first()
@@ -2204,8 +2117,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`
                     )
                     .first()
@@ -2504,7 +2416,7 @@ test.describe("booking product management", () => {
             await adminPage.getByRole('textbox', { name: 'Description' }).click();
             await adminPage.getByRole('textbox', { name: 'Description' }).fill(generateDescription());
             await adminPage.getByRole('button', { name: 'Save', exact: true }).click();
-            
+
             /**
              * Saving the Booking Product.
              */
@@ -2576,7 +2488,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("textbox", { name: "Available To" })
                 .press("Enter");
-            
+
             /**
              * select Daily renting Type.
              */
@@ -2691,10 +2603,10 @@ test.describe("booking product management", () => {
             await adminPage
                 .locator('select[name="booking\\[same_slot_all_days\\]"]')
                 .selectOption("1");
-            
+
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -2916,7 +2828,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -3161,7 +3073,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
@@ -3419,7 +3331,7 @@ test.describe("booking product management", () => {
 
             /**
              * Add slots
-             */    
+             */
             await adminPage.getByText('Add Slots').first().click();
             await adminPage.getByRole('textbox', { name: 'From', exact: true }).click();
             await adminPage.getByRole('spinbutton', { name: 'Hour' }).fill('14');
