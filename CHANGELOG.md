@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10721 [fixed] - Customer's phone number is not validated on the backend.
 
+* #10722 [fixed] - Postcode backend validation message is not in proper format 
+
 ## **v2.2.5 (28th of March 2025)** - *Release*
 
 * Grouped product and bundle product exception fixings.
