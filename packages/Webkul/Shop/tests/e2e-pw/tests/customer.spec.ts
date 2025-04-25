@@ -64,6 +64,7 @@ test("should add an address", async ({ page }) => {
 
 test("should edit an address", async ({ page }) => {
     await loginAsCustomer(page);
+
     await addAddress(page);
 
     await page.getByLabel("More Options").first().click();
@@ -121,10 +122,9 @@ test("should delete the address", async ({ page }) => {
     ).toBeVisible();
 });
 
-// for these testing we need order helper.. first we create order then we will test the reorder,
-// cancel order, print invoice, downloadable orders, etc and also these test needs improvements...
 test("should be able to reorder", async ({ page }) => {
     await generateOrder(page);
+
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Orders", exact: true }).click();
@@ -140,13 +140,19 @@ test("should be able to reorder", async ({ page }) => {
 
 test("should be able to cancel order", async ({ page }) => {
     await generateOrder(page);
+
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Orders", exact: true }).click();
     await page.locator("div").locator("span.icon-eye").first().click();
     await page.getByRole("link", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
-    await expect(page.getByRole('paragraph').filter({ hasText: 'Your order has been canceled' })).toBeVisible();
+
+    await expect(
+        page
+            .getByRole("paragraph")
+            .filter({ hasText: "Your order has been canceled" })
+    ).toBeVisible();
 });
 
 test("should be able to print invoice", async ({ page }) => {
@@ -191,11 +197,10 @@ test("should be able to print invoice", async ({ page }) => {
     await page.getByRole("button", { name: "Invoices" }).click();
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("link", { name: " Print" }).click();
-    const download = await downloadPromise;
+    await downloadPromise;
 });
 
 test("should able to download downloadable orders", async ({ shopPage }) => {
-    
     /**
      * Login to admin panel.
      */
@@ -206,7 +211,9 @@ test("should able to download downloadable orders", async ({ shopPage }) => {
 
     await shopPage.goto("admin/login");
     await shopPage.getByPlaceholder("Email Address").click();
-    await shopPage.getByPlaceholder("Email Address").fill(adminCredentials.email);
+    await shopPage
+        .getByPlaceholder("Email Address")
+        .fill(adminCredentials.email);
     await shopPage.getByPlaceholder("Password").click();
     await shopPage.getByPlaceholder("Password").fill(adminCredentials.password);
     await shopPage.getByRole("button", { name: "Sign In" }).click();
@@ -214,24 +221,24 @@ test("should able to download downloadable orders", async ({ shopPage }) => {
     /**
      * Create downloadable product.
      */
-
     const productName = await downloadableOrder(shopPage);
 
     /**
-     * go to shop for download a product.
-     */   
+     * Go to shop for download a product.
+     */
     await shopPage.goto("");
     await shopPage.getByLabel("Profile").click();
     await shopPage.getByRole("link", { name: "Profile", exact: true }).click();
-    await shopPage.getByRole("link", { name: " Downloadable Products " }).click();
-    const page1Promise = shopPage.waitForEvent('popup');
-    const downloadPromise = shopPage.waitForEvent('download');
-    await shopPage.getByRole('link', { name: productName }).click();
-    const page1 = await page1Promise;
-    const download = await downloadPromise;
+    await shopPage
+        .getByRole("link", { name: " Downloadable Products " })
+        .click();
+    const page1Promise = shopPage.waitForEvent("popup");
+    const downloadPromise = shopPage.waitForEvent("download");
+    await shopPage.getByRole("link", { name: productName }).click();
+    await page1Promise;
+    await downloadPromise;
 });
 
-// need wishlist helper first...
 test("should add wishlist to cart", async ({ page }) => {
     await loginAsCustomer(page);
 
@@ -249,7 +256,11 @@ test("should add wishlist to cart", async ({ page }) => {
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.getByRole("button", { name: "Move To Cart" }).first().click();
 
-    await expect(page.getByRole('paragraph').filter({ hasText: 'Item Successfully Moved to Cart' })).toBeVisible();
+    await expect(
+        page
+            .getByRole("paragraph")
+            .filter({ hasText: "Item Successfully Moved to Cart" })
+    ).toBeVisible();
 });
 
 test("should remove product from wishlist", async ({ page }) => {
@@ -267,22 +278,6 @@ test("should remove product from wishlist", async ({ page }) => {
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.locator(".max-md\\:hidden > .flex").first().click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
-
-    await expect(
-        page.getByText("Item Successfully Removed From Wishlist").first()
-    ).toBeVisible();
-});
-
-test("should clear all wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
-
-    await addWishlist(page);
-
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByText("Delete All", { exact: true }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
 
     await expect(

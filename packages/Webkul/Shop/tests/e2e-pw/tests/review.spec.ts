@@ -1,7 +1,8 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer } from "../utils/customer";
 import { generateName, generateDescription } from "../utils/faker";
-    test("should review a product", async ({ page }) => {
+
+test("should review a product", async ({ page }) => {
     await loginAsCustomer(page);
 
     await page

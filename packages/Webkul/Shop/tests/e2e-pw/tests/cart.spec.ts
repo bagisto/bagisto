@@ -1,8 +1,90 @@
 import { test, expect } from "../setup";
 import { generateName, generateDescription, generatePhoneNumber } from '../utils/faker';
 
-test("add different product", async ({ page }) => {
+test("should increase the quantity from the mini cart drawer", async ({ page }) => {
     await page.goto("");
+
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .first()
+        .click();
+
+    await page.getByRole("button", { name: "Shopping Cart" }).click();
+
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+});
+
+test("should decrease the quantity from the mini cart drawer", async ({ page }) => {
+    await page.goto("");
+
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .nth(2)
+        .click();
+
+    await page.getByRole("button", { name: "Shopping Cart" }).click();
+
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+    await page.getByRole("button", { name: "Decrease Quantity" }).click();
+    await page.getByRole("button", { name: "Decrease Quantity" }).click();
+
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+});
+
+test("should remove the product from the mini cart drawer", async ({ page }) => {
+    await page.goto("");
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .nth(2)
+        .click();
+    await page.getByRole("button", { name: "Shopping Cart" }).click();
+    await page.getByRole("button", { name: "Remove" }).click();
+    await page.getByRole("button", { name: "Agree", exact: true }).click();
+
+    await expect(
+        page.getByText("Item is successfully removed from the cart.").first()
+    ).toBeVisible();
+});
+
+test("should add product to cart", async ({ page }) => {
+    await page.goto("");
+
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .first()
+        .waitFor({ state: "visible" });
+
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .first()
+        .click();
+
+    await expect(
+        page.getByText("Item Added Successfully").first()
+    ).toBeVisible();
+});
+
+test("should add different product to cart and update quantity from cart view page", async ({ page }) => {
+    await page.goto("");
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -13,6 +95,7 @@ test("add different product", async ({ page }) => {
         .getByText("Arctic Touchscreen Winter Gloves $21.00 Add To Cart")
         .first()
         .click();
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -27,6 +110,7 @@ test("add different product", async ({ page }) => {
         .click();
 
     await page.goto("checkout/cart");
+
     await page
         .getByLabel("Increase Quantity")
         .first()
@@ -39,8 +123,9 @@ test("add different product", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("decrement the quantity of product", async ({ page }) => {
+test("should add product to cart and decrement the quantity of product from the cart view page", async ({ page }) => {
     await page.goto("");
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -55,16 +140,19 @@ test("decrement the quantity of product", async ({ page }) => {
         .click();
 
     await page.goto("checkout/cart");
+
     await page
         .getByLabel("Increase Quantity")
         .first()
         .waitFor({ state: "visible" });
     await page.getByLabel("Increase Quantity").first().click();
+
     await page
         .getByLabel("Decrease Quantity")
         .first()
         .waitFor({ state: "visible" });
     await page.getByLabel("Decrease Quantity").first().click();
+
     await page.getByRole("button", { name: "Update Cart" }).click();
 
     await expect(
@@ -72,8 +160,9 @@ test("decrement the quantity of product", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("Remove One", async ({ page }) => {
+test("should remove product from the cart view page", async ({ page }) => {
     await page.goto("");
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -82,10 +171,12 @@ test("Remove One", async ({ page }) => {
         .click();
 
     await page.goto("checkout/cart");
+
     await page
         .getByRole("button", { name: "Remove" })
         .first()
         .waitFor({ state: "visible" });
+
     await page.getByRole("button", { name: "Remove" }).first().click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
 
@@ -94,20 +185,23 @@ test("Remove One", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("Remove All", async ({ page }) => {
+test("should remove all products from the cart view page", async ({ page }) => {
     await page.goto("");
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
         .locator("button")
         .nth(1)
         .click();
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
         .locator("button")
         .first()
         .click();
+
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -116,12 +210,14 @@ test("Remove All", async ({ page }) => {
         .click();
 
     await page.goto("checkout/cart");
+
     await page.locator(".icon-uncheck").first().waitFor({ state: "visible" });
     await page.locator(".icon-uncheck").first().click();
     await page
         .getByRole("button", { name: "Remove" })
         .first()
         .waitFor({ state: "visible" });
+
     await page.getByRole("button", { name: "Remove" }).first().click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
 
@@ -130,8 +226,7 @@ test("Remove All", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("Apply Coupon", async ({ page }) => {
-
+test("should apply coupon", async ({ page }) => {
     const couponCode = generatePhoneNumber();
 
     /**
@@ -182,7 +277,7 @@ test("Apply Coupon", async ({ page }) => {
 
     /**
      * Selecting the condition attribute.
-     */ 
+     */
     await page.waitForSelector('select[id="conditions\\[0\\]\\[attribute\\]"]');
     await page.locator('[id="conditions\\[0\\]\\[attribute\\]"]').selectOption('cart_item|quantity');
     await page.locator('select[name="conditions\\[0\\]\\[operator\\]"]').selectOption('>=');
