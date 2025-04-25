@@ -2,6 +2,14 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **Unreleased**
+
+* #10612 [feature] - Added confirmation before copying a product.
+
+* #10671 [enhancement] - Added spacing between shipments.
+
+* #10670 [enhancement] - Added spacing between invoices.
+
 ## **v2.2.5 (28th of March 2025)** - *Release*
 
 * Grouped product and bundle product exception fixings.
