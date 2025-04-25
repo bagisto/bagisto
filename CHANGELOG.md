@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **Unreleased**
+
+* #10679 [enhancement] - Some options in the products need to be enabled by default.
+
 ## **v2.3.0 (27th of March 2025)** - *Release*
 
 ### Features:
