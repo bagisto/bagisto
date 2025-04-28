@@ -52,7 +52,7 @@ class VatValidator
      * @param ?string $formCountry country code from the input form - used as backup if the VAT number does not contain a country code
      * @return bool
      */
-    public function validate(string $vatNumber, ?string $formCountry): bool
+    public function validate(string $vatNumber, ?string $formCountry = null): bool
     {
         $vatNumber = $this->vatCleaner($vatNumber);
 
