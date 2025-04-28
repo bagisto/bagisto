@@ -803,6 +803,7 @@ return [
                 'street-address'         => 'Вулиця',
                 'telephone'              => 'Телефон',
                 'title'                  => 'Адреса',
+                'vat-id'                 => 'Ідентифікаційний номер ПДВ',
             ],
 
             'index' => [
