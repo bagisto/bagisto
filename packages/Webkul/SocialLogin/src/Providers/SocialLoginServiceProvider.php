@@ -31,8 +31,8 @@ class SocialLoginServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /*
-         * Register custom SocialiteManager to override the default laravel socialite manager
+        /**
+         * Register custom `SocialiteManager` to override the default laravel socialite manager
          * to use the core config data for social login.
          */
         $this->app->singleton(Factory::class, function ($app) {
