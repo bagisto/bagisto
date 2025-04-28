@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'آدرس خیابان',
                 'telephone'              => 'تلفن',
                 'title'                  => 'آدرس',
+                'vat-id'                 => 'شناسه مالیاتی',
             ],
 
             'index' => [

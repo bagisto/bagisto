@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'Adres ulicy',
                 'telephone'              => 'Telefon',
                 'title'                  => 'Adres',
+                'vat-id'                 => 'Numer VAT',
             ],
 
             'index' => [

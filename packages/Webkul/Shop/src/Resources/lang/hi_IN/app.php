@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'स्ट्रीट पता',
                 'telephone'              => 'टेलीफोन',
                 'title'                  => 'पता',
+                'vat-id'                 => 'वैट आईडी',
             ],
 
             'index' => [

@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'Street Address',
                 'telephone'              => 'Telephone',
                 'title'                  => 'Address',
+                'vat-id'                 => 'Vat ID',
             ],
 
             'index' => [

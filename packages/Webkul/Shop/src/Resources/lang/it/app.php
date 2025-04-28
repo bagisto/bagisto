@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'Indirizzo',
                 'telephone'              => 'Telefono',
                 'title'                  => 'Indirizzo',
+                'vat-id'                 => 'Partita IVA',
             ],
 
             'index' => [

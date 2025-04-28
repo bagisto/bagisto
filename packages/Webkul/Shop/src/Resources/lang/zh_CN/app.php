@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => '街道地址',
                 'telephone'              => '电话',
                 'title'                  => '地址',
+                'vat-id'                 => 'VAT号码',
             ],
 
             'index' => [

@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'عنوان الشارع',
                 'telephone'              => 'الهاتف',
                 'title'                  => 'العنوان',
+                'vat-id'                 => 'رقم الضريبة',
             ],
 
             'index' => [

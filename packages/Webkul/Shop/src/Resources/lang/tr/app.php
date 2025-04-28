@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'Sokak Adresi',
                 'telephone'              => 'Telefon',
                 'title'                  => 'Adres',
+                'vat-id'                 => 'KDV Numarası',
             ],
 
             'index' => [

@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'כתובת',
                 'telephone'              => 'טלפון',
                 'title'                  => 'כתובת',
+                'vat-id'                 => 'מספר עוסק מורשה',
             ],
 
             'index' => [

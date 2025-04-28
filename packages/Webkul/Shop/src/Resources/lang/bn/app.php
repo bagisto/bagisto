@@ -1005,6 +1005,7 @@ return [
                 'street-address'         => 'রাস্তার ঠিকানা',
                 'telephone'              => 'টেলিফোন',
                 'title'                  => 'ঠিকানা',
+                'vat-id'                 => 'ভ্যাট আইডি',
             ],
 
             'index' => [
