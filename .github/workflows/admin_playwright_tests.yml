@@ -55,7 +55,9 @@ jobs:
         working-directory: packages/Webkul/Admin
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: |
+          sudo apt-get update --allow-releaseinfo-change
+          npx playwright install --with-deps chromium
         working-directory: packages/Webkul/Admin
 
       - name: Setting Environment
