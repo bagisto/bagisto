@@ -163,5 +163,39 @@ class CMSPagesTableSeeder extends Seeder
                 ],
             ]);
         }
+
+        DB::table('cms_page_channels')->insert([
+            [
+                'cms_page_id' => 1,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 2,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 3,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 4,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 5,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 6,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 7,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 8,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 9,
+                'channel_id'  => 1,
+            ], [
+                'cms_page_id' => 10,
+                'channel_id'  => 1,
+            ],
+        ]);
     }
 }

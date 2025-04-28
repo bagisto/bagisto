@@ -52,7 +52,6 @@ class PageController extends Controller
         $this->validate(request(), [
             'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Rules\Slug],
             'page_title'   => 'required',
-            'channels'     => 'required',
             'html_content' => 'required',
         ]);
 
@@ -104,7 +103,6 @@ class PageController extends Controller
             }],
             $locale.'.page_title'     => 'required',
             $locale.'.html_content'   => 'required',
-            'channels'                => 'required',
         ]);
 
         Event::dispatch('cms.page.update.before', $id);

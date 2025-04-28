@@ -51,7 +51,6 @@ it('should fail the validation with errors when certain inputs are not provided 
     postJson(route('admin.cms.store'))
         ->assertJsonValidationErrorFor('url_key')
         ->assertJsonValidationErrorFor('page_title')
-        ->assertJsonValidationErrorFor('channels')
         ->assertJsonValidationErrorFor('html_content')
         ->assertUnprocessable();
 });
@@ -118,7 +117,6 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertJsonValidationErrorFor($localeCode.'.url_key')
         ->assertJsonValidationErrorFor($localeCode.'.page_title')
         ->assertJsonValidationErrorFor($localeCode.'.html_content')
-        ->assertJsonValidationErrorFor('channels')
         ->assertUnprocessable();
 });
 
