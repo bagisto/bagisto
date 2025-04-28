@@ -822,6 +822,8 @@ class Cart
 
         Event::dispatch('checkout.cart.collect.totals.before', $this->cart);
 
+        $this->refreshCart();
+
         $this->calculateItemsTax();
 
         $this->calculateShippingTax();
