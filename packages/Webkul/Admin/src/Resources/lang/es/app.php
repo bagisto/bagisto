@@ -4163,13 +4163,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Habilitar Facebook',
-                        'enable-github'     => 'Habilitar Github',
-                        'enable-google'     => 'Habilitar Google',
-                        'enable-linkedin'   => 'Habilitar LinkedIn',
-                        'enable-twitter'    => 'Habilitar Twitter',
-                        'social-login'      => 'Inicio de sesión social',
-                        'social-login-info' => '"Inicio de sesión social" permite a los usuarios acceder a sitios web utilizando sus cuentas de redes sociales, simplificando los procesos de registro e inicio de sesión para mayor comodidad.',
+                        'title' => 'Inicio de sesión social',
+                        'info'  => '"El inicio de sesión social" permite a los usuarios acceder a un sitio web utilizando sus cuentas de redes sociales, simplificando los procesos de registro e inicio de sesión.',
+
+                        'google' => [
+                            'enable-google' => 'Habilitar Google',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por Google al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de Google. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Debe coincidir con la URL configurada en tu consola de Google.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Habilitar Facebook',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'ID de la aplicación proporcionado por Facebook al crear una aplicación en la consola de desarrolladores.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Secreto de la aplicación asociado a tu aplicación de Facebook. Mantenlo seguro y privado.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Habilitar GitHub',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por GitHub al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de GitHub. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Debe coincidir con la URL configurada en tu consola de GitHub.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Habilitar LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por LinkedIn al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de LinkedIn. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Debe coincidir con la URL configurada en tu consola de LinkedIn.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Habilitar Twitter',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por Twitter al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de Twitter. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Debe coincidir con la URL configurada en tu consola de Twitter.',
+                            ],
+                        ],
                     ],
                 ],
             ],

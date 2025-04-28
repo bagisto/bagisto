@@ -4163,13 +4163,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Enable Facebook',
-                        'enable-github'     => 'Enable Github',
-                        'enable-google'     => 'Enable Google',
-                        'enable-linkedin'   => 'Enable LinkedIn',
-                        'enable-twitter'    => 'Enable Twitter',
-                        'social-login'      => 'Social Login',
-                        'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
+                        'title' => 'Social Login',
+                        'info'  => '"Social login" allows users to access a website using their social media accounts, simplifying registration and login processes.',
+
+                        'google' => [
+                            'enable-google' => 'Enable Google',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by Google when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your Google OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Must match the URL configured in your Google console.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Enable Facebook',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'App ID provided by Facebook when creating an app in the Facebook developer console.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'App secret associated with your Facebook application. Keep it secure and private.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Must match the URL configured in your Facebook app settings.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Enable GitHub',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by GitHub when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your GitHub OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Must match the URL configured in your GitHub console.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Enable LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by LinkedIn when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your LinkedIn OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Must match the URL configured in your LinkedIn console.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Enable Twitter',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by Twitter when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your Twitter OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Must match the URL configured in your Twitter console.',
+                            ],
+                        ],
                     ],
                 ],
             ],

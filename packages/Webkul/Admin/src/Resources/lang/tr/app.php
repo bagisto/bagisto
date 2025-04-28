@@ -4163,13 +4163,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Facebook\'u Etkinleştir',
-                        'enable-github'     => 'Github\'u Etkinleştir',
-                        'enable-google'     => 'Google\'ı Etkinleştir',
-                        'enable-linkedin'   => 'LinkedIn\'i Etkinleştir',
-                        'enable-twitter'    => 'Twitter\'ı Etkinleştir',
-                        'social-login'      => 'Sosyal Giriş',
-                        'social-login-info' => '"Sosyal giriş", kullanıcıların sosyal medya hesaplarını kullanarak web sitelerine erişmelerini sağlar, kayıt ve giriş işlemlerini kolaylık sağlamak için basitleştirir.',
+                        'title' => 'Sosyal Giriş',
+                        'info'  => '"Sosyal giriş", kullanıcıların sosyal medya hesaplarını kullanarak bir web sitesine erişmesini sağlar, kayıt ve giriş işlemlerini basitleştirir.',
+
+                        'google' => [
+                            'enable-google' => 'Google\'ı Etkinleştir',
+
+                            'client-id' => [
+                                'title'      => 'Müşteri ID\'si',
+                                'title-info' => 'Google tarafından OAuth uygulamanızı oluştururken verilen benzersiz kimlik numarası.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Müşteri Gizlisi',
+                                'title-info' => 'Google OAuth müşteri hesabınızla ilişkili gizli anahtar. Gizli tutun.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Yönlendirme URL\'si',
+                                'title-info' => 'Kullanıcılar Google ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Google konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Facebook\'u Etkinleştir',
+
+                            'client-id' => [
+                                'title'      => 'Müşteri ID\'si',
+                                'title-info' => 'Facebook geliştirici konsolunda bir uygulama oluştururken Facebook tarafından verilen Uygulama ID\'si.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Müşteri Gizlisi',
+                                'title-info' => 'Facebook uygulamanızla ilişkili gizli anahtar. Güvenli ve özel tutun.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Yönlendirme URL\'si',
+                                'title-info' => 'Kullanıcılar Facebook ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Facebook uygulama ayarlarınızda yapılandırılan URL ile aynı olmalıdır.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'GitHub\'ı Etkinleştir',
+
+                            'client-id' => [
+                                'title'      => 'Müşteri ID\'si',
+                                'title-info' => 'GitHub tarafından OAuth uygulamanızı oluştururken verilen benzersiz kimlik numarası.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Müşteri Gizlisi',
+                                'title-info' => 'GitHub OAuth müşteri hesabınızla ilişkili gizli anahtar. Gizli tutun.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Yönlendirme URL\'si',
+                                'title-info' => 'Kullanıcılar GitHub ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. GitHub konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'LinkedIn\'i Etkinleştir',
+
+                            'client-id' => [
+                                'title'      => 'Müşteri ID\'si',
+                                'title-info' => 'LinkedIn tarafından OAuth uygulamanızı oluştururken verilen benzersiz kimlik numarası.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Müşteri Gizlisi',
+                                'title-info' => 'LinkedIn OAuth müşteri hesabınızla ilişkili gizli anahtar. Gizli tutun.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Yönlendirme URL\'si',
+                                'title-info' => 'Kullanıcılar LinkedIn ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. LinkedIn konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Twitter\'ı Etkinleştir',
+
+                            'client-id' => [
+                                'title'      => 'Müşteri ID\'si',
+                                'title-info' => 'Twitter tarafından OAuth uygulamanızı oluştururken verilen benzersiz kimlik numarası.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Müşteri Gizlisi',
+                                'title-info' => 'Twitter OAuth müşteri hesabınızla ilişkili gizli anahtar. Gizli tutun.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Yönlendirme URL\'si',
+                                'title-info' => 'Kullanıcılar Twitter ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Twitter konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                            ],
+                        ],
                     ],
                 ],
             ],

@@ -4163,13 +4163,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'אפשר פייסבוק',
-                        'enable-github'     => 'אפשר גיטהאב',
-                        'enable-google'     => 'אפשר גוגל',
-                        'enable-linkedin'   => 'אפשר לינקדאין',
-                        'enable-twitter'    => 'אפשר טוויטר',
-                        'social-login'      => 'התחברות חברתית',
-                        'social-login-info' => '"התחברות חברתית" מאפשרת למשתמשים לגשת לאתרים באמצעות חשבונות המדיה החברתית שלהם, מקלה על הרשמה והתחברות למערכות לקוחות לנוחות.',
+                        'title' => 'התחברות חברתית',
+                        'info'  => '"התחברות חברתית" מאפשרת למשתמשים להיכנס לאתר באמצעות חשבונות המדיה החברתית שלהם, ומפשטת את תהליכי ההרשמה והכניסה.',
+
+                        'google' => [
+                            'enable-google' => 'הפעל Google',
+
+                            'client-id' => [
+                                'title'      => 'מזהה לקוח (Client ID)',
+                                'title-info' => 'מזהה ייחודי שמסופק על ידי Google בעת יצירת אפליקציית OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'סוד לקוח (Client Secret)',
+                                'title-info' => 'מפתח סודי המשויך ללקוח ה-OAuth שלך בגוגל. שמור עליו בסודיות.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'כתובת הפנייה (Redirect)',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Google. חייבת להתאים לכתובת שהוגדרה בקונסולה של Google.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'הפעל Facebook',
+
+                            'client-id' => [
+                                'title'      => 'מזהה לקוח (Client ID)',
+                                'title-info' => 'מזהה אפליקציה שמסופק על ידי Facebook בעת יצירת אפליקציה בקונסולה למפתחים.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'סוד לקוח (Client Secret)',
+                                'title-info' => 'המפתח הסודי של האפליקציה שלך בפייסבוק. שמור עליו בטוח ופרטי.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'כתובת הפנייה (Redirect URL)',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Facebook. חייבת להתאים לכתובת שהוגדרה בהגדרות האפליקציה שלך בפייסבוק.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'הפעל GitHub',
+
+                            'client-id' => [
+                                'title'      => 'מזהה לקוח (Client ID)',
+                                'title-info' => 'מזהה ייחודי שמסופק על ידי GitHub בעת יצירת אפליקציית OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'סוד לקוח (Client Secret)',
+                                'title-info' => 'מפתח סודי המשויך ללקוח ה-OAuth שלך ב-GitHub. שמור עליו בסודיות.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'כתובת הפנייה (Redirect URL)',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם GitHub. חייבת להתאים לכתובת שהוגדרה בקונסולה של GitHub.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'הפעל LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'מזהה לקוח (Client ID)',
+                                'title-info' => 'מזהה ייחודי שמסופק על ידי LinkedIn בעת יצירת אפליקציית OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'סוד לקוח (Client Secret)',
+                                'title-info' => 'מפתח סודי המשויך ללקוח ה-OAuth שלך ב-LinkedIn. שמור עליו בסודיות.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'כתובת הפנייה (Redirect URL)',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם LinkedIn. חייבת להתאים לכתובת שהוגדרה בקונסולה של LinkedIn.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'הפעל Twitter',
+
+                            'client-id' => [
+                                'title'      => 'מזהה לקוח (Client ID)',
+                                'title-info' => 'מזהה ייחודי שמסופק על ידי Twitter בעת יצירת אפליקציית OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'סוד לקוח (Client Secret)',
+                                'title-info' => 'מפתח סודי המשויך ללקוח ה-OAuth שלך ב-Twitter. שמור עליו בסודיות.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'כתובת הפנייה (Redirect URL)',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Twitter. חייבת להתאים לכתובת שהוגדרה בקונסולה של Twitter.',
+                            ],
+                        ],
                     ],
                 ],
             ],
