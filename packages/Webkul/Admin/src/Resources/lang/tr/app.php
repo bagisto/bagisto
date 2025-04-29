@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'İşlemler',
+                    'days-left'           => ':count gün kaldı',
+                    'days-overdue'        => ':count gün gecikmiş',
                     'grand-total'         => 'Genel Toplam',
                     'id'                  => 'Kimlik',
                     'invoice-date'        => 'Fatura Tarihi',
                     'mass-update-success' => 'Seçilen faturalar başarıyla güncellendi.',
                     'order-id'            => 'Sipariş Kimliği',
                     'overdue'             => 'Vadesi Geçmiş',
+                    'overdue-by'          => ':count gün gecikmiş',
                     'paid'                => 'Ödenen',
                     'pending'             => 'Beklemede',
                     'status'              => 'Durum',

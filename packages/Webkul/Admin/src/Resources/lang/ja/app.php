@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'アクション',
+                    'days-left'           => '残り :count 日',
+                    'days-overdue'        => ':count 日遅れ',
                     'grand-total'         => '総合計',
                     'id'                  => 'ID',
                     'invoice-date'        => '請求書の日付',
                     'mass-update-success' => '選択された請求書が正常に更新されました。',
                     'order-id'            => '注文ID',
                     'overdue'             => '延滞',
+                    'overdue-by'          => ':count 日遅れ',
                     'paid'                => '支払済み',
                     'pending'             => '保留中',
                     'status'              => 'ステータス',

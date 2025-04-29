@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'פעולות',
+                    'days-left'           => 'נותרו :count ימים',
+                    'days-overdue'        => ':count ימים באיחור',
                     'grand-total'         => 'סכום כולל',
                     'id'                  => 'מספר זיהוי',
                     'invoice-date'        => 'תאריך חשבונית',
                     'mass-update-success' => 'חשבוניות שנבחרו עודכנו בהצלחה.',
                     'order-id'            => 'מספר הזמנה',
                     'overdue'             => 'לא שולם',
+                    'overdue-by'          => 'באיחור של :count ימים',
                     'paid'                => 'שולם',
                     'pending'             => 'ממתין',
                     'status'              => 'סטטוס',

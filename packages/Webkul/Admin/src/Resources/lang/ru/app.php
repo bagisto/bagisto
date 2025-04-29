@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'Действия',
+                    'days-left'           => 'Осталось :count дн(я/ей)',
+                    'days-overdue'        => ':count дн(я/ей) просрочено',
                     'grand-total'         => 'Общая сумма',
                     'id'                  => 'ID',
                     'invoice-date'        => 'Дата выставления счета',
                     'mass-update-success' => 'Выбранные счета успешно обновлены.',
                     'order-id'            => 'ID заказа',
                     'overdue'             => 'Просрочено',
+                    'overdue-by'          => 'Просрочено на :count дн(я/ей)',
                     'paid'                => 'Оплачено',
                     'pending'             => 'В ожидании',
                     'status'              => 'Статус',

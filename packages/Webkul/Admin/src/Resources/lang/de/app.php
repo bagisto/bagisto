@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'Aktionen',
+                    'days-left'           => 'Noch :count Tag(e)',
+                    'days-overdue'        => ':count Tag(e) überfällig',
                     'grand-total'         => 'Gesamtsumme',
                     'id'                  => 'ID',
                     'invoice-date'        => 'Rechnungsdatum',
                     'mass-update-success' => 'Ausgewählte Rechnungen wurden erfolgreich aktualisiert.',
                     'order-id'            => 'Bestellnummer',
                     'overdue'             => 'Überfällig',
+                    'overdue-by'          => 'Überfällig seit :count Tag(en)',
                     'paid'                => 'Bezahlt',
                     'pending'             => 'Ausstehend',
                     'status'              => 'Status',

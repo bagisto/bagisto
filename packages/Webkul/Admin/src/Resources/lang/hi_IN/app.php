@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'क्रिया',
+                    'days-left'           => ':count दिन शेष',
+                    'days-overdue'        => ':count दिन की देरी',
                     'grand-total'         => 'कुल योग',
                     'id'                  => 'आईडी',
                     'invoice-date'        => 'चालान तिथि',
                     'mass-update-success' => 'चयनित चालान सफलतापूर्वक अपडेट किए गए।',
                     'order-id'            => 'आदेश आईडी',
                     'overdue'             => 'समय से पहले',
+                    'overdue-by'          => ':count दिन की देरी',
                     'paid'                => 'भुगतान किया गया',
                     'pending'             => 'लंबित',
                     'status'              => 'स्थिति',

@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'Acties',
+                    'days-left'           => 'Nog :count dag(en)',
+                    'days-overdue'        => ':count dag(en) te laat',
                     'grand-total'         => 'Totaalbedrag',
                     'id'                  => 'ID',
                     'invoice-date'        => 'Factuurdatum',
                     'mass-update-success' => 'Geselecteerde facturen zijn succesvol bijgewerkt.',
                     'order-id'            => 'Bestelnummer',
                     'overdue'             => 'Achterstallig',
+                    'overdue-by'          => ':count dag(en) te laat',
                     'paid'                => 'Betaald',
                     'pending'             => 'In afwachting',
                     'status'              => 'Status',

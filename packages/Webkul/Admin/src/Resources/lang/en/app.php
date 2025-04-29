@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'Actions',
+                    'days-left'           => ':count day(s) left',
+                    'days-overdue'        => ':count day(s) overdue',
                     'grand-total'         => 'Grand Total',
                     'id'                  => 'ID',
                     'invoice-date'        => 'Invoice Date',
                     'mass-update-success' => 'Selected invoice updated successfully.',
                     'order-id'            => 'Order ID',
                     'overdue'             => 'Overdue',
+                    'overdue-by'          => 'Overdue by :count day(s)',
                     'paid'                => 'Paid',
                     'pending'             => 'Pending',
                     'status'              => 'Status',

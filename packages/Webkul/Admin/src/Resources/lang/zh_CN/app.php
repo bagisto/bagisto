@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => '操作',
+                    'days-left'           => '还有 :count 天',
+                    'days-overdue'        => '已逾期 :count 天',
                     'grand-total'         => '总计',
                     'id'                  => 'ID',
                     'invoice-date'        => '发票日期',
                     'mass-update-success' => '所选发票已成功更新。',
                     'order-id'            => '订单ID',
                     'overdue'             => '逾期',
+                    'overdue-by'          => '逾期 :count 天',
                     'paid'                => '已支付',
                     'pending'             => '待支付',
                     'status'              => '状态',

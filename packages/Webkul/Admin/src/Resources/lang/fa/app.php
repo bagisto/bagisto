@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'عملیات',
+                    'days-left'           => ':count روز باقی مانده',
+                    'days-overdue'        => ':count روز تأخیر',
                     'grand-total'         => 'جمع کل',
                     'id'                  => 'شناسه',
                     'invoice-date'        => 'تاریخ صورتحساب',
                     'mass-update-success' => 'فاکتورهای انتخاب شده با موفقیت به‌روزرسانی شدند.',
                     'order-id'            => 'شماره سفارش',
                     'overdue'             => 'سررسید',
+                    'overdue-by'          => ':count روز تأخیر دارد',
                     'paid'                => 'پرداخت شده',
                     'pending'             => 'در انتظار',
                     'status'              => 'وضعیت',

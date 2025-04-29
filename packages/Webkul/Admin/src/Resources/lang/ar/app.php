@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'الإجراءات',
+                    'days-left'           => 'تبقى :count يومًا',
+                    'days-overdue'        => ':count يومًا متأخرة',
                     'grand-total'         => 'الإجمالي الكلي',
                     'id'                  => 'الرقم',
                     'invoice-date'        => 'تاريخ الفاتورة',
                     'mass-update-success' => 'تم تحديث الفواتير المحددة بنجاح.',
                     'order-id'            => 'رقم الطلب',
                     'overdue'             => 'متأخرة',
+                    'overdue-by'          => 'متأخر بـ :count يومًا',
                     'paid'                => 'مدفوعة',
                     'pending'             => 'معلقة',
                     'status'              => 'الحالة',

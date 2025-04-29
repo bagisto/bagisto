@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'ක්‍රියාවක්',
+                    'days-left'           => ':count දිනක් ඇත',
+                    'days-overdue'        => ':count දිනක ප්‍රමාදය',
                     'grand-total'         => 'මහේ මුලු මුදල',
                     'id'                  => 'අංකය',
                     'invoice-date'        => 'අනුවා දිනය',
                     'mass-update-success' => 'තෝරාගත් ඉන්වොයිසියන් සාර්ථකව යාවත්කාලීන විය.',
                     'order-id'            => 'ඇණවුම ID',
                     'overdue'             => 'පිටවන',
+                    'overdue-by'          => ':count දිනකින් ප්‍රමාදයි',
                     'paid'                => 'ගෙවිය',
                     'pending'             => 'බලන්න',
                     'status'              => 'තත්වය',

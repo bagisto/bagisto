@@ -572,12 +572,15 @@ return [
 
                 'datagrid' => [
                     'action'              => 'Akcje',
+                    'days-left'           => 'Pozostało :count dzień/dni',
+                    'days-overdue'        => ':count dzień/dni opóźnienia',
                     'grand-total'         => 'Razem',
                     'id'                  => 'ID',
                     'invoice-date'        => 'Data faktury',
                     'mass-update-success' => 'Wybrane faktury zostały pomyślnie zaktualizowane.',
                     'order-id'            => 'ID zamówienia',
                     'overdue'             => 'Zaległe',
+                    'overdue-by'          => 'Spóźnione o :count dzień/dni',
                     'paid'                => 'Opłacone',
                     'pending'             => 'Oczekujące',
                     'status'              => 'Status',

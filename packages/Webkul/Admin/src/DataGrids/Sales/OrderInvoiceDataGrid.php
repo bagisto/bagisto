@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Sales;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Invoice;
@@ -79,23 +80,45 @@ class OrderInvoiceDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                if ($value->state == Invoice::STATUS_PAID) {
+            'closure'    => function ($row) {
+                $dueDuration = core()->getConfigData('sales.invoice_settings.payment_terms.due_duration');
+
+                $todayDate = Carbon::now();
+
+                $dueDate = Carbon::parse($row->created_at)->addDays($dueDuration);
+
+                if ($row->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
                 }
 
                 if (
-                    $value->state == Invoice::STATUS_PENDING
-                    || $value->state == Invoice::STATUS_PENDING_PAYMENT
+                    $row->state == Invoice::STATUS_PENDING
+                    || $row->state == Invoice::STATUS_PENDING_PAYMENT
                 ) {
-                    return '<p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p>';
+                    $daysLeft = $todayDate->diffInDays($dueDate, false);
+
+                    if ($daysLeft >= 0) {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.days-left', ['count' => $daysLeft]);
+                    } else {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.overdue-by', ['count' => abs($daysLeft)]);
+                    }
+
+                    return '<div class="flex flex-col gap-1"><p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
                 }
 
-                if ($value->state == Invoice::STATUS_OVERDUE) {
-                    return '<p class="label-canceled">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
+                if ($row->state == Invoice::STATUS_OVERDUE) {
+                    $daysOverdue = $dueDate->diffInDays($todayDate, false);
+
+                    if ($daysOverdue >= 0) {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.days-overdue', ['count' => $daysOverdue]);
+                    } else {
+                        $extra = '';
+                    }
+
+                    return '<div class="flex flex-col gap-1"><p class="label-canceled">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
                 }
 
-                return $value->state;
+                return $row->state;
             },
         ]);
 
