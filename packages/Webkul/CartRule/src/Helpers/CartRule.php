@@ -10,7 +10,6 @@ use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Rule\Helpers\Validator;
 
@@ -39,7 +38,6 @@ class CartRule
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected CartRepository $cartRepository,
         protected CartRuleRepository $cartRuleRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
@@ -84,9 +82,9 @@ class CartRule
             }
         }
 
-        $this->cart = $this->cartRepository->update([
+        $this->cart->update([
             'applied_cart_rule_ids' => implode(',', array_unique($appliedCartRuleIds, SORT_REGULAR)),
-        ], $this->cart->id);
+        ]);
 
         $this->processShippingDiscount();
 
@@ -382,9 +380,9 @@ class CartRule
 
         $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
 
-        $this->cart = $this->cartRepository->update([
+        $this->cart->update([
             'applied_cart_rule_ids' => implode(',', $cartAppliedCartRuleIds),
-        ], $this->cart->id);
+        ]);
 
         return $this;
     }
@@ -448,11 +446,9 @@ class CartRule
 
         $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
 
-        $this->cart->applied_cart_rule_ids = implode(',', $cartAppliedCartRuleIds);
-
-        $this->cart = $this->cartRepository->update([
+        $this->cart->update([
             'applied_cart_rule_ids' => implode(',', $cartAppliedCartRuleIds),
-        ], $this->cart->id);
+        ]);
     }
 
     /**
