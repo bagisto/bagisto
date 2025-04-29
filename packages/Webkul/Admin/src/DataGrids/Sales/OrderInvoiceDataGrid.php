@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Invoice;
 
 class OrderInvoiceDataGrid extends DataGrid
 {
@@ -79,15 +80,19 @@ class OrderInvoiceDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
-                if ($value->state == 'paid') {
+                if ($value->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
-                } elseif (
-                    $value->state == 'pending'
-                    || $value->state == 'pending_payment'
+                }
+
+                if (
+                    $value->state == Invoice::STATUS_PENDING
+                    || $value->state == Invoice::STATUS_PENDING_PAYMENT
                 ) {
                     return '<p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p>';
-                } elseif ($value->state == 'overdue') {
-                    return '<p class="label-cancel">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
+                }
+
+                if ($value->state == Invoice::STATUS_OVERDUE) {
+                    return '<p class="label-canceled">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
                 }
 
                 return $value->state;
@@ -122,5 +127,33 @@ class OrderInvoiceDataGrid extends DataGrid
                 },
             ]);
         }
+    }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'title'   => trans('admin::app.sales.invoices.index.datagrid.update-status'),
+            'url'     => route('admin.sales.invoices.mass_update.state'),
+            'method'  => 'POST',
+            'options' => [
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.pending'),
+                    'value' => Invoice::STATUS_PENDING,
+                ],
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.paid'),
+                    'value' => Invoice::STATUS_PAID,
+                ],
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.overdue'),
+                    'value' => Invoice::STATUS_OVERDUE,
+                ],
+            ],
+        ]);
     }
 }

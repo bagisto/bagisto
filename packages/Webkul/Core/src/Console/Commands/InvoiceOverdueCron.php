@@ -19,7 +19,7 @@ class InvoiceOverdueCron extends Command
      *
      * @var string
      */
-    protected $description = 'Invoice reminders';
+    protected $description = 'Invoice overdue reminders';
 
     /**
      * Create a new command instance.
@@ -38,7 +38,6 @@ class InvoiceOverdueCron extends Command
      */
     public function handle()
     {
-        // Get 'overdue' invoices
         Invoice::inOverdueAndRemindersLimit()
             ->get()
             ->each(function (Invoice $invoice) {
