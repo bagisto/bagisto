@@ -44,7 +44,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(
-            adminPage.getByText("Attribute Created Successfully")
+            adminPage.getByText('Attribute Created Successfully')
         ).toBeVisible();
     });
 
@@ -60,7 +60,8 @@ test.describe("attribute management", () => {
         );
 
         await adminPage.click('button[type="submit"]');
-
+        
+        await adminPage.waitForTimeout(3000); 
         await expect(adminPage.getByText('The Admin field is required')).toBeVisible();
         await expect(adminPage.getByText('The Attribute Code field is')).toBeVisible();
     });
@@ -83,7 +84,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(
-            adminPage.getByText("Attribute Updated Successfully")
+            adminPage.getByText('Attribute Updated Successfully')
         ).toBeVisible();
     });
 
