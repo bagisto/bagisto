@@ -2,7 +2,7 @@ import { test, expect } from "../../setup";
 import { generateName, generateSlug } from "../../utils/faker";
 
 test.describe("attribute family management", () => {
-    test("create attribute family", async ({ adminPage }) => {
+    test("should be able to create attribute family", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("div.primary-button", {
             state: "visible",
@@ -50,7 +50,7 @@ test.describe("attribute family management", () => {
         ).toBeVisible();
     });
 
-    test("edit attribute family", async ({ adminPage }) => {
+    test("should be able to edit attribute family", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("div.primary-button", {
             state: "visible",
@@ -97,7 +97,7 @@ test.describe("attribute family management", () => {
         ).toBeVisible();
     });
 
-    test("delete attribute family", async ({ adminPage }) => {
+    test("should be able to delete attribute family", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("div.primary-button", {
             state: "visible",

@@ -450,11 +450,12 @@ test.describe("sales management", () => {
          */
         await generateOrder(adminPage);
         await adminPage.waitForTimeout(3000);
-
+        
         /**
          * Create Transaction
          */
         await adminPage.goto("admin/sales/orders");
+        await adminPage.waitForTimeout(3000);
         await adminPage.reload();
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage.locator(".transparent-button > .icon-sales").click();
