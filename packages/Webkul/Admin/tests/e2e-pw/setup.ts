@@ -72,4 +72,4 @@ export const test = base.extend<AdminFixtures>({
     },
 });
 
-export { expect, Page };
+export { expect };

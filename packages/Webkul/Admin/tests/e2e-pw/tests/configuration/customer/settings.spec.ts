@@ -1,7 +1,7 @@
-import { test, expect, Page } from "../../../setup";
+import { test, expect } from "../../../setup";
 
-export async function clickIfNotEnabled(page: Page, selector: string) {
-    const element = page.locator(selector);
+export async function clickIfNotEnabled(adminPage, selector: string) {
+    const element = adminPage.locator(selector);
 
     // Wait for the element to be visible and attached to the DOM
     await element.waitFor({ state: "visible" });
@@ -11,7 +11,7 @@ export async function clickIfNotEnabled(page: Page, selector: string) {
 
     // If the element is disabled, click it to enable
     if (!isChecked) {
-        await page.locator(selector).click();
+        await adminPage.locator(selector).click();
     }
 }
 
@@ -142,10 +142,7 @@ test.describe("settings configuration", () => {
                 'rect[width="40"][height="40"][rx="20"][fill="black"]'
             );
             await expect(rect).toBeVisible();
-            await Promise.all([
-                adminPage.waitForNavigation(),
-                rect.click(),
-              ]);
+            await rect.click();
         });
 
         test("should enable the linkedin login ", async ({ adminPage }) => {
@@ -172,10 +169,7 @@ test.describe("settings configuration", () => {
                 'rect[width="40"][height="40"][rx="20"][fill="#1D8DEE"]'
             );
             await expect(rect).toBeVisible();
-            await Promise.all([
-                adminPage.waitForNavigation(),
-                rect.click(),
-              ]);
+            await rect.click();
         });
 
         test("should enable the google login ", async ({ adminPage }) => {
@@ -201,10 +195,7 @@ test.describe("settings configuration", () => {
                 'rect[width="40"][height="40"][rx="20"][fill="white"]'
             );
             await expect(rect).toBeVisible();
-            await Promise.all([
-                adminPage.waitForNavigation(),
-                rect.click(),
-              ]);
+            await rect.click();
         });
 
         test("should enable the twitter login ", async ({ adminPage }) => {
@@ -231,10 +222,7 @@ test.describe("settings configuration", () => {
                 'rect[width="40"][height="40"][rx="20"][fill="#1A1A1A"]'
             );
             await expect(rect).toBeVisible();
-            await Promise.all([
-                adminPage.waitForNavigation(),
-                rect.click(),
-              ]);
+            await rect.click();
         });
 
         test("should enable the facebook login ", async ({ adminPage }) => {
@@ -261,10 +249,7 @@ test.describe("settings configuration", () => {
                 'rect[width="40"][height="40"][rx="20"][fill="#1877F2"]'
             );
             await expect(rect).toBeVisible();
-            await Promise.all([
-                adminPage.waitForNavigation(),
-                rect.click(),
-              ]);
+            await rect.click();
         });
     });
 });
