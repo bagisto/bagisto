@@ -48,9 +48,7 @@ class VatValidator
     /**
      * Validate a VAT number format.
      *
-     * @param string $vatNumber
-     * @param ?string $formCountry country code from the input form - used as backup if the VAT number does not contain a country code
-     * @return bool
+     * @param  ?string  $formCountry  country code from the input form - used as backup if the VAT number does not contain a country code
      */
     public function validate(string $vatNumber, ?string $formCountry = null): bool
     {
@@ -60,7 +58,7 @@ class VatValidator
 
         if (! isset(self::$pattern_expression[$country])) {
 
-            if (!$formCountry) {
+            if (! $formCountry) {
                 return false;
             }
 
@@ -68,7 +66,7 @@ class VatValidator
             $number = $vatNumber;
         }
 
-        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
+        return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) > 0;
     }
 
     private function vatCleaner(string $vatNumber): string
