@@ -36,7 +36,7 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill(generateDescription());
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Request created successfully', { timeout: 5000 });
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
