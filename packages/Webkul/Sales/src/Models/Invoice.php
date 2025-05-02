@@ -18,14 +18,24 @@ class Invoice extends Model implements InvoiceContract
     use HasFactory, InvoiceReminder, PaymentTerm;
 
     /**
-     * Pending Invoice.
+     * Pending invoice.
      */
     public const STATUS_PENDING = 'pending';
 
     /**
-     * Paid Invoice.
+     * Payment pending invoice.
+     */
+    public const STATUS_PENDING_PAYMENT = 'pending_payment';
+
+    /**
+     * Paid invoice.
      */
     public const STATUS_PAID = 'paid';
+
+    /**
+     * Overdue invoice.
+     */
+    public const STATUS_OVERDUE = 'overdue';
 
     /**
      * Refunded invoice.
@@ -49,9 +59,24 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabel = [
-        self::STATUS_PENDING  => 'Pending',
-        self::STATUS_PAID     => 'Paid',
-        self::STATUS_REFUNDED => 'Refunded',
+        self::STATUS_PENDING         => 'Pending',
+        self::STATUS_PENDING_PAYMENT => 'Pending Payment',
+        self::STATUS_PAID            => 'Paid',
+        self::STATUS_OVERDUE         => 'Overdue',
+        self::STATUS_REFUNDED        => 'Refunded',
+    ];
+
+    /**
+     * Invoice status label class.
+     *
+     * @var array
+     */
+    protected $statusLabelClass = [
+        self::STATUS_PENDING         => 'label-pending',
+        self::STATUS_PENDING_PAYMENT => 'label-pending',
+        self::STATUS_PAID            => 'label-active',
+        self::STATUS_OVERDUE         => 'label-canceled',
+        self::STATUS_REFUNDED        => 'label-canceled',
     ];
 
     /**
@@ -59,7 +84,15 @@ class Invoice extends Model implements InvoiceContract
      */
     public function getStatusLabelAttribute()
     {
-        return $this->statusLabel[$this->state] ?? '';
+        return $this->statusLabel[$this->state] ?? $this->state;
+    }
+
+    /**
+     * Returns the status label class from status code.
+     */
+    public function getStatusLabelClassAttribute()
+    {
+        return $this->statusLabelClass[$this->state] ?? 'label-active';
     }
 
     /**

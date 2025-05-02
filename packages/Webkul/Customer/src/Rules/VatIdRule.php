@@ -5,9 +5,6 @@ namespace Webkul\Customer\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-/**
- * Class VatIdRule - VAT ID validation rule.
- */
 class VatIdRule implements ValidationRule
 {
     /**
