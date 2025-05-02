@@ -6,13 +6,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10612 [feature] - Added confirmation before copying a product.
 
+* #10535 [enhancement] - Added missing 'Overdue' state to the Invoice DataGrid.
+
 * #10671 [enhancement] - Added spacing between shipments.
 
 * #10670 [enhancement] - Added spacing between invoices.
 
+* #10716 [fixed] - Hide 'Cancel' button in Admin Sales → Orders when the invoice is generated.
+
 * #10721 [fixed] - Customer's phone number is not validated on the backend.
 
-* #10722 [fixed] - Postcode backend validation message is not in proper format 
+* #10722 [fixed] - Postcode backend validation message is not in proper format
 
 ## **v2.2.5 (28th of March 2025)** - *Release*
 
