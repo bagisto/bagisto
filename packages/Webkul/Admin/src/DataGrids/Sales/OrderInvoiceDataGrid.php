@@ -2,8 +2,10 @@
 
 namespace Webkul\Admin\DataGrids\Sales;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Invoice;
 
 class OrderInvoiceDataGrid extends DataGrid
 {
@@ -78,19 +80,45 @@ class OrderInvoiceDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                if ($value->state == 'paid') {
+            'closure'    => function ($row) {
+                $dueDuration = core()->getConfigData('sales.invoice_settings.payment_terms.due_duration');
+
+                $todayDate = Carbon::now();
+
+                $dueDate = Carbon::parse($row->created_at)->addDays($dueDuration);
+
+                if ($row->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
-                } elseif (
-                    $value->state == 'pending'
-                    || $value->state == 'pending_payment'
-                ) {
-                    return '<p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p>';
-                } elseif ($value->state == 'overdue') {
-                    return '<p class="label-cancel">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
                 }
 
-                return $value->state;
+                if (
+                    $row->state == Invoice::STATUS_PENDING
+                    || $row->state == Invoice::STATUS_PENDING_PAYMENT
+                ) {
+                    $daysLeft = $todayDate->diffInDays($dueDate, false);
+
+                    if ($daysLeft >= 0) {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.days-left', ['count' => $daysLeft]);
+                    } else {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.overdue-by', ['count' => abs($daysLeft)]);
+                    }
+
+                    return '<div class="flex flex-col gap-1"><p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
+                }
+
+                if ($row->state == Invoice::STATUS_OVERDUE) {
+                    $daysOverdue = $dueDate->diffInDays($todayDate, false);
+
+                    if ($daysOverdue >= 0) {
+                        $extra = trans('admin::app.sales.invoices.index.datagrid.days-overdue', ['count' => $daysOverdue]);
+                    } else {
+                        $extra = '';
+                    }
+
+                    return '<div class="flex flex-col gap-1"><p class="label-canceled">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p><p class="block text-xs italic leading-5 text-red-600 dark:text-gray-300">'.$extra.'</p></div>';
+                }
+
+                return $row->state;
             },
         ]);
 
@@ -122,5 +150,33 @@ class OrderInvoiceDataGrid extends DataGrid
                 },
             ]);
         }
+    }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'title'   => trans('admin::app.sales.invoices.index.datagrid.update-status'),
+            'url'     => route('admin.sales.invoices.mass_update.state'),
+            'method'  => 'POST',
+            'options' => [
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.pending'),
+                    'value' => Invoice::STATUS_PENDING,
+                ],
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.paid'),
+                    'value' => Invoice::STATUS_PAID,
+                ],
+                [
+                    'label' => trans('admin::app.sales.invoices.index.datagrid.overdue'),
+                    'value' => Invoice::STATUS_OVERDUE,
+                ],
+            ],
+        ]);
     }
 }
