@@ -255,6 +255,7 @@
         type="text/x-template"
         id="v-desktop-category-template"
     >
+        <!-- Loading State -->
         <div
             class="flex items-center gap-5"
             v-if="isLoading"
@@ -275,13 +276,25 @@
             ></span>
         </div>
 
+        <!-- Categories Navigation -->
         <div
             class="flex items-center"
             v-else
         >
+            <!-- "All" button for opening the category drawer -->
+            <div 
+                class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                @click="toggleAllCategoriesDrawer"
+            >
+                <span class="flex items-center px-5 uppercase">
+                    <span class="icon-hamburger mr-2 text-2xl"></span> All
+                </span>
+            </div>
+                
+            <!-- Show only first 4 categories in main navigation -->
             <div
                 class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
-                v-for="category in categories"
+                v-for="category in categories.slice(0, 4)"
             >
                 <span>
                     <a
@@ -292,11 +305,12 @@
                     </a>
                 </span>
 
+                <!-- Dropdown for each category -->
                 <div
                     class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
-                    v-if="category.children.length"
+                    v-if="category.children && category.children.length"
                 >
-                    <div class="aigns flex justify-between gap-x-[70px]">
+                    <div class="flex justify-between gap-x-[70px]">
                         <div
                             class="grid w-full min-w-max max-w-[150px] flex-auto grid-cols-[1fr] content-start gap-5"
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
@@ -310,7 +324,7 @@
 
                                 <ul
                                     class="grid grid-cols-[1fr] gap-3"
-                                    v-if="secondLevelCategory.children.length"
+                                    v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                 >
                                     <li
                                         class="text-sm font-medium text-zinc-500"
@@ -327,6 +341,140 @@
                 </div>
             </div>
         </div>
+
+        <!-- Backdrop Overlay with Fade Transition -->
+        <transition name="fade">
+            <div 
+                class="fixed inset-0 z-50 bg-black bg-opacity-50" 
+                v-if="showAllCategoriesDrawer"
+                @click="closeAllCategoriesDrawer"
+            ></div>
+        </transition>
+
+        <!-- Single drawer with multiple views - Amazon style slide from left -->
+        <transition name="slide-left">
+            <div 
+                class="fixed bottom-0 left-0 top-0 z-50 w-96 overflow-hidden bg-white shadow-lg"
+                v-if="showAllCategoriesDrawer"
+            >
+                <!-- Main drawer wrapper with horizontal sliding panels -->
+                <div class="drawer-inner-transition flex h-full" :style="{ transform: `translateX(${showThirdLevelDrawer ? '-100%' : '0'})` }">
+                    <!-- First level panel -->
+                    <div class="min-w-full flex-shrink-0">
+                        <!-- Drawer Header -->
+                        <div class="flex items-center justify-between border-b p-4">
+                            <h2 class="text-xl font-bold">All Categories</h2>
+                            <button 
+                                @click="closeAllCategoriesDrawer" 
+                                class="icon-cancel p-2 text-2xl focus:outline-none"
+                                aria-label="Close menu"
+                            >                            
+                            </button>
+                        </div>
+
+                        <!-- Drawer Content - First Level Categories -->
+                        <div class="h-full overflow-y-auto p-4">
+                            <div 
+                                v-for="category in categories" 
+                                :key="category.id" 
+                                class="mb-4"
+                            >
+                                <div class="flex cursor-pointer items-center justify-between rounded px-4 py-2 transition-colors duration-200 hover:bg-gray-100">
+                                    <a :href="category.url" class="text-base font-medium text-black">
+                                        @{{ category.name }}
+                                    </a>
+                                </div>
+
+                                <!-- Second Level Categories -->
+                                <div 
+                                    v-if="category.children && category.children.length" 
+                                    class="mt-2"
+                                >
+                                    <div 
+                                        v-for="secondLevelCategory in category.children" 
+                                        :key="secondLevelCategory.id" 
+                                        class="mb-2"
+                                    >
+                                        <div 
+                                            class="flex cursor-pointer items-center justify-between rounded px-4 py-2 transition-colors duration-200 hover:bg-gray-100"
+                                            @click="toggleSecondLevelCategory(secondLevelCategory, category, $event)"
+                                        >
+                                            <a :href="secondLevelCategory.url" class="text-sm font-normal">
+                                                @{{ secondLevelCategory.name }}
+                                            </a>
+                                            
+                                            <span 
+                                                v-if="secondLevelCategory.children && secondLevelCategory.children.length" 
+                                                class="icon-arrow-right transform transition-transform duration-300"
+                                                :class="{'rotate-90': !isAmazonStyleSecondLevel && expandedCategories.includes(secondLevelCategory.id)}"
+                                            ></span>
+                                        </div>
+
+                                        <!-- Third Level Categories (Original Expandable Style) -->
+                                        <div 
+                                            v-if="!isAmazonStyleSecondLevel && secondLevelCategory.children && secondLevelCategory.children.length && expandedCategories.includes(secondLevelCategory.id)" 
+                                            class="ml-4 mt-2"
+                                        >
+                                            <div 
+                                                v-for="thirdLevelCategory in secondLevelCategory.children" 
+                                                :key="thirdLevelCategory.id" 
+                                                class="rounded px-4 py-2 transition-colors duration-200 hover:bg-gray-100"
+                                            >
+                                                <a :href="thirdLevelCategory.url" class="text-sm text-gray-600">
+                                                    @{{ thirdLevelCategory.name }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second level panel (third level categories) -->
+                    <div class="min-w-full flex-shrink-0">
+                        <!-- Drawer Header with Back Button -->
+                        <div class="flex items-center justify-between border-b p-4">
+                            <div class="flex items-center">
+                                <button 
+                                    @click="closeThirdLevelDrawer" 
+                                    class="mr-3 flex items-center justify-center focus:outline-none"
+                                    aria-label="Go back"
+                                >
+                                    <span class="icon-arrow-left text-lg"></span>
+                                </button>
+                                <div>
+                                    <div class="text-xs text-gray-500">@{{ currentParentCategory?.name }}</div>
+                                    <h2 class="text-xl font-bold">@{{ currentSecondLevelCategory?.name }}</h2>
+                                </div>
+                            </div>
+                            <button 
+                                @click="closeAllCategoriesDrawer" 
+                                class="icon-cancel p-2 text-2xl focus:outline-none"
+                                aria-label="Close menu"
+                            >
+                            </button>
+                        </div>
+
+                        <!-- Third Level Content -->
+                        <div class="h-full overflow-y-auto p-4">
+                            <div
+                                v-for="thirdLevelCategory in currentSecondLevelCategory?.children" 
+                                :key="thirdLevelCategory.id" 
+                                class="mb-2"
+                            >
+                                <a 
+                                    :href="thirdLevelCategory.url" 
+                                    class="block rounded px-4 py-3 text-sm transition-colors duration-200 hover:bg-gray-100"
+                                >
+                                    @{{ thirdLevelCategory.name }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </script>
 
     <script type="module">
@@ -334,15 +482,35 @@
             template: '#v-desktop-category-template',
 
             data() {
-                return  {
+                return {
                     isLoading: true,
-
                     categories: [],
+                    showAllCategoriesDrawer: false,
+                    expandedCategories: [],
+                    showThirdLevelDrawer: false,
+                    currentSecondLevelCategory: null,
+                    currentParentCategory: null,
+                    isAmazonStyleSecondLevel: true,
+                    drawerTransition: 'fade'
                 }
             },
 
             mounted() {
                 this.get();
+                
+                // Add transition styles to document head
+                this.addTransitionStyles();
+                
+                // Close drawer when clicking escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        if (this.showThirdLevelDrawer) {
+                            this.closeThirdLevelDrawer();
+                        } else if (this.showAllCategoriesDrawer) {
+                            this.closeAllCategoriesDrawer();
+                        }
+                    }
+                });
             },
 
             methods: {
@@ -350,14 +518,43 @@
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.isLoading = false;
-
                             this.categories = response.data.data;
                         }).catch(error => {
                             console.log(error);
                         });
                 },
 
+                addTransitionStyles() {
+                    // Create style element for transitions
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        /* Fade transition for overlay */
+                        .fade-enter-active, .fade-leave-active {
+                            transition: opacity 0.3s ease;
+                        }
+                        .fade-enter-from, .fade-leave-to {
+                            opacity: 0;
+                        }
+                        
+                        /* Slide from left transition for main drawer */
+                        .slide-left-enter-active, .slide-left-leave-active {
+                            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        }
+                        .slide-left-enter-from, .slide-left-leave-to {
+                            transform: translateX(-100%);
+                        }
+                        
+                        /* Ensure smooth inner transitions between drawer views */
+                        .drawer-inner-transition {
+                            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        }
+                    `;
+                    document.head.appendChild(style);
+                },
+
                 pairCategoryChildren(category) {
+                    if (! category.children) return [];
+                    
                     return category.children.reduce((result, value, index, array) => {
                         if (index % 2 === 0) {
                             result.push(array.slice(index, index + 2));
@@ -365,10 +562,76 @@
 
                         return result;
                     }, []);
+                },
+                
+                toggleAllCategoriesDrawer() {
+                    this.showAllCategoriesDrawer = !this.showAllCategoriesDrawer;
+                    
+                    // Prevent body scroll when drawer is open
+                    if (this.showAllCategoriesDrawer) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                        // Reset third level drawer when main drawer is closed
+                        this.showThirdLevelDrawer = false;
+                    }
+                },
+                
+                closeAllCategoriesDrawer() {
+                    // First transition back to main panel if we're in a subcategory
+                    if (this.showThirdLevelDrawer) {
+                        this.showThirdLevelDrawer = false;
+                        // Use setTimeout to allow inner transition to complete before closing the drawer
+                        setTimeout(() => {
+                            this.showAllCategoriesDrawer = false;
+                            document.body.style.overflow = '';
+                        }, 300);
+                    } else {
+                        this.showAllCategoriesDrawer = false;
+                        document.body.style.overflow = '';
+                    }
+                },
+                
+                toggleSecondLevelCategory(secondLevelCategory, parentCategory, event) {
+                    // If category has children and we're using Amazon style
+                    if (secondLevelCategory.children && secondLevelCategory.children.length && this.isAmazonStyleSecondLevel) {
+                        // Store current categories for the drawer
+                        this.currentSecondLevelCategory = secondLevelCategory;
+                        this.currentParentCategory = parentCategory;
+                        
+                        // Smooth transition to the next panel
+                        this.showThirdLevelDrawer = true;
+                        
+                        // Prevent default link behavior
+                        if (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        return;
+                    }
+                    
+                    // Original expand/collapse behavior for non-Amazon style
+                    if (!this.isAmazonStyleSecondLevel && secondLevelCategory.children && secondLevelCategory.children.length) {
+                        if (this.expandedCategories.includes(secondLevelCategory.id)) {
+                            this.expandedCategories = this.expandedCategories.filter(id => id !== secondLevelCategory.id);
+                        } else {
+                            this.expandedCategories.push(secondLevelCategory.id);
+                        }
+                        
+                        // Prevent default link behavior
+                        if (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                    }
+                },
+                
+                closeThirdLevelDrawer() {
+                    // Slide back to main menu with animation
+                    this.showThirdLevelDrawer = false;
                 }
             },
         });
     </script>
 @endPushOnce
-
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.after') !!}
