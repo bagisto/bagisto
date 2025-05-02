@@ -152,7 +152,7 @@ export async function downloadableOrder(page) {
      */
     await page.getByText("Add Link").first().click();
     await page.waitForSelector(".min-h-0 > div > div");
-    await page.locator('input[name="title"]').first().fill(generateName());
+    await page.locator('input[name="title"]').fill(generateName());
     const linkTitle = await page.locator('input[name="title"]').inputValue();
     await page.locator('input[name="price"]').first().fill("100");
     await page.locator('input[name="downloads"]').fill("10");

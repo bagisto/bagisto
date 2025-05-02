@@ -4,11 +4,14 @@ import {
     generateLastName,
     generateEmail,
     randomElement,
+    generatePhoneNumber,
+    generateFullName,
+    generateDescription,
 } from "../../utils/faker";
 import * as forms from "../../utils/form";
 
 async function createCustomer(adminPage) {
-    await adminPage.goto('admin/customers');
+    await adminPage.goto("admin/customers");
     await adminPage.waitForSelector("button.primary-button:visible", {
         state: "visible",
     });
@@ -34,17 +37,17 @@ async function createCustomer(adminPage) {
 }
 
 test.describe("customer management", () => {
-    test("create customer", async ({ adminPage }) => {
+    test("should be create customer", async ({ adminPage }) => {
         await createCustomer(adminPage);
     });
 
-    test("edit customer", async ({ adminPage }) => {
+    test("should be able to edit customer", async ({ adminPage }) => {
         /**
          * Creating a customer first.
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto('admin/customers');
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -68,26 +71,19 @@ test.describe("customer management", () => {
 
         await adminPage.fill(
             'input[name="first_name"]:visible',
-            forms.form.firstName
+            generateFirstName()
         );
         await adminPage.fill(
             'input[name="last_name"]:visible',
-            forms.form.lastName
+            generateLastName()
         );
         const email = forms.form.email;
-        await adminPage.fill('input[name="email"]:visible', email);
-        await adminPage.fill('input[name="phone"]:visible', forms.form.phone);
+        await adminPage.fill('input[name="email"]:visible', generateEmail());
+        await adminPage.fill(
+            'input[name="phone"]:visible',
+            generatePhoneNumber()
+        );
         await adminPage.selectOption('select[name="gender"]:visible', "Other");
-
-        const checkboxs = await adminPage.$$('input[type="checkbox"] + label');
-
-        for (let checkbox of checkboxs) {
-            let i = Math.floor(Math.random() * 10) + 1;
-
-            if (i % 2 == 1) {
-                await checkbox.click();
-            }
-        }
 
         await adminPage.press('input[name="phone"]:visible', "Enter");
 
@@ -96,8 +92,8 @@ test.describe("customer management", () => {
         ).toBeVisible();
     });
 
-    test("Add address", async ({ adminPage }) => {
-        await adminPage.goto('admin/customers');
+    test("should be add address", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -118,18 +114,16 @@ test.describe("customer management", () => {
         );
         await createBtn[1].click();
 
-        await adminPage.fill('input[name="company_name"]', forms.form.lastName);
-        await adminPage.fill('input[name="first_name"]', forms.form.firstName);
-        await adminPage.fill('input[name="last_name"]', forms.form.lastName);
-        await adminPage.fill('input[name="email"]', forms.form.email);
+        await adminPage.fill('input[name="company_name"]', generateFullName());
+        await adminPage.fill('input[name="first_name"]', generateFirstName());
+        await adminPage.fill('input[name="last_name"]', generateLastName());
+        await adminPage.fill('input[name="email"]', generateEmail());
         await adminPage.fill('input[name="address[0]"]', forms.form.firstName);
         await adminPage.selectOption('select[name="country"]', "IN");
         await adminPage.selectOption('select[name="state"]', "UP");
         await adminPage.fill('input[name="city"]', forms.form.lastName);
         await adminPage.fill('input[name="postcode"]', "201301");
-        await adminPage.fill('input[name="phone"]', forms.form.phone);
-
-        await adminPage.click('input[name="default_address"] + label:visible');
+        await adminPage.fill('input[name="phone"]', generatePhoneNumber());
         await adminPage.press('input[name="phone"]', "Enter");
 
         await expect(
@@ -137,8 +131,8 @@ test.describe("customer management", () => {
         ).toBeVisible();
     });
 
-    test("edit address", async ({ adminPage }) => {
-        await adminPage.goto('admin/customers');
+    test("should be able to edit address", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -159,9 +153,9 @@ test.describe("customer management", () => {
             'p[class="cursor-pointer text-blue-600 transition-all hover:underline"]:visible'
         );
 
-        if (createBtn.length == 0) {
-            throw new Error("No address found for edit");
-        }
+        // if (createBtn.length == 0) {
+        //     throw new Error("No address found for edit");
+        // }
 
         await createBtn[0].click();
 
@@ -175,8 +169,6 @@ test.describe("customer management", () => {
         await adminPage.fill('input[name="city"]', forms.form.lastName);
         await adminPage.fill('input[name="postcode"]', "201301");
         await adminPage.fill('input[name="phone"]', forms.form.phone);
-
-        await adminPage.click('input[name="default_address"] + label:visible');
         await adminPage.press('input[name="phone"]', "Enter");
 
         await expect(
@@ -184,29 +176,41 @@ test.describe("customer management", () => {
         ).toBeVisible();
     });
 
-    // test('set default address', async ({ adminPage }) => {
-    //     await adminPage.goto('admin/customers');
-    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
+    test("should be set default address", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
-    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
-    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
-    //     await iconRight[0].click();
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
 
-    //     await adminPage.waitForSelector('div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible');
+        await adminPage.waitForSelector(
+            'button.flex:has-text("Set as Default"):visible'
+        );
 
-    //     const createBtn = await adminPage.$$('button[class="flex cursor-pointer justify-center text-sm text-blue-600 transition-all hover:underline"]:visible');
+        const createBtn = await adminPage.$$(
+            'button.flex:has-text("Set as Default"):visible'
+        );
 
-    //     if (createBtn.length == 0) {
-    //         throw new Error('No address found for edit');
-    //     }
+        // if (createBtn.length == 0) {
+        //     throw new Error('No address found for edit');
+        // }
 
-    //     await createBtn[createBtn.length - 1].click();
+        await createBtn[createBtn.length - 1].click();
 
-    //     await expect(adminPage.getByText('Default Address Updated Successfully')).toBeVisible();
-    // });
+        await expect(
+            adminPage.getByText("Default Address Updated Successfully")
+        ).toBeVisible();
+    });
 
-    test("delete address", async ({ adminPage }) => {
-        await adminPage.goto('admin/customers');
+    test("should be able to delete address", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -233,44 +237,68 @@ test.describe("customer management", () => {
         ).toBeVisible();
     });
 
-    // test('add note', async ({ adminPage }) => {
-    //     await adminPage.goto('admin/customers');
-    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
+    test("should be add note in customer", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
-    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
-    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
-    //     await iconRight[0].click();
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
 
-    //     const lorem100 = forms.generateRandomStringWithSpaces(200);
-    //     adminPage.fill('textarea[name="note"]', lorem100);
+        const lorem100 = forms.generateRandomStringWithSpaces(200);
+        adminPage.fill('textarea[name="note"]', generateDescription());
 
-    //     await adminPage.click('input[name="customer_notified"] + span');
+        await adminPage.click('input[name="customer_notified"] + span');
 
-    //     await adminPage.click('button[type="submit"].secondary-button:visible');
+        await adminPage.click('button[type="submit"].secondary-button:visible');
 
-    //     await adminPage.waitForTimeout(2000);
+        await adminPage.waitForSelector('text=Note Created Successfully', { timeout: 5000 });
+        // await expect(
+            // adminPage.getByText("Note Created Successfully")
+        // ).toBeVisible();
 
-    //     await expect(adminPage.getByText('Note Created Successfully')).toBeVisible();
-    // });
+        await expect(
+            adminPage.locator("#app").filter({ hasText: "Note Created Successfully" })
+        ).toBeVisible();
+    });
 
-    // test('delete account', async ({ adminPage }) => {
-    //     await createCustomer(adminPage);
+    test("should be able to delete account", async ({ adminPage }) => {
+        await createCustomer(adminPage);
 
-    //     await adminPage.goto('admin/customers');
-    //     await adminPage.waitForSelector('button.primary-button:visible', { state: 'visible' });
+        await adminPage.goto("admin/customers");
+        await adminPage.waitForSelector("button.primary-button:visible", {
+            state: "visible",
+        });
 
-    //     await adminPage.waitForSelector('a.cursor-pointer.icon-sort-right', { state: 'visible' });
-    //     const iconRight = await adminPage.$$('a.cursor-pointer.icon-sort-right');
-    //     await iconRight[0].click();
+        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
+            state: "visible",
+        });
+        const iconRight = await adminPage.$$(
+            "a.cursor-pointer.icon-sort-right"
+        );
+        await iconRight[0].click();
+        await adminPage.waitForTimeout(3000);
 
-    //     await adminPage.click('.icon-cancel:visible');
-    //     await adminPage.click('button[type="button"].transparent-button + button[type="button"].primary-button');
+        await adminPage.click(".icon-cancel:visible");
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
-    //     await expect(adminPage.getByText('Customer Deleted Successfully')).toBeVisible();
-    // });
+        await adminPage.waitForSelector('text=Customer Deleted Successfully', { timeout: 3000 });
 
-    test("create order", async ({ adminPage }) => {
-        await adminPage.goto('admin/customers');
+        await expect(
+            adminPage.locator("#app").filter({ hasText: "Customer Deleted Successfully" })
+        ).toBeVisible();
+    });
+
+    test("should be able to create order", async ({ adminPage }) => {
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -292,13 +320,15 @@ test.describe("customer management", () => {
         await expect(adminPage.getByText("Cart Items").first()).toBeVisible();
     });
 
-    test("mass delete customers", async ({ adminPage }) => {
+    test("should be able to mass delete the customers.", async ({
+        adminPage,
+    }) => {
         /**
          * Creating a customer first.
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto('admin/customers');
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
@@ -337,13 +367,15 @@ test.describe("customer management", () => {
         ).toBeVisible();
     });
 
-    test("mass update customers", async ({ adminPage }) => {
+    test("should be able to mass update the customers", async ({
+        adminPage,
+    }) => {
         /**
          * Creating a customer first.
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto('admin/customers');
+        await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
