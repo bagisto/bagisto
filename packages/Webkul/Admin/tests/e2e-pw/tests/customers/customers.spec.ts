@@ -251,7 +251,9 @@ test.describe("customer management", () => {
             "a.cursor-pointer.icon-sort-right"
         );
         await iconRight[0].click();
-
+        await adminPage.waitForTimeout(5000);
+        await adminPage.reload();
+        
         /**
          * add note in Customer Profile
          */
