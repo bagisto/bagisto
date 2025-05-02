@@ -1,6 +1,6 @@
 name: Auto Commits
 
-on: [push, pull_request]
+on: [pull_request]
 
 permissions:
   contents: write
