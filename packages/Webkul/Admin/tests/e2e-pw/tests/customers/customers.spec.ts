@@ -241,6 +241,7 @@ test.describe("customer management", () => {
         await adminPage.goto("admin/customers");
         await adminPage.waitForSelector("button.primary-button:visible");
 
+        const Description = generateDescription();
         /**
          * edit customer profile
          */
@@ -260,7 +261,7 @@ test.describe("customer management", () => {
         await adminPage.waitForSelector('textarea[name="note"]', {
             state: "visible",
         });
-        await adminPage.fill('textarea[name="note"]', generateDescription());
+        await adminPage.fill('textarea[name="note"]', Description);
 
         await adminPage.click('input[name="customer_notified"] + span');
 
@@ -273,10 +274,13 @@ test.describe("customer management", () => {
         await expect(submitBtn).toBeVisible({ timeout: 5000 });
         await submitBtn.click();
         await adminPage.waitForTimeout(3000);
+        
         /**
-         * check success message
+         * check Note Created Successfully
          */
-        await expect(adminPage.locator('#app')).toContainText('Note Created Successfully', { timeout: 5000 });
+        await expect(adminPage.getByText('Note Created Successfully Close')).toBeVisible({ timeout: 5000 });
+        await expect(adminPage.getByText(Description)).toBeVisible();
+
     });
 
     test("should be able to delete account", async ({ adminPage }) => {
