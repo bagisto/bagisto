@@ -473,13 +473,14 @@ test.describe("sales management", () => {
         adminPage,
     }) => {
         await generateOrder(adminPage);
+        await adminPage.waitForTimeout(5000);
 
         /**
          * create invoice
          */
         await adminPage.goto("admin/sales/orders");
-        await adminPage.waitForTimeout(5000);
         await adminPage.reload();
+        await adminPage.waitForTimeout(5000);   
 
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage

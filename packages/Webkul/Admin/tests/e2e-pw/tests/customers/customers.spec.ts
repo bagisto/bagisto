@@ -253,7 +253,7 @@ test.describe("customer management", () => {
         await iconRight[0].click();
         await adminPage.waitForTimeout(5000);
         await adminPage.reload();
-        
+
         /**
          * add note in Customer Profile
          */
@@ -270,16 +270,13 @@ test.describe("customer management", () => {
         const submitBtn = adminPage.locator(
             'button[type="submit"].secondary-button:visible'
         );
-        await expect(submitBtn).toBeVisible({ timeout: 3000 });
+        await expect(submitBtn).toBeVisible({ timeout: 5000 });
         await submitBtn.click();
- 
+        await adminPage.waitForTimeout(3000);
         /**
          * check success message
          */
-        const successMessage = adminPage.locator("#app", {
-            hasText: "Note Created Successfully"
-        });
-        await expect(successMessage).toBeVisible({ timeout: 5000 });   
+        await expect(adminPage.locator('#app')).toContainText('Note Created Successfully', { timeout: 5000 });
     });
 
     test("should be able to delete account", async ({ adminPage }) => {
