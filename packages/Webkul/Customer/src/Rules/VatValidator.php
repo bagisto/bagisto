@@ -5,7 +5,7 @@ namespace Webkul\Customer\Rules;
 class VatValidator
 {
     /**
-     * Regular expression patterns per country code
+     * Regular expression patterns per country code.
      *
      * @var array
      *
@@ -48,9 +48,7 @@ class VatValidator
     /**
      * Validate a VAT number format.
      *
-     * @param string $vatNumber
-     * @param ?string $formCountry country code from the input form - used as backup if the VAT number does not contain a country code
-     * @return bool
+     * @param  ?string  $formCountry  country code from the input form - used as backup if the VAT number does not contain a country code
      */
     public function validate(string $vatNumber, ?string $formCountry = null): bool
     {
@@ -59,8 +57,7 @@ class VatValidator
         [$country, $number] = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
-
-            if (!$formCountry) {
+            if (! $formCountry) {
                 return false;
             }
 
@@ -68,9 +65,12 @@ class VatValidator
             $number = $vatNumber;
         }
 
-        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
+        return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) > 0;
     }
 
+    /**
+     * Vat number cleaner.
+     */
     private function vatCleaner(string $vatNumber): string
     {
         $vatNumberClean = preg_replace('/[^A-Z0-9]/i', '', $vatNumber);
@@ -78,6 +78,9 @@ class VatValidator
         return strtoupper($vatNumberClean);
     }
 
+    /**
+     * Split the VAT number into country code and number.
+     */
     private function splitVat(string $vatNumber): array
     {
         return [

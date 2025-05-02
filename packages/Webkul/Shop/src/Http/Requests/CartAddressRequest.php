@@ -18,8 +18,6 @@ class CartAddressRequest extends FormRequest
 
     /**
      * Determine if the product is authorized to make this request.
-     * 
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -28,8 +26,6 @@ class CartAddressRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     * 
-     * @return array
      */
     public function rules(): array
     {
@@ -46,9 +42,6 @@ class CartAddressRequest extends FormRequest
 
     /**
      * Merge new address rules.
-     *
-     * @param string $addressType
-     * @return void
      */
     private function mergeAddressRules(string $addressType): void
     {

@@ -2,10 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Sales\OrderInvoiceDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -142,5 +144,27 @@ class InvoiceController extends Controller
             view('admin::sales.invoices.pdf', compact('invoice'))->render(),
             'invoice-'.$invoice->created_at->format('d-m-Y')
         );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massUpdateState(MassUpdateRequest $massUpdateRequest)
+    {
+        $invoiceIds = $massUpdateRequest->input('indices');
+
+        $invoices = $this->invoiceRepository->findWhereIn('id', $invoiceIds);
+
+        foreach ($invoices as $invoice) {
+            $invoice->state = $massUpdateRequest->input('value');
+
+            $invoice->save();
+        }
+
+        return new JsonResponse([
+            'message' => trans('admin::app.sales.invoices.index.datagrid.mass-update-success'),
+        ], 200);
     }
 }
