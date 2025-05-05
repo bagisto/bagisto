@@ -398,7 +398,6 @@
 
             <!-- Bagisto Drawer Integration -->
             <x-shop::drawer
-                ref="categoryDrawer"
                 position="left"
                 width="400px"
                 ::is-active="isDrawerActive"
@@ -409,11 +408,7 @@
 
                 <x-slot:header class="border-b border-gray-200">
                     <div class="flex w-full items-center justify-between">
-                        <h2 class="text-xl font-bold" v-if="currentViewLevel === 'main'">All Categories</h2>
-
-                        <div v-else>
-                            <h2 class="text-xl font-bold">@{{ currentSecondLevelCategory?.name }}</h2>
-                        </div>
+                        <h2 class="text-xl font-bold">Categories</h2>
                     </div>
                 </x-slot>
 
@@ -539,7 +534,7 @@
                 },
 
                 pairCategoryChildren(category) {
-                    if (!category.children) return [];
+                    if (! category.children) return [];
                     
                     return category.children.reduce((result, value, index, array) => {
                         if (index % 2 === 0) {

@@ -127,7 +127,34 @@ return [
                 'type'          => 'image',
                 'channel_based' => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
-            ],
+            ], 
+        ],
+    ], [
+        'key'    => 'general.design.categories',
+        'name'   => 'admin::app.configuration.index.general.design.header-category.title',
+        'info'   => 'admin::app.configuration.index.general.design.header-category.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'category_view',
+                'title'   => 'admin::app.configuration.index.general.design.header-category.title',
+                'type'    => 'select',
+                'default' => 'parent',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.design.header-category.parent',
+                        'value' => 'parent',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.design.header-category.all',
+                        'value' => 'all',
+                    ],
+                ],
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'blade',
+                'path'          => 'admin::configuration.custom-configurations.cateogy-layouts',
+            ], 
         ],
     ], [
         'key'  => 'general.magic_ai',
