@@ -2,52 +2,6 @@ import { test, expect } from "../../setup";
 import { generateName, generateSlug } from "../../utils/faker";
 
 test.describe("attribute management", () => {
-    test("should create a new attribute successfully", async ({
-        adminPage,
-    }) => {
-        await adminPage.goto("admin/catalog/attributes");
-        await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
-        );
-
-        const attributeName = generateName();
-
-        // Label Section
-        await adminPage.fill('input[name="admin_name"]', attributeName);
-        await adminPage.fill('input[name="en[name]"]', attributeName);
-
-        // General Section
-        await adminPage.fill("#code", generateSlug("_"));
-        await adminPage.selectOption('select[name="type"]', "text");
-
-        // Validations Section
-        await adminPage.click('label[for="is_required"]');
-
-        // Configuration Section
-        await adminPage.click('label[for="value_per_locale"]');
-        await adminPage.click('label[for="value_per_channel"]');
-        await adminPage.click('label[for="is_visible_on_front"]');
-        await adminPage.click('label[for="is_comparable"]');
-
-        // Verify Checkbox States Using The Hidden Inputs
-        await expect(adminPage.locator("input#is_required")).toBeChecked();
-        await expect(adminPage.locator("input#value_per_locale")).toBeChecked();
-        await expect(
-            adminPage.locator("input#value_per_channel")
-        ).toBeChecked();
-        await expect(
-            adminPage.locator("input#is_visible_on_front")
-        ).toBeChecked();
-        await expect(adminPage.locator("input#is_comparable")).toBeChecked();
-
-        // Submit
-        await adminPage.click('button[type="submit"]');
-
-        await expect(
-            adminPage.getByText("Attribute Created Successfully")
-        ).toBeVisible();
-    });
-
     test("should validate required fields", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.waitForSelector(
@@ -61,8 +15,76 @@ test.describe("attribute management", () => {
 
         await adminPage.click('button[type="submit"]');
 
-        await expect(adminPage.getByText('The Admin field is required')).toBeVisible();
-        await expect(adminPage.getByText('The Attribute Code field is')).toBeVisible();
+        await expect(
+            adminPage.getByText("The Admin field is required")
+        ).toBeVisible();
+        await expect(
+            adminPage.getByText("The Attribute Code field is")
+        ).toBeVisible();
+    });
+
+    test("should create a new text type attribute", async ({ adminPage }) => {
+        await adminPage.goto("admin/catalog/attributes");
+        await adminPage.click(
+            'div.primary-button:has-text("Create Attribute")'
+        );
+
+        const attributeName = generateName();
+
+        /**
+         * Label Section
+         */
+        await adminPage.fill('input[name="admin_name"]', attributeName);
+        await adminPage.fill('input[name="en[name]"]', attributeName);
+
+        /**
+         * General Section
+         */
+        await adminPage.fill("#code", generateSlug("_"));
+        await adminPage.selectOption('select[name="type"]', "text");
+
+        /**
+         * Validations Section
+         */
+        await adminPage.click('label[for="is_required"]');
+
+        /**
+         * Configuration Section
+         */
+        await adminPage.click('label[for="value_per_locale"]');
+        await adminPage.click('label[for="value_per_channel"]');
+        await adminPage.click('label[for="is_visible_on_front"]');
+        await adminPage.click('label[for="is_comparable"]');
+
+        /**
+         * Verify Checkbox States Using The Hidden Inputs
+         */
+        await expect(adminPage.locator("input#is_required")).toBeChecked();
+        await expect(adminPage.locator("input#value_per_locale")).toBeChecked();
+        await expect(
+            adminPage.locator("input#value_per_channel")
+        ).toBeChecked();
+        await expect(
+            adminPage.locator("input#is_visible_on_front")
+        ).toBeChecked();
+        await expect(adminPage.locator("input#is_comparable")).toBeChecked();
+
+        /**
+         * Submit
+         */
+        await adminPage.click('button[type="submit"]');
+
+        await expect(adminPage.locator("#app")).toContainText(
+            "Attribute Created Successfully"
+        );
+
+        adminPage.goto("admin/catalog/families");
+        await adminPage.locator("span").first().click();
+        
+        const source = adminPage.locator('#unassigned-attributes');
+        const target = adminPage.locator('div.group_node:has-text("General")');
+
+        await source.dragTo(target);
     });
 
     test("should edit an existing attribute successfully", async ({
