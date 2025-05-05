@@ -239,10 +239,12 @@ test.describe("customer management", () => {
 
     test("should be add note in customer", async ({ adminPage }) => {
         await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
+        await adminPage.waitForSelector("button.primary-button:visible");
 
+        const Description = generateDescription();
+        /**
+         * edit customer profile
+         */
         await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
             state: "visible",
         });
@@ -250,22 +252,35 @@ test.describe("customer management", () => {
             "a.cursor-pointer.icon-sort-right"
         );
         await iconRight[0].click();
+        await adminPage.waitForTimeout(5000);
+        await adminPage.reload();
 
-        const lorem100 = forms.generateRandomStringWithSpaces(200);
-        adminPage.fill('textarea[name="note"]', generateDescription());
+        /**
+         * add note in Customer Profile
+         */
+        await adminPage.waitForSelector('textarea[name="note"]', {
+            state: "visible",
+        });
+        await adminPage.fill('textarea[name="note"]', Description);
 
         await adminPage.click('input[name="customer_notified"] + span');
 
-        await adminPage.click('button[type="submit"].secondary-button:visible');
+        /**
+         * submit note
+         */
+        const submitBtn = adminPage.locator(
+            'button[type="submit"].secondary-button:visible'
+        );
+        await expect(submitBtn).toBeVisible({ timeout: 5000 });
+        await submitBtn.click();
+        await adminPage.waitForTimeout(5000);
 
-        await adminPage.waitForSelector('text=Note Created Successfully', { timeout: 5000 });
-        // await expect(
-            // adminPage.getByText("Note Created Successfully")
-        // ).toBeVisible();
+        /**
+         * check Note Created Successfully
+         */
+        // await expect(adminPage.getByText('Note Created Successfully Close')).toBeVisible({ timeout: 5000 });
+        await expect(adminPage.getByText(Description)).toBeVisible();
 
-        await expect(
-            adminPage.locator("#app").filter({ hasText: "Note Created Successfully" })
-        ).toBeVisible();
     });
 
     test("should be able to delete account", async ({ adminPage }) => {
@@ -290,10 +305,14 @@ test.describe("customer management", () => {
             .getByRole("button", { name: "Agree", exact: true })
             .click();
 
-        await adminPage.waitForSelector('text=Customer Deleted Successfully', { timeout: 3000 });
+        await adminPage.waitForSelector("text=Customer Deleted Successfully", {
+            timeout: 3000,
+        });
 
         await expect(
-            adminPage.locator("#app").filter({ hasText: "Customer Deleted Successfully" })
+            adminPage
+                .locator("#app")
+                .filter({ hasText: "Customer Deleted Successfully" })
         ).toBeVisible();
     });
 
