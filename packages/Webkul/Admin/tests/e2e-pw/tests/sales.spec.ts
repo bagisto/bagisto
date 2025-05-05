@@ -450,7 +450,7 @@ test.describe("sales management", () => {
          */
         await generateOrder(adminPage);
         await adminPage.waitForTimeout(3000);
-        
+
         /**
          * Create Transaction
          */
@@ -480,8 +480,7 @@ test.describe("sales management", () => {
          */
         await adminPage.goto("admin/sales/orders");
         await adminPage.reload();
-        await adminPage.waitForTimeout(5000);   
-
+        await adminPage.waitForTimeout(5000);
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage
             .waitForSelector(
@@ -504,7 +503,7 @@ test.describe("sales management", () => {
         await adminPage.goto("admin/sales/invoices");
 
         const checkboxes = await adminPage.locator('.icon-uncheckbox')
-        await checkboxes.first().click();     
+        await checkboxes.first().click();
         await adminPage.getByRole("button", { name: "Select Action " }).click();
         await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
         await adminPage.getByRole("link", { name: "Paid" }).click();
@@ -524,7 +523,7 @@ test.describe("sales management", () => {
         await adminPage.goto("admin/sales/invoices");
 
         const checkboxes = await adminPage.locator('.icon-uncheckbox')
-        await checkboxes.first().click();     
+        await checkboxes.first().click();
         await adminPage.getByRole("button", { name: "Select Action " }).click();
         await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
         await adminPage.getByRole("link", { name: "Overdue" }).click();
