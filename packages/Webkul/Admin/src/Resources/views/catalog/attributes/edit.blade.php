@@ -579,10 +579,6 @@
 
                             <!-- Is Required -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
-                                @php
-                                    $selectedOption = old('is_required') ?? $attribute->is_required
-                                @endphp
-
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_required"
@@ -595,7 +591,7 @@
                                     id="is_required"
                                     for="is_required"
                                     value="1"
-                                    :checked="(boolean) $selectedOption"
+                                    :checked="(boolean) (old('is_required') ?? $attribute->is_required)"
                                 />
 
                                 <label
@@ -608,6 +604,12 @@
 
                             <!-- Is Unique -->
                             <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="is_unique"
+                                    :value="(boolean) (old('is_unique') ?? $attribute->is_unique)"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_unique"
@@ -624,12 +626,6 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-unique')
                                 </label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    :name="$type"
-                                    :value="$attribute->is_unique"
-                                />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
