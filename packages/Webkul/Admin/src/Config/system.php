@@ -127,7 +127,7 @@ return [
                 'type'          => 'image',
                 'channel_based' => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
-            ], 
+            ],
         ],
     ], [
         'key'    => 'general.design.categories',
@@ -139,7 +139,7 @@ return [
                 'name'    => 'category_view',
                 'title'   => 'admin::app.configuration.index.general.design.menu-category.title',
                 'type'    => 'select',
-                'default' => 'parent',
+                'default' => 'default',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.general.design.menu-category.default',
@@ -154,7 +154,7 @@ return [
                 'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
                 'type'          => 'blade',
                 'path'          => 'admin::configuration.custom-views.category-menu',
-            ], 
+            ],
         ],
     ], [
         'key'  => 'general.magic_ai',

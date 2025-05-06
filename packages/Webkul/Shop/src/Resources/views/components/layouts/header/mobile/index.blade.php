@@ -24,7 +24,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
-                aria-label="@lang('shop::app.components.layouts.header.bagisto')"
+                aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
             >
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
@@ -45,7 +45,7 @@
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
-                        aria-label="@lang('shop::app.components.layouts.header.compare')"
+                        aria-label="@lang('shop::app.components.layouts.header.mobile.compare')"
                     >
                         <span class="icon-compare cursor-pointer text-2xl"></span>
                     </a>
@@ -73,11 +73,11 @@
                             <x-slot:content>
                                 <div class="grid gap-2.5">
                                     <p class="font-dmserif text-xl">
-                                        @lang('shop::app.components.layouts.header.welcome-guest')
+                                        @lang('shop::app.components.layouts.header.mobile.welcome-guest')
                                     </p>
     
                                     <p class="text-sm">
-                                        @lang('shop::app.components.layouts.header.dropdown-text')
+                                        @lang('shop::app.components.layouts.header.mobile.dropdown-text')
                                     </p>
                                 </div>
     
@@ -92,14 +92,14 @@
                                         href="{{ route('shop.customer.session.create') }}"
                                         class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
                                     >
-                                        @lang('shop::app.components.layouts.header.sign-in')
+                                        @lang('shop::app.components.layouts.header.mobile.sign-in')
                                     </a>
     
                                     <a
                                         href="{{ route('shop.customers.register.index') }}"
                                         class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0"
                                     >
-                                        @lang('shop::app.components.layouts.header.sign-up')
+                                        @lang('shop::app.components.layouts.header.mobile.sign-up')
                                     </a>
     
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
@@ -114,12 +114,12 @@
                             <x-slot:content class="!p-0">
                                 <div class="grid gap-2.5 p-5 pb-0">
                                     <p class="font-dmserif text-xl">
-                                        @lang('shop::app.components.layouts.header.welcome')’
+                                        @lang('shop::app.components.layouts.header.mobile.welcome')’
                                         {{ auth()->guard('customer')->user()->first_name }}
                                     </p>
     
                                     <p class="text-sm">
-                                        @lang('shop::app.components.layouts.header.dropdown-text')
+                                        @lang('shop::app.components.layouts.header.mobile.dropdown-text')
                                     </p>
                                 </div>
     
@@ -132,14 +132,14 @@
                                         class="cursor-pointer px-5 py-2 text-base"
                                         href="{{ route('shop.customers.account.profile.index') }}"
                                     >
-                                        @lang('shop::app.components.layouts.header.profile')
+                                        @lang('shop::app.components.layouts.header.mobile.profile')
                                     </a>
     
                                     <a
                                         class="cursor-pointer px-5 py-2 text-base"
                                         href="{{ route('shop.customers.account.orders.index') }}"
                                     >
-                                        @lang('shop::app.components.layouts.header.orders')
+                                        @lang('shop::app.components.layouts.header.mobile.orders')
                                     </a>
     
                                     @if ($showWishlist)
@@ -147,7 +147,7 @@
                                             class="cursor-pointer px-5 py-2 text-base"
                                             href="{{ route('shop.customers.account.wishlist.index') }}"
                                         >
-                                            @lang('shop::app.components.layouts.header.wishlist')
+                                            @lang('shop::app.components.layouts.header.mobile.wishlist')
                                         </a>
                                     @endif
     
@@ -164,7 +164,7 @@
                                             href="{{ route('shop.customer.session.destroy') }}"
                                             onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                         >
-                                            @lang('shop::app.components.layouts.header.logout')
+                                            @lang('shop::app.components.layouts.header.mobile.logout')
                                         </a>
                                     @endauth
     
@@ -180,7 +180,7 @@
                     @guest('customer')
                         <a
                             href="{{ route('shop.customer.session.create') }}"
-                            aria-label="@lang('shop::app.components.layouts.header.account')"
+                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
                             <span class="icon-users cursor-pointer text-2xl"></span>
                         </a>
@@ -190,7 +190,7 @@
                     @auth('customer')
                         <a
                             href="{{ route('shop.customers.account.index') }}"
-                            aria-label="@lang('shop::app.components.layouts.header.account')"
+                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
                             <span class="icon-users cursor-pointer text-2xl"></span>
                         </a>
@@ -208,7 +208,7 @@
             for="organic-search" 
             class="sr-only"
         >
-            @lang('shop::app.components.layouts.header.search')
+            @lang('shop::app.components.layouts.header.mobile.search')
         </label>
 
         <div class="relative w-full">
@@ -219,7 +219,7 @@
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
-                placeholder="@lang('shop::app.components.layouts.header.search-text')"
+                placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
                 required
             >
 

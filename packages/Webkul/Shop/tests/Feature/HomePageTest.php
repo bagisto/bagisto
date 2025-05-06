@@ -66,16 +66,16 @@ it('displays navigation buttons when the customer is logged in', function () {
      * We avoid using the `assertSeeText` method of the response because it may sometimes
      * produce false positive results when dealing with large DOM sizes.
      */
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.profile')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.profile')))
         ->toBeTruthy();
 
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.orders')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.orders')))
         ->toBeTruthy();
 
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.wishlist')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.wishlist')))
         ->toBeTruthy();
 
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.logout')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.logout')))
         ->toBeTruthy();
 });
 

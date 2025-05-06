@@ -11,7 +11,7 @@
 
         <a
             href="{{ route('shop.home.index') }}"
-            aria-label="@lang('shop::app.components.layouts.header.bagisto')"
+            aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')"
         >
             <img
                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
@@ -63,7 +63,7 @@
                     for="organic-search"
                     class="sr-only"
                 >
-                    @lang('shop::app.components.layouts.header.search')
+                    @lang('shop::app.components.layouts.header.desktop.bottom.search')
                 </label>
 
                 <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3"></div>
@@ -75,8 +75,8 @@
                     class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
                     minlength="{{ core()->getConfigData('catalog.products.search.min_query_length') }}"
                     maxlength="{{ core()->getConfigData('catalog.products.search.max_query_length') }}"
-                    placeholder="@lang('shop::app.components.layouts.header.search-text')"
-                    aria-label="@lang('shop::app.components.layouts.header.search-text')"
+                    placeholder="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
+                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
                     aria-required="true"
                     pattern="[^\\]+"
                     required
@@ -85,7 +85,7 @@
                 <button
                     type="submit"
                     class="hidden"
-                    aria-label="@lang('shop::app.components.layouts.header.submit')"
+                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.submit')"
                 >
                 </button>
 
@@ -106,7 +106,7 @@
             @if(core()->getConfigData('catalog.products.settings.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
-                    aria-label="@lang('shop::app.components.layouts.header.compare')"
+                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')"
                 >
                     <span
                         class="icon-compare inline-block cursor-pointer text-2xl"
@@ -134,7 +134,7 @@
                     <span
                         class="icon-users inline-block cursor-pointer text-2xl"
                         role="button"
-                        aria-label="@lang('shop::app.components.layouts.header.profile')"
+                        aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')"
                         tabindex="0"
                     ></span>
                 </x-slot>
@@ -144,11 +144,11 @@
                     <x-slot:content>
                         <div class="grid gap-2.5">
                             <p class="font-dmserif text-xl">
-                                @lang('shop::app.components.layouts.header.welcome-guest')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.welcome-guest')
                             </p>
 
                             <p class="text-sm">
-                                @lang('shop::app.components.layouts.header.dropdown-text')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.dropdown-text')
                             </p>
                         </div>
 
@@ -163,14 +163,14 @@
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="primary-button m-0 mx-auto block w-max rounded-2xl px-7 text-center text-base max-md:rounded-lg ltr:ml-0 rtl:mr-0"
                             >
-                                @lang('shop::app.components.layouts.header.sign-in')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
                                 class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg max-md:py-3 ltr:ml-0 rtl:mr-0"
                             >
-                                @lang('shop::app.components.layouts.header.sign-up')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.sign-up')
                             </a>
                             
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
@@ -185,12 +185,12 @@
                     <x-slot:content class="!p-0">
                         <div class="grid gap-2.5 p-5 pb-0">
                             <p class="font-dmserif text-xl">
-                                @lang('shop::app.components.layouts.header.welcome')’
+                                @lang('shop::app.components.layouts.header.desktop.bottom.welcome')’
                                 {{ auth()->guard('customer')->user()->first_name }}
                             </p>
 
                             <p class="text-sm">
-                                @lang('shop::app.components.layouts.header.dropdown-text')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.dropdown-text')
                             </p>
                         </div>
 
@@ -203,14 +203,14 @@
                                 class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                 href="{{ route('shop.customers.account.profile.index') }}"
                             >
-                                @lang('shop::app.components.layouts.header.profile')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.profile')
                             </a>
 
                             <a
                                 class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                 href="{{ route('shop.customers.account.orders.index') }}"
                             >
-                                @lang('shop::app.components.layouts.header.orders')
+                                @lang('shop::app.components.layouts.header.desktop.bottom.orders')
                             </a>
 
                             @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
@@ -218,7 +218,7 @@
                                     class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"
                                 >
-                                    @lang('shop::app.components.layouts.header.wishlist')
+                                    @lang('shop::app.components.layouts.header.desktop.bottom.wishlist')
                                 </a>
                             @endif
 
@@ -235,7 +235,7 @@
                                     href="{{ route('shop.customer.session.destroy') }}"
                                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                 >
-                                    @lang('shop::app.components.layouts.header.logout')
+                                    @lang('shop::app.components.layouts.header.desktop.bottom.logout')
                                 </a>
                             @endauth
 
@@ -279,7 +279,7 @@
         <!-- Default category layout -->
         <div
             class="flex items-center"
-            v-else-if="'{{ core()->getConfigData('general.design.categories.category_view') }}' !== 'all'"
+            v-else-if="'{{ core()->getConfigData('general.design.categories.category_view') }}' !== 'sidebar'"
         >
             <div
                 class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
@@ -339,9 +339,10 @@
                     class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
                     @click="toggleCategoryDrawer"
                 >
-                    <span class="flex items-center px-5 uppercase">
-                        <span class="icon-hamburger mr-2 text-2xl"></span> 
-                        All
+                    <span class="flex items-center gap-1 px-5 uppercase">
+                        <span class="icon-hamburger text-xl"></span> 
+                        
+                        @lang('shop::app.components.layouts.header.desktop.bottom.all')
                     </span>
                 </div>
                     
@@ -408,7 +409,9 @@
 
                 <x-slot:header class="border-b border-gray-200">
                     <div class="flex w-full items-center justify-between">
-                        <h2 class="text-xl font-bold">Categories</h2>
+                        <p class="text-xl font-medium">                 
+                            @lang('shop::app.components.layouts.header.desktop.bottom.categories')
+                        </p>
                     </div>
                 </x-slot>
 
@@ -432,7 +435,10 @@
                                         class="mb-4"
                                     >
                                         <div class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100">
-                                            <a :href="category.url" class="text-base font-medium text-black">
+                                            <a 
+                                                :href="category.url" 
+                                                class="text-base font-medium text-black"
+                                            >
                                                 @{{ category.name }}
                                             </a>
                                         </div>
@@ -451,7 +457,10 @@
                                                     class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100"
                                                     @click="showThirdLevel(secondLevelCategory, category, $event)"
                                                 >
-                                                    <a :href="secondLevelCategory.url" class="text-sm font-normal">
+                                                    <a 
+                                                        :href="secondLevelCategory.url" 
+                                                        class="text-sm font-normal"
+                                                    >
                                                         @{{ secondLevelCategory.name }}
                                                     </a>
                 
@@ -475,7 +484,10 @@
                                         aria-label="Go back"
                                     >
                                         <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
-                                        <div class="text-base font-medium text-black">Back to Main Menu</div>
+
+                                        <p class="text-base font-medium text-black">
+                                            @lang('shop::app.components.layouts.header.desktop.bottom.back-button')
+                                        </p>
                                     </button>
                                 </div>
                                 
