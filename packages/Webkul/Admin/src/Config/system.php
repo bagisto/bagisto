@@ -131,29 +131,29 @@ return [
         ],
     ], [
         'key'    => 'general.design.categories',
-        'name'   => 'admin::app.configuration.index.general.design.header-category.title',
-        'info'   => 'admin::app.configuration.index.general.design.header-category.info',
+        'name'   => 'admin::app.configuration.index.general.design.menu-category.title',
+        'info'   => 'admin::app.configuration.index.general.design.menu-category.info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'    => 'category_view',
-                'title'   => 'admin::app.configuration.index.general.design.header-category.title',
+                'title'   => 'admin::app.configuration.index.general.design.menu-category.title',
                 'type'    => 'select',
                 'default' => 'parent',
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.general.design.header-category.parent',
-                        'value' => 'parent',
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.default',
+                        'value' => 'default',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.design.header-category.all',
-                        'value' => 'all',
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.sidebar',
+                        'value' => 'sidebar',
                     ],
                 ],
             ], [
                 'name'          => 'agreement_label',
                 'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
                 'type'          => 'blade',
-                'path'          => 'admin::configuration.custom-configurations.cateogy-layouts',
+                'path'          => 'admin::configuration.custom-views.category-menu',
             ], 
         ],
     ], [

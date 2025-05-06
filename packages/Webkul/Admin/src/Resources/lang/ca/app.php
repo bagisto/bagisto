@@ -3751,6 +3751,15 @@ return [
                         'title'      => 'Logotip d\'Administrador',
                         'title-info' => 'Configura les imatges de logotip i favicon per a la interfície del teu lloc web per a una millor marca i reconeixement.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Menú per defecte',
+                        'info'            => 'Aquesta configuració controla la visibilitat de les categories al menú de capçalera. Pots triar mostrar només les categories pare o totes les categories niades.',
+                        'preview-default' => 'Previsualització del menú per defecte',
+                        'preview-sidebar' => 'Previsualització del menú lateral',
+                        'sidebar'         => 'Menú lateral',
+                        'title'           => 'Vista de la categoria del menú',
+                    ],
                 ],
 
                 'magic-ai' => [

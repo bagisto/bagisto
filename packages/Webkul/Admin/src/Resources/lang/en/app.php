@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Admin Logo',
                         'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Default Menu',
+                        'info'            => 'This setting controls the visibility of categories in the header menu. You can choose to display only parent categories or all nested categories.',
+                        'preview-default' => 'Preview Default Menu',
+                        'preview-sidebar' => 'Preview Sidebar Menu',
+                        'sidebar'         => 'Sidebar Menu',
+                        'title'           => 'Menu Category View',
+                    ],
                 ],
 
                 'magic-ai' => [

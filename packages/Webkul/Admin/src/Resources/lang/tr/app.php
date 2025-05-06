@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Yönetici Logosu',
                         'title-info' => 'Web sitenizin ön ucu için logo ve favicon görüntülerini daha iyi markalaşma ve tanınma için yapılandırın.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Varsayılan Menü',
+                        'info'            => 'Bu ayar, başlık menüsündeki kategorilerin görünürlüğünü kontrol eder. Yalnızca ana kategorileri veya tüm iç içe kategorileri gösterebilirsiniz.',
+                        'preview-default' => 'Varsayılan Menüyü Önizle',
+                        'preview-sidebar' => 'Kenar Çubuğu Menüsünü Önizle',
+                        'sidebar'         => 'Kenar Çubuğu Menüsü',
+                        'title'           => 'Menü Kategori Görünümü',
+                    ],
                 ],
 
                 'magic-ai' => [

@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Logo Admin',
                         'title-info' => 'Configura le immagini del logo e del favicon per il front-end del tuo sito web per un miglior branding e riconoscimento.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Menu predefinito',
+                        'info'            => 'Questa impostazione controlla la visibilità delle categorie nel menu intestazione. Puoi scegliere di mostrare solo le categorie principali o tutte le categorie annidate.',
+                        'preview-default' => 'Anteprima menu predefinito',
+                        'preview-sidebar' => 'Anteprima menu laterale',
+                        'sidebar'         => 'Menu laterale',
+                        'title'           => 'Vista categoria menu',
+                    ],
                 ],
 
                 'magic-ai' => [

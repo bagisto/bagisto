@@ -276,7 +276,7 @@
             ></span>
         </div>
 
-        <!-- Original Design -->
+        <!-- Default category layout -->
         <div
             class="flex items-center"
             v-else-if="'{{ core()->getConfigData('general.design.categories.category_view') }}' !== 'all'"
@@ -330,7 +330,7 @@
             </div>
         </div>
 
-        <!-- New Design with DraweR -->
+        <!-- Sidebar category layout -->
         <div v-else>
             <!-- Categories Navigation -->
             <div class="flex items-center">
