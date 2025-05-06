@@ -115,7 +115,6 @@
                             <div
                                 class="secondary-button text-sm"
                                 @click="$refs.addOptionsRow.toggle();swatchValue=''"
-                                v-if="! isRestricted"
                             >
                                 @lang('admin::app.catalog.attributes.edit.add-row')
                             </div>
@@ -139,7 +138,6 @@
                                     type="select"
                                     id="swatchType"
                                     name="swatch_type"
-                                    ::disabled="isRestricted"
                                     v-model="swatchType"
                                     @change="showSwatch=true"
                                 >
@@ -154,10 +152,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Checkbox -->
-                            <div
-                                class="w-full"
-                                v-if="! isRestricted"
-                            >
+                            <div class="w-full">
                                 <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
                                     <input
                                         type="checkbox"
@@ -198,10 +193,7 @@
                                         <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <!-- Draggable Icon -->
-                                                <x-admin::table.th
-                                                    class="!p-0"
-                                                    v-if="! isRestricted"
-                                                ></x-admin::table.th>
+                                                <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
                                                 <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
@@ -219,7 +211,7 @@
                                                 </x-admin::table.th>
 
                                                 <!-- Action Tables Heading -->
-                                                <x-admin::table.th v-if="! isRestricted"></x-admin::table.th>
+                                                <x-admin::table.th></x-admin::table.th>
                                             </x-admin::table.thead.tr>
                                         </x-admin::table.thead>
 
@@ -252,10 +244,7 @@
                                                     >
 
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td
-                                                        class="!px-0 text-center"
-                                                        v-if="! isRestricted"
-                                                    >
+                                                    <x-admin::table.td class="!px-0 text-center">
                                                         <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-700"></i>
 
                                                         <input
@@ -326,10 +315,7 @@
                                                     </x-admin::table.td>
 
                                                     <!-- Actions Button -->
-                                                    <x-admin::table.td
-                                                        class="!px-0"
-                                                        v-if="! isRestricted"
-                                                    >
+                                                    <x-admin::table.td class="!px-0">
                                                         <span
                                                             class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
@@ -1001,11 +987,7 @@
                     },
 
                     isConfigurable() {
-                        return this.attributeType == 'select' || this.attributeType == 'multiselect';
-                    },
-
-                    isRestricted() {
-                        return ['brand'].includes(this.attributeCode);
+                        return this.attributeType == 'select';
                     },
 
                     canHaveDefaultValue() {
