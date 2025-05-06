@@ -847,7 +847,7 @@
                     },
 
                     isConfigurable() {
-                        return this.attributeType == 'select' || this.attributeType == 'multiselect';
+                        return this.attributeType == 'select';
                     },
 
                     canHaveDefaultValue() {
