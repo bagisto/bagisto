@@ -10,10 +10,9 @@
         :action="route('admin.catalog.attributes.store')"
         enctype="multipart/form-data"
     >
-
         {!! view_render_event('bagisto.admin.catalog.attributes.create.create_form_controls.before') !!}
 
-        <!-- actions buttons -->
+        <!-- Actions Buttons -->
         <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.attributes.create.title')
@@ -37,7 +36,7 @@
                 </button>
             </div>
         </div>
-        
+
         <!-- Create Attributes Vue Components -->
         <v-create-attributes>
             <!-- Shimmer Effect -->
@@ -45,7 +44,6 @@
         </v-create-attributes>
 
         {!! view_render_event('bagisto.admin.catalog.attributes.create_form_controls.after') !!}
-
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.attributes.create.after') !!}
@@ -55,12 +53,12 @@
             type="text/x-template"
             id="v-create-attributes-template"
         >
-            <!-- body content -->
+            <!-- Body Content -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
 
                 {!! view_render_event('bagisto.admin.catalog.attributes.create.card.label.before') !!}
 
-                <!-- Left sub Component -->
+                <!-- Left Sub Component -->
                 <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
                     <!-- Label -->
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -68,7 +66,7 @@
                             @lang('admin::app.catalog.attributes.create.label')
                         </p>
 
-                        <!-- Admin name -->
+                        <!-- Admin Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.attributes.create.admin')
@@ -107,11 +105,10 @@
                     <div
                         class="box-shadow rounded bg-white p-4 dark:bg-gray-900"
                         v-if="swatchAttribute && (
-                                attributeType == 'select'
-                                || attributeType == 'multiselect'
-                                || attributeType == 'price'
-                                || attributeType == 'checkbox'
-                            )"
+                            attributeType == 'select'
+                            || attributeType == 'multiselect'
+                            || attributeType == 'checkbox'
+                        )"
                     >
                         <div class="mb-3 flex items-center justify-between">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -129,7 +126,10 @@
 
                         <!-- For Attribute Options If Data Exist -->
                         <div class="mt-4 overflow-x-auto">
-                            <div class="flex gap-4 max-sm:flex-wrap">
+                            <div
+                                class="flex gap-4 max-sm:flex-wrap"
+                                v-if="swatchAttribute && (attributeType == 'select')"
+                            >
                                 <!-- Input Options -->
                                 <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label>
@@ -144,9 +144,9 @@
                                         v-model="swatchType"
                                         @change="showSwatch=true"
                                     >
-                                        @foreach (['dropdown', 'color', 'image', 'text'] as $type)
-                                            <option value="{{ $type }}">
-                                                @lang('admin::app.catalog.attributes.create.option.' . $type)
+                                        @foreach ($swatchTypes as $swatchType)
+                                            <option value="{{ $swatchType }}">
+                                                @lang('admin::app.catalog.attributes.create.option.' . $swatchType)
                                             </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
@@ -158,7 +158,7 @@
                                 </x-admin::form.control-group>
 
                                 <div class="mb-2.5 w-full">
-                                    <!-- checkbox -->
+                                    <!-- Checkbox -->
                                     <x-admin::form.control-group.label class="invisible">
                                         @lang('admin::app.catalog.attributes.create.input-options')
                                     </x-admin::form.control-group.label>
@@ -195,6 +195,7 @@
                                 <x-admin::table>
                                     <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                         <x-admin::table.thead.tr>
+                                            <!-- Draggable Icon -->
                                             <x-admin::table.th class="!p-0" />
 
                                             <!-- Swatch Select -->
@@ -202,19 +203,19 @@
                                                 @lang('admin::app.catalog.attributes.create.swatch')
                                             </x-admin::table.th>
 
-                                            <!-- Admin tables heading -->
+                                            <!-- Admin Tables Heading -->
                                             <x-admin::table.th>
                                                 @lang('admin::app.catalog.attributes.create.admin-name')
                                             </x-admin::table.th>
 
-                                            <!-- Locales tables heading -->
+                                            <!-- Locales Tables Heading -->
                                             @foreach ($locales as $locale)
                                                 <x-admin::table.th>
                                                     {{ $locale->name . ' (' . $locale->code . ')' }}
                                                 </x-admin::table.th>
                                             @endforeach
 
-                                            <!-- Action tables heading -->
+                                            <!-- Action Tables Heading -->
                                             <x-admin::table.th />
                                         </x-admin::table.thead.tr>
                                     </x-admin::table.thead>
@@ -288,6 +289,7 @@
                                                     />
                                                 </x-admin::table.td>
 
+                                                <!-- Locales -->
                                                 <x-admin::table.td v-for="locale in locales">
                                                     <p class="dark:text-white">
                                                         @{{ element.params[locale.code] }}
@@ -300,7 +302,7 @@
                                                     />
                                                 </x-admin::table.td>
 
-                                                <!-- Actions button -->
+                                                <!-- Action Buttons -->
                                                 <x-admin::table.td class="!px-0">
                                                     <span
                                                         class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
@@ -350,7 +352,7 @@
 
                 {!! view_render_event('bagisto.admin.catalog.attributes.create.card.general.before') !!}
 
-                <!-- Right sub-component -->
+                <!-- Right Sub Component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2">
                     <!-- General -->
                     <x-admin::accordion>
@@ -405,13 +407,12 @@
                                     :label="trans('admin::app.catalog.attributes.create.type')"
                                     @change="swatchAttribute=true"
                                 >
-                                    <!-- Here! All Needed types are defined -->
-                                    @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
+                                    @foreach($attributeTypes as $attributeType)
                                         <option
-                                            value="{{ $type }}"
-                                            {{ $type === 'text' ? "selected" : '' }}
+                                            value="{{ $attributeType }}"
+                                            {{ $attributeType === 'text' ? "selected" : '' }}
                                         >
-                                            @lang('admin::app.catalog.attributes.create.'. $type)
+                                            @lang('admin::app.catalog.attributes.create.'. $attributeType)
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
@@ -434,7 +435,10 @@
                             </x-admin::form.control-group>
 
                             <!-- Default Value -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group
+                                class="!mb-0"
+                                v-if="canHaveDefaultValue"
+                            >
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.catalog.attributes.create.default-value')
                                 </x-admin::form.control-group.label>
@@ -449,7 +453,7 @@
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
-                    
+
                     <!-- Validations -->
                     <x-admin::accordion>
                         <x-slot:header>
@@ -476,10 +480,9 @@
                                     refs="validation"
                                     @change="inputValidation=true"
                                 >
-                                    <!-- Here! All Needed types are defined -->
-                                    @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
-                                        <option value="{{ $type }}">
-                                            @lang('admin::app.catalog.attributes.create.' . $type)
+                                    @foreach($validations as $validation)
+                                        <option value="{{ $validation }}">
+                                            @lang('admin::app.catalog.attributes.create.' . $validation)
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
@@ -589,7 +592,7 @@
                             <!-- Use to create configurable product -->
                             <x-admin::form.control-group
                                 class="!mb-2 flex select-none items-center gap-2.5"
-                                ::class="{ 'opacity-70' : isConfigurableDisabled }"
+                                ::class="{ 'opacity-70' : ! isConfigurable }"
                             >
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -597,7 +600,7 @@
                                     name="is_configurable"
                                     value="1"
                                     for="is_configurable"
-                                    ::disabled="isConfigurableDisabled"
+                                    ::disabled="! isConfigurable"
                                 />
 
                                 <label
@@ -647,7 +650,7 @@
                             <!-- Use in Layered -->
                             <x-admin::form.control-group
                                 class="!mb-2 flex select-none items-center gap-2.5"
-                                ::class="{ 'opacity-70' : isFilterableDisabled }"
+                                ::class="{ 'opacity-70' : ! isFilterable }"
                             >
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -655,7 +658,7 @@
                                     name="is_filterable"
                                     value="1"
                                     for="is_filterable"
-                                    ::disabled="isFilterableDisabled"
+                                    ::disabled="! isFilterable"
                                 />
 
                                 <label
@@ -812,7 +815,7 @@
                     return {
                         optionRowCount: 1,
 
-                        attributeType: '',
+                        attributeType: '{{ old('type') }}',
 
                         validationType: '',
 
@@ -839,16 +842,17 @@
                 },
 
                 computed: {
-                    isFilterableDisabled() {
-                        return this.attributeType == 'price' || this.attributeType == 'checkbox'
-                            || this.attributeType == 'select' || this.attributeType == 'multiselect'
-                            ? false : true;
+                    isFilterable() {
+                        return this.attributeType == 'checkbox' || this.attributeType == 'select' || this.attributeType == 'multiselect';
                     },
 
-                    isConfigurableDisabled() {
-                        return this.attributeType == 'select' || this.attributeType == 'multiselect'
-                            ? false : true;
-                    }
+                    isConfigurable() {
+                        return this.attributeType == 'select' || this.attributeType == 'multiselect';
+                    },
+
+                    canHaveDefaultValue() {
+                        return this.attributeType == 'boolean';
+                    },
                 },
 
                 methods: {

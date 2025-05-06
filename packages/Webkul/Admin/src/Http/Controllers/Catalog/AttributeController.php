@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Catalog\AttributeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
+use Webkul\Attribute\Enums\SwatchTypeEnum;
+use Webkul\Attribute\Enums\ValidationEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Rules\Code;
 use Webkul\Product\Repositories\ProductRepository;
@@ -46,7 +49,13 @@ class AttributeController extends Controller
     {
         $locales = core()->getAllLocales();
 
-        return view('admin::catalog.attributes.create', compact('locales'));
+        $attributeTypes = AttributeTypeEnum::getValues();
+
+        $swatchTypes = SwatchTypeEnum::getValues();
+
+        $validations = ValidationEnum::getValues();
+
+        return view('admin::catalog.attributes.create', compact('locales', 'attributeTypes', 'swatchTypes', 'validations'));
     }
 
     /**
@@ -56,12 +65,17 @@ class AttributeController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
+        $rules = [
             'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name'    => 'required',
             'type'          => 'required',
-            'default_value' => 'integer',
-        ]);
+        ];
+
+        if (request('type') === 'boolean') {
+            $rules['default_value'] = 'in:0,1';
+        }
+
+        $this->validate(request(), $rules);
 
         $requestData = request()->all();
 
@@ -89,7 +103,13 @@ class AttributeController extends Controller
 
         $locales = core()->getAllLocales();
 
-        return view('admin::catalog.attributes.edit', compact('attribute', 'locales'));
+        $attributeTypes = AttributeTypeEnum::getValues();
+
+        $swatchTypes = SwatchTypeEnum::getValues();
+
+        $validations = ValidationEnum::getValues();
+
+        return view('admin::catalog.attributes.edit', compact('attribute', 'locales', 'attributeTypes', 'swatchTypes', 'validations'));
     }
 
     /**
@@ -111,18 +131,21 @@ class AttributeController extends Controller
      */
     public function update(int $id)
     {
-        $this->validate(request(), [
+        $rules = [
             'code'          => ['required', 'unique:attributes,code,'.$id, new Code],
             'admin_name'    => 'required',
             'type'          => 'required',
-            'default_value' => 'integer',
-        ]);
+        ];
+
+        if (request('type') === 'boolean') {
+            $rules['default_value'] = 'in:0,1';
+        }
+
+        $this->validate(request(), $rules);
 
         $requestData = request()->all();
 
-        if (! $requestData['default_value']) {
-            $requestData['default_value'] = null;
-        }
+        $requestData['default_value'] ??= null;
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
