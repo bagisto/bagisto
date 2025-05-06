@@ -4,6 +4,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+### Features:
+
+* Side Bar Menu: Introduced a new sidebar menu that provides users with quick access to various sections of the application, improving navigation and user experience.
+
+* Default Menu Feature: Added the ability to set a default menu for users, allowing for a more personalized and streamlined interface. 
+
 * #10679 [enhancement] - Some options in the products need to be enabled by default.
 
 ## **v2.3.0 (27th of March 2025)** - *Release*
