@@ -12,6 +12,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10679 [enhancement] - Some options in the products need to be enabled by default.
 
+* #10666 [enhancement] - Need to create the configuration in the admin panel for the removed keys from the .env
+
+* #10747 [fixed] - Update Locale Name from 'Canada' to 'Catalan'
+
 ## **v2.3.0 (27th of March 2025)** - *Release*
 
 ### Features:

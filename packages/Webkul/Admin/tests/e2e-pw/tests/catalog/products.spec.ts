@@ -231,7 +231,12 @@ async function createConfigurableProduct(adminPage) {
     await adminPage.locator("#meta_description").fill(product.shortDescription);
 
     /**
-     * Adding new varient.
+     * Image Section.
+     */
+    // Will add images later.
+
+    /**
+     * Adding new variant.
      */
     await adminPage.getByText("Add Variant").click();
     await adminPage.locator('select[name="color"]').selectOption("1");
@@ -380,6 +385,11 @@ async function createGroupedProduct(adminPage) {
     await adminPage.locator("#meta_title").fill(product.name);
     await adminPage.locator("#meta_keywords").fill(product.name);
     await adminPage.locator("#meta_description").fill(product.shortDescription);
+
+    /**
+     * Image Section.
+     */
+    // Will add images later.
 
     /**
      * Adding products to make a group of products.
@@ -726,7 +736,7 @@ async function createBookingProduct(adminPage) {
     };
 
     const availableFromDate = new Date(); // Now
-    const availableToDate = new Date(availableFromDate.getTime() + 60 * 60000); 
+    const availableToDate = new Date(availableFromDate.getTime() + 60 * 60000);
     const formattedAvailableFromDate = availableFromDate
         .toISOString()
         .slice(0, 19)
