@@ -409,7 +409,7 @@
                         <div 
                             v-for="category in categories" 
                             :key="category.id" 
-                            class="mb-4"
+                            :class="{'mb-2': category.children && category.children.length}"
                         >
                             <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
                                 <a :href="category.url" class="text-base font-medium text-black">
@@ -418,14 +418,10 @@
                             </div>
     
                             <!-- Second Level Categories -->
-                            <div 
-                                v-if="category.children && category.children.length" 
-                                class="mt-2"
-                            >
+                            <div v-if="category.children && category.children.length" >
                                 <div 
                                     v-for="secondLevelCategory in category.children" 
                                     :key="secondLevelCategory.id" 
-                                    class="mb-2"
                                 >
                                     <div 
                                         class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200"
@@ -455,7 +451,9 @@
                             aria-label="Go back"
                         >
                             <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
-                            <div class="text-base font-medium text-black">Back to Main Menu</div>
+                            <div class="text-base font-medium text-black">                  
+                                @lang('shop::app.components.layouts.header.mobile.back-button')
+                            </div>
                         </button>
                     </div>
                     

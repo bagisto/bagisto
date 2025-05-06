@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'アカウント',
+                    'back-button'   => 'メインメニューに戻る',
                     'bagisto'       => 'バギスト',
                     'compare'       => '比較',
                     'currencies'    => '通貨',

@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'Hesap',
+                    'back-button'   => 'Ana Menüye Geri Dön',
                     'bagisto'       => 'Bagisto',
                     'compare'       => 'Karşılaştır',
                     'currencies'    => 'Para Birimleri',

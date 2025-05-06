@@ -432,7 +432,7 @@
                                     <div 
                                         v-for="category in categories.slice(4)" 
                                         :key="category.id" 
-                                        class="mb-4"
+                                        :class="{'mb-2': category.children && category.children.length}"
                                     >
                                         <div class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100">
                                             <a 
@@ -444,14 +444,10 @@
                                         </div>
                 
                                         <!-- Second Level Categories -->
-                                        <div 
-                                            v-if="category.children && category.children.length" 
-                                            class="mt-2"
-                                        >
+                                        <div v-if="category.children && category.children.length" >
                                             <div 
                                                 v-for="secondLevelCategory in category.children" 
                                                 :key="secondLevelCategory.id" 
-                                                class="mb-2"
                                             >
                                                 <div 
                                                     class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100"

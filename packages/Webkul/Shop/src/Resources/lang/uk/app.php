@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'Обліковий запис',
+                    'back-button'   => 'Повернутися до головного меню',
                     'bagisto'       => 'Bagisto',
                     'compare'       => 'Порівняти',
                     'currencies'    => 'Валюти',

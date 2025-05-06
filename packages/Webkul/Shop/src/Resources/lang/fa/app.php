@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'حساب کاربری',
+                    'back-button'   => 'بازگشت به منوی اصلی',
                     'bagisto'       => 'باگیستو',
                     'compare'       => 'مقایسه',
                     'currencies'    => 'واحدهای پول',

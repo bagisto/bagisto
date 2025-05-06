@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'खाता',
+                    'back-button'   => 'मुख्य मेनू पर वापस जाएं',
                     'bagisto'       => 'बैगिस्टो',
                     'compare'       => 'तुलना करें',
                     'currencies'    => 'मुद्राएँ',

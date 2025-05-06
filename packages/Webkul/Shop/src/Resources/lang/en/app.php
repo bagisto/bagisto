@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'Account',
+                    'back-button'   => 'Back to Main Menu',
                     'bagisto'       => 'Bagisto',
                     'compare'       => 'Compare',
                     'currencies'    => 'Currencies',

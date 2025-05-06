@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => '账户',
+                    'back-button'   => '返回主菜单',
                     'bagisto'       => 'Bagisto',
                     'compare'       => '比较',
                     'currencies'    => '货币',

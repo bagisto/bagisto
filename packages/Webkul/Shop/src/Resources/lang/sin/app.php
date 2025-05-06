@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'ගිණුම',
+                    'back-button'   => 'ප්‍රධාන මෙනුවට ආපසු යන්න',
                     'bagisto'       => 'Bagisto',
                     'compare'       => 'සංසන්දනය කරන්න',
                     'currencies'    => 'මුදල් ඒකක',

@@ -511,6 +511,7 @@ return [
 
                 'mobile' => [
                     'account'       => 'الحساب',
+                    'back-button'   => 'العودة إلى القائمة الرئيسية',
                     'bagisto'       => 'باجيستو',
                     'compare'       => 'مقارنة',
                     'currencies'    => 'العملات',
