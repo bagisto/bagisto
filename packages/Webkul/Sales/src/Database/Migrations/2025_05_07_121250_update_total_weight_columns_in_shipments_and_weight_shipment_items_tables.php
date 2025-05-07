@@ -29,12 +29,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('shipments', function (Blueprint $table) {
-            $table->integer('total_weight')->nullable()->change();
-        });
-
         Schema::table('shipment_items', function (Blueprint $table) {
             $table->integer('weight')->nullable()->change();
+        });
+
+        Schema::table('shipments', function (Blueprint $table) {
+            $table->integer('total_weight')->nullable()->change();
         });
     }
 };
