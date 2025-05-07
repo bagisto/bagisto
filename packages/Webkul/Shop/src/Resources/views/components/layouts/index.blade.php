@@ -76,6 +76,39 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
+        @stack('scripts')
+
+        <script type="speculationrules">
+            {
+            "prerender": [
+                {
+                "source": "document",
+                "where": {
+                    "and": [
+                    { "href_matches": "/*" },
+                    { "not": { "href_matches": "/logout" } },
+                    { "not": { "selector_matches": ".no-prerender" } },
+                    { "not": { "selector_matches": "[rel~=nofollow]" } }
+                    ]
+                },
+                "eagerness": "moderate"
+                }
+            ],
+            "prefetch": [
+                {
+                "source": "document",
+                "where": {
+                    "and": [
+                    { "href_matches": "/*" }
+                    ]
+                },
+                "requires": ["anonymous-client-ip-when-cross-origin"],
+                "referrer_policy": "no-referrer",
+                "eagerness": "moderate"
+                }
+            ]
+            }
+        </script>
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
 
     </head>
