@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Admin-Logo',
                         'title-info' => 'Konfigurieren Sie das Logo und das Favicon-Bild für das Frontend Ihrer Website für eine bessere Markenbildung und Wiedererkennung.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Standardmenü',
+                        'info'            => 'Diese Einstellung steuert die Sichtbarkeit der Kategorien im Kopfmenü. Sie können wählen, ob nur übergeordnete Kategorien oder alle verschachtelten Kategorien angezeigt werden sollen.',
+                        'preview-default' => 'Standardmenü-Vorschau',
+                        'preview-sidebar' => 'Seitenleistenmenü-Vorschau',
+                        'sidebar'         => 'Seitenleistenmenü',
+                        'title'           => 'Menükategorie-Ansicht',
+                    ],
                 ],
 
                 'magic-ai' => [

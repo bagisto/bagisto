@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Logo de l\'administrateur',
                         'title-info' => 'Configurez les images du logo et du favicon pour la partie frontale de votre site web afin d\'améliorer votre image de marque et votre reconnaissance.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Menu par défaut',
+                        'info'            => 'Ce paramètre contrôle la visibilité des catégories dans le menu d’en-tête. Vous pouvez choisir d’afficher uniquement les catégories parentes ou toutes les catégories imbriquées.',
+                        'preview-default' => 'Aperçu du menu par défaut',
+                        'preview-sidebar' => 'Aperçu du menu latéral',
+                        'sidebar'         => 'Menu latéral',
+                        'title'           => 'Vue de la catégorie du menu',
+                    ],
                 ],
 
                 'magic-ai' => [

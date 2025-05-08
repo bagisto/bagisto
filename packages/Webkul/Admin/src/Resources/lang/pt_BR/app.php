@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Logotipo do Admin',
                         'title-info' => 'Configure imagens de logotipo e favicon para a interface do seu site para melhorar a marca e o reconhecimento.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Menu padrão',
+                        'info'            => 'Esta configuração controla a visibilidade das categorias no menu do cabeçalho. Você pode escolher exibir apenas as categorias principais ou todas as categorias aninhadas.',
+                        'preview-default' => 'Visualizar menu padrão',
+                        'preview-sidebar' => 'Visualizar menu lateral',
+                        'sidebar'         => 'Menu lateral',
+                        'title'           => 'Visualização de categoria do menu',
+                    ],
                 ],
 
                 'magic-ai' => [

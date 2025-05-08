@@ -130,6 +130,33 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.design.categories',
+        'name'   => 'admin::app.configuration.index.general.design.menu-category.title',
+        'info'   => 'admin::app.configuration.index.general.design.menu-category.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'category_view',
+                'title'   => 'admin::app.configuration.index.general.design.menu-category.title',
+                'type'    => 'select',
+                'default' => 'default',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.default',
+                        'value' => 'default',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.sidebar',
+                        'value' => 'sidebar',
+                    ],
+                ],
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'blade',
+                'path'          => 'admin::configuration.custom-views.category-menu',
+            ],
+        ],
+    ], [
         'key'  => 'general.magic_ai',
         'name' => 'admin::app.configuration.index.general.magic-ai.title',
         'info' => 'admin::app.configuration.index.general.magic-ai.info',

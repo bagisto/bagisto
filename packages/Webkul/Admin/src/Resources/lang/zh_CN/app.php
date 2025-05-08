@@ -3752,6 +3752,15 @@ return [
                         'title'      => '管理标志',
                         'title-info' => '为您的网站前端配置标志和网站图标图像，以提升品牌形象和识别度。',
                     ],
+
+                    'menu-category' => [
+                        'default'         => '默认菜单',
+                        'info'            => '此设置控制标题菜单中类别的可见性。您可以选择仅显示父类别或显示所有嵌套类别。',
+                        'preview-default' => '预览默认菜单',
+                        'preview-sidebar' => '预览侧边栏菜单',
+                        'sidebar'         => '侧边栏菜单',
+                        'title'           => '菜单类别视图',
+                    ],
                 ],
 
                 'magic-ai' => [

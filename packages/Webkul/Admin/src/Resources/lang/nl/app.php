@@ -3753,6 +3753,15 @@ return [
                         'title'      => 'Admin-logo',
                         'title-info' => 'Configureer het logo en de favicon-afbeeldingen voor de voorkant van uw website voor een betere branding en herkenning.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Standaardmenu',
+                        'info'            => 'Deze instelling bepaalt de zichtbaarheid van categorieën in het hoofdmenu. Je kunt ervoor kiezen om alleen hoofdcategorieën of alle geneste categorieën weer te geven.',
+                        'preview-default' => 'Voorbeeld standaardmenu',
+                        'preview-sidebar' => 'Voorbeeld zijbalkmenu',
+                        'sidebar'         => 'Zijbalkmenu',
+                        'title'           => 'Menucategorie weergave',
+                    ],
                 ],
 
                 'magic-ai' => [

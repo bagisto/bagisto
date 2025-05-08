@@ -3752,6 +3752,15 @@ return [
                         'title'      => 'Logotipo de Administrador',
                         'title-info' => 'Configure imágenes de logotipo y favicon para la interfaz de su sitio web para una mejor marca y reconocimiento.',
                     ],
+
+                    'menu-category' => [
+                        'default'         => 'Menú predeterminado',
+                        'info'            => 'Esta configuración controla la visibilidad de las categorías en el menú de encabezado. Puedes elegir mostrar solo las categorías principales o todas las categorías anidadas.',
+                        'preview-default' => 'Vista previa del menú predeterminado',
+                        'preview-sidebar' => 'Vista previa del menú lateral',
+                        'sidebar'         => 'Menú lateral',
+                        'title'           => 'Vista de categoría del menú',
+                    ],
                 ],
 
                 'magic-ai' => [
