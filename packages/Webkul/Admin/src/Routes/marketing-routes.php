@@ -12,11 +12,12 @@ use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SearchSynonymController;
 use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SearchTermController;
 use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SitemapController;
 use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\URLRewriteController;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
  * Marketing routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('marketing')->group(function () {
         /**
          * Promotions routes.

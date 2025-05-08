@@ -70,8 +70,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('downloadable/download-sample/{type}/{id}', 'downloadSample')->name('shop.downloadable.download_sample');
 
-        Route::get('product/{id}/{attribute_id}', 'download')->defaults('_config', [
-            'view' => 'shop.products.index',
-        ])->name('shop.product.file.download');
+        Route::get('product/{id}/{attribute_id}', 'download')->name('shop.product.file.download');
     });
 });

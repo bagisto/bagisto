@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\NotificationController;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
  * Notification routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     Route::controller(NotificationController::class)->group(function () {
         Route::get('notifications', 'index')->name('admin.notification.index');
 

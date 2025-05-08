@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
@@ -13,7 +14,6 @@ use Webkul\Shop\Http\Controllers\Customer\SessionController;
 use Webkul\Shop\Http\Controllers\DataGridController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
-
     Route::prefix('customer')->group(function () {
         /**
          * Forgot password routes.
@@ -64,7 +64,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
          * Customer authenticated routes. All the below routes only be accessible
          * if customer is authenticated.
          */
-        Route::group(['middleware' => ['customer']], function () {
+        Route::group(['middleware' => ['customer', NoCacheMiddleware::class]], function () {
             /**
              * Datagrid routes.
              */
@@ -73,9 +73,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Logout.
              */
-            Route::delete('logout', [SessionController::class, 'destroy'])->defaults('_config', [
-                'redirect' => 'shop.customer.session.index',
-            ])->name('shop.customer.session.destroy');
+            Route::delete('logout', [SessionController::class, 'destroy'])->name('shop.customer.session.destroy');
 
             /**
              * Customer account. All the below routes are related to

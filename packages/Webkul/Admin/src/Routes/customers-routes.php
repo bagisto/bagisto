@@ -9,11 +9,12 @@ use Webkul\Admin\Http\Controllers\Customers\Customer\WishlistController;
 use Webkul\Admin\Http\Controllers\Customers\CustomerController;
 use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
 use Webkul\Admin\Http\Controllers\Customers\ReviewController;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
  * Customers routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/customers'], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url').'/customers'], function () {
     Route::prefix('customers')->group(function () {
         /**
          * Customer management routes.
