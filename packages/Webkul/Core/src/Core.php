@@ -934,4 +934,56 @@ class Core
     {
         return ini_get('upload_max_filesize');
     }
+
+    /**
+     * Get get Speculation Rules.
+     *
+     * @return array
+     */
+    public static function getSpeculationRules()
+    {
+        if (! core()->getConfigData('general.speculation_rules.settings.enabled')) {
+            return null;
+        }
+
+        $configPath = 'general.speculation_rules.settings.';
+        
+        $eagerness = core()->getConfigData($configPath . 'eagerness') ?? 'moderate';
+        
+        $ignoreUrls = array_filter(
+            explode('|', core()->getConfigData($configPath . 'ignore_urls')),
+            fn($url) => trim($url) !== ''
+        );
+
+        $ignoreUrlParams = array_filter(
+            explode('|', core()->getConfigData($configPath . 'ignore_url_params')),
+            fn($param) => trim($param) !== ''
+        );
+
+        $conditions = [['href_matches' => '/*']];
+
+        foreach ($ignoreUrls as $url) {
+            $conditions[] = ['not' => ['href_matches' => trim($url)]];
+        }
+
+        foreach ($ignoreUrlParams as $param) {
+            $param = trim($param);
+            $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+        }
+
+        return [
+            'prerender' => [[
+                'source'    => 'document',
+                'where'     => ['and' => $conditions],
+                'eagerness' => $eagerness,
+            ]],
+            'prefetch' => [[
+                'source'          => 'document',
+                'where'           => ['and' => $conditions],
+                'requires'        => ['anonymous-client-ip-when-cross-origin'],
+                'referrer_policy' => 'no-referrer',
+                'eagerness'       => $eagerness,
+            ]],
+        ];
+    }
 }
