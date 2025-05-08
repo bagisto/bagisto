@@ -437,7 +437,6 @@
                                     return {
                                         ...datagrid,
                                         requestCount: ++datagrid.requestCount,
-                                        available: this.available,
                                         applied: this.applied,
                                     };
                                 }
@@ -463,7 +462,6 @@
                     return {
                         src: this.src,
                         requestCount: 0,
-                        available: this.available,
                         applied: this.applied,
                     };
                 },
