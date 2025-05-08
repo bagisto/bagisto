@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Reporting\CustomerController;
 use Webkul\Admin\Http\Controllers\Reporting\ProductController;
 use Webkul\Admin\Http\Controllers\Reporting\SaleController;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
  * Reporting routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('reporting')->group(function () {
         /**
          * Customer routes.

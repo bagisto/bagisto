@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\CMS\PageController;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
  * CMS routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     Route::controller(PageController::class)->prefix('cms')->group(function () {
         Route::get('/', 'index')->name('admin.cms.index');
 
