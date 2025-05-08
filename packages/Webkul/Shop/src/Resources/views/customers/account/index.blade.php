@@ -32,7 +32,7 @@
                     href="{{ route('shop.customer.session.destroy') }}"
                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                 >
-                    @lang('shop::app.components.layouts.header.logout')
+                    @lang('shop::app.components.layouts.header.desktop.bottom.logout')
                 </a>
             </div>
         </div>

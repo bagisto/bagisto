@@ -57,9 +57,7 @@
         <div>
             <!-- Toggler -->
             <div @click="open">
-                <slot name="toggle">
-                    @lang('admin::app.components.drawer.default-toggle')
-                </slot>
+                <slot name="toggle"></slot>
             </div>
 
             <!-- Overlay -->
