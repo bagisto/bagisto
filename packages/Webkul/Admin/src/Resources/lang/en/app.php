@@ -3904,6 +3904,25 @@ return [
                         'title'            => 'File Limits',
                     ],
                 ],
+
+                'speculation-rules' => [
+                    'info'  => 'Configure settings for enabling or disabling automated speculation logic.',
+                    'title' => 'Speculation Rules',
+
+                    'settings' => [
+                        'eagerness'              => 'Eagerness Level',
+                        'eager'                  => 'Eager',
+                        'moderate'               => 'Moderate',
+                        'conservative'           => 'Conservative',
+                        'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                        'ignore-url-params'      => 'Ignore URL Parameters',
+                        'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                        'ignore-urls'            => 'Ignore URLs',
+                        'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                        'info'                   => 'Set speculation rules status.',
+                        'title'                  => 'Enable Speculation Rules',
+                    ],
+                ],
             ],
 
             'catalog' => [

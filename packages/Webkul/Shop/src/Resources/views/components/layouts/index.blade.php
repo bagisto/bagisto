@@ -76,6 +76,56 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
+        @if (core()->getConfigData('general.speculation_rules.settings.enabled'))
+            @php
+                $configPath = 'general.speculation_rules.settings.';
+                
+                $eagerness = core()->getConfigData($configPath . 'eagerness');
+                
+                $ignoreUrls = array_filter(
+                    explode('|', core()->getConfigData($configPath . 'ignore_urls')),
+                    function($url) { return trim($url) !== ''; }
+                );
+                
+                $ignoreUrlParams = array_filter(
+                    explode('|', core()->getConfigData($configPath . 'ignore_url_params')),
+                    function($param) { return trim($param) !== ''; }
+                );
+                
+                $prerenderConditions = [['href_matches' => '/*']];
+                
+                foreach ($ignoreUrls as $url) {
+                    $prerenderConditions[] = ['not' => ['href_matches' => trim($url)]];
+                }
+                
+                foreach ($ignoreUrlParams as $param) {
+                    $param = trim($param);
+                    $prerenderConditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+                }
+                
+                $speculationRules = [
+                    'prerender' => [[
+                        'source' => 'document',
+                        'where' => ['and' => $prerenderConditions],
+                        'eagerness' => $eagerness,
+                    ]],
+                    'prefetch' => [[
+                        'source' => 'document',
+                        'where' => ['and' => $prerenderConditions],
+                        'requires' => ['anonymous-client-ip-when-cross-origin'],
+                        'referrer_policy' => 'no-referrer',
+                        'eagerness' => $eagerness,
+                    ]],
+                ];
+                
+                $jsonOptions = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+            @endphp
+
+            <script type="speculationrules">
+                @json($speculationRules, $jsonOptions)
+            </script>
+        @endif
+
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
 
     </head>

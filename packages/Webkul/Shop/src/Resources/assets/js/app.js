@@ -57,7 +57,6 @@ import Emitter from "./plugins/emitter";
 import Shop from "./plugins/shop";
 import VeeValidate from "./plugins/vee-validate";
 import Flatpickr from "./plugins/flatpickr";
-import SpeculationRules from "./plugins/speculation-rules";
 
 [
     Axios,
@@ -65,7 +64,6 @@ import SpeculationRules from "./plugins/speculation-rules";
     Shop,
     VeeValidate,
     Flatpickr,
-    SpeculationRules,
 ].forEach((plugin) => app.use(plugin));
 
 export default app;
