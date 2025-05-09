@@ -147,7 +147,8 @@ test("should be able to cancel order", async ({ page }) => {
     await page.locator("div").locator("span.icon-eye").first().click();
     await page.getByRole("link", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
-
+    
+    await page.waitForTimeout(4000);
     await expect(
         page
             .getByRole("paragraph")
@@ -232,11 +233,6 @@ test("should able to download downloadable orders", async ({ shopPage }) => {
     await shopPage
         .getByRole("link", { name: " Downloadable Products " })
         .click();
-    // const page1Promise = shopPage.waitForEvent("popup");
-    // const downloadPromise = shopPage.waitForEvent("download");
-    // await shopPage.getByRole("link", { name: productName }).click();
-    // await page1Promise;
-    // await downloadPromise;
     const popupPromise = shopPage.waitForEvent('popup').catch(() => null);
     const downloadPromise = shopPage.waitForEvent('download').catch(() => null);
     await shopPage.getByRole("link", { name: productName }).click();
