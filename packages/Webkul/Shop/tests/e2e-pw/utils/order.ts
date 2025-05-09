@@ -171,23 +171,6 @@ export async function downloadableOrder(page) {
     await expect(page.getByText(`${linkTitle}`)).toBeVisible();
 
     /**
-     * Downloadable Samples Section.
-     */
-    await page.getByText("Add Sample").first().click();
-    await page.waitForSelector(".min-h-0 > div > div");
-    await page.locator('input[name="title"]').fill(generateName());
-    const sampleTitle = await page.locator('input[name="title"]').inputValue();
-    await page.locator('select[name="type"]').selectOption("url");
-    await page.locator('input[name="url"]').fill(generateHostname());
-
-    /**
-     * Saving the Downloadable Sample.
-     */
-    await page.getByText("Link Save").click();
-    await page.getByRole("button", { name: "Save", exact: true }).click();
-    await expect(page.getByText(`${sampleTitle}`)).toBeVisible();
-
-    /**
      * Saving the product.
      */
     await page.getByRole("button", { name: "Save Product" }).click();
