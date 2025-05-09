@@ -3734,6 +3734,25 @@ return [
                         'redirection-link'  => 'リダイレクションリンク',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => '自動推測ロジックの有効化または無効化の設定を構成します。',
+                        'title' => '推測ルール',
+
+                        'settings' => [
+                            'eagerness'              => '積極性レベル',
+                            'eager'                  => '積極的',
+                            'moderate'               => '普通',
+                            'conservative'           => '控えめ',
+                            'eagerness-info'         => '推測ルールの適用の積極性を制御します。オプション：積極的（最大）、普通（デフォルト）、控えめ（低）。',
+                            'ignore-url-params'      => 'URLパラメータを無視',
+                            'ignore-url-params-info' => '無視するURLパラメータを指定します。複数指定する場合は|で区切ります。',
+                            'ignore-urls'            => 'URLを無視',
+                            'ignore-urls-info'       => '推測ロジックから除外するURLを入力してください。|で区切ります。',
+                            'info'                   => '推測ルールのステータスを設定します。',
+                            'title'                  => '推測ルールを有効にする',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'カスタムCSS',
                         'custom-javascript' => 'カスタムJavascript',
