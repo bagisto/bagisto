@@ -1269,7 +1269,6 @@ return [
                             'guest-capacity'            => 'Gastcapaciteit',
                             'guest-limit'               => 'Gastlimiet Per Tafel',
                             'prevent-scheduling-before' => 'Voorkom Planning Voor',
-
                             'slot-duration'             => 'Tijdsduur (Minuten)',
 
                             'charged-per'               => [
