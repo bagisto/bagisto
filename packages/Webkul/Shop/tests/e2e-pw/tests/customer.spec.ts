@@ -254,7 +254,7 @@ test("should add wishlist to cart", async ({ page }) => {
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByRole("button", { name: "Move To Cart" }).first().click();
+    await page.getByRole("button", { name: "Move To Cart" }).nth(1).click();
 
     await expect(
         page
