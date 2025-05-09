@@ -1558,7 +1558,7 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .click();
-                await adminPage.waitForTimeout(500); // Adding a delay of 0.5 second
+                await adminPage.waitForTimeout(500); 
 
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
@@ -1654,6 +1654,7 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .fill("35");
+                    await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
                 /**
                  * Available To.
@@ -1679,6 +1680,7 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .fill("35");
+                await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
                 /**
                  * Timeout of 0.5sec.
@@ -1794,6 +1796,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");    
 
             /**
              * Slot 1 time available to.
@@ -1813,7 +1816,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("55");
-
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
             /**
              * Adding slot 2 and waiting for time slot to be visible.
              */
@@ -1841,6 +1844,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("10");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");    
 
             /**
              * Slot 2 time available to.
@@ -1858,7 +1862,8 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
-
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
+            
             /**
              * Saving the slots.
              */
@@ -2174,6 +2179,7 @@ test.describe("booking product management", () => {
                     const fromMin = await adminPage
                         .getByRole("spinbutton", { name: "Minute" })
                         .fill("00");
+                    await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
                     /**
                      * Adding slots as per day available to.
@@ -2198,6 +2204,7 @@ test.describe("booking product management", () => {
                     const toMin = await adminPage
                         .getByRole("spinbutton", { name: "Minute" })
                         .fill("55");
+                    await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
                     /**
                      * Clicking on Add Slots.
@@ -2300,6 +2307,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
             /**
              * Slot 1 time available to.
@@ -2319,6 +2327,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("55");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
             /**
              * Adding slot 2 and waiting for time slot to be visible.
@@ -2348,6 +2357,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("10");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
             /**
              * Slot 2 time available to.
@@ -2365,6 +2375,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
 
             /**
              * Saving the slots.
@@ -2883,6 +2894,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("20");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
             await adminPage
                 .getByRole("textbox", { name: "To", exact: true })
                 .click();
@@ -2893,6 +2905,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.getByRole("spinbutton", { name: "Minute" }).press("Enter");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
