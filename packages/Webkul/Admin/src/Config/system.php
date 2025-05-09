@@ -99,7 +99,7 @@ return [
                 'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-urls',
                 'info'    => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-urls-info',
                 'type'    => 'textarea',
-                'default' => 'account|checkout|onepage|cart,',
+                'default' => 'account|checkout|onepage|cart',
             ], [
                 'name'    => 'ignore_url_params',
                 'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-url-params',
