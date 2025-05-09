@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-C0147TQp.css",
+    "file": "assets/app-C-rgoRgA.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -275,6 +275,14 @@
   "src/Resources/assets/images/average-orders.svg": {
     "file": "assets/average-orders-UpY6pgyW.svg",
     "src": "src/Resources/assets/images/average-orders.svg"
+  },
+  "src/Resources/assets/images/configuration/default-menu.svg": {
+    "file": "assets/default-menu-Dj-Oltdo.svg",
+    "src": "src/Resources/assets/images/configuration/default-menu.svg"
+  },
+  "src/Resources/assets/images/configuration/side-bar-menu.svg": {
+    "file": "assets/side-bar-menu-AbcRgqJb.svg",
+    "src": "src/Resources/assets/images/configuration/side-bar-menu.svg"
   },
   "src/Resources/assets/images/customers.svg": {
     "file": "assets/customers-BfcJGhnh.svg",

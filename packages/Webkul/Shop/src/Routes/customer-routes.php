@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
@@ -63,7 +64,7 @@ Route::prefix('customer')->group(function () {
      * Customer authenticated routes. All the below routes only be accessible
      * if customer is authenticated.
      */
-    Route::group(['middleware' => ['customer']], function () {
+    Route::group(['middleware' => ['customer', NoCacheMiddleware::class]], function () {
         /**
          * Datagrid routes.
          */
