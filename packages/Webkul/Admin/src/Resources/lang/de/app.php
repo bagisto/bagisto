@@ -3734,6 +3734,25 @@ return [
                         'redirection-link'  => 'Umleitungslink',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
+                        'title' => 'Spekulationsregeln',
+
+                        'settings' => [
+                            'eagerness'              => 'Eifer-Stufe',
+                            'eager'                  => 'Eifrig',
+                            'moderate'               => 'Moderat',
+                            'conservative'           => 'Konservativ',
+                            'eagerness-info'         => 'Steuert, wie aggressiv Spekulationsregeln angewendet werden. Optionen: eifrig (max), moderat (Standard), konservativ (niedrig).',
+                            'ignore-url-params'      => 'URL-Parameter ignorieren',
+                            'ignore-url-params-info' => 'Geben Sie zu ignorierende URL-Parameter an. Verwenden Sie | zur Trennung.',
+                            'ignore-urls'            => 'URLs ignorieren',
+                            'ignore-urls-info'       => 'Geben Sie URLs ein, die von der Spekulation ausgeschlossen werden sollen. Trennen Sie mehrere mit |.',
+                            'info'                   => 'Legen Sie den Status der Spekulationsregeln fest.',
+                            'title'                  => 'Spekulationsregeln aktivieren',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'Benutzerdefiniertes CSS',
                         'custom-javascript' => 'Benutzerdefiniertes JavaScript',

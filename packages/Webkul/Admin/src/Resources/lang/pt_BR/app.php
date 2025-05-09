@@ -3734,6 +3734,25 @@ return [
                         'redirection-link'  => 'Link de Redirecionamento',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => 'Configure as configurações para ativar ou desativar a lógica automatizada de especulação.',
+                        'title' => 'Regras de Especulação',
+
+                        'settings' => [
+                            'eagerness'              => 'Nível de Eagerness',
+                            'eager'                  => 'Eager',
+                            'moderate'               => 'Moderado',
+                            'conservative'           => 'Conservador',
+                            'eagerness-info'         => 'Controla quão agressivamente as regras de especulação são aplicadas. Opções: eager (máximo), moderate (padrão), conservative (baixo).',
+                            'ignore-url-params'      => 'Ignorar Parâmetros de URL',
+                            'ignore-url-params-info' => 'Especifique os parâmetros de URL para ignorar nas regras de especulação. Use pipe (|) para separar múltiplos parâmetros.',
+                            'ignore-urls'            => 'Ignorar URLs',
+                            'ignore-urls-info'       => 'Digite URLs a serem excluídas da lógica de especulação. Separe múltiplos URLs com pipe (|).',
+                            'info'                   => 'Defina o status das regras de especulação.',
+                            'title'                  => 'Ativar Regras de Especulação',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'CSS Personalizado',
                         'custom-javascript' => 'Javascript Personalizado',

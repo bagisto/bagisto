@@ -3733,6 +3733,25 @@ return [
                         'redirection-link'  => 'Enllaç de Redirecció',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => 'Configura els paràmetres per activar o desactivar la lògica d’especulació automàtica.',
+                        'title' => 'Regles d’especulació',
+
+                        'settings' => [
+                            'eagerness'              => 'Nivell d’afany',
+                            'eager'                  => 'Alt',
+                            'moderate'               => 'Moderada',
+                            'conservative'           => 'Conservadora',
+                            'eagerness-info'         => 'Controla com s’apliquen les regles d’especulació. Opcions: alt, moderat (per defecte), conservador.',
+                            'ignore-url-params'      => 'Ignora paràmetres URL',
+                            'ignore-url-params-info' => 'Indica els paràmetres URL a ignorar. Separa múltiples amb una barra (|).',
+                            'ignore-urls'            => 'Ignora URLs',
+                            'ignore-urls-info'       => 'Introdueix URLs a excloure. Separa múltiples amb una barra (|).',
+                            'info'                   => 'Defineix l’estat de les regles d’especulació.',
+                            'title'                  => 'Activa les regles d’especulació',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'CSS Personalitzat',
                         'custom-javascript' => 'Javascript Personalitzat',

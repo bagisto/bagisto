@@ -3734,6 +3734,25 @@ return [
                         'redirection-link'  => 'קישור הפניה',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => 'הגדר את ההגדרות להפעלת או ביטול לוגיקת ספקולציה אוטומטית.',
+                        'title' => 'חוקי ספקולציה',
+
+                        'settings' => [
+                            'eagerness'              => 'רמת להיטות',
+                            'eager'                  => 'להוט',
+                            'moderate'               => 'מתון',
+                            'conservative'           => 'שמרן',
+                            'eagerness-info'         => 'שולט עד כמה חזק יחולו חוקי הספקולציה. אפשרויות: להוט (מקסימום), מתון (ברירת מחדל), שמרן (נמוך).',
+                            'ignore-url-params'      => 'התעלם מפרמטרים ב-URL',
+                            'ignore-url-params-info' => 'ציין פרמטרים שיש להתעלם מהם. השתמש ב-| להפרדה.',
+                            'ignore-urls'            => 'התעלם מ-URLs',
+                            'ignore-urls-info'       => 'הזן כתובות שיש להוציא מהספקולציה. הפרד עם |.',
+                            'info'                   => 'הגדר את מצב חוקי הספקולציה.',
+                            'title'                  => 'הפעל חוקי ספקולציה',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'CSS מותאם אישית',
                         'custom-javascript' => 'קוד JavaScript מותאם אישית',

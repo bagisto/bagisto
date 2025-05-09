@@ -3734,6 +3734,25 @@ return [
                         'redirection-link'  => 'Link Reindirizzamento',
                     ],
 
+                    'speculation-rules' => [
+                        'info'  => 'Configura le impostazioni per abilitare o disabilitare la logica di speculazione automatica.',
+                        'title' => 'Regole di speculazione',
+
+                        'settings' => [
+                            'eagerness'              => 'Livello di entusiasmo',
+                            'eager'                  => 'Entusiasta',
+                            'moderate'               => 'Moderato',
+                            'conservative'           => 'Conservatore',
+                            'eagerness-info'         => 'Controlla quanto aggressivamente si applicano le regole di speculazione. Opzioni: entusiasta (max), moderato (default), conservatore (basso).',
+                            'ignore-url-params'      => 'Ignora parametri URL',
+                            'ignore-url-params-info' => 'Specifica i parametri URL da ignorare. Usa il simbolo | per separare.',
+                            'ignore-urls'            => 'Ignora URL',
+                            'ignore-urls-info'       => 'Inserisci gli URL da escludere dalla logica di speculazione. Separali con |.',
+                            'info'                   => 'Imposta lo stato delle regole di speculazione.',
+                            'title'                  => 'Abilita regole di speculazione',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'CSS Personalizzato',
                         'custom-javascript' => 'Javascript Personalizzato',

@@ -936,28 +936,28 @@ class Core
     }
 
     /**
-     * Get get Speculation Rules.
+     * Get Speculation Rules.
      *
      * @return array
      */
-    public static function getSpeculationRules()
+    public function getSpeculationRules()
     {
-        if (! core()->getConfigData('general.speculation_rules.settings.enabled')) {
+        if (! $this->getConfigData('general.content.speculation_rules.enabled')) {
             return null;
         }
 
-        $configPath = 'general.speculation_rules.settings.';
-        
-        $eagerness = core()->getConfigData($configPath . 'eagerness') ?? 'moderate';
-        
+        $configPath = 'general.content.speculation_rules.';
+
+        $eagerness = $this->getConfigData($configPath.'eagerness') ?? 'moderate';
+
         $ignoreUrls = array_filter(
-            explode('|', core()->getConfigData($configPath . 'ignore_urls')),
-            fn($url) => trim($url) !== ''
+            explode('|', $this->getConfigData($configPath.'ignore_urls')),
+            fn ($url) => trim($url) !== ''
         );
 
         $ignoreUrlParams = array_filter(
-            explode('|', core()->getConfigData($configPath . 'ignore_url_params')),
-            fn($param) => trim($param) !== ''
+            explode('|', $this->getConfigData($configPath.'ignore_url_params')),
+            fn ($param) => trim($param) !== ''
         );
 
         $conditions = [['href_matches' => '/*']];
