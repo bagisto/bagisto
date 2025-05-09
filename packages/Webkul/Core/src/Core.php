@@ -942,10 +942,6 @@ class Core
      */
     public function getSpeculationRules()
     {
-        if (! $this->getConfigData('general.content.speculation_rules.enabled')) {
-            return null;
-        }
-
         $configPath = 'general.content.speculation_rules.';
 
         $eagerness = $this->getConfigData($configPath.'eagerness') ?? 'moderate';

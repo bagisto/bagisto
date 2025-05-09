@@ -76,9 +76,11 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
-        <script type="speculationrules">
-            @json(core()->getSpeculationRules(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
-        </script>
+        @if(core()->getConfigData('general.content.speculation_rules.enabled'))
+            <script type="speculationrules">
+                @json(core()->getSpeculationRules(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+            </script>
+        @endif
 
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
 
