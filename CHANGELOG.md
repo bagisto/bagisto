@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+## **v2.3.1 (14th of May 2025)** - *Release*
+
 ### Features:
 
 * Side Bar Menu: Introduced a new sidebar menu that provides users with quick access to various sections of the application, improving navigation and user experience.

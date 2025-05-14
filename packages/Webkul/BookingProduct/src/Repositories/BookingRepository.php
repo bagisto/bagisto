@@ -74,6 +74,8 @@ class BookingRepository extends Repository
      */
     public function getBookings(array $dateRange): Collection
     {
+        $tablePrefix = DB::getTablePrefix();
+
         return $this->select(
             'bookings.id',
             'bookings.order_id',
@@ -90,7 +92,7 @@ class BookingRepository extends Repository
             'addresses.country as country',
             'addresses.postcode as postcode',
         )
-            ->addSelect(DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name) as full_name'))
+            ->addSelect(DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'))
             ->leftJoin('orders', 'bookings.order_id', '=', 'orders.id')
             ->leftJoin('addresses', 'bookings.order_id', '=', 'addresses.order_id')
             ->whereBetween('bookings.from', $dateRange)
