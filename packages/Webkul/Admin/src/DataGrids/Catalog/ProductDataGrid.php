@@ -317,8 +317,9 @@ class ProductDataGrid extends DataGrid
 
         $ids = collect($results['hits']['hits'])->pluck('_id')->toArray();
 
-        $this->queryBuilder->whereIn('product_flat.product_id', $ids)
-            ->orderBy(DB::raw('FIELD(product_flat.product_id, '.implode(',', $ids).')'));
+        $this->queryBuilder
+            ->whereIn('product_flat.product_id', $ids)
+            ->orderBy(DB::raw('FIELD('.DB::getTablePrefix().'product_flat.product_id, '.implode(',', $ids).')'));
 
         $total = $results['hits']['total']['value'];
 
