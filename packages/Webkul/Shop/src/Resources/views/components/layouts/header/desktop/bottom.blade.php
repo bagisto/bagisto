@@ -155,7 +155,7 @@
                         <p class="mt-3 w-full border border-zinc-200"></p>
 
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.before') !!}
-                        
+
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
@@ -172,7 +172,7 @@
                             >
                                 @lang('shop::app.components.layouts.header.desktop.bottom.sign-up')
                             </a>
-                            
+
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 
@@ -335,17 +335,17 @@
             <!-- Categories Navigation -->
             <div class="flex items-center">
                 <!-- "All" button for opening the category drawer -->
-                <div 
+                <div
                     class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
                     @click="toggleCategoryDrawer"
                 >
                     <span class="flex items-center gap-1 px-5 uppercase">
-                        <span class="icon-hamburger text-xl"></span> 
-                        
+                        <span class="icon-hamburger text-xl"></span>
+
                         @lang('shop::app.components.layouts.header.desktop.bottom.all')
                     </span>
                 </div>
-                    
+
                 <!-- Show only first 4 categories in main navigation -->
                 <div
                     class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
@@ -409,7 +409,7 @@
 
                 <x-slot:header class="border-b border-gray-200">
                     <div class="flex w-full items-center justify-between">
-                        <p class="text-xl font-medium">                 
+                        <p class="text-xl font-medium">
                             @lang('shop::app.components.layouts.header.desktop.bottom.categories')
                         </p>
                     </div>
@@ -427,41 +427,41 @@
                             }"
                         >
                             <!-- First level view -->
-                            <div class="h-full w-full flex-shrink-0">
+                            <div class="h-[calc(100vh-74px)] overflow-auto w-full flex-shrink-0">
                                 <div class="py-4">
-                                    <div 
-                                        v-for="category in categories.slice(4)" 
-                                        :key="category.id" 
+                                    <div
+                                        v-for="category in categories.slice(4)"
+                                        :key="category.id"
                                         :class="{'mb-2': category.children && category.children.length}"
                                     >
                                         <div class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100">
-                                            <a 
-                                                :href="category.url" 
+                                            <a
+                                                :href="category.url"
                                                 class="text-base font-medium text-black"
                                             >
                                                 @{{ category.name }}
                                             </a>
                                         </div>
-                
+
                                         <!-- Second Level Categories -->
                                         <div v-if="category.children && category.children.length" >
-                                            <div 
-                                                v-for="secondLevelCategory in category.children" 
-                                                :key="secondLevelCategory.id" 
+                                            <div
+                                                v-for="secondLevelCategory in category.children"
+                                                :key="secondLevelCategory.id"
                                             >
-                                                <div 
+                                                <div
                                                     class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100"
                                                     @click="showThirdLevel(secondLevelCategory, category, $event)"
                                                 >
-                                                    <a 
-                                                        :href="secondLevelCategory.url" 
+                                                    <a
+                                                        :href="secondLevelCategory.url"
                                                         class="text-sm font-normal"
                                                     >
                                                         @{{ secondLevelCategory.name }}
                                                     </a>
-                
-                                                    <span 
-                                                        v-if="secondLevelCategory.children && secondLevelCategory.children.length" 
+
+                                                    <span
+                                                        v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                                         class="icon-arrow-right rtl:icon-arrow-left"
                                                     ></span>
                                                 </div>
@@ -470,12 +470,15 @@
                                     </div>
                                 </div>
                             </div>
-                
+
                             <!-- Third level view -->
-                            <div class="h-full w-full flex-shrink-0">
+                            <div
+                                class="h-full w-full flex-shrink-0"
+                                v-if="currentViewLevel === 'third'"
+                            >
                                 <div class="border-b border-gray-200 px-6 py-4">
-                                    <button 
-                                        @click="goBackToMainView" 
+                                    <button
+                                        @click="goBackToMainView"
                                         class="flex items-center justify-center gap-2 focus:outline-none"
                                         aria-label="Go back"
                                     >
@@ -486,16 +489,16 @@
                                         </p>
                                     </button>
                                 </div>
-                                
+
                                 <!-- Third Level Content -->
                                 <div class="py-4">
                                     <div
-                                        v-for="thirdLevelCategory in currentSecondLevelCategory?.children" 
-                                        :key="thirdLevelCategory.id" 
+                                        v-for="thirdLevelCategory in currentSecondLevelCategory?.children"
+                                        :key="thirdLevelCategory.id"
                                         class="mb-2"
                                     >
-                                        <a 
-                                            :href="thirdLevelCategory.url" 
+                                        <a
+                                            :href="thirdLevelCategory.url"
                                             class="block px-6 py-2 text-sm transition-colors duration-200 hover:bg-gray-100"
                                         >
                                             @{{ thirdLevelCategory.name }}
@@ -543,7 +546,7 @@
 
                 pairCategoryChildren(category) {
                     if (! category.children) return [];
-                    
+
                     return category.children.reduce((result, value, index, array) => {
                         if (index % 2 === 0) {
                             result.push(array.slice(index, index + 2));
@@ -551,35 +554,35 @@
                         return result;
                     }, []);
                 },
-                
+
                 toggleCategoryDrawer() {
                     this.isDrawerActive = !this.isDrawerActive;
                     if (this.isDrawerActive) {
                         this.currentViewLevel = 'main';
                     }
                 },
-                
+
                 onDrawerToggle(event) {
                     this.isDrawerActive = event.isActive;
                 },
-                
+
                 onDrawerClose(event) {
                     this.isDrawerActive = false;
                 },
-                
+
                 showThirdLevel(secondLevelCategory, parentCategory, event) {
                     if (secondLevelCategory.children && secondLevelCategory.children.length) {
                         this.currentSecondLevelCategory = secondLevelCategory;
                         this.currentParentCategory = parentCategory;
                         this.currentViewLevel = 'third';
-                        
+
                         if (event) {
                             event.preventDefault();
                             event.stopPropagation();
                         }
                     }
                 },
-                
+
                 goBackToMainView() {
                     this.currentViewLevel = 'main';
                 }
