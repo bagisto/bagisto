@@ -46,10 +46,10 @@ it('displays the "Sign In" and "Sign Up" buttons when the customer is not logged
      * We avoid using the `assertSeeText` method of the response because it may sometimes
      * produce false positive results when dealing with large DOM sizes.
      */
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.sign-in')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-in')))
         ->toBeTruthy();
 
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.sign-up')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-up')))
         ->toBeTruthy();
 });
 

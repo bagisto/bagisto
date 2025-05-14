@@ -1021,6 +1021,7 @@ return [
                 'street-address'         => 'Adreça',
                 'telephone'              => 'Telèfon',
                 'title'                  => 'Adreça',
+                'vat-id'                 => 'Número d\'Identificació Fiscal',
             ],
 
             'index' => [
