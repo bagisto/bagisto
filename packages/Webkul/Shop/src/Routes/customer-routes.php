@@ -73,9 +73,7 @@ Route::prefix('customer')->group(function () {
         /**
          * Logout.
          */
-        Route::delete('logout', [SessionController::class, 'destroy'])->defaults('_config', [
-            'redirect' => 'shop.customer.session.index',
-        ])->name('shop.customer.session.destroy');
+        Route::delete('logout', [SessionController::class, 'destroy'])->name('shop.customer.session.destroy');
 
         /**
          * Customer account. All the below routes are related to
