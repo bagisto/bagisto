@@ -12,5 +12,7 @@ class AttributeServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'attribute');
     }
 }
