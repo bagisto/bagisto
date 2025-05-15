@@ -178,13 +178,13 @@
                     <!-- Checkbox Filter Options -->
                     <ul class="pb-3 text-base text-gray-700" v-else>
                         <li
-                            :key="option.id"
+                            :key="`${filter.id}_${option.id}`"
                             v-for="(option, optionIndex) in filter.options"
                         >
                             <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
                                 <input
                                     type="checkbox"
-                                    :id="'option_' + option.id"
+                                    :id="`filter_${filter.id}_option_ ${option.id}`"
                                     class="peer hidden"
                                     :value="option.id"
                                     v-model="appliedValues"
@@ -198,14 +198,14 @@
                                     :aria-label="option.name"
                                     :aria-labelledby="'label_option_' + option.id"
                                     tabindex="0"
-                                    :for="'option_' + option.id"
+                                    :for="`filter_${filter.id}_option_ ${option.id}`"
                                 >
                                 </label>
 
                                 <label
                                     class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
                                     :id="'label_option_' + option.id"
-                                    :for="'option_' + option.id"
+                                    :for="`filter_${filter.id}_option_ ${option.id}`"
                                     role="button"
                                     tabindex="0"
                                 >
@@ -267,7 +267,7 @@
             methods: {
                 getFilters() {
                     this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
-                            params: { 
+                            params: {
                                 category_id: "{{ isset($category) ? $category->id : ''  }}",
                             }
                         })
