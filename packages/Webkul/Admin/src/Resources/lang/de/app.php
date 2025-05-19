@@ -3735,21 +3735,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
-                        'title' => 'Spekulationsregeln',
+                        'enable-speculation' => 'Spekulationsregeln aktivieren',
+                        'info'               => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
+                        'title'              => 'Spekulationsregeln',
 
-                        'settings' => [
-                            'eagerness'              => 'Eifer-Stufe',
-                            'eager'                  => 'Eifrig',
-                            'moderate'               => 'Moderat',
+                        'prerender' => [
                             'conservative'           => 'Konservativ',
-                            'eagerness-info'         => 'Steuert, wie aggressiv Spekulationsregeln angewendet werden. Optionen: eifrig (max), moderat (Standard), konservativ (niedrig).',
-                            'ignore-url-params'      => 'URL-Parameter ignorieren',
-                            'ignore-url-params-info' => 'Geben Sie zu ignorierende URL-Parameter an. Verwenden Sie | zur Trennung.',
-                            'ignore-urls'            => 'URLs ignorieren',
-                            'ignore-urls-info'       => 'Geben Sie URLs ein, die von der Spekulation ausgeschlossen werden sollen. Trennen Sie mehrere mit |.',
+                            'eager'                  => 'Eifrig',
+                            'eagerness'              => 'Prerender-Eifer-Stufe',
+                            'eagerness-info'         => 'Steuert, wie aggressiv die Spekulationsregeln angewendet werden. Optionen: eifrig (maximal), moderat (Standard), konservativ (niedrig).',
+                            'enabled'                => 'Prerender-Spekulationsregeln aktivieren',
+                            'ignore-url-params'      => 'Prerender-URL-Parameter ignorieren',
+                            'ignore-url-params-info' => 'Geben Sie URL-Parameter an, die in den Spekulationsregeln ignoriert werden sollen. Verwenden Sie ein Pipe-Zeichen (|) zur Trennung mehrerer Parameter.',
+                            'ignore-urls'            => 'Prerender-URLs ignorieren',
+                            'ignore-urls-info'       => 'Geben Sie URLs an, die von der Spekulationslogik ausgeschlossen werden sollen. Trennen Sie mehrere URLs mit einem Pipe-Zeichen (|).',
                             'info'                   => 'Legen Sie den Status der Spekulationsregeln fest.',
-                            'title'                  => 'Spekulationsregeln aktivieren',
+                            'moderate'               => 'Moderat',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Konservativ',
+                            'eager'                  => 'Eifrig',
+                            'eagerness'              => 'Prefetch-Eifer-Stufe',
+                            'eagerness-info'         => 'Steuert, wie aggressiv die Spekulationsregeln angewendet werden. Optionen: eifrig (maximal), moderat (Standard), konservativ (niedrig).',
+                            'enabled'                => 'Prefetch-Spekulationsregeln aktivieren',
+                            'ignore-url-params'      => 'Prefetch-URL-Parameter ignorieren',
+                            'ignore-url-params-info' => 'Geben Sie URL-Parameter an, die in den Spekulationsregeln ignoriert werden sollen. Verwenden Sie ein Pipe-Zeichen (|) zur Trennung mehrerer Parameter.',
+                            'ignore-urls'            => 'Prefetch-URLs ignorieren',
+                            'ignore-urls-info'       => 'Geben Sie URLs an, die von der Spekulationslogik ausgeschlossen werden sollen. Trennen Sie mehrere URLs mit einem Pipe-Zeichen (|).',
+                            'info'                   => 'Legen Sie den Status der Spekulationsregeln fest.',
+                            'moderate'               => 'Moderat',
                         ],
                     ],
 
