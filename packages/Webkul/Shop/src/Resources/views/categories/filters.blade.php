@@ -116,7 +116,7 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:ltr:pr-7 md:rtl:pl-7">
+            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[342px] md:ltr:pr-7 md:rtl:pl-7">
                 <!-- Filters Header Container -->
                 <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
                     <p class="text-lg font-semibold max-sm:font-medium">
@@ -182,11 +182,11 @@
                         v-if="filter.type !== 'boolean'"
                     >
                         <div class="relative">
-                            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl ltr:left-3 rtl:right-3 max-md:text-xl max-sm:top-2.5"></div>
+                            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
                             <input
                                 type="text"
-                                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                                class="block w-full rounded-xl border border-zinc-200 px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                                 placeholder="@lang('shop::app.categories.filters.search.title')"
                                 v-model="searchQuery"
                                 @input="searchOptions"
@@ -194,7 +194,7 @@
                         </div>
 
                         <p
-                            class="flex flex-row-reverse mt-1 text-xs text-gray-600"
+                            class="mt-1 flex flex-row-reverse text-xs text-gray-600"
                             v-text="
                                 '@lang('shop::app.categories.filters.search.results-info', ['currentCount' => 'currentCount', 'totalCount' => 'totalCount'])'
                                     .replace('currentCount', options.length)
@@ -212,7 +212,7 @@
                                 :key="`${filter.id}_${option.id}`"
                                 v-for="(option, optionIndex) in options"
                             >
-                                <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 ltr:pl-2 rtl:pr-2 max-sm:gap-x-1 max-sm:!p-0">
+                                <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
                                     <input
                                         type="checkbox"
                                         :id="`filter_${filter.id}_option_ ${option.id}`"
@@ -234,7 +234,7 @@
                                     </label>
 
                                     <label
-                                        class="w-full cursor-pointer p-2 text-base text-gray-900 ltr:pl-0 rtl:pr-0 max-sm:p-1 max-sm:text-sm"
+                                        class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
                                         :id="'label_option_' + option.id"
                                         :for="`filter_${filter.id}_option_ ${option.id}`"
                                         role="button"
