@@ -856,6 +856,15 @@ return [
             'clear-all' => 'مسح الكل',
             'filters'   => 'الفلاتر:',
             'filter'    => 'فلتر',
+
+            'search' => [
+                'load-more'            => 'تحميل المزيد',
+                'loading'              => 'جارٍ التحميل...',
+                'no-options-available' => 'لا توجد خيارات متاحة.',
+                'results-info'         => 'عرض :currentCount من :totalCount خيار',
+                'title'                => 'بحث',
+            ],
+
             'sort'      => 'ترتيب',
         ],
 

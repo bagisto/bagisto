@@ -856,6 +856,15 @@ return [
             'clear-all' => 'සියල්ල ඉවත් කරන්න',
             'filter'    => 'වෙනත්',
             'filters'   => 'වෙනත්:',
+
+            'search' => [
+                'load-more'            => 'තවත් පූරණය කරන්න',
+                'loading'              => 'පූරණය වෙමින්...',
+                'no-options-available' => 'විකල්ප නොමැත.',
+                'results-info'         => ':totalCount විකල්ප වලින් :currentCount පෙන්වයි',
+                'title'                => 'සෙවීම',
+            ],
+
             'sort'      => 'වර්ගය',
         ],
 

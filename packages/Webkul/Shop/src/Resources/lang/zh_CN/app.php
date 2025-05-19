@@ -856,6 +856,15 @@ return [
             'clear-all' => '清除所有',
             'filter'    => '筛选',
             'filters'   => '筛选条件：',
+
+            'search' => [
+                'load-more'            => '加载更多',
+                'loading'              => '加载中...',
+                'no-options-available' => '没有可用的选项。',
+                'results-info'         => '显示 :currentCount 个，共 :totalCount 个选项',
+                'title'                => '搜索',
+            ],
+
             'sort'      => '排序',
         ],
 

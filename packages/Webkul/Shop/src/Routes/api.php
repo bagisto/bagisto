@@ -26,6 +26,8 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
 
+        Route::get('attributes/{attribute_id}/options', 'getAttributeOptions')->name('shop.api.categories.attribute_options');
+
         Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 

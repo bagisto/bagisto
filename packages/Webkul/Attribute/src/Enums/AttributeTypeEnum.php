@@ -77,12 +77,12 @@ enum AttributeTypeEnum: string
     {
         return [
             [
-                'id'   => 1,
-                'name' => trans('attribute::app.boolean.options.yes'),
-            ],
-            [
                 'id'   => 0,
                 'name' => trans('attribute::app.boolean.options.no'),
+            ],
+            [
+                'id'   => 1,
+                'name' => trans('attribute::app.boolean.options.yes'),
             ],
         ];
     }
