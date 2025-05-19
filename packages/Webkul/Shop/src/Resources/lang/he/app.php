@@ -856,6 +856,15 @@ return [
             'clear-all' => 'נקה הכל',
             'filter'    => 'מסנן',
             'filters'   => 'מסננים:',
+
+            'search' => [
+                'load-more'            => 'טען עוד',
+                'loading'              => 'טוען...',
+                'no-options-available' => 'אין אפשרויות זמינות.',
+                'results-info'         => 'מציג :currentCount מתוך :totalCount אפשרויות',
+                'title'                => 'חיפוש',
+            ],
+
             'sort'      => 'מיון',
         ],
 

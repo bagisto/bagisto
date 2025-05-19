@@ -856,6 +856,15 @@ return [
             'clear-all' => 'সব মুছুন',
             'filter'    => 'ফিল্টার',
             'filters'   => 'ফিল্টার:',
+
+            'search' => [
+                'load-more'            => 'আরও লোড করুন',
+                'loading'              => 'লোড হচ্ছে...',
+                'no-options-available' => 'কোনো বিকল্প উপলব্ধ নেই।',
+                'results-info'         => ':totalCount বিকল্পের মধ্যে :currentCount দেখানো হচ্ছে',
+                'title'                => 'অনুসন্ধান',
+            ],
+
             'sort'      => 'সাজান',
         ],
 

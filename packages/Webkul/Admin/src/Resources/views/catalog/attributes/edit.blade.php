@@ -983,7 +983,10 @@
 
                 computed: {
                     isFilterable() {
-                        return this.attributeType == 'checkbox' || this.attributeType == 'select' || this.attributeType == 'multiselect';
+                        return this.attributeType == 'checkbox'
+                            || this.attributeType == 'select'
+                            || this.attributeType == 'multiselect'
+                            || this.attributeType == 'boolean';
                     },
 
                     isConfigurable() {
