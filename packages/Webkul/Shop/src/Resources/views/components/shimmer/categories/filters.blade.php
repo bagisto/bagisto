@@ -23,8 +23,10 @@
             <span class="shimmer h-6 w-6"></span>
         </div>
 
-        <div class="flex items-center justify-between py-2.5">
-            <p class="shimmer h-[50px] w-full rounded-xl"></p>
+        <div class="flex flex-col items-center justify-between gap-2">
+            <p class="shimmer h-[52px] w-full rounded-xl"></p>
+
+            <div class="shimmer h-5 w-full rounded"></div>
         </div>
 
         <div class="z-10 grid rounded-lg bg-white pb-3">
@@ -77,8 +79,10 @@
             <span class="shimmer h-6 w-6"></span>
         </div>
 
-        <div class="flex items-center justify-between py-2.5">
-            <p class="shimmer h-[50px] w-full rounded-xl"></p>
+        <div class="flex flex-col items-center justify-between gap-2">
+            <p class="shimmer h-[52px] w-full rounded-xl"></p>
+
+            <div class="shimmer h-5 w-full rounded"></div>
         </div>
         
         <div class="z-10 grid rounded-lg bg-white pb-3">
