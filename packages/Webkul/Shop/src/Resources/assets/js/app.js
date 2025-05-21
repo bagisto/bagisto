@@ -66,4 +66,11 @@ import Flatpickr from "./plugins/flatpickr";
     Flatpickr,
 ].forEach((plugin) => app.use(plugin));
 
+/**
+ * Global directives.
+ */
+import Debounce from "./directives/debounce";
+
+app.directive("debounce", Debounce);
+
 export default app;

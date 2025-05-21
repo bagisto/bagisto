@@ -189,7 +189,7 @@
                                 class="block w-full rounded-xl border border-zinc-200 px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                                 placeholder="@lang('shop::app.categories.filters.search.title')"
                                 v-model="searchQuery"
-                                @input="searchOptions"
+                                v-debounce:500="searchOptions"
                             />
                         </div>
 
