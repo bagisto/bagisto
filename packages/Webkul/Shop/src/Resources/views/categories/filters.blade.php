@@ -286,22 +286,6 @@
                                             <div class="shimmer h-5 w-[100px]"></div>
                                         </div>
                                     </div>
-
-                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                        <div class="shimmer h-5 w-5 rounded"></div>
-
-                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                            <div class="shimmer h-5 w-[100px]"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                        <div class="shimmer h-5 w-5 rounded"></div>
-
-                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                            <div class="shimmer h-5 w-[100px]"></div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </template>
