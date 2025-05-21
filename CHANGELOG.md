@@ -4,6 +4,16 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+## **v2.3.2 (21st of May 2025)** - *Release*
+
+* Response cache is enabled by default.
+
+* Fetch priority added for the slider image and product view image.
+
+* Separate configuration provided for speculation APIs for both prerender and prefetch.
+
+* Searchable attributes added on the category view page.
+
 ## **v2.3.1 (14th of May 2025)** - *Release*
 
 ### Features:
