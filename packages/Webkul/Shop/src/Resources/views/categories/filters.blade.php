@@ -251,48 +251,50 @@
                                 @lang('shop::app.categories.filters.search.no-options-available')
                             </li>
 
-                            <div class="z-10 grid rounded-lg bg-white pb-3" v-else>
-                                <div class="flex flex-col items-center justify-between pt-2">
-                                    <div class="shimmer h-5 w-full rounded"></div>
+                            <div class="mt-2">
+                                <div class="flex flex-col items-center justify-between">
+                                    <div class="shimmer h-5 w-[50%] self-end rounded"></div>
                                 </div>
 
-                                <div class="flex items-center gap-x-4 ltr:pl-2 rtl:pr-2">
-                                    <div class="shimmer h-5 w-5 rounded"></div>
-                                    
-                                    <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                        <div class="shimmer h-5 w-[100px]"></div>
+                                <div class="z-10 grid gap-1 rounded-lg bg-white">
+                                    <div class="flex items-center gap-x-4 ltr:pl-2 rtl:pr-2">
+                                        <div class="shimmer h-5 w-5 rounded"></div>
+                                        
+                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
+                                            <div class="shimmer h-5 w-[100px]"></div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                    <div class="shimmer h-5 w-5 rounded"></div>
+                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
+                                        <div class="shimmer h-5 w-5 rounded"></div>
 
-                                    <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                        <div class="shimmer h-5 w-[100px]"></div>
+                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
+                                            <div class="shimmer h-5 w-[100px]"></div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                    <div class="shimmer h-5 w-5 rounded"></div>
+                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
+                                        <div class="shimmer h-5 w-5 rounded"></div>
 
-                                    <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                        <div class="shimmer h-5 w-[100px]"></div>
+                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
+                                            <div class="shimmer h-5 w-[100px]"></div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                    <div class="shimmer h-5 w-5 rounded"></div>
+                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
+                                        <div class="shimmer h-5 w-5 rounded"></div>
 
-                                    <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                        <div class="shimmer h-5 w-[100px]"></div>
+                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
+                                            <div class="shimmer h-5 w-[100px]"></div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
-                                    <div class="shimmer h-5 w-5 rounded"></div>
+                                    <div class="flex items-center gap-x-4 rounded ltr:pl-2 rtl:pr-2">
+                                        <div class="shimmer h-5 w-5 rounded"></div>
 
-                                    <div class="p-2 ltr:pl-0 rtl:pr-0">
-                                        <div class="shimmer h-5 w-[100px]"></div>
+                                        <div class="p-2 ltr:pl-0 rtl:pr-0">
+                                            <div class="shimmer h-5 w-[100px]"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
