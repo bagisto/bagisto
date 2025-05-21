@@ -349,7 +349,7 @@
                 <!-- Show only first 4 categories in main navigation -->
                 <div
                     class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
-                    v-for="category in categories"
+                    v-for="category in categories.slice(4)"
                 >
                     <span>
                         <a
