@@ -154,6 +154,16 @@
                 };
             },
 
+            created() {
+                let queryParams = new URLSearchParams(window.location.search);
+
+                queryParams.forEach((value, filter) => {
+                    if (['sort', 'limit', 'mode'].includes(filter)) {
+                        this.filters.applied[filter] = value;
+                    }
+                });
+            },
+
             mounted() {
                 this.setFilters();
             },
