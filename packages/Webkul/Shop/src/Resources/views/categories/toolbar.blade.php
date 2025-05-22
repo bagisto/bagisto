@@ -17,8 +17,8 @@
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
 
                 <!-- Product Sorting Filters -->
-                <x-shop::dropdown 
-                    class="z-[1]" 
+                <x-shop::dropdown
+                    class="z-[1]"
                     position="bottom-left"
                 >
                     <x-slot:toggle>
@@ -32,7 +32,7 @@
                             ></span>
                         </button>
                     </x-slot>
-                
+
                     <!-- Dropdown Content -->
                     <x-slot:menu>
                         <x-shop::dropdown.menu.item
@@ -64,7 +64,7 @@
                                 ></span>
                             </button>
                         </x-slot>
-                    
+
                         <!-- Dropdown Content -->
                         <x-slot:menu>
                             <x-shop::dropdown.menu.item
