@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+## **v2.2.7 (22nd of May 2025)** - *Release*
+
 * Resolved Full Page Cache (FPC) issues affecting category and search result pages.
 
 * Fixed persistent toolbar state issues on the category page.
