@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+* Resolved Full Page Cache (FPC) issues affecting category and search result pages.
+
+* Fixed persistent toolbar state issues on the category page.
+
 ## **v2.2.6 (14th of May 2025)** - *Release*
 
 * #10612 [feature] - Added confirmation before copying a product.
