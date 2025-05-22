@@ -49,6 +49,7 @@
             'fr'    => 'french',
             'he'    => 'hebrew',
             'hi_IN' => 'hindi',
+            'id'    => 'indonesian',
             'it'    => 'italian',
             'ja'    => 'japanese',
             'nl'    => 'dutch',
