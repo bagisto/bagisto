@@ -17,8 +17,8 @@
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
 
                 <!-- Product Sorting Filters -->
-                <x-shop::dropdown 
-                    class="z-[1]" 
+                <x-shop::dropdown
+                    class="z-[1]"
                     position="bottom-left"
                 >
                     <x-slot:toggle>
@@ -32,7 +32,7 @@
                             ></span>
                         </button>
                     </x-slot>
-                
+
                     <!-- Dropdown Content -->
                     <x-slot:menu>
                         <x-shop::dropdown.menu.item
@@ -64,7 +64,7 @@
                                 ></span>
                             </button>
                         </x-slot>
-                    
+
                         <!-- Dropdown Content -->
                         <x-slot:menu>
                             <x-shop::dropdown.menu.item
@@ -154,6 +154,16 @@
                 };
             },
 
+            created() {
+                let queryParams = new URLSearchParams(window.location.search);
+
+                queryParams.forEach((value, filter) => {
+                    if (['sort', 'limit', 'mode'].includes(filter)) {
+                        this.filters.applied[filter] = value;
+                    }
+                });
+            },
+
             mounted() {
                 this.setFilters();
             },
@@ -183,12 +193,13 @@
                     for (let key in this.filters.applied) {
                         if (this.filters.applied[key] != this.filters.default[key]) {
                             filters[key] = this.filters.applied[key];
-                        } else {
-                            filters[key] = this.filters.default[key];
                         }
                     }
 
-                    this.$emit('filter-applied', filters);
+                    this.$emit('filter-applied', {
+                        default: this.filters.default,
+                        applied: filters,
+                    });
                 }
             },
         });
