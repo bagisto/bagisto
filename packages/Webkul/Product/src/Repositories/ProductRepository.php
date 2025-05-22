@@ -365,7 +365,17 @@ class ProductRepository extends Repository
                                     $join->where($alias.'.attribute_id', $attribute->id);
                                 });
 
-                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                if ($attribute->type === 'multiselect') {
+                                    $paramValues = explode(',', $params[$attribute->code]);
+
+                                    $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute) {
+                                        foreach ($paramValues as $value) {
+                                            $query->orWhereRaw("FIND_IN_SET(?, {$alias}.{$attribute->column_name})", [$value]);
+                                        }
+                                    });
+                                } else {
+                                    $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                }
                             }
                         });
                     }
