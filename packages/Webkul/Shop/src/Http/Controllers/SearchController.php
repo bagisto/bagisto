@@ -38,7 +38,13 @@ class SearchController extends Controller
             return redirect()->to($searchTerm->redirect_url);
         }
 
-        return view('shop::search.index');
+        return view('shop::search.index', [
+            'params' => [
+                'sort'  => request()->query('sort'),
+                'limit' => request()->query('limit'),
+                'mode'  => request()->query('mode'),
+            ],
+        ]);
     }
 
     /**
