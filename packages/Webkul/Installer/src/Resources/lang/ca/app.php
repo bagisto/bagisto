@@ -214,6 +214,7 @@ return [
                 'fr'    => 'Francès',
                 'he'    => 'Hebreu',
                 'hi_IN' => 'Hindi',
+                'id'    => 'Indonesi',
                 'it'    => 'Italià',
                 'ja'    => 'Japonès',
                 'nl'    => 'Holandès',
