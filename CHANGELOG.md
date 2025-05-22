@@ -4,6 +4,16 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+* Resolved an issue with the category filter functionality.
+
+* Fixed an issue with search attributes on the category page.
+
+* Addressed a problem with category listings.
+
+* Corrected issues on the search page and toolbar.
+
+* #10784 [fixed] - Fixed store search issue caused by Full Page Cache (FPC).
+
 ## **v2.3.2 (21st of May 2025)** - *Release*
 
 * Response cache is enabled by default.
