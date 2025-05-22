@@ -69,6 +69,10 @@ class ProductRepository extends Repository
     {
         $product = $this->findOrFail($id);
 
+        if ($data['booking']['booking_type'] == 'one') {
+            $data['booking']['default_slot']['duration'] = null;
+            $data['booking']['default_slot']['break_time'] = null;
+        }
         $product = $product->getTypeInstance()->update($data, $id, $attributes);
 
         $product->refresh();
