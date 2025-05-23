@@ -653,7 +653,7 @@ class Core
 
         $date->setTimezone($channel->timezone);
 
-        return $date->format($format);
+        return $date->translatedFormat($format);
     }
 
     /**
