@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **Unreleased**
+
+* Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
+
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
 * Resolved an issue with the category filter functionality.
