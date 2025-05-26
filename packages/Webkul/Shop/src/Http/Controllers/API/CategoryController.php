@@ -100,6 +100,8 @@ class CategoryController extends APIController
             });
         }
 
+        $query->orderBy('sort_order');
+
         return AttributeOptionResource::collection($query->paginate());
     }
 

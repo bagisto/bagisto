@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
 
+* Resolved the sort order issue for paginated attribute options on the category page.
+
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
 * Resolved an issue with the category filter functionality.
