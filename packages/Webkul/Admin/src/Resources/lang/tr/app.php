@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR Uyumluluk Ayarları',
+
+                    'settings' => [
+                        'title'   => 'GDPR Uyumluluk Ayarları',
+                        'info'    => 'Gizlilik politikası dahil olmak üzere GDPR uyumluluk ayarlarını yönetin. Gereksinimlere göre GDPR özelliklerini etkinleştirin veya devre dışı bırakın.',
+                        'enabled' => 'GDPR\'yi Etkinleştir',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR Anlaşması',
+                        'info'           => 'GDPR düzenlemelerine uygun olarak müşteri onayını yönetin. Veri toplama ve işleme için gerekli onayı etkinleştirin.',
+                        'enable'         => 'Müşteri Onayını Etkinleştir',
+                        'checkbox-label' => 'Onay için Etiket',
+                        'content'        => 'Onay İçeriği',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Alt Sol',
+                        'bottom-right' => 'Alt Sağ',
+                        'center'       => 'Merkez',
+                        'description'  => 'Açıklama',
+                        'enable'       => 'Çerez Bildirimini Etkinleştir',
+                        'identifier'   => 'Statik Blok ID',
+                        'info'         => 'Kullanıcıları veri toplama ve gizlilik politikası hakkında bilgilendirmek için çerez onay ayarlarını yapılandırın.',
+                        'position'     => 'Çerez Blok Konumu',
+                        'title'        => 'Çerez Bildirim Ayarları',
+                        'top-left'     => 'Üst Sol',
+                        'top-right'    => 'Üst Sağ',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Çerez Ayarlarını Yönet',
+                        'info'                   => 'Veri kullanımı yönetimi için tercih edilen çerez ayarlarını seçin. Farklı çerez türleri için onay ayarlarını yapılandırın.',
+                        'strictly-necessary'     => 'Kesinlikle Gerekli',
+                        'basic-interaction'      => 'Temel Etkileşim ve İşlevsellik',
+                        'experience-enhancement' => 'Deneyim Geliştirme',
+                        'measurement'            => 'Ölçüm',
+                        'targeting-advertising'  => 'Hedefleme ve Reklam',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Site haritası seçeneklerini ayarlayın.',
                     'title' => 'Site Haritası',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
                         'title'            => 'Dosya Limitleri',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPR Uyumluluk Ayarları',
-
-                'settings' => [
-                    'title'   => 'GDPR Uyumluluk Ayarları',
-                    'info'    => 'Gizlilik politikası dahil olmak üzere GDPR uyumluluk ayarlarını yönetin. Gereksinimlere göre GDPR özelliklerini etkinleştirin veya devre dışı bırakın.',
-                    'enabled' => 'GDPR\'yi Etkinleştir',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR Anlaşması',
-                    'info'           => 'GDPR düzenlemelerine uygun olarak müşteri onayını yönetin. Veri toplama ve işleme için gerekli onayı etkinleştirin.',
-                    'enable'         => 'Müşteri Onayını Etkinleştir',
-                    'checkbox-label' => 'Onay için Etiket',
-                    'content'        => 'Onay İçeriği',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Alt Sol',
-                    'bottom-right' => 'Alt Sağ',
-                    'center'       => 'Merkez',
-                    'description'  => 'Açıklama',
-                    'enable'       => 'Çerez Bildirimini Etkinleştir',
-                    'identifier'   => 'Statik Blok ID',
-                    'info'         => 'Kullanıcıları veri toplama ve gizlilik politikası hakkında bilgilendirmek için çerez onay ayarlarını yapılandırın.',
-                    'position'     => 'Çerez Blok Konumu',
-                    'title'        => 'Çerez Bildirim Ayarları',
-                    'top-left'     => 'Üst Sol',
-                    'top-right'    => 'Üst Sağ',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Çerez Ayarlarını Yönet',
-                    'info'                   => 'Veri kullanımı yönetimi için tercih edilen çerez ayarlarını seçin. Farklı çerez türleri için onay ayarlarını yapılandırın.',
-                    'strictly-necessary'     => 'Kesinlikle Gerekli',
-                    'basic-interaction'      => 'Temel Etkileşim ve İşlevsellik',
-                    'experience-enhancement' => 'Deneyim Geliştirme',
-                    'measurement'            => 'Ölçüm',
-                    'targeting-advertising'  => 'Hedefleme ve Reklam',
                 ],
             ],
 

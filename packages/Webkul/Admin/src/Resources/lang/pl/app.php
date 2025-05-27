@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Ustawienia zgodności z GDPR',
+
+                    'settings' => [
+                        'title'   => 'Ustawienia zgodności z GDPR',
+                        'info'    => 'Zarządzaj ustawieniami zgodności z GDPR, w tym polityką prywatności. Włącz lub wyłącz funkcje GDPR w razie potrzeby.',
+                        'enabled' => 'Włącz GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Zgoda GDPR',
+                        'info'           => 'Zarządzaj zgodą klientów zgodnie z przepisami GDPR. Włącz obowiązkową zgodę na zbieranie i przetwarzanie danych.',
+                        'enable'         => 'Włącz zgodę klienta',
+                        'checkbox-label' => 'Etykieta pola zgody',
+                        'content'        => 'Treść zgody',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Lewy dolny róg',
+                        'bottom-right' => 'Prawy dolny róg',
+                        'center'       => 'Centrum',
+                        'description'  => 'Opis',
+                        'enable'       => 'Włącz powiadomienie o plikach cookie',
+                        'identifier'   => 'ID bloku statycznego',
+                        'info'         => 'Skonfiguruj ustawienia zgody na pliki cookie, aby informować użytkowników o zbieraniu danych i zgodności z polityką prywatności.',
+                        'position'     => 'Pozycja bloku cookie',
+                        'title'        => 'Ustawienia powiadomień o plikach cookie',
+                        'top-left'     => 'Lewy górny róg',
+                        'top-right'    => 'Prawy górny róg',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Zarządzaj ustawieniami plików cookie',
+                        'info'                   => 'Wybierz preferowane ustawienia plików cookie, aby zarządzać wykorzystaniem danych. Skonfiguruj zgody na różne rodzaje plików cookie.',
+                        'strictly-necessary'     => 'Ściśle niezbędne',
+                        'basic-interaction'      => 'Podstawowa interakcja i funkcjonalność',
+                        'experience-enhancement' => 'Poprawa doświadczenia',
+                        'measurement'            => 'Pomiar',
+                        'targeting-advertising'  => 'Targetowanie i reklamy',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Ustaw opcje mapy witryny.',
                     'title' => 'Mapa witryny',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Maksymalna liczba URL na plik',
                         'title'            => 'Limity plików',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Ustawienia zgodności z GDPR',
-
-                'settings' => [
-                    'title'   => 'Ustawienia zgodności z GDPR',
-                    'info'    => 'Zarządzaj ustawieniami zgodności z GDPR, w tym polityką prywatności. Włącz lub wyłącz funkcje GDPR w razie potrzeby.',
-                    'enabled' => 'Włącz GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Zgoda GDPR',
-                    'info'           => 'Zarządzaj zgodą klientów zgodnie z przepisami GDPR. Włącz obowiązkową zgodę na zbieranie i przetwarzanie danych.',
-                    'enable'         => 'Włącz zgodę klienta',
-                    'checkbox-label' => 'Etykieta pola zgody',
-                    'content'        => 'Treść zgody',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Lewy dolny róg',
-                    'bottom-right' => 'Prawy dolny róg',
-                    'center'       => 'Centrum',
-                    'description'  => 'Opis',
-                    'enable'       => 'Włącz powiadomienie o plikach cookie',
-                    'identifier'   => 'ID bloku statycznego',
-                    'info'         => 'Skonfiguruj ustawienia zgody na pliki cookie, aby informować użytkowników o zbieraniu danych i zgodności z polityką prywatności.',
-                    'position'     => 'Pozycja bloku cookie',
-                    'title'        => 'Ustawienia powiadomień o plikach cookie',
-                    'top-left'     => 'Lewy górny róg',
-                    'top-right'    => 'Prawy górny róg',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Zarządzaj ustawieniami plików cookie',
-                    'info'                   => 'Wybierz preferowane ustawienia plików cookie, aby zarządzać wykorzystaniem danych. Skonfiguruj zgody na różne rodzaje plików cookie.',
-                    'strictly-necessary'     => 'Ściśle niezbędne',
-                    'basic-interaction'      => 'Podstawowa interakcja i funkcjonalność',
-                    'experience-enhancement' => 'Poprawa doświadczenia',
-                    'measurement'            => 'Pomiar',
-                    'targeting-advertising'  => 'Targetowanie i reklamy',
                 ],
             ],
 

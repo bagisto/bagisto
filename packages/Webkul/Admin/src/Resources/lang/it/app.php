@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Impostazioni di conformità GDPR',
+
+                    'settings' => [
+                        'title'   => 'Impostazioni di conformità GDPR',
+                        'info'    => 'Gestisci le impostazioni di conformità GDPR, inclusa la politica sulla privacy. Abilita o disabilita le funzionalità GDPR secondo necessità.',
+                        'enabled' => 'Abilita GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Accordo GDPR',
+                        'info'           => 'Gestisci il consenso dei clienti in conformità con i regolamenti GDPR. Abilita il consenso obbligatorio per la raccolta e l\'elaborazione dei dati.',
+                        'enable'         => 'Abilita il consenso del cliente',
+                        'checkbox-label' => 'Etichetta della casella di controllo per il consenso',
+                        'content'        => 'Contenuto del consenso',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'In basso a sinistra',
+                        'bottom-right' => 'In basso a destra',
+                        'center'       => 'Centro',
+                        'description'  => 'Descrizione',
+                        'enable'       => 'Abilita notifica sui cookie',
+                        'identifier'   => 'Identificatore del blocco statico',
+                        'info'         => 'Imposta le impostazioni di consenso sui cookie per informare gli utenti sulla raccolta dei dati e rispettare la politica sulla privacy.',
+                        'position'     => 'Posizione di visualizzazione del blocco dei cookie',
+                        'title'        => 'Impostazioni di notifica sui cookie',
+                        'top-left'     => 'In alto a sinistra',
+                        'top-right'    => 'In alto a destra',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Gestisci le tue impostazioni sui cookie',
+                        'info'                   => 'Controlla l\'uso dei dati selezionando le impostazioni dei cookie desiderate. Imposta le autorizzazioni per diversi tipi di cookie.',
+                        'strictly-necessary'     => 'Strettamente necessari',
+                        'basic-interaction'      => 'Interazione e funzionalità di base',
+                        'experience-enhancement' => 'Miglioramento dell\'esperienza',
+                        'measurement'            => 'Misurazione',
+                        'targeting-advertising'  => 'Targeting e pubblicità',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Impostare le opzioni della mappa del sito.',
                     'title' => 'Mappa del Sito',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Numero massimo di URL per file',
                         'title'            => 'Limiti dei File',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Impostazioni di conformità GDPR',
-
-                'settings' => [
-                    'title'   => 'Impostazioni di conformità GDPR',
-                    'info'    => 'Gestisci le impostazioni di conformità GDPR, inclusa la politica sulla privacy. Abilita o disabilita le funzionalità GDPR secondo necessità.',
-                    'enabled' => 'Abilita GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Accordo GDPR',
-                    'info'           => 'Gestisci il consenso dei clienti in conformità con i regolamenti GDPR. Abilita il consenso obbligatorio per la raccolta e l\'elaborazione dei dati.',
-                    'enable'         => 'Abilita il consenso del cliente',
-                    'checkbox-label' => 'Etichetta della casella di controllo per il consenso',
-                    'content'        => 'Contenuto del consenso',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'In basso a sinistra',
-                    'bottom-right' => 'In basso a destra',
-                    'center'       => 'Centro',
-                    'description'  => 'Descrizione',
-                    'enable'       => 'Abilita notifica sui cookie',
-                    'identifier'   => 'Identificatore del blocco statico',
-                    'info'         => 'Imposta le impostazioni di consenso sui cookie per informare gli utenti sulla raccolta dei dati e rispettare la politica sulla privacy.',
-                    'position'     => 'Posizione di visualizzazione del blocco dei cookie',
-                    'title'        => 'Impostazioni di notifica sui cookie',
-                    'top-left'     => 'In alto a sinistra',
-                    'top-right'    => 'In alto a destra',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Gestisci le tue impostazioni sui cookie',
-                    'info'                   => 'Controlla l\'uso dei dati selezionando le impostazioni dei cookie desiderate. Imposta le autorizzazioni per diversi tipi di cookie.',
-                    'strictly-necessary'     => 'Strettamente necessari',
-                    'basic-interaction'      => 'Interazione e funzionalità di base',
-                    'experience-enhancement' => 'Miglioramento dell\'esperienza',
-                    'measurement'            => 'Misurazione',
-                    'targeting-advertising'  => 'Targeting e pubblicità',
                 ],
             ],
 

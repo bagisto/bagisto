@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'DSGVO',
+                    'info'  => 'DSGVO-Konformitätseinstellungen',
+
+                    'settings' => [
+                        'title'   => 'DSGVO-Konformitätseinstellungen',
+                        'info'    => 'Verwalten Sie die DSGVO-Konformitätseinstellungen, einschließlich der Datenschutzvereinbarung. Aktivieren oder deaktivieren Sie die DSGVO-Funktionen nach Bedarf.',
+                        'enabled' => 'DSGVO aktivieren',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'DSGVO-Vereinbarung',
+                        'info'           => 'Verwalten Sie die Zustimmung der Kunden gemäß den DSGVO-Vorschriften. Aktivieren Sie die Zustimmungspflicht für die Datenerfassung und -verarbeitung.',
+                        'enable'         => 'Kundenzustimmung aktivieren',
+                        'checkbox-label' => 'Checkbox-Beschriftung für die Zustimmung',
+                        'content'        => 'Inhalt der Zustimmung',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Unten links',
+                        'bottom-right' => 'Unten rechts',
+                        'center'       => 'Mitte',
+                        'description'  => 'Beschreibung',
+                        'enable'       => 'Cookie-Benachrichtigung aktivieren',
+                        'identifier'   => 'Statischer Block-Identifier',
+                        'info'         => 'Konfigurieren Sie die Cookie-Zustimmungseinstellungen, um Benutzer über die Datenerfassung zu informieren und die Datenschutzbestimmungen einzuhalten.',
+                        'position'     => 'Anzeigeposition des Cookie-Blocks',
+                        'title'        => 'Cookie-Benachrichtigungseinstellungen',
+                        'top-left'     => 'Oben links',
+                        'top-right'    => 'Oben rechts',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Verwalten Sie Ihre Cookie-Einstellungen',
+                        'info'                   => 'Kontrollieren Sie, wie Ihre Daten verwendet werden, indem Sie die bevorzugten Cookie-Einstellungen auswählen. Passen Sie die Berechtigungen für verschiedene Arten von Cookies an.',
+                        'strictly-necessary'     => 'Unbedingt erforderlich',
+                        'basic-interaction'      => 'Grundlegende Interaktion und Funktionalität',
+                        'experience-enhancement' => 'Erlebnisverbesserung',
+                        'measurement'            => 'Messung',
+                        'targeting-advertising'  => 'Targeting und Werbung',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Sitemap-Optionen festlegen.',
                     'title' => 'Sitemap',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Maximale Anzahl von URLs pro Datei',
                         'title'            => 'Dateibeschränkungen',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'DSGVO',
-                'info'  => 'DSGVO-Konformitätseinstellungen',
-
-                'settings' => [
-                    'title'   => 'DSGVO-Konformitätseinstellungen',
-                    'info'    => 'Verwalten Sie die DSGVO-Konformitätseinstellungen, einschließlich der Datenschutzvereinbarung. Aktivieren oder deaktivieren Sie die DSGVO-Funktionen nach Bedarf.',
-                    'enabled' => 'DSGVO aktivieren',
-                ],
-
-                'agreement' => [
-                    'title'          => 'DSGVO-Vereinbarung',
-                    'info'           => 'Verwalten Sie die Zustimmung der Kunden gemäß den DSGVO-Vorschriften. Aktivieren Sie die Zustimmungspflicht für die Datenerfassung und -verarbeitung.',
-                    'enable'         => 'Kundenzustimmung aktivieren',
-                    'checkbox-label' => 'Checkbox-Beschriftung für die Zustimmung',
-                    'content'        => 'Inhalt der Zustimmung',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Unten links',
-                    'bottom-right' => 'Unten rechts',
-                    'center'       => 'Mitte',
-                    'description'  => 'Beschreibung',
-                    'enable'       => 'Cookie-Benachrichtigung aktivieren',
-                    'identifier'   => 'Statischer Block-Identifier',
-                    'info'         => 'Konfigurieren Sie die Cookie-Zustimmungseinstellungen, um Benutzer über die Datenerfassung zu informieren und die Datenschutzbestimmungen einzuhalten.',
-                    'position'     => 'Anzeigeposition des Cookie-Blocks',
-                    'title'        => 'Cookie-Benachrichtigungseinstellungen',
-                    'top-left'     => 'Oben links',
-                    'top-right'    => 'Oben rechts',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Verwalten Sie Ihre Cookie-Einstellungen',
-                    'info'                   => 'Kontrollieren Sie, wie Ihre Daten verwendet werden, indem Sie die bevorzugten Cookie-Einstellungen auswählen. Passen Sie die Berechtigungen für verschiedene Arten von Cookies an.',
-                    'strictly-necessary'     => 'Unbedingt erforderlich',
-                    'basic-interaction'      => 'Grundlegende Interaktion und Funktionalität',
-                    'experience-enhancement' => 'Erlebnisverbesserung',
-                    'measurement'            => 'Messung',
-                    'targeting-advertising'  => 'Targeting und Werbung',
                 ],
             ],
 

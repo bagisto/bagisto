@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Configuraciones de cumplimiento de GDPR',
+
+                    'settings' => [
+                        'title'   => 'Configuraciones de cumplimiento de GDPR',
+                        'info'    => 'Administre las configuraciones de cumplimiento de GDPR, incluida la política de privacidad. Habilite o deshabilite las funciones de GDPR según sea necesario.',
+                        'enabled' => 'Habilitar GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Acuerdo de GDPR',
+                        'info'           => 'Administre el consentimiento de los clientes de acuerdo con las regulaciones de GDPR. Habilite el consentimiento obligatorio para la recopilación y el procesamiento de datos.',
+                        'enable'         => 'Habilitar consentimiento del cliente',
+                        'checkbox-label' => 'Etiqueta de la casilla de verificación para el consentimiento',
+                        'content'        => 'Contenido del consentimiento',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Abajo a la izquierda',
+                        'bottom-right' => 'Abajo a la derecha',
+                        'center'       => 'Centro',
+                        'description'  => 'Descripción',
+                        'enable'       => 'Habilitar notificación de cookies',
+                        'identifier'   => 'Identificador de bloque estático',
+                        'info'         => 'Configure las configuraciones de consentimiento de cookies para informar a los usuarios sobre la recopilación de datos y cumplir con las políticas de privacidad.',
+                        'position'     => 'Posición de visualización del bloque de cookies',
+                        'title'        => 'Configuraciones de notificación de cookies',
+                        'top-left'     => 'Arriba a la izquierda',
+                        'top-right'    => 'Arriba a la derecha',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Administre sus configuraciones de cookies',
+                        'info'                   => 'Controle cómo se utilizan sus datos seleccionando las configuraciones de cookies preferidas. Ajuste los permisos para diferentes tipos de cookies.',
+                        'strictly-necessary'     => 'Estrictamente necesario',
+                        'basic-interaction'      => 'Interacción y funcionalidad básica',
+                        'experience-enhancement' => 'Mejora de la experiencia',
+                        'measurement'            => 'Medición',
+                        'targeting-advertising'  => 'Segmentación y publicidad',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Configurar opciones del mapa del sitio.',
                     'title' => 'Mapa del Sitio',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Número máximo de URLs por archivo',
                         'title'            => 'Límites de Archivo',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Configuraciones de cumplimiento de GDPR',
-
-                'settings' => [
-                    'title'   => 'Configuraciones de cumplimiento de GDPR',
-                    'info'    => 'Administre las configuraciones de cumplimiento de GDPR, incluida la política de privacidad. Habilite o deshabilite las funciones de GDPR según sea necesario.',
-                    'enabled' => 'Habilitar GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Acuerdo de GDPR',
-                    'info'           => 'Administre el consentimiento de los clientes de acuerdo con las regulaciones de GDPR. Habilite el consentimiento obligatorio para la recopilación y el procesamiento de datos.',
-                    'enable'         => 'Habilitar consentimiento del cliente',
-                    'checkbox-label' => 'Etiqueta de la casilla de verificación para el consentimiento',
-                    'content'        => 'Contenido del consentimiento',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Abajo a la izquierda',
-                    'bottom-right' => 'Abajo a la derecha',
-                    'center'       => 'Centro',
-                    'description'  => 'Descripción',
-                    'enable'       => 'Habilitar notificación de cookies',
-                    'identifier'   => 'Identificador de bloque estático',
-                    'info'         => 'Configure las configuraciones de consentimiento de cookies para informar a los usuarios sobre la recopilación de datos y cumplir con las políticas de privacidad.',
-                    'position'     => 'Posición de visualización del bloque de cookies',
-                    'title'        => 'Configuraciones de notificación de cookies',
-                    'top-left'     => 'Arriba a la izquierda',
-                    'top-right'    => 'Arriba a la derecha',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Administre sus configuraciones de cookies',
-                    'info'                   => 'Controle cómo se utilizan sus datos seleccionando las configuraciones de cookies preferidas. Ajuste los permisos para diferentes tipos de cookies.',
-                    'strictly-necessary'     => 'Estrictamente necesario',
-                    'basic-interaction'      => 'Interacción y funcionalidad básica',
-                    'experience-enhancement' => 'Mejora de la experiencia',
-                    'measurement'            => 'Medición',
-                    'targeting-advertising'  => 'Segmentación y publicidad',
                 ],
             ],
 

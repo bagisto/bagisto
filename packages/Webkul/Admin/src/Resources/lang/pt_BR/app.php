@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Configurações de conformidade com GDPR',
+
+                    'settings' => [
+                        'title'   => 'Configurações de conformidade com GDPR',
+                        'info'    => 'Gerencie as configurações de conformidade com GDPR, incluindo a política de privacidade. Ative ou desative os recursos do GDPR conforme necessário.',
+                        'enabled' => 'Ativar GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Consentimento GDPR',
+                        'info'           => 'Gerencie o consentimento dos clientes de acordo com os regulamentos GDPR. Ative o consentimento obrigatório para coleta e processamento de dados.',
+                        'enable'         => 'Ativar consentimento do cliente',
+                        'checkbox-label' => 'Rótulo da caixa de consentimento',
+                        'content'        => 'Conteúdo do consentimento',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Inferior esquerdo',
+                        'bottom-right' => 'Inferior direito',
+                        'center'       => 'Centro',
+                        'description'  => 'Descrição',
+                        'enable'       => 'Ativar notificação de cookies',
+                        'identifier'   => 'ID do bloco estático',
+                        'info'         => 'Configure as configurações de consentimento de cookies para informar os usuários sobre a coleta de dados e conformidade com a política de privacidade.',
+                        'position'     => 'Posição do bloco de cookies',
+                        'title'        => 'Configurações de notificação de cookies',
+                        'top-left'     => 'Superior esquerdo',
+                        'top-right'    => 'Superior direito',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Gerenciar configurações de cookies',
+                        'info'                   => 'Escolha as configurações de cookies preferidas para gerenciar o uso de dados. Configure consentimentos para diferentes tipos de cookies.',
+                        'strictly-necessary'     => 'Estritamente necessário',
+                        'basic-interaction'      => 'Interação e funcionalidade básicas',
+                        'experience-enhancement' => 'Melhoria da experiência',
+                        'measurement'            => 'Medição',
+                        'targeting-advertising'  => 'Segmentação e publicidade',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Definir opções do sitemap.',
                     'title' => 'Sitemap',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Número máximo de URLs por arquivo',
                         'title'            => 'Limites de Arquivo',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Configurações de conformidade com GDPR',
-
-                'settings' => [
-                    'title'   => 'Configurações de conformidade com GDPR',
-                    'info'    => 'Gerencie as configurações de conformidade com GDPR, incluindo a política de privacidade. Ative ou desative os recursos do GDPR conforme necessário.',
-                    'enabled' => 'Ativar GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Consentimento GDPR',
-                    'info'           => 'Gerencie o consentimento dos clientes de acordo com os regulamentos GDPR. Ative o consentimento obrigatório para coleta e processamento de dados.',
-                    'enable'         => 'Ativar consentimento do cliente',
-                    'checkbox-label' => 'Rótulo da caixa de consentimento',
-                    'content'        => 'Conteúdo do consentimento',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Inferior esquerdo',
-                    'bottom-right' => 'Inferior direito',
-                    'center'       => 'Centro',
-                    'description'  => 'Descrição',
-                    'enable'       => 'Ativar notificação de cookies',
-                    'identifier'   => 'ID do bloco estático',
-                    'info'         => 'Configure as configurações de consentimento de cookies para informar os usuários sobre a coleta de dados e conformidade com a política de privacidade.',
-                    'position'     => 'Posição do bloco de cookies',
-                    'title'        => 'Configurações de notificação de cookies',
-                    'top-left'     => 'Superior esquerdo',
-                    'top-right'    => 'Superior direito',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Gerenciar configurações de cookies',
-                    'info'                   => 'Escolha as configurações de cookies preferidas para gerenciar o uso de dados. Configure consentimentos para diferentes tipos de cookies.',
-                    'strictly-necessary'     => 'Estritamente necessário',
-                    'basic-interaction'      => 'Interação e funcionalidade básicas',
-                    'experience-enhancement' => 'Melhoria da experiência',
-                    'measurement'            => 'Medição',
-                    'targeting-advertising'  => 'Segmentação e publicidade',
                 ],
             ],
 

@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Paramètres de conformité au GDPR',
+
+                    'settings' => [
+                        'title'   => 'Paramètres de conformité au GDPR',
+                        'info'    => 'Gérer les paramètres de conformité au GDPR, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du GDPR selon les besoins.',
+                        'enabled' => 'Activer le GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Accord GDPR',
+                        'info'           => 'Gérer le consentement des clients conformément aux réglementations GDPR. Activer le consentement obligatoire pour la collecte et le traitement des données.',
+                        'enable'         => 'Activer le consentement des clients',
+                        'checkbox-label' => 'Étiquette de la case à cocher pour le consentement',
+                        'content'        => 'Contenu du consentement',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'En bas à gauche',
+                        'bottom-right' => 'En bas à droite',
+                        'center'       => 'Centre',
+                        'description'  => 'Description',
+                        'enable'       => 'Activer la notification des cookies',
+                        'identifier'   => 'Identifiant du bloc statique',
+                        'info'         => 'Configurer les paramètres de consentement des cookies pour informer les utilisateurs de la collecte de données et se conformer aux politiques de confidentialité.',
+                        'position'     => 'Position d\'affichage du bloc de cookies',
+                        'title'        => 'Paramètres de notification des cookies',
+                        'top-left'     => 'En haut à gauche',
+                        'top-right'    => 'En haut à droite',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Gérer vos paramètres de cookies',
+                        'info'                   => 'Contrôlez comment vos données sont utilisées en sélectionnant les paramètres de cookies souhaités. Configurez les autorisations pour différents types de cookies.',
+                        'strictly-necessary'     => 'Strictement nécessaire',
+                        'basic-interaction'      => 'Interaction et fonctionnalité de base',
+                        'experience-enhancement' => 'Amélioration de l\'expérience',
+                        'measurement'            => 'Mesure',
+                        'targeting-advertising'  => 'Ciblage et publicité',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Configurer les options du plan du site.',
                     'title' => 'Plan du Site',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Nombre maximal d\'URL par fichier',
                         'title'            => 'Limites de Fichier',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Paramètres de conformité au GDPR',
-
-                'settings' => [
-                    'title'   => 'Paramètres de conformité au GDPR',
-                    'info'    => 'Gérer les paramètres de conformité au GDPR, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du GDPR selon les besoins.',
-                    'enabled' => 'Activer le GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Accord GDPR',
-                    'info'           => 'Gérer le consentement des clients conformément aux réglementations GDPR. Activer le consentement obligatoire pour la collecte et le traitement des données.',
-                    'enable'         => 'Activer le consentement des clients',
-                    'checkbox-label' => 'Étiquette de la case à cocher pour le consentement',
-                    'content'        => 'Contenu du consentement',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'En bas à gauche',
-                    'bottom-right' => 'En bas à droite',
-                    'center'       => 'Centre',
-                    'description'  => 'Description',
-                    'enable'       => 'Activer la notification des cookies',
-                    'identifier'   => 'Identifiant du bloc statique',
-                    'info'         => 'Configurer les paramètres de consentement des cookies pour informer les utilisateurs de la collecte de données et se conformer aux politiques de confidentialité.',
-                    'position'     => 'Position d\'affichage du bloc de cookies',
-                    'title'        => 'Paramètres de notification des cookies',
-                    'top-left'     => 'En haut à gauche',
-                    'top-right'    => 'En haut à droite',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Gérer vos paramètres de cookies',
-                    'info'                   => 'Contrôlez comment vos données sont utilisées en sélectionnant les paramètres de cookies souhaités. Configurez les autorisations pour différents types de cookies.',
-                    'strictly-necessary'     => 'Strictement nécessaire',
-                    'basic-interaction'      => 'Interaction et fonctionnalité de base',
-                    'experience-enhancement' => 'Amélioration de l\'expérience',
-                    'measurement'            => 'Mesure',
-                    'targeting-advertising'  => 'Ciblage et publicité',
                 ],
             ],
 

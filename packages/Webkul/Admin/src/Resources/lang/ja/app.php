@@ -3887,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPRコンプライアンス設定',
+
+                    'settings' => [
+                        'title'   => 'GDPRコンプライアンス設定',
+                        'info'    => 'プライバシーポリシーを含むGDPRコンプライアンス設定を管理します。必要に応じてGDPR機能を有効または無効にします。',
+                        'enabled' => 'GDPRを有効にする',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR同意',
+                        'info'           => 'GDPR規制に準拠して顧客の同意を管理します。データの収集と処理のために必須の同意を有効にします。',
+                        'enable'         => '顧客の同意を有効にする',
+                        'checkbox-label' => '同意のチェックボックスラベル',
+                        'content'        => '同意の内容',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => '左下',
+                        'bottom-right' => '右下',
+                        'center'       => '中央',
+                        'description'  => '説明',
+                        'enable'       => 'クッキー通知を有効にする',
+                        'identifier'   => '静的ブロック識別子',
+                        'info'         => 'データ収集についてユーザーに通知し、プライバシーポリシーを遵守するためのクッキー同意設定を行います。',
+                        'position'     => 'クッキーブロックの表示位置',
+                        'title'        => 'クッキー通知設定',
+                        'top-left'     => '左上',
+                        'top-right'    => '右上',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'クッキー設定を管理する',
+                        'info'                   => '希望するクッキー設定を選択してデータの使用を制御します。さまざまな種類のクッキーに対する許可を設定します。',
+                        'strictly-necessary'     => '厳密に必要',
+                        'basic-interaction'      => '基本的な相互作用と機能',
+                        'experience-enhancement' => '体験の向上',
+                        'measurement'            => '測定',
+                        'targeting-advertising'  => 'ターゲティングと広告',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'サイトマップのオプションを設定します。',
                     'title' => 'サイトマップ',
@@ -3903,49 +3946,6 @@ return [
                         'max-url-per-file' => 'ファイルあたりの最大URL数',
                         'title'            => 'ファイル制限',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPRコンプライアンス設定',
-
-                'settings' => [
-                    'title'   => 'GDPRコンプライアンス設定',
-                    'info'    => 'プライバシーポリシーを含むGDPRコンプライアンス設定を管理します。必要に応じてGDPR機能を有効または無効にします。',
-                    'enabled' => 'GDPRを有効にする',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR同意',
-                    'info'           => 'GDPR規制に準拠して顧客の同意を管理します。データの収集と処理のために必須の同意を有効にします。',
-                    'enable'         => '顧客の同意を有効にする',
-                    'checkbox-label' => '同意のチェックボックスラベル',
-                    'content'        => '同意の内容',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => '左下',
-                    'bottom-right' => '右下',
-                    'center'       => '中央',
-                    'description'  => '説明',
-                    'enable'       => 'クッキー通知を有効にする',
-                    'identifier'   => '静的ブロック識別子',
-                    'info'         => 'データ収集についてユーザーに通知し、プライバシーポリシーを遵守するためのクッキー同意設定を行います。',
-                    'position'     => 'クッキーブロックの表示位置',
-                    'title'        => 'クッキー通知設定',
-                    'top-left'     => '左上',
-                    'top-right'    => '右上',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'クッキー設定を管理する',
-                    'info'                   => '希望するクッキー設定を選択してデータの使用を制御します。さまざまな種類のクッキーに対する許可を設定します。',
-                    'strictly-necessary'     => '厳密に必要',
-                    'basic-interaction'      => '基本的な相互作用と機能',
-                    'experience-enhancement' => '体験の向上',
-                    'measurement'            => '測定',
-                    'targeting-advertising'  => 'ターゲティングと広告',
                 ],
             ],
 

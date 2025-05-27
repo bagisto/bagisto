@@ -8,6 +8,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Resolved the sort order issue for paginated attribute options on the category page.
 
+* Fixed the Spanish translation issue on the sidebar, which was caused by the translation key itself being translated.
+
+* Fixed the GDPR translation issue for all locales, which was previously falling back to the English locale.
+
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
 * Resolved an issue with the category filter functionality.
