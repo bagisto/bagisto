@@ -348,14 +348,14 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->where(function ($filterQuery) use ($qb, $params, $attributes) {
+                $qb->where(function ($filterQuery) use ($qb, $params, $attributes, $prefix) {
                     $aliases = [
                         'products' => 'product_attribute_values',
                         'variants' => 'variant_attribute_values',
                     ];
 
                     foreach ($aliases as $table => $tableAlias) {
-                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
+                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $prefix, $table, $tableAlias) {
                             foreach ($attributes as $attribute) {
                                 $alias = $attribute->code.'_'.$tableAlias;
 
@@ -368,9 +368,9 @@ class ProductRepository extends Repository
                                 if ($attribute->type === 'multiselect') {
                                     $paramValues = explode(',', $params[$attribute->code]);
 
-                                    $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute) {
+                                    $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute, $prefix) {
                                         foreach ($paramValues as $value) {
-                                            $query->orWhereRaw("FIND_IN_SET(?, {$alias}.{$attribute->column_name})", [$value]);
+                                            $query->orWhereRaw("FIND_IN_SET(?, {$prefix}{$alias}.{$attribute->column_name})", [$value]);
                                         }
                                     });
                                 } else {
