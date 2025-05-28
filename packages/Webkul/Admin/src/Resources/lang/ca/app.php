@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'No es pot canviar l\'usuari.',
             'create-success'     => 'Usuari creat amb éxit.',
             'delete-failed'      => 'Error en eliminar l\'usuari.',
+            'delete-self-error'  => 'No pots suprimir el teu propi compte.',
             'delete-success'     => 'Usuari eliminat amb éxit.',
             'delete-warning'     => 'Estàs segur que vols realitzar aquesta acció?',
             'incorrect-password' => 'Contrasenya incorrecta',
