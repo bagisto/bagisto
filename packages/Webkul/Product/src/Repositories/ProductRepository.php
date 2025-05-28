@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -365,7 +366,7 @@ class ProductRepository extends Repository
                                     $join->where($alias.'.attribute_id', $attribute->id);
                                 });
 
-                                if ($attribute->type === 'multiselect') {
+                                if ($attribute->type === AttributeTypeEnum::MULTISELECT->value) {
                                     $paramValues = explode(',', $params[$attribute->code]);
 
                                     $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute, $prefix) {
