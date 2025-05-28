@@ -319,7 +319,7 @@ class ProductDataGrid extends DataGrid
         $this->queryBuilder
             ->whereIn('product_flat.product_id', $ids);
 
-        if($ids) {
+        if ($ids) {
             $this->queryBuilder
                 ->orderBy(DB::raw('FIELD('.DB::getTablePrefix().'product_flat.product_id, '.implode(',', $ids).')'));
         }
