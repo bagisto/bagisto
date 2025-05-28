@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the GDPR translation issue for all locales, which was previously falling back to the English locale.
 
+* Resolved the filter issue for date and datetime types in the DataGrid.
+
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
 * Resolved an issue with the category filter functionality.
