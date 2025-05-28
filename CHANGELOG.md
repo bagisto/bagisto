@@ -18,7 +18,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Resolved the "break-all" issue on the product view page.
 
-* Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
+* #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
 
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
