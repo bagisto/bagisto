@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
 
+* Fixed the issue where the transaction drawer was not opening as expected.
+
 ## **v2.2.7 (22nd of May 2025)** - *Release*
 
 * Resolved Full Page Cache (FPC) issues affecting category and search result pages.
