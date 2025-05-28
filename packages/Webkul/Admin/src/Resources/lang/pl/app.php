@@ -3028,6 +3028,7 @@ return [
             'cannot-change'      => 'Nie można zmienić użytkownika.',
             'create-success'     => 'Użytkownik został pomyślnie utworzony.',
             'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
+            'delete-self-error'  => 'Nie możesz usunąć własnego konta.',
             'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
             'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
             'incorrect-password' => 'Niepoprawne hasło',

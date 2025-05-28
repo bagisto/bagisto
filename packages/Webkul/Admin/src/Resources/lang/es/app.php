@@ -3028,6 +3028,7 @@ return [
             'cannot-change'      => 'No se puede cambiar el usuario.',
             'create-success'     => 'Usuario creado con éxito.',
             'delete-failed'      => 'Error al eliminar el usuario.',
+            'delete-self-error'  => 'No puedes eliminar tu propia cuenta.',
             'delete-success'     => 'Usuario eliminado con éxito.',
             'delete-warning'     => '¿Estás seguro de que quieres realizar esta acción?',
             'incorrect-password' => 'Contraseña incorrecta',

@@ -152,6 +152,12 @@ class UserController extends Controller
             ], 400);
         }
 
+        if (auth()->guard('admin')->user()->id == $id) {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.users.delete-self-error'),
+            ], 403);
+        }
+
         try {
             Event::dispatch('user.admin.delete.before', $id);
 

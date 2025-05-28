@@ -3028,6 +3028,7 @@ return [
             'cannot-change'      => '无法更改用户。',
             'create-success'     => '用户成功创建。',
             'delete-failed'      => '删除用户失败。',
+            'delete-self-error'  => '您无法删除自己的账户。',
             'delete-success'     => '用户成功删除。',
             'delete-warning'     => '您确定要执行此操作吗？',
             'incorrect-password' => '密码错误',
