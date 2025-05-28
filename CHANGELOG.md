@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+* Resolved the filter issue for date and datetime types in the DataGrid.
+
 ## **v2.2.7 (22nd of May 2025)** - *Release*
 
 * Resolved Full Page Cache (FPC) issues affecting category and search result pages.
