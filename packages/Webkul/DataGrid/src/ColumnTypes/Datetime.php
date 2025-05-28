@@ -47,8 +47,15 @@ class Datetime extends Column
                 $rangeOption = collect($this->filterableOptions)->firstWhere('name', $requestedDates);
 
                 $requestedDates = ! $rangeOption
-                    ? [[$requestedDates, $requestedDates]]
-                    : [[$rangeOption['from'], $rangeOption['to']]];
+                ? [[$requestedDates, $requestedDates]]
+                : [[$rangeOption['from'], $rangeOption['to']]];
+
+                foreach ($requestedDates as $value) {
+                    $scopeQueryBuilder->whereBetween($this->columnName, [
+                        $value[0],
+                        $value[1],
+                    ]);
+                }
             } elseif (is_array($requestedDates)) {
                 foreach ($requestedDates as $value) {
                     $scopeQueryBuilder->whereBetween($this->columnName, [$value[0] ?? '', $value[1] ?? '']);
