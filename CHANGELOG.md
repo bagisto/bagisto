@@ -14,6 +14,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Resolved the filter issue for date and datetime types in the DataGrid.
 
+* Fixed the date translation issue that was coming from the Carbon instance.
+
+* Resolved the "break-all" issue on the product view page.
+
 ## **v2.3.3 (22nd of May 2025)** - *Release*
 
 * Resolved an issue with the category filter functionality.
