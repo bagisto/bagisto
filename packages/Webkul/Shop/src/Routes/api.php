@@ -26,6 +26,8 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
 
+        Route::get('attributes/{attribute_id}/options', 'getAttributeOptions')->name('shop.api.categories.attribute_options');
+
         Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 
@@ -97,7 +99,6 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
-
         Route::controller(AddressController::class)->prefix('addresses')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.addresses.index');
 

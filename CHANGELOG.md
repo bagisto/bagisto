@@ -4,7 +4,55 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **Unreleased**
 
+* Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
+
+* Resolved the sort order issue for paginated attribute options on the category page.
+
+* Fixed the Spanish translation issue on the sidebar, which was caused by the translation key itself being translated.
+
+* Fixed the GDPR translation issue for all locales, which was previously falling back to the English locale.
+
+* Resolved the filter issue for date and datetime types in the DataGrid.
+
+* Fixed the date translation issue that was coming from the Carbon instance.
+
+* Resolved the "break-all" issue on the product view page.
+
+## **v2.3.3 (22nd of May 2025)** - *Release*
+
+* Resolved an issue with the category filter functionality.
+
+* Fixed an issue with search attributes on the category page.
+
+* Addressed a problem with category listings.
+
+* Corrected issues on the search page and toolbar.
+
+* #10784 [fixed] - Fixed store search issue caused by Full Page Cache (FPC).
+
+## **v2.3.2 (21st of May 2025)** - *Release*
+
+* Response cache is enabled by default.
+
+* Fetch priority added for the slider image and product view image.
+
+* Separate configuration provided for speculation APIs for both prerender and prefetch.
+
+* Searchable attributes added on the category view page.
+
+## **v2.3.1 (14th of May 2025)** - *Release*
+
+### Features:
+
+* Side Bar Menu: Introduced a new sidebar menu that provides users with quick access to various sections of the application, improving navigation and user experience.
+
+* Default Menu Feature: Added the ability to set a default menu for users, allowing for a more personalized and streamlined interface. 
+
 * #10679 [enhancement] - Some options in the products need to be enabled by default.
+
+* #10666 [enhancement] - Need to create the configuration in the admin panel for the removed keys from the .env
+
+* #10747 [fixed] - Update Locale Name from 'Canada' to 'Catalan'
 
 ## **v2.3.0 (27th of March 2025)** - *Release*
 

@@ -25,7 +25,7 @@ class ElasticSearchRepository
      */
     public function getIndexName(): string
     {
-        return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCode().'_index';
+        return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCodeInRequestedChannel().'_index';
     }
 
     /**

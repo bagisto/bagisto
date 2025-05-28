@@ -14,7 +14,5 @@ Route::controller(ConfigurationController::class)->prefix('configuration/{slug?}
 
     Route::post('', 'store')->name('admin.configuration.store');
 
-    Route::get('{path}', 'download')->defaults('_config', [
-        'redirect' => 'admin.configuration.index',
-    ])->name('admin.configuration.download');
+    Route::get('{path}', 'download')->name('admin.configuration.download');
 });

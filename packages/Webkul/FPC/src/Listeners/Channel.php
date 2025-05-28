@@ -7,12 +7,12 @@ use Spatie\ResponseCache\Facades\ResponseCache;
 class Channel
 {
     /**
-     * After category update
+     * After channel update.
      *
-     * @param  \Webkul\Category\Contracts\Category  $category
+     * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return void
      */
-    public function afterUpdate($category)
+    public function afterUpdate($channel)
     {
         ResponseCache::clear();
     }

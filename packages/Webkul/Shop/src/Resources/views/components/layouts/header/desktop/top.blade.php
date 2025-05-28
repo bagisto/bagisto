@@ -59,7 +59,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
 
             <!-- Currency Switcher -->
-            <x-shop::dropdown>
+            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
                     <div
@@ -81,7 +81,7 @@
                 </x-slot>
 
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] overflow-auto !p-0">
+                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
                     <v-currency-switcher></v-currency-switcher>
                 </x-slot>
             </x-shop::dropdown>
@@ -136,7 +136,7 @@
                 </x-slot>
             
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] overflow-auto !p-0">
+                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
                     <v-locale-switcher></v-locale-switcher>
                 </x-slot>
             </x-shop::dropdown>

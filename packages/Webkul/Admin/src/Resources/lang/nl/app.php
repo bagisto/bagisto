@@ -581,15 +581,20 @@ return [
                 'title' => 'Facturen',
 
                 'datagrid' => [
-                    'action'       => 'Acties',
-                    'grand-total'  => 'Totaalbedrag',
-                    'id'           => 'ID',
-                    'invoice-date' => 'Factuurdatum',
-                    'order-id'     => 'Bestelnummer',
-                    'overdue'      => 'Achterstallig',
-                    'paid'         => 'Betaald',
-                    'pending'      => 'In afwachting',
-                    'status'       => 'Status',
+                    'action'              => 'Acties',
+                    'days-left'           => 'Nog :count dag(en)',
+                    'days-overdue'        => ':count dag(en) te laat',
+                    'grand-total'         => 'Totaalbedrag',
+                    'id'                  => 'ID',
+                    'invoice-date'        => 'Factuurdatum',
+                    'mass-update-success' => 'Geselecteerde facturen zijn succesvol bijgewerkt.',
+                    'order-id'            => 'Bestelnummer',
+                    'overdue'             => 'Achterstallig',
+                    'overdue-by'          => ':count dag(en) te laat',
+                    'paid'                => 'Betaald',
+                    'pending'             => 'In afwachting',
+                    'status'              => 'Status',
+                    'update-status'       => 'Status bijwerken',
                 ],
             ],
 
@@ -1264,7 +1269,6 @@ return [
                             'guest-capacity'            => 'Gastcapaciteit',
                             'guest-limit'               => 'Gastlimiet Per Tafel',
                             'prevent-scheduling-before' => 'Voorkom Planning Voor',
-
                             'slot-duration'             => 'Tijdsduur (Minuten)',
 
                             'charged-per'               => [
@@ -3730,6 +3734,40 @@ return [
                         'redirection-link'  => 'Omleidingslink',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => 'Speculatieregels inschakelen',
+                        'info'               => 'Stel instellingen in voor het in- of uitschakelen van geautomatiseerde speculatie-logica.',
+                        'title'              => 'Speculatieregels',
+
+                        'prerender' => [
+                            'conservative'           => 'Conservatief',
+                            'eager'                  => 'Gretig',
+                            'eagerness'              => 'Prerender gretigheidsniveau',
+                            'eagerness-info'         => 'Bepaalt hoe agressief speculatieregels worden toegepast. Opties: gretig (max), gematigd (standaard), conservatief (laag).',
+                            'enabled'                => 'Speculatieregels voor Prerender inschakelen',
+                            'ignore-url-params'      => 'Negeer Prerender URL-parameters',
+                            'ignore-url-params-info' => 'Specificeer URL-parameters die genegeerd moeten worden in speculatieregels. Gebruik een pipe (|) om meerdere parameters te scheiden.',
+                            'ignore-urls'            => 'Negeer Prerender URLs',
+                            'ignore-urls-info'       => 'Voer URLs in die moeten worden uitgesloten van speculatie-logica. Scheid meerdere URLs met een pipe (|).',
+                            'info'                   => 'Stel de status van speculatieregels in.',
+                            'moderate'               => 'Gematigd',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservatief',
+                            'eager'                  => 'Gretig',
+                            'eagerness'              => 'Prefetch gretigheidsniveau',
+                            'eagerness-info'         => 'Bepaalt hoe agressief speculatieregels worden toegepast. Opties: gretig (max), gematigd (standaard), conservatief (laag).',
+                            'enabled'                => 'Speculatieregels voor Prefetch inschakelen',
+                            'ignore-url-params'      => 'Negeer Prefetch URL-parameters',
+                            'ignore-url-params-info' => 'Specificeer URL-parameters die genegeerd moeten worden in speculatieregels. Gebruik een pipe (|) om meerdere parameters te scheiden.',
+                            'ignore-urls'            => 'Negeer Prefetch URLs',
+                            'ignore-urls-info'       => 'Voer URLs in die moeten worden uitgesloten van speculatie-logica. Scheid meerdere URLs met een pipe (|).',
+                            'info'                   => 'Stel de status van speculatieregels in.',
+                            'moderate'               => 'Gematigd',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'Aangepaste CSS',
                         'custom-javascript' => 'Aangepast Javascript',
@@ -3747,6 +3785,15 @@ return [
                         'logo-image' => 'Logo-afbeelding',
                         'title'      => 'Admin-logo',
                         'title-info' => 'Configureer het logo en de favicon-afbeeldingen voor de voorkant van uw website voor een betere branding en herkenning.',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => 'Standaardmenu',
+                        'info'            => 'Deze instelling bepaalt de zichtbaarheid van categorieën in het hoofdmenu. Je kunt ervoor kiezen om alleen hoofdcategorieën of alle geneste categorieën weer te geven.',
+                        'preview-default' => 'Voorbeeld standaardmenu',
+                        'preview-sidebar' => 'Voorbeeld zijbalkmenu',
+                        'sidebar'         => 'Zijbalkmenu',
+                        'title'           => 'Menucategorie weergave',
                     ],
                 ],
 
@@ -3840,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR-nalevingsinstellingen',
+
+                    'settings' => [
+                        'title'   => 'GDPR-nalevingsinstellingen',
+                        'info'    => 'Beheer GDPR-nalevingsinstellingen, inclusief het privacybeleid. Schakel GDPR-functies in of uit indien nodig.',
+                        'enabled' => 'GDPR inschakelen',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR-toestemming',
+                        'info'           => 'Beheer klanttoestemming in overeenstemming met GDPR-regelgeving. Schakel verplichte toestemming in voor gegevensverzameling en -verwerking.',
+                        'enable'         => 'Klanttoestemming inschakelen',
+                        'checkbox-label' => 'Label van toestemmingsvakje',
+                        'content'        => 'Inhoud van toestemming',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Linksonder',
+                        'bottom-right' => 'Rechtsonder',
+                        'center'       => 'Centrum',
+                        'description'  => 'Beschrijving',
+                        'enable'       => 'Cookie-melding inschakelen',
+                        'identifier'   => 'Statische blok-ID',
+                        'info'         => 'Stel cookie-toestemmingsinstellingen in om gebruikers te informeren over gegevensverzameling en naleving van het privacybeleid.',
+                        'position'     => 'Positie van cookieblok',
+                        'title'        => 'Cookie-meldingsinstellingen',
+                        'top-left'     => 'Linksboven',
+                        'top-right'    => 'Rechtsboven',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Beheer cookie-instellingen',
+                        'info'                   => 'Selecteer de gewenste cookie-instellingen om het gebruik van gegevens te beheren. Stel toestemmingen in voor verschillende soorten cookies.',
+                        'strictly-necessary'     => 'Strikt noodzakelijk',
+                        'basic-interaction'      => 'Basisinteractie en functionaliteit',
+                        'experience-enhancement' => 'Ervaringsverbetering',
+                        'measurement'            => 'Meting',
+                        'targeting-advertising'  => 'Targeting en advertenties',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Stel sitemapopties in.',
                     'title' => 'Sitemap',
@@ -3856,49 +3946,6 @@ return [
                         'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
                         'title'            => 'Bestandslimieten',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPR-nalevingsinstellingen',
-
-                'settings' => [
-                    'title'   => 'GDPR-nalevingsinstellingen',
-                    'info'    => 'Beheer GDPR-nalevingsinstellingen, inclusief het privacybeleid. Schakel GDPR-functies in of uit indien nodig.',
-                    'enabled' => 'GDPR inschakelen',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR-toestemming',
-                    'info'           => 'Beheer klanttoestemming in overeenstemming met GDPR-regelgeving. Schakel verplichte toestemming in voor gegevensverzameling en -verwerking.',
-                    'enable'         => 'Klanttoestemming inschakelen',
-                    'checkbox-label' => 'Label van toestemmingsvakje',
-                    'content'        => 'Inhoud van toestemming',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Linksonder',
-                    'bottom-right' => 'Rechtsonder',
-                    'center'       => 'Centrum',
-                    'description'  => 'Beschrijving',
-                    'enable'       => 'Cookie-melding inschakelen',
-                    'identifier'   => 'Statische blok-ID',
-                    'info'         => 'Stel cookie-toestemmingsinstellingen in om gebruikers te informeren over gegevensverzameling en naleving van het privacybeleid.',
-                    'position'     => 'Positie van cookieblok',
-                    'title'        => 'Cookie-meldingsinstellingen',
-                    'top-left'     => 'Linksboven',
-                    'top-right'    => 'Rechtsboven',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Beheer cookie-instellingen',
-                    'info'                   => 'Selecteer de gewenste cookie-instellingen om het gebruik van gegevens te beheren. Stel toestemmingen in voor verschillende soorten cookies.',
-                    'strictly-necessary'     => 'Strikt noodzakelijk',
-                    'basic-interaction'      => 'Basisinteractie en functionaliteit',
-                    'experience-enhancement' => 'Ervaringsverbetering',
-                    'measurement'            => 'Meting',
-                    'targeting-advertising'  => 'Targeting en advertenties',
                 ],
             ],
 

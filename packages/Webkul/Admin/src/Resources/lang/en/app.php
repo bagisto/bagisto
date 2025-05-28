@@ -581,15 +581,20 @@ return [
                 'title' => 'Invoices',
 
                 'datagrid' => [
-                    'action'       => 'Actions',
-                    'grand-total'  => 'Grand Total',
-                    'id'           => 'ID',
-                    'invoice-date' => 'Invoice Date',
-                    'order-id'     => 'Order ID',
-                    'overdue'      => 'Overdue',
-                    'paid'         => 'Paid',
-                    'pending'      => 'Pending',
-                    'status'       => 'Status',
+                    'action'              => 'Actions',
+                    'days-left'           => ':count day(s) left',
+                    'days-overdue'        => ':count day(s) overdue',
+                    'grand-total'         => 'Grand Total',
+                    'id'                  => 'ID',
+                    'invoice-date'        => 'Invoice Date',
+                    'mass-update-success' => 'Selected invoice updated successfully.',
+                    'order-id'            => 'Order ID',
+                    'overdue'             => 'Overdue',
+                    'overdue-by'          => 'Overdue by :count day(s)',
+                    'paid'                => 'Paid',
+                    'pending'             => 'Pending',
+                    'status'              => 'Status',
+                    'update-status'       => 'Update Status',
                 ],
             ],
 
@@ -3729,6 +3734,40 @@ return [
                         'redirection-link'  => 'Redirection Link',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => 'Enable Speculation Rules',
+                        'info'               => 'Configure settings for enabling or disabling automated speculation logic.',
+                        'title'              => 'Speculation Rules',
+
+                        'prerender' => [
+                            'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prerender Eagerness Level',
+                            'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                            'enabled'                => 'Enable Prerender Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prerender URL Parameters',
+                            'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                            'ignore-urls'            => 'Ignore Prerender URLs',
+                            'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                            'info'                   => 'Set speculation rules status.',
+                            'moderate'               => 'Moderate',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prefetch Eagerness Level',
+                            'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                            'enabled'                => 'Enable Prefetch Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prefetch URL Parameters',
+                            'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                            'ignore-urls'            => 'Ignore Prefetch URLs',
+                            'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                            'info'                   => 'Set speculation rules status.',
+                            'moderate'               => 'Moderate',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'Custom CSS',
                         'custom-javascript' => 'Custom Javascript',
@@ -3746,6 +3785,15 @@ return [
                         'logo-image' => 'Logo Image',
                         'title'      => 'Admin Logo',
                         'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => 'Default Menu',
+                        'info'            => 'This setting controls the visibility of categories in the header menu. You can choose to display only parent categories or all nested categories.',
+                        'preview-default' => 'Preview Default Menu',
+                        'preview-sidebar' => 'Preview Sidebar Menu',
+                        'sidebar'         => 'Sidebar Menu',
+                        'title'           => 'Menu Category View',
                     ],
                 ],
 

@@ -653,7 +653,7 @@ class Core
 
         $date->setTimezone($channel->timezone);
 
-        return $date->format($format);
+        return $date->translatedFormat($format);
     }
 
     /**
@@ -933,5 +933,89 @@ class Core
     public function getMaxUploadSize()
     {
         return ini_get('upload_max_filesize');
+    }
+
+    /**
+     * Get Speculation Rules.
+     *
+     * @return array
+     */
+    public function getSpeculationRules()
+    {
+        $configPath = 'general.content.speculation_rules.';
+
+        $rules = [];
+
+        /**
+         * Prerender Rules
+         */
+        if ($this->getConfigData($configPath.'prerender_enabled')) {
+            $prerenderEagerness = $this->getConfigData($configPath.'prerender_eagerness') ?? 'moderate';
+
+            $prerenderIgnoreUrls = array_filter(
+                explode('|', $this->getConfigData($configPath.'prerender_ignore_urls')),
+                fn ($url) => trim($url) !== ''
+            );
+
+            $prerenderIgnoreParams = array_filter(
+                explode('|', $this->getConfigData($configPath.'prerender_ignore_url_params')),
+                fn ($param) => trim($param) !== ''
+            );
+
+            $conditions = [['href_matches' => '/*']];
+
+            foreach ($prerenderIgnoreUrls as $url) {
+                $conditions[] = ['not' => ['href_matches' => trim($url)]];
+            }
+
+            foreach ($prerenderIgnoreParams as $param) {
+                $param = trim($param);
+                $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+            }
+
+            $rules['prerender'][] = [
+                'source'    => 'document',
+                'where'     => ['and' => $conditions],
+                'eagerness' => $prerenderEagerness,
+            ];
+        }
+
+        /**
+         * Prefetch Rules
+         */
+        if ($this->getConfigData($configPath.'prefetch_enabled')) {
+            $prefetchEagerness = $this->getConfigData($configPath.'prefetch_eagerness') ?? 'moderate';
+
+            $prefetchIgnoreUrls = array_filter(
+                explode('|', $this->getConfigData($configPath.'prefetch_ignore_urls')),
+                fn ($url) => trim($url) !== ''
+            );
+
+            $prefetchIgnoreParams = array_filter(
+                explode('|', $this->getConfigData($configPath.'prefetch_ignore_url_params')),
+                fn ($param) => trim($param) !== ''
+            );
+
+            $conditions = [['href_matches' => '/*']];
+
+            foreach ($prefetchIgnoreUrls as $url) {
+                $conditions[] = ['not' => ['href_matches' => trim($url)]];
+            }
+
+            foreach ($prefetchIgnoreParams as $param) {
+                $param = trim($param);
+                $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+            }
+
+            $rules['prefetch'][] = [
+                'source'          => 'document',
+                'where'           => ['and' => $conditions],
+                'requires'        => ['anonymous-client-ip-when-cross-origin'],
+                'referrer_policy' => 'no-referrer',
+                'eagerness'       => $prefetchEagerness,
+            ];
+        }
+
+        return $rules;
     }
 }

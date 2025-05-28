@@ -49,9 +49,9 @@
             type="text/x-template"
             id="v-edit-attributes-template"
         >
-            <!-- body content -->
+            <!-- Body Content -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-                <!-- Left sub Component -->
+                <!-- Left Sub Component -->
                 <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
@@ -62,7 +62,7 @@
                             @lang('admin::app.catalog.attributes.edit.label')
                         </p>
 
-                        <!-- Admin name -->
+                        <!-- Admin Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.attributes.edit.admin')
@@ -103,7 +103,7 @@
 
                     <!-- Options -->
                     <div
-                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
                         v-if="showSwatch"
                     >
                         <div class="mb-3 flex items-center justify-between">
@@ -120,8 +120,11 @@
                             </div>
                         </div>
 
-                        <!-- Swatch Changer and Empty Field Section. -->
-                        <div class="flex items-center gap-4 max-sm:flex-wrap">
+                        <!-- Swatch Changer And Empty Field Section -->
+                        <div
+                            class="flex items-center gap-4 max-sm:flex-wrap"
+                            v-if="attributeType == 'select'"
+                        >
                             <!-- Input Options -->
                             <x-admin::form.control-group
                                 class="mb-2.5 w-full"
@@ -138,9 +141,9 @@
                                     v-model="swatchType"
                                     @change="showSwatch=true"
                                 >
-                                    @foreach (['dropdown', 'color', 'image', 'text'] as $type)
-                                        <option value="{{ $type }}">
-                                            @lang('admin::app.catalog.attributes.edit.option.' . $type)
+                                    @foreach ($swatchTypes as $swatchType)
+                                        <option value="{{ $swatchType }}">
+                                            @lang('admin::app.catalog.attributes.edit.option.' . $swatchType)
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
@@ -148,7 +151,7 @@
                                 <x-admin::form.control-group.error control-name="admin" />
                             </x-admin::form.control-group>
 
-                            <!-- checkbox -->
+                            <!-- Checkbox -->
                             <div class="w-full">
                                 <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
                                     <input
@@ -184,12 +187,12 @@
                                     $attribute->type == 'select'
                                     || $attribute->type == 'multiselect'
                                     || $attribute->type == 'checkbox'
-                                    || $attribute->type == 'price'
                                 )
                                     <!-- Table Information -->
                                     <x-admin::table>
                                         <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
+                                                <!-- Draggable Icon -->
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
@@ -197,17 +200,17 @@
                                                     @lang('admin::app.catalog.attributes.edit.swatch')
                                                 </x-admin::table.th>
 
-                                                <!-- Admin tables heading -->
+                                                <!-- Admin Tables Heading -->
                                                 <x-admin::table.th>
                                                     @lang('admin::app.catalog.attributes.edit.admin-name')
                                                 </x-admin::table.th>
 
-                                                <!-- Locales tables heading -->
+                                                <!-- Locales Tables Heading -->
                                                 <x-admin::table.th v-for="locale in locales">
                                                     @{{ locale.name + '(' + [locale.code] + ')' }}
                                                 </x-admin::table.th>
 
-                                                <!-- Action tables heading -->
+                                                <!-- Action Tables Heading -->
                                                 <x-admin::table.th></x-admin::table.th>
                                             </x-admin::table.thead.tr>
                                         </x-admin::table.thead>
@@ -226,19 +229,19 @@
                                                     class="hover:bg-gray-50 dark:hover:bg-gray-950"
                                                     v-show="! element.isDelete"
                                                 >
-                                                    <th>
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][isNew]'"
-                                                            :value="element.isNew"
-                                                        >
-        
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][isDelete]'"
-                                                            :value="element.isDelete"
-                                                        >
-                                                    </th>
+                                                    <!-- Hidden Input -->
+                                                    <input
+                                                        type="hidden"
+                                                        :name="'options[' + element.id + '][isNew]'"
+                                                        :value="element.isNew"
+                                                    >
+
+                                                    <!-- Hidden Input -->
+                                                    <input
+                                                        type="hidden"
+                                                        :name="'options[' + element.id + '][isDelete]'"
+                                                        :value="element.isDelete"
+                                                    >
 
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0 text-center">
@@ -285,7 +288,7 @@
                                                         </div>
                                                     </x-admin::table.td>
 
-                                                    <!-- Admin-->
+                                                    <!-- Admin -->
                                                     <x-admin::table.td>
                                                         <p class="dark:text-white">
                                                             @{{ element.admin_name }}
@@ -366,7 +369,7 @@
                     </div>
                 </div>
 
-                <!-- Right sub-component -->
+                <!-- Right Sub Component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.before', ['attribute' => $attribute]) !!}
 
@@ -425,13 +428,12 @@
                                     :disabled="(boolean) $selectedOption"
                                     :label="trans('admin::app.catalog.attributes.edit.type')"
                                 >
-                                    <!-- Here! All Needed types are defined -->
-                                    @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
+                                    @foreach($attributeTypes as $attributeType)
                                         <option
-                                            value="{{ $type }}"
-                                            {{ $selectedOption == $type ? 'selected' : '' }}
+                                            value="{{ $attributeType }}"
+                                            {{ $selectedOption == $attributeType ? 'selected' : '' }}
                                         >
-                                            @lang('admin::app.catalog.attributes.edit.'. $type)
+                                            @lang('admin::app.catalog.attributes.edit.'. $attributeType)
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
@@ -471,7 +473,10 @@
                             @endif
 
                             <!-- Default Value -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group
+                                class="!mb-0"
+                                v-if="canHaveDefaultValue"
+                            >
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.catalog.attributes.edit.default-value')
                                 </x-admin::form.control-group.label>
@@ -487,7 +492,7 @@
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
-                    
+
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.after', ['attribute' => $attribute]) !!}
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.validations.before', ['attribute' => $attribute]) !!}
@@ -515,10 +520,9 @@
                                             :value="$attribute->validation"
                                             disabled="disabled"
                                         >
-                                            <!-- Here! All Needed types are defined -->
-                                            @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
-                                                <option value="{{ $type }}" {{ $attribute->validation == $type ? 'selected' : '' }}>
-                                                    @lang('admin::app.catalog.attributes.edit.' . $type)
+                                            @foreach($validations as $validation)
+                                                <option value="{{ $validation }}" {{ $attribute->validation == $validation ? 'selected' : '' }}>
+                                                    @lang('admin::app.catalog.attributes.edit.' . $validation)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>
@@ -561,10 +565,6 @@
 
                             <!-- Is Required -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
-                                @php
-                                    $selectedOption = old('is_required') ?? $attribute->is_required
-                                @endphp
-
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_required"
@@ -577,7 +577,7 @@
                                     id="is_required"
                                     for="is_required"
                                     value="1"
-                                    :checked="(boolean) $selectedOption"
+                                    :checked="(boolean) (old('is_required') ?? $attribute->is_required)"
                                 />
 
                                 <label
@@ -590,6 +590,12 @@
 
                             <!-- Is Unique -->
                             <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="is_unique"
+                                    :value="(boolean) (old('is_unique') ?? $attribute->is_unique)"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_unique"
@@ -605,13 +611,7 @@
                                     for="is_unique"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-unique')
-                                </label>    
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    :name="$type"
-                                    :value="$attribute->is_unique"
-                                />
+                                </label>
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
@@ -648,7 +648,7 @@
                                     class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.value-per-locale')
-                                </label>   
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -674,7 +674,7 @@
 
                                 <label class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.catalog.attributes.edit.value-per-channel')
-                                </label>   
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -683,10 +683,10 @@
                                 />
                             </x-admin::form.control-group>
 
-                            <!-- Use in Layered -->
+                            <!-- Use In Layered -->
                             <x-admin::form.control-group
                                 class="!mb-2 flex select-none items-center gap-2.5"
-                                ::class="{ 'opacity-70' : isFilterableDisabled }"
+                                ::class="{ 'opacity-70' : ! isFilterable }"
                             >
                                 @php
                                     $isFilterable = old('is_filterable') ?? $attribute->is_filterable;
@@ -699,15 +699,15 @@
                                     value="1"
                                     for="is_filterable"
                                     :checked="(boolean) $isFilterable"
-                                    ::disabled="isFilterableDisabled"
+                                    ::disabled="! isFilterable"
                                 />
 
                                 <label
-                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                    :class="`${isFilterable ? 'cursor-pointer' : 'cursor-not-allowed'} text-xs font-medium text-gray-600 dark:text-gray-300`"
                                     for="is_filterable"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-filterable')
-                                </label> 
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -716,8 +716,11 @@
                                 />
                             </x-admin::form.control-group>
 
-                            <!-- Use to create configurable product -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                            <!-- Use To Create Configurable Product -->
+                            <x-admin::form.control-group
+                                class="!mb-2 flex select-none items-center gap-2.5"
+                                ::class="{ 'opacity-70' : ! isConfigurable }"
+                            >
                                 @php
                                     $isConfigurable = old('is_configurable') ?? $attribute->is_configurable;
                                 @endphp
@@ -729,14 +732,15 @@
                                     value="1"
                                     for="is_configurable"
                                     :checked="(boolean) $isConfigurable"
+                                    ::disabled="! isConfigurable"
                                 />
 
                                 <label
-                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                    :class="`${isConfigurable ? 'cursor-pointer' : 'cursor-not-allowed'} text-xs font-medium text-gray-600 dark:text-gray-300`"
                                     for="is_configurable"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-configurable')
-                                </label> 
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -765,7 +769,7 @@
                                     for="is_visible_on_front"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
-                                </label> 
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -774,7 +778,7 @@
                                 />
                             </x-admin::form.control-group>
 
-                            <!-- Attribute is Comparable -->
+                            <!-- Attribute Is Comparable -->
                             <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
                                 @php
                                     $isComparable = old('is_comparable') ?? $attribute->is_comparable
@@ -794,7 +798,7 @@
                                     for="is_comparable"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-comparable')
-                                </label> 
+                                </label>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -879,13 +883,13 @@
                             </div>
 
                             <div class="grid grid-cols-3 gap-4">
-                                <!-- Hidden Id Input -->
+                                <!-- Hidden Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="id"
                                 />
 
-                                <!-- Hidden IsNew Input -->
+                                <!-- Hidden Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="isNew"
@@ -951,7 +955,9 @@
 
                 data() {
                     return {
-                        showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
+                        showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'multiselect']) ? 'true' : 'false' }},
+
+                        attributeCode: "{{ $attribute->code }}",
 
                         attributeType: "{{ $attribute->type }}",
 
@@ -976,10 +982,19 @@
                 },
 
                 computed: {
-                    isFilterableDisabled() {
-                        return this.attributeType == 'price' || this.attributeType == 'checkbox'
-                            || this.attributeType == 'select' || this.attributeType == 'multiselect'
-                            ? false : true;
+                    isFilterable() {
+                        return this.attributeType == 'checkbox'
+                            || this.attributeType == 'select'
+                            || this.attributeType == 'multiselect'
+                            || this.attributeType == 'boolean';
+                    },
+
+                    isConfigurable() {
+                        return this.attributeType == 'select';
+                    },
+
+                    canHaveDefaultValue() {
+                        return this.attributeType == 'boolean';
                     },
                 },
 

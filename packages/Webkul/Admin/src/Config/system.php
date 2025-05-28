@@ -84,6 +84,97 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.content.speculation_rules',
+        'name'   => 'admin::app.configuration.index.general.content.speculation-rules.title',
+        'info'   => 'admin::app.configuration.index.general.content.speculation-rules.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'prerender_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'prerender_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls-info',
+                'type'    => 'textarea',
+                'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prerender_enabled:true',
+            ], [
+                'name'    => 'prerender_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params-info',
+                'type'    => 'textarea',
+                'depends' => 'prerender_enabled:true',
+            ], [
+                'name'    => 'prerender_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness-info',
+                'type'    => 'select',
+                'default' => 'moderate',
+                'depends' => 'prerender_enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eager',
+                        'value' => 'eager',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.moderate',
+                        'value' => 'moderate',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.conservative',
+                        'value' => 'conservative',
+                    ],
+                ],
+            ], [
+                'name'    => 'prefetch_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.enabled',
+                'type'    => 'boolean',
+                'default' => false,
+            ], [
+                'name'    => 'prefetch_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls-info',
+                'type'    => 'textarea',
+                'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params-info',
+                'type'    => 'textarea',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness-info',
+                'type'    => 'select',
+                'default' => 'moderate',
+                'depends' => 'prefetch_enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eager',
+                        'value' => 'eager',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.moderate',
+                        'value' => 'moderate',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.conservative',
+                        'value' => 'conservative',
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.configuration.index.general.content.custom-scripts.title',
         'info'   => 'admin::app.configuration.index.general.content.custom-scripts.title-info',
@@ -127,6 +218,33 @@ return [
                 'type'          => 'image',
                 'channel_based' => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
+            ],
+        ],
+    ], [
+        'key'    => 'general.design.categories',
+        'name'   => 'admin::app.configuration.index.general.design.menu-category.title',
+        'info'   => 'admin::app.configuration.index.general.design.menu-category.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'category_view',
+                'title'   => 'admin::app.configuration.index.general.design.menu-category.title',
+                'type'    => 'select',
+                'default' => 'default',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.default',
+                        'value' => 'default',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.sidebar',
+                        'value' => 'sidebar',
+                    ],
+                ],
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'blade',
+                'path'          => 'admin::configuration.custom-views.category-menu',
             ],
         ],
     ], [

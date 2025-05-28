@@ -581,15 +581,20 @@ return [
                 'title' => '发票',
 
                 'datagrid' => [
-                    'action'       => '操作',
-                    'grand-total'  => '总计',
-                    'id'           => 'ID',
-                    'invoice-date' => '发票日期',
-                    'order-id'     => '订单ID',
-                    'overdue'      => '逾期',
-                    'paid'         => '已支付',
-                    'pending'      => '待支付',
-                    'status'       => '状态',
+                    'action'              => '操作',
+                    'days-left'           => '还有 :count 天',
+                    'days-overdue'        => '已逾期 :count 天',
+                    'grand-total'         => '总计',
+                    'id'                  => 'ID',
+                    'invoice-date'        => '发票日期',
+                    'mass-update-success' => '所选发票已成功更新。',
+                    'order-id'            => '订单ID',
+                    'overdue'             => '逾期',
+                    'overdue-by'          => '逾期 :count 天',
+                    'paid'                => '已支付',
+                    'pending'             => '待支付',
+                    'status'              => '状态',
+                    'update-status'       => '更新状态',
                 ],
             ],
 
@@ -3729,6 +3734,40 @@ return [
                         'redirection-link'  => '重定向链接',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => '启用猜测规则',
+                        'info'               => '配置启用或禁用自动猜测逻辑的设置。',
+                        'title'              => '猜测规则',
+
+                        'prerender' => [
+                            'conservative'           => '保守',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预渲染积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预渲染猜测规则',
+                            'ignore-url-params'      => '忽略预渲染URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预渲染URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => '保守',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预取积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预取猜测规则',
+                            'ignore-url-params'      => '忽略预取URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预取URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => '自定义CSS',
                         'custom-javascript' => '自定义Javascript',
@@ -3746,6 +3785,15 @@ return [
                         'logo-image' => '标志图像',
                         'title'      => '管理标志',
                         'title-info' => '为您的网站前端配置标志和网站图标图像，以提升品牌形象和识别度。',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => '默认菜单',
+                        'info'            => '此设置控制标题菜单中类别的可见性。您可以选择仅显示父类别或显示所有嵌套类别。',
+                        'preview-default' => '预览默认菜单',
+                        'preview-sidebar' => '预览侧边栏菜单',
+                        'sidebar'         => '侧边栏菜单',
+                        'title'           => '菜单类别视图',
                     ],
                 ],
 
@@ -3839,6 +3887,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR 合规设置',
+
+                    'settings' => [
+                        'title'   => 'GDPR 合规设置',
+                        'info'    => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
+                        'enabled' => '启用 GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR 协议',
+                        'info'           => '根据 GDPR 规定管理客户同意。启用必要的数据收集和处理同意。',
+                        'enable'         => '启用客户同意',
+                        'checkbox-label' => '同意标签',
+                        'content'        => '同意内容',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => '左下角',
+                        'bottom-right' => '右下角',
+                        'center'       => '中心',
+                        'description'  => '描述',
+                        'enable'       => '启用 Cookie 通知',
+                        'identifier'   => '静态块 ID',
+                        'info'         => '配置 Cookie 同意设置，以通知用户数据收集和隐私政策。',
+                        'position'     => 'Cookie 块位置',
+                        'title'        => 'Cookie 通知设置',
+                        'top-left'     => '左上角',
+                        'top-right'    => '右上角',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => '管理 Cookie 设置',
+                        'info'                   => '选择首选的 Cookie 设置以管理数据使用。为不同类型的 Cookie 配置同意选项。',
+                        'strictly-necessary'     => '严格必要',
+                        'basic-interaction'      => '基本交互和功能',
+                        'experience-enhancement' => '体验增强',
+                        'measurement'            => '测量',
+                        'targeting-advertising'  => '目标广告',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => '设置站点地图选项。',
                     'title' => '站点地图',
@@ -3855,49 +3946,6 @@ return [
                         'max-url-per-file' => '每个文件的最大 URL 数量',
                         'title'            => '文件限制',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPR 合规设置',
-
-                'settings' => [
-                    'title'   => 'GDPR 合规设置',
-                    'info'    => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
-                    'enabled' => '启用 GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR 协议',
-                    'info'           => '根据 GDPR 规定管理客户同意。启用必要的数据收集和处理同意。',
-                    'enable'         => '启用客户同意',
-                    'checkbox-label' => '同意标签',
-                    'content'        => '同意内容',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => '左下角',
-                    'bottom-right' => '右下角',
-                    'center'       => '中心',
-                    'description'  => '描述',
-                    'enable'       => '启用 Cookie 通知',
-                    'identifier'   => '静态块 ID',
-                    'info'         => '配置 Cookie 同意设置，以通知用户数据收集和隐私政策。',
-                    'position'     => 'Cookie 块位置',
-                    'title'        => 'Cookie 通知设置',
-                    'top-left'     => '左上角',
-                    'top-right'    => '右上角',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => '管理 Cookie 设置',
-                    'info'                   => '选择首选的 Cookie 设置以管理数据使用。为不同类型的 Cookie 配置同意选项。',
-                    'strictly-necessary'     => '严格必要',
-                    'basic-interaction'      => '基本交互和功能',
-                    'experience-enhancement' => '体验增强',
-                    'measurement'            => '测量',
-                    'targeting-advertising'  => '目标广告',
                 ],
             ],
 

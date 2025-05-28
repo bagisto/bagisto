@@ -26,6 +26,8 @@ Route::prefix('sales')->group(function () {
         Route::post('send-duplicate-email/{id}', 'sendDuplicateEmail')->name('admin.sales.invoices.send_duplicate_email');
 
         Route::get('print/{id}', 'printInvoice')->name('admin.sales.invoices.print');
+
+        Route::post('mass-update/state', 'massUpdateState')->name('admin.sales.invoices.mass_update.state');
     });
 
     /**
