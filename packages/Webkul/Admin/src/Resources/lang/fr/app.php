@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'L\'utilisateur ne peut pas être modifié.',
             'create-success'     => 'Utilisateur créé avec succès.',
             'delete-failed'      => 'Échec de la suppression de l\'utilisateur.',
+            'delete-self-error'  => 'Vous ne pouvez pas supprimer votre propre compte.',
             'delete-success'     => 'Utilisateur supprimé avec succès.',
             'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
             'incorrect-password' => 'Mot de passe incorrect',

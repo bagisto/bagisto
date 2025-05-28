@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'لا يمكن تغيير المستخدم.',
             'create-success'     => 'تم إنشاء المستخدم بنجاح.',
             'delete-failed'      => 'فشل حذف المستخدم.',
+            'delete-self-error'  => 'لا يمكنك حذف حسابك الخاص.',
             'delete-success'     => 'تم حذف المستخدم بنجاح.',
             'delete-warning'     => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
             'incorrect-password' => 'كلمة المرور غير صحيحة.',

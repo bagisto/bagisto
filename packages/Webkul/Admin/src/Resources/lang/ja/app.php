@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'ユーザーは変更できません。',
             'create-success'     => 'ユーザーが正常に作成されました。',
             'delete-failed'      => 'ユーザーの削除に失敗しました。',
+            'delete-self-error'  => '自分自身のアカウントを削除することはできません。',
             'delete-success'     => 'ユーザーが正常に削除されました。',
             'delete-warning'     => 'このアクションを実行してもよろしいですか？',
             'incorrect-password' => 'パスワードが正しくありません',

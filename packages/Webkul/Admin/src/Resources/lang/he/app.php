@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'לא ניתן לשנות את המשתמש.',
             'create-success'     => 'המשתמש נוצר בהצלחה.',
             'delete-failed'      => 'נכשל במחיקת המשתמש.',
+            'delete-self-error'  => 'אינך יכול למחוק את החשבון שלך.',
             'delete-success'     => 'המשתמש נמחק בהצלחה.',
             'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
             'incorrect-password' => 'סיסמה שגויה',

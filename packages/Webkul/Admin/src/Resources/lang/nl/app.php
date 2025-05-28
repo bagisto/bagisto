@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Gebruiker kan niet worden gewijzigd.',
             'create-success'     => 'Gebruiker succesvol aangemaakt.',
             'delete-failed'      => 'Gebruiker kon niet worden verwijderd.',
+            'delete-self-error'  => 'U kunt uw eigen account niet verwijderen.',
             'delete-success'     => 'Gebruiker succesvol verwijderd.',
             'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             'incorrect-password' => 'Onjuist wachtwoord',

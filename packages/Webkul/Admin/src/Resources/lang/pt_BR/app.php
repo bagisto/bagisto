@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Não é possível alterar o usuário.',
             'create-success'     => 'Usuário criado com sucesso.',
             'delete-failed'      => 'Falha ao excluir usuário.',
+            'delete-self-error'  => 'Você não pode excluir sua própria conta.',
             'delete-success'     => 'Usuário excluído com sucesso.',
             'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
             'incorrect-password' => 'Senha incorreta',

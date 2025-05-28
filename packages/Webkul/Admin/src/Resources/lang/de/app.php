@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Benutzer kann nicht geändert werden.',
             'create-success'     => 'Benutzer erfolgreich erstellt.',
             'delete-failed'      => 'Benutzerlöschung fehlgeschlagen.',
+            'delete-self-error'  => 'Sie können Ihr eigenes Konto nicht löschen.',
             'delete-success'     => 'Benutzer erfolgreich gelöscht.',
             'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
             'incorrect-password' => 'Falsches Passwort',

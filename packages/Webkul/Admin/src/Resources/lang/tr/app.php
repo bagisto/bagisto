@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Kullanıcı değiştirilemez.',
             'create-success'     => 'Kullanıcı başarıyla oluşturuldu.',
             'delete-failed'      => 'Kullanıcı silme başarısız.',
+            'delete-self-error'  => 'Kendi hesabınızı silemezsiniz.',
             'delete-success'     => 'Kullanıcı başarıyla silindi.',
             'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
             'incorrect-password' => 'Yanlış şifre',
