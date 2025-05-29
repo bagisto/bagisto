@@ -102,6 +102,8 @@ class ElasticSearchRepository
             case AttributeTypeEnum::BOOLEAN->value:
                 $values = array_map('intval', explode(',', $params[$attribute->code]));
 
+                $values = array_map('intval', explode(',', $params[$attribute->code]));
+
                 return [
                     'terms' => [
                         $attribute->code => $values,
