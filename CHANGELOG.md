@@ -26,6 +26,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the multiselect filter and also added support for checkbox filters in both Elasticsearch and database modes.
 
+* Fixed the filter issue for boolean-type attributes in Elasticsearch mode.
+
 * #10788 [fixed] - Added a slight delay of 300ms along with a debounce mechanism to ensure that the dash is removed only after the user stops typing.
 
 * #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
