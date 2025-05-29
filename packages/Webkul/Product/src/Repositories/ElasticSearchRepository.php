@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -21,7 +22,7 @@ class ElasticSearchRepository
     ) {}
 
     /**
-     * Return elastic search index name
+     * Return elastic search index name.
      */
     public function getIndexName(): string
     {
@@ -29,7 +30,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Returns product ids from Elasticsearch
+     * Return product ids from elasticsearch.
      */
     public function search(array $params, array $options): array
     {
@@ -63,7 +64,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Prepare filters for search results
+     * Prepare filters for search results.
      */
     public function getFilters(array $params): array
     {
@@ -93,12 +94,12 @@ class ElasticSearchRepository
     }
 
     /**
-     * Return applied filters
+     * Return applied filters.
      */
     public function getFilterValue(mixed $attribute, array $params): array
     {
         switch ($attribute->type) {
-            case 'boolean':
+            case AttributeTypeEnum::BOOLEAN->value:
                 /**
                  * Need to remove this condition after the next release.
                  *
@@ -134,7 +135,7 @@ class ElasticSearchRepository
                     ],
                 ];
 
-            case 'price':
+            case AttributeTypeEnum::PRICE->value:
                 $customerGroup = $this->customerRepository->getCurrentGroup();
 
                 $range = explode(',', $params[$attribute->code]);
@@ -148,7 +149,7 @@ class ElasticSearchRepository
                     ],
                 ];
 
-            case 'text':
+            case AttributeTypeEnum::TEXT->value:
                 $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
 
                 $synonyms = array_map(function ($synonym) {
@@ -162,7 +163,7 @@ class ElasticSearchRepository
                     ],
                 ];
 
-            case 'select':
+            case AttributeTypeEnum::SELECT->value:
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
 
                 if ($attribute->is_configurable) {
@@ -170,11 +171,19 @@ class ElasticSearchRepository
                 }
 
                 return $filter;
+
+            case AttributeTypeEnum::CHECKBOX->value:
+            case AttributeTypeEnum::MULTISELECT->value:
+                $values = explode(',', $params[$attribute->code]);
+
+                $filter[]['terms'][$attribute->code] = $values;
+
+                return $filter;
         }
     }
 
     /**
-     * Returns sort options
+     * Returns sort options.
      */
     public function getSortOptions(array $options): array
     {
