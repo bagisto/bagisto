@@ -16,6 +16,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
 
+* Fixed the multiselect filter and also added support for checkbox filters in both Elasticsearch and database modes.
+
 * #10718 [fixed] - Fixed the issue that allowed an admin to delete their own account.
 
 ## **v2.2.7 (22nd of May 2025)** - *Release*
