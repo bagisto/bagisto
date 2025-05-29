@@ -366,7 +366,10 @@ class ProductRepository extends Repository
                                     $join->where($alias.'.attribute_id', $attribute->id);
                                 });
 
-                                if ($attribute->type === AttributeTypeEnum::MULTISELECT->value) {
+                                if (in_array($attribute->type, [
+                                    AttributeTypeEnum::CHECKBOX->value,
+                                    AttributeTypeEnum::MULTISELECT->value,
+                                ])) {
                                     $paramValues = explode(',', $params[$attribute->code]);
 
                                     $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute, $prefix) {
