@@ -20,6 +20,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the issue where the transaction drawer was not opening as expected.
 
+* Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
+
 * #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
 
 * #10718 [fixed] - Fixed the issue that allowed an admin to delete their own account.
