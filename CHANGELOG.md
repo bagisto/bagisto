@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the issue where the transaction drawer was not opening as expected.
 
+* Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
+
 * #10718 [fixed] - Fixed the issue that allowed an admin to delete their own account.
 
 ## **v2.2.7 (22nd of May 2025)** - *Release*
