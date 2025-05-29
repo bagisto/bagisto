@@ -276,7 +276,10 @@ class ElasticSearch extends AbstractIndexer
                 }
             } elseif ($attribute->type == AttributeTypeEnum::BOOLEAN->value) {
                 $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
-            } elseif ($attribute->type == AttributeTypeEnum::MULTISELECT->value) {
+            } elseif (in_array($attribute->type, [
+                AttributeTypeEnum::CHECKBOX->value,
+                AttributeTypeEnum::MULTISELECT->value,
+            ])) {
                 $rawValue = $attributeValue?->{$attribute->column_name};
 
                 $properties[$attribute->code] = $rawValue ? array_map('trim', explode(',', $rawValue)) : [];
