@@ -277,7 +277,7 @@ class ElasticSearch extends AbstractIndexer
                     $properties[$attribute->code.'_'.$customerGroup->id] = (float) $groupPrice;
                 }
             } elseif ($attribute->type == AttributeTypeEnum::BOOLEAN->value) {
-                $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
+                $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name} ?? $attribute->default_value);
             } elseif (in_array($attribute->type, [
                 AttributeTypeEnum::CHECKBOX->value,
                 AttributeTypeEnum::MULTISELECT->value,

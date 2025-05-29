@@ -100,38 +100,11 @@ class ElasticSearchRepository
     {
         switch ($attribute->type) {
             case AttributeTypeEnum::BOOLEAN->value:
-                /**
-                 * Need to remove this condition after the next release.
-                 *
-                 * Previously, these attributes were not indexed in Elasticsearch.
-                 * Therefore, we need to check if the attributes exist in the index
-                 * to maintain backward compatibility.
-                 */
-                if (in_array($attribute->code, ['status', 'visible_individually'])) {
-                    return [
-                        'bool' => [
-                            'should' => [
-                                [
-                                    'term' => [
-                                        $attribute->code => 1,
-                                    ],
-                                ], [
-                                    'bool' => [
-                                        'must_not' => [
-                                            'exists' => [
-                                                'field' => $attribute->code,
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ];
-                }
+                $values = array_map('intval', explode(',', $params[$attribute->code]));
 
                 return [
-                    'term' => [
-                        $attribute->code => intval($params[$attribute->code]),
+                    'terms' => [
+                        $attribute->code => $values,
                     ],
                 ];
 
@@ -179,6 +152,11 @@ class ElasticSearchRepository
                 $filter[]['terms'][$attribute->code] = $values;
 
                 return $filter;
+
+            default:
+                throw new \InvalidArgumentException(
+                    'Unsupported attribute type: '.$attribute->type
+                );
         }
     }
 
