@@ -3,6 +3,7 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -252,7 +253,7 @@ class ElasticSearch extends AbstractIndexer
         foreach ($attributes as $attribute) {
             $attributeValue = $this->getAttributeValue($attribute);
 
-            if ($attribute->code == 'price') {
+            if ($attribute->code == AttributeTypeEnum::PRICE->value) {
                 $properties[$attribute->code] = (float) $attributeValue?->{$attribute->column_name};
 
                 foreach ($this->getCustomerGroups() as $customerGroup) {
@@ -273,8 +274,12 @@ class ElasticSearch extends AbstractIndexer
 
                     $properties[$attribute->code.'_'.$customerGroup->id] = (float) $groupPrice;
                 }
-            } elseif ($attribute->type == 'boolean') {
+            } elseif ($attribute->type == AttributeTypeEnum::BOOLEAN->value) {
                 $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
+            } elseif ($attribute->type == AttributeTypeEnum::MULTISELECT->value) {
+                $rawValue = $attributeValue?->{$attribute->column_name};
+
+                $properties[$attribute->code] = $rawValue ? array_map('trim', explode(',', $rawValue)) : [];
             } else {
                 $properties[$attribute->code] = strip_tags($attributeValue?->{$attribute->column_name});
             }

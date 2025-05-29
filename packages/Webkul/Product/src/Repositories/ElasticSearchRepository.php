@@ -170,6 +170,13 @@ class ElasticSearchRepository
                 }
 
                 return $filter;
+
+            case 'multiselect':
+                $values = explode(',', $params[$attribute->code]);
+
+                $filter[]['terms'][$attribute->code] = $values;
+
+                return $filter;
         }
     }
 
