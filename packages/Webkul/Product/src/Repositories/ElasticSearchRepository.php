@@ -129,9 +129,11 @@ class ElasticSearchRepository
                     ];
                 }
 
+                $values = array_map('intval', explode(',', $params[$attribute->code]));
+
                 return [
-                    'term' => [
-                        $attribute->code => intval($params[$attribute->code]),
+                    'terms' => [
+                        $attribute->code => $values,
                     ],
                 ];
 
@@ -179,6 +181,11 @@ class ElasticSearchRepository
                 $filter[]['terms'][$attribute->code] = $values;
 
                 return $filter;
+
+            default:
+                throw new \InvalidArgumentException(
+                    'Unsupported attribute type: '.$attribute->type
+                );
         }
     }
 
