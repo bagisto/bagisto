@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Sudah memiliki akun?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Daftar',
+            'click-here'                  => 'Klik di sini',
             'confirm-pass'                => 'Konfirmasi Kata Sandi',
             'email'                       => 'Email',
             'first-name'                  => 'Nama Depan',
@@ -482,25 +483,6 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Akun',
-                'bagisto'           => 'Bagisto',
-                'cart'              => 'Keranjang',
-                'compare'           => 'Bandingkan',
-                'dropdown-text'     => 'Kelola Keranjang, Pesanan & Wishlist',
-                'logout'            => 'Keluar',
-                'no-category-found' => 'Kategori tidak ditemukan.',
-                'orders'            => 'Pesanan',
-                'profile'           => 'Profil',
-                'search'            => 'Cari',
-                'search-text'       => 'Cari produk',
-                'sign-in'           => 'Masuk',
-                'sign-up'           => 'Daftar',
-                'submit'            => 'Kirim',
-                'title'             => 'Akun',
-                'welcome'           => 'Selamat Datang',
-                'welcome-guest'     => 'Selamat Datang, Tamu',
-                'wishlist'          => 'Wishlist',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Lokal default',
@@ -708,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Tidak ada',
+                        'total-amount' => 'Jumlah Total',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Silakan pilih opsi',
                     'select-above-options' => 'Silakan pilih opsi di atas',

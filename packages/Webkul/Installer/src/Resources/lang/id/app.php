@@ -244,7 +244,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-
                 'all-products' => [
                     'name' => 'Semua Produk',
 
