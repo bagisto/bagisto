@@ -22,7 +22,7 @@ class ElasticSearchRepository
     ) {}
 
     /**
-     * Return elastic search index name
+     * Return elastic search index name.
      */
     public function getIndexName(): string
     {
@@ -30,7 +30,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Returns product ids from Elasticsearch
+     * Return product ids from elasticsearch.
      */
     public function search(array $params, array $options): array
     {
@@ -64,7 +64,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Prepare filters for search results
+     * Prepare filters for search results.
      */
     public function getFilters(array $params): array
     {
@@ -94,7 +94,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Return applied filters
+     * Return applied filters.
      */
     public function getFilterValue(mixed $attribute, array $params): array
     {
@@ -183,7 +183,7 @@ class ElasticSearchRepository
     }
 
     /**
-     * Returns sort options
+     * Returns sort options.
      */
     public function getSortOptions(array $options): array
     {
