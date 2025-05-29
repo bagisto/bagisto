@@ -2,7 +2,9 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **Unreleased**
+## Unreleased
+
+## **v2.3.4 (29th of May 2025)** - *Release*
 
 * Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
 
@@ -23,6 +25,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
 
 * Fixed the multiselect filter and also added support for checkbox filters in both Elasticsearch and database modes.
+
+* #10788 [fixed] - Added a slight delay of 300ms along with a debounce mechanism to ensure that the dash is removed only after the user stops typing.
 
 * #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
 
