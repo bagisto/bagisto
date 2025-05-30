@@ -581,15 +581,20 @@ return [
                 'title' => 'Faktur',
 
                 'datagrid' => [
-                    'action'       => 'Tindakan',
-                    'grand-total'  => 'Total Keseluruhan',
-                    'id'           => 'ID',
-                    'invoice-date' => 'Tanggal Faktur',
-                    'order-id'     => 'ID Pesanan',
-                    'overdue'      => 'Terlambat',
-                    'paid'         => 'Dibayar',
-                    'pending'      => 'Tertunda',
-                    'status'       => 'Status',
+                    'action'              => 'Tindakan',
+                    'days-left'           => 'Sisa :count hari',
+                    'days-overdue'        => 'Terlambat :count hari',
+                    'grand-total'         => 'Total Keseluruhan',
+                    'id'                  => 'ID',
+                    'invoice-date'        => 'Tanggal Faktur',
+                    'mass-update-success' => 'Faktur yang dipilih berhasil diperbarui.',
+                    'order-id'            => 'ID Pesanan',
+                    'overdue'             => 'Terlambat',
+                    'overdue-by'          => 'Terlambat :count hari',
+                    'paid'                => 'Lunas',
+                    'pending'             => 'Menunggu Pembayaran',
+                    'status'              => 'Status',
+                    'update-status'       => 'Perbarui Status',
                 ],
             ],
 
@@ -930,16 +935,16 @@ return [
                                 'empty-title' => 'Tambah Opsi',
 
                                 'types' => [
-                                    'text'        => ['title' => 'Teks'],
-                                    'textarea'    => ['title' => 'Textarea'],
-                                    'checkbox'    => ['title' => 'Checkbox'],
-                                    'radio'       => ['title' => 'Radio'],
-                                    'select'      => ['title' => 'Select'],
-                                    'multiselect' => ['title' => 'Multiselect'],
-                                    'date'        => ['title' => 'Tanggal'],
-                                    'datetime'    => ['title' => 'Tanggal & Waktu'],
-                                    'time'        => ['title' => 'Waktu'],
-                                    'file'        => ['title' => 'File'],
+                                    'text'          => ['title' => 'Text'],
+                                    'textarea'      => ['title' => 'Textarea'],
+                                    'checkbox'      => ['title' => 'Checkbox'],
+                                    'radio'         => ['title' => 'Radio'],
+                                    'select'        => ['title' => 'Select'],
+                                    'multiselect'   => ['title' => 'Multiselect'],
+                                    'date'          => ['title' => 'Date'],
+                                    'datetime'      => ['title' => 'Datetime'],
+                                    'time'          => ['title' => 'Time'],
+                                    'file'          => ['title' => 'File'],
                                 ],
 
                                 'items' => [
@@ -1173,7 +1178,141 @@ return [
                             'valid-until'        => 'Berlaku Sampai',
 
                             'modal' => [
-                                'edit' => 'Edit Tiket...',
+                                'edit' => 'Ubah Tiket',
+                                'save' => 'Simpan',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Tambah Tiket',
+                            ],
+
+                            'slots' => [
+                                'add'         => 'Tambah Slot',
+                                'description' => 'Slot tersedia dengan durasi waktu.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'Harian',
+                            'daily-hourly' => 'Gabungan (Harian dan Per Jam)',
+                            'daily-price'  => 'Harga Harian',
+                            'hourly'       => 'Per Jam',
+                            'hourly-price' => 'Harga Per Jam',
+                            'title'        => 'Jenis Penyewaan',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Tidak',
+                                'title' => 'Slot Sama untuk Semua Hari',
+                                'yes'   => 'Ya',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Tambah Slot',
+                            'description-info' => 'Durasi waktu akan dibuat dan ditampilkan berdasarkan slot. Setiap durasi waktu akan bersifat unik di semua slot dan akan terlihat di etalase.',
+                            'save'             => 'Simpan',
+                            'title'            => 'Durasi Waktu Slot',
+                            'unavailable'      => 'Tidak Tersedia',
+
+                            'action' => [
+                                'add' => 'Tambah',
+                            ],
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'    => 'Jumat',
+                                    'from'      => 'Dari',
+                                    'monday'    => 'Senin',
+                                    'saturday'  => 'Sabtu',
+                                    'sunday'    => 'Minggu',
+                                    'thursday'  => 'Kamis',
+                                    'to'        => 'Sampai',
+                                    'tuesday'   => 'Selasa',
+                                    'wednesday' => 'Rabu',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Waktu Istirahat antar Slot (Menit)',
+                            'guest-capacity'            => 'Kapasitas Tamu',
+                            'guest-limit'               => 'Batas Tamu per Meja',
+                            'prevent-scheduling-before' => 'Cegah Penjadwalan Sebelum',
+                            'slot-duration'             => 'Durasi Slot (Menit)',
+
+                            'charged-per' => [
+                                'guest' => 'Per Tamu',
+                                'table' => 'Per Meja',
+                                'title' => 'Dikenakan Biaya Berdasarkan',
+                            ],
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Tidak',
+                                'title' => 'Slot Sama untuk Semua Hari',
+                                'yes'   => 'Ya',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Pemesanan Janji Temu',
+                            'default'     => 'Pemesanan Biasa',
+                            'event'       => 'Pemesanan Acara',
+                            'many'        => 'Banyak',
+                            'one'         => 'Satu',
+                            'rental'      => 'Pemesanan Sewa',
+                            'table'       => 'Pemesanan Meja',
+                            'title'       => 'Jenis',
+                        ],
+                    ],
+
+                    'downloadable' => [
+                        'links' => [
+                            'add-btn'     => 'Tambah Tautan',
+                            'delete-btn'  => 'Hapus',
+                            'edit-btn'    => 'Edit',
+                            'empty-info'  => 'Buat tautan langsung saat dibutuhkan.',
+                            'empty-title' => 'Tambah Tautan',
+                            'file'        => 'Berkas:',
+                            'info'        => 'Tipe produk unduhan memungkinkan penjualan produk digital, seperti eBook, aplikasi perangkat lunak, musik, game, dan sebagainya.',
+                            'sample-file' => 'Contoh Berkas:',
+                            'sample-url'  => 'URL Contoh:',
+                            'title'       => 'Tautan Unduhan',
+                            'url'         => 'URL:',
+
+                            'update-create' => [
+                                'downloads'   => 'Jumlah Unduhan Diizinkan',
+                                'file'        => 'Berkas',
+                                'file-type'   => 'Tipe Berkas',
+                                'name'        => 'Judul',
+                                'price'       => 'Harga',
+                                'sample'      => 'Contoh',
+                                'sample-type' => 'Tipe Contoh',
+                                'save-btn'    => 'Simpan',
+                                'title'       => 'Tautan',
+                                'url'         => 'URL',
+                            ],
+                        ],
+
+                        'samples' => [
+                            'add-btn'     => 'Tambah Contoh',
+                            'delete-btn'  => 'Hapus',
+                            'edit-btn'    => 'Edit',
+                            'empty-info'  => 'Buat contoh langsung saat dibutuhkan.',
+                            'empty-title' => 'Tambah Contoh',
+                            'file'        => 'Berkas:',
+                            'info'        => 'Tipe produk unduhan memungkinkan penjualan produk digital, seperti eBook, aplikasi perangkat lunak, musik, game, dan sebagainya.',
+                            'title'       => 'Contoh Unduhan',
+                            'url'         => 'URL:',
+
+                            'update-create' => [
+                                'file'      => 'Berkas',
+                                'file-type' => 'Tipe Berkas',
+                                'name'      => 'Judul',
+                                'save-btn'  => 'Simpan',
+                                'title'     => 'Tautan',
+                                'url'       => 'URL',
                             ],
                         ],
                     ],
@@ -2701,19 +2840,20 @@ return [
                 ],
 
                 'create' => [
-                    'code'              => 'Kode',
-                    'create-btn'        => 'Buat Mata Uang',
-                    'currency-position' => 'Posisi Mata Uang',
-                    'decimal'           => 'Desimal',
-                    'decimal-separator' => 'Pemisah Desimal',
-                    'delete-warning'    => 'Apakah Anda yakin ingin melakukan tindakan ini?',
-                    'general'           => 'Umum',
-                    'group-separator'   => 'Pemisah Ribuan',
-                    'name'              => 'Nama',
-                    'separator-note'    => 'Kolom :attribute hanya dapat menerima operator koma (,) dan titik (.)',
-                    'save-btn'          => 'Simpan Mata Uang',
-                    'symbol'            => 'Simbol',
-                    'title'             => 'Buat Mata Uang Baru',
+                    'code'                   => 'Kode',
+                    'create-btn'             => 'Buat Mata Uang',
+                    'currency-position'      => 'Posisi Simbol Mata Uang',
+                    'decimal'                => 'Desimal',
+                    'decimal-separator'      => 'Pemisah Desimal',
+                    'decimal-separator-note' => 'Kolom :attribute hanya boleh menggunakan karakter koma (,) atau titik (.)',
+                    'delete-warning'         => 'Apakah Anda yakin ingin melakukan tindakan ini?',
+                    'general'                => 'Umum',
+                    'group-separator'        => 'Pemisah Kelompok Angka',
+                    'group-separator-note'   => 'Kolom :attribute hanya boleh menggunakan karakter koma (,), titik (.), apostrof (\'), atau spasi ( )',
+                    'name'                   => 'Nama',
+                    'save-btn'               => 'Simpan Mata Uang',
+                    'symbol'                 => 'Simbol',
+                    'title'                  => 'Buat Mata Uang Baru',
                 ],
 
                 'edit' => [
@@ -3314,21 +3454,21 @@ return [
                 'create-filter'                 => 'Buat Filter',
                 'css'                           => 'CSS',
                 'delete'                        => 'Hapus',
-                'desc'                          => 'Deskripsi',
+                'desc'                          => 'Turun',
                 'edit'                          => 'Edit',
                 'featured'                      => 'Fitur Unggulan',
                 'filter-title'                  => 'Judul Filter',
                 'filters'                       => 'Filter',
                 'footer-link'                   => 'Tautan Footer',
-                'footer-link-description'       => 'Navigasi melalui tautan footer untuk eksplorasi dan informasi situs web yang lancar.',
+                'footer-link-description'       => 'Navigasi mudah melalui tautan footer untuk menjelajah dan menemukan informasi di situs Anda.',
                 'footer-link-form-title'        => 'Tautan Footer',
                 'footer-title'                  => 'Judul Footer',
                 'general'                       => 'Umum',
                 'html'                          => 'HTML',
                 'image'                         => 'Gambar',
-                'image-size'                    => 'Resolusi gambar harus (1920px X 700px)',
+                'image-size'                    => 'Resolusi gambar sebaiknya (1920px X 700px)',
                 'image-title'                   => 'Judul Gambar',
-                'image-upload-message'          => 'Hanya gambar (.jpeg, .jpg, .png, .webp, ..) yang diperbolehkan.',
+                'image-upload-message'          => 'Hanya berkas gambar (.jpeg, .jpg, .png, .webp, ..) yang diizinkan.',
                 'inactive'                      => 'Tidak Aktif',
                 'key'                           => 'Kunci: :key',
                 'key-input'                     => 'Kunci',
@@ -3338,10 +3478,11 @@ return [
                 'new'                           => 'Baru',
                 'no'                            => 'Tidak',
                 'parent-id'                     => 'ID Induk',
+                'parent-id-hint'                => 'Anda dapat memasukkan beberapa ID induk dengan koma sebagai pemisah (misal: 12,15,34)',
                 'category-id'                   => 'ID Kategori',
                 'preview'                       => 'Pratinjau',
                 'product-carousel'              => 'Carousel Produk',
-                'product-carousel-description'  => 'Tampilkan produk secara elegan dengan carousel produk yang dinamis dan responsif.',
+                'product-carousel-description'  => 'Pamerkan produk dengan elegan menggunakan carousel produk yang dinamis dan responsif.',
                 'save-btn'                      => 'Simpan',
                 'select'                        => 'Pilih',
                 'slider'                        => 'Slider',
@@ -3558,17 +3699,36 @@ return [
 
                     'header-offer' => [
                         'title'             => 'Judul Penawaran Header',
-                        'title-info'        => 'Konfigurasi Judul Penawaran Header dengan judul penawaran, judul pengalihan, dan tautan pengalihan.',
+                        'title-info'        => 'Atur judul penawaran header beserta judul pengalihan dan tautannya.',
                         'offer-title'       => 'Judul Penawaran',
                         'redirection-title' => 'Judul Pengalihan',
                         'redirection-link'  => 'Tautan Pengalihan',
+                    ],
+
+                    'speculation-rules' => [
+                        'info'  => 'Atur pengaktifan atau penonaktifan logika spekulasi otomatis.',
+                        'title' => 'Aturan Spekulasi',
+
+                        'settings' => [
+                            'eagerness'              => 'Tingkat Agresivitas',
+                            'eager'                  => 'Agresif',
+                            'moderate'               => 'Sedang',
+                            'conservative'           => 'Konservatif',
+                            'eagerness-info'         => 'Mengontrol seberapa agresif aturan spekulasi diterapkan. Pilihan: agresif (maksimal), sedang (default), konservatif (minim).',
+                            'ignore-url-params'      => 'Abaikan Parameter URL',
+                            'ignore-url-params-info' => 'Tentukan parameter URL yang diabaikan dalam aturan spekulasi. Gunakan tanda pipa (|) sebagai pemisah untuk beberapa parameter.',
+                            'ignore-urls'            => 'Abaikan URL',
+                            'ignore-urls-info'       => 'Masukkan URL yang ingin dikecualikan dari logika spekulasi. Pisahkan beberapa URL dengan tanda pipa (|).',
+                            'info'                   => 'Aktifkan atau nonaktifkan aturan spekulasi.',
+                            'title'                  => 'Aktifkan Aturan Spekulasi',
+                        ],
                     ],
 
                     'custom-scripts' => [
                         'custom-css'        => 'CSS Kustom',
                         'custom-javascript' => 'Javascript Kustom',
                         'title'             => 'Skrip Kustom',
-                        'title-info'        => 'Skrip kustom adalah potongan kode yang dipersonalisasi dibuat untuk menambahkan fungsi atau fitur khusus ke perangkat lunak, meningkatkan kapabilitasnya dengan cara yang unik.',
+                        'title-info'        => 'Skrip kustom adalah potongan kode yang dibuat secara khusus untuk menambahkan fungsi atau fitur tertentu ke dalam perangkat lunak, sehingga meningkatkan kemampuannya secara unik.',
                     ],
                 ],
 
@@ -3578,9 +3738,18 @@ return [
 
                     'admin-logo' => [
                         'favicon'    => 'Favicon',
-                        'logo-image' => 'Gambar Logo',
-                        'title'      => 'Logo Admin',
-                        'title-info' => 'Konfigurasi logo dan gambar favicon untuk antarmuka depan situs web Anda untuk branding yang lebih baik dan pengenalan yang lebih jelas.',
+                        'logo-image' => 'Logo Image',
+                        'title'      => 'Admin Logo',
+                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => 'Menu Default',
+                        'info'            => 'Pengaturan ini mengontrol visibilitas kategori dalam menu header. Anda dapat memilih untuk menampilkan hanya kategori induk atau seluruh kategori bersarang.',
+                        'preview-default' => 'Pratinjau Menu Default',
+                        'preview-sidebar' => 'Pratinjau Menu Sidebar',
+                        'sidebar'         => 'Menu Sidebar',
+                        'title'           => 'Tampilan Kategori Menu',
                     ],
                 ],
 
@@ -3831,13 +4000,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Izinkan Ulasan Pelanggan',
-                        'allow-guest-review'    => 'Izinkan Ulasan Tamu',
-                        'display-review-count'  => 'Tampilkan jumlah ulasan untuk peringkat.',
-                        'display-star-count'    => 'Tampilkan jumlah bintang dalam peringkat.',
-                        'summary'               => 'Ringkasan',
-                        'title'                 => 'Ulasan',
-                        'title-info'            => 'Evaluasi atau penilaian terhadap sesuatu, sering kali melibatkan pendapat dan umpan balik.',
+                        'allow-customer-review'   => 'Izinkan Ulasan dari Pelanggan',
+                        'allow-guest-review'      => 'Izinkan Ulasan dari Tamu',
+                        'censoring-reviewer-name' => 'Sensor Nama Pengulas',
+                        'display-review-count'    => 'Tampilkan jumlah ulasan dalam penilaian.',
+                        'display-star-count'      => 'Tampilkan jumlah bintang dalam penilaian.',
+                        'summary'                 => 'Ringkasan',
+                        'title'                   => 'Ulasan',
+                        'title-info'              => 'Evaluasi atau penilaian terhadap sesuatu, biasanya melibatkan opini dan masukan.',
                     ],
 
                     'attribute' => [
@@ -3997,13 +4167,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Aktifkan Facebook',
-                        'enable-github'     => 'Aktifkan Github',
-                        'enable-google'     => 'Aktifkan Google',
-                        'enable-linkedin'   => 'Aktifkan LinkedIn',
-                        'enable-twitter'    => 'Aktifkan Twitter',
-                        'social-login'      => 'Login Sosial',
-                        'social-login-info' => '"Login sosial" memungkinkan pengguna mengakses situs web menggunakan akun media sosial mereka, mempermudah proses pendaftaran dan login untuk kenyamanan.',
+                        'title' => 'Login Sosial',
+                        'info'  => '"Login sosial" memungkinkan pengguna mengakses situs web menggunakan akun media sosial mereka, sehingga proses registrasi dan masuk menjadi lebih mudah.',
+
+                        'google' => [
+                            'enable-google' => 'Aktifkan Google',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Pengenal unik yang diberikan oleh Google saat Anda membuat aplikasi OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth Google Anda. Jaga kerahasiaannya.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL Pengalihan',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Google. Harus sesuai dengan URL yang dikonfigurasi di konsol Google Anda.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Aktifkan Facebook',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'App ID yang diberikan oleh Facebook saat membuat aplikasi di konsol pengembang Facebook.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'App secret yang terkait dengan aplikasi Facebook Anda. Jaga kerahasiaannya.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL Pengalihan',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Facebook. Harus sesuai dengan URL yang dikonfigurasi di pengaturan aplikasi Facebook Anda.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Aktifkan GitHub',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Pengenal unik yang diberikan oleh GitHub saat membuat aplikasi OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth GitHub Anda. Jaga kerahasiaannya.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL Pengalihan',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan GitHub. Harus sesuai dengan URL yang dikonfigurasi di konsol GitHub Anda.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Aktifkan LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Pengenal unik yang diberikan oleh LinkedIn saat membuat aplikasi OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth LinkedIn Anda. Jaga kerahasiaannya.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL Pengalihan',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan LinkedIn. Harus sesuai dengan URL yang dikonfigurasi di konsol LinkedIn Anda.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Aktifkan Twitter',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Pengenal unik yang diberikan oleh Twitter saat membuat aplikasi OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth Twitter Anda. Jaga kerahasiaannya.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL Pengalihan',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -4392,7 +4652,7 @@ return [
             ],
 
             'powered-by' => [
-                'description' => '',
+                'description' => 'Dibuat oleh :bagisto, proyek open-source dari :webkul.',
             ],
         ],
 
@@ -4692,7 +4952,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '',
+        'copy-right' => 'Didukung oleh <a href="https://bagisto.com/" target="_blank">Bagisto</a>, proyek komunitas yang dikembangkan oleh <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
 
     'emails' => [
