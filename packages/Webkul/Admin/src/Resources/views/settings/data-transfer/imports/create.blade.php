@@ -83,8 +83,7 @@
                                 <x-slot:content>
                                     <div class="grid gap-2.5 max-md:my-0">
                                         @foreach ($supportedFormats as $format)
-                                            <a
-                                                :href="'{{ route('admin.settings.data_transfer.imports.download_sample', ['type' => ':type:', 'format' => ':format:']) }}'.replace(':type:', $refs['importType']?.value).replace(':format:', '{{ $format }}')"
+                                            <a href="'{{ route('admin.settings.data_transfer.imports.download_sample', ['type' => ':type:', 'format' => ':format:']) }}'.replace(':type:', $refs['importType']?.value).replace(':format:', '{{ $format }}')"
                                                 target="_blank"
                                                 id="source-sample-link"
                                                 class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
