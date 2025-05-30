@@ -214,6 +214,7 @@ return [
                 'fr'    => 'Fransızca',
                 'he'    => 'İbranice',
                 'hi_IN' => 'Hintçe',
+                'id'    => 'Endonezyaca',
                 'it'    => 'İtalyanca',
                 'ja'    => 'Japonca',
                 'nl'    => 'Felemenkçe',
