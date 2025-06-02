@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Event;
 use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
@@ -24,11 +25,14 @@ class ReviewController extends APIController
     ) {}
 
     /**
-     * Using const variable for status
+     * Pending review status.
+     */
+    const STATUS_PENDING = 'pending';
+
+    /**
+     * Approved review status.
      */
     const STATUS_APPROVED = 'approved';
-
-    const STATUS_PENDING = 'pending';
 
     /**
      * Product listings.
@@ -78,9 +82,13 @@ class ReviewController extends APIController
         $data['name'] = auth()->guard('customer')->user()?->name ?? request()->input('name');
         $data['customer_id'] = auth()->guard('customer')->id() ?? null;
 
+        Event::dispatch('customer.review.create.before', $id);
+
         $review = $this->productReviewRepository->create($data);
 
         $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
+
+        Event::dispatch('customer.review.create.after', $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.view.reviews.success'),
