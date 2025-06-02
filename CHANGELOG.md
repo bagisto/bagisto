@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Fixed an issue in the installer where old values were being retained, causing the first attempt to fail. The installation now completes successfully on the first attempt.
+
 ## **v2.2.8 (29th of May 2025)** - *Release*
 
 * Resolved the filter issue for date and datetime types in the DataGrid.
