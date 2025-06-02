@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed an issue in the installer where old values were being retained, causing the first attempt to fail. The installation now completes successfully on the first attempt.
 
+* Added missing event dispatches to ensure proper event flow and handling.
+
 ## **v2.3.4 (29th of May 2025)** - *Release*
 
 * Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
