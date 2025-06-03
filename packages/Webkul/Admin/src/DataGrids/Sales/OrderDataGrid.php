@@ -18,7 +18,6 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
-            ->distinct()
             ->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
                     ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
@@ -30,7 +29,7 @@ class OrderDataGrid extends DataGrid
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->select(
                 'orders.id',
-                'order_payment.method',
+                DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'order_payment.method SEPARATOR "|") as method'),
                 'orders.increment_id',
                 'orders.base_grand_total',
                 'orders.created_at',
@@ -41,7 +40,8 @@ class OrderDataGrid extends DataGrid
                 'orders.cart_id as items',
                 DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name) as full_name'),
                 DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.city, ", ", '.DB::getTablePrefix().'order_address_billing.state,", ", '.DB::getTablePrefix().'order_address_billing.country) as location')
-            );
+            )
+            ->groupBy('orders.id');
 
         $this->addFilter('full_name', DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name)'));
         $this->addFilter('created_at', 'orders.created_at');
@@ -142,7 +142,13 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
             'closure'    => function ($row) {
-                return core()->getConfigData('sales.payment_methods.'.$row->method.'.title');
+                $methods = explode('|', $row->method);
+                $methods = array_map(function ($method) {
+                    return core()->getConfigData('sales.payment_methods.'.$method.'.title');
+                }, $methods);
+                $methods = array_filter($methods);
+                $methods = array_unique($methods);
+                return implode(', ', $methods);
             },
         ]);
 
