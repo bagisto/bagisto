@@ -935,16 +935,45 @@ return [
                                 'empty-title' => 'Tambah Opsi',
 
                                 'types' => [
-                                    'text'          => ['title' => 'Text'],
-                                    'textarea'      => ['title' => 'Textarea'],
-                                    'checkbox'      => ['title' => 'Checkbox'],
-                                    'radio'         => ['title' => 'Radio'],
-                                    'select'        => ['title' => 'Select'],
-                                    'multiselect'   => ['title' => 'Multiselect'],
-                                    'date'          => ['title' => 'Date'],
-                                    'datetime'      => ['title' => 'Datetime'],
-                                    'time'          => ['title' => 'Time'],
-                                    'file'          => ['title' => 'File'],
+                                    'text'          => [
+                                        'title' => 'Text',
+                                    ],
+
+                                    'textarea'      => [
+                                        'title' => 'Textarea',
+                                    ],
+
+                                    'checkbox'      => [
+                                        'title' => 'Checkbox',
+                                    ],
+
+                                    'radio'         => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select'        => [
+                                        'title' => 'Select',
+                                    ],
+
+                                    'multiselect'   => [
+                                        'title' => 'Multiselect',
+                                    ],
+
+                                    'date'          => [
+                                        'title' => 'Date',
+                                    ],
+
+                                    'datetime'      => [
+                                        'title' => 'Datetime',
+                                    ],
+
+                                    'time'          => [
+                                        'title' => 'Time',
+                                    ],
+
+                                    'file'          => [
+                                        'title' => 'File',
+                                    ],
                                 ],
 
                                 'items' => [
