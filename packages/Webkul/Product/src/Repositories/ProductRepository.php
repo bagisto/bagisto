@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -348,14 +349,14 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->where(function ($filterQuery) use ($qb, $params, $attributes) {
+                $qb->where(function ($filterQuery) use ($qb, $params, $attributes, $prefix) {
                     $aliases = [
                         'products' => 'product_attribute_values',
                         'variants' => 'variant_attribute_values',
                     ];
 
                     foreach ($aliases as $table => $tableAlias) {
-                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
+                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $prefix, $table, $tableAlias) {
                             foreach ($attributes as $attribute) {
                                 $alias = $attribute->code.'_'.$tableAlias;
 
@@ -365,7 +366,20 @@ class ProductRepository extends Repository
                                     $join->where($alias.'.attribute_id', $attribute->id);
                                 });
 
-                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                if (in_array($attribute->type, [
+                                    AttributeTypeEnum::CHECKBOX->value,
+                                    AttributeTypeEnum::MULTISELECT->value,
+                                ])) {
+                                    $paramValues = explode(',', $params[$attribute->code]);
+
+                                    $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute, $prefix) {
+                                        foreach ($paramValues as $value) {
+                                            $query->orWhereRaw("FIND_IN_SET(?, {$prefix}{$alias}.{$attribute->column_name})", [$value]);
+                                        }
+                                    });
+                                } else {
+                                    $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                }
                             }
                         });
                     }

@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Clear All',
             'filters'   => 'Filters:',
             'filter'    => 'Filter',
+
+            'search'    => [
+                'load-more'            => 'Load More',
+                'loading'              => 'Loading...',
+                'no-options-available' => 'No options available.',
+                'results-info'         => 'Showing :currentCount of :totalCount options',
+                'title'                => 'Search',
+            ],
+
             'sort'      => 'Sort',
         ],
 

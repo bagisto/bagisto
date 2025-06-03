@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Benutzer kann nicht geändert werden.',
             'create-success'     => 'Benutzer erfolgreich erstellt.',
             'delete-failed'      => 'Benutzerlöschung fehlgeschlagen.',
+            'delete-self-error'  => 'Sie können Ihr eigenes Konto nicht löschen.',
             'delete-success'     => 'Benutzer erfolgreich gelöscht.',
             'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
             'incorrect-password' => 'Falsches Passwort',
@@ -3735,21 +3736,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
-                        'title' => 'Spekulationsregeln',
+                        'enable-speculation' => 'Spekulationsregeln aktivieren',
+                        'info'               => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
+                        'title'              => 'Spekulationsregeln',
 
-                        'settings' => [
-                            'eagerness'              => 'Eifer-Stufe',
-                            'eager'                  => 'Eifrig',
-                            'moderate'               => 'Moderat',
+                        'prerender' => [
                             'conservative'           => 'Konservativ',
-                            'eagerness-info'         => 'Steuert, wie aggressiv Spekulationsregeln angewendet werden. Optionen: eifrig (max), moderat (Standard), konservativ (niedrig).',
-                            'ignore-url-params'      => 'URL-Parameter ignorieren',
-                            'ignore-url-params-info' => 'Geben Sie zu ignorierende URL-Parameter an. Verwenden Sie | zur Trennung.',
-                            'ignore-urls'            => 'URLs ignorieren',
-                            'ignore-urls-info'       => 'Geben Sie URLs ein, die von der Spekulation ausgeschlossen werden sollen. Trennen Sie mehrere mit |.',
+                            'eager'                  => 'Eifrig',
+                            'eagerness'              => 'Prerender-Eifer-Stufe',
+                            'eagerness-info'         => 'Steuert, wie aggressiv die Spekulationsregeln angewendet werden. Optionen: eifrig (maximal), moderat (Standard), konservativ (niedrig).',
+                            'enabled'                => 'Prerender-Spekulationsregeln aktivieren',
+                            'ignore-url-params'      => 'Prerender-URL-Parameter ignorieren',
+                            'ignore-url-params-info' => 'Geben Sie URL-Parameter an, die in den Spekulationsregeln ignoriert werden sollen. Verwenden Sie ein Pipe-Zeichen (|) zur Trennung mehrerer Parameter.',
+                            'ignore-urls'            => 'Prerender-URLs ignorieren',
+                            'ignore-urls-info'       => 'Geben Sie URLs an, die von der Spekulationslogik ausgeschlossen werden sollen. Trennen Sie mehrere URLs mit einem Pipe-Zeichen (|).',
                             'info'                   => 'Legen Sie den Status der Spekulationsregeln fest.',
-                            'title'                  => 'Spekulationsregeln aktivieren',
+                            'moderate'               => 'Moderat',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Konservativ',
+                            'eager'                  => 'Eifrig',
+                            'eagerness'              => 'Prefetch-Eifer-Stufe',
+                            'eagerness-info'         => 'Steuert, wie aggressiv die Spekulationsregeln angewendet werden. Optionen: eifrig (maximal), moderat (Standard), konservativ (niedrig).',
+                            'enabled'                => 'Prefetch-Spekulationsregeln aktivieren',
+                            'ignore-url-params'      => 'Prefetch-URL-Parameter ignorieren',
+                            'ignore-url-params-info' => 'Geben Sie URL-Parameter an, die in den Spekulationsregeln ignoriert werden sollen. Verwenden Sie ein Pipe-Zeichen (|) zur Trennung mehrerer Parameter.',
+                            'ignore-urls'            => 'Prefetch-URLs ignorieren',
+                            'ignore-urls-info'       => 'Geben Sie URLs an, die von der Spekulationslogik ausgeschlossen werden sollen. Trennen Sie mehrere URLs mit einem Pipe-Zeichen (|).',
+                            'info'                   => 'Legen Sie den Status der Spekulationsregeln fest.',
+                            'moderate'               => 'Moderat',
                         ],
                     ],
 
@@ -3872,6 +3888,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'DSGVO',
+                    'info'  => 'DSGVO-Konformitätseinstellungen',
+
+                    'settings' => [
+                        'title'   => 'DSGVO-Konformitätseinstellungen',
+                        'info'    => 'Verwalten Sie die DSGVO-Konformitätseinstellungen, einschließlich der Datenschutzvereinbarung. Aktivieren oder deaktivieren Sie die DSGVO-Funktionen nach Bedarf.',
+                        'enabled' => 'DSGVO aktivieren',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'DSGVO-Vereinbarung',
+                        'info'           => 'Verwalten Sie die Zustimmung der Kunden gemäß den DSGVO-Vorschriften. Aktivieren Sie die Zustimmungspflicht für die Datenerfassung und -verarbeitung.',
+                        'enable'         => 'Kundenzustimmung aktivieren',
+                        'checkbox-label' => 'Checkbox-Beschriftung für die Zustimmung',
+                        'content'        => 'Inhalt der Zustimmung',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Unten links',
+                        'bottom-right' => 'Unten rechts',
+                        'center'       => 'Mitte',
+                        'description'  => 'Beschreibung',
+                        'enable'       => 'Cookie-Benachrichtigung aktivieren',
+                        'identifier'   => 'Statischer Block-Identifier',
+                        'info'         => 'Konfigurieren Sie die Cookie-Zustimmungseinstellungen, um Benutzer über die Datenerfassung zu informieren und die Datenschutzbestimmungen einzuhalten.',
+                        'position'     => 'Anzeigeposition des Cookie-Blocks',
+                        'title'        => 'Cookie-Benachrichtigungseinstellungen',
+                        'top-left'     => 'Oben links',
+                        'top-right'    => 'Oben rechts',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Verwalten Sie Ihre Cookie-Einstellungen',
+                        'info'                   => 'Kontrollieren Sie, wie Ihre Daten verwendet werden, indem Sie die bevorzugten Cookie-Einstellungen auswählen. Passen Sie die Berechtigungen für verschiedene Arten von Cookies an.',
+                        'strictly-necessary'     => 'Unbedingt erforderlich',
+                        'basic-interaction'      => 'Grundlegende Interaktion und Funktionalität',
+                        'experience-enhancement' => 'Erlebnisverbesserung',
+                        'measurement'            => 'Messung',
+                        'targeting-advertising'  => 'Targeting und Werbung',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Sitemap-Optionen festlegen.',
                     'title' => 'Sitemap',
@@ -3888,49 +3947,6 @@ return [
                         'max-url-per-file' => 'Maximale Anzahl von URLs pro Datei',
                         'title'            => 'Dateibeschränkungen',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'DSGVO',
-                'info'  => 'DSGVO-Konformitätseinstellungen',
-
-                'settings' => [
-                    'title'   => 'DSGVO-Konformitätseinstellungen',
-                    'info'    => 'Verwalten Sie die DSGVO-Konformitätseinstellungen, einschließlich der Datenschutzvereinbarung. Aktivieren oder deaktivieren Sie die DSGVO-Funktionen nach Bedarf.',
-                    'enabled' => 'DSGVO aktivieren',
-                ],
-
-                'agreement' => [
-                    'title'          => 'DSGVO-Vereinbarung',
-                    'info'           => 'Verwalten Sie die Zustimmung der Kunden gemäß den DSGVO-Vorschriften. Aktivieren Sie die Zustimmungspflicht für die Datenerfassung und -verarbeitung.',
-                    'enable'         => 'Kundenzustimmung aktivieren',
-                    'checkbox-label' => 'Checkbox-Beschriftung für die Zustimmung',
-                    'content'        => 'Inhalt der Zustimmung',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Unten links',
-                    'bottom-right' => 'Unten rechts',
-                    'center'       => 'Mitte',
-                    'description'  => 'Beschreibung',
-                    'enable'       => 'Cookie-Benachrichtigung aktivieren',
-                    'identifier'   => 'Statischer Block-Identifier',
-                    'info'         => 'Konfigurieren Sie die Cookie-Zustimmungseinstellungen, um Benutzer über die Datenerfassung zu informieren und die Datenschutzbestimmungen einzuhalten.',
-                    'position'     => 'Anzeigeposition des Cookie-Blocks',
-                    'title'        => 'Cookie-Benachrichtigungseinstellungen',
-                    'top-left'     => 'Oben links',
-                    'top-right'    => 'Oben rechts',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Verwalten Sie Ihre Cookie-Einstellungen',
-                    'info'                   => 'Kontrollieren Sie, wie Ihre Daten verwendet werden, indem Sie die bevorzugten Cookie-Einstellungen auswählen. Passen Sie die Berechtigungen für verschiedene Arten von Cookies an.',
-                    'strictly-necessary'     => 'Unbedingt erforderlich',
-                    'basic-interaction'      => 'Grundlegende Interaktion und Funktionalität',
-                    'experience-enhancement' => 'Erlebnisverbesserung',
-                    'measurement'            => 'Messung',
-                    'targeting-advertising'  => 'Targeting und Werbung',
                 ],
             ],
 

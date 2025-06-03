@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Hepsini Temizle',
             'filter'    => 'Filtrele',
             'filters'   => 'Filtreler:',
+
+            'search' => [
+                'load-more'            => 'Daha fazla yükle',
+                'loading'              => 'Yükleniyor...',
+                'no-options-available' => 'Mevcut seçenek yok.',
+                'results-info'         => ':totalCount seçeneğin :currentCount gösteriliyor',
+                'title'                => 'Arama',
+            ],
+
             'sort'      => 'Sırala',
         ],
 

@@ -2,10 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\AttributeOptionResource;
 use Webkul\Shop\Http\Resources\AttributeResource;
 use Webkul\Shop\Http\Resources\CategoryResource;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
@@ -70,6 +73,36 @@ class CategoryController extends APIController
         }
 
         return AttributeResource::collection($filterableAttributes);
+    }
+
+    /**
+     * Get attribute options with pagination and search.
+     */
+    public function getAttributeOptions(int $attributeId): mixed
+    {
+        $attribute = $this->attributeRepository->findOrFail($attributeId);
+
+        if ($attribute->type === AttributeTypeEnum::BOOLEAN->value) {
+            return new JsonResponse([
+                'data' => AttributeTypeEnum::getBooleanOptions(),
+            ]);
+        }
+
+        $query = $attribute->options()
+            ->with([
+                'translation' => fn ($query) => $query->where('locale', core()->getCurrentLocale()->code),
+            ]);
+
+        if ($search = request('search')) {
+            $query->where(function ($query) use ($search) {
+                $query->whereHas('translation', fn ($query) => $query->where('label', 'like', "%{$search}%"))
+                    ->orWhere('admin_name', 'like', "%{$search}%");
+            });
+        }
+
+        $query->orderBy('sort_order');
+
+        return AttributeOptionResource::collection($query->paginate());
     }
 
     /**

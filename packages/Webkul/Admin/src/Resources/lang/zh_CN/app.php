@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => '无法更改用户。',
             'create-success'     => '用户成功创建。',
             'delete-failed'      => '删除用户失败。',
+            'delete-self-error'  => '您无法删除自己的账户。',
             'delete-success'     => '用户成功删除。',
             'delete-warning'     => '您确定要执行此操作吗？',
             'incorrect-password' => '密码错误',
@@ -3735,21 +3736,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => '配置启用或禁用自动推测逻辑的设置。',
-                        'title' => '推测规则',
+                        'enable-speculation' => '启用猜测规则',
+                        'info'               => '配置启用或禁用自动猜测逻辑的设置。',
+                        'title'              => '猜测规则',
 
-                        'settings' => [
-                            'eagerness'              => '渴望程度',
-                            'eager'                  => '渴望',
-                            'moderate'               => '适度',
+                        'prerender' => [
                             'conservative'           => '保守',
-                            'eagerness-info'         => '控制推测规则应用的激进程度。选项：eager（最大），moderate（默认），conservative（低）。',
-                            'ignore-url-params'      => '忽略URL参数',
-                            'ignore-url-params-info' => '指定在推测规则中忽略的URL参数。使用竖线（|）分隔多个参数。',
-                            'ignore-urls'            => '忽略URLs',
-                            'ignore-urls-info'       => '输入需要从推测逻辑中排除的URLs。使用竖线（|）分隔多个URLs。',
-                            'info'                   => '设置推测规则状态。',
-                            'title'                  => '启用推测规则',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预渲染积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预渲染猜测规则',
+                            'ignore-url-params'      => '忽略预渲染URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预渲染URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => '保守',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预取积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预取猜测规则',
+                            'ignore-url-params'      => '忽略预取URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预取URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
                         ],
                     ],
 
@@ -3872,6 +3888,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR 合规设置',
+
+                    'settings' => [
+                        'title'   => 'GDPR 合规设置',
+                        'info'    => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
+                        'enabled' => '启用 GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR 协议',
+                        'info'           => '根据 GDPR 规定管理客户同意。启用必要的数据收集和处理同意。',
+                        'enable'         => '启用客户同意',
+                        'checkbox-label' => '同意标签',
+                        'content'        => '同意内容',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => '左下角',
+                        'bottom-right' => '右下角',
+                        'center'       => '中心',
+                        'description'  => '描述',
+                        'enable'       => '启用 Cookie 通知',
+                        'identifier'   => '静态块 ID',
+                        'info'         => '配置 Cookie 同意设置，以通知用户数据收集和隐私政策。',
+                        'position'     => 'Cookie 块位置',
+                        'title'        => 'Cookie 通知设置',
+                        'top-left'     => '左上角',
+                        'top-right'    => '右上角',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => '管理 Cookie 设置',
+                        'info'                   => '选择首选的 Cookie 设置以管理数据使用。为不同类型的 Cookie 配置同意选项。',
+                        'strictly-necessary'     => '严格必要',
+                        'basic-interaction'      => '基本交互和功能',
+                        'experience-enhancement' => '体验增强',
+                        'measurement'            => '测量',
+                        'targeting-advertising'  => '目标广告',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => '设置站点地图选项。',
                     'title' => '站点地图',
@@ -3888,49 +3947,6 @@ return [
                         'max-url-per-file' => '每个文件的最大 URL 数量',
                         'title'            => '文件限制',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPR 合规设置',
-
-                'settings' => [
-                    'title'   => 'GDPR 合规设置',
-                    'info'    => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
-                    'enabled' => '启用 GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR 协议',
-                    'info'           => '根据 GDPR 规定管理客户同意。启用必要的数据收集和处理同意。',
-                    'enable'         => '启用客户同意',
-                    'checkbox-label' => '同意标签',
-                    'content'        => '同意内容',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => '左下角',
-                    'bottom-right' => '右下角',
-                    'center'       => '中心',
-                    'description'  => '描述',
-                    'enable'       => '启用 Cookie 通知',
-                    'identifier'   => '静态块 ID',
-                    'info'         => '配置 Cookie 同意设置，以通知用户数据收集和隐私政策。',
-                    'position'     => 'Cookie 块位置',
-                    'title'        => 'Cookie 通知设置',
-                    'top-left'     => '左上角',
-                    'top-right'    => '右上角',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => '管理 Cookie 设置',
-                    'info'                   => '选择首选的 Cookie 设置以管理数据使用。为不同类型的 Cookie 配置同意选项。',
-                    'strictly-necessary'     => '严格必要',
-                    'basic-interaction'      => '基本交互和功能',
-                    'experience-enhancement' => '体验增强',
-                    'measurement'            => '测量',
-                    'targeting-advertising'  => '目标广告',
                 ],
             ],
 

@@ -427,10 +427,10 @@
                             }"
                         >
                             <!-- First level view -->
-                            <div class="h-[calc(100vh-74px)] overflow-auto w-full flex-shrink-0">
+                            <div class="h-[calc(100vh-74px)] w-full flex-shrink-0 overflow-auto">
                                 <div class="py-4">
                                     <div
-                                        v-for="category in categories.slice(4)"
+                                        v-for="category in categories"
                                         :key="category.id"
                                         :class="{'mb-2': category.children && category.children.length}"
                                     >

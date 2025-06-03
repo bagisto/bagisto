@@ -8,19 +8,19 @@
 </v-tabs>
 
 @pushOnce('scripts')
-    <script 
+    <script
         type="text/x-template"
         id="v-tabs-template"
     >
         <div>
             <div
-                class="flex justify-center gap-4 bg-neutral-100 pt-2 max-sm:hidden"
+                class="flex justify-center gap-4 bg-white dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 pt-2 max-sm:hidden"
                 :style="positionStyles"
             >
                 <div
                     v-for="tab in tabs"
                     class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-300"
-                    :class="{'border-navyBlue border-b-2 text-black transition': tab.isActive }"
+                    :class="{'border-blue-600 border-b-2 text-blue-600 transition': tab.isActive }"
                     @click="change(tab)"
                 >
                     @{{ tab.title }}

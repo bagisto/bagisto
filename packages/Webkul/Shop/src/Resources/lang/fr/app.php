@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Tout effacer',
             'filter'    => 'Filtre',
             'filters'   => 'Filtres :',
+
+            'search' => [
+                'load-more'            => 'Charger plus',
+                'loading'              => 'Chargement...',
+                'no-options-available' => 'Aucune option disponible.',
+                'results-info'         => 'Affichage de :currentCount sur :totalCount options',
+                'title'                => 'Recherche',
+            ],
+
             'sort'      => 'Trier',
         ],
 

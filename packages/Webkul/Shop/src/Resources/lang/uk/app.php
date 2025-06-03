@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Очистити всі',
             'filter'    => 'Фільтр',
             'filters'   => 'Фільтри:',
+
+            'search' => [
+                'load-more'            => 'Завантажити більше',
+                'loading'              => 'Завантаження...',
+                'no-options-available' => 'Немає доступних опцій.',
+                'results-info'         => 'Показано :currentCount з :totalCount опцій',
+                'title'                => 'Пошук',
+            ],
+
             'sort'      => 'Сортувати',
         ],
 

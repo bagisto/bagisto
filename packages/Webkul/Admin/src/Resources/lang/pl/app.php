@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'Nie można zmienić użytkownika.',
             'create-success'     => 'Użytkownik został pomyślnie utworzony.',
             'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
+            'delete-self-error'  => 'Nie możesz usunąć własnego konta.',
             'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
             'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
             'incorrect-password' => 'Niepoprawne hasło',
@@ -3735,21 +3736,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => 'Skonfiguruj ustawienia włączania lub wyłączania automatycznej logiki spekulacji.',
-                        'title' => 'Zasady Spekulacji',
+                        'enable-speculation' => 'Włącz reguły spekulacji',
+                        'info'               => 'Skonfiguruj ustawienia włączania lub wyłączania automatycznej logiki spekulacji.',
+                        'title'              => 'Reguły spekulacji',
 
-                        'settings' => [
-                            'eagerness'              => 'Poziom Eagerness',
-                            'eager'                  => 'Eager',
-                            'moderate'               => 'Umiarkowane',
-                            'conservative'           => 'Konserwatywne',
-                            'eagerness-info'         => 'Określa, jak agresywnie będą stosowane zasady spekulacji. Opcje: eager (maksymalny), moderate (domyślny), conservative (niski).',
-                            'ignore-url-params'      => 'Ignoruj Parametry URL',
-                            'ignore-url-params-info' => 'Określ parametry URL, które mają zostać zignorowane w zasadach spekulacji. Użyj pionowej kreski (|), aby oddzielić wiele parametrów.',
-                            'ignore-urls'            => 'Ignoruj URL',
-                            'ignore-urls-info'       => 'Wpisz URL, które mają zostać wyłączone z logiki spekulacji. Oddzielaj wiele URL-ów pionową kreską (|).',
-                            'info'                   => 'Ustaw status zasad spekulacji.',
-                            'title'                  => 'Włącz zasady spekulacji',
+                        'prerender' => [
+                            'conservative'           => 'Konserwatywny',
+                            'eager'                  => 'Chętny',
+                            'eagerness'              => 'Poziom chęci prerenderowania',
+                            'eagerness-info'         => 'Kontroluje, jak agresywnie stosowane są reguły spekulacji. Opcje: chętny (maksymalny), umiarkowany (domyślny), konserwatywny (niski).',
+                            'enabled'                => 'Włącz reguły spekulacji prerender',
+                            'ignore-url-params'      => 'Ignoruj parametry URL prerender',
+                            'ignore-url-params-info' => 'Określ parametry URL do ignorowania w regułach spekulacji. Użyj znaku pipe (|) do oddzielenia wielu parametrów.',
+                            'ignore-urls'            => 'Ignoruj URL prerender',
+                            'ignore-urls-info'       => 'Wprowadź adresy URL do wykluczenia z logiki spekulacji. Oddziel wiele adresów pipe\'em (|).',
+                            'info'                   => 'Ustaw status reguł spekulacji.',
+                            'moderate'               => 'Umiarkowany',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Konserwatywny',
+                            'eager'                  => 'Chętny',
+                            'eagerness'              => 'Poziom chęci prefetch',
+                            'eagerness-info'         => 'Kontroluje, jak agresywnie stosowane są reguły spekulacji. Opcje: chętny (maksymalny), umiarkowany (domyślny), konserwatywny (niski).',
+                            'enabled'                => 'Włącz reguły spekulacji prefetch',
+                            'ignore-url-params'      => 'Ignoruj parametry URL prefetch',
+                            'ignore-url-params-info' => 'Określ parametry URL do ignorowania w regułach spekulacji. Użyj znaku pipe (|) do oddzielenia wielu parametrów.',
+                            'ignore-urls'            => 'Ignoruj URL prefetch',
+                            'ignore-urls-info'       => 'Wprowadź adresy URL do wykluczenia z logiki spekulacji. Oddziel wiele adresów pipe\'em (|).',
+                            'info'                   => 'Ustaw status reguł spekulacji.',
+                            'moderate'               => 'Umiarkowany',
                         ],
                     ],
 
@@ -3872,6 +3888,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Ustawienia zgodności z GDPR',
+
+                    'settings' => [
+                        'title'   => 'Ustawienia zgodności z GDPR',
+                        'info'    => 'Zarządzaj ustawieniami zgodności z GDPR, w tym polityką prywatności. Włącz lub wyłącz funkcje GDPR w razie potrzeby.',
+                        'enabled' => 'Włącz GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Zgoda GDPR',
+                        'info'           => 'Zarządzaj zgodą klientów zgodnie z przepisami GDPR. Włącz obowiązkową zgodę na zbieranie i przetwarzanie danych.',
+                        'enable'         => 'Włącz zgodę klienta',
+                        'checkbox-label' => 'Etykieta pola zgody',
+                        'content'        => 'Treść zgody',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Lewy dolny róg',
+                        'bottom-right' => 'Prawy dolny róg',
+                        'center'       => 'Centrum',
+                        'description'  => 'Opis',
+                        'enable'       => 'Włącz powiadomienie o plikach cookie',
+                        'identifier'   => 'ID bloku statycznego',
+                        'info'         => 'Skonfiguruj ustawienia zgody na pliki cookie, aby informować użytkowników o zbieraniu danych i zgodności z polityką prywatności.',
+                        'position'     => 'Pozycja bloku cookie',
+                        'title'        => 'Ustawienia powiadomień o plikach cookie',
+                        'top-left'     => 'Lewy górny róg',
+                        'top-right'    => 'Prawy górny róg',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Zarządzaj ustawieniami plików cookie',
+                        'info'                   => 'Wybierz preferowane ustawienia plików cookie, aby zarządzać wykorzystaniem danych. Skonfiguruj zgody na różne rodzaje plików cookie.',
+                        'strictly-necessary'     => 'Ściśle niezbędne',
+                        'basic-interaction'      => 'Podstawowa interakcja i funkcjonalność',
+                        'experience-enhancement' => 'Poprawa doświadczenia',
+                        'measurement'            => 'Pomiar',
+                        'targeting-advertising'  => 'Targetowanie i reklamy',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Ustaw opcje mapy witryny.',
                     'title' => 'Mapa witryny',
@@ -3888,49 +3947,6 @@ return [
                         'max-url-per-file' => 'Maksymalna liczba URL na plik',
                         'title'            => 'Limity plików',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Ustawienia zgodności z GDPR',
-
-                'settings' => [
-                    'title'   => 'Ustawienia zgodności z GDPR',
-                    'info'    => 'Zarządzaj ustawieniami zgodności z GDPR, w tym polityką prywatności. Włącz lub wyłącz funkcje GDPR w razie potrzeby.',
-                    'enabled' => 'Włącz GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Zgoda GDPR',
-                    'info'           => 'Zarządzaj zgodą klientów zgodnie z przepisami GDPR. Włącz obowiązkową zgodę na zbieranie i przetwarzanie danych.',
-                    'enable'         => 'Włącz zgodę klienta',
-                    'checkbox-label' => 'Etykieta pola zgody',
-                    'content'        => 'Treść zgody',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'Lewy dolny róg',
-                    'bottom-right' => 'Prawy dolny róg',
-                    'center'       => 'Centrum',
-                    'description'  => 'Opis',
-                    'enable'       => 'Włącz powiadomienie o plikach cookie',
-                    'identifier'   => 'ID bloku statycznego',
-                    'info'         => 'Skonfiguruj ustawienia zgody na pliki cookie, aby informować użytkowników o zbieraniu danych i zgodności z polityką prywatności.',
-                    'position'     => 'Pozycja bloku cookie',
-                    'title'        => 'Ustawienia powiadomień o plikach cookie',
-                    'top-left'     => 'Lewy górny róg',
-                    'top-right'    => 'Prawy górny róg',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Zarządzaj ustawieniami plików cookie',
-                    'info'                   => 'Wybierz preferowane ustawienia plików cookie, aby zarządzać wykorzystaniem danych. Skonfiguruj zgody na różne rodzaje plików cookie.',
-                    'strictly-necessary'     => 'Ściśle niezbędne',
-                    'basic-interaction'      => 'Podstawowa interakcja i funkcjonalność',
-                    'experience-enhancement' => 'Poprawa doświadczenia',
-                    'measurement'            => 'Pomiar',
-                    'targeting-advertising'  => 'Targetowanie i reklamy',
                 ],
             ],
 

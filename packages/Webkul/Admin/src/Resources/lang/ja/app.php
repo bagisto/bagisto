@@ -3371,6 +3371,7 @@ return [
             'cannot-change'      => 'ユーザーは変更できません。',
             'create-success'     => 'ユーザーが正常に作成されました。',
             'delete-failed'      => 'ユーザーの削除に失敗しました。',
+            'delete-self-error'  => '自分自身のアカウントを削除することはできません。',
             'delete-success'     => 'ユーザーが正常に削除されました。',
             'delete-warning'     => 'このアクションを実行してもよろしいですか？',
             'incorrect-password' => 'パスワードが正しくありません',
@@ -3735,21 +3736,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => '自動推測ロジックの有効化または無効化の設定を構成します。',
-                        'title' => '推測ルール',
+                        'enable-speculation' => '投機ルールを有効にする',
+                        'info'               => '自動投機ロジックの有効化または無効化の設定を構成します。',
+                        'title'              => '投機ルール',
 
-                        'settings' => [
-                            'eagerness'              => '積極性レベル',
+                        'prerender' => [
+                            'conservative'           => '保守的',
                             'eager'                  => '積極的',
-                            'moderate'               => '普通',
-                            'conservative'           => '控えめ',
-                            'eagerness-info'         => '推測ルールの適用の積極性を制御します。オプション：積極的（最大）、普通（デフォルト）、控えめ（低）。',
-                            'ignore-url-params'      => 'URLパラメータを無視',
-                            'ignore-url-params-info' => '無視するURLパラメータを指定します。複数指定する場合は|で区切ります。',
-                            'ignore-urls'            => 'URLを無視',
-                            'ignore-urls-info'       => '推測ロジックから除外するURLを入力してください。|で区切ります。',
-                            'info'                   => '推測ルールのステータスを設定します。',
-                            'title'                  => '推測ルールを有効にする',
+                            'eagerness'              => 'Prerenderの積極性レベル',
+                            'eagerness-info'         => '投機ルールの適用度合いを制御します。オプション：積極的（最大）、中程度（デフォルト）、保守的（低）。',
+                            'enabled'                => 'Prerender投機ルールを有効にする',
+                            'ignore-url-params'      => 'PrerenderのURLパラメータを無視',
+                            'ignore-url-params-info' => '投機ルールで無視するURLパラメータを指定します。複数のパラメータはパイプ(|)で区切ってください。',
+                            'ignore-urls'            => 'PrerenderのURLを無視',
+                            'ignore-urls-info'       => '投機ロジックから除外するURLを入力してください。複数のURLはパイプ(|)で区切ってください。',
+                            'info'                   => '投機ルールの状態を設定します。',
+                            'moderate'               => '中程度',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => '保守的',
+                            'eager'                  => '積極的',
+                            'eagerness'              => 'Prefetchの積極性レベル',
+                            'eagerness-info'         => '投機ルールの適用度合いを制御します。オプション：積極的（最大）、中程度（デフォルト）、保守的（低）。',
+                            'enabled'                => 'Prefetch投機ルールを有効にする',
+                            'ignore-url-params'      => 'PrefetchのURLパラメータを無視',
+                            'ignore-url-params-info' => '投機ルールで無視するURLパラメータを指定します。複数のパラメータはパイプ(|)で区切ってください。',
+                            'ignore-urls'            => 'PrefetchのURLを無視',
+                            'ignore-urls-info'       => '投機ロジックから除外するURLを入力してください。複数のURLはパイプ(|)で区切ってください。',
+                            'info'                   => '投機ルールの状態を設定します。',
+                            'moderate'               => '中程度',
                         ],
                     ],
 
@@ -3872,6 +3888,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPRコンプライアンス設定',
+
+                    'settings' => [
+                        'title'   => 'GDPRコンプライアンス設定',
+                        'info'    => 'プライバシーポリシーを含むGDPRコンプライアンス設定を管理します。必要に応じてGDPR機能を有効または無効にします。',
+                        'enabled' => 'GDPRを有効にする',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR同意',
+                        'info'           => 'GDPR規制に準拠して顧客の同意を管理します。データの収集と処理のために必須の同意を有効にします。',
+                        'enable'         => '顧客の同意を有効にする',
+                        'checkbox-label' => '同意のチェックボックスラベル',
+                        'content'        => '同意の内容',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => '左下',
+                        'bottom-right' => '右下',
+                        'center'       => '中央',
+                        'description'  => '説明',
+                        'enable'       => 'クッキー通知を有効にする',
+                        'identifier'   => '静的ブロック識別子',
+                        'info'         => 'データ収集についてユーザーに通知し、プライバシーポリシーを遵守するためのクッキー同意設定を行います。',
+                        'position'     => 'クッキーブロックの表示位置',
+                        'title'        => 'クッキー通知設定',
+                        'top-left'     => '左上',
+                        'top-right'    => '右上',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'クッキー設定を管理する',
+                        'info'                   => '希望するクッキー設定を選択してデータの使用を制御します。さまざまな種類のクッキーに対する許可を設定します。',
+                        'strictly-necessary'     => '厳密に必要',
+                        'basic-interaction'      => '基本的な相互作用と機能',
+                        'experience-enhancement' => '体験の向上',
+                        'measurement'            => '測定',
+                        'targeting-advertising'  => 'ターゲティングと広告',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'サイトマップのオプションを設定します。',
                     'title' => 'サイトマップ',
@@ -3888,49 +3947,6 @@ return [
                         'max-url-per-file' => 'ファイルあたりの最大URL数',
                         'title'            => 'ファイル制限',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'GDPRコンプライアンス設定',
-
-                'settings' => [
-                    'title'   => 'GDPRコンプライアンス設定',
-                    'info'    => 'プライバシーポリシーを含むGDPRコンプライアンス設定を管理します。必要に応じてGDPR機能を有効または無効にします。',
-                    'enabled' => 'GDPRを有効にする',
-                ],
-
-                'agreement' => [
-                    'title'          => 'GDPR同意',
-                    'info'           => 'GDPR規制に準拠して顧客の同意を管理します。データの収集と処理のために必須の同意を有効にします。',
-                    'enable'         => '顧客の同意を有効にする',
-                    'checkbox-label' => '同意のチェックボックスラベル',
-                    'content'        => '同意の内容',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => '左下',
-                    'bottom-right' => '右下',
-                    'center'       => '中央',
-                    'description'  => '説明',
-                    'enable'       => 'クッキー通知を有効にする',
-                    'identifier'   => '静的ブロック識別子',
-                    'info'         => 'データ収集についてユーザーに通知し、プライバシーポリシーを遵守するためのクッキー同意設定を行います。',
-                    'position'     => 'クッキーブロックの表示位置',
-                    'title'        => 'クッキー通知設定',
-                    'top-left'     => '左上',
-                    'top-right'    => '右上',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'クッキー設定を管理する',
-                    'info'                   => '希望するクッキー設定を選択してデータの使用を制御します。さまざまな種類のクッキーに対する許可を設定します。',
-                    'strictly-necessary'     => '厳密に必要',
-                    'basic-interaction'      => '基本的な相互作用と機能',
-                    'experience-enhancement' => '体験の向上',
-                    'measurement'            => '測定',
-                    'targeting-advertising'  => 'ターゲティングと広告',
                 ],
             ],
 

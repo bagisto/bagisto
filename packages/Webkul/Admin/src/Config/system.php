@@ -91,37 +91,84 @@ return [
         'fields' => [
             [
                 'name'    => 'enabled',
-                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.title',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
                 'type'    => 'boolean',
                 'default' => true,
             ], [
-                'name'    => 'ignore_urls',
-                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-urls',
-                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-urls-info',
+                'name'    => 'prerender_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'prerender_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls-info',
                 'type'    => 'textarea',
                 'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prerender_enabled:true',
             ], [
-                'name'    => 'ignore_url_params',
-                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-url-params',
-                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.settings.ignore-url-params-info',
+                'name'    => 'prerender_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params-info',
                 'type'    => 'textarea',
+                'depends' => 'prerender_enabled:true',
             ], [
-                'name'    => 'eagerness',
-                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.settings.eagerness',
+                'name'    => 'prerender_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness-info',
                 'type'    => 'select',
-                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.settings.eagerness-info',
                 'default' => 'moderate',
+                'depends' => 'prerender_enabled:true',
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.settings.eager',
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eager',
                         'value' => 'eager',
                     ],
                     [
-                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.settings.moderate',
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.moderate',
                         'value' => 'moderate',
                     ],
                     [
-                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.settings.conservative',
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.conservative',
+                        'value' => 'conservative',
+                    ],
+                ],
+            ], [
+                'name'    => 'prefetch_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.enabled',
+                'type'    => 'boolean',
+                'default' => false,
+            ], [
+                'name'    => 'prefetch_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls-info',
+                'type'    => 'textarea',
+                'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params-info',
+                'type'    => 'textarea',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness-info',
+                'type'    => 'select',
+                'default' => 'moderate',
+                'depends' => 'prefetch_enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eager',
+                        'value' => 'eager',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.moderate',
+                        'value' => 'moderate',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.conservative',
                         'value' => 'conservative',
                     ],
                 ],

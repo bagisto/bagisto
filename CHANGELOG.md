@@ -2,7 +2,65 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **Unreleased**
+## Unreleased
+
+* Fixed an issue in the installer where old values were being retained, causing the first attempt to fail. The installation now completes successfully on the first attempt.
+
+* Added missing event dispatches to ensure proper event flow and handling.
+
+* #10802 [fixed] - Removed default address handling from the repository and moved it to the controllers to prevent side effects across customer addresses in the admin panel, shop front, and checkout pages.
+
+## **v2.3.4 (29th of May 2025)** - *Release*
+
+* Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
+
+* Resolved the sort order issue for paginated attribute options on the category page.
+
+* Fixed the Spanish translation issue on the sidebar, which was caused by the translation key itself being translated.
+
+* Fixed the GDPR translation issue for all locales, which was previously falling back to the English locale.
+
+* Resolved the filter issue for date and datetime types in the DataGrid.
+
+* Fixed the date translation issue that was coming from the Carbon instance.
+
+* Resolved the "break-all" issue on the product view page.
+
+* Fixed the issue where the transaction drawer was not opening as expected.
+
+* Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
+
+* Fixed the multiselect filter and also added support for checkbox filters in both Elasticsearch and database modes.
+
+* Fixed the filter issue for boolean-type attributes in Elasticsearch mode.
+
+* #10788 [fixed] - Added a slight delay of 300ms along with a debounce mechanism to ensure that the dash is removed only after the user stops typing.
+
+* #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
+
+* #10718 [fixed] - Fixed the issue that allowed an admin to delete their own account.
+
+## **v2.3.3 (22nd of May 2025)** - *Release*
+
+* Resolved an issue with the category filter functionality.
+
+* Fixed an issue with search attributes on the category page.
+
+* Addressed a problem with category listings.
+
+* Corrected issues on the search page and toolbar.
+
+* #10784 [fixed] - Fixed store search issue caused by Full Page Cache (FPC).
+
+## **v2.3.2 (21st of May 2025)** - *Release*
+
+* Response cache is enabled by default.
+
+* Fetch priority added for the slider image and product view image.
+
+* Separate configuration provided for speculation APIs for both prerender and prefetch.
+
+* Searchable attributes added on the category view page.
 
 ## **v2.3.1 (14th of May 2025)** - *Release*
 

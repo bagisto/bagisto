@@ -15,11 +15,10 @@ class AttributeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'      => $this->id,
-            'code'    => $this->code,
-            'type'    => $this->type,
-            'name'    => $this->name ?? $this->admin_name,
-            'options' => AttributeOptionResource::collection($this->options),
+            'id'           => $this->id,
+            'code'         => $this->code,
+            'type'         => $this->type,
+            'name'         => $this->name ?? $this->admin_name,
         ];
     }
 }
