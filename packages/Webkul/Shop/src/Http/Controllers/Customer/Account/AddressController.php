@@ -65,6 +65,12 @@ class AddressController extends Controller
             'address'     => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
+        if (! empty($data['default_address'])) {
+            $this->customerAddressRepository->where('customer_id', $data['customer_id'])
+                ->where('default_address', 1)
+                ->update(['default_address' => 0]);
+        }
+
         $customerAddress = $this->customerAddressRepository->create($data);
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
