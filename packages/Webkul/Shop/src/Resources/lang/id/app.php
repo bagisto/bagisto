@@ -640,7 +640,7 @@ return [
                 'add-to-wishlist'        => 'Tambah ke Wishlist',
                 'already-in-compare'     => 'Item sudah ada dalam daftar perbandingan.',
                 'new'                    => 'Baru',
-                'review-description'     => '',
+                'review-description'     => 'Jadilah yang pertama mengulas produk ini.',
                 'sale'                   => 'Diskon',
             ],
 
@@ -856,7 +856,16 @@ return [
             'clear-all' => 'Hapus Semua',
             'filters'   => 'Filter:',
             'filter'    => 'Filter',
-            'sort'      => 'Urutkan',
+
+            'search' => [
+                'load-more'            => 'Muat Lebih Banyak',
+                'loading'              => 'Memuat...',
+                'no-options-available' => 'Tidak ada opsi yang tersedia.',
+                'results-info'         => 'Menampilkan :currentCount dari :totalCount opsi',
+                'title'                => 'Pencarian',
+            ],
+
+            'sort'      => 'Sort',
         ],
 
         'toolbar' => [
@@ -1263,10 +1272,10 @@ return [
             ],
 
             'refunded' => [
-                'greeting' => 'Pengembalian dana telah diproses untuk pesanan :order_id yang dibuat pada :created_at',
-                'subject'  => 'Konfirmasi Pengembalian Dana Baru',
-                'summary'  => 'Ringkasan Pengembalian Dana',
-                'title'    => 'Pesanan Dikembalikan!',
+                'greeting' => 'Refund has been initiated for the :order_id placed on :created_at',
+                'subject'  => 'New Refund Confirmation',
+                'summary'  => 'Summary of Refund',
+                'title'    => 'Order Refunded!',
             ],
 
             'canceled' => [
