@@ -1272,10 +1272,10 @@ return [
             ],
 
             'refunded' => [
-                'greeting' => 'Refund has been initiated for the :order_id placed on :created_at',
-                'subject'  => 'New Refund Confirmation',
-                'summary'  => 'Summary of Refund',
-                'title'    => 'Order Refunded!',
+                'greeting' => 'Pengembalian dana telah diproses untuk pesanan :order_id yang dibuat pada :created_at',
+                'subject'  => 'Konfirmasi Pengembalian Dana Baru',
+                'summary'  => 'Ringkasan Pengembalian Dana',
+                'title'    => 'Pesanan Dikembalikan!',
             ],
 
             'canceled' => [
