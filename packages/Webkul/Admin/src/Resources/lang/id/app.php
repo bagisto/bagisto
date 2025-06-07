@@ -3376,7 +3376,6 @@ return [
             'delete-warning'     => 'Apakah Anda yakin ingin melakukan tindakan ini?',
             'incorrect-password' => 'Kata sandi salah',
             'last-delete-error'  => 'Setidaknya satu admin dibutuhkan.',
-            'last-delete-error'  => 'Penghapusan pengguna terakhir gagal',
             'login-error'        => 'Periksa kredensial Anda dan coba lagi.',
             'update-success'     => 'Pengguna berhasil diperbarui.',
         ],
