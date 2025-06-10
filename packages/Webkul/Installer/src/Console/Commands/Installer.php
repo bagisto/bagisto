@@ -79,6 +79,7 @@ class Installer extends Command
         'fr'    => 'French',
         'he'    => 'Hebrew',
         'hi_IN' => 'Hindi',
+        'id'    => 'Indonesian',
         'it'    => 'Italian',
         'ja'    => 'Japanese',
         'nl'    => 'Dutch',
