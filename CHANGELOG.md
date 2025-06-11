@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+## **v2.2.9 (11th of June 2025)** - *Release*
+
 * Fixed an issue in the installer where old values were being retained, causing the first attempt to fail. The installation now completes successfully on the first attempt.
 
 * Added missing event dispatches to ensure proper event flow and handling.
