@@ -54,6 +54,10 @@ class SearchController extends Controller
      */
     public function upload()
     {
+        request()->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
+
         return $this->searchRepository->uploadSearchImage(request()->all());
     }
 }

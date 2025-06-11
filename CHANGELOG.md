@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Added missing event dispatches to ensure proper event flow and handling.
 
+* Added backend validation for image uploads in the image search feature.
+
 * #10802 [fixed] - Removed default address handling from the repository and moved it to the controllers to prevent side effects across customer addresses in the admin panel, shop front, and checkout pages.
 
 ## **v2.3.4 (29th of May 2025)** - *Release*
