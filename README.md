@@ -62,6 +62,25 @@ You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
 Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.webkul.com/bagisto-starter-pack.html), streamlining setup and integration for a seamless online store launch. Get ready to unlock success in the digital marketplace! 
 
+## ZYLVER.IN Project Customizations
+
+This fork of Bagisto has been customized for the ZYLVER.IN e-commerce store. The following modifications were made as part of Phase 2: Basic Configuration & Branding:
+
+*   **Store Setup:**
+    *   Created and configured the "ZYLVER.IN" sales channel.
+    *   Added "Indian Rupee (INR)" as a currency and set it as the default for the channel.
+    *   Updated store shipping origin information.
+    *   Disabled PHP Debug Bar (`APP_DEBUG=false` in `.env`).
+*   **Branding & Theme:**
+    *   Applied a custom color scheme: Olive Green (`#808000`), Gold (`#FFD700`), and White (`#FFFFFF`).
+    *   Uploaded placeholder logo and favicon for ZYLVER.IN.
+    *   Modified theme files directly (Tailwind config, CSS, and Blade templates) to reflect the new color scheme for buttons, header, footer, and other elements.
+    *   Resolved a Vite build issue related to `laravel-vite-plugin` to enable asset compilation.
+*   **Version Control:**
+    *   Changes related to this phase are tracked in the `feat/zylver-branding-phase2` branch and included in PR #1 targeting the `2.3` branch.
+    *   The `database/database.sqlite` file, containing channel and currency configurations, has been included in the version control for this project's setup.
+
+
 # Headless Commerce
 
 The power of headless laravel commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks (Vue and React), Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing-fast speed and easy customization powered by Vue Storefront and Next.js
