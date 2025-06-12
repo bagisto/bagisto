@@ -26,6 +26,23 @@
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
     
+
+<!-- ZYLVER.IN Custom Hero Section -->
+<div class="w-full bg-zylver-olive-green text-center py-20 lg:py-32">
+    <div class="container mx-auto px-4">
+        <h1 class="font-fraunces text-4xl lg:text-6xl text-zylver-cream mb-6">
+            Timeless Elegance, Modern Grace.
+        </h1>
+        <p class="font-lato text-lg lg:text-xl text-zylver-light-gold mb-10 max-w-2xl mx-auto">
+            Discover exquisite silver jewellery, crafted with passion and precision for the discerning eye.
+        </p>
+        <a href="{{ route('shop.shop.index') }}" class="secondary-button"> <!-- Link to all products / shop page -->
+            Explore Collections
+        </a>
+    </div>
+</div>
+<!-- End ZYLVER.IN Custom Hero Section -->
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
