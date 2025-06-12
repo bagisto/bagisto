@@ -340,7 +340,7 @@
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ "@lang('admin::app.catalog.products.edit.types.bundle.option.sku')".replace(':sku', element.product.sku) }}
+                                        @{{ `@lang('admin::app.catalog.products.edit.types.bundle.option.sku')`.replace(':sku', element.product.sku) }}
                                     </p>
                                 </div>
                             </div>
@@ -515,26 +515,26 @@
                     types: {
                         select: {
                             key: 'select',
-                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.title')',
-                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.info')'
+                            title: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.select.info')`
                         },
 
                         radio: {
                             key: 'radio',
-                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.title')',
-                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.info')'
+                            title: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.radio.info')`
                         },
 
                         multiselect: {
                             key: 'multiselect',
-                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.title')',
-                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.info')'
+                            title: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.multiselect.info')`
                         },
 
                         checkbox: {
                             key: 'checkbox',
-                            title: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.title')',
-                            info: '@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.info')'
+                            title: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.types.bundle.option.types.checkbox.info')`
                         }
                     },
                 }
@@ -579,7 +579,7 @@
                 updateIsDefault: function(updatedProductOption) {
                     this.option.bundle_option_products.forEach((productOption) => {
                         if (
-                            this.option.type == 'radio' 
+                            this.option.type == 'radio'
                             || this.option.type == 'select'
                         ) {
                             productOption.is_default = productOption.product.id == updatedProductOption.product.id ? 1 : 0;
