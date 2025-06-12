@@ -412,7 +412,7 @@
                             :class="{'mb-2': category.children && category.children.length}"
                         >
                             <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
-                                <a :href="category.url" class="text-base font-medium text-black">
+                                <a :href="category.url" class="text-base font-lato font-medium text-zylver-olive-green">
                                     @{{ category.name }}
                                 </a>
                             </div>
@@ -427,13 +427,13 @@
                                         class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200"
                                         @click="showThirdLevel(secondLevelCategory, category, $event)"
                                     >
-                                        <a :href="secondLevelCategory.url" class="text-sm font-normal">
+                                        <a :href="secondLevelCategory.url" class="text-sm font-lato text-zylver-text-primary">
                                             @{{ secondLevelCategory.name }}
                                         </a>
 
                                         <span
                                             v-if="secondLevelCategory.children && secondLevelCategory.children.length"
-                                            class="icon-arrow-right rtl:icon-arrow-left"
+                                            class="icon-arrow-right rtl:icon-arrow-left text-zylver-olive-green"
                                         ></span>
                                     </div>
                                 </div>
@@ -453,8 +453,8 @@
                             class="flex items-center justify-center gap-2 focus:outline-none"
                             aria-label="Go back"
                         >
-                            <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
-                            <div class="text-base font-medium text-black">
+                            <span class="icon-arrow-left rtl:icon-arrow-right text-lg text-zylver-olive-green"></span>
+                            <div class="text-base font-lato font-medium text-zylver-olive-green">
                                 @lang('shop::app.components.layouts.header.mobile.back-button')
                             </div>
                         </button>
@@ -469,7 +469,7 @@
                         >
                             <a
                                 :href="thirdLevelCategory.url"
-                                class="block py-2 text-sm transition-colors duration-200"
+                                class="block py-2 text-sm font-lato text-zylver-text-secondary transition-colors duration-200"
                             >
                                 @{{ thirdLevelCategory.name }}
                             </a>

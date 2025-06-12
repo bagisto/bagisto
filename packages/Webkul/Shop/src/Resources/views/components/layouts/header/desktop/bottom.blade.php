@@ -66,13 +66,13 @@
                     @lang('shop::app.components.layouts.header.desktop.bottom.search')
                 </label>
 
-                <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3"></div>
+                <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-2xl text-zylver-olive-green ltr:left-3 rtl:right-3"></div>
 
                 <input
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full rounded-lg border border-zylver-border-grey bg-zylver-cream px-11 py-3 text-sm font-lato text-zylver-text-primary placeholder:text-zylver-text-secondary transition-all hover:border-zylver-olive-green focus:border-zylver-olive-green"
                     minlength="{{ core()->getConfigData('catalog.products.search.min_query_length') }}"
                     maxlength="{{ core()->getConfigData('catalog.products.search.max_query_length') }}"
                     placeholder="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
@@ -282,20 +282,20 @@
             v-else-if="'{{ core()->getConfigData('general.design.categories.category_view') }}' !== 'sidebar'"
         >
             <div
-                class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-zylver-gold"
                 v-for="category in categories"
             >
                 <span>
                     <a
                         :href="category.url"
-                        class="inline-block px-5 uppercase"
+                        class="inline-block px-5 uppercase font-lato text-zylver-olive-green group-hover:text-zylver-gold"
                     >
                         @{{ category.name }}
                     </a>
                 </span>
 
                 <div
-                    class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
+                    class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-zylver-border-grey bg-zylver-cream p-9 opacity-0 shadow-lg transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
                     v-if="category.children && category.children.length"
                 >
                     <div class="flex justify-between gap-x-[70px]">
@@ -304,7 +304,7 @@
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
-                                <p class="font-medium text-navyBlue">
+                                <p class="font-fraunces font-medium text-zylver-olive-green">
                                     <a :href="secondLevelCategory.url">
                                         @{{ secondLevelCategory.name }}
                                     </a>
@@ -315,7 +315,7 @@
                                     v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-sm font-medium text-zinc-500"
+                                        class="text-sm font-lato text-zylver-text-secondary hover:text-zylver-gold"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
                                         <a :href="thirdLevelCategory.url">
@@ -336,11 +336,11 @@
             <div class="flex items-center">
                 <!-- "All" button for opening the category drawer -->
                 <div
-                    class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                    class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-zylver-gold"
                     @click="toggleCategoryDrawer"
                 >
-                    <span class="flex items-center gap-1 px-5 uppercase">
-                        <span class="icon-hamburger text-xl"></span>
+                    <span class="flex items-center gap-1 px-5 uppercase font-lato text-zylver-olive-green group-hover:text-zylver-gold">
+                        <span class="icon-hamburger text-xl text-zylver-olive-green group-hover:text-zylver-gold"></span>
 
                         @lang('shop::app.components.layouts.header.desktop.bottom.all')
                     </span>
@@ -348,13 +348,13 @@
 
                 <!-- Show only first 4 categories in main navigation -->
                 <div
-                    class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                    class="group relative flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-zylver-gold"
                     v-for="category in categories.slice(0, 4)"
                 >
                     <span>
                         <a
                             :href="category.url"
-                            class="inline-block px-5 uppercase"
+                            class="inline-block px-5 uppercase font-lato text-zylver-olive-green group-hover:text-zylver-gold"
                         >
                             @{{ category.name }}
                         </a>
@@ -362,7 +362,7 @@
 
                     <!-- Dropdown for each category -->
                     <div
-                        class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
+                        class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-zylver-border-grey bg-zylver-cream p-9 opacity-0 shadow-lg transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
                         v-if="category.children && category.children.length"
                     >
                         <div class="flex justify-between gap-x-[70px]">
@@ -371,7 +371,7 @@
                                 v-for="pairCategoryChildren in pairCategoryChildren(category)"
                             >
                                 <template v-for="secondLevelCategory in pairCategoryChildren">
-                                    <p class="font-medium text-navyBlue">
+                                    <p class="font-fraunces font-medium text-zylver-olive-green">
                                         <a :href="secondLevelCategory.url">
                                             @{{ secondLevelCategory.name }}
                                         </a>
@@ -382,7 +382,7 @@
                                         v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                     >
                                         <li
-                                            class="text-sm font-medium text-zinc-500"
+                                            class="text-sm font-lato text-zylver-text-secondary hover:text-zylver-gold"
                                             v-for="thirdLevelCategory in secondLevelCategory.children"
                                         >
                                             <a :href="thirdLevelCategory.url">
