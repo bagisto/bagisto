@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
+/*
 @font-face {
     font-family: 'Canela';
-    src: url('../fonts/Canela-Regular.woff2') format('woff2'), /* Update with actual file names if different */
-         url('../fonts/Canela-Regular.woff') format('woff');   /* Update with actual file names if different */
+    src: url('../fonts/Canela-Regular.woff2') format('woff2'),
+         url('../fonts/Canela-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
+*/
 
 /* Add other weights/styles for Canela if available and placed in ../fonts/ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -395,7 +399,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    @apply font-canela text-zylver-olive-green;
+    @apply font-fraunces text-zylver-olive-green;
 }
 
     .scrollbar-hide::-webkit-scrollbar {

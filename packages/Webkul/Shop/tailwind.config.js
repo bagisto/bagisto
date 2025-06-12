@@ -43,7 +43,7 @@ module.exports = {
 
             fontFamily: {
                 lato: ["Lato", "sans-serif"],
-                canela: ["Canela", "serif"],
+                fraunces: ["Fraunces", "serif"],
             },
         }
     },
