@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+@font-face {
+    font-family: 'Canela';
+    src: url('../fonts/Canela-Regular.woff2') format('woff2'), /* Update with actual file names if different */
+         url('../fonts/Canela-Regular.woff') format('woff');   /* Update with actual file names if different */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Add other weights/styles for Canela if available and placed in ../fonts/ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -374,8 +387,16 @@ img.lazy {
     }
 
     * {
-        @apply box-border font-poppins;
+        @apply box-border;
     }
+
+body {
+    @apply font-lato bg-zylver-cream text-zylver-text-primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply font-canela text-zylver-olive-green;
+}
 
     .scrollbar-hide::-webkit-scrollbar {
         display: none;
@@ -433,11 +454,11 @@ img.lazy {
     }
 
     .primary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-olive border border-olive px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-lato font-semibold rounded-xl text-zylver-white bg-zylver-olive-green border border-zylver-olive-green px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-opacity-90;
     }
     
     .secondary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-olive border border-olive px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-olive hover:text-white;
+        @apply flex gap-x-1.5 items-center place-content-center font-lato font-semibold rounded-xl bg-zylver-white text-zylver-olive-green border border-zylver-olive-green px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-zylver-olive-green hover:text-zylver-white;
     }
 
     .shimmer {

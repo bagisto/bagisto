@@ -29,18 +29,21 @@ module.exports = {
 
         extend: {
             colors: {
-                navyBlue: "#060C3B",
-                lightOrange: "#F6F2EB",
-                darkGreen: '#40994A',
-                darkBlue: '#0044F2',
-                darkPink: '#F85156',
-                'olive': '#808000',
-                'gold': '#FFD700',
+                'zylver-olive-green': '#556B2F',
+                'zylver-gold': '#B08D57',
+                'zylver-light-gold': '#D4C1A9',
+                'zylver-white': '#FFFFFF',
+                'zylver-cream': '#F8F6F0',
+                'zylver-text-primary': '#212529',
+                'zylver-text-secondary': '#495057',
+                'zylver-border-grey': '#DEE2E6',
+                'zylver-error': '#DC3545',
+                'zylver-success': '#198754',
             },
 
             fontFamily: {
-                poppins: ["Poppins"],
-                dmserif: ["DM Serif Display"],
+                lato: ["Lato", "sans-serif"],
+                canela: ["Canela", "serif"],
             },
         }
     },
