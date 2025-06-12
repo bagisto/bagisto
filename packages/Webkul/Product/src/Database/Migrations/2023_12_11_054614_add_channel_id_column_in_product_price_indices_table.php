@@ -15,8 +15,8 @@ return new class extends Migration
         $tablePrefix = DB::getTablePrefix();
 
         Schema::table('product_price_indices', function (Blueprint $table) use ($tablePrefix) {
-            $table->dropForeign($tablePrefix.'product_price_indices_product_id_foreign');
-            $table->dropForeign($tablePrefix.'product_price_indices_customer_group_id_foreign');
+            // $table->dropForeign($tablePrefix.'product_price_indices_product_id_foreign');
+            // $table->dropForeign($tablePrefix.'product_price_indices_customer_group_id_foreign');
             $table->dropUnique($tablePrefix.'product_price_indices_product_id_customer_group_id_unique');
 
             $table->integer('channel_id')->unsigned()->default(1)->after('customer_group_id');

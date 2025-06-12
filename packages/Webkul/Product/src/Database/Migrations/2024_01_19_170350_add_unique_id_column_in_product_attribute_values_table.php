@@ -16,7 +16,7 @@ return new class extends Migration
         });
 
         DB::table('product_attribute_values')
-            ->update(['unique_id' => DB::raw("CONCAT_WS('|', channel, locale, product_id, attribute_id)")]);
+            ->update(['unique_id' => DB::raw("channel || '|' || locale || '|' || product_id || '|' || attribute_id")]);
     }
 
     /**

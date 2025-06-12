@@ -15,6 +15,7 @@ class ChannelTableSeeder extends Seeder
      */
     public function run($parameters = [])
     {
+        DB::statement('PRAGMA foreign_keys = OFF;');
         DB::table('channels')->delete();
 
         DB::table('channel_translations')->delete();
@@ -84,5 +85,7 @@ class ChannelTableSeeder extends Seeder
             'channel_id'          => 1,
             'inventory_source_id' => 1,
         ]);
+
+        DB::statement('PRAGMA foreign_keys = ON;');
     }
 }

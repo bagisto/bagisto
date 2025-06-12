@@ -16,7 +16,7 @@ return new class extends Migration
         });
 
         DB::table('product_customer_group_prices')
-            ->update(['unique_id' => DB::raw("CONCAT_WS('|', qty, product_id, customer_group_id)")]);
+            ->update(['unique_id' => DB::raw("qty || '|' || product_id || '|' || customer_group_id")]);
     }
 
     /**
