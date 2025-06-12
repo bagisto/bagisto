@@ -43,6 +43,11 @@
 </div>
 <!-- End ZYLVER.IN Custom Hero Section -->
 
+    <!-- ZYLVER.IN Brand Storytelling Section -->
+    <x-shop::components.home.brand-story/>
+    <!-- End ZYLVER.IN Brand Storytelling Section -->
+
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
