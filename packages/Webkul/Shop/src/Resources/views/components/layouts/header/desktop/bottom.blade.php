@@ -109,7 +109,7 @@
                     aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')"
                 >
                     <span
-                        class="icon-compare inline-block cursor-pointer text-2xl"
+                        class="icon-compare inline-block cursor-pointer text-2xl text-zylver-olive-green hover:text-zylver-gold"
                         role="presentation"
                     ></span>
                 </a>
@@ -132,7 +132,7 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
-                        class="icon-users inline-block cursor-pointer text-2xl"
+                        class="icon-users inline-block cursor-pointer text-2xl text-zylver-olive-green hover:text-zylver-gold"
                         role="button"
                         aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')"
                         tabindex="0"
