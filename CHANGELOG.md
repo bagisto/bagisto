@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* #10782 [fixed] - Resolved an issue where the "Bundle Items" section was not visible while creating a Bundle Product in the French locale (APP_LOCALE=fr). This was caused by unescaped apostrophes in translatable strings breaking JavaScript during rendering.
+
 ## **v2.3.5 (11th of June 2025)** - *Release*
 
 * Added support for the Indonesian language.
