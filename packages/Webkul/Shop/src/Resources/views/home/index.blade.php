@@ -48,6 +48,11 @@
     <!-- End ZYLVER.IN Brand Storytelling Section -->
 
 
+    <!-- ZYLVER.IN Featured Collections Section -->
+    <x-shop::components.home.featured-collections/>
+    <!-- End ZYLVER.IN Featured Collections Section -->
+
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
