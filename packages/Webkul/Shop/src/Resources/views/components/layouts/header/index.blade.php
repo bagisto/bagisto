@@ -6,7 +6,7 @@
     </div>
 @endif
 
-<header class="shadow-gray sticky top-0 z-10 bg-white shadow-sm max-lg:shadow-none">
+<header class="sticky top-0 z-10 bg-zylver-white border-b border-zylver-border-grey">
     <x-shop::layouts.header.desktop />
 
     <x-shop::layouts.header.mobile />

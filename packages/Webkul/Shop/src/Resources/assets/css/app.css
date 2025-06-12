@@ -553,3 +553,8 @@ h1, h2, h3, h4, h5, h6 {
         @apply ltr:left-1/2 rtl:right-1/2 ltr:translate-x-1/2 rtl:translate-x-[-50%] opacity-100;
     }
 }
+
+/* Custom style for mobile header profile icon in dropdown */
+.max-md\:hidden .icon-users {
+    color: #556B2F; /* zylver-olive-green */
+}

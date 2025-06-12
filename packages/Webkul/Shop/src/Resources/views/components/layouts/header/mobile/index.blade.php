@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
-<div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
+<div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 lg:hidden">
     <div class="flex w-full items-center justify-between">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
@@ -47,7 +47,7 @@
                         href="{{ route('shop.compare.index') }}"
                         aria-label="@lang('shop::app.components.layouts.header.mobile.compare')"
                     >
-                        <span class="icon-compare cursor-pointer text-2xl"></span>
+                        <span class="icon-compare cursor-pointer text-2xl text-zylver-olive-green"></span>
                     </a>
                 @endif
 
@@ -182,7 +182,7 @@
                             href="{{ route('shop.customer.session.create') }}"
                             aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
-                            <span class="icon-users cursor-pointer text-2xl"></span>
+                            <span class="icon-users cursor-pointer text-2xl text-zylver-olive-green"></span>
                         </a>
                     @endguest
 
@@ -192,7 +192,7 @@
                             href="{{ route('shop.customers.account.index') }}"
                             aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
-                            <span class="icon-users cursor-pointer text-2xl"></span>
+                            <span class="icon-users cursor-pointer text-2xl text-zylver-olive-green"></span>
                         </a>
                     @endauth
                 </div>
@@ -212,11 +212,11 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl text-zylver-olive-green max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                class="block w-full rounded-xl border border-zylver-border-grey bg-zylver-white px-11 py-3.5 text-sm font-lato text-zylver-text-primary placeholder:text-zylver-text-secondary focus:border-zylver-olive-green focus:ring-zylver-olive-green max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
@@ -240,7 +240,7 @@
             @close="onDrawerClose"
         >
             <x-slot:toggle>
-                <span class="icon-hamburger cursor-pointer text-2xl"></span>
+                <span class="icon-hamburger cursor-pointer text-2xl text-zylver-olive-green"></span>
             </x-slot>
 
             <x-slot:header>
@@ -258,8 +258,8 @@
 
             <x-slot:content class="!p-0">
                 <!-- Account Profile Hero Section -->
-                <div class="border-b border-zinc-200 p-4">
-                    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
+                <div class="border-b border-zylver-border-grey p-4">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zylver-border-grey p-2.5">
                         <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -270,19 +270,19 @@
                         @guest('customer')
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="flex text-base font-medium"
+                                class="flex text-base font-lato font-medium text-zylver-olive-green"
                             >
                                 @lang('shop::app.components.layouts.header.mobile.login')
 
-                                <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
+                                <i class="icon-double-arrow text-2xl text-zylver-olive-green ltr:ml-2.5 rtl:mr-2.5"></i>
                             </a>
                         @endguest
 
                         @auth('customer')
                             <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
-                                <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="font-fraunces break-all text-2xl text-zylver-olive-green max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-zinc-500 no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
+                                <p class="text-zylver-text-secondary font-lato no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
