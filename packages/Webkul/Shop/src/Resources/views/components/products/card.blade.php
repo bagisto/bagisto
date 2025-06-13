@@ -83,7 +83,11 @@
 
                 <!-- Quick View (Placeholder for future implementation) -->
                 <div class="mt-2 opacity-0 transition-opacity group-hover:opacity-100">
-                    <button class="font-lato text-sm text-zylver-olive-green/80 hover:text-zylver-gold">
+                    <button
+                        type="button"
+                        class="font-lato text-sm text-zylver-olive-green/80 hover:text-zylver-gold"
+                        @click="openQuickView()"
+                    >
                         Quick View
                     </button>
                 </div>
@@ -240,6 +244,81 @@
         </div>
     </script>
 
+        <!-- Quick View Modal -->
+        <div
+            v-if="isQuickViewOpen"
+            class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
+            @click.self="closeQuickView" <!-- Close on overlay click -->
+        >
+            <div class="relative w-full max-w-4xl rounded-lg bg-zylver-white p-6 shadow-xl max-h-[90vh] overflow-y-auto md:p-8">
+                <!-- Close Button -->
+                <button
+                    class="absolute top-4 right-4 z-10 text-2xl text-zylver-olive-green/70 hover:text-zylver-olive-green"
+                    @click="closeQuickView"
+                    aria-label="Close Quick View"
+                >
+                    <span class="icon-cancel"></span>
+                </button>
+
+                <!-- Modal Content (Static Placeholder) -->
+                <div v-if="product" class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+                    <!-- Image Placeholder -->
+                    <div class="aspect-square w-full rounded-md bg-zylver-cream">
+                        <img v-if="product.base_image && product.base_image.large_image_url" :src="product.base_image.large_image_url" :alt="product.name" class="h-full w-full rounded-md object-cover"/>
+                        <div v-else class="flex h-full w-full items-center justify-center">
+                            <span class="icon-placeholder text-6xl text-zylver-olive-green/30"></span>
+                        </div>
+                    </div>
+
+                    <!-- Info Placeholder -->
+                    <div>
+                        <h2 class="font-fraunces text-2xl text-zylver-olive-green md:text-3xl">
+                            @{{ product.name }}
+                        </h2>
+
+                        <div class="mt-2 font-lato text-xl font-semibold text-zylver-olive-green md:text-2xl" v-html="product.price_html">
+                        </div>
+
+                        <p class="mt-4 font-lato text-sm text-zylver-olive-green/80">
+                            <!-- Placeholder for short description. Actual description will require more advanced data fetching or passing. -->
+                            Discover the elegance of this exquisite piece, crafted with the finest materials and attention to detail.
+                        </p>
+
+                        <!-- Options/Variants Placeholder -->
+                        <div class="mt-6">
+                            <h3 class="font-fraunces text-lg text-zylver-olive-green">Options</h3>
+                            <div class="mt-2 space-y-2">
+                                <p class="font-lato text-sm text-zylver-olive-green/80">Size: Default (More options on product page)</p>
+                                <p class="font-lato text-sm text-zylver-olive-green/80">Material: As Described (More options on product page)</p>
+                            </div>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <button
+                            class="primary-button mt-6 w-full bg-zylver-olive-green py-3 text-zylver-cream hover:bg-zylver-gold hover:text-zylver-olive-green"
+                            @click="addToCart()"
+                            :disabled="!product.is_saleable || isAddingToCart"
+                        >
+                            <template v-if="isAddingToCart">
+                                Adding...
+                            </template>
+                            <template v-else>
+                                Add to Cart
+                            </template>
+                        </button>
+
+                        <a
+                            :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
+                            class="mt-3 block text-center font-lato text-sm text-zylver-olive-green/80 hover:text-zylver-gold"
+                        >
+                            View Full Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <script type="module">
         app.component('v-product-card', {
             template: '#v-product-card-template',
@@ -251,10 +330,25 @@
                     isCustomer: '{{ auth()->guard('customer')->check() }}',
 
                     isAddingToCart: false,
+
+                    isQuickViewOpen: false,
                 }
             },
 
             methods: {
+
+                openQuickView() {
+                    this.isQuickViewOpen = true;
+                    // Optional: Prevent body scroll when modal is open
+                    document.body.style.overflow = 'hidden';
+                },
+
+                closeQuickView() {
+                    this.isQuickViewOpen = false;
+                    // Optional: Restore body scroll
+                    document.body.style.overflow = '';
+                },
+
                 addToWishlist() {
                     if (this.isCustomer) {
                         this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
