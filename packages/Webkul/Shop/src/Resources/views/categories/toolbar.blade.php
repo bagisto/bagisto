@@ -102,8 +102,8 @@
             <div class="md:hidden">
                 <ul>
                     <li
-                        class="px-4 py-2.5"
-                        :class="{'bg-gray-100': sort.value == filters.applied.sort}"
+                        class="block w-full cursor-pointer px-6 py-3 font-lato text-sm text-zylver-olive-green hover:bg-zylver-border-grey/20"
+                        :class="{'!bg-zylver-border-grey/40 text-zylver-gold font-semibold': sort.value == filters.applied.sort}"
                         v-for="(sort, key) in filters.available.sort"
                         @click="apply('sort', sort.value)"
                     >

@@ -19,7 +19,7 @@
 
     @isset($menu)
         <template v-slot:menu>
-            <ul {{ $menu->attributes->merge(['class' => 'py-4']) }}>
+            <ul {{ $menu->attributes->merge(['class' => 'py-2']) }}>
                 {{ $menu }}
             </ul>
         </template>
@@ -51,7 +51,7 @@
                 leave-to-class="scale-95 transform opacity-0"
             >
                 <div
-                    class="absolute z-20 w-max rounded-[20px] bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] max-md:rounded-lg"
+                    class="absolute z-20 w-max rounded-lg border border-zylver-border-grey bg-zylver-white shadow-lg"
                     :style="positionStyles"
                     v-show="isActive"
                 >

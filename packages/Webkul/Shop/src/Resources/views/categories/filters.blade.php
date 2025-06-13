@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Navigation -->
 <div
-    class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
+    class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zylver-border-grey bg-zylver-white px-4 ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                class="flex cursor-pointer items-center gap-x-2 py-3.5 font-lato text-sm font-medium uppercase tracking-wider text-zylver-olive-green hover:text-zylver-gold"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-2xl"></span>
@@ -38,12 +38,12 @@
         <!-- Drawer Header -->
         <x-slot:header>
             <div class="flex items-center justify-between">
-                <p class="text-lg font-semibold">
+                <p class="font-fraunces text-xl font-medium text-zylver-olive-green">
                     @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p
-                    class="cursor-pointer text-sm font-medium ltr:mr-[50px] rtl:ml-[50px]"
+                    class="cursor-pointer font-lato text-sm font-medium text-zylver-olive-green/80 hover:text-zylver-gold ltr:mr-4 rtl:ml-4"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                class="flex cursor-pointer items-center gap-x-2 py-3.5 font-lato text-sm font-medium uppercase tracking-wider text-zylver-olive-green hover:text-zylver-gold"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>
@@ -88,7 +88,7 @@
         <!-- Drawer Header -->
         <x-slot:header>
             <div class="flex items-center justify-between">
-                <p class="text-lg font-semibold">
+                <p class="font-fraunces text-xl font-medium text-zylver-olive-green">
                     @lang('shop::app.categories.filters.sort')
                 </p>
             </div>

@@ -295,7 +295,7 @@
 
                         <!-- Add to Cart Button -->
                         <button
-                            class="primary-button mt-6 w-full bg-zylver-olive-green py-3 text-zylver-cream hover:bg-zylver-gold hover:text-zylver-olive-green"
+                            class="mt-6 w-full rounded-md bg-zylver-gold py-3 px-6 font-lato text-sm font-semibold uppercase tracking-wider text-zylver-olive-green shadow-sm transition-all duration-300 ease-in-out hover:bg-zylver-olive-green hover:text-zylver-cream hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zylver-gold focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
                             @click="addToCart()"
                             :disabled="!product.is_saleable || isAddingToCart"
                         >
