@@ -23,13 +23,9 @@
                 >
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
-                        <button class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white p-3.5 text-base transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-md:border-0 max-md:pl-2.5 max-md:pr-2.5">
-                            @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
-
-                            <span
-                                class="icon-arrow-down text-2xl"
-                                role="presentation"
-                            ></span>
+                        <button class="flex items-center gap-x-2 font-lato text-sm font-medium text-zylver-olive-green/80 hover:text-zylver-olive-green">
+                            <span>@{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}</span>
+                            <span class="icon-arrow-down text-2xl"></span>
                         </button>
                     </x-slot>
 
@@ -55,13 +51,9 @@
                     <x-shop::dropdown position="bottom-right">
                         <x-slot:toggle>
                             <!-- Dropdown Toggler -->
-                            <button class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white p-3.5 text-base transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-md:border-0 max-md:pl-2.5 max-md:pr-2.5">
-                                @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
-
-                                <span
-                                    class="icon-arrow-down text-2xl"
-                                    role="presentation"
-                                ></span>
+                            <button class="flex items-center gap-x-2 font-lato text-sm font-medium text-zylver-olive-green/80 hover:text-zylver-olive-green">
+                                <span>@{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}</span>
+                                <span class="icon-arrow-down text-2xl"></span>
                             </button>
                         </x-slot>
 
@@ -78,25 +70,27 @@
                     </x-shop::dropdown>
 
                     <!-- Listing Mode Switcher -->
-                    <div class="flex items-center gap-5">
+                    <div class="flex items-center gap-x-4">
                         <span
-                            class="cursor-pointer text-2xl"
+                            class="cursor-pointer text-2xl text-zylver-olive-green/60 hover:text-zylver-olive-green"
                             role="button"
                             aria-label="@lang('shop::app.categories.toolbar.list')"
                             tabindex="0"
-                            :class="(filters.applied.mode === 'list') ? 'icon-listing-fill' : 'icon-listing'"
+                            :class="{'text-zylver-olive-green': (filters.applied.mode === 'list')}"
                             @click="changeMode('list')"
                         >
+                            <i class="icon-listing"></i>
                         </span>
 
                         <span
-                            class="cursor-pointer text-2xl"
+                            class="cursor-pointer text-2xl text-zylver-olive-green/60 hover:text-zylver-olive-green"
                             role="button"
                             aria-label="@lang('shop::app.categories.toolbar.grid')"
                             tabindex="0"
-                            :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
+                            :class="{'text-zylver-olive-green': (filters.applied.mode === 'grid')}"
                             @click="changeMode('grid')"
                         >
+                            <i class="icon-grid-view"></i>
                         </span>
                     </div>
                 </div>

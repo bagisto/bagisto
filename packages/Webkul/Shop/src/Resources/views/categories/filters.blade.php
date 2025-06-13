@@ -118,13 +118,13 @@
         <template v-else>
             <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[342px] md:ltr:pr-7 md:rtl:pl-7">
                 <!-- Filters Header Container -->
-                <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
-                    <p class="text-lg font-semibold max-sm:font-medium">
+                <div class="flex items-center justify-between border-b border-zylver-border-grey py-4 max-md:hidden">
+                    <p class="font-fraunces text-2xl font-medium text-zylver-olive-green">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
                     <p
-                        class="cursor-pointer text-xs font-medium"
+                        class="cursor-pointer font-lato text-sm font-medium text-zylver-olive-green/80 hover:text-zylver-gold"
                         tabindex="0"
                         @click="clear()"
                     >
@@ -152,9 +152,9 @@
     >
         <x-shop::accordion class="last:border-b-0">
             <!-- Filter Item Header -->
-            <x-slot:header class="px-0 py-2.5 max-sm:!pb-1.5">
+            <x-slot:header class="!py-5">
                 <div class="flex items-center justify-between">
-                    <p class="text-lg font-semibold max-sm:text-base max-sm:font-medium">
+                    <p class="font-fraunces text-xl text-zylver-olive-green">
                         @{{ filter.name }}
                     </p>
                 </div>
@@ -223,22 +223,15 @@
                                     />
 
                                     <label
-                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
+                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-zylver-olive-green/60 peer-checked:text-zylver-gold"
                                         role="checkbox"
-                                        aria-checked="false"
-                                        :aria-label="option.name"
-                                        :aria-labelledby="'label_option_' + option.id"
-                                        tabindex="0"
                                         :for="`filter_${filter.id}_option_ ${option.id}`"
                                     >
                                     </label>
 
                                     <label
-                                        class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
-                                        :id="'label_option_' + option.id"
+                                        class="cursor-pointer font-lato text-zylver-olive-green"
                                         :for="`filter_${filter.id}_option_ ${option.id}`"
-                                        role="button"
-                                        tabindex="0"
                                     >
                                         @{{ option.name }}
                                     </label>

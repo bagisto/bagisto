@@ -40,17 +40,25 @@
 
     {!! view_render_event('bagisto.shop.categories.view.banner_path.after') !!}
 
-    {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
 
-    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
-        @if ($category->description)
-            <div class="container mt-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
-                {!! $category->description !!}
-            </div>
+    <!-- Category Header -->
+    <div class="container px-4 sm:px-6 lg:px-8 mt-8 md:mt-12 text-center">
+        {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
+
+        <h1 class="text-3xl md:text-4xl font-fraunces text-zylver-olive-green">
+            {{ $category->name }}
+        </h1>
+
+        @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
+            @if ($category->description)
+                <div class="prose max-w-3xl mx-auto mt-4 font-lato text-zylver-olive-green/80">
+                    {!! $category->description !!}
+                </div>
+            @endif
         @endif
-    @endif
 
-    {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
+        {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
+    </div>
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
         <!-- Category Vue Component -->
@@ -65,8 +73,8 @@
             type="text/x-template"
             id="v-category-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
+            <div class="container px-4 sm:px-6 lg:px-8">
+                <div class="flex items-start gap-x-8 md:mt-12">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -134,7 +142,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -164,6 +172,7 @@
                             {!! view_render_event('bagisto.shop.categories.view.grid.product_card.after') !!}
                         </div>
 
+                        {{--
                         {!! view_render_event('bagisto.shop.categories.view.load_more_button.before') !!}
 
                         <!-- Load More Button -->
@@ -188,6 +197,7 @@
                         </button>
 
                         {!! view_render_event('bagisto.shop.categories.view.grid.load_more_button.after') !!}
+                        --}}
                     </div>
                 </div>
             </div>
