@@ -108,19 +108,20 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
-                                        <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
-                                            src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="@lang('shop::app.categories.view.empty')"
-                                        />
-
-                                        <p
-                                            class="text-xl max-md:text-sm"
-                                            role="heading"
-                                        >
-                                            @lang('shop::app.categories.view.empty')
+                                    <div class="flex flex-col items-center justify-center w-full py-20 sm:py-24 text-center border border-dashed border-zylver-border-grey rounded-lg bg-zylver-cream/50">
+                                        <span class="icon-jewelry-box text-6xl text-zylver-olive-green/30 mb-4" aria-hidden="true"></span> <!-- Placeholder icon, e.g., a jewelry box or magnifying glass -->
+                                        <h3 class="font-fraunces text-2xl text-zylver-olive-green mb-2">
+                                            No Treasures Found
+                                        </h3>
+                                        <p class="font-lato text-sm text-zylver-olive-green/80 mb-6 max-w-xs mx-auto">
+                                            We couldn't find any products matching your current selection. Try adjusting your filters or explore other categories.
                                         </p>
+                                        <a
+                                            href="{{ route('shop.home.index') }}"
+                                            class="rounded-md bg-zylver-gold py-2.5 px-6 font-lato text-sm font-semibold uppercase tracking-wider text-zylver-olive-green shadow-sm transition-all duration-300 ease-in-out hover:bg-zylver-olive-green hover:text-zylver-cream hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zylver-gold focus:ring-opacity-50"
+                                        >
+                                            Explore Our Collections
+                                        </a>
                                     </div>
                                 </template>
                             </template>
@@ -152,19 +153,20 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
-                                        <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
-                                            src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="@lang('shop::app.categories.view.empty')"
-                                        />
-
-                                        <p
-                                            class="text-xl max-md:text-sm"
-                                            role="heading"
-                                        >
-                                            @lang('shop::app.categories.view.empty')
+                                    <div class="flex flex-col items-center justify-center w-full py-20 sm:py-24 text-center border border-dashed border-zylver-border-grey rounded-lg bg-zylver-cream/50">
+                                        <span class="icon-jewelry-box text-6xl text-zylver-olive-green/30 mb-4" aria-hidden="true"></span> <!-- Placeholder icon, e.g., a jewelry box or magnifying glass -->
+                                        <h3 class="font-fraunces text-2xl text-zylver-olive-green mb-2">
+                                            No Treasures Found
+                                        </h3>
+                                        <p class="font-lato text-sm text-zylver-olive-green/80 mb-6 max-w-xs mx-auto">
+                                            We couldn't find any products matching your current selection. Try adjusting your filters or explore other categories.
                                         </p>
+                                        <a
+                                            href="{{ route('shop.home.index') }}"
+                                            class="rounded-md bg-zylver-gold py-2.5 px-6 font-lato text-sm font-semibold uppercase tracking-wider text-zylver-olive-green shadow-sm transition-all duration-300 ease-in-out hover:bg-zylver-olive-green hover:text-zylver-cream hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zylver-gold focus:ring-opacity-50"
+                                        >
+                                            Explore Our Collections
+                                        </a>
                                     </div>
                                 </template>
                             </template>
