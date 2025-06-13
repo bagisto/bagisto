@@ -178,7 +178,7 @@
                         <template v-if="!isLoading && products.length">
                             {!! view_render_event('bagisto.shop.categories.view.pagination.before') !!}
 
-                            <x-shop::components.pagination
+                            <x-shop::pagination
                                 ::meta="meta"
                                 on-page-change-method-name="handlePageChange"
                             />
