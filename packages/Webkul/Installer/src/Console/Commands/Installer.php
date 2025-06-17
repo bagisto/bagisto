@@ -27,7 +27,9 @@ class Installer extends Command
      */
     protected $signature = 'bagisto:install
         { --skip-env-check : Skip env check. }
-        { --skip-admin-creation : Skip admin creation. }';
+        { --skip-admin-creation : Skip admin creation. }
+        { --skip-github-star : Skip GitHub star prompt. }
+    ';
 
     /**
      * The console command description.
@@ -213,7 +215,9 @@ class Installer extends Command
         $this->warn('Step: Clearing cached bootstrap files...');
         $this->call('optimize:clear');
 
-        $this->askForGithubStar();
+        if (! $this->option('skip-github-star')) {
+            $this->askForGithubStar();
+        }
 
         ComposerEvents::postCreateProject();
     }
