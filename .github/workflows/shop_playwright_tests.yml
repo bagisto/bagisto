@@ -76,7 +76,7 @@ jobs:
         run: composer install
 
       - name: Running Bagisto Installer
-        run: php artisan bagisto:install --skip-env-check --skip-admin-creation
+        run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Seed Product Table
         run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"

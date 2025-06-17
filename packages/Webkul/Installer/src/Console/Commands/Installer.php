@@ -27,7 +27,9 @@ class Installer extends Command
      */
     protected $signature = 'bagisto:install
         { --skip-env-check : Skip env check. }
-        { --skip-admin-creation : Skip admin creation. }';
+        { --skip-admin-creation : Skip admin creation. }
+        { --skip-github-star : Skip GitHub star prompt. }
+    ';
 
     /**
      * The console command description.
@@ -214,6 +216,10 @@ class Installer extends Command
 
         $this->warn('Step: Clearing cached bootstrap files...');
         $this->call('optimize:clear');
+
+        if (! $this->option('skip-github-star')) {
+            $this->askForGithubStar();
+        }
 
         ComposerEvents::postCreateProject();
     }
@@ -645,5 +651,29 @@ class Installer extends Command
             'default_currency'   => $this->envDetails['APP_CURRENCY'] ?? $this->getEnvVariable('APP_CURRENCY', 'USD'),
             'allowed_currencies' => $this->envDetails['APP_ALLOWED_CURRENCIES'] ?? [$this->getEnvVariable('APP_CURRENCY', 'USD')],
         ];
+    }
+
+    /**
+     * Ask user to star the GitHub repository.
+     */
+    protected function askForGithubStar(): void
+    {
+        if (! $this->confirm('Would you like to star our repo on GitHub?')) {
+            return;
+        }
+
+        $repoUrl = 'https://github.com/bagisto/bagisto';
+
+        if (PHP_OS_FAMILY == 'Darwin') {
+            exec("open {$repoUrl}");
+        }
+
+        if (PHP_OS_FAMILY == 'Windows') {
+            exec("start {$repoUrl}");
+        }
+
+        if (PHP_OS_FAMILY == 'Linux') {
+            exec("xdg-open {$repoUrl}");
+        }
     }
 }
