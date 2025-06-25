@@ -85,6 +85,12 @@ class ChannelController extends Controller
 
         $channel = $this->channelRepository->create($data);
 
+        if ($channel->is_maintenance_on) {
+            app()->maintenanceMode()->activate([]);
+        } else {
+            app()->maintenanceMode()->deactivate();
+        }
+
         Event::dispatch('core.channel.create.after', $channel);
 
         session()->flash('success', trans('admin::app.settings.channels.create.create-success'));
@@ -151,6 +157,12 @@ class ChannelController extends Controller
         Event::dispatch('core.channel.update.before', $id);
 
         $channel = $this->channelRepository->update($data, $id);
+
+        if ($channel->is_maintenance_on) {
+            app()->maintenanceMode()->activate([]);
+        } else {
+            app()->maintenanceMode()->deactivate();
+        }
 
         Event::dispatch('core.channel.update.after', $channel);
 

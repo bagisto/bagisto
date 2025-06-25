@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
@@ -134,6 +135,13 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.catalog.products.index.datagrid.image'),
             'type'       => 'string',
             'exportable' => false,
+            'closure'    => function ($row) {
+                if (! $row->base_image) {
+                    return;
+                }
+
+                return Storage::url($row->base_image);
+            },
         ]);
 
         $this->addColumn([
