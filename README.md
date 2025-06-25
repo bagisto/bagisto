@@ -58,6 +58,14 @@ Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQr
 
 You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
+## ☁️ Cloud Installation via Amazon AMI
+
+You can also deploy Bagisto quickly using our pre-configured Amazon Machine Image (AMI) available on the AWS Marketplace:
+
+👉 [**Launch Bagisto on AWS**](https://aws.amazon.com/marketplace/pp/prodview-r3xv62axcqkpa)
+
+This AMI allows you to get started with Bagisto on a cloud environment without manual setup. Ideal for scalable production or testing environments.
+
 # Accelerate Your Online Store Launch with the Bagisto Starter Pack!
 
 Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.webkul.com/bagisto-starter-pack.html), streamlining setup and integration for a seamless online store launch. Get ready to unlock success in the digital marketplace! 
