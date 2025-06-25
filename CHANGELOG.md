@@ -2,9 +2,13 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.2.10 (27th of June 2025)** - *Release*
 
 * Added a method in the Installer class to prompt for a GitHub star once the installation is completed.
+
+* Fixed the blank search issue that was causing all products to be fetched.
+
+* Handled the storage URL directly within the DataGrid class instead of the view.
 
 * #10782 [fixed] - Resolved an issue where the "Bundle Items" section was not visible while creating a Bundle Product in the French locale (APP_LOCALE=fr). This was caused by unescaped apostrophes in translatable strings breaking JavaScript during rendering.
 

@@ -171,7 +171,7 @@
                             <template v-if="record.base_image">
                                 <img
                                     class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded"
-                                    :src=`{{ Storage::url('') }}${record.base_image}`
+                                    :src='record.base_image'
                                 />
 
                                 <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
