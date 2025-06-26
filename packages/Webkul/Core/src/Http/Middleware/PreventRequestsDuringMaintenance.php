@@ -7,15 +7,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as BasePreventRequestsDuringMaintenance;
 use Illuminate\Routing\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Webkul\Installer\Helpers\DatabaseManager;
 
 class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintenance
 {
-    /**
-     * Database manager instance.
-     */
-    protected DatabaseManager $databaseManager;
-
     /**
      * Exclude route names.
      *
@@ -37,13 +31,7 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
     {
         parent::__construct($app);
 
-        $this->databaseManager = $this->app->make(DatabaseManager::class);
-
         $this->except[] = config('app.admin_url').'*';
-
-        if ($this->databaseManager->isInstalled()) {
-            $this->setAllowedIps();
-        }
     }
 
     /**
@@ -56,7 +44,7 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
      */
     public function handle($request, Closure $next)
     {
-        if ($this->databaseManager->isInstalled() && $this->app->maintenanceMode()->active()) {
+        if ($this->app->maintenanceMode()->active()) {
             try {
                 $data = $this->app->maintenanceMode()->data();
             } catch (\ErrorException $exception) {
@@ -74,6 +62,8 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
             if ($this->hasValidBypassCookie($request, $data)) {
                 return $next($request);
             }
+
+            $this->setAllowedIps();
 
             if (
                 in_array($request->ip(), $this->excludedIPs)
