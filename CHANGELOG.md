@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Handled the storage URL directly within the DataGrid class instead of the view.
 
+* Optimized the anonymous file by removing unnecessary currency code, and cleaned up the Maintenance Mode class by removing the unused Database Manager code.
+
 * #10782 [fixed] - Resolved an issue where the "Bundle Items" section was not visible while creating a Bundle Product in the French locale (APP_LOCALE=fr). This was caused by unescaped apostrophes in translatable strings breaking JavaScript during rendering.
 
 ## **v2.2.9 (11th of June 2025)** - *Release*
