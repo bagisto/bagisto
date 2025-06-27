@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.6 (27th of June 2025)** - *Release*
 
 * Added a method in the Installer class to prompt for a GitHub star once the installation is completed.
 
