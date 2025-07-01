@@ -1,7 +1,7 @@
 <p align="center">
   <a href="http://www.bagisto.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://bagisto.com/wp-content/themes/bagisto/images/logo.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/bagisto/bagisto/blob/2.3/public/themes/admin/default/build/assets/dark-logo-P5H7MBtx.svg">
       <source media="(prefers-color-scheme: light)" srcset="https://bagisto.com/wp-content/themes/bagisto/images/logo.png">
       <img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Bagisto logo">
     </picture>
