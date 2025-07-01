@@ -1,5 +1,11 @@
 <p align="center">
-    <a href="http://www.bagisto.com"><img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Total Downloads"></a>
+  <a href="http://www.bagisto.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://bagisto.com/wp-content/themes/bagisto/images/logo.png">
+      <source media="(prefers-color-scheme: light)" srcset="https://bagisto.com/wp-content/themes/bagisto/images/logo.png">
+      <img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Bagisto logo">
+    </picture>
+  </a>
 </p>
 
 <p align="center">
