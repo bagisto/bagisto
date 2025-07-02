@@ -29,8 +29,8 @@
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
-                    width="131"
-                    height="29"
+                    width="150"
+                    height="40"
                 >
             </a>
 
@@ -72,11 +72,11 @@
                         @guest('customer')
                             <x-slot:content>
                                 <div class="grid gap-2.5">
-                                    <p class="font-dmserif text-xl">
+                                    <p class="font-dmserif text-xl txt-white">
                                         @lang('shop::app.components.layouts.header.mobile.welcome-guest')
                                     </p>
 
-                                    <p class="text-sm">
+                                    <p class="text-sm txt-white">
                                         @lang('shop::app.components.layouts.header.mobile.dropdown-text')
                                     </p>
                                 </div>
@@ -243,20 +243,20 @@
                 <span class="icon-hamburger cursor-pointer text-2xl"></span>
             </x-slot>
 
-            <x-slot:header>
+            <x-slot:header class="bg-blue">
                 <div class="flex items-center justify-between">
                     <a href="{{ route('shop.home.index') }}">
                         <img
                             src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                             alt="{{ config('app.name') }}"
-                            width="131"
-                            height="29"
+                            width="150"
+                            height="40"
                         >
                     </a>
                 </div>
             </x-slot>
 
-            <x-slot:content class="!p-0">
+            <x-slot:content class="!p-0 bg-mobile-header">
                 <!-- Account Profile Hero Section -->
                 <div class="border-b border-zinc-200 p-4">
                     <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">

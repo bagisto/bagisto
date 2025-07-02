@@ -58,7 +58,7 @@
                         </p>
                     </div>
 
-                    <p class="text-base max-md:text-zinc-500 max-sm:text-xs">
+                    <p class="text-base max-md:text-zinc-500 max-sm:text-xs txt-white">
                         {{ core()->getConfigData('sales.checkout.mini_cart.offer_info')}}
                     </p>
 

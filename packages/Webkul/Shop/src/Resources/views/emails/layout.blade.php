@@ -19,7 +19,7 @@
                             <img
                                 src="{{ $logo }}"
                                 alt="{{ config('app.name') }}"
-                                style="height: 40px; width: 110px;"
+                                style="height: 40px; width: 150px;"
                             />
                         @else
                             <img

@@ -18,7 +18,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.header.before') !!}
 
     <!-- Page Header -->
-    <div class="flex-wrap">
+    <div class="flex-wrap bg-blue">
         <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
@@ -29,8 +29,8 @@
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                         alt="{{ config('app.name') }}"
-                        width="131"
-                        height="29"
+                        width="150"
+                        height="40"
                     >
                 </a>
             </div>
