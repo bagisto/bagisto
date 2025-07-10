@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Database Password',
                 'database-port'               => 'Database Port',
                 'database-prefix'             => 'Database Prefix',
+                'database-prefix-help'        => 'The prefix should be 4 characters long and can only contain letters, numbers, and underscores.',
                 'database-username'           => 'Database Username',
                 'default-currency'            => 'Default Currency',
                 'default-locale'              => 'Default Locale',

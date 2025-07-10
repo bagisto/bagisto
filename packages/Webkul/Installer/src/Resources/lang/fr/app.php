@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Mot de passe de la base de données',
                 'database-port'               => 'Port de la base de données',
                 'database-prefix'             => 'Préfixe de la base de données',
+                'database-prefix-help'        => 'Le préfixe doit comporter 4 caractères et ne peut contenir que des lettres, des chiffres et des traits de soulignement.',
                 'database-username'           => 'Nom d\'utilisateur de la base de données',
                 'default-currency'            => 'Devise par défaut',
                 'default-locale'              => 'Langue par défaut',

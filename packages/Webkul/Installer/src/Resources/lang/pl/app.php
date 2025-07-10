@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Hasło Bazy Danych',
                 'database-port'               => 'Port Bazy Danych',
                 'database-prefix'             => 'Prefiks Bazy Danych',
+                'database-prefix-help'        => 'Prefiks powinien mieć długość 4 znaków i może zawierać tylko litery, cyfry i znaki podkreślenia.',
                 'database-username'           => 'Nazwa Użytkownika Bazy Danych',
                 'default-currency'            => 'Domyślna Waluta',
                 'default-locale'              => 'Domyślna Lokalizacja',

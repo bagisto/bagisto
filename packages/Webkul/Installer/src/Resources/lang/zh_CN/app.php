@@ -654,6 +654,7 @@ return [
                 'database-password'           => '数据库密码',
                 'database-port'               => '数据库端口',
                 'database-prefix'             => '数据库前缀',
+                'database-prefix-help'        => '前缀必须为4个字符，并且只能包含字母、数字和下划线。',
                 'database-username'           => '数据库用户名',
                 'default-currency'            => '默认货币',
                 'default-locale'              => '默认语言环境',

@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Password del database',
                 'database-port'               => 'Porta del database',
                 'database-prefix'             => 'Prefisso del database',
+                'database-prefix-help'        => 'La prefixazione ha di avere 4 caratteri e può contenere solo lettere, numeri e trattini bassi.',
                 'database-username'           => 'Nome utente del database',
                 'default-currency'            => 'Valuta predefinita',
                 'default-locale'              => 'Lingua predefinita',

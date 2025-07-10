@@ -325,7 +325,20 @@ class Installer extends Command
             'DB_PREFIX' => text(
                 label   : 'Please enter the database prefix',
                 default : $this->getEnvVariable('DB_PREFIX', ''),
-                hint    : 'or press enter to continue'
+                hint    : 'or press enter to continue',
+                validate: function (string $value) {
+                    if (strlen($value) > 0) {
+                        if (strlen($value) > 4) {
+                            return 'The database prefix must be at most 4 characters long.';
+                        }
+
+                        if (! preg_match('/^[a-zA-Z0-9_]+$/', $value)) {
+                            return 'The database prefix can only contain letters, numbers, and underscores.';
+                        }
+                    }
+
+                    return null;
+                }
             ),
 
             'DB_USERNAME' => text(
