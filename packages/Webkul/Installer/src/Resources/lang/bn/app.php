@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'ডাটাবেস পাসওয়ার্ড',
                 'database-port'               => 'ডাটাবেস পোর্ট',
                 'database-prefix'             => 'ডাটাবেস প্রিফিক্স',
+                'database-prefix-help'        => 'বিপরীতটি 4 অক্ষরের দীর্ঘ হওয়া উচিত এবং কেবল অক্ষর, সংখ্যা এবং আন্ডারস্কোর থাকতে পারে।',
                 'database-username'           => 'ডাটাবেস ইউজারনেম',
                 'default-currency'            => 'ডিফল্ট মুদ্রা',
                 'default-locale'              => 'ডিফল্ট লোকেল',

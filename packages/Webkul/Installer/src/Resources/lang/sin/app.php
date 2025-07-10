@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'දත්ත මුරපදය',
                 'database-port'               => 'දත්ත අගය',
                 'database-prefix'             => 'දත්ත උඩුගත ප්‍රාම්පදාය',
+                'database-prefix-help'        => 'පෙරනිමිය 4 අක්ෂර දිගක් විය යුතු අතර, අක්ෂර, සංඛ්‍යා සහ අඩු රේඛා පමණක් අඩංගු විය හැක.',
                 'database-username'           => 'දත්ත පරිශීලක නම',
                 'default-currency'            => 'ස්ථඳන වර්ගය',
                 'default-locale'              => 'ස්ථඳන භාෂාව',

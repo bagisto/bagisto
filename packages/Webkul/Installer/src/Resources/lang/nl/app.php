@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Database Wachtwoord',
                 'database-port'               => 'Database Poort',
                 'database-prefix'             => 'Database Voorvoegsel',
+                'database-prefix-help'        => 'De prefix moet 4 tekens lang zijn en mag alleen letters, cijfers en onderstrepingstekens bevatten.',
                 'database-username'           => 'Database Gebruikersnaam',
                 'default-currency'            => 'Standaard Valuta',
                 'default-locale'              => 'Standaard Locatie',

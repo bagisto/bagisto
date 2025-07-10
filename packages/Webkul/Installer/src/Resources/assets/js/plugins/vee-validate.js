@@ -13,7 +13,7 @@ import es from "@vee-validate/i18n/dist/locale/es.json";
 import fa from "@vee-validate/i18n/dist/locale/fa.json";
 import fr from "@vee-validate/i18n/dist/locale/fr.json";
 import he from "@vee-validate/i18n/dist/locale/he.json";
-import hi_IN from "../../locales/hi_IN.json";
+import hi_IN from "../locales/hi_IN.json";
 import id from "@vee-validate/i18n/dist/locale/id.json";
 import it from "@vee-validate/i18n/dist/locale/it.json";
 import ja from "@vee-validate/i18n/dist/locale/ja.json";
@@ -21,11 +21,11 @@ import nl from "@vee-validate/i18n/dist/locale/nl.json";
 import pl from "@vee-validate/i18n/dist/locale/pl.json";
 import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
 import ru from "@vee-validate/i18n/dist/locale/ru.json";
-import sin from "../../locales/sin.json";
+import sin from "../locales/sin.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
 import uk from "@vee-validate/i18n/dist/locale/uk.json";
 import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
-import { all } from "@vee-validate/rules";
+import { all } from '@vee-validate/rules';
 
 window.defineRule = defineRule;
 
@@ -45,73 +45,7 @@ export default {
          */
         Object.entries(all).forEach(([name, rule]) => defineRule(name, rule));
 
-        /**
-         * This regular expression allows phone numbers with the following conditions:
-         * - The phone number can start with an optional "+" sign.
-         * - After the "+" sign, there should be one or more digits.
-         *
-         * This validation is sufficient for global-level phone number validation. If
-         * someone wants to customize it, they can override this rule.
-         */
-        defineRule("phone", (value) => {
-            if (!value || !value.length) {
-                return true;
-            }
-
-            if (!/^\+?\d+$/.test(value)) {
-                return false;
-            }
-
-            return true;
-        });
-
-        defineRule("address", (value) => {
-            if (!value || !value.length) {
-                return true;
-            }
-
-            if (
-                !/^[a-zA-Z0-9\s.\/*'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u0590-\u05FF\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u0D80-\u0DFF\u3400-\u4DBF\u2000-\u2A6D\u00C0-\u017F\u0980-\u09FF\u0900-\u097F\u4E00-\u9FFF,\(\)-]{1,60}$/iu.test(
-                    value
-                )
-            ) {
-                return false;
-            }
-
-            return true;
-        });
-
-        defineRule("postcode", (value) => {
-            if (! value || ! value.length) {
-                return true;
-            }
-
-            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(value)) {
-                return false;
-            }
-
-            return true;
-        });
-
-        defineRule(
-            "decimal",
-            (value, { decimals = "*", separator = "." } = {}) => {
-                if (value === null || value === undefined || value === "") {
-                    return true;
-                }
-
-                if (Number(decimals) === 0) {
-                    return /^-?\d*$/.test(value);
-                }
-
-                const regexPart = decimals === "*" ? "+" : `{1,${decimals}}`;
-                const regex = new RegExp(
-                    `^[-+]?\\d*(\\${separator}\\d${regexPart})?([eE]{1}[-]?\\d+)?$`
-                );
-
-                return regex.test(value);
-            }
-        );
+        defineRule("", () => true);
 
         configure({
             /**
@@ -119,21 +53,11 @@ export default {
              * locales can be added in the same way.
              */
             generateMessage: localize({
-                en: {
-                    ...en,
-                    messages: {
-                        ...en.messages,
-                        phone: "This {field} must be a valid phone number",
-                        address: "This {field} must be a valid address",
-                    },
-                },
-
                 ar: {
                     ...ar,
                     messages: {
                         ...ar.messages,
-                        phone: "يجب أن يكون هذا {field} رقم هاتف صالح",
-                        address: "يجب أن يكون هذا {field} عنوانًا صالحًا",
+                        phone: "هذا {field} يجب أن يكون رقم هاتف صالح",
                     },
                 },
 
@@ -142,7 +66,6 @@ export default {
                     messages: {
                         ...bn.messages,
                         phone: "এই {field} একটি বৈধ ফোন নম্বর হতে হবে",
-                        address: "এই {field} একটি বৈধ ঠিকানা হতে হবে",
                     },
                 },
 
@@ -151,7 +74,6 @@ export default {
                     messages: {
                         ...ca.messages,
                         phone: "Aquest {field} ha de ser un número de telèfon vàlid",
-                        address: "Aquest {field} ha de ser una adreça vàlida",
                     },
                 },
 
@@ -159,8 +81,15 @@ export default {
                     ...de,
                     messages: {
                         ...de.messages,
-                        phone: "Dieses {field} muss eine gültige Telefonnummer sein",
-                        address: "Diese {field} muss eine gültige Adresse sein",
+                        phone: "Diese {field} muss eine gültige Telefonnummer sein",
+                    },
+                },
+
+                en: {
+                    ...en,
+                    messages: {
+                        ...en.messages,
+                        phone: "This {field} must be a valid phone number",
                     },
                 },
 
@@ -169,7 +98,6 @@ export default {
                     messages: {
                         ...es.messages,
                         phone: "Este {field} debe ser un número de teléfono válido",
-                        address: "Esta {field} debe ser una dirección válida",
                     },
                 },
 
@@ -178,7 +106,6 @@ export default {
                     messages: {
                         ...fa.messages,
                         phone: "این {field} باید یک شماره تلفن معتبر باشد",
-                        address: "این {field} باید یک آدرس معتبر باشد",
                     },
                 },
 
@@ -187,7 +114,6 @@ export default {
                     messages: {
                         ...fr.messages,
                         phone: "Ce {field} doit être un numéro de téléphone valide",
-                        address: "Cette {field} doit être une adresse valide",
                     },
                 },
 
@@ -195,8 +121,7 @@ export default {
                     ...he,
                     messages: {
                         ...he.messages,
-                        phone: "זה {field} חייב להיות מספר טלפון תקין",
-                        address: "זה {field} חייב להיות כתובת תקינה",
+                        phone: "מספר הטלפון {field} חייב להיות תקין",
                     },
                 },
 
@@ -204,8 +129,7 @@ export default {
                     ...hi_IN,
                     messages: {
                         ...hi_IN.messages,
-                        phone: "यह {field} कोई मान्य फ़ोन नंबर होना चाहिए",
-                        address: "यह {field} एक मान्य पता होना चाहिए",
+                        phone: "यह {field} एक मान्य फोन नंबर होना चाहिए",
                     },
                 },
 
@@ -214,7 +138,6 @@ export default {
                     messages: {
                         ...id.messages,
                         phone: "Nomor telepon {field} harus valid",
-                        address: "Alamat {field} harus valid",
                     },
                 },
 
@@ -223,7 +146,6 @@ export default {
                     messages: {
                         ...it.messages,
                         phone: "Questo {field} deve essere un numero di telefono valido",
-                        address: "Questo {field} deve essere un indirizzo valido",
                     },
                 },
 
@@ -231,8 +153,7 @@ export default {
                     ...ja,
                     messages: {
                         ...ja.messages,
-                        phone: "この{field}は有効な電話番号である必要があります",
-                        address: "この{field}は有効な住所である必要があります",
+                        phone: "この {field} は有効な電話番号である必要があります",
                     },
                 },
 
@@ -240,8 +161,7 @@ export default {
                     ...nl,
                     messages: {
                         ...nl.messages,
-                        phone: "Dit {field} moet een geldig telefoonnummer zijn",
-                        address: "Dit {field} moet een geldig adres zijn",
+                        phone: "Deze {field} moet een geldig telefoonnummer zijn",
                     },
                 },
 
@@ -249,8 +169,7 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
-                        phone: "To {field} musi być prawidłowy numer telefonu",
-                        address: "To {field} musi być prawidłowym adresem",
+                        phone: "To {field} musi być prawidłowym numerem telefonu",
                     },
                 },
 
@@ -259,7 +178,6 @@ export default {
                     messages: {
                         ...pt_BR.messages,
                         phone: "Este {field} deve ser um número de telefone válido",
-                        address: "Este {field} deve ser um endereço válido",
                     },
                 },
 
@@ -267,8 +185,7 @@ export default {
                     ...ru,
                     messages: {
                         ...ru.messages,
-                        phone: "Это {field} должно быть действительным номером телефона",
-                        address: "Это {field} должно быть действительным адресом",
+                        phone: "Этот {field} должен быть действительным номером телефона",
                     },
                 },
 
@@ -276,8 +193,7 @@ export default {
                     ...sin,
                     messages: {
                         ...sin.messages,
-                        phone: "මෙම {field} වටේ වලංගු දුරකතන අංකය විය යුතුයි",
-                        address: "මෙම {field} වටේ වලංගු ලිපිනය විය යුතුයි",
+                        phone: "මෙම {field} වලංගු දුරකථන අංකයක් විය යුතුය",
                     },
                 },
 
@@ -286,7 +202,6 @@ export default {
                     messages: {
                         ...tr.messages,
                         phone: "Bu {field} geçerli bir telefon numarası olmalıdır",
-                        address: "Bu {field} geçerli bir adres olmalıdır",
                     },
                 },
 
@@ -294,8 +209,7 @@ export default {
                     ...uk,
                     messages: {
                         ...uk.messages,
-                        phone: "Це {field} повинно бути дійсним номером телефону",
-                        address: "Це {field} повинно бути дійсною адресою",
+                        phone: "Цей {field} має бути дійсним номером телефону",
                     },
                 },
 
@@ -303,8 +217,7 @@ export default {
                     ...zh_CN,
                     messages: {
                         ...zh_CN.messages,
-                        phone: "这个 {field} 必须是一个有效的电话号码",
-                        address: "这个 {field} 必须是一个有效的地址",
+                        phone: "此 {field} 必须是有效的电话号码",
                     },
                 },
             }),
