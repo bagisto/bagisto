@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Fixed the database prefix validation issue in both the GUI and CLI installers.
+
+* Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
+
 ## **v2.3.6 (27th of June 2025)** - *Release*
 
 * Added a method in the Installer class to prompt for a GitHub star once the installation is completed.

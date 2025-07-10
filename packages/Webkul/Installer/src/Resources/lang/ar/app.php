@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'كلمة مرور قاعدة البيانات',
                 'database-port'               => 'منفذ قاعدة البيانات',
                 'database-prefix'             => 'بادئة قاعدة البيانات',
+                'database-prefix-help'        => 'يجب أن تكون البادئة بطول 4 أحرف ويمكن أن تحتوي فقط على أحرف وأرقام وشرطات سفلية.',
                 'database-username'           => 'اسم مستخدم قاعدة البيانات',
                 'default-currency'            => 'العملة الافتراضية',
                 'default-locale'              => 'اللغة الافتراضية',

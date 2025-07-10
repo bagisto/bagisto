@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Contraseña de la Base de Datos',
                 'database-port'               => 'Puerto de la Base de Datos',
                 'database-prefix'             => 'Prefijo de la Base de Datos',
+                'database-prefix-help'        => 'El prefijo debe tener 4 caracteres de longitud y solo puede contener letras, números y guiones bajos.',
                 'database-username'           => 'Nombre de Usuario de la Base de Datos',
                 'default-currency'            => 'Moneda Predeterminada',
                 'default-locale'              => 'Idioma Predeterminado',

@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Datenbankpasswort',
                 'database-port'               => 'Datenbank-Port',
                 'database-prefix'             => 'Datenbank-Präfix',
+                'database-prefix-help'        => 'Die Präfix sollte 4 Zeichen lang sein und darf nur Buchstaben, Zahlen und Unterstriche enthalten.',
                 'database-username'           => 'Datenbank-Benutzername',
                 'default-currency'            => 'Standardwährung',
                 'default-locale'              => 'Standardsprache',
