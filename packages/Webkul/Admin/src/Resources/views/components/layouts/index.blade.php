@@ -7,7 +7,6 @@
 >
 
 <head>
-
     {!! view_render_event('bagisto.admin.layout.head.before') !!}
 
     <title>{{ $title ?? '' }}</title>
@@ -104,7 +103,7 @@
             ref="appLayout"
         >
             <!-- Page Sidebar Blade Component -->
-            <div class="lg:fixed lg:top-[62px] lg:left-0 lg:z-10 w-full lg:w-auto">
+            <div class="lg:fixed lg:top-[62px] lg:left-0 rtl:lg:right-0 rtl:lg:left-auto lg:z-10 w-full lg:w-auto">
                 <x-admin::layouts.sidebar />
             </div>
 
