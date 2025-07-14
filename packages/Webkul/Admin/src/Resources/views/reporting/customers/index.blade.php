@@ -28,7 +28,7 @@
         @include('admin::reporting.customers.total-customers')
 
         <!-- Customers With Most Sales and Customers With Most Orders Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Customers With Most Sales Section -->
             @include('admin::reporting.customers.most-sales')
 
@@ -40,7 +40,7 @@
         @include('admin::reporting.customers.total-traffic')
 
         <!-- Top Customer Groups Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Top Customer Groups Section -->
             @include('admin::reporting.customers.top-customer-groups')
 
