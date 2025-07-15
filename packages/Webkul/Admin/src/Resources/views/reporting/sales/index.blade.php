@@ -29,7 +29,7 @@
         @include('admin::reporting.sales.total-sales')
 
         <!-- Purchase Funnel and Abandoned Carts Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Purchase Funnel Section -->
             @include('admin::reporting.sales.purchase-funnel')
 
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Total Orders and Average Order Value Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Total Orders Section -->
             @include('admin::reporting.sales.total-orders')
 
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Tax Collected and Shipping Collected Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Tax Collected Section -->
             @include('admin::reporting.sales.tax-collected')
 
@@ -56,7 +56,7 @@
         </div>
 
         <!-- Refunds and Top Payment Methods Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Refunds Section -->
             @include('admin::reporting.sales.total-refunds')
 

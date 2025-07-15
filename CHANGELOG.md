@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
+
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
 
 * Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
