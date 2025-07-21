@@ -25,7 +25,7 @@
     <!-- Products Stats Vue Component -->
     <div class="flex flex-1 flex-col gap-4 max-xl:flex-auto">
         <!-- Total Sold Quantities and Products Added to Wishlist Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Total Sold Quantities Section -->
             @include('admin::reporting.products.sold-quantities')
 
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Top Selling Products By Revenue and Top Selling Products By Quantity Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Top Selling Products By Revenue Section -->
             @include('admin::reporting.products.top-selling-by-revenue')
 
@@ -43,7 +43,7 @@
         </div>
 
         <!-- Products With Most Reviews and Products With Most Visits Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Products With Most Reviews Section -->
             @include('admin::reporting.products.most-reviews')
 
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Last Search Terms and Top Search Terms Sections Container -->
-        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Last Search Terms Section -->
             @include('admin::reporting.products.last-search-terms')
 

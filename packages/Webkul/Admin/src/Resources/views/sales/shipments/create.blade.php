@@ -37,7 +37,7 @@
                 <x-admin::drawer ref="shipment">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid h-8 gap-3">
+                        <div class="grid sm:h-8 gap-3">
                             <div class="flex items-center justify-between">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.shipments.create.title')
