@@ -281,4 +281,25 @@ class Booking extends AbstractType
     {
         return app(VirtualIndexer::class);
     }
+
+    /**
+     * Returns validation rules.
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            'booking.type' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $bookingProduct = $this->getBookingProduct($this->product->id);
+
+                    if ($bookingProduct && $value != $bookingProduct->type) {
+                        $fail(trans('admin::app.catalog.products.edit.types.booking.validations.type-mismatch'));
+                    }
+                },
+            ],
+        ];
+    }
 }

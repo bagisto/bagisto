@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Reserva de Taula',
                             'title'       => 'Tipus',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'El tipus de reserva no es pot canviar.',
+                        ],
                     ],
 
                     'downloadable' => [

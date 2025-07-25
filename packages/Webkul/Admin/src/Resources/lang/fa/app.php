@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'رزرو میز',
                             'title'       => 'نوع',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'نوع رزرو قابل تغییر نیست.',
+                        ],
                     ],
 
                     'downloadable' => [

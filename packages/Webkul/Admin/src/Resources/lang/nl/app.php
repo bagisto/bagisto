@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Tafel Boeking',
                             'title'       => 'Type',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Het boekingstype kan niet worden gewijzigd.',
+                        ],
                     ],
 
                     'downloadable' => [

@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Tischbuchung',
                             'title'       => 'Typ',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Der Buchungstyp kann nicht geändert werden.',
+                        ],
                     ],
 
                     'downloadable' => [

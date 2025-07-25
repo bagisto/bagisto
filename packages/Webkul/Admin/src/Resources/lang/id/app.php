@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Pemesanan Meja',
                             'title'       => 'Jenis',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Jenis pemesanan tidak dapat diubah.',
+                        ],
                     ],
 
                     'downloadable' => [

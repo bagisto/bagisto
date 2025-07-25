@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Table Booking',
                             'title'       => 'Type',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'The booking type cannot be changed.',
+                        ],
                     ],
 
                     'downloadable' => [

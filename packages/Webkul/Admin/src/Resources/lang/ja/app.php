@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'テーブル予約',
                             'title'       => 'タイプ',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => '予約タイプは変更できません。',
+                        ],
                     ],
 
                     'downloadable' => [

@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'මේස වෙන්කිරීම',
                             'title'       => 'වර්ගය',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'වෙන්කිරීමේ වර්ගය වෙනස් කළ නොහැක.',
+                        ],
                     ],
 
                     'downloadable' => [

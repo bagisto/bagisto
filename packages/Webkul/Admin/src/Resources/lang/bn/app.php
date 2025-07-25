@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'টেবিল বুকিং',
                             'title'       => 'প্রকার',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'বুকিংয়ের ধরন পরিবর্তন করা যাবে না।',
+                        ],
                     ],
 
                     'downloadable' => [

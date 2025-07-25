@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'टेबल बुकिंग',
                             'title'       => 'प्रकार',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'बुकिंग प्रकार बदला नहीं जा सकता।',
+                        ],
                     ],
 
                     'downloadable' => [
