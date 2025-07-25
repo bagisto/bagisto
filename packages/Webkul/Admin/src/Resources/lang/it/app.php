@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Prenotazione Tavolo',
                             'title'       => 'Tipo',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Il tipo di prenotazione non può essere modificato.',
+                        ],
                     ],
 
                     'downloadable' => [

@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'حجز طاولة',
                             'title'       => 'النوع',
                         ],
+
+                       'validations' => [
+                            'type-mismatch' => 'لا يمكن تغيير نوع الحجز.',
+                        ],
                     ],
 
                     'downloadable' => [

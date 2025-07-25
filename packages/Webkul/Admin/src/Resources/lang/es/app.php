@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Reserva de Mesa',
                             'title'       => 'Tipo',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'El tipo de reserva no se puede cambiar.',
+                        ],
                     ],
 
                     'downloadable' => [
