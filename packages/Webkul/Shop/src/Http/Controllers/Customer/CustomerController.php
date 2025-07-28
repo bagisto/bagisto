@@ -61,7 +61,7 @@ class CustomerController extends Controller
         $data = $profileRequest->validated();
 
         if (empty($data['date_of_birth'])) {
-            unset($data['date_of_birth']);
+            $data['date_of_birth'] = null;
         }
 
         if (
