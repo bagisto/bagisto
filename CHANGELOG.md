@@ -4,11 +4,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-* #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
-
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
 
 * Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
+
+* Added the capability to run the dev command from the customized theme package without needing to run the publishers repeatedly.
+
+* #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
+
+* #10836 [fixed] - Fixed the date of birth issue.
+
+* #10838 [fixed] - Fixed the cart issue.
 
 ## **v2.3.6 (27th of June 2025)** - *Release*
 
