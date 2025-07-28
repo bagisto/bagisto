@@ -19,6 +19,9 @@
             <div class="mt-14 rounded max-sm:mt-8">
                 <!-- Contact Form -->
                 <x-shop::form :action="route('shop.home.contact_us.send_mail')">
+                    
+                    {!! view_render_event('bagisto.shop.contact.form_controls.before') !!}
+
                     <!-- Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -118,6 +121,9 @@
                             @lang('shop::app.home.contact.submit')
                         </button>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.contact.form_controls.after') !!}
+                    
                 </x-shop::form>
             </div>
 		</div>
