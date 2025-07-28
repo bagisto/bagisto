@@ -1294,6 +1294,10 @@ return [
                             'table'       => '桌子预订',
                             'title'       => '类型',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => '预订类型无法更改。',
+                        ],
                     ],
 
                     'downloadable' => [

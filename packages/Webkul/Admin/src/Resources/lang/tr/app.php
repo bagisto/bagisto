@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Masa Rezervasyonu',
                             'title'       => 'Tür',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Rezervasyon türü değiştirilemez.',
+                        ],
                     ],
 
                     'downloadable' => [

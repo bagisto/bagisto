@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'הזמנת שולחן',
                             'title'       => 'סוג',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'לא ניתן לשנות את סוג ההזמנה.',
+                        ],
                     ],
 
                     'downloadable' => [

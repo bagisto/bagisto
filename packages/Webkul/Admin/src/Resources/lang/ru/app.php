@@ -1294,6 +1294,10 @@ return [
                             'table'       => 'Бронирование стола',
                             'title'       => 'Тип',
                         ],
+
+                        'validations' => [
+                            'type-mismatch' => 'Тип бронирования не может быть изменён.',
+                        ],
                     ],
 
                     'downloadable' => [
