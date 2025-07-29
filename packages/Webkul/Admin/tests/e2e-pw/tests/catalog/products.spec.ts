@@ -1576,7 +1576,8 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save Product" })
                 .click();
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
 
         test("should create default product with many booking for one day", async ({
@@ -1732,7 +1733,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the product name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
     });
 
@@ -1894,7 +1896,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
 
         test("should create appointment booking product that are not available every week with no same slot for all days", async ({
@@ -2068,7 +2071,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
 
         test("should create appointment booking product that are available every week with no same slot for all days", async ({
@@ -2245,7 +2249,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
 
         test("should create appointment booking product that are available every week with same slot for all days", async ({
@@ -2408,7 +2413,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
     });
 
@@ -2472,7 +2478,8 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await expect(adminPage.locator('table').getByText(product.name)).toBeVisible();
+
         });
     });
 
