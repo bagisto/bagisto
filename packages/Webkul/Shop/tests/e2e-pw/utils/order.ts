@@ -185,7 +185,7 @@ export async function downloadableOrder(page) {
      * Checking the product in the list.
      */
     await page.goto("admin/catalog/products");
-    await expect(page.getByText(`${name}`)).toBeVisible();
+    await expect(page.locator('p.break-all.text-base').filter({ hasText: product.name })).toBeVisible();
 
     /**
      * Customer login.
