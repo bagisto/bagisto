@@ -117,6 +117,7 @@ class Themes
                 $data['name'] ?? '',
                 $data['assets_path'] ?? '',
                 $data['views_path'] ?? '',
+                $data['views_namespace'] ?? null,
                 $data['vite'] ?? [],
             );
 
