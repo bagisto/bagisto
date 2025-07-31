@@ -29,13 +29,18 @@ class ProductController extends APIController
             $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
         }
 
+        $searchData = $this->getSearchQueryData();
+
         $products = $this->productRepository
             ->setSearchEngine($searchEngine ?? 'database')
             ->getAll(array_merge(request()->query(), [
+                'query' => $searchData['effective_query'],
                 'channel_id'           => core()->getCurrentChannel()->id,
                 'status'               => 1,
                 'visible_individually' => 1,
             ]));
+
+        $this->trackSearchTermIfApplicable($products, $searchData['original_query']);
 
         if (! empty(request()->query('query'))) {
             /**
@@ -44,7 +49,7 @@ class ProductController extends APIController
              */
             if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
                 UpdateCreateSearchTermJob::dispatch([
-                    'term'       => request()->query('query'),
+                    'term'       => $searchData['original_query'],
                     'results'    => $products->total(),
                     'channel_id' => core()->getCurrentChannel()->id,
                     'locale'     => app()->getLocale(),
@@ -62,13 +67,7 @@ class ProductController extends APIController
      */
     public function relatedProducts($id): JsonResource
     {
-        $product = $this->productRepository->findOrFail($id);
-
-        $relatedProducts = $product->related_products()
-            ->take(core()->getConfigData('catalog.products.product_view_page.no_of_related_products'))
-            ->get();
-
-        return ProductResource::collection($relatedProducts);
+        return $this->getAssociatedProducts($id, 'related_products');
     }
 
     /**
@@ -78,12 +77,25 @@ class ProductController extends APIController
      */
     public function upSellProducts($id): JsonResource
     {
+        return $this->getAssociatedProducts($id, 'up_sells');
+    }
+
+    /**
+     * Get associated products (related/up-sell).
+     */
+    protected function getAssociatedProducts(int $id, string $relationType): JsonResource
+    {
         $product = $this->productRepository->findOrFail($id);
 
-        $upSellProducts = $product->up_sells()
-            ->take(core()->getConfigData('catalog.products.product_view_page.no_of_up_sells_products'))
+        $configKey = match ($relationType) {
+            'related_products' => 'no_of_related_products',
+            'up_sells'         => 'no_of_up_sells_products'
+        };
+
+        $products = $product->{$relationType}()
+            ->take(core()->getConfigData("catalog.products.product_view_page.{$configKey}"))
             ->get();
 
-        return ProductResource::collection($upSellProducts);
+        return ProductResource::collection($products);
     }
 }

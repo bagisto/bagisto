@@ -34,6 +34,18 @@
                 v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'"
             >
             </h1>
+
+            {{-- @if ($suggestion)
+                <div class="suggestion-container">
+                    <p>@lang('Did you mean:')</p>
+                    <a 
+                        href="{{ route('shop.search.index', ['query' => $suggestion]) }}" 
+                        class="suggestion-link"
+                    >
+                        {{ $suggestion }}
+                    </a>
+                </div>
+            @endif --}}
         </div>
     </div>
 
