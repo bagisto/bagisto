@@ -74,7 +74,7 @@ class Handler extends BaseHandler
                 $viewPath = "{$namespace}::errors.index";
             }
 
-            return response()->view($viewPath, compact('errorCode'));
+            return response()->view($viewPath, compact('errorCode'), $errorCode);
         });
     }
 
@@ -111,7 +111,7 @@ class Handler extends BaseHandler
                 $viewPath = "{$namespace}::errors.index";
             }
 
-            return response()->view($viewPath, compact('errorCode'));
+            return response()->view($viewPath, compact('errorCode'), $errorCode);
         });
     }
 }
