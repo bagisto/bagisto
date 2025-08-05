@@ -91,7 +91,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test --reporter=list --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test --reporter=list,html --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/Shop
 
       - name: Upload Test Results
