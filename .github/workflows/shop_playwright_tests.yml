@@ -100,6 +100,7 @@ jobs:
         with:
           name: test-results-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
+            packages/Webkul/Shop/tests/e2e-pw/playwright-report
             packages/Webkul/Shop/tests/e2e-pw/test-results
             storage/logs/laravel.log
           retention-days: 1
