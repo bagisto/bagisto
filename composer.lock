@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27dcf8864e0a3c2d435bdcc067255c61",
+    "content-hash": "761bd88900c6157305217835f6036cdc",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10728,16 +10728,16 @@
     "packages-dev": [
         {
             "name": "bagisto/laravel-datafaker",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543"
+                "reference": "b3c33334f6b6e0acd4e5f06360f2fd1f5661d289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/26660106b3a75168accea6b2bb17c4dc2fd95543",
-                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/b3c33334f6b6e0acd4e5f06360f2fd1f5661d289",
+                "reference": "b3c33334f6b6e0acd4e5f06360f2fd1f5661d289",
                 "shasum": ""
             },
             "type": "library",
@@ -10774,9 +10774,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
-                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.2.0"
+                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.3.0"
             },
-            "time": "2024-09-30T09:26:10+00:00"
+            "time": "2025-08-05T12:30:38+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -13895,6 +13895,6 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
