@@ -3710,7 +3710,7 @@ return [
                 'title' => 'Umum',
 
                 'general' => [
-                    'info'  => 'Atur opsi unit dan aktifkan atau nonaktifkan breadcrumb.',
+                    'info'  => 'Konfigurasikan pengaturan unit dan aktifkan/nonaktifkan opsi Breadcrumbs dan Pengunjung.',
                     'title' => 'Umum',
 
                     'unit-options' => [
