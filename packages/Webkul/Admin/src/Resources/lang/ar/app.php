@@ -1295,7 +1295,7 @@ return [
                             'title'       => 'النوع',
                         ],
 
-                       'validations' => [
+                        'validations' => [
                             'type-mismatch' => 'لا يمكن تغيير نوع الحجز.',
                         ],
                     ],
