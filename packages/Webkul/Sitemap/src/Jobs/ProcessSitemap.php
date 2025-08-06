@@ -151,7 +151,7 @@ class ProcessSitemap implements ShouldQueue
         $sitemap = SitemapIndex::create();
 
         foreach ($this->generatedSitemaps as $generatedSitemap) {
-            $sitemap->add(Storage::url($generatedSitemap));
+            $sitemap->add(Storage::disk('public')->url($generatedSitemap));
         }
 
         $sitemap->writeToDisk('public', $this->sitemap->index_file_name);
