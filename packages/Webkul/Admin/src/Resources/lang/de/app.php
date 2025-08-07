@@ -3710,7 +3710,7 @@ return [
                 'title' => 'Allgemein',
 
                 'general' => [
-                    'info'  => 'Einheitsoptionen festlegen und Breadcrumbs aktivieren oder deaktivieren.',
+                    'info'  => 'Konfigurieren Sie die Einheitseinstellungen und aktivieren oder deaktivieren Sie die Optionen für Breadcrumbs und Besucher.',
                     'title' => 'Allgemein',
 
                     'unit-options' => [

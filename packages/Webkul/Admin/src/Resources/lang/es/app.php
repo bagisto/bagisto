@@ -3710,7 +3710,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Establecer opciones de unidades y habilitar o deshabilitar las migas de pan.',
+                    'info'  => 'Configura las opciones de unidades y activa o desactiva las opciones de Migas de Pan y Visitantes.',
                     'title' => 'General',
 
                     'unit-options' => [

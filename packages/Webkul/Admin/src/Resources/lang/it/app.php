@@ -3710,7 +3710,7 @@ return [
                 'title' => 'Generale',
 
                 'general' => [
-                    'info'  => 'Imposta le opzioni delle unità e abilita o disabilita i breadcrumbs.',
+                    'info'  => 'Configura le impostazioni delle unità e attiva o disattiva le opzioni Breadcrumbs e Visitatori.',
                     'title' => 'Generale',
 
                     'unit-options' => [
