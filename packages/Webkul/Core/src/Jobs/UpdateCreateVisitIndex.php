@@ -33,6 +33,10 @@ class UpdateCreateVisitIndex implements ShouldQueue
      */
     public function handle()
     {
+        if (! core()->getConfigData('general.general.visitor_options')) {
+            return;
+        }
+
         $visitRepository = app(VisitRepository::class);
 
         $lastVisit = $visitRepository->where(Arr::only($this->log, [

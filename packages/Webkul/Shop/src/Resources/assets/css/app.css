@@ -441,32 +441,30 @@ img.lazy {
     }
 
     .shimmer {
-        animation-duration: 1.5s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: skeleton;
-        animation-timing-function: linear;
-        background: linear-gradient(to right,#f6f6f6 8%,#00000015 18%,#f6f6F6 33%);
-        background-size: 1250px 100%;
+        animation: placeHolderShimmer 1s infinite linear;
+        background-color: #f6f7f8;
+        background-image: linear-gradient(90deg, #f6f6f6 8%, #00000015 18%, #f6f6F6 33%);
+        background-size: 200% 100px;
+        background-attachment: fixed;
+        color: transparent;
+        border: none;
+        object-position: -99999px 99999px;
     }
 
-    @keyframes skeleton {
-        0% {
-            background-position: -1250px 0;
-        }
-
-        100% {
-            background-position: 1250px 0;
-        }
+    .shimmer:nth-child(3n-2) {
+        animation-delay: 0.1s;
     }
 
-    @keyframes on-fade {
+    .shimmer:nth-child(3n-1) {
+        animation-delay: 0.2s;
+    }
+
+    @keyframes placeHolderShimmer {
         0% {
-            opacity: 0;
+            background-position: 100% 0;
         }
-        
         100% {
-            opacity: 1;
+            background-position: -100% 0;
         }
     }
 
