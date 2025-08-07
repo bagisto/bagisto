@@ -441,12 +441,12 @@ img.lazy {
     }
 
     .shimmer {
-        animation-duration: 2.2s;
+        animation-duration: 1.5s;
         animation-fill-mode: forwards;
         animation-iteration-count: infinite;
         animation-name: skeleton;
         animation-timing-function: linear;
-        background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+        background: linear-gradient(to right,#f6f6f6 8%,#00000015 18%,#f6f6F6 33%);
         background-size: 1250px 100%;
     }
 

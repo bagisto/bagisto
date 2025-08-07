@@ -3727,10 +3727,10 @@ return [
                     ],
 
                     'visitor-options' => [
-                        'title'     => 'Visitor Options',
+                        'title'      => 'Visitor Options',
                         'title-info' => 'Allows control over the site to track and count the number of visits, helping monitor general visitor activity and engagement.',
                         'enable'     => 'Enable Visitor Options',
-                    ]
+                    ],
                 ],
 
                 'content' => [
