@@ -440,29 +440,27 @@ img.lazy {
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
 
-    .shimmer {
-        animation: placeHolderShimmer 1s infinite linear;
+    .shimmer, .shimmer * {
+        color: transparent !important;
         background-color: #f6f7f8;
-        background-image: linear-gradient(90deg, #f6f6f6 8%, #00000015 18%, #f6f6F6 33%);
-        background-size: 200% 100px;
+        background-image: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.07) 8%,
+            rgba(24, 22, 22, 0.301) 18%,
+            rgba(0, 0, 0, 0.07) 33%
+        );
+        background-size: 200% 100%;
         background-attachment: fixed;
-        color: transparent;
+        animation: shimmer 1.2s linear infinite;
         border: none;
         object-position: -99999px 99999px;
     }
 
-    .shimmer:nth-child(3n-2) {
-        animation-delay: 0.1s;
-    }
-
-    .shimmer:nth-child(3n-1) {
-        animation-delay: 0.2s;
-    }
-
-    @keyframes placeHolderShimmer {
+    @keyframes shimmer {
         0% {
             background-position: 100% 0;
         }
+
         100% {
             background-position: -100% 0;
         }
