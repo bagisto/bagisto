@@ -138,27 +138,38 @@ class CartRule
                 $coupon
                 && $coupon->code === $this->cart->coupon_code
             ) {
+                // Check if coupon usage limit is set to 0 (no usage allowed)
+                if ($coupon->usage_limit === 0) {
+                    return false;
+                }
+
+                // Check if coupon usage limit is exceeded
                 if (
-                    $coupon->usage_limit
+                    $coupon->usage_limit > 0
                     && $coupon->times_used >= $coupon->usage_limit
                 ) {
                     return false;
                 }
 
-                if (
-                    $this->cart->customer_id
-                    && $coupon->usage_per_customer
-                ) {
-                    $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
-                        'cart_rule_coupon_id' => $coupon->id,
-                        'customer_id'         => $this->cart->customer_id,
-                    ]);
-
-                    if (
-                        $couponUsage
-                        && $couponUsage->times_used >= $coupon->usage_per_customer
-                    ) {
+                if ($this->cart->customer_id) {
+                    // Check if per-customer usage is set to 0 (no usage allowed for any customer)
+                    if ($coupon->usage_per_customer === 0) {
                         return false;
+                    }
+
+                    // Check if per-customer usage limit is exceeded
+                    if ($coupon->usage_per_customer > 0) {
+                        $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
+                            'cart_rule_coupon_id' => $coupon->id,
+                            'customer_id'         => $this->cart->customer_id,
+                        ]);
+
+                        if (
+                            $couponUsage
+                            && $couponUsage->times_used >= $coupon->usage_per_customer
+                        ) {
+                            return false;
+                        }
                     }
                 }
             } else {
@@ -166,7 +177,13 @@ class CartRule
             }
         }
 
-        if ($rule->usage_per_customer) {
+        // Check if cart rule usage per customer is set to 0 (no usage allowed for any customer)
+        if ($rule->usage_per_customer === 0) {
+            return false;
+        }
+
+        // Check if cart rule usage per customer limit is exceeded
+        if ($rule->usage_per_customer > 0) {
             $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
                 'cart_rule_id' => $rule->id,
                 'customer_id'  => $this->cart->customer_id,
