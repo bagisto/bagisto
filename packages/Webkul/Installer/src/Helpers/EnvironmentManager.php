@@ -20,7 +20,7 @@ class EnvironmentManager
      */
     public function generateEnv($request)
     {
-        $envExamplePath = base_path('.env.example');
+        $envExamplePath = base_path('.env');
 
         $envPath = base_path('.env');
 

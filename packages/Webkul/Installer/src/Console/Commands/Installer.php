@@ -177,7 +177,7 @@ class Installer extends Command
         if (! $hasExistingEnv) {
             $this->components->info('Creating the environment configuration file.');
 
-            File::copy('.env.example', '.env');
+            File::copy('.env', '.env');
         } else {
             $this->components->info('Great! your environment configuration file already exists.');
         }
