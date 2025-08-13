@@ -55,8 +55,8 @@
 
                 <p class="text-sm text-gray-800">
                     @lang('admin::app.errors.support', [
-                        'link'  => 'mailto:support@example.com',
-                        'email' => 'support@example.com',
+                        'link'  => 'mailto:info@bannerkw.com',
+                        'email' => 'info@bannerkw.com',
                         'class' => 'font-semibold text-blue-600 transition-all hover:underline',
                     ])
                 </p>

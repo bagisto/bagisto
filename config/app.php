@@ -13,7 +13,15 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bagisto'),
+    'name' => env('APP_NAME', 'BannerKW'),
+
+    'company_name'   => env('APP_COMPANY_NAME', 'BannerKW'),
+    'contact_phone'  => env('APP_CONTACT_PHONE'),
+    'contact_email'  => env('APP_CONTACT_EMAIL'),
+    'app_logo_url'   => env('APP_LOGO_URL'),
+    'brand_tagline'  => env('BRAND_TAGLINE'),
+    'brand_keywords' => env('BRAND_KEYWORDS'),
+    'site_tier' => env('SITE_TIER', 'user'),
 
     /*
     |--------------------------------------------------------------------------

@@ -5,8 +5,15 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@vee-validate/i18n": "^4.15.1",
+        "@vee-validate/rules": "^4.15.1",
         "axios": "^1.7.9",
+        "flatpickr": "^4.6.13",
         "laravel-vite-plugin": "^1.0",
-        "vite": "^5.4.12"
+        "mitt": "^3.0.1",
+        "vee-validate": "^4.15.1",
+        "vite": "^5.4.12",
+        "vue-cal": "^4.10.2",
+        "vuedraggable": "^2.24.3"
     }
 }

@@ -1,5 +1,12 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
+<style>
+    .front-logo-content {
+    height: 29px !important;    /* Set the exact height */
+    width: auto !important;     /* Let width adjust automatically */
+    max-height: 29px !important; /* Set max-height as a safeguard */
+}
+</style>
 <div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
@@ -13,7 +20,7 @@
             href="{{ route('shop.home.index') }}"
             aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')"
         >
-            <img
+            <img class="front-logo-content"
                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                 width="131"
                 height="29"

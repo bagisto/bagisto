@@ -5,10 +5,10 @@ return [
         'forgot-password' => [
             'already-sent'         => 'Already Password Reset Mail Sent.',
             'back'                 => 'Back to sign In ?',
-            'bagisto'              => 'Bagisto',
+            'bagisto'              => 'BannerKW',
             'email'                => 'Email',
             'email-not-exist'      => 'We cannot find a user with that email address.',
-            'footer'               => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
+            'footer'               => '© Copyright 2010 - :current_year, BannerKW (Registered in Kuwait). All rights reserved.',
             'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
             'page-title'           => 'Forgot your password ?',
             'reset-link-sent'      => 'We have e-mailed your reset password link.',
@@ -19,21 +19,21 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Back to Sign In',
-            'bagisto'          => 'Bagisto',
+            'bagisto'          => 'BannerKW',
             'confirm-password' => 'Confirm Password',
             'email'            => 'Registered Email',
-            'footer'           => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
+            'footer'           => '© Copyright 2010 - :current_year, BannerKW (Registered in Kuwait). All rights reserved.',
             'password'         => 'Password',
             'submit-btn-title' => 'Reset Password',
             'title'            => 'Reset Password',
         ],
 
         'login-form' => [
-            'bagisto'             => 'Bagisto',
+            'bagisto'             => 'BannerKW',
             'button-title'        => 'Sign In',
             'create-your-account' => 'Create your account',
             'email'               => 'Email',
-            'footer'              => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
+            'footer'              => '© Copyright 2010 - :current_year, BannerKW (Registered in Kuwait). All rights reserved.',
             'forgot-pass'         => 'Forgot Password?',
             'form-login-text'     => 'If you have an account, sign in with your email address.',
             'invalid-credentials' => 'Please check your credentials and try again.',
@@ -48,13 +48,13 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Already have an account ?',
-            'bagisto'                     => 'Bagisto',
+            'bagisto'                     => 'BannerKW',
             'button-title'                => 'Register',
             'click-here'                  => 'Click Here',
             'confirm-pass'                => 'Confirm Password',
             'email'                       => 'Email',
             'first-name'                  => 'First Name',
-            'footer'                      => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
+            'footer'                      => '© Copyright 2010 - :current_year, BannerKW (Registered in Kuwait). All rights reserved.',
             'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
             'last-name'                   => 'Last Name',
             'page-title'                  => 'Become User',
@@ -491,7 +491,7 @@ return [
                     'bottom' => [
                         'all'           => 'All',
                         'back-button'   => 'Back to Main Menu',
-                        'bagisto'       => 'Bagisto',
+                        'bagisto'       => 'BannerKW',
                         'categories'    => 'Categories',
                         'compare'       => 'Compare',
                         'dropdown-text' => 'Manage Cart, Orders & Wishlist',
@@ -512,7 +512,7 @@ return [
                 'mobile' => [
                     'account'       => 'Account',
                     'back-button'   => 'Back to Main Menu',
-                    'bagisto'       => 'Bagisto',
+                    'bagisto'       => 'BannerKW',
                     'compare'       => 'Compare',
                     'currencies'    => 'Currencies',
                     'dropdown-text' => 'Manage Cart, Orders & Wishlist',
@@ -538,7 +538,7 @@ return [
                 'customer-service'       => 'Customer Service',
                 'email'                  => 'Email',
                 'footer-content'         => 'Footer Content',
-                'footer-text'            => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
+                'footer-text'            => '© Copyright 2010 - :current_year, BannerKW (Registered in Kuwait). All rights reserved.',
                 'locale'                 => 'Locale',
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
                 'order-return'           => 'Order and Returns',
@@ -937,7 +937,7 @@ return [
             'suspended-account-message' => 'Your account has been suspended.',
 
             'index' => [
-                'bagisto'                  => 'Bagisto',
+                'bagisto'                  => 'BannerKW',
                 'cart'                     => 'Cart',
                 'continue-shopping'        => 'Continue Shopping',
                 'empty-product'            => 'You don’t have a product in your cart.',

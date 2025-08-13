@@ -1,12 +1,610 @@
 {
-  "src/Resources/assets/css/app.css": {
-    "file": "assets/app-d9dcaa8a.css",
-    "isEntry": true,
-    "src": "src/Resources/assets/css/app.css"
+  "_flatpickr-!~{005}~.js": {
+    "file": "assets/flatpickr-BsM4JrO0.css",
+    "src": "_flatpickr-!~{005}~.js"
   },
-  "src/Resources/assets/js/app.js": {
-    "file": "assets/app-4ed993c7.js",
+  "_flatpickr-C0NwO3kl.js": {
+    "file": "assets/flatpickr-C0NwO3kl.js",
+    "name": "flatpickr",
+    "css": [
+      "assets/flatpickr-BsM4JrO0.css"
+    ]
+  },
+  "node_modules/vue-cal/dist/drag-and-drop.es.js": {
+    "file": "assets/drag-and-drop.es-JkAdgoaa.js",
+    "name": "drag-and-drop.es",
+    "src": "node_modules/vue-cal/dist/drag-and-drop.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ar.es.js": {
+    "file": "assets/ar.es-CfdTYgcp.js",
+    "name": "ar.es",
+    "src": "node_modules/vue-cal/dist/i18n/ar.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bg.es.js": {
+    "file": "assets/bg.es-Ce0T19Qg.js",
+    "name": "bg.es",
+    "src": "node_modules/vue-cal/dist/i18n/bg.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bn.es.js": {
+    "file": "assets/bn.es-iWyup8_3.js",
+    "name": "bn.es",
+    "src": "node_modules/vue-cal/dist/i18n/bn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/bs.es.js": {
+    "file": "assets/bs.es-Cz58hpHx.js",
+    "name": "bs.es",
+    "src": "node_modules/vue-cal/dist/i18n/bs.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ca.es.js": {
+    "file": "assets/ca.es-CujU75Im.js",
+    "name": "ca.es",
+    "src": "node_modules/vue-cal/dist/i18n/ca.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/cs.es.js": {
+    "file": "assets/cs.es-BHhRbaip.js",
+    "name": "cs.es",
+    "src": "node_modules/vue-cal/dist/i18n/cs.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/da.es.js": {
+    "file": "assets/da.es-DglD7fV2.js",
+    "name": "da.es",
+    "src": "node_modules/vue-cal/dist/i18n/da.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/de.es.js": {
+    "file": "assets/de.es-D_4ZyLTN.js",
+    "name": "de.es",
+    "src": "node_modules/vue-cal/dist/i18n/de.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/el.es.js": {
+    "file": "assets/el.es-BC26X5xm.js",
+    "name": "el.es",
+    "src": "node_modules/vue-cal/dist/i18n/el.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/en.es.js": {
+    "file": "assets/en.es-DDTuV2po.js",
+    "name": "en.es",
+    "src": "node_modules/vue-cal/dist/i18n/en.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/es.es.js": {
+    "file": "assets/es.es-BvvfjN-O.js",
+    "name": "es.es",
+    "src": "node_modules/vue-cal/dist/i18n/es.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/et.es.js": {
+    "file": "assets/et.es-C0rF9HtR.js",
+    "name": "et.es",
+    "src": "node_modules/vue-cal/dist/i18n/et.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fa.es.js": {
+    "file": "assets/fa.es-CibKJjgz.js",
+    "name": "fa.es",
+    "src": "node_modules/vue-cal/dist/i18n/fa.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fi.es.js": {
+    "file": "assets/fi.es-B0Iy6aas.js",
+    "name": "fi.es",
+    "src": "node_modules/vue-cal/dist/i18n/fi.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/fr.es.js": {
+    "file": "assets/fr.es-B7WXlprl.js",
+    "name": "fr.es",
+    "src": "node_modules/vue-cal/dist/i18n/fr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/he.es.js": {
+    "file": "assets/he.es-K9Fk8xhK.js",
+    "name": "he.es",
+    "src": "node_modules/vue-cal/dist/i18n/he.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/hr.es.js": {
+    "file": "assets/hr.es-ef5bxYFj.js",
+    "name": "hr.es",
+    "src": "node_modules/vue-cal/dist/i18n/hr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/hu.es.js": {
+    "file": "assets/hu.es-nZ65MV0n.js",
+    "name": "hu.es",
+    "src": "node_modules/vue-cal/dist/i18n/hu.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/id.es.js": {
+    "file": "assets/id.es-CzHAK-XV.js",
+    "name": "id.es",
+    "src": "node_modules/vue-cal/dist/i18n/id.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/is.es.js": {
+    "file": "assets/is.es-Dz07gBgt.js",
+    "name": "is.es",
+    "src": "node_modules/vue-cal/dist/i18n/is.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/it.es.js": {
+    "file": "assets/it.es-CquQA5xx.js",
+    "name": "it.es",
+    "src": "node_modules/vue-cal/dist/i18n/it.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ja.es.js": {
+    "file": "assets/ja.es-D6pL26k_.js",
+    "name": "ja.es",
+    "src": "node_modules/vue-cal/dist/i18n/ja.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ka.es.js": {
+    "file": "assets/ka.es-Cb9X-eNS.js",
+    "name": "ka.es",
+    "src": "node_modules/vue-cal/dist/i18n/ka.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ko.es.js": {
+    "file": "assets/ko.es-CTpJlj0A.js",
+    "name": "ko.es",
+    "src": "node_modules/vue-cal/dist/i18n/ko.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/lt.es.js": {
+    "file": "assets/lt.es-vqgjGyMx.js",
+    "name": "lt.es",
+    "src": "node_modules/vue-cal/dist/i18n/lt.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/mn.es.js": {
+    "file": "assets/mn.es-YZet1as4.js",
+    "name": "mn.es",
+    "src": "node_modules/vue-cal/dist/i18n/mn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/nl.es.js": {
+    "file": "assets/nl.es-COp8PWbT.js",
+    "name": "nl.es",
+    "src": "node_modules/vue-cal/dist/i18n/nl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/no.es.js": {
+    "file": "assets/no.es-_2m-F2FS.js",
+    "name": "no.es",
+    "src": "node_modules/vue-cal/dist/i18n/no.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pl.es.js": {
+    "file": "assets/pl.es-jjNeJM5X.js",
+    "name": "pl.es",
+    "src": "node_modules/vue-cal/dist/i18n/pl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pt-br.es.js": {
+    "file": "assets/pt-br.es-D8ojES2d.js",
+    "name": "pt-br.es",
+    "src": "node_modules/vue-cal/dist/i18n/pt-br.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/pt-pt.es.js": {
+    "file": "assets/pt-pt.es-D8ojES2d.js",
+    "name": "pt-pt.es",
+    "src": "node_modules/vue-cal/dist/i18n/pt-pt.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ro.es.js": {
+    "file": "assets/ro.es-B6_ATXom.js",
+    "name": "ro.es",
+    "src": "node_modules/vue-cal/dist/i18n/ro.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/ru.es.js": {
+    "file": "assets/ru.es-BGEpmv_x.js",
+    "name": "ru.es",
+    "src": "node_modules/vue-cal/dist/i18n/ru.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sk.es.js": {
+    "file": "assets/sk.es-V3h-1af8.js",
+    "name": "sk.es",
+    "src": "node_modules/vue-cal/dist/i18n/sk.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sl.es.js": {
+    "file": "assets/sl.es-mZjm0YDT.js",
+    "name": "sl.es",
+    "src": "node_modules/vue-cal/dist/i18n/sl.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sq.es.js": {
+    "file": "assets/sq.es-_6B4UQXy.js",
+    "name": "sq.es",
+    "src": "node_modules/vue-cal/dist/i18n/sq.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sr.es.js": {
+    "file": "assets/sr.es-BmdOpTOG.js",
+    "name": "sr.es",
+    "src": "node_modules/vue-cal/dist/i18n/sr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/sv.es.js": {
+    "file": "assets/sv.es-LwrPWbzy.js",
+    "name": "sv.es",
+    "src": "node_modules/vue-cal/dist/i18n/sv.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/tr.es.js": {
+    "file": "assets/tr.es-CS80t-Rq.js",
+    "name": "tr.es",
+    "src": "node_modules/vue-cal/dist/i18n/tr.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/uk.es.js": {
+    "file": "assets/uk.es-BVYlda65.js",
+    "name": "uk.es",
+    "src": "node_modules/vue-cal/dist/i18n/uk.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/vi.es.js": {
+    "file": "assets/vi.es-B5CIRCK5.js",
+    "name": "vi.es",
+    "src": "node_modules/vue-cal/dist/i18n/vi.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/zh-cn.es.js": {
+    "file": "assets/zh-cn.es-DKz-yscG.js",
+    "name": "zh-cn.es",
+    "src": "node_modules/vue-cal/dist/i18n/zh-cn.es.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-cal/dist/i18n/zh-hk.es.js": {
+    "file": "assets/zh-hk.es-CFZP5Cvd.js",
+    "name": "zh-hk.es",
+    "src": "node_modules/vue-cal/dist/i18n/zh-hk.es.js",
+    "isDynamicEntry": true
+  },
+  "packages/Webkul/Admin/src/Resources/assets/css/app.css": {
+    "file": "assets/app-9qhMCuYo.css",
+    "src": "packages/Webkul/Admin/src/Resources/assets/css/app.css",
+    "isEntry": true
+  },
+  "packages/Webkul/Admin/src/Resources/assets/fonts/bagisto-admin.woff": {
+    "file": "assets/bagisto-admin-BzOkv6lg.woff",
+    "src": "packages/Webkul/Admin/src/Resources/assets/fonts/bagisto-admin.woff"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/average-orders.svg": {
+    "file": "assets/average-orders-UpY6pgyW.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/average-orders.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/configuration/default-menu.svg": {
+    "file": "assets/default-menu-Dj-Oltdo.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/configuration/default-menu.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/configuration/side-bar-menu.svg": {
+    "file": "assets/side-bar-menu-AbcRgqJb.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/configuration/side-bar-menu.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/customers.svg": {
+    "file": "assets/customers-BfcJGhnh.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/customers.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/dark-logo.svg": {
+    "file": "assets/dark-logo-P5H7MBtx.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/dark-logo.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/customers.svg": {
+    "file": "assets/customers-BksiMJdH.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/customers.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/default.svg": {
+    "file": "assets/default-Bzl-phiD.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/default.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/orders.svg": {
+    "file": "assets/orders-BL3uXoui.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/orders.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/report-empty.svg": {
+    "file": "assets/report-empty-B0NsGHhI.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/report-empty.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/reviews.svg": {
+    "file": "assets/reviews-UDFC2zlO.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/empty-placeholders/reviews.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/error.svg": {
+    "file": "assets/error-ClRu8L1K.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/error.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/favicon.ico": {
+    "file": "assets/favicon--PZ4cBiP.ico",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/favicon.ico"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/icon-add-product.svg": {
+    "file": "assets/icon-add-product-nFt8sucb.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/icon-add-product.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/icon-discount.svg": {
+    "file": "assets/icon-discount-muGQmsXC.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/icon-discount.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/icon-options.svg": {
+    "file": "assets/icon-options-B9pp5RQf.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/icon-options.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/logo-light.svg": {
+    "file": "assets/logo-D7_GgN5O.svg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/logo.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/logo.svg": {
+    "file": "assets/logo-D7_GgN5O.svg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/logo.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/front.svg": {
+    "file": "assets/front-CFI3VfdH.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/front.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/next-1.svg": {
+    "file": "assets/next-1-C2hl59rC.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/next-1.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/next-2.svg": {
+    "file": "assets/next-2-wWoAa-nH.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/next-2.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/size.svg": {
+    "file": "assets/size-DCBc_ei4.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/size.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/use-cases.svg": {
+    "file": "assets/use-cases-D4JhqD_Z.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/use-cases.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/zoom.svg": {
+    "file": "assets/zoom-CynTuPTI.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/product-placeholders/zoom.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/address.svg": {
+    "file": "assets/address-DH7M3lNY.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/address.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/captcha.svg": {
+    "file": "assets/captcha-CcuSNj-t.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/captcha.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/checkout.svg": {
+    "file": "assets/checkout-BvqH__Gi.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/checkout.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/email.svg": {
+    "file": "assets/email-5AJwT575.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/email.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/inventory.svg": {
+    "file": "assets/inventory-D1uKZcKj.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/inventory.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/invoice.svg": {
+    "file": "assets/invoice-qNYgi9ea.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/invoice.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/magic-ai.svg": {
+    "file": "assets/magic-ai-C0gXN1sk.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/magic-ai.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/order.svg": {
+    "file": "assets/order-Bj8Kur9c.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/order.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/payment-method.svg": {
+    "file": "assets/payment-method-Bu6ybGKX.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/payment-method.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/product.svg": {
+    "file": "assets/product-CoE-Gk7v.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/product.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/settings.svg": {
+    "file": "assets/settings-DhKa03Cc.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/settings.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/shipping-method.svg": {
+    "file": "assets/icon-options-B9pp5RQf.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/icon-options.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/shipping.svg": {
+    "file": "assets/shipping-B_qRLPCF.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/shipping.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/store-information.svg": {
+    "file": "assets/store-information-Cjd5D_oN.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/store-information.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/store.svg": {
+    "file": "assets/store-DyMTCGK9.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/store.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/tax.svg": {
+    "file": "assets/tax-BQgwf9VP.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/tax.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/settings/theme.svg": {
+    "file": "assets/theme-Bwf_p88V.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/settings/theme.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/spinner.svg": {
+    "file": "assets/spinner-CkjnFMgn.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/spinner.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/total-orders.svg": {
+    "file": "assets/total-orders-wduYhIFA.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/total-orders.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/total-sales.svg": {
+    "file": "assets/total-sales-B1A9STxj.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/total-sales.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/images/unpaid-invoices.svg": {
+    "file": "assets/unpaid-invoices-BgQgwKF1.svg",
+    "src": "packages/Webkul/Admin/src/Resources/assets/images/unpaid-invoices.svg"
+  },
+  "packages/Webkul/Admin/src/Resources/assets/js/app.js": {
+    "file": "assets/app-wH3_IfDn.js",
+    "name": "app",
+    "src": "packages/Webkul/Admin/src/Resources/assets/js/app.js",
     "isEntry": true,
-    "src": "src/Resources/assets/js/app.js"
+    "imports": [
+      "_flatpickr-C0NwO3kl.js"
+    ],
+    "dynamicImports": [
+      "node_modules/vue-cal/dist/i18n/ar.es.js",
+      "node_modules/vue-cal/dist/i18n/bg.es.js",
+      "node_modules/vue-cal/dist/i18n/bn.es.js",
+      "node_modules/vue-cal/dist/i18n/bs.es.js",
+      "node_modules/vue-cal/dist/i18n/ca.es.js",
+      "node_modules/vue-cal/dist/i18n/cs.es.js",
+      "node_modules/vue-cal/dist/i18n/da.es.js",
+      "node_modules/vue-cal/dist/i18n/de.es.js",
+      "node_modules/vue-cal/dist/i18n/el.es.js",
+      "node_modules/vue-cal/dist/i18n/en.es.js",
+      "node_modules/vue-cal/dist/i18n/es.es.js",
+      "node_modules/vue-cal/dist/i18n/et.es.js",
+      "node_modules/vue-cal/dist/i18n/fa.es.js",
+      "node_modules/vue-cal/dist/i18n/fi.es.js",
+      "node_modules/vue-cal/dist/i18n/fr.es.js",
+      "node_modules/vue-cal/dist/i18n/he.es.js",
+      "node_modules/vue-cal/dist/i18n/hr.es.js",
+      "node_modules/vue-cal/dist/i18n/hu.es.js",
+      "node_modules/vue-cal/dist/i18n/id.es.js",
+      "node_modules/vue-cal/dist/i18n/is.es.js",
+      "node_modules/vue-cal/dist/i18n/it.es.js",
+      "node_modules/vue-cal/dist/i18n/ja.es.js",
+      "node_modules/vue-cal/dist/i18n/ka.es.js",
+      "node_modules/vue-cal/dist/i18n/ko.es.js",
+      "node_modules/vue-cal/dist/i18n/lt.es.js",
+      "node_modules/vue-cal/dist/i18n/mn.es.js",
+      "node_modules/vue-cal/dist/i18n/nl.es.js",
+      "node_modules/vue-cal/dist/i18n/no.es.js",
+      "node_modules/vue-cal/dist/i18n/pl.es.js",
+      "node_modules/vue-cal/dist/i18n/pt-br.es.js",
+      "node_modules/vue-cal/dist/i18n/pt-pt.es.js",
+      "node_modules/vue-cal/dist/i18n/ro.es.js",
+      "node_modules/vue-cal/dist/i18n/ru.es.js",
+      "node_modules/vue-cal/dist/i18n/sk.es.js",
+      "node_modules/vue-cal/dist/i18n/sl.es.js",
+      "node_modules/vue-cal/dist/i18n/sq.es.js",
+      "node_modules/vue-cal/dist/i18n/sr.es.js",
+      "node_modules/vue-cal/dist/i18n/sv.es.js",
+      "node_modules/vue-cal/dist/i18n/tr.es.js",
+      "node_modules/vue-cal/dist/i18n/uk.es.js",
+      "node_modules/vue-cal/dist/i18n/vi.es.js",
+      "node_modules/vue-cal/dist/i18n/zh-cn.es.js",
+      "node_modules/vue-cal/dist/i18n/zh-hk.es.js",
+      "node_modules/vue-cal/dist/drag-and-drop.es.js"
+    ],
+    "css": [
+      "assets/app-D3H39dNn.css"
+    ]
+  },
+  "packages/Webkul/Shop/src/Resources/assets/css/app.css": {
+    "file": "assets/app-DUl7EXt7.css",
+    "src": "packages/Webkul/Shop/src/Resources/assets/css/app.css",
+    "isEntry": true
+  },
+  "packages/Webkul/Shop/src/Resources/assets/fonts/bagisto-shop.woff": {
+    "file": "assets/bagisto-shop-BHAKyv0r.woff",
+    "src": "packages/Webkul/Shop/src/Resources/assets/fonts/bagisto-shop.woff"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/cash-on-delivery.png": {
+    "file": "assets/cash-on-delivery-Ck2rBtSq.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/cash-on-delivery.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/default-language.svg": {
+    "file": "assets/default-language-BxH8WlkY.svg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/default-language.svg"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/empty-dwn-product.png": {
+    "file": "assets/empty-dwn-product-DYRIKFWL.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/empty-dwn-product.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/favicon.ico": {
+    "file": "assets/favicon-Df9chQdB.ico",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/favicon.ico"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/hero-image.jpg": {
+    "file": "assets/hero-image-BlVTwpsv.jpg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/hero-image.jpg"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/hero-image.webp": {
+    "file": "assets/hero-image-DwKg3YHc.webp",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/hero-image.webp"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/large-product-placeholder.webp": {
+    "file": "assets/large-product-placeholder-B9xoAuKQ.webp",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/large-product-placeholder.webp"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/logo.svg": {
+    "file": "assets/logo-D7_GgN5O.svg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/logo.svg"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/medium-product-placeholder.webp": {
+    "file": "assets/medium-product-placeholder-INODB-G2.webp",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/medium-product-placeholder.webp"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/money-transfer.png": {
+    "file": "assets/money-transfer-BNjtOcYo.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/money-transfer.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/no-address.png": {
+    "file": "assets/no-address-BHTy4apn.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/no-address.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/paypal.png": {
+    "file": "assets/paypal-CIu1GKlz.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/paypal.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/review.png": {
+    "file": "assets/review-ZWqERyaT.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/review.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/small-product-placeholder.webp": {
+    "file": "assets/small-product-placeholder-CMT26fOX.webp",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/small-product-placeholder.webp"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/spinner.svg": {
+    "file": "assets/spinner-CWS6ej98.svg",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/spinner.svg"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/thank-you.png": {
+    "file": "assets/thank-you-mhMpuEVL.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/thank-you.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/user-placeholder.png": {
+    "file": "assets/user-placeholder-C_FiyGd9.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/user-placeholder.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/images/wishlist.png": {
+    "file": "assets/wishlist-DPRG46v-.png",
+    "src": "packages/Webkul/Shop/src/Resources/assets/images/wishlist.png"
+  },
+  "packages/Webkul/Shop/src/Resources/assets/js/app.js": {
+    "file": "assets/app-uRPvcxUI.js",
+    "name": "app",
+    "src": "packages/Webkul/Shop/src/Resources/assets/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_flatpickr-C0NwO3kl.js"
+    ]
   }
 }
