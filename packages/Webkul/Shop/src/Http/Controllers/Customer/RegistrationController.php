@@ -46,6 +46,8 @@ class RegistrationController extends Controller
     {
         $customerGroup = core()->getConfigData('customer.settings.create_new_account_options.default_group');
 
+        $subscription = $this->subscriptionRepository->findOneWhere(['email' => request()->input('email')]);
+
         $data = array_merge($registrationRequest->only([
             'first_name',
             'last_name',
@@ -59,33 +61,34 @@ class RegistrationController extends Controller
             'customer_group_id'         => $this->customerGroupRepository->findOneWhere(['code' => $customerGroup])->id,
             'channel_id'                => core()->getCurrentChannel()->id,
             'token'                     => md5(uniqid(rand(), true)),
-            'subscribed_to_news_letter' => (bool) request()->input('is_subscribed'),
+            'subscribed_to_news_letter' => (bool) (request()->input('is_subscribed') ?? $subscription?->is_subscribed),
         ]);
 
         Event::dispatch('customer.registration.before');
 
         $customer = $this->customerRepository->create($data);
 
-        if (isset($data['is_subscribed'])) {
-            $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
+        if ($subscription) {
+            $this->subscriptionRepository->update([
+                'customer_id' => $customer->id,
+            ], $subscription->id);
+        } 
+        
+        if (
+            ! empty($data['is_subscribed'])
+            && ! $subscription
+        ) {
+            Event::dispatch('customer.subscription.before');
 
-            if ($subscription) {
-                $this->subscriptionRepository->update([
-                    'customer_id' => $customer->id,
-                ], $subscription->id);
-            } else {
-                Event::dispatch('customer.subscription.before');
+            $subscription = $this->subscriptionRepository->create([
+                'email'         => $data['email'],
+                'customer_id'   => $customer->id,
+                'channel_id'    => core()->getCurrentChannel()->id,
+                'is_subscribed' => 1,
+                'token'         => uniqid(),
+            ]);
 
-                $subscription = $this->subscriptionRepository->create([
-                    'email'         => $data['email'],
-                    'customer_id'   => $customer->id,
-                    'channel_id'    => core()->getCurrentChannel()->id,
-                    'is_subscribed' => 1,
-                    'token'         => uniqid(),
-                ]);
-
-                Event::dispatch('customer.subscription.after', $subscription);
-            }
+            Event::dispatch('customer.subscription.after', $subscription);
         }
 
         Event::dispatch('customer.create.after', $customer);
