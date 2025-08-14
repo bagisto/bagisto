@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Webkul\Admin\DataGrids\Marketing\Communications\NewsLetterDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class SubscriptionController extends Controller
 {
@@ -14,7 +15,10 @@ class SubscriptionController extends Controller
      *
      * @return void
      */
-    public function __construct(protected SubscribersListRepository $subscribersListRepository) {}
+    public function __construct(
+        protected SubscribersListRepository $subscribersListRepository,
+        protected CustomerRepository $customerRepository,
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -85,7 +89,15 @@ class SubscriptionController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->subscribersListRepository->delete($id);
+            $newsLetter = $this->subscribersListRepository->findOrFail($id);
+
+            if ($newsLetter->customer) {
+                $newsLetter->customer->subscribed_to_news_letter = false;
+
+                $newsLetter->customer->save();
+            }
+
+            $newsLetter->delete();
 
             return response()->json([
                 'message' => trans('admin::app.marketing.communications.subscribers.delete-success'),
