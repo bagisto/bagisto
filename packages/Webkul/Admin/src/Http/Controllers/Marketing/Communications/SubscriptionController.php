@@ -6,7 +6,6 @@ use Illuminate\Http\JsonResponse;
 use Webkul\Admin\DataGrids\Marketing\Communications\NewsLetterDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 
 class SubscriptionController extends Controller
 {
@@ -15,10 +14,7 @@ class SubscriptionController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected SubscribersListRepository $subscribersListRepository,
-        protected CustomerRepository $customerRepository,
-    ) {}
+    public function __construct(protected SubscribersListRepository $subscribersListRepository) {}
 
     /**
      * Display a listing of the resource.
