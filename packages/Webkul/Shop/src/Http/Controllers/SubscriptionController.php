@@ -44,7 +44,7 @@ class SubscriptionController extends Controller
             'channel_id'    => core()->getCurrentChannel()->id,
             'is_subscribed' => 1,
             'token'         => uniqid(),
-            'customer_id'   => $customer?->id ?? null,
+            'customer_id'   => $customer?->id,
         ]);
 
         if ($customer) {
