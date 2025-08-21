@@ -1,4 +1,26 @@
 @props(['options'])
+@php
+    $firstImage = $options['images'][0]['image'] ?? null;
+
+@endphp
+
+@if($firstImage)
+    @pushOnce('styles')
+    <link
+        rel="preload"
+        as="image"
+        href="{{ asset($firstImage) }}"
+        imagesrcset="
+            {{ asset($firstImage) }} 1920w,
+            {{ str_replace('storage', 'cache/large', asset($firstImage)) }} 1280w,
+            {{ str_replace('storage', 'cache/medium', asset($firstImage)) }} 1024w,
+            {{ str_replace('storage', 'cache/small', asset($firstImage)) }} 525w
+        "
+        imagesizes="100vw"
+        fetchpriority="high"
+    >
+    @endPushOnce
+@endif
 
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="overflow-hidden">
@@ -13,7 +35,7 @@
     >
         <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
-            <div 
+            <div
                 class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
                 ref="sliderContainer"
             >
@@ -25,12 +47,18 @@
                 >
                     <x-shop::media.images.lazy
                         class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
-                        ::lazy="false"
-                        ::src="image.image"
+                        ::lazy="index === 0 ? false : true"
+                        ::src="image.image.replace('storage', 'cache/large')"
                         ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
+                        ::sizes="
+                            '(max-width: 525px) 525px, ' +
+                            '(max-width: 1024px) 1024px, ' +
+                            '(max-width: 1280px) 1280px, ' +
+                            '1920px'
+                        "
                         ::alt="image?.title"
                         tabindex="0"
-                        fetchpriority="high"
+                        ::fetchpriority="index === 0 ? 'high' : 'auto'"
                     />
                 </div>
             </div>
@@ -68,11 +96,15 @@
             <div class="absolute bottom-5 left-0 flex w-full justify-center max-md:bottom-3.5 max-sm:bottom-2.5">
                 <div
                     v-for="(image, index) in images"
-                    class="mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5"
+                    :key="index"
+                    class="p-2 sm:p-2.5 md:p-3 lg:p-3.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5 focus:outline-none"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     role="button"
                     tabindex="0"
+                    :aria-label="{'Go to slide': index + 1 }"
                     @click="navigateByPagination(index)"
+                    @keydown.enter="navigateByPagination(index)"
+                    @keydown.space.prevent="navigateByPagination(index)"
                 >
                 </div>
             </div>
@@ -113,7 +145,9 @@
 
                 this.init();
 
-                this.play();
+                setTimeout(() => {
+                    this.play();
+                }, 4000);
             },
 
             methods: {
@@ -129,13 +163,13 @@
 
                         slide.addEventListener('mousedown', this.handleDragStart);
 
-                        slide.addEventListener('touchstart', this.handleDragStart);
+                        slide.addEventListener('touchstart', this.handleDragStart, { passive: true });
 
                         slide.addEventListener('mouseup', this.handleDragEnd);
 
                         slide.addEventListener('mouseleave', this.handleDragEnd);
 
-                        slide.addEventListener('touchend', this.handleDragEnd);
+                        slide.addEventListener('touchend', this.handleDragEnd, { passive: true });
 
                         slide.addEventListener('mousemove', this.handleDrag);
 

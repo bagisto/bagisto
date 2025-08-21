@@ -10,9 +10,7 @@ module.exports = {
                 "2xl": "1440px",
             },
 
-            padding: {
-                DEFAULT: "90px",
-            },
+            padding: "1rem",
         },
 
         screens: {
@@ -37,8 +35,8 @@ module.exports = {
             },
 
             fontFamily: {
-                poppins: ["Poppins"],
-                dmserif: ["DM Serif Display"],
+                poppins: ["Poppins", "sans-serif"],
+                dmserif: ["DM Serif Display", "serif"],
             },
         }
     },

@@ -140,8 +140,10 @@
                             class="max-sm:h-[100px] max-sm:w-[100px]"
                             src="{{ bagisto_asset('images/thank-you.png') }}"
                             alt="@lang('shop::app.compare.empty-text')"
+                            loading="lazy"
+                            decoding="async"
                         />
-                        
+
                         <p
                             class="text-xl max-sm:text-sm"
                             role="heading"
@@ -186,11 +188,11 @@
                 methods: {
                     getItems() {
                         let productIds = [];
-                        
+
                         if (! this.isCustomer) {
                             productIds = this.getStorageValue('compare_items');
                         }
-                        
+
                         this.$axios.get("{{ route('shop.api.compare.index') }}", {
                                 params: {
                                     product_ids: productIds,
@@ -249,7 +251,7 @@
 
                                     return;
                                 }
-                                
+
                                 this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
                                         '_method': 'DELETE',
                                     })

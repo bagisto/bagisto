@@ -3,10 +3,11 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Shop\Http\Requests\ContactRequest;
+use Webkul\Shop\Http\Resources\CategoryTreeResource;
 use Webkul\Shop\Mail\ContactUs;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
-
 class HomeController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository) {}
+    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository, protected CategoryRepository $categoryRepository) {}
 
     /**
      * Loads the home page for the storefront.
@@ -36,7 +37,15 @@ class HomeController extends Controller
             'theme_code' => core()->getCurrentChannel()->theme,
         ]);
 
-        return view('shop::home.index', compact('customizations'));
+        $cacheKey = 'visible_category_tree_' . core()->getCurrentChannel()->root_category_id;
+
+        $categories = cache()->remember($cacheKey, 60 * 60, function () {
+            return $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+        });
+
+        $categories = CategoryTreeResource::collection($categories);
+
+        return view('shop::home.index', compact('customizations', 'categories'));
     }
 
     /**
