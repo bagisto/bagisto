@@ -50,6 +50,10 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
+        $this->publishes([
+            __DIR__.'/../Resources/views'  => resource_path('themes/default/views'),
+        ]);
+
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
