@@ -200,6 +200,7 @@
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
+                                    v-if="item.can_change_qty"
                                     class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                     name="quantity"
                                     ::value="item?.quantity"
