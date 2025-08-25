@@ -211,6 +211,7 @@
                             type="date"
                             name="booking[date_from]"
                             rules="required"
+                            v-model="booking.date_from"
                             :label="trans('shop::app.products.view.type.booking.rental.from')"
                             :placeholder="trans('shop::app.products.view.type.booking.rental.from')"
                             data-min-date="today"
@@ -229,7 +230,8 @@
                         <x-shop::form.control-group.control
                             type="date"
                             name="booking[date_to]"
-                            rules="required"
+                            ::rules="'required|after:' + booking.date_from"
+                            v-model="booking.date_to"
                             :label="trans('shop::app.products.view.type.booking.rental.to')"
                             :placeholder="trans('shop::app.products.view.type.booking.rental.to')"
                             data-min-date="today"
@@ -244,6 +246,14 @@
     </script>
 
     <script type="module">
+        defineRule('after', (value, [target]) => {
+            if (! value || ! target) {
+                return false;
+            }
+
+            return new Date(value) > new Date(target);
+        });
+
         app.component('v-rental-slots', {
             template: '#v-rental-slots-template',
 
@@ -258,6 +268,12 @@
                     slots: [],
 
                     selected_slot: '',
+
+                    booking: {
+                        date_from: '',
+                        
+                        date_to: '',
+                    },
                 }
             },
 
