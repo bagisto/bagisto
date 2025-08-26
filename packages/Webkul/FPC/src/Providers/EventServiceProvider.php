@@ -12,10 +12,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'customer.subscription.before'=> [
-            'Webkul\FPC\Listeners\NewsletterSubscriber@beforeCreate',
-        ],
-
         'catalog.product.update.after'  => [
             'Webkul\FPC\Listeners\Product@afterUpdate',
         ],

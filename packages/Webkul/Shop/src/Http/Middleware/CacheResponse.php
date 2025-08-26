@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Spatie\ResponseCache\Middlewares\CacheResponse as BaseCacheResponseMiddleware;
 use Spatie\ResponseCache\ResponseCache as BaseResponseCache;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,6 +92,17 @@ class CacheResponse extends BaseCacheResponseMiddleware
 
             if ($pageURLRewrite) {
                 return redirect()->to($pageURLRewrite->target_path, $pageURLRewrite->redirect_type);
+            }
+        }
+
+        /**
+         * Do not cache the response if there are any flash messages in the session.
+         */
+        $flashKeys = ['success', 'error', 'warning', 'info', 'danger'];
+
+        foreach ($flashKeys as $key) {
+            if (Session::has($key)) {
+                return $next($request); 
             }
         }
 
