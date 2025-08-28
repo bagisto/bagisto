@@ -7,7 +7,7 @@
     >
         <div class="grid grid-cols-1 gap-2.5">
             <template v-if="renting_type == 'daily_hourly'">
-                <x-shop::form.control-group.label class="required w-full">
+                <x-shop::form.control-group.label class="w-full required">
                     @lang('shop::app.products.view.type.booking.rental.choose-rent-option')
                 </x-shop::form.control-group.label>
 
@@ -16,7 +16,7 @@
                     <span class="flex gap-x-4">
                         <input
                             type="radio"
-                            class="peer hidden"
+                            class="hidden peer"
                             id="booking[daily]"
                             name="booking[renting_type]"
                             value="daily"
@@ -24,7 +24,7 @@
                         >
 
                         <label
-                            class="icon-radio-unselect peer-checked:icon-radio-select text-2xl text-navyBlue"
+                            class="text-2xl icon-radio-unselect peer-checked:icon-radio-select text-navyBlue"
                             for="booking[daily]"
                         >
                         </label>
@@ -41,7 +41,7 @@
                     <span class="flex gap-x-4">
                         <input
                             type="radio"
-                            class="peer hidden"
+                            class="hidden peer"
                             id="booking[hourly]"
                             name="booking[renting_type]"
                             value="hourly"
@@ -49,7 +49,7 @@
                         >
 
                         <label
-                            class="icon-radio-unselect peer-checked:icon-radio-select text-2xl text-navyBlue"
+                            class="text-2xl icon-radio-unselect peer-checked:icon-radio-select text-navyBlue"
                             for="booking[hourly]"
                         >
                         </label>
@@ -251,7 +251,7 @@
                 return false;
             }
 
-            return new Date(value) > new Date(target);
+            return new Date(value) >= new Date(target);
         });
 
         app.component('v-rental-slots', {
