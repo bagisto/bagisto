@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Jenis pemesanan tidak dapat diubah.',
+                            'type-mismatch'      => 'Jenis pemesanan tidak dapat diubah.',
+                            'time-validation'    => 'Waktu mulai harus lebih kecil dari waktu selesai.',
+                            'overlap-validation' => 'Slot waktu bertabrakan dengan slot yang sudah ada.',
                         ],
                     ],
 

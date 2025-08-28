@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => '预订类型无法更改。',
+                            'type-mismatch'      => '预订类型无法更改。',
+                            'time-validation'    => '开始时间必须早于结束时间。',
+                            'overlap-validation' => '时间段与已有时间段重叠。',
                         ],
                     ],
 

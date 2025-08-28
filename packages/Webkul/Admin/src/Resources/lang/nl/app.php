@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Het boekingstype kan niet worden gewijzigd.',
+                            'type-mismatch'      => 'Het boekingstype kan niet worden gewijzigd.',
+                            'time-validation'    => 'De starttijd moet kleiner zijn dan de eindtijd.',
+                            'overlap-validation' => 'Het tijdslot overlapt met een bestaand slot.',
                         ],
                     ],
 
