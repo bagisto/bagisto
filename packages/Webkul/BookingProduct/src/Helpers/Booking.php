@@ -427,6 +427,8 @@ class Booking
                                 'timestamp' => $from->getTimestamp().'-'.$to->getTimestamp(),
                                 'qty'       => $qty,
                             ];
+                            
+                            usort($slots, fn($first, $second) => strtotime($first['from']) <=> strtotime($second['from']));
                         }
                     }
                 } else {
