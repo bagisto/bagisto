@@ -22,9 +22,13 @@ class GDPRController extends Controller
         protected OrderRepository $orderRepository,
         protected CustomerAddressRepository $customerAddressRepository
     ) {
-        if (! core()->getConfigData('general.gdpr.settings.enabled')) {
+        if (
+            ! core()->getConfigData('general.gdpr.settings.enabled')
+            && ! app()->runningInConsole()
+        ) {
             abort(404);
         }
+
     }
 
     /**
