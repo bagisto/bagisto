@@ -68,7 +68,7 @@ class ThemeViewFinder extends FileViewFinder
      */
     protected function getThemedViewName($namespace, $view, $isAdmin)
     {
-        $themeCode = themes()->current()->code;
+        $themeCode = themes()->current()?->code;
 
         if (
             ! $isAdmin
