@@ -130,9 +130,9 @@ return [
         'core' => [
             'channels' => [
                 'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'SHOPAGG Demo store',
+                'meta-keywords'    => 'SHOPAGG Demo store meta keyword',
+                'meta-description' => 'SHOPAGG Demo store meta description',
             ],
 
             'currencies' => [

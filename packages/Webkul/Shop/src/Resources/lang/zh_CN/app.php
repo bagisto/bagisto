@@ -539,7 +539,7 @@ return [
                 'footer-content'         => '页脚内容',
                 'footer-text'            => 'Copyright © 2024 - :current_year shopagg. All rights reserved.',
                 'locale'                 => '语言',
-                'newsletter-text'        => '准备好我们有趣的新闻通讯！',
+                'newsletter-text'        => '订阅我们有趣的新闻！',
                 'order-return'           => '订单和退货',
                 'payment-policy'         => '付款政策',
                 'privacy-cookies-policy' => '隐私和 Cookie 政策',
