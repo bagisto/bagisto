@@ -63,7 +63,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
             )
-            ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
+            ->addSelect(DB::raw('SUM('.$tablePrefix.'product_inventories.qty) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
             ->where('product_flat.locale', app()->getLocale())
             ->groupBy('product_flat.product_id');
