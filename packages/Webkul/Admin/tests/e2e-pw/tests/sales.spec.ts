@@ -434,8 +434,6 @@ test.describe("sales management", () => {
         /**
          * Should Cancel a Order
          */
-        
-        await adminPage.goto("admin/sales/orders");
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage.locator(".icon-cancel").click();
         await adminPage
@@ -452,7 +450,7 @@ test.describe("sales management", () => {
          */
         await generateOrder(adminPage);
         await adminPage.waitForTimeout(3000);
-        
+
         /**
          * Create Transaction
          */
@@ -463,55 +461,54 @@ test.describe("sales management", () => {
         await adminPage.locator(".transparent-button > .icon-sales").click();
         await adminPage.locator("#can_create_transaction").nth(1).click();
         await adminPage.getByRole("button", { name: "Create Invoice" }).click();
-    
+
         /**
          * Go to transaction page
          */
         await adminPage.goto("admin/sales/transactions");
         await expect(adminPage.getByText("Paid").first()).toBeVisible();
     });
-    
+
     test("support mass status Change  to Paid for Invoices", async ({
         adminPage,
     }) => {
         await generateOrder(adminPage);
         await adminPage.waitForTimeout(5000);
-    
+
         /**
          * create invoice
          */
         await adminPage.goto("admin/sales/orders");
         await adminPage.reload();
-        await adminPage.waitForTimeout(5000);   
-    
+        await adminPage.waitForTimeout(5000);
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage
             .waitForSelector(
                 "div.transparent-button.px-1 > .icon-sales.text-2xl:visible"
             )
             .catch(() => null);
-    
+
         await adminPage.click(
             "div.transparent-button.px-1 > .icon-sales.text-2xl:visible"
         );
-    
+
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(adminPage.locator("#app")).toContainText(
             "Invoice created successfully"
         );
-    
+
         /**
          * Go to invoice page
          */
         await adminPage.goto("admin/sales/invoices");
-    
+
         const checkboxes = await adminPage.locator('.icon-uncheckbox')
-        await checkboxes.first().click();     
+        await checkboxes.first().click();
         await adminPage.getByRole("button", { name: "Select Action " }).click();
         await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
         await adminPage.getByRole("link", { name: "Paid" }).click();
         await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
-    
+
         await expect(adminPage.locator("#app")).toContainText("Paid");
         await expect(adminPage.getByText('Selected invoice updated successfully')).toBeVisible();
     });
@@ -519,14 +516,14 @@ test.describe("sales management", () => {
  test("support mass status Change to overdue for Invoices", async ({
         adminPage,
     }) => {
-    
+
         /**
          * Go to invoice page
          */
         await adminPage.goto("admin/sales/invoices");
 
         const checkboxes = await adminPage.locator('.icon-uncheckbox')
-        await checkboxes.first().click();     
+        await checkboxes.first().click();
         await adminPage.getByRole("button", { name: "Select Action " }).click();
         await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
         await adminPage.getByRole("link", { name: "Overdue" }).click();

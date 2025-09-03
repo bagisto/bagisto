@@ -2,29 +2,12 @@
 
 namespace Webkul\User\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Webkul\User\Bouncer;
-use Webkul\User\Facades\Bouncer as BouncerFacade;
 use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;
 
 class UserServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        include __DIR__.'/../Http/helpers.php';
-
-        $router->aliasMiddleware('admin', BouncerMiddleware::class);
-
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
-    }
-
     /**
      * Register services.
      *
@@ -32,21 +15,18 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerBouncer();
+        include __DIR__.'/../Http/helpers.php';
     }
 
     /**
-     * Register Bouncer as a singleton.
+     * Bootstrap services.
      *
      * @return void
      */
-    protected function registerBouncer()
+    public function boot(Router $router)
     {
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Bouncer', BouncerFacade::class);
+        $router->aliasMiddleware('admin', BouncerMiddleware::class);
 
-        $this->app->singleton('bouncer', function () {
-            return new Bouncer;
-        });
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 }

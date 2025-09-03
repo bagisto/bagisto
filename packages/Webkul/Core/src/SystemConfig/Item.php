@@ -13,6 +13,7 @@ class Item
         public Collection $children,
         public ?array $fields,
         public ?string $icon,
+        public ?string $icon_class,
         public ?string $info,
         public string $key,
         public string $name,
@@ -98,6 +99,14 @@ class Item
     public function getIcon(): ?string
     {
         return $this->icon;
+    }
+
+    /**
+     * Get Icon class.
+     */
+    public function getIconClass(): ?string
+    {
+        return $this->icon_class;
     }
 
     /**

@@ -12,7 +12,15 @@ class ItemField
      * @var array
      */
     protected $veeValidateMappings = [
-        'min' => 'min_value',
+        'max' => [
+            'text'   => 'max',
+            'number' => 'max_value',
+        ],
+
+        'min' => [
+            'text'   => 'min',
+            'number' => 'min_value',
+        ],
     ];
 
     /**
@@ -94,7 +102,11 @@ class ItemField
         }
 
         foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
-            $this->validation = str_replace($laravelRule, $veeValidateRule, $this->validation);
+            if (! array_key_exists($this->getType(), $veeValidateRule)) {
+                continue;
+            }
+
+            $this->validation = str_replace($laravelRule, $veeValidateRule[$this->getType()], $this->validation);
         }
 
         return $this->validation;

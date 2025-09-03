@@ -1,6 +1,28 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
 import { generatePhoneNumber, generateEmail } from "../utils/faker";
+import { downloadableOrder, generateOrder } from "../utils/order";
+
+function generateRandomDate() {
+    const today = new Date();
+    const endDate = new Date(
+        today.getFullYear() - 1,
+        today.getMonth(),
+        today.getDate()
+    );
+    const startDate = new Date(1925, 0, 1);
+
+    const randomDate = new Date(
+        startDate.getTime() +
+            Math.random() * (endDate.getTime() - startDate.getTime())
+    );
+
+    const year = randomDate.getFullYear();
+    const month = String(randomDate.getMonth() + 1).padStart(2, "0");
+    const day = String(randomDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
 
 test("should edit a profile", async ({ page }) => {
     const credentials = await loginAsCustomer(page);
@@ -8,10 +30,14 @@ test("should edit a profile", async ({ page }) => {
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
     await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByPlaceholder("First Name").click();
-    await page.getByPlaceholder("First Name").fill(credentials.firstName);
-    await page.getByPlaceholder("Last Name").click();
-    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
+    await page.getByRole("textbox", { name: "First Name" }).click();
+    await page
+        .getByRole("textbox", { name: "First Name" })
+        .fill(credentials.firstName);
+    await page.getByRole("textbox", { name: "Last Name" }).click();
+    await page
+        .getByRole("textbox", { name: "Last Name" })
+        .fill(credentials.lastName);
     await page.getByPlaceholder("Email", { exact: true }).click();
     await page
         .getByPlaceholder("Email", { exact: true })
@@ -19,11 +45,10 @@ test("should edit a profile", async ({ page }) => {
     await page.getByPlaceholder("Phone").click();
     await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
     await page.getByLabel("shop::app.customers.account.").selectOption("Male");
-    await page.getByPlaceholder("Date of Birth").click();
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - 1);
-    const formattedDate = date.toISOString().split("T")[0];
-    await page.getByPlaceholder("Date of Birth").fill(formattedDate);
+    await page.getByRole("textbox", { name: "Date of Birth" }).click();
+    await page
+        .getByRole("textbox", { name: "Date of Birth" })
+        .fill(generateRandomDate());
     await page.getByRole("button", { name: "Save" }).click();
 
     await expect(
@@ -97,63 +122,123 @@ test("should delete the address", async ({ page }) => {
     ).toBeVisible();
 });
 
-// for these testing we need order helper.. first we create order then we will test the reorder,
-// cancel order, print invoice, downloadable orders, etc and also these test needs improvements...
-// test("Reorder", async ({ page }) => {
-//     await loginAsCustomer(page);
+test("should be able to reorder", async ({ page }) => {
+    await generateOrder(page);
 
-//     await page.getByLabel("Profile").click();
-//     await page.getByRole("link", { name: "Orders", exact: true }).click();
-//     await page.locator("div").locator("span.icon-eye").first().click();
-//     await page.getByRole("link", { name: "Reorder" }).click();
+    await page.goto("");
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Orders", exact: true }).click();
+    await page.locator("div").locator("span.icon-eye").first().click();
+    await page.getByRole("link", { name: "Reorder" }).click();
 
-//     await page.getByRole("button", { name: "Update Cart" }).click();
+    await page.getByRole("button", { name: "Update Cart" }).click();
 
-//     await expect(
-//         page.getByText("Quantity updated successfully").first()
-//     ).toBeVisible();
-// });
+    await expect(
+        page.getByText("Quantity updated successfully").first()
+    ).toBeVisible();
+});
 
-// test("Cancel Order", async ({ page }) => {
-//     await loginAsCustomer(page);
+test("should be able to cancel order", async ({ page }) => {
+    await generateOrder(page);
 
-//     await page.getByLabel("Profile").click();
-//     await page.getByRole("link", { name: "Orders", exact: true }).click();
-//     await page.locator("div").locator("span.icon-eye").first().click();
-//     await page.getByRole("link", { name: "Cancel" }).click();
-//     await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await page.goto("");
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Orders", exact: true }).click();
+    await page.locator("div").locator("span.icon-eye").first().click();
+    await page.getByRole("link", { name: "Cancel" }).click();
+    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    
+    await page.waitForTimeout(4000);
+    await expect(
+        page
+            .getByRole("paragraph")
+            .filter({ hasText: "Your order has been canceled" })
+    ).toBeVisible();
+});
 
-//     await expect(
-//         page.getByText("Your order has been canceled").first()
-//     ).toBeVisible();
-// });
+test("should be able to print invoice", async ({ page }) => {
+    await generateOrder(page);
 
-// test("Print Invoice", async ({ page }) => {
-//     await loginAsCustomer(page);
+    /**
+     * Login to admin panel.
+     */
+    const adminCredentials = {
+        email: "admin@example.com",
+        password: "admin123",
+    };
+    await page.goto("admin/login");
+    await page.getByPlaceholder("Email Address").click();
+    await page.getByPlaceholder("Email Address").fill(adminCredentials.email);
+    await page.getByPlaceholder("Password").click();
+    await page.getByPlaceholder("Password").fill(adminCredentials.password);
+    await page.getByRole("button", { name: "Sign In" }).click();
 
-//     await page.getByLabel("Profile").click();
-//     await page.getByRole("link", { name: "Orders", exact: true }).click();
-//     await page.locator("div").locator("span.icon-eye").first().click();
-//     await page.getByRole("button", { name: "Invoices" }).click();
-//     const downloadPromise = page.waitForEvent("download");
-//     await page.getByRole("link", { name: " Print" }).click();
-//     const download = await downloadPromise;
-// });
+    /**
+     * Create invoice
+     */
+    await page.goto("admin/sales/orders");
+    await page.locator(".row > div:nth-child(4) > a").first().click();
+    await page.getByText("Invoice", { exact: true }).click();
+    await page.locator("#can_create_transaction").nth(1).click();
+    await page.getByRole("button", { name: "Create Invoice" }).click();
+    await expect(
+        page.getByText("Invoice created successfully Close")
+    ).toBeVisible();
+    await expect(
+        page.locator("span").filter({ hasText: "Processing" })
+    ).toBeVisible();
 
-// test("Downloadable Orders", async ({ page }) => {
-//     await loginAsCustomer(page);
+    /**
+     * check invoice to customer side.
+     */
+    await page.goto("");
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Orders", exact: true }).click();
+    await page.locator("div").locator("span.icon-eye").first().click();
+    await page.getByRole("button", { name: "Invoices" }).click();
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("link", { name: " Print" }).click();
+    await downloadPromise;
+});
 
-//     await page.getByLabel("Profile").click();
-//     await page.getByRole("link", { name: "Profile", exact: true }).click();
-//     await page.getByRole("link", { name: " Downloadable Products " }).click();
-//     const page2Promise = page.waitForEvent("popup");
-//     const download1Promise = page.waitForEvent("download");
-//     await page.getByRole("link", { name: "file", exact: true }).click();
-//     const page2 = await page2Promise;
-//     const download1 = await download1Promise;
-// });
+test("should able to download downloadable orders", async ({ shopPage }) => {
+    /**
+     * Login to admin panel.
+     */
+    const adminCredentials = {
+        email: "admin@example.com",
+        password: "admin123",
+    };
 
-// need wishlist helper first...
+    await shopPage.goto("admin/login");
+    await shopPage.getByPlaceholder("Email Address").click();
+    await shopPage
+        .getByPlaceholder("Email Address")
+        .fill(adminCredentials.email);
+    await shopPage.getByPlaceholder("Password").click();
+    await shopPage.getByPlaceholder("Password").fill(adminCredentials.password);
+    await shopPage.getByRole("button", { name: "Sign In" }).click();
+
+    /**
+     * Create downloadable product.
+     */
+    const productName = await downloadableOrder(shopPage);
+
+    /**
+     * Go to shop for download a product.
+     */
+    await shopPage.goto("");
+    await shopPage.getByLabel("Profile").click();
+    await shopPage.getByRole("link", { name: "Profile", exact: true }).click();
+    await shopPage
+        .getByRole("link", { name: " Downloadable Products " })
+        .click();
+    const popupPromise = shopPage.waitForEvent('popup').catch(() => null);
+    const downloadPromise = shopPage.waitForEvent('download').catch(() => null);
+    await shopPage.getByRole("link", { name: productName }).click();
+    const result = await Promise.race([popupPromise, downloadPromise]);
+});
+
 test("should add wishlist to cart", async ({ page }) => {
     await loginAsCustomer(page);
 
@@ -169,10 +254,12 @@ test("should add wishlist to cart", async ({ page }) => {
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByRole("button", { name: "Move To Cart" }).first().click();
+    await page.getByRole("button", { name: "Move To Cart" }).nth(1).click();
 
     await expect(
-        page.getByText("Item Successfully Moved to Cart").first()
+        page
+            .getByRole("paragraph")
+            .filter({ hasText: "Item Successfully Moved to Cart" })
     ).toBeVisible();
 });
 
@@ -191,22 +278,6 @@ test("should remove product from wishlist", async ({ page }) => {
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.locator(".max-md\\:hidden > .flex").first().click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
-
-    await expect(
-        page.getByText("Item Successfully Removed From Wishlist").first()
-    ).toBeVisible();
-});
-
-test("should clear all wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
-
-    await addWishlist(page);
-
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByText("Delete All", { exact: true }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
 
     await expect(

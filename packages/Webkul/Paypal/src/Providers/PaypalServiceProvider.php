@@ -7,22 +7,6 @@ use Illuminate\Support\ServiceProvider;
 class PaypalServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        include __DIR__.'/../Http/routes.php';
-
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'paypal');
-
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paypal');
-
-        $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
      * Register services.
      *
      * @return void
@@ -30,6 +14,22 @@ class PaypalServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadRoutesFrom(__DIR__.'/../Http/routes.php');
+
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'paypal');
+
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paypal');
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

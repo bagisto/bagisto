@@ -27,6 +27,7 @@ class Theme
         public $name = null,
         public $assetsPath = null,
         public $viewsPath = null,
+        public $viewsNamespace = null,
         public $vite = []
     ) {
         $this->assetsPath = $assetsPath === null ? $code : $assetsPath;

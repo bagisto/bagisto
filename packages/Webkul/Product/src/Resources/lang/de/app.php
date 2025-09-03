@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => 'Mindestens ein Produkt sollte mehr als 1 Menge haben.',
             ],
 
+            'invalid-file-extension'   => 'Ungültige Dateierweiterung gefunden.',
             'inventory-warning'        => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'missing-links'            => 'Download-Links fehlen für dieses Produkt.',
             'missing-options'          => 'Optionen fehlen für dieses Produkt.',
@@ -41,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'Bündel',
+        'booking'      => 'Buchung',
         'configurable' => 'Konfigurierbar',
         'downloadable' => 'Downloadbar',
         'grouped'      => 'Gruppiert',

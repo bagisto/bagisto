@@ -84,6 +84,97 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.content.speculation_rules',
+        'name'   => 'admin::app.configuration.index.general.content.speculation-rules.title',
+        'info'   => 'admin::app.configuration.index.general.content.speculation-rules.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'prerender_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'prerender_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls-info',
+                'type'    => 'textarea',
+                'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prerender_enabled:true',
+            ], [
+                'name'    => 'prerender_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params-info',
+                'type'    => 'textarea',
+                'depends' => 'prerender_enabled:true',
+            ], [
+                'name'    => 'prerender_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness-info',
+                'type'    => 'select',
+                'default' => 'moderate',
+                'depends' => 'prerender_enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eager',
+                        'value' => 'eager',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.moderate',
+                        'value' => 'moderate',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.conservative',
+                        'value' => 'conservative',
+                    ],
+                ],
+            ], [
+                'name'    => 'prefetch_enabled',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.enabled',
+                'type'    => 'boolean',
+                'default' => false,
+            ], [
+                'name'    => 'prefetch_ignore_urls',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls-info',
+                'type'    => 'textarea',
+                'default' => 'account|checkout|onepage|cart',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_ignore_url_params',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params-info',
+                'type'    => 'textarea',
+                'depends' => 'prefetch_enabled:true',
+            ], [
+                'name'    => 'prefetch_eagerness',
+                'title'   => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness',
+                'info'    => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness-info',
+                'type'    => 'select',
+                'default' => 'moderate',
+                'depends' => 'prefetch_enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eager',
+                        'value' => 'eager',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.moderate',
+                        'value' => 'moderate',
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.conservative',
+                        'value' => 'conservative',
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.configuration.index.general.content.custom-scripts.title',
         'info'   => 'admin::app.configuration.index.general.content.custom-scripts.title-info',
@@ -127,6 +218,33 @@ return [
                 'type'          => 'image',
                 'channel_based' => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
+            ],
+        ],
+    ], [
+        'key'    => 'general.design.categories',
+        'name'   => 'admin::app.configuration.index.general.design.menu-category.title',
+        'info'   => 'admin::app.configuration.index.general.design.menu-category.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'category_view',
+                'title'   => 'admin::app.configuration.index.general.design.menu-category.title',
+                'type'    => 'select',
+                'default' => 'default',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.default',
+                        'value' => 'default',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.design.menu-category.sidebar',
+                        'value' => 'sidebar',
+                    ],
+                ],
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'blade',
+                'path'          => 'admin::configuration.custom-views.category-menu',
             ],
         ],
     ], [
@@ -226,41 +344,71 @@ return [
                 'channel_based' => true,
                 'options'       => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-3-5-turbo',
-                        'value' => 'gpt-3.5-turbo',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
+                        'value' => 'gpt-4-turbo',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2',
-                        'value' => 'llama2',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
+                        'value' => 'gpt-4o',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral',
-                        'value' => 'mistral',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.dolphin-phi',
-                        'value' => 'dolphin-phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
+                        'value' => 'gemini-2.0-flash',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi',
-                        'value' => 'phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
+                        'value' => 'deepseek-r1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm',
-                        'value' => 'starling-lm',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
+                        'value' => 'llama3-8b-8192',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2-uncensored',
-                        'value' => 'llama2-uncensored',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
+                        'value' => 'llama3.2:3b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2:13b',
-                        'value' => 'llama2:13b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-1b',
+                        'value' => 'llama3.2:1b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2:70b',
-                        'value' => 'llama2:70b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-1-8b',
+                        'value' => 'llama3.1:8b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-8b',
+                        'value' => 'llama3:8b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava-7b',
+                        'value' => 'llava:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-13b',
+                        'value' => 'vicuna:13b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-7b',
+                        'value' => 'vicuna:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-14b',
+                        'value' => 'qwen2.5:14b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-7b',
+                        'value' => 'qwen2.5:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-3b',
+                        'value' => 'qwen2.5:3b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-1-5b',
+                        'value' => 'qwen2.5:1.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-0-5b',
+                        'value' => 'qwen2.5:0.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral-7b',
+                        'value' => 'mistral:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm-7b',
+                        'value' => 'starling-lm:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi3-5',
+                        'value' => 'phi3.5',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
                         'value' => 'orca-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna',
-                        'value' => 'vicuna',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava',
-                        'value' => 'llava',
                     ],
                 ],
             ],
@@ -283,47 +431,263 @@ return [
                 'channel_based' => true,
                 'options'       => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-3-5-turbo',
-                        'value' => 'open-ai-gpt-3.5-turbo',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
+                        'value' => 'gpt-4-turbo',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2',
-                        'value' => 'llama2',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
+                        'value' => 'gpt-4o',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral',
-                        'value' => 'mistral',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.dolphin-phi',
-                        'value' => 'dolphin-phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
+                        'value' => 'gemini-2.0-flash',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi',
-                        'value' => 'phi',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
+                        'value' => 'deepseek-r1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm',
-                        'value' => 'starling-lm',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
+                        'value' => 'llama3.3',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2-uncensored',
-                        'value' => 'llama2-uncensored',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
+                        'value' => 'llama3.2:3b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:13b',
-                        'value' => 'llama2:13b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
+                        'value' => 'llama3.2:1b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:70b',
-                        'value' => 'llama2:70b',
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
+                        'value' => 'llama3.1:8b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
+                        'value' => 'llama3:8b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
+                        'value' => 'llava:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
+                        'value' => 'vicuna:13b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
+                        'value' => 'vicuna:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
+                        'value' => 'qwen2.5:14b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
+                        'value' => 'qwen2.5:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
+                        'value' => 'qwen2.5:3b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
+                        'value' => 'qwen2.5:1.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
+                        'value' => 'qwen2.5:0.5b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
+                        'value' => 'mistral:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
+                        'value' => 'starling-lm:7b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
+                        'value' => 'phi3.5',
                     ], [
                         'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
                         'value' => 'orca-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna',
-                        'value' => 'vicuna',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava',
-                        'value' => 'llava',
                     ],
                 ],
             ], [
                 'name'          => 'prompt',
                 'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
                 'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ],
+    ], [
+        'key'  => 'general.sitemap',
+        'name' => 'admin::app.configuration.index.general.sitemap.title',
+        'info' => 'admin::app.configuration.index.general.sitemap.info',
+        'icon' => 'settings/store.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'general.sitemap.settings',
+        'name'   => 'admin::app.configuration.index.general.sitemap.settings.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.settings.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.sitemap.settings.enabled',
+                'type'          => 'boolean',
+                'default'       => 1,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.sitemap.file_limits',
+        'name'   => 'admin::app.configuration.index.general.sitemap.file-limits.title',
+        'info'   => 'admin::app.configuration.index.general.sitemap.file-limits.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'max_url_per_file',
+                'title'         => 'admin::app.configuration.index.general.sitemap.file-limits.max-url-per-file',
+                'type'          => 'text',
+                'default'       => 50000,
+                'validation'    => 'integer|min:1',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'  => 'general.gdpr',
+        'name' => 'admin::app.configuration.index.general.gdpr.title',
+        'info' => 'admin::app.configuration.index.general.gdpr.info',
+        'icon' => 'settings/store.svg',
+        'sort' => 4,
+    ], [
+        'key'    => 'general.gdpr.settings',
+        'name'   => 'admin::app.configuration.index.general.gdpr.settings.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.settings.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.settings.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.agreement',
+        'name'   => 'admin::app.configuration.index.general.gdpr.agreement.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.agreement.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.enable',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'agreement_label',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'text',
+                'default'       => 'I agree with the terms and conditions.',
+                'validation'    => 'max:255',
+                'depends'       => 'enabled:true',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'agreement_content',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.content',
+                'type'          => 'editor',
+                'depends'       => 'enabled:true',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.cookie',
+        'name'   => 'admin::app.configuration.index.general.gdpr.cookie.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.cookie.info',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.enable',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'position',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.position',
+                'type'          => 'select',
+                'default'       => 'bottom-left',
+                'depends'       => 'enabled:true',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-left',
+                        'value' => 'bottom-left',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-right',
+                        'value' => 'bottom-right',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.top-left',
+                        'value' => 'top-left',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.top-right',
+                        'value' => 'top-right',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.gdpr.cookie.center',
+                        'value' => 'center',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'static_block_identifier',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.identifier',
+                'type'          => 'text',
+                'default'       => 'Cookie Block',
+                'validation'    => 'max:255',
+                'depends'       => 'enabled:true',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie.description',
+                'type'          => 'textarea',
+                'default'       => 'This website uses cookies to ensure you get the best experience on our website.',
+                'validation'    => 'max:500',
+                'depends'       => 'enabled:true',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.gdpr.cookie_consent',
+        'name'   => 'admin::app.configuration.index.general.gdpr.cookie-consent.title',
+        'info'   => 'admin::app.configuration.index.general.gdpr.cookie-consent.info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'          => 'strictly_necessary',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.strictly-necessary',
+                'type'          => 'editor',
+                'default'       => 'I agree with the terms and conditions.',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'basic_interaction',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.basic-interaction',
+                'type'          => 'editor',
+                'default'       => 'These trackers enable basic interactions and functionalities that allow you to access selected features of our service and facilitate your communication with us.',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'experience_enhancement',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.experience-enhancement',
+                'type'          => 'editor',
+                'default'       => 'These trackers help us to provide a personalized user experience by improving the quality of your preference management options, and by enabling the interaction with external networks and platforms.',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'measurements',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.measurement',
+                'type'          => 'editor',
+                'default'       => 'These trackers help us to measure traffic and analyze your behavior with the goal of improving our service.',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'targeting_advertising',
+                'title'         => 'admin::app.configuration.index.general.gdpr.cookie-consent.targeting-advertising',
+                'type'          => 'editor',
+                'default'       => 'These trackers help us to deliver personalized marketing content to you based on your behavior and to operate, serve and track ads.',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
@@ -599,6 +963,11 @@ return [
             ], [
                 'name'    => 'customer_review',
                 'title'   => 'admin::app.configuration.index.catalog.products.review.allow-customer-review',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'censoring_reviewer_name',
+                'title'   => 'admin::app.configuration.index.catalog.products.review.censoring-reviewer-name',
                 'type'    => 'boolean',
                 'default' => true,
             ], [
@@ -955,11 +1324,11 @@ return [
         'sort'   => 5,
         'fields' => [
             [
-                'name'         => 'subscription',
-                'title'        => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
-                'info'         => 'Enable subscription option for users in the footer section.',
-                'type'         => 'boolean',
-                'default'      => 1,
+                'name'    => 'subscription',
+                'title'   => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
+                'info'    => 'Enable subscription option for users in the footer section.',
+                'type'    => 'boolean',
+                'default' => 1,
             ],
         ],
     ], [
@@ -976,35 +1345,125 @@ return [
         ],
     ], [
         'key'    => 'customer.settings.social_login',
-        'name'   => 'admin::app.configuration.index.customer.settings.social-login.social-login',
-        'info'   => 'admin::app.configuration.index.customer.settings.social-login.social-login-info',
+        'name'   => 'admin::app.configuration.index.customer.settings.social-login.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.social-login.info',
         'sort'   => 7,
         'fields' => [
             [
                 'name'          => 'enable_facebook',
-                'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-facebook',
+                'title'         => 'admin::app.configuration.index.customer.settings.social-login.facebook.enable-facebook',
                 'type'          => 'boolean',
                 'channel_based' => true,
+            ], [
+                'name'    => 'facebook_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.facebook.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.facebook.client-id.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_facebook:1',
+            ], [
+                'name'    => 'facebook_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.facebook.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.facebook.client-secret.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_facebook:1',
+            ], [
+                'name'    => 'facebook_callback_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_facebook:1',
             ], [
                 'name'          => 'enable_twitter',
-                'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-twitter',
+                'title'         => 'admin::app.configuration.index.customer.settings.social-login.twitter.enable-twitter',
                 'type'          => 'boolean',
                 'channel_based' => true,
+            ], [
+                'name'    => 'twitter_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.twitter.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.twitter.client-id.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_twitter:1',
+            ], [
+                'name'    => 'twitter_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.twitter.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.twitter.client-secret.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_twitter:1',
+            ], [
+                'name'    => 'twitter_callback_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_twitter:1',
             ], [
                 'name'          => 'enable_google',
-                'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-google',
+                'title'         => 'admin::app.configuration.index.customer.settings.social-login.google.enable-google',
                 'type'          => 'boolean',
                 'channel_based' => true,
+            ], [
+                'name'    => 'google_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.google.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.google.client-id.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_google:1',
+            ], [
+                'name'    => 'google_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.google.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.google.client-secret.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_google:1',
+            ], [
+                'name'    => 'google_callback_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_google:1',
             ], [
                 'name'          => 'enable_linkedin-openid',
-                'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-linkedin',
+                'title'         => 'admin::app.configuration.index.customer.settings.social-login.linkedin.enable-linkedin',
                 'type'          => 'boolean',
                 'channel_based' => true,
             ], [
+                'name'    => 'linkedin_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_linkedin-openid:1',
+            ], [
+                'name'    => 'linkedin_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_linkedin-openid:1',
+            ], [
+                'name'    => 'linkedin_callback_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_linkedin-openid:1',
+            ], [
                 'name'          => 'enable_github',
-                'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-github',
+                'title'         => 'admin::app.configuration.index.customer.settings.social-login.github.enable-github',
                 'type'          => 'boolean',
                 'channel_based' => true,
+            ], [
+                'name'    => 'github_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.github.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.github.client-id.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_github:1',
+            ], [
+                'name'    => 'github_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.github.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.github.client-secret.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_github:1',
+            ], [
+                'name'    => 'github_callback_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_github:1',
             ],
         ],
     ],
@@ -1869,6 +2328,13 @@ return [
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
+            ], [
+                'name'          => 'footer_text',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text',
+                'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text-info',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ], [

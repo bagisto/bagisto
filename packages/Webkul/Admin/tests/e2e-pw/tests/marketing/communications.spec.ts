@@ -29,9 +29,7 @@ async function createTemplate(adminPage) {
         'button[type="submit"][class="primary-button"]:visible:has-text("Save Template")'
     );
 
-    await expect(
-        adminPage.getByText("Email template created successfully.")
-    ).toBeVisible();
+    await expect(adminPage.locator('#app')).toContainText('Email template created successfully.');
 }
 
 test.describe("communication management", () => {
@@ -52,14 +50,16 @@ test.describe("communication management", () => {
         });
         const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
         await iconEdit[0].click();
+        await adminPage.fill('input[name="name"]', generateName());
 
-        // Content will be added here. Currently just checking the general save button.
-
+        /**
+         * Save the edit template.
+         */
         await adminPage.click(
             'button[type="submit"][class="primary-button"]:visible'
         );
 
-        await expect(adminPage.getByText("Updated successfully")).toBeVisible();
+        await expect(adminPage.locator('#app')).toContainText('Updated successfully');
     });
 
     test("should delete a template", async ({ adminPage }) => {

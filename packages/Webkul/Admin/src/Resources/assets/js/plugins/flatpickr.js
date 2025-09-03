@@ -1,6 +1,7 @@
 import Flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
 import { Spanish } from "flatpickr/dist/l10n/es.js";
+import { Catalan } from "flatpickr/dist/l10n/cat.js"
 import { Arabic } from "flatpickr/dist/l10n/ar.js";
 import { Persian } from "flatpickr/dist/l10n/fa.js";
 import { Turkish } from "flatpickr/dist/l10n/tr.js";
@@ -29,6 +30,7 @@ export default {
 
             const localeMap = {
                 es: Spanish,
+                ca: Catalan,
                 ar: Arabic,
                 fa: Persian,
                 tr: Turkish,

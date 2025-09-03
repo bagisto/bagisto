@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
@@ -133,12 +134,20 @@ class ProductDataGrid extends DataGrid
             'index'      => 'base_image',
             'label'      => trans('admin::app.catalog.products.index.datagrid.image'),
             'type'       => 'string',
+            'exportable' => false,
+            'closure'    => function ($row) {
+                if (! $row->base_image) {
+                    return;
+                }
+
+                return Storage::url($row->base_image);
+            },
         ]);
 
         $this->addColumn([
             'index'      => 'price',
             'label'      => trans('admin::app.catalog.products.index.datagrid.price'),
-            'type'       => 'string',
+            'type'       => 'decimal',
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -316,8 +325,13 @@ class ProductDataGrid extends DataGrid
 
         $ids = collect($results['hits']['hits'])->pluck('_id')->toArray();
 
-        $this->queryBuilder->whereIn('product_flat.product_id', $ids)
-            ->orderBy(DB::raw('FIELD(product_flat.product_id, '.implode(',', $ids).')'));
+        $this->queryBuilder
+            ->whereIn('product_flat.product_id', $ids);
+
+        if ($ids) {
+            $this->queryBuilder
+                ->orderBy(DB::raw('FIELD('.DB::getTablePrefix().'product_flat.product_id, '.implode(',', $ids).')'));
+        }
 
         $total = $results['hits']['total']['value'];
 

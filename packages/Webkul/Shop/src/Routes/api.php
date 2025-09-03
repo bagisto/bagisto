@@ -12,7 +12,7 @@ use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 
-Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
+Route::group(['prefix' => 'api'], function () {
     Route::controller(CoreController::class)->prefix('core')->group(function () {
         Route::get('countries', 'getCountries')->name('shop.api.core.countries');
 
@@ -25,6 +25,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('tree', 'tree')->name('shop.api.categories.tree');
 
         Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
+
+        Route::get('attributes/{attribute_id}/options', 'getAttributeOptions')->name('shop.api.categories.attribute_options');
 
         Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
@@ -97,7 +99,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
-
         Route::controller(AddressController::class)->prefix('addresses')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.addresses.index');
 

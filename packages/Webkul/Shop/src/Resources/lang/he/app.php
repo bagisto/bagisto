@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'כבר יש לך חשבון?',
             'bagisto'                     => 'בַּגִּיסְטוֹ',
             'button-title'                => 'הירשם',
+            'click-here'                  => 'לחץ כאן',
             'confirm-pass'                => 'אימות סיסמה',
             'email'                       => 'אימייל',
             'first-name'                  => 'שם פרטי',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'חשבון נוצר בהצלחה.',
             'success-verify'              => 'חשבון נוצר בהצלחה, הודעת אימייל נשלחה לאימות.',
             'success-verify-email-unsent' => 'חשבון נוצר בהצלחה, אך הודעת האימייל לא נשלחה.',
+            'terms-conditions'            => 'תנאים והגבלות',
             'verification-not-sent'       => 'שגיאה! בעיה בשליחת האימייל לאימות, אנא נסה שוב מאוחר יותר.',
             'verification-sent'           => 'האימייל לאימות נשלח',
             'verified'                    => 'חשבונך אומת, נסה להתחבר כעת.',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'הפריט הוסף בהצלחה לרשימת המשאלות',
                 'title'              => 'רשימת משאלות',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'הבקשה נוצרה בהצלחה',
+                'revoked-successfully'        => 'הבקשה בוטלה בהצלחה',
+                'success-verify'              => 'הצלחה! אימייל האימות נשלח.',
+                'success-verify-email-unsent' => 'הצלחה! אימייל האימות לא נשלח.',
+                'unable-to-sent'              => 'לא ניתן לשלוח אימייל.',
+
+                'index'   => [
+                    'create-btn' => 'צור בקשה',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'בקשות נתונים GDPR',
+
+                    'modal' => [
+                        'message' => 'הודעה',
+                        'save'    => 'שמור',
+                        'title'   => 'צור בקשה חדשה',
+
+                        'type'    => [
+                            'choose' => 'בחר',
+                            'delete' => 'מחק',
+                            'title'  => 'סוג',
+                            'update' => 'עדכן',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'הושלם',
+                        'date'       => 'תאריך',
+                        'declined'   => 'נדחה',
+                        'delete'     => 'מחק',
+                        'id'         => 'מזהה',
+                        'message'    => 'הודעה',
+                        'pending'    => 'ממתין',
+                        'processing' => 'בעיבוד',
+                        'revoke-btn' => 'לבטל',
+                        'revoked'    => 'בוטל',
+                        'status'     => 'סטטוס',
+                        'type'       => 'סוג',
+                        'update'     => 'עדכן',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'תצוגת חנות ברירת מחדל',
+
+                    'account-info' => [
+                        'dob'          => 'תאריך לידה',
+                        'email'        => 'אימייל',
+                        'first-name'   => 'שם פרטי',
+                        'gender'       => 'מגדר',
+                        'last-name'    => 'שם משפחה',
+                        'phone'        => 'טלפון',
+                        'title'        => 'פרטי חשבון',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'כתובת',
+                        'address1'   => 'כתובת 1',
+                        'address2'   => 'כתובת 2',
+                        'city'       => 'עיר',
+                        'company'    => 'חברה',
+                        'country'    => 'מדינה',
+                        'first-name' => 'שם פרטי',
+                        'last-name'  => 'שם משפחה',
+                        'phone'      => 'טלפון',
+                        'postcode'   => 'מיקוד',
+                        'state'      => 'מדינה',
+                        'title'      => 'פרטי כתובת',
+                        'vat-id'     => 'מספר מע"מ',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'סכום',
+                        'order-id'     => 'מזהה הזמנה',
+                        'product-name' => 'שם המוצר',
+                        'qty'          => 'כמות',
+                        'shipping'     => 'משלוח',
+                        'sku'          => 'מק"ט',
+                        'status'       => 'סטטוס',
+                        'title'        => 'פרטי הזמנה',
+                        'type'         => 'סוג',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'חשבון',
-                'bagisto'           => 'בַּגִּיסְטוֹ',
-                'cart'              => 'עגלה',
-                'compare'           => 'השוואה',
-                'dropdown-text'     => 'ניהול עגלה, הזמנות ורשימת משאלות',
-                'logout'            => 'התנתק',
-                'no-category-found' => 'לא נמצאה קטגוריה.',
-                'orders'            => 'הזמנות',
-                'profile'           => 'פרופיל',
-                'search'            => 'חיפוש',
-                'search-text'       => 'חפש מוצרים כאן',
-                'sign-in'           => 'התחבר',
-                'sign-up'           => 'הרשם',
-                'submit'            => 'שלח',
-                'title'             => 'חשבון',
-                'welcome'           => 'ברוך הבא',
-                'welcome-guest'     => 'ברוך הבא אורח',
-                'wishlist'          => 'רשימת משאלות',
-
                 'desktop' => [
                     'top' => [
-                        'default-locale' => 'שפת ברירת המחדל',
+                        'default-locale' => 'שפת ברירת מחדל',
+                    ],
+
+                    'bottom' => [
+                        'all'           => 'הכל',
+                        'back-button'   => 'חזרה לתפריט הראשי',
+                        'bagisto'       => 'באגיסטו',
+                        'categories'    => 'קטגוריות',
+                        'compare'       => 'השווה',
+                        'dropdown-text' => 'ניהול עגלה, הזמנות ורשימת משאלות',
+                        'logout'        => 'התנתקות',
+                        'orders'        => 'הזמנות',
+                        'profile'       => 'פרופיל',
+                        'search'        => 'חיפוש',
+                        'search-text'   => 'חפש מוצרים כאן',
+                        'sign-in'       => 'התחברות',
+                        'sign-up'       => 'הרשמה',
+                        'submit'        => 'שלח',
+                        'welcome'       => 'ברוך הבא',
+                        'welcome-guest' => 'ברוך הבא אורח',
+                        'wishlist'      => 'רשימת משאלות',
                     ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'מטבעות',
-                    'locales'    => 'אזורים',
-                    'login'      => ' הרשם או התחבר',
+                    'account'       => 'חשבון',
+                    'back-button'   => 'חזרה לתפריט הראשי',
+                    'bagisto'       => 'באגיסטו',
+                    'compare'       => 'השווה',
+                    'currencies'    => 'מטבעות',
+                    'dropdown-text' => 'ניהול עגלה, הזמנות ורשימת משאלות',
+                    'locales'       => 'שפות',
+                    'login'         => 'התחברות או הרשמה',
+                    'logout'        => 'התנתקות',
+                    'orders'        => 'הזמנות',
+                    'profile'       => 'פרופיל',
+                    'search'        => 'חיפוש',
+                    'search-text'   => 'חפש מוצרים כאן',
+                    'sign-in'       => 'התחברות',
+                    'sign-up'       => 'הרשמה',
+                    'welcome'       => 'ברוך הבא',
+                    'welcome-guest' => 'ברוך הבא אורח',
+                    'wishlist'      => 'רשימת משאלות',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'הרשמו לרשימת התפוצה',
                 'subscribe-stay-touch'   => 'הירשמו לעדכונים ונשארו מעודכנים.',
                 'whats-new'              => 'מה חדש',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'מדיניות פרטיות',
+                    'reject'                   => 'דחה',
+                    'accept'                   => 'קבל',
+                    'learn-more-and-customize' => 'למד עוד והתאם אישית',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'העדפות הסכמת העוגיות שלך',
+                    'save-and-continue'                       => 'שמור והמשך',
+                    'strictly-necessary'                      => 'הכרחי בהחלט',
+                    'basic-interactions'                      => 'אינטראקציות ותפקודים בסיסיים',
+                    'experience-enhancement'                  => 'שיפור חווית משתמש',
+                    'measurements'                            => 'מדידה',
+                    'targeting-and-advertising'               => 'מיקוד ופרסום',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'אין',
+                        'total-amount' => 'סכום כולל',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'אנא בחר אפשרות',
                     'select-above-options' => 'אנא בחר אפשרויות למעלה',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'שם',
+                ],
+
+                'booking' => [
+                    'location'    => 'מיקום',
+                    'view-on-map' => 'צפה במפה',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'slot-duration'            => 'משך זמן',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'סגור',
+                        'see-details'              => 'ראה פרטים',
+                        'slot-duration'            => 'משך זמן',
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'today-availability'       => 'זמינות היום',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'הזמן כרטיס',
+                        'title'            => 'אירוע ב-:',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'בחר אפשרות השכרה',
+                        'daily-basis'        => 'בסיס יומי',
+                        'from'               => 'מ',
+                        'hourly-basis'       => 'בסיס שעתי',
+                        'rent-an-item'       => 'השכר פריט',
+                        'select-date'        => 'בחר תאריך',
+                        'select-rent-time'   => 'בחר זמן השכרה',
+                        'select-slot'        => 'בחר משבצת',
+                        'select-time-slot'   => 'בחר משבצת זמן',
+                        'slot'               => 'משבצת',
+                        'no-slots-available' => 'אין משבצות זמינות',
+                        'to'                 => 'עד',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'הזמן שולחן',
+                        'closed'                   => 'סגור',
+                        'slot-duration'            => 'משך זמן',
+                        'slot-duration-in-minutes' => ':minutes דקות',
+                        'slots-for-all-days'       => 'הצג לכל הימים',
+                        'special-notes'            => 'בקשה/הערות מיוחדות',
+                        'today-availability'       => 'זמינות היום',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'הזמן פגישה',
+                        'date'                => 'תאריך',
+                        'no-slots-available'  => 'אין משבצות זמינות',
+                        'select-slot'         => 'בחר משבצת',
+                        'title'               => 'משבצת',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'סגור',
+
+            'cart'             => [
+                'booking-from' => 'הזמנה מ',
+                'booking-till' => 'הזמנה עד',
+                'daily'        => 'בסיס יומי',
+                'event-from'   => 'אירוע מ',
+                'event-ticket' => 'כרטיס אירוע',
+                'event-till'   => 'אירוע עד',
+                'hourly'       => 'בסיס שעתי',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'האירוע הזה פג תוקף.',
+                    ],
+
+                    'missing_options'        => 'אפשרויות חסרות עבור מוצר זה.',
+                    'inventory_warning'      => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
+                    'select_hourly_duration' => 'בחר משבצת זמן של שעה אחת.',
+                ],
+
+                'rent-from'    => 'השכרה מ',
+                'rent-till'    => 'השכרה עד',
+                'rent-type'    => 'סוג השכרה',
+                'renting_type' => 'סוג השכרה',
+                'special-note' => 'בקשה/הערות מיוחדות',
+            ],
+
+            'per-ticket-price' => ':price לכל כרטיס',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'נקה הכל',
             'filter'    => 'מסנן',
             'filters'   => 'מסננים:',
+
+            'search' => [
+                'load-more'            => 'טען עוד',
+                'loading'              => 'טוען...',
+                'no-options-available' => 'אין אפשרויות זמינות.',
+                'results-info'         => 'מציג :currentCount מתוך :totalCount אפשרויות',
+                'title'                => 'חיפוש',
+            ],
+
             'sort'      => 'מיון',
         ],
 
@@ -874,8 +1101,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
-            'resend-verify-email' => 'שלח מחדש אימייל לאימות',
+            'categories-carousel' => 'קרוסלת קטגוריות',
+            'image-carousel'      => 'קרוסלת תמונות',
+            'offer'               => 'קבל עד 40% הנחה על ההזמנה הראשונה שלך, קנה עכשיו',
+            'product-carousel'    => 'קרוסלת מוצרים',
+            'resend-verify-email' => 'שלח מחדש את מייל האימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
 
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'עמוד הבא',
             'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
+            'prev-page'          => 'עמוד קודם',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'כתובת',
         'downloadable-products' => 'מוצרים להורדה',
+        'gdpr-request'          => 'בקשות GDPR',
         'my-account'            => 'החשבון שלי',
         'orders'                => 'הזמנות',
         'profile'               => 'פרופיל',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'ברוך הבא לניוזלטר שלנו!',
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'בקשה חדשה למחיקת נתונים',
+                'new-update-request' => 'בקשה חדשה לעדכון נתונים',
+
+                'new-request' => [
+                    'delete-summary' => 'סיכום בקשת המחיקה',
+                    'message'        => 'הודעה : ',
+                    'request-status' => 'סטטוס הבקשה : ',
+                    'request-type'   => 'סוג הבקשה : ',
+                    'update-summary' => 'סיכום בקשת העדכון',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'הבקשה GDPR שלך עודכנה',
+                    'summary'        => 'סטטוס הבקשה GDPR שלך עודכן',
+                    'request-status' => 'סטטוס הבקשה:',
+                    'request-type'   => 'סוג הבקשה:',
+                    'message'        => 'הודעה:',
+                ],
             ],
 
             'reminder' => [

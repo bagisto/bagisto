@@ -6,6 +6,7 @@ import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
 import { localize, setLocale } from "@vee-validate/i18n";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import bn from "@vee-validate/i18n/dist/locale/bn.json";
+import ca from "@vee-validate/i18n/dist/locale/ca.json";
 import de from "@vee-validate/i18n/dist/locale/de.json";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import es from "@vee-validate/i18n/dist/locale/es.json";
@@ -13,6 +14,7 @@ import fa from "@vee-validate/i18n/dist/locale/fa.json";
 import fr from "@vee-validate/i18n/dist/locale/fr.json";
 import he from "@vee-validate/i18n/dist/locale/he.json";
 import hi_IN from "../../locales/hi_IN.json";
+import id from "@vee-validate/i18n/dist/locale/id.json";
 import it from "@vee-validate/i18n/dist/locale/it.json";
 import ja from "@vee-validate/i18n/dist/locale/ja.json";
 import nl from "@vee-validate/i18n/dist/locale/nl.json";
@@ -128,22 +130,34 @@ export default {
                     ...ar,
                     messages: {
                         ...ar.messages,
+                        decimal: "يجب أن يكون هذا {field} رقمًا عشريًا صالحًا",
                         phone: "يجب أن يكون هذا {field} رقم هاتف صالحًا",
                     },
                 },
-        
+
                 bn: {
                     ...bn,
                     messages: {
                         ...bn.messages,
+                        decimal: "এই {field} একটি বৈধ দশমিক সংখ্যা হতে হবে",
                         phone: "এই {field} একটি বৈধ ফোন নম্বর হতে হবে",
                     },
                 },
-        
+
+                ca: {
+                    ...ca,
+                    messages: {
+                        ...ca.messages,
+                        decimal: "Aquest {field} ha de ser un número decimal vàlid.",
+                        phone: "Aquest {field} ha de ser un número de telèfon vàlid.",
+                    },
+                },
+
                 de: {
                     ...de,
                     messages: {
                         ...de.messages,
+                        decimal: "Dieses {field} muss eine gültige Dezimalzahl sein.",
                         phone: "Dieses {field} muss eine gültige Telefonnummer sein.",
                     },
                 },
@@ -152,126 +166,151 @@ export default {
                     ...en,
                     messages: {
                         ...en.messages,
+                        decimal: "This {field} must be a valid decimal number.",
                         phone: "This {field} must be a valid phone number",
                     },
                 },
-        
+
                 es: {
                     ...es,
                     messages: {
                         ...es.messages,
+                        decimal: "Este {field} debe ser un número decimal válido.",
                         phone: "Este {field} debe ser un número de teléfono válido.",
                     },
                 },
-        
+
                 fa: {
                     ...fa,
                     messages: {
                         ...fa.messages,
+                        decimal: "این {field} باید یک عدد اعشاری معتبر باشد.",
                         phone: "این {field} باید یک شماره تلفن معتبر باشد.",
                     },
                 },
-        
+
                 fr: {
                     ...fr,
                     messages: {
                         ...fr.messages,
+                        decimal: "Ce {field} doit être un nombre décimal valide.",
                         phone: "Ce {field} doit être un numéro de téléphone valide.",
                     },
                 },
-        
+
                 he: {
                     ...he,
                     messages: {
                         ...he.messages,
+                        decimal: "זה {field} חייב להיות מספר עשרוני תקין.",
                         phone: "זה {field} חייב להיות מספר טלפון תקין.",
                     },
                 },
-        
+
                 hi_IN: {
                     ...hi_IN,
                     messages: {
                         ...hi_IN.messages,
+                        decimal: "यह {field} एक मान्य दशमलव संख्या होनी चाहिए।",
                         phone: "यह {field} कोई मान्य फ़ोन नंबर होना चाहिए।",
                     },
                 },
-        
+
+                id: {
+                    ...id,
+                    messages: {
+                        ...id.messages,
+                        decimal: "Nomor desimal {field} harus valid.",
+                        phone: "Nomor telepon {field} harus valid.",
+                    },
+                },
+
                 it: {
                     ...it,
                     messages: {
                         ...it.messages,
+                        decimal: "Questo {field} deve essere un numero decimale valido.",
                         phone: "Questo {field} deve essere un numero di telefono valido.",
                     },
                 },
-        
+
                 ja: {
                     ...ja,
                     messages: {
                         ...ja.messages,
+                        decimal: "この{field}は有効な10進数である必要があります。",
                         phone: "この{field}は有効な電話番号である必要があります。",
                     },
                 },
-        
+
                 nl: {
                     ...nl,
                     messages: {
                         ...nl.messages,
+                        decimal: "Dit {field} moet een geldig decimaal getal zijn.",
                         phone: "Dit {field} moet een geldig telefoonnummer zijn.",
                     },
                 },
-        
+
                 pl: {
                     ...pl,
                     messages: {
                         ...pl.messages,
+                        decimal: "To {field} musi być prawidłową liczbą dziesiętną.",
                         phone: "To {field} musi być prawidłowy numer telefonu.",
                     },
                 },
-        
+
                 pt_BR: {
                     ...pt_BR,
                     messages: {
                         ...pt_BR.messages,
+                        decimal: "Este {field} deve ser um número decimal válido.",
                         phone: "Este {field} deve ser um número de telefone válido.",
                     },
                 },
-        
+
                 ru: {
                     ...ru,
                     messages: {
                         ...ru.messages,
+                        decimal: "Это {field} должно быть действительным десятичным числом.",
                         phone: "Это {field} должно быть действительным номером телефона.",
                     },
                 },
-        
+
                 sin: {
                     ...sin,
                     messages: {
                         ...sin.messages,
+                        decimal: "මෙම {field} වටේ වලංගු දශක්ෂණ අංකය විය යුතුයි.",
                         phone: "මෙම {field} වටේ වලංගු දුරකතන අංකය විය යුතුයි.",
                     },
                 },
-        
+
                 tr: {
                     ...tr,
                     messages: {
                         ...tr.messages,
+                        decimal: "Bu {field} geçerli bir ondalık sayı olmalıdır.",
                         phone: "Bu {field} geçerli bir telefon numarası olmalıdır.",
                     },
                 },
-        
+
                 uk: {
                     ...uk,
                     messages: {
                         ...uk.messages,
+                        decimal: "Це {field} повинно бути дійсним десятковим числом.",
                         phone: "Це {field} повинно бути дійсним номером телефону.",
                     },
                 },
-        
+
                 zh_CN: {
                     ...zh_CN,
                     messages: {
                         ...zh_CN.messages,
+                        decimal: "这个 {field} 必须是一个有效的十进制数。",
                         phone: "这个 {field} 必须是一个有效的电话号码。",
                     },
                 },

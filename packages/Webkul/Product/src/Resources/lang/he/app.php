@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => 'לפחות מוצר אחד צריך לכלול יותר מכמות 1.',
             ],
 
+            'invalid-file-extension'   => 'סיומת קובץ לא חוקית נמצאה.',
             'inventory-warning'        => 'הכמות המבוקשת אינה זמינה, יש לנסות שוב מאוחר יותר.',
             'missing-links'            => 'קישורים להורדה חסרים למוצר זה.',
             'missing-options'          => 'אפשרויות חסרות למוצר זה.',
@@ -41,6 +42,7 @@ return [
         ],
 
         'bundle'       => 'ארגז',
+        'booking'      => 'הזמנה',
         'configurable' => 'ניתן להגדיר',
         'downloadable' => 'ניתן להוריד',
         'grouped'      => 'מקובץ',

@@ -3,6 +3,7 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -12,26 +13,28 @@ use Webkul\Product\Repositories\ProductRepository;
 class ElasticSearch extends AbstractIndexer
 {
     /**
+     * Batch size.
+     *
      * @var int
      */
     private $batchSize;
 
     /**
-     * Attributes
+     * Attributes.
      *
      * @var array
      */
     protected $attributes;
 
     /**
-     * Channels
+     * Channels.
      *
      * @var array
      */
     protected $channels;
 
     /**
-     * Customer Groups
+     * Customer groups
      *
      * @var array
      */
@@ -73,10 +76,10 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Set current product
+     * Set current product.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\Indexers\ElasticSearch\Product
+     * @return self
      */
     public function setProduct($product)
     {
@@ -86,10 +89,10 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Set Channel
+     * Set Channel.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\Indexers\ElasticSearch\Product
+     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @return self
      */
     public function setChannel($channel)
     {
@@ -99,10 +102,10 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Set Locale
+     * Set Locale.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\Indexers\ElasticSearch\Product
+     * @param  \Webkul\Core\Contracts\Locale  $locale
+     * @return self
      */
     public function setLocale($locale)
     {
@@ -112,7 +115,7 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Reindex every products
+     * Reindex every products.
      *
      * @return void
      */
@@ -152,7 +155,7 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Reindex products by batch size
+     * Reindex products by batch size.
      *
      * @return void
      */
@@ -199,7 +202,7 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Delete product indices
+     * Delete product indices.
      *
      * @param  array  $indices
      * @return void
@@ -222,9 +225,9 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Refresh product indices
+     * Refresh product indices.
      *
-     * @return void
+     * @return string
      */
     public function getIndexName()
     {
@@ -232,7 +235,7 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Returns filterable attribute values
+     * Get indices for the product.
      *
      * @return void
      */
@@ -252,7 +255,7 @@ class ElasticSearch extends AbstractIndexer
         foreach ($attributes as $attribute) {
             $attributeValue = $this->getAttributeValue($attribute);
 
-            if ($attribute->code == 'price') {
+            if ($attribute->code == AttributeTypeEnum::PRICE->value) {
                 $properties[$attribute->code] = (float) $attributeValue?->{$attribute->column_name};
 
                 foreach ($this->getCustomerGroups() as $customerGroup) {
@@ -273,8 +276,15 @@ class ElasticSearch extends AbstractIndexer
 
                     $properties[$attribute->code.'_'.$customerGroup->id] = (float) $groupPrice;
                 }
-            } elseif ($attribute->type == 'boolean') {
-                $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
+            } elseif ($attribute->type == AttributeTypeEnum::BOOLEAN->value) {
+                $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name} ?? $attribute->default_value);
+            } elseif (in_array($attribute->type, [
+                AttributeTypeEnum::CHECKBOX->value,
+                AttributeTypeEnum::MULTISELECT->value,
+            ])) {
+                $rawValue = $attributeValue?->{$attribute->column_name};
+
+                $properties[$attribute->code] = $rawValue ? array_map('trim', explode(',', $rawValue)) : [];
             } else {
                 $properties[$attribute->code] = strip_tags($attributeValue?->{$attribute->column_name});
             }
@@ -290,9 +300,9 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Returns attributes to index
+     * Returns attributes to index.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAttributes()
     {
@@ -300,27 +310,30 @@ class ElasticSearch extends AbstractIndexer
             return $this->attributes;
         }
 
-        $this->attributes = $this->attributeRepository->scopeQuery(function ($query) {
-            return $query->where(function ($qb) {
-                return $qb->orWhereIn('code', [
-                    'name',
-                    'status',
-                    'visible_individually',
-                    'new',
-                    'featured',
-                    'url_key',
-                    'short_description',
-                    'description',
-                ])
-                    ->orWhere('is_filterable', 1);
-            });
-        })->get();
+        $this->attributes = $this->attributeRepository
+            ->scopeQuery(function ($query) {
+                return $query->where(function ($qb) {
+                    return $qb
+                        ->orWhereIn('code', [
+                            'name',
+                            'status',
+                            'visible_individually',
+                            'new',
+                            'featured',
+                            'url_key',
+                            'short_description',
+                            'description',
+                        ])
+                        ->orWhere('is_filterable', 1);
+                });
+            })
+            ->get();
 
         return $this->attributes;
     }
 
     /**
-     * Returns filterable attribute values
+     * Returns filterable attribute values.
      *
      * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @param  \Webkul\Product\Contracts\ProductAttributeValue
@@ -351,9 +364,9 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Returns all channels
+     * Returns all channels.
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getChannels()
     {
@@ -365,9 +378,9 @@ class ElasticSearch extends AbstractIndexer
     }
 
     /**
-     * Returns all customer groups
+     * Returns all customer groups.
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getCustomerGroups()
     {

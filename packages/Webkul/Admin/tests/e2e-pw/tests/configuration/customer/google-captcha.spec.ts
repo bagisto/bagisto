@@ -1,31 +1,62 @@
-import { test, expect } from '../../../setup';
-import { generateRandomStringWithSpaces } from '../../../utils/form';
+import { test, expect } from "../../../setup";
+import { generateRandomStringWithSpaces } from "../../../utils/form";
 
-
-test.describe('Google Captcha Configuration', () => {
+test.describe("google captcha configuration", () => {
     /**
-     * Navigate to the configuration page.
+     * Disable the google captcha configuration as this will create issue in further testcases.
      */
-    test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/customer/captcha');
+    test.afterEach(async ({ adminPage }) => {
+        await adminPage.goto("admin/configuration/customer/captcha");
+
+        const isChecked = await adminPage
+            .locator(
+                'input[type="checkbox"][name="customer[captcha][credentials][status]"]'
+            )
+            .isChecked();
+
+        if (isChecked) {
+            await adminPage.click(
+                'label[for="customer[captcha][credentials][status]"]'
+            );
+        }
+
+        await adminPage.click('button[type="submit"].primary-button:visible');
     });
 
-    /**
-     * Update the Google Captcha Configuration.
-     */
-    test('should make enable the google captcha with site and secrete key', async ({ adminPage }) => {
-        await adminPage.locator('input[name="customer[captcha][credentials][site_key]"]').fill(generateRandomStringWithSpaces(60));
-        await adminPage.locator('input[name="customer[captcha][credentials][secret_key]"]').fill(generateRandomStringWithSpaces(60));
+    test("should make enable the google captcha with site and secret key", async ({
+        adminPage,
+    }) => {
+        /**
+         * Navigate to the configuration page.
+         */
+        await adminPage.goto("admin/configuration/customer/captcha");
 
-        await adminPage.click('label[for="customer[captcha][credentials][status]"]');
-        // const toggleInput = await adminPage.locator('input[name="customer[captcha][credentials][status]"]');
-        // await expect(toggleInput).toBeChecked();
+        const isChecked = await adminPage
+            .locator(
+                'input[type="checkbox"][name="customer[captcha][credentials][status]"]'
+            )
+            .isChecked();
+
+        if (!isChecked) {
+            await adminPage.click(
+                'label[for="customer[captcha][credentials][status]"]'
+            );
+        }
+
+        await adminPage
+            .locator('input[name="customer[captcha][credentials][site_key]"]')
+            .fill(generateRandomStringWithSpaces(60));
+        await adminPage
+            .locator('input[name="customer[captcha][credentials][secret_key]"]')
+            .fill(generateRandomStringWithSpaces(60));
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
          * Verify the change is saved.
          */
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Configuration saved successfully")
+        ).toBeVisible();
     });
 });

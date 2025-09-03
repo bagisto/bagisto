@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Already have an account ?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Register',
+            'click-here'                  => 'Click Here',
             'confirm-pass'                => 'Confirm Password',
             'email'                       => 'Email',
             'first-name'                  => 'First Name',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Account created successfully.',
             'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
             'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
+            'terms-conditions'            => ' Terms & Conditions',
             'verification-not-sent'       => 'Error! Problem in sending verification email, please try again later.',
             'verification-sent'           => 'Verification email sent',
             'verified'                    => 'Your account has been verified, try to login now.',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'Item Successfully Added To Wishlist',
                 'title'              => 'Wishlist',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'Request created successfully',
+                'revoked-successfully'        => 'Request revoked successfully',
+                'success-verify'              => 'Success! Verification email has been sent.',
+                'success-verify-email-unsent' => 'Success! Verification email has not been sent.',
+                'unable-to-sent'              => 'Unable to sent email.',
+
+                'index'   => [
+                    'create-btn' => 'Create Request',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR Data Requests',
+
+                    'modal' => [
+                        'message' => 'Message',
+                        'save'    => 'Save',
+                        'title'   => 'Create New Request',
+
+                        'type'    => [
+                            'choose' => 'Choose',
+                            'delete' => 'Delete',
+                            'title'  => 'Type',
+                            'update' => 'Update',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Completed',
+                        'date'       => 'Date',
+                        'declined'   => 'Declined',
+                        'delete'     => 'Delete',
+                        'id'         => 'ID',
+                        'message'    => 'Message',
+                        'pending'    => 'Pending',
+                        'processing' => 'Processing',
+                        'revoke-btn' => 'Revoke',
+                        'revoked'    => 'Revoked',
+                        'status'     => 'Status',
+                        'type'       => 'Type',
+                        'update'     => 'Update',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Default Store View',
+
+                    'account-info' => [
+                        'dob'          => 'Date of Birth',
+                        'email'        => 'Email',
+                        'first-name'   => 'First Name',
+                        'gender'       => 'Gender',
+                        'last-name'    => 'Last Name',
+                        'phone'        => 'Phone',
+                        'title'        => 'Account Information',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Address',
+                        'address1'   => 'Address 1',
+                        'address2'   => 'Address 2',
+                        'city'       => 'City',
+                        'company'    => 'Company',
+                        'country'    => 'Country',
+                        'first-name' => 'First Name',
+                        'last-name'  => 'Last Name',
+                        'phone'      => 'Phone',
+                        'postcode'   => 'Postcode',
+                        'state'      => 'State',
+                        'title'      => 'Address Information',
+                        'vat-id'     => 'Vat ID',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Amount',
+                        'order-id'     => 'Order ID',
+                        'product-name' => 'Product Name',
+                        'qty'          => 'Quantity',
+                        'shipping'     => 'Shipping',
+                        'sku'          => 'SKU',
+                        'status'       => 'Status',
+                        'title'        => 'Order Information',
+                        'type'         => 'Type',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Account',
-                'bagisto'           => 'Bagisto',
-                'cart'              => 'Cart',
-                'compare'           => 'Compare',
-                'dropdown-text'     => 'Manage Cart, Orders & Wishlist',
-                'logout'            => 'Logout',
-                'no-category-found' => 'No category found.',
-                'orders'            => 'Orders',
-                'profile'           => 'Profile',
-                'search'            => 'Search',
-                'search-text'       => 'Search products here',
-                'sign-in'           => 'Sign In',
-                'sign-up'           => 'Sign Up',
-                'submit'            => 'Submit',
-                'title'             => 'Account',
-                'welcome'           => 'Welcome',
-                'welcome-guest'     => 'Welcome Guest',
-                'wishlist'          => 'Wishlist',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Default locale',
                     ],
+
+                    'bottom' => [
+                        'all'           => 'All',
+                        'back-button'   => 'Back to Main Menu',
+                        'bagisto'       => 'Bagisto',
+                        'categories'    => 'Categories',
+                        'compare'       => 'Compare',
+                        'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+                        'logout'        => 'Logout',
+                        'orders'        => 'Orders',
+                        'profile'       => 'Profile',
+                        'search'        => 'Search',
+                        'search-text'   => 'Search products here',
+                        'sign-in'       => 'Sign In',
+                        'sign-up'       => 'Sign Up',
+                        'submit'        => 'Submit',
+                        'welcome'       => 'Welcome',
+                        'welcome-guest' => 'Welcome Guest',
+                        'wishlist'      => 'Wishlist',
+                    ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'Currencies',
-                    'locales'    => 'Locales',
-                    'login'      => 'Sign up or Login',
+                    'account'       => 'Account',
+                    'back-button'   => 'Back to Main Menu',
+                    'bagisto'       => 'Bagisto',
+                    'compare'       => 'Compare',
+                    'currencies'    => 'Currencies',
+                    'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+                    'locales'       => 'Locales',
+                    'login'         => 'Sign up or Login',
+                    'logout'        => 'Logout',
+                    'orders'        => 'Orders',
+                    'profile'       => 'Profile',
+                    'search'        => 'Search',
+                    'search-text'   => 'Search products here',
+                    'sign-in'       => 'Sign In',
+                    'sign-up'       => 'Sign Up',
+                    'welcome'       => 'Welcome',
+                    'welcome-guest' => 'Welcome Guest',
+                    'wishlist'      => 'Wishlist',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'Subscribe Newsletter',
                 'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
                 'whats-new'              => 'What’s New',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Privacy Policy',
+                    'reject'                   => 'Reject',
+                    'accept'                   => 'Accept',
+                    'learn-more-and-customize' => 'Learn More and Customize',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'        => 'Your Cookie Consent Preferences',
+                    'save-and-continue'                      => 'Save and Continue',
+                    'strictly-necessary'                     => 'Strictly Necessary',
+                    'basic-interactions'                     => 'Basic Interactions and Functionalities',
+                    'experience-enhancement'                 => 'Experience enhancement',
+                    'measurements'                           => 'Measurements',
+                    'targeting-and-advertising'              => 'Targeting and Advertising',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'None',
+                        'total-amount' => 'Total Amount',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Please select an option',
                     'select-above-options' => 'Please select above options',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'Name',
+                ],
+
+                'booking' => [
+                    'location'    => 'Location',
+                    'view-on-map' => 'View on Map',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slot-duration'            => 'Slot Duration',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Closed',
+                        'see-details'              => 'See Details',
+                        'slot-duration'            => 'Slot Duration',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'today-availability'       => 'Today Availability',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Book Your Ticket',
+                        'title'            => 'Event on :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Choose Rent Option',
+                        'daily-basis'        => 'Daily Basis',
+                        'from'               => 'From',
+                        'hourly-basis'       => 'Hourly Basis',
+                        'rent-an-item'       => 'Rent an Item',
+                        'select-date'        => 'Select date',
+                        'select-rent-time'   => 'Select Rent Time',
+                        'select-slot'        => 'Select Slot',
+                        'select-time-slot'   => 'Select Time Slot',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'No slots available',
+                        'to'                 => 'To',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Book a Table',
+                        'closed'                   => 'Closed',
+                        'slot-duration'            => 'Slot Duration',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slots-for-all-days'       => 'Show for all days',
+                        'special-notes'            => 'Special Request/Notes',
+                        'today-availability'       => 'Today Availability',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Book an Appointment',
+                        'date'                => 'Date',
+                        'no-slots-available'  => 'No slots available',
+                        'select-slot'         => 'Select Slot',
+                        'title'               => 'Slot',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'Buy :qty for :price each and save :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'Closed',
+
+            'cart'             => [
+                'booking-from' => 'Booking From',
+                'booking-till' => 'Booking Till',
+                'daily'        => 'Daily Basis',
+                'event-from'   => 'Event From',
+                'event-ticket' => 'Event Ticket',
+                'event-till'   => 'Event Till',
+                'hourly'       => 'Hourly Basis',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'This event has been expired.',
+                    ],
+
+                    'missing_options'        => 'Options are missing for this product.',
+                    'inventory_warning'      => 'The requested quantity is not available, please try again later.',
+                    'select_hourly_duration' => 'Select a slot duration of one hour.',
+                ],
+
+                'rent-from'    => 'Rent From',
+                'rent-till'    => 'Rent Till',
+                'rent-type'    => 'Rent Type',
+                'renting_type' => 'Rent Type',
+                'special-note' => 'Special Request/Notes',
+            ],
+
+            'per-ticket-price' => ':price Per Ticket',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'Clear All',
             'filters'   => 'Filters:',
             'filter'    => 'Filter',
+
+            'search'    => [
+                'load-more'            => 'Load More',
+                'loading'              => 'Loading...',
+                'no-options-available' => 'No options available.',
+                'results-info'         => 'Showing :currentCount of :totalCount options',
+                'title'                => 'Search',
+            ],
+
             'sort'      => 'Sort',
         ],
 
@@ -874,7 +1101,10 @@ return [
         ],
 
         'index' => [
+            'categories-carousel' => 'Categories Carousel',
+            'image-carousel'      => 'Image Carousel',
             'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'product-carousel'    => 'Product Carousel',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
         ],
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Next Page',
             'pagination-showing' => 'Showing :firstItem to :lastItem of :total entries',
+            'prev-page'          => 'Previous Page',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'Address',
         'downloadable-products' => 'Downloadable Products',
+        'gdpr-request'          => 'GDPR Requests',
         'my-account'            => 'My Account',
         'orders'                => 'Orders',
         'profile'               => 'Profile',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'Welcome to our newsletter!',
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'New Request For Data Delete',
+                'new-update-request' => 'New Request For Data Update',
+
+                'new-request' => [
+                    'delete-summary' => 'Summary of Delete Request',
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'update-summary' => 'Summary of Update Request',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Your GDPR Request Has Been Updated',
+                    'summary'        => 'Your GDPR Request Status has been Updated',
+                    'request-status' => 'Request Status:',
+                    'request-type'   => 'Request Type:',
+                    'message'        => 'Message:',
+                ],
             ],
 
             'reminder' => [

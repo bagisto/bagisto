@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Вже є обліковий запис?',
             'bagisto'                     => 'Багісто',
             'button-title'                => 'Зареєструватися',
+            'click-here'                  => 'Натисніть тут',
             'confirm-pass'                => 'Підтвердіть пароль',
             'email'                       => 'Електронна пошта',
             'first-name'                  => 'Ім’я',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Обліковий запис успішно створено.',
             'success-verify'              => 'Обліковий запис успішно створено, на вашу електронну адресу відправлено лист для підтвердження.',
             'success-verify-email-unsent' => 'Обліковий запис успішно створено, але лист із запитом на підтвердження не відправлено.',
+            'terms-conditions'            => 'Умови та положення',
             'verification-not-sent'       => 'Помилка! Під час надсилання листа для підтвердження сталася помилка, спробуйте ще раз пізніше.',
             'verification-sent'           => 'Лист для підтвердження надіслано',
             'verified'                    => 'Ваш обліковий запис підтверджено, спробуйте увійти зараз.',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'Товар успешно добавлен в список желаний',
                 'title'              => 'Список желаний',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'Запит успішно створено',
+                'revoked-successfully'        => 'Запит успішно скасовано',
+                'success-verify'              => 'Успішно! Лист для підтвердження відправлено.',
+                'success-verify-email-unsent' => 'Успішно! Лист для підтвердження не відправлено.',
+                'unable-to-sent'              => 'Не вдалося надіслати листа.',
+
+                'index'   => [
+                    'create-btn' => 'Створити запит',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'Запити на дані GDPR',
+
+                    'modal' => [
+                        'message' => 'Повідомлення',
+                        'save'    => 'Зберегти',
+                        'title'   => 'Створити новий запит',
+
+                        'type'    => [
+                            'choose' => 'Обрати',
+                            'delete' => 'Видалити',
+                            'title'  => 'Тип',
+                            'update' => 'Оновити',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Завершено',
+                        'date'       => 'Дата',
+                        'declined'   => 'Відхилено',
+                        'delete'     => 'Видалити',
+                        'id'         => 'ID',
+                        'message'    => 'Повідомлення',
+                        'pending'    => 'В очікуванні',
+                        'processing' => 'В обробці',
+                        'revoke-btn' => 'Скасувати',
+                        'revoked'    => 'Скасовано',
+                        'status'     => 'Статус',
+                        'type'       => 'Тип',
+                        'update'     => 'Оновити',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Відображення магазину за замовчуванням',
+
+                    'account-info' => [
+                        'dob'          => 'Дата народження',
+                        'email'        => 'Електронна пошта',
+                        'first-name'   => 'Ім’я',
+                        'gender'       => 'Стать',
+                        'last-name'    => 'Прізвище',
+                        'phone'        => 'Телефон',
+                        'title'        => 'Інформація про акаунт',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Адреса',
+                        'address1'   => 'Адреса 1',
+                        'address2'   => 'Адреса 2',
+                        'city'       => 'Місто',
+                        'company'    => 'Компанія',
+                        'country'    => 'Країна',
+                        'first-name' => 'Ім’я',
+                        'last-name'  => 'Прізвище',
+                        'phone'      => 'Телефон',
+                        'postcode'   => 'Поштовий індекс',
+                        'state'      => 'Область',
+                        'title'      => 'Адресна інформація',
+                        'vat-id'     => 'ІПН',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Сума',
+                        'order-id'     => 'ID замовлення',
+                        'product-name' => 'Назва продукту',
+                        'qty'          => 'Кількість',
+                        'shipping'     => 'Доставка',
+                        'sku'          => 'SKU',
+                        'status'       => 'Статус',
+                        'title'        => 'Інформація про замовлення',
+                        'type'         => 'Тип',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Обліковий запис',
-                'bagisto'           => 'Багісто',
-                'cart'              => 'Кошик',
-                'compare'           => 'Порівняння',
-                'dropdown-text'     => 'Керування кошиком, замовленнями та списком бажань',
-                'logout'            => 'Вийти',
-                'no-category-found' => 'Категорія не знайдена.',
-                'orders'            => 'Замовлення',
-                'profile'           => 'Профіль',
-                'search'            => 'Пошук',
-                'search-text'       => 'Шукати продукти тут',
-                'sign-in'           => 'Увійти',
-                'sign-up'           => 'Зареєструватися',
-                'submit'            => 'Відправити',
-                'title'             => 'Обліковий запис',
-                'welcome'           => 'Ласкаво просимо',
-                'welcome-guest'     => 'Ласкаво просимо, Гість',
-                'wishlist'          => 'Список бажань',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Мова за замовчуванням',
                     ],
+
+                    'bottom' => [
+                        'all'           => 'Все',
+                        'back-button'   => 'Повернутися до головного меню',
+                        'bagisto'       => 'Bagisto',
+                        'categories'    => 'Категорії',
+                        'compare'       => 'Порівняти',
+                        'dropdown-text' => 'Керуйте кошиком, замовленнями та списком бажань',
+                        'logout'        => 'Вийти',
+                        'orders'        => 'Замовлення',
+                        'profile'       => 'Профіль',
+                        'search'        => 'Пошук',
+                        'search-text'   => 'Шукати товари тут',
+                        'sign-in'       => 'Увійти',
+                        'sign-up'       => 'Зареєструватися',
+                        'submit'        => 'Надіслати',
+                        'welcome'       => 'Ласкаво просимо',
+                        'welcome-guest' => 'Ласкаво просимо, гість',
+                        'wishlist'      => 'Список бажань',
+                    ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'Валюти',
-                    'locales'    => 'Мови',
-                    'login'      => 'Зареєструватися або Увійти',
+                    'account'       => 'Обліковий запис',
+                    'back-button'   => 'Повернутися до головного меню',
+                    'bagisto'       => 'Bagisto',
+                    'compare'       => 'Порівняти',
+                    'currencies'    => 'Валюти',
+                    'dropdown-text' => 'Керуйте кошиком, замовленнями та списком бажань',
+                    'locales'       => 'Мови',
+                    'login'         => 'Зареєструватися або Увійти',
+                    'logout'        => 'Вийти',
+                    'orders'        => 'Замовлення',
+                    'profile'       => 'Профіль',
+                    'search'        => 'Пошук',
+                    'search-text'   => 'Шукати товари тут',
+                    'sign-in'       => 'Увійти',
+                    'sign-up'       => 'Зареєструватися',
+                    'welcome'       => 'Ласкаво просимо',
+                    'welcome-guest' => 'Ласкаво просимо, гість',
+                    'wishlist'      => 'Список бажань',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'Підписатися на розсилку',
                 'subscribe-stay-touch'   => 'Підпишіться, щоб залишатися на зв\'язку.',
                 'whats-new'              => 'Що нового',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Політика конфіденційності',
+                    'reject'                   => 'Відхилити',
+                    'accept'                   => 'Прийняти',
+                    'learn-more-and-customize' => 'Дізнатися більше та налаштувати',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'Ваші налаштування згоди на використання файлів cookie',
+                    'save-and-continue'                       => 'Зберегти та продовжити',
+                    'strictly-necessary'                      => 'Суворо необхідні',
+                    'basic-interactions'                      => 'Основні взаємодії та функціональність',
+                    'experience-enhancement'                  => 'Покращення досвіду',
+                    'measurements'                            => 'Вимірювання',
+                    'targeting-and-advertising'               => 'Цільова реклама',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Нічого',
+                        'total-amount' => 'Загальна сума',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Будь ласка, виберіть опцію',
                     'select-above-options' => 'Будь ласка, виберіть опції вище',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'Назва',
+                ],
+
+                'booking' => [
+                    'location'    => 'Місцезнаходження',
+                    'view-on-map' => 'Переглянути на карті',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'slot-duration'            => 'Тривалість слоту',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Закрито',
+                        'see-details'              => 'Дивитися деталі',
+                        'slot-duration'            => 'Тривалість слоту',
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'today-availability'       => 'Доступність сьогодні',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Забронюйте свій квиток',
+                        'title'            => 'Подія на :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Виберіть варіант оренди',
+                        'daily-basis'        => 'Щоденна основа',
+                        'from'               => 'Від',
+                        'hourly-basis'       => 'Погодинна основа',
+                        'rent-an-item'       => 'Орендувати предмет',
+                        'select-date'        => 'Виберіть дату',
+                        'select-rent-time'   => 'Виберіть час оренди',
+                        'select-slot'        => 'Виберіть слот',
+                        'select-time-slot'   => 'Виберіть часовий слот',
+                        'slot'               => 'Слот',
+                        'no-slots-available' => 'Немає доступних слотів',
+                        'to'                 => 'До',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Забронювати стіл',
+                        'closed'                   => 'Закрито',
+                        'slot-duration'            => 'Тривалість слоту',
+                        'slot-duration-in-minutes' => ':minutes Хвилин',
+                        'slots-for-all-days'       => 'Показати для всіх днів',
+                        'special-notes'            => 'Особливі запити/Примітки',
+                        'today-availability'       => 'Доступність сьогодні',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Записатися на прийом',
+                        'date'                => 'Дата',
+                        'no-slots-available'  => 'Немає доступних слотів',
+                        'select-slot'         => 'Виберіть слот',
+                        'title'               => 'Слот',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'Купуйте :qty за :price кожний і економте :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'Закрито',
+
+            'cart'             => [
+                'booking-from' => 'Бронювання з',
+                'booking-till' => 'Бронювання до',
+                'daily'        => 'Щоденна основа',
+                'event-from'   => 'Подія з',
+                'event-ticket' => 'Квиток на подію',
+                'event-till'   => 'Подія до',
+                'hourly'       => 'Погодинна основа',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Ця подія закінчилася.',
+                    ],
+
+                    'missing_options'        => 'Варіанти відсутні для цього продукту.',
+                    'inventory_warning'      => 'Запитана кількість недоступна, будь ласка, спробуйте пізніше.',
+                    'select_hourly_duration' => 'Виберіть тривалість слоту одну годину.',
+                ],
+
+                'rent-from'    => 'Оренда з',
+                'rent-till'    => 'Оренда до',
+                'rent-type'    => 'Тип оренди',
+                'renting_type' => 'Тип оренди',
+                'special-note' => 'Особливі запити/Примітки',
+            ],
+
+            'per-ticket-price' => ':price за квиток',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'Очистити всі',
             'filter'    => 'Фільтр',
             'filters'   => 'Фільтри:',
+
+            'search' => [
+                'load-more'            => 'Завантажити більше',
+                'loading'              => 'Завантаження...',
+                'no-options-available' => 'Немає доступних опцій.',
+                'results-info'         => 'Показано :currentCount з :totalCount опцій',
+                'title'                => 'Пошук',
+            ],
+
             'sort'      => 'Сортувати',
         ],
 
@@ -874,9 +1101,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Отримайте ЗНИЖКУ до 40% на ваше 1-е замовлення. КУПУЙТЕ ЗАРАЗ',
-            'resend-verify-email' => 'Надіслати лист для підтвердження електронної пошти знову',
-            'verify-email'        => 'Підтвердіть свій обліковий запис електронної пошти',
+            'categories-carousel' => 'Карусель категорій',
+            'image-carousel'      => 'Карусель зображень',
+            'offer'               => 'Отримайте ДО 40% ЗНИЖКИ на перше замовлення, КУПИТИ ЗАРАЗ',
+            'product-carousel'    => 'Карусель продуктів',
+            'resend-verify-email' => 'Повторно надіслати лист з підтвердженням',
+            'verify-email'        => 'Підтвердіть свою електронну пошту',
         ],
 
         'thanks-for-contact' => 'Дякуємо, що зв\'язалися з нами зі своїми коментарями та питаннями. Ми відповімо вам найближчим часом.',
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Наступна сторінка',
             'pagination-showing' => 'Показано від :firstItem до :lastItem з :total записів',
+            'prev-page'          => 'Попередня сторінка',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'Адреса',
         'downloadable-products' => 'Завантажувані товари',
+        'gdpr-request'          => 'Запити GDPR',
         'my-account'            => 'Мій обліковий запис',
         'orders'                => 'Замовлення',
         'profile'               => 'Профіль',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'Ласкаво просимо до нашої розсилки!',
                 'subject'     => 'Ви! Підпишіться на нашу розсилку',
                 'unsubscribe' => 'Відписатися',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Нове запит на видалення даних',
+                'new-update-request' => 'Нове запит на оновлення даних',
+
+                'new-request' => [
+                    'delete-summary' => 'Резюме запиту на видалення',
+                    'message'        => 'Повідомлення : ',
+                    'request-status' => 'Статус запиту : ',
+                    'request-type'   => 'Тип запиту : ',
+                    'update-summary' => 'Резюме запиту на оновлення',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Ваш запит GDPR оновлено',
+                    'summary'        => 'Статус вашого запиту GDPR оновлено',
+                    'request-status' => 'Статус запиту:',
+                    'request-type'   => 'Тип запиту:',
+                    'message'        => 'Повідомлення:',
+                ],
             ],
 
             'reminder' => [

@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'قبلاً حساب دارید؟',
             'bagisto'                     => 'بگیستو',
             'button-title'                => 'ثبت نام',
+            'click-here'                  => 'اینجا کلیک کنید',
             'confirm-pass'                => 'تأیید رمز عبور',
             'email'                       => 'ایمیل',
             'first-name'                  => 'نام',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'حساب با موفقیت ایجاد شد.',
             'success-verify'              => 'حساب با موفقیت ایجاد شد، یک ایمیل برای تأیید ارسال شده است.',
             'success-verify-email-unsent' => 'حساب با موفقیت ایجاد شد، اما ایمیل تأیید ارسال نشد.',
+            'terms-conditions'            => 'شرایط و ضوابط',
             'verification-not-sent'       => 'خطا! مشکل در ارسال ایمیل تأیید، لطفاً بعداً دوباره تلاش کنید.',
             'verification-sent'           => 'ایمیل تأیید ارسال شد',
             'verified'                    => 'حساب شما تأیید شده است، اکنون می‌توانید وارد شوید.',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'مورد با موفقیت به لیست علاقه‌مندی‌ها اضافه شد',
                 'title'              => 'لیست علاقه‌مندی',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'درخواست با موفقیت ایجاد شد',
+                'revoked-successfully'        => 'درخواست با موفقیت لغو شد',
+                'success-verify'              => 'موفقیت! ایمیل تأیید ارسال شد.',
+                'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشده است.',
+                'unable-to-sent'              => 'امکان ارسال ایمیل وجود ندارد.',
+
+                'index'   => [
+                    'create-btn' => 'ایجاد درخواست',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'درخواست‌های داده GDPR',
+
+                    'modal' => [
+                        'message' => 'پیام',
+                        'save'    => 'ذخیره',
+                        'title'   => 'ایجاد درخواست جدید',
+
+                        'type'    => [
+                            'choose' => 'انتخاب کنید',
+                            'delete' => 'حذف',
+                            'title'  => 'نوع',
+                            'update' => 'به‌روزرسانی',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'تکمیل شده',
+                        'date'       => 'تاریخ',
+                        'declined'   => 'رد شده',
+                        'delete'     => 'حذف',
+                        'id'         => 'شناسه',
+                        'message'    => 'پیام',
+                        'pending'    => 'در انتظار',
+                        'processing' => 'در حال پردازش',
+                        'revoke-btn' => 'ابطال',
+                        'revoked'    => 'ابطال شده',
+                        'status'     => 'وضعیت',
+                        'type'       => 'نوع',
+                        'update'     => 'به‌روزرسانی',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'نمای فروشگاه پیش‌فرض',
+
+                    'account-info' => [
+                        'dob'          => 'تاریخ تولد',
+                        'email'        => 'ایمیل',
+                        'first-name'   => 'نام',
+                        'gender'       => 'جنسیت',
+                        'last-name'    => 'نام خانوادگی',
+                        'phone'        => 'تلفن',
+                        'title'        => 'اطلاعات حساب',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'آدرس',
+                        'address1'   => 'آدرس ۱',
+                        'address2'   => 'آدرس ۲',
+                        'city'       => 'شهر',
+                        'company'    => 'شرکت',
+                        'country'    => 'کشور',
+                        'first-name' => 'نام',
+                        'last-name'  => 'نام خانوادگی',
+                        'phone'      => 'تلفن',
+                        'postcode'   => 'کد پستی',
+                        'state'      => 'استان',
+                        'title'      => 'اطلاعات آدرس',
+                        'vat-id'     => 'شناسه مالیات بر ارزش افزوده',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'مقدار',
+                        'order-id'     => 'شناسه سفارش',
+                        'product-name' => 'نام محصول',
+                        'qty'          => 'تعداد',
+                        'shipping'     => 'حمل و نقل',
+                        'sku'          => 'کد SKU',
+                        'status'       => 'وضعیت',
+                        'title'        => 'اطلاعات سفارش',
+                        'type'         => 'نوع',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'حساب کاربری',
-                'bagisto'           => 'بگیستو',
-                'cart'              => 'سبد خرید',
-                'compare'           => 'مقایسه',
-                'dropdown-text'     => 'مدیریت سبد خرید، سفارشات و لیست علاقه‌مندی',
-                'logout'            => 'خروج',
-                'no-category-found' => 'هیچ دسته‌ای یافت نشد.',
-                'orders'            => 'سفارشات',
-                'profile'           => 'پروفایل',
-                'search'            => 'جستجو',
-                'search-text'       => 'محصولات را اینجا جستجو کنید',
-                'sign-in'           => 'ورود',
-                'sign-up'           => 'عضویت',
-                'submit'            => 'ارسال',
-                'title'             => 'حساب کاربری',
-                'welcome'           => 'خوش آمدید',
-                'welcome-guest'     => 'خوش آمدید مهمان',
-                'wishlist'          => 'لیست علاقه‌مندی',
-
                 'desktop' => [
                     'top' => [
-                        'default-locale' => 'زبان پیش فرض',
+                        'default-locale' => 'زبان پیش‌فرض',
+                    ],
+
+                    'bottom' => [
+                        'all'           => 'همه',
+                        'back-button'   => 'بازگشت به منوی اصلی',
+                        'bagisto'       => 'باگیستو',
+                        'categories'    => 'دسته‌بندی‌ها',
+                        'compare'       => 'مقایسه',
+                        'dropdown-text' => 'مدیریت سبد خرید، سفارش‌ها و لیست علاقه‌مندی‌ها',
+                        'logout'        => 'خروج',
+                        'orders'        => 'سفارش‌ها',
+                        'profile'       => 'پروفایل',
+                        'search'        => 'جستجو',
+                        'search-text'   => 'اینجا محصولات را جستجو کنید',
+                        'sign-in'       => 'ورود',
+                        'sign-up'       => 'ثبت‌نام',
+                        'submit'        => 'ارسال',
+                        'welcome'       => 'خوش آمدید',
+                        'welcome-guest' => 'مهمان خوش آمدید',
+                        'wishlist'      => 'لیست علاقه‌مندی‌ها',
                     ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'واحد پول',
-                    'locales'    => 'زبان و محل',
-                    'login'      => 'ثبت‌نام یا ورود',
+                    'account'       => 'حساب کاربری',
+                    'back-button'   => 'بازگشت به منوی اصلی',
+                    'bagisto'       => 'باگیستو',
+                    'compare'       => 'مقایسه',
+                    'currencies'    => 'واحدهای پول',
+                    'dropdown-text' => 'مدیریت سبد خرید، سفارش‌ها و لیست علاقه‌مندی‌ها',
+                    'locales'       => 'زبان‌ها',
+                    'login'         => 'ثبت‌نام یا ورود',
+                    'logout'        => 'خروج',
+                    'orders'        => 'سفارش‌ها',
+                    'profile'       => 'پروفایل',
+                    'search'        => 'جستجو',
+                    'search-text'   => 'اینجا محصولات را جستجو کنید',
+                    'sign-in'       => 'ورود',
+                    'sign-up'       => 'ثبت‌نام',
+                    'welcome'       => 'خوش آمدید',
+                    'welcome-guest' => 'مهمان خوش آمدید',
+                    'wishlist'      => 'لیست علاقه‌مندی‌ها',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'عضویت در خبرنامه',
                 'subscribe-stay-touch'   => 'برای ماندن در تماس عضو شوید.',
                 'whats-new'              => 'چه خبر است',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'سیاست حفظ حریم خصوصی',
+                    'reject'                   => 'رد کردن',
+                    'accept'                   => 'پذیرفتن',
+                    'learn-more-and-customize' => 'بیشتر بدانید و سفارشی کنید',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'ترجیحات رضایت کوکی شما',
+                    'save-and-continue'                       => 'ذخیره و ادامه',
+                    'strictly-necessary'                      => 'کاملاً ضروری',
+                    'basic-interactions'                      => 'تعاملات و عملکردهای پایه',
+                    'experience-enhancement'                  => 'افزایش تجربه',
+                    'measurements'                            => 'اندازه‌گیری',
+                    'targeting-and-advertising'               => 'هدف‌گیری و تبلیغات',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مبلغ کل',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'لطفاً یک گزینه انتخاب کنید',
                     'select-above-options' => 'لطفاً گزینه‌های بالا را انتخاب کنید',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'نام',
+                ],
+
+                'booking' => [
+                    'location'    => 'مکان',
+                    'view-on-map' => 'مشاهده روی نقشه',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes دقیقه',
+                        'slot-duration'            => 'مدت زمان اسلات',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'بسته',
+                        'see-details'              => 'مشاهده جزئیات',
+                        'slot-duration'            => 'مدت زمان اسلات',
+                        'slot-duration-in-minutes' => ':minutes دقیقه',
+                        'today-availability'       => 'دسترسی امروز',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'رزرو بلیط شما',
+                        'title'            => 'رویداد در :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'گزینه اجاره را انتخاب کنید',
+                        'daily-basis'        => 'به صورت روزانه',
+                        'from'               => 'از',
+                        'hourly-basis'       => 'به صورت ساعتی',
+                        'rent-an-item'       => 'اجاره یک مورد',
+                        'select-date'        => 'تاریخ را انتخاب کنید',
+                        'select-rent-time'   => 'زمان اجاره را انتخاب کنید',
+                        'select-slot'        => 'اسلات را انتخاب کنید',
+                        'select-time-slot'   => 'زمان اسلات را انتخاب کنید',
+                        'slot'               => 'اسلات',
+                        'no-slots-available' => 'هیچ اسلاتی موجود نیست',
+                        'to'                 => 'تا',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'رزرو میز',
+                        'closed'                   => 'بسته',
+                        'slot-duration'            => 'مدت زمان اسلات',
+                        'slot-duration-in-minutes' => ':minutes دقیقه',
+                        'slots-for-all-days'       => 'نمایش برای همه روزها',
+                        'special-notes'            => 'درخواست/یادداشت ویژه',
+                        'today-availability'       => 'دسترسی امروز',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'رزرو وقت ملاقات',
+                        'date'                => 'تاریخ',
+                        'no-slots-available'  => 'هیچ اسلاتی موجود نیست',
+                        'select-slot'         => 'اسلات را انتخاب کنید',
+                        'title'               => 'اسلات',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'بسته',
+
+            'cart'             => [
+                'booking-from' => 'رزرو از',
+                'booking-till' => 'رزرو تا',
+                'daily'        => 'به صورت روزانه',
+                'event-from'   => 'رویداد از',
+                'event-ticket' => 'بلیط رویداد',
+                'event-till'   => 'رویداد تا',
+                'hourly'       => 'به صورت ساعتی',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'این رویداد منقضی شده است.',
+                    ],
+
+                    'missing_options'        => 'گزینه‌ها برای این محصول وجود ندارند.',
+                    'inventory_warning'      => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
+                    'select_hourly_duration' => 'یک مدت زمان ساعتی انتخاب کنید.',
+                ],
+
+                'rent-from'    => 'اجاره از',
+                'rent-till'    => 'اجاره تا',
+                'rent-type'    => 'نوع اجاره',
+                'renting_type' => 'نوع اجاره',
+                'special-note' => 'درخواست/یادداشت ویژه',
+            ],
+
+            'per-ticket-price' => ':price به ازای هر بلیط',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'پاک کردن همه',
             'filter'    => 'فیلتر',
             'filters'   => 'فیلترها:',
+
+            'search' => [
+                'load-more'            => 'بارگذاری بیشتر',
+                'loading'              => 'در حال بارگذاری...',
+                'no-options-available' => 'گزینه‌ای در دسترس نیست.',
+                'results-info'         => 'نمایش :currentCount از :totalCount گزینه',
+                'title'                => 'جستجو',
+            ],
+
             'sort'      => 'مرتب‌سازی',
         ],
 
@@ -874,8 +1101,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'تا ۴۰٪ تخفیف برای سفارش اولتان دریافت کنید. همین الان خرید کنید',
-            'resend-verify-email' => 'ارسال مجدد ایمیل تأیید',
+            'categories-carousel' => 'چرخ فلک دسته‌ها',
+            'image-carousel'      => 'چرخ فلک تصاویر',
+            'offer'               => 'تا ۴۰% تخفیف برای سفارش اول شما، اکنون خرید کنید',
+            'product-carousel'    => 'چرخ فلک محصولات',
+            'resend-verify-email' => 'ارسال دوباره ایمیل تایید',
             'verify-email'        => 'ایمیل خود را تأیید کنید',
         ],
 
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'صفحه بعدی',
             'pagination-showing' => 'نمایش :firstItem تا :lastItem از مجموع :total مورد',
+            'prev-page'          => 'صفحه قبلی',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'آدرس',
         'downloadable-products' => 'محصولات قابل دانلود',
+        'gdpr-request'          => 'درخواست‌های GDPR',
         'my-account'            => 'حساب کاربری من',
         'orders'                => 'سفارش‌ها',
         'profile'               => 'پروفایل',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'به خبرنامه ما خوش آمدید!',
                 'subject'     => 'شما! به خبرنامه ما مشترک شدید',
                 'unsubscribe' => 'لغو اشتراک',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'درخواست جدید برای حذف داده',
+                'new-update-request' => 'درخواست جدید برای به‌روزرسانی داده',
+
+                'new-request' => [
+                    'delete-summary' => 'خلاصه درخواست حذف',
+                    'message'        => 'پیام : ',
+                    'request-status' => 'وضعیت درخواست : ',
+                    'request-type'   => 'نوع درخواست : ',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'درخواست GDPR شما به‌روزرسانی شد',
+                    'summary'        => 'وضعیت درخواست GDPR شما به‌روزرسانی شد',
+                    'request-status' => 'وضعیت درخواست:',
+                    'request-type'   => 'نوع درخواست:',
+                    'message'        => 'پیام:',
+                ],
             ],
 
             'reminder' => [

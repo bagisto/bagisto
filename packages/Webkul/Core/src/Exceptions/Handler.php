@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Exceptions;
 
-use App\Exceptions\Handler as BaseHandler;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as BaseHandler;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,16 +32,16 @@ class Handler extends BaseHandler
     /**
      * Handle the authentication exception.
      */
-    private function handleAuthenticationException(): void
+    protected function handleAuthenticationException(): void
     {
         $this->renderable(function (AuthenticationException $exception, Request $request) {
-            $path = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
+            $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
 
             if ($request->wantsJson()) {
-                return response()->json(['error' => trans("{$path}::app.errors.401.description")], 401);
+                return response()->json(['error' => trans("{$namespace}::app.errors.401.description")], 401);
             }
 
-            if ($path !== 'admin') {
+            if ($namespace !== 'admin') {
                 return redirect()->guest(route('shop.customer.session.index'));
             }
 
@@ -52,7 +52,7 @@ class Handler extends BaseHandler
     /**
      * Handle the http exceptions.
      */
-    private function handleHttpException(): void
+    protected function handleHttpException(): void
     {
         $this->renderable(function (HttpException $exception, Request $request) {
             $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
@@ -74,14 +74,24 @@ class Handler extends BaseHandler
                 $viewPath = "{$namespace}::errors.index";
             }
 
-            return response()->view($viewPath, compact('errorCode'));
+            return response()->view($viewPath, compact('errorCode'), $errorCode);
+        });
+    }
+
+    /**
+     * Handle validation exceptions.
+     */
+    protected function handleValidationException(): void
+    {
+        $this->renderable(function (ValidationException $exception, Request $request) {
+            return parent::convertValidationExceptionToResponse($exception, $request);
         });
     }
 
     /**
      * Handle the server exceptions.
      */
-    private function handleServerException(): void
+    protected function handleServerException(): void
     {
         $this->renderable(function (Throwable $throwable, Request $request) {
             $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
@@ -101,17 +111,7 @@ class Handler extends BaseHandler
                 $viewPath = "{$namespace}::errors.index";
             }
 
-            return response()->view($viewPath, compact('errorCode'));
-        });
-    }
-
-    /**
-     * Handle validation exceptions.
-     */
-    private function handleValidationException(): void
-    {
-        $this->renderable(function (ValidationException $exception, Request $request) {
-            return parent::convertValidationExceptionToResponse($exception, $request);
+            return response()->view($viewPath, compact('errorCode'), $errorCode);
         });
     }
 }

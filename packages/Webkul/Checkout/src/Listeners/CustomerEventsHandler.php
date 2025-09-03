@@ -2,7 +2,7 @@
 
 namespace Webkul\Checkout\Listeners;
 
-use Cart;
+use Webkul\Checkout\Facades\Cart;
 
 class CustomerEventsHandler
 {

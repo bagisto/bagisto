@@ -7,6 +7,7 @@ return [
                 'qty-missing'   => '至少一个产品的数量应大于1。',
             ],
 
+            'invalid-file-extension'   => '找到无效的文件扩展名。',
             'inventory-warning'        => '所请求的数量不可用，请稍后重试。',
             'missing-links'            => '此产品缺少可下载的链接。',
             'missing-options'          => '此产品缺少选项。',
@@ -41,6 +42,7 @@ return [
         ],
 
         'bundle'       => '捆绑销售',
+        'booking'      => '预订',
         'configurable' => '可配置的',
         'downloadable' => '可下载的',
         'grouped'      => '分组的',

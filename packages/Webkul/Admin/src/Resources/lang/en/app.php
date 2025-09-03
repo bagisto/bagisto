@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Create Order for :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'None',
+                        'total-amount' => 'Total Amount',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Please select an option',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Links',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'None',
+                        'total-amount' => 'Total Amount',
                     ],
                 ],
 
@@ -728,6 +738,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Created Date',
+                    'from'         => 'From',
+                    'id'           => 'ID',
+                    'order-id'     => 'Order ID',
+                    'qty'          => 'QTY',
+                    'to'           => 'To',
+                    'view'         => 'View',
+                ],
+
+                'title'    => 'Bookings',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Booking Date',
+                'booking-details'  => 'Booking Details',
+                'canceled'         => 'Canceled',
+                'closed'           => 'Closed',
+                'done'             => 'Done',
+                'order-id'         => 'Order Id',
+                'pending'          => 'Pending',
+                'price'            => 'Price',
+                'status'           => 'Status',
+                'time-slot'        => 'Time Slot:',
+                'view-details'     => 'View Details',
+            ],
+
+            'title' => 'Bookings Product',
+        ],
     ],
 
     'catalog' => [
@@ -863,6 +905,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Add Option',
+                            'empty-info'        => 'To create customizable options on a go.',
+                            'empty-title'       => 'Add Option',
+                            'info'              => 'This will customize the simple product.',
+                            'title'             => 'Customizable Item',
+
+                            'update-create' => [
+                                'is-required'               => 'Is Required',
+                                'max-characters'            => 'Max Characters',
+                                'name'                      => 'Title',
+                                'no'                        => 'No',
+                                'price'                     => 'Price',
+                                'save-btn'                  => 'Save',
+                                'supported-file-extensions' => 'Supported File Extensions',
+                                'title'                     => 'Option',
+                                'type'                      => 'Type',
+                                'yes'                       => 'Yes',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Add Option',
+                                'delete'      => 'Delete',
+                                'delete-btn'  => 'Delete',
+                                'edit-btn'    => 'Edit',
+                                'empty-info'  => 'To create various combination of product on a go.',
+                                'empty-title' => 'Add Option',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Text',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Textarea',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Checkbox',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Select',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Multiselect',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Date',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Datetime',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Time',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'File',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Label',
+                                        'price'    => 'Price',
+                                        'save-btn' => 'Save',
+                                        'title'    => 'Option',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'The product is already associated with a configurable, grouped, or bundle product.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Add Variant',
                         'delete-btn'        => 'Delete',
@@ -990,6 +1119,186 @@ return [
                                     'title' => 'Select',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Available From',
+                        'available-to'   => 'Available To',
+                        'location'       => 'Location',
+                        'qty'            => 'Qty',
+                        'title'          => 'Booking Type',
+
+                        'available-every-week' => [
+                            'no'    => 'No',
+                            'title' => 'Available Every Week',
+                            'yes'   => 'Yes',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => 'Break Time b/w Slots (Mins)',
+                            'slot-duration'  => 'Slot Duration (Mins)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Same Slot For All days',
+                                'yes'   => 'Yes',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Add',
+                            'break-duration'   => 'Break Time b/w Slots (Mins)',
+                            'close'            => 'Close',
+                            'description'      => 'Booking Information',
+                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'edit'             => 'Edit',
+                            'many'             => 'Many Bookings For One Days',
+                            'one'              => 'One Booking For Many Days',
+                            'open'             => 'Open',
+                            'slot-add'         => 'Add Slots',
+                            'slot-duration'    => 'Slot Duration (Mins)',
+                            'slot-title'       => 'Slots Time Duration',
+                            'title'            => 'Default',
+                            'unavailable'      => 'Unavailable',
+
+                            'modal' => [
+                                'slot' => [
+                                    'add-title'  => 'Add Slots',
+                                    'close'      => 'Close',
+                                    'day'        => 'Day',
+                                    'edit-title' => 'Edit Slots',
+                                    'friday'     => 'Friday',
+                                    'from'       => 'From',
+                                    'from-day'   => 'From Day',
+                                    'from-time'  => 'From Time',
+                                    'monday'     => 'Monday',
+                                    'open'       => 'Open',
+                                    'saturday'   => 'Saturday',
+                                    'save'       => 'Save',
+                                    'select'     => 'Select',
+                                    'status'     => 'Status',
+                                    'sunday'     => 'Sunday',
+                                    'thursday'   => 'Thursday',
+                                    'to'         => 'To',
+                                    'to-day'     => 'To Day',
+                                    'to-time'    => 'To Time',
+                                    'tuesday'    => 'Tuesday',
+                                    'wednesday'  => 'Wednesday',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Add Tickets',
+                            'delete'             => 'Delete',
+                            'description'        => 'Description',
+                            'description-info'   => 'There is no tickets available.',
+                            'edit'               => 'Edit',
+                            'name'               => 'Name',
+                            'price'              => 'Price',
+                            'qty'                => 'Quantity',
+                            'special-price'      => 'Special Price',
+                            'special-price-from' => 'Special Price From',
+                            'special-price-to'   => 'Special Price To',
+                            'title'              => 'Tickets',
+                            'valid-from'         => 'Valid From',
+                            'valid-until'        => 'Valid Until',
+
+                            'modal' => [
+                                'edit' => 'Edit Tickets',
+                                'save' => 'Save',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Add Tickets',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Add Slots',
+                                'description' => 'Available Slots with time Duration.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'        => 'Daily Basis',
+                            'daily-hourly' => 'Both (Daily and Hourly Basis)',
+                            'daily-price'  => 'Daily Price',
+                            'hourly'       => 'Hourly Basis',
+                            'hourly-price' => 'Hourly Price',
+                            'title'        => 'Renting Type',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Same Slot For All days',
+                                'yes'   => 'Yes',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Add Slots',
+                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'save'             => 'Save',
+                            'title'            => 'Slots Time Duration',
+                            'unavailable'      => 'Unavailable',
+
+                            'action' => [
+                                'add' => 'Add',
+                            ],
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'    => 'Friday',
+                                    'from'      => 'From',
+                                    'monday'    => 'Monday',
+                                    'saturday'  => 'Saturday',
+                                    'sunday'    => 'Sunday',
+                                    'thursday'  => 'Thursday',
+                                    'to'        => 'To',
+                                    'tuesday'   => 'Tuesday',
+                                    'wednesday' => 'Wednesday',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Break Time b/w Slots (Mins)',
+                            'guest-capacity'            => 'Guest Capacity',
+                            'guest-limit'               => 'Guest Limit Per Table',
+                            'prevent-scheduling-before' => 'Prevent Scheduling Before',
+                            'slot-duration'             => 'Slot Duration (Mins)',
+
+                            'charged-per'               => [
+                                'guest'  => 'Guest',
+                                'table'  => 'Table',
+                                'title'  => 'Charged Per',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'No',
+                                'title' => 'Same Slot For All days',
+                                'yes'   => 'Yes',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Appointment Booking',
+                            'default'     => 'Default Booking',
+                            'event'       => 'Event Booking',
+                            'many'        => 'Many',
+                            'one'         => 'One',
+                            'rental'      => 'Rental Booking',
+                            'table'       => 'Table Booking',
+                            'title'       => 'Type',
+                        ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'The booking type cannot be changed.',
+                            'time-validation'    => 'Start time must be less than end time.',
+                            'overlap-validation' => 'Time slot overlaps with an existing slot.',
                         ],
                     ],
 
@@ -1670,6 +1979,46 @@ return [
                     'id'     => 'ID',
                     'name'   => 'Name',
                 ],
+            ],
+        ],
+
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR Request',
+
+                'datagrid' => [
+                    'completed'     => 'Completed',
+                    'created-at'    => 'Created At',
+                    'customer-name' => 'Customer Name',
+                    'declined'      => 'Declined',
+                    'delete'        => 'Delete',
+                    'edit'          => 'Edit',
+                    'id'            => 'ID',
+                    'message'       => 'Message',
+                    'pending'       => 'Pending',
+                    'processing'    => 'Processing',
+                    'revoked'       => 'Revoked',
+                    'status'        => 'Status',
+                    'type'          => 'Type',
+                ],
+
+                'modal' => [
+                    'completed'  => 'Completed',
+                    'declined'   => 'Declined',
+                    'pending'    => 'Pending',
+                    'processing' => 'Processing',
+                    'status'     => 'Status',
+                    'title'      => 'Edit GDPR Data Request',
+                    'type'       => 'Type',
+                    'message'    => 'Message',
+                    'save-btn'   => 'Save',
+                    'revoked'    => 'Revoked',
+                ],
+
+                'update-success'              => 'Data Request updated successfully and Email Sent to Customer.',
+                'delete-success'              => 'Data Request deleted successfully.',
+                'attribute-reason-error'      => 'Unable to Delete.',
+                'update-success-unsent-email' => 'Data Request updated successfully But Email unsent to Customer.',
             ],
         ],
 
@@ -3028,10 +3377,11 @@ return [
             'cannot-change'      => 'User cannot be changed',
             'create-success'     => 'User created successfully.',
             'delete-failed'      => 'User deleted failed.',
+            'delete-self-error'  => 'You cannot delete your own account.',
             'delete-success'     => 'User deleted successfully.',
             'delete-warning'     => 'Are you sure, you want to perform this action?',
             'incorrect-password' => 'Incorrect password',
-            'last-delete-error'  => 'Last User delete failed',
+            'last-delete-error'  => 'Atleast one admin is required.',
             'login-error'        => 'Please check your credentials and try again.',
             'update-success'     => 'User updated successfully.',
         ],
@@ -3326,6 +3676,7 @@ return [
 
         'view' => [
             'all-channels'  => 'All Channels',
+            'back-btn'      => 'Back',
             'day'           => 'Day',
             'end-date'      => 'End Date',
             'export-csv'    => 'Export CSV',
@@ -3390,6 +3741,40 @@ return [
                         'redirection-link'  => 'Redirection Link',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => 'Enable Speculation Rules',
+                        'info'               => 'Configure settings for enabling or disabling automated speculation logic.',
+                        'title'              => 'Speculation Rules',
+
+                        'prerender' => [
+                            'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prerender Eagerness Level',
+                            'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                            'enabled'                => 'Enable Prerender Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prerender URL Parameters',
+                            'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                            'ignore-urls'            => 'Ignore Prerender URLs',
+                            'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                            'info'                   => 'Set speculation rules status.',
+                            'moderate'               => 'Moderate',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prefetch Eagerness Level',
+                            'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                            'enabled'                => 'Enable Prefetch Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prefetch URL Parameters',
+                            'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                            'ignore-urls'            => 'Ignore Prefetch URLs',
+                            'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                            'info'                   => 'Set speculation rules status.',
+                            'moderate'               => 'Moderate',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'Custom CSS',
                         'custom-javascript' => 'Custom Javascript',
@@ -3407,6 +3792,15 @@ return [
                         'logo-image' => 'Logo Image',
                         'title'      => 'Admin Logo',
                         'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => 'Default Menu',
+                        'info'            => 'This setting controls the visibility of categories in the header menu. You can choose to display only parent categories or all nested categories.',
+                        'preview-default' => 'Preview Default Menu',
+                        'preview-sidebar' => 'Preview Sidebar Menu',
+                        'sidebar'         => 'Sidebar Menu',
+                        'title'           => 'Menu Category View',
                     ],
                 ],
 
@@ -3440,42 +3834,124 @@ return [
                     ],
 
                     'review-translation' => [
-                        'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Enabled',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Uncensored',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
-                        'model'             => 'Model',
-                        'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
-                        'starling-lm'       => 'Starling',
-                        'title'             => 'Review Translation',
-                        'title-info'        => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
-                        'vicuna'            => 'Vicuna',
+                        'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
+                        'enabled'             => 'Enabled',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'         => 'OpenAI gpt-4 Turbo',
+                        'gpt-4o'              => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
+                        'llama-groq'          => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'         => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'         => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'         => 'Llama 3.2 (3B)',
+                        'llama3-8b'           => 'Llama 3 (8B)',
+                        'llava-7b'            => 'Llava (7b)',
+                        'mistral-7b'          => 'Mistral (7b)',
+                        'model'               => 'Model',
+                        'orca-mini'           => 'Orca Mini',
+                        'phi3-5'              => 'Phi 3.5',
+                        'qwen2-5-0-5b'        => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'        => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'         => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'          => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'          => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'      => 'Starling-lm (7b)',
+                        'title'               => 'Review Translation',
+                        'title-info'          => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
+                        'vicuna-13b'          => 'Vicuna (13b)',
+                        'vicuna-7b'           => 'Vicuna (7b)',
                     ],
 
                     'checkout-message' => [
-                        'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Enabled',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Uncensored',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
-                        'model'             => 'Model',
-                        'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
-                        'prompt'            => 'Prompt',
-                        'starling-lm'       => 'Starling',
-                        'title'             => 'Personalized Checkout Message',
-                        'title-info'        => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
-                        'vicuna'            => 'Vicuna',
+                        'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
+                        'enabled'             => 'Enabled',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'         => 'OpenAI gpt 4 Turbo',
+                        'gpt-4o'              => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
+                        'llama-groq'          => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'         => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'         => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'         => 'Llama 3.2 (3B)',
+                        'llama3-8b'           => 'Llama 3 (8B)',
+                        'llava-7b'            => 'Llava (7b)',
+                        'mistral-7b'          => 'Mistral (7b)',
+                        'model'               => 'Model',
+                        'orca-mini'           => 'Orca Mini',
+                        'phi3-5'              => 'Phi 3.5',
+                        'prompt'              => 'Prompt',
+                        'qwen2-5-0-5b'        => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'        => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'         => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'          => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'          => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'      => 'Starling-lm (7b)',
+                        'title'               => 'Personalized Checkout Message',
+                        'title-info'          => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
+                        'vicuna'              => 'Vicuna',
+                        'vicuna-13b'          => 'Vicuna (13b)',
+                        'vicuna-7b'           => 'Vicuna (7b)',
+                    ],
+                ],
+
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR Compliance Settings',
+
+                    'settings' => [
+                        'title'   => 'GDPR Compliance Settings',
+                        'info'    => 'Manage GDPR compliance settings, including data privacy agreement. Enable or disable GDPR features as required',
+                        'enabled' => 'Enable GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR Agreement',
+                        'info'           => 'Manage customer consent under GDPR regulations. Enable agreement requirements for data collection and processing.',
+                        'enable'         => 'Enable Customer Agreement',
+                        'checkbox-label' => 'Agreement Checkbox Label',
+                        'content'        => 'Agreement Content',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Bottom Left',
+                        'bottom-right' => 'Bottom Right',
+                        'center'       => 'Center',
+                        'description'  => 'Description',
+                        'enable'       => 'Enable Cookie Notice',
+                        'identifier'   => 'Static Block Identifier',
+                        'info'         => 'Configure cookie consent settings to inform users about data collection and ensure compliance with privacy regulations.',
+                        'position'     => 'Cookie Block Display Position',
+                        'title'        => 'Cookie Notice Settings',
+                        'top-left'     => 'Top Left',
+                        'top-right'    => 'Top Right',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Manage Your Cookie Preferences',
+                        'info'                   => 'Control how your data is used by selecting your preferred cookie settings. Adjust permissions for different types of cookies.',
+                        'strictly-necessary'     => 'Strictly Necessary',
+                        'basic-interaction'      => 'Basic Interactions & Functionalities',
+                        'experience-enhancement' => 'Experience Enhancements',
+                        'measurement'            => 'Measurements',
+                        'targeting-advertising'  => 'Targeting & Advertising',
+                    ],
+                ],
+
+                'sitemap' => [
+                    'info'  => 'Set sitemap options.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
+                        'title'   => 'Settings',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Set file limits options.',
+                        'max-file-size'    => 'Maximum file size',
+                        'max-url-per-file' => 'Maximum no. of URLs per file',
+                        'title'            => 'File Limits',
                     ],
                 ],
             ],
@@ -3575,13 +4051,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Allow Customer Review',
-                        'allow-guest-review'    => 'Allow Guest Review',
-                        'display-review-count'  => 'Display the review count for ratings.',
-                        'display-star-count'    => 'Display the star count in ratings.',
-                        'summary'               => 'Summary',
-                        'title'                 => 'Review',
-                        'title-info'            => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                        'allow-customer-review'   => 'Allow Customer Review',
+                        'allow-guest-review'      => 'Allow Guest Review',
+                        'censoring-reviewer-name' => 'Censoring Reviewer Name',
+                        'display-review-count'    => 'Display the review count for ratings.',
+                        'display-star-count'      => 'Display the star count in ratings.',
+                        'summary'                 => 'Summary',
+                        'title'                   => 'Review',
+                        'title-info'              => 'Evaluation or assessment of something, often involving opinions and feedback.',
                     ],
 
                     'attribute' => [
@@ -3741,13 +4218,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Enable Facebook',
-                        'enable-github'     => 'Enable Github',
-                        'enable-google'     => 'Enable Google',
-                        'enable-linkedin'   => 'Enable LinkedIn',
-                        'enable-twitter'    => 'Enable Twitter',
-                        'social-login'      => 'Social Login',
-                        'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
+                        'title' => 'Social Login',
+                        'info'  => '"Social login" allows users to access a website using their social media accounts, simplifying registration and login processes.',
+
+                        'google' => [
+                            'enable-google' => 'Enable Google',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by Google when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your Google OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Must match the URL configured in your Google console.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Enable Facebook',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'App ID provided by Facebook when creating an app in the Facebook developer console.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'App secret associated with your Facebook application. Keep it secure and private.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Must match the URL configured in your Facebook app settings.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Enable GitHub',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by GitHub when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your GitHub OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Must match the URL configured in your GitHub console.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Enable LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by LinkedIn when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your LinkedIn OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Must match the URL configured in your LinkedIn console.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Enable Twitter',
+
+                            'client-id' => [
+                                'title'      => 'Client ID',
+                                'title-info' => 'Unique identifier provided by Twitter when creating your OAuth application.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Client Secret',
+                                'title-info' => 'Secret key associated with your Twitter OAuth client. Keep it confidential.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirect URL',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Must match the URL configured in your Twitter console.',
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -3943,6 +4510,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Footer text',
+                        'footer-text-info' => 'Enter the text that will appear in the footer of the PDF.',
                         'info'             => 'Configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.',
                         'invoice-id-info'  => 'Configure display of Invoice ID in Invoice Header.',
                         'invoice-id-title' => 'Display Invoice ID in Header',
@@ -4084,6 +4653,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => 'Attribute Families',
                 'attributes'               => 'Attributes',
+                'booking-product'          => 'Bookings',
                 'campaigns'                => 'Campaigns',
                 'catalog'                  => 'Catalog',
                 'categories'               => 'Categories',
@@ -4100,6 +4670,7 @@ return [
                 'email-templates'          => 'Email Templates',
                 'events'                   => 'Events',
                 'exchange-rates'           => 'Exchange Rates',
+                'gdpr-data-requests'       => 'GDPR Data Requests',
                 'groups'                   => 'Groups',
                 'imports'                  => 'Imports',
                 'inventory-sources'        => 'Inventory Sources',
@@ -4291,26 +4862,37 @@ return [
             'ai-btn-tile' => 'Magic AI',
 
             'ai-generation' => [
-                'apply'                  => 'Apply',
-                'generate'               => 'Generate',
-                'generated-content'      => 'Generated Content',
-                'generated-content-info' => 'AI content can be misleading. Please review the generated content before applying it.',
-                'generating'             => 'Generating...',
-                'prompt'                 => 'Prompt',
-                'title'                  => 'AI Assistance',
-                'model'                  => 'Model',
-                'gpt-3-5-turbo'          => 'OpenAI gpt-3.5-turbo',
-                'llama2'                 => 'Llama 2',
-                'mistral'                => 'Mistral',
-                'dolphin-phi'            => 'Dolphin Phi',
-                'phi'                    => 'Phi-2',
-                'starling-lm'            => 'Starling',
-                'llama2-uncensored'      => 'Llama 2 Uncensored',
-                'llama2:13b'             => 'Llama 2 13B',
-                'llama2:70b'             => 'Llama 2 70B',
-                'orca-mini'              => 'Orca Mini',
-                'vicuna'                 => 'Vicuna',
-                'llava'                  => 'LLaVA',
+                'apply'                    => 'Apply',
+                'deepseek-r1-8b'           => 'DeepSeek R1 (8b)',
+                'enabled'                  => 'Enabled',
+                'gemini-2-0-flash'         => 'Gemini 2.0 Flash',
+                'generate'                 => 'Generate',
+                'generated-content'        => 'Generated Content',
+                'generated-content-info'   => 'AI-generated content may be misleading. Review the generated content before applying.',
+                'generating'               => 'Generating...',
+                'gpt-4-turbo'              => 'OpenAI gpt-4 Turbo',
+                'gpt-4o'                   => 'OpenAI gpt-4o',
+                'gpt-4o-mini'              => 'OpenAI gpt-4o Mini',
+                'llama-groq'               => 'Llama 3.3 (Groq)',
+                'llama3-1-8b'              => '(Ollama) Llama 3.1 (8B)',
+                'llama3-2-1b'              => '(Ollama) Llama 3.2 (1B)',
+                'llama3-2-3b'              => '(Ollama) Llama 3.2 (3B)',
+                'llama3-8b'                => '(Ollama) Llama 3 (8B)',
+                'llava-7b'                 => 'Llava (7b)',
+                'mistral-7b'               => 'Mistral (7b)',
+                'model'                    => 'Model',
+                'orca-mini'                => 'Orca Mini',
+                'phi3-5'                   => 'Phi 3.5',
+                'prompt'                   => 'Prompt',
+                'qwen2-5-0-5b'             => 'Qwen 2.5 (0.5b)',
+                'qwen2-5-1-5b'             => 'Qwen 2.5 (1.5b)',
+                'qwen2-5-14b'              => 'Qwen 2.5 (14b)',
+                'qwen2-5-3b'               => 'Qwen 2.5 (3b)',
+                'qwen2-5-7b'               => 'Qwen 2.5 (7b)',
+                'starling-lm-7b'           => 'Starling-lm (7b)',
+                'title'                    => 'AI Assistance',
+                'vicuna-13b'               => 'Vicuna (13b)',
+                'vicuna-7b'                => 'Vicuna (7b)',
             ],
         ],
     ],
@@ -4322,8 +4904,8 @@ return [
         'campaigns'                => 'Campaigns',
         'cancel'                   => 'Cancel',
         'cart-rules'               => 'Cart Rules',
-        'catalog-rules'            => 'Catalog Rules',
         'catalog'                  => 'Catalog',
+        'catalog-rules'            => 'Catalog Rules',
         'categories'               => 'Categories',
         'channels'                 => 'Channels',
         'cms'                      => 'CMS',
@@ -4340,6 +4922,7 @@ return [
         'email-templates'          => 'Email Templates',
         'events'                   => 'Events',
         'exchange-rates'           => 'Exchange Rates',
+        'gdpr'                     => 'GDPR',
         'groups'                   => 'Groups',
         'import'                   => 'Import',
         'imports'                  => 'Imports',
@@ -4441,6 +5024,28 @@ return [
                 'description' => 'A new customer account has been successfully created. They can now log in using their email address and password credentials. Once logged in, they will have access to various services, including the ability to review past orders, manage wishlists, and update their account information.',
                 'greeting'    => 'We extend a warm welcome to the new customer, :customer_name who has just registered with us!',
                 'subject'     => 'New Customer Registration',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'New Request For Data Delete',
+                'new-update-request' => 'New Request For Data Update',
+
+                'new-request' => [
+                    'customer-name'  => 'Customer Name : ',
+                    'delete-summary' => 'Summary of Delete Request',
+                    'message'        => 'Message : ',
+                    'request-status' => 'Request Status : ',
+                    'request-type'   => 'Request Type : ',
+                    'update-summary' => 'Summary of Update Request',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR Request Has Been Updated',
+                    'summary'        => 'The GDPR Request Status Has Been Updated',
+                    'request-status' => 'Request Status:',
+                    'request-type'   => 'Request Type:',
+                    'message'        => 'Message:',
+                ],
             ],
         ],
 

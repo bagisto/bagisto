@@ -37,7 +37,7 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function create()
     {
         if (request()->ajax()) {
             return datagrid(TaxRateDataGrid::class)->process();
@@ -51,7 +51,7 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(TaxRateRequest $request)
+    public function store(TaxRateRequest $request)
     {
         Event::dispatch('tax.rate.create.before');
 

@@ -190,6 +190,11 @@ return [
                 'title'                   => 'Crear pedido para :name',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => 'Ninguno',
+                        'total-amount' => 'Monto total',
+                    ],
+
                     'configurable' => [
                         'select-options' => 'Por favor, selecciona una opción',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => 'Enlaces',
+                    ],
+
+                    'virtual' => [
+                        'none'         => 'Ninguno',
+                        'total-amount' => 'Monto total',
                     ],
                 ],
 
@@ -728,6 +738,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => 'Fecha de Creación',
+                    'from'         => 'Desde',
+                    'id'           => 'ID',
+                    'order-id'     => 'ID de Pedido',
+                    'qty'          => 'Cantidad',
+                    'to'           => 'Hasta',
+                    'view'         => 'Ver',
+                ],
+
+                'title'    => 'Reservas',
+            ],
+
+            'calendar' => [
+                'booking-date'     => 'Fecha de Reserva',
+                'booking-details'  => 'Detalles de la Reserva',
+                'canceled'         => 'Cancelado',
+                'closed'           => 'Cerrado',
+                'done'             => 'Hecho',
+                'order-id'         => 'ID de Pedido',
+                'pending'          => 'Pendiente',
+                'price'            => 'Precio',
+                'status'           => 'Estado',
+                'time-slot'        => 'Franja Horaria:',
+                'view-details'     => 'Ver Detalles',
+            ],
+
+            'title' => 'Producto de Reservas',
+        ],
     ],
 
     'catalog' => [
@@ -863,6 +905,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Agregar opción',
+                            'empty-info'        => 'Para crear opciones personalizables al instante.',
+                            'empty-title'       => 'Agregar opción',
+                            'info'              => 'Esto personalizará el producto simple.',
+                            'title'             => 'Elemento personalizable',
+
+                            'update-create' => [
+                                'is-required'               => 'Es obligatorio',
+                                'max-characters'            => 'Máximo de caracteres',
+                                'name'                      => 'Título',
+                                'no'                        => 'No',
+                                'price'                     => 'Precio',
+                                'save-btn'                  => 'Guardar',
+                                'supported-file-extensions' => 'Extensiones de archivo admitidas',
+                                'title'                     => 'Opción',
+                                'type'                      => 'Tipo',
+                                'yes'                       => 'Sí',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Agregar opción',
+                                'delete'      => 'Eliminar',
+                                'delete-btn'  => 'Eliminar',
+                                'edit-btn'    => 'Editar',
+                                'empty-info'  => 'Para crear varias combinaciones de productos al instante.',
+                                'empty-title' => 'Agregar opción',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => 'Texto',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Área de texto',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => 'Casilla de verificación',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => 'Botón de opción',
+                                    ],
+
+                                    'select' => [
+                                        'title' => 'Seleccionar',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Selección múltiple',
+                                    ],
+
+                                    'date' => [
+                                        'title' => 'Fecha',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Fecha y hora',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Hora',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'Archivo',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => 'Etiqueta',
+                                        'price'    => 'Precio',
+                                        'save-btn' => 'Guardar',
+                                        'title'    => 'Opción',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => 'El producto ya está asociado con un producto configurable, agrupado o en paquete.',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Agregar variante',
                         'delete-btn'        => 'Eliminar',
@@ -990,6 +1119,186 @@ return [
                                     'title' => 'Seleccionar',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => 'Disponible Desde',
+                        'available-to'   => 'Disponible Hasta',
+                        'location'       => 'Ubicación',
+                        'qty'            => 'Cantidad',
+                        'title'          => 'Tipo de Reserva',
+
+                        'available-every-week' => [
+                            'no'    => 'No',
+                            'title' => 'Disponible Cada Semana',
+                            'yes'   => 'Sí',
+                        ],
+
+                        'appointment' => [
+                            'break-duration'         => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'slot-duration'          => 'Duración del Slot (Minutos)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => 'Agregar',
+                            'break-duration'   => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'close'            => 'Cerrar',
+                            'description'      => 'Información de la Reserva',
+                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'edit'             => 'Editar',
+                            'many'             => 'Muchas Reservas Para Un Día',
+                            'one'              => 'Una Reserva Para Muchos Días',
+                            'open'             => 'Abrir',
+                            'slot-add'         => 'Agregar Slots',
+                            'slot-duration'    => 'Duración del Slot (Minutos)',
+                            'slot-title'       => 'Duración del Tiempo de los Slots',
+                            'title'            => 'Predeterminado',
+                            'unavailable'      => 'No Disponible',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => 'Agregar Slots',
+                                    'close'      => 'Cerrar',
+                                    'day'        => 'Día',
+                                    'edit-title' => 'Editar Slots',
+                                    'friday'     => 'Viernes',
+                                    'from'       => 'Desde',
+                                    'from-day'   => 'Desde el Día',
+                                    'from-time'  => 'Desde la Hora',
+                                    'monday'     => 'Lunes',
+                                    'open'       => 'Abrir',
+                                    'saturday'   => 'Sábado',
+                                    'save'       => 'Guardar',
+                                    'select'     => 'Seleccionar',
+                                    'status'     => 'Estado',
+                                    'sunday'     => 'Domingo',
+                                    'thursday'   => 'Jueves',
+                                    'to'         => 'Hasta',
+                                    'to-day'     => 'Hasta el Día',
+                                    'to-time'    => 'Hasta la Hora',
+                                    'tuesday'    => 'Martes',
+                                    'wednesday'  => 'Miércoles',
+                                    'week'       => ':día',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => 'Agregar Entradas',
+                            'delete'             => 'Eliminar',
+                            'description'        => 'Descripción',
+                            'description-info'   => 'No hay entradas disponibles.',
+                            'edit'               => 'Editar',
+                            'name'               => 'Nombre',
+                            'price'              => 'Precio',
+                            'qty'                => 'Cantidad',
+                            'special-price'      => 'Precio Especial',
+                            'special-price-from' => 'Precio Especial Desde',
+                            'special-price-to'   => 'Precio Especial Hasta',
+                            'title'              => 'Entradas',
+                            'valid-from'         => 'Válido Desde',
+                            'valid-until'        => 'Válido Hasta',
+
+                            'modal'              => [
+                                'edit' => 'Editar Entradas',
+                                'save' => 'Guardar',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Agregar Entradas',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Agregar Slots',
+                                'description' => 'Slots Disponibles con Duración de Tiempo.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => 'Base Diaria',
+                            'daily-hourly'           => 'Ambos (Base Diaria y por Hora)',
+                            'daily-price'            => 'Precio Diario',
+                            'hourly'                 => 'Base por Hora',
+                            'hourly-price'           => 'Precio por Hora',
+                            'title'                  => 'Tipo de Alquiler',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Agregar Slots',
+                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'save'             => 'Guardar',
+                            'title'            => 'Duración del Tiempo de los Slots',
+                            'unavailable'      => 'No Disponible',
+
+                            'action' => [
+                                'add' => 'Agregar',
+                            ],
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'     => 'Viernes',
+                                    'from'       => 'Desde',
+                                    'monday'     => 'Lunes',
+                                    'saturday'   => 'Sábado',
+                                    'sunday'     => 'Domingo',
+                                    'thursday'   => 'Jueves',
+                                    'to'         => 'Hasta',
+                                    'tuesday'    => 'Martes',
+                                    'wednesday'  => 'Miércoles',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => 'Tiempo de Descanso entre Slots (Minutos)',
+                            'guest-capacity'            => 'Capacidad de Huéspedes',
+                            'guest-limit'               => 'Límite de Huéspedes por Mesa',
+                            'prevent-scheduling-before' => 'Prevenir Programación Antes de',
+                            'slot-duration'             => 'Duración del Slot (Minutos)',
+
+                            'charged-per' => [
+                                'guest'  => 'Huésped',
+                                'table'  => 'Mesa',
+                                'title'  => 'Cobrado Por',
+                            ],
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Mismo Slot Para Todos los Días',
+                                'yes'   => 'Sí',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => 'Reserva de Cita',
+                            'default'     => 'Reserva Predeterminada',
+                            'event'       => 'Reserva de Evento',
+                            'many'        => 'Muchas',
+                            'one'         => 'Una',
+                            'rental'      => 'Reserva de Alquiler',
+                            'table'       => 'Reserva de Mesa',
+                            'title'       => 'Tipo',
+                        ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'El tipo de reserva no se puede cambiar.',
+                            'time-validation'    => 'La hora de inicio debe ser menor que la hora de finalización.',
+                            'overlap-validation' => 'El intervalo de tiempo se superpone con un intervalo existente.',
                         ],
                     ],
 
@@ -1670,6 +1979,46 @@ return [
                     'id'      => 'ID',
                     'name'    => 'Nombre',
                 ],
+            ],
+        ],
+
+        'gdpr' => [
+            'index' => [
+                'title' => 'Solicitud de GDPR',
+
+                'datagrid' => [
+                    'completed'     => 'Completado',
+                    'created-at'    => 'Creado en',
+                    'customer-name' => 'Nombre del Cliente',
+                    'declined'      => 'Rechazado',
+                    'delete'        => 'Eliminar',
+                    'edit'          => 'Editar',
+                    'id'            => 'ID',
+                    'message'       => 'Mensaje',
+                    'pending'       => 'Pendiente',
+                    'processing'    => 'Procesando',
+                    'revoked'       => 'Widerrufen',
+                    'status'        => 'Estado',
+                    'type'          => 'Tipo',
+                ],
+
+                'modal' => [
+                    'completed'     => 'Completado',
+                    'declined'      => 'Rechazado',
+                    'message'       => 'Mensaje',
+                    'pending'       => 'Pendiente',
+                    'processing'    => 'Procesando',
+                    'revoked'       => 'Widerrufen',
+                    'save-btn'      => 'Guardar',
+                    'status'        => 'Estado',
+                    'title'         => 'Editar Solicitud de Datos GDPR',
+                    'type'          => 'Tipo',
+                ],
+
+                'update-success'              => 'Solicitud de Datos actualizada con éxito y correo electrónico enviado al cliente.',
+                'delete-success'              => 'Solicitud de Datos eliminada con éxito.',
+                'attribute-reason-error'      => 'No se puede eliminar.',
+                'update-success-unsent-email' => 'Solicitud de Datos actualizada con éxito pero correo electrónico no enviado al cliente.',
             ],
         ],
 
@@ -3028,6 +3377,7 @@ return [
             'cannot-change'      => 'No se puede cambiar el usuario.',
             'create-success'     => 'Usuario creado con éxito.',
             'delete-failed'      => 'Error al eliminar el usuario.',
+            'delete-self-error'  => 'No puedes eliminar tu propia cuenta.',
             'delete-success'     => 'Usuario eliminado con éxito.',
             'delete-warning'     => '¿Estás seguro de que quieres realizar esta acción?',
             'incorrect-password' => 'Contraseña incorrecta',
@@ -3326,6 +3676,7 @@ return [
 
         'view' => [
             'all-channels'  => 'Todos los Canales',
+            'back-btn'      => 'Atrás',
             'day'           => 'Día',
             'end-date'      => 'Fecha de Finalización',
             'export-csv'    => 'Exportar CSV',
@@ -3390,6 +3741,40 @@ return [
                         'redirection-link'  => 'Enlace de Redirección',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => 'Habilitar reglas de especulación',
+                        'info'               => 'Configura los ajustes para habilitar o deshabilitar la lógica de especulación automática.',
+                        'title'              => 'Reglas de especulación',
+
+                        'prerender' => [
+                            'conservative'           => 'Conservador',
+                            'eager'                  => 'Ansioso',
+                            'eagerness'              => 'Nivel de anticipación del prerender',
+                            'eagerness-info'         => 'Controla cuán agresivamente se aplican las reglas de especulación. Opciones: ansioso (máximo), moderado (predeterminado), conservador (bajo).',
+                            'enabled'                => 'Habilitar reglas de especulación para prerender',
+                            'ignore-url-params'      => 'Ignorar parámetros de URL para prerender',
+                            'ignore-url-params-info' => 'Especifica los parámetros de URL a ignorar en las reglas de especulación. Usa una barra vertical (|) para separar múltiples parámetros.',
+                            'ignore-urls'            => 'Ignorar URLs para prerender',
+                            'ignore-urls-info'       => 'Introduce las URLs que deben excluirse de la lógica de especulación. Separa múltiples URLs con una barra vertical (|).',
+                            'info'                   => 'Configura el estado de las reglas de especulación.',
+                            'moderate'               => 'Moderado',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservador',
+                            'eager'                  => 'Ansioso',
+                            'eagerness'              => 'Nivel de anticipación del prefetch',
+                            'eagerness-info'         => 'Controla cuán agresivamente se aplican las reglas de especulación. Opciones: ansioso (máximo), moderado (predeterminado), conservador (bajo).',
+                            'enabled'                => 'Habilitar reglas de especulación para prefetch',
+                            'ignore-url-params'      => 'Ignorar parámetros de URL para prefetch',
+                            'ignore-url-params-info' => 'Especifica los parámetros de URL a ignorar en las reglas de especulación. Usa una barra vertical (|) para separar múltiples parámetros.',
+                            'ignore-urls'            => 'Ignorar URLs para prefetch',
+                            'ignore-urls-info'       => 'Introduce las URLs que deben excluirse de la lógica de especulación. Separa múltiples URLs con una barra vertical (|).',
+                            'info'                   => 'Configura el estado de las reglas de especulación.',
+                            'moderate'               => 'Moderado',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => 'CSS Personalizado',
                         'custom-javascript' => 'Javascript Personalizado',
@@ -3407,6 +3792,15 @@ return [
                         'logo-image' => 'Imagen de Logotipo',
                         'title'      => 'Logotipo de Administrador',
                         'title-info' => 'Configure imágenes de logotipo y favicon para la interfaz de su sitio web para una mejor marca y reconocimiento.',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => 'Menú predeterminado',
+                        'info'            => 'Esta configuración controla la visibilidad de las categorías en el menú de encabezado. Puedes elegir mostrar solo las categorías principales o todas las categorías anidadas.',
+                        'preview-default' => 'Vista previa del menú predeterminado',
+                        'preview-sidebar' => 'Vista previa del menú lateral',
+                        'sidebar'         => 'Menú lateral',
+                        'title'           => 'Vista de categoría del menú',
                     ],
                 ],
 
@@ -3440,42 +3834,124 @@ return [
                     ],
 
                     'review-translation' => [
-                        'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Habilitado',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Sin Censura',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
-                        'model'             => 'Modelo',
-                        'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
-                        'starling-lm'       => 'Starling',
-                        'title'             => 'Traducción de Reseñas',
-                        'title-info'        => 'Proporciona la opción al cliente o visitante de traducir la reseña del cliente al inglés.<br/><br/>Cuando está habilitado, ve a las reseñas y encontrarás el botón "Traducir al inglés" si la reseña no está en inglés.',
-                        'vicuna'            => 'Vicuña',
+                        'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
+                        'enabled'             => 'Habilitado',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'         => 'OpenAI gpt-4 Turbo',
+                        'gpt-4o'              => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
+                        'llama-groq'          => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'         => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'         => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'         => 'Llama 3.2 (3B)',
+                        'llama3-8b'           => 'Llama 3 (8B)',
+                        'llava-7b'            => 'Llava (7b)',
+                        'mistral-7b'          => 'Mistral (7b)',
+                        'model'               => 'Modelo',
+                        'orca-mini'           => 'Orca Mini',
+                        'phi3-5'              => 'Phi 3.5',
+                        'qwen2-5-0-5b'        => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'        => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'         => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'          => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'          => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'      => 'Starling-lm (7b)',
+                        'title'               => 'Traducción de Reseñas',
+                        'title-info'          => 'Proporcionar opción al cliente o visitante para traducir la reseña del cliente al inglés.<br/><br/>Cuando esté habilitado, ve a la reseña y encontrarás el botón "Traducir al inglés" si la reseña está en otro idioma que no sea inglés.',
+                        'vicuna-13b'          => 'Vicuna (13b)',
+                        'vicuna-7b'           => 'Vicuna (7b)',
                     ],
 
                     'checkout-message' => [
-                        'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Habilitado',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Sin Censura',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
-                        'model'             => 'Modelo',
-                        'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
-                        'prompt'            => 'Indicación',
-                        'starling-lm'       => 'Starling',
-                        'title'             => 'Mensaje Personalizado de Pago',
-                        'title-info'        => 'Crea un mensaje de pago personalizado para los clientes en la página de agradecimiento, adaptando el contenido para que resuene con las preferencias individuales y mejore la experiencia general después de la compra.',
-                        'vicuna'            => 'Vicuña',
+                        'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
+                        'enabled'             => 'Habilitado',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'         => 'OpenAI gpt 4 Turbo',
+                        'gpt-4o'              => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
+                        'llama-groq'          => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'         => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'         => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'         => 'Llama 3.2 (3B)',
+                        'llama3-8b'           => 'Llama 3 (8B)',
+                        'llava-7b'            => 'Llava (7b)',
+                        'mistral-7b'          => 'Mistral (7b)',
+                        'model'               => 'Modelo',
+                        'orca-mini'           => 'Orca Mini',
+                        'phi3-5'              => 'Phi 3.5',
+                        'prompt'              => 'Indicación',
+                        'qwen2-5-0-5b'        => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'        => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'         => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'          => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'          => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'      => 'Starling-lm (7b)',
+                        'title'               => 'Mensaje Personalizado de Pago',
+                        'title-info'          => 'Crea un mensaje de pago personalizado para los clientes en la página de agradecimiento, adaptando el contenido para resonar con las preferencias individuales y mejorando la experiencia post-compra en general.',
+                        'vicuna'              => 'Vicuna',
+                        'vicuna-13b'          => 'Vicuna (13b)',
+                        'vicuna-7b'           => 'Vicuna (7b)',
+                    ],
+                ],
+
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Configuraciones de cumplimiento de GDPR',
+
+                    'settings' => [
+                        'title'   => 'Configuraciones de cumplimiento de GDPR',
+                        'info'    => 'Administre las configuraciones de cumplimiento de GDPR, incluida la política de privacidad. Habilite o deshabilite las funciones de GDPR según sea necesario.',
+                        'enabled' => 'Habilitar GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Acuerdo de GDPR',
+                        'info'           => 'Administre el consentimiento de los clientes de acuerdo con las regulaciones de GDPR. Habilite el consentimiento obligatorio para la recopilación y el procesamiento de datos.',
+                        'enable'         => 'Habilitar consentimiento del cliente',
+                        'checkbox-label' => 'Etiqueta de la casilla de verificación para el consentimiento',
+                        'content'        => 'Contenido del consentimiento',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'Abajo a la izquierda',
+                        'bottom-right' => 'Abajo a la derecha',
+                        'center'       => 'Centro',
+                        'description'  => 'Descripción',
+                        'enable'       => 'Habilitar notificación de cookies',
+                        'identifier'   => 'Identificador de bloque estático',
+                        'info'         => 'Configure las configuraciones de consentimiento de cookies para informar a los usuarios sobre la recopilación de datos y cumplir con las políticas de privacidad.',
+                        'position'     => 'Posición de visualización del bloque de cookies',
+                        'title'        => 'Configuraciones de notificación de cookies',
+                        'top-left'     => 'Arriba a la izquierda',
+                        'top-right'    => 'Arriba a la derecha',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Administre sus configuraciones de cookies',
+                        'info'                   => 'Controle cómo se utilizan sus datos seleccionando las configuraciones de cookies preferidas. Ajuste los permisos para diferentes tipos de cookies.',
+                        'strictly-necessary'     => 'Estrictamente necesario',
+                        'basic-interaction'      => 'Interacción y funcionalidad básica',
+                        'experience-enhancement' => 'Mejora de la experiencia',
+                        'measurement'            => 'Medición',
+                        'targeting-advertising'  => 'Segmentación y publicidad',
+                    ],
+                ],
+
+                'sitemap' => [
+                    'info'  => 'Configurar opciones del mapa del sitio.',
+                    'title' => 'Mapa del Sitio',
+
+                    'settings' => [
+                        'enabled' => 'Habilitado',
+                        'info'    => 'Habilitar o deshabilitar el mapa del sitio para su sitio web para mejorar la optimización de motores de búsqueda y mejorar la experiencia del usuario.',
+                        'title'   => 'Configuraciones',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Configurar opciones de límites de archivo.',
+                        'max-file-size'    => 'Tamaño máximo de archivo',
+                        'max-url-per-file' => 'Número máximo de URLs por archivo',
+                        'title'            => 'Límites de Archivo',
                     ],
                 ],
             ],
@@ -3575,13 +4051,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => 'Permitir reseñas de clientes',
-                        'allow-guest-review'    => 'Permitir reseñas de invitados',
-                        'display-review-count'  => 'Muestra el recuento de reseñas para las calificaciones.',
-                        'display-star-count'    => 'Muestra el recuento de estrellas en las calificaciones.',
-                        'summary'               => 'Resumen',
-                        'title'                 => 'Reseña',
-                        'title-info'            => 'Evaluación o valoración de algo, a menudo involucrando opiniones y comentarios.',
+                        'allow-customer-review'   => 'Permitir reseñas de clientes',
+                        'allow-guest-review'      => 'Permitir reseñas de invitados',
+                        'censoring-reviewer-name' => 'Censurar Nombre del Reseñador',
+                        'display-review-count'    => 'Muestra el recuento de reseñas para las calificaciones.',
+                        'display-star-count'      => 'Muestra el recuento de estrellas en las calificaciones.',
+                        'summary'                 => 'Resumen',
+                        'title'                   => 'Reseña',
+                        'title-info'              => 'Evaluación o valoración de algo, a menudo involucrando opiniones y comentarios.',
                     ],
 
                     'attribute' => [
@@ -3741,13 +4218,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => 'Habilitar Facebook',
-                        'enable-github'     => 'Habilitar Github',
-                        'enable-google'     => 'Habilitar Google',
-                        'enable-linkedin'   => 'Habilitar LinkedIn',
-                        'enable-twitter'    => 'Habilitar Twitter',
-                        'social-login'      => 'Inicio de sesión social',
-                        'social-login-info' => '"Inicio de sesión social" permite a los usuarios acceder a sitios web utilizando sus cuentas de redes sociales, simplificando los procesos de registro e inicio de sesión para mayor comodidad.',
+                        'title' => 'Inicio de sesión social',
+                        'info'  => '"El inicio de sesión social" permite a los usuarios acceder a un sitio web utilizando sus cuentas de redes sociales, simplificando los procesos de registro e inicio de sesión.',
+
+                        'google' => [
+                            'enable-google' => 'Habilitar Google',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por Google al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de Google. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'Redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Debe coincidir con la URL configurada en tu consola de Google.',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => 'Habilitar Facebook',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'ID de la aplicación proporcionado por Facebook al crear una aplicación en la consola de desarrolladores.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Secreto de la aplicación asociado a tu aplicación de Facebook. Mantenlo seguro y privado.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => 'Habilitar GitHub',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por GitHub al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de GitHub. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Debe coincidir con la URL configurada en tu consola de GitHub.',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => 'Habilitar LinkedIn',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por LinkedIn al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de LinkedIn. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Debe coincidir con la URL configurada en tu consola de LinkedIn.',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => 'Habilitar Twitter',
+
+                            'client-id' => [
+                                'title'      => 'ID de cliente',
+                                'title-info' => 'Identificador único proporcionado por Twitter al crear tu aplicación OAuth.',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => 'Secreto de cliente',
+                                'title-info' => 'Clave secreta asociada a tu cliente OAuth de Twitter. Mantenla confidencial.',
+                            ],
+
+                            'redirect' => [
+                                'title'      => 'URL de redirección',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Debe coincidir con la URL configurada en tu consola de Twitter.',
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -3943,6 +4510,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Texto de pie de página',
+                        'footer-text-info' => 'Introduce el texto que aparecerá en el pie de página del PDF.',
                         'info'             => 'Configurar las impresiones en PDF para mostrar el ID de la factura, el ID del pedido en el encabezado e incluir el logotipo de la factura.',
                         'invoice-id-info'  => 'Configurar la visualización del ID de la factura en el encabezado de la factura.',
                         'invoice-id-title' => 'Mostrar ID de factura en el encabezado',
@@ -4082,8 +4651,9 @@ return [
             ],
 
             'sidebar' => [
-                'attribute-families'       => 'Familias de Atributos',
+                'attribute-families'       => 'Familias de atributos',
                 'attributes'               => 'Atributos',
+                'booking-product'          => 'Reservas',
                 'campaigns'                => 'Campañas',
                 'catalog'                  => 'Catálogo',
                 'categories'               => 'Categorías',
@@ -4094,36 +4664,37 @@ return [
                 'configure'                => 'Configurar',
                 'currencies'               => 'Monedas',
                 'customers'                => 'Clientes',
-                'dashboard'                => 'Panel de Control',
+                'dashboard'                => 'Panel de control',
                 'data-transfer'            => 'Transferencia de datos',
                 'discount'                 => 'Descuento',
-                'email-templates'          => 'Plantillas de Correo Electrónico',
+                'email-templates'          => 'Plantillas de correo',
                 'events'                   => 'Eventos',
-                'exchange-rates'           => 'Tasas de Cambio',
+                'exchange-rates'           => 'Tasas de cambio',
+                'gdpr-data-requests'       => 'Solicitudes de datos GDPR',
                 'groups'                   => 'Grupos',
                 'imports'                  => 'Importaciones',
-                'inventory-sources'        => 'Fuentes de Inventario',
+                'inventory-sources'        => 'Fuentes de inventario',
                 'invoices'                 => 'Facturas',
-                'locales'                  => 'Localizaciones',
+                'locales'                  => 'Idiomas',
                 'marketing'                => 'Marketing',
-                'mode'                     => 'Modo Oscuro',
-                'newsletter-subscriptions' => 'Suscripciones al Boletín de Noticias',
+                'mode'                     => 'Modo oscuro',
+                'newsletter-subscriptions' => 'Suscripciones al boletín',
                 'orders'                   => 'Pedidos',
                 'products'                 => 'Productos',
                 'promotions'               => 'Promociones',
                 'refunds'                  => 'Reembolsos',
-                'reporting'                => 'Informe',
+                'reporting'                => 'Informes',
                 'reviews'                  => 'Reseñas',
                 'roles'                    => 'Roles',
                 'sales'                    => 'Ventas',
                 'search-seo'               => 'Búsqueda y SEO',
-                'search-synonyms'          => 'Sinónimos de Búsqueda',
+                'search-synonyms'          => 'Sinónimos de búsqueda',
                 'search-terms'             => 'Términos de búsqueda',
-                'settings'                 => 'Configuración',
+                'settings'                 => 'Configuraciones',
                 'shipments'                => 'Envíos',
-                'sitemaps'                 => 'Mapas del Sitio',
-                'tax-categories'           => 'Categorías de Impuestos',
-                'tax-rates'                => 'Tasas de Impuestos',
+                'sitemaps'                 => 'Mapas del sitio',
+                'tax-categories'           => 'Categorías de impuestos',
+                'tax-rates'                => 'Tasas de impuestos',
                 'taxes'                    => 'Impuestos',
                 'themes'                   => 'Temas',
                 'transactions'             => 'Transacciones',
@@ -4291,26 +4862,37 @@ return [
             'ai-btn-tile' => 'Magia IA',
 
             'ai-generation' => [
-                'apply'                  => 'Aplicar',
-                'generate'               => 'Generar',
-                'generated-content'      => 'Contenido Generado',
-                'generated-content-info' => 'El contenido generado por IA puede ser engañoso. Por favor, revise el contenido generado antes de aplicarlo.',
-                'generating'             => 'Generando...',
-                'prompt'                 => 'Indicación',
-                'title'                  => 'Asistencia de IA',
-                'model'                  => 'Modelo',
-                'gpt-3-5-turbo'          => 'OpenAI GPT-3.5 Turbo',
-                'llama2'                 => 'Llama 2',
-                'mistral'                => 'Mistral',
-                'dolphin-phi'            => 'Dolphin Phi',
-                'phi'                    => 'Phi-2',
-                'starling-lm'            => 'Starling',
-                'llama2-uncensored'      => 'Llama 2 Sin Censura',
-                'llama2:13b'             => 'Llama 2 13B',
-                'llama2:70b'             => 'Llama 2 70B',
-                'orca-mini'              => 'Orca Mini',
-                'vicuna'                 => 'Vicuña',
-                'llava'                  => 'LLaVA',
+                'apply'                    => 'Aplicar',
+                'deepseek-r1-8b'           => 'DeepSeek R1 (8b)',
+                'enabled'                  => 'Habilitado',
+                'gemini-2-0-flash'         => 'Gemini 2.0 Flash',
+                'generate'                 => 'Generar',
+                'generated-content'        => 'Contenido Generado',
+                'generated-content-info'   => 'El contenido generado por IA puede ser engañoso. Por favor, revise el contenido generado antes de aplicarlo.',
+                'generating'               => 'Generando...',
+                'gpt-4-turbo'              => 'OpenAI gpt-4 Turbo',
+                'gpt-4o'                   => 'OpenAI gpt-4o',
+                'gpt-4o-mini'              => 'OpenAI gpt-4o mini',
+                'llama-groq'               => 'Llama 3.3 (Groq)',
+                'llama3-1-8b'              => 'Llama 3.1 (8B)',
+                'llama3-2-1b'              => 'Llama 3.2 (1B)',
+                'llama3-2-3b'              => 'Llama 3.2 (3B)',
+                'llama3-8b'                => 'Llama 3 (8B)',
+                'llava-7b'                 => 'Llava (7b)',
+                'mistral-7b'               => 'Mistral (7b)',
+                'model'                    => 'Modelo',
+                'orca-mini'                => 'Orca Mini',
+                'phi3-5'                   => 'Phi 3.5',
+                'prompt'                   => 'Indicación',
+                'qwen2-5-0-5b'             => 'Qwen 2.5 (0.5b)',
+                'qwen2-5-1-5b'             => 'Qwen 2.5 (1.5b)',
+                'qwen2-5-14b'              => 'Qwen 2.5 (14b)',
+                'qwen2-5-3b'               => 'Qwen 2.5 (3b)',
+                'qwen2-5-7b'               => 'Qwen 2.5 (7b)',
+                'starling-lm-7b'           => 'Starling-lm (7b)',
+                'title'                    => 'Asistencia de IA',
+                'vicuna-13b'               => 'Vicuna (13b)',
+                'vicuna-7b'                => 'Vicuna (7b)',
             ],
         ],
     ],
@@ -4340,6 +4922,7 @@ return [
         'email-templates'          => 'Plantillas de Correo Electrónico',
         'events'                   => 'Eventos',
         'exchange-rates'           => 'Tasas de Cambio',
+        'gdpr'                     => 'RGPD',
         'groups'                   => 'Grupos',
         'import'                   => 'Importar',
         'imports'                  => 'Importaciones',
@@ -4441,6 +5024,28 @@ return [
                 'description' => 'Se ha creado correctamente una nueva cuenta de cliente. Ahora pueden iniciar sesión con sus credenciales de dirección de correo electrónico y contraseña. Una vez que hayan iniciado sesión, tendrán acceso a varios servicios, incluida la capacidad de revisar pedidos anteriores, administrar listas de deseos y actualizar la información de su cuenta.',
                 'greeting'    => '¡Damos una cálida bienvenida al nuevo cliente, :customer_name que acaba de registrarse con nosotros!',
                 'subject'     => 'Registro de nuevo cliente',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Nueva solicitud para eliminar datos',
+                'new-update-request' => 'Nueva solicitud para actualizar datos',
+
+                'new-request' => [
+                    'customer-name'  => 'Nombre del cliente : ',
+                    'delete-summary' => 'Resumen de la solicitud de eliminación',
+                    'message'        => 'Mensaje : ',
+                    'request-status' => 'Estado de la solicitud : ',
+                    'request-type'   => 'Tipo de solicitud : ',
+                    'update-summary' => 'Resumen de la solicitud de actualización',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'La solicitud GDPR ha sido actualizada',
+                    'summary'        => 'El estado de la solicitud GDPR ha sido actualizado',
+                    'request-status' => 'Estado de la solicitud:',
+                    'request-type'   => 'Tipo de solicitud:',
+                    'message'        => 'Mensaje:',
+                ],
             ],
         ],
 

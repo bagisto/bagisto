@@ -114,20 +114,20 @@
                                         </div>
 
                                         @if ($customAttributeValue['type'] == 'file')
-                                            <a 
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
                                                 <span class="icon-download text-2xl"></span>
                                             </a>
                                         @elseif ($customAttributeValue['type'] == 'image')
-                                            <a 
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
-                                                <img 
-                                                    class="h-5 min-h-5 w-5 min-w-5" 
-                                                    src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                                <img
+                                                    class="h-5 min-h-5 w-5 min-w-5"
+                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 />
                                             </a>
                                         @else
@@ -259,7 +259,7 @@
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
     />
 
-    <!-- Upsell Products -->
+    <!-- Up-sell Products -->
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
@@ -302,7 +302,7 @@
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="break-all text-3xl font-medium max-sm:text-xl">
+                                    <h1 class="break-words text-3xl font-medium max-sm:text-xl">
                                         {{ $product->name }}
                                     </h1>
 
@@ -376,6 +376,8 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
 
+                                @include('shop::products.view.types.simple')
+
                                 @include('shop::products.view.types.configurable')
 
                                 @include('shop::products.view.types.grouped')
@@ -384,8 +386,9 @@
 
                                 @include('shop::products.view.types.downloadable')
 
+                                @include('shop::products.view.types.booking')
 
-                                <!-- Product Actions and Qunatity Box -->
+                                <!-- Product Actions and Quantity Box -->
                                 <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-4">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
@@ -639,7 +642,7 @@
                                 behavior: 'smooth'
                             });
                         }
-                        
+
                         let tabElement = document.querySelector('#review-tab-button');
 
                         if (tabElement) {

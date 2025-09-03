@@ -12,7 +12,7 @@
         <div>
             <!-- Address Edit Button -->
             @if (bouncer()->hasPermission('customers.addresses.edit'))
-                <p 
+                <p
                     class="cursor-pointer text-blue-600 transition-all hover:underline"
                     @click="$refs.customerAddressModal.toggle()"
                 >
@@ -41,7 +41,7 @@
                         <x-slot:header class="py-5">
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.customers.customers.view.address.edit.title')
-                            </p>    
+                            </p>
                         </x-slot>
 
                         <!-- Drawer Content -->
@@ -256,8 +256,8 @@
                                     v-model="address.country"
                                 >
                                     @foreach (core()->countries() as $country)
-                                        <option 
-                                            {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
+                                        <option
+                                            {{ $country->code === config('app.default_country') ? 'selected' : '' }}
                                             value="{{ $country->code }}"
                                         >
                                             {{ $country->name }}
@@ -284,7 +284,7 @@
                                         :placeholder="trans('admin::app.customers.customers.view.address.edit.state')"
                                         v-model="address.state"
                                     >
-                                        <option 
+                                        <option
                                             v-for='(state, index) in countryStates[address.country]'
                                             :value="state.code"
                                         >
@@ -336,11 +336,11 @@
                                 button-type="submit"
                                 class="primary-button w-full max-w-full justify-center"
                                 :title="trans('admin::app.customers.customers.view.address.edit.save-btn-title')"
-                                ::loading="isUpdating"
-                                ::disabled="isUpdating"
+                                ::loading="isLoading"
+                                ::disabled="isLoading"
                             />
                         </x-slot>
-                    </x-admin::modal>
+                    </x-admin::drawer>
                 </form>
 
                 {!! view_render_event('bagisto.admin.customers.addresses.edit.edit_form_controls.after') !!}
@@ -363,13 +363,13 @@
                 return {
                     countryStates: @json(core()->groupedStatesByCountries()),
 
-                    isUpdating: false,
+                    isLoading: false,
                 };
             },
 
             methods: {
                 update(params, { resetForm, setErrors }) {
-                    this.isUpdating = true;
+                    this.isLoading = true;
 
                     let formData = new FormData(this.$refs.createOrUpdateForm);
 
@@ -378,17 +378,17 @@
                     formData.append('default_address', formData.get('default_address') ? 1 : 0);
 
                     this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${params?.address_id}`, formData)
-                        .then((response) => {                            
+                        .then((response) => {
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.$emit('address-updated', response.data.data);
 
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             this.$refs.customerAddressModal.toggle();
                         })
                         .catch(error => {
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);

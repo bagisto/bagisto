@@ -323,6 +323,14 @@ class ProductController extends Controller
      */
     public function search()
     {
+        $query = trim(request('query'));
+
+        if (empty($query)) {
+            return response()->json([
+                'data' => [],
+            ]);
+        }
+
         $searchEngine = 'database';
 
         if (
@@ -348,6 +356,10 @@ class ProductController extends Controller
 
         if (request()->has('type')) {
             $params['type'] = request('type');
+        }
+
+        if (request()->has('exclude_customizable_products')) {
+            $params['exclude_customizable_products'] = request('exclude_customizable_products');
         }
 
         $products = $this->productRepository

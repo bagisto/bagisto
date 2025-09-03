@@ -28,6 +28,8 @@ export default defineConfig({
     reportSlowTests: null,
 
     reporter: [
+        ["list"],
+        
         [
             "html",
             {

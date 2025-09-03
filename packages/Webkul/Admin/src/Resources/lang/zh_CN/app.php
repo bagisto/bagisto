@@ -190,6 +190,11 @@ return [
                 'title'                   => '为 :name 创建订单',
 
                 'types' => [
+                    'simple' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+
                     'configurable' => [
                         'select-options' => '请选择一个选项',
                     ],
@@ -205,6 +210,11 @@ return [
 
                     'downloadable' => [
                         'title' => '链接',
+                    ],
+
+                    'virtual' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
                     ],
                 ],
 
@@ -728,6 +738,38 @@ return [
                 ],
             ],
         ],
+
+        'booking' => [
+            'index' => [
+                'datagrid' => [
+                    'created-date' => '创建日期',
+                    'from'         => '从',
+                    'id'           => 'ID',
+                    'order-id'     => '订单ID',
+                    'qty'          => '数量',
+                    'to'           => '至',
+                    'view'         => '查看',
+                ],
+
+                'title'    => '预订',
+            ],
+
+            'calendar' => [
+                'booking-date'     => '预订日期',
+                'booking-details'  => '预订详情',
+                'canceled'         => '已取消',
+                'closed'           => '已关闭',
+                'done'             => '已完成',
+                'order-id'         => '订单ID',
+                'pending'          => '待处理',
+                'price'            => '价格',
+                'status'           => '状态',
+                'time-slot'        => '时间段：',
+                'view-details'     => '查看详情',
+            ],
+
+            'title' => '预订产品',
+        ],
     ],
 
     'catalog' => [
@@ -863,6 +905,93 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => '添加选项',
+                            'empty-info'        => '快速创建可定制选项。',
+                            'empty-title'       => '添加选项',
+                            'info'              => '这将定制简单的产品。',
+                            'title'             => '可定制项目',
+
+                            'update-create' => [
+                                'is-required'               => '是否必填',
+                                'max-characters'            => '最大字符数',
+                                'name'                      => '标题',
+                                'no'                        => '否',
+                                'price'                     => '价格',
+                                'save-btn'                  => '保存',
+                                'supported-file-extensions' => '支持的文件扩展名',
+                                'title'                     => '选项',
+                                'type'                      => '类型',
+                                'yes'                       => '是',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => '添加选项',
+                                'delete'      => '删除',
+                                'delete-btn'  => '删除',
+                                'edit-btn'    => '编辑',
+                                'empty-info'  => '快速创建不同产品组合。',
+                                'empty-title' => '添加选项',
+
+                                'types' => [
+                                    'text' => [
+                                        'title' => '文本',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => '文本区域',
+                                    ],
+
+                                    'checkbox' => [
+                                        'title' => '复选框',
+                                    ],
+
+                                    'radio' => [
+                                        'title' => '单选框',
+                                    ],
+
+                                    'select' => [
+                                        'title' => '选择',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => '多选',
+                                    ],
+
+                                    'date' => [
+                                        'title' => '日期',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => '日期和时间',
+                                    ],
+
+                                    'time' => [
+                                        'title' => '时间',
+                                    ],
+
+                                    'file' => [
+                                        'title' => '文件',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label'    => '标签',
+                                        'price'    => '价格',
+                                        'save-btn' => '保存',
+                                        'title'    => '选项',
+                                    ],
+                                ],
+                            ],
+
+                            'validations' => [
+                                'associated-product' => '产品已关联到配置、组或捆绑产品。',
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => '添加变体',
                         'delete-btn'        => '删除',
@@ -990,6 +1119,186 @@ return [
                                     'title' => '选择',
                                 ],
                             ],
+                        ],
+                    ],
+
+                    'booking' => [
+                        'available-from' => '可用起始日期',
+                        'available-to'   => '可用结束日期',
+                        'location'       => '位置',
+                        'qty'            => '数量',
+                        'title'          => '预订类型',
+
+                        'available-every-week' => [
+                            'no'    => '否',
+                            'title' => '每周可用',
+                            'yes'   => '是',
+                        ],
+
+                        'appointment' => [
+                            'break-duration' => '每个时段之间的休息时间（分钟）',
+                            'slot-duration'  => '时段持续时间（分钟）',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'default' => [
+                            'add'              => '添加',
+                            'break-duration'   => '每个时段之间的休息时间（分钟）',
+                            'close'            => '关闭',
+                            'description'      => '预订信息',
+                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'edit'             => '编辑',
+                            'many'             => '一天多次预订',
+                            'one'              => '多天一次预订',
+                            'open'             => '打开',
+                            'slot-add'         => '添加时段',
+                            'slot-duration'    => '时段持续时间（分钟）',
+                            'slot-title'       => '时段时间持续时间',
+                            'title'            => '默认',
+                            'unavailable'      => '不可用',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'add-title'  => '添加时段',
+                                    'close'      => '关闭',
+                                    'day'        => '天',
+                                    'edit-title' => '编辑时段',
+                                    'friday'     => '星期五',
+                                    'from'       => '从',
+                                    'from-day'   => '从天',
+                                    'from-time'  => '从时间',
+                                    'monday'     => '星期一',
+                                    'open'       => '打开',
+                                    'saturday'   => '星期六',
+                                    'save'       => '保存',
+                                    'select'     => '选择',
+                                    'status'     => '状态',
+                                    'sunday'     => '星期天',
+                                    'thursday'   => '星期四',
+                                    'to'         => '到',
+                                    'to-day'     => '到天',
+                                    'to-time'    => '到时间',
+                                    'tuesday'    => '星期二',
+                                    'wednesday'  => '星期三',
+                                    'week'       => ':day',
+                                ],
+                            ],
+                        ],
+
+                        'event' => [
+                            'add'                => '添加票',
+                            'delete'             => '删除',
+                            'description'        => '描述',
+                            'description-info'   => '没有可用的票。',
+                            'edit'               => '编辑',
+                            'name'               => '名称',
+                            'price'              => '价格',
+                            'qty'                => '数量',
+                            'special-price'      => '特价',
+                            'special-price-from' => '特价起始日期',
+                            'special-price-to'   => '特价结束日期',
+                            'title'              => '票',
+                            'valid-from'         => '有效起始日期',
+                            'valid-until'        => '有效结束日期',
+
+                            'modal'              => [
+                                'edit' => '编辑票',
+                                'save' => '保存',
+                            ],
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => '添加票',
+                            ],
+
+                            'slots'   => [
+                                'add'         => '添加时段',
+                                'description' => '可用时段和时间持续时间。',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily'                  => '按天计费',
+                            'daily-hourly'           => '按天和按小时计费',
+                            'daily-price'            => '每日价格',
+                            'hourly'                 => '按小时计费',
+                            'hourly-price'           => '每小时价格',
+                            'title'                  => '租赁类型',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'slots' => [
+                            'add'              => '添加时段',
+                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'save'             => '保存',
+                            'title'            => '时段时间持续时间',
+                            'unavailable'      => '不可用',
+
+                            'action'           => [
+                                'add' => '添加',
+                            ],
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => '星期五',
+                                    'from'       => '从',
+                                    'monday'     => '星期一',
+                                    'saturday'   => '星期六',
+                                    'sunday'     => '星期天',
+                                    'thursday'   => '星期四',
+                                    'to'         => '到',
+                                    'tuesday'    => '星期二',
+                                    'wednesday'  => '星期三',
+                                ],
+                            ],
+                        ],
+
+                        'table' => [
+                            'break-duration'            => '每个时段之间的休息时间（分钟）',
+                            'guest-capacity'            => '客人容量',
+                            'guest-limit'               => '每桌客人限制',
+                            'prevent-scheduling-before' => '防止提前安排',
+                            'slot-duration'             => '时段持续时间（分钟）',
+
+                            'charged-per'               => [
+                                'guest'  => '客人',
+                                'table'  => '桌子',
+                                'title'  => '按每个收费',
+                            ],
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => '否',
+                                'title' => '所有天数相同的时段',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'type' => [
+                            'appointment' => '预约预订',
+                            'default'     => '默认预订',
+                            'event'       => '活动预订',
+                            'many'        => '多个',
+                            'one'         => '一个',
+                            'rental'      => '租赁预订',
+                            'table'       => '桌子预订',
+                            'title'       => '类型',
+                        ],
+
+                        'validations' => [
+                            'type-mismatch'      => '预订类型无法更改。',
+                            'time-validation'    => '开始时间必须早于结束时间。',
+                            'overlap-validation' => '时间段与已有时间段重叠。',
                         ],
                     ],
 
@@ -1670,6 +1979,46 @@ return [
                     'id'     => 'ID',
                     'name'   => '名称',
                 ],
+            ],
+        ],
+
+        'gdpr' => [
+            'index' => [
+                'title' => 'GDPR 请求',
+
+                'datagrid' => [
+                    'completed'     => '已完成',
+                    'created-at'    => '创建时间',
+                    'customer-name' => '客户名称',
+                    'declined'      => '已拒绝',
+                    'delete'        => '删除',
+                    'edit'          => '编辑',
+                    'id'            => 'ID',
+                    'message'       => '消息',
+                    'pending'       => '待处理',
+                    'processing'    => '处理中',
+                    'revoked'       => '已撤销',
+                    'status'        => '状态',
+                    'type'          => '类型',
+                ],
+
+                'modal' => [
+                    'completed'     => '已完成',
+                    'declined'      => '已拒绝',
+                    'message'       => '消息',
+                    'pending'       => '待处理',
+                    'processing'    => '处理中',
+                    'revoked'       => '已撤销',
+                    'save-btn'      => '保存',
+                    'status'        => '状态',
+                    'title'         => '编辑 GDPR 数据请求',
+                    'type'          => '类型',
+                ],
+
+                'update-success'              => '数据请求更新成功并已发送邮件给客户。',
+                'delete-success'              => '数据请求删除成功。',
+                'attribute-reason-error'      => '无法删除。',
+                'update-success-unsent-email' => '数据请求更新成功但邮件未发送给客户。',
             ],
         ],
 
@@ -3028,6 +3377,7 @@ return [
             'cannot-change'      => '无法更改用户。',
             'create-success'     => '用户成功创建。',
             'delete-failed'      => '删除用户失败。',
+            'delete-self-error'  => '您无法删除自己的账户。',
             'delete-success'     => '用户成功删除。',
             'delete-warning'     => '您确定要执行此操作吗？',
             'incorrect-password' => '密码错误',
@@ -3326,6 +3676,7 @@ return [
 
         'view' => [
             'all-channels'  => '所有渠道',
+            'back-btn'      => '返回',
             'day'           => '日',
             'end-date'      => '结束日期',
             'export-csv'    => '导出CSV',
@@ -3390,6 +3741,40 @@ return [
                         'redirection-link'  => '重定向链接',
                     ],
 
+                    'speculation-rules' => [
+                        'enable-speculation' => '启用猜测规则',
+                        'info'               => '配置启用或禁用自动猜测逻辑的设置。',
+                        'title'              => '猜测规则',
+
+                        'prerender' => [
+                            'conservative'           => '保守',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预渲染积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预渲染猜测规则',
+                            'ignore-url-params'      => '忽略预渲染URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预渲染URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => '保守',
+                            'eager'                  => '积极',
+                            'eagerness'              => '预取积极程度',
+                            'eagerness-info'         => '控制猜测规则的应用激进程度。选项：积极（最大）、适中（默认）、保守（低）。',
+                            'enabled'                => '启用预取猜测规则',
+                            'ignore-url-params'      => '忽略预取URL参数',
+                            'ignore-url-params-info' => '指定在猜测规则中忽略的URL参数。使用管道符 (|) 分隔多个参数。',
+                            'ignore-urls'            => '忽略预取URL',
+                            'ignore-urls-info'       => '输入要从猜测逻辑中排除的URL。用管道符 (|) 分隔多个URL。',
+                            'info'                   => '设置猜测规则状态。',
+                            'moderate'               => '适中',
+                        ],
+                    ],
+
                     'custom-scripts' => [
                         'custom-css'        => '自定义CSS',
                         'custom-javascript' => '自定义Javascript',
@@ -3407,6 +3792,15 @@ return [
                         'logo-image' => '标志图像',
                         'title'      => '管理标志',
                         'title-info' => '为您的网站前端配置标志和网站图标图像，以提升品牌形象和识别度。',
+                    ],
+
+                    'menu-category' => [
+                        'default'         => '默认菜单',
+                        'info'            => '此设置控制标题菜单中类别的可见性。您可以选择仅显示父类别或显示所有嵌套类别。',
+                        'preview-default' => '预览默认菜单',
+                        'preview-sidebar' => '预览侧边栏菜单',
+                        'sidebar'         => '侧边栏菜单',
+                        'title'           => '菜单类别视图',
                     ],
                 ],
 
@@ -3440,42 +3834,124 @@ return [
                     ],
 
                     'review-translation' => [
-                        'dolphin-phi'       => '海豚Phi',
-                        'enabled'           => '已启用',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2未经审查',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
+                        'deepseek-r1-8b'    => 'DeepSeek R1 (8b)',
+                        'enabled'           => '启用',
+                        'gemini-2-0-flash'  => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'       => 'OpenAI gpt-4 Turbo',
+                        'gpt-4o'            => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'       => 'OpenAI gpt-4o mini',
+                        'llama-groq'        => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'       => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'       => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'       => 'Llama 3.2 (3B)',
+                        'llama3-8b'         => 'Llama 3 (8B)',
+                        'llava-7b'          => 'Llava (7b)',
+                        'mistral-7b'        => 'Mistral (7b)',
                         'model'             => '模型',
                         'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
-                        'starling-lm'       => 'Starling',
+                        'phi3-5'            => 'Phi 3.5',
+                        'qwen2-5-0-5b'      => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'      => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'       => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'        => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'        => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'    => 'Starling-lm (7b)',
                         'title'             => '评论翻译',
-                        'title-info'        => '为顾客或访客提供将顾客评论翻译成英文的选项。<br/><br/>启用后，转到评论页面，如果您的评论不是英文，您将找到“翻译为英文”的按钮。',
-                        'vicuna'            => 'Vicuna',
+                        'title-info'        => '为客户或访客提供将客户评论翻译成英语的选项。<br/><br/>启用后，转到评论页面，如果评论不是英语，您会找到“翻译成英语”按钮。',
+                        'vicuna-13b'        => 'Vicuna (13b)',
+                        'vicuna-7b'         => 'Vicuna (7b)',
                     ],
 
                     'checkout-message' => [
-                        'dolphin-phi'       => '海豚Phi',
-                        'enabled'           => '已启用',
-                        'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
-                        'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2未经审查',
-                        'llama2:13b'        => 'Llama 2 13B',
-                        'llama2:70b'        => 'Llama 2 70B',
-                        'llava'             => 'LLaVA',
-                        'mistral'           => 'Mistral',
+                        'deepseek-r1-8b'    => 'DeepSeek R1 (8b)',
+                        'enabled'           => '启用',
+                        'gemini-2-0-flash'  => 'Gemini 2.0 Flash',
+                        'gpt-4-turbo'       => 'OpenAI gpt 4 Turbo',
+                        'gpt-4o'            => 'OpenAI gpt-4o',
+                        'gpt-4o-mini'       => 'OpenAI gpt-4o mini',
+                        'llama-groq'        => 'Llama 3.3 (Groq)',
+                        'llama3-1-8b'       => 'Llama 3.1 (8B)',
+                        'llama3-2-1b'       => 'Llama 3.2 (1B)',
+                        'llama3-2-3b'       => 'Llama 3.2 (3B)',
+                        'llama3-8b'         => 'Llama 3 (8B)',
+                        'llava-7b'          => 'Llava (7b)',
+                        'mistral-7b'        => 'Mistral (7b)',
                         'model'             => '模型',
                         'orca-mini'         => 'Orca Mini',
-                        'phi'               => 'Phi-2',
+                        'phi3-5'            => 'Phi 3.5',
                         'prompt'            => '提示',
-                        'starling-lm'       => 'Starling',
-                        'title'             => '个性化结账信息',
-                        'title-info'        => '为感谢页面上的顾客定制结账信息，以使内容与个人偏好产生共鸣，增强整体购买后体验。',
+                        'qwen2-5-0-5b'      => 'Qwen 2.5 (0.5b)',
+                        'qwen2-5-1-5b'      => 'Qwen 2.5 (1.5b)',
+                        'qwen2-5-14b'       => 'Qwen 2.5 (14b)',
+                        'qwen2-5-3b'        => 'Qwen 2.5 (3b)',
+                        'qwen2-5-7b'        => 'Qwen 2.5 (7b)',
+                        'starling-lm-7b'    => 'Starling-lm (7b)',
+                        'title'             => '个性化结账消息',
+                        'title-info'        => '为客户在感谢页面上制作个性化的结账消息，定制内容以符合个人偏好，增强整体购买后的体验。',
                         'vicuna'            => 'Vicuna',
+                        'vicuna-13b'        => 'Vicuna (13b)',
+                        'vicuna-7b'         => 'Vicuna (7b)',
+                    ],
+                ],
+
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'GDPR 合规设置',
+
+                    'settings' => [
+                        'title'   => 'GDPR 合规设置',
+                        'info'    => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
+                        'enabled' => '启用 GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'GDPR 协议',
+                        'info'           => '根据 GDPR 规定管理客户同意。启用必要的数据收集和处理同意。',
+                        'enable'         => '启用客户同意',
+                        'checkbox-label' => '同意标签',
+                        'content'        => '同意内容',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => '左下角',
+                        'bottom-right' => '右下角',
+                        'center'       => '中心',
+                        'description'  => '描述',
+                        'enable'       => '启用 Cookie 通知',
+                        'identifier'   => '静态块 ID',
+                        'info'         => '配置 Cookie 同意设置，以通知用户数据收集和隐私政策。',
+                        'position'     => 'Cookie 块位置',
+                        'title'        => 'Cookie 通知设置',
+                        'top-left'     => '左上角',
+                        'top-right'    => '右上角',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => '管理 Cookie 设置',
+                        'info'                   => '选择首选的 Cookie 设置以管理数据使用。为不同类型的 Cookie 配置同意选项。',
+                        'strictly-necessary'     => '严格必要',
+                        'basic-interaction'      => '基本交互和功能',
+                        'experience-enhancement' => '体验增强',
+                        'measurement'            => '测量',
+                        'targeting-advertising'  => '目标广告',
+                    ],
+                ],
+
+                'sitemap' => [
+                    'info'  => '设置站点地图选项。',
+                    'title' => '站点地图',
+
+                    'settings' => [
+                        'enabled' => '启用',
+                        'info'    => '启用或禁用您网站的站点地图，以提高搜索引擎优化并增强用户体验。',
+                        'title'   => '设置',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => '设置文件限制选项。',
+                        'max-file-size'    => '最大文件大小',
+                        'max-url-per-file' => '每个文件的最大 URL 数量',
+                        'title'            => '文件限制',
                     ],
                 ],
             ],
@@ -3575,13 +4051,14 @@ return [
                     ],
 
                     'review' => [
-                        'allow-customer-review' => '允许客户评价',
-                        'allow-guest-review'    => '允许访客评价',
-                        'display-review-count'  => '显示评级的评论计数。',
-                        'display-star-count'    => '显示评分中的星级数。',
-                        'summary'               => '概括',
-                        'title'                 => '评价',
-                        'title-info'            => '对某物进行评估或评价，通常涉及意见和反馈。',
+                        'allow-customer-review'   => '允许客户评价',
+                        'allow-guest-review'      => '允许访客评价',
+                        'censoring-reviewer-name' => '审查者姓名审查',
+                        'display-review-count'    => '显示评级的评论计数。',
+                        'display-star-count'      => '显示评分中的星级数。',
+                        'summary'                 => '概括',
+                        'title'                   => '评价',
+                        'title-info'              => '对某物进行评估或评价，通常涉及意见和反馈。',
                     ],
 
                     'attribute' => [
@@ -3741,13 +4218,103 @@ return [
                     ],
 
                     'social-login' => [
-                        'enable-facebook'   => '启用 Facebook',
-                        'enable-github'     => '启用 Github',
-                        'enable-google'     => '启用 Google',
-                        'enable-linkedin'   => '启用 LinkedIn',
-                        'enable-twitter'    => '启用 Twitter',
-                        'social-login'      => '社交登录',
-                        'social-login-info' => '“社交登录”通过让用户使用社交媒体账户访问网站，从而简化了注册和登录流程。',
+                        'title' => '社交登录',
+                        'info'  => '"社交登录"允许用户通过他们的社交媒体账户访问网站，从而简化注册和登录过程。',
+
+                        'google' => [
+                            'enable-google' => '启用Google',
+
+                            'client-id' => [
+                                'title'      => '客户端ID',
+                                'title-info' => 'Google在创建OAuth应用时提供的唯一标识符。',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => '客户端密钥',
+                                'title-info' => '与您的Google OAuth客户端相关联的密钥。请保密。',
+                            ],
+
+                            'redirect' => [
+                                'title'      => '重定向URL',
+                                'title-info' => '用户在通过Google认证后被重定向的回调URL。必须与您在Google控制台中配置的URL匹配。',
+                            ],
+                        ],
+
+                        'facebook' => [
+                            'enable-facebook' => '启用Facebook',
+
+                            'client-id' => [
+                                'title'      => '客户端ID',
+                                'title-info' => '在Facebook开发者控制台创建应用时，Facebook提供的应用ID。',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => '客户端密钥',
+                                'title-info' => '与您的Facebook应用关联的密钥。请保密。',
+                            ],
+
+                            'redirect' => [
+                                'title'      => '重定向URL',
+                                'title-info' => '用户在通过Facebook认证后被重定向的回调URL。必须与您在Facebook应用设置中配置的URL匹配。',
+                            ],
+                        ],
+
+                        'github' => [
+                            'enable-github' => '启用GitHub',
+
+                            'client-id' => [
+                                'title'      => '客户端ID',
+                                'title-info' => 'GitHub在创建OAuth应用时提供的唯一标识符。',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => '客户端密钥',
+                                'title-info' => '与您的GitHub OAuth客户端相关联的密钥。请保密。',
+                            ],
+
+                            'redirect' => [
+                                'title'      => '重定向URL',
+                                'title-info' => '用户在通过GitHub认证后被重定向的回调URL。必须与您在GitHub控制台中配置的URL匹配。',
+                            ],
+                        ],
+
+                        'linkedin' => [
+                            'enable-linkedin' => '启用LinkedIn',
+
+                            'client-id' => [
+                                'title'      => '客户端ID',
+                                'title-info' => 'LinkedIn在创建OAuth应用时提供的唯一标识符。',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => '客户端密钥',
+                                'title-info' => '与您的LinkedIn OAuth客户端相关联的密钥。请保密。',
+                            ],
+
+                            'redirect' => [
+                                'title'      => '重定向URL',
+                                'title-info' => '用户在通过LinkedIn认证后被重定向的回调URL。必须与您在LinkedIn控制台中配置的URL匹配。',
+                            ],
+                        ],
+
+                        'twitter' => [
+                            'enable-twitter' => '启用Twitter',
+
+                            'client-id' => [
+                                'title'      => '客户端ID',
+                                'title-info' => 'Twitter在创建OAuth应用时提供的唯一标识符。',
+                            ],
+
+                            'client-secret' => [
+                                'title'      => '客户端密钥',
+                                'title-info' => '与您的Twitter OAuth客户端相关联的密钥。请保密。',
+                            ],
+
+                            'redirect' => [
+                                'title'      => '重定向URL',
+                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。必须与您在Twitter控制台中配置的URL匹配。',
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -3943,6 +4510,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => '页脚文字',
+                        'footer-text-info' => '输入将显示在PDF页脚中的文本。',
                         'info'             => '设置 PDF 打印输出，以在页眉中显示发票 ID、订单 ID，并包含发票 Logo。',
                         'invoice-id-info'  => '设置是否在发票页眉中显示发票 ID。',
                         'invoice-id-title' => '在页眉显示发票 ID',
@@ -4084,6 +4653,7 @@ return [
             'sidebar' => [
                 'attribute-families'       => '属性族',
                 'attributes'               => '属性',
+                'booking-product'          => '预订',
                 'campaigns'                => '活动',
                 'catalog'                  => '目录',
                 'categories'               => '分类',
@@ -4100,6 +4670,7 @@ return [
                 'email-templates'          => '电子邮件模板',
                 'events'                   => '事件',
                 'exchange-rates'           => '汇率',
+                'gdpr-data-requests'       => 'GDPR 数据请求',
                 'groups'                   => '分组',
                 'imports'                  => '导入',
                 'inventory-sources'        => '库存来源',
@@ -4292,25 +4863,36 @@ return [
 
             'ai-generation' => [
                 'apply'                  => '应用',
-                'dolphin-phi'            => 'Dolphin Phi',
+                'deepseek-r1-8b'         => 'DeepSeek R1 (8b)',
+                'enabled'                => '启用',
+                'gemini-2-0-flash'       => 'Gemini 2.0 Flash',
                 'generate'               => '生成',
                 'generated-content'      => '生成的内容',
-                'generated-content-info' => 'AI内容可能具有误导性。请在应用之前审查生成的内容。',
+                'generated-content-info' => 'AI内容可能会误导。请在应用之前审查生成的内容。',
                 'generating'             => '生成中...',
-                'gpt-3-5-turbo'          => 'OpenAI gpt-3.5-turbo',
-                'llama2'                 => 'Llama 2',
-                'llama2-uncensored'      => 'Llama 2 未经审查',
-                'llama2:13b'             => 'Llama 2 13B',
-                'llama2:70b'             => 'Llama 2 70B',
-                'llava'                  => 'LLaVA',
-                'mistral'                => 'Mistral',
+                'gpt-4-turbo'            => 'OpenAI gpt-4 Turbo',
+                'gpt-4o'                 => 'OpenAI gpt-4o',
+                'gpt-4o-mini'            => 'OpenAI gpt-4o mini',
+                'llama-groq'             => 'Llama 3.3 (Groq)',
+                'llama3-1-8b'            => 'Llama 3.1 (8B)',
+                'llama3-2-1b'            => 'Llama 3.2 (1B)',
+                'llama3-2-3b'            => 'Llama 3.2 (3B)',
+                'llama3-8b'              => 'Llama 3 (8B)',
+                'llava-7b'               => 'Llava (7b)',
+                'mistral-7b'             => 'Mistral (7b)',
                 'model'                  => '模型',
                 'orca-mini'              => 'Orca Mini',
-                'phi'                    => 'Phi-2',
+                'phi3-5'                 => 'Phi 3.5',
                 'prompt'                 => '提示',
-                'starling-lm'            => 'Starling',
-                'title'                  => 'AI辅助',
-                'vicuna'                 => 'Vicuna',
+                'qwen2-5-0-5b'           => 'Qwen 2.5 (0.5b)',
+                'qwen2-5-1-5b'           => 'Qwen 2.5 (1.5b)',
+                'qwen2-5-14b'            => 'Qwen 2.5 (14b)',
+                'qwen2-5-3b'             => 'Qwen 2.5 (3b)',
+                'qwen2-5-7b'             => 'Qwen 2.5 (7b)',
+                'starling-lm-7b'         => 'Starling-lm (7b)',
+                'title'                  => 'AI 辅助',
+                'vicuna-13b'             => 'Vicuna (13b)',
+                'vicuna-7b'              => 'Vicuna (7b)',
             ],
         ],
     ],
@@ -4340,6 +4922,7 @@ return [
         'email-templates'          => '电子邮件模板',
         'events'                   => '事件',
         'exchange-rates'           => '汇率',
+        'gdpr'                     => 'GDPR',
         'groups'                   => '群组',
         'import'                   => '进口',
         'imports'                  => '进口',
@@ -4441,6 +5024,28 @@ return [
                 'description' => '新的客户帐户已成功创建。 他们现在可以使用电子邮件地址和密码凭据登录。 登录后，他们将可以访问各种服务，包括查看过去的订单、管理愿望清单和更新帐户信息的能力。',
                 'greeting'    => '我们热烈欢迎刚刚在我们这里注册的新客户：customer_name！',
                 'subject'     => '新客户注册',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => '新的数据删除请求',
+                'new-update-request' => '新的数据更新请求',
+
+                'new-request' => [
+                    'customer-name'  => '客户名称 : ',
+                    'delete-summary' => '删除请求摘要',
+                    'message'        => '消息：',
+                    'request-status' => '请求状态：',
+                    'request-type'   => '请求类型：',
+                    'update-summary' => '更新请求摘要',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'GDPR请求已更新',
+                    'summary'        => 'GDPR请求状态已更新',
+                    'request-status' => '请求状态:',
+                    'request-type'   => '请求类型:',
+                    'message'        => '信息:',
+                ],
             ],
         ],
 

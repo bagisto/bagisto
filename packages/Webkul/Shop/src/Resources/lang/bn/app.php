@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'ইতিমধ্যে একটি অ্যাকাউন্ট আছে?',
             'bagisto'                     => 'বাগিস্তো',
             'button-title'                => 'রেজিস্টার করুন',
+            'click-here'                  => 'এখানে ক্লিক করুন',
             'confirm-pass'                => 'পাসওয়ার্ড নিশ্চিত করুন',
             'email'                       => 'ইমেইল',
             'first-name'                  => 'প্রথম নাম',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।',
             'success-verify'              => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে, একটি যাচাই ইমেইল পাঠানো হয়েছে।',
             'success-verify-email-unsent' => 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে, কিন্তু যাচাই ইমেইল পাঠানো হয়নি।',
+            'terms-conditions'            => 'শর্তাবলী',
             'verification-not-sent'       => 'ত্রুটি! যাচাই ইমেইল পাঠানোর সময় সমস্যা, দয়া করে পরে আবার চেষ্টা করুন।',
             'verification-sent'           => 'যাচাই ইমেইল পাঠানো হয়েছে',
             'verified'                    => 'আপনার অ্যাকাউন্ট যাচাই করা হয়েছে, এখন লগইন চেষ্টা করুন।',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'আইটেম সফলভাবে ইচ্ছা সূচিতে যুক্ত হয়েছে',
                 'title'              => 'ইচ্ছেসূচি',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'অনুরোধ সফলভাবে তৈরি হয়েছে',
+                'revoked-successfully'        => 'অনুরোধ সফলভাবে বাতিল হয়েছে',
+                'success-verify'              => 'সফলতা! যাচাইকরণ ইমেল পাঠানো হয়েছে।',
+                'success-verify-email-unsent' => 'সফলতা! যাচাইকরণ ইমেল পাঠানো হয়নি।',
+                'unable-to-sent'              => 'ইমেল পাঠাতে অক্ষম।',
+
+                'index'   => [
+                    'create-btn' => 'অনুরোধ তৈরি করুন',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'জিডিপিআর ডেটা অনুরোধ',
+
+                    'modal' => [
+                        'message' => 'বার্তা',
+                        'save'    => 'সংরক্ষণ করুন',
+                        'title'   => 'নতুন অনুরোধ তৈরি করুন',
+
+                        'type'    => [
+                            'choose' => 'নির্বাচন করুন',
+                            'delete' => 'মুছুন',
+                            'title'  => 'ধরন',
+                            'update' => 'আপডেট',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'সম্পন্ন',
+                        'date'       => 'তারিখ',
+                        'declined'   => 'প্রত্যাখ্যাত',
+                        'delete'     => 'মুছে ফেলা',
+                        'id'         => 'আইডি',
+                        'message'    => 'বার্তা',
+                        'pending'    => 'মুলতুবি',
+                        'processing' => 'প্রক্রিয়াধীন',
+                        'revoke-btn' => 'বাতিল করুন',
+                        'revoked'    => 'বাতিল',
+                        'status'     => 'অবস্থা',
+                        'type'       => 'ধরন',
+                        'update'     => 'আপডেট',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'ডিফল্ট স্টোর ভিউ',
+
+                    'account-info' => [
+                        'dob'          => 'জন্ম তারিখ',
+                        'email'        => 'ইমেল',
+                        'first-name'   => 'প্রথম নাম',
+                        'gender'       => 'লিঙ্গ',
+                        'last-name'    => 'শেষ নাম',
+                        'phone'        => 'ফোন',
+                        'title'        => 'অ্যাকাউন্ট তথ্য',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'ঠিকানা',
+                        'address1'   => 'ঠিকানা ১',
+                        'address2'   => 'ঠিকানা ২',
+                        'city'       => 'শহর',
+                        'company'    => 'কোম্পানি',
+                        'country'    => 'দেশ',
+                        'first-name' => 'প্রথম নাম',
+                        'last-name'  => 'শেষ নাম',
+                        'phone'      => 'ফোন',
+                        'postcode'   => 'পোস্টকোড',
+                        'state'      => 'অবস্থা',
+                        'title'      => 'ঠিকানা তথ্য',
+                        'vat-id'     => 'ভ্যাট আইডি',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'পরিমাণ',
+                        'order-id'     => 'অর্ডার আইডি',
+                        'product-name' => 'পণ্যের নাম',
+                        'qty'          => 'পরিমাণ',
+                        'shipping'     => 'শিপিং',
+                        'sku'          => 'এসকেইউ',
+                        'status'       => 'অবস্থা',
+                        'title'        => 'অর্ডার তথ্য',
+                        'type'         => 'ধরন',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'অ্যাকাউন্ট',
-                'bagisto'           => 'বাগিস্তো',
-                'cart'              => 'কার্ট',
-                'compare'           => 'তুলনা করুন',
-                'dropdown-text'     => 'কার্ট, অর্ডার এবং ইচ্ছেসূচি পরিচালনা করুন',
-                'logout'            => 'লগআউট',
-                'no-category-found' => 'কোনও বিভাগ পাওয়া যায়নি।',
-                'orders'            => 'অর্ডারগুলি',
-                'profile'           => 'প্রোফাইল',
-                'search'            => 'খুঁজুন',
-                'search-text'       => 'এখানে পণ্য খুঁজুন',
-                'sign-in'           => 'সাইন ইন',
-                'sign-up'           => 'সাইন আপ',
-                'submit'            => 'জমা দিন',
-                'title'             => 'একাউন্ট',
-                'welcome'           => 'স্বাগতম',
-                'welcome-guest'     => 'স্বাগতম অতিথি',
-                'wishlist'          => 'ইচ্ছেসূচি',
-
                 'desktop' => [
                     'top' => [
-                        'default-locale' => 'ডিফল্ট লোকেল',
+                        'default-locale' => 'ডিফল্ট ভাষা',
+                    ],
+
+                    'bottom' => [
+                        'all'           => 'সব',
+                        'back-button'   => 'প্রধান মেনুতে ফিরে যান',
+                        'bagisto'       => 'বাগিস্টো',
+                        'categories'    => 'বিভাগ',
+                        'compare'       => 'তুলনা করুন',
+                        'dropdown-text' => 'কার্ট, অর্ডার ও উইশলিস্ট পরিচালনা করুন',
+                        'logout'        => 'লগআউট',
+                        'orders'        => 'অর্ডার',
+                        'profile'       => 'প্রোফাইল',
+                        'search'        => 'অনুসন্ধান',
+                        'search-text'   => 'এখানে পণ্য অনুসন্ধান করুন',
+                        'sign-in'       => 'সাইন ইন',
+                        'sign-up'       => 'সাইন আপ',
+                        'submit'        => 'জমা দিন',
+                        'welcome'       => 'স্বাগতম',
+                        'welcome-guest' => 'অতিথিকে স্বাগতম',
+                        'wishlist'      => 'উইশলিস্ট',
                     ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'মুদ্রা',
-                    'locales'    => 'লোকেল',
-                    'login'      => 'নিবন্ধন করুন বা লগইন করুন',
+                    'account'       => 'অ্যাকাউন্ট',
+                    'back-button'   => 'প্রধান মেনুতে ফিরে যান',
+                    'bagisto'       => 'বাগিস্টো',
+                    'compare'       => 'তুলনা করুন',
+                    'currencies'    => 'মুদ্রা',
+                    'dropdown-text' => 'কার্ট, অর্ডার ও উইশলিস্ট পরিচালনা করুন',
+                    'locales'       => 'ভাষা',
+                    'login'         => 'সাইন আপ অথবা লগইন করুন',
+                    'logout'        => 'লগআউট',
+                    'orders'        => 'অর্ডার',
+                    'profile'       => 'প্রোফাইল',
+                    'search'        => 'অনুসন্ধান',
+                    'search-text'   => 'এখানে পণ্য অনুসন্ধান করুন',
+                    'sign-in'       => 'সাইন ইন',
+                    'sign-up'       => 'সাইন আপ',
+                    'welcome'       => 'স্বাগতম',
+                    'welcome-guest' => 'অতিথিকে স্বাগতম',
+                    'wishlist'      => 'উইশলিস্ট',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'নিউজলেটার সাবস্ক্রাইব করুন',
                 'subscribe-stay-touch'   => 'যোগাযোগে থাকতে সাবস্ক্রাইব করুন।',
                 'whats-new'              => 'নতুন কি',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'গোপনীয়তা নীতি',
+                    'reject'                   => 'প্রত্যাখ্যান করুন',
+                    'accept'                   => 'গ্রহণ করুন',
+                    'learn-more-and-customize' => 'আরও জানুন এবং কাস্টমাইজ করুন',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'আপনার কুকি সম্মতি পছন্দগুলি',
+                    'save-and-continue'                       => 'সংরক্ষণ করুন এবং চালিয়ে যান',
+                    'strictly-necessary'                      => 'কঠোরভাবে প্রয়োজনীয়',
+                    'basic-interactions'                      => 'মৌলিক ইন্টারঅ্যাকশন এবং কার্যকারিতা',
+                    'experience-enhancement'                  => 'অভিজ্ঞতা উন্নতি',
+                    'measurements'                            => 'পরিমাপ',
+                    'targeting-and-advertising'               => 'টার্গেটিং এবং বিজ্ঞাপন',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'কিছু নেই',
+                        'total-amount' => 'মোট পরিমাণ',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'দয়া করে একটি বিকল্প নির্বাচন করুন',
                     'select-above-options' => 'দয়া করে উপরের বিকল্পগুলি নির্বাচন করুন',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'নাম',
+                ],
+
+                'booking' => [
+                    'location'    => 'অবস্থান',
+                    'view-on-map' => 'মানচিত্রে দেখুন',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes মিনিট',
+                        'slot-duration'            => 'স্লট সময়কাল',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'বন্ধ',
+                        'see-details'              => 'বিস্তারিত দেখুন',
+                        'slot-duration'            => 'স্লট সময়কাল',
+                        'slot-duration-in-minutes' => ':minutes মিনিট',
+                        'today-availability'       => 'আজকের প্রাপ্যতা',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'আপনার টিকিট বুক করুন',
+                        'title'            => 'ইভেন্ট :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'ভাড়া বিকল্প নির্বাচন করুন',
+                        'daily-basis'        => 'দৈনিক ভিত্তিতে',
+                        'from'               => 'থেকে',
+                        'hourly-basis'       => 'ঘণ্টা ভিত্তিতে',
+                        'rent-an-item'       => 'একটি আইটেম ভাড়া করুন',
+                        'select-date'        => 'তারিখ নির্বাচন করুন',
+                        'select-rent-time'   => 'ভাড়া সময় নির্বাচন করুন',
+                        'select-slot'        => 'স্লট নির্বাচন করুন',
+                        'select-time-slot'   => 'সময় স্লট নির্বাচন করুন',
+                        'slot'               => 'স্লট',
+                        'no-slots-available' => 'কোন স্লট উপলব্ধ নেই',
+                        'to'                 => 'পর্যন্ত',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'একটি টেবিল বুক করুন',
+                        'closed'                   => 'বন্ধ',
+                        'slot-duration'            => 'স্লট সময়কাল',
+                        'slot-duration-in-minutes' => ':minutes মিনিট',
+                        'slots-for-all-days'       => 'সব দিনের জন্য দেখান',
+                        'special-notes'            => 'বিশেষ অনুরোধ/নোট',
+                        'today-availability'       => 'আজকের প্রাপ্যতা',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'একটি অ্যাপয়েন্টমেন্ট বুক করুন',
+                        'date'                => 'তারিখ',
+                        'no-slots-available'  => 'কোন স্লট উপলব্ধ নেই',
+                        'select-slot'         => 'স্লট নির্বাচন করুন',
+                        'title'               => 'স্লট',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'প্রতি একক মূল্যে কিনুন :qty এবং :discount সেভ করুন',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'বন্ধ',
+
+            'cart'             => [
+                'booking-from' => 'বুকিং থেকে',
+                'booking-till' => 'বুকিং পর্যন্ত',
+                'daily'        => 'দৈনিক ভিত্তিতে',
+                'event-from'   => 'ইভেন্ট থেকে',
+                'event-ticket' => 'ইভেন্ট টিকিট',
+                'event-till'   => 'ইভেন্ট পর্যন্ত',
+                'hourly'       => 'ঘণ্টা ভিত্তিতে',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'এই ইভেন্টটির মেয়াদ শেষ হয়ে গেছে।',
+                    ],
+
+                    'missing_options'        => 'এই পণ্যের জন্য বিকল্পগুলি অনুপস্থিত।',
+                    'inventory_warning'      => 'অনুরোধকৃত পরিমাণ উপলব্ধ নেই, দয়া করে পরে আবার চেষ্টা করুন।',
+                    'select_hourly_duration' => 'এক ঘণ্টার স্লট সময়কাল নির্বাচন করুন।',
+                ],
+
+                'rent-from'    => 'ভাড়া থেকে',
+                'rent-till'    => 'ভাড়া পর্যন্ত',
+                'rent-type'    => 'ভাড়া ধরন',
+                'renting_type' => 'ভাড়া ধরন',
+                'special-note' => 'বিশেষ অনুরোধ/নোট',
+            ],
+
+            'per-ticket-price' => ':price প্রতি টিকিট',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'সব মুছুন',
             'filter'    => 'ফিল্টার',
             'filters'   => 'ফিল্টার:',
+
+            'search' => [
+                'load-more'            => 'আরও লোড করুন',
+                'loading'              => 'লোড হচ্ছে...',
+                'no-options-available' => 'কোনো বিকল্প উপলব্ধ নেই।',
+                'results-info'         => ':totalCount বিকল্পের মধ্যে :currentCount দেখানো হচ্ছে',
+                'title'                => 'অনুসন্ধান',
+            ],
+
             'sort'      => 'সাজান',
         ],
 
@@ -874,9 +1101,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'এখন SHOP NOW করে 1 মিনিটে 40% ছাড় পান',
-            'resend-verify-email' => 'ইমেইল পুনরায় পাঠান',
-            'verify-email'        => 'আপনার ইমেইল অ্যাকাউন্ট যাচাই করুন',
+            'categories-carousel' => 'ক্যাটাগরি ক্যারোসেল',
+            'image-carousel'      => 'ইমেজ ক্যারোসেল',
+            'offer'               => 'আপনার প্রথম অর্ডারে ৪০% পর্যন্ত ছাড় পান, এখনই কেনাকাটা করুন',
+            'product-carousel'    => 'প্রোডাক্ট ক্যারোসেল',
+            'resend-verify-email' => 'যাচাইকরণ ইমেল পুনরায় পাঠান',
+            'verify-email'        => 'আপনার ইমেল অ্যাকাউন্ট যাচাই করুন',
         ],
 
         'thanks-for-contact' => 'আপনার মন্তব্য এবং প্রশ্নের জন্য আমাদের সাথে যোগাযোগ করার জন্য আপনাকে ধন্যবাদ। আমরা খুব শীঘ্রই আপনাকে উত্তর দেব।',
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'পরবর্তী পৃষ্ঠা',
             'pagination-showing' => ':firstItem থেকে :lastItem পর্যন্ত মোট :total নির্দেশিকা দেখানো হচ্ছে',
+            'prev-page'          => 'পূর্ববর্তী পৃষ্ঠা',
         ],
     ],
 
@@ -921,6 +1153,7 @@ return [
         'address'               => 'ঠিকানা',
         'my-account'            => 'আমার অ্যাকাউন্ট',
         'downloadable-products' => 'ডাউনলোড যোগ্য পণ্য',
+        'gdpr-request'          => 'জিডিপিআর অনুরোধ',
         'orders'                => 'আদেশ',
         'profile'               => 'প্রোফাইল',
         'reviews'               => 'পর্যালোচনা',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'আমাদের সংবাদপত্রে স্বাগত!',
                 'subject'     => 'আপনি! আমাদের সংবাদপত্রে সদস্য হন',
                 'unsubscribe' => 'সদস্যপত্র প্রত্যাহার করুন',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'ডেটা মুছে ফেলার জন্য নতুন অনুরোধ',
+                'new-update-request' => 'ডেটা আপডেট করার জন্য নতুন অনুরোধ',
+
+                'new-request' => [
+                    'delete-summary' => 'মুছে ফেলার অনুরোধের সংক্ষিপ্তসার',
+                    'message'        => 'বার্তা : ',
+                    'request-status' => 'অনুরোধের অবস্থা : ',
+                    'request-type'   => 'অনুরোধের ধরন : ',
+                    'update-summary' => 'আপডেট অনুরোধের সংক্ষিপ্তসার',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'আপনার GDPR অনুরোধ আপডেট হয়েছে',
+                    'summary'        => 'আপনার GDPR অনুরোধের অবস্থা আপডেট হয়েছে',
+                    'request-status' => 'অনুরোধের অবস্থা:',
+                    'request-type'   => 'অনুরোধের ধরন:',
+                    'message'        => 'বার্তা:',
+                ],
             ],
 
             'reminder' => [

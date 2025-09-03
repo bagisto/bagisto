@@ -59,6 +59,7 @@
             {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 
             {!! view_render_event('bagisto.admin.dashboard.stock_threshold.before') !!}
+
             <!-- Stock Threshold -->
             <div class="flex flex-col gap-2">
                 <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
@@ -68,6 +69,7 @@
                 <!-- Products List -->  
                 @include('admin::dashboard.stock-threshold-products')
             </div>
+            
             {!! view_render_event('bagisto.admin.dashboard.stock_threshold.after') !!}
         </div>
 

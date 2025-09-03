@@ -71,6 +71,12 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.create.before');
 
+        if (! empty($data['default_address'])) {
+            $this->customerAddressRepository->where('customer_id', $data['customer_id'])
+                ->where('default_address', 1)
+                ->update(['default_address' => 0]);
+        }
+
         $address = $this->customerAddressRepository->create(array_merge($data, [
             'customer_id' => $id,
         ]));
@@ -119,6 +125,12 @@ class AddressController extends Controller
         ]);
 
         Event::dispatch('customer.addresses.update.before', $id);
+
+        if (! empty($data['default_address'])) {
+            $this->customerAddressRepository->where('customer_id', $data['customer_id'])
+                ->where('default_address', 1)
+                ->update(['default_address' => 0]);
+        }
 
         $address = $this->customerAddressRepository->update($data, $id);
 

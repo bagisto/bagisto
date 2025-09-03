@@ -89,7 +89,7 @@
                     <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
                             <a
-                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
+                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code ]) }}"
                                 class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
                             >
                                 {{ $channel->name }}
@@ -204,7 +204,7 @@
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->code === 'inventories' && !$product->getTypeInstance()->isComposite(),
+                                    $group->code === 'inventories' && ! $product->getTypeInstance()->isComposite(),
                                     'admin::catalog.products.edit.inventories'
                                 )
                             </div>

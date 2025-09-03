@@ -72,7 +72,7 @@
                                 </span>
 
                                 <div class="grid">
-                                    <p  
+                                    <p
                                         class="text-gray-800 dark:text-white"
                                         :class="notification.read ? 'font-normal' : 'font-semibold'"
                                     >

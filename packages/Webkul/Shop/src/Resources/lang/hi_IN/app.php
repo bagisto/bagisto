@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'पहले से ही खाता है?',
             'bagisto'                     => 'बागिस्तो',
             'button-title'                => 'रजिस्टर करें',
+            'click-here'                  => 'यहां क्लिक करें',
             'confirm-pass'                => 'पासवर्ड की पुष्टि करें',
             'email'                       => 'ईमेल',
             'first-name'                  => 'पहला नाम',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'खाता सफलतापूर्वक बनाया गया है।',
             'success-verify'              => 'खाता सफलतापूर्वक बनाया गया है, सत्यापन के लिए एक ईमेल भेजा गया है।',
             'success-verify-email-unsent' => 'खाता सफलतापूर्वक बनाया गया है, लेकिन सत्यापन ईमेल अयसेंट नहीं हुआ है।',
+            'terms-conditions'            => 'नियम और शर्तें',
             'verification-not-sent'       => 'त्रुटि! सत्यापन ईमेल भेजने में समस्या है, कृपया बाद में पुनः प्रयास करें।',
             'verification-sent'           => 'सत्यापन ईमेल भेजा गया है',
             'verified'                    => 'आपका खाता सत्यापित हो गया है, अब साइन इन करने का प्रयास करें।',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'आइटम सफलतापूर्वक इच्छा-सूची में जोड़ा गया',
                 'title'              => 'इच्छा सूची',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'अनुरोध सफलतापूर्वक बनाया गया',
+                'revoked-successfully'        => 'अनुरोध सफलतापूर्वक रद्द किया गया',
+                'success-verify'              => 'Successo! L\'email di verifica è stata inviata.',
+                'success-verify-email-unsent' => 'Successo! L\'email di verifica non è stata inviata.',
+                'unable-to-sent'              => 'Impossibile inviare l\'email.',
+
+                'index'   => [
+                    'create-btn' => 'Crea richiesta',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'Richieste dati GDPR',
+
+                    'modal' => [
+                        'message' => 'Messaggio',
+                        'save'    => 'Salva',
+                        'title'   => 'Crea nuova richiesta',
+
+                        'type'    => [
+                            'choose' => 'Scegli',
+                            'delete' => 'Elimina',
+                            'title'  => 'Tipo',
+                            'update' => 'Aggiorna',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'पूरा हुआ',
+                        'date'       => 'तारीख',
+                        'declined'   => 'अस्वीकृत',
+                        'delete'     => 'हटाएं',
+                        'id'         => 'आईडी',
+                        'message'    => 'संदेश',
+                        'pending'    => 'लंबित',
+                        'processing' => 'प्रक्रियाधीन',
+                        'revoke-btn' => 'रद्द करें',
+                        'revoked'    => 'रद्द किया गया',
+                        'status'     => 'स्थिति',
+                        'type'       => 'प्रकार',
+                        'update'     => 'अद्यतन करें',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Vista predefinita del negozio',
+
+                    'account-info' => [
+                        'dob'          => 'Data di nascita',
+                        'email'        => 'Email',
+                        'first-name'   => 'Nome',
+                        'gender'       => 'Genere',
+                        'last-name'    => 'Cognome',
+                        'phone'        => 'Telefono',
+                        'title'        => 'Informazioni account',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Indirizzo',
+                        'address1'   => 'Indirizzo 1',
+                        'address2'   => 'Indirizzo 2',
+                        'city'       => 'Città',
+                        'company'    => 'Azienda',
+                        'country'    => 'Paese',
+                        'first-name' => 'Nome',
+                        'last-name'  => 'Cognome',
+                        'phone'      => 'Telefono',
+                        'postcode'   => 'CAP',
+                        'state'      => 'Stato',
+                        'title'      => 'Informazioni sull\'indirizzo',
+                        'vat-id'     => 'Partita IVA',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Importo',
+                        'order-id'     => 'ID ordine',
+                        'product-name' => 'Nome prodotto',
+                        'qty'          => 'Quantità',
+                        'shipping'     => 'Spedizione',
+                        'sku'          => 'SKU',
+                        'status'       => 'Stato',
+                        'title'        => 'Informazioni sull\'ordine',
+                        'type'         => 'Tipo',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'खाता',
-                'bagisto'           => 'बागिस्तो',
-                'cart'              => 'कार्ट',
-                'compare'           => 'तुलना करें',
-                'dropdown-text'     => 'कार्ट, आर्डर और विशलिस्ट प्रबंधित करें',
-                'logout'            => 'लॉगआउट',
-                'no-category-found' => 'कोई श्रेणी नहीं मिली.',
-                'orders'            => 'आर्डर',
-                'profile'           => 'प्रोफ़ाइल',
-                'search'            => 'खोजें',
-                'search-text'       => 'यहां प्रोडक्ट्स खोजें',
-                'sign-in'           => 'साइन इन करें',
-                'sign-up'           => 'साइन अप करें',
-                'submit'            => 'सबमिट करें',
-                'title'             => 'खाता',
-                'welcome'           => 'स्वागत है',
-                'welcome-guest'     => 'स्वागतम अतिथि',
-                'wishlist'          => 'विशलिस्ट',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'डिफ़ॉल्ट भाषा',
                     ],
+
+                    'bottom' => [
+                        'all'           => 'सभी',
+                        'back-button'   => 'मुख्य मेनू पर वापस जाएं',
+                        'bagisto'       => 'बैगिस्टो',
+                        'categories'    => 'श्रेणियाँ',
+                        'compare'       => 'तुलना करें',
+                        'dropdown-text' => 'कार्ट, ऑर्डर और विशलिस्ट प्रबंधित करें',
+                        'logout'        => 'लॉगआउट',
+                        'orders'        => 'ऑर्डर',
+                        'profile'       => 'प्रोफ़ाइल',
+                        'search'        => 'खोजें',
+                        'search-text'   => 'यहाँ उत्पाद खोजें',
+                        'sign-in'       => 'साइन इन',
+                        'sign-up'       => 'साइन अप',
+                        'submit'        => 'जमा करें',
+                        'welcome'       => 'स्वागत है',
+                        'welcome-guest' => 'अतिथि का स्वागत है',
+                        'wishlist'      => 'इच्छा सूची',
+                    ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'मुद्रा',
-                    'locales'    => 'स्थान',
-                    'login'      => 'साइन अप या लॉगिन करें',
+                    'account'       => 'खाता',
+                    'back-button'   => 'मुख्य मेनू पर वापस जाएं',
+                    'bagisto'       => 'बैगिस्टो',
+                    'compare'       => 'तुलना करें',
+                    'currencies'    => 'मुद्राएँ',
+                    'dropdown-text' => 'कार्ट, ऑर्डर और विशलिस्ट प्रबंधित करें',
+                    'locales'       => 'भाषाएँ',
+                    'login'         => 'साइन अप या लॉगिन करें',
+                    'logout'        => 'लॉगआउट',
+                    'orders'        => 'ऑर्डर',
+                    'profile'       => 'प्रोफ़ाइल',
+                    'search'        => 'खोजें',
+                    'search-text'   => 'यहाँ उत्पाद खोजें',
+                    'sign-in'       => 'साइन इन',
+                    'sign-up'       => 'साइन अप',
+                    'welcome'       => 'स्वागत है',
+                    'welcome-guest' => 'अतिथि का स्वागत है',
+                    'wishlist'      => 'इच्छा सूची',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'सदस्यता लें',
                 'subscribe-stay-touch'   => 'संपर्क में रहने के लिए सदस्यता लें।',
                 'whats-new'              => 'नया क्या है',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'गोपनीयता नीति',
+                    'reject'                   => 'अस्वीकार करें',
+                    'accept'                   => 'स्वीकार करें',
+                    'learn-more-and-customize' => 'और जानें और अनुकूलित करें',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'आपकी कुकी सहमति प्राथमिकताएँ',
+                    'save-and-continue'                       => 'सहेजें और जारी रखें',
+                    'strictly-necessary'                      => 'सख्ती से आवश्यक',
+                    'basic-interactions'                      => 'मूल इंटरैक्शन और कार्यक्षमताएँ',
+                    'experience-enhancement'                  => 'अनुभव वृद्धि',
+                    'measurements'                            => 'मापन',
+                    'targeting-and-advertising'               => 'लक्ष्यीकरण और विज्ञापन',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'कृपया एक विकल्प चुनें',
                     'select-above-options' => 'कृपया ऊपर के विकल्प चुनें',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'नाम',
+                ],
+
+                'booking' => [
+                    'location'    => 'स्थान',
+                    'view-on-map' => 'नक्शे पर देखें',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'बंद',
+                        'see-details'              => 'विवरण देखें',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'today-availability'       => 'आज की उपलब्धता',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'अपना टिकट बुक करें',
+                        'title'            => 'कार्यक्रम :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'किराया विकल्प चुनें',
+                        'daily-basis'        => 'दैनिक आधार',
+                        'from'               => 'से',
+                        'hourly-basis'       => 'घंटे के आधार पर',
+                        'rent-an-item'       => 'एक आइटम किराए पर लें',
+                        'select-date'        => 'तारीख चुनें',
+                        'select-rent-time'   => 'किराया समय चुनें',
+                        'select-slot'        => 'स्लॉट चुनें',
+                        'select-time-slot'   => 'समय स्लॉट चुनें',
+                        'slot'               => 'स्लॉट',
+                        'no-slots-available' => 'कोई स्लॉट उपलब्ध नहीं है',
+                        'to'                 => 'तक',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'टेबल बुक करें',
+                        'closed'                   => 'बंद',
+                        'slot-duration'            => 'स्लॉट अवधि',
+                        'slot-duration-in-minutes' => ':minutes मिनट',
+                        'slots-for-all-days'       => 'सभी दिनों के लिए दिखाएं',
+                        'special-notes'            => 'विशेष अनुरोध/नोट्स',
+                        'today-availability'       => 'आज की उपलब्धता',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'अपॉइंटमेंट बुक करें',
+                        'date'                => 'तारीख',
+                        'no-slots-available'  => 'कोई स्लॉट उपलब्ध नहीं है',
+                        'select-slot'         => 'स्लॉट चुनें',
+                        'title'               => 'स्लॉट',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => ':qty के लिए :price प्रति प्रति खरीदें और :discount बचाएं',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'बंद',
+
+            'cart'             => [
+                'booking-from' => 'बुकिंग से',
+                'booking-till' => 'बुकिंग तक',
+                'daily'        => 'दैनिक आधार',
+                'event-from'   => 'कार्यक्रम से',
+                'event-ticket' => 'कार्यक्रम टिकट',
+                'event-till'   => 'कार्यक्रम तक',
+                'hourly'       => 'घंटे के आधार पर',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'यह कार्यक्रम समाप्त हो गया है।',
+                    ],
+
+                    'missing_options'        => 'इस उत्पाद के लिए विकल्प गायब हैं।',
+                    'inventory_warning'      => 'अनुरोधित मात्रा उपलब्ध नहीं है, कृपया बाद में पुनः प्रयास करें।',
+                    'select_hourly_duration' => 'एक घंटे की अवधि का चयन करें।',
+                ],
+
+                'rent-from'    => 'किराया से',
+                'rent-till'    => 'किराया तक',
+                'rent-type'    => 'किराया प्रकार',
+                'renting_type' => 'किराया प्रकार',
+                'special-note' => 'विशेष अनुरोध/नोट्स',
+            ],
+
+            'per-ticket-price' => ':price प्रति टिकट',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'सब क्लियर करें',
             'filter'    => 'फ़िल्टर',
             'filters'   => 'फ़िल्टर:',
+
+            'search' => [
+                'load-more'            => 'और लोड करें',
+                'loading'              => 'लोड हो रहा है...',
+                'no-options-available' => 'कोई विकल्प उपलब्ध नहीं है।',
+                'results-info'         => ':totalCount विकल्पों में से :currentCount दिखा रहे हैं',
+                'title'                => 'खोज',
+            ],
+
             'sort'      => 'क्रमबद्ध करें',
         ],
 
@@ -874,9 +1101,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'पहले आदेश पर अपटू 40% तक की छूट पाएं अभी खरीदें',
+            'categories-carousel' => 'श्रेणियाँ कैरोसेल',
+            'image-carousel'      => 'चित्र कैरोसेल',
+            'offer'               => 'अपनी पहली ऑर्डर पर 40% तक छूट पाएं, अभी खरीदारी करें',
+            'product-carousel'    => 'उत्पाद कैरोसेल',
             'resend-verify-email' => 'सत्यापन ईमेल फिर से भेजें',
-            'verify-email'        => 'अपने ईमेल खाता सत्यापित करें',
+            'verify-email'        => 'अपने ईमेल खाते की पुष्टि करें',
         ],
 
         'thanks-for-contact' => 'आपके टिप्पणियों और प्रश्नों के साथ हमसे संपर्क करने के लिए धन्यवाद। हम आपको बहुत जल्द ही जवाब देंगे।',
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'अगला पृष्ठ',
             'pagination-showing' => 'कुल :total आइटमों में :firstItem से :lastItem तक दिखा रहा है',
+            'prev-page'          => 'पिछला पृष्ठ',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'पता',
         'downloadable-products' => 'डाउनलोड करने योग्य उत्पाद',
+        'gdpr-request'          => 'जीडीपीआर अनुरोध',
         'my-account'            => 'मेरा खाता',
         'orders'                => 'आदेश',
         'profile'               => 'प्रोफ़ाइल',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'हमारे समाचार पत्रिका में आपका स्वागत है!',
                 'subject'     => 'आपने हमारी समाचार पत्रिका में सदस्यता ली है!',
                 'unsubscribe' => 'सदस्यता रद्द करें',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'डेटा हटाने के लिए नया अनुरोध',
+                'new-update-request' => 'डेटा अपडेट करने के लिए नया अनुरोध',
+
+                'new-request' => [
+                    'delete-summary' => 'हटाने के अनुरोध का सारांश',
+                    'message'        => 'संदेश : ',
+                    'request-status' => 'अनुरोध स्थिति : ',
+                    'request-type'   => 'अनुरोध प्रकार : ',
+                    'update-summary' => 'अद्यतन अनुरोध का सारांश',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'आपका GDPR अनुरोध अपडेट किया गया है',
+                    'summary'        => 'आपके GDPR अनुरोध की स्थिति अपडेट की गई है',
+                    'request-status' => 'अनुरोध स्थिति:',
+                    'request-type'   => 'अनुरोध प्रकार:',
+                    'message'        => 'संदेश:',
+                ],
             ],
 
             'reminder' => [

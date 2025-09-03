@@ -168,14 +168,14 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex items-center gap-x-2.5">
-                                    <button
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.customers.groups.index.create.save-btn')
-                                    </button>
-                                </div>
+                                <!-- Save Button -->
+                                <x-admin::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    :title="trans('admin::app.customers.groups.index.create.save-btn')"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
                             </x-slot>
                         </x-admin::modal>
                     </form>
@@ -190,6 +190,8 @@
                 data() {
                     return {
                         selectedGroups: 0,
+
+                        isLoading: false,
                     }
                 },
 
@@ -211,6 +213,8 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
+                        this.isLoading = true;
+
                         let formData = new FormData(this.$refs.groupCreateForm);
 
                         if (params.id) {
@@ -219,6 +223,8 @@
 
                         this.$axios.post(params.id ? "{{ route('admin.customers.groups.update') }}" : "{{ route('admin.customers.groups.store') }}", formData)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 this.$refs.groupUpdateOrCreateModal.close();
 
                                 this.$refs.datagrid.get();
@@ -228,7 +234,9 @@
                                 resetForm();
                             })
                             .catch(error => {
-                                if (error.response.status ==422) {
+                                this.isLoading = false;
+
+                                if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
                             });

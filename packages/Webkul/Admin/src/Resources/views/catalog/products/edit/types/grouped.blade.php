@@ -175,7 +175,7 @@
             <x-admin::products.search
                 ref="productSearch"
                 ::added-product-ids="addedProductIds"
-                ::query-params="{type: 'simple'}"
+                ::query-params="{type: 'simple', exclude_customizable_products: 1}"
                 @onProductAdded="addSelected($event)"
             />
         </div>

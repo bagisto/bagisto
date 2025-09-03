@@ -15,27 +15,37 @@ use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 class Importer extends AbstractImporter
 {
     /**
-     * Error code for non existing email
+     * Error code for non existing email.
+     *
+     * @var string
      */
     const ERROR_EMAIL_NOT_FOUND_FOR_DELETE = 'email_not_found_to_delete';
 
     /**
-     * Error code for duplicated email
+     * Error code for duplicated email.
+     *
+     * @var string
      */
     const ERROR_DUPLICATE_EMAIL = 'duplicated_email';
 
     /**
-     * Error code for duplicated phone
+     * Error code for duplicated phone.
+     *
+     * @var string
      */
     const ERROR_DUPLICATE_PHONE = 'duplicated_phone';
 
     /**
-     * Error code for invalid attribute family code
+     * Error code for invalid attribute family code.
+     *
+     * @var string
      */
     const ERROR_INVALID_CUSTOMER_GROUP_CODE = 'customer_group_code_not_found';
 
     /**
-     * Permanent entity columns
+     * Permanent entity columns.
+     *
+     * @var string[]
      */
     protected array $validColumnNames = [
         'email',
@@ -48,7 +58,9 @@ class Importer extends AbstractImporter
     ];
 
     /**
-     * Error message templates
+     * Error message templates.
+     *
+     * @var string[]
      */
     protected array $messages = [
         self::ERROR_EMAIL_NOT_FOUND_FOR_DELETE  => 'data_transfer::app.importers.customers.validation.errors.email-not-found',
@@ -58,29 +70,29 @@ class Importer extends AbstractImporter
     ];
 
     /**
-     * Permanent entity columns
+     * Permanent entity columns.
      *
      * @var string[]
      */
     protected $permanentAttributes = ['email'];
 
     /**
-     * Permanent entity column
+     * Permanent entity column.
      */
     protected string $masterAttributeCode = 'email';
 
     /**
-     * Cached customer groups
+     * Cached customer groups.
      */
     protected mixed $customerGroups = [];
 
     /**
-     * Emails storage
+     * Emails storage.
      */
     protected array $emails = [];
 
     /**
-     * Phones storage
+     * Phones storage.
      */
     protected array $phones = [];
 
@@ -101,7 +113,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Load all attributes and families to use later
+     * Load all attributes and families to use later.
      */
     protected function initCustomerGroups(): void
     {
@@ -109,7 +121,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Initialize Product error templates
+     * Initialize Product error templates.
      */
     protected function initErrorMessages(): void
     {
@@ -131,12 +143,12 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Validates row
+     * Validates row.
      */
     public function validateRow(array $rowData, int $rowNumber): bool
     {
         /**
-         * If row is already validated than no need for further validation
+         * If row is already validated than no need for further validation.
          */
         if (isset($this->validatedRows[$rowNumber])) {
             return ! $this->errorHelper->isRowInvalid($rowNumber);
@@ -145,7 +157,7 @@ class Importer extends AbstractImporter
         $this->validatedRows[$rowNumber] = true;
 
         /**
-         * If import action is delete than no need for further validation
+         * If import action is delete than no need for further validation.
          */
         if ($this->import->action == Import::ACTION_DELETE) {
             if (! $this->isEmailExist($rowData['email'])) {
@@ -158,7 +170,7 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Check if customer group code exists
+         * Check if customer group code exists.
          */
         if (! $this->customerGroups->where('code', $rowData['customer_group_code'])->first()) {
             $this->skipRow($rowNumber, self::ERROR_INVALID_CUSTOMER_GROUP_CODE, 'customer_group_code');
@@ -167,12 +179,12 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Validate product attributes
+         * Validate product attributes.
          */
         $validator = Validator::make($rowData, [
             'customer_group_code' => 'required',
-            'first_name'          => 'string|required',
-            'last_name'           => 'string|required',
+            'first_name'          => 'required|string',
+            'last_name'           => 'required|string',
             'gender'              => 'required:in,Male,Female,Other',
             'email'               => 'required|email',
             'date_of_birth'       => [
@@ -195,7 +207,7 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Check if email is unique
+         * Check if email is unique.
          */
         if (! in_array($rowData['email'], $this->emails)) {
             $this->emails[] = $rowData['email'];
@@ -209,7 +221,7 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Check if phone is unique
+         * Check if phone is unique.
          */
         if (! in_array($rowData['phone'], $this->phones)) {
             if (! empty($rowData['phone'])) {
@@ -228,7 +240,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Start the import process
+     * Start the import process.
      */
     public function importBatch(ImportBatchContract $batch): bool
     {
@@ -241,7 +253,7 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Update import batch summary
+         * Update import batch summary.
          */
         $batch = $this->importBatchRepository->update([
             'state' => Import::STATE_PROCESSED,
@@ -259,12 +271,12 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Delete customers from current batch
+     * Delete customers from current batch.
      */
     protected function deleteCustomers(ImportBatchContract $batch): bool
     {
         /**
-         * Load customer storage with batch emails
+         * Load customer storage with batch emails.
          */
         $this->customerStorage->load(Arr::pluck($batch->data, 'email'));
 
@@ -288,12 +300,12 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Save customers from current batch
+     * Save customers from current batch.
      */
     protected function saveCustomersData(ImportBatchContract $batch): bool
     {
         /**
-         * Load customer storage with batch email
+         * Load customer storage with batch email.
          */
         $this->customerStorage->load(Arr::pluck($batch->data, 'email'));
 
@@ -312,7 +324,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Prepare customers from current batch
+     * Prepare customers from current batch.
      */
     public function prepareCustomers(array $rowData, array &$customers): void
     {
@@ -336,7 +348,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Save customers from current batch
+     * Save customers from current batch.
      */
     public function saveCustomers(array $customers): void
     {
@@ -357,7 +369,7 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Check if email exists
+     * Check if email exists.
      */
     public function isEmailExist(string $email): bool
     {

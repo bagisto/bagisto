@@ -30,12 +30,30 @@ export async function register(page) {
         .fill(credentials.password);
     await page.getByPlaceholder("Confirm Password").click();
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
-    await page
+
+
+    const isAgreementVisible = await page.locator("#agreement").nth(1).isVisible();
+
+    if (isAgreementVisible) {
+        await page.getByText("I agree with this statement.").click();
+    }
+
+    const isNewsletterVisible = await page
         .locator("#main form div")
         .filter({ hasText: "Subscribe to newsletter" })
         .locator("label")
         .first()
-        .click();
+        .isVisible();
+
+    if (isNewsletterVisible) {
+        await page
+            .locator("#main form div")
+            .filter({ hasText: "Subscribe to newsletter" })
+            .locator("label")
+            .first()
+            .click();
+    }
+
     await page.getByRole("button", { name: "Register" }).click();
 
     await expect(

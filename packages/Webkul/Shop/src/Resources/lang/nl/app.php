@@ -39,7 +39,7 @@ return [
             'invalid-credentials' => 'Controleer uw referenties en probeer het opnieuw.',
             'new-customer'        => 'Nieuwe klant?',
             'not-activated'       => 'Uw activering wacht op goedkeuring van de beheerder',
-            'page-title'          => 'Klant Aanmelden',
+            'page-title'          => 'Aanmelden',
             'password'            => 'Wachtwoord',
             'show-password'       => 'Wachtwoord Weergeven',
             'title'               => 'Aanmelden',
@@ -50,6 +50,7 @@ return [
             'account-exists'              => 'Heeft u al een account?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registreren',
+            'click-here'                  => 'Klik Hier',
             'confirm-pass'                => 'Bevestig Wachtwoord',
             'email'                       => 'E-mail',
             'first-name'                  => 'Voornaam',
@@ -58,11 +59,12 @@ return [
             'last-name'                   => 'Achternaam',
             'page-title'                  => 'Word Gebruiker',
             'password'                    => 'Wachtwoord',
-            'sign-in-button'              => 'Aanmelden',
+            'sign-in-button'              => 'Registreren',
             'subscribe-to-newsletter'     => 'Abonneer op nieuwsbrief',
             'success'                     => 'Account succesvol aangemaakt.',
             'success-verify'              => 'Account succesvol aangemaakt, er is een e-mail verzonden ter verificatie.',
             'success-verify-email-unsent' => 'Account succesvol aangemaakt, maar verificatie-e-mail niet verzonden.',
+            'terms-conditions'            => 'Algemene Voorwaarden',
             'verification-not-sent'       => 'Fout! Probleem bij het verzenden van de verificatie-e-mail, probeer het later opnieuw.',
             'verification-sent'           => 'Verificatie e-mail verzonden',
             'verified'                    => 'Uw account is geverifieerd, probeer nu in te loggen.',
@@ -188,7 +190,7 @@ return [
                         'fraud'           => 'Fraude',
                         'pending'         => 'In Afwachting',
                         'pending-payment' => 'In Afwachting van Betaling',
-                        'processing'      => 'Verwerking',
+                        'processing'      => 'Bezig met verwerken',
                     ],
                 ],
 
@@ -328,7 +330,7 @@ return [
                     'subtotal-incl-tax'          => 'Subtotaal (incl. BTW)',
                     'subtotal'                   => 'Subtotaal',
                     'tax-amount'                 => 'Belastingbedrag',
-                    'tax'                        => 'Belasting',
+                    'tax'                        => 'BTW',
                     'vat-number'                 => 'BTW-nummer',
                 ],
             ],
@@ -373,6 +375,92 @@ return [
                 'success'            => 'Item succesvol toegevoegd aan verlanglijst',
                 'title'              => 'Verlanglijst',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'Verzoek succesvol aangemaakt',
+                'revoked-successfully'        => 'Verzoek succesvol ingetrokken',
+                'success-verify'              => 'Succes! Verificatie-e-mail is verzonden.',
+                'success-verify-email-unsent' => 'Succes! Verificatie-e-mail is niet verzonden.',
+                'unable-to-sent'              => 'E-mail kon niet worden verzonden.',
+
+                'index'   => [
+                    'create-btn' => 'Verzoek aanmaken',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'GDPR-gegevensverzoeken',
+
+                    'modal' => [
+                        'message' => 'Bericht',
+                        'save'    => 'Opslaan',
+                        'title'   => 'Nieuw verzoek aanmaken',
+
+                        'type'    => [
+                            'choose' => 'Kiezen',
+                            'delete' => 'Verwijderen',
+                            'title'  => 'Type',
+                            'update' => 'Bijwerken',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Voltooid',
+                        'date'       => 'Datum',
+                        'declined'   => 'Geweigerd',
+                        'delete'     => 'Verwijderen',
+                        'id'         => 'ID',
+                        'message'    => 'Bericht',
+                        'pending'    => 'In afwachting',
+                        'processing' => 'In verwerking',
+                        'revoke-btn' => 'Intrekken',
+                        'revoked'    => 'Ingetrokken',
+                        'status'     => 'Status',
+                        'type'       => 'Type',
+                        'update'     => 'Bijwerken',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Standaard Winkelweergave',
+
+                    'account-info' => [
+                        'dob'          => 'Geboortedatum',
+                        'email'        => 'E-mail',
+                        'first-name'   => 'Voornaam',
+                        'gender'       => 'Geslacht',
+                        'last-name'    => 'Achternaam',
+                        'phone'        => 'Telefoon',
+                        'title'        => 'Accountinformatie',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Adres',
+                        'address1'   => 'Adres 1',
+                        'address2'   => 'Adres 2',
+                        'city'       => 'Stad',
+                        'company'    => 'Bedrijf',
+                        'country'    => 'Land',
+                        'first-name' => 'Voornaam',
+                        'last-name'  => 'Achternaam',
+                        'phone'      => 'Telefoon',
+                        'postcode'   => 'Postcode',
+                        'state'      => 'Staat',
+                        'title'      => 'Adresgegevens',
+                        'vat-id'     => 'BTW-ID',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Bedrag',
+                        'order-id'     => 'Bestel-ID',
+                        'product-name' => 'Productnaam',
+                        'qty'          => 'Aantal',
+                        'shipping'     => 'Verzending',
+                        'sku'          => 'SKU',
+                        'status'       => 'Status',
+                        'title'        => 'Bestelinformatie',
+                        'type'         => 'Type',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Account',
-                'bagisto'           => 'Bagisto',
-                'cart'              => 'Winkelwagen',
-                'compare'           => 'Vergelijken',
-                'dropdown-text'     => 'Beheer Winkelwagen, Bestellingen en Verlanglijst',
-                'logout'            => 'Uitloggen',
-                'no-category-found' => 'Geen categorie gevonden.',
-                'orders'            => 'Bestellingen',
-                'profile'           => 'Profiel',
-                'search'            => 'Zoeken',
-                'search-text'       => 'Zoek hier producten',
-                'sign-in'           => 'Inloggen',
-                'sign-up'           => 'Aanmelden',
-                'submit'            => 'Verzenden',
-                'title'             => 'Account',
-                'welcome'           => 'Welkom',
-                'welcome-guest'     => 'Welkom Gast',
-                'wishlist'          => 'Verlanglijst',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standaardtaal',
                     ],
+
+                    'bottom' => [
+                        'all'           => 'Alles',
+                        'back-button'   => 'Terug naar hoofdmenu',
+                        'bagisto'       => 'Bagisto',
+                        'categories'    => 'Categorieën',
+                        'compare'       => 'Vergelijken',
+                        'dropdown-text' => 'Winkelwagen, bestellingen & verlanglijst beheren',
+                        'logout'        => 'Uitloggen',
+                        'orders'        => 'Bestellingen',
+                        'profile'       => 'Profiel',
+                        'search'        => 'Zoeken',
+                        'search-text'   => 'Zoek producten hier',
+                        'sign-in'       => 'Inloggen',
+                        'sign-up'       => 'Registreren',
+                        'submit'        => 'Verzenden',
+                        'welcome'       => 'Welkom',
+                        'welcome-guest' => 'Welkom gast',
+                        'wishlist'      => 'Verlanglijst',
+                    ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'Valuta',
-                    'locales'    => 'Taal',
-                    'login'      => 'Registreren of Inloggen',
+                    'account'       => 'Account',
+                    'back-button'   => 'Terug naar hoofdmenu',
+                    'bagisto'       => 'Bagisto',
+                    'compare'       => 'Vergelijken',
+                    'currencies'    => 'Valuta',
+                    'dropdown-text' => 'Winkelwagen, bestellingen & verlanglijst beheren',
+                    'locales'       => 'Talen',
+                    'login'         => 'Registreren of inloggen',
+                    'logout'        => 'Uitloggen',
+                    'orders'        => 'Bestellingen',
+                    'profile'       => 'Profiel',
+                    'search'        => 'Zoeken',
+                    'search-text'   => 'Zoek producten hier',
+                    'sign-in'       => 'Inloggen',
+                    'sign-up'       => 'Registreren',
+                    'welcome'       => 'Welkom',
+                    'welcome-guest' => 'Welkom gast',
+                    'wishlist'      => 'Verlanglijst',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'Abonneer op de nieuwsbrief',
                 'subscribe-stay-touch'   => 'Abonneer om in contact te blijven.',
                 'whats-new'              => 'Wat is nieuw',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Privacybeleid',
+                    'reject'                   => 'Weigeren',
+                    'accept'                   => 'Accepteren',
+                    'learn-more-and-customize' => 'Meer informatie en aanpassen',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'Uw cookievoorkeuren',
+                    'save-and-continue'                       => 'Opslaan en doorgaan',
+                    'strictly-necessary'                      => 'Strikt noodzakelijk',
+                    'basic-interactions'                      => 'Basisinteracties en functionaliteiten',
+                    'experience-enhancement'                  => 'Ervaring verbetering',
+                    'measurements'                            => 'Meting',
+                    'targeting-and-advertising'               => 'Targeting en adverteren',
+                ],
             ],
         ],
 
@@ -514,8 +637,8 @@ return [
                 'add-to-cart'            => 'Toevoegen aan winkelwagen',
                 'add-to-compare'         => 'Toevoegen aan vergelijkingslijst',
                 'add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
-                'add-to-wishlist'        => 'Toevoegen aan verlanglijstje',
-                'already-in-compare'     => 'Item is al toegevoegd aan vergelijkingslijst.',
+                'add-to-wishlist'        => 'Toevoegen aan verlanglijst',
+                'already-in-compare'     => 'Dit item is al toegevoegd aan vergelijkingslijst.',
                 'new'                    => 'Nieuw',
                 'review-description'     => 'Wees de eerste om dit product te beoordelen',
                 'sale'                   => 'Uitverkoop',
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Selecteer alsjeblieft een optie',
                     'select-above-options' => 'Selecteer hierboven de opties',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'Naam',
+                ],
+
+                'booking' => [
+                    'location'    => 'Locatie',
+                    'view-on-map' => 'Bekijk op Kaart',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'slot-duration'            => 'Slotduur',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Gesloten',
+                        'see-details'              => 'Bekijk Details',
+                        'slot-duration'            => 'Slotduur',
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'today-availability'       => 'Beschikbaarheid Vandaag',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Boek Uw Ticket',
+                        'title'            => 'Evenement op :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Kies Huur Optie',
+                        'daily-basis'        => 'Dagelijks',
+                        'from'               => 'Van',
+                        'hourly-basis'       => 'Per Uur',
+                        'rent-an-item'       => 'Huur een Item',
+                        'select-date'        => 'Selecteer Datum',
+                        'select-rent-time'   => 'Selecteer Huur Tijd',
+                        'select-slot'        => 'Selecteer Slot',
+                        'select-time-slot'   => 'Selecteer Tijdslot',
+                        'slot'               => 'Slot',
+                        'no-slots-available' => 'Geen slots beschikbaar',
+                        'to'                 => 'Tot',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Reserveer een Tafel',
+                        'closed'                   => 'Gesloten',
+                        'slot-duration'            => 'Slotduur',
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'slots-for-all-days'       => 'Toon voor alle dagen',
+                        'special-notes'            => 'Speciale Verzoeken/Opmerkingen',
+                        'today-availability'       => 'Beschikbaarheid Vandaag',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Maak een Afspraak',
+                        'date'                => 'Datum',
+                        'no-slots-available'  => 'Geen slots beschikbaar',
+                        'select-slot'         => 'Selecteer Slot',
+                        'title'               => 'Slot',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'Koop :qty voor :price per stuk en bespaar :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'Gesloten',
+
+            'cart'             => [
+                'booking-from' => 'Boeking Van',
+                'booking-till' => 'Boeking Tot',
+                'daily'        => 'Dagelijks',
+                'event-from'   => 'Evenement Van',
+                'event-ticket' => 'Evenement Ticket',
+                'event-till'   => 'Evenement Tot',
+                'hourly'       => 'Per Uur',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Dit evenement is verlopen.',
+                    ],
+
+                    'missing_options'        => 'Opties ontbreken voor dit product.',
+                    'inventory_warning'      => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
+                    'select_hourly_duration' => 'Selecteer een tijdsduur van één uur.',
+                ],
+
+                'rent-from'    => 'Huur Van',
+                'rent-till'    => 'Huur Tot',
+                'rent-type'    => 'Huur Type',
+                'renting_type' => 'Huur Type',
+                'special-note' => 'Speciale Verzoeken/Opmerkingen',
+            ],
+
+            'per-ticket-price' => ':price Per Ticket',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'Alles wissen',
             'filter'    => 'Filter',
             'filters'   => 'Filters:',
+
+            'search' => [
+                'load-more'            => 'Meer laden',
+                'loading'              => 'Bezig met laden...',
+                'no-options-available' => 'Geen opties beschikbaar.',
+                'results-info'         => ':currentCount van :totalCount opties weergegeven',
+                'title'                => 'Zoeken',
+            ],
+
             'sort'      => 'Sorteer',
         ],
 
@@ -728,7 +955,7 @@ return [
                 'see-details'              => 'Details bekijken',
                 'select-all'               => 'Alles selecteren',
                 'select-cart-item'         => 'Selecteer winkelwagenitem',
-                'tax'                      => 'Belasting',
+                'tax'                      => 'BTW',
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
@@ -762,7 +989,7 @@ return [
                 'sub-total-excl-tax'        => 'Subtotaal (Excl. BTW)',
                 'sub-total-incl-tax'        => 'Subtotaal (Incl. BTW)',
                 'sub-total'                 => 'Subtotaal',
-                'tax'                       => 'Belasting',
+                'tax'                       => 'BTW',
 
                 'estimate-shipping' => [
                     'country'        => 'Land',
@@ -833,7 +1060,7 @@ return [
                 'sub-total-excl-tax'        => 'Subtotaal (Excl. BTW)',
                 'sub-total-incl-tax'        => 'Subtotaal (Incl. BTW)',
                 'sub-total'                 => 'Subtotaal',
-                'tax'                       => 'Belasting',
+                'tax'                       => 'BTW',
             ],
         ],
 
@@ -874,7 +1101,10 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
+            'categories-carousel' => 'Categorieën Carrousel',
+            'image-carousel'      => 'Afbeeldingen Carrousel',
+            'offer'               => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'product-carousel'    => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Volgende pagina',
             'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
+            'prev-page'          => 'Vorige pagina',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'Adres',
         'downloadable-products' => 'Downloadbare Producten',
+        'gdpr-request'          => 'GDPR Verzoeken',
         'my-account'            => 'Mijn Account',
         'orders'                => 'Bestellingen',
         'profile'               => 'Profiel',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => 'Welkom bij onze nieuwsbrief!',
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Nieuwe aanvraag voor gegevensverwijdering',
+                'new-update-request' => 'Nieuwe aanvraag voor gegevensupdate',
+
+                'new-request' => [
+                    'delete-summary' => 'Samenvatting van verwijderingsverzoek',
+                    'message'        => 'Bericht : ',
+                    'request-status' => 'Aanvraagstatus : ',
+                    'request-type'   => 'Aanvraagtype : ',
+                    'update-summary' => 'Samenvatting van updateverzoek',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Uw GDPR-aanvraag is bijgewerkt',
+                    'summary'        => 'De status van uw GDPR-aanvraag is bijgewerkt',
+                    'request-status' => 'Aanvraagstatus:',
+                    'request-type'   => 'Aanvraagtype:',
+                    'message'        => 'Bericht:',
+                ],
             ],
 
             'reminder' => [

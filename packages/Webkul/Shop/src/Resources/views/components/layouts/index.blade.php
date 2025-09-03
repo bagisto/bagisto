@@ -76,6 +76,12 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
+        @if(core()->getConfigData('general.content.speculation_rules.enabled'))
+            <script type="speculationrules">
+                @json(core()->getSpeculationRules(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+            </script>
+        @endif
+
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
 
     </head>
@@ -100,6 +106,13 @@
             <!-- Page Header Blade Component -->
             @if ($hasHeader)
                 <x-shop::layouts.header />
+            @endif
+
+            @if(
+                core()->getConfigData('general.gdpr.settings.enabled')
+                && core()->getConfigData('general.gdpr.cookie.enabled')
+            )
+                <x-shop::layouts.cookie />
             @endif
 
             {!! view_render_event('bagisto.shop.layout.content.before') !!}

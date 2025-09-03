@@ -53,7 +53,7 @@ jobs:
           cat .env
 
       - name: Running Bagisto Installer
-        run: php artisan bagisto:install --skip-env-check --skip-admin-creation
+        run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Running Pest Test
         run: vendor/bin/pest --parallel --colors=always

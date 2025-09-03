@@ -84,6 +84,7 @@
                                         @{{ available.columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
                                     </span>
                                 </span>
+
                                 <!-- Filter Arrow Icon -->
                                 <i
                                     class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -92,6 +93,7 @@
                                 ></i>
                             </p>
                         </div>
+                        
                         <!-- Actions -->
                         @if ($hasPermission)
                             <p class="flex justify-end gap-2.5">
@@ -117,7 +119,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(150px, 1fr));'"
                         >
                             <!-- ID -->
                             <p>@{{ record.user_id }}</p>
@@ -145,7 +147,7 @@
                                         </button>
                                     </div>
 
-                                    <div class="text-sm">
+                                    <div class="text-sm break-all">
                                         @{{ record.user_name }}
                                     </div>
                                 </div>
@@ -155,7 +157,7 @@
                             <p>@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p>@{{ record.email }}</p>
+                            <p class="break-words">@{{ record.email }}</p>
 
                             <!-- Role -->
                             <p>@{{ record.role_name }}</p>
@@ -385,67 +387,14 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.settings.users.index.create.save-btn')
-                                </button>
-                            </div>
-                        </x-slot>
-                    </x-admin::modal>
-                </form>
-            </x-admin::form>
-
-            <!-- User Delete Password Form -->
-            <x-admin::form
-                v-slot="{ meta, errors, handleSubmit }"
-                as="div"
-            >
-                <form
-                    @submit="handleSubmit($event, UserConfirmModal)"
-                    ref="confirmPassword"
-                >
-                    <x-admin::modal ref="confirmPasswordModal">
-                        <!-- Modal Header -->
-                        <x-slot:header>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white">
-                                @lang('Confirm Password Before DELETE')
-                            </p>
-                        </x-slot>
-
-                        <!-- Modal Content -->
-                        <x-slot:content>
-                            <!-- Password -->
-                            <x-admin::form.control-group class="mb-2.5">
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('Enter Current Password')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    rules="required"
-                                    :label="trans('Password')"
-                                    :placeholder="trans('Password')"
-                                />
-
-                                <x-admin::form.control-group.error control-name="password" />
-                            </x-admin::form.control-group>
-                        </x-slot>
-
-                        <!-- Modal Footer -->
-                        <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('Confirm Delete This Account')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="submit"
+                                class="primary-button justify-center"
+                                :title="trans('admin::app.settings.users.index.create.save-btn')"
+                                ::loading="isLoading"
+                                ::disabled="isLoading"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
@@ -467,12 +416,16 @@
                             images: [],
                         },
 
+                        isLoading: false,
+
                         currentUserId: "{{ auth()->guard('admin')->user()->id }}",
                     }
                 },
 
                 methods: {
                     updateOrCreate(params, { setErrors }) {
+                        this.isLoading = true;
+
                         let formData = new FormData(this.$refs.userCreateForm);
 
                         if (params.id) {
@@ -485,6 +438,8 @@
                                 }
                             })
                             .then((response) => {
+                                this.isLoading = false;
+
                                 this.$refs.userUpdateOrCreateModal.close();
 
                                 this.$refs.datagrid.get();
@@ -494,6 +449,8 @@
                                 this.resetForm();
                             })
                             .catch(error => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
@@ -524,24 +481,6 @@
                             .catch(error => this.$emitter.emit('add-flash', {
                                 type: 'error', message: error.response.data.message
                             }));
-                    },
-
-                    UserConfirmModal() {
-                        let formData = new FormData(this.$refs.confirmPassword);
-
-                        formData.append('_method', 'put');
-
-                        this.$axios.post("{{ route('admin.settings.users.destroy')}}", formData)
-                            .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                window.location.href = response.data.redirectUrl;
-                            })
-                            .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-
-                                this.$refs.confirmPasswordModal.toggle();
-                            });
                     },
 
                     resetForm() {

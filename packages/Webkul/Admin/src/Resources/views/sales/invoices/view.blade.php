@@ -92,14 +92,12 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.sales.invoices.view.send')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.sales.invoices.view.send')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </x-admin::form>
@@ -157,11 +155,26 @@
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
                                             <!-- Item Additional Details -->
-                                            <p class="text-gray-600 dark:text-gray-300">
-                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                @endforeach
-                                            </p>
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @if (
+                                                        ! isset($attribute['attribute_type'])
+                                                        || $attribute['attribute_type'] !== 'file'
+                                                    )
+                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                    @else
+                                                        {{ $attribute['attribute_name'] }} :
+
+                                                        <a
+                                                            href="{{ Storage::url($attribute['option_label']) }}"
+                                                            class="text-blue-600 hover:underline"
+                                                            download="{{ File::basename($attribute['option_label']) }}"
+                                                        >
+                                                            {{ File::basename($attribute['option_label']) }}
+                                                        </a>
+                                                    @endif
+                                                </p>
+                                            @endforeach
                                         @endif
 
                                         <!--SKU -->

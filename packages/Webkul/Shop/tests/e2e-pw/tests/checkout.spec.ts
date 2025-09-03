@@ -108,7 +108,6 @@ async function createSimpleProduct(page) {
 
 test.describe("checkout", () => {
     test("guest should be able to checkout", async ({ shopPage }) => {
-
         /**
          * Login to admin panel.
          */

@@ -50,6 +50,7 @@ return [
             'account-exists'              => '¿Ya tienes una cuenta?',
             'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registrarse',
+            'click-here'                  => 'Haga clic aquí',
             'confirm-pass'                => 'Confirmar Contraseña',
             'email'                       => 'Correo Electrónico',
             'first-name'                  => 'Nombre',
@@ -63,6 +64,7 @@ return [
             'success'                     => 'Cuenta creada con éxito.',
             'success-verify'              => 'Cuenta creada con éxito, se ha enviado un correo electrónico para su verificación.',
             'success-verify-email-unsent' => 'Cuenta creada con éxito, pero el correo de verificación no se envió.',
+            'terms-conditions'            => 'Términos y Condiciones',
             'verification-not-sent'       => 'Error! Problema al enviar el correo de verificación, por favor inténtalo de nuevo más tarde.',
             'verification-sent'           => 'Correo de verificación enviado',
             'verified'                    => 'Tu cuenta ha sido verificada, intenta iniciar sesión ahora.',
@@ -373,6 +375,92 @@ return [
                 'success'            => 'Artículo añadido exitosamente a la lista de deseos',
                 'title'              => 'Lista de Deseos',
             ],
+
+            'gdpr' => [
+                'create-success'              => 'Solicitud creada con éxito',
+                'revoked-successfully'        => 'Solicitud revocada con éxito',
+                'success-verify'              => '¡Éxito! El correo de verificación ha sido enviado.',
+                'success-verify-email-unsent' => '¡Éxito! El correo de verificación no ha sido enviado.',
+                'unable-to-sent'              => 'No se pudo enviar el correo electrónico.',
+
+                'index'   => [
+                    'create-btn' => 'Crear solicitud',
+                    'html'       => 'HTML',
+                    'pdf'        => 'PDF',
+                    'title'      => 'Solicitudes de datos GDPR',
+
+                    'modal' => [
+                        'message' => 'Mensaje',
+                        'save'    => 'Guardar',
+                        'title'   => 'Crear nueva solicitud',
+
+                        'type'    => [
+                            'choose' => 'Elegir',
+                            'delete' => 'Eliminar',
+                            'title'  => 'Tipo',
+                            'update' => 'Actualizar',
+                        ],
+                    ],
+
+                    'datagrid' => [
+                        'completed'  => 'Completado',
+                        'date'       => 'Fecha',
+                        'declined'   => 'Rechazado',
+                        'delete'     => 'Eliminar',
+                        'id'         => 'ID',
+                        'message'    => 'Mensaje',
+                        'pending'    => 'Pendiente',
+                        'processing' => 'Procesando',
+                        'revoke-btn' => 'Revocar',
+                        'revoked'    => 'Revocado',
+                        'status'     => 'Estado',
+                        'type'       => 'Tipo',
+                        'update'     => 'Actualizar',
+                    ],
+                ],
+
+                'pdf' => [
+                    'title' => 'Vista predeterminada de la tienda',
+
+                    'account-info' => [
+                        'dob'          => 'Fecha de nacimiento',
+                        'email'        => 'Correo electrónico',
+                        'first-name'   => 'Nombre',
+                        'gender'       => 'Género',
+                        'last-name'    => 'Apellido',
+                        'phone'        => 'Teléfono',
+                        'title'        => 'Información de la cuenta',
+                    ],
+
+                    'address-info' => [
+                        'address'    => 'Dirección',
+                        'address1'   => 'Dirección 1',
+                        'address2'   => 'Dirección 2',
+                        'city'       => 'Ciudad',
+                        'company'    => 'Empresa',
+                        'country'    => 'País',
+                        'first-name' => 'Nombre',
+                        'last-name'  => 'Apellido',
+                        'phone'      => 'Teléfono',
+                        'postcode'   => 'Código postal',
+                        'state'      => 'Estado',
+                        'title'      => 'Información de la dirección',
+                        'vat-id'     => 'ID de IVA',
+                    ],
+
+                    'order-info' => [
+                        'amount'       => 'Monto',
+                        'order-id'     => 'ID de pedido',
+                        'product-name' => 'Nombre del producto',
+                        'qty'          => 'Cantidad',
+                        'shipping'     => 'Envío',
+                        'sku'          => 'SKU',
+                        'status'       => 'Estado',
+                        'title'        => 'Información del pedido',
+                        'type'         => 'Tipo',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -395,35 +483,51 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Cuenta',
-                'bagisto'           => 'Bagisto',
-                'cart'              => 'Carrito de compras',
-                'compare'           => 'Comparar',
-                'dropdown-text'     => 'Administrar carrito de compras, pedidos y lista de deseos',
-                'logout'            => 'Cerrar sesión',
-                'no-category-found' => 'No se encontró categoría.',
-                'orders'            => 'Pedidos',
-                'profile'           => 'Perfil',
-                'search'            => 'Buscar',
-                'search-text'       => 'Buscar productos aquí',
-                'sign-in'           => 'Iniciar sesión',
-                'sign-up'           => 'Registrarse',
-                'submit'            => 'Enviar',
-                'title'             => 'Cuenta',
-                'welcome'           => 'Bienvenido',
-                'welcome-guest'     => 'Bienvenido Invitado',
-                'wishlist'          => 'Lista de deseos',
-
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Idioma predeterminado',
                     ],
+
+                    'bottom' => [
+                        'all'           => 'Todo',
+                        'back-button'   => 'Volver al menú principal',
+                        'bagisto'       => 'Bagisto',
+                        'categories'    => 'Categorías',
+                        'compare'       => 'Comparar',
+                        'dropdown-text' => 'Gestionar carrito, pedidos y lista de deseos',
+                        'logout'        => 'Cerrar sesión',
+                        'orders'        => 'Pedidos',
+                        'profile'       => 'Perfil',
+                        'search'        => 'Buscar',
+                        'search-text'   => 'Buscar productos aquí',
+                        'sign-in'       => 'Iniciar sesión',
+                        'sign-up'       => 'Registrarse',
+                        'submit'        => 'Enviar',
+                        'welcome'       => 'Bienvenido',
+                        'welcome-guest' => 'Bienvenido Invitado',
+                        'wishlist'      => 'Lista de deseos',
+                    ],
                 ],
 
                 'mobile' => [
-                    'currencies' => 'Monedas',
-                    'locales'    => 'Idiomas',
-                    'login'      => 'Registrarse o Iniciar sesión',
+                    'account'       => 'Cuenta',
+                    'back-button'   => 'Volver al menú principal',
+                    'bagisto'       => 'Bagisto',
+                    'compare'       => 'Comparar',
+                    'currencies'    => 'Monedas',
+                    'dropdown-text' => 'Gestionar carrito, pedidos y lista de deseos',
+                    'locales'       => 'Idiomas',
+                    'login'         => 'Registrarse o iniciar sesión',
+                    'logout'        => 'Cerrar sesión',
+                    'orders'        => 'Pedidos',
+                    'profile'       => 'Perfil',
+                    'search'        => 'Buscar',
+                    'search-text'   => 'Buscar productos aquí',
+                    'sign-in'       => 'Iniciar sesión',
+                    'sign-up'       => 'Registrarse',
+                    'welcome'       => 'Bienvenido',
+                    'welcome-guest' => 'Bienvenido Invitado',
+                    'wishlist'      => 'Lista de deseos',
                 ],
             ],
 
@@ -445,6 +549,25 @@ return [
                 'subscribe-newsletter'   => 'Suscribirse al boletín',
                 'subscribe-stay-touch'   => 'Suscríbete para mantenerte en contacto.',
                 'whats-new'              => 'Novedades',
+            ],
+
+            'cookie' => [
+                'index' => [
+                    'privacy-policy'           => 'Política de Privacidad',
+                    'reject'                   => 'Rechazar',
+                    'accept'                   => 'Aceptar',
+                    'learn-more-and-customize' => 'Aprender Más y Personalizar',
+                ],
+
+                'consent' => [
+                    'your-cookie-consent-preferences'         => 'Tus Preferencias de Consentimiento de Cookies',
+                    'save-and-continue'                       => 'Guardar y Continuar',
+                    'strictly-necessary'                      => 'Estríctamente Necesarias',
+                    'basic-interactions'                      => 'Interacciones y Funcionalidades Básicas',
+                    'experience-enhancement'                  => 'Mejora de la Experiencia',
+                    'measurements'                            => 'Medición',
+                    'targeting-and-advertising'               => 'Segmentación y Publicidad',
+                ],
             ],
         ],
 
@@ -567,6 +690,13 @@ return [
 
         'view' => [
             'type' => [
+                'simple' => [
+                    'customizable-options' => [
+                        'none'         => 'Ninguno',
+                        'total-amount' => 'Cantidad Total',
+                    ],
+                ],
+
                 'configurable' => [
                     'select-options'       => 'Por favor, seleccione una opción',
                     'select-above-options' => 'Por favor, seleccione las opciones anteriores',
@@ -585,6 +715,62 @@ return [
 
                 'grouped' => [
                     'name' => 'Nombre',
+                ],
+
+                'booking' => [
+                    'location'    => 'Ubicación',
+                    'view-on-map' => 'Ver en el Mapa',
+
+                    'default' => [
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'slot-duration'            => 'Duración del Intervalo',
+                    ],
+
+                    'appointment' => [
+                        'closed'                   => 'Cerrado',
+                        'see-details'              => 'Ver Detalles',
+                        'slot-duration'            => 'Duración del Intervalo',
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'today-availability'       => 'Disponibilidad de Hoy',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Reserva tu Entrada',
+                        'title'            => 'Evento en :',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Elige Opción de Alquiler',
+                        'daily-basis'        => 'Diario',
+                        'from'               => 'Desde',
+                        'hourly-basis'       => 'Por Hora',
+                        'rent-an-item'       => 'Alquilar un Artículo',
+                        'select-date'        => 'Seleccionar Fecha',
+                        'select-rent-time'   => 'Seleccionar Hora de Alquiler',
+                        'select-slot'        => 'Seleccionar Intervalo',
+                        'select-time-slot'   => 'Seleccionar Intervalo de Tiempo',
+                        'slot'               => 'Intervalo',
+                        'no-slots-available' => 'No hay intervalos disponibles',
+                        'to'                 => 'Hasta',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'             => 'Reservar una Mesa',
+                        'closed'                   => 'Cerrado',
+                        'slot-duration'            => 'Duración del Intervalo',
+                        'slot-duration-in-minutes' => ':minutes Minutos',
+                        'slots-for-all-days'       => 'Mostrar para todos los días',
+                        'special-notes'            => 'Solicitud/Notas Especiales',
+                        'today-availability'       => 'Disponibilidad de Hoy',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment' => 'Reservar una Cita',
+                        'date'                => 'Fecha',
+                        'no-slots-available'  => 'No hay intervalos disponibles',
+                        'select-slot'         => 'Seleccionar Intervalo',
+                        'title'               => 'Intervalo',
+                    ],
                 ],
             ],
 
@@ -631,6 +817,38 @@ return [
                 'offers' => 'Compra :qty a :price cada uno y ahorra :discount',
             ],
         ],
+
+        'booking' => [
+            'closed' => 'Cerrado',
+
+            'cart'             => [
+                'booking-from' => 'Reserva Desde',
+                'booking-till' => 'Reserva Hasta',
+                'daily'        => 'Base Diaria',
+                'event-from'   => 'Evento Desde',
+                'event-ticket' => 'Entrada para Evento',
+                'event-till'   => 'Evento Hasta',
+                'hourly'       => 'Base por Hora',
+
+                'integrity'    => [
+                    'event'                  => [
+                        'expired' => 'Este evento ha expirado.',
+                    ],
+
+                    'missing_options'        => 'Faltan opciones para este producto.',
+                    'inventory_warning'      => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
+                    'select_hourly_duration' => 'Selecciona una duración de una hora.',
+                ],
+
+                'rent-from'    => 'Alquiler Desde',
+                'rent-till'    => 'Alquiler Hasta',
+                'rent-type'    => 'Tipo de Alquiler',
+                'renting_type' => 'Tipo de Alquiler',
+                'special-note' => 'Solicitud/Notas Especiales',
+            ],
+
+            'per-ticket-price' => ':price Por Entrada',
+        ],
     ],
 
     'categories' => [
@@ -638,6 +856,15 @@ return [
             'clear-all' => 'Borrar todo',
             'filter'    => 'Filtrar',
             'filters'   => 'Filtros:',
+
+            'search' => [
+                'load-more'            => 'Cargar más',
+                'loading'              => 'Cargando...',
+                'no-options-available' => 'No hay opciones disponibles.',
+                'results-info'         => 'Mostrando :currentCount de :totalCount opciones',
+                'title'                => 'Buscar',
+            ],
+
             'sort'      => 'Ordenar',
         ],
 
@@ -874,9 +1101,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'categories-carousel' => 'Carrusel de categorías',
+            'image-carousel'      => 'Carrusel de imágenes',
+            'offer'               => 'Obtén HASTA 40% DE DESCUENTO en tu primer pedido, COMPRA AHORA',
+            'product-carousel'    => 'Carrusel de productos',
             'resend-verify-email' => 'Reenviar correo de verificación',
-            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+            'verify-email'        => 'Verifica tu cuenta de correo electrónico',
         ],
 
         'thanks-for-contact' => 'Gracias por contactarnos con tus comentarios y preguntas. Te responderemos muy pronto.',
@@ -884,7 +1114,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Página siguiente',
             'pagination-showing' => 'Mostrando :firstItem a :lastItem de :total entradas',
+            'prev-page'          => 'Página anterior',
         ],
     ],
 
@@ -920,6 +1152,7 @@ return [
     'layouts' => [
         'address'               => 'Dirección',
         'downloadable-products' => 'Productos descargables',
+        'gdpr-request'          => 'Solicitudes de GDPR',
         'my-account'            => 'Mi cuenta',
         'orders'                => 'Pedidos',
         'profile'               => 'Perfil',
@@ -978,6 +1211,27 @@ return [
                 'greeting'    => '¡Bienvenido a nuestro boletín!',
                 'subject'     => '¡Usted! Suscríbase a nuestro boletín',
                 'unsubscribe' => 'Darse de baja',
+            ],
+
+            'gdpr' => [
+                'new-delete-request' => 'Nueva solicitud para eliminar datos',
+                'new-update-request' => 'Nueva solicitud para actualizar datos',
+
+                'new-request' => [
+                    'delete-summary' => 'خلاصه درخواست حذف',
+                    'message'        => 'Mensaje : ',
+                    'request-status' => 'Estado de la solicitud : ',
+                    'request-type'   => 'Tipo de solicitud : ',
+                    'update-summary' => 'خلاصه درخواست به‌روزرسانی',
+                ],
+
+                'status-update' => [
+                    'subject'        => 'Tu solicitud GDPR ha sido actualizada',
+                    'summary'        => 'El estado de tu solicitud GDPR ha sido actualizado',
+                    'request-status' => 'Estado de la solicitud:',
+                    'request-type'   => 'Tipo de solicitud:',
+                    'message'        => 'Mensaje:',
+                ],
             ],
 
             'reminder' => [

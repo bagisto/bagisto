@@ -20,9 +20,7 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * Create.
-     *
-     * @return \Webkul\Core\Contracts\CoreConfig
+     * Create core configuration.
      */
     public function create(array $data)
     {

@@ -71,14 +71,32 @@
                         </x-admin::form.control-group.control>
 
                         <!-- Source Sample Download Links -->
-                        <a
-                            :href="'{{ route('admin.settings.data_transfer.imports.download_sample') }}/' + $refs['importType']?.value"
-                            target="_blank"
-                            id="source-sample-link"
-                            class="mt-1 cursor-pointer text-sm text-blue-600 transition-all hover:underline"
-                        >
-                            @lang('admin::app.settings.data-transfer.imports.edit.download-sample')
-                        </a>
+                        <div class="flex items-center mt-2.5">
+                            <span>
+                                @lang('admin::app.settings.data-transfer.imports.create.download-sample')
+                            </span>
+
+                            <x-admin::dropdown>
+                                <x-slot:toggle>
+                                    <span class="cursor-pointer text-2xl icon-arrow-down"></span>
+                                </x-slot>
+
+                                <x-slot:content>
+                                    <div class="grid gap-2.5 max-md:my-0">
+                                        @foreach ($supportedFormats as $format)
+                                            <a
+                                                :href="'{{ route('admin.settings.data_transfer.imports.download_sample', ['type' => ':type:', 'format' => ':format:']) }}'.replace(':type:', $refs['importType']?.value).replace(':format:', '{{ $format }}')"
+                                                target="_blank"
+                                                id="source-sample-link"
+                                                class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
+                                            >
+                                                {{ strtoupper($format) }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </x-slot>
+                            </x-admin::dropdown>
+                        </div>
 
                         <x-admin::form.control-group.error control-name="type" />
                     </x-admin::form.control-group>

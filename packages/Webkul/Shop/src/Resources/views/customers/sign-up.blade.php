@@ -56,6 +56,7 @@
                 <x-shop::form :action="route('shop.customers.register.store')">
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
+                    <!-- First Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.first-name')
@@ -78,6 +79,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.first_name.after') !!}
 
+                    <!-- Last Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.last-name')
@@ -100,6 +102,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.last_name.after') !!}
 
+                    <!-- Email -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.email')
@@ -122,6 +125,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.email.after') !!}
 
+                    <!-- Password -->
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.password')
@@ -145,6 +149,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.password.after') !!}
 
+                    <!-- Confirm Password -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
                             @lang('shop::app.customers.signup-form.confirm-pass')
@@ -169,12 +174,13 @@
 
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="mb-5 flex">
-                            {!! Captcha::render() !!}
+                            {!! \Webkul\Customer\Facades\Captcha::render() !!}
                         </div>
                     @endif
 
+                    <!-- Subscribed Button -->
                     @if (core()->getConfigData('customer.settings.create_new_account_options.news_letter'))
-                        <div class="flex select-none items-center gap-1.5">
+                        <div class="mb-5 flex select-none items-center gap-1.5">
                             <input
                                 type="checkbox"
                                 name="is_subscribed"
@@ -183,7 +189,7 @@
                             />
 
                             <label
-                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
+                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                 for="is-subscribed"
                             ></label>
 
@@ -198,7 +204,42 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.newsletter_subscription.after') !!}
 
+                    @if(
+                        core()->getConfigData('general.gdpr.settings.enabled')
+                        && core()->getConfigData('general.gdpr.agreement.enabled')
+                    )
+                        <div class="mb-2 flex select-none items-center gap-1.5">
+                            <x-shop::form.control-group.control
+                                type="checkbox"
+                                name="agreement"
+                                id="agreement"
+                                value="0"
+                                rules="required"
+                                for="agreement"
+                            />
+
+                            <label
+                                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm"
+                                for="agreement"
+                            >
+                                {{ core()->getConfigData('general.gdpr.agreement.agreement_label') }}
+                            </label>
+
+                            @if (core()->getConfigData('general.gdpr.agreement.agreement_content'))
+                                <span
+                                    class="cursor-pointer text-base text-navyBlue max-sm:text-sm"
+                                    @click="$refs.termsModal.open()"
+                                >
+                                    @lang('shop::app.customers.signup-form.click-here')
+                                </span>
+                            @endif
+                        </div>
+
+                        <x-shop::form.control-group.error control-name="agreement" />
+                    @endif
+
                     <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:gap-5">
+                        <!-- Save Button -->
                         <button
                             class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5 ltr:ml-0 rtl:mr-0"
                             type="submit"
@@ -233,6 +274,21 @@
 	</div>
 
     @push('scripts')
-        {!! Captcha::renderJS() !!}
+        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
     @endpush
+
+    <!-- Terms & Conditions Modal -->
+    <x-shop::modal ref="termsModal">
+        <x-slot:toggle></x-slot>
+
+        <x-slot:header class="!p-5">
+            <p>@lang('shop::app.customers.signup-form.terms-conditions')</p>
+        </x-slot>
+
+        <x-slot:content class="!p-5">
+            <div class="max-h-[500px] overflow-auto">
+                {!! core()->getConfigData('general.gdpr.agreement.agreement_content') !!}
+            </div>
+        </x-slot>
+    </x-admin::modal>
 </x-shop::layouts>

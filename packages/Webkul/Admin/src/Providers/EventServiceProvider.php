@@ -4,8 +4,8 @@ namespace Webkul\Admin\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Webkul\Admin\Listeners\Admin;
-use Webkul\Admin\Listeners\ChannelSettingsChange;
 use Webkul\Admin\Listeners\Customer;
+use Webkul\Admin\Listeners\GDPR;
 use Webkul\Admin\Listeners\Invoice;
 use Webkul\Admin\Listeners\Order;
 use Webkul\Admin\Listeners\Refund;
@@ -19,23 +19,22 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        /**
-         * Customer related events.
-         */
         'customer.create.after' => [
             [Customer::class, 'afterCreated'],
         ],
 
-        /**
-         * Admin related events.
-         */
+        'customer.gdpr-request.create.after' => [
+            [GDPR::class, 'afterGdprRequestCreated'],
+        ],
+
+        'customer.gdpr-request.update.after' => [
+            [GDPR::class, 'afterGdprRequestUpdated'],
+        ],
+
         'admin.password.update.after' => [
             [Admin::class, 'afterPasswordUpdated'],
         ],
 
-        /**
-         * Sales related events.
-         */
         'checkout.order.save.after' => [
             [Order::class, 'afterCreated'],
         ],
@@ -54,13 +53,6 @@ class EventServiceProvider extends ServiceProvider
 
         'sales.refund.save.after' => [
             [Refund::class, 'afterCreated'],
-        ],
-
-        /**
-         * Channel Settings related events.
-         */
-        'core.channel.update.after' => [
-            [ChannelSettingsChange::class, 'checkForMaintenanceMode'],
         ],
     ];
 }

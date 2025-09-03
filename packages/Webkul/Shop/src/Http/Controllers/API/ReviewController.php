@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Event;
 use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
@@ -24,11 +25,14 @@ class ReviewController extends APIController
     ) {}
 
     /**
-     * Using const variable for status
+     * Pending review status.
+     */
+    const STATUS_PENDING = 'pending';
+
+    /**
+     * Approved review status.
      */
     const STATUS_APPROVED = 'approved';
-
-    const STATUS_PENDING = 'pending';
 
     /**
      * Product listings.
@@ -36,10 +40,18 @@ class ReviewController extends APIController
     public function index(int $id): JsonResource
     {
         $product = $this->productRepository
-            ->find($id)
+            ->findOrFail($id)
             ->reviews()
-            ->Where('status', self::STATUS_APPROVED)
+            ->where('status', self::STATUS_APPROVED)
             ->paginate(8);
+
+        if (core()->getConfigData('catalog.products.review.censoring_reviewer_name')) {
+            $product->getCollection()->transform(function ($review) {
+                $review->name = $this->censorReviewerName($review->name);
+
+                return $review;
+            });
+        }
 
         return ProductReviewResource::collection($product);
     }
@@ -70,9 +82,13 @@ class ReviewController extends APIController
         $data['name'] = auth()->guard('customer')->user()?->name ?? request()->input('name');
         $data['customer_id'] = auth()->guard('customer')->id() ?? null;
 
+        Event::dispatch('customer.review.create.before', $id);
+
         $review = $this->productReviewRepository->create($data);
 
         $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
+
+        Event::dispatch('customer.review.create.after', $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.view.reviews.success'),
@@ -114,5 +130,15 @@ class ReviewController extends APIController
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * Censoring the Reviewer name
+     */
+    private function censorReviewerName(string $name): string
+    {
+        return collect(explode(' ', $name))
+            ->map(fn ($part) => substr($part, 0, 1).str_repeat('*', max(strlen($part) - 1, 0)))
+            ->join(' ');
     }
 }

@@ -25,9 +25,35 @@
 
                     <!-- Actions -->
                     <div class="flex items-center gap-1.5">
+                       <!-- Back Button -->
+                        <div>
+                            <a v-if="entity === 'customers'"
+                                href="{{ route('admin.reporting.customers.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                            
+                            <a v-else-if="entity === 'products'"
+                                href="{{ route('admin.reporting.products.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                            
+                            <a v-else
+                                href="{{ route('admin.reporting.sales.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                        </div>
+             
+                        <!-- Export Button -->
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
-                                <span class="icon-admin-export flex cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <div class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                    <span class="icon-export text-xl text-gray-600"></span>
+            
+                                    @lang('admin::app.export.export')
+                                </div>
                             </x-slot>
 
                             <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
@@ -44,14 +70,21 @@
                                 </x-admin::dropdown.menu.item>
                             </x-slot>
                         </x-admin::dropdown>
-                        
+                    </div>
+                </div>
+
+                <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
+                    <div class="flex items-center gap-x-1">
+                        <!-- Channel Filter -->
                         <template v-if="channels.length > 2">
-                            <x-admin::dropdown position="bottom-right">
+                            <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}" >
                                 <x-slot:toggle>
                                     <button
                                         type="button"
-                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center text-sm leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                        class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                                     >
+                                        <span class="icon-store text-2xl"></span>
+
                                         @{{ channels.find(channel => channel.code == filters.channel).name }}
                                         
                                         <span class="icon-sort-down text-2xl"></span>
@@ -70,6 +103,7 @@
                             </x-admin::dropdown>
                         </template>
 
+                        <!-- Day Filter -->
                         @if (in_array(request()->query('type'), [
                             'total-sales',
                             'total-orders',
@@ -102,7 +136,10 @@
                                 <span class="icon-sort-down pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 transform text-2xl text-gray-600 dark:text-gray-300"></span>
                             </div>
                         @endif
+                    </div>
 
+                    <!-- Actions -->
+                    <div class="flex items-center gap-1.5">
                         <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
                                 class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -196,6 +233,8 @@
                         reporting: [],
 
                         isLoading: true,
+
+                        entity: "{{ $entity }}",
                     }
                 },
 

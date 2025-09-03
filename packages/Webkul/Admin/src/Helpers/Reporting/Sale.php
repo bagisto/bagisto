@@ -444,12 +444,14 @@ class Sale extends AbstractReporting
      */
     public function getTopTaxCategories($limit = null): Collection
     {
+        $tablePrefix = DB::getTablePrefix();
+
         return $this->orderItemRepository
             ->resetModel()
             ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->leftJoin('tax_categories', 'order_items.tax_category_id', '=', 'tax_categories.id')
             ->select('tax_categories.id as tax_category_id', 'tax_categories.name')
-            ->addSelect(DB::raw('SUM(order_items.base_tax_amount_invoiced - order_items.base_tax_amount_refunded) as total'))
+            ->addSelect(DB::raw("SUM({$tablePrefix}order_items.base_tax_amount_invoiced - {$tablePrefix}order_items.base_tax_amount_refunded) as total"))
             ->whereIn('orders.channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->whereNotNull('tax_category_id')
@@ -477,7 +479,6 @@ class Sale extends AbstractReporting
      *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
-     * @return array
      */
     public function getShippingCollected($startDate, $endDate): float
     {
