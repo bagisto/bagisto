@@ -1,24 +1,23 @@
 @props(['options'])
 @php
     $firstImage = $options['images'][0]['image'] ?? null;
-
 @endphp
 
 @if($firstImage)
     @pushOnce('styles')
-    <link
-        rel="preload"
-        as="image"
-        href="{{ asset($firstImage) }}"
-        imagesrcset="
-            {{ asset($firstImage) }} 1920w,
-            {{ str_replace('storage', 'cache/large', asset($firstImage)) }} 1280w,
-            {{ str_replace('storage', 'cache/medium', asset($firstImage)) }} 1024w,
-            {{ str_replace('storage', 'cache/small', asset($firstImage)) }} 525w
-        "
-        imagesizes="100vw"
-        fetchpriority="high"
-    >
+        <link
+            rel="preload"
+            as="image"
+            href="{{ str_replace('storage', 'cache/large', asset($firstImage)) }}"
+            imagesrcset="
+                {{ str_replace('storage', 'cache/small', asset($firstImage)) }} 525w,
+                {{ str_replace('storage', 'cache/medium', asset($firstImage)) }} 1024w,
+                {{ str_replace('storage', 'cache/large', asset($firstImage)) }} 1280w,
+                {{ asset($firstImage) }} 1920w,
+            "
+            imagesizes="100vw"
+            fetchpriority="high"
+        >
     @endPushOnce
 @endif
 
@@ -49,15 +48,19 @@
                         class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
                         ::lazy="index === 0 ? false : true"
                         ::src="image.image.replace('storage', 'cache/large')"
-                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
+                        ::srcset="
+                            image.image.replace('storage', 'cache/small') + ' 525w, ' +
+                            image.image.replace('storage', 'cache/medium') + ' 1024w, ' +
+                            image.image.replace('storage', 'cache/large') + ' 1280w,'
+                        "
                         ::sizes="
-                            '(max-width: 525px) 525px, ' +
-                            '(max-width: 1024px) 1024px, ' +
-                            '(max-width: 1280px) 1280px, ' +
-                            '1920px'
+                            '(max-width: 600px) 100vh, ' +
+                            '(max-width: 1024px) 100vh, ' +
+                            '(max-width: 1440px) 90vh, '
                         "
                         ::alt="image?.title"
                         tabindex="0"
+                        ::loading="eager"
                         ::fetchpriority="index === 0 ? 'high' : 'auto'"
                     />
                 </div>

@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
         build: {
             emptyOutDir: true,
             minify: "esbuild",
+            cssCodeSplit: true,
             rollupOptions: {
                 output: {
                     manualChunks: {
@@ -44,7 +45,7 @@ export default defineConfig(({ mode }) => {
                 ],
                 refresh: true,
                 valetTls: true,
-                preload: true,
+                preload: false,
             }),
         ],
 
