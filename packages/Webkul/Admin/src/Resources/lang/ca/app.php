@@ -1298,7 +1298,7 @@ return [
                         'validations' => [
                             'type-mismatch'      => 'El tipus de reserva no es pot canviar.',
                             'time-validation'    => "L'hora d'inici ha de ser menor que l'hora de finalització.",
-                            'overlap-validation' => "La franja horària se solapa amb una franja existent.",
+                            'overlap-validation' => 'La franja horària se solapa amb una franja existent.',
                         ],
                     ],
 
