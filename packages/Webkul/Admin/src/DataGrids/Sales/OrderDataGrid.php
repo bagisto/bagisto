@@ -142,13 +142,11 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
             'closure'    => function ($row) {
-                $methods = explode('|', $row->method);
-                $methods = array_map(function ($method) {
-                    return core()->getConfigData('sales.payment_methods.'.$method.'.title');
-                }, $methods);
-                $methods = array_filter($methods);
-                $methods = array_unique($methods);
-                return implode(', ', $methods);
+                return collect(explode('|', $row->method))
+                    ->map(fn ($method) => core()->getConfigData('sales.payment_methods.' . $method . '.title'))
+                    ->filter()
+                    ->unique()
+                    ->join(', ');
             },
         ]);
 
