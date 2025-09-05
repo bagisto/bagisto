@@ -16,6 +16,20 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10838 [fixed] - Fixed the cart issue.
 
+* #10711 [fixed] - Show validation error in cart rule coupons when entering wrong input.
+
+* #10694 [fixed] - Closed time slot should show all the time slots except the mentioned one.
+
+* #10693 [fixed] - Fixed issue where multiple bookings created for back-to-back days showed all bookings starting on the first day, even if they started later.
+
+* #10692 [fixed] - Show all time slots in default booking type (one booking for many days).
+
+* #10686 [fixed] - Prevent customer from updating the quantity of appointment booking type.
+
+* #10684 [fixed] - Show validation error when entering wrong time slot.
+
+* #10682 [fixed] - Show correct alert message when entering wrong date in the "available to" column of booking product.
+
 ## **v2.3.6 (27th of June 2025)** - *Release*
 
 * Added a method in the Installer class to prompt for a GitHub star once the installation is completed.
