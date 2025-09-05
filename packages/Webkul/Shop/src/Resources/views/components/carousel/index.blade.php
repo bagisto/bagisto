@@ -1,25 +1,5 @@
 @props(['options'])
-@php
-    $firstImage = $options['images'][0]['image'] ?? null;
-@endphp
 
-@if($firstImage)
-    @pushOnce('styles')
-        <link
-            rel="preload"
-            as="image"
-            href="{{ str_replace('storage', 'cache/large', asset($firstImage)) }}"
-            imagesrcset="
-                {{ str_replace('storage', 'cache/small', asset($firstImage)) }} 525w,
-                {{ str_replace('storage', 'cache/medium', asset($firstImage)) }} 1024w,
-                {{ str_replace('storage', 'cache/large', asset($firstImage)) }} 1280w,
-                {{ asset($firstImage) }} 1920w,
-            "
-            imagesizes="100vw"
-            fetchpriority="high"
-        >
-    @endPushOnce
-@endif
 
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="overflow-hidden">
@@ -41,27 +21,24 @@
                 <div
                     class="max-h-screen w-screen bg-cover bg-no-repeat"
                     v-for="(image, index) in images"
+                    :key="index"
                     @click="visitLink(image)"
                     ref="slide"
                 >
                     <x-shop::media.images.lazy
-                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
+                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
                         ::lazy="index === 0 ? false : true"
-                        ::src="image.image.replace('storage', 'cache/large')"
-                        ::srcset="
-                            image.image.replace('storage', 'cache/small') + ' 525w, ' +
-                            image.image.replace('storage', 'cache/medium') + ' 1024w, ' +
-                            image.image.replace('storage', 'cache/large') + ' 1280w,'
-                        "
+                        ::src="image.image"
+                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
                         ::sizes="
-                            '(max-width: 600px) 100vh, ' +
-                            '(max-width: 1024px) 100vh, ' +
-                            '(max-width: 1440px) 90vh, '
+                            '(max-width: 525px) 525px, ' +
+                            '(max-width: 1024px) 1024px, ' +
+                            '1280px'
                         "
-                        ::alt="image?.title"
+                        ::alt="image?.title || 'Carousel Image ' + (index + 1)"
                         tabindex="0"
-                        ::loading="eager"
-                        ::fetchpriority="index === 0 ? 'high' : 'auto'"
+                        ::fetchpriority="index === 0 ? 'high' : 'low'"
+                        ::decoding="index === 0 ? 'sync' : 'async'"
                     />
                 </div>
             </div>
@@ -104,7 +81,7 @@
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     role="button"
                     tabindex="0"
-                    :aria-label="{'Go to slide': index + 1 }"
+                    :aria-label="'Go to slide ' + (index + 1)"
                     @click="navigateByPagination(index)"
                     @keydown.enter="navigateByPagination(index)"
                     @keydown.space.prevent="navigateByPagination(index)"
@@ -146,11 +123,26 @@
                     this.slides = Array.from(this.$refs.slide);
                 }
 
-                this.init();
+                // Use requestIdleCallback for non-critical initialization
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(() => {
+                        this.init();
+                        setTimeout(() => {
+                            this.play();
+                        }, 4000);
+                    });
+                } else {
+                    setTimeout(() => {
+                        this.init();
+                        setTimeout(() => {
+                            this.play();
+                        }, 4000);
+                    });
+                }
+            },
 
-                setTimeout(() => {
-                    this.play();
-                }, 4000);
+            beforeUnmount() {
+                this.cleanup();
             },
 
             methods: {
@@ -318,6 +310,27 @@
 
                         this.setPositionByIndex();
                     }, 5000);
+                },
+
+                cleanup() {
+                    // Clear intervals and animation frames
+                    clearInterval(this.autoPlayInterval);
+                    cancelAnimationFrame(this.animationID);
+
+                    // Remove event listeners
+                    if (this.slides) {
+                        this.slides.forEach(slide => {
+                            slide.removeEventListener('mousedown', this.handleDragStart);
+                            slide.removeEventListener('touchstart', this.handleDragStart);
+                            slide.removeEventListener('mouseup', this.handleDragEnd);
+                            slide.removeEventListener('mouseleave', this.handleDragEnd);
+                            slide.removeEventListener('touchend', this.handleDragEnd);
+                            slide.removeEventListener('mousemove', this.handleDrag);
+                            slide.removeEventListener('touchmove', this.handleDrag);
+                        });
+                    }
+
+                    window.removeEventListener('resize', this.setPositionByIndex);
                 },
             },
         });

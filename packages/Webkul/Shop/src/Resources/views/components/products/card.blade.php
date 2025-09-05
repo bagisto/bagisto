@@ -28,7 +28,6 @@
                         ::srcset="`
                             ${product.base_image.small_image_url} 150w,
                             ${product.base_image.medium_image_url} 300w,
-                            ${product.base_image.large_image_url} 600w
                         `"
                         sizes="(max-width: 768px) 150px, (max-width: 1200px) 300px, 600px"
                         ::key="product.id"

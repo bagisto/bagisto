@@ -33,11 +33,11 @@
                             :aria-label="category.name"
                         >
                             <x-shop::media.images.lazy
-                                ::src="category.logo?.small_image_url || '{{ bagisto_asset('images/small-product-placeholder.webp') }}'"
+                                ::src="category.logo?.small_image_url || fallback"
                                 ::srcset="`
-                                    ${category.logo?.small_image_url} 60w,
-                                    ${category.logo?.medium_image_url} 110w,
-                                    ${category.logo?.large_image_url} 300w
+                                    ${(category.logo?.small_image_url || fallback)} 60w,
+                                    ${(category.logo?.medium_image_url || fallback)} 110w,
+                                    ${(category.logo?.large_image_url || fallback)} 300w
                                 `"
                                 sizes="(max-width: 640px) 60px, 110px"
                                 width="110"
@@ -106,6 +106,8 @@
                     categories: [],
 
                     offset: 323,
+
+                    fallback: "{{ bagisto_asset('images/small-product-placeholder.webp') }}"
                 };
             },
 
