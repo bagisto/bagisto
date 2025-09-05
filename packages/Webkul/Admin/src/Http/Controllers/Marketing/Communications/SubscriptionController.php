@@ -85,7 +85,15 @@ class SubscriptionController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->subscribersListRepository->delete($id);
+            $subscription = $this->subscribersListRepository->findOrFail($id);
+
+            if ($subscription->customer) {
+                $subscription->customer->subscribed_to_news_letter = false;
+
+                $subscription->customer->save();
+            }
+
+            $subscription->delete();
 
             return response()->json([
                 'message' => trans('admin::app.marketing.communications.subscribers.delete-success'),

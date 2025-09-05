@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Rezervasyon türü değiştirilemez.',
+                            'type-mismatch'      => 'Rezervasyon türü değiştirilemez.',
+                            'time-validation'    => 'Başlangıç zamanı, bitiş zamanından küçük olmalıdır.',
+                            'overlap-validation' => 'Zaman aralığı mevcut bir aralıkla çakışıyor.',
                         ],
                     ],
 

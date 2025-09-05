@@ -200,6 +200,7 @@
                                 type="text"
                                 id="usage_per_customer"
                                 name="usage_per_customer"
+                                rules="numeric"
                                 :label="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-customer')"
                                 :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-customer')"
                             />

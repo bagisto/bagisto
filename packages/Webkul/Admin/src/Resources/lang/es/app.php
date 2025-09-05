@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'El tipo de reserva no se puede cambiar.',
+                            'type-mismatch'      => 'El tipo de reserva no se puede cambiar.',
+                            'time-validation'    => 'La hora de inicio debe ser menor que la hora de finalización.',
+                            'overlap-validation' => 'El intervalo de tiempo se superpone con un intervalo existente.',
                         ],
                     ],
 

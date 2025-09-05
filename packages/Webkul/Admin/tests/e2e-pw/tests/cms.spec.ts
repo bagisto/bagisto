@@ -48,9 +48,8 @@ async function createPage(adminPage) {
      */
     await adminPage.click('button.primary-button:has-text("Save Page")');
     await expect(
-        adminPage.getByText("CMS created successfully.")
+        adminPage.locator("#app p", { hasText: "CMS created successfully." })
     ).toBeVisible();
-
     await expect(adminPage.getByText(cms.name)).toBeVisible();
     await expect(adminPage.getByText(cms.slug)).toBeVisible();
 
@@ -110,7 +109,9 @@ test.describe("cms management", () => {
          */
         await adminPage.click('button.primary-button:has-text("Save Page")');
         await expect(
-            adminPage.getByText("CMS updated successfully.")
+            adminPage.locator("#app p", {
+                hasText: "CMS updated successfully.",
+            })
         ).toBeVisible();
         await expect(adminPage.getByText(cms.name)).toBeVisible();
         await expect(adminPage.getByText(cms.slug)).toBeVisible();
@@ -149,9 +150,11 @@ test.describe("cms management", () => {
 
         /**
          * Alert message for deleting a CMS page should appear.
-         */
+         */ ("CMS deleted successfully.");
         await expect(
-            adminPage.getByText("CMS deleted successfully.")
+            adminPage.locator("#app p", {
+                hasText: "CMS deleted successfully.",
+            })
         ).toBeVisible();
         await expect(adminPage.getByText(cms.name)).not.toBeVisible();
     });
