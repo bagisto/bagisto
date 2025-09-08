@@ -1,6 +1,5 @@
 @props(['options'])
 
-
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="overflow-hidden">
         <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
@@ -33,7 +32,8 @@
                         ::sizes="
                             '(max-width: 525px) 525px, ' +
                             '(max-width: 1024px) 1024px, ' +
-                            '1280px'
+                            '(max-width: 1600px) 1280px, ' +
+                            '1920px'
                         "
                         ::alt="image?.title || 'Carousel Image ' + (index + 1)"
                         tabindex="0"

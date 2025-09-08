@@ -395,7 +395,9 @@
             },
 
             mounted() {
-
+                if (!this.cart) {
+                    this.getCart();
+                }
                 /**
                  * To Do: Implement this.
                  *

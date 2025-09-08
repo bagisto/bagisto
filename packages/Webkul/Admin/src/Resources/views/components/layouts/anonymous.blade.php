@@ -48,7 +48,7 @@
             href="{{ Storage::url($favicon) }}"
             rel="shortcut icon"
             sizes="16x16"
-        >
+        />
     @else
         <link
             type="image/x-icon"
