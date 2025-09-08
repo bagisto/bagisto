@@ -129,7 +129,11 @@ async function createSimpleProduct(adminPage) {
      * Checking the product in the list.
      */
     await adminPage.goto("admin/catalog/products");
-    await expect(adminPage.getByText(`${name}`)).toBeVisible();
+    await expect(
+        adminPage
+            .locator("p.break-all.text-base")
+            .filter({ hasText: product.name })
+    ).toBeVisible();
 }
 
 async function createConfigurableProduct(adminPage) {
@@ -314,7 +318,9 @@ async function createConfigurableProduct(adminPage) {
      * Checking the product in the list.
      */
     await adminPage.goto("admin/catalog/products");
-    await expect(adminPage.getByText(`${name}`)).toBeVisible();
+    await expect(
+        adminPage.getByRole("paragraph").filter({ hasText: product.name })
+    ).toBeVisible();
 }
 
 async function createGroupedProduct(adminPage) {
@@ -459,7 +465,9 @@ async function createGroupedProduct(adminPage) {
      * Checking the product in the list.
      */
     await adminPage.goto("admin/catalog/products");
-    await expect(adminPage.getByText(`${name}`)).toBeVisible();
+    await expect(
+        adminPage.getByRole("paragraph").filter({ hasText: product.name })
+    ).toBeVisible();
 }
 
 async function createVirtualProduct(adminPage) {
@@ -572,7 +580,9 @@ async function createVirtualProduct(adminPage) {
      * Checking the product in the list.
      */
     await adminPage.goto("admin/catalog/products");
-    await expect(adminPage.getByText(`${name}`)).toBeVisible();
+    await expect(
+        adminPage.getByRole("paragraph").filter({ hasText: product.name })
+    ).toBeVisible();
 }
 
 async function createDownloadableProduct(adminPage) {
@@ -716,7 +726,9 @@ async function createDownloadableProduct(adminPage) {
      * Checking the product in the list.
      */
     await adminPage.goto("admin/catalog/products");
-    await expect(adminPage.getByText(`${name}`)).toBeVisible();
+    await expect(
+        adminPage.getByRole("paragraph").filter({ hasText: product.name })
+    ).toBeVisible();
 }
 
 async function createBookingProduct(adminPage) {
@@ -845,13 +857,16 @@ test.describe("simple product management", () => {
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
-        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        const parent = adminPage
+            .locator(
+                ".flex.items-center.justify-between.gap-x-4 > .flex.items-center"
+            )
+            .first();
+
+        await parent
+            .locator(".cursor-pointer.icon-sort-right")
+            .waitFor({ state: "visible" });
+        await parent.locator(".cursor-pointer.icon-sort-right").click();
 
         /**
          * Waiting for the main form to be visible.
@@ -973,9 +988,9 @@ test.describe("configurable product management", () => {
          * Opening the configurable product though edit button.
          */
         await adminPage
-            .locator(
-                "div:nth-child(7) > div:nth-child(3) > p > span:nth-child(2)"
-            )
+            .locator("div.flex.items-center.justify-between")
+            .nth(7)
+            .locator(".icon-sort-right")
             .click();
 
         /**
@@ -1017,13 +1032,15 @@ test.describe("configurable product management", () => {
         );
 
         await adminPage.waitForSelector(
-            "div:nth-child(7) > div > .icon-uncheckbox",
+            "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox",
             {
                 state: "visible",
             }
         );
         await adminPage
-            .locator("div:nth-child(7) > div > .icon-uncheckbox")
+            .locator(
+                "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox"
+            )
             .click();
 
         let selectActionButton = await adminPage.waitForSelector(
@@ -1066,13 +1083,15 @@ test.describe("configurable product management", () => {
         );
 
         await adminPage.waitForSelector(
-            "div:nth-child(7) > div > .icon-uncheckbox",
+            "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox",
             {
                 state: "visible",
             }
         );
         await adminPage
-            .locator("div:nth-child(7) > div > .icon-uncheckbox")
+            .locator(
+                "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox"
+            )
             .click();
 
         let selectActionButton = await adminPage.waitForSelector(
@@ -1116,13 +1135,16 @@ test.describe("grouped product management", () => {
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
-        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        const parent = adminPage
+            .locator(
+                ".flex.items-center.justify-between.gap-x-4 > .flex.items-center"
+            )
+            .first();
+
+        await parent
+            .locator(".cursor-pointer.icon-sort-right")
+            .waitFor({ state: "visible" });
+        await parent.locator(".cursor-pointer.icon-sort-right").click();
 
         /**
          * Waiting for the main form to be visible.
@@ -1258,13 +1280,16 @@ test.describe("virtual product management", () => {
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
-        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        const parent = adminPage
+            .locator(
+                ".flex.items-center.justify-between.gap-x-4 > .flex.items-center"
+            )
+            .first();
+
+        await parent
+            .locator(".cursor-pointer.icon-sort-right")
+            .waitFor({ state: "visible" });
+        await parent.locator(".cursor-pointer.icon-sort-right").click();
 
         /**
          * Waiting for the main form to be visible.
@@ -1394,13 +1419,16 @@ test.describe("downloadable product management", () => {
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Create Product")'
         );
-        await adminPage.waitForSelector("span.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        const parent = adminPage
+            .locator(
+                ".flex.items-center.justify-between.gap-x-4 > .flex.items-center"
+            )
+            .first();
+
+        await parent
+            .locator(".cursor-pointer.icon-sort-right")
+            .waitFor({ state: "visible" });
+        await parent.locator(".cursor-pointer.icon-sort-right").click();
 
         /**
          * Waiting for the main form to be visible.
@@ -1558,7 +1586,7 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .click();
-                await adminPage.waitForTimeout(500); // Adding a delay of 0.5 second
+                await adminPage.waitForTimeout(500);
 
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
@@ -1576,7 +1604,12 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save Product" })
                 .click();
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
 
         test("should create default product with many booking for one day", async ({
@@ -1654,6 +1687,9 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .fill("35");
+                await adminPage
+                    .getByRole("spinbutton", { name: "Minute" })
+                    .press("Enter");
 
                 /**
                  * Available To.
@@ -1679,6 +1715,9 @@ test.describe("booking product management", () => {
                 await adminPage
                     .getByRole("spinbutton", { name: "Minute" })
                     .fill("35");
+                await adminPage
+                    .getByRole("spinbutton", { name: "Minute" })
+                    .press("Enter");
 
                 /**
                  * Timeout of 0.5sec.
@@ -1730,7 +1769,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the product name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
     });
 
@@ -1794,6 +1838,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Slot 1 time available to.
@@ -1813,7 +1860,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("55");
-
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
             /**
              * Adding slot 2 and waiting for time slot to be visible.
              */
@@ -1841,6 +1890,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("10");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Slot 2 time available to.
@@ -1858,6 +1910,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Saving the slots.
@@ -1889,7 +1944,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
 
         test("should create appointment booking product that are not available every week with no same slot for all days", async ({
@@ -2063,7 +2123,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
 
         test("should create appointment booking product that are available every week with no same slot for all days", async ({
@@ -2174,6 +2239,9 @@ test.describe("booking product management", () => {
                     const fromMin = await adminPage
                         .getByRole("spinbutton", { name: "Minute" })
                         .fill("00");
+                    await adminPage
+                        .getByRole("spinbutton", { name: "Minute" })
+                        .press("Enter");
 
                     /**
                      * Adding slots as per day available to.
@@ -2198,6 +2266,9 @@ test.describe("booking product management", () => {
                     const toMin = await adminPage
                         .getByRole("spinbutton", { name: "Minute" })
                         .fill("55");
+                    await adminPage
+                        .getByRole("spinbutton", { name: "Minute" })
+                        .press("Enter");
 
                     /**
                      * Clicking on Add Slots.
@@ -2238,7 +2309,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
 
         test("should create appointment booking product that are available every week with same slot for all days", async ({
@@ -2300,6 +2376,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Slot 1 time available to.
@@ -2319,6 +2398,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("55");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Adding slot 2 and waiting for time slot to be visible.
@@ -2348,6 +2430,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("10");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Slot 2 time available to.
@@ -2365,6 +2450,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
 
             /**
              * Saving the slots.
@@ -2397,7 +2485,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
     });
 
@@ -2461,7 +2554,12 @@ test.describe("booking product management", () => {
             /**
              * Expecting the Product Name to be visible.
              */
-            await expect(adminPage.getByText(product.name)).toBeVisible();
+            await adminPage.goto("admin/catalog/products");
+            await expect(
+                adminPage
+                    .getByRole("paragraph")
+                    .filter({ hasText: product.name })
+            ).toBeVisible();
         });
     });
 
@@ -2884,6 +2982,9 @@ test.describe("booking product management", () => {
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("20");
             await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
+            await adminPage
                 .getByRole("textbox", { name: "To", exact: true })
                 .click();
             await adminPage
@@ -2893,6 +2994,9 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();

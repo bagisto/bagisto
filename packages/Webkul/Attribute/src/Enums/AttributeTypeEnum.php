@@ -69,4 +69,21 @@ enum AttributeTypeEnum: string
             self::cases()
         );
     }
+
+    /**
+     * Get boolean options.
+     */
+    public static function getBooleanOptions(): array
+    {
+        return [
+            [
+                'id'   => 0,
+                'name' => trans('attribute::app.boolean.options.no'),
+            ],
+            [
+                'id'   => 1,
+                'name' => trans('attribute::app.boolean.options.yes'),
+            ],
+        ];
+    }
 }

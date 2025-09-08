@@ -856,6 +856,15 @@ return [
             'clear-all' => 'すべてクリア',
             'filter'    => 'フィルター',
             'filters'   => 'フィルター:',
+
+            'search' => [
+                'load-more'            => 'さらに読み込む',
+                'loading'              => '読み込み中...',
+                'no-options-available' => '利用可能なオプションがありません。',
+                'results-info'         => ':totalCount 件中 :currentCount 件を表示',
+                'title'                => '検索',
+            ],
+
             'sort'      => '並び替え',
         ],
 

@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Esborrar tot',
             'filter'    => 'Filtrar',
             'filters'   => 'Filtres:',
+
+            'search' => [
+                'load-more'            => 'Carrega més',
+                'loading'              => 'Carregant...',
+                'no-options-available' => 'No hi ha opcions disponibles.',
+                'results-info'         => 'Mostrant :currentCount de :totalCount opcions',
+                'title'                => 'Cerca',
+            ],
+
             'sort'      => 'Ordenar',
         ],
 
@@ -1021,6 +1030,7 @@ return [
                 'street-address'         => 'Adreça',
                 'telephone'              => 'Telèfon',
                 'title'                  => 'Adreça',
+                'vat-id'                 => 'Número d\'Identificació Fiscal',
             ],
 
             'index' => [

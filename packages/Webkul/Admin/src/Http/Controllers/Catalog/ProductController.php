@@ -323,6 +323,14 @@ class ProductController extends Controller
      */
     public function search()
     {
+        $query = trim(request('query'));
+
+        if (empty($query)) {
+            return response()->json([
+                'data' => [],
+            ]);
+        }
+
         $searchEngine = 'database';
 
         if (

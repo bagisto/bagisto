@@ -84,6 +84,7 @@
                                         @{{ available.columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
                                     </span>
                                 </span>
+
                                 <!-- Filter Arrow Icon -->
                                 <i
                                     class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -92,6 +93,7 @@
                                 ></i>
                             </p>
                         </div>
+                        
                         <!-- Actions -->
                         @if ($hasPermission)
                             <p class="flex justify-end gap-2.5">
@@ -117,7 +119,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(150px, 1fr));'"
                         >
                             <!-- ID -->
                             <p>@{{ record.user_id }}</p>

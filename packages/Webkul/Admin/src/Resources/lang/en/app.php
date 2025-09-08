@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Table Booking',
                             'title'       => 'Type',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'The booking type cannot be changed.',
+                            'time-validation'    => 'Start time must be less than end time.',
+                            'overlap-validation' => 'Time slot overlaps with an existing slot.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -3371,10 +3377,11 @@ return [
             'cannot-change'      => 'User cannot be changed',
             'create-success'     => 'User created successfully.',
             'delete-failed'      => 'User deleted failed.',
+            'delete-self-error'  => 'You cannot delete your own account.',
             'delete-success'     => 'User deleted successfully.',
             'delete-warning'     => 'Are you sure, you want to perform this action?',
             'incorrect-password' => 'Incorrect password',
-            'last-delete-error'  => 'Last User delete failed',
+            'last-delete-error'  => 'Atleast one admin is required.',
             'login-error'        => 'Please check your credentials and try again.',
             'update-success'     => 'User updated successfully.',
         ],
@@ -3735,21 +3742,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => 'Configure settings for enabling or disabling automated speculation logic.',
-                        'title' => 'Speculation Rules',
+                        'enable-speculation' => 'Enable Speculation Rules',
+                        'info'               => 'Configure settings for enabling or disabling automated speculation logic.',
+                        'title'              => 'Speculation Rules',
 
-                        'settings' => [
-                            'eagerness'              => 'Eagerness Level',
-                            'eager'                  => 'Eager',
-                            'moderate'               => 'Moderate',
+                        'prerender' => [
                             'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prerender Eagerness Level',
                             'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
-                            'ignore-url-params'      => 'Ignore URL Parameters',
+                            'enabled'                => 'Enable Prerender Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prerender URL Parameters',
                             'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
-                            'ignore-urls'            => 'Ignore URLs',
+                            'ignore-urls'            => 'Ignore Prerender URLs',
                             'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
                             'info'                   => 'Set speculation rules status.',
-                            'title'                  => 'Enable Speculation Rules',
+                            'moderate'               => 'Moderate',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservative',
+                            'eager'                  => 'Eager',
+                            'eagerness'              => 'Prefetch Eagerness Level',
+                            'eagerness-info'         => 'Controls how aggressively speculation rules are applied. Options: eager (max), moderate (default), conservative (low).',
+                            'enabled'                => 'Enable Prefetch Speculation Rules',
+                            'ignore-url-params'      => 'Ignore Prefetch URL Parameters',
+                            'ignore-url-params-info' => 'Specify URL parameters to ignore in speculation rules. Use pipe (|) to separate multiple parameters.',
+                            'ignore-urls'            => 'Ignore Prefetch URLs',
+                            'ignore-urls-info'       => 'Enter URLs to be excluded from speculation logic. Separate multiple URLs with a pipe (|) symbol.',
+                            'info'                   => 'Set speculation rules status.',
+                            'moderate'               => 'Moderate',
                         ],
                     ],
 

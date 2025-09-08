@@ -317,6 +317,7 @@
 
                                             <div class="flex items-center gap-2.5 max-md:mt-2.5">
                                                 <x-shop::quantity-changer
+                                                    v-if="item.can_change_qty"
                                                     class="flex max-w-max items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1.5 max-md:px-1 max-md:py-0.5"
                                                     name="quantity"
                                                     ::value="item?.quantity"
@@ -519,9 +520,9 @@
 
                         this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
-                                this.cart = response.data.data;
-
                                 if (response.data.message) {
+                                    this.cart = response.data.data;
+                                    
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });

@@ -856,6 +856,15 @@ return [
             'clear-all' => 'پاک کردن همه',
             'filter'    => 'فیلتر',
             'filters'   => 'فیلترها:',
+
+            'search' => [
+                'load-more'            => 'بارگذاری بیشتر',
+                'loading'              => 'در حال بارگذاری...',
+                'no-options-available' => 'گزینه‌ای در دسترس نیست.',
+                'results-info'         => 'نمایش :currentCount از :totalCount گزینه',
+                'title'                => 'جستجو',
+            ],
+
             'sort'      => 'مرتب‌سازی',
         ],
 

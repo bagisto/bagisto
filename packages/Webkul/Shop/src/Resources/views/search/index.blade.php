@@ -62,7 +62,7 @@
                         <!-- Product List Card Container -->
                         <div
                             class="mt-8 grid grid-cols-1 gap-6"
-                            v-if="filters.toolbar.mode === 'list'"
+                            v-if="(filters.toolbar.applied.mode ?? filters.toolbar.default.mode) === 'list'"
                         >
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
@@ -169,7 +169,11 @@
                         },
 
                         filters: {
-                            toolbar: {},
+                            toolbar: {
+                                default: {},
+
+                                applied: {},
+                            },
 
                             filter: {},
                         },
@@ -182,7 +186,7 @@
 
                 computed: {
                     queryParams() {
-                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar);
+                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar.applied);
 
                         return this.removeJsonEmptyValues(queryParams);
                     },

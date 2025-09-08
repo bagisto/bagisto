@@ -856,6 +856,15 @@ return [
             'clear-all' => 'सब क्लियर करें',
             'filter'    => 'फ़िल्टर',
             'filters'   => 'फ़िल्टर:',
+
+            'search' => [
+                'load-more'            => 'और लोड करें',
+                'loading'              => 'लोड हो रहा है...',
+                'no-options-available' => 'कोई विकल्प उपलब्ध नहीं है।',
+                'results-info'         => ':totalCount विकल्पों में से :currentCount दिखा रहे हैं',
+                'title'                => 'खोज',
+            ],
+
             'sort'      => 'क्रमबद्ध करें',
         ],
 

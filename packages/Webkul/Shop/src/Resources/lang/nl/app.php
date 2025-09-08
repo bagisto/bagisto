@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Alles wissen',
             'filter'    => 'Filter',
             'filters'   => 'Filters:',
+
+            'search' => [
+                'load-more'            => 'Meer laden',
+                'loading'              => 'Bezig met laden...',
+                'no-options-available' => 'Geen opties beschikbaar.',
+                'results-info'         => ':currentCount van :totalCount opties weergegeven',
+                'title'                => 'Zoeken',
+            ],
+
             'sort'      => 'Sorteer',
         ],
 

@@ -163,8 +163,6 @@ class Core
 
     /**
      * Returns current channel code.
-     *
-     * @return \Webkul\Core\Contracts\Channel
      */
     public function getCurrentChannelCode(): string
     {
@@ -653,7 +651,7 @@ class Core
 
         $date->setTimezone($channel->timezone);
 
-        return $date->format($format);
+        return $date->translatedFormat($format);
     }
 
     /**
@@ -944,42 +942,78 @@ class Core
     {
         $configPath = 'general.content.speculation_rules.';
 
-        $eagerness = $this->getConfigData($configPath.'eagerness') ?? 'moderate';
+        $rules = [];
 
-        $ignoreUrls = array_filter(
-            explode('|', $this->getConfigData($configPath.'ignore_urls')),
-            fn ($url) => trim($url) !== ''
-        );
+        /**
+         * Prerender Rules
+         */
+        if ($this->getConfigData($configPath.'prerender_enabled')) {
+            $prerenderEagerness = $this->getConfigData($configPath.'prerender_eagerness') ?? 'moderate';
 
-        $ignoreUrlParams = array_filter(
-            explode('|', $this->getConfigData($configPath.'ignore_url_params')),
-            fn ($param) => trim($param) !== ''
-        );
+            $prerenderIgnoreUrls = array_filter(
+                explode('|', $this->getConfigData($configPath.'prerender_ignore_urls')),
+                fn ($url) => trim($url) !== ''
+            );
 
-        $conditions = [['href_matches' => '/*']];
+            $prerenderIgnoreParams = array_filter(
+                explode('|', $this->getConfigData($configPath.'prerender_ignore_url_params')),
+                fn ($param) => trim($param) !== ''
+            );
 
-        foreach ($ignoreUrls as $url) {
-            $conditions[] = ['not' => ['href_matches' => trim($url)]];
-        }
+            $conditions = [['href_matches' => '/*']];
 
-        foreach ($ignoreUrlParams as $param) {
-            $param = trim($param);
-            $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
-        }
+            foreach ($prerenderIgnoreUrls as $url) {
+                $conditions[] = ['not' => ['href_matches' => trim($url)]];
+            }
 
-        return [
-            'prerender' => [[
+            foreach ($prerenderIgnoreParams as $param) {
+                $param = trim($param);
+                $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+            }
+
+            $rules['prerender'][] = [
                 'source'    => 'document',
                 'where'     => ['and' => $conditions],
-                'eagerness' => $eagerness,
-            ]],
-            'prefetch' => [[
+                'eagerness' => $prerenderEagerness,
+            ];
+        }
+
+        /**
+         * Prefetch Rules
+         */
+        if ($this->getConfigData($configPath.'prefetch_enabled')) {
+            $prefetchEagerness = $this->getConfigData($configPath.'prefetch_eagerness') ?? 'moderate';
+
+            $prefetchIgnoreUrls = array_filter(
+                explode('|', $this->getConfigData($configPath.'prefetch_ignore_urls')),
+                fn ($url) => trim($url) !== ''
+            );
+
+            $prefetchIgnoreParams = array_filter(
+                explode('|', $this->getConfigData($configPath.'prefetch_ignore_url_params')),
+                fn ($param) => trim($param) !== ''
+            );
+
+            $conditions = [['href_matches' => '/*']];
+
+            foreach ($prefetchIgnoreUrls as $url) {
+                $conditions[] = ['not' => ['href_matches' => trim($url)]];
+            }
+
+            foreach ($prefetchIgnoreParams as $param) {
+                $param = trim($param);
+                $conditions[] = ['not' => ['selector_matches' => "[href*='?{$param}=']"]];
+            }
+
+            $rules['prefetch'][] = [
                 'source'          => 'document',
                 'where'           => ['and' => $conditions],
                 'requires'        => ['anonymous-client-ip-when-cross-origin'],
                 'referrer_policy' => 'no-referrer',
-                'eagerness'       => $eagerness,
-            ]],
-        ];
+                'eagerness'       => $prefetchEagerness,
+            ];
+        }
+
+        return $rules;
     }
 }

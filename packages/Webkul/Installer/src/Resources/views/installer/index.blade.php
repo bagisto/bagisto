@@ -49,6 +49,7 @@
             'fr'    => 'french',
             'he'    => 'hebrew',
             'hi_IN' => 'hindi',
+            'id'    => 'indonesian',
             'it'    => 'italian',
             'ja'    => 'japanese',
             'nl'    => 'dutch',
@@ -563,9 +564,17 @@
                                         type="text"
                                         name="db_prefix"
                                         ::value="envData.db_prefix"
+                                        ::rules="{ 
+                                            max: 4, 
+                                            regex: /^[a-zA-Z0-9_]*$/
+                                        }"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-prefix')"
                                     />
+
+                                    <p class="mt-1 text-sm text-gray-500">
+                                        @lang('installer::app.installer.index.environment-configuration.database-prefix-help')
+                                    </p>
 
                                     <x-installer::form.control-group.error control-name="db_prefix" />
                                 </x-installer::form.control-group>

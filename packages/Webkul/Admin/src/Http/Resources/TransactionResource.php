@@ -24,7 +24,8 @@ class TransactionResource extends JsonResource
             'status'          => match ($this->status) {
                 'paid'      => '<span class="label-active">'.ucfirst($this->status).'</span>',
                 'pending'   => '<span class="label-pending">'.ucfirst($this->status).'</span>',
-                'completed' => '<span class="label-completed">'.ucfirst($this->status).'</span>',
+                'completed' => '<span class="label-active">'.ucfirst($this->status).'</span>',
+                default     => $this->status,
             },
             'created_at'      => $this->created_at->format('d M Y'),
         ];

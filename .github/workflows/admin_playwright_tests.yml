@@ -76,7 +76,7 @@ jobs:
         run: composer install
 
       - name: Running Bagisto Installer
-        run: php artisan bagisto:install --skip-env-check --skip-admin-creation
+        run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Seed Product Table
         run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
@@ -91,7 +91,7 @@ jobs:
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test --reporter=list --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/Admin
 
       - name: Upload Test Results
@@ -100,6 +100,7 @@ jobs:
         with:
           name: test-results-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
+            packages/Webkul/Admin/tests/e2e-pw/playwright-report
             packages/Webkul/Admin/tests/e2e-pw/test-results
             storage/logs/laravel.log
           retention-days: 1

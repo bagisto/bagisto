@@ -1,12 +1,12 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta 
-        name="description" 
+    <meta
+        name="description"
         content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"
     />
 
-    <meta 
-        name="keywords" 
+    <meta
+        name="keywords"
         content="{{ $category->meta_keywords }}"
     />
 
@@ -49,7 +49,7 @@
             </div>
         @endif
     @endif
-        
+
     {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
@@ -61,8 +61,8 @@
     @endif
 
     @pushOnce('scripts')
-        <script 
-            type="text/x-template" 
+        <script
+            type="text/x-template"
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-md:px-4">
@@ -80,7 +80,7 @@
                         <!-- Product List Card Container -->
                         <div
                             class="mt-8 grid grid-cols-1 gap-6"
-                            v-if="filters.toolbar.mode === 'list'"
+                            v-if="(filters.toolbar.applied.mode ?? filters.toolbar.default.mode) === 'list'"
                         >
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
@@ -106,7 +106,7 @@
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
-                                  
+
                                         <p
                                             class="text-xl max-md:text-sm"
                                             role="heading"
@@ -150,7 +150,7 @@
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
-                                        
+
                                         <p
                                             class="text-xl max-md:text-sm"
                                             role="heading"
@@ -205,13 +205,17 @@
 
                         isDrawerActive: {
                             toolbar: false,
-                            
+
                             filter: false,
                         },
 
                         filters: {
-                            toolbar: {},
-                            
+                            toolbar: {
+                                default: {},
+
+                                applied: {},
+                            },
+
                             filter: {},
                         },
 
@@ -225,7 +229,7 @@
 
                 computed: {
                     queryParams() {
-                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar);
+                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar.applied);
 
                         return this.removeJsonEmptyValues(queryParams);
                     },
@@ -257,14 +261,14 @@
                     getProducts() {
                         this.isDrawerActive = {
                             toolbar: false,
-                            
+
                             filter: false,
                         };
 
                         document.body.style.overflow ='scroll';
 
                         this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
-                            params: this.queryParams 
+                            params: this.queryParams
                         })
                             .then(response => {
                                 this.isLoading = false;

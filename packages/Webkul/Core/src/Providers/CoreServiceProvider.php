@@ -69,7 +69,7 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerOverrides(): void
     {
         $this->app->extend(
-            \Illuminate\Foundation\Console\DownCommand::class,
+            \Illuminate\Foundation\Console\UpCommand::class,
             fn () => new \Webkul\Core\Console\Commands\UpCommand
         );
 

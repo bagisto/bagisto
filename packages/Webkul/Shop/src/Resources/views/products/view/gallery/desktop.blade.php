@@ -79,6 +79,7 @@
             tabindex="0"
             @click="isImageZooming = !isImageZooming"
             @load="onMediaLoad()"
+            fetchpriority="high"
         />
 
         <div

@@ -856,6 +856,15 @@ return [
             'clear-all' => 'Cancella tutto',
             'filter'    => 'Filtro',
             'filters'   => 'Filtri:',
+
+            'search' => [
+                'load-more'            => 'Carica altro',
+                'loading'              => 'Caricamento...',
+                'no-options-available' => 'Nessuna opzione disponibile.',
+                'results-info'         => 'Mostrando :currentCount di :totalCount opzioni',
+                'title'                => 'Ricerca',
+            ],
+
             'sort'      => 'Ordina',
         ],
 

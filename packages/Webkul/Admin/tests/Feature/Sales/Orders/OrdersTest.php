@@ -88,9 +88,9 @@ it('should search the products via name for adding products to the cart', functi
     // Act and Assert.
     $this->loginAsAdmin();
 
-    getJson(route('admin.catalog.products.search'), [
+    getJson(route('admin.catalog.products.search', [
         'query' => $product->name,
-    ])
+    ]))
         ->assertOk()
         ->assertJsonPath('data.0.id', $product->id)
         ->assertJsonPath('data.0.name', $product->name)

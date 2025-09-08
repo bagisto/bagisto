@@ -44,7 +44,7 @@ class CategoryRequest extends FormRequest
             return $rules;
         }
 
-        $rules['slug'] = ['required', new ProductCategoryUniqueSlug];
+        $rules['slug'] = ['required', new ProductCategoryUniqueSlug('category_translations')];
         $rules['name'] = 'required';
         $rules['description'] = 'required_if:display_mode,==,description_only,products_and_description';
 

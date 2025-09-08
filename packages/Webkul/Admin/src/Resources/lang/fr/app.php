@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Réservation de table',
                             'title'       => 'Type',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'Le type de réservation ne peut pas être modifié.',
+                            'time-validation'    => "L'heure de début doit être inférieure à l'heure de fin.",
+                            'overlap-validation' => "Le créneau horaire chevauche un créneau existant.",
+                        ],
                     ],
 
                     'downloadable' => [
@@ -3371,6 +3377,7 @@ return [
             'cannot-change'      => 'L\'utilisateur ne peut pas être modifié.',
             'create-success'     => 'Utilisateur créé avec succès.',
             'delete-failed'      => 'Échec de la suppression de l\'utilisateur.',
+            'delete-self-error'  => 'Vous ne pouvez pas supprimer votre propre compte.',
             'delete-success'     => 'Utilisateur supprimé avec succès.',
             'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
             'incorrect-password' => 'Mot de passe incorrect',
@@ -3735,21 +3742,36 @@ return [
                     ],
 
                     'speculation-rules' => [
-                        'info'  => 'Configurez les paramètres pour activer ou désactiver la logique de spéculation automatique.',
-                        'title' => 'Règles de spéculation',
+                        'enable-speculation' => 'Activer les règles de spéculation',
+                        'info'               => 'Configurer les paramètres pour activer ou désactiver la logique de spéculation automatique.',
+                        'title'              => 'Règles de spéculation',
 
-                        'settings' => [
-                            'eagerness'              => 'Niveau d’empressement',
-                            'eager'                  => 'Elevé',
-                            'moderate'               => 'Modéré',
+                        'prerender' => [
                             'conservative'           => 'Conservateur',
-                            'eagerness-info'         => 'Contrôle l’intensité des règles de spéculation. Options : élevé (max), modéré (défaut), conservateur (faible).',
-                            'ignore-url-params'      => 'Ignorer les paramètres URL',
-                            'ignore-url-params-info' => 'Spécifiez les paramètres d’URL à ignorer. Utilisez le symbole | pour les séparer.',
-                            'ignore-urls'            => 'Ignorer les URLs',
-                            'ignore-urls-info'       => 'Entrez les URLs à exclure de la logique de spéculation. Séparez-les avec le symbole |.',
-                            'info'                   => 'Définir l’état des règles de spéculation.',
-                            'title'                  => 'Activer les règles de spéculation',
+                            'eager'                  => 'Avide',
+                            'eagerness'              => 'Niveau d’empressement du Prerender',
+                            'eagerness-info'         => 'Contrôle l’agressivité d’application des règles de spéculation. Options : avide (max), modéré (par défaut), conservateur (faible).',
+                            'enabled'                => 'Activer les règles de spéculation Prerender',
+                            'ignore-url-params'      => 'Ignorer les paramètres d’URL pour Prerender',
+                            'ignore-url-params-info' => 'Spécifiez les paramètres d’URL à ignorer dans les règles de spéculation. Utilisez le caractère pipe (|) pour en séparer plusieurs.',
+                            'ignore-urls'            => 'Ignorer les URLs de Prerender',
+                            'ignore-urls-info'       => 'Entrez les URLs à exclure de la logique de spéculation. Séparez-les avec un caractère pipe (|).',
+                            'info'                   => 'Définir le statut des règles de spéculation.',
+                            'moderate'               => 'Modéré',
+                        ],
+
+                        'prefetch' => [
+                            'conservative'           => 'Conservateur',
+                            'eager'                  => 'Avide',
+                            'eagerness'              => 'Niveau d’empressement du Prefetch',
+                            'eagerness-info'         => 'Contrôle l’agressivité d’application des règles de spéculation. Options : avide (max), modéré (par défaut), conservateur (faible).',
+                            'enabled'                => 'Activer les règles de spéculation Prefetch',
+                            'ignore-url-params'      => 'Ignorer les paramètres d’URL pour Prefetch',
+                            'ignore-url-params-info' => 'Spécifiez les paramètres d’URL à ignorer dans les règles de spéculation. Utilisez le caractère pipe (|) pour en séparer plusieurs.',
+                            'ignore-urls'            => 'Ignorer les URLs de Prefetch',
+                            'ignore-urls-info'       => 'Entrez les URLs à exclure de la logique de spéculation. Séparez-les avec un caractère pipe (|).',
+                            'info'                   => 'Définir le statut des règles de spéculation.',
+                            'moderate'               => 'Modéré',
                         ],
                     ],
 
@@ -3872,6 +3894,49 @@ return [
                     ],
                 ],
 
+                'gdpr' => [
+                    'title' => 'GDPR',
+                    'info'  => 'Paramètres de conformité au GDPR',
+
+                    'settings' => [
+                        'title'   => 'Paramètres de conformité au GDPR',
+                        'info'    => 'Gérer les paramètres de conformité au GDPR, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du GDPR selon les besoins.',
+                        'enabled' => 'Activer le GDPR',
+                    ],
+
+                    'agreement' => [
+                        'title'          => 'Accord GDPR',
+                        'info'           => 'Gérer le consentement des clients conformément aux réglementations GDPR. Activer le consentement obligatoire pour la collecte et le traitement des données.',
+                        'enable'         => 'Activer le consentement des clients',
+                        'checkbox-label' => 'Étiquette de la case à cocher pour le consentement',
+                        'content'        => 'Contenu du consentement',
+                    ],
+
+                    'cookie' => [
+                        'bottom-left'  => 'En bas à gauche',
+                        'bottom-right' => 'En bas à droite',
+                        'center'       => 'Centre',
+                        'description'  => 'Description',
+                        'enable'       => 'Activer la notification des cookies',
+                        'identifier'   => 'Identifiant du bloc statique',
+                        'info'         => 'Configurer les paramètres de consentement des cookies pour informer les utilisateurs de la collecte de données et se conformer aux politiques de confidentialité.',
+                        'position'     => 'Position d\'affichage du bloc de cookies',
+                        'title'        => 'Paramètres de notification des cookies',
+                        'top-left'     => 'En haut à gauche',
+                        'top-right'    => 'En haut à droite',
+                    ],
+
+                    'cookie-consent' => [
+                        'title'                  => 'Gérer vos paramètres de cookies',
+                        'info'                   => 'Contrôlez comment vos données sont utilisées en sélectionnant les paramètres de cookies souhaités. Configurez les autorisations pour différents types de cookies.',
+                        'strictly-necessary'     => 'Strictement nécessaire',
+                        'basic-interaction'      => 'Interaction et fonctionnalité de base',
+                        'experience-enhancement' => 'Amélioration de l\'expérience',
+                        'measurement'            => 'Mesure',
+                        'targeting-advertising'  => 'Ciblage et publicité',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info'  => 'Configurer les options du plan du site.',
                     'title' => 'Plan du Site',
@@ -3888,49 +3953,6 @@ return [
                         'max-url-per-file' => 'Nombre maximal d\'URL par fichier',
                         'title'            => 'Limites de Fichier',
                     ],
-                ],
-            ],
-
-            'gdpr' => [
-                'title' => 'GDPR',
-                'info'  => 'Paramètres de conformité au GDPR',
-
-                'settings' => [
-                    'title'   => 'Paramètres de conformité au GDPR',
-                    'info'    => 'Gérer les paramètres de conformité au GDPR, y compris la politique de confidentialité. Activer ou désactiver les fonctionnalités du GDPR selon les besoins.',
-                    'enabled' => 'Activer le GDPR',
-                ],
-
-                'agreement' => [
-                    'title'          => 'Accord GDPR',
-                    'info'           => 'Gérer le consentement des clients conformément aux réglementations GDPR. Activer le consentement obligatoire pour la collecte et le traitement des données.',
-                    'enable'         => 'Activer le consentement des clients',
-                    'checkbox-label' => 'Étiquette de la case à cocher pour le consentement',
-                    'content'        => 'Contenu du consentement',
-                ],
-
-                'cookie' => [
-                    'bottom-left'  => 'En bas à gauche',
-                    'bottom-right' => 'En bas à droite',
-                    'center'       => 'Centre',
-                    'description'  => 'Description',
-                    'enable'       => 'Activer la notification des cookies',
-                    'identifier'   => 'Identifiant du bloc statique',
-                    'info'         => 'Configurer les paramètres de consentement des cookies pour informer les utilisateurs de la collecte de données et se conformer aux politiques de confidentialité.',
-                    'position'     => 'Position d\'affichage du bloc de cookies',
-                    'title'        => 'Paramètres de notification des cookies',
-                    'top-left'     => 'En haut à gauche',
-                    'top-right'    => 'En haut à droite',
-                ],
-
-                'cookie-consent' => [
-                    'title'                  => 'Gérer vos paramètres de cookies',
-                    'info'                   => 'Contrôlez comment vos données sont utilisées en sélectionnant les paramètres de cookies souhaités. Configurez les autorisations pour différents types de cookies.',
-                    'strictly-necessary'     => 'Strictement nécessaire',
-                    'basic-interaction'      => 'Interaction et fonctionnalité de base',
-                    'experience-enhancement' => 'Amélioration de l\'expérience',
-                    'measurement'            => 'Mesure',
-                    'targeting-advertising'  => 'Ciblage et publicité',
                 ],
             ],
 
