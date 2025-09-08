@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Nie można zmienić typu rezerwacji.',
+                            'type-mismatch'      => 'Nie można zmienić typu rezerwacji.',
+                            'time-validation'    => 'Czas rozpoczęcia musi być wcześniejszy niż czas zakończenia.',
+                            'overlap-validation' => 'Przedział czasowy nakłada się na istniejący przedział.',
                         ],
                     ],
 

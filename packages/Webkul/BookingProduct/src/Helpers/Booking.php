@@ -340,14 +340,63 @@ class Booking
      */
     public function slotsCalculation(object $bookingProduct, object $requestedDate, object $bookingProductSlot): array
     {
+        $slots = [];
+            
         if ($bookingProduct->type == 'default') {
             [$availableFrom, $availableTo, $timeDurations] = $this->getDefaultSlotDetails($bookingProduct, $bookingProductSlot, $requestedDate);
 
-            if (
-                ! count($timeDurations)
-                || ! $timeDurations[0]['status']
-            ) {
+            if (! count($timeDurations)) {
                 return [];
+            }
+
+            if ( 
+                isset($timeDurations[0]['status']) 
+                && $timeDurations[0]['status'] == 0
+            ) {
+                $start = $requestedDate->copy()->startOfDay();
+                  
+                $end = $requestedDate->copy()->endOfDay();
+
+                $currentTime  = clone $start;
+
+                while ($currentTime < $end) {
+                    $to = (clone $currentTime)->addMinutes($bookingProductSlot->duration);
+
+                    $isClosed = false;
+                    
+                    foreach ($timeDurations as $slot) {
+                        if (! ($slot['status'] ?? 1)) {
+                            $closedFrom = Carbon::parse($requestedDate->format('Y-m-d').' '.$slot['from']);
+                            
+                            $closedTo   = Carbon::parse($requestedDate->format('Y-m-d').' '.$slot['to']);
+                            
+                            if (
+                                $currentTime < $closedTo 
+                                && $to > $closedFrom
+                            ) {
+                                $isClosed = true;
+                                
+                                break;
+                            }
+                        }
+                    }
+
+                    if (
+                        ! $isClosed 
+                        && Carbon::now() <= $currentTime
+                    ) {
+                        $slots[] = [
+                            'from'      => $currentTime->format('h:i A'),
+                            'to'        => $to->format('h:i A'),
+                            'timestamp' => $currentTime->getTimestamp().'-'.$to->getTimestamp(),
+                            'qty'       => $timeDuration['qty'] ?? 1,
+                        ];
+                    }
+
+                    $currentTime->addMinutes($bookingProductSlot->duration + $bookingProductSlot->break_time);
+                }
+
+                return $slots;
             }
         } else {
             [$availableFrom, $availableTo, $timeDurations] = $this->getSlotDetails($bookingProduct, $bookingProductSlot, $requestedDate);
@@ -359,8 +408,6 @@ class Booking
                 return [];
             }
         }
-
-        $slots = [];
 
         foreach ($timeDurations as $index => $timeDuration) {
             $fromChunks = explode(':', $timeDuration['from']);
@@ -427,6 +474,8 @@ class Booking
                                 'timestamp' => $from->getTimestamp().'-'.$to->getTimestamp(),
                                 'qty'       => $qty,
                             ];
+
+                            usort($slots, fn($first, $second) => strtotime($first['from']) <=> strtotime($second['from']));
                         }
                     }
                 } else {

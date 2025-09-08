@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Der Buchungstyp kann nicht geändert werden.',
+                            'type-mismatch'      => 'Der Buchungstyp kann nicht geändert werden.',
+                            'time-validation'    => 'Die Startzeit muss kleiner als die Endzeit sein.',
+                            'overlap-validation' => 'Der Zeitraum überschneidet sich mit einem vorhandenen Zeitraum.',
                         ],
                     ],
 

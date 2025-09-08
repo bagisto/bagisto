@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => '予約タイプは変更できません。',
+                            'type-mismatch'      => '予約タイプは変更できません。',
+                            'time-validation'    => '開始時間は終了時間より前でなければなりません。',
+                            'overlap-validation' => '時間帯が既存のスロットと重なっています。',
                         ],
                     ],
 

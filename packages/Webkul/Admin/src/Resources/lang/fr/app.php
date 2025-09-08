@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Le type de réservation ne peut pas être modifié.',
+                            'type-mismatch'      => 'Le type de réservation ne peut pas être modifié.',
+                            'time-validation'    => "L'heure de début doit être inférieure à l'heure de fin.",
+                            'overlap-validation' => "Le créneau horaire chevauche un créneau existant.",
                         ],
                     ],
 

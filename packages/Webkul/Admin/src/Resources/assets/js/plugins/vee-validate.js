@@ -256,8 +256,8 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
-                        decimal: "To {field} musi być prawidłową liczbą dziesiętną.",
-                        phone: "To {field} musi być prawidłowy numer telefonu.",
+                        decimal: "Pole {field} musi być prawidłową liczbą dziesiętną.",
+                        phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
                     },
                 },
 
