@@ -97,7 +97,6 @@ test.describe("design configuration", () => {
         ).toBeVisible();
     });
 
-
     test("should Set sidebar Menu category view", async ({ adminPage }) => {
         /**
          * Select the default menu category view.
@@ -107,15 +106,23 @@ test.describe("design configuration", () => {
             "sidebar"
         );
         await adminPage
-            .locator(".flex.items-center.justify-between.gap-2\\.5")
+            .getByRole("button", { name: " Preview Sidebar Menu " })
             .click();
+         await expect(
+            adminPage.locator(".flex.items-center.justify-between.gap-2\\.5")
+        ).toBeVisible();
+
         await adminPage.locator(".icon-cancel-1").click();
+
+        await adminPage
+            .getByRole("button", { name: "Save Configuration" })
+            .click();
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
             })
         ).toBeVisible();
-        
+
         /**
          * chekk whether the sidebar menu category view is set or not.
          */
@@ -164,8 +171,7 @@ test.describe("design configuration", () => {
         await adminPage.hover('a:has-text("Men")');
         await adminPage.waitForTimeout(2000);
         await expect(
-            adminPage.locator("a", { hasText: /Winter Wear/ })
+            adminPage.getByRole("link", { name: "Winter Wear" }).first()
         ).toBeVisible();
     });
-
 });
