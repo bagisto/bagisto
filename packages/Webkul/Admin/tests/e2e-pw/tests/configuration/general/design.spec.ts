@@ -96,4 +96,76 @@ test.describe("design configuration", () => {
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
     });
+
+
+    test("should Set sidebar Menu category view", async ({ adminPage }) => {
+        /**
+         * Select the default menu category view.
+         */
+        await adminPage.selectOption(
+            '[name="general[design][categories][category_view]"]',
+            "sidebar"
+        );
+        await adminPage
+            .locator(".flex.items-center.justify-between.gap-2\\.5")
+            .click();
+        await adminPage.locator(".icon-cancel-1").click();
+        await expect(
+            adminPage.locator("#app p", {
+                hasText: "Configuration saved successfully",
+            })
+        ).toBeVisible();
+        
+        /**
+         * chekk whether the sidebar menu category view is set or not.
+         */
+        await adminPage.goto("");
+        await expect(adminPage.getByText("All", { exact: true })).toBeVisible();
+        await adminPage
+            .locator("#app span")
+            .filter({ hasText: "All" })
+            .locator("span")
+            .click();
+        await adminPage.locator(".icon-cancel").first().click();
+    });
+    test("should Set default Menu category view", async ({ adminPage }) => {
+        /**
+         * Select the default menu category view.
+         */
+        await adminPage.selectOption(
+            '[name="general[design][categories][category_view]"]',
+            "default"
+        );
+
+        await adminPage
+            .getByRole("button", { name: "Preview Default Menu" })
+            .click();
+        await expect(
+            adminPage.locator(".flex.items-center.justify-between.gap-2\\.5")
+        ).toBeVisible();
+
+        await adminPage.locator(".icon-cancel-1").click();
+        await adminPage
+            .getByRole("button", { name: "Save Configuration" })
+            .click();
+        await expect(
+            adminPage.locator("#app p", {
+                hasText: "Configuration saved successfully",
+            })
+        ).toBeVisible();
+
+        /**
+         * Chekk whether the menu category view is set to default or not.
+         */
+
+        await adminPage.goto("");
+        await expect(adminPage.getByText("Men").first()).toBeVisible();
+        await adminPage.waitForTimeout(2000);
+        await adminPage.hover('a:has-text("Men")');
+        await adminPage.waitForTimeout(2000);
+        await expect(
+            adminPage.locator("a", { hasText: /Winter Wear/ })
+        ).toBeVisible();
+    });
+
 });

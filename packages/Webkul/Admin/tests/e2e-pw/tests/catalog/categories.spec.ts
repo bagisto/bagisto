@@ -71,7 +71,7 @@ async function createCategory(adminPage) {
 
     await adminPage.click('button:has-text("Save Category")');
 
-    await expect(adminPage.getByText('Category created successfully.')).toBeVisible();
+    await expect(adminPage.locator('#app p', { hasText: 'Category created successfully.' })).toBeVisible();
 }
 
 test.describe('category management', () => {
@@ -93,7 +93,7 @@ test.describe('category management', () => {
 
         await adminPage.click('button:has-text("Save Category")');
 
-        await expect(adminPage.getByText('Category updated successfully.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
 
     test('should delete a category', async ({ adminPage }) => {
@@ -107,8 +107,7 @@ test.describe('category management', () => {
         await iconDelete[0].click();
 
         await adminPage.click('button.transparent-button + button.primary-button:visible');
-
-        await expect(adminPage.getByText('The category has been successfully deleted.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 
     test('should mass update a categories', async ({ adminPage }) => {
@@ -135,7 +134,7 @@ test.describe('category management', () => {
             console.error("Agree button not found or not visible.");
         }
 
-        await expect(adminPage.getByText('Category updated successfully.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
 
     test('should mass delete a categories', async ({ adminPage }) => {
@@ -162,7 +161,6 @@ test.describe('category management', () => {
         } else {
             console.error("Agree button not found or not visible.");
         }
-
-        await expect(adminPage.getByText('The category has been successfully deleted.')).toBeVisible();
+        await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 });
