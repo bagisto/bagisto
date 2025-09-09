@@ -70,7 +70,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|extensions:'.$supportedFormats.'|mimes:'.$supportedFormats,
+            'file'                => 'required|extensions:'.$supportedFormats.'|mimetypes:text/plain,text/csv,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
@@ -148,7 +148,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'extensions:'.$supportedFormats.'|mimes:'.$supportedFormats,
+            'file'                => 'extensions:'.$supportedFormats.'|mimetypes:text/plain,text/csv,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');
