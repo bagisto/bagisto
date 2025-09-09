@@ -276,6 +276,14 @@
                 },
 
                 create(params) {
+                    if (this.selectedPrice.value_type === 'fixed' && parseFloat(this.selectedPrice.value) > parseFloat(@json($product->price))) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: 'Group price cannot be greater than product price (' + @json($product->price) + ')',
+                        });
+                        return;
+                    }
+
                     if (this.selectedPrice.id == undefined) {
                         params.id = 'price_' + this.prices.length;
 
