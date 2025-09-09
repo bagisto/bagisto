@@ -143,7 +143,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'closure'    => function ($row) {
                 return collect(explode('|', $row->method))
-                    ->map(fn ($method) => core()->getConfigData('sales.payment_methods.' . $method . '.title'))
+                    ->map(fn ($method) => core()->getConfigData('sales.payment_methods.'.$method.'.title'))
                     ->filter()
                     ->unique()
                     ->join(', ');

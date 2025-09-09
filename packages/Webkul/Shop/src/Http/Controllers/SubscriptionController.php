@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
         $email = request()->input('email');
 
         $subscription = $this->subscriptionRepository->findOneByField('email', $email);
-        
+
         Event::dispatch('customer.subscription.before');
 
         if ($subscription) {
