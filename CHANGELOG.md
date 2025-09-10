@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
+* #10912 [fixed] - ACL invoice create not used correctly
+
 * #10897 [fixed] - Fixed missing success message when admin approving the review.
 
 * #10883 [fixed] - Fixed broken artisan commands. 
@@ -33,8 +35,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #10684 [fixed] - Show validation error when entering wrong time slot.
 
 * #10682 [fixed] - Show correct alert message when entering wrong date in the "available to" column of booking product.
-
-* #10912 [fixed] - ACL invoice create not used correctly
 
 ## **v2.3.6 (27th of June 2025)** - *Release*
 
