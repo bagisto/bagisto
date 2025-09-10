@@ -253,17 +253,7 @@
         </x-shop::accordion>
     </div>
 
-    <!-- Featured Products -->
-    <x-shop::products.carousel
-        :title="trans('shop::app.products.view.related-product-title')"
-        :src="route('shop.api.products.related.index', ['id' => $product->id])"
-    />
-
-    <!-- Up-sell Products -->
-    <x-shop::products.carousel
-        :title="trans('shop::app.products.view.up-sell-title')"
-        :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
-    />
+    <v-product-associations />
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
@@ -660,6 +650,54 @@
                         }
                     },
                 },
+            });
+        </script>
+
+        <script
+            type="text/x-template"
+            id="v-product-associations-template"
+        >
+            <div ref="carouselWrapper">
+                <template v-if="isVisible">
+
+                <!-- Featured Products -->
+                    <x-shop::products.carousel
+                        :title="trans('shop::app.products.view.related-product-title')"
+                        :src="route('shop.api.products.related.index', ['id' => $product->id])"
+                    />
+
+                    <!-- Up-sell Products -->
+                    <x-shop::products.carousel
+                        :title="trans('shop::app.products.view.up-sell-title')"
+                        :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
+                    />
+                </template>
+
+            </div>
+        </script>
+        <script type="module">
+            app.component('v-product-associations', {
+                template: '#v-product-associations-template',
+                data() {
+                    return {
+                        isVisible: false,
+                    };
+                },
+                mounted() {
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    this.isVisible = true;
+                                    observer.unobserve(entry.target); // Stop observing
+                                }
+                            });
+                        },
+                        { threshold: 0.1 }
+                    );
+
+                    observer.observe(this.$refs.carouselWrapper);
+                }
             });
         </script>
     @endPushOnce
