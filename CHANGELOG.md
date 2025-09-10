@@ -34,6 +34,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10682 [fixed] - Show correct alert message when entering wrong date in the "available to" column of booking product.
 
+* #10912 [fixed] - ACL invoice create not used correctly
+
 ## **v2.3.6 (27th of June 2025)** - *Release*
 
 * Added a method in the Installer class to prompt for a GitHub star once the installation is completed.
