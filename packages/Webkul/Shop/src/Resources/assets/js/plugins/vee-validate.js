@@ -249,8 +249,8 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
-                        phone: "To {field} musi być prawidłowy numer telefonu",
-                        address: "To {field} musi być prawidłowym adresem",
+                        phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
+                        address: "Pole {field} musi zawierać prawidłowy adres",
                     },
                 },
 

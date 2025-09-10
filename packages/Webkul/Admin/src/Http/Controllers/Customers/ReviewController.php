@@ -67,7 +67,7 @@ class ReviewController extends Controller
         Event::dispatch('customer.review.update.after', $review);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.reviews.update-success'),
+            'message' => trans('admin::app.customers.reviews.index.edit.update-success'),
         ]);
     }
 
