@@ -276,11 +276,14 @@
                 },
 
                 create(params) {
-                    if (this.selectedPrice.value_type === 'fixed' && parseFloat(this.selectedPrice.value) > parseFloat(@json($product->price))) {
+                    // Get product price from Blade variable (no JSON)
+                    let productPrice = {{$product->price}};
+                    if (this.selectedPrice.value_type === 'fixed' && parseFloat(this.selectedPrice.value) > productPrice) {
                         this.$emitter.emit('add-flash', {
                             type: 'error',
-                            message: 'Group price cannot be greater than product price (' + @json($product->price) + ')',
+                            message: `@lang('admin::app.catalog.products.edit.price.group.error-message', ['price' => $product->price])`,
                         });
+                        this.$refs.groupPriceCreateModal.close();
                         return;
                     }
 

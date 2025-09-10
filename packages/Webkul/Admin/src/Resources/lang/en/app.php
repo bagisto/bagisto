@@ -839,6 +839,7 @@ return [
                         'empty-info'                => 'Special pricing for customers belonging to a specific group.',
                         'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
                         'title'                     => 'Customer Group Price',
+                        'error-message' => 'Group price cannot be greater than product price (:price)',
 
                         'create' => [
                             'all-groups'     => 'All Groups',
