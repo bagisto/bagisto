@@ -275,8 +275,7 @@
                     return group ? group.name : "@lang('admin::app.catalog.products.edit.price.group.all-groups')";
                 },
 
-                create(params) {
-                    // Get product price from Blade variable (no JSON)
+                create(params) {     
                     let productPrice = {{$product->price}};
                     if (this.selectedPrice.value_type === 'fixed' && parseFloat(this.selectedPrice.value) > productPrice) {
                         this.$emitter.emit('add-flash', {
