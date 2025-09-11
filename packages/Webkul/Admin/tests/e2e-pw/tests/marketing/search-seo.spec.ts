@@ -298,7 +298,7 @@ test.describe("search-seo management", () => {
     test.describe("search terms management", () => {
         test("should create new search term", async ({ adminPage }) => {
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
             };
 
             /**
@@ -434,7 +434,7 @@ test.describe("search-seo management", () => {
             adminPage,
         }) => {
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
             };
 
             /**
