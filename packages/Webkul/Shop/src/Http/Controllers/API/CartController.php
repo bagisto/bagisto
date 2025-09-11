@@ -211,7 +211,7 @@ class CartController extends APIController
                 if (! $coupon) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
-                        'message'  => trans('shop::app.checkout.coupon.not-found'),
+                        'message'  => trans('shop::app.checkout.coupon.invalid'),
                     ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
 
