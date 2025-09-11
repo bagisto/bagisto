@@ -133,6 +133,28 @@ Bagisto is a fully open-source Laravel eCommerce framework that will always rema
 # Security Vulnerabilities
 If you think that you have found a security issue in Bagisto, please do not use the issue tracker and do not post it publicly. Instead, all security issues must be sent to [mailto:support@bagisto.com](mailto:support@bagisto.com).
 
+# Running Tests
+
+Bagisto uses PHPUnit for testing. To run the test suite, use the following command:
+
+```bash
+php artisan test
+```
+
+Or, if you prefer to use PHPUnit directly:
+
+```bash
+./vendor/bin/phpunit
+```
+
+Make sure you have installed all dependencies with Composer before running tests:
+
+```bash
+composer install
+```
+
+Running tests ensures your changes do not break existing functionality and helps maintain code quality.
+
 # Contributors
 
 This project is on [Open Collective](https://opencollective.com/bagisto), and it exists thanks to the people who contribute.
