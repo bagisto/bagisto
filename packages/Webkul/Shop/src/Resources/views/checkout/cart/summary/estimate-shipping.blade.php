@@ -127,7 +127,7 @@
                     v-if="methods.length"
                 >
                     <template v-for="method in methods">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.before') !!}
 
                         <div
                             class="relative select-none border-b border-zinc-200 last:border-b-0 max-md:max-w-full max-md:flex-auto"
@@ -158,7 +158,7 @@
                             </label>
                         </div>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.after') !!}
                     </template>
                 </div>
             </form>                    
