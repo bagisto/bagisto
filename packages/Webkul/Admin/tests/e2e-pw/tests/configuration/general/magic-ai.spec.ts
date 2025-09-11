@@ -1,9 +1,5 @@
 import { test, expect } from "../../../setup";
-import {
-    generateRandomStringWithSpaces,
-    generateRandomUrl,
-} from "../../../utils/form";
-import { generateName, generateDescription } from "../../../utils/faker";
+import { generateName, generateDescription, generateHostname } from "../../../utils/faker";
 
 test.describe("magic ai configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
@@ -28,13 +24,13 @@ test.describe("magic ai configuration", () => {
          */
         await adminPage
             .locator('input[name="general[magic_ai][settings][api_key]"]')
-            .fill(generateRandomStringWithSpaces(100));
+            .fill(generateDescription(20));
         await adminPage
             .locator('input[name="general[magic_ai][settings][organization]"]')
             .fill(generateName());
         await adminPage
             .locator('input[name="general[magic_ai][settings][api_domain]"]')
-            .fill(generateRandomUrl());
+            .fill(generateHostname());
 
         /**
          * Save the configuration.
