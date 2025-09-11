@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
+* #10912 [fixed] - ACL for create invoice is not correct.
+
 * #10897 [fixed] - Fixed missing success message when admin approving the review.
 
 * #10883 [fixed] - Fixed broken artisan commands. 
