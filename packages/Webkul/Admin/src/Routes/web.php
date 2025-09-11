@@ -8,7 +8,7 @@ use Webkul\Core\Http\Middleware\NoCacheMiddleware;
  */
 require 'auth-routes.php';
 
-Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', 'admin.2fa', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     /**
      * Sales routes.
      */
