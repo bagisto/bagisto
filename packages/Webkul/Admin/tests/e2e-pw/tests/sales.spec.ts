@@ -1,11 +1,13 @@
 import { test, expect } from "../setup";
-import * as forms from "../utils/form";
 import address from "../utils/address";
 import {
     generateFirstName,
     generateLastName,
     generateEmail,
     generatePhoneNumber,
+    generateDescription,
+    generateName,
+    generateRandomNumericString,
 } from "../utils/faker";
 
 export async function generateOrder(adminPage) {
@@ -244,7 +246,7 @@ test.describe("sales management", () => {
 
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
 
-        const lorem100 = forms.generateRandomStringWithSpaces(500);
+        const lorem100 = generateDescription(200);
         adminPage.fill('textarea[name="comment"]', lorem100);
         await adminPage
             .locator('span.icon-uncheckbox.cursor-pointer[role="button"]')
@@ -311,11 +313,11 @@ test.describe("sales management", () => {
 
         await adminPage.fill(
             'input[name="shipment[carrier_title]"]',
-            forms.generateRandomStringWithSpaces(20)
+            generateName()
         );
         await adminPage.fill(
             'input[name="shipment[track_number]"]',
-            forms.generateRandomStringWithSpaces(20)
+            generateRandomNumericString()
         );
 
         await adminPage

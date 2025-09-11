@@ -1,6 +1,5 @@
 import { test, expect } from "../../../setup";
-import { generateName } from "../../../utils/faker";
-import { generateRandomUrl } from "../../../utils/form";
+import { generateHostname, generateName } from "../../../utils/faker";
 
 test.describe("content configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
@@ -25,15 +24,13 @@ test.describe("content configuration", () => {
             .locator(
                 'input[name="general[content][header_offer][redirection_link]"]'
             )
-            .fill(generateRandomUrl());
+            .fill(generateHostname());
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
          * Verify the change is saved.
          */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 
     test("should add css and javascript", async ({ adminPage }) => {
@@ -58,8 +55,6 @@ test.describe("content configuration", () => {
         /**
          * Verify the change is saved.
          */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 });

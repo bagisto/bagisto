@@ -1,6 +1,5 @@
 import { test, expect } from '../../../setup';
-import { generateRandomNumericString, generateDescription } from '../../../utils/faker';
-import * as forms from "../../../utils/form";
+import { generateRandomNumericString, generateDescription, generateLastName, generateFirstName, generatePhoneNumber } from '../../../utils/faker';
 
 test.describe('Shipping Settings Configuration', () => {
     /**
@@ -22,12 +21,12 @@ test.describe('Shipping Settings Configuration', () => {
         const state = adminPage.locator('select[name="sales[shipping][origin][state]"]');
         await expect(state).toHaveValue('UP');
 
-        await adminPage.fill('input[name="sales[shipping][origin][city]"]', forms.form.lastName);
-        await adminPage.fill('input[name="sales[shipping][origin][address]"]', forms.form.firstName);
+        await adminPage.fill('input[name="sales[shipping][origin][city]"]', generateLastName());
+        await adminPage.fill('input[name="sales[shipping][origin][address]"]', generateFirstName());
         await adminPage.fill('input[name="sales[shipping][origin][zipcode]"]', generateRandomNumericString(6));
-        await adminPage.fill('input[name="sales[shipping][origin][store_name]"]', forms.form.firstName);
+        await adminPage.fill('input[name="sales[shipping][origin][store_name]"]', generateFirstName());
         await adminPage.fill('input[name="sales[shipping][origin][vat_number]"]', generateRandomNumericString(6));
-        await adminPage.fill('input[name="sales[shipping][origin][contact]"]', forms.form.phone);
+        await adminPage.fill('input[name="sales[shipping][origin][contact]"]', generatePhoneNumber());
         await adminPage.fill('textarea[name="sales[shipping][origin][bank_details]"]', generateDescription(200));
         
         await adminPage.click('button[type="submit"].primary-button:visible');
@@ -35,6 +34,6 @@ test.describe('Shipping Settings Configuration', () => {
         /**
          * Verify the change is saved.
          */
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 });

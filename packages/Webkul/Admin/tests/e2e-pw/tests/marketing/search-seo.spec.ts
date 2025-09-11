@@ -1,5 +1,6 @@
 import { test, expect } from "../../setup";
-import { generateRandomUrl } from "../../utils/form";
+import { generateHostname } from "../../utils/faker";
+
 
 test.describe("search-seo management", () => {
     test.describe("url rewrites management", () => {
@@ -10,7 +11,7 @@ test.describe("search-seo management", () => {
              * SEO main content will be filled and generated.
              */
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
                 product: "product",
             };
 
@@ -66,7 +67,7 @@ test.describe("search-seo management", () => {
              * Reaching to the url rewrite page.
              */
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
                 product: "product",
             };
 
@@ -112,7 +113,7 @@ test.describe("search-seo management", () => {
             adminPage,
         }) => {
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
             };
 
             /**
@@ -149,7 +150,7 @@ test.describe("search-seo management", () => {
             adminPage,
         }) => {
             const seo = {
-                url: generateRandomUrl(),
+                url: generateHostname(),
             };
 
             /**
