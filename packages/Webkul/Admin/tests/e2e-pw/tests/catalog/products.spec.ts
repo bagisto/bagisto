@@ -110,7 +110,7 @@ async function createSimpleProduct(adminPage) {
     await adminPage
         .locator("label")
         .filter({ hasText: "Men" })
-        .locator("span")
+        .locator("span.icon-uncheckbox")
         .click();
 
     /**
@@ -561,7 +561,7 @@ async function createVirtualProduct(adminPage) {
     await adminPage
         .locator("label")
         .filter({ hasText: "Men" })
-        .locator("span")
+        .locator("span.icon-uncheckbox")
         .click();
 
     /**
