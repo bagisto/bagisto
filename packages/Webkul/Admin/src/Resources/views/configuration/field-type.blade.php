@@ -17,7 +17,7 @@
         validations="{{ $field->getValidations() }}"
         is-require="{{ $field->isRequired() }}"
         depend-name="{{ $field->getDependFieldName() }}"
-        src="{{ Storage::url($value) }}"
+        src="{{ $value ? Storage::url($value) : '' }}"
         field-data="{{ json_encode($field) }}"
         channel-count="{{ $channels->count() }}"
         current-channel="{{ $currentChannel }}"
@@ -110,7 +110,7 @@
                         type="color"
                         v-bind="field"
                         :class="[errors.length ? 'border border-red-500' : '']"
-                        class="w-full appearance-none rounded-md border text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300 dark:hover:border-gray-400"
+                        class="w-full text-sm text-gray-600 transition-all border rounded-md appearance-none hover:border-gray-400 dark:text-gray-300 dark:hover:border-gray-400"
                     />
                 </v-field>
             </template>
@@ -213,13 +213,13 @@
                     :value="0"
                 />
         
-                <label class="relative inline-flex cursor-pointer items-center">
+                <label class="relative inline-flex items-center cursor-pointer">
                     <input  
                         type="checkbox"
                         :name="name"
                         :value="1"
                         :id="name"
-                        class="peer sr-only"
+                        class="sr-only peer"
                         :checked="parseInt(value || 0)"
                     >
 
@@ -276,7 +276,7 @@
                     :href="`{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), '']) }}/${value.split('/')[1]}`"
                 >
                     <div class="mb-1 inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
-                        <i class="icon-down-stat text-2xl"></i>
+                        <i class="text-2xl icon-down-stat"></i>
                     </div>
                 </a>
         
@@ -387,7 +387,7 @@
         
             <p
                 v-if="field.info && field.is_visible"
-                class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300"
+                class="block mt-1 text-xs italic leading-5 text-gray-600 dark:text-gray-300"
                 v-text="info"
             >
             </p>
