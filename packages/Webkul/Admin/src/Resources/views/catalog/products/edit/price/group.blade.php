@@ -275,7 +275,17 @@
                     return group ? group.name : "@lang('admin::app.catalog.products.edit.price.group.all-groups')";
                 },
 
-                create(params) {
+                create(params) {     
+                    let productPrice = {{$product->price}};
+                    if (this.selectedPrice.value_type === 'fixed' && parseFloat(this.selectedPrice.value) > productPrice) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: `@lang('admin::app.catalog.products.edit.price.group.error-message', ['price' => $product->price])`,
+                        });
+                        this.$refs.groupPriceCreateModal.close();
+                        return;
+                    }
+
                     if (this.selectedPrice.id == undefined) {
                         params.id = 'price_' + this.prices.length;
 
