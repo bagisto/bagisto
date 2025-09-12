@@ -164,20 +164,21 @@ class CartController extends APIController
             'shipping_method' => 'sometimes|required',
         ]);
 
-        $cart = Cart::getCart();
-
-        $address = (new CartAddress)->fill([
+        Cart::updateOrCreateBillingAddress([
             'country'  => request()->input('country'),
             'state'    => request()->input('state'),
             'postcode' => request()->input('postcode'),
-            'cart_id'  => $cart->id,
+            'address' => [],
+            'city'     => '',
         ]);
 
-        $cart->setRelation('billing_address', $address);
-
-        $cart->setRelation('shipping_address', $address);
-
-        Cart::setCart($cart);
+        Cart::updateOrCreateShippingAddress([
+            'country'  => request()->input('country'),
+            'state'    => request()->input('state'),
+            'postcode' => request()->input('postcode'),
+            'address'  => [],
+            'city'     => '',
+        ]);
 
         if (request()->has('shipping_method')) {
             Cart::saveShippingMethod(request()->input('shipping_method'));
