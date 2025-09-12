@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.before') !!}
 
 <v-shipping-methods
     :methods="shippingMethods"
@@ -9,7 +9,7 @@
     <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-methods>
 
-{!! view_render_event('bagisto.shop.checkout.onepage.shipping.after') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -38,7 +38,7 @@
                     <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:rounded-t-none max-md:border max-md:border-t-0 max-md:!p-4">
                         <div class="flex flex-wrap gap-8 max-md:gap-4 max-sm:gap-2.5">
                             <template v-for="method in methods">
-                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.before') !!}
 
                                 <div
                                     class="relative max-w-[218px] select-none max-md:max-w-full max-md:flex-auto"
@@ -77,7 +77,7 @@
                                     </label>
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping.after') !!}
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
                             </template>
                         </div>
                     </x-slot>
