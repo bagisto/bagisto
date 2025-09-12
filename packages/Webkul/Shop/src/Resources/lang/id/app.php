@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Hasil pencarian untuk: :query',
+        'title'   => 'Ini adalah hasil untuk : :query',
+        'suggest' => 'Cari sebagai gantinya',
         'results' => 'Hasil pencarian',
 
         'images' => [
