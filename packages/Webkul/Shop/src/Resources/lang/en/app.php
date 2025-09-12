@@ -885,7 +885,7 @@ return [
         'suggest' => 'Search instead for',
         'results' => 'Search results',
 
-        'images'  => [
+        'images' => [
             'index' => [
                 'only-images-allowed'  => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
                 'search'               => 'Search',
