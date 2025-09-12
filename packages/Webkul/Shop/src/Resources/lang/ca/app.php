@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Resultats per a: :query',
+        'title'   => 'Aquests són els resultats per a : :query',
+        'suggest' => 'Cerca en lloc de',
         'results' => 'Resultats de cerca',
 
         'images' => [

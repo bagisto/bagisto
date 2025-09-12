@@ -40,6 +40,10 @@ class CacheResponse extends BaseCacheResponseMiddleware
          * Redirect to the search term redirect url if the search term is found.
          */
         if ($request->route()->getName() == 'shop.search.index') {
+            if ($request->query('suggest') === '0') {
+                return $next($request);
+            }
+
             $searchTerm = app(SearchTermRepository::class)->findOneWhere([
                 'term'       => request()->query('query'),
                 'channel_id' => core()->getCurrentChannel()->id,

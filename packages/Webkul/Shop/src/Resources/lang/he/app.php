@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'תוצאות חיפוש עבור : :query',
+        'title'   => 'אלה התוצאות עבור : :query',
+        'suggest' => 'חפש במקום זאת',
         'results' => 'תוצאות חיפוש',
 
         'images' => [
