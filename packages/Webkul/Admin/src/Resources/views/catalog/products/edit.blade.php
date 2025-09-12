@@ -155,6 +155,10 @@
                     @foreach ($groups as $group)
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
+                        @if ($group->code === 'inventories' && $product->getTypeInstance()->isComposite())
+                            @continue
+                        @endif
+
                         @if ($customAttributes->isNotEmpty())
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
