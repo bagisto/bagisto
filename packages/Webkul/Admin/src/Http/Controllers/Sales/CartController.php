@@ -278,16 +278,16 @@ class CartController extends Controller
             }
 
             if ($coupon->cart_rule->status) {
-                if (Cart::getCart()->coupon_code == $params['code']) {
+                if (Cart::getCart()->coupon_code == $coupon->code) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
                         'message'  => trans('admin::app.sales.orders.create.coupon-already-applied'),
                     ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
 
-                Cart::setCouponCode($params['code'])->collectTotals();
+                Cart::setCouponCode($coupon->code)->collectTotals();
 
-                if (Cart::getCart()->coupon_code == $params['code']) {
+                if (Cart::getCart()->coupon_code == $coupon->code) {
                     return new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
                         'message'  => trans('admin::app.sales.orders.create.coupon-applied'),

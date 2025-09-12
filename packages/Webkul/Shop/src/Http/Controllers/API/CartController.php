@@ -211,21 +211,21 @@ class CartController extends APIController
                 if (! $coupon) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
-                        'message'  => trans('Coupon not found.'),
+                        'message'  => trans('shop::app.checkout.coupon.invalid'),
                     ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
 
                 if ($coupon->cart_rule->status) {
-                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
+                    if (Cart::getCart()->coupon_code == $coupon->code) {
                         return (new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
                             'message'  => trans('shop::app.checkout.coupon.already-applied'),
                         ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
-                    Cart::setCouponCode($validatedData['code'])->collectTotals();
+                    Cart::setCouponCode($coupon->code)->collectTotals();
 
-                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
+                    if (Cart::getCart()->coupon_code == $coupon->code) {
                         return new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
                             'message'  => trans('shop::app.checkout.coupon.success-apply'),
