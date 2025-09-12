@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { getRandomImageFile } from "../../../utils/form";
+import { getImageFile } from "../../../utils/faker";
 
 test.describe("design configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
@@ -18,7 +18,7 @@ test.describe("design configuration", () => {
         );
 
         if (logoInput) {
-            const filePath = getRandomImageFile();
+            const filePath = getImageFile();
             await logoInput.setInputFiles(filePath);
         } else {
             throw new Error("Logo input field not found");
@@ -29,9 +29,7 @@ test.describe("design configuration", () => {
         /**
          * Verify the change is saved.
          */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+       await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
 
         /**
          * Delete the uploaded logo.
@@ -48,9 +46,7 @@ test.describe("design configuration", () => {
         /**
          * Verify the change is saved.
          */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 
     test("should update and delete favicon", async ({ adminPage }) => {
@@ -62,7 +58,7 @@ test.describe("design configuration", () => {
         );
 
         if (faviconInput) {
-            const filePath = getRandomImageFile();
+            const filePath = getImageFile();
             await faviconInput.setInputFiles(filePath);
         } else {
             throw new Error("Favicon input field not found");

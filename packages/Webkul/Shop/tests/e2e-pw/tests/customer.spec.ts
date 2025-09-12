@@ -148,12 +148,8 @@ test("should be able to cancel order", async ({ page }) => {
     await page.getByRole("link", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
     
-    await page.waitForTimeout(4000);
-    await expect(
-        page
-            .getByRole("paragraph")
-            .filter({ hasText: "Your order has been canceled" })
-    ).toBeVisible();
+    await page.waitForTimeout(5000);
+    await expect(page.locator('div').filter({ hasText: 'Your order has been canceled' }).nth(2)).toBeVisible();
 });
 
 test("should be able to print invoice", async ({ page }) => {

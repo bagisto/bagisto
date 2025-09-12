@@ -852,3 +852,23 @@ export function generateLocation() {
 
     return location[Math.floor(Math.random() * location.length)];
 }
+
+export function generateRandomDate(
+    start: Date = new Date(),                      
+    end: Date = new Date(new Date().getFullYear(), 11, 31) 
+): string {
+    /**
+     * Generate a random timestamp between start and end
+     */ 
+    const timestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+    const randomDate = new Date(timestamp);
+
+    /**
+     * Format to YYYY-MM-DD 
+     */ 
+    const year = randomDate.getFullYear();
+    const month = String(randomDate.getMonth() + 1).padStart(2, "0");
+    const day = String(randomDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}

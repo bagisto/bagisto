@@ -8,7 +8,6 @@ import {
     generateFullName,
     generateDescription,
 } from "../../utils/faker";
-import * as forms from "../../utils/form";
 
 async function createCustomer(adminPage) {
     await adminPage.goto("admin/customers");
@@ -77,7 +76,7 @@ test.describe("customer management", () => {
             'input[name="last_name"]:visible',
             generateLastName()
         );
-        const email = forms.form.email;
+        const email = generateEmail();
         await adminPage.fill('input[name="email"]:visible', generateEmail());
         await adminPage.fill(
             'input[name="phone"]:visible',
@@ -118,10 +117,10 @@ test.describe("customer management", () => {
         await adminPage.fill('input[name="first_name"]', generateFirstName());
         await adminPage.fill('input[name="last_name"]', generateLastName());
         await adminPage.fill('input[name="email"]', generateEmail());
-        await adminPage.fill('input[name="address[0]"]', forms.form.firstName);
+        await adminPage.fill('input[name="address[0]"]', generateFirstName());
         await adminPage.selectOption('select[name="country"]', "IN");
         await adminPage.selectOption('select[name="state"]', "UP");
-        await adminPage.fill('input[name="city"]', forms.form.lastName);
+        await adminPage.fill('input[name="city"]', generateLastName());
         await adminPage.fill('input[name="postcode"]', "201301");
         await adminPage.fill('input[name="phone"]', generatePhoneNumber());
         await adminPage.press('input[name="phone"]', "Enter");
@@ -159,16 +158,16 @@ test.describe("customer management", () => {
 
         await createBtn[0].click();
 
-        await adminPage.fill('input[name="company_name"]', forms.form.lastName);
-        await adminPage.fill('input[name="first_name"]', forms.form.firstName);
-        await adminPage.fill('input[name="last_name"]', forms.form.lastName);
-        await adminPage.fill('input[name="email"]', forms.form.email);
-        await adminPage.fill('input[name="address[0]"]', forms.form.firstName);
+        await adminPage.fill('input[name="company_name"]', generateLastName());
+        await adminPage.fill('input[name="first_name"]', generateFirstName());
+        await adminPage.fill('input[name="last_name"]', generateLastName());
+        await adminPage.fill('input[name="email"]', generateEmail());
+        await adminPage.fill('input[name="address[0]"]', generateFirstName());
         await adminPage.selectOption('select[name="country"]', "IN");
         await adminPage.selectOption('select[name="state"]', "UP");
-        await adminPage.fill('input[name="city"]', forms.form.lastName);
+        await adminPage.fill('input[name="city"]', generateLastName());
         await adminPage.fill('input[name="postcode"]', "201301");
-        await adminPage.fill('input[name="phone"]', forms.form.phone);
+        await adminPage.fill('input[name="phone"]', generatePhoneNumber());
         await adminPage.press('input[name="phone"]', "Enter");
 
         await expect(

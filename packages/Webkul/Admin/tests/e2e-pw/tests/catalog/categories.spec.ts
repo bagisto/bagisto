@@ -1,5 +1,14 @@
 import { test, expect } from '../../setup';
-import  * as forms from '../../utils/form';
+import {
+    generateFirstName,
+    generateLastName,
+    generateEmail,
+    generatePhoneNumber,
+    generateDescription,
+    generateName,
+    generateRandomNumericString,
+    getImageFile,
+} from '../../utils/faker';
 
 async function createCategory(adminPage) {
     await adminPage.goto('admin/catalog/categories');
@@ -8,7 +17,7 @@ async function createCategory(adminPage) {
 
     const concatenatedNames = Array(5)
         .fill(null)
-        .map(() => forms.generateRandomProductName())
+        .map(() => generateName())
         .join(' ')
         .replaceAll(' ', '');
 
@@ -46,7 +55,7 @@ async function createCategory(adminPage) {
         adminPage.waitForEvent('filechooser'),
         adminPage.click('label:has-text("Add Image")')
     ]);
-    await fileChooser.setFiles(forms.getRandomImageFile());
+    await fileChooser.setFiles(getImageFile());
     await expect(adminPage.locator('.flex-wrap >> nth=0')).toBeVisible();
 
     /**
