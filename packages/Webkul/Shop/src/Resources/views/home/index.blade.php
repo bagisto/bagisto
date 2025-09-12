@@ -20,12 +20,18 @@
     />
 @endPush
 
+@push('scripts')
+    <script>
+        localStorage.setItem('categories', JSON.stringify(@json($categories)));
+    </script>
+@endpush
+
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
-    
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp

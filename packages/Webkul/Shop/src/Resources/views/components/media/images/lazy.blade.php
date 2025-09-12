@@ -11,10 +11,10 @@
             :id="'image-shimmer-' + $.uid"
             class="shimmer"
             v-bind="$attrs"
-            v-show="isLoading"
+            v-if="isLoading"
         >
         </div>
-        
+
         <img
             v-bind="$attrs"
             :data-src="src"
@@ -40,12 +40,12 @@
 
             props: {
                 lazy: {
-                    type: Boolean, 
+                    type: Boolean,
                     default: true,
                 },
 
                 src: {
-                    type: String, 
+                    type: String,
                     default: '',
                 },
             },
@@ -62,7 +62,7 @@
                 if (! this.lazy) {
                     return;
                 }
-                
+
                 let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
@@ -77,7 +77,7 @@
 
                 lazyImageObserver.observe(document.getElementById('image-shimmer-' + this.$.uid));
             },
-            
+
             methods: {
                 onLoad() {
                     this.isLoading = false;

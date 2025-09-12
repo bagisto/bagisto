@@ -445,33 +445,33 @@
                 }
             },
 
-            watch: {
-                appliedValues() {
-                    if (this.filter.code === 'price' && ! this.appliedValues) {
-                        ++this.refreshKey;
-                    }
-                },
+            created() {
+                // Initialize values in created hook
+                if (this.filter.code === 'price') {
+                    this.appliedValues = this.$parent.$data.filters.applied[this.filter.code]?.join(',');
+                } else {
+                    this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
+                }
             },
 
             mounted() {
                 this.fetchFilterOptions();
-
-                if (this.filter.code === 'price') {
-                    /**
-                     * Improvisation needed here for `this.$parent.$data`.
-                     */
-                    this.appliedValues = this.$parent.$data.filters.applied[this.filter.code]?.join(',');
-
-                    ++this.refreshKey;
-
-                    return;
-                }
-
-                /**
-                 * Improvisation needed here for `this.$parent.$data`.
-                 */
-                this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
             },
+
+            watch: {
+                appliedValues: {
+                    handler(newVal, oldVal) {
+                        if (
+                            this.filter.code === 'price' &&
+                            newVal !== oldVal &&
+                            !newVal
+                        ) {
+                            this.refreshKey++;
+                        }
+                    }
+                }
+            },
+
 
             methods: {
                 applyValue($event) {
@@ -539,27 +539,27 @@
             data() {
                 return {
                     refreshKey: 0,
-
                     isLoading: true,
-
                     allowedMaxPrice: 100,
-
-                    priceRange: this.defaultPriceRange ?? [0, 100].join(','),
+                    priceRange: null,
                 };
             },
 
             computed: {
                 minRange() {
-                    let priceRange = this.priceRange.split(',');
-
+                    let priceRange = (this.priceRange || '0,100').split(',');
                     return priceRange[0];
                 },
 
                 maxRange() {
-                    let priceRange = this.priceRange.split(',');
-
+                    let priceRange = (this.priceRange || '0,100').split(',');
                     return priceRange[1];
                 }
+            },
+
+            created() {
+                // Initialize price range in created hook
+                this.priceRange = this.defaultPriceRange ?? [0, 100].join(',');
             },
 
             mounted() {

@@ -435,6 +435,8 @@
                             class="max-md:h-[100px] max-md:w-[100px]"
                             src="{{ bagisto_asset('images/thank-you.png') }}"
                             alt="@lang('shop::app.checkout.cart.index.empty-product')"
+                            loading="lazy"
+                            decoding="async"
                         />
 
                         <p
@@ -522,7 +524,7 @@
                             .then(response => {
                                 if (response.data.message) {
                                     this.cart = response.data.data;
-                                    
+
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });

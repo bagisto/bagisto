@@ -21,7 +21,6 @@
         http-equiv="content-language"
         content="{{ app()->getLocale() }}"
     >
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1"

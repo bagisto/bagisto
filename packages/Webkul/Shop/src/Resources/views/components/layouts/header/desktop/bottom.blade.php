@@ -529,15 +529,31 @@
             },
 
             mounted() {
-                this.getCategories();
+                this.initCategories();
             },
 
             methods: {
+                initCategories() {
+                    try {
+                        const stored = localStorage.getItem('categories');
+
+                        if (stored) {
+                            this.categories = JSON.parse(stored);
+                            this.isLoading = false;
+                            return;
+                        }
+
+                    } catch (e) {}
+
+                    this.getCategories();
+                },
+
                 getCategories() {
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.isLoading = false;
                             this.categories = response.data.data;
+                            localStorage.setItem('categories', JSON.stringify(this.categories));
                         })
                         .catch(error => {
                             console.log(error);

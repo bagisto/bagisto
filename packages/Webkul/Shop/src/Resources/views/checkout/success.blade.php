@@ -13,11 +13,13 @@
 		<div class="grid place-items-center gap-y-5 max-md:gap-y-2.5">
 			{{ view_render_event('bagisto.shop.checkout.success.image.before', ['order' => $order]) }}
 
-			<img 
+			<img
 				class="max-md:h-[100px] max-md:w-[100px]"
-				src="{{ bagisto_asset('images/thank-you.png') }}" 
-				alt="@lang('shop::app.checkout.success.thanks')" 
+				src="{{ bagisto_asset('images/thank-you.png') }}"
+				alt="@lang('shop::app.checkout.success.thanks')"
 				title="@lang('shop::app.checkout.success.thanks')"
+                loading="lazy"
+                decoding="async"
 			>
 
 			{{ view_render_event('bagisto.shop.checkout.success.image.after', ['order' => $order]) }}
@@ -28,14 +30,14 @@
 						'order_id' => '<a class="text-blue-700" href="'.route('shop.customers.account.orders.view', $order->id).'">'.$order->increment_id.'</a>'
 					])
 				@else
-					@lang('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) 
+					@lang('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id])
 				@endif
 			</p>
 
 			<p class="font-medium md:text-2xl">
 				@lang('shop::app.checkout.success.thanks')
 			</p>
-			
+
 			<p class="text-xl text-zinc-500 max-md:text-center max-md:text-xs">
 				@if (! empty($order->checkout_message))
 					{!! nl2br($order->checkout_message) !!}
@@ -49,9 +51,9 @@
 			<a href="{{ route('shop.home.index') }}">
 				<div class="w-max cursor-pointer rounded-2xl bg-navyBlue px-11 py-3 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-6 max-md:py-1.5">
              		@lang('shop::app.checkout.cart.index.continue-shopping')
-				</div> 
+				</div>
 			</a>
-			
+
 			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.after', ['order' => $order]) }}
 		</div>
 	</div>

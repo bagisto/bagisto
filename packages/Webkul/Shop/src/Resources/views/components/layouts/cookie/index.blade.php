@@ -12,7 +12,7 @@
         {!! view_render_event('bagisto.shop.settings.gdpr.modal.cookie.before') !!}
 
             @if (core()->getConfigData('general.gdpr.cookie.enabled'))
-                <div 
+                <div
                     class="js-cookie-consent fixed z-[999] mx-4 box-border hidden min-h-5 overflow-hidden rounded bg-black/90 p-7"
                     :class="getPositionClasses(position)"
                 >
@@ -26,8 +26,8 @@
                         <p class="mt-2.5 block font-sans text-sm leading-5 text-white">
                             {{ core()->getConfigData('general.gdpr.cookie.description') }}
 
-                            <a 
-                                class="text-white underline" 
+                            <a
+                                class="text-white underline"
                                 href="{{ url('page/privacy-policy') }}"
                             >
                                 @lang('shop::app.components.layouts.cookie.index.privacy-policy')
@@ -37,23 +37,23 @@
 
                     <div class="cookieButton">
                         <div class="mt-2.5 flex gap-2">
-                            <a 
+                            <button
                                 class="box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
                                 @click="createCookie()"
                             >
                                 @lang('shop::app.components.layouts.cookie.index.accept')
-                            </a>
-                        
-                            <a 
+                            </button>
+
+                            <button
                                 class="box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
                                 @click="rejectCookie()"
                             >
                                 @lang('shop::app.components.layouts.cookie.index.reject')
-                            </a>
+                            </button>
 
                         </div>
 
-                        <a 
+                        <a
                             class="mt-2.5 box-border inline-block w-full cursor-pointer rounded bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
                             href="{{ route('shop.customers.gdpr.cookie-consent') }}"
                         >

@@ -25,6 +25,11 @@
                     <x-shop::media.images.lazy
                         class="after:content-[' '] relative bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
+                        ::srcset="`
+                            ${product.base_image.small_image_url} 150w,
+                            ${product.base_image.medium_image_url} 300w,
+                        `"
+                        sizes="(max-width: 768px) 150px, (max-width: 1200px) 300px, 600px"
                         ::key="product.id"
                         ::index="product.id"
                         width="291"
@@ -34,7 +39,7 @@
                 </a>
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
-                
+
                 <!-- Product Ratings -->
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
@@ -189,7 +194,7 @@
             class="relative flex max-w-max grid-cols-2 gap-4 overflow-hidden rounded max-sm:flex-wrap"
             v-else
         >
-            <div class="group relative max-h-[258px] max-w-[250px] overflow-hidden"> 
+            <div class="group relative max-h-[258px] max-w-[250px] overflow-hidden">
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
@@ -227,7 +232,7 @@
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
                         @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
-                            <span 
+                            <span
                                 class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
@@ -446,7 +451,7 @@
                             if (error.response.data.redirect_uri) {
                                 window.location.href = error.response.data.redirect_uri;
                             }
-                            
+
                             this.isAddingToCart = false;
                         });
                 },
