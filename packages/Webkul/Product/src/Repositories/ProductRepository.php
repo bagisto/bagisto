@@ -80,9 +80,9 @@ class ProductRepository extends Repository
     /**
      * Suggest products based on query.
      */
-    public function getSuggestions(string $query): ?string
+    public function getSuggestions(?string $query): ?string
     {
-        if ($this->searchEngine == 'elastic') {
+        if ($this->searchEngine == 'elastic' && ! empty($query)) {
             return $this->elasticSearchRepository->getSuggestions($query);
         }
 

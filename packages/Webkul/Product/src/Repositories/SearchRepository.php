@@ -9,6 +9,9 @@ class SearchRepository extends ProductRepository
 {
     use Sanitizer;
 
+    const SUGGEST_DISABLED = '0';
+
+
     /**
      * Upload provided image
      *
