@@ -55,14 +55,12 @@ trait TwoFactorAuthenticatable
     */
     public function generateBackupCodes(int $count = 8): array
     {
-        $codes = collect(range(1, $count))
+        $this->backup_codes = collect(range(1, $count))
             ->map(fn () => str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT))
             ->toArray();
-
-        $this->backup_codes = json_encode($codes);
-
+    
         $this->save();
-
-        return $codes;
+    
+        return $this->backup_codes;
     }
 }
