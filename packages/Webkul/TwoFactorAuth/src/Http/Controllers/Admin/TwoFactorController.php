@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\TwoFactorAuth\Mail\BackupCodesMail;
+use Illuminate\Support\Facades\Mail;
 
 class TwoFactorController extends Controller
 {
@@ -59,6 +61,18 @@ class TwoFactorController extends Controller
             $admin->save();
 
             $backupCodes = $admin->generateBackupCodes();
+
+            try {
+                Mail::to($admin->email)->send(new BackupCodesMail($admin, $backupCodes));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send backup codes email', [
+                    'admin_id'    => $admin->id ?? null,
+                    'admin_email' => $admin->email ?? null,
+                    'exception'   => $e->getMessage(),
+                ]);
+            
+                session()->flash('error', trans('two_factor_auth::app.messages.email_failed'));
+            }
 
             session()->put('two_factor_passed', true);
 
