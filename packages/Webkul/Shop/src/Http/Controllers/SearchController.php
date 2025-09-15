@@ -40,7 +40,7 @@ class SearchController extends Controller
 
         $query = request()->query('query');
 
-        if (request()->has('suggest') && request()->query('suggest') === SearchRepository::SUGGEST_DISABLED) {
+        if (request()->has('suggest') && request()->query('suggest') === '0') {
             $suggestion = null;
         } else {
             if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
