@@ -17,4 +17,9 @@ return [
             ],
         ],
     ],
+
+    'messages' => [
+        'enabled_success' => 'Two-Factor Authentication enabled successfully.',
+        'invalid_code'    => 'Invalid verification code.',
+    ],
 ];

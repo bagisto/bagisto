@@ -68,7 +68,7 @@ class TwoFactorController extends Controller
                 'value' => '1',
             ]);
 
-            session()->flash('success', 'Two-Factor Authentication enabled successfully.');
+            session()->flash('success', trans('two_factor_auth::app.messages.enabled_success'));
 
             return redirect()->route('admin.configuration.index', [
                 'slug'  => 'general',
@@ -76,7 +76,7 @@ class TwoFactorController extends Controller
             ]);
         }
 
-        return back()->withErrors(['code' => 'Invalid verification code.']);
+        return back()->withErrors(['code' => trans('two_factor_auth::app.messages.invalid_code')]);
     }
 
     /**
