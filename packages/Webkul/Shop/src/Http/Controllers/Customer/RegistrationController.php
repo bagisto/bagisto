@@ -72,8 +72,8 @@ class RegistrationController extends Controller
             $this->subscriptionRepository->update([
                 'customer_id' => $customer->id,
             ], $subscription->id);
-        } 
-        
+        }
+
         if (
             ! empty($data['is_subscribed'])
             && ! $subscription

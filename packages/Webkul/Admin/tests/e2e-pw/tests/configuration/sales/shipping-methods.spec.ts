@@ -1,6 +1,5 @@
 import { test, expect } from '../../../setup';
 import { generateName, generateDescription, generateRandomNumericString } from '../../../utils/faker';
-import * as forms from "../../../utils/form";
 
 test.describe('Shipping Methods Configuration', () => {
     /**
@@ -58,6 +57,6 @@ test.describe('Shipping Methods Configuration', () => {
         /**
          * Verify the change is saved.
          */
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 });

@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Implemented did you mean functionality.
+
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
 
 * Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
@@ -12,9 +14,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
-* #10836 [fixed] - Fixed the date of birth issue.
+* #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
+
+* #10912 [fixed] - ACL for create invoice is not correct.
+
+* #10897 [fixed] - Fixed missing success message when admin approving the review.
+
+* #10883 [fixed] - Fixed broken artisan commands. 
 
 * #10838 [fixed] - Fixed the cart issue.
+
+* #10836 [fixed] - Fixed the date of birth issue.
 
 * #10711 [fixed] - Show validation error in cart rule coupons when entering wrong input.
 

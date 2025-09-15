@@ -1,5 +1,14 @@
 import { test, expect } from '../../setup';
-import  * as forms from '../../utils/form';
+import {
+    generateFirstName,
+    generateLastName,
+    generateEmail,
+    generatePhoneNumber,
+    generateDescription,
+    generateName,
+    generateRandomNumericString,
+    getImageFile,
+} from '../../utils/faker';
 
 async function createCategory(adminPage) {
     await adminPage.goto('admin/catalog/categories');
@@ -8,7 +17,7 @@ async function createCategory(adminPage) {
 
     const concatenatedNames = Array(5)
         .fill(null)
-        .map(() => forms.generateRandomProductName())
+        .map(() => generateName())
         .join(' ')
         .replaceAll(' ', '');
 
@@ -46,7 +55,7 @@ async function createCategory(adminPage) {
         adminPage.waitForEvent('filechooser'),
         adminPage.click('label:has-text("Add Image")')
     ]);
-    await fileChooser.setFiles(forms.getRandomImageFile());
+    await fileChooser.setFiles(getImageFile());
     await expect(adminPage.locator('.flex-wrap >> nth=0')).toBeVisible();
 
     /**
@@ -71,7 +80,7 @@ async function createCategory(adminPage) {
 
     await adminPage.click('button:has-text("Save Category")');
 
-    await expect(adminPage.getByText('Category created successfully.')).toBeVisible();
+    await expect(adminPage.locator('#app p', { hasText: 'Category created successfully.' })).toBeVisible();
 }
 
 test.describe('category management', () => {
@@ -93,7 +102,7 @@ test.describe('category management', () => {
 
         await adminPage.click('button:has-text("Save Category")');
 
-        await expect(adminPage.getByText('Category updated successfully.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
 
     test('should delete a category', async ({ adminPage }) => {
@@ -107,8 +116,7 @@ test.describe('category management', () => {
         await iconDelete[0].click();
 
         await adminPage.click('button.transparent-button + button.primary-button:visible');
-
-        await expect(adminPage.getByText('The category has been successfully deleted.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 
     test('should mass update a categories', async ({ adminPage }) => {
@@ -135,7 +143,7 @@ test.describe('category management', () => {
             console.error("Agree button not found or not visible.");
         }
 
-        await expect(adminPage.getByText('Category updated successfully.')).toBeVisible();
+         await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
 
     test('should mass delete a categories', async ({ adminPage }) => {
@@ -162,7 +170,6 @@ test.describe('category management', () => {
         } else {
             console.error("Agree button not found or not visible.");
         }
-
-        await expect(adminPage.getByText('The category has been successfully deleted.')).toBeVisible();
+        await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 });

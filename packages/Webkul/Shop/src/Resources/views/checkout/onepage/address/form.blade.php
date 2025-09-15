@@ -283,7 +283,7 @@
                     type="text"
                     ::name="controlName + '.phone'"
                     ::value="address.phone"
-                    rules="required|numeric"
+                    rules="required|phone"
                     :label="trans('shop::app.checkout.onepage.address.telephone')"
                     :placeholder="trans('shop::app.checkout.onepage.address.telephone')"
                 />

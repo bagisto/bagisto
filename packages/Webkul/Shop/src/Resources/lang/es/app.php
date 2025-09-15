@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Resultados para: :query',
+        'title'   => 'Estos son los resultados para : :query',
+        'suggest' => 'Buscar en su lugar',
         'results' => 'Resultados de búsqueda',
 
         'images' => [

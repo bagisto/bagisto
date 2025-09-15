@@ -47,6 +47,10 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Approved").first()).toBeVisible();
+        // await expect(adminPage.getByText('Review Update Successfully')).toBeVisible();
+         await expect(
+        adminPage.locator("#app p", { hasText: "Review Update Successfully" })
+    ).toBeVisible();
     });
 
     test("should disapprove the review", async ({ adminPage }) => {
@@ -82,6 +86,9 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Disapproved").first()).toBeVisible();
+         await expect(
+        adminPage.locator("#app p", { hasText: "Review Update Successfully" })
+    ).toBeVisible();
     });
 
     test("should approve the review via. mass update", async ({
@@ -141,6 +148,9 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Approved").first()).toBeVisible();
+         await expect(
+        adminPage.locator("#app p", { hasText: "Selected Review Updated Successfully" })
+    ).toBeVisible();
     });
 
     test("should disapprove the review via. mass update", async ({
@@ -200,6 +210,9 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Disapproved").first()).toBeVisible();
+          await expect(
+        adminPage.locator("#app p", { hasText: "Selected Review Updated Successfully" })
+    ).toBeVisible();
     });
 
     test("should delete a review", async ({ adminPage }) => {
@@ -233,10 +246,9 @@ test.describe("review management", () => {
         } else {
             console.error("Agree button not found or not visible.");
         }
-
         await expect(
-            adminPage.getByText("Review Deleted Successfully")
-        ).toBeVisible();
+        adminPage.locator("#app p", { hasText: "Review Deleted Successfully" })
+    ).toBeVisible();
     });
 
     test("should mass delete a reviews", async ({ adminPage }) => {

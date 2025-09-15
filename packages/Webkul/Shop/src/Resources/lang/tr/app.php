@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => ': :query için arama sonuçları',
+        'title'   => 'Bunlar :query için sonuçlar',
+        'suggest' => 'Bunun yerine ara',
         'results' => 'Arama sonuçları',
 
         'images' => [

@@ -1,8 +1,9 @@
 import { test, expect } from '../../../setup';
-import { getRandomImageFile } from '../../../utils/form';
+
 import { 
     generateName, 
     generateRandomNumericString,
+    getImageFile,
 } from '../../../utils/faker';
 
 test.describe('Invoice Settings Configuration', () => {
@@ -60,7 +61,7 @@ test.describe('Invoice Settings Configuration', () => {
             adminPage.click('input[name="sales[invoice_settings][pdf_print_outs][logo]"]')
         ]);
 
-        await fileChooser.setFiles(getRandomImageFile());
+        await fileChooser.setFiles(getImageFile());
         
         await adminPage.click('button[type="submit"].primary-button:visible');
 
