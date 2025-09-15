@@ -77,6 +77,7 @@ class ProductRepository extends Repository
             $data['booking']['default_slot']['duration'] = null;
             $data['booking']['default_slot']['break_time'] = null;
         }
+
         $product = $product->getTypeInstance()->update($data, $id, $attributes);
 
         $product->refresh();
