@@ -26,7 +26,7 @@ class TwoFactorController extends Controller
 
         $secret = $admin->google2fa_secret ?? $admin->generateTwoFactorSecret();
 
-        $qrCodeUrl = $google2fa->getQRCodeUrl(
+        $qrCodeUrl = $this->google2fa->getQRCodeUrl(
             config('app.name'),
             $admin->email,
             decrypt($secret)
