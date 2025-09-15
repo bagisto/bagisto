@@ -47,7 +47,7 @@ class TwoFactorController extends Controller
     public function enable(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|size:6',
+            'code' => 'required|digits:6',
         ]);
 
         $admin = auth('admin')->user();
@@ -130,7 +130,7 @@ class TwoFactorController extends Controller
     */
     public function verifyTwoFactorCode(Request $request)
     {
-        $request->validate(['code' => 'required|string|size:6']);
+        $request->validate(['code' => 'required|digits:6']);
 
         $admin = auth('admin')->user();
 

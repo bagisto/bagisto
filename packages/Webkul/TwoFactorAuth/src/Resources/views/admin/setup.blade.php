@@ -1,6 +1,6 @@
 <x-admin::layouts.anonymous>
     <x-slot:title>
-        Two Factor Authentication
+        @lang('two_factor_auth::app.setup.title')
     </x-slot>
 
     <div class="flex h-[100vh] items-center justify-center">
@@ -15,12 +15,12 @@
             <div class="box-shadow flex min-w-[320px] flex-col rounded-md bg-white dark:bg-gray-900">
 
                 <p class="p-4 text-xl font-bold text-gray-800 dark:text-white">
-                    {{ __('Enable Two-Factor Authentication') }}
+                        @lang('two_factor_auth::app.setup.title')
                 </p>
 
                 <div class="border-y p-4 dark:border-gray-800 flex flex-col items-center gap-4">
                     <p class="text-sm text-gray-600 dark:text-gray-300 text-center">
-                        {{ __('Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.') }}
+                        @lang('two_factor_auth::app.setup.scan_qr')
                     </p>
 
                     <div class="flex justify-center">
@@ -31,7 +31,7 @@
                         @csrf
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                {{ __('Verification Code') }}
+                                @lang('two_factor_auth::app.setup.code_label')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -52,14 +52,14 @@
                                 class="transparent-button hover:bg-gray-200 px-3.5 py-1.5 font-semibold dark:text-white dark:hover:bg-gray-800"
                                 href="{{ route('admin.twofactor.configuration.back') }}"
                             >
-                                {{ __('Back') }}
+                                @lang('two_factor_auth::app.setup.back')
                             </a>
 
                             <button
                                 class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50"
                                 aria-label="{{ __('Verify & Enable') }}"
                             >
-                                {{ __('Verify & Enable') }}
+                                @lang('two_factor_auth::app.setup.verify_enable')
                             </button>
                         </div>
                     </x-admin::form>

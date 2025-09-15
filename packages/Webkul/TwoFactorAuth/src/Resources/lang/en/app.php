@@ -22,6 +22,15 @@ return [
         'enabled_success'  => 'Two-Factor Authentication enabled successfully.',
         'invalid_code'     => 'Invalid verification code.',
         'disabled_success' => 'Two-Factor Authentication has been disabled.',
-        'verified_success'  => 'Two-Factor Authentication verified successfully.',
+        'verified_success' => 'Two-Factor Authentication verified successfully.',
+    ],
+
+    'setup' => [
+        'title'        => 'Enable Two-Factor Authentication',
+        'scan_qr'      => 'Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.',
+        'code_label'   => 'Verification Code',
+        'code_placeholder' => 'Enter 6-digit code',
+        'back'         => 'Back',
+        'verify_enable'=> 'Verify & Enable',
     ],
 ];
