@@ -86,19 +86,19 @@ class TwoFactorController extends Controller
     {
         $admin = auth('admin')->user();
 
-        $admin->google2fa_secret = null;
-        $admin->two_factor_enabled = 0;
-        $admin->backup_codes = null;
-        $admin->two_factor_verified_at = now();
-        $admin->save();
+        $admin->fill([
+            'google2fa_secret'       => null,
+            'two_factor_enabled'     => false,
+            'backup_codes'           => null,
+            'two_factor_verified_at' => null,
+        ])->save();
 
-        $this->coreConfigRepository->updateOrCreate([
-            'code' => 'general.two_factor_auth.settings.enabled',
-        ], [
-            'value' => '0',
-        ]);
+        $this->coreConfigRepository->updateOrCreate(
+            ['code' => 'general.two_factor_auth.settings.enabled'],
+            ['value' => '0']
+        );
 
-        session()->flash('success', 'Two-Factor Authentication has been disabled.');
+        session()->flash('success', trans('two_factor_auth::app.messages.disabled_success'));
 
         return redirect()->route('admin.configuration.index', [
             'slug'  => 'general',
@@ -135,29 +135,31 @@ class TwoFactorController extends Controller
         $admin = auth('admin')->user();
 
         if ($admin->verifyQrCode($request->code)) {
+            return $this->handleSuccessfulVerification();
+        }   
 
-            session()->put('two_factor_passed', true);
-
-            return redirect()->intended(route('admin.dashboard.index'))
-                ->with('success', 'Two-Factor Authentication verified successfully.');
-        }
-
-        $backupCodes = json_decode($admin->backup_codes ?? '[]', true);
-
+        $backupCodes = $admin->backup_codes ?? [];
+        
         if (in_array($request->code, $backupCodes)) {
-
-            $remainingCodes = array_diff($backupCodes, [$request->code]);
-
-            $admin->backup_codes = json_encode(array_values($remainingCodes));
-            
+            $admin->backup_codes = array_values(array_diff($backupCodes, [$request->code]));
             $admin->save();
 
-            session()->put('two_factor_passed', true);
-
-            return redirect()->intended(route('admin.dashboard.index'))
-                ->with('success', 'Two-Factor Authentication verified successfully.');
+            return $this->handleSuccessfulVerification();
         }
+     
+        return back()->withErrors([
+            'code' => trans('two_factor_auth::app.messages.invalid_code'),
+        ]);
+    }
 
-        return back()->withErrors(['code' => 'Invalid verification code.']);
+    /**
+     * Handle successful 2FA verification.
+     */
+    protected function handleSuccessfulVerification()
+    {
+        session()->put('two_factor_passed', true);
+
+        return redirect()->intended(route('admin.dashboard.index'))
+            ->with('success', trans('two_factor_auth::app.messages.verified_success'));
     }
 }
