@@ -47,7 +47,7 @@ class SearchController extends Controller
                 $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
             }
 
-            $suggestion = $this->searchRepository->setSearchEngine($searchEngine ?? 'database')->getSuggestions( $query);
+            $suggestion = $this->searchRepository->setSearchEngine($searchEngine ?? 'database')->getSuggestions($query);
         }
 
         return view('shop::search.index', [
