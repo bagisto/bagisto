@@ -43,7 +43,7 @@ class SearchController extends Controller
         $suggestion = null;
 
         if (
-            !request()->has('suggest')
+            ! request()->has('suggest')
             || request()->query('suggest') !== '0'
         ) {
             $searchEngine = core()->getConfigData('catalog.products.search.engine') === 'elastic'
