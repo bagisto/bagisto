@@ -43,12 +43,11 @@ class SearchController extends Controller
         if (request()->has('suggest') && request()->query('suggest') === '0') {
             $suggestion = null;
         } else {
-
             if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-               $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
+                $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
             }
 
-            $suggestion = $this->searchRepository->setSearchEngine($searchEngine ?? 'database')->getSuggestions(request()->query('query'));
+            $suggestion = $this->searchRepository->setSearchEngine($searchEngine ?? 'database')->getSuggestions($query);
         }
 
         return view('shop::search.index', [

@@ -66,8 +66,12 @@ class ElasticSearchRepository
     /**
      * Get suggestions based on the query text.
      */
-    public function getSuggestions(string $queryText): ?string
+    public function getSuggestions(?string $queryText): ?string
     {
+        if (empty($queryText)) {
+            return null;
+        }
+
         $results = Elasticsearch::search([
             'index' => $this->getIndexName(),
             'body'  => [
