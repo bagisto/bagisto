@@ -12,7 +12,10 @@ class TwoFactorController extends Controller
     /**
      * Inject CoreConfigRepository dependency.
      */
-    public function __construct(protected CoreConfigRepository $coreConfigRepository) {}
+    public function __construct(
+        protected CoreConfigRepository $coreConfigRepository,
+        protected Google2FA $google2fa,
+    ) {}
 
     /**
     * Show 2FA setup page with QR code and secret key.
@@ -22,7 +25,7 @@ class TwoFactorController extends Controller
         $google2fa = new Google2FA;
         $admin = auth('admin')->user();
 
-        $secret = $admin->generateTwoFactorSecret();
+        $secret = $admin->google2fa_secret ?? $admin->generateTwoFactorSecret();
 
         $qrCodeUrl = $google2fa->getQRCodeUrl(
             config('app.name'),
