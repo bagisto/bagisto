@@ -22,7 +22,6 @@ class TwoFactorController extends Controller
     */
     public function setup()
     {
-        $google2fa = new Google2FA;
         $admin = auth('admin')->user();
 
         $secret = $admin->google2fa_secret ?? $admin->generateTwoFactorSecret();
