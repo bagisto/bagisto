@@ -23,12 +23,12 @@ class BackupCodesMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Two-Factor Authentication Backup Codes - ' . config('app.name'))
-                    ->view('two_factor_auth::emails.backup-codes')
-                    ->with([
-                        'admin' => $this->admin,
-                        'backupCodes' => $this->backupCodes,
-                        'appName' => config('app.name'),
-                    ]);
+        return $this->subject('Two-Factor Authentication Backup Codes - '.config('app.name'))
+            ->view('two_factor_auth::emails.backup-codes')
+            ->with([
+                'admin'       => $this->admin,
+                'backupCodes' => $this->backupCodes,
+                'appName'     => config('app.name'),
+            ]);
     }
 }

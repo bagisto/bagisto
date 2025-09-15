@@ -3,11 +3,11 @@
 namespace Webkul\TwoFactorAuth\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\TwoFactorAuth\Mail\BackupCodesMail;
-use Illuminate\Support\Facades\Mail;
 
 class TwoFactorController extends Controller
 {
@@ -20,8 +20,8 @@ class TwoFactorController extends Controller
     ) {}
 
     /**
-    * Show 2FA setup page with QR code and secret key.
-    */
+     * Show 2FA setup page with QR code and secret key.
+     */
     public function setup()
     {
         $admin = auth('admin')->user();
@@ -44,8 +44,8 @@ class TwoFactorController extends Controller
     }
 
     /**
-    * Enable 2FA after verifying code.
-    */
+     * Enable 2FA after verifying code.
+     */
     public function enable(Request $request)
     {
         $request->validate([
@@ -65,12 +65,12 @@ class TwoFactorController extends Controller
             try {
                 Mail::to($admin->email)->send(new BackupCodesMail($admin, $backupCodes));
             } catch (\Exception $e) {
-                \Log::error('Failed to send backup codes email', [
+                \Log::error(trans('two_factor_auth::app.messages.email_failed'), [
                     'admin_id'    => $admin->id ?? null,
                     'admin_email' => $admin->email ?? null,
                     'exception'   => $e->getMessage(),
                 ]);
-            
+
                 session()->flash('error', trans('two_factor_auth::app.messages.email_failed'));
             }
 
@@ -94,8 +94,8 @@ class TwoFactorController extends Controller
     }
 
     /**
-    * Disable and remove 2FA configuration.
-    */
+     * Disable and remove 2FA configuration.
+     */
     public function remove()
     {
         $admin = auth('admin')->user();
@@ -132,16 +132,16 @@ class TwoFactorController extends Controller
     }
 
     /**
-    * Show verification form for login.
-    */
+     * Show verification form for login.
+     */
     public function showVerifyForm()
     {
         return view('two_factor_auth::admin.verify');
     }
 
     /**
-    * Verify 2FA or backup code during login.
-    */
+     * Verify 2FA or backup code during login.
+     */
     public function verifyTwoFactorCode(Request $request)
     {
         $request->validate(['code' => 'required|digits:6']);
@@ -150,17 +150,17 @@ class TwoFactorController extends Controller
 
         if ($admin->verifyQrCode($request->code)) {
             return $this->handleSuccessfulVerification();
-        }   
+        }
 
         $backupCodes = $admin->backup_codes ?? [];
-        
+
         if (in_array($request->code, $backupCodes)) {
             $admin->backup_codes = array_values(array_diff($backupCodes, [$request->code]));
             $admin->save();
 
             return $this->handleSuccessfulVerification();
         }
-     
+
         return back()->withErrors([
             'code' => trans('two_factor_auth::app.messages.invalid_code'),
         ]);
