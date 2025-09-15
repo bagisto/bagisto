@@ -11,7 +11,6 @@ class SearchRepository extends ProductRepository
 
     const SUGGEST_DISABLED = '0';
 
-
     /**
      * Upload provided image
      *
