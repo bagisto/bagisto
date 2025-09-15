@@ -881,10 +881,11 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Search results for : :query',
+        'title'   => 'These are results for : :query',
+        'suggest' => 'Search instead for',
         'results' => 'Search results',
 
-        'images' => [
+        'images'  => [
             'index' => [
                 'only-images-allowed'  => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
                 'search'               => 'Search',

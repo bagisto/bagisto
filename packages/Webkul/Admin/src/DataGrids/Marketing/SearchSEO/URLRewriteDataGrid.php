@@ -126,7 +126,7 @@ class URLRewriteDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.url_rewrites.edit')) {
+        if (bouncer()->hasPermission('marketing.search_seo.url_rewrites.edit')) {
             $this->addAction([
                 'index'  => 'edit',
                 'icon'   => 'icon-edit',
@@ -139,7 +139,7 @@ class URLRewriteDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.url_rewrites.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.url_rewrites.delete')) {
             $this->addAction([
                 'index'  => 'delete',
                 'icon'   => 'icon-delete',
@@ -159,7 +159,7 @@ class URLRewriteDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('marketing.url_rewrites.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.url_rewrites.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.delete'),
                 'method' => 'POST',

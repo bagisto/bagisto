@@ -3,11 +3,8 @@ import {
     generateEmail,
     generateDescription,
     generateCurrency,
+    getImageFile,
 } from "../../../utils/faker";
-import {
-    getRandomImageFile,
-    generateRandomPassword,
-} from "../../../utils/form";
 
 test.describe("payment methods configuration", () => {
     /**
@@ -33,7 +30,7 @@ test.describe("payment methods configuration", () => {
             adminPage.click('label:has-text("Logo")'),
         ]);
 
-        await fileChooser.setFiles(getRandomImageFile());
+        await fileChooser.setFiles(getImageFile());
 
         await adminPage.fill(
             'textarea[name="sales[payment_methods][cashondelivery][instructions]"]',
@@ -111,7 +108,7 @@ test.describe("payment methods configuration", () => {
             adminPage.click('label:has-text("Logo")'),
         ]);
 
-        await fileChooser.setFiles(getRandomImageFile());
+        await fileChooser.setFiles(getImageFile());
 
         await adminPage.click(
             'label[for="sales[payment_methods][moneytransfer][generate_invoice]"]'
@@ -189,7 +186,7 @@ test.describe("payment methods configuration", () => {
             adminPage.click('label:has-text("Logo")'),
         ]);
 
-        await fileChooser.setFiles(getRandomImageFile());
+        await fileChooser.setFiles(getImageFile());
 
         // await adminPage.click(
         //     'label[for="sales[payment_methods][paypal_standard][active]"]'
@@ -243,7 +240,7 @@ test.describe("payment methods configuration", () => {
             adminPage.click('label:has-text("Logo")'),
         ]);
 
-        await fileChooser.setFiles(getRandomImageFile());
+        await fileChooser.setFiles(getImageFile());
 
         // await adminPage.click(
         //     'label[for="sales[payment_methods][paypal_smart_button][active]"]'

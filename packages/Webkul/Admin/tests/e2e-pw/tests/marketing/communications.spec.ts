@@ -1,6 +1,5 @@
 import { test, expect } from "../../setup";
-import { generateName, generateDescription } from "../../utils/faker";
-import * as forms from "../../utils/form";
+import { generateName, generateDescription, generateRandomDate } from "../../utils/faker";
 
 async function createTemplate(adminPage) {
     /**
@@ -99,12 +98,12 @@ test.describe("communication management", () => {
         );
 
         for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
+            await input.fill(generateName());
         }
 
-        const time = forms.generateRandomDateTimeRange();
+        const time = generateRandomDate();
 
-        await adminPage.fill('input[name="date"]', time.from);
+        await adminPage.fill('input[name="date"]', time);
 
         await adminPage.click('button[class="primary-button"]:visible');
 
@@ -156,12 +155,12 @@ test.describe("communication management", () => {
         );
 
         for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
+            await input.fill(generateDescription(200));
         }
 
-        const time = forms.generateRandomDateTimeRange();
+        const time = generateRandomDate();
 
-        await adminPage.fill('input[name="date"]', time.from);
+        await adminPage.fill('input[name="date"]', time);
 
         await adminPage.click('button[class="primary-button"]:visible');
 
@@ -209,12 +208,12 @@ test.describe("communication management", () => {
         );
 
         for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
+            await input.fill(generateDescription(200));
         }
 
-        const time = forms.generateRandomDateTimeRange();
+        const time = generateRandomDate();
 
-        await adminPage.fill('input[name="date"]', time.from);
+        await adminPage.fill('input[name="date"]', time);
 
         await adminPage.click('button[class="primary-button"]:visible');
 
@@ -233,7 +232,7 @@ test.describe("communication management", () => {
         );
 
         for (let input of newInputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
+            await input.fill(generateDescription(200));
         }
 
         const selects = await adminPage.$$("select.custom-select");
@@ -286,7 +285,7 @@ test.describe("communication management", () => {
         );
 
         for (let input of inputs) {
-            await input.fill(forms.generateRandomStringWithSpaces(200));
+            await input.fill(generateDescription(200));
         }
 
         const selects = await adminPage.$$("select.custom-select");
