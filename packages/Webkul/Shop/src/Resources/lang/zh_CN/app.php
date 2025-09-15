@@ -881,7 +881,8 @@ return [
     ],
 
     'search' => [
-        'title'   => '搜索结果为：:query',
+        'title'   => '这是 :query 的搜索结果',
+        'suggest' => '改为搜索',
         'results' => '搜索结果',
 
         'images' => [

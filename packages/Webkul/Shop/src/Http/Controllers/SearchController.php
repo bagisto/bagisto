@@ -38,8 +38,27 @@ class SearchController extends Controller
             return redirect()->to($searchTerm->redirect_url);
         }
 
+        $query = request()->query('query');
+
+        $suggestion = null;
+
+        if (
+            ! request()->has('suggest')
+            || request()->query('suggest') !== '0'
+        ) {
+            $searchEngine = core()->getConfigData('catalog.products.search.engine') === 'elastic'
+                ? core()->getConfigData('catalog.products.search.storefront_mode')
+                : 'database';
+
+            $suggestion = $this->searchRepository
+                ->setSearchEngine($searchEngine)
+                ->getSuggestions($query);
+        }
+
         return view('shop::search.index', [
-            'params' => [
+            'query'      => $query,
+            'suggestion' => $suggestion,
+            'params'     => [
                 'sort'  => request()->query('sort'),
                 'limit' => request()->query('limit'),
                 'mode'  => request()->query('mode'),

@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Implemented did you mean functionality.
+
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
 
 * Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
@@ -11,6 +13,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Added the capability to run the dev command from the customized theme package without needing to run the publishers repeatedly.
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
+
+* #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
 
 * #10912 [fixed] - ACL for create invoice is not correct.
 
