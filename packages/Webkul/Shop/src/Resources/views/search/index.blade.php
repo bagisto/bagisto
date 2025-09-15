@@ -28,9 +28,7 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h2
-                class="text-2xl font-medium max-sm:text-base"
-            >
+            <h2 class="text-2xl font-medium max-sm:text-base">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
             </h2>
         </div>
@@ -60,7 +58,7 @@
 
                     <button
                         type="submit"
-                        class="text-blue-600 hover:underline hover:text-blue-800"
+                        class="text-blue-600 hover:text-blue-800 hover:underline"
                         aria-label="{{ trans('shop::app.components.layouts.header.desktop.bottom.submit') }}"
                     >
                         {{ $searchInstead }}
