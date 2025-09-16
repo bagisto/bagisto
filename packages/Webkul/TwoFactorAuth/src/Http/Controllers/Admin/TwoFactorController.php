@@ -22,25 +22,47 @@ class TwoFactorController extends Controller
     /**
      * Show 2FA setup page with QR code and secret key.
      */
-    public function setup()
+    public function setup(Request $request)
     {
-        $admin = auth('admin')->user();
+        try {
 
-        $secret = $admin->google2fa_secret ?? $admin->generateTwoFactorSecret();
+            $admin = auth('admin')->user();
 
-        $qrCodeUrl = $this->google2fa->getQRCodeUrl(
-            config('app.name'),
-            $admin->email,
-            decrypt($secret)
-        );
+            if (! $admin->google2fa_secret) {
+                $secret = $this->google2fa->generateSecretKey();
+                $admin->google2fa_secret = encrypt($secret);
+                $admin->save();
+            } else {
+                $secret = decrypt($admin->google2fa_secret);
+            }
 
-        $this->coreConfigRepository->updateOrCreate([
-            'code' => 'general.two_factor_auth.settings.enabled',
-        ], [
-            'value' => '0',
-        ]);
+            $qrCodeUrl = $this->google2fa->getQRCodeUrl(
+                config('app.name'),
+                $admin->email,
+                $secret
+            );
 
-        return view('two_factor_auth::admin.setup', compact('qrCodeUrl', 'secret'));
+            $qrCodeSvg = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(200)->generate($qrCodeUrl);
+            $qrCodeSvg = (string) $qrCodeSvg;
+            $qrCodeSvg = mb_convert_encoding($qrCodeSvg, 'UTF-8', 'UTF-8');
+            $qrCodeSvg = str_replace(["\0", "\x00"], '', $qrCodeSvg);
+
+            return response()->json([
+                'success'   => true,
+                'qrCodeSvg' => $qrCodeSvg,
+                'qrCodeUrl' => $qrCodeUrl,
+            ], 200);
+
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'error'   => $e->getMessage(),
+                ], 500);
+            }
+
+            throw $e;
+        }
     }
 
     /**
@@ -77,17 +99,14 @@ class TwoFactorController extends Controller
             session()->put('two_factor_passed', true);
 
             $this->coreConfigRepository->updateOrCreate([
-                'code' => 'general.two_factor_auth.settings.enabled',
+                'code' => 'general.two_factor_auth.settings.two_factor_auth_enable',
             ], [
                 'value' => '1',
             ]);
 
             session()->flash('success', trans('two_factor_auth::app.messages.enabled_success'));
 
-            return redirect()->route('admin.configuration.index', [
-                'slug'  => 'general',
-                'slug2' => 'two_factor_auth',
-            ]);
+            return redirect()->back();
         }
 
         return back()->withErrors(['code' => trans('two_factor_auth::app.messages.invalid_code')]);
@@ -108,23 +127,12 @@ class TwoFactorController extends Controller
         ])->save();
 
         $this->coreConfigRepository->updateOrCreate(
-            ['code' => 'general.two_factor_auth.settings.enabled'],
+            ['code' => 'general.two_factor_auth.settings.two_factor_auth_enable'],
             ['value' => '0']
         );
 
         session()->flash('success', trans('two_factor_auth::app.messages.disabled_success'));
 
-        return redirect()->route('admin.configuration.index', [
-            'slug'  => 'general',
-            'slug2' => 'two_factor_auth',
-        ]);
-    }
-
-    /**
-     * Redirect back to 2FA config page.
-     */
-    public function back()
-    {
         return redirect()->route('admin.configuration.index', [
             'slug'  => 'general',
             'slug2' => 'two_factor_auth',
