@@ -9,6 +9,7 @@
     @case('email')
     @case('password')
     @case('number')
+    @case('tel')
         <v-field
             v-slot="{ field, errors }"
             {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
