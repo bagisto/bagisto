@@ -143,6 +143,7 @@
                         </x-admin::form.control-group>
 
                         <template v-if="parseInt(couponType)">
+                            <!-- Auto Generate Coupon -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.auto-generate-coupon')
@@ -867,7 +868,10 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
-                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                <x-admin::flat-picker.date
+                                    class="!w-[140px]"
+                                    ::allow-input="false"
+                                >
                                     <input
                                         type="date"
                                         class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -878,7 +882,10 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'datetime'">
-                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                <x-admin::flat-picker.date
+                                    class="!w-[140px]"
+                                    ::allow-input="false"
+                                >
                                     <input
                                         type="datetime"
                                         class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -959,7 +966,7 @@
                 </div>
 
                 <span
-                    class="icon-delete max-h-9 max-w-9 cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                    class="icon-delete max-w-9 max-h-9 cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                     @click="removeCondition"
                 >
                 </span>
@@ -1187,6 +1194,7 @@
                         <form @submit="handleSubmit($event, store)">
                             <div class="flex gap-4 max-sm:flex-wrap">
                                 <div class="mb-2.5 w-full">
+                                    <!-- Coupon Quantity -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-qty')
@@ -1207,6 +1215,7 @@
                                 </div>
 
                                 <div class="mb-2.5 w-full">
+                                    <!-- Code Length -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-length')
@@ -1229,6 +1238,7 @@
 
                             <div class="flex gap-4 max-sm:flex-wrap">
                                 <div class="mb-2.5 w-full">
+                                    <!-- Code Format -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-format')
@@ -1244,22 +1254,17 @@
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                         >
-                                            <option value="alphanumeric">
-                                                @lang('admin::app.marketing.promotions.cart-rules.edit.alphanumeric')
-                                            </option>
-
-                                            <option value="alphabetical">
-                                                @lang('admin::app.marketing.promotions.cart-rules.edit.alphabetical')
-                                            </option>
-
-                                            <option value="numeric">
-                                                @lang('admin::app.marketing.promotions.cart-rules.edit.numeric')
-                                            </option>
+                                            @foreach (['alphanumeric', 'alphabetical', 'numeric'] as $item)
+                                                <option value="{{ $item }}">
+                                                    @lang('admin::app.marketing.promotions.cart-rules.edit.alphanumeric')
+                                                </option>
+                                            @endforeach
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error control-name="code_format" />
                                     </x-admin::form.control-group>
 
+                                    <!-- Code Prefix -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-prefix')
@@ -1279,6 +1284,7 @@
                                 </div>
 
                                 <div class="mb-2.5 w-full">
+                                    <!-- Code Suffix -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-suffix')
