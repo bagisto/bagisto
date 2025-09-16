@@ -10,7 +10,7 @@ class TwoFactorMiddleware
     {
         $admin = auth('admin')->user();
 
-        $twoFactorEnabled = core()->getConfigData('general.two_factor_auth.settings.enabled');
+        $twoFactorEnabled = core()->getConfigData('general.two_factor_auth.settings.two_factor_auth_enable');
 
         if ($request->routeIs('admin.twofactor.*')) {
             return $next($request);

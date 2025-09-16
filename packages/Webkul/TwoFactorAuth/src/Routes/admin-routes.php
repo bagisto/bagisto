@@ -14,8 +14,6 @@ Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
 
         Route::get('/remove', [TwoFactorController::class, 'remove'])->name('admin.twofactor.configuration.remove');
 
-        Route::get('/back', [TwoFactorController::class, 'back'])->name('admin.twofactor.configuration.back');
-
         Route::get('/verify', [TwoFactorController::class, 'showVerifyForm'])->name('admin.twofactor.verify.form');
 
         Route::post('/verify', [TwoFactorController::class, 'verifyTwoFactorCode'])->name('admin.twofactor.verifyTwoFactorCode');
