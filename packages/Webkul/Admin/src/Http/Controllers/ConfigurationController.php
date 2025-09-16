@@ -87,12 +87,6 @@ class ConfigurationController extends Controller
                 return redirect()->back();
             }
         }
-        
-        $twoFactorEnabled = data_get($data, 'general.two_factor_auth.settings.two_factor_auth_enable', '0');
-        
-        if($twoFactorEnabled == '0'){
-            return redirect()->route('admin.twofactor.configuration.remove');
-        }
 
         $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
 
