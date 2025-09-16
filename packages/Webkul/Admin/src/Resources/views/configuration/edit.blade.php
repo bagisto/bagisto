@@ -140,8 +140,6 @@
                             @include ('admin::configuration.field-type')
                         @endif
                     @endforeach
-
-                    <v-twofactor-setup />
                 </div>
             @endforeach
         </div>
