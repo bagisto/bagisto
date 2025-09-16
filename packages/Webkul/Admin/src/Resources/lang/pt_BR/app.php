@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Geral',
 
                 'general' => [
-                    'info'  => 'Definir opções de unidades e ativar ou desativar migalhas de pão.',
+                    'info'  => 'Defina as opções de unidade e ative ou desative as migalhas de pão.',
                     'title' => 'Geral',
 
                     'unit-options' => [

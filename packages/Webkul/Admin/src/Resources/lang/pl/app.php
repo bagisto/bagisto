@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Ogólne',
 
                 'general' => [
-                    'info'  => 'Ustaw opcje jednostek i włącz lub wyłącz ścieżki nawigacyjne.',
+                    'info'  => 'Skonfiguruj ustawienia jednostek oraz włącz lub wyłącz opcje Ścieżki nawigacyjnej i Odwiedzających.',
                     'title' => 'Ogólne',
 
                     'unit-options' => [

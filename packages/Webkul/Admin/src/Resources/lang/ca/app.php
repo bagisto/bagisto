@@ -3711,7 +3711,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Estableix opcions d\'unitats.',
+                    'info'  => 'Configura les opcions d\'unitats i activa o desactiva les opcions de Molles de Pa i Visitants.',
                     'title' => 'General',
 
                     'unit-options' => [

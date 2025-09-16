@@ -3712,7 +3712,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Set units options and enable or disable breadcrumbs.',
+                    'info'  => 'Configure unit settings and toggle the Breadcrumbs and Visitor options on or off.',
                     'title' => 'General',
 
                     'unit-options' => [

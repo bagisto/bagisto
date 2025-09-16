@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Général',
 
                 'general' => [
-                    'info'  => 'Définir les options d\'unités et activer ou désactiver les fils d\'Ariane.',
+                    'info'  => 'Configurer les paramètres d\'unités et activer ou désactiver les options Fil d\'Ariane et Visiteur.',
                     'title' => 'Général',
 
                     'unit-options' => [

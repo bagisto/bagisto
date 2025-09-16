@@ -15,6 +15,10 @@ class Visitor extends BaseVisitor
      */
     public function visit(?Model $model = null)
     {
+        if (! core()->getConfigData('general.general.visitor_options')) {
+            return;
+        }
+
         foreach ($this->except as $path) {
             if ($this->request->is($path)) {
                 return;

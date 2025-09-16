@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Algemeen',
 
                 'general' => [
-                    'info'  => 'Stel eenhedensopties in en schakel broodkruimelnavigatie in of uit.',
+                    'info'  => 'Configureer eenheidsinstellingen en schakel de opties voor Breadcrumbs en Bezoekers in of uit.',
                     'title' => 'Algemeen',
 
                     'unit-options' => [
