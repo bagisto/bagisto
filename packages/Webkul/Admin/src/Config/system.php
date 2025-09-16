@@ -709,12 +709,10 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'enabled',
-                'title'         => 'two_factor_auth::app.configuration.index.general.two_factor_auth.settings.enabled',
-                'type'          => 'boolean',
-                'channel_based' => false,
-                'locale_based'  => false,
-                'default'       => false,
+                'name'          => 'two_factor_auth_enable',
+                'title'         => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'type'          => 'blade',
+                'path'          => 'two_factor_auth::admin.setup',
             ],
         ],
     ],
