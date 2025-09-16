@@ -88,11 +88,9 @@ class ConfigurationController extends Controller
             }
         }
         
-        $twoFactorEnabled = data_get($data, 'general.two_factor_auth.settings.enabled', '0');
+        $twoFactorEnabled = data_get($data, 'general.two_factor_auth.settings.two_factor_auth_enable', '0');
         
-        if ($twoFactorEnabled == '1') {
-            return redirect()->route('admin.twofactor.setup');
-        }else if($twoFactorEnabled == '0'){
+        if($twoFactorEnabled == '0'){
             return redirect()->route('admin.twofactor.configuration.remove');
         }
 
