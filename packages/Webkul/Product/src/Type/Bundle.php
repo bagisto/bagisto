@@ -242,6 +242,10 @@ class Bundle extends AbstractType
 
         $products = parent::prepareForCart($data);
 
+        if (gettype($products) == "string") {
+            return($products);
+        }
+
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
             $product = $this->productRepository->find($productId);
 
