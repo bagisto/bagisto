@@ -10,7 +10,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Installer\Http\Middleware\CanInstall;
-use Webkul\TwoFactorAuth\Http\Middleware\TwoFactorMiddleware;
+use Webkul\Admin\Http\Middleware\TwoFactorMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(

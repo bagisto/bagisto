@@ -97,8 +97,7 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\TwoFactorAuth\\": "packages/Webkul/TwoFactorAuth/src"
+            "Webkul\\User\\": "packages/Webkul/User/src"
         }
     },
     "autoload-dev": {
