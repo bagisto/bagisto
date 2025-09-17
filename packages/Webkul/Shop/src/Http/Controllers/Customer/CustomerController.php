@@ -64,13 +64,6 @@ class CustomerController extends Controller
             $data['date_of_birth'] = null;
         }
 
-        if (
-            core()->getCurrentChannel()->theme === 'default'
-            && ! isset($data['image'])
-        ) {
-            $data['image']['image_0'] = '';
-        }
-
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']);
 
         if (! empty($data['current_password'])) {
