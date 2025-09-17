@@ -80,7 +80,7 @@ class SessionController extends Controller
     public function destroy()
     {
         auth()->guard('admin')->logout();
-        
+
         session()->forget('two_factor_passed');
 
         return redirect()->route('admin.session.create');

@@ -542,7 +542,7 @@ return [
             ],
         ],
     ],
-    
+
     [
         'key'  => 'general.gdpr',
         'name' => 'admin::app.configuration.index.general.gdpr.title',
