@@ -8,6 +8,7 @@ use Webkul\Admin\Http\Controllers\MagicAIController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
 use Webkul\Admin\Http\Controllers\User\AccountController;
 use Webkul\Admin\Http\Controllers\User\SessionController;
+use Webkul\Admin\Http\Controllers\User\TwoFactorController;
 
 /**
  * Dashboard routes.
@@ -56,6 +57,18 @@ Route::controller(AccountController::class)->prefix('account')->group(function (
     Route::get('', 'edit')->name('admin.account.edit');
 
     Route::put('', 'update')->name('admin.account.update');
+});
+
+Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
+
+    Route::group(['prefix' => 'admin/two-factor'], function () {
+
+        Route::get('/setup', [TwoFactorController::class, 'setup'])->name('admin.twofactor.setup');
+
+        Route::post('/enable', [TwoFactorController::class, 'enable'])->name('admin.twofactor.enable');
+
+        Route::get('/remove', [TwoFactorController::class, 'remove'])->name('admin.twofactor.configuration.remove');
+    });
 });
 
 Route::delete('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');

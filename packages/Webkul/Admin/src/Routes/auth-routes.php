@@ -5,6 +5,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Controllers\User\ForgetPasswordController;
 use Webkul\Admin\Http\Controllers\User\ResetPasswordController;
 use Webkul\Admin\Http\Controllers\User\SessionController;
+use Webkul\Admin\Http\Controllers\User\TwoFactorController;
 
 /**
  * Auth routes.
@@ -44,4 +45,15 @@ Route::group(['prefix' => config('app.admin_url')], function () {
 
         Route::post('', 'store')->name('admin.reset_password.store');
     });
+});
+
+Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
+
+    Route::group(['prefix' => 'admin/two-factor'], function () {
+        Route::get('/verify', [TwoFactorController::class, 'showVerifyForm'])->name('admin.twofactor.verify.form');
+
+        Route::post('/verify', [TwoFactorController::class, 'verifyTwoFactorCode'])->name('admin.twofactor.verifyTwoFactorCode');
+    });
+
+    Route::get('/admin/logout', [SessionController::class, 'destroy'])->name('admin.twofactor.session.destroy');
 });
