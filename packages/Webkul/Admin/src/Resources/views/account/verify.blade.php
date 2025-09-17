@@ -23,7 +23,6 @@
                     </p>
 
                     <x-admin::form :action="route('admin.twofactor.verifyTwoFactorCode')" method="POST" class="w-full">
-                        @csrf
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.verify.code_label')
@@ -35,8 +34,8 @@
                                 id="code"
                                 name="code"
                                 rules="required|numeric|digits:6"
-                                :label="__('Verification Code')"
-                                :placeholder="__('Enter 6-digit code')"
+                                :label="trans('admin::app.users.verify.code_label')"
+                                :placeholder="trans('admin::app.account.setup.code_placeholder')"
                             />
 
                             <x-admin::form.control-group.error control-name="code" />
