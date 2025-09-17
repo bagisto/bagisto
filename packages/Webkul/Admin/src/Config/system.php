@@ -65,6 +65,7 @@ return [
                 'type'    => 'boolean',
                 'default' => false,
             ],
+        ],
     ], [
         'key'  => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
