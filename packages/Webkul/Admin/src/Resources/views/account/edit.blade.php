@@ -168,21 +168,22 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                                        Two Factor Auth
+                                        @lang('admin::app.account.setup.title')
                                     </p>
                                 </x-slot>
                                 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            Enable
+                                            @lang('admin::app.account.setup.enable')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="two_factor_auth_enable"
                                             :value="1"
-                                            @change="$event.target.checked? openSetupModal():$refs.twoFactorSetupModal.close()"
+                                            :checked="$user->two_factor_enabled ? true : false"
+                                            @change="handleToggleChange($event)"
                                         />
                                         
                                         <x-admin::form.control-group.error control-name="two_factor_auth_enable" />
@@ -229,8 +230,8 @@
                                             id="code"
                                             name="code"
                                             rules="required|numeric|digits:6"
-                                            :label="__('Verification Code')"
-                                            :placeholder="__('Enter 6-digit code')"
+                                            :label="trans('admin::app.account.setup.code_label')"
+                                            :placeholder="trans('admin::app.account.setup.code_placeholder')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="code" />
@@ -239,7 +240,7 @@
                                     <div class="mt-4 flex justify-end gap-4">
                                         <button
                                             class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50"
-                                            aria-label="{{ __('Verify & Enable') }}"
+                                            aria-label="{{ trans('admin::app.account.setup.verify_enable') }}"
                                         >
                                             @lang('admin::app.account.setup.verify_enable')
                                         </button>
@@ -281,6 +282,31 @@
                 methods: {
                     setupModalClose() {
                         this.$emit('update:modelValue', false);
+                    },
+
+                    handleToggleChange(event) {
+                        if (event.target.checked) {
+                            this.openSetupModal();
+                        } else {
+                            this.disableTwoFactor();
+                        }
+                    },
+
+                    disableTwoFactor() {
+                        this.$axios.get(`{{ route('admin.twofactor.disable') }}`)
+                            .then(response => {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'success',
+                                    message: response.data?.message
+                                });
+                            })
+                            .catch(error => {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: error.response?.data?.message
+                                });
+                                event.target.checked = true;
+                            });
                     },
 
                     openSetupModal() {

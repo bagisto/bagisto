@@ -110,6 +110,7 @@ return [
 
         'setup' => [
             'title'            => 'Enable Two-Factor Authentication',
+            'enable'           => 'Enable',
             'scan_qr'          => 'Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.',
             'code_label'       => 'Verification Code',
             'code_placeholder' => 'Enter 6-digit code',

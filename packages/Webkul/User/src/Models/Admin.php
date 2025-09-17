@@ -31,6 +31,9 @@ class Admin extends Authenticatable implements AdminContract
         'role_id',
         'status',
         'google2fa_secret',
+        'two_factor_enabled',
+        'backup_codes',
+        'two_factor_verified_at',
     ];
 
     protected $casts = [

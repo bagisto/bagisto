@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
 
         Route::post('/enable', [TwoFactorController::class, 'enable'])->name('admin.twofactor.enable');
 
-        Route::get('/remove', [TwoFactorController::class, 'remove'])->name('admin.twofactor.configuration.remove');
+        Route::get('/disable', [TwoFactorController::class, 'disable'])->name('admin.twofactor.disable');
     });
 });
 

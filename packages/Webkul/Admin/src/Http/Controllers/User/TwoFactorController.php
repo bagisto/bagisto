@@ -107,9 +107,9 @@ class TwoFactorController extends Controller
     }
 
     /**
-     * Disable and remove 2FA configuration.
+     * Disable 2FA configuration.
      */
-    public function remove()
+    public function disable()
     {
         $admin = auth('admin')->user();
 
@@ -119,10 +119,15 @@ class TwoFactorController extends Controller
             'backup_codes'           => null,
             'two_factor_verified_at' => null,
         ])->save();
-
-        session()->flash('success', trans('admin::app.account.messages.disabled_success'));
-
-        return redirect()->back();
+            
+        $message = trans('admin::app.account.messages.disabled_success');
+        
+        return response()->json([
+            'success' => true,
+            'message' => $message
+        ]);
+        
+        return back();
     }
 
     /**
