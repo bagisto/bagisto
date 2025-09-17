@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Codes de sauvegarde de l’authentification à deux facteurs - ',
                 'greeting'            => 'Vous avez activé avec succès l’authentification à deux facteurs pour votre compte administrateur.',
                 'description'         => 'Pour votre sécurité, nous avons généré des codes de secours que vous pouvez utiliser si vous perdez l’accès à votre application d’authentification. Chaque code ne peut être utilisé qu’une seule fois.',
                 'codes-title'         => 'Vos codes de secours',

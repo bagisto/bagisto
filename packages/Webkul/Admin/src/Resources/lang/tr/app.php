@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'İki Faktörlü Kimlik Doğrulama Yedek Kodları - ',
                 'greeting'            => 'Yönetici hesabınız için iki faktörlü doğrulamayı başarıyla etkinleştirdiniz.',
                 'description'         => 'Güvenliğiniz için, doğrulayıcı uygulamanıza erişimi kaybetmeniz durumunda kullanabileceğiniz yedek kodlar oluşturduk. Her kod yalnızca bir kez kullanılabilir.',
                 'codes-title'         => 'Yedek Kodlarınız',

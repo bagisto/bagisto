@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Codis de còpia de seguretat de l’autenticació de dos factors - ',
                 'greeting'            => 'Has habilitat correctament l’autenticació de dos factors pel teu compte d’administrador.',
                 'description'         => 'Per la teva seguretat, hem generat codis de reserva que pots utilitzar si perds l’accés a la teva aplicació d’autenticació. Cada codi només es pot utilitzar una vegada.',
                 'codes-title'         => 'Els teus codis de reserva',

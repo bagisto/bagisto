@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Kode Cadangan Otentikasi Dua Faktor - ',
                 'greeting'            => 'Anda telah berhasil mengaktifkan Autentikasi Dua Faktor untuk akun admin Anda.',
                 'description'         => 'Untuk keamanan Anda, kami telah menghasilkan kode cadangan yang dapat digunakan jika Anda kehilangan akses ke aplikasi autentikator Anda. Setiap kode hanya dapat digunakan sekali.',
                 'codes-title'         => 'Kode Cadangan Anda',

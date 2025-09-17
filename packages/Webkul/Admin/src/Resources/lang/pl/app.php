@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Kody zapasowe uwierzytelniania dwuskładnikowego - ',
                 'greeting'            => 'Pomyślnie włączyłeś uwierzytelnianie dwuskładnikowe dla swojego konta administratora.',
                 'description'         => 'Dla Twojego bezpieczeństwa wygenerowaliśmy kody zapasowe, których możesz użyć, jeśli stracisz dostęp do aplikacji uwierzytelniającej. Każdy kod można użyć tylko raz.',
                 'codes-title'         => 'Twoje kody zapasowe',

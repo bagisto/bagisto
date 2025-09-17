@@ -80,6 +80,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Códigos de respaldo de la autenticación de dos factores - ',
                 'greeting'            => 'Ha habilitado correctamente la autenticación de dos factores para su cuenta de administrador.',
                 'description'         => 'Por su seguridad, hemos generado códigos de respaldo que puede usar si pierde acceso a su aplicación autenticadora. Cada código solo se puede usar una vez.',
                 'codes-title'         => 'Sus códigos de respaldo',

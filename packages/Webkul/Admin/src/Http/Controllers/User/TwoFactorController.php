@@ -25,7 +25,6 @@ class TwoFactorController extends Controller
     public function setup(Request $request)
     {
         try {
-
             $admin = auth('admin')->user();
 
             if (! $admin->google2fa_secret) {

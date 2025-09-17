@@ -23,7 +23,7 @@ class BackupCodesMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Two-Factor Authentication Backup Codes - '.config('app.name'))
+        return $this->subject(trans('admin::app.account.emails.backup-codes.subject').config('app.name'))
             ->view('admin::emails.admin.backup-codes')
             ->with([
                 'admin'       => $this->admin,

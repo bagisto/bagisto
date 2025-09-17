@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Back-upcodes voor tweeledige verificatie - ',
                 'greeting'            => 'Je hebt twee-factor authenticatie succesvol ingeschakeld voor je admin-account.',
                 'description'         => 'Voor jouw veiligheid hebben we back-upcodes gegenereerd die je kunt gebruiken als je de toegang tot je authenticator-app verliest. Elke code kan slechts één keer worden gebruikt.',
                 'codes-title'         => 'Jouw Back-upcodes',

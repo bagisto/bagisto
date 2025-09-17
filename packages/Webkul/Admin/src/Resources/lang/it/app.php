@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Codici di backup per l’autenticazione a due fattori - ',
                 'greeting'            => 'Hai abilitato correttamente l’autenticazione a due fattori per il tuo account amministratore.',
                 'description'         => 'Per la tua sicurezza, abbiamo generato codici di backup che puoi utilizzare se perdi l’accesso alla tua app di autenticazione. Ogni codice può essere usato una sola volta.',
                 'codes-title'         => 'I tuoi codici di backup',

@@ -90,6 +90,7 @@ return [
             ],
 
             'backup-codes' => [
+                'subject'             => 'Two-Factor Authentication Backup Codes - ',
                 'greeting'            => 'You have successfully enabled Two-Factor Authentication for your admin account.',
                 'description'         => 'For your security, we have generated backup codes that you can use if you lose access to your authenticator app. Each code can only be used once.',
                 'codes-title'         => 'Your Backup Codes',
