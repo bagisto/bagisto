@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
+* #10937 [fixed] - Customer profile photo removed when saving profile without changes.
+
 * #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
 
 * #10912 [fixed] - ACL for create invoice is not correct.
