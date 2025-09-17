@@ -3722,9 +3722,15 @@ return [
                     ],
 
                     'breadcrumbs' => [
-                        'shop'       => 'Molles de Pa de la Botiga',
-                        'title'      => 'Molles de Pa',
+                        'shop'       => 'Molles de pa de la botiga',
+                        'title'      => 'Molles de pa',
                         'title-info' => 'Habilita o deshabilita la navegació de molles de pa a la botiga.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Habilitar opcions de visitant',
+                        'title'      => 'Opcions de visitant',
+                        'title-info' => 'Permet controlar el lloc per fer el seguiment i comptar el nombre de visites, ajudant a monitorar l\'activitat i el compromís general dels visitants.',
                     ],
                 ],
 

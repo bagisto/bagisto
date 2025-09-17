@@ -3718,14 +3718,20 @@ return [
                     'unit-options' => [
                         'info'        => 'Establecer opciones de unidades.',
                         'title'       => 'Opciones de Unidades',
-                        'title-info'  => 'Configure el peso en libras (lbs) o kilogramos (kgs).',
+                        'title-info'  => 'Configura el peso en libras (lbs) o kilogramos (kgs).',
                         'weight-unit' => 'Unidad de Peso',
                     ],
 
                     'breadcrumbs' => [
-                        'shop'       => 'Migas de Pan de la Tienda',
-                        'title'      => 'Migas de Pan',
-                        'title-info' => 'Habilitar o deshabilitar la navegación de migas de pan en la tienda.',
+                        'shop'       => 'Migas de pan de la tienda',
+                        'title'      => 'Migas de pan',
+                        'title-info' => 'Habilita o deshabilita la navegación de migas de pan en la tienda.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Habilitar opciones de visitantes',
+                        'title'      => 'Opciones de visitantes',
+                        'title-info' => 'Permite controlar el sitio para rastrear y contar el número de visitas, ayudando a monitorear la actividad y el compromiso general de los visitantes.',
                     ],
                 ],
 

@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Migalhas de Pão',
                         'title-info' => 'Ativar ou desativar a navegação por migalhas de pão na loja.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Ativar opções de visitante',
+                        'title'      => 'Opções de visitante',
+                        'title-info' => 'Permite controlar o site para rastrear e contar o número de visitas, ajudando a monitorar a atividade geral e o engajamento dos visitantes.',
+                    ],
                 ],
 
                 'content' => [

@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Aktivieren oder deaktivieren Sie die Breadcrumbs-Navigation im Shop.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Besucheroptionen aktivieren',
+                        'title'      => 'Besucheroptionen',
+                        'title-info' => 'Ermöglicht die Kontrolle über die Website, um die Anzahl der Besuche zu verfolgen und zu zählen, was hilft, die allgemeine Besucheraktivität und das Engagement zu überwachen.',
+                    ],
                 ],
 
                 'content' => [

@@ -3718,14 +3718,20 @@ return [
                     'unit-options' => [
                         'info'        => 'Stel eenhedensopties in.',
                         'title'       => 'Eenheidsopties',
-                        'title-info'  => 'Configureer het gewicht in ponden (lbs) of kilogrammen (kgs).',
+                        'title-info'  => 'Configureer het gewicht in ponden (lbs) of kilogrammen (kg).',
                         'weight-unit' => 'Gewichtseenheid',
                     ],
 
                     'breadcrumbs' => [
-                        'shop'       => 'Shop Breadcrumbs',
-                        'title'      => 'Breadcrumbs',
+                        'shop'       => 'Shop broodkruimels',
+                        'title'      => 'Broodkruimels',
                         'title-info' => 'Schakel broodkruimelnavigatie in of uit in de winkel.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Bezoekersopties inschakelen',
+                        'title'      => 'Bezoekersopties',
+                        'title-info' => 'Hiermee kun je het bijhouden en tellen van het aantal bezoeken aan de site beheren, wat helpt om algemene bezoekersactiviteit en betrokkenheid te monitoren.',
                     ],
                 ],
 

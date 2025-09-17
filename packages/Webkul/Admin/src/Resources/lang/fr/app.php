@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Fil d\'Ariane',
                         'title-info' => 'Activer ou désactiver la navigation par fil d\'Ariane dans la boutique.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Activer les options de visiteur',
+                        'title'      => 'Options de visiteur',
+                        'title-info' => 'Permet de contrôler le site pour suivre et compter le nombre de visites, aidant à surveiller l\'activité générale et l\'engagement des visiteurs.',
+                    ],
                 ],
 
                 'content' => [

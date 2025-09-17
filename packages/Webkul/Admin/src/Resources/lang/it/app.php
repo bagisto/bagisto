@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Abilita o disabilita la navigazione tramite breadcrumbs nel negozio.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Abilita opzioni visitatore',
+                        'title'      => 'Opzioni visitatore',
+                        'title-info' => 'Consente di controllare il sito per tracciare e contare il numero di visite, aiutando a monitorare l\'attività generale e il coinvolgimento dei visitatori.',
+                    ],
                 ],
 
                 'content' => [

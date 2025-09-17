@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Enable or disable breadcrumbs navigation in the shop.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Enable Visitor Options',
+                        'title'      => 'Visitor Options',
+                        'title-info' => 'Allows control over the site to track and count the number of visits, helping monitor general visitor activity and engagement.',
+                    ],
                 ],
 
                 'content' => [

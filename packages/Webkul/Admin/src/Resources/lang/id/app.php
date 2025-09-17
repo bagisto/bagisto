@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Aktifkan atau nonaktifkan navigasi breadcrumb di toko.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Aktifkan Opsi Pengunjung',
+                        'title'      => 'Opsi Pengunjung',
+                        'title-info' => 'Mengizinkan kontrol atas situs untuk melacak dan menghitung jumlah kunjungan, membantu memantau aktivitas dan keterlibatan pengunjung secara umum.',
+                    ],
                 ],
 
                 'content' => [

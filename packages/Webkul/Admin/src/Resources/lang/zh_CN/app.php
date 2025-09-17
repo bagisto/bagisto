@@ -3727,6 +3727,12 @@ return [
                         'title'      => '面包屑',
                         'title-info' => '在商店中启用或禁用面包屑导航。',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => '启用访客选项',
+                        'title'      => '访客选项',
+                        'title-info' => '允许控制站点以跟踪和统计访问次数，有助于监控一般访客活动和参与度。',
+                    ],
                 ],
 
                 'content' => [

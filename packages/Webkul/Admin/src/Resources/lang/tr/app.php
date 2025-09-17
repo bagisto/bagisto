@@ -3727,6 +3727,12 @@ return [
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Mağazada breadcrumbs gezinmesini etkinleştirin veya devre dışı bırakın.',
                     ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Ziyaretçi Seçeneklerini Etkinleştir',
+                        'title'      => 'Ziyaretçi Seçenekleri',
+                        'title-info' => 'Site üzerinde ziyaretçi sayısını izlemek ve saymak için kontrol sağlar, genel ziyaretçi etkinliğini ve etkileşimini izlemeye yardımcı olur.',
+                    ],
                 ],
 
                 'content' => [
