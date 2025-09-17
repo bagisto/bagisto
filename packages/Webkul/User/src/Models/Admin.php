@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
-use Webkul\TwoFactorAuth\Models\Traits\TwoFactorAuthenticatable;
+use Webkul\Admin\Models\Traits\TwoFactorAuthenticatable;
 
 class Admin extends Authenticatable implements AdminContract
 {
@@ -31,9 +31,6 @@ class Admin extends Authenticatable implements AdminContract
         'role_id',
         'status',
         'google2fa_secret',
-        'two_factor_enabled',
-        'backup_codes',
-        'two_factor_verified_at',
     ];
 
     protected $casts = [
