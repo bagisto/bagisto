@@ -71,7 +71,39 @@ return [
             'save-btn'          => 'Guardar Cuenta',
             'title'             => 'Mi Cuenta',
             'update-success'    => 'Cuenta actualizada con éxito',
-            'upload-image-info' => 'Cargar una Imagen de Perfil (110px X 110px) en formato PNG o JPG',
+            'upload-image-info' => 'Suba una imagen de perfil (110px X 110px) en formato PNG o JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Estimado/a :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Ha habilitado correctamente la autenticación de dos factores para su cuenta de administrador.',
+                'description'         => 'Por su seguridad, hemos generado códigos de respaldo que puede usar si pierde acceso a su aplicación autenticadora. Cada código solo se puede usar una vez.',
+                'codes-title'         => 'Sus códigos de respaldo',
+                'codes-subtitle'      => 'Guarde estos códigos en un lugar seguro: cada uno solo puede usarse una vez.',
+                'warning-title'       => 'Aviso importante de seguridad',
+                'warning-description' => 'Mantenga estos códigos seguros y no los comparta con nadie. Guárdelos fuera de línea en un lugar seguro.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Autenticación de dos factores habilitada correctamente.',
+            'invalid_code'     => 'Código de verificación inválido.',
+            'disabled_success' => 'Autenticación de dos factores deshabilitada.',
+            'verified_success' => 'Autenticación de dos factores verificada correctamente.',
+            'email_failed'     => 'No se pudieron entregar los códigos de respaldo',
+        ],
+
+        'setup' => [
+            'title'            => 'Habilitar autenticación de dos factores',
+            'scan_qr'          => 'Escanee este código QR en su aplicación Google Authenticator y luego ingrese el código de 6 dígitos a continuación.',
+            'code_label'       => 'Código de verificación',
+            'code_placeholder' => 'Ingrese el código de 6 dígitos',
+            'back'             => 'Atrás',
+            'verify_enable'    => 'Verificar y habilitar',
         ],
     ],
 

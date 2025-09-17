@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Redefinir Senha',
             'title'                  => 'Redefinir Senha',
         ],
+
+        'verify' => [
+            'title'                 => 'Verifique a autenticação de dois fatores',
+            'enter_code'            => 'Digite o código de 6 dígitos do seu aplicativo autenticador para continuar.',
+            'code_label'            => 'Código de verificação',
+            'code_placeholder'      => 'Digite o código de 6 dígitos',
+            'back'                  => 'Voltar',
+            'verify_code'           => 'Verificar código',
+            'disabled_message'      => 'A autenticação de dois fatores está atualmente desativada pelo administrador.',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,39 @@ return [
             'save-btn'          => 'Salvar Conta',
             'title'             => 'Minha Conta',
             'update-success'    => 'Conta atualizada com sucesso',
-            'upload-image-info' => 'Faça o upload de uma imagem de perfil (110px X 110px) em formato PNG ou JPG',
+            'upload-image-info' => 'Carregue uma imagem de perfil (110px X 110px) em formato PNG ou JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Prezado(a) :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Você ativou com sucesso a autenticação de dois fatores para sua conta de administrador.',
+                'description'         => 'Para sua segurança, geramos códigos de backup que você pode usar se perder acesso ao seu aplicativo autenticador. Cada código só pode ser usado uma vez.',
+                'codes-title'         => 'Seus códigos de backup',
+                'codes-subtitle'      => 'Armazene esses códigos em um local seguro – cada um só pode ser usado uma vez.',
+                'warning-title'       => 'Aviso de segurança importante',
+                'warning-description' => 'Mantenha esses códigos seguros e não compartilhe com ninguém. Armazene offline em um local seguro.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Autenticação de dois fatores ativada com sucesso.',
+            'invalid_code'     => 'Código de verificação inválido.',
+            'disabled_success' => 'Autenticação de dois fatores desativada.',
+            'verified_success' => 'Autenticação de dois fatores verificada com sucesso.',
+            'email_failed'     => 'Falha ao enviar códigos de backup',
+        ],
+
+        'setup' => [
+            'title'            => 'Ativar autenticação de dois fatores',
+            'scan_qr'          => 'Digitalize este código QR no seu aplicativo Google Authenticator e, em seguida, insira o código de 6 dígitos abaixo.',
+            'code_label'       => 'Código de verificação',
+            'code_placeholder' => 'Digite o código de 6 dígitos',
+            'back'             => 'Voltar',
+            'verify_enable'    => 'Verificar & Ativar',
         ],
     ],
 

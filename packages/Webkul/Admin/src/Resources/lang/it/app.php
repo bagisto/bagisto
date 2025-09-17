@@ -29,9 +29,19 @@ return [
             'confirm-password'       => 'Conferma Password',
             'email'                  => 'Email Registrata',
             'password'               => 'Password',
-            'powered-by-description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
-            'submit-btn'             => 'Ripristina Password',
-            'title'                  => 'Ripristina Password',
+            'powered-by-description' => 'Realizzato con :bagisto, un progetto open-source di :webkul.',
+            'submit-btn'             => 'Reimposta Password',
+            'title'                  => 'Reimposta Password',
+        ],
+
+        'verify' => [
+            'title'                 => 'Verifica Autenticazione a Due Fattori',
+            'enter_code'            => 'Inserisci il codice a 6 cifre dalla tua app di autenticazione per continuare.',
+            'code_label'            => 'Codice di Verifica',
+            'code_placeholder'      => 'Inserisci codice a 6 cifre',
+            'back'                  => 'Indietro',
+            'verify_code'           => 'Verifica Codice',
+            'disabled_message'      => "La verifica a due fattori è attualmente disabilitata dall'amministratore.",
         ],
     ],
 
@@ -71,7 +81,39 @@ return [
             'save-btn'          => 'Salva Account',
             'title'             => 'Il Mio Account',
             'update-success'    => 'Account aggiornato con successo',
-            'upload-image-info' => 'Carica un\'Immagine del Profilo (110px X 110px) in formato PNG o JPG',
+            'upload-image-info' => 'Carica un’immagine del profilo (110px X 110px) in formato PNG o JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Caro/a :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Hai abilitato correttamente l’autenticazione a due fattori per il tuo account amministratore.',
+                'description'         => 'Per la tua sicurezza, abbiamo generato codici di backup che puoi utilizzare se perdi l’accesso alla tua app di autenticazione. Ogni codice può essere usato una sola volta.',
+                'codes-title'         => 'I tuoi codici di backup',
+                'codes-subtitle'      => 'Conserva questi codici in un luogo sicuro – ciascuno può essere usato una sola volta.',
+                'warning-title'       => 'Avviso di Sicurezza Importante',
+                'warning-description' => 'Tieni questi codici al sicuro e non condividerli con nessuno. Conservali offline in un luogo sicuro.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Autenticazione a due fattori abilitata con successo.',
+            'invalid_code'     => 'Codice di verifica non valido.',
+            'disabled_success' => 'Autenticazione a due fattori disabilitata.',
+            'verified_success' => 'Autenticazione a due fattori verificata con successo.',
+            'email_failed'     => 'Invio dei codici di backup fallito',
+        ],
+
+        'setup' => [
+            'title'            => 'Abilita Autenticazione a Due Fattori',
+            'scan_qr'          => 'Scansiona questo codice QR nella tua app Google Authenticator, quindi inserisci il codice a 6 cifre qui sotto.',
+            'code_label'       => 'Codice di Verifica',
+            'code_placeholder' => 'Inserisci codice a 6 cifre',
+            'back'             => 'Indietro',
+            'verify_enable'    => 'Verifica & Abilita',
         ],
     ],
 

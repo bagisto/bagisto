@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Atur Ulang Kata Sandi',
             'title'                  => 'Atur Ulang Kata Sandi',
         ],
+
+        'verify' => [
+            'title'                 => 'Verifikasi Autentikasi Dua Faktor',
+            'enter_code'            => 'Masukkan kode 6 digit dari aplikasi autentikator Anda untuk melanjutkan.',
+            'code_label'            => 'Kode Verifikasi',
+            'code_placeholder'      => 'Masukkan kode 6 digit',
+            'back'                  => 'Kembali',
+            'verify_code'           => 'Verifikasi Kode',
+            'disabled_message'      => 'Verifikasi Autentikasi Dua Faktor saat ini dinonaktifkan oleh admin.',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,39 @@ return [
             'save-btn'          => 'Simpan Akun',
             'title'             => 'Akun Saya',
             'update-success'    => 'Akun berhasil diperbarui',
-            'upload-image-info' => 'Unggah Gambar Profil (110px X 110px) dalam format PNG atau JPG',
+            'upload-image-info' => 'Unggah Gambar Profil (110px X 110px) dalam Format PNG atau JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Yth. :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Anda telah berhasil mengaktifkan Autentikasi Dua Faktor untuk akun admin Anda.',
+                'description'         => 'Untuk keamanan Anda, kami telah menghasilkan kode cadangan yang dapat digunakan jika Anda kehilangan akses ke aplikasi autentikator Anda. Setiap kode hanya dapat digunakan sekali.',
+                'codes-title'         => 'Kode Cadangan Anda',
+                'codes-subtitle'      => 'Simpan kode ini di tempat yang aman – masing-masing hanya bisa digunakan sekali.',
+                'warning-title'       => 'Peringatan Keamanan Penting',
+                'warning-description' => 'Jaga kode ini tetap aman dan jangan dibagikan kepada siapa pun. Simpan secara offline di lokasi yang aman.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Autentikasi Dua Faktor berhasil diaktifkan.',
+            'invalid_code'     => 'Kode verifikasi tidak valid.',
+            'disabled_success' => 'Autentikasi Dua Faktor telah dinonaktifkan.',
+            'verified_success' => 'Autentikasi Dua Faktor berhasil diverifikasi.',
+            'email_failed'     => 'Gagal mengirim kode cadangan',
+        ],
+
+        'setup' => [
+            'title'            => 'Aktifkan Autentikasi Dua Faktor',
+            'scan_qr'          => 'Pindai kode QR ini di aplikasi Google Authenticator Anda, lalu masukkan kode 6 digit di bawah ini.',
+            'code_label'       => 'Kode Verifikasi',
+            'code_placeholder' => 'Masukkan kode 6 digit',
+            'back'             => 'Kembali',
+            'verify_enable'    => 'Verifikasi & Aktifkan',
         ],
     ],
 

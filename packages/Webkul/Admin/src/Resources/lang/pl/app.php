@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Zresetuj hasło',
             'title'                  => 'Zresetuj hasło',
         ],
+
+        'verify' => [
+            'title'                 => 'Weryfikacja uwierzytelniania dwuskładnikowego',
+            'enter_code'            => 'Wprowadź 6-cyfrowy kod z aplikacji uwierzytelniającej, aby kontynuować.',
+            'code_label'            => 'Kod weryfikacyjny',
+            'code_placeholder'      => 'Wprowadź 6-cyfrowy kod',
+            'back'                  => 'Powrót',
+            'verify_code'           => 'Zweryfikuj kod',
+            'disabled_message'      => 'Uwierzytelnianie dwuskładnikowe jest obecnie wyłączone przez administratora.',
+        ],
     ],
 
     'notifications' => [
@@ -70,8 +80,40 @@ return [
             'profile-image'     => 'Zdjęcie profilowe',
             'save-btn'          => 'Zapisz konto',
             'title'             => 'Moje konto',
-            'update-success'    => 'Konto zaktualizowane pomyślnie',
-            'upload-image-info' => 'Załaduj zdjęcie profilowe (110px X 110px) w formacie PNG lub JPG',
+            'update-success'    => 'Konto zostało pomyślnie zaktualizowane',
+            'upload-image-info' => 'Prześlij zdjęcie profilowe (110px X 110px) w formacie PNG lub JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Drogi :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Pomyślnie włączyłeś uwierzytelnianie dwuskładnikowe dla swojego konta administratora.',
+                'description'         => 'Dla Twojego bezpieczeństwa wygenerowaliśmy kody zapasowe, których możesz użyć, jeśli stracisz dostęp do aplikacji uwierzytelniającej. Każdy kod można użyć tylko raz.',
+                'codes-title'         => 'Twoje kody zapasowe',
+                'codes-subtitle'      => 'Przechowuj te kody w bezpiecznym miejscu – każdy można użyć tylko raz.',
+                'warning-title'       => 'Ważne ostrzeżenie bezpieczeństwa',
+                'warning-description' => 'Przechowuj te kody w bezpiecznym miejscu i nie udostępniaj ich nikomu. Przechowuj je offline w bezpiecznej lokalizacji.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Uwierzytelnianie dwuskładnikowe włączone pomyślnie.',
+            'invalid_code'     => 'Nieprawidłowy kod weryfikacyjny.',
+            'disabled_success' => 'Uwierzytelnianie dwuskładnikowe zostało wyłączone.',
+            'verified_success' => 'Uwierzytelnianie dwuskładnikowe pomyślnie zweryfikowane.',
+            'email_failed'     => 'Wysłanie kodów zapasowych nie powiodło się',
+        ],
+
+        'setup' => [
+            'title'            => 'Włącz uwierzytelnianie dwuskładnikowe',
+            'scan_qr'          => 'Zeskanuj ten kod QR w aplikacji Google Authenticator, a następnie wprowadź poniższy 6-cyfrowy kod.',
+            'code_label'       => 'Kod weryfikacyjny',
+            'code_placeholder' => 'Wprowadź 6-cyfrowy kod',
+            'back'             => 'Powrót',
+            'verify_enable'    => 'Zweryfikuj i włącz',
         ],
     ],
 

@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Restablir contrasenya',
             'title'                  => 'Restablir contrasenya',
         ],
+
+        'verify' => [
+            'title'                 => 'Verifica l’autenticació de dos factors',
+            'enter_code'            => 'Introdueix el codi de 6 dígits de la teva aplicació d’autenticació per continuar.',
+            'code_label'            => 'Codi de verificació',
+            'code_placeholder'      => 'Introdueix el codi de 6 dígits',
+            'back'                  => 'Enrere',
+            'verify_code'           => 'Verifica el codi',
+            'disabled_message'      => 'La verificació de dos factors està desactivada actualment per l’administrador.',
+        ],
     ],
 
     'notifications' => [
@@ -70,8 +80,40 @@ return [
             'profile-image'     => 'Imatge de perfil',
             'save-btn'          => 'Desar compte',
             'title'             => 'El meu compte',
-            'update-success'    => 'Compte actualitzat amb éxit',
-            'upload-image-info' => 'Carregar una imatge de perfil (110px X 110px) en format PNG o JPG',
+            'update-success'    => 'Compte actualitzat amb èxit',
+            'upload-image-info' => 'Carrega una imatge de perfil (110px X 110px) en format PNG o JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Benvolgut/da :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => 'Has habilitat correctament l’autenticació de dos factors pel teu compte d’administrador.',
+                'description'         => 'Per la teva seguretat, hem generat codis de reserva que pots utilitzar si perds l’accés a la teva aplicació d’autenticació. Cada codi només es pot utilitzar una vegada.',
+                'codes-title'         => 'Els teus codis de reserva',
+                'codes-subtitle'      => 'Guarda aquests codis en un lloc segur: cada un només es pot utilitzar una vegada.',
+                'warning-title'       => 'Avís de seguretat important',
+                'warning-description' => 'Mantingues aquests codis segurs i no els comparteixis amb ningú. Desa’ls fora de línia en un lloc segur.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Autenticació de dos factors habilitada correctament.',
+            'invalid_code'     => 'Codi de verificació invàlid.',
+            'disabled_success' => 'Autenticació de dos factors deshabilitada.',
+            'verified_success' => 'Autenticació de dos factors verificada correctament.',
+            'email_failed'     => 'Error en enviar els codis de reserva',
+        ],
+
+        'setup' => [
+            'title'            => 'Habilita l’autenticació de dos factors',
+            'scan_qr'          => 'Escaneja aquest codi QR a la teva aplicació Google Authenticator, després introdueix el codi de 6 dígits a continuació.',
+            'code_label'       => 'Codi de verificació',
+            'code_placeholder' => 'Introdueix el codi de 6 dígits',
+            'back'             => 'Enrere',
+            'verify_enable'    => 'Verifica i habilita',
         ],
     ],
 

@@ -33,6 +33,16 @@ return [
             'submit-btn'             => '重置密码',
             'title'                  => '重置密码',
         ],
+
+        'verify' => [
+            'title'                 => '验证双重身份验证',
+            'enter_code'            => '请输入您身份验证应用中的6位验证码以继续。',
+            'code_label'            => '验证码',
+            'code_placeholder'      => '输入6位验证码',
+            'back'                  => '返回',
+            'verify_code'           => '验证代码',
+            'disabled_message'      => '管理员当前已禁用双重身份验证。',
+        ],
     ],
 
     'notifications' => [
@@ -70,8 +80,40 @@ return [
             'profile-image'     => '个人资料图片',
             'save-btn'          => '保存账户',
             'title'             => '我的账户',
-            'update-success'    => '账户已成功更新',
-            'upload-image-info' => '上传个人资料图片（110px X 110px），格式为PNG或JPG',
+            'update-success'    => '账户更新成功',
+            'upload-image-info' => '上传个人头像（110px X 110px），支持 PNG 或 JPG 格式',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => '尊敬的 :admin_name',
+            ],
+
+            'backup-codes' => [
+                'greeting'            => '您已成功为管理员账户启用双重身份验证。',
+                'description'         => '为了您的安全，我们生成了备份代码，以防您无法访问身份验证应用。每个代码只能使用一次。',
+                'codes-title'         => '您的备份代码',
+                'codes-subtitle'      => '请将这些代码安全存放——每个代码仅能使用一次。',
+                'warning-title'       => '重要安全提示',
+                'warning-description' => '请妥善保管这些代码，不要与他人分享。请离线存放在安全位置。',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => '双重身份验证已成功启用。',
+            'invalid_code'     => '无效的验证码。',
+            'disabled_success' => '双重身份验证已禁用。',
+            'verified_success' => '双重身份验证已成功验证。',
+            'email_failed'     => '发送备份代码失败',
+        ],
+
+        'setup' => [
+            'title'            => '启用双重身份验证',
+            'scan_qr'          => '在您的 Google Authenticator 应用中扫描此二维码，然后输入以下6位验证码。',
+            'code_label'       => '验证码',
+            'code_placeholder' => '输入6位验证码',
+            'back'             => '返回',
+            'verify_enable'    => '验证并启用',
         ],
     ],
 
