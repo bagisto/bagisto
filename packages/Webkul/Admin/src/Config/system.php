@@ -541,9 +541,7 @@ return [
                 'channel_based' => true,
             ],
         ],
-    ],
-
-    [
+    ],[
         'key'  => 'general.gdpr',
         'name' => 'admin::app.configuration.index.general.gdpr.title',
         'info' => 'admin::app.configuration.index.general.gdpr.info',
