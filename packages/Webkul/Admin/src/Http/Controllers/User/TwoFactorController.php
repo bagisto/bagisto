@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Mail\Admin\BackupCodesMail;
+use Webkul\Admin\Mail\Admin\BackupCodesNotification;
 use Webkul\Core\Repositories\CoreConfigRepository;
 
 class TwoFactorController extends Controller
@@ -27,12 +27,12 @@ class TwoFactorController extends Controller
         try {
             $admin = auth('admin')->user();
 
-            if (! $admin->google2fa_secret) {
+            if (! $admin->two_factor_secret) {
                 $secret = $this->google2fa->generateSecretKey();
-                $admin->google2fa_secret = encrypt($secret);
+                $admin->two_factor_secret = encrypt($secret);
                 $admin->save();
             } else {
-                $secret = decrypt($admin->google2fa_secret);
+                $secret = decrypt($admin->two_factor_secret);
             }
 
             $qrCodeUrl = $this->google2fa->getQRCodeUrl(
@@ -84,7 +84,7 @@ class TwoFactorController extends Controller
             $backupCodes = $admin->generateBackupCodes();
 
             try {
-                Mail::to($admin->email)->send(new BackupCodesMail($admin, $backupCodes));
+                Mail::to($admin->email)->send(new BackupCodesNotification($admin, $backupCodes));
             } catch (\Exception $e) {
                 \Log::error(trans('admin::app.account.messages.email_failed'), [
                     'admin_id'    => $admin->id ?? null,
@@ -114,19 +114,19 @@ class TwoFactorController extends Controller
         $admin = auth('admin')->user();
 
         $admin->fill([
-            'google2fa_secret'       => null,
-            'two_factor_enabled'     => false,
-            'backup_codes'           => null,
-            'two_factor_verified_at' => null,
+            'two_factor_secret'       => null,
+            'two_factor_enabled'      => false,
+            'two_factor_backup_codes' => null,
+            'two_factor_verified_at'  => null,
         ])->save();
-            
+
         $message = trans('admin::app.account.messages.disabled_success');
-        
+
         return response()->json([
             'success' => true,
-            'message' => $message
+            'message' => $message,
         ]);
-        
+
         return back();
     }
 
@@ -151,10 +151,10 @@ class TwoFactorController extends Controller
             return $this->handleSuccessfulVerification();
         }
 
-        $backupCodes = $admin->backup_codes ?? [];
+        $backupCodes = $admin->two_factor_backup_codes ?? [];
 
         if (in_array($request->code, $backupCodes)) {
-            $admin->backup_codes = array_values(array_diff($backupCodes, [$request->code]));
+            $admin->two_factor_backup_codes = array_values(array_diff($backupCodes, [$request->code]));
             $admin->save();
 
             return $this->handleSuccessfulVerification();
