@@ -59,16 +59,15 @@ Route::controller(AccountController::class)->prefix('account')->group(function (
     Route::put('', 'update')->name('admin.account.update');
 });
 
-Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
+/**
+ * Admin two-factor authentication routes.
+ */
+Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
+    Route::get('setup', 'setup')->name('admin.twofactor.setup');
 
-    Route::group(['prefix' => 'admin/two-factor'], function () {
+    Route::post('enable', 'enable')->name('admin.twofactor.enable');
 
-        Route::get('/setup', [TwoFactorController::class, 'setup'])->name('admin.twofactor.setup');
-
-        Route::post('/enable', [TwoFactorController::class, 'enable'])->name('admin.twofactor.enable');
-
-        Route::get('/disable', [TwoFactorController::class, 'disable'])->name('admin.twofactor.disable');
-    });
+    Route::get('disable', 'disable')->name('admin.twofactor.disable');
 });
 
 Route::delete('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');

@@ -10,7 +10,6 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Installer\Http\Middleware\CanInstall;
-use Webkul\Admin\Http\Middleware\TwoFactorMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -36,9 +35,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->append(SecureHeaders::class);
         $middleware->append(CanInstall::class);
-        $middleware->alias([
-            'admin.2fa' => TwoFactorMiddleware::class,
-        ]);
 
         /**
          * Add the overridden middleware at the end of the list.

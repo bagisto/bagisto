@@ -45,15 +45,13 @@ Route::group(['prefix' => config('app.admin_url')], function () {
 
         Route::post('', 'store')->name('admin.reset_password.store');
     });
-});
 
-Route::group(['middleware' => ['web', 'admin', 'admin.2fa']], function () {
+    /**
+     * Two-factor authentication verification routes.
+     */
+    Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
+        Route::get('verify', 'showVerifyForm')->name('admin.twofactor.verify.form');
 
-    Route::group(['prefix' => 'admin/two-factor'], function () {
-        Route::get('/verify', [TwoFactorController::class, 'showVerifyForm'])->name('admin.twofactor.verify.form');
-
-        Route::post('/verify', [TwoFactorController::class, 'verifyTwoFactorCode'])->name('admin.twofactor.verifyTwoFactorCode');
+        Route::post('verify', 'verifyTwoFactorCode')->name('admin.twofactor.verifyTwoFactorCode');
     });
-
-    Route::get('/admin/logout', [SessionController::class, 'destroy'])->name('admin.twofactor.session.destroy');
 });
