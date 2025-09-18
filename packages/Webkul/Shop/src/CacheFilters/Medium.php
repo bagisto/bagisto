@@ -21,11 +21,11 @@ class Medium implements FilterInterface
         if (Str::contains(url()->current(), '/product')) {
             $width = core()->getConfigData('catalog.products.cache_medium_image.width') != ''
                 ? core()->getConfigData('catalog.products.cache_medium_image.width')
-                : 300;
+                : 360;
 
             $height = core()->getConfigData('catalog.products.cache_medium_image.height') != ''
                 ? core()->getConfigData('catalog.products.cache_medium_image.height')
-                : 300;
+                : 360;
 
             return $image->fit($width, $height);
         } elseif (Str::contains(url()->current(), '/category')) {

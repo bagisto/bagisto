@@ -12,32 +12,32 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('product_images', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_images', 'product_images_product_id_index')) {
-                $table->index('product_id');
+            if (! Schema::hasIndex('product_images', 'prod_img_product_id_idx')) {
+                $table->index('product_id', 'prod_img_product_id_idx');
             }
         });
 
         Schema::table('product_videos', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_videos', 'product_videos_product_id_index')) {
-                $table->index('product_id');
+            if (! Schema::hasIndex('product_videos', 'prod_vid_product_id_idx')) {
+                $table->index('product_id', 'prod_vid_product_id_idx');
             }
         });
 
         Schema::table('product_reviews', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_reviews', 'product_reviews_product_id_index')) {
-                $table->index('product_id');
+            if (! Schema::hasIndex('product_reviews', 'prod_rev_product_id_idx')) {
+                $table->index('product_id', 'prod_rev_product_id_idx');
             }
         });
 
         Schema::table('product_inventory_indices', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_inventory_indices', 'product_inventory_indices_product_id_index')) {
-                $table->index('product_id');
+            if (! Schema::hasIndex('product_inventory_indices', 'prod_inv_product_id_idx')) {
+                $table->index('product_id', 'prod_inv_product_id_idx');
             }
         });
 
         Schema::table('product_attribute_values', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_attribute_values', 'product_attribute_values_product_id_index')) {
-                $table->index('product_id');
+            if (! Schema::hasIndex('product_attribute_values', 'prod_attr_product_id_idx')) {
+                $table->index('product_id', 'prod_attr_product_id_idx');
             }
         });
     }

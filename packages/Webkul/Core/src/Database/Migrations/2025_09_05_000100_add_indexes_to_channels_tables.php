@@ -12,20 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('channels', function (Blueprint $table) {
-            if (!Schema::hasIndex('channels', 'channels_hostname_index')) {
-                $table->index('hostname');
+            if (! Schema::hasIndex('channels', 'channels_hostname_idx')) {
+                $table->index('hostname', 'channels_hostname_idx');
             }
         });
 
         Schema::table('channel_locales', function (Blueprint $table) {
-            if (!Schema::hasIndex('channel_locales', 'channel_locales_channel_id_locale_id_index')) {
-                $table->index(['channel_id', 'locale_id']);
+            if (! Schema::hasIndex('channel_locales', 'channel_locales_cid_lid_idx')) {
+                $table->index(['channel_id', 'locale_id'], 'channel_locales_cid_lid_idx');
             }
         });
 
         Schema::table('channel_currencies', function (Blueprint $table) {
-            if (!Schema::hasIndex('channel_currencies', 'channel_currencies_channel_id_currency_id_index')) {
-                $table->index(['channel_id', 'currency_id']);
+            if (! Schema::hasIndex('channel_currencies', 'channel_currencies_cid_cyid_idx')) {
+                $table->index(['channel_id', 'currency_id'], 'channel_currencies_cid_cyid_idx');
             }
         });
     }

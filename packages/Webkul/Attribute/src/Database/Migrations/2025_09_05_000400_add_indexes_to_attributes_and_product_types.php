@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('attributes', function (Blueprint $table) {
-            if (!Schema::hasIndex('attributes', 'attributes_code_index')) {
+            if (! Schema::hasIndex('attributes', 'attributes_code_index')) {
                 $table->index('code');
             }
         });
@@ -26,6 +26,5 @@ return new class extends Migration
         Schema::table('attributes', function (Blueprint $table) {
             $table->dropIndex(['code']);
         });
-
     }
 };

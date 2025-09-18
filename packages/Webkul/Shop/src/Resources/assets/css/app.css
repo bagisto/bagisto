@@ -329,7 +329,6 @@ img.lazy {
         content: "\e942";
     }
 
-
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
         cursor: pointer;

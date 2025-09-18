@@ -12,18 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('product_price_indices', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_price_indices', 'product_price_indices_product_id_customer_group_id_index')) {
-                $table->index(['product_id', 'customer_group_id']);
+            if (! Schema::hasIndex('product_price_indices', 'ppi_product_id_customer_group_id_idx')) {
+                $table->index(['product_id', 'customer_group_id'], 'ppi_product_id_customer_group_id_idx');
             }
         });
 
         Schema::table('product_channels', function (Blueprint $table) {
-            if (!Schema::hasIndex('product_channels', 'product_channels_product_id_channel_id_index')) {
-                $table->index(['product_id', 'channel_id']);
+            if (! Schema::hasIndex('product_channels', 'pc_product_id_channel_id_idx')) {
+                $table->index(['product_id', 'channel_id'], 'pc_product_id_channel_id_idx');
             }
         });
-
-        // Primary key check removed as it's already handled by table creation
     }
 
     /**
@@ -38,7 +36,5 @@ return new class extends Migration
         Schema::table('product_channels', function (Blueprint $table) {
             $table->dropIndex(['product_id', 'channel_id']);
         });
-
-        // Don't drop the primary key in down migration as it's fundamental
     }
 };

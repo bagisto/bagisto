@@ -12,21 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('url_rewrites', function (Blueprint $table) {
-            // Add composite index for url rewrites with optimal column order
-            if (!Schema::hasIndex('url_rewrites', 'idx_url_rewrites_entity_type_request_path_locale')) {
+            if (! Schema::hasIndex('url_rewrites', 'url_rewrites_et_rp_lc_idx')) {
                 $table->index(
                     ['entity_type', 'request_path', 'locale'],
-                    'idx_url_rewrites_entity_type_request_path_locale'
+                    'url_rewrites_et_rp_lc_idx'
                 );
             }
         });
 
         Schema::table('visits', function (Blueprint $table) {
-            // Add composite index for visits tracking with optimal column order
-            if (!Schema::hasIndex('visits', 'idx_visits_channel_url_ip_method')) {
+            if (! Schema::hasIndex('visits', 'visits_cid_ip_m_vid_vt_ca_idx')) {
                 $table->index(
                     ['channel_id', 'ip', 'method', 'visitor_id', 'visitor_type', 'created_at'],
-                    'idx_visits_channel_url_ip_method'
+                    'visits_cid_ip_m_vid_vt_ca_idx'
                 );
             }
         });

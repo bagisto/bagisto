@@ -72,26 +72,23 @@
                                 <x-shop::form.control-group.error control-name="rating" />
                             </x-shop::form.control-group>
 
-                            @if (
-                                    core()->getConfigData('catalog.products.review.guest_review')
-                                    && !auth()->guard('customer')->user()
-                                )
-                                    <x-shop::form.control-group>
-                                        <x-shop::form.control-group.label class="required">
-                                            @lang('shop::app.products.view.reviews.name')
-                                        </x-shop::form.control-group.label>
+                            @if (core()->getConfigData('catalog.products.review.guest_review') && !auth()->guard('customer')->user())
+                                <x-shop::form.control-group>
+                                    <x-shop::form.control-group.label class="required">
+                                        @lang('shop::app.products.view.reviews.name')
+                                    </x-shop::form.control-group.label>
 
-                                        <x-shop::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            rules="required"
-                                            :value="old('name')"
-                                            :label="trans('shop::app.products.view.reviews.name')"
-                                            :placeholder="trans('shop::app.products.view.reviews.name')"
-                                        />
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        rules="required"
+                                        :value="old('name')"
+                                        :label="trans('shop::app.products.view.reviews.name')"
+                                        :placeholder="trans('shop::app.products.view.reviews.name')"
+                                    />
 
-                                        <x-shop::form.control-group.error control-name="name" />
-                                    </x-shop::form.control-group>
+                                    <x-shop::form.control-group.error control-name="name" />
+                                </x-shop::form.control-group>
                             @endif
 
                             <x-shop::form.control-group>

@@ -50,7 +50,6 @@
                             >
                                 @lang('shop::app.components.layouts.cookie.index.reject')
                             </button>
-
                         </div>
 
                         <a

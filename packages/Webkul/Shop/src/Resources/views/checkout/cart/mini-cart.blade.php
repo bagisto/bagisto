@@ -398,9 +398,8 @@
                 if (!this.cart) {
                     this.getCart();
                 }
+
                 /**
-                 * To Do: Implement this.
-                 *
                  * Action.
                  */
                 this.$emitter.on('update-mini-cart', (cart) => {
