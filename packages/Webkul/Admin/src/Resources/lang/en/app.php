@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'The booking type cannot be changed.',
+                            'type-mismatch'      => 'The booking type cannot be changed.',
+                            'time-validation'    => 'Start time must be less than end time.',
+                            'overlap-validation' => 'Time slot overlaps with an existing slot.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Any Conditions Are True',
                     'apply-to-shipping'                         => 'Apply to Shipping',
                     'attribute-family'                          => 'Attribute Family',
-                    'attribute-name-children-only'              => 'Attribute name Children Only',
-                    'attribute-name-parent-only'                => 'Attribute name Parent Only',
+                    'attribute-name-children-only'              => ':attribute_name (Children Only)',
+                    'attribute-name-parent-only'                => ':attribute_name (Parent Only)',
                     'auto-generate-coupon'                      => 'Auto Generate Coupon',
                     'back-btn'                                  => 'Back',
                     'buy-x-get-y-free'                          => 'Buy X Get Y Free',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Any Conditions Are True',
                     'apply-to-shipping'                         => 'Apply to Shipping',
                     'attribute-family'                          => 'Attribute Family',
-                    'attribute-name-children-only'              => 'Attribute name children only',
-                    'attribute-name-parent-only'                => 'Attribute name parent only',
+                    'attribute-name-children-only'              => ':attribute_name (Children Only)',
+                    'attribute-name-parent-only'                => ':attribute_name (Parent Only)',
                     'auto-generate-coupon'                      => 'Auto Generate Coupon',
                     'back-btn'                                  => 'Back',
                     'buy-x-get-y-free'                          => 'Buy X Get Y Free',

@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => '预订类型无法更改。',
+                            'type-mismatch'      => '预订类型无法更改。',
+                            'time-validation'    => '开始时间必须早于结束时间。',
+                            'overlap-validation' => '时间段与已有时间段重叠。',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => '任意条件为真',
                     'apply-to-shipping'                         => '应用于运费',
                     'attribute-family'                          => '属性系列',
-                    'attribute-name-children-only'              => '仅限子类别的属性名称',
-                    'attribute-name-parent-only'                => '仅限父类别的属性名称',
+                    'attribute-name-children-only'              => ':attribute_name (仅限子类别)',
+                    'attribute-name-parent-only'                => ':attribute_name (仅限父类别)',
                     'auto-generate-coupon'                      => '自动生成优惠券',
                     'back-btn'                                  => '返回',
                     'buy-x-get-y-free'                          => '买 X 送 Y',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => '任意条件为真',
                     'apply-to-shipping'                         => '应用于运费',
                     'attribute-family'                          => '属性系列',
-                    'attribute-name-children-only'              => '仅限子类别的属性名称',
-                    'attribute-name-parent-only'                => '仅限父类别的属性名称',
+                    'attribute-name-children-only'              => ':attribute_name (仅限子类别)',
+                    'attribute-name-parent-only'                => ':attribute_name (仅限父类别)',
                     'auto-generate-coupon'                      => '自动生成优惠券',
                     'back-btn'                                  => '返回',
                     'buy-x-get-y-free'                          => '买 X 送 Y',

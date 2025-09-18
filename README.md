@@ -78,13 +78,7 @@ Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.we
 
 # Headless Commerce
 
-The power of headless laravel commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks (Vue and React), Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing-fast speed and easy customization powered by Vue Storefront and Next.js
-
-## Vue Storefront
-
-![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/vue.png)
-
-Vue Storefront 2 integration for Bagisto: [https://github.com/bagisto/vuestorefront](https://github.com/bagisto/vuestorefront)
+The power of headless laravel commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks, Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing-fast speed and easy customization powered by Next.js
 
 ## Next.js Commerce
 
@@ -149,20 +143,10 @@ This project is on [Open Collective](https://opencollective.com/bagisto), and it
 
 Thank you to all our backers! 🙏
 
-<a href="https://opencollective.com/bagisto#contributors" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
+<a href="https://opencollective.com/bagisto" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
 
 # Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
-<div>
-    <a href="https://opencollective.com/bagisto/contribute/sponsor-7372/checkout" target="_blank">
-        <img src="https://images.opencollective.com/static/images/become_sponsor.svg">
-    </a>
-</div>
-
-<kbd>
-    <a href="http://e.ventures/" target="_blank">
-        <img src="https://images.opencollective.com/e-ventures1/7d61db2/logo.png" height="75">
-    </a>
-</kbd>
+<a href="https://opencollective.com/bagisto" target="_blank"><img src="https://opencollective.com/bagisto/sponsors.svg?width=890&isActive=true"></a>

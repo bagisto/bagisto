@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Jenis pemesanan tidak dapat diubah.',
+                            'type-mismatch'      => 'Jenis pemesanan tidak dapat diubah.',
+                            'time-validation'    => 'Waktu mulai harus lebih kecil dari waktu selesai.',
+                            'overlap-validation' => 'Slot waktu bertabrakan dengan slot yang sudah ada.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Salah Satu Kondisi Terpenuhi',
                     'apply-to-shipping'                         => 'Terapkan ke Pengiriman',
                     'attribute-family'                          => 'Kelompok Atribut',
-                    'attribute-name-children-only'              => 'Nama Atribut (Hanya Anak)',
-                    'attribute-name-parent-only'                => 'Nama Atribut (Hanya Induk)',
+                    'attribute-name-children-only'              => ':attribute_name (Hanya Anak)',
+                    'attribute-name-parent-only'                => ':attribute_name (Hanya Induk)',
                     'auto-generate-coupon'                      => 'Buat Kupon Secara Otomatis',
                     'back-btn'                                  => 'Kembali',
                     'buy-x-get-y-free'                          => 'Beli X Gratis Y',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Salah Satu Kondisi Bernilai Benar',
                     'apply-to-shipping'                         => 'Terapkan pada Pengiriman',
                     'attribute-family'                          => 'Keluarga Atribut',
-                    'attribute-name-children-only'              => 'Nama Atribut (hanya turunan)',
-                    'attribute-name-parent-only'                => 'Nama Atribut (hanya induk)',
+                    'attribute-name-children-only'              => ':attribute_name (hanya turunan)',
+                    'attribute-name-parent-only'                => ':attribute_name (hanya induk)',
                     'auto-generate-coupon'                      => 'Buat Kupon Otomatis',
                     'back-btn'                                  => 'Kembali',
                     'buy-x-get-y-free'                          => 'Beli X Dapat Y Gratis',

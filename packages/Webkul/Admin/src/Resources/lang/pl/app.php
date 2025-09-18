@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Nie można zmienić typu rezerwacji.',
+                            'type-mismatch'      => 'Nie można zmienić typu rezerwacji.',
+                            'time-validation'    => 'Czas rozpoczęcia musi być wcześniejszy niż czas zakończenia.',
+                            'overlap-validation' => 'Przedział czasowy nakłada się na istniejący przedział.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Jakiekolwiek Warunki Są Prawdziwe',
                     'apply-to-shipping'                         => 'Zastosuj do Dostawy',
                     'attribute-family'                          => 'Rodzina Atrybutów',
-                    'attribute-name-children-only'              => 'Nazwa Atrybutu (Tylko Dzieci)',
-                    'attribute-name-parent-only'                => 'Nazwa Atrybutu (Tylko Rodzice)',
+                    'attribute-name-children-only'              => ':attribute_name (Tylko Dzieci)',
+                    'attribute-name-parent-only'                => ':attribute_name (Tylko Rodzice)',
                     'auto-generate-coupon'                      => 'Automatycznie Generowany Kupon',
                     'back-btn'                                  => 'Powrót',
                     'buy-x-get-y-free'                          => 'Kup X, Zdobądź Y za Darmo',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Jakiekolwiek Warunki Są Prawdziwe',
                     'apply-to-shipping'                         => 'Zastosuj do Dostawy',
                     'attribute-family'                          => 'Rodzina Atrybutów',
-                    'attribute-name-children-only'              => 'Nazwa Atrybutu (Tylko Dzieci)',
-                    'attribute-name-parent-only'                => 'Nazwa Atrybutu (Tylko Rodzice)',
+                    'attribute-name-children-only'              => ':attribute_name (Tylko Dzieci)',
+                    'attribute-name-parent-only'                => ':attribute_name (Tylko Rodzice)',
                     'auto-generate-coupon'                      => 'Automatycznie Generowany Kupon',
                     'back-btn'                                  => 'Powrót',
                     'buy-x-get-y-free'                          => 'Kup X, Zdobądź Y za Darmo',

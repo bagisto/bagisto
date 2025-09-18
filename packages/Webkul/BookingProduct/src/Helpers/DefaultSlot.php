@@ -68,9 +68,9 @@ class DefaultSlot extends Booking
                 continue;
             }
 
-            $startDate = clone $requestedDate->modify('this '.$this->daysOfWeek[$timeDuration['from_day']]);
+            $startDate = (clone $requestedDate)->modify('this '.$this->daysOfWeek[$timeDuration['from_day']]);
 
-            $endDate = clone $requestedDate->modify('this '.$this->daysOfWeek[$timeDuration['to_day']]);
+            $endDate = (clone $requestedDate)->modify('this '.$this->daysOfWeek[$timeDuration['to_day']]);
 
             $startDate = Carbon::createFromTimeString($startDate->format('Y-m-d').' '.$timeDuration['from'].':00');
 

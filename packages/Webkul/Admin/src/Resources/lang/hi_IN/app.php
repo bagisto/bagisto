@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'बुकिंग प्रकार बदला नहीं जा सकता।',
+                            'type-mismatch'      => 'बुकिंग प्रकार बदला नहीं जा सकता।',
+                            'time-validation'    => 'प्रारंभ समय समाप्ति समय से कम होना चाहिए।',
+                            'overlap-validation' => 'समय स्लॉट मौजूदा स्लॉट के साथ ओवरलैप कर रहा है।',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'कोई भी शर्त सत्य है',
                     'apply-to-shipping'                         => 'शिपिंग पर लागू करें',
                     'attribute-family'                          => 'गुण परिवार',
-                    'attribute-name-children-only'              => 'गुण का नाम केवल बच्चों के लिए',
-                    'attribute-name-parent-only'                => 'गुण का नाम केवल माता-पिता के लिए',
+                    'attribute-name-children-only'              => ':attribute_name (केवल बच्चों के लिए)',
+                    'attribute-name-parent-only'                => ':attribute_name (केवल माता-पिता के लिए)',
                     'auto-generate-coupon'                      => 'कूपन स्वचालित रूप से उत्पन्न करें',
                     'back-btn'                                  => 'वापस',
                     'buy-x-get-y-free'                          => 'X खरीदें, Y मुफ्त प्राप्त करें',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'कोई भी शर्त सत्य है',
                     'apply-to-shipping'                         => 'शिपिंग पर लागू करें',
                     'attribute-family'                          => 'गुण परिवार',
-                    'attribute-name-children-only'              => 'गुण नाम केवल बच्चों के लिए',
-                    'attribute-name-parent-only'                => 'गुण नाम केवल माता-पिता के लिए',
+                    'attribute-name-children-only'              => ':attribute_name (केवल बच्चों के लिए)',
+                    'attribute-name-parent-only'                => ':attribute_name (केवल माता-पिता के लिए)',
                     'auto-generate-coupon'                      => 'कूपन स्वचालित रूप से उत्पन्न करें',
                     'back-btn'                                  => 'पीछे जाएं',
                     'buy-x-get-y-free'                          => 'X खरीदें और Y फ्री पाएं',

@@ -52,7 +52,7 @@
                             />
 
                             <!-- Panel Details -->
-                            <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
                                 @{{ data.from }} - @{{ data.to }}
 
                                 <span
@@ -82,7 +82,7 @@
                     >
                     </p>
 
-                    <div class="flex grid-cols-2 items-center justify-between">
+                    <div class="flex items-center justify-between grid-cols-2">
                         <div class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800">
                             <template
                                 v-if="slots['different_for_week'][dayIndex]?.length"
@@ -102,7 +102,7 @@
                                 />
 
                                 <!-- Panel Details -->
-                                <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                                <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
                                     @{{ item.from }} - @{{ item.to }}
 
                                     <span
@@ -121,7 +121,7 @@
                         </div>
 
                         <p
-                            class="cursor-pointer place-content-start text-right text-blue-600 transition-all hover:underline"
+                            class="text-right text-blue-600 transition-all cursor-pointer place-content-start hover:underline"
                             @click="currentIndex=dayIndex;toggle()"
                         >
                             @lang('admin::app.catalog.products.edit.types.booking.slots.action.add')
@@ -150,7 +150,7 @@
                             <div class="flex items-center gap-4 ltr:mr-11 rtl:ml-11">
                                 <!-- Add Slots Button -->
                                 <div
-                                    class="w-fit cursor-pointer font-medium text-blue-600 dark:text-white"
+                                    class="font-medium text-blue-600 cursor-pointer w-fit dark:text-white"
                                     @click="add"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.booking.slots.add')
@@ -413,8 +413,23 @@
 
                 insertTimeSlot(key, fromValue, toValue, id) {
                     if (! fromValue || ! toValue) return;
-
+                    
+                    if (! this.isValidSlot(fromValue, toValue)) return;
+                    
                     const slot = { id, to: toValue, from: fromValue };
+
+                    let existingSlots = key === 'same_for_week'
+                        ? Object.values(this.slots[key] || [])
+                        : this.slots[key][this.currentIndex] || [];
+
+                    if (this.isOverlapping(slot, existingSlots)) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: "@lang('admin::app.catalog.products.edit.types.booking.validations.overlap-validation')",
+                        });
+                        
+                        return;
+                    }
 
                     if (key === 'same_for_week') {
                         this.slots[key] = this.slots[key] || {};
@@ -451,6 +466,25 @@
                     this.add();
 
                     this.$refs.drawerForm.toggle();
+                },
+
+                isValidSlot(from, to) {
+                    if (from >= to) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')",
+                        });
+                        
+                        return false;
+                    }
+                    
+                    return true;
+                },
+
+                isOverlapping(newSlot, existingSlots) {
+                    return existingSlots.some(s => {
+                        return (newSlot.from < s.to && newSlot.to > s.from);
+                    });
                 },
             },
         });

@@ -64,6 +64,34 @@ class ElasticSearchRepository
     }
 
     /**
+     * Get suggestions based on the query text.
+     */
+    public function getSuggestions(?string $queryText): ?string
+    {
+        if (empty($queryText)) {
+            return null;
+        }
+
+        $results = Elasticsearch::search([
+            'index' => $this->getIndexName(),
+            'body'  => [
+                'suggest' => [
+                    'name_suggest' => [
+                        'text' => $queryText,
+                        'term' => [
+                            'field'        => 'name',
+                            'suggest_mode' => 'always',
+                        ],
+                    ],
+                ],
+                'size' => 1,
+            ],
+        ]);
+
+        return $results['suggest']['name_suggest'][0]['options'][0]['text'] ?? null;
+    }
+
+    /**
      * Prepare filters for search results.
      */
     public function getFilters(array $params): array
