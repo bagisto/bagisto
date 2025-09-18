@@ -12,20 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->text('google2fa_secret')->nullable();
-            $table->boolean('two_factor_enabled')->default(false);
-            $table->json('backup_codes')->nullable();
-            $table->timestamp('two_factor_verified_at')->nullable();
+            $table->text('two_factor_secret')->after('remember_token')->nullable();
+            $table->boolean('two_factor_enabled')->after('two_factor_secret')->default(false);
+            $table->json('two_factor_backup_codes')->after('two_factor_enabled')->nullable();
+            $table->timestamp('two_factor_verified_at')->after('two_factor_backup_codes')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropColumn([
+                'two_factor_secret',
+                'two_factor_enabled',
+                'two_factor_backup_codes',
+                'two_factor_verified_at',
+            ]);
+        });
     }
 };

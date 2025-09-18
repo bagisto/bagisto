@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class BackupCodesMail extends Mailable
+class BackupCodesNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
