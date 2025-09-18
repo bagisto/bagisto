@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Models\Traits;
+namespace Webkul\User\Models\Traits;
 
 use PragmaRX\Google2FA\Google2FA;
 
@@ -15,11 +15,11 @@ trait TwoFactorAuthenticatable
     {
         $google2fa = new Google2FA;
 
-        $this->google2fa_secret = encrypt($google2fa->generateSecretKey());
+        $this->two_factor_secret = encrypt($google2fa->generateSecretKey());
 
         $this->save();
 
-        return $this->google2fa_secret;
+        return $this->two_factor_secret;
     }
 
     /**
@@ -27,14 +27,14 @@ trait TwoFactorAuthenticatable
      */
     public function verifyQrCode(string $code): bool
     {
-        if (! $this->google2fa_secret) {
+        if (! $this->two_factor_secret) {
             return false;
         }
 
         $google2fa = new Google2FA;
 
         try {
-            $decryptedSecret = decrypt($this->google2fa_secret);
+            $decryptedSecret = decrypt($this->two_factor_secret);
 
             $result = $google2fa->verifyKey($decryptedSecret, $code);
 
@@ -51,12 +51,12 @@ trait TwoFactorAuthenticatable
      */
     public function generateBackupCodes(int $count = 8): array
     {
-        $this->backup_codes = collect(range(1, $count))
+        $this->two_factor_backup_codes = collect(range(1, $count))
             ->map(fn () => str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT))
             ->toArray();
 
         $this->save();
 
-        return $this->backup_codes;
+        return $this->two_factor_backup_codes;
     }
 }
