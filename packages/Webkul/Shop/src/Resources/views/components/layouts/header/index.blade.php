@@ -33,9 +33,10 @@
                 }
             },
             render() {
+                console.log(this.isDesktop);
                 return this.isDesktop
-                    ? this.$createElement('v-desktop-header')
-                    : this.$createElement('v-mobile-header');
+                    ? this.$h(this.$resolveComponent('v-desktop-header'))
+                    : this.$h(this.$resolveComponent('v-mobile-header'));
             }
         });
 

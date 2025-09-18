@@ -54,6 +54,7 @@ window.app = createApp({
  */
 import Axios from "./plugins/axios";
 import Emitter from "./plugins/emitter";
+import CreateElement from "./plugins/createElement";
 import Shop from "./plugins/shop";
 import VeeValidate from "./plugins/vee-validate";
 import Flatpickr from "./plugins/flatpickr";
@@ -61,6 +62,7 @@ import Flatpickr from "./plugins/flatpickr";
 [
     Axios,
     Emitter,
+    CreateElement,
     Shop,
     VeeValidate,
     Flatpickr,
