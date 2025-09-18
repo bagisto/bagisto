@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\Product\Helpers\Indexers\ElasticSearch;
+use Webkul\Product\Helpers\Product;
 
 class DeleteIndex implements ShouldQueue
 {
@@ -39,7 +40,7 @@ class DeleteIndex implements ShouldQueue
 
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
-                $index = 'products_'.$channel->code.'_'.$locale->code.'_index';
+                $index = Product::formatElasticSearchIndexName($channel->code, $locale->code);
 
                 $removeIndices[$index] = $this->productIds;
             }
