@@ -11,19 +11,6 @@ use Webkul\User\Contracts\Admin;
 class AdminRepository extends Repository
 {
     /**
-     * Google2FA instance.
-     */
-    protected Google2FA $google2fa;
-
-    /**
-     * Create a new repository instance.
-     */
-    public function __construct()
-    {
-        $this->google2fa = new Google2FA();
-    }
-
-    /**
      * Specify model class name.
      */
     public function model(): string
@@ -65,7 +52,7 @@ class AdminRepository extends Repository
     public function getOrGenerateTwoFactorSecret(Admin $admin): string
     {
         if (! $admin->two_factor_secret) {
-            $secret = $this->google2fa->generateSecretKey();
+            $secret = app(Google2FA::class)->generateSecretKey();
             
             $admin->update([
                 'two_factor_secret' => encrypt($secret)
@@ -86,7 +73,7 @@ class AdminRepository extends Repository
      */
     public function generateTwoFactorQrCodeData(Admin $admin, string $secret): array
     {
-        $qrCodeUrl = $this->google2fa->getQRCodeUrl(
+        $qrCodeUrl = app(Google2FA::class)->getQRCodeUrl(
             config('app.name'),
             $admin->email,
             $secret
