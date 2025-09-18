@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
-use Webkul\Admin\Models\Traits\TwoFactorAuthenticatable;
+use Webkul\User\Models\Traits\TwoFactorAuthenticatable;
 
 class Admin extends Authenticatable implements AdminContract
 {
@@ -30,16 +30,21 @@ class Admin extends Authenticatable implements AdminContract
         'api_token',
         'role_id',
         'status',
-        'google2fa_secret',
+        'two_factor_secret',
         'two_factor_enabled',
-        'backup_codes',
+        'two_factor_backup_codes',
         'two_factor_verified_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
-        'backup_codes' => 'array',
-        'two_factor_verified_at' => 'datetime',
-        'two_factor_enabled' => 'boolean',
+        'two_factor_backup_codes' => 'array',
+        'two_factor_verified_at'  => 'datetime',
+        'two_factor_enabled'      => 'boolean',
     ];
 
     /**
