@@ -268,6 +268,8 @@
                     return {    
                         qrCodeSvg: '',
                         isLoading: false,
+                        originalToggleState: {{ $user->two_factor_enabled ? 'true' : 'false' }},
+                        currentToggleElement: null,
                     };
                 },
 
@@ -281,10 +283,15 @@
 
                 methods: {
                     setupModalClose() {
+                        if (this.currentToggleElement && !this.originalToggleState) {
+                            this.currentToggleElement.checked = this.originalToggleState;
+                        }
                         this.$emit('update:modelValue', false);
                     },
 
                     handleToggleChange(event) {
+                        this.currentToggleElement = event.target;
+                        
                         if (event.target.checked) {
                             this.openSetupModal();
                         } else {
@@ -295,6 +302,7 @@
                     disableTwoFactor() {
                         this.$axios.get(`{{ route('admin.twofactor.disable') }}`)
                             .then(response => {
+                                this.originalToggleState = false;
                                 this.$emitter.emit('add-flash', {
                                     type: 'success',
                                     message: response.data?.message
@@ -305,7 +313,10 @@
                                     type: 'error',
                                     message: error.response?.data?.message
                                 });
-                                event.target.checked = true;
+
+                                if (this.currentToggleElement) {
+                                    this.currentToggleElement.checked = this.originalToggleState;
+                                }
                             });
                     },
 
@@ -323,11 +334,20 @@
                                     type: 'error',
                                     message: error.response?.data?.message
                                 });
+                               
+                                if (this.currentToggleElement) {
+                                    this.currentToggleElement.checked = this.originalToggleState;
+                                }
                             })
                             .finally(() => {
                                 this.isLoading = false;
                             });
                     },
+
+                    onTwoFactorEnabled() {
+                        this.originalToggleState = true;
+                        this.$refs.twoFactorSetupModal.close();
+                    }
                 }
             });
         </script>

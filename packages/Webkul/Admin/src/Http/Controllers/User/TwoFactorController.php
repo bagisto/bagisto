@@ -3,21 +3,15 @@
 namespace Webkul\Admin\Http\Controllers\User;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Mail\Admin\BackupCodesNotification;
-use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\User\Repositories\AdminRepository;
 
 class TwoFactorController extends Controller
 {
     /**
-     * Inject CoreConfigRepository dependency.
+     * Create a new controller instance.
      */
-    public function __construct(
-        protected CoreConfigRepository $coreConfigRepository,
-        protected Google2FA $google2fa,
-    ) {}
+    public function __construct(protected AdminRepository $adminRepository) {}
 
     /**
      * Show 2FA setup page with QR code and secret key.
@@ -26,30 +20,13 @@ class TwoFactorController extends Controller
     {
         try {
             $admin = auth('admin')->user();
-
-            if (! $admin->two_factor_secret) {
-                $secret = $this->google2fa->generateSecretKey();
-                $admin->two_factor_secret = encrypt($secret);
-                $admin->save();
-            } else {
-                $secret = decrypt($admin->two_factor_secret);
-            }
-
-            $qrCodeUrl = $this->google2fa->getQRCodeUrl(
-                config('app.name'),
-                $admin->email,
-                $secret
-            );
-
-            $qrCodeSvg = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(200)->generate($qrCodeUrl);
-            $qrCodeSvg = (string) $qrCodeSvg;
-            $qrCodeSvg = mb_convert_encoding($qrCodeSvg, 'UTF-8', 'UTF-8');
-            $qrCodeSvg = str_replace(["\0", "\x00"], '', $qrCodeSvg);
+            
+            $secret = $this->adminRepository->getOrGenerateTwoFactorSecret($admin);
+            $qrCodeData = $this->adminRepository->generateTwoFactorQrCodeData($admin, $secret);
 
             return response()->json([
-                'success'   => true,
-                'qrCodeSvg' => $qrCodeSvg,
-                'qrCodeUrl' => $qrCodeUrl,
+                'success' => true,
+                ...$qrCodeData,
             ], 200);
 
         } catch (\Exception $e) {
@@ -75,33 +52,12 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if ($admin->verifyQrCode($request->code)) {
-
-            $admin->two_factor_enabled = true;
-            $admin->two_factor_verified_at = now();
-            $admin->save();
-
-            $backupCodes = $admin->generateBackupCodes();
-
-            try {
-                Mail::to($admin->email)->send(new BackupCodesNotification($admin, $backupCodes));
-            } catch (\Exception $e) {
-                \Log::error(trans('admin::app.account.messages.email_failed'), [
-                    'admin_id'    => $admin->id ?? null,
-                    'admin_email' => $admin->email ?? null,
-                    'exception'   => $e->getMessage(),
-                ]);
-
-                session()->flash('error', trans('admin::app.account.messages.email_failed'));
-            }
-
+        if ($this->adminRepository->enableTwoFactor($admin, $request->code)) {
             session()->put('two_factor_passed', true);
-
             session()->flash('success', trans('admin::app.account.messages.enabled_success'));
-
-            return redirect()->back();
+        } else {
+            session()->flash('error', trans('admin::app.account.messages.invalid_code'));
         }
-        session()->flash('error', trans('admin::app.account.messages.invalid_code'));
 
         return redirect()->back();
     }
@@ -113,12 +69,7 @@ class TwoFactorController extends Controller
     {
         $admin = auth('admin')->user();
 
-        $admin->fill([
-            'two_factor_secret'       => null,
-            'two_factor_enabled'      => false,
-            'two_factor_backup_codes' => null,
-            'two_factor_verified_at'  => null,
-        ])->save();
+        $this->adminRepository->disableTwoFactor($admin);
 
         $message = trans('admin::app.account.messages.disabled_success');
 
@@ -126,8 +77,6 @@ class TwoFactorController extends Controller
             'success' => true,
             'message' => $message,
         ]);
-
-        return back();
     }
 
     /**
@@ -147,16 +96,7 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if ($admin->verifyQrCode($request->code)) {
-            return $this->handleSuccessfulVerification();
-        }
-
-        $backupCodes = $admin->two_factor_backup_codes ?? [];
-
-        if (in_array($request->code, $backupCodes)) {
-            $admin->two_factor_backup_codes = array_values(array_diff($backupCodes, [$request->code]));
-            $admin->save();
-
+        if ($this->adminRepository->verifyTwoFactorCode($admin, $request->code)) {
             return $this->handleSuccessfulVerification();
         }
 
