@@ -210,6 +210,13 @@ class Booking extends AbstractType
 
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
+        if (! $typeHelper->isDateAvailable($products)) {
+            return trans('shop::app.products.booking.cart.integrity.unavailable_date', [
+                'date_from' => $data['booking']['date_from'] ?? null,
+                'date_to'   => $data['booking']['date_to'] ?? null,
+            ]);
+        }
+
         if (! $typeHelper->isSlotAvailable($products)) {
             return trans('shop::app.products.booking.cart.integrity.inventory_warning');
         }

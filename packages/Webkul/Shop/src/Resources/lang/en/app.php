@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Options are missing for this product.',
                     'inventory_warning'      => 'The requested quantity is not available, please try again later.',
                     'select_hourly_duration' => 'Select a slot duration of one hour.',
+                    'unavailable_date'       => 'The requested date is not available, please book again between :date_from and :date_to .',
                 ],
 
                 'rent-from'    => 'Rent From',
