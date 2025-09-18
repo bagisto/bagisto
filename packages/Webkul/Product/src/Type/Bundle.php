@@ -242,7 +242,7 @@ class Bundle extends AbstractType
 
         $products = parent::prepareForCart($data);
 
-        if (gettype($products) == "string") {
+        if (gettype($products) == 'string') {
             return $products;
         }
 
