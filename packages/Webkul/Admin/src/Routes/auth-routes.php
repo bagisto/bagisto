@@ -29,6 +29,15 @@ Route::group(['prefix' => config('app.admin_url')], function () {
     });
 
     /**
+     * Two-factor authentication verification routes.
+     */
+    Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
+        Route::get('verify', 'showVerifyForm')->name('admin.twofactor.verify.form');
+
+        Route::post('verify', 'verifyTwoFactorCode')->name('admin.twofactor.verifyTwoFactorCode');
+    });
+
+    /**
      * Forget password routes.
      */
     Route::controller(ForgetPasswordController::class)->prefix('forget-password')->group(function () {
@@ -44,14 +53,5 @@ Route::group(['prefix' => config('app.admin_url')], function () {
         Route::get('{token}', 'create')->name('admin.reset_password.create');
 
         Route::post('', 'store')->name('admin.reset_password.store');
-    });
-
-    /**
-     * Two-factor authentication verification routes.
-     */
-    Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
-        Route::get('verify', 'showVerifyForm')->name('admin.twofactor.verify.form');
-
-        Route::post('verify', 'verifyTwoFactorCode')->name('admin.twofactor.verifyTwoFactorCode');
     });
 });
