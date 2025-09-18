@@ -12,6 +12,16 @@
                 ];
             }
         }
+
+        $isResponseCacheMiddlwareActive = false;
+
+        $currentRoute = request()->route();
+
+        if ($currentRoute) {
+            $middlewares = $currentRoute->gatherMiddleware();
+
+            $isResponseCacheMiddlwareActive = in_array('cache.response', $middlewares);
+        }
     @endphp
 
     <script
@@ -67,11 +77,16 @@
 
             methods: {
                 loadInitialFlashes() {
-                    @if (config('responsecache.enabled'))
+                    @if (
+                        config('responsecache.enabled') 
+                        && $isResponseCacheMiddlwareActive
+                    )
                         let flashes = '<bagisto-response-cache-session-flashes>';
                     @else
                         let flashes = @json($flashes);
                     @endif
+
+                    console.log(flashes);
 
                     if (typeof(flashes) === 'string') {
                         return;
