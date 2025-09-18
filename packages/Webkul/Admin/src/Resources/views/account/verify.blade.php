@@ -42,13 +42,23 @@
                         </x-admin::form.control-group>
 
                         <div class="mt-4 flex items-center justify-end gap-4">
-                            <a
-                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-                                href="{{ route('admin.twofactor.session.destroy') }}"
+                            <!--Admin logout-->
+                            <x-admin::form
+                                method="DELETE"
+                                action="{{ route('admin.session.destroy') }}"
+                                id="adminLogout"
+                            >
+
+                            </x-admin::form>
+                        
+                            <button
+                                type="button"
+                                class="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950 sm:px-5 sm:text-base"
+                                onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
                             >
                                 @lang('admin::app.users.verify.back')
-                            </a>
-                            
+                            </button>
+
                             <button
                                 class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50"
                                 aria-label="@lang('admin::app.users.verify.verify_code')"
