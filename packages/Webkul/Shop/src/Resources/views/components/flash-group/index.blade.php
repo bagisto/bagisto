@@ -86,8 +86,6 @@
                         let flashes = @json($flashes);
                     @endif
 
-                    console.log(flashes);
-
                     if (typeof(flashes) === 'string') {
                         return;
                     }
