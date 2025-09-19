@@ -510,6 +510,7 @@
 
                         this.columnGroups[params.column].push({
                             'id': 'group_' + params.column + '_' + this.columnGroups[params.column].length,
+                            'code': params.code,
                             'name': params.name,
                             'is_user_defined': 1,
                             'custom_attributes': [],
