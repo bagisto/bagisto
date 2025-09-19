@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Improved full application perfomance and web vital score.
+
 * Implemented did you mean functionality.
 
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
