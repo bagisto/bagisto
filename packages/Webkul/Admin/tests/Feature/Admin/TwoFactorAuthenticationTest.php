@@ -118,8 +118,7 @@ describe('2FA Enable Endpoint', function () {
         expect($this->admin->two_factor_verified_at)->not()->toBeNull();
 
         // Assert (mail notification sent)
-        Mail::assertSent(BackupCodesNotification::class, fn ($mail) =>
-            $mail->hasTo($this->admin->email)
+        Mail::assertSent(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email)
         );
     });
 
@@ -181,10 +180,10 @@ describe('Two Factor Authentication Disable', function () {
     beforeEach(function () {
         // Arrange
         $this->admin->update([
-            'two_factor_secret' => encrypt($this->google2fa->generateSecretKey()),
-            'two_factor_enabled' => true,
+            'two_factor_secret'       => encrypt($this->google2fa->generateSecretKey()),
+            'two_factor_enabled'      => true,
             'two_factor_backup_codes' => ['123456', '789012'],
-            'two_factor_verified_at' => now(),
+            'two_factor_verified_at'  => now(),
         ]);
     });
 
@@ -214,5 +213,103 @@ describe('Two Factor Authentication Disable', function () {
 
         // Assert
         $response->assertStatus(401);
+    });
+});
+
+describe('Two Factor Authentication Login Verification', function () {
+
+    beforeEach(function () {
+        // Arrange
+        $this->secret = $this->google2fa->generateSecretKey();
+        $this->admin->update([
+            'two_factor_secret'       => encrypt($this->secret),
+            'two_factor_enabled'      => true,
+            'two_factor_backup_codes' => ['670089', '569097'],
+            'two_factor_verified_at'  => now(),
+        ]);
+    });
+
+    it('admin can verify with valid TOTP code', function () {
+        // Arrange
+        $validCode = $this->google2fa->getCurrentOtp($this->secret);
+
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => $validCode,
+            ]);
+
+        // Assert
+        $response->assertRedirect(route('admin.dashboard.index'));
+        expect(session('two_factor_passed'))->toBeTrue();
+    });
+
+    it('admin can verify with valid backup code', function () {
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => '670089',
+            ]);
+
+        // Assert
+        $response->assertRedirect(route('admin.dashboard.index'));
+        expect(session('two_factor_passed'))->toBeTrue();
+
+        // Verify backup code was removed
+        $this->admin->refresh();
+        expect($this->admin->two_factor_backup_codes)->not()->toContain('670089');
+        expect($this->admin->two_factor_backup_codes)->toContain('569097');
+    });
+
+    it('verification fails with invalid code', function () {
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => '999999',
+            ]);
+
+        // Assert
+        $response->assertRedirect()
+            ->assertSessionHasErrors('code');
+
+        expect(session('two_factor_passed'))->toBeNull();
+    });
+
+    it('verification requires 6-digit code', function () {
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => '123',
+            ]);
+
+        // Assert
+        $response->assertSessionHasErrors('code');
+    });
+
+    it('verification requires code parameter', function () {
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), []);
+
+        // Assert
+        $response->assertSessionHasErrors('code');
+    });
+
+    it('backup code can only be used once', function () {
+        // Act
+        $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => '670089',
+            ]);
+
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => '670089',
+            ]);
+
+        // Assert
+        $response->assertRedirect()
+            ->assertSessionHasErrors('code');
     });
 });
