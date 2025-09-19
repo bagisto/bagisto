@@ -18,7 +18,7 @@ beforeEach(function () {
     Mail::fake();
 });
 
-describe('2FA Setup Endpoint', function () {
+describe('Two Factor Authentication Setup Endpoint', function () {
     it('allows an authenticated admin to access the 2FA setup endpoint', function () {
         // Act
         $response = $this->actingAs($this->admin, 'admin')
@@ -90,7 +90,7 @@ describe('2FA Setup Endpoint', function () {
     });
 });
 
-describe('2FA Enable Endpoint', function () {
+describe('Two Factor Authentication Enable Endpoint', function () {
     beforeEach(function () {
         // Arrange (setup secret before each test)
         $this->secret = $this->google2fa->generateSecretKey();
@@ -350,19 +350,19 @@ describe('Two Factor Authentication Repository Methods', function () {
 describe('Two Factor Authentication Backup Codes Email Notifications', function () {
 
     it('sends backup codes email on successful 2FA enable', function () {
-        //Arrange
+        // Arrange
         $secret = $this->google2fa->generateSecretKey();
         $this->admin->update(['two_factor_secret' => encrypt($secret)]);
 
         $validCode = $this->google2fa->getCurrentOtp($secret);
 
-        //Act
+        // Act
         $this->actingAs($this->admin, 'admin')
             ->post(route('admin.twofactor.enable'), [
                 'code' => $validCode,
             ]);
-        
-        //Assert
+
+        // Assert
         Mail::assertSent(BackupCodesNotification::class, function ($mail) {
             return $mail->hasTo($this->admin->email) && ! empty($mail->backupCodes);
         });
@@ -388,5 +388,58 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
         expect($this->admin->two_factor_enabled)->toBeTrue();
 
         expect(session('error'))->toBe(trans('admin::app.account.messages.email_failed'));
+    });
+});
+
+describe('Two Factor Authentication Integration Flow', function () {
+
+    test('complete 2FA setup and login flow', function () {
+        // Arrange & Act: Setup 2FA
+        $setupResponse = $this->actingAs($this->admin, 'admin')
+            ->getJson(route('admin.twofactor.setup'));
+
+        // Assert: setup successful
+        $setupResponse->assertJson(['success' => true]);
+
+        // Arrange: prepare valid OTP using generated secret
+        $this->admin->refresh();
+        $secret = decrypt($this->admin->two_factor_secret);
+        $validCode = $this->google2fa->getCurrentOtp($secret);
+
+        // Act: Step 2 - Enable 2FA with valid code
+        $enableResponse = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.enable'), [
+                'code' => $validCode,
+            ]);
+
+        // Assert: 2FA enable endpoint redirects successfully
+        $enableResponse->assertRedirect();
+
+        // Assert: Step 3 - 2FA is enabled in DB
+        $this->admin->refresh();
+        expect($this->admin->two_factor_enabled)->toBeTrue();
+
+        // Arrange: generate fresh valid OTP
+        $newValidCode = $this->google2fa->getCurrentOtp($secret);
+
+        // Act: Step 4 - Verify 2FA during login
+        $verifyResponse = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
+                'code' => $newValidCode,
+            ]);
+
+        // Assert: redirect to dashboard + session flag set
+        $verifyResponse->assertRedirect(route('admin.dashboard.index'));
+        expect(session('two_factor_passed'))->toBeTrue();
+
+        // Act: Step 5 - Disable 2FA
+        $disableResponse = $this->actingAs($this->admin, 'admin')
+            ->get(route('admin.twofactor.disable'));
+
+        // Assert: disable response and DB flag updated
+        $disableResponse->assertJson(['success' => true]);
+
+        $this->admin->refresh();
+        expect($this->admin->two_factor_enabled)->toBeFalse();
     });
 });
