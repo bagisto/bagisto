@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
 use Webkul\User\Models\Admin;
+use Webkul\User\Repositories\AdminRepository;
 
 beforeEach(function () {
     $this->admin = Admin::factory()->create([
@@ -71,7 +72,7 @@ describe('2FA Setup Endpoint', function () {
 
     it('handles exceptions gracefully for AJAX setup requests', function () {
         // Arrange
-        $this->mock(\Webkul\User\Repositories\AdminRepository::class, function ($mock) {
+        $this->mock(AdminRepository::class, function ($mock) {
             $mock->shouldReceive('getOrGenerateTwoFactorSecret')
                 ->andThrow(new \Exception('Test exception'));
         });
@@ -172,5 +173,46 @@ describe('2FA Enable Endpoint', function () {
 
         // Assert
         expect(session('two_factor_passed'))->toBeTrue();
+    });
+});
+
+describe('Two Factor Authentication Disable', function () {
+
+    beforeEach(function () {
+        // Arrange
+        $this->admin->update([
+            'two_factor_secret' => encrypt($this->google2fa->generateSecretKey()),
+            'two_factor_enabled' => true,
+            'two_factor_backup_codes' => ['123456', '789012'],
+            'two_factor_verified_at' => now(),
+        ]);
+    });
+
+    it('admin can disable 2FA', function () {
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->get(route('admin.twofactor.disable'));
+
+        // Assert
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => trans('admin::app.account.messages.disabled_success'),
+            ]);
+
+        // Assert
+        $this->admin->refresh();
+        expect($this->admin->two_factor_secret)->toBeNull();
+        expect($this->admin->two_factor_enabled)->toBeFalse();
+        expect($this->admin->two_factor_backup_codes)->toBeNull();
+        expect($this->admin->two_factor_verified_at)->toBeNull();
+    });
+
+    it('unauthenticated user cannot disable 2FA', function () {
+        // Act
+        $response = $this->get(route('admin.twofactor.disable'));
+
+        // Assert
+        $response->assertStatus(401);
     });
 });

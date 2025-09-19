@@ -19,14 +19,14 @@ class TwoFactorController extends Controller
     public function setup(Request $request)
     {
         try {
-            if (! auth('admin')->check()) {
+            $admin = auth('admin')->user();
+
+            if (! $admin) {
                 return response()->json([
                     'success' => false,
                     'message' => trans('admin::app.errors.401.title'),
                 ], 401);
             }
-
-            $admin = auth('admin')->user();
 
             $secret = $this->adminRepository->getOrGenerateTwoFactorSecret($admin);
             $qrCodeData = $this->adminRepository->generateTwoFactorQrCodeData($admin, $secret);
@@ -71,6 +71,13 @@ class TwoFactorController extends Controller
     public function disable()
     {
         $admin = auth('admin')->user();
+
+        if (! $admin) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('admin::app.errors.401.title'),
+            ], 401);
+        }
 
         $this->adminRepository->disableTwoFactor($admin);
 
