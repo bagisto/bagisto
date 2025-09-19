@@ -313,3 +313,36 @@ describe('Two Factor Authentication Login Verification', function () {
             ->assertSessionHasErrors('code');
     });
 });
+
+describe('Two Factor Authentication Repository Methods', function () {
+
+    it('generates QR code data correctly', function () {
+        // Arrange
+        $repository = app(AdminRepository::class);
+        $secret = $this->google2fa->generateSecretKey();
+
+        // Act
+        $qrData = $repository->generateTwoFactorQrCodeData($this->admin, $secret);
+
+        // Assert
+        expect($qrData)->toHaveKeys(['qrCodeSvg', 'qrCodeUrl']);
+        expect($qrData['qrCodeSvg'])->toContain('<svg');
+        expect($qrData['qrCodeUrl'])->toContain('otpauth://totp/');
+    });
+
+    it('cleans SVG string properly', function () {
+        // Arrange
+        $repository = app(AdminRepository::class);
+        $reflection = new \ReflectionClass($repository);
+        $method = $reflection->getMethod('cleanSvgString');
+        $method->setAccessible(true);
+
+        $dirtySvg = "<svg>\x00invalid\0content</svg>";
+
+        // Act
+        $cleanSvg = $method->invoke($repository, $dirtySvg);
+
+        // Assert
+        expect($cleanSvg)->toBe('<svg>invalidcontent</svg>');
+    });
+});

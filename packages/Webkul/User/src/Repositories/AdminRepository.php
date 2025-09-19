@@ -177,27 +177,4 @@ class AdminRepository extends Repository
 
         return str_replace(["\0", "\x00"], '', $svg);
     }
-
-    /**
-     * Count admins with two-factor authentication enabled.
-     */
-    public function countAdminsWithTwoFactorEnabled(): int
-    {
-        return $this->getModel()
-            ->where('two_factor_enabled', true)
-            ->count();
-    }
-
-    /**
-     * Get admins who have two-factor enabled but not verified.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getAdminsWithUnverifiedTwoFactor()
-    {
-        return $this->getModel()
-            ->where('two_factor_enabled', true)
-            ->whereNull('two_factor_verified_at')
-            ->get();
-    }
 }
