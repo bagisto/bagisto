@@ -8,21 +8,16 @@ use Webkul\User\Models\Admin;
 use Webkul\User\Repositories\AdminRepository;
 
 beforeEach(function () {
-    $this->admin = Admin::factory()->create([
-        'email'    => 'admin@test.com',
-        'password' => Hash::make('password123'),
-        'status'   => 1,
-    ]);
-
+    $this->admin = $this->loginAsAdmin();
+    
     $this->google2fa = new Google2FA;
     Mail::fake();
 });
 
 describe('Two Factor Authentication Setup Endpoint', function () {
     it('allows an authenticated admin to access the 2FA setup endpoint', function () {
-        // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->getJson(route('admin.twofactor.setup'));
+        // Act - admin is already logged in via loginAsAdmin()
+        $response = $this->getJson(route('admin.twofactor.setup'));
 
         // Assert
         $response->assertStatus(200)
@@ -31,6 +26,9 @@ describe('Two Factor Authentication Setup Endpoint', function () {
     });
 
     it('denies unauthenticated users from accessing 2FA setup', function () {
+        // Arrange - logout the admin
+        auth('admin')->logout();
+        
         // Act
         $response = $this->getJson(route('admin.twofactor.setup'));
 
@@ -43,8 +41,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
         expect($this->admin->two_factor_secret)->toBeNull();
 
         // Act
-        $this->actingAs($this->admin, 'admin')
-            ->getJson(route('admin.twofactor.setup'));
+        $response = $this->getJson(route('admin.twofactor.setup'));
 
         // Assert
         $this->admin->refresh();
@@ -59,8 +56,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
         ]);
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->getJson(route('admin.twofactor.setup'));
+        $response = $this->getJson(route('admin.twofactor.setup'));
 
         // Assert
         $response->assertStatus(200)
@@ -78,8 +74,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
         });
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->getJson(route('admin.twofactor.setup'));
+        $response = $this->getJson(route('admin.twofactor.setup'));
 
         // Assert
         $response->assertStatus(500)
@@ -105,10 +100,9 @@ describe('Two Factor Authentication Enable Endpoint', function () {
         $validCode = $this->google2fa->getCurrentOtp($this->secret);
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => $validCode,
-            ]);
+        $response = $this->post(route('admin.twofactor.enable'), [
+            'code' => $validCode,
+        ]);
 
         // Assert
         $response->assertRedirect();
@@ -118,16 +112,14 @@ describe('Two Factor Authentication Enable Endpoint', function () {
         expect($this->admin->two_factor_verified_at)->not()->toBeNull();
 
         // Assert (mail notification sent)
-        Mail::assertSent(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email)
-        );
+        Mail::assertSent(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
     });
 
     it('prevents an admin from enabling 2FA with an invalid code', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => '123456',
-            ]);
+        $response = $this->post(route('admin.twofactor.enable'), [
+            'code' => '123456',
+        ]);
 
         // Assert
         $response->assertRedirect();
@@ -142,10 +134,9 @@ describe('Two Factor Authentication Enable Endpoint', function () {
 
     it('requires a 6-digit code to enable 2FA', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => '123',
-            ]);
+        $response = $this->post(route('admin.twofactor.enable'), [
+            'code' => '123',
+        ]);
 
         // Assert
         $response->assertSessionHasErrors('code');
@@ -153,8 +144,7 @@ describe('Two Factor Authentication Enable Endpoint', function () {
 
     it('requires the code parameter when enabling 2FA', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), []);
+        $response = $this->post(route('admin.twofactor.enable'), []);
 
         // Assert
         $response->assertSessionHasErrors('code');
@@ -165,10 +155,9 @@ describe('Two Factor Authentication Enable Endpoint', function () {
         $validCode = $this->google2fa->getCurrentOtp($this->secret);
 
         // Act
-        $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => $validCode,
-            ]);
+        $this->post(route('admin.twofactor.enable'), [
+            'code' => $validCode,
+        ]);
 
         // Assert
         expect(session('two_factor_passed'))->toBeTrue();
@@ -176,7 +165,6 @@ describe('Two Factor Authentication Enable Endpoint', function () {
 });
 
 describe('Two Factor Authentication Disable', function () {
-
     beforeEach(function () {
         // Arrange
         $this->admin->update([
@@ -189,8 +177,7 @@ describe('Two Factor Authentication Disable', function () {
 
     it('admin can disable 2FA', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->get(route('admin.twofactor.disable'));
+        $response = $this->get(route('admin.twofactor.disable'));
 
         // Assert
         $response->assertStatus(200)
@@ -208,6 +195,9 @@ describe('Two Factor Authentication Disable', function () {
     });
 
     it('unauthenticated user cannot disable 2FA', function () {
+        // Arrange - logout the admin
+        auth('admin')->logout();
+        
         // Act
         $response = $this->get(route('admin.twofactor.disable'));
 
@@ -217,7 +207,6 @@ describe('Two Factor Authentication Disable', function () {
 });
 
 describe('Two Factor Authentication Login Verification', function () {
-
     beforeEach(function () {
         // Arrange
         $this->secret = $this->google2fa->generateSecretKey();
@@ -234,10 +223,9 @@ describe('Two Factor Authentication Login Verification', function () {
         $validCode = $this->google2fa->getCurrentOtp($this->secret);
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => $validCode,
-            ]);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => $validCode,
+        ]);
 
         // Assert
         $response->assertRedirect(route('admin.dashboard.index'));
@@ -246,10 +234,9 @@ describe('Two Factor Authentication Login Verification', function () {
 
     it('admin can verify with valid backup code', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => '670089',
-            ]);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => '670089',
+        ]);
 
         // Assert
         $response->assertRedirect(route('admin.dashboard.index'));
@@ -263,10 +250,9 @@ describe('Two Factor Authentication Login Verification', function () {
 
     it('verification fails with invalid code', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => '999999',
-            ]);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => '999999',
+        ]);
 
         // Assert
         $response->assertRedirect()
@@ -277,10 +263,9 @@ describe('Two Factor Authentication Login Verification', function () {
 
     it('verification requires 6-digit code', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => '123',
-            ]);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => '123',
+        ]);
 
         // Assert
         $response->assertSessionHasErrors('code');
@@ -288,8 +273,7 @@ describe('Two Factor Authentication Login Verification', function () {
 
     it('verification requires code parameter', function () {
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), []);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), []);
 
         // Assert
         $response->assertSessionHasErrors('code');
@@ -297,16 +281,14 @@ describe('Two Factor Authentication Login Verification', function () {
 
     it('backup code can only be used once', function () {
         // Act
-        $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => '670089',
-            ]);
+        $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => '670089',
+        ]);
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => '670089',
-            ]);
+        $response = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => '670089',
+        ]);
 
         // Assert
         $response->assertRedirect()
@@ -315,7 +297,6 @@ describe('Two Factor Authentication Login Verification', function () {
 });
 
 describe('Two Factor Authentication Repository Methods', function () {
-
     it('generates QR code data correctly', function () {
         // Arrange
         $repository = app(AdminRepository::class);
@@ -348,7 +329,6 @@ describe('Two Factor Authentication Repository Methods', function () {
 });
 
 describe('Two Factor Authentication Backup Codes Email Notifications', function () {
-
     it('sends backup codes email on successful 2FA enable', function () {
         // Arrange
         $secret = $this->google2fa->generateSecretKey();
@@ -357,10 +337,9 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
         $validCode = $this->google2fa->getCurrentOtp($secret);
 
         // Act
-        $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => $validCode,
-            ]);
+        $this->post(route('admin.twofactor.enable'), [
+            'code' => $validCode,
+        ]);
 
         // Assert
         Mail::assertSent(BackupCodesNotification::class, function ($mail) {
@@ -378,10 +357,9 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
         $validCode = $this->google2fa->getCurrentOtp($secret);
 
         // Act
-        $response = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => $validCode,
-            ]);
+        $response = $this->post(route('admin.twofactor.enable'), [
+            'code' => $validCode,
+        ]);
 
         // Assert
         $this->admin->refresh();
@@ -392,11 +370,9 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
 });
 
 describe('Two Factor Authentication Integration Flow', function () {
-
-    test('complete 2FA setup and login flow', function () {
-        // Arrange & Act: Setup 2FA
-        $setupResponse = $this->actingAs($this->admin, 'admin')
-            ->getJson(route('admin.twofactor.setup'));
+    it('complete 2FA setup and login flow', function () {
+        // Act: Setup 2FA
+        $setupResponse = $this->getJson(route('admin.twofactor.setup'));
 
         // Assert: setup successful
         $setupResponse->assertJson(['success' => true]);
@@ -407,10 +383,9 @@ describe('Two Factor Authentication Integration Flow', function () {
         $validCode = $this->google2fa->getCurrentOtp($secret);
 
         // Act: Step 2 - Enable 2FA with valid code
-        $enableResponse = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.enable'), [
-                'code' => $validCode,
-            ]);
+        $enableResponse = $this->post(route('admin.twofactor.enable'), [
+            'code' => $validCode,
+        ]);
 
         // Assert: 2FA enable endpoint redirects successfully
         $enableResponse->assertRedirect();
@@ -423,18 +398,16 @@ describe('Two Factor Authentication Integration Flow', function () {
         $newValidCode = $this->google2fa->getCurrentOtp($secret);
 
         // Act: Step 4 - Verify 2FA during login
-        $verifyResponse = $this->actingAs($this->admin, 'admin')
-            ->post(route('admin.twofactor.verifyTwoFactorCode'), [
-                'code' => $newValidCode,
-            ]);
+        $verifyResponse = $this->post(route('admin.twofactor.verifyTwoFactorCode'), [
+            'code' => $newValidCode,
+        ]);
 
         // Assert: redirect to dashboard + session flag set
         $verifyResponse->assertRedirect(route('admin.dashboard.index'));
         expect(session('two_factor_passed'))->toBeTrue();
 
         // Act: Step 5 - Disable 2FA
-        $disableResponse = $this->actingAs($this->admin, 'admin')
-            ->get(route('admin.twofactor.disable'));
+        $disableResponse = $this->get(route('admin.twofactor.disable'));
 
         // Assert: disable response and DB flag updated
         $disableResponse->assertJson(['success' => true]);
