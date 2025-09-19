@@ -15,6 +15,14 @@ class Bouncer
      */
     public function handle($request, \Closure $next, $guard = 'admin')
     {
+        // Skip two-factor routes to prevent redirect loops
+        if (
+            $request->routeIs('admin.twofactor.*')
+            || $request->routeIs('admin.session.destroy')
+        ) {
+            return $next($request);
+        }
+
         if (! auth()->guard($guard)->check()) {
             return redirect()->route('admin.session.create');
         }
@@ -39,6 +47,14 @@ class Bouncer
             session()->flash('error', __('admin::app.error.403.message'));
 
             return redirect()->route('admin.session.create');
+        }
+
+        /**
+         * If two-factor authentication is enabled for the user,
+         * check if they have completed the verification process.
+         */
+        if ($this->isTwoFactorRequired($guard)) {
+            return $this->handleTwoFactorRedirect(auth()->guard($guard)->user());
         }
 
         return $next($request);
@@ -83,5 +99,38 @@ class Bouncer
         if (isset($roles[Route::currentRouteName()])) {
             bouncer()->allow($roles[Route::currentRouteName()]);
         }
+    }
+
+    /**
+     * Check if two-factor authentication is required.
+     *
+     * @param  string  $guard
+     * @return bool
+     */
+    public function isTwoFactorRequired($guard)
+    {
+        $admin = auth()->guard($guard)->user();
+
+        // Only require 2FA if admin has it enabled AND hasn't verified in this session
+        if ($admin && $admin->two_factor_enabled && ! session()->get('two_factor_passed', false)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Handle redirection based on two-factor setup status.
+     *
+     * @param  mixed  $admin
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleTwoFactorRedirect($admin)
+    {
+        if ($admin->two_factor_secret) {
+            return redirect()->route('admin.twofactor.verify.form');
+        }
+
+        return redirect()->route('admin.twofactor.setup');
     }
 }

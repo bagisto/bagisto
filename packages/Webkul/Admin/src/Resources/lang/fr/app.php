@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Réinitialiser le mot de passe',
             'title'                  => 'Réinitialiser le mot de passe',
         ],
+
+        'verify' => [
+            'title'                 => 'Vérifier l’authentification à deux facteurs',
+            'enter_code'            => 'Entrez le code à 6 chiffres de votre application d’authentification pour continuer.',
+            'code_label'            => 'Code de vérification',
+            'code_placeholder'      => 'Entrez le code à 6 chiffres',
+            'back'                  => 'Retour',
+            'verify_code'           => 'Vérifier le code',
+            'disabled_message'      => 'La vérification à deux facteurs est actuellement désactivée par l’administrateur.',
+        ],
     ],
 
     'notifications' => [
@@ -72,6 +82,39 @@ return [
             'title'             => 'Mon compte',
             'update-success'    => 'Compte mis à jour avec succès',
             'upload-image-info' => 'Téléchargez une image de profil (110px X 110px) au format PNG ou JPG',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Cher/Chère :admin_name',
+            ],
+
+            'backup-codes' => [
+                'subject'             => 'Codes de sauvegarde de l’authentification à deux facteurs - ',
+                'greeting'            => 'Vous avez activé avec succès l’authentification à deux facteurs pour votre compte administrateur.',
+                'description'         => 'Pour votre sécurité, nous avons généré des codes de secours que vous pouvez utiliser si vous perdez l’accès à votre application d’authentification. Chaque code ne peut être utilisé qu’une seule fois.',
+                'codes-title'         => 'Vos codes de secours',
+                'codes-subtitle'      => 'Conservez ces codes en lieu sûr – chacun ne peut être utilisé qu’une seule fois.',
+                'warning-title'       => 'Avis de sécurité important',
+                'warning-description' => 'Gardez ces codes en sécurité et ne les partagez avec personne. Conservez-les hors ligne dans un endroit sûr.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'Authentification à deux facteurs activée avec succès.',
+            'invalid_code'     => 'Code de vérification invalide.',
+            'disabled_success' => 'Authentification à deux facteurs désactivée.',
+            'verified_success' => 'Authentification à deux facteurs vérifiée avec succès.',
+            'email_failed'     => 'Échec de l’envoi des codes de secours',
+        ],
+
+        'setup' => [
+            'title'            => 'Activer l’authentification à deux facteurs',
+            'scan_qr'          => 'Scannez ce code QR dans votre application Google Authenticator, puis entrez le code à 6 chiffres ci-dessous.',
+            'code_label'       => 'Code de vérification',
+            'code_placeholder' => 'Entrez le code à 6 chiffres',
+            'back'             => 'Retour',
+            'verify_enable'    => 'Vérifier et activer',
         ],
     ],
 

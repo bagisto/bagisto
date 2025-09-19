@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Şifre Sıfırla',
             'title'                  => 'Şifre Sıfırlama',
         ],
+
+        'verify' => [
+            'title'                 => 'İki Faktörlü Doğrulamayı Onayla',
+            'enter_code'            => 'Devam etmek için doğrulayıcı uygulamanızdan 6 haneli kodu girin.',
+            'code_label'            => 'Doğrulama Kodu',
+            'code_placeholder'      => '6 haneli kodu girin',
+            'back'                  => 'Geri',
+            'verify_code'           => 'Kodu Doğrula',
+            'disabled_message'      => 'İki faktörlü doğrulama şu anda yönetici tarafından devre dışı bırakılmıştır.',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,40 @@ return [
             'save-btn'          => 'Hesabı Kaydet',
             'title'             => 'Hesabım',
             'update-success'    => 'Hesap başarıyla güncellendi',
-            'upload-image-info' => 'PNG veya JPG Formatında 110x110 boyutlarında bir profil resmi yükleyin',
+            'upload-image-info' => 'Profil Resmi Yükle (110px X 110px) PNG veya JPG formatında',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Sayın :admin_name',
+            ],
+
+            'backup-codes' => [
+                'subject'             => 'İki Faktörlü Kimlik Doğrulama Yedek Kodları - ',
+                'greeting'            => 'Yönetici hesabınız için iki faktörlü doğrulamayı başarıyla etkinleştirdiniz.',
+                'description'         => 'Güvenliğiniz için, doğrulayıcı uygulamanıza erişimi kaybetmeniz durumunda kullanabileceğiniz yedek kodlar oluşturduk. Her kod yalnızca bir kez kullanılabilir.',
+                'codes-title'         => 'Yedek Kodlarınız',
+                'codes-subtitle'      => 'Bu kodları güvenli bir yerde saklayın – her biri yalnızca bir kez kullanılabilir.',
+                'warning-title'       => 'Önemli Güvenlik Uyarısı',
+                'warning-description' => 'Bu kodları güvende tutun ve kimseyle paylaşmayın. Çevrimdışı güvenli bir yerde saklayın.',
+            ],
+        ],
+
+        'messages' => [
+            'enabled_success'  => 'İki faktörlü doğrulama başarıyla etkinleştirildi.',
+            'invalid_code'     => 'Geçersiz doğrulama kodu.',
+            'disabled_success' => 'İki faktörlü doğrulama devre dışı bırakıldı.',
+            'verified_success' => 'İki faktörlü doğrulama başarıyla doğrulandı.',
+            'email_failed'     => 'Yedek kodlar gönderilemedi',
+        ],
+
+        'setup' => [
+            'title'            => 'İki Faktörlü Doğrulamayı Etkinleştir',
+            'scan_qr'          => 'Bu QR kodunu Google Authenticator uygulamanızla tarayın ve ardından aşağıdaki 6 haneli kodu girin.',
+            'code_label'       => 'Doğrulama Kodu',
+            'code_placeholder' => '6 haneli kodu girin',
+            'back'             => 'Geri',
+            'verify_enable'    => 'Doğrula & Etkinleştir',
         ],
     ],
 
