@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Allgemein',
 
                 'general' => [
-                    'info'  => 'Einheitsoptionen festlegen und Breadcrumbs aktivieren oder deaktivieren.',
+                    'info'  => 'Konfigurieren Sie die Einheitseinstellungen und aktivieren oder deaktivieren Sie die Optionen für Breadcrumbs und Besucher.',
                     'title' => 'Allgemein',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Shop-Breadcrumbs',
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Aktivieren oder deaktivieren Sie die Breadcrumbs-Navigation im Shop.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Besucheroptionen aktivieren',
+                        'title'      => 'Besucheroptionen',
+                        'title-info' => 'Ermöglicht die Kontrolle über die Website, um die Anzahl der Besuche zu verfolgen und zu zählen, was hilft, die allgemeine Besucheraktivität und das Engagement zu überwachen.',
                     ],
                 ],
 

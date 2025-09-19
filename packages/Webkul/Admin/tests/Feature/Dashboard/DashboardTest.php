@@ -34,6 +34,8 @@ it('should return the dashboard index page', function () {
 
 it('should show the dashboard over all stats', function () {
     // Arrange.
+    config(['visitor.general.status' => true]);
+
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1101,6 +1103,8 @@ it('should show the dashboard total visitors stats', function () {
     ]))
         ->getSimpleProductFactory()
         ->create();
+
+    config(['visitor.general.status' => true]);
 
     visitor()->visit();
 

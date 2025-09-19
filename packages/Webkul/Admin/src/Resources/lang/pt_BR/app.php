@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Geral',
 
                 'general' => [
-                    'info'  => 'Definir opções de unidades e ativar ou desativar migalhas de pão.',
+                    'info'  => 'Defina as opções de unidade e ative ou desative as migalhas de pão.',
                     'title' => 'Geral',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Migalhas de Pão da Loja',
                         'title'      => 'Migalhas de Pão',
                         'title-info' => 'Ativar ou desativar a navegação por migalhas de pão na loja.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Ativar opções de visitante',
+                        'title'      => 'Opções de visitante',
+                        'title-info' => 'Permite controlar o site para rastrear e contar o número de visitas, ajudando a monitorar a atividade geral e o engajamento dos visitantes.',
                     ],
                 ],
 
