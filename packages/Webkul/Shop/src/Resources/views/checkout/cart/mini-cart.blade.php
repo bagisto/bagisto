@@ -26,6 +26,7 @@
                             role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
                             tabindex="0"
+                            @click="getCart"
                         ></span>
 
                         @if (core()->getConfigData('sales.checkout.my_cart.summary') == 'display_item_quantity')
@@ -235,6 +236,8 @@
                             <img
                                 class="max-md:h-[100px] max-md:w-[100px]"
                                 src="{{ bagisto_asset('images/thank-you.png') }}"
+                                loading="lazy"
+                                decoding="async"
                             >
 
                             <p
@@ -392,11 +395,11 @@
             },
 
             mounted() {
-                this.getCart();
+                if (!this.cart) {
+                    this.getCart();
+                }
 
                 /**
-                 * To Do: Implement this.
-                 *
                  * Action.
                  */
                 this.$emitter.on('update-mini-cart', (cart) => {
