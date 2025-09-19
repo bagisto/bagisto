@@ -659,8 +659,7 @@
         >
             <div ref="carouselWrapper">
                 <template v-if="isVisible">
-
-                <!-- Featured Products -->
+                    <!-- Featured Products -->
                     <x-shop::products.carousel
                         :title="trans('shop::app.products.view.related-product-title')"
                         :src="route('shop.api.products.related.index', ['id' => $product->id])"
@@ -672,17 +671,19 @@
                         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
                     />
                 </template>
-
             </div>
         </script>
+
         <script type="module">
             app.component('v-product-associations', {
                 template: '#v-product-associations-template',
+
                 data() {
                     return {
                         isVisible: false,
                     };
                 },
+
                 mounted() {
                     const observer = new IntersectionObserver(
                         (entries) => {

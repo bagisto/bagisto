@@ -96,18 +96,23 @@
                     isDesktop: window.innerWidth >= 1024
                 }
             },
+
             mounted() {
                 this.media = window.matchMedia('(min-width: 1024px)');
+
                 this.media.addEventListener('change', this.handleMedia);
             },
+
             beforeUnmount() {
                 this.media.removeEventListener('change', this.handleMedia);
             },
+
             methods: {
                 handleMedia(e) {
                     this.isDesktop = e.matches;
                 }
             },
+
             render() {
                 return this.isDesktop
                     ? this.$h(this.$resolveComponent('v-desktop-header'))

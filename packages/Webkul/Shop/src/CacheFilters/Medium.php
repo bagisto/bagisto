@@ -25,7 +25,7 @@ class Medium implements FilterInterface
 
             $height = core()->getConfigData('catalog.products.cache_medium_image.height') != ''
                 ? core()->getConfigData('catalog.products.cache_medium_image.height')
-                : 350;
+                : 360;
 
             return $image->fit($width, $height);
         } elseif (Str::contains(url()->current(), '/category')) {
