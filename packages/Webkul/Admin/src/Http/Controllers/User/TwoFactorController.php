@@ -19,8 +19,15 @@ class TwoFactorController extends Controller
     public function setup(Request $request)
     {
         try {
+            if (! auth('admin')->check()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => trans('admin::app.errors.401.title'),
+                ], 401);
+            }
+
             $admin = auth('admin')->user();
-            
+
             $secret = $this->adminRepository->getOrGenerateTwoFactorSecret($admin);
             $qrCodeData = $this->adminRepository->generateTwoFactorQrCodeData($admin, $secret);
 
@@ -30,14 +37,10 @@ class TwoFactorController extends Controller
             ], 200);
 
         } catch (\Exception $e) {
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'error'   => $e->getMessage(),
-                ], 500);
-            }
-
-            throw $e;
+            return response()->json([
+                'success' => false,
+                'error'   => $e->getMessage(),
+            ], 500);
         }
     }
 
