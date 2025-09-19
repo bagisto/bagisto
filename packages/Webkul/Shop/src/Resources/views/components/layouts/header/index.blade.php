@@ -109,7 +109,6 @@
                 }
             },
             render() {
-                console.log(this.isDesktop);
                 return this.isDesktop
                     ? this.$h(this.$resolveComponent('v-desktop-header'))
                     : this.$h(this.$resolveComponent('v-mobile-header'));

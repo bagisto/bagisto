@@ -29,12 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product_price_indices', function (Blueprint $table) {
-            $table->dropIndex(['product_id', 'customer_group_id']);
-        });
+        Schema::dropIfExists('ppi_product_id_customer_group_id_idx');
 
-        Schema::table('product_channels', function (Blueprint $table) {
-            $table->dropIndex(['product_id', 'channel_id']);
-        });
+        Schema::dropIfExists('pc_product_id_channel_id_idx');
     }
 };

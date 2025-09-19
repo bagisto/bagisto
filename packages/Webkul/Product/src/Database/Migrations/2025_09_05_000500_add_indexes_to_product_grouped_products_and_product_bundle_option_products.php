@@ -29,12 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product_grouped_products', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('pgp_product_id_idx');
 
-        Schema::table('product_bundle_option_products', function (Blueprint $table) {
-            $table->dropIndex(['product_bundle_option_id']);
-        });
+        Schema::dropIfExists('pbop_option_id_idx');
     }
 };

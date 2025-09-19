@@ -35,12 +35,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('url_rewrites', function (Blueprint $table) {
-            $table->dropIndex('idx_url_rewrites_entity_type_request_path_locale');
-        });
+        Schema::dropIfExists('url_rewrites_et_rp_lc_idx');
 
-        Schema::table('visits', function (Blueprint $table) {
-            $table->dropIndex('idx_visits_channel_url_ip_method');
-        });
+        Schema::dropIfExists('visits_cid_ip_m_vid_vt_ca_idx');
     }
 };

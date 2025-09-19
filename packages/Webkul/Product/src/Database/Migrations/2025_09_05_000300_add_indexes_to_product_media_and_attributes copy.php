@@ -47,24 +47,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product_images', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('prod_img_product_id_idx');
 
-        Schema::table('product_videos', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('prod_vid_product_id_idx');
 
-        Schema::table('product_reviews', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('prod_rev_product_id_idx');
 
-        Schema::table('product_inventory_indices', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('prod_inv_product_id_idx');
 
-        Schema::table('product_attribute_values', function (Blueprint $table) {
-            $table->dropIndex(['product_id']);
-        });
+        Schema::dropIfExists('prod_attr_product_id_idx');
     }
 };

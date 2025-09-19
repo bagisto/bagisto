@@ -92,8 +92,7 @@
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
         <a
-
-        href="#main"
+            href="#main"
             class="skip-to-main-content-link"
         >
             Skip to main content
