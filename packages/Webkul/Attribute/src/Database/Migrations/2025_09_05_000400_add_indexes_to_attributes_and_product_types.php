@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('attributes', function (Blueprint $table) {
-            if (! Schema::hasIndex('attributes', 'attributes_code_index')) {
+            if (! Schema::hasIndex('attributes', $table->getPrefix(). 'attributes_code_index')) {
                 $table->index('code');
             }
         });
@@ -24,8 +24,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('attributes', function (Blueprint $table) {
-            if (Schema::hasIndex('attributes', 'attributes_code_index')) {
-                $table->dropIndex('attributes_code_index');
+            if (Schema::hasIndex('attributes', $table->getPrefix().'attributes_code_index')) {
+                $table->dropIndex(['code']);
             }
         });
     }
