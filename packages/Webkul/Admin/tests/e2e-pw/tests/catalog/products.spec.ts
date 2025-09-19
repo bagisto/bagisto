@@ -65,7 +65,6 @@ async function createSimpleProduct(adminPage) {
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
     const name = await adminPage.locator('input[name="name"]').inputValue();
-    console.log(name);
 
     /**
      * Description Section.
