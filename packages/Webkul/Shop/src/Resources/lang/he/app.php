@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'הרשם לניוזלטר',
             'success'                     => 'חשבון נוצר בהצלחה.',
             'success-verify'              => 'חשבון נוצר בהצלחה, הודעת אימייל נשלחה לאימות.',
-            'success-verify-email-unsent' => 'חשבון נוצר בהצלחה, אך הודעת האימייל לא נשלחה.',
             'terms-conditions'            => 'תנאים והגבלות',
             'verification-not-sent'       => 'שגיאה! בעיה בשליחת האימייל לאימות, אנא נסה שוב מאוחר יותר.',
             'verification-sent'           => 'האימייל לאימות נשלח',
