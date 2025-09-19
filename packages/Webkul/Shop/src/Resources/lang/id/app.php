@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Berlangganan buletin',
             'success'                     => 'Akun berhasil dibuat.',
             'success-verify'              => 'Akun berhasil dibuat, email verifikasi telah dikirim.',
-            'success-verify-email-unsent' => 'Akun berhasil dibuat, tetapi email verifikasi tidak terkirim.',
             'terms-conditions'            => 'Syarat & Ketentuan',
             'verification-not-sent'       => 'Kesalahan! Terjadi masalah saat mengirim email verifikasi, silakan coba lagi nanti.',
             'verification-sent'           => 'Email verifikasi telah dikirim.',

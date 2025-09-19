@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Http;
 class GroqAI
 {
     /**
-     * Summary of API_URL
+     * API URL for Groq AI.
      */
     private const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
     /**
-     * Summary of TEMPERATURE
+     * Temperature setting for Groq AI.
      */
     private const TEMPERATURE = 0.7;
 
@@ -43,26 +43,22 @@ class GroqAI
      */
     public function ask(): string
     {
-        try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.config('groq.api_key'),
-                'Content-Type'  => 'application/json',
-            ])->post(self::API_URL, [
-                'model'       => $this->model,
-                'temperature' => $this->temperature,
-                'messages'    => [
-                    [
-                        'role'    => 'user',
-                        'content' => $this->prompt,
-                    ],
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.config('groq.api_key'),
+            'Content-Type'  => 'application/json',
+        ])->post(self::API_URL, [
+            'model'       => $this->model,
+            'temperature' => $this->temperature,
+            'messages'    => [
+                [
+                    'role'    => 'user',
+                    'content' => $this->prompt,
                 ],
-            ]);
+            ],
+        ]);
 
-            $result = $response->json();
+        $result = $response->json();
 
-            return $result['choices'][0]['message']['content'] ?? '';
-        } catch (\Exception $e) {
-            return 'Exception: '.$e->getMessage();
-        }
+        return $result['choices'][0]['message']['content'] ?? '';
     }
 }

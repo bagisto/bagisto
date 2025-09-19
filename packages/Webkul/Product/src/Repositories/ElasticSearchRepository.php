@@ -7,6 +7,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
+use Webkul\Product\Helpers\Product;
 
 class ElasticSearchRepository
 {
@@ -26,7 +27,10 @@ class ElasticSearchRepository
      */
     public function getIndexName(): string
     {
-        return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCodeInRequestedChannel().'_index';
+        return Product::formatElasticSearchIndexName(
+            core()->getRequestedChannelCode(),
+            core()->getRequestedLocaleCodeInRequestedChannel()
+        );
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Product\Helpers\Product;
 
 class ProductDataGrid extends DataGrid
 {
@@ -306,7 +307,7 @@ class ProductDataGrid extends DataGrid
         $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
 
         $indexNames = collect($channelCodes)->map(function ($channelCode) {
-            return 'products_'.$channelCode.'_'.app()->getLocale().'_index';
+            return Product::formatElasticSearchIndexName($channelCode, app()->getLocale());
         })->toArray();
 
         $results = Elasticsearch::search([

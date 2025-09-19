@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Newsletter abonnieren',
             'success'                     => 'Konto erfolgreich erstellt.',
             'success-verify'              => 'Konto erfolgreich erstellt, eine E-Mail zur Verifizierung wurde gesendet.',
-            'success-verify-email-unsent' => 'Konto erfolgreich erstellt, aber die Verifizierungs-E-Mail wurde nicht gesendet.',
             'terms-conditions'            => 'Allgemeine Geschäftsbedingungen',
             'verification-not-sent'       => 'Fehler! Problem beim Senden der Verifizierungs-E-Mail, bitte versuchen Sie es später erneut.',
             'verification-sent'           => 'Verifizierungs-E-Mail gesendet',

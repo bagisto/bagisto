@@ -59,6 +59,7 @@ class CartItemResource extends JsonResource
 
                     return $attribute;
                 })
+                ->values()
                 ->toArray();
         }
 
