@@ -280,6 +280,7 @@ class CartController extends APIController
             ->select('products.*', 'product_cross_sells.child_id')
             ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
             ->whereIn('product_cross_sells.parent_id', $productIds)
+            ->whereNotIn('product_cross_sells.child_id', $productIds)
             ->groupBy('product_cross_sells.child_id')
             ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products'))
             ->get();
