@@ -306,7 +306,7 @@
                                                             type="text"
                                                             class="ltr:pl-8 rtl:pr-8"
                                                             name="price"
-                                                            ::rules="{required: true, decimal: true, min_value: 0}"
+                                                            ::rules="{decimal: true, min_value: 0}"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                                         />
                                                     </div>
@@ -498,7 +498,7 @@
                                                 class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-8 rtl:pr-8"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
-                                                :rules="{required: true, decimal: true, min_value: 0}"
+                                                :rules="{decimal: true, min_value: 0}"
                                                 v-model="variant.price"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                             >
