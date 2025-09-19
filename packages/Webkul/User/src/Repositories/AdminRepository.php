@@ -45,19 +45,16 @@ class AdminRepository extends Repository
 
     /**
      * Generate or retrieve 2FA secret for admin.
-     *
-     * @param  Admin  $admin
-     * @return string
      */
     public function getOrGenerateTwoFactorSecret(Admin $admin): string
     {
         if (! $admin->two_factor_secret) {
             $secret = app(Google2FA::class)->generateSecretKey();
-            
+
             $admin->update([
-                'two_factor_secret' => encrypt($secret)
+                'two_factor_secret' => encrypt($secret),
             ]);
-            
+
             return $secret;
         }
 
@@ -66,10 +63,6 @@ class AdminRepository extends Repository
 
     /**
      * Generate QR code data for 2FA setup.
-     *
-     * @param  Admin   $admin
-     * @param  string  $secret
-     * @return array
      */
     public function generateTwoFactorQrCodeData(Admin $admin, string $secret): array
     {
@@ -93,10 +86,6 @@ class AdminRepository extends Repository
 
     /**
      * Enable 2FA for admin after code verification.
-     *
-     * @param  Admin   $admin
-     * @param  string  $code
-     * @return bool
      */
     public function enableTwoFactor(Admin $admin, string $code): bool
     {
@@ -105,20 +94,17 @@ class AdminRepository extends Repository
         }
 
         $admin->update([
-            'two_factor_enabled'    => true,
+            'two_factor_enabled'     => true,
             'two_factor_verified_at' => now(),
         ]);
 
         $this->sendTwoFactorBackupCodesEmail($admin);
-        
+
         return true;
     }
 
     /**
      * Disable 2FA for admin.
-     *
-     * @param  Admin  $admin
-     * @return bool
      */
     public function disableTwoFactor(Admin $admin): bool
     {
@@ -132,10 +118,6 @@ class AdminRepository extends Repository
 
     /**
      * Verify 2FA code or backup code.
-     *
-     * @param  Admin   $admin
-     * @param  string  $code
-     * @return bool
      */
     public function verifyTwoFactorCode(Admin $admin, string $code): bool
     {
@@ -148,10 +130,6 @@ class AdminRepository extends Repository
 
     /**
      * Verify backup code and remove it from available codes.
-     *
-     * @param  Admin   $admin
-     * @param  string  $code
-     * @return bool
      */
     public function verifyBackupCode(Admin $admin, string $code): bool
     {
@@ -162,23 +140,20 @@ class AdminRepository extends Repository
         }
 
         $updatedBackupCodes = array_values(array_diff($backupCodes, [$code]));
-        
+
         return $admin->update([
-            'two_factor_backup_codes' => $updatedBackupCodes
+            'two_factor_backup_codes' => $updatedBackupCodes,
         ]);
     }
 
     /**
      * Send backup codes via email.
-     *
-     * @param  Admin  $admin
-     * @return void
      */
     protected function sendTwoFactorBackupCodesEmail(Admin $admin): void
     {
         try {
             $backupCodes = $admin->generateBackupCodes();
-            
+
             Mail::to($admin->email)->send(
                 new BackupCodesNotification($admin, $backupCodes)
             );
@@ -195,21 +170,16 @@ class AdminRepository extends Repository
 
     /**
      * Clean SVG string from invalid characters.
-     *
-     * @param  string  $svg
-     * @return string
      */
     protected function cleanSvgString(string $svg): string
     {
         $svg = mb_convert_encoding($svg, 'UTF-8', 'UTF-8');
-        
+
         return str_replace(["\0", "\x00"], '', $svg);
     }
 
     /**
      * Count admins with two-factor authentication enabled.
-     *
-     * @return int
      */
     public function countAdminsWithTwoFactorEnabled(): int
     {
