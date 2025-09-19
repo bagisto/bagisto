@@ -29,8 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pgp_product_id_idx');
-
-        Schema::dropIfExists('pbop_option_id_idx');
+        Schema::table('product_grouped_products', function (Blueprint $table) {
+            if (Schema::hasIndex('product_grouped_products', 'pgp_product_id_idx')) {
+                $table->dropIndex('pgp_product_id_idx');
+            }
+        });
     }
 };

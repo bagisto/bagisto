@@ -24,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('attributes', function (Blueprint $table) {
-            $table->dropIndex(['code']);
+            if (Schema::hasIndex('attributes', 'attributes_code_index')) {
+                $table->dropIndex('attributes_code_index');
+            }
         });
     }
 };

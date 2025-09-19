@@ -35,8 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('url_rewrites_et_rp_lc_idx');
-
-        Schema::dropIfExists('visits_cid_ip_m_vid_vt_ca_idx');
+        Schema::table('url_rewrites', function (Blueprint $table) {
+            if (Schema::hasIndex('url_rewrites', 'url_rewrites_et_rp_lc_idx')) {
+                $table->dropIndex('url_rewrites_et_rp_lc_idx');
+            }
+        });
     }
 };

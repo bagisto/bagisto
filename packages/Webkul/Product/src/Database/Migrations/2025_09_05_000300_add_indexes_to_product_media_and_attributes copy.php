@@ -47,14 +47,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prod_img_product_id_idx');
-
-        Schema::dropIfExists('prod_vid_product_id_idx');
-
-        Schema::dropIfExists('prod_rev_product_id_idx');
-
-        Schema::dropIfExists('prod_inv_product_id_idx');
-
-        Schema::dropIfExists('prod_attr_product_id_idx');
+        Schema::table('product_inventory_indices', function (Blueprint $table) {
+            if (Schema::hasIndex('product_inventory_indices', 'prod_inv_product_id_idx')) {
+                $table->dropIndex('prod_inv_product_id_idx');
+            }
+        });
     }
 };

@@ -29,8 +29,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ppi_product_id_customer_group_id_idx');
+        Schema::table('product_price_indices', function (Blueprint $table) {
+            if (Schema::hasIndex('product_price_indices', 'ppi_product_id_customer_group_id_idx')) {
+                $table->dropIndex('ppi_product_id_customer_group_id_idx');
+            }
+        });
 
-        Schema::dropIfExists('pc_product_id_channel_id_idx');
+        Schema::table('product_channels', function (Blueprint $table) {
+            if (Schema::hasIndex('product_channels', 'pc_product_id_channel_id_idx')) {
+                $table->dropIndex('pc_product_id_channel_id_idx');
+            }
+        });
     }
 };
