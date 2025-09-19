@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Subscribe to newsletter',
             'success'                     => 'Account created successfully.',
             'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
             'terms-conditions'            => ' Terms & Conditions',
             'verification-not-sent'       => 'Error! Problem in sending verification email, please try again later.',
             'verification-sent'           => 'Verification email sent',

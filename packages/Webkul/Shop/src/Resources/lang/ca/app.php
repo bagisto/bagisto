@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Subscriure’s al butlletí',
             'success'                     => 'Compte creat amb èxit.',
             'success-verify'              => 'Compte creat amb èxit, s’ha enviat un correu electrònic per a la seva verificació.',
-            'success-verify-email-unsent' => 'Compte creat amb èxit, però el correu de verificació no s’ha enviat.',
             'terms-conditions'            => 'Termes i Condicions',
             'verification-not-sent'       => 'Error! Problema en enviar el correu de verificació, si us plau intenta-ho de nou més tard.',
             'verification-sent'           => 'Correu de verificació enviat',
