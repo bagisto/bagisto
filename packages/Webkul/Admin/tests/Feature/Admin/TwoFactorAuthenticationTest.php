@@ -346,3 +346,47 @@ describe('Two Factor Authentication Repository Methods', function () {
         expect($cleanSvg)->toBe('<svg>invalidcontent</svg>');
     });
 });
+
+describe('Two Factor Authentication Backup Codes Email Notifications', function () {
+
+    it('sends backup codes email on successful 2FA enable', function () {
+        //Arrange
+        $secret = $this->google2fa->generateSecretKey();
+        $this->admin->update(['two_factor_secret' => encrypt($secret)]);
+
+        $validCode = $this->google2fa->getCurrentOtp($secret);
+
+        //Act
+        $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.enable'), [
+                'code' => $validCode,
+            ]);
+        
+        //Assert
+        Mail::assertSent(BackupCodesNotification::class, function ($mail) {
+            return $mail->hasTo($this->admin->email) && ! empty($mail->backupCodes);
+        });
+    });
+
+    it('handles email failure gracefully', function () {
+        // Arrange
+        Mail::shouldReceive('to->send')->andThrow(new \Exception('Mail server error'));
+
+        $secret = $this->google2fa->generateSecretKey();
+        $this->admin->update(['two_factor_secret' => encrypt($secret)]);
+
+        $validCode = $this->google2fa->getCurrentOtp($secret);
+
+        // Act
+        $response = $this->actingAs($this->admin, 'admin')
+            ->post(route('admin.twofactor.enable'), [
+                'code' => $validCode,
+            ]);
+
+        // Assert
+        $this->admin->refresh();
+        expect($this->admin->two_factor_enabled)->toBeTrue();
+
+        expect(session('error'))->toBe(trans('admin::app.account.messages.email_failed'));
+    });
+});
