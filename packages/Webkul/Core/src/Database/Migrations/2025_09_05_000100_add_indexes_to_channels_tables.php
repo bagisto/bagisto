@@ -35,16 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('channels', function (Blueprint $table) {
-            $table->dropIndex(['hostname']);
-        });
+        Schema::dropIfExists('channels_hostname_idx');
 
-        Schema::table('channel_locales', function (Blueprint $table) {
-            $table->dropIndex(['channel_id', 'locale_id']);
-        });
+        Schema::dropIfExists('channel_locales_cid_lid_idx');
 
-        Schema::table('channel_currencies', function (Blueprint $table) {
-            $table->dropIndex(['channel_id', 'currency_id']);
-        });
+        Schema::dropIfExists('channel_currencies_cid_cyid_idx');
     }
 };
