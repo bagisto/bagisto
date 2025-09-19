@@ -95,7 +95,7 @@ class RegistrationController extends Controller
 
         Event::dispatch('customer.registration.after', $customer);
 
-        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
+        if (core()->getConfigData('customer.settings.email.verification')) {
             session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
         } else {
             session()->flash('success', trans('shop::app.customers.signup-form.success'));
