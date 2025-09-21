@@ -27,24 +27,20 @@ class Gemini
 
         $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->model}:generateContent?key={$apiKey}";
 
-        try {
-            $result = $httpClient->request('POST', $endpoint, [
-                'headers' => [
-                    'Accept'       => 'application/json',
-                    'Content-Type' => 'application/json',
+        $result = $httpClient->request('POST', $endpoint, [
+            'headers' => [
+                'Accept'       => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            'json' => [
+                'contents'    => [
+                    ['parts' => [['text' => $this->prompt]]],
                 ],
-                'json' => [
-                    'contents'    => [
-                        ['parts' => [['text' => $this->prompt]]],
-                    ],
-                ],
-            ]);
+            ],
+        ]);
 
-            $result = json_decode($result->getBody()->getContents(), true);
+        $result = json_decode($result->getBody()->getContents(), true);
 
-            return $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            \Log::error($e->getMessage());
-        }
+        return $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
     }
 }

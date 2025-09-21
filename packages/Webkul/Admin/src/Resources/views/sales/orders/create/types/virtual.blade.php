@@ -417,8 +417,6 @@
                                 };
                             });
 
-                            console.log(this.options);
-
                             this.prices = this.options.map((option) => {
                                 return {
                                     option_id: option.id,

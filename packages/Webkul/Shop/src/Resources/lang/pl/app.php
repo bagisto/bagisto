@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Zapisz się na newsletter',
             'success'                     => 'Konto zostało pomyślnie utworzone.',
             'success-verify'              => 'Konto zostało pomyślnie utworzone, na Twój adres e-mail została wysłana wiadomość w celu weryfikacji.',
-            'success-verify-email-unsent' => 'Konto zostało pomyślnie utworzone, ale wiadomość weryfikacyjna nie została wysłana.',
             'terms-conditions'            => 'Warunki i zasady',
             'verification-not-sent'       => 'Błąd! Problem z wysłaniem wiadomości weryfikacyjnej, spróbuj ponownie później.',
             'verification-sent'           => 'Wysłano wiadomość weryfikacyjną',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Wyniki wyszukiwania dla: :query',
+        'title'   => 'Oto wyniki dla : :query',
+        'suggest' => 'Szukaj zamiast tego',
         'results' => 'Wyniki wyszukiwania',
 
         'images' => [

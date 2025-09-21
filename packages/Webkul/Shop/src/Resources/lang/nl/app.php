@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Abonneer op nieuwsbrief',
             'success'                     => 'Account succesvol aangemaakt.',
             'success-verify'              => 'Account succesvol aangemaakt, er is een e-mail verzonden ter verificatie.',
-            'success-verify-email-unsent' => 'Account succesvol aangemaakt, maar verificatie-e-mail niet verzonden.',
             'terms-conditions'            => 'Algemene Voorwaarden',
             'verification-not-sent'       => 'Fout! Probleem bij het verzenden van de verificatie-e-mail, probeer het later opnieuw.',
             'verification-sent'           => 'Verificatie e-mail verzonden',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Zoekresultaten voor : :query',
+        'title'   => 'Dit zijn de resultaten voor : :query',
+        'suggest' => 'Zoek in plaats daarvan',
         'results' => 'Zoekresultaten',
 
         'images' => [

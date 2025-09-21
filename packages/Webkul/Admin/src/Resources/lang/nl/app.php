@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Het boekingstype kan niet worden gewijzigd.',
+                            'type-mismatch'      => 'Het boekingstype kan niet worden gewijzigd.',
+                            'time-validation'    => 'De starttijd moet kleiner zijn dan de eindtijd.',
+                            'overlap-validation' => 'Het tijdslot overlapt met een bestaand slot.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Een Van De Voorwaarden Is Waar',
                     'apply-to-shipping'                         => 'Toepassen op Verzending',
                     'attribute-family'                          => 'Attribuutfamilie',
-                    'attribute-name-children-only'              => 'Attribuutnaam (alleen kinderen)',
-                    'attribute-name-parent-only'                => 'Attribuutnaam (alleen ouders)',
+                    'attribute-name-children-only'              => ':attribute_name (alleen voor subcategorieën)',
+                    'attribute-name-parent-only'                => ':attribute_name (alleen voor hoofdcategorieën)',
                     'auto-generate-coupon'                      => 'Automatisch Coupon Genereren',
                     'back-btn'                                  => 'Terug',
                     'buy-x-get-y-free'                          => 'Koop X, Krijg Y Gratis',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Een Van De Voorwaarden Is Waar',
                     'apply-to-shipping'                         => 'Toepassen Op Verzending',
                     'attribute-family'                          => 'Attribuutfamilie',
-                    'attribute-name-children-only'              => 'Naam van attribuut alleen voor subcategorieën',
-                    'attribute-name-parent-only'                => 'Naam van attribuut alleen voor hoofdcategorieën',
+                    'attribute-name-children-only'              => ':attribute_name (alleen voor subcategorieën)',
+                    'attribute-name-parent-only'                => ':attribute_name (alleen voor hoofdcategorieën)',
                     'auto-generate-coupon'                      => 'Automatisch Coupon Genereren',
                     'back-btn'                                  => 'Terug',
                     'buy-x-get-y-free'                          => 'Koop X, Krijg Y Gratis',

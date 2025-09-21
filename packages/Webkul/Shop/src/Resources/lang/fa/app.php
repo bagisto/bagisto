@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'اشتراک در خبرنامه',
             'success'                     => 'حساب با موفقیت ایجاد شد.',
             'success-verify'              => 'حساب با موفقیت ایجاد شد، یک ایمیل برای تأیید ارسال شده است.',
-            'success-verify-email-unsent' => 'حساب با موفقیت ایجاد شد، اما ایمیل تأیید ارسال نشد.',
             'terms-conditions'            => 'شرایط و ضوابط',
             'verification-not-sent'       => 'خطا! مشکل در ارسال ایمیل تأیید، لطفاً بعداً دوباره تلاش کنید.',
             'verification-sent'           => 'ایمیل تأیید ارسال شد',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'نتایج جستجو برای : :query',
+        'title'   => 'این نتایج برای : :query هستند',
+        'suggest' => 'به جای آن جستجو کنید',
         'results' => 'نتایج جستجو',
 
         'images' => [

@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'Тип бронювання не можна змінити.',
+                            'type-mismatch'      => 'Тип бронювання не можна змінити.',
+                            'time-validation'    => 'Час початку має бути меншим за час закінчення.',
+                            'overlap-validation' => 'Часовий проміжок перекривається з існуючим проміжком.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Будь-яка Умова Вірна',
                     'apply-to-shipping'                         => 'Застосувати до Доставки',
                     'attribute-family'                          => 'Сімейство Атрибутів',
-                    'attribute-name-children-only'              => 'Назва Атрибуту (Тільки Діти)',
-                    'attribute-name-parent-only'                => 'Назва Атрибуту (Тільки Батьки)',
+                    'attribute-name-children-only'              => ':attribute_name (Тільки Діти)',
+                    'attribute-name-parent-only'                => ':attribute_name (Тільки Батьки)',
                     'auto-generate-coupon'                      => 'Автоматично Генерувати Промокод',
                     'back-btn'                                  => 'Назад',
                     'buy-x-get-y-free'                          => 'Купи X Отримай Y За Безкоштовно',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Будь-яка Умова Вірна',
                     'apply-to-shipping'                         => 'Застосувати до Доставки',
                     'attribute-family'                          => 'Сімейство Атрибутів',
-                    'attribute-name-children-only'              => 'Назва Атрибуту (Тільки Діти)',
-                    'attribute-name-parent-only'                => 'Назва Атрибуту (Тільки Батьки)',
+                    'attribute-name-children-only'              => ':attribute_name (Тільки Діти)',
+                    'attribute-name-parent-only'                => ':attribute_name (Тільки Батьки)',
                     'auto-generate-coupon'                      => 'Автоматично Генерувати Промокод',
                     'back-btn'                                  => 'Назад',
                     'buy-x-get-y-free'                          => 'Купи X Отримай Y За Безкоштовно',

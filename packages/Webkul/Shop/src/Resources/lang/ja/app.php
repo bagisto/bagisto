@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'ニュースレターに登録',
             'success'                     => 'アカウントは正常に作成されました。',
             'success-verify'              => 'アカウントが正常に作成されました。確認のためのメールが送信されました。',
-            'success-verify-email-unsent' => 'アカウントは正常に作成されましたが、確認メールは送信されませんでした。',
             'terms-conditions'            => '利用規約',
             'verification-not-sent'       => 'エラー！確認メールの送信に問題があります。後でもう一度お試しください。',
             'verification-sent'           => '確認メールが送信されました',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => ':queryの検索結果',
+        'title'   => '「:query」の検索結果です',
+        'suggest' => '代わりに検索',
         'results' => '検索結果',
 
         'images' => [

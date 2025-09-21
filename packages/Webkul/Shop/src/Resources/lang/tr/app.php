@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Bültenimize abone olun',
             'success'                     => 'Hesap başarıyla oluşturuldu.',
             'success-verify'              => 'Hesap başarıyla oluşturuldu, doğrulama için bir e-posta gönderildi.',
-            'success-verify-email-unsent' => 'Hesap başarıyla oluşturuldu, ancak doğrulama e-postası gönderilemedi.',
             'verification-not-sent'       => 'Hata! Doğrulama e-postası gönderme sorunu, lütfen daha sonra tekrar deneyin.',
             'terms-conditions'            => 'Şartlar ve Koşullar',
             'verification-sent'           => 'Doğrulama e-postası gönderildi',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => ': :query için arama sonuçları',
+        'title'   => 'Bunlar :query için sonuçlar',
+        'suggest' => 'Bunun yerine ara',
         'results' => 'Arama sonuçları',
 
         'images' => [

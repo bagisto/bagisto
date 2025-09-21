@@ -246,7 +246,7 @@
                     <span class="block w-full border-b dark:border-gray-800"></span>
 
                     <div class="pt-4">
-                        <!-- Shipping Menthod -->
+                        <!-- Shipping Method -->
                         <p class="font-semibold text-gray-800 dark:text-white">
                             {{ $order->shipping_title }}
                         </p>

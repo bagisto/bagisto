@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'වෙන්කිරීමේ වර්ගය වෙනස් කළ නොහැක.',
+                            'type-mismatch'      => 'වෙන්කිරීමේ වර්ගය වෙනස් කළ නොහැක.',
+                            'time-validation'    => 'ආරම්භක වේලාව අවසන් වේලාවට වඩා අඩු විය යුතුය.',
+                            'overlap-validation' => 'වේලාවන් සලකා බැලූ සලකුණක් පවතින සලකුණ සමඟ අතිරික්ත වේ.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'ඕනෑම තත්වයක්ම සත්‍ය',
                     'apply-to-shipping'                         => 'නැවතුම්කරන්න',
                     'attribute-family'                          => 'අයිතම පවරනය',
-                    'attribute-name-children-only'              => 'අයිතම නම(පුණ්කර පමණ)',
-                    'attribute-name-parent-only'                => 'අයිතම නම(මව පමණ)',
+                    'attribute-name-children-only'              => ':attribute_name (පුණ්කර පමණ)',
+                    'attribute-name-parent-only'                => ':attribute_name (මව පමණ)',
                     'auto-generate-coupon'                      => 'ස්වික්රයෙන් කූපනය සාදන්න',
                     'back-btn'                                  => 'ආපසු',
                     'buy-x-get-y-free'                          => 'X අතර Y න් නොමෙයා',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'ඕනෑම තත්වයක්ම සත්‍ය',
                     'apply-to-shipping'                         => 'නැවතුම්කරන්න',
                     'attribute-family'                          => 'අයිතම පවරනය',
-                    'attribute-name-children-only'              => 'අයිතම නම(පුණ්කර පමණ)',
-                    'attribute-name-parent-only'                => 'අයිතම නම(මව පමණ)',
+                    'attribute-name-children-only'              => ':attribute_name (පුණ්කර පමණ)',
+                    'attribute-name-parent-only'                => ':attribute_name (මව පමණ)',
                     'auto-generate-coupon'                      => 'ස්වික්රයෙන් කූපනය සාදන්න',
                     'back-btn'                                  => 'ආපසු',
                     'buy-x-get-y-free'                          => 'X අතර Y න් නොමෙයා',

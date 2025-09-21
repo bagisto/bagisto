@@ -20,9 +20,6 @@ class ElasticSearch
 
     /**
      * Make a new connection.
-     *
-     *
-     * @return \Elasticsearch\Client
      */
     protected function makeConnection(?string $name = null): Client
     {
@@ -34,19 +31,19 @@ class ElasticSearch
 
         if ($connection == 'default') {
             /**
-             * Build default connection
+             * Build default connection.
              */
             $clientBuilder->setHosts($config['hosts'])
                 ->setBasicAuthentication($config['user'] ?: '', $config['pass'] ?: '');
         } elseif ($connection == 'api') {
             /**
-             * Build API key connection
+             * Build API key connection.
              */
             $clientBuilder->setHosts($config['hosts'])
                 ->setApiKey($config['key']);
         } elseif ($connection == 'cloud') {
             /**
-             * Build Elastic Cloud connection
+             * Build elastic cloud connection.
              */
             $clientBuilder->setElasticCloudId($config['id']);
 
@@ -58,7 +55,7 @@ class ElasticSearch
         }
 
         /**
-         * Set additional client configuration
+         * Set additional client configuration.
          */
         foreach ($this->configMappings as $key => $method) {
             $value = Arr::get(config('elasticsearch'), $key);
@@ -81,7 +78,6 @@ class ElasticSearch
 
     /**
      * Get the configuration for a named connection.
-     *
      *
      * @return mixed
      *

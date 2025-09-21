@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => 'לא ניתן לשנות את סוג ההזמנה.',
+                            'type-mismatch'      => 'לא ניתן לשנות את סוג ההזמנה.',
+                            'time-validation'    => 'שעת ההתחלה חייבת להיות מוקדמת יותר משעת הסיום.',
+                            'overlap-validation' => 'חלון הזמן חופף לחלון קיים.',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'לפחות תנאי אחד נכון',
                     'apply-to-shipping'                         => 'החל למשלוח',
                     'attribute-family'                          => 'משפחת התכונות',
-                    'attribute-name-children-only'              => 'שם התכונה (רק ילדים)',
-                    'attribute-name-parent-only'                => 'שם התכונה (רק הורים)',
+                    'attribute-name-children-only'              => ':attribute_name (רק ילדים)',
+                    'attribute-name-parent-only'                => ':attribute_name (רק הורים)',
                     'auto-generate-coupon'                      => 'יצירת קופון אוטומטית',
                     'back-btn'                                  => 'חזרה',
                     'buy-x-get-y-free'                          => 'קנה X וקבל Y בחינם',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'לפחות תנאי אחד נכון',
                     'apply-to-shipping'                         => 'החל למשלוח',
                     'attribute-family'                          => 'משפחת התכונות',
-                    'attribute-name-children-only'              => 'שם התכונה (רק ילדים)',
-                    'attribute-name-parent-only'                => 'שם התכונה (רק הורים)',
+                    'attribute-name-children-only'              => ':attribute_name (רק ילדים)',
+                    'attribute-name-parent-only'                => ':attribute_name (רק הורים)',
                     'auto-generate-coupon'                      => 'יצירת קופון אוטומטית',
                     'back-btn'                                  => 'חזרה',
                     'buy-x-get-y-free'                          => 'קנה X וקבל Y בחינם',

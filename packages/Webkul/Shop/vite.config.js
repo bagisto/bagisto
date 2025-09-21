@@ -11,6 +11,17 @@ export default defineConfig(({ mode }) => {
     return {
         build: {
             emptyOutDir: true,
+            minify: "esbuild",
+            cssCodeSplit: true,
+            rollupOptions: {
+                output: {
+                    manualChunks: {
+                        vue: ["vue"],
+                        veeValidate: ["vee-validate", "@vee-validate/rules", "@vee-validate/i18n"],
+                        vendor: ["axios", "mitt"]
+                    }
+                }
+            }
         },
 
         envDir,
@@ -33,6 +44,8 @@ export default defineConfig(({ mode }) => {
                     "src/Resources/assets/js/app.js",
                 ],
                 refresh: true,
+                valetTls: true,
+                preload: false,
             }),
         ],
 

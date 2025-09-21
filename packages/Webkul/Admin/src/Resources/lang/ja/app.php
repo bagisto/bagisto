@@ -1296,7 +1296,9 @@ return [
                         ],
 
                         'validations' => [
-                            'type-mismatch' => '予約タイプは変更できません。',
+                            'type-mismatch'      => '予約タイプは変更できません。',
+                            'time-validation'    => '開始時間は終了時間より前でなければなりません。',
+                            'overlap-validation' => '時間帯が既存のスロットと重なっています。',
                         ],
                     ],
 
@@ -2300,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'いずれかの条件が真である',
                     'apply-to-shipping'                         => '配送に適用',
                     'attribute-family'                          => '属性ファミリー',
-                    'attribute-name-children-only'              => '属性名（子カテゴリのみ）',
-                    'attribute-name-parent-only'                => '属性名（親カテゴリのみ）',
+                    'attribute-name-children-only'              => ':attribute_name（子カテゴリのみ）',
+                    'attribute-name-parent-only'                => ':attribute_name（親カテゴリのみ）',
                     'auto-generate-coupon'                      => 'クーポンを自動生成',
                     'back-btn'                                  => '戻る',
                     'buy-x-get-y-free'                          => 'X個買うとY個無料',
@@ -2377,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'いずれかの条件が真である',
                     'apply-to-shipping'                         => '配送に適用',
                     'attribute-family'                          => '属性ファミリー',
-                    'attribute-name-children-only'              => '属性名（子カテゴリのみ）',
-                    'attribute-name-parent-only'                => '属性名（親カテゴリのみ）',
+                    'attribute-name-children-only'              => ':attribute_name（子カテゴリのみ）',
+                    'attribute-name-parent-only'                => ':attribute_name（親カテゴリのみ）',
                     'auto-generate-coupon'                      => 'クーポンを自動生成',
                     'back-btn'                                  => '戻る',
                     'buy-x-get-y-free'                          => 'X個買うとY個無料',
