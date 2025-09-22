@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
@@ -9,7 +8,7 @@ use Webkul\User\Repositories\AdminRepository;
 
 beforeEach(function () {
     $this->admin = $this->loginAsAdmin();
-    
+
     $this->google2fa = new Google2FA;
     Mail::fake();
 });
@@ -28,7 +27,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
     it('denies unauthenticated users from accessing 2FA setup', function () {
         // Arrange - logout the admin
         auth('admin')->logout();
-        
+
         // Act
         $response = $this->getJson(route('admin.two_factor.setup'));
 
@@ -197,7 +196,7 @@ describe('Two Factor Authentication Disable', function () {
     it('unauthenticated user cannot disable 2FA', function () {
         // Arrange - logout the admin
         auth('admin')->logout();
-        
+
         // Act
         $response = $this->get(route('admin.two_factor.disable'));
 
