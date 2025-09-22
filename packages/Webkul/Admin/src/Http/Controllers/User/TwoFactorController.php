@@ -4,15 +4,9 @@ namespace Webkul\Admin\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\User\Repositories\AdminRepository;
 
 class TwoFactorController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct(protected AdminRepository $adminRepository) {}
-
     /**
      * Show 2FA setup page with QR code and secret key.
      */
@@ -28,8 +22,7 @@ class TwoFactorController extends Controller
                 ], 401);
             }
 
-            $secret = $this->adminRepository->getOrGenerateTwoFactorSecret($admin);
-            $qrCodeData = $this->adminRepository->generateTwoFactorQrCodeData($admin, $secret);
+            $qrCodeData = twoFactorAuth()->generateSetupData($admin);
 
             return response()->json([
                 'success' => true,
@@ -55,7 +48,7 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if ($this->adminRepository->enableTwoFactor($admin, $request->code)) {
+        if (twoFactorAuth()->enable($admin, $request->code)) {
             session()->put('two_factor_passed', true);
             session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
@@ -79,7 +72,7 @@ class TwoFactorController extends Controller
             ], 401);
         }
 
-        $this->adminRepository->disableTwoFactor($admin);
+        twoFactorAuth()->disable($admin);
 
         $message = trans('admin::app.account.messages.disabled-success');
 
@@ -106,7 +99,7 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if ($this->adminRepository->verifyTwoFactorCode($admin, $request->code)) {
+        if (twoFactorAuth()->verifyCode($admin, $request->code)) {
             return $this->handleSuccessfulVerification();
         }
 
