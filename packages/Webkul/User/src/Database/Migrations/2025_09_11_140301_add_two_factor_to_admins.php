@@ -25,12 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->dropColumn([
-                'two_factor_secret',
-                'two_factor_enabled',
-                'two_factor_backup_codes',
-                'two_factor_verified_at',
-            ]);
+            $table->dropColumn('two_factor_verified_at');
+            $table->dropColumn('two_factor_backup_codes');
+            $table->dropColumn('two_factor_enabled');
+            $table->dropColumn('two_factor_secret');
         });
     }
 };
