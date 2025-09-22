@@ -22,7 +22,7 @@
                         @lang('admin::app.users.verify.enter_code')
                     </p>
 
-                    <x-admin::form :action="route('admin.twofactor.verifyTwoFactorCode')" method="POST" class="w-full">
+                    <x-admin::form :action="route('admin.two_factor.verifyTwoFactorCode')" method="POST" class="w-full">
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.verify.code_label')

@@ -63,11 +63,11 @@ Route::controller(AccountController::class)->prefix('account')->group(function (
  * Admin two-factor authentication routes.
  */
 Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
-    Route::get('setup', 'setup')->name('admin.twofactor.setup');
+    Route::get('setup', 'setup')->name('admin.two_factor.setup');
 
-    Route::post('enable', 'enable')->name('admin.twofactor.enable');
+    Route::post('enable', 'enable')->name('admin.two_factor.enable');
 
-    Route::get('disable', 'disable')->name('admin.twofactor.disable');
+    Route::get('disable', 'disable')->name('admin.two_factor.disable');
 });
 
 Route::delete('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');

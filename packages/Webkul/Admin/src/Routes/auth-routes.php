@@ -32,9 +32,9 @@ Route::group(['prefix' => config('app.admin_url')], function () {
      * Two-factor authentication verification routes.
      */
     Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
-        Route::get('verify', 'showVerifyForm')->name('admin.twofactor.verify.form');
+        Route::get('verify', 'showVerifyForm')->name('admin.two_factor.verify.form');
 
-        Route::post('verify', 'verifyTwoFactorCode')->name('admin.twofactor.verifyTwoFactorCode');
+        Route::post('verify', 'verifyTwoFactorCode')->name('admin.two_factor.verifyTwoFactorCode');
     });
 
     /**

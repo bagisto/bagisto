@@ -218,7 +218,7 @@
                                     <div v-html="qrCodeSvg"></div>
                                 </div>
 
-                                <x-admin::form :action="route('admin.twofactor.enable')" method="POST" class="w-full mt-4">
+                                <x-admin::form :action="route('admin.two_factor.enable')" method="POST" class="w-full mt-4">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.account.setup.code_label')
@@ -300,7 +300,7 @@
                     },
 
                     disableTwoFactor() {
-                        this.$axios.get(`{{ route('admin.twofactor.disable') }}`)
+                        this.$axios.get(`{{ route('admin.two_factor.disable') }}`)
                             .then(response => {
                                 this.originalToggleState = false;
                                 this.$emitter.emit('add-flash', {
@@ -325,7 +325,7 @@
 
                         this.isLoading = true;
 
-                        this.$axios.get(`{{ route('admin.twofactor.setup') }}`)
+                        this.$axios.get(`{{ route('admin.two_factor.setup') }}`)
                             .then(response => {
                                 this.qrCodeSvg = response.data.qrCodeSvg;
                             })

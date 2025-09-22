@@ -17,7 +17,7 @@ class Bouncer
     {
         // Skip two-factor routes to prevent redirect loops
         if (
-            $request->routeIs('admin.twofactor.*')
+            $request->routeIs('admin.two_factor.*')
             || $request->routeIs('admin.session.destroy')
         ) {
             return $next($request);
@@ -128,9 +128,9 @@ class Bouncer
     public function handleTwoFactorRedirect($admin)
     {
         if ($admin->two_factor_secret) {
-            return redirect()->route('admin.twofactor.verify.form');
+            return redirect()->route('admin.two_factor.verify.form');
         }
 
-        return redirect()->route('admin.twofactor.setup');
+        return redirect()->route('admin.two_factor.setup');
     }
 }
