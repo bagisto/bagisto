@@ -11,11 +11,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
-use Webkul\User\Models\Traits\TwoFactorAuthenticatable;
 
 class Admin extends Authenticatable implements AdminContract
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
