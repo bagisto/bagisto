@@ -100,7 +100,7 @@
         <x-admin::layouts.header />
 
         <div
-            class="group/container {{ request()->cookie('sidebar_collapsed') ?? 0 ? 'sidebar-collapsed' : 'sidebar-not-collapsed' }} flex gap-4"
+            class="group/container {{ request()->cookie('sidebar_collapsed') ?? 0 ? 'sidebar-collapsed' : 'sidebar-collapsed' }} flex gap-4"
             ref="appLayout"
         >
             <!-- Page Sidebar Blade Component -->
@@ -119,14 +119,14 @@
                 </div>
 
                 <!-- Powered By -->
-                <div class="mt-auto">
-                    <div class="border-t bg-white py-2 text-center text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white">
-                        @lang('admin::app.components.layouts.powered-by.description', [
-                            'bagisto' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://bagisto.com/en/">Bagisto</a>',
-                            'webkul' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://webkul.com/">Webkul</a>',
-                        ])
-                    </div>
-                </div>
+{{--                <div class="mt-auto">--}}
+{{--                    <div class="border-t bg-white py-2 text-center text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white">--}}
+{{--                        @lang('admin::app.components.layouts.powered-by.description', [--}}
+{{--                            'bagisto' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://bagisto.com/en/">Bagisto</a>',--}}
+{{--                            'webkul' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://webkul.com/">Webkul</a>',--}}
+{{--                        ])--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
 

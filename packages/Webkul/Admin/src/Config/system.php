@@ -1343,7 +1343,9 @@ return [
                 'type'  => 'boolean',
             ],
         ],
-    ], [
+    ],
+    /*
+    [
         'key'    => 'customer.settings.social_login',
         'name'   => 'admin::app.configuration.index.customer.settings.social-login.title',
         'info'   => 'admin::app.configuration.index.customer.settings.social-login.info',
@@ -1467,7 +1469,99 @@ return [
             ],
         ],
     ],
-
+    */
+    [
+        'key'    => 'customer.settings.auth_types',
+        'name'   => 'admin::app.configuration.index.customer.settings.auth-types.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.auth-types.info',
+        'sort'   => 0,
+        'fields' => [
+            [
+                'name'          => 'auth_except_numbers',
+                'title'         => 'admin::app.configuration.index.customer.settings.auth-types.except-numbers.title',
+                'info'          => 'admin::app.configuration.index.customer.settings.auth-types.except-numbers.title-info',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+                'default' => "+71231234567",
+            ],
+            [
+                'name'          => 'enable_sms_auth',
+                'title'         => 'admin::app.configuration.index.customer.settings.auth-types.sms.sms-verification',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'    => 'sms_client_id',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.sms.client-id.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.sms.client-id.title-info',
+                'type'    => 'text',
+                'channel_based' => true,
+                'depends' => 'enable_sms_auth:1',
+            ], [
+                'name'    => 'sms_client_secret',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.sms.client-secret.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.sms.client-secret.title-info',
+                'type'    => 'text',
+                'channel_based' => true,
+                'depends' => 'enable_sms_auth:1',
+            ], [
+                'name'    => 'sms_message_text',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.sms.message_text.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.sms.message_text.title-info',
+                'type'    => 'text',
+                'channel_based' => true,
+                'locale_based'  => true,
+                'depends' => 'enable_sms_auth:1',
+            ], [
+                'name'          => 'enable_telegram_auth',
+                'title'         => 'admin::app.configuration.index.customer.settings.auth-types.telegram.telegram-verification',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'    => 'telegram_api_key',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.telegram.api-key.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.telegram.api-key.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_telegram_auth:1',
+            ], [
+                'name'    => 'telegram_bot_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.telegram.bot-url.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.telegram.bot-url.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_telegram_auth:1',
+            ], [
+                'name'    => 'telegram_app_site_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.telegram.app-site-url.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.telegram.app-site-url.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_telegram_auth:1',
+            ], [
+                'name'          => 'enable_whatsapp_auth',
+                'title'         => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.whatsapp-verification',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.title-info',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'    => 'service_api_url',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.service-api-url.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.service-api-url.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_whatsapp_auth:1',
+            ], [
+                'name'    => 'id_instance',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.id-instance.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.id-instance.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_whatsapp_auth:1',
+            ], [
+                'name'    => 'token',
+                'title'   => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.token.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.auth-types.whatsapp.token.title-info',
+                'type'    => 'text',
+                'depends' => 'enable_whatsapp_auth:1',
+            ],
+        ],
+    ],
     /**
      * Emails.
      */

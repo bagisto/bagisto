@@ -15,7 +15,7 @@
                 />
             @else
                 <img
-                    class="w-max" 
+                    class="w-max"
                     src="{{ bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
                 />
@@ -33,7 +33,7 @@
                     <x-admin::form.control-group.control
                         type="hidden"
                         name="token"
-                        :value="$token"       
+                        :value="$token"
                     />
 
                     <div class="border-y p-4 dark:border-gray-800">
@@ -45,17 +45,17 @@
 
                             <x-admin::form.control-group.control
                                 type="email"
-                                class="w-[254px] max-w-full" 
+                                class="w-[254px] max-w-full"
                                 id="email"
-                                name="email" 
-                                rules="required|email" 
+                                name="email"
+                                rules="required|email"
                                 :label="trans('admin::app.users.reset-password.email')"
                                 :placeholder="trans('admin::app.users.reset-password.email')"
                             />
 
                             <x-admin::form.control-group.error control-name="email" />
                         </x-admin::form.control-group>
-                        
+
                         <!-- Password -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -64,10 +64,10 @@
 
                             <x-admin::form.control-group.control
                                 type="password"
-                                class="w-[254px] max-w-full" 
+                                class="w-[254px] max-w-full"
                                 id="password"
-                                name="password" 
-                                rules="required|min:6" 
+                                name="password"
+                                rules="required|min:6"
                                 :label="trans('admin::app.users.reset-password.password')"
                                 :placeholder="trans('admin::app.users.reset-password.password')"
                                 ref="password"
@@ -84,10 +84,10 @@
 
                             <x-admin::form.control-group.control
                                 type="password"
-                                class="w-[254px] max-w-full" 
+                                class="w-[254px] max-w-full"
                                 id="password_confirmation"
                                 name="password_confirmation"
-                                rules="confirmed:@password" 
+                                rules="confirmed:@password"
                                 :label="trans('admin::app.users.reset-password.confirm-password')"
                                 :placeholder="trans('admin::app.users.reset-password.confirm-password')"
                                 ref="password"
@@ -99,7 +99,7 @@
 
                     <div class="flex items-center justify-between p-4">
                         <!-- Back Button-->
-                        <a 
+                        <a
                             class="cursor-pointer text-xs font-semibold leading-6 text-blue-600"
                             href="{{ route('admin.session.create') }}"
                         >
@@ -107,7 +107,7 @@
                         </a>
 
                         <!-- Submit Button -->
-                        <button 
+                        <button
                             class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50">
                             @lang('admin::app.users.reset-password.submit-btn')
                         </button>
@@ -116,12 +116,12 @@
             </div>
 
             <!-- Powered By -->
-            <div class="text-sm font-normal">
-                @lang('admin::app.users.reset-password.powered-by-description', [
-                    'bagisto' => '<a class="text-blue-600 hover:underline" href="https://bagisto.com/en/">Bagisto</a>',
-                    'webkul' => '<a class="text-blue-600 hover:underline" href="https://webkul.com/">Webkul</a>',
-                ])
-            </div>
+{{--            <div class="text-sm font-normal">--}}
+{{--                @lang('admin::app.users.reset-password.powered-by-description', [--}}
+{{--                    'bagisto' => '<a class="text-blue-600 hover:underline" href="https://bagisto.com/en/">Bagisto</a>',--}}
+{{--                    'webkul' => '<a class="text-blue-600 hover:underline" href="https://webkul.com/">Webkul</a>',--}}
+{{--                ])--}}
+{{--            </div>--}}
         </div>
     </div>
 </x-admin::layouts.anonymous>

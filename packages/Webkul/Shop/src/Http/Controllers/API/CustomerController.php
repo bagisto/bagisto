@@ -10,7 +10,7 @@ use Webkul\Shop\Http\Requests\Customer\LoginRequest;
 class CustomerController extends APIController
 {
     /**
-     * Login Customer
+     * Login Customer BY email and password
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -49,4 +49,17 @@ class CustomerController extends APIController
 
         return response()->json([]);
     }
+
+    /**
+     * Login customer by phone and sms code
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function auth_by_sms()
+    {
+        ///////////////////
+
+        return response()->json([]);
+    }
+
 }

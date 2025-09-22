@@ -93,11 +93,23 @@ Route::group(['prefix' => 'api'], function () {
 
     /**
      * Login routes.
+     * Where are four login ways:
+     * 1. Login with email and password
+     * 2. Login with phone and code from sms
+     * 3. Login with phone and code from telegram
+     * 4. Login with phone and code from WhatsApp
      */
     Route::controller(CustomerController::class)->prefix('customer')->group(function () {
         Route::post('login', 'login')->name('shop.api.customers.session.create');
     });
-
+    Route::group(['prefix' => 'login/sms'], function () {
+        Route::controller(CustomerController::class)->prefix('customer')->group(function () {
+            Route::post('send_code', 'login')->name('shop.api.customers.session.create');
+        });
+    });
+    /**
+     * Customer data routes.
+     */
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
         Route::controller(AddressController::class)->prefix('addresses')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.addresses.index');
