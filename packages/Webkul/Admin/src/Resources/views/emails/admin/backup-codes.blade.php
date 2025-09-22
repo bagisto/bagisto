@@ -35,6 +35,7 @@
         <p style="font-weight: bold;font-size: 16px;color: #92400E;line-height: 24px;margin-bottom: 8px;">
             @lang('admin::app.account.emails.backup-codes.warning-title')
         </p>
+        
         <p style="font-size: 14px;color: #92400E;line-height: 20px;margin: 0;">
             @lang('admin::app.account.emails.backup-codes.warning-description')
         </p>

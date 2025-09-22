@@ -5,7 +5,6 @@
 
     <div class="flex h-[100vh] items-center justify-center">
         <div class="flex flex-col items-center gap-5">
-
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img class="h-10 w-[110px]" src="{{ Storage::url($logo) }}" alt="{{ config('app.name') }}" />
             @else
@@ -42,13 +41,12 @@
                         </x-admin::form.control-group>
 
                         <div class="mt-4 flex items-center justify-end gap-4">
-                            <!--Admin logout-->
+                            <!-- Admin logout -->
                             <x-admin::form
                                 method="DELETE"
                                 action="{{ route('admin.session.destroy') }}"
                                 id="adminLogout"
                             >
-
                             </x-admin::form>
                         
                             <button
@@ -66,7 +64,6 @@
                                 @lang('admin::app.users.verify.verify_code')
                             </button>
                         </div>
-
                     </x-admin::form>
                 </div>
             </div>

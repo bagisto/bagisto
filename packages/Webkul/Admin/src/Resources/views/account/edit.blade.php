@@ -3,11 +3,11 @@
         @lang('admin::app.account.edit.title')
     </x-slot>
 
-    <v-twofactor-setup></v-twofactor-setup>
+    <v-two-factor-setup></v-two-factor-setup>
 
     <!-- Input Form -->
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-twofactor-setup-template">
+        <script type="text/x-template" id="v-two-factor-setup-template">
             <x-admin::form
                 :action="route('admin.account.update')"
                 enctype="multipart/form-data"
@@ -254,8 +254,8 @@
         </script>
         
         <script type="module">
-            app.component('v-twofactor-setup', {
-                template: '#v-twofactor-setup-template',
+            app.component('v-two-factor-setup', {
+                template: '#v-two-factor-setup-template',
 
                 props: {
                     modelValue: {
