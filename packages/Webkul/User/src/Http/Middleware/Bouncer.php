@@ -54,7 +54,7 @@ class Bouncer
          * check if they have completed the verification process.
          */
         if ($this->isTwoFactorRequired($guard)) {
-            return $this->handleTwoFactorRedirect(auth()->guard($guard)->user());
+            return $this->handleTwoFactorRedirect($guard);
         }
 
         return $next($request);
@@ -103,30 +103,29 @@ class Bouncer
 
     /**
      * Check if two-factor authentication is required.
-     *
-     * @param  string  $guard
-     * @return bool
      */
-    public function isTwoFactorRequired($guard)
+    public function isTwoFactorRequired(string $guard): bool
     {
         $admin = auth()->guard($guard)->user();
 
-        // Only require 2FA if admin has it enabled AND hasn't verified in this session
-        if ($admin && $admin->two_factor_enabled && ! session()->get('two_factor_passed', false)) {
-            return true;
-        }
-
-        return false;
+        return $admin->two_factor_enabled && ! $this->hasPassedTwoFactor();
     }
 
     /**
-     * Handle redirection based on two-factor setup status.
-     *
-     * @param  mixed  $admin
-     * @return \Illuminate\Http\RedirectResponse
+     * Determine if two-factor authentication has been passed for this session.
      */
-    public function handleTwoFactorRedirect($admin)
+    protected function hasPassedTwoFactor(): bool
     {
+        return (bool) session('two_factor_passed', false);
+    }
+
+    /**
+     * Redirect to the correct two-factor flow.
+     */
+    public function handleTwoFactorRedirect(string $guard)
+    {
+        $admin = auth()->guard($guard)->user();
+
         if ($admin->two_factor_secret) {
             return redirect()->route('admin.two_factor.verify.form');
         }
