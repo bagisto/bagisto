@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Verify Two-Factor Authentication',
-            'enter_code'            => 'Enter the 6-digit code from your authenticator app to continue.',
-            'code_label'            => 'Verification Code',
-            'code_placeholder'      => 'Enter 6-digit code',
+            'enter-code'            => 'Enter the 6-digit code from your authenticator app to continue.',
+            'code-label'            => 'Verification Code',
+            'code-placeholder'      => 'Enter 6-digit code',
             'back'                  => 'Back',
-            'verify_code'           => 'Verify Code',
+            'verify-code'           => 'Verify Code',
             'disabled_message'      => 'Verify Two-Factor Authentication is currently disabled by the admin.',
         ],
     ],
@@ -101,21 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Two-Factor Authentication enabled successfully.',
-            'invalid_code'     => 'Invalid verification code.',
-            'disabled_success' => 'Two-Factor Authentication has been disabled.',
-            'verified_success' => 'Two-Factor Authentication verified successfully.',
-            'email_failed'     => 'Failed to deliver backup codes',
+            'enabled-success'  => 'Two-Factor Authentication enabled successfully.',
+            'invalid-code'     => 'Invalid verification code.',
+            'disabled-success' => 'Two-Factor Authentication has been disabled.',
+            'verified-success' => 'Two-Factor Authentication verified successfully.',
+            'email-failed'     => 'Failed to deliver backup codes',
         ],
 
         'setup' => [
             'title'            => 'Enable Two-Factor Authentication',
             'enable'           => 'Enable',
-            'scan_qr'          => 'Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.',
-            'code_label'       => 'Verification Code',
-            'code_placeholder' => 'Enter 6-digit code',
+            'scan-qr'          => 'Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.',
+            'code-label'       => 'Verification Code',
+            'code-placeholder' => 'Enter 6-digit code',
             'back'             => 'Back',
-            'verify_enable'    => 'Verify & Enable',
+            'verify-enable'    => 'Verify & Enable',
         ],
     ],
 

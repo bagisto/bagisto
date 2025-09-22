@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Weryfikacja uwierzytelniania dwuskładnikowego',
-            'enter_code'            => 'Wprowadź 6-cyfrowy kod z aplikacji uwierzytelniającej, aby kontynuować.',
-            'code_label'            => 'Kod weryfikacyjny',
-            'code_placeholder'      => 'Wprowadź 6-cyfrowy kod',
+            'enter-code'            => 'Wprowadź 6-cyfrowy kod z aplikacji uwierzytelniającej, aby kontynuować.',
+            'code-label'            => 'Kod weryfikacyjny',
+            'code-placeholder'      => 'Wprowadź 6-cyfrowy kod',
             'back'                  => 'Powrót',
-            'verify_code'           => 'Zweryfikuj kod',
+            'verify-code'           => 'Zweryfikuj kod',
             'disabled_message'      => 'Uwierzytelnianie dwuskładnikowe jest obecnie wyłączone przez administratora.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Uwierzytelnianie dwuskładnikowe włączone pomyślnie.',
-            'invalid_code'     => 'Nieprawidłowy kod weryfikacyjny.',
-            'disabled_success' => 'Uwierzytelnianie dwuskładnikowe zostało wyłączone.',
-            'verified_success' => 'Uwierzytelnianie dwuskładnikowe pomyślnie zweryfikowane.',
-            'email_failed'     => 'Wysłanie kodów zapasowych nie powiodło się',
+            'enabled-success'  => 'Uwierzytelnianie dwuskładnikowe włączone pomyślnie.',
+            'invalid-code'     => 'Nieprawidłowy kod weryfikacyjny.',
+            'disabled-success' => 'Uwierzytelnianie dwuskładnikowe zostało wyłączone.',
+            'verified-success' => 'Uwierzytelnianie dwuskładnikowe pomyślnie zweryfikowane.',
+            'email-failed'     => 'Wysłanie kodów zapasowych nie powiodło się',
         ],
 
         'setup' => [
-            'title'            => 'Włącz uwierzytelnianie dwuskładnikowe',
-            'scan_qr'          => 'Zeskanuj ten kod QR w aplikacji Google Authenticator, a następnie wprowadź poniższy 6-cyfrowy kod.',
-            'code_label'       => 'Kod weryfikacyjny',
-            'code_placeholder' => 'Wprowadź 6-cyfrowy kod',
-            'back'             => 'Powrót',
-            'verify_enable'    => 'Zweryfikuj i włącz',
+            'title'                   => 'Włącz uwierzytelnianie dwuskładnikowe',
+            'enable'                  => 'Włącz',
+            'scan-qr'                 => 'Zeskanuj ten kod QR w aplikacji Google Authenticator, a następnie wprowadź poniższy 6-cyfrowy kod.',
+            'code-label'              => 'Kod weryfikacyjny',
+            'code-placeholder'        => 'Wprowadź 6-cyfrowy kod',
+            'back'                    => 'Powrót',
+            'verify-enable'           => 'Zweryfikuj i włącz',
         ],
     ],
 

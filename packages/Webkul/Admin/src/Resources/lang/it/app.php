@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Verifica Autenticazione a Due Fattori',
-            'enter_code'            => 'Inserisci il codice a 6 cifre dalla tua app di autenticazione per continuare.',
-            'code_label'            => 'Codice di Verifica',
-            'code_placeholder'      => 'Inserisci codice a 6 cifre',
+            'enter-code'            => 'Inserisci il codice a 6 cifre dalla tua app di autenticazione per continuare.',
+            'code-label'            => 'Codice di Verifica',
+            'code-placeholder'      => 'Inserisci codice a 6 cifre',
             'back'                  => 'Indietro',
-            'verify_code'           => 'Verifica Codice',
+            'verify-code'           => 'Verifica Codice',
             'disabled_message'      => "La verifica a due fattori è attualmente disabilitata dall'amministratore.",
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Autenticazione a due fattori abilitata con successo.',
-            'invalid_code'     => 'Codice di verifica non valido.',
-            'disabled_success' => 'Autenticazione a due fattori disabilitata.',
-            'verified_success' => 'Autenticazione a due fattori verificata con successo.',
-            'email_failed'     => 'Invio dei codici di backup fallito',
+            'enabled-success'  => 'Autenticazione a due fattori abilitata con successo.',
+            'invalid-code'     => 'Codice di verifica non valido.',
+            'disabled-success' => 'Autenticazione a due fattori disabilitata.',
+            'verified-success' => 'Autenticazione a due fattori verificata con successo.',
+            'email-failed'     => 'Invio dei codici di backup fallito',
         ],
 
         'setup' => [
             'title'            => 'Abilita Autenticazione a Due Fattori',
-            'scan_qr'          => 'Scansiona questo codice QR nella tua app Google Authenticator, quindi inserisci il codice a 6 cifre qui sotto.',
-            'code_label'       => 'Codice di Verifica',
-            'code_placeholder' => 'Inserisci codice a 6 cifre',
+            'enable'           => 'Abilita',
+            'scan-qr'          => 'Scansiona questo codice QR nella tua app Google Authenticator, quindi inserisci il codice a 6 cifre qui sotto.',
+            'code-label'       => 'Codice di Verifica',
+            'code-placeholder' => 'Inserisci codice a 6 cifre',
             'back'             => 'Indietro',
-            'verify_enable'    => 'Verifica & Abilita',
+            'verify-enable'    => 'Verifica & Abilita',
         ],
     ],
 

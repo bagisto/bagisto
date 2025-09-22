@@ -158,13 +158,13 @@ class AdminRepository extends Repository
                 new BackupCodesNotification($admin, $backupCodes)
             );
         } catch (\Exception $e) {
-            \Log::error(trans('admin::app.account.messages.email_failed'), [
+            \Log::error(trans('admin::app.account.messages.email-failed'), [
                 'admin_id'    => $admin->id ?? null,
                 'admin_email' => $admin->email ?? null,
                 'exception'   => $e->getMessage(),
             ]);
 
-            session()->flash('error', trans('admin::app.account.messages.email_failed'));
+            session()->flash('error', trans('admin::app.account.messages.email-failed'));
         }
     }
 

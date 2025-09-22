@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Zwei-Faktor-Authentifizierung verifizieren',
-            'enter_code'            => 'Geben Sie den 6-stelligen Code aus Ihrer Authentifikator-App ein, um fortzufahren.',
-            'code_label'            => 'Verifizierungscode',
-            'code_placeholder'      => '6-stelligen Code eingeben',
+            'enter-code'            => 'Geben Sie den 6-stelligen Code aus Ihrer Authentifikator-App ein, um fortzufahren.',
+            'code-label'            => 'Verifizierungscode',
+            'code-placeholder'      => '6-stelligen Code eingeben',
             'back'                  => 'Zurück',
-            'verify_code'           => 'Code überprüfen',
+            'verify-code'           => 'Code überprüfen',
             'disabled_message'      => 'Die Zwei-Faktor-Authentifizierung ist derzeit vom Administrator deaktiviert.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Zwei-Faktor-Authentifizierung erfolgreich aktiviert.',
-            'invalid_code'     => 'Ungültiger Verifizierungscode.',
-            'disabled_success' => 'Zwei-Faktor-Authentifizierung wurde deaktiviert.',
-            'verified_success' => 'Zwei-Faktor-Authentifizierung erfolgreich verifiziert.',
-            'email_failed'     => 'Backup-Codes konnten nicht zugestellt werden',
+            'enabled-success'  => 'Zwei-Faktor-Authentifizierung erfolgreich aktiviert.',
+            'invalid-code'     => 'Ungültiger Verifizierungscode.',
+            'disabled-success' => 'Zwei-Faktor-Authentifizierung wurde deaktiviert.',
+            'verified-success' => 'Zwei-Faktor-Authentifizierung erfolgreich verifiziert.',
+            'email-failed'     => 'Backup-Codes konnten nicht zugestellt werden',
         ],
 
         'setup' => [
-            'title'            => 'Zwei-Faktor-Authentifizierung aktivieren',
-            'scan_qr'          => 'Scannen Sie diesen QR-Code in Ihrer Google Authenticator-App und geben Sie dann den 6-stelligen Code unten ein.',
-            'code_label'       => 'Verifizierungscode',
-            'code_placeholder' => '6-stelligen Code eingeben',
-            'back'             => 'Zurück',
-            'verify_enable'    => 'Überprüfen & Aktivieren',
+            'title'                   => 'Zwei-Faktor-Authentifizierung aktivieren',
+            'enable'                  => 'Aktivieren',
+            'scan-qr'                 => 'Scannen Sie diesen QR-Code in Ihrer Google Authenticator-App und geben Sie dann den 6-stelligen Code unten ein.',
+            'code-label'              => 'Verifizierungscode',
+            'code-placeholder'        => '6-stelligen Code eingeben',
+            'back'                    => 'Zurück',
+            'verify-enable'           => 'Überprüfen & Aktivieren',
         ],
     ],
 

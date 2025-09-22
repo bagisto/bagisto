@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'אימות אימות דו-שלבי',
-            'enter_code'            => 'הזן את קוד ה-6 ספרות מהאפליקציה שלך כדי להמשיך.',
-            'code_label'            => 'קוד אימות',
-            'code_placeholder'      => 'הזן קוד בן 6 ספרות',
+            'enter-code'            => 'הזן את קוד ה-6 ספרות מהאפליקציה שלך כדי להמשיך.',
+            'code-label'            => 'קוד אימות',
+            'code-placeholder'      => 'הזן קוד בן 6 ספרות',
             'back'                  => 'חזרה',
-            'verify_code'           => 'אמת קוד',
+            'verify-code'           => 'אמת קוד',
             'disabled_message'      => 'אימות דו-שלבי מושבת כרגע על ידי המנהל.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'האימות הדו-שלבי הופעל בהצלחה.',
-            'invalid_code'     => 'קוד אימות לא תקין.',
-            'disabled_success' => 'האימות הדו-שלבי בוטל.',
-            'verified_success' => 'האימות הדו-שלבי אומת בהצלחה.',
-            'email_failed'     => 'שליחת קודי הגיבוי נכשלה',
+            'enabled-success'  => 'האימות הדו-שלבי הופעל בהצלחה.',
+            'invalid-code'     => 'קוד אימות לא תקין.',
+            'disabled-success' => 'האימות הדו-שלבי בוטל.',
+            'verified-success' => 'האימות הדו-שלבי אומת בהצלחה.',
+            'email-failed'     => 'שליחת קודי הגיבוי נכשלה',
         ],
 
         'setup' => [
-            'title'            => 'הפעל אימות דו-שלבי',
-            'scan_qr'          => 'סרוק את קוד ה-QR הזה באפליקציית Google Authenticator שלך ואז הזן את הקוד בן 6 הספרות למטה.',
-            'code_label'       => 'קוד אימות',
-            'code_placeholder' => 'הזן קוד בן 6 ספרות',
-            'back'             => 'חזרה',
-            'verify_enable'    => 'אמת והפעל',
+            'title'                   => 'הפעל אימות דו-שלבי',
+            'enable'                  => 'אפשר',
+            'scan-qr'                 => 'סרוק את קוד ה-QR הזה באפליקציית Google Authenticator שלך ואז הזן את הקוד בן 6 הספרות למטה.',
+            'code-label'              => 'קוד אימות',
+            'code-placeholder'        => 'הזן קוד בן 6 ספרות',
+            'back'                    => 'חזרה',
+            'verify-enable'           => 'אמת והפעל',
         ],
     ],
 

@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => '二要素認証の確認',
-            'enter_code'            => '続行するには、認証アプリから6桁のコードを入力してください。',
-            'code_label'            => '確認コード',
-            'code_placeholder'      => '6桁のコードを入力',
+            'enter-code'            => '続行するには、認証アプリから6桁のコードを入力してください。',
+            'code-label'            => '確認コード',
+            'code-placeholder'      => '6桁のコードを入力',
             'back'                  => '戻る',
-            'verify_code'           => 'コードを確認',
+            'verify-code'           => 'コードを確認',
             'disabled_message'      => '二要素認証は現在管理者によって無効化されています。',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => '二要素認証が正常に有効化されました。',
-            'invalid_code'     => '無効な確認コードです。',
-            'disabled_success' => '二要素認証が無効化されました。',
-            'verified_success' => '二要素認証が正常に確認されました。',
-            'email_failed'     => 'バックアップコードの送信に失敗しました',
+            'enabled-success'  => '二要素認証が正常に有効化されました。',
+            'invalid-code'     => '無効な確認コードです。',
+            'disabled-success' => '二要素認証が無効化されました。',
+            'verified-success' => '二要素認証が正常に確認されました。',
+            'email-failed'     => 'バックアップコードの送信に失敗しました',
         ],
 
         'setup' => [
             'title'            => '二要素認証を有効化',
-            'scan_qr'          => 'このQRコードをGoogle Authenticatorアプリでスキャンし、下の6桁のコードを入力してください。',
-            'code_label'       => '確認コード',
-            'code_placeholder' => '6桁のコードを入力',
+            'enable'           => '有効にする',
+            'scan-qr'          => 'このQRコードをGoogle Authenticatorアプリでスキャンし、下の6桁のコードを入力してください。',
+            'code-label'       => '確認コード',
+            'code-placeholder' => '6桁のコードを入力',
             'back'             => '戻る',
-            'verify_enable'    => '確認して有効化',
+            'verify-enable'    => '確認して有効化',
         ],
     ],
 

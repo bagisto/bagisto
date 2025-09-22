@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Verifikasi Autentikasi Dua Faktor',
-            'enter_code'            => 'Masukkan kode 6 digit dari aplikasi autentikator Anda untuk melanjutkan.',
-            'code_label'            => 'Kode Verifikasi',
-            'code_placeholder'      => 'Masukkan kode 6 digit',
+            'enter-code'            => 'Masukkan kode 6 digit dari aplikasi autentikator Anda untuk melanjutkan.',
+            'code-label'            => 'Kode Verifikasi',
+            'code-placeholder'      => 'Masukkan kode 6 digit',
             'back'                  => 'Kembali',
-            'verify_code'           => 'Verifikasi Kode',
+            'verify-code'           => 'Verifikasi Kode',
             'disabled_message'      => 'Verifikasi Autentikasi Dua Faktor saat ini dinonaktifkan oleh admin.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Autentikasi Dua Faktor berhasil diaktifkan.',
-            'invalid_code'     => 'Kode verifikasi tidak valid.',
-            'disabled_success' => 'Autentikasi Dua Faktor telah dinonaktifkan.',
-            'verified_success' => 'Autentikasi Dua Faktor berhasil diverifikasi.',
-            'email_failed'     => 'Gagal mengirim kode cadangan',
+            'enabled-success'  => 'Autentikasi Dua Faktor berhasil diaktifkan.',
+            'invalid-code'     => 'Kode verifikasi tidak valid.',
+            'disabled-success' => 'Autentikasi Dua Faktor telah dinonaktifkan.',
+            'verified-success' => 'Autentikasi Dua Faktor berhasil diverifikasi.',
+            'email-failed'     => 'Gagal mengirim kode cadangan',
         ],
 
         'setup' => [
-            'title'            => 'Aktifkan Autentikasi Dua Faktor',
-            'scan_qr'          => 'Pindai kode QR ini di aplikasi Google Authenticator Anda, lalu masukkan kode 6 digit di bawah ini.',
-            'code_label'       => 'Kode Verifikasi',
-            'code_placeholder' => 'Masukkan kode 6 digit',
-            'back'             => 'Kembali',
-            'verify_enable'    => 'Verifikasi & Aktifkan',
+            'title'                   => 'Aktifkan Autentikasi Dua Faktor',
+            'enable'                  => 'Aktifkan',
+            'scan-qr'                 => 'Pindai kode QR ini di aplikasi Google Authenticator Anda, lalu masukkan kode 6 digit di bawah ini.',
+            'code-label'              => 'Kode Verifikasi',
+            'code-placeholder'        => 'Masukkan kode 6 digit',
+            'back'                    => 'Kembali',
+            'verify-enable'           => 'Verifikasi & Aktifkan',
         ],
     ],
 

@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Verifique a autenticação de dois fatores',
-            'enter_code'            => 'Digite o código de 6 dígitos do seu aplicativo autenticador para continuar.',
-            'code_label'            => 'Código de verificação',
-            'code_placeholder'      => 'Digite o código de 6 dígitos',
+            'enter-code'            => 'Digite o código de 6 dígitos do seu aplicativo autenticador para continuar.',
+            'code-label'            => 'Código de verificação',
+            'code-placeholder'      => 'Digite o código de 6 dígitos',
             'back'                  => 'Voltar',
-            'verify_code'           => 'Verificar código',
+            'verify-code'           => 'Verificar código',
             'disabled_message'      => 'A autenticação de dois fatores está atualmente desativada pelo administrador.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Autenticação de dois fatores ativada com sucesso.',
-            'invalid_code'     => 'Código de verificação inválido.',
-            'disabled_success' => 'Autenticação de dois fatores desativada.',
-            'verified_success' => 'Autenticação de dois fatores verificada com sucesso.',
-            'email_failed'     => 'Falha ao enviar códigos de backup',
+            'enabled-success'  => 'Autenticação de dois fatores ativada com sucesso.',
+            'invalid-code'     => 'Código de verificação inválido.',
+            'disabled-success' => 'Autenticação de dois fatores desativada.',
+            'verified-success' => 'Autenticação de dois fatores verificada com sucesso.',
+            'email-failed'     => 'Falha ao enviar códigos de backup',
         ],
 
         'setup' => [
-            'title'            => 'Ativar autenticação de dois fatores',
-            'scan_qr'          => 'Digitalize este código QR no seu aplicativo Google Authenticator e, em seguida, insira o código de 6 dígitos abaixo.',
-            'code_label'       => 'Código de verificação',
-            'code_placeholder' => 'Digite o código de 6 dígitos',
-            'back'             => 'Voltar',
-            'verify_enable'    => 'Verificar & Ativar',
+            'title'                   => 'Ativar autenticação de dois fatores',
+            'enable'                  => 'Ativar',
+            'scan-qr'                 => 'Digitalize este código QR no seu aplicativo Google Authenticator e, em seguida, insira o código de 6 dígitos abaixo.',
+            'code-label'              => 'Código de verificação',
+            'code-placeholder'        => 'Digite o código de 6 dígitos',
+            'back'                    => 'Voltar',
+            'verify-enable'           => 'Verificar & Ativar',
         ],
     ],
 

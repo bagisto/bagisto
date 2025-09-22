@@ -18,13 +18,13 @@
 
                 <div class="border-t p-4 dark:border-gray-800 flex flex-col gap-4">
                     <p class="text-sm text-gray-600 dark:text-gray-300 text-center">
-                        @lang('admin::app.users.verify.enter_code')
+                        @lang('admin::app.users.verify.enter-code')
                     </p>
 
                     <x-admin::form :action="route('admin.two_factor.verifyTwoFactorCode')" method="POST" class="w-full">
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.users.verify.code_label')
+                                @lang('admin::app.users.verify.code-label')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -33,8 +33,8 @@
                                 id="code"
                                 name="code"
                                 rules="required|numeric|digits:6"
-                                :label="trans('admin::app.users.verify.code_label')"
-                                :placeholder="trans('admin::app.account.setup.code_placeholder')"
+                                :label="trans('admin::app.users.verify.code-label')"
+                                :placeholder="trans('admin::app.users.verify.code-placeholder')"
                             />
 
                             <x-admin::form.control-group.error control-name="code" />
@@ -59,9 +59,9 @@
 
                             <button
                                 class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50"
-                                aria-label="@lang('admin::app.users.verify.verify_code')"
+                                aria-label="@lang('admin::app.users.verify.verify-code')"
                             >
-                                @lang('admin::app.users.verify.verify_code')
+                                @lang('admin::app.users.verify.verify-code')
                             </button>
                         </div>
                     </x-admin::form>

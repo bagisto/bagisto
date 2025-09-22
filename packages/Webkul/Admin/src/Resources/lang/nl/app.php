@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Twee-factor authenticatie verifiëren',
-            'enter_code'            => 'Voer de 6-cijferige code van je authenticator-app in om door te gaan.',
-            'code_label'            => 'Verificatiecode',
-            'code_placeholder'      => 'Voer 6-cijferige code in',
+            'enter-code'            => 'Voer de 6-cijferige code van je authenticator-app in om door te gaan.',
+            'code-label'            => 'Verificatiecode',
+            'code-placeholder'      => 'Voer 6-cijferige code in',
             'back'                  => 'Terug',
-            'verify_code'           => 'Code Verifiëren',
+            'verify-code'           => 'Code Verifiëren',
             'disabled_message'      => 'Twee-factor authenticatie is momenteel uitgeschakeld door de beheerder.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Twee-factor authenticatie succesvol ingeschakeld.',
-            'invalid_code'     => 'Ongeldige verificatiecode.',
-            'disabled_success' => 'Twee-factor authenticatie uitgeschakeld.',
-            'verified_success' => 'Twee-factor authenticatie succesvol geverifieerd.',
-            'email_failed'     => 'Verzenden van back-upcodes mislukt',
+            'enabled-success'  => 'Twee-factor authenticatie succesvol ingeschakeld.',
+            'invalid-code'     => 'Ongeldige verificatiecode.',
+            'disabled-success' => 'Twee-factor authenticatie uitgeschakeld.',
+            'verified-success' => 'Twee-factor authenticatie succesvol geverifieerd.',
+            'email-failed'     => 'Verzenden van back-upcodes mislukt',
         ],
 
         'setup' => [
-            'title'            => 'Schakel Twee-Factor Authenticatie In',
-            'scan_qr'          => 'Scan deze QR-code in je Google Authenticator-app en voer vervolgens de onderstaande 6-cijferige code in.',
-            'code_label'       => 'Verificatiecode',
-            'code_placeholder' => 'Voer 6-cijferige code in',
-            'back'             => 'Terug',
-            'verify_enable'    => 'Verifiëren & Inschakelen',
+            'title'                   => 'Schakel Twee-Factor Authenticatie In',
+            'enable'                  => 'Inschakelen',
+            'scan-qr'                 => 'Scan deze QR-code in je Google Authenticator-app en voer vervolgens de onderstaande 6-cijferige code in.',
+            'code-label'              => 'Verificatiecode',
+            'code-placeholder'        => 'Voer 6-cijferige code in',
+            'back'                    => 'Terug',
+            'verify-enable'           => 'Verifiëren & Inschakelen',
         ],
     ],
 

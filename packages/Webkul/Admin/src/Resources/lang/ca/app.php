@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'Verifica l’autenticació de dos factors',
-            'enter_code'            => 'Introdueix el codi de 6 dígits de la teva aplicació d’autenticació per continuar.',
-            'code_label'            => 'Codi de verificació',
-            'code_placeholder'      => 'Introdueix el codi de 6 dígits',
+            'enter-code'            => 'Introdueix el codi de 6 dígits de la teva aplicació d’autenticació per continuar.',
+            'code-label'            => 'Codi de verificació',
+            'code-placeholder'      => 'Introdueix el codi de 6 dígits',
             'back'                  => 'Enrere',
-            'verify_code'           => 'Verifica el codi',
+            'verify-code'           => 'Verifica el codi',
             'disabled_message'      => 'La verificació de dos factors està desactivada actualment per l’administrador.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'Autenticació de dos factors habilitada correctament.',
-            'invalid_code'     => 'Codi de verificació invàlid.',
-            'disabled_success' => 'Autenticació de dos factors deshabilitada.',
-            'verified_success' => 'Autenticació de dos factors verificada correctament.',
-            'email_failed'     => 'Error en enviar els codis de reserva',
+            'enabled-success'  => 'Autenticació de dos factors habilitada correctament.',
+            'invalid-code'     => 'Codi de verificació invàlid.',
+            'disabled-success' => 'Autenticació de dos factors deshabilitada.',
+            'verified-success' => 'Autenticació de dos factors verificada correctament.',
+            'email-failed'     => 'Error en enviar els codis de reserva',
         ],
 
         'setup' => [
-            'title'            => 'Habilita l’autenticació de dos factors',
-            'scan_qr'          => 'Escaneja aquest codi QR a la teva aplicació Google Authenticator, després introdueix el codi de 6 dígits a continuació.',
-            'code_label'       => 'Codi de verificació',
-            'code_placeholder' => 'Introdueix el codi de 6 dígits',
-            'back'             => 'Enrere',
-            'verify_enable'    => 'Verifica i habilita',
+            'title'                   => 'Habilita l’autenticació de dos factors',
+            'enable'                  => 'Habilitar',
+            'scan-qr'                 => 'Escaneja aquest codi QR a la teva aplicació Google Authenticator, després introdueix el codi de 6 dígits a continuació.',
+            'code-label'              => 'Codi de verificació',
+            'code-placeholder'        => 'Introdueix el codi de 6 dígits',
+            'back'                    => 'Enrere',
+            'verify-enable'           => 'Verifica i habilita',
         ],
     ],
 

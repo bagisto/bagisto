@@ -36,11 +36,11 @@ return [
 
         'verify' => [
             'title'                 => 'İki Faktörlü Doğrulamayı Onayla',
-            'enter_code'            => 'Devam etmek için doğrulayıcı uygulamanızdan 6 haneli kodu girin.',
-            'code_label'            => 'Doğrulama Kodu',
-            'code_placeholder'      => '6 haneli kodu girin',
+            'enter-code'            => 'Devam etmek için doğrulayıcı uygulamanızdan 6 haneli kodu girin.',
+            'code-label'            => 'Doğrulama Kodu',
+            'code-placeholder'      => '6 haneli kodu girin',
             'back'                  => 'Geri',
-            'verify_code'           => 'Kodu Doğrula',
+            'verify-code'           => 'Kodu Doğrula',
             'disabled_message'      => 'İki faktörlü doğrulama şu anda yönetici tarafından devre dışı bırakılmıştır.',
         ],
     ],
@@ -101,20 +101,21 @@ return [
         ],
 
         'messages' => [
-            'enabled_success'  => 'İki faktörlü doğrulama başarıyla etkinleştirildi.',
-            'invalid_code'     => 'Geçersiz doğrulama kodu.',
-            'disabled_success' => 'İki faktörlü doğrulama devre dışı bırakıldı.',
-            'verified_success' => 'İki faktörlü doğrulama başarıyla doğrulandı.',
-            'email_failed'     => 'Yedek kodlar gönderilemedi',
+            'enabled-success'  => 'İki faktörlü doğrulama başarıyla etkinleştirildi.',
+            'invalid-code'     => 'Geçersiz doğrulama kodu.',
+            'disabled-success' => 'İki faktörlü doğrulama devre dışı bırakıldı.',
+            'verified-success' => 'İki faktörlü doğrulama başarıyla doğrulandı.',
+            'email-failed'     => 'Yedek kodlar gönderilemedi',
         ],
 
         'setup' => [
-            'title'            => 'İki Faktörlü Doğrulamayı Etkinleştir',
-            'scan_qr'          => 'Bu QR kodunu Google Authenticator uygulamanızla tarayın ve ardından aşağıdaki 6 haneli kodu girin.',
-            'code_label'       => 'Doğrulama Kodu',
-            'code_placeholder' => '6 haneli kodu girin',
-            'back'             => 'Geri',
-            'verify_enable'    => 'Doğrula & Etkinleştir',
+            'title'                   => 'İki Faktörlü Doğrulamayı Etkinleştir',
+            'enable'                  => 'Etkinleştir',
+            'scan-qr'                 => 'Bu QR kodunu Google Authenticator uygulamanızla tarayın ve ardından aşağıdaki 6 haneli kodu girin.',
+            'code-label'              => 'Doğrulama Kodu',
+            'code-placeholder'        => '6 haneli kodu girin',
+            'back'                    => 'Geri',
+            'verify-enable'           => 'Doğrula & Etkinleştir',
         ],
     ],
 

@@ -182,7 +182,7 @@ describe('Two Factor Authentication Disable', function () {
         $response->assertStatus(200)
             ->assertJson([
                 'success' => true,
-                'message' => trans('admin::app.account.messages.disabled_success'),
+                'message' => trans('admin::app.account.messages.disabled-success'),
             ]);
 
         // Assert
@@ -364,7 +364,7 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
         $this->admin->refresh();
         expect($this->admin->two_factor_enabled)->toBeTrue();
 
-        expect(session('error'))->toBe(trans('admin::app.account.messages.email_failed'));
+        expect(session('error'))->toBe(trans('admin::app.account.messages.email-failed'));
     });
 });
 

@@ -211,7 +211,7 @@
 
                             <div v-else>
                                 <p class="text-sm text-gray-600 dark:text-gray-300 text-center">
-                                    @lang('admin::app.account.setup.scan_qr')
+                                    @lang('admin::app.account.setup.scan-qr')
                                 </p>
 
                                 <div class="flex justify-center mt-4" v-if="qrCodeSvg">
@@ -221,7 +221,7 @@
                                 <x-admin::form :action="route('admin.two_factor.enable')" method="POST" class="w-full mt-4">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.account.setup.code_label')
+                                            @lang('admin::app.account.setup.code-label')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -230,8 +230,8 @@
                                             id="code"
                                             name="code"
                                             rules="required|numeric|digits:6"
-                                            :label="trans('admin::app.account.setup.code_label')"
-                                            :placeholder="trans('admin::app.account.setup.code_placeholder')"
+                                            :label="trans('admin::app.account.setup.code-label')"
+                                            :placeholder="trans('admin::app.account.setup.code-placeholder')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="code" />
@@ -240,9 +240,9 @@
                                     <div class="mt-4 flex justify-end gap-4">
                                         <button
                                             class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3.5 py-1.5 font-semibold text-gray-50"
-                                            aria-label="{{ trans('admin::app.account.setup.verify_enable') }}"
+                                            aria-label="{{ trans('admin::app.account.setup.verify-enable') }}"
                                         >
-                                            @lang('admin::app.account.setup.verify_enable')
+                                            @lang('admin::app.account.setup.verify-enable')
                                         </button>
                                     </div>
                                 </x-admin::form>

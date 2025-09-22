@@ -57,9 +57,9 @@ class TwoFactorController extends Controller
 
         if ($this->adminRepository->enableTwoFactor($admin, $request->code)) {
             session()->put('two_factor_passed', true);
-            session()->flash('success', trans('admin::app.account.messages.enabled_success'));
+            session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
-            session()->flash('error', trans('admin::app.account.messages.invalid_code'));
+            session()->flash('error', trans('admin::app.account.messages.invalid-code'));
         }
 
         return redirect()->back();
@@ -81,7 +81,7 @@ class TwoFactorController extends Controller
 
         $this->adminRepository->disableTwoFactor($admin);
 
-        $message = trans('admin::app.account.messages.disabled_success');
+        $message = trans('admin::app.account.messages.disabled-success');
 
         return response()->json([
             'success' => true,
@@ -111,7 +111,7 @@ class TwoFactorController extends Controller
         }
 
         return back()->withErrors([
-            'code' => trans('admin::app.account.messages.invalid_code'),
+            'code' => trans('admin::app.account.messages.invalid-code'),
         ]);
     }
 
@@ -123,6 +123,6 @@ class TwoFactorController extends Controller
         session()->put('two_factor_passed', true);
 
         return redirect()->intended(route('admin.dashboard.index'))
-            ->with('success', trans('admin::app.account.messages.verified_success'));
+            ->with('success', trans('admin::app.account.messages.verified-success'));
     }
 }
