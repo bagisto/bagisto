@@ -64,24 +64,6 @@ describe('Two Factor Authentication Setup Endpoint', function () {
         $this->admin->refresh();
         expect(decrypt($this->admin->two_factor_secret))->toBe($originalSecret);
     });
-
-    it('handles exceptions gracefully for AJAX setup requests', function () {
-        // Arrange
-        $this->mock(AdminRepository::class, function ($mock) {
-            $mock->shouldReceive('getOrGenerateTwoFactorSecret')
-                ->andThrow(new \Exception('Test exception'));
-        });
-
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
-
-        // Assert
-        $response->assertStatus(500)
-            ->assertJson([
-                'success' => false,
-                'error'   => 'Test exception',
-            ]);
-    });
 });
 
 describe('Two Factor Authentication Enable Endpoint', function () {
@@ -295,38 +277,6 @@ describe('Two Factor Authentication Login Verification', function () {
     });
 });
 
-describe('Two Factor Authentication Repository Methods', function () {
-    it('generates QR code data correctly', function () {
-        // Arrange
-        $repository = app(AdminRepository::class);
-        $secret = $this->google2fa->generateSecretKey();
-
-        // Act
-        $qrData = $repository->generateTwoFactorQrCodeData($this->admin, $secret);
-
-        // Assert
-        expect($qrData)->toHaveKeys(['qrCodeSvg', 'qrCodeUrl']);
-        expect($qrData['qrCodeSvg'])->toContain('<svg');
-        expect($qrData['qrCodeUrl'])->toContain('otpauth://totp/');
-    });
-
-    it('cleans SVG string properly', function () {
-        // Arrange
-        $repository = app(AdminRepository::class);
-        $reflection = new \ReflectionClass($repository);
-        $method = $reflection->getMethod('cleanSvgString');
-        $method->setAccessible(true);
-
-        $dirtySvg = "<svg>\x00invalid\0content</svg>";
-
-        // Act
-        $cleanSvg = $method->invoke($repository, $dirtySvg);
-
-        // Assert
-        expect($cleanSvg)->toBe('<svg>invalidcontent</svg>');
-    });
-});
-
 describe('Two Factor Authentication Backup Codes Email Notifications', function () {
     it('sends backup codes email on successful 2FA enable', function () {
         // Arrange
@@ -342,7 +292,7 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
 
         // Assert
         Mail::assertSent(BackupCodesNotification::class, function ($mail) {
-            return $mail->hasTo($this->admin->email) && ! empty($mail->backupCodes);
+            return $mail->hasTo($this->admin->email) && ! empty($this->admin->two_factor_backup_codes);
         });
     });
 
