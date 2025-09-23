@@ -2,30 +2,39 @@
 
 namespace Webkul\Admin\Mail\Admin;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Webkul\User\Models\Admin;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
+use Webkul\User\Contracts\Admin;
 
 class BackupCodesNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
-     * Create a new message instance.
+     * Create a new mailable instance.
      */
     public function __construct(public Admin $admin) {}
 
     /**
-     * Build the message.
+     * Get the message envelope.
      */
-    public function build(): static
+    public function envelope(): Envelope
     {
-        return $this
-            ->subject(trans('admin::app.account.emails.backup-codes.subject').config('app.name'))
-            ->view('admin::emails.admin.backup-codes')
-            ->with([
-                'appName' => config('app.name'),
-            ]);
+        return new Envelope(
+            to: [
+                new Address($this->admin->email),
+            ],
+            subject: trans('admin::app.account.emails.backup-codes.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'admin::emails.admin.backup-codes',
+        );
     }
 }
