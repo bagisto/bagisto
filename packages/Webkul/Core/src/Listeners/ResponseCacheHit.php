@@ -14,7 +14,7 @@ class ResponseCacheHit
      */
     public function handle(ResponseCacheHitEvent $event)
     {
-         if (! core()->getConfigData('general.general.visitor_options')) {
+        if (! core()->getConfigData('general.general.visitor_options')) {
             return;
         }
 

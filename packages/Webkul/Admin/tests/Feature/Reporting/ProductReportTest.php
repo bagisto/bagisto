@@ -12,7 +12,6 @@ use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Models\Wishlist;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Marketing\Models\SearchTerm;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\InvoiceItem;
