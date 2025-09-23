@@ -61,7 +61,7 @@ class TwoFactorAuthentication
     public function generateSetupData(Admin $admin): array
     {
         $secret = $this->getOrGenerateSecret($admin);
-        
+
         return $this->generateQrCodeData($admin, $secret);
     }
 
@@ -115,17 +115,17 @@ class TwoFactorAuthentication
     public function verifyBackupCode(Admin $admin, string $code): bool
     {
         $backupCodes = $admin->two_factor_backup_codes ?? [];
-    
+
         foreach ($backupCodes as $index => $storedCode) {
             if (hash_equals($storedCode, $code)) {
                 unset($backupCodes[$index]);
-            
+
                 return $admin->update([
                     'two_factor_backup_codes' => array_values($backupCodes),
                 ]);
             }
         }
-    
+
         return false;
     }
 

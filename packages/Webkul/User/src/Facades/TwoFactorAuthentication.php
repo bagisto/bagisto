@@ -4,8 +4,6 @@ namespace Webkul\User\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Webkul\User\TwoFactorAuthentication as BaseTwoFactorAuthentication;
-use PragmaRX\Google2FA\Google2FA;
-
 
 class TwoFactorAuthentication extends Facade
 {
@@ -14,7 +12,8 @@ class TwoFactorAuthentication extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor(){
+    protected static function getFacadeAccessor()
+    {
         return BaseTwoFactorAuthentication::class;
     }
 }
