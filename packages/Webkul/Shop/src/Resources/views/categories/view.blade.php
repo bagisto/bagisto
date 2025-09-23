@@ -271,6 +271,8 @@
 
                         document.body.style.overflow ='scroll';
 
+                        this.isLoading = true;
+
                         this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
                             params: this.queryParams
                         })
