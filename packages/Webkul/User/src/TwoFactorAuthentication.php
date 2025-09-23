@@ -18,29 +18,19 @@ class TwoFactorAuthentication
     /**
      * Generate or retrieve 2FA secret for admin.
      */
-    public function getOrGenerateSecret(Admin $admin): string
+    public function generateSecretKey(): string
     {
-        if (! $admin->two_factor_secret) {
-            $secret = $this->google2fa->generateSecretKey();
-
-            $admin->update([
-                'two_factor_secret' => encrypt($secret),
-            ]);
-
-            return $secret;
-        }
-
-        return decrypt($admin->two_factor_secret);
+        return $this->google2fa->generateSecretKey();
     }
 
     /**
      * Generate QR code data for 2FA setup.
      */
-    public function generateQrCodeData(Admin $admin, string $secret): array
+    public function generateQrCode(string $email, string $secret): array
     {
         $qrCodeUrl = $this->google2fa->getQRCodeUrl(
             config('app.name'),
-            $admin->email,
+            $email,
             $secret
         );
 
@@ -54,16 +44,6 @@ class TwoFactorAuthentication
             'qrCodeSvg' => $qrCodeSvg,
             'qrCodeUrl' => $qrCodeUrl,
         ];
-    }
-
-    /**
-     * Generate complete setup data (secret + QR code) for 2FA.
-     */
-    public function generateSetupData(Admin $admin): array
-    {
-        $secret = $this->getOrGenerateSecret($admin);
-
-        return $this->generateQrCodeData($admin, $secret);
     }
 
     /**

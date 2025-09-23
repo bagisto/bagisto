@@ -21,7 +21,17 @@ class TwoFactorController extends Controller
                 ], 401);
             }
 
-            $qrCodeData = two_factor_authentication()->generateSetupData($admin);
+            if (! $admin->two_factor_secret) {
+                $secret = two_factor_authentication()->generateSecretKey();
+
+                $admin->update([
+                    'two_factor_secret' => encrypt($secret),
+                ]);
+            } else {
+                $secret = decrypt($admin->two_factor_secret);
+            }
+
+            $qrCodeData = two_factor_authentication()->generateQrCode($admin->email, $secret);
 
             return response()->json($qrCodeData);
 
@@ -45,7 +55,7 @@ class TwoFactorController extends Controller
 
         if (two_factor_authentication()->enable($admin, $request->code)) {
             session()->put('two_factor_passed', true);
-            
+
             session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
             session()->flash('error', trans('admin::app.account.messages.invalid-code'));
