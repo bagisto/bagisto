@@ -16,6 +16,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
+* #10955 [fixed] - Fixed cancel order issue in mobile device.
+
 * #10937 [fixed] - Customer profile photo removed when saving profile without changes.
 
 * #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
