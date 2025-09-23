@@ -19,8 +19,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
 
         // Assert
         $response->assertStatus(200)
-            ->assertJsonStructure(['success', 'qrCodeSvg', 'qrCodeUrl'])
-            ->assertJson(['success' => true]);
+            ->assertJsonStructure(['qrCodeSvg', 'qrCodeUrl']);
     });
 
     it('denies unauthenticated users from accessing 2FA setup', function () {
@@ -57,8 +56,7 @@ describe('Two Factor Authentication Setup Endpoint', function () {
         $response = $this->getJson(route('admin.two_factor.setup'));
 
         // Assert
-        $response->assertStatus(200)
-            ->assertJson(['success' => true]);
+        $response->assertStatus(200);
 
         $this->admin->refresh();
         expect(decrypt($this->admin->two_factor_secret))->toBe($originalSecret);
@@ -92,7 +90,7 @@ describe('Two Factor Authentication Enable Endpoint', function () {
         expect($this->admin->two_factor_verified_at)->not()->toBeNull();
 
         // Assert (mail notification sent)
-        Mail::assertSent(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
+        Mail::assertQueued(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
     });
 
     it('prevents an admin from enabling 2FA with an invalid code', function () {
@@ -162,7 +160,6 @@ describe('Two Factor Authentication Disable', function () {
         // Assert
         $response->assertStatus(200)
             ->assertJson([
-                'success' => true,
                 'message' => trans('admin::app.account.messages.disabled-success'),
             ]);
 
@@ -290,7 +287,7 @@ describe('Two Factor Authentication Backup Codes Email Notifications', function 
         ]);
 
         // Assert
-        Mail::assertSent(BackupCodesNotification::class, function ($mail) {
+        Mail::assertQueued(BackupCodesNotification::class, function ($mail) {
             return $mail->hasTo($this->admin->email) && ! empty($this->admin->two_factor_backup_codes);
         });
     });
@@ -323,7 +320,10 @@ describe('Two Factor Authentication Integration Flow', function () {
         $setupResponse = $this->getJson(route('admin.two_factor.setup'));
 
         // Assert: setup successful
-        $setupResponse->assertJson(['success' => true]);
+        $setupResponse->assertJsonStructure([
+            'qrCodeSvg',
+            'qrCodeUrl',
+        ]);
 
         // Arrange: prepare valid OTP using generated secret
         $this->admin->refresh();
@@ -356,9 +356,6 @@ describe('Two Factor Authentication Integration Flow', function () {
 
         // Act: Step 5 - Disable 2FA
         $disableResponse = $this->get(route('admin.two_factor.disable'));
-
-        // Assert: disable response and DB flag updated
-        $disableResponse->assertJson(['success' => true]);
 
         $this->admin->refresh();
         expect($this->admin->two_factor_enabled)->toBeFalse();

@@ -2,10 +2,7 @@
 
 namespace Webkul\User;
 
-use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
-use Webkul\Admin\Mail\Admin\BackupCodesNotification;
-use Webkul\User\Contracts\Admin;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TwoFactorAuthentication
@@ -47,25 +44,6 @@ class TwoFactorAuthentication
     }
 
     /**
-     * Enable 2FA for admin after code verification.
-     */
-    public function enable(Admin $admin, string $code): bool
-    {
-        if (! $this->verifyQrCode($admin, $code)) {
-            return false;
-        }
-
-        $admin->forceFill([
-            'two_factor_enabled'     => true,
-            'two_factor_verified_at' => now(),
-        ])->save();
-
-        $this->sendBackupCodesEmail($admin);
-
-        return true;
-    }
-
-    /**
      * Disable 2FA for admin.
      */
     public function getDisableValues(): array
@@ -79,56 +57,29 @@ class TwoFactorAuthentication
     }
 
     /**
-     * Verify 2FA code or backup code.
+     * Verify backup code and return remaining codes.
      */
-    public function verifyCode(Admin $admin, string $code): bool
+    public function verifyBackupCode(array $backupCodes, string $code): ?array
     {
-        if ($this->verifyQrCode($admin, $code)) {
-            return true;
-        }
-
-        return $this->verifyBackupCode($admin, $code);
-    }
-
-    /**
-     * Verify backup code and remove it from available codes.
-     */
-    public function verifyBackupCode(Admin $admin, string $code): bool
-    {
-        $backupCodes = $admin->two_factor_backup_codes ?? [];
-
         foreach ($backupCodes as $index => $storedCode) {
             if (hash_equals($storedCode, $code)) {
                 unset($backupCodes[$index]);
-
-                return $admin->update([
-                    'two_factor_backup_codes' => array_values($backupCodes),
-                ]);
+                return array_values($backupCodes); // return updated codes
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
-     * Send backup codes via email.
+     * Verify a given 2FA code against the stored secret.
      */
-    protected function sendBackupCodesEmail(Admin $admin): void
+    public function verifyQrCode(string $decryptedSecret, string $requestedCode): bool
     {
         try {
-            $backupCodes = $this->generateBackupCodes($admin);
-
-            Mail::to($admin->email)->send(
-                new BackupCodesNotification($admin, $backupCodes)
-            );
+            return $this->google2fa->verifyKey($decryptedSecret, $requestedCode);
         } catch (\Exception $e) {
-            \Log::error(trans('admin::app.account.messages.email-failed'), [
-                'admin_id'    => $admin->id ?? null,
-                'admin_email' => $admin->email ?? null,
-                'exception'   => $e->getMessage(),
-            ]);
-
-            session()->flash('error', trans('admin::app.account.messages.email-failed'));
+            return false;
         }
     }
 
@@ -142,39 +93,16 @@ class TwoFactorAuthentication
         return str_replace(["\0", "\x00"], '', $svg);
     }
 
-    /**
-     * Verify a given 2FA code against the stored secret.
-     */
-    public function verifyQrCode(Admin $admin, string $code): bool
-    {
-        if (! $admin->two_factor_secret) {
-            return false;
-        }
-
-        try {
-            $decryptedSecret = decrypt($admin->two_factor_secret);
-
-            return $this->google2fa->verifyKey($decryptedSecret, $code);
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
 
     /**
      * Generate and store backup codes for 2FA.
      *
      * @param  int  $count  Number of codes to generate (default: 8)
      */
-    public function generateBackupCodes(Admin $admin, int $count = 8): array
+    public function generateBackupCodes(int $count = 8): array
     {
-        $backupCodes = collect(range(1, $count))
+        return collect(range(1, $count))
             ->map(fn () => str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT))
             ->toArray();
-
-        $admin->update([
-            'two_factor_backup_codes' => $backupCodes,
-        ]);
-
-        return $backupCodes;
     }
 }

@@ -3,7 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Mail\Admin\BackupCodesNotification;
 
 class TwoFactorController extends Controller
 {
@@ -53,8 +55,37 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if (two_factor_authentication()->enable($admin, $request->code)) {
+        $decryptedSecret = decrypt($admin->two_factor_secret);
+
+        $isValidCode = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code);
+
+        if ($isValidCode) {
+            $admin->forceFill([
+                'two_factor_enabled'     => true,
+                'two_factor_verified_at' => now(),
+            ])->save();
+
             session()->put('two_factor_passed', true);
+
+            try {
+                $backupCodes = two_factor_authentication()->generateBackupCodes();
+
+                $admin->update([
+                    'two_factor_backup_codes' => $backupCodes,
+                ]);
+
+                Mail::to($admin->email)->send(
+                    new BackupCodesNotification($admin, $backupCodes)
+                );
+            } catch (\Exception $e) {
+                \Log::error(trans('admin::app.account.messages.email-failed'), [
+                    'admin_id'    => $admin->id ?? null,
+                    'admin_email' => $admin->email ?? null,
+                    'exception'   => $e->getMessage(),
+                ]);
+
+                session()->flash('error', trans('admin::app.account.messages.email-failed'));
+            }
 
             session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
@@ -105,7 +136,20 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if (two_factor_authentication()->verifyCode($admin, $request->code)) {
+        $decryptedSecret = decrypt($admin->two_factor_secret);
+
+        if (two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code)) {
+            return $this->handleSuccessfulVerification();
+        }
+
+        $updatedCodes = two_factor_authentication()->verifyBackupCode(
+            $admin->two_factor_backup_codes ?? [],
+            $request->code
+        );
+
+        if ($updatedCodes !== null) {
+            $admin->update(['two_factor_backup_codes' => $updatedCodes]);
+
             return $this->handleSuccessfulVerification();
         }
 
