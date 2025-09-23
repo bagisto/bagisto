@@ -18,6 +18,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10955 [fixed] - Fixed cancel order issue in mobile device.
 
+* #10953 [fixed] - Fixed bundle product issue when having one simple product in cart.
+
+* #10952 [fixed] - Fixed move to cart bundle product issue when having one simple product in cart.
+
 * #10937 [fixed] - Customer profile photo removed when saving profile without changes.
 
 * #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
