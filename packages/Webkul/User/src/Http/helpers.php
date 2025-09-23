@@ -1,7 +1,7 @@
 <?php
 
 use Webkul\User\Bouncer;
-use Webkul\User\TwoFactorAuthentication;
+use Webkul\User\Facades\TwoFactorAuthentication as TwoFactorAuthFacade;
 
 if (! function_exists('bouncer')) {
     function bouncer(): Bouncer
@@ -10,9 +10,9 @@ if (! function_exists('bouncer')) {
     }
 }
 
-if (! function_exists('twoFactorAuth')) {
-    function twoFactorAuth(): TwoFactorAuthentication
+if (! function_exists('two_factor_authentication')) {
+    function two_factor_authentication()
     {
-        return app()->make(TwoFactorAuthentication::class);
+        return TwoFactorAuthFacade::getFacadeRoot();
     }
 }

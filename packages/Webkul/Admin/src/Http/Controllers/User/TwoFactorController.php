@@ -22,7 +22,7 @@ class TwoFactorController extends Controller
                 ], 401);
             }
 
-            $qrCodeData = twoFactorAuth()->generateSetupData($admin);
+            $qrCodeData = two_factor_authentication()->generateSetupData($admin);
 
             return response()->json([
                 'success' => true,
@@ -48,7 +48,7 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if (twoFactorAuth()->enable($admin, $request->code)) {
+        if (two_factor_authentication()->enable($admin, $request->code)) {
             session()->put('two_factor_passed', true);
             session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
@@ -72,7 +72,7 @@ class TwoFactorController extends Controller
             ], 401);
         }
 
-        twoFactorAuth()->disable($admin);
+        two_factor_authentication()->disable($admin);
 
         $message = trans('admin::app.account.messages.disabled-success');
 
@@ -99,7 +99,7 @@ class TwoFactorController extends Controller
 
         $admin = auth('admin')->user();
 
-        if (twoFactorAuth()->verifyCode($admin, $request->code)) {
+        if (two_factor_authentication()->verifyCode($admin, $request->code)) {
             return $this->handleSuccessfulVerification();
         }
 
