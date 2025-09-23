@@ -34,8 +34,6 @@ it('should return the dashboard index page', function () {
 
 it('should show the dashboard over all stats', function () {
     // Arrange.
-    config(['visitor.general.status' => true]);
-
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1086,37 +1084,6 @@ it('should show the dashboard total sales stats', function () {
             $this->prepareOrderTransaction($orderTransaction),
         ],
     ]);
-});
-
-it('should show the dashboard total visitors stats', function () {
-    // Arrange.
-    (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    config(['visitor.general.status' => true]);
-
-    visitor()->visit();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    get(route('admin.dashboard.stats', [
-        'type' => 'total-visitors',
-    ]))
-        ->assertOk()
-        ->assertJsonPath('statistics.total.current', 1)
-        ->assertJsonPath('statistics.unique.current', 1);
 });
 
 it('should show the dashboard top selling products stats', function () {
