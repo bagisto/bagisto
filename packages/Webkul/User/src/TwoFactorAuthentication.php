@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
 use Webkul\User\Contracts\Admin;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TwoFactorAuthentication
 {
@@ -43,7 +44,7 @@ class TwoFactorAuthentication
             $secret
         );
 
-        $qrCodeSvg = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')
+        $qrCodeSvg = QrCode::format('svg')
             ->size(200)
             ->generate($qrCodeUrl);
 
@@ -87,14 +88,14 @@ class TwoFactorAuthentication
     /**
      * Disable 2FA for admin.
      */
-    public function disable(Admin $admin): bool
+    public function getDisableValues(): array
     {
-        return $admin->update([
+        return [
             'two_factor_secret'       => null,
             'two_factor_enabled'      => false,
             'two_factor_backup_codes' => null,
             'two_factor_verified_at'  => null,
-        ]);
+        ];
     }
 
     /**

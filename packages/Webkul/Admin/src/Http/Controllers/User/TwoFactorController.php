@@ -17,22 +17,17 @@ class TwoFactorController extends Controller
 
             if (! $admin) {
                 return response()->json([
-                    'success' => false,
                     'message' => trans('admin::app.errors.401.title'),
                 ], 401);
             }
 
             $qrCodeData = two_factor_authentication()->generateSetupData($admin);
 
-            return response()->json([
-                'success' => true,
-                ...$qrCodeData,
-            ], 200);
+            return response()->json($qrCodeData);
 
         } catch (\Exception $e) {
             return response()->json([
-                'success' => false,
-                'error'   => $e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -50,6 +45,7 @@ class TwoFactorController extends Controller
 
         if (two_factor_authentication()->enable($admin, $request->code)) {
             session()->put('two_factor_passed', true);
+            
             session()->flash('success', trans('admin::app.account.messages.enabled-success'));
         } else {
             session()->flash('error', trans('admin::app.account.messages.invalid-code'));
@@ -67,17 +63,17 @@ class TwoFactorController extends Controller
 
         if (! $admin) {
             return response()->json([
-                'success' => false,
                 'message' => trans('admin::app.errors.401.title'),
             ], 401);
         }
 
-        two_factor_authentication()->disable($admin);
+        $admin->update(
+            two_factor_authentication()->getDisableValues()
+        );
 
         $message = trans('admin::app.account.messages.disabled-success');
 
         return response()->json([
-            'success' => true,
             'message' => $message,
         ]);
     }
