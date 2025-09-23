@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Genel',
 
                 'general' => [
-                    'info'  => 'Birim seçeneklerini ayarlayın ve breadcrumbs\'ı etkinleştirin veya devre dışı bırakın.',
+                    'info'  => 'Birim ayarlarını yapılandırın ve Breadcrumbs ile Ziyaretçi seçeneklerini açıp kapatın.',
                     'title' => 'Genel',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Mağaza Breadcrumbs',
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Mağazada breadcrumbs gezinmesini etkinleştirin veya devre dışı bırakın.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Ziyaretçi Seçeneklerini Etkinleştir',
+                        'title'      => 'Ziyaretçi Seçenekleri',
+                        'title-info' => 'Site üzerinde ziyaretçi sayısını izlemek ve saymak için kontrol sağlar, genel ziyaretçi etkinliğini ve etkileşimini izlemeye yardımcı olur.',
                     ],
                 ],
 

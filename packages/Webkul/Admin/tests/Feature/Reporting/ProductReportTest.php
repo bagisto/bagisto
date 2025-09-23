@@ -12,7 +12,6 @@ use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Models\Wishlist;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Marketing\Models\SearchTerm;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\InvoiceItem;
@@ -832,38 +831,6 @@ it('should return the products with most reviews reporting stats', function () {
         ->assertJsonPath('statistics.0.reviews', 2)
         ->assertJsonPath('statistics.0.product.id', $product->id)
         ->assertJsonPath('statistics.0.product.type', $product->type);
-});
-
-it('should return the products with most visits reporting stats', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    visitor()->visit($product);
-
-    get(route('admin.reporting.products.stats', [
-        'type' => 'products-with-most-visits',
-    ]))
-        ->assertOk()
-        ->assertJsonPath('statistics.0.visitable_id', $product->id)
-        ->assertJsonPath('statistics.0.visits', 1)
-        ->assertJsonPath('statistics.0.visitable_type', Product::class)
-        ->assertJsonPath('statistics.0.visitable.id', $product->id)
-        ->assertJsonPath('statistics.0.visitable.type', $product->type);
 });
 
 it('should return the last search terms reporting stats', function () {

@@ -54,6 +54,19 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.general.visitor_options',
+        'name'   => 'admin::app.configuration.index.general.general.visitor-options.title',
+        'info'   => 'admin::app.configuration.index.general.general.visitor-options.title-info',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'enabled',
+                'title'   => 'admin::app.configuration.index.general.general.visitor-options.enable',
+                'type'    => 'boolean',
+                'default' => false,
+            ],
+        ],
+    ], [
         'key'  => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
@@ -1296,7 +1309,7 @@ return [
                 'title'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title-info',
                 'type'    => 'select',
-                'default' => 'guest',
+                'default' => 'general',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.general',

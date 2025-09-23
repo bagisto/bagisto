@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Umum',
 
                 'general' => [
-                    'info'  => 'Atur opsi unit dan aktifkan atau nonaktifkan breadcrumb.',
+                    'info'  => 'Atur pengaturan unit dan aktifkan/nonaktifkan opsi Breadcrumbs dan Pengunjung.',
                     'title' => 'Umum',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Breadcrumbs Toko',
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Aktifkan atau nonaktifkan navigasi breadcrumb di toko.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Aktifkan Opsi Pengunjung',
+                        'title'      => 'Opsi Pengunjung',
+                        'title-info' => 'Mengizinkan kontrol atas situs untuk melacak dan menghitung jumlah kunjungan, membantu memantau aktivitas dan keterlibatan pengunjung secara umum.',
                     ],
                 ],
 
