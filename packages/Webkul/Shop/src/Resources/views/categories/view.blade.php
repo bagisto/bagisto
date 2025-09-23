@@ -105,6 +105,8 @@
                                             class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
 
                                         <p
@@ -149,6 +151,8 @@
                                             class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
 
                                         <p

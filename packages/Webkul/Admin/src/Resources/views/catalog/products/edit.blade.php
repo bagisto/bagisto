@@ -155,6 +155,16 @@
                     @foreach ($groups as $group)
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
+                        @if (
+                            $group->code === 'inventories' 
+                            && (
+                                $product->getTypeInstance()->isComposite()
+                                || $product->type === 'downloadable'
+                            )
+                        )
+                            @continue
+                        @endif
+
                         @if ($customAttributes->isNotEmpty())
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
@@ -203,10 +213,7 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
-                                @includeWhen(
-                                    $group->code === 'inventories' && ! $product->getTypeInstance()->isComposite(),
-                                    'admin::catalog.products.edit.inventories'
-                                )
+                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}

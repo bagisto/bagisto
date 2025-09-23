@@ -59,7 +59,7 @@ export async function register(page) {
     await expect(
         page
             .getByText(
-                "Account created successfully, an e-mail has been sent for verification."
+                "Account created successfully."
             )
             .first()
     ).toBeVisible();

@@ -16,6 +16,7 @@ use Webkul\Admin\Http\Resources\ProductResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Rules\Slug;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Helpers\Product;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -25,9 +26,9 @@ use Webkul\Product\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
-    /*
-    * Using const variable for status
-    */
+    /**
+     * Using const variable for status.
+     */
     const ACTIVE_STATUS = 1;
 
     /**
@@ -340,7 +341,7 @@ class ProductController extends Controller
             $searchEngine = 'elastic';
 
             $indexNames = core()->getAllChannels()->map(function ($channel) {
-                return 'products_'.$channel->code.'_'.app()->getLocale().'_index';
+                return Product::formatElasticSearchIndexName($channel->code, app()->getLocale());
             })->toArray();
         }
 

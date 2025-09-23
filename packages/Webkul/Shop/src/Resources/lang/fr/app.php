@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Souscrire à la newsletter',
             'success'                     => 'Compte créé avec succès.',
             'success-verify'              => 'Compte créé avec succès, un e-mail de vérification a été envoyé.',
-            'success-verify-email-unsent' => 'Compte créé avec succès, mais l\'e-mail de vérification n\'a pas été envoyé.',
             'terms-conditions'            => 'Termes et conditions',
             'verification-not-sent'       => 'Erreur ! Problème d\'envoi de l\'e-mail de vérification, veuillez réessayer plus tard.',
             'verification-sent'           => 'E-mail de vérification envoyé',

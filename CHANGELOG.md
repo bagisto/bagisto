@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Improved full application perfomance and web vital score.
+
 * Implemented did you mean functionality.
 
 * Fixed the database prefix validation issue in both the GUI and CLI installers.
@@ -14,19 +16,35 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
 
+* #10955 [fixed] - Fixed cancel order issue in mobile device.
+
+* #10937 [fixed] - Customer profile photo removed when saving profile without changes.
+
 * #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
 
 * #10912 [fixed] - ACL for create invoice is not correct.
 
+* #10903 [fixed] - Fixed elasticsearch issue for Hindi, Chinese and Portugues locale.
+
 * #10897 [fixed] - Fixed missing success message when admin approving the review.
 
-* #10883 [fixed] - Fixed broken artisan commands. 
+* #10893 [fixed] - Fixed email verification issue.
+
+* #10883 [fixed] - Fixed broken artisan commands.
+
+* #10847 [fixed] - Fixed attribute family issue where new attribute group is not getting saved.
+
+* #10840 [fixed] - Fixed flash message issue which is caused due to FPC.
 
 * #10838 [fixed] - Fixed the cart issue.
 
 * #10836 [fixed] - Fixed the date of birth issue.
 
+* #10755 [fixed] - Fixed review api issue by setting generic message for customer facing end.
+
 * #10711 [fixed] - Show validation error in cart rule coupons when entering wrong input.
+
+* #10701 [fixed] - Fixed inventories group attribute condition error.
 
 * #10694 [fixed] - Closed time slot should show all the time slots except the mentioned one.
 
