@@ -469,7 +469,6 @@
                                 @endif
 
                                 @if ($order->canCancel())
-
                                     <form
                                         method="POST"
                                         ref="cancelOrderForm"
