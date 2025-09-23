@@ -1296,7 +1296,7 @@ return [
                 'title'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title',
                 'info'    => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title-info',
                 'type'    => 'select',
-                'default' => 'guest',
+                'default' => 'general',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.general',
