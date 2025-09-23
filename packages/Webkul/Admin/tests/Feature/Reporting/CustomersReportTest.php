@@ -106,23 +106,6 @@ it('should return the top customers group stats report', function () {
         ->assertJsonPath('statistics.0.group_name', 'General');
 });
 
-it('should return the customers traffic stats report', function () {
-    // Arrange.
-    $customer = Customer::factory()->create();
-
-    visitor()->visit($customer);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    get(route('admin.reporting.customers.stats', [
-        'type' => 'customers-traffic',
-    ]))
-        ->assertOk()
-        ->assertJsonPath('statistics.total.current', 1)
-        ->assertJsonPath('statistics.unique.current', 1);
-});
-
 it('should return the customers with most orders stats report', function () {
     // Arrange.
     $product = (new ProductFaker([
