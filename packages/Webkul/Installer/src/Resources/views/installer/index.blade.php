@@ -41,7 +41,7 @@
         $locales = [
             'ar'    => 'arabic',
             'bn'    => 'bengali',
-            'ca'    => 'Catalan',
+            'ca'    => 'catalan',
             'de'    => 'german',
             'en'    => 'english',
             'es'    => 'spanish',

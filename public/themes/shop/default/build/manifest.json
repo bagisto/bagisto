@@ -1,21 +1,21 @@
 {
-  "_veeValidate-CHxk2las.js": {
-    "file": "assets/veeValidate-CHxk2las.js",
+  "_veeValidate-AStS9x6w.js": {
+    "file": "assets/veeValidate-AStS9x6w.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-RtTmbo1p.js"
+      "_vue-BpIHnJ7o.js"
     ]
   },
-  "_vendor-CznqvZOj.js": {
-    "file": "assets/vendor-CznqvZOj.js",
+  "_vendor-DIwtuusy.js": {
+    "file": "assets/vendor-DIwtuusy.js",
     "name": "vendor"
   },
-  "_vue-RtTmbo1p.js": {
-    "file": "assets/vue-RtTmbo1p.js",
+  "_vue-BpIHnJ7o.js": {
+    "file": "assets/vue-BpIHnJ7o.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-EGyU0bGv.css",
+    "file": "assets/app-BoUQhNYM.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -96,14 +96,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-CZhbwYqt.js",
+    "file": "assets/app-C4XCDcMP.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-RtTmbo1p.js",
-      "_vendor-CznqvZOj.js",
-      "_veeValidate-CHxk2las.js"
+      "_vue-BpIHnJ7o.js",
+      "_vendor-DIwtuusy.js",
+      "_veeValidate-AStS9x6w.js"
     ],
     "css": [
       "assets/app-DsP8OK1c.css"
