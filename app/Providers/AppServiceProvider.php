@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
 
         $allowedIPs = array_filter($allowedIPs);
 
-        if (empty($allowedIPs)) {
+        if ($allowedIPs === []) {
             return;
         }
 

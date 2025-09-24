@@ -1,0 +1,50 @@
+name: Rector CI
+
+on:
+  push:
+    branches:
+      - 2.3
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  rector:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        extensions: mbstring, xml, tokenizer, curl, json
+        tools: composer
+        coverage: none
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install dependencies
+      run: composer install --no-progress --no-suggest --prefer-dist
+
+    - name: Cache Rector cache
+      uses: actions/cache@v3
+      with:
+        path: storage/rector
+        key: ${{ runner.os }}-rector-${{ hashFiles('**/rector.php') }}
+        restore-keys: ${{ runner.os }}-rector-
+
+    - name: Run Rector
+      run: |
+        vendor/bin/rector process --ansi
+
+    - name: Validate Rector changes
+      run: |
+        git diff --exit-code
