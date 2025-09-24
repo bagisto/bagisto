@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
-use Webkul\User\Models\Admin;
 
 beforeEach(function () {
     $this->admin = $this->loginAsAdmin();
