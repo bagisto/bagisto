@@ -129,7 +129,7 @@
             <div class="flex w-full items-center">
                 <div class="relative w-full">
                     <span
-                        class="shimmer block h-[42px] w-[250px] rounded-xl px-11 py-3.5 max-md:rounded-lg"
+                        class="shimmer block h-[42px] w-full rounded-xl px-11 py-3.5 max-md:rounded-lg"
                         role="presentation"
                     >
                     </span>
