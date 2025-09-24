@@ -44,7 +44,6 @@ export default defineConfig(({ mode }) => {
                     "src/Resources/assets/js/app.js",
                 ],
                 refresh: true,
-                valetTls: true,
                 preload: false,
             }),
         ],

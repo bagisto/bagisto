@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.7 (24th of September 2025)** - *Release*
 
 * Improved full application perfomance and web vital score.
 
