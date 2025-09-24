@@ -3712,7 +3712,7 @@ return [
                 'title' => 'General',
 
                 'general' => [
-                    'info'  => 'Set units options and enable or disable breadcrumbs.',
+                    'info'  => 'Configure unit settings and toggle the Breadcrumbs and Visitor options on or off.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Shop Breadcrumbs',
                         'title'      => 'Breadcrumbs',
                         'title-info' => 'Enable or disable breadcrumbs navigation in the shop.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Enable Visitor Options',
+                        'title'      => 'Visitor Options',
+                        'title-info' => 'Allows control over the site to track and count the number of visits, helping monitor general visitor activity and engagement.',
                     ],
                 ],
 

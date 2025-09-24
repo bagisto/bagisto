@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+## **v2.3.7 (24th of September 2025)** - *Release*
+
 * Improved full application perfomance and web vital score.
 
 * Implemented did you mean functionality.
@@ -15,6 +17,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Added the capability to run the dev command from the customized theme package without needing to run the publishers repeatedly.
 
 * #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
+
+* #10955 [fixed] - Fixed cancel order issue in mobile device.
+
+* #10953 [fixed] - Fixed bundle product issue when having one simple product in cart.
+
+* #10952 [fixed] - Fixed move to cart bundle product issue when having one simple product in cart.
 
 * #10937 [fixed] - Customer profile photo removed when saving profile without changes.
 

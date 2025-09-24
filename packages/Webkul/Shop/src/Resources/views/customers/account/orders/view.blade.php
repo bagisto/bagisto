@@ -469,6 +469,14 @@
                                 @endif
 
                                 @if ($order->canCancel())
+                                    <form
+                                        method="POST"
+                                        ref="cancelOrderForm"
+                                        action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
+                                    >
+                                        @csrf
+                                    </form>
+
                                     <!-- Seperator -->
                                     <span class="my-auto h-5 w-0.5 bg-zinc-200 py-3"></span>
 

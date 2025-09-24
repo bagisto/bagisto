@@ -3712,7 +3712,7 @@ return [
                 'title' => 'Général',
 
                 'general' => [
-                    'info'  => 'Définir les options d\'unités et activer ou désactiver les fils d\'Ariane.',
+                    'info'  => 'Configurer les paramètres d\'unités et activer ou désactiver les options Fil d\'Ariane et Visiteur.',
                     'title' => 'Général',
 
                     'unit-options' => [
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Fil d\'Ariane de la boutique',
                         'title'      => 'Fil d\'Ariane',
                         'title-info' => 'Activer ou désactiver la navigation par fil d\'Ariane dans la boutique.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Activer les options de visiteur',
+                        'title'      => 'Options de visiteur',
+                        'title-info' => 'Permet de contrôler le site pour suivre et compter le nombre de visites, aidant à surveiller l\'activité générale et l\'engagement des visiteurs.',
                     ],
                 ],
 

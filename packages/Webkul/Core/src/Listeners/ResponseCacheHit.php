@@ -14,6 +14,10 @@ class ResponseCacheHit
      */
     public function handle(ResponseCacheHitEvent $event)
     {
+        if (! core()->getConfigData('general.general.visitor_options')) {
+            return;
+        }
+
         $log = visitor()->getLog();
 
         if (request()->route()->getName() == 'shop.home.index') {

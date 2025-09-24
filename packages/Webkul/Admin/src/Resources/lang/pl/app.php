@@ -3712,13 +3712,13 @@ return [
                 'title' => 'Ogólne',
 
                 'general' => [
-                    'info'  => 'Ustaw opcje jednostek i włącz lub wyłącz ścieżki nawigacyjne.',
+                    'info'  => 'Skonfiguruj ustawienia jednostek oraz włącz lub wyłącz opcje ścieżki nawigacyjnej i odwiedzających.',
                     'title' => 'Ogólne',
 
                     'unit-options' => [
                         'info'        => 'Ustaw opcje jednostek.',
                         'title'       => 'Opcje jednostek',
-                        'title-info'  => 'Skonfiguruj wagę w funtach (lbs) lub kilogramach (kgs).',
+                        'title-info'  => 'Skonfiguruj wagę w funtach (lbs) lub kilogramach (kg).',
                         'weight-unit' => 'Jednostka wagi',
                     ],
 
@@ -3726,6 +3726,12 @@ return [
                         'shop'       => 'Ścieżka nawigacyjna sklepu',
                         'title'      => 'Ścieżka nawigacyjna',
                         'title-info' => 'Włącz lub wyłącz nawigację ścieżki nawigacyjnej w sklepie.',
+                    ],
+
+                    'visitor-options' => [
+                        'enable'     => 'Włącz opcje odwiedzających',
+                        'title'      => 'Opcje odwiedzających',
+                        'title-info' => 'Pozwala kontrolować witrynę w celu śledzenia i liczenia liczby wizyt, pomagając monitorować ogólną aktywność i zaangażowanie odwiedzających.',
                     ],
                 ],
 

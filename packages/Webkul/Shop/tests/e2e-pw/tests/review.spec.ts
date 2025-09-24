@@ -11,6 +11,7 @@ test("should review a product", async ({ page }) => {
         .getByLabel("Arctic Touchscreen Winter")
         .click();
     await page.getByRole("button", { name: "Reviews" }).click();
+    await page.waitForSelector("#review-tab");
     await page.locator("#review-tab").getByText("Write a Review").click();
     await page.locator("#review-tab span").nth(3).click();
     await page.locator("#review-tab span").nth(4).click();
