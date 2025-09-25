@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { generateRandomStringWithSpaces } from "../../../utils/form";
+import { generateDescription } from "../../../utils/faker";
 
 test.describe("google captcha configuration", () => {
     /**
@@ -45,10 +45,10 @@ test.describe("google captcha configuration", () => {
 
         await adminPage
             .locator('input[name="customer[captcha][credentials][site_key]"]')
-            .fill(generateRandomStringWithSpaces(60));
+            .fill(generateDescription(60));
         await adminPage
             .locator('input[name="customer[captcha][credentials][secret_key]"]')
-            .fill(generateRandomStringWithSpaces(60));
+            .fill(generateDescription(60));
 
         await adminPage.click('button[type="submit"].primary-button:visible');
 

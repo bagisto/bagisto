@@ -61,7 +61,7 @@
             </template>
 
             <template v-else>
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
+                <div class="row grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] grid-rows-1 gap-1 items-center border-b px-4 py-2.5 dark:border-gray-800 min-w-full">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group', 'customer_id'], ['revenue', 'order_count', 'address_count']]"
@@ -136,7 +136,7 @@
 
             <template v-else>
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-1 gap-2 md:grid-cols-[minmax(150px,_2fr)_1fr_1fr] md:gap-0 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950 min-w-full"
                     v-for="record in available.records"
                 >
                     <div class="flex gap-2.5">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-1.5">
+                    <div class="flex flex-col gap-1.5 ps-8 md:ps-0">
                         <div class="flex gap-1.5">
                             <span
                                 :class="{
@@ -206,7 +206,7 @@
                         </p>
                     </div>
 
-                    <div class="flex items-center justify-between gap-x-4">
+                    <div class="flex items-center justify-between gap-x-4 ps-8 md:ps-0">
                         <div class="flex flex-col gap-1.5">
                             <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ $admin.formatPrice(record.revenue) }}

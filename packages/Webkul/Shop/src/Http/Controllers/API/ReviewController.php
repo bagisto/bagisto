@@ -98,9 +98,15 @@ class ReviewController extends APIController
     /**
      * Translate the specified resource in storage.
      */
-    public function translate(int $reviewId): JsonResponse
+    public function translate(int $productId, int $reviewId): JsonResponse
     {
         $review = $this->productReviewRepository->find($reviewId);
+
+        if ($review?->status !== self::STATUS_APPROVED) {
+            return new JsonResponse([
+                'message' => trans('shop::app.products.view.reviews.empty-review'),
+            ], 400);
+        }
 
         $currentLocale = core()->getCurrentLocale();
 
@@ -127,13 +133,13 @@ class ReviewController extends APIController
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => $e->getMessage(),
+                'message' => trans('shop::app.errors.500.title'),
             ], 500);
         }
     }
 
     /**
-     * Censoring the Reviewer name
+     * Censoring the reviewer name.
      */
     private function censorReviewerName(string $name): string
     {

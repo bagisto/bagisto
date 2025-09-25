@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Senha do Banco de Dados',
                 'database-port'               => 'Porta do Banco de Dados',
                 'database-prefix'             => 'Prefixo do Banco de Dados',
+                'database-prefix-help'        => 'O prefixo deve ter 4 caracteres de comprimento e pode conter apenas letras, números e sublinhados.',
                 'database-username'           => 'Nome de Usuário do Banco de Dados',
                 'default-currency'            => 'Moeda Padrão',
                 'default-locale'              => 'Localidade Padrão',

@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Пароль бази даних',
                 'database-port'               => 'Порт бази даних',
                 'database-prefix'             => 'Префікс бази даних',
+                'database-prefix-help'        => 'Префікс повинен містити 4 символи і може містити лише літери, цифри та підкреслення.',
                 'database-username'           => 'Ім\'я користувача бази даних',
                 'default-currency'            => 'Типова валюта',
                 'default-locale'              => 'Типове місце знаходження',

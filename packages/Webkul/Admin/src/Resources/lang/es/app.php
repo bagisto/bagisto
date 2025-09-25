@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Reserva de Mesa',
                             'title'       => 'Tipo',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'El tipo de reserva no se puede cambiar.',
+                            'time-validation'    => 'La hora de inicio debe ser menor que la hora de finalización.',
+                            'overlap-validation' => 'El intervalo de tiempo se superpone con un intervalo existente.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Cualquier Condición Es Verdadera',
                     'apply-to-shipping'                         => 'Aplicar al Envío',
                     'attribute-family'                          => 'Familia de Atributos',
-                    'attribute-name-children-only'              => 'Nombre del Atributo Solo para Hijos',
-                    'attribute-name-parent-only'                => 'Nombre del Atributo Solo para Padres',
+                    'attribute-name-children-only'              => ':attribute_name (Solo Hijos)',
+                    'attribute-name-parent-only'                => ':attribute_name (Solo Padres)',
                     'auto-generate-coupon'                      => 'Generación Automática de Cupón',
                     'back-btn'                                  => 'Volver',
                     'buy-x-get-y-free'                          => 'Comprar X y Obtener Y Gratis',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Cualquier Condición Es Verdadera',
                     'apply-to-shipping'                         => 'Aplicar al Envío',
                     'attribute-family'                          => 'Familia de Atributos',
-                    'attribute-name-children-only'              => 'Nombre del Atributo Solo para Hijos',
-                    'attribute-name-parent-only'                => 'Nombre del Atributo Solo para Padres',
+                    'attribute-name-children-only'              => ':attribute_name (Solo Hijos)',
+                    'attribute-name-parent-only'                => ':attribute_name (Solo Padres)',
                     'auto-generate-coupon'                      => 'Generación Automática de Cupón',
                     'back-btn'                                  => 'Volver',
                     'buy-x-get-y-free'                          => 'Comprar X y Obtener Y Gratis',

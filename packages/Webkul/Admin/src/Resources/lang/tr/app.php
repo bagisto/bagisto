@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Masa Rezervasyonu',
                             'title'       => 'Tür',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'Rezervasyon türü değiştirilemez.',
+                            'time-validation'    => 'Başlangıç zamanı, bitiş zamanından küçük olmalıdır.',
+                            'overlap-validation' => 'Zaman aralığı mevcut bir aralıkla çakışıyor.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Herhangi Bir Koşul Doğru',
                     'apply-to-shipping'                         => 'Kargo Üzerine Uygula',
                     'attribute-family'                          => 'Özellik Ailesi',
-                    'attribute-name-children-only'              => 'Özellik Adı (Sadece Çocuklar)',
-                    'attribute-name-parent-only'                => 'Özellik Adı (Sadece Ebeveynler)',
+                    'attribute-name-children-only'              => ':attribute_name (Sadece Çocuklar)',
+                    'attribute-name-parent-only'                => ':attribute_name (Sadece Ebeveynler)',
                     'auto-generate-coupon'                      => 'Kupon Otomatik Üret',
                     'back-btn'                                  => 'Geri',
                     'buy-x-get-y-free'                          => 'X Ürün Al, Y Ürün Bedava',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Herhangi Bir Koşul Doğru',
                     'apply-to-shipping'                         => 'Kargo Üzerine Uygula',
                     'attribute-family'                          => 'Özellik Ailesi',
-                    'attribute-name-children-only'              => 'Sadece Çocuklar için Özellik Adı',
-                    'attribute-name-parent-only'                => 'Sadece Ebeveynler için Özellik Adı',
+                    'attribute-name-children-only'              => ':attribute_name (Sadece Çocuklar)',
+                    'attribute-name-parent-only'                => ':attribute_name (Sadece Ebeveynler)',
                     'auto-generate-coupon'                      => 'Otomatik Kupon Oluştur',
                     'back-btn'                                  => 'Geri',
                     'buy-x-get-y-free'                          => 'X Ürün Al Y Ürün Bedava',

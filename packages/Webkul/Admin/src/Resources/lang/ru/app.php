@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Бронирование стола',
                             'title'       => 'Тип',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'Тип бронирования не может быть изменён.',
+                            'time-validation'    => 'Время начала должно быть меньше времени окончания.',
+                            'overlap-validation' => 'Временной слот пересекается с существующим слотом.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Любое условие верно',
                     'apply-to-shipping'                         => 'Применить к доставке',
                     'attribute-family'                          => 'Семейство атрибутов',
-                    'attribute-name-children-only'              => 'Имя атрибута (только дочерние)',
-                    'attribute-name-parent-only'                => 'Имя атрибута (только родительские)',
+                    'attribute-name-children-only'              => ':attribute_name (только дочерние)',
+                    'attribute-name-parent-only'                => ':attribute_name (только родительские)',
                     'auto-generate-coupon'                      => 'Автоматическая генерация промокода',
                     'back-btn'                                  => 'Назад',
                     'buy-x-get-y-free'                          => 'Купи X, получи Y бесплатно',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Любое условие верно',
                     'apply-to-shipping'                         => 'Применить к доставке',
                     'attribute-family'                          => 'Семейство атрибутов',
-                    'attribute-name-children-only'              => 'Имя атрибута (только дочерние)',
-                    'attribute-name-parent-only'                => 'Имя атрибута (только родительские)',
+                    'attribute-name-children-only'              => ':attribute_name (только дочерние)',
+                    'attribute-name-parent-only'                => ':attribute_name (только родительские)',
                     'auto-generate-coupon'                      => 'Автоматическая генерация промокода',
                     'back-btn'                                  => 'Назад',
                     'buy-x-get-y-free'                          => 'Купи X, получи Y бесплатно',

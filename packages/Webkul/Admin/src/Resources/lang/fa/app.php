@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'رزرو میز',
                             'title'       => 'نوع',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'نوع رزرو قابل تغییر نیست.',
+                            'time-validation'    => 'زمان شروع باید کمتر از زمان پایان باشد.',
+                            'overlap-validation' => 'بازه زمانی با یک بازه موجود همپوشانی دارد.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'حداقل یکی از شرایط درست باشد',
                     'apply-to-shipping'                         => 'اعمال به هزینه ارسال',
                     'attribute-family'                          => 'خانواده ویژگی',
-                    'attribute-name-children-only'              => 'نام ویژگی فقط در دسته‌بندی‌های فرزند',
-                    'attribute-name-parent-only'                => 'نام ویژگی فقط در دسته‌بندی‌های والد',
+                    'attribute-name-children-only'              => ':attribute_name (فقط دسته‌های فرزند)',
+                    'attribute-name-parent-only'                => ':attribute_name (فقط دسته‌های والد)',
                     'auto-generate-coupon'                      => 'تولید خودکار کد تخفیف',
                     'back-btn'                                  => 'بازگشت',
                     'buy-x-get-y-free'                          => 'خرید X تا بگیرید Y رایگان',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'حداقل یکی از شرایط درست باشد',
                     'apply-to-shipping'                         => 'اعمال به هزینه ارسال',
                     'attribute-family'                          => 'خانواده ویژگی',
-                    'attribute-name-children-only'              => 'نام ویژگی فقط در دسته‌بندی‌های فرزند',
-                    'attribute-name-parent-only'                => 'نام ویژگی فقط در دسته‌بندی‌های والد',
+                    'attribute-name-children-only'              => ':attribute_name (فقط دسته‌های فرزند)',
+                    'attribute-name-parent-only'                => ':attribute_name (فقط دسته‌های والد)',
                     'auto-generate-coupon'                      => 'تولید خودکار کد تخفیف',
                     'back-btn'                                  => 'بازگشت',
                     'buy-x-get-y-free'                          => 'خرید X تا بگیرید Y رایگان',

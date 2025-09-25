@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => '订阅通讯',
             'success'                     => '成功创建账户。',
             'success-verify'              => '成功创建账户，已发送验证电子邮件。',
-            'success-verify-email-unsent' => '成功创建账户，但未发送验证电子邮件。',
             'terms-conditions'            => '条款和条件',
             'verification-not-sent'       => '错误！发送验证电子邮件时出现问题，请稍后再试。',
             'verification-sent'           => '已发送验证电子邮件',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => '搜索结果为：:query',
+        'title'   => '这是 :query 的搜索结果',
+        'suggest' => '改为搜索',
         'results' => '搜索结果',
 
         'images' => [

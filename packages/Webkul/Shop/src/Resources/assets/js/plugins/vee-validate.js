@@ -6,6 +6,7 @@ import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
 import { localize, setLocale } from "@vee-validate/i18n";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import bn from "@vee-validate/i18n/dist/locale/bn.json";
+import ca from "@vee-validate/i18n/dist/locale/ca.json";
 import de from "@vee-validate/i18n/dist/locale/de.json";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import es from "@vee-validate/i18n/dist/locale/es.json";
@@ -13,6 +14,7 @@ import fa from "@vee-validate/i18n/dist/locale/fa.json";
 import fr from "@vee-validate/i18n/dist/locale/fr.json";
 import he from "@vee-validate/i18n/dist/locale/he.json";
 import hi_IN from "../../locales/hi_IN.json";
+import id from "@vee-validate/i18n/dist/locale/id.json";
 import it from "@vee-validate/i18n/dist/locale/it.json";
 import ja from "@vee-validate/i18n/dist/locale/ja.json";
 import nl from "@vee-validate/i18n/dist/locale/nl.json";
@@ -144,6 +146,15 @@ export default {
                     },
                 },
 
+                ca: {
+                    ...ca,
+                    messages: {
+                        ...ca.messages,
+                        phone: "Aquest {field} ha de ser un número de telèfon vàlid",
+                        address: "Aquest {field} ha de ser una adreça vàlida",
+                    },
+                },
+
                 de: {
                     ...de,
                     messages: {
@@ -198,6 +209,15 @@ export default {
                     },
                 },
 
+                id: {
+                    ...id,
+                    messages: {
+                        ...id.messages,
+                        phone: "Nomor telepon {field} harus valid",
+                        address: "Alamat {field} harus valid",
+                    },
+                },
+
                 it: {
                     ...it,
                     messages: {
@@ -229,8 +249,8 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
-                        phone: "To {field} musi być prawidłowy numer telefonu",
-                        address: "To {field} musi być prawidłowym adresem",
+                        phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
+                        address: "Pole {field} musi zawierać prawidłowy adres",
                     },
                 },
 

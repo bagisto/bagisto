@@ -137,7 +137,7 @@
                             />
 
                             <!-- Panel details -->
-                            <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
                                 @{{ convertIndexToDay(slot.from_day) }} @{{ slot.from }} - @{{ convertIndexToDay(slot.to_day) }} @{{ slot.to }}
 
                                 <span
@@ -180,7 +180,7 @@
                         </template>
                     </div>
 
-                    <div class="flex grid-cols-2 items-center justify-between">
+                    <div class="flex items-center justify-between grid-cols-2">
                         <div class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800">
                             <template v-if="slots['many'][dayIndex]?.length">
                                 <template v-for="(slot, slotIndex) in slots['many'][dayIndex]">
@@ -209,7 +209,7 @@
                                         :value="slot.status"
                                     />
 
-                                    <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                                    <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
                                         @{{ slot.from }} - @{{ slot.to }}
         
                                         <span
@@ -229,7 +229,7 @@
                         </div>
 
                         <p
-                            class="cursor-pointer place-content-start text-right text-blue-600 transition-all hover:underline"
+                            class="text-right text-blue-600 transition-all cursor-pointer place-content-start hover:underline"
                             v-if="! slots['many'][dayIndex]?.length"
                             @click="currentIndex=dayIndex;toggle()"
                         >
@@ -237,7 +237,7 @@
                         </p>
 
                         <p
-                            class="cursor-pointer place-content-start text-right text-red-600 transition-all hover:underline"
+                            class="text-right text-red-600 transition-all cursor-pointer place-content-start hover:underline"
                             v-else
                             @click="currentIndex=dayIndex;toggle(dayIndex)"
                         >
@@ -531,20 +531,45 @@
                             params.id = this.optionRowCount++;
                         }
 
+                        if (
+                            params.from_day > params.to_day || 
+                            (params.from_day === params.to_day && params.from >= params.to)
+                        ) {
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')"
+                            });
+                            
+                            return;
+                        }
+                        
                         const isOverlapping = this.slots.one.some(item => {
-                            return (
-                                item.from_day === params.from_day &&
-                                item.to_day === params.to_day &&
-                                (
-                                    (params.from >= item.from && params.from <= item.to) ||
-                                    (params.to >= item.from && params.to <= item.to) ||
-                                    (params.from <= item.from && params.to >= item.to)
-                                )
-                            );
+                            const toMinutes = (day, time) => {
+                                const [h, m] = time.split(':').map(Number);
+                                
+                                return day * 1440 + h * 60 + m;
+                            };
+
+                            const itemStart = toMinutes(+item.from_day, item.from);
+
+                            const itemEnd = toMinutes(+item.to_day, item.to);
+                            
+                            const paramsStart = toMinutes(+params.from_day, params.from);
+                            
+                            const paramsEnd = toMinutes(+params.to_day, params.to);
+
+                            return paramsStart < itemEnd && paramsEnd > itemStart;
                         });
 
                         if (! isOverlapping) {
                             this.slots.one.push(params);
+                        } else {
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: "@lang('admin::app.catalog.products.edit.types.booking.validations.overlap-validation')",
+                            });
+                            
+                            return;
                         }
                     } else {
                         params.id = this.currentIndex;
@@ -552,6 +577,15 @@
                         if (params.from && params.to) {
                             const currentSlot = this.slots['many'][this.currentIndex];
 
+                            if (params.from >= params.to) {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')"
+                                });
+
+                                return;
+                            }
+                            
                             if (! currentSlot.length) {
                                 currentSlot.push(params);
                             } else {

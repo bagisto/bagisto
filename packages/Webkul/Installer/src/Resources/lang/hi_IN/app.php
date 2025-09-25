@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'डेटाबेस पासवर्ड',
                 'database-port'               => 'डेटाबेस पोर्ट',
                 'database-prefix'             => 'डेटाबेस प्रीफ़िक्स',
+                'database-prefix-help'        => 'प्रीफ़िक्स 4 वर्ण लंबा होना चाहिए और केवल अक्षर, संख्या और अंडरस्कोर हो सकते हैं।',
                 'database-username'           => 'डेटाबेस उपयोगकर्ता नाम',
                 'default-currency'            => 'डिफ़ॉल्ट मुद्रा',
                 'default-locale'              => 'डिफ़ॉल्ट स्थान',

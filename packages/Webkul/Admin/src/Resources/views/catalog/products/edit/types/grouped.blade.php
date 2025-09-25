@@ -212,13 +212,10 @@
                 },
 
                 remove(product) {
-                    console.log(this.groupProducts);
 
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.groupProducts = this.groupProducts.filter(item => item.associated_product.id !== product.associated_product.id);
-
-                            console.log(this.groupProducts);
                         }
                     });
                 },

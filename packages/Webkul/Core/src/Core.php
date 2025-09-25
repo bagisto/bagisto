@@ -163,8 +163,6 @@ class Core
 
     /**
      * Returns current channel code.
-     *
-     * @return \Webkul\Core\Contracts\Channel
      */
     public function getCurrentChannelCode(): string
     {

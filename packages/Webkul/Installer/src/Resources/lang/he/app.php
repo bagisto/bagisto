@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'סיסמת מסד נתונים',
                 'database-port'               => 'יציאת מסד נתונים',
                 'database-prefix'             => 'קידומת מסד נתונים',
+                'database-prefix-help'        => 'הקידומת צריכה להיות באורך 4 תווים ויכולה להכיל רק אותיות, מספרים ותווי קו תחתון.',
                 'database-username'           => 'שם משתמש מסד נתונים',
                 'default-currency'            => 'מטבע ברירת מחדל',
                 'default-locale'              => 'שפת ברירת מחדל',

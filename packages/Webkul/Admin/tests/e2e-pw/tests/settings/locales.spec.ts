@@ -1,5 +1,5 @@
 import { test, expect } from '../../setup';
-import  * as forms from '../../utils/form';
+import { generateFirstName, generateFullName, generateName, getImageFile } from '../../utils/faker';
 
 test.describe('locale management', () => {
     test('create locale', async ({ adminPage }) => {
@@ -7,7 +7,7 @@ test.describe('locale management', () => {
 
         await adminPage.click('button[type="button"].primary-button:visible');
 
-        await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await adminPage.fill('input[name="name"]', generateName());
 
         const select = await adminPage.$('select[name="direction"]');
 
@@ -17,7 +17,7 @@ test.describe('locale management', () => {
 
         const concatenatedNames = Array(5)
         .fill(null)
-        .map(() => forms.generateRandomProductName())
+        .map(() => generateFirstName())
         .join(' ')
         .replaceAll(' ', '');
 
@@ -29,7 +29,7 @@ test.describe('locale management', () => {
 
         const image = await adminPage.$('input[type="file"][name="logo_path[]"]');
 
-        const filePath = forms.getRandomImageFile();
+        const filePath = getImageFile();
 
         await image.setInputFiles(filePath);
 
@@ -47,7 +47,7 @@ test.describe('locale management', () => {
 
         await iconEdit[0].click();
 
-        await adminPage.fill('input[name="name"]', forms.generateRandomStringWithSpaces(Math.floor(Math.random() * 200)));
+        await adminPage.fill('input[name="name"]', generateName());
 
         const select = await adminPage.$('select[name="direction"]');
 
@@ -61,7 +61,7 @@ test.describe('locale management', () => {
 
         const image = await adminPage.$('input[type="file"][name="logo_path[]"]');
 
-        const filePath = forms.getRandomImageFile();
+        const filePath = getImageFile();
 
         await image.setInputFiles(filePath);
 

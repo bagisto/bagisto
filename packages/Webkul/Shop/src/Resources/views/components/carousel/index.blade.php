@@ -13,24 +13,32 @@
     >
         <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
-            <div 
+            <div
                 class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
                 ref="sliderContainer"
             >
                 <div
                     class="max-h-screen w-screen bg-cover bg-no-repeat"
                     v-for="(image, index) in images"
+                    :key="index"
                     @click="visitLink(image)"
                     ref="slide"
                 >
                     <x-shop::media.images.lazy
-                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
-                        ::lazy="false"
+                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
+                        ::lazy="index === 0 ? false : true"
                         ::src="image.image"
                         ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-                        ::alt="image?.title"
+                        ::sizes="
+                            '(max-width: 525px) 525px, ' +
+                            '(max-width: 1024px) 1024px, ' +
+                            '(max-width: 1600px) 1280px, ' +
+                            '1920px'
+                        "
+                        ::alt="image?.title || 'Carousel Image ' + (index + 1)"
                         tabindex="0"
-                        fetchpriority="high"
+                        ::fetchpriority="index === 0 ? 'high' : 'low'"
+                        ::decoding="index === 0 ? 'sync' : 'async'"
                     />
                 </div>
             </div>
@@ -68,11 +76,16 @@
             <div class="absolute bottom-5 left-0 flex w-full justify-center max-md:bottom-3.5 max-sm:bottom-2.5">
                 <div
                     v-for="(image, index) in images"
-                    class="mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5"
+                    :key="index"
+                    class="sm:p-2.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5
+                    p-2 focus:outline-none"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     role="button"
                     tabindex="0"
+                    :aria-label="'Go to slide ' + (index + 1)"
                     @click="navigateByPagination(index)"
+                    @keydown.enter="navigateByPagination(index)"
+                    @keydown.space.prevent="navigateByPagination(index)"
                 >
                 </div>
             </div>
@@ -111,9 +124,26 @@
                     this.slides = Array.from(this.$refs.slide);
                 }
 
-                this.init();
+                // Use requestIdleCallback for non-critical initialization
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(() => {
+                        this.init();
+                        setTimeout(() => {
+                            this.play();
+                        }, 4000);
+                    });
+                } else {
+                    setTimeout(() => {
+                        this.init();
+                        setTimeout(() => {
+                            this.play();
+                        }, 4000);
+                    });
+                }
+            },
 
-                this.play();
+            beforeUnmount() {
+                this.cleanup();
             },
 
             methods: {
@@ -129,13 +159,13 @@
 
                         slide.addEventListener('mousedown', this.handleDragStart);
 
-                        slide.addEventListener('touchstart', this.handleDragStart);
+                        slide.addEventListener('touchstart', this.handleDragStart, { passive: true });
 
                         slide.addEventListener('mouseup', this.handleDragEnd);
 
                         slide.addEventListener('mouseleave', this.handleDragEnd);
 
-                        slide.addEventListener('touchend', this.handleDragEnd);
+                        slide.addEventListener('touchend', this.handleDragEnd, { passive: true });
 
                         slide.addEventListener('mousemove', this.handleDrag);
 
@@ -281,6 +311,27 @@
 
                         this.setPositionByIndex();
                     }, 5000);
+                },
+
+                cleanup() {
+                    // Clear intervals and animation frames
+                    clearInterval(this.autoPlayInterval);
+                    cancelAnimationFrame(this.animationID);
+
+                    // Remove event listeners
+                    if (this.slides) {
+                        this.slides.forEach(slide => {
+                            slide.removeEventListener('mousedown', this.handleDragStart);
+                            slide.removeEventListener('touchstart', this.handleDragStart);
+                            slide.removeEventListener('mouseup', this.handleDragEnd);
+                            slide.removeEventListener('mouseleave', this.handleDragEnd);
+                            slide.removeEventListener('touchend', this.handleDragEnd);
+                            slide.removeEventListener('mousemove', this.handleDrag);
+                            slide.removeEventListener('touchmove', this.handleDrag);
+                        });
+                    }
+
+                    window.removeEventListener('resize', this.setPositionByIndex);
                 },
             },
         });

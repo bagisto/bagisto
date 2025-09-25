@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Reserva de Taula',
                             'title'       => 'Tipus',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'El tipus de reserva no es pot canviar.',
+                            'time-validation'    => "L'hora d'inici ha de ser menor que l'hora de finalització.",
+                            'overlap-validation' => 'La franja horària se solapa amb una franja existent.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Qualsevol Condició És Vertadera',
                     'apply-to-shipping'                         => 'Aplicar a l\'Enviament',
                     'attribute-family'                          => 'Família d\'Atributs',
-                    'attribute-name-children-only'              => 'Nom de l\'Atribut Només per a Fills',
-                    'attribute-name-parent-only'                => 'Nom de l\'Atribut Només per a Pares',
+                    'attribute-name-children-only'              => ':attribute_name (Només Fills)',
+                    'attribute-name-parent-only'                => ':attribute_name (Només Pares)',
                     'auto-generate-coupon'                      => 'Generació Automàtica de Cupó',
                     'back-btn'                                  => 'Tornar',
                     'buy-x-get-y-free'                          => 'Comprar X i Obtenir Y Gratis',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Qualsevol Condició És Vertadera',
                     'apply-to-shipping'                         => 'Aplicar a l\'Enviament',
                     'attribute-family'                          => 'Família d\'Atributs',
-                    'attribute-name-children-only'              => 'Nom de l\'Atribut Només per a Fills',
-                    'attribute-name-parent-only'                => 'Nom de l\'Atribut Només per a Pares',
+                    'attribute-name-children-only'              => ':attribute_name (Només Fills)',
+                    'attribute-name-parent-only'                => ':attribute_name (Només Pares)',
                     'auto-generate-coupon'                      => 'Generació Automàtica de Cupó',
                     'back-btn'                                  => 'Tornar',
                     'buy-x-get-y-free'                          => 'Comprar X i Obtenir Y Gratis',

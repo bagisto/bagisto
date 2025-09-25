@@ -45,7 +45,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
+                        <div class="row grid grid-cols-1 md:grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] grid-rows-1 gap-1 items-center border-b px-4 py-2.5 dark:border-gray-800 min-w-full">
                             <div
                                 class="flex items-center gap-2.5"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
@@ -121,7 +121,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                            class="row grid grid-cols-1 gap-2 md:grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] md:gap-0 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950 min-w-full"
                             v-for="record in available.records"
                         >
                             <!-- Name, Product, Description -->
@@ -157,7 +157,7 @@
                             </div>
 
                             <!-- Rating, Date, Id Section -->
-                            <div class="flex flex-col gap-1.5">
+                            <div class="flex flex-col gap-1.5 ps-8 md:ps-0">
                                 <div class="flex">
                                     <x-admin::star-rating
                                         :is-editable="false"
@@ -177,7 +177,7 @@
                             </div>
 
                             <!-- Title, Description -->
-                            <div class="flex flex-col gap-1.5">
+                            <div class="flex flex-col gap-1.5 ps-8 md:ps-0">
                                 <p class="text-base font-semibold text-gray-800 dark:text-white">
                                     @{{ record.title }}
                                 </p>
@@ -427,7 +427,7 @@
 
                                 this.$refs.review_data.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data,message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {

@@ -34,6 +34,7 @@ class CartItemResource extends JsonResource
             'base_image'                => $this->getTypeInstance()->getBaseImage($this),
             'product_url_key'           => $this->product->url_key,
             'options'                   => $this->formatAdditionalAttributes(),
+            'can_change_qty'            => $this->product ? $this->product->getTypeInstance()->showQuantityBox() : false,
         ];
     }
 
@@ -58,6 +59,7 @@ class CartItemResource extends JsonResource
 
                     return $attribute;
                 })
+                ->values()
                 ->toArray();
         }
 

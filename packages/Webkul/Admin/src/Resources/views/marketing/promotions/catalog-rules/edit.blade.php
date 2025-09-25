@@ -27,7 +27,7 @@
                     @lang('admin::app.marketing.promotions.catalog-rules.edit.back-btn')
                 </a>
 
-                <!-- Save buton -->
+                <!-- Save button -->
                 <button
                     type="submit"
                     class="primary-button"
@@ -66,6 +66,7 @@
                             @lang('admin::app.marketing.promotions.catalog-rules.edit.general')
                         </p>
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.name')
@@ -84,6 +85,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Description -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.description')
@@ -114,10 +116,11 @@
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')
                             </p>
 
+                            <!-- Condition Type -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    class="text-gray-400 dark:border-gray-800 ltr:pr-10 rtl:pl-10"
+                                    class="text-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800"
                                     id="condition_type"
                                     name="condition_type"
                                     v-model="conditionType"
@@ -170,6 +173,7 @@
                                 <div class="w-full">
                                     @php($selectedOption = old('action_type') ?? $catalogRule->action_type)
 
+                                    <!-- Action Type -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.catalog-rules.edit.action-type')
@@ -203,60 +207,58 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="w-full">
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')
-                                        </x-admin::form.control-group.label>
+                                <!-- Discount Amount -->
+                                <x-admin::form.control-group class="w-full">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            id="discount_amount"
-                                            name="discount_amount"
-                                            rules="required"
-                                            :value="old('discount_amount') ?? $catalogRule->discount_amount"
-                                            :label="trans('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')"
-                                            :placeholder="trans('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')"
-                                        />
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        id="discount_amount"
+                                        name="discount_amount"
+                                        rules="required"
+                                        :value="old('discount_amount') ?? $catalogRule->discount_amount"
+                                        :label="trans('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')"
+                                        :placeholder="trans('admin::app.marketing.promotions.catalog-rules.edit.discount-amount')"
+                                    />
 
-                                        <x-admin::form.control-group.error control-name="discount_amount" />
-                                    </x-admin::form.control-group>
-                                </div>
+                                    <x-admin::form.control-group.error control-name="discount_amount" />
+                                </x-admin::form.control-group>
 
-                                <div class="w-full">
-                                    @php($selectedOption = old('end_other_rules') ?? $catalogRule->end_other_rules)
+                                @php($selectedOption = old('end_other_rules') ?? $catalogRule->end_other_rules)
 
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.end-other-rules')
-                                        </x-admin::form.control-group.label>
+                                <!-- End Other Rules -->
+                                <x-admin::form.control-group class="w-full">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.marketing.promotions.catalog-rules.edit.end-other-rules')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            class="h-[39px]"
-                                            id="end_other_rules"
-                                            name="end_other_rules"
-                                            :value="old('end_other_rules') ?? $selectedOption"
-                                            :label="trans('admin::app.marketing.promotions.catalog-rules.edit.end-other-rules')"
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        class="h-[39px]"
+                                        id="end_other_rules"
+                                        name="end_other_rules"
+                                        :value="old('end_other_rules') ?? $selectedOption"
+                                        :label="trans('admin::app.marketing.promotions.catalog-rules.edit.end-other-rules')"
+                                    >
+                                        <option
+                                            value="0"
+                                            {{ ! $selectedOption ? 'selected' : '' }}
                                         >
-                                            <option
-                                                value="0"
-                                                {{ ! $selectedOption ? 'selected' : '' }}
-                                            >
-                                                @lang('admin::app.marketing.promotions.catalog-rules.edit.no')
-                                            </option>
+                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.no')
+                                        </option>
 
-                                            <option
-                                                value="1"
-                                                {{ $selectedOption ? 'selected' : '' }}
-                                            >
-                                                @lang('admin::app.marketing.promotions.catalog-rules.edit.yes')
-                                            </option>
-                                        </x-admin::form.control-group.control>
+                                        <option
+                                            value="1"
+                                            {{ $selectedOption ? 'selected' : '' }}
+                                        >
+                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.yes')
+                                        </option>
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="end_other_rules" />
-                                    </x-admin::form.control-group>
-                                </div>
+                                    <x-admin::form.control-group.error control-name="end_other_rules" />
+                                </x-admin::form.control-group>
                             </div>
                         </div>
                     </div>
@@ -265,7 +267,7 @@
 
                 </div>
 
-                <!-- Rightsub components -->
+                <!-- Right sub components -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.before', ['catalogRule' => $catalogRule]) !!}
@@ -281,6 +283,7 @@
                         </x-slot>
 
                         <x-slot:content>
+                            <!-- Sort Order -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.promotions.catalog-rules.edit.priority')
@@ -399,6 +402,7 @@
 
                         <x-slot:content>
                             <div class="flex gap-4">
+                                <!-- Start From -->
                                 <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.from')
@@ -416,6 +420,7 @@
                                     <x-admin::form.control-group.error control-name="starts_from" />
                                 </x-admin::form.control-group>
 
+                                <!-- Ends Till -->
                                 <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.to')
@@ -491,7 +496,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="custom-select min:w-1/3 flex h-10 w-1/3 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                        class="custom-select min:w-1/3 flex h-10 w-1/3 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.catalog-rules.edit.choose-condition-to-add')</option>
@@ -511,7 +516,7 @@
 
                     <select
                         :name="['conditions[' + index + '][operator]']"
-                        class="custom-select min:w-1/3 flex h-10 w-1/3 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                        class="custom-select min:w-1/3 flex h-10 w-1/3 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -564,7 +569,7 @@
                                     <input
                                         type="text"
                                         :class="{ 'border border-red-500': errorMessage }"
-                                        class="min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                                        class="min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         v-bind="field"
                                     />
                                 </v-field>
@@ -578,7 +583,10 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
-                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                <x-admin::flat-picker.date
+                                    class="!w-[140px]"
+                                    ::allow-input="false"
+                                >
                                     <input
                                         type="date"
                                         class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -589,7 +597,10 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'datetime'">
-                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                <x-admin::flat-picker.date
+                                    class="!w-[140px]"
+                                    ::allow-input="false"
+                                >
                                     <input
                                         type="datetime"
                                         class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -602,7 +613,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select inline-flex max-h-10 w-full max-w-[196px] cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 rtl:pr-3"
+                                    class="custom-select inline-flex max-h-10 w-full max-w-[196px] cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black ltr:pl-3 rtl:pr-3 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -618,7 +629,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -632,7 +643,7 @@
 
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                     v-else
                                 >
@@ -653,7 +664,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-10 rtl:pl-10"
+                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                     multiple
                                 >
@@ -670,7 +681,7 @@
                 </div>
 
                 <span
-                    class="icon-delete max-h-9 max-w-9 cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                    class="icon-delete max-w-9 max-h-9 cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                     @click="removeCondition"
                 >
                 </span>

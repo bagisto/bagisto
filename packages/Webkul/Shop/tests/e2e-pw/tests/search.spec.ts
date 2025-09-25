@@ -8,6 +8,6 @@ test("should search by query", async ({ page }) => {
     await page.getByLabel("Search products here").press("Enter");
 
     await expect(
-        page.getByText("Search results for : arct").first()
+        page.getByText("These are results for : arct").first()
     ).toBeVisible();
 });

@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Reserva de Mesa',
                             'title'       => 'Tipo',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'O tipo de reserva não pode ser alterado.',
+                            'time-validation'    => 'O horário de início deve ser menor que o horário de término.',
+                            'overlap-validation' => 'O intervalo de tempo se sobrepõe a um intervalo existente.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Qualquer Condição Verdadeira',
                     'apply-to-shipping'                         => 'Aplicar ao Envio',
                     'attribute-family'                          => 'Família de Atributos',
-                    'attribute-name-children-only'              => 'Nome do Atributo Somente para Categorias Filhas',
-                    'attribute-name-parent-only'                => 'Nome do Atributo Somente para Categorias Principais',
+                    'attribute-name-children-only'              => ':attribute_name (Somente Categorias Filhas)',
+                    'attribute-name-parent-only'                => ':attribute_name (Somente Categorias Principais)',
                     'auto-generate-coupon'                      => 'Gerar Cupom Automaticamente',
                     'back-btn'                                  => 'Voltar',
                     'buy-x-get-y-free'                          => 'Compre X e Leve Y de Graça',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Qualquer Condição Verdadeira',
                     'apply-to-shipping'                         => 'Aplicar ao Envio',
                     'attribute-family'                          => 'Família de Atributos',
-                    'attribute-name-children-only'              => 'Nome do Atributo Somente para Categorias Filhas',
-                    'attribute-name-parent-only'                => 'Nome do Atributo Somente para Categorias Principais',
+                    'attribute-name-children-only'              => ':attribute_name (Somente Categorias Filhas)',
+                    'attribute-name-parent-only'                => ':attribute_name (Somente Categorias Principais)',
                     'auto-generate-coupon'                      => 'Gerar Cupom Automaticamente',
                     'back-btn'                                  => 'Voltar',
                     'buy-x-get-y-free'                          => 'Compre X e Leve Y de Graça',

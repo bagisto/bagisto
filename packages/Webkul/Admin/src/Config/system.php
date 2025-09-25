@@ -1645,10 +1645,6 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'  => 'emails.general.notifications.verification',
-                'title' => 'admin::app.configuration.index.email.notifications.verification',
-                'type'  => 'boolean',
-            ], [
                 'name'  => 'emails.general.notifications.registration',
                 'title' => 'admin::app.configuration.index.email.notifications.registration',
                 'type'  => 'boolean',

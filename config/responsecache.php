@@ -70,6 +70,7 @@ return [
      */
     'replacers' => [
         \Spatie\ResponseCache\Replacers\CsrfTokenReplacer::class,
+        \Webkul\FPC\Replacers\FlashMessagesReplacer::class,
     ],
 
     /*

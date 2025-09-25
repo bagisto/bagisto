@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'Tischbuchung',
                             'title'       => 'Typ',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'Der Buchungstyp kann nicht geändert werden.',
+                            'time-validation'    => 'Die Startzeit muss kleiner als die Endzeit sein.',
+                            'overlap-validation' => 'Der Zeitraum überschneidet sich mit einem vorhandenen Zeitraum.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'Eine beliebige Bedingung ist wahr',
                     'apply-to-shipping'                         => 'Auf Versand anwenden',
                     'attribute-family'                          => 'Attributfamilie',
-                    'attribute-name-children-only'              => 'Attributname (Nur Unterkategorien)',
-                    'attribute-name-parent-only'                => 'Attributname (Nur Hauptkategorien)',
+                    'attribute-name-children-only'              => ':attribute_name (Nur Unterkategorien)',
+                    'attribute-name-parent-only'                => ':attribute_name (Nur Hauptkategorien)',
                     'auto-generate-coupon'                      => 'Coupon automatisch generieren',
                     'back-btn'                                  => 'Zurück',
                     'buy-x-get-y-free'                          => 'Kaufe X, erhalte Y kostenlos',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'Eine beliebige Bedingung ist wahr',
                     'apply-to-shipping'                         => 'Auf Versand anwenden',
                     'attribute-family'                          => 'Attributfamilie',
-                    'attribute-name-children-only'              => 'Attributname (nur Unterkategorien)',
-                    'attribute-name-parent-only'                => 'Attributname (nur Hauptkategorien)',
+                    'attribute-name-children-only'              => ':attribute_name (nur Unterkategorien)',
+                    'attribute-name-parent-only'                => ':attribute_name (nur Hauptkategorien)',
                     'auto-generate-coupon'                      => 'Coupon automatisch generieren',
                     'back-btn'                                  => 'Zurück',
                     'buy-x-get-y-free'                          => 'Kaufe X, erhalte Y kostenlos',

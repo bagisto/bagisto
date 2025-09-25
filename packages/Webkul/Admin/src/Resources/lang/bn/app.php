@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'টেবিল বুকিং',
                             'title'       => 'প্রকার',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'বুকিংয়ের ধরন পরিবর্তন করা যাবে না।',
+                            'time-validation'    => 'শুরুর সময় শেষ সময়ের চেয়ে কম হতে হবে।',
+                            'overlap-validation' => 'সময়ের স্লটটি বিদ্যমান স্লটের সাথে ওভারল্যাপ করছে।',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'যে কোন শর্ত সত্য',
                     'apply-to-shipping'                         => 'শিপিংয়ে প্রয়োগ করুন',
                     'attribute-family'                          => 'বৈশিষ্ট্য পরিবার',
-                    'attribute-name-children-only'              => 'শিশু মাত্র বৈশিষ্ট্যের নাম',
-                    'attribute-name-parent-only'                => 'মাতৃপিতৃ মাত্র বৈশিষ্ট্যের নাম',
+                    'attribute-name-children-only'              => ':attribute_name (শিশু মাত্র)',
+                    'attribute-name-parent-only'                => ':attribute_name (মাতৃপিতৃ মাত্র)',
                     'auto-generate-coupon'                      => 'অটো জেনারেট কুপন',
                     'back-btn'                                  => 'পেছনে',
                     'buy-x-get-y-free'                          => 'X কেনে Y ফ্রি',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'যে কোন শর্ত সত্য',
                     'apply-to-shipping'                         => 'শিপিংয়ে প্রয়োগ করুন',
                     'attribute-family'                          => 'বৈশিষ্ট্য পরিবার',
-                    'attribute-name-children-only'              => 'শিশু মাত্র বৈশিষ্ট্যের নাম',
-                    'attribute-name-parent-only'                => 'মাতৃপিতৃ মাত্র বৈশিষ্ট্যের নাম',
+                    'attribute-name-children-only'              => ':attribute_name (শিশু মাত্র)',
+                    'attribute-name-parent-only'                => ':attribute_name (মাতৃপিতৃ মাত্র)',
                     'auto-generate-coupon'                      => 'অটো জেনারেট কুপন',
                     'back-btn'                                  => 'পেছনে',
                     'buy-x-get-y-free'                          => 'X কেনে Y ফ্রি',

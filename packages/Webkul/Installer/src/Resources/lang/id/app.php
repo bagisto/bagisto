@@ -654,6 +654,7 @@ return [
                 'database-password'           => 'Kata Sandi Database',
                 'database-port'               => 'Port Database',
                 'database-prefix'             => 'Prefiks Database',
+                'database-prefix-help'        => 'Prefiks harus sepanjang 4 karakter dan hanya dapat berisi huruf, angka, dan garis bawah.',
                 'database-username'           => 'Nama Pengguna Database',
                 'default-currency'            => 'Mata Uang Default',
                 'default-locale'              => 'Locale Default',

@@ -202,7 +202,7 @@ it('should update the status of the review', function () {
         'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('admin::app.customers.reviews.update-success'));
+        ->assertJsonPath('message', trans('admin::app.customers.reviews.index.edit.update-success'));
 
     $this->assertModelWise([
         ProductReviewAttachment::class => [

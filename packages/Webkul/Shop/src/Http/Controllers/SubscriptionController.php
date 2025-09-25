@@ -29,13 +29,13 @@ class SubscriptionController extends Controller
 
         $subscription = $this->subscriptionRepository->findOneByField('email', $email);
 
+        Event::dispatch('customer.subscription.before');
+
         if ($subscription) {
             session()->flash('error', trans('shop::app.subscription.already'));
 
             return redirect()->back();
         }
-
-        Event::dispatch('customer.subscription.before');
 
         $customer = auth()->user();
 
@@ -44,7 +44,7 @@ class SubscriptionController extends Controller
             'channel_id'    => core()->getCurrentChannel()->id,
             'is_subscribed' => 1,
             'token'         => uniqid(),
-            'customer_id'   => $customer->id ?? null,
+            'customer_id'   => $customer?->id,
         ]);
 
         if ($customer) {

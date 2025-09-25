@@ -1294,6 +1294,12 @@ return [
                             'table'       => 'حجز طاولة',
                             'title'       => 'النوع',
                         ],
+
+                        'validations' => [
+                            'type-mismatch'      => 'لا يمكن تغيير نوع الحجز.',
+                            'time-validation'    => 'يجب أن يكون وقت البدء أقل من وقت الانتهاء.',
+                            'overlap-validation' => 'تداخل فترة الوقت مع فترة موجودة بالفعل.',
+                        ],
                     ],
 
                     'downloadable' => [
@@ -2296,8 +2302,8 @@ return [
                     'any-conditions-true'                       => 'أي شرط صحيح',
                     'apply-to-shipping'                         => 'تطبيق على الشحن',
                     'attribute-family'                          => 'عائلة السمة',
-                    'attribute-name-children-only'              => 'اسم السمة (الأطفال فقط)',
-                    'attribute-name-parent-only'                => 'اسم السمة (الوالدين فقط)',
+                    'attribute-name-children-only'              => ':attribute_name (الأطفال فقط)',
+                    'attribute-name-parent-only'                => ':attribute_name (الوالدين فقط)',
                     'auto-generate-coupon'                      => 'توليد تلقائي للقسائم',
                     'back-btn'                                  => 'رجوع',
                     'buy-x-get-y-free'                          => 'اشتري X واحصل على Y مجانًا',
@@ -2373,8 +2379,8 @@ return [
                     'any-conditions-true'                       => 'أي شرط صحيح',
                     'apply-to-shipping'                         => 'تطبيق على الشحن',
                     'attribute-family'                          => 'عائلة السمة',
-                    'attribute-name-children-only'              => 'اسم السمة (الأطفال فقط)',
-                    'attribute-name-parent-only'                => 'اسم السمة (الوالدين فقط)',
+                    'attribute-name-children-only'              => ':attribute_name (الأطفال فقط)',
+                    'attribute-name-parent-only'                => ':attribute_name (الوالدين فقط)',
                     'auto-generate-coupon'                      => 'توليد تلقائي للقسائم',
                     'back-btn'                                  => 'رجوع',
                     'buy-x-get-y-free'                          => 'اشتري X واحصل على Y مجانًا',

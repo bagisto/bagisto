@@ -63,7 +63,6 @@ return [
             'subscribe-to-newsletter'     => 'Suscribirse al boletín',
             'success'                     => 'Cuenta creada con éxito.',
             'success-verify'              => 'Cuenta creada con éxito, se ha enviado un correo electrónico para su verificación.',
-            'success-verify-email-unsent' => 'Cuenta creada con éxito, pero el correo de verificación no se envió.',
             'terms-conditions'            => 'Términos y Condiciones',
             'verification-not-sent'       => 'Error! Problema al enviar el correo de verificación, por favor inténtalo de nuevo más tarde.',
             'verification-sent'           => 'Correo de verificación enviado',
@@ -881,7 +880,8 @@ return [
     ],
 
     'search' => [
-        'title'   => 'Resultados para: :query',
+        'title'   => 'Estos son los resultados para : :query',
+        'suggest' => 'Buscar en su lugar',
         'results' => 'Resultados de búsqueda',
 
         'images' => [

@@ -37,13 +37,13 @@
                 <x-admin::drawer ref="shipment">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid h-8 gap-3">
+                        <div class="grid gap-3 sm:h-8">
                             <div class="flex items-center justify-between">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.shipments.create.title')
                                 </p>
 
-                                @if (bouncer()->hasPermission('sales.invoices.create'))
+                                @if (bouncer()->hasPermission('sales.shipments.create'))
                                     <button
                                         type="submit"
                                         class="primary-button ltr:mr-11 rtl:ml-11"
@@ -232,7 +232,7 @@
                                                         $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                     @endphp
 
-                                                    <!-- Quantity  To Ship -->
+                                                    <!-- Quantity To Ship -->
                                                     <x-admin::form.control-group class="!mb-0">
                                                         <x-admin::form.control-group.label class="required !block">
                                                             @lang('admin::app.sales.shipments.create.qty-to-ship')

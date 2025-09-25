@@ -1,9 +1,8 @@
-@php
-    $title = request()->has('query')
-            ? trans('shop::app.search.title', ['query' => request()->query('query')])
-            : trans('shop::app.search.results');
-@endphp
-
+<?php
+    $searchTitle = $suggestion ?? $query;
+    $title = $searchTitle ? trans('shop::app.search.title', ['query' => $searchTitle]) : trans('shop::app.search.results');
+    $searchInstead = $suggestion ? $query : null;
+?>
 <!-- SEO Meta Content -->
 @push('meta')
     <meta
@@ -29,12 +28,44 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h1
-                class="text-2xl font-medium max-sm:text-base"
-                v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'"
-            >
-            </h1>
+            <h2 class="text-2xl font-medium max-sm:text-base">
+                <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
+            </h2>
         </div>
+
+        @if ($searchInstead)
+            <form
+                action="{{ route('shop.search.index', ['suggest' => false]) }}"
+                class="flex max-w-[445px] items-center"
+                role="search"
+            >
+                <input
+                    type="text"
+                    name="query"
+                    class="hidden"
+                    value="{{ $searchInstead }}"
+                >
+
+                <input
+                    type="text"
+                    name="suggest"
+                    class="hidden"
+                    value="0"
+                >
+
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ trans('shop::app.search.suggest') }}
+
+                    <button
+                        type="submit"
+                        class="text-blue-600 hover:text-blue-800 hover:underline"
+                        aria-label="{{ trans('shop::app.components.layouts.header.desktop.bottom.submit') }}"
+                    >
+                        {{ $searchInstead }}
+                    </button>
+                </p>
+            </form>
+        @endif
     </div>
 
     <!-- Product Listing -->
@@ -85,6 +116,8 @@
                                             class="max-sm:h-[100px] max-sm:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="Empty result"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
 
                                         <p
@@ -126,6 +159,8 @@
                                             class="max-sm:h-[100px] max-sm:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="Empty result"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
 
                                         <p

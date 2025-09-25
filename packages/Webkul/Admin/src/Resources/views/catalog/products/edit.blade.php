@@ -72,7 +72,7 @@
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                         >
                             <span class="icon-store text-2xl"></span>
-                            
+
                             {{ $currentChannel->name }}
 
                             <input
@@ -89,7 +89,7 @@
                     <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
                             <a
-                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
+                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code ]) }}"
                                 class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
                             >
                                 {{ $channel->name }}
@@ -109,7 +109,7 @@
                             <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
-                            
+
                             <input
                                 type="hidden"
                                 name="locale"
@@ -155,7 +155,24 @@
                     @foreach ($groups as $group)
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
+                        @if (
+                            $group->code === 'inventories'
+                            && (
+                                $product->getTypeInstance()->isComposite()
+                                || $product->type === 'downloadable'
+                            )
+                        )
+                            @continue
+                        @endif
+
                         @if ($customAttributes->isNotEmpty())
+                            <!--TODO - remove this-->
+{{--                        {{$group->code}}--}}
+                            @if(in_array($group->code, ['shipping']))
+                               @continue;
+                            @endif
+
+{{--                            {{$group->code}}--}}
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
                             <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
@@ -168,6 +185,12 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
+{{--                                    {{$group->code}}--}}
+<!--                                    TODO - remove this -->
+                                    @if(in_array($attribute->code, ['color', 'brand', 'size', 'length', 'width', 'height']))
+                                        @continue
+                                    @endif
+
                                     {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.before", ['product' => $product]) !!}
 
                                     <x-admin::form.control-group class="last:!mb-0">
@@ -203,10 +226,7 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
-                                @includeWhen(
-                                    $group->code === 'inventories' && ! $product->getTypeInstance()->isComposite(),
-                                    'admin::catalog.products.edit.inventories'
-                                )
+                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
@@ -241,7 +261,7 @@
 
                 @if ($isSingleColumn && ($column == 1 || $column == 2))
                     <div class="w-[360px] max-w-full max-sm:w-full">
-                        @if ($column == 2) 
+                        @if ($column == 2)
                             <!-- Images View Blade File -->
                             @include('admin::catalog.products.edit.images')
 
