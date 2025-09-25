@@ -9,6 +9,13 @@ use Webkul\Category\Models\Category as BaseCategory;
 
 class Category extends BaseCategory implements Sitemapable
 {
+    protected function rootCategoryIds()
+    {
+        return cache()->remember('root_category_ids', 300, function () {
+            return core()->getAllChannels()->pluck('root_category_id')->toArray();
+        });
+    }
+
     /**
      * To get the sitemap tag for the category.
      */
@@ -17,6 +24,7 @@ class Category extends BaseCategory implements Sitemapable
         if (
             ! $this->slug
             || ! $this->status
+            || in_array($this->id, $this->rootCategoryIds())
         ) {
             return [];
         }
