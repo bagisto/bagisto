@@ -30,3 +30,4 @@ yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+/storage/rector
