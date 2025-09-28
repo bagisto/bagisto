@@ -293,7 +293,7 @@
                                         <div class="border-b pb-2.5 dark:border-gray-800">
                                             <div class="flex items-end gap-2.5">
                                                 <x-admin::form.control-group class="!mb-0 flex-1">
-                                                    <x-admin::form.control-group.label>
+                                                    <x-admin::form.control-group.label class="required">
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
                                                     </x-admin::form.control-group.label>
                         
@@ -306,7 +306,7 @@
                                                             type="text"
                                                             class="ltr:pl-8 rtl:pr-8"
                                                             name="price"
-                                                            ::rules="{decimal: true, min_value: 0}"
+                                                            ::rules="{required: true, decimal: true, min_value: 0}"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                                         />
                                                     </div>
@@ -477,14 +477,16 @@
                                 ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
-                                <div class="text-sm text-gray-800">
-                                    <span
-                                        class="after:content-['_/_'] last:after:content-[''] dark:text-white"
-                                        v-for='(attribute, index) in superAttributes'
-                                    >
-                                        @{{ optionName(attribute, variant[attribute.code]) }}
-                                    </span>
-                                </div>
+                                <x-admin::form.control-group.label class="required">
+                                    <div class="text-sm text-gray-800">
+                                        <span
+                                            class="after:content-['_/_'] last:after:content-[''] dark:text-white"
+                                            v-for='(attribute, index) in superAttributes'
+                                        >
+                                            @{{ optionName(attribute, variant[attribute.code]) }}
+                                        </span>
+                                    </div>
+                                </x-admin::form.control-group.label>
 
                                 <template v-if="selectedType == 'editPrices'">
                                     <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">
@@ -498,7 +500,7 @@
                                                 class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-8 rtl:pr-8"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
-                                                :rules="{decimal: true, min_value: 0}"
+                                                :rules="{required: true, decimal: true, min_value: 0}"
                                                 v-model="variant.price"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                             >
