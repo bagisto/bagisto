@@ -840,6 +840,8 @@ return [
                         'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
                         'title'                     => 'Customer Group Price',
 
+                        'duplicate-error' => 'A discount for this customer group with the same quantity already exists.',
+
                         'create' => [
                             'all-groups'     => 'All Groups',
                             'create-title'   => 'Create Customer Group Price',

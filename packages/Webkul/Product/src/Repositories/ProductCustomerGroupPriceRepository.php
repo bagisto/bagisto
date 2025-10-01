@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Database\QueryException;
 
 class ProductCustomerGroupPriceRepository extends Repository
 {
@@ -22,6 +23,7 @@ class ProductCustomerGroupPriceRepository extends Repository
     public function saveCustomerGroupPrices(array $data, $product)
     {
         $previousCustomerGroupPriceIds = $product->customer_group_prices()->pluck('id');
+        $seenUniqueIds = [];
 
         if (isset($data['customer_group_prices'])) {
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
@@ -33,10 +35,27 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $row['customer_group_id'],
                 ]));
 
+                if (in_array($row['unique_id'], $seenUniqueIds)) {
+                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                }
+                $seenUniqueIds[] = $row['unique_id'];
+
                 if (Str::contains($customerGroupPriceId, 'price_')) {
-                    $this->create(array_merge([
-                        'product_id' => $product->id,
-                    ], $row));
+                    $existingPrice = $this->findOneWhere(['unique_id' => $row['unique_id']]);
+                    if ($existingPrice) {
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                    }
+
+                    try {
+                        $this->create(array_merge([
+                            'product_id' => $product->id,
+                        ], $row));
+                    } catch (QueryException $e) {
+                        if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                        }
+                        throw $e;
+                    }
                 } else {
                     if (is_numeric($index = $previousCustomerGroupPriceIds->search($customerGroupPriceId))) {
                         $previousCustomerGroupPriceIds->forget($index);

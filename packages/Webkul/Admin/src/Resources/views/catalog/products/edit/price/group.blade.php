@@ -277,10 +277,31 @@
 
                 create(params) {
                     if (this.selectedPrice.id == undefined) {
+                        const isDuplicate = this.prices.some(price => {
+                            return price.customer_group_id == params.customer_group_id && 
+                                   price.qty == params.qty;
+                        });
+
+                        if (isDuplicate) {
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang("admin::app.catalog.products.edit.price.group.duplicate-error")' });
+                            return;
+                        }
+
                         params.id = 'price_' + this.prices.length;
 
                         this.prices.push(params);
                     } else {
+                        const isDuplicate = this.prices.some(price => {
+                            return price.id !== this.selectedPrice.id &&
+                                   price.customer_group_id == this.selectedPrice.customer_group_id && 
+                                   price.qty == this.selectedPrice.qty;
+                        });
+
+                        if (isDuplicate) {
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang("admin::app.catalog.products.edit.price.group.duplicate-error")' });
+                            return;
+                        }
+
                         const indexToUpdate = this.prices.findIndex(price => price.id === this.selectedPrice.id);
 
                         this.prices[indexToUpdate] = this.selectedPrice;
