@@ -116,7 +116,7 @@ class UserController extends Controller
          * If the request has image.image, it means the request doesn't upload a new image.
          * So we need to remove it from the data to prevent the image from being overwritten.
          */
-        if(request()->has('image.image')) {
+        if (request()->has('image.image')) {
             unset($data['image']);
         }
 
