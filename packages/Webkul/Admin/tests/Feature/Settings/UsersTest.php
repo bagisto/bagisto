@@ -174,7 +174,7 @@ it('should fails the validation error with tempered avatar provided when update 
         ->assertUnprocessable();
 });
 
-it('should can update users without new image', function () {
+it('can update the users without new image', function () {
     // Arrange.
     $admin = Admin::factory()->create();
     $admin->update([
