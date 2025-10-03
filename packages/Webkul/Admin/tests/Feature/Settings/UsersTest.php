@@ -174,6 +174,36 @@ it('should fails the validation error with tempered avatar provided when update 
         ->assertUnprocessable();
 });
 
+it('can update the users without new image', function () {
+    // Arrange.
+    $admin = Admin::factory()->create();
+    $admin->update([
+        'image' => 'avatar.jpg',
+    ]);
+    $admin->refresh();
+
+    // Act and Assert.
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.settings.users.update'), [
+        'id'                    => $admin->id,
+        'name'                  => $admin->name,
+        'image'                 => [
+            'image' => '',
+        ],
+        'role_id'               => 1,
+        'email'                 => fake()->email(),
+        'password'              => $password = fake()->password(),
+        'password_confirmation' => $password,
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('admins', [
+        'id'    => $admin->id,
+        'image' => $admin->image,
+    ]);
+});
+
 it('should delete the existing admin', function () {
     // Arrange.
     $admin = Admin::factory()->create();

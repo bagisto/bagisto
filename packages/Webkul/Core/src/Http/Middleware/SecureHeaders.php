@@ -11,10 +11,7 @@ class SecureHeaders
      *
      * @var array
      */
-    private $unwantedHeaderList = [
-        'X-Powered-By',
-        'Server',
-    ];
+    private $unwantedHeaderList = [];
 
     /**
      * Handle an incoming request.
