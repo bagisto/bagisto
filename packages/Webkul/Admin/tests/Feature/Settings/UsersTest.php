@@ -199,7 +199,7 @@ it('can update the users without new image', function () {
         ->assertOk();
 
     $this->assertDatabaseHas('admins', [
-        'id' => $admin->id,
+        'id'    => $admin->id,
         'image' => $admin->image,
     ]);
 });
