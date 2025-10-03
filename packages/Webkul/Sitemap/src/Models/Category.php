@@ -17,11 +17,20 @@ class Category extends BaseCategory implements Sitemapable
         if (
             ! $this->slug
             || ! $this->status
+            || in_array($this->id, $this->rootCategoryIds())
         ) {
             return [];
         }
 
         return Url::create(route('shop.product_or_category.index', $this->slug))
             ->setLastModificationDate(Carbon::create($this->updated_at));
+    }
+
+    /**
+     * Get root category ids.
+     */
+    protected function rootCategoryIds(): array
+    {
+        return core()->getAllChannels()->pluck('root_category_id')->toArray();
     }
 }

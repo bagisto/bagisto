@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* #10898 - Added asterisk symbol to all the required fields in configurable product variants.
+
 ## **v2.3.7 (24th of September 2025)** - *Release*
 
 * Improved full application perfomance and web vital score.
