@@ -161,37 +161,35 @@ class CartController extends APIController
             'country'         => 'required',
             'state'           => 'required',
             'postcode'        => 'required',
-            'shipping_method' => 'sometimes|required',
         ]);
 
-        Cart::updateOrCreateBillingAddress([
+        $billingAddress = Cart::updateOrCreateBillingAddress([
+            'first_name' => '',
+            'last_name'  => '',
             'country'  => request()->input('country'),
             'state'    => request()->input('state'),
             'postcode' => request()->input('postcode'),
             'address' => [],
             'city'     => '',
+            'use_for_shipping' => 1,
         ]);
 
-        Cart::updateOrCreateShippingAddress([
-            'country'  => request()->input('country'),
-            'state'    => request()->input('state'),
-            'postcode' => request()->input('postcode'),
-            'address'  => [],
-            'city'     => '',
-        ]);
-
-        if (request()->has('shipping_method')) {
-            Cart::saveShippingMethod(request()->input('shipping_method'));
-        }
+        $shippingAddress = Cart::updateOrCreateShippingAddress([]);
 
         Cart::collectTotals();
 
         $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
+        $shippingMethods = array_values(Shipping::collectRates()['shippingMethods']);
+
+        if (!Cart::getCart()->is_guest) {
+            $billingAddress->delete();
+            $shippingAddress->delete();
+        }
 
         return new JsonResource([
             'data'     => [
                 'cart'             => $cartResource,
-                'shipping_methods' => array_values(Shipping::collectRates()['shippingMethods']),
+                'shipping_methods' => $shippingMethods,
             ],
         ]);
     }
