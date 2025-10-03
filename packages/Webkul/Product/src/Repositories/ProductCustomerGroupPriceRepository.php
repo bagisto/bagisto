@@ -4,9 +4,18 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Database\QueryException;
 
 class ProductCustomerGroupPriceRepository extends Repository
 {
+    /**
+     * Duplicate customer group price error code constant.
+     * 
+     * This constant is used to identify duplicate customer group price errors
+     * across different validation points in the application.
+     */
+    const DUPLICATE_CUSTOMER_GROUP_PRICE = 'duplicate_customer_group_price';
+
     /**
      * Specify Model class name.
      */
@@ -23,6 +32,8 @@ class ProductCustomerGroupPriceRepository extends Repository
     {
         $previousCustomerGroupPriceIds = $product->customer_group_prices()->pluck('id');
 
+        $processedUniqueIds = [];
+
         if (isset($data['customer_group_prices'])) {
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
                 $row['customer_group_id'] = $row['customer_group_id'] == '' ? null : $row['customer_group_id'];
@@ -33,10 +44,28 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $row['customer_group_id'],
                 ]));
 
+                if (in_array($row['unique_id'], $processedUniqueIds)) {
+                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                }
+
+                $processedUniqueIds[] = $row['unique_id'];
+
                 if (Str::contains($customerGroupPriceId, 'price_')) {
-                    $this->create(array_merge([
-                        'product_id' => $product->id,
-                    ], $row));
+                    $existingPrice = $this->findOneWhere(['unique_id' => $row['unique_id']]);
+                    if ($existingPrice) {
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                    }
+
+                    try {
+                        $this->create(array_merge([
+                            'product_id' => $product->id,
+                        ], $row));
+                    } catch (QueryException $e) {
+                        if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                        }
+                        throw $e;
+                    }
                 } else {
                     if (is_numeric($index = $previousCustomerGroupPriceIds->search($customerGroupPriceId))) {
                         $previousCustomerGroupPriceIds->forget($index);
