@@ -9,7 +9,6 @@ use Webkul\Category\Models\Category as BaseCategory;
 
 class Category extends BaseCategory implements Sitemapable
 {
-
     /**
      * To get the sitemap tag for the category.
      */
@@ -27,7 +26,10 @@ class Category extends BaseCategory implements Sitemapable
             ->setLastModificationDate(Carbon::create($this->updated_at));
     }
 
-    protected function rootCategoryIds()
+    /**
+     * Get root category ids.
+     */
+    protected function rootCategoryIds(): array
     {
         return core()->getAllChannels()->pluck('root_category_id')->toArray();
     }
