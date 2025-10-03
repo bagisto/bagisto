@@ -835,12 +835,11 @@ return [
                         'all-groups'                => 'All Groups',
                         'create-btn'                => 'Add New',
                         'discount-group-price-info' => 'For :qty Qty at discount of :price',
+                        'duplicate-error'           => 'A discount for this customer group with the same quantity already exists.',
                         'edit-btn'                  => 'Edit',
                         'empty-info'                => 'Special pricing for customers belonging to a specific group.',
                         'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
                         'title'                     => 'Customer Group Price',
-
-                        'duplicate-error' => 'A discount for this customer group with the same quantity already exists.',
 
                         'create' => [
                             'all-groups'     => 'All Groups',

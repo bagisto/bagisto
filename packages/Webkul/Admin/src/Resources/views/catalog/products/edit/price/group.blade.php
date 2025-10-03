@@ -299,6 +299,7 @@
 
                         if (isDuplicate) {
                             this.$emitter.emit('add-flash', { type: 'error', message: '@lang("admin::app.catalog.products.edit.price.group.duplicate-error")' });
+
                             return;
                         }
 

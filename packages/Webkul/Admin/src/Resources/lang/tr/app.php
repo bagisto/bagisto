@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'Tüm Gruplar',
                         'create-btn'                => 'Yeni Ekle',
                         'discount-group-price-info' => ':qty Miktarında indirimli fiyat :price',
+                        'duplicate-error'           => 'Aynı miktarda bu müşteri grubu için indirim zaten mevcut.',
                         'edit-btn'                  => 'Düzenle',
                         'empty-info'                => 'Belirli bir gruba ait müşteriler için özel fiyatlandırma.',
                         'fixed-group-price-info'    => ':qty Miktarında sabit fiyat :price',

@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'Semua Grup',
                         'create-btn'                => 'Tambah Baru',
                         'discount-group-price-info' => 'Untuk :qty Qty dengan diskon :price',
+                        'duplicate-error'           => 'Diskon untuk grup pelanggan ini dengan jumlah yang sama sudah ada.',
                         'edit-btn'                  => 'Edit',
                         'empty-info'                => 'Harga khusus untuk pelanggan dalam grup tertentu.',
                         'fixed-group-price-info'    => 'Untuk :qty Qty dengan harga tetap :price',

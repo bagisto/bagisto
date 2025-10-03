@@ -9,6 +9,14 @@ use Illuminate\Database\QueryException;
 class ProductCustomerGroupPriceRepository extends Repository
 {
     /**
+     * Duplicate customer group price error code constant.
+     * 
+     * This constant is used to identify duplicate customer group price errors
+     * across different validation points in the application.
+     */
+    const DUPLICATE_CUSTOMER_GROUP_PRICE = 'duplicate_customer_group_price';
+
+    /**
      * Specify Model class name.
      */
     public function model(): string
@@ -23,7 +31,8 @@ class ProductCustomerGroupPriceRepository extends Repository
     public function saveCustomerGroupPrices(array $data, $product)
     {
         $previousCustomerGroupPriceIds = $product->customer_group_prices()->pluck('id');
-        $seenUniqueIds = [];
+
+        $processedUniqueIds = [];
 
         if (isset($data['customer_group_prices'])) {
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
@@ -35,15 +44,16 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $row['customer_group_id'],
                 ]));
 
-                if (in_array($row['unique_id'], $seenUniqueIds)) {
-                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                if (in_array($row['unique_id'], $processedUniqueIds)) {
+                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
                 }
-                $seenUniqueIds[] = $row['unique_id'];
+
+                $processedUniqueIds[] = $row['unique_id'];
 
                 if (Str::contains($customerGroupPriceId, 'price_')) {
                     $existingPrice = $this->findOneWhere(['unique_id' => $row['unique_id']]);
                     if ($existingPrice) {
-                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
                     }
 
                     try {
@@ -52,7 +62,7 @@ class ProductCustomerGroupPriceRepository extends Repository
                         ], $row));
                     } catch (QueryException $e) {
                         if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
                         }
                         throw $e;
                     }

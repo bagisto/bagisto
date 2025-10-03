@@ -835,6 +835,7 @@ return [
                         'all-groups'                => '所有群组',
                         'create-btn'                => '添加新的',
                         'discount-group-price-info' => '对于 :qty 个数量，折扣价格为 :price',
+                        'duplicate-error'           => '相同数量的客户组折扣已经存在。',
                         'edit-btn'                  => '编辑',
                         'empty-info'                => '针对属于特定组的客户的特殊定价。',
                         'fixed-group-price-info'    => '对于 :qty 个数量，固定价格为 :price',

@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'Всі групи',
                         'create-btn'                => 'Додати новий',
                         'discount-group-price-info' => 'Для :qty штук зі знижкою :price',
+                        'duplicate-error'           => 'Знижка для цієї групи клієнтів з такою ж кількістю вже існує.',
                         'edit-btn'                  => 'Редагувати',
                         'empty-info'                => 'Спеціальні ціни для покупців, які належать до певної групи.',
                         'fixed-group-price-info'    => 'Для :qty штук за фіксованою ціною :price',

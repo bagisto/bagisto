@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'تمام گروه‌ها',
                         'create-btn'                => 'افزودن جدید',
                         'discount-group-price-info' => 'برای :qty تعداد با تخفیف :price',
+                        'duplicate-error'           => 'تخفیف برای این گروه مشتری با همین مقدار در حال حاضر وجود دارد.',
                         'edit-btn'                  => 'ویرایش',
                         'empty-info'                => 'قیمت‌گذاری ویژه برای مشتریان تعلق گرفته به گروه‌های خاص.',
                         'fixed-group-price-info'    => 'برای تعداد :qty با قیمت ثابت :price',
