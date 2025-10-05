@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Faltam opções para este produto.',
                     'inventory_warning'      => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde.',
                     'select_hourly_duration' => 'Selecione uma duração de intervalo de uma hora.',
+                    'unavailable_date'       => 'A data solicitada não está disponível, por favor, reserve novamente entre :date_from e :date_to.',
                 ],
 
                 'rent-from'    => 'Alugar De',

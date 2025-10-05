@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'אפשרויות חסרות עבור מוצר זה.',
                     'inventory_warning'      => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
                     'select_hourly_duration' => 'בחר משבצת זמן של שעה אחת.',
+                    'unavailable_date'       => 'התאריך המבוקש אינו זמין, אנא הזמינו שוב בין :date_from ל- :date_to.',
                 ],
 
                 'rent-from'    => 'השכרה מ',

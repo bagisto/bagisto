@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Falten opcions per a aquest producte.',
                     'inventory_warning'      => 'La quantitat sol·licitada no està disponible, si us plau intenta-ho més tard.',
                     'select_hourly_duration' => 'Selecciona una durada d\'una hora.',
+                    'unavailable_date'       => 'La data sol·licitada no està disponible, si us plau, reserveu de nou entre :date_from i :date_to.',
                 ],
 
                 'rent-from'    => 'Lloguer des de',

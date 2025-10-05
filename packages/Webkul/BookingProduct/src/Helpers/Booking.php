@@ -182,45 +182,6 @@ class Booking
     }
 
     /**
-     * Return is item have valid date
-     *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
-     */
-    public function isItemHaveValidDate($cartItem)
-    {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
-
-        $cartFrom = \Carbon\Carbon::parse($cartItem['additional']['booking']['date_from']);
-        $cartTo = \Carbon\Carbon::parse($cartItem['additional']['booking']['date_to']);
-
-        if (
-            $cartFrom->lt($bookingProduct->available_from) ||
-            $cartTo->gt($bookingProduct->available_to)
-        ) {
-            return false;
-        }
-
-        return true;
-
-    }
-
-    /**
-     * Return date if it is available.
-     */
-    public function isDateAvailable(array $cartProducts): bool
-    {
-        foreach ($cartProducts as $cartProduct) {
-            if ((isset($cartProduct['additional']['booking']['date_from']) && isset($cartProduct['additional']['booking']['date_from']))) {
-                if (! $this->isItemHaveValidDate($cartProduct)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Return slot if it is available.
      */
     public function isSlotAvailable(array $cartProducts): bool

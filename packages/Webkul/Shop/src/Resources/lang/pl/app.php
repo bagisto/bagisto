@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Brakujące opcje dla tego produktu.',
                     'inventory_warning'      => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później.',
                     'select_hourly_duration' => 'Wybierz czas trwania jednej godziny.',
+                    'unavailable_date'       => 'Wybrany termin jest niedostępny. Prosimy o ponowną rezerwację pomiędzy :date_from a :date_to.',
                 ],
 
                 'rent-from'    => 'Wynajem od',

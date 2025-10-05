@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Opsi tidak tersedia untuk produk ini.',
                     'inventory_warning'      => 'Jumlah yang diminta tidak tersedia, silakan coba lagi nanti.',
                     'select_hourly_duration' => 'Pilih durasi slot satu jam.',
+                    'unavailable_date'       => 'Tanggal yang diminta tidak tersedia, silakan pesan lagi antara :date_from dan :date_to.',
                 ],
 
                 'rent-from'    => 'Sewa Dari',

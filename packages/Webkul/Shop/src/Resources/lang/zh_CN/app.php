@@ -838,6 +838,7 @@ return [
                     'missing_options'        => '此产品缺少选项。',
                     'inventory_warning'      => '请求的数量不可用，请稍后再试。',
                     'select_hourly_duration' => '选择一小时的时段。',
+                    'unavailable_date'       => '请求的日期不可用，请在 :date_from 和 :date_to 之间重新预订。',
                 ],
 
                 'rent-from'    => '租赁从',

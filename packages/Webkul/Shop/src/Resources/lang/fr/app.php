@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Les options sont manquantes pour ce produit.',
                     'inventory_warning'      => 'La quantité demandée n\'est pas disponible, veuillez réessayer plus tard.',
                     'select_hourly_duration' => 'Sélectionnez une durée de créneau d\'une heure.',
+                    'unavailable_date'       => 'La date demandée n\'est pas disponible, veuillez réserver à nouveau entre :date_from et :date_to.',
                 ],
 
                 'rent-from'    => 'Louer de',

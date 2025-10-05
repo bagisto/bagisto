@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Faltan opciones para este producto.',
                     'inventory_warning'      => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
                     'select_hourly_duration' => 'Selecciona una duración de una hora.',
+                    'unavailable_date'       => 'La fecha solicitada no está disponible, por favor reserve nuevamente entre :date_from y :date_to.',
                 ],
 
                 'rent-from'    => 'Alquiler Desde',

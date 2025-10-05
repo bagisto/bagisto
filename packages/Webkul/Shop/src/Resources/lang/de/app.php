@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Optionen fehlen für dieses Produkt.',
                     'inventory_warning'      => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
                     'select_hourly_duration' => 'Wählen Sie eine Slot-Dauer von einer Stunde.',
+                    'unavailable_date'       => 'Das gewünschte Datum ist nicht verfügbar, bitte buchen Sie erneut zwischen :date_from und :date_to.',
                 ],
 
                 'rent-from'    => 'Mieten von',

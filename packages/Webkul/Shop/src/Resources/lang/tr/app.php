@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'Bu ürün için seçenekler eksik.',
                     'inventory_warning'      => 'İstenen miktar mevcut değil, lütfen daha sonra tekrar deneyin.',
                     'select_hourly_duration' => 'Bir saatlik süre aralığı seçin.',
+                    'unavailable_date'       => 'İstediğiniz tarih müsait değil, lütfen :date_from ve :date_to tarihleri ​​arasında tekrar rezervasyon yapın.',
                 ],
 
                 'rent-from'    => 'Kiralama Başlangıcı',

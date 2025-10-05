@@ -838,6 +838,7 @@ return [
                     'missing_options'        => 'この製品にはオプションがありません。',
                     'inventory_warning'      => '要求された数量は利用できません。後でやり直してください。',
                     'select_hourly_duration' => '1時間のスロット期間を選択してください。',
+                    'unavailable_date'       => 'リクエストされた日付は利用できません。:date_from から :date_to の間に再度予約してください。',
                 ],
 
                 'rent-from'    => 'レンタル開始',
