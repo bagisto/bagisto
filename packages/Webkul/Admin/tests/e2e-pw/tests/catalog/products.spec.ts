@@ -927,6 +927,7 @@ test.describe("simple product management", () => {
             adminPage.getByText("Selected Products Updated Successfully")
         ).toBeVisible();
     });
+
     test("should mass delete the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
@@ -1126,6 +1127,7 @@ test.describe("grouped product management", () => {
     test("should create a grouped product", async ({ adminPage }) => {
         await createGroupedProduct(adminPage);
     });
+
     test("should edit a grouped product", async ({ adminPage }) => {
         /**
          * Reaching to the edit product page.
@@ -1181,6 +1183,7 @@ test.describe("grouped product management", () => {
             "Product updated successfully"
         );
     });
+
     test("should mass update the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
@@ -1224,6 +1227,7 @@ test.describe("grouped product management", () => {
             adminPage.getByText("Selected Products Updated Successfully")
         ).toBeVisible();
     });
+
     test("should mass delete the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
@@ -1320,6 +1324,7 @@ test.describe("virtual product management", () => {
             "Product updated successfully"
         );
     });
+
     test("should mass update the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
@@ -1410,6 +1415,7 @@ test.describe("downloadable product management", () => {
     test("should create a downloadable product", async ({ adminPage }) => {
         await createDownloadableProduct(adminPage);
     });
+
     test("should edit a downloadable product", async ({ adminPage }) => {
         /**
          * Reaching to the edit product page.
@@ -1464,6 +1470,7 @@ test.describe("downloadable product management", () => {
             "Product updated successfully"
         );
     });
+
     test("should mass update the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
@@ -1507,6 +1514,7 @@ test.describe("downloadable product management", () => {
             adminPage.getByText("Selected Products Updated Successfully")
         ).toBeVisible();
     });
+    
     test("should mass delete the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
