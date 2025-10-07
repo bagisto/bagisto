@@ -293,7 +293,7 @@
                                         <div class="border-b pb-2.5 dark:border-gray-800">
                                             <div class="flex items-end gap-2.5">
                                                 <x-admin::form.control-group class="!mb-0 flex-1">
-                                                    <x-admin::form.control-group.label>
+                                                    <x-admin::form.control-group.label class="required">
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
                                                     </x-admin::form.control-group.label>
                         
@@ -477,14 +477,16 @@
                                 ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
-                                <div class="text-sm text-gray-800">
-                                    <span
-                                        class="after:content-['_/_'] last:after:content-[''] dark:text-white"
-                                        v-for='(attribute, index) in superAttributes'
-                                    >
-                                        @{{ optionName(attribute, variant[attribute.code]) }}
-                                    </span>
-                                </div>
+                                <x-admin::form.control-group.label class="required">
+                                    <div class="text-sm text-gray-800">
+                                        <span
+                                            class="after:content-['_/_'] last:after:content-[''] dark:text-white"
+                                            v-for='(attribute, index) in superAttributes'
+                                        >
+                                            @{{ optionName(attribute, variant[attribute.code]) }}
+                                        </span>
+                                    </div>
+                                </x-admin::form.control-group.label>
 
                                 <template v-if="selectedType == 'editPrices'">
                                     <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">

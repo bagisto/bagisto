@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* #10971 - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
+
+* #10898 - Added an asterisk (*) to indicate all required fields in configurable product variants.
+
 ## **v2.3.7 (24th of September 2025)** - *Release*
 
 * Improved full application perfomance and web vital score.
