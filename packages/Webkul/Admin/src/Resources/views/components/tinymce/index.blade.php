@@ -245,7 +245,7 @@
                 this.init();
 
                 this.$emitter.on('change-theme', (theme) => {
-                    tinymce.activeEditor.destroy();
+                    tinymce.get(0).destroy();
 
                     this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
                     this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
