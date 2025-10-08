@@ -37,7 +37,7 @@ class ProductCustomerGroupPriceRepository extends Repository
                 ]));
 
                 if (in_array($row['unique_id'], $processedUniqueIds)) {
-                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                 }
 
                 $processedUniqueIds[] = $row['unique_id'];
