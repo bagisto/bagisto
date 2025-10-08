@@ -192,15 +192,10 @@ class CoreConfigRepository extends Repository
     /**
      * Recursive array.
      *
-     * @param  string  $method
      * @return array
      */
-    public function recursiveArray(array $formData, $method)
+    public function recursiveArray(array $formData, string $method, array &$data = [], array &$recursiveArrayData = [])
     {
-        static $data = [];
-
-        static $recursiveArrayData = [];
-
         foreach ($formData as $form => $formValue) {
             $value = $method.'.'.$form;
 
@@ -208,7 +203,7 @@ class CoreConfigRepository extends Repository
                 $dim = $this->countDim($formValue);
 
                 if ($dim > 1) {
-                    $this->recursiveArray($formValue, $value);
+                    $this->recursiveArray($formValue, $value, $data, $recursiveArrayData);
                 } elseif ($dim == 1) {
                     $data[$value] = $formValue;
                 }
@@ -238,12 +233,8 @@ class CoreConfigRepository extends Repository
      */
     public function countDim($array)
     {
-        if (is_array(reset($array))) {
-            $return = $this->countDim(reset($array)) + 1;
-        } else {
-            $return = 1;
-        }
-
-        return $return;
+        return is_array(reset($array))
+            ? $this->countDim(reset($array)) + 1
+            : 1;
     }
 }

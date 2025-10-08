@@ -7,37 +7,61 @@ use Illuminate\Support\Facades\Event;
 class ViewRenderEventManager
 {
     /**
-     * Contains all themes
+     * Contains all templates.
      *
      * @var array
      */
     protected $templates = [];
 
     /**
-     * Paramters passed with event
+     * Event name.
+     */
+    protected $eventName;
+
+    /**
+     * Parameters passed with event.
      *
      * @var array
      */
     protected $params;
 
     /**
-     * Fires event for rendering template
+     * Fires event for rendering template.
      *
-     * @param  string  $eventName
      * @param  array|null  $params
-     * @return string
+     * @return self
      */
-    public function handleRenderEvent($eventName, $params = null)
+    public function handleRenderEvent(string $eventName, mixed $params = null)
     {
+        $this->templates = [];
+
+        $this->eventName = $eventName;
+
         $this->params = $params ?? [];
 
         Event::dispatch($eventName, $this);
 
+        return $this;
+    }
+
+    /**
+     * Get all templates.
+     */
+    public function getTemplates()
+    {
         return $this->templates;
     }
 
     /**
-     *  get params
+     * Get event name.
+     */
+    public function getEventName()
+    {
+        return $this->eventName;
+    }
+
+    /**
+     * Get all params.
      *
      * @return array
      */
@@ -47,7 +71,7 @@ class ViewRenderEventManager
     }
 
     /**
-     *  get param
+     * Get specific param by name.
      *
      * @return mixed
      */
@@ -57,7 +81,7 @@ class ViewRenderEventManager
     }
 
     /**
-     * Add templates for render
+     * Add templates for render.
      *
      * @param  string  $template
      * @return void
@@ -68,7 +92,7 @@ class ViewRenderEventManager
     }
 
     /**
-     * Renders templates
+     * Renders templates.
      *
      * @return string
      */
@@ -84,6 +108,22 @@ class ViewRenderEventManager
             }
         }
 
+        $this->resetState();
+
         return $string;
+    }
+
+    /**
+     * Reset the manager state.
+     *
+     * @return void
+     */
+    protected function resetState()
+    {
+        $this->templates = [];
+
+        $this->eventName = null;
+
+        $this->params = null;
     }
 }

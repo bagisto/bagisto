@@ -75,7 +75,7 @@
             data() {
                 return {
                     cookieDomain: '{{ config('session.domain') ?? request()->getHost() }}',
-                    cookieIp: "{{ $_SERVER['REMOTE_ADDR'] }}",
+                    cookieIp: "{{ request()->ip() }}",
                     position: "{{ core()->getConfigData('general.gdpr.cookie.position') ?? 'center' }}"
                 };
             },

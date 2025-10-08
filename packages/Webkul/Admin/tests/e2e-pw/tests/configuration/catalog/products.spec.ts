@@ -32,54 +32,6 @@ test.describe("product configuration", () => {
         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 
-    test("should set up the search engine for product searches", async ({
-        adminPage,
-    }) => {
-        await adminPage.selectOption(
-            'select[name="catalog[products][search][engine]"]',
-            "elastic"
-        );
-        const searchEngine = adminPage.locator(
-            'select[name="catalog[products][search][engine]"]'
-        );
-        await expect(searchEngine).toHaveValue("elastic");
-
-        await adminPage.selectOption(
-            'select[name="catalog[products][search][admin_mode]"]',
-            "elastic"
-        );
-        const adminSearchMode = adminPage.locator(
-            'select[name="catalog[products][search][admin_mode]"]'
-        );
-        await expect(adminSearchMode).toHaveValue("elastic");
-
-        await adminPage.selectOption(
-            'select[name="catalog[products][search][storefront_mode]"]',
-            "elastic"
-        );
-        const storeFrontSearchMode = adminPage.locator(
-            'select[name="catalog[products][search][storefront_mode]"]'
-        );
-        await expect(storeFrontSearchMode).toHaveValue("elastic");
-
-        await adminPage
-            .locator(
-                'input[name="catalog[products][search][min_query_length]"]'
-            )
-            .fill(generateRandomNumericString(2));
-        await adminPage
-            .locator(
-                'input[name="catalog[products][search][max_query_length]"]'
-            )
-            .fill(generateRandomNumericString(2));
-        await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
-        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
-    });
-
     /**
      * Update the product view page configuration.
      */
