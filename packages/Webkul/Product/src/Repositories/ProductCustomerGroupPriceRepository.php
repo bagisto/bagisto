@@ -9,14 +9,6 @@ use Illuminate\Database\QueryException;
 class ProductCustomerGroupPriceRepository extends Repository
 {
     /**
-     * Duplicate customer group price error code constant.
-     * 
-     * This constant is used to identify duplicate customer group price errors
-     * across different validation points in the application.
-     */
-    const DUPLICATE_CUSTOMER_GROUP_PRICE = 'duplicate_customer_group_price';
-
-    /**
      * Specify Model class name.
      */
     public function model(): string
@@ -52,8 +44,9 @@ class ProductCustomerGroupPriceRepository extends Repository
 
                 if (Str::contains($customerGroupPriceId, 'price_')) {
                     $existingPrice = $this->findOneWhere(['unique_id' => $row['unique_id']]);
+
                     if ($existingPrice) {
-                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                     }
 
                     try {
@@ -62,8 +55,9 @@ class ProductCustomerGroupPriceRepository extends Repository
                         ], $row));
                     } catch (QueryException $e) {
                         if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'), self::DUPLICATE_CUSTOMER_GROUP_PRICE);
+                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                         }
+
                         throw $e;
                     }
                 } else {

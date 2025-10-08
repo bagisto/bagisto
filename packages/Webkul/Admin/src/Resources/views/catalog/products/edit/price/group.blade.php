@@ -278,8 +278,8 @@
                 create(params) {
                     if (this.selectedPrice.id == undefined) {
                         const isDuplicate = this.prices.some(price => {
-                            return price.customer_group_id == params.customer_group_id && 
-                                   price.qty == params.qty;
+                            return price.customer_group_id == params.customer_group_id &&
+                                price.qty == params.qty;
                         });
 
                         if (isDuplicate) {
@@ -293,8 +293,8 @@
                     } else {
                         const isDuplicate = this.prices.some(price => {
                             return price.id !== this.selectedPrice.id &&
-                                   price.customer_group_id == this.selectedPrice.customer_group_id && 
-                                   price.qty == this.selectedPrice.qty;
+                                price.customer_group_id == this.selectedPrice.customer_group_id &&
+                                price.qty == this.selectedPrice.qty;
                         });
 
                         if (isDuplicate) {
