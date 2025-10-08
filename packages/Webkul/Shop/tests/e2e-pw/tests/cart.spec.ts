@@ -1,6 +1,11 @@
 import { test, expect } from "../setup";
 import { generateName, generateDescription, generatePhoneNumber } from '../utils/faker';
 
+/**
+ * Waiting time after cart operations to allow for UI updates.
+ */
+const CART_WAITING_TIME = 2000;
+
 test("should increase the quantity from the mini cart drawer", async ({ page }) => {
     await page.goto("");
 
@@ -14,11 +19,16 @@ test("should increase the quantity from the mini cart drawer", async ({ page }) 
     await page.getByRole("button", { name: "Shopping Cart" }).click();
 
     await page.getByRole("button", { name: "Increase Quantity" }).click();
-    await page.getByRole("button", { name: "Increase Quantity" }).click();
-
     await expect(
         page.locator("svg.text-blue.animate-spin.font-semibold")
     ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
+
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
 });
 
 test("should decrease the quantity from the mini cart drawer", async ({ page }) => {
@@ -34,13 +44,28 @@ test("should decrease the quantity from the mini cart drawer", async ({ page }) 
     await page.getByRole("button", { name: "Shopping Cart" }).click();
 
     await page.getByRole("button", { name: "Increase Quantity" }).click();
-    await page.getByRole("button", { name: "Increase Quantity" }).click();
-    await page.getByRole("button", { name: "Decrease Quantity" }).click();
-    await page.getByRole("button", { name: "Decrease Quantity" }).click();
-
     await expect(
         page.locator("svg.text-blue.animate-spin.font-semibold")
     ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
+
+    await page.getByRole("button", { name: "Increase Quantity" }).click();
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
+
+    await page.getByRole("button", { name: "Decrease Quantity" }).click();
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
+
+    await page.getByRole("button", { name: "Decrease Quantity" }).click();
+    await expect(
+        page.locator("svg.text-blue.animate-spin.font-semibold")
+    ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
 });
 
 test("should remove the product from the mini cart drawer", async ({ page }) => {
@@ -169,6 +194,7 @@ test("should remove product from the cart view page", async ({ page }) => {
         .locator("button")
         .first()
         .click();
+    await page.waitForTimeout(CART_WAITING_TIME);
 
     await page.goto("checkout/cart");
 
@@ -178,11 +204,13 @@ test("should remove product from the cart view page", async ({ page }) => {
         .waitFor({ state: "visible" });
 
     await page.getByRole("button", { name: "Remove" }).first().click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await page.waitForTimeout(CART_WAITING_TIME);
 
+    await page.getByRole("button", { name: "Agree", exact: true }).click();
     await expect(
         page.getByText("Item is successfully removed from the cart.").first()
     ).toBeVisible();
+    await page.waitForTimeout(CART_WAITING_TIME);
 });
 
 test("should remove all products from the cart view page", async ({ page }) => {

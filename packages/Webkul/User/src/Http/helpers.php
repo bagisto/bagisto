@@ -1,10 +1,15 @@
 <?php
 
-use Webkul\User\Bouncer;
+use Webkul\User\Facades\Bouncer as BouncerFacade;
 
 if (! function_exists('bouncer')) {
-    function bouncer(): Bouncer
+    /**
+     * Bouncer helper.
+     *
+     * @return \Webkul\User\Bouncer
+     */
+    function bouncer()
     {
-        return app()->make(Bouncer::class);
+        return BouncerFacade::getFacadeRoot();
     }
 }
