@@ -269,6 +269,12 @@
             },
 
             methods: {
+                normalizeGroupId(id) {
+                    // Normalize null, undefined, and empty string to null for comparison
+                    // This handles "All Groups" which can be represented as null (DB) or "" (form)
+                    return (id === null || id === undefined || id === '') ? null : id;
+                },
+
                 getGroupNameById(id) {
                     let group = this.groups.find(group => group.id == id);
 
@@ -278,7 +284,7 @@
                 create(params) {
                     if (this.selectedPrice.id == undefined) {
                         const isDuplicate = this.prices.some(price => {
-                            return price.customer_group_id == params.customer_group_id &&
+                            return this.normalizeGroupId(price.customer_group_id) === this.normalizeGroupId(params.customer_group_id) &&
                                 price.qty == params.qty;
                         });
 
@@ -293,7 +299,7 @@
                     } else {
                         const isDuplicate = this.prices.some(price => {
                             return price.id !== this.selectedPrice.id &&
-                                price.customer_group_id == this.selectedPrice.customer_group_id &&
+                                this.normalizeGroupId(price.customer_group_id) === this.normalizeGroupId(this.selectedPrice.customer_group_id) &&
                                 price.qty == this.selectedPrice.qty;
                         });
 
@@ -315,7 +321,7 @@
 
                 resetForm() {
                     this.selectedPrice = {
-                        customer_group_id: null,
+                        customer_group_id: '',
                         qty: 0,
                         value_type: 'fixed',
                         value: 0,
