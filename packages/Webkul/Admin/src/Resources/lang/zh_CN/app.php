@@ -33,6 +33,16 @@ return [
             'submit-btn'             => '重置密码',
             'title'                  => '重置密码',
         ],
+
+        'verify' => [
+            'back'             => '返回',
+            'code-label'       => '验证码',
+            'code-placeholder' => '输入6位验证码',
+            'disabled_message' => '管理员当前已禁用双重身份验证。',
+            'enter-code'       => '请输入您身份验证应用中的6位验证码以继续。',
+            'title'            => '验证双重身份验证',
+            'verify-code'      => '验证代码',
+        ],
     ],
 
     'notifications' => [
@@ -70,8 +80,42 @@ return [
             'profile-image'     => '个人资料图片',
             'save-btn'          => '保存账户',
             'title'             => '我的账户',
-            'update-success'    => '账户已成功更新',
-            'upload-image-info' => '上传个人资料图片（110px X 110px），格式为PNG或JPG',
+            'update-success'    => '账户更新成功',
+            'upload-image-info' => '上传个人头像（110px X 110px），支持 PNG 或 JPG 格式',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => '尊敬的 :admin_name',
+            ],
+
+            'backup-codes' => [
+                'codes-subtitle'      => '请将这些代码安全存放——每个代码仅能使用一次。',
+                'codes-title'         => '您的备份代码',
+                'description'         => '为了您的安全，我们生成了备份代码，以防您无法访问身份验证应用。每个代码只能使用一次。',
+                'greeting'            => '您已成功为管理员账户启用双重身份验证。',
+                'subject'             => '双重身份验证备份代码',
+                'warning-description' => '请妥善保管这些代码，不要与他人分享。请离线存放在安全位置。',
+                'warning-title'       => '重要安全提示',
+            ],
+        ],
+
+        'messages' => [
+            'disabled-success' => '双重身份验证已禁用。',
+            'email-failed'     => '发送备份代码失败',
+            'enabled-success'  => '双重身份验证已成功启用。',
+            'invalid-code'     => '无效的验证码。',
+            'verified-success' => '双重身份验证已成功验证。',
+        ],
+
+        'setup' => [
+            'back'             => '返回',
+            'code-label'       => '验证码',
+            'code-placeholder' => '输入6位验证码',
+            'enable'           => '启用',
+            'scan-qr'          => '在您的 Google Authenticator 应用中扫描此二维码，然后输入以下6位验证码。',
+            'title'            => '启用双重身份验证',
+            'verify-enable'    => '验证并启用',
         ],
     ],
 

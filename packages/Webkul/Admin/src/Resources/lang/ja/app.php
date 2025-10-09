@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'パスワードをリセット',
             'title'                  => 'パスワードをリセット',
         ],
+
+        'verify' => [
+            'back'             => '戻る',
+            'code-label'       => '確認コード',
+            'code-placeholder' => '6桁のコードを入力',
+            'disabled_message' => '二要素認証は現在管理者によって無効化されています。',
+            'enter-code'       => '続行するには、認証アプリから6桁のコードを入力してください。',
+            'title'            => '二要素認証の確認',
+            'verify-code'      => 'コードを確認',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,41 @@ return [
             'save-btn'          => 'アカウントを保存',
             'title'             => 'マイアカウント',
             'update-success'    => 'アカウントが正常に更新されました',
-            'upload-image-info' => 'プロフィール画像をアップロード（110px X 110px）PNGまたはJPG形式',
+            'upload-image-info' => 'プロフィール画像をアップロード（110px X 110px、PNGまたはJPG形式）',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => ':admin_name 様',
+            ],
+
+            'backup-codes' => [
+                'codes-subtitle'      => 'これらのコードは安全な場所に保管してください – 各コードは一度だけ使用可能です。',
+                'codes-title'         => 'バックアップコード',
+                'description'         => 'セキュリティのため、認証アプリにアクセスできなくなった場合に使用できるバックアップコードを生成しました。各コードは一度だけ使用できます。',
+                'greeting'            => '管理者アカウントの二要素認証を正常に有効にしました。',
+                'subject'             => '二要素認証バックアップコード',
+                'warning-description' => 'これらのコードを安全に保管し、他人と共有しないでください。オフラインで安全な場所に保管してください。',
+                'warning-title'       => '重要なセキュリティ通知',
+            ],
+        ],
+
+        'messages' => [
+            'disabled-success' => '二要素認証が無効化されました。',
+            'email-failed'     => 'バックアップコードの送信に失敗しました',
+            'enabled-success'  => '二要素認証が正常に有効化されました。',
+            'invalid-code'     => '無効な確認コードです。',
+            'verified-success' => '二要素認証が正常に確認されました。',
+        ],
+
+        'setup' => [
+            'back'             => '戻る',
+            'code-label'       => '確認コード',
+            'code-placeholder' => '6桁のコードを入力',
+            'enable'           => '有効にする',
+            'scan-qr'          => 'このQRコードをGoogle Authenticatorアプリでスキャンし、下の6桁のコードを入力してください。',
+            'title'            => '二要素認証を有効化',
+            'verify-enable'    => '確認して有効化',
         ],
     ],
 

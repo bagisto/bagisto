@@ -29,6 +29,21 @@ class Admin extends Authenticatable implements AdminContract
         'api_token',
         'role_id',
         'status',
+        'two_factor_secret',
+        'two_factor_enabled',
+        'two_factor_backup_codes',
+        'two_factor_verified_at',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'two_factor_backup_codes' => 'array',
+        'two_factor_verified_at'  => 'datetime',
+        'two_factor_enabled'      => 'boolean',
     ];
 
     /**
