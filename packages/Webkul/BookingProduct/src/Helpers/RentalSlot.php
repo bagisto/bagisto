@@ -207,21 +207,21 @@ class RentalSlot extends Booking
     }
 
     /**
-     * Return is item have valid date
-     *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * Determine if the given cart item has valid booking dates.
      */
-    public function isItemHaveValidDate($cartItem)
+    public function hasValidBookingDates(array $cartItem): bool
     {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
-        $cartFrom = Carbon::parse($cartItem['additional']['booking']['date_from']);
-        $cartTo = Carbon::parse($cartItem['additional']['booking']['date_to']);
+        if (isset($cartItem['additional']['booking']['renting_type']) && $cartItem['additional']['booking']['renting_type'] == 'daily') {
+            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+            $cartFrom = Carbon::parse($cartItem['additional']['booking']['date_from']);
+            $cartTo = Carbon::parse($cartItem['additional']['booking']['date_to']);
 
-        if (
-            $cartFrom->lt($bookingProduct->available_from) ||
-            $cartTo->gt($bookingProduct->available_to)
-        ) {
-            return false;
+            if (
+                $cartFrom->lt($bookingProduct->available_from) ||
+                $cartTo->gt($bookingProduct->available_to)
+            ) {
+                return false;
+            }
         }
 
         return true;
@@ -233,7 +233,7 @@ class RentalSlot extends Booking
     public function isSlotAvailable(array $cartProducts): bool
     {
         foreach ($cartProducts as $cartProduct) {
-            if (! $this->isItemHaveValidDate($cartProduct)) {
+            if (! $this->hasValidBookingDates($cartProduct)) {
                 return false;
             }
         }

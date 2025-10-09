@@ -212,10 +212,7 @@ class Booking extends AbstractType
 
         if (! $typeHelper->isSlotAvailable($products)) {
             if ($bookingProduct->type == 'rental') {
-                return trans('shop::app.products.booking.cart.integrity.unavailable_date', [
-                    'date_from' => $data['booking']['date_from'] ?? null,
-                    'date_to'   => $data['booking']['date_to'] ?? null,
-                ]);
+                return $typeHelper->slotUnavailableMessage($data);
             }
 
             return trans('shop::app.products.booking.cart.integrity.inventory_warning');
