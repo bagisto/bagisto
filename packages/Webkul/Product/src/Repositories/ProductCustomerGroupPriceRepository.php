@@ -43,9 +43,13 @@ class ProductCustomerGroupPriceRepository extends Repository
                 $processedUniqueIds[] = $row['unique_id'];
 
                 if (Str::contains($customerGroupPriceId, 'price_')) {
-                    $existingPrice = $this->findOneWhere(['unique_id' => $row['unique_id']]);
+                    $existingPrice = $this->findOneWhere([
+                        'unique_id' => $row['unique_id'],
+                        'product_id' => $product->id,
+                    ]);
 
-                    if ($existingPrice) {
+                    // Only throw error if the existing price is not in the list of prices to be deleted
+                    if ($existingPrice && ! $previousCustomerGroupPriceIds->contains($existingPrice->id)) {
                         throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                     }
 
@@ -63,6 +67,16 @@ class ProductCustomerGroupPriceRepository extends Repository
                 } else {
                     if (is_numeric($index = $previousCustomerGroupPriceIds->search($customerGroupPriceId))) {
                         $previousCustomerGroupPriceIds->forget($index);
+                    }
+
+                    // Check if updating would create a duplicate with another existing record
+                    $existingPrice = $this->findOneWhere([
+                        'unique_id' => $row['unique_id'],
+                        'product_id' => $product->id,
+                    ]);
+
+                    if ($existingPrice && $existingPrice->id != $customerGroupPriceId) {
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                     }
 
                     $this->update($row, $customerGroupPriceId);

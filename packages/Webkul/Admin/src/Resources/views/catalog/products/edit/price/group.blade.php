@@ -66,7 +66,7 @@
 
                         <p
                             class="cursor-pointer text-blue-600 transition-all hover:underline"
-                            @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
+                            @click="edit(item)"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
                         </p>
@@ -279,6 +279,13 @@
                     let group = this.groups.find(group => group.id == id);
 
                     return group ? group.name : "@lang('admin::app.catalog.products.edit.price.group.all-groups')";
+                },
+
+                edit(item) {
+                    // Create a copy to avoid modifying the original item during editing
+                    this.selectedPrice = { ...item };
+
+                    this.$refs.groupPriceCreateModal.open();
                 },
 
                 create(params) {
