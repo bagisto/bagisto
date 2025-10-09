@@ -211,8 +211,9 @@ class RentalSlot extends Booking
      */
     public function hasValidBookingDates(array $cartItem): bool
     {
-        if (isset($cartItem['additional']['booking']['renting_type']) && $cartItem['additional']['booking']['renting_type'] == 'daily') {
-            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+
+        if (! $bookingProduct->available_every_week && isset($cartItem['additional']['booking']['date_from']) && isset($cartItem['additional']['booking']['date_to'])) {
             $cartFrom = Carbon::parse($cartItem['additional']['booking']['date_from']);
             $cartTo = Carbon::parse($cartItem['additional']['booking']['date_to']);
 
