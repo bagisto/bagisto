@@ -4,4 +4,4 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-* Soon.
+* Implemented two-factor authentication (2FA) for admin users to enhance account security.
