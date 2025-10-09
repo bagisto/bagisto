@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Passwort zurücksetzen',
             'title'                  => 'Passwort zurücksetzen',
         ],
+
+        'verify' => [
+            'back'             => 'Zurück',
+            'code-label'       => 'Verifizierungscode',
+            'code-placeholder' => '6-stelligen Code eingeben',
+            'disabled_message' => 'Die Zwei-Faktor-Authentifizierung ist derzeit vom Administrator deaktiviert.',
+            'enter-code'       => 'Geben Sie den 6-stelligen Code aus Ihrer Authentifikator-App ein, um fortzufahren.',
+            'title'            => 'Zwei-Faktor-Authentifizierung verifizieren',
+            'verify-code'      => 'Code überprüfen',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,41 @@ return [
             'save-btn'          => 'Konto speichern',
             'title'             => 'Mein Konto',
             'update-success'    => 'Konto erfolgreich aktualisiert',
-            'upload-image-info' => 'Laden Sie ein Profilbild (110px X 110px) im PNG- oder JPG-Format hoch',
+            'upload-image-info' => 'Laden Sie ein Profilbild hoch (110px X 110px) im PNG- oder JPG-Format',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Sehr geehrte/r :admin_name',
+            ],
+
+            'backup-codes' => [
+                'codes-subtitle'      => 'Bewahren Sie diese Codes an einem sicheren Ort auf – jeder Code kann nur einmal verwendet werden.',
+                'codes-title'         => 'Ihre Backup-Codes',
+                'description'         => 'Für Ihre Sicherheit haben wir Backup-Codes erstellt, die Sie verwenden können, falls Sie den Zugriff auf Ihre Authentifikator-App verlieren. Jeder Code kann nur einmal verwendet werden.',
+                'greeting'            => 'Sie haben die Zwei-Faktor-Authentifizierung für Ihr Administratorkonto erfolgreich aktiviert.',
+                'subject'             => 'Zwei-Faktor-Authentifizierung Backup-Codes',
+                'warning-description' => 'Bewahren Sie diese Codes sicher auf und teilen Sie sie nicht mit anderen. Lagern Sie sie offline an einem sicheren Ort.',
+                'warning-title'       => 'Wichtiger Sicherheitshinweis',
+            ],
+        ],
+
+        'messages' => [
+            'disabled-success' => 'Zwei-Faktor-Authentifizierung wurde deaktiviert.',
+            'email-failed'     => 'Backup-Codes konnten nicht zugestellt werden',
+            'enabled-success'  => 'Zwei-Faktor-Authentifizierung erfolgreich aktiviert.',
+            'invalid-code'     => 'Ungültiger Verifizierungscode.',
+            'verified-success' => 'Zwei-Faktor-Authentifizierung erfolgreich verifiziert.',
+        ],
+
+        'setup' => [
+            'back'             => 'Zurück',
+            'code-label'       => 'Verifizierungscode',
+            'code-placeholder' => '6-stelligen Code eingeben',
+            'enable'           => 'Aktivieren',
+            'scan-qr'          => 'Scannen Sie diesen QR-Code in Ihrer Google Authenticator-App und geben Sie dann den 6-stelligen Code unten ein.',
+            'title'            => 'Zwei-Faktor-Authentifizierung aktivieren',
+            'verify-enable'    => 'Überprüfen & Aktivieren',
         ],
     ],
 

@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Reset Password',
             'title'                  => 'Reset Password',
         ],
+
+        'verify' => [
+            'back'             => 'Back',
+            'code-label'       => 'Verification Code',
+            'code-placeholder' => 'Enter 6-digit code',
+            'disabled_message' => 'Verify Two-Factor Authentication is currently disabled by the admin.',
+            'enter-code'       => 'Enter the 6-digit code from your authenticator app to continue.',
+            'title'            => 'Verify Two-Factor Authentication',
+            'verify-code'      => 'Verify Code',
+        ],
     ],
 
     'notifications' => [
@@ -72,6 +82,40 @@ return [
             'title'             => 'My Account',
             'update-success'    => 'Account updated successfully',
             'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Dear :admin_name',
+            ],
+
+            'backup-codes' => [
+                'codes-subtitle'      => 'Store these codes in a safe place - each can only be used once.',
+                'codes-title'         => 'Your Backup Codes',
+                'description'         => 'For your security, we have generated backup codes that you can use if you lose access to your authenticator app. Each code can only be used once.',
+                'greeting'            => 'You have successfully enabled Two-Factor Authentication for your admin account.',
+                'subject'             => 'Two-Factor Authentication Backup Codes',
+                'warning-description' => 'Keep these codes secure and do not share them with anyone. Store them offline in a safe location.',
+                'warning-title'       => 'Important Security Notice',
+            ],
+        ],
+
+        'messages' => [
+            'disabled-success' => 'Two-Factor Authentication has been disabled.',
+            'email-failed'     => 'Failed to deliver backup codes',
+            'enabled-success'  => 'Two-Factor Authentication enabled successfully.',
+            'invalid-code'     => 'Invalid verification code.',
+            'verified-success' => 'Two-Factor Authentication verified successfully.',
+        ],
+
+        'setup' => [
+            'back'             => 'Back',
+            'code-label'       => 'Verification Code',
+            'code-placeholder' => 'Enter 6-digit code',
+            'enable'           => 'Enable',
+            'scan-qr'          => 'Scan this QR code in your Google Authenticator app, then enter the 6-digit code below.',
+            'title'            => 'Enable Two-Factor Authentication',
+            'verify-enable'    => 'Verify & Enable',
         ],
     ],
 

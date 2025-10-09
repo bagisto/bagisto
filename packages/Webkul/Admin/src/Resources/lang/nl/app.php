@@ -33,6 +33,16 @@ return [
             'submit-btn'             => 'Wachtwoord Herstellen',
             'title'                  => 'Wachtwoord Herstellen',
         ],
+
+        'verify' => [
+            'back'             => 'Terug',
+            'code-label'       => 'Verificatiecode',
+            'code-placeholder' => 'Voer 6-cijferige code in',
+            'disabled_message' => 'Twee-factor authenticatie is momenteel uitgeschakeld door de beheerder.',
+            'enter-code'       => 'Voer de 6-cijferige code van je authenticator-app in om door te gaan.',
+            'title'            => 'Twee-factor authenticatie verifiëren',
+            'verify-code'      => 'Code Verifiëren',
+        ],
     ],
 
     'notifications' => [
@@ -71,7 +81,41 @@ return [
             'save-btn'          => 'Account Opslaan',
             'title'             => 'Mijn Account',
             'update-success'    => 'Account succesvol bijgewerkt',
-            'upload-image-info' => 'Upload een Profiel Afbeelding (110px X 110px) in PNG of JPG Formaat',
+            'upload-image-info' => 'Upload een profielfoto (110px X 110px) in PNG- of JPG-formaat',
+        ],
+
+        'emails' => [
+            'common' => [
+                'dear' => 'Beste :admin_name',
+            ],
+
+            'backup-codes' => [
+                'codes-subtitle'      => 'Bewaar deze codes op een veilige plek – elke code kan slechts één keer worden gebruikt.',
+                'codes-title'         => 'Jouw Back-upcodes',
+                'description'         => 'Voor jouw veiligheid hebben we back-upcodes gegenereerd die je kunt gebruiken als je de toegang tot je authenticator-app verliest. Elke code kan slechts één keer worden gebruikt.',
+                'greeting'            => 'Je hebt twee-factor authenticatie succesvol ingeschakeld voor je admin-account.',
+                'subject'             => 'Back-upcodes voor tweeledige verificatie',
+                'warning-description' => 'Houd deze codes veilig en deel ze niet met anderen. Bewaar ze offline op een veilige plaats.',
+                'warning-title'       => 'Belangrijke Beveiligingswaarschuwing',
+            ],
+        ],
+
+        'messages' => [
+            'disabled-success' => 'Twee-factor authenticatie uitgeschakeld.',
+            'email-failed'     => 'Verzenden van back-upcodes mislukt',
+            'enabled-success'  => 'Twee-factor authenticatie succesvol ingeschakeld.',
+            'invalid-code'     => 'Ongeldige verificatiecode.',
+            'verified-success' => 'Twee-factor authenticatie succesvol geverifieerd.',
+        ],
+
+        'setup' => [
+            'back'             => 'Terug',
+            'code-label'       => 'Verificatiecode',
+            'code-placeholder' => 'Voer 6-cijferige code in',
+            'enable'           => 'Inschakelen',
+            'scan-qr'          => 'Scan deze QR-code in je Google Authenticator-app en voer vervolgens de onderstaande 6-cijferige code in.',
+            'title'            => 'Schakel Twee-Factor Authenticatie In',
+            'verify-enable'    => 'Verifiëren & Inschakelen',
         ],
     ],
 
