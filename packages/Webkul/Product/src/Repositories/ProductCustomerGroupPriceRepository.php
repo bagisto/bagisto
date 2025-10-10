@@ -48,8 +48,12 @@ class ProductCustomerGroupPriceRepository extends Repository
                         'product_id' => $product->id,
                     ]);
 
-                    // Only throw error if the existing price is not in the list of prices to be deleted
-                    if ($existingPrice && ! $previousCustomerGroupPriceIds->contains($existingPrice->id)) {
+                    // If an existing price with same unique_id exists and it's marked for deletion, delete it first
+                    if ($existingPrice && $previousCustomerGroupPriceIds->contains($existingPrice->id)) {
+                        $this->delete($existingPrice->id);
+                        $previousCustomerGroupPriceIds = $previousCustomerGroupPriceIds->reject(fn($id) => $id == $existingPrice->id);
+                    } elseif ($existingPrice) {
+                        // Only throw error if the existing price is not in the list of prices to be deleted
                         throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                     }
 
