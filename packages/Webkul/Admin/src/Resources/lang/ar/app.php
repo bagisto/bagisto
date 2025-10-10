@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'جميع المجموعات',
                         'create-btn'                => 'إضافة جديدة',
                         'discount-group-price-info' => 'لـ :qty كمية بخصم قدره :price',
+                        'duplicate-error'           => 'خصم لهذه المجموعة من العملاء مع نفس الكمية موجود بالفعل.',
                         'edit-btn'                  => 'تعديل',
                         'empty-info'                => 'تسعير خاص للعملاء الذين ينتمون إلى مجموعة معينة.',
                         'fixed-group-price-info'    => 'لـ :qty كمية بسعر ثابت قدره :price',

@@ -66,7 +66,7 @@
 
                         <p
                             class="cursor-pointer text-blue-600 transition-all hover:underline"
-                            @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
+                            @click="edit(item)"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
                         </p>
@@ -269,18 +269,53 @@
             },
 
             methods: {
+                normalizeGroupId(id) {
+                    // Normalize null, undefined, and empty string to null for comparison
+                    // This handles "All Groups" which can be represented as null (DB) or "" (form)
+                    return (id === null || id === undefined || id === '') ? null : id;
+                },
+
                 getGroupNameById(id) {
                     let group = this.groups.find(group => group.id == id);
 
                     return group ? group.name : "@lang('admin::app.catalog.products.edit.price.group.all-groups')";
                 },
 
+                edit(item) {
+                    // Create a copy to avoid modifying the original item during editing
+                    this.selectedPrice = { ...item };
+
+                    this.$refs.groupPriceCreateModal.open();
+                },
+
                 create(params) {
                     if (this.selectedPrice.id == undefined) {
+                        const isDuplicate = this.prices.some(price => {
+                            return this.normalizeGroupId(price.customer_group_id) === this.normalizeGroupId(params.customer_group_id) &&
+                                price.qty == params.qty;
+                        });
+
+                        if (isDuplicate) {
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang("admin::app.catalog.products.edit.price.group.duplicate-error")' });
+                            return;
+                        }
+
                         params.id = 'price_' + this.prices.length;
 
                         this.prices.push(params);
                     } else {
+                        const isDuplicate = this.prices.some(price => {
+                            return price.id !== this.selectedPrice.id &&
+                                this.normalizeGroupId(price.customer_group_id) === this.normalizeGroupId(this.selectedPrice.customer_group_id) &&
+                                price.qty == this.selectedPrice.qty;
+                        });
+
+                        if (isDuplicate) {
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang("admin::app.catalog.products.edit.price.group.duplicate-error")' });
+
+                            return;
+                        }
+
                         const indexToUpdate = this.prices.findIndex(price => price.id === this.selectedPrice.id);
 
                         this.prices[indexToUpdate] = this.selectedPrice;
@@ -293,7 +328,7 @@
 
                 resetForm() {
                     this.selectedPrice = {
-                        customer_group_id: null,
+                        customer_group_id: '',
                         qty: 0,
                         value_type: 'fixed',
                         value: 0,
