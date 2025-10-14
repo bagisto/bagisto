@@ -8,6 +8,8 @@
 </v-checkout-login>
 
 @pushOnce('scripts')
+    {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
+
     <script
         type="text/x-template"
         id="v-checkout-login-template"
@@ -88,11 +90,12 @@
 
                             <!-- Captcha -->
                             @if (core()->getConfigData('customer.captcha.credentials.status'))
-                                <div class="mt-5 flex">
+                                <x-shop::form.control-group class="mt-5">
                                     {!! \Webkul\Customer\Facades\Captcha::render() !!}
-                                </div>
+
+                                    <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                                </x-shop::form.control-group>
                             @endif
-                            
                         </x-slot>
 
                         <!-- Modal Footer -->
@@ -113,11 +116,6 @@
             </x-shop::form>
 
             {!! view_render_event('bagisto.shop.checkout.login.after') !!}
-
-            @push('scripts')
-                {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
-            @endpush
-
         </div>
     </script>
 
@@ -133,11 +131,13 @@
 
             methods: {
                 login(params, {
-                    resetForm
+                    resetForm,
+                    setErrors
                 }) {
                     this.isStoring = true;
 
                     const captchaResponse = document.querySelector('[name="g-recaptcha-response"]')?.value
+
                     params['g-recaptcha-response'] = captchaResponse;
                    
                     this.$axios.post("{{ route('shop.api.customers.session.create') }}", params)
