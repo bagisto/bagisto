@@ -633,16 +633,10 @@ class Cart
             return false;
         }
 
-        if (! $wishlistItem->additional) {
-            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
-        }
+        $options = $wishlistItem->additional ?? [];
+        $options['quantity'] = $quantity;
 
-        $additional = [
-            ...$wishlistItem->additional,
-            'quantity' => $quantity,
-        ];
-
-        $result = $this->addProduct($wishlistItem->product, $additional);
+        $result = $this->addProduct($wishlistItem->product, $options);
 
         if ($result) {
             Event::dispatch('customer.wishlist.delete.before', $wishlistItem->id);
@@ -673,21 +667,23 @@ class Cart
             'product_id'  => $cartItem->product_id,
         ]);
 
-        $found = false;
-
+        $existing = null;
         foreach ($wishlistItems as $wishlistItem) {
-            $options = $wishlistItem->item_options;
-
-            if (! $options) {
-                $options = ['product_id' => $wishlistItem->product_id];
-            }
+            $options = $wishlistItem->item_options ?: ['product_id' => $wishlistItem->product_id];
 
             if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
-                $found = true;
+                $existing = $wishlistItem;
+                break;
             }
         }
 
-        if (! $found) {
+        if ($existing) {
+            $additional = $existing->additional ?? [];
+            $oldQty = $additional['quantity'] ?? 0;
+            $additional['quantity'] = $oldQty + $quantity;
+            $existing->additional = $additional;
+            $existing->save();
+        } else {
             Event::dispatch('customer.wishlist.create.before', $cartItem->product_id);
 
             $wishlist = $this->wishlistRepository->create([
