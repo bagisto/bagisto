@@ -837,6 +837,7 @@ return [
                     'missing_options'        => 'Opties ontbreken voor dit product.',
                     'inventory_warning'      => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
                     'select_hourly_duration' => 'Selecteer een tijdsduur van één uur.',
+                    'unavailable_date' => 'De gevraagde datum is niet beschikbaar. Boek opnieuw tussen :date_from en :date_to.',
                 ],
 
                 'rent-from'    => 'Huur Van',
