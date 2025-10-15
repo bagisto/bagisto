@@ -4899,6 +4899,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'L\'extensió del fitxer no coincideix amb el tipus de fitxer.',
+                'file-upload-failed'             => 'Ha fallat la càrrega del fitxer.',
+                'http-error'                     => 'Error HTTP.',
+                'invalid-file-type'              => 'Tipus de fitxer no vàlid. Tipus permesos: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'JSON no vàlid.',
+                'no-file-uploaded'               => 'No s\'ha carregat cap fitxer.',
+                'upload-failed'                  => 'La càrrega de la imatge ha fallat a causa d\'un error de transport XHR.',
+            ],
         ],
     ],
 

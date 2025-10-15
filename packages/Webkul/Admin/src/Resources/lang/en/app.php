@@ -4900,6 +4900,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'File extension does not match file type.',
+                'file-upload-failed'             => 'File upload failed.',
+                'http-error'                     => 'HTTP error.',
+                'invalid-file-type'              => 'Invalid file type. Allowed types: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'Invalid JSON.',
+                'no-file-uploaded'               => 'No file uploaded.',
+                'upload-failed'                  => 'Image upload failed due to a XHR Transport error.',
+            ],
         ],
     ],
 
