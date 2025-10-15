@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* #10866 [Fixed] - Product Carousel Theme Filter: Attribute Value Dropdown Not Showing Options for Custom Attributes.
+
 * Improved octane compatibility.
 
 * #10971 - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
