@@ -1,14 +1,14 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.sales.orders.create.title', ['name' => $cart->customer->name])
+        @lang('admin::app.sales.orders.create.title', ['name' => e($cart->customer->name)])
     </x-slot>
 
     <!-- Page Header -->
     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="grid gap-1.5">
             <p class="text-xl font-bold leading-6 text-gray-800 dark:text-white">
-                @lang('admin::app.sales.orders.create.title', ['name' => $cart->customer->name])
+                @lang('admin::app.sales.orders.create.title', ['name' => e($cart->customer->name)])
             </p>
         </div>
 

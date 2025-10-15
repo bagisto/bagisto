@@ -3,9 +3,12 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Traits\Sanitizer;
 
 class TinyMCEController extends Controller
 {
+    use Sanitizer;
+
     /**
      * Storage folder path.
      *
@@ -42,8 +45,12 @@ class TinyMCEController extends Controller
             return [];
         }
 
+        $path = request()->file('file')->store($this->storagePath);
+
+        $this->sanitizeSVG($path, request()->file('file')->getMimeType());
+
         return [
-            'file'      => $path = request()->file('file')->store($this->storagePath),
+            'file'      => $path,
             'file_name' => request()->file('file')->getClientOriginalName(),
             'file_url'  => Storage::url($path),
         ];
