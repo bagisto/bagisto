@@ -135,8 +135,8 @@ class Captcha implements CaptchaContract
         }
 
         if (
-            empty($this->apiKey) 
-            || empty($this->projectId) 
+            empty($this->apiKey)
+            || empty($this->projectId)
             || empty($this->siteKey)
         ) {
             logger()->error('reCAPTCHA: Validation failed - API Key, Project ID, or Site Key is not configured.');
@@ -162,7 +162,7 @@ class Captcha implements CaptchaContract
             $result = $apiResponse->json();
 
             if (
-                ! $result 
+                ! $result
                 || $apiResponse->failed()
             ) {
                 logger()->error('reCAPTCHA: Failed to get valid response from Google.', ['response' => $result]);
@@ -180,7 +180,7 @@ class Captcha implements CaptchaContract
                 $score = $result['riskAnalysis']['score'];
 
                 $isValid = $score >= $this->scoreThreshold;
-                
+
                 logger()->info('reCAPTCHA: Validation result.', [
                     'score'     => $score,
                     'threshold' => $this->scoreThreshold,

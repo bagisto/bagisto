@@ -1223,6 +1223,7 @@ return [
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.project-id',
                 'info'          => 'admin::app.configuration.index.customer.captcha.credentials.project-id-info',
                 'type'          => 'text',
+                'validation'    => 'required',
                 'depends'       => 'status:1',
                 'channel_based' => true,
             ], [
@@ -1230,6 +1231,7 @@ return [
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.api-key',
                 'info'          => 'admin::app.configuration.index.customer.captcha.credentials.api-key-info',
                 'type'          => 'text',
+                'validation'    => 'required',
                 'depends'       => 'status:1',
                 'channel_based' => true,
             ], [
@@ -1237,6 +1239,7 @@ return [
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
                 'info'          => 'admin::app.configuration.index.customer.captcha.credentials.site-key-info',
                 'type'          => 'text',
+                'validation'    => 'required',
                 'depends'       => 'status:1',
                 'channel_based' => true,
             ], [
@@ -1244,7 +1247,7 @@ return [
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold',
                 'info'          => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold-info',
                 'type'          => 'text',
-                'validation'    => 'decimal:1',
+                'validation'    => 'required|decimal:1',
                 'default'       => '0.5',
                 'depends'       => 'status:1',
                 'channel_based' => true,
