@@ -20,6 +20,9 @@ test.describe("google captcha configuration", () => {
      * Disable the google captcha configuration as this will create issue in further testcases.
      */
     test.afterEach(async ({ adminPage }) => {
+        /**
+         * Navigate to the configuration page.
+         */
         await adminPage.goto("admin/configuration/customer/captcha");
 
         const isChecked = await adminPage
@@ -35,6 +38,13 @@ test.describe("google captcha configuration", () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
+
+        /**
+         * Verify the change is saved.
+         */
+        await expect(
+            adminPage.locator('p.flex.items-center.break-all.text-sm', { hasText: "Configuration saved successfully" })
+        ).toBeVisible();
 
         await expect(
             adminPage.locator(
@@ -81,7 +91,7 @@ test.describe("google captcha configuration", () => {
          * Verify the change is saved.
          */
         await expect(
-            adminPage.getByText("Configuration saved successfully")
+            adminPage.locator('p.flex.items-center.break-all.text-sm', { hasText: "Configuration saved successfully" })
         ).toBeVisible();
 
         await expect(
