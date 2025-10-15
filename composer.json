@@ -46,7 +46,8 @@
         "shetabit/visitor": "^4.1",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-responsecache": "^7.4",
-        "spatie/laravel-sitemap": "^7.3"
+        "spatie/laravel-sitemap": "^7.3",
+        "stevebauman/purify": "^6.3"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "2.3.*",

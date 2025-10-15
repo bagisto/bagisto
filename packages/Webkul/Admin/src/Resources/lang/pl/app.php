@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'Rozszerzenie pliku nie pasuje do typu pliku.',
+                'file-upload-failed'             => 'Przesyłanie pliku nie powiodło się.',
+                'http-error'                     => 'Błąd HTTP.',
+                'invalid-file-type'              => 'Nieprawidłowy typ pliku. Dozwolone typy: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'Nieprawidłowy JSON.',
+                'no-file-uploaded'               => 'Nie przesłano pliku.',
+                'upload-failed'                  => 'Przesyłanie obrazu nie powiodło się z powodu błędu transportu XHR.',
+            ],
         ],
     ],
 

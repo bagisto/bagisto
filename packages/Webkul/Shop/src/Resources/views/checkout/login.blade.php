@@ -8,6 +8,8 @@
 </v-checkout-login>
 
 @pushOnce('scripts')
+    {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
+
     <script
         type="text/x-template"
         id="v-checkout-login-template"
@@ -85,13 +87,22 @@
 
                                 <x-shop::form.control-group.error control-name="password" />
                             </x-shop::form.control-group>
+
+                            <!-- Captcha -->
+                            @if (core()->getConfigData('customer.captcha.credentials.status'))
+                                <x-shop::form.control-group class="mt-5">
+                                    {!! \Webkul\Customer\Facades\Captcha::render() !!}
+
+                                    <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                                </x-shop::form.control-group>
+                            @endif
                         </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <div class="flex flex-wrap items-center gap-4">
                                 <x-shop::button
-                                    class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:rounded-lg max-md:py-1.5"
+                                    class="primary-button max-w-none flex-auto rounded-sm px-11 py-3 max-md:rounded-lg max-md:py-1.5"
                                     :title="trans('shop::app.checkout.login.title')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"
@@ -111,7 +122,7 @@
     <script type="module">
         app.component('v-checkout-login', {
             template: '#v-checkout-login-template',
-            
+
             data() {
                 return {
                     isStoring: false,
@@ -119,9 +130,16 @@
             },
 
             methods: {
-                login(params, { resetForm }) {
+                login(params, {
+                    resetForm,
+                    setErrors
+                }) {
                     this.isStoring = true;
 
+                    const captchaResponse = document.querySelector('[name="g-recaptcha-response"]')?.value
+
+                    params['g-recaptcha-response'] = captchaResponse;
+                   
                     this.$axios.post("{{ route('shop.api.customers.session.create') }}", params)
                         .then((response) => {
                             this.isStoring = false;
@@ -137,7 +155,10 @@
                                 return;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: error.response.data.message
+                            });
                         });
                 },
             }

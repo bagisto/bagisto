@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'             => 'Vicuna (13b)',
                 'vicuna-7b'              => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'Dosya uzantısı dosya türüyle eşleşmiyor.',
+                'file-upload-failed'             => 'Dosya yükleme başarısız oldu.',
+                'http-error'                     => 'HTTP hatası.',
+                'invalid-file-type'              => 'Geçersiz dosya türü. İzin verilen türler: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'Geçersiz JSON.',
+                'no-file-uploaded'               => 'Hiçbir dosya yüklenmedi.',
+                'upload-failed'                  => 'XHR aktarım hatası nedeniyle resim yüklenemedi.',
+            ],
         ],
     ],
 

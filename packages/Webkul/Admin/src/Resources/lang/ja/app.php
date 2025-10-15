@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'ファイル拡張子がファイルタイプと一致しません。',
+                'file-upload-failed'             => 'ファイルのアップロードに失敗しました。',
+                'http-error'                     => 'HTTPエラー。',
+                'invalid-file-type'              => '無効なファイルタイプです。許可されるタイプ: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => '無効なJSON。',
+                'no-file-uploaded'               => 'ファイルがアップロードされていません。',
+                'upload-failed'                  => 'XHRトランスポートエラーにより画像のアップロードに失敗しました。',
+            ],
         ],
     ],
 

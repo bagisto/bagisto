@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'             => 'Vicuna (13b)',
                 'vicuna-7b'              => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'Розширення файлу не відповідає типу файлу.',
+                'file-upload-failed'             => 'Не вдалося завантажити файл.',
+                'http-error'                     => 'Помилка HTTP.',
+                'invalid-file-type'              => 'Недійсний тип файлу. Дозволені типи: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'Недійсний JSON.',
+                'no-file-uploaded'               => 'Файл не завантажено.',
+                'upload-failed'                  => 'Не вдалося завантажити зображення через помилку передачі XHR.',
+            ],
         ],
     ],
 

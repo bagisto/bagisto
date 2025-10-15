@@ -102,11 +102,13 @@
                         <x-shop::form.control-group.error control-name="message" />
                     </x-shop::form.control-group>
 
-                    <!-- Re captcha -->
+                    <!-- Captcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <div class="mb-5 flex">
+                        <x-shop::form.control-group class="mt-5">
                             {!! \Webkul\Customer\Facades\Captcha::render() !!}
-                        </div>
+
+                            <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                        </x-shop::form.control-group>
                     @endif
 
                     <!-- Submit Button -->

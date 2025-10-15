@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'امتداد الملف لا يتطابق مع نوع الملف.',
+                'file-upload-failed'             => 'فشل تحميل الملف.',
+                'http-error'                     => 'خطأ في HTTP.',
+                'invalid-file-type'              => 'نوع ملف غير صالح. الأنواع المسموحة: JPEG، PNG، GIF، WebP، SVG',
+                'invalid-json'                   => 'JSON غير صالح.',
+                'no-file-uploaded'               => 'لم يتم تحميل ملف.',
+                'upload-failed'                  => 'فشل تحميل الصورة بسبب خطأ في نقل XHR.',
+            ],
         ],
     ],
 

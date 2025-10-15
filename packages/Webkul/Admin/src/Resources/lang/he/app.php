@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'סיומת הקובץ אינה תואמת לסוג הקובץ.',
+                'file-upload-failed'             => 'העלאת הקובץ נכשלה.',
+                'http-error'                     => 'שגיאת HTTP.',
+                'invalid-file-type'              => 'סוג קובץ לא חוקי. סוגים מותרים: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'JSON לא חוקי.',
+                'no-file-uploaded'               => 'לא הועלה קובץ.',
+                'upload-failed'                  => 'העלאת התמונה נכשלה עקב שגיאת העברת XHR.',
+            ],
         ],
     ],
 

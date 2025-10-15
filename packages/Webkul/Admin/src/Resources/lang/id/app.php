@@ -4944,6 +4944,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'Ekstensi file tidak cocok dengan jenis file.',
+                'file-upload-failed'             => 'Unggahan file gagal.',
+                'http-error'                     => 'Kesalahan HTTP.',
+                'invalid-file-type'              => 'Jenis file tidak valid. Jenis yang diizinkan: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'JSON tidak valid.',
+                'no-file-uploaded'               => 'Tidak ada file yang diunggah.',
+                'upload-failed'                  => 'Unggahan gambar gagal karena kesalahan transport XHR.',
+            ],
         ],
     ],
 
