@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Refined TinyMCE editor integration and applied related security fixes.
 
+* Fixed an issue where the description was not updating correctly during channel updates.
+
 * #10971 - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
 
 * #10898 - Added an asterisk (*) to indicate all required fields in configurable product variants.
