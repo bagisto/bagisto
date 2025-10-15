@@ -2,23 +2,40 @@
 
 namespace Webkul\Customer;
 
+use Illuminate\Support\Facades\Http;
 use Webkul\Customer\Contracts\Captcha as CaptchaContract;
 
 class Captcha implements CaptchaContract
 {
     /**
-     * Site key.
-     *
-     * @var string
+     * Client endpoint.
      */
-    protected $siteKey;
+    const string CLIENT_ENDPOINT = 'https://www.google.com/recaptcha/enterprise.js';
 
     /**
-     * Secret key.
-     *
-     * @var string
+     * Site verify endpoint.
      */
-    protected $secretKey;
+    const string SITE_VERIFY_ENDPOINT = 'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments';
+
+    /**
+     * Project Id.
+     */
+    protected ?string $projectId;
+
+    /**
+     * API Key.
+     */
+    protected ?string $apiKey;
+
+    /**
+     * Site key.
+     */
+    protected ?string $siteKey;
+
+    /**
+     * Score threshold.
+     */
+    protected ?float $scoreThreshold;
 
     /**
      * Create a new instance.
@@ -27,9 +44,7 @@ class Captcha implements CaptchaContract
      */
     public function __construct()
     {
-        $this->siteKey = $this->getSiteKey();
-
-        $this->secretKey = $this->getSecretKey();
+        $this->initialize();
     }
 
     /**
@@ -41,6 +56,22 @@ class Captcha implements CaptchaContract
     }
 
     /**
+     * Get project id from the core config.
+     */
+    public function getProjectId(): ?string
+    {
+        return core()->getConfigData('customer.captcha.credentials.project_id');
+    }
+
+    /**
+     * Get api key from the core config.
+     */
+    public function getApiKey(): ?string
+    {
+        return core()->getConfigData('customer.captcha.credentials.api_key');
+    }
+
+    /**
      * Get site key from the core config.
      */
     public function getSiteKey(): ?string
@@ -49,11 +80,11 @@ class Captcha implements CaptchaContract
     }
 
     /**
-     * Get secret key from the core config.
+     * Get score threshold.
      */
-    public function getSecretKey(): ?string
+    public function getScoreThreshold(): float
     {
-        return core()->getConfigData('customer.captcha.credentials.secret_key');
+        return (float) core()->getConfigData('customer.captcha.credentials.score_threshold');
     }
 
     /**
@@ -69,7 +100,7 @@ class Captcha implements CaptchaContract
      */
     public function getSiteVerifyEndpoint(): string
     {
-        return static::SITE_VERIFY_ENDPOINT;
+        return str_replace('{project_id}', $this->projectId, static::SITE_VERIFY_ENDPOINT);
     }
 
     /**
@@ -97,16 +128,79 @@ class Captcha implements CaptchaContract
      */
     public function validateResponse($response): bool
     {
-        $client = new \GuzzleHttp\Client;
+        if (empty($response)) {
+            logger()->error('reCAPTCHA: Validation failed - empty response token.');
 
-        $response = $client->post($this->getSiteVerifyEndpoint(), [
-            'query' => [
-                'secret'   => $this->secretKey,
-                'response' => $response,
+            return false;
+        }
+
+        if (
+            empty($this->apiKey) 
+            || empty($this->projectId) 
+            || empty($this->siteKey)
+        ) {
+            logger()->error('reCAPTCHA: Validation failed - API Key, Project ID, or Site Key is not configured.');
+
+            return false;
+        }
+
+        $endpoint = $this->getSiteVerifyEndpoint().'?key='.$this->apiKey;
+
+        $payload = [
+            'event' => [
+                'token'          => $response,
+                'siteKey'        => $this->siteKey,
+                'expectedAction' => 'submit',
             ],
-        ]);
+        ];
 
-        return json_decode($response->getBody())->success;
+        try {
+            logger()->info('reCAPTCHA: Sending assessment request.', ['endpoint' => $endpoint, 'payload' => $payload]);
+
+            $apiResponse = Http::post($endpoint, $payload);
+
+            $result = $apiResponse->json();
+
+            if (
+                ! $result 
+                || $apiResponse->failed()
+            ) {
+                logger()->error('reCAPTCHA: Failed to get valid response from Google.', ['response' => $result]);
+
+                return false;
+            }
+
+            logger()->info('reCAPTCHA: Assessment response received.', ['response' => $result]);
+
+            if (
+                isset($result['tokenProperties']['valid'])
+                && $result['tokenProperties']['valid']
+                && isset($result['riskAnalysis']['score'])
+            ) {
+                $score = $result['riskAnalysis']['score'];
+
+                $isValid = $score >= $this->scoreThreshold;
+                
+                logger()->info('reCAPTCHA: Validation result.', [
+                    'score'     => $score,
+                    'threshold' => $this->scoreThreshold,
+                    'success'   => $isValid,
+                ]);
+
+                return $isValid;
+            }
+
+            logger()->error('reCAPTCHA: Invalid response structure from Google.', ['response' => $result]);
+
+            return false;
+        } catch (\Exception $e) {
+            logger()->error('reCAPTCHA: Exception during validation request.', [
+                'message' => $e->getMessage(),
+                'trace'   => $e->getTraceAsString(),
+            ]);
+
+            return false;
+        }
     }
 
     /**
@@ -115,7 +209,7 @@ class Captcha implements CaptchaContract
     public function getValidations($rules = []): array
     {
         return $this->isActive()
-            ? array_merge($rules, ['g-recaptcha-response' => 'required|captcha'])
+            ? array_merge($rules, ['recaptcha_token' => 'required|captcha'])
             : $rules;
     }
 
@@ -126,10 +220,24 @@ class Captcha implements CaptchaContract
     {
         return $this->isActive()
             ? array_merge($messages, [
-                'g-recaptcha-response.required' => trans('customer::app.validations.captcha.required'),
-                'g-recaptcha-response.captcha'  => trans('customer::app.validations.captcha.captcha'),
+                'recaptcha_token.required' => trans('customer::app.validations.captcha.required'),
+                'recaptcha_token.captcha'  => trans('customer::app.validations.captcha.captcha'),
             ])
             : $messages;
+    }
+
+    /**
+     * Initialize.
+     */
+    protected function initialize(): void
+    {
+        $this->projectId = $this->getProjectId();
+
+        $this->apiKey = $this->getApiKey();
+
+        $this->siteKey = $this->getSiteKey();
+
+        $this->scoreThreshold = $this->getScoreThreshold();
     }
 
     /**
@@ -138,8 +246,9 @@ class Captcha implements CaptchaContract
     protected function getAttributes(): array
     {
         return [
-            'class'        => 'g-recaptcha',
-            'data-sitekey' => $this->siteKey,
+            'id'   => 'recaptcha-token',
+            'name' => 'recaptcha_token',
+            'type' => 'hidden',
         ];
     }
 
@@ -182,6 +291,7 @@ class Captcha implements CaptchaContract
     {
         return view('customer::captcha.scripts', [
             'clientEndPoint' => $this->getClientEndpoint(),
+            'siteKey'        => $this->siteKey,
         ])->render();
     }
 }

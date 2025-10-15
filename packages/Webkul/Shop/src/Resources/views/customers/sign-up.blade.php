@@ -177,7 +177,7 @@
                         <x-shop::form.control-group>
                             {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
-                            <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                            <x-shop::form.control-group.error control-name="recaptcha_token" />
                         </x-shop::form.control-group>
                     @endif
 

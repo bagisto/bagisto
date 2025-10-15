@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google キャプチャ',
 
                     'credentials' => [
-                        'secret-key' => 'シークレットキー',
-                        'site-key'   => 'サイトキー',
-                        'status'     => 'ステータス',
-                        'title'      => '資格情報',
-                        'title-info' => '「サイトマップ: 検索エンジン用のウェブサイトのレイアウトマップ。シークレットキー: データの暗号化、認証、またはAPIアクセス保護のための安全なコード。」',
+                        'api-key'              => 'APIキー',
+                        'api-key-info'         => 'プロジェクトを作成した後、「APIs & Services」メニューの「認証情報」セクションに移動してAPIキーを作成する必要があります。',
+                        'project-id'           => 'プロジェクトID',
+                        'project-id-info'      => 'APIキーとシークレットキーを取得するには、Google Cloudコンソールでプロジェクトを作成する必要があります。',
+                        'score-threshold'      => 'スコアしきい値',
+                        'score-threshold-info' => 'reCAPTCHA v3のスコアしきい値を0.0から1.0の範囲で設定します。',
+                        'secret-key'           => 'シークレットキー',
+                        'site-key'             => 'サイトキー',
+                        'site-key-info'        => 'プロジェクトとAPIキーが作成されたら、ライブラリで「reCAPTCHA」サービスを検索し、「reCAPTCHA」キーを生成します。',
+                        'status'               => 'ステータス',
+                        'title'                => '認証情報',
+                        'title-info'           => 'APIキー、プロジェクトID、サイトキー、シークレットキーを含むGoogle reCAPTCHA認証情報を設定し、ステータスを有効または無効にします。',
                     ],
 
                     'validations' => [

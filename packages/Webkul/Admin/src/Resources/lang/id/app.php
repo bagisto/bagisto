@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Kunci Rahasia',
-                        'site-key'   => 'Kunci Situs',
-                        'status'     => 'Status',
-                        'title'      => 'Kredensial',
-                        'title-info' => '"Peta Situs: Peta tata letak situs untuk mesin pencari. Kunci rahasia: Kode aman untuk enkripsi data, otentikasi, atau perlindungan akses API."',
+                        'api-key'              => 'Kunci API',
+                        'api-key-info'         => 'Setelah membuat proyek, Anda perlu membuat kunci API dengan menavigasi ke bagian "Credentials" di menu "APIs & Services".',
+                        'project-id'           => 'ID Proyek',
+                        'project-id-info'      => 'Untuk mendapatkan kunci API dan kunci rahasia, Anda perlu membuat proyek di konsol Google Cloud.',
+                        'score-threshold'      => 'Ambang Skor',
+                        'score-threshold-info' => 'Tetapkan ambang skor untuk reCAPTCHA v3, berkisar dari 0.0 hingga 1.0.',
+                        'secret-key'           => 'Kunci Rahasia',
+                        'site-key'             => 'Kunci Situs',
+                        'site-key-info'        => 'Setelah proyek dan kunci API dibuat, cari layanan "reCAPTCHA" di perpustakaan dan hasilkan kunci "reCAPTCHA".',
+                        'status'               => 'Status',
+                        'title'                => 'Kredensial',
+                        'title-info'           => 'Tetapkan kredensial Google reCAPTCHA termasuk kunci API, ID Proyek, Kunci Situs, Kunci Rahasia, dan aktifkan atau nonaktifkan status.',
                     ],
 
                     'validations' => [

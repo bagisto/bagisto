@@ -1137,19 +1137,7 @@ return [
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.allow-back-orders',
                 'type'          => 'boolean',
                 'default',
-            ],
-            // [
-            //     'name'          => 'maximum_product',
-            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
-            //     'type'          => 'text',
-            //     'default'       => '10',
-            // ], [
-            //     'name'          => 'minimum_product',
-            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
-            //     'type'          => 'number',
-            //     'default'       => '0',
-            // ],
-            [
+            ], [
                 'name'          => 'out_of_stock_threshold',
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
                 'type'          => 'number',
@@ -1226,19 +1214,39 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'site_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
-                'name'          => 'secret_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
                 'name'          => 'status',
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.status',
                 'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'          => 'project_id',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.project-id',
+                'info'          => 'admin::app.configuration.index.customer.captcha.credentials.project-id-info',
+                'type'          => 'text',
+                'depends'       => 'status:1',
+                'channel_based' => true,
+            ], [
+                'name'          => 'api_key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.api-key',
+                'info'          => 'admin::app.configuration.index.customer.captcha.credentials.api-key-info',
+                'type'          => 'text',
+                'depends'       => 'status:1',
+                'channel_based' => true,
+            ], [
+                'name'          => 'site_key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
+                'info'          => 'admin::app.configuration.index.customer.captcha.credentials.site-key-info',
+                'type'          => 'text',
+                'depends'       => 'status:1',
+                'channel_based' => true,
+            ], [
+                'name'          => 'score_threshold',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold',
+                'info'          => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold-info',
+                'type'          => 'text',
+                'validation'    => 'decimal:1',
+                'default'       => '0.5',
+                'depends'       => 'status:1',
                 'channel_based' => true,
             ],
         ],
@@ -1248,22 +1256,7 @@ return [
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
         'sort' => 3,
-    ],
-    // [
-    //     'key'    => 'customer.settings.login_as_customer',
-    //     'name'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
-    //     'info'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title-info',
-    //     'sort'   => 1,
-    //     'fields' => [
-    //         [
-    //             'name'         => 'login',
-    //             'title'        => 'admin::app.configuration.index.customer.settings.login-as-customer.allow-option',
-    //             'type'         => 'boolean',
-    //             'default'      => 1,
-    //         ],
-    //     ],
-    // ],
-    [
+    ], [
         'key'    => 'customer.settings.wishlist',
         'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
         'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',

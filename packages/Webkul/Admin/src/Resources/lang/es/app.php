@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Clave Secreta',
-                        'site-key'   => 'Clave del Sitio',
-                        'status'     => 'Estado',
-                        'title'      => 'Credenciales',
-                        'title-info' => '"Mapa del sitio: Diseño del sitio web para motores de búsqueda. Clave secreta: Código seguro para cifrado de datos, autenticación o protección de acceso a la API."',
+                        'api-key'              => 'Clave API',
+                        'api-key-info'         => 'Después de crear el proyecto, debe crear las claves API navegando a la sección "Credenciales" en el menú "APIs y servicios".',
+                        'project-id'           => 'ID del proyecto',
+                        'project-id-info'      => 'Para obtener la clave API y la clave secreta, debe crear un proyecto en la consola de Google Cloud.',
+                        'score-threshold'      => 'Umbral de puntuación',
+                        'score-threshold-info' => 'Establezca el umbral de puntuación para reCAPTCHA v3, que va de 0.0 a 1.0.',
+                        'secret-key'           => 'Clave secreta',
+                        'site-key'             => 'Clave del sitio',
+                        'site-key-info'        => 'Una vez creado el proyecto y la clave API, busque el servicio "reCAPTCHA" en la biblioteca y genere las claves de "reCAPTCHA".',
+                        'status'               => 'Estado',
+                        'title'                => 'Credenciales',
+                        'title-info'           => 'Configure las credenciales de Google reCAPTCHA, incluida la clave API, el ID del proyecto, la clave del sitio, la clave secreta y habilite o deshabilite el estado.',
                     ],
 
                     'validations' => [

@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Klucz tajny',
-                        'site-key'   => 'Klucz witryny',
-                        'status'     => 'Status',
-                        'title'      => 'Dane uwierzytelniające',
-                        'title-info' => '"Mapa witryny: Mapa układu witryny dla wyszukiwarek. Klucz tajny: Bezpieczny kod do szyfrowania danych, uwierzytelniania lub ochrony dostępu do interfejsu API."',
+                        'api-key'              => 'Klucz API',
+                        'api-key-info'         => 'Po utworzeniu projektu musisz utworzyć klucze API, przechodząc do sekcji "Dane logowania" w menu "API i usługi".',
+                        'project-id'           => 'ID projektu',
+                        'project-id-info'      => 'Aby uzyskać klucz API i klucz tajny, musisz utworzyć projekt w konsoli Google Cloud.',
+                        'score-threshold'      => 'Próg wyniku',
+                        'score-threshold-info' => 'Ustaw próg wyniku dla reCAPTCHA v3, w zakresie od 0.0 do 1.0.',
+                        'secret-key'           => 'Klucz tajny',
+                        'site-key'             => 'Klucz witryny',
+                        'site-key-info'        => 'Po utworzeniu projektu i klucza API wyszukaj usługę "reCAPTCHA" w bibliotece i wygeneruj klucze "reCAPTCHA".',
+                        'status'               => 'Status',
+                        'title'                => 'Dane logowania',
+                        'title-info'           => 'Ustaw dane logowania Google reCAPTCHA, w tym klucz API, ID projektu, klucz witryny, klucz tajny oraz włącz lub wyłącz status.',
                     ],
 
                     'validations' => [
