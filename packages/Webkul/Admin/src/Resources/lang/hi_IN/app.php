@@ -4900,6 +4900,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'फ़ाइल एक्सटेंशन फ़ाइल प्रकार से मेल नहीं खाता।',
+                'file-upload-failed'             => 'फ़ाइल अपलोड विफल रहा।',
+                'http-error'                     => 'HTTP त्रुटि।',
+                'invalid-file-type'              => 'अमान्य फ़ाइल प्रकार। अनुमत प्रकार: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'अमान्य JSON।',
+                'no-file-uploaded'               => 'कोई फ़ाइल अपलोड नहीं की गई।',
+                'upload-failed'                  => 'XHR ट्रांसपोर्ट त्रुटि के कारण छवि अपलोड विफल रहा।',
+            ],
         ],
     ],
 

@@ -4900,6 +4900,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'پسوند فایل با نوع فایل مطابقت ندارد.',
+                'file-upload-failed'             => 'بارگذاری فایل ناموفق بود.',
+                'http-error'                     => 'خطای HTTP.',
+                'invalid-file-type'              => 'نوع فایل نامعتبر است. انواع مجاز: JPEG، PNG، GIF، WebP، SVG',
+                'invalid-json'                   => 'JSON نامعتبر.',
+                'no-file-uploaded'               => 'هیچ فایلی بارگذاری نشد.',
+                'upload-failed'                  => 'بارگذاری تصویر به دلیل خطای انتقال XHR ناموفق بود.',
+            ],
         ],
     ],
 
