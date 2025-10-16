@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
+* #10846 [Fixed] - Quantity in wishlist is not updated when moving the same product from cart to wishlist.
+
 * Improved octane compatibility.
 
 * Added the missing captcha on the checkout login page.
