@@ -1,26 +1,20 @@
 # UPGRADE Guide
 
-- [Upgrading To v2.3 From v2.2](#upgrading-to-v23-from-v22)
+- [Upgrading To v2.4 From v2.3](#upgrading-to-v24-from-v23)
 
 ## High Impact Changes
 
-- [Updating Dependencies](#updating-dependencies)
-
-- [Application Structure](#application-structure)
+- [Google reCAPTCHA Enterprise Integration](#google-recaptcha-enterprise-integration)
 
 ## Medium Impact Changes
 
-- [Environment Keys Changes](#environment-keys-changes)
+- Soon.
 
 ## Low Impact Changes
 
-- [Removed Publishable Stuffs](#removed-publishable-stuffs)
+- Soon.
 
-- [Removal of Aliases and Singleton Facade Registry](#removal-of-aliases-and-singleton-facade-registry)
-
-- [Schedule Commands Moved To Package](#schedule-commands-moved-to-package)
-
-## Upgrading To v2.3 From v2.2
+## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
@@ -29,256 +23,142 @@
 
 **Impact Probability: High**
 
-#### PHP 8.2.0 Required
+#### PHP 8.3 Required
 
-We have upgraded to Laravel 11 and Laravel now requires PHP 8.2.0 or greater.
+Bagisto v2.4.x now requires PHP 8.3 or greater.
 
-#### Composer Dependencies
-
-We have handled most of the dependencies mentioned by Laravel, so there is no need for further action on your part. 
-
-#### NPM Depenencies
-
-We have upgraded the NPM dependencies to Vite 5 and the Laravel Vite Plugin to version 1.0. This update will not affect your work unless you are working directly on the package. In that case, you need to rename the file postcss.config.js to postcss.config.cjs. Below are the changes required in your package file:
-
-```diff
-- module.exports = {
--  plugins: {
--    tailwindcss: {},
--    autoprefixer: {},
--  },
-- }
-
-+ module.exports = ({ env }) => ({
-+     plugins: [require("tailwindcss")(), require("autoprefixer")()],
-+ });
-```
-
-### Application Structure
+### Google reCAPTCHA Enterprise Integration
 
 **Impact Probability: High**
 
-With Laravel 11, a new default application structure has been introduced, resulting in a leaner setup with fewer default files. This update reduces the number of service providers, middleware, and configuration files in the framework.
+Bagisto v2.4 has migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise, which introduces significant changes to the implementation and configuration.
 
-Since Bagisto is built on top of Laravel, we have also updated Bagisto to Laravel 11 and adopted the same streamlined approach to maintain compatibility. For more detailed information, please refer to the [Laravel documentation](https://laravel.com/docs/11.x). 
+#### Configuration Changes
 
-### Environment Keys Changes
+The following configuration keys have changed:
 
-**Impact Probability: Medium**
+**v2.3 Configuration:**
+- `customer.captcha.credentials.site_key`
+- `customer.captcha.credentials.secret_key`
 
-We have synchronized most of the new .env keys introduced in Laravel's latest release (version 11). Below, we have listed only the keys that have been newly added or had their names changed in this version.
+**v2.4 Configuration:**
+- `customer.captcha.credentials.site_key`
+- `customer.captcha.credentials.project_id` (new)
+- `customer.captcha.credentials.api_key` (replaces secret_key)
+- `customer.captcha.credentials.score_threshold` (new)
 
-```diff
-- CACHE_DRIVER=file
-+ CACHE_STORE=file
+#### API Endpoint Changes
 
-- BROADCAST_DRIVER=log
-+ BROADCAST_CONNECTION=log
+**v2.3:**
+- Used standard reCAPTCHA v2 verification endpoint.
 
-- QUEUE_DRIVER=sync
-+ QUEUE_CONNECTION=database
+**v2.4:**
+- Now uses Google reCAPTCHA Enterprise API: `https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments`.
+- Requires a valid Google Cloud Project ID.
+
+#### Form Field Changes
+
+The captcha token field name has changed:
+
+**v2.3:**
+```php
+'g-recaptcha-response' => 'required|captcha'
 ```
 
-Additionally, the following keys have been removed to prevent the `.env` file from becoming unnecessarily large. These keys are not required unless the related services are being used. In a fresh installation of Bagisto, these keys will not be present by default; you will need to add them manually if you plan to use the corresponding services.
-
-```diff
-- FIXER_API_KEY=
-- EXCHANGE_RATES_API_KEY=
-- EXCHANGE_RATES_API_ENDPOINT=
-
-- PUSHER_APP_ID=
-- PUSHER_APP_KEY=
-- PUSHER_APP_SECRET=
-- PUSHER_APP_CLUSTER=mt1
-
-- MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-- MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
-
-- FACEBOOK_CLIENT_ID=
-- FACEBOOK_CLIENT_SECRET=
-- FACEBOOK_CALLBACK_URL=https://yourhost.com/customer/social-login/facebook/callback
-
-- TWITTER_CLIENT_ID=
-- TWITTER_CLIENT_SECRET=
-- TWITTER_CALLBACK_URL=https://yourhost.com/customer/social-login/twitter/callback
-
-- GOOGLE_CLIENT_ID=
-- GOOGLE_CLIENT_SECRET=
-- GOOGLE_CALLBACK_URL=https://yourhost.com/customer/social-login/google/callback
-
-- LINKEDIN_CLIENT_ID=
-- LINKEDIN_CLIENT_SECRET=
-- LINKEDIN_CALLBACK_URL=https://yourhost.com/customer/social-login/linkedin-openid/callback
-
-- GITHUB_CLIENT_ID=
-- GITHUB_CLIENT_SECRET=
-- GITHUB_CALLBACK_URL=https://yourhost.com/customer/social-login/github/callback
+**v2.4:**
+```php
+'recaptcha_token' => 'required|captcha'
 ```
 
-### Removal of Aliases and Singleton Facade Registry
+#### Migration Steps
 
-**Impact Probability: Low**
+1. **Update Configuration:**
 
-We have removed all aliases and the singleton facade registry. This change was made because facades are inherently singletons, making the additional registry unnecessary.
+    Here are the details for updating the configuration to support Google reCAPTCHA Enterprise in Bagisto v2.4. You will need to update the configuration with the new keys and values as described below.
 
-#### Using Helper Methods Instead of Aliases
+   **Obtain Google Cloud Project ID:**
+   - Visit [Google Cloud Console](https://console.cloud.google.com/).
+   - Create a new project or select an existing one from the project dropdown.
+   - Note your Project ID from the project dashboard (not the project name).
 
-We now strongly recommend using our helper methods instead of relying on aliases. This approach provides better IDE support, type hinting, and makes the code more explicit and easier to understand.
+   **Generate API Key:**
+   - In Google Cloud Console, navigate to **APIs & Services → Credentials**.
+   - Click **Create Credentials → API Key**.
+   - Copy the generated API key.
 
-Instead of:
+   **Create reCAPTCHA Site Key:**
+   - Navigate to **Security → reCAPTCHA** in Google Cloud Console.
+   - Click **Create Key**.
+   - Enter a display name for your key.
+   - Select **Website** as the platform type.
+   - Choose **Score-based (reCAPTCHA v3)** as the reCAPTCHA type.
+   - Add your domain(s) in the **Domains** section (e.g., `example.com`).
+   - Click **Create** and copy the generated site key.
 
-```diff
-- app('core')->getAllChannels()
+   **Configure in Bagisto Admin Panel:**
+   - Log in to your Bagisto admin panel.
+   - Navigate to **Configuration → Customer → Captcha**.
+   - Set **Status** to **Yes** to enable captcha.
+   - Enter your **Project ID** (from step 1).
+   - Enter your **API Key** (from step 2).
+   - Enter your **Site Key** (from step 3).
+   - Set **Score Threshold** (0.0 to 1.0, recommended: 0.5 for balanced security).
+   - Click **Save Configuration**.
+
+2. **Update Form Submissions:**
+   - Replace `g-recaptcha-response` field name with `recaptcha_token` in all forms using captcha.
+   - Update any custom validation rules referencing the old field name.
+
+3. **Update Frontend Implementation:**
+   - The captcha now renders as a hidden field instead of a visible checkbox.
+   - Update your frontend JavaScript to handle the new implementation.
+   - The captcha client endpoint remains similar but uses Enterprise version: `https://www.google.com/recaptcha/enterprise.js`.
+
+4. **Review Validation Messages:**
+   - Translation keys remain the same (`customer::app.validations.captcha.required` and `customer::app.validations.captcha.captcha`).
+   - No changes required to translation files.
+
+#### Behavioral Changes
+
+**v2.3:**
+- Used checkbox-based reCAPTCHA v2.
+- Binary pass/fail validation.
+
+**v2.4:**
+- Uses invisible reCAPTCHA Enterprise.
+- Risk-based scoring system (0.0 to 1.0).
+- Validation passes only if score >= configured threshold.
+- Enhanced logging for debugging.
+
+#### Code Example
+
+If you have custom implementations using the Captcha class:
+
+**v2.3:**
+```php
+// Old implementation
+$captcha->getSecretKey();
+
+$rules = ['g-recaptcha-response' => 'required|captcha'];
 ```
 
-Use:
-
-```diff
-+ core()->getAllChannels(); // Recommended
+**v2.4:**
+```php
+// New implementation
+$captcha->getProjectId();
+$captcha->getApiKey();
+$captcha->getScoreThreshold();
+$rules = ['recaptcha_token' => 'required|captcha'];
 ```
 
-OR
+#### Troubleshooting
 
-```diff
-+ use Webkul\Core\Facades\Core;
+The new implementation includes comprehensive logging. Check your logs for:
+- `reCAPTCHA: Validation failed.` - Configuration or token issues.
+- `reCAPTCHA: Assessment response received.` - Successful API communication.
+- `reCAPTCHA: Validation result.` - Score and threshold comparison.
 
-+ Core::getAllChannels();
-```
-
-> [!NOTE]
-> Did you noticed, in the newer version of Bagisto, we have replaced all alias references with full namespaces.
-
-This change applies to all our helper methods, not just `core()`. Always prefer the helper method if one is available.
-
-### Removed Publishable Stuffs
-
-**Impact Probability: Low**
-
-We have removed all the publishable registries from the service provider, and we are no longer publishing any files. Previously, configuration files were often published manually. However, with this update, most of the configuration files have been moved directly into the default config folder, simplifying the structure and eliminating the need for manual publishing.
-
-For instance, if you look at the **Core** package, there were previously four configuration files located in the `Config` folder of the package:
-
-```diff
-- packages/Webkul/Core/src/Config/*.php
-```
-
-These configuration files have now been moved to the root `config` folder:
-
-```diff
-+ config/*.php
-```
-
-This change consolidates the configuration files into a central location, following Laravel 11's convention and eliminating the need for separate publishable registries.
-
-### Schedule Commands Moved To Package
-
-**Impact Probability: Low**
-
-All scheduled commands previously registered in the Kernel have now been moved to their respective packages. Since each command belongs to a specific package, it is more appropriate for the package itself to handle its own commands. Therefore, each individual package is now responsible for registering its respective commands.
-
-```diff
-- $schedule->command('invoice:cron')->dailyAt('3:00');
-- $schedule->command('indexer:index --type=price')->dailyAt('00:01');
-- $schedule->command('product:price-rule:index')->dailyAt('00:01');
-
-+ // Core Package
-+ $schedule->command('invoice:cron')->dailyAt('3:00');
-
-+ // Product Package
-+ $schedule->command('indexer:index --type=price')->dailyAt('00:01');
-
-+ // CatalogRule Package
-+ $schedule->command('product:price-rule:index')->dailyAt('00:01');
-```
-
-### Packages
-
-Below are the specific changes we have implemented in each package:
-
-#### Core
-
-##### Unwanted Files Removed
-
-The following files have been removed as they are no longer needed:
-
-**Impact Probability: Low**
-
-- Configs
-
-```diff
-- src/Config/concord.php
-- src/Config/elasticsearch.php
-- src/Config/repository.php
-- src/Config/visitor.php
-```
-
-- Commands
-
-```diff
-- src/Console/Commands/BagistoPublish.php
-- src/Console/Commands/DownChannelCommand.php
-- src/Console/Commands/UpChannelCommand.php
-```
-
-These files have been deemed unnecessary in the current structure, streamlining the codebase and reducing clutter
-
-##### Exception Handler
-
-**Impact Probability: Low**
-
-n Bagisto, we have overridden the default Laravel 11 exception handler. Since the Laravel 11 application skeleton is now empty, we need to override the core Laravel exception handler instead of using the handler within the app directory.
-
-Additionally, the access modifiers for some of our methods have been updated.
-
-```diff
-- private function handleAuthenticationException(): void
-+ protected function handleAuthenticationException(): void
-
-- private function handleHttpException(): void
-+ protected function handleHttpException(): void
-
-- private function handleValidationException(): void
-+ protected function handleValidationException(): void
-
-- private function handleServerException(): void
-+ protected function handleServerException(): void
-```
-
-##### Maintenance Mode Middleware
-
-**Impact Probability: Low**
-
-The `CheckForMaintenanceMode` class has been removed, and a new class, `PreventRequestsDuringMaintenance`, has been introduced. In Laravel, `PreventRequestsDuringMaintenance` middleware is applied at the global level. However, in Bagisto, we have removed the middleware from the global scope and applied it at the route level.
-
-The reason for this change is that we need to display customized pages based on the current theme, and if the middleware is applied globally, the theme may not be accessible, resulting an error.
-
-```diff
-- CheckForMaintenanceMode.php
-
-+ PreventRequestsDuringMaintenance.php
-```
-
-#### DataGrid
-
-##### The `Webkul\DataGrid\DataGrid` Class
-
-**Impact Probability: Medium**
-
-1. Moved the `DataGridExport` class to the DataGrid package and enhanced the new exporter class with the `WithQuery` interface instead of `WithView`. This change reduces the need for temporary file creation.
-
-2. We have removed the `exportFile` properties and all its associated method i.e. `setExportFile` and `getExportFile`,
-
-```diff
-- protected mixed $exportFile = null;
-- public function setExportFile($format = 'csv')
-- public function getExportFile()
-```
-
-3. We have removed two methods: `processPaginatedRequest` and `processExportRequest`.
-
-```diff
-- $this->processPaginatedRequest();
-- $this->processExportRequest();
-```
-
-4. Removed all the events from the setter methods to avoid duplicate dispatching.
+Ensure your Google Cloud Project has:
+- reCAPTCHA Enterprise API enabled.
+- Valid API key with proper permissions.
+- Site key configured for your domain.
