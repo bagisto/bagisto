@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.8 (16th of October 2025)** - *Release*
 
 * Improved octane compatibility.
 
