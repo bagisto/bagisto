@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google 验证码',
 
                     'credentials' => [
-                        'secret-key' => '密钥',
-                        'site-key'   => '站点密钥',
-                        'status'     => '状态',
-                        'title'      => '凭证',
-                        'title-info' => '“站点地图：网站布局地图，供搜索引擎使用。密钥：用于数据加密、认证或API访问保护的安全代码。”',
+                        'api-key'              => 'API密钥',
+                        'api-key-info'         => '创建项目后，您需要导航到"APIs & Services"菜单中的"Credentials"部分来创建API密钥。',
+                        'project-id'           => '项目ID',
+                        'project-id-info'      => '要获取API密钥和密钥，您需要在Google Cloud控制台中创建一个项目。',
+                        'score-threshold'      => '分数阈值',
+                        'score-threshold-info' => '设置reCAPTCHA v3的分数阈值，范围从0.0到1.0。',
+                        'secret-key'           => '密钥',
+                        'site-key'             => '站点密钥',
+                        'site-key-info'        => '创建项目和API密钥后，在库中搜索"reCAPTCHA"服务并生成"reCAPTCHA"密钥。',
+                        'status'               => '状态',
+                        'title'                => '凭据',
+                        'title-info'           => '设置Google reCAPTCHA凭据，包括API密钥、项目ID、站点密钥、密钥，并启用或禁用状态。',
                     ],
 
                     'validations' => [

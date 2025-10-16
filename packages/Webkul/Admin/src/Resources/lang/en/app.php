@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Secret Key',
-                        'site-key'   => 'Site Key',
-                        'status'     => 'Status',
-                        'title'      => 'Credentials',
-                        'title-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
+                        'api-key'              => 'API Key',
+                        'api-key-info'         => 'After creating the project, you need to create the API keys by navigating to the "Credentials" section in the "APIs & Services" menu.',
+                        'project-id'           => 'Project ID',
+                        'project-id-info'      => 'To obtain the API key and secret key, you need to create a project in the Google Cloud console.',
+                        'score-threshold'      => 'Score Threshold',
+                        'score-threshold-info' => 'Set the score threshold for reCAPTCHA v3, ranging from 0.0 to 1.0.',
+                        'secret-key'           => 'Secret Key',
+                        'site-key'             => 'Site Key',
+                        'site-key-info'        => 'Once the project and API key have been created, search for the "reCAPTCHA" service in the library and generate the "reCAPTCHA" keys.',
+                        'status'               => 'Status',
+                        'title'                => 'Credentials',
+                        'title-info'           => 'Set Google reCAPTCHA credentials including API key, Project ID, Site Key, Secret Key, and enable or disable the status.',
                     ],
 
                     'validations' => [

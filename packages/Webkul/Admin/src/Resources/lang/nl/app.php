@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Geheime Sleutel',
-                        'site-key'   => 'Site Sleutel',
-                        'status'     => 'Status',
-                        'title'      => 'Referenties',
-                        'title-info' => '"Sitemap: Website lay-outkaart voor zoekmachines. Geheime sleutel: Beveiligingscode voor gegevensversleuteling, authenticatie of API-toegangsbeveiliging."',
+                        'api-key'              => 'API-sleutel',
+                        'api-key-info'         => 'Na het aanmaken van het project moet u de API-sleutels aanmaken door naar de sectie "Inloggegevens" in het menu "API\'s en services" te navigeren.',
+                        'project-id'           => 'Project-ID',
+                        'project-id-info'      => 'Om de API-sleutel en geheime sleutel te verkrijgen, moet u een project aanmaken in de Google Cloud-console.',
+                        'score-threshold'      => 'Scoredrempel',
+                        'score-threshold-info' => 'Stel de scoredrempel in voor reCAPTCHA v3, variërend van 0.0 tot 1.0.',
+                        'secret-key'           => 'Geheime sleutel',
+                        'site-key'             => 'Sitesleutel',
+                        'site-key-info'        => 'Nadat het project en de API-sleutel zijn aangemaakt, zoekt u naar de "reCAPTCHA"-service in de bibliotheek en genereert u de "reCAPTCHA"-sleutels.',
+                        'status'               => 'Status',
+                        'title'                => 'Inloggegevens',
+                        'title-info'           => 'Stel Google reCAPTCHA-inloggegevens in, inclusief API-sleutel, project-ID, sitesleutel, geheime sleutel en schakel de status in of uit.',
                     ],
 
                     'validations' => [

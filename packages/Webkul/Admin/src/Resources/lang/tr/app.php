@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Gizli Anahtar',
-                        'site-key'   => 'Site Anahtarı',
-                        'status'     => 'Durum',
-                        'title'      => 'Kimlik Bilgileri',
-                        'title-info' => '"Site haritası: Arama motorları için web sitesi düzen haritası. Gizli anahtar: Veri şifreleme, kimlik doğrulama veya API erişim koruması için güvenli kod."',
+                        'api-key'              => 'API Anahtarı',
+                        'api-key-info'         => 'Projeyi oluşturduktan sonra, "APIs & Services" menüsündeki "Credentials" bölümüne giderek API anahtarlarını oluşturmanız gerekir.',
+                        'project-id'           => 'Proje Kimliği',
+                        'project-id-info'      => 'API anahtarını ve gizli anahtarı almak için Google Cloud konsolunda bir proje oluşturmanız gerekir.',
+                        'score-threshold'      => 'Skor Eşiği',
+                        'score-threshold-info' => 'reCAPTCHA v3 için skor eşiğini 0.0 ile 1.0 arasında ayarlayın.',
+                        'secret-key'           => 'Gizli Anahtar',
+                        'site-key'             => 'Site Anahtarı',
+                        'site-key-info'        => 'Proje ve API anahtarı oluşturulduktan sonra, kütüphanede "reCAPTCHA" hizmetini arayın ve "reCAPTCHA" anahtarlarını oluşturun.',
+                        'status'               => 'Durum',
+                        'title'                => 'Kimlik Bilgileri',
+                        'title-info'           => 'API anahtarı, Proje Kimliği, Site Anahtarı, Gizli Anahtar dahil olmak üzere Google reCAPTCHA kimlik bilgilerini ayarlayın ve durumu etkinleştirin veya devre dışı bırakın.',
                     ],
 
                     'validations' => [

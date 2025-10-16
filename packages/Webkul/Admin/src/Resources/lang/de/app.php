@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Geheimer Schlüssel',
-                        'site-key'   => 'Site-Schlüssel',
-                        'status'     => 'Status',
-                        'title'      => 'Anmeldeinformationen',
-                        'title-info' => '"Sitemap: Website-Layout-Karte für Suchmaschinen. Geheimer Schlüssel: Sicherer Code für die Verschlüsselung, Authentifizierung oder den Schutz des API-Zugriffs."',
+                        'api-key'              => 'API-Schlüssel',
+                        'api-key-info'         => 'Nach dem Erstellen des Projekts müssen Sie die API-Schlüssel erstellen, indem Sie zum Abschnitt "Anmeldedaten" im Menü "APIs & Dienste" navigieren.',
+                        'project-id'           => 'Projekt-ID',
+                        'project-id-info'      => 'Um den API-Schlüssel und den geheimen Schlüssel zu erhalten, müssen Sie ein Projekt in der Google Cloud-Konsole erstellen.',
+                        'score-threshold'      => 'Punkteschwelle',
+                        'score-threshold-info' => 'Legen Sie die Punkteschwelle für reCAPTCHA v3 fest, die von 0.0 bis 1.0 reicht.',
+                        'secret-key'           => 'Geheimer Schlüssel',
+                        'site-key'             => 'Site-Schlüssel',
+                        'site-key-info'        => 'Nachdem das Projekt und der API-Schlüssel erstellt wurden, suchen Sie in der Bibliothek nach dem "reCAPTCHA"-Dienst und generieren Sie die "reCAPTCHA"-Schlüssel.',
+                        'status'               => 'Status',
+                        'title'                => 'Anmeldedaten',
+                        'title-info'           => 'Legen Sie Google reCAPTCHA-Anmeldedaten fest, einschließlich API-Schlüssel, Projekt-ID, Site-Schlüssel, geheimer Schlüssel und aktivieren oder deaktivieren Sie den Status.',
                     ],
 
                     'validations' => [

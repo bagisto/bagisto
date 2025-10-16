@@ -4203,11 +4203,18 @@ return [
                     'title' => 'Google קפצ',
 
                     'credentials' => [
-                        'secret-key' => 'מפתח סודי',
-                        'site-key'   => 'מפתח אתר',
-                        'status'     => 'מצב',
-                        'title'      => 'פרטי גישה',
-                        'title-info' => '"מפתח סודי: קוד מאובטח להצפנת נתונים, אימות או הגנת גישה ל- API."',
+                        'api-key'              => 'מפתח API',
+                        'api-key-info'         => 'לאחר יצירת הפרויקט, עליך ליצור את מפתחות ה-API על ידי ניווט לקטע "אישורים" בתפריט "APIs ושירותים".',
+                        'project-id'           => 'מזהה פרויקט',
+                        'project-id-info'      => 'כדי לקבל את מפתח ה-API ואת המפתח הסודי, עליך ליצור פרויקט בקונסולת Google Cloud.',
+                        'score-threshold'      => 'סף ציון',
+                        'score-threshold-info' => 'הגדר את סף הציון עבור reCAPTCHA v3, בטווח של 0.0 עד 1.0.',
+                        'secret-key'           => 'מפתח סודי',
+                        'site-key'             => 'מפתח אתר',
+                        'site-key-info'        => 'לאחר שהפרויקט ומפתח ה-API נוצרו, חפש את שירות "reCAPTCHA" בספרייה וצור את מפתחות "reCAPTCHA".',
+                        'status'               => 'סטטוס',
+                        'title'                => 'אישורים',
+                        'title-info'           => 'הגדר את אישורי Google reCAPTCHA כולל מפתח API, מזהה פרויקט, מפתח אתר, מפתח סודי והפעל או השבת את הסטטוס.',
                     ],
 
                     'validations' => [

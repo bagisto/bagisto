@@ -4202,11 +4202,18 @@ return [
                     'title' => 'Captcha',
 
                     'credentials' => [
-                        'secret-key' => 'Clau secreta',
-                        'site-key'   => 'Clau del lloc',
-                        'status'     => 'Estat',
-                        'title'      => 'Credencials',
-                        'title-info' => '"Mapa del lloc: Disseny del lloc web per a motors de cerca. Clau secreta: Codi segur per a la xifratge de dades, autenticació o protecció d\'accés a l\'API."',
+                        'api-key'              => 'Clau API',
+                        'api-key-info'         => 'Després de crear el projecte, heu de crear les claus API navegant a la secció "Credencials" del menú "APIs i serveis".',
+                        'project-id'           => 'ID del projecte',
+                        'project-id-info'      => 'Per obtenir la clau API i la clau secreta, heu de crear un projecte a la consola de Google Cloud.',
+                        'score-threshold'      => 'Llindar de puntuació',
+                        'score-threshold-info' => 'Estableix el llindar de puntuació per a reCAPTCHA v3, que va de 0.0 a 1.0.',
+                        'secret-key'           => 'Clau secreta',
+                        'site-key'             => 'Clau del lloc',
+                        'site-key-info'        => 'Un cop creat el projecte i la clau API, cerca el servei "reCAPTCHA" a la biblioteca i genera les claus de "reCAPTCHA".',
+                        'status'               => 'Estat',
+                        'title'                => 'Credencials',
+                        'title-info'           => 'Configura les credencials de Google reCAPTCHA, incloent-hi la clau API, l\'ID del projecte, la clau del lloc, la clau secreta i activa o desactiva l\'estat.',
                     ],
 
                     'validations' => [
