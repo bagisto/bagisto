@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
+* #10866 [Fixed] - Product Carousel Theme Filter: Attribute Value Dropdown Not Showing Options for Custom Attributes.
+
 * Improved octane compatibility.
 
 * Added the missing captcha on the checkout login page.

@@ -153,7 +153,16 @@ class AttributeRepository extends Repository
      */
     public function getFilterableAttributes()
     {
-        return $this->model->where('is_filterable', 1)->get();
+        return $this->model->where('is_filterable', 1)
+            ->with([
+                'options' => function ($query) {
+                    $query->orderBy('sort_order');
+                },
+                'options.translation' => function ($q) {
+                    $q->where('locale', core()->getCurrentLocale()->code);
+                },
+            ])
+            ->get();
     }
 
     /**
