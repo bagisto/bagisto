@@ -1,0 +1,11 @@
+{
+  "src/Resources/assets/images/razorpay.png": {
+    "file": "assets/razorpay-e1aaa324.png",
+    "src": "src/Resources/assets/images/razorpay.png"
+  },
+  "src/Resources/assets/js/app.js": {
+    "file": "assets/app-4ed993c7.js",
+    "isEntry": true,
+    "src": "src/Resources/assets/js/app.js"
+  }
+}
