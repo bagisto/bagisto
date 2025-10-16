@@ -31,6 +31,6 @@ class RazorpayPayment extends Payment
     {
         $url = $this->getConfigData('image');
 
-        return $url ? Storage::url($url) :  bagisto_asset('images/razorpay.png', 'razorpay');
+        return $url ? Storage::url($url) :  bagisto_asset('images/razorpay.png', 'shop');
     }
 }
