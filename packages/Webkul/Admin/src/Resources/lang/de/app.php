@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'Alle Gruppen',
                         'create-btn'                => 'Neu hinzufügen',
                         'discount-group-price-info' => 'Für :price Rabatt ab :qty Stück',
+                        'duplicate-error'           => 'Ein Rabatt für diese Kundengruppe mit der gleichen Menge existiert bereits.',
                         'edit-btn'                  => 'Bearbeiten',
                         'empty-info'                => 'Sonderpreise für Kunden in einer bestimmten Gruppe.',
                         'fixed-group-price-info'    => 'Für :qty Stück zum Festpreis von :price',

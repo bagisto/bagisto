@@ -835,6 +835,7 @@ return [
                         'all-groups'                => 'כל הקבוצות',
                         'create-btn'                => 'הוסף חדש',
                         'discount-group-price-info' => 'עבור כמות :price בהנחה של :qty',
+                        'duplicate-error'           => 'כבר קיימת הנחה לקבוצת לקוחות זו עם אותה כמות.',
                         'edit-btn'                  => 'ערוך',
                         'empty-info'                => 'מחיר מיוחד ללקוחות שנמצאים בקבוצה ספציפית.',
                         'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',

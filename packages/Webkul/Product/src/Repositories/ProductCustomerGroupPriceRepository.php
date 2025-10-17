@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Database\QueryException;
 
 class ProductCustomerGroupPriceRepository extends Repository
 {
@@ -23,6 +24,8 @@ class ProductCustomerGroupPriceRepository extends Repository
     {
         $previousCustomerGroupPriceIds = $product->customer_group_prices()->pluck('id');
 
+        $processedUniqueIds = [];
+
         if (isset($data['customer_group_prices'])) {
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
                 $row['customer_group_id'] = $row['customer_group_id'] == '' ? null : $row['customer_group_id'];
@@ -33,13 +36,51 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $row['customer_group_id'],
                 ]));
 
+                if (in_array($row['unique_id'], $processedUniqueIds)) {
+                    throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                }
+
+                $processedUniqueIds[] = $row['unique_id'];
+
                 if (Str::contains($customerGroupPriceId, 'price_')) {
-                    $this->create(array_merge([
+                    $existingPrice = $this->findOneWhere([
+                        'unique_id' => $row['unique_id'],
                         'product_id' => $product->id,
-                    ], $row));
+                    ]);
+
+                    // If an existing price with same unique_id exists and it's marked for deletion, delete it first
+                    if ($existingPrice && $previousCustomerGroupPriceIds->contains($existingPrice->id)) {
+                        $this->delete($existingPrice->id);
+                        $previousCustomerGroupPriceIds = $previousCustomerGroupPriceIds->reject(fn($id) => $id == $existingPrice->id);
+                    } elseif ($existingPrice) {
+                        // Only throw error if the existing price is not in the list of prices to be deleted
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                    }
+
+                    try {
+                        $this->create(array_merge([
+                            'product_id' => $product->id,
+                        ], $row));
+                    } catch (QueryException $e) {
+                        if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                            throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
+                        }
+
+                        throw $e;
+                    }
                 } else {
                     if (is_numeric($index = $previousCustomerGroupPriceIds->search($customerGroupPriceId))) {
                         $previousCustomerGroupPriceIds->forget($index);
+                    }
+
+                    // Check if updating would create a duplicate with another existing record
+                    $existingPrice = $this->findOneWhere([
+                        'unique_id' => $row['unique_id'],
+                        'product_id' => $product->id,
+                    ]);
+
+                    if ($existingPrice && $existingPrice->id != $customerGroupPriceId) {
+                        throw new \Exception(trans('admin::app.catalog.products.edit.price.group.duplicate-error'));
                     }
 
                     $this->update($row, $customerGroupPriceId);
