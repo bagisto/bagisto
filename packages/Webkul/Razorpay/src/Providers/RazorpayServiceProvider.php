@@ -20,10 +20,6 @@ class RazorpayServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'razorpay');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'razorpay');
-
-        $this->publishes([
-            __DIR__ .'/../../publishable/build' => public_path('themes/razorpay/build')
-        ], 'public');
     }
 
     /**
@@ -51,11 +47,6 @@ class RazorpayServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/paymentmethods.php', 
             'payment_methods'
-        );
-
-        $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/vite.php',
-            'bagisto-vite.viters'
         );
     }
 }
