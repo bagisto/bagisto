@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #10846 [Fixed] - Quantity in wishlist is not updated when moving the same product from cart to wishlist.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
