@@ -58,7 +58,11 @@ export default {
                 return true;
             }
 
-            if (! /^\+?\d+$/.test(value)) {
+            const trimmed = String(value).trim();
+
+            if (! trimmed.length) return true;
+
+            if (!/^\+?\d+$/.test(trimmed)) {
                 return false;
             }
 
@@ -86,7 +90,11 @@ export default {
                 return true;
             }
 
-            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(value)) {
+            const trimmed = String(value).trim();
+
+            if (! trimmed.length) return true;
+
+            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(trimmed)) {
                 return false;
             }
 
