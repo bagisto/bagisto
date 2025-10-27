@@ -170,6 +170,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Filters Illustration -->
                 <div
                     class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
@@ -346,7 +347,7 @@
                 if (this.options === null) {
                     this.options = { filters: {} };
                 }
-                
+
                 if (! this.options.filters) {
                     this.options.filters = {};
                 }

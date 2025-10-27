@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #10866 [Fixed] - Product Carousel Theme Filter: Attribute Value Dropdown Not Showing Options for Custom Attributes.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
