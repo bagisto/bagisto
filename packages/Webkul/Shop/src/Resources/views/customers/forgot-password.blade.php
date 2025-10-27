@@ -77,11 +77,14 @@
 
                     {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.email.after') !!}
 
-                    <div>
+                    <!-- Captcha -->
+                    @if (core()->getConfigData('customer.captcha.credentials.status'))
+                        <x-shop::form.control-group class="mt-5">
+                            {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
-                        {!! \Webkul\Customer\Facades\Captcha::render() !!}
-
-                    </div>
+                            <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                        </x-shop::form.control-group>
+                    @endif
 
                     <!-- Submit Button -->
                     <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:mt-0 max-sm:justify-center max-sm:text-center">

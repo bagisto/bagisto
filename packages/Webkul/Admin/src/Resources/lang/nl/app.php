@@ -4900,6 +4900,16 @@ return [
                 'vicuna-13b'               => 'Vicuna (13b)',
                 'vicuna-7b'                => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => 'Bestandsextensie komt niet overeen met bestandstype.',
+                'file-upload-failed'             => 'Bestand uploaden mislukt.',
+                'http-error'                     => 'HTTP-fout.',
+                'invalid-file-type'              => 'Ongeldig bestandstype. Toegestane types: JPEG, PNG, GIF, WebP, SVG',
+                'invalid-json'                   => 'Ongeldige JSON.',
+                'no-file-uploaded'               => 'Geen bestand geüpload.',
+                'upload-failed'                  => 'Afbeelding uploaden mislukt vanwege een XHR-transportfout.',
+            ],
         ],
     ],
 

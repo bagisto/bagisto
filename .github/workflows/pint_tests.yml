@@ -1,12 +1,9 @@
-name: Auto Commits
+name: Pint Tests
 
-on: [pull_request]
-
-permissions:
-  contents: write
+on: [push, pull_request]
 
 jobs:
-  auto_commits:
+  pint_tests:
     runs-on: ${{ matrix.operating-systems }}
 
     strategy:
@@ -26,9 +23,4 @@ jobs:
           COMPOSER_HOME: ${{ runner.temp }}/composer
 
       - name: Run Pint
-        run: ${{ runner.temp }}/composer/vendor/bin/pint
-
-      - name: Commit Linted Files
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: applied pint changes"
+        run: ${{ runner.temp }}/composer/vendor/bin/pint --test

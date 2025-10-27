@@ -6,11 +6,23 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10866 [Fixed] - Product Carousel Theme Filter: Attribute Value Dropdown Not Showing Options for Custom Attributes.
 
+## **v2.3.8 (16th of October 2025)** - *Release*
+
 * Improved octane compatibility.
 
-* #10971 - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
+* Added the missing captcha on the checkout login page.
 
-* #10898 - Added an asterisk (*) to indicate all required fields in configurable product variants.
+* Refined TinyMCE editor integration and applied related security fixes.
+
+* Applied security fixes to product attributes, including short description, long description, and other TinyMCE-enabled fields.
+
+* Fixed an issue where the description was not updating correctly during channel updates.
+
+* Implemented security fixes for the DataGrid export feature.
+
+* #10971 [fixed] - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
+
+* #10898 [fixed] - Added an asterisk (*) to indicate all required fields in configurable product variants.
 
 ## **v2.3.7 (24th of September 2025)** - *Release*
 

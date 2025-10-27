@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
+use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -18,6 +19,20 @@ class ProductForm extends FormRequest
      * @var array
      */
     protected $rules;
+
+    /**
+     * Product instance.
+     *
+     * @var \Webkul\Product\Contracts\Product
+     */
+    protected $product;
+
+    /**
+     * Product editable attributes.
+     *
+     * @var \Illuminate\Database\Eloquent\Collection
+     */
+    protected $productEditableAttributes;
 
     /**
      * Max video upload size.
@@ -55,9 +70,9 @@ class ProductForm extends FormRequest
      */
     public function rules()
     {
-        $product = $this->productRepository->find($this->id);
+        $this->product = $this->productRepository->find($this->id);
 
-        $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
+        $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                  => ['required', 'unique:products,sku,'.$this->id, new Slug],
             'url_key'              => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*'       => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
@@ -84,10 +99,12 @@ class ProductForm extends FormRequest
             }
         }
 
-        foreach ($product->getEditableAttributes() as $attribute) {
+        $this->productEditableAttributes = $this->product->getEditableAttributes();
+
+        foreach ($this->productEditableAttributes as $attribute) {
             if (
                 in_array($attribute->code, ['sku', 'url_key'])
-                || $attribute->type == 'boolean'
+                || $attribute->type == AttributeTypeEnum::BOOLEAN->value
             ) {
                 continue;
             }
@@ -101,7 +118,7 @@ class ProductForm extends FormRequest
             }
 
             if (
-                $attribute->type == 'text'
+                $attribute->type == AttributeTypeEnum::TEXT->value
                 && $attribute->validation
             ) {
                 if ($attribute->validation === 'decimal') {
@@ -113,7 +130,7 @@ class ProductForm extends FormRequest
                 }
             }
 
-            if ($attribute->type == 'price') {
+            if ($attribute->type == AttributeTypeEnum::PRICE->value) {
                 $validations[] = new Decimal;
             }
 
@@ -163,5 +180,26 @@ class ProductForm extends FormRequest
             'videos.files.*' => 'video',
             'variants.*.sku' => 'sku',
         ];
+    }
+
+    /**
+     * Handle a passed validation attempt.
+     *
+     * @return void
+     */
+    protected function passedValidation()
+    {
+        $tinyMCEFields = $this->productEditableAttributes
+            ->filter(fn ($attribute) => $attribute->type === AttributeTypeEnum::TEXTAREA->value && $attribute->enable_wysiwyg)
+            ->pluck('code')
+            ->toArray();
+
+        foreach ($tinyMCEFields as $field) {
+            if ($this->has($field)) {
+                $this->merge([
+                    $field => clean_content($this->get($field)),
+                ]);
+            }
+        }
     }
 }

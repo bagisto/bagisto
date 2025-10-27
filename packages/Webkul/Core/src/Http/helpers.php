@@ -1,5 +1,6 @@
 <?php
 
+use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Facades\Acl;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Facades\Menu;
@@ -62,6 +63,35 @@ if (! function_exists('clean_path')) {
         return collect(explode('/', $path))
             ->filter(fn ($segment) => ! empty($segment))
             ->join('/');
+    }
+}
+
+if (! function_exists('clean_content')) {
+    /**
+     * Clean content.
+     */
+    function clean_content(string $content): string
+    {
+        $cleaned = Purify::clean($content);
+
+        $patterns = [
+            '/\{\{.*?\}\}/',
+            '/\{!!.*?!!\}/',
+            '/@(php|if|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|endswitch|case|break|continue|include|extends|section|endsection|yield|push|endpush|stack|endstack)/',
+            '/<\?php.*?\?>/s',
+        ];
+
+        foreach ($patterns as $pattern) {
+            $cleaned = preg_replace($pattern, '', $cleaned);
+        }
+
+        $cleaned = str_replace(
+            ['{{', '}}', '{!!', '!!}'],
+            ['&#123;&#123;', '&#125;&#125;', '&#123;!!', '!!&#125;'],
+            $cleaned
+        );
+
+        return $cleaned;
     }
 }
 
