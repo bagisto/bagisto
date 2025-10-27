@@ -57,15 +57,17 @@ class VatValidator
         [$country, $number] = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
-            if (! $formCountry) {
-                return false;
-            }
+            $formCountry = $formCountry ? strtoupper($formCountry) : null;
+
+            if (
+                ! $formCountry
+                || ! isset(self::$pattern_expression[$formCountry])
+            ) return false;
 
             $country = $formCountry;
-            $number = $vatNumber;
         }
 
-        return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) > 0;
+        return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) === 1;
     }
 
     /**
@@ -83,9 +85,15 @@ class VatValidator
      */
     private function splitVat(string $vatNumber): array
     {
-        return [
-            substr($vatNumber, 0, 2),
-            substr($vatNumber, 2),
-        ];
+        $prefix = strtoupper(substr($vatNumber, 0, 2));
+
+        if (
+            ctype_alpha($prefix)
+            && isset(self::$pattern_expression[$prefix])
+        ) {
+            return [$prefix, substr($vatNumber, 2)];
+        }
+
+        return [null, $vatNumber];
     }
 }

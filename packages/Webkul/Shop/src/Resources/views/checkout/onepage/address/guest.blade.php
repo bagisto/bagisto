@@ -131,11 +131,11 @@
 
                     params['billing']['use_for_shipping'] = this.useBillingAddressForShipping;
 
-                    this.moveToNextStep();
-
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
                             this.isStoring = false;
+
+                            this.moveToNextStep();
 
                             if (response.data.data.redirect_url) {
                                 window.location.href = response.data.data.redirect_url;

@@ -565,11 +565,11 @@
 
                     this.isStoring = true;
 
-                    this.moveToNextStep();
-
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', payload)
                         .then((response) => {
                             this.isStoring = false;
+
+                            this.moveToNextStep();
 
                             if (response.data.data.redirect_url) {
                                 window.location.href = response.data.data.redirect_url;
