@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #11007 [fixed] - Shipment options are not showing when adding invalid Vat ID in address.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
