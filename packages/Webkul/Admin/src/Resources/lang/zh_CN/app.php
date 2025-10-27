@@ -4900,6 +4900,16 @@ return [
                 'vicuna-13b'             => 'Vicuna (13b)',
                 'vicuna-7b'              => 'Vicuna (7b)',
             ],
+
+            'errors' => [
+                'file-extension-mismatch'        => '文件扩展名与文件类型不匹配。',
+                'file-upload-failed'             => '文件上传失败。',
+                'http-error'                     => 'HTTP错误。',
+                'invalid-file-type'              => '无效的文件类型。允许的类型：JPEG、PNG、GIF、WebP、SVG',
+                'invalid-json'                   => '无效的JSON。',
+                'no-file-uploaded'               => '未上传文件。',
+                'upload-failed'                  => '由于XHR传输错误，图片上传失败。',
+            ],
         ],
     ],
 

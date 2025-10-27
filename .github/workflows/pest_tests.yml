@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-systems: [ubuntu-latest]
-        php-versions: ['8.2', '8.3']
+        php-versions: ['8.3']
 
     name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 
@@ -56,4 +56,4 @@ jobs:
         run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Running Pest Test
-        run: vendor/bin/pest --parallel --colors=always
+        run: vendor/bin/pest --colors=always

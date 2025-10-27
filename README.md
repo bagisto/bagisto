@@ -52,7 +52,7 @@ Bagisto is an opensource [laravel eCommerce](https://www.bagisto.com/) framework
 
 Bagisto can help you cut down your time, cost, and workforce for building online stores or migrating from physical stores to the ever-demanding online world. Your business—whether small or huge—can benefit. The best part, it's straightforward to set it up!
 
-![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/stats.png)
+![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/stats.webp)
 
 # Getting Started
 
@@ -75,6 +75,30 @@ This AMI allows you to get started with Bagisto on a cloud environment without m
 # Accelerate Your Online Store Launch with the Bagisto Starter Pack!
 
 Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.webkul.com/bagisto-starter-pack.html), streamlining setup and integration for a seamless online store launch. Get ready to unlock success in the digital marketplace! 
+
+# Open Source B2B eCommerce Platform
+
+The [B2B eCommerce Platform](https://bagisto.com/en/b2b-commerce-platform/) enhances your Bagisto store with advanced Business-to-Business (B2B) features. It enables company-based purchasing, multi-user access, quote negotiation, and procurement management — empowering businesses to handle B2B workflows efficiently within a single platform.
+
+![Bagisto B2B Ecommerce Image](https://github.com/bagisto/temp-media/blob/master/intro-banner.webp)
+
+# Multi Vendor Marketplace
+
+[Multi Vendor Marketplace](https://bagisto.com/en/laravel-multi-vendor-marketplace/) transforms a standard store into a complete marketplace, allowing the admin to manage sellers, commissions, product approvals, and order handling, while giving vendors a dedicated dashboard to manage their catalog, orders, and transactions.
+
+![Multi Vendor Marketplace Image](https://github.com/bagisto/temp-media/blob/master/multi-vendor-marketplace.webp)
+
+# Multi Tenant eCommerce
+
+[Multi Tenant eCommerce](https://bagisto.com/en/laravel-multi-tenant-saas/) in Bagisto allows businesses to build a SaaS-based marketplace platform where multiple vendors or merchants can create and manage their own individual stores under a single system.
+
+![Multi Tenant eCommerce Image](https://github.com/bagisto/temp-media/blob/master/multi-tenant.webp)
+
+# POS 
+
+[Point of Sale](https://bagisto.com/en/laravel-pos/) system manages retail operations efficiently, handling inventory management and fast customer checkout for your store.
+
+![POS Image](https://github.com/bagisto/temp-media/blob/master/pos.webp)
 
 # Headless Commerce
 

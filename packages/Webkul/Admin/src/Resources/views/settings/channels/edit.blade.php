@@ -109,14 +109,14 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
-                            id="description"
-                            name="description"
+                            :id="$locale . '[description]'"
+                            :name="$locale . '[description]'"
                             :value="old('description') ?? $channel->description"
                             :label="trans('admin::app.settings.channels.edit.description')"
                             :placeholder="trans('admin::app.settings.channels.edit.description')"
                         />
 
-                        <x-admin::form.control-group.error control-name="description" />
+                        <x-admin::form.control-group.error control-name="$locale . '[description]'" />
                     </x-admin::form.control-group>
 
                     <!-- Inventory Sources -->
