@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Allowed number of Related Products',
-                        'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',
-                        'title'                         => 'Product view page configuration',
-                        'title-info'                    => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
+                        'allow-overlapping-booking-time-slots' => 'Allowed Overlapping Booking Time Slots',
+                        'allow-no-of-up-sells-products'        => 'Allowed number of Up-Sell Products',
+                        'allow-no-of-related-products'         => 'Allowed number of Related Products',
+                        'title'                                => 'Product view page configuration',
+                        'title-info'                           => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation, as well as managing overlapping booking time slots to determine whether they are permitted or restricted.',
                     ],
 
                     'cart-view-page' => [

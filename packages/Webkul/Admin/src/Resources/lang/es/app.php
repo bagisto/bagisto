@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Número permitido de productos relacionados',
-                        'allow-no-of-up-sells-products' => 'Número permitido de productos de venta cruzada',
-                        'title'                         => 'Configuración de la página de vista de producto',
-                        'title-info'                    => 'La configuración de la página de vista de producto implica ajustar el diseño y los elementos en la página de visualización de un producto, mejorando la experiencia del usuario y la presentación de información.',
+                        'allow-overlapping-booking-time-slots' => 'Permitir franjas horarias de reserva superpuestas',
+                        'allow-no-of-up-sells-products'        => 'Número permitido de productos de upsell',
+                        'allow-no-of-related-products'         => 'Número permitido de productos relacionados',
+                        'title'                                => 'Configuración de la página de vista del producto',
+                        'title-info'                           => 'La configuración de la página de vista del producto implica ajustar el diseño y los elementos en la página de visualización del producto, mejorando la experiencia del usuario y la presentación de la información, además de gestionar franjas horarias de reserva superpuestas para determinar si están permitidas o restringidas.',
                     ],
 
                     'cart-view-page' => [

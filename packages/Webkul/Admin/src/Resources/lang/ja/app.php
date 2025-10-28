@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => '関連製品の許可数',
-                        'allow-no-of-up-sells-products' => 'アップセル製品の許可数',
-                        'title'                         => '製品ビューページの設定',
-                        'title-info'                    => '製品ビューページの設定では、製品の表示ページのレイアウトと要素を調整し、ユーザーエクスペリエンスと情報の表示を向上させます。',
+                        'allow-overlapping-booking-time-slots' => '重複する予約時間スロットを許可',
+                        'allow-no-of-up-sells-products'        => 'アップセル製品の許可数',
+                        'allow-no-of-related-products'         => '関連製品の許可数',
+                        'title'                                => '製品表示ページの設定',
+                        'title-info'                           => '製品表示ページの設定には、製品の表示ページのレイアウトや要素を調整し、ユーザー体験や情報表示を向上させること、ならびに重複する予約時間スロットを管理して許可または制限するかを決定する作業が含まれます。',
                     ],
 
                     'cart-view-page' => [

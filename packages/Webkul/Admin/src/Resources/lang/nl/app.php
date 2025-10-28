@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Toegestaan aantal gerelateerde producten',
-                        'allow-no-of-up-sells-products' => 'Toegestaan aantal Up-Sell-producten',
-                        'title'                         => 'Configuratie productweergavepagina',
-                        'title-info'                    => 'Configuratie van de productweergavepagina omvat het aanpassen van de lay-out en elementen op de weergavepagina van een product, waardoor de gebruikerservaring en informatiepresentatie worden verbeterd.',
+                        'allow-overlapping-booking-time-slots' => 'Toegestane overlappende boekingstijdsloten',
+                        'allow-no-of-up-sells-products'        => 'Toegestaan aantal upsell-producten',
+                        'allow-no-of-related-products'         => 'Toegestaan aantal gerelateerde producten',
+                        'title'                                => 'Configuratie productweergavepagina',
+                        'title-info'                           => 'Configuratie van de productweergavepagina omvat het aanpassen van de lay-out en elementen op de productpagina, het verbeteren van de gebruikerservaring en informatiepresentatie, en het beheren of beperken van overlappende boekingstijdsloten.',
                     ],
 
                     'cart-view-page' => [
