@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => '允许相关产品的数量',
-                        'allow-no-of-up-sells-products' => '允许上销售产品的数量',
-                        'title'                         => '产品查看页面配置',
-                        'title-info'                    => '产品查看页面配置涉及调整产品显示页面上的布局和元素，提升用户体验和信息呈现。',
+                        'allow-overlapping-booking-time-slots' => '允许重叠的预订时段',
+                        'allow-no-of-up-sells-products'        => '允许的上卖产品数量',
+                        'allow-no-of-related-products'         => '允许的相关产品数量',
+                        'title'                                => '产品查看页面配置',
+                        'title-info'                           => '产品查看页面配置包括调整产品展示页面的布局和元素，以提升用户体验和信息展示，并管理重叠的预订时段以确定是否允许或限制它们。',
                     ],
 
                     'cart-view-page' => [

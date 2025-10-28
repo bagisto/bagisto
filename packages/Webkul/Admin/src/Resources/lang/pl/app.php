@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Dozwolona liczba powiązanych produktów',
-                        'allow-no-of-up-sells-products' => 'Dozwolona liczba produktów Up-Sell',
-                        'title'                         => 'Konfiguracja strony widoku produktu',
-                        'title-info'                    => 'Konfiguracja strony widoku produktu polega na dostosowaniu układu i elementów na stronie wyświetlania produktu, poprawiając doświadczenie użytkownika i prezentację informacji.',
+                        'allow-overlapping-booking-time-slots' => 'Zezwalaj na nakładające się przedziały czasowe rezerwacji',
+                        'allow-no-of-up-sells-products'        => 'Dozwolona liczba produktów do sprzedaży krzyżowej',
+                        'allow-no-of-related-products'         => 'Dozwolona liczba powiązanych produktów',
+                        'title'                                => 'Konfiguracja strony widoku produktu',
+                        'title-info'                           => 'Konfiguracja strony widoku produktu obejmuje dostosowanie układu i elementów na stronie prezentacji produktu, poprawę doświadczenia użytkownika i sposobu prezentacji informacji, a także zarządzanie nakładającymi się przedziałami czasowymi rezerwacji, aby określić, czy są one dozwolone, czy zabronione.',
                     ],
 
                     'cart-view-page' => [

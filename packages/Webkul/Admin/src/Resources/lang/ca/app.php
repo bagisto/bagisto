@@ -4045,10 +4045,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Nombre permès de productes relacionats',
-                        'allow-no-of-up-sells-products' => 'Nombre permès de productes de venda creuada',
-                        'title'                         => 'Configuració de la pàgina de vista de producte',
-                        'title-info'                    => 'La configuració de la pàgina de vista de producte implica ajustar el disseny i els elements a la pàgina de visualització d\'un producte, millorant l\'experiència de l\'usuari i la presentació de la informació.',
+                        'allow-overlapping-booking-time-slots' => 'Permetre franges horàries de reserva superposades',
+                        'allow-no-of-up-sells-products'        => 'Nombre permès de productes d\'upsell',
+                        'allow-no-of-related-products'         => 'Nombre permès de productes relacionats',
+                        'title'                                => 'Configuració de la pàgina de vista del producte',
+                        'title-info'                           => 'La configuració de la pàgina de vista del producte implica ajustar la disposició i els elements de la pàgina de visualització d\'un producte per millorar l\'experiència de l\'usuari i la presentació de la informació, així com gestionar les franges horàries de reserva superposades per determinar si estan permeses o restringides.',
                     ],
 
                     'cart-view-page' => [

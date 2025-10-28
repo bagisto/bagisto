@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'Jumlah Produk Terkait yang Diizinkan',
-                        'allow-no-of-up-sells-products' => 'Jumlah Produk Up-Sell yang Diizinkan',
-                        'title'                         => 'Konfigurasi Halaman Tampilan Produk',
-                        'title-info'                    => 'Konfigurasi halaman tampilan produk melibatkan penyesuaian tata letak dan elemen pada halaman tampilan produk, meningkatkan pengalaman pengguna dan penyajian informasi.',
+                        'allow-overlapping-booking-time-slots' => 'Izinkan Slot Waktu Pemesanan yang Bertumpuk',
+                        'allow-no-of-up-sells-products'        => 'Jumlah Produk Up-Sell yang Diizinkan',
+                        'allow-no-of-related-products'         => 'Jumlah Produk Terkait yang Diizinkan',
+                        'title'                                => 'Konfigurasi Halaman Tampilan Produk',
+                        'title-info'                           => 'Konfigurasi halaman tampilan produk meliputi penyesuaian tata letak dan elemen pada halaman produk untuk meningkatkan pengalaman pengguna dan penyajian informasi, serta pengelolaan slot waktu pemesanan yang bertumpuk untuk menentukan apakah slot tersebut diizinkan atau dibatasi.',
                     ],
 
                     'cart-view-page' => [

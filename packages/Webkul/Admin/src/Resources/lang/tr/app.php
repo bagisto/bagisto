@@ -4046,10 +4046,11 @@ return [
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'İzin Verilen İlgili Ürün Sayısı',
-                        'allow-no-of-up-sells-products' => 'İzin Verilen Yükseltme Ürün Sayısı',
-                        'title'                         => 'Ürün görüntüleme sayfası yapılandırması',
-                        'title-info'                    => 'Ürün görüntüleme sayfası yapılandırması, bir ürünün görüntüleme sayfasındaki düzeni ve öğeleri ayarlamayı içerir, kullanıcı deneyimini ve bilgi sunumunu geliştirir.',
+                        'allow-overlapping-booking-time-slots' => 'Çakışan rezervasyon zaman dilimlerine izin ver',
+                        'allow-no-of-up-sells-products'        => 'İzin verilen üst satış ürün sayısı',
+                        'allow-no-of-related-products'         => 'İzin verilen ilgili ürün sayısı',
+                        'title'                                => 'Ürün görüntüleme sayfası yapılandırması',
+                        'title-info'                           => 'Ürün görüntüleme sayfası yapılandırması, bir ürünün görüntüleme sayfasındaki düzen ve öğeleri ayarlamayı, kullanıcı deneyimi ve bilgi sunumunu geliştirmeyi ve çakışan rezervasyon zaman dilimlerinin izinli mi yoksa kısıtlı mı olduğunu yönetmeyi içerir.',
                     ],
 
                     'cart-view-page' => [
