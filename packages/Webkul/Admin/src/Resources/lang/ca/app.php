@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Nom',
                     'no-of-products' => 'Visible al menú',
                     'position'       => 'Posició',
+                    'slug'           => 'Sublit',
                     'status'         => 'Estat',
                     'update-status'  => 'Actualitzar Estat',
                 ],

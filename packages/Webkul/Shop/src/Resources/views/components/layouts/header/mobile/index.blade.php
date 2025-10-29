@@ -398,81 +398,67 @@
             <!-- Sliding container -->
             <div
                 class="flex h-full transition-transform duration-300"
-                :class="{
-                    'ltr:translate-x-0 rtl:translate-x-0': currentViewLevel !== 'third',
-                    'ltr:-translate-x-full rtl:translate-x-full': currentViewLevel === 'third'
+                :style="{
+                    transform: `translateX(${getCurrentTranslateX()})`
                 }"
             >
-                <!-- First level view -->
-                <div class="h-full w-full flex-shrink-0 overflow-auto px-6">
-                    <div class="py-4">
-                        <div
-                            v-for="category in categories"
-                            :key="category.id"
-                            :class="{'mb-2': category.children && category.children.length}"
-                        >
-                            <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
-                                <a :href="category.url" class="text-base font-medium text-black">
-                                    @{{ category.name }}
-                                </a>
-                            </div>
-
-                            <!-- Second Level Categories -->
-                            <div v-if="category.children && category.children.length" >
-                                <div
-                                    v-for="secondLevelCategory in category.children"
-                                    :key="secondLevelCategory.id"
-                                >
-                                    <div
-                                        class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200"
-                                        @click="showThirdLevel(secondLevelCategory, category, $event)"
-                                    >
-                                        <a :href="secondLevelCategory.url" class="text-sm font-normal">
-                                            @{{ secondLevelCategory.name }}
-                                        </a>
-
-                                        <span
-                                            v-if="secondLevelCategory.children && secondLevelCategory.children.length"
-                                            class="icon-arrow-right rtl:icon-arrow-left"
-                                        ></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Third level view -->
+                <!-- Dynamic category levels -->
                 <div
-                    class="h-full w-full flex-shrink-0"
-                    v-if="currentViewLevel === 'third'"
+                    v-for="(level, index) in categoryStack"
+                    :key="'level-' + index"
+                    class="h-full w-full flex-shrink-0 overflow-auto"
                 >
-                    <div class="border-b border-gray-200 px-6 py-4">
+                    <!-- Back button for non-root levels -->
+                    <div 
+                        v-if="index > 0"
+                        class="border-b border-gray-200 px-6 py-4"
+                    >
                         <button
-                            @click="goBackToMainView"
+                            @click="goBack"
                             class="flex items-center justify-center gap-2 focus:outline-none"
                             aria-label="Go back"
                         >
                             <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
-                            <div class="text-base font-medium text-black">
-                                @lang('shop::app.components.layouts.header.mobile.back-button')
-                            </div>
+
+                            <p class="text-base font-medium text-black">
+                                <span v-if="level.parent">
+                                    @{{ level.parent.name }}
+                                </span>
+                                
+                                <span v-else>
+                                    @lang('shop::app.components.layouts.header.mobile.back')
+                                </span>
+                            </p>
                         </button>
                     </div>
 
-                    <!-- Third Level Content -->
+                    <!-- Category list -->
                     <div class="px-6 py-4">
                         <div
-                            v-for="thirdLevelCategory in currentSecondLevelCategory?.children"
-                            :key="thirdLevelCategory.id"
+                            v-for="category in level.categories"
+                            :key="category.id"
                             class="mb-2"
                         >
-                            <a
-                                :href="thirdLevelCategory.url"
-                                class="block py-2 text-sm transition-colors duration-200"
+                            <div 
+                                class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200 hover:bg-gray-100"
+                                @click="navigateToCategory(category, $event)"
                             >
-                                @{{ thirdLevelCategory.name }}
-                            </a>
+                                <a
+                                    :href="category.url"
+                                    class="flex-1"
+                                    :class="{
+                                        'text-base font-medium text-black': index === 0,
+                                        'text-sm font-normal': index > 0
+                                    }"
+                                >
+                                    @{{ category.name }}
+                                </a>
+
+                                <span
+                                    v-if="category.children && category.children.length"
+                                    class="icon-arrow-right rtl:icon-arrow-left ml-2"
+                                ></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -487,9 +473,7 @@
             data() {
                 return  {
                     categories: [],
-                    currentViewLevel: 'main',
-                    currentSecondLevelCategory: null,
-                    currentParentCategory: null
+                    categoryStack: []
                 }
             },
 
@@ -510,6 +494,12 @@
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
+                            
+                            this.categoryStack = [{
+                                categories: this.categories,
+                                level: 0
+                            }];
+                            
                             this.isLoading = false;
                             return;
                         }
@@ -518,32 +508,61 @@
 
                     this.getCategories();
                 },
+
                 getCategories() {
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.categories = response.data.data;
+                            
                             localStorage.setItem('categories', JSON.stringify(this.categories));
+                            
+                            this.categoryStack = [{
+                                categories: this.categories,
+                                level: 0
+                            }];
                         })
                         .catch(error => {
                             console.log(error);
                         });
                 },
 
-                showThirdLevel(secondLevelCategory, parentCategory, event) {
-                    if (secondLevelCategory.children && secondLevelCategory.children.length) {
-                        this.currentSecondLevelCategory = secondLevelCategory;
-                        this.currentParentCategory = parentCategory;
-                        this.currentViewLevel = 'third';
-
-                        if (event) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
+                navigateToCategory(category, event) {
+                    if (category.children && category.children.length) {
+                        event.preventDefault();
+                        
+                        this.categoryStack.push({
+                            categories: category.children,
+                            level: this.categoryStack.length,
+                            parent: category
+                        });
                     }
                 },
 
-                goBackToMainView() {
-                    this.currentViewLevel = 'main';
+                goBack() {
+                    if (this.categoryStack.length > 1) {
+                        this.categoryStack.pop();
+                    }
+                },
+
+                getCurrentTranslateX() {
+                    const direction = document.dir || document.documentElement.dir || 'ltr';
+
+                    const currentLevel = this.categoryStack.length - 1;
+
+                    const translateValue = currentLevel * 100;
+                    
+                    if (direction === 'rtl') {
+                        return `${translateValue}%`;
+                    }
+                    
+                    return `-${translateValue}%`;
+                },
+
+                resetStack() {
+                    this.categoryStack = [{
+                        categories: this.categories,
+                        level: 0
+                    }];
                 }
             },
         });
@@ -553,7 +572,9 @@
 
             methods: {
                 onDrawerClose() {
-                    this.$refs.mobileCategory.currentViewLevel = 'main';
+                    if (this.$refs.mobileCategory) {
+                        this.$refs.mobileCategory.resetStack();
+                    }
                 }
             },
         });

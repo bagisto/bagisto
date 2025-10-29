@@ -370,26 +370,20 @@
                                 class="grid w-full min-w-max max-w-[150px] flex-auto grid-cols-[1fr] content-start gap-5"
                                 v-for="pairCategoryChildren in pairCategoryChildren(category)"
                             >
-                                <template v-for="secondLevelCategory in pairCategoryChildren">
-                                    <p class="font-medium text-navyBlue">
-                                        <a :href="secondLevelCategory.url">
-                                            @{{ secondLevelCategory.name }}
-                                        </a>
-                                    </p>
-
-                                    <ul
-                                        class="grid grid-cols-[1fr] gap-3"
-                                        v-if="secondLevelCategory.children && secondLevelCategory.children.length"
-                                    >
-                                        <li
-                                            class="text-sm font-medium text-zinc-500"
-                                            v-for="thirdLevelCategory in secondLevelCategory.children"
-                                        >
-                                            <a :href="thirdLevelCategory.url">
-                                                @{{ thirdLevelCategory.name }}
+                                <template v-for="childCategory in pairCategoryChildren">
+                                    <div>
+                                        <p class="font-medium text-navyBlue">
+                                            <a :href="childCategory.url">
+                                                @{{ childCategory.name }}
                                             </a>
-                                        </li>
-                                    </ul>
+                                        </p>
+
+                                        <!-- Recursive rendering of all child levels -->
+                                        <div
+                                            v-if="childCategory.children && childCategory.children.length"
+                                            v-html="renderCategoryTree(childCategory.children, 1)"
+                                        ></div>
+                                    </div>
                                 </template>
                             </div>
                         </div>
@@ -421,88 +415,67 @@
                         <!-- Sliding container -->
                         <div
                             class="flex h-full transition-transform duration-300"
-                            :class="{
-                                'ltr:translate-x-0 rtl:translate-x-0': currentViewLevel !== 'third',
-                                'ltr:-translate-x-full rtl:translate-x-full': currentViewLevel === 'third'
+                            :style="{
+                                transform: `translateX(${getCurrentTranslateX()})`
                             }"
                         >
-                            <!-- First level view -->
-                            <div class="h-[calc(100vh-74px)] w-full flex-shrink-0 overflow-auto">
-                                <div class="py-4">
-                                    <div
-                                        v-for="category in categories"
-                                        :key="category.id"
-                                        :class="{'mb-2': category.children && category.children.length}"
-                                    >
-                                        <div class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100">
-                                            <a
-                                                :href="category.url"
-                                                class="text-base font-medium text-black"
-                                            >
-                                                @{{ category.name }}
-                                            </a>
-                                        </div>
-
-                                        <!-- Second Level Categories -->
-                                        <div v-if="category.children && category.children.length" >
-                                            <div
-                                                v-for="secondLevelCategory in category.children"
-                                                :key="secondLevelCategory.id"
-                                            >
-                                                <div
-                                                    class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100"
-                                                    @click="showThirdLevel(secondLevelCategory, category, $event)"
-                                                >
-                                                    <a
-                                                        :href="secondLevelCategory.url"
-                                                        class="text-sm font-normal"
-                                                    >
-                                                        @{{ secondLevelCategory.name }}
-                                                    </a>
-
-                                                    <span
-                                                        v-if="secondLevelCategory.children && secondLevelCategory.children.length"
-                                                        class="icon-arrow-right rtl:icon-arrow-left"
-                                                    ></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Third level view -->
+                            <!-- Dynamic category levels -->
                             <div
-                                class="h-full w-full flex-shrink-0"
-                                v-if="currentViewLevel === 'third'"
+                                v-for="(level, index) in categoryStack"
+                                :key="'level-' + index"
+                                class="h-[calc(100vh-74px)] w-full flex-shrink-0 overflow-auto"
                             >
-                                <div class="border-b border-gray-200 px-6 py-4">
+                                <!-- Back button for non-root levels -->
+                                <div 
+                                    v-if="index > 0"
+                                    class="border-b border-gray-200 px-6 py-4"
+                                >
                                     <button
-                                        @click="goBackToMainView"
+                                        @click="goBack"
                                         class="flex items-center justify-center gap-2 focus:outline-none"
                                         aria-label="Go back"
                                     >
                                         <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
 
                                         <p class="text-base font-medium text-black">
-                                            @lang('shop::app.components.layouts.header.desktop.bottom.back-button')
+                                            <span v-if="level.parent">
+                                                @{{ level.parent.name }}
+                                            </span>
+
+                                            <span v-else>
+                                                @lang('shop::app.components.layouts.header.desktop.bottom.back')
+                                            </span>
                                         </p>
                                     </button>
                                 </div>
 
-                                <!-- Third Level Content -->
+                                <!-- Category list -->
                                 <div class="py-4">
                                     <div
-                                        v-for="thirdLevelCategory in currentSecondLevelCategory?.children"
-                                        :key="thirdLevelCategory.id"
+                                        v-for="category in level.categories"
+                                        :key="category.id"
                                         class="mb-2"
                                     >
-                                        <a
-                                            :href="thirdLevelCategory.url"
-                                            class="block px-6 py-2 text-sm transition-colors duration-200 hover:bg-gray-100"
+                                        <div 
+                                            class="flex cursor-pointer items-center justify-between px-6 py-2 transition-colors duration-200 hover:bg-gray-100"
+                                            @click="navigateToCategory(category, $event)"
                                         >
-                                            @{{ thirdLevelCategory.name }}
-                                        </a>
+                                            <a
+                                                :href="category.url"
+                                                class="flex-1"
+                                                :class="{
+                                                    'text-base font-medium text-black': index === 0,
+                                                    'text-sm font-normal': index > 0
+                                                }"
+                                            >
+                                                @{{ category.name }}
+                                            </a>
+
+                                            <span
+                                                v-if="category.children && category.children.length"
+                                                class="icon-arrow-right rtl:icon-arrow-left ml-2"
+                                            ></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -522,9 +495,8 @@
                     isLoading: true,
                     categories: [],
                     isDrawerActive: false,
-                    currentViewLevel: 'main',
-                    currentSecondLevelCategory: null,
-                    currentParentCategory: null
+                    categoryStack: [],
+                    maxMegaMenuDepth: 2
                 }
             },
 
@@ -539,6 +511,7 @@
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
+
                             this.isLoading = false;
 
                             return;
@@ -553,7 +526,9 @@
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.isLoading = false;
+
                             this.categories = response.data.data;
+
                             localStorage.setItem('categories', JSON.stringify(this.categories));
                         })
                         .catch(error => {
@@ -568,14 +543,19 @@
                         if (index % 2 === 0) {
                             result.push(array.slice(index, index + 2));
                         }
+
                         return result;
                     }, []);
                 },
 
                 toggleCategoryDrawer() {
                     this.isDrawerActive = !this.isDrawerActive;
+                    
                     if (this.isDrawerActive) {
-                        this.currentViewLevel = 'main';
+                        this.categoryStack = [{
+                            categories: this.categories,
+                            level: 0
+                        }];
                     }
                 },
 
@@ -585,26 +565,77 @@
 
                 onDrawerClose(event) {
                     this.isDrawerActive = false;
+
+                    this.categoryStack = [];
                 },
 
-                showThirdLevel(secondLevelCategory, parentCategory, event) {
-                    if (secondLevelCategory.children && secondLevelCategory.children.length) {
-                        this.currentSecondLevelCategory = secondLevelCategory;
-                        this.currentParentCategory = parentCategory;
-                        this.currentViewLevel = 'third';
-
-                        if (event) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
+                navigateToCategory(category, event) {
+                    if (category.children && category.children.length) {
+                        event.preventDefault();
+                        
+                        this.categoryStack.push({
+                            categories: category.children,
+                            level: this.categoryStack.length,
+                            parent: category
+                        });
                     }
                 },
 
-                goBackToMainView() {
-                    this.currentViewLevel = 'main';
-                }
+                goBack() {
+                    if (this.categoryStack.length > 1) {
+                        this.categoryStack.pop();
+                    }
+                },
+
+                getCurrentTranslateX() {
+                    const direction = document.dir || document.documentElement.dir || 'ltr';
+
+                    const currentLevel = this.categoryStack.length - 1;
+
+                    const translateValue = currentLevel * 100;
+                    
+                    if (direction === 'rtl') {
+                        return `${translateValue}%`;
+                    }
+                    
+                    return `-${translateValue}%`;
+                },
+
+                renderCategoryTree(categories, depth) {
+                    if (!categories || !categories.length) {
+                        return '';
+                    }
+
+                    if (this.maxMegaMenuDepth > 0 && depth >= this.maxMegaMenuDepth) {
+                        return '';
+                    }
+
+                    const indentClass = depth > 1 ? `ml-${depth * 2}` : '';
+                    const textSizeClass = depth === 1 ? 'text-sm' : 'text-xs';
+                    const textColorClass = depth === 1 ? 'text-zinc-500' : 'text-zinc-400';
+
+                    let html = `<ul class="grid grid-cols-[1fr] gap-3 mt-3">`;
+
+                    categories.forEach(category => {
+                        html += `<li class="${textSizeClass} font-medium ${textColorClass} ${indentClass}">`;
+                        html += `<a href="${category.url}">${category.name}</a>`;
+                        
+                        if (category.children && category.children.length) {
+                            if (this.maxMegaMenuDepth === 0 || depth + 1 < this.maxMegaMenuDepth) {
+                                html += this.renderCategoryTree(category.children, depth + 1);
+                            }
+                        }
+                        
+                        html += `</li>`;
+                    });
+
+                    html += `</ul>`;
+
+                    return html;
+                },
             },
         });
     </script>
 @endPushOnce
+
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.after') !!}

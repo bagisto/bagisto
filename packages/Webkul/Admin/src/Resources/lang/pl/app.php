@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Nazwa',
                     'no-of-products' => 'Liczba Produktów',
                     'position'       => 'Pozycja',
+                    'slug'           => 'Sługa',
                     'status'         => 'Widoczne w menu',
                     'update-status'  => 'Aktualizuj Status',
                 ],

@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Adı',
                     'no-of-products' => 'Ürün Sayısı',
                     'position'       => 'Pozisyon',
+                    'slug'           => 'URL Yolu',
                     'status'         => 'Menüde Görünür',
                     'update-status'  => 'Durumu Güncelle',
                 ],

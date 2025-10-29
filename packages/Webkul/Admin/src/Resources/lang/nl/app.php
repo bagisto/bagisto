@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Naam',
                     'no-of-products' => 'Aantal Producten',
                     'position'       => 'Positie',
+                    'slug'           => 'URL-slug',
                     'status'         => 'Zichtbaar in menu',
                     'update-status'  => 'Status Bijwerken',
                 ],

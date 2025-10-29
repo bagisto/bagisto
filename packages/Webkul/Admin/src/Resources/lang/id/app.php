@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Nama',
                     'no-of-products' => 'Jumlah Produk',
                     'position'       => 'Posisi',
+                    'slug'           => 'Slug',
                     'status'         => 'Terlihat di Menu',
                     'update-status'  => 'Perbarui Status',
                 ],

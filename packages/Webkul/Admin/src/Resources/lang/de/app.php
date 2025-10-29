@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Name',
                     'no-of-products' => 'Im Menü sichtbar',
                     'position'       => 'Position',
+                    'slug'           => 'URL-Pfad',
                     'status'         => 'Status',
                     'update-status'  => 'Status aktualisieren',
                 ],

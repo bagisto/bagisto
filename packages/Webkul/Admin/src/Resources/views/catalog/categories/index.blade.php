@@ -9,6 +9,9 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
+            <!-- Export Modal -->
+            <x-admin::datagrid.export :src="route('admin.catalog.categories.index')" />
+
             {!! view_render_event('bagisto.admin.catalog.categories.index.create-button.before') !!}
 
             @if (bouncer()->hasPermission('catalog.categories.create'))
