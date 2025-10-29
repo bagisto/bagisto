@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'שם',
                     'no-of-products' => 'מספר מוצרים',
                     'position'       => 'מיקום',
+                    'slug'           => 'סלאג',
                     'status'         => 'נראה בתפריט',
                     'update-status'  => 'עדכן סטטוס',
                 ],

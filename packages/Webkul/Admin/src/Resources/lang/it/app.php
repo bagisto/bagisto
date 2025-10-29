@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Nome',
                     'no-of-products' => 'Numero di Prodotti',
                     'position'       => 'Posizione',
+                    'slug'           => 'URL amichevole',
                     'status'         => 'Visibile Nel Menu',
                     'update-status'  => 'Aggiorna Stato',
                 ],

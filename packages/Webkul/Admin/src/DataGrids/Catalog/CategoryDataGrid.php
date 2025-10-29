@@ -24,10 +24,11 @@ class CategoryDataGrid extends DataGrid
         $queryBuilder = DB::table('categories')
             ->select(
                 'categories.id as category_id',
-                'category_translations.name',
                 'categories.position',
                 'categories.status',
                 'category_translations.locale',
+                'category_translations.name',
+                'category_translations.slug',
             )
             ->leftJoin('category_translations', function ($join) {
                 $join->on('categories.id', '=', 'category_translations.category_id')
@@ -59,6 +60,15 @@ class CategoryDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'name',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'slug',
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.slug'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,

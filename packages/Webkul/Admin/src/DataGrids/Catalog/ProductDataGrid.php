@@ -43,17 +43,10 @@ class ProductDataGrid extends DataGrid
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
-            ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
-            ->leftJoin('category_translations as ct', function ($leftJoin) {
-                $leftJoin->on('pc.category_id', '=', 'ct.category_id')
-                    ->where('ct.locale', app()->getLocale());
-            })
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
                 'product_images.path as base_image',
-                'pc.category_id',
-                'ct.name as category_name',
                 'product_flat.product_id',
                 'product_flat.sku',
                 'product_flat.name',
@@ -66,6 +59,13 @@ class ProductDataGrid extends DataGrid
             )
             ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
+            ->addSelect(DB::raw('(
+                SELECT GROUP_CONCAT(ct2.name SEPARATOR ", ")
+                FROM '.$tablePrefix.'product_categories pc2
+                JOIN '.$tablePrefix.'category_translations ct2 ON pc2.category_id = ct2.category_id
+                WHERE pc2.product_id = '.$tablePrefix.'product_flat.product_id
+                AND ct2.locale = "'.app()->getLocale().'"
+            ) as categories'))
             ->where('product_flat.locale', app()->getLocale())
             ->groupBy('product_flat.product_id');
 
@@ -190,6 +190,10 @@ class ProductDataGrid extends DataGrid
             'index'      => 'category_name',
             'label'      => trans('admin::app.catalog.products.index.datagrid.category'),
             'type'       => 'string',
+            'sortable'   => false,
+            'closure'    => function ($row) {
+                return $row->categories ?: '';
+            },
         ]);
 
         $this->addColumn([

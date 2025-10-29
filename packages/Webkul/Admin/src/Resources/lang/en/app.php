@@ -1540,14 +1540,15 @@ return [
 
                 'datagrid' => [
                     'active'         => 'Active',
-                    'delete-success' => 'Selected :resource were successfully deleted',
                     'delete'         => 'Delete',
+                    'delete-success' => 'Selected :resource were successfully deleted',
                     'edit'           => 'Edit',
                     'id'             => 'ID',
                     'inactive'       => 'Inactive',
                     'name'           => 'Name',
                     'no-of-products' => 'Number of Products',
                     'position'       => 'Position',
+                    'slug'           => 'Slug',
                     'status'         => 'Visible In Menu',
                     'update-status'  => 'Update Status',
                 ],

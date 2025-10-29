@@ -1548,6 +1548,7 @@ return [
                     'name'           => '名前',
                     'no-of-products' => '製品数',
                     'position'       => '位置',
+                    'slug'           => 'スラッグ',
                     'status'         => 'メニューで表示',
                     'update-status'  => 'ステータスを更新',
                 ],

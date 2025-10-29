@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'الاسم',
                     'no-of-products' => 'عدد المنتجات',
                     'position'       => 'الموقع',
+                    'slug'           => 'السبيكة',
                     'status'         => 'مرئي في القائمة',
                     'update-status'  => 'تحديث الحالة',
                 ],

@@ -1548,6 +1548,7 @@ return [
                     'name'           => 'Nom',
                     'no-of-products' => 'Visible dans le menu',
                     'position'       => 'Position',
+                    'slug'           => 'Identifiant URL',
                     'status'         => 'Statut',
                     'update-status'  => 'Mettre à jour le statut',
                 ],
