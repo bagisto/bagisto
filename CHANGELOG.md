@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #10973 [fixed] - Unnecessary Validation Error on Input Fields with Spaces.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
