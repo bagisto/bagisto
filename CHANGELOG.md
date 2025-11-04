@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #10985 [fixed] - incorrect record deletion in CustomerGroupPrice: Deleting any group discount removes the last group discount entry instead.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
