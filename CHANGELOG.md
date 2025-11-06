@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+* #10985 [fixed] - Fixed an issue in CustomerGroupPrice where deleting any group discount incorrectly removed the last discount entry instead of the selected one.
 
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
