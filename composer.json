@@ -28,6 +28,7 @@
         "kalnoy/nestedset": "^6.0",
         "khaled.alshamaa/ar-php": "^6.0.0",
         "konekt/concord": "^1.2",
+        "laravel/cashier": "^16.0",
         "laravel/framework": "^11.0",
         "laravel/octane": "^2.3",
         "laravel/sanctum": "^4.0",
@@ -47,7 +48,8 @@
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-responsecache": "^7.4",
         "spatie/laravel-sitemap": "^7.3",
-        "stevebauman/purify": "^6.3"
+        "stevebauman/purify": "^6.3",
+        "stripe/stripe-php": "^17.3"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "2.3.*",
@@ -97,7 +99,8 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\Stripe\\": "packages/Webkul/Stripe/src"
         }
     },
     "autoload-dev": {

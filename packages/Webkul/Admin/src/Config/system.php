@@ -2160,6 +2160,97 @@ return [
             ],
         ],
     ], [
+        'key'    => 'sales.payment_methods.stripe',
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.stripePayment',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.payment-method-info',
+        'sort'   => 5,
+        'fields' => [
+            [
+                'name'          => 'active',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'title',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type'          => 'text',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name'          => 'debug',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.debug',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'api_key',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.api_key',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
+                'type'          => 'password',
+                'channel_based' => false,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'api_publishable_key',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.api_publishable_key',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
+                'type'          => 'password',
+                'channel_based' => false,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'api_test_key',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.api_test_key',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
+                'type'          => 'password',
+                'channel_based' => false,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'api_test_publishable_key',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.api_test_publishable_key',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
+                'type'          => 'password',
+                'channel_based' => false,
+                'locale_based'  => false,
+            ], [
+                'name'    => 'sort',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => '1',
+                        'value' => 1,
+                    ], [
+                        'title' => '2',
+                        'value' => 2,
+                    ], [
+                        'title' => '3',
+                        'value' => 3,
+                    ], [
+                        'title' => '4',
+                        'value' => 4,
+                    ], [
+                        'title' => '5',
+                        'value' => 5,
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'  => 'sales.order_settings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.info',
