@@ -63,7 +63,7 @@ class StripeWebhookController extends CashierController
         }
 
         if ($response) {
-            return 'Refunded  Successfully';
+            return trans('admin::app.sales.refunds.create.create-success');
         }
     }
 }

@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => '¡Advertencia! Por favor, verifique sus credenciales',
+    'nameoncard'           => 'Nombre en la tarjeta',
+    'expirymonth'          => 'Mes de expiración',
+    'expiryyear'           => 'Año de expiración',
+    'cvc'                  => 'Código de seguridad',
+    'or'                   => 'o',
+    'pay-with-saved-card'  => 'Pagar con tarjeta guardada',
+    'cardno'               => 'Número de tarjeta',
+    'pay-now'              => 'Pagar ahora',
+    'errors-in-fields'     => 'Por favor, corrija los errores y vuelva a intentarlo',
+    'pay-with-new-card'    => 'Pagar con nueva tarjeta',
+    'remember-card'        => 'Recordar tarjeta',
+    'pay'                  => 'Pagar',
+    'payment-failed'       => '¡Error! El pago no pudo ser procesado',
+    'payment-success'      => '¡Éxito! Pago completado',
+    'click-continue'       => 'Haga clic en Continuar para proceder al siguiente paso',
+    'some-error'           => 'Ocurrió un error',
+    'transaction-fee'      => 'Tarifa de transacción',
+    'more-info'            => '(Después de completar el pedido con éxito)',
+    'continue'             => 'Por favor, haga clic en Continuar para completar su transacción',
+    'unavailable'          => 'Stripe no está disponible para el vendedor',
+    'something-went-wrong' => '¡Algo salió mal!',
+    'payment-for-order-id' => 'Pago para el ID de pedido',
+    'delete'               => 'Eliminar',
+    'app-name'             => 'Pasarela de pago Stripe de Webkul Bagisto',
+
+    'stripe-form' => [
+        'card-number'     => 'Número de tarjeta',
+        'expiration-date' => 'Fecha de expiración',
+        'security-code'   => 'Código de seguridad',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Detalles de la tarjeta',
+                'discount'         => 'Descuento',
+                'grand-total'      => 'Total general',
+                'pay'              => 'Pagar',
+                'powered-by'       => 'Desarrollado por',
+                'privacy'          => 'Privacidad',
+                'save-card-info'   => '¿Desea guardar esta tarjeta para futuros pagos?',
+                'shipping-cost'    => 'Costo de envío',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Subtotal',
+                'tax'              => 'Impuesto',
+                'terms'            => 'Términos',
+                'test-mode'        => 'Modo de prueba',
+                'want-delete-card' => '¿Desea eliminar esta tarjeta?',
+            ],
+        ],
+    ],
+];

@@ -2,6 +2,13 @@
 
 namespace Webkul\Stripe\Http\Controllers;
 
+use Stripe\Exception\ApiConnectionException;
+use Stripe\Exception\ApiErrorException;
+use Stripe\Exception\AuthenticationException;
+use Stripe\Exception\CardException;
+use Stripe\Exception\InvalidRequestException;
+use Stripe\Exception\RateLimitException;
+use Stripe\Refund;
 use Stripe\Stripe;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderItemRepository;
@@ -36,19 +43,6 @@ class RefundController extends Controller
         }
 
         Stripe::setApiKey($this->stripeSecretKey);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param  int  $orderId
-     * @return \Illuminate\Http\View
-     */
-    public function create($orderId)
-    {
-        $order = $this->orderRepository->findOrFail($orderId);
-
-        return view('stripe::admin.sales.refunds.create', compact('order'));
     }
 
     /**
@@ -103,58 +97,26 @@ class RefundController extends Controller
             $paymentIntentId = $decodeStripeToken->paymentIntent->id;
 
             try {
-                $result = \Stripe\Refund::create([
+                $result = Refund::create([
                     'payment_intent' => $paymentIntentId,
                     'amount'         => round($refundAmount, 2) * 100,
                 ]);
-            } catch (\Stripe\Exception\CardException $e) {
-
-                // Since it's a decline, \Stripe\Exception\CardException will be caught
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (\Stripe\Exception\RateLimitException $e) {
-
-                // Too many requests made to the API too quickly
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (\Stripe\Exception\InvalidRequestException $e) {
-
-                // Invalid parameters were supplied to Stripe's API
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (\Stripe\Exception\AuthenticationException $e) {
-
-                // Authentication with Stripe's API failed
-                // (maybe you changed API keys recently)
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (\Stripe\Exception\ApiConnectionException $e) {
-
-                // Network communication with Stripe failed
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (\Stripe\Exception\ApiErrorException $e) {
-
-                // Display a very generic error to the user, and maybe send
-                // yourself an email
-                session()->flash('error', $e->getError()->message);
-
-                return redirect()->back();
-            } catch (Exception $e) {
-
-                // Something else happened, completely unrelated to Stripe
-                session()->flash('error', $e->getError()->message);
+            } catch (
+                CardException|
+                RateLimitException|
+                InvalidRequestException|
+                AuthenticationException|
+                ApiConnectionException|
+                ApiErrorException|
+                \Exception $e
+            ) {
+                session()->flash('error', $e->getMessage() ?? $e->getError()->message ?? 'An unexpected error occurred.');
 
                 return redirect()->back();
             }
 
             if ($result['status'] != 'succeeded') {
-                session()->flash('error', trans('admin::app.sales.refunds.creation-error'));
+                session()->flash('error', trans('admin::app.sales.refunds.create.creation-error'));
 
                 return redirect()->back();
             }
@@ -178,36 +140,6 @@ class RefundController extends Controller
 
         session()->flash('success', trans('admin::app.sales.refunds.create.create-success'));
 
-        return redirect()->route('admin.sales.refunds.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  int  $orderId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function updateQty($orderId)
-    {
-        $refundSummary = $this->refundRepository->getOrderItemsRefundSummary(request()->all(), $orderId);
-
-        if (! $refundSummary) {
-            return response('');
-        }
-
-        return response()->json($refundSummary);
-    }
-
-    /**
-     * Show the view for the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\View
-     */
-    public function view($id)
-    {
-        $refund = $this->refundRepository->findOrFail($id);
-
-        return view('admin::sales.refunds.view', compact('refund'));
+        return redirect()->route('admin.sales.orders.view', $orderId);
     }
 }

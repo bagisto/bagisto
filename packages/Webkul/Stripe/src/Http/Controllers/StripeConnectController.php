@@ -2,9 +2,18 @@
 
 namespace Webkul\Stripe\Http\Controllers;
 
+use Stripe\Customer;
+use Stripe\Exception\ApiConnectionException;
+use Stripe\Exception\ApiErrorException;
+use Stripe\Exception\AuthenticationException;
+use Stripe\Exception\CardException;
+use Stripe\Exception\InvalidRequestException;
+use Stripe\Exception\RateLimitException;
 use Stripe\PaymentIntent;
+use Stripe\PaymentMethod;
 use Stripe\Stripe;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Stripe\Helpers\Helper;
@@ -39,13 +48,6 @@ class StripeConnectController extends Controller
     protected $statementDescriptor;
 
     /**
-     * InvoiceRepository object
-     *
-     * @var object
-     */
-    protected $invoiceRepository;
-
-    /**
      * App Name
      *
      * @var string
@@ -67,7 +69,8 @@ class StripeConnectController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected StripeCart $stripeCart,
-        protected stripeRepository $stripeRepository,
+        protected StripeRepository $stripeRepository,
+        protected InvoiceRepository $invoiceRepository,
         protected Helper $helper
     ) {
         $this->testMode = (bool) core()->getConfigData('sales.payment_methods.stripe.debug');
@@ -80,7 +83,7 @@ class StripeConnectController extends Controller
             $this->stripePublishableKey = core()->getConfigData('sales.payment_methods.stripe.api_publishable_key');
         }
 
-        $this->appName = 'Webkul Bagisto Stripe Payment Gateway';
+        $this->appName = trans('stripe::app.app-name');
 
         $this->partner_Id = 'pp_partner_FLJSvfbQDaJTyY';
 
@@ -123,12 +126,12 @@ class StripeConnectController extends Controller
     public function saveCard()
     {
         try {
-            $customerResponse = \Stripe\Customer::create([
+            $customerResponse = Customer::create([
                 'description' => 'Customer for '.Cart::getCart()->customer_email,
                 'source'      => request()->stripetoken, // obtained with Stripe.js
             ]);
 
-            $payment_method = \Stripe\PaymentMethod::retrieve(request()->paymentMethodId);
+            $payment_method = PaymentMethod::retrieve(request()->paymentMethodId);
 
             $attachedCustomer = $payment_method->attach(['customer' => $customerResponse->id]);
 
@@ -171,60 +174,16 @@ class StripeConnectController extends Controller
                 'customerId'      => $customerResponse->id,
                 'paymentMethodId' => request()->paymentMethodId,
             ]);
-        } catch (\Stripe\Exception\CardException $e) {
-
-            // Since it's a decline, \Stripe\Exception\CardException will be caught
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (\Stripe\Exception\RateLimitException $e) {
-
-            // Too many requests made to the API too quickly
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (\Stripe\Exception\InvalidRequestException $e) {
-
-            // Invalid parameters were supplied to Stripe's API
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (\Stripe\Exception\AuthenticationException $e) {
-
-            // Authentication with Stripe's API failed
-            // (maybe you changed API keys recently)
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (\Stripe\Exception\ApiConnectionException $e) {
-
-            // Network communication with Stripe failed
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-
-            // Display a very generic error to the user, and maybe send
-            // yourself an email
-            session()->flash('error', $e->getError()->message);
-
-            return response()->json([
-                'message' => $e->getError()->message,
-            ]);
-        } catch (Exception $e) {
-
-            // Something else happened, completely unrelated to Stripe
-            session()->flash('error', $e->getError()->message);
+        } catch (
+            CardException|
+            RateLimitException|
+            InvalidRequestException|
+            AuthenticationException|
+            ApiConnectionException|
+            ApiErrorException|
+            \Exception $e
+        ) {
+            session()->flash('error', $e->getMessage() ?? $e->getError()->message ?? trans('stripe::app.something-went-wrong'));
 
             return response()->json([
                 'message' => trans('stripe::app.something-went-wrong'),
@@ -266,7 +225,7 @@ class StripeConnectController extends Controller
                 ]);
             }
 
-            return response()->json(['sucess' => 'false'], 404);
+            return response()->json(['success' => 'false'], 404);
         } catch (Exception $e) {
             throw $e;
         }
@@ -318,8 +277,6 @@ class StripeConnectController extends Controller
         $order = $this->orderRepository->create($data);
 
         $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-        $this->invoiceRepository = app('Webkul\Sales\Repositories\InvoiceRepository');
 
         if ($order->canInvoice()) {
             $this->invoiceRepository->create($this->prepareInvoiceData($order));

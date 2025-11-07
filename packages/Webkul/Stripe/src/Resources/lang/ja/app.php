@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => '警告！資格情報を確認してください',
+    'nameoncard'           => 'カード上の名前',
+    'expirymonth'          => '有効期限（月）',
+    'expiryyear'           => '有効期限（年）',
+    'cvc'                  => 'セキュリティコード',
+    'or'                   => 'または',
+    'pay-with-saved-card'  => '保存済みカードで支払う',
+    'cardno'               => 'カード番号',
+    'pay-now'              => '今すぐ支払う',
+    'errors-in-fields'     => 'エラーを修正して、もう一度お試しください',
+    'pay-with-new-card'    => '新しいカードで支払う',
+    'remember-card'        => 'カードを記憶する',
+    'pay'                  => '支払う',
+    'payment-failed'       => 'エラー！支払い処理ができませんでした',
+    'payment-success'      => '成功！支払いが完了しました',
+    'click-continue'       => '次のステップに進むには、続行をクリックしてください',
+    'some-error'           => 'エラーが発生しました',
+    'transaction-fee'      => '取引手数料',
+    'more-info'            => '（注文が正常に完了した後）',
+    'continue'             => '取引を完了するには、続行をクリックしてください',
+    'unavailable'          => '販売者にStripeが利用できません',
+    'something-went-wrong' => '何か問題が発生しました！',
+    'payment-for-order-id' => '注文IDの支払い',
+    'delete'               => '削除',
+    'app-name'             => 'Webkul Bagisto ストライプ決済ゲートウェイ',
+
+    'stripe-form' => [
+        'card-number'     => 'カード番号',
+        'expiration-date' => '有効期限',
+        'security-code'   => 'セキュリティコード',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'カードの詳細',
+                'discount'         => '割引',
+                'grand-total'      => '合計金額',
+                'pay'              => '支払う',
+                'powered-by'       => '提供元',
+                'privacy'          => 'プライバシー',
+                'save-card-info'   => '今後の支払いのためにこのカードを保存しますか？',
+                'shipping-cost'    => '送料',
+                'stripe'           => 'Stripe',
+                'subtotal'         => '小計',
+                'tax'              => '税金',
+                'terms'            => '利用規約',
+                'test-mode'        => 'テストモード',
+                'want-delete-card' => 'このカードを削除しますか？',
+            ],
+        ],
+    ],
+];

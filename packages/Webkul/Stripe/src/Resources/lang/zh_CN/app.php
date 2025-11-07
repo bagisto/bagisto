@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => '警告！请检查您的凭据',
+    'nameoncard'           => '卡片上的名字',
+    'expirymonth'          => '到期月份',
+    'expiryyear'           => '到期年份',
+    'cvc'                  => '安全码',
+    'or'                   => '或者',
+    'pay-with-saved-card'  => '使用保存的卡支付',
+    'cardno'               => '卡号',
+    'pay-now'              => '立即支付',
+    'errors-in-fields'     => '请更正错误并重试',
+    'pay-with-new-card'    => '使用新卡支付',
+    'remember-card'        => '记住卡片',
+    'pay'                  => '支付',
+    'payment-failed'       => '错误！无法处理付款',
+    'payment-success'      => '成功！付款已完成',
+    'click-continue'       => '请点击继续进行下一步',
+    'some-error'           => '发生错误',
+    'transaction-fee'      => '交易费',
+    'more-info'            => '（订单成功完成后）',
+    'continue'             => '请点击继续以完成交易',
+    'unavailable'          => '卖家不支持Stripe',
+    'something-went-wrong' => '出了点问题！',
+    'payment-for-order-id' => '订单ID付款',
+    'delete'               => '删除',
+    'app-name'             => 'Webkul Bagisto Stripe 支付网关',
+
+    'stripe-form' => [
+        'card-number'     => '卡号',
+        'expiration-date' => '到期日期',
+        'security-code'   => '安全码',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => '卡片详情',
+                'discount'         => '折扣',
+                'grand-total'      => '总金额',
+                'pay'              => '支付',
+                'powered-by'       => '技术支持',
+                'privacy'          => '隐私',
+                'save-card-info'   => '是否要保存此卡以便将来付款？',
+                'shipping-cost'    => '运费',
+                'stripe'           => 'Stripe',
+                'subtotal'         => '小计',
+                'tax'              => '税费',
+                'terms'            => '条款',
+                'test-mode'        => '测试模式',
+                'want-delete-card' => '是否要删除此卡？',
+            ],
+        ],
+    ],
+];

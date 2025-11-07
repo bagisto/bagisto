@@ -1,21 +1,21 @@
 {
-  "_veeValidate-AStS9x6w.js": {
-    "file": "assets/veeValidate-AStS9x6w.js",
+  "_veeValidate-B4BuHxkA.js": {
+    "file": "assets/veeValidate-B4BuHxkA.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-BpIHnJ7o.js"
+      "_vue-DCfJTHHH.js"
     ]
   },
-  "_vendor-DIwtuusy.js": {
-    "file": "assets/vendor-DIwtuusy.js",
+  "_vendor-jY-xvwzp.js": {
+    "file": "assets/vendor-jY-xvwzp.js",
     "name": "vendor"
   },
-  "_vue-BpIHnJ7o.js": {
-    "file": "assets/vue-BpIHnJ7o.js",
+  "_vue-DCfJTHHH.js": {
+    "file": "assets/vue-DCfJTHHH.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BoUQhNYM.css",
+    "file": "assets/app-CVWqGsTj.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -83,6 +83,10 @@
     "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
+  "src/Resources/assets/images/stripe.png": {
+    "file": "assets/stripe-WsnmAxt1.png",
+    "src": "src/Resources/assets/images/stripe.png"
+  },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-mhMpuEVL.png",
     "src": "src/Resources/assets/images/thank-you.png"
@@ -96,14 +100,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-C4XCDcMP.js",
+    "file": "assets/app-B9I5Mo_q.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-BpIHnJ7o.js",
-      "_vendor-DIwtuusy.js",
-      "_veeValidate-AStS9x6w.js"
+      "_vue-DCfJTHHH.js",
+      "_vendor-jY-xvwzp.js",
+      "_veeValidate-B4BuHxkA.js"
     ],
     "css": [
       "assets/app-DsP8OK1c.css"
