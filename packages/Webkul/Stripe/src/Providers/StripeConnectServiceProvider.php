@@ -26,31 +26,6 @@ class StripeConnectServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         $this->app->register(ModuleServiceProvider::class);
-
-        if (core()->getConfigData('sales.payment_methods.stripe.active')) {
-            $visiable = false;
-
-            if (
-                core()->getConfigData('sales.payment_methods.stripe.debug')
-                && core()->getConfigData('sales.payment_methods.stripe.api_test_key')
-                && core()->getConfigData('sales.payment_methods.stripe.api_test_publishable_key')
-            ) {
-                $visiable = true;
-            } elseif (
-                ! core()->getConfigData('sales.payment_methods.stripe.debug')
-                && ! empty(core()->getConfigData('sales.payment_methods.stripe.api_key'))
-                && ! empty(core()->getConfigData('sales.payment_methods.stripe.api_publishable_key'))
-            ) {
-                $visiable = true;
-            }
-
-            if ($visiable) {
-                $this->mergeConfigFrom(
-                    dirname(__DIR__).'/Config/paymentmethods.php',
-                    'payment_methods'
-                );
-            }
-        }
     }
 
     /**
@@ -66,8 +41,10 @@ class StripeConnectServiceProvider extends ServiceProvider
     /**
      * Merge the stripe connect's configuration with the admin panel
      */
-    public function registerConfig()
+    protected function registerConfig()
     {
-        //
+        $this->mergeConfigFrom(
+            dirname(__DIR__).'/Config/paymentmethods.php', 'payment_methods'
+        );
     }
 }
