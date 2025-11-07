@@ -333,7 +333,7 @@
                                                     @lang('stripe::app.pay-now') ({{ core()->currency($cart->base_grand_total) }})
                                                 </button>
 
-                                                or
+                                                @lang('stripe::app.or')
 
                                                 <span
                                                     class="secondary-button flex-block items-center gap-2 text-sm w-1/2 max-md:w-full max-w-full"

@@ -61,7 +61,6 @@ class StripeConnectServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-
     }
 
     /**
