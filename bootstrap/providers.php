@@ -32,6 +32,7 @@ return [
     Webkul\Notification\Providers\NotificationServiceProvider::class,
     Webkul\Payment\Providers\PaymentServiceProvider::class,
     Webkul\Paypal\Providers\PaypalServiceProvider::class,
+    Webkul\PayU\Providers\PayUServiceProvider::class,
     Webkul\Product\Providers\ProductServiceProvider::class,
     Webkul\Rule\Providers\RuleServiceProvider::class,
     Webkul\Sales\Providers\SalesServiceProvider::class,

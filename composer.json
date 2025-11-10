@@ -86,6 +86,7 @@
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
+            "Webkul\\PayU\\": "packages/Webkul/PayU/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
             "Webkul\\Rule\\": "packages/Webkul/Rule/src",
