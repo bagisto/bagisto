@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => '此组有关联的客户，无法删除。',
+
             'index' => [
                 'title' => '分组',
 

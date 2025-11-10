@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Grup ini memiliki pelanggan terkait dan tidak dapat dihapus.',
+
             'index' => [
                 'title' => 'Grup',
 

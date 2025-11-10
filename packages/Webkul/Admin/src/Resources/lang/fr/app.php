@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Ce groupe a des clients associés et ne peut pas être supprimé.',
+
             'index' => [
                 'title' => 'Groupes',
 

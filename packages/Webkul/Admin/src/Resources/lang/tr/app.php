@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Bu grubun ilişkili müşterileri var ve silinemez.',
+
             'index' => [
                 'title' => 'Gruplar',
 
