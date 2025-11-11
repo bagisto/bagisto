@@ -7,3 +7,5 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Implemented two-factor authentication (2FA) for admin users to enhance account security.
 
 * Migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise for enhanced bot protection.
+
+* Added Razorpay payment gateway integration with drop-in UI checkout experience.

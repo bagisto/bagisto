@@ -9,7 +9,7 @@ return [
         'class'            => 'Webkul\Paypal\Payment\SmartButton',
         'sandbox'          => true,
         'active'           => true,
-        'sort'             => 4,
+        'sort'             => 3,
     ],
 
     'paypal_standard' => [
@@ -20,6 +20,6 @@ return [
         'sandbox'          => true,
         'active'           => true,
         'business_account' => 'test@webkul.com',
-        'sort'             => 3,
+        'sort'             => 4,
     ],
 ];
