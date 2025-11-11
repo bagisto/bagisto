@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>@lang('razorpay::app.configuration.checkout-title')</title>
+        <title>@lang('razorpay::app.drop-in-ui.title')</title>
+
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <!-- Add loading spinner styles -->
+
+        <!-- Add Loading Spinner Styles -->
         <style>
             .loader-container {
                 display: flex;
@@ -39,29 +41,40 @@
             }
         </style>
     </head>
+
     <body>
-        <!-- Add loading spinner -->
+        <!-- Add Loading Spinner -->
         <div class="loader-container">
             <div class="loader"></div>
         </div>
-        
-        <!-- Add error message container -->
-        <div id="error-message" class="error-message">
-            @lang('razorpay::app.response.error-message')
+
+        <!-- Add Error Message Container -->
+        <div 
+            id="error-message" 
+            class="error-message"
+        >
+            @lang('razorpay::app.response.something-went-wrong')
         </div>
 
         <script>
-            var options = {
+            let options = {
                 "key": "{{ $payment['key'] }}",
+
                 "amount": "{{ $payment['amount'] }}",
+
                 "currency": "INR",
+
                 "name": @json(core()->getConfigData('sales.payment_methods.razorpay.merchant_name')),
+
                 "description": @json(core()->getConfigData('sales.payment_methods.razorpay.merchant_desc')),
+
                 "image": "{{ $payment['image'] }}",
+
                 "order_id": "{{ $payment['order_id'] }}",
+
                 "handler": function (response) {
                     sessionStorage.removeItem('razorpayInitiated');
-                    // Show loading spinner during redirect
+
                     document.querySelector('.loader-container').style.display = 'flex';
 
                     window.location.href = "{{ route('razorpay.payment.success') }}?razorpay_payment_id=" + 
@@ -69,17 +82,23 @@
                         "&razorpay_order_id=" + encodeURIComponent(response.razorpay_order_id) + 
                         "&razorpay_signature=" + encodeURIComponent(response.razorpay_signature);
                 },
+
                 "prefill": {
                     "name": "{{ $payment['prefill']['name'] }}",
+
                     "email": "{{ $payment['prefill']['email'] }}",
+
                     "contact": "{{ $payment['prefill']['contact'] }}"
                 },
+
                 "notes": {
                     "shipping_address": "{{ $payment['notes']['shipping_address'] }}"
                 },
+
                 "theme": {
                     "color": "#F37254"
                 },
+
                 "modal": {
                     "ondismiss": function () {
                         sessionStorage.removeItem('razorpayInitiated');
@@ -88,15 +107,17 @@
 
                         window.location.href = "{{ route('razorpay.payment.cancel') }}";
                     },
+
                     "escape": true,
+
                     "animation": true
                 }
             };
 
-            var rzp1 = new Razorpay(options);
+            let razorpay = new Razorpay(options);
 
             if (sessionStorage.getItem('razorpayInitiated')) {
-                rzp1.open();
+                razorpay.open();
             }
             
             document.querySelector('.loader-container').style.display = 'none';
@@ -104,7 +125,7 @@
             window.onload = function () {
                 sessionStorage.setItem('razorpayInitiated', true);
 
-                rzp1.open();
+                razorpay.open();
             };
         </script>
     </body>

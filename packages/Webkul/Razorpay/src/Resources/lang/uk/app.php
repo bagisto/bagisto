@@ -1,27 +1,15 @@
 <?php
 
 return [
-    'configuration' => [
-        'checkout-title'   => 'Razorpay Оплата',
-        'client-id'        => 'Ідентифікатор клієнта',
-        'client-secret'    => 'Секретний ключ клієнта',
-        'description'      => 'Опис',
-        'info'             => 'Razorpay — це фінансова технологічна платформа, яка допомагає компаніям приймати, обробляти та здійснювати платежі.',
-        'merchant_desc'    => 'Опис транзакції (буде показано у формі оплати)',
-        'merchant_name'    => 'Ім’я продавця (буде показано у формі оплати)',
-        'name'             => 'Razorpay',
-        'production-only'  => 'Тільки для виробництва.',
-        'sandbox-only'     => 'Тільки для пісочниці.',
-        'status'           => 'Статус',
-        'test-mode-id'     => 'Ідентифікатор клієнта в тестовому режимі',
-        'test-mode-secret' => 'Секретний ключ клієнта в тестовому режимі',
-        'title'            => 'Заголовок',
+    'drop-in-ui' => [
+        'title' => 'Razorpay',
     ],
 
     'response' => [
-        'credentials-missing'  => 'Відсутні облікові дані Razorpay!',
-        'error-message'        => 'Під час завантаження платіжного шлюзу сталася помилка. Будь ласка, спробуйте ще раз.',
-        'razorpay-cancelled'   => 'Платіж Razorpay було скасовано.',
-        'something-went-wrong' => 'Щось пішло не так',
+        'payment' => [
+            'cancelled' => 'Платіж Razorpay було скасовано.',
+        ],
+
+        'something-went-wrong' => 'Щось пішло не так.',
     ],
 ];

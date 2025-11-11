@@ -8,14 +8,14 @@ use Webkul\Payment\Payment\Payment;
 class RazorpayPayment extends Payment
 {
     /**
-     * Payment method code
+     * Payment method code.
      *
      * @var string
      */
     protected $code = 'razorpay';
 
     /**
-     * @return string — The redirect URL.
+     * Get redirect url.
      */
     public function getRedirectUrl()
     {
@@ -23,7 +23,7 @@ class RazorpayPayment extends Payment
     }
 
     /**
-     * Returns payment method image
+     * Returns payment method image.
      *
      * @return array
      */
@@ -31,6 +31,6 @@ class RazorpayPayment extends Payment
     {
         $url = $this->getConfigData('image');
 
-        return $url ? Storage::url($url) :  bagisto_asset('images/razorpay.png', 'shop');
+        return $url ? Storage::url($url) : bagisto_asset('images/razorpay.png', 'shop');
     }
 }

@@ -7,6 +7,6 @@ return [
         'description' => 'Razorpay',
         'class'       => 'Webkul\Razorpay\Payment\RazorpayPayment',
         'active'      => true,
-        'sort'        => 3,
+        'sort'        => 5,
     ],
 ];

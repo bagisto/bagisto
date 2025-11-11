@@ -7,9 +7,9 @@ return [
 
     'response' => [
         'payment' => [
-            'cancelled' => 'De Razorpay-betaling is geannuleerd.',
+            'cancelled' => 'Pembayaran Razorpay telah dibatalkan.',
         ],
 
-        'something-went-wrong' => 'Er is iets misgegaan.',
+        'something-went-wrong' => 'Ada yang salah.',
     ],
 ];
