@@ -10,6 +10,7 @@ return [
             'cancelled' => 'پرداخت Razorpay لغو شد.',
         ],
 
-        'something-went-wrong' => 'مشکلی پیش آمد.',
+        'something-went-wrong'     => 'مشکلی پیش آمد.',
+        'supported-currency-error' => 'ارز :currency پشتیبانی نمی‌شود. ارزهای پشتیبانی شده: :supportedCurrencies.',
     ],
 ];

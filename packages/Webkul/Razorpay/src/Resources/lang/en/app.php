@@ -10,6 +10,7 @@ return [
             'cancelled' => 'Razorpay payment has been cancelled.',
         ],
 
-        'something-went-wrong' => 'Something went wrong.',
+        'something-went-wrong'     => 'Something went wrong.',
+        'supported-currency-error' => 'The currency :currency is not supported. Supported Currencies: :supportedCurrencies.',
     ],
 ];

@@ -10,6 +10,7 @@ return [
             'cancelled' => 'Płatność Razorpay została anulowana.',
         ],
 
-        'something-went-wrong' => 'Coś poszło nie tak.',
+        'something-went-wrong'     => 'Coś poszło nie tak.',
+        'supported-currency-error' => 'Waluta :currency nie jest obsługiwana. Obsługiwane waluty: :supportedCurrencies.',
     ],
 ];

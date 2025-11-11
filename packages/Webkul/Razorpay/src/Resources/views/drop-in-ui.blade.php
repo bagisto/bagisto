@@ -57,76 +57,51 @@
         </div>
 
         <script>
-            let options = {
-                "key": "{{ $payment['key'] }}",
-
-                "amount": "{{ $payment['amount'] }}",
-
-                "currency": "INR",
-
-                "name": @json(core()->getConfigData('sales.payment_methods.razorpay.merchant_name')),
-
-                "description": @json(core()->getConfigData('sales.payment_methods.razorpay.merchant_desc')),
-
-                "image": "{{ $payment['image'] }}",
-
-                "order_id": "{{ $payment['order_id'] }}",
-
-                "handler": function (response) {
-                    sessionStorage.removeItem('razorpayInitiated');
-
-                    document.querySelector('.loader-container').style.display = 'flex';
-
-                    window.location.href = "{{ route('razorpay.payment.success') }}?razorpay_payment_id=" + 
-                        encodeURIComponent(response.razorpay_payment_id) + 
-                        "&razorpay_order_id=" + encodeURIComponent(response.razorpay_order_id) + 
-                        "&razorpay_signature=" + encodeURIComponent(response.razorpay_signature);
+            const payment = @json($payment);
+            
+            const razorpay = new Razorpay({
+                key: payment.key,
+                amount: payment.amount,
+                currency: payment.currency,
+                name: payment.name,
+                description: payment.description,
+                image: payment.image,
+                order_id: payment.order_id,
+                prefill: payment.prefill,
+                
+                theme: {
+                    color: payment.theme_color || '#0041FF'
                 },
-
-                "prefill": {
-                    "name": "{{ $payment['prefill']['name'] }}",
-
-                    "email": "{{ $payment['prefill']['email'] }}",
-
-                    "contact": "{{ $payment['prefill']['contact'] }}"
-                },
-
-                "notes": {
-                    "shipping_address": "{{ $payment['notes']['shipping_address'] }}"
-                },
-
-                "theme": {
-                    "color": "#F37254"
-                },
-
-                "modal": {
-                    "ondismiss": function () {
-                        sessionStorage.removeItem('razorpayInitiated');
-
+                
+                modal: {
+                    ondismiss: function () {
                         document.querySelector('.loader-container').style.display = 'flex';
 
                         window.location.href = "{{ route('razorpay.payment.cancel') }}";
                     },
-
-                    "escape": true,
-
-                    "animation": true
+                    
+                    escape: true,
+                    animation: true
+                },
+                
+                handler: function (response) {
+                    document.querySelector('.loader-container').style.display = 'flex';
+                    
+                    const params = new URLSearchParams({
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature
+                    });
+                    
+                    window.location.href = "{{ route('razorpay.payment.success') }}?" + params.toString();
                 }
-            };
+            });
 
-            let razorpay = new Razorpay(options);
-
-            if (sessionStorage.getItem('razorpayInitiated')) {
-                razorpay.open();
-            }
-            
-            document.querySelector('.loader-container').style.display = 'none';
-
-            window.onload = function () {
-                sessionStorage.setItem('razorpayInitiated', true);
+            window.addEventListener('load', function() {
+                document.querySelector('.loader-container').style.display = 'none';
 
                 razorpay.open();
-            };
+            });
         </script>
     </body>
 </html>
