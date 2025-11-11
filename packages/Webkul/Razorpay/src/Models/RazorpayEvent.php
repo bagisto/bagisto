@@ -16,7 +16,9 @@ class RazorpayEvent extends Model implements RazorpayEventContract
      * @var array
      */
     protected $fillable = [
+        'cart_id',
         'order_id',
+        'razorpay_receipt',
         'razorpay_order_id',
         'razorpay_payment_id',
         'razorpay_invoice_status',

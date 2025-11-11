@@ -17,6 +17,11 @@ use Webkul\Sales\Transformers\OrderResource;
 class RazorpayController extends Controller
 {
     /**
+     * Receipt prefix.
+     */
+    public const RECEIPT_PREFIX = 'receipt_';
+
+    /**
      * Supported currencies.
      */
     protected $supportedCurrencies = ['INR'];
@@ -59,7 +64,7 @@ class RazorpayController extends Controller
             $orderAPI = $api->order->create([
                 'amount'          => (int) $cart->base_grand_total * 100,
                 'currency'        => $currency,
-                'receipt'         => 'receipt_'.$cart->id,
+                'receipt'         => self::RECEIPT_PREFIX.$cart->id,
                 'payment_capture' => 1,
                 'notes'           => [
                     'cart_id' => $cart->id,
@@ -84,6 +89,8 @@ class RazorpayController extends Controller
             ];
 
             $this->razorpayEventRepository->create([
+                'cart_id'                 => $cart->id,
+                'razorpay_receipt'        => self::RECEIPT_PREFIX.$cart->id,
                 'razorpay_order_id'       => $orderAPI['id'],
                 'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
             ]);
