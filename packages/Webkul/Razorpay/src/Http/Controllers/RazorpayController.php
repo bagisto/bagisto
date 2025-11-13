@@ -53,7 +53,7 @@ class RazorpayController extends Controller
 
             $cart = Cart::getCart();
 
-            $currency = strtoupper($cart->cart_currency_code ?? core()->getBaseCurrencyCode());
+            $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 
             if (! in_array($currency, $this->supportedCurrencies)) {
                 session()->flash('error', trans('razorpay::app.response.supported-currency-error', ['currency' => $currency, 'supportedCurrencies' => implode(', ', $this->supportedCurrencies)]));
