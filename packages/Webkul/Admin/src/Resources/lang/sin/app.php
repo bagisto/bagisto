@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'මෙම කණ්ඩායමට සම්බන්ධිත පාරිභෝගිකයින් ඇති අතර එය මකා දැමිය නොහැක.',
+
             'index' => [
                 'title' => 'කණ්ඩායම්',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => 'ඉල්ලා සිටීම',
                     'pending-payment'                => 'ඉල්ලා සිටින ගෙවීම',
                     'processing'                     => 'සංස්කරණය කිරීම',
+                    'production-mode-info'           => 'නිෂ්පාදන මාදිලිය සඳහා පමණක්.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay යනු ව්‍යාපාරයන්ට ගෙවීම් පිළිගැනීමට, සැකසීමට සහ බෙදා හැරීමට උපකාර කරන මූල්‍ය තාක්ෂණ වේදිකාවකි.',
                     'sandbox'                        => 'සැම්ප්ලින්',
                     'set-invoice-status'             => 'බිල්පත සාදන්නාට පසුව බිල්පතේ තත්වය සකස් කරන්න',
                     'set-order-status'               => 'බිල්පත සාදන්නාට පසුව ඇණවුමේ තත්වය සකස් කරන්න',
                     'sort-order'                     => 'අනුක්රමයේ අනුක්‍රමය',
                     'statement_descriptor'           => 'ප්‍රකාශන විස්තරය',
                     'status'                         => 'තත්වය',
-                    'stripePayment'                  => 'Stripe ගෙවීම',
-                    'stripe_refund'                  => 'Stripe ආපසු ගෙවීම',
+                    'merchant-name'                  => 'වෙළෙන්දාගේ නම',
+                    'merchant-description'           => 'වෙළෙන්දාගේ විස්තර',
+                    'test-client-id'                 => 'පරීක්ෂණ මාදිලියේ අමතක අංකය',
+                    'test-client-secret'             => 'පරීක්ෂණ මාදිලියේ අමතක රහස',
+                    'test-mode-info'                 => 'පරීක්ෂණ/සැම්ප්ලින් මාදිලිය සඳහා පමණක්.',
                     'title'                          => 'මාතෘකාව',
                 ],
 

@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Ce groupe a des clients associés et ne peut pas être supprimé.',
+
             'index' => [
                 'title' => 'Groupes',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => 'En attente',
                     'pending-payment'                => 'Paiement en attente',
                     'processing'                     => 'En cours de traitement',
+                    'production-mode-info'           => 'Pour le mode production uniquement.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay est une plateforme de technologie financière qui aide les entreprises à accepter, traiter et décaisser des paiements.',
                     'sandbox'                        => 'Environnement de test',
                     'set-invoice-status'             => 'Définir le statut de la facture après sa création sur',
                     'set-order-status'               => 'Définir le statut de la commande après la création de la facture sur',
                     'sort-order'                     => 'Ordre de tri',
                     'statement_descriptor'           => 'Descripteur de relevé',
                     'status'                         => 'Statut',
-                    'stripePayment'                  => 'Paiement Stripe',
-                    'stripe_refund'                  => 'Remboursement Stripe',
+                    'merchant-name'                  => 'Nom du marchand',
+                    'merchant-description'           => 'Description du marchand',
+                    'test-client-id'                 => 'ID client mode test',
+                    'test-client-secret'             => 'Secret client mode test',
+                    'test-mode-info'                 => 'Pour le mode test/environnement de test uniquement.',
                     'title'                          => 'Titre',
                 ],
 

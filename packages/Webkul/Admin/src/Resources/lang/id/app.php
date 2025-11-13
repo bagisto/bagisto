@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Grup ini memiliki pelanggan terkait dan tidak dapat dihapus.',
+
             'index' => [
                 'title' => 'Grup',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => 'Menunggu',
                     'pending-payment'                => 'Pembayaran Menunggu',
                     'processing'                     => 'Proses',
+                    'production-mode-info'           => 'Hanya untuk mode produksi.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay adalah platform teknologi keuangan yang membantu bisnis menerima, memproses, dan mencairkan pembayaran.',
                     'sandbox'                        => 'Sandbox',
                     'set-invoice-status'             => 'Setel status faktur setelah membuat faktur ke',
                     'set-order-status'               => 'Setel status pesanan setelah membuat faktur ke',
                     'sort-order'                     => 'Urutan Pengurutan',
                     'statement_descriptor'           => 'Deskripsi Pernyataan',
                     'status'                         => 'Status',
-                    'stripePayment'                  => 'Pembayaran Stripe',
-                    'stripe_refund'                  => 'Pengembalian Dana Stripe',
+                    'merchant-name'                  => 'Nama Merchant',
+                    'merchant-description'           => 'Deskripsi Merchant',
+                    'test-client-id'                 => 'ID Klien Mode Test',
+                    'test-client-secret'             => 'Kunci Rahasia Klien Mode Test',
+                    'test-mode-info'                 => 'Hanya untuk mode test/sandbox.',
                     'title'                          => 'Judul',
                 ],
 

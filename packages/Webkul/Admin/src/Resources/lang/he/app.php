@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'לקבוצה זו יש לקוחות משויכים ולא ניתן למחוק אותה.',
+
             'index' => [
                 'title' => 'קבוצות',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => 'ממתין',
                     'pending-payment'                => 'תשלום ממתין',
                     'processing'                     => 'מעבד',
+                    'production-mode-info'           => 'למצב ייצור בלבד.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay היא פלטפורמת טכנולוגיה פיננסית שמסייעת לעסקים לקבל, לעבד ולשלם תשלומים.',
                     'sandbox'                        => 'סנדבוקס',
                     'set-invoice-status'             => 'הגדר את מצב החשבונית לאחר יצירת החשבונית ל',
                     'set-order-status'               => 'הגדר את מצב ההזמנה לאחר יצירת החשבונית ל',
                     'sort-order'                     => 'סדר מיון',
                     'statement_descriptor'           => 'תיאור דוח',
                     'status'                         => 'סטטוס',
-                    'stripePayment'                  => 'תשלום Stripe',
-                    'stripe_refund'                  => 'החזר Stripe',
+                    'merchant-name'                  => 'שם הסוחר',
+                    'merchant-description'           => 'תיאור הסוחר',
+                    'test-client-id'                 => 'מזהה לקוח במצב בדיקה',
+                    'test-client-secret'             => 'סוד לקוח במצב בדיקה',
+                    'test-mode-info'                 => 'למצב בדיקה/סנדבוקס בלבד.',
                     'title'                          => 'כותרת',
                 ],
 

@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Aquest grup té clients associats i no es pot eliminar.',
+
             'index' => [
                 'title' => 'Grups',
 
@@ -4511,14 +4513,20 @@ return [
                     'pending'                        => 'Pendent',
                     'pending-payment'                => 'Pagament pendent',
                     'processing'                     => 'Processant',
+                    'production-mode-info'           => 'Només per al mode de producció.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay és una plataforma de tecnologia financera que ajuda les empreses a acceptar, processar i distribuir pagaments.',
                     'sandbox'                        => 'Entorn de proves',
                     'set-invoice-status'             => 'Establir l\'estat de la factura després de crear-la a',
                     'set-order-status'               => 'Establir l\'estat de la comanda després de crear la factura a',
                     'sort-order'                     => 'Ordre de classificació',
                     'statement_descriptor'           => 'Descripció de l’extracte',
                     'status'                         => 'Estat',
-                    'stripePayment'                  => 'Pagament amb Stripe',
-                    'stripe_refund'                  => 'Reemborsament Stripe',
+                    'merchant-name'                  => 'Nom del comerciant',
+                    'merchant-description'           => 'Descripció del comerciant',
+                    'test-client-id'                 => 'ID de client en mode de prova',
+                    'test-client-secret'             => 'Clau secreta del client en mode de prova',
+                    'test-mode-info'                 => 'Només per al mode de prova/entorn de proves.',
                     'title'                          => 'Títol',
                 ],
 

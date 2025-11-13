@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => '此组有关联的客户，无法删除。',
+
             'index' => [
                 'title' => '分组',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => '待处理',
                     'pending-payment'                => '待处理付款',
                     'processing'                     => '处理中',
+                    'production-mode-info'           => '仅限生产模式。',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay 是一个金融技术平台，帮助企业接受、处理和支付款项。',
                     'sandbox'                        => '沙盒',
                     'set-invoice-status'             => '设置发票生成后的状态',
                     'set-order-status'               => '设置发票生成后的订单状态',
                     'sort-order'                     => '排序',
                     'statement_descriptor'           => '账单描述',
                     'status'                         => '状态',
-                    'stripePayment'                  => 'Stripe 支付',
-                    'stripe_refund'                  => 'Stripe 退款',
+                    'merchant-name'                  => '商户名称',
+                    'merchant-description'           => '商户描述',
+                    'test-client-id'                 => '测试模式客户端 ID',
+                    'test-client-secret'             => '测试模式客户端密钥',
+                    'test-mode-info'                 => '仅限测试/沙盒模式。',
                     'title'                          => '标题',
                 ],
 

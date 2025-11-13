@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Bu grubun ilişkili müşterileri var ve silinemez.',
+
             'index' => [
                 'title' => 'Gruplar',
 
@@ -4512,14 +4514,20 @@ return [
                     'pending'                        => 'Beklemede',
                     'pending-payment'                => 'Bekleyen Ödeme',
                     'processing'                     => 'İşleniyor',
+                    'production-mode-info'           => 'Yalnızca üretim modu için.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay, işletmelerin ödemeleri kabul etmesine, işlemesine ve ödemesine yardımcı olan bir finansal teknoloji platformudur.',
                     'sandbox'                        => 'Kum Havuzu',
                     'set-invoice-status'             => 'Fatura oluşturulduktan sonra fatura durumunu ayarla',
                     'set-order-status'               => 'Fatura oluşturulduktan sonra sipariş durumunu ayarla',
                     'sort-order'                     => 'Sıralama Sırası',
                     'statement_descriptor'           => 'Ekstre Açıklaması',
                     'status'                         => 'Durum',
-                    'stripePayment'                  => 'Stripe Ödemesi',
-                    'stripe_refund'                  => 'Stripe İadesi',
+                    'merchant-name'                  => 'Satıcı Adı',
+                    'merchant-description'           => 'Satıcı Açıklaması',
+                    'test-client-id'                 => 'Test Modu Müşteri Kimliği',
+                    'test-client-secret'             => 'Test Modu Müşteri Sırrı',
+                    'test-mode-info'                 => 'Yalnızca test/kum havuzu modu için.',
                     'title'                          => 'Başlık',
                 ],
 
