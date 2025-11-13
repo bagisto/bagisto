@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'تحذير! يرجى التحقق من بيانات الاعتماد الخاصة بك',
+    'nameoncard'           => 'الاسم على البطاقة',
+    'expirymonth'          => 'شهر الانتهاء',
+    'expiryyear'           => 'سنة الانتهاء',
+    'cvc'                  => 'رمز الأمان',
+    'or'                   => 'أو',
+    'pay-with-saved-card'  => 'الدفع باستخدام بطاقة محفوظة',
+    'cardno'               => 'رقم البطاقة',
+    'pay-now'              => 'ادفع الآن',
+    'errors-in-fields'     => 'يرجى تصحيح الأخطاء والمحاولة مرة أخرى',
+    'pay-with-new-card'    => 'الدفع ببطاقة جديدة',
+    'remember-card'        => 'تذكر البطاقة',
+    'pay'                  => 'دفع',
+    'payment-failed'       => 'خطأ! لم تتم معالجة الدفع',
+    'payment-success'      => 'نجاح! تم إكمال الدفع',
+    'click-continue'       => 'انقر فوق متابعة للانتقال إلى الخطوة التالية',
+    'some-error'           => 'حدث خطأ',
+    'transaction-fee'      => 'رسوم المعاملة',
+    'more-info'            => '(بعد إكمال الطلب بنجاح)',
+    'continue'             => 'يرجى النقر على متابعة لإتمام معاملتك',
+    'unavailable'          => 'Stripe غير متاح للبائع',
+    'something-went-wrong' => 'حدث خطأ ما!',
+    'payment-for-order-id' => 'الدفع لرقم الطلب',
+    'delete'               => 'حذف',
+    'app-name'             => 'بوابة دفع Webkul Bagisto Stripe',
+
+    'stripe-form' => [
+        'card-number'     => 'رقم البطاقة',
+        'expiration-date' => 'تاريخ انتهاء الصلاحية',
+        'security-code'   => 'رمز الأمان',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'تفاصيل البطاقة',
+                'discount'         => 'الخصم',
+                'grand-total'      => 'المجموع الكلي',
+                'pay'              => 'ادفع',
+                'powered-by'       => 'بدعم من',
+                'privacy'          => 'الخصوصية',
+                'save-card-info'   => 'هل تريد حفظ هذه البطاقة للمدفوعات المستقبلية؟',
+                'shipping-cost'    => 'تكلفة الشحن',
+                'stripe'           => 'سترايب',
+                'subtotal'         => 'المجموع الفرعي',
+                'tax'              => 'الضريبة',
+                'terms'            => 'الشروط',
+                'test-mode'        => 'وضع الاختبار',
+                'want-delete-card' => 'هل تريد حذف هذه البطاقة؟',
+            ],
+        ],
+    ],
+];

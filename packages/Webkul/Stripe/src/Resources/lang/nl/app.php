@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'Waarschuwing! Controleer uw referenties',
+    'nameoncard'           => 'Naam op kaart',
+    'expirymonth'          => 'Vervalmaand',
+    'expiryyear'           => 'Vervaljaar',
+    'cvc'                  => 'Beveiligingscode',
+    'or'                   => 'of',
+    'pay-with-saved-card'  => 'Betalen met opgeslagen kaart',
+    'cardno'               => 'Kaartnummer',
+    'pay-now'              => 'Betaal nu',
+    'errors-in-fields'     => 'Corrigeer de fouten en probeer het opnieuw',
+    'pay-with-new-card'    => 'Betalen met nieuwe kaart',
+    'remember-card'        => 'Onthoud kaart',
+    'pay'                  => 'Betalen',
+    'payment-failed'       => 'Fout! Betaling kon niet worden verwerkt',
+    'payment-success'      => 'Succes! Betaling voltooid',
+    'click-continue'       => 'Klik op Doorgaan om door te gaan naar de volgende stap',
+    'some-error'           => 'Er is een fout opgetreden',
+    'transaction-fee'      => 'Transactiekosten',
+    'more-info'            => '(Nadat de bestelling met succes is voltooid)',
+    'continue'             => 'Klik op Doorgaan om uw transactie te voltooien',
+    'unavailable'          => 'Stripe is niet beschikbaar voor verkoper',
+    'something-went-wrong' => 'Er is iets misgegaan!',
+    'payment-for-order-id' => 'Betaling voor bestel-ID',
+    'delete'               => 'Verwijderen',
+    'app-name'             => 'Webkul Bagisto Stripe-betalingsgateway',
+
+    'stripe-form' => [
+        'card-number'     => 'Kaartnummer',
+        'expiration-date' => 'Vervaldatum',
+        'security-code'   => 'Beveiligingscode',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Kaartgegevens',
+                'discount'         => 'Korting',
+                'grand-total'      => 'Totaalbedrag',
+                'pay'              => 'Betalen',
+                'powered-by'       => 'Aangedreven door',
+                'privacy'          => 'Privacy',
+                'save-card-info'   => 'Wilt u deze kaart opslaan voor toekomstige betalingen?',
+                'shipping-cost'    => 'Verzendkosten',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Subtotaal',
+                'tax'              => 'Belasting',
+                'terms'            => 'Voorwaarden',
+                'test-mode'        => 'Testmodus',
+                'want-delete-card' => 'Wilt u deze kaart verwijderen?',
+            ],
+        ],
+    ],
+];

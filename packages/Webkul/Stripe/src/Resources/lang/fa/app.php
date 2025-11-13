@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'هشدار! لطفاً مدارک خود را بررسی کنید',
+    'nameoncard'           => 'نام روی کارت',
+    'expirymonth'          => 'ماه انقضا',
+    'expiryyear'           => 'سال انقضا',
+    'cvc'                  => 'کد امنیتی',
+    'or'                   => 'یا',
+    'pay-with-saved-card'  => 'پرداخت با کارت ذخیره شده',
+    'cardno'               => 'شماره کارت',
+    'pay-now'              => 'اکنون پرداخت کنید',
+    'errors-in-fields'     => 'لطفاً خطاها را اصلاح کنید و دوباره تلاش کنید',
+    'pay-with-new-card'    => 'پرداخت با کارت جدید',
+    'remember-card'        => 'کارت را به خاطر بسپار',
+    'pay'                  => 'پرداخت',
+    'payment-failed'       => 'خطا! پرداخت پردازش نشد',
+    'payment-success'      => 'موفقیت! پرداخت تکمیل شد',
+    'click-continue'       => 'برای ادامه به مرحله بعدی روی ادامه کلیک کنید',
+    'some-error'           => 'یک خطا رخ داد',
+    'transaction-fee'      => 'هزینه تراکنش',
+    'more-info'            => '(پس از تکمیل موفقیت‌آمیز سفارش)',
+    'continue'             => 'لطفاً برای تکمیل تراکنش خود روی ادامه کلیک کنید',
+    'unavailable'          => 'Stripe برای فروشنده در دسترس نیست',
+    'something-went-wrong' => 'مشکلی پیش آمد!',
+    'payment-for-order-id' => 'پرداخت برای شناسه سفارش',
+    'delete'               => 'حذف',
+    'app-name'             => 'درگاه پرداخت Stripe وبکول بگیستو',
+
+    'stripe-form' => [
+        'card-number'     => 'شماره کارت',
+        'expiration-date' => 'تاریخ انقضا',
+        'security-code'   => 'کد امنیتی',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'جزئیات کارت',
+                'discount'         => 'تخفیف',
+                'grand-total'      => 'جمع کل',
+                'pay'              => 'پرداخت',
+                'powered-by'       => 'قدرت گرفته از',
+                'privacy'          => 'حریم خصوصی',
+                'save-card-info'   => 'آیا می‌خواهید این کارت را برای پرداخت‌های بعدی ذخیره کنید؟',
+                'shipping-cost'    => 'هزینه ارسال',
+                'stripe'           => 'استرایپ',
+                'subtotal'         => 'جمع جزئی',
+                'tax'              => 'مالیات',
+                'terms'            => 'شرایط',
+                'test-mode'        => 'حالت آزمایشی',
+                'want-delete-card' => 'آیا می‌خواهید این کارت را حذف کنید؟',
+            ],
+        ],
+    ],
+];

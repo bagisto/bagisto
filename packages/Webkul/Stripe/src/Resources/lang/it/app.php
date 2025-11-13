@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'Attenzione! Controlla le tue credenziali',
+    'nameoncard'           => 'Nome sulla carta',
+    'expirymonth'          => 'Mese di scadenza',
+    'expiryyear'           => 'Anno di scadenza',
+    'cvc'                  => 'Codice di sicurezza',
+    'or'                   => 'o',
+    'pay-with-saved-card'  => 'Paga con carta salvata',
+    'cardno'               => 'Numero di carta',
+    'pay-now'              => 'Paga ora',
+    'errors-in-fields'     => 'Correggi gli errori e riprova',
+    'pay-with-new-card'    => 'Paga con nuova carta',
+    'remember-card'        => 'Ricorda carta',
+    'pay'                  => 'Paga',
+    'payment-failed'       => 'Errore! Impossibile elaborare il pagamento',
+    'payment-success'      => 'Successo! Pagamento completato',
+    'click-continue'       => 'Clicca su Continua per procedere al passaggio successivo',
+    'some-error'           => 'Si è verificato un errore',
+    'transaction-fee'      => 'Commissione di transazione',
+    'more-info'            => '(Dopo aver completato l\'ordine con successo)',
+    'continue'             => 'Fai clic su Continua per completare la tua transazione',
+    'unavailable'          => 'Stripe non è disponibile per il venditore',
+    'something-went-wrong' => 'Qualcosa è andato storto!',
+    'payment-for-order-id' => 'Pagamento per ID ordine',
+    'delete'               => 'Elimina',
+    'app-name'             => 'Gateway di pagamento Stripe di Webkul Bagisto',
+
+    'stripe-form' => [
+        'card-number'     => 'Numero di carta',
+        'expiration-date' => 'Data di scadenza',
+        'security-code'   => 'Codice di sicurezza',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Dettagli della carta',
+                'discount'         => 'Sconto',
+                'grand-total'      => 'Totale generale',
+                'pay'              => 'Paga',
+                'powered-by'       => 'Offerto da',
+                'privacy'          => 'Privacy',
+                'save-card-info'   => 'Vuoi salvare questa carta per futuri pagamenti?',
+                'shipping-cost'    => 'Costo di spedizione',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Subtotale',
+                'tax'              => 'Tassa',
+                'terms'            => 'Termini',
+                'test-mode'        => 'Modalità test',
+                'want-delete-card' => 'Vuoi eliminare questa carta?',
+            ],
+        ],
+    ],
+];

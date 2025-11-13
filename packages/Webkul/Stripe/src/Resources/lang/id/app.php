@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'Peringatan! Harap periksa kredensial Anda.',
+    'nameoncard'           => 'Nama pada kartu',
+    'expirymonth'          => 'Bulan kedaluwarsa',
+    'expiryyear'           => 'Tahun kedaluwarsa',
+    'cvc'                  => 'Kode keamanan (CVC)',
+    'or'                   => 'atau',
+    'pay-with-saved-card'  => 'Bayar dengan kartu tersimpan',
+    'cardno'               => 'Nomor kartu',
+    'pay-now'              => 'Bayar sekarang',
+    'errors-in-fields'     => 'Harap perbaiki kesalahan dan coba lagi.',
+    'pay-with-new-card'    => 'Bayar dengan kartu baru',
+    'remember-card'        => 'Ingat kartu ini',
+    'pay'                  => 'Bayar',
+    'payment-failed'       => 'Kesalahan! Pembayaran gagal diproses.',
+    'payment-success'      => 'Berhasil! Pembayaran berhasil diselesaikan.',
+    'click-continue'       => 'Klik Lanjutkan untuk melanjutkan ke langkah berikutnya.',
+    'some-error'           => 'Terjadi kesalahan.',
+    'transaction-fee'      => 'Biaya transaksi',
+    'more-info'            => '(setelah pesanan berhasil diselesaikan)',
+    'continue'             => 'Silakan klik Lanjutkan untuk menyelesaikan transaksi Anda.',
+    'unavailable'          => 'Stripe tidak tersedia untuk penjual.',
+    'something-went-wrong' => 'Terjadi kesalahan!',
+    'payment-for-order-id' => 'Pembayaran untuk ID pesanan',
+    'delete'               => 'Hapus',
+    'app-name'             => 'Gateway Pembayaran Webkul Bagisto Stripe',
+
+    'stripe-form' => [
+        'card-number'     => 'Nomor kartu',
+        'expiration-date' => 'Tanggal kedaluwarsa',
+        'security-code'   => 'Kode keamanan',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Detail kartu',
+                'discount'         => 'Diskon',
+                'grand-total'      => 'Total keseluruhan',
+                'pay'              => 'Bayar',
+                'powered-by'       => 'Didukung oleh',
+                'privacy'          => 'Privasi',
+                'save-card-info'   => 'Apakah Anda ingin menyimpan kartu ini untuk pembayaran berikutnya?',
+                'shipping-cost'    => 'Biaya pengiriman',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Subtotal',
+                'tax'              => 'Pajak',
+                'terms'            => 'Syarat dan Ketentuan',
+                'test-mode'        => 'Mode uji coba',
+                'want-delete-card' => 'Apakah Anda ingin menghapus kartu ini?',
+            ],
+        ],
+    ],
+];

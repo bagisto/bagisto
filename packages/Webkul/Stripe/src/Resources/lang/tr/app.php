@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'Uyarı! Lütfen kimlik bilgilerinizi kontrol edin',
+    'nameoncard'           => 'Kart Üzerindeki İsim',
+    'expirymonth'          => 'Son Kullanma Ayı',
+    'expiryyear'           => 'Son Kullanma Yılı',
+    'cvc'                  => 'Güvenlik Kodu',
+    'or'                   => 'veya',
+    'pay-with-saved-card'  => 'Kaydedilmiş Kart ile Öde',
+    'cardno'               => 'Kart Numarası',
+    'pay-now'              => 'Şimdi Öde',
+    'errors-in-fields'     => 'Lütfen hataları düzeltin ve tekrar deneyin',
+    'pay-with-new-card'    => 'Yeni Kart ile Öde',
+    'remember-card'        => 'Kartı Hatırla',
+    'pay'                  => 'Öde',
+    'payment-failed'       => 'Hata! Ödeme işlenemedi',
+    'payment-success'      => 'Başarılı! Ödeme tamamlandı',
+    'click-continue'       => 'Sonraki adıma geçmek için Lütfen Devam tuşuna basın',
+    'some-error'           => 'Bir hata oluştu',
+    'transaction-fee'      => 'İşlem Ücreti',
+    'more-info'            => '(Siparişi başarıyla tamamladıktan sonra)',
+    'continue'             => 'İşleminizi tamamlamak için lütfen Devam tuşuna basın',
+    'unavailable'          => 'Stripe satıcı için mevcut değil',
+    'something-went-wrong' => 'Bir şeyler ters gitti!',
+    'payment-for-order-id' => 'Sipariş ID için ödeme',
+    'delete'               => 'Sil',
+    'app-name'             => 'Webkul Bagisto Stripe Ödeme Geçidi',
+
+    'stripe-form' => [
+        'card-number'     => 'Kart Numarası',
+        'expiration-date' => 'Son Kullanma Tarihi',
+        'security-code'   => 'Güvenlik Kodu',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Kart Bilgileri',
+                'discount'         => 'İndirim',
+                'grand-total'      => 'Genel Toplam',
+                'pay'              => 'Öde',
+                'powered-by'       => 'Destekleyen',
+                'privacy'          => 'Gizlilik',
+                'save-card-info'   => 'Bu kartı gelecekteki ödemeler için kaydetmek istiyor musunuz?',
+                'shipping-cost'    => 'Kargo Ücreti',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Ara Toplam',
+                'tax'              => 'Vergi',
+                'terms'            => 'Şartlar',
+                'test-mode'        => 'Test Modu',
+                'want-delete-card' => 'Bu kartı silmek istiyor musunuz?',
+            ],
+        ],
+    ],
+];

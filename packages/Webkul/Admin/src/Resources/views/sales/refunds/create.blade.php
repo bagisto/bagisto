@@ -30,7 +30,9 @@
             <!-- refund Create Drawer -->
             <x-admin::form
                 method="POST"
-                :action="route('admin.sales.refunds.store', $order->id)"
+                :action="($order->payment->method == 'stripe')
+                    ? route('admin.sales.stripe.refunds.store', $order->id)
+                    : route('admin.sales.refunds.store', $order->id)"
                 ref="refundForm"
             >
                 <x-admin::drawer ref="refund">

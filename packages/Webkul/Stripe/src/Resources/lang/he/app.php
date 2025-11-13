@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'אזהרה! אנא בדוק את האישורים שלך',
+    'nameoncard'           => 'שם על הכרטיס',
+    'expirymonth'          => 'חודש פקיעת תוקף',
+    'expiryyear'           => 'שנת פקיעת תוקף',
+    'cvc'                  => 'קוד אבטחה',
+    'or'                   => 'או',
+    'pay-with-saved-card'  => 'שלם עם כרטיס שמור',
+    'cardno'               => 'מספר כרטיס',
+    'pay-now'              => 'שלם עכשיו',
+    'errors-in-fields'     => 'אנא תקן את השגיאות ונסה שוב',
+    'pay-with-new-card'    => 'שלם עם כרטיס חדש',
+    'remember-card'        => 'זכור כרטיס',
+    'pay'                  => 'שלם',
+    'payment-failed'       => 'שגיאה! התשלום לא הצליח לעבור',
+    'payment-success'      => 'הצלחה! התשלום הושלם',
+    'click-continue'       => 'לחץ על המשך כדי לעבור לשלב הבא',
+    'some-error'           => 'אירעה שגיאה',
+    'transaction-fee'      => 'דמי עסקה',
+    'more-info'            => '(לאחר השלמת ההזמנה בהצלחה)',
+    'continue'             => 'אנא לחץ על המשך כדי להשלים את העסקה שלך',
+    'unavailable'          => 'Stripe לא זמין למוכר',
+    'something-went-wrong' => 'משהו השתבש!',
+    'payment-for-order-id' => 'תשלום עבור מזהה ההזמנה',
+    'delete'               => 'מחק',
+    'app-name'             => 'שער תשלום Stripe של Webkul Bagisto',
+
+    'stripe-form' => [
+        'card-number'     => 'מספר כרטיס',
+        'expiration-date' => 'תאריך תפוגה',
+        'security-code'   => 'קוד אבטחה',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'פרטי כרטיס',
+                'discount'         => 'הנחה',
+                'grand-total'      => 'סכום כולל',
+                'pay'              => 'שלם',
+                'powered-by'       => 'מופעל על ידי',
+                'privacy'          => 'פרטיות',
+                'save-card-info'   => 'האם ברצונך לשמור כרטיס זה לתשלומים עתידיים?',
+                'shipping-cost'    => 'עלות משלוח',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'סכום ביניים',
+                'tax'              => 'מס',
+                'terms'            => 'תנאים',
+                'test-mode'        => 'מצב בדיקה',
+                'want-delete-card' => 'האם ברצונך למחוק כרטיס זה?',
+            ],
+        ],
+    ],
+];

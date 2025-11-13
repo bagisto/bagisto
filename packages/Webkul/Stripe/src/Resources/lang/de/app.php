@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'provide-api-key'      => 'Warnung! Bitte überprüfen Sie Ihre Anmeldeinformationen',
+    'nameoncard'           => 'Name auf der Karte',
+    'expirymonth'          => 'Ablaufmonat',
+    'expiryyear'           => 'Ablaufjahr',
+    'cvc'                  => 'Sicherheitscode',
+    'or'                   => 'oder',
+    'pay-with-saved-card'  => 'Mit gespeicherter Karte bezahlen',
+    'cardno'               => 'Kartennummer',
+    'pay-now'              => 'Jetzt bezahlen',
+    'errors-in-fields'     => 'Bitte korrigieren Sie die Fehler und versuchen Sie es erneut',
+    'pay-with-new-card'    => 'Mit neuer Karte bezahlen',
+    'remember-card'        => 'Karte merken',
+    'pay'                  => 'Bezahlen',
+    'payment-failed'       => 'Fehler! Zahlung konnte nicht verarbeitet werden',
+    'payment-success'      => 'Erfolg! Zahlung abgeschlossen',
+    'click-continue'       => 'Klicken Sie auf Weiter, um zum nächsten Schritt zu gelangen',
+    'some-error'           => 'Ein Fehler ist aufgetreten',
+    'transaction-fee'      => 'Transaktionsgebühr',
+    'more-info'            => '(Nach erfolgreichem Abschluss der Bestellung)',
+    'continue'             => 'Bitte klicken Sie auf Weiter, um Ihre Transaktion abzuschließen',
+    'unavailable'          => 'Stripe ist für den Verkäufer nicht verfügbar',
+    'something-went-wrong' => 'Etwas ist schief gelaufen!',
+    'payment-for-order-id' => 'Zahlung für Bestell-ID',
+    'delete'               => 'Löschen',
+    'app-name'             => 'Webkul Bagisto Stripe-Zahlungs-Gateway',
+
+    'stripe-form' => [
+        'card-number'     => 'Kartennummer',
+        'expiration-date' => 'Ablaufdatum',
+        'security-code'   => 'Sicherheitscode',
+    ],
+
+    'shop' => [
+        'checkout' => [
+            'card' => [
+                'card-details'     => 'Kartendetails',
+                'discount'         => 'Rabatt',
+                'grand-total'      => 'Gesamtsumme',
+                'pay'              => 'Bezahlen',
+                'powered-by'       => 'Bereitgestellt von',
+                'privacy'          => 'Datenschutz',
+                'save-card-info'   => 'Möchten Sie diese Karte für zukünftige Zahlungen speichern?',
+                'shipping-cost'    => 'Versandkosten',
+                'stripe'           => 'Stripe',
+                'subtotal'         => 'Zwischensumme',
+                'tax'              => 'Steuer',
+                'terms'            => 'Bedingungen',
+                'test-mode'        => 'Testmodus',
+                'want-delete-card' => 'Möchten Sie diese Karte löschen?',
+            ],
+        ],
+    ],
+];
