@@ -821,7 +821,12 @@ return [
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-up-sells-products',
                 'type'       => 'number',
                 'validation' => 'integer|min:0',
-            ],
+            ], [
+                'name'       => 'allow_overlapping_booking_time_slots',
+                'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-overlapping-booking-time-slots',
+                'type'       => 'boolean',
+                'default'    => false,
+            ]
         ],
     ], [
         'key'    => 'catalog.products.cart_view_page',
