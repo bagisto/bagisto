@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Cistell no trobat. Si us plau, torna-ho a provar.',
-        'hash-mismatch'         => 'Verificació de pagament fallida. Discordança de hash.',
-        'invalid-transaction'   => 'Transacció no vàlida. Si us plau, torna-ho a provar.',
-        'order-creation-failed' => 'Error en crear la comanda. Si us plau, contacta amb el suport.',
-        'payment-cancelled'     => 'El pagament ha estat cancel·lat. Pots tornar-ho a provar.',
-        'payment-failed'        => 'El pagament ha fallat. Si us plau, torna-ho a provar.',
-        'payment-success'       => 'Pagament completat amb èxit!',
-        'provide-credentials'   => 'Si us plau, configura la clau de comerciant i Salt de PayU al panell d\'administració.',
+        'cart-not-found'            => 'Cistell no trobat. Si us plau, torna-ho a provar.',
+        'hash-mismatch'             => 'Verificació de pagament fallida. Discordança de hash.',
+        'invalid-transaction'       => 'Transacció no vàlida. Si us plau, torna-ho a provar.',
+        'order-creation-failed'     => 'Error en crear la comanda. Si us plau, contacta amb el suport.',
+        'payment-already-processed' => 'El pagament ja ha estat processat.',
+        'payment-cancelled'         => 'El pagament ha estat cancel·lat. Pots tornar-ho a provar.',
+        'payment-failed'            => 'El pagament ha fallat. Si us plau, torna-ho a provar.',
+        'payment-success'           => 'Pagament completat amb èxit!',
+        'provide-credentials'       => 'Si us plau, configura la clau de comerciant i Salt de PayU al panell d\'administració.',
     ],
 ];

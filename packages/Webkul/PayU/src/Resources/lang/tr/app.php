@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Sepet bulunamadı. Lütfen tekrar deneyin.',
-        'hash-mismatch'         => 'Ödeme doğrulaması başarısız oldu. Hash uyuşmazlığı.',
-        'invalid-transaction'   => 'Geçersiz işlem. Lütfen tekrar deneyin.',
-        'order-creation-failed' => 'Sipariş oluşturulamadı. Lütfen destekle iletişime geçin.',
-        'payment-cancelled'     => 'Ödeme iptal edildi. Tekrar deneyebilirsiniz.',
-        'payment-failed'        => 'Ödeme başarısız oldu. Lütfen tekrar deneyin.',
-        'payment-success'       => 'Ödeme başarıyla tamamlandı!',
-        'provide-credentials'   => 'Lütfen yönetici panelinde PayU Satıcı Anahtarını ve Salt\'ı yapılandırın.',
+        'cart-not-found'            => 'Sepet bulunamadı. Lütfen tekrar deneyin.',
+        'hash-mismatch'             => 'Ödeme doğrulaması başarısız oldu. Hash uyuşmazlığı.',
+        'invalid-transaction'       => 'Geçersiz işlem. Lütfen tekrar deneyin.',
+        'order-creation-failed'     => 'Sipariş oluşturulamadı. Lütfen destekle iletişime geçin.',
+        'payment-already-processed' => 'Ödeme zaten işlendi.',
+        'payment-cancelled'         => 'Ödeme iptal edildi. Tekrar deneyebilirsiniz.',
+        'payment-failed'            => 'Ödeme başarısız oldu. Lütfen tekrar deneyin.',
+        'payment-success'           => 'Ödeme başarıyla tamamlandı!',
+        'provide-credentials'       => 'Lütfen yönetici panelinde PayU Satıcı Anahtarını ve Salt\'ı yapılandırın.',
     ],
 ];

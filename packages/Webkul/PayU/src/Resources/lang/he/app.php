@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'העגלה לא נמצאה. אנא נסה שוב.',
-        'hash-mismatch'         => 'אימות התשלום נכשל. אי התאמה של Hash.',
-        'invalid-transaction'   => 'עסקה לא חוקית. אנא נסה שוב.',
-        'order-creation-failed' => 'יצירת ההזמנה נכשלה. אנא צור קשר עם התמיכה.',
-        'payment-cancelled'     => 'התשלום בוטל. אתה יכול לנסות שוב.',
-        'payment-failed'        => 'התשלום נכשל. אנא נסה שוב.',
-        'payment-success'       => 'התשלום הושלם בהצלחה!',
-        'provide-credentials'   => 'אנא הגדר את מפתח הסוחר ו-Salt של PayU בפאנל הניהול.',
+        'cart-not-found'            => 'העגלה לא נמצאה. אנא נסה שוב.',
+        'hash-mismatch'             => 'אימות התשלום נכשל. אי התאמה של Hash.',
+        'invalid-transaction'       => 'עסקה לא חוקית. אנא נסה שוב.',
+        'order-creation-failed'     => 'יצירת ההזמנה נכשלה. אנא צור קשר עם התמיכה.',
+        'payment-already-processed' => 'התשלום כבר עובד.',
+        'payment-cancelled'         => 'התשלום בוטל. אתה יכול לנסות שוב.',
+        'payment-failed'            => 'התשלום נכשל. אנא נסה שוב.',
+        'payment-success'           => 'התשלום הושלם בהצלחה!',
+        'provide-credentials'       => 'אנא הגדר את מפתח הסוחר ו-Salt של PayU בפאנל הניהול.',
     ],
 ];

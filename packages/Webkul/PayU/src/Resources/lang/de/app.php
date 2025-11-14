@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Warenkorb nicht gefunden. Bitte versuchen Sie es erneut.',
-        'hash-mismatch'         => 'Zahlungsüberprüfung fehlgeschlagen. Hash-Fehler.',
-        'invalid-transaction'   => 'Ungültige Transaktion. Bitte versuchen Sie es erneut.',
-        'order-creation-failed' => 'Bestellung konnte nicht erstellt werden. Bitte kontaktieren Sie den Support.',
-        'payment-cancelled'     => 'Zahlung wurde abgebrochen. Sie können es erneut versuchen.',
-        'payment-failed'        => 'Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.',
-        'payment-success'       => 'Zahlung erfolgreich abgeschlossen!',
-        'provide-credentials'   => 'Bitte konfigurieren Sie den PayU-Händlerschlüssel und Salt im Admin-Panel.',
+        'cart-not-found'            => 'Warenkorb nicht gefunden. Bitte versuchen Sie es erneut.',
+        'hash-mismatch'             => 'Zahlungsüberprüfung fehlgeschlagen. Hash-Fehler.',
+        'invalid-transaction'       => 'Ungültige Transaktion. Bitte versuchen Sie es erneut.',
+        'order-creation-failed'     => 'Bestellung konnte nicht erstellt werden. Bitte kontaktieren Sie den Support.',
+        'payment-already-processed' => 'Zahlung wurde bereits verarbeitet.',
+        'payment-cancelled'         => 'Zahlung wurde abgebrochen. Sie können es erneut versuchen.',
+        'payment-failed'            => 'Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.',
+        'payment-success'           => 'Zahlung erfolgreich abgeschlossen!',
+        'provide-credentials'       => 'Bitte konfigurieren Sie den PayU-Händlerschlüssel und Salt im Admin-Panel.',
     ],
 ];

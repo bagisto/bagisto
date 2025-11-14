@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Carrinho não encontrado. Por favor, tente novamente.',
-        'hash-mismatch'         => 'Falha na verificação do pagamento. Incompatibilidade de hash.',
-        'invalid-transaction'   => 'Transação inválida. Por favor, tente novamente.',
-        'order-creation-failed' => 'Falha ao criar pedido. Entre em contato com o suporte.',
-        'payment-cancelled'     => 'O pagamento foi cancelado. Você pode tentar novamente.',
-        'payment-failed'        => 'Pagamento falhou. Por favor, tente novamente.',
-        'payment-success'       => 'Pagamento concluído com sucesso!',
-        'provide-credentials'   => 'Por favor, configure a chave de comerciante e Salt do PayU no painel de administração.',
+        'cart-not-found'            => 'Carrinho não encontrado. Por favor, tente novamente.',
+        'hash-mismatch'             => 'Falha na verificação do pagamento. Incompatibilidade de hash.',
+        'invalid-transaction'       => 'Transação inválida. Por favor, tente novamente.',
+        'order-creation-failed'     => 'Falha ao criar pedido. Entre em contato com o suporte.',
+        'payment-already-processed' => 'O pagamento já foi processado.',
+        'payment-cancelled'         => 'O pagamento foi cancelado. Você pode tentar novamente.',
+        'payment-failed'            => 'Pagamento falhou. Por favor, tente novamente.',
+        'payment-success'           => 'Pagamento concluído com sucesso!',
+        'provide-credentials'       => 'Por favor, configure a chave de comerciante e Salt do PayU no painel de administração.',
     ],
 ];

@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Winkelwagen niet gevonden. Probeer het opnieuw.',
-        'hash-mismatch'         => 'Betalingsverificatie mislukt. Hash komt niet overeen.',
-        'invalid-transaction'   => 'Ongeldige transactie. Probeer het opnieuw.',
-        'order-creation-failed' => 'Bestelling aanmaken mislukt. Neem contact op met de ondersteuning.',
-        'payment-cancelled'     => 'Betaling is geannuleerd. U kunt het opnieuw proberen.',
-        'payment-failed'        => 'Betaling mislukt. Probeer het opnieuw.',
-        'payment-success'       => 'Betaling succesvol voltooid!',
-        'provide-credentials'   => 'Configureer de PayU Merchant Key en Salt in het beheerpaneel.',
+        'cart-not-found'            => 'Winkelwagen niet gevonden. Probeer het opnieuw.',
+        'hash-mismatch'             => 'Betalingsverificatie mislukt. Hash komt niet overeen.',
+        'invalid-transaction'       => 'Ongeldige transactie. Probeer het opnieuw.',
+        'order-creation-failed'     => 'Bestelling aanmaken mislukt. Neem contact op met de ondersteuning.',
+        'payment-already-processed' => 'Betaling is al verwerkt.',
+        'payment-cancelled'         => 'Betaling is geannuleerd. U kunt het opnieuw proberen.',
+        'payment-failed'            => 'Betaling mislukt. Probeer het opnieuw.',
+        'payment-success'           => 'Betaling succesvol voltooid!',
+        'provide-credentials'       => 'Configureer de PayU Merchant Key en Salt in het beheerpaneel.',
     ],
 ];

@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Cart not found. Please try again.',
-        'hash-mismatch'         => 'Payment verification failed. Hash mismatch.',
-        'invalid-transaction'   => 'Invalid transaction. Please try again.',
-        'order-creation-failed' => 'Failed to create order. Please contact support.',
-        'payment-cancelled'     => 'Payment was cancelled. You can try again.',
-        'payment-failed'        => 'Payment failed. Please try again.',
-        'payment-success'       => 'Payment completed successfully!',
-        'provide-credentials'   => 'Please configure PayU Merchant Key and Salt in the admin panel.',
+        'cart-not-found'            => 'Cart not found. Please try again.',
+        'hash-mismatch'             => 'Payment verification failed. Hash mismatch.',
+        'invalid-transaction'       => 'Invalid transaction. Please try again.',
+        'order-creation-failed'     => 'Failed to create order. Please contact support.',
+        'payment-already-processed' => 'Payment already processed.',
+        'payment-cancelled'         => 'Payment was cancelled. You can try again.',
+        'payment-failed'            => 'Payment failed. Please try again.',
+        'payment-success'           => 'Payment completed successfully!',
+        'provide-credentials'       => 'Please configure PayU Merchant Key and Salt in the admin panel.',
     ],
 ];

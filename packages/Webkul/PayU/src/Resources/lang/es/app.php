@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Carrito no encontrado. Por favor, inténtalo de nuevo.',
-        'hash-mismatch'         => 'Verificación de pago fallida. Discordancia de hash.',
-        'invalid-transaction'   => 'Transacción no válida. Por favor, inténtalo de nuevo.',
-        'order-creation-failed' => 'Error al crear el pedido. Por favor, contacta con soporte.',
-        'payment-cancelled'     => 'El pago fue cancelado. Puedes intentarlo de nuevo.',
-        'payment-failed'        => 'El pago falló. Por favor, inténtalo de nuevo.',
-        'payment-success'       => '¡Pago completado exitosamente!',
-        'provide-credentials'   => 'Por favor, configura la clave de comerciante y Salt de PayU en el panel de administración.',
+        'cart-not-found'            => 'Carrito no encontrado. Por favor, inténtalo de nuevo.',
+        'hash-mismatch'             => 'Verificación de pago fallida. Discordancia de hash.',
+        'invalid-transaction'       => 'Transacción no válida. Por favor, inténtalo de nuevo.',
+        'order-creation-failed'     => 'Error al crear el pedido. Por favor, contacta con soporte.',
+        'payment-already-processed' => 'El pago ya ha sido procesado.',
+        'payment-cancelled'         => 'El pago fue cancelado. Puedes intentarlo de nuevo.',
+        'payment-failed'            => 'El pago falló. Por favor, inténtalo de nuevo.',
+        'payment-success'           => '¡Pago completado exitosamente!',
+        'provide-credentials'       => 'Por favor, configura la clave de comerciante y Salt de PayU en el panel de administración.',
     ],
 ];

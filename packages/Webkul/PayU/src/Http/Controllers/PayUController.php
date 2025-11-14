@@ -24,7 +24,7 @@ class PayUController extends Controller
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
-        protected PayUTransactionRepository $payuTransactionRepository
+        protected PayUTransactionRepository $payUTransactionRepository
     ) {}
 
     /**
@@ -50,7 +50,7 @@ class PayUController extends Controller
 
         $paymentData = $this->payU->getPaymentData($cart);
 
-        $this->payuTransactionRepository->create([
+        $this->payUTransactionRepository->create([
             'transaction_id' => $paymentData['txnid'],
             'cart_id'        => $cart->id,
             'customer_id'    => $cart->customer_id,
@@ -79,14 +79,8 @@ class PayUController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        if (($response['status'] ?? '') !== 'success') {
-            session()->flash('error', trans('payu::app.response.payment-failed'));
-
-            return redirect()->route('shop.checkout.cart.index');
-        }
-
         try {
-            $transaction = $this->payuTransactionRepository->findOneWhere([
+            $transaction = $this->payUTransactionRepository->findOneWhere([
                 'transaction_id' => $response['txnid'] ?? '',
             ]);
 
@@ -97,7 +91,7 @@ class PayUController extends Controller
             }
 
             if ($transaction->status === TransactionStatus::SUCCESS) {
-                session()->flash('warning', 'Payment already processed');
+                session()->flash('warning', trans('payu::app.response.payment-already-processed'));
 
                 return redirect()->route('shop.checkout.onepage.success');
             }
@@ -110,11 +104,8 @@ class PayUController extends Controller
                 return redirect()->route('shop.checkout.cart.index');
             }
 
-            if ($transaction->customer_id && ! auth()->guard('customer')->check()) {
-                auth()->guard('customer')->loginUsingId($transaction->customer_id);
-            }
-
             Cart::setCart($cart);
+
             Cart::collectTotals();
 
             $data = (new OrderResource($cart))->jsonSerialize();
@@ -136,16 +127,19 @@ class PayUController extends Controller
 
             Cart::deActivateCart();
 
-            $this->payuTransactionRepository->update([
+            $this->payUTransactionRepository->update([
                 'status'   => TransactionStatus::SUCCESS->value,
                 'response' => $response,
             ], $transaction->id);
 
             session()->flash('order_id', $order->id);
+
             session()->flash('success', trans('payu::app.response.payment-success'));
 
             return redirect()->route('shop.checkout.onepage.success');
         } catch (\Exception $e) {
+            report($e);
+
             session()->flash('error', trans('payu::app.response.order-creation-failed'));
 
             return redirect()->route('shop.checkout.cart.index');
@@ -162,19 +156,15 @@ class PayUController extends Controller
         $response = request()->all();
 
         if ($txnid = $response['txnid'] ?? null) {
-            $transaction = $this->payuTransactionRepository->findOneWhere([
+            $transaction = $this->payUTransactionRepository->findOneWhere([
                 'transaction_id' => $txnid,
             ]);
 
             if ($transaction) {
-                $this->payuTransactionRepository->update([
+                $this->payUTransactionRepository->update([
                     'status'   => TransactionStatus::FAILED->value,
                     'response' => $response,
                 ], $transaction->id);
-
-                if ($transaction->customer_id && ! auth()->guard('customer')->check()) {
-                    auth()->guard('customer')->loginUsingId($transaction->customer_id);
-                }
             }
         }
 
@@ -193,19 +183,15 @@ class PayUController extends Controller
         $response = request()->all();
 
         if ($txnid = $response['txnid'] ?? null) {
-            $transaction = $this->payuTransactionRepository->findOneWhere([
+            $transaction = $this->payUTransactionRepository->findOneWhere([
                 'transaction_id' => $txnid,
             ]);
 
             if ($transaction) {
-                $this->payuTransactionRepository->update([
+                $this->payUTransactionRepository->update([
                     'status'   => TransactionStatus::CANCELLED->value,
                     'response' => $response,
                 ], $transaction->id);
-
-                if ($transaction->customer_id && ! auth()->guard('customer')->check()) {
-                    auth()->guard('customer')->loginUsingId($transaction->customer_id);
-                }
             }
         }
 

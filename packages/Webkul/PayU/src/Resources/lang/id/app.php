@@ -14,13 +14,14 @@ return [
     ],
 
     'response' => [
-        'cart-not-found'        => 'Keranjang tidak ditemukan. Silakan coba lagi.',
-        'hash-mismatch'         => 'Verifikasi pembayaran gagal. Hash tidak cocok.',
-        'invalid-transaction'   => 'Transaksi tidak valid. Silakan coba lagi.',
-        'order-creation-failed' => 'Gagal membuat pesanan. Silakan hubungi dukungan.',
-        'payment-cancelled'     => 'Pembayaran dibatalkan. Anda dapat mencoba lagi.',
-        'payment-failed'        => 'Pembayaran gagal. Silakan coba lagi.',
-        'payment-success'       => 'Pembayaran berhasil diselesaikan!',
-        'provide-credentials'   => 'Harap konfigurasikan Kunci Merchant dan Salt PayU di panel admin.',
+        'cart-not-found'            => 'Keranjang tidak ditemukan. Silakan coba lagi.',
+        'hash-mismatch'             => 'Verifikasi pembayaran gagal. Hash tidak cocok.',
+        'invalid-transaction'       => 'Transaksi tidak valid. Silakan coba lagi.',
+        'order-creation-failed'     => 'Gagal membuat pesanan. Silakan hubungi dukungan.',
+        'payment-already-processed' => 'Pembayaran sudah diproses.',
+        'payment-cancelled'         => 'Pembayaran dibatalkan. Anda dapat mencoba lagi.',
+        'payment-failed'            => 'Pembayaran gagal. Silakan coba lagi.',
+        'payment-success'           => 'Pembayaran berhasil diselesaikan!',
+        'provide-credentials'       => 'Harap konfigurasikan Kunci Merchant dan Salt PayU di panel admin.',
     ],
 ];
