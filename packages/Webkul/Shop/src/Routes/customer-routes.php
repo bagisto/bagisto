@@ -5,6 +5,7 @@ use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
+use Webkul\Shop\Http\Controllers\Customer\Account\RMAController;
 use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
 use Webkul\Shop\Http\Controllers\Customer\CustomerController;
 use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
@@ -166,6 +167,20 @@ Route::prefix('customer')->group(function () {
                 Route::get('', 'index')->name('shop.customers.account.downloadable_products.index');
 
                 Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
+            });
+
+
+            /**
+             * Customer RMA Routes.
+             */
+            Route::controller(RMAController::class)->prefix('rma')->group(function () {
+                Route::get('', 'index')->name('shop.customers.account.rma.index');
+
+                Route::get('view/{id}', 'view')->name('shop.customers.account.rma.view');
+
+                Route::get('create', 'create')->name('shop.customers.account.rma.create');
+
+                Route::post('store', 'store')->name('shop.customers.account.rma.store');
             });
         });
     });

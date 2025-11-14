@@ -105,6 +105,31 @@ return [
         'name'  => 'admin::app.acl.view',
         'route' => 'admin.sales.transactions.view',
         'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma-reason',
+        'name'  => 'admin::app.acl.rma-reason.title',
+        'route' => 'admin.sales.rma.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-reason.edit',
+        'name'  => 'admin::app.acl.rma-reason.edit',
+        'route' => 'admin.sales.rma.reason.edit',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma-reason.delete',
+        'name'  => 'admin::app.acl.rma-reason.delete',
+        'route' => 'admin.sales.rma.reason.delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-reason.mass-delete',
+        'name'  => 'admin::app.acl.rma-reason.mass-delete',
+        'route' => 'admin.sales.rma.mass_delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-reason.mass-update',
+        'name'  => 'admin::app.acl.rma-reason.mass-update',
+        'route' => 'admin.sales.rma.reason.mass_update',
+        'sort'  => 2,
     ],
 
     /*

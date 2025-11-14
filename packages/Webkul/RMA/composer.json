@@ -1,0 +1,34 @@
+{
+  "name": "bagisto/bagisto-rma",
+  "description": "help customers to request for return / cancel / exchange products during the stipulated time-period.",
+  "keywords": [
+    "bagisto",
+    "product rma",
+    "rma"
+  ],
+  "homepage": "https://github.com/bagisto/bagisto-rma",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bagisto",
+      "homepage": "https://bagisto.com"
+    }
+  ],
+  "require": {
+    "konekt/concord": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Webkul\\RMA\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Webkul\\RMA\\Providers\\RMAServiceProvider"
+      ],
+      "aliases": {}
+    }
+  },
+  "minimum-stability": "dev"
+}

@@ -96,3 +96,30 @@ Breadcrumbs::for('product', function (BreadcrumbTrail $trail, $entity) {
     $trail->parent('home');
     $trail->push($entity->name ?? '', route('shop.product_or_category.index', $entity->url_key));
 });
+
+/**
+ * Home > Rma
+ */
+Breadcrumbs::for('rma', function (BreadcrumbTrail $trail) {
+    $trail->parent('account');
+
+    $trail->push(trans('rma::app.shop.customer-rma-index.heading'), route('shop.customers.account.rma.index'));
+});
+
+/**
+ * Home > Rma Create
+ */
+Breadcrumbs::for('rma.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('rma');
+
+    $trail->push(trans('rma::app.shop.customer-rma-index.create'), route('shop.customers.account.rma.create'));
+});
+
+/**
+ * Home > Rma View
+ */
+Breadcrumbs::for('rma.view', function (BreadcrumbTrail $trail, $id) {
+    $trail->parent('rma');
+
+    $trail->push(trans('rma::app.shop.customer-rma-index.view'), route('shop.customers.account.rma.index'));
+});
