@@ -290,6 +290,57 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.before') !!}
 
+                @guest('customer')
+                    @php
+                        $isGuestLoggedIn = !empty(session()->get('guestEmail'));
+                    @endphp
+
+                    <div class="border-b border-zinc-200 p-4">
+                        <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
+                            
+                            <!-- Avatar -->
+                            <div>
+                                <img
+                                    src="{{ auth()->user()?->image_url ?? bagisto_asset('images/user-placeholder.png') }}"
+                                    class="h-[60px] w-[60px] rounded-full max-md:rounded-full"
+                                >
+                            </div>
+
+                            <!-- Action Section -->
+                            @if (! $isGuestLoggedIn)
+                                {{-- Guest Not Logged In → Show Login Link --}}
+                                <a
+                                    href="{{ route('shop.rma.guest.session.index') }}"
+                                    class="flex text-base font-medium"
+                                >
+                                    @lang('shop::app.rma.customer.title')
+
+                                    <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
+                                </a>
+
+                            @else
+                                <!-- Guest Logged In → Show Logout Link -->
+                                <x-shop::form
+                                    class="hidden"
+                                    method="DELETE"
+                                    action="{{ route('shop.rma.guest.session.destroy') }}"
+                                    id="rmaGuestLogout"
+                                />
+
+                                <a
+                                    href="{{ route('shop.rma.guest.session.destroy') }}"
+                                    onclick="event.preventDefault(); document.getElementById('rmaGuestLogout').submit();"
+                                    class="flex text-base font-medium"
+                                >
+                                    @lang('shop::app.rma.guest-users.logout')
+
+                                    <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                @endguest
+
                 <!-- Mobile category view -->
                 <v-mobile-category ref="mobileCategory"></v-mobile-category>
 

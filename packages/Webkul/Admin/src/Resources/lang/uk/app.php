@@ -5182,4 +5182,304 @@ return [
             'tracking-number'            => 'Номер відстеження: :tracking_number',
         ],
     ],
+
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => 'День',
+                        'all-products'                        => 'Усі продукти',
+                        'all-status'                          => 'Усі статуси',
+                        'allow-new-request-for-pending-order' => 'Дозволити новий запит на RMA для очікуваного замовлення',
+                        'allow-rma-for-digital-product'       => 'Дозволити RMA для цифрового продукту',
+                        'allowed-file-extension'              => 'Дозволене розширення файлу',
+                        'allowed-file-types'                  => 'Будь ласка, виберіть тільки типи файлів ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-info'                        => 'Розділено комами. Наприклад: jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => 'Дозволити новий запит на RMA для скасованого запиту',
+                        'allowed-request-declined-request'    => 'Дозволити новий запит на RMA для відхиленого запиту',
+                        'allowed-rma-for-product'             => 'Дозволити RMA для продукту',
+                        'cancel-items'                        => 'Скасувати елементи',
+                        'complete'                            => 'Завершено',
+                        'current-order-quantity'              => 'Поточна кількість замовлень',
+                        'days-info'                           => 'Кількість днів, протягом яких клієнт може подати запит на RMA після розміщення замовлення.',
+                        'default-allow-days'                  => 'Дні, дозволені за замовчуванням',
+                        'enable'                              => 'Увімкнути RMA',
+                        'evening'                             => 'Вечір',
+                        'exchange'                            => 'Обмін',
+                        'info'                                => 'RMA є частиною процесу повернення продукту до компанії для отримання відшкодування, заміни або ремонту.',
+                        'morning'                             => 'Ранок',
+                        'new-rma-message-to-customer'         => 'Нове повідомлення RMA для клієнта',
+                        'no'                                  => 'Ні',
+                        'open'                                => 'Відкрити',
+                        'package-condition'                   => 'Стан упаковки',
+                        'packed'                              => 'Упаковано',
+                        'print-page'                          => 'Друкувати сторінку',
+                        'product-already-raw'                 => 'Продукт вже перебуває в RMA.',
+                        'product-delivery-status'             => 'Статус доставки продукту',
+                        'resolution-type'                     => 'Тип вирішення',
+                        'return-pickup-address'               => 'Адреса для повернення',
+                        'return-pickup-time'                  => 'Час повернення',
+                        'return-policy'                       => 'Політика повернення',
+                        'return'                              => 'Повернення',
+                        'select-allowed-order-status'         => 'Виберіть дозволений статус замовлення',
+                        'specific-products'                   => 'Конкретні продукти',
+                        'title'                               => 'RMA',
+                        'yes'                                 => 'Так',
+
+                        'setting' => [
+                            'info'  => 'Функція RMA дозволяє обробляти повернення товарів клієнтами для ремонту, обслуговування або повернення грошей чи заміни.',
+                            'read'  => 'Читати політику',
+                            'terms' => 'Я прочитав і прийняв політику повернення.',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma' => 'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => 'Усі RMA',
+
+                        'datagrid' => [
+                            'create'        => 'Час створення',
+                            'customer-name' => 'Ім\'я клієнта',
+                            'id'            => 'Номер RMA',
+                            'order-ref'     => 'Посилання на замовлення',
+                            'order-status'  => 'Статус замовлення',
+                            'rma-status'    => 'Статус RMA',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => 'Додати вкладення',
+                        'additional-information' => 'Додаткова інформація:',
+                        'attachment'             => 'Вкладення',
+                        'change-status'          => 'Змінити статус',
+                        'confirm-print'          => 'Натисніть OK, щоб надрукувати RMA',
+                        'conversations'          => 'Розмови',
+                        'customer-details'       => 'Деталі клієнта',
+                        'customer-email'         => 'Електронна пошта клієнта:',
+                        'customer'               => 'Клієнт:',
+                        'enter-message'          => 'Введіть повідомлення',
+                        'images'                 => 'Зображення:',
+                        'no-record'              => 'Запис не знайдено!',
+                        'order-date'             => 'Дата замовлення:',
+                        'order-details'          => 'Замовлені товари для RMA',
+                        'order-id'               => 'ID замовлення:',
+                        'order-status'           => 'Статус замовлення:',
+                        'order-total'            => 'Загальна сума замовлення:',
+                        'request-on'             => 'Запит від:',
+                        'resolution-type'        => 'Тип вирішення:',
+                        'rma-status'             => 'Статус RMA:',
+                        'save-btn'               => 'Зберегти',
+                        'send-message-btn'       => 'Надіслати повідомлення',
+                        'send-message-success'   => 'Повідомлення успішно надіслано.',
+                        'send-message'           => 'Надіслати повідомлення',
+                        'status'                 => 'Статус',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'Статус RMA успішно оновлено.',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => 'Створити статус RMA',
+                        'title'      => 'Статус RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Створено',
+                            'delete-success'      => 'Статус RMA успішно видалено.',
+                            'disabled'            => 'Неактивний',
+                            'enabled'             => 'Активний',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Вибраний статус RMA успішно видалено.',
+                            'reason-error'        => 'Статус RMA використовується в RMA.',
+                            'reason'              => 'Статус RMA',
+                            'status'              => 'Статус',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Додати новий статус RMA',
+                        'reason'       => 'Статус RMA',
+                        'save-btn'     => 'Зберегти статус RMA',
+                        'status'       => 'Статус',
+                        'success'      => 'Статус RMA успішно створено.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Редагувати статус RMA',
+                        'mass-update-success' => 'Вибраний статус RMA успішно оновлено.',
+                        'reason'              => 'Статус RMA',
+                        'save-btn'            => 'Зберегти статус RMA',
+                        'status'              => 'Статус',
+                        'success'             => 'Статус RMA успішно оновлено.',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'create-btn' => 'Створити причину RMA',
+                        'title'      => 'Причини',
+
+                        'datagrid' => [
+                            'created-at'          => 'Час створення',
+                            'delete-success'      => 'Причина успішно видалена.',
+                            'disabled'            => 'Неактивний',
+                            'enabled'             => 'Активний',
+                            'id'                  => 'Номер',
+                            'mass-delete-success' => 'Обрані дані успішно видалено',
+                            'reason-error'        => 'Причина використовується в RMA.',
+                            'reason'              => 'Причина',
+                            'status'              => 'Статус',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Додати нову причину',
+                        'reason'       => 'Причина',
+                        'save-btn'     => 'Зберегти причину',
+                        'status'       => 'Статус',
+                        'success'      => 'Причину успішно створено.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Редагувати причину',
+                        'mass-update-success' => 'Обрані причини успішно оновлено.',
+                        'reason'              => 'Причина',
+                        'save-btn'            => 'Зберегти причину',
+                        'status'              => 'Статус',
+                        'success'             => 'Причину успішно оновлено.',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => 'Додати нове поле',
+                        'title'      => 'Налаштовані поля RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Створено',
+                            'delete-success'      => 'Налаштовані поля успішно видалено.',
+                            'disabled'            => 'Неактивний',
+                            'enabled'             => 'Активний',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Обрані дані успішно видалено',
+                            'status'              => 'Статус',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Нове налаштоване поле',
+                        'save-btn'     => 'Зберегти налаштоване поле',
+                        'status'       => 'Статус',
+                        'success'      => 'Налаштоване поле успішно створено.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Редагувати налаштоване поле',
+                        'mass-update-success' => 'Обрані налаштовані поля успішно оновлено.',
+                        'reason'              => 'Налаштоване поле',
+                        'save-btn'            => 'Зберегти налаштоване поле',
+                        'status'              => 'Статус',
+                        'success'             => 'Налаштоване поле успішно оновлено.',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => 'Створити правила RMA',
+                        'title'      => 'Правила RMA',
+
+                        'datagrid' => [
+                            'delete-success'      => 'Правила RMA успішно видалено.',
+                            'disabled'            => 'Неактивний',
+                            'enabled'             => 'Активний',
+                            'exchange-period'     => 'Період обміну (дні)',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Вибрані дані успішно видалено.',
+                            'reason'              => 'Правила',
+                            'return-period'       => 'Період повернення (дні)',
+                            'status'              => 'Статус',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => 'Додати нові правила RMA',
+                        'reason'             => 'Правила RMA',
+                        'resolutions-period' => 'Період вирішення',
+                        'rule-description'   => 'Опис правил',
+                        'rule-details'       => 'Деталі правил',
+                        'rules-title'        => 'Заголовок правил',
+                        'save-btn'           => 'Зберегти правила RMA',
+                        'status'             => 'Статус RMA',
+                        'success'            => 'Правила RMA успішно створено.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Редагувати правила RMA',
+                        'mass-update-success' => 'Вибрані правила RMA успішно оновлено.',
+                        'reason'              => 'Правила RMA',
+                        'save-btn'            => 'Оновити правила RMA',
+                        'status'              => 'Статус',
+                        'success'             => 'Правила RMA успішно оновлено.',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA успішно створено.',
+                    'create-title'             => 'Створити RMA',
+                    'email'                    => 'Електронна пошта',
+                    'image'                    => 'Зображення',
+                    'invalid-order-id'         => 'Неправильний номер замовлення',
+                    'mismatch'                 => 'Номер замовлення та електронна пошта не співпадають',
+                    'new-rma'                  => 'Нове RMA',
+                    'order-id'                 => 'Номер замовлення',
+                    'quantity'                 => 'Кількість',
+                    'reason'                   => 'Причина',
+                    'rma-already-exist'        => 'RMA вже існує',
+                    'rma-not-available-quotes' => 'Товар недоступний для RMA',
+                    'save-btn'                 => 'Зберегти',
+                    'search'                   => '--Вибрати--',
+                    'validate'                 => 'Перевірити',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'RMA успішно створено',
+                    'rma-created-message'  => 'Запит RMA доступний для продукту з кількістю :qty'
+                ],
+            ],
+        ],
+
+        'rma' => [
+            'index' => [
+            'create-rma-title' => 'Створити',
+            'reason-title'     => 'Причини',
+            'rma-title'        => 'Повернення',
+            ],
+        ],
+
+        'acl' => [
+            'delete'      => 'Видалити',
+            'edit'        => 'Редагувати',
+            'mass-delete' => 'Масове видалення',
+            'mass-update' => 'Масове оновлення',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

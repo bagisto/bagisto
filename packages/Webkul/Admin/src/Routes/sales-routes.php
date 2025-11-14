@@ -6,6 +6,12 @@ use Webkul\Admin\Http\Controllers\Sales\CartController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RequestController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\CustomFieldController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\ReasonController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RmaController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RulesController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\StatusController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
 use Webkul\Admin\Http\Controllers\Sales\TransactionController;
 
@@ -112,5 +118,120 @@ Route::prefix('sales')->group(function () {
         Route::get('', 'index')->name('admin.sales.bookings.index');
 
         Route::get('get', 'get')->name('admin.sales.bookings.get');
+    });
+
+    /**
+     * RMA routes.
+     */
+    Route::prefix('rma')->group(function () {
+        /**
+         * RMA Request routes.
+         */
+        Route::prefix('requests')->group(function () {
+            Route::controller(RmaController::class)->group(function () {
+                Route::get('', 'index')->name('admin.sales.rma.index');
+
+                Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
+
+                Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
+
+                Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
+
+                Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
+
+                Route::post('save-rma-reopen-status', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
+            });
+
+            /**
+             * Create RMA routes.
+             */
+            Route::controller(RequestController::class)->group(function () {
+                Route::get('create', 'create')->name('admin.sales.rma.create');
+
+                Route::post('store', 'store')->name('admin.sales.rma.store');
+
+                Route::get('getOrderProduct/{orderId}', 'getOrderProduct')->name('admin.sales.rma.getOrderProduct');
+
+                Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.getResolutionReason');
+            });
+        });
+
+        /**
+         * Reason routes.
+         */
+        Route::controller(ReasonController::class)->prefix('reasons')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.reason.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.reason.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.reason.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.sales.rma.reason.update');
+
+            Route::delete('edit/{id}', 'destroy')->name('admin.sales.rma.reason.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reason.mass_update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reason.mass_delete');
+        });
+
+        /**
+         * RMA Status routes.
+         */
+        Route::controller(StatusController::class)->prefix('rma-status')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.rma-status.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.rma-status.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rma-status.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.sales.rma.rma-status.update');
+
+            Route::delete('edit/{id}', 'destroy')->name('admin.sales.rma.rma-status.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rma-status.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rma-status.mass-delete');
+        });
+
+        /**
+         * RMA Rules routes.
+         */
+        Route::controller(RulesController::class)->prefix('rules')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.rules.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.rules.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rules.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.sales.rma.rules.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rules.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rules.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rules.mass-delete');
+        });
+
+        /**
+         * RMA Rules routes.
+         */
+        Route::controller(CustomFieldController::class)->prefix('custom-field')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.custom-field.index');
+
+            Route::get('create', 'create')->name('admin.sales.rma.custom-field.create');
+
+            Route::post('store', 'store')->name('admin.sales.rma.custom-field.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom-field.edit');
+
+            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom-field.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom-field.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom-field.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-field.mass-delete');
+        });
     });
 });

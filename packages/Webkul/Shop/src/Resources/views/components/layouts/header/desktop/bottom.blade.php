@@ -177,6 +177,37 @@
                         </div>
 
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.after') !!}
+
+                        @guest('customer')
+                            @if (empty(session()->get('guestEmail')))
+                                <div class="mt-6 w-full">
+                                    <a 
+                                        href="{{ route('shop.rma.guest.session.index') }}"
+                                        class="secondary-button block w-full m-0 mx-auto rounded-2xl border-2 px-7 py-3 text-center text-base max-md:rounded-lg flex items-center justify-center"
+                                    >
+                                        @lang('shop::app.rma.customer-rma-index.guest')
+                                    </a>
+                                </div>
+
+                            @else
+                                <div class="mt-6 w-full">
+                                    <x-shop::form
+                                        class="hidden"
+                                        method="DELETE"
+                                        action="{{ route('shop.rma.guest.session.destroy') }}"
+                                        id="rmaGuestLogout"
+                                    />
+
+                                    <a
+                                        href="{{ route('shop.rma.guest.session.destroy') }}"
+                                        onclick="event.preventDefault(); document.getElementById('rmaGuestLogout').submit();"
+                                        class="secondary-button block w-full m-0 mx-auto rounded-2xl border-2 px-7 py-3 text-center text-base max-md:rounded-lg flex items-center justify-center"
+                                    >
+                                        @lang('shop::app.rma.guest-users.logout')
+                                    </a>
+                                </div>
+                            @endif
+                        @endguest
                     </x-slot>
                 @endguest
 

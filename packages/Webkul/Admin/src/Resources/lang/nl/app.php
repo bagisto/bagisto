@@ -5182,4 +5182,304 @@ return [
             'tracking-number'            => 'Volgnummer: :tracking_number',
         ],
     ],
+
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => 'Middag',
+                        'all-products'                        => 'Alle producten',
+                        'all-status'                          => 'Alle statussen',
+                        'allow-new-request-for-pending-order' => 'Sta een nieuw RMA-verzoek toe voor een lopende bestelling',
+                        'allow-rma-for-digital-product'       => 'Sta RMA toe voor digitaal product',
+                        'allowed-file-extension'              => 'Toegestane bestandsextensie',
+                        'allowed-file-types'                  => 'Selecteer alleen de bestandstypen ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-info'                        => 'Gescheiden door komma’s. Bijvoorbeeld: jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => 'Sta een nieuw RMA-verzoek toe voor geannuleerd verzoek',
+                        'allowed-request-declined-request'    => 'Sta een nieuw RMA-verzoek toe voor afgewezen verzoek',
+                        'allowed-rma-for-product'             => 'Sta RMA toe voor product',
+                        'cancel-items'                        => 'Annuleer items',
+                        'complete'                            => 'Voltooid',
+                        'current-order-quantity'              => 'Huidige bestelhoeveelheid',
+                        'days-info'                           => 'Het aantal dagen waarbinnen de klant een RMA kan aanvragen na het plaatsen van een bestelling.',
+                        'default-allow-days'                  => 'Standaard toegestane dagen',
+                        'enable'                              => 'Schakel RMA in',
+                        'evening'                             => 'Avond',
+                        'exchange'                            => 'Ruilen',
+                        'info'                                => 'RMA is onderdeel van het proces van het retourneren van een product aan een bedrijf om een terugbetaling, vervanging of reparatie te ontvangen.',
+                        'morning'                             => 'Ochtend',
+                        'new-rma-message-to-customer'         => 'Nieuw RMA-bericht aan klant',
+                        'no'                                  => 'Nee',
+                        'open'                                => 'Open',
+                        'package-condition'                   => 'Pakketconditie',
+                        'packed'                              => 'Verpakt',
+                        'print-page'                          => 'Pagina afdrukken',
+                        'product-already-raw'                 => 'Product bevindt zich al in RMA.',
+                        'product-delivery-status'             => 'Productleverstatus',
+                        'resolution-type'                     => 'Oplossingstype',
+                        'return-pickup-address'               => 'Retour ophaaladres',
+                        'return-pickup-time'                  => 'Retour ophaaltijd',
+                        'return-policy'                       => 'Retourbeleid',
+                        'return'                              => 'Retourneren',
+                        'select-allowed-order-status'         => 'Selecteer toegestane orderstatus',
+                        'specific-products'                   => 'Specifieke producten',
+                        'title'                               => 'RMA',
+                        'yes'                                 => 'Ja',
+
+                        'setting' => [
+                            'info'  => 'De RMA-functionaliteit maakt het mogelijk om situaties te behandelen waarin een klant artikelen retourneert voor reparatie en onderhoud, of voor terugbetaling of vervanging.',
+                            'read'  => 'Beleid lezen',
+                            'terms' => 'Ik heb het retourbeleid gelezen en geaccepteerd.',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma' => 'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => 'Alle RMA',
+
+                        'datagrid' => [
+                            'create'        => 'Aangemaakt op',
+                            'customer-name' => 'Klantnaam',
+                            'id'            => 'RMA ID',
+                            'order-ref'     => 'Bestelreferentie',
+                            'order-status'  => 'Bestelstatus',
+                            'rma-status'    => 'RMA Status',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => 'Bijlagen toevoegen',
+                        'additional-information' => 'Aanvullende informatie:',
+                        'attachment'             => 'Bijlage',
+                        'change-status'          => 'Status wijzigen',
+                        'confirm-print'          => 'Klik op OK om de RMA af te drukken',
+                        'conversations'          => 'Gesprekken',
+                        'customer-details'       => 'Klantgegevens',
+                        'customer-email'         => 'Klant e-mail:',
+                        'customer'               => 'Klant:',
+                        'enter-message'          => 'Bericht invoeren',
+                        'images'                 => 'Afbeelding:',
+                        'no-record'              => 'Geen record gevonden!',
+                        'order-date'             => 'Besteldatum:',
+                        'order-details'          => 'Aangevraagde artikel(en) voor RMA',
+                        'order-id'               => 'Bestel-ID:',
+                        'order-status'           => 'Bestelstatus:',
+                        'order-total'            => 'Totaal bestelling:',
+                        'request-on'             => 'Aangevraagd op:',
+                        'resolution-type'        => 'Oplossingstype:',
+                        'rma-status'             => 'RMA-status:',
+                        'save-btn'               => 'Opslaan',
+                        'send-message-btn'       => 'Bericht verzenden',
+                        'send-message-success'   => 'Bericht succesvol verzonden.',
+                        'send-message'           => 'Bericht verzenden',
+                        'status'                 => 'Status',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'RMA-status succesvol bijgewerkt.',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => 'RMA-status maken',
+                        'title'      => 'RMA-status',
+
+                        'datagrid' => [
+                            'created-at'          => 'Gemaakt op',
+                            'delete-success'      => 'RMA-status succesvol verwijderd.',
+                            'disabled'            => 'Inactief',
+                            'enabled'             => 'Actief',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Geselecteerde RMA-status succesvol verwijderd.',
+                            'reason-error'        => 'RMA-status wordt gebruikt in RMA.',
+                            'reason'              => 'RMA-status',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Nieuwe RMA-status toevoegen',
+                        'reason'       => 'RMA-status',
+                        'save-btn'     => 'RMA-status opslaan',
+                        'status'       => 'Status',
+                        'success'      => 'RMA-status succesvol aangemaakt.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'RMA-status bewerken',
+                        'mass-update-success' => 'Geselecteerde RMA-status succesvol bijgewerkt.',
+                        'reason'              => 'RMA-status',
+                        'save-btn'            => 'RMA-status opslaan',
+                        'status'              => 'Status',
+                        'success'             => 'RMA-status succesvol bijgewerkt.',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'title'      => 'Redenen',
+                        'create-btn' => 'RMA Reden aanmaken',
+
+                        'datagrid' => [
+                            'created-at'          => 'Aangemaakt op',
+                            'delete-success'      => 'Reden succesvol verwijderd.',
+                            'disabled'            => 'Inactief',
+                            'enabled'             => 'Actief',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Geselecteerde gegevens succesvol verwijderd.',
+                            'reason-error'        => 'Reden wordt gebruikt in RMA.',
+                            'reason'              => 'Reden',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Nieuwe Reden toevoegen',
+                        'reason'       => 'Reden',
+                        'save-btn'     => 'Reden opslaan',
+                        'status'       => 'Status',
+                        'success'      => 'Reden succesvol aangemaakt.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Reden bewerken',
+                        'mass-update-success' => 'Geselecteerde redenen succesvol bijgewerkt.',
+                        'reason'              => 'Reden',
+                        'save-btn'            => 'Reden opslaan',
+                        'status'              => 'Status',
+                        'success'             => 'Reden succesvol bijgewerkt.',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => 'Nieuw veld toevoegen',
+                        'title'      => 'RMA Aangepaste Velden',
+
+                        'datagrid' => [
+                            'created-at'          => 'Gemaakt op',
+                            'delete-success'      => 'Aangepaste velden succesvol verwijderd.',
+                            'disabled'            => 'Inactief',
+                            'enabled'             => 'Actief',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Geselecteerde gegevens succesvol verwijderd',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Nieuw Aangepast Veld',
+                        'save-btn'     => 'Aangepast veld opslaan',
+                        'status'       => 'Status',
+                        'success'      => 'Aangepast veld succesvol aangemaakt.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Aangepast veld bewerken',
+                        'mass-update-success' => 'Geselecteerde aangepaste velden succesvol bijgewerkt.',
+                        'reason'              => 'Aangepast Veld',
+                        'save-btn'            => 'Aangepast veld opslaan',
+                        'status'              => 'Status',
+                        'success'             => 'Aangepast veld succesvol bijgewerkt.',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => 'Maak RMA-regels',
+                        'title'      => 'RMA-regels',
+
+                        'datagrid' => [
+                            'delete-success'      => 'RMA-regels succesvol verwijderd.',
+                            'disabled'            => 'Inactief',
+                            'enabled'             => 'Actief',
+                            'exchange-period'     => 'Ruilperiode (dagen)',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Geselecteerde gegevens succesvol verwijderd.',
+                            'reason'              => 'Regels',
+                            'return-period'       => 'Retourperiode (dagen)',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => 'Nieuwe RMA-regels toevoegen',
+                        'reason'             => 'RMA-regels',
+                        'rule-description'   => 'Regelbeschrijving',
+                        'rule-details'       => 'Regelgegevens',
+                        'resolutions-period' => 'Oplossingsperiode',
+                        'rules-title'        => 'Regels Titel',
+                        'save-btn'           => 'RMA-regels opslaan',
+                        'status'             => 'RMA-status',
+                        'success'            => 'RMA-regels succesvol aangemaakt.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'RMA-regels bewerken',
+                        'mass-update-success' => 'Geselecteerde RMA-regels succesvol bijgewerkt.',
+                        'reason'              => 'RMA-regels',
+                        'save-btn'            => 'RMA-regels bijwerken',
+                        'status'              => 'Status',
+                        'success'             => 'RMA-regels succesvol bijgewerkt.',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA succesvol aangemaakt.',
+                    'create-title'             => 'RMA aanmaken',
+                    'email'                    => 'E-mail',
+                    'image'                    => 'Afbeelding',
+                    'invalid-order-id'         => 'Ongeldige bestel-ID',
+                    'mismatch'                 => 'Bestel-ID en e-mail komen niet overeen',
+                    'new-rma'                  => 'Nieuwe RMA',
+                    'order-id'                 => 'Bestel-ID',
+                    'quantity'                 => 'Aantal',
+                    'reason'                   => 'Reden',
+                    'rma-already-exist'        => 'RMA bestaat al',
+                    'rma-not-available-quotes' => 'Item niet beschikbaar voor RMA',
+                    'save-btn'                 => 'Opslaan',
+                    'search'                   => '--Selecteer--',
+                    'validate'                 => 'Valideren',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'RMA is succesvol aangemaakt',
+                    'rma-created-message'  => 'Een RMA-aanvraag is beschikbaar voor het product met een hoeveelheid van :qty'
+                ],
+            ],
+        ],
+
+        'rma' => [
+            'index' => [
+            'create-rma-title' => 'Aanmaken',
+            'reason-title'     => 'Redenen',
+            'rma-title'        => 'Retouren',
+            ],
+        ],
+
+        'acl' => [
+            'delete'      => 'Verwijderen',
+            'edit'        => 'Bewerken',
+            'mass-delete' => 'Massa verwijderen',
+            'mass-update' => 'Massa bijwerken',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

@@ -5182,4 +5182,304 @@ return [
             'tracking-number'            => 'מספר מעקב : :tracking_number',
         ],
     ],
+
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => 'אחר הצהריים',
+                        'all-products'                        => 'כל המוצרים',
+                        'all-status'                          => 'כל הסטטוסים',
+                        'allow-new-request-for-pending-order' => 'אפשר בקשת RMA חדשה עבור הזמנה ממתינה',
+                        'allow-rma-for-digital-product'       => 'אפשר RMA עבור מוצר דיגיטלי',
+                        'allowed-file-types'                  => 'אנא בחר סוגי קבצים ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' בלבד',
+                        'allowed-file-extension'              => 'סיומת קובץ מותרת',
+                        'allowed-info'                        => 'מופרד באמצעות פסיקים. לדוגמה: jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => 'אפשר בקשת RMA חדשה עבור בקשה מבוטלת',
+                        'allowed-request-declined-request'    => 'אפשר בקשת RMA חדשה עבור בקשה נדחתה',
+                        'allowed-rma-for-product'             => 'אפשר RMA עבור מוצר',
+                        'cancel-items'                        => 'בטל פריטים',
+                        'complete'                            => 'הושלם',
+                        'current-order-quantity'              => 'כמות הזמנה נוכחית',
+                        'days-info'                           => 'מספר הימים שבהם הלקוח יכול לבקש RMA לאחר ביצוע הזמנה.',
+                        'default-allow-days'                  => 'ימים מותרים כברירת מחדל',
+                        'enable'                              => 'אפשר RMA',
+                        'evening'                             => 'ערב',
+                        'exchange'                            => 'החלפה',
+                        'info'                                => 'RMA הוא חלק מהתהליך של החזרת מוצר לעסק כדי לקבל החזר, החלפה או תיקון.',
+                        'morning'                             => 'בוקר',
+                        'new-rma-message-to-customer'         => 'הודעת RMA חדשה ללקוח',
+                        'no'                                  => 'לא',
+                        'open'                                => 'פתוח',
+                        'package-condition'                   => 'מצב החבילה',
+                        'packed'                              => 'ארוז',
+                        'print-page'                          => 'הדפס עמוד',
+                        'product-already-raw'                 => 'המוצר כבר נמצא ב-RMA.',
+                        'product-delivery-status'             => 'מצב מסירת המוצר',
+                        'resolution-type'                     => 'סוג פתרון',
+                        'return-pickup-address'               => 'כתובת איסוף החזרה',
+                        'return-pickup-time'                  => 'זמן איסוף החזרה',
+                        'return-policy'                       => 'מדיניות החזרה',
+                        'return'                              => 'החזרה',
+                        'select-allowed-order-status'         => 'בחר סטטוס הזמנה מותר',
+                        'specific-products'                   => 'מוצרים ספציפיים',
+                        'title'                               => 'RMA',
+                        'yes'                                 => 'כן',
+
+                        'setting' => [
+                            'info'  => 'הפונקציונליות של RMA מאפשרת טיפול במצבים בהם לקוח מחזיר פריטים לצורך תיקון ותחזוקה, או לצורך החזר כספי או החלפה.',
+                            'read'  => 'קרא את המדיניות',
+                            'terms' => 'קראתי וקיבלתי את מדיניות ההחזרה.',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma' => 'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => 'כל ה-RMA',
+
+                        'datagrid' => [
+                            'create'        => 'נוצר בתאריך',
+                            'customer-name' => 'שם הלקוח',
+                            'id'            => 'מזהה RMA',
+                            'order-ref'     => 'מספר הזמנה',
+                            'order-status'  => 'מצב הזמנה',
+                            'rma-status'    => 'מצב RMA',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => 'הוסף קבצים מצורפים',
+                        'additional-information' => 'מידע נוסף:',
+                        'attachment'             => 'קובץ מצורף',
+                        'change-status'          => 'שנה מצב',
+                        'confirm-print'          => 'לחץ על אישור להדפסת ה-RMA',
+                        'conversations'          => 'שיחות',
+                        'customer-details'       => 'פרטי לקוח',
+                        'customer-email'         => 'אימייל לקוח:',
+                        'customer'               => 'לקוח:',
+                        'enter-message'          => 'הזן הודעה',
+                        'images'                 => 'תמונה:',
+                        'no-record'              => 'לא נמצא תיעוד!',
+                        'order-date'             => 'תאריך הזמנה:',
+                        'order-details'          => 'פריטים מבוקשים עבור RMA',
+                        'order-id'               => 'מספר הזמנה:',
+                        'order-status'           => 'מצב הזמנה:',
+                        'order-total'            => 'סך הכל הזמנה:',
+                        'request-on'             => 'בקשה בתאריך:',
+                        'resolution-type'        => 'סוג פתרון:',
+                        'rma-status'             => 'מצב RMA:',
+                        'save-btn'               => 'שמור',
+                        'send-message-btn'       => 'שלח הודעה',
+                        'send-message-success'   => 'הודעה נשלחה בהצלחה.',
+                        'send-message'           => 'שלח הודעה',
+                        'status'                 => 'מצב',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'מצב RMA עודכן בהצלחה.',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => 'צור מצב RMA',
+                        'title'      => 'מצב RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'נוצר ב',
+                            'delete-success'      => 'מצב RMA נמחק בהצלחה.',
+                            'disabled'            => 'לא פעיל',
+                            'enabled'             => 'פעיל',
+                            'id'                  => 'מזהה',
+                            'mass-delete-success' => 'מצב RMA שנבחר נמחק בהצלחה.',
+                            'reason-error'        => 'מצב RMA בשימוש ב-RMA.',
+                            'reason'              => 'מצב RMA',
+                            'status'              => 'מצב',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'הוסף מצב RMA חדש',
+                        'reason'       => 'מצב RMA',
+                        'save-btn'     => 'שמור מצב RMA',
+                        'status'       => 'מצב',
+                        'success'      => 'מצב RMA נוצר בהצלחה.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'ערוך מצב RMA',
+                        'mass-update-success' => 'מצב RMA שנבחר עודכן בהצלחה.',
+                        'reason'              => 'מצב RMA',
+                        'save-btn'            => 'שמור מצב RMA',
+                        'status'              => 'מצב',
+                        'success'             => 'מצב RMA עודכן בהצלחה.',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'create-btn' => 'יצירת סיבת RMA',
+                        'title'      => 'סיבות',
+
+                        'datagrid' => [
+                            'created-at'          => 'נוצר בתאריך',
+                            'delete-success'      => 'הסיבה נמחקה בהצלחה.',
+                            'disabled'            => 'לא פעיל',
+                            'enabled'             => 'פעיל',
+                            'id'                  => 'מזהה',
+                            'mass-delete-success' => 'הנתונים שנבחרו נמחקו בהצלחה',
+                            'reason-error'        => 'הסיבה בשימוש ב-RMA.',
+                            'reason'              => 'סיבה',
+                            'status'              => 'מצב',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'הוספת סיבה חדשה',
+                        'reason'       => 'סיבה',
+                        'save-btn'     => 'שמירת סיבה',
+                        'status'       => 'מצב',
+                        'success'      => 'הסיבה נוצרה בהצלחה.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'עריכת סיבה',
+                        'mass-update-success' => 'הסיבות שנבחרו עודכנו בהצלחה.',
+                        'reason'              => 'סיבה',
+                        'save-btn'            => 'שמירת שינויים',
+                        'status'              => 'מצב',
+                        'success'             => 'הסיבה עודכנה בהצלחה.',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => 'הוסף שדה חדש',
+                        'title'      => 'שדות מותאמים אישית ל-RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'נוצר בתאריך',
+                            'delete-success'      => 'שדות מותאמים אישית נמחקו בהצלחה.',
+                            'disabled'            => 'לא פעיל',
+                            'enabled'             => 'פעיל',
+                            'id'                  => 'מזהה',
+                            'mass-delete-success' => 'הנתונים שנבחרו נמחקו בהצלחה',
+                            'status'              => 'סטטוס',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'שדה מותאם אישית חדש',
+                        'save-btn'     => 'שמור שדה מותאם אישית',
+                        'status'       => 'סטטוס',
+                        'success'      => 'שדה מותאם אישית נוצר בהצלחה.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'ערוך שדה מותאם אישית',
+                        'mass-update-success' => 'השדות המותאמים אישית שנבחרו עודכנו בהצלחה.',
+                        'reason'              => 'שדה מותאם אישית',
+                        'save-btn'            => 'שמור שדה מותאם אישית',
+                        'status'              => 'סטטוס',
+                        'success'             => 'השדה המותאם אישית עודכן בהצלחה.',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => 'צור כללי RMA',
+                        'title'      => 'כללי RMA',
+
+                        'datagrid' => [
+                            'delete-success'      => 'כללי RMA נמחקו בהצלחה.',
+                            'disabled'            => 'לא פעיל',
+                            'enabled'             => 'פעיל',
+                            'exchange-period'     => 'תקופת החלפה (ימים)',
+                            'id'                  => 'מזהה',
+                            'mass-delete-success' => 'הנתונים שנבחרו נמחקו בהצלחה.',
+                            'reason'              => 'כללים',
+                            'return-period'       => 'תקופת החזרה (ימים)',
+                            'status'              => 'סטטוס',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => 'הוסף כללי RMA חדשים',
+                        'reason'             => 'כללי RMA',
+                        'rule-description'   => 'תיאור הכללים',
+                        'rule-details'       => 'פרטי הכללים',
+                        'resolutions-period' => 'תקופת פתרונות',
+                        'rules-title'        => 'כותרת הכללים',
+                        'save-btn'           => 'שמור כללי RMA',
+                        'status'             => 'סטטוס RMA',
+                        'success'            => 'כללי RMA נוצרו בהצלחה.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'ערוך כללי RMA',
+                        'mass-update-success' => 'כללי RMA שנבחרו עודכנו בהצלחה.',
+                        'reason'              => 'כללי RMA',
+                        'save-btn'            => 'עדכן כללי RMA',
+                        'status'              => 'סטטוס',
+                        'success'             => 'כללי RMA עודכנו בהצלחה.',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA נוצרה בהצלחה.',
+                    'create-title'             => 'יצירת RMA',
+                    'email'                    => 'אימייל',
+                    'image'                    => 'תמונה',
+                    'invalid-order-id'         => 'מספר הזמנה אינו תקין',
+                    'mismatch'                 => 'מספר הזמנה וכתובת האימייל לא תואמים',
+                    'new-rma'                  => 'RMA חדשה',
+                    'order-id'                 => 'מספר הזמנה',
+                    'quantity'                 => 'כמות',
+                    'reason'                   => 'סיבה',
+                    'rma-already-exist'        => 'ה-RMA כבר קיימת',
+                    'rma-not-available-quotes' => 'הפריט לא זמין ל-RMA',
+                    'save-btn'                 => 'שמירה',
+                    'search'                   => '--בחר--',
+                    'validate'                 => 'אימות',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'ה-RMA נוצרה בהצלחה',
+                    'rma-created-message'  => 'בקשת RMA זמינה עבור המוצר עם כמות של :qty'
+                ],
+            ],
+        ],
+
+        'rma' => [
+            'index' => [
+            'create-rma-title' => 'צור',
+            'reason-title'     => 'סיבות',
+            'rma-title'        => 'החזרות',
+            ],
+        ],
+
+        'acl' => [
+            'delete'      => 'מחיקה',
+            'edit'        => 'עריכה',
+            'mass-delete' => 'מחיקה מרובה',
+            'mass-update' => 'עדכון מרובה',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

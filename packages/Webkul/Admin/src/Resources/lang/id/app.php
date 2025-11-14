@@ -5182,4 +5182,303 @@ return [
             'tracking-number'            => 'Nomor Pelacakan : :tracking_number',
         ],
     ],
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => 'Sore',
+                        'all-products'                        => 'Semua Produk',
+                        'all-status'                          => 'Semua Status',
+                        'allow-new-request-for-pending-order' => 'Izinkan permintaan RMA baru untuk pesanan tertunda',
+                        'allow-rma-for-digital-product'       => 'Izinkan RMA untuk produk digital',
+                        'allowed-file-extension'              => 'Ekstensi File yang Diizinkan',
+                        'allowed-file-types'                  => 'Silakan pilih tipe file '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' saja',
+                        'allowed-info'                        => 'Pisahkan dengan koma. Contoh: jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Dibatalkan',
+                        'allowed-request-declined-request'    => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Ditolak',
+                        'allowed-rma-for-product'             => 'Izinkan RMA untuk Produk',
+                        'cancel-items'                        => 'Batalkan Item',
+                        'complete'                            => 'Selesai',
+                        'current-order-quantity'              => 'Jumlah Pesanan Saat Ini',
+                        'days-info'                           => 'Jumlah hari di mana pelanggan dapat meminta RMA setelah melakukan pesanan.',
+                        'default-allow-days'                  => 'Hari yang Diizinkan Default',
+                        'enable'                              => 'Aktifkan RMA',
+                        'evening'                             => 'Malam',
+                        'exchange'                            => 'Tukar',
+                        'info'                                => 'RMA adalah bagian dari proses pengembalian produk ke bisnis untuk menerima pengembalian dana, penggantian, atau perbaikan.',
+                        'morning'                             => 'Pagi',
+                        'new-rma-message-to-customer'         => 'Pesan RMA Baru ke Pelanggan',
+                        'no'                                  => 'Tidak',
+                        'open'                                => 'Buka',
+                        'package-condition'                   => 'Kondisi Paket',
+                        'packed'                              => 'Dikemas',
+                        'print-page'                          => 'Cetak RMA',
+                        'product-already-raw'                 => 'Produk sudah dalam proses RMA.',
+                        'product-delivery-status'             => 'Status Pengiriman Produk',
+                        'resolution-type'                     => 'Tipe Resolusi',
+                        'return-pickup-address'               => 'Alamat Pengambilan Pengembalian',
+                        'return-pickup-time'                  => 'Waktu Pengambilan Pengembalian',
+                        'return-policy'                       => 'Kebijakan Pengembalian',
+                        'return'                              => 'Pengembalian',
+                        'select-allowed-order-status'         => 'Pilih Status Pesanan yang Diizinkan',
+                        'specific-products'                   => 'Produk Tertentu',
+                        'title'                               => 'RMA',
+                        'yes'                                 => 'Ya',
+
+                        'setting' => [
+                            'info'  => 'Fitur RMA memungkinkan penanganan situasi ketika pelanggan mengembalikan barang untuk perbaikan, pengembalian dana, atau penggantian.',
+                            'read'  => 'Baca Kebijakan',
+                            'terms' => 'Saya telah membaca dan menerima Kebijakan Pengembalian.',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma'=>'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => 'Semua RMA',
+
+                        'datagrid' => [
+                            'create'        => 'Dibuat Pada',
+                            'customer-name' => 'Nama Pelanggan',
+                            'id'            => 'ID RMA',
+                            'order-ref'     => 'Referensi Pesanan',
+                            'order-status'  => 'Status Pengiriman',
+                            'rma-status'    => 'Status RMA',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => 'Tambah Lampiran',
+                        'additional-information' => 'Informasi Tambahan :',
+                        'attachment'             => 'Lampiran',
+                        'change-status'          => 'Ubah Status',
+                        'confirm-print'          => 'Klik OK untuk mencetak RMA',
+                        'conversations'          => 'Percakapan',
+                        'customer-details'       => 'Detail Pelanggan',
+                        'customer-email'         => 'Email Pelanggan :',
+                        'customer'               => 'Pelanggan :',
+                        'enter-message'          => 'Masukkan Pesan',
+                        'images'                 => 'Gambar :',
+                        'no-record'              => 'Data Tidak Ditemukan!',
+                        'order-date'             => 'Tanggal Pesanan :',
+                        'order-details'          => 'Item yang Diminta untuk RMA',
+                        'order-id'               => 'ID Pesanan :',
+                        'order-status'           => 'Status Pengiriman :',
+                        'order-total'            => 'Total Pesanan :',
+                        'request-on'             => 'Permintaan Pada :',
+                        'resolution-type'        => 'Tipe Resolusi :',
+                        'rma-status'             => 'Status RMA :',
+                        'save-btn'               => 'Simpan',
+                        'send-message-btn'       => 'Kirim Pesan',
+                        'send-message-success'   => 'Pesan berhasil dikirim.',
+                        'send-message'           => 'Kirim Pesan',
+                        'status'                 => 'Status',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'Status RMA berhasil diperbarui.',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => 'Buat Status RMA',
+                        'title'      => 'Status RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Dibuat Pada',
+                            'delete-success'      => 'Status RMA berhasil dihapus.',
+                            'disabled'            => 'Tidak Aktif',
+                            'enabled'             => 'Aktif',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Status RMA yang dipilih berhasil dihapus.',
+                            'reason-error'        => 'Status RMA digunakan dalam RMA.',
+                            'reason'              => 'Status RMA',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Tambah Status RMA Baru',
+                        'reason'       => 'Status RMA',
+                        'save-btn'     => 'Simpan Status RMA',
+                        'status'       => 'Status',
+                        'success'      => 'Status RMA berhasil dibuat.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Edit Status RMA',
+                        'mass-update-success' => 'Status RMA yang dipilih berhasil diperbarui.',
+                        'reason'              => 'Status RMA',
+                        'save-btn'            => 'Simpan Status RMA',
+                        'status'              => 'Status',
+                        'success'             => 'Status RMA berhasil diperbarui.',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'create-btn' => 'Buat Alasan RMA',
+                        'title'      => 'Alasan',
+
+                        'datagrid' => [
+                            'created-at'          => 'Dibuat Pada',
+                            'delete-success'      => 'Alasan berhasil dihapus.',
+                            'disabled'            => 'Tidak Aktif',
+                            'enabled'             => 'Aktif',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Data yang dipilih berhasil dihapus',
+                            'reason-error'        => 'Alasan digunakan dalam RMA.',
+                            'reason'              => 'Alasan',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Tambah Alasan Baru',
+                        'reason'       => 'Alasan',
+                        'save-btn'     => 'Simpan Alasan',
+                        'status'       => 'Status',
+                        'success'      => 'Alasan berhasil dibuat.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Edit Alasan',
+                        'mass-update-success' => 'Alasan yang dipilih berhasil diperbarui.',
+                        'reason'              => 'Alasan',
+                        'save-btn'            => 'Simpan Alasan',
+                        'status'              => 'Status',
+                        'success'             => 'Alasan berhasil diperbarui.',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => 'Tambah Field Baru',
+                        'title'      => 'Field Kustom RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Dibuat Pada',
+                            'delete-success'      => 'Field Kustom berhasil dihapus.',
+                            'disabled'            => 'Tidak Aktif',
+                            'enabled'             => 'Aktif',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Data yang dipilih berhasil dihapus',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Field Kustom Baru',
+                        'save-btn'     => 'Simpan Field Kustom',
+                        'status'       => 'Status',
+                        'success'      => 'Field Kustom berhasil dibuat.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Edit Field Kustom',
+                        'mass-update-success' => 'Field Kustom yang dipilih berhasil diperbarui.',
+                        'reason'              => 'Field Kustom',
+                        'save-btn'            => 'Simpan Field Kustom',
+                        'status'              => 'Status',
+                        'success'             => 'Field Kustom berhasil diperbarui.',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => 'Buat Aturan RMA',
+                        'title'      => 'Aturan RMA',
+
+                        'datagrid' => [
+                            'delete-success'      => 'Aturan RMA berhasil dihapus.',
+                            'disabled'            => 'Tidak Aktif',
+                            'enabled'             => 'Aktif',
+                            'exchange-period'     => 'Periode Tukar (hari)',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Data yang dipilih berhasil dihapus.',
+                            'reason'              => 'Aturan',
+                            'return-period'       => 'Periode Pengembalian (hari)',
+                            'status'              => 'Status',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => 'Tambah Aturan RMA Baru',
+                        'reason'             => 'Aturan RMA',
+                        'resolutions-period' => 'Periode Resolusi',
+                        'rule-description'   => 'Deskripsi Aturan',
+                        'rule-details'       => 'Detail Aturan',
+                        'rules-title'        => 'Judul Aturan',
+                        'save-btn'           => 'Simpan Aturan RMA',
+                        'status'             => 'Status RMA',
+                        'success'            => 'Aturan RMA berhasil dibuat.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Edit Aturan RMA',
+                        'mass-update-success' => 'Aturan RMA yang dipilih berhasil diperbarui.',
+                        'reason'              => 'Aturan RMA',
+                        'save-btn'            => 'Perbarui Aturan RMA',
+                        'status'              => 'Status',
+                        'success'             => 'Aturan RMA berhasil diperbarui.',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA berhasil dibuat.',
+                    'create-title'             => 'Buat RMA',
+                    'email'                    => 'Email',
+                    'image'                    => 'Gambar',
+                    'invalid-order-id'         => 'ID Pesanan tidak valid',
+                    'mismatch'                 => 'ID Pesanan dan email tidak cocok',
+                    'new-rma'                  => 'RMA Baru',
+                    'order-id'                 => 'ID Pesanan',
+                    'quantity'                 => 'Jumlah',
+                    'reason'                   => 'Alasan',
+                    'rma-already-exist'        => 'RMA sudah ada',
+                    'rma-not-available-quotes' => 'Item tidak tersedia untuk RMA',
+                    'save-btn'                 => 'Simpan',
+                    'search'                   => '--Pilih--',
+                    'validate'                 => 'Validasi',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'RMA telah dibuat',
+                    'rma-created-message'  => 'Permintaan RMA tersedia untuk produk dengan jumlah :qty'
+                ],
+            ],
+        ],
+
+        'rma' => [
+            'index' => [
+                'create-rma-title' => 'Buat',
+                'reason-title'     => 'Alasan',
+                'rma-title'        => 'Permintaan',
+            ],
+        ],
+
+        'acl' => [
+            'delete'      => 'Hapus',
+            'edit'        => 'Edit',
+            'mass-delete' => 'Hapus Massal',
+            'mass-update' => 'Perbarui Massal',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

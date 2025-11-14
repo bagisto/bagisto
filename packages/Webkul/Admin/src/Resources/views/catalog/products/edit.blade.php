@@ -217,6 +217,11 @@
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
+
+                            @if ($group->code == 'settings')
+                                <!-- RMA Allow Product Edit Blade File -->
+                                @include('admin::catalog.products.edit.rma')
+                            @endif
                         @endif
                     @endforeach
 

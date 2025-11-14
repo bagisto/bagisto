@@ -5182,4 +5182,304 @@ return [
             'tracking-number'            => 'Número de Seguiment: :tracking_number',
         ],
     ],
+
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => 'Tarda',
+                        'all-products'                        => 'Tots els productes',
+                        'all-status'                          => 'Tots els estats',
+                        'allow-new-request-for-pending-order' => 'Permetre nova sol·licitud RMA per comanda pendent',
+                        'allow-rma-for-digital-product'       => 'Permetre RMA per producte digital',
+                        'allowed-file-extension'              => 'Extensions de fitxer permeses',
+                        'allowed-file-types'                  => 'Seleccioneu només els tipus de fitxer '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-info'                        => 'Separat per comes. Exemple: jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => 'Permetre nova sol·licitud RMA per sol·licitud cancel·lada',
+                        'allowed-request-declined-request'    => 'Permetre nova sol·licitud RMA per sol·licitud rebutjada',
+                        'allowed-rma-for-product'             => 'Permetre RMA per producte',
+                        'cancel-items'                        => 'Cancel·lar articles',
+                        'complete'                            => 'Completat',
+                        'current-order-quantity'              => 'Quantitat actual de la comanda',
+                        'days-info'                           => 'Nombre de dies en què el client pot sol·licitar una RMA després de fer una comanda.',
+                        'default-allow-days'                  => 'Dies permesos per defecte',
+                        'enable'                              => 'Habilitar RMA',
+                        'evening'                             => 'Vespre',
+                        'exchange'                            => 'Canvi',
+                        'info'                                => 'La RMA forma part del procés de devolució d\'un producte a una empresa per rebre un reemborsament, substitució o reparació.',
+                        'morning'                             => 'Matí',
+                        'new-rma-message-to-customer'         => 'Nou missatge RMA al client',
+                        'no'                                  => 'No',
+                        'open'                                => 'Obert',
+                        'package-condition'                   => 'Condició del paquet',
+                        'packed'                              => 'Embalat',
+                        'print-page'                          => 'Imprimir RMA',
+                        'product-already-raw'                 => 'El producte ja està en RMA.',
+                        'product-delivery-status'             => 'Estat de lliurament del producte',
+                        'resolution-type'                     => 'Tipus de resolució',
+                        'return-pickup-address'               => 'Adreça de recollida de devolució',
+                        'return-pickup-time'                  => 'Hora de recollida de devolució',
+                        'return-policy'                       => 'Política de devolució',
+                        'return'                              => 'Devolució',
+                        'select-allowed-order-status'         => 'Selecciona l\'estat de comanda permès',
+                        'specific-products'                   => 'Productes específics',
+                        'title'                               => 'RMA',
+                        'yes'                                 => 'Sí',
+
+                        'setting' => [
+                            'info'  => 'La funcionalitat RMA permet gestionar situacions en què un client retorna articles per reparació, manteniment, reemborsament o substitució.',
+                            'read'  => 'Llegir política',
+                            'terms' => 'He llegit i accepto la política de devolució.',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma'=>'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => 'Totes les RMA',
+
+                        'datagrid' => [
+                            'create'        => 'Creat el',
+                            'customer-name' => 'Nom del client',
+                            'id'            => 'ID RMA',
+                            'order-ref'     => 'Referència de comanda',
+                            'order-status'  => 'Estat de lliurament',
+                            'rma-status'    => 'Estat RMA',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => 'Afegir adjunts',
+                        'additional-information' => 'Informació addicional :',
+                        'attachment'             => 'Adjunt',
+                        'change-status'          => 'Canviar estat',
+                        'confirm-print'          => 'Fes clic a OK per imprimir la RMA',
+                        'conversations'          => 'Converses',
+                        'customer-details'       => 'Detalls del client',
+                        'customer-email'         => 'Email del client :',
+                        'customer'               => 'Client :',
+                        'enter-message'          => 'Introdueix el missatge',
+                        'images'                 => 'Imatge :',
+                        'no-record'              => 'No s\'ha trobat cap registre!',
+                        'order-date'             => 'Data de la comanda :',
+                        'order-details'          => 'Article(s) sol·licitats per RMA',
+                        'order-id'               => 'ID de la comanda :',
+                        'order-status'           => 'Estat de lliurament :',
+                        'order-total'            => 'Total de la comanda :',
+                        'request-on'             => 'Sol·licitud el :',
+                        'resolution-type'        => 'Tipus de resolució :',
+                        'rma-status'             => 'Estat RMA :',
+                        'save-btn'               => 'Desar',
+                        'send-message-btn'       => 'Enviar missatge',
+                        'send-message-success'   => 'Missatge enviat correctament.',
+                        'send-message'           => 'Enviar missatge',
+                        'status'                 => 'Estat',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'Estat de la RMA actualitzat correctament.',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => 'Crear estat RMA',
+                        'title'      => 'Estat RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Creat el',
+                            'delete-success'      => 'Estat RMA eliminat correctament.',
+                            'disabled'            => 'Inactiu',
+                            'enabled'             => 'Actiu',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Estat RMA seleccionat eliminat correctament.',
+                            'reason-error'        => 'L\'estat RMA s\'utilitza en una RMA.',
+                            'reason'              => 'Estat RMA',
+                            'status'              => 'Estat',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Afegir nou estat RMA',
+                        'reason'       => 'Estat RMA',
+                        'save-btn'     => 'Desar estat RMA',
+                        'status'       => 'Estat',
+                        'success'      => 'Estat RMA creat correctament.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Editar estat RMA',
+                        'mass-update-success' => 'Estat RMA seleccionat actualitzat correctament.',
+                        'reason'              => 'Estat RMA',
+                        'save-btn'            => 'Desar estat RMA',
+                        'status'              => 'Estat',
+                        'success'             => 'Estat RMA actualitzat correctament.',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'create-btn' => 'Crear motiu RMA',
+                        'title'      => 'Motius',
+
+                        'datagrid' => [
+                            'created-at'          => 'Creat el',
+                            'delete-success'      => 'Motiu eliminat correctament.',
+                            'disabled'            => 'Inactiu',
+                            'enabled'             => 'Actiu',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Dades seleccionades eliminades correctament',
+                            'reason-error'        => 'El motiu s\'utilitza en una RMA.',
+                            'reason'              => 'Motiu',
+                            'status'              => 'Estat',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Afegir nou motiu',
+                        'reason'       => 'Motiu',
+                        'save-btn'     => 'Desar motiu',
+                        'status'       => 'Estat',
+                        'success'      => 'Motiu creat correctament.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Editar motiu',
+                        'mass-update-success' => 'Motius seleccionats actualitzats correctament.',
+                        'reason'              => 'Motiu',
+                        'save-btn'            => 'Desar motiu',
+                        'status'              => 'Estat',
+                        'success'             => 'Motiu actualitzat correctament.',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => 'Afegir nou camp',
+                        'title'      => 'Camps personalitzats RMA',
+
+                        'datagrid' => [
+                            'created-at'          => 'Creat el',
+                            'delete-success'      => 'Camps personalitzats eliminats correctament.',
+                            'disabled'            => 'Inactiu',
+                            'enabled'             => 'Actiu',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Dades seleccionades eliminades correctament',
+                            'status'              => 'Estat',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => 'Nou camp personalitzat',
+                        'save-btn'     => 'Desar camp personalitzat',
+                        'status'       => 'Estat',
+                        'success'      => 'Camp personalitzat creat correctament.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Editar camp personalitzat',
+                        'mass-update-success' => 'Camp personalitzat seleccionat actualitzat correctament.',
+                        'reason'              => 'Camp personalitzat',
+                        'save-btn'            => 'Desar camp personalitzat',
+                        'status'              => 'Estat',
+                        'success'             => 'Camp personalitzat actualitzat correctament.',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => 'Crear regles RMA',
+                        'title'      => 'Regles RMA',
+
+                        'datagrid' => [
+                            'delete-success'      => 'Regles RMA eliminades correctament.',
+                            'disabled'            => 'Inactiu',
+                            'enabled'             => 'Actiu',
+                            'exchange-period'     => 'Període de canvi (dies)',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => 'Dades seleccionades eliminades correctament.',
+                            'reason'              => 'Regles',
+                            'return-period'       => 'Període de devolució (dies)',
+                            'status'              => 'Estat',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => 'Afegir noves regles RMA',
+                        'reason'             => 'Regles RMA',
+                        'resolutions-period' => 'Període de resolucions',
+                        'rule-description'   => 'Descripció de les regles',
+                        'rule-details'       => 'Detalls de les regles',
+                        'rules-title'        => 'Títol de les regles',
+                        'save-btn'           => 'Desar regles RMA',
+                        'status'             => 'Estat RMA',
+                        'success'            => 'Regles RMA creades correctament.',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => 'Editar regles RMA',
+                        'mass-update-success' => 'Regles RMA seleccionades actualitzades correctament.',
+                        'reason'              => 'Regles RMA',
+                        'save-btn'            => 'Actualitzar regles RMA',
+                        'status'              => 'Estat',
+                        'success'             => 'Regles RMA actualitzades correctament.',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA creada correctament.',
+                    'create-title'             => 'Crear RMA',
+                    'email'                    => 'Email',
+                    'image'                    => 'Imatge',
+                    'invalid-order-id'         => 'ID de comanda invàlid',
+                    'mismatch'                 => 'ID de comanda i email no coincideixen',
+                    'new-rma'                  => 'Nova RMA',
+                    'order-id'                 => 'ID de comanda',
+                    'quantity'                 => 'Quantitat',
+                    'reason'                   => 'Motiu',
+                    'rma-already-exist'        => 'La RMA ja existeix',
+                    'rma-not-available-quotes' => 'Article no disponible per RMA',
+                    'save-btn'                 => 'Desar',
+                    'search'                   => '--Seleccionar--',
+                    'validate'                 => 'Validar',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'S\'ha creat la RMA',
+                    'rma-created-message'  => 'Hi ha una sol·licitud RMA disponible per al producte amb una quantitat de :qty'
+                ],
+            ],
+        ],
+
+        'rma' => [
+            'index' => [
+                'create-rma-title' => 'Crear',
+                'reason-title'     => 'Motius',
+                'rma-title'        => 'Sol·licituds',
+            ],
+        ],
+
+        'acl' => [
+            'delete'      => 'Eliminar',
+            'edit'        => 'Editar',
+            'mass-delete' => 'Eliminació massiva',
+            'mass-update' => 'Actualització massiva',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

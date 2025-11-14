@@ -5182,4 +5182,304 @@ return [
             'tracking-number'            => '跟踪号码：:tracking_number',
         ],
     ],
+
+    'rma' => [
+        'configuration' => [
+            'index' => [
+                'sales' => [
+                    'rma' => [
+                        'afternoon'                           => '下午',
+                        'all-products'                        => '所有产品',
+                        'all-status'                          => '所有状态',
+                        'allow-new-request-for-pending-order' => '允许针对待处理订单的新RMA请求',
+                        'allow-rma-for-digital-product'       => '允许数字产品的RMA',
+                        'allowed-file-extension'              => '允许的文件扩展名',
+                        'allowed-file-types'                  => '请选择仅文件类型 ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-info'                        => '用逗号分隔。例如：jpg,jpeg,pdf',
+                        'allowed-request-cancelled-request'   => '允许取消请求的新RMA请求',
+                        'allowed-request-declined-request'    => '允许被拒请求的新RMA请求',
+                        'allowed-rma-for-product'             => '允许产品的RMA',
+                        'cancel-items'                        => '取消项目',
+                        'complete'                            => '完成',
+                        'current-order-quantity'              => '当前订单数量',
+                        'days-info'                           => '客户在下订单后可以请求RMA的天数。',
+                        'default-allow-days'                  => '默认允许天数',
+                        'enable'                              => '启用RMA',
+                        'evening'                             => '晚上',
+                        'exchange'                            => '换货',
+                        'info'                                => 'RMA是将产品退还给企业以获得退款、替换或修理的过程的一部分。',
+                        'morning'                             => '早上',
+                        'new-rma-message-to-customer'         => '给客户的新RMA消息',
+                        'no'                                  => '否',
+                        'open'                                => '打开',
+                        'package-condition'                   => '包装状况',
+                        'packed'                              => '已包装',
+                        'print-page'                          => '打印页面',
+                        'product-already-raw'                 => '产品已在RMA中。',
+                        'product-delivery-status'             => '产品交付状态',
+                        'resolution-type'                     => '解决类型',
+                        'return-pickup-address'               => '退货取件地址',
+                        'return-pickup-time'                  => '退货取件时间',
+                        'return-policy'                       => '退货政策',
+                        'return'                              => '退货',
+                        'select-allowed-order-status'         => '选择允许的订单状态',
+                        'specific-products'                   => '特定产品',
+                        'title'                               => 'RMA',
+                        'yes'                                 => '是',
+
+                        'setting' => [
+                            'info'  => 'RMA功能允许处理客户退回商品进行修理和维护，或退款或更换的情况。',
+                            'read'  => '阅读政策',
+                            'terms' => '我已阅读并接受退货政策。',
+                            'title' => 'RMA',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+
+        'components' => [
+            'layouts' => [
+                'sidebar' => [
+                    'rma' => 'RMA',
+                ],
+            ],
+        ],
+
+        'sales' => [
+            'rma' => [
+                'all-rma' => [
+                    'index' => [
+                        'title' => '所有RMA',
+
+                        'datagrid' => [
+                            'create'        => '创建时间',
+                            'customer-name' => '客户姓名',
+                            'id'            => 'RMA编号',
+                            'order-ref'     => '订单参考',
+                            'order-status'  => '订单状态',
+                            'rma-status'    => 'RMA状态',
+                        ],
+                    ],
+
+                    'view' => [
+                        'add-attachments'        => '添加附件',
+                        'additional-information' => '附加信息：',
+                        'attachment'             => '附件',
+                        'change-status'          => '更改状态',
+                        'confirm-print'          => '点击确定打印RMA',
+                        'conversations'          => '对话',
+                        'customer-details'       => '客户详情',
+                        'customer-email'         => '客户邮箱：',
+                        'customer'               => '客户：',
+                        'enter-message'          => '输入消息',
+                        'images'                 => '图片：',
+                        'no-record'              => '未找到记录！',
+                        'order-date'             => '订单日期：',
+                        'order-details'          => 'RMA请求的商品',
+                        'order-id'               => '订单编号：',
+                        'order-status'           => '订单状态：',
+                        'order-total'            => '订单总额：',
+                        'request-on'             => '请求日期：',
+                        'resolution-type'        => '解决类型：',
+                        'rma-status'             => 'RMA状态：',
+                        'save-btn'               => '保存',
+                        'send-message-btn'       => '发送消息',
+                        'send-message-success'   => '消息发送成功。',
+                        'send-message'           => '发送消息',
+                        'status'                 => '状态',
+                        'title'                  => 'RMA',
+                        'update-success'         => 'RMA状态更新成功。',
+                        'view-title'             => 'RMA',
+                    ],
+                ],
+
+                'rma-status' => [
+                    'index' => [
+                        'create-btn' => '创建RMA状态',
+                        'title'      => 'RMA状态',
+
+                        'datagrid' => [
+                            'created-at'          => '创建时间',
+                            'delete-success'      => 'RMA状态删除成功。',
+                            'disabled'            => '禁用',
+                            'enabled'             => '启用',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => '选定的RMA状态删除成功。',
+                            'reason-error'        => 'RMA状态在RMA中使用。',
+                            'reason'              => 'RMA状态',
+                            'status'              => '状态',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => '添加新的RMA状态',
+                        'reason'       => 'RMA状态',
+                        'save-btn'     => '保存RMA状态',
+                        'status'       => '状态',
+                        'success'      => 'RMA状态创建成功。',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => '编辑RMA状态',
+                        'mass-update-success' => '选定的RMA状态更新成功。',
+                        'reason'              => 'RMA状态',
+                        'save-btn'            => '保存RMA状态',
+                        'status'              => '状态',
+                        'success'             => 'RMA状态更新成功。',
+                    ],
+                ],
+
+                'reasons' => [
+                    'index' => [
+                        'create-btn' => '创建RMA原因',
+                        'title'      => '原因',
+
+                        'datagrid' => [
+                            'created-at'          => '创建时间',
+                            'delete-success'      => '原因删除成功。',
+                            'disabled'            => '禁用',
+                            'enabled'             => '启用',
+                            'id'                  => '编号',
+                            'mass-delete-success' => '选中的数据删除成功',
+                            'reason-error'        => '原因在RMA中使用。',
+                            'reason'              => '原因',
+                            'status'              => '状态',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => '添加新原因',
+                        'reason'       => '原因',
+                        'save-btn'     => '保存原因',
+                        'status'       => '状态',
+                        'success'      => '原因创建成功。',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => '编辑原因',
+                        'mass-update-success' => '选中的原因更新成功。',
+                        'reason'              => '原因',
+                        'save-btn'            => '保存原因',
+                        'status'              => '状态',
+                        'success'             => '原因更新成功。',
+                    ],
+                ],
+
+                'custom-field' => [
+                    'index' => [
+                        'create-btn' => '添加新字段',
+                        'title'      => 'RMA自定义字段',
+
+                        'datagrid' => [
+                            'created-at'          => '创建时间',
+                            'delete-success'      => '自定义字段删除成功。',
+                            'disabled'            => '禁用',
+                            'enabled'             => '启用',
+                            'id'                  => '编号',
+                            'mass-delete-success' => '选中的数据已成功删除',
+                            'status'              => '状态',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title' => '新建自定义字段',
+                        'save-btn'     => '保存自定义字段',
+                        'status'       => '状态',
+                        'success'      => '自定义字段创建成功。',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => '编辑自定义字段',
+                        'mass-update-success' => '选中的自定义字段已成功更新。',
+                        'reason'              => '自定义字段',
+                        'save-btn'            => '保存自定义字段',
+                        'status'              => '状态',
+                        'success'             => '自定义字段更新成功。',
+                    ],
+                ],
+
+                'rules' => [
+                    'index' => [
+                        'create-btn' => '创建RMA规则',
+                        'title'      => 'RMA规则',
+
+                        'datagrid' => [
+                            'delete-success'      => 'RMA规则删除成功。',
+                            'disabled'            => '禁用',
+                            'enabled'             => '启用',
+                            'exchange-period'     => '交换期（天）',
+                            'id'                  => 'ID',
+                            'mass-delete-success' => '选中的数据删除成功。',
+                            'reason'              => '规则',
+                            'return-period'       => '退货期（天）',
+                            'status'              => '状态',
+                        ],
+                    ],
+
+                    'create' => [
+                        'create-title'       => '添加新RMA规则',
+                        'reason'             => 'RMA规则',
+                        'resolutions-period' => '解决期',
+                        'rule-description'   => '规则描述',
+                        'rule-details'       => '规则详情',
+                        'rules-title'        => '规则标题',
+                        'save-btn'           => '保存RMA规则',
+                        'status'             => 'RMA状态',
+                        'success'            => 'RMA规则创建成功。',
+                    ],
+
+                    'edit' => [
+                        'edit-title'          => '编辑RMA规则',
+                        'mass-update-success' => '选中的RMA规则更新成功。',
+                        'reason'              => 'RMA规则',
+                        'save-btn'            => '更新RMA规则',
+                        'status'              => '状态',
+                        'success'             => 'RMA规则更新成功。',
+                    ],
+                ],
+
+                'create-rma' => [
+                    'create-success'           => 'RMA创建成功。',
+                    'create-title'             => '创建RMA',
+                    'email'                    => '电子邮件',
+                    'image'                    => '图片',
+                    'invalid-order-id'         => '无效的订单编号',
+                    'mismatch'                 => '订单编号和电子邮件不匹配',
+                    'new-rma'                  => '新RMA',
+                    'order-id'                 => '订单编号',
+                    'quantity'                 => '数量',
+                    'reason'                   => '原因',
+                    'rma-already-exist'        => 'RMA已存在',
+                    'rma-not-available-quotes' => '商品不可用于RMA',
+                    'save-btn'                 => '保存',
+                    'search'                   => '--选择--',
+                    'validate'                 => '验证',
+                ],
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma_has_been_created' => 'RMA已创建',
+                    'rma-created-message'  => '产品数量为:qty的RMA请求已创建'
+                ],
+            ],
+        ],
+
+            'rma' => [
+                'index' => [
+                'create-rma-title' => '创建',
+                'reason-title'     => '原因',
+                'rma-title'        => '退货',
+                ],
+            ],
+
+        'acl' => [
+            'delete'      => '删除',
+            'edit'        => '编辑',
+            'mass-delete' => '批量删除',
+            'mass-update' => '批量更新',
+            'title'       => 'RMA',
+        ],
+    ],
 ];

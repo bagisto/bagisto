@@ -394,9 +394,19 @@
                                         <div class="flex w-full justify-between gap-x-5">
                                             @lang('shop::app.customers.account.orders.view.information.total-due')
 
+                                            @php
+                                                $baseTotalDue = $order->base_total_due;
+                                            @endphp
+
+                                            @foreach ($order->items as $item)
+                                                @php
+                                                    $baseTotalDue = $baseTotalDue - ($item->base_price * $item->qty_canceled);
+                                                @endphp
+                                            @endforeach
+
                                             <p>
                                                 @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                                    {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
+                                                    {{ core()->formatPrice($baseTotalDue, $order->order_currency_code) }}
                                                 @else
                                                     {{ core()->formatPrice(0.00, $order->order_currency_code) }}
                                                 @endif
@@ -856,9 +866,19 @@
                                         @lang('shop::app.customers.account.orders.view.information.total-due')
                                     </p>
 
+                                    @php
+                                        $baseTotalDue = $order->base_total_due;
+                                    @endphp
+
+                                    @foreach ($order->items as $item)
+                                        @php
+                                            $baseTotalDue = $baseTotalDue - ($item->base_price * $item->qty_canceled);
+                                        @endphp
+                                    @endforeach
+
                                     <p>
                                         @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                            {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
+                                            {{ core()->formatPrice($baseTotalDue, $order->order_currency_code) }}
                                         @else
                                             {{ core()->formatPrice(0.00, $order->order_currency_code) }}
                                         @endif
