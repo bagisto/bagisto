@@ -1878,6 +1878,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 1,
                 'options' => [
                     [
                         'title' => '1',
@@ -1989,6 +1990,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 2,
                 'options' => [
                     [
                         'title' => '1',
@@ -2085,6 +2087,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 3,
                 'options' => [
                     [
                         'title' => '1',
@@ -2160,6 +2163,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 4,
                 'options' => [
                     [
                         'title' => '1',
@@ -2269,6 +2273,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 5,
                 'options' => [
                     [
                         'title' => '1',
@@ -2351,6 +2356,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 6,
                 'options' => [
                     [
                         'title' => '1',
