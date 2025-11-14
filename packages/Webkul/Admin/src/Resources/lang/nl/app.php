@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Deze groep heeft geassocieerde klanten en kan niet worden verwijderd.',
+
             'index' => [
                 'title' => 'Groepen',
 
@@ -4504,11 +4506,19 @@ return [
                     'pending'                        => 'In afwachting',
                     'pending-payment'                => 'In afwachting van betaling',
                     'processing'                     => 'Verwerken',
+                    'production-mode-info'           => 'Alleen voor productiemodus.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay is een financieel technologieplatform dat bedrijven helpt betalingen te accepteren, te verwerken en uit te betalen.',
                     'sandbox'                        => 'Sandbox',
                     'set-invoice-status'             => 'Stel de factuurstatus in na het maken van de factuur op',
                     'set-order-status'               => 'Stel de bestelstatus in na het maken van de factuur op',
                     'sort-order'                     => 'Sorteervolgorde',
                     'status'                         => 'Status',
+                    'merchant-name'                  => 'Handelsnaam',
+                    'merchant-description'           => 'Handelsbeschrijving',
+                    'test-client-id'                 => 'Testmodus Client-ID',
+                    'test-client-secret'             => 'Testmodus Clientgeheim',
+                    'test-mode-info'                 => 'Alleen voor test-/sandboxmodus.',
                     'title'                          => 'Titel',
                 ],
 

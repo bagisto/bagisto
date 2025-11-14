@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'This group has associated customers and cannot be deleted.',
+
             'index' => [
                 'title' => 'Groups',
 
@@ -4487,7 +4489,9 @@ return [
                     'logo'                           => 'Logo',
                     'logo-information'               => 'Image resolution should be like 55px X 45px',
                     'mailing-address'                => 'Send Check to',
+                    'merchant-description'           => 'Merchant Description',
                     'merchant-key'                   => 'Merchant Key',
+                    'merchant-name'                  => 'Merchant Name',
                     'merchant-salt'                  => 'Merchant Salt',
                     'money-transfer'                 => 'Money Transfer',
                     'money-transfer-info'            => 'Transfer of funds from one person or account to another, often electronically, for various purposes such as transactions or remittances.',
@@ -4504,11 +4508,17 @@ return [
                     'pending'                        => 'Pending',
                     'pending-payment'                => 'Pending Payment',
                     'processing'                     => 'Processing',
+                    'production-mode-info'           => 'For production mode only.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay is a financial technology platform that helps businesses accept, process, and disburse payments.',
                     'sandbox'                        => 'Sandbox',
                     'set-invoice-status'             => 'Set the invoice status after creating the invoice to',
                     'set-order-status'               => 'Set the order status after creating the invoice to',
                     'sort-order'                     => 'Sort Order',
                     'status'                         => 'Status',
+                    'test-client-id'                 => 'Test Mode Client ID',
+                    'test-client-secret'             => 'Test Mode Client Secret',
+                    'test-mode-info'                 => 'For test/sandbox mode only.',
                     'title'                          => 'Title',
                 ],
 

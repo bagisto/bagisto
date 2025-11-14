@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Diese Gruppe hat zugeordnete Kunden und kann nicht gelöscht werden.',
+
             'index' => [
                 'title' => 'Gruppen',
 
@@ -4504,11 +4506,19 @@ return [
                     'pending'                        => 'Ausstehend',
                     'pending-payment'                => 'Ausstehende Zahlung',
                     'processing'                     => 'In Bearbeitung',
+                    'production-mode-info'           => 'Nur für den Produktionsmodus.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay ist eine Finanztechnologieplattform, die Unternehmen hilft, Zahlungen zu akzeptieren, zu verarbeiten und auszuzahlen.',
                     'sandbox'                        => 'Sandbox',
                     'set-invoice-status'             => 'Den Rechnungsstatus nach Erstellung der Rechnung auf',
                     'set-order-status'               => 'Den Bestellstatus nach Erstellung der Rechnung auf',
                     'sort-order'                     => 'Sortierreihenfolge',
                     'status'                         => 'Status',
+                    'merchant-name'                  => 'Händlername',
+                    'merchant-description'           => 'Händlerbeschreibung',
+                    'test-client-id'                 => 'Testmodus Client-ID',
+                    'test-client-secret'             => 'Testmodus Client Secret',
+                    'test-mode-info'                 => 'Nur für Test-/Sandbox-Modus.',
                     'title'                          => 'Titel',
                 ],
 

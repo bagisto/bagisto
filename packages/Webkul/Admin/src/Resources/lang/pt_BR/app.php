@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Este grupo possui clientes associados e não pode ser excluído.',
+
             'index' => [
                 'title' => 'Grupos',
 
@@ -4504,11 +4506,19 @@ return [
                     'pending'                        => 'Pendente',
                     'pending-payment'                => 'Pagamento Pendente',
                     'processing'                     => 'Processando',
+                    'production-mode-info'           => 'Somente para modo de produção.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay é uma plataforma de tecnologia financeira que ajuda empresas a aceitar, processar e desembolsar pagamentos.',
                     'sandbox'                        => 'Ambiente de Teste',
                     'set-invoice-status'             => 'Definir o status da fatura após criar a fatura para',
                     'set-order-status'               => 'Definir o status do pedido após criar a fatura para',
                     'sort-order'                     => 'Ordem de Classificação',
                     'status'                         => 'Status',
+                    'merchant-name'                  => 'Nome do comerciante',
+                    'merchant-description'           => 'Descrição do comerciante',
+                    'test-client-id'                 => 'ID do Cliente Modo de Teste',
+                    'test-client-secret'             => 'Chave Secreta do Cliente Modo de Teste',
+                    'test-mode-info'                 => 'Somente para modo de teste/sandbox.',
                     'title'                          => 'Título',
                 ],
 

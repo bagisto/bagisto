@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>@lang('razorpay::app.drop-in-ui.title')</title>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <!-- Add Loading Spinner Styles -->
+        <style>
+            .loader-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+
+            .loader {
+                border: 5px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 5px solid #F37254;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            
+            .error-message {
+                display: none;
+                text-align: center;
+                color: #721c24;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                padding: 1rem;
+                margin: 1rem;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Add Loading Spinner -->
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+
+        <!-- Add Error Message Container -->
+        <div 
+            id="error-message" 
+            class="error-message"
+        >
+            @lang('razorpay::app.response.something-went-wrong')
+        </div>
+
+        <script>
+            const payment = @json($payment);
+            
+            const razorpay = new Razorpay({
+                key: payment.key,
+                amount: payment.amount,
+                currency: payment.currency,
+                name: payment.name,
+                description: payment.description,
+                image: payment.image,
+                order_id: payment.order_id,
+                prefill: payment.prefill,
+                
+                theme: {
+                    color: payment.theme_color || '#0041FF'
+                },
+                
+                modal: {
+                    ondismiss: function () {
+                        document.querySelector('.loader-container').style.display = 'flex';
+
+                        window.location.href = "{{ route('razorpay.payment.cancel') }}";
+                    },
+                    
+                    escape: true,
+                    animation: true
+                },
+                
+                handler: function (response) {
+                    document.querySelector('.loader-container').style.display = 'flex';
+                    
+                    const params = new URLSearchParams({
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature
+                    });
+                    
+                    window.location.href = "{{ route('razorpay.payment.success') }}?" + params.toString();
+                }
+            });
+
+            window.addEventListener('load', function() {
+                document.querySelector('.loader-container').style.display = 'none';
+
+                razorpay.open();
+            });
+        </script>
+    </body>
+</html>
