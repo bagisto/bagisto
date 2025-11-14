@@ -1,11 +1,17 @@
 <?php
 
-/**
- * Store front routes.
- */
-require 'store-front-routes.php';
+use Illuminate\Support\Facades\Route;
+use Webkul\PayU\Http\Controllers\PayUController;
 
-/**
- * Admin routes.
- */
-require 'admin-routes.php';
+Route::controller(PayUController::class)
+    ->middleware('web')
+    ->prefix('payu')
+    ->group(function () {
+        Route::get('redirect', 'redirect')->name('payu.redirect');
+
+        Route::post('success', 'success')->name('payu.success');
+
+        Route::post('failure', 'failure')->name('payu.failure');
+
+        Route::post('cancel', 'cancel')->name('payu.cancel');
+    });
