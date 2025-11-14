@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'このグループには関連する顧客がいるため、削除できません。',
+
             'index' => [
                 'title' => 'グループ',
 
@@ -4498,11 +4500,19 @@ return [
                     'pending'                        => '保留中',
                     'pending-payment'                => '保留中の支払い',
                     'processing'                     => '処理中',
+                    'production-mode-info'           => '本番モードのみ。',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpayは、企業が支払いを受け入れ、処理し、支払いを行うのを支援する金融技術プラットフォームです。',
                     'sandbox'                        => 'サンドボックス',
                     'set-invoice-status'             => '請求書作成後の請求書ステータスを設定する',
                     'set-order-status'               => '請求書作成後の注文ステータスを設定する',
                     'sort-order'                     => '並べ替え順',
                     'status'                         => 'ステータス',
+                    'merchant-name'                  => 'マーチャント名',
+                    'merchant-description'           => 'マーチャントの説明',
+                    'test-client-id'                 => 'テストモードクライアントID',
+                    'test-client-secret'             => 'テストモードクライアントシークレット',
+                    'test-mode-info'                 => 'テスト/サンドボックスモードのみ。',
                     'title'                          => 'タイトル',
                 ],
 

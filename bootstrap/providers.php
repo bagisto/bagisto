@@ -34,6 +34,7 @@ return [
     Webkul\Paypal\Providers\PaypalServiceProvider::class,
     Webkul\Product\Providers\ProductServiceProvider::class,
     Webkul\RMA\Providers\RMAServiceProvider::class,
+    Webkul\Razorpay\Providers\RazorpayServiceProvider::class,
     Webkul\Rule\Providers\RuleServiceProvider::class,
     Webkul\Sales\Providers\SalesServiceProvider::class,
     Webkul\Shipping\Providers\ShippingServiceProvider::class,

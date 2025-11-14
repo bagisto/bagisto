@@ -1996,6 +1996,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Ta grupa ma powiązanych klientów i nie może zostać usunięta.',
+
             'index' => [
                 'title' => 'Grupy',
 
@@ -4498,11 +4500,19 @@ return [
                     'pending'                        => 'Oczekujące',
                     'pending-payment'                => 'Oczekująca płatność',
                     'processing'                     => 'Przetwarzanie',
+                    'production-mode-info'           => 'Tylko dla trybu produkcyjnego.',
+                    'razorpay'                       => 'Razorpay',
+                    'razorpay-info'                  => 'Razorpay to platforma technologii finansowej, która pomaga firmom akceptować, przetwarzać i wypłacać płatności.',
                     'sandbox'                        => 'Piaskownica',
                     'set-invoice-status'             => 'Ustaw status faktury po utworzeniu faktury na',
                     'set-order-status'               => 'Ustaw status zamówienia po utworzeniu faktury na',
                     'sort-order'                     => 'Kolejność sortowania',
                     'status'                         => 'Status',
+                    'merchant-name'                  => 'Nazwa sprzedawcy',
+                    'merchant-description'           => 'Opis sprzedawcy',
+                    'test-client-id'                 => 'ID klienta w trybie testowym',
+                    'test-client-secret'             => 'Sekret klienta w trybie testowym',
+                    'test-mode-info'                 => 'Tylko dla trybu testowego/piaskownicy.',
                     'title'                          => 'Tytuł',
                 ],
 
