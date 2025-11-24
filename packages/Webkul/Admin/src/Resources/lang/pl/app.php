@@ -1952,6 +1952,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Ta grupa ma powiązanych klientów i nie może zostać usunięta.',
+
             'index' => [
                 'title' => 'Grupy',
 

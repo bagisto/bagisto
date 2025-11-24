@@ -1952,6 +1952,8 @@ return [
         ],
 
         'groups' => [
+            'customer-associate' => 'Este grupo possui clientes associados e não pode ser excluído.',
+
             'index' => [
                 'title' => 'Grupos',
 
