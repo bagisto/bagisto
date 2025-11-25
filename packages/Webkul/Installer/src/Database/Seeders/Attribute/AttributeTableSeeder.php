@@ -234,7 +234,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => 13,
                 'is_required'         => 1,
                 'is_unique'           => 0,
-                'value_per_locale'    => 0,
+                'value_per_locale'    => 1,
                 'value_per_channel'   => 0,
                 'default_value'       => null,
                 'is_filterable'       => 1,
