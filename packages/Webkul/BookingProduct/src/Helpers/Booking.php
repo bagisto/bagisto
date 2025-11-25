@@ -669,4 +669,15 @@ class Booking
             ],
         ];
     }
+
+    /**
+     * Return a slot unavailable message.
+     */
+    public function slotUnavailableMessage(array $data): string
+    {
+        return trans('shop::app.products.booking.cart.integrity.unavailable_date', [
+            'date_from' => $data['booking']['date_from'] ?? null,
+            'date_to'   => $data['booking']['date_to'] ?? null,
+        ]);
+    }
 }
