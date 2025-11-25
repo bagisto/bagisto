@@ -95,6 +95,7 @@ abstract class AbstractType
             'product_id'        => $this->product->id,
             'channel_id'        => $this->channel->id,
             'customer_group_id' => $this->customerGroup->id,
+            'locale'            => app()->getLocale(),
         ];
     }
 
