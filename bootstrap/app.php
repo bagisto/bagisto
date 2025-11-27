@@ -26,10 +26,6 @@ return Application::configure(basePath: dirname(__DIR__))
          * As of now, this has been added in the Admin and Shop providers. I will look for a better approach in Laravel 11 for this.
          */
         $middleware->remove(PreventRequestsDuringMaintenance::class);
-        
-        $middleware->validateCsrfTokens(except: [
-            'stripe/*',
-        ]);
 
         /**
          * Remove the default Laravel middleware that converts empty strings to null. First, handle all nullable cases,
@@ -44,6 +40,12 @@ return Application::configure(basePath: dirname(__DIR__))
          * Add the overridden middleware at the end of the list.
          */
         $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
+
+        $middleware->validateCsrfTokens(except: [
+            'stripe/*',
+        ]);
+
+        $middleware->trustProxies(at: '*');
     })
     ->withSchedule(function (Schedule $schedule) {
         //

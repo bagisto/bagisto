@@ -12,6 +12,7 @@ use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
 
 class RazorpayController extends Controller
@@ -32,6 +33,7 @@ class RazorpayController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
         protected RazorpayEventRepository $razorpayEventRepository,
     ) {}
 
@@ -203,7 +205,22 @@ class RazorpayController extends Controller
 
             $this->orderRepository->update(['status' => Order::STATUS_PROCESSING], $order->id);
 
-            $this->invoiceRepository->create($this->prepareInvoiceData($order->id));
+            $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order->id));
+
+            $this->orderTransactionRepository->create([
+                'transaction_id' => $request->input('razorpay_payment_id'),
+                'status'         => PaymentStatus::CAPTURED,
+                'type'           => $order->payment->method,
+                'payment_method' => $order->payment->method,
+                'order_id'       => $order->id,
+                'invoice_id'     => $invoice->id,
+                'amount'         => $orderData['base_grand_total'] ?? 0,
+                'data'           => json_encode([
+                    'razorpay_order_id'   => $request->input('razorpay_order_id'),
+                    'razorpay_payment_id' => $request->input('razorpay_payment_id'),
+                    'razorpay_signature'  => $request->input('razorpay_signature'),
+                ]),
+            ]);
 
             try {
                 $razorpayEvent = $this->razorpayEventRepository->findOneWhere(['razorpay_order_id' => $request->input('razorpay_order_id')]);
