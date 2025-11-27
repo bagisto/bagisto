@@ -4,7 +4,7 @@ return [
     'payu' => [
         'code'          => 'payu',
         'title'         => 'PayU',
-        'description'   => 'Pay securely using Credit Card, Debit Card, Net Banking, UPI & Wallets via PayU',
+        'description'   => 'PayU',
         'class'         => 'Webkul\PayU\Payment\PayU',
         'sandbox'       => true,
         'active'        => true,

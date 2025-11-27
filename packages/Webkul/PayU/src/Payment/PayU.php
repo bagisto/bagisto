@@ -36,20 +36,6 @@ class PayU extends Payment
     }
 
     /**
-     * Get payment method additional information.
-     *
-     * @return array
-     */
-    public function getAdditionalDetails()
-    {
-        return [
-            'title'       => $this->getTitle(),
-            'description' => $this->getDescription(),
-            'image'       => $this->getImage(),
-        ];
-    }
-
-    /**
      * Get payment method title.
      *
      * @return string
