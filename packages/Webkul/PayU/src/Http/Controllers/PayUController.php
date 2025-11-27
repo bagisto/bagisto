@@ -9,6 +9,7 @@ use Webkul\PayU\Payment\PayU;
 use Webkul\PayU\Repositories\PayUTransactionRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shop\Http\Controllers\Controller;
 
@@ -24,6 +25,7 @@ class PayUController extends Controller
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
         protected PayUTransactionRepository $payUTransactionRepository
     ) {}
 
@@ -122,7 +124,18 @@ class PayUController extends Controller
             $this->orderRepository->update(['status' => 'processing'], $order->id);
 
             if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+
+                $this->orderTransactionRepository->create([
+                    'transaction_id' => $response['txnid'] ?? '',
+                    'status'         => TransactionStatus::SUCCESS->value,
+                    'type'           => $order->payment->method,
+                    'payment_method' => $order->payment->method,
+                    'order_id'       => $order->id,
+                    'invoice_id'     => $invoice->id,
+                    'amount'         => $transaction->amount,
+                    'data'           => json_encode($response),
+                ]);
             }
 
             Cart::deActivateCart();
