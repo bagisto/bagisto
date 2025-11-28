@@ -4,4 +4,4 @@ namespace Webkul\Razorpay\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class RazorpayEventProxy extends ModelProxy {}
+class RazorpayTransactionProxy extends ModelProxy {}

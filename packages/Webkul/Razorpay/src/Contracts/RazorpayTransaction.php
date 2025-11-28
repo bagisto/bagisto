@@ -2,4 +2,4 @@
 
 namespace Webkul\Razorpay\Contracts;
 
-interface RazorpayEvent {}
+interface RazorpayTransaction {}

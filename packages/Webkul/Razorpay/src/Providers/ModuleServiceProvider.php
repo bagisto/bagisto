@@ -12,6 +12,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Razorpay\Models\RazorpayEvent::class,
+        \Webkul\Razorpay\Models\RazorpayTransaction::class,
     ];
 }

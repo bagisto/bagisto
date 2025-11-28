@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Razorpay\Enums\PaymentStatus;
-use Webkul\Razorpay\Repositories\RazorpayEventRepository;
+use Webkul\Razorpay\Repositories\RazorpayTransactionRepository;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -34,7 +34,7 @@ class RazorpayController extends Controller
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
-        protected RazorpayEventRepository $razorpayEventRepository,
+        protected RazorpayTransactionRepository $razorpayTransactionRepository,
     ) {}
 
     /**
@@ -90,7 +90,7 @@ class RazorpayController extends Controller
                 ],
             ];
 
-            $this->razorpayEventRepository->create([
+            $this->razorpayTransactionRepository->create([
                 'cart_id'                 => $cart->id,
                 'razorpay_receipt'        => self::RECEIPT_PREFIX.$cart->id,
                 'razorpay_order_id'       => $orderAPI['id'],
@@ -169,12 +169,12 @@ class RazorpayController extends Controller
         $razorpayOrderId = $request->input('error.metadata.order_id') ?? $request->input('razorpay_order_id');
 
         if ($razorpayOrderId) {
-            $razorpayEvent = $this->razorpayEventRepository->findOneWhere(['razorpay_order_id' => $razorpayOrderId]);
+            $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere(['razorpay_order_id' => $razorpayOrderId]);
 
-            if ($razorpayEvent) {
-                $this->razorpayEventRepository->update([
+            if ($razorpayTransaction) {
+                $this->razorpayTransactionRepository->update([
                     'razorpay_invoice_status' => PaymentStatus::PAYMENT_ERROR,
-                ], $razorpayEvent->id);
+                ], $razorpayTransaction->id);
             }
         }
 
@@ -223,9 +223,9 @@ class RazorpayController extends Controller
             ]);
 
             try {
-                $razorpayEvent = $this->razorpayEventRepository->findOneWhere(['razorpay_order_id' => $request->input('razorpay_order_id')]);
+                $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere(['razorpay_order_id' => $request->input('razorpay_order_id')]);
 
-                if ($razorpayEvent) {
+                if ($razorpayTransaction) {
                     $updateData = [
                         'order_id'                => $order->id,
                         'razorpay_payment_id'     => $request->input('razorpay_payment_id'),
@@ -253,7 +253,7 @@ class RazorpayController extends Controller
                         report($e);
                     }
 
-                    $this->razorpayEventRepository->update($updateData, $razorpayEvent->id);
+                    $this->razorpayTransactionRepository->update($updateData, $razorpayTransaction->id);
                 }
             } catch (\Throwable $e) {
                 report($e);

@@ -3,15 +3,15 @@
 namespace Webkul\Razorpay\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Razorpay\Contracts\RazorpayEvent;
+use Webkul\Razorpay\Contracts\RazorpayTransaction;
 
-class RazorpayEventRepository extends Repository
+class RazorpayTransactionRepository extends Repository
 {
     /**
      * Specify model class name.
      */
     public function model(): string
     {
-        return RazorpayEvent::class;
+        return RazorpayTransaction::class;
     }
 }

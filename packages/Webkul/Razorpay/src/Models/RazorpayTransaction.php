@@ -4,11 +4,11 @@ namespace Webkul\Razorpay\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Webkul\Razorpay\Contracts\RazorpayEvent as RazorpayEventContract;
+use Webkul\Razorpay\Contracts\RazorpayTransaction as RazorpayTransactionContract;
 use Webkul\Razorpay\Enums\PaymentStatus;
 use Webkul\Sales\Models\Order;
 
-class RazorpayEvent extends Model implements RazorpayEventContract
+class RazorpayTransaction extends Model implements RazorpayTransactionContract
 {
     /**
      * The attributes that are mass assignable.
@@ -36,7 +36,7 @@ class RazorpayEvent extends Model implements RazorpayEventContract
     }
 
     /**
-     * Get the order that owns the razorpay event.
+     * Get the order that owns the razorpay transaction.
      */
     public function order(): BelongsTo
     {
