@@ -100,10 +100,10 @@
             "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
             "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
+            "Webkul\\Stripe\\": "packages/Webkul/Stripe/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\Stripe\\": "packages/Webkul/Stripe/src"
+            "Webkul\\User\\": "packages/Webkul/User/src"
         }
     },
     "autoload-dev": {

@@ -6,8 +6,12 @@ use Konekt\Concord\BaseModuleServiceProvider;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
+    /**
+     * Models.
+     *
+     * @var array
+     */
     protected $models = [
-        \Webkul\Stripe\Models\StripeCart::class,
-        \Webkul\Stripe\Models\Stripe::class,
+        \Webkul\Stripe\Models\StripeTransaction::class,
     ];
 }

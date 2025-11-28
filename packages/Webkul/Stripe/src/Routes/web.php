@@ -1,11 +1,15 @@
 <?php
 
-/**
- * Store front routes.
- */
-require 'store-front-routes.php';
+use Illuminate\Support\Facades\Route;
+use Webkul\Stripe\Http\Controllers\StripeController;
 
-/**
- * Admin routes.
- */
-require 'admin-routes.php';
+Route::controller(StripeController::class)
+    ->middleware('web')
+    ->prefix('stripe')
+    ->group(function () {
+        Route::get('redirect', 'redirect')->name('stripe.standard.redirect');
+
+        Route::get('success', 'success')->name('stripe.payment.success');
+
+        Route::get('cancel', 'cancel')->name('stripe.payment.cancel');
+    });

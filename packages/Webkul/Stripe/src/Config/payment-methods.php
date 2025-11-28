@@ -5,7 +5,7 @@ return [
         'code'          => 'stripe',
         'title'         => 'Stripe',
         'description'   => 'Stripe Payments',
-        'class'         => 'Webkul\Stripe\Payment\StripePayment',
+        'class'         => 'Webkul\Stripe\Payment\Stripe',
         'debug'         => true,
         'active'        => false,
     ],

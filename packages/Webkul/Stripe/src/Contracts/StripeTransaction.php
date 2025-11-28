@@ -2,4 +2,4 @@
 
 namespace Webkul\Stripe\Contracts;
 
-interface StripeCart {}
+interface StripeTransaction {}
