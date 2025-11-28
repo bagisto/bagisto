@@ -12,4 +12,4 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Added PayU Money payment gateway integration with redirect-based checkout flow.
 
-* Added Stripe payment gateway.
+* Added Stripe payment gateway integration with secure checkout session.
