@@ -15,7 +15,7 @@ class StripeTransaction extends Model implements StripeTransactionContract
      */
     protected $fillable = [
         'cart_id',
-        'customer_id',
+        'order_id',
         'session_id',
         'amount',
         'status',

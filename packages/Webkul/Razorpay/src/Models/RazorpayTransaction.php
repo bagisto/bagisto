@@ -3,10 +3,8 @@
 namespace Webkul\Razorpay\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Razorpay\Contracts\RazorpayTransaction as RazorpayTransactionContract;
 use Webkul\Razorpay\Enums\PaymentStatus;
-use Webkul\Sales\Models\Order;
 
 class RazorpayTransaction extends Model implements RazorpayTransactionContract
 {
@@ -26,20 +24,11 @@ class RazorpayTransaction extends Model implements RazorpayTransactionContract
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
+     *
+     * @var array
      */
-    protected function casts(): array
-    {
-        return [
-            'razorpay_invoice_status' => PaymentStatus::class,
-        ];
-    }
-
-    /**
-     * Get the order that owns the razorpay transaction.
-     */
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
+    protected $casts = [
+        'razorpay_invoice_status' => PaymentStatus::class,
+    ];
 }

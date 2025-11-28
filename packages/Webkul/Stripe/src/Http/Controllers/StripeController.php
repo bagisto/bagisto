@@ -52,11 +52,10 @@ class StripeController extends Controller
             $checkoutSession = $this->stripe->createCheckoutSession($cart);
 
             $this->stripeTransactionRepository->create([
-                'cart_id'     => $cart->id,
-                'customer_id' => $cart->customer_id,
-                'session_id'  => $checkoutSession->id,
-                'amount'      => $cart->base_grand_total,
-                'status'      => StripeTransactionStatus::PENDING->value,
+                'cart_id'    => $cart->id,
+                'session_id' => $checkoutSession->id,
+                'amount'     => $cart->base_grand_total,
+                'status'     => StripeTransactionStatus::PENDING->value,
             ]);
 
             return redirect($checkoutSession->url);
@@ -139,7 +138,8 @@ class StripeController extends Controller
             Cart::deActivateCart();
 
             $this->stripeTransactionRepository->update([
-                'status' => StripeTransactionStatus::COMPLETED->value,
+                'order_id' => $order->id,
+                'status'   => StripeTransactionStatus::COMPLETED->value,
             ], $stripeTransaction->id);
 
             session()->flash('order_id', $order->id);

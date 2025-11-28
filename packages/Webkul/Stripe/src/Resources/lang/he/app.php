@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'description' 'שלמו בבטח> = עם כרטיס האשראי/החיוב שלכם דרך Stripe.',
+    'description' => 'שלמו בבטח> = עם כרטיס האשראי/החיוב שלכם דרך Stripe.',
     'title'       => 'Stripe',
 
     'response' => [

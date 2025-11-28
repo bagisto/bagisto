@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('stripe_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_id')->unsigned();
-            $table->integer('customer_id')->unsigned()->nullable();
-            $table->string('session_id')->index()->nullable();
+            $table->integer('order_id')->unsigned()->nullable();
+            $table->string('session_id')->unique()->index();
             $table->decimal('amount', 12, 4)->nullable();
             $table->string('status', 20)->default('pending');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 
