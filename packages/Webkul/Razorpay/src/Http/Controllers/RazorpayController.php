@@ -31,10 +31,10 @@ class RazorpayController extends Controller
      * Create a new controller instance.
      */
     public function __construct(
-        protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository,
-        protected OrderTransactionRepository $orderTransactionRepository,
         protected RazorpayTransactionRepository $razorpayTransactionRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
+        protected InvoiceRepository $invoiceRepository,
     ) {}
 
     /**

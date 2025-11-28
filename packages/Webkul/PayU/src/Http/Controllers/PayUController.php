@@ -22,11 +22,11 @@ class PayUController extends Controller
      */
     public function __construct(
         protected PayU $payU,
+        protected PayUTransactionRepository $payUTransactionRepository,
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
-        protected PayUTransactionRepository $payUTransactionRepository
+        protected InvoiceRepository $invoiceRepository,
     ) {}
 
     /**

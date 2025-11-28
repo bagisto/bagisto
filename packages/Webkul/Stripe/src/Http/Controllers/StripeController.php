@@ -6,6 +6,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Stripe\Enums\StripeTransactionStatus;
@@ -24,6 +25,7 @@ class StripeController extends Controller
         protected StripeTransactionRepository $stripeTransactionRepository,
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
     ) {}
 
@@ -132,7 +134,22 @@ class StripeController extends Controller
                     $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;
                 }
 
-                $this->invoiceRepository->create($invoiceData);
+                $invoice = $this->invoiceRepository->create($invoiceData);
+
+                $this->orderTransactionRepository->create([
+                    'transaction_id' => $session->payment_intent,
+                    'status'         => StripeTransactionStatus::COMPLETED->value,
+                    'type'           => $order->payment->method,
+                    'payment_method' => $order->payment->method,
+                    'order_id'       => $order->id,
+                    'invoice_id'     => $invoice->id,
+                    'amount'         => $stripeTransaction->amount,
+                    'data'           => json_encode([
+                        'stripe_session_id'        => $sessionId,
+                        'stripe_payment_intent_id' => $session->payment_intent,
+                        'stripe_payment_status'    => $session->payment_status,
+                    ]),
+                ]);
             }
 
             Cart::deActivateCart();
