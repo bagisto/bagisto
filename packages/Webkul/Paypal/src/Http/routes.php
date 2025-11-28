@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Webkul\Paypal\Http\Controllers\StandardController;
-use Webkul\Paypal\Http\Controllers\SmartButtonController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Support\Facades\Route;
+use Webkul\Paypal\Http\Controllers\SmartButtonController;
+use Webkul\Paypal\Http\Controllers\StandardController;
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('paypal/standard')->group(function () {

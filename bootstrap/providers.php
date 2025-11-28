@@ -42,6 +42,7 @@ return [
     Webkul\Sitemap\Providers\SitemapServiceProvider::class,
     Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
     Webkul\SocialShare\Providers\SocialShareServiceProvider::class,
+    Webkul\Stripe\Providers\StripeConnectServiceProvider::class,
     Webkul\Tax\Providers\TaxServiceProvider::class,
     Webkul\Theme\Providers\ThemeServiceProvider::class,
     Webkul\User\Providers\UserServiceProvider::class,

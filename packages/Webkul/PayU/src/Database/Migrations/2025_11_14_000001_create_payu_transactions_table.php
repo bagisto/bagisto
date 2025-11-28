@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('payu_transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cart_id')->index();
-            $table->unsignedInteger('customer_id')->nullable()->index();
+            $table->unsignedInteger('cart_id');
+            $table->unsignedInteger('order_id')->nullable();
             $table->string('transaction_id')->unique()->index();
             $table->decimal('amount', 12, 4);
             $table->string('status')->default('pending');
             $table->json('response')->nullable();
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

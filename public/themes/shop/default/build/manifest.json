@@ -91,6 +91,10 @@
     "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
+  "src/Resources/assets/images/stripe.png": {
+    "file": "assets/stripe-WsnmAxt1.png",
+    "src": "src/Resources/assets/images/stripe.png"
+  },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-mhMpuEVL.png",
     "src": "src/Resources/assets/images/thank-you.png"

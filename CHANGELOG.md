@@ -11,3 +11,5 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Added Razorpay payment gateway integration with drop-in UI checkout experience.
 
 * Added PayU Money payment gateway integration with redirect-based checkout flow.
+
+* Added Stripe payment gateway.

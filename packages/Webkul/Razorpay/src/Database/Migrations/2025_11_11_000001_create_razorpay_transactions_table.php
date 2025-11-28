@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('razorpay_events', function (Blueprint $table) {
+        Schema::create('razorpay_transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('cart_id');
             $table->unsignedInteger('order_id')->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('razorpay_events');
+        Schema::dropIfExists('razorpay_transactions');
     }
 };

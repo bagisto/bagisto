@@ -41,6 +41,10 @@ return Application::configure(basePath: dirname(__DIR__))
          */
         $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
 
+        $middleware->validateCsrfTokens(except: [
+            'stripe/*',
+        ]);
+
         $middleware->trustProxies(at: '*');
     })
     ->withSchedule(function (Schedule $schedule) {

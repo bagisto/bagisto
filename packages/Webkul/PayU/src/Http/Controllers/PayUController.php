@@ -22,11 +22,11 @@ class PayUController extends Controller
      */
     public function __construct(
         protected PayU $payU,
+        protected PayUTransactionRepository $payUTransactionRepository,
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
-        protected PayUTransactionRepository $payUTransactionRepository
+        protected InvoiceRepository $invoiceRepository,
     ) {}
 
     /**
@@ -55,7 +55,6 @@ class PayUController extends Controller
         $this->payUTransactionRepository->create([
             'transaction_id' => $paymentData['txnid'],
             'cart_id'        => $cart->id,
-            'customer_id'    => $cart->customer_id,
             'amount'         => $paymentData['amount'],
             'status'         => TransactionStatus::PENDING->value,
         ]);
@@ -141,6 +140,7 @@ class PayUController extends Controller
             Cart::deActivateCart();
 
             $this->payUTransactionRepository->update([
+                'order_id' => $order->id,
                 'status'   => TransactionStatus::SUCCESS->value,
                 'response' => $response,
             ], $transaction->id);
