@@ -1898,6 +1898,9 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
@@ -2010,6 +2013,9 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
@@ -2107,6 +2113,9 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
@@ -2183,6 +2192,9 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
@@ -2293,6 +2305,9 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
@@ -2300,7 +2315,7 @@ return [
     ], [
         'key'    => 'sales.payment_methods.payu',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.payu',
-        'info'   => 'admin::app.configuration.index.sales.payment-methods.payment-method-info',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.payu-info',
         'sort'   => 6,
         'fields' => [
             [
@@ -2376,15 +2391,18 @@ return [
                     ], [
                         'title' => '6',
                         'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
         ],
     ], [
         'key'    => 'sales.payment_methods.stripe',
-        'name'   => 'admin::app.configuration.index.sales.payment-methods.stripePayment',
-        'info'   => 'admin::app.configuration.index.sales.payment-methods.payment-method-info',
-        'sort'   => 6,
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.stripe',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.stripe-info',
+        'sort'   => 7,
         'fields' => [
             [
                 'name'          => 'active',
@@ -2451,6 +2469,7 @@ return [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
+                'default' => 7,
                 'options' => [
                     [
                         'title' => '1',
@@ -2467,6 +2486,12 @@ return [
                     ], [
                         'title' => '5',
                         'value' => 5,
+                    ], [
+                        'title' => '6',
+                        'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
                     ],
                 ],
             ],
