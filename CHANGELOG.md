@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Meta tag and header added for Bagisto.
+
 * #11011 [fixed] - Added missing translation for the Customer Group delete response message.
 
 * #10985 [fixed] - Fixed an issue in CustomerGroupPrice where deleting any group discount incorrectly removed the last discount entry instead of the selected one.
