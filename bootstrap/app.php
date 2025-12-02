@@ -40,6 +40,8 @@ return Application::configure(basePath: dirname(__DIR__))
          * Add the overridden middleware at the end of the list.
          */
         $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
+
+        $middleware->trustProxies('*');
     })
     ->withSchedule(function (Schedule $schedule) {
         //
