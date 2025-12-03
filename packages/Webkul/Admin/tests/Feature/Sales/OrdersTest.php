@@ -101,7 +101,7 @@ it('should return the view page of order', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -292,7 +292,7 @@ it('should cancel the order', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -490,7 +490,7 @@ it('should cancel the order and send the notification to the customer and admin'
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -683,7 +683,7 @@ it('should give validation error when store the comment to the order', function 
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -870,7 +870,7 @@ it('should comment to the order', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -1068,7 +1068,7 @@ it('should comment to the order and send mail to the customer', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -1270,7 +1270,7 @@ it('should search the order', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'method'       => $paymentMethod = 'stripe',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
