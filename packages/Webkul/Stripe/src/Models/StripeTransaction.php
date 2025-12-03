@@ -17,6 +17,7 @@ class StripeTransaction extends Model implements StripeTransactionContract
         'cart_id',
         'order_id',
         'session_id',
+        'payment_intent_id',
         'amount',
         'status',
     ];

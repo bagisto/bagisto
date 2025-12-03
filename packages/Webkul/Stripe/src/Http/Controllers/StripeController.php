@@ -155,8 +155,9 @@ class StripeController extends Controller
             Cart::deActivateCart();
 
             $this->stripeTransactionRepository->update([
-                'order_id' => $order->id,
-                'status'   => StripeTransactionStatus::COMPLETED->value,
+                'order_id'          => $order->id,
+                'payment_intent_id' => $session->payment_intent,
+                'status'            => StripeTransactionStatus::COMPLETED->value,
             ], $stripeTransaction->id);
 
             session()->flash('order_id', $order->id);
