@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('cart_id')->unsigned();
             $table->integer('order_id')->unsigned()->nullable();
             $table->string('session_id')->unique()->index();
+            $table->string('payment_intent_id')->nullable()->index();
             $table->decimal('amount', 12, 4)->nullable();
             $table->string('status', 20)->default('pending');
             $table->timestamps();

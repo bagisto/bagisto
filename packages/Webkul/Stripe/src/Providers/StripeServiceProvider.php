@@ -4,7 +4,7 @@ namespace Webkul\Stripe\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class StripeConnectServiceProvider extends ServiceProvider
+class StripeServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

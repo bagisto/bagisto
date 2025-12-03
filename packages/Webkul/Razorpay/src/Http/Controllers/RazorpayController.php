@@ -4,9 +4,9 @@ namespace Webkul\Razorpay\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Razorpay\Api\Api;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Razorpay\Enums\PaymentStatus;
+use Webkul\Razorpay\Payment\RazorpayPayment;
 use Webkul\Razorpay\Repositories\RazorpayTransactionRepository;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
@@ -18,19 +18,10 @@ use Webkul\Sales\Transformers\OrderResource;
 class RazorpayController extends Controller
 {
     /**
-     * Receipt prefix.
-     */
-    public const RECEIPT_PREFIX = 'receipt_';
-
-    /**
-     * Supported currencies.
-     */
-    protected $supportedCurrencies = ['INR'];
-
-    /**
      * Create a new controller instance.
      */
     public function __construct(
+        protected RazorpayPayment $razorpayPayment,
         protected RazorpayTransactionRepository $razorpayTransactionRepository,
         protected OrderRepository $orderRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
@@ -42,58 +33,34 @@ class RazorpayController extends Controller
      */
     public function redirect(): \Illuminate\Http\RedirectResponse|\Illuminate\View\View
     {
-        $credentials = $this->getRazorpayCredentials();
-
-        if (! $credentials['merchant_id'] || ! $credentials['private_key']) {
+        if (! $this->razorpayPayment->hasValidCredentials()) {
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
 
             return redirect()->back();
         }
 
         try {
-            $api = new Api($credentials['merchant_id'], $credentials['private_key']);
-
             $cart = Cart::getCart();
 
             $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 
-            if (! in_array($currency, $this->supportedCurrencies)) {
-                session()->flash('error', trans('razorpay::app.response.supported-currency-error', ['currency' => $currency, 'supportedCurrencies' => implode(', ', $this->supportedCurrencies)]));
+            if (! $this->razorpayPayment->isCurrencySupported($currency)) {
+                session()->flash('error', trans('razorpay::app.response.supported-currency-error', [
+                    'currency'            => $currency,
+                    'supportedCurrencies' => implode(', ', $this->razorpayPayment->getSupportedCurrencies()),
+                ]));
 
                 return redirect()->back();
             }
 
-            $orderAPI = $api->order->create([
-                'amount'          => (int) $cart->base_grand_total * 100,
-                'currency'        => $currency,
-                'receipt'         => self::RECEIPT_PREFIX.$cart->id,
-                'payment_capture' => 1,
-                'notes'           => [
-                    'cart_id' => $cart->id,
-                ],
-            ]);
+            $razorpayOrder = $this->razorpayPayment->createOrder($cart);
 
-            $payment = [
-                'key'         => $credentials['merchant_id'],
-                'amount'      => $cart->base_grand_total * 100,
-                'currency'    => $currency,
-                'name'        => core()->getConfigData('sales.payment_methods.razorpay.merchant_name'),
-                'description' => core()->getConfigData('sales.payment_methods.razorpay.merchant_desc'),
-                'image'       => bagisto_asset('images/logo.svg', 'admin'),
-                'order_id'    => $orderAPI['id'],
-                'theme_color' => '#0041FF',
-
-                'prefill' => [
-                    'name'    => $cart->billing_address->name,
-                    'email'   => $cart->billing_address->email,
-                    'contact' => $cart->billing_address->phone,
-                ],
-            ];
+            $payment = $this->razorpayPayment->preparePaymentData($cart, $razorpayOrder);
 
             $this->razorpayTransactionRepository->create([
                 'cart_id'                 => $cart->id,
-                'razorpay_receipt'        => self::RECEIPT_PREFIX.$cart->id,
-                'razorpay_order_id'       => $orderAPI['id'],
+                'razorpay_receipt'        => RazorpayPayment::RECEIPT_PREFIX.$cart->id,
+                'razorpay_order_id'       => $razorpayOrder['id'],
                 'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
             ]);
 
@@ -112,9 +79,7 @@ class RazorpayController extends Controller
      */
     public function paymentSuccess(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $credentials = $this->getRazorpayCredentials();
-
-        if (! $credentials['merchant_id'] || ! $credentials['private_key']) {
+        if (! $this->razorpayPayment->hasValidCredentials()) {
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
 
             return redirect()->route('shop.checkout.cart.index');
@@ -132,7 +97,13 @@ class RazorpayController extends Controller
             return $this->handlePaymentError($request);
         }
 
-        if (! $this->verifySignature($request, $credentials['private_key'])) {
+        $isValidSignature = $this->razorpayPayment->verifySignature(
+            $request->input('razorpay_order_id'),
+            $request->input('razorpay_payment_id'),
+            $request->input('razorpay_signature')
+        );
+
+        if (! $isValidSignature) {
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
 
             return redirect()->route('shop.checkout.cart.index');
@@ -222,42 +193,7 @@ class RazorpayController extends Controller
                 ]),
             ]);
 
-            try {
-                $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere(['razorpay_order_id' => $request->input('razorpay_order_id')]);
-
-                if ($razorpayTransaction) {
-                    $updateData = [
-                        'order_id'                => $order->id,
-                        'razorpay_payment_id'     => $request->input('razorpay_payment_id'),
-                        'razorpay_signature'      => $request->input('razorpay_signature'),
-                    ];
-
-                    try {
-                        $credentials = $this->getRazorpayCredentials();
-
-                        if (! $credentials['merchant_id'] || ! $credentials['private_key']) {
-                            throw new \Exception('Razorpay credentials are not set.');
-                        }
-
-                        $api = new Api($credentials['merchant_id'], $credentials['private_key']);
-
-                        $payment = $api->payment->fetch($request->input('razorpay_payment_id'));
-
-                        $updateData['razorpay_invoice_status'] = PaymentStatus::tryFrom($payment->status) ?? PaymentStatus::CAPTURED;
-                    } catch (\Throwable $e) {
-                        /**
-                         * If we can't fetch payment details, default to 'captured' since signature was verified.
-                         */
-                        $updateData['razorpay_invoice_status'] = PaymentStatus::CAPTURED;
-
-                        report($e);
-                    }
-
-                    $this->razorpayTransactionRepository->update($updateData, $razorpayTransaction->id);
-                }
-            } catch (\Throwable $e) {
-                report($e);
-            }
+            $this->updateRazorpayTransaction($request);
 
             Cart::deActivateCart();
 
@@ -274,25 +210,38 @@ class RazorpayController extends Controller
     }
 
     /**
-     * Verify Razorpay signature.
+     * Update Razorpay transaction after successful payment.
      */
-    protected function verifySignature(Request $request, string $privateKey): bool
+    protected function updateRazorpayTransaction(Request $request): void
     {
-        $razorpayOrderId = $request->input('razorpay_order_id');
+        try {
+            $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere([
+                'razorpay_order_id' => $request->input('razorpay_order_id'),
+            ]);
 
-        $razorpayPaymentId = $request->input('razorpay_payment_id');
+            if (! $razorpayTransaction) {
+                return;
+            }
 
-        $razorpaySignature = $request->input('razorpay_signature');
+            $updateData = [
+                'razorpay_payment_id' => $request->input('razorpay_payment_id'),
+                'razorpay_signature'  => $request->input('razorpay_signature'),
+            ];
 
-        if (! $razorpayOrderId || ! $razorpayPaymentId || ! $razorpaySignature) {
-            return false;
+            try {
+                $payment = $this->razorpayPayment->fetchPayment($request->input('razorpay_payment_id'));
+
+                $updateData['razorpay_invoice_status'] = PaymentStatus::tryFrom($payment->status) ?? PaymentStatus::CAPTURED;
+            } catch (\Throwable $e) {
+                $updateData['razorpay_invoice_status'] = PaymentStatus::CAPTURED;
+
+                report($e);
+            }
+
+            $this->razorpayTransactionRepository->update($updateData, $razorpayTransaction->id);
+        } catch (\Throwable $e) {
+            report($e);
         }
-
-        $expectedSignature = $razorpayOrderId.'|'.$razorpayPaymentId;
-
-        $generatedSignature = hash_hmac('sha256', $expectedSignature, $privateKey);
-
-        return hash_equals($generatedSignature, $razorpaySignature);
     }
 
     /**
@@ -332,30 +281,5 @@ class RazorpayController extends Controller
 
             return [];
         }
-    }
-
-    /**
-     * Get Razorpay credentials.
-     */
-    protected function getRazorpayCredentials(): array
-    {
-        $isSandbox = core()->getConfigData('sales.payment_methods.razorpay.sandbox');
-
-        $merchantId = core()->getConfigData(
-            $isSandbox
-                ? 'sales.payment_methods.razorpay.test_client_id'
-                : 'sales.payment_methods.razorpay.client_id'
-        );
-
-        $privateKey = core()->getConfigData(
-            $isSandbox
-                ? 'sales.payment_methods.razorpay.test_client_secret'
-                : 'sales.payment_methods.razorpay.client_secret'
-        );
-
-        return [
-            'merchant_id' => $merchantId,
-            'private_key' => $privateKey,
-        ];
     }
 }

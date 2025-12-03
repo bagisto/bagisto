@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Stripe\\Providers\\StripeConnectServiceProdiver"
+                "Webkul\\Stripe\\Providers\\StripeServiceProvider"
             ],
             "aliases": {}
         }
