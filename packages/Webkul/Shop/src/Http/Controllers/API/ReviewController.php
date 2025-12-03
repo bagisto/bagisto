@@ -144,7 +144,7 @@ class ReviewController extends APIController
     private function censorReviewerName(string $name): string
     {
         return collect(explode(' ', $name))
-            ->map(fn ($part) => substr($part, 0, 1).str_repeat('*', max(strlen($part) - 1, 0)))
+            ->map(fn ($part) => mb_substr($part, 0, 1).str_repeat('*', max(mb_strlen($part) - 1, 0)))
             ->join(' ');
     }
 }
