@@ -76,9 +76,9 @@ class Stripe extends Payment
      */
     public function getApiKey()
     {
-        $isTestMode = $this->getConfigData('debug');
+        $isSandbox = $this->getConfigData('sandbox');
 
-        return $isTestMode
+        return $isSandbox
             ? $this->getConfigData('api_test_key')
             : $this->getConfigData('api_key');
     }
@@ -90,9 +90,9 @@ class Stripe extends Payment
      */
     public function getPublishableKey()
     {
-        $isTestMode = $this->getConfigData('debug');
+        $isSandbox = $this->getConfigData('sandbox');
 
-        return $isTestMode
+        return $isSandbox
             ? $this->getConfigData('api_test_publishable_key')
             : $this->getConfigData('api_publishable_key');
     }
@@ -104,9 +104,9 @@ class Stripe extends Payment
      */
     public function hasValidCredentials()
     {
-        $isTestMode = $this->getConfigData('debug');
+        $isSandbox = $this->getConfigData('sandbox');
 
-        if ($isTestMode) {
+        if ($isSandbox) {
             return $this->getConfigData('api_test_key') && $this->getConfigData('api_test_publishable_key');
         }
 

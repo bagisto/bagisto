@@ -34,7 +34,7 @@ class RazorpayServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/paymentmethods.php',
+            dirname(__DIR__).'/Config/payment-methods.php',
             'payment_methods'
         );
     }
