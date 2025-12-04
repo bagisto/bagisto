@@ -1823,7 +1823,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -1832,7 +1832,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'api_publishable_key',
@@ -1840,7 +1840,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'sandbox',
@@ -1855,7 +1855,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'api_test_publishable_key',
@@ -1863,7 +1863,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
@@ -1894,6 +1894,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -1907,7 +1909,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'title',
@@ -1915,7 +1917,7 @@ return [
                 'type'          => 'text',
                 'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
@@ -1923,7 +1925,7 @@ return [
                 'type'          => 'textarea',
                 'depends'       => 'active:1',
                 'validation'    => 'max:200',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'image',
@@ -1931,7 +1933,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -1941,16 +1943,16 @@ return [
                 'depends'       => 'active:1',
                 'validation'    => 'required',
                 'validation'    => 'max:200',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'merchant_desc',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.merchant-description',
                 'type'          => 'textarea',
                 'depends'       => 'active:1',
                 'validation'    => 'max:200',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'client_id',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
@@ -1958,8 +1960,8 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.production-mode-info',
                 'depends'       => 'active:1',
                 'validation'    => 'max:200',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'client_secret',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
@@ -1967,15 +1969,15 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.production-mode-info',
                 'depends'       => 'active:1',
                 'validation'    => 'max:200',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'sandbox',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
                 'type'          => 'boolean',
                 'depends'       => 'active:1',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'test_client_id',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.test-client-id',
@@ -1983,8 +1985,8 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.test-mode-info',
                 'validation'    => 'max:200',
                 'depends'       => 'active:1',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'test_client_secret',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.test-client-secret',
@@ -1992,8 +1994,8 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.test-mode-info',
                 'depends'       => 'active:1',
                 'validation'    => 'max:200',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
@@ -2023,6 +2025,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -2058,7 +2062,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -2067,7 +2071,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.payu-merchant-key-info',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'merchant_salt',
@@ -2075,7 +2079,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.payu-merchant-salt-info',
                 'type'          => 'password',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'sandbox',
@@ -2113,6 +2117,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -2148,7 +2154,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -2211,6 +2217,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -2246,7 +2254,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -2293,6 +2301,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -2411,6 +2421,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
@@ -2446,7 +2458,7 @@ return [
                 'type'          => 'image',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
                 'depends'       => 'active:1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => false,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
@@ -2499,7 +2511,7 @@ return [
                 'type'          => 'textarea',
                 'depends'       => 'active:1',
                 'channel_based' => true,
-                'locale_based'  => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'sort',
                 'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
@@ -2529,6 +2541,8 @@ return [
                         'value' => 7,
                     ],
                 ],
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [

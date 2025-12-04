@@ -113,7 +113,11 @@
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\Customer\\Tests\\": "packages/Webkul/Customer/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
-            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests"
+            "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",
+            "Webkul\\PayU\\Tests\\": "packages/Webkul/PayU/tests",
+            "Webkul\\Razorpay\\Tests\\": "packages/Webkul/Razorpay/tests",
+            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
+            "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests"
         }
     },
     "scripts": {
