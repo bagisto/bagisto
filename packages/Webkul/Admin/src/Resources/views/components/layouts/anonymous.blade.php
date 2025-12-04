@@ -27,6 +27,10 @@
         name="base-url"
         content="{{ url()->to('/') }}"
     >
+    <meta 
+        name="generator" 
+        content="Bagisto"
+    >
 
     @stack('meta')
 
