@@ -52,11 +52,6 @@ test.describe("check the data transfer flow", () => {
 
     test("delete customers using data transfer", async ({ adminPage }) => {
 
-        // Load seller credentials
-        const sellerLoginCredentials = JSON.parse(
-            fs.readFileSync("seller-credentials.json", "utf-8")
-        );
-
         await adminPage.waitForTimeout(2000);
 
         const dataTransfer = new AdminDataTransfer(adminPage);
@@ -72,11 +67,6 @@ test.describe("check the data transfer flow", () => {
 
     test("create/update tax-rates using data transfer", async ({ adminPage }) => {
 
-        // Load seller credentials
-        const sellerLoginCredentials = JSON.parse(
-            fs.readFileSync("seller-credentials.json", "utf-8")
-        );
-
         await adminPage.waitForTimeout(2000);
 
         const dataTransfer = new AdminDataTransfer(adminPage);
@@ -91,11 +81,6 @@ test.describe("check the data transfer flow", () => {
     });
 
     test("create/update tax-rates using data transfer", async ({ adminPage }) => {
-
-        // Load seller credentials
-        const sellerLoginCredentials = JSON.parse(
-            fs.readFileSync("seller-credentials.json", "utf-8")
-        );
 
         await adminPage.waitForTimeout(2000);
 
