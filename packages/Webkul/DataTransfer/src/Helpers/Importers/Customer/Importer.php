@@ -5,6 +5,7 @@ namespace Webkul\DataTransfer\Helpers\Importers\Customer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
+use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
@@ -193,7 +194,7 @@ class Importer extends AbstractImporter
                 'before:today',
                 'regex:/^\d{4}-\d{2}-\d{2}$/',
             ],
-            'phone'               => 'nullable|regex:/^\+?[0-9]{7,15}$/',
+            'phone'               => ['nullable', new PhoneNumber],
         ]);
 
         if ($validator->fails()) {

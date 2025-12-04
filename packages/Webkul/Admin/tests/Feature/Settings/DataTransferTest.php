@@ -455,6 +455,6 @@ it('should sanitize filename when storing import', function () {
 
     // Verify the filename is sanitized (contains hash and unique ID)
     expect($import->file_path)->toContain('imports/');
-    
+
     expect($import->file_path)->not()->toContain('../');
 });
