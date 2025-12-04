@@ -15,7 +15,7 @@ class Visitor extends BaseVisitor
      */
     public function visit(?Model $model = null)
     {
-        if (! core()->getConfigData('general.general.visitor_options')) {
+        if (! core()->getConfigData('general.general.visitor_options.enabled')) {
             return;
         }
 

@@ -66,11 +66,11 @@ class ImportController extends Controller
 
         $this->validate(request(), [
             'type'                => 'required|in:'.$importers,
-            'action'              => 'required:in:append,delete',
-            'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
+            'action'              => 'required|in:append,delete',
+            'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|extensions:'.$supportedFormats.'|mimes:'.$supportedFormats,
+            'file'                => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
@@ -144,11 +144,11 @@ class ImportController extends Controller
 
         $this->validate(request(), [
             'type'                => 'required|in:'.$importers,
-            'action'              => 'required:in:append,delete',
-            'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
+            'action'              => 'required|in:append,delete',
+            'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'extensions:'.$supportedFormats.'|mimes:'.$supportedFormats,
+            'file'                => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');
