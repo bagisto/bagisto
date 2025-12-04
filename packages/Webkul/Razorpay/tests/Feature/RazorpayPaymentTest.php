@@ -57,6 +57,7 @@ it('redirects back when razorpay credentials are invalid', function () {
 
     // Assert
     $response->assertRedirect();
+
     $response->assertSessionHas('error');
 });
 
@@ -69,6 +70,7 @@ it('redirects back when cart is not found', function () {
 
     // Assert
     $response->assertRedirect();
+    
     $response->assertSessionHas('error');
 });
 

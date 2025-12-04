@@ -270,6 +270,7 @@ it('generates correct payment hash', function () {
 
     // Assert
     $expectedHashString = 'TEST_KEY|TXN123|100.5|Test Product|John|john@example.com|||||||||||TEST_SALT';
+
     $expectedHash = strtolower(hash('sha512', $expectedHashString));
 
     expect($hash)->toBe($expectedHash);
@@ -300,6 +301,7 @@ it('verifies hash from PayU response correctly', function () {
     ];
 
     $hashString = 'TEST_SALT|success|||||||||||john@example.com|John|Test Product|100.50|TXN123|TEST_KEY';
+    
     $response['hash'] = strtolower(hash('sha512', $hashString));
 
     // Act
