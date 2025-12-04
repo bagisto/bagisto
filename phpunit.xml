@@ -26,9 +26,27 @@
             <directory suffix="Test.php">packages/Webkul/DataGrid/tests/Unit</directory>
         </testsuite>
 
+        <!-- Razorpay package testsuites. -->
+        <testsuite name="Razorpay Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Razorpay Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Feature</directory>
+        </testsuite>
+
         <!-- Shop package testsuites. -->
         <testsuite name="Shop Feature Test">
             <directory suffix="Test.php">packages/Webkul/Shop/tests/Feature</directory>
+        </testsuite>
+
+        <!-- Stripe package testsuites. -->
+        <testsuite name="Stripe Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Stripe/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Stripe Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Stripe/tests/Feature</directory>
         </testsuite>
     </testsuites>
 
