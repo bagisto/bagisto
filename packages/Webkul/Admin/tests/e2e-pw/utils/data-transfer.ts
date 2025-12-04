@@ -29,14 +29,15 @@ export class AdminDataTransfer {
         await this.AdminDataTransferSectionGoto();
         await this.page.waitForTimeout(2000);
 
-        await this.page.click('button[data-testid="data-transfer-button"]');
-        await this.page.selectOption('select[name="type"]', type);
+        await this.page.click('a.primary-button');
         await this.page.waitForTimeout(2000);
 
+        await this.page.selectOption('select[name="type"]', type);
+        
         /*
         * Here you can change the Product file path as per your requirement
         */
-        const filePath = path.resolve(__dirname, `../../data/data-transfer/${file_name}`);
+        const filePath = path.resolve(__dirname, `../data/data-transfer/${file_name}`);
 
         const [fileChooser] = await Promise.all([
             this.page.waitForEvent("filechooser"),
