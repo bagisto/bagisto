@@ -1,14 +1,7 @@
 <?php
 
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
@@ -132,21 +125,10 @@ it('shows error message on payment cancellation', function () {
 
 it('redirects to cart when cart is already processed', function () {
     // Arrange
-    $product = (new ProductFaker)
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'is_active'           => 0,
-        'base_grand_total'    => 100.00,
-        'grand_total'         => 100.00,
+    $cart = $this->createCartWithItems('stripe', [
+        'is_active'        => 0,
+        'base_grand_total' => 100.00,
+        'grand_total'      => 100.00,
     ]);
 
     $transaction = StripeTransaction::create([
@@ -184,84 +166,7 @@ it('redirects to cart when cart is already processed', function () {
 
 it('successfully processes stripe payment and creates order with invoice', function () {
     // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'shipping_method'     => 'free_free',
-    ]);
-
-    $additional = [
-        'product_id' => $product->id,
-        'rating'     => '0',
-        'is_buy_now' => '0',
-        'quantity'   => '1',
-    ];
-
-    $cartItem = CartItem::factory()->create([
-        'cart_id'             => $cart->id,
-        'product_id'          => $product->id,
-        'sku'                 => $product->sku,
-        'quantity'            => $additional['quantity'],
-        'name'                => $product->name,
-        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
-        'price_incl_tax'      => $convertedPrice,
-        'base_price'          => $price,
-        'base_price_incl_tax' => $price,
-        'total'               => $total = $convertedPrice * $additional['quantity'],
-        'total_incl_tax'      => $total,
-        'base_total'          => $price * $additional['quantity'],
-        'weight'              => $product->weight ?? 0,
-        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
-        'type'                => $product->type,
-        'additional'          => $additional,
-    ]);
-
-    $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => 'stripe',
-        'method_title' => 'Stripe',
-    ]);
-
-    $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
-        'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
-        'cart_id'            => $cart->id,
-    ]);
+    $cart = $this->createCartWithItems('stripe');
 
     $transaction = StripeTransaction::create([
         'cart_id'    => $cart->id,
@@ -269,10 +174,6 @@ it('successfully processes stripe payment and creates order with invoice', funct
         'amount'     => $cart->base_grand_total,
         'status'     => StripeTransactionStatus::PENDING,
     ]);
-
-    Cart::setCart($cart);
-
-    Cart::collectTotals();
 
     $mockSession = (object) [
         'id'             => 'cs_test_success_123',
@@ -300,7 +201,7 @@ it('successfully processes stripe payment and creates order with invoice', funct
     $response->assertSessionHas('order_id');
 
     // Verify order was created
-    $order = Order::where('customer_id', $customer->id)->first();
+    $order = Order::where('customer_id', $cart->customer_id)->first();
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing');

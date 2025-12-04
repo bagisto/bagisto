@@ -16,21 +16,35 @@ it('returns the correct payment method code', function () {
 });
 
 it('returns the payment method title from configuration', function () {
+    // Arrange
+    CoreConfig::factory()->create([
+        'code'         => 'sales.payment_methods.payu.title',
+        'value'        => 'PayU Payment Gateway',
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ]);
+
     // Act
     $title = $this->payU->getTitle();
 
     // Assert
-    expect($title)->toBeString()
-        ->and($title)->not->toBeEmpty();
+    expect($title)->toBe('PayU Payment Gateway');
 });
 
 it('returns the payment method description from configuration', function () {
+    // Arrange
+    CoreConfig::factory()->create([
+        'code'         => 'sales.payment_methods.payu.description',
+        'value'        => 'Pay securely using PayU',
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ]);
+
     // Act
     $description = $this->payU->getDescription();
 
     // Assert
-    expect($description)->toBeString()
-        ->and($description)->not->toBeEmpty();
+    expect($description)->toBe('Pay securely using PayU');
 });
 
 it('returns the merchant key from configuration', function () {

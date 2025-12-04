@@ -7,14 +7,6 @@ beforeEach(function () {
     $this->stripe = app(Stripe::class);
 });
 
-it('returns the correct redirect URL', function () {
-    // Act
-    $url = $this->stripe->getRedirectUrl();
-
-    // Assert
-    expect($url)->toBe(route('stripe.standard.redirect'));
-});
-
 it('returns the correct payment method code', function () {
     // Act
     $code = $this->stripe->getCode();
@@ -24,21 +16,35 @@ it('returns the correct payment method code', function () {
 });
 
 it('returns the payment method title from configuration', function () {
+    // Arrange
+    CoreConfig::factory()->create([
+        'code'         => 'sales.payment_methods.stripe.title',
+        'value'        => 'Stripe Payment Gateway',
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ]);
+
     // Act
     $title = $this->stripe->getTitle();
 
     // Assert
-    expect($title)->toBeString()
-        ->and($title)->not->toBeEmpty();
+    expect($title)->toBe('Stripe Payment Gateway');
 });
 
 it('returns the payment method description from configuration', function () {
+    // Arrange
+    CoreConfig::factory()->create([
+        'code'         => 'sales.payment_methods.stripe.description',
+        'value'        => 'Pay securely using Stripe',
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ]);
+
     // Act
     $description = $this->stripe->getDescription();
 
     // Assert
-    expect($description)->toBeString()
-        ->and($description)->not->toBeEmpty();
+    expect($description)->toBe('Pay securely using Stripe');
 });
 
 it('returns the API key based on sandbox mode', function () {
@@ -313,4 +319,12 @@ it('returns default payment method image when not configured', function () {
     // The image path includes a Vite asset hash, so just check it contains the filename
     expect($image)->toContain('stripe')
         ->and($image)->toContain('.png');
+});
+
+it('returns the correct redirect URL', function () {
+    // Act
+    $url = $this->stripe->getRedirectUrl();
+
+    // Assert
+    expect($url)->toBe(route('stripe.standard.redirect'));
 });

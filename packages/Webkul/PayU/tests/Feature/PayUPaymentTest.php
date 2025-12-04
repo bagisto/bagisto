@@ -2,10 +2,6 @@
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -78,88 +74,7 @@ it('redirects back when cart is not found', function () {
 
 it('creates payu transaction and returns redirect view', function () {
     // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'shipping_method'     => 'free_free',
-    ]);
-
-    $additional = [
-        'product_id' => $product->id,
-        'rating'     => '0',
-        'is_buy_now' => '0',
-        'quantity'   => '1',
-    ];
-
-    $cartItem = CartItem::factory()->create([
-        'cart_id'             => $cart->id,
-        'product_id'          => $product->id,
-        'sku'                 => $product->sku,
-        'quantity'            => $additional['quantity'],
-        'name'                => $product->name,
-        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
-        'price_incl_tax'      => $convertedPrice,
-        'base_price'          => $price,
-        'base_price_incl_tax' => $price,
-        'total'               => $total = $convertedPrice * $additional['quantity'],
-        'total_incl_tax'      => $total,
-        'base_total'          => $price * $additional['quantity'],
-        'weight'              => $product->weight ?? 0,
-        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
-        'type'                => $product->type,
-        'additional'          => $additional,
-    ]);
-
-    $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => 'payu',
-        'method_title' => 'PayU',
-    ]);
-
-    $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
-        'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
-        'cart_id'            => $cart->id,
-    ]);
-
-    Cart::setCart($cart);
-
-    Cart::collectTotals();
+    $cart = $this->createCartWithItems('payu');
 
     // Act
     $response = $this->get(route('payu.redirect'));
@@ -182,88 +97,7 @@ it('creates payu transaction and returns redirect view', function () {
 
 it('successfully processes payu payment and creates order with invoice', function () {
     // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'shipping_method'     => 'free_free',
-    ]);
-
-    $additional = [
-        'product_id' => $product->id,
-        'rating'     => '0',
-        'is_buy_now' => '0',
-        'quantity'   => '1',
-    ];
-
-    $cartItem = CartItem::factory()->create([
-        'cart_id'             => $cart->id,
-        'product_id'          => $product->id,
-        'sku'                 => $product->sku,
-        'quantity'            => $additional['quantity'],
-        'name'                => $product->name,
-        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
-        'price_incl_tax'      => $convertedPrice,
-        'base_price'          => $price,
-        'base_price_incl_tax' => $price,
-        'total'               => $total = $convertedPrice * $additional['quantity'],
-        'total_incl_tax'      => $total,
-        'base_total'          => $price * $additional['quantity'],
-        'weight'              => $product->weight ?? 0,
-        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
-        'type'                => $product->type,
-        'additional'          => $additional,
-    ]);
-
-    $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => 'payu',
-        'method_title' => 'PayU',
-    ]);
-
-    $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
-        'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
-        'cart_id'            => $cart->id,
-    ]);
-
-    Cart::setCart($cart);
-
-    Cart::collectTotals();
+    $cart = $this->createCartWithItems('payu');
 
     // Create the initial transaction
     $txnid = 'PAYU_TEST123';
@@ -291,8 +125,8 @@ it('successfully processes payu payment and creates order with invoice', functio
         'key'         => 'test_merchant_key',
         'amount'      => $transaction->amount,
         'productinfo' => 'Order #'.$cart->id,
-        'firstname'   => $customer->first_name,
-        'email'       => $customer->email,
+        'firstname'   => $cart->customer_first_name,
+        'email'       => $cart->customer_email,
         'hash'        => 'valid_hash_value',
     ];
 
@@ -307,7 +141,7 @@ it('successfully processes payu payment and creates order with invoice', functio
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing')
-        ->and($order->customer_id)->toBe($customer->id);
+        ->and($order->customer_id)->toBe($cart->customer_id);
 
     // Verify invoice was created
     $invoice = Invoice::where('order_id', $order->id)->first();
