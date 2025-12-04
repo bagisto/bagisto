@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10985 [fixed] - Fixed an issue in CustomerGroupPrice where deleting any group discount incorrectly removed the last discount entry instead of the selected one.
 
+* #10899 [fixed] - Fixed a validation error that occurred while importing CSV files in Data Transfer.
+
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
 * Improved octane compatibility.
