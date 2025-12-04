@@ -52,7 +52,7 @@ export class AdminDataTransfer {
         /*
         // * Here you can change the Product image zip path as per your requirement
         // */
-        // const imageFilePath = path.resolve(__dirname, `../../data/${image_file_name}`);
+        // const imageFilePath = path.resolve(__dirname, `../data/data-transfer/${image_file_name}`);
 
         // const [imageFileChooser] = await Promise.all([
         //     this.page.waitForEvent("filechooser"),

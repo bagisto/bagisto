@@ -144,7 +144,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.csv',
-            // 'product_images.zip',
         );
     });
 
@@ -190,7 +189,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.xls',
-            // 'product_images.zip',
         );
     });
 
@@ -206,7 +204,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.xlsx',
-            // 'product_images.zip',
         );
     });
 
@@ -222,7 +219,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.xlsx',
-            // 'product_images.zip',
         );
     });
 
@@ -238,7 +234,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.xml',
-            // 'product_images.zip',
         );
     });
 
@@ -254,7 +249,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'customers.xml',
-            // 'product_images.zip',
         );
     });
 
@@ -264,13 +258,12 @@ test.describe("check the data transfer flow", () => {
 
         const dataTransfer = new AdminDataTransfer(adminPage);
         await dataTransfer.DataTransfer(
-            'tax-rates',
+            'tax_rates',
             'append',
             'skip-erros',
             '10',
             ',',
             'tax-rates.csv',
-            // 'product_images.zip',
         );
     });
 
@@ -316,7 +309,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'tax-rates.xls',
-            // 'product_images.zip',
         );
     });
 
@@ -332,7 +324,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'tax-rates.xlsx',
-            // 'product_images.zip',
         );
     });
 
@@ -348,7 +339,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'tax-rates.xlsx',
-            // 'product_images.zip',
         );
     });
 
@@ -364,7 +354,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'tax-rates.xml',
-            // 'product_images.zip',
         );
     });
 
@@ -380,7 +369,6 @@ test.describe("check the data transfer flow", () => {
             '10',
             ',',
             'tax-rates.xml',
-            // 'product_images.zip',
         );
     });
 });
