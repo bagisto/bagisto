@@ -18,36 +18,42 @@ use Webkul\Stripe\Payment\Stripe;
 
 beforeEach(function () {
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.active',
-        'value' => '1',
+        'code'         => 'sales.payment_methods.stripe.active',
+        'value'        => '1',
+        'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
+        'code'         => 'sales.payment_methods.stripe.sandbox',
+        'value'        => '1',
+        'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.api_test_key',
-        'value' => 'sk_test_fake_key',
+        'code'         => 'sales.payment_methods.stripe.api_test_key',
+        'value'        => 'sk_test_fake_key',
+        'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'pk_test_fake_key',
+        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value'        => 'pk_test_fake_key',
+        'channel_code' => 'default',
     ]);
 });
 
 it('redirects to cart when stripe credentials are invalid', function () {
     // Arrange - Override with empty credentials
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.api_test_key',
-        'value' => '',
+        'code'         => 'sales.payment_methods.stripe.api_test_key',
+        'value'        => '',
+        'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => '',
+        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value'        => '',
+        'channel_code' => 'default',
     ]);
 
     // Act

@@ -9,55 +9,55 @@ use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Razorpay\Enums\PaymentStatus;
-use Webkul\Razorpay\Models\RazorpayTransaction;
-use Webkul\Razorpay\Payment\RazorpayPayment;
+use Webkul\PayU\Enums\TransactionStatus;
+use Webkul\PayU\Models\PayUTransaction;
+use Webkul\PayU\Payment\PayU as PayUPayment;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
 beforeEach(function () {
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.active',
+        'code'         => 'sales.payment_methods.payu.active',
         'value'        => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
+        'code'         => 'sales.payment_methods.payu.sandbox',
         'value'        => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => 'rzp_test_fake_key',
+        'code'         => 'sales.payment_methods.payu.merchant_key',
+        'value'        => 'test_merchant_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'fake_test_secret',
+        'code'         => 'sales.payment_methods.payu.merchant_salt',
+        'value'        => 'test_merchant_salt',
         'channel_code' => 'default',
     ]);
 });
 
-it('redirects back when razorpay credentials are invalid', function () {
+it('redirects back when payu credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
+        'code'         => 'sales.payment_methods.payu.merchant_key',
         'value'        => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
+        'code'         => 'sales.payment_methods.payu.merchant_salt',
         'value'        => '',
         'channel_code' => 'default',
     ]);
 
     // Act
-    $response = $this->get(route('razorpay.payment.redirect'));
+    $response = $this->get(route('payu.redirect'));
 
     // Assert
     $response->assertRedirect();
@@ -69,14 +69,14 @@ it('redirects back when cart is not found', function () {
     Cart::shouldReceive('getCart')->andReturn(null);
 
     // Act
-    $response = $this->get(route('razorpay.payment.redirect'));
+    $response = $this->get(route('payu.redirect'));
 
     // Assert
     $response->assertRedirect();
     $response->assertSessionHas('error');
 });
 
-it('creates razorpay order and returns drop-in UI view', function () {
+it('creates payu transaction and returns redirect view', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -100,7 +100,6 @@ it('creates razorpay order and returns drop-in UI view', function () {
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
         'shipping_method'     => 'free_free',
-        'base_currency_code'  => 'INR',
     ]);
 
     $additional = [
@@ -144,8 +143,8 @@ it('creates razorpay order and returns drop-in UI view', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => 'razorpay',
-        'method_title' => 'Razorpay',
+        'method'       => 'payu',
+        'method_title' => 'PayU',
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
@@ -162,44 +161,26 @@ it('creates razorpay order and returns drop-in UI view', function () {
 
     Cart::collectTotals();
 
-    // Mock RazorpayPayment class to avoid actual API calls
-    $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
-
-    $mockRazorpay->shouldReceive('createOrder')->andReturn([
-        'id'       => 'order_test123',
-        'amount'   => 33415,
-        'currency' => 'INR',
-        'receipt'  => 'receipt_'.$cart->id,
-    ]);
-
-    $mockRazorpay->shouldReceive('preparePaymentData')->andReturn([
-        'key'      => 'test_key',
-        'amount'   => 33415,
-        'currency' => 'INR',
-        'order_id' => 'order_test123',
-    ]);
-
-    $this->app->instance(RazorpayPayment::class, $mockRazorpay);
-
     // Act
-    $response = $this->get(route('razorpay.payment.redirect'));
+    $response = $this->get(route('payu.redirect'));
 
     // Assert
     $response->assertOk();
 
-    $response->assertViewIs('razorpay::drop-in-ui');
+    $response->assertViewIs('payu::checkout.redirect');
 
-    $response->assertViewHas('payment');
+    $response->assertViewHas('paymentUrl');
+    $response->assertViewHas('paymentData');
 
     // Verify transaction was created
-    $transaction = RazorpayTransaction::where('cart_id', $cart->id)->first();
+    $transaction = PayUTransaction::where('cart_id', $cart->id)->first();
 
     expect($transaction)->not->toBeNull()
-        ->and($transaction->razorpay_invoice_status)->toBe(PaymentStatus::AWAITING_PAYMENT)
-        ->and($transaction->razorpay_order_id)->not->toBeEmpty();
+        ->and($transaction->status)->toBe(TransactionStatus::PENDING)
+        ->and($transaction->transaction_id)->not->toBeEmpty();
 });
 
-it('successfully processes razorpay payment and creates order with invoice', function () {
+it('successfully processes payu payment and creates order with invoice', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -223,7 +204,6 @@ it('successfully processes razorpay payment and creates order with invoice', fun
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
         'shipping_method'     => 'free_free',
-        'base_currency_code'  => 'INR',
     ]);
 
     $additional = [
@@ -267,8 +247,8 @@ it('successfully processes razorpay payment and creates order with invoice', fun
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
-        'method'       => 'razorpay',
-        'method_title' => 'Razorpay',
+        'method'       => 'payu',
+        'method_title' => 'PayU',
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
@@ -286,27 +266,38 @@ it('successfully processes razorpay payment and creates order with invoice', fun
     Cart::collectTotals();
 
     // Create the initial transaction
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_test123',
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
+    $txnid = 'PAYU_TEST123';
+
+    $transaction = PayUTransaction::create([
+        'transaction_id' => $txnid,
+        'cart_id'        => $cart->id,
+        'amount'         => round($cart->base_grand_total, 2),
+        'status'         => TransactionStatus::PENDING->value,
     ]);
 
-    // Mock the RazorpayPayment methods
-    $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
+    // Mock the PayU payment method
+    $mockPayU = $this->mock(PayUPayment::class)->makePartial();
 
-    $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
+    $mockPayU->shouldReceive('verifyHash')->andReturn(true);
 
-    $mockRazorpay->shouldReceive('fetchPayment')->andReturn((object) ['status' => 'captured']);
+    $this->app->instance(PayUPayment::class, $mockPayU);
 
-    $this->app->instance(RazorpayPayment::class, $mockRazorpay);
+    // Prepare success response data
+    $paymentData = [
+        'txnid'       => $txnid,
+        'mihpayid'    => 'MIHPAY_TEST_456',
+        'mode'        => 'CC',
+        'status'      => 'success',
+        'key'         => 'test_merchant_key',
+        'amount'      => $transaction->amount,
+        'productinfo' => 'Order #'.$cart->id,
+        'firstname'   => $customer->first_name,
+        'email'       => $customer->email,
+        'hash'        => 'valid_hash_value',
+    ];
 
     // Act
-    $response = $this->get(route('razorpay.payment.success', [
-        'razorpay_payment_id' => 'pay_test123',
-        'razorpay_order_id'   => 'order_test123',
-        'razorpay_signature'  => 'test_signature',
-    ]));
+    $response = $this->post(route('payu.success'), $paymentData);
 
     // Assert
     $response->assertRedirect(route('shop.checkout.onepage.success'));
@@ -327,16 +318,16 @@ it('successfully processes razorpay payment and creates order with invoice', fun
     // Verify transaction was updated
     $transaction->refresh();
 
-    expect($transaction->razorpay_payment_id)->toBe('pay_test123')
-        ->and($transaction->razorpay_invoice_status)->toBe(PaymentStatus::CAPTURED);
+    expect($transaction->order_id)->toBe($order->id)
+        ->and($transaction->status)->toBe(TransactionStatus::SUCCESS);
 
     // Verify order transaction was created
     $orderTransaction = OrderTransaction::where('order_id', $order->id)->first();
 
     expect($orderTransaction)->not->toBeNull()
-        ->and($orderTransaction->transaction_id)->toBe('pay_test123')
-        ->and($orderTransaction->status)->toBe('captured')
-        ->and($orderTransaction->type)->toBe('razorpay');
+        ->and($orderTransaction->transaction_id)->toBe($txnid)
+        ->and($orderTransaction->status)->toBe(TransactionStatus::SUCCESS->value)
+        ->and($orderTransaction->type)->toBe('payu');
 });
 
 it('handles payment failure gracefully', function () {
@@ -354,59 +345,96 @@ it('handles payment failure gracefully', function () {
         'base_grand_total'    => 100.00,
     ]);
 
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_fail_123',
-        'razorpay_receipt'        => 'receipt_'.$cart->id,
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
+    $txnid = 'PAYU_FAIL_789';
+
+    $transaction = PayUTransaction::create([
+        'transaction_id' => $txnid,
+        'cart_id'        => $cart->id,
+        'amount'         => 100.00,
+        'status'         => TransactionStatus::PENDING->value,
     ]);
 
     // Act
-    $response = $this->get(route('razorpay.payment.success', [
-        'razorpay_order_id' => 'order_fail_123',
-        'error'             => 'payment_failed',
-    ]));
+    $response = $this->post(route('payu.failure'), [
+        'txnid'  => $txnid,
+        'status' => 'failure',
+        'error'  => 'Payment declined',
+    ]);
 
     // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 
-    // Verify transaction status was updated to payment error
+    // Verify transaction status was updated to failed
     $transaction->refresh();
 
-    expect($transaction->razorpay_invoice_status)->toBe(PaymentStatus::PAYMENT_ERROR);
+    expect($transaction->status)->toBe(TransactionStatus::FAILED);
 });
 
-it('redirects to cart when signature verification fails', function () {
+it('redirects to cart when hash verification fails', function () {
     // Arrange
     $cart = CartModel::factory()->create([
         'base_grand_total' => 100.00,
     ]);
 
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_test_456',
-        'razorpay_receipt'        => 'receipt_'.$cart->id,
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
+    $txnid = 'PAYU_INVALID_HASH';
+
+    $transaction = PayUTransaction::create([
+        'transaction_id' => $txnid,
+        'cart_id'        => $cart->id,
+        'amount'         => 100.00,
+        'status'         => TransactionStatus::PENDING->value,
     ]);
 
-    // Mock invalid signature
-    $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
+    // Mock invalid hash verification
+    $mockPayU = $this->mock(PayUPayment::class)->makePartial();
 
-    $mockRazorpay->shouldReceive('verifySignature')->andReturn(false);
+    $mockPayU->shouldReceive('verifyHash')->andReturn(false);
 
-    $this->app->instance(RazorpayPayment::class, $mockRazorpay);
+    $this->app->instance(PayUPayment::class, $mockPayU);
 
     // Act
-    $response = $this->get(route('razorpay.payment.success', [
-        'razorpay_payment_id' => 'pay_test_456',
-        'razorpay_order_id'   => 'order_test_456',
-        'razorpay_signature'  => 'invalid_signature',
-    ]));
+    $response = $this->post(route('payu.success'), [
+        'txnid'  => $txnid,
+        'status' => 'success',
+        'hash'   => 'invalid_hash',
+    ]);
 
     // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
+});
+
+it('handles payment cancellation', function () {
+    // Arrange
+    $cart = CartModel::factory()->create([
+        'base_grand_total' => 100.00,
+    ]);
+
+    $txnid = 'PAYU_CANCEL_101';
+
+    $transaction = PayUTransaction::create([
+        'transaction_id' => $txnid,
+        'cart_id'        => $cart->id,
+        'amount'         => 100.00,
+        'status'         => TransactionStatus::PENDING->value,
+    ]);
+
+    // Act
+    $response = $this->post(route('payu.cancel'), [
+        'txnid'  => $txnid,
+        'status' => 'userCancelled',
+    ]);
+
+    // Assert
+    $response->assertRedirect(route('shop.checkout.cart.index'));
+
+    $response->assertSessionHas('warning');
+
+    // Verify transaction status was updated to cancelled
+    $transaction->refresh();
+
+    expect($transaction->status)->toBe(TransactionStatus::CANCELLED);
 });
