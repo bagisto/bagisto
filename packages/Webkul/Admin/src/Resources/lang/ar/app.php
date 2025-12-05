@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'إعادة كتابة عناوين URL',
         'users'                    => 'المستخدمين',
         'view'                     => 'عرض',
+
+        'rma' => [
+            'create' => 'إنشاء',
+            'delete' => 'حذف',
+            'edit'   => 'تعديل',
+            'view'   => 'عرض',
+            'title'  => 'إرجاع المنتجات (RMA)',
+        ],
+
+        'rma-reason' => [
+            'create' => 'إنشاء',
+            'delete' => 'حذف',
+            'edit'   => 'تعديل',
+            'title'  => 'أسباب الإرجاع',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'حذف',
+            'edit'   => 'تعديل',
+            'title'  => 'قواعد الإرجاع',
+        ],
+
+        'rma-status' => [
+            'delete' => 'حذف',
+            'edit'   => 'تعديل',
+            'title'  => 'حالة الإرجاع',
+        ],
+
+        'custom-field' => [
+            'create' => 'إنشاء',
+            'delete' => 'حذف',
+            'edit'   => 'تعديل',
+            'title'  => 'حقول مخصصة',
+        ],
     ],
 
     'errors' => [

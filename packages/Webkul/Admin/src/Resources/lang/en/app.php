@@ -3490,7 +3490,7 @@ return [
                 'datagrid' => [
                     'active'        => 'Active',
                     'channel_name'  => 'Channel Name',
-                    'change-status' => 'Change status',
+                    'change-status' => 'Change Request Status',
                     'delete'        => 'Delete',
                     'id'            => 'Id',
                     'inactive'      => 'Inactive',
@@ -5082,12 +5082,38 @@ return [
         'users'                    => 'Users',
         'view'                     => 'View',
 
-        'rma-reason'               => [
-            'delete'      => 'Delete',
-            'edit'        => 'Edit',
-            'mass-delete' => 'Mass Delete',
-            'mass-update' => 'Mass Update',
-            'title'       => 'RMA Reasons',
+        'rma' => [
+            'create' => 'Create',
+            'delete' => 'Delete',
+            'edit'   => 'Edit',
+            'view'   => 'View',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Create',
+            'delete' => 'Delete',
+            'edit'   => 'Edit',
+            'title'  => 'RMA Reasons',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Delete',
+            'edit'   => 'Edit',
+            'title'  => 'RMA Rules',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Delete',
+            'edit'   => 'Edit',
+            'title'  => 'RMA Status',
+        ],
+
+        'custom-field' => [
+            'create' => 'Create',
+            'delete' => 'Delete',
+            'edit'   => 'Edit',
+            'title'  => 'Custom Fields',
         ],
     ],
 
@@ -5271,7 +5297,7 @@ return [
                             'id'            => 'RMA ID',
                             'order-ref'     => 'Order Ref',
                             'order-status'  => 'Delivery Status',
-                            'rma-status'    => 'RMA Status',
+                            'rma-status'    => 'Request Status',
                         ],
                     ],
 
@@ -5279,7 +5305,7 @@ return [
                         'add-attachments'        => 'Add Attachments',
                         'additional-information' => 'Additional Information :',
                         'attachment'             => 'Attachment',
-                        'change-status'          => 'Change Status',
+                        'change-status'          => 'Change Request Status',
                         'confirm-print'          => 'Click OK to print RMA',
                         'conversations'          => 'Conversations',
                         'customer-details'       => 'Customer Details',
@@ -5295,7 +5321,7 @@ return [
                         'order-total'            => 'Order Total :',
                         'request-on'             => 'Request On :',
                         'resolution-type'        => 'Resolution Type :',
-                        'rma-status'             => 'RMA Status :',
+                        'rma-status'             => 'Request Status :',
                         'save-btn'               => 'Save',
                         'send-message-btn'       => 'Send Message',
                         'send-message-success'   => 'Message sent successfully.',

@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'URL Yeniden Yazma',
         'users'                    => 'Kullanıcılar',
         'view'                     => 'Görüntüle',
+
+        'rma' => [
+            'create' => 'Oluştur',
+            'delete' => 'Sil',
+            'edit'   => 'Düzenle',
+            'view'   => 'Görüntüle',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Oluştur',
+            'delete' => 'Sil',
+            'edit'   => 'Düzenle',
+            'title'  => 'RMA Nedenleri',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Sil',
+            'edit'   => 'Düzenle',
+            'title'  => 'RMA Kuralları',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Sil',
+            'edit'   => 'Düzenle',
+            'title'  => 'RMA Durumu',
+        ],
+
+        'custom-field' => [
+            'create' => 'Oluştur',
+            'delete' => 'Sil',
+            'edit'   => 'Düzenle',
+            'title'  => 'Özel Alanlar',
+        ],
     ],
 
     'errors' => [

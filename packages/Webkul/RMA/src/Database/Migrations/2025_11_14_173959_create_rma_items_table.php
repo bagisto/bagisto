@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('rma_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_item_id')->unsigned();
-            $table->integer('variant_id')->unsigned()->nullable()->comment('product variant id, if any');
             $table->integer('rma_id')->unsigned();
             $table->integer('rma_reason_id')->unsigned();
+            $table->integer('order_item_id')->unsigned();
+            $table->integer('variant_id')->unsigned()->nullable()->comment('product variant id, if any');
             $table->integer('quantity')->unsigned();
             $table->string('resolution')->nullable();
             $table->timestamps();
 
             $table->foreign('rma_id')->references('id')->on('rma')->onDelete('cascade');
             $table->foreign('rma_reason_id')->references('id')->on('rma_reasons')->onDelete('cascade');
+            $table->foreign('order_item_id')->references('id')->on('order_items')->onDelete('cascade');
             $table->foreign('variant_id')->references('id')->on('products')->onDelete('restrict');
         });
     }

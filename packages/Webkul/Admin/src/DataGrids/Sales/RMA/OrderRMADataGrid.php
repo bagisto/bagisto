@@ -22,6 +22,8 @@ class OrderRMADataGrid extends DataGrid
     {
         $globalReturnDays = core()->getConfigData('sales.rma.setting.default_allow_days');
 
+        $allowedProductTypes = core()->getConfigData('sales.rma.setting.select_allowed_product_type');
+        
         $table_prefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('orders')
@@ -41,12 +43,11 @@ class OrderRMADataGrid extends DataGrid
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
-            ->leftJoin('rma_rules', 'products.rma_rules', '=', 'rma_rules.id')
             ->leftJoin('rma', 'orders.id', '=', 'rma.order_id')
             ->leftJoin(
                 DB::raw('(SELECT order_item_id, SUM(quantity) as total_rma_qty
-                         FROM rma_items
-                         GROUP BY order_item_id) as rma_items_aggregated'),
+                        FROM rma_items
+                        GROUP BY order_item_id) as rma_items_aggregated'),
                 'order_items.id',
                 '=',
                 'rma_items_aggregated.order_item_id'
@@ -56,26 +57,64 @@ class OrderRMADataGrid extends DataGrid
                 Order::STATUS_CLOSED,
                 Order::STATUS_FRAUD,
                 Order::STATUS_PENDING_PAYMENT
-            ])
-            ->whereIn('products.type', explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type')))
-            ->where(function ($query) use ($globalReturnDays) {
-                $query->where(function ($q) {
-                    $q->where('products.allow_rma', 1)
+            ]);
+
+        if (! empty($allowedProductTypes)) {
+            $productTypesArray = is_array($allowedProductTypes) 
+                ? $allowedProductTypes 
+                : explode(',', $allowedProductTypes);
+            
+            if (!empty($productTypesArray)) {
+                $queryBuilder->whereIn('products.type', $productTypesArray);
+            }
+        }
+
+        $queryBuilder->leftJoin('attributes as attr_allow_rma', function($join) {
+            $join->on(DB::raw('1'), '=', DB::raw('1'))
+                ->where('attr_allow_rma.code', '=', 'allow_rma');
+        });
+        
+        $queryBuilder->leftJoin('product_attribute_values as pav_allow_rma', function($join) {
+            $join->on('products.id', '=', 'pav_allow_rma.product_id')
+                ->on('pav_allow_rma.attribute_id', '=', 'attr_allow_rma.id');
+        })
+        ->addSelect('pav_allow_rma.boolean_value as allow_rma_value');
+
+        $queryBuilder->leftJoin('attributes as attr_rma_rules', function($join) {
+            $join->on(DB::raw('1'), '=', DB::raw('1'))
+                ->where('attr_rma_rules.code', '=', 'rma_rule_id');
+        });
+        
+        $queryBuilder->leftJoin('product_attribute_values as pav_rma_rules', function($join) {
+            $join->on('products.id', '=', 'pav_rma_rules.product_id')
+                ->on('pav_rma_rules.attribute_id', '=', 'attr_rma_rules.id');
+        })
+        ->addSelect('pav_rma_rules.integer_value as rma_rule_id_value')
+        ->leftJoin('rma_rules', 'rma_rules.id', '=', 'pav_rma_rules.integer_value');
+
+        $queryBuilder->where(function ($query) use ($globalReturnDays) {
+            $query->where(function ($q) {
+                $q->where('pav_allow_rma.boolean_value', 1)
                     ->where('rma_rules.status', 1)
                     ->whereRaw('DATEDIFF(NOW(), orders.created_at) <= rma_rules.return_period');
-                })->orWhere(function ($q) use ($globalReturnDays) {
+            });
+            
+            if (!empty($globalReturnDays) && is_numeric($globalReturnDays)) {
+                $query->orWhere(function ($q) use ($globalReturnDays) {
                     $q->where(function ($sub) {
-                        $sub->whereNull('products.allow_rma')
-                            ->orWhere('products.allow_rma', 0)
+                        $sub->whereNull('pav_allow_rma.boolean_value')
+                            ->orWhere('pav_allow_rma.boolean_value', 0)
                             ->orWhere('rma_rules.status', 0);
-                    })->whereRaw("DATEDIFF(NOW(), orders.created_at) <= {$globalReturnDays}");
+                    })->whereRaw("DATEDIFF(NOW(), orders.created_at) <= ?", [$globalReturnDays]);
                 });
-            })
-            ->groupBy('orders.id')
+            }
+        });
+
+        $queryBuilder->groupBy('orders.id')
             ->havingRaw('SUM(order_items.qty_ordered) > IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0)');
 
         if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == self::COMPLETE) {
-            $queryBuilder->where('orders.status', [
+            $queryBuilder->whereIn('orders.status', [
                 Order::STATUS_COMPLETED,
             ]);
         }
@@ -182,28 +221,22 @@ class OrderRMADataGrid extends DataGrid
                 [
                     'label' => trans('admin::app.sales.orders.index.datagrid.processing'),
                     'value' => Order::STATUS_PROCESSING,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.completed'),
                     'value' => Order::STATUS_COMPLETED,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.canceled'),
                     'value' => Order::STATUS_CANCELED,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.closed'),
                     'value' => Order::STATUS_CLOSED,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.pending'),
                     'value' => Order::STATUS_PENDING,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
                     'value' => Order::STATUS_PENDING_PAYMENT,
-                ],
-                [
+                ], [
                     'label' => trans('admin::app.sales.orders.index.datagrid.fraud'),
                     'value' => Order::STATUS_FRAUD,
                 ],

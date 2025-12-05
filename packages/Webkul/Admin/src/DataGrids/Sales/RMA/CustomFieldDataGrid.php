@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Webkul\DataGrid\DataGrid;
 
-class CustomFieldRMADataGrid extends DataGrid
+class CustomFieldDataGrid extends DataGrid
 {
     /**
      * @var int
@@ -138,23 +138,27 @@ class CustomFieldRMADataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.catalog.categories.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.rma.custom-field.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.custom-field.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.catalog.categories.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.rma.custom-field.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.sales.rma.custom-field.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.custom-field.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.sales.rma.custom-field.delete', $row->id);
+                },
+            ]);
+        }
     }
 
     /**
@@ -162,25 +166,29 @@ class CustomFieldRMADataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        $this->addMassAction([
-            'title'   => trans('shop::app.rma.customer-rma-index.update'),
-            'method'  => 'POST',
-            'url'     => route('admin.sales.rma.custom-field.mass-update'),
-            'options' => [
-                [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
-                ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+        if (bouncer()->hasPermission('sales.custom-field.edit')) {
+            $this->addMassAction([
+                'title'   => trans('shop::app.rma.customer-rma-index.update'),
+                'method'  => 'POST',
+                'url'     => route('admin.sales.rma.custom-field.mass-update'),
+                'options' => [
+                    [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'value' => self::ONE,
+                    ], [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'value' => self::ZERO,
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'  => trans('shop::app.rma.customer-rma-index.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.sales.rma.custom-field.mass-delete'),
-        ]);
+        if (bouncer()->hasPermission('sales.custom-field.delete')) {
+            $this->addMassAction([
+                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.sales.rma.custom-field.mass-delete'),
+            ]);
+        }
     }
 }

@@ -1351,6 +1351,7 @@ return [
                 'save'                     => 'Opslaan',
                 'search-order'             => 'Zoek Bestelling',
                 'sku'                      => 'SKU',
+                'view'                     => 'Bekijk RMA',
             ],
         ],
 

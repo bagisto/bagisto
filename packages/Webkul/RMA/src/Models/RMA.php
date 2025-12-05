@@ -60,7 +60,7 @@ class RMA extends Model implements RMAContract
     protected $fillable = [
         'information',
         'order_status',
-        'rma_status',
+        'request_status',
         'order_id',
         'status',
         'package_condition',
@@ -86,7 +86,7 @@ class RMA extends Model implements RMAContract
      */
     public function getStatusLabelRMA(): string
     {
-        return $this->statusLabel[$this->rma_status];
+        return $this->statusLabel[$this->request_status];
     }
 
     /**
@@ -126,7 +126,7 @@ class RMA extends Model implements RMAContract
      */
     public function messages(): HasMany
     {
-        return $this->hasMany(RMAMessagesProxy::modelClass(), 'rma_id');
+        return $this->hasMany(RMAMessageProxy::modelClass(), 'rma_id');
     }
 
     /**

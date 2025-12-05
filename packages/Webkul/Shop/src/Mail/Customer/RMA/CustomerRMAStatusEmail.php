@@ -4,6 +4,9 @@ namespace Webkul\Shop\Mail\Customer\RMA;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
 class CustomerRMAStatusEmail extends Mailable
@@ -11,34 +14,32 @@ class CustomerRMAStatusEmail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The RMA status data.
-     *
-     * @var array
+     * Create a new message instance.
      */
-    public $rmaStatus;
+    public function __construct(public array $rmaStatus) {}
 
     /**
-     * Create a new message instance.
-     *
-     * @param  array  $rmaStatus
-     * @return void
+     * Get the message envelope.
      */
-    public function __construct($rmaStatus)
+    public function envelope(): Envelope
     {
-        $this->rmaStatus = $rmaStatus;
+        $senderDetails = core()->getSenderEmailDetails();
+
+        return new Envelope(
+            from: new Address($senderDetails['email'], $senderDetails['name']),
+            to: [new Address($this->rmaStatus['email'])],
+            subject: trans('shop::app.rma.mail.status.title'),
+        );
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message content definition.
      */
-    public function build()
+    public function content(): Content
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->rmaStatus['email'])
-            ->subject('Status Updated')
-            ->view('shop::emails.customers.rma.status')
-            ->with($this->rmaStatus);
+        return new Content(
+            view: 'shop::emails.customers.rma.status',
+            with: $this->rmaStatus,
+        );
     }
 }

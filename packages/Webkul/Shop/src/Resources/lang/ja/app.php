@@ -1351,6 +1351,7 @@ return [
                 'save'                     => '保存',
                 'search-order'             => '注文を検索',
                 'sku'                      => 'SKU',
+                'view'                     => 'RMAを表示',
             ],
         ],
 

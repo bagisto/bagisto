@@ -1351,6 +1351,7 @@ return [
                 'save'                     => 'Kaydet',
                 'search-order'             => 'Sipariş Ara',
                 'sku'                      => 'Stok Kodu (SKU)',
+                'view'                     => 'RMA Görüntüle',
             ],
         ],
 

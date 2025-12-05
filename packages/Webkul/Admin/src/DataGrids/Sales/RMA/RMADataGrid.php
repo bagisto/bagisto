@@ -7,7 +7,7 @@ use Illuminate\Database\Query\Builder;
 use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
-class RmaDataGrid extends DataGrid
+class RMADataGrid extends DataGrid
 {
     /**
      * @var string
@@ -64,7 +64,7 @@ class RmaDataGrid extends DataGrid
                 'orders.is_guest as is_guest',
                 DB::raw('CONCAT(' . $table_prefix . 'orders.customer_first_name, " ", ' . $table_prefix . 'orders.customer_last_name) as customer_name'),
                 'rma.status',
-                'rma.rma_status',
+                'rma.request_status',
                 'rma.order_status as rma_order_status',
                 'rma.created_at',
                 'orders.status as order_status'
@@ -73,7 +73,7 @@ class RmaDataGrid extends DataGrid
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
-        $this->addFilter('rma_status', 'rma.rma_status');
+        $this->addFilter('request_status', 'rma.request_status');
         $this->addFilter('rma_order_status', 'rma.order_status');
         $this->addFilter('created_at', 'rma.created_at');
         $this->addFilter('customer_name', DB::raw('CONCAT(' . $table_prefix . 'orders.customer_first_name, " ", ' . $table_prefix . 'orders.customer_last_name)'));
@@ -140,7 +140,7 @@ class RmaDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'rma_status',
+            'index'              => 'request_status',
             'label'              => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.rma-status'),
             'type'               => 'string',
             'searchable'         => true,
@@ -150,7 +150,7 @@ class RmaDataGrid extends DataGrid
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
             'closure'            => function ($row) {
                 $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
-                    ->where('title', $row->rma_status)
+                    ->where('title', $row->request_status)
                     ->first();
 
                 if (
@@ -160,7 +160,7 @@ class RmaDataGrid extends DataGrid
                     return '<p class="label-canceled">' . trans('shop::app.rma.status.status-name.item-canceled') . '</p>';
                 }
 
-                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->rma_status . '</p>';
+                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->request_status . '</p>';
             },
         ]);
 
@@ -211,13 +211,15 @@ class RmaDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        $this->addAction([
-            'title'  => trans('shop::app.rma.customer-rma-index.view'),
-            'icon'   => 'icon-view',
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.rma.view', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.rma.create')) {
+            $this->addAction([
+                'title'  => trans('shop::app.rma.customer-rma-index.view'),
+                'icon'   => 'icon-view',
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.rma.view', $row->id);
+                },
+            ]);
+        }
     }
 }

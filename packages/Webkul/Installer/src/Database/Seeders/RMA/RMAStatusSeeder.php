@@ -5,12 +5,12 @@ namespace Webkul\Installer\Database\Seeders\RMA;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RMAStatusDataSeed extends Seeder
+class RMAStatusSeeder extends Seeder
 {
     /**
      * Create a new rma configuration
      */
-    public function run(): void
+    public function run($parameters = [])
     {
         /**
          * Default statuses to be inserted

@@ -20,8 +20,8 @@ class RMARule extends Model implements RMARuleContract
      * @var array
      */
     protected $fillable = [
-        'title',
-        'rule_description',
+        'name',
+        'description',
         'status',
         'exchange_period',
         'return_period',

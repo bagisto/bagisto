@@ -62,7 +62,7 @@
                             >
                                 <div
                                     class="flex gap-2.5 items-center select-none"
-                                    v-for="(columnGroup, index) in [['id'], ['order_id'], ['rma_status'], ['total_quantity'], ['created_at']]"
+                                    v-for="(columnGroup, index) in [['id'], ['order_id'], ['request_status'], ['total_quantity'], ['created_at']]"
                                 >
                                     <p class="text-gray-600 text-base">
                                         <span class="[&>*]:after:content-['_/_']">
@@ -139,7 +139,7 @@
                                     <div class="flex flex-col gap-1.5">
                                         <p
                                             class="text-gray-600"
-                                            v-html="record.rma_status"
+                                            v-html="record.request_status"
                                         >
                                         </p>
                                     </div>
@@ -214,7 +214,7 @@
                             >
                                 <div
                                     class="flex gap-2.5 items-center select-none"
-                                    v-for="(columnGroup, index) in [['id', 'order_id', 'rma_status'], ['total_quantity', 'created_at']]"
+                                    v-for="(columnGroup, index) in [['id', 'order_id', 'request_status'], ['total_quantity', 'created_at']]"
                                 >
                                     <p class="text-gray-600 text-base">
                                         <span class="[&>*]:after:content-['_/_']">
@@ -279,7 +279,7 @@
 
                                         <p
                                             class="text-gray-600"
-                                            v-html="record.rma_status"
+                                            v-html="record.request_status"
                                         >
                                         </p>
                                     </div>

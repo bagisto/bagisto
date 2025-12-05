@@ -9,9 +9,9 @@ use Illuminate\View\View;
 use Webkul\Shop\DataGrids\RMA\Guest\OrderRMADataGrid as GuestOrderRMADataGrid;
 use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAImageRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
 use Webkul\Sales\Repositories\{OrderRepository, OrderItemRepository};
-use Webkul\Shop\DataGrids\RMA\CustomerRmaDataGrid;
+use Webkul\Shop\DataGrids\RMA\CustomerRMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\RMA\CustomerRmaRequestNotification;
+use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class GuestController extends Controller
 {
@@ -50,7 +50,7 @@ class GuestController extends Controller
     public function index(): View|JsonResponse|RedirectResponse
     {
         if (request()->ajax()) {
-            return datagrid(CustomerRmaDataGrid::class)->process();
+            return datagrid(CustomerRMADataGrid::class)->process();
         }
 
         if (empty(session()->get('guestOrderId'))) {
@@ -132,7 +132,7 @@ class GuestController extends Controller
             'order_id'          => $data['order_id'],
             'information'       => $data['information'] ?? null,
             'order_status'      => $data['order_status'],
-            'rma_status'        => self::PENDING,
+            'request_status'        => self::PENDING,
             'package_condition' => $data['package_condition'] ?? '',
         ]);
 
@@ -214,7 +214,7 @@ class GuestController extends Controller
 
         if ($rma->items) {
             try {
-                Mail::queue(new CustomerRmaRequestNotification($data));
+                Mail::queue(new CustomerRMARequestNotification($data));
 
             } catch (\Exception $e) {
                 \Log::error('Error in Sending Email'.$e->getMessage());

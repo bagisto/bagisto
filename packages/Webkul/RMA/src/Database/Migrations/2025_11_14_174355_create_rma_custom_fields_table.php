@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rma_custom_fields', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->boolean('status')->nullable()->default('0');
             $table->string('code')->unique();
             $table->string('label')->nullable();

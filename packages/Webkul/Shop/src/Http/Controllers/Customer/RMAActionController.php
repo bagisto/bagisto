@@ -14,7 +14,7 @@ use Webkul\RMA\Repositories\{ReasonResolutionRepository, RMAItemRepository, RMAM
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 
-class RmaActionController extends Controller
+class RMAActionController extends Controller
 {
     /**
      * Product Type
@@ -97,7 +97,7 @@ class RmaActionController extends Controller
     {
         $rma = $this->rmaRepository->find($id);
 
-        if ($rma->rma_status == self::CANCELED) {
+        if ($rma->request_status == self::CANCELED) {
 
             return new JsonResponse([
                 'message' => trans('shop::app.rma.response.already-cancel'),
@@ -105,7 +105,7 @@ class RmaActionController extends Controller
         }
 
         $rma->update([
-            'rma_status' => self::CANCELED,
+            'request_status' => self::CANCELED,
         ]);
 
         return new JsonResponse([
@@ -125,7 +125,7 @@ class RmaActionController extends Controller
         if (! empty($data['close_rma'])) {
             $rma->update([
                 'status'       => 1,
-                'rma_status'   => self::SOLVED,
+                'request_status'   => self::SOLVED,
                 'order_status' => 'closed',
             ]);
 
@@ -164,7 +164,7 @@ class RmaActionController extends Controller
 
             $rma->update([
                 'status'       => self::ACTIVE,
-                'rma_status'   => self::PENDING,
+                'request_status'   => self::PENDING,
                 'status'       => self::INACTIVE,
                 'order_status' => self::INACTIVE,
             ]);

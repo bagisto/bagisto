@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'כתיבת URL מחדש',
         'users'                    => 'משתמשים',
         'view'                     => 'הצג',
+
+        'rma' => [
+            'create' => 'צור',
+            'delete' => 'מחק',
+            'edit'   => 'ערוך',
+            'view'   => 'צפה',
+            'title'  => 'החזרת מוצרים (RMA)',
+        ],
+
+        'rma-reason' => [
+            'create' => 'צור',
+            'delete' => 'מחק',
+            'edit'   => 'ערוך',
+            'title'  => 'סיבות להחזרה',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'מחק',
+            'edit'   => 'ערוך',
+            'title'  => 'כללי החזרה',
+        ],
+
+        'rma-status' => [
+            'delete' => 'מחק',
+            'edit'   => 'ערוך',
+            'title'  => 'מצב החזרה',
+        ],
+
+        'custom-field' => [
+            'create' => 'צור',
+            'delete' => 'מחק',
+            'edit'   => 'ערוך',
+            'title'  => 'שדות מותאמים',
+        ],
     ],
 
     'errors' => [

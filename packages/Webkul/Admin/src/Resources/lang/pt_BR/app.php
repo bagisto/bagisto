@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'Reescritas de URL',
         'users'                    => 'Utilizadores',
         'view'                     => 'Ver',
+
+        'rma' => [
+            'create' => 'Criar',
+            'delete' => 'Excluir',
+            'edit'   => 'Editar',
+            'view'   => 'Visualizar',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Criar',
+            'delete' => 'Excluir',
+            'edit'   => 'Editar',
+            'title'  => 'Motivos de RMA',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Excluir',
+            'edit'   => 'Editar',
+            'title'  => 'Regras de RMA',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Excluir',
+            'edit'   => 'Editar',
+            'title'  => 'Status de RMA',
+        ],
+
+        'custom-field' => [
+            'create' => 'Criar',
+            'delete' => 'Excluir',
+            'edit'   => 'Editar',
+            'title'  => 'Campos Personalizados',
+        ],
     ],
 
     'errors' => [

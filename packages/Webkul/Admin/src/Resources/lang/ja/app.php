@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'URL書き換え',
         'users'                    => 'ユーザー',
         'view'                     => '表示',
+
+        'rma' => [
+            'create' => '作成',
+            'delete' => '削除',
+            'edit'   => '編集',
+            'view'   => '表示',
+            'title'  => 'RMA（返品承認）',
+        ],
+
+        'rma-reason' => [
+            'create' => '作成',
+            'delete' => '削除',
+            'edit'   => '編集',
+            'title'  => 'RMA理由',
+        ],
+
+        'rma-rules' => [
+            'delete' => '削除',
+            'edit'   => '編集',
+            'title'  => 'RMA規則',
+        ],
+
+        'rma-status' => [
+            'delete' => '削除',
+            'edit'   => '編集',
+            'title'  => 'RMAステータス',
+        ],
+
+        'custom-field' => [
+            'create' => '作成',
+            'delete' => '削除',
+            'edit'   => '編集',
+            'title'  => 'カスタムフィールド',
+        ],
     ],
 
     'errors' => [

@@ -8,17 +8,17 @@
         $show = true;
 
         if (
-            is_null($rma->rma_status)
-            || $rma->rma_status == 'Received Package'
-            || $rma->rma_status == 'Solved'
+            is_null($rma->request_status)
+            || $rma->request_status == 'Received Package'
+            || $rma->request_status == 'Solved'
         ) {
             if ($rma->status == 1) {
                 $show = false;
             }
         } else if (
-            $rma->rma_status == 'Item Canceled'
-            || $rma->rma_status == 'Declined'
-            || $rma->rma_status == 'Canceled'
+            $rma->request_status == 'Item Canceled'
+            || $rma->request_status == 'Declined'
+            || $rma->request_status == 'Canceled'
             || $rma->order->status == 'canceled'
             || $rma->order->status == 'closed'
 
@@ -28,25 +28,25 @@
 
         $currentDate = \Carbon\Carbon::now();
 
-        $expiredays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
+        $expireDays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
 
         $orderCustomer = app('Webkul\Sales\Repositories\OrderRepository')->find(session()->get('guestOrderId'));
 
         $newDateTime = \Carbon\Carbon::parse($rma->created_at);
 
-        $DeferenceInDays = $currentDate->diffInDays($newDateTime);
+        $differenceInDays = $currentDate->diffInDays($newDateTime);
 
         $checkDateExpires = false;
 
         if (
-            $DeferenceInDays > $expiredays
-            && $DeferenceInDays != 0
+            $differenceInDays > $expireDays
+            && $differenceInDays != 0
         ) {
             $checkDateExpires = true;
         }
 
         $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
-            ->where('title', $rma->rma_status)
+            ->where('title', $rma->request_status)
             ->first();
 
         $rmaStatusColor = '';
@@ -302,7 +302,7 @@
                                 </p>
 
                                 <span @if ($rma->status == 1) class="hidden" @endif>
-                                    @if ($rma->rma_status == 'solved')
+                                    @if ($rma->request_status == 'solved')
                                         <span class="label-active py-1">
                                             @lang('shop::app.rma.status.status-name.solved')
                                         </span>
@@ -320,7 +320,7 @@
                                             class="label-active py-1 text-xs"
                                             style="background: {{ $rmaStatusColor }}"
                                         >
-                                            {{ $rma->rma_status }}
+                                            {{ $rma->request_status }}
                                         </span>
                                     @endif
                                 </span>
@@ -367,7 +367,7 @@
                             @if (! $checkDateExpires)
                                 @if (
                                     $rma->status == 1
-                                    && $rma->rma_status != 'Declined'
+                                    && $rma->request_status != 'Declined'
                                 )
                                     <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
                                         <!-- Close RMA -->
@@ -383,7 +383,7 @@
                                 @endif
 
                                 <!-- RMA solved -->
-                                @if ($rma->rma_status == 'Item Canceled')
+                                @if ($rma->request_status == 'Item Canceled')
                                     <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
                                         <p  class="text-base text-black font-medium">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
@@ -395,7 +395,7 @@
                                     </div>
                                 @endif
 
-                                @if ($rma->rma_status == 'Declined')
+                                @if ($rma->request_status == 'Declined')
                                     <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
                                         <p class="text-base text-black font-medium">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
@@ -480,7 +480,7 @@
                     @else
                         @if (
                             core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes'
-                            && $rma->rma_status == 'Canceled'
+                            && $rma->request_status == 'Canceled'
                         )
                             <div class="relative mt-3 overflow-x-auto rounded-xl border px-8 py-4">
                                 <!-- Close rma if solved -->

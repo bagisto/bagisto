@@ -45,7 +45,7 @@ class RulesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'title',
+            'index'      => 'name',
             'label'      => trans('admin::app.rma.sales.rma.rules.create.rules-title'),
             'type'       => 'string',
             'searchable' => true,
@@ -103,7 +103,7 @@ class RulesDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('rma.reason.edit')) {
+        if (bouncer()->hasPermission('sales.rma-rules.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('shop::app.rma.customer-rma-index.edit'),
@@ -115,7 +115,7 @@ class RulesDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('rma.reason.delete')) {
+        if (bouncer()->hasPermission('sales.rma-rules.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('shop::app.rma.customer-rma-index.delete'),
@@ -133,25 +133,29 @@ class RulesDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        $this->addMassAction([
-            'title'   => trans('shop::app.rma.customer-rma-index.update'),
-            'method'  => 'POST',
-            'url'     => route('admin.sales.rma.rules.mass-update'),
-            'options' => [
-                [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
-                ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+        if (bouncer()->hasPermission('sales.rma-rules.edit')) {
+            $this->addMassAction([
+                'title'   => trans('shop::app.rma.customer-rma-index.update'),
+                'method'  => 'POST',
+                'url'     => route('admin.sales.rma.rules.mass-update'),
+                'options' => [
+                    [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'value' => self::ONE,
+                    ], [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'value' => self::ZERO,
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'  => trans('shop::app.rma.customer-rma-index.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.sales.rma.rules.mass-delete'),
-        ]);
+        if (bouncer()->hasPermission('sales.rma-rules.delete')) {
+            $this->addMassAction([
+                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.sales.rma.rules.mass-delete'),
+            ]);
+        }
     }
 }

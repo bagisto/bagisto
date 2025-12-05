@@ -13,7 +13,7 @@ use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 use Webkul\Shop\Http\Controllers\Customer\Guest\GuestAuthenticationController;
 use Webkul\Shop\Http\Controllers\Customer\Guest\GuestController;
-use Webkul\Shop\Http\Controllers\Customer\RmaActionController;
+use Webkul\Shop\Http\Controllers\Customer\RMAActionController;
 
 Route::group(['prefix' => 'api'], function () {
     Route::controller(CoreController::class)->prefix('core')->group(function () {
@@ -128,7 +128,7 @@ Route::group(['prefix' => 'api'], function () {
     /**
      * RMA Action routes for guest and customer. These routes are used to perform actions on RMA requests such as canceling, updating status, and sending messages.
      */
-    Route::controller(RmaActionController::class)->prefix('rma')->group(function () {
+    Route::controller(RMAActionController::class)->prefix('rma')->group(function () {
         Route::get('getOrderProduct/{orderId}', 'getOrderProduct')->name('shop.rma.action.ordered.product');
 
         Route::get('resolution-reason/{resolutionType}', 'getResolutionReason')->name('shop.rma.action.resolution.reasons');

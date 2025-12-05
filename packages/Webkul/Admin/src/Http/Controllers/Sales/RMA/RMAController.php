@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use Webkul\Admin\DataGrids\Sales\RMA\RmaDataGrid;
+use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\Admin\RMA\AdminConversationEmail;
 use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAMessageRepository,RMARepository};
@@ -18,7 +18,7 @@ use Webkul\Sales\Repositories\{OrderRepository,RefundRepository};
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusEmail;
 
-class RmaController extends Controller
+class RMAController extends Controller
 {
     /**
      * @var string
@@ -85,7 +85,7 @@ class RmaController extends Controller
     public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
-            return datagrid(RmaDataGrid::class)->process();
+            return datagrid(RMADataGrid::class)->process();
         }
 
         return view('admin::sales.rma.returns.index');
@@ -132,7 +132,7 @@ class RmaController extends Controller
 
             $this->rmaRepository->find($data['rma_id'])->update([
                 'status'       => self::ACTIVE,
-                'rma_status'   => self::PENDING,
+                'request_status'   => self::PENDING,
                 'status'       => self::INACTIVE,
                 'order_status' => self::INACTIVE,
             ]);
@@ -239,7 +239,7 @@ class RmaController extends Controller
             'name'       => $order->customer_first_name . ' ' . $order->customer_last_name,
             'email'      => $order->customer_email,
             'rma_id'     => $status['rma_id'],
-            'rma_status' => $status['rma_status'],
+            'request_status' => $status['request_status'],
         ];
 
         $ordersRma = $this->rmaRepository->findWhere(['order_id' => $orderId]);
@@ -247,7 +247,7 @@ class RmaController extends Controller
         $totalCount = (int)$this->rmaItemsRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
 
         if ($totalCount > 0) {
-            if ($status['rma_status'] == self::ITEMCANCELED) {
+            if ($status['request_status'] == self::ITEMCANCELED) {
 
                 foreach ($ordersRma as $orderRma) {
                     $rmaItems = $this->rmaItemsRepository->findWhere([
@@ -279,7 +279,7 @@ class RmaController extends Controller
             }
 
 
-            if ($status['rma_status'] == self::RECEIVEDPACKAGE) {
+            if ($status['request_status'] == self::RECEIVEDPACKAGE) {
                 $refund = $this->createRefund($rma);
 
                 if (! $refund) {
@@ -296,11 +296,11 @@ class RmaController extends Controller
             }
 
             if ($order->total_qty_ordered == $totalCount) {
-                if ($status['rma_status'] == self::ITEMCANCELED) {
+                if ($status['request_status'] == self::ITEMCANCELED) {
                     $status['order_status'] = self::ORDERCANCELED;
 
                     $order->update(['status' => self::CANCELED]);
-                } elseif ($status['rma_status'] == self::ACCEPT) {
+                } elseif ($status['request_status'] == self::ACCEPT) {
                     $this->rmaRepository->find($status['rma_id'])->update(['status' => 0]);
                 }
             }
@@ -309,7 +309,7 @@ class RmaController extends Controller
         $updateStatus = $rma->update($status);
 
         $requestData = [
-            'message'    => trans('shop::app.rma.mail.status.your-rma-id') .' '. trans('shop::app.rma.mail.status.status-change', ['id' => $status['rma_id']]) .'. '. trans('shop::app.rma.mail.status.status') . ' : ' . $rma['rma_status'],
+            'message'    => trans('shop::app.rma.mail.status.your-rma-id') .' '. trans('shop::app.rma.mail.status.status-change', ['id' => $status['rma_id']]) .'. '. trans('shop::app.rma.mail.status.status') . ' : ' . $rma['request_status'],
             'rma_id'     => $status['rma_id'],
             'is_admin'   => 1,
         ];

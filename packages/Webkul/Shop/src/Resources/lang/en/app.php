@@ -1355,6 +1355,7 @@ return [
                 'save'                     => 'Save',
                 'search-order'             => 'Search Order',
                 'sku'                      => 'Sku',
+                'view'                     => 'View RMA',
             ],
         ],
 

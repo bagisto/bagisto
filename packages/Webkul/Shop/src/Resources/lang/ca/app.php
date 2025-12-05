@@ -1354,6 +1354,7 @@ return [
                 'save'                     => 'Desar',
                 'search-order'             => 'Cercar comanda',
                 'sku'                      => 'SKU',
+                'view'                     => 'Veure RMA',
             ],
         ],
 

@@ -4,7 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
-use Webkul\Admin\DataGrids\Sales\RMA\RmaStatusDataGrid;
+use Webkul\Admin\DataGrids\Sales\RMA\StatusDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
@@ -45,7 +45,7 @@ class StatusController extends Controller
     public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
-            return datagrid(RmaStatusDataGrid::class)->process();
+            return datagrid(StatusDataGrid::class)->process();
         }
 
         return view('admin::sales.rma.statuses.index');
@@ -57,7 +57,7 @@ class StatusController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:rma_status,title',
+            'title'  => 'required|unique:request_status,title',
             'status' => 'required|boolean',
         ]);
 
@@ -90,7 +90,7 @@ class StatusController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:rma_status,title,' . request()->id,
+            'title'  => 'required|unique:request_status,title,' . request()->id,
             'status' => 'required|boolean',
         ]);
 

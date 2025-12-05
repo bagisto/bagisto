@@ -11,13 +11,13 @@
 
         $newDateTime = \Carbon\Carbon::parse($rma->created_at);
 
-        $DeferenceInDays = $currentDate->diffInDays($newDateTime);
+        $differenceInDays = $currentDate->diffInDays($newDateTime);
 
         $checkDateExpires = false;
 
         if (
-            $DeferenceInDays > $expireDays
-            && $DeferenceInDays != 0
+            $differenceInDays > $expireDays
+            && $differenceInDays != 0
         ) {
             $checkDateExpires = true;
         }
@@ -26,7 +26,7 @@
 
         $rmaActiveStatus = $rmaActiveStatus->toarray();
 
-        if ($rma->rma_status == 'Pending') {
+        if ($rma->request_status == 'Pending') {
 
             $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
                 return in_array($status, ["Accept", "Declined"]);
@@ -50,7 +50,7 @@
         $rmaStatusColor = '';
 
         $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
-            ->where('title', $rma->rma_status)
+            ->where('title', $rma->request_status)
             ->first();
 
         if ($rmaStatusData) {
@@ -458,13 +458,13 @@
                                        @lang('admin::app.rma.sales.rma.all-rma.view.order-status')
                                     </p>
 
-                                    @if ($rma->rma_status == 'Declined')
+                                    @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
                                         </p>
 
                                     @endif
-                                    @if ($rma->rma_status == 'Item Canceled')
+                                    @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
                                         </p>
@@ -477,17 +477,17 @@
                                     <!-- RMA Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span>
-                                            @if (strtolower($rma->rma_status) == 'Solved')
+                                            @if (strtolower($rma->request_status) == 'Solved')
                                                 <span class="label-active py-1">
                                                     @lang('shop::app.rma.status.status-name.solved')
                                                 </span>
 
                                             @elseif(
-                                                    strtolower($rma->rma_status) == 'canceled'
-                                                    && strtolower($rma->rma_status) == 'closed'
+                                                    strtolower($rma->request_status) == 'canceled'
+                                                    && strtolower($rma->request_status) == 'closed'
                                                 )
                                                 <span
-                                                    class="label-{{strtolower($rma->rma_status)}} py-1 text-xs"
+                                                    class="label-{{strtolower($rma->request_status)}} py-1 text-xs"
                                                 >
                                                     @lang('shop::app.rma.status.status-name.item-canceled')
                                                 </span>
@@ -496,7 +496,7 @@
                                                     class="label-active py-1 text-xs"
                                                     style="background: {{ $rmaStatusColor }}"
                                                 >
-                                                    {{ $rma->rma_status }}
+                                                    {{ $rma->request_status }}
                                                 </span>
                                             @endif
                                         </span>
@@ -524,13 +524,13 @@
                                         </span>
                                     </p>
 
-                                    @if ($rma->rma_status == 'Declined')
+                                    @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.status.status-quotes.declined-admin')
                                         </p>
                                     @endif
 
-                                    @if ($rma->rma_status == 'Item Canceled')
+                                    @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.status.status-quotes.solved-by-admin')
                                         </p>
@@ -542,21 +542,21 @@
 
                     <!-- RMA change status-->
                     @if (
-                        $rma->rma_status != 'Solved'
+                        $rma->request_status != 'Solved'
                         && $rma->status != 1
                         && ! in_array($rma->order->status, ['canceled', 'closed'])
                     )
-                        @if ($rma->rma_status == 'Item Canceled')
+                        @if ($rma->request_status == 'Item Canceled')
                             @php($flag = 0)
 
-                        @elseif ($rma->rma_status == 'Received Package')
+                        @elseif ($rma->request_status == 'Received Package')
                             @php($flag = 0)
 
-                        @elseif ($rma->rma_status == 'Declined')
+                        @elseif ($rma->request_status == 'Declined')
                             @php($flag = 0)
 
 
-                        @elseif ($rma->rma_status == 'Canceled')
+                        @elseif ($rma->request_status == 'Canceled')
                             @php($flag = 0)
 
                         @elseif (
@@ -601,21 +601,21 @@
                                         <x-admin::form.control-group class="mb-2 w-full">
                                             <x-admin::form.control-group.control
                                                 type="select"
-                                                name="rma_status"
+                                                name="request_status"
                                                 rules="required"
                                                 v-model="rmaStatus"
                                                 :label="trans('admin::app.rma.sales.rma.all-rma.index.datagrid.rma-status')"
                                                 id="orderItem"
                                             >
                                                 @foreach ($statusArr as $status)
-                                                    <option value="{{ $status }}" {{ $rma->rma_status == $status ? 'selected' : '' }}>
+                                                    <option value="{{ $status }}" {{ $rma->request_status == $status ? 'selected' : '' }}>
                                                         {{ $status }}
                                                     </option>
                                                 @endforeach
                                             </x-admin::form.control-group.control>
 
                                             <x-admin::form.control-group.error
-                                                control-name="rma_status"
+                                                control-name="request_status"
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
@@ -654,11 +654,11 @@
 
                         @if (
                             ($rma->status == 1 && $rma->resolution == 'Replace')
-                            || $rma->rma_status == 'Item Canceled'
+                            || $rma->request_status == 'Item Canceled'
                             || $rma->resolution == 'Return'
                             && $rma->status == 1
                             || $rma->status == 1
-                            && $rma->rma_status != 'Declined'
+                            && $rma->request_status != 'Declined'
                         )
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -684,7 +684,7 @@
                     <!-- Re open RMA -->
                     @if (
                         core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') == 'yes'
-                        && $rma->rma_status == 'Declined'
+                        && $rma->request_status == 'Declined'
                     )
                         <x-admin::accordion>
                             <x-slot:header>

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rma_reason_resolutions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('rma_reason_id')->unsigned();
             $table->string('resolution_type');
             $table->timestamps();

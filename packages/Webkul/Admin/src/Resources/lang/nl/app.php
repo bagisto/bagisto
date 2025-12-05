@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'URL-herschrijvingen',
         'users'                    => 'Gebruikers',
         'view'                     => 'Bekijken',
+
+        'rma' => [
+            'create' => 'Aanmaken',
+            'delete' => 'Verwijderen',
+            'edit'   => 'Bewerken',
+            'view'   => 'Bekijken',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Aanmaken',
+            'delete' => 'Verwijderen',
+            'edit'   => 'Bewerken',
+            'title'  => 'RMA Redenen',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Verwijderen',
+            'edit'   => 'Bewerken',
+            'title'  => 'RMA Regels',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Verwijderen',
+            'edit'   => 'Bewerken',
+            'title'  => 'RMA Status',
+        ],
+
+        'custom-field' => [
+            'create' => 'Aanmaken',
+            'delete' => 'Verwijderen',
+            'edit'   => 'Bewerken',
+            'title'  => 'Aangepaste Velden',
+        ],
     ],
 
     'errors' => [

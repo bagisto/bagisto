@@ -92,16 +92,6 @@ class ReasonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.rma.sales.rma.reasons.index.datagrid.created-at'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'filterable'      => true,
-            'sortable'        => true,
-            'filterable_type' => 'date_range',
-        ]);
-
-        $this->addColumn([
             'index'      => 'resolution_types',
             'label'      => trans('admin::app.configuration.index.sales.rma.resolution-type'),
             'type'       => 'string',
@@ -123,6 +113,16 @@ class ReasonDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
         ]);
+
+        $this->addColumn([
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.rma.sales.rma.reasons.index.datagrid.created-at'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'sortable'        => true,
+            'filterable_type' => 'date_range',
+        ]);
     }
 
     /**
@@ -130,17 +130,19 @@ class ReasonDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        $this->addAction([
-            'index'  => 'edit',
-            'icon'   => 'icon-edit',
-            'title'  => trans('shop::app.rma.customer-rma-index.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.rma.reason.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.rma-reason.edit')) {
+            $this->addAction([
+                'index'  => 'edit',
+                'icon'   => 'icon-edit',
+                'title'  => trans('shop::app.rma.customer-rma-index.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.rma.reason.edit', $row->id);
+                },
+            ]);
+        }
 
-        if (bouncer()->hasPermission('rma.reason.delete')) {
+        if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('shop::app.rma.customer-rma-index.delete'),
@@ -158,7 +160,7 @@ class ReasonDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        if (bouncer()->hasPermission('rma.reason.mass-update')) {
+        if (bouncer()->hasPermission('sales.rma-reason.edit')) {
             $this->addMassAction([
                 'title'   => trans('shop::app.rma.customer-rma-index.update'),
                 'method'  => 'POST',
@@ -175,7 +177,7 @@ class ReasonDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('rma.reason.mass-delete')) {
+        if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addMassAction([
                 'title'  => trans('shop::app.rma.customer-rma-index.delete'),
                 'method' => 'POST',

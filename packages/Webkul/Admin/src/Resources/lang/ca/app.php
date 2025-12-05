@@ -5031,6 +5031,40 @@ return [
         'url-rewrites'             => 'Reescriptures d\'URL',
         'users'                    => 'Usuaris',
         'view'                     => 'Veure',
+
+        'rma' => [
+            'create' => 'Crear',
+            'delete' => 'Eliminar',
+            'edit'   => 'Editar',
+            'view'   => 'Veure',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Crear',
+            'delete' => 'Eliminar',
+            'edit'   => 'Editar',
+            'title'  => 'Raons de RMA',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Eliminar',
+            'edit'   => 'Editar',
+            'title'  => 'Regles de RMA',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Eliminar',
+            'edit'   => 'Editar',
+            'title'  => 'Estat de RMA',
+        ],
+
+        'custom-field' => [
+            'create' => 'Crear',
+            'delete' => 'Eliminar',
+            'edit'   => 'Editar',
+            'title'  => 'Camps personalitzats',
+        ],
     ],
 
     'errors' => [

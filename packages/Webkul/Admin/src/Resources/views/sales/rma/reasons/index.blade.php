@@ -10,6 +10,7 @@
         <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid />
     </v-rma-reasons>
+
     {!! view_render_event('bagisto.admin.catalog.rma.list.after') !!}
 
     @pushOnce('scripts')
@@ -74,6 +75,7 @@
                                 >
                                 </label>
                             @endif
+
                             <!-- Id -->
                             <p v-text="record.id"></p>
 
@@ -83,14 +85,14 @@
                             <!-- Name -->
                             <p v-html="record.status"></p>
 
-                            <!-- Direction -->
-                            <p v-text="record.created_at"></p>
-
                             <!-- Resolution Type -->
                             <p v-text="record.resolution_types"></p>
 
                             <!-- Resolution Type -->
                             <p v-text="record.position"></p>
+
+                            <!-- Direction -->
+                            <p v-text="record.created_at"></p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
@@ -282,18 +284,21 @@
                         setErrors
                     }) {
                         let formData = new FormData(this.$refs.createReasonsForm);
+                        
                         let url;
 
-                        // Sanitize the message input
                         const messageInput = formData.get('title');
+                        
                         const sanitizedMessage = this.sanitizeInput(messageInput);
+
                         formData.set('title', sanitizedMessage);
+
+                        url = `{{ route('admin.sales.rma.reason.store') }}`;
 
                         if (params.id) {
                             url = `{{ route('admin.sales.rma.reason.update', '') }}/${params.id}`;
+
                             formData.append('_method', 'put');
-                        } else {
-                            url = `{{ route('admin.sales.rma.reason.store') }}`;
                         }
 
                         this.$axios.post(url, formData, {

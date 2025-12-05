@@ -6,10 +6,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
-use Webkul\Admin\DataGrids\Sales\RMA\CustomFieldRMADataGrid;
+use Webkul\Admin\DataGrids\Sales\RMA\CustomFieldDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\RMA\Repositories\RmaCustomFieldOptionRepository;
-use Webkul\RMA\Repositories\RmaCustomFieldRepository;
+use Webkul\RMA\Repositories\RMACustomFieldOptionRepository;
+use Webkul\RMA\Repositories\RMACustomFieldRepository;
 
 class CustomFieldController extends Controller
 {
@@ -24,8 +24,8 @@ class CustomFieldController extends Controller
      * @return void
      */
     public function __construct(
-        protected RmaCustomFieldRepository $rmaCustomFieldRepository,
-        protected RmaCustomFieldOptionRepository $rmaCustomFieldOptionRepository,
+        protected RMACustomFieldRepository $rmaCustomFieldRepository,
+        protected RMACustomFieldOptionRepository $rmaCustomFieldOptionRepository,
     ) {
     }
 
@@ -35,7 +35,7 @@ class CustomFieldController extends Controller
     public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
-            return datagrid(CustomFieldRMADataGrid::class)->process();
+            return datagrid(CustomFieldDataGrid::class)->process();
         }
 
         return view('admin::sales.rma.custom-fields.index');

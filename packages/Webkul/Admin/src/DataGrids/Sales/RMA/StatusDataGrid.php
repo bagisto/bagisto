@@ -7,7 +7,7 @@ use Illuminate\Database\Query\Builder;
 use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
-class RmaStatusDataGrid extends DataGrid
+class StatusDataGrid extends DataGrid
 {
     /**
      * @var int
@@ -34,7 +34,7 @@ class RmaStatusDataGrid extends DataGrid
      */
     public function prepareQueryBuilder(): Builder
     {
-        $queryBuilder = DB::table('rma_status')
+        $queryBuilder = DB::table('rma_statuses')
             ->addSelect(
                 'id',
                 'title',
@@ -43,7 +43,7 @@ class RmaStatusDataGrid extends DataGrid
                 'default',
             );
 
-        $this->addFilter('id', 'rma_status.id');
+        $this->addFilter('id', 'rma_statuses.id');
         
         return $queryBuilder;
     }
@@ -119,7 +119,7 @@ class RmaStatusDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('rma.reason.edit')) {
+        if (bouncer()->hasPermission('sales.rma-status.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('shop::app.rma.customer-rma-index.edit'),
@@ -131,7 +131,7 @@ class RmaStatusDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('rma.reason.delete')) {
+        if (bouncer()->hasPermission('sales.rma-status.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('shop::app.rma.customer-rma-index.delete'),
@@ -149,25 +149,29 @@ class RmaStatusDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        $this->addMassAction([
-            'title'   => trans('shop::app.rma.customer-rma-index.update'),
-            'method'  => 'POST',
-            'url'     => route('admin.sales.rma.rma-status.mass-update'),
-            'options' => [
-                [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
-                ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+        if (bouncer()->hasPermission('sales.rma-status.edit')) {
+            $this->addMassAction([
+                'title'   => trans('shop::app.rma.customer-rma-index.update'),
+                'method'  => 'POST',
+                'url'     => route('admin.sales.rma.rma-status.mass-update'),
+                'options' => [
+                    [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'value' => self::ONE,
+                    ], [
+                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'value' => self::ZERO,
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'  => trans('shop::app.rma.customer-rma-index.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.sales.rma.rma-status.mass-delete'),
-        ]);
+        if (bouncer()->hasPermission('sales.rma-status.delete')) {
+            $this->addMassAction([
+                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.sales.rma.rma-status.mass-delete'),
+            ]);
+        }
     }
 }

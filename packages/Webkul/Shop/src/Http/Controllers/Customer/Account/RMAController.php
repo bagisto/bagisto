@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAImageRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
 use Webkul\Sales\Repositories\{OrderRepository, OrderItemRepository};
-use Webkul\Shop\DataGrids\RMA\CustomerRmaDataGrid;
+use Webkul\Shop\DataGrids\RMA\CustomerRMADataGrid;
 use Webkul\Shop\DataGrids\RMA\OrderRMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\RMA\CustomerRmaRequestNotification;
+use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class RMAController extends Controller
 {
@@ -49,10 +49,9 @@ class RMAController extends Controller
     public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
-            return datagrid(CustomerRmaDataGrid::class)->process();
+            return datagrid(CustomerRMADataGrid::class)->process();
         }
 
-        // packages/Webkul/Shop/src/Resources/views/customers/account/rma/create.blade.php
         return view('shop::customers.account.rma.index');
     }
 
@@ -128,7 +127,7 @@ class RMAController extends Controller
             'order_id'          => $data['order_id'],
             'information'       => $data['information'] ?? null,
             'order_status'      => $data['order_status'] ?? 0,
-            'rma_status'        => self::PENDING,
+            'request_status'        => self::PENDING,
             'package_condition' => $data['package_condition'] ?? '',
         ]);
 
@@ -211,7 +210,7 @@ class RMAController extends Controller
 
         if ($rma->items) {
             try {
-                Mail::queue(new CustomerRmaRequestNotification($data));
+                Mail::queue(new CustomerRMARequestNotification($data));
             } catch (\Exception $e) {
                 \Log::error('Error in Sending Email'.$e->getMessage());
             }

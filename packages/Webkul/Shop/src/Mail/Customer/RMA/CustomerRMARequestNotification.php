@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Mail\Admin\RMA;
+namespace Webkul\Shop\Mail\Customer\RMA;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,26 +9,26 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class AdminConversationEmail extends Mailable
+class CustomerRMARequestNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public array $conversation) {}
+    public function __construct(public array $customerRmaData) {}
 
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
-        $senderDetails = core()->getSenderEmailDetails();
+        $adminDetails = core()->getAdminEmailDetails();
 
         return new Envelope(
-            from: new Address($senderDetails['email'], $senderDetails['name']),
-            to: [new Address($this->conversation['customerEmail'])],
-            subject: trans('shop::app.rma.mail.seller-conversation.subject'),
+            from: new Address($adminDetails['email']),
+            to: [new Address($this->customerRmaData['email'])],
+            subject: trans('shop::app.rma.customer.create.heading'),
         );
     }
 
@@ -38,8 +38,10 @@ class AdminConversationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'admin::emails.admin.rma.conversation.message',
-            with: $this->conversation,
+            view: 'shop::emails.customers.rma.new-rma-request',
+            with: [
+                'customerRmaData' => $this->customerRmaData,
+            ],
         );
     }
 }

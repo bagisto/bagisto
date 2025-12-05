@@ -1351,6 +1351,7 @@ return [
                 'save'                     => '保存',
                 'search-order'             => '搜索订单',
                 'sku'                      => 'SKU',
+                'view'                     => '查看 RMA',
             ],
         ],
 

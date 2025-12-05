@@ -16,11 +16,13 @@ return new class extends Migration
             $table->integer('order_id')->unsigned();
             $table->string('order_status')->nullable();
             $table->boolean('status')->default(1);
-            $table->string('rma_status')->nullable();
+            $table->string('request_status')->nullable();
             $table->string('resolution')->nullable();
             $table->string('package_condition')->nullable();
             $table->longtext('information')->nullable();
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

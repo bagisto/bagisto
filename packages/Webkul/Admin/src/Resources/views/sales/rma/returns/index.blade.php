@@ -10,17 +10,18 @@
         </h1>
 
         <div class="flex items-center gap-x-2.5">
+            <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.rma.index') }}" />
 
-            <a
-                href="{{ route('admin.sales.rma.create') }}"
-                class="primary-button"
-            >
-                @lang('admin::app.rma.rma.index.create-rma-title')
-            </a>
+            @if (bouncer()->hasPermission('sales.rma.create'))
+                <a
+                    href="{{ route('admin.sales.rma.create') }}"
+                    class="primary-button"
+                >
+                    @lang('admin::app.rma.rma.index.create-rma-title')
+                </a>
+            @endif
         </div>
-
-        <!-- Export Modal -->
     </div>
 
     {!! view_render_event('bagisto.admin.rma.list.before') !!}

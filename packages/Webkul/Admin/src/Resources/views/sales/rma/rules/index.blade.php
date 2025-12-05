@@ -78,7 +78,7 @@
                             <p v-text="record.id"></p>
 
                             <!-- Code -->
-                            <p v-text="record.title"></p>
+                            <p v-text="record.name"></p>
 
                             <!-- Name -->
                             <p v-html="record.status"></p>
@@ -160,15 +160,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="title"
+                                            name="name"
                                             rules="required"
-                                            :value="old('title')"
-                                            v-model="rules.title"
+                                            :value="old('name')"
+                                            v-model="rules.name"
                                             :label="trans('admin::app.rma.sales.rma.rules.create.rules-title')"
                                             :placeholder="trans('admin::app.rma.sales.rma.rules.create.rules-title')"
                                         />
 
-                                        <x-admin::form.control-group.error control-name="title" />
+                                        <x-admin::form.control-group.error control-name="name" />
                                     </x-admin::form.control-group>
 
                                     <!-- Status -->
@@ -200,15 +200,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="textarea"
-                                            name="rule_description"
+                                            name="description"
                                             rules="required|min:1|max:70"
-                                            :value="old('rule_description')"
-                                            v-model="rules.rule_description"
+                                            :value="old('description')"
+                                            v-model="rules.description"
                                             :label="trans('admin::app.rma.sales.rma.rules.create.rule-description')"
                                             :placeholder="trans('admin::app.rma.sales.rma.rules.create.rule-description')"
                                         />
 
-                                        <x-admin::form.control-group.error control-name="rule_description" />
+                                        <x-admin::form.control-group.error control-name="description" />
                                     </x-admin::form.control-group>
 
                                     <hr/>

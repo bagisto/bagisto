@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
-class CustomerRmaDataGrid extends DataGrid
+class CustomerRMADataGrid extends DataGrid
 {
     /**
      * @var string
@@ -63,8 +63,8 @@ class CustomerRmaDataGrid extends DataGrid
                 'rma.id',
                 'rma.status',
                 'rma.order_id',
-                'rma.rma_status',
-                'rma.rma_status as rmaStatus',
+                'rma.request_status',
+                'rma.request_status as rmaStatus',
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
@@ -85,7 +85,7 @@ class CustomerRmaDataGrid extends DataGrid
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
-        $this->addFilter('rma_status', 'rma.rma_status');
+        $this->addFilter('request_status', 'rma.request_status');
         $this->addFilter('customer_email', 'orders.customer_email');
         $this->addFilter('created_at', 'rma.created_at');
 
@@ -119,7 +119,7 @@ class CustomerRmaDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'rma_status',
+            'index'              => 'request_status',
             'label'              => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.rma-status'),
             'type'               => 'string',
             'filterable_type'    => 'dropdown',
@@ -129,7 +129,7 @@ class CustomerRmaDataGrid extends DataGrid
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
             'closure'            => function ($row) {
                 $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
-                    ->where('title', $row->rma_status)
+                    ->where('title', $row->request_status)
                     ->first();
 
                 if (
@@ -139,7 +139,7 @@ class CustomerRmaDataGrid extends DataGrid
                     return '<p class="label-canceled">' . trans('shop::app.rma.status.status-name.item-canceled') . '</p>';
                 }
 
-                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->rma_status . '</p>';
+                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->request_status . '</p>';
             },
         ]);
 

@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rma_additional_fields', function (Blueprint $table) {
-            $table->id();
-            $table->integer('rma_id')->nullable();
+            $table->increments('id');
+            $table->integer('rma_id')->nullable()->unsigned();
             $table->string('name')->nullable();
             $table->string('value')->nullable();
             $table->timestamps();
+
+            $table->foreign('rma_id')->references('id')->on('rma')->onDelete('cascade');
         });
     }
 

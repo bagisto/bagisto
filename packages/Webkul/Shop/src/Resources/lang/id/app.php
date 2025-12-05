@@ -1354,6 +1354,7 @@ return [
                 'save'                     => 'Simpan',
                 'search-order'             => 'Cari Pesanan',
                 'sku'                      => 'SKU',
+                'view'                     => 'Lihat RMA',
             ],
         ],
 

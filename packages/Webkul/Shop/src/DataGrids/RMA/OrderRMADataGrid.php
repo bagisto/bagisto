@@ -37,12 +37,28 @@ class OrderRMADataGrid extends DataGrid
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
-            ->leftJoin('rma_rules', 'products.rma_rules', '=', 'rma_rules.id')
+            ->leftJoin('attributes as attr_allow_rma', function($join) {
+                $join->on(DB::raw('1'), '=', DB::raw('1'))
+                    ->where('attr_allow_rma.code', '=', 'allow_rma');
+            })
+            ->leftJoin('product_attribute_values as pav_allow_rma', function($join) {
+                $join->on('products.id', '=', 'pav_allow_rma.product_id')
+                    ->on('pav_allow_rma.attribute_id', '=', 'attr_allow_rma.id');
+            })
+            ->leftJoin('attributes as attr_rma_rules', function($join) {
+                $join->on(DB::raw('1'), '=', DB::raw('1'))
+                    ->where('attr_rma_rules.code', '=', 'rma_rule_id');
+            })
+            ->leftJoin('product_attribute_values as pav_rma_rules', function($join) {
+                $join->on('products.id', '=', 'pav_rma_rules.product_id')
+                    ->on('pav_rma_rules.attribute_id', '=', 'attr_rma_rules.id');
+            })
+            ->leftJoin('rma_rules', 'pav_rma_rules.integer_value', '=', 'rma_rules.id')
             ->leftJoin('rma', 'orders.id', '=', 'rma.order_id')
             ->leftJoin(
                 DB::raw('(SELECT order_item_id, SUM(quantity) as total_rma_qty
-                         FROM rma_items
-                         GROUP BY order_item_id) as rma_items_aggregated'),
+                        FROM rma_items
+                        GROUP BY order_item_id) as rma_items_aggregated'),
                 'order_items.id',
                 '=',
                 'rma_items_aggregated.order_item_id'
@@ -57,22 +73,22 @@ class OrderRMADataGrid extends DataGrid
             ->whereIn('products.type', explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type')))
             ->where(function ($query) use ($globalReturnDays) {
                 $query->where(function ($q) {
-                    $q->where('products.allow_rma', 1)
+                    $q->where('pav_allow_rma.boolean_value', 1)
                     ->where('rma_rules.status', 1)
                     ->whereRaw('DATEDIFF(NOW(), orders.created_at) <= rma_rules.return_period');
                 })->orWhere(function ($q) use ($globalReturnDays) {
                     $q->where(function ($sub) {
-                        $sub->whereNull('products.allow_rma')
-                            ->orWhere('products.allow_rma', 0)
+                        $sub->whereNull('pav_allow_rma.boolean_value')
+                            ->orWhere('pav_allow_rma.boolean_value', 0)
                             ->orWhere('rma_rules.status', 0);
-                    })->whereRaw("DATEDIFF(NOW(), orders.created_at) <= {$globalReturnDays}");
+                    })->whereRaw("DATEDIFF(NOW(), orders.created_at) <= ?", [$globalReturnDays]);
                 });
             })
             ->groupBy('orders.id')
             ->havingRaw('SUM(order_items.qty_ordered) > IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0)');
 
         if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == self::COMPLETE) {
-            $queryBuilder->where('orders.status', [
+            $queryBuilder->whereIn('orders.status', [
                 Order::STATUS_COMPLETED,
             ]);
         }

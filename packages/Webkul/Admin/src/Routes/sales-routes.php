@@ -9,7 +9,7 @@ use Webkul\Admin\Http\Controllers\Sales\RefundController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\RequestController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\CustomFieldController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\ReasonController;
-use Webkul\Admin\Http\Controllers\Sales\RMA\RmaController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RMAController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\RulesController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\StatusController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
@@ -128,7 +128,7 @@ Route::prefix('sales')->group(function () {
          * RMA Request routes.
          */
         Route::prefix('requests')->group(function () {
-            Route::controller(RmaController::class)->group(function () {
+            Route::controller(RMAController::class)->group(function () {
                 Route::get('', 'index')->name('admin.sales.rma.index');
 
                 Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');

@@ -6,45 +6,52 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DefaultReasons extends Seeder
+class RMAReasonSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
         $now = Carbon::now();
 
         $defaultReasons = [
             [
-                'title'      => 'Manufacturer defect', 
-                'status'     => 1, 
-                'created_at' => $now, 
-                'updated_at' => $now,
-            ],[
-                'title'      => 'Damaged during shipping', 
-                'status'     => 1, 
-                'created_at' => $now, 
-                'updated_at' => $now,
-            ],[
-                'title'      => 'Wrong description online', 
-                'status'     => 1, 
-                'created_at' => $now, 
+                'title'      => 'Manufacturer defect',
+                'status'     => 1,
+                'created_at' => $now,
                 'updated_at' => $now,
             ], [
-                'title'      => 'Dead on arrival', 
-                'status'     => 1, 
-                'created_at' => $now, 
+                'title'      => 'Damaged during shipping',
+                'status'     => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ], [
+                'title'      => 'Wrong description online',
+                'status'     => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ], [
+                'title'      => 'Dead on arrival',
+                'status'     => 1,
+                'created_at' => $now,
                 'updated_at' => $now,
             ],
         ];
 
+        /**
+         * Insert default RMA reasons into the database.
+         */
         foreach ($defaultReasons as $reason) {
             DB::table('rma_reasons')->updateOrInsert(
                 ['title' => $reason['title']],
-                ['status' => $reason['status'], 'updated_at' => $reason['updated_at']]
+                [
+                    'status'     => $reason['status'],
+                    'created_at' => $reason['created_at'],
+                    'updated_at' => $reason['updated_at'],
+                ]
             );
         }
 
@@ -52,6 +59,9 @@ class DefaultReasons extends Seeder
 
         $resolutionTypes = ['exchange', 'return', 'cancel-items'];
 
+        /**
+         * Insert default resolution mappings for RMA reasons.
+         */
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {
                 DB::table('rma_reason_resolutions')->updateOrInsert(
@@ -61,13 +71,16 @@ class DefaultReasons extends Seeder
                     ], [
                         'created_at' => $now,
                         'updated_at' => $now,
-                    ],
+                    ]
                 );
             }
         }
 
+        /**
+         * Cleanup duplicate resolution mappings.
+         */
         DB::table('rma_reason_resolutions')
-            ->select('id', 'rma_reason_id', 'resolution_type')
+            ->select('rma_reason_id', 'resolution_type')
             ->groupBy('rma_reason_id', 'resolution_type')
             ->havingRaw('COUNT(*) > 1')
             ->get()
@@ -76,7 +89,6 @@ class DefaultReasons extends Seeder
                     ->where('rma_reason_id', $duplicate->rma_reason_id)
                     ->where('resolution_type', $duplicate->resolution_type)
                     ->skip(1)
-                    ->take(PHP_INT_MAX)
                     ->delete();
             });
     }

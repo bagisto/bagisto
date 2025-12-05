@@ -5,7 +5,7 @@ namespace Webkul\RMA\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\RMA\Contracts\RMACustomFieldOption;
 
-class RmaCustomFieldOptionRepository extends Repository
+class RMACustomFieldOptionRepository extends Repository
 {
     /**
      * Specify model class name

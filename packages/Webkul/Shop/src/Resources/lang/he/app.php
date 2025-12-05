@@ -1352,6 +1352,7 @@ return [
                 'save'                     => 'שמור',
                 'search-order'             => 'חפש הזמנה',
                 'sku'                      => 'SKU',
+                'view'                     => 'צפה ב-RMA',
             ],
         ],
 

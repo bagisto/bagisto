@@ -103,7 +103,7 @@ Breadcrumbs::for('product', function (BreadcrumbTrail $trail, $entity) {
 Breadcrumbs::for('rma', function (BreadcrumbTrail $trail) {
     $trail->parent('account');
 
-    $trail->push(trans('rma::app.shop.customer-rma-index.heading'), route('shop.customers.account.rma.index'));
+    $trail->push(trans('shop::app.rma.customer-rma-index.heading'), route('shop.customers.account.rma.index'));
 });
 
 /**
@@ -112,7 +112,7 @@ Breadcrumbs::for('rma', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('rma.create', function (BreadcrumbTrail $trail) {
     $trail->parent('rma');
 
-    $trail->push(trans('rma::app.shop.customer-rma-index.create'), route('shop.customers.account.rma.create'));
+    $trail->push(trans('shop::app.rma.customer.create.heading'), route('shop.customers.account.rma.create'));
 });
 
 /**
@@ -121,5 +121,5 @@ Breadcrumbs::for('rma.create', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('rma.view', function (BreadcrumbTrail $trail, $id) {
     $trail->parent('rma');
 
-    $trail->push(trans('rma::app.shop.customer-rma-index.view'), route('shop.customers.account.rma.index'));
+    $trail->push(trans('shop::app.rma.customer.create.view'), route('shop.customers.account.rma.index'));
 });

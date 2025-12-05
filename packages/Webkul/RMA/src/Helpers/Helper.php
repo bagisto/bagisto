@@ -4,6 +4,7 @@ namespace Webkul\RMA\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
@@ -37,9 +38,9 @@ class Helper
      * @return void
      */
     public function __construct(
-        protected RMAItemRepository $rmaItemsRepository,
         protected OrderItemRepository $orderItemRepository,
         protected ProductRepository $productRepository,
+        protected RMAItemRepository $rmaItemsRepository,
         protected RMARepository $rmaRepository,
     ) {
     }
@@ -81,7 +82,7 @@ class Helper
             ->get();
 
         $rmaQty = $rmaItems->reduce(function ($carry, $rmaItem) {
-            $rmaStatus = $rmaItem->rma->rma_status ?? null;
+            $rmaStatus = $rmaItem->rma->request_status ?? null;
 
             if (!in_array($rmaStatus, [self::DECLINED, self::CANCELED])) {
                 return $carry + $rmaItem->quantity;
@@ -115,7 +116,7 @@ class Helper
         }
 
         return $rmaItems->every(function ($rmaItem) {
-            return in_array($rmaItem->rma->rma_status ?? null, self::REFUND_EXCLUDED_STATUSES);
+            return in_array($rmaItem->rma->request_status ?? null, self::REFUND_EXCLUDED_STATUSES);
         });
     }
 
@@ -146,8 +147,8 @@ class Helper
                 'orders.status as order_status',
                 'orders.id as order_id',
                 'products.type as product_type',
-                'products.allow_rma',
-                'products.rma_rules',
+                'pav_allow_rma.boolean_value as allow_rma',
+                'pav_rma_rules.integer_value as rma_rules',
                 'rma_rules.id as rule_id',
                 'rma_rules.status as rma_rule_status',
                 'rma_rules.exchange_period as rma_exchange_period',
@@ -156,15 +157,36 @@ class Helper
             )
             ->leftJoin('product_flat', 'order_items.product_id', '=', 'product_flat.product_id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
-            ->leftJoin('rma_rules', 'products.rma_rules', '=', 'rma_rules.id')
             ->leftJoin('products as parent_products', 'products.parent_id', '=', 'parent_products.id')
+            
+            ->leftJoin('attributes as attr_allow_rma', function($join) {
+                $join->on(DB::raw('1'), '=', DB::raw('1'))
+                    ->where('attr_allow_rma.code', '=', 'allow_rma');
+            })
+            
+            ->leftJoin('product_attribute_values as pav_allow_rma', function($join) {
+                $join->on('products.id', '=', 'pav_allow_rma.product_id')
+                    ->on('pav_allow_rma.attribute_id', '=', 'attr_allow_rma.id');
+            })
+            
+            ->leftJoin('attributes as attr_rma_rules', function($join) {
+                $join->on(DB::raw('1'), '=', DB::raw('1'))
+                    ->where('attr_rma_rules.code', '=', 'rma_rule_id');
+            })
+            
+            ->leftJoin('product_attribute_values as pav_rma_rules', function($join) {
+                $join->on('products.id', '=', 'pav_rma_rules.product_id')
+                    ->on('pav_rma_rules.attribute_id', '=', 'attr_rma_rules.id');
+            })
+            
+            ->leftJoin('rma_rules', 'pav_rma_rules.integer_value', '=', 'rma_rules.id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
             ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->whereNull('order_items.parent_id')
             ->where(function ($query) use ($allowedProductTypes) {
                 $query->where(function ($subQuery) use ($allowedProductTypes) {
                     $subQuery->whereNull('products.parent_id')
-                             ->whereIn('products.type', $allowedProductTypes);
+                            ->whereIn('products.type', $allowedProductTypes);
                 })->orWhere(function ($subQuery) use ($allowedProductTypes) {
                     $subQuery->whereNotNull('products.parent_id')
                         ->whereIn('parent_products.type', $allowedProductTypes);
@@ -177,12 +199,13 @@ class Helper
 
         $orderItems = $orderItems->filter(function ($orderItem) {
             $createdAt = Carbon::parse($orderItem->created_at);
+
             $today = Carbon::now();
+
+            $returnWindow = (int) core()->getConfigData('sales.rma.setting.default_allow_days');
 
             if ($orderItem->allow_rma && $orderItem->rma_rule_status) {
                 $returnWindow = (int) $orderItem->rma_return_period;
-            } else {
-                $returnWindow = (int) core()->getConfigData('sales.rma.setting.default_allow_days');
             }
 
             $returnLastDate = $createdAt->copy()->addDays($returnWindow);

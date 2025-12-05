@@ -1351,6 +1351,7 @@ return [
                 'save'                     => 'Salvar',
                 'search-order'             => 'Buscar Pedido',
                 'sku'                      => 'SKU',
+                'view'                     => 'Ver RMA',
             ],
         ],
 

@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\ReasonResolution;
-use Webkul\RMA\Helpers\Helper as RmaHelper;
+use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\{ReasonResolutionRepository, RMAReasonRepository, RMARepository};
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -19,7 +19,7 @@ use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\Mail\Customer\RMA\CustomerRmaRequestNotification;
+use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class RequestController extends Controller
 {
@@ -53,7 +53,7 @@ class RequestController extends Controller
         protected OrderRepository $orderRepository,
         protected ReasonResolutionRepository $reasonResolutionsRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
-        protected RmaHelper $rmaHelper,
+        protected RMAHelper $rmaHelper,
         protected RMAImageRepository $rmaImagesRepository,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
@@ -120,7 +120,7 @@ class RequestController extends Controller
             'order_id'          => $requestData['order_id'],
             'information'       => $requestData['information'] ?? null,
             'order_status'      => $requestData['order_status'],
-            'rma_status'        => self::PENDING,
+            'request_status'        => self::PENDING,
             'package_condition' => $requestData['package_condition'] ?? '',
         ]);
 
@@ -214,7 +214,7 @@ class RequestController extends Controller
 
         if ($rma->items) {
             try {
-                Mail::queue(new CustomerRmaRequestNotification($data));
+                Mail::queue(new CustomerRMARequestNotification($data));
 
             } catch (\Exception $e) {
                 \Log::error('Error in Sending Email'.$e->getMessage());

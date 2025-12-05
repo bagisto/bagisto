@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rma_rules', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->string('rule_description')->nullable();
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->boolean('status')->nullable();
             $table->string('exchange_period')->nullable();
             $table->string('return_period')->nullable();

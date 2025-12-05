@@ -12,12 +12,14 @@
 
         <!-- Create Button -->
         <div class="flex items-center gap-x-2.5">
-            <a
-                class="primary-button"
-                href="{{ route('admin.sales.rma.custom-field.create') }}"
-            >
-                @lang('admin::app.rma.sales.rma.custom-field.index.create-btn')
-            </a>
+            @if (bouncer()->hasPermission('sales.custom-field.create'))
+                <a
+                    class="primary-button"
+                    href="{{ route('admin.sales.rma.custom-field.create') }}"
+                >
+                    @lang('admin::app.rma.sales.rma.custom-field.index.create-btn')
+                </a>
+            @endif
         </div>
     </div>
 

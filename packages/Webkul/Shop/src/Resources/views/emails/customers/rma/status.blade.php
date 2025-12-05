@@ -24,7 +24,7 @@
                 <div style="font-size: 16px; font-weight: bold; color: #242424;">
                     @lang('shop::app.rma.mail.status.status') :
                     <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                       {{ $rmaStatus['rma_status'] }}
+                       {{ $rmaStatus['request_status'] }}
                     </span>
                 </div>
             </div>

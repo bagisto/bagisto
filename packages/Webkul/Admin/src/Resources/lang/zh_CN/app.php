@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'URL 重写',
         'users'                    => '用户',
         'view'                     => '查看',
+
+        'rma' => [
+            'create' => '创建',
+            'delete' => '删除',
+            'edit'   => '编辑',
+            'view'   => '查看',
+            'title'  => '退货授权 (RMA)',
+        ],
+
+        'rma-reason' => [
+            'create' => '创建',
+            'delete' => '删除',
+            'edit'   => '编辑',
+            'title'  => '退货原因',
+        ],
+
+        'rma-rules' => [
+            'delete' => '删除',
+            'edit'   => '编辑',
+            'title'  => '退货规则',
+        ],
+
+        'rma-status' => [
+            'delete' => '删除',
+            'edit'   => '编辑',
+            'title'  => '退货状态',
+        ],
+
+        'custom-field' => [
+            'create' => '创建',
+            'delete' => '删除',
+            'edit'   => '编辑',
+            'title'  => '自定义字段',
+        ],
     ],
 
     'errors' => [

@@ -1351,6 +1351,7 @@ return [
                 'save'                     => 'ذخیره',
                 'search-order'             => 'جستجوی سفارش',
                 'sku'                      => 'SKU',
+                'view'                     => 'مشاهده RMA',
             ],
         ],
 

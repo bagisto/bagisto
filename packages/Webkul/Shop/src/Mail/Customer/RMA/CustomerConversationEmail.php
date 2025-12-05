@@ -4,6 +4,9 @@ namespace Webkul\Shop\Mail\Customer\RMA;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
 class CustomerConversationEmail extends Mailable
@@ -11,34 +14,32 @@ class CustomerConversationEmail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The conversation data.
-     *
-     * @var array
+     * Create a new message instance.
      */
-    public $conversation;
+    public function __construct(public array $conversation) {}
 
     /**
-     * Create a new message instance.
-     *
-     * @param  array  $conversation
-     * @return void
+     * Get the message envelope.
      */
-    public function __construct($conversation)
+    public function envelope(): Envelope
     {
-        $this->conversation = $conversation;
+        $senderDetails = core()->getSenderEmailDetails();
+
+        return new Envelope(
+            from: new Address($senderDetails['email'], $senderDetails['name']),
+            to: [new Address($this->conversation['adminEmail'])],
+            subject: trans('shop::app.rma.mail.customer-conversation.subject'),
+        );
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message content definition.
      */
-    public function build()
+    public function content(): Content
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->conversation['adminEmail'])
-            ->subject( trans('shop::app.rma.mail.customer-conversation.subject') )
-            ->view('shop::emails.customers.rma.conversation.message')
-            ->with($this->conversation);
+        return new Content(
+            view: 'shop::emails.customers.rma.conversation.message',
+            with: $this->conversation,
+        );
     }
 }

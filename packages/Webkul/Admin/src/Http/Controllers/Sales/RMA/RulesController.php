@@ -36,9 +36,9 @@ class RulesController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'            => 'required',
-            'status'           => 'required|boolean',
-            'rule_description' => 'required',
+            'name'        => 'required',
+            'status'      => 'required|boolean',
+            'description' => 'required',
         ]);
 
         $this->rmaRulesRepository->create(request()->input());
@@ -70,9 +70,9 @@ class RulesController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'title'            => 'required',
+            'name'             => 'required',
             'status'           => 'required|boolean',
-            'rule_description' => 'required',
+            'description' => 'required',
         ]);
 
         $this->rmaRulesRepository->update(request()->except('_method', 'id'), request()->id);

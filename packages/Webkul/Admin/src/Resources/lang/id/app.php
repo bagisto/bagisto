@@ -5032,6 +5032,40 @@ return [
         'url-rewrites'             => 'Penulisan Ulang URL',
         'users'                    => 'Pengguna',
         'view'                     => 'Lihat',
+
+        'rma' => [
+            'create' => 'Buat',
+            'delete' => 'Hapus',
+            'edit'   => 'Edit',
+            'view'   => 'Lihat',
+            'title'  => 'RMA',
+        ],
+
+        'rma-reason' => [
+            'create' => 'Buat',
+            'delete' => 'Hapus',
+            'edit'   => 'Edit',
+            'title'  => 'Alasan RMA',
+        ],
+
+        'rma-rules' => [
+            'delete' => 'Hapus',
+            'edit'   => 'Edit',
+            'title'  => 'Aturan RMA',
+        ],
+
+        'rma-status' => [
+            'delete' => 'Hapus',
+            'edit'   => 'Edit',
+            'title'  => 'Status RMA',
+        ],
+
+        'custom-field' => [
+            'create' => 'Buat',
+            'delete' => 'Hapus',
+            'edit'   => 'Edit',
+            'title'  => 'Bidang Kustom',
+        ],
     ],
 
     'errors' => [
