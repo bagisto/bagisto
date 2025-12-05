@@ -167,7 +167,7 @@ class ChannelController extends Controller
         Event::dispatch('core.channel.update.after', $channel);
 
         if ($channel->base_currency->code !== session()->get('currency')) {
-            session()->put('currency', $channel->base_currency->code);
+            session()->forget('currency');
         }
 
         session()->flash('success', trans('admin::app.settings.channels.edit.update-success'));

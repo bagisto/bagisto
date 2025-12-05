@@ -908,7 +908,9 @@ class Cart
 
         $this->cart->base_grand_total = round($this->cart->base_grand_total, 2);
 
-        $this->cart->cart_currency_code = core()->getCurrentCurrencyCode();
+        if (! $this->cart->cart_currency_code) {
+            $this->cart->cart_currency_code = core()->getCurrentCurrencyCode();
+        }
 
         $this->cart->save();
 
