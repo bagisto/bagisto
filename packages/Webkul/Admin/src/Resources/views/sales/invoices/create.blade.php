@@ -56,6 +56,10 @@
                     <x-slot:content class="!p-0">
                         <div class="grid p-4 !pt-0">
                             @foreach ($order->items as $item)
+                                @php
+                                    $canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRMAStatus($item->id);
+                                @endphp
+
                                 @if ($item->qty_to_invoice)
                                     <div class="flex justify-between gap-2.5 border-b border-slate-300 py-4 dark:border-gray-800">
                                         <div class="flex gap-2.5">
@@ -130,7 +134,7 @@
                                                     :id="'invoice[items][' . $item->id . ']'"
                                                     :name="'invoice[items][' . $item->id . ']'"
                                                     rules="required|numeric|min:0"
-                                                    :value="$item->qty_to_invoice"
+                                                    :value="$canShipQty['qty'] - $item->qty_invoiced"
                                                     :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
                                                     :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
                                                 />
@@ -138,6 +142,10 @@
                                                 <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
                                             </x-admin::form.control-group>
                                         </div>
+                                        
+                                        @if ($canShipQty['message'])
+                                            <p class="mt-1 text-xs italic text-red-600">{{ $canShipQty['message'] }}</p>
+                                        @endif
                                     </div>
                                 @endif
                             @endforeach

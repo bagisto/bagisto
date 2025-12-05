@@ -92,6 +92,7 @@
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
+            "Webkul\\RMA\\": "packages/Webkul/RMA/src",
             "Webkul\\Razorpay\\": "packages/Webkul/Razorpay/src",
             "Webkul\\Rule\\": "packages/Webkul/Rule/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",

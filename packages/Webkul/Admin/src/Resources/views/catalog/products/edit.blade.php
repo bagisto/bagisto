@@ -165,6 +165,18 @@
                             @continue
                         @endif
 
+                        @if ($group->code === 'rma')
+                            @if (
+                                ! in_array($product->type, explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type'))) 
+                                && (
+                                    $product->type != 'simple' 
+                                    && empty($product->parent_id)
+                                )
+                            )
+                                @continue
+                            @endif
+                        @endif
+
                         @if ($customAttributes->isNotEmpty())
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
@@ -213,7 +225,7 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
-                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')
+                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')                                
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
