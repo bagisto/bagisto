@@ -17,10 +17,10 @@ class SmartButtonController extends Controller
      * @return void
      */
     public function __construct(
-        protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
+        protected SmartButton $smartButton,
     ) {}
 
     /**

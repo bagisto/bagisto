@@ -5,9 +5,7 @@ namespace Webkul\Razorpay\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Razorpay\Enums\PaymentStatus;
 use Webkul\Razorpay\Payment\RazorpayPayment;
-use Webkul\Razorpay\Repositories\RazorpayTransactionRepository;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -18,11 +16,15 @@ use Webkul\Sales\Transformers\OrderResource;
 class RazorpayController extends Controller
 {
     /**
+     * Payment captured constant.
+     */
+    public const PAYMENT_CAPTURED = 'captured';
+
+    /**
      * Create a new controller instance.
      */
     public function __construct(
         protected RazorpayPayment $razorpayPayment,
-        protected RazorpayTransactionRepository $razorpayTransactionRepository,
         protected OrderRepository $orderRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
@@ -56,13 +58,6 @@ class RazorpayController extends Controller
             $razorpayOrder = $this->razorpayPayment->createOrder($cart);
 
             $payment = $this->razorpayPayment->preparePaymentData($cart, $razorpayOrder);
-
-            $this->razorpayTransactionRepository->create([
-                'cart_id'                 => $cart->id,
-                'razorpay_receipt'        => RazorpayPayment::RECEIPT_PREFIX.$cart->id,
-                'razorpay_order_id'       => $razorpayOrder['id'],
-                'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
-            ]);
 
             return view('razorpay::drop-in-ui', compact('payment'));
         } catch (\Throwable $e) {
@@ -123,7 +118,7 @@ class RazorpayController extends Controller
     /**
      * Payment fail.
      */
-    public function paymentFail(Request $request): \Illuminate\Http\RedirectResponse
+    public function paymentFail(): \Illuminate\Http\RedirectResponse
     {
         session()->flash('error', trans('razorpay::app.response.payment.cancelled'));
 
@@ -136,18 +131,6 @@ class RazorpayController extends Controller
     protected function handlePaymentError(Request $request): \Illuminate\Http\RedirectResponse
     {
         $errorDescription = $request->input('error.description', trans('razorpay::app.response.something-went-wrong'));
-
-        $razorpayOrderId = $request->input('error.metadata.order_id') ?? $request->input('razorpay_order_id');
-
-        if ($razorpayOrderId) {
-            $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere(['razorpay_order_id' => $razorpayOrderId]);
-
-            if ($razorpayTransaction) {
-                $this->razorpayTransactionRepository->update([
-                    'razorpay_invoice_status' => PaymentStatus::PAYMENT_ERROR,
-                ], $razorpayTransaction->id);
-            }
-        }
 
         session()->flash('error', $errorDescription);
 
@@ -180,7 +163,7 @@ class RazorpayController extends Controller
 
             $this->orderTransactionRepository->create([
                 'transaction_id' => $request->input('razorpay_payment_id'),
-                'status'         => PaymentStatus::CAPTURED,
+                'status'         => self::PAYMENT_CAPTURED,
                 'type'           => $order->payment->method,
                 'payment_method' => $order->payment->method,
                 'order_id'       => $order->id,
@@ -193,8 +176,6 @@ class RazorpayController extends Controller
                 ]),
             ]);
 
-            $this->updateRazorpayTransaction($request);
-
             Cart::deActivateCart();
 
             session()->flash('order_id', $order->id);
@@ -206,41 +187,6 @@ class RazorpayController extends Controller
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
 
             return redirect()->route('shop.checkout.cart.index');
-        }
-    }
-
-    /**
-     * Update Razorpay transaction after successful payment.
-     */
-    protected function updateRazorpayTransaction(Request $request): void
-    {
-        try {
-            $razorpayTransaction = $this->razorpayTransactionRepository->findOneWhere([
-                'razorpay_order_id' => $request->input('razorpay_order_id'),
-            ]);
-
-            if (! $razorpayTransaction) {
-                return;
-            }
-
-            $updateData = [
-                'razorpay_payment_id' => $request->input('razorpay_payment_id'),
-                'razorpay_signature'  => $request->input('razorpay_signature'),
-            ];
-
-            try {
-                $payment = $this->razorpayPayment->fetchPayment($request->input('razorpay_payment_id'));
-
-                $updateData['razorpay_invoice_status'] = PaymentStatus::tryFrom($payment->status) ?? PaymentStatus::CAPTURED;
-            } catch (\Throwable $e) {
-                $updateData['razorpay_invoice_status'] = PaymentStatus::CAPTURED;
-
-                report($e);
-            }
-
-            $this->razorpayTransactionRepository->update($updateData, $razorpayTransaction->id);
-        } catch (\Throwable $e) {
-            report($e);
         }
     }
 
