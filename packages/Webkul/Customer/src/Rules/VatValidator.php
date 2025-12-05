@@ -61,6 +61,11 @@ class VatValidator
                 return false;
             }
 
+            // Ensure the provided form country is supported before using it
+            if (! isset(self::$pattern_expression[$formCountry])) {
+                return false;
+            }
+
             $country = $formCountry;
             $number = $vatNumber;
         }
