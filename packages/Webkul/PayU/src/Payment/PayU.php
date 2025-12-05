@@ -138,7 +138,8 @@ class PayU extends Payment
             'surl'         => route('payu.success'),
             'furl'         => route('payu.failure'),
             'curl'         => route('payu.cancel'),
-            'hash'         => $this->generateHash($txnid, $amount, $productInfo, $firstname, $email),
+            'hash'         => $this->generateHash($txnid, $amount, $productInfo, $firstname, $email, $cart->id),
+            'udf1'         => $cart->id,
         ];
     }
 
@@ -150,11 +151,12 @@ class PayU extends Payment
      * @param  string  $productInfo
      * @param  string  $firstname
      * @param  string  $email
+     * @param  string  $udf1
      * @return string
      */
-    public function generateHash($txnid, $amount, $productInfo, $firstname, $email)
+    public function generateHash($txnid, $amount, $productInfo, $firstname, $email, $udf1 = '')
     {
-        $hashString = $this->getMerchantKey().'|'.$txnid.'|'.$amount.'|'.$productInfo.'|'.$firstname.'|'.$email.'|||||||||||'.$this->getMerchantSalt();
+        $hashString = $this->getMerchantKey().'|'.$txnid.'|'.$amount.'|'.$productInfo.'|'.$firstname.'|'.$email.'|'.$udf1.'||||||||||'.$this->getMerchantSalt();
 
         return strtolower(hash('sha512', $hashString));
     }
@@ -173,9 +175,10 @@ class PayU extends Payment
         $key = $response['key'] ?? '';
         $productInfo = $response['productinfo'] ?? '';
         $email = $response['email'] ?? '';
+        $udf1 = $response['udf1'] ?? '';
         $receivedHash = $response['hash'] ?? '';
 
-        $hashString = $this->getMerchantSalt().'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productInfo.'|'.$amount.'|'.$txnid.'|'.$key;
+        $hashString = $this->getMerchantSalt().'|'.$status.'||||||||||'.$udf1.'|'.$email.'|'.$firstname.'|'.$productInfo.'|'.$amount.'|'.$txnid.'|'.$key;
 
         $calculatedHash = strtolower(hash('sha512', $hashString));
 
