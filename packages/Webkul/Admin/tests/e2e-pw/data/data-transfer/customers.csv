@@ -1,0 +1,4 @@
+email,customer_group_code,first_name,last_name,phone,date_of_birth,gender
+john@example.com,wholesale,John,Doe,,1991-05-15,Male
+jane@example.com,general,Jane,Smith,,1991-05-15,Female
+robert@example.com,general,Robert,Johnson,,1990-11-26,Male

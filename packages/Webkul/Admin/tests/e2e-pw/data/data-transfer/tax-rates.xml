@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tax_rates>
+    <tax_rate
+        identifier="US-CA-*-RATE-1"
+        is_zip_range="0"
+        zip_code="*"
+        zip_from=""
+        zip_to=""
+        state="CA"
+        country="US"
+        tax_rate="18.00"
+    />
+    <tax_rate
+        identifier="US-CO-*-RATE-2"
+        is_zip_range="0"
+        zip_code="*"
+        zip_from=""
+        zip_to=""
+        state="CO"
+        country="US"
+        tax_rate="18.00"
+    />
+</tax_rates>
