@@ -87,7 +87,7 @@ it('creates payu transaction and returns redirect view', function () {
     $response->assertViewIs('payu::checkout.redirect');
 
     $response->assertViewHas('paymentUrl');
-    
+
     $response->assertViewHas('paymentData');
 
     // Verify transaction was created

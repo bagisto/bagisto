@@ -39,7 +39,7 @@
         "mpdf/mpdf": "^8.2",
         "nesbot/carbon": "^2.72.2",
         "openai-php/laravel": "^0.10.1",
-        "paypal/paypal-checkout-sdk": "1.0.1",
+        "paypal/paypal-server-sdk": "^2.0",
         "pragmarx/google2fa": "^8.0",
         "predis/predis": "^2.2",
         "prettus/l5-repository": "^2.6",

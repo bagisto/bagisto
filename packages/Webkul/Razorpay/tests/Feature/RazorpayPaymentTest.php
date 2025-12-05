@@ -70,7 +70,7 @@ it('redirects back when cart is not found', function () {
 
     // Assert
     $response->assertRedirect();
-    
+
     $response->assertSessionHas('error');
 });
 
