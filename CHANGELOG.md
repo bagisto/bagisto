@@ -13,3 +13,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Added Razorpay payment gateway integration with drop-in UI checkout experience.
 
 * Added PayU payment gateway integration with redirect-based checkout flow.
+
+* Upgraded PayPal SDK from abandoned v1 to modern v2 with improved reliability and security. Refactored PayPal integration to use controller-based transaction handling and modernized IPN processing with Laravel HTTP client.
+ 

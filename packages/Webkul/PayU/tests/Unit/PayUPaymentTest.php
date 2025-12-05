@@ -301,7 +301,7 @@ it('verifies hash from PayU response correctly', function () {
     ];
 
     $hashString = 'TEST_SALT|success|||||||||||john@example.com|John|Test Product|100.50|TXN123|TEST_KEY';
-    
+
     $response['hash'] = strtolower(hash('sha512', $hashString));
 
     // Act
