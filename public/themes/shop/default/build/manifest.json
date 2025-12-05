@@ -71,8 +71,12 @@
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
   },
+  "src/Resources/assets/images/payu.png": {
+    "file": "assets/payu-Lrh50Ekl.png",
+    "src": "src/Resources/assets/images/payu.png"
+  },
   "src/Resources/assets/images/razorpay.png": {
-    "file": "assets/razorpay-2G6hAkLu.png",
+    "file": "assets/razorpay-Cbr80qFP.png",
     "src": "src/Resources/assets/images/razorpay.png"
   },
   "src/Resources/assets/images/review.png": {
@@ -86,6 +90,10 @@
   "src/Resources/assets/images/spinner.svg": {
     "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
+  },
+  "src/Resources/assets/images/stripe.png": {
+    "file": "assets/stripe-WsnmAxt1.png",
+    "src": "src/Resources/assets/images/stripe.png"
   },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-mhMpuEVL.png",

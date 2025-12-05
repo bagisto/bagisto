@@ -33,6 +33,10 @@
         name="currency"
         content="{{ core()->getBaseCurrency()->toJson() }}"
     >
+    <meta 
+        name="generator" 
+        content="Bagisto"
+    >
 
     @stack('meta')
 

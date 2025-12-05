@@ -8,4 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise for enhanced bot protection.
 
+* Added Stripe payment gateway integration with secure checkout session.
+
 * Added Razorpay payment gateway integration with drop-in UI checkout experience.
+
+* Added PayU payment gateway integration with redirect-based checkout flow.

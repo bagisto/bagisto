@@ -21,12 +21,7 @@ class TransactionResource extends JsonResource
             'payment_title'   => $this->payment_title,
             'amount'          => core()->formatPrice($this->amount),
             'invoice_id'      => $this->invoice_id,
-            'status'          => match ($this->status) {
-                'paid'      => '<span class="label-active">'.ucfirst($this->status).'</span>',
-                'pending'   => '<span class="label-pending">'.ucfirst($this->status).'</span>',
-                'completed' => '<span class="label-active">'.ucfirst($this->status).'</span>',
-                default     => $this->status,
-            },
+            'status'          => $this->status,
             'created_at'      => $this->created_at->format('d M Y'),
         ];
     }

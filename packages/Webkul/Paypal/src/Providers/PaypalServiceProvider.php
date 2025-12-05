@@ -40,7 +40,7 @@ class PaypalServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/paymentmethods.php', 'payment_methods'
+            dirname(__DIR__).'/Config/payment-methods.php', 'payment_methods'
         );
     }
 }

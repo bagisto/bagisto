@@ -164,7 +164,7 @@ class Core
     /**
      * Returns current channel code.
      */
-    public function getCurrentChannelCode(): string
+    public function getCurrentChannelCode(): ?string
     {
         return $this->getCurrentChannel()?->code;
     }
@@ -200,7 +200,7 @@ class Core
     /**
      * Returns the default channel code configured in `config/app.php`.
      */
-    public function getDefaultChannelCode(): string
+    public function getDefaultChannelCode(): ?string
     {
         return $this->getDefaultChannel()?->code;
     }
