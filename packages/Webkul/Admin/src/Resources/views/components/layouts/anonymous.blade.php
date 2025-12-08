@@ -74,6 +74,7 @@
 <body>
     {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
+    <!-- Built With Bagisto -->
     <div id="app">
         <!-- Flash Message Blade Component -->
         <x-admin::flash-group />
