@@ -94,7 +94,7 @@ class ImportController extends Controller
 
         $file = request()->file('file');
         $safeFilename = uniqid().'_'.hash('sha256', $file->getClientOriginalName());
-        $extension = $file->guessExtension();
+        $extension = strtolower($file->getClientOriginalExtension());
 
         $import = $this->importRepository->create(
             array_merge(
@@ -186,7 +186,7 @@ class ImportController extends Controller
             && $file->isValid()
         ) {
             $safeFilename = uniqid().'_'.hash('sha256', $file->getClientOriginalName());
-            $extension = $file->guessExtension();
+            $extension = strtolower($file->getClientOriginalExtension());
 
             Storage::disk('private')->delete($import->file_path);
 
