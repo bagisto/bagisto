@@ -1,0 +1,3 @@
+identifier,is_zip_range,zip_code,zip_from,zip_to,state,country,tax_rate
+US-CA-*-RATE-1,0,*,"","",CA,US,18.00
+US-CO-*-RATE-2,0,*,"","",CO,US,18.00
