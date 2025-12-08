@@ -18,6 +18,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10899 [fixed] - Fixed a validation error that occurred while importing CSV files in Data Transfer.
 
+* #10866 [fixed] - Fixed the issue where filterable options on the theme page were not appearing.
+
 ## **v2.3.8 (16th of October 2025)** - *Release*
 
 * Improved octane compatibility.
