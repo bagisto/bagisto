@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Soon.
+
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.
