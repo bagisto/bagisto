@@ -53,6 +53,7 @@ class PageController extends Controller
             'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Rules\Slug],
             'page_title'   => 'required',
             'html_content' => 'required',
+            'channels'     => 'required|array|min:1',
         ]);
 
         Event::dispatch('cms.page.create.before');
@@ -103,6 +104,7 @@ class PageController extends Controller
             }],
             $locale.'.page_title'     => 'required',
             $locale.'.html_content'   => 'required',
+            'channels'                => 'required|array|min:1',
         ]);
 
         Event::dispatch('cms.page.update.before', $id);
