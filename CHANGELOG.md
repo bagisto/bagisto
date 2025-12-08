@@ -4,9 +4,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
-* Meta tag and header added for Bagisto.
+* Meta tag, comment and header added for Bagisto.
 
 * #11035 [fixed] - Fixed an issue where an exception occurred when saving a CMS page without selecting a channel.
+
+* #11014 [fixed] - Fixed the wishlist icon issue on the product view page caused by Full Page Cache (FPC).
 
 * #11011 [fixed] - Added missing translation for the Customer Group delete response message.
 

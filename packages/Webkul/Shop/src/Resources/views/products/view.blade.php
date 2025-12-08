@@ -472,7 +472,7 @@
 
                 data() {
                     return {
-                        isWishlist: Boolean("{{ (boolean) auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}"),
+                        isWishlist: false,
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
@@ -484,6 +484,10 @@
                             buyNow: false,
                         },
                     }
+                },
+
+                mounted() {
+                    this.checkWishlistStatus();
                 },
 
                 methods: {
@@ -521,6 +525,27 @@
 
                                 this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
                             });
+                    },
+
+                    checkWishlistStatus() {
+                        if (this.isCustomer) {
+                            /**
+                             * Fetches the wishlist items for the customer and checks whether the current
+                             * product exists in the wishlist. If found, `isWishlist` is set to true;
+                             * otherwise, it is set to false.
+                             *
+                             * This approach is used due to Full Page Cache (FPC) limitations. We cannot
+                             * use a replacer here because `product_id` is dynamic, and the replacer
+                             * cannot reliably detect it.
+                             */
+                            this.$axios.get('{{ route('shop.api.customers.account.wishlist.index') }}')
+                                .then(response => {
+                                    const wishlistItems = response.data.data || [];
+
+                                    this.isWishlist = Boolean(wishlistItems.find(item => item.product.id == "{{ $product->id }}")?.product?.is_wishlist);
+                                })
+                                .catch(error => {});
+                        }
                     },
 
                     addToWishlist() {
