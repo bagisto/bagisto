@@ -2,6 +2,19 @@
     <x-admin::shimmer.settings.themes.product-carousel />
 </v-product-carousel>
 
+@php
+    $filterableAttributes = app(Webkul\Attribute\Repositories\AttributeRepository::class)
+        ->with([
+            'options' => function ($query) {
+                $query->orderBy('sort_order');
+            },
+            'options.translation' => function ($q) {
+                $q->where('locale', core()->getCurrentLocale()->code);
+            },
+        ])
+        ->getFilterableAttributes();
+@endphp
+
 <!-- Product Carousel Vue Component -->
 @pushOnce('scripts')
     <script
@@ -334,7 +347,7 @@
                                 type: 'text',
                                 name: '@lang('admin::app.settings.themes.edit.category-id')',
                             },
-                            ...@json(app(Webkul\Attribute\Repositories\AttributeRepository::class)->getFilterableAttributes()),
+                            ...@json($filterableAttributes),
                         ],
 
                         applied: [],

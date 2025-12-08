@@ -252,7 +252,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Select Channels -->
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.create.channels')
                         </x-admin::form.control-group.label>
 
@@ -262,6 +262,7 @@
                                     type="checkbox"
                                     :id="'channels_' . $channel->id"
                                     name="channels[]"
+                                    rules="required"
                                     :value="$channel->id"
                                     :for="'channels_' . $channel->id"
                                     :label="trans('admin::app.cms.create.channels')"
