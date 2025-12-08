@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #11011 [fixed] - Added missing translation for the Customer Group delete response message.
 
+* #11010 [fixed] - Fixed the CAPTCHA configuration issue that allowed saving settings without the site key or secret key.
+
 * #10985 [fixed] - Fixed an issue in CustomerGroupPrice where deleting any group discount incorrectly removed the last discount entry instead of the selected one.
 
 * #10899 [fixed] - Fixed a validation error that occurred while importing CSV files in Data Transfer.

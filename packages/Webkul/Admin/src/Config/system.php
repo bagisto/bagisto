@@ -1226,20 +1226,27 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'site_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
-                'name'          => 'secret_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
                 'name'          => 'status',
                 'title'         => 'admin::app.configuration.index.customer.captcha.credentials.status',
                 'type'          => 'boolean',
                 'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'site_key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
+                'type'          => 'text',
+                'depends'       => 'status:true',
+                'validation'    => 'required_if:status,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'secret_key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
+                'type'          => 'text',
+                'depends'       => 'status:true',
+                'validation'    => 'required_if:status,1',
+                'channel_based' => true,
+                'locale_based'  => false,
             ],
         ],
     ], [
