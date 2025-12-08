@@ -11,7 +11,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.csv',
@@ -27,7 +27,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.csv',
@@ -43,7 +43,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xls',
@@ -59,7 +59,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xls',
@@ -75,7 +75,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xlsx',
@@ -91,7 +91,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xlsx',
@@ -107,7 +107,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xml',
@@ -123,7 +123,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'products',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'products.xml',
@@ -140,7 +140,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.csv',
@@ -155,7 +155,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.csv',
@@ -170,7 +170,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xls',
@@ -185,7 +185,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xls',
@@ -200,7 +200,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xlsx',
@@ -215,7 +215,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xlsx',
@@ -230,7 +230,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xml',
@@ -245,7 +245,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'customers',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'customers.xml',
@@ -260,7 +260,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.csv',
@@ -275,7 +275,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.csv',
@@ -290,7 +290,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xls',
@@ -305,7 +305,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xls',
@@ -320,7 +320,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xlsx',
@@ -335,7 +335,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xlsx',
@@ -350,7 +350,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'append',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xml',
@@ -365,7 +365,7 @@ test.describe("check the data transfer flow", () => {
         await dataTransfer.DataTransfer(
             'tax_rates',
             'delete',
-            'skip-erros',
+            'skip-errors',
             '10',
             ',',
             'tax-rates.xml',
