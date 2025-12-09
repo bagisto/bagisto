@@ -2,7 +2,7 @@
 
 return [
     'description' => 'PayU üzerinden kredi kartı, banka kartı, internet bankacılığı, UPI ve cüzdanlar kullanarak güvenli ödeme yapın',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Devam etmek için buraya tıklayın',

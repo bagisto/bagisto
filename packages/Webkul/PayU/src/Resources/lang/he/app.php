@@ -2,7 +2,7 @@
 
 return [
     'description' => 'שלם בצורה מאובטחת באמצעות כרטיס אשראי, כרטיס חיוב, בנקאות מקוונת, UPI וארנקים דרך PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'לחץ כאן כדי להמשיך',

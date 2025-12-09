@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Оплачивайте безопасно с помощью кредитной карты, дебетовой карты, онлайн-банкинга, UPI и кошельков через PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Нажмите здесь, чтобы продолжить',
