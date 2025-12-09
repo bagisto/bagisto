@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Webkul\Admin\DataGrids\Sales\RMA\ReasonDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\{MassDestroyRequest,MassUpdateRequest};
-use Webkul\RMA\Repositories\ReasonResolutionRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
 use Webkul\RMA\Repositories\RMAReasonRepository;
 
 class ReasonController extends Controller
@@ -18,7 +18,7 @@ class ReasonController extends Controller
      * @return void
      */
     public function __construct(
-        protected ReasonResolutionRepository $reasonResolutionsRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAReasonRepository $rmaReasonRepository,
     ) {
     }
@@ -48,7 +48,7 @@ class ReasonController extends Controller
 
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
-        array_map(fn($resolutionType) => $this->reasonResolutionsRepository->create([
+        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->create([
             'rma_reason_id'   => $rmaReason->id,
             'resolution_type' => $resolutionType,
         ]), request()->resolution_type);
@@ -91,13 +91,13 @@ class ReasonController extends Controller
 
         $resolutionTypes = request()->resolution_type ?? [];
 
-        $existResolution = $this->reasonResolutionsRepository->where('rma_reason_id', $rmaReason->id)->get();
+        $existResolution = $this->rmaReasonResolutionsRepository->where('rma_reason_id', $rmaReason->id)->get();
 
         if (! empty($existResolution)) {
-            $this->reasonResolutionsRepository->whereNotIn('resolution_type', $resolutionTypes)->where('rma_reason_id', $rmaReason->id)->delete();
+            $this->rmaReasonResolutionsRepository->whereNotIn('resolution_type', $resolutionTypes)->where('rma_reason_id', $rmaReason->id)->delete();
         }
 
-        array_map(fn($resolutionType) => $this->reasonResolutionsRepository->updateOrCreate([
+        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->updateOrCreate([
             'rma_reason_id'   => $rmaReason->id,
             'resolution_type' => $resolutionType,
         ]), $resolutionTypes);

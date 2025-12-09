@@ -31,6 +31,6 @@ class RMAReason extends Model implements RMAReasonContract
      */
     public function reasonResolutions(): HasMany
     {
-        return $this->hasMany(ReasonResolutions::class, 'rma_reason_id');
+        return $this->hasMany(RMAReasonResolution::class, 'rma_reason_id');
     }
 }

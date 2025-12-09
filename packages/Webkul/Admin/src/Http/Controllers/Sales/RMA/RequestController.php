@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\RMA\Contracts\ReasonResolution;
+use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
-use Webkul\RMA\Repositories\{ReasonResolutionRepository, RMAReasonRepository, RMARepository};
+use Webkul\RMA\Repositories\{RMAReasonResolutionRepository, RMAReasonRepository, RMARepository};
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
@@ -51,7 +51,7 @@ class RequestController extends Controller
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
         protected OrderRepository $orderRepository,
-        protected ReasonResolutionRepository $reasonResolutionsRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
         protected RMAHelper $rmaHelper,
         protected RMAImageRepository $rmaImagesRepository,
@@ -243,9 +243,9 @@ class RequestController extends Controller
     /**
      * Get reason for resolution.
      */
-    public function getResolutionReason(string $resolutionType): ReasonResolution|Collection
+    public function getResolutionReason(string $resolutionType): RMAReasonResolution|Collection
     {
-        $existResolutions = $this->reasonResolutionsRepository
+        $existResolutions = $this->rmaReasonResolutionsRepository
                                 ->where('resolution_type', $resolutionType)
                                 ->pluck('rma_reason_id');
 

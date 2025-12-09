@@ -2,4 +2,4 @@
 
 namespace Webkul\RMA\Contracts;
 
-interface ReasonResolution {}
+interface RMAReasonResolution {}

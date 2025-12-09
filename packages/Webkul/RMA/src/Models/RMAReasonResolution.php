@@ -3,9 +3,9 @@
 namespace Webkul\RMA\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\RMA\Contracts\ReasonResolution as ReasonResolutionContract;
+use Webkul\RMA\Contracts\RMAReasonResolution as RMAReasonResolutionContract;
 
-class ReasonResolution extends Model implements ReasonResolutionContract
+class RMAReasonResolution extends Model implements RMAReasonResolutionContract
 {
     /**
      * The table associated with the model.

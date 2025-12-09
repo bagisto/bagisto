@@ -10,7 +10,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
      * Define the models provided by this module
      */
     protected $models = [
-        \Webkul\RMA\Models\ReasonResolution::class,
+        \Webkul\RMA\Models\RMAReasonResolution::class,
         \Webkul\RMA\Models\RMA::class,
         \Webkul\RMA\Models\RMAAdditionalField::class,
         \Webkul\RMA\Models\RMACustomField::class,

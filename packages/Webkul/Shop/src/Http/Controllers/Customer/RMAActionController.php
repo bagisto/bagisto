@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\Shop\Mail\Customer\RMA\CustomerConversationEmail;
-use Webkul\RMA\Repositories\{ReasonResolutionRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
+use Webkul\RMA\Repositories\{RMAReasonResolutionRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 
@@ -64,7 +64,7 @@ class RMAActionController extends Controller
      */
     public function __construct(
         protected OrderRepository $orderRepository,
-        protected ReasonResolutionRepository $reasonResolutionsRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAHelper $rmaHelper,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
@@ -85,7 +85,7 @@ class RMAActionController extends Controller
      */
     public function getResolutionReason(mixed $resolutionType): RMAReason|Collection
     {
-        $existResolutions = $this->reasonResolutionsRepository->where('resolution_type', $resolutionType)->pluck('rma_reason_id');
+        $existResolutions = $this->rmaReasonResolutionsRepository->where('resolution_type', $resolutionType)->pluck('rma_reason_id');
 
         return $this->rmaReasonRepository->whereIn('id', $existResolutions)->where('status', self::ACTIVE)->get();
     }

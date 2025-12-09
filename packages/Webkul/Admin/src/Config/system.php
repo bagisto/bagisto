@@ -3092,11 +3092,11 @@ return [
             [
                 'name'          => 'default_allow_days',
                 'title'         => 'admin::app.configuration.index.sales.rma.default-allow-days',
+                'info'          => 'admin::app.configuration.index.sales.rma.days-info',
                 'type'          => 'text',
                 'validation'    => 'required|numeric',
                 'channel_based' => true,
                 'locale_based'  => false,
-                'info'          => 'admin::app.configuration.index.sales.rma.days-info',
             ], [
                 'name'          => 'return_policy',
                 'title'         => 'admin::app.configuration.index.sales.rma.return-policy',
@@ -3196,7 +3196,6 @@ return [
                         'value' => 'grouped',
                     ],
                 ],
-
                 'channel_based' => true,
                 'locale_based'  => false,
             ],

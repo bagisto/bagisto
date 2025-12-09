@@ -3,15 +3,15 @@
 namespace Webkul\RMA\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\RMA\Contracts\ReasonResolution;
+use Webkul\RMA\Contracts\RMAReasonResolution;
 
-class ReasonResolutionRepository extends Repository
+class RMAReasonResolutionRepository extends Repository
 {
     /**
      * Specify model class name
      */
     public function model(): string
     {
-        return ReasonResolution::class;
+        return RMAReasonResolution::class;
     }
 }

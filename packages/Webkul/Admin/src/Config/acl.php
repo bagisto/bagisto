@@ -129,12 +129,12 @@ return [
         'key'   => 'sales.rma-reason.edit',
         'name'  => 'admin::app.acl.rma-reason.edit',
         'route' => 'admin.sales.rma.reason.edit',
-        'sort'  => 2,
+        'sort'  => 1,
     ], [
         'key'   => 'sales.rma-reason.delete',
         'name'  => 'admin::app.acl.rma-reason.delete',
         'route' => 'admin.sales.rma.reason.delete',
-        'sort'  => 3,
+        'sort'  => 2,
     ], [
         'key'   => 'sales.rma-rules',
         'name'  => 'admin::app.acl.rma-rules.title',
