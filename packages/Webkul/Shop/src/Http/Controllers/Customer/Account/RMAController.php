@@ -6,8 +6,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAImageRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
-use Webkul\Sales\Repositories\{OrderRepository, OrderItemRepository};
+use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
+use Webkul\RMA\Repositories\RMAImageRepository;
+use Webkul\RMA\Repositories\RMAItemRepository;
+use Webkul\RMA\Repositories\RMAMessageRepository;
+use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMARepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\RMA\CustomerRMADataGrid;
 use Webkul\Shop\DataGrids\RMA\OrderRMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -96,7 +102,7 @@ class RMAController extends Controller
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
-            'images.*'        => 'nullable|file|mimetypes:' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $data = request()->only([
@@ -123,12 +129,12 @@ class RMAController extends Controller
         }
 
         $rma = $this->rmaRepository->create([
-            'status'            => '',
-            'order_id'          => $data['order_id'],
-            'information'       => $data['information'] ?? null,
-            'order_status'      => $data['order_status'] ?? 0,
+            'status'                => '',
+            'order_id'              => $data['order_id'],
+            'information'           => $data['information'] ?? null,
+            'order_status'          => $data['order_status'] ?? 0,
             'request_status'        => self::PENDING,
-            'package_condition' => $data['package_condition'] ?? '',
+            'package_condition'     => $data['package_condition'] ?? '',
         ]);
 
         $data['order_items'] = [];

@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'ID замовлення',
             'title'       => 'Вхід для гостей',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'Додаткова інформація :',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'Резюме повернення товару замовлення',
                 'thank-you'              => 'Дякуємо',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'Назва продукту',
                 'qty'          => 'Кількість',
                 'reason'       => 'Причина',
                 'sku'          => 'Артикул (SKU)',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'Нове повідомлення',
                 'heading' => 'Шановний(а) :name,',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => 'Є нове повідомлення від покупця',
                 'solved'  => 'Статус RMA було змінено на Вирішено клієнтом.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'Нове повідомлення',
                 'heading' => 'Шановний(а) :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'Є нове повідомлення від адміністратора',
                 'title'   => 'Отримано повідомлення!',
             ],
-    
+
             'status' => [
                 'heading'       => 'Шановний(а) :name',
                 'quotes'        => 'Статус вашого запиту на повернення товару (RMA) змінено продавцем',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'Ваш ідентифікатор RMA',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'Прийняти',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'Отримано пакет',
                 'solved'                   => 'Вирішено',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'Запит на повернення товару (RMA) відхилено адміністратором.',
                 'declined-buyer'  => 'Запит на повернення товару (RMA) відхилено покупцем.',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'Запит на повернення товару (RMA) вирішено.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'Статус RMA вже скасовано.',
             'cancel-success'    => 'Статус RMA було успішно скасовано.',

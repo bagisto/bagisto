@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids\Sales\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class RulesDataGrid extends DataGrid
@@ -26,7 +26,7 @@ class RulesDataGrid extends DataGrid
         $queryBuilder = DB::table('rma_rules');
 
         $this->addFilter('id', 'rma_rules.id');
-        
+
         return $queryBuilder;
     }
 

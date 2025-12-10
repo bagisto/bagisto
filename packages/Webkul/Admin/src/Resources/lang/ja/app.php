@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => '保留中の注文に対する新しいRMAリクエストを許可する',
                         'allow-rma-for-digital-product'       => 'デジタル製品のRMAを許可する',
                         'allowed-file-extension'              => '許可されているファイル拡張子',
-                        'allowed-file-types'                  => 'ファイルタイプ ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' のみを選択してください',
+                        'allowed-file-types'                  => 'ファイルタイプ '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' のみを選択してください',
                         'allowed-info'                        => 'コンマで区切る。例えば: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'キャンセルされたリクエストの新しいRMAリクエストを許可する',
                         'allowed-request-declined-request'    => '拒否されたリクエストの新しいRMAリクエストを許可する',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMAが作成されました。',
-                    'rma-created-message'  => '製品の :qty 数量についてRMAリクエストが利用可能です'
+                    'rma-created-message'  => '製品の :qty 数量についてRMAリクエストが利用可能です',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => '作成',
-            'reason-title'     => '理由',
-            'rma-title'        => '返品',
+                'create-rma-title' => '作成',
+                'reason-title'     => '理由',
+                'rma-title'        => '返品',
             ],
         ],
 

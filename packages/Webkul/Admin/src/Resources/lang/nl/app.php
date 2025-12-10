@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'Sta een nieuw RMA-verzoek toe voor een lopende bestelling',
                         'allow-rma-for-digital-product'       => 'Sta RMA toe voor digitaal product',
                         'allowed-file-extension'              => 'Toegestane bestandsextensie',
-                        'allowed-file-types'                  => 'Selecteer alleen de bestandstypen ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => 'Selecteer alleen de bestandstypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => 'Gescheiden door komma’s. Bijvoorbeeld: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'Sta een nieuw RMA-verzoek toe voor geannuleerd verzoek',
                         'allowed-request-declined-request'    => 'Sta een nieuw RMA-verzoek toe voor afgewezen verzoek',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA is succesvol aangemaakt',
-                    'rma-created-message'  => 'Een RMA-aanvraag is beschikbaar voor het product met een hoeveelheid van :qty'
+                    'rma-created-message'  => 'Een RMA-aanvraag is beschikbaar voor het product met een hoeveelheid van :qty',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'Aanmaken',
-            'reason-title'     => 'Redenen',
-            'rma-title'        => 'Retouren',
+                'create-rma-title' => 'Aanmaken',
+                'reason-title'     => 'Redenen',
+                'rma-title'        => 'Retouren',
             ],
         ],
 

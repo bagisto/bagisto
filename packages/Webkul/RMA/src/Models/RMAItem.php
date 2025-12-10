@@ -3,15 +3,15 @@
 namespace Webkul\RMA\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Webkul\Sales\Models\OrderItemProxy;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductProxy;
 use Webkul\RMA\Contracts\RMAItem as RMAItemContract;
+use Webkul\Sales\Models\OrderItemProxy;
 
-class RMAItem extends Model implements RMAItemContract 
+class RMAItem extends Model implements RMAItemContract
 {
     /**
      * The table associated with the model.
@@ -47,7 +47,8 @@ class RMAItem extends Model implements RMAItemContract
     /**
      * Get related RMA
      */
-    public function rma() : BelongsTo {
+    public function rma(): BelongsTo
+    {
 
         return $this->belongsTo(RMAProxy::modelClass(), 'rma_id');
     }

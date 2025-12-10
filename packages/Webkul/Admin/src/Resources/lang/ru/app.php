@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'Разрешить новый запрос RMA для ожидающего заказа',
                         'allow-rma-for-digital-product'       => 'Разрешить RMA для цифрового продукта',
                         'allowed-file-extension'              => 'Разрешённое расширение файла',
-                        'allowed-file-types'                  => 'Пожалуйста, выберите только типы файлов ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => 'Пожалуйста, выберите только типы файлов '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => 'Разделено запятыми. Например: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'Разрешить новый запрос RMA для отменённого запроса',
                         'allowed-request-declined-request'    => 'Разрешить новый запрос RMA для отклонённого запроса',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA было успешно создано',
-                    'rma-created-message'  => 'Запрос RMA доступен для продукта с количеством :qty'
+                    'rma-created-message'  => 'Запрос RMA доступен для продукта с количеством :qty',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'Создать',
-            'reason-title'     => 'Причины',
-            'rma-title'        => 'Возвраты',
+                'create-rma-title' => 'Создать',
+                'reason-title'     => 'Причины',
+                'rma-title'        => 'Возвраты',
             ],
         ],
 

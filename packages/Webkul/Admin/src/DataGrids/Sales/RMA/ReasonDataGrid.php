@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids\Sales\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class ReasonDataGrid extends DataGrid
@@ -38,7 +38,7 @@ class ReasonDataGrid extends DataGrid
         $this->addFilter('id', 'rma_reasons.id');
         $this->addFilter('created_at', 'rma_reasons.created_at');
         $this->addFilter('resolution_types', DB::raw('GROUP_CONCAT(rma_reason_resolutions.resolution_type SEPARATOR ", ")'));
-        
+
         return $queryBuilder;
     }
 

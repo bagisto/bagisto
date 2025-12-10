@@ -63,7 +63,7 @@ return [
         'route'      => 'admin.sales.rma.index',
         'sort'       => 7,
         'icon'       => '',
-    ], [     
+    ], [
         'key'        => 'sales.rma.index',
         'name'       => 'admin::app.rma.rma.index.rma-title',
         'route'      => 'admin.sales.rma.index',

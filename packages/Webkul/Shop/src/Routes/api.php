@@ -99,7 +99,7 @@ Route::group(['prefix' => 'api'], function () {
      */
     Route::prefix('guest')->group(function () {
 
-         /**
+        /**
          * Login routes.
          */
         Route::controller(GuestAuthenticationController::class)->prefix('login')->group(function () {

@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids\Sales\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
@@ -46,8 +46,7 @@ class RMADataGrid extends DataGrid
      */
     public function __construct(
         protected RMAStatusRepository $rmaStatusRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Prepare query builder.
@@ -62,7 +61,7 @@ class RMADataGrid extends DataGrid
                 'rma.id',
                 'rma.order_id',
                 'orders.is_guest as is_guest',
-                DB::raw('CONCAT(' . $table_prefix . 'orders.customer_first_name, " ", ' . $table_prefix . 'orders.customer_last_name) as customer_name'),
+                DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
                 'rma.status',
                 'rma.request_status',
                 'rma.order_status as rma_order_status',
@@ -76,7 +75,7 @@ class RMADataGrid extends DataGrid
         $this->addFilter('request_status', 'rma.request_status');
         $this->addFilter('rma_order_status', 'rma.order_status');
         $this->addFilter('created_at', 'rma.created_at');
-        $this->addFilter('customer_name', DB::raw('CONCAT(' . $table_prefix . 'orders.customer_first_name, " ", ' . $table_prefix . 'orders.customer_last_name)'));
+        $this->addFilter('customer_name', DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name)'));
 
         return $queryBuilder;
     }
@@ -119,7 +118,7 @@ class RMADataGrid extends DataGrid
                     return "<span class='text-blue-600'>#{$row->order_id}</span>";
                 }
 
-                return '<a href="' . $route . '">' . "<span class='text-blue-600'>#" . $row->order_id . '</span></a>';
+                return '<a href="'.$route.'">'."<span class='text-blue-600'>#".$row->order_id.'</span></a>';
             },
         ]);
 
@@ -132,7 +131,7 @@ class RMADataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>' . $row->customer_name .'('. trans('shop::app.rma.view-customer-rma.guest') .')'. '</span>';
+                    return '<span>'.$row->customer_name.'('.trans('shop::app.rma.view-customer-rma.guest').')'.'</span>';
                 }
 
                 return $row->customer_name;
@@ -157,10 +156,10 @@ class RMADataGrid extends DataGrid
                     $row->order_status == self::CANCELED
                     && $row->order_status == self::CLOSED
                 ) {
-                    return '<p class="label-canceled">' . trans('shop::app.rma.status.status-name.item-canceled') . '</p>';
+                    return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
 
-                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->request_status . '</p>';
+                return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
             },
         ]);
 
@@ -186,12 +185,12 @@ class RMADataGrid extends DataGrid
                     $row->order_status == 'canceled'
                     || $row->order_status == 'closed'
                 ) {
-                    return '<p class="label-'. $row->order_status .'">' . trans('shop::app.rma.customer.'. $row->order_status) . '</p>';
+                    return '<p class="label-'.$row->order_status.'">'.trans('shop::app.rma.customer.'.$row->order_status).'</p>';
                 } elseif ($row->rma_order_status == self::ACTIVE) {
-                   return '<p class="label-active">' . trans('shop::app.rma.customer.delivered') . '</p>';
+                    return '<p class="label-active">'.trans('shop::app.rma.customer.delivered').'</p>';
                 }
 
-                return '<p class="label-info">' . trans('shop::app.rma.customer.undelivered') . '</p>';
+                return '<p class="label-info">'.trans('shop::app.rma.customer.undelivered').'</p>';
             },
         ]);
 

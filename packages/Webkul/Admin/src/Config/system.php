@@ -3173,7 +3173,7 @@ return [
                     ], [
                         'title' => 'admin::app.configuration.index.sales.rma.complete',
                         'value' => 'complete',
-                    ], 
+                    ],
                 ],
                 'channel_based' => true,
                 'locale_based'  => false,

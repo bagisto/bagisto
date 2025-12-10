@@ -36,8 +36,7 @@ class CustomerRMADataGrid extends DataGrid
      */
     public function __construct(
         protected RMAStatusRepository $rmaStatusRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Prepare query builder.
@@ -114,7 +113,7 @@ class CustomerRMADataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                return '<span class="text-sm text-blue-500"><a href="' . route('shop.customers.account.orders.view', ['id' => $row->order_id]) . '">' . '#' . $row->order_id . '</a></span>';
+                return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->order_id]).'">'.'#'.$row->order_id.'</a></span>';
             },
         ]);
 
@@ -136,10 +135,10 @@ class CustomerRMADataGrid extends DataGrid
                     $row->order_status == self::CANCELED
                     && $row->order_status == self::CLOSED
                 ) {
-                    return '<p class="label-canceled">' . trans('shop::app.rma.status.status-name.item-canceled') . '</p>';
+                    return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
 
-                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->request_status . '</p>';
+                return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
             },
         ]);
 

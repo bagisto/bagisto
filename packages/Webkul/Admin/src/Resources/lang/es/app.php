@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'Permitir nueva solicitud de RMA para pedido pendiente',
                         'allow-rma-for-digital-product'       => 'Permitir RMA para producto digital',
                         'allowed-file-extension'              => 'Extensión de archivo permitida',
-                        'allowed-file-types'                  => 'Por favor, seleccione solo los tipos de archivo ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => 'Por favor, seleccione solo los tipos de archivo '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => 'Separado por comas. Por ejemplo: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'Permitir nueva solicitud de RMA para solicitud cancelada',
                         'allowed-request-declined-request'    => 'Permitir nueva solicitud de RMA para solicitud rechazada',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'La RMA ha sido creada',
-                    'rma-created-message'  => 'Una solicitud de RMA está disponible para el producto con una cantidad de :qty'
+                    'rma-created-message'  => 'Una solicitud de RMA está disponible para el producto con una cantidad de :qty',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'Crear',
-            'reason-title'     => 'Motivos',
-            'rma-title'        => 'Devoluciones',
+                'create-rma-title' => 'Crear',
+                'reason-title'     => 'Motivos',
+                'rma-title'        => 'Devoluciones',
             ],
         ],
 

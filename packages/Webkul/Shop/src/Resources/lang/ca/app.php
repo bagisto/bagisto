@@ -1313,7 +1313,7 @@ return [
             'tracking-number'            => 'Número de seguiment: :tracking_number',
         ],
     ],
-    
+
     'rma' => [
         'customer' => [
             'delivered'    => 'Entregat',

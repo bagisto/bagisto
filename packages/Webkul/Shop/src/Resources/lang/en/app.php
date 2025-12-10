@@ -1157,7 +1157,7 @@ return [
         'orders'                => 'Orders',
         'profile'               => 'Profile',
         'reviews'               => 'Reviews',
-        'rma'                   => 'RMA', 
+        'rma'                   => 'RMA',
         'wishlist'              => 'Wishlist',
     ],
 
@@ -1326,7 +1326,7 @@ return [
             'title'        => 'RMA',
             'undelivered'  => 'Undelivered',
             'canceled'     => 'Canceled',
-            'closed'     => 'Closed',
+            'closed'       => 'Closed',
             'by-admin'     => 'Order Canceled By Admin',
 
             'create' => [

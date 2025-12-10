@@ -2,13 +2,14 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
-use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\ReasonDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Http\Requests\{MassDestroyRequest,MassUpdateRequest};
-use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
 
 class ReasonController extends Controller
 {
@@ -20,8 +21,7 @@ class ReasonController extends Controller
     public function __construct(
         protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAReasonRepository $rmaReasonRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -48,7 +48,7 @@ class ReasonController extends Controller
 
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
-        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->create([
+        array_map(fn ($resolutionType) => $this->rmaReasonResolutionsRepository->create([
             'rma_reason_id'   => $rmaReason->id,
             'resolution_type' => $resolutionType,
         ]), request()->resolution_type);
@@ -97,7 +97,7 @@ class ReasonController extends Controller
             $this->rmaReasonResolutionsRepository->whereNotIn('resolution_type', $resolutionTypes)->where('rma_reason_id', $rmaReason->id)->delete();
         }
 
-        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->updateOrCreate([
+        array_map(fn ($resolutionType) => $this->rmaReasonResolutionsRepository->updateOrCreate([
             'rma_reason_id'   => $rmaReason->id,
             'resolution_type' => $resolutionType,
         ]), $resolutionTypes);

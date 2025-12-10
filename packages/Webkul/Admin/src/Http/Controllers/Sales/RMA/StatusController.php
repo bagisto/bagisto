@@ -90,7 +90,7 @@ class StatusController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:request_status,title,' . request()->id,
+            'title'  => 'required|unique:request_status,title,'.request()->id,
             'status' => 'required|boolean',
         ]);
 

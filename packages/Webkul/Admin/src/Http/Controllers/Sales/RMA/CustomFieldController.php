@@ -26,8 +26,7 @@ class CustomFieldController extends Controller
     public function __construct(
         protected RMACustomFieldRepository $rmaCustomFieldRepository,
         protected RMACustomFieldOptionRepository $rmaCustomFieldOptionRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -62,7 +61,7 @@ class CustomFieldController extends Controller
 
         $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->except('_token', 'options', 'value'));
 
-        if (request()->input( 'options')) {
+        if (request()->input('options')) {
             $this->rmaCustomFieldOptionRepository->createOption([
                 'options' => request()->input('options'),
                 'value'   => request()->input('value'),
@@ -103,7 +102,7 @@ class CustomFieldController extends Controller
 
         $rmaCustomField = $this->rmaCustomFieldRepository->update($data, $id);
 
-        if (request()->input( 'options')) {
+        if (request()->input('options')) {
             $this->rmaCustomFieldOptionRepository->where('rma_custom_field_id', $rmaCustomField->id)->delete();
 
             $this->rmaCustomFieldOptionRepository->createOption([

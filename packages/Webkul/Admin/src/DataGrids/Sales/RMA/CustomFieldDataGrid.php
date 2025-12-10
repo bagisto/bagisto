@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids\Sales\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class CustomFieldDataGrid extends DataGrid

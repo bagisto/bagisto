@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'Consenti nuova richiesta RMA per ordine in sospeso',
                         'allow-rma-for-digital-product'       => 'Consenti RMA per prodotto digitale',
                         'allowed-file-extension'              => 'Estensione del file consentita',
-                        'allowed-file-types'                  => 'Si prega di selezionare solo i tipi di file ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => 'Si prega di selezionare solo i tipi di file '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => 'Separato da virgole. Ad esempio: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'Consenti nuova richiesta RMA per richiesta annullata',
                         'allowed-request-declined-request'    => 'Consenti nuova richiesta RMA per richiesta rifiutata',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA è stato creato',
-                    'rma-created-message'  => 'Una richiesta di RMA è disponibile per il prodotto con una quantità di :qty'
+                    'rma-created-message'  => 'Una richiesta di RMA è disponibile per il prodotto con una quantità di :qty',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'Crea',
-            'reason-title'     => 'Motivi',
-            'rma-title'        => 'Resi',
+                'create-rma-title' => 'Crea',
+                'reason-title'     => 'Motivi',
+                'rma-title'        => 'Resi',
             ],
         ],
 

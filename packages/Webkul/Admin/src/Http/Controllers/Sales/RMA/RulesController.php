@@ -6,7 +6,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RulesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Http\Requests\{MassDestroyRequest,MassUpdateRequest};
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\RMA\Repositories\RMARuleRepository;
 
 class RulesController extends Controller
@@ -72,7 +73,7 @@ class RulesController extends Controller
         $this->validate(request(), [
             'name'             => 'required',
             'status'           => 'required|boolean',
-            'description' => 'required',
+            'description'      => 'required',
         ]);
 
         $this->rmaRulesRepository->update(request()->except('_method', 'id'), request()->id);

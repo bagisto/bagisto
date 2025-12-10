@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'ऑर्डर आईडी',
             'title'       => 'अतिथि लॉगिन',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'अतिरिक्त जानकारी :',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'आरडर की आरएमए का सारांश',
                 'thank-you'              => 'धन्यवाद',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'उत्पाद का नाम',
                 'qty'          => 'मात्रा',
                 'reason'       => 'कारण',
                 'sku'          => 'एसकेयू',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'नया संदेश',
                 'heading' => 'प्रिय :name,',
@@ -1562,7 +1562,7 @@ return [
                 'process' => 'आपकी रिटर्न अनुरोध प्रक्रिया में है।',
                 'solved'  => 'ग्राहक द्वारा RMA स्थिति को हल किया गया है।',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'नया संदेश',
                 'heading' => 'प्रिय :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'प्रशासक से एक नया संदेश है',
                 'title'   => 'संदेश प्राप्त हुआ!',
             ],
-    
+
             'status' => [
                 'heading'       => 'प्रिय :name',
                 'quotes'        => 'आपकी आरएमए स्थिति को विक्रेता ने बदल दिया है',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'आपका आरएमए आईडी',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'स्वीकृत',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'पैकेज प्राप्त हुआ',
                 'solved'                   => 'समाधान हुआ',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'आरएमए व्यवस्थापक द्वारा अस्वीकृत किया गया है।',
                 'declined-buyer'  => 'आरएमए खरीदार द्वारा अस्वीकृत किया गया है।',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'आरएमए समाधान हुआ है।',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA स्थिति पहले ही रद्द की जा चुकी है।',
             'cancel-success'    => 'RMA स्थिति सफलतापूर्वक रद्द कर दी गई।',

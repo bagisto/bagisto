@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'ඇණවුම අංකය',
             'title'       => 'අමාරු ලොග් වන්න',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'අත්තිකාරම් විස්තර:',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'ඇණවුම් සඳහා RMA සාරාංශය',
                 'thank-you'              => 'ඔබට ස්තූතියි',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'නිෂ්පාදන නාමය',
                 'qty'          => 'ප්රමාණය',
                 'reason'       => 'හේතුව',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'නව පණිවිඩය',
                 'heading' => 'හිතුණු :name,',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => 'ක්ෂේත්‍රයේ නව පණිවිඩයක් ඇත',
                 'solved'  => 'RMA තත්ත්වය ගනුදෙනුකරු විසින් විසඳා ඇත.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'නව පණිවිඩය',
                 'heading' => 'හිතුණු :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'පරිපාලකයෙන් නව පණිවිඩයක් ඇත',
                 'title'   => 'පණිවිඩය ලබා දෙන්නාවේ!',
             ],
-    
+
             'status' => [
                 'heading'       => 'හිතුණු :name',
                 'quotes'        => 'ඔබේ RMA තත්වය විකුණන්නේ විකුණුම් විසින් වෙනස් කර ඇත',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'ඔබගේ RMA අංකය',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'හුවමාරු කරන්න',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'සාර්ථකව පැකිලීම',
                 'solved'                   => 'විශ්වාසය සාර්ථකව පිළිබද යුතුයි',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA පරිපාලක විසින් හරහා පහතින් පරණය කළ යුතුයි.',
                 'declined-buyer'  => 'මිලදී ගැනීමේ වෙනස්කම අයිතමයේදී පරිශීලකයා වෙනස් කළ යුතුයි.',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA සාර්ථකව විශ්වාසය ලබා දුන් ඇත.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA තත්ත්වය දැනටමත් අවලංගු වී ඇත.',
             'cancel-success'    => 'RMA තත්ත්වය සාර්ථකව අවලංගු කෙරිණි.',
