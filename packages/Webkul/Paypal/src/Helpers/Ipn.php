@@ -2,9 +2,11 @@
 
 namespace Webkul\Paypal\Helpers;
 
+use Illuminate\Support\Facades\Http;
 use Webkul\Paypal\Payment\Standard;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class Ipn
 {
@@ -30,7 +32,8 @@ class Ipn
     public function __construct(
         protected Standard $paypalStandard,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected InvoiceRepository $invoiceRepository,
+        protected OrderTransactionRepository $orderTransactionRepository
     ) {}
 
     /**
@@ -50,11 +53,9 @@ class Ipn
         try {
             if (
                 isset($this->post['txn_type'])
-                && $this->post['txn_type'] == 'recurring_payment'
+                && $this->post['txn_type'] !== 'recurring_payment'
             ) {
-
-            } else {
-                $this->getOrder();
+                $this->order = $this->orderRepository->findOneByField(['cart_id' => $this->post['invoice']]);
 
                 $this->processOrder();
             }
@@ -64,14 +65,23 @@ class Ipn
     }
 
     /**
-     * Load order via IPN invoice id.
+     * Post back to PayPal to check whether this request is a valid one.
      *
-     * @return void
+     * @return bool
      */
-    protected function getOrder()
+    protected function postBack()
     {
-        if (empty($this->order)) {
-            $this->order = $this->orderRepository->findOneByField(['cart_id' => $this->post['invoice']]);
+        $url = $this->paypalStandard->getIPNUrl();
+
+        try {
+            $response = Http::asForm()
+                ->post($url, ['cmd' => '_notify-validate'] + $this->post);
+
+            return $response->successful() && $response->body() === 'VERIFIED';
+        } catch (\Exception $e) {
+            report($e);
+
+            return false;
         }
     }
 
@@ -85,12 +95,22 @@ class Ipn
         if ($this->post['payment_status'] == 'Completed') {
             if ($this->post['mc_gross'] != $this->order->grand_total) {
                 return;
-            } else {
-                $this->orderRepository->update(['status' => 'processing'], $this->order->id);
+            }
 
-                if ($this->order->canInvoice()) {
-                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
-                }
+            $this->order = $this->orderRepository->update(['status' => 'processing'], $this->order->id);
+
+            if ($this->order->canInvoice()) {
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
+
+                $this->orderTransactionRepository->create([
+                    'transaction_id' => $this->post['txn_id'],
+                    'status'         => $this->post['payment_status'],
+                    'type'           => $this->post['payment_type'] ?? 'instant',
+                    'payment_method' => $this->order->payment->method,
+                    'order_id'       => $this->order->id,
+                    'invoice_id'     => $invoice->id,
+                    'data'           => json_encode($this->post),
+                ]);
             }
         }
     }
@@ -109,36 +129,5 @@ class Ipn
         }
 
         return $invoiceData;
-    }
-
-    /**
-     * Post back to PayPal to check whether this request is a valid one.
-     *
-     * @return bool
-     */
-    protected function postBack()
-    {
-        $url = $this->paypalStandard->getIPNUrl();
-
-        $request = curl_init();
-
-        curl_setopt_array($request, [
-            CURLOPT_URL            => $url,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => http_build_query(['cmd' => '_notify-validate'] + $this->post),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
-        ]);
-
-        $response = curl_exec($request);
-        $status = curl_getinfo($request, CURLINFO_HTTP_CODE);
-
-        curl_close($request);
-
-        if ($status == 200 && $response == 'VERIFIED') {
-            return true;
-        }
-
-        return false;
     }
 }

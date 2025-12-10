@@ -6,6 +6,8 @@
 
 - [Google reCAPTCHA Enterprise Integration](#google-recaptcha-enterprise-integration)
 
+- [PayPal SDK Upgrade](#paypal-sdk-upgrade)
+
 ## Medium Impact Changes
 
 - Soon.
@@ -74,7 +76,7 @@ The captcha token field name has changed:
 
 1. **Update Configuration:**
 
-    Here are the details for updating the configuration to support Google reCAPTCHA Enterprise in Bagisto v2.4. You will need to update the configuration with the new keys and values as described below.
+   Here are the details for updating the configuration to support Google reCAPTCHA Enterprise in Bagisto v2.4. You will need to update the configuration with the new keys and values as described below.
 
    **Obtain Google Cloud Project ID:**
    - Visit [Google Cloud Console](https://console.cloud.google.com/).
@@ -112,7 +114,7 @@ The captcha token field name has changed:
 3. **Update Frontend Implementation:**
    - The captcha now renders as a hidden field instead of a visible checkbox.
    - Update your frontend JavaScript to handle the new implementation.
-   - The captcha client endpoint remains similar but uses Enterprise version: `https://www.google.com/recaptcha/enterprise.js`.
+   - The captcha client endpoint remains similar but uses the Enterprise version: `https://www.google.com/recaptcha/enterprise.js`.
 
 4. **Review Validation Messages:**
    - Translation keys remain the same (`customer::app.validations.captcha.required` and `customer::app.validations.captcha.captcha`).
@@ -162,3 +164,184 @@ Ensure your Google Cloud Project has:
 - reCAPTCHA Enterprise API enabled.
 - Valid API key with proper permissions.
 - Site key configured for your domain.
+
+### PayPal SDK Upgrade
+
+**Impact Probability: High**
+
+Bagisto v2.4 has upgraded from the abandoned `paypal/paypal-checkout-sdk` v1.0.1 to the modern `paypal/paypal-server-sdk` v2.0, which introduces significant changes to the implementation and improves reliability and security.
+
+#### Dependency Changes
+
+The PayPal SDK dependency has changed:
+
+**v2.3 Dependency:**
+```json
+"paypal/paypal-checkout-sdk": "1.0.1"
+```
+
+**v2.4 Dependency:**
+```json
+"paypal/paypal-server-sdk": "^2.0"
+```
+
+#### Namespace Changes
+
+If you have custom PayPal implementations, the following namespace imports need to be updated:
+
+**v2.3 Imports:**
+```php
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\ProductionEnvironment;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
+```
+
+**v2.4 Imports:**
+```php
+use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
+use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
+use PaypalServerSdkLib\Environment;
+```
+
+#### Client Initialization Changes
+
+The client initialization method has changed significantly:
+
+**v2.3:**
+```php
+$environment = $isSandbox 
+    ? new SandboxEnvironment($clientId, $clientSecret)
+    : new ProductionEnvironment($clientId, $clientSecret);
+
+$client = new PayPalHttpClient($environment);
+```
+
+**v2.4:**
+```php
+$environment = $isSandbox 
+    ? Environment::SANDBOX 
+    : Environment::PRODUCTION;
+
+$client = PaypalServerSdkClientBuilder::init()
+    ->clientCredentialsAuthCredentials(
+        ClientCredentialsAuthCredentialsBuilder::init(
+            $clientId,
+            $clientSecret
+        )
+    )
+    ->environment($environment)
+    ->build();
+```
+
+#### API Method Changes
+
+The way API requests are made has changed:
+
+**v2.3:**
+```php
+// Create order
+$request = new OrdersCreateRequest();
+$request->headers["prefer"] = "return=representation";
+$request->body = $orderData;
+$response = $client->execute($request);
+
+// Capture order
+$request = new OrdersCaptureRequest($orderId);
+$response = $client->execute($request);
+```
+
+**v2.4:**
+```php
+// Create order
+$ordersController = $client->getOrdersController();
+$response = $ordersController->createOrder([
+    'body' => $orderData,
+    'prefer' => 'return=representation'
+]);
+
+// Capture order
+$response = $ordersController->captureOrder($orderId, [
+    'prefer' => 'return=representation'
+]);
+```
+
+#### Response Handling Changes
+
+Response object access has changed:
+
+**v2.3:**
+```php
+// Direct property access
+$orderId = $response->result->id;
+$status = $response->result->status;
+$captureId = $response->result->purchase_units[0]->payments->captures[0]->id;
+```
+
+**v2.4:**
+```php
+// Getter methods
+$result = $response->getResult();
+$orderId = $result->getId();
+$status = $result->getStatus();
+$captureId = $result->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getId();
+```
+
+#### Transaction Handling Architecture Change
+
+**v2.3:**
+- Used event-driven listener pattern.
+- Transactions created via `sales.invoice.save.after` event.
+- Required separate `Transaction.php` listener class.
+
+**v2.4:**
+- Uses direct controller-based transaction creation.
+- Transactions created immediately after invoice/order creation.
+- No event listeners required.
+
+#### Migration Steps
+
+1. **Update Dependencies:**
+
+   ```bash
+   composer remove paypal/paypal-checkout-sdk
+   composer require paypal/paypal-server-sdk:^2.0
+   ```
+
+2. **Update Custom Implementations:**
+
+   If you have custom PayPal integrations:
+   
+   - Update namespace imports to use `PaypalServerSdkLib\*`.
+   - Replace client initialization with builder pattern.
+   - Update API calls to use controller methods.
+   - Replace direct property access with getter methods.
+   - Remove any event-driven transaction listeners.
+
+3. **Test PayPal Functionality:**
+
+   - Test order creation in sandbox environment.
+   - Verify order capture works correctly.
+   - Test refund functionality.
+   - Verify IPN/webhook notifications are processed.
+   - Test production environment configuration.
+
+4. **Review Configuration:**
+
+   No changes required to PayPal configuration in admin panel. All existing settings (Client ID, Client Secret, sandbox mode) work as before.
+
+#### Behavioral Changes
+
+**v2.3:**
+- Used older SDK with deprecated dependencies.
+- Event-driven transaction handling.
+
+**v2.4:**
+- Modern SDK with active support and updates.
+- Direct transaction handling for better reliability.
+- Improved error handling and logging.
+- OAuth 2.0 Client Credentials authentication.
+- Built-in retry logic for API calls.

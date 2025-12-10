@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Bezahlen Sie sicher mit Kreditkarte, Debitkarte, Online-Banking, UPI und Wallets über PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Klicken Sie hier, um fortzufahren',

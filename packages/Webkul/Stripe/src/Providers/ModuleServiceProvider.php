@@ -11,7 +11,5 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
      *
      * @var array
      */
-    protected $models = [
-        \Webkul\Stripe\Models\StripeTransaction::class,
-    ];
+    protected $models = [];
 }

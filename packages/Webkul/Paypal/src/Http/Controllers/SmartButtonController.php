@@ -6,6 +6,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
 
 class SmartButtonController extends Controller
@@ -16,9 +17,10 @@ class SmartButtonController extends Controller
      * @return void
      */
     public function __construct(
-        protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected OrderTransactionRepository $orderTransactionRepository,
+        protected InvoiceRepository $invoiceRepository,
+        protected SmartButton $smartButton,
     ) {}
 
     /**
@@ -29,7 +31,9 @@ class SmartButtonController extends Controller
     public function createOrder()
     {
         try {
-            return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
+            $order = $this->smartButton->createOrder($this->buildRequestBody());
+
+            return response()->json(['result' => $order]);
         } catch (\Exception $e) {
             return response()->json(json_decode($e->getMessage()), 400);
         }
@@ -226,7 +230,29 @@ class SmartButtonController extends Controller
             $this->orderRepository->update(['status' => 'processing'], $order->id);
 
             if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+
+                $orderData = request()->input('orderData');
+
+                if (isset($orderData['orderID'])) {
+                    $transactionDetails = $this->smartButton->getOrder($orderData['orderID']);
+
+                    $transactionDetails = json_decode(json_encode($transactionDetails), true);
+
+                    $this->orderTransactionRepository->create([
+                        'transaction_id' => $transactionDetails['id'],
+                        'status'         => $transactionDetails['status'],
+                        'type'           => $transactionDetails['intent'],
+                        'amount'         => $transactionDetails['purchase_units'][0]['amount']['value'],
+                        'payment_method' => $order->payment->method,
+                        'order_id'       => $order->id,
+                        'invoice_id'     => $invoice->id,
+                        'data'           => json_encode([
+                            'purchase_units' => $transactionDetails['purchase_units'],
+                            'payer'          => $transactionDetails['payer'],
+                        ]),
+                    ]);
+                }
             }
 
             Cart::deActivateCart();

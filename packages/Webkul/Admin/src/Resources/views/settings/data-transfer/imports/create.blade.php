@@ -193,7 +193,7 @@
                                 :label="trans('admin::app.settings.data-transfer.imports.create.validation-strategy')"
                             >
                                 <option value="stop-on-errors">@lang('admin::app.settings.data-transfer.imports.create.stop-on-errors')</option>
-                                <option value="skip-erros">@lang('admin::app.settings.data-transfer.imports.create.skip-errors')</option>
+                                <option value="skip-errors">@lang('admin::app.settings.data-transfer.imports.create.skip-errors')</option>
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error control-name="validation_strategy" />

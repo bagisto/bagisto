@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Pay securely using Credit Card, Debit Card, Net Banking, UPI & Wallets via PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Click here to continue',

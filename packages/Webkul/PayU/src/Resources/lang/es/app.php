@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Paga de forma segura utilizando tarjeta de crédito, tarjeta de débito, banca en línea, UPI y billeteras a través de PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Haz clic aquí para continuar',

@@ -2,7 +2,7 @@
 
 return [
     'description' => 'PayU के माध्यम से क्रेडिट कार्ड, डेबिट कार्ड, नेट बैंकिंग, UPI और वॉलेट का उपयोग करके सुरक्षित रूप से भुगतान करें',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'जारी रखने के लिए यहां क्लिक करें',

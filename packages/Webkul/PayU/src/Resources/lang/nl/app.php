@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Betaal veilig met creditcard, debetkaart, online bankieren, UPI en portemonnees via PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Klik hier om door te gaan',

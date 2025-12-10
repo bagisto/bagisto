@@ -2,7 +2,7 @@
 
 return [
     'description' => 'با استفاده از کارت اعتباری، کارت نقدی، بانکداری اینترنتی، UPI و کیف پول از طریق PayU به صورت ایمن پرداخت کنید',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'برای ادامه اینجا کلیک کنید',

@@ -3,10 +3,6 @@
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Razorpay\Enums\PaymentStatus;
-use Webkul\Razorpay\Models\RazorpayTransaction;
 use Webkul\Razorpay\Payment\RazorpayPayment;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
@@ -70,7 +66,7 @@ it('redirects back when cart is not found', function () {
 
     // Assert
     $response->assertRedirect();
-    
+
     $response->assertSessionHas('error');
 });
 
@@ -106,32 +102,16 @@ it('creates razorpay order and returns drop-in UI view', function () {
     $response->assertViewIs('razorpay::drop-in-ui');
 
     $response->assertViewHas('payment');
-
-    // Verify transaction was created
-    $transaction = RazorpayTransaction::where('cart_id', $cart->id)->first();
-
-    expect($transaction)->not->toBeNull()
-        ->and($transaction->razorpay_invoice_status)->toBe(PaymentStatus::AWAITING_PAYMENT)
-        ->and($transaction->razorpay_order_id)->not->toBeEmpty();
 });
 
 it('successfully processes razorpay payment and creates order with invoice', function () {
     // Arrange
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    // Create the initial transaction
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_test123',
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
-    ]);
-
     // Mock the RazorpayPayment methods
     $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
 
     $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
-
-    $mockRazorpay->shouldReceive('fetchPayment')->andReturn((object) ['status' => 'captured']);
 
     $this->app->instance(RazorpayPayment::class, $mockRazorpay);
 
@@ -158,12 +138,6 @@ it('successfully processes razorpay payment and creates order with invoice', fun
     expect($invoice)->not->toBeNull()
         ->and($invoice->state)->toBe('paid');
 
-    // Verify transaction was updated
-    $transaction->refresh();
-
-    expect($transaction->razorpay_payment_id)->toBe('pay_test123')
-        ->and($transaction->razorpay_invoice_status)->toBe(PaymentStatus::CAPTURED);
-
     // Verify order transaction was created
     $orderTransaction = OrderTransaction::where('order_id', $order->id)->first();
 
@@ -174,27 +148,6 @@ it('successfully processes razorpay payment and creates order with invoice', fun
 });
 
 it('handles payment failure gracefully', function () {
-    // Arrange
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $customer = Customer::factory()->create();
-
-    $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'base_grand_total'    => 100.00,
-    ]);
-
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_fail_123',
-        'razorpay_receipt'        => 'receipt_'.$cart->id,
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
-    ]);
-
     // Act
     $response = $this->get(route('razorpay.payment.success', [
         'razorpay_order_id' => 'order_fail_123',
@@ -205,24 +158,12 @@ it('handles payment failure gracefully', function () {
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
-
-    // Verify transaction status was updated to payment error
-    $transaction->refresh();
-
-    expect($transaction->razorpay_invoice_status)->toBe(PaymentStatus::PAYMENT_ERROR);
 });
 
 it('redirects to cart when signature verification fails', function () {
     // Arrange
     $cart = CartModel::factory()->create([
         'base_grand_total' => 100.00,
-    ]);
-
-    $transaction = RazorpayTransaction::create([
-        'cart_id'                 => $cart->id,
-        'razorpay_order_id'       => 'order_test_456',
-        'razorpay_receipt'        => 'receipt_'.$cart->id,
-        'razorpay_invoice_status' => PaymentStatus::AWAITING_PAYMENT,
     ]);
 
     // Mock invalid signature

@@ -264,12 +264,13 @@ it('generates correct payment hash', function () {
     $productInfo = 'Test Product';
     $firstname = 'John';
     $email = 'john@example.com';
+    $udf1 = '456';
 
     // Act
-    $hash = $this->payU->generateHash($txnid, $amount, $productInfo, $firstname, $email);
+    $hash = $this->payU->generateHash($txnid, $amount, $productInfo, $firstname, $email, $udf1);
 
     // Assert
-    $expectedHashString = 'TEST_KEY|TXN123|100.5|Test Product|John|john@example.com|||||||||||TEST_SALT';
+    $expectedHashString = 'TEST_KEY|TXN123|100.5|Test Product|John|john@example.com|456||||||||||TEST_SALT';
 
     $expectedHash = strtolower(hash('sha512', $expectedHashString));
 
@@ -298,10 +299,11 @@ it('verifies hash from PayU response correctly', function () {
         'key'         => 'TEST_KEY',
         'productinfo' => 'Test Product',
         'email'       => 'john@example.com',
+        'udf1'        => '456',
     ];
 
-    $hashString = 'TEST_SALT|success|||||||||||john@example.com|John|Test Product|100.50|TXN123|TEST_KEY';
-    
+    $hashString = 'TEST_SALT|success||||||||||456|john@example.com|John|Test Product|100.50|TXN123|TEST_KEY';
+
     $response['hash'] = strtolower(hash('sha512', $hashString));
 
     // Act
@@ -333,6 +335,7 @@ it('rejects invalid hash from PayU response', function () {
         'key'         => 'TEST_KEY',
         'productinfo' => 'Test Product',
         'email'       => 'john@example.com',
+        'udf1'        => '456',
         'hash'        => 'invalid_hash_value',
     ];
 

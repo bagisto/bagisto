@@ -2,7 +2,7 @@
 
 return [
     'description' => '通过PayU使用信用卡、借记卡、网上银行、UPI和钱包安全支付',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => '点击此处继续',
