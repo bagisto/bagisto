@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
+    <!-- Title -->
     <x-slot:title>
         @lang('admin::app.rma.sales.rma.rma-status.index.title')
     </x-slot>
@@ -74,7 +74,8 @@
                                 >
                                 </label>
                             @endif
-                            <!-- Id -->
+
+                            <!-- ID -->
                             <p v-text="record.id"></p>
 
                             <!-- Code -->
@@ -146,7 +147,7 @@
                                     />
 
                                     <div v-if="! selectedLocales">
-                                        <!-- Rules Title -->
+                                        <!-- Status Title -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.reviews.index.datagrid.title')
@@ -188,7 +189,7 @@
                                     </div>
 
                                     <div v-else>
-                                        <!-- Rules Title -->
+                                        <!-- Status Title -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.reviews.index.datagrid.title')
@@ -329,10 +330,12 @@
                         setErrors
                     }) {
                         let formData = new FormData(this.$refs.createRmaStatusForm);
+
                         let url;
 
                         if (params.id) {
                             url = `{{ route('admin.sales.rma.rma-status.update', '') }}/${params.id}`;
+
                             formData.append('_method', 'put');
                         } else {
                             url = `{{ route('admin.sales.rma.rma-status.store') }}`;
@@ -375,7 +378,9 @@
 
                     resetForm() {
                         this.reason = {};
+
                         this.reasonResolutions = [];
+                        
                         this.rules = {
                             color: '#000000'
                         };

@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Inventaris',
                 'meta-description' => 'Meta Descripció',
                 'price'            => 'Preu',
+                'rma'              => 'RMA',
                 'settings'         => 'Configuracions',
                 'shipping'         => 'Enviament',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Descripció Curta',
                 'size'                 => 'Mida',
                 'sku'                  => 'SKU',
+                'special-price'        => 'Preu Especial',
                 'special-price-from'   => 'Preu Especial Des de',
                 'special-price-to'     => 'Preu Especial Fins a',
-                'special-price'        => 'Preu Especial',
                 'status'               => 'Estat',
                 'tax-category'         => 'Categoria d\'Impostos',
                 'url-key'              => 'Clau d\'URL',

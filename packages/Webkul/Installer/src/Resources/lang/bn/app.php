@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'মালামালের মৌলিক বিশেষত্ব',
                 'meta-description' => 'মেটা বর্ণনা',
                 'price'            => 'মূল্য',
+                'rma'              => 'RMA',
                 'settings'         => 'সেটিংস',
                 'shipping'         => 'শিপিং',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'সংক্ষিপ্ত বর্ণনা',
                 'size'                 => 'আকার',
                 'sku'                  => 'SKU',
+                'special-price'        => 'বিশেষ মূল্য',
                 'special-price-from'   => 'বিশেষ মূল্য থেকে',
                 'special-price-to'     => 'বিশেষ মূল্য প্রায়',
-                'special-price'        => 'বিশেষ মূল্য',
                 'status'               => 'অবস্থা',
                 'tax-category'         => 'কর বিভাগ',
                 'url-key'              => 'URL কী',

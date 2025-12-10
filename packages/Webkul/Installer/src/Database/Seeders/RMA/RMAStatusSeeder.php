@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\DB;
 class RMAStatusSeeder extends Seeder
 {
     /**
-     * Create a new rma configuration
+     * Run the database seeds.
+     *
+     * @return void
      */
     public function run($parameters = [])
     {
-        /**
-         * Default statuses to be inserted
-         */
-        $statuses = [
+        DB::table('rma_statuses')->delete();
+
+        $defaultStatuses = [
             [
                 'title'   => 'Accept',
                 'status'  => 1,
@@ -54,14 +55,6 @@ class RMAStatusSeeder extends Seeder
             ],
         ];
 
-        foreach ($statuses as $status) {
-            DB::table('rma_statuses')->updateOrInsert(
-                ['title' => $status['title']],
-                array_merge($status, [
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ])
-            );
-        }
+        DB::table('rma_statuses')->insert($defaultStatuses);
     }
 }

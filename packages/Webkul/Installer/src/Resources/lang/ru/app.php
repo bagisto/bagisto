@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Инвентарь',
                 'meta-description' => 'Мета-описание',
                 'price'            => 'Цена',
+                'rma'              => 'RMA',
                 'settings'         => 'Настройки',
                 'shipping'         => 'Доставка',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Краткое описание',
                 'size'                 => 'Размер',
                 'sku'                  => 'Артикул товара (SKU)',
+                'special-price'        => 'Специальная цена',
                 'special-price-from'   => 'Специальная цена от',
                 'special-price-to'     => 'Специальная цена до',
-                'special-price'        => 'Специальная цена',
                 'status'               => 'Статус',
                 'tax-category'         => 'Категория налога',
                 'url-key'              => 'Ключ URL',

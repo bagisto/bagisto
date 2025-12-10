@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Stok',
                 'meta-description' => 'Meta Deskripsi',
                 'price'            => 'Harga',
+                'rma'              => 'RMA',
                 'settings'         => 'Pengaturan',
                 'shipping'         => 'Pengiriman',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Deskripsi Singkat',
                 'size'                 => 'Ukuran',
                 'sku'                  => 'SKU',
+                'special-price'        => 'Harga Spesial',
                 'special-price-from'   => 'Harga Spesial Mulai',
                 'special-price-to'     => 'Harga Spesial Sampai',
-                'special-price'        => 'Harga Spesial',
                 'status'               => 'Status',
                 'tax-category'         => 'Kategori Pajak',
                 'url-key'              => 'Kunci URL',

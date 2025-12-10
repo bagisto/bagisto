@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'වෘක්ත',
                 'meta-description' => 'මැටා වෘක්ත',
                 'price'            => 'මිල',
+                'rma'              => 'RMA',
                 'settings'         => 'සැකසොක්ක',
                 'shipping'         => 'නාශීලන',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'කොදු විස්තර',
                 'size'                 => 'ප්රමාණක්',
                 'sku'                  => 'SKU කේඑ',
+                'special-price'        => 'විාළු මිල',
                 'special-price-from'   => 'විාළු මිල සිට',
                 'special-price-to'     => 'විාළු මිල දක්වා',
-                'special-price'        => 'විාළු මිල',
                 'status'               => 'තත්ත්වක්',
                 'tax-category'         => 'බද කටක්',
                 'url-key'              => 'URL යතුර',

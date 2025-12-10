@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Bestände',
                 'meta-description' => 'Meta-Beschreibung',
                 'price'            => 'Preis',
+                'rma'              => 'RMA',
                 'settings'         => 'Einstellungen',
                 'shipping'         => 'Versand',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Kurzbeschreibung',
                 'size'                 => 'Größe',
                 'sku'                  => 'Artikelnummer (SKU)',
+                'special-price'        => 'Sonderpreis',
                 'special-price-from'   => 'Sonderpreis Von',
                 'special-price-to'     => 'Sonderpreis Bis',
-                'special-price'        => 'Sonderpreis',
                 'status'               => 'Status',
                 'tax-category'         => 'Steuerkategorie',
                 'url-key'              => 'URL-Schlüssel',

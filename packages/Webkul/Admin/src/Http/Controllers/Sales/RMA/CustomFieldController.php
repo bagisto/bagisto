@@ -14,6 +14,8 @@ use Webkul\RMA\Repositories\RMACustomFieldRepository;
 class CustomFieldController extends Controller
 {
     /**
+     * Inactive status value.
+     *
      * @var int
      */
     public const INACTIVE = 0;
@@ -54,14 +56,28 @@ class CustomFieldController extends Controller
     public function store(): RedirectResponse
     {
         $this->validate(request(), [
-            'label' => 'required',
-            'code'  => 'required',
-            'type'  => 'required',
+            'label'    => 'required',
+            'code'     => 'required|unique:rma_custom_fields,code',
+            'position' => 'required',
+            'type'     => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
+            'options'  => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
-        $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->except('_token', 'options', 'value'));
+        $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->only(
+            'label',
+            'code',
+            'position',
+            'type',
+            'is_required',
+            'input_validation',
+            'status',
+        ));
 
-        if (request()->input('options')) {
+        if (
+            in_array(request()->input('type'), ['select', 'multiselect', 'checkbox', 'radio'])
+            && request()->input('options')
+        ) {
             $this->rmaCustomFieldOptionRepository->createOption([
                 'options' => request()->input('options'),
                 'value'   => request()->input('value'),
@@ -89,12 +105,23 @@ class CustomFieldController extends Controller
     public function update(int $id): RedirectResponse
     {
         $this->validate(request(), [
-            'label' => 'required',
-            'code'  => ['required', 'unique:rma_custom_fields,code,'.$id],
-            'type'  => 'required',
+            'label'    => 'required',
+            'code'     => ['required', 'unique:rma_custom_fields,code,'.$id],
+            'position' => 'required',
+            'type'     => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
+            'options'  => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
-        $data = request()->except('_token');
+        $data = request()->only(
+            'label',
+            'code',
+            'position',
+            'type',
+            'is_required',
+            'input_validation',
+            'status',
+        );
 
         $data['status'] = $data['status'] ?? self::INACTIVE;
 
@@ -102,9 +129,12 @@ class CustomFieldController extends Controller
 
         $rmaCustomField = $this->rmaCustomFieldRepository->update($data, $id);
 
-        if (request()->input('options')) {
-            $this->rmaCustomFieldOptionRepository->where('rma_custom_field_id', $rmaCustomField->id)->delete();
+        $this->rmaCustomFieldOptionRepository->where('rma_custom_field_id', $rmaCustomField->id)->delete();
 
+        if (
+            in_array(request()->input('type'), ['select', 'multiselect', 'checkbox', 'radio'])
+            && request()->input('options')
+        ) {
             $this->rmaCustomFieldOptionRepository->createOption([
                 'options' => request()->input('options'),
                 'value'   => request()->input('value'),

@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Запаси',
                 'meta-description' => 'Мета-опис',
                 'price'            => 'Ціна',
+                'rma'              => 'RMA',
                 'settings'         => 'Налаштування',
                 'shipping'         => 'Доставка',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Короткий опис',
                 'size'                 => 'Розмір',
                 'sku'                  => 'Артикул',
+                'special-price'        => 'Спеціальна ціна',
                 'special-price-from'   => 'Спеціальна ціна від',
                 'special-price-to'     => 'Спеціальна ціна до',
-                'special-price'        => 'Спеціальна ціна',
                 'status'               => 'Статус',
                 'tax-category'         => 'Категорія податків',
                 'url-key'              => 'URL-ключ',

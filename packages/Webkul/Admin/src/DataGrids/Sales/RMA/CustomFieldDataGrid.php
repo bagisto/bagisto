@@ -9,16 +9,6 @@ use Webkul\DataGrid\DataGrid;
 class CustomFieldDataGrid extends DataGrid
 {
     /**
-     * @var int
-     */
-    public const ONE = 1;
-
-    /**
-     * @var int
-     */
-    public const ZERO = 0;
-
-    /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
@@ -33,8 +23,6 @@ class CustomFieldDataGrid extends DataGrid
                 'position',
                 'status',
             );
-
-        $this->addFilter('code', 'rma_custom_fields.code');
 
         return $queryBuilder;
     }
@@ -91,14 +79,14 @@ class CustomFieldDataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.catalog.products.edit.types.bundle.update-create.yes'),
-                    'value' => self::ONE,
+                    'value' => 1,
                 ], [
                     'label' => trans('admin::app.catalog.products.edit.types.bundle.update-create.no'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
-                if ($row->is_required == self::ONE) {
+                if ($row->is_required) {
                     return '<span class="label-active">'.trans('admin::app.catalog.products.edit.types.bundle.update-create.yes').'</span>';
                 }
 
@@ -117,10 +105,10 @@ class CustomFieldDataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
+                    'value' => 1,
                 ], [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'    => function ($row) {
@@ -174,10 +162,10 @@ class CustomFieldDataGrid extends DataGrid
                 'options' => [
                     [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                        'value' => self::ONE,
+                        'value' => 1,
                     ], [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                        'value' => self::ZERO,
+                        'value' => 0,
                     ],
                 ],
             ]);

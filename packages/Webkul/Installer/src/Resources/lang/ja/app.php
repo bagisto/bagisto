@@ -13,9 +13,9 @@ return [
                 'inventories'      => '在庫',
                 'meta-description' => 'メタ説明',
                 'price'            => '価格',
+                'rma'              => 'RMA',
                 'settings'         => '設定',
                 'shipping'         => '配送',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => '短い説明',
                 'size'                 => 'サイズ',
                 'sku'                  => 'SKU',
+                'special-price'        => '特別価格',
                 'special-price-from'   => '特別価格 開始',
                 'special-price-to'     => '特別価格 終了',
-                'special-price'        => '特別価格',
                 'status'               => 'ステータス',
                 'tax-category'         => '税カテゴリー',
                 'url-key'              => 'URLキー',

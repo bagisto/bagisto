@@ -2,7 +2,6 @@
 
 namespace Webkul\Installer\Database\Seeders\RMA;
 
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,81 +14,53 @@ class RMAReasonSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        $now = Carbon::now();
+        DB::table('rma_reasons')->delete();
+
+        DB::table('rma_reason_resolutions')->delete();
 
         $defaultReasons = [
             [
-                'title'      => 'Manufacturer defect',
+                'title'      => 'Manufacturer Defect',
                 'status'     => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'position'   => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ], [
-                'title'      => 'Damaged during shipping',
+                'title'      => 'Damaged During Shipping',
                 'status'     => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'position'   => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ], [
-                'title'      => 'Wrong description online',
+                'title'      => 'Wrong Description Online',
                 'status'     => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'position'   => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
             ], [
-                'title'      => 'Dead on arrival',
+                'title'      => 'Dead On Arrival',
                 'status'     => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'position'   => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 
-        /**
-         * Insert default RMA reasons into the database.
-         */
-        foreach ($defaultReasons as $reason) {
-            DB::table('rma_reasons')->updateOrInsert(
-                ['title' => $reason['title']],
-                [
-                    'status'     => $reason['status'],
-                    'created_at' => $reason['created_at'],
-                    'updated_at' => $reason['updated_at'],
-                ]
-            );
-        }
+        DB::table('rma_reasons')->insert($defaultReasons);
 
         $reasons = DB::table('rma_reasons')->get();
 
         $resolutionTypes = ['exchange', 'return', 'cancel-items'];
 
-        /**
-         * Insert default resolution mappings for RMA reasons.
-         */
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {
-                DB::table('rma_reason_resolutions')->updateOrInsert(
-                    [
-                        'rma_reason_id'   => $reason->id,
-                        'resolution_type' => $resolutionType,
-                    ], [
-                        'created_at' => $now,
-                        'updated_at' => $now,
-                    ]
-                );
+                DB::table('rma_reason_resolutions')->insert([
+                    'rma_reason_id'   => $reason->id,
+                    'resolution_type' => $resolutionType,
+                    'created_at'      => now(),
+                    'updated_at'      => now(),
+                ]);
             }
         }
-
-        /**
-         * Cleanup duplicate resolution mappings.
-         */
-        DB::table('rma_reason_resolutions')
-            ->select('rma_reason_id', 'resolution_type')
-            ->groupBy('rma_reason_id', 'resolution_type')
-            ->havingRaw('COUNT(*) > 1')
-            ->get()
-            ->each(function ($duplicate) {
-                DB::table('rma_reason_resolutions')
-                    ->where('rma_reason_id', $duplicate->rma_reason_id)
-                    ->where('resolution_type', $duplicate->resolution_type)
-                    ->skip(1)
-                    ->delete();
-            });
     }
 }

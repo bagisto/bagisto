@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
+    <!-- Title -->
     <x-slot:title>
         @lang('admin::app.rma.sales.rma.rules.index.title')
     </x-slot>
@@ -74,7 +74,8 @@
                                 >
                                 </label>
                             @endif
-                            <!-- Id -->
+
+                            <!-- ID -->
                             <p v-text="record.id"></p>
 
                             <!-- Code -->
@@ -83,10 +84,10 @@
                             <!-- Name -->
                             <p v-html="record.status"></p>
 
-                            <!-- Resolution Type -->
+                            <!-- Exchange Period -->
                             <p v-text="record.exchange_period"></p>
 
-                            <!-- Resolution Type -->
+                            <!-- Return Period -->
                             <p v-text="record.return_period"></p>
 
                             <!-- Actions -->
@@ -212,6 +213,7 @@
                                     </x-admin::form.control-group>
 
                                     <hr/>
+
                                     <!-- Resolutions Period -->
                                     <x-admin::form.control-group.label class="font-semibold mt-4">
                                         @lang('admin::app.rma.sales.rma.rules.create.resolutions-period')
@@ -299,10 +301,12 @@
                         setErrors
                     }) {
                         let formData = new FormData(this.$refs.createRulesForm);
+
                         let url;
 
                         if (params.id) {
                             url = `{{ route('admin.sales.rma.rules.update', '') }}/${params.id}`;
+                            
                             formData.append('_method', 'put');
                         } else {
                             url = `{{ route('admin.sales.rma.rules.store') }}`;
@@ -342,6 +346,7 @@
 
                     resetForm() {
                         this.reason = {};
+
                         this.reasonResolutions = [];
                     },
                 },

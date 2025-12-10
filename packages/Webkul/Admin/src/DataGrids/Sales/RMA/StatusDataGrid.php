@@ -10,16 +10,6 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 class StatusDataGrid extends DataGrid
 {
     /**
-     * @var int
-     */
-    public const ONE = 1;
-
-    /**
-     * @var int
-     */
-    public const ZERO = 0;
-
-    /**
      * Constructor for the class.
      *
      * @return void
@@ -41,8 +31,6 @@ class StatusDataGrid extends DataGrid
                 'status',
                 'default',
             );
-
-        $this->addFilter('id', 'rma_statuses.id');
 
         return $queryBuilder;
     }
@@ -97,10 +85,10 @@ class StatusDataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
+                    'value' => 1,
                 ], [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
@@ -156,10 +144,10 @@ class StatusDataGrid extends DataGrid
                 'options' => [
                     [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                        'value' => self::ONE,
+                        'value' => 1,
                     ], [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                        'value' => self::ZERO,
+                        'value' => 0,
                     ],
                 ],
             ]);

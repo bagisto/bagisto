@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Envanterler',
                 'meta-description' => 'Meta Açıklama',
                 'price'            => 'Fiyat',
+                'rma'              => 'RMA',
                 'settings'         => 'Ayarlar',
                 'shipping'         => 'Nakliye',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Kısa Açıklama',
                 'size'                 => 'Boyut',
                 'sku'                  => 'Stok Kodu',
+                'special-price'        => 'Özel Fiyat',
                 'special-price-from'   => 'Özel Fiyat Başlangıç',
                 'special-price-to'     => 'Özel Fiyat Bitiş',
-                'special-price'        => 'Özel Fiyat',
                 'status'               => 'Durum',
                 'tax-category'         => 'Vergi Kategorisi',
                 'url-key'              => 'URL Anahtarı',

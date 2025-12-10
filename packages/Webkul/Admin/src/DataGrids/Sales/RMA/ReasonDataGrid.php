@@ -9,16 +9,6 @@ use Webkul\DataGrid\DataGrid;
 class ReasonDataGrid extends DataGrid
 {
     /**
-     * @var int
-     */
-    public const ONE = 1;
-
-    /**
-     * @var int
-     */
-    public const ZERO = 0;
-
-    /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
@@ -30,14 +20,14 @@ class ReasonDataGrid extends DataGrid
                 'rma_reasons.status',
                 'rma_reasons.position',
                 'rma_reasons.created_at',
-                DB::raw('GROUP_CONCAT(rma_reason_resolutions.resolution_type SEPARATOR ", ") as resolution_types'),
+                DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'rma_reason_resolutions.resolution_type SEPARATOR ", ") as resolution_types'),
             )
             ->leftJoin('rma_reason_resolutions', 'rma_reasons.id', '=', 'rma_reason_resolutions.rma_reason_id')
-            ->groupBy('rma_reasons.id', 'rma_reasons.title', 'rma_reasons.status', 'rma_reasons.created_at');
+            ->groupBy('rma_reasons.id');
 
         $this->addFilter('id', 'rma_reasons.id');
         $this->addFilter('created_at', 'rma_reasons.created_at');
-        $this->addFilter('resolution_types', DB::raw('GROUP_CONCAT(rma_reason_resolutions.resolution_type SEPARATOR ", ")'));
+        $this->addFilter('resolution_types', DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'rma_reason_resolutions.resolution_type SEPARATOR ", ")'));
 
         return $queryBuilder;
     }
@@ -76,10 +66,10 @@ class ReasonDataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
+                    'value' => 1,
                 ], [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'           => function ($row) {
@@ -168,10 +158,10 @@ class ReasonDataGrid extends DataGrid
                 'options' => [
                     [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                        'value' => self::ONE,
+                        'value' => 1,
                     ], [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                        'value' => self::ZERO,
+                        'value' => 0,
                     ],
                 ],
             ]);

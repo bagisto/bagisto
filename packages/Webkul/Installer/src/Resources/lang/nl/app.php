@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'Voorraden',
                 'meta-description' => 'Meta Beschrijving',
                 'price'            => 'Prijs',
+                'rma'              => 'RMA',
                 'settings'         => 'Instellingen',
                 'shipping'         => 'Verzending',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'Korte Beschrijving',
                 'size'                 => 'Maat',
                 'sku'                  => 'SKU',
+                'special-price'        => 'Speciale Prijs',
                 'special-price-from'   => 'Speciale Prijs Vanaf',
                 'special-price-to'     => 'Speciale Prijs Tot',
-                'special-price'        => 'Speciale Prijs',
                 'status'               => 'Status',
                 'tax-category'         => 'Belastingcategorie',
                 'url-key'              => 'URL Sleutel',

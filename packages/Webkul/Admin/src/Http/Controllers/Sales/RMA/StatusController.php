@@ -13,26 +13,6 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 class StatusController extends Controller
 {
     /**
-     * @var string
-     */
-    public const ACCEPT = 'Accept';
-
-    /**
-     * @var string
-     */
-    public const ITEMCANCELED = 'Item Canceled';
-
-    /**
-     * @var string
-     */
-    public const ORDERCANCELED = 'Canceled';
-
-    /**
-     * @var string
-     */
-    public const CANCELED = 'canceled';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -40,7 +20,7 @@ class StatusController extends Controller
     public function __construct(protected RMAStatusRepository $rmaStatusRepository) {}
 
     /**
-     * RMA status list
+     * RMA status listing.
      */
     public function index(): View|JsonResponse
     {
@@ -57,11 +37,11 @@ class StatusController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:request_status,title',
+            'title'  => 'required|unique:rma_statuses,title',
             'status' => 'required|boolean',
         ]);
 
-        $this->rmaStatusRepository->create(request()->input());
+        $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.rma-status.create.success'),
@@ -73,13 +53,7 @@ class StatusController extends Controller
      */
     public function edit(int $id): JsonResponse
     {
-        $reason = $this->rmaStatusRepository->find($id);
-
-        if (! $reason) {
-            return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rma-status.update.not-found'),
-            ], 404);
-        }
+        $reason = $this->rmaStatusRepository->findOrFail($id);
 
         return new JsonResponse($reason);
     }
@@ -90,11 +64,11 @@ class StatusController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:request_status,title,'.request()->id,
+            'title'  => 'required|unique:rma_statuses,title,'.request()->id,
             'status' => 'required|boolean',
         ]);
 
-        $this->rmaStatusRepository->update(request()->except('_method', 'id'), request()->id);
+        $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), request()->id);
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.rma-status.edit.success', ['name' => 'RMA Status']),
