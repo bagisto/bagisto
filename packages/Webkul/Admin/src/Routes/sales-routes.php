@@ -125,7 +125,7 @@ Route::prefix('sales')->group(function () {
      */
     Route::prefix('rma')->group(function () {
         /**
-         * RMA Request routes.
+         * RMA request routes.
          */
         Route::prefix('requests')->group(function () {
             Route::controller(RMAController::class)->group(function () {
@@ -176,7 +176,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA Status routes.
+         * RMA status routes.
          */
         Route::controller(StatusController::class)->prefix('rma-status')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.rma-status.index');
@@ -195,7 +195,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA Rules routes.
+         * RMA rules routes.
          */
         Route::controller(RulesController::class)->prefix('rules')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.rules.index');
@@ -214,7 +214,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA Rules routes.
+         * RMA custom field routes.
          */
         Route::controller(CustomFieldController::class)->prefix('custom-field')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.custom-field.index');

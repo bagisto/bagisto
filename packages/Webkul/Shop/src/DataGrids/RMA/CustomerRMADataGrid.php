@@ -10,24 +10,25 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 class CustomerRMADataGrid extends DataGrid
 {
     /**
+     * Pending status.
+     * 
      * @var string
      */
     public const PENDING = 'Pending';
 
     /**
+     * Closed status.
+     * 
      * @var string
      */
     public const CLOSED = 'closed';
 
     /**
+     * Canceled status.
+     * 
      * @var string
      */
     public const CANCELED = 'canceled';
-
-    /**
-     * @var string
-     */
-    public const PENDINGSTATUS = 'Pending';
 
     /**
      * Constructor for the class.
@@ -55,6 +56,8 @@ class CustomerRMADataGrid extends DataGrid
 
         $orderId = session()->get('guestOrderId') ?? null;
 
+        $tablePrefix = DB::getTablePrefix();
+
         $queryBuilder = DB::table('rma')
             ->join('orders', 'orders.id', '=', 'rma.order_id')
             ->join('rma_items', 'rma_items.rma_id', '=', 'rma.id')
@@ -67,8 +70,9 @@ class CustomerRMADataGrid extends DataGrid
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
-                DB::raw('SUM(rma_items.quantity) as total_quantity'),
-            )->groupBy('rma.id');
+                DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
+            )
+            ->groupBy('rma.id');
 
         $queryBuilder->where(function ($query) use ($orderId, $customerId, $guestEmail) {
             if (! is_null($orderId)) {

@@ -10,37 +10,28 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 class RMADataGrid extends DataGrid
 {
     /**
+     * Pending status constant.
+     * 
      * @var string
      */
     public const PENDING = 'pending';
 
     /**
+     * Closed status constant.
+     *
      * @var string
      */
     public const CLOSED = 'closed';
 
     /**
+     * Canceled status constant.
+     * 
      * @var string
      */
     public const CANCELED = 'canceled';
 
     /**
-     * @var string
-     */
-    public const PENDINGSTATUS = 'Pending';
-
-    /**
-     * @var int
-     */
-    public const ZERO = 0;
-
-    /**
-     * @var int
-     */
-    public const ACTIVE = 1;
-
-    /**
-     * Constructor for the class.
+     * Constructor.
      *
      * @return void
      */
@@ -174,10 +165,10 @@ class RMADataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('shop::app.rma.customer.delivered'),
-                    'value' => self::ACTIVE,
+                    'value' => 1,
                 ], [
                     'label' => trans('shop::app.rma.customer.undelivered'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
@@ -186,7 +177,7 @@ class RMADataGrid extends DataGrid
                     || $row->order_status == 'closed'
                 ) {
                     return '<p class="label-'.$row->order_status.'">'.trans('shop::app.rma.customer.'.$row->order_status).'</p>';
-                } elseif ($row->rma_order_status == self::ACTIVE) {
+                } elseif ($row->rma_order_status) {
                     return '<p class="label-active">'.trans('shop::app.rma.customer.delivered').'</p>';
                 }
 

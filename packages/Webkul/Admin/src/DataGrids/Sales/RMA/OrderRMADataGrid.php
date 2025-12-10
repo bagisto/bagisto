@@ -11,11 +11,6 @@ use Webkul\Sales\Models\OrderPayment;
 class OrderRMADataGrid extends DataGrid
 {
     /**
-     * @var string
-     */
-    public const COMPLETE = 'complete';
-
-    /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
@@ -24,7 +19,7 @@ class OrderRMADataGrid extends DataGrid
 
         $allowedProductTypes = core()->getConfigData('sales.rma.setting.select_allowed_product_type');
 
-        $table_prefix = DB::getTablePrefix();
+        $tablePrefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('orders')
             ->addSelect(
@@ -33,21 +28,25 @@ class OrderRMADataGrid extends DataGrid
                 'orders.status as status',
                 'orders.created_at as created_at',
                 'orders.grand_total as grand_total',
-                DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
+                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as customer_name'),
                 'orders.is_guest as is_guest',
                 'orders.order_currency_code as order_currency_code',
                 'order_payment.method_title as method_title',
-                DB::raw('SUM(order_items.qty_ordered) as total_qty_ordered'),
-                DB::raw('IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0) as total_rma_qty')
+                DB::raw('SUM('.$tablePrefix.'order_items.qty_ordered) as total_qty_ordered'),
+                DB::raw('IFNULL(SUM('.$tablePrefix.'rma_items_aggregated.total_rma_qty), 0) as total_rma_qty')
             )
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
             ->leftJoin('rma', 'orders.id', '=', 'rma.order_id')
             ->leftJoin(
-                DB::raw('(SELECT order_item_id, SUM(quantity) as total_rma_qty
-                        FROM rma_items
-                        GROUP BY order_item_id) as rma_items_aggregated'),
+                DB::raw('
+                    (
+                        SELECT order_item_id, SUM(quantity) as total_rma_qty
+                        FROM '.$tablePrefix.'rma_items
+                        GROUP BY order_item_id
+                    ) as '.$tablePrefix.'rma_items_aggregated
+                '),
                 'order_items.id',
                 '=',
                 'rma_items_aggregated.order_item_id'
@@ -92,11 +91,11 @@ class OrderRMADataGrid extends DataGrid
             ->addSelect('pav_rma_rules.integer_value as rma_rule_id_value')
             ->leftJoin('rma_rules', 'rma_rules.id', '=', 'pav_rma_rules.integer_value');
 
-        $queryBuilder->where(function ($query) use ($globalReturnDays) {
-            $query->where(function ($q) {
+        $queryBuilder->where(function ($query) use ($globalReturnDays, $tablePrefix) {
+            $query->where(function ($q) use ($tablePrefix) {
                 $q->where('pav_allow_rma.boolean_value', 1)
                     ->where('rma_rules.status', 1)
-                    ->whereRaw('DATEDIFF(NOW(), orders.created_at) <= rma_rules.return_period');
+                    ->whereRaw('DATEDIFF(NOW(), '.$tablePrefix.'orders.created_at) <= '.$tablePrefix.'rma_rules.return_period');
             });
 
             if (! empty($globalReturnDays) && is_numeric($globalReturnDays)) {
@@ -111,9 +110,9 @@ class OrderRMADataGrid extends DataGrid
         });
 
         $queryBuilder->groupBy('orders.id')
-            ->havingRaw('SUM(order_items.qty_ordered) > IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0)');
+            ->havingRaw('SUM('.$tablePrefix.'order_items.qty_ordered) > IFNULL(SUM('.$tablePrefix.'rma_items_aggregated.total_rma_qty), 0)');
 
-        if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == self::COMPLETE) {
+        if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == Order::STATUS_COMPLETED) {
             $queryBuilder->whereIn('orders.status', [
                 Order::STATUS_COMPLETED,
             ]);
@@ -123,7 +122,7 @@ class OrderRMADataGrid extends DataGrid
         $this->addFilter('status', 'orders.status');
         $this->addFilter('grand_total', 'orders.grand_total');
         $this->addFilter('method_title', 'order_payment.method_title');
-        $this->addFilter('customer_name', DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name)'));
+        $this->addFilter('customer_name', DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name)'));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
