@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Paga de forma segura utilitzant targeta de crèdit, targeta de dèbit, banca en línia, UPI i carteres a través de PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Fes clic aquí per continuar',

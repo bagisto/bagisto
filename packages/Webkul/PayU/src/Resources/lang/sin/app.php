@@ -2,7 +2,7 @@
 
 return [
     'description' => 'PayU හරහා ණය කාඩ්පත, ඩෙබිට් කාඩ්පත, ඔන්ලයින් බැංකු කටයුතු, UPI සහ පසුම්බි භාවිතයෙන් ආරක්ෂිතව ගෙවන්න',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'ඉදිරියට යාමට මෙහි ක්ලික් කරන්න',

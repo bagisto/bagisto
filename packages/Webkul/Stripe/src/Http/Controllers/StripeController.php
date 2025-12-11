@@ -9,9 +9,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Stripe\Enums\StripeTransactionStatus;
 use Webkul\Stripe\Payment\Stripe;
-use Webkul\Stripe\Repositories\StripeTransactionRepository;
 
 class StripeController extends Controller
 {
@@ -21,12 +19,11 @@ class StripeController extends Controller
      * @return void
      */
     public function __construct(
-        protected Stripe $stripe,
-        protected StripeTransactionRepository $stripeTransactionRepository,
         protected CartRepository $cartRepository,
         protected OrderRepository $orderRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
+        protected Stripe $stripe,
     ) {}
 
     /**
@@ -53,15 +50,7 @@ class StripeController extends Controller
         try {
             $checkoutSession = $this->stripe->createCheckoutSession($cart);
 
-            $this->stripeTransactionRepository->create([
-                'cart_id'    => $cart->id,
-                'session_id' => $checkoutSession->id,
-                'amount'     => $cart->base_grand_total,
-                'status'     => StripeTransactionStatus::PENDING->value,
-            ]);
-
             return redirect($checkoutSession->url);
-
         } catch (\Exception $e) {
             session()->flash('error', trans('stripe::app.response.payment-failed').': '.$e->getMessage());
 
@@ -93,15 +82,15 @@ class StripeController extends Controller
                 return redirect()->route('shop.checkout.cart.index');
             }
 
-            $stripeTransaction = $this->stripeTransactionRepository->where('session_id', $sessionId)->first();
+            $cartId = $session->metadata->cart_id ?? null;
 
-            if (! $stripeTransaction) {
-                session()->flash('error', trans('stripe::app.response.session-not-found'));
+            if (! $cartId) {
+                session()->flash('error', trans('stripe::app.response.cart-not-found'));
 
                 return redirect()->route('shop.checkout.cart.index');
             }
 
-            $cart = $this->cartRepository->find($stripeTransaction->cart_id);
+            $cart = $this->cartRepository->find($cartId);
 
             if (! $cart || ! $cart->is_active) {
                 session()->flash('error', trans('stripe::app.response.cart-processed'));
@@ -138,12 +127,12 @@ class StripeController extends Controller
 
                 $this->orderTransactionRepository->create([
                     'transaction_id' => $session->payment_intent,
-                    'status'         => StripeTransactionStatus::COMPLETED->value,
+                    'status'         => $session->payment_status,
                     'type'           => $order->payment->method,
                     'payment_method' => $order->payment->method,
                     'order_id'       => $order->id,
                     'invoice_id'     => $invoice->id,
-                    'amount'         => $stripeTransaction->amount,
+                    'amount'         => $order->base_grand_total,
                     'data'           => json_encode([
                         'stripe_session_id'        => $sessionId,
                         'stripe_payment_intent_id' => $session->payment_intent,
@@ -153,12 +142,6 @@ class StripeController extends Controller
             }
 
             Cart::deActivateCart();
-
-            $this->stripeTransactionRepository->update([
-                'order_id'          => $order->id,
-                'payment_intent_id' => $session->payment_intent,
-                'status'            => StripeTransactionStatus::COMPLETED->value,
-            ], $stripeTransaction->id);
 
             session()->flash('order_id', $order->id);
 
@@ -179,18 +162,6 @@ class StripeController extends Controller
      */
     public function cancel()
     {
-        $sessionId = request()->get('session_id');
-
-        if ($sessionId) {
-            $stripeTransaction = $this->stripeTransactionRepository->where('session_id', $sessionId)->first();
-
-            if ($stripeTransaction) {
-                $this->stripeTransactionRepository->update([
-                    'status' => StripeTransactionStatus::CANCELLED->value,
-                ], $stripeTransaction->id);
-            }
-        }
-
         session()->flash('error', trans('stripe::app.response.payment-cancelled'));
 
         return redirect()->route('shop.checkout.cart.index');

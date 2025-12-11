@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Paga in sicurezza utilizzando carta di credito, carta di debito, online banking, UPI e portafogli tramite PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Clicca qui per continuare',

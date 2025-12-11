@@ -134,6 +134,9 @@ class Stripe extends Payment
             'mode'                 => 'payment',
             'success_url'          => route('stripe.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url'           => route('stripe.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+            'metadata'             => [
+                'cart_id' => $cart->id,
+            ],
         ]);
     }
 

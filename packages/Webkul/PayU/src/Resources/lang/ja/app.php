@@ -2,7 +2,7 @@
 
 return [
     'description' => 'PayU経由でクレジットカード、デビットカード、ネットバンキング、UPI、ウォレットを使用して安全にお支払いください',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => '続行するにはここをクリックしてください',

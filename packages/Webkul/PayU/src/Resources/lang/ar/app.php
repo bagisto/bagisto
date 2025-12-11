@@ -2,7 +2,7 @@
 
 return [
     'description' => 'ادفع بأمان باستخدام بطاقة الائتمان أو بطاقة الخصم أو الخدمات المصرفية عبر الإنترنت أو UPI والمحافظ عبر PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'انقر هنا للمتابعة',

@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Bayar dengan aman menggunakan Kartu Kredit, Kartu Debit, Internet Banking, UPI & Dompet melalui PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Klik di sini untuk melanjutkan',

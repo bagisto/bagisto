@@ -102,6 +102,7 @@
             Skip to main content
         </a>
 
+        <!-- Built With Bagisto -->
         <div id="app">
             <!-- Flash Message Blade Component -->
             <x-shop::flash-group />

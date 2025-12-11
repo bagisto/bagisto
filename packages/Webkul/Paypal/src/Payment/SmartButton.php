@@ -2,13 +2,9 @@
 
 namespace Webkul\Paypal\Payment;
 
-use PayPalCheckoutSdk\Core\PayPalHttpClient;
-use PayPalCheckoutSdk\Core\ProductionEnvironment;
-use PayPalCheckoutSdk\Core\SandboxEnvironment;
-use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
-use PayPalCheckoutSdk\Orders\OrdersGetRequest;
-use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
+use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
+use PaypalServerSdkLib\Environment;
+use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
 
 class SmartButton extends Paypal
 {
@@ -25,6 +21,13 @@ class SmartButton extends Paypal
      * @var string
      */
     protected $clientSecret;
+
+    /**
+     * PayPal SDK Client.
+     *
+     * @var \PaypalServerSdkLib\PaypalServerSdkClient
+     */
+    protected $client;
 
     /**
      * Payment method code.
@@ -49,58 +52,98 @@ class SmartButton extends Paypal
     }
 
     /**
-     * Returns PayPal HTTP client instance with environment that has access
-     * credentials context. Use this instance to invoke PayPal APIs, provided the
-     * credentials have access.
+     * Returns PayPal SDK client instance.
      *
-     * @return PayPalCheckoutSdk\Core\PayPalHttpClient
+     * @return \PaypalServerSdkLib\PaypalServerSdkClient
      */
-    public function client()
+    public function getClient()
     {
-        return new PayPalHttpClient($this->environment());
+        if (! $this->client) {
+            $this->client = $this->buildClient();
+        }
+
+        return $this->client;
+    }
+
+    /**
+     * Build PayPal SDK client.
+     *
+     * @return \PaypalServerSdkLib\PaypalServerSdkClient
+     */
+    protected function buildClient()
+    {
+        $isSandbox = $this->getConfigData('sandbox') ?: false;
+
+        $environment = $isSandbox
+            ? Environment::SANDBOX
+            : Environment::PRODUCTION;
+
+        return PaypalServerSdkClientBuilder::init()
+            ->clientCredentialsAuthCredentials(
+                ClientCredentialsAuthCredentialsBuilder::init(
+                    $this->clientId,
+                    $this->clientSecret
+                )
+            )
+            ->environment($environment)
+            ->build();
     }
 
     /**
      * Create order for approval of client.
      *
      * @param  array  $body
-     * @return HttpResponse
+     * @return mixed
      */
     public function createOrder($body)
     {
-        $request = new OrdersCreateRequest;
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->prefer('return=representation');
-        $request->body = $body;
+        $ordersController = $this->getClient()->getOrdersController();
 
-        return $this->client()->execute($request);
+        $options = [
+            'body'                       => $body,
+            'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
+            'prefer'                     => 'return=representation',
+        ];
+
+        $response = $ordersController->createOrder($options);
+
+        return $response->getResult();
     }
 
     /**
      * Capture order after approval.
      *
      * @param  string  $orderId
-     * @return HttpResponse
+     * @return mixed
      */
     public function captureOrder($orderId)
     {
-        $request = new OrdersCaptureRequest($orderId);
+        $ordersController = $this->getClient()->getOrdersController();
 
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->prefer('return=representation');
+        $options = [
+            'id'                         => $orderId,
+            'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
+            'prefer'                     => 'return=representation',
+        ];
 
-        $this->client()->execute($request);
+        $response = $ordersController->captureOrder($options);
+
+        return $response->getResult();
     }
 
     /**
      * Get order details.
      *
      * @param  string  $orderId
-     * @return HttpResponse
+     * @return mixed
      */
     public function getOrder($orderId)
     {
-        return $this->client()->execute(new OrdersGetRequest($orderId));
+        $ordersController = $this->getClient()->getOrdersController();
+
+        $response = $ordersController->getOrder(['id' => $orderId]);
+
+        return $response->getResult();
     }
 
     /**
@@ -113,22 +156,33 @@ class SmartButton extends Paypal
     {
         $paypalOrderDetails = $this->getOrder($orderId);
 
-        return $paypalOrderDetails->result->purchase_units[0]->payments->captures[0]->id;
+        return $paypalOrderDetails->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getId();
     }
 
     /**
      * Refund order.
      *
-     * @return HttpResponse
+     * @param  string  $captureId
+     * @param  array  $body
+     * @return mixed
      */
     public function refundOrder($captureId, $body = [])
     {
-        $request = new CapturesRefundRequest($captureId);
+        $paymentsController = $this->getClient()->getPaymentsController();
 
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->body = $body;
+        $options = [
+            'captureId'                  => $captureId,
+            'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
+            'prefer'                     => 'return=representation',
+        ];
 
-        return $this->client()->execute($request);
+        if (! empty($body)) {
+            $options['body'] = $body;
+        }
+
+        $response = $paymentsController->refundCapturedPayment($options);
+
+        return $response->getResult();
     }
 
     /**
@@ -137,23 +191,6 @@ class SmartButton extends Paypal
      * @return string
      */
     public function getRedirectUrl() {}
-
-    /**
-     * Set up and return PayPal PHP SDK environment with PayPal access credentials.
-     * This sample uses SandboxEnvironment. In production, use LiveEnvironment.
-     *
-     * @return PayPalCheckoutSdk\Core\SandboxEnvironment|PayPalCheckoutSdk\Core\ProductionEnvironment
-     */
-    protected function environment()
-    {
-        $isSandbox = $this->getConfigData('sandbox') ?: false;
-
-        if ($isSandbox) {
-            return new SandboxEnvironment($this->clientId, $this->clientSecret);
-        }
-
-        return new ProductionEnvironment($this->clientId, $this->clientSecret);
-    }
 
     /**
      * Initialize properties.

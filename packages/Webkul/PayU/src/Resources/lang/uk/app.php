@@ -2,7 +2,7 @@
 
 return [
     'description' => 'Сплачуйте безпечно за допомогою кредитної картки, дебетової картки, онлайн-банкінгу, UPI та гаманців через PayU',
-    'title'       => 'PayU Money',
+    'title'       => 'PayU',
 
     'redirect' => [
         'click-if-not-redirected' => 'Натисніть тут, щоб продовжити',

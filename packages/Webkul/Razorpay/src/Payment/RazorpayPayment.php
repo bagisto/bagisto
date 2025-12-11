@@ -257,15 +257,4 @@ class RazorpayPayment extends Payment
 
         return hash_equals($generatedSignature, $signature);
     }
-
-    /**
-     * Fetch payment details from Razorpay.
-     *
-     * @param  string  $paymentId
-     * @return \Razorpay\Api\Payment
-     */
-    public function fetchPayment($paymentId)
-    {
-        return $this->getApi()->payment->fetch($paymentId);
-    }
 }

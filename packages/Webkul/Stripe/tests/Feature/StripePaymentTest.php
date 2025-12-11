@@ -5,8 +5,6 @@ use Webkul\Core\Models\CoreConfig;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
-use Webkul\Stripe\Enums\StripeTransactionStatus;
-use Webkul\Stripe\Models\StripeTransaction;
 use Webkul\Stripe\Payment\Stripe;
 
 beforeEach(function () {
@@ -36,7 +34,7 @@ beforeEach(function () {
 });
 
 it('redirects to cart when stripe credentials are invalid', function () {
-    // Arrange - Override with empty credentials
+    // Arrange
     CoreConfig::factory()->create([
         'code'         => 'sales.payment_methods.stripe.api_test_key',
         'value'        => '',
@@ -81,7 +79,16 @@ it('redirects to cart when session id is missing on success callback', function 
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when stripe transaction is not found', function () {
+it('redirects to cart when stripe session is invalid or not found', function () {
+    // Arrange
+    $stripeMock = $this->mock(Stripe::class)->makePartial();
+
+    $stripeMock->shouldReceive('retrieveCheckoutSession')
+        ->with('invalid_session')
+        ->andReturn(false);
+
+    $this->app->instance(Stripe::class, $stripeMock);
+
     // Act
     $response = $this->get(route('stripe.payment.success', ['session_id' => 'invalid_session']));
 
@@ -89,28 +96,6 @@ it('redirects to cart when stripe transaction is not found', function () {
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
-});
-
-it('updates transaction status to cancelled on cancel callback', function () {
-    // Arrange
-    $transaction = StripeTransaction::create([
-        'cart_id'    => 1,
-        'session_id' => 'cs_test_cancel_123',
-        'amount'     => 100.00,
-        'status'     => StripeTransactionStatus::PENDING,
-    ]);
-
-    // Act
-    $response = $this->get(route('stripe.payment.cancel', ['session_id' => 'cs_test_cancel_123']));
-
-    // Assert
-    $response->assertRedirect(route('shop.checkout.cart.index'));
-
-    $response->assertSessionHas('error');
-
-    $transaction->refresh();
-
-    expect($transaction->status)->toBe(StripeTransactionStatus::CANCELLED);
 });
 
 it('shows error message on payment cancellation', function () {
@@ -131,18 +116,12 @@ it('redirects to cart when cart is already processed', function () {
         'grand_total'      => 100.00,
     ]);
 
-    $transaction = StripeTransaction::create([
-        'cart_id'    => $cart->id,
-        'session_id' => 'cs_test_already_processed',
-        'amount'     => 100.00,
-        'status'     => StripeTransactionStatus::PENDING,
-    ]);
-
     $mockSession = (object) [
         'id'             => 'cs_test_already_processed',
         'payment_intent' => 'pi_test_123',
         'payment_status' => 'paid',
         'status'         => 'complete',
+        'metadata'       => (object) ['cart_id' => $cart->id],
     ];
 
     $stripeMock = $this->mock(Stripe::class)->makePartial();
@@ -168,18 +147,12 @@ it('successfully processes stripe payment and creates order with invoice', funct
     // Arrange
     $cart = $this->createCartWithItems('stripe');
 
-    $transaction = StripeTransaction::create([
-        'cart_id'    => $cart->id,
-        'session_id' => 'cs_test_success_123',
-        'amount'     => $cart->base_grand_total,
-        'status'     => StripeTransactionStatus::PENDING,
-    ]);
-
     $mockSession = (object) [
         'id'             => 'cs_test_success_123',
         'payment_intent' => 'pi_test_123',
         'payment_status' => 'paid',
         'status'         => 'complete',
+        'metadata'       => (object) ['cart_id' => $cart->id],
     ];
 
     $stripeMock = $this->mock(Stripe::class)->makePartial();
@@ -206,19 +179,12 @@ it('successfully processes stripe payment and creates order with invoice', funct
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing');
 
-    // Verify transaction was updated
-    $transaction->refresh();
-
-    expect($transaction->status)->toBe(StripeTransactionStatus::COMPLETED)
-        ->and($transaction->payment_intent_id)->toBe('pi_test_123')
-        ->and($transaction->order_id)->toBe($order->id);
-
     // Verify order transaction was created
     $orderTransaction = OrderTransaction::where('transaction_id', 'pi_test_123')->first();
 
     expect($orderTransaction)->not->toBeNull()
         ->and($orderTransaction->order_id)->toBe($order->id)
-        ->and($orderTransaction->status)->toBe(StripeTransactionStatus::COMPLETED->value);
+        ->and($orderTransaction->status)->toBe('paid');
 
     // Verify invoice was created
     $invoice = Invoice::where('order_id', $order->id)->first();
