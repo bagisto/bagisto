@@ -5,8 +5,8 @@ namespace Webkul\RMA\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Webkul\Sales\Models\OrderProxy;
 use Webkul\RMA\Contracts\RMA as RMAContract;
+use Webkul\Sales\Models\OrderProxy;
 
 class RMA extends Model implements RMAContract
 {
@@ -91,8 +91,6 @@ class RMA extends Model implements RMAContract
 
     /**
      * Define a one-to-many relationship with the RMA items.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function items(): HasMany
     {
@@ -101,8 +99,6 @@ class RMA extends Model implements RMAContract
 
     /**
      * Define a one-to-many relationship with the RMA images.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images(): HasMany
     {
@@ -111,8 +107,6 @@ class RMA extends Model implements RMAContract
 
     /**
      * Define a one-to-one relationship with the RMA.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order(): BelongsTo
     {
@@ -121,8 +115,6 @@ class RMA extends Model implements RMAContract
 
     /**
      * Define a one-to-many relationship with the RMA items.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages(): HasMany
     {
@@ -131,8 +123,6 @@ class RMA extends Model implements RMAContract
 
     /**
      * Define a one-to-many relationship with the RMA items.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function additionalFields(): HasMany
     {

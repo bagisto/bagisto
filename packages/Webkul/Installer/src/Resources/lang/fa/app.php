@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'موجودی‌ها',
                 'meta-description' => 'توضیحات متا',
                 'price'            => 'قیمت',
+                'rma'              => 'RMA',
                 'settings'         => 'تنظیمات',
                 'shipping'         => 'حمل و نقل',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'توضیح کوتاه',
                 'size'                 => 'اندازه',
                 'sku'                  => 'SKU',
+                'special-price'        => 'قیمت ویژه',
                 'special-price-from'   => 'قیمت ویژه از',
                 'special-price-to'     => 'قیمت ویژه تا',
-                'special-price'        => 'قیمت ویژه',
                 'status'               => 'وضعیت',
                 'tax-category'         => 'دسته مالیاتی',
                 'url-key'              => 'کلید URL',

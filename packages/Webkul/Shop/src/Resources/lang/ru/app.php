@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'ID заказа',
             'title'       => 'Вход для гостей',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'Дополнительная информация:',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'Сводка RMA заказа',
                 'thank-you'              => 'Спасибо',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'Наименование Товара',
                 'qty'          => 'Количество',
                 'reason'       => 'Причина',
                 'sku'          => 'Артикул (SKU)',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'Новое сообщение',
                 'heading' => 'Уважаемый(ая) :name,',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => 'Есть новое сообщение от покупателя',
                 'solved'  => 'Статус RMA был изменен на Решено клиентом.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'Новое сообщение',
                 'heading' => 'Уважаемый(ая) :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'Есть новое сообщение от администратора',
                 'title'   => 'Получено сообщение!',
             ],
-    
+
             'status' => [
                 'heading'       => 'Уважаемый(ая) :name',
                 'quotes'        => 'Ваш статус RMA был изменен продавцом',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'Ваш ID RMA',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'Принять',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'Получен пакет',
                 'solved'                   => 'Решено',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA был отклонен администратором.',
                 'declined-buyer'  => 'RMA был отклонен покупателем.',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA был решен.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'Статус RMA уже отменен.',
             'cancel-success'    => 'Статус RMA успешно отменен.',

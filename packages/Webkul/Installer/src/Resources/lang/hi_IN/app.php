@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'इन्वेंटरी',
                 'meta-description' => 'मेटा विवरण',
                 'price'            => 'मूल्य',
+                'rma'              => 'RMA',
                 'settings'         => 'सेटिंग्स',
                 'shipping'         => 'शिपिंग',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'संक्षेप विवरण',
                 'size'                 => 'साइज़',
                 'sku'                  => 'SKU',
+                'special-price'        => 'विशेष मूल्य',
                 'special-price-from'   => 'विशेष मूल्य से',
                 'special-price-to'     => 'विशेष मूल्य तक',
-                'special-price'        => 'विशेष मूल्य',
                 'status'               => 'स्थिति',
                 'tax-category'         => 'कर श्रेणी',
                 'url-key'              => 'URL कुंजी',

@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'المخزونات',
                 'meta-description' => 'الوصف الواجب',
                 'price'            => 'السعر',
+                'rma'              => 'RMA',
                 'settings'         => 'الإعدادات',
                 'shipping'         => 'الشحن',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'وصف مختصر',
                 'size'                 => 'الحجم',
                 'sku'                  => 'رمز المنتج',
+                'special-price'        => 'السعر الخاص',
                 'special-price-from'   => 'السعر الخاص من',
                 'special-price-to'     => 'السعر الخاص حتى',
-                'special-price'        => 'السعر الخاص',
                 'status'               => 'الحالة',
                 'tax-category'         => 'فئة الضريبة',
                 'url-key'              => 'الرابط المميز',

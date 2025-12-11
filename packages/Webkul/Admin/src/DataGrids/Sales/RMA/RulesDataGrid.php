@@ -2,31 +2,26 @@
 
 namespace Webkul\Admin\DataGrids\Sales\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class RulesDataGrid extends DataGrid
 {
     /**
-     * @var int
-     */
-    public const ONE = 1;
-
-    /**
-     * @var int
-     */
-    public const ZERO = 0;
-
-    /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
     {
-        $queryBuilder = DB::table('rma_rules');
+        $queryBuilder = DB::table('rma_rules')
+            ->addSelect(
+                'id',
+                'name',
+                'status',
+                'exchange_period',
+                'return_period',
+            );
 
-        $this->addFilter('id', 'rma_rules.id');
-        
         return $queryBuilder;
     }
 
@@ -64,10 +59,10 @@ class RulesDataGrid extends DataGrid
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                    'value' => self::ONE,
+                    'value' => 1,
                 ], [
                     'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                    'value' => self::ZERO,
+                    'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
@@ -141,10 +136,10 @@ class RulesDataGrid extends DataGrid
                 'options' => [
                     [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
-                        'value' => self::ONE,
+                        'value' => 1,
                     ], [
                         'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
-                        'value' => self::ZERO,
+                        'value' => 0,
                     ],
                 ],
             ]);

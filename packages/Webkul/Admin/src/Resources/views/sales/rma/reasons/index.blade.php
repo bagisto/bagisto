@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
+    <!-- Title -->
     <x-slot:title>
         @lang('admin::app.rma.sales.rma.reasons.index.title')
     </x-slot>
@@ -76,7 +76,7 @@
                                 </label>
                             @endif
 
-                            <!-- Id -->
+                            <!-- ID -->
                             <p v-text="record.id"></p>
 
                             <!-- Code -->
@@ -231,9 +231,11 @@
                                                 <option value="return">
                                                     @lang('admin::app.configuration.index.sales.rma.return')
                                                 </option>
+
                                                 <option value="exchange">
                                                     @lang('admin::app.configuration.index.sales.rma.exchange')
                                                 </option>
+
                                                 <option value="cancel-items">
                                                     @lang('admin::app.configuration.index.sales.rma.cancel-items')
                                                 </option>
@@ -339,6 +341,7 @@
 
                     resetForm() {
                         this.reason = {};
+                        
                         this.reasonResolutions = [];
                     },
                 },

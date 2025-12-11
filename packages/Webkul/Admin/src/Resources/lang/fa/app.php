@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'اجازه درخواست جدید RMA برای سفارش معلق',
                         'allow-rma-for-digital-product'       => 'اجازه RMA برای محصول دیجیتال',
                         'allowed-file-extension'              => 'پسوند فایل مجاز',
-                        'allowed-file-types'                  => 'لطفاً فقط نوع فایل‌های ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' را انتخاب کنید',
+                        'allowed-file-types'                  => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',
                         'allowed-info'                        => 'با کاما جدا شده. به عنوان مثال: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'اجازه درخواست جدید RMA برای درخواست لغو شده',
                         'allowed-request-declined-request'    => 'اجازه درخواست جدید RMA برای درخواست رد شده',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA با موفقیت ایجاد شد',
-                    'rma-created-message'  => 'درخواست RMA برای محصول با مقدار :qty موجود است'
+                    'rma-created-message'  => 'درخواست RMA برای محصول با مقدار :qty موجود است',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'ایجاد',
-            'reason-title'     => 'دلایل',
-            'rma-title'        => 'بازگشت‌ها',
+                'create-rma-title' => 'ایجاد',
+                'reason-title'     => 'دلایل',
+                'rma-title'        => 'بازگشت‌ها',
             ],
         ],
 

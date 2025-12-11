@@ -1531,7 +1531,7 @@ return [
             'order-id'    => '订单编号',
             'title'       => '访客登录',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => '附加信息 :',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => '订单 RMA 概要',
                 'thank-you'              => '谢谢',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => '产品名称',
                 'qty'          => '数量',
                 'reason'       => '原因',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => '新消息',
                 'heading' => '亲爱的 :name，',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => '有买家的新消息',
                 'solved'  => '客户已将RMA状态更改为已解决。',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => '新消息',
                 'heading' => '亲爱的 :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => '有一条来自管理员的新消息',
                 'title'   => '消息已收到！',
             ],
-    
+
             'status' => [
                 'heading'       => '亲爱的 :name',
                 'quotes'        => '您的 RMA 状态已被卖家更改',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => '您的 RMA 编号',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => '接受',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => '包裹已收到',
                 'solved'                   => '已解决',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA 被管理员拒绝。',
                 'declined-buyer'  => 'RMA 被买家拒绝。',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA 已解决。',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA 状态已被取消。',
             'cancel-success'    => 'RMA状态已成功取消。',

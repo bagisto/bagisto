@@ -5302,7 +5302,7 @@ return [
         'components' => [
             'layouts' => [
                 'sidebar' => [
-                    'rma'=>'RMA',
+                    'rma'=> 'RMA',
                 ],
             ],
         ],
@@ -5522,7 +5522,7 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA telah dibuat',
-                    'rma-created-message'  => 'Permintaan RMA tersedia untuk produk dengan jumlah :qty'
+                    'rma-created-message'  => 'Permintaan RMA tersedia untuk produk dengan jumlah :qty',
                 ],
             ],
         ],

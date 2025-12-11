@@ -11,11 +11,14 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\Admin\RMA\AdminConversationEmail;
-use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAMessageRepository,RMARepository};
+use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
+use Webkul\RMA\Repositories\RMAMessageRepository;
+use Webkul\RMA\Repositories\RMARepository;
 use Webkul\RMA\Repositories\RMAStatusRepository;
-use Webkul\Sales\Repositories\{OrderRepository,RefundRepository};
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\RefundRepository;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusEmail;
 
 class RMAController extends Controller
@@ -76,8 +79,7 @@ class RMAController extends Controller
         protected RMARepository $rmaRepository,
         protected RMAStatusRepository $rmaStatusRepository,
         protected RefundRepository $refundRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * RMA list
@@ -131,10 +133,10 @@ class RMAController extends Controller
             $order->update(['status' => 'pending']);
 
             $this->rmaRepository->find($data['rma_id'])->update([
-                'status'       => self::ACTIVE,
+                'status'           => self::ACTIVE,
                 'request_status'   => self::PENDING,
-                'status'       => self::INACTIVE,
-                'order_status' => self::INACTIVE,
+                'status'           => self::INACTIVE,
+                'order_status'     => self::INACTIVE,
             ]);
 
             $requestData = [
@@ -159,8 +161,8 @@ class RMAController extends Controller
     public function getMessages()
     {
         $messages = $this->rmaMessagesRepository->where('rma_id', request()->get('id'))
-                    ->orderBy('id', 'desc')
-                    ->paginate(request()->get('limit') ?? 5);
+            ->orderBy('id', 'desc')
+            ->paginate(request()->get('limit') ?? 5);
 
         return new JsonResponse([
             'messages' => $messages,
@@ -178,7 +180,7 @@ class RMAController extends Controller
 
         $conversationDetails = [
             'message'       => $requestData['message'],
-            'customerName'  => $orderDetails->customer_first_name . ' ' . $orderDetails->customer_last_name,
+            'customerName'  => $orderDetails->customer_first_name.' '.$orderDetails->customer_last_name,
             'customerEmail' => $orderDetails->customer_email,
         ];
 
@@ -195,7 +197,7 @@ class RMAController extends Controller
 
             $filename = $file->getClientOriginalName();
 
-            $path = $file->storeAs('rma-conversation/'. $storedMessage->id, $filename);
+            $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
 
             $this->rmaMessagesRepository->update([
                 'attachment_path' => $path,
@@ -236,15 +238,15 @@ class RMAController extends Controller
         $order = $this->orderRepository->find($orderId);
 
         $mailDetails = [
-            'name'       => $order->customer_first_name . ' ' . $order->customer_last_name,
-            'email'      => $order->customer_email,
-            'rma_id'     => $status['rma_id'],
+            'name'           => $order->customer_first_name.' '.$order->customer_last_name,
+            'email'          => $order->customer_email,
+            'rma_id'         => $status['rma_id'],
             'request_status' => $status['request_status'],
         ];
 
         $ordersRma = $this->rmaRepository->findWhere(['order_id' => $orderId]);
 
-        $totalCount = (int)$this->rmaItemsRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
+        $totalCount = (int) $this->rmaItemsRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
 
         if ($totalCount > 0) {
             if ($status['request_status'] == self::ITEMCANCELED) {
@@ -278,7 +280,6 @@ class RMAController extends Controller
                 Event::dispatch('sales.order.cancel.after', $order);
             }
 
-
             if ($status['request_status'] == self::RECEIVEDPACKAGE) {
                 $refund = $this->createRefund($rma);
 
@@ -309,7 +310,7 @@ class RMAController extends Controller
         $updateStatus = $rma->update($status);
 
         $requestData = [
-            'message'    => trans('shop::app.rma.mail.status.your-rma-id') .' '. trans('shop::app.rma.mail.status.status-change', ['id' => $status['rma_id']]) .'. '. trans('shop::app.rma.mail.status.status') . ' : ' . $rma['request_status'],
+            'message'    => trans('shop::app.rma.mail.status.your-rma-id').' '.trans('shop::app.rma.mail.status.status-change', ['id' => $status['rma_id']]).'. '.trans('shop::app.rma.mail.status.status').' : '.$rma['request_status'],
             'rma_id'     => $status['rma_id'],
             'is_admin'   => 1,
         ];
@@ -339,7 +340,8 @@ class RMAController extends Controller
      * @param  \Webkul\RMA\Contracts\RMA  $rma
      * @return \Webkul\Sales\Contracts\Refund
      */
-    public function createRefund($rma){
+    public function createRefund($rma)
+    {
         $requestData = request()->all();
 
         $orderId = $rma->order_id;
@@ -402,10 +404,10 @@ class RMAController extends Controller
         return $refund;
     }
 
-     /**
+    /**
      * Update order status.
      */
-    public function updateOrderStatus(\Webkul\Sales\Contracts\Order $order, string $orderState = null): void
+    public function updateOrderStatus(\Webkul\Sales\Contracts\Order $order, ?string $orderState = null): void
     {
         Event::dispatch('sales.order.update-status.before', $order);
 

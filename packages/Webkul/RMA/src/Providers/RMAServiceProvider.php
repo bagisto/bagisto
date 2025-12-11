@@ -2,7 +2,6 @@
 
 namespace Webkul\RMA\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class RMAServiceProvider extends ServiceProvider
@@ -14,6 +13,6 @@ class RMAServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 }

@@ -1531,7 +1531,7 @@ return [
             'order-id'    => '注文ID',
             'title'       => 'ゲストログイン',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => '追加情報：',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => '注文のRMAの概要',
                 'thank-you'              => 'ありがとうございます',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => '製品名',
                 'qty'          => '数量',
                 'reason'       => '理由',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => '新しいメッセージ',
                 'heading' => '拝啓 :name 様',
@@ -1562,7 +1562,7 @@ return [
                 'process' => '返金リクエストが処理中です。',
                 'solved'  => 'RMAのステータスが顧客によって解決済みに変更されました。',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => '新しいメッセージ',
                 'heading' => '拝啓 :name 様',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => '管理者から新しいメッセージがあります',
                 'title'   => 'メッセージを受信しました！',
             ],
-    
+
             'status' => [
                 'heading'       => '拝啓 :name 様',
                 'quotes'        => 'セラーによってあなたのRMAステータスが変更されました',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'あなたのRMA ID',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => '承諾',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'パッケージを受け取りました',
                 'solved'                   => '解決済み',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => '管理者によってRMAが拒否されました。',
                 'declined-buyer'  => 'バイヤーによってRMAが拒否されました。',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMAが解決されました。',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMAステータスはすでにキャンセルされています。',
             'cancel-success'    => 'RMAステータスが正常にキャンセルされました。',

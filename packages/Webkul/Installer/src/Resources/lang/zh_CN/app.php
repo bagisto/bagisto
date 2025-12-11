@@ -13,9 +13,9 @@ return [
                 'inventories'      => '庫存',
                 'meta-description' => '元描述',
                 'price'            => '價格',
+                'rma'              => 'RMA',
                 'settings'         => '設定',
                 'shipping'         => '運送',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => '簡短描述',
                 'size'                 => '尺寸',
                 'sku'                  => 'SKU',
+                'special-price'        => '特價',
                 'special-price-from'   => '特價起始日期',
                 'special-price-to'     => '特價結束日期',
-                'special-price'        => '特價',
                 'status'               => '狀態',
                 'tax-category'         => '稅收類別',
                 'url-key'              => '網址關鍵字',

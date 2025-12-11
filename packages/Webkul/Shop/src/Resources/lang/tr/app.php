@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'Sipariş ID',
             'title'       => 'Misafir Giriş',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'Ek Bilgi:',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'Siparişin RMA Özeti',
                 'thank-you'              => 'Teşekkür ederiz',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'Ürün Adı',
                 'qty'          => 'Miktar',
                 'reason'       => 'Neden',
                 'sku'          => 'Stok Kodu (SKU)',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'Yeni Mesaj',
                 'heading' => 'Sayın :name,',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => 'Alıcıdan yeni bir mesaj var',
                 'solved'  => 'RMA durumu müşteri tarafından Çözüldü olarak değiştirildi.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'Yeni Mesaj',
                 'heading' => 'Sayın :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'Yönetici’den yeni bir mesaj var',
                 'title'   => 'Mesaj Alındı!',
             ],
-    
+
             'status' => [
                 'heading'       => 'Sayın :name',
                 'quotes'        => 'RMA durumunuz satıcı tarafından değiştirildi',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'Sizin RMA ID',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'Kabul Et',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'Paket Alındı',
                 'solved'                   => 'Çözüldü',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA yönetici tarafından reddedildi.',
                 'declined-buyer'  => 'RMA alıcı tarafından reddedildi.',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA çözüldü.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA durumu zaten iptal edilmiştir.',
             'cancel-success'    => 'RMA durumu başarıyla iptal edildi.',

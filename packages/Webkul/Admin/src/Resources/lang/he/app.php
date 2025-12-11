@@ -5255,7 +5255,7 @@ return [
                         'all-status'                          => 'כל הסטטוסים',
                         'allow-new-request-for-pending-order' => 'אפשר בקשת RMA חדשה עבור הזמנה ממתינה',
                         'allow-rma-for-digital-product'       => 'אפשר RMA עבור מוצר דיגיטלי',
-                        'allowed-file-types'                  => 'אנא בחר סוגי קבצים ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' בלבד',
+                        'allowed-file-types'                  => 'אנא בחר סוגי קבצים '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' בלבד',
                         'allowed-file-extension'              => 'סיומת קובץ מותרת',
                         'allowed-info'                        => 'מופרד באמצעות פסיקים. לדוגמה: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'אפשר בקשת RMA חדשה עבור בקשה מבוטלת',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'ה-RMA נוצרה בהצלחה',
-                    'rma-created-message'  => 'בקשת RMA זמינה עבור המוצר עם כמות של :qty'
+                    'rma-created-message'  => 'בקשת RMA זמינה עבור המוצר עם כמות של :qty',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'צור',
-            'reason-title'     => 'סיבות',
-            'rma-title'        => 'החזרות',
+                'create-rma-title' => 'צור',
+                'reason-title'     => 'סיבות',
+                'rma-title'        => 'החזרות',
             ],
         ],
 

@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'लंबित ऑर्डर के लिए नए RMA अनुरोध की अनुमति दें',
                         'allow-rma-for-digital-product'       => 'डिजिटल उत्पाद के लिए RMA की अनुमति दें',
                         'allowed-file-extension'              => 'अनुमत फ़ाइल एक्सटेंशन',
-                        'allowed-file-types'                  => 'कृपया केवल फ़ाइल प्रकार चुनें ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => 'कृपया केवल फ़ाइल प्रकार चुनें '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => 'अल्पविराम द्वारा विभाजित। उदाहरण के लिए: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'रद्द किए गए अनुरोध के लिए नए RMA अनुरोध की अनुमति दें',
                         'allowed-request-declined-request'    => 'अस्वीकृत अनुरोध के लिए नए RMA अनुरोध की अनुमति दें',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'आरएमए सफलतापूर्वक बनाई गई है',
-                    'rma-created-message'  => 'RMA अनुरोध :qty मात्रा वाले उत्पाद के लिए उपलब्ध है'
+                    'rma-created-message'  => 'RMA अनुरोध :qty मात्रा वाले उत्पाद के लिए उपलब्ध है',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'बनाएं',
-            'reason-title'     => 'कारण',
-            'rma-title'        => 'रिटर्न',
+                'create-rma-title' => 'बनाएं',
+                'reason-title'     => 'कारण',
+                'rma-title'        => 'रिटर्न',
             ],
         ],
 

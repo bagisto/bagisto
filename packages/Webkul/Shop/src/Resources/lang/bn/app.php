@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'অর্ডারের RMA সংক্ষিপ্তসারণ',
                 'thank-you'              => 'ধন্যবাদ',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'পণ্যের নাম',
                 'qty'          => 'পরিমাণ',
                 'reason'       => 'কারণ',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'নতুন বার্তা',
                 'heading' => 'প্রিয় :name,',
@@ -1562,7 +1562,7 @@ return [
                 'quotes'  => 'ক্রেতার দিক থেকে একটি নতুন বার্তা রয়েছে',
                 'solved'  => 'RMA স্থিতি গ্রাহকের দ্বারা সমাধান করা হয়েছে।',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'নতুন বার্তা',
                 'heading' => 'প্রিয় :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'অ্যাডমিন থেকে একটি নতুন বার্তা এসেছে',
                 'title'   => 'বার্তা প্রাপ্ত হয়েছে!',
             ],
-    
+
             'status' => [
                 'heading'       => 'প্রিয় :name',
                 'quotes'        => 'আপনার RMA অবস্থা বিক্রেতার দ্বারা পরিবর্তিত হয়েছে',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'আপনার RMA আইডি',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'গ্রহণ',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'প্যাকেজ প্রাপ্ত',
                 'solved'                   => 'সমাধান করা হয়েছে',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'এডমিন দ্বারা RMA অস্বীকৃত হয়েছে।',
                 'declined-buyer'  => 'ক্রেতা দ্বারা RMA অস্বীকৃত হয়েছে।',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA সমাধান করা হয়েছে।',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA স্ট্যাটাস ইতিমধ্যেই বাতিল করা হয়েছে।',
             'cancel-success'    => 'RMA স্থিতি সফলভাবে বাতিল করা হয়েছে।',

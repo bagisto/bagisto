@@ -10,24 +10,25 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 class CustomerRMADataGrid extends DataGrid
 {
     /**
+     * Pending status.
+     * 
      * @var string
      */
     public const PENDING = 'Pending';
 
     /**
+     * Closed status.
+     * 
      * @var string
      */
     public const CLOSED = 'closed';
 
     /**
+     * Canceled status.
+     * 
      * @var string
      */
     public const CANCELED = 'canceled';
-
-    /**
-     * @var string
-     */
-    public const PENDINGSTATUS = 'Pending';
 
     /**
      * Constructor for the class.
@@ -36,8 +37,7 @@ class CustomerRMADataGrid extends DataGrid
      */
     public function __construct(
         protected RMAStatusRepository $rmaStatusRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Prepare query builder.
@@ -56,6 +56,8 @@ class CustomerRMADataGrid extends DataGrid
 
         $orderId = session()->get('guestOrderId') ?? null;
 
+        $tablePrefix = DB::getTablePrefix();
+
         $queryBuilder = DB::table('rma')
             ->join('orders', 'orders.id', '=', 'rma.order_id')
             ->join('rma_items', 'rma_items.rma_id', '=', 'rma.id')
@@ -68,8 +70,9 @@ class CustomerRMADataGrid extends DataGrid
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
-                DB::raw('SUM(rma_items.quantity) as total_quantity'),
-            )->groupBy('rma.id');
+                DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
+            )
+            ->groupBy('rma.id');
 
         $queryBuilder->where(function ($query) use ($orderId, $customerId, $guestEmail) {
             if (! is_null($orderId)) {
@@ -114,7 +117,7 @@ class CustomerRMADataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                return '<span class="text-sm text-blue-500"><a href="' . route('shop.customers.account.orders.view', ['id' => $row->order_id]) . '">' . '#' . $row->order_id . '</a></span>';
+                return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->order_id]).'">'.'#'.$row->order_id.'</a></span>';
             },
         ]);
 
@@ -136,10 +139,10 @@ class CustomerRMADataGrid extends DataGrid
                     $row->order_status == self::CANCELED
                     && $row->order_status == self::CLOSED
                 ) {
-                    return '<p class="label-canceled">' . trans('shop::app.rma.status.status-name.item-canceled') . '</p>';
+                    return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
 
-                return '<p class="label-active" style="background:' . $rmaStatusData?->color . ';">' . $row->request_status . '</p>';
+                return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
             },
         ]);
 

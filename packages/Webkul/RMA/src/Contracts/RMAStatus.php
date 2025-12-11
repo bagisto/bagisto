@@ -2,5 +2,4 @@
 
 namespace Webkul\RMA\Contracts;
 
-interface RMAStatus
-{}
+interface RMAStatus {}

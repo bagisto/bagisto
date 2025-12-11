@@ -6,7 +6,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RulesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Http\Requests\{MassDestroyRequest,MassUpdateRequest};
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\RMA\Repositories\RMARuleRepository;
 
 class RulesController extends Controller
@@ -41,7 +42,13 @@ class RulesController extends Controller
             'description' => 'required',
         ]);
 
-        $this->rmaRulesRepository->create(request()->input());
+        $this->rmaRulesRepository->create(request()->only(
+            'name',
+            'status',
+            'description',
+            'exchange_period',
+            'return_period'
+        ));
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.rules.create.success'),
@@ -53,13 +60,7 @@ class RulesController extends Controller
      */
     public function edit(int $id): JsonResponse
     {
-        $reason = $this->rmaRulesRepository->find($id);
-
-        if (! $reason) {
-            return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rules.update.not-found'),
-            ], 404);
-        }
+        $reason = $this->rmaRulesRepository->findOrFail($id);
 
         return new JsonResponse($reason);
     }
@@ -72,10 +73,16 @@ class RulesController extends Controller
         $this->validate(request(), [
             'name'             => 'required',
             'status'           => 'required|boolean',
-            'description' => 'required',
+            'description'      => 'required',
         ]);
 
-        $this->rmaRulesRepository->update(request()->except('_method', 'id'), request()->id);
+        $this->rmaRulesRepository->update(request()->only(
+            'name',
+            'status',
+            'description',
+            'exchange_period',
+            'return_period'
+        ), request()->id);
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.rules.edit.success', ['name' => 'Reason']),

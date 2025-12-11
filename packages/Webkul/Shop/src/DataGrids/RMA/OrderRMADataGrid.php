@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\DataGrids\RMA;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderPayment;
@@ -11,16 +11,13 @@ use Webkul\Sales\Models\OrderPayment;
 class OrderRMADataGrid extends DataGrid
 {
     /**
-     * @var string
-     */
-    public const COMPLETE = 'complete';
-
-    /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
     {
         $globalReturnDays = core()->getConfigData('sales.rma.setting.default_allow_days') ?? 0;
+
+        $tablePrefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('orders')
             ->addSelect(
@@ -31,34 +28,38 @@ class OrderRMADataGrid extends DataGrid
                 'orders.grand_total as grand_total',
                 'orders.order_currency_code as order_currency_code',
                 'order_payment.method_title as method_title',
-                DB::raw('SUM(order_items.qty_ordered) as total_qty_ordered'),
-                DB::raw('IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0) as total_rma_qty')
+                DB::raw('SUM('.$tablePrefix.'order_items.qty_ordered) as total_qty_ordered'),
+                DB::raw('IFNULL(SUM('.$tablePrefix.'rma_items_aggregated.total_rma_qty), 0) as total_rma_qty')
             )
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
-            ->leftJoin('attributes as attr_allow_rma', function($join) {
+            ->leftJoin('attributes as attr_allow_rma', function ($join) {
                 $join->on(DB::raw('1'), '=', DB::raw('1'))
                     ->where('attr_allow_rma.code', '=', 'allow_rma');
             })
-            ->leftJoin('product_attribute_values as pav_allow_rma', function($join) {
+            ->leftJoin('product_attribute_values as pav_allow_rma', function ($join) {
                 $join->on('products.id', '=', 'pav_allow_rma.product_id')
                     ->on('pav_allow_rma.attribute_id', '=', 'attr_allow_rma.id');
             })
-            ->leftJoin('attributes as attr_rma_rules', function($join) {
+            ->leftJoin('attributes as attr_rma_rules', function ($join) {
                 $join->on(DB::raw('1'), '=', DB::raw('1'))
                     ->where('attr_rma_rules.code', '=', 'rma_rule_id');
             })
-            ->leftJoin('product_attribute_values as pav_rma_rules', function($join) {
+            ->leftJoin('product_attribute_values as pav_rma_rules', function ($join) {
                 $join->on('products.id', '=', 'pav_rma_rules.product_id')
                     ->on('pav_rma_rules.attribute_id', '=', 'attr_rma_rules.id');
             })
             ->leftJoin('rma_rules', 'pav_rma_rules.integer_value', '=', 'rma_rules.id')
             ->leftJoin('rma', 'orders.id', '=', 'rma.order_id')
             ->leftJoin(
-                DB::raw('(SELECT order_item_id, SUM(quantity) as total_rma_qty
-                        FROM rma_items
-                        GROUP BY order_item_id) as rma_items_aggregated'),
+                DB::raw('
+                    (
+                        SELECT order_item_id, SUM(quantity) as total_rma_qty
+                        FROM '.$tablePrefix.'rma_items
+                        GROUP BY order_item_id
+                    ) as '.$tablePrefix.'rma_items_aggregated
+                '),
                 'order_items.id',
                 '=',
                 'rma_items_aggregated.order_item_id'
@@ -68,26 +69,26 @@ class OrderRMADataGrid extends DataGrid
                 Order::STATUS_CANCELED,
                 Order::STATUS_CLOSED,
                 Order::STATUS_FRAUD,
-                Order::STATUS_PENDING_PAYMENT
+                Order::STATUS_PENDING_PAYMENT,
             ])
             ->whereIn('products.type', explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type')))
-            ->where(function ($query) use ($globalReturnDays) {
-                $query->where(function ($q) {
+            ->where(function ($query) use ($globalReturnDays, $tablePrefix) {
+                $query->where(function ($q) use ($tablePrefix) {
                     $q->where('pav_allow_rma.boolean_value', 1)
-                    ->where('rma_rules.status', 1)
-                    ->whereRaw('DATEDIFF(NOW(), orders.created_at) <= rma_rules.return_period');
-                })->orWhere(function ($q) use ($globalReturnDays) {
+                        ->where('rma_rules.status', 1)
+                        ->whereRaw('DATEDIFF(NOW(), '.$tablePrefix.'orders.created_at) <= '.$tablePrefix.'rma_rules.return_period');
+                })->orWhere(function ($q) use ($globalReturnDays, $tablePrefix) {
                     $q->where(function ($sub) {
                         $sub->whereNull('pav_allow_rma.boolean_value')
                             ->orWhere('pav_allow_rma.boolean_value', 0)
                             ->orWhere('rma_rules.status', 0);
-                    })->whereRaw("DATEDIFF(NOW(), orders.created_at) <= ?", [$globalReturnDays]);
+                    })->whereRaw('DATEDIFF(NOW(), '.$tablePrefix.'orders.created_at) <= ?', [$globalReturnDays]);
                 });
             })
             ->groupBy('orders.id')
-            ->havingRaw('SUM(order_items.qty_ordered) > IFNULL(SUM(rma_items_aggregated.total_rma_qty), 0)');
+            ->havingRaw('SUM('.$tablePrefix.'order_items.qty_ordered) > IFNULL(SUM('.$tablePrefix.'rma_items_aggregated.total_rma_qty), 0)');
 
-        if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == self::COMPLETE) {
+        if (core()->getConfigData('sales.rma.setting.select_allowed_order_status') == Order::STATUS_COMPLETED) {
             $queryBuilder->whereIn('orders.status', [
                 Order::STATUS_COMPLETED,
             ]);
@@ -115,7 +116,7 @@ class OrderRMADataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                return '<span class="text-sm text-blue-500"><a href="' . route('shop.customers.account.orders.view', ['id' => $row->increment_id]) . '">' . '#' . $row->increment_id . '</a></span>';
+                return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->increment_id]).'">'.'#'.$row->increment_id.'</a></span>';
             },
         ]);
 
@@ -185,7 +186,7 @@ class OrderRMADataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                return '<span class="text-sm">' . core()->formatPrice($row->grand_total, $row->order_currency_code) . '</span>';
+                return '<span class="text-sm">'.core()->formatPrice($row->grand_total, $row->order_currency_code).'</span>';
             },
         ]);
 
@@ -207,7 +208,7 @@ class OrderRMADataGrid extends DataGrid
                 })
                 ->toArray(),
             'closure'            => function ($row) {
-                return '<span class="text-sm">' . trans('admin::app.sales.orders.index.datagrid.pay-by', ['method' => '']) . $row->method_title . '</span>';
+                return '<span class="text-sm">'.trans('admin::app.sales.orders.index.datagrid.pay-by', ['method' => '']).$row->method_title.'</span>';
             },
         ]);
 
@@ -220,7 +221,7 @@ class OrderRMADataGrid extends DataGrid
             'filterable'      => true,
             'filterable_type' => 'date_range',
             'closure'         => function ($row) {
-                return '<span class="text-sm">' . $row->created_at . '</span>';
+                return '<span class="text-sm">'.$row->created_at.'</span>';
             },
         ]);
     }

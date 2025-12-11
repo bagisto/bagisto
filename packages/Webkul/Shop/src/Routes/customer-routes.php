@@ -169,7 +169,6 @@ Route::prefix('customer')->group(function () {
                 Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
             });
 
-
             /**
              * Customer RMA Routes.
              */

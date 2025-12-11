@@ -1531,7 +1531,7 @@ return [
             'order-id'    => 'Bestel-ID',
             'title'       => 'Gast Login',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'Aanvullende informatie:',
@@ -1546,14 +1546,14 @@ return [
                 'summary'                => 'Samenvatting van de RMA van de bestelling',
                 'thank-you'              => 'Bedankt',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'Productnaam',
                 'qty'          => 'Aantal',
                 'reason'       => 'Reden',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'Nieuw Bericht',
                 'heading' => 'Beste :name,',
@@ -1562,7 +1562,7 @@ return [
                 'process' => 'Uw retourverzoek wordt verwerkt.',
                 'solved'  => 'De RMA-status is door de klant gewijzigd naar Opgelost.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'Nieuw Bericht',
                 'heading' => 'Beste :name',
@@ -1570,7 +1570,7 @@ return [
                 'quotes'  => 'Er is een nieuw bericht van de beheerder',
                 'title'   => 'Bericht ontvangen!',
             ],
-    
+
             'status' => [
                 'heading'       => 'Beste :name',
                 'quotes'        => 'Uw RMA-status is gewijzigd door de verkoper',
@@ -1581,7 +1581,7 @@ return [
                 'your-rma-id'   => 'Uw RMA ID',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'Accepteren',
@@ -1596,7 +1596,7 @@ return [
                 'received-package'         => 'Pakket ontvangen',
                 'solved'                   => 'Opgelost',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA is afgewezen door de beheerder.',
                 'declined-buyer'  => 'RMA is afgewezen door de koper.',
@@ -1604,7 +1604,7 @@ return [
                 'solved'          => 'RMA is opgelost.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'RMA-status is al geannuleerd.',
             'cancel-success'    => 'RMA-status is succesvol geannuleerd.',

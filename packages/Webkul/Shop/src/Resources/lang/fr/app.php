@@ -1314,7 +1314,6 @@ return [
         ],
     ],
 
-
     'rma' => [
         'customer' => [
             'delivered'    => 'Livré',
@@ -1532,7 +1531,7 @@ return [
             'order-id'    => 'ID de commande',
             'title'       => 'Connexion invité',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'Informations supplémentaires :',
@@ -1547,14 +1546,14 @@ return [
                 'summary'                => 'Résumé du RMA de la commande',
                 'thank-you'              => 'Merci',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'Nom du produit',
                 'qty'          => 'Quantité',
                 'reason'       => 'Raison',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'Nouveau message',
                 'heading' => 'Cher :name',
@@ -1563,7 +1562,7 @@ return [
                 'process' => 'Votre demande de retour est en cours de traitement.',
                 'solved'  => 'Le statut RMA a été changé en Résolu par le client.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'Nouveau message',
                 'heading' => 'Cher :name',
@@ -1571,7 +1570,7 @@ return [
                 'quotes'  => 'Il y a un nouveau message de l’administrateur',
                 'title'   => 'Message reçu !',
             ],
-    
+
             'status' => [
                 'heading'       => 'Cher :name',
                 'quotes'        => 'Le statut de votre RMA a été modifié par le vendeur',
@@ -1582,7 +1581,7 @@ return [
                 'your-rma-id'   => 'Votre ID RMA',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'Accepté',
@@ -1597,7 +1596,7 @@ return [
                 'received-package'         => 'Colis reçu',
                 'solved'                   => 'Résolu',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'Le RMA a été refusé par l\'administrateur.',
                 'declined-buyer'  => 'Le RMA a été refusé par l\'acheteur.',
@@ -1605,7 +1604,7 @@ return [
                 'solved'          => 'Le RMA a été résolu.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'Le statut RMA a déjà été annulé.',
             'cancel-success'    => 'Le statut RMA a été annulé avec succès.',

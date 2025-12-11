@@ -9,17 +9,21 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
-use Webkul\Shop\Mail\Customer\RMA\CustomerConversationEmail;
-use Webkul\RMA\Repositories\{RMAReasonResolutionRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
+use Webkul\RMA\Repositories\RMAItemRepository;
+use Webkul\RMA\Repositories\RMAMessageRepository;
+use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
+use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Mail\Customer\RMA\CustomerConversationEmail;
 
 class RMAActionController extends Controller
 {
     /**
      * Product Type
      *
-     * @var Array
+     * @var array
      */
     public const PRODUCT_TYPE = ['virtual', 'downloadable', 'booking', 'configurable'];
 
@@ -124,9 +128,9 @@ class RMAActionController extends Controller
 
         if (! empty($data['close_rma'])) {
             $rma->update([
-                'status'       => 1,
+                'status'           => 1,
                 'request_status'   => self::SOLVED,
-                'order_status' => 'closed',
+                'order_status'     => 'closed',
             ]);
 
             $this->rmaMessagesRepository->create([
@@ -148,7 +152,7 @@ class RMAActionController extends Controller
     public function reOpen(): RedirectResponse
     {
         $data = request()->all();
-        
+
         $rma = $this->rmaRepository->find($data['rma_id']);
 
         if (! empty($data['close_rma'])) {
@@ -163,10 +167,10 @@ class RMAActionController extends Controller
             $order->update(['status' => 'pending']);
 
             $rma->update([
-                'status'       => self::ACTIVE,
+                'status'           => self::ACTIVE,
                 'request_status'   => self::PENDING,
-                'status'       => self::INACTIVE,
-                'order_status' => self::INACTIVE,
+                'status'           => self::INACTIVE,
+                'order_status'     => self::INACTIVE,
             ]);
 
             $this->rmaMessagesRepository->create([
@@ -204,7 +208,7 @@ class RMAActionController extends Controller
     public function sendMessage(): JsonResponse
     {
         $data = request()->all();
-        
+
         $conversationDetails = [
             'adminName'     => 'Admin',
             'message'       => $data['message'],
@@ -224,7 +228,7 @@ class RMAActionController extends Controller
 
                 $filename = $file->getClientOriginalName();
 
-                $path = $file->storeAs('rma-conversation/' . $storedMessage->id, $filename);
+                $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
 
                 $this->rmaMessagesRepository->update([
                     'attachment_path' => $path,

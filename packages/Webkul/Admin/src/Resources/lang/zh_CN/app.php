@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => '允许针对待处理订单的新RMA请求',
                         'allow-rma-for-digital-product'       => '允许数字产品的RMA',
                         'allowed-file-extension'              => '允许的文件扩展名',
-                        'allowed-file-types'                  => '请选择仅文件类型 ' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                        'allowed-file-types'                  => '请选择仅文件类型 '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
                         'allowed-info'                        => '用逗号分隔。例如：jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => '允许取消请求的新RMA请求',
                         'allowed-request-declined-request'    => '允许被拒请求的新RMA请求',
@@ -5523,18 +5523,18 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA已创建',
-                    'rma-created-message'  => '产品数量为:qty的RMA请求已创建'
+                    'rma-created-message'  => '产品数量为:qty的RMA请求已创建',
                 ],
             ],
         ],
 
-            'rma' => [
-                'index' => [
+        'rma' => [
+            'index' => [
                 'create-rma-title' => '创建',
                 'reason-title'     => '原因',
                 'rma-title'        => '退货',
-                ],
             ],
+        ],
 
         'acl' => [
             'delete'      => '删除',

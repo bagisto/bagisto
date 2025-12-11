@@ -25,8 +25,8 @@ class RMAImageRepository extends Repository
 
         if (! empty($requestData['images'])) {
             foreach ($requestData['images'] as $imageId => $image) {
-                $file = 'images.' . $imageId;
-                $dir = 'rma/' . $rma->id;
+                $file = 'images.'.$imageId;
+                $dir = 'rma/'.$rma->id;
 
                 if (str_contains($imageId, '')) {
                     if (request()->hasFile($file)) {

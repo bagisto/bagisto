@@ -13,9 +13,9 @@ return [
                 'inventories'      => 'מלאי',
                 'meta-description' => 'תיאור מטא',
                 'price'            => 'מחיר',
+                'rma'              => 'RMA',
                 'settings'         => 'הגדרות',
                 'shipping'         => 'משלוח',
-                'rma'              => 'RMA',
             ],
 
             'attributes' => [
@@ -40,9 +40,9 @@ return [
                 'short-description'    => 'תיאור קצר',
                 'size'                 => 'גודל',
                 'sku'                  => 'קוד מוצר',
+                'special-price'        => 'מחיר מיוחד',
                 'special-price-from'   => 'מחיר מיוחד מ',
                 'special-price-to'     => 'מחיר מיוחד עד',
-                'special-price'        => 'מחיר מיוחד',
                 'status'               => 'סטטוס',
                 'tax-category'         => 'קטגוריית מס',
                 'url-key'              => 'מפתח URL',

@@ -6,45 +6,50 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use Webkul\Shop\DataGrids\RMA\Guest\OrderRMADataGrid as GuestOrderRMADataGrid;
-use Webkul\RMA\Repositories\{RMAAdditionalFieldRepository, RMAImageRepository, RMAItemRepository, RMAMessageRepository, RMAReasonRepository, RMARepository};
-use Webkul\Sales\Repositories\{OrderRepository, OrderItemRepository};
+use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
+use Webkul\RMA\Repositories\RMAImageRepository;
+use Webkul\RMA\Repositories\RMAItemRepository;
+use Webkul\RMA\Repositories\RMAMessageRepository;
+use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMARepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\RMA\CustomerRMADataGrid;
+use Webkul\Shop\DataGrids\RMA\Guest\OrderRMADataGrid as GuestOrderRMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class GuestController extends Controller
 {
-	/**
+    /**
      * RMA Status
      *
      * @var string
      */
     public const PENDING = 'Pending';
 
-	/**
+    /**
      * @var string
      */
     public const CONFIGURABLE = 'configurable';
 
-	/**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(
-		protected OrderItemRepository $orderItemRepository,
-		protected OrderRepository $orderRepository,
-		protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
-		protected RMAImageRepository $rmaImagesRepository,
-		protected RMAItemRepository $rmaItemsRepository,
-		protected RMAMessageRepository $rmaMessagesRepository,
-		protected RMAReasonRepository $rmaReasonsRepository,
-		protected RMARepository $rmaRepository,
-	){
-	}
+        protected OrderItemRepository $orderItemRepository,
+        protected OrderRepository $orderRepository,
+        protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
+        protected RMAImageRepository $rmaImagesRepository,
+        protected RMAItemRepository $rmaItemsRepository,
+        protected RMAMessageRepository $rmaMessagesRepository,
+        protected RMAReasonRepository $rmaReasonsRepository,
+        protected RMARepository $rmaRepository,
+    ) {}
 
-	/**
+    /**
      * Method to populate the customer and guest rma index page.
      */
     public function index(): View|JsonResponse|RedirectResponse
@@ -60,7 +65,7 @@ class GuestController extends Controller
         return view('shop::guest.rma.index');
     }
 
-	/**
+    /**
      * Get details of rma
      */
     public function view(int $id): View|RedirectResponse
@@ -74,7 +79,7 @@ class GuestController extends Controller
         return view('shop::guest.rma.view', compact('rma'));
     }
 
-	/**
+    /**
      * Create rma for guest
      */
     public function create(): RedirectResponse|View|JsonResponse
@@ -86,7 +91,7 @@ class GuestController extends Controller
         return view('shop::guest.rma.create');
     }
 
-	/**
+    /**
      * Store a newly created rma.
      */
     public function store(): JsonResponse|RedirectResponse
@@ -101,7 +106,7 @@ class GuestController extends Controller
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
-            'images.*'        => 'nullable|file|mimetypes:' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $data = request()->only([
@@ -128,12 +133,12 @@ class GuestController extends Controller
         }
 
         $rma = $this->rmaRepository->create([
-            'status'            => '',
-            'order_id'          => $data['order_id'],
-            'information'       => $data['information'] ?? null,
-            'order_status'      => $data['order_status'],
+            'status'                => '',
+            'order_id'              => $data['order_id'],
+            'information'           => $data['information'] ?? null,
+            'order_status'          => $data['order_status'],
             'request_status'        => self::PENDING,
-            'package_condition' => $data['package_condition'] ?? '',
+            'package_condition'     => $data['package_condition'] ?? '',
         ]);
 
         $data['order_items'] = [];
@@ -165,7 +170,7 @@ class GuestController extends Controller
 
         $data['rma_id'] = $rma->id;
 
-         if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
+        if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
             foreach ($data['images'] as $itemImg) {
                 $this->rmaImagesRepository->create([
                     'rma_id' => $rma->id,

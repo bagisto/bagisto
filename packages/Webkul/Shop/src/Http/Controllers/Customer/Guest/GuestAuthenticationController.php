@@ -9,14 +9,14 @@ use Webkul\Shop\Http\Controllers\Controller;
 
 class GuestAuthenticationController extends Controller
 {
-	/**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(protected OrderRepository $orderRepository) {}
 
-	/**
+    /**
      * Login for the guest user
      */
     public function index(): View|RedirectResponse

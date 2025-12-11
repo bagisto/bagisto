@@ -1314,7 +1314,6 @@ return [
         ],
     ],
 
-
     'rma' => [
         'customer' => [
             'delivered'    => 'נמסר',
@@ -1532,7 +1531,7 @@ return [
             'order-id'    => 'מספר הזמנה',
             'title'       => 'התחברות אורחים',
         ],
-    
+
         'mail' => [
             'customer-rma-create' => [
                 'additional-information' => 'מידע נוסף :',
@@ -1547,14 +1546,14 @@ return [
                 'summary'                => 'סיכום של RMA הזמנה',
                 'thank-you'              => 'תודה',
             ],
-    
+
             'customer-data-table-heading' => [
                 'product-name' => 'שם המוצר',
                 'qty'          => 'כמות',
                 'reason'       => 'סיבה',
                 'sku'          => 'SKU',
             ],
-    
+
             'customer-conversation' => [
                 'subject' => 'הודעה חדשה',
                 'heading' => 'יקר :name,',
@@ -1563,7 +1562,7 @@ return [
                 'process' => 'בקשת ההחזרה שלך נמצאת בתהליך.',
                 'solved'  => 'סטטוס RMA שונה לפתרון על ידי הלקוח.',
             ],
-    
+
             'seller-conversation' => [
                 'subject' => 'הודעה חדשה',
                 'heading' => 'יקר :name',
@@ -1571,7 +1570,7 @@ return [
                 'quotes'  => 'יש הודעה חדשה מהאדמין',
                 'title'   => 'הודעה התקבלה!',
             ],
-    
+
             'status' => [
                 'heading'       => 'יקר :name',
                 'quotes'        => 'הסטטוס של RMA שלך השתנה על ידי המוכר',
@@ -1582,7 +1581,7 @@ return [
                 'your-rma-id'   => 'המזהה שלך RMA',
             ],
         ],
-    
+
         'status' => [
             'status-name' => [
                 'accept'                   => 'קבל',
@@ -1597,7 +1596,7 @@ return [
                 'received-package'         => 'החבילה התקבלה',
                 'solved'                   => 'פתרון נמצא',
             ],
-    
+
             'status-quotes' => [
                 'declined-admin'  => 'RMA נדחה על ידי המנהל.',
                 'declined-buyer'  => 'RMA נדחה על ידי הלקוח.',
@@ -1605,7 +1604,7 @@ return [
                 'solved'          => 'RMA פתור.',
             ],
         ],
-    
+
         'response' => [
             'already-cancel'    => 'סטטוס RMA כבר בוטל.',
             'cancel-success'    => 'סטטוס RMA בוטל בהצלחה.',

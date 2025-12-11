@@ -12,11 +12,13 @@ use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
-use Webkul\RMA\Repositories\{RMAReasonResolutionRepository, RMAReasonRepository, RMARepository};
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
+use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
+use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
@@ -59,8 +61,7 @@ class RequestController extends Controller
         protected RMAMessageRepository $rmaMessagesRepository,
         protected RMAReasonRepository $rmaReasonRepository,
         protected RMARepository $rmaRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display the RMA creation form.
@@ -89,7 +90,7 @@ class RequestController extends Controller
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
-            'images.*'        => 'nullable|file|mimetypes:' . core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $requestData = request()->only([
@@ -116,12 +117,12 @@ class RequestController extends Controller
         }
 
         $rma = $this->rmaRepository->create([
-            'status'            => '',
-            'order_id'          => $requestData['order_id'],
-            'information'       => $requestData['information'] ?? null,
-            'order_status'      => $requestData['order_status'],
+            'status'                => '',
+            'order_id'              => $requestData['order_id'],
+            'information'           => $requestData['information'] ?? null,
+            'order_status'          => $requestData['order_status'],
             'request_status'        => self::PENDING,
-            'package_condition' => $requestData['package_condition'] ?? '',
+            'package_condition'     => $requestData['package_condition'] ?? '',
         ]);
 
         $this->storeRelatedData($requestData, $rma);
@@ -131,7 +132,8 @@ class RequestController extends Controller
         ]);
     }
 
-    public function storeRelatedData($data, $rma) {
+    public function storeRelatedData($data, $rma)
+    {
         $data['order_items'] = [];
         $rmaItemIds = [];
 
@@ -246,13 +248,13 @@ class RequestController extends Controller
     public function getResolutionReason(string $resolutionType): RMAReasonResolution|Collection
     {
         $existResolutions = $this->rmaReasonResolutionsRepository
-                                ->where('resolution_type', $resolutionType)
-                                ->pluck('rma_reason_id');
+            ->where('resolution_type', $resolutionType)
+            ->pluck('rma_reason_id');
 
         $reasons = $this->rmaReasonRepository
-                    ->whereIn('id', $existResolutions)
-                    ->where('status', self::ACTIVE)
-                    ->get();
+            ->whereIn('id', $existResolutions)
+            ->where('status', self::ACTIVE)
+            ->get();
 
         return $reasons;
     }

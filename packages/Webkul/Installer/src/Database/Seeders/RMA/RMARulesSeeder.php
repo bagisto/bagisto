@@ -8,31 +8,26 @@ use Illuminate\Support\Facades\DB;
 class RMARulesSeeder extends Seeder
 {
     /**
-     * Seed the rma rules table
+     * Run the database seeds.
      *
      * @return void
      */
     public function run($parameters = [])
     {
-        $timestamp = now();
+        DB::table('rma_rules')->delete();
 
-        $rules = [
+        $defaultRules = [
             [
                 'name'            => 'Basic',
                 'description'     => 1,
                 'status'          => 1,
                 'exchange_period' => 10,
                 'return_period'   => 10,
-                'created_at'      => $timestamp,
-                'updated_at'      => $timestamp,
+                'created_at'      => now(),
+                'updated_at'      => now(),
             ],
         ];
 
-        foreach ($rules as $rule) {
-            DB::table('rma_rules')->updateOrInsert(
-                ['name' => $rule['name']],
-                $rule
-            );
-        }
+        DB::table('rma_rules')->insert($defaultRules);
     }
 }

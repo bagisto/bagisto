@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'মুলতুবি অর্ডারের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
                         'allow-rma-for-digital-product'       => 'ডিজিটাল পণ্যের জন্য RMA অনুমোদন করুন',
                         'allowed-file-extension'              => 'অনুমোদিত ফাইল এক্সটেনশন',
-                        'allowed-file-types'                  => 'অনুগ্রহ করে ফাইলের ধরন নির্বাচন করুন ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' কেবল',
+                        'allowed-file-types'                  => 'অনুগ্রহ করে ফাইলের ধরন নির্বাচন করুন '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' কেবল',
                         'allowed-info'                        => 'কমা দিয়ে পৃথক করা হয়েছে। উদাহরণস্বরূপ: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'বাতিল অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
                         'allowed-request-declined-request'    => 'প্রত্যাখ্যাত অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'RMA তৈরি করা হয়েছে',
-                    'rma-created-message'  => 'RMA অনুরোধটি :qty পরিমাণ পণ্যের জন্য উপলব্ধ'
+                    'rma-created-message'  => 'RMA অনুরোধটি :qty পরিমাণ পণ্যের জন্য উপলব্ধ',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'তৈরি করুন',
-            'reason-title'     => 'কারণসমূহ',
-            'rma-title'        => 'ফেরতসমূহ',
+                'create-rma-title' => 'তৈরি করুন',
+                'reason-title'     => 'কারণসমূহ',
+                'rma-title'        => 'ফেরতসমূহ',
             ],
         ],
 

@@ -5256,7 +5256,7 @@ return [
                         'allow-new-request-for-pending-order' => 'Bekleyen sipariş için yeni RMA talebine izin ver',
                         'allow-rma-for-digital-product'       => 'Dijital ürün için RMA\'ya izin ver',
                         'allowed-file-extension'              => 'İzin verilen dosya uzantısı',
-                        'allowed-file-types'                  => 'Lütfen yalnızca ' . core()->getConfigData('sales.rma.setting.allowed_file_extension') . ' dosya türlerini seçin',
+                        'allowed-file-types'                  => 'Lütfen yalnızca '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' dosya türlerini seçin',
                         'allowed-info'                        => 'Virgülle ayrılmış. Örneğin: jpg,jpeg,pdf',
                         'allowed-request-cancelled-request'   => 'İptal edilen talep için yeni RMA talebine izin ver',
                         'allowed-request-declined-request'    => 'Reddedilen talep için yeni RMA talebine izin ver',
@@ -5523,16 +5523,16 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'İade Talebi başarıyla oluşturuldu',
-                    'rma-created-message'  => ':qty miktarındaki ürün için bir RMA talebi mevcuttur'
+                    'rma-created-message'  => ':qty miktarındaki ürün için bir RMA talebi mevcuttur',
                 ],
             ],
         ],
 
         'rma' => [
             'index' => [
-            'create-rma-title' => 'Oluştur',
-            'reason-title'     => 'Sebepler',
-            'rma-title'        => 'İadeler',
+                'create-rma-title' => 'Oluştur',
+                'reason-title'     => 'Sebepler',
+                'rma-title'        => 'İadeler',
             ],
         ],
 

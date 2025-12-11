@@ -2,13 +2,14 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
-use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\ReasonDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Http\Requests\{MassDestroyRequest,MassUpdateRequest};
-use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
 
 class ReasonController extends Controller
 {
@@ -18,10 +19,9 @@ class ReasonController extends Controller
      * @return void
      */
     public function __construct(
-        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAReasonRepository $rmaReasonRepository,
-    ) {
-    }
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -41,17 +41,20 @@ class ReasonController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'    => 'required',
-            'status'   => 'required|boolean',
-            'position' => 'required',
+            'title'           => 'required',
+            'status'          => 'required|boolean',
+            'position'        => 'required',
+            'resolution_type' => 'required|array|min:1',
         ]);
 
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
-        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->create([
-            'rma_reason_id'   => $rmaReason->id,
-            'resolution_type' => $resolutionType,
-        ]), request()->resolution_type);
+        foreach (request()->resolution_type as $resolutionType) {
+            $this->rmaReasonResolutionsRepository->create([
+                'rma_reason_id'   => $rmaReason->id,
+                'resolution_type' => $resolutionType,
+            ]);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.reasons.create.success'),
@@ -63,13 +66,7 @@ class ReasonController extends Controller
      */
     public function edit(int $id): JsonResponse
     {
-        $reason = $this->rmaReasonRepository->find($id);
-
-        if (! $reason) {
-            return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.reasons.update.not-found'),
-            ], 404);
-        }
+        $reason = $this->rmaReasonRepository->findOrFail($id);
 
         $reason->reasonResolutions = $reason->reasonResolutions->pluck('resolution_type')->toArray();
 
@@ -82,9 +79,10 @@ class ReasonController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'title'    => 'required',
-            'status'   => 'required|boolean',
-            'position' => 'required',
+            'title'           => 'required',
+            'status'          => 'required|boolean',
+            'position'        => 'required',
+            'resolution_type' => 'required|array|min:1',
         ]);
 
         $rmaReason = $this->rmaReasonRepository->update(request()->only('title', 'status', 'position'), request()->id);
@@ -94,13 +92,17 @@ class ReasonController extends Controller
         $existResolution = $this->rmaReasonResolutionsRepository->where('rma_reason_id', $rmaReason->id)->get();
 
         if (! empty($existResolution)) {
-            $this->rmaReasonResolutionsRepository->whereNotIn('resolution_type', $resolutionTypes)->where('rma_reason_id', $rmaReason->id)->delete();
+            $this->rmaReasonResolutionsRepository->whereNotIn('resolution_type', $resolutionTypes)
+                ->where('rma_reason_id', $rmaReason->id)
+                ->delete();
         }
 
-        array_map(fn($resolutionType) => $this->rmaReasonResolutionsRepository->updateOrCreate([
-            'rma_reason_id'   => $rmaReason->id,
-            'resolution_type' => $resolutionType,
-        ]), $resolutionTypes);
+        foreach ($resolutionTypes as $resolutionType) {
+            $this->rmaReasonResolutionsRepository->updateOrCreate([
+                'rma_reason_id'   => $rmaReason->id,
+                'resolution_type' => $resolutionType,
+            ]);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.rma.sales.rma.reasons.edit.success', ['name' => 'Reason']),

@@ -5303,7 +5303,7 @@ return [
         'components' => [
             'layouts' => [
                 'sidebar' => [
-                    'rma'=>'RMA',
+                    'rma'=> 'RMA',
                 ],
             ],
         ],
@@ -5523,7 +5523,7 @@ return [
             'invoice' => [
                 'create' => [
                     'rma_has_been_created' => 'S\'ha creat la RMA',
-                    'rma-created-message'  => 'Hi ha una sol·licitud RMA disponible per al producte amb una quantitat de :qty'
+                    'rma-created-message'  => 'Hi ha una sol·licitud RMA disponible per al producte amb una quantitat de :qty',
                 ],
             ],
         ],
