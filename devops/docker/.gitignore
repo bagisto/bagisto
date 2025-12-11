@@ -1,0 +1,5 @@
+# Ignore production environment file (contains secrets)
+.env.production
+
+# But keep the example
+!.env.production.example

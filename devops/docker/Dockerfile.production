@@ -1,0 +1,86 @@
+FROM php:8.3-fpm
+
+# Build arguments
+ARG WWWGROUP=1000
+ARG NODE_VERSION=20
+
+# Environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Mexico_City
+
+# Set timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    libicu-dev \
+    zip \
+    unzip \
+    supervisor \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        pdo_mysql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip \
+        intl \
+        calendar
+
+# Install Redis extension
+RUN pecl install redis && docker-php-ext-enable redis
+
+# Copy Composer from official image
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create application user
+RUN groupadd --force -g $WWWGROUP sail
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1000 sail
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy application files
+COPY --chown=sail:sail . /var/www/html
+
+# Install Composer dependencies (production)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+# Set permissions
+RUN chown -R sail:sail /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
+
+# Configure PHP-FPM
+RUN echo "php_admin_value[error_log] = /var/www/html/storage/logs/php-fpm.log" >> /usr/local/etc/php-fpm.d/www.conf \
+    && echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
+
+# Copy PHP production configuration
+COPY devops/docker/php.ini /usr/local/etc/php/conf.d/99-production.ini
+
+# Expose port
+EXPOSE 9000
+
+# Switch to application user
+USER sail
+
+# Start PHP-FPM
+CMD ["php-fpm"]

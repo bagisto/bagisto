@@ -1,0 +1,8 @@
+# Ignore all .env files with secrets
+*.env
+.env.*
+
+# But keep examples
+!.env.example
+!*.env.example
+!docker/.env.production.example
