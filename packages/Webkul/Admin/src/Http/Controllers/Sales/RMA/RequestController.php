@@ -128,7 +128,7 @@ class RequestController extends Controller
         $this->storeRelatedData($requestData, $rma);
 
         return new JsonResponse([
-            'messages' => trans('admin::app.rma.sales.rma.create-rma.create-success'),
+            'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
         ]);
     }
 
@@ -225,7 +225,7 @@ class RequestController extends Controller
             Cookie::has('rmaData') ? setcookie('rmaData', null, -1, '/') : '';
 
             return response()->json([
-                'messages' => trans('admin::app.rma.sales.rma.create-rma.create-success'),
+                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
             ]);
         }
 

@@ -814,6 +814,230 @@ return [
 
             'title' => 'محصولات رزرو',
         ],
+
+        'rma' => [
+            'all-rma' => [
+                'index' => [
+                    'title' => 'همه RMA ها',
+
+                    'datagrid' => [
+                        'create'        => 'ایجاد شده در',
+                        'customer-name' => 'نام مشتری',
+                        'id'            => 'شناسه RMA',
+                        'order-ref'     => 'مرجع سفارش',
+                        'order-status'  => 'وضعیت سفارش',
+                        'rma-status'    => 'وضعیت RMA',
+                    ],
+                ],
+
+                'view' => [
+                    'add-attachments'        => 'افزودن پیوست‌ها',
+                    'additional-information' => 'اطلاعات اضافی:',
+                    'attachment'             => 'پیوست',
+                    'change-status'          => 'تغییر وضعیت',
+                    'confirm-print'          => 'برای چاپ RMA روی تأیید کلیک کنید',
+                    'conversations'          => 'مکالمات',
+                    'customer-details'       => 'جزئیات مشتری',
+                    'customer-email'         => 'ایمیل مشتری:',
+                    'customer'               => 'مشتری:',
+                    'enter-message'          => 'پیام را وارد کنید',
+                    'images'                 => 'تصویر:',
+                    'no-record'              => 'هیچ سابقه‌ای یافت نشد!',
+                    'order-date'             => 'تاریخ سفارش:',
+                    'order-details'          => 'آیتم(های) درخواست شده برای RMA',
+                    'order-id'               => 'شناسه سفارش:',
+                    'order-status'           => 'وضعیت سفارش:',
+                    'order-total'            => 'مجموع سفارش:',
+                    'request-on'             => 'درخواست در:',
+                    'resolution-type'        => 'نوع راه حل:',
+                    'rma-status'             => 'وضعیت RMA:',
+                    'save-btn'               => 'ذخیره',
+                    'send-message-btn'       => 'ارسال پیام',
+                    'send-message-success'   => 'پیام با موفقیت ارسال شد.',
+                    'send-message'           => 'ارسال پیام',
+                    'status'                 => 'وضعیت',
+                    'title'                  => 'RMA',
+                    'update-success'         => 'وضعیت RMA با موفقیت به‌روزرسانی شد.',
+                    'view-title'             => 'RMA',
+                ],
+            ],
+
+            'rma-status' => [
+                'index' => [
+                    'create-btn' => 'ایجاد وضعیت RMA',
+                    'title'      => 'وضعیت RMA',
+
+                    'datagrid' => [
+                        'created-at'          => 'ایجاد شده در',
+                        'delete-success'      => 'وضعیت RMA با موفقیت حذف شد.',
+                        'disabled'            => 'غیرفعال',
+                        'enabled'             => 'فعال',
+                        'id'                  => 'شناسه',
+                        'mass-delete-success' => 'وضعیت RMA انتخاب شده با موفقیت حذف شد.',
+                        'reason-error'        => 'وضعیت RMA در RMA استفاده شده است.',
+                        'reason'              => 'وضعیت RMA',
+                        'status'              => 'وضعیت',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'افزودن وضعیت RMA جدید',
+                    'reason'       => 'وضعیت RMA',
+                    'save-btn'     => 'ذخیره وضعیت RMA',
+                    'status'       => 'وضعیت',
+                    'success'      => 'وضعیت RMA با موفقیت ایجاد شد.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'ویرایش وضعیت RMA',
+                    'mass-update-success' => 'وضعیت RMA انتخاب شده با موفقیت به‌روزرسانی شد.',
+                    'reason'              => 'وضعیت RMA',
+                    'save-btn'            => 'ذخیره وضعیت RMA',
+                    'status'              => 'وضعیت',
+                    'success'             => 'وضعیت RMA با موفقیت به‌روزرسانی شد.',
+                ],
+            ],
+
+            'reasons' => [
+                'index' => [
+                    'create-btn' => 'ایجاد دلیل RMA',
+                    'title'      => 'دلایل',
+
+                    'datagrid' => [
+                        'created-at'          => 'ایجاد شده در',
+                        'delete-success'      => 'دلیل با موفقیت حذف شد.',
+                        'disabled'            => 'غیرفعال',
+                        'enabled'             => 'فعال',
+                        'id'                  => 'شناسه',
+                        'mass-delete-success' => 'اطلاعات انتخاب شده با موفقیت حذف شدند',
+                        'reason-error'        => 'این دلیل در RMA استفاده شده است.',
+                        'reason'              => 'دلیل',
+                        'status'              => 'وضعیت',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'افزودن دلیل جدید',
+                    'reason'       => 'دلیل',
+                    'save-btn'     => 'ذخیره دلیل',
+                    'status'       => 'وضعیت',
+                    'success'      => 'دلیل با موفقیت ایجاد شد.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'ویرایش دلیل',
+                    'mass-update-success' => 'دلایل انتخاب شده با موفقیت به روز شدند.',
+                    'reason'              => 'دلیل',
+                    'save-btn'            => 'ذخیره دلیل',
+                    'status'              => 'وضعیت',
+                    'success'             => 'دلیل با موفقیت به روز شد.',
+                ],
+            ],
+
+            'custom-field' => [
+                'index' => [
+                    'create-btn' => 'اضافه کردن فیلد جدید',
+                    'title'      => 'فیلدهای سفارشی RMA',
+
+                    'datagrid' => [
+                        'created-at'          => 'ایجاد شده در',
+                        'delete-success'      => 'فیلدهای سفارشی با موفقیت حذف شدند.',
+                        'disabled'            => 'غیرفعال',
+                        'enabled'             => 'فعال',
+                        'id'                  => 'شناسه',
+                        'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند',
+                        'status'              => 'وضعیت',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'فیلد سفارشی جدید',
+                    'save-btn'     => 'ذخیره فیلد سفارشی',
+                    'status'       => 'وضعیت',
+                    'success'      => 'فیلد سفارشی با موفقیت ایجاد شد.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'ویرایش فیلد سفارشی',
+                    'mass-update-success' => 'فیلدهای سفارشی انتخاب شده با موفقیت به‌روزرسانی شدند.',
+                    'reason'              => 'فیلد سفارشی',
+                    'save-btn'            => 'ذخیره فیلد سفارشی',
+                    'status'              => 'وضعیت',
+                    'success'             => 'فیلد سفارشی با موفقیت به‌روزرسانی شد.',
+                ],
+            ],
+
+            'rules' => [
+                'index' => [
+                    'create-btn' => 'ایجاد قوانین RMA',
+                    'title'      => 'قوانین RMA',
+
+                    'datagrid' => [
+                        'delete-success'      => 'قوانین RMA با موفقیت حذف شدند.',
+                        'disabled'            => 'غیرفعال',
+                        'enabled'             => 'فعال',
+                        'exchange-period'     => 'دوره تعویض (روزها)',
+                        'id'                  => 'شناسه',
+                        'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند.',
+                        'reason'              => 'قوانین',
+                        'return-period'       => 'دوره بازگشت (روزها)',
+                        'status'              => 'وضعیت',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title'       => 'افزودن قوانین جدید RMA',
+                    'reason'             => 'قوانین RMA',
+                    'rule-description'   => 'توضیحات قوانین',
+                    'rule-details'       => 'جزئیات قوانین',
+                    'resolutions-period' => 'دوره راه‌حل‌ها',
+                    'rules-title'        => 'عنوان قوانین',
+                    'save-btn'           => 'ذخیره قوانین RMA',
+                    'status'             => 'وضعیت RMA',
+                    'success'            => 'قوانین RMA با موفقیت ایجاد شدند.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'ویرایش قوانین RMA',
+                    'mass-update-success' => 'قوانین RMA انتخاب شده با موفقیت به‌روزرسانی شدند.',
+                    'reason'              => 'قوانین RMA',
+                    'save-btn'            => 'به‌روزرسانی قوانین RMA',
+                    'status'              => 'وضعیت',
+                    'success'             => 'قوانین RMA با موفقیت به‌روزرسانی شدند.',
+                ],
+            ],
+
+            'create-rma' => [
+                'create-success'           => 'RMA با موفقیت ایجاد شد.',
+                'create-title'             => 'ایجاد RMA',
+                'email'                    => 'ایمیل',
+                'image'                    => 'تصویر',
+                'invalid-order-id'         => 'شناسه سفارش نامعتبر است',
+                'mismatch'                 => 'شناسه سفارش و ایمیل مطابقت ندارند',
+                'new-rma'                  => 'RMA جدید',
+                'order-id'                 => 'شناسه سفارش',
+                'quantity'                 => 'تعداد',
+                'reason'                   => 'دلیل',
+                'rma-already-exist'        => 'این RMA از قبل وجود دارد',
+                'rma-not-available-quotes' => 'مورد برای RMA در دسترس نیست',
+                'save-btn'                 => 'ذخیره',
+                'search'                   => '--انتخاب--',
+                'validate'                 => 'اعتبارسنجی',
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma-has-been-created' => 'RMA با موفقیت ایجاد شد',
+                    'rma-created-message'  => 'درخواست RMA برای محصول با مقدار :qty موجود است',
+                ],
+            ],
+
+            'index' => [
+                'create-rma-title' => 'ایجاد',
+                'reason-title'     => 'دلایل',
+                'rma-title'        => 'بازگشت‌ها',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -4703,6 +4927,54 @@ return [
                         'title'                => 'سبد خرید کوچک',
                     ],
                 ],
+
+                'rma' => [
+                    'afternoon'                           => 'بعد از ظهر',
+                    'all-products'                        => 'تمام محصولات',
+                    'all-status'                          => 'تمام وضعیت‌ها',
+                    'allow-new-request-for-pending-order' => 'اجازه درخواست جدید RMA برای سفارش معلق',
+                    'allow-rma-for-digital-product'       => 'اجازه RMA برای محصول دیجیتال',
+                    'allowed-file-extension'              => 'پسوند فایل مجاز',
+                    'allowed-file-types'                  => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',
+                    'allowed-info'                        => 'با کاما جدا شده. به عنوان مثال: jpg,jpeg,pdf',
+                    'allowed-request-cancelled-request'   => 'اجازه درخواست جدید RMA برای درخواست لغو شده',
+                    'allowed-request-declined-request'    => 'اجازه درخواست جدید RMA برای درخواست رد شده',
+                    'allowed-rma-for-product'             => 'اجازه RMA برای محصول',
+                    'cancel-items'                        => 'لغو موارد',
+                    'complete'                            => 'کامل',
+                    'current-order-quantity'              => 'مقدار سفارش فعلی',
+                    'days-info'                           => 'تعداد روزهایی که مشتری می‌تواند پس از ثبت سفارش، درخواست RMA کند.',
+                    'default-allow-days'                  => 'روزهای مجاز پیش‌فرض',
+                    'enable'                              => 'فعال‌سازی RMA',
+                    'evening'                             => 'عصر',
+                    'exchange'                            => 'تعویض',
+                    'info'                                => 'RMA بخشی از فرآیند بازگرداندن محصول به کسب و کار برای دریافت بازپرداخت، تعویض یا تعمیر است.',
+                    'morning'                             => 'صبح',
+                    'new-rma-message-to-customer'         => 'پیام جدید RMA به مشتری',
+                    'no'                                  => 'نه',
+                    'open'                                => 'باز',
+                    'package-condition'                   => 'وضعیت بسته‌بندی',
+                    'packed'                              => 'بسته‌بندی شده',
+                    'print-page'                          => 'چاپ صفحه',
+                    'product-already-raw'                 => 'محصول در حال حاضر در RMA است.',
+                    'product-delivery-status'             => 'وضعیت تحویل محصول',
+                    'resolution-type'                     => 'نوع راه‌حل',
+                    'return-pickup-address'               => 'آدرس برداشت بازگشت',
+                    'return-pickup-time'                  => 'زمان برداشت بازگشت',
+                    'return-policy'                       => 'سیاست بازگشت',
+                    'return'                              => 'بازگشت',
+                    'select-allowed-order-status'         => 'وضعیت سفارش مجاز را انتخاب کنید',
+                    'specific-products'                   => 'محصولات خاص',
+                    'title'                               => 'RMA',
+                    'yes'                                 => 'بله',
+
+                    'setting' => [
+                        'info'  => 'قابلیت RMA اجازه می‌دهد که در مواقعی که مشتری اقلام را برای تعمیر و نگهداری، یا برای بازپرداخت یا تعویض بازمی‌گرداند، مدیریت شود.',
+                        'read'  => 'مطالعه سیاست',
+                        'terms' => 'من سیاست بازگشت را خوانده و پذیرفته‌ام.',
+                        'title' => 'RMA',
+                    ],
+                ],
             ],
         ],
     ],
@@ -4748,6 +5020,7 @@ return [
                 'communications'           => 'ارتباطات',
                 'configure'                => 'پیکربندی',
                 'currencies'               => 'ارزها',
+                'custom-field'             => 'فیلد سفارشی',
                 'customers'                => 'مشتریان',
                 'dashboard'                => 'پیشخوان',
                 'data-transfer'            => 'انتقال اطلاعات',
@@ -4767,10 +5040,15 @@ return [
                 'orders'                   => 'سفارش‌ها',
                 'products'                 => 'محصولات',
                 'promotions'               => 'تبلیغات',
+                'reason'                   => 'دلیل',
                 'refunds'                  => 'بازپرداخت‌ها',
                 'reporting'                => 'گزارش‌دهی',
+                'requests'                 => 'درخواست‌ها',
                 'reviews'                  => 'نقد و بررسی‌ها',
+                'rma-status'               => 'وضعیت RMA',
+                'rma'                      => 'RMA',
                 'roles'                    => 'نقش‌ها',
+                'rules'                    => 'قوانین',
                 'sales'                    => 'فروش‌ها',
                 'search-seo'               => 'جستجو و بهینه‌سازی سئو',
                 'search-synonyms'          => 'مرادف‌های جستجو',
@@ -5242,306 +5520,6 @@ return [
             'subtotal'                   => 'جمع',
             'tax'                        => 'مالیات',
             'tracking-number'            => 'شماره پیگیری: :tracking_number',
-        ],
-    ],
-
-    'rma' => [
-        'configuration' => [
-            'index' => [
-                'sales' => [
-                    'rma' => [
-                        'afternoon'                           => 'بعد از ظهر',
-                        'all-products'                        => 'تمام محصولات',
-                        'all-status'                          => 'تمام وضعیت‌ها',
-                        'allow-new-request-for-pending-order' => 'اجازه درخواست جدید RMA برای سفارش معلق',
-                        'allow-rma-for-digital-product'       => 'اجازه RMA برای محصول دیجیتال',
-                        'allowed-file-extension'              => 'پسوند فایل مجاز',
-                        'allowed-file-types'                  => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',
-                        'allowed-info'                        => 'با کاما جدا شده. به عنوان مثال: jpg,jpeg,pdf',
-                        'allowed-request-cancelled-request'   => 'اجازه درخواست جدید RMA برای درخواست لغو شده',
-                        'allowed-request-declined-request'    => 'اجازه درخواست جدید RMA برای درخواست رد شده',
-                        'allowed-rma-for-product'             => 'اجازه RMA برای محصول',
-                        'cancel-items'                        => 'لغو موارد',
-                        'complete'                            => 'کامل',
-                        'current-order-quantity'              => 'مقدار سفارش فعلی',
-                        'days-info'                           => 'تعداد روزهایی که مشتری می‌تواند پس از ثبت سفارش، درخواست RMA کند.',
-                        'default-allow-days'                  => 'روزهای مجاز پیش‌فرض',
-                        'enable'                              => 'فعال‌سازی RMA',
-                        'evening'                             => 'عصر',
-                        'exchange'                            => 'تعویض',
-                        'info'                                => 'RMA بخشی از فرآیند بازگرداندن محصول به کسب و کار برای دریافت بازپرداخت، تعویض یا تعمیر است.',
-                        'morning'                             => 'صبح',
-                        'new-rma-message-to-customer'         => 'پیام جدید RMA به مشتری',
-                        'no'                                  => 'نه',
-                        'open'                                => 'باز',
-                        'package-condition'                   => 'وضعیت بسته‌بندی',
-                        'packed'                              => 'بسته‌بندی شده',
-                        'print-page'                          => 'چاپ صفحه',
-                        'product-already-raw'                 => 'محصول در حال حاضر در RMA است.',
-                        'product-delivery-status'             => 'وضعیت تحویل محصول',
-                        'resolution-type'                     => 'نوع راه‌حل',
-                        'return-pickup-address'               => 'آدرس برداشت بازگشت',
-                        'return-pickup-time'                  => 'زمان برداشت بازگشت',
-                        'return-policy'                       => 'سیاست بازگشت',
-                        'return'                              => 'بازگشت',
-                        'select-allowed-order-status'         => 'وضعیت سفارش مجاز را انتخاب کنید',
-                        'specific-products'                   => 'محصولات خاص',
-                        'title'                               => 'RMA',
-                        'yes'                                 => 'بله',
-
-                        'setting' => [
-                            'info'  => 'قابلیت RMA اجازه می‌دهد که در مواقعی که مشتری اقلام را برای تعمیر و نگهداری، یا برای بازپرداخت یا تعویض بازمی‌گرداند، مدیریت شود.',
-                            'read'  => 'مطالعه سیاست',
-                            'terms' => 'من سیاست بازگشت را خوانده و پذیرفته‌ام.',
-                            'title' => 'RMA',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-
-        'components' => [
-            'layouts' => [
-                'sidebar' => [
-                    'rma' => 'RMA',
-                ],
-            ],
-        ],
-
-        'sales' => [
-            'rma' => [
-                'all-rma' => [
-                    'index' => [
-                        'title' => 'همه RMA ها',
-
-                        'datagrid' => [
-                            'create'        => 'ایجاد شده در',
-                            'customer-name' => 'نام مشتری',
-                            'id'            => 'شناسه RMA',
-                            'order-ref'     => 'مرجع سفارش',
-                            'order-status'  => 'وضعیت سفارش',
-                            'rma-status'    => 'وضعیت RMA',
-                        ],
-                    ],
-
-                    'view' => [
-                        'add-attachments'        => 'افزودن پیوست‌ها',
-                        'additional-information' => 'اطلاعات اضافی:',
-                        'attachment'             => 'پیوست',
-                        'change-status'          => 'تغییر وضعیت',
-                        'confirm-print'          => 'برای چاپ RMA روی تأیید کلیک کنید',
-                        'conversations'          => 'مکالمات',
-                        'customer-details'       => 'جزئیات مشتری',
-                        'customer-email'         => 'ایمیل مشتری:',
-                        'customer'               => 'مشتری:',
-                        'enter-message'          => 'پیام را وارد کنید',
-                        'images'                 => 'تصویر:',
-                        'no-record'              => 'هیچ سابقه‌ای یافت نشد!',
-                        'order-date'             => 'تاریخ سفارش:',
-                        'order-details'          => 'آیتم(های) درخواست شده برای RMA',
-                        'order-id'               => 'شناسه سفارش:',
-                        'order-status'           => 'وضعیت سفارش:',
-                        'order-total'            => 'مجموع سفارش:',
-                        'request-on'             => 'درخواست در:',
-                        'resolution-type'        => 'نوع راه حل:',
-                        'rma-status'             => 'وضعیت RMA:',
-                        'save-btn'               => 'ذخیره',
-                        'send-message-btn'       => 'ارسال پیام',
-                        'send-message-success'   => 'پیام با موفقیت ارسال شد.',
-                        'send-message'           => 'ارسال پیام',
-                        'status'                 => 'وضعیت',
-                        'title'                  => 'RMA',
-                        'update-success'         => 'وضعیت RMA با موفقیت به‌روزرسانی شد.',
-                        'view-title'             => 'RMA',
-                    ],
-                ],
-
-                'rma-status' => [
-                    'index' => [
-                        'create-btn' => 'ایجاد وضعیت RMA',
-                        'title'      => 'وضعیت RMA',
-
-                        'datagrid' => [
-                            'created-at'          => 'ایجاد شده در',
-                            'delete-success'      => 'وضعیت RMA با موفقیت حذف شد.',
-                            'disabled'            => 'غیرفعال',
-                            'enabled'             => 'فعال',
-                            'id'                  => 'شناسه',
-                            'mass-delete-success' => 'وضعیت RMA انتخاب شده با موفقیت حذف شد.',
-                            'reason-error'        => 'وضعیت RMA در RMA استفاده شده است.',
-                            'reason'              => 'وضعیت RMA',
-                            'status'              => 'وضعیت',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'افزودن وضعیت RMA جدید',
-                        'reason'       => 'وضعیت RMA',
-                        'save-btn'     => 'ذخیره وضعیت RMA',
-                        'status'       => 'وضعیت',
-                        'success'      => 'وضعیت RMA با موفقیت ایجاد شد.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'ویرایش وضعیت RMA',
-                        'mass-update-success' => 'وضعیت RMA انتخاب شده با موفقیت به‌روزرسانی شد.',
-                        'reason'              => 'وضعیت RMA',
-                        'save-btn'            => 'ذخیره وضعیت RMA',
-                        'status'              => 'وضعیت',
-                        'success'             => 'وضعیت RMA با موفقیت به‌روزرسانی شد.',
-                    ],
-                ],
-
-                'reasons' => [
-                    'index' => [
-                        'create-btn' => 'ایجاد دلیل RMA',
-                        'title'      => 'دلایل',
-
-                        'datagrid' => [
-                            'created-at'          => 'ایجاد شده در',
-                            'delete-success'      => 'دلیل با موفقیت حذف شد.',
-                            'disabled'            => 'غیرفعال',
-                            'enabled'             => 'فعال',
-                            'id'                  => 'شناسه',
-                            'mass-delete-success' => 'اطلاعات انتخاب شده با موفقیت حذف شدند',
-                            'reason-error'        => 'این دلیل در RMA استفاده شده است.',
-                            'reason'              => 'دلیل',
-                            'status'              => 'وضعیت',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'افزودن دلیل جدید',
-                        'reason'       => 'دلیل',
-                        'save-btn'     => 'ذخیره دلیل',
-                        'status'       => 'وضعیت',
-                        'success'      => 'دلیل با موفقیت ایجاد شد.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'ویرایش دلیل',
-                        'mass-update-success' => 'دلایل انتخاب شده با موفقیت به روز شدند.',
-                        'reason'              => 'دلیل',
-                        'save-btn'            => 'ذخیره دلیل',
-                        'status'              => 'وضعیت',
-                        'success'             => 'دلیل با موفقیت به روز شد.',
-                    ],
-                ],
-
-                'custom-field' => [
-                    'index' => [
-                        'create-btn' => 'اضافه کردن فیلد جدید',
-                        'title'      => 'فیلدهای سفارشی RMA',
-
-                        'datagrid' => [
-                            'created-at'          => 'ایجاد شده در',
-                            'delete-success'      => 'فیلدهای سفارشی با موفقیت حذف شدند.',
-                            'disabled'            => 'غیرفعال',
-                            'enabled'             => 'فعال',
-                            'id'                  => 'شناسه',
-                            'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند',
-                            'status'              => 'وضعیت',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'فیلد سفارشی جدید',
-                        'save-btn'     => 'ذخیره فیلد سفارشی',
-                        'status'       => 'وضعیت',
-                        'success'      => 'فیلد سفارشی با موفقیت ایجاد شد.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'ویرایش فیلد سفارشی',
-                        'mass-update-success' => 'فیلدهای سفارشی انتخاب شده با موفقیت به‌روزرسانی شدند.',
-                        'reason'              => 'فیلد سفارشی',
-                        'save-btn'            => 'ذخیره فیلد سفارشی',
-                        'status'              => 'وضعیت',
-                        'success'             => 'فیلد سفارشی با موفقیت به‌روزرسانی شد.',
-                    ],
-                ],
-
-                'rules' => [
-                    'index' => [
-                        'create-btn' => 'ایجاد قوانین RMA',
-                        'title'      => 'قوانین RMA',
-
-                        'datagrid' => [
-                            'delete-success'      => 'قوانین RMA با موفقیت حذف شدند.',
-                            'disabled'            => 'غیرفعال',
-                            'enabled'             => 'فعال',
-                            'exchange-period'     => 'دوره تعویض (روزها)',
-                            'id'                  => 'شناسه',
-                            'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند.',
-                            'reason'              => 'قوانین',
-                            'return-period'       => 'دوره بازگشت (روزها)',
-                            'status'              => 'وضعیت',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title'       => 'افزودن قوانین جدید RMA',
-                        'reason'             => 'قوانین RMA',
-                        'rule-description'   => 'توضیحات قوانین',
-                        'rule-details'       => 'جزئیات قوانین',
-                        'resolutions-period' => 'دوره راه‌حل‌ها',
-                        'rules-title'        => 'عنوان قوانین',
-                        'save-btn'           => 'ذخیره قوانین RMA',
-                        'status'             => 'وضعیت RMA',
-                        'success'            => 'قوانین RMA با موفقیت ایجاد شدند.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'ویرایش قوانین RMA',
-                        'mass-update-success' => 'قوانین RMA انتخاب شده با موفقیت به‌روزرسانی شدند.',
-                        'reason'              => 'قوانین RMA',
-                        'save-btn'            => 'به‌روزرسانی قوانین RMA',
-                        'status'              => 'وضعیت',
-                        'success'             => 'قوانین RMA با موفقیت به‌روزرسانی شدند.',
-                    ],
-                ],
-
-                'create-rma' => [
-                    'create-success'           => 'RMA با موفقیت ایجاد شد.',
-                    'create-title'             => 'ایجاد RMA',
-                    'email'                    => 'ایمیل',
-                    'image'                    => 'تصویر',
-                    'invalid-order-id'         => 'شناسه سفارش نامعتبر است',
-                    'mismatch'                 => 'شناسه سفارش و ایمیل مطابقت ندارند',
-                    'new-rma'                  => 'RMA جدید',
-                    'order-id'                 => 'شناسه سفارش',
-                    'quantity'                 => 'تعداد',
-                    'reason'                   => 'دلیل',
-                    'rma-already-exist'        => 'این RMA از قبل وجود دارد',
-                    'rma-not-available-quotes' => 'مورد برای RMA در دسترس نیست',
-                    'save-btn'                 => 'ذخیره',
-                    'search'                   => '--انتخاب--',
-                    'validate'                 => 'اعتبارسنجی',
-                ],
-            ],
-
-            'invoice' => [
-                'create' => [
-                    'rma_has_been_created' => 'RMA با موفقیت ایجاد شد',
-                    'rma-created-message'  => 'درخواست RMA برای محصول با مقدار :qty موجود است',
-                ],
-            ],
-        ],
-
-        'rma' => [
-            'index' => [
-                'create-rma-title' => 'ایجاد',
-                'reason-title'     => 'دلایل',
-                'rma-title'        => 'بازگشت‌ها',
-            ],
-        ],
-
-        'acl' => [
-            'delete'      => 'حذف',
-            'edit'        => 'ویرایش',
-            'mass-delete' => 'حذف گروهی',
-            'mass-update' => 'به روزرسانی گروهی',
-            'title'       => 'RMA',
         ],
     ],
 ];

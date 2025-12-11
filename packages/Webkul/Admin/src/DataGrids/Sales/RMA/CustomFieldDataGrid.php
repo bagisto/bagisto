@@ -96,7 +96,7 @@ class CustomFieldDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('admin::app.rma.sales.rma.reasons.index.datagrid.status'),
+            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => true,
             'sortable'           => true,
@@ -104,10 +104,10 @@ class CustomFieldDataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                     'value' => 1,
                 ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                     'value' => 0,
                 ],
             ],
@@ -161,10 +161,10 @@ class CustomFieldDataGrid extends DataGrid
                 'url'     => route('admin.sales.rma.custom-field.mass-update'),
                 'options' => [
                     [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                         'value' => 1,
                     ], [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                         'value' => 0,
                     ],
                 ],

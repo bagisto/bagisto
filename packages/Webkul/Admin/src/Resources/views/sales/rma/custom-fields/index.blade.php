@@ -1,13 +1,13 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.custom-field.index.title')
+        @lang('admin::app.sales.rma.custom-field.index.title')
     </x-slot>
 
     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <!-- Title -->
         <p class="text-xl font-bold text-gray-800 dark:text-white">
-            @lang('admin::app.rma.sales.rma.custom-field.index.title')
+            @lang('admin::app.sales.rma.custom-field.index.title')
         </p>
 
         <!-- Create Button -->
@@ -17,7 +17,7 @@
                     class="primary-button"
                     href="{{ route('admin.sales.rma.custom-field.create') }}"
                 >
-                    @lang('admin::app.rma.sales.rma.custom-field.index.create-btn')
+                    @lang('admin::app.sales.rma.custom-field.index.create-btn')
                 </a>
             @endif
         </div>

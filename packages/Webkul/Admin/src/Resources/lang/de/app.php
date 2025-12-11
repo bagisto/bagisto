@@ -814,6 +814,230 @@ return [
 
             'title' => 'Buchungsprodukte',
         ],
+
+        'rma' => [
+            'all-rma' => [
+                'index' => [
+                    'title' => 'Alle RMA',
+
+                    'datagrid' => [
+                        'create'        => 'Erstellt am',
+                        'customer-name' => 'Kundenname',
+                        'id'            => 'RMA ID',
+                        'order-ref'     => 'Auftragsreferenz',
+                        'order-status'  => 'Auftragsstatus',
+                        'rma-status'    => 'RMA Status',
+                    ],
+                ],
+
+                'view' => [
+                    'add-attachments'        => 'Anhänge hinzufügen',
+                    'additional-information' => 'Zusätzliche Informationen:',
+                    'attachment'             => 'Anhang',
+                    'change-status'          => 'Status ändern',
+                    'confirm-print'          => 'Klicken Sie auf OK, um das RMA zu drucken',
+                    'conversations'          => 'Unterhaltungen',
+                    'customer-details'       => 'Kundendetails',
+                    'customer-email'         => 'Kunden-E-Mail:',
+                    'customer'               => 'Kunde:',
+                    'enter-message'          => 'Nachricht eingeben',
+                    'images'                 => 'Bild:',
+                    'no-record'              => 'Kein Eintrag gefunden!',
+                    'order-date'             => 'Bestelldatum:',
+                    'order-details'          => 'Artikel, die für RMA angefordert wurden',
+                    'order-id'               => 'Bestell-ID:',
+                    'order-status'           => 'Bestellstatus:',
+                    'order-total'            => 'Gesamtbestellung:',
+                    'request-on'             => 'Angefordert am:',
+                    'resolution-type'        => 'Lösungstyp:',
+                    'rma-status'             => 'RMA-Status:',
+                    'save-btn'               => 'Speichern',
+                    'send-message-btn'       => 'Nachricht senden',
+                    'send-message-success'   => 'Nachricht erfolgreich gesendet.',
+                    'send-message'           => 'Nachricht senden',
+                    'status'                 => 'Status',
+                    'title'                  => 'RMA',
+                    'update-success'         => 'RMA-Status erfolgreich aktualisiert.',
+                    'view-title'             => 'RMA',
+                ],
+            ],
+
+            'rma-status' => [
+                'index' => [
+                    'create-btn' => 'RMA-Status erstellen',
+                    'title'      => 'RMA-Status',
+
+                    'datagrid' => [
+                        'created-at'          => 'Erstellt am',
+                        'delete-success'      => 'RMA-Status erfolgreich gelöscht.',
+                        'disabled'            => 'Inaktiv',
+                        'enabled'             => 'Aktiv',
+                        'id'                  => 'ID',
+                        'mass-delete-success' => 'Ausgewählter RMA-Status erfolgreich gelöscht.',
+                        'reason-error'        => 'RMA-Status wird in RMA verwendet.',
+                        'reason'              => 'RMA-Status',
+                        'status'              => 'Status',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'Neuen RMA-Status hinzufügen',
+                    'reason'       => 'RMA-Status',
+                    'save-btn'     => 'RMA-Status speichern',
+                    'status'       => 'Status',
+                    'success'      => 'RMA-Status erfolgreich erstellt.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA-Status bearbeiten',
+                    'mass-update-success' => 'Ausgewählter RMA-Status erfolgreich aktualisiert.',
+                    'reason'              => 'RMA-Status',
+                    'save-btn'            => 'RMA-Status speichern',
+                    'status'              => 'Status',
+                    'success'             => 'RMA-Status erfolgreich aktualisiert.',
+                ],
+            ],
+
+            'reasons' => [
+                'index' => [
+                    'create-btn' => 'RMA Grund erstellen',
+                    'title'      => 'Gründe',
+
+                    'datagrid' => [
+                        'created-at'          => 'Erstellt am',
+                        'delete-success'      => 'Grund erfolgreich gelöscht.',
+                        'disabled'            => 'Inaktiv',
+                        'enabled'             => 'Aktiv',
+                        'id'                  => 'ID',
+                        'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
+                        'reason-error'        => 'Grund wird in RMA verwendet.',
+                        'reason'              => 'Grund',
+                        'status'              => 'Status',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'Neuen Grund hinzufügen',
+                    'reason'       => 'Grund',
+                    'save-btn'     => 'Grund speichern',
+                    'status'       => 'Status',
+                    'success'      => 'Grund erfolgreich erstellt.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'Grund bearbeiten',
+                    'mass-update-success' => 'Ausgewählte Gründe erfolgreich aktualisiert.',
+                    'reason'              => 'Grund',
+                    'save-btn'            => 'Grund speichern',
+                    'status'              => 'Status',
+                    'success'             => 'Grund erfolgreich aktualisiert.',
+                ],
+            ],
+
+            'custom-field' => [
+                'index' => [
+                    'create-btn' => 'Neues Feld hinzufügen',
+                    'title'      => 'RMA-Benutzerdefinierte Felder',
+
+                    'datagrid' => [
+                        'created-at'          => 'Erstellt am',
+                        'delete-success'      => 'Benutzerdefinierte Felder erfolgreich gelöscht.',
+                        'disabled'            => 'Inaktiv',
+                        'enabled'             => 'Aktiv',
+                        'id'                  => 'ID',
+                        'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
+                        'status'              => 'Status',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'Neues Benutzerdefiniertes Feld',
+                    'save-btn'     => 'Benutzerdefiniertes Feld speichern',
+                    'status'       => 'Status',
+                    'success'      => 'Benutzerdefiniertes Feld erfolgreich erstellt.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'Benutzerdefiniertes Feld bearbeiten',
+                    'mass-update-success' => 'Ausgewählte Benutzerdefinierte Felder erfolgreich aktualisiert.',
+                    'reason'              => 'Benutzerdefiniertes Feld',
+                    'save-btn'            => 'Benutzerdefiniertes Feld speichern',
+                    'status'              => 'Status',
+                    'success'             => 'Benutzerdefiniertes Feld erfolgreich aktualisiert.',
+                ],
+            ],
+
+            'rules' => [
+                'index' => [
+                    'create-btn' => 'RMA-Regeln erstellen',
+                    'title'      => 'RMA-Regeln',
+
+                    'datagrid' => [
+                        'delete-success'      => 'RMA-Regeln erfolgreich gelöscht.',
+                        'disabled'            => 'Inaktiv',
+                        'enabled'             => 'Aktiv',
+                        'exchange-period'     => 'Austauschzeitraum (Tage)',
+                        'id'                  => 'ID',
+                        'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht.',
+                        'reason'              => 'Regeln',
+                        'return-period'       => 'Rückgabezeitraum (Tage)',
+                        'status'              => 'Status',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title'       => 'Neue RMA-Regeln hinzufügen',
+                    'reason'             => 'RMA-Regeln',
+                    'resolutions-period' => 'Lösungszeitraum',
+                    'rule-description'   => 'Regelnbeschreibung',
+                    'rule-details'       => 'Regeldetails',
+                    'rules-title'        => 'Regeln Titel',
+                    'save-btn'           => 'RMA-Regeln speichern',
+                    'status'             => 'RMA-Status',
+                    'success'            => 'RMA-Regeln erfolgreich erstellt.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA-Regeln bearbeiten',
+                    'mass-update-success' => 'Ausgewählte RMA-Regeln erfolgreich aktualisiert.',
+                    'reason'              => 'RMA-Regeln',
+                    'save-btn'            => 'RMA-Regeln aktualisieren',
+                    'status'              => 'Status',
+                    'success'             => 'RMA-Regeln erfolgreich aktualisiert.',
+                ],
+            ],
+
+            'create-rma' => [
+                'create-success'           => 'RMA erfolgreich erstellt.',
+                'create-title'             => 'RMA erstellen',
+                'email'                    => 'E-Mail',
+                'image'                    => 'Bild',
+                'invalid-order-id'         => 'Ungültige Auftrags-ID',
+                'mismatch'                 => 'Auftrags-ID und E-Mail stimmen nicht überein',
+                'new-rma'                  => 'Neue RMA',
+                'order-id'                 => 'Auftrags-ID',
+                'quantity'                 => 'Menge',
+                'reason'                   => 'Grund',
+                'rma-already-exist'        => 'RMA existiert bereits',
+                'rma-not-available-quotes' => 'Artikel nicht für RMA verfügbar',
+                'save-btn'                 => 'Speichern',
+                'search'                   => '--Auswählen--',
+                'validate'                 => 'Überprüfen',
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma-has-been-created' => 'RMA wurde erstellt',
+                    'rma-created-message'  => 'Eine RMA-Anfrage ist für das Produkt mit einer Menge von :qty verfügbar',
+                ],
+            ],
+
+            'index' => [
+                'create-rma-title' => 'Erstellen',
+                'reason-title'     => 'Gründe',
+                'rma-title'        => 'Rückgaben',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -4703,6 +4927,54 @@ return [
                         'title'                => 'Mini-Warenkorb',
                     ],
                 ],
+
+                'rma' => [
+                    'afternoon'                           => 'Nachmittag',
+                    'all-products'                        => 'Alle Produkte',
+                    'all-status'                          => 'Alle Status',
+                    'allow-new-request-for-pending-order' => 'Neuen RMA-Antrag für ausstehende Bestellung zulassen',
+                    'allow-rma-for-digital-product'       => 'RMA für digitales Produkt zulassen',
+                    'allowed-file-extension'              => 'Erlaubte Dateierweiterung',
+                    'allowed-file-types'                  => 'Bitte wählen Sie nur die Dateitypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-info'                        => 'Durch Kommas getrennt. Zum Beispiel: jpg,jpeg,pdf',
+                    'allowed-request-cancelled-request'   => 'Neuen RMA-Antrag für stornierte Anfragen zulassen',
+                    'allowed-request-declined-request'    => 'Neuen RMA-Antrag für abgelehnte Anfragen zulassen',
+                    'allowed-rma-for-product'             => 'RMA für Produkt zulassen',
+                    'cancel-items'                        => 'Artikel stornieren',
+                    'complete'                            => 'Abgeschlossen',
+                    'current-order-quantity'              => 'Aktuelle Bestellmenge',
+                    'days-info'                           => 'Die Anzahl der Tage, innerhalb derer der Kunde nach einer Bestellung eine RMA anfordern kann.',
+                    'default-allow-days'                  => 'Standard-Zulassungstage',
+                    'enable'                              => 'RMA aktivieren',
+                    'evening'                             => 'Abend',
+                    'exchange'                            => 'Umtausch',
+                    'info'                                => 'RMA ist Teil des Prozesses, ein Produkt an ein Unternehmen zurückzusenden, um eine Rückerstattung, einen Ersatz oder eine Reparatur zu erhalten.',
+                    'morning'                             => 'Morgen',
+                    'new-rma-message-to-customer'         => 'Neue RMA-Nachricht an den Kunden',
+                    'no'                                  => 'Nein',
+                    'open'                                => 'Offen',
+                    'package-condition'                   => 'Paketzustand',
+                    'packed'                              => 'Verpackt',
+                    'print-page'                          => 'Seite drucken',
+                    'product-already-raw'                 => 'Produkt befindet sich bereits im RMA.',
+                    'product-delivery-status'             => 'Produktlieferstatus',
+                    'resolution-type'                     => 'Lösungstyp',
+                    'return-pickup-address'               => 'Rückholadresse',
+                    'return-pickup-time'                  => 'Rückholzeit',
+                    'return-policy'                       => 'Rückgaberecht',
+                    'return'                              => 'Rückgabe',
+                    'select-allowed-order-status'         => 'Erlaubten Bestellstatus auswählen',
+                    'specific-products'                   => 'Spezifische Produkte',
+                    'title'                               => 'RMA',
+                    'yes'                                 => 'Ja',
+
+                    'setting' => [
+                        'info'  => 'Die RMA-Funktionalität ermöglicht die Handhabung von Situationen, in denen ein Kunde Artikel zur Reparatur und Wartung oder zur Rückerstattung oder zum Austausch zurücksendet.',
+                        'read'  => 'Richtlinie lesen',
+                        'terms' => 'Ich habe die Rückgaberichtlinie gelesen und akzeptiert.',
+                        'title' => 'RMA',
+                    ],
+                ],
             ],
         ],
     ],
@@ -4748,6 +5020,7 @@ return [
                 'communications'           => 'Kommunikation',
                 'configure'                => 'Konfigurieren',
                 'currencies'               => 'Währungen',
+                'custom-field'             => 'Benutzerdefiniertes Feld',
                 'customers'                => 'Kunden',
                 'dashboard'                => 'Dashboard',
                 'data-transfer'            => 'Datentransfer',
@@ -4767,10 +5040,15 @@ return [
                 'orders'                   => 'Bestellungen',
                 'products'                 => 'Produkte',
                 'promotions'               => 'Aktionen',
+                'reason'                   => 'Reason',
                 'refunds'                  => 'Rückerstattungen',
                 'reporting'                => 'Berichterstattung',
+                'requests'                 => 'Requests',
                 'reviews'                  => 'Bewertungen',
+                'rma-status'               => 'RMA-Status',
+                'rma'                      => 'RMA',
                 'roles'                    => 'Rollen',
+                'rules'                    => 'Regeln',
                 'sales'                    => 'Vertrieb',
                 'search-seo'               => 'Suche & SEO',
                 'search-synonyms'          => 'Suchsynonyme',
@@ -5242,306 +5520,6 @@ return [
             'subtotal'                   => 'Zwischensumme',
             'tax'                        => 'Steuern',
             'tracking-number'            => 'Sendungsnummer: :tracking_number',
-        ],
-    ],
-
-    'rma' => [
-        'configuration' => [
-            'index' => [
-                'sales' => [
-                    'rma' => [
-                        'afternoon'                           => 'Nachmittag',
-                        'all-products'                        => 'Alle Produkte',
-                        'all-status'                          => 'Alle Status',
-                        'allow-new-request-for-pending-order' => 'Neuen RMA-Antrag für ausstehende Bestellung zulassen',
-                        'allow-rma-for-digital-product'       => 'RMA für digitales Produkt zulassen',
-                        'allowed-file-extension'              => 'Erlaubte Dateierweiterung',
-                        'allowed-file-types'                  => 'Bitte wählen Sie nur die Dateitypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
-                        'allowed-info'                        => 'Durch Kommas getrennt. Zum Beispiel: jpg,jpeg,pdf',
-                        'allowed-request-cancelled-request'   => 'Neuen RMA-Antrag für stornierte Anfragen zulassen',
-                        'allowed-request-declined-request'    => 'Neuen RMA-Antrag für abgelehnte Anfragen zulassen',
-                        'allowed-rma-for-product'             => 'RMA für Produkt zulassen',
-                        'cancel-items'                        => 'Artikel stornieren',
-                        'complete'                            => 'Abgeschlossen',
-                        'current-order-quantity'              => 'Aktuelle Bestellmenge',
-                        'days-info'                           => 'Die Anzahl der Tage, innerhalb derer der Kunde nach einer Bestellung eine RMA anfordern kann.',
-                        'default-allow-days'                  => 'Standard-Zulassungstage',
-                        'enable'                              => 'RMA aktivieren',
-                        'evening'                             => 'Abend',
-                        'exchange'                            => 'Umtausch',
-                        'info'                                => 'RMA ist Teil des Prozesses, ein Produkt an ein Unternehmen zurückzusenden, um eine Rückerstattung, einen Ersatz oder eine Reparatur zu erhalten.',
-                        'morning'                             => 'Morgen',
-                        'new-rma-message-to-customer'         => 'Neue RMA-Nachricht an den Kunden',
-                        'no'                                  => 'Nein',
-                        'open'                                => 'Offen',
-                        'package-condition'                   => 'Paketzustand',
-                        'packed'                              => 'Verpackt',
-                        'print-page'                          => 'Seite drucken',
-                        'product-already-raw'                 => 'Produkt befindet sich bereits im RMA.',
-                        'product-delivery-status'             => 'Produktlieferstatus',
-                        'resolution-type'                     => 'Lösungstyp',
-                        'return-pickup-address'               => 'Rückholadresse',
-                        'return-pickup-time'                  => 'Rückholzeit',
-                        'return-policy'                       => 'Rückgaberecht',
-                        'return'                              => 'Rückgabe',
-                        'select-allowed-order-status'         => 'Erlaubten Bestellstatus auswählen',
-                        'specific-products'                   => 'Spezifische Produkte',
-                        'title'                               => 'RMA',
-                        'yes'                                 => 'Ja',
-
-                        'setting' => [
-                            'info'  => 'Die RMA-Funktionalität ermöglicht die Handhabung von Situationen, in denen ein Kunde Artikel zur Reparatur und Wartung oder zur Rückerstattung oder zum Austausch zurücksendet.',
-                            'read'  => 'Richtlinie lesen',
-                            'terms' => 'Ich habe die Rückgaberichtlinie gelesen und akzeptiert.',
-                            'title' => 'RMA',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-
-        'components' => [
-            'layouts' => [
-                'sidebar' => [
-                    'rma' => 'RMA',
-                ],
-            ],
-        ],
-
-        'sales' => [
-            'rma' => [
-                'all-rma' => [
-                    'index' => [
-                        'title' => 'Alle RMA',
-
-                        'datagrid' => [
-                            'create'        => 'Erstellt am',
-                            'customer-name' => 'Kundenname',
-                            'id'            => 'RMA ID',
-                            'order-ref'     => 'Auftragsreferenz',
-                            'order-status'  => 'Auftragsstatus',
-                            'rma-status'    => 'RMA Status',
-                        ],
-                    ],
-
-                    'view' => [
-                        'add-attachments'        => 'Anhänge hinzufügen',
-                        'additional-information' => 'Zusätzliche Informationen:',
-                        'attachment'             => 'Anhang',
-                        'change-status'          => 'Status ändern',
-                        'confirm-print'          => 'Klicken Sie auf OK, um das RMA zu drucken',
-                        'conversations'          => 'Unterhaltungen',
-                        'customer-details'       => 'Kundendetails',
-                        'customer-email'         => 'Kunden-E-Mail:',
-                        'customer'               => 'Kunde:',
-                        'enter-message'          => 'Nachricht eingeben',
-                        'images'                 => 'Bild:',
-                        'no-record'              => 'Kein Eintrag gefunden!',
-                        'order-date'             => 'Bestelldatum:',
-                        'order-details'          => 'Artikel, die für RMA angefordert wurden',
-                        'order-id'               => 'Bestell-ID:',
-                        'order-status'           => 'Bestellstatus:',
-                        'order-total'            => 'Gesamtbestellung:',
-                        'request-on'             => 'Angefordert am:',
-                        'resolution-type'        => 'Lösungstyp:',
-                        'rma-status'             => 'RMA-Status:',
-                        'save-btn'               => 'Speichern',
-                        'send-message-btn'       => 'Nachricht senden',
-                        'send-message-success'   => 'Nachricht erfolgreich gesendet.',
-                        'send-message'           => 'Nachricht senden',
-                        'status'                 => 'Status',
-                        'title'                  => 'RMA',
-                        'update-success'         => 'RMA-Status erfolgreich aktualisiert.',
-                        'view-title'             => 'RMA',
-                    ],
-                ],
-
-                'rma-status' => [
-                    'index' => [
-                        'create-btn' => 'RMA-Status erstellen',
-                        'title'      => 'RMA-Status',
-
-                        'datagrid' => [
-                            'created-at'          => 'Erstellt am',
-                            'delete-success'      => 'RMA-Status erfolgreich gelöscht.',
-                            'disabled'            => 'Inaktiv',
-                            'enabled'             => 'Aktiv',
-                            'id'                  => 'ID',
-                            'mass-delete-success' => 'Ausgewählter RMA-Status erfolgreich gelöscht.',
-                            'reason-error'        => 'RMA-Status wird in RMA verwendet.',
-                            'reason'              => 'RMA-Status',
-                            'status'              => 'Status',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'Neuen RMA-Status hinzufügen',
-                        'reason'       => 'RMA-Status',
-                        'save-btn'     => 'RMA-Status speichern',
-                        'status'       => 'Status',
-                        'success'      => 'RMA-Status erfolgreich erstellt.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA-Status bearbeiten',
-                        'mass-update-success' => 'Ausgewählter RMA-Status erfolgreich aktualisiert.',
-                        'reason'              => 'RMA-Status',
-                        'save-btn'            => 'RMA-Status speichern',
-                        'status'              => 'Status',
-                        'success'             => 'RMA-Status erfolgreich aktualisiert.',
-                    ],
-                ],
-
-                'reasons' => [
-                    'index' => [
-                        'create-btn' => 'RMA Grund erstellen',
-                        'title'      => 'Gründe',
-
-                        'datagrid' => [
-                            'created-at'          => 'Erstellt am',
-                            'delete-success'      => 'Grund erfolgreich gelöscht.',
-                            'disabled'            => 'Inaktiv',
-                            'enabled'             => 'Aktiv',
-                            'id'                  => 'ID',
-                            'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
-                            'reason-error'        => 'Grund wird in RMA verwendet.',
-                            'reason'              => 'Grund',
-                            'status'              => 'Status',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'Neuen Grund hinzufügen',
-                        'reason'       => 'Grund',
-                        'save-btn'     => 'Grund speichern',
-                        'status'       => 'Status',
-                        'success'      => 'Grund erfolgreich erstellt.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'Grund bearbeiten',
-                        'mass-update-success' => 'Ausgewählte Gründe erfolgreich aktualisiert.',
-                        'reason'              => 'Grund',
-                        'save-btn'            => 'Grund speichern',
-                        'status'              => 'Status',
-                        'success'             => 'Grund erfolgreich aktualisiert.',
-                    ],
-                ],
-
-                'custom-field' => [
-                    'index' => [
-                        'create-btn' => 'Neues Feld hinzufügen',
-                        'title'      => 'RMA-Benutzerdefinierte Felder',
-
-                        'datagrid' => [
-                            'created-at'          => 'Erstellt am',
-                            'delete-success'      => 'Benutzerdefinierte Felder erfolgreich gelöscht.',
-                            'disabled'            => 'Inaktiv',
-                            'enabled'             => 'Aktiv',
-                            'id'                  => 'ID',
-                            'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
-                            'status'              => 'Status',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'Neues Benutzerdefiniertes Feld',
-                        'save-btn'     => 'Benutzerdefiniertes Feld speichern',
-                        'status'       => 'Status',
-                        'success'      => 'Benutzerdefiniertes Feld erfolgreich erstellt.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'Benutzerdefiniertes Feld bearbeiten',
-                        'mass-update-success' => 'Ausgewählte Benutzerdefinierte Felder erfolgreich aktualisiert.',
-                        'reason'              => 'Benutzerdefiniertes Feld',
-                        'save-btn'            => 'Benutzerdefiniertes Feld speichern',
-                        'status'              => 'Status',
-                        'success'             => 'Benutzerdefiniertes Feld erfolgreich aktualisiert.',
-                    ],
-                ],
-
-                'rules' => [
-                    'index' => [
-                        'create-btn' => 'RMA-Regeln erstellen',
-                        'title'      => 'RMA-Regeln',
-
-                        'datagrid' => [
-                            'delete-success'      => 'RMA-Regeln erfolgreich gelöscht.',
-                            'disabled'            => 'Inaktiv',
-                            'enabled'             => 'Aktiv',
-                            'exchange-period'     => 'Austauschzeitraum (Tage)',
-                            'id'                  => 'ID',
-                            'mass-delete-success' => 'Ausgewählte Daten erfolgreich gelöscht.',
-                            'reason'              => 'Regeln',
-                            'return-period'       => 'Rückgabezeitraum (Tage)',
-                            'status'              => 'Status',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title'       => 'Neue RMA-Regeln hinzufügen',
-                        'reason'             => 'RMA-Regeln',
-                        'resolutions-period' => 'Lösungszeitraum',
-                        'rule-description'   => 'Regelnbeschreibung',
-                        'rule-details'       => 'Regeldetails',
-                        'rules-title'        => 'Regeln Titel',
-                        'save-btn'           => 'RMA-Regeln speichern',
-                        'status'             => 'RMA-Status',
-                        'success'            => 'RMA-Regeln erfolgreich erstellt.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA-Regeln bearbeiten',
-                        'mass-update-success' => 'Ausgewählte RMA-Regeln erfolgreich aktualisiert.',
-                        'reason'              => 'RMA-Regeln',
-                        'save-btn'            => 'RMA-Regeln aktualisieren',
-                        'status'              => 'Status',
-                        'success'             => 'RMA-Regeln erfolgreich aktualisiert.',
-                    ],
-                ],
-
-                'create-rma' => [
-                    'create-success'           => 'RMA erfolgreich erstellt.',
-                    'create-title'             => 'RMA erstellen',
-                    'email'                    => 'E-Mail',
-                    'image'                    => 'Bild',
-                    'invalid-order-id'         => 'Ungültige Auftrags-ID',
-                    'mismatch'                 => 'Auftrags-ID und E-Mail stimmen nicht überein',
-                    'new-rma'                  => 'Neue RMA',
-                    'order-id'                 => 'Auftrags-ID',
-                    'quantity'                 => 'Menge',
-                    'reason'                   => 'Grund',
-                    'rma-already-exist'        => 'RMA existiert bereits',
-                    'rma-not-available-quotes' => 'Artikel nicht für RMA verfügbar',
-                    'save-btn'                 => 'Speichern',
-                    'search'                   => '--Auswählen--',
-                    'validate'                 => 'Überprüfen',
-                ],
-            ],
-
-            'invoice' => [
-                'create' => [
-                    'rma_has_been_created' => 'RMA wurde erstellt',
-                    'rma-created-message'  => 'Eine RMA-Anfrage ist für das Produkt mit einer Menge von :qty verfügbar',
-                ],
-            ],
-        ],
-
-        'rma' => [
-            'index' => [
-                'create-rma-title' => 'Erstellen',
-                'reason-title'     => 'Gründe',
-                'rma-title'        => 'Rückgaben',
-            ],
-        ],
-
-        'acl' => [
-            'delete'      => 'Löschen',
-            'edit'        => 'Bearbeiten',
-            'mass-delete' => 'Massenlöschung',
-            'mass-update' => 'Massenaktualisierung',
-            'title'       => 'RMA',
         ],
     ],
 ];

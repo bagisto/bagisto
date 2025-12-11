@@ -16,7 +16,7 @@ use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\RMA\CustomerConversationEmail;
+use Webkul\Shop\Mail\Customer\RMA\CustomerConversationNotification;
 
 class RMAActionController extends Controller
 {
@@ -128,9 +128,9 @@ class RMAActionController extends Controller
 
         if (! empty($data['close_rma'])) {
             $rma->update([
-                'status'           => 1,
-                'request_status'   => self::SOLVED,
-                'order_status'     => 'closed',
+                'status'         => 1,
+                'request_status' => self::SOLVED,
+                'order_status'   => 'closed',
             ]);
 
             $this->rmaMessagesRepository->create([
@@ -140,7 +140,7 @@ class RMAActionController extends Controller
             ]);
         }
 
-        session()->flash('success', trans('shop::app.rma.response.update-success', ['name' => trans('admin::app.rma.sales.rma.all-rma.view.status')]));
+        session()->flash('success', trans('shop::app.rma.response.update-success', ['name' => trans('admin::app.sales.rma.all-rma.view.status')]));
 
         return redirect()->back();
     }
@@ -238,7 +238,7 @@ class RMAActionController extends Controller
 
             try {
                 if ($conversationDetails['adminEmail']) {
-                    Mail::queue(new CustomerConversationEmail($conversationDetails));
+                    Mail::queue(new CustomerConversationNotification($conversationDetails));
                 }
             } catch (\Exception $e) {
                 return new JsonResponse([

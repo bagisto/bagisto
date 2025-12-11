@@ -39,7 +39,7 @@ class ReasonDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.rma.sales.rma.reasons.index.datagrid.id'),
+            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -48,7 +48,7 @@ class ReasonDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'title',
-            'label'      => trans('admin::app.rma.sales.rma.reasons.index.datagrid.reason'),
+            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.reason'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -57,7 +57,7 @@ class ReasonDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('admin::app.rma.sales.rma.reasons.index.datagrid.status'),
+            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => false,
             'filterable'         => true,
@@ -65,19 +65,19 @@ class ReasonDataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                     'value' => 1,
                 ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                     'value' => 0,
                 ],
             ],
             'closure'           => function ($row) {
                 if ($row->status) {
-                    return '<p class="label-active">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled').'</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.rma.reasons.index.datagrid.enabled').'</p>';
                 }
 
-                return '<p class="label-canceled">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled').'</p>';
+                return '<p class="label-canceled">'.trans('admin::app.sales.rma.reasons.index.datagrid.disabled').'</p>';
             },
         ]);
 
@@ -106,7 +106,7 @@ class ReasonDataGrid extends DataGrid
 
         $this->addColumn([
             'index'           => 'created_at',
-            'label'           => trans('admin::app.rma.sales.rma.reasons.index.datagrid.created-at'),
+            'label'           => trans('admin::app.sales.rma.reasons.index.datagrid.created-at'),
             'type'            => 'date',
             'searchable'      => true,
             'filterable'      => true,
@@ -154,13 +154,13 @@ class ReasonDataGrid extends DataGrid
             $this->addMassAction([
                 'title'   => trans('shop::app.rma.customer-rma-index.update'),
                 'method'  => 'POST',
-                'url'     => route('admin.sales.rma.reason.mass_update'),
+                'url'     => route('admin.sales.rma.reason.mass-update'),
                 'options' => [
                     [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                         'value' => 1,
                     ], [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                         'value' => 0,
                     ],
                 ],
@@ -171,7 +171,7 @@ class ReasonDataGrid extends DataGrid
             $this->addMassAction([
                 'title'  => trans('shop::app.rma.customer-rma-index.delete'),
                 'method' => 'POST',
-                'url'    => route('admin.sales.rma.reason.mass_delete'),
+                'url'    => route('admin.sales.rma.reason.mass-delete'),
             ]);
         }
     }

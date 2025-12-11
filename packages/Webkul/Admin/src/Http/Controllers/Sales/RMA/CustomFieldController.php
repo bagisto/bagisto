@@ -84,7 +84,7 @@ class CustomFieldController extends Controller
             ], $rmaCustomField->id);
         }
 
-        session()->flash('success', trans('admin::app.rma.sales.rma.custom-field.create.success'));
+        session()->flash('success', trans('admin::app.sales.rma.custom-field.create.success'));
 
         return redirect()->route('admin.sales.rma.custom-field.index');
     }
@@ -141,7 +141,7 @@ class CustomFieldController extends Controller
             ], $rmaCustomField->id);
         }
 
-        session()->flash('success', trans('admin::app.rma.sales.rma.custom-field.edit.success'));
+        session()->flash('success', trans('admin::app.sales.rma.custom-field.edit.success'));
 
         return redirect()->route('admin.sales.rma.custom-field.index');
     }
@@ -159,7 +159,7 @@ class CustomFieldController extends Controller
             Event::dispatch('rma.custom-field.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.custom-field.index.datagrid.delete-success'),
+                'message' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
@@ -179,7 +179,7 @@ class CustomFieldController extends Controller
             ->update(['status' => request()->value]);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.custom-field.edit.success'),
+            'message' => trans('admin::app.sales.rma.custom-field.edit.success'),
         ]);
     }
 
@@ -192,7 +192,7 @@ class CustomFieldController extends Controller
             $this->rmaCustomFieldRepository->whereIn('id', request()->indices)->delete();
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.custom-field.index.datagrid.delete-success'),
+                'message' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([

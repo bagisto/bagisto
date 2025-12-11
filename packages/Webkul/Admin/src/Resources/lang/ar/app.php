@@ -814,6 +814,230 @@ return [
 
             'title' => 'منتجات الحجز',
         ],
+
+        'rma' => [
+            'all-rma' => [
+                'index' => [
+                    'title' => 'جميع طلبات RMA',
+
+                    'datagrid' => [
+                        'create'        => 'تم الإنشاء في',
+                        'customer-name' => 'اسم العميل',
+                        'id'            => 'معرف RMA',
+                        'order-ref'     => 'رقم الطلب',
+                        'order-status'  => 'حالة الطلب',
+                        'rma-status'    => 'حالة RMA',
+                    ],
+                ],
+
+                'view' => [
+                    'add-attachments'        => 'إضافة مرفقات',
+                    'additional-information' => 'معلومات إضافية:',
+                    'attachment'             => 'مرفق',
+                    'change-status'          => 'تغيير الحالة',
+                    'confirm-print'          => 'انقر على موافق لطباعة RMA',
+                    'conversations'          => 'المحادثات',
+                    'customer-details'       => 'تفاصيل العميل',
+                    'customer-email'         => 'بريد العميل الإلكتروني:',
+                    'customer'               => 'العميل:',
+                    'enter-message'          => 'أدخل الرسالة',
+                    'images'                 => 'صورة:',
+                    'no-record'              => 'لم يتم العثور على سجل!',
+                    'order-date'             => 'تاريخ الطلب:',
+                    'order-details'          => 'العناصر المطلوبة لـ RMA',
+                    'order-id'               => 'رقم الطلب:',
+                    'order-status'           => 'حالة الطلب:',
+                    'order-total'            => 'إجمالي الطلب:',
+                    'request-on'             => 'تم الطلب في:',
+                    'resolution-type'        => 'نوع الحل:',
+                    'rma-status'             => 'حالة RMA:',
+                    'save-btn'               => 'حفظ',
+                    'send-message-btn'       => 'إرسال الرسالة',
+                    'send-message-success'   => 'تم إرسال الرسالة بنجاح.',
+                    'send-message'           => 'إرسال الرسالة',
+                    'status'                 => 'الحالة',
+                    'title'                  => 'RMA',
+                    'update-success'         => 'تم تحديث حالة RMA بنجاح.',
+                    'view-title'             => 'RMA',
+                ],
+            ],
+
+            'rma-status' => [
+                'index' => [
+                    'create-btn' => 'إنشاء حالة RMA',
+                    'title'      => 'حالة RMA',
+
+                    'datagrid' => [
+                        'created-at'          => 'تم الإنشاء في',
+                        'delete-success'      => 'تم حذف حالة RMA بنجاح.',
+                        'disabled'            => 'غير نشط',
+                        'enabled'             => 'نشط',
+                        'id'                  => 'معرف',
+                        'mass-delete-success' => 'تم حذف حالة RMA المحددة بنجاح.',
+                        'reason-error'        => 'حالة RMA مستخدمة في RMA.',
+                        'reason'              => 'حالة RMA',
+                        'status'              => 'الحالة',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'إضافة حالة RMA جديدة',
+                    'reason'       => 'حالة RMA',
+                    'save-btn'     => 'حفظ حالة RMA',
+                    'status'       => 'الحالة',
+                    'success'      => 'تم إنشاء حالة RMA بنجاح.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'تعديل حالة RMA',
+                    'mass-update-success' => 'تم تحديث حالة RMA المحددة بنجاح.',
+                    'reason'              => 'حالة RMA',
+                    'save-btn'            => 'حفظ حالة RMA',
+                    'status'              => 'الحالة',
+                    'success'             => 'تم تحديث حالة RMA بنجاح.',
+                ],
+            ],
+
+            'reasons' => [
+                'index' => [
+                    'create-btn' => 'إنشاء سبب RMA',
+                    'title'      => 'الأسباب',
+
+                    'datagrid' => [
+                        'created-at'          => 'تم الإنشاء في',
+                        'delete-success'      => 'تم حذف السبب بنجاح.',
+                        'disabled'            => 'غير نشط',
+                        'enabled'             => 'نشط',
+                        'id'                  => 'المعرف',
+                        'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح',
+                        'reason-error'        => 'السبب مستخدم في RMA.',
+                        'reason'              => 'السبب',
+                        'status'              => 'الحالة',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'إضافة سبب جديد',
+                    'reason'       => 'السبب',
+                    'save-btn'     => 'حفظ السبب',
+                    'status'       => 'الحالة',
+                    'success'      => 'تم إنشاء السبب بنجاح.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'تعديل السبب',
+                    'mass-update-success' => 'تم تحديث الأسباب المحددة بنجاح.',
+                    'reason'              => 'السبب',
+                    'save-btn'            => 'حفظ السبب',
+                    'status'              => 'الحالة',
+                    'success'             => 'تم تحديث السبب بنجاح.',
+                ],
+            ],
+
+            'custom-field' => [
+                'index' => [
+                    'create-btn' => 'إضافة حقل جديد',
+                    'title'      => 'حقول مخصصة لـ RMA',
+
+                    'datagrid' => [
+                        'created-at'          => 'تم الإنشاء في',
+                        'delete-success'      => 'تم حذف الحقول المخصصة بنجاح.',
+                        'disabled'            => 'غير نشط',
+                        'enabled'             => 'نشط',
+                        'id'                  => 'معرّف',
+                        'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح',
+                        'status'              => 'الحالة',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'حقل مخصص جديد',
+                    'save-btn'     => 'حفظ الحقل المخصص',
+                    'status'       => 'الحالة',
+                    'success'      => 'تم إنشاء الحقل المخصص بنجاح.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'تعديل الحقل المخصص',
+                    'mass-update-success' => 'تم تحديث الحقول المخصصة المحددة بنجاح.',
+                    'reason'              => 'الحقل المخصص',
+                    'save-btn'            => 'حفظ الحقل المخصص',
+                    'status'              => 'الحالة',
+                    'success'             => 'تم تحديث الحقل المخصص بنجاح.',
+                ],
+            ],
+
+            'rules' => [
+                'index' => [
+                    'create-btn' => 'إنشاء قواعد RMA',
+                    'title'      => 'قواعد RMA',
+
+                    'datagrid' => [
+                        'delete-success'      => 'تم حذف قواعد RMA بنجاح.',
+                        'disabled'            => 'غير نشط',
+                        'enabled'             => 'نشط',
+                        'exchange-period'     => 'فترة التبديل (بالأيام)',
+                        'id'                  => 'معرف',
+                        'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح.',
+                        'reason'              => 'قواعد',
+                        'return-period'       => 'فترة الإرجاع (بالأيام)',
+                        'status'              => 'الحالة',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title'       => 'إضافة قواعد RMA جديدة',
+                    'reason'             => 'قواعد RMA',
+                    'resolutions-period' => 'فترة الحلول',
+                    'rule-description'   => 'وصف القواعد',
+                    'rule-details'       => 'تفاصيل القواعد',
+                    'rules-title'        => 'عنوان القواعد',
+                    'save-btn'           => 'حفظ قواعد RMA',
+                    'status'             => 'حالة RMA',
+                    'success'            => 'تم إنشاء قواعد RMA بنجاح.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'تعديل قواعد RMA',
+                    'mass-update-success' => 'تم تحديث قواعد RMA المحددة بنجاح.',
+                    'reason'              => 'قواعد RMA',
+                    'save-btn'            => 'تحديث قواعد RMA',
+                    'status'              => 'الحالة',
+                    'success'             => 'تم تحديث قواعد RMA بنجاح.',
+                ],
+            ],
+
+            'create-rma' => [
+                'create-success'           => 'تم إنشاء RMA بنجاح.',
+                'create-title'             => 'إنشاء طلب RMA',
+                'email'                    => 'البريد الإلكتروني',
+                'image'                    => 'صورة',
+                'invalid-order-id'         => 'معرف الطلب غير صالح',
+                'mismatch'                 => 'عدم تطابق معرف الطلب والبريد الإلكتروني',
+                'new-rma'                  => 'طلب RMA جديد',
+                'order-id'                 => 'معرف الطلب',
+                'quantity'                 => 'الكمية',
+                'reason'                   => 'السبب',
+                'rma-already-exist'        => 'RMA موجود بالفعل',
+                'rma-not-available-quotes' => 'العنصر غير متوفر لـ RMA',
+                'save-btn'                 => 'حفظ',
+                'search'                   => '--اختر--',
+                'validate'                 => 'التحقق',
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma-has-been-created' => 'تم إنشاء RMA',
+                    'rma-created-message'  => 'طلب RMA متاح للمنتج بكمية :qty',
+                ],
+            ],
+
+            'index' => [
+                'create-rma-title' => 'إنشاء',
+                'reason-title'     => 'الأسباب',
+                'rma-title'        => 'الإرجاع',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -4703,6 +4927,54 @@ return [
                         'title'                => 'السلة المصغرة',
                     ],
                 ],
+
+                'rma' => [
+                    'afternoon'                           => 'بعد الظهر',
+                    'all-products'                        => 'جميع المنتجات',
+                    'all-status'                          => 'جميع الحالات',
+                    'allow-new-request-for-pending-order' => 'السماح بطلب RMA جديد للطلب المعلق',
+                    'allow-rma-for-digital-product'       => 'السماح بـ RMA للمنتجات الرقمية',
+                    'allowed-file-extension'              => 'الامتدادات المسموح بها للملفات',
+                    'allowed-file-types'                  => 'يرجى اختيار أنواع الملفات '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' فقط',
+                    'allowed-info'                        => 'مفصولة بفواصل. على سبيل المثال: jpg,jpeg,pdf',
+                    'allowed-request-cancelled-request'   => 'السماح بطلب RMA جديد للطلبات الملغاة',
+                    'allowed-request-declined-request'    => 'السماح بطلب RMA جديد للطلبات المرفوضة',
+                    'allowed-rma-for-product'             => 'السماح بـ RMA للمنتج',
+                    'cancel-items'                        => 'إلغاء العناصر',
+                    'complete'                            => 'مكتمل',
+                    'current-order-quantity'              => 'الكمية الحالية للطلب',
+                    'days-info'                           => 'عدد الأيام التي يمكن خلالها للعميل طلب RMA بعد تقديم الطلب.',
+                    'default-allow-days'                  => 'الأيام المسموح بها افتراضيًا',
+                    'enable'                              => 'تمكين RMA',
+                    'evening'                             => 'مساءً',
+                    'exchange'                            => 'استبدال',
+                    'info'                                => 'RMA هو جزء من عملية إرجاع المنتج إلى النشاط التجاري للحصول على استرداد أو استبدال أو إصلاح.',
+                    'morning'                             => 'صباحًا',
+                    'new-rma-message-to-customer'         => 'رسالة RMA جديدة إلى العميل',
+                    'no'                                  => 'لا',
+                    'open'                                => 'مفتوح',
+                    'package-condition'                   => 'حالة العبوة',
+                    'packed'                              => 'معبأة',
+                    'print-page'                          => 'طباعة الصفحة',
+                    'product-already-raw'                 => 'المنتج موجود بالفعل في RMA.',
+                    'product-delivery-status'             => 'حالة تسليم المنتج',
+                    'resolution-type'                     => 'نوع الحل',
+                    'return-pickup-address'               => 'عنوان استلام الإرجاع',
+                    'return-pickup-time'                  => 'وقت استلام الإرجاع',
+                    'return-policy'                       => 'سياسة الإرجاع',
+                    'return'                              => 'إرجاع',
+                    'select-allowed-order-status'         => 'اختر حالة الطلب المسموح بها',
+                    'specific-products'                   => 'منتجات محددة',
+                    'title'                               => 'RMA',
+                    'yes'                                 => 'نعم',
+
+                    'setting' => [
+                        'info'  => 'تتيح وظيفة RMA التعامل مع الحالات التي يعيد فيها العميل العناصر للإصلاح والصيانة أو لاسترداد الأموال أو الاستبدال.',
+                        'read'  => 'قراءة السياسة',
+                        'terms' => 'لقد قرأت وقبلت سياسة الإرجاع.',
+                        'title' => 'RMA',
+                    ],
+                ],
             ],
         ],
     ],
@@ -4748,6 +5020,7 @@ return [
                 'communications'           => 'الاتصالات',
                 'configure'                => 'تكوين',
                 'currencies'               => 'العملات',
+                'custom-field'             => 'حقل مخصص',
                 'customers'                => 'العملاء',
                 'dashboard'                => 'لوحة التحكم',
                 'data-transfer'            => 'نقل البيانات',
@@ -4767,10 +5040,15 @@ return [
                 'orders'                   => 'الطلبات',
                 'products'                 => 'المنتجات',
                 'promotions'               => 'العروض',
+                'reason'                   => 'سبب',
                 'refunds'                  => 'المستردات',
                 'reporting'                => 'تقرير',
+                'requests'                 => 'طلبات',
                 'reviews'                  => 'المراجعات',
+                'rma-status'               => 'حالة RMA',
+                'rma'                      => 'RMA',
                 'roles'                    => 'الأدوار',
+                'rules'                    => 'قواعد',
                 'sales'                    => 'المبيعات',
                 'search-seo'               => 'البحث وتحسين محركات البحث',
                 'search-synonyms'          => 'مرادفات البحث',
@@ -5242,306 +5520,6 @@ return [
             'subtotal'                   => 'المجموع الفرعي',
             'tax'                        => 'الضريبة',
             'tracking-number'            => 'رقم التتبع : :tracking_number',
-        ],
-    ],
-
-    'rma' => [
-        'configuration' => [
-            'index' => [
-                'sales' => [
-                    'rma' => [
-                        'afternoon'                           => 'بعد الظهر',
-                        'all-products'                        => 'جميع المنتجات',
-                        'all-status'                          => 'جميع الحالات',
-                        'allow-new-request-for-pending-order' => 'السماح بطلب RMA جديد للطلب المعلق',
-                        'allow-rma-for-digital-product'       => 'السماح بـ RMA للمنتجات الرقمية',
-                        'allowed-file-extension'              => 'الامتدادات المسموح بها للملفات',
-                        'allowed-file-types'                  => 'يرجى اختيار أنواع الملفات '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' فقط',
-                        'allowed-info'                        => 'مفصولة بفواصل. على سبيل المثال: jpg,jpeg,pdf',
-                        'allowed-request-cancelled-request'   => 'السماح بطلب RMA جديد للطلبات الملغاة',
-                        'allowed-request-declined-request'    => 'السماح بطلب RMA جديد للطلبات المرفوضة',
-                        'allowed-rma-for-product'             => 'السماح بـ RMA للمنتج',
-                        'cancel-items'                        => 'إلغاء العناصر',
-                        'complete'                            => 'مكتمل',
-                        'current-order-quantity'              => 'الكمية الحالية للطلب',
-                        'days-info'                           => 'عدد الأيام التي يمكن خلالها للعميل طلب RMA بعد تقديم الطلب.',
-                        'default-allow-days'                  => 'الأيام المسموح بها افتراضيًا',
-                        'enable'                              => 'تمكين RMA',
-                        'evening'                             => 'مساءً',
-                        'exchange'                            => 'استبدال',
-                        'info'                                => 'RMA هو جزء من عملية إرجاع المنتج إلى النشاط التجاري للحصول على استرداد أو استبدال أو إصلاح.',
-                        'morning'                             => 'صباحًا',
-                        'new-rma-message-to-customer'         => 'رسالة RMA جديدة إلى العميل',
-                        'no'                                  => 'لا',
-                        'open'                                => 'مفتوح',
-                        'package-condition'                   => 'حالة العبوة',
-                        'packed'                              => 'معبأة',
-                        'print-page'                          => 'طباعة الصفحة',
-                        'product-already-raw'                 => 'المنتج موجود بالفعل في RMA.',
-                        'product-delivery-status'             => 'حالة تسليم المنتج',
-                        'resolution-type'                     => 'نوع الحل',
-                        'return-pickup-address'               => 'عنوان استلام الإرجاع',
-                        'return-pickup-time'                  => 'وقت استلام الإرجاع',
-                        'return-policy'                       => 'سياسة الإرجاع',
-                        'return'                              => 'إرجاع',
-                        'select-allowed-order-status'         => 'اختر حالة الطلب المسموح بها',
-                        'specific-products'                   => 'منتجات محددة',
-                        'title'                               => 'RMA',
-                        'yes'                                 => 'نعم',
-
-                        'setting' => [
-                            'info'  => 'تتيح وظيفة RMA التعامل مع الحالات التي يعيد فيها العميل العناصر للإصلاح والصيانة أو لاسترداد الأموال أو الاستبدال.',
-                            'read'  => 'قراءة السياسة',
-                            'terms' => 'لقد قرأت وقبلت سياسة الإرجاع.',
-                            'title' => 'RMA',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-
-        'components' => [
-            'layouts' => [
-                'sidebar' => [
-                    'rma' => 'RMA',
-                ],
-            ],
-        ],
-
-        'sales' => [
-            'rma' => [
-                'all-rma' => [
-                    'index' => [
-                        'title' => 'جميع طلبات RMA',
-
-                        'datagrid' => [
-                            'create'        => 'تم الإنشاء في',
-                            'customer-name' => 'اسم العميل',
-                            'id'            => 'معرف RMA',
-                            'order-ref'     => 'رقم الطلب',
-                            'order-status'  => 'حالة الطلب',
-                            'rma-status'    => 'حالة RMA',
-                        ],
-                    ],
-
-                    'view' => [
-                        'add-attachments'        => 'إضافة مرفقات',
-                        'additional-information' => 'معلومات إضافية:',
-                        'attachment'             => 'مرفق',
-                        'change-status'          => 'تغيير الحالة',
-                        'confirm-print'          => 'انقر على موافق لطباعة RMA',
-                        'conversations'          => 'المحادثات',
-                        'customer-details'       => 'تفاصيل العميل',
-                        'customer-email'         => 'بريد العميل الإلكتروني:',
-                        'customer'               => 'العميل:',
-                        'enter-message'          => 'أدخل الرسالة',
-                        'images'                 => 'صورة:',
-                        'no-record'              => 'لم يتم العثور على سجل!',
-                        'order-date'             => 'تاريخ الطلب:',
-                        'order-details'          => 'العناصر المطلوبة لـ RMA',
-                        'order-id'               => 'رقم الطلب:',
-                        'order-status'           => 'حالة الطلب:',
-                        'order-total'            => 'إجمالي الطلب:',
-                        'request-on'             => 'تم الطلب في:',
-                        'resolution-type'        => 'نوع الحل:',
-                        'rma-status'             => 'حالة RMA:',
-                        'save-btn'               => 'حفظ',
-                        'send-message-btn'       => 'إرسال الرسالة',
-                        'send-message-success'   => 'تم إرسال الرسالة بنجاح.',
-                        'send-message'           => 'إرسال الرسالة',
-                        'status'                 => 'الحالة',
-                        'title'                  => 'RMA',
-                        'update-success'         => 'تم تحديث حالة RMA بنجاح.',
-                        'view-title'             => 'RMA',
-                    ],
-                ],
-
-                'rma-status' => [
-                    'index' => [
-                        'create-btn' => 'إنشاء حالة RMA',
-                        'title'      => 'حالة RMA',
-
-                        'datagrid' => [
-                            'created-at'          => 'تم الإنشاء في',
-                            'delete-success'      => 'تم حذف حالة RMA بنجاح.',
-                            'disabled'            => 'غير نشط',
-                            'enabled'             => 'نشط',
-                            'id'                  => 'معرف',
-                            'mass-delete-success' => 'تم حذف حالة RMA المحددة بنجاح.',
-                            'reason-error'        => 'حالة RMA مستخدمة في RMA.',
-                            'reason'              => 'حالة RMA',
-                            'status'              => 'الحالة',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'إضافة حالة RMA جديدة',
-                        'reason'       => 'حالة RMA',
-                        'save-btn'     => 'حفظ حالة RMA',
-                        'status'       => 'الحالة',
-                        'success'      => 'تم إنشاء حالة RMA بنجاح.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'تعديل حالة RMA',
-                        'mass-update-success' => 'تم تحديث حالة RMA المحددة بنجاح.',
-                        'reason'              => 'حالة RMA',
-                        'save-btn'            => 'حفظ حالة RMA',
-                        'status'              => 'الحالة',
-                        'success'             => 'تم تحديث حالة RMA بنجاح.',
-                    ],
-                ],
-
-                'reasons' => [
-                    'index' => [
-                        'create-btn' => 'إنشاء سبب RMA',
-                        'title'      => 'الأسباب',
-
-                        'datagrid' => [
-                            'created-at'          => 'تم الإنشاء في',
-                            'delete-success'      => 'تم حذف السبب بنجاح.',
-                            'disabled'            => 'غير نشط',
-                            'enabled'             => 'نشط',
-                            'id'                  => 'المعرف',
-                            'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح',
-                            'reason-error'        => 'السبب مستخدم في RMA.',
-                            'reason'              => 'السبب',
-                            'status'              => 'الحالة',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'إضافة سبب جديد',
-                        'reason'       => 'السبب',
-                        'save-btn'     => 'حفظ السبب',
-                        'status'       => 'الحالة',
-                        'success'      => 'تم إنشاء السبب بنجاح.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'تعديل السبب',
-                        'mass-update-success' => 'تم تحديث الأسباب المحددة بنجاح.',
-                        'reason'              => 'السبب',
-                        'save-btn'            => 'حفظ السبب',
-                        'status'              => 'الحالة',
-                        'success'             => 'تم تحديث السبب بنجاح.',
-                    ],
-                ],
-
-                'custom-field' => [
-                    'index' => [
-                        'create-btn' => 'إضافة حقل جديد',
-                        'title'      => 'حقول مخصصة لـ RMA',
-
-                        'datagrid' => [
-                            'created-at'          => 'تم الإنشاء في',
-                            'delete-success'      => 'تم حذف الحقول المخصصة بنجاح.',
-                            'disabled'            => 'غير نشط',
-                            'enabled'             => 'نشط',
-                            'id'                  => 'معرّف',
-                            'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح',
-                            'status'              => 'الحالة',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'حقل مخصص جديد',
-                        'save-btn'     => 'حفظ الحقل المخصص',
-                        'status'       => 'الحالة',
-                        'success'      => 'تم إنشاء الحقل المخصص بنجاح.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'تعديل الحقل المخصص',
-                        'mass-update-success' => 'تم تحديث الحقول المخصصة المحددة بنجاح.',
-                        'reason'              => 'الحقل المخصص',
-                        'save-btn'            => 'حفظ الحقل المخصص',
-                        'status'              => 'الحالة',
-                        'success'             => 'تم تحديث الحقل المخصص بنجاح.',
-                    ],
-                ],
-
-                'rules' => [
-                    'index' => [
-                        'create-btn' => 'إنشاء قواعد RMA',
-                        'title'      => 'قواعد RMA',
-
-                        'datagrid' => [
-                            'delete-success'      => 'تم حذف قواعد RMA بنجاح.',
-                            'disabled'            => 'غير نشط',
-                            'enabled'             => 'نشط',
-                            'exchange-period'     => 'فترة التبديل (بالأيام)',
-                            'id'                  => 'معرف',
-                            'mass-delete-success' => 'تم حذف البيانات المحددة بنجاح.',
-                            'reason'              => 'قواعد',
-                            'return-period'       => 'فترة الإرجاع (بالأيام)',
-                            'status'              => 'الحالة',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title'       => 'إضافة قواعد RMA جديدة',
-                        'reason'             => 'قواعد RMA',
-                        'resolutions-period' => 'فترة الحلول',
-                        'rule-description'   => 'وصف القواعد',
-                        'rule-details'       => 'تفاصيل القواعد',
-                        'rules-title'        => 'عنوان القواعد',
-                        'save-btn'           => 'حفظ قواعد RMA',
-                        'status'             => 'حالة RMA',
-                        'success'            => 'تم إنشاء قواعد RMA بنجاح.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'تعديل قواعد RMA',
-                        'mass-update-success' => 'تم تحديث قواعد RMA المحددة بنجاح.',
-                        'reason'              => 'قواعد RMA',
-                        'save-btn'            => 'تحديث قواعد RMA',
-                        'status'              => 'الحالة',
-                        'success'             => 'تم تحديث قواعد RMA بنجاح.',
-                    ],
-                ],
-
-                'create-rma' => [
-                    'create-success'           => 'تم إنشاء RMA بنجاح.',
-                    'create-title'             => 'إنشاء طلب RMA',
-                    'email'                    => 'البريد الإلكتروني',
-                    'image'                    => 'صورة',
-                    'invalid-order-id'         => 'معرف الطلب غير صالح',
-                    'mismatch'                 => 'عدم تطابق معرف الطلب والبريد الإلكتروني',
-                    'new-rma'                  => 'طلب RMA جديد',
-                    'order-id'                 => 'معرف الطلب',
-                    'quantity'                 => 'الكمية',
-                    'reason'                   => 'السبب',
-                    'rma-already-exist'        => 'RMA موجود بالفعل',
-                    'rma-not-available-quotes' => 'العنصر غير متوفر لـ RMA',
-                    'save-btn'                 => 'حفظ',
-                    'search'                   => '--اختر--',
-                    'validate'                 => 'التحقق',
-                ],
-            ],
-
-            'invoice' => [
-                'create' => [
-                    'rma_has_been_created' => 'تم إنشاء RMA',
-                    'rma-created-message'  => 'طلب RMA متاح للمنتج بكمية :qty',
-                ],
-            ],
-        ],
-
-        'rma' => [
-            'index' => [
-                'create-rma-title' => 'إنشاء',
-                'reason-title'     => 'الأسباب',
-                'rma-title'        => 'الإرجاع',
-            ],
-        ],
-
-        'acl' => [
-            'delete'      => 'حذف',
-            'edit'        => 'تعديل',
-            'mass-delete' => 'حذف جماعي',
-            'mass-update' => 'تحديث جماعي',
-            'title'       => 'RMA',
         ],
     ],
 ];

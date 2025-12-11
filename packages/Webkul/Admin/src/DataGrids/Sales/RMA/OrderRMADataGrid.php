@@ -147,7 +147,7 @@ class OrderRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'customer_name',
-            'label'      => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.customer-name'),
+            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.customer-name'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,

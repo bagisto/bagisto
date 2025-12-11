@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.all-rma.view.title', ['id' => $rma->id])
+        @lang('admin::app.sales.rma.all-rma.view.title', ['id' => $rma->id])
     </x-slot>
 
     @php
@@ -72,7 +72,7 @@
 
                     <div class="flex items-center gap-2.5">
                         <p class="text-xl font-bold leading-6 text-gray-800 dark:text-white">
-                            @lang('admin::app.rma.sales.rma.all-rma.index.datagrid.id') {{ '#'. $rma->id }}
+                            @lang('admin::app.sales.rma.all-rma.index.datagrid.id') {{ '#'. $rma->id }}
                         </p>
                     </div>
 
@@ -108,7 +108,7 @@
                                         <!-- Created At -->
                                         <div class="flex gap-2.5 mt-2">
                                             <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.request-on')
+                                                @lang('admin::app.sales.rma.all-rma.view.request-on')
                                             </div>
 
                                             <div class="text-sm text-gray-600 dark:text-gray-300">
@@ -147,7 +147,7 @@
                                         <!-- Additional Information -->
                                         <div class="flex gap-2.5 mt-2 ">
                                             <div class="text-sm font-semibold text-gray-600 dark:text-gray-300 min-w-[160px]">
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.additional-information')
+                                                @lang('admin::app.sales.rma.all-rma.view.additional-information')
                                             </div>
 
                                             <p class="text-sm text-gray-600 dark:text-gray-300">
@@ -158,7 +158,7 @@
                                         <!--RMA Image -->
                                         <div class="flex gap-2.5 mt-2">
                                             <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.images')
+                                                @lang('admin::app.sales.rma.all-rma.view.images')
                                             </div>
 
                                             <div class="flex justify-between flex-wrap gap-2">
@@ -180,7 +180,7 @@
                     <div class="box-shadow rounded bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4 !pb-0">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
-                               @lang('admin::app.rma.sales.rma.all-rma.view.order-details')
+                               @lang('admin::app.sales.rma.all-rma.view.order-details')
                             </p>
                         </div>
 
@@ -270,7 +270,7 @@
                     <div class="box-shadow rounded bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
-                               @lang('admin::app.rma.sales.rma.all-rma.view.conversations')
+                               @lang('admin::app.sales.rma.all-rma.view.conversations')
                             </p>
                         </div>
                         <div class="grid gap-2.5 p-4">
@@ -303,7 +303,7 @@
 
                                         <x-admin::form.control-group>
                                             <x-shop::form.control-group.label class="required flex dark:text-gray-300">
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.send-message')
+                                                @lang('admin::app.sales.rma.all-rma.view.send-message')
                                             </x-shop::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -311,8 +311,8 @@
                                                 name="message"
                                                 id="message"
                                                 rules="required"
-                                                :label="trans('admin::app.rma.sales.rma.all-rma.view.enter-message')"
-                                                :placeholder="trans('admin::app.rma.sales.rma.all-rma.view.enter-message')"
+                                                :label="trans('admin::app.sales.rma.all-rma.view.enter-message')"
+                                                :placeholder="trans('admin::app.sales.rma.all-rma.view.enter-message')"
                                             />
 
                                             <div class="flex">
@@ -329,7 +329,7 @@
                                                 id="newFileInput"
                                                 class="transparent-button text-sm hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                                             >
-                                                + @lang('admin::app.rma.sales.rma.all-rma.view.add-attachments')
+                                                + @lang('admin::app.sales.rma.all-rma.view.add-attachments')
 
                                                 <input
                                                     type="file"
@@ -356,14 +356,14 @@
                                                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                                 </svg>
 
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.send-message-btn')
+                                                @lang('admin::app.sales.rma.all-rma.view.send-message-btn')
                                             </button>
 
                                             <button
                                                 class="primary-button"
                                                 v-else
                                             >
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.send-message-btn')
+                                                @lang('admin::app.sales.rma.all-rma.view.send-message-btn')
                                             </button>
                                         </div>
                                     </form>
@@ -428,7 +428,7 @@
                                             >
                                         </div>
 
-                                        <p class="flex justify-center text-gray-300">@lang('admin::app.rma.sales.rma.all-rma.view.no-record')</p>
+                                        <p class="flex justify-center text-gray-300">@lang('admin::app.sales.rma.all-rma.view.no-record')</p>
                                     </div>
                                     <br>
                                 </div>
@@ -443,7 +443,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.rma.sales.rma.all-rma.view.status')
+                                @lang('admin::app.sales.rma.all-rma.view.status')
                             </p>
                         </x-slot:header>
 
@@ -451,11 +451,11 @@
                             <div class="flex w-full justify-start gap-5">
                                 <div class="flex flex-col gap-2.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.rma.sales.rma.all-rma.view.rma-status')
+                                        @lang('admin::app.sales.rma.all-rma.view.rma-status')
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                       @lang('admin::app.rma.sales.rma.all-rma.view.order-status')
+                                       @lang('admin::app.sales.rma.all-rma.view.order-status')
                                     </p>
 
                                     @if ($rma->request_status == 'Declined')
@@ -583,7 +583,7 @@
 
                                 <x-slot:header>
                                     <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
-                                        @lang('admin::app.rma.sales.rma.all-rma.view.change-status')
+                                        @lang('admin::app.sales.rma.all-rma.view.change-status')
                                     </p>
                                 </x-slot:header>
 
@@ -604,7 +604,7 @@
                                                 name="request_status"
                                                 rules="required"
                                                 v-model="rmaStatus"
-                                                :label="trans('admin::app.rma.sales.rma.all-rma.index.datagrid.rma-status')"
+                                                :label="trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status')"
                                                 id="orderItem"
                                             >
                                                 @foreach ($statusArr as $status)
@@ -644,7 +644,7 @@
                                                 type="submit"
                                                 class="primary-button"
                                             >
-                                                @lang('admin::app.rma.sales.rma.all-rma.view.save-btn')
+                                                @lang('admin::app.sales.rma.all-rma.view.save-btn')
                                             </button>
                                         </div>
                                     </x-admin::form>
@@ -754,15 +754,15 @@
                             <div class="flex w-full justify-start gap-5">
                                 <div class="flex flex-col gap-y-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.rma.sales.rma.all-rma.view.order-id')
+                                        @lang('admin::app.sales.rma.all-rma.view.order-id')
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                       @lang('admin::app.rma.sales.rma.all-rma.view.order-total')
+                                       @lang('admin::app.sales.rma.all-rma.view.order-total')
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.rma.sales.rma.all-rma.view.order-date')
+                                        @lang('admin::app.sales.rma.all-rma.view.order-date')
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -807,7 +807,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                 @lang('admin::app.rma.sales.rma.all-rma.view.customer-details')
+                                 @lang('admin::app.sales.rma.all-rma.view.customer-details')
                             </p>
                         </x-slot>
 
@@ -815,11 +815,11 @@
                             <div class="flex w-full justify-start gap-5">
                                 <div class="flex flex-col gap-y-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.rma.sales.rma.all-rma.view.customer')
+                                        @lang('admin::app.sales.rma.all-rma.view.customer')
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                       @lang('admin::app.rma.sales.rma.all-rma.view.customer-email')
+                                       @lang('admin::app.sales.rma.all-rma.view.customer-email')
                                     </p>
                                 </div>
 
@@ -855,7 +855,7 @@
                 <!-- Modal Header -->
                 <x-slot:header>
                     <p class="text-lg font-bold text-gray-800 dark:text-white">
-                        @lang('admin::app.rma.sales.rma.all-rma.view.attachment')
+                        @lang('admin::app.sales.rma.all-rma.view.attachment')
                     </p>
                 </x-slot>
 

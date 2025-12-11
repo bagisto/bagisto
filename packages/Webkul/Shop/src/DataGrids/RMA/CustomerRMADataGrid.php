@@ -102,7 +102,7 @@ class CustomerRMADataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.id'),
+            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
@@ -111,7 +111,7 @@ class CustomerRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'order_id',
-            'label'      => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.order-ref'),
+            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.order-ref'),
             'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
@@ -123,7 +123,7 @@ class CustomerRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'request_status',
-            'label'              => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.rma-status'),
+            'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status'),
             'type'               => 'string',
             'filterable_type'    => 'dropdown',
             'searchable'         => true,
@@ -157,7 +157,7 @@ class CustomerRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'           => 'created_at',
-            'label'           => trans('admin::app.rma.sales.rma.all-rma.index.datagrid.create'),
+            'label'           => trans('admin::app.sales.rma.all-rma.index.datagrid.create'),
             'type'            => 'date',
             'sortable'        => true,
             'searchable'      => true,

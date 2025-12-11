@@ -70,13 +70,12 @@ class Helper
         if (! $orderItem) {
             return [
                 'qty'     => 0,
-                'message' => trans('admin::app.rma.sales.invoice.create.order-item-not-found'),
+                'message' => trans('admin::app.sales.rma.invoice.create.order-item-not-found'),
             ];
         }
 
-        // Fetch RMA items for the order item and eager load their RMA parent
         $rmaItems = $this->rmaItemsRepository
-            ->with('rma') // Eager load the RMA relation
+            ->with('rma')
             ->where('order_item_id', $orderItemId)
             ->get();
 
@@ -95,7 +94,7 @@ class Helper
         return [
             'qty'     => $remainingQty,
             'message' => $rmaQty > 0
-                ? trans('admin::app.rma.sales.invoice.create.rma-created-message', ['qty' => $rmaQty])
+                ? trans('admin::app.sales.rma.invoice.create.rma-created-message', ['qty' => $rmaQty])
                 : '',
         ];
     }

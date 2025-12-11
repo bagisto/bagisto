@@ -51,7 +51,7 @@ class RulesController extends Controller
         ));
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rules.create.success'),
+            'message' => trans('admin::app.sales.rma.rules.create.success'),
         ]);
     }
 
@@ -85,7 +85,7 @@ class RulesController extends Controller
         ), request()->id);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rules.edit.success', ['name' => 'Reason']),
+            'message' => trans('admin::app.sales.rma.rules.edit.success'),
         ]);
     }
 
@@ -98,11 +98,11 @@ class RulesController extends Controller
             $this->rmaRulesRepository->delete($id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rules.index.datagrid.delete-success'),
+                'message' => trans('admin::app.sales.rma.rules.index.datagrid.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rules.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.rules.index.datagrid.reason-error'),
             ], 500);
         }
     }
@@ -117,7 +117,7 @@ class RulesController extends Controller
             ->update(['status' => $request->value]);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rules.edit.mass-update-success'),
+            'message' => trans('admin::app.sales.rma.rules.edit.mass-update-success'),
         ]);
     }
 
@@ -130,11 +130,11 @@ class RulesController extends Controller
             $this->rmaRulesRepository->whereIn('id', $request->indices)->delete();
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rules.index.datagrid.mass-delete-success'),
+                'message' => trans('admin::app.sales.rma.rules.index.datagrid.mass-delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rules.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.rules.index.datagrid.reason-error'),
             ], 500);
         }
     }

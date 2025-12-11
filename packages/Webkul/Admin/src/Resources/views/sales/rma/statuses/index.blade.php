@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <!-- Title -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.rma-status.index.title')
+        @lang('admin::app.sales.rma.rma-status.index.title')
     </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.rma.rma-status.list.before') !!}
@@ -21,16 +21,16 @@
                 <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
                     <!-- Title -->
                     <p class="text-xl font-bold text-gray-800 dark:text-white">
-                        @lang('admin::app.rma.sales.rma.rma-status.index.title')
+                        @lang('admin::app.sales.rma.rma-status.index.title')
                     </p>
 
                     <!-- Create Button -->
                     <div class="flex items-center gap-x-2.5">
                         <button
                             class="primary-button"
-                            @click="selectedLocales=0; resetForm(); $refs.rulesModal.toggle()"
+                            @click="selectedRules=0; resetForm(); $refs.rulesModal.toggle()"
                         >
-                            @lang('admin::app.rma.sales.rma.rma-status.index.create-btn')
+                            @lang('admin::app.sales.rma.rma-status.index.create-btn')
                         </button>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                <a @click="selectedLocales=1; editModal(record.actions.find(action => action.method === 'GET').url)">
+                                <a @click="selectedRules=1; editModal(record.actions.find(action => action.method === 'GET').url)">
                                     <span
                                         :class="record.actions.find(action => action.title === 'Edit')?.icon"
                                         class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
@@ -128,25 +128,26 @@
                             <x-admin::modal ref="rulesModal">
                                 <!-- Modal Header -->
                                 <x-slot:header>
-                                    <p v-if="! selectedLocales" class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.rma-status.create.create-title')
+                                    <p v-if="! selectedRules" class="text-lg font-bold text-gray-800 dark:text-white">
+                                        @lang('admin::app.sales.rma.rma-status.create.create-title')
                                     </p>
 
                                     <p v-else class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.rma-status.edit.edit-title')
+                                        @lang('admin::app.sales.rma.rma-status.edit.edit-title')
                                     </p>
                                 </x-slot>
 
                                 <!-- Modal Content -->
                                 <x-slot:content>
                                     {!! view_render_event('bagisto.admin.catalog.rma.rma-status.create.before') !!}
+
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="id"
                                         v-model="rules.id"
                                     />
 
-                                    <div v-if="! selectedLocales">
+                                    <div v-if="! selectedRules">
                                         <!-- Status Title -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
@@ -169,7 +170,7 @@
                                         <!-- Status -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.rma.sales.rma.reasons.create.status')
+                                                @lang('admin::app.sales.rma.reasons.create.status')
                                             </x-admin::form.control-group.label>
 
                                             <input
@@ -182,7 +183,7 @@
                                                 type="switch"
                                                 name="status"
                                                 value="1"
-                                                :label="trans('admin::app.rma.sales.rma.rules.create.status')"
+                                                :label="trans('admin::app.sales.rma.rules.create.status')"
                                                 ::checked="(rules.status == 1) ? 1 : 0"
                                             />
                                         </x-admin::form.control-group>
@@ -213,21 +214,21 @@
                                         <div v-if="defaultStatus == 1">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    @lang('admin::app.rma.sales.rma.reasons.create.status')
+                                                    @lang('admin::app.sales.rma.reasons.create.status')
                                                 </x-admin::form.control-group.label>
 
                                                 <p
                                                     v-if="rules.status == 1"
                                                     class="label-active"
                                                 >
-                                                    @lang('admin::app.rma.sales.rma.reasons.index.datagrid.enabled')
+                                                    @lang('admin::app.sales.rma.reasons.index.datagrid.enabled')
                                                 </p>
 
                                                 <p
                                                     v-else
                                                     class="label-canceled"
                                                 >
-                                                    @lang('admin::app.rma.sales.rma.reasons.index.datagrid.disabled')
+                                                    @lang('admin::app.sales.rma.reasons.index.datagrid.disabled')
                                                 </p>
 
                                                 <input
@@ -240,7 +241,7 @@
                                                     type="hidden"
                                                     name="status"
                                                     value="1"
-                                                    :label="trans('admin::app.rma.sales.rma.rules.create.status')"
+                                                    :label="trans('admin::app.sales.rma.rules.create.status')"
                                                     ::checked="(rules.status == 1) ? 1 : 0"
                                                 />
                                             </x-admin::form.control-group>
@@ -250,7 +251,7 @@
                                         <div v-else>
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    @lang('admin::app.rma.sales.rma.reasons.create.status')
+                                                    @lang('admin::app.sales.rma.reasons.create.status')
                                                 </x-admin::form.control-group.label>
 
                                                 <input
@@ -263,7 +264,7 @@
                                                     type="switch"
                                                     name="status"
                                                     value="1"
-                                                    :label="trans('admin::app.rma.sales.rma.rules.create.status')"
+                                                    :label="trans('admin::app.sales.rma.rules.create.status')"
                                                     ::checked="(rules.status == 1) ? 1 : 0"
                                                 />
                                             </x-admin::form.control-group>
@@ -298,7 +299,7 @@
                                             type="submit"
                                             class="primary-button"
                                         >
-                                            @lang('admin::app.rma.sales.rma.rma-status.create.save-btn')
+                                            @lang('admin::app.sales.rma.rma-status.create.save-btn')
                                         </button>
                                     </div>
                                 </x-slot>
@@ -320,7 +321,7 @@
 
                         defaultStatus: '',
 
-                        selectedLocales: 0,
+                        selectedRules: 0,
                     }
                 },
 
@@ -333,12 +334,12 @@
 
                         let url;
 
+                        url = `{{ route('admin.sales.rma.rma-status.store') }}`;
+
                         if (params.id) {
                             url = `{{ route('admin.sales.rma.rma-status.update', '') }}/${params.id}`;
 
                             formData.append('_method', 'put');
-                        } else {
-                            url = `{{ route('admin.sales.rma.rma-status.store') }}`;
                         }
 
                         this.$axios.post(url, formData, {
@@ -362,7 +363,7 @@
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
-                            });;
+                            });
                     },
 
                     editModal(url) {

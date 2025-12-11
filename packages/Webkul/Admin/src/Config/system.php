@@ -3095,6 +3095,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.rma.days-info',
                 'type'          => 'text',
                 'validation'    => 'required|numeric',
+                'default'       => '7',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -3102,12 +3103,14 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.rma.return-policy',
                 'type'          => 'textarea',
                 'validation'    => 'required',
+                'default'       => '7 days return policy.',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'allowed_file_extension',
                 'title'         => 'admin::app.configuration.index.sales.rma.allowed-file-extension',
                 'validation'    => 'required',
+                'default'       => 'image/jpg,image/jpeg,image/png,image/webp',
                 'type'          => 'multiselect',
                 'options'       => [
                     [
@@ -3165,7 +3168,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.rma.select-allowed-order-status',
                 'type'          => 'select',
                 'validation'    => 'required',
-                'default'       => 'complete',
+                'default'       => 'all',
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.rma.all-status',
@@ -3181,6 +3184,7 @@ return [
                 'name'          => 'select_allowed_product_type',
                 'title'         => 'admin::app.configuration.index.sales.rma.allow-product-type-for-rma',
                 'type'          => 'multiselect',
+                'default'       => 'simple,configurable,bundle,grouped',
                 'options'       => [
                     [
                         'title' => 'product::app.type.simple',

@@ -42,7 +42,7 @@ class StatusDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.rma.sales.rma.reasons.index.datagrid.id'),
+            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -76,7 +76,7 @@ class StatusDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('admin::app.rma.sales.rma.reasons.index.datagrid.status'),
+            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => false,
             'filterable'         => true,
@@ -84,19 +84,19 @@ class StatusDataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                     'value' => 1,
                 ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                     'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
                 if ($row->status) {
-                    return '<p class="label-active">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled').'</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.rma.reasons.index.datagrid.enabled').'</p>';
                 }
 
-                return '<p class="label-canceled">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled').'</p>';
+                return '<p class="label-canceled">'.trans('admin::app.sales.rma.reasons.index.datagrid.disabled').'</p>';
             },
         ]);
     }
@@ -143,10 +143,10 @@ class StatusDataGrid extends DataGrid
                 'url'     => route('admin.sales.rma.rma-status.mass-update'),
                 'options' => [
                     [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                         'value' => 1,
                     ], [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                         'value' => 0,
                     ],
                 ],

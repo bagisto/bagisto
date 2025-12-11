@@ -32,7 +32,7 @@ class RulesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.rma.sales.rma.reasons.index.datagrid.id'),
+            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -41,7 +41,7 @@ class RulesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.rma.sales.rma.rules.create.rules-title'),
+            'label'      => trans('admin::app.sales.rma.rules.create.rules-title'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -50,7 +50,7 @@ class RulesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('admin::app.rma.sales.rma.reasons.index.datagrid.status'),
+            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => false,
             'filterable'         => true,
@@ -58,25 +58,25 @@ class RulesDataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                     'value' => 1,
                 ], [
-                    'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                     'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
                 if ($row->status) {
-                    return '<p class="label-active">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled').'</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.rma.reasons.index.datagrid.enabled').'</p>';
                 }
 
-                return '<p class="label-canceled">'.trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled').'</p>';
+                return '<p class="label-canceled">'.trans('admin::app.sales.rma.reasons.index.datagrid.disabled').'</p>';
             },
         ]);
 
         $this->addColumn([
             'index'      => 'exchange_period',
-            'label'      => trans('admin::app.rma.sales.rma.rules.index.datagrid.exchange-period'),
+            'label'      => trans('admin::app.sales.rma.rules.index.datagrid.exchange-period'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -85,7 +85,7 @@ class RulesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'return_period',
-            'label'      => trans('admin::app.rma.sales.rma.rules.index.datagrid.return-period'),
+            'label'      => trans('admin::app.sales.rma.rules.index.datagrid.return-period'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -135,10 +135,10 @@ class RulesDataGrid extends DataGrid
                 'url'     => route('admin.sales.rma.rules.mass-update'),
                 'options' => [
                     [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.enabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
                         'value' => 1,
                     ], [
-                        'label' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.disabled'),
+                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
                         'value' => 0,
                     ],
                 ],

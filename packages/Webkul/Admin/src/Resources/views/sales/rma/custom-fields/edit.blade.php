@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.custom-field.create.create-title')
+        @lang('admin::app.sales.rma.custom-field.create.create-title')
     </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.rma.custom-field.list.before') !!}
@@ -24,7 +24,7 @@
                     <div class="flex flex-col gap-2 flex-1 overflow-auto">
                         <div class="flex justify-between items-center">
                             <p class="text-xl text-gray-800 dark:text-white font-bold">
-                                @lang('admin::app.rma.sales.rma.custom-field.edit.edit-title')
+                                @lang('admin::app.sales.rma.custom-field.edit.edit-title')
                             </p>
 
                             <div class="flex gap-x-2.5 items-center">
@@ -41,7 +41,7 @@
                                     type="submit"
                                     class="primary-button"
                                 >
-                                    @lang('admin::app.rma.sales.rma.all-rma.view.save-btn')
+                                    @lang('admin::app.sales.rma.all-rma.view.save-btn')
                                 </button>
                             </div>
                         </div>
@@ -267,6 +267,7 @@
                                         :key="index"
                                         class="flex gap-4"
                                     >
+                                        <!-- Option Input -->
                                         <x-admin::form.control-group class="w-full">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.attributes.create.options')
@@ -277,7 +278,7 @@
                                                 :name="'options[' + index + ']'"
                                                 rules="required"
                                                 v-model="option.option"
-                                                :value="option.option_name"
+                                                :value="option.name"
                                                 v-slot="{ field }"
                                                 label="{{ trans('admin::app.catalog.attributes.create.options') }}"
                                             >
@@ -304,6 +305,7 @@
                                             </v-error-message>
                                         </x-admin::form.control-group>
 
+                                        <!-- Value Input -->
                                         <x-admin::form.control-group class="w-full">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.settings.themes.edit.value-input')

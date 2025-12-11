@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <!-- Title -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.rules.index.title')
+        @lang('admin::app.sales.rma.rules.index.title')
     </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.rma.rules.list.before') !!}
@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
                     <!-- Title -->
                     <p class="text-xl font-bold text-gray-800 dark:text-white">
-                        @lang('admin::app.rma.sales.rma.rules.index.title')
+                        @lang('admin::app.sales.rma.rules.index.title')
                     </p>
 
                     <!-- Create Button -->
@@ -30,7 +30,7 @@
                             class="primary-button"
                             @click="selectedLocales=0; resetForm(); $refs.rulesModal.toggle()"
                         >
-                            @lang('admin::app.rma.sales.rma.rules.index.create-btn')
+                            @lang('admin::app.sales.rma.rules.index.create-btn')
                         </button>
                     </div>
                 </div>
@@ -130,11 +130,11 @@
                                 <!-- Modal Header -->
                                 <x-slot:header>
                                     <p v-if="! selectedLocales" class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.rules.create.create-title')
+                                        @lang('admin::app.sales.rma.rules.create.create-title')
                                     </p>
 
                                     <p v-else class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.rules.edit.edit-title')
+                                        @lang('admin::app.sales.rma.rules.edit.edit-title')
                                     </p>
                                 </x-slot>
 
@@ -148,7 +148,7 @@
                                     />
 
                                     <x-admin::form.control-group.label class="font-semibold">
-                                        @lang('admin::app.rma.sales.rma.rules.create.rule-details')
+                                        @lang('admin::app.sales.rma.rules.create.rule-details')
                                     </x-admin::form.control-group.label>
 
                                     <hr class="mb-2"/>
@@ -156,7 +156,7 @@
                                     <!-- Rules Title -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.rma.sales.rma.rules.create.rules-title')
+                                            @lang('admin::app.sales.rma.rules.create.rules-title')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -165,8 +165,8 @@
                                             rules="required"
                                             :value="old('name')"
                                             v-model="rules.name"
-                                            :label="trans('admin::app.rma.sales.rma.rules.create.rules-title')"
-                                            :placeholder="trans('admin::app.rma.sales.rma.rules.create.rules-title')"
+                                            :label="trans('admin::app.sales.rma.rules.create.rules-title')"
+                                            :placeholder="trans('admin::app.sales.rma.rules.create.rules-title')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="name" />
@@ -175,7 +175,7 @@
                                     <!-- Status -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.rma.sales.rma.reasons.create.status')
+                                            @lang('admin::app.sales.rma.reasons.create.status')
                                         </x-admin::form.control-group.label>
 
                                         <input
@@ -188,7 +188,7 @@
                                             type="switch"
                                             name="status"
                                             value="1"
-                                            :label="trans('admin::app.rma.sales.rma.rules.create.status')"
+                                            :label="trans('admin::app.sales.rma.rules.create.status')"
                                             ::checked="(rules.status == 1) ? 1 : 0"
                                         />
                                     </x-admin::form.control-group>
@@ -196,7 +196,7 @@
                                     <!-- Rules Description -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.rma.sales.rma.rules.create.rule-description')
+                                            @lang('admin::app.sales.rma.rules.create.rule-description')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -205,8 +205,8 @@
                                             rules="required|min:1|max:70"
                                             :value="old('description')"
                                             v-model="rules.description"
-                                            :label="trans('admin::app.rma.sales.rma.rules.create.rule-description')"
-                                            :placeholder="trans('admin::app.rma.sales.rma.rules.create.rule-description')"
+                                            :label="trans('admin::app.sales.rma.rules.create.rule-description')"
+                                            :placeholder="trans('admin::app.sales.rma.rules.create.rule-description')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="description" />
@@ -216,7 +216,7 @@
 
                                     <!-- Resolutions Period -->
                                     <x-admin::form.control-group.label class="font-semibold mt-4">
-                                        @lang('admin::app.rma.sales.rma.rules.create.resolutions-period')
+                                        @lang('admin::app.sales.rma.rules.create.resolutions-period')
                                     </x-admin::form.control-group.label>
 
                                     <hr class="mb-2"/>
@@ -224,7 +224,7 @@
                                     <!-- Exchange Period -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.rma.sales.rma.rules.index.datagrid.exchange-period')
+                                            @lang('admin::app.sales.rma.rules.index.datagrid.exchange-period')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -233,8 +233,8 @@
                                             rules="min_value:1"
                                             :value="old('exchange_period')"
                                             v-model="rules.exchange_period"
-                                            :label="trans('admin::app.rma.sales.rma.rules.index.datagrid.exchange-period')"
-                                            :placeholder="trans('admin::app.rma.sales.rma.rules.index.datagrid.exchange-period')"
+                                            :label="trans('admin::app.sales.rma.rules.index.datagrid.exchange-period')"
+                                            :placeholder="trans('admin::app.sales.rma.rules.index.datagrid.exchange-period')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="exchange_period" />
@@ -243,7 +243,7 @@
                                     <!-- Return Period -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.rma.sales.rma.rules.index.datagrid.return-period')
+                                            @lang('admin::app.sales.rma.rules.index.datagrid.return-period')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -252,8 +252,8 @@
                                             rules="min_value:1"
                                             :value="old('return_period')"
                                             v-model="rules.return_period"
-                                            :label="trans('admin::app.rma.sales.rma.rules.index.datagrid.return-period')"
-                                            :placeholder="trans('admin::app.rma.sales.rma.rules.index.datagrid.return-period')"
+                                            :label="trans('admin::app.sales.rma.rules.index.datagrid.return-period')"
+                                            :placeholder="trans('admin::app.sales.rma.rules.index.datagrid.return-period')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="return_period" />
@@ -270,7 +270,7 @@
                                             type="submit"
                                             class="primary-button"
                                         >
-                                            @lang('admin::app.rma.sales.rma.rules.create.save-btn')
+                                            @lang('admin::app.sales.rma.rules.create.save-btn')
                                         </button>
                                     </div>
                                 </x-slot>
@@ -304,12 +304,12 @@
 
                         let url;
 
+                        url = `{{ route('admin.sales.rma.rules.store') }}`;
+
                         if (params.id) {
                             url = `{{ route('admin.sales.rma.rules.update', '') }}/${params.id}`;
                             
                             formData.append('_method', 'put');
-                        } else {
-                            url = `{{ route('admin.sales.rma.rules.store') }}`;
                         }
 
                         this.$axios.post(url, formData, {
@@ -327,11 +327,12 @@
 
                                 this.$refs.datagrid.get();
 
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 2000);
-
                                 resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
                             });
                     },
 

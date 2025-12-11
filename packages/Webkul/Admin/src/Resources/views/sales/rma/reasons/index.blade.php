@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <!-- Title -->
     <x-slot:title>
-        @lang('admin::app.rma.sales.rma.reasons.index.title')
+        @lang('admin::app.sales.rma.reasons.index.title')
     </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.rma.list.before') !!}
@@ -22,7 +22,7 @@
                 <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
                     <!-- Title -->
                     <p class="text-xl font-bold text-gray-800 dark:text-white">
-                        @lang('admin::app.rma.sales.rma.reasons.index.title')
+                        @lang('admin::app.sales.rma.reasons.index.title')
                     </p>
 
                     <!-- Create Button -->
@@ -31,7 +31,7 @@
                             class="primary-button"
                             @click="selectedLocales=0; resetForm(); $refs.reasonsModal.toggle()"
                         >
-                            @lang('admin::app.rma.sales.rma.reasons.index.create-btn')
+                            @lang('admin::app.sales.rma.reasons.index.create-btn')
                         </button>
                     </div>
                 </div>
@@ -133,11 +133,11 @@
                                 <!-- Modal Header -->
                                 <x-slot:header>
                                     <p v-if="! selectedLocales" class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.reasons.create.create-title')
+                                        @lang('admin::app.sales.rma.reasons.create.create-title')
                                     </p>
 
                                     <p v-else class="text-lg font-bold text-gray-800 dark:text-white">
-                                        @lang('admin::app.rma.sales.rma.reasons.edit.edit-title')
+                                        @lang('admin::app.sales.rma.reasons.edit.edit-title')
                                     </p>
                                 </x-slot>
 
@@ -153,7 +153,7 @@
                                     <!-- Reason -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.rma.sales.rma.reasons.create.reason')
+                                            @lang('admin::app.sales.rma.reasons.create.reason')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -162,8 +162,8 @@
                                             rules="required"
                                             :value="old('title')"
                                             v-model="reason.title"
-                                            :label="trans('admin::app.rma.sales.rma.reasons.create.reason')"
-                                            :placeholder="trans('admin::app.rma.sales.rma.reasons.create.reason')"
+                                            :label="trans('admin::app.sales.rma.reasons.create.reason')"
+                                            :placeholder="trans('admin::app.sales.rma.reasons.create.reason')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="title" />
@@ -172,7 +172,7 @@
                                     <!-- Status -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.rma.sales.rma.reasons.create.status')
+                                            @lang('admin::app.sales.rma.reasons.create.status')
                                         </x-admin::form.control-group.label>
 
                                         <input
@@ -185,7 +185,7 @@
                                             type="switch"
                                             name="status"
                                             value="1"
-                                            :label="trans('admin::app.rma.sales.rma.reasons.create.status')"
+                                            :label="trans('admin::app.sales.rma.reasons.create.status')"
                                             ::checked="(reason.status == 1) ? 1 : 0"
                                         />
                                     </x-admin::form.control-group>
@@ -209,7 +209,7 @@
                                         <x-admin::form.control-group.error control-name="position" />
                                     </x-admin::form.control-group>
 
-                                    <!-- Reason -->
+                                    <!-- Resolution Type -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.configuration.index.sales.rma.resolution-type')
@@ -217,8 +217,9 @@
 
                                         <v-field
                                             name="resolution_type[]"
-                                            label="@lang('mpauction::app.shop.sellers.account.auction.option')"
+                                            label="@lang('admin::app.configuration.index.sales.rma.resolution-type')"
                                             v-model="reason.reasonResolutions"
+                                            rules="required"
                                             multiple
                                         >
                                             <select
@@ -226,6 +227,8 @@
                                                 class="flex w-full min-h-10 py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                                 :class="[errors['resolution_type[]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 v-model="reason.reasonResolutions"
+                                                rules="required"
+                                                label="@lang('admin::app.configuration.index.sales.rma.resolution-type')"
                                                 multiple
                                             >
                                                 <option value="return">
@@ -242,7 +245,8 @@
                                             </select>
                                         </v-field>
 
-                                        <x-admin::form.control-group.error control-name="resolution_id" />
+                                        <x-admin::form.control-group.error control-name="resolution_type" />
+                                        <x-admin::form.control-group.error control-name="resolution_type[]" />
                                     </x-admin::form.control-group>
 
                                     {!! view_render_event('bagisto.admin.catalog.rma.create.after') !!}
@@ -256,7 +260,7 @@
                                             type="submit"
                                             class="primary-button"
                                         >
-                                            @lang('admin::app.rma.sales.rma.reasons.create.save-btn')
+                                            @lang('admin::app.sales.rma.reasons.create.save-btn')
                                         </button>
                                     </div>
                                 </x-slot>
@@ -281,10 +285,7 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, {
-                        resetForm,
-                        setErrors
-                    }) {
+                    updateOrCreate(params, { resetForm, setErrors  }) {
                         let formData = new FormData(this.$refs.createReasonsForm);
                         
                         let url;
@@ -319,6 +320,11 @@
                                 this.$refs.datagrid.get();
 
                                 resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
                             });
                     },
 

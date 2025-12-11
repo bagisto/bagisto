@@ -814,6 +814,230 @@ return [
 
             'title' => 'වෙන්කිරීම් නිෂ්පාදන',
         ],
+
+        'rma' => [
+            'all-rma' => [
+                'index' => [
+                    'title' => 'සියලු අපසුම් ඉඟි',
+
+                    'datagrid' => [
+                        'id'            => 'අපසුම් ID',
+                        'order-ref'     => 'ඇණවුම් සම්බන්ධය',
+                        'customer-name' => 'පාරිභෝගික නම',
+                        'rma-status'    => 'අපසුම් තත්වය',
+                        'order-status'  => 'ඇණවුම් තත්වය',
+                        'create'        => 'නිර්මාණය කරන ලද දිනය',
+                    ],
+                ],
+
+                'view' => [
+                    'add-attachments'        => 'අමුණන ලිපි එකතු කරන්න',
+                    'additional-information' => 'අමතර තොරතුරු:',
+                    'attachment'             => 'අමුණන ලිපි',
+                    'change-status'          => 'තත්ත්වය වෙනස් කරන්න',
+                    'confirm-print'          => 'RMA මුද්‍රණය කිරීමට OK ක්ලික් කරන්න',
+                    'conversations'          => 'කතාබහ',
+                    'customer-details'       => 'පාරිභෝගික විස්තර',
+                    'customer-email'         => 'පාරිභෝගික විද්‍යුත් තැපෑල:',
+                    'customer'               => 'පාරිභෝගික:',
+                    'enter-message'          => 'පණිවිඩය ඇතුළත් කරන්න',
+                    'images'                 => 'පිංතූරය:',
+                    'no-record'              => 'වාර්තාවක් හමු නොවීය!',
+                    'order-date'             => 'ඇණවුම් දිනය:',
+                    'order-details'          => 'RMA සඳහා ඉල්ලුම් කරන ලද අයිතම(යන්)',
+                    'order-id'               => 'ඇණවුම් අංකය:',
+                    'order-status'           => 'ඇණවුම් තත්ත්වය:',
+                    'order-total'            => 'මුළු ඇණවුම:',
+                    'request-on'             => 'ඉල්ලුම සකස් කළ දිනය:',
+                    'resolution-type'        => 'විසඳුම් වර්ගය:',
+                    'rma-status'             => 'RMA තත්ත්වය:',
+                    'save-btn'               => 'සුරකින්න',
+                    'send-message-btn'       => 'පණිවිඩය එවන්න',
+                    'send-message-success'   => 'පණිවිඩය සාර්ථකව යවනු ලැබුණි.',
+                    'send-message'           => 'පණිවිඩය එවන්න',
+                    'status'                 => 'තත්ත්වය',
+                    'title'                  => 'RMA',
+                    'update-success'         => 'RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදි.',
+                    'view-title'             => 'RMA',
+                ],
+            ],
+
+            'rma-status' => [
+                'index' => [
+                    'create-btn' => 'RMA තත්ත්වය සාදන්න',
+                    'title'      => 'RMA තත්ත්වය',
+
+                    'datagrid' => [
+                        'created-at'          => 'සෑදී තිබෙන දිනය',
+                        'delete-success'      => 'RMA තත්ත්වය සාර්ථකව මැකීම.',
+                        'disabled'            => 'නොවැඩි',
+                        'enabled'             => 'සක්‍රීය',
+                        'id'                  => 'අයි.ඩී.',
+                        'mass-delete-success' => 'තෝරාගත් RMA තත්ත්වය සාර්ථකව මැකීම.',
+                        'reason-error'        => 'RMA තත්ත්වය RMA හි භාවිතා වේ.',
+                        'reason'              => 'RMA තත්ත්වය',
+                        'status'              => 'තත්ත්වය',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'නව RMA තත්ත්වය එකතු කරන්න',
+                    'reason'       => 'RMA තත්ත්වය',
+                    'save-btn'     => 'RMA තත්ත්වය සුරකින්න',
+                    'status'       => 'තත්ත්වය',
+                    'success'      => 'RMA තත්ත්වය සාර්ථකව නිර්මාණය විය.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA තත්ත්වය සංස්කරණය කරන්න',
+                    'mass-update-success' => 'තෝරාගත් RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදී.',
+                    'reason'              => 'RMA තත්ත්වය',
+                    'save-btn'            => 'RMA තත්ත්වය සුරකින්න',
+                    'status'              => 'තත්ත්වය',
+                    'success'             => 'RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදී.',
+                ],
+            ],
+
+            'reasons' => [
+                'index' => [
+                    'create-btn' => 'අපසුම් හේතුවක් නිර්මාණය කරන්න',
+                    'title'      => 'හේතුවෙන්',
+
+                    'datagrid' => [
+                        'created-at'          => 'නිර්මාණය කරන ලද දිනය',
+                        'delete-success'      => 'හේතුව සාර්ථකව ඉවත් කරන ලදි.',
+                        'disabled'            => 'අක්‍රිය කරන ලදි',
+                        'enabled'             => 'සක්‍රිය කරන ලදි',
+                        'id'                  => 'ID',
+                        'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව ඉවත් කරන ලදි.',
+                        'reason-error'        => 'මෙම හේතුව අපසුම් වෙත භාවිතා කරනු ලබන්න.',
+                        'reason'              => 'හේතුව',
+                        'status'              => 'තත්වය',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'නව හේතුවක් එකතු කරන්න',
+                    'reason'       => 'හේතුව',
+                    'save-btn'     => 'හේතුව ඉතිරි කරන්න',
+                    'status'       => 'තත්වය',
+                    'success'      => 'හේතුව සාර්ථකව නිර්මාණය කරන ලදි.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'හේතුව සංස්කරණය කරන්න',
+                    'mass-update-success' => 'තෝරාගත් හේතුවන් සාර්ථකව යාවත්කාලීන විය.',
+                    'reason'              => 'හේතුව',
+                    'save-btn'            => 'හේතුව ඉතිරි කරන්න',
+                    'status'              => 'තත්වය',
+                    'success'             => 'හේතුව සාර්ථකව යාවත්කාලීන විය.',
+                ],
+            ],
+
+            'custom-field' => [
+                'index' => [
+                    'create-btn' => 'නව ක්ෂේත්‍රයක් එකතු කරන්න',
+                    'title'      => 'RMA කස්ටම් ක්ෂේත්‍ර',
+
+                    'datagrid' => [
+                        'created-at'          => 'සෑදූ දිනය',
+                        'delete-success'      => 'අභිරුචි ක්ෂේත්‍ර සාර්ථකව මකා දැමීම.',
+                        'disabled'            => 'අක්‍රියයි',
+                        'enabled'             => 'ක්‍රියාවට පත්',
+                        'id'                  => 'හැඳුනුම් අංකය',
+                        'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකා දැමීය',
+                        'status'              => 'තත්ත්වය',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'නව අභිරුචි ක්ෂේත්‍රය',
+                    'save-btn'     => 'අභිරුචි ක්ෂේත්‍රය සුරකින්න',
+                    'status'       => 'තත්ත්වය',
+                    'success'      => 'අභිරුචි ක්ෂේත්‍රය සාර්ථකව සාදන ලදී.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'අභිරුචි ක්ෂේත්‍රය සංස්කරණය කරන්න',
+                    'mass-update-success' => 'තෝරාගත් අභිරුචි ක්ෂේත්‍ර සාර්ථකව යාවත්කාලීන කරන ලදී.',
+                    'reason'              => 'අභිරුචි ක්ෂේත්‍රය',
+                    'save-btn'            => 'අභිරුචි ක්ෂේත්‍රය සුරකින්න',
+                    'status'              => 'තත්ත්වය',
+                    'success'             => 'අභිරුචි ක්ෂේත්‍රය සාර්ථකව යාවත්කාලීන කරන ලදී.',
+                ],
+            ],
+
+            'rules' => [
+                'index' => [
+                    'create-btn' => 'RMA නීති සාදන්න',
+                    'title'      => 'RMA නීති',
+
+                    'datagrid' => [
+                        'delete-success'      => 'RMA නීති සාර්ථකව මකා ඇත.',
+                        'disabled'            => 'ක්‍රියා විරහිතයි',
+                        'enabled'             => 'ක්‍රියාත්මකයි',
+                        'exchange-period'     => 'හුවමාරු කාලය (දින)',
+                        'id'                  => 'හැඳුනුම් අංකය',
+                        'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකා ඇත.',
+                        'reason'              => 'නීති',
+                        'return-period'       => 'ආපසු ගැනීම් කාලය (දින)',
+                        'status'              => 'තත්ත්වය',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title'       => 'නව RMA නීති එකතු කරන්න',
+                    'reason'             => 'RMA නීති',
+                    'resolutions-period' => 'විසඳුම් කාලය',
+                    'rule-description'   => 'නීති විස්තරය',
+                    'rule-details'       => 'නීති විස්තර',
+                    'rules-title'        => 'නීති මාතෘකාව',
+                    'save-btn'           => 'RMA නීති සුරකින්න',
+                    'status'             => 'RMA තත්ත්වය',
+                    'success'            => 'RMA නීති සාර්ථකව නිර්මාණය කරන ලදි.',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA නීති සංස්කරණය කරන්න',
+                    'mass-update-success' => 'තෝරාගත් RMA නීති සාර්ථකව යාවත්කාලීන කරන ලදි.',
+                    'reason'              => 'RMA නීති',
+                    'save-btn'            => 'RMA නීති යාවත්කාලීන කරන්න',
+                    'status'              => 'තත්ත්වය',
+                    'success'             => 'RMA නීති සාර්ථකව යාවත්කාලීන කරන ලදි.',
+                ],
+            ],
+
+            'create-rma' => [
+                'create-success'           => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි.',
+                'create-title'             => 'අපසුම් ඉඟි නිර්මාණය කරන්න',
+                'email'                    => 'ඊමේල්',
+                'image'                    => 'රූපය',
+                'invalid-order-id'         => 'අවලංගු ඇණවුම් අංකය',
+                'mismatch'                 => 'ඇණවුම් අංකය සහ ඊමේල් නොගැලපේ',
+                'new-rma'                  => 'නව අපසුම් ඉඟි',
+                'order-id'                 => 'ඇණවුම් අංකය',
+                'quantity'                 => 'ප්‍රමාණය',
+                'reason'                   => 'හේතුව',
+                'rma-already-exist'        => 'අපසුම් ඉඟි දැනටමත් පවතී',
+                'rma-not-available-quotes' => 'මෙම අයිතමය සම්බන්ධ සඳහා අපසුම් ඉඟි යාම් නොවේ',
+                'save-btn'                 => 'සුරක්ෂිත කරන්න',
+                'search'                   => '--තෝරන්න--',
+                'validate'                 => 'වලංගු කරන්න',
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma-has-been-created' => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි',
+                    'rma-created-message'  => ':qty ප්‍රමාණයකින් සමන්විත නිෂ්පාදනය සඳහා RMA ඉල්ලීම ලබා ගත හැක',
+                ],
+            ],
+
+            'index' => [
+                'create-rma-title' => 'සාදන්න',
+                'reason-title'     => 'හේතු',
+                'rma-title'        => 'ආපසු ලබාගැනීම්',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -4703,6 +4927,54 @@ return [
                         'title'                => 'මිනි කාට්ටු',
                     ],
                 ],
+
+                'rma' => [
+                    'afternoon'                           => 'දවල්',
+                    'all-products'                        => 'සියලුම නිෂ්පාදන',
+                    'all-status'                          => 'සියලුම තත්ත්වයන්',
+                    'allow-new-request-for-pending-order' => 'අපේක්ෂිත ඇණවුම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
+                    'allow-rma-for-digital-product'       => 'ඩිජිටල් නිෂ්පාදනයකට RMA වලට අවසර දීම',
+                    'allowed-file-extension'              => 'අනුමත කළ ගොනු විස්තාරණය',
+                    'allowed-file-types'                  => 'කරුණාකර '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' පමණක් තෝරන්න',
+                    'allowed-info'                        => 'අලංකාරක සලකුණු එක්ක වෙන් කළා. උදාහරණයක්: jpg,jpeg,pdf',
+                    'allowed-request-cancelled-request'   => 'අවලංගු කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
+                    'allowed-request-declined-request'    => 'ප්‍රතික්ෂේප කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
+                    'allowed-rma-for-product'             => 'නිෂ්පාදනයකට RMA සඳහා අවසර දීම',
+                    'cancel-items'                        => 'අයිතම අහෝසි කරන්න',
+                    'complete'                            => 'සම්පූර්ණයි',
+                    'current-order-quantity'              => 'වත්මන් ඇණවුම් ප්‍රමාණය',
+                    'days-info'                           => 'නවතම ඇණවුමක් සිදු කළ පසු පාරිභෝගිකයාට RMA ඉල්ලා සිටිය හැකි දින ගණන.',
+                    'default-allow-days'                  => 'පෙරනිමියෙන් අනුමත කරන දින',
+                    'enable'                              => 'RMA සක්‍රීය කරන්න',
+                    'evening'                             => 'සන්ධ්‍යාව',
+                    'exchange'                            => 'හුවමාරුව',
+                    'info'                                => 'RMA යනු ආපසු ලැබීම්, මාරු හෝ අලුත්වැඩියා සඳහා සමාගමේ නිෂ්පාදන ආපසු ලබා දීමේ ක්‍රියාවලියේ අංගයකි.',
+                    'morning'                             => 'උදෑසන',
+                    'new-rma-message-to-customer'         => 'පාරිභෝගිකයාට නව RMA පණිවිඩය',
+                    'no'                                  => 'නැත',
+                    'open'                                => 'විවෘත කරන්න',
+                    'package-condition'                   => 'පැකේජයේ තත්වය',
+                    'packed'                              => 'පැකේජයක් කරන ලදි',
+                    'print-page'                          => 'මුද්‍රිත පිටුව',
+                    'product-already-raw'                 => 'නිෂ්පාදනය දැනටමත් RMA තුළ පවතී.',
+                    'product-delivery-status'             => 'නිෂ්පාදන බෙදාහැරීමේ තත්ත්වය',
+                    'resolution-type'                     => 'පිළිතුරු වර්ගය',
+                    'return-pickup-address'               => 'ආපසු ලබාගැනීමේ ලිපිනය',
+                    'return-pickup-time'                  => 'ආපසු ලබාගැනීමේ වේලාව',
+                    'return-policy'                       => 'ආපසු ලබාගැනීමේ ප්‍රතිපත්තිය',
+                    'return'                              => 'ආපසු ලබාගැනීම',
+                    'select-allowed-order-status'         => 'අනුමත කරන ලද ඇණවුම් තත්ත්වය තෝරන්න',
+                    'specific-products'                   => 'පිළිබඳ නිෂ්පාදන',
+                    'title'                               => 'RMA',
+                    'yes'                                 => 'ඔව්',
+
+                    'setting' => [
+                        'info'  => 'RMA ක්‍රියාත්මකයේදී, මූලිකව ලැබුණු කාලයේදී පවා ප්‍රමාද හෝ නැවුම්කරුවන්ට සම්බන්ධතා කළ හැකිය.',
+                        'read'  => 'ප්රතිපත්තිය කියවන්න',
+                        'terms' => 'මම ප්රතිප්‍රේෂණ ප්රතිපත්තිය කියවා පිළිගෙන ඇත.',
+                        'title' => 'RMA',
+                    ],
+                ],
             ],
         ],
     ],
@@ -4748,6 +5020,7 @@ return [
                 'communications'           => 'සන්නිවේදන',
                 'configure'                => 'සකසන්න',
                 'currencies'               => 'මුදල්',
+                'custom-field'             => 'අභිරුචි ක්ෂේත්‍රය',
                 'customers'                => 'පාරිභාවයෙන්',
                 'dashboard'                => 'මුල් පටුන',
                 'data-transfer'            => 'දත්ත හුවමාරු',
@@ -4767,10 +5040,15 @@ return [
                 'orders'                   => 'ඇණවුම්',
                 'products'                 => 'නිෂ්පාදන',
                 'promotions'               => 'ප්‍රමාදයොන්',
+                'reason'                   => 'හේතුව',
                 'refunds'                  => 'ආපසු',
                 'reporting'                => 'වාර්ථාව',
+                'requests'                 => 'අයදුම්',
                 'reviews'                  => 'විභාග',
+                'rma-status'               => 'RMA තත්ත්වය',
+                'rma'                      => 'RMA',
                 'roles'                    => 'භූමිකා',
+                'rules'                    => 'නියම',
                 'sales'                    => 'මිල',
                 'search-seo'               => 'සෙවුම් සහ අන්තර්ගත අධිකරණය',
                 'search-synonyms'          => 'සෙවුම් සමාන්‍යවේදය',
@@ -5242,306 +5520,6 @@ return [
             'subtotal'                   => 'මුළු එකතුව',
             'tax'                        => 'බදාගැනීම',
             'tracking-number'            => 'දත්ත ලබාදුන් අංකය : :tracking_number',
-        ],
-    ],
-
-    'rma' => [
-        'configuration' => [
-            'index' => [
-                'sales' => [
-                    'rma' => [
-                        'afternoon'                           => 'දවල්',
-                        'all-products'                        => 'සියලුම නිෂ්පාදන',
-                        'all-status'                          => 'සියලුම තත්ත්වයන්',
-                        'allow-new-request-for-pending-order' => 'අපේක්ෂිත ඇණවුම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
-                        'allow-rma-for-digital-product'       => 'ඩිජිටල් නිෂ්පාදනයකට RMA වලට අවසර දීම',
-                        'allowed-file-extension'              => 'අනුමත කළ ගොනු විස්තාරණය',
-                        'allowed-file-types'                  => 'කරුණාකර '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' පමණක් තෝරන්න',
-                        'allowed-info'                        => 'අලංකාරක සලකුණු එක්ක වෙන් කළා. උදාහරණයක්: jpg,jpeg,pdf',
-                        'allowed-request-cancelled-request'   => 'අවලංගු කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
-                        'allowed-request-declined-request'    => 'ප්‍රතික්ෂේප කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
-                        'allowed-rma-for-product'             => 'නිෂ්පාදනයකට RMA සඳහා අවසර දීම',
-                        'cancel-items'                        => 'අයිතම අහෝසි කරන්න',
-                        'complete'                            => 'සම්පූර්ණයි',
-                        'current-order-quantity'              => 'වත්මන් ඇණවුම් ප්‍රමාණය',
-                        'days-info'                           => 'නවතම ඇණවුමක් සිදු කළ පසු පාරිභෝගිකයාට RMA ඉල්ලා සිටිය හැකි දින ගණන.',
-                        'default-allow-days'                  => 'පෙරනිමියෙන් අනුමත කරන දින',
-                        'enable'                              => 'RMA සක්‍රීය කරන්න',
-                        'evening'                             => 'සන්ධ්‍යාව',
-                        'exchange'                            => 'හුවමාරුව',
-                        'info'                                => 'RMA යනු ආපසු ලැබීම්, මාරු හෝ අලුත්වැඩියා සඳහා සමාගමේ නිෂ්පාදන ආපසු ලබා දීමේ ක්‍රියාවලියේ අංගයකි.',
-                        'morning'                             => 'උදෑසන',
-                        'new-rma-message-to-customer'         => 'පාරිභෝගිකයාට නව RMA පණිවිඩය',
-                        'no'                                  => 'නැත',
-                        'open'                                => 'විවෘත කරන්න',
-                        'package-condition'                   => 'පැකේජයේ තත්වය',
-                        'packed'                              => 'පැකේජයක් කරන ලදි',
-                        'print-page'                          => 'මුද්‍රිත පිටුව',
-                        'product-already-raw'                 => 'නිෂ්පාදනය දැනටමත් RMA තුළ පවතී.',
-                        'product-delivery-status'             => 'නිෂ්පාදන බෙදාහැරීමේ තත්ත්වය',
-                        'resolution-type'                     => 'පිළිතුරු වර්ගය',
-                        'return-pickup-address'               => 'ආපසු ලබාගැනීමේ ලිපිනය',
-                        'return-pickup-time'                  => 'ආපසු ලබාගැනීමේ වේලාව',
-                        'return-policy'                       => 'ආපසු ලබාගැනීමේ ප්‍රතිපත්තිය',
-                        'return'                              => 'ආපසු ලබාගැනීම',
-                        'select-allowed-order-status'         => 'අනුමත කරන ලද ඇණවුම් තත්ත්වය තෝරන්න',
-                        'specific-products'                   => 'පිළිබඳ නිෂ්පාදන',
-                        'title'                               => 'RMA',
-                        'yes'                                 => 'ඔව්',
-
-                        'setting' => [
-                            'info'  => 'RMA ක්‍රියාත්මකයේදී, මූලිකව ලැබුණු කාලයේදී පවා ප්‍රමාද හෝ නැවුම්කරුවන්ට සම්බන්ධතා කළ හැකිය.',
-                            'read'  => 'ප්රතිපත්තිය කියවන්න',
-                            'terms' => 'මම ප්රතිප්‍රේෂණ ප්රතිපත්තිය කියවා පිළිගෙන ඇත.',
-                            'title' => 'RMA',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-
-        'components' => [
-            'layouts' => [
-                'sidebar' => [
-                    'rma' => 'RMA',
-                ],
-            ],
-        ],
-
-        'sales' => [
-            'rma' => [
-                'all-rma' => [
-                    'index' => [
-                        'title' => 'සියලු අපසුම් ඉඟි',
-
-                        'datagrid' => [
-                            'id'            => 'අපසුම් ID',
-                            'order-ref'     => 'ඇණවුම් සම්බන්ධය',
-                            'customer-name' => 'පාරිභෝගික නම',
-                            'rma-status'    => 'අපසුම් තත්වය',
-                            'order-status'  => 'ඇණවුම් තත්වය',
-                            'create'        => 'නිර්මාණය කරන ලද දිනය',
-                        ],
-                    ],
-
-                    'view' => [
-                        'add-attachments'        => 'අමුණන ලිපි එකතු කරන්න',
-                        'additional-information' => 'අමතර තොරතුරු:',
-                        'attachment'             => 'අමුණන ලිපි',
-                        'change-status'          => 'තත්ත්වය වෙනස් කරන්න',
-                        'confirm-print'          => 'RMA මුද්‍රණය කිරීමට OK ක්ලික් කරන්න',
-                        'conversations'          => 'කතාබහ',
-                        'customer-details'       => 'පාරිභෝගික විස්තර',
-                        'customer-email'         => 'පාරිභෝගික විද්‍යුත් තැපෑල:',
-                        'customer'               => 'පාරිභෝගික:',
-                        'enter-message'          => 'පණිවිඩය ඇතුළත් කරන්න',
-                        'images'                 => 'පිංතූරය:',
-                        'no-record'              => 'වාර්තාවක් හමු නොවීය!',
-                        'order-date'             => 'ඇණවුම් දිනය:',
-                        'order-details'          => 'RMA සඳහා ඉල්ලුම් කරන ලද අයිතම(යන්)',
-                        'order-id'               => 'ඇණවුම් අංකය:',
-                        'order-status'           => 'ඇණවුම් තත්ත්වය:',
-                        'order-total'            => 'මුළු ඇණවුම:',
-                        'request-on'             => 'ඉල්ලුම සකස් කළ දිනය:',
-                        'resolution-type'        => 'විසඳුම් වර්ගය:',
-                        'rma-status'             => 'RMA තත්ත්වය:',
-                        'save-btn'               => 'සුරකින්න',
-                        'send-message-btn'       => 'පණිවිඩය එවන්න',
-                        'send-message-success'   => 'පණිවිඩය සාර්ථකව යවනු ලැබුණි.',
-                        'send-message'           => 'පණිවිඩය එවන්න',
-                        'status'                 => 'තත්ත්වය',
-                        'title'                  => 'RMA',
-                        'update-success'         => 'RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදි.',
-                        'view-title'             => 'RMA',
-                    ],
-                ],
-
-                'rma-status' => [
-                    'index' => [
-                        'create-btn' => 'RMA තත්ත්වය සාදන්න',
-                        'title'      => 'RMA තත්ත්වය',
-
-                        'datagrid' => [
-                            'created-at'          => 'සෑදී තිබෙන දිනය',
-                            'delete-success'      => 'RMA තත්ත්වය සාර්ථකව මැකීම.',
-                            'disabled'            => 'නොවැඩි',
-                            'enabled'             => 'සක්‍රීය',
-                            'id'                  => 'අයි.ඩී.',
-                            'mass-delete-success' => 'තෝරාගත් RMA තත්ත්වය සාර්ථකව මැකීම.',
-                            'reason-error'        => 'RMA තත්ත්වය RMA හි භාවිතා වේ.',
-                            'reason'              => 'RMA තත්ත්වය',
-                            'status'              => 'තත්ත්වය',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'නව RMA තත්ත්වය එකතු කරන්න',
-                        'reason'       => 'RMA තත්ත්වය',
-                        'save-btn'     => 'RMA තත්ත්වය සුරකින්න',
-                        'status'       => 'තත්ත්වය',
-                        'success'      => 'RMA තත්ත්වය සාර්ථකව නිර්මාණය විය.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA තත්ත්වය සංස්කරණය කරන්න',
-                        'mass-update-success' => 'තෝරාගත් RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදී.',
-                        'reason'              => 'RMA තත්ත්වය',
-                        'save-btn'            => 'RMA තත්ත්වය සුරකින්න',
-                        'status'              => 'තත්ත්වය',
-                        'success'             => 'RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදී.',
-                    ],
-                ],
-
-                'reasons' => [
-                    'index' => [
-                        'create-btn' => 'අපසුම් හේතුවක් නිර්මාණය කරන්න',
-                        'title'      => 'හේතුවෙන්',
-
-                        'datagrid' => [
-                            'created-at'          => 'නිර්මාණය කරන ලද දිනය',
-                            'delete-success'      => 'හේතුව සාර්ථකව ඉවත් කරන ලදි.',
-                            'disabled'            => 'අක්‍රිය කරන ලදි',
-                            'enabled'             => 'සක්‍රිය කරන ලදි',
-                            'id'                  => 'ID',
-                            'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව ඉවත් කරන ලදි.',
-                            'reason-error'        => 'මෙම හේතුව අපසුම් වෙත භාවිතා කරනු ලබන්න.',
-                            'reason'              => 'හේතුව',
-                            'status'              => 'තත්වය',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'නව හේතුවක් එකතු කරන්න',
-                        'reason'       => 'හේතුව',
-                        'save-btn'     => 'හේතුව ඉතිරි කරන්න',
-                        'status'       => 'තත්වය',
-                        'success'      => 'හේතුව සාර්ථකව නිර්මාණය කරන ලදි.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'හේතුව සංස්කරණය කරන්න',
-                        'mass-update-success' => 'තෝරාගත් හේතුවන් සාර්ථකව යාවත්කාලීන විය.',
-                        'reason'              => 'හේතුව',
-                        'save-btn'            => 'හේතුව ඉතිරි කරන්න',
-                        'status'              => 'තත්වය',
-                        'success'             => 'හේතුව සාර්ථකව යාවත්කාලීන විය.',
-                    ],
-                ],
-
-                'custom-field' => [
-                    'index' => [
-                        'create-btn' => 'නව ක්ෂේත්‍රයක් එකතු කරන්න',
-                        'title'      => 'RMA කස්ටම් ක්ෂේත්‍ර',
-
-                        'datagrid' => [
-                            'created-at'          => 'සෑදූ දිනය',
-                            'delete-success'      => 'අභිරුචි ක්ෂේත්‍ර සාර්ථකව මකා දැමීම.',
-                            'disabled'            => 'අක්‍රියයි',
-                            'enabled'             => 'ක්‍රියාවට පත්',
-                            'id'                  => 'හැඳුනුම් අංකය',
-                            'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකා දැමීය',
-                            'status'              => 'තත්ත්වය',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'නව අභිරුචි ක්ෂේත්‍රය',
-                        'save-btn'     => 'අභිරුචි ක්ෂේත්‍රය සුරකින්න',
-                        'status'       => 'තත්ත්වය',
-                        'success'      => 'අභිරුචි ක්ෂේත්‍රය සාර්ථකව සාදන ලදී.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'අභිරුචි ක්ෂේත්‍රය සංස්කරණය කරන්න',
-                        'mass-update-success' => 'තෝරාගත් අභිරුචි ක්ෂේත්‍ර සාර්ථකව යාවත්කාලීන කරන ලදී.',
-                        'reason'              => 'අභිරුචි ක්ෂේත්‍රය',
-                        'save-btn'            => 'අභිරුචි ක්ෂේත්‍රය සුරකින්න',
-                        'status'              => 'තත්ත්වය',
-                        'success'             => 'අභිරුචි ක්ෂේත්‍රය සාර්ථකව යාවත්කාලීන කරන ලදී.',
-                    ],
-                ],
-
-                'rules' => [
-                    'index' => [
-                        'create-btn' => 'RMA නීති සාදන්න',
-                        'title'      => 'RMA නීති',
-
-                        'datagrid' => [
-                            'delete-success'      => 'RMA නීති සාර්ථකව මකා ඇත.',
-                            'disabled'            => 'ක්‍රියා විරහිතයි',
-                            'enabled'             => 'ක්‍රියාත්මකයි',
-                            'exchange-period'     => 'හුවමාරු කාලය (දින)',
-                            'id'                  => 'හැඳුනුම් අංකය',
-                            'mass-delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකා ඇත.',
-                            'reason'              => 'නීති',
-                            'return-period'       => 'ආපසු ගැනීම් කාලය (දින)',
-                            'status'              => 'තත්ත්වය',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title'       => 'නව RMA නීති එකතු කරන්න',
-                        'reason'             => 'RMA නීති',
-                        'resolutions-period' => 'විසඳුම් කාලය',
-                        'rule-description'   => 'නීති විස්තරය',
-                        'rule-details'       => 'නීති විස්තර',
-                        'rules-title'        => 'නීති මාතෘකාව',
-                        'save-btn'           => 'RMA නීති සුරකින්න',
-                        'status'             => 'RMA තත්ත්වය',
-                        'success'            => 'RMA නීති සාර්ථකව නිර්මාණය කරන ලදි.',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA නීති සංස්කරණය කරන්න',
-                        'mass-update-success' => 'තෝරාගත් RMA නීති සාර්ථකව යාවත්කාලීන කරන ලදි.',
-                        'reason'              => 'RMA නීති',
-                        'save-btn'            => 'RMA නීති යාවත්කාලීන කරන්න',
-                        'status'              => 'තත්ත්වය',
-                        'success'             => 'RMA නීති සාර්ථකව යාවත්කාලීන කරන ලදි.',
-                    ],
-                ],
-
-                'create-rma' => [
-                    'create-success'           => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි.',
-                    'create-title'             => 'අපසුම් ඉඟි නිර්මාණය කරන්න',
-                    'email'                    => 'ඊමේල්',
-                    'image'                    => 'රූපය',
-                    'invalid-order-id'         => 'අවලංගු ඇණවුම් අංකය',
-                    'mismatch'                 => 'ඇණවුම් අංකය සහ ඊමේල් නොගැලපේ',
-                    'new-rma'                  => 'නව අපසුම් ඉඟි',
-                    'order-id'                 => 'ඇණවුම් අංකය',
-                    'quantity'                 => 'ප්‍රමාණය',
-                    'reason'                   => 'හේතුව',
-                    'rma-already-exist'        => 'අපසුම් ඉඟි දැනටමත් පවතී',
-                    'rma-not-available-quotes' => 'මෙම අයිතමය සම්බන්ධ සඳහා අපසුම් ඉඟි යාම් නොවේ',
-                    'save-btn'                 => 'සුරක්ෂිත කරන්න',
-                    'search'                   => '--තෝරන්න--',
-                    'validate'                 => 'වලංගු කරන්න',
-                ],
-            ],
-
-            'invoice' => [
-                'create' => [
-                    'rma_has_been_created' => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි',
-                    'rma-created-message'  => ':qty ප්‍රමාණයකින් සමන්විත නිෂ්පාදනය සඳහා RMA ඉල්ලීම ලබා ගත හැක',
-                ],
-            ],
-        ],
-
-        'rma' => [
-            'index' => [
-                'create-rma-title' => 'සාදන්න',
-                'reason-title'     => 'හේතු',
-                'rma-title'        => 'ආපසු ලබාගැනීම්',
-            ],
-        ],
-
-        'acl' => [
-            'delete'      => 'මකන්න',
-            'edit'        => 'සංස්කරණය',
-            'mass-delete' => 'බාගත මකා දමන්න',
-            'mass-update' => 'බාගත යාවත්කාලීනය',
-            'title'       => 'අපසුම් ඉඟි',
         ],
     ],
 ];

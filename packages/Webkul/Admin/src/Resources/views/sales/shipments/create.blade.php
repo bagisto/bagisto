@@ -247,11 +247,11 @@
                                                             class="!w-[100px]"
                                                             :id="$inputName"
                                                             :name="$inputName"
-                                                            :rules="'required|numeric|min_value:0|max_value:' . $canShipQty['qty'] - $item->qty_ordered"
-                                                            :value="$item->qty_to_ship"
+                                                            :rules="'required|numeric|min_value:0|max_value:' . $canShipQty['qty']"
+                                                            :value="$canShipQty['qty']"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
-                                                            data-original-quantity="{{ $canShipQty['qty'] - $item->qty_to_ship }}"
-                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}' || '{{ $canShipQty['qty'] - $item->qty_to_ship}} ' <= 0"
+                                                            data-original-quantity="{{ $canShipQty['qty'] }}"
+                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}' || '{{ $canShipQty['qty'] }} ' <= 0"
                                                             :ref="$inputName"
                                                         />
 

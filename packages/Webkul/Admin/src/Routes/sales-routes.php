@@ -131,15 +131,15 @@ Route::prefix('sales')->group(function () {
             Route::controller(RMAController::class)->group(function () {
                 Route::get('', 'index')->name('admin.sales.rma.index');
 
-                Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
-
-                Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
-
                 Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
-
+                
                 Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
-
+                
                 Route::post('save-rma-reopen-status', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
+                
+                Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
+                
+                Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
             });
 
             /**
@@ -150,9 +150,9 @@ Route::prefix('sales')->group(function () {
 
                 Route::post('store', 'store')->name('admin.sales.rma.store');
 
-                Route::get('getOrderProduct/{orderId}', 'getOrderProduct')->name('admin.sales.rma.getOrderProduct');
+                Route::get('get-order-product/{orderId}', 'getOrderProduct')->name('admin.sales.rma.get-order-product');
 
-                Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.getResolutionReason');
+                Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.get-resolution-reason');
             });
         });
 
@@ -166,13 +166,13 @@ Route::prefix('sales')->group(function () {
 
             Route::get('edit/{id}', 'edit')->name('admin.sales.rma.reason.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.sales.rma.reason.update');
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.reason.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.sales.rma.reason.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.reason.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reason.mass_update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reason.mass-update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reason.mass_delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reason.mass-delete');
         });
 
         /**
@@ -185,9 +185,9 @@ Route::prefix('sales')->group(function () {
 
             Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rma-status.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.sales.rma.rma-status.update');
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.rma-status.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.sales.rma.rma-status.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rma-status.delete');
 
             Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rma-status.mass-update');
 
@@ -204,7 +204,7 @@ Route::prefix('sales')->group(function () {
 
             Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rules.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.sales.rma.rules.update');
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.rules.update');
 
             Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rules.delete');
 

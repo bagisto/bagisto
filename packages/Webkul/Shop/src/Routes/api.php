@@ -11,9 +11,6 @@ use Webkul\Shop\Http\Controllers\API\OnepageController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
-use Webkul\Shop\Http\Controllers\Customer\Guest\GuestAuthenticationController;
-use Webkul\Shop\Http\Controllers\Customer\Guest\GuestController;
-use Webkul\Shop\Http\Controllers\Customer\RMAActionController;
 
 Route::group(['prefix' => 'api'], function () {
     Route::controller(CoreController::class)->prefix('core')->group(function () {
@@ -92,56 +89,6 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('payment-methods', 'storePaymentMethod')->name('shop.checkout.onepage.payment_methods.store');
 
         Route::post('orders', 'storeOrder')->name('shop.checkout.onepage.orders.store');
-    });
-
-    /**
-     * Guest routes.
-     */
-    Route::prefix('guest')->group(function () {
-
-        /**
-         * Login routes.
-         */
-        Route::controller(GuestAuthenticationController::class)->prefix('login')->group(function () {
-            Route::get('', 'index')->name('shop.rma.guest.session.index');
-
-            Route::post('', 'store')->name('shop.rma.guest.session.create');
-        });
-
-        Route::prefix('rma')->group(function () {
-
-            Route::delete('logout', [GuestAuthenticationController::class, 'destroy'])->name('shop.rma.guest.session.destroy');
-
-            Route::controller(GuestController::class)->middleware('guest-rma')->group(function () {
-
-                Route::get('', 'index')->name('shop.guest.account.rma.index');
-
-                Route::get('view/{id}', 'view')->name('shop.guest.account.rma.view');
-
-                Route::get('create', 'create')->name('shop.guest.account.rma.create');
-
-                Route::post('store', 'store')->name('shop.guest.account.rma.store');
-            });
-        });
-    });
-
-    /**
-     * RMA Action routes for guest and customer. These routes are used to perform actions on RMA requests such as canceling, updating status, and sending messages.
-     */
-    Route::controller(RMAActionController::class)->prefix('rma')->group(function () {
-        Route::get('getOrderProduct/{orderId}', 'getOrderProduct')->name('shop.rma.action.ordered.product');
-
-        Route::get('resolution-reason/{resolutionType}', 'getResolutionReason')->name('shop.rma.action.resolution.reasons');
-
-        Route::post('update-status', 'saveStatus')->name('shop.rma.action.close');
-
-        Route::post('reopen-status', 'reOpen')->name('shop.rma.action.re-open');
-
-        Route::get('cancel/{id}', 'cancel')->name('shop.rma.action.cancel');
-
-        Route::get('get-messages', 'getMessages')->name('shop.rma.action.get.messages');
-
-        Route::post('send-message', 'sendMessage')->name('shop.rma.action.send.message');
     });
 
     /**

@@ -46,7 +46,7 @@ class ReasonController extends Controller
             'position'        => 'required',
             'resolution_type' => 'required|array|min:1',
         ]);
-
+        
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
         foreach (request()->resolution_type as $resolutionType) {
@@ -57,7 +57,7 @@ class ReasonController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.reasons.create.success'),
+            'message' => trans('admin::app.sales.rma.reasons.create.success'),
         ]);
     }
 
@@ -105,7 +105,7 @@ class ReasonController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.reasons.edit.success', ['name' => 'Reason']),
+            'message' => trans('admin::app.sales.rma.reasons.edit.success'),
         ]);
     }
 
@@ -118,11 +118,11 @@ class ReasonController extends Controller
             $this->rmaReasonRepository->delete($id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.delete-success'),
+                'message' => trans('admin::app.sales.rma.reasons.index.datagrid.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.reasons.index.datagrid.reason-error'),
             ], 500);
         }
     }
@@ -137,7 +137,7 @@ class ReasonController extends Controller
             ->update(['status' => $request->value]);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.reasons.edit.mass-update-success'),
+            'message' => trans('admin::app.sales.rma.reasons.edit.mass-update-success'),
         ]);
     }
 
@@ -150,11 +150,11 @@ class ReasonController extends Controller
             $this->rmaReasonRepository->whereIn('id', $request->indices)->delete();
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.mass-delete-success'),
+                'message' => trans('admin::app.sales.rma.reasons.index.datagrid.mass-delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.reasons.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.reasons.index.datagrid.reason-error'),
             ], 500);
         }
     }

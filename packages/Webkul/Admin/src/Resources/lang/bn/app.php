@@ -814,6 +814,230 @@ return [
 
             'title' => 'বুকিং পণ্য',
         ],
+
+        'rma' => [
+            'all-rma' => [
+                'index' => [
+                    'title' => 'সমস্ত RMA',
+
+                    'datagrid' => [
+                        'create'        => 'তৈরি হয়েছে',
+                        'customer-name' => 'গ্রাহকের নাম',
+                        'id'            => 'RMA আইডি',
+                        'order-ref'     => 'অর্ডার রেফারেন্স',
+                        'order-status'  => 'অর্ডারের স্ট্যাটাস',
+                        'rma-status'    => 'RMA স্ট্যাটাস',
+                    ],
+                ],
+
+                'view' => [
+                    'add-attachments'        => 'সংযুক্তি যুক্ত করুন',
+                    'additional-information' => 'অতিরিক্ত তথ্য:',
+                    'attachment'             => 'সংযুক্তি',
+                    'change-status'          => 'স্থিতি পরিবর্তন করুন',
+                    'confirm-print'          => 'RMA মুদ্রণের জন্য ঠিক আছে ক্লিক করুন',
+                    'conversations'          => 'আলাপচারিতা',
+                    'customer-details'       => 'গ্রাহকের বিবরণ',
+                    'customer-email'         => 'গ্রাহকের ইমেইল:',
+                    'customer'               => 'গ্রাহক:',
+                    'enter-message'          => 'বার্তা লিখুন',
+                    'images'                 => 'ছবি:',
+                    'no-record'              => 'কোনো রেকর্ড পাওয়া যায়নি!',
+                    'order-date'             => 'অর্ডারের তারিখ:',
+                    'order-details'          => 'RMA এর জন্য অনুরোধকৃত আইটেম',
+                    'order-id'               => 'অর্ডার আইডি:',
+                    'order-status'           => 'অর্ডারের স্থিতি:',
+                    'order-total'            => 'মোট অর্ডার:',
+                    'request-on'             => 'অনুরোধের তারিখ:',
+                    'resolution-type'        => 'সমাধানের ধরন:',
+                    'rma-status'             => 'RMA স্থিতি:',
+                    'save-btn'               => 'সংরক্ষণ করুন',
+                    'send-message-btn'       => 'বার্তা পাঠান',
+                    'send-message-success'   => 'বার্তা সফলভাবে পাঠানো হয়েছে।',
+                    'send-message'           => 'বার্তা পাঠান',
+                    'status'                 => 'স্থিতি',
+                    'title'                  => 'RMA',
+                    'update-success'         => 'RMA স্থিতি সফলভাবে আপডেট হয়েছে।',
+                    'view-title'             => 'RMA',
+                ],
+            ],
+
+            'rma-status' => [
+                'index' => [
+                    'create-btn' => 'RMA স্ট্যাটাস তৈরি করুন',
+                    'title'      => 'RMA স্ট্যাটাস',
+
+                    'datagrid' => [
+                        'created-at'          => 'তৈরি হয়েছে',
+                        'delete-success'      => 'RMA স্ট্যাটাস সফলভাবে মুছে ফেলা হয়েছে।',
+                        'disabled'            => 'নিষ্ক্রিয়',
+                        'enabled'             => 'সক্রিয়',
+                        'id'                  => 'আইডি',
+                        'mass-delete-success' => 'নির্বাচিত RMA স্ট্যাটাস সফলভাবে মুছে ফেলা হয়েছে।',
+                        'reason-error'        => 'RMA স্ট্যাটাস RMA তে ব্যবহৃত হচ্ছে।',
+                        'reason'              => 'RMA স্ট্যাটাস',
+                        'status'              => 'স্ট্যাটাস',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'নতুন RMA স্ট্যাটাস যোগ করুন',
+                    'reason'       => 'RMA স্ট্যাটাস',
+                    'save-btn'     => 'RMA স্ট্যাটাস সংরক্ষণ করুন',
+                    'status'       => 'স্ট্যাটাস',
+                    'success'      => 'RMA স্ট্যাটাস সফলভাবে তৈরি করা হয়েছে।',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA স্ট্যাটাস সম্পাদনা করুন',
+                    'mass-update-success' => 'নির্বাচিত RMA স্ট্যাটাস সফলভাবে আপডেট করা হয়েছে।',
+                    'reason'              => 'RMA স্ট্যাটাস',
+                    'save-btn'            => 'RMA স্ট্যাটাস সংরক্ষণ করুন',
+                    'status'              => 'স্ট্যাটাস',
+                    'success'             => 'RMA স্ট্যাটাস সফলভাবে আপডেট করা হয়েছে।',
+                ],
+            ],
+
+            'reasons' => [
+                'index' => [
+                    'create-btn' => 'RMA কারণ তৈরি করুন',
+                    'title'      => 'কারণ',
+
+                    'datagrid' => [
+                        'created-at'          => 'তৈরি হয়েছে',
+                        'delete-success'      => 'কারণটি সফলভাবে মুছে ফেলা হয়েছে।',
+                        'disabled'            => 'নিষ্ক্রিয়',
+                        'enabled'             => 'সক্রিয়',
+                        'id'                  => 'আইডি',
+                        'mass-delete-success' => 'নির্বাচিত তথ্য সফলভাবে মুছে ফেলা হয়েছে',
+                        'reason-error'        => 'কারণটি RMA এ ব্যবহৃত হচ্ছে।',
+                        'reason'              => 'কারণ',
+                        'status'              => 'স্ট্যাটাস',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'নতুন কারণ যোগ করুন',
+                    'reason'       => 'কারণ',
+                    'save-btn'     => 'কারণ সংরক্ষণ করুন',
+                    'status'       => 'স্ট্যাটাস',
+                    'success'      => 'কারণ সফলভাবে তৈরি হয়েছে।',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'কারণ সম্পাদনা করুন',
+                    'mass-update-success' => 'নির্বাচিত কারণগুলি সফলভাবে আপডেট হয়েছে।',
+                    'reason'              => 'কারণ',
+                    'save-btn'            => 'কারণ সংরক্ষণ করুন',
+                    'status'              => 'স্ট্যাটাস',
+                    'success'             => 'কারণটি সফলভাবে আপডেট হয়েছে।',
+                ],
+            ],
+
+            'custom-field' => [
+                'index' => [
+                    'create-btn' => 'নতুন ক্ষেত্র যোগ করুন',
+                    'title'      => 'RMA কাস্টম ক্ষেত্র',
+
+                    'datagrid' => [
+                        'created-at'          => 'তৈরির তারিখ',
+                        'delete-success'      => 'কাস্টম ক্ষেত্র সফলভাবে মুছে ফেলা হয়েছে।',
+                        'disabled'            => 'নিষ্ক্রিয়',
+                        'enabled'             => 'সক্রিয়',
+                        'id'                  => 'আইডি',
+                        'mass-delete-success' => 'নির্বাচিত তথ্য সফলভাবে মুছে ফেলা হয়েছে',
+                        'status'              => 'অবস্থা',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title' => 'নতুন কাস্টম ক্ষেত্র',
+                    'save-btn'     => 'কাস্টম ক্ষেত্র সংরক্ষণ করুন',
+                    'status'       => 'অবস্থা',
+                    'success'      => 'কাস্টম ক্ষেত্র সফলভাবে তৈরি হয়েছে।',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'কাস্টম ক্ষেত্র সম্পাদনা করুন',
+                    'mass-update-success' => 'নির্বাচিত কাস্টম ক্ষেত্র সফলভাবে আপডেট হয়েছে।',
+                    'reason'              => 'কাস্টম ক্ষেত্র',
+                    'save-btn'            => 'কাস্টম ক্ষেত্র সংরক্ষণ করুন',
+                    'status'              => 'অবস্থা',
+                    'success'             => 'কাস্টম ক্ষেত্র সফলভাবে আপডেট হয়েছে।',
+                ],
+            ],
+
+            'rules' => [
+                'index' => [
+                    'create-btn' => 'RMA নিয়ম তৈরি করুন',
+                    'title'      => 'RMA নিয়ম',
+
+                    'datagrid' => [
+                        'delete-success'      => 'RMA নিয়ম সফলভাবে মুছে ফেলা হয়েছে।',
+                        'disabled'            => 'নিষ্ক্রিয়',
+                        'enabled'             => 'সক্রিয়',
+                        'exchange-period'     => 'বিনিময় সময়কাল (দিন)',
+                        'id'                  => 'আইডি',
+                        'mass-delete-success' => 'নির্বাচিত ডেটা সফলভাবে মুছে ফেলা হয়েছে।',
+                        'reason'              => 'নিয়ম',
+                        'return-period'       => 'ফেরত সময়কাল (দিন)',
+                        'status'              => 'অবস্থা',
+                    ],
+                ],
+
+                'create' => [
+                    'create-title'       => 'নতুন RMA নিয়ম যোগ করুন',
+                    'reason'             => 'RMA নিয়ম',
+                    'resolutions-period' => 'সমাধান সময়কাল',
+                    'rule-description'   => 'নিয়মের বিবরণ',
+                    'rule-details'       => 'নিয়মের বিবরণী',
+                    'rules-title'        => 'নিয়মের শিরোনাম',
+                    'save-btn'           => 'RMA নিয়ম সংরক্ষণ করুন',
+                    'status'             => 'RMA অবস্থা',
+                    'success'            => 'RMA নিয়ম সফলভাবে তৈরি করা হয়েছে।',
+                ],
+
+                'edit' => [
+                    'edit-title'          => 'RMA নিয়ম সম্পাদনা করুন',
+                    'mass-update-success' => 'নির্বাচিত RMA নিয়ম সফলভাবে আপডেট করা হয়েছে।',
+                    'reason'              => 'RMA নিয়ম',
+                    'save-btn'            => 'RMA নিয়ম আপডেট করুন',
+                    'status'              => 'অবস্থা',
+                    'success'             => 'RMA নিয়ম সফলভাবে আপডেট করা হয়েছে।',
+                ],
+            ],
+
+            'create-rma' => [
+                'create-success'           => 'RMA সফলভাবে তৈরি হয়েছে।',
+                'create-title'             => 'RMA তৈরি করুন',
+                'email'                    => 'ইমেল',
+                'image'                    => 'চিত্র',
+                'invalid-order-id'         => 'অবৈধ অর্ডার আইডি',
+                'mismatch'                 => 'অর্ডার আইডি এবং ইমেলের মিল নেই',
+                'new-rma'                  => 'নতুন RMA',
+                'order-id'                 => 'অর্ডার আইডি',
+                'quantity'                 => 'পরিমাণ',
+                'reason'                   => 'কারণ',
+                'rma-already-exist'        => 'RMA ইতিমধ্যে বিদ্যমান',
+                'rma-not-available-quotes' => 'আইটেম RMA এর জন্য পাওয়া যায়নি',
+                'save-btn'                 => 'সংরক্ষণ করুন',
+                'search'                   => '--নির্বাচন করুন--',
+                'validate'                 => 'যাচাই করুন',
+            ],
+
+            'invoice' => [
+                'create' => [
+                    'rma-has-been-created' => 'RMA তৈরি করা হয়েছে',
+                    'rma-created-message'  => 'RMA অনুরোধটি :qty পরিমাণ পণ্যের জন্য উপলব্ধ',
+                ],
+            ],
+
+            'index' => [
+                'create-rma-title' => 'তৈরি করুন',
+                'reason-title'     => 'কারণসমূহ',
+                'rma-title'        => 'ফেরতসমূহ',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -4703,6 +4927,54 @@ return [
                         'title'                => 'মিনি কার্ট',
                     ],
                 ],
+
+                'rma' => [
+                    'afternoon'                           => 'দুপুর',
+                    'all-products'                        => 'সব পণ্য',
+                    'all-status'                          => 'সব অবস্থা',
+                    'allow-new-request-for-pending-order' => 'মুলতুবি অর্ডারের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
+                    'allow-rma-for-digital-product'       => 'ডিজিটাল পণ্যের জন্য RMA অনুমোদন করুন',
+                    'allowed-file-extension'              => 'অনুমোদিত ফাইল এক্সটেনশন',
+                    'allowed-file-types'                  => 'অনুগ্রহ করে ফাইলের ধরন নির্বাচন করুন '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' কেবল',
+                    'allowed-info'                        => 'কমা দিয়ে পৃথক করা হয়েছে। উদাহরণস্বরূপ: jpg,jpeg,pdf',
+                    'allowed-request-cancelled-request'   => 'বাতিল অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
+                    'allowed-request-declined-request'    => 'প্রত্যাখ্যাত অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
+                    'allowed-rma-for-product'             => 'পণ্যের জন্য RMA অনুমোদন',
+                    'cancel-items'                        => 'আইটেম বাতিল করুন',
+                    'complete'                            => 'সম্পূর্ণ',
+                    'current-order-quantity'              => 'বর্তমান অর্ডারের পরিমাণ',
+                    'days-info'                           => 'অর্ডার দেওয়ার পরে গ্রাহক কত দিনের মধ্যে একটি RMA অনুরোধ করতে পারেন।',
+                    'default-allow-days'                  => 'ডিফল্ট অনুমোদিত দিন',
+                    'enable'                              => 'RMA সক্রিয় করুন',
+                    'evening'                             => 'সন্ধ্যা',
+                    'exchange'                            => 'বিনিময়',
+                    'info'                                => 'RMA একটি প্রক্রিয়ার অংশ যা পণ্য ফেরত দিয়ে রিফান্ড, প্রতিস্থাপন বা মেরামত পেতে হয়।',
+                    'morning'                             => 'সকাল',
+                    'new-rma-message-to-customer'         => 'গ্রাহকের জন্য নতুন RMA বার্তা',
+                    'no'                                  => 'না',
+                    'open'                                => 'খোলা',
+                    'package-condition'                   => 'প্যাকেজের অবস্থা',
+                    'packed'                              => 'প্যাক করা হয়েছে',
+                    'print-page'                          => 'প্রিন্ট পৃষ্ঠা',
+                    'product-already-raw'                 => 'পণ্যটি ইতিমধ্যে RMA তে রয়েছে।',
+                    'product-delivery-status'             => 'পণ্য বিতরণের অবস্থা',
+                    'resolution-type'                     => 'সমাধানের ধরন',
+                    'return-pickup-address'               => 'ফেরত পিকআপ ঠিকানা',
+                    'return-pickup-time'                  => 'ফেরত পিকআপ সময়',
+                    'return-policy'                       => 'ফেরত নীতি',
+                    'return'                              => 'ফেরত',
+                    'select-allowed-order-status'         => 'অনুমোদিত অর্ডার অবস্থা নির্বাচন করুন',
+                    'specific-products'                   => 'নির্দিষ্ট পণ্য',
+                    'title'                               => 'RMA',
+                    'yes'                                 => 'হ্যাঁ',
+
+                    'setting' => [
+                        'info'  => 'RMA কার্যকারিতা এমন পরিস্থিতি পরিচালনা করতে সহায়তা করে যেখানে একটি গ্রাহক মেরামত এবং রক্ষণাবেক্ষণের জন্য বা ফেরত বা প্রতিস্থাপনের জন্য আইটেমগুলি ফেরত দেয়।',
+                        'read'  => 'নীতি পড়ুন',
+                        'terms' => 'আমি ফেরত নীতিটি পড়েছি এবং গ্রহণ করেছি।',
+                        'title' => 'RMA',
+                    ],
+                ],
             ],
         ],
     ],
@@ -4748,6 +5020,7 @@ return [
                 'communications'           => 'যোগাযোগ',
                 'configure'                => 'কনফিগার করুন',
                 'currencies'               => 'মুদ্রা',
+                'custom-field'             => 'কাস্টম ক্ষেত্র',
                 'customers'                => 'গ্রাহকগণ',
                 'dashboard'                => 'ড্যাশবোর্ড',
                 'data-transfer'            => 'তথ্য স্থানান্তর',
@@ -4767,10 +5040,15 @@ return [
                 'orders'                   => 'অর্ডার',
                 'products'                 => 'পণ্য',
                 'promotions'               => 'প্রচার',
+                'reason'                   => 'কারণ',
                 'refunds'                  => 'ফেরত',
                 'reporting'                => 'প্রতিবেদন',
+                'requests'                 => 'অনুরোধ',
                 'reviews'                  => 'পর্যালোচনাগুলি',
+                'rma-status'               => 'RMA স্থিতি',
+                'rma'                      => 'RMA',
                 'roles'                    => 'ভূমিকা',
+                'rules'                    => 'নিয়ম',
                 'sales'                    => 'বিক্রয়',
                 'search-seo'               => 'অনুসন্ধান এবং এসইও',
                 'search-synonyms'          => 'অনুসন্ধান সমার্থক',
@@ -5242,306 +5520,6 @@ return [
             'subtotal'                   => 'সাবটোটাল',
             'tax'                        => 'কর',
             'tracking-number'            => 'ট্র্যাকিং নম্বর: :tracking_number',
-        ],
-    ],
-
-    'rma' => [
-        'configuration' => [
-            'index' => [
-                'sales' => [
-                    'rma' => [
-                        'afternoon'                           => 'দুপুর',
-                        'all-products'                        => 'সব পণ্য',
-                        'all-status'                          => 'সব অবস্থা',
-                        'allow-new-request-for-pending-order' => 'মুলতুবি অর্ডারের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
-                        'allow-rma-for-digital-product'       => 'ডিজিটাল পণ্যের জন্য RMA অনুমোদন করুন',
-                        'allowed-file-extension'              => 'অনুমোদিত ফাইল এক্সটেনশন',
-                        'allowed-file-types'                  => 'অনুগ্রহ করে ফাইলের ধরন নির্বাচন করুন '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' কেবল',
-                        'allowed-info'                        => 'কমা দিয়ে পৃথক করা হয়েছে। উদাহরণস্বরূপ: jpg,jpeg,pdf',
-                        'allowed-request-cancelled-request'   => 'বাতিল অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
-                        'allowed-request-declined-request'    => 'প্রত্যাখ্যাত অনুরোধের জন্য নতুন RMA অনুরোধ অনুমোদন করুন',
-                        'allowed-rma-for-product'             => 'পণ্যের জন্য RMA অনুমোদন',
-                        'cancel-items'                        => 'আইটেম বাতিল করুন',
-                        'complete'                            => 'সম্পূর্ণ',
-                        'current-order-quantity'              => 'বর্তমান অর্ডারের পরিমাণ',
-                        'days-info'                           => 'অর্ডার দেওয়ার পরে গ্রাহক কত দিনের মধ্যে একটি RMA অনুরোধ করতে পারেন।',
-                        'default-allow-days'                  => 'ডিফল্ট অনুমোদিত দিন',
-                        'enable'                              => 'RMA সক্রিয় করুন',
-                        'evening'                             => 'সন্ধ্যা',
-                        'exchange'                            => 'বিনিময়',
-                        'info'                                => 'RMA একটি প্রক্রিয়ার অংশ যা পণ্য ফেরত দিয়ে রিফান্ড, প্রতিস্থাপন বা মেরামত পেতে হয়।',
-                        'morning'                             => 'সকাল',
-                        'new-rma-message-to-customer'         => 'গ্রাহকের জন্য নতুন RMA বার্তা',
-                        'no'                                  => 'না',
-                        'open'                                => 'খোলা',
-                        'package-condition'                   => 'প্যাকেজের অবস্থা',
-                        'packed'                              => 'প্যাক করা হয়েছে',
-                        'print-page'                          => 'প্রিন্ট পৃষ্ঠা',
-                        'product-already-raw'                 => 'পণ্যটি ইতিমধ্যে RMA তে রয়েছে।',
-                        'product-delivery-status'             => 'পণ্য বিতরণের অবস্থা',
-                        'resolution-type'                     => 'সমাধানের ধরন',
-                        'return-pickup-address'               => 'ফেরত পিকআপ ঠিকানা',
-                        'return-pickup-time'                  => 'ফেরত পিকআপ সময়',
-                        'return-policy'                       => 'ফেরত নীতি',
-                        'return'                              => 'ফেরত',
-                        'select-allowed-order-status'         => 'অনুমোদিত অর্ডার অবস্থা নির্বাচন করুন',
-                        'specific-products'                   => 'নির্দিষ্ট পণ্য',
-                        'title'                               => 'RMA',
-                        'yes'                                 => 'হ্যাঁ',
-
-                        'setting' => [
-                            'info'  => 'RMA কার্যকারিতা এমন পরিস্থিতি পরিচালনা করতে সহায়তা করে যেখানে একটি গ্রাহক মেরামত এবং রক্ষণাবেক্ষণের জন্য বা ফেরত বা প্রতিস্থাপনের জন্য আইটেমগুলি ফেরত দেয়।',
-                            'read'  => 'নীতি পড়ুন',
-                            'terms' => 'আমি ফেরত নীতিটি পড়েছি এবং গ্রহণ করেছি।',
-                            'title' => 'RMA',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-
-        'components' => [
-            'layouts' => [
-                'sidebar' => [
-                    'rma' => 'RMA',
-                ],
-            ],
-        ],
-
-        'sales' => [
-            'rma' => [
-                'all-rma' => [
-                    'index' => [
-                        'title' => 'সমস্ত RMA',
-
-                        'datagrid' => [
-                            'create'        => 'তৈরি হয়েছে',
-                            'customer-name' => 'গ্রাহকের নাম',
-                            'id'            => 'RMA আইডি',
-                            'order-ref'     => 'অর্ডার রেফারেন্স',
-                            'order-status'  => 'অর্ডারের স্ট্যাটাস',
-                            'rma-status'    => 'RMA স্ট্যাটাস',
-                        ],
-                    ],
-
-                    'view' => [
-                        'add-attachments'        => 'সংযুক্তি যুক্ত করুন',
-                        'additional-information' => 'অতিরিক্ত তথ্য:',
-                        'attachment'             => 'সংযুক্তি',
-                        'change-status'          => 'স্থিতি পরিবর্তন করুন',
-                        'confirm-print'          => 'RMA মুদ্রণের জন্য ঠিক আছে ক্লিক করুন',
-                        'conversations'          => 'আলাপচারিতা',
-                        'customer-details'       => 'গ্রাহকের বিবরণ',
-                        'customer-email'         => 'গ্রাহকের ইমেইল:',
-                        'customer'               => 'গ্রাহক:',
-                        'enter-message'          => 'বার্তা লিখুন',
-                        'images'                 => 'ছবি:',
-                        'no-record'              => 'কোনো রেকর্ড পাওয়া যায়নি!',
-                        'order-date'             => 'অর্ডারের তারিখ:',
-                        'order-details'          => 'RMA এর জন্য অনুরোধকৃত আইটেম',
-                        'order-id'               => 'অর্ডার আইডি:',
-                        'order-status'           => 'অর্ডারের স্থিতি:',
-                        'order-total'            => 'মোট অর্ডার:',
-                        'request-on'             => 'অনুরোধের তারিখ:',
-                        'resolution-type'        => 'সমাধানের ধরন:',
-                        'rma-status'             => 'RMA স্থিতি:',
-                        'save-btn'               => 'সংরক্ষণ করুন',
-                        'send-message-btn'       => 'বার্তা পাঠান',
-                        'send-message-success'   => 'বার্তা সফলভাবে পাঠানো হয়েছে।',
-                        'send-message'           => 'বার্তা পাঠান',
-                        'status'                 => 'স্থিতি',
-                        'title'                  => 'RMA',
-                        'update-success'         => 'RMA স্থিতি সফলভাবে আপডেট হয়েছে।',
-                        'view-title'             => 'RMA',
-                    ],
-                ],
-
-                'rma-status' => [
-                    'index' => [
-                        'create-btn' => 'RMA স্ট্যাটাস তৈরি করুন',
-                        'title'      => 'RMA স্ট্যাটাস',
-
-                        'datagrid' => [
-                            'created-at'          => 'তৈরি হয়েছে',
-                            'delete-success'      => 'RMA স্ট্যাটাস সফলভাবে মুছে ফেলা হয়েছে।',
-                            'disabled'            => 'নিষ্ক্রিয়',
-                            'enabled'             => 'সক্রিয়',
-                            'id'                  => 'আইডি',
-                            'mass-delete-success' => 'নির্বাচিত RMA স্ট্যাটাস সফলভাবে মুছে ফেলা হয়েছে।',
-                            'reason-error'        => 'RMA স্ট্যাটাস RMA তে ব্যবহৃত হচ্ছে।',
-                            'reason'              => 'RMA স্ট্যাটাস',
-                            'status'              => 'স্ট্যাটাস',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'নতুন RMA স্ট্যাটাস যোগ করুন',
-                        'reason'       => 'RMA স্ট্যাটাস',
-                        'save-btn'     => 'RMA স্ট্যাটাস সংরক্ষণ করুন',
-                        'status'       => 'স্ট্যাটাস',
-                        'success'      => 'RMA স্ট্যাটাস সফলভাবে তৈরি করা হয়েছে।',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA স্ট্যাটাস সম্পাদনা করুন',
-                        'mass-update-success' => 'নির্বাচিত RMA স্ট্যাটাস সফলভাবে আপডেট করা হয়েছে।',
-                        'reason'              => 'RMA স্ট্যাটাস',
-                        'save-btn'            => 'RMA স্ট্যাটাস সংরক্ষণ করুন',
-                        'status'              => 'স্ট্যাটাস',
-                        'success'             => 'RMA স্ট্যাটাস সফলভাবে আপডেট করা হয়েছে।',
-                    ],
-                ],
-
-                'reasons' => [
-                    'index' => [
-                        'create-btn' => 'RMA কারণ তৈরি করুন',
-                        'title'      => 'কারণ',
-
-                        'datagrid' => [
-                            'created-at'          => 'তৈরি হয়েছে',
-                            'delete-success'      => 'কারণটি সফলভাবে মুছে ফেলা হয়েছে।',
-                            'disabled'            => 'নিষ্ক্রিয়',
-                            'enabled'             => 'সক্রিয়',
-                            'id'                  => 'আইডি',
-                            'mass-delete-success' => 'নির্বাচিত তথ্য সফলভাবে মুছে ফেলা হয়েছে',
-                            'reason-error'        => 'কারণটি RMA এ ব্যবহৃত হচ্ছে।',
-                            'reason'              => 'কারণ',
-                            'status'              => 'স্ট্যাটাস',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'নতুন কারণ যোগ করুন',
-                        'reason'       => 'কারণ',
-                        'save-btn'     => 'কারণ সংরক্ষণ করুন',
-                        'status'       => 'স্ট্যাটাস',
-                        'success'      => 'কারণ সফলভাবে তৈরি হয়েছে।',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'কারণ সম্পাদনা করুন',
-                        'mass-update-success' => 'নির্বাচিত কারণগুলি সফলভাবে আপডেট হয়েছে।',
-                        'reason'              => 'কারণ',
-                        'save-btn'            => 'কারণ সংরক্ষণ করুন',
-                        'status'              => 'স্ট্যাটাস',
-                        'success'             => 'কারণটি সফলভাবে আপডেট হয়েছে।',
-                    ],
-                ],
-
-                'custom-field' => [
-                    'index' => [
-                        'create-btn' => 'নতুন ক্ষেত্র যোগ করুন',
-                        'title'      => 'RMA কাস্টম ক্ষেত্র',
-
-                        'datagrid' => [
-                            'created-at'          => 'তৈরির তারিখ',
-                            'delete-success'      => 'কাস্টম ক্ষেত্র সফলভাবে মুছে ফেলা হয়েছে।',
-                            'disabled'            => 'নিষ্ক্রিয়',
-                            'enabled'             => 'সক্রিয়',
-                            'id'                  => 'আইডি',
-                            'mass-delete-success' => 'নির্বাচিত তথ্য সফলভাবে মুছে ফেলা হয়েছে',
-                            'status'              => 'অবস্থা',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title' => 'নতুন কাস্টম ক্ষেত্র',
-                        'save-btn'     => 'কাস্টম ক্ষেত্র সংরক্ষণ করুন',
-                        'status'       => 'অবস্থা',
-                        'success'      => 'কাস্টম ক্ষেত্র সফলভাবে তৈরি হয়েছে।',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'কাস্টম ক্ষেত্র সম্পাদনা করুন',
-                        'mass-update-success' => 'নির্বাচিত কাস্টম ক্ষেত্র সফলভাবে আপডেট হয়েছে।',
-                        'reason'              => 'কাস্টম ক্ষেত্র',
-                        'save-btn'            => 'কাস্টম ক্ষেত্র সংরক্ষণ করুন',
-                        'status'              => 'অবস্থা',
-                        'success'             => 'কাস্টম ক্ষেত্র সফলভাবে আপডেট হয়েছে।',
-                    ],
-                ],
-
-                'rules' => [
-                    'index' => [
-                        'create-btn' => 'RMA নিয়ম তৈরি করুন',
-                        'title'      => 'RMA নিয়ম',
-
-                        'datagrid' => [
-                            'delete-success'      => 'RMA নিয়ম সফলভাবে মুছে ফেলা হয়েছে।',
-                            'disabled'            => 'নিষ্ক্রিয়',
-                            'enabled'             => 'সক্রিয়',
-                            'exchange-period'     => 'বিনিময় সময়কাল (দিন)',
-                            'id'                  => 'আইডি',
-                            'mass-delete-success' => 'নির্বাচিত ডেটা সফলভাবে মুছে ফেলা হয়েছে।',
-                            'reason'              => 'নিয়ম',
-                            'return-period'       => 'ফেরত সময়কাল (দিন)',
-                            'status'              => 'অবস্থা',
-                        ],
-                    ],
-
-                    'create' => [
-                        'create-title'       => 'নতুন RMA নিয়ম যোগ করুন',
-                        'reason'             => 'RMA নিয়ম',
-                        'resolutions-period' => 'সমাধান সময়কাল',
-                        'rule-description'   => 'নিয়মের বিবরণ',
-                        'rule-details'       => 'নিয়মের বিবরণী',
-                        'rules-title'        => 'নিয়মের শিরোনাম',
-                        'save-btn'           => 'RMA নিয়ম সংরক্ষণ করুন',
-                        'status'             => 'RMA অবস্থা',
-                        'success'            => 'RMA নিয়ম সফলভাবে তৈরি করা হয়েছে।',
-                    ],
-
-                    'edit' => [
-                        'edit-title'          => 'RMA নিয়ম সম্পাদনা করুন',
-                        'mass-update-success' => 'নির্বাচিত RMA নিয়ম সফলভাবে আপডেট করা হয়েছে।',
-                        'reason'              => 'RMA নিয়ম',
-                        'save-btn'            => 'RMA নিয়ম আপডেট করুন',
-                        'status'              => 'অবস্থা',
-                        'success'             => 'RMA নিয়ম সফলভাবে আপডেট করা হয়েছে।',
-                    ],
-                ],
-
-                'create-rma' => [
-                    'create-success'           => 'RMA সফলভাবে তৈরি হয়েছে।',
-                    'create-title'             => 'RMA তৈরি করুন',
-                    'email'                    => 'ইমেল',
-                    'image'                    => 'চিত্র',
-                    'invalid-order-id'         => 'অবৈধ অর্ডার আইডি',
-                    'mismatch'                 => 'অর্ডার আইডি এবং ইমেলের মিল নেই',
-                    'new-rma'                  => 'নতুন RMA',
-                    'order-id'                 => 'অর্ডার আইডি',
-                    'quantity'                 => 'পরিমাণ',
-                    'reason'                   => 'কারণ',
-                    'rma-already-exist'        => 'RMA ইতিমধ্যে বিদ্যমান',
-                    'rma-not-available-quotes' => 'আইটেম RMA এর জন্য পাওয়া যায়নি',
-                    'save-btn'                 => 'সংরক্ষণ করুন',
-                    'search'                   => '--নির্বাচন করুন--',
-                    'validate'                 => 'যাচাই করুন',
-                ],
-            ],
-
-            'invoice' => [
-                'create' => [
-                    'rma_has_been_created' => 'RMA তৈরি করা হয়েছে',
-                    'rma-created-message'  => 'RMA অনুরোধটি :qty পরিমাণ পণ্যের জন্য উপলব্ধ',
-                ],
-            ],
-        ],
-
-        'rma' => [
-            'index' => [
-                'create-rma-title' => 'তৈরি করুন',
-                'reason-title'     => 'কারণসমূহ',
-                'rma-title'        => 'ফেরতসমূহ',
-            ],
-        ],
-
-        'acl' => [
-            'delete'      => 'মুছে ফেলুন',
-            'edit'        => 'সম্পাদনা',
-            'mass-delete' => 'সামগ্রিক মুছুন',
-            'mass-update' => 'সামগ্রিক আপডেট',
-            'title'       => 'RMA',
         ],
     ],
 ];

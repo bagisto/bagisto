@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Mail\Admin\RMA\AdminConversationEmail;
+use Webkul\Admin\Mail\Admin\RMA\AdminConversationNotification;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
@@ -19,7 +19,7 @@ use Webkul\RMA\Repositories\RMAStatusRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\RefundRepository;
-use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusEmail;
+use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusNotification;
 
 class RMAController extends Controller
 {
@@ -73,12 +73,12 @@ class RMAController extends Controller
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
         protected OrderRepository $orderRepository,
+        protected RefundRepository $refundRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
         protected RMARepository $rmaRepository,
         protected RMAStatusRepository $rmaStatusRepository,
-        protected RefundRepository $refundRepository,
     ) {}
 
     /**
@@ -150,7 +150,7 @@ class RMAController extends Controller
             $this->rmaMessagesRepository->create($requestData);
         }
 
-        session()->flash('success', trans('shop::app.rma.response.update-success', ['name' => 'Status']));
+        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
         return back();
     }
@@ -207,14 +207,14 @@ class RMAController extends Controller
 
         if ($storedMessage) {
             try {
-                Mail::queue(new AdminConversationEmail($conversationDetails));
+                Mail::queue(new AdminConversationNotification($conversationDetails));
 
                 return new JsonResponse([
-                    'message' => trans('admin::app.rma.sales.rma.all-rma.view.send-message-success'),
+                    'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
                 ]);
             } catch (\Exception $e) {
                 return new JsonResponse([
-                    'message' => trans('admin::app.rma.sales.rma.all-rma.view.send-message-success'),
+                    'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
                 ]);
             }
         }
@@ -319,11 +319,11 @@ class RMAController extends Controller
 
         if ($updateStatus) {
             try {
-                Mail::queue(new CustomerRMAStatusEmail($mailDetails));
+                Mail::queue(new CustomerRMAStatusNotification($mailDetails));
 
-                session()->flash('success', trans('admin::app.rma.sales.rma.all-rma.view.update-success'));
+                session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
             } catch (\Exception $e) {
-                session()->flash('success', trans('admin::app.rma.sales.rma.all-rma.view.update-success'));
+                session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
             }
 
             return redirect()->back();

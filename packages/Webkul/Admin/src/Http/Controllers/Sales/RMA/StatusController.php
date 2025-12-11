@@ -44,7 +44,7 @@ class StatusController extends Controller
         $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rma-status.create.success'),
+            'message' => trans('admin::app.sales.rma.rma-status.create.success'),
         ]);
     }
 
@@ -71,7 +71,7 @@ class StatusController extends Controller
         $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), request()->id);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rma-status.edit.success', ['name' => 'RMA Status']),
+            'message' => trans('admin::app.sales.rma.rma-status.edit.success'),
         ]);
     }
 
@@ -86,11 +86,11 @@ class StatusController extends Controller
             $this->rmaStatusRepository->delete($id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rma-status.index.datagrid.delete-success'),
+                'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rma-status.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.reason-error'),
             ], 500);
         }
     }
@@ -105,7 +105,7 @@ class StatusController extends Controller
             ->update(['status' => $request->value]);
 
         return new JsonResponse([
-            'message' => trans('admin::app.rma.sales.rma.rma-status.edit.mass-update-success'),
+            'message' => trans('admin::app.sales.rma.rma-status.edit.mass-update-success'),
         ]);
     }
 
@@ -121,11 +121,11 @@ class StatusController extends Controller
                 ->delete();
 
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rma-status.index.datagrid.mass-delete-success'),
+                'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.mass-delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.rma.sales.rma.rma-status.index.datagrid.reason-error'),
+                'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.reason-error'),
             ], 500);
         }
     }
