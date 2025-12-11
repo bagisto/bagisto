@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RAM Comercios - Production Deployment Script
+# RAM Plaza - Production Deployment Script
 # Run this script from the project root: ./devops/scripts/deploy.sh
 
 set -e  # Exit on error
@@ -12,7 +12,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}========================================${NC}"
-echo -e "${GREEN}RAM Comercios - Production Deployment${NC}"
+echo -e "${GREEN}RAM Plaza - Production Deployment${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
 
@@ -122,7 +122,7 @@ echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}Deployment Complete!${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
-echo "Application URL: https://comercios.redactivamexico.net"
+echo "Application URL: https://plaza.redactivamexico.net"
 echo ""
 echo "Verify deployment:"
 echo "  - Check website is accessible"

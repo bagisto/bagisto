@@ -1,6 +1,6 @@
-# DevOps - RAM Comercios
+# DevOps - RAM Plaza
 
-Configuración y documentación para deployment de RAM Comercios (Bagisto) en producción.
+Configuración y documentación para deployment de RAM Plaza (Bagisto) en producción.
 
 ## 📁 Estructura
 
@@ -44,8 +44,8 @@ Ver documentación completa en [DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ```bash
 # 1. Clonar en servidor
-git clone https://github.com/JuanLalo/RamComercios.git ~/apps/RamComercios
-cd ~/apps/RamComercios
+git clone https://github.com/JuanLalo/RamPlaza.git ~/apps/RamPlaza
+cd ~/apps/RamPlaza
 
 # 2. Configurar variables
 cp devops/docker/.env.production.example devops/docker/.env.production

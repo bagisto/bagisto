@@ -1,7 +1,7 @@
 {
-    "name": "bagisto/bagisto",
+    "name": "ram/plaza",
     "type": "project",
-    "description": "Bagisto Laravel E-Commerce",
+    "description": "RAM Plaza - E-Commerce con Social Commerce",
     "keywords": [
         "framework",
         "laravel"

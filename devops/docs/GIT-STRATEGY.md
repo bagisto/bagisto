@@ -1,4 +1,4 @@
-# Estrategia de Git - RAM Comercios
+# Estrategia de Git - RAM Plaza
 
 ## 🎯 Filosofía: GitHub Flow
 
@@ -18,8 +18,8 @@ Usamos **GitHub Flow** - un workflow simple y efectivo:
                   │ fetch/merge
                   ↓
 ┌─────────────────────────────────────────────────────────┐
-│  JuanLalo/RamComercios (origin)                         │
-│  https://github.com/JuanLalo/RamComercios.git           │
+│  JuanLalo/RamPlaza (origin)                         │
+│  https://github.com/JuanLalo/RamPlaza.git           │
 ├─────────────────────────────────────────────────────────┤
 │  Ramas:                                                 │
 │  • 2.3         ← Sincronizada con upstream/2.3         │
@@ -83,20 +83,20 @@ Usamos **GitHub Flow** - un workflow simple y efectivo:
 ### 1. Configurar Remotes
 
 ```bash
-cd ~/repos/RamComercios
+cd ~/repos/RamPlaza
 
 # Verificar remote actual
 git remote -v
-# origin  https://github.com/JuanLalo/RamComercios.git (fetch)
-# origin  https://github.com/JuanLalo/RamComercios.git (push)
+# origin  https://github.com/JuanLalo/RamPlaza.git (fetch)
+# origin  https://github.com/JuanLalo/RamPlaza.git (push)
 
 # Agregar upstream de Bagisto oficial
 git remote add upstream https://github.com/bagisto/bagisto.git
 
 # Verificar
 git remote -v
-# origin    https://github.com/JuanLalo/RamComercios.git (fetch)
-# origin    https://github.com/JuanLalo/RamComercios.git (push)
+# origin    https://github.com/JuanLalo/RamPlaza.git (fetch)
+# origin    https://github.com/JuanLalo/RamPlaza.git (push)
 # upstream  https://github.com/bagisto/bagisto.git (fetch)
 # upstream  https://github.com/bagisto/bagisto.git (push)
 ```
@@ -111,7 +111,7 @@ git checkout -b main
 # Aplicar customizaciones de RAM
 git add devops/
 git add .env
-git commit -m "feat: initial RAM Comercios setup
+git commit -m "feat: initial RAM Plaza setup
 
 - Add devops folder with deployment configs
 - Configure for redactivamexico.net (español, MXN)
@@ -247,7 +247,7 @@ docker compose restart
 
 # 3. Pull en servidor de producción
 ssh usuario@servidor
-cd ~/apps/RamComercios
+cd ~/apps/RamPlaza
 git pull origin main
 
 # 4. Ejecutar script de deploy
@@ -288,7 +288,7 @@ git push origin v1.0.0
 # 4. Crear Release en GitHub
 # Releases → Create a new release
 # Tag: v1.0.0
-# Title: "RAM Comercios v1.0.0"
+# Title: "RAM Plaza v1.0.0"
 # Description: Copy del tag message
 ```
 
@@ -522,4 +522,4 @@ git blame path/to/file
 
 **Actualizado**: 2025-12-10
 **Workflow**: GitHub Flow (simple y efectivo)
-**Responsable**: Equipo RAM Comercios
+**Responsable**: Equipo RAM Plaza

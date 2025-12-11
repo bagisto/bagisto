@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RAM Comercios - Backup Script
+# RAM Plaza - Backup Script
 # Creates backup of database and uploaded files
 
 set -e
@@ -11,14 +11,14 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Configuration
-BACKUP_DIR="$HOME/backups/ramcomercios"
+BACKUP_DIR="$HOME/backups/ramplaza"
 DATE=$(date +%Y%m%d_%H%M%S)
-DB_CONTAINER="ramcomercios-mysql"
-DB_NAME="ram_comercios"
-DB_USER="ramcomercios"
+DB_CONTAINER="ramplaza-mysql"
+DB_NAME="ram_plaza"
+DB_USER="ramplaza"
 
 echo -e "${GREEN}========================================${NC}"
-echo -e "${GREEN}RAM Comercios - Backup${NC}"
+echo -e "${GREEN}RAM Plaza - Backup${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
 

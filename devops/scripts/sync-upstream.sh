@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RAM Comercios - Sync with Bagisto Upstream
+# RAM Plaza - Sync with Bagisto Upstream
 # Checks for updates from Bagisto official repo and helps merge them
 
 set -e

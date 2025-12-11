@@ -1,4 +1,4 @@
-# Deployment a Producción - RAM Comercios
+# Deployment a Producción - RAM Plaza
 
 ## Arquitectura del Servidor
 
@@ -82,7 +82,7 @@ docker compose up -d
 │   ├── docker-compose.yml
 │   └── ... (archivos de WoWonder)
 │
-└── ramcomercios/           # Proyecto Bagisto nuevo
+└── ramplaza/           # Proyecto Bagisto nuevo
     ├── .env.production
     ├── docker-compose.production.yml
     ├── docker/
@@ -100,8 +100,8 @@ ssh usuario@redactivamexico.net
 
 # Clonar repositorio
 cd ~
-git clone https://github.com/JuanLalo/RamComercios.git ramcomercios
-cd ramcomercios
+git clone https://github.com/JuanLalo/RamPlaza.git ramplaza
+cd ramplaza
 
 # Usar branch main (o dev según prefieras)
 git checkout main
@@ -110,7 +110,7 @@ git checkout main
 ### 5. Configurar Variables de Entorno
 
 ```bash
-cd ~/ramcomercios
+cd ~/ramplaza
 cp .env.example .env.production
 nano .env.production
 ```
@@ -118,10 +118,10 @@ nano .env.production
 **Configuración en .env.production:**
 
 ```env
-APP_NAME="RAM Comercios"
+APP_NAME="RAM Plaza"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://comercios.redactivamexico.net
+APP_URL=https://plaza.redactivamexico.net
 APP_ADMIN_URL=admin
 APP_TIMEZONE=America/Mexico_City
 
@@ -132,17 +132,17 @@ APP_CURRENCY=MXN
 
 # Base de datos (contenedor propio de Bagisto)
 DB_CONNECTION=mysql
-DB_HOST=ramcomercios-mysql
+DB_HOST=ramplaza-mysql
 DB_PORT=3306
-DB_DATABASE=ram_comercios
-DB_USERNAME=ramcomercios
+DB_DATABASE=ram_plaza
+DB_USERNAME=ramplaza
 DB_PASSWORD=<GENERAR_PASSWORD_FUERTE>
 
 # Cache y sesiones (Redis propio de Bagisto)
 CACHE_STORE=redis
 SESSION_DRIVER=redis
 QUEUE_CONNECTION=redis
-REDIS_HOST=ramcomercios-redis
+REDIS_HOST=ramplaza-redis
 REDIS_PORT=6379
 
 # WoWonder SSO - URL INTERNA (nombre del contenedor de WoWonder)
@@ -160,11 +160,11 @@ MAIL_USERNAME=<usuario-smtp>
 MAIL_PASSWORD=<password-smtp>
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=comercios@redactivamexico.net
-MAIL_FROM_NAME="RAM Comercios"
+MAIL_FROM_NAME="RAM Plaza"
 
 # Elasticsearch
 SCOUT_DRIVER=elasticsearch
-ELASTICSEARCH_HOST=ramcomercios-elasticsearch
+ELASTICSEARCH_HOST=ramplaza-elasticsearch
 ELASTICSEARCH_PORT=9200
 
 # Stripe (Production)
@@ -294,7 +294,7 @@ server {
 
     # PHP-FPM configuration
     location ~ \.php$ {
-        fastcgi_pass ramcomercios-app:9000;
+        fastcgi_pass ramplaza-app:9000;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
         fastcgi_hide_header X-Powered-By;
@@ -333,7 +333,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.production
-    container_name: ramcomercios-app
+    container_name: ramplaza-app
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -342,7 +342,7 @@ services:
     env_file:
       - .env.production
     networks:
-      - ramcomercios
+      - ramplaza
       - wowonder_shared
     depends_on:
       - mysql
@@ -351,7 +351,7 @@ services:
 
   webserver:
     image: nginx:alpine
-    container_name: ramcomercios-webserver
+    container_name: ramplaza-webserver
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:80"
@@ -360,41 +360,41 @@ services:
       - ./docker/nginx/production.conf:/etc/nginx/conf.d/default.conf
       - ./storage/logs/nginx:/var/log/nginx
     networks:
-      - ramcomercios
+      - ramplaza
     depends_on:
       - app
 
   mysql:
     image: mysql:8.0
-    container_name: ramcomercios-mysql
+    container_name: ramplaza-mysql
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-ram_comercios}
-      MYSQL_USER: ${DB_USERNAME:-ramcomercios}
+      MYSQL_DATABASE: ${DB_DATABASE:-ram_plaza}
+      MYSQL_USER: ${DB_USERNAME:-ramplaza}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
     networks:
-      - ramcomercios
+      - ramplaza
     ports:
       - "127.0.0.1:3308:3306"
 
   redis:
     image: redis:alpine
-    container_name: ramcomercios-redis
+    container_name: ramplaza-redis
     restart: unless-stopped
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-null}
     volumes:
       - redis-data:/data
     networks:
-      - ramcomercios
+      - ramplaza
       - wowonder_shared
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    container_name: ramcomercios-elasticsearch
+    container_name: ramplaza-elasticsearch
     restart: unless-stopped
     environment:
       - discovery.type=single-node
@@ -403,7 +403,7 @@ services:
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     networks:
-      - ramcomercios
+      - ramplaza
     ulimits:
       memlock:
         soft: -1
@@ -416,7 +416,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.production
-    container_name: ramcomercios-queue
+    container_name: ramplaza-queue
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -425,7 +425,7 @@ services:
       - .env.production
     command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600 --timeout=300
     networks:
-      - ramcomercios
+      - ramplaza
       - wowonder_shared
     depends_on:
       - mysql
@@ -435,7 +435,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.production
-    container_name: ramcomercios-scheduler
+    container_name: ramplaza-scheduler
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -444,7 +444,7 @@ services:
       - .env.production
     command: sh -c "while true; do php artisan schedule:run --verbose --no-interaction & sleep 60; done"
     networks:
-      - ramcomercios
+      - ramplaza
     depends_on:
       - mysql
       - redis
@@ -458,7 +458,7 @@ volumes:
     driver: local
 
 networks:
-  ramcomercios:
+  ramplaza:
     driver: bridge
   wowonder_shared:
     external: true
@@ -468,14 +468,14 @@ networks:
 
 Crear archivo de configuración para el sitio de Bagisto.
 
-**Archivo en el servidor: `/etc/nginx/sites-available/comercios.redactivamexico.net`**
+**Archivo en el servidor: `/etc/nginx/sites-available/plaza.redactivamexico.net`**
 
 ```nginx
 # Redirect HTTP to HTTPS
 server {
     listen 80;
     listen [::]:80;
-    server_name comercios.redactivamexico.net;
+    server_name plaza.redactivamexico.net;
 
     # Certbot challenge
     location /.well-known/acme-challenge/ {
@@ -491,11 +491,11 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name comercios.redactivamexico.net;
+    server_name plaza.redactivamexico.net;
 
     # SSL Certificates (ajustar rutas según tu configuración)
-    ssl_certificate /etc/letsencrypt/live/comercios.redactivamexico.net/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/comercios.redactivamexico.net/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/plaza.redactivamexico.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/plaza.redactivamexico.net/privkey.pem;
 
     # SSL Configuration
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -545,7 +545,7 @@ server {
 
 ```bash
 # Crear symlink para habilitar el sitio
-sudo ln -s /etc/nginx/sites-available/comercios.redactivamexico.net /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/plaza.redactivamexico.net /etc/nginx/sites-enabled/
 
 # Verificar configuración
 sudo nginx -t
@@ -561,7 +561,7 @@ sudo apt-get update
 sudo apt-get install certbot python3-certbot-nginx
 
 # Obtener certificado
-sudo certbot --nginx -d comercios.redactivamexico.net
+sudo certbot --nginx -d plaza.redactivamexico.net
 
 # Verificar renovación automática
 sudo certbot renew --dry-run
@@ -570,7 +570,7 @@ sudo certbot renew --dry-run
 ### 12. Deploy de Bagisto
 
 ```bash
-cd ~/ramcomercios
+cd ~/ramplaza
 
 # 1. Instalar dependencias (usando Docker temporal)
 docker run --rm \
@@ -634,10 +634,10 @@ docker compose -f docker-compose.production.yml logs -f
 docker compose -f docker-compose.production.yml ps
 
 # Verificar conectividad con WoWonder
-docker exec ramcomercios-app ping wowonder-app -c 3
+docker exec ramplaza-app ping wowonder-app -c 3
 
 # Acceder a la aplicación
-# https://comercios.redactivamexico.net
+# https://plaza.redactivamexico.net
 ```
 
 ## Verificación del SSO
@@ -646,7 +646,7 @@ Para verificar que Bagisto puede comunicarse con WoWonder:
 
 ```bash
 # Desde el contenedor de Bagisto, hacer curl al API de WoWonder
-docker exec ramcomercios-app curl http://wowonder-app/api/get-user-data
+docker exec ramplaza-app curl http://wowonder-app/api/get-user-data
 
 # Debería responder (aunque sea error de autenticación, significa que la conexión funciona)
 ```
@@ -656,7 +656,7 @@ docker exec ramcomercios-app curl http://wowonder-app/api/get-user-data
 ### Actualizar Código
 
 ```bash
-cd ~/ramcomercios
+cd ~/ramplaza
 git pull origin main
 
 # Rebuild de contenedores
@@ -677,10 +677,10 @@ docker compose -f docker-compose.production.yml exec app php artisan view:cache
 
 ```bash
 # Backup de base de datos
-docker exec ramcomercios-mysql mysqldump -u ramcomercios -p ram_comercios > backup-$(date +%Y%m%d).sql
+docker exec ramplaza-mysql mysqldump -u ramplaza -p ram_plaza > backup-$(date +%Y%m%d).sql
 
 # Backup de archivos subidos
-tar -czf storage-backup-$(date +%Y%m%d).tar.gz ~/ramcomercios/storage/app
+tar -czf storage-backup-$(date +%Y%m%d).tar.gz ~/ramplaza/storage/app
 ```
 
 ### Ver Logs
@@ -711,7 +711,7 @@ Verificar que ambos proyectos estén en la red compartida:
 docker inspect <wowonder-container-id> | grep Networks -A 10
 
 # Ver redes de Bagisto
-docker inspect ramcomercios-app | grep Networks -A 10
+docker inspect ramplaza-app | grep Networks -A 10
 
 # Deben compartir "wowonder_shared"
 ```
@@ -720,7 +720,7 @@ docker inspect ramcomercios-app | grep Networks -A 10
 
 ```bash
 # Verificar que el contenedor webserver esté corriendo
-docker ps | grep ramcomercios-webserver
+docker ps | grep ramplaza-webserver
 
 # Verificar logs
 docker compose -f docker-compose.production.yml logs webserver

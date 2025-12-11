@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RAM Comercios - Setup Docker Shared Network
+# RAM Plaza - Setup Docker Shared Network
 # Creates shared network between WoWonder and Bagisto for SSO communication
 
 set -e
@@ -39,5 +39,5 @@ echo ""
 echo "2. Bagisto will automatically connect when started (configured in docker-compose)"
 echo ""
 echo "3. Test connectivity:"
-echo "   ${YELLOW}docker exec ramcomercios-app ping ram_app_1 -c 3${NC}"
+echo "   ${YELLOW}docker exec ramplaza-app ping ram_app_1 -c 3${NC}"
 echo ""

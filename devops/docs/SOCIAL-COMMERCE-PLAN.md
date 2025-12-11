@@ -1,4 +1,4 @@
-# Plan de Social Commerce - RAM Comercios
+# Plan de Social Commerce - RAM Plaza
 
 **Objetivo:** Integrar feed social de productos y promociones tipo TikTok/Instagram Shopping con sistema robusto de cupones.
 
@@ -219,7 +219,7 @@ Cuando usuario entra a "MURO LOCO":
 **Concepto:** Desarrollar módulo de feed social dentro de Bagisto únicamente.
 
 ```
-comercios.redactivamexico.net
+plaza.redactivamexico.net
 ├── /feed (nuevo feed de productos)
 ├── /products (catálogo tradicional)
 └── /checkout
@@ -253,11 +253,11 @@ redactivamexico.net (WoWonder)
 │   ├── Integración con Bagisto
 │   └── Interacción social (like, comment, share)
 │
-├── /store → Redirect a comercios.redactivamexico.net
+├── /store → Redirect a plaza.redactivamexico.net
 │
 └── Usuario logueado globalmente (SSO)
 
-comercios.redactivamexico.net (Bagisto)
+plaza.redactivamexico.net (Bagisto)
 ├── /products (catálogo completo)
 ├── /cart
 ├── /checkout
@@ -1185,7 +1185,7 @@ self.addEventListener('fetch', (event) => {
 ```json
 // manifest.json
 {
-  "name": "Muro Loco - RAM Comercios",
+  "name": "Muro Loco - RAM Plaza",
   "short_name": "Muro Loco",
   "description": "Descubre ofertas increíbles",
   "start_url": "/muro-loco/",

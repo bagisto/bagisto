@@ -2,7 +2,7 @@
 
 ## 🎯 Qué es Muro Loco
 
-**Feed social de productos estilo TikTok** integrado en WoWonder para descubrir ofertas y promociones de RAM Comercios.
+**Feed social de productos estilo TikTok** integrado en WoWonder para descubrir ofertas y promociones de RAM Plaza.
 
 ```
 ┌─────────────────────────────────────┐
@@ -42,7 +42,7 @@ redactivamexico.net (WoWonder)
 ├── /muro-loco ⭐ (productos y ofertas)
 └── Usuario logueado (SSO)
          ↓
-comercios.redactivamexico.net (Bagisto)
+plaza.redactivamexico.net (Bagisto)
 ├── /products
 ├── /checkout
 └── Admin crea promo → Auto-post en Muro Loco

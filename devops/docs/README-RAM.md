@@ -1,4 +1,4 @@
-# RAM Comercios - E-commerce Platform
+# RAM Plaza - E-commerce Platform
 
 Plataforma de e-commerce basada en Bagisto para Red Activa México.
 
@@ -24,8 +24,8 @@ Plataforma de e-commerce basada en Bagisto para Red Activa México.
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/JuanLalo/RamComercios.git
-cd RamComercios
+git clone https://github.com/JuanLalo/RamPlaza.git
+cd RamPlaza
 ```
 
 ### 2. Configurar variables de entorno
@@ -142,20 +142,20 @@ docker compose exec laravel.test npm run build
 
 ```bash
 # Conectar a MySQL
-docker compose exec mysql mysql -u sail -ppassword ram_comercios
+docker compose exec mysql mysql -u sail -ppassword ram_plaza
 
 # Backup
-docker compose exec mysql mysqldump -u sail -ppassword ram_comercios > backup.sql
+docker compose exec mysql mysqldump -u sail -ppassword ram_plaza > backup.sql
 
 # Restore
-cat backup.sql | docker compose exec -T mysql mysql -u sail -ppassword ram_comercios
+cat backup.sql | docker compose exec -T mysql mysql -u sail -ppassword ram_plaza
 ```
 
 ## Estrategia Git
 
 ### Remotes
 
-- `origin` → https://github.com/JuanLalo/RamComercios.git (tu fork)
+- `origin` → https://github.com/JuanLalo/RamPlaza.git (tu fork)
 - `upstream` → https://github.com/bagisto/bagisto.git (Bagisto oficial)
 
 ### Actualizar desde upstream (Bagisto oficial)
@@ -207,7 +207,7 @@ git pull origin dev
 ## Estructura del Proyecto
 
 ```
-RamComercios/
+RamPlaza/
 ├── app/                    # Código de aplicación Laravel
 ├── packages/Webkul/        # Packages de Bagisto
 │   ├── Admin/             # Panel administrativo
@@ -239,7 +239,7 @@ Integración de Single Sign-On para que usuarios de redactivamexico.net puedan a
 
 **Flujo**:
 1. Usuario logueado en RAM → click "Comercios"
-2. RAM genera URL: `comercios.redactivamexico.net/sso?token={access_token}`
+2. RAM genera URL: `plaza.redactivamexico.net/sso?token={access_token}`
 3. Bagisto valida token contra WoWonder API
 4. Crea/actualiza customer en Bagisto
 5. Usuario queda logueado
@@ -306,11 +306,11 @@ Extensión para split payments (~$99 USD):
 # 1. Configurar .env.production
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://comercios.redactivamexico.net
+APP_URL=https://plaza.redactivamexico.net
 
 DB_HOST=ram-db.xxx.rds.amazonaws.com
-DB_DATABASE=ram_comercios
-DB_USERNAME=ram_comercios
+DB_DATABASE=ram_plaza
+DB_USERNAME=ram_plaza
 DB_PASSWORD=<strong_password>
 
 REDIS_HOST=ram-redis.xxx.cache.amazonaws.com
@@ -337,7 +337,7 @@ php artisan optimize
 
 **Desarrollo (.env.local)**:
 ```env
-APP_NAME="RAM Comercios"
+APP_NAME="RAM Plaza"
 APP_ENV=local
 APP_URL=http://localhost:8000
 APP_LOCALE=es
@@ -345,7 +345,7 @@ APP_CURRENCY=MXN
 APP_TIMEZONE=America/Mexico_City
 
 DB_HOST=mysql
-DB_DATABASE=ram_comercios_local
+DB_DATABASE=ram_plaza_local
 DB_USERNAME=sail
 DB_PASSWORD=password
 
@@ -358,14 +358,14 @@ MAIL_PORT=1025
 
 **Producción (.env.production)**:
 ```env
-APP_NAME="RAM Comercios"
+APP_NAME="RAM Plaza"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://comercios.redactivamexico.net
+APP_URL=https://plaza.redactivamexico.net
 
 DB_HOST=<rds-endpoint>
-DB_DATABASE=ram_comercios
-DB_USERNAME=ram_comercios
+DB_DATABASE=ram_plaza
+DB_USERNAME=ram_plaza
 DB_PASSWORD=<strong-password>
 
 REDIS_HOST=<elasticache-endpoint>
