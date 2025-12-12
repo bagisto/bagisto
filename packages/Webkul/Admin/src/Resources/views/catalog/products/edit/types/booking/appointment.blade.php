@@ -21,7 +21,7 @@
                 name="booking[duration]"
                 rules="required|min_value:1"
                 v-model="appointment_booking.duration"
-                :label="trans('admin::app.catalog.products.edit.types.booking.slot-duration')"
+                :label="trans('admin::app.catalog.products.edit.types.booking.appointment.slot-duration')"
                 :placeholder="trans('admin::app.catalog.products.edit.types.booking.appointment.slot-duration')"
             />
 
