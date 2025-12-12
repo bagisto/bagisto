@@ -9,7 +9,7 @@ use Webkul\RMA\Contracts\RMAImage;
 class RMAImageRepository extends Repository
 {
     /**
-     * Specify model class name
+     * Specify model class name.
      */
     public function model(): string
     {
@@ -17,7 +17,7 @@ class RMAImageRepository extends Repository
     }
 
     /**
-     * Upload images
+     * Upload images.
      */
     public function uploadImages(array $requestData, object $rma): void
     {

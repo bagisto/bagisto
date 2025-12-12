@@ -8,7 +8,7 @@ use Webkul\RMA\Contracts\RMA;
 class RMARepository extends Repository
 {
     /**
-     * Specify model class name
+     * Specify model class name.
      */
     public function model(): string
     {

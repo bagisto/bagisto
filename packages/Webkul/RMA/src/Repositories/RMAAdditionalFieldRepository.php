@@ -8,7 +8,7 @@ use Webkul\RMA\Contracts\RMAAdditionalField;
 class RMAAdditionalFieldRepository extends Repository
 {
     /**
-     * Specify model class name
+     * Specify model class name.
      */
     public function model(): string
     {
