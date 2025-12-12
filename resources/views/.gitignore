@@ -1,2 +1,6 @@
 *
 !.gitignore
+!vendor/
+!vendor/shop/
+!vendor/shop/customers/
+!vendor/shop/customers/sign-in.blade.php

@@ -150,6 +150,12 @@
     color: #fff;
 }
 
+/* Admin Icon - Blue/Purple Gradient */
+.ram-plaza-icon-admin {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
 .ram-welcome-title {
     font-family: 'Poppins', sans-serif;
     font-size: 24px;
