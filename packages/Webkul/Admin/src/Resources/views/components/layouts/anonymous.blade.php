@@ -64,8 +64,8 @@
 
     @stack('styles')
 
-    <!-- RAM Plaza Identity -->
-    <link rel="stylesheet" href="{{ asset('ram-assets/ram-identity.css') }}" />
+    <!-- RAM Plaza Login Styles -->
+    <link rel="stylesheet" href="{{ asset('ram-assets/css/login.css') }}" />
 
     <style>
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}

@@ -8,7 +8,7 @@
 @endPush
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('ram-assets/ram-identity.css') }}">
+    <link rel="stylesheet" href="{{ asset('ram-assets/css/login.css') }}">
 @endpush
 
 <x-shop::layouts

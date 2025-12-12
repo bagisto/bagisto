@@ -1,7 +1,7 @@
 /**
- * RAM Plaza - Visual Identity CSS
- * E-commerce de RedActivaMéxico
- * Unique marketplace branding
+ * RAM Plaza - Login Styles
+ * Shared styles for customer and admin login pages
+ * Uses glassmorphism design with RAM branding
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -21,7 +21,7 @@
     display: flex;
     min-height: 100vh;
     width: 100%;
-    background: url('/ram-assets/login-bg-optimized.jpg') !important;
+    background: url('/ram-assets/images/backgrounds/login-bg-optimized.jpg') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
