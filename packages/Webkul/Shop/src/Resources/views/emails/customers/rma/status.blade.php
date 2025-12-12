@@ -1,16 +1,18 @@
 @component('shop::emails.layout')
-    <!-- Title -->
     <div style="margin-bottom: 34px;">
+        <!-- Title -->
         <span style="font-size: 22px;font-weight: 600;color: #121A26">
             @lang('shop::app.rma.mail.status.title')
-        </span><br>
+        </span>
+        
+        <br>
 
-        <!-- Customer name -->
+        <!-- Customer Name -->
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
             @lang('shop::app.rma.mail.status.heading', ['name' => $rmaStatus['name']]),👋
         </p>
 
-        <!-- RMA Id -->
+        <!-- RMA ID -->
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
             @lang('shop::app.rma.mail.status.your-rma-id')
             @lang('shop::app.rma.mail.status.status-change', [
@@ -18,7 +20,7 @@
             ])
         </p>
 
-        <!-- status -->
+        <!-- Status -->
         <div style="margin-bottom: 20px; margin-top: 20px; display: flex; flex-direction: row; justify-content: space-between;">
             <div style="line-height: 25px;">
                 <div style="font-size: 16px; font-weight: bold; color: #242424;">
@@ -28,6 +30,6 @@
                     </span>
                 </div>
             </div>
-        </div><br><br><br>
+        </div>
     </div>
 @endcomponent

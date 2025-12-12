@@ -1,9 +1,11 @@
 @component('shop::emails.layout')
-    <!-- heading -->
+    <!-- Heading -->
     <div style="margin-bottom: 34px;">
         <span style="font-size: 22px; font-weight: 600; color: #121A26;">
             @lang('shop::app.rma.mail.customer-rma-create.heading') !
-        </span><br>
+        </span>
+        
+        <br>
 
         <p style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
             @lang('shop::app.rma.mail.customer-rma-create.hello', ['name' => $customerRmaData['name']]),👋
@@ -20,12 +22,12 @@
             ])
         </p>
 
-        <!-- summary -->
+        <!-- Summary -->
         <div style="margin-bottom: 10px; font-size: 18px; font-weight: bold; color: #2d3748;">
             @lang('shop::app.rma.mail.customer-rma-create.summary')
         </div>
 
-        <!-- RMA id -->
+        <!-- RMA ID -->
         <div style="margin-bottom: 20px; margin-top: 20px; display: flex; flex-direction: row; justify-content: space-between;">
             <div style="line-height: 25px;">
                 <!-- RMA ID -->
@@ -37,7 +39,7 @@
                     </span>
                 </div>
 
-                <!-- order status -->
+                <!-- Order Status -->
                 <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
                     @if ($customerRmaData['order_status'] == '1')
                         @lang('shop::app.rma.mail.customer-rma-create.order-status')
@@ -56,7 +58,7 @@
             </div>
 
             <div style="line-height: 25px;">
-                <!-- order Id -->
+                <!-- Order ID -->
                 <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
                     @lang('shop::app.rma.mail.customer-rma-create.order-id')
 
@@ -141,6 +143,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div><br><br><br>
+        </div>
     </div>
 @endcomponent

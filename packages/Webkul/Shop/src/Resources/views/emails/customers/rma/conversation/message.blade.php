@@ -1,16 +1,20 @@
 @component('shop::emails.layout')
-    <!-- Title -->
     <div style="margin-bottom: 34px;">
+        <!-- Title -->
         <span style="font-size: 22px; font-weight: 600; color: #121A26;">
             @lang('shop::app.rma.mail.seller-conversation.title')
-        </span><br>
+        </span>
+        
+        <br>
 
         <!-- Heading -->
         <p style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
             @lang('shop::app.rma.mail.customer-conversation.heading', ['name' => $conversation['adminName']]),👋
-        </p><br>
+        </p>
+        
+        <br>
 
-        <!-- conversation -->
+        <!-- Conversation -->
         <p style="font-size: 16px; color: #6B7280; line-height: 24px;">
             @lang('shop::app.rma.mail.customer-conversation.quotes')
         </p>
@@ -25,6 +29,6 @@
                     {{ $conversation['message'] }}
                 </div>
             </div>
-        </div><br><br><br>
+        </div>
     </div>
 @endcomponent
