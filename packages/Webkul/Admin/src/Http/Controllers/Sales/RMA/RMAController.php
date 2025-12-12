@@ -64,9 +64,38 @@ class RMAController extends Controller
             return redirect()->route('admin.sales.rma.index');
         }
 
-        $rmaActiveStatus = $this->rmaStatusRepository->where('status', 1)->pluck('title');
+        $statusArr = $this->rmaStatusForRequest($rma);
 
-        return view('admin::sales.rma.returns.view', compact('rma', 'rmaActiveStatus'));
+        $rmaStatusColor = app('Webkul\RMA\Repositories\RMAStatusRepository')
+            ->where('title', $rma->request_status)
+            ->value('color') ?? '#000000';
+
+        $order = $rma->order;
+
+        return view('admin::sales.rma.returns.view', compact('rma', 'statusArr', 'rmaStatusColor', 'order'));
+    }
+
+    /**
+     * Get rma status for request
+     */
+    public function rmaStatusForRequest($rma)
+    {
+        $activeStatuses = $this->rmaStatusRepository
+            ->where('status', 1)
+            ->pluck('title')
+            ->toArray();
+
+        if ($rma->request_status === RequestStatusEnum::PENDING->value) {
+            return array_values(array_intersect($activeStatuses, [RequestStatusEnum::ACCEPT->value, RequestStatusEnum::DECLINED->value]));
+        }
+
+        $hasCancel = $rma->items->pluck('resolution')->contains('cancel-items');
+
+        $excludedStatuses = $hasCancel
+            ? [RequestStatusEnum::ACCEPT->value, RequestStatusEnum::DECLINED->value, RequestStatusEnum::PENDING->value, RequestStatusEnum::DISPATCHED_PACKAGE->value, RequestStatusEnum::RECEIVED_PACKAGE->value]
+            : [RequestStatusEnum::ITEM_CANCELED->value, RequestStatusEnum::ACCEPT->value, RequestStatusEnum::DECLINED->value, RequestStatusEnum::PENDING->value];
+
+        return array_values(array_diff($activeStatuses, $excludedStatuses));
     }
 
     /**

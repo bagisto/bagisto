@@ -4,55 +4,6 @@
         @lang('admin::app.sales.rma.all-rma.view.title', ['id' => $rma->id])
     </x-slot>
 
-    @php
-        $currentDate = \Carbon\Carbon::now();
-
-        $expireDays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
-
-        $newDateTime = \Carbon\Carbon::parse($rma->created_at);
-
-        $differenceInDays = $currentDate->diffInDays($newDateTime);
-
-        $checkDateExpires = false;
-
-        if (
-            $differenceInDays > $expireDays
-            && $differenceInDays != 0
-        ) {
-            $checkDateExpires = true;
-        }
-
-        $statusArr = [];
-
-        $rmaActiveStatus = $rmaActiveStatus->toArray();
-
-        if ($rma->request_status == 'Pending') {
-            $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-                return in_array($status, ["Accept", "Declined"]);
-            });
-        } else {
-            if (in_array('cancel-items', $rma->items->pluck('resolution')->toArray())) {
-                $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-                    if (!in_array($status, ["Accept", "Declined", "Pending", "Dispatched Package", "Received Package"])) {
-                        return true;
-                    }
-                });
-            } else {
-                $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-                    return $status !== "Item Canceled" && $status !== "Accept" && $status !== "Declined" && $status !== "Pending";
-                });
-            }
-        }
-
-        $statusArr = array_values($rmaActiveStatus);
-
-        $rmaStatusColor = app('Webkul\RMA\Repositories\RMAStatusRepository')
-            ->where('title', $rma->request_status)
-            ->value('color') ?? '#000000';
-
-        $order = $rma->order;
-    @endphp
-
     {!! view_render_event('bagisto.admin.rma.view.before') !!}
     
     <v-admin-rma-view></v-admin-rma-view>
@@ -855,13 +806,13 @@
                     <!-- Display Image -->
                     <img
                         v-if="
-                                messagePath
-                                && (
-                                    this.getAttachmentExtension === 'jpg'
-                                    || this.getAttachmentExtension === 'jpeg'
-                                    || this.getAttachmentExtension === 'png'
-                                    || this.getAttachmentExtension === 'gif'
-                                )"
+                            messagePath
+                            && (
+                                this.getAttachmentExtension === 'jpg'
+                                || this.getAttachmentExtension === 'jpeg'
+                                || this.getAttachmentExtension === 'png'
+                                || this.getAttachmentExtension === 'gif'
+                        )"
                         :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
                         class="min-h-[500px] min-w-[500px] max-h-[500px] max-w-[500px] rounded m-auto"
                     />
