@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
 use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Facades\Acl;
 use Webkul\Core\Facades\Core;
@@ -133,4 +132,3 @@ if (! function_exists('array_permutation')) {
         return $results;
     }
 }
-

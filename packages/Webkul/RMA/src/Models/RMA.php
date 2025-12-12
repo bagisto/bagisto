@@ -34,14 +34,6 @@ class RMA extends Model implements RMAContract
     ];
 
     /**
-     * RMA Package
-     */
-    public function getStatusLabelRMA(): string
-    {
-        return $this->statusLabel[$this->request_status];
-    }
-
-    /**
      * Define a one-to-many relationship with the RMA items.
      */
     public function items(): HasMany

@@ -1157,6 +1157,7 @@ return [
         'orders'                => 'הזמנות',
         'profile'               => 'פרופיל',
         'reviews'               => 'ביקורות',
+        'rma'                   => 'RMA',
         'wishlist'              => 'רשימת משאלות',
     ],
 

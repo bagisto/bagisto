@@ -1157,6 +1157,7 @@ return [
         'orders'                => 'Pesanan',
         'profile'               => 'Profil',
         'reviews'               => 'Ulasan',
+        'rma'                   => 'RMA',
         'wishlist'              => 'Wishlist',
     ],
 
@@ -1324,9 +1325,6 @@ return [
             'submit-req'   => 'Kirim Permintaan',
             'title'        => 'RMA',
             'undelivered'  => 'Belum Terkirim',
-            'canceled'     => 'Dibatalkan',
-            'closed'       => 'Ditutup',
-            'by-admin'     => 'Pesanan Dibatalkan oleh Admin',
 
             'create' => [
                 'cancel'                   => 'Batal',

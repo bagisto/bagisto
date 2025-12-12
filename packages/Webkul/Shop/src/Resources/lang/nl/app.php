@@ -1157,6 +1157,7 @@ return [
         'orders'                => 'Bestellingen',
         'profile'               => 'Profiel',
         'reviews'               => 'Beoordelingen',
+        'rma'                   => 'RMA',
         'wishlist'              => 'Verlanglijst',
     ],
 

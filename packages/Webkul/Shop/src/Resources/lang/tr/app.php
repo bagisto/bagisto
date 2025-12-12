@@ -1157,6 +1157,7 @@ return [
         'orders'                => 'Siparişler',
         'profile'               => 'Profil',
         'reviews'               => 'Yorumlar',
+        'rma'                   => 'RMA',
         'wishlist'              => 'İstek Listesi',
     ],
 

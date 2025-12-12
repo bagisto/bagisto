@@ -1157,6 +1157,7 @@ return [
         'orders'                => '订单',
         'profile'               => '个人资料',
         'reviews'               => '评论',
+        'rma'                   => 'RMA',
         'wishlist'              => '愿望清单',
     ],
 

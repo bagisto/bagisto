@@ -1151,12 +1151,13 @@ return [
 
     'layouts' => [
         'address'               => 'ঠিকানা',
-        'my-account'            => 'আমার অ্যাকাউন্ট',
         'downloadable-products' => 'ডাউনলোড যোগ্য পণ্য',
         'gdpr-request'          => 'জিডিপিআর অনুরোধ',
+        'my-account'            => 'আমার অ্যাকাউন্ট',
         'orders'                => 'আদেশ',
         'profile'               => 'প্রোফাইল',
         'reviews'               => 'পর্যালোচনা',
+        'rma'                   => 'RMA',
         'wishlist'              => 'ইচ্ছাশূণ্যতা',
     ],
 

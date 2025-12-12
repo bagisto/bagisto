@@ -234,7 +234,6 @@
                             <div class="flex-auto">
                                 <div class="flex justify-end">
                                     <div class="grid max-w-max gap-2 text-sm">
-
                                         {!! view_render_event('bagisto.shop.customers.account.orders.view.information.subtotal.before') !!}
 
                                         <!-- Sub Total -->
@@ -395,18 +394,18 @@
                                             @lang('shop::app.customers.account.orders.view.information.total-due')
 
                                             @php
-                                                $baseTotalDue = $order->base_total_due;
+                                                $totalDue = $order->total_due;
                                             @endphp
 
                                             @foreach ($order->items as $item)
                                                 @php
-                                                    $baseTotalDue = $baseTotalDue - ($item->base_price * $item->qty_canceled);
+                                                    $totalDue = $totalDue - ($item->base_price * $item->qty_canceled);
                                                 @endphp
                                             @endforeach
 
                                             <p>
                                                 @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                                    {{ core()->formatPrice($baseTotalDue, $order->order_currency_code) }}
+                                                    {{ core()->formatPrice($totalDue, $order->order_currency_code) }}
                                                 @else
                                                     {{ core()->formatPrice(0.00, $order->order_currency_code) }}
                                                 @endif
@@ -414,7 +413,6 @@
                                         </div>
 
                                         {!! view_render_event('bagisto.shop.customers.account.orders.view.information.total-due.after') !!}
-
                                     </div>
                                 </div>
                             </div>

@@ -1157,6 +1157,7 @@ return [
         'orders'                => 'ඇණවුම්',
         'profile'               => 'පාරිභෝගය',
         'reviews'               => 'අදහස්',
+        'rma'                   => 'RMA',
         'wishlist'              => 'කෙටුම් ලැයිස්තුව',
     ],
 

@@ -1152,11 +1152,12 @@ return [
     'layouts' => [
         'address'               => 'Adreça',
         'downloadable-products' => 'Productes descarregables',
-        'sol·licitud-gdpr'      => 'Sol·licituds de GDPR',
         'my-account'            => 'El meu compte',
         'orders'                => 'Comandes',
         'profile'               => 'Perfil',
         'reviews'               => 'Ressenyes',
+        'rma'                   => 'RMA',
+        'sol·licitud-gdpr'      => 'Sol·licituds de GDPR',
         'wishlist'              => 'Llista de desitjos',
     ],
 
@@ -1324,9 +1325,6 @@ return [
             'submit-req'   => 'Enviar sol·licitud',
             'title'        => 'RMA',
             'undelivered'  => 'No entregat',
-            'canceled'     => 'Cancel·lat',
-            'closed'       => 'Tancat',
-            'by-admin'     => 'Comanda cancel·lada per l\'administrador',
 
             'create' => [
                 'cancel'                   => 'Cancel·lar',

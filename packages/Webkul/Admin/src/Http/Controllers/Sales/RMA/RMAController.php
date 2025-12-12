@@ -282,7 +282,7 @@ class RMAController extends Controller
                     $status['order_status'] = RequestStatusEnum::CANCELED->value;
 
                     $order->update(['status' => Order::STATUS_CANCELED]);
-                } else if ($status['request_status'] == RequestStatusEnum::ACCEPT->value) {
+                } elseif ($status['request_status'] == RequestStatusEnum::ACCEPT->value) {
                     $this->rmaRepository->find($status['rma_id'])->update(['status' => 0]);
                 }
             }
@@ -400,7 +400,7 @@ class RMAController extends Controller
 
             if ($this->orderRepository->isInCanceledState($order)) {
                 $status = Order::STATUS_CANCELED;
-            } else if ($this->orderRepository->isInClosedState($order)) {
+            } elseif ($this->orderRepository->isInClosedState($order)) {
                 $status = Order::STATUS_CLOSED;
             }
         }

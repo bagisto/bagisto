@@ -1325,9 +1325,6 @@ return [
             'submit-req'   => 'Submit request',
             'title'        => 'RMA',
             'undelivered'  => 'Undelivered',
-            'canceled'     => 'Canceled',
-            'closed'       => 'Closed',
-            'by-admin'     => 'Order Canceled By Admin',
 
             'create' => [
                 'cancel'                   => 'Cancel',
