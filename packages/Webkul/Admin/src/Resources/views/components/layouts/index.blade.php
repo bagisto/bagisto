@@ -76,6 +76,9 @@
 
     @stack('styles')
 
+    <!-- RAM Plaza Identity -->
+    <link rel="stylesheet" href="{{ asset('ram-assets/ram-identity.css') }}" />
+
     <style>
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
     </style>
@@ -127,13 +130,12 @@
                     </div>
                 </div>
 
-                <!-- Powered By -->
+                <!-- Powered By RAM -->
                 <div class="mt-auto">
                     <div class="border-t bg-white py-2 text-center text-xs sm:text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white">
-                        @lang('admin::app.components.layouts.powered-by.description', [
-                            'bagisto' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://bagisto.com/en/">Bagisto</a>',
-                            'webkul' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://webkul.com/">Webkul</a>',
-                        ])
+                        <a class="text-pink-500 hover:underline font-medium" href="https://plaza.redactivamexico.net">RAM Plaza</a>
+                        &mdash; e-commerce de
+                        <a class="text-pink-500 hover:underline font-medium" href="https://redactivamexico.net">RedActivaMéxico</a>
                     </div>
                 </div>
             </div>

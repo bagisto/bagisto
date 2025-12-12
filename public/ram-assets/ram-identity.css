@@ -1,0 +1,606 @@
+/**
+ * RAM Plaza - Visual Identity CSS
+ * E-commerce de RedActivaMéxico
+ * Unique marketplace branding
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --ram-primary: #ff3e9a;
+    --ram-secondary: #ff66b6;
+    --ram-bg: #1E252B;
+    --ram-form-bg: #262D34;
+}
+
+/* ==========================================
+   LOGIN PAGE - RAMPlaza Unique Design
+   ========================================== */
+
+.ram-login-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: url('/ram-assets/login-bg-optimized.jpg') !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Left Side - Branding */
+.ram-login-left {
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 60px;
+}
+
+.ram-login-branding {
+    color: #fff;
+}
+
+.ram-login-branding .ram-logo img {
+    max-width: 180px;
+    margin-bottom: 40px;
+}
+
+.ram-login-branding h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.2;
+    margin: 0 0 15px;
+    color: #fff;
+}
+
+.ram-login-branding h1 b {
+    color: var(--ram-primary);
+}
+
+.ram-login-branding .ram-tagline {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 40px;
+    font-weight: 400;
+}
+
+.ram-login-branding .ram-tagline b {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Features List */
+.ram-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ram-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.ram-feature svg {
+    color: var(--ram-primary);
+    flex-shrink: 0;
+}
+
+/* Mexican Badge */
+.ram-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ram-badge span {
+    font-size: 18px;
+}
+
+/* Right Side - Login Form */
+.ram-login-right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.ram-login-form-container {
+    width: 100%;
+    max-width: 420px;
+    /* RAM Glassmorphism */
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Plaza Icon */
+.ram-plaza-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--ram-primary) 0%, var(--ram-secondary) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    box-shadow: 0 8px 24px rgba(255, 62, 154, 0.3);
+}
+
+.ram-plaza-icon svg {
+    color: #fff;
+}
+
+.ram-welcome-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.ram-welcome-desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+/* Form Fields */
+.ram-form-fields {
+    margin-bottom: 20px;
+}
+
+.ram-form-group {
+    position: relative;
+    margin: 20px 0;
+}
+
+.ram-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ram-form-group input.ram-input,
+.ram-form-group .ram-input {
+    width: 100% !important;
+    height: 54px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 15px 18px !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-family: 'Poppins', sans-serif !important;
+    transition: all 0.3s ease;
+}
+
+.ram-form-group input.ram-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.ram-form-group input.ram-input:focus {
+    border-color: var(--ram-primary) !important;
+    background: rgba(255, 62, 154, 0.08) !important;
+    box-shadow: 0 0 0 3px rgba(255, 62, 154, 0.15) !important;
+    outline: none;
+}
+
+.ram-password-wrapper {
+    position: relative;
+}
+
+.ram-eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    transition: color 0.2s;
+}
+
+.ram-eye-icon:hover {
+    color: var(--ram-primary);
+}
+
+/* Form Footer */
+.ram-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.ram-forgot-link {
+    font-size: 13px;
+    color: var(--ram-primary) !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.ram-forgot-link:hover {
+    color: var(--ram-secondary) !important;
+}
+
+/* Submit Button */
+.ram-submit-btn {
+    width: 100%;
+    height: 54px;
+    background: linear-gradient(135deg, var(--ram-primary) 0%, var(--ram-secondary) 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0 24px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(255, 62, 154, 0.35);
+}
+
+.ram-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 62, 154, 0.45);
+}
+
+.ram-submit-btn:active {
+    transform: translateY(0);
+}
+
+.ram-submit-btn svg {
+    flex-shrink: 0;
+}
+
+/* Login Footer */
+.ram-login-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ram-login-footer span {
+    color: var(--ram-primary);
+    font-weight: 600;
+}
+
+.ram-login-footer a {
+    color: var(--ram-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.ram-login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .ram-login-left {
+        padding: 40px;
+    }
+
+    .ram-login-branding h1 {
+        font-size: 42px;
+    }
+
+    .ram-login-form-container {
+        max-width: 380px;
+        padding: 35px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .ram-login-wrapper {
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .ram-login-left {
+        width: 100%;
+        padding: 30px 20px 20px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ram-login-branding {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ram-login-branding .ram-logo img {
+        max-width: 120px;
+        margin-bottom: 20px;
+    }
+
+    .ram-login-branding h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .ram-login-branding .ram-tagline {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .ram-features {
+        display: none;
+    }
+
+    .ram-badge {
+        margin-top: 15px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .ram-badge span {
+        font-size: 14px;
+    }
+
+    .ram-login-right {
+        width: 100%;
+        padding: 20px;
+        flex: 1;
+    }
+
+    .ram-login-form-container {
+        max-width: 100%;
+        padding: 25px 20px;
+        border-radius: 16px;
+        margin: 0;
+    }
+
+    .ram-plaza-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .ram-plaza-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .ram-welcome-title {
+        font-size: 20px;
+    }
+
+    .ram-welcome-desc {
+        font-size: 13px;
+        margin-bottom: 25px;
+    }
+
+    .ram-form-group {
+        margin: 16px 0;
+    }
+
+    .ram-form-group label {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .ram-form-group input.ram-input,
+    .ram-form-group .ram-input {
+        height: 50px !important;
+        font-size: 14px !important;
+        padding: 12px 15px !important;
+        border-radius: 10px !important;
+    }
+
+    .ram-submit-btn {
+        height: 50px;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+    }
+
+    .ram-login-footer {
+        margin-top: 20px;
+        padding-top: 15px;
+        font-size: 12px;
+    }
+
+    .ram-form-footer {
+        margin-bottom: 20px;
+    }
+
+    .ram-forgot-link {
+        font-size: 12px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .ram-login-left {
+        padding: 25px 15px 15px;
+    }
+
+    .ram-login-branding .ram-logo img {
+        max-width: 100px;
+        margin-bottom: 15px;
+    }
+
+    .ram-login-branding h1 {
+        font-size: 28px;
+    }
+
+    .ram-login-branding .ram-tagline {
+        font-size: 14px;
+    }
+
+    .ram-login-right {
+        padding: 15px;
+    }
+
+    .ram-login-form-container {
+        padding: 20px 18px;
+    }
+
+    .ram-plaza-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .ram-plaza-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .ram-welcome-title {
+        font-size: 18px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .ram-login-wrapper {
+        flex-direction: row;
+    }
+
+    .ram-login-left {
+        width: 40%;
+        padding: 20px;
+    }
+
+    .ram-login-branding .ram-logo img {
+        max-width: 80px;
+        margin-bottom: 10px;
+    }
+
+    .ram-login-branding h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .ram-login-branding .ram-tagline {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .ram-badge {
+        display: none;
+    }
+
+    .ram-login-right {
+        width: 60%;
+        padding: 15px;
+    }
+
+    .ram-login-form-container {
+        padding: 20px;
+    }
+
+    .ram-plaza-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .ram-plaza-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ram-welcome-title {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .ram-welcome-desc {
+        font-size: 11px;
+        margin-bottom: 15px;
+    }
+
+    .ram-form-group {
+        margin: 10px 0;
+    }
+
+    .ram-form-group input.ram-input {
+        height: 42px !important;
+    }
+
+    .ram-submit-btn {
+        height: 42px;
+    }
+
+    .ram-login-footer {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+}
+
+/* ==========================================
+   ADMIN DASHBOARD - Minimal changes
+   ========================================== */
+
+button.primary-button,
+a.primary-button {
+    background: var(--ram-primary) !important;
+    border-color: var(--ram-primary) !important;
+}
+
+button.primary-button:hover,
+a.primary-button:hover {
+    background: var(--ram-secondary) !important;
+    border-color: var(--ram-secondary) !important;
+}
+
+/* ==========================================
+   SCROLLBAR
+   ========================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ram-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ram-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ram-secondary);
+}
