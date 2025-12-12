@@ -4,6 +4,7 @@ namespace Webkul\RMA\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\RMA\Contracts\RMAItem as RMAItemContract;
@@ -39,6 +40,14 @@ class RMAItem extends Model implements RMAItemContract
     {
 
         return $this->belongsTo(RMAProxy::modelClass(), 'rma_id');
+    }
+
+    /**
+     * Get the reason related to the rma item.
+     */
+    public function reason(): HasOne
+    {
+        return $this->hasOne(RMAReasonProxy::modelClass(), 'id', 'rma_reason_id');
     }
 
     /**

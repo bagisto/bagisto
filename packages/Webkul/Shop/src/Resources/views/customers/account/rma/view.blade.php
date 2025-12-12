@@ -205,7 +205,7 @@
                                 </td>
                                 
                                 <td class="px-4 py-4 text-sm text-gray-600">
-                                    {{ $item->getReasons->title }}
+                                    {{ $item->reason->title }}
                                 </td>
                             </tr>
                         @endforeach
@@ -263,7 +263,7 @@
 
                         <div>
                             <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.reason')</span>
-                            <p class="text-gray-600">{{ $item->getReasons->title }}</p>
+                            <p class="text-gray-600">{{ $item->reason->title }}</p>
                         </div>
                     </div>
                 @endforeach

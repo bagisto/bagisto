@@ -118,6 +118,8 @@ class Helper
     {
         $allowedProductTypes = explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type'));
 
+        $tablePrefix = DB::getTablePrefix();
+
         $orderItems = $this->orderItemRepository->where('order_id', $orderId)
             ->addSelect(
                 'product_flat.product_id',
@@ -183,7 +185,7 @@ class Helper
                 });
             })
             ->where('product_flat.locale', app()->getLocale())
-            ->whereRaw('order_items.qty_ordered > (order_items.qty_refunded + order_items.qty_canceled)')
+            ->whereRaw($tablePrefix.'order_items.qty_ordered > ('.$tablePrefix.'order_items.qty_refunded + '.$tablePrefix.'order_items.qty_canceled)')
             ->groupBy('order_items.id')
             ->get();
 

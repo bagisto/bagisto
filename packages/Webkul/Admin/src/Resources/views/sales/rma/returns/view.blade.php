@@ -206,7 +206,7 @@
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                                    {!! wordwrap($rmaItem->getReasons->title, 50, "<br>\n") !!}
+                                                    {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
                                                 </p>
                                             </div>
                                         </div>
