@@ -6,3 +6,6 @@
 !.env.example
 !*.env.example
 !docker/.env.production.example
+
+# Temp folder (local notes, TODO tracking before moving to GH Projects)
+temp/
