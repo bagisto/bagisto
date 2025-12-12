@@ -5,9 +5,9 @@ namespace Webkul\RMA\Enums;
 enum RequestStatusEnum: string
 {
     /**
-     * Pending request status.
+     * Accepted request status.
      */
-    case PENDING = 'Pending';
+    case ACCEPT = 'Accept';
 
     /**
      * Canceled request status.
@@ -15,14 +15,24 @@ enum RequestStatusEnum: string
     case CANCELED = 'Canceled';
 
     /**
+     * Declined request status.
+     */
+    case DECLINED = 'Declined';
+
+    /**
+     * Dispatched package request status.
+     */
+    case DISPATCHED_PACKAGE = 'Dispatched Package';
+
+    /**
      * Item canceled request status.
      */
     case ITEM_CANCELED = 'Item Canceled';
 
     /**
-     * Declined request status.
+     * Pending request status.
      */
-    case DECLINED = 'Declined';
+    case PENDING = 'Pending';
 
     /**
      * Received package request status.
@@ -33,9 +43,4 @@ enum RequestStatusEnum: string
      * Solved request status.
      */
     case SOLVED = 'Solved';
-
-    /**
-     * Accepted request status.
-     */
-    case ACCEPT = 'Accept';
 }

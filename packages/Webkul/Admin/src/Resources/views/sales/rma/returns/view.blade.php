@@ -446,7 +446,7 @@
                                                     class="label-active py-1 text-xs"
                                                     style="background: {{ $rmaStatusColor }}"
                                                 >
-                                                    {{ format_title_case($rma->request_status) }}
+                                                    {{ $rma->request_status }}
                                                 </span>
                                             @endif
                                         </span>

@@ -134,9 +134,3 @@ if (! function_exists('array_permutation')) {
     }
 }
 
-if (! function_exists('format_title_case')) {
-    function format_title_case($input)
-    {
-        return Str::title(str_replace('_', ' ', $input));
-    }
-}

@@ -974,13 +974,13 @@
                         <x-shop::form.control-group.control
                             type="image"
                             class="!p-0 rounded-xl text-gray-700 mb-0"
-                            name="images"
+                            name="images[]"
                             :label="trans('admin::app.catalog.products.edit.images.title')"
                             :is-multiple="false"
                             accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />
 
-                        <x-shop::form.control-group.error control-name="images" class="flex" />
+                        <x-shop::form.control-group.error control-name="images[]" class="flex" />
                     </x-shop::form.control-group>
 
                     @include('shop::customers.account.rma.terms')

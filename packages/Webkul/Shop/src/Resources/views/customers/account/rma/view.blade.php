@@ -294,7 +294,7 @@
                             </span>
                         @else
                             <span class="px-3 py-1 text-xs rounded-full" style="background: {{ $statusColor }}20; color: {{ $statusColor }}">
-                                {{ format_title_case($rma->request_status) }}
+                                {{ $rma->request_status }}
                             </span>
                         @endif
                     </div>

@@ -15,13 +15,6 @@ class RMAImage extends Model implements RMAImageContract
     protected $table = 'rma_images';
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $guarded = ['_token'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

@@ -97,7 +97,7 @@ class RMAController extends Controller
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
-            'images'          => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $data = request()->only([
@@ -161,11 +161,13 @@ class RMAController extends Controller
 
         $data['rma_id'] = $rma->id;
 
-        if (! empty($data['images'])) {
-            $this->rmaImagesRepository->create([
-                'rma_id' => $rma->id,
-                'path'   => ! empty($data['images']) ? $data['images']->getClientOriginalName() : null,
-            ]);
+        if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
+            foreach ($data['images'] as $itemImg) {
+                $this->rmaImagesRepository->create([
+                    'rma_id' => $rma->id,
+                    'path'   => $itemImg->getClientOriginalName(),
+                ]);
+            }
 
             $this->rmaImagesRepository->uploadImages($data, $rma);
         }
