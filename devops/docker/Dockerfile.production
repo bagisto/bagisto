@@ -1,8 +1,12 @@
+# Dockerfile de Producción para RamPlaza (Bagisto)
+# Basado en el Dockerfile oficial de bagisto-docker
+# https://github.com/bagisto/bagisto-docker
+
 FROM php:8.3-fpm
 
 # Build arguments
 ARG WWWGROUP=1000
-ARG NODE_VERSION=20
+ARG WWWUSER=1000
 
 # Environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,49 +15,63 @@ ENV TZ=America/Mexico_City
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Install system dependencies
+# Install main dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
+    procps \
+    ffmpeg
+
+# Install unzip dependencies
+RUN apt-get install -y \
     libzip-dev \
+    zlib1g-dev \
+    unzip
+
+# GD extension dependencies and install
+RUN apt-get install -y \
+    libfreetype6-dev \
     libicu-dev \
-    zip \
-    unzip \
-    supervisor \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libgmp-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
+    libxpm-dev \
+    libonig-dev \
+    libxml2-dev
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install gd
 
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
-        zip \
-        intl \
-        calendar
+# Imagick extension
+RUN apt-get install -y libmagickwand-dev \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
 
-# Install Redis extension
+# Intl extension
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
+
+# Other PHP extensions
+RUN docker-php-ext-install bcmath calendar exif gmp mysqli pdo pdo_mysql zip
+
+# Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
 
-# Copy Composer from official image
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:2.7 /usr/bin/composer /usr/local/bin/composer
 
 # Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+COPY --from=node:20 /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:20 /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # Create application user
-RUN groupadd --force -g $WWWGROUP sail
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1000 sail
+RUN groupadd --force -g $WWWGROUP sail \
+    && (useradd -g sail -G www-data,root -u $WWWUSER -d /home/sail sail || true) \
+    && mkdir -p /home/sail/.composer \
+    && chown -R sail:sail /home/sail
 
 # Set working directory
 WORKDIR /var/www/html
@@ -65,15 +83,11 @@ COPY --chown=sail:sail . /var/www/html
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
 # Set permissions
-RUN chown -R sail:sail /var/www/html \
+RUN chown -R sail:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Configure PHP-FPM
-RUN echo "php_admin_value[error_log] = /var/www/html/storage/logs/php-fpm.log" >> /usr/local/etc/php-fpm.d/www.conf \
-    && echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
-
-# Copy PHP production configuration
+# Copy PHP production configuration (if exists)
 COPY devops/docker/php.ini /usr/local/etc/php/conf.d/99-production.ini
 
 # Expose port

@@ -19,7 +19,7 @@ services:
       - devops/docker/.env.production
     networks:
       - ramplaza
-      - ram_shared
+      - ram-network
     depends_on:
       mysql:
         condition: service_healthy
@@ -36,10 +36,11 @@ services:
     container_name: ramplaza-webserver
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8081:80"
+      - "127.0.0.1:8082:80"
     volumes:
       - .:/var/www/html
-      - devops/docker/nginx/production.conf:/etc/nginx/conf.d/default.conf
+      - ./storage/app/public:/var/www/html/public/storage
+      - ./devops/docker/nginx/production.conf:/etc/nginx/conf.d/default.conf
       - ./storage/logs/nginx:/var/log/nginx
     networks:
       - ramplaza
@@ -55,9 +56,11 @@ services:
     image: mysql:8.0
     container_name: ramplaza-mysql
     restart: unless-stopped
+    env_file:
+      - devops/docker/.env.production
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-ram_plaza}
-      MYSQL_USER: ${DB_USERNAME:-ramplaza}
+      MYSQL_DATABASE: ram_plaza
+      MYSQL_USER: ramplaza
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
@@ -73,7 +76,7 @@ services:
     ports:
       - "127.0.0.1:3308:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -82,15 +85,17 @@ services:
     image: redis:alpine
     container_name: ramplaza-redis
     restart: unless-stopped
+    env_file:
+      - devops/docker/.env.production
     command: >
       redis-server
       --appendonly yes
-      ${REDIS_PASSWORD:+--requirepass ${REDIS_PASSWORD}}
+      --requirepass kGueiXjXvh2DSOjgHpjecdYr
     volumes:
       - redis-data:/data
     networks:
       - ramplaza
-      - ram_shared
+      - ram-network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -138,7 +143,7 @@ services:
     command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600 --timeout=300
     networks:
       - ramplaza
-      - ram_shared
+      - ram-network
     depends_on:
       mysql:
         condition: service_healthy
@@ -177,6 +182,6 @@ volumes:
 networks:
   ramplaza:
     driver: bridge
-  ram_shared:
+  ram-network:
     external: true
-    name: ram_shared
+    name: ram-network  # Red compartida con RAM Core
