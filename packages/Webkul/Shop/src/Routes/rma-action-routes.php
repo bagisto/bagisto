@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\Customer\Guest\GuestAuthenticationController;
 use Webkul\Shop\Http\Controllers\Customer\Guest\GuestController;
@@ -25,16 +26,16 @@ Route::prefix('rma')->group(function () {
             Route::get('', 'index')->name('shop.guest.account.rma.index');
 
             Route::get('create', 'create')->name('shop.guest.account.rma.create');
-            
+
             Route::post('store', 'store')->name('shop.guest.account.rma.store');
-            
+
             Route::get('view/{id}', 'view')->name('shop.guest.account.rma.view');
         });
     });
 
     /**
      * RMA Action routes for guest and customer.
-     * 
+     *
      * These routes are used to perform actions on RMA requests such as canceling, updating status, and sending messages.
      */
     Route::controller(RMAActionController::class)->group(function () {

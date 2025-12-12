@@ -176,9 +176,9 @@ Route::prefix('customer')->group(function () {
                 Route::get('', 'index')->name('shop.customers.account.rma.index');
 
                 Route::get('create', 'create')->name('shop.customers.account.rma.create');
-                
+
                 Route::post('store', 'store')->name('shop.customers.account.rma.store');
-                
+
                 Route::get('view/{id}', 'view')->name('shop.customers.account.rma.view');
             });
         });

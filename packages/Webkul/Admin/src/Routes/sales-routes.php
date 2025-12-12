@@ -132,13 +132,13 @@ Route::prefix('sales')->group(function () {
                 Route::get('', 'index')->name('admin.sales.rma.index');
 
                 Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
-                
+
                 Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
-                
+
                 Route::post('save-rma-reopen-status', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
-                
+
                 Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
-                
+
                 Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
             });
 

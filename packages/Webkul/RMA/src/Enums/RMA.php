@@ -21,6 +21,6 @@ enum RMA: string
     case SOLVED = 'solved';
 
     case INACTIVE = '0';
-    
+
     case ACTIVE = '1';
 }

@@ -10,14 +10,14 @@
             @lang('shop::app.rma.mail.seller-conversation.heading', ['name' => $conversation['customerName']]),👋
         </p>
 
-        <!-- conversation -->
+        <!-- Conversation -->
         <p style="font-size: 16px; color: #6B7280; line-height: 24px;">
             @lang('shop::app.rma.mail.seller-conversation.quotes')
         </p>
 
         <div style="margin-bottom: 20px; margin-top: 20px; display: flex; flex-direction: row; justify-content: space-between;">
             <div style="line-height: 25px;">
-                <!-- message -->
+                <!-- Message -->
                 <div style="font-size: 16px; font-weight: bold; color: #1F2937;">
                     @lang('shop::app.rma.mail.seller-conversation.message')
                 </div>
@@ -26,6 +26,6 @@
                     {{ $conversation['message'] }}
                 </div>
             </div>
-        </div><br><br><br>
+        </div>
     </div>
 @endcomponent

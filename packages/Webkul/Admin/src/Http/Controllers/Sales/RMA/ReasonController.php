@@ -46,7 +46,7 @@ class ReasonController extends Controller
             'position'        => 'required',
             'resolution_type' => 'required|array|min:1',
         ]);
-        
+
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
         foreach (request()->resolution_type as $resolutionType) {

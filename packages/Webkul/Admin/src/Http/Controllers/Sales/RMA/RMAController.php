@@ -254,7 +254,7 @@ class RMAController extends Controller
                     $status['order_status'] = RMA::CANCELED->value;
 
                     $order->update(['status' => RMA::CANCELED->value]);
-                } else if ($status['request_status'] == RMA::ACCEPT->value) {
+                } elseif ($status['request_status'] == RMA::ACCEPT->value) {
                     $this->rmaRepository->find($status['rma_id'])->update(['status' => 0]);
                 }
             }
@@ -273,7 +273,8 @@ class RMAController extends Controller
         if ($updateStatus) {
             try {
                 Mail::queue(new CustomerRMAStatusNotification($mailDetails));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 

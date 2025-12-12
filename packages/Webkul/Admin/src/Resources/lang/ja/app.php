@@ -815,7 +815,7 @@ return [
             'title' => '予約商品',
         ],
 
-       'rma' => [
+        'rma' => [
             'all-rma' => [
                 'index' => [
                     'title' => '全てのRMA',

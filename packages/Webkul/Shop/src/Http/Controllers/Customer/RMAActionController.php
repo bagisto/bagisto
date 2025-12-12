@@ -201,14 +201,14 @@ class RMAActionController extends Controller
             } catch (\Exception $e) {
                 return new JsonResponse([
                     'messages' => trans('shop::app.rma.response.send-message', [
-                        'name' => trans('shop::app.rma.mail.customer-conversation.message')
+                        'name' => trans('shop::app.rma.mail.customer-conversation.message'),
                     ]),
                 ]);
             }
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.send-message', [
-                    'name' => trans('shop::app.rma.mail.customer-conversation.message')
+                    'name' => trans('shop::app.rma.mail.customer-conversation.message'),
                 ]),
             ]);
         }

@@ -1,7 +1,7 @@
 <?php
 
-use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Str;
+use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Facades\Acl;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Facades\Menu;
@@ -135,7 +135,7 @@ if (! function_exists('array_permutation')) {
 }
 
 if (! function_exists('format_title_case')) {
-    function format_title_case($input) 
+    function format_title_case($input)
     {
         return Str::title(str_replace('_', ' ', $input));
     }

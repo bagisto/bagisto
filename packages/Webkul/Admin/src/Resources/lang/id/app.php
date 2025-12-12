@@ -1031,7 +1031,7 @@ return [
                     'rma-created-message'  => 'Permintaan RMA tersedia untuk produk dengan jumlah :qty',
                 ],
             ],
-            
+
             'index' => [
                 'create-rma-title' => 'Buat',
                 'reason-title'     => 'Alasan',

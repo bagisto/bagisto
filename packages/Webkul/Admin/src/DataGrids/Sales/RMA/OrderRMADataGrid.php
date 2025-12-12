@@ -99,12 +99,12 @@ class OrderRMADataGrid extends DataGrid
             });
 
             if (! empty($globalReturnDays) && is_numeric($globalReturnDays)) {
-                $query->orWhere(function ($q) use ($globalReturnDays) {
+                $query->orWhere(function ($q) use ($globalReturnDays, $tablePrefix) {
                     $q->where(function ($sub) {
                         $sub->whereNull('pav_allow_rma.boolean_value')
                             ->orWhere('pav_allow_rma.boolean_value', 0)
                             ->orWhere('rma_rules.status', 0);
-                    })->whereRaw('DATEDIFF(NOW(), orders.created_at) <= ?', [$globalReturnDays]);
+                    })->whereRaw('DATEDIFF(NOW(), '.$tablePrefix.'orders.created_at) <= ?', [$globalReturnDays]);
                 });
             }
         });
@@ -154,7 +154,7 @@ class OrderRMADataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>'.$row->customer_name.'('.trans('shop::app.rma.view-customer-rma.guest').')'.'</span>';
+                    return '<span>'.$row->customer_name.' ('.trans('shop::app.rma.view-customer-rma.guest').')'.'</span>';
                 }
 
                 return $row->customer_name;
