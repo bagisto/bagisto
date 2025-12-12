@@ -13,7 +13,7 @@
         <x-shop::breadcrumbs name="rma.create"></x-shop::breadcrumbs>
     @endSection
 
-    <div class="mx-4">
+    <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
     </div>
     
@@ -338,6 +338,7 @@
                     name="order_id"
                     ::value="orderId"
                 />
+
                 <div v-for="product in products">
                     <div class="flex-row gap-2.5 border-b mt-2 mb-2">
                         <div class="flex gap-2.5 mb-3">
@@ -392,12 +393,13 @@
                                         <a
                                             :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
                                             target='_blank'
-                                            class="text-blue-500 text-lg"
+                                            class="text-blue-500 text-lg hover:underline"
                                         >
                                             @{{ product.name }}
 
                                         </a>
                                     </template>
+
                                     <template v-else>
                                             @{{ product.name }}
                                     </template>
@@ -408,7 +410,7 @@
                                     class="flex text-sm justify-between whitespace-nowrap"
                                     >
                                     <span>
-                                        @{{attribute.attribute_name}}:
+                                        @{{ attribute.attribute_name }}:
                                     </span>
 
                                     <span>@{{ attribute.option_label }}</span>
@@ -500,7 +502,7 @@
                                         v-model="rma_qty[getProductId(product)]"
                                     />
 
-                                    <x-shop::form.control-group.error ::name="'rma_qty[' + getProductId(product) + ']'" class="flex"/>
+                                    <x-shop::form.control-group.error ::name="'rma_qty[' + getProductId(product) + ']'" class="flex" />
                                 </x-shop::form.control-group>
                             </div>
 
@@ -555,7 +557,7 @@
                                             </option>
                                         </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex"/>
+                                        <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex" />
                                     </x-shop::form.control-group>
                                 </div>
                             </p>
@@ -602,7 +604,7 @@
                                             </option>
                                         </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex"/>
+                                        <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex" />
                                     </x-shop::form.control-group>
                                 </div>
                             </p>
@@ -637,7 +639,7 @@
                                             </option>
                                         </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error ::name="'rma_reason_id[' + getProductId(product) + ']'" class="flex"/>
+                                        <x-shop::form.control-group.error ::name="'rma_reason_id[' + getProductId(product) + ']'" class="flex" />
                                     </x-shop::form.control-group>
                                 </div>
                             </p>
@@ -650,7 +652,9 @@
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
                     <!-- Delivery Status -->
-                    <x-shop::form.control-group>
+                    <x-shop::form.control-group
+                        v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'"
+                    >
                         <x-shop::form.control-group.label class="required text-sm mt-4 flex">
                             @lang('admin::app.configuration.index.sales.rma.product-delivery-status')
                         </x-shop::form.control-group.label>
@@ -661,15 +665,12 @@
                             rules="required"
                             v-model="orderStatus"
                             :label="trans('admin::app.configuration.index.sales.rma.product-delivery-status')"
-                            >
+                        >
                             <option value="">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
                             </option>
 
-                            <option
-                                v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'"
-                                value="1"
-                            >
+                            <option value="1">
                                 @lang('shop::app.rma.customer.delivered')
                             </option>
 
@@ -678,10 +679,12 @@
                             </option>
                         </x-shop::form.control-group.control>
 
-                        <x-shop::form.control-group.error name="order_status" class="flex"/>
+                        <x-shop::form.control-group.error name="order_status" class="flex" />
                     </x-shop::form.control-group>
 
-                    <div v-if="orderStatus == '1'">
+                    <input v-else type="hidden" name="order_status" value="0" />
+
+                    <template v-if="orderStatus == '1'">
                         <!-- Delivery Status -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
@@ -708,7 +711,7 @@
                                 </option>
                             </x-shop::form.control-group.control>
 
-                            <x-shop::form.control-group.error name="package_condition" class="flex"/>
+                            <x-shop::form.control-group.error name="package_condition" class="flex" />
                         </x-shop::form.control-group>
 
                         <!-- Return Pickup Address -->
@@ -727,7 +730,7 @@
                                 aria-label="@lang('admin::app.configuration.index.sales.rma.return-pickup-address')"
                             />
 
-                            <x-shop::form.control-group.error name="return_pickup_address" class="flex"/>
+                            <x-shop::form.control-group.error name="return_pickup_address" class="flex" />
                         </x-shop::form.control-group>
 
                         <!-- Return Pickup Time -->
@@ -760,7 +763,7 @@
                                 </option>
                             </x-shop::form.control-group.control>
 
-                            <x-shop::form.control-group.error name="return_pickup_time" class="flex"/>
+                            <x-shop::form.control-group.error name="return_pickup_time" class="flex" />
                         </x-shop::form.control-group>
 
                         <!-- Additionally -->
@@ -772,12 +775,12 @@
 
                                 @if ($attribute->is_required == '1')
                                    @php
-                                    $attribute->is_required = 'required';
-                                   @endphp
+                                        $attribute->is_required = 'required';
+                                    @endphp
                                 @elseif ($attribute->is_required == '0')
                                     @php
-                                    $attribute->is_required = '';
-                                   @endphp
+                                        $attribute->is_required = '';
+                                    @endphp
                                 @endif
 
                                 @switch($attribute->type)
@@ -794,7 +797,7 @@
                                         <x-shop::form.control-group.error
                                             class="flex"
                                             control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
+                                        />
 
                                         @break
 
@@ -812,7 +815,7 @@
                                         <x-shop::form.control-group.error
                                             class="flex"
                                             control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
+                                        />
 
                                         @break
 
@@ -829,7 +832,7 @@
                                         <x-shop::form.control-group.error
                                             class="flex"
                                             control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
+                                        />
 
                                         @break
 
@@ -856,7 +859,7 @@
                                         <x-shop::form.control-group.error
                                             class="flex"
                                             control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
+                                        />
 
                                         @break
 
@@ -883,7 +886,7 @@
                                         <x-shop::form.control-group.error
                                             class="flex"
                                             control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
+                                        />
 
                                         @break
 
@@ -959,14 +962,14 @@
                                         <x-admin::form.control-group.error
                                             control-name="customAttributes[{{ $attribute->code }}]"
                                             class="flex"
-                                            />
+                                        />
 
                                     @break
 
                                 @endswitch
                             </x-shop::form.control-group>
                         @endforeach
-                    </div>
+                    </template>
 
                     <!-- Additional information -->
                     <x-shop::form.control-group>
@@ -986,7 +989,7 @@
                             maxlength="250"
                         />
 
-                        <x-shop::form.control-group.error control-name="information" class="flex"/>
+                        <x-shop::form.control-group.error control-name="information" class="flex" />
                     </x-shop::form.control-group>
 
                     <!-- Images -->
@@ -998,13 +1001,13 @@
                         <x-shop::form.control-group.control
                             type="image"
                             class="!p-0 rounded-xl text-gray-700 mb-0"
-                            name="images[]"
+                            name="images"
                             :label="trans('admin::app.catalog.products.edit.images.title')"
                             :is-multiple="false"
-                            accepted-types="{{core()->getConfigData('sales.rma.setting.allowed_file_extension')}}"
+                            accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />
 
-                        <x-shop::form.control-group.error control-name="images[]" class="flex"/>
+                        <x-shop::form.control-group.error control-name="images" class="flex" />
                     </x-shop::form.control-group>
 
                     @include('shop::customers.account.rma.terms')
@@ -1018,7 +1021,7 @@
             <div
                 v-else
                 class="text-center text-red-600 font-semibold mt-4"
-                >
+            >
                 @lang('shop::app.rma.customer.create.rma-not-available-quotes')
             </div>
         </script>
@@ -1037,7 +1040,6 @@
                 },
 
                 mounted() {
-                    // adding eventBus listener
                     this.$emitter.on('valid-rma', (data) => {
                         if (data.isValid) {
                             this.rmaFormButton = true;
@@ -1069,8 +1071,9 @@
                             }, 1000);
                         } catch (error) {
                             this.rmaFormSubmit = true;
-                            if (error.response && error.response.data && error.response.data.errors) {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
                             }
                         }
                     },

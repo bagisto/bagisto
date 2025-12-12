@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\Admin\RMA\AdminConversationNotification;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
@@ -23,48 +24,6 @@ use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusNotification;
 
 class RMAController extends Controller
 {
-    /**
-     * @var string
-     */
-    public const ACCEPT = 'Accept';
-
-    /**
-     * @var string
-     */
-    public const RECEIVEDPACKAGE = 'Received Package';
-
-    /**
-     * @var string
-     */
-    public const ITEMCANCELED = 'Item Canceled';
-
-    /**
-     * @var string
-     */
-    public const ORDERCANCELED = 'Canceled';
-
-    /**
-     * @var string
-     */
-    public const CANCELED = 'canceled';
-
-    /**
-     * @var int
-     */
-    public const ACTIVE = 1;
-
-    /**
-     * RMA Status
-     *
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
-    /**
-     * @var int
-     */
-    public const INACTIVE = 0;
-
     /**
      * Create a new controller instance.
      *
@@ -119,30 +78,24 @@ class RMAController extends Controller
             'rma_id',
         ]);
 
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+
         if (! empty($data['close_rma'])) {
-            $rma = $this->rmaRepository->find($data['rma_id']);
-
-            if (empty($rma)) {
-                session()->flash('error', 'Something Went Wrong');
-
-                return back();
-            }
-
             $order = $this->orderRepository->find($rma->order_id);
 
             $order->update(['status' => 'pending']);
 
             $this->rmaRepository->find($data['rma_id'])->update([
-                'status'           => self::ACTIVE,
-                'request_status'   => self::PENDING,
-                'status'           => self::INACTIVE,
-                'order_status'     => self::INACTIVE,
+                'status'           => RMA::ACTIVE->value,
+                'request_status'   => RMA::PENDING->value,
+                'status'           => RMA::INACTIVE->value,
+                'order_status'     => RMA::INACTIVE->value,
             ]);
 
             $requestData = [
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
                 'rma_id'     => $data['rma_id'],
-                'is_admin'   => self::ACTIVE,
+                'is_admin'   => RMA::ACTIVE->value,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];
@@ -249,7 +202,7 @@ class RMAController extends Controller
         $totalCount = (int) $this->rmaItemsRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
 
         if ($totalCount > 0) {
-            if ($status['request_status'] == self::ITEMCANCELED) {
+            if ($status['request_status'] == RMA::ITEMCANCELED->value) {
 
                 foreach ($ordersRma as $orderRma) {
                     $rmaItems = $this->rmaItemsRepository->findWhere([
@@ -257,16 +210,16 @@ class RMAController extends Controller
                     ]);
 
                     foreach ($rmaItems as $key => $rmaItem) {
-                        $item1 = $this->orderItemRepository->find($rmaItem->order_item_id);
+                        $firstItem = $this->orderItemRepository->find($rmaItem->order_item_id);
 
-                        if ($item1->parent_id != null) {
-                            $parentItem = $this->orderItemRepository->find($item1->parent_id);
+                        if ($firstItem->parent_id != null) {
+                            $parentItem = $this->orderItemRepository->find($firstItem->parent_id);
 
                             $parentItem->update([
                                 'qty_canceled' => $rmaItem->quantity,
                             ]);
                         } else {
-                            $item1->update([
+                            $firstItem->update([
                                 'qty_canceled' => $rmaItem->quantity,
                             ]);
                         }
@@ -280,7 +233,7 @@ class RMAController extends Controller
                 Event::dispatch('sales.order.cancel.after', $order);
             }
 
-            if ($status['request_status'] == self::RECEIVEDPACKAGE) {
+            if ($status['request_status'] == RMA::RECEIVEDPACKAGE->value) {
                 $refund = $this->createRefund($rma);
 
                 if (! $refund) {
@@ -297,11 +250,11 @@ class RMAController extends Controller
             }
 
             if ($order->total_qty_ordered == $totalCount) {
-                if ($status['request_status'] == self::ITEMCANCELED) {
-                    $status['order_status'] = self::ORDERCANCELED;
+                if ($status['request_status'] == RMA::ITEMCANCELED->value) {
+                    $status['order_status'] = RMA::CANCELED->value;
 
-                    $order->update(['status' => self::CANCELED]);
-                } elseif ($status['request_status'] == self::ACCEPT) {
+                    $order->update(['status' => RMA::CANCELED->value]);
+                } else if ($status['request_status'] == RMA::ACCEPT->value) {
                     $this->rmaRepository->find($status['rma_id'])->update(['status' => 0]);
                 }
             }
@@ -320,11 +273,9 @@ class RMAController extends Controller
         if ($updateStatus) {
             try {
                 Mail::queue(new CustomerRMAStatusNotification($mailDetails));
+            } catch (\Exception $e) {}
 
-                session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
-            } catch (\Exception $e) {
-                session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
-            }
+            session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
             return redirect()->back();
         }

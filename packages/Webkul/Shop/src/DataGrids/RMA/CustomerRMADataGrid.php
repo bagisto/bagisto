@@ -5,56 +5,34 @@ namespace Webkul\Shop\DataGrids\RMA;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
 class CustomerRMADataGrid extends DataGrid
 {
     /**
-     * Pending status.
-     * 
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
-    /**
-     * Closed status.
-     * 
-     * @var string
-     */
-    public const CLOSED = 'closed';
-
-    /**
-     * Canceled status.
-     * 
-     * @var string
-     */
-    public const CANCELED = 'canceled';
-
-    /**
      * Constructor for the class.
      *
      * @return void
      */
-    public function __construct(
-        protected RMAStatusRepository $rmaStatusRepository,
-    ) {}
+    public function __construct(protected RMAStatusRepository $rmaStatusRepository) {}
 
     /**
      * Prepare query builder.
      */
     public function prepareQueryBuilder(): Builder
     {
-        $customerId = null;
+        $customer = auth('customer');
+
+        if ($customer->check()) {
+            session()->forget(['guestOrderId', 'guestEmail']);
+        }
+
+        $customerId = $customer->id() ?? null;
 
         $guestEmail = session('guestEmail');
 
-        if (auth()->guard('customer')->check()) {
-            session()->forget(['guestOrderId', 'guestEmail']);
-
-            $customerId = auth()->guard('customer')->id();
-        }
-
-        $orderId = session()->get('guestOrderId') ?? null;
+        $orderId = session('guestOrderId');
 
         $tablePrefix = DB::getTablePrefix();
 
@@ -66,7 +44,7 @@ class CustomerRMADataGrid extends DataGrid
                 'rma.status',
                 'rma.order_id',
                 'rma.request_status',
-                'rma.request_status as rmaStatus',
+                'rma.request_status as rma_status',
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
@@ -136,8 +114,8 @@ class CustomerRMADataGrid extends DataGrid
                     ->first();
 
                 if (
-                    $row->order_status == self::CANCELED
-                    && $row->order_status == self::CLOSED
+                    $row->order_status == RMA::CANCELED->value
+                    && $row->order_status == RMA::CLOSED->value
                 ) {
                     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
@@ -198,9 +176,7 @@ class CustomerRMADataGrid extends DataGrid
             'icon'      => 'icon-cancel',
             'method'    => 'GET',
             'condition' => function ($row) {
-                if (
-                    $row->rmaStatus != 'solved'
-                ) {
+                if ($row->rma_status != RMA::SOLVED->value) {
                     return false;
                 }
 

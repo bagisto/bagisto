@@ -5,31 +5,11 @@ namespace Webkul\Admin\DataGrids\Sales\RMA;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
 class RMADataGrid extends DataGrid
 {
-    /**
-     * Pending status constant.
-     * 
-     * @var string
-     */
-    public const PENDING = 'pending';
-
-    /**
-     * Closed status constant.
-     *
-     * @var string
-     */
-    public const CLOSED = 'closed';
-
-    /**
-     * Canceled status constant.
-     * 
-     * @var string
-     */
-    public const CANCELED = 'canceled';
-
     /**
      * Constructor.
      *
@@ -144,8 +124,8 @@ class RMADataGrid extends DataGrid
                     ->first();
 
                 if (
-                    $row->order_status == self::CANCELED
-                    && $row->order_status == self::CLOSED
+                    $row->order_status == RMA::CANCELED->value
+                    && $row->order_status == RMA::CLOSED->value
                 ) {
                     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }

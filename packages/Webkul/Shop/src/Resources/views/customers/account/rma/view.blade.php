@@ -1,439 +1,273 @@
 <x-shop::layouts.account>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('shop::app.rma.customer.create.view')
     </x-slot>
 
-    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="rma.view"></x-shop::breadcrumbs>
     @endSection
 
-    <div class="mx-4">
+    <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
     </div>
 
     @php
-        $show = true;
-
+        $canCloseRma = true;
+        $canReopenRma = false;
+        
+        // Determine if RMA can be closed
         if (
-            is_null($rma->request_status)
-            || $rma->request_status == 'Received Package'
-            || $rma->request_status == 'Solved'
+            is_null($rma->request_status) ||
+            in_array($rma->request_status, ['received_package', 'solved', 'item_canceled', 'declined', 'canceled']) ||
+            in_array($rma->order->status, ['canceled', 'closed']) ||
+            $rma->status == 1
         ) {
-            if ($rma->status == 1) {
-                $show = false;
-            }
-        } else if (
-            $rma->request_status == 'Item Canceled'
-            || $rma->request_status == 'Declined'
-            || $rma->request_status == 'Canceled'
-            || $rma->order->status == 'canceled'
-            || $rma->order->status == 'closed'
-        ) {
-            $show = false;
+            $canCloseRma = false;
         }
 
-        $currentDate = \Carbon\Carbon::now();
+        // Check if RMA can be reopened
+        if (
+            core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes' &&
+            $rma->request_status == 'canceled'
+        ) {
+            $canReopenRma = true;
+        }
 
+        // Check if RMA has expired
         $expireDays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
+        $daysSinceCreation = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($rma->created_at));
+        $isExpired = $daysSinceCreation > $expireDays && $daysSinceCreation != 0;
 
-        $newDateTime = \Carbon\Carbon::parse($rma->created_at);
-
-        $differenceInDays = $currentDate->diffInDays($newDateTime);
-
-        $checkDateExpires = false;
-
-        if (
-            $differenceInDays > $expireDays
-            && $differenceInDays != 0
-        ) {
-            $checkDateExpires = true;
-        }
-
-        $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
+        // Get RMA status color
+        $rmaStatus = app('Webkul\RMA\Repositories\RMAStatusRepository')
             ->where('title', $rma->request_status)
             ->first();
-
-        $rmaStatusColor = '';
-
-        if ($rmaStatusData) {
-            $rmaStatusColor = $rmaStatusData->color;
-        }
+        $statusColor = $rmaStatus?->color ?? '';
     @endphp
 
     <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="mb-8 flex items-center max-md:mb-5">
+            <!-- Back Button -->
+            <a
+                class="grid md:hidden"
+                href="{{ route('shop.customers.account.index') }}"
+            >
+                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+            </a>
+
             <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
-                @lang('admin::app.sales.rma.all-rma.index.datagrid.id') {{ '#'.$rma->id }}
+                @lang('admin::app.sales.rma.all-rma.index.datagrid.id') #{{ $rma->id }}
             </h2>
         </div>
 
-        <!-- Item(s) Requested for RMA -->
-        <div class="mt-8 flex items-center justify-between">
-            <h2 class="text-xl font-medium">
+        <!-- RMA Information -->
+        <div class="mt-8">
+            <h2 class="text-xl font-medium mb-5">
                 @lang('shop::app.rma.view-customer-rma.heading')
             </h2>
+
+            <div class="rounded-xl border overflow-hidden">
+                <div class="p-6 space-y-4">
+                    <!-- Request Date -->
+                    <div class="grid grid-cols-[200px_1fr] gap-4">
+                        <span class="font-medium">@lang('shop::app.rma.view-customer-rma-content.request-on')</span>
+                        <span class="text-gray-600">{{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}</span>
+                    </div>
+
+                    <!-- Order ID -->
+                    <div class="grid grid-cols-[200px_1fr] gap-4">
+                        <span class="font-medium">@lang('shop::app.rma.view-customer-rma.order-id')</span>
+
+                        <a href="{{ route('shop.customers.account.orders.view', $rma->order_id) }}" 
+                           class="text-blue-600 hover:underline" target="_blank">
+                            #{{ $rma->order_id }}
+                        </a>
+                    </div>
+
+                    <!-- Additional Fields -->
+                    @if (! empty($rma->additionalFields))
+                        @foreach ($rma->additionalFields as $field)
+                            <div class="grid grid-cols-[200px_1fr] gap-4">
+                                <span class="font-medium">{{ $field->customField->label }}</span>
+                                <span class="text-gray-600">{{ $field->field_value }}</span>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    <!-- Additional Information -->
+                    @if (!empty($rma->information))
+                        <div class="grid grid-cols-[200px_1fr] gap-4">
+                            <span class="font-medium">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
+                            <span class="text-gray-600">{{ $rma->information }}</span>
+                        </div>
+                    @endif
+
+                    <!-- Images -->
+                    @if (! empty($rma->images) && $rma->images->count() > 0)
+                        <div class="grid grid-cols-[200px_1fr] gap-4">
+                            <span class="font-medium">@lang('shop::app.rma.view-customer-rma.images')</span>
+
+                            <div class="flex gap-2 flex-wrap">
+                                @foreach ($rma->images as $image)
+                                    <a href="{{ Storage::url($image['path']) }}" target="_blank">
+                                        <img src="{{ Storage::url($image['path']) }}" 
+                                             class="w-24 h-24 object-cover rounded border shadow-sm hover:shadow-md transition">
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
 
-        <div class="mt-5 grid gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
-            <!-- Rma information -->
-            <div class="relative mt-4 overflow-x-auto rounded-xl border">
-                <x-table>
-                    <div class="mt-4 grid grid-cols-1">
-                    <!-- Request On -->
-                        <div class="grid w-full grid-cols-[2fr_3fr] px-8 py-3">
-                            <p class="text-base font-medium">
-                                @lang('shop::app.rma.view-customer-rma-content.request-on')
-                            </p>
+        <!-- RMA Items -->
+        <div class="mt-8">
+            <h2 class="text-xl font-medium mb-5">
+                @lang('shop::app.rma.view-customer-rma.items-request')
+            </h2>
 
-                            <p class="text-base font-medium text-[#6E6E6E]">
-                                {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
-                            </p>
-                        </div>
+            <div class="rounded-xl border overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.image') / @lang('shop::app.rma.table-heading.product-name')
+                            </th>
+                            
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.sku')
+                            </th>
+                            
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.price')
+                            </th>
+                            
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.rma-qty')
+                            </th>
+                            
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.resolution-type')
+                            </th>
+                            
+                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                                @lang('shop::app.rma.table-heading.reason')
+                            </th>
+                        </tr>
+                    </thead>
 
-                        <!-- Order Id -->
-                        <div class="grid w-full grid-cols-[2fr_3fr] px-8 py-3">
-                            <p class="text-base font-medium">
-                                @lang('shop::app.rma.view-customer-rma.order-id')
-                            </p>
+                    <tbody class="divide-y">
+                        @foreach($rma->items as $item)
+                            <tr>
+                                <td class="px-4 py-4">
+                                    <div class="flex items-center gap-3">
+                                        @if ($item->orderItem->product?->images?->first())
+                                            <img 
+                                                src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
+                                                 class="w-16 h-16 object-cover rounded border"
+                                            />
+                                        @else
+                                            <div class="w-16 h-16 border border-dashed rounded flex items-center justify-center text-gray-300">
+                                                <span class="text-xs">No Image</span>
+                                            </div>
+                                        @endif
 
-                            <p class="text-base font-medium text-[#2633aa] hover:underline">
-                                <a
-                                    href="{{ route('shop.customers.account.orders.view', $rma->order_id) }}"
-                                    target="_blank"
-                                >
-                                    {{ '#' . $rma->order_id }}
-                                </a>
-                            </p>
-                        </div>
-
-                        <!-- Additional Fields -->
-                        @if (! empty($rma->additionalFields))
-                            @foreach ($rma->additionalFields as $key => $additionalField)
-                                <div class="grid w-full grid-cols-[2fr_3fr] px-8 py-3">
-                                    <p class="text-base font-medium">
-                                        {{ $additionalField?->customField?->label }} :
-                                    </p>
-
-                                    <p class="text-base font-medium text-[#6E6E6E]">
-                                        {{ $additionalField?->field_value }}
-                                    </p>
-                                </div>
-                            @endforeach
-                        @endif
-
-                        <!-- Additional Information -->
-                        @if (! empty($rma->information))
-                            <div class="grid w-full grid-cols-[2fr_3fr] px-8 py-3">
-                                <p class="text-base font-medium">
-                                    @lang('shop::app.rma.view-customer-rma.additional-information')
-                                </p>
-
-                                <p class="text-base font-medium text-[#6E6E6E]">
-                                    {{ $rma->information }}
-                                </p>
-                            </div>
-                        @endif
-
-                        <!-- Images shown which is uploaded -->
-                        <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
-                            @if ( ! empty($rma->images) || $rma->images->count() > 0 )
-
-                                <p class="text-base font-medium">
-                                    @lang('shop::app.rma.view-customer-rma.images')
-                                </p>
-
-                                <p class="flex gap-1" style="max-width: 150px;">
-                                    @foreach ($rma->images as $image)
-                                        <a
-                                            href="{{ Storage::url($image['path']) }}"
-                                            target="_blank"
-                                        >
-                                            <img
-                                                class="box-shadow m-1 h-24 w-64 rounded"
-                                                src="{{ Storage::url($image['path']) }}"
+                                        <div>
+                                            <a 
+                                                href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}" 
+                                                class="text-blue-600 hover:underline text-sm" 
+                                                target="_blank"
                                             >
-                                        </a>
-                                    @endforeach
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                </x-table>
-            </div>
+                                                {{ $item->orderItem->name }}
+                                            </a>
 
-            <!-- Item(s) Requested for RMA -->
-            <div class="mt-8 flex items-center justify-between">
-                <h2 class="text-xl font-medium">
-                    @lang('shop::app.rma.view-customer-rma.items-request')
-                </h2>
-            </div>
-
-            <!-- Order information -->
-            <div class="relative mt-4 overflow-x-auto rounded-xl border">
-                <x-table>
-                    <x-table.thead>
-                        @php($lang = Lang::get('shop::app.rma.table-heading'))
-
-                        <x-table.tr>
-                            <x-admin::table.thead.tr class="text-gray-500">
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.image') / @lang('shop::app.rma.table-heading.product-name')
-                                    </x-admin::table.th>
-
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.sku')
-                                    </x-admin::table.th>
-
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.price')
-                                    </x-admin::table.th>
-
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.rma-qty') /  @lang('shop::app.rma.table-heading.order-qty')
-                                    </x-admin::table.th>
-
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.resolution-type')
-                                    </x-admin::table.th>
-
-                                    <x-admin::table.th>
-                                        @lang('shop::app.rma.table-heading.reason')
-                                    </x-admin::table.th>
-                            </x-admin::table.thead.tr>
-                        </x-table.tr>
-                    </x-table.thead>
-
-                    <x-table.tbody>
-                        @foreach($rma->items as $key => $rmaItem)
-                            <x-table.tr>
-                                <!-- Product Name -->
-                                <x-admin::table.td class="dark:text-gray-300">
-                                    @if (empty($rmaItem->orderItem->product?->images?->pluck('path')['0']))
-                                        <div class="w-[60px] h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                            <img
-                                                src="{{ asset('themes/admin/default/build/assets/front-93490c30.svg') }}"
-                                                alt="Sample Images"
-                                                target="new"
-                                            >
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                @lang('admin::app.dashboard.index.product-image')
-                                            </p>
+                                            {!! app('Webkul\RMA\Helpers\Helper')->getOptionDetailHtml($item->orderItem->additional['attributes'] ?? []) !!}
                                         </div>
+                                    </div>
+                                </td>
 
-                                        <br/>
-                                        <p style="width: 100px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: break-spaces;">
-                                            <a
-                                                target="_blank"
-                                                class="text-blue-600 hover:underline"
-                                                href="{{ route('shop.product_or_category.index', $rmaItem->orderItem->product->url_key) }}"
-                                            >
-                                                {!! $rmaItem->orderItem['name'] !!}
-                                                {!! app('Webkul\RMA\Helpers\Helper')->getOptionDetailHtml($rmaItem->orderItem->additional['attributes'] ?? []) !!}
-                                            </a>
-                                        </p>
-                                    @else
-                                        <a
-                                            target="new"
-                                            href="{{ asset('storage/' . $rmaItem->orderItem->product->images->pluck('path')['0']) }}"
-                                        >
-                                            <img
-                                                src="{{ asset('storage/'. $rmaItem->orderItem->product->images->pluck('path')['0']) }}"
-                                                alt="Sample Images"
-                                                target="new"
-                                                class="w-[60px] h-[60px] max-w-[60px] max-h-[60px] cursor-pointer shadow-2xl border"
-                                            >
-                                        </a>
-
-                                        <br/>
-                                        <p style="width: 100px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: break-spaces;">
-                                            <a
-                                                target="_blank"
-                                                class="text-blue-600 hover:underline"
-                                                href="{{ route('shop.product_or_category.index', $rmaItem->orderItem->product->url_key) }}"
-                                            >
-                                                {!! $rmaItem->orderItem['name'] !!}
-                                                {!! app('Webkul\RMA\Helpers\Helper')->getOptionDetailHtml($rmaItem->orderItem->additional['attributes'] ?? []) !!}
-                                            </a>
-                                        </p>
-                                    @endif
-                                </x-admin::table.td>
-
-                                <!-- SKU -->
-                                <x-table.td>
-                                    <p style="width: 100px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: break-spaces;">
-                                        {{ $rmaItem?->orderItem?->product?->sku }}
-                                    </p>
-                                </x-table.td>
-
-                                <!-- Price -->
-                                <x-table.td>
-                                    {!! core()->formatPrice($rmaItem?->orderItem?->product?->price, $rmaItem?->orderItem?->order?->order_currency_code) !!}
-                                </x-table.td>
-
-                                <!-- RMA Quantity -->
-                                <x-table.td>
-                                    {!! $rmaItem?->quantity !!}
-
-                                    <br/>
-
-                                    {{ $rmaItem?->orderItem?->qty_ordered }}
-                                </x-table.td>
-
-                                <!-- Resolution -->
-                                <x-admin::table.td>
-                                    {!! ucwords($rmaItem->resolution) !!}
-                                </x-admin::table.td>
-
-                                <!-- Reason -->
-                                <x-table.td>
-                                    {!! wordwrap($rmaItem->getReasons->title, 15, "<br>\n") !!}
-                                </x-table.td>
-                            </x-table.tr>
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    {{ $item->orderItem->product->sku }}
+                                </td>
+                                
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    {!! core()->formatPrice($item->orderItem->product->price, $item->orderItem->order->order_currency_code) !!}
+                                </td>
+                                
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    {{ $item->quantity }} / {{ $item->orderItem->qty_ordered }}
+                                </td>
+                                
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    {{ ucwords($item->resolution) }}
+                                </td>
+                                
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    {{ $item->getReasons->title }}
+                                </td>
+                            </tr>
                         @endforeach
-                    </x-table.tbody>
-                </x-table>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Status detail of rma -->
-            <div class="mt-8 flex items-center justify-between">
-                <h2 class="text-xl font-medium">
-                    @lang('shop::app.rma.view-customer-rma.status-details')
-                </h2>
-            </div>
+        <!-- Status Details -->
+        <div class="mt-8">
+            <h2 class="text-xl font-medium mb-5">
+                @lang('shop::app.rma.view-customer-rma.status-details')
+            </h2>
 
-            <div class="relative mt-4 overflow-x-auto rounded-xl border">
-                <div class="mt-4 grid grid-cols-1">
-                    <!-- RMA status -->
-                    <div class="grid grid-cols-1 text-white">
-                        <div class="grid grid-cols-[2fr_3fr] px-8  py-3">
-                            <p class="text-base text-black font-medium max-sm:text-sm">
-                                @lang('shop::app.rma.view-customer-rma-content.rma-status')
-                            </p>
+            <div class="rounded-xl border p-6 space-y-4">
+                <!-- RMA Status -->
+                <div class="grid grid-cols-[200px_1fr] gap-4">
+                    <span class="font-medium">
+                        @lang('shop::app.rma.view-customer-rma-content.rma-status')
+                    </span>
 
-                            <span @if ($rma->status == 1) class="hidden" @endif>
-                                @if ($rma->request_status == 'solved')
-                                    <span class="label-active py-1">
-                                        @lang('shop::app.rma.status.status-name.solved')
-                                    </span>
-                                @elseif(
-                                    $rma->order->status == 'canceled'
-                                    || $rma->order->status == 'closed'
-                                )
-                                    <span
-                                        class="label-canceled py-1 text-xs"
-                                    >
-                                        @lang('shop::app.rma.status.status-name.item-canceled')
-                                    </span>
-                                @else
-
-                                    <span
-                                        class="label-active py-1 text-xs"
-                                        style="background: {{ $rmaStatusColor }}"
-                                    >
-                                        {{ $rma->request_status }}
-                                    </span>
-                                @endif
+                    <div>
+                        @if ($rma->status == 1 || $rma->request_status == 'solved')
+                            <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                                @lang('shop::app.rma.status.status-name.solved')
                             </span>
-
-                            <!-- Status solved -->
-                            <span @if ($rma->status == 0) class="hidden" @endif>
-                                <span class="label-active py-1">
-                                    @lang('shop::app.rma.status.status-name.solved')
-                                </span>
+                        @elseif(in_array($rma->order->status, ['canceled', 'closed']))
+                            <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-800">
+                                @lang('shop::app.rma.status.status-name.item-canceled')
                             </span>
-                        </div>
-
-                        <!-- Delivery status -->
-                        <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
-                            <p class="text-base text-black font-medium max-sm:text-sm">
-                                @lang('shop::app.rma.view-customer-rma-content.order-status')
-                            </p>
-
-                            <span
-                                @if ($rma->order_status == '1')
-                                    class="label-active py-1 text-xs"
-                                @elseif (
-                                        $rma->order->status == 'canceled'
-                                        || $rma->order->status == 'closed'
-                                    )
-                                    class="label-{{$rma->order->status}} py-1 text-xs"
-                                @else
-                                    class="label-info py-1 text-xs"
-                                @endif
-                            >
-                                @if ($rma->order_status == '1')
-                                    @lang('shop::app.rma.customer.delivered')
-                                @elseif (
-                                    $rma->order->status == 'canceled'
-                                    || $rma->order->status == 'closed'
-                                )
-                                    @lang('shop::app.rma.customer.'. $rma->order->status)
-                                @else
-                                    @lang('shop::app.rma.customer.undelivered')
-                                @endif
+                        @else
+                            <span class="px-3 py-1 text-xs rounded-full" style="background: {{ $statusColor }}20; color: {{ $statusColor }}">
+                                {{ format_title_case($rma->request_status) }}
                             </span>
-                        </div>
-
-                        @if (! $checkDateExpires)
-                            @if (
-                                $rma->status == 1
-                                && $rma->request_status != 'Declined'
-                                && $rma->request_status != 'Pending'
-                            )
-                                <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
-                                    <!-- Close RMA -->
-                                    <p class="text-base text-black font-medium">
-                                        @lang('shop::app.rma.view-customer-rma.close-rma')
-                                    </p>
-
-                                    <!-- RMA solved -->
-                                    <p class="text-base font-medium text-[#6E6E6E]">
-                                        @lang('shop::app.rma.status.status-quotes.solved')
-                                    </p>
-                                </div>
-                            @endif
-
-                            <!-- RMA solved -->
-                            @if ($rma->request_status == 'Item Canceled')
-                                <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
-                                    <p  class="text-base text-black font-medium">
-                                        @lang('shop::app.rma.view-customer-rma.close-rma')
-                                    </p>
-
-                                    <p class="text-base font-medium text-[#6E6E6E]">
-                                        @lang('shop::app.rma.status.status-quotes.solved-by-admin')
-                                    </p>
-                                </div>
-                            @endif
-
-                            @if ($rma->request_status == 'Declined')
-                                <div class="grid grid-cols-[2fr_3fr] px-8 py-3">
-                                    <p class="text-base text-black font-medium">
-                                        @lang('shop::app.rma.view-customer-rma.close-rma')
-                                    </p>
-
-                                    <p class="text-base font-medium text-[#6E6E6E]">
-                                        @lang('shop::app.rma.status.status-quotes.declined-admin')
-                                    </p>
-                                </div>
-                            @endif
                         @endif
                     </div>
                 </div>
-            </div>
 
-            <option-wrapper></option-wrapper>
+                <!-- Order Status -->
+                <div class="grid grid-cols-[200px_1fr] gap-4">
+                    <span class="font-medium">
+                        @lang('shop::app.rma.view-customer-rma-content.order-status')
+                    </span>
+                    
+                    <span class="px-3 py-1 text-xs rounded-full w-fit {{ $rma->order_status == '1' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                        @if ($rma->order_status == '1')
+                            @lang('shop::app.rma.customer.delivered')
+                        @else
+                            @lang('shop::app.rma.customer.undelivered')
+                        @endif
+                    </span>
+                </div>
+            </div>
         </div>
+
+        <option-wrapper></option-wrapper>
     </div>
 
     @push('scripts')
         <script type="text/x-template" id="option-wrapper-template">
-            @if (! $checkDateExpires)
-                @if ($show)
+            @if (! $isExpired)
+                @if ($canCloseRma)
                     <div class="relative mt-3 overflow-x-auto rounded-xl border px-8 py-4">
-                        <!-- Close rma if solved -->
                         <div class="mt-2">
                             <p class="text-xl font-medium">
                                 @lang('shop::app.rma.view-customer-rma.close-rma')
@@ -450,14 +284,9 @@
                                 @csrf
                                 <div class="grid w-full gap-4">
                                     <div>
-                                        <input
-                                            type="hidden"
-                                            name="rma_id"
-                                            value="{{ $rma->id }}"
-                                        >
+                                        <input type="hidden" name="rma_id" value="{{ $rma->id }}">
 
                                         <x-shop::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
-
                                             <x-shop::form.control-group.control
                                                 type="checkbox"
                                                 id="close_rma"
@@ -467,14 +296,12 @@
                                                 value="1"
                                             />
 
-                                            <label
-                                                class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
-                                                for="close_rma"
-                                            >
+                                            <label class="cursor-pointer text-xs font-medium text-gray-600" for="close_rma">
                                                 @lang('shop::app.rma.view-customer-rma.status-quotes')
                                             </label>
                                         </x-shop::form.control-group>
                                     </div>
+
                                     <div>
                                         <button
                                             type="submit"
@@ -489,12 +316,8 @@
                         </div>
                     </div>
                 @else
-                    @if (
-                        core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes'
-                        && $rma->request_status == 'Canceled'
-                    )
+                    @if ($canReopenRma)
                         <div class="relative mt-3 overflow-x-auto rounded-xl border px-8 py-4">
-                            <!-- Close rma if solved -->
                             <div class="mt-2">
                                 <p class="text-xl font-medium">
                                     @lang('shop::app.rma.view-customer-rma.status-reopen')
@@ -511,13 +334,8 @@
                                     @csrf
                                     <div class="flex w-full gap-4">
                                         <div>
-                                            <input
-                                                type="hidden"
-                                                name="rma_id"
-                                                value="{{ $rma->id }}"
-                                            >
+                                            <input type="hidden" name="rma_id" value="{{ $rma->id }}">
 
-                                            <!-- Checkbox for closing RMA -->
                                             <input
                                                 type="checkbox"
                                                 id="close_rma"
@@ -527,17 +345,11 @@
                                                 data-vv-as="{{ trans('shop::app.rma.validation.close-rma') }}"
                                             >
 
-                                            <label
-                                                for="close_rma"
-                                                class="required text-xs font-medium"
-                                            >
+                                            <label for="close_rma" class="required text-xs font-medium">
                                                 @lang('shop::app.rma.customer.create.reopen-request')
                                             </label>
 
-                                            <p
-                                                v-if="error"
-                                                style="color:red;"
-                                            >
+                                            <p v-if="error" style="color:red;">
                                                 @lang('shop::app.rma.view-customer-rma.term')
                                             </p>
                                         </div>
@@ -559,7 +371,7 @@
                 @endif
             @endif
 
-            <!-- Enter message -->
+            <!-- Conversations -->
             <div class="mt-8">
                 <p class="required text-xl font-medium">
                     @lang('shop::app.rma.view-customer-rma.conversations')
@@ -568,25 +380,10 @@
 
             <div class="relative mt-3 overflow-x-auto rounded-xl border p-2">
                 <div class="border rounded-lg p-3">
-                    <x-shop::form
-                        v-slot="{ meta, errors, handleSubmit }"
-                        as="div"
-                    >
-                        <form
-                            @submit="handleSubmit($event, chatSubmit)"
-                            ref="chatForm"
-                        >
-                            <input
-                                type="hidden"
-                                name="is_admin"
-                                value="0"
-                            />
-
-                            <input
-                                type="hidden"
-                                name="rma_id"
-                                value="{{ $rma->id }}"
-                            />
+                    <x-shop::form v-slot="{ meta, errors, handleSubmit }" as="div">
+                        <form @submit="handleSubmit($event, chatSubmit)" ref="chatForm">
+                            <input type="hidden" name="is_admin" value="0"/>
+                            <input type="hidden" name="rma_id" value="{{ $rma->id }}"/>
 
                             <x-shop::form.control-group>
                                 <div class="bg-white !pl-0 !pt-2">
@@ -602,20 +399,13 @@
                                     >
                                     </x-shop::form.control-group.control>
 
-                                    <x-shop::form.control-group.error
-                                        class="flex"
-                                        control-name="message"
-                                    >
+                                    <x-shop::form.control-group.error class="flex" control-name="message">
                                     </x-shop::form.control-group.error>
                                 </div>
                             </x-shop::form.control-group>
 
                             <div class="mb-4">
-                                <button
-                                    type="button"
-                                    id="newFileInput"
-                                    class="transparent-button text-sm hover:bg-gray-200 relative"
-                                >
+                                <button type="button" id="newFileInput" class="transparent-button text-sm hover:bg-gray-200 relative">
                                     + @lang('admin::app.sales.rma.all-rma.view.add-attachments')
 
                                     <input
@@ -628,20 +418,15 @@
                                 </button>
 
                                 <input type="hidden" name="removed_key" id="removed_key" />
-
                                 <div id="attachmentPreview"></div>
                             </div>
 
                             <div class="flex justify-end">
-                                <button
-                                    class="primary-button"
-                                    :disabled="!isChatSend"
-                                >
+                                <button class="primary-button" :disabled="!isChatSend">
                                     <svg v-if="!isChatSend" aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                     </svg>
-
                                     @lang('admin::app.sales.rma.all-rma.view.send-message-btn')
                                 </button>
                             </div>
@@ -665,23 +450,13 @@
                         >
                             <div class="title">
                                 @lang('shop::app.rma.conversation-texts.by')
-                                    <strong v-if="message.is_admin == 1">
-                                        @lang('shop::app.rma.view-customer-rma.admin')
-                                    </strong>
-                                    <strong v-else>
-                                        {{ auth()->guard('customer')->user()->name }}
-                                    </strong>
+                                <strong v-if="message.is_admin == 1">@lang('shop::app.rma.view-customer-rma.admin')</strong>
+                                <strong v-else>{{ auth()->guard('customer')->user()->name }}</strong>
                                 @lang('shop::app.rma.conversation-texts.on')
-
-                                @{{ dateFormat( message.created_at) }}
+                                @{{ dateFormat(message.created_at) }}
                             </div>
 
-                            <div
-                                class="value"
-                                style="margin-top:10px; word-break: break-all;"
-                                v-html="message.message"
-                            >
-                            </div>
+                            <div class="value" style="margin-top:10px; word-break: break-all;" v-html="message.message"></div>
 
                             <hr v-if="message.attachment"/>
 
@@ -697,82 +472,48 @@
                         </div>
 
                         <div v-else>
-                            <div
-                                class="icon-listing"
-                                style="font-size:150px; color:#d7d7d7;"
-                            >
-                            </div>
-
+                            <div class="icon-listing" style="font-size:150px; color:#d7d7d7;"></div>
                             <p class="flex justify-center text-gray-300">
                                 @lang('shop::app.rma.conversation-texts.no-record')
                             </p>
                         </div>
                     </div>
                 </div>
+
                 <x-shop::modal ref="attachmentModal">
-                    <!-- Modal Header -->
                     <x-slot:header>
                         <p class="text-lg font-bold text-gray-800">
                             @lang('admin::app.sales.rma.all-rma.view.attachment')
                         </p>
                     </x-slot>
 
-                    <!-- Modal Content -->
                     <x-slot:content>
-                        {!! view_render_event('bagisto.admin.sales.rma.view.message.attachment.modal.content.before') !!}
-
-                         <!-- Display Image -->
-                         <img
-                            v-if="
-                                    messagePath
-                                    && (
-                                        this.getAttachmentExtension === 'jpg'
-                                        || this.getAttachmentExtension === 'jpeg'
-                                        || this.getAttachmentExtension === 'png'
-                                        || this.getAttachmentExtension === 'gif'
-                                    )"
+                        <img
+                            v-if="messagePath && (getAttachmentExtension === 'jpg' || getAttachmentExtension === 'jpeg' || getAttachmentExtension === 'png' || getAttachmentExtension === 'gif')"
                             :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
                             class="min-h-[500px] min-w-[500px] max-h-[500px] max-w-[500px] rounded m-auto"
                         />
 
-                        <!-- Display PDF -->
                         <embed
-                            v-if="
-                                messagePath
-                                && this.getAttachmentExtension === 'pdf'
-                                "
+                            v-if="messagePath && getAttachmentExtension === 'pdf'"
                             :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
                             width="100%" height="500px"
                             type="application/pdf"
                         />
 
-                        <!-- Display Video -->
                         <video
-                            v-if="
-                                messagePath
-                                && (
-                                    this.getAttachmentExtension === 'mp4'
-                                    || this.getAttachmentExtension === 'webm'
-                                    || this.getAttachmentExtension === 'ogg'
-                                )"
+                            v-if="messagePath && (getAttachmentExtension === 'mp4' || getAttachmentExtension === 'webm' || getAttachmentExtension === 'ogg')"
                             controls
                             class="w-full h-auto max-h-[500px] rounded m-auto"
                         >
                             <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
                             Your browser does not support the video tag.
                         </video>
-
-                        {!! view_render_event('bagisto.admin.sales.rma.view.message.attachment.modal.content.after') !!}
                     </x-slot>
 
-                    <!-- Modal Footer -->
                     <x-slot:footer>
                         <div class="flex items-center gap-x-2.5">
-                            <!-- Save Button -->
-                            <button
-                                @click="downloadAttachment(messagePath)"
-                                class="transparent-button"
-                            >
+                            <button @click="downloadAttachment(messagePath)" class="transparent-button">
                                 @lang('admin::app.export.download')
                             </button>
                         </div>
@@ -784,25 +525,17 @@
         <script type="module">
             app.component('option-wrapper', {
                 template: '#option-wrapper-template',
-
                 inject: ['$validator'],
-
+                
                 data() {
                     return {
                         error: false,
-
                         closeRmaChecked: false,
-
                         isChatSend: true,
-
                         messages: {},
-
                         message: '',
-
                         rma: @json($rma),
-
                         limit: 5,
-
                         allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
                     };
                 },
@@ -823,81 +556,55 @@
                 methods: {
                     getMessage() {
                         this.$axios.get(`{{ route('shop.rma.action.get.messages') }}`, {
-                            params: {
-                                id: this.rma.id,
-                                limit: this.limit,
-                            }
+                            params: { id: this.rma.id, limit: this.limit }
                         })
                         .then(response => {
                             this.messages = response.data.messages.data;
-
-                        }).catch(error => {
-                        });
+                        }).catch(error => {});
                     },
 
-                    chatSubmit(params, { resetForm, setErrors  }) {
+                    chatSubmit(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.chatForm);
-
-                        // Sanitize the message input
                         const messageInput = formData.get('message');
-
                         const sanitizedMessage = this.sanitizeInput(messageInput);
-
                         formData.set('message', sanitizedMessage);
-
                         this.isChatSend = false;
 
                         this.$axios.post("{{ route('shop.rma.action.send.message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
-
                                 attachmentPreview.innerHTML = '';
-
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
-
                                 this.getNewMessage();
-
                                 resetForm();
                             });
                     },
 
                     sanitizeInput(input) {
                         const tempDiv = document.createElement('div');
-
                         tempDiv.textContent = input;
-
                         return tempDiv.innerHTML;
                     },
 
                     viewAttachmentModal(messagePath) {
                         this.messagePath = messagePath;
-
                         this.getAttachmentExtension = messagePath.split('.').pop().toLowerCase();
-
                         this.$refs.attachmentModal.toggle();
                     },
 
                     downloadAttachment(messagePath) {
                         const imageUrl = `{{ config('app.url') }}/storage/${messagePath}`;
-
                         const link = document.createElement('a');
-
                         link.href = imageUrl;
-
                         link.download = imageUrl.split('/').pop();
-
                         document.body.appendChild(link);
-
                         link.click();
-
                         document.body.removeChild(link);
                     },
 
                     getNewMessage() {
                         this.limit += 5;
-
                         this.getMessage();
-
                         this.isChatSend = true;
                     },
 
@@ -906,57 +613,36 @@
                     },
 
                     validateForm(scope) {
-                        if (! this.closeRmaChecked) {
+                        if (!this.closeRmaChecked) {
                             this.error = true;
-
                             return;
                         }
-
                         this.error = false;
-
                         document.getElementById('check-form').submit();
-
-                        this.$validator.validateAll(scope).then((result) => {
-                            if (result) {
-                                if (scope == 'form-1') {
-                                    document.getElementById('form-1').submit();
-                                } else if (scope == 'form-2') {
-                                    document.getElementById('form-2').submit();
-                                }
-                            }
-                        });
                     },
 
                     dateFormat(v) {
                         let date = new Date(v);
-
                         const day = String(date.getDate()).padStart(2, '0');
                         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                         const month = monthNames[date.getMonth()];
                         const year = date.getFullYear();
                         const hours = String(date.getHours()).padStart(2, '0');
                         const minutes = String(date.getMinutes()).padStart(2, '0');
-
                         return `${day}-${month}-${year} ${hours}:${minutes}`;
                     },
 
                     handleFileSelect($event) {
                         const attachmentPreview = document.getElementById('attachmentPreview');
-
                         attachmentPreview.innerHTML = '';
-
                         const inputElement = event.target;
-
                         const files = event.target.files;
-
                         const fileNames = Array.from(files).map(file => file.name);
 
                         if (this.allowedFileTypesArray.length) {
                             const fileExtensions = Array.from(files).map(file => {
                                 const fileName = file.name;
-
                                 const extension = fileName.slice(fileName.lastIndexOf('.') + 1);
-
                                 return extension;
                             });
 
@@ -964,48 +650,33 @@
                                 this.allowedFileTypesArray.includes(extension)
                             );
 
-                            if (! hasAllowedFileType) {
+                            if (!hasAllowedFileType) {
                                 this.$emitter.emit('add-flash', {
                                     type: 'warning',
                                     message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types')"
                                 });
-
                                 event.target.value = '';
-
                                 inputElement.value = '';
-
                                 return;
                             }
                         }
 
                         const fileParagraph = document.createElement('p');
-
-                        fileParagraph.classList.add('attachmentPreview');
-
-                        fileParagraph.classList.add('border', 'p-3', 'my-2', 'rounded-md');
-
+                        fileParagraph.classList.add('attachmentPreview', 'border', 'p-3', 'my-2', 'rounded-md');
                         fileParagraph.innerHTML = fileNames;
 
                         const removeButton = document.createElement('button');
-
-                        removeButton.classList.add('removeFile');
-
-                        removeButton.classList.add('text-blue-600');
-
+                        removeButton.classList.add('removeFile', 'text-blue-600');
                         removeButton.textContent = "@lang('admin::app.catalog.products.edit.remove')";
-
                         removeButton.style.float = 'right';
 
                         removeButton.addEventListener('click', function() {
                             attachmentPreview.innerHTML = '';
-
                             event.target.value = '';
-
                             inputElement.value = '';
                         });
 
                         fileParagraph.appendChild(removeButton);
-
                         attachmentPreview.appendChild(fileParagraph);
                     },
                 }

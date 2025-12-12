@@ -35,14 +35,14 @@
                 >
                 </label>
 
-                <span class="flex max-md:hidden">
-                    <span class="text-zinc-500">
+                <span class="flex max-md:block">
+                    <span class="text-zinc-500 max-md:text-xs">
                         @lang('admin::app.configuration.index.sales.rma.setting.terms')
                     </span>
                     
                     <a 
                         href="#" 
-                        class="mx-2 text-blue-500 max-md:mt-2"
+                        class="mx-2 text-blue-500 max-md:mt-2 max-md:text-xs"
                         @click="$refs.agreementModel.open()"
                     >
                         <span>
@@ -53,16 +53,6 @@
             </label>
 
             <x-admin::form.control-group.error control-name="agreement" />
-
-            <a
-                href="#" 
-                class="hidden max-md:block mx-2 text-blue-500 max-md:mt-2"
-                @click="$refs.agreementModel.open()"
-            >
-                <span>
-                    @lang('gdpr::app.admin.create-gdpr.read-content')
-                </span>
-            </a>
         </div>
 
         <!-- Agreement modal -->

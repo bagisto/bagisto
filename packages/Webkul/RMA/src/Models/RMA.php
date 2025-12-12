@@ -18,41 +18,6 @@ class RMA extends Model implements RMAContract
     protected $table = 'rma';
 
     /**
-     * Pending Order
-     */
-    public const STATUS_PENDING = 'pending';
-
-    /**
-     * Payment is in pending
-     */
-    public const RECEIVED_PACKAGE = 'received_package';
-
-    /**
-     * Order in processing
-     */
-    public const DECLINED = 'declined';
-
-    /**
-     * Complete Order
-     */
-    public const ITEM_CANCELED = 'item_canceled';
-
-    /**
-     * Canceled Order
-     */
-    public const NOT_RECEIVE_PACKAGE_YET = 'not_receive_package_yet';
-
-    /**
-     * Closed Order
-     */
-    public const DISPATCHED_PACKAGE = 'Dispatched_Package';
-
-    /**
-     * Fraud Order
-     */
-    public const ACCEPT = 'accept';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -66,19 +31,6 @@ class RMA extends Model implements RMAContract
         'package_condition',
         'return_pickup_address',
         'return_pickup_time',
-    ];
-
-    /**
-     * RMA Status
-     */
-    protected $statusLabel = [
-        self::STATUS_PENDING          => 'Pending',
-        self::RECEIVED_PACKAGE        => 'Received Package',
-        self::ITEM_CANCELED           => 'Item Canceled',
-        self::DECLINED                => 'Declined',
-        self::NOT_RECEIVE_PACKAGE_YET => 'Awaiting',
-        self::DISPATCHED_PACKAGE      => 'Dispatched Package',
-        self::ACCEPT                  => 'Accept',
     ];
 
     /**

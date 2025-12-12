@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -28,21 +29,6 @@ class RequestController extends Controller
     /**
      * @var string
      */
-    public const CANCELED = 'canceled';
-
-    /**
-     * @var int
-     */
-    public const ACTIVE = 1;
-
-    /**
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
-    /**
-     * @var string
-     */
     public const CONFIGURABLE = 'configurable';
 
     /**
@@ -53,13 +39,13 @@ class RequestController extends Controller
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
         protected OrderRepository $orderRepository,
-        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
         protected RMAHelper $rmaHelper,
         protected RMAImageRepository $rmaImagesRepository,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
         protected RMAReasonRepository $rmaReasonRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMARepository $rmaRepository,
     ) {}
 
@@ -121,7 +107,7 @@ class RequestController extends Controller
             'order_id'              => $requestData['order_id'],
             'information'           => $requestData['information'] ?? null,
             'order_status'          => $requestData['order_status'],
-            'request_status'        => self::PENDING,
+            'request_status'        => RMA::PENDING->value,
             'package_condition'     => $requestData['package_condition'] ?? '',
         ]);
 
@@ -253,7 +239,7 @@ class RequestController extends Controller
 
         $reasons = $this->rmaReasonRepository
             ->whereIn('id', $existResolutions)
-            ->where('status', self::ACTIVE)
+            ->where('status', 1)
             ->get();
 
         return $reasons;

@@ -635,7 +635,7 @@
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
                     <!-- Delivery Status -->
-                    <x-shop::form.control-group>
+                    <x-shop::form.control-group v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'">
                         <x-shop::form.control-group.label class="required text-sm mt-4 flex">
                             @lang('admin::app.configuration.index.sales.rma.product-delivery-status')
                         </x-shop::form.control-group.label>
@@ -651,10 +651,7 @@
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
                             </option>
 
-                            <option
-                                v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'"
-                                value="1"
-                            >
+                            <option value="1">
                                 @lang('shop::app.rma.customer.delivered')
                             </option>
 
@@ -665,6 +662,8 @@
 
                         <x-shop::form.control-group.error name="order_status" class="flex"/>
                     </x-shop::form.control-group>
+
+                    <input v-else type="hidden" name="order_status" value="0" />
 
                     <div v-if="orderStatus == '1'">
                         <!-- Delivery Status -->

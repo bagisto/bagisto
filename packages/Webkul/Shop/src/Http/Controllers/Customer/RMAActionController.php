@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Webkul\RMA\Contracts\RMAReason;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
@@ -21,45 +22,9 @@ use Webkul\Shop\Mail\Customer\RMA\CustomerConversationNotification;
 class RMAActionController extends Controller
 {
     /**
-     * Product Type
-     *
      * @var array
      */
     public const PRODUCT_TYPE = ['virtual', 'downloadable', 'booking', 'configurable'];
-
-    /**
-     * RMA status Solved.
-     *
-     * @var string
-     */
-    public const SOLVED = 'Solved';
-
-    /**
-     * RMA Status
-     *
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
-    /**
-     * @var string
-     */
-    public const COMPLETED = 'completed';
-
-    /**
-     * @var string
-     */
-    public const CANCELED = 'Canceled';
-
-    /**
-     * @var int
-     */
-    public const INACTIVE = 0;
-
-    /**
-     * @var int
-     */
-    public const ACTIVE = 1;
 
     /**
      * Create a new controller instance.
@@ -68,11 +33,11 @@ class RMAActionController extends Controller
      */
     public function __construct(
         protected OrderRepository $orderRepository,
-        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMAHelper $rmaHelper,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
         protected RMAReasonRepository $rmaReasonRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
         protected RMARepository $rmaRepository,
     ) {}
 
@@ -91,7 +56,7 @@ class RMAActionController extends Controller
     {
         $existResolutions = $this->rmaReasonResolutionsRepository->where('resolution_type', $resolutionType)->pluck('rma_reason_id');
 
-        return $this->rmaReasonRepository->whereIn('id', $existResolutions)->where('status', self::ACTIVE)->get();
+        return $this->rmaReasonRepository->whereIn('id', $existResolutions)->where('status', RMA::ACTIVE->value)->get();
     }
 
     /**
@@ -99,17 +64,16 @@ class RMAActionController extends Controller
      */
     public function cancel(int $id): JsonResponse
     {
-        $rma = $this->rmaRepository->find($id);
+        $rma = $this->rmaRepository->findOrFail($id);
 
-        if ($rma->request_status == self::CANCELED) {
-
+        if ($rma->request_status == RMA::CANCELED->value) {
             return new JsonResponse([
                 'message' => trans('shop::app.rma.response.already-cancel'),
             ]);
         }
 
         $rma->update([
-            'request_status' => self::CANCELED,
+            'request_status' => RMA::CANCELED->value,
         ]);
 
         return new JsonResponse([
@@ -122,25 +86,25 @@ class RMAActionController extends Controller
      */
     public function saveStatus(): RedirectResponse
     {
-        $data = request()->all();
+        $data = request()->only(['rma_id', 'close_rma']);
 
-        $rma = $this->rmaRepository->find($data['rma_id']);
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
 
         if (! empty($data['close_rma'])) {
             $rma->update([
                 'status'         => 1,
-                'request_status' => self::SOLVED,
+                'request_status' => RMA::SOLVED->value,
                 'order_status'   => 'closed',
             ]);
 
             $this->rmaMessagesRepository->create([
-                'message'    => trans('shop::app.rma.mail.customer-conversation.solved'),
-                'rma_id'     => $data['rma_id'],
-                'is_admin'   => 1,
+                'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
+                'rma_id'   => $data['rma_id'],
+                'is_admin' => 1,
             ]);
         }
 
-        session()->flash('success', trans('shop::app.rma.response.update-success', ['name' => trans('admin::app.sales.rma.all-rma.view.status')]));
+        session()->flash('success', trans('shop::app.rma.response.update-success'));
 
         return redirect()->back();
     }
@@ -151,38 +115,32 @@ class RMAActionController extends Controller
      */
     public function reOpen(): RedirectResponse
     {
-        $data = request()->all();
+        $data = request()->only(['rma_id', 'close_rma']);
 
-        $rma = $this->rmaRepository->find($data['rma_id']);
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
 
         if (! empty($data['close_rma'])) {
-            if (empty($rma)) {
-                session()->flash('error', 'Something Went Wrong');
-
-                return back();
-            }
-
             $order = $this->orderRepository->find($rma->order_id);
 
             $order->update(['status' => 'pending']);
 
             $rma->update([
-                'status'           => self::ACTIVE,
-                'request_status'   => self::PENDING,
-                'status'           => self::INACTIVE,
-                'order_status'     => self::INACTIVE,
+                'status'         => RMA::ACTIVE->value,
+                'request_status' => RMA::PENDING->value,
+                'status'         => RMA::INACTIVE->value,
+                'order_status'   => RMA::INACTIVE->value,
             ]);
 
             $this->rmaMessagesRepository->create([
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
                 'rma_id'     => $data['rma_id'],
-                'is_admin'   => self::ACTIVE,
+                'is_admin'   => RMA::ACTIVE->value,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
         }
 
-        session()->flash('success', trans('shop::app.rma.response.update-success', ['name' => 'Status']));
+        session()->flash('success', trans('shop::app.rma.response.update-success'));
 
         return back();
     }
@@ -242,12 +200,16 @@ class RMAActionController extends Controller
                 }
             } catch (\Exception $e) {
                 return new JsonResponse([
-                    'messages' => trans('shop::app.rma.response.send-message', ['name' => trans('shop::app.rma.mail.customer-conversation.message')]),
+                    'messages' => trans('shop::app.rma.response.send-message', [
+                        'name' => trans('shop::app.rma.mail.customer-conversation.message')
+                    ]),
                 ]);
             }
 
             return new JsonResponse([
-                'messages' => trans('shop::app.rma.response.send-message', ['name' => trans('shop::app.rma.mail.customer-conversation.message')]),
+                'messages' => trans('shop::app.rma.response.send-message', [
+                    'name' => trans('shop::app.rma.mail.customer-conversation.message')
+                ]),
             ]);
         }
 

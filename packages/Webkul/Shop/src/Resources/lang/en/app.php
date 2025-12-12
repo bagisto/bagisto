@@ -1617,7 +1617,7 @@ return [
             'permission-denied' => 'You are logged in',
             'rma-disabled'      => 'RMA is disabled for this product',
             'send-message'      => ':name sent successfully.',
-            'update-success'    => ':name updated successfully.',
+            'update-success'    => 'Status updated successfully.',
         ],
     ],
 ];

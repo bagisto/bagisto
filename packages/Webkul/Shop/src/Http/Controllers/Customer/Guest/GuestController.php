@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
@@ -21,13 +22,6 @@ use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class GuestController extends Controller
 {
-    /**
-     * RMA Status
-     *
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
     /**
      * @var string
      */
@@ -137,7 +131,7 @@ class GuestController extends Controller
             'order_id'              => $data['order_id'],
             'information'           => $data['information'] ?? null,
             'order_status'          => $data['order_status'],
-            'request_status'        => self::PENDING,
+            'request_status'        => RMA::PENDING->value,
             'package_condition'     => $data['package_condition'] ?? '',
         ]);
 
@@ -226,7 +220,7 @@ class GuestController extends Controller
             }
 
             return new JsonResponse([
-                'messages' => trans('shop::app.rma.response.create-success', ['name' => 'Request']),
+                'messages' => trans('shop::app.rma.response.create-success'),
             ]);
         }
 

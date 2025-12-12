@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Contracts\OrderItem;
@@ -14,23 +15,9 @@ use Webkul\Sales\Repositories\OrderItemRepository;
 class Helper
 {
     /**
-     * Rma in declined status.
-     *
-     * @var string
-     */
-    public const DECLINED = 'Declined';
-
-    /**
      * rma refund-related statuses
      */
-    public const REFUND_EXCLUDED_STATUSES = ['Received Package', 'Declined', 'Canceled', 'Solved', 'Item Canceled'];
-
-    /**
-     * Rma in canceled status.
-     *
-     * @var string
-     */
-    public const CANCELED = 'Canceled';
+    public const REFUND_EXCLUDED_STATUSES = [RMA::RECEIVEDPACKAGE->value, RMA::DECLINED->value, RMA::CANCELED->value, RMA::SOLVED->value, RMA::ITEMCANCELED->value];
 
     /**
      * Create a new controller instance.
@@ -82,7 +69,7 @@ class Helper
         $rmaQty = $rmaItems->reduce(function ($carry, $rmaItem) {
             $rmaStatus = $rmaItem->rma->request_status ?? null;
 
-            if (! in_array($rmaStatus, [self::DECLINED, self::CANCELED])) {
+            if (! in_array($rmaStatus, [RMA::DECLINED->value, RMA::CANCELED->value])) {
                 return $carry + $rmaItem->quantity;
             }
 

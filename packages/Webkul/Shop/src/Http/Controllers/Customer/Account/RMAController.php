@@ -4,8 +4,10 @@ namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
@@ -21,13 +23,6 @@ use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class RMAController extends Controller
 {
-    /**
-     * RMA Status
-     *
-     * @var string
-     */
-    public const PENDING = 'Pending';
-
     /**
      * @var string
      */
@@ -102,7 +97,7 @@ class RMAController extends Controller
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
-            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'images'          => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $data = request()->only([
@@ -129,12 +124,12 @@ class RMAController extends Controller
         }
 
         $rma = $this->rmaRepository->create([
-            'status'                => '',
-            'order_id'              => $data['order_id'],
-            'information'           => $data['information'] ?? null,
-            'order_status'          => $data['order_status'] ?? 0,
-            'request_status'        => self::PENDING,
-            'package_condition'     => $data['package_condition'] ?? '',
+            'status'            => '',
+            'order_id'          => $data['order_id'],
+            'information'       => $data['information'] ?? null,
+            'order_status'      => $data['order_status'] ?? 0,
+            'request_status'    => RMA::PENDING->value,
+            'package_condition' => $data['package_condition'] ?? '',
         ]);
 
         $data['order_items'] = [];
@@ -166,20 +161,15 @@ class RMAController extends Controller
 
         $data['rma_id'] = $rma->id;
 
-        // Insert image
-        if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
-            foreach ($data['images'] as $itemImg) {
-                $this->rmaImagesRepository->create([
-                    'rma_id' => $rma->id,
-                    'path'   => ! empty($itemImg) ?? $itemImg->getClientOriginalName(),
-                ]);
-            }
+        if (! empty($data['images'])) {
+            $this->rmaImagesRepository->create([
+                'rma_id' => $rma->id,
+                'path'   => ! empty($data['images']) ? $data['images']->getClientOriginalName() : null,
+            ]);
 
-            // Save the image in the public path
             $this->rmaImagesRepository->uploadImages($data, $rma);
         }
 
-        // Save custom Attributes
         $customAttributes = request('customAttributes') ?? [];
 
         if ($customAttributes) {
@@ -218,11 +208,11 @@ class RMAController extends Controller
             try {
                 Mail::queue(new CustomerRMARequestNotification($data));
             } catch (\Exception $e) {
-                \Log::error('Error in Sending Email'.$e->getMessage());
+                Log::error('Error in Sending Email'.$e->getMessage());
             }
 
             return new JsonResponse([
-                'messages' => trans('shop::app.rma.response.create-success', ['name' => 'Request']),
+                'messages' => trans('shop::app.rma.response.create-success'),
             ]);
         } else {
             return new JsonResponse([
