@@ -837,6 +837,7 @@ return [
                     'missing_options'        => 'Mancano opzioni per questo prodotto.',
                     'inventory_warning'      => 'La quantità richiesta non è disponibile, riprova più tardi.',
                     'select_hourly_duration' => 'Seleziona una durata di slot di un\'ora.',
+                    'unavailable_date'       => 'La data richiesta non è disponibile, si prega di prenotare nuovamente tra :date_from e :date_to.',
                 ],
 
                 'rent-from'    => 'Noleggio Da',

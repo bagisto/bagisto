@@ -205,4 +205,40 @@ class RentalSlot extends Booking
 
         return $result;
     }
+
+    /**
+     * Determine if the given cart item has valid booking dates.
+     */
+    public function hasValidBookingDates(array $cartItem): bool
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+
+        if (! $bookingProduct->available_every_week && isset($cartItem['additional']['booking']['date_from']) && isset($cartItem['additional']['booking']['date_to'])) {
+            $cartFrom = Carbon::parse($cartItem['additional']['booking']['date_from']);
+            $cartTo = Carbon::parse($cartItem['additional']['booking']['date_to']);
+
+            if (
+                $cartFrom->lt($bookingProduct->available_from) ||
+                $cartTo->gt($bookingProduct->available_to)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Return slot if it is available.
+     */
+    public function isSlotAvailable(array $cartProducts): bool
+    {
+        foreach ($cartProducts as $cartProduct) {
+            if (! $this->hasValidBookingDates($cartProduct)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
