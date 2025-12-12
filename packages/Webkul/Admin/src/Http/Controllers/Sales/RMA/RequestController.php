@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
-use Webkul\RMA\Enums\RMA;
+use Webkul\RMA\Enums\RequestStatusEnum;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -107,7 +107,7 @@ class RequestController extends Controller
             'order_id'              => $requestData['order_id'],
             'information'           => $requestData['information'] ?? null,
             'order_status'          => $requestData['order_status'],
-            'request_status'        => RMA::PENDING->value,
+            'request_status'        => RequestStatusEnum::PENDING->value,
             'package_condition'     => $requestData['package_condition'] ?? '',
         ]);
 

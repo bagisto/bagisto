@@ -11,7 +11,6 @@ use Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\CacheResponse;
 use Webkul\Shop\Http\Middleware\Currency;
-use Webkul\Shop\Http\Middleware\GuestRMA;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 
@@ -41,7 +40,6 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('currency', Currency::class);
         $router->aliasMiddleware('cache.response', CacheResponse::class);
         $router->aliasMiddleware('customer', AuthenticateCustomer::class);
-        $router->aliasMiddleware('guest-rma', GuestRMA::class);
 
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/web.php');
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/api.php');

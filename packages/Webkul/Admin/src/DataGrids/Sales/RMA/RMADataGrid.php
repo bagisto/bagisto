@@ -5,8 +5,8 @@ namespace Webkul\Admin\DataGrids\Sales\RMA;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
-use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMAStatusRepository;
+use Webkul\Sales\Models\Order;
 
 class RMADataGrid extends DataGrid
 {
@@ -119,16 +119,14 @@ class RMADataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
             'closure'            => function ($row) {
-                $rmaStatusData = app('Webkul\RMA\Repositories\RMAStatusRepository')
-                    ->where('title', $row->request_status)
-                    ->first();
-
                 if (
-                    $row->order_status == RMA::CANCELED->value
-                    && $row->order_status == RMA::CLOSED->value
+                    $row->order_status == Order::STATUS_CANCELED
+                    && $row->order_status == Order::STATUS_CLOSED
                 ) {
                     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
+
+                $rmaStatusData = $this->rmaStatusRepository->where('title', $row->request_status)->first();
 
                 return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
             },

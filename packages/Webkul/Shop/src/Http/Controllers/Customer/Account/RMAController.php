@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use Webkul\RMA\Enums\RMA;
+use Webkul\RMA\Enums\RequestStatusEnum;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
@@ -128,7 +128,7 @@ class RMAController extends Controller
             'order_id'          => $data['order_id'],
             'information'       => $data['information'] ?? null,
             'order_status'      => $data['order_status'] ?? 0,
-            'request_status'    => RMA::PENDING->value,
+            'request_status'    => RequestStatusEnum::PENDING->value,
             'package_condition' => $data['package_condition'] ?? '',
         ]);
 

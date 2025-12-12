@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\CustomFieldDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\RMA\Enums\RMA;
 use Webkul\RMA\Repositories\RMACustomFieldOptionRepository;
 use Webkul\RMA\Repositories\RMACustomFieldRepository;
 
@@ -117,9 +116,9 @@ class CustomFieldController extends Controller
             'status',
         );
 
-        $data['status'] = $data['status'] ?? RMA::INACTIVE->value;
+        $data['status'] = $data['status'] ?? 0;
 
-        $data['is_required'] = $data['is_required'] ?? RMA::INACTIVE->value;
+        $data['is_required'] = $data['is_required'] ?? 0;
 
         $rmaCustomField = $this->rmaCustomFieldRepository->update($data, $id);
 

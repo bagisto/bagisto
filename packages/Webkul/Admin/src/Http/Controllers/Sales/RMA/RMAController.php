@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\Admin\RMA\AdminConversationNotification;
-use Webkul\RMA\Enums\RMA;
+use Webkul\RMA\Enums\RequestStatusEnum;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
@@ -86,16 +86,16 @@ class RMAController extends Controller
             $order->update(['status' => 'pending']);
 
             $this->rmaRepository->find($data['rma_id'])->update([
-                'status'           => RMA::ACTIVE->value,
-                'request_status'   => RMA::PENDING->value,
-                'status'           => RMA::INACTIVE->value,
-                'order_status'     => RMA::INACTIVE->value,
+                'status'           => 1,
+                'request_status'   => RequestStatusEnum::PENDING->value,
+                'status'           => 0,
+                'order_status'     => 0,
             ]);
 
             $requestData = [
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
                 'rma_id'     => $data['rma_id'],
-                'is_admin'   => RMA::ACTIVE->value,
+                'is_admin'   => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];

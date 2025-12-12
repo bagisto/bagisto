@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\RMA\Enums\RMA;
+use Webkul\RMA\Enums\RequestStatusEnum;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Contracts\OrderItem;
@@ -17,7 +17,13 @@ class Helper
     /**
      * rma refund-related statuses
      */
-    public const REFUND_EXCLUDED_STATUSES = [RMA::RECEIVEDPACKAGE->value, RMA::DECLINED->value, RMA::CANCELED->value, RMA::SOLVED->value, RMA::ITEMCANCELED->value];
+    public const REFUND_EXCLUDED_STATUSES = [
+        RequestStatusEnum::RECEIVED_PACKAGE->value,
+        RequestStatusEnum::DECLINED->value,
+        RequestStatusEnum::CANCELED->value,
+        RequestStatusEnum::SOLVED->value,
+        RequestStatusEnum::ITEM_CANCELED->value,
+    ];
 
     /**
      * Create a new controller instance.

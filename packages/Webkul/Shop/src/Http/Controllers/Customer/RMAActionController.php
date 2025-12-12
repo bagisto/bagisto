@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Webkul\RMA\Contracts\RMAReason;
-use Webkul\RMA\Enums\RMA;
+use Webkul\RMA\Enums\RequestStatusEnum;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
@@ -56,7 +56,7 @@ class RMAActionController extends Controller
     {
         $existResolutions = $this->rmaReasonResolutionsRepository->where('resolution_type', $resolutionType)->pluck('rma_reason_id');
 
-        return $this->rmaReasonRepository->whereIn('id', $existResolutions)->where('status', RMA::ACTIVE->value)->get();
+        return $this->rmaReasonRepository->whereIn('id', $existResolutions)->where('status', 1)->get();
     }
 
     /**
@@ -66,14 +66,14 @@ class RMAActionController extends Controller
     {
         $rma = $this->rmaRepository->findOrFail($id);
 
-        if ($rma->request_status == RMA::CANCELED->value) {
+        if ($rma->request_status == RequestStatusEnum::CANCELED->value) {
             return new JsonResponse([
                 'message' => trans('shop::app.rma.response.already-cancel'),
             ]);
         }
 
         $rma->update([
-            'request_status' => RMA::CANCELED->value,
+            'request_status' => RequestStatusEnum::CANCELED->value,
         ]);
 
         return new JsonResponse([
@@ -93,7 +93,7 @@ class RMAActionController extends Controller
         if (! empty($data['close_rma'])) {
             $rma->update([
                 'status'         => 1,
-                'request_status' => RMA::SOLVED->value,
+                'request_status' => RequestStatusEnum::SOLVED->value,
                 'order_status'   => 'closed',
             ]);
 
@@ -125,16 +125,16 @@ class RMAActionController extends Controller
             $order->update(['status' => 'pending']);
 
             $rma->update([
-                'status'         => RMA::ACTIVE->value,
-                'request_status' => RMA::PENDING->value,
-                'status'         => RMA::INACTIVE->value,
-                'order_status'   => RMA::INACTIVE->value,
+                'status'         => 1,
+                'request_status' => RequestStatusEnum::PENDING->value,
+                'status'         => 0,
+                'order_status'   => 0,
             ]);
 
             $this->rmaMessagesRepository->create([
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
                 'rma_id'     => $data['rma_id'],
-                'is_admin'   => RMA::ACTIVE->value,
+                'is_admin'   => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
