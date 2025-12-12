@@ -105,14 +105,14 @@ echo ""
 
 # Step 10: Set permissions
 echo -e "${YELLOW}Step 10: Setting permissions...${NC}"
-docker compose -f docker-compose.prod.yml exec -T app chown -R sail:sail storage bootstrap/cache
+docker compose -f docker-compose.prod.yml exec -T app chown -R www-data:www-data storage bootstrap/cache
 docker compose -f docker-compose.prod.yml exec -T app chmod -R 775 storage bootstrap/cache
 echo -e "${GREEN}✓ Permissions set${NC}"
 echo ""
 
 # Step 11: Restart queue workers
 echo -e "${YELLOW}Step 11: Restarting queue workers...${NC}"
-docker compose -f docker-compose.prod.yml restart queue-worker
+docker restart ramplaza-queue 2>/dev/null || docker compose -f docker-compose.prod.yml restart queue
 echo -e "${GREEN}✓ Queue workers restarted${NC}"
 echo ""
 
