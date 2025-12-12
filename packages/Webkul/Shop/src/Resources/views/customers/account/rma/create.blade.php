@@ -465,22 +465,9 @@
                                             @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_return_period) }}
                                         </span>
                                     </p>
-
-                                    <p
-                                        v-if="resolutionType[getProductId(product)] == 'exchange'"
-                                        class="flex text-sm justify-between gap-3 whitespace-nowrap"
-                                    >
-                                        <span>
-                                            @lang('shop::app.rma.customer.create.exchange-window'):
-                                        </span>
-
-                                        <span>
-                                            @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_exchange_period) }}
-                                        </span>
-                                    </p>
                                 </template>
                                 <p
-                                    v-else-if="! product.rma_exchange_period && ! product.rma_return_period"
+                                    v-else-if="! product.rma_return_period"
                                     class="flex text-sm justify-between gap-3 whitespace-nowrap"
                                     >
                                     <span>
@@ -526,7 +513,7 @@
 
                         <div class="flex gap-3" v-if="! notAllowed">
                             <!-- Resolution Type for rules product -->
-                            <p class="w-full" v-if="product.rma_exchange_period || product.rma_return_period">
+                            <p class="w-full" v-if="product.rma_return_period">
                                 <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                     <x-shop::form.control-group>
                                         <x-shop::form.control-group.label class="required text-sm flex">
@@ -550,13 +537,6 @@
                                                 value="return"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped && product.rma_exchange_period"
-                                                value="exchange"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.exchange')
                                             </option>
 
                                             <option
@@ -597,13 +577,6 @@
                                                 value="return"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped"
-                                                value="exchange"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.exchange')
                                             </option>
 
                                             <option
@@ -662,9 +635,7 @@
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
                     <!-- Delivery Status -->
-                    <x-shop::form.control-group
-                        v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'"
-                    >
+                    <x-shop::form.control-group v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'">
                         <x-shop::form.control-group.label class="required text-sm mt-4 flex">
                             @lang('admin::app.configuration.index.sales.rma.product-delivery-status')
                         </x-shop::form.control-group.label>
@@ -676,16 +647,8 @@
                             v-model="orderStatus"
                             :label="trans('admin::app.configuration.index.sales.rma.product-delivery-status')"
                         >
-                            <option value="">
-                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                            </option>
-
                             <option value="1">
                                 @lang('shop::app.rma.customer.delivered')
-                            </option>
-
-                            <option value="0">
-                                @lang('shop::app.rma.customer.undelivered')
                             </option>
                         </x-shop::form.control-group.control>
 

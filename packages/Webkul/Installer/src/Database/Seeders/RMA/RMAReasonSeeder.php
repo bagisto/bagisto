@@ -50,7 +50,7 @@ class RMAReasonSeeder extends Seeder
 
         $reasons = DB::table('rma_reasons')->get();
 
-        $resolutionTypes = ['exchange', 'return', 'cancel-items'];
+        $resolutionTypes = ['return', 'cancel-items'];
 
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {

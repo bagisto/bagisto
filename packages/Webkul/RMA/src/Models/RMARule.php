@@ -23,7 +23,6 @@ class RMARule extends Model implements RMARuleContract
         'name',
         'description',
         'status',
-        'exchange_period',
         'return_period',
         'default',
     ];

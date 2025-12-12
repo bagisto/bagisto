@@ -7,30 +7,35 @@ enum RequestStatusEnum: string
     /**
      * Pending request status.
      */
-    case PENDING = 'pending';
+    case PENDING = 'Pending';
 
     /**
      * Canceled request status.
      */
-    case CANCELED = 'canceled';
+    case CANCELED = 'Canceled';
 
     /**
      * Item canceled request status.
      */
-    case ITEM_CANCELED = 'item_canceled';
+    case ITEM_CANCELED = 'Item Canceled';
 
     /**
      * Declined request status.
      */
-    case DECLINED = 'declined';
+    case DECLINED = 'Declined';
 
     /**
      * Received package request status.
      */
-    case RECEIVED_PACKAGE = 'received_package';
+    case RECEIVED_PACKAGE = 'Received Package';
 
     /**
      * Solved request status.
      */
-    case SOLVED = 'solved';
+    case SOLVED = 'Solved';
+
+    /**
+     * Accepted request status.
+     */
+    case ACCEPT = 'Accept';
 }

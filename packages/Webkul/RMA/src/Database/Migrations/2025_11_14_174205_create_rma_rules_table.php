@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->boolean('status')->nullable();
-            $table->integer('exchange_period')->nullable();
             $table->integer('return_period')->nullable();
             $table->boolean('default')->nullable();
             $table->timestamps();

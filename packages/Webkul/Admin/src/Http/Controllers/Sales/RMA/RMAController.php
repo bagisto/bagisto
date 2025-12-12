@@ -17,6 +17,7 @@ use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\RMA\Repositories\RMAStatusRepository;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\RefundRepository;
@@ -83,7 +84,7 @@ class RMAController extends Controller
         if (! empty($data['close_rma'])) {
             $order = $this->orderRepository->find($rma->order_id);
 
-            $order->update(['status' => 'pending']);
+            $order->update(['status' => Order::STATUS_PENDING]);
 
             $this->rmaRepository->find($data['rma_id'])->update([
                 'status'           => 1,
@@ -186,9 +187,7 @@ class RMAController extends Controller
 
         $rma = $this->rmaRepository->find($status['rma_id']);
 
-        $orderId = $rma->order_id;
-
-        $order = $this->orderRepository->find($orderId);
+        $order = $rma->order;
 
         $mailDetails = [
             'name'           => $order->customer_first_name.' '.$order->customer_last_name,
@@ -197,12 +196,12 @@ class RMAController extends Controller
             'request_status' => $status['request_status'],
         ];
 
-        $ordersRma = $this->rmaRepository->findWhere(['order_id' => $orderId]);
+        $ordersRma = $this->rmaRepository->findWhere(['order_id' => $order->id]);
 
         $totalCount = (int) $this->rmaItemsRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
 
         if ($totalCount > 0) {
-            if ($status['request_status'] == RMA::ITEMCANCELED->value) {
+            if ($status['request_status'] == RequestStatusEnum::ITEM_CANCELED->value) {
 
                 foreach ($ordersRma as $orderRma) {
                     $rmaItems = $this->rmaItemsRepository->findWhere([
@@ -233,7 +232,7 @@ class RMAController extends Controller
                 Event::dispatch('sales.order.cancel.after', $order);
             }
 
-            if ($status['request_status'] == RMA::RECEIVEDPACKAGE->value) {
+            if ($status['request_status'] == RequestStatusEnum::RECEIVED_PACKAGE->value) {
                 $refund = $this->createRefund($rma);
 
                 if (! $refund) {
@@ -250,11 +249,11 @@ class RMAController extends Controller
             }
 
             if ($order->total_qty_ordered == $totalCount) {
-                if ($status['request_status'] == RMA::ITEMCANCELED->value) {
-                    $status['order_status'] = RMA::CANCELED->value;
+                if ($status['request_status'] == RequestStatusEnum::ITEM_CANCELED->value) {
+                    $status['order_status'] = RequestStatusEnum::CANCELED->value;
 
-                    $order->update(['status' => RMA::CANCELED->value]);
-                } elseif ($status['request_status'] == RMA::ACCEPT->value) {
+                    $order->update(['status' => Order::STATUS_CANCELED]);
+                } else if ($status['request_status'] == RequestStatusEnum::ACCEPT->value) {
                     $this->rmaRepository->find($status['rma_id'])->update(['status' => 0]);
                 }
             }
@@ -367,13 +366,13 @@ class RMAController extends Controller
             $status = $orderState;
         } else {
             if ($this->orderRepository->isInCompletedState($order)) {
-                $status = 'completed';
+                $status = Order::STATUS_COMPLETED;
             }
 
             if ($this->orderRepository->isInCanceledState($order)) {
-                $status = 'canceled';
-            } elseif ($this->orderRepository->isInClosedState($order)) {
-                $status = 'closed';
+                $status = Order::STATUS_CANCELED;
+            } else if ($this->orderRepository->isInClosedState($order)) {
+                $status = Order::STATUS_CLOSED;
             }
         }
 

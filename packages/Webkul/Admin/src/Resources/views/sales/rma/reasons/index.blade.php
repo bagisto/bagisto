@@ -235,10 +235,6 @@
                                                     @lang('admin::app.configuration.index.sales.rma.return')
                                                 </option>
 
-                                                <option value="exchange">
-                                                    @lang('admin::app.configuration.index.sales.rma.exchange')
-                                                </option>
-
                                                 <option value="cancel-items">
                                                     @lang('admin::app.configuration.index.sales.rma.cancel-items')
                                                 </option>

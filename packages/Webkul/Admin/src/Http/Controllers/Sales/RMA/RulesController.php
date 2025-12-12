@@ -46,7 +46,6 @@ class RulesController extends Controller
             'name',
             'status',
             'description',
-            'exchange_period',
             'return_period'
         ));
 
@@ -80,7 +79,6 @@ class RulesController extends Controller
             'name',
             'status',
             'description',
-            'exchange_period',
             'return_period'
         ), request()->id);
 

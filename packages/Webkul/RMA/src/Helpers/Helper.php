@@ -75,7 +75,7 @@ class Helper
         $rmaQty = $rmaItems->reduce(function ($carry, $rmaItem) {
             $rmaStatus = $rmaItem->rma->request_status ?? null;
 
-            if (! in_array($rmaStatus, [RMA::DECLINED->value, RMA::CANCELED->value])) {
+            if (! in_array($rmaStatus, [RequestStatusEnum::DECLINED->value, RequestStatusEnum::CANCELED->value])) {
                 return $carry + $rmaItem->quantity;
             }
 
@@ -142,7 +142,6 @@ class Helper
                 'pav_rma_rules.integer_value as rma_rules',
                 'rma_rules.id as rule_id',
                 'rma_rules.status as rma_rule_status',
-                'rma_rules.exchange_period as rma_exchange_period',
                 'rma_rules.return_period as rma_return_period',
                 'parent_products.id as parentId',
             )

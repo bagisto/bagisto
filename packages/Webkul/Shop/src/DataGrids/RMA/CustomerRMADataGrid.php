@@ -147,7 +147,7 @@ class CustomerRMADataGrid extends DataGrid
             'icon'      => 'icon-cancel',
             'method'    => 'GET',
             'condition' => function ($row) {
-                if ($row->rma_status != 'solved') {
+                if ($row->request_status != 'Solved') {
                     return false;
                 }
 

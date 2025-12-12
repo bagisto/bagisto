@@ -57,94 +57,96 @@
                         <div class="grid p-4 !pt-0">
                             @foreach ($order->items as $item)
                                 @php
-                                    $canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRMAStatus($item->id);
+                                    $canInvoiceQty = app('\Webkul\RMA\Helpers\Helper')->getRMAStatus($item->id);
                                 @endphp
 
                                 @if ($item->qty_to_invoice)
-                                    <div class="flex justify-between gap-2.5 border-b border-slate-300 py-4 dark:border-gray-800">
-                                        <div class="flex gap-2.5">
-                                            @if ($item->product?->base_image_url)
-                                                <img
-                                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
-                                                    src="{{ $item->product?->base_image_url }}"
-                                                />
-                                            @else
-                                                <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
-                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                    <div class="border-b border-slate-300 py-4 dark:border-gray-800 last:border-0">
+                                        <div class="flex justify-between gap-2.5">
+                                            <div class="flex gap-2.5">
+                                                @if ($item->product?->base_image_url)
+                                                    <img
+                                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                                        src="{{ $item->product?->base_image_url }}"
+                                                    />
+                                                @else
+                                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
-                                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
-                                                        @lang('admin::app.sales.invoices.create.product-image')
+                                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                            @lang('admin::app.sales.invoices.create.product-image')
+                                                        </p>
+                                                    </div>
+                                                @endif
+
+                                                <div class="grid place-content-start gap-1.5">
+                                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
+                                                        {{ $item->name }}
                                                     </p>
+
+                                                    <div class="flex flex-col place-items-start gap-1.5">
+                                                        <p class="text-gray-600 dark:text-gray-300">
+                                                            @lang('admin::app.sales.invoices.create.amount-per-unit', [
+                                                                'amount' => core()->formatBasePrice($item->base_price),
+                                                                'qty'    => $item->qty_ordered,
+                                                            ])
+                                                        </p>
+
+                                                        @if (isset($item->additional['attributes']))
+                                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                                <p class="text-gray-600 dark:text-gray-300">
+                                                                    @if (
+                                                                        ! isset($attribute['attribute_type'])
+                                                                        || $attribute['attribute_type'] !== 'file'
+                                                                    )
+                                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                    @else
+                                                                        {{ $attribute['attribute_name'] }} :
+
+                                                                        <a
+                                                                            href="{{ Storage::url($attribute['option_label']) }}"
+                                                                            class="text-blue-600 hover:underline"
+                                                                            download="{{ File::basename($attribute['option_label']) }}"
+                                                                        >
+                                                                            {{ File::basename($attribute['option_label']) }}
+                                                                        </a>
+                                                                    @endif
+                                                                </p>
+                                                            @endforeach
+                                                        @endif
+
+                                                        <p class="text-gray-600 dark:text-gray-300">
+                                                            @lang('admin::app.sales.invoices.create.sku', ['sku' => $item->sku])
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            @endif
+                                            </div>
 
-                                            <div class="grid place-content-start gap-1.5">
-                                                <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
-                                                    {{ $item->name }}
-                                                </p>
+                                            <div class="grid ltr:text-right rtl:text-left">
+                                                <!-- Quantity Details -->
+                                                <x-admin::form.control-group>
+                                                    <x-admin::form.control-group.label class="required !block">
+                                                        @lang('admin::app.sales.invoices.create.qty-to-invoiced')
+                                                    </x-admin::form.control-group.label>
 
-                                                <div class="flex flex-col place-items-start gap-1.5">
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.invoices.create.amount-per-unit', [
-                                                            'amount' => core()->formatBasePrice($item->base_price),
-                                                            'qty'    => $item->qty_ordered,
-                                                        ])
-                                                    </p>
+                                                    <x-admin::form.control-group.control
+                                                        type="text"
+                                                        class="!w-[100px]"
+                                                        :id="'invoice[items][' . $item->id . ']'"
+                                                        :name="'invoice[items][' . $item->id . ']'"
+                                                        :rules="'required|numeric|min:0|max_value:' . $canInvoiceQty['qty']"
+                                                        :value="$canInvoiceQty['qty']"
+                                                        :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
+                                                        :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
+                                                    />
 
-                                                    @if (isset($item->additional['attributes']))
-                                                        @foreach ($item->additional['attributes'] as $attribute)
-                                                            <p class="text-gray-600 dark:text-gray-300">
-                                                                @if (
-                                                                    ! isset($attribute['attribute_type'])
-                                                                    || $attribute['attribute_type'] !== 'file'
-                                                                )
-                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                                @else
-                                                                    {{ $attribute['attribute_name'] }} :
-
-                                                                    <a
-                                                                        href="{{ Storage::url($attribute['option_label']) }}"
-                                                                        class="text-blue-600 hover:underline"
-                                                                        download="{{ File::basename($attribute['option_label']) }}"
-                                                                    >
-                                                                        {{ File::basename($attribute['option_label']) }}
-                                                                    </a>
-                                                                @endif
-                                                            </p>
-                                                        @endforeach
-                                                    @endif
-
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.invoices.create.sku', ['sku' => $item->sku])
-                                                    </p>
-                                                </div>
+                                                    <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
+                                                </x-admin::form.control-group>
                                             </div>
                                         </div>
 
-                                        <div class="grid ltr:text-right rtl:text-left">
-                                            <!-- Quantity Details -->
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label class="required !block">
-                                                    @lang('admin::app.sales.invoices.create.qty-to-invoiced')
-                                                </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    class="!w-[100px]"
-                                                    :id="'invoice[items][' . $item->id . ']'"
-                                                    :name="'invoice[items][' . $item->id . ']'"
-                                                    rules="required|numeric|min:0"
-                                                    :value="$canShipQty['qty'] - $item->qty_invoiced"
-                                                    :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
-                                                    :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
-                                                />
-
-                                                <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
-                                            </x-admin::form.control-group>
-                                        </div>
-                                        
-                                        @if ($canShipQty['message'])
-                                            <p class="mt-1 text-xs italic text-red-600">{{ $canShipQty['message'] }}</p>
+                                        @if ($canInvoiceQty['message'])
+                                            <p class="mt-1 text-xs italic text-green-600">{{ $canInvoiceQty['message'] }}</p>
                                         @endif
                                     </div>
                                 @endif

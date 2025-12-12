@@ -90,7 +90,7 @@
                                     </p>
                                 </div>
 
-                                <p class="flex justify-start text-gray-600 hover:text-gray-800 cursor-pointer">
+                                <p class="flex justify-end text-gray-600 hover:text-gray-800 cursor-pointer">
                                     @lang('admin::app.settings.data-transfer.imports.edit.action')
                                 </p>
                             </div>
@@ -161,29 +161,27 @@
                                     </div>
                                 </div>
 
-                                <div class="flex ml-3 gap-x-4 justify-between items-center">
-                                    <div class="flex flex-col gap-1.5">
-                                        <p class="flex justify-end">
-                                            <!-- Arrow -->
-                                            <a :href="`{{{ route('shop.customers.account.rma.view', '') }}}/${record.id}`">
-                                                <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
-                                            </a>
+                                <div class="flex flex-col gap-1.5">
+                                    <p class="flex justify-end">
+                                        <!-- Arrow -->
+                                        <a :href="`{{{ route('shop.customers.account.rma.view', '') }}}/${record.id}`">
+                                            <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
+                                        </a>
 
-                                            <span v-if="record.rmaStatus != 'canceled'">
-                                                <span v-if="record.rmaStatus != 'item_canceled'">
-                                                    <span v-if="record.rmaStatus != 'declined'">
-                                                        <span v-if="record.rmaStatus != 'solved'">
-                                                            <span v-if="record.rmaStatus != 'received_package'">
-                                                                <a @click="cancelStatus(record.id)">
-                                                                    <span class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
-                                                                </a>
-                                                            </span>
+                                        <span v-if="record.rmaStatus != 'Canceled'">
+                                            <span v-if="record.rmaStatus != 'Item Canceled'">
+                                                <span v-if="record.rmaStatus != 'Declined'">
+                                                    <span v-if="record.rmaStatus != 'Solved'">
+                                                        <span v-if="record.rmaStatus != 'Received Package'">
+                                                            <a @click="cancelStatus(record.id)">
+                                                                <span class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
+                                                            </a>
                                                         </span>
                                                     </span>
                                                 </span>
                                             </span>
-                                        </p>
-                                    </div>
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </template>
@@ -302,11 +300,11 @@
                                             <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                         </a>
 
-                                        <span v-if="record.rmaStatus != 'canceled'">
-                                            <span v-if="record.rmaStatus != 'item_canceled'">
-                                                <span v-if="record.rmaStatus != 'declined'">
-                                                    <span v-if="record.rmaStatus != 'solved'">
-                                                        <span v-if="record.rmaStatus != 'received_package'">
+                                        <span v-if="record.rmaStatus != 'Canceled'">
+                                            <span v-if="record.rmaStatus != 'Item Canceled'">
+                                                <span v-if="record.rmaStatus != 'Declined'">
+                                                    <span v-if="record.rmaStatus != 'Solved'">
+                                                        <span v-if="record.rmaStatus != 'Received Package'">
                                                             <a @click="cancelStatus(record.id)">
                                                                 <span class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                                             </a>

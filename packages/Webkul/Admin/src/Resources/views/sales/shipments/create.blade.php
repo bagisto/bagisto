@@ -251,7 +251,7 @@
                                                             :value="$canShipQty['qty']"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
                                                             data-original-quantity="{{ $canShipQty['qty'] }}"
-                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}' || '{{ $canShipQty['qty'] }} ' <= 0"
+                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                             :ref="$inputName"
                                                         />
 
@@ -260,7 +260,7 @@
                                                 </div>
 
 												@if ($canShipQty['message'])
-													<p class="mt-1 text-xs italic text-red-600">{{ $canShipQty['message'] }}</p>
+													<p class="mt-1 text-xs italic text-green-600">{{ $canShipQty['message'] }}</p>
 												@endif
                                             </div>
                                         @endforeach

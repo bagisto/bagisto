@@ -18,7 +18,7 @@
         // Determine if RMA can be closed
         if (
             is_null($rma->request_status) ||
-            in_array($rma->request_status, ['received_package', 'solved', 'item_canceled', 'declined', 'canceled']) ||
+            in_array($rma->request_status, ['Received Package', 'Solved', 'Item Canceled', 'Declined', 'Canceled']) ||
             in_array($rma->order->status, ['canceled', 'closed']) ||
             $rma->status == 1
         ) {
@@ -28,7 +28,7 @@
         // Check if RMA can be reopened
         if (
             core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes' &&
-            $rma->request_status == 'canceled'
+            $rma->request_status == 'Canceled'
         ) {
             $canReopenRma = true;
         }
@@ -103,7 +103,7 @@
                     @endif
 
                     <!-- Images -->
-                    @if (! empty($rma->images) && $rma->images->count() > 0)
+                    @if ($rma->images->isNotEmpty())
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                             <span class="font-medium">@lang('shop::app.rma.view-customer-rma.images')</span>
 
@@ -284,11 +284,11 @@
                     </span>
 
                     <div>
-                        @if ($rma->status == 1 || $rma->request_status == 'solved')
+                        @if ($rma->status == 1 || $rma->request_status == 'Solved')
                             <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-800">
                                 @lang('shop::app.rma.status.status-name.solved')
                             </span>
-                        @elseif(in_array($rma->order->status, ['canceled', 'closed']))
+                        @elseif(in_array($rma->order->status, ['canceled']))
                             <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-800">
                                 @lang('shop::app.rma.status.status-name.item-canceled')
                             </span>

@@ -84,9 +84,6 @@
                             <!-- Name -->
                             <p v-html="record.status"></p>
 
-                            <!-- Exchange Period -->
-                            <p v-text="record.exchange_period"></p>
-
                             <!-- Return Period -->
                             <p v-text="record.return_period"></p>
 
@@ -220,25 +217,6 @@
                                     </x-admin::form.control-group.label>
 
                                     <hr class="mb-2"/>
-
-                                    <!-- Exchange Period -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.sales.rma.rules.index.datagrid.exchange-period')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="number"
-                                            name="exchange_period"
-                                            rules="min_value:1"
-                                            :value="old('exchange_period')"
-                                            v-model="rules.exchange_period"
-                                            :label="trans('admin::app.sales.rma.rules.index.datagrid.exchange-period')"
-                                            :placeholder="trans('admin::app.sales.rma.rules.index.datagrid.exchange-period')"
-                                        />
-
-                                        <x-admin::form.control-group.error control-name="exchange_period" />
-                                    </x-admin::form.control-group>
 
                                     <!-- Return Period -->
                                     <x-admin::form.control-group>

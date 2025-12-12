@@ -331,22 +331,9 @@
                                             @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_return_period) }}
                                         </span>
                                     </p>
-
-                                    <p
-                                        v-if="resolutionType[getProductId(product)] == 'exchange'"
-                                        class="flex text-sm justify-between gap-3 whitespace-nowrap"
-                                    >
-                                        <span>
-                                            @lang('shop::app.rma.customer.create.exchange-window'):
-                                        </span>
-
-                                        <span>
-                                            @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_exchange_period) }}
-                                        </span>
-                                    </p>
                                 </template>
                                 <p
-                                    v-else-if="! product.rma_exchange_period && ! product.rma_return_period"
+                                    v-else-if="! product.rma_return_period"
                                     class="flex text-sm justify-between gap-3 whitespace-nowrap"
                                     >
                                     <span>
@@ -392,7 +379,7 @@
 
                         <div class="flex gap-3" v-if="! notAllowed">
                             <!-- Resolution Type for rules product -->
-                            <p class="w-full" v-if="product.rma_exchange_period || product.rma_return_period">
+                            <p class="w-full" v-if="product.rma_return_period">
                                 <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required text-sm flex">
@@ -416,13 +403,6 @@
                                                 value="return"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped && product.rma_exchange_period"
-                                                value="exchange"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.exchange')
                                             </option>
 
                                             <option
@@ -463,13 +443,6 @@
                                                 value="return"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped"
-                                                value="exchange"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.exchange')
                                             </option>
 
                                             <option

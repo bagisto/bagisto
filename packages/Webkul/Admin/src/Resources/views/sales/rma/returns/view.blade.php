@@ -24,24 +24,24 @@
 
         $statusArr = [];
 
-        $rmaActiveStatus = $rmaActiveStatus->toarray();
+        $rmaActiveStatus = $rmaActiveStatus->toArray();
 
-        $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-            return $status !== "item_canceled" && $status !== "accept" && $status !== "declined" && $status !== "pending";
-        });
-
-        if (in_array('cancel-items', $rma->items->pluck('resolution')->toArray())) {
+        if ($rma->request_status == 'Pending') {
             $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-                if (! in_array($status, ["accept", "declined", "pending", "dispatched_package", "received_package"])) {
-                    return true;
-                }
+                return in_array($status, ["Accept", "Declined"]);
             });
-        } 
-
-        if ($rma->request_status == 'pending') {
-            $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
-                return in_array($status, ["accept", "declined"]);
-            });
+        } else {
+            if (in_array('cancel-items', $rma->items->pluck('resolution')->toArray())) {
+                $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
+                    if (!in_array($status, ["Accept", "Declined", "Pending", "Dispatched Package", "Received Package"])) {
+                        return true;
+                    }
+                });
+            } else {
+                $rmaActiveStatus = array_filter($rmaActiveStatus, function ($status) {
+                    return $status !== "Item Canceled" && $status !== "Accept" && $status !== "Declined" && $status !== "Pending";
+                });
+            }
         }
 
         $statusArr = array_values($rmaActiveStatus);
@@ -53,7 +53,11 @@
         $order = $rma->order;
     @endphp
 
+    {!! view_render_event('bagisto.admin.rma.view.before') !!}
+    
     <v-admin-rma-view></v-admin-rma-view>
+    
+    {!! view_render_event('bagisto.admin.rma.view.after') !!}
 
     @push('scripts')
         <script
@@ -149,20 +153,22 @@
                                         </div>
 
                                         <!--RMA Image -->
-                                        <div class="flex gap-2.5 mt-2">
-                                            <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.sales.rma.all-rma.view.images')
-                                            </div>
+                                        @if ($rma->images->isNotEmpty())
+                                            <div class="flex gap-2.5 mt-2">
+                                                <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.all-rma.view.images')
+                                                </div>
 
-                                            <div class="flex justify-between flex-wrap gap-2">
-                                                @foreach($rma->images as $image)
-                                                    <img
-                                                        class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
-                                                        src="{{ Storage::url($image->path) }}"
-                                                    />
-                                                @endforeach
+                                                <div class="flex justify-between flex-wrap gap-2">
+                                                    @foreach($rma->images as $image)
+                                                        <img
+                                                            class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
+                                                            src="{{ Storage::url($image->path) }}"
+                                                        />
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif 
                                     </div>
                                 </div>
                             </div>
@@ -451,13 +457,13 @@
                                        @lang('admin::app.sales.rma.all-rma.view.order-status')
                                     </p>
 
-                                    @if ($rma->request_status == 'declined')
+                                    @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
                                         </p>
 
                                     @endif
-                                    @if ($rma->request_status == 'item_canceled')
+                                    @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.view-customer-rma.close-rma')
                                         </p>
@@ -470,14 +476,14 @@
                                     <!-- RMA Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span>
-                                            @if (strtolower($rma->request_status) == 'solved')
+                                            @if (strtolower($rma->request_status) == 'Solved')
                                                 <span class="label-active py-1">
                                                     @lang('shop::app.rma.status.status-name.solved')
                                                 </span>
 
                                             @elseif(
-                                                    strtolower($rma->request_status) == 'canceled'
-                                                    && strtolower($rma->request_status) == 'closed'
+                                                    strtolower($rma->request_status) == 'Canceled'
+                                                    && strtolower($rma->request_status) == 'Closed'
                                                 )
                                                 <span
                                                     class="label-{{ $rma->request_status }} py-1 text-xs"
@@ -517,13 +523,13 @@
                                         </span>
                                     </p>
 
-                                    @if ($rma->request_status == 'declined')
+                                    @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.status.status-quotes.declined-admin')
                                         </p>
                                     @endif
 
-                                    @if ($rma->request_status == 'item_canceled')
+                                    @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('shop::app.rma.status.status-quotes.solved-by-admin')
                                         </p>
@@ -535,28 +541,23 @@
 
                     <!-- RMA change status-->
                     @if (
-                        $rma->request_status != 'solved'
+                        $rma->request_status != 'Solved'
                         && $rma->status != 1
                         && ! in_array($rma->order->status, ['canceled', 'closed'])
                     )
-                        @if ($rma->request_status == 'item_canceled')
+                        @if ($rma->request_status == 'Item Canceled')
                             @php($flag = 0)
 
-                        @elseif ($rma->request_status == 'received_package')
+                        @elseif ($rma->request_status == 'Received Package')
                             @php($flag = 0)
 
-                        @elseif ($rma->request_status == 'declined')
+                        @elseif ($rma->request_status == 'Declined')
                             @php($flag = 0)
 
 
-                        @elseif ($rma->request_status == 'canceled')
+                        @elseif ($rma->request_status == 'Canceled')
                             @php($flag = 0)
 
-                        @elseif (
-                            $rma->status == 1
-                            && $rma->resolution == 'Replace'
-                        )
-                            @php($flag = 0)
                         @elseif (
                             $rma->resolution == 'Return'
                             && $rma->status == 1
@@ -573,7 +574,6 @@
                             && $rma->order->status != 'closed'
                         )
                             <x-admin::accordion>
-
                                 <x-slot:header>
                                     <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
                                         @lang('admin::app.sales.rma.all-rma.view.change-status')
@@ -607,15 +607,13 @@
                                                 @endforeach
                                             </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="request_status"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="request_status" />
                                         </x-admin::form.control-group>
 
                                         <x-admin::form.control-group
-                                            v-if="rmaStatus == 'received_package' || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 'item_canceled')"
-                                            class="mb-2 w-full">
+                                            v-if="rmaStatus == 'Received Package' || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 'Item Canceled')"
+                                            class="mb-2 w-full"
+                                        >
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.sales.refunds.create.refund-shipping')
                                             </x-admin::form.control-group.label>
@@ -623,7 +621,8 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="shipping"
-                                                :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma ->order->base_shipping_refunded"
+                                                :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
+                                                value="{{ $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded }}"
                                                 :label="trans('admin::app.sales.refunds.create.refund-shipping')"
                                                 id="shipping"
                                             >
@@ -646,12 +645,9 @@
                         @endif
 
                         @if (
-                            ($rma->status == 1 && $rma->resolution == 'Replace')
-                            || $rma->request_status == 'item_canceled'
-                            || $rma->resolution == 'Return'
-                            && $rma->status == 1
-                            || $rma->status == 1
-                            && $rma->request_status != 'declined'
+                            $rma->request_status == 'Item Canceled'
+                            || ($rma->resolution == 'Return' && $rma->status == 1)
+                            || ($rma->status == 1 && $rma->request_status != 'Declined')
                         )
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -677,7 +673,7 @@
                     <!-- Re open RMA -->
                     @if (
                         core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') == 'yes'
-                        && $rma->request_status == 'declined'
+                        && $rma->request_status == 'Declined'
                     )
                         <x-admin::accordion>
                             <x-slot:header>

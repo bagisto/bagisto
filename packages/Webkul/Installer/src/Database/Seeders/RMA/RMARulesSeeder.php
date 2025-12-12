@@ -21,7 +21,6 @@ class RMARulesSeeder extends Seeder
                 'name'            => 'Basic',
                 'description'     => 1,
                 'status'          => 1,
-                'exchange_period' => 10,
                 'return_period'   => 10,
                 'created_at'      => now(),
                 'updated_at'      => now(),

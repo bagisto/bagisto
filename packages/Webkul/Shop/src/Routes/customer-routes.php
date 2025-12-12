@@ -191,7 +191,7 @@ Route::prefix('customer')->group(function () {
 
                 Route::get('resolution-reason/{resolutionType}', 'getResolutionReason')->name('shop.rma.action.resolution.reasons');
 
-                Route::post('update-status', 'updateStatus')->name('shop.rma.action.update.status');
+                Route::post('update-status', 'updateStatus')->name('shop.rma.action.update-status');
 
                 Route::post('reopen-status', 'reOpen')->name('shop.rma.action.re-open');
 

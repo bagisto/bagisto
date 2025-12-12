@@ -18,7 +18,6 @@ class RulesDataGrid extends DataGrid
                 'id',
                 'name',
                 'status',
-                'exchange_period',
                 'return_period',
             );
 
@@ -72,15 +71,6 @@ class RulesDataGrid extends DataGrid
 
                 return '<p class="label-canceled">'.trans('admin::app.sales.rma.reasons.index.datagrid.disabled').'</p>';
             },
-        ]);
-
-        $this->addColumn([
-            'index'      => 'exchange_period',
-            'label'      => trans('admin::app.sales.rma.rules.index.datagrid.exchange-period'),
-            'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
         ]);
 
         $this->addColumn([
