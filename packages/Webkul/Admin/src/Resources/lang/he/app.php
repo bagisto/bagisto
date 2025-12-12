@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'ה-RMA נוצרה בהצלחה',
+                    'order-item-not-found' => 'פריט הזמנה לא נמצא',
                     'rma-created-message'  => 'בקשת RMA זמינה עבור המוצר עם כמות של :qty',
+                    'rma-has-been-created' => 'ה-RMA נוצרה בהצלחה',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'כל המוצרים',
                     'all-status'                          => 'כל הסטטוסים',
                     'allow-new-request-for-pending-order' => 'אפשר בקשת RMA חדשה עבור הזמנה ממתינה',
+                    'allow-product-type-for-rma'          => 'אפשר סוג מוצר עבור RMA',
                     'allow-rma-for-digital-product'       => 'אפשר RMA עבור מוצר דיגיטלי',
                     'allowed-file-types'                  => 'אנא בחר סוגי קבצים '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' בלבד',
                     'allowed-file-extension'              => 'סיומת קובץ מותרת',

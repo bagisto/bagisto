@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'RMA با موفقیت ایجاد شد',
+                    'order-item-not-found' => 'آیتم سفارش پیدا نشد',
                     'rma-created-message'  => 'درخواست RMA برای محصول با مقدار :qty موجود است',
+                    'rma-has-been-created' => 'RMA با موفقیت ایجاد شد',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'تمام محصولات',
                     'all-status'                          => 'تمام وضعیت‌ها',
                     'allow-new-request-for-pending-order' => 'اجازه درخواست جدید RMA برای سفارش معلق',
+                    'allow-product-type-for-rma'          => 'اجازه نوع محصول برای RMA',
                     'allow-rma-for-digital-product'       => 'اجازه RMA برای محصول دیجیتال',
                     'allowed-file-extension'              => 'پسوند فایل مجاز',
                     'allowed-file-types'                  => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',

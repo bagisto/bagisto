@@ -28,6 +28,7 @@ class RMADataGrid extends DataGrid
 
         $queryBuilder = DB::table('rma')
             ->leftJoin('orders', 'orders.id', '=', 'rma.order_id')
+            ->leftJoin('rma_statuses', 'rma_statuses.title', '=', 'rma.request_status')
             ->addSelect(
                 'rma.id',
                 'rma.order_id',
@@ -37,7 +38,8 @@ class RMADataGrid extends DataGrid
                 'rma.request_status',
                 'rma.order_status as rma_order_status',
                 'rma.created_at',
-                'orders.status as order_status'
+                'orders.status as order_status',
+                'rma_statuses.color as rma_status_color',
             )
             ->whereIn('order_id', DB::table('orders')->pluck('id')?->toArray());
 
@@ -126,9 +128,9 @@ class RMADataGrid extends DataGrid
                     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
 
-                $rmaStatusData = $this->rmaStatusRepository->where('title', $row->request_status)->first();
+                $color = $row->rma_status_color ?? '';
 
-                return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
+                return '<p class="label-active" style="background:'.$color.';">'.format_title_case($row->request_status).'</p>';
             },
         ]);
 

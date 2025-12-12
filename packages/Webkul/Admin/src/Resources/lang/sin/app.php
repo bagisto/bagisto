@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි',
+                    'order-item-not-found' => 'ඇණවුම් අයිතමය නොමැත',
                     'rma-created-message'  => ':qty ප්‍රමාණයකින් සමන්විත නිෂ්පාදනය සඳහා RMA ඉල්ලීම ලබා ගත හැක',
+                    'rma-has-been-created' => 'අපසුම් ඉඟි සාර්ථකව නිර්මාණය කරන ලදි',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'සියලුම නිෂ්පාදන',
                     'all-status'                          => 'සියලුම තත්ත්වයන්',
                     'allow-new-request-for-pending-order' => 'අපේක්ෂිත ඇණවුම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
+                    'allow-product-type-for-rma'          => 'RMA සඳහා නිෂ්පාදන වර්ගය අවසර දීම',
                     'allow-rma-for-digital-product'       => 'ඩිජිටල් නිෂ්පාදනයකට RMA වලට අවසර දීම',
                     'allowed-file-extension'              => 'අනුමත කළ ගොනු විස්තාරණය',
                     'allowed-file-types'                  => 'කරුණාකර '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' පමණක් තෝරන්න',

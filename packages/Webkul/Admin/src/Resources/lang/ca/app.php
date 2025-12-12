@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'S\'ha creat la RMA',
+                    'order-item-not-found' => 'Element de la comanda no trobat',
                     'rma-created-message'  => 'Hi ha una sol·licitud RMA disponible per al producte amb una quantitat de :qty',
+                    'rma-has-been-created' => 'S\'ha creat la RMA',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'Tots els productes',
                     'all-status'                          => 'Tots els estats',
                     'allow-new-request-for-pending-order' => 'Permetre nova sol·licitud RMA per comanda pendent',
+                    'allow-product-type-for-rma'          => 'Permetre tipus de producte per a RMA',
                     'allow-rma-for-digital-product'       => 'Permetre RMA per producte digital',
                     'allowed-file-extension'              => 'Extensions de fitxer permeses',
                     'allowed-file-types'                  => 'Seleccioneu només els tipus de fitxer '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),

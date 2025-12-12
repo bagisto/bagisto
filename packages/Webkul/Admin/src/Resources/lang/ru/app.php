@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'RMA было успешно создано',
+                    'order-item-not-found' => 'Элемент заказа не найден',
                     'rma-created-message'  => 'Запрос RMA доступен для продукта с количеством :qty',
+                    'rma-has-been-created' => 'RMA было успешно создано',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'Все продукты',
                     'all-status'                          => 'Все статусы',
                     'allow-new-request-for-pending-order' => 'Разрешить новый запрос RMA для ожидающего заказа',
+                    'allow-product-type-for-rma'          => 'Разрешить тип продукта для RMA',
                     'allow-rma-for-digital-product'       => 'Разрешить RMA для цифрового продукта',
                     'allowed-file-extension'              => 'Разрешённое расширение файла',
                     'allowed-file-types'                  => 'Пожалуйста, выберите только типы файлов '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),

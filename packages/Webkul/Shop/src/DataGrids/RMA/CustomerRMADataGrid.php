@@ -24,23 +24,16 @@ class CustomerRMADataGrid extends DataGrid
      */
     public function prepareQueryBuilder(): Builder
     {
-        $customer = auth('customer');
-
-        if ($customer->check()) {
-            session()->forget(['guestOrderId', 'guestEmail']);
-        }
-
-        $customerId = $customer->id() ?? null;
-
-        $guestEmail = session('guestEmail');
-
-        $orderId = session('guestOrderId');
+        $customerId = auth()->guard('customer')->user()
+            ? auth()->guard('customer')->user()->id
+            : null;
 
         $tablePrefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('rma')
             ->join('orders', 'orders.id', '=', 'rma.order_id')
             ->join('rma_items', 'rma_items.rma_id', '=', 'rma.id')
+            ->leftJoin('rma_statuses', 'rma_statuses.title', '=', 'rma.request_status')
             ->select(
                 'rma.id',
                 'rma.status',
@@ -50,21 +43,12 @@ class CustomerRMADataGrid extends DataGrid
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
+                'rma_statuses.id as rma_status_id',
+                'rma_statuses.color as rma_status_color',
                 DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
             )
+            ->where('orders.customer_id', $customerId)
             ->groupBy('rma.id');
-
-        $queryBuilder->where(function ($query) use ($orderId, $customerId, $guestEmail) {
-            if (! is_null($orderId)) {
-                $query->where('orders.id', $orderId)
-                    ->where('orders.customer_email', $guestEmail);
-            } elseif ($guestEmail) {
-                $query->where('orders.customer_email', $guestEmail)
-                    ->where('orders.is_guest', 1);
-            } elseif ($customerId) {
-                $query->where('orders.customer_id', $customerId);
-            }
-        });
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
@@ -118,9 +102,9 @@ class CustomerRMADataGrid extends DataGrid
                     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
                 }
 
-                $rmaStatusData = $this->rmaStatusRepository->where('title', $row->request_status)->first();
+                $color = $row->rma_status_color ?? '';
 
-                return '<p class="label-active" style="background:'.$rmaStatusData?->color.';">'.$row->request_status.'</p>';
+                return '<p class="label-active" style="background:'.$color.';">'.format_title_case($row->request_status).'</p>';
             },
         ]);
 
@@ -149,25 +133,12 @@ class CustomerRMADataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        $route = 'shop.guest.account.rma.view';
-
-        $cancelRoute = 'shop.rma.action.cancel';
-
-        if (
-            auth()->guard('customer')->user()
-            && request()->route()->getName() == 'shop.customers.account.rma.index'
-        ) {
-            $route = 'shop.customers.account.rma.view';
-
-            $cancelRoute = 'shop.rma.action.cancel';
-        }
-
         $this->addAction([
             'title'  => trans('shop::app.rma.customer-rma-index.view'),
             'icon'   => 'icon-eye',
             'method' => 'GET',
-            'url'    => function ($row) use ($route) {
-                return route($route, $row->id);
+            'url'    => function ($row) {
+                return route('shop.customers.account.rma.view', $row->id);
             },
         ]);
 
@@ -182,8 +153,8 @@ class CustomerRMADataGrid extends DataGrid
 
                 return true;
             },
-            'url'      => function ($row) use ($cancelRoute) {
-                return route($cancelRoute, $row->id);
+            'url'      => function ($row) {
+                return route('shop.rma.action.cancel', $row->id);
             },
         ]);
     }

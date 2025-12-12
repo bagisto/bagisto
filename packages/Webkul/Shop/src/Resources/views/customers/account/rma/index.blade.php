@@ -296,7 +296,7 @@
 
                                     <p class="text-gray-600 text-sm" v-html="record.created_at"></p>
 
-                                    <p class="flex justify-end">
+                                    <p class="flex justify-start">
                                         <!-- Arrow -->
                                         <a :href="`{{{ route('shop.customers.account.rma.view', '') }}}/${record.id}`">
                                             <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>

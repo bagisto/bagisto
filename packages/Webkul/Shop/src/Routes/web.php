@@ -16,9 +16,3 @@ require 'customer-routes.php';
  * cart, coupons, etc will be placed here.
  */
 require 'checkout-routes.php';
-
-/**
- * RMA action routes. All routes related to RMA actions
- * in storefront will be placed here.
- */
-require 'rma-action-routes.php';

@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'RMA已创建',
+                    'order-item-not-found' => '订单项未找到',
                     'rma-created-message'  => '产品数量为:qty的RMA请求已创建',
+                    'rma-has-been-created' => 'RMA已创建',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => '所有产品',
                     'all-status'                          => '所有状态',
                     'allow-new-request-for-pending-order' => '允许针对待处理订单的新RMA请求',
+                    'allow-product-type-for-rma'          => '允许产品类型用于RMA',
                     'allow-rma-for-digital-product'       => '允许数字产品的RMA',
                     'allowed-file-extension'              => '允许的文件扩展名',
                     'allowed-file-types'                  => '请选择仅文件类型 '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),

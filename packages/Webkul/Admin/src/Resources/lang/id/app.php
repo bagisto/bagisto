@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'RMA telah dibuat',
+                    'order-item-not-found' => 'Item pesanan tidak ditemukan',
                     'rma-created-message'  => 'Permintaan RMA tersedia untuk produk dengan jumlah :qty',
+                    'rma-has-been-created' => 'RMA telah dibuat',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'Semua Produk',
                     'all-status'                          => 'Semua Status',
                     'allow-new-request-for-pending-order' => 'Izinkan permintaan RMA baru untuk pesanan tertunda',
+                    'allow-product-type-for-rma'          => 'Izinkan Jenis Produk untuk RMA',
                     'allow-rma-for-digital-product'       => 'Izinkan RMA untuk produk digital',
                     'allowed-file-extension'              => 'Ekstensi File yang Diizinkan',
                     'allowed-file-types'                  => 'Silakan pilih tipe file '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' saja',

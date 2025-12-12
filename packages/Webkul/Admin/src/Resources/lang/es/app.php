@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'La RMA ha sido creada',
+                    'order-item-not-found' => 'Elemento de pedido no encontrado',
                     'rma-created-message'  => 'Una solicitud de RMA está disponible para el producto con una cantidad de :qty',
+                    'rma-has-been-created' => 'La RMA ha sido creada',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'Todos los productos',
                     'all-status'                          => 'Todos los estados',
                     'allow-new-request-for-pending-order' => 'Permitir nueva solicitud de RMA para pedido pendiente',
+                    'allow-product-type-for-rma'          => 'Permitir tipo de producto para RMA',
                     'allow-rma-for-digital-product'       => 'Permitir RMA para producto digital',
                     'allowed-file-extension'              => 'Extensión de archivo permitida',
                     'allowed-file-types'                  => 'Por favor, seleccione solo los tipos de archivo '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),

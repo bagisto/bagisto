@@ -6,7 +6,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderPayment;
 
 class OrderRMADataGrid extends DataGrid
 {
@@ -198,14 +197,9 @@ class OrderRMADataGrid extends DataGrid
             'searchable'         => true,
             'sortable'           => true,
             'filterable'         => true,
-            'filterable_options' => OrderPayment::distinct()
-                ->get(['method_title'])
-                ->map(function ($item) {
-                    return [
-                        'label' => $item->method_title,
-                        'value' => $item->method_title,
-                    ];
-                })
+            'filterable_options' => collect(config('payment_methods'))
+                ->map(fn ($type) => ['label' => trans($type['title']), 'value' => $type['title']])
+                ->values()
                 ->toArray(),
             'closure'            => function ($row) {
                 return '<span class="text-sm">'.trans('admin::app.sales.orders.index.datagrid.pay-by', ['method' => '']).$row->method_title.'</span>';

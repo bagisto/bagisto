@@ -62,7 +62,7 @@ class RMAActionController extends Controller
     /**
      * Change rma status to canceled.
      */
-    public function cancel(int $id): JsonResponse
+    public function cancelRequest(int $id): JsonResponse
     {
         $rma = $this->rmaRepository->findOrFail($id);
 
@@ -84,7 +84,7 @@ class RMAActionController extends Controller
     /**
      * Save rma status by customer
      */
-    public function saveStatus(): RedirectResponse
+    public function updateStatus(): RedirectResponse
     {
         $data = request()->only(['rma_id', 'close_rma']);
 

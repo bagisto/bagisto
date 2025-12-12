@@ -1027,8 +1027,9 @@ return [
 
             'invoice' => [
                 'create' => [
-                    'rma-has-been-created' => 'İade Talebi başarıyla oluşturuldu',
+                    'order-item-not-found' => 'Sipariş kalemi bulunamadı',
                     'rma-created-message'  => ':qty miktarındaki ürün için bir RMA talebi mevcuttur',
+                    'rma-has-been-created' => 'İade Talebi başarıyla oluşturuldu',
                 ],
             ],
 
@@ -4933,6 +4934,7 @@ return [
                     'all-products'                        => 'Tüm Ürünler',
                     'all-status'                          => 'Tüm Durumlar',
                     'allow-new-request-for-pending-order' => 'Bekleyen sipariş için yeni RMA talebine izin ver',
+                    'allow-product-type-for-rma'          => 'RMA için ürün türüne izin ver',
                     'allow-rma-for-digital-product'       => 'Dijital ürün için RMA\'ya izin ver',
                     'allowed-file-extension'              => 'İzin verilen dosya uzantısı',
                     'allowed-file-types'                  => 'Lütfen yalnızca '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' dosya türlerini seçin',
