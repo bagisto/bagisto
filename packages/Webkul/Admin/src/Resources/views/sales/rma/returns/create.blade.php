@@ -5,13 +5,13 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('shop::app.rma.customer.create.heading')
+        @lang('admin::app.sales.rma.create-rma.create-title')
     </x-slot:title>
 
     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <!-- Heading -->
         <h1 class="text-xl font-bold text-gray-800 dark:text-white">
-            @lang('shop::app.rma.customer.create.heading')
+            @lang('admin::app.sales.rma.create-rma.create-title')
         </h1>
 
         <div class="flex items-center gap-x-2.5">
@@ -179,7 +179,7 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-base font-medium max-md:text-base dark:text-gray-300">
-                                    @lang('shop::app.rma.customer.create.heading')
+                                    @lang('admin::app.sales.rma.create-rma.create-title')
                                 </h2>
                             </x-slot>
 
@@ -202,7 +202,7 @@
                                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                         </svg>
 
-                                        @lang('shop::app.rma.customer.submit-req')
+                                        @lang('admin::app.sales.rma.create-rma.save-btn')
                                     </button>
                                 </div>
                             </x-slot>
@@ -247,8 +247,8 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             ::name="'order_item_id[' + getProductId(product) + ']'"
-                                            :label="trans('shop::app.rma.customer.rma-qty')"
-                                            :placeholder="trans('shop::app.rma.customer.rma-qty')"
+                                            :label="trans('admin::app.sales.rma.create-rma.quantity')"
+                                            :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
                                             ::value="product.order_item_id"
                                         />
                                     </x-admin::form.control-group>
@@ -324,7 +324,7 @@
                                         class="flex text-sm justify-between gap-3 whitespace-nowrap"
                                     >
                                         <span>
-                                            @lang('shop::app.rma.customer.create.return-window'):
+                                            @lang('admin::app.sales.rma.all-rma.index.datagrid.return-window'):
                                         </span>
 
                                         <span>
@@ -337,7 +337,7 @@
                                     class="flex text-sm justify-between gap-3 whitespace-nowrap"
                                     >
                                     <span>
-                                        @lang('shop::app.rma.customer.create.return-window'):
+                                        @lang('admin::app.sales.rma.all-rma.index.datagrid.return-window'):
                                     </span>
 
                                     <span>
@@ -353,15 +353,15 @@
                                 <!-- RMA Quantity -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required text-sm flex">
-                                        @lang('shop::app.rma.customer.rma-qty')
+                                        @lang('admin::app.sales.rma.create-rma.quantity')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         ::name="'rma_qty[' + getProductId(product) + ']'"
                                         ::rules="'min_value:1|required|max_value:' + product.currentQuantity"
-                                        :label="trans('shop::app.rma.customer.rma-qty')"
-                                        :placeholder="trans('shop::app.rma.customer.rma-qty')"
+                                        :label="trans('admin::app.sales.rma.create-rma.quantity')"
+                                        :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
                                         v-model="rma_qty[getProductId(product)]"
                                     />
 
@@ -469,7 +469,7 @@
                                 >
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required text-sm flex">
-                                            @lang('shop::app.rma.customer.create.reason')
+                                            @lang('admin::app.sales.rma.create-rma.reason')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -477,7 +477,7 @@
                                             ::name="'rma_reason_id[' + getProductId(product) + ']'"
                                             v-model="rma_reason_id[getProductId(product)]"
                                             rules="required"
-                                            :label="trans('shop::app.rma.customer.create.reason')"
+                                            :label="trans('admin::app.sales.rma.create-rma.reason')"
                                         >
                                             <option
                                                 v-for="reason in resolutionReason[getProductId(product)]"
@@ -521,11 +521,11 @@
                                 v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'"
                                 value="1"
                             >
-                                @lang('shop::app.rma.customer.delivered')
+                                @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
                             </option>
 
                             <option value="0">
-                                @lang('shop::app.rma.customer.undelivered')
+                                @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
                             </option>
                         </x-admin::form.control-group.control>
 
@@ -798,15 +798,15 @@
                     <!-- Additional information -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="text-sm flex">
-                            @lang('shop::app.rma.customer.create.information')
+                            @lang('admin::app.sales.rma.all-rma.view.additional-information')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="information"
                             id="information"
-                            :label="trans('shop::app.rma.customer.create.information')"
-                            :placeholder="trans('shop::app.rma.customer.create.information')"
+                            :label="trans('admin::app.sales.rma.all-rma.view.additional-information')"
+                            :placeholder="trans('admin::app.sales.rma.all-rma.view.additional-information')"
                             rows="4"
                             maxlength="250"
                         />
@@ -835,7 +835,7 @@
             </div>
 
             <div v-else>
-                @lang('shop::app.rma.customer.create.rma-not-available-quotes')
+                @lang('admin::app.sales.rma.create-rma.rma-not-available-quotes')
             </div>
         </script>
 

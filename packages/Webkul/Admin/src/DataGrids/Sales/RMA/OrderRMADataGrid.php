@@ -135,7 +135,7 @@ class OrderRMADataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('shop::app.customers.account.orders.order-id'),
+            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -154,7 +154,7 @@ class OrderRMADataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>'.$row->customer_name.' ('.trans('shop::app.rma.view-customer-rma.guest').')'.'</span>';
+                    return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
                 }
 
                 return $row->customer_name;
@@ -163,7 +163,7 @@ class OrderRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'           => 'created_at',
-            'label'           => trans('shop::app.customers.account.orders.order-date'),
+            'label'           => trans('admin::app.sales.rma.all-rma.index.datagrid.order-date'),
             'type'            => 'date',
             'searchable'      => true,
             'sortable'        => true,
@@ -176,7 +176,7 @@ class OrderRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'grand_total',
-            'label'      => trans('shop::app.customers.account.orders.total'),
+            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.total'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -210,7 +210,7 @@ class OrderRMADataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('shop::app.customers.account.orders.status.title'),
+            'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => true,
             'sortable'           => true,
@@ -274,7 +274,7 @@ class OrderRMADataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-eye',
-            'title'  => trans('shop::app.customers.account.orders.action-view'),
+            'title'  => trans('admin::app.sales.rma.all-rma.index.datagrid.action-view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('shop.customers.account.orders.view', $row->id);

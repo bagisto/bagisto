@@ -123,7 +123,7 @@ class RMAController extends Controller
             ]);
 
             $requestData = [
-                'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
+                'message'    => trans('admin::app.sales.rma.all-rma.view.conversation-process'),
                 'rma_id'     => $data['rma_id'],
                 'is_admin'   => 1,
                 'created_at' => Carbon::now(),
@@ -203,7 +203,7 @@ class RMAController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('shop::app.customer.signup-form.failed'),
+            'message' => trans('admin::app.sales.rma.all-rma.view.failed'),
         ]);
     }
 
@@ -265,7 +265,7 @@ class RMAController extends Controller
                 $refund = $this->createRefund($rma);
 
                 if (! $refund) {
-                    session()->flash('error', trans('shop::app.customer.signup-form.failed'));
+                    session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-failed'));
 
                     return redirect()->back();
                 }
@@ -291,7 +291,10 @@ class RMAController extends Controller
         $updateStatus = $rma->update($status);
 
         $requestData = [
-            'message'    => trans('shop::app.rma.mail.status.your-rma-id').' '.trans('shop::app.rma.mail.status.status-change', ['id' => $status['rma_id']]).'. '.trans('shop::app.rma.mail.status.status').' : '.$rma['request_status'],
+            'message'    => trans('admin::app.sales.rma.all-rma.view.status-message', [
+                'id'     => $status['rma_id'],
+                'status' => $rma['request_status'],
+            ]),
             'rma_id'     => $status['rma_id'],
             'is_admin'   => 1,
         ];
@@ -309,7 +312,7 @@ class RMAController extends Controller
             return redirect()->back();
         }
 
-        session()->flash('error', trans('shop::app.customer.signup-form.failed'));
+        session()->flash('error', trans('admin::app.sales.rma.all-rma.view.failed'));
 
         return redirect()->back();
     }
@@ -348,7 +351,7 @@ class RMAController extends Controller
         $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canRefund()) {
-            session()->flash('error', trans('shop::app.rma.response.creation-error'));
+            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-creation-error'));
 
             return redirect()->back();
         }

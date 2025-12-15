@@ -31,7 +31,7 @@ class RulesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
+            'label'      => trans('admin::app.sales.rma.rules.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -40,7 +40,7 @@ class RulesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.sales.rma.rules.create.rules-title'),
+            'label'      => trans('admin::app.sales.rma.rules.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -49,7 +49,7 @@ class RulesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'status',
-            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
+            'label'              => trans('admin::app.sales.rma.rules.index.datagrid.status'),
             'type'               => 'string',
             'searchable'         => false,
             'filterable'         => true,
@@ -57,19 +57,19 @@ class RulesDataGrid extends DataGrid
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [
-                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
+                    'label' => trans('admin::app.sales.rma.rules.index.datagrid.enabled'),
                     'value' => 1,
                 ], [
-                    'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
+                    'label' => trans('admin::app.sales.rma.rules.index.datagrid.disabled'),
                     'value' => 0,
                 ],
             ],
             'closure'            => function ($row) {
                 if ($row->status) {
-                    return '<p class="label-active">'.trans('admin::app.sales.rma.reasons.index.datagrid.enabled').'</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.rma.rules.index.datagrid.enabled').'</p>';
                 }
 
-                return '<p class="label-canceled">'.trans('admin::app.sales.rma.reasons.index.datagrid.disabled').'</p>';
+                return '<p class="label-canceled">'.trans('admin::app.sales.rma.rules.index.datagrid.disabled').'</p>';
             },
         ]);
 
@@ -91,7 +91,7 @@ class RulesDataGrid extends DataGrid
         if (bouncer()->hasPermission('sales.rma-rules.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
-                'title'  => trans('shop::app.rma.customer-rma-index.edit'),
+                'title'  => trans('admin::app.sales.rma.rules.index.datagrid.edit'),
                 'type'   => 'Edit',
                 'method' => 'GET',
                 'url'    => function ($row) {
@@ -103,7 +103,7 @@ class RulesDataGrid extends DataGrid
         if (bouncer()->hasPermission('sales.rma-rules.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
-                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'title'  => trans('admin::app.sales.rma.rules.index.datagrid.delete'),
                 'type'   => 'Delete',
                 'method' => 'DELETE',
                 'url'    => function ($row) {
@@ -120,15 +120,15 @@ class RulesDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma-rules.edit')) {
             $this->addMassAction([
-                'title'   => trans('shop::app.rma.customer-rma-index.update'),
+                'title'   => trans('admin::app.sales.rma.rules.index.datagrid.update'),
                 'method'  => 'POST',
                 'url'     => route('admin.sales.rma.rules.mass-update'),
                 'options' => [
                     [
-                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
+                        'label' => trans('admin::app.sales.rma.rules.index.datagrid.enabled'),
                         'value' => 1,
                     ], [
-                        'label' => trans('admin::app.sales.rma.reasons.index.datagrid.disabled'),
+                        'label' => trans('admin::app.sales.rma.rules.index.datagrid.disabled'),
                         'value' => 0,
                     ],
                 ],
@@ -137,7 +137,7 @@ class RulesDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.rma-rules.delete')) {
             $this->addMassAction([
-                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'title'  => trans('admin::app.sales.rma.rules.index.datagrid.delete'),
                 'method' => 'POST',
                 'url'    => route('admin.sales.rma.rules.mass-delete'),
             ]);

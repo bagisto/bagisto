@@ -104,7 +104,7 @@ class RMADataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>'.$row->customer_name.'('.trans('shop::app.rma.view-customer-rma.guest').')'.'</span>';
+                    return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
                 }
 
                 return $row->customer_name;
@@ -125,7 +125,7 @@ class RMADataGrid extends DataGrid
                     $row->order_status == Order::STATUS_CANCELED
                     && $row->order_status == Order::STATUS_CLOSED
                 ) {
-                    return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
+                    return '<p class="label-canceled">'.trans('admin::app.sales.rma.all-rma.index.datagrid.item-canceled').'</p>';
                 }
 
                 $color = $row->rma_status_color ?? '';
@@ -144,10 +144,10 @@ class RMADataGrid extends DataGrid
             'sortable'           => true,
             'filterable_options' => [
                 [
-                    'label' => trans('shop::app.rma.customer.delivered'),
+                    'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.delivered'),
                     'value' => 1,
                 ], [
-                    'label' => trans('shop::app.rma.customer.undelivered'),
+                    'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.undelivered'),
                     'value' => 0,
                 ],
             ],
@@ -156,12 +156,12 @@ class RMADataGrid extends DataGrid
                     $row->order_status == 'canceled'
                     || $row->order_status == 'closed'
                 ) {
-                    return '<p class="label-'.$row->order_status.'">'.trans('shop::app.rma.customer.'.$row->order_status).'</p>';
+                    return '<p class="label-'.$row->order_status.'">'.trans('admin::app.sales.rma.all-rma.index.datagrid.'.$row->order_status).'</p>';
                 } elseif ($row->rma_order_status) {
-                    return '<p class="label-active">'.trans('shop::app.rma.customer.delivered').'</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.rma.all-rma.index.datagrid.delivered').'</p>';
                 }
 
-                return '<p class="label-info">'.trans('shop::app.rma.customer.undelivered').'</p>';
+                return '<p class="label-info">'.trans('admin::app.sales.rma.all-rma.index.datagrid.undelivered').'</p>';
             },
         ]);
 
@@ -183,7 +183,7 @@ class RMADataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma.create')) {
             $this->addAction([
-                'title'  => trans('shop::app.rma.customer-rma-index.view'),
+                'title'  => trans('admin::app.sales.rma.all-rma.index.datagrid.view'),
                 'icon'   => 'icon-view',
                 'method' => 'GET',
                 'url'    => function ($row) {

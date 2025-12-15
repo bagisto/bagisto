@@ -107,7 +107,7 @@
                                     </div>
 
                                     <p class="flex justify-end text-gray-600 cursor-pointer">
-                                        @lang('admin::app.settings.data-transfer.imports.edit.action')
+                                        @lang('shop::app.customers.account.rma.create.action')
                                     </p>
                                 </div>
                             </template>
@@ -428,7 +428,7 @@
 
                                 <p class="flex text-sm justify-between whitespace-nowrap">
                                     <span>
-                                        @lang('admin::app.catalog.products.index.create.sku'):
+                                        @lang('shop::app.customers.account.rma.create.sku'):
                                     </span>
 
                                     <span>@{{ product.sku }}</span>
@@ -436,7 +436,7 @@
 
                                 <p class="flex text-sm justify-between whitespace-nowrap">
                                     <span>
-                                        @lang('admin::app.catalog.attributes.create.price'):
+                                        @lang('shop::app.customers.account.rma.create.price'):
                                     </span>
 
                                     <span>@{{ formatPrice(product.price) }}</span>
@@ -444,7 +444,7 @@
 
                                 <p class="flex text-sm justify-between whitespace-nowrap">
                                     <span>
-                                        @lang('admin::app.configuration.index.sales.rma.current-order-quantity'):
+                                        @lang('shop::app.customers.account.rma.create.current-order-quantity'):
                                     </span>
 
                                     <span>
@@ -507,7 +507,7 @@
                                 v-if="product.currentQuantity <= '0'"
                                 class="text-sm text-red-600 flex mb-2"
                             >
-                                @lang('admin::app.configuration.index.sales.rma.product-already-raw')
+                                @lang('shop::app.customers.account.rma.create.product-already-raw')
                             </div>
                         </p>
 
@@ -517,7 +517,7 @@
                                 <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                     <x-shop::form.control-group>
                                         <x-shop::form.control-group.label class="required text-sm flex">
-                                            @lang('admin::app.configuration.index.sales.rma.resolution-type')
+                                            @lang('shop::app.customers.account.rma.create.resolution-type')
                                         </x-shop::form.control-group.label>
 
                                         <x-shop::form.control-group.control
@@ -526,24 +526,24 @@
                                             rules="required"
                                             v-model="resolutionType[getProductId(product)]"
                                             @change="getResolutionReason(getProductId(product))"
-                                            :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
+                                            :label="trans('shop::app.customers.account.rma.create.resolution-type')"
                                         >
                                             <option value="">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                                @lang('shop::app.customers.account.rma.create.select')
                                             </option>
 
                                             <option
                                                 v-if="product.qty_ordered == product.qty_shipped && product.rma_return_period"
                                                 value="return"
                                             >
-                                                @lang('admin::app.configuration.index.sales.rma.return')
+                                                @lang('shop::app.customers.account.rma.create.return')
                                             </option>
 
                                             <option
                                                 v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
                                                 value="cancel-items"
                                             >
-                                                @lang('admin::app.configuration.index.sales.rma.cancel-items')
+                                                @lang('shop::app.customers.account.rma.create.cancel-items')
                                             </option>
                                         </x-shop::form.control-group.control>
 
@@ -557,7 +557,7 @@
                                 <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                     <x-shop::form.control-group>
                                         <x-shop::form.control-group.label class="required text-sm flex">
-                                            @lang('admin::app.configuration.index.sales.rma.resolution-type')
+                                            @lang('shop::app.customers.account.rma.create.resolution-type')
                                         </x-shop::form.control-group.label>
 
                                         <x-shop::form.control-group.control
@@ -566,24 +566,24 @@
                                             rules="required"
                                             v-model="resolutionType[getProductId(product)]"
                                             @change="getResolutionReason(getProductId(product))"
-                                            :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
+                                            :label="trans('shop::app.customers.account.rma.create.resolution-type')"
                                         >
                                             <option value="">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                                @lang('shop::app.customers.account.rma.create.select')
                                             </option>
 
                                             <option
                                                 v-if="product.qty_ordered == product.qty_shipped"
                                                 value="return"
                                             >
-                                                @lang('admin::app.configuration.index.sales.rma.return')
+                                                @lang('shop::app.customers.account.rma.create.return')
                                             </option>
 
                                             <option
                                                 v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
                                                 value="cancel-items"
                                             >
-                                                @lang('admin::app.configuration.index.sales.rma.cancel-items')
+                                                @lang('shop::app.customers.account.rma.create.cancel-items')
                                             </option>
                                         </x-shop::form.control-group.control>
 
@@ -637,7 +637,7 @@
                     <!-- Delivery Status -->
                     <x-shop::form.control-group v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'">
                         <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                            @lang('admin::app.configuration.index.sales.rma.product-delivery-status')
+                            @lang('shop::app.customers.account.rma.create.product-delivery-status')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -645,7 +645,7 @@
                             name="order_status"
                             rules="required"
                             v-model="orderStatus"
-                            :label="trans('admin::app.configuration.index.sales.rma.product-delivery-status')"
+                            :label="trans('shop::app.customers.account.rma.create.product-delivery-status')"
                         >
                             <option value="1">
                                 @lang('shop::app.rma.customer.delivered')
@@ -661,7 +661,7 @@
                         <!-- Delivery Status -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.package-condition')
+                                @lang('shop::app.customers.account.rma.create.package-condition')
                             </x-shop::form.control-group.label>
 
                             <x-shop::form.control-group.control
@@ -669,18 +669,18 @@
                                 name="package_condition"
                                 rules="required"
                                 v-model="packageCondition"
-                                :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
+                                :label="trans('shop::app.customers.account.rma.create.package-condition')"
                             >
                                 <option value="">
-                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                    @lang('shop::app.customers.account.rma.create.select')
                                 </option>
 
                                 <option value="open">
-                                    @lang('admin::app.configuration.index.sales.rma.open')
+                                    @lang('shop::app.customers.account.rma.create.open')
                                 </option>
 
                                 <option value="packed">
-                                    @lang('admin::app.configuration.index.sales.rma.packed')
+                                    @lang('shop::app.customers.account.rma.create.packed')
                                 </option>
                             </x-shop::form.control-group.control>
 
@@ -690,7 +690,7 @@
                         <!-- Return Pickup Address -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.return-pickup-address')
+                                @lang('shop::app.customers.account.rma.create.return-pickup-address')
                             </x-shop::form.control-group.label>
 
                             <x-shop::form.control-group.control
@@ -698,9 +698,9 @@
                                 name="return_pickup_address"
                                 rules="required"
                                 :value="old('return_pickup_address')"
-                                :label="trans('admin::app.configuration.index.sales.rma.return-pickup-address')"
-                                :placeholder="trans('admin::app.configuration.index.sales.rma.return-pickup-address')"
-                                aria-label="@lang('admin::app.configuration.index.sales.rma.return-pickup-address')"
+                                :label="trans('shop::app.customers.account.rma.create.return-pickup-address')"
+                                :placeholder="trans('shop::app.customers.account.rma.create.return-pickup-address')"
+                                aria-label="@lang('shop::app.customers.account.rma.create.return-pickup-address')"
                             />
 
                             <x-shop::form.control-group.error name="return_pickup_address" class="flex" />
@@ -709,7 +709,7 @@
                         <!-- Return Pickup Time -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.return-pickup-time')
+                                @lang('shop::app.customers.account.rma.create.return-pickup-time')
                             </x-shop::form.control-group.label>
 
                             <x-shop::form.control-group.control
@@ -717,22 +717,22 @@
                                 name="return_pickup_time"
                                 rules="required"
                                 v-model="returnPickupTime"
-                                :label="trans('admin::app.configuration.index.sales.rma.return-pickup-time')"
+                                :label="trans('shop::app.customers.account.rma.create.return-pickup-time')"
                             >
                                 <option value="">
-                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                    @lang('shop::app.customers.account.rma.create.select')
                                 </option>
 
                                 <option value="morning">
-                                    @lang('admin::app.configuration.index.sales.rma.morning')
+                                    @lang('shop::app.customers.account.rma.create.morning')
                                 </option>
 
                                 <option value="afternoon">
-                                    @lang('admin::app.configuration.index.sales.rma.afternoon')
+                                    @lang('shop::app.customers.account.rma.create.afternoon')
                                 </option>
 
                                 <option value="evening">
-                                    @lang('admin::app.configuration.index.sales.rma.evening')
+                                    @lang('shop::app.customers.account.rma.create.evening')
                                 </option>
                             </x-shop::form.control-group.control>
 
@@ -893,7 +893,7 @@
                                                 </label>
                                             </label>
 
-                                            <x-admin::form.control-group.error
+                                            <x-shop::form.control-group.error
                                                 control-name="customAttributes[{{ $attribute->code }}]"
                                                 class="flex"
                                                 />
@@ -932,7 +932,7 @@
                                             </label>
                                         @endforeach
 
-                                        <x-admin::form.control-group.error
+                                        <x-shop::form.control-group.error
                                             control-name="customAttributes[{{ $attribute->code }}]"
                                             class="flex"
                                         />
@@ -968,14 +968,14 @@
                     <!-- Images -->
                     <x-shop::form.control-group class="mt-4">
                         <x-shop::form.control-group.label class="text-sm flex">
-                            @lang('admin::app.catalog.products.edit.images.title')
+                            @lang('shop::app.customers.account.rma.create.images')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
                             type="image"
                             class="!p-0 rounded-xl text-gray-700 mb-0"
                             name="images[]"
-                            :label="trans('admin::app.catalog.products.edit.images.title')"
+                            :label="trans('shop::app.customers.account.rma.create.images')"
                             :is-multiple="false"
                             accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />

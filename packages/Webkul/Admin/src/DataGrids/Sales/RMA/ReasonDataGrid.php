@@ -124,7 +124,7 @@ class ReasonDataGrid extends DataGrid
             $this->addAction([
                 'index'  => 'edit',
                 'icon'   => 'icon-edit',
-                'title'  => trans('shop::app.rma.customer-rma-index.edit'),
+                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.edit'),
                 'method' => 'GET',
                 'url'    => function ($row) {
                     return route('admin.sales.rma.reason.edit', $row->id);
@@ -135,7 +135,7 @@ class ReasonDataGrid extends DataGrid
         if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
-                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'type'   => 'Delete',
                 'method' => 'DELETE',
                 'url'    => function ($row) {
@@ -152,7 +152,7 @@ class ReasonDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma-reason.edit')) {
             $this->addMassAction([
-                'title'   => trans('shop::app.rma.customer-rma-index.update'),
+                'title'   => trans('admin::app.sales.rma.reasons.index.datagrid.update'),
                 'method'  => 'POST',
                 'url'     => route('admin.sales.rma.reason.mass-update'),
                 'options' => [
@@ -169,7 +169,7 @@ class ReasonDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addMassAction([
-                'title'  => trans('shop::app.rma.customer-rma-index.delete'),
+                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'method' => 'POST',
                 'url'    => route('admin.sales.rma.reason.mass-delete'),
             ]);

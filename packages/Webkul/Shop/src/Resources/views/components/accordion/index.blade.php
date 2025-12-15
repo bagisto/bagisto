@@ -51,14 +51,14 @@
                 :toggle="toggle"
                 :isOpen="isOpen"
             >
-                @lang('admin::app.components.accordion.default-content')
+                @lang('shop::app.components.accordion.default-content')
             </slot>
 
             <slot
                 name="content"
                 :isOpen="isOpen"
             >
-                @lang('admin::app.components.accordion.default-content')
+                @lang('shop::app.components.accordion.default-content')
             </slot>
         </div>
     </script>

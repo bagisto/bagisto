@@ -91,7 +91,7 @@
                                 </div>
 
                                 <p class="flex justify-end text-gray-600 hover:text-gray-800 cursor-pointer">
-                                    @lang('admin::app.settings.data-transfer.imports.edit.action')
+                                    @lang('shop::app.customers.account.rma.index.action')
                                 </p>
                             </div>
                         </template>

@@ -246,7 +246,7 @@
                             />
                         </div>
                     </form>
-                </x-shop::form>
+                </x-admin::form>
             </div>
 
             <x-admin::form

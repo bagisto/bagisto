@@ -37,7 +37,7 @@
 
                 <span class="flex max-md:block">
                     <span class="text-zinc-500 max-md:text-xs">
-                        @lang('admin::app.configuration.index.sales.rma.setting.terms')
+                        @lang('shop::app.customers.account.rma.terms.terms')
                     </span>
                     
                     <a 
@@ -46,13 +46,13 @@
                         @click="$refs.agreementModel.open()"
                     >
                         <span>
-                            @lang('admin::app.configuration.index.sales.rma.setting.read')
+                            @lang('shop::app.customers.account.rma.terms.read')
                         </span>
                     </a>
                 </span>
             </label>
 
-            <x-admin::form.control-group.error control-name="agreement" />
+            <x-shop::form.control-group.error control-name="agreement" />
         </div>
 
         <!-- Agreement modal -->

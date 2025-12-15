@@ -5,7 +5,6 @@ namespace Webkul\RMA\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\RMA\Contracts\RMAItem as RMAItemContract;
 use Webkul\Sales\Models\OrderItemProxy;

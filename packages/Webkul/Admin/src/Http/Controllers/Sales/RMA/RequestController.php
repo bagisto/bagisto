@@ -66,17 +66,12 @@ class RequestController extends Controller
      */
     public function store(): RedirectResponse|JsonResponse
     {
-        if (! is_array(request()->input('order_item_id'))) {
-            session()->flash('warning', trans('Please select the item'));
-
-            return redirect()->route('admin.sales.rma.create');
-        }
-
         $this->validate(request(), [
-            'rma_qty'         => 'required',
-            'resolution_type' => 'required',
-            'order_status'    => 'required',
-            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'rma_qty'          => 'required',
+            'resolution_type'  => 'required',
+            'order_status'     => 'required',
+            'order_item_id'    => 'required|array|min:1',
+            'images.*'         => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $requestData = request()->only([
@@ -145,7 +140,7 @@ class RequestController extends Controller
         }
 
         $requestData = [
-            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
+            'message'    => trans('admin::app.sales.rma.create-rma.conversation-process'),
             'rma_id'     => $rma->id,
             'is_admin'   => 1,
         ];
@@ -216,7 +211,7 @@ class RequestController extends Controller
         }
 
         return response()->json([
-            'messages' => trans('shop::app.customer.signup-form.failed'),
+            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
         ]);
     }
 

@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\RMA\Enums\RequestStatusEnum;
@@ -34,14 +33,14 @@ class RMAController extends Controller
      * @return void
      */
     public function __construct(
-        protected OrderItemRepository $orderItemRepository,
         protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected RMARepository $rmaRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
         protected RMAImageRepository $rmaImagesRepository,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
         protected RMAReasonRepository $rmaReasonsRepository,
-        protected RMARepository $rmaRepository,
     ) {}
 
     /**
@@ -57,7 +56,7 @@ class RMAController extends Controller
     }
 
     /**
-     * Get details of rma
+     * Get details of rma.
      */
     public function view(int $id): View|RedirectResponse
     {
@@ -71,7 +70,7 @@ class RMAController extends Controller
     }
 
     /**
-     * Create rma for customer
+     * Create rma for customer.
      */
     public function create(): JsonResponse|View
     {
@@ -87,16 +86,11 @@ class RMAController extends Controller
      */
     public function store(): JsonResponse|RedirectResponse
     {
-        if (! is_array(request()->input('order_item_id'))) {
-            session()->flash('warning', trans('Please select the item'));
-
-            return redirect()->route('shop.guest.account.rma.create');
-        }
-
         $this->validate(request(), [
             'rma_qty'         => 'required',
             'resolution_type' => 'required',
             'order_status'    => 'required',
+            'order_item_id'   => 'required|array|min:1',
             'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
@@ -210,7 +204,6 @@ class RMAController extends Controller
             try {
                 Mail::queue(new CustomerRMARequestNotification($data));
             } catch (\Exception $e) {
-                Log::error('Error in Sending Email'.$e->getMessage());
             }
 
             return new JsonResponse([

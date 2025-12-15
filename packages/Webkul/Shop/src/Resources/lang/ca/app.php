@@ -1152,12 +1152,12 @@ return [
     'layouts' => [
         'address'               => 'Adreça',
         'downloadable-products' => 'Productes descarregables',
+        'gdpr-request'          => 'Sol·licituds de GDPR',
         'my-account'            => 'El meu compte',
         'orders'                => 'Comandes',
         'profile'               => 'Perfil',
         'reviews'               => 'Ressenyes',
         'rma'                   => 'RMA',
-        'sol·licitud-gdpr'      => 'Sol·licituds de GDPR',
         'wishlist'              => 'Llista de desitjos',
     ],
 

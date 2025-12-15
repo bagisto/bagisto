@@ -45,7 +45,7 @@
                     <div class="box-shadow rounded bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4">
                             <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                @lang('shop::app.rma.view-customer-rma.heading')
+                                @lang('admin::app.sales.rma.all-rma.view.title')
                             </p>
                         </div>
 
@@ -162,7 +162,7 @@
 
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('shop::app.rma.table-heading.price'):
+                                                    @lang('admin::app.sales.rma.all-rma.view.order-details'):
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -172,7 +172,7 @@
 
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('shop::app.rma.table-heading.rma-qty'):
+                                                    @lang('admin::app.sales.rma.create-rma.quantity'):
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -182,7 +182,7 @@
 
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('shop::app.rma.table-heading.order-qty'):
+                                                    @lang('admin::app.sales.orders.view.grand-total'):
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -192,7 +192,7 @@
 
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('shop::app.rma.table-heading.resolution-type'):
+                                                    @lang('admin::app.sales.rma.all-rma.view.resolution-type'):
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -202,7 +202,7 @@
 
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('shop::app.rma.table-heading.reason'):
+                                                    @lang('admin::app.sales.rma.create-rma.reason'):
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -252,9 +252,9 @@
                                         >
 
                                         <x-admin::form.control-group>
-                                            <x-shop::form.control-group.label class="required flex dark:text-gray-300">
+                                            <x-admin::form.control-group.label class="required flex dark:text-gray-300">
                                                 @lang('admin::app.sales.rma.all-rma.view.send-message')
-                                            </x-shop::form.control-group.label>
+                                            </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="textarea"
@@ -317,7 +317,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                </x-shop::form>
+                                </x-admin::form>
                             </div>
 
                             <div class="border rounded-lg p-3">
@@ -335,17 +335,17 @@
                                         class="mb-3 rounded-md p-4"
                                     >
                                         <div class="title">
-                                            @lang('shop::app.rma.conversation-texts.by')
+                                            @lang('admin::app.sales.rma.all-rma.view.by')
 
                                             <strong v-if="message.is_admin == 1">
-                                                @lang('shop::app.rma.view-customer-rma.admin')
+                                                @lang('admin::app.sales.rma.all-rma.view.admin')
                                             </strong>
 
                                             <strong v-else>
                                             {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
                                             </strong>
 
-                                            @lang('shop::app.rma.conversation-texts.on')
+                                            @lang('admin::app.sales.rma.all-rma.view.on')
 
                                             @{{ dateFormat( message.created_at) }}
                                         </div>
@@ -410,13 +410,13 @@
 
                                     @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('shop::app.rma.view-customer-rma.close-rma')
+                                            @lang('admin::app.sales.rma.all-rma.view.close-rma')
                                         </p>
 
                                     @endif
                                     @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('shop::app.rma.view-customer-rma.close-rma')
+                                            @lang('admin::app.sales.rma.all-rma.view.close-rma')
                                         </p>
                                     @endif
 
@@ -429,7 +429,7 @@
                                         <span>
                                             @if (strtolower($rma->request_status) == 'Solved')
                                                 <span class="label-active py-1">
-                                                    @lang('shop::app.rma.status.status-name.solved')
+                                                    @lang('admin::app.sales.rma.all-rma.view.solved')
                                                 </span>
 
                                             @elseif(
@@ -439,7 +439,7 @@
                                                 <span
                                                     class="label-{{ $rma->request_status }} py-1 text-xs"
                                                 >
-                                                    @lang('shop::app.rma.status.status-name.item-canceled')
+                                                    @lang('admin::app.sales.rma.all-rma.view.item-canceled')
                                                 </span>
                                             @else
                                                 <span
@@ -464,25 +464,25 @@
                                             @endif
                                         >
                                             @if ($rma->order_status == '1')
-                                                @lang('shop::app.rma.customer.delivered')
+                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
                                             @elseif ( strtolower($rma->order_status) == 'canceled' || strtolower($rma->order_status) == 'closed'
                                             )
-                                                @lang('shop::app.rma.customer.'. strtolower($rma->order_status))
+                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.'. strtolower($rma->order_status))
                                             @else
-                                                @lang('shop::app.rma.customer.undelivered')
+                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
                                             @endif
                                         </span>
                                     </p>
 
                                     @if ($rma->request_status == 'Declined')
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('shop::app.rma.status.status-quotes.declined-admin')
+                                            @lang('admin::app.sales.rma.all-rma.view.declined-admin')
                                         </p>
                                     @endif
 
                                     @if ($rma->request_status == 'Item Canceled')
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('shop::app.rma.status.status-quotes.solved-by-admin')
+                                            @lang('admin::app.sales.rma.all-rma.view.solved-by-admin')
                                         </p>
                                     @endif
                                 </div>
@@ -603,7 +603,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                        @lang('shop::app.rma.view-customer-rma.change-rma-status')
+                                        @lang('admin::app.sales.rma.all-rma.view.change-status')
                                     </p>
                                 </x-slot:header>
 
@@ -629,13 +629,13 @@
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                    @lang('shop::app.rma.view-customer-rma.status-reopen')
+                                    @lang('admin::app.sales.rma.all-rma.view.status-reopen')
                                 </p>
                             </x-slot>
 
                             <x-slot:content>
                                 <div class="grid w-full py-3">
-                                    <x-shop::form
+                                    <x-admin::form
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
@@ -663,7 +663,7 @@
                                                         class="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                                         for="close_rma"
                                                     >
-                                                        @lang('shop::app.rma.view-customer-rma.status-reopen')
+                                                        @lang('admin::app.sales.rma.all-rma.view.status-reopen')
                                                     </label>
                                                 </x-admin::form.control-group>
                                             </div>
@@ -673,10 +673,10 @@
                                                 class="primary-button "
                                                 v-if="closeRmaChecked"
                                             >
-                                                @lang('shop::app.rma.view-customer-rma.save-btn')
+                                                @lang('admin::app.sales.rma.all-rma.view.save-btn')
                                             </button>
                                         </div>
-                                    </x-shop::form>
+                                    </x-admin::form>
                                 </div>
                             </x-slot>
                         </x-admin::accordion>
@@ -686,7 +686,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                @lang('shop::app.rma.view-customer-rma-content.order-details')
+                                @lang('admin::app.sales.rma.all-rma.view.order-details')
                             </p>
                         </x-slot>
 
@@ -769,7 +769,7 @@
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @if (empty($rma->order->customer_id))
                                             <div class="text-sm dark:text-gray-300">
-                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}  (@lang('shop::app.rma.view-customer-rma.guest'))
+                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}  (@lang('admin::app.sales.rma.all-rma.index.datagrid.guest'))
                                             </div>
                                         @else
                                             <a href="{{ route('admin.customers.customers.view', $rma->order->customer_id) }}">

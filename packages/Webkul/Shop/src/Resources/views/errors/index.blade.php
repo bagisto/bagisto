@@ -5,7 +5,7 @@
 >
     <!-- Page Title -->
     <x-slot:title>
-        @lang("admin::app.errors.{$errorCode}.title")
+        @lang("shop::app.errors.{$errorCode}.title")
     </x-slot>
 
     <!-- Error page Information -->
@@ -23,13 +23,13 @@
 
             <div class="absolute left-1/2 top-[74%] mt-10 -translate-x-1/2 -translate-y-1/2 text-center max-868:w-full max-md:top-[60%]">
                 <h1 class="text-3xl font-semibold max-md:text-xl">
-                    @lang("admin::app.errors.{$errorCode}.title")
+                    @lang("shop::app.errors.{$errorCode}.title")
                 </h1>
 
                 <p class="mt-4 text-lg text-zinc-500 max-md:text-sm">
                     {{ 
                         $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
-                        ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")
+                        ? core()->getCurrentChannel()->maintenance_mode_text : trans("shop::app.errors.{$errorCode}.description")
                     }}
                 </p>
 

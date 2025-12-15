@@ -28,7 +28,7 @@ class AdminConversationNotification extends Mailable
         return new Envelope(
             from: new Address($senderDetails['email'], $senderDetails['name']),
             to: [new Address($this->conversation['customerEmail'])],
-            subject: trans('shop::app.rma.mail.seller-conversation.subject'),
+            subject: trans('admin::app.emails.rma.conversation.subject'),
         );
     }
 
@@ -38,7 +38,7 @@ class AdminConversationNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'admin::emails.admin.rma.conversation.message',
+            view: 'admin::emails.rma.conversation.message',
             with: $this->conversation,
         );
     }
