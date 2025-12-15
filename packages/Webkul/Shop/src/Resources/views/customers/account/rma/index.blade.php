@@ -337,7 +337,7 @@
                     cancelStatus(recordId) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
-                                this.$axios.get(`{{ route('shop.rma.action.cancel', '') }}/${recordId}`)
+                                this.$axios.get(`{{ route('shop.customers.account.rma.cancel', '') }}/${recordId}`)
                                     .then(response => {
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 

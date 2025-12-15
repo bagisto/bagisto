@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Webkul\RMA\Contracts\RMA;
 
 class CustomerRMARequestNotification extends Mailable
 {
@@ -16,7 +17,9 @@ class CustomerRMARequestNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public array $customerRmaData) {}
+    public function __construct(
+        public RMA $rma
+    ) {}
 
     /**
      * Get the message envelope.
@@ -27,7 +30,7 @@ class CustomerRMARequestNotification extends Mailable
 
         return new Envelope(
             from: new Address($adminDetails['email']),
-            to: [new Address($this->customerRmaData['email'])],
+            to: [new Address($this->rma->order->customer_email)],
             subject: trans('shop::app.rma.customer.create.heading'),
         );
     }
@@ -39,9 +42,6 @@ class CustomerRMARequestNotification extends Mailable
     {
         return new Content(
             view: 'shop::emails.customers.rma.new-rma-request',
-            with: [
-                'customerRmaData' => $this->customerRmaData,
-            ],
         );
     }
 }

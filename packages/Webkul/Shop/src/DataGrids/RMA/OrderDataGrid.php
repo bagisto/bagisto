@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Order;
 
-class OrderRMADataGrid extends DataGrid
+class OrderDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.

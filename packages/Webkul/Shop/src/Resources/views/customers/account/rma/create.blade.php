@@ -1136,7 +1136,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("shop.rma.action.ordered.product", "") }}/' + this.orderId)
+                            this.$axios.get('{{ route("shop.customers.account.rma.get-order-items", "") }}/' + this.orderId)
                                 .then(response => {
                                     this.isLoading = false;
 
@@ -1208,7 +1208,7 @@
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
 
-                        let url = '{{route("shop.rma.action.resolution.reasons", ":resolutionType")}}';
+                        let url = '{{route("shop.customers.account.rma.get-resolution-reasons", ":resolutionType")}}';
 
                         url = url.replace(':resolutionType', resolutionType);
 

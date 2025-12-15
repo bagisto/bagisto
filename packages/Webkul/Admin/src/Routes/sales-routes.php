@@ -9,7 +9,6 @@ use Webkul\Admin\Http\Controllers\Sales\RefundController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\CustomFieldController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\ReasonController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\RequestController;
-use Webkul\Admin\Http\Controllers\Sales\RMA\RMAController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\RulesController;
 use Webkul\Admin\Http\Controllers\Sales\RMA\StatusController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
@@ -125,35 +124,28 @@ Route::prefix('sales')->group(function () {
      */
     Route::prefix('rma')->group(function () {
         /**
-         * RMA request routes.
+         * Request routes.
          */
-        Route::prefix('requests')->group(function () {
-            Route::controller(RMAController::class)->group(function () {
-                Route::get('', 'index')->name('admin.sales.rma.index');
+        Route::controller(RequestController::class)->prefix('requests')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.index');
 
-                Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
+            Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
 
-                Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
+            Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
 
-                Route::post('save-rma-reopen-status', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
+            Route::post('save-rma-reopen-status', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
 
-                Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
+            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
 
-                Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
-            });
+            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
 
-            /**
-             * Create RMA routes.
-             */
-            Route::controller(RequestController::class)->group(function () {
-                Route::get('create', 'create')->name('admin.sales.rma.create');
+            Route::get('create', 'create')->name('admin.sales.rma.create');
 
-                Route::post('store', 'store')->name('admin.sales.rma.store');
+            Route::post('store', 'store')->name('admin.sales.rma.store');
 
-                Route::get('get-order-product/{orderId}', 'getOrderProduct')->name('admin.sales.rma.get-order-product');
+            Route::get('get-order-product/{orderId}', 'getOrderProduct')->name('admin.sales.rma.get-order-product');
 
-                Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.get-resolution-reason');
-            });
+            Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.get-resolution-reason');
         });
 
         /**
@@ -176,7 +168,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA status routes.
+         * Status routes.
          */
         Route::controller(StatusController::class)->prefix('rma-status')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.rma-status.index');
@@ -195,7 +187,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA rules routes.
+         * Rules routes.
          */
         Route::controller(RulesController::class)->prefix('rules')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.rules.index');
@@ -214,7 +206,7 @@ Route::prefix('sales')->group(function () {
         });
 
         /**
-         * RMA custom field routes.
+         * Custom field routes.
          */
         Route::controller(CustomFieldController::class)->prefix('custom-field')->group(function () {
             Route::get('', 'index')->name('admin.sales.rma.custom-field.index');

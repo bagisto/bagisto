@@ -29,8 +29,6 @@ class RMA extends Model implements RMAContract
         'order_id',
         'status',
         'package_condition',
-        'return_pickup_address',
-        'return_pickup_time',
     ];
 
     /**

@@ -8,7 +8,7 @@ use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 use Webkul\Sales\Models\Order;
 
-class CustomerRMADataGrid extends DataGrid
+class RMADataGrid extends DataGrid
 {
     /**
      * Constructor for the class.
@@ -24,10 +24,6 @@ class CustomerRMADataGrid extends DataGrid
      */
     public function prepareQueryBuilder(): Builder
     {
-        $customerId = auth()->guard('customer')->user()
-            ? auth()->guard('customer')->user()->id
-            : null;
-
         $tablePrefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('rma')
@@ -47,7 +43,7 @@ class CustomerRMADataGrid extends DataGrid
                 'rma_statuses.color as rma_status_color',
                 DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
             )
-            ->where('orders.customer_id', $customerId)
+            ->where('orders.customer_id', auth()->guard('customer')->user()->id)
             ->groupBy('rma.id');
 
         $this->addFilter('id', 'rma.id');
@@ -154,7 +150,7 @@ class CustomerRMADataGrid extends DataGrid
                 return true;
             },
             'url'      => function ($row) {
-                return route('shop.rma.action.cancel', $row->id);
+                return route('shop.customers.account.rma.cancel', $row->id);
             },
         ]);
     }

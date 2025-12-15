@@ -336,7 +336,7 @@
                                 @submit="validateForm"
                                 id="check-form"
                                 enctype="multipart/form-data"
-                                :action="route('shop.rma.action.update-status')"
+                                :action="route('shop.customers.account.rma.update-status')"
                             >
                                 @csrf
                                 <div class="grid w-full gap-4">
@@ -386,7 +386,7 @@
                                     @submit="validateForm"
                                     id="check-form"
                                     enctype="multipart/form-data"
-                                    :action="route('shop.rma.action.re-open')"
+                                    :action="route('shop.customers.account.rma.re-open')"
                                 >
                                     @csrf
                                     <div class="flex flex-col max-md:flex-col w-full gap-4">
@@ -609,7 +609,7 @@
 
                 methods: {
                     getMessage() {
-                        this.$axios.get(`{{ route('shop.rma.action.get.messages') }}`, {
+                        this.$axios.get(`{{ route('shop.customers.account.rma.get-messages') }}`, {
                             params: { id: this.rma.id, limit: this.limit }
                         })
                         .then(response => {
@@ -624,7 +624,7 @@
                         formData.set('message', sanitizedMessage);
                         this.isChatSend = false;
 
-                        this.$axios.post("{{ route('shop.rma.action.send.message') }}", formData)
+                        this.$axios.post("{{ route('shop.customers.account.rma.send-message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
                                 attachmentPreview.innerHTML = '';

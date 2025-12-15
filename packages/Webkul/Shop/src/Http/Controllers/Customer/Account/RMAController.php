@@ -2,30 +2,45 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Enums\RequestStatusEnum;
+use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMAMessageRepository;
 use Webkul\RMA\Repositories\RMAReasonRepository;
+use Webkul\RMA\Repositories\RMAReasonResolutionRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\DataGrids\RMA\CustomerRMADataGrid;
-use Webkul\Shop\DataGrids\RMA\OrderRMADataGrid;
+use Webkul\Shop\DataGrids\RMA\OrderDataGrid;
+use Webkul\Shop\DataGrids\RMA\RMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Mail\Customer\RMA\CustomerConversationNotification;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class RMAController extends Controller
 {
     /**
+     * Configurable product type constant.
+     *
      * @var string
      */
     public const CONFIGURABLE = 'configurable';
+
+    /**
+     * Supported product types for RMA.
+     *
+     * @var array
+     */
+    public const PRODUCT_TYPE = ['virtual', 'downloadable', 'booking', 'configurable'];
 
     /**
      * Create a new controller instance.
@@ -40,126 +55,109 @@ class RMAController extends Controller
         protected RMAImageRepository $rmaImagesRepository,
         protected RMAItemRepository $rmaItemsRepository,
         protected RMAMessageRepository $rmaMessagesRepository,
-        protected RMAReasonRepository $rmaReasonsRepository,
+        protected RMAReasonRepository $rmaReasonRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
+        protected RMAHelper $rmaHelper,
     ) {}
 
     /**
-     * Method to populate the customer and guest rma index page.
+     * Display a listing of the resource.
      */
     public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
-            return datagrid(CustomerRMADataGrid::class)->process();
+            return datagrid(RMADataGrid::class)->process();
         }
 
         return view('shop::customers.account.rma.index');
     }
 
     /**
-     * Get details of rma.
+     * Display the specified resource.
      */
     public function view(int $id): View|RedirectResponse
     {
-        $rma = $this->rmaRepository->with(['items', 'order'])->findOneWhere(['id' => $id]);
+        $rma = $this->rmaRepository->with(['items', 'order'])
+            ->findOneWhere(['id' => $id]);
 
         if (! $rma) {
-            return redirect()->route('shop.customers.account.rma.index');
+            return abort(404);
         }
 
         return view('shop::customers.account.rma.view', compact('rma'));
     }
 
     /**
-     * Create rma for customer.
+     * Create rma for customer. This page will first show order list to select order.
+     * Then after selecting order, it will show order items to create rma.
      */
     public function create(): JsonResponse|View
     {
         if (request()->ajax()) {
-            return datagrid(OrderRMADataGrid::class)->process();
+            return datagrid(OrderDataGrid::class)->process();
         }
 
         return view('shop::customers.account.rma.create');
     }
 
     /**
-     * Store a newly created rma.
+     * Store a newly created resource in storage.
      */
     public function store(): JsonResponse|RedirectResponse
     {
         $this->validate(request(), [
-            'rma_qty'         => 'required',
-            'resolution_type' => 'required',
-            'order_status'    => 'required',
+            'order_id'        => 'required|exists:orders,id',
             'order_item_id'   => 'required|array|min:1',
+            'rma_qty'         => 'required|array|min:1',
+            'resolution_type' => 'required|array|min:1',
+            'rma_reason_id'   => 'required|array|min:1',
+            'information'     => 'nullable|string',
+            'images'          => 'nullable|array|min:1',
             'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'agreement'       => 'accepted',
         ]);
 
         $data = request()->only([
             'order_id',
-            'resolution_type',
-            'order_status',
             'order_item_id',
+            'variant',
             'rma_qty',
+            'resolution_type',
             'rma_reason_id',
-            'images',
             'information',
+            'images',
+            'package_condition',
         ]);
-
-        if (request()->input('package_condition')) {
-            $data['package_condition'] = request()->input('package_condition');
-        }
-
-        if (request()->input('return_pickup_address')) {
-            $data['return_pickup_address'] = request()->input('return_pickup_address');
-        }
-
-        if (request()->input('return_pickup_time')) {
-            $data['return_pickup_time'] = request()->input('return_pickup_time');
-        }
 
         $rma = $this->rmaRepository->create([
-            'status'            => '',
             'order_id'          => $data['order_id'],
-            'information'       => $data['information'] ?? null,
-            'order_status'      => $data['order_status'] ?? 0,
             'request_status'    => RequestStatusEnum::PENDING->value,
-            'package_condition' => $data['package_condition'] ?? '',
+            'information'       => $data['information'] ?? null,
+            'package_condition' => $data['package_condition'] ?? null,
         ]);
 
-        $data['order_items'] = [];
-
         foreach ($data['order_item_id'] as $key => $orderItemId) {
-            $orderItem = $this->orderItemRepository->find($orderItemId);
-
-            array_push($data['order_items'], $orderItem);
-
-            $rmaItem = $this->rmaItemsRepository->create([
-                'resolution'    => $data['resolution_type'][$key],
+            $this->rmaItemsRepository->create([
                 'rma_id'        => $rma->id,
-                'order_item_id' => $orderItemId,
-                'quantity'      => $data['rma_qty'][$key],
                 'rma_reason_id' => $data['rma_reason_id'][$key],
+                'order_item_id' => $orderItemId,
                 'variant_id'    => ! empty($data['variant'][$key]) ? $data['variant'][$key] : null,
+                'quantity'      => $data['rma_qty'][$key],
+                'resolution'    => $data['resolution_type'][$key],
             ]);
-
-            $rmaItemIds[] = $rmaItem->id;
-
-            $data['reason'][] = $this->rmaReasonsRepository->findOneWhere(['id' => $data['rma_reason_id'][$key]])->title;
         }
 
         $this->rmaMessagesRepository->create([
-            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
             'rma_id'     => $rma->id,
+            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
             'is_admin'   => 1,
         ]);
 
-        $data['rma_id'] = $rma->id;
-
         if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
-            foreach ($data['images'] as $itemImg) {
+            foreach ($data['images'] as $itemImage) {
                 $this->rmaImagesRepository->create([
                     'rma_id' => $rma->id,
-                    'path'   => $itemImg->getClientOriginalName(),
+                    'path'   => $itemImage->getClientOriginalName(),
                 ]);
             }
 
@@ -169,11 +167,9 @@ class RMAController extends Controller
         $customAttributes = request('customAttributes') ?? [];
 
         if ($customAttributes) {
-
             $customAttributesData = [];
 
             foreach ($customAttributes as $key => $customAttribute) {
-
                 $customAttributesData = [
                     'rma_id' => $data['rma_id'],
                     'name'   => $key,
@@ -184,25 +180,9 @@ class RMAController extends Controller
             }
         }
 
-        $order = $this->orderRepository->findOrFail($rma->order_id);
-
-        $orderData = $order->items->whereIn('id', $rmaItemIds);
-
-        foreach ($orderData as $key => $configurableProducts) {
-            if ($configurableProducts['type'] == self::CONFIGURABLE) {
-                $data['skus'][] = $configurableProducts['child'];
-            }
-        }
-
-        $data['email'] = auth()->guard('customer')->user()->email;
-
-        $data['name'] = auth()->guard('customer')->user()->name;
-
-        unset($data['images']);
-
         if ($rma->items) {
             try {
-                Mail::queue(new CustomerRMARequestNotification($data));
+                // Mail::queue(new CustomerRMARequestNotification($rma));
             } catch (\Exception $e) {
             }
 
@@ -214,5 +194,186 @@ class RMAController extends Controller
                 'messages' => trans('shop::app.customer.signup-form.failed'),
             ]);
         }
+    }
+
+    /**
+     * Get order items for rma creation.
+     */
+    public function getOrderItems(int $orderId)
+    {
+        return $this->rmaHelper->getOrderProduct($orderId);
+    }
+
+    /**
+     * Get resolution reasons based on resolution type.
+     */
+    public function getResolutionReasons(string $resolutionType): RMAReason|Collection
+    {
+        $existResolutions = $this->rmaReasonResolutionsRepository
+            ->where('resolution_type', $resolutionType)
+            ->pluck('rma_reason_id');
+
+        return $this->rmaReasonRepository
+            ->whereIn('id', $existResolutions)
+            ->where('status', 1)
+            ->get();
+    }
+
+    /**
+     * Update RMA status.
+     */
+    public function updateStatus(int $id): RedirectResponse
+    {
+        $data = request()->only(['rma_id', 'close_rma']);
+
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+
+        if (! empty($data['close_rma'])) {
+            $rma->update([
+                'status'         => 1,
+                'request_status' => RequestStatusEnum::SOLVED->value,
+                'order_status'   => 'closed',
+            ]);
+
+            $this->rmaMessagesRepository->create([
+                'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
+                'rma_id'   => $data['rma_id'],
+                'is_admin' => 1,
+            ]);
+        }
+
+        session()->flash('success', trans('shop::app.rma.response.update-success'));
+
+        return redirect()->back();
+    }
+
+    /**
+     * Re-open RMA request.
+     */
+    public function reOpenRequest(int $id): RedirectResponse
+    {
+        $data = request()->only(['rma_id', 'close_rma']);
+
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+
+        if (! empty($data['close_rma'])) {
+            $order = $this->orderRepository->find($rma->order_id);
+
+            $order->update(['status' => 'pending']);
+
+            $rma->update([
+                'status'         => 1,
+                'request_status' => RequestStatusEnum::PENDING->value,
+                'status'         => 0,
+                'order_status'   => 0,
+            ]);
+
+            $this->rmaMessagesRepository->create([
+                'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
+                'rma_id'     => $data['rma_id'],
+                'is_admin'   => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        session()->flash('success', trans('shop::app.rma.response.update-success'));
+
+        return back();
+    }
+
+    /**
+     * Cancel RMA request.
+     */
+    public function cancelRequest(int $id): JsonResponse
+    {
+        $rma = $this->rmaRepository->findOrFail($id);
+
+        if ($rma->request_status == RequestStatusEnum::CANCELED->value) {
+            return new JsonResponse([
+                'message' => trans('shop::app.rma.response.already-cancel'),
+            ]);
+        }
+
+        $rma->update([
+            'request_status' => RequestStatusEnum::CANCELED->value,
+        ]);
+
+        return new JsonResponse([
+            'message' => trans('shop::app.rma.response.cancel-success'),
+        ]);
+    }
+
+    /**
+     * Get messages for rma conversation.
+     */
+    public function getMessages(): JsonResponse
+    {
+        $messages = $this->rmaMessagesRepository
+            ->where('rma_id', request()->get('id'))
+            ->orderBy('id', 'desc')
+            ->paginate(request()->get('limit') ?? 5);
+
+        return new JsonResponse([
+            'messages' => $messages,
+        ]);
+    }
+
+    /**
+     * Send message in rma conversation.
+     */
+    public function sendMessage(): JsonResponse
+    {
+        $data = request()->all();
+
+        $conversationDetails = [
+            'adminName'     => 'Admin',
+            'message'       => $data['message'],
+            'adminEmail'    => core()->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address'),
+            'customerEmail' => auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : $this->orderRepository->find(session()->get('guestOrderId'))->customer_email,
+        ];
+
+        $storedMessage = $this->rmaMessagesRepository->create($data);
+
+        if (! empty($storedMessage)) {
+            $removedKeys = explode(',', request()->input('removed_key'));
+
+            array_shift($removedKeys);
+
+            if (! empty(request()->file('file'))) {
+                $file = request()->file('file');
+
+                $filename = $file->getClientOriginalName();
+
+                $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
+
+                $this->rmaMessagesRepository->update([
+                    'attachment_path' => $path,
+                    'attachment'      => $filename,
+                ], $storedMessage->id);
+            }
+
+            try {
+                if ($conversationDetails['adminEmail']) {
+                    Mail::queue(new CustomerConversationNotification($conversationDetails));
+                }
+            } catch (\Exception $e) {
+                return new JsonResponse([
+                    'messages' => trans('shop::app.rma.response.send-message', [
+                        'name' => trans('shop::app.rma.mail.customer-conversation.message'),
+                    ]),
+                ]);
+            }
+
+            return new JsonResponse([
+                'messages' => trans('shop::app.rma.response.send-message', [
+                    'name' => trans('shop::app.rma.mail.customer-conversation.message'),
+                ]),
+            ]);
+        }
+
+        return new JsonResponse([
+            'messages' => trans('shop::app.customer.signup-form.failed'),
+        ]);
     }
 }

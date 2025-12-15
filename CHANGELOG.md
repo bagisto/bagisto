@@ -15,4 +15,5 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Added PayU payment gateway integration with redirect-based checkout flow.
 
 * Upgraded PayPal SDK from abandoned v1 to modern v2 with improved reliability and security. Refactored PayPal integration to use controller-based transaction handling and modernized IPN processing with Laravel HTTP client.
- 
+
+* Added comprehensive Return Merchandise Authorization (RMA) system with complete order return management.
