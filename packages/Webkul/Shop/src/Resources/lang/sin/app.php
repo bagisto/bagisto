@@ -175,6 +175,8 @@ return [
                 'order'       => 'ඇණවුම',
                 'order-date'  => 'ඇණවුම් දිනය',
                 'order-id'    => 'ඇණවුම් හරහා හඳුනා ගත් හැඳුනුම්පත',
+                'pay-by'      => 'ගෙවීම් ක්රමය - :method',
+                'pay-via'     => 'ගෙවීම් මාර්ගය',
                 'subtotal'    => 'අඟල් එකතුව',
                 'title'       => 'ඇණවුම්',
                 'total'       => 'මාතික්',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'අපහසු ගෙවීම',
                         'processing'      => 'ප්රකාශයට',
                     ],
+
+                    'canceled'        => 'අවලංගු කර ඇත',
+                    'closed'          => 'වසා ඇත',
+                    'completed'       => 'සම්පූර්ණයි',
+                    'fraud'           => 'වංචාව',
+                    'pending'         => 'පැවැති',
+                    'pending-payment' => 'ගෙවීම බලාපොරොත්තුවෙන්',
+                    'processing'      => 'සැකසෙමින් පවතී',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'අයිතමය ආපසු කිරීමේදී',
                     'item-shipped'         => 'අයිතමය නැවුම් කරන්නේදී',
                     'item-ordered'         => 'අයිතමය ඇනවුම් කරන්නේදී',
+                    'order'                => 'ඇනවුම',
                     'order-id'             => 'ඇනවුම් අංකය',
                     'page-title'           => 'ඇනවුම #:order_id',
                     'payment-method'       => 'ගෙවීමේ ක්රමය',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'ඇණවුම් තොරතුරු',
                         'type'         => 'වර්ගය',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'ක්‍රියාව',
+
+                    'datagrid' => [
+                        'id'         => 'RMA හැඳුනුම් අංකය',
+                        'order-ref'  => 'ඇණවුම් යොමු අංකය',
+                        'rma-status' => 'ඉල්ලීම් තත්ත්වය',
+                        'create'     => 'නිර්මාණය කළ දිනය',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'ක්‍රියාව',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'මිල',
+                    'current-order-quantity'  => 'දැනට ඇති ඇණවුම් ප්‍රමාණය',
+                    'product-already-raw'     => 'මෙම නිෂ්පාදනයේ සියලු අයිතම දැනටමත් ආපසු/අවලංගු කිරීම සඳහා ඉල්ලීම් කර ඇත',
+                    'resolution-type'         => 'විසඳුම් වර්ගය',
+                    'select'                  => 'තෝරන්න',
+                    'return'                  => 'ආපසු යවන්න',
+                    'cancel-items'            => 'අයිතම අවලංගු කරන්න',
+                    'product-delivery-status' => 'භාරදීමේ තත්ත්වය',
+                    'package-condition'       => 'පැකේජ් තත්ත්වය',
+                    'open'                    => 'විවෘත',
+                    'packed'                  => 'ඇසුරුම් කර ඇත',
+                    'return-pickup-address'   => 'ආපසු ගන්නා ලිපිනය',
+                    'return-pickup-time'      => 'ආපසු ගන්නා වේලාව',
+                    'morning'                 => 'උදෑසන (10 - 13)',
+                    'afternoon'               => 'දවල් (14 - 17)',
+                    'evening'                 => 'සවස (18 - 21)',
+                    'images'                  => 'රූප',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA හැඳුනුම් අංකය',
+                    'enter-message'      => 'ඔබගේ පණිවිඩය මෙහි ඇතුළත් කරන්න',
+                    'add-attachments'    => 'අමුණා එකතු කරන්න',
+                    'send-message-btn'   => 'පණිවිඩය යවන්න',
+                    'attachment'         => 'අමුණා',
+                    'download'           => 'බාගත කරන්න',
+                    'allowed-file-types' => 'අවසර ලත් ගොනු වර්ග',
+                    'remove'             => 'ඉවත් කරන්න',
+                ],
+
+                'terms' => [
+                    'terms' => 'මම නියම සහ කොන්දේසි වලට එකඟ වෙමි',
+                    'read'  => 'නියම සහ කොන්දේසි කියවන්න',
                 ],
             ],
         ],

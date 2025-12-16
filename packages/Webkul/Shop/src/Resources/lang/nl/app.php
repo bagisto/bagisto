@@ -175,6 +175,8 @@ return [
                 'order'       => 'Bestelling',
                 'order-date'  => 'Besteldatum',
                 'order-id'    => 'Bestel-ID',
+                'pay-by'      => 'Betalen met - :method',
+                'pay-via'     => 'Betalen via',
                 'subtotal'    => 'Subtotaal',
                 'title'       => 'Bestellingen',
                 'total'       => 'Totaal',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'In Afwachting van Betaling',
                         'processing'      => 'Bezig met verwerken',
                     ],
+
+                    'canceled'        => 'Geannuleerd',
+                    'closed'          => 'Gesloten',
+                    'completed'       => 'Voltooid',
+                    'fraud'           => 'Fraude',
+                    'pending'         => 'In afwachting',
+                    'pending-payment' => 'Betaling in afwachting',
+                    'processing'      => 'In verwerking',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Item terugbetaald',
                     'item-shipped'         => 'Item verzonden',
                     'item-ordered'         => 'Item besteld',
+                    'order'                => 'Bestelling',
                     'order-id'             => 'Bestelnummer',
                     'page-title'           => 'Bestelling #:order_id',
                     'payment-method'       => 'Betaalmethode',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Bestelinformatie',
                         'type'         => 'Type',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Actie',
+
+                    'datagrid' => [
+                        'id'         => 'RMA-ID',
+                        'order-ref'  => 'Bestelreferentie',
+                        'rma-status' => 'Aanvraagstatus',
+                        'create'     => 'Aangemaakt op',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Actie',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Prijs',
+                    'current-order-quantity'  => 'Huidige bestelhoeveelheid',
+                    'product-already-raw'     => 'Alle items van dit product zijn al aangevraagd voor retour/annulering',
+                    'resolution-type'         => 'Oplossingstype',
+                    'select'                  => 'Selecteren',
+                    'return'                  => 'Retour',
+                    'cancel-items'            => 'Annuleer items',
+                    'product-delivery-status' => 'Leveringsstatus',
+                    'package-condition'       => 'Pakketconditie',
+                    'open'                    => 'Open',
+                    'packed'                  => 'Verpakt',
+                    'return-pickup-address'   => 'Retour ophaaladres',
+                    'return-pickup-time'      => 'Retour ophaaltijd',
+                    'morning'                 => 'Ochtend (10 - 13)',
+                    'afternoon'               => 'Middag (14 - 17)',
+                    'evening'                 => 'Avond (18 - 21)',
+                    'images'                  => 'Afbeeldingen',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA-ID',
+                    'enter-message'      => 'Voer hier uw bericht in',
+                    'add-attachments'    => 'Bijlagen toevoegen',
+                    'send-message-btn'   => 'Bericht verzenden',
+                    'attachment'         => 'Bijlage',
+                    'download'           => 'Downloaden',
+                    'allowed-file-types' => 'Toegestane bestandstypen',
+                    'remove'             => 'Verwijderen',
+                ],
+
+                'terms' => [
+                    'terms' => 'Ik ga akkoord met de voorwaarden',
+                    'read'  => 'Lees de voorwaarden',
                 ],
             ],
         ],

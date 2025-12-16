@@ -175,6 +175,8 @@ return [
                 'order'       => 'Commande',
                 'order-date'  => 'Date de commande',
                 'order-id'    => 'ID de commande',
+                'pay-by'      => 'Payer par - :method',
+                'pay-via'     => 'Payer via',
                 'subtotal'    => 'Sous-total',
                 'title'       => 'Commandes',
                 'total'       => 'Total',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'En attente de paiement',
                         'processing'      => 'En cours de traitement',
                     ],
+
+                    'canceled'        => 'Annulé',
+                    'closed'          => 'Fermé',
+                    'completed'       => 'Terminé',
+                    'fraud'           => 'Fraude',
+                    'pending'         => 'En attente',
+                    'pending-payment' => 'Paiement en attente',
+                    'processing'      => 'En cours de traitement',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Article remboursé',
                     'item-shipped'         => 'Article expédié',
                     'item-ordered'         => 'Article commandé',
+                    'order'                => 'Commande',
                     'order-id'             => 'ID de commande',
                     'page-title'           => 'Commande #:order_id',
                     'payment-method'       => 'Moyen de paiement',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informations de commande',
                         'type'         => 'Type',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Action',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Référence de commande',
+                        'rma-status' => 'Statut de la demande',
+                        'create'     => 'Créé le',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Action',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Prix',
+                    'current-order-quantity'  => 'Quantité actuelle de la commande',
+                    'product-already-raw'     => 'Tous les articles de ce produit ont déjà été demandés pour retour/annulation',
+                    'resolution-type'         => 'Type de résolution',
+                    'select'                  => 'Sélectionner',
+                    'return'                  => 'Retour',
+                    'cancel-items'            => 'Annuler les articles',
+                    'product-delivery-status' => 'Statut de livraison',
+                    'package-condition'       => 'État du colis',
+                    'open'                    => 'Ouvert',
+                    'packed'                  => 'Emballé',
+                    'return-pickup-address'   => 'Adresse de collecte',
+                    'return-pickup-time'      => 'Heure de collecte',
+                    'morning'                 => 'Matin (10h - 13h)',
+                    'afternoon'               => 'Après-midi (14h - 17h)',
+                    'evening'                 => 'Soir (18h - 21h)',
+                    'images'                  => 'Images',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Entrez votre message ici',
+                    'add-attachments'    => 'Ajouter des pièces jointes',
+                    'send-message-btn'   => 'Envoyer le message',
+                    'attachment'         => 'Pièce jointe',
+                    'download'           => 'Télécharger',
+                    'allowed-file-types' => 'Types de fichiers autorisés',
+                    'remove'             => 'Supprimer',
+                ],
+
+                'terms' => [
+                    'terms' => 'J’accepte les conditions générales',
+                    'read'  => 'Lire les conditions générales',
                 ],
             ],
         ],

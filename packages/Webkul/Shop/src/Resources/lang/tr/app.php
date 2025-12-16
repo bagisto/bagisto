@@ -175,6 +175,8 @@ return [
                 'order'       => 'Pedido',
                 'order-date'  => 'Pedido Tarihi',
                 'order-id'    => 'Pedido ID',
+                'pay-by'      => 'Ödeme Yöntemi - :method',
+                'pay-via'     => 'Ödeme Yolu',
                 'subtotal'    => 'Subtotal',
                 'title'       => 'Pedidos',
                 'total'       => 'Toplam',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Ödeme Bekliyor',
                         'processing'      => 'İşleniyor',
                     ],
+
+                    'canceled'        => 'İptal Edildi',
+                    'closed'          => 'Kapalı',
+                    'completed'       => 'Tamamlandı',
+                    'fraud'           => 'Dolandırıcılık',
+                    'pending'         => 'Beklemede',
+                    'pending-payment' => 'Ödeme Bekleniyor',
+                    'processing'      => 'İşleniyor',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Ürün İade Edildi',
                     'item-shipped'         => 'Ürün Gönderildi',
                     'item-ordered'         => 'Ürün Sipariş Edildi',
+                    'order'                => 'Sipariş',
                     'order-id'             => 'Sipariş ID',
                     'page-title'           => 'Sipariş #:order_id',
                     'payment-method'       => 'Ödeme Yöntemi',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Sipariş Bilgileri',
                         'type'         => 'Tür',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'İşlem',
+
+                    'datagrid' => [
+                        'id'         => 'RMA ID',
+                        'order-ref'  => 'Sipariş Referansı',
+                        'rma-status' => 'Talep Durumu',
+                        'create'     => 'Oluşturulma Tarihi',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'İşlem',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Fiyat',
+                    'current-order-quantity'  => 'Mevcut Sipariş Miktarı',
+                    'product-already-raw'     => 'Bu ürüne ait tüm öğeler zaten iade/iptal için talep edilmiştir',
+                    'resolution-type'         => 'Çözüm Türü',
+                    'select'                  => 'Seç',
+                    'return'                  => 'İade',
+                    'cancel-items'            => 'Ürünleri İptal Et',
+                    'product-delivery-status' => 'Ürün Teslimat Durumu',
+                    'package-condition'       => 'Paket Durumu',
+                    'open'                    => 'Açık',
+                    'packed'                  => 'Paketlenmiş',
+                    'return-pickup-address'   => 'İade Alma Adresi',
+                    'return-pickup-time'      => 'İade Alma Zamanı',
+                    'morning'                 => 'Sabah (10 - 13)',
+                    'afternoon'               => 'Öğleden Sonra (14 - 17)',
+                    'evening'                 => 'Akşam (18 - 21)',
+                    'images'                  => 'Görseller',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA ID',
+                    'enter-message'      => 'Mesajınızı buraya girin',
+                    'add-attachments'    => 'Ekleri ekle',
+                    'send-message-btn'   => 'Mesaj Gönder',
+                    'attachment'         => 'Ek',
+                    'download'           => 'İndir',
+                    'allowed-file-types' => 'İzin Verilen Dosya Türleri',
+                    'remove'             => 'Kaldır',
+                ],
+
+                'terms' => [
+                    'terms' => 'Şartlar ve koşulları kabul ediyorum',
+                    'read'  => 'Şartlar ve koşulları oku',
                 ],
             ],
         ],

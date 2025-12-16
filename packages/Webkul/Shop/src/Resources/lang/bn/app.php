@@ -175,6 +175,8 @@ return [
                 'order'       => 'অর্ডার',
                 'order-date'  => 'অর্ডারের তারিখ',
                 'order-id'    => 'অর্ডার আইডি',
+                'pay-by'      => 'পেমেন্ট পদ্ধতি - :method',
+                'pay-via'     => 'পেমেন্ট মাধ্যম',
                 'subtotal'    => 'সাবটোটাল',
                 'title'       => 'অর্ডারগুলি',
                 'total'       => 'মোট',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'মুলতুলি পেমেন্ট',
                         'processing'      => 'প্রসেসিং',
                     ],
+
+                    'canceled'        => 'বাতিল',
+                    'closed'          => 'বন্ধ',
+                    'completed'       => 'সম্পন্ন',
+                    'fraud'           => 'প্রতারণা',
+                    'pending'         => 'অপেক্ষমান',
+                    'pending-payment' => 'অপেক্ষমান পেমেন্ট',
+                    'processing'      => 'প্রক্রিয়াধীন',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'আইটেম ফেরত দেওয়া হয়েছে',
                     'item-shipped'         => 'আইটেম প্রেরণ করা হয়েছে',
                     'item-ordered'         => 'আইটেম অর্ডার করা হয়েছে',
+                    'order'                => 'অর্ডার',
                     'order-id'             => 'অর্ডার আইডি',
                     'page-title'           => 'অর্ডার #:order_id',
                     'payment-method'       => 'পেমেন্ট পদ্ধতি',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'অর্ডার তথ্য',
                         'type'         => 'ধরন',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'অ্যাকশন',
+
+                    'datagrid' => [
+                        'id'         => 'RMA আইডি',
+                        'order-ref'  => 'অর্ডার রেফারেন্স',
+                        'rma-status' => 'অনুরোধের অবস্থা',
+                        'create'     => 'তৈরি হয়েছে',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'অ্যাকশন',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'মূল্য',
+                    'current-order-quantity'  => 'বর্তমান অর্ডার পরিমাণ',
+                    'product-already-raw'     => 'এই পণ্যের সব আইটেম ইতিমধ্যেই রিটার্ন/বাতিলের জন্য অনুরোধ করা হয়েছে',
+                    'resolution-type'         => 'সমাধানের ধরন',
+                    'select'                  => 'নির্বাচন করুন',
+                    'return'                  => 'রিটার্ন',
+                    'cancel-items'            => 'আইটেম বাতিল করুন',
+                    'product-delivery-status' => 'ডেলিভারির অবস্থা',
+                    'package-condition'       => 'প্যাকেজের অবস্থা',
+                    'open'                    => 'খোলা',
+                    'packed'                  => 'প্যাক করা',
+                    'return-pickup-address'   => 'রিটার্ন পিকআপ ঠিকানা',
+                    'return-pickup-time'      => 'রিটার্ন পিকআপ সময়',
+                    'morning'                 => 'সকাল (১০টা - ১টা)',
+                    'afternoon'               => 'দুপুর (২টা - ৫টা)',
+                    'evening'                 => 'সন্ধ্যা (৬টা - ৯টা)',
+                    'images'                  => 'ছবি',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA আইডি',
+                    'enter-message'      => 'এখানে আপনার বার্তা লিখুন',
+                    'add-attachments'    => 'সংযুক্তি যোগ করুন',
+                    'send-message-btn'   => 'বার্তা পাঠান',
+                    'attachment'         => 'সংযুক্তি',
+                    'download'           => 'ডাউনলোড',
+                    'allowed-file-types' => 'অনুমোদিত ফাইলের ধরন',
+                    'remove'             => 'মুছুন',
+                ],
+
+                'terms' => [
+                    'terms' => 'আমি শর্তাবলীতে সম্মত',
+                    'read'  => 'শর্তাবলী পড়ুন',
                 ],
             ],
         ],

@@ -175,6 +175,8 @@ return [
                 'order'       => '注文',
                 'order-date'  => '注文日',
                 'order-id'    => '注文ID',
+                'pay-by'      => '支払い方法 - :method',
+                'pay-via'     => '支払い経由',
                 'subtotal'    => '小計',
                 'title'       => '注文',
                 'total'       => '合計',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => '支払い保留',
                         'processing'      => '処理中',
                     ],
+
+                    'canceled'        => 'キャンセル',
+                    'closed'          => 'クローズ',
+                    'completed'       => '完了',
+                    'fraud'           => '不正',
+                    'pending'         => '保留中',
+                    'pending-payment' => '支払い待ち',
+                    'processing'      => '処理中',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => '返金済みアイテム',
                     'item-shipped'         => '出荷済みアイテム',
                     'item-ordered'         => '注文済みアイテム',
+                    'order'                => '注文',
                     'order-id'             => '注文ID',
                     'page-title'           => '注文 #:order_id',
                     'payment-method'       => '支払い方法',
@@ -458,6 +469,58 @@ return [
                         'title'        => '注文情報',
                         'type'         => 'タイプ',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => '操作',
+
+                    'datagrid' => [
+                        'id'         => 'RMA ID',
+                        'order-ref'  => '注文参照',
+                        'rma-status' => 'リクエスト状況',
+                        'create'     => '作成日',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => '操作',
+                    'sku'                     => 'SKU',
+                    'price'                   => '価格',
+                    'current-order-quantity'  => '現在の注文数量',
+                    'product-already-raw'     => 'この商品のすべてのアイテムはすでに返品／キャンセルが申請されています',
+                    'resolution-type'         => '解決タイプ',
+                    'select'                  => '選択',
+                    'return'                  => '返品',
+                    'cancel-items'            => '商品をキャンセル',
+                    'product-delivery-status' => '配送状況',
+                    'package-condition'       => '梱包状態',
+                    'open'                    => '開封済み',
+                    'packed'                  => '梱包済み',
+                    'return-pickup-address'   => '返品集荷先住所',
+                    'return-pickup-time'      => '返品集荷時間',
+                    'morning'                 => '午前（10時～13時）',
+                    'afternoon'               => '午後（14時～17時）',
+                    'evening'                 => '夕方（18時～21時）',
+                    'images'                  => '画像',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA ID',
+                    'enter-message'      => 'ここにメッセージを入力してください',
+                    'add-attachments'    => '添付ファイルを追加',
+                    'send-message-btn'   => 'メッセージ送信',
+                    'attachment'         => '添付ファイル',
+                    'download'           => 'ダウンロード',
+                    'allowed-file-types' => '許可されたファイル形式',
+                    'remove'             => '削除',
+                ],
+
+                'terms' => [
+                    'terms' => '利用規約に同意します',
+                    'read'  => '利用規約を読む',
                 ],
             ],
         ],

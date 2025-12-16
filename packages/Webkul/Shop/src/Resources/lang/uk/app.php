@@ -175,6 +175,8 @@ return [
                 'order'       => 'Замовлення',
                 'order-date'  => 'Дата замовлення',
                 'order-id'    => 'ID замовлення',
+                'pay-by'      => 'Спосіб оплати - :method',
+                'pay-via'     => 'Оплатити через',
                 'subtotal'    => 'Підсумок',
                 'title'       => 'Замовлення',
                 'total'       => 'Всього',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Ожидание оплаты',
                         'processing'      => 'Обработка',
                     ],
+
+                    'canceled'        => 'Скасовано',
+                    'closed'          => 'Закрито',
+                    'completed'       => 'Завершено',
+                    'fraud'           => 'Шахрайство',
+                    'pending'         => 'В очікуванні',
+                    'pending-payment' => 'Очікує оплати',
+                    'processing'      => 'В обробці',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Товар повернутий',
                     'item-shipped'         => 'Товар відправлений',
                     'item-ordered'         => 'Товар замовлений',
+                    'order'                => 'Замовлення',
                     'order-id'             => 'ID замовлення',
                     'page-title'           => 'Замовлення #:order_id',
                     'payment-method'       => 'Спосіб оплати',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Інформація про замовлення',
                         'type'         => 'Тип',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Дія',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Номер замовлення',
+                        'rma-status' => 'Статус запиту',
+                        'create'     => 'Дата створення',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Дія',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Ціна',
+                    'current-order-quantity'  => 'Поточна кількість замовлення',
+                    'product-already-raw'     => 'Усі товари цього продукту вже були запитані для повернення/скасування',
+                    'resolution-type'         => 'Тип рішення',
+                    'select'                  => 'Вибрати',
+                    'return'                  => 'Повернення',
+                    'cancel-items'            => 'Скасувати товари',
+                    'product-delivery-status' => 'Статус доставки товару',
+                    'package-condition'       => 'Стан упаковки',
+                    'open'                    => 'Відкрито',
+                    'packed'                  => 'Запаковано',
+                    'return-pickup-address'   => 'Адреса забору повернення',
+                    'return-pickup-time'      => 'Час забору повернення',
+                    'morning'                 => 'Ранок (10–13)',
+                    'afternoon'               => 'День (14–17)',
+                    'evening'                 => 'Вечір (18–21)',
+                    'images'                  => 'Зображення',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Введіть ваше повідомлення тут',
+                    'add-attachments'    => 'Додати вкладення',
+                    'send-message-btn'   => 'Надіслати повідомлення',
+                    'attachment'         => 'Вкладення',
+                    'download'           => 'Завантажити',
+                    'allowed-file-types' => 'Дозволені типи файлів',
+                    'remove'             => 'Видалити',
+                ],
+
+                'terms' => [
+                    'terms' => 'Я погоджуюся з умовами',
+                    'read'  => 'Прочитати умови',
                 ],
             ],
         ],

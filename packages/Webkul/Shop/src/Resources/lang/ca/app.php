@@ -175,6 +175,8 @@ return [
                 'order'       => 'Comanda',
                 'order-date'  => 'Data de la comanda',
                 'order-id'    => 'ID de la comanda',
+                'pay-by'      => 'Pagar per - :method',
+                'pay-via'     => 'Pagar a través de',
                 'subtotal'    => 'Subtotal',
                 'title'       => 'Comandes',
                 'total'       => 'Total',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Pagament Pendent',
                         'processing'      => 'Processant',
                     ],
+
+                    'canceled'        => 'Cancel·lat',
+                    'closed'          => 'Tancat',
+                    'completed'       => 'Completat',
+                    'fraud'           => 'Frau',
+                    'pending'         => 'Pendent',
+                    'pending-payment' => 'Pagament pendent',
+                    'processing'      => 'Processant',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Producte Reembossat',
                     'item-shipped'         => 'Producte Enviat',
                     'item-ordered'         => 'Producte Comandat',
+                    'order'                => 'Comanda',
                     'order-id'             => 'ID de la Comanda',
                     'page-title'           => 'Comanda #:order_id',
                     'payment-method'       => 'Mètode de Pagament',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informació de la comanda',
                         'type'         => 'Tipus',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Acció',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Referència de comanda',
+                        'rma-status' => 'Estat de la sol·licitud',
+                        'create'     => 'Creat el',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Acció',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Preu',
+                    'current-order-quantity'  => 'Quantitat actual de la comanda',
+                    'product-already-raw'     => 'Tots els articles d’aquest producte ja han estat sol·licitats per devolució/cancel·lació',
+                    'resolution-type'         => 'Tipus de resolució',
+                    'select'                  => 'Selecciona',
+                    'return'                  => 'Devolució',
+                    'cancel-items'            => 'Cancel·lar articles',
+                    'product-delivery-status' => 'Estat de lliurament',
+                    'package-condition'       => 'Estat del paquet',
+                    'open'                    => 'Obert',
+                    'packed'                  => 'Empaquetat',
+                    'return-pickup-address'   => 'Adreça de recollida',
+                    'return-pickup-time'      => 'Hora de recollida',
+                    'morning'                 => 'Matí (10 - 13 h)',
+                    'afternoon'               => 'Tarda (14 - 17 h)',
+                    'evening'                 => 'Vespre (18 - 21 h)',
+                    'images'                  => 'Imatges',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Introdueix el teu missatge aquí',
+                    'add-attachments'    => 'Afegir adjunts',
+                    'send-message-btn'   => 'Enviar missatge',
+                    'attachment'         => 'Adjunt',
+                    'download'           => 'Descarregar',
+                    'allowed-file-types' => 'Tipus de fitxers permesos',
+                    'remove'             => 'Eliminar',
+                ],
+
+                'terms' => [
+                    'terms' => 'Accepto els termes i condicions',
+                    'read'  => 'Llegir els termes i condicions',
                 ],
             ],
         ],

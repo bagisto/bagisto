@@ -175,6 +175,8 @@ return [
                 'order'       => 'Pesanan',
                 'order-date'  => 'Tanggal Pesanan',
                 'order-id'    => 'ID Pesanan',
+                'pay-by'      => 'Bayar Dengan - :method',
+                'pay-via'     => 'Bayar Melalui',
                 'subtotal'    => 'Subtotal',
                 'title'       => 'Pesanan',
                 'total'       => 'Total',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Menunggu Pembayaran',
                         'processing'      => 'Sedang Diproses',
                     ],
+
+                    'canceled'        => 'Dibatalkan',
+                    'closed'          => 'Ditutup',
+                    'completed'       => 'Selesai',
+                    'fraud'           => 'Penipuan',
+                    'pending'         => 'Tertunda',
+                    'pending-payment' => 'Pembayaran tertunda',
+                    'processing'      => 'Diproses',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Item Dikembalikan',
                     'item-shipped'         => 'Item Dikirim',
                     'item-ordered'         => 'Item Dipesan',
+                    'order'                => 'Pesanan',
                     'order-id'             => 'ID Pesanan',
                     'page-title'           => 'Pesanan #:order_id',
                     'payment-method'       => 'Metode Pembayaran',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informasi Pesanan',
                         'type'         => 'Jenis',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Aksi',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Referensi Pesanan',
+                        'rma-status' => 'Status Permintaan',
+                        'create'     => 'Dibuat Pada',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Aksi',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Harga',
+                    'current-order-quantity'  => 'Jumlah Pesanan Saat Ini',
+                    'product-already-raw'     => 'Semua item dari produk ini telah diminta untuk pengembalian/pembatalan',
+                    'resolution-type'         => 'Jenis Resolusi',
+                    'select'                  => 'Pilih',
+                    'return'                  => 'Pengembalian',
+                    'cancel-items'            => 'Batalkan Item',
+                    'product-delivery-status' => 'Status Pengiriman Produk',
+                    'package-condition'       => 'Kondisi Paket',
+                    'open'                    => 'Terbuka',
+                    'packed'                  => 'Dikemas',
+                    'return-pickup-address'   => 'Alamat Penjemputan Pengembalian',
+                    'return-pickup-time'      => 'Waktu Penjemputan Pengembalian',
+                    'morning'                 => 'Pagi (10 - 13)',
+                    'afternoon'               => 'Siang (14 - 17)',
+                    'evening'                 => 'Malam (18 - 21)',
+                    'images'                  => 'Gambar',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Masukkan pesan Anda di sini',
+                    'add-attachments'    => 'Tambah Lampiran',
+                    'send-message-btn'   => 'Kirim Pesan',
+                    'attachment'         => 'Lampiran',
+                    'download'           => 'Unduh',
+                    'allowed-file-types' => 'Jenis File yang Diizinkan',
+                    'remove'             => 'Hapus',
+                ],
+
+                'terms' => [
+                    'terms' => 'Saya menyetujui syarat dan ketentuan',
+                    'read'  => 'Baca syarat dan ketentuan',
                 ],
             ],
         ],

@@ -175,6 +175,8 @@ return [
                 'order'       => 'Zamówienie',
                 'order-date'  => 'Data zamówienia',
                 'order-id'    => 'ID zamówienia',
+                'pay-by'      => 'Płatność za pomocą - :method',
+                'pay-via'     => 'Płatność przez',
                 'subtotal'    => 'Suma częściowa',
                 'title'       => 'Zamówienia',
                 'total'       => 'Razem',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Oczekuje na płatność',
                         'processing'      => 'W trakcie realizacji',
                     ],
+
+                    'canceled'        => 'Anulowane',
+                    'closed'          => 'Zamknięte',
+                    'completed'       => 'Zakończone',
+                    'fraud'           => 'Oszustwo',
+                    'pending'         => 'Oczekujące',
+                    'pending-payment' => 'Oczekująca płatność',
+                    'processing'      => 'W trakcie realizacji',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Pozycja zwrócona',
                     'item-shipped'         => 'Pozycja wysłana',
                     'item-ordered'         => 'Pozycja zamówiona',
+                    'order'                => 'Zamówienie',
                     'order-id'             => 'Identyfikator zamówienia',
                     'page-title'           => 'Zamówienie #:order_id',
                     'payment-method'       => 'Metoda płatności',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informacje o zamówieniu',
                         'type'         => 'Typ',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Akcja',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Numer zamówienia',
+                        'rma-status' => 'Status zgłoszenia',
+                        'create'     => 'Utworzono',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Akcja',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Cena',
+                    'current-order-quantity'  => 'Aktualna ilość zamówienia',
+                    'product-already-raw'     => 'Wszystkie pozycje tego produktu zostały już zgłoszone do zwrotu/anulowania',
+                    'resolution-type'         => 'Typ rozwiązania',
+                    'select'                  => 'Wybierz',
+                    'return'                  => 'Zwrot',
+                    'cancel-items'            => 'Anuluj pozycje',
+                    'product-delivery-status' => 'Status dostawy produktu',
+                    'package-condition'       => 'Stan paczki',
+                    'open'                    => 'Otwarta',
+                    'packed'                  => 'Zapakowana',
+                    'return-pickup-address'   => 'Adres odbioru zwrotu',
+                    'return-pickup-time'      => 'Czas odbioru zwrotu',
+                    'morning'                 => 'Rano (10–13)',
+                    'afternoon'               => 'Po południu (14–17)',
+                    'evening'                 => 'Wieczór (18–21)',
+                    'images'                  => 'Obrazy',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Wpisz tutaj swoją wiadomość',
+                    'add-attachments'    => 'Dodaj załączniki',
+                    'send-message-btn'   => 'Wyślij wiadomość',
+                    'attachment'         => 'Załącznik',
+                    'download'           => 'Pobierz',
+                    'allowed-file-types' => 'Dozwolone typy plików',
+                    'remove'             => 'Usuń',
+                ],
+
+                'terms' => [
+                    'terms' => 'Akceptuję regulamin',
+                    'read'  => 'Przeczytaj regulamin',
                 ],
             ],
         ],

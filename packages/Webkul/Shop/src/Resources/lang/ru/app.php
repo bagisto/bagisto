@@ -169,15 +169,17 @@ return [
             ],
 
             'orders' => [
-                'action'        => 'Действие',
-                'action-view'   => 'Просмотр',
-                'empty-order'   => 'Вы еще не заказывали ни одного продукта',
-                'order'         => 'Заказ',
-                'order-date'    => 'Дата заказа',
-                'order-id'      => 'ID заказа',
-                'subtotal'      => 'Подытог',
-                'title'         => 'Заказы',
-                'total'         => 'Всего',
+                'action'      => 'Действие',
+                'action-view' => 'Просмотр',
+                'empty-order' => 'Вы еще не заказывали ни одного продукта',
+                'order'       => 'Заказ',
+                'order-date'  => 'Дата заказа',
+                'order-id'    => 'ID заказа',
+                'pay-by'      => 'Оплата через - :method',
+                'pay-via'     => 'Оплата через',
+                'subtotal'    => 'Подытог',
+                'title'       => 'Заказы',
+                'total'       => 'Всего',
 
                 'status' => [
                     'title' => 'Статус',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Ожидание оплаты',
                         'processing'      => 'Обработка',
                     ],
+
+                    'canceled'        => 'Отменено',
+                    'closed'          => 'Закрыто',
+                    'completed'       => 'Завершено',
+                    'fraud'           => 'Мошенничество',
+                    'pending'         => 'В ожидании',
+                    'pending-payment' => 'Ожидание оплаты',
+                    'processing'      => 'В обработке',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Товар возвращен',
                     'item-shipped'         => 'Товар отправлен',
                     'item-ordered'         => 'Товар заказан',
+                    'order'                => 'Заказ',
                     'order-id'             => 'ID заказа',
                     'page-title'           => 'Заказ #:order_id',
                     'payment-method'       => 'Способ оплаты',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Информация о заказе',
                         'type'         => 'Тип',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Действие',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Номер заказа',
+                        'rma-status' => 'Статус запроса',
+                        'create'     => 'Дата создания',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Действие',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Цена',
+                    'current-order-quantity'  => 'Текущее количество заказа',
+                    'product-already-raw'     => 'Все товары этого продукта уже были запрошены для возврата/отмены',
+                    'resolution-type'         => 'Тип решения',
+                    'select'                  => 'Выбрать',
+                    'return'                  => 'Возврат',
+                    'cancel-items'            => 'Отменить товары',
+                    'product-delivery-status' => 'Статус доставки товара',
+                    'package-condition'       => 'Состояние упаковки',
+                    'open'                    => 'Открыт',
+                    'packed'                  => 'Упакован',
+                    'return-pickup-address'   => 'Адрес забора возврата',
+                    'return-pickup-time'      => 'Время забора возврата',
+                    'morning'                 => 'Утро (10–13)',
+                    'afternoon'               => 'День (14–17)',
+                    'evening'                 => 'Вечер (18–21)',
+                    'images'                  => 'Изображения',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Введите сообщение здесь',
+                    'add-attachments'    => 'Добавить вложения',
+                    'send-message-btn'   => 'Отправить сообщение',
+                    'attachment'         => 'Вложение',
+                    'download'           => 'Скачать',
+                    'allowed-file-types' => 'Разрешенные типы файлов',
+                    'remove'             => 'Удалить',
+                ],
+
+                'terms' => [
+                    'terms' => 'Я согласен с условиями',
+                    'read'  => 'Прочитать условия',
                 ],
             ],
         ],

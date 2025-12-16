@@ -175,6 +175,8 @@ return [
                 'order'       => 'הזמנה',
                 'order-date'  => 'תאריך הזמנה',
                 'order-id'    => 'מספר הזמנה',
+                'pay-by'      => 'תשלום באמצעות - :method', 
+                'pay-via'     => 'תשלום דרך',
                 'subtotal'    => 'סכום חלקי',
                 'title'       => 'הזמנות',
                 'total'       => 'סך הכל',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'ממתין לתשלום',
                         'processing'      => 'בטיפול',
                     ],
+
+                    'canceled'        => 'בוטל',
+                    'closed'          => 'נסגר',
+                    'completed'       => 'הושלם',
+                    'fraud'           => 'הונאה',
+                    'pending'         => 'ממתין',
+                    'pending-payment' => 'ממתין לתשלום',
+                    'processing'      => 'בטיפול',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'פריט הוחזר',
                     'item-shipped'         => 'פריט נשלח',
                     'item-ordered'         => 'פריט הוזמן',
+                    'order'                => 'הזמנה',
                     'order-id'             => 'מספר הזמנה',
                     'page-title'           => 'הזמנה #:order_id',
                     'payment-method'       => 'אמצעי תשלום',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'פרטי הזמנה',
                         'type'         => 'סוג',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'פעולה',
+
+                    'datagrid' => [
+                        'id'         => 'מזהה RMA',
+                        'order-ref'  => 'אסמכתת הזמנה',
+                        'rma-status' => 'סטטוס הבקשה',
+                        'create'     => 'נוצר בתאריך',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'פעולה',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'מחיר',
+                    'current-order-quantity'  => 'כמות הזמנה נוכחית',
+                    'product-already-raw'     => 'כל הפריטים של מוצר זה כבר התבקשו להחזרה/ביטול',
+                    'resolution-type'         => 'סוג פתרון',
+                    'select'                  => 'בחר',
+                    'return'                  => 'החזרה',
+                    'cancel-items'            => 'ביטול פריטים',
+                    'product-delivery-status' => 'סטטוס משלוח',
+                    'package-condition'       => 'מצב החבילה',
+                    'open'                    => 'פתוח',
+                    'packed'                  => 'ארוז',
+                    'return-pickup-address'   => 'כתובת איסוף להחזרה',
+                    'return-pickup-time'      => 'זמן איסוף להחזרה',
+                    'morning'                 => 'בוקר (10–13)',
+                    'afternoon'               => 'אחר הצהריים (14–17)',
+                    'evening'                 => 'ערב (18–21)',
+                    'images'                  => 'תמונות',
+                ],
+
+                'view' => [
+                    'id'                 => 'מזהה RMA',
+                    'enter-message'      => 'הזן את ההודעה כאן',
+                    'add-attachments'    => 'הוסף קבצים מצורפים',
+                    'send-message-btn'   => 'שלח הודעה',
+                    'attachment'         => 'קובץ מצורף',
+                    'download'           => 'הורדה',
+                    'allowed-file-types' => 'סוגי קבצים מותרים',
+                    'remove'             => 'הסר',
+                ],
+
+                'terms' => [
+                    'terms' => 'אני מסכים לתנאים ולהגבלות',
+                    'read'  => 'קרא תנאים והגבלות',
                 ],
             ],
         ],

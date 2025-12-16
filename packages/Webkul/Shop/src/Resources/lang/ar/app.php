@@ -175,6 +175,8 @@ return [
                 'order'       => 'طلب',
                 'order-date'  => 'تاريخ الطلب',
                 'order-id'    => 'معرف الطلب',
+                'pay-by'      => 'الدفع بواسطة - :method',
+                'pay-via'     => 'الدفع عبر',
                 'subtotal'    => 'المجموع الفرعي',
                 'title'       => 'الطلبات',
                 'total'       => 'الإجمالي',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'معلق على الدفع',
                         'processing'      => 'قيد المعالجة',
                     ],
+
+                    'canceled'        => 'ملغى',
+                    'closed'          => 'مغلق',
+                    'completed'       => 'مكتمل',
+                    'fraud'           => 'احتيال',
+                    'pending'         => 'معلق',
+                    'pending-payment' => 'معلق على الدفع',
+                    'processing'      => 'قيد المعالجة',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'العنصر المسترد',
                     'item-shipped'         => 'العنصر المشحون',
                     'item-ordered'         => 'العنصر المطلوب',
+                    'order'                => 'الطلب',
                     'order-id'             => 'معرف الطلب',
                     'page-title'           => 'الطلب #:order_id',
                     'payment-method'       => 'طريقة الدفع',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'معلومات الطلب',
                         'type'         => 'النوع',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'طلب إرجاع',
+                    'action' => 'إجراء',
+
+                    'datagrid' => [
+                        'id'         => 'معرّف RMA',
+                        'order-ref'  => 'مرجع الطلب',
+                        'rma-status' => 'حالة الطلب',
+                        'create'     => 'تاريخ الإنشاء',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'إجراء',
+                    'sku'                     => 'رمز المنتج',
+                    'price'                   => 'السعر',
+                    'current-order-quantity'  => 'الكمية الحالية للطلب',
+                    'product-already-raw'     => 'تم طلب إرجاع/إلغاء جميع عناصر هذا المنتج مسبقًا',
+                    'resolution-type'         => 'نوع الحل',
+                    'select'                  => 'اختر',
+                    'return'                  => 'إرجاع',
+                    'cancel-items'            => 'إلغاء العناصر',
+                    'product-delivery-status' => 'حالة تسليم المنتج',
+                    'package-condition'       => 'حالة الطرد',
+                    'open'                    => 'مفتوح',
+                    'packed'                  => 'معبأ',
+                    'return-pickup-address'   => 'عنوان استلام الإرجاع',
+                    'return-pickup-time'      => 'وقت استلام الإرجاع',
+                    'morning'                 => 'صباحًا (10 ص - 1 م)',
+                    'afternoon'               => 'بعد الظهر (2 م - 5 م)',
+                    'evening'                 => 'مساءً (6 م - 9 م)',
+                    'images'                  => 'صور',
+                ],
+
+                'view' => [
+                    'id'                 => 'معرّف RMA',
+                    'enter-message'      => 'أدخل رسالتك هنا',
+                    'add-attachments'    => 'إضافة مرفقات',
+                    'send-message-btn'   => 'إرسال الرسالة',
+                    'attachment'         => 'مرفق',
+                    'download'           => 'تنزيل',
+                    'allowed-file-types' => 'أنواع الملفات المسموح بها',
+                    'remove'             => 'إزالة',
+                ],
+
+                'terms' => [
+                    'terms' => 'أوافق على الشروط والأحكام',
+                    'read'  => 'قراءة الشروط والأحكام',
                 ],
             ],
         ],

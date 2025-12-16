@@ -175,6 +175,8 @@ return [
                 'order'       => 'आदेश',
                 'order-date'  => 'आदेश की तारीख',
                 'order-id'    => 'आदेश आईडी',
+                'pay-by'      => 'भुगतान विधि - :method',
+                'pay-via'     => 'भुगतान के माध्यम से',
                 'subtotal'    => 'उपकुल',
                 'title'       => 'आदेश',
                 'total'       => 'कुल',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'अपूर्ण भुगतान',
                         'processing'      => 'प्रोसेसिंग',
                     ],
+
+                    'canceled'        => 'रद्द किया गया',
+                    'closed'          => 'बंद',
+                    'completed'       => 'पूर्ण',
+                    'fraud'           => 'धोखाधड़ी',
+                    'pending'         => 'लंबित',
+                    'pending-payment' => 'भुगतान लंबित',
+                    'processing'      => 'प्रक्रिया में',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'आइटम वापसी की गई',
                     'item-shipped'         => 'आइटम भेज दिया गया',
                     'item-ordered'         => 'आइटम आदेश दिया गया',
+                    'order'                => 'आदेश',
                     'order-id'             => 'आदेश आईडी',
                     'page-title'           => 'आदेश #:order_id',
                     'payment-method'       => 'भुगतान विधि',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informazioni sull\'ordine',
                         'type'         => 'Tipo',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'कार्रवाई',
+
+                    'datagrid' => [
+                        'id'         => 'RMA आईडी',
+                        'order-ref'  => 'ऑर्डर संदर्भ',
+                        'rma-status' => 'अनुरोध स्थिति',
+                        'create'     => 'बनाया गया',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'कार्रवाई',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'मूल्य',
+                    'current-order-quantity'  => 'वर्तमान ऑर्डर मात्रा',
+                    'product-already-raw'     => 'इस उत्पाद के सभी आइटम पहले ही रिटर्न/रद्द के लिए अनुरोधित हैं',
+                    'resolution-type'         => 'समाधान प्रकार',
+                    'select'                  => 'चयन करें',
+                    'return'                  => 'रिटर्न',
+                    'cancel-items'            => 'आइटम रद्द करें',
+                    'product-delivery-status' => 'डिलीवरी स्थिति',
+                    'package-condition'       => 'पैकेज की स्थिति',
+                    'open'                    => 'खुला',
+                    'packed'                  => 'पैक किया हुआ',
+                    'return-pickup-address'   => 'रिटर्न पिकअप पता',
+                    'return-pickup-time'      => 'रिटर्न पिकअप समय',
+                    'morning'                 => 'सुबह (10 बजे - 1 बजे)',
+                    'afternoon'               => 'दोपहर (2 बजे - 5 बजे)',
+                    'evening'                 => 'शाम (6 बजे - 9 बजे)',
+                    'images'                  => 'चित्र',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA आईडी',
+                    'enter-message'      => 'यहाँ अपना संदेश लिखें',
+                    'add-attachments'    => 'अटैचमेंट जोड़ें',
+                    'send-message-btn'   => 'संदेश भेजें',
+                    'attachment'         => 'अटैचमेंट',
+                    'download'           => 'डाउनलोड',
+                    'allowed-file-types' => 'अनुमत फ़ाइल प्रकार',
+                    'remove'             => 'हटाएँ',
+                ],
+
+                'terms' => [
+                    'terms' => 'मैं नियम और शर्तों से सहमत हूँ',
+                    'read'  => 'नियम और शर्तें पढ़ें',
                 ],
             ],
         ],

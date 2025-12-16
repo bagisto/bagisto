@@ -175,6 +175,8 @@ return [
                 'order'       => '订单',
                 'order-date'  => '订单日期',
                 'order-id'    => '订单ID',
+                'pay-by'      => '支付方式 - :method',
+                'pay-via'     => '通过支付',
                 'subtotal'    => '小计',
                 'title'       => '订单',
                 'total'       => '总计',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => '待付款',
                         'processing'      => '处理中',
                     ],
+
+                    'canceled'        => '已取消',
+                    'closed'          => '已关闭',
+                    'completed'       => '已完成',
+                    'fraud'           => '欺诈',
+                    'pending'         => '待处理',
+                    'pending-payment' => '待付款',
+                    'processing'      => '处理中',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => '已退款商品',
                     'item-shipped'         => '已发货商品',
                     'item-ordered'         => '已下单商品',
+                    'order'                => '订单',
                     'order-id'             => '订单编号',
                     'page-title'           => '订单 #:order_id',
                     'payment-method'       => '付款方式',
@@ -458,6 +469,58 @@ return [
                         'title'        => '订单信息',
                         'type'         => '类型',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => '操作',
+
+                    'datagrid' => [
+                        'id'         => 'RMA 编号',
+                        'order-ref'  => '订单参考',
+                        'rma-status' => '请求状态',
+                        'create'     => '创建时间',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => '操作',
+                    'sku'                     => 'SKU',
+                    'price'                   => '价格',
+                    'current-order-quantity'  => '当前订单数量',
+                    'product-already-raw'     => '该产品的所有商品已申请退货/取消',
+                    'resolution-type'         => '解决类型',
+                    'select'                  => '选择',
+                    'return'                  => '退货',
+                    'cancel-items'            => '取消商品',
+                    'product-delivery-status' => '配送状态',
+                    'package-condition'       => '包裹状态',
+                    'open'                    => '已打开',
+                    'packed'                  => '已包装',
+                    'return-pickup-address'   => '退货取件地址',
+                    'return-pickup-time'      => '退货取件时间',
+                    'morning'                 => '上午（10点 - 13点）',
+                    'afternoon'               => '下午（14点 - 17点）',
+                    'evening'                 => '晚上（18点 - 21点）',
+                    'images'                  => '图片',
+                ],
+
+                'view' => [
+                    'id'                 => 'RMA 编号',
+                    'enter-message'      => '在此输入您的消息',
+                    'add-attachments'    => '添加附件',
+                    'send-message-btn'   => '发送消息',
+                    'attachment'         => '附件',
+                    'download'           => '下载',
+                    'allowed-file-types' => '允许的文件类型',
+                    'remove'             => '移除',
+                ],
+
+                'terms' => [
+                    'terms' => '我同意条款和条件',
+                    'read'  => '阅读条款和条件',
                 ],
             ],
         ],

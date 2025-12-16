@@ -175,6 +175,8 @@ return [
                 'order'       => 'سفارش',
                 'order-date'  => 'تاریخ سفارش',
                 'order-id'    => 'شناسه سفارش',
+                'pay-by'      => 'پرداخت با - :method',
+                'pay-via'     => 'پرداخت از طریق',
                 'subtotal'    => 'جمع جزئی',
                 'title'       => 'سفارش‌ها',
                 'total'       => 'مجموع',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'در انتظار پرداخت',
                         'processing'      => 'در حال پردازش',
                     ],
+
+                    'canceled'        => 'لغو شده',
+                    'closed'          => 'بسته شده',
+                    'completed'       => 'تکمیل شده',
+                    'fraud'           => 'تقلب',
+                    'pending'         => 'در انتظار',
+                    'pending-payment' => 'در انتظار پرداخت',
+                    'processing'      => 'در حال پردازش',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'مورد بازپرداخت شده',
                     'item-shipped'         => 'مورد ارسال شده',
                     'item-ordered'         => 'مورد سفارش داده شده',
+                    'order'                => 'سفارش',
                     'order-id'             => 'شناسه سفارش',
                     'page-title'           => 'سفارش #:order_id',
                     'payment-method'       => 'روش پرداخت',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'اطلاعات سفارش',
                         'type'         => 'نوع',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'اقدام',
+
+                    'datagrid' => [
+                        'id'         => 'شناسه RMA',
+                        'order-ref'  => 'مرجع سفارش',
+                        'rma-status' => 'وضعیت درخواست',
+                        'create'     => 'تاریخ ایجاد',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'اقدام',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'قیمت',
+                    'current-order-quantity'  => 'تعداد فعلی سفارش',
+                    'product-already-raw'     => 'تمام اقلام این محصول قبلاً برای بازگشت/لغو درخواست شده‌اند',
+                    'resolution-type'         => 'نوع حل مشکل',
+                    'select'                  => 'انتخاب',
+                    'return'                  => 'بازگشت',
+                    'cancel-items'            => 'لغو اقلام',
+                    'product-delivery-status' => 'وضعیت تحویل محصول',
+                    'package-condition'       => 'وضعیت بسته‌بندی',
+                    'open'                    => 'باز',
+                    'packed'                  => 'بسته‌بندی شده',
+                    'return-pickup-address'   => 'آدرس دریافت بازگشت',
+                    'return-pickup-time'      => 'زمان دریافت بازگشت',
+                    'morning'                 => 'صبح (۱۰ تا ۱۳)',
+                    'afternoon'               => 'بعدازظهر (۱۴ تا ۱۷)',
+                    'evening'                 => 'عصر (۱۸ تا ۲۱)',
+                    'images'                  => 'تصاویر',
+                ],
+
+                'view' => [
+                    'id'                 => 'شناسه RMA',
+                    'enter-message'      => 'پیام خود را اینجا وارد کنید',
+                    'add-attachments'    => 'افزودن پیوست',
+                    'send-message-btn'   => 'ارسال پیام',
+                    'attachment'         => 'پیوست',
+                    'download'           => 'دانلود',
+                    'allowed-file-types' => 'انواع فایل مجاز',
+                    'remove'             => 'حذف',
+                ],
+
+                'terms' => [
+                    'terms' => 'با شرایط و ضوابط موافقم',
+                    'read'  => 'مطالعه شرایط و ضوابط',
                 ],
             ],
         ],

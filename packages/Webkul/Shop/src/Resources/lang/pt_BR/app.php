@@ -175,6 +175,8 @@ return [
                 'order'       => 'Pedido',
                 'order-date'  => 'Data do pedido',
                 'order-id'    => 'ID do pedido',
+                'pay-by'      => 'Pagar por - :method',
+                'pay-via'     => 'Pagar via',
                 'subtotal'    => 'Subtotal',
                 'title'       => 'Pedidos',
                 'total'       => 'Total',
@@ -191,6 +193,14 @@ return [
                         'pending-payment' => 'Pagamento Pendente',
                         'processing'      => 'Em Processamento',
                     ],
+
+                    'canceled'        => 'Cancelado',
+                    'closed'          => 'Fechado',
+                    'completed'       => 'Concluído',
+                    'fraud'           => 'Fraude',
+                    'pending'         => 'Pendente',
+                    'pending-payment' => 'Pagamento pendente',
+                    'processing'      => 'Processando',
                 ],
 
                 'view' => [
@@ -204,6 +214,7 @@ return [
                     'item-refunded'        => 'Item Reembolsado',
                     'item-shipped'         => 'Item Enviado',
                     'item-ordered'         => 'Item Pedido',
+                    'order'                => 'Pedido',
                     'order-id'             => 'ID do Pedido',
                     'page-title'           => 'Pedido #:order_id',
                     'payment-method'       => 'Método de Pagamento',
@@ -458,6 +469,58 @@ return [
                         'title'        => 'Informações do pedido',
                         'type'         => 'Tipo',
                     ],
+                ],
+            ],
+
+            'rma' => [
+                'index' => [
+                    'title'  => 'RMA',
+                    'action' => 'Ação',
+
+                    'datagrid' => [
+                        'id'         => 'ID RMA',
+                        'order-ref'  => 'Referência do pedido',
+                        'rma-status' => 'Status da solicitação',
+                        'create'     => 'Criado em',
+                    ],
+                ],
+
+                'create' => [
+                    'action'                  => 'Ação',
+                    'sku'                     => 'SKU',
+                    'price'                   => 'Preço',
+                    'current-order-quantity'  => 'Quantidade atual do pedido',
+                    'product-already-raw'     => 'Todos os itens deste produto já foram solicitados para devolução/cancelamento',
+                    'resolution-type'         => 'Tipo de resolução',
+                    'select'                  => 'Selecionar',
+                    'return'                  => 'Devolução',
+                    'cancel-items'            => 'Cancelar itens',
+                    'product-delivery-status' => 'Status de entrega do produto',
+                    'package-condition'       => 'Condição da embalagem',
+                    'open'                    => 'Aberto',
+                    'packed'                  => 'Embalado',
+                    'return-pickup-address'   => 'Endereço de coleta da devolução',
+                    'return-pickup-time'      => 'Horário de coleta da devolução',
+                    'morning'                 => 'Manhã (10h - 13h)',
+                    'afternoon'               => 'Tarde (14h - 17h)',
+                    'evening'                 => 'Noite (18h - 21h)',
+                    'images'                  => 'Imagens',
+                ],
+
+                'view' => [
+                    'id'                 => 'ID RMA',
+                    'enter-message'      => 'Digite sua mensagem aqui',
+                    'add-attachments'    => 'Adicionar anexos',
+                    'send-message-btn'   => 'Enviar mensagem',
+                    'attachment'         => 'Anexo',
+                    'download'           => 'Baixar',
+                    'allowed-file-types' => 'Tipos de arquivos permitidos',
+                    'remove'             => 'Remover',
+                ],
+
+                'terms' => [
+                    'terms' => 'Aceito os termos e condições',
+                    'read'  => 'Ler termos e condições',
                 ],
             ],
         ],
