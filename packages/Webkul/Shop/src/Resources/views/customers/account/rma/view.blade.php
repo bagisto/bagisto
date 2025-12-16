@@ -11,40 +11,6 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    @php
-        $canCloseRma = true;
-        $canReopenRma = false;
-        
-        // Determine if RMA can be closed
-        if (
-            is_null($rma->request_status) ||
-            in_array($rma->request_status, ['Received Package', 'Solved', 'Item Canceled', 'Declined', 'Canceled']) ||
-            in_array($rma->order->status, ['canceled', 'closed']) ||
-            $rma->status == 1
-        ) {
-            $canCloseRma = false;
-        }
-
-        // Check if RMA can be reopened
-        if (
-            core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes' &&
-            $rma->request_status == 'Canceled'
-        ) {
-            $canReopenRma = true;
-        }
-
-        // Check if RMA has expired
-        $expireDays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
-        $daysSinceCreation = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($rma->created_at));
-        $isExpired = $daysSinceCreation > $expireDays && $daysSinceCreation != 0;
-
-        // Get RMA status color
-        $rmaStatus = app('Webkul\RMA\Repositories\RMAStatusRepository')
-            ->where('title', $rma->request_status)
-            ->first();
-        $statusColor = $rmaStatus?->color ?? '';
-    @endphp
-
     <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
@@ -95,7 +61,7 @@
                     @endif
 
                     <!-- Additional Information -->
-                    @if (!empty($rma->information))
+                    @if (! empty($rma->information))
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                             <span class="font-medium">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
                             <span class="text-gray-600">{{ $rma->information }}</span>
@@ -284,19 +250,9 @@
                     </span>
 
                     <div>
-                        @if ($rma->status == 1 || $rma->request_status == 'Solved')
-                            <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                                @lang('shop::app.rma.status.status-name.solved')
-                            </span>
-                        @elseif(in_array($rma->order->status, ['canceled']))
-                            <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-800">
-                                @lang('shop::app.rma.status.status-name.item-canceled')
-                            </span>
-                        @else
-                            <span class="px-3 py-1 text-xs rounded-full" style="background: {{ $statusColor }}20; color: {{ $statusColor }}">
-                                {{ $rma->request_status }}
-                            </span>
-                        @endif
+                        <span class="px-3 py-1 text-xs rounded-full" style="background: {{ $rmaStatus->color }}20; color: {{ $rmaStatus->color }}">
+                            {{ $rmaStatus->title }}
+                        </span>
                     </div>
                 </div>
 
@@ -336,13 +292,10 @@
                                 @submit="validateForm"
                                 id="check-form"
                                 enctype="multipart/form-data"
-                                :action="route('shop.customers.account.rma.update-status')"
+                                :action="route('shop.customers.account.rma.update-status', $rma->id)"
                             >
-                                @csrf
                                 <div class="grid w-full gap-4">
                                     <div>
-                                        <input type="hidden" name="rma_id" value="{{ $rma->id }}">
-
                                         <x-shop::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                             <x-shop::form.control-group.control
                                                 type="checkbox"
@@ -386,23 +339,20 @@
                                     @submit="validateForm"
                                     id="check-form"
                                     enctype="multipart/form-data"
-                                    :action="route('shop.customers.account.rma.re-open')"
+                                    :action="route('shop.customers.account.rma.re-open', $rma->id)"
                                 >
-                                    @csrf
                                     <div class="flex flex-col max-md:flex-col w-full gap-4">
                                         <div>
-                                            <input type="hidden" name="rma_id" value="{{ $rma->id }}">
-
                                             <input
                                                 type="checkbox"
-                                                id="close_rma"
-                                                name="close_rma"
+                                                id="reopen_rma"
+                                                name="reopen_rma"
                                                 v-model="closeRmaChecked"
                                                 v-validate="'required'"
                                                 data-vv-as="{{ trans('shop::app.rma.validation.close-rma') }}"
                                             >
 
-                                            <label for="close_rma" class="required text-xs font-medium">
+                                            <label for="reopen_rma" class="required text-xs font-medium">
                                                 @lang('shop::app.rma.customer.create.reopen-request')
                                             </label>
 

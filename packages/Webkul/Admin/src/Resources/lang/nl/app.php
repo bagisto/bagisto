@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'Bestel-ID :',
                     'order-status'           => 'Leveringsstatus :',
                     'order-total'            => 'Besteltotaal :',
+                    'price'                  => 'Prijs :',
                     'refund-creation-error'  => 'Kan geen terugbetaling voor deze bestelling aanmaken.',
                     'refund-failed'          => 'Terugbetaling mislukt.',
                     'request-on'             => 'Aangevraagd op :',

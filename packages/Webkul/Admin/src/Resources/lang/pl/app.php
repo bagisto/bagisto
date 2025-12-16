@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID zamówienia :',
                     'order-status'           => 'Status dostawy :',
                     'order-total'            => 'Łączna kwota zamówienia :',
+                    'price'                  => 'Cena :',
                     'refund-creation-error'  => 'Nie można utworzyć zwrotu dla tego zamówienia.',
                     'refund-failed'          => 'Zwrot nie powiódł się.',
                     'request-on'             => 'Zgłoszono dnia :',

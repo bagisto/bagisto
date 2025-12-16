@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'Bestellnummer:',
                     'order-status'           => 'Lieferstatus:',
                     'order-total'            => 'Bestellsumme:',
+                    'price'                  => 'Preis:',
                     'refund-creation-error'  => 'Rückerstattung für diese Bestellung kann nicht erstellt werden.',
                     'refund-failed'          => 'Rückerstattung fehlgeschlagen.',
                     'request-on'             => 'Angefragt am:',

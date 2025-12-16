@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID de la comanda:',
                     'order-status'           => 'Estat de lliurament:',
                     'order-total'            => 'Total de la comanda:',
+                    'price'                  => 'Preu:',
                     'refund-creation-error'  => 'No es pot crear el reemborsament per a aquesta comanda.',
                     'refund-failed'          => 'El reemborsament ha fallat.',
                     'request-on'             => 'Sol·licitud el:',

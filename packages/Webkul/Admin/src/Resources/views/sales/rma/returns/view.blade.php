@@ -139,11 +139,11 @@
                                 <div class="gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
                                     <div class="flex gap-2.5">
                                         <div>
-                                            @if($rmaItem?->product?->base_image_url)
+                                            @if ($rmaItem?->product?->base_image_url)
                                                 <img
                                                     class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
                                                     src="{{$rmaItem?->product->base_image_url }}"
-                                                >
+                                                />
                                             @else
                                                 <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -160,9 +160,10 @@
                                                 {{ $rmaItem->product->name }}
                                             </p>
 
+                                            <!-- Order Details -->
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.all-rma.view.order-details'):
+                                                    @lang('admin::app.sales.rma.all-rma.view.price')
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -170,6 +171,7 @@
                                                 </p>
                                             </div>
 
+                                            <!-- Quantity -->
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.create-rma.quantity'):
@@ -180,19 +182,10 @@
                                                 </p>
                                             </div>
 
+                                            <!-- Resolution Type -->
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.orders.view.grand-total'):
-                                                </p>
-
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                                    {{ $rmaItem->orderItem->qty_ordered }}
-                                                </p>
-                                            </div>
-
-                                            <div class="flex w-full gap-x-5">
-                                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.all-rma.view.resolution-type'):
+                                                    @lang('admin::app.sales.rma.all-rma.view.resolution-type')
                                                 </p>
 
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -200,6 +193,7 @@
                                                 </p>
                                             </div>
 
+                                            <!-- Reason -->
                                             <div class="flex w-full gap-x-5">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.create-rma.reason'):
@@ -223,6 +217,7 @@
                                @lang('admin::app.sales.rma.all-rma.view.conversations')
                             </p>
                         </div>
+
                         <div class="grid gap-2.5 p-4">
                             <div class="mb-3 border rounded-lg p-3">
                                 <x-admin::form
@@ -408,79 +403,48 @@
                                        @lang('admin::app.sales.rma.all-rma.view.order-status')
                                     </p>
 
-                                    @if ($rma->request_status == 'Declined')
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.rma.all-rma.view.close-rma')
-                                        </p>
-
-                                    @endif
-                                    @if ($rma->request_status == 'Item Canceled')
+                                    @if (in_array($rma->rma_status_id, [7, 8]))
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.close-rma')
                                         </p>
                                     @endif
-
                                 </div>
 
                                 <div class="flex flex-col gap-2.5">
-
                                     <!-- RMA Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        <span>
-                                            @if (strtolower($rma->request_status) == 'Solved')
-                                                <span class="label-active py-1">
-                                                    @lang('admin::app.sales.rma.all-rma.view.solved')
-                                                </span>
-
-                                            @elseif(
-                                                    strtolower($rma->request_status) == 'Canceled'
-                                                    && strtolower($rma->request_status) == 'Closed'
-                                                )
-                                                <span
-                                                    class="label-{{ $rma->request_status }} py-1 text-xs"
-                                                >
-                                                    @lang('admin::app.sales.rma.all-rma.view.item-canceled')
-                                                </span>
-                                            @else
-                                                <span
-                                                    class="label-active py-1 text-xs"
-                                                    style="background: {{ $rmaStatusColor }}"
-                                                >
-                                                    {{ $rma->request_status }}
-                                                </span>
-                                            @endif
+                                        <span
+                                            class="label-active py-1 text-xs"
+                                            style="background: {{ $rma->requestStatus->color }};"
+                                        >
+                                            {{ $rma->requestStatus->title }}
                                         </span>
                                     </p>
 
                                     <!-- RMA Order Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span
-                                            @if ( $rma->order_status == '1')
-                                                class="label-active py-1"
-                                            @elseif ( strtolower($rma->order_status) == 'canceled' || strtolower($rma->order_status) == 'closed')
-                                                class="label-{{strtolower($rma->order_status)}} py-1"
+                                            @if (strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
+                                                class="label-{{strtolower($rma->order->status)}} py-1"
                                             @else
                                                 class="label-info py-1"
                                             @endif
                                         >
-                                            @if ($rma->order_status == '1')
-                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
-                                            @elseif ( strtolower($rma->order_status) == 'canceled' || strtolower($rma->order_status) == 'closed'
-                                            )
-                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.'. strtolower($rma->order_status))
+                                            @if ( strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
+                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.'. strtolower($rma->order->status))
                                             @else
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
                                             @endif
                                         </span>
                                     </p>
 
-                                    @if ($rma->request_status == 'Declined')
+                                    @if ($rma->rma_status_id == 7)
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.declined-admin')
                                         </p>
                                     @endif
 
-                                    @if ($rma->request_status == 'Item Canceled')
+                                    @if ($rma->rma_status_id == 8)
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.solved-by-admin')
                                         </p>
@@ -491,39 +455,11 @@
                     </x-admin::accordion>
 
                     <!-- RMA change status-->
-                    @if (
-                        $rma->request_status != 'Solved'
-                        && $rma->status != 1
+                     @if (
+                        $rma->rma_status_id != 6
                         && ! in_array($rma->order->status, ['canceled', 'closed'])
                     )
-                        @if ($rma->request_status == 'Item Canceled')
-                            @php($flag = 0)
-
-                        @elseif ($rma->request_status == 'Received Package')
-                            @php($flag = 0)
-
-                        @elseif ($rma->request_status == 'Declined')
-                            @php($flag = 0)
-
-
-                        @elseif ($rma->request_status == 'Canceled')
-                            @php($flag = 0)
-
-                        @elseif (
-                            $rma->resolution == 'Return'
-                            && $rma->status == 1
-                        )
-                            @php($flag = 0)
-                        @else
-                            @php($flag = 1)
-                        @endif
-
-                        @if (
-                            ! empty($flag)
-                            && $flag == 1
-                            && $rma->status == 0
-                            && $rma->order->status != 'closed'
-                        )
+                        @if ($rma->order->status != 'closed') 
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
@@ -545,24 +481,24 @@
                                         <x-admin::form.control-group class="mb-2 w-full">
                                             <x-admin::form.control-group.control
                                                 type="select"
-                                                name="request_status"
+                                                name="rma_status_id"
                                                 rules="required"
                                                 v-model="rmaStatus"
                                                 :label="trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status')"
                                                 id="orderItem"
                                             >
-                                                @foreach ($statusArr as $status)
-                                                    <option value="{{ $status }}" {{ $rma->request_status == $status ? 'selected' : '' }}>
+                                                @foreach ($statusArray as $key => $status)
+                                                    <option value="{{ $key }}" {{ $rma->rma_status_id == $key ? 'selected' : '' }}>
                                                         {{ $status }}
-                                                    </option>
+                                                    </option>   
                                                 @endforeach
                                             </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error control-name="request_status" />
+                                            <x-admin::form.control-group.error control-name="rma_status_id" />
                                         </x-admin::form.control-group>
 
                                         <x-admin::form.control-group
-                                            v-if="rmaStatus == 'Received Package' || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 'Item Canceled')"
+                                            v-if="rmaStatus == 5 || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 8)"
                                             class="mb-2 w-full"
                                         >
                                             <x-admin::form.control-group.label class="required">
@@ -573,7 +509,7 @@
                                                 type="text"
                                                 name="shipping"
                                                 :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
-                                                value="{{ $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded }}"
+                                                :value="$rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
                                                 :label="trans('admin::app.sales.refunds.create.refund-shipping')"
                                                 id="shipping"
                                             >
@@ -594,37 +530,12 @@
                                 </x-slot:content>
                             </x-admin::accordion>
                         @endif
-
-                        @if (
-                            $rma->request_status == 'Item Canceled'
-                            || ($rma->resolution == 'Return' && $rma->status == 1)
-                            || ($rma->status == 1 && $rma->request_status != 'Declined')
-                        )
-                            <x-admin::accordion>
-                                <x-slot:header>
-                                    <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.rma.all-rma.view.change-status')
-                                    </p>
-                                </x-slot:header>
-
-                                <x-slot:content>
-                                    <x-admin::form :action="route('admin.sales.rma.save.status')">
-                                        <input
-                                            type="hidden"
-                                            name="rma_id"
-                                            value="{{ $rma->id }}"
-                                        >
-                                    </x-admin::form>
-                                </x-slot:content>
-                            </x-admin::accordion>
-
-                        @endif
                     @endif
 
-                    <!-- Re open RMA -->
+                    <!-- Reopen Declined Request RMA -->
                     @if (
                         core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') == 'yes'
-                        && $rma->request_status == 'Declined'
+                        && $rma->rma_status_id == 7
                     )
                         <x-admin::accordion>
                             <x-slot:header>
@@ -641,7 +552,6 @@
                                         enctype="multipart/form-data"
                                         :action="route('admin.sales.rma.save.reopen-status')"
                                     >
-                                        @csrf
                                         <div class="w-full gap-4">
                                             <div>
                                                 <input
@@ -659,6 +569,7 @@
                                                         for="close_rma"
                                                         @change="closeRmaChecked = !closeRmaChecked"
                                                     />
+
                                                     <label
                                                         class="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                                         for="close_rma"
@@ -764,8 +675,7 @@
                                 </div>
 
                                 <div class="flex flex-col gap-y-1.5">
-
-                                    <!-- customer id -->
+                                    <!-- Customer Info -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @if (empty($rma->order->customer_id))
                                             <div class="text-sm dark:text-gray-300">
@@ -773,7 +683,7 @@
                                             </div>
                                         @else
                                             <a href="{{ route('admin.customers.customers.view', $rma->order->customer_id) }}">
-                                                <div class="text-sm dark:text-gray-300">
+                                                <div class="text-sm dark:text-gray-300 hover:underline">
                                                     {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
                                                 </div>
                                             </a>
@@ -791,6 +701,7 @@
                 </div>
             </div>
 
+            <!-- Attachment Modal -->
             <x-admin::modal ref="attachmentModal">
                 <!-- Modal Header -->
                 <x-slot:header>

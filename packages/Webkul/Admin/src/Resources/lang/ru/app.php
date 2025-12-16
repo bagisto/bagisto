@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID заказа :',
                     'order-status'           => 'Статус доставки :',
                     'order-total'            => 'Сумма заказа :',
+                    'price'                  => 'Цена :',
                     'refund-creation-error'  => 'Невозможно создать возврат для этого заказа.',
                     'refund-failed'          => 'Возврат не удался.',
                     'request-on'             => 'Запрос от :',

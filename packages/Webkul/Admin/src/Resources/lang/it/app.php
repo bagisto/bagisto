@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID ordine:',
                     'order-status'           => 'Stato consegna:',
                     'order-total'            => 'Totale ordine:',
+                    'price'                  => 'Prezzo:',
                     'refund-creation-error'  => 'Impossibile creare il rimborso per questo ordine.',
                     'refund-failed'          => 'Rimborso fallito.',
                     'request-on'             => 'Richiesta il:',

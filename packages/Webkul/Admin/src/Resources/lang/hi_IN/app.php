@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ऑर्डर आईडी :',
                     'order-status'           => 'डिलीवरी स्थिति :',
                     'order-total'            => 'ऑर्डर कुल :',
+                    'price'                  => 'मूल्य',
                     'refund-creation-error'  => 'इस ऑर्डर के लिए रिफंड बनाने में असमर्थ।',
                     'refund-failed'          => 'रिफंड विफल रहा।',
                     'request-on'             => 'अनुरोध दिनांक :',

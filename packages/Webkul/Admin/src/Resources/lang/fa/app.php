@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'شناسه سفارش :',
                     'order-status'           => 'وضعیت تحویل :',
                     'order-total'            => 'جمع سفارش :',
+                    'price'                  => 'قیمت :',
                     'refund-creation-error'  => 'امکان ایجاد بازپرداخت برای این سفارش وجود ندارد.',
                     'refund-failed'          => 'بازپرداخت ناموفق بود.',
                     'request-on'             => 'درخواست در :',

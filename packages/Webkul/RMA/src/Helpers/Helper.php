@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\RMA\Enums\RequestStatusEnum;
+use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMARepository;
 use Webkul\Sales\Contracts\OrderItem;
@@ -18,11 +18,11 @@ class Helper
      * rma refund-related statuses
      */
     public const REFUND_EXCLUDED_STATUSES = [
-        RequestStatusEnum::RECEIVED_PACKAGE->value,
-        RequestStatusEnum::DECLINED->value,
-        RequestStatusEnum::CANCELED->value,
-        RequestStatusEnum::SOLVED->value,
-        RequestStatusEnum::ITEM_CANCELED->value,
+        DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+        DefaultRMAStatusEnum::DECLINED->value,
+        DefaultRMAStatusEnum::CANCELED->value,
+        DefaultRMAStatusEnum::SOLVED->value,
+        DefaultRMAStatusEnum::ITEM_CANCELED->value,
     ];
 
     /**
@@ -73,9 +73,9 @@ class Helper
             ->get();
 
         $rmaQty = $rmaItems->reduce(function ($carry, $rmaItem) {
-            $rmaStatus = $rmaItem->rma->request_status ?? null;
+            $rmaStatus = $rmaItem->rma->rma_status_id ?? null;
 
-            if (! in_array($rmaStatus, [RequestStatusEnum::DECLINED->value, RequestStatusEnum::CANCELED->value])) {
+            if (! in_array($rmaStatus, [DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::CANCELED->value])) {
                 return $carry + $rmaItem->quantity;
             }
 
@@ -107,7 +107,7 @@ class Helper
         }
 
         return $rmaItems->every(function ($rmaItem) {
-            return in_array($rmaItem->rma->request_status ?? null, self::REFUND_EXCLUDED_STATUSES);
+            return in_array($rmaItem->rma->rma_status_id ?? null, self::REFUND_EXCLUDED_STATUSES);
         });
     }
 

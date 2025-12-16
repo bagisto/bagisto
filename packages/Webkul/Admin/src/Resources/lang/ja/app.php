@@ -869,6 +869,7 @@ return [
                     'order-id'               => '注文ID :',
                     'order-status'           => '配送状況 :',
                     'order-total'            => '注文合計 :',
+                    'price'                  => '価格 :',
                     'refund-creation-error'  => 'この注文の返金を作成できません。',
                     'refund-failed'          => '返金に失敗しました。',
                     'request-on'             => '申請日 :',

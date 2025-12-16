@@ -1,17 +1,17 @@
 {
-  "_veeValidate-BnSi22_q.js": {
-    "file": "assets/veeValidate-BnSi22_q.js",
+  "_veeValidate-C-tOO5sf.js": {
+    "file": "assets/veeValidate-C-tOO5sf.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-DaFNcYaj.js"
+      "_vue-497hH3Y-.js"
     ]
   },
-  "_vendor-CW6uOYFM.js": {
-    "file": "assets/vendor-CW6uOYFM.js",
+  "_vendor-jY-xvwzp.js": {
+    "file": "assets/vendor-jY-xvwzp.js",
     "name": "vendor"
   },
-  "_vue-DaFNcYaj.js": {
-    "file": "assets/vue-DaFNcYaj.js",
+  "_vue-497hH3Y-.js": {
+    "file": "assets/vue-497hH3Y-.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
@@ -108,14 +108,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-h2RhPG73.js",
+    "file": "assets/app-DicDQvYX.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-DaFNcYaj.js",
-      "_vendor-CW6uOYFM.js",
-      "_veeValidate-BnSi22_q.js"
+      "_vue-497hH3Y-.js",
+      "_vendor-jY-xvwzp.js",
+      "_veeValidate-C-tOO5sf.js"
     ],
     "css": [
       "assets/app-DsP8OK1c.css"

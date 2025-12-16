@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'Sipariş ID :',
                     'order-status'           => 'Teslimat durumu :',
                     'order-total'            => 'Sipariş toplamı :',
+                    'price'                  => 'Fiyat :',
                     'refund-creation-error'  => 'Bu sipariş için iade oluşturulamadı.',
                     'refund-failed'          => 'İade başarısız.',
                     'request-on'             => 'Talep tarihi :',

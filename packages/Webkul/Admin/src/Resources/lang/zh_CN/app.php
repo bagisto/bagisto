@@ -869,6 +869,7 @@ return [
                     'order-id'               => '订单 ID :',
                     'order-status'           => '配送状态 :',
                     'order-total'            => '订单总额 :',
+                    'price'                  => '价格 :',
                     'refund-creation-error'  => '无法为此订单创建退款。',
                     'refund-failed'          => '退款失败。',
                     'request-on'             => '请求日期 :',

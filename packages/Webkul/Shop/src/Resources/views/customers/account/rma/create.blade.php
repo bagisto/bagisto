@@ -687,58 +687,6 @@
                             <x-shop::form.control-group.error name="package_condition" class="flex" />
                         </x-shop::form.control-group>
 
-                        <!-- Return Pickup Address -->
-                        <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('shop::app.customers.account.rma.create.return-pickup-address')
-                            </x-shop::form.control-group.label>
-
-                            <x-shop::form.control-group.control
-                                type="text"
-                                name="return_pickup_address"
-                                rules="required"
-                                :value="old('return_pickup_address')"
-                                :label="trans('shop::app.customers.account.rma.create.return-pickup-address')"
-                                :placeholder="trans('shop::app.customers.account.rma.create.return-pickup-address')"
-                                aria-label="@lang('shop::app.customers.account.rma.create.return-pickup-address')"
-                            />
-
-                            <x-shop::form.control-group.error name="return_pickup_address" class="flex" />
-                        </x-shop::form.control-group>
-
-                        <!-- Return Pickup Time -->
-                        <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('shop::app.customers.account.rma.create.return-pickup-time')
-                            </x-shop::form.control-group.label>
-
-                            <x-shop::form.control-group.control
-                                type="select"
-                                name="return_pickup_time"
-                                rules="required"
-                                v-model="returnPickupTime"
-                                :label="trans('shop::app.customers.account.rma.create.return-pickup-time')"
-                            >
-                                <option value="">
-                                    @lang('shop::app.customers.account.rma.create.select')
-                                </option>
-
-                                <option value="morning">
-                                    @lang('shop::app.customers.account.rma.create.morning')
-                                </option>
-
-                                <option value="afternoon">
-                                    @lang('shop::app.customers.account.rma.create.afternoon')
-                                </option>
-
-                                <option value="evening">
-                                    @lang('shop::app.customers.account.rma.create.evening')
-                                </option>
-                            </x-shop::form.control-group.control>
-
-                            <x-shop::form.control-group.error name="return_pickup_time" class="flex" />
-                        </x-shop::form.control-group>
-
                         <!-- Additionally -->
                         @foreach ($customAttributes as $attribute)
                             <x-shop::form.control-group>
@@ -1136,7 +1084,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("shop.customers.account.rma.get-order-items", "") }}/' + this.orderId)
+                            this.$axios.get('{{ route("shop.customers.account.create.get-order-items", "") }}/' + this.orderId)
                                 .then(response => {
                                     this.isLoading = false;
 

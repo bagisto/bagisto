@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'অর্ডার আইডি :',
                     'order-status'           => 'ডেলিভারি অবস্থা :',
                     'order-total'            => 'অর্ডার মোট :',
+                    'price'                  => 'মূল্য :',
                     'refund-creation-error'  => 'এই অর্ডারের জন্য ফেরত তৈরি করা যায়নি।',
                     'refund-failed'          => 'ফেরত ব্যর্থ হয়েছে।',
                     'request-on'             => 'অনুরোধের তারিখ :',

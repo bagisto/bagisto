@@ -25,7 +25,7 @@ class RMA extends Model implements RMAContract
     protected $fillable = [
         'information',
         'order_status',
-        'request_status',
+        'rma_status_id',
         'order_id',
         'status',
         'package_condition',
@@ -69,5 +69,13 @@ class RMA extends Model implements RMAContract
     public function additionalFields(): HasMany
     {
         return $this->hasMany(RMAAdditionalFieldProxy::modelClass(), 'rma_id');
+    }
+
+    /**
+     * RMA Status
+     */
+    public function requestStatus(): BelongsTo
+    {
+        return $this->belongsTo(RMAStatusProxy::modelClass(), 'rma_status_id');
     }
 }

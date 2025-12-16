@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'מספר הזמנה:',
                     'order-status'           => 'סטטוס משלוח:',
                     'order-total'            => 'סך הכל הזמנה:',
+                    'price'                  => 'מחיר:',
                     'refund-creation-error'  => 'לא ניתן ליצור החזר עבור הזמנה זו.',
                     'refund-failed'          => 'ההחזר נכשל.',
                     'request-on'             => 'בקשה בתאריך:',

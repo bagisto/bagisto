@@ -562,58 +562,6 @@
                             <x-admin::form.control-group.error name="package_condition" class="flex"/>
                         </x-admin::form.control-group>
 
-                        <!-- Return Pickup Address -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.return-pickup-address')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="return_pickup_address"
-                                rules="required"
-                                :value="old('return_pickup_address')"
-                                :label="trans('admin::app.configuration.index.sales.rma.return-pickup-address')"
-                                :placeholder="trans('admin::app.configuration.index.sales.rma.return-pickup-address')"
-                                aria-label="@lang('admin::app.configuration.index.sales.rma.return-pickup-address')"
-                            />
-
-                            <x-admin::form.control-group.error name="return_pickup_address" class="flex"/>
-                        </x-admin::form.control-group>
-
-                        <!-- Return Pickup Time -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.return-pickup-time')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="return_pickup_time"
-                                rules="required"
-                                v-model="returnPickupTime"
-                                :label="trans('admin::app.configuration.index.sales.rma.return-pickup-time')"
-                            >
-                                <option value="">
-                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                </option>
-
-                                <option value="morning">
-                                    @lang('admin::app.configuration.index.sales.rma.morning')
-                                </option>
-
-                                <option value="afternoon">
-                                    @lang('admin::app.configuration.index.sales.rma.afternoon')
-                                </option>
-
-                                <option value="evening">
-                                    @lang('admin::app.configuration.index.sales.rma.evening')
-                                </option>
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error name="return_pickup_time" class="flex"/>
-                        </x-admin::form.control-group>
-
                         <!-- Additionally -->
                         @foreach ($customAttributes as $attribute)
                             <x-admin::form.control-group>

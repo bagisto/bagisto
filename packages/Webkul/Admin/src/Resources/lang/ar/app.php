@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'رقم الطلب :',
                     'order-status'           => 'حالة التسليم :',
                     'order-total'            => 'إجمالي الطلب :',
+                    'price'                  => 'السعر :',
                     'refund-creation-error'  => 'غير قادر على إنشاء استرداد لهذا الطلب.',
                     'refund-failed'          => 'فشل الاسترداد.',
                     'request-on'             => 'تم الطلب في :',

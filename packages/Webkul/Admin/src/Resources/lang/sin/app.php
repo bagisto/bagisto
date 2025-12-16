@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ඇණවුම් ID :',
                     'order-status'           => 'බෙදාහැරීමේ තත්ත්වය :',
                     'order-total'            => 'මුළු ඇණවුම :',
+                    'price'                  => 'මිල',
                     'refund-creation-error'  => 'මෙම ඇණවුම සඳහා ආපසු ගෙවීම සෑදිය නොහැක.',
                     'refund-failed'          => 'ආපසු ගෙවීම අසාර්ථකයි.',
                     'request-on'             => 'ඉල්ලූ දිනය :',

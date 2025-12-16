@@ -35,7 +35,7 @@
                 >
                 </label>
 
-                <span class="flex max-md:block">
+                <span class="block">
                     <span class="text-zinc-500 max-md:text-xs">
                         @lang('shop::app.customers.account.rma.terms.terms')
                     </span>

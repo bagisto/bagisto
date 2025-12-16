@@ -29,17 +29,15 @@ class RMADataGrid extends DataGrid
         $queryBuilder = DB::table('rma')
             ->join('orders', 'orders.id', '=', 'rma.order_id')
             ->join('rma_items', 'rma_items.rma_id', '=', 'rma.id')
-            ->leftJoin('rma_statuses', 'rma_statuses.title', '=', 'rma.request_status')
+            ->leftJoin('rma_statuses', 'rma_statuses.id', '=', 'rma.rma_status_id')
             ->select(
                 'rma.id',
                 'rma.status',
                 'rma.order_id',
-                'rma.request_status',
-                'rma.request_status as rma_status',
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
-                'rma_statuses.id as rma_status_id',
+                'rma_statuses.title',
                 'rma_statuses.color as rma_status_color',
                 DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
             )
@@ -48,7 +46,7 @@ class RMADataGrid extends DataGrid
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
-        $this->addFilter('request_status', 'rma.request_status');
+        $this->addFilter('rma_status_title', 'rma_statuses.title');
         $this->addFilter('customer_email', 'orders.customer_email');
         $this->addFilter('created_at', 'rma.created_at');
 
@@ -82,7 +80,7 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'request_status',
+            'index'              => 'title',
             'label'              => trans('shop::app.customers.account.rma.index.datagrid.rma-status'),
             'type'               => 'string',
             'filterable_type'    => 'dropdown',
@@ -100,7 +98,7 @@ class RMADataGrid extends DataGrid
 
                 $color = $row->rma_status_color ?? '';
 
-                return '<p class="label-active" style="background:'.$color.';">'.$row->request_status.'</p>';
+                return '<p class="label-active" style="background:'.$color.';">'.$row->title.'</p>';
             },
         ]);
 
@@ -142,13 +140,6 @@ class RMADataGrid extends DataGrid
             'title'     => trans('shop::app.rma.customer-rma-index.view'),
             'icon'      => 'icon-cancel',
             'method'    => 'GET',
-            'condition' => function ($row) {
-                if ($row->request_status != 'Solved') {
-                    return false;
-                }
-
-                return true;
-            },
             'url'      => function ($row) {
                 return route('shop.customers.account.rma.cancel', $row->id);
             },

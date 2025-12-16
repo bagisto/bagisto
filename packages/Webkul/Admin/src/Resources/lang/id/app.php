@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID Pesanan :',
                     'order-status'           => 'Status Pengiriman :',
                     'order-total'            => 'Total Pesanan :',
+                    'price'                  => 'Harga',
                     'refund-creation-error'  => 'Tidak dapat membuat pengembalian dana untuk pesanan ini.',
                     'refund-failed'          => 'Pengembalian dana gagal.',
                     'request-on'             => 'Permintaan Pada :',

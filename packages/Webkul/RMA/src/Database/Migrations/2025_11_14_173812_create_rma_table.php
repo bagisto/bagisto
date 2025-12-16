@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('rma', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
+            $table->integer('rma_status_id')->unsigned()->nullable();
             $table->string('order_status')->nullable();
             $table->boolean('status')->default(1);
-            $table->string('request_status')->nullable();
             $table->string('resolution')->nullable();
             $table->string('package_condition')->nullable();
             $table->longtext('information')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('rma_status_id')->references('id')->on('rma_statuses')->onDelete('set null');
         });
     }
 

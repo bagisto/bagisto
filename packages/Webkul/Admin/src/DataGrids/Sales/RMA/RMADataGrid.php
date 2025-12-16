@@ -15,9 +15,7 @@ class RMADataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(
-        protected RMAStatusRepository $rmaStatusRepository,
-    ) {}
+    public function __construct(protected RMAStatusRepository $rmaStatusRepository) {}
 
     /**
      * Prepare query builder.
@@ -28,14 +26,14 @@ class RMADataGrid extends DataGrid
 
         $queryBuilder = DB::table('rma')
             ->leftJoin('orders', 'orders.id', '=', 'rma.order_id')
-            ->leftJoin('rma_statuses', 'rma_statuses.title', '=', 'rma.request_status')
+            ->leftJoin('rma_statuses', 'rma_statuses.id', '=', 'rma.rma_status_id')
             ->addSelect(
                 'rma.id',
                 'rma.order_id',
                 'orders.is_guest as is_guest',
                 DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
                 'rma.status',
-                'rma.request_status',
+                'rma_statuses.title',
                 'rma.order_status as rma_order_status',
                 'rma.created_at',
                 'orders.status as order_status',
@@ -45,7 +43,7 @@ class RMADataGrid extends DataGrid
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
-        $this->addFilter('request_status', 'rma.request_status');
+        $this->addFilter('title', 'rma_statuses.title');
         $this->addFilter('rma_order_status', 'rma.order_status');
         $this->addFilter('created_at', 'rma.created_at');
         $this->addFilter('customer_name', DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name)'));
@@ -75,23 +73,7 @@ class RMADataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                $routeName = request()->route()->getName();
-
-                if (
-                    $routeName == 'admin.sales.rma.index'
-                    && auth()->guard('admin')->check()
-                ) {
-                    $route = route('admin.sales.orders.view', ['id' => $row->order_id]);
-                } elseif (
-                    $routeName == 'shop.customers.account.rma.index'
-                    && auth()->guard('customer')->check()
-                ) {
-                    $route = route('shop.customers.account.rma.index', ['id' => $row->order_id]);
-                } else {
-                    return "<span class='text-blue-600'>#{$row->order_id}</span>";
-                }
-
-                return '<a href="'.$route.'">'."<span class='text-blue-600'>#".$row->order_id.'</span></a>';
+                return '<a href="'.route('admin.sales.orders.view', ['id' => $row->order_id]).'">'."<span class='text-blue-600'>#".$row->order_id.'</span></a>';
             },
         ]);
 
@@ -112,7 +94,7 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'request_status',
+            'index'              => 'title',
             'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status'),
             'type'               => 'string',
             'searchable'         => true,
@@ -130,7 +112,7 @@ class RMADataGrid extends DataGrid
 
                 $color = $row->rma_status_color ?? '';
 
-                return '<p class="label-active" style="background:'.$color.';">'.$row->request_status.'</p>';
+                return '<p class="label-active" style="background:'.$color.';">'.$row->title.'</p>';
             },
         ]);
 

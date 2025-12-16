@@ -869,6 +869,7 @@ return [
                     'order-id'               => 'ID de commande :',
                     'order-status'           => 'Statut de livraison :',
                     'order-total'            => 'Total de la commande :',
+                    'price'                  => 'Prix :',
                     'refund-creation-error'  => 'Impossible de créer un remboursement pour cette commande.',
                     'refund-failed'          => 'Échec du remboursement.',
                     'request-on'             => 'Demande le :',
