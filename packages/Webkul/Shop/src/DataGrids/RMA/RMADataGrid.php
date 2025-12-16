@@ -32,7 +32,6 @@ class RMADataGrid extends DataGrid
             ->leftJoin('rma_statuses', 'rma_statuses.id', '=', 'rma.rma_status_id')
             ->select(
                 'rma.id',
-                'rma.status',
                 'rma.order_id',
                 'rma.created_at',
                 'orders.customer_email',

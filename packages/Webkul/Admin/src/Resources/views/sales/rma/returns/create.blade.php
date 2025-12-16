@@ -902,7 +902,6 @@
                                 .then(response => {
                                     this.isLoading = false;
 
-                                    console.log(response.data);
                                     this.products = response.data;
                                 }).catch(error => {
                                     console.log(error);
@@ -913,6 +912,7 @@
                     calculateReturnWindow(createdAt) {
                         const createdDate = new Date(createdAt);
                         const returnDate = new Date(createdDate);
+                        
                         returnDate.setDate(createdDate.getDate() + this.returnWindowDays);
 
                         const currentDate = new Date();

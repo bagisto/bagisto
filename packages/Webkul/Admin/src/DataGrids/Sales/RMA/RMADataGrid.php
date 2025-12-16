@@ -32,7 +32,6 @@ class RMADataGrid extends DataGrid
                 'rma.order_id',
                 'orders.is_guest as is_guest',
                 DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
-                'rma.status',
                 'rma_statuses.title',
                 'rma.order_status as rma_order_status',
                 'rma.created_at',

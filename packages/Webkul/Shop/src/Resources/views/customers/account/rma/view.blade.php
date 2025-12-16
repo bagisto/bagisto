@@ -36,16 +36,23 @@
                 <div class="p-6 space-y-4 max-md:p-4">
                     <!-- Request Date -->
                     <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                        <span class="font-medium">@lang('shop::app.rma.view-customer-rma-content.request-on')</span>
-                        <span class="text-gray-600">{{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}</span>
+                        <span class="font-medium">
+                            @lang('shop::app.rma.view-customer-rma-content.request-on')
+                        </span>
+                        
+                        <span class="text-gray-600">
+                            {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
+                        </span>
                     </div>
 
                     <!-- Order ID -->
                     <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                         <span class="font-medium">@lang('shop::app.rma.view-customer-rma.order-id')</span>
 
-                        <a href="{{ route('shop.customers.account.orders.view', $rma->order_id) }}" 
-                           class="text-blue-600 hover:underline" target="_blank">
+                        <a 
+                            href="{{ route('shop.customers.account.orders.view', $rma->order_id) }}" 
+                            class="text-blue-600 hover:underline" target="_blank"
+                        >
                             #{{ $rma->order_id }}
                         </a>
                     </div>
@@ -55,6 +62,7 @@
                         @foreach ($rma->additionalFields as $field)
                             <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                                 <span class="font-medium">{{ $field->customField->label }}</span>
+
                                 <span class="text-gray-600">{{ $field->field_value }}</span>
                             </div>
                         @endforeach
@@ -64,6 +72,7 @@
                     @if (! empty($rma->information))
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                             <span class="font-medium">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
+
                             <span class="text-gray-600">{{ $rma->information }}</span>
                         </div>
                     @endif
@@ -76,8 +85,10 @@
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
                                     <a href="{{ Storage::url($image['path']) }}" target="_blank">
-                                        <img src="{{ Storage::url($image['path']) }}" 
-                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded border shadow-sm hover:shadow-md transition">
+                                        <img 
+                                            src="{{ Storage::url($image['path']) }}" 
+                                            class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded border shadow-sm hover:shadow-md transition"
+                                        />
                                     </a>
                                 @endforeach
                             </div>
@@ -132,7 +143,7 @@
                                         @if ($item->orderItem->product?->images?->first())
                                             <img 
                                                 src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
-                                                 class="w-16 h-16 object-cover rounded border"
+                                                class="w-16 h-16 object-cover rounded border"
                                             />
                                         @else
                                             <div class="w-16 h-16 border border-dashed rounded flex items-center justify-center text-gray-300">
@@ -213,14 +224,17 @@
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.sku')</span>
                                 <p class="text-gray-600">{{ $item->orderItem->product->sku }}</p>
                             </div>
+
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.price')</span>
                                 <p class="text-gray-600">{!! core()->formatPrice($item->orderItem->product->price, $item->orderItem->order->order_currency_code) !!}</p>
                             </div>
+
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.rma-qty')</span>
                                 <p class="text-gray-600">{{ $item->quantity }} / {{ $item->orderItem->qty_ordered }}</p>
                             </div>
+
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.resolution-type')</span>
                                 <p class="text-gray-600">{{ ucwords($item->resolution) }}</p>
@@ -229,6 +243,7 @@
 
                         <div>
                             <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.reason')</span>
+
                             <p class="text-gray-600">{{ $item->reason->title }}</p>
                         </div>
                     </div>
@@ -385,10 +400,25 @@
 
             <div class="relative mt-3 overflow-x-auto rounded-xl border p-2 max-md:p-1">
                 <div class="border rounded-lg p-3 max-md:p-2">
-                    <x-shop::form v-slot="{ meta, errors, handleSubmit }" as="div">
-                        <form @submit="handleSubmit($event, chatSubmit)" ref="chatForm">
-                            <input type="hidden" name="is_admin" value="0"/>
-                            <input type="hidden" name="rma_id" value="{{ $rma->id }}"/>
+                    <x-shop::form 
+                        v-slot="{ meta, errors, handleSubmit }" 
+                        as="div"
+                    >
+                        <form 
+                            @submit="handleSubmit($event, chatSubmit)" 
+                            ref="chatForm"
+                        >
+                            <input 
+                                type="hidden" 
+                                name="is_admin" 
+                                value="0"
+                            />
+
+                            <input 
+                                type="hidden" 
+                                name="rma_id" 
+                                value="{{ $rma->id }}"
+                            />
 
                             <x-shop::form.control-group>
                                 <div class="bg-white !pl-0 !pt-2">
@@ -422,6 +452,7 @@
                                 </button>
 
                                 <input type="hidden" name="removed_key" id="removed_key" />
+
                                 <div id="attachmentPreview"></div>
                             </div>
 
@@ -431,6 +462,7 @@
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                     </svg>
+
                                     @lang('shop::app.customers.account.rma.view.send-message-btn')
                                 </button>
                             </div>
@@ -454,9 +486,13 @@
                         >
                             <div class="title font-medium">
                                 @lang('shop::app.rma.conversation-texts.by')
+
                                 <strong v-if="message.is_admin == 1">@lang('shop::app.rma.view-customer-rma.admin')</strong>
+
                                 <strong v-else>{{ auth()->guard('customer')->user()->name }}</strong>
+
                                 @lang('shop::app.rma.conversation-texts.on')
+
                                 @{{ dateFormat(message.created_at) }}
                             </div>
 
@@ -477,6 +513,7 @@
 
                         <div v-else>
                             <div class="icon-listing" style="font-size:150px; color:#d7d7d7;"></div>
+                            
                             <p class="flex justify-center text-gray-300">
                                 @lang('shop::app.rma.conversation-texts.no-record')
                             </p>

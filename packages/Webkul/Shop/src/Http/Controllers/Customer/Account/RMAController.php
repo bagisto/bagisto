@@ -54,11 +54,11 @@ class RMAController extends Controller
         protected OrderItemRepository $orderItemRepository,
         protected RMARepository $rmaRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
-        protected RMAImageRepository $rmaImagesRepository,
-        protected RMAItemRepository $rmaItemsRepository,
-        protected RMAMessageRepository $rmaMessagesRepository,
+        protected RMAImageRepository $rmaImageRepository,
+        protected RMAItemRepository $rmaItemRepository,
+        protected RMAMessageRepository $rmaMessageRepository,
         protected RMAReasonRepository $rmaReasonRepository,
-        protected RMAReasonResolutionRepository $rmaReasonResolutionsRepository,
+        protected RMAReasonResolutionRepository $rmaReasonResolutionRepository,
         protected RMAStatusRepository $rmaStatusRepository,
         protected RMAHelper $rmaHelper,
     ) {}
@@ -166,7 +166,7 @@ class RMAController extends Controller
         ]);
 
         foreach ($data['order_item_id'] as $key => $orderItemId) {
-            $this->rmaItemsRepository->create([
+            $this->rmaItemRepository->create([
                 'rma_id'        => $rma->id,
                 'rma_reason_id' => $data['rma_reason_id'][$key],
                 'order_item_id' => $orderItemId,
@@ -176,21 +176,24 @@ class RMAController extends Controller
             ]);
         }
 
-        $this->rmaMessagesRepository->create([
+        $this->rmaMessageRepository->create([
             'rma_id'     => $rma->id,
             'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
             'is_admin'   => 1,
         ]);
 
-        if (! empty($data['images']) && ! empty(implode(',', $data['images']))) {
+        if (
+            ! empty($data['images']) 
+            && ! empty(implode(',', $data['images']))
+        ) {
             foreach ($data['images'] as $itemImage) {
-                $this->rmaImagesRepository->create([
+                $this->rmaImageRepository->create([
                     'rma_id' => $rma->id,
                     'path'   => $itemImage->getClientOriginalName(),
                 ]);
             }
 
-            $this->rmaImagesRepository->uploadImages($data, $rma);
+            $this->rmaImageRepository->uploadImages($data, $rma);
         }
 
         $customAttributes = request('customAttributes') ?? [];
@@ -212,8 +215,7 @@ class RMAController extends Controller
         if ($rma->items) {
             try {
                 // Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {
-            }
+            } catch (\Exception $e) {}
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.create-success'),
@@ -238,7 +240,7 @@ class RMAController extends Controller
      */
     public function getResolutionReasons(string $resolutionType): RMAReason|Collection
     {
-        $existResolutions = $this->rmaReasonResolutionsRepository
+        $existResolutions = $this->rmaReasonResolutionRepository
             ->where('resolution_type', $resolutionType)
             ->pluck('rma_reason_id');
 
@@ -264,7 +266,7 @@ class RMAController extends Controller
                 'order_status'  => 0,
             ]);
 
-            $this->rmaMessagesRepository->create([
+            $this->rmaMessageRepository->create([
                 'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
                 'rma_id'   => $id,
                 'is_admin' => 1,
@@ -292,11 +294,10 @@ class RMAController extends Controller
 
             $rma->update([
                 'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
-                'status'        => 0,
                 'order_status'  => 0,
             ]);
 
-            $this->rmaMessagesRepository->create([
+            $this->rmaMessageRepository->create([
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
                 'rma_id'     => $id,
                 'is_admin'   => 1,
@@ -337,7 +338,7 @@ class RMAController extends Controller
      */
     public function getMessages(): JsonResponse
     {
-        $messages = $this->rmaMessagesRepository
+        $messages = $this->rmaMessageRepository
             ->where('rma_id', request()->get('id'))
             ->orderBy('id', 'desc')
             ->paginate(request()->get('limit') ?? 5);
@@ -361,7 +362,7 @@ class RMAController extends Controller
             'customerEmail' => auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : $this->orderRepository->find(session()->get('guestOrderId'))->customer_email,
         ];
 
-        $storedMessage = $this->rmaMessagesRepository->create($data);
+        $storedMessage = $this->rmaMessageRepository->create($data);
 
         if (! empty($storedMessage)) {
             $removedKeys = explode(',', request()->input('removed_key'));
@@ -375,7 +376,7 @@ class RMAController extends Controller
 
                 $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
 
-                $this->rmaMessagesRepository->update([
+                $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
                     'attachment'      => $filename,
                 ], $storedMessage->id);

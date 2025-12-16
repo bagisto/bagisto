@@ -139,6 +139,7 @@
 
                             <div class="px-4 pb-4">
                                 @php $selectedValue = old('status') ?: $rmaData->status @endphp
+
                                 <!-- Status -->
                                 <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
