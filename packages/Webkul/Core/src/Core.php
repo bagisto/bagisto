@@ -955,6 +955,8 @@ class Core
                 fn ($url) => trim($url) !== ''
             );
 
+            $prerenderIgnoreUrls[] = '/customer/account/gdpr/revoke/*';
+
             $prerenderIgnoreParams = array_filter(
                 explode('|', $this->getConfigData($configPath.'prerender_ignore_url_params')),
                 fn ($param) => trim($param) !== ''
