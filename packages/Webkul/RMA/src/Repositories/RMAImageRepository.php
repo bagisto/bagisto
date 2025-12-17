@@ -17,14 +17,29 @@ class RMAImageRepository extends Repository
     }
 
     /**
+     * Manage images.
+     */
+    public function manageImages($requestImages, $rma): void
+    {
+        foreach ($requestImages as $itemImage) {
+            $this->create([
+                'rma_id' => $rma->id,
+                'path'   => $itemImage->getClientOriginalName(),
+            ]);
+        }
+
+        $this->uploadImages($requestImages, $rma);
+    }
+
+    /**
      * Upload images.
      */
-    public function uploadImages(array $requestData, object $rma): void
+    public function uploadImages(array $requestImages, object $rma): void
     {
         $previousImageIds = $rma->images()->pluck('id');
 
-        if (! empty($requestData['images'])) {
-            foreach ($requestData['images'] as $imageId => $image) {
+        if (! empty($requestImages)) {
+            foreach ($requestImages as $imageId => $image) {
                 $file = 'images.'.$imageId;
                 $dir = 'rma/'.$rma->id;
 

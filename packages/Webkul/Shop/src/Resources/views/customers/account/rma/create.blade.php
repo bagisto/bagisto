@@ -1156,7 +1156,7 @@
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
 
-                        let url = '{{route("shop.customers.account.rma.get-resolution-reasons", ":resolutionType")}}';
+                        let url = '{{ route("shop.customers.account.rma.get-resolution-reasons", ":resolutionType") }}';
 
                         url = url.replace(':resolutionType', resolutionType);
 

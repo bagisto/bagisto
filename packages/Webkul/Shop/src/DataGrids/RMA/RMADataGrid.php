@@ -16,7 +16,7 @@ class RMADataGrid extends DataGrid
      * @return void
      */
     public function __construct(
-        protected RMAStatusRepository $rmaStatusRepository
+        protected RMAStatusRepository $rmaStatusRepository,
     ) {}
 
     /**
@@ -88,12 +88,12 @@ class RMADataGrid extends DataGrid
             'filterable'         => true,
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
             'closure'            => function ($row) {
-                if (
-                    $row->order_status == Order::STATUS_CANCELED
-                    && $row->order_status == Order::STATUS_CLOSED
-                ) {
-                    return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
-                }
+                // if (
+                //     $row->order_status == Order::STATUS_CANCELED
+                //     && $row->order_status == Order::STATUS_CLOSED
+                // ) {
+                //     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
+                // }
 
                 $color = $row->rma_status_color ?? '';
 

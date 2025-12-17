@@ -131,7 +131,7 @@ Route::prefix('sales')->group(function () {
 
             Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
 
-            Route::post('save-rma-status', 'saveRmaStatus')->name('admin.sales.rma.save.status');
+            Route::post('save-rma-status/{id}', 'saveRmaStatus')->name('admin.sales.rma.save.status');
 
             Route::post('save-rma-reopen-status/{id}', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
 

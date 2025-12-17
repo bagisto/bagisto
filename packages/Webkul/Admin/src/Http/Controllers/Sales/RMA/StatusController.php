@@ -17,7 +17,9 @@ class StatusController extends Controller
      *
      * @return void
      */
-    public function __construct(protected RMAStatusRepository $rmaStatusRepository) {}
+    public function __construct(
+        protected RMAStatusRepository $rmaStatusRepository,
+    ) {}
 
     /**
      * RMA status listing.
@@ -61,14 +63,14 @@ class StatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:rma_statuses,title,'.request()->id,
+            'title'  => 'required|unique:rma_statuses,title,'.$id,
             'status' => 'required|boolean',
         ]);
 
-        $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), request()->id);
+        $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), $id);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.edit.success'),

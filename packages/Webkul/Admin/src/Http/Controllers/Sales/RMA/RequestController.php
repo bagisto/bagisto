@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
@@ -35,11 +34,6 @@ use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusNotification;
 class RequestController extends Controller
 {
     /**
-     * @var string
-     */
-    public const CONFIGURABLE = 'configurable';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -60,157 +54,7 @@ class RequestController extends Controller
     ) {}
 
     /**
-     * Display the RMA creation form.
-     */
-    public function create(): View|JsonResponse
-    {
-        if (request()->ajax()) {
-            return datagrid(OrderRMADataGrid::class)->process();
-        }
-
-        return view('admin::sales.rma.returns.create');
-    }
-
-    /**
-     * Store RMA created by admin.
-     */
-    public function store(): RedirectResponse|JsonResponse
-    {
-        $this->validate(request(), [
-            'order_id'        => 'required|exists:orders,id',
-            'order_item_id'   => 'required|array|min:1',
-            'rma_qty'         => 'required|array|min:1',
-            'resolution_type' => 'required|array|min:1',
-            'rma_reason_id'   => 'required|array|min:1',
-            'information'     => 'nullable|string',
-            'images'          => 'nullable|array|min:1',
-            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
-        ]);
-
-        $data = request()->only([
-            'order_id',
-            'order_item_id',
-            'variant',
-            'rma_qty',
-            'resolution_type',
-            'rma_reason_id',
-            'information',
-            'images',
-            'package_condition',
-        ]);
-
-        /**
-         * Creation of a new RMA record.
-         */
-        $rma = $this->rmaRepository->create([
-            'order_id'          => $data['order_id'],
-            'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
-            'information'       => $data['information'] ?? null,
-            'package_condition' => $data['package_condition'] ?? null,
-        ]);
-
-        /**
-         * Creation of RMA items for the newly created RMA record.
-         */
-        foreach ($data['order_item_id'] as $key => $orderItemId) {  
-            $this->rmaItemRepository->create([
-                'rma_id'        => $rma->id,
-                'rma_reason_id' => $data['rma_reason_id'][$key],
-                'order_item_id' => $orderItemId,
-                'variant_id'    => ! empty($data['variant'][$key]) ? $data['variant'][$key] : null,
-                'quantity'      => $data['rma_qty'][$key],
-                'resolution'    => $data['resolution_type'][$key],
-            ]);
-        }
-
-        /**
-         * Initial message indicating the processing of the RMA request.
-         */
-        $this->rmaMessageRepository->create([
-            'rma_id'     => $rma->id,
-            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
-            'is_admin'   => 1,
-        ]);
-
-        /**
-         * Creation of RMA images for the newly created RMA record.
-         */
-        if (
-            ! empty($data['images']) 
-            && ! empty(implode(',', $data['images']))
-        ) {
-            foreach ($data['images'] as $itemImg) {
-                $this->rmaImageRepository->create([
-                    'rma_id'     => $rma->id,
-                    'path'       => $itemImg->getClientOriginalName(),
-                ]);
-            }
-
-            $this->rmaImageRepository->uploadImages($data, $rma);
-        }
-
-        $customAttributes = request('customAttributes') ?? [];
-
-        /**
-         * Creation of additional fields for the newly created RMA record.
-         */
-        if ($customAttributes) {
-            foreach ($customAttributes as $key => $customAttribute) {
-                $customAttributesData = [
-                    'rma_id'  => $rma->id,
-                    'name'    => $key,
-                    'value'   => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
-                ];
-
-                $this->rmaAdditionalFieldRepository->create($customAttributesData);
-            }
-        }
-
-        /**
-         * Sending RMA creation email to the customer.
-         */
-        if ($rma->items) {
-            try {
-                Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {}
-
-            return response()->json([
-                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
-            ]);
-        }
-
-        return response()->json([
-            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
-        ]);
-    }
-
-    /**
-     * Get order details
-     */
-    public function getOrderProduct(int $orderId)
-    {
-        return $this->rmaHelper->getOrderProduct($orderId);
-    }
-
-    /**
-     * Get reason for resolution.
-     */
-    public function getResolutionReason(string $resolutionType): RMAReasonResolution|Collection
-    {
-        $existResolutions = $this->rmaReasonResolutionRepository
-            ->where('resolution_type', $resolutionType)
-            ->pluck('rma_reason_id');
-
-        $reasons = $this->rmaReasonRepository
-            ->whereIn('id', $existResolutions)
-            ->where('status', 1)
-            ->get();
-
-        return $reasons;
-    }
-
-    /**
-     * RMA list
+     * Display a listing of the resource.
      */
     public function index(): View|JsonResponse
     {
@@ -226,11 +70,7 @@ class RequestController extends Controller
      */
     public function view(int $rmaId): View|RedirectResponse
     {
-        $rma = $this->rmaRepository->with(['items', 'order'])->find($rmaId);
-
-        if (! $rma) {
-            return redirect()->route('admin.sales.rma.index');
-        }
+        $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($rmaId);
 
         $statusArray = $this->rmaStatusForRequest($rma);
 
@@ -238,34 +78,36 @@ class RequestController extends Controller
     }
 
     /**
-     * Get rma status for request
+     * Save rma status by admin
      */
-    public function rmaStatusForRequest($rma): array
+    public function saveRmaStatus(int $id): RedirectResponse
     {
-        $activeStatusIds = $this->rmaStatusRepository
-            ->where('status', 1)
-            ->pluck('id');
+        $data = request()->input();
 
-        if ($rma->rma_status_id === DefaultRMAStatusEnum::PENDING->value) {
-            return $this->rmaStatusRepository
-                ->whereIn('id', $activeStatusIds->intersect([
-                    DefaultRMAStatusEnum::ACCEPT->value,
-                    DefaultRMAStatusEnum::DECLINED->value,
-                ]))
-                ->pluck('title', 'id')
-                ->toArray();
+        $rma = $this->rmaRepository->findOrFail($id);
+        $order = $rma->order;
+        
+        $ordersRma = $this->rmaRepository->findWhere(['order_id' => $order->id]);
+
+        $totalCount = (int) $this->rmaItemRepository
+            ->whereIn('rma_id', $ordersRma->pluck('id'))
+            ->sum('quantity');
+        
+        if (empty($totalCount)) {
+            return $this->updateRmaAndRedirect($rma, $id, $data);
         }
-
-        $hasCancel = $rma->items->contains('resolution', 'cancel-items');
-
-        $excludedStatuses = $hasCancel
-            ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
-            : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
-
-        return $this->rmaStatusRepository
-            ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
-            ->pluck('title', 'id')
-            ->toArray();
+        
+        $statusId = (int) $data['rma_status_id'];
+        
+        if ($statusId === DefaultRMAStatusEnum::ITEM_CANCELED->value) {
+            $this->handleItemCancellation($ordersRma, $order, $totalCount);
+        }
+        
+        if ($statusId === DefaultRMAStatusEnum::RECEIVED_PACKAGE->value) {
+            return $this->handleReceivedPackage($rma, $data);
+        }
+        
+        return $this->updateRmaAndRedirect($rma, $id, $data);
     }
 
     /**
@@ -282,10 +124,7 @@ class RequestController extends Controller
 
             $order->update(['status' => Order::STATUS_PENDING]);
 
-            $rma->update([
-                'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
-                'order_status'  => 0,
-            ]);
+            $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
 
             $this->rmaMessageRepository->create([
                 'message'    => trans('admin::app.sales.rma.all-rma.view.conversation-process'),
@@ -308,7 +147,7 @@ class RequestController extends Controller
     /**
      * Get all Messages
      */
-    public function getMessages()
+    public function getMessages() : JsonResponse
     {
         $messages = $this->rmaMessageRepository->where('rma_id', request()->get('id'))
             ->orderBy('id', 'desc')
@@ -361,100 +200,162 @@ class RequestController extends Controller
     }
 
     /**
-     * Save rma status by admin
+     * Display the RMA creation form.
      */
-    public function saveRmaStatus(): RedirectResponse
+    public function create(): View|JsonResponse
     {
-        $data = request()->input();
-
-        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
-
-        $order = $rma->order;
-
-        $ordersRma = $this->rmaRepository->findWhere(['order_id' => $order->id]);
-
-        $totalCount = (int) $this->rmaItemRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
-
-        if ($totalCount > 0) {
-            if ($data['rma_status_id'] == DefaultRMAStatusEnum::ITEM_CANCELED->value) {
-                foreach ($ordersRma as $orderRma) {
-                    $rmaItems = $this->rmaItemRepository->findWhere([
-                        'rma_id' => $orderRma->id,
-                    ]);
-
-                    foreach ($rmaItems as $rmaItem) {
-                        $firstItem = $this->orderItemRepository->find($rmaItem->order_item_id);
-
-                        if ($firstItem->parent_id != null) {
-                            $parentItem = $this->orderItemRepository->find($firstItem->parent_id);
-
-                            $parentItem->update([
-                                'qty_canceled' => $rmaItem->quantity,
-                            ]);
-                        } else {
-                            $firstItem->update([
-                                'qty_canceled' => $rmaItem->quantity,
-                            ]);
-                        }
-                    }
-                }
-
-                $this->createRefund($rma);
-
-                $this->updateOrderStatus($order);
-
-                Event::dispatch('sales.order.cancel.after', $order);
-            }
-
-            if ($data['rma_status_id'] == DefaultRMAStatusEnum::RECEIVED_PACKAGE->value) {
-                $refund = $this->createRefund($rma);
-
-                if (! $refund) {
-                    session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-failed'));
-
-                    return redirect()->back();
-                }
-
-                $updateStatus = $rma->update($data);
-
-                session()->flash('success', trans('admin::app.sales.refunds.create.create-success'));
-
-                return redirect()->route('admin.sales.refunds.index');
-            }
-
-            if ($order->total_qty_ordered == $totalCount) {
-                if ($data['rma_status_id'] == DefaultRMAStatusEnum::ITEM_CANCELED->value) {
-                    $data['order_status'] = 0;
-
-                    $order->update(['status' => Order::STATUS_CANCELED]);
-                }
-            }
+        if (request()->ajax()) {
+            return datagrid(OrderRMADataGrid::class)->process();
         }
 
-        $updateStatus = $rma->update($data);
+        return view('admin::sales.rma.returns.create');
+    }
 
-        $this->rmaMessageRepository->create([
-            'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
-                'id'     => $data['rma_id'],
-                'status' => $rma->requestStatus->title,
-            ]),
-            'rma_id'   => $data['rma_id'],
-            'is_admin' => 1,
+    /**
+     * Store RMA created by admin.
+     */
+    public function store(): RedirectResponse|JsonResponse
+    {
+        $this->validate(request(), [
+            'order_id'        => 'required|exists:orders,id',
+            'order_item_id'   => 'required|array|min:1',
+            'rma_qty'         => 'required|array|min:1',
+            'resolution_type' => 'required|array|min:1',
+            'rma_reason_id'   => 'required|array|min:1',
+            'information'     => 'nullable|string',
+            'images'          => 'nullable|array|min:1',
+            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
-        if ($updateStatus) {
-            try {
-                Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {}
+        $data = request()->only([
+            'order_id',
+            'order_item_id',
+            'order_status',
+            'variant',
+            'rma_qty',
+            'resolution_type',
+            'rma_reason_id',
+            'information',
+            'images',
+            'package_condition',
+        ]);
 
-            session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
+        /**
+         * Creation of a new RMA record.
+         */
+        $rma = $this->rmaRepository->create([
+            'order_id'          => $data['order_id'],
+            'order_status'      => $data['order_status'] ?? null,
+            'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
+            'information'       => $data['information'] ?? null,
+            'package_condition' => $data['package_condition'] ?? null,
+        ]);
 
-            return redirect()->back();
+        /**
+         * Creation of RMA items for the newly created RMA record.
+         */
+        foreach ($data['order_item_id'] as $key => $orderItemId) {  
+            $this->rmaItemRepository->create([
+                'rma_id'        => $rma->id,
+                'rma_reason_id' => $data['rma_reason_id'][$key],
+                'order_item_id' => $orderItemId,
+                'variant_id'    => ! empty($data['variant'][$key]) ? $data['variant'][$key] : null,
+                'quantity'      => $data['rma_qty'][$key],
+                'resolution'    => $data['resolution_type'][$key],
+            ]);
         }
 
-        session()->flash('error', trans('admin::app.sales.rma.all-rma.view.failed'));
+        /**
+         * Initial message indicating the processing of the RMA request.
+         */
+        $this->rmaMessageRepository->create([
+            'rma_id'     => $rma->id,
+            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
+            'is_admin'   => 1,
+        ]);
 
-        return redirect()->back();
+        /**
+         * Creation of RMA images for the newly created RMA record.
+         */
+        if (
+            ! empty($data['images']) 
+            && ! empty(implode(',', $data['images']))
+        ) {
+            $this->rmaImageRepository->manageImages($data['images'], $rma);
+        }
+
+        /**
+         * Creation of additional fields for the newly created RMA record.
+         */
+        $customAttributes = request('customAttributes', []);
+
+        if (! empty($customAttributes)) {
+            $this->rmaAdditionalFieldRepository->createManyForRma($rma->id, $customAttributes);
+        }
+
+        /**
+         * Sending RMA creation email to the customer.
+         */
+        if ($rma->items) {
+            try {
+                Mail::queue(new CustomerRMARequestNotification($rma));
+            } catch (\Exception $e) {}
+
+            return response()->json([
+                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
+            ]);
+        }
+
+        return response()->json([
+            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
+        ]);
+    }
+
+    /**
+     * Get order details
+     */
+    public function getOrderProduct(int $orderId) : Collection
+    {
+        return $this->rmaHelper->getOrderProduct($orderId);
+    }
+
+    /**
+     * Get RMA reason by resolution type.
+     */
+    public function getResolutionReason(string $resolutionType): RMAReasonResolution|Collection
+    {
+        return $this->rmaReasonRepository->getRMAReasonsByResolutionType($resolutionType);
+    }
+
+    /**
+     * Get RMA status for request.
+     */
+    public function rmaStatusForRequest($rma): array
+    {
+        $activeStatusIds = $this->rmaStatusRepository
+            ->where('status', 1)
+            ->pluck('id');
+
+        if ($rma->rma_status_id === DefaultRMAStatusEnum::PENDING->value) {
+            return $this->rmaStatusRepository
+                ->whereIn('id', $activeStatusIds->intersect([
+                    DefaultRMAStatusEnum::ACCEPT->value,
+                    DefaultRMAStatusEnum::DECLINED->value,
+                ]))
+                ->pluck('title', 'id')
+                ->toArray();
+        }
+
+        $hasCancel = $rma->items->contains('resolution', 'cancel-items');
+
+        $excludedStatuses = $hasCancel
+            ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
+            : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
+
+        return $this->rmaStatusRepository
+            ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
+            ->pluck('title', 'id')
+            ->toArray();
     }
 
     /**
@@ -555,5 +456,98 @@ class RequestController extends Controller
         $order->save();
 
         Event::dispatch('sales.order.update-status.after', $order);
+    }
+
+    /**
+     * Handle item cancellation status update.
+     */
+    private function handleItemCancellation($ordersRma, $order, int $totalCount): void
+    {
+        $orderItemIds = $ordersRma->flatMap(fn($orderRma) => 
+            $orderRma->items->pluck('order_item_id')
+        );
+        
+        $orderItems = $this->orderItemRepository
+            ->whereIn('id', $orderItemIds)
+            ->orWhereIn('parent_id', $orderItemIds)
+            ->get()
+            ->keyBy('id');
+        
+        foreach ($ordersRma as $orderRma) {
+            foreach ($orderRma->items as $rmaItem) {
+                $orderItem = $orderItems->get($rmaItem->order_item_id);
+                
+                if (! $orderItem) {
+                    continue;
+                }
+                
+                $itemToUpdate = $orderItem->parent_id 
+                    ? $orderItems->get($orderItem->parent_id) 
+                    : $orderItem;
+                
+                if ($itemToUpdate) {
+                    $itemToUpdate->update([
+                        'qty_canceled' => $rmaItem->quantity,
+                    ]);
+                }
+            }
+        }
+        
+        if ($order->total_qty_ordered == $totalCount) {
+            $order->update(['status' => Order::STATUS_CANCELED]);
+        } else {
+            $this->updateOrderStatus($order);
+        }
+        
+        Event::dispatch('sales.order.cancel.after', $order);
+    }
+
+    /**
+     * Handle received package status update.
+     */
+    private function handleReceivedPackage($rma, array $data): RedirectResponse
+    {
+        $refund = $this->createRefund($rma);
+        
+        if (! $refund) {
+            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-failed'));
+
+            return redirect()->back();
+        }
+        
+        $rma->update($data);
+        
+        session()->flash('success', trans('admin::app.sales.refunds.create.create-success'));
+
+        return redirect()->route('admin.sales.refunds.index');
+    }
+
+    /**
+     * Update RMA and redirect with status message.
+     */
+    private function updateRmaAndRedirect($rma, int $id, array $data): RedirectResponse
+    {
+        $updateStatus = $rma->update($data);
+        
+        $this->rmaMessageRepository->create([
+            'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
+                'id'     => $id,
+                'status' => $rma->fresh()->requestStatus->title,
+            ]),
+            'rma_id'   => $id,
+            'is_admin' => 1,
+        ]);
+        
+        if ($updateStatus) {
+            try {
+                Mail::queue(new CustomerRMAStatusNotification($rma));
+            } catch (\Exception $e) {}
+            
+            session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
+        } else {
+            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.failed'));
+        }
+        
+        return redirect()->back();
     }
 }

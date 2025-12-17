@@ -278,7 +278,9 @@
                     </span>
                     
                     <span class="px-3 py-1 text-xs rounded-full w-fit {{ $rma->order_status == '1' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
-                        @if ($rma->order_status == '1')
+                        @if (strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
+                            {{ $rma->order->status }}
+                        @elseif ($rma->order_status == '1')
                             @lang('shop::app.rma.customer.delivered')
                         @else
                             @lang('shop::app.rma.customer.undelivered')

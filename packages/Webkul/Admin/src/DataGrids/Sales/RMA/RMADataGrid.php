@@ -15,7 +15,9 @@ class RMADataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected RMAStatusRepository $rmaStatusRepository) {}
+    public function __construct(
+        protected RMAStatusRepository $rmaStatusRepository,
+    ) {}
 
     /**
      * Prepare query builder.
@@ -134,8 +136,8 @@ class RMADataGrid extends DataGrid
             ],
             'closure'            => function ($row) {
                 if (
-                    $row->order_status == 'canceled'
-                    || $row->order_status == 'closed'
+                    $row->order_status == Order::STATUS_CANCELED
+                    || $row->order_status == Order::STATUS_CLOSED
                 ) {
                     return '<p class="label-'.$row->order_status.'">'.trans('admin::app.sales.rma.all-rma.index.datagrid.'.$row->order_status).'</p>';
                 } elseif ($row->rma_order_status) {

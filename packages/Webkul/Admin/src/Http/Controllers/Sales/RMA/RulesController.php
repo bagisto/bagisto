@@ -17,7 +17,9 @@ class RulesController extends Controller
      *
      * @return void
      */
-    public function __construct(protected RMARuleRepository $rmaRulesRepository) {}
+    public function __construct(
+        protected RMARuleRepository $rmaRulesRepository,
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -67,7 +69,7 @@ class RulesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
             'name'             => 'required',
@@ -80,7 +82,7 @@ class RulesController extends Controller
             'status',
             'description',
             'return_period'
-        ), request()->id);
+        ), $id);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.edit.success'),

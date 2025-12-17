@@ -512,7 +512,7 @@
                             rules="required"
                             v-model="orderStatus"
                             :label="trans('admin::app.configuration.index.sales.rma.product-delivery-status')"
-                            >
+                        >
                             <option value="">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
                             </option>

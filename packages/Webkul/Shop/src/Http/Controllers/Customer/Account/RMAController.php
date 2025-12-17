@@ -26,7 +26,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\RMA\OrderDataGrid;
 use Webkul\Shop\DataGrids\RMA\RMADataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Shop\Mail\Customer\RMA\CustomerConversationNotification;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 
 class RMAController extends Controller
@@ -51,17 +50,17 @@ class RMAController extends Controller
      * @return void
      */
     public function __construct(
-        protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
-        protected RMARepository $rmaRepository,
+        protected OrderRepository $orderRepository,
         protected RMAAdditionalFieldRepository $rmaAdditionalFieldRepository,
+        protected RMAHelper $rmaHelper,
         protected RMAImageRepository $rmaImageRepository,
         protected RMAItemRepository $rmaItemRepository,
         protected RMAMessageRepository $rmaMessageRepository,
         protected RMAReasonRepository $rmaReasonRepository,
         protected RMAReasonResolutionRepository $rmaReasonResolutionRepository,
+        protected RMARepository $rmaRepository,
         protected RMAStatusRepository $rmaStatusRepository,
-        protected RMAHelper $rmaHelper,
     ) {}
 
     /**
@@ -83,29 +82,11 @@ class RMAController extends Controller
     {            
         $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($id);
 
-        $canCloseRma = true;
-        $canReopenRma = false;
-        
-        if (
-            is_null($rma->rma_status_id)
-            || in_array($rma->rma_status_id, [DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value, DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::CANCELED->value]) 
-            || in_array($rma->order->status, [Order::STATUS_CANCELED, Order::STATUS_CLOSED])
-        ) {
-            $canCloseRma = false;
-        }
+        $canCloseRma = $this->rmaRepository->canCloseRma($rma);
 
-        if (
-            core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes' &&
-            $rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value
-        ) {
-            $canReopenRma = true;
-        }
+        $canReopenRma = $this->rmaRepository->canReopenRma($rma);
 
-        $expireDays = intval(core()->getConfigData('sales.rma.setting.default_allow_days'));
-
-        $daysSinceCreation = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($rma->created_at));
-
-        $isExpired = $daysSinceCreation > $expireDays && $daysSinceCreation != 0;
+        $isExpired = $this->rmaRepository->isRmaExpired($rma);
 
         $rmaStatus = $this->rmaStatusRepository->findOrFail($rma->rma_status_id);
 
@@ -145,6 +126,7 @@ class RMAController extends Controller
         $data = request()->only([
             'order_id',
             'order_item_id',
+            'order_status',
             'variant',
             'rma_qty',
             'resolution_type',
@@ -159,6 +141,7 @@ class RMAController extends Controller
          */
         $rma = $this->rmaRepository->create([
             'order_id'          => $data['order_id'],
+            'order_status'      => $data['order_status'] ?? null,
             'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
             'information'       => $data['information'] ?? null,
             'package_condition' => $data['package_condition'] ?? null,
@@ -190,35 +173,21 @@ class RMAController extends Controller
         /**
          * Creation of RMA images for the newly created RMA record.
          */
+        
         if (
             ! empty($data['images']) 
             && ! empty(implode(',', $data['images']))
         ) {
-            foreach ($data['images'] as $itemImage) {
-                $this->rmaImageRepository->create([
-                    'rma_id' => $rma->id,
-                    'path'   => $itemImage->getClientOriginalName(),
-                ]);
-            }
-
-            $this->rmaImageRepository->uploadImages($data, $rma);
+            $this->rmaImageRepository->manageImages($data['images'], $rma);
         }
-
-        $customAttributes = request('customAttributes') ?? [];
 
         /**
          * Creation of additional fields for the newly created RMA record.
-         */
-        if ($customAttributes) {
-            foreach ($customAttributes as $key => $customAttribute) {
-                $customAttributesData = [
-                    'rma_id' => $rma->id,
-                    'name'   => $key,
-                    'value'  => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
-                ];
+        */
+        $customAttributes = request('customAttributes', []);
 
-                $this->rmaAdditionalFieldRepository->create($customAttributesData);
-            }
+        if (! empty($customAttributes)) {
+            $this->rmaAdditionalFieldRepository->createManyForRma($rma->id, $customAttributes);
         }
 
         /**
@@ -252,14 +221,7 @@ class RMAController extends Controller
      */
     public function getResolutionReasons(string $resolutionType): RMAReason|Collection
     {
-        $existResolutions = $this->rmaReasonResolutionRepository
-            ->where('resolution_type', $resolutionType)
-            ->pluck('rma_reason_id');
-
-        return $this->rmaReasonRepository
-            ->whereIn('id', $existResolutions)
-            ->where('status', 1)
-            ->get();
+        return $this->rmaReasonRepository->getRMAReasonsByResolutionType($resolutionType);
     }
 
     /**
@@ -272,11 +234,7 @@ class RMAController extends Controller
         $rma = $this->rmaRepository->findOrFail($id);
 
         if (! empty($data['close_rma'])) {
-            $rma->update([
-                'status'        => 1,
-                'rma_status_id' => DefaultRMAStatusEnum::SOLVED->value,
-                'order_status'  => 0,
-            ]);
+            $rma->update(['rma_status_id' => DefaultRMAStatusEnum::SOLVED->value]);
 
             $this->rmaMessageRepository->create([
                 'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
@@ -302,12 +260,9 @@ class RMAController extends Controller
         if (! empty($data['reopen_rma'])) {
             $order = $this->orderRepository->findOrFail($rma->order_id);
 
-            $order->update(['status' => 'pending']);
+            $order->update(['status' => Order::STATUS_PENDING]);
 
-            $rma->update([
-                'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
-                'order_status'  => 0,
-            ]);
+            $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
 
             $this->rmaMessageRepository->create([
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
@@ -336,9 +291,7 @@ class RMAController extends Controller
             ]);
         }
 
-        $rma->update([
-            'rma_status_id' => DefaultRMAStatusEnum::CANCELED->value,
-        ]);
+        $rma->update(['rma_status_id' => DefaultRMAStatusEnum::CANCELED->value]);
 
         return new JsonResponse([
             'message' => trans('shop::app.rma.response.cancel-success'),

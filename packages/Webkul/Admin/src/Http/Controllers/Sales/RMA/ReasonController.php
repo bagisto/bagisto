@@ -76,7 +76,7 @@ class ReasonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
             'title'           => 'required',
@@ -85,7 +85,7 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
-        $rmaReason = $this->rmaReasonRepository->update(request()->only('title', 'status', 'position'), request()->id);
+        $rmaReason = $this->rmaReasonRepository->update(request()->only('title', 'status', 'position'), $id);
 
         $resolutionTypes = request()->resolution_type ?? [];
 
