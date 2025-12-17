@@ -414,9 +414,9 @@
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span
                                             class="label-active py-1 text-xs"
-                                            style="background: {{ $rma->requestStatus->color }};"
+                                            style="background: {{ $rma->status->color }};"
                                         >
-                                            {{ $rma->requestStatus->title }}
+                                            {{ $rma->status->title }}
                                         </span>
                                     </p>
 

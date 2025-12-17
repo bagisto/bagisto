@@ -532,7 +532,7 @@ class RequestController extends Controller
         $this->rmaMessageRepository->create([
             'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
                 'id'     => $id,
-                'status' => $rma->fresh()->requestStatus->title,
+                'status' => $rma->fresh()->status->title,
             ]),
             'rma_id'   => $id,
             'is_admin' => 1,
