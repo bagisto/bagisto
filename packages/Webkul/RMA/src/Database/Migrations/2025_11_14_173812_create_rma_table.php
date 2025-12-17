@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('order_id')->unsigned();
             $table->integer('rma_status_id')->unsigned()->nullable();
             $table->string('order_status')->nullable();
-            $table->string('resolution')->nullable();
             $table->string('package_condition')->nullable();
             $table->longtext('information')->nullable();
             $table->timestamps();

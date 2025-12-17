@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Webkul\Admin\Mail\Admin\RMA\CustomerToAdminConversationNotification;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
@@ -79,13 +80,8 @@ class RMAController extends Controller
      * Display the specified resource.
      */
     public function view(int $id): View|RedirectResponse
-    {
-        $rma = $this->rmaRepository->with(['items', 'order'])
-            ->findOneWhere(['id' => $id]);
-
-        if (! $rma) {
-            return abort(404);
-        }
+    {            
+        $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($id);
 
         $canCloseRma = true;
         $canReopenRma = false;
@@ -158,6 +154,9 @@ class RMAController extends Controller
             'package_condition',
         ]);
 
+        /**
+         * Creation of a new RMA record.
+         */
         $rma = $this->rmaRepository->create([
             'order_id'          => $data['order_id'],
             'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
@@ -165,6 +164,9 @@ class RMAController extends Controller
             'package_condition' => $data['package_condition'] ?? null,
         ]);
 
+        /**
+         * Creation of RMA items for the newly created RMA record.
+         */
         foreach ($data['order_item_id'] as $key => $orderItemId) {
             $this->rmaItemRepository->create([
                 'rma_id'        => $rma->id,
@@ -176,12 +178,18 @@ class RMAController extends Controller
             ]);
         }
 
+        /**
+         * Initial message indicating the processing of the RMA request.
+         */
         $this->rmaMessageRepository->create([
             'rma_id'     => $rma->id,
             'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
             'is_admin'   => 1,
         ]);
 
+        /**
+         * Creation of RMA images for the newly created RMA record.
+         */
         if (
             ! empty($data['images']) 
             && ! empty(implode(',', $data['images']))
@@ -198,12 +206,13 @@ class RMAController extends Controller
 
         $customAttributes = request('customAttributes') ?? [];
 
+        /**
+         * Creation of additional fields for the newly created RMA record.
+         */
         if ($customAttributes) {
-            $customAttributesData = [];
-
             foreach ($customAttributes as $key => $customAttribute) {
                 $customAttributesData = [
-                    'rma_id' => $data['rma_id'],
+                    'rma_id' => $rma->id,
                     'name'   => $key,
                     'value'  => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
                 ];
@@ -212,9 +221,12 @@ class RMAController extends Controller
             }
         }
 
+        /**
+         * Sending RMA creation email to the customer.
+         */
         if ($rma->items) {
             try {
-                // Mail::queue(new CustomerRMARequestNotification($rma));
+                Mail::queue(new CustomerRMARequestNotification($rma));
             } catch (\Exception $e) {}
 
             return new JsonResponse([
@@ -355,13 +367,6 @@ class RMAController extends Controller
     {
         $data = request()->all();
 
-        $conversationDetails = [
-            'adminName'     => 'Admin',
-            'message'       => $data['message'],
-            'adminEmail'    => core()->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address'),
-            'customerEmail' => auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : $this->orderRepository->find(session()->get('guestOrderId'))->customer_email,
-        ];
-
         $storedMessage = $this->rmaMessageRepository->create($data);
 
         if (! empty($storedMessage)) {
@@ -383,16 +388,8 @@ class RMAController extends Controller
             }
 
             try {
-                if ($conversationDetails['adminEmail']) {
-                    Mail::queue(new CustomerConversationNotification($conversationDetails));
-                }
-            } catch (\Exception $e) {
-                return new JsonResponse([
-                    'messages' => trans('shop::app.rma.response.send-message', [
-                        'name' => trans('shop::app.rma.mail.customer-conversation.message'),
-                    ]),
-                ]);
-            }
+                Mail::queue(new CustomerToAdminConversationNotification($storedMessage));
+            } catch (\Exception $e) {}
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.send-message', [

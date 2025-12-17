@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -14,7 +13,6 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Mail\Admin\RMA\AdminConversationNotification;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
@@ -30,6 +28,7 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\RefundRepository;
+use Webkul\Shop\Mail\Customer\RMA\AdminToCustomerConversationNotification;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMARequestNotification;
 use Webkul\Shop\Mail\Customer\RMA\CustomerRMAStatusNotification;
 
@@ -100,6 +99,9 @@ class RequestController extends Controller
             'package_condition',
         ]);
 
+        /**
+         * Creation of a new RMA record.
+         */
         $rma = $this->rmaRepository->create([
             'order_id'          => $data['order_id'],
             'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
@@ -107,6 +109,9 @@ class RequestController extends Controller
             'package_condition' => $data['package_condition'] ?? null,
         ]);
 
+        /**
+         * Creation of RMA items for the newly created RMA record.
+         */
         foreach ($data['order_item_id'] as $key => $orderItemId) {  
             $this->rmaItemRepository->create([
                 'rma_id'        => $rma->id,
@@ -118,12 +123,18 @@ class RequestController extends Controller
             ]);
         }
 
+        /**
+         * Initial message indicating the processing of the RMA request.
+         */
         $this->rmaMessageRepository->create([
             'rma_id'     => $rma->id,
             'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
             'is_admin'   => 1,
         ]);
 
+        /**
+         * Creation of RMA images for the newly created RMA record.
+         */
         if (
             ! empty($data['images']) 
             && ! empty(implode(',', $data['images']))
@@ -140,12 +151,13 @@ class RequestController extends Controller
 
         $customAttributes = request('customAttributes') ?? [];
 
+        /**
+         * Creation of additional fields for the newly created RMA record.
+         */
         if ($customAttributes) {
-            $customAttributesData = [];
-
             foreach ($customAttributes as $key => $customAttribute) {
                 $customAttributesData = [
-                    'rma_id'  => $data['rma_id'],
+                    'rma_id'  => $rma->id,
                     'name'    => $key,
                     'value'   => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
                 ];
@@ -154,12 +166,13 @@ class RequestController extends Controller
             }
         }
 
+        /**
+         * Sending RMA creation email to the customer.
+         */
         if ($rma->items) {
             try {
-                // Mail::queue(new CustomerRMARequestNotification($data));
-            } catch (\Exception $e) {
-                Log::error('Error in Sending Email'.$e->getMessage());
-            }
+                Mail::queue(new CustomerRMARequestNotification($rma));
+            } catch (\Exception $e) {}
 
             return response()->json([
                 'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
@@ -255,38 +268,36 @@ class RequestController extends Controller
             ->toArray();
     }
 
-
     /**
      * Save rma status by customer
      */
-    public function saveReOpenStatus(): RedirectResponse
+    public function saveReOpenStatus(int $id): RedirectResponse
     {
-        $data = request()->only([
-            'close_rma',
-            'rma_id',
-        ]);
+        $data = request()->only(['close_rma']);
 
-        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+        $rma = $this->rmaRepository->findOrFail($id);
 
         if (! empty($data['close_rma'])) {
             $order = $this->orderRepository->find($rma->order_id);
 
             $order->update(['status' => Order::STATUS_PENDING]);
 
-            $this->rmaRepository->find($data['rma_id'])->update([
+            $rma->update([
                 'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
                 'order_status'  => 0,
             ]);
 
-            $requestData = [
+            $this->rmaMessageRepository->create([
                 'message'    => trans('admin::app.sales.rma.all-rma.view.conversation-process'),
-                'rma_id'     => $data['rma_id'],
+                'rma_id'     => $id,
                 'is_admin'   => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ];
+            ]);
 
-            $this->rmaMessageRepository->create($requestData);
+            try {
+                Mail::queue(new CustomerRMAStatusNotification($rma));
+            } catch (\Exception $e) {}
         }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
@@ -309,53 +320,39 @@ class RequestController extends Controller
     }
 
     /**
-     * Send message
+     * Send message from admin to customer
      */
     public function sendMessage(): JsonResponse
     {
         $requestData = request()->input();
 
-        $orderDetails = $this->orderRepository->find($requestData['order_id']);
-
-        $conversationDetails = [
-            'message'       => $requestData['message'],
-            'customerName'  => $orderDetails->customer_first_name.' '.$orderDetails->customer_last_name,
-            'customerEmail' => $orderDetails->customer_email,
-        ];
-
-        unset($requestData['order_id']);
-
         $storedMessage = $this->rmaMessageRepository->create($requestData);
 
-        $removedKeys = explode(',', request()->input('removed_key'));
+        if (! empty($storedMessage)) {
+            $removedKeys = explode(',', request()->input('removed_key'));
 
-        array_shift($removedKeys);
+            array_shift($removedKeys);
 
-        if (! empty(request()->file('file'))) {
-            $file = request()->file('file');
+            if (! empty(request()->file('file'))) {
+                $file = request()->file('file');
 
-            $filename = $file->getClientOriginalName();
+                $filename = $file->getClientOriginalName();
 
-            $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
+                $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
 
-            $this->rmaMessageRepository->update([
-                'attachment_path' => $path,
-                'attachment'      => $filename,
-            ], $storedMessage->id);
-        }
-
-        if ($storedMessage) {
-            try {
-                Mail::queue(new AdminConversationNotification($conversationDetails));
-
-                return new JsonResponse([
-                    'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
-                ]);
-            } catch (\Exception $e) {
-                return new JsonResponse([
-                    'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
-                ]);
+                $this->rmaMessageRepository->update([
+                    'attachment_path' => $path,
+                    'attachment'      => $filename,
+                ], $storedMessage->id);
             }
+
+            try {
+                Mail::queue(new AdminToCustomerConversationNotification($storedMessage));
+            } catch (\Exception $e) {}
+
+            return new JsonResponse([
+                'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
+            ]);
         }
 
         return new JsonResponse([
@@ -364,7 +361,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Save rma status
+     * Save rma status by admin
      */
     public function saveRmaStatus(): RedirectResponse
     {
@@ -374,26 +371,18 @@ class RequestController extends Controller
 
         $order = $rma->order;
 
-        $mailDetails = [
-            'name'          => $order->customer_first_name.' '.$order->customer_last_name,
-            'email'         => $order->customer_email,
-            'rma_id'        => $data['rma_id'],
-            'rma_status_id' => $data['rma_status_id'],
-        ];
-
         $ordersRma = $this->rmaRepository->findWhere(['order_id' => $order->id]);
 
         $totalCount = (int) $this->rmaItemRepository->whereIn('rma_id', $ordersRma->pluck('id'))->sum('quantity');
 
         if ($totalCount > 0) {
             if ($data['rma_status_id'] == DefaultRMAStatusEnum::ITEM_CANCELED->value) {
-
                 foreach ($ordersRma as $orderRma) {
                     $rmaItems = $this->rmaItemRepository->findWhere([
                         'rma_id' => $orderRma->id,
                     ]);
 
-                    foreach ($rmaItems as $key => $rmaItem) {
+                    foreach ($rmaItems as $rmaItem) {
                         $firstItem = $this->orderItemRepository->find($rmaItem->order_item_id);
 
                         if ($firstItem->parent_id != null) {
@@ -444,23 +433,18 @@ class RequestController extends Controller
 
         $updateStatus = $rma->update($data);
 
-        /**
-         * Message
-         */
-        $requestData = [
-            'message'    => trans('admin::app.sales.rma.all-rma.view.status-message', [
+        $this->rmaMessageRepository->create([
+            'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
                 'id'     => $data['rma_id'],
                 'status' => $rma->requestStatus->title,
             ]),
-            'rma_id'     => $data['rma_id'],
-            'is_admin'   => 1,
-        ];
-
-        $this->rmaMessageRepository->create($requestData);
+            'rma_id'   => $data['rma_id'],
+            'is_admin' => 1,
+        ]);
 
         if ($updateStatus) {
             try {
-                Mail::queue(new CustomerRMAStatusNotification($mailDetails));
+                Mail::queue(new CustomerRMAStatusNotification($rma));
             } catch (\Exception $e) {}
 
             session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));

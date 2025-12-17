@@ -9,14 +9,14 @@
 
         <!-- Customer Name -->
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            @lang('shop::app.rma.mail.status.heading', ['name' => $rmaStatus['name']]),👋
+            @lang('shop::app.rma.mail.status.heading', ['name' => $rma->order->customer->name]),👋
         </p>
 
         <!-- RMA ID -->
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
             @lang('shop::app.rma.mail.status.your-rma-id')
             @lang('shop::app.rma.mail.status.status-change', [
-                'id' => '<a href="' . route('shop.customers.account.rma.view', $rmaStatus['rma_id']) . '" style="color: #0041FF; font-weight: bold;">#' . $rmaStatus['rma_id'] . '</a>',
+                'id' => '<a href="' . route('shop.customers.account.rma.view', $rma->id) . '" style="color: #0041FF; font-weight: bold;">#' . $rma->id . '</a>',
             ])
         </p>
 
@@ -26,7 +26,7 @@
                 <div style="font-size: 16px; font-weight: bold; color: #242424;">
                     @lang('shop::app.rma.mail.status.status') :
                     <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                       {{ $rmaStatus['request_status'] }}
+                       {{ $rma->requestStatus->title }}
                     </span>
                 </div>
             </div>

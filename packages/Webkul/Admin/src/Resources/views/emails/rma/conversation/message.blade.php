@@ -7,7 +7,7 @@
 
         <!-- Heading -->
         <p style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-            @lang('admin::app.emails.rma.conversation.heading', ['name' => $conversation['customerName']]),👋
+            @lang('admin::app.emails.rma.conversation.heading', ['name' => core()->getAdminEmailDetails()['name']]),👋
         </p>
 
         <!-- Conversation -->
@@ -23,7 +23,7 @@
                 </div>
 
                 <div>
-                    {{ $conversation['message'] }}
+                    {{ $rmaMessage->message }}
                 </div>
             </div>
         </div>

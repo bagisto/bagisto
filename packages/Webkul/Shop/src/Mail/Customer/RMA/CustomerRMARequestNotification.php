@@ -17,9 +17,7 @@ class CustomerRMARequestNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public RMA $rma
-    ) {}
+    public function __construct(public RMA $rma) {}
 
     /**
      * Get the message envelope.
@@ -29,8 +27,14 @@ class CustomerRMARequestNotification extends Mailable
         $adminDetails = core()->getAdminEmailDetails();
 
         return new Envelope(
-            from: new Address($adminDetails['email']),
-            to: [new Address($this->rma->order->customer_email)],
+            from: new Address(
+                $adminDetails['email'],
+                $adminDetails['name']
+            ),
+            to: [new Address(
+                $this->rma->order->customer->email,
+                $this->rma->order->customer->name
+            )],
             subject: trans('shop::app.rma.customer.create.heading'),
         );
     }

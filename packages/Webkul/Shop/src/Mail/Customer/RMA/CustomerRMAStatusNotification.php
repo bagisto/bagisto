@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Webkul\RMA\Contracts\RMA;
 
 class CustomerRMAStatusNotification extends Mailable
 {
@@ -16,18 +17,22 @@ class CustomerRMAStatusNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public array $rmaStatus) {}
+    public function __construct(public RMA $rma) {}
 
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
-        $senderDetails = core()->getSenderEmailDetails();
-
         return new Envelope(
-            from: new Address($senderDetails['email'], $senderDetails['name']),
-            to: [new Address($this->rmaStatus['email'])],
+            from: new Address(
+                core()->getSenderEmailDetails()['email'],
+                core()->getSenderEmailDetails()['name']
+            ),
+            to: [new Address(
+                $this->rma->order->customer->email,
+                $this->rma->order->customer->name
+            )],
             subject: trans('shop::app.rma.mail.status.title'),
         );
     }
@@ -39,7 +44,6 @@ class CustomerRMAStatusNotification extends Mailable
     {
         return new Content(
             view: 'shop::emails.customers.rma.status',
-            with: $this->rmaStatus,
         );
     }
 }

@@ -1,98 +1,87 @@
 @component('shop::emails.layout')
-    <!-- Heading -->
-    <div style="margin-bottom: 34px;">
-        <span style="font-size: 22px; font-weight: 600; color: #121A26;">
-            @lang('shop::app.rma.mail.customer-rma-create.heading') !
-        </span>
+    <!-- Header Section -->
+    <div style="margin-bottom: 40px;">
+        <h1 style="font-size: 28px; font-weight: 700; color: #121A26; margin: 0 0 20px 0;">
+            @lang('shop::app.rma.mail.customer-rma-create.heading')
+        </h1>
         
-        <br>
-
-        <p style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-            @lang('shop::app.rma.mail.customer-rma-create.hello', ['name' => $customerRmaData['name']]),👋
+        <p style="font-size: 16px; color: #5E5E5E; line-height: 26px; margin: 0 0 16px 0;">
+            @lang('shop::app.rma.mail.customer-rma-create.hello', ['name' => $rma->order->customer->name]), 👋
         </p>
 
-        <p style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
+        <p style="font-size: 16px; color: #5E5E5E; line-height: 26px; margin: 0;">
             @lang('shop::app.rma.mail.customer-rma-create.greeting', [
                 'order_id' =>
                     '<a href="' .
-                    route('shop.customers.account.orders.view', $customerRmaData['order_id']) .
-                    '" style="font-weight: bold; color: #2563eb; text-decoration: underline;">#' .
-                    $customerRmaData['order_id'] .
+                    route('shop.customers.account.orders.view', $rma->order_id) .
+                    '" style="font-weight: 600; color: #2563eb; text-decoration: none;">#' .
+                    $rma->order_id .
                     '</a>',
             ])
         </p>
+    </div>
 
-        <!-- Summary -->
-        <div style="margin-bottom: 10px; font-size: 18px; font-weight: bold; color: #2d3748;">
+    <!-- Summary Section -->
+    <div style="margin-bottom: 32px; padding: 24px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #2563eb;">
+        <h2 style="font-size: 18px; font-weight: 700; color: #121A26; margin: 0 0 20px 0;">
             @lang('shop::app.rma.mail.customer-rma-create.summary')
-        </div>
+        </h2>
 
-        <!-- RMA ID -->
-        <div style="margin-bottom: 20px; margin-top: 20px; display: flex; flex-direction: row; justify-content: space-between;">
-            <div style="line-height: 25px;">
-                <!-- RMA ID -->
-                <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
+        <!-- Info Grid -->
+        <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+            <!-- RMA ID -->
+            <div style="flex: 1; min-width: 200px;">
+                <p style="font-size: 13px; font-weight: 600; color: #718096; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px;">
                     @lang('shop::app.rma.mail.customer-rma-create.rma-id')
-
-                    <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                        {{ $customerRmaData['rma_id'] }}
-                    </span>
-                </div>
-
-                <!-- Order Status -->
-                <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
-                    @if ($customerRmaData['order_status'] == '1')
-                        @lang('shop::app.rma.mail.customer-rma-create.order-status')
-
-                        <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                            @lang('shop::app.rma.customer.delivered')
-                        </span>
-                    @else
-                        @lang('shop::app.rma.mail.customer-rma-create.order-status')
-
-                        <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                            @lang('shop::app.rma.customer.undelivered')
-                        </span>
-                    @endif
-                </div>
+                </p>
+                <p style="font-size: 18px; font-weight: 700; color: #2563eb; margin: 0;">
+                    {{ $rma->id }}
+                </p>
             </div>
 
-            <div style="line-height: 25px;">
-                <!-- Order ID -->
-                <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
+            <!-- Order ID -->
+            <div style="flex: 1; min-width: 200px;">
+                <p style="font-size: 13px; font-weight: 600; color: #718096; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px;">
                     @lang('shop::app.rma.mail.customer-rma-create.order-id')
+                </p>
+                <p style="font-size: 18px; font-weight: 700; color: #121A26; margin: 0;">
+                    #{{ $rma->order_id }}
+                </p>
+            </div>
 
-                    <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                        {{ $customerRmaData['order_id'] }}
+            <!-- Order Status -->
+            <div style="flex: 1; min-width: 200px;">
+                <p style="font-size: 13px; font-weight: 600; color: #718096; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px;">
+                    @lang('shop::app.rma.mail.customer-rma-create.order-status')
+                </p>
+                @if ($rma->order_status == '1')
+                    <span style="display: inline-block; padding: 6px 12px; background-color: #d1fae5; color: #065f46; border-radius: 4px; font-size: 14px; font-weight: 600;">
+                        @lang('shop::app.rma.customer.delivered')
                     </span>
-                </div>
-
-                <!-- Resolution Type -->
-                <div style="font-size: 16px; font-weight: bold; color: #2d3748;">
-                    @lang('shop::app.rma.mail.customer-rma-create.resolution-type')
-
-                    <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                        @foreach ($customerRmaData['resolution_type'] as $resolution)
-                            {{ $resolution }}
-                        @endforeach
+                @else
+                    <span style="display: inline-block; padding: 6px 12px; background-color: #fecaca; color: #991b1b; border-radius: 4px; font-size: 14px; font-weight: 600;">
+                        @lang('shop::app.rma.customer.undelivered')
                     </span>
-                </div>
+                @endif
             </div>
         </div>
+    </div>
 
-        <!-- Additional Information -->
-        <div style="margin-bottom: 5px; font-size: 16px; font-weight: bold; color: #2d3748;">
+    <!-- Additional Information Section -->
+    <div style="margin-bottom: 32px; padding: 20px; background-color: #fff5f5; border-radius: 8px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #121A26; margin: 0 0 12px 0;">
             @lang('shop::app.rma.mail.customer-rma-create.additional-information')
-
-            <span style="font-size: 16px; color: #5E5E5E; line-height: 24px;">
-                {!! $customerRmaData['information'] !!}
-            </span>
+        </h3>
+        <div style="font-size: 15px; color: #5E5E5E; line-height: 26px; margin: 0;">
+            {!! $rma->information !!}
         </div>
+    </div>
 
-        <div style="margin-top: 10px; font-size: 16px; font-weight: bold; color: #2d3748;">
+    <!-- Products Section -->
+    <div style="margin-bottom: 40px;">
+        <h2 style="font-size: 18px; font-weight: 700; color: #121A26; margin: 0 0 20px 0;">
             @lang('shop::app.rma.mail.customer-rma-create.requested-rma-product')
-        </div>
-        <br/>
+        </h2>
 
         <div style="width: 100%; overflow-x: auto;">
             <table style="margin-top: 8px; width: 100%; border-collapse: collapse; text-align: left;">
@@ -108,36 +97,22 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($customerRmaData['order_items'] as $key => $ordered_item)
+                    @foreach ($rma->items as $key => $item)
                         <tr>
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                {!! $ordered_item->name !!}
+                                {!! $item->orderItem->name !!}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                @foreach ($customerRmaData['rma_qty'] as $rmaQty)
-                                    {!! $rmaQty !!}
-                                @endforeach
+                                {!! $item->quantity !!}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                @if (count($customerRmaData['reason']) > 1)
-                                    {!! $customerRmaData['reason'][$key] !!}
-                                @else
-                                    {!! $customerRmaData['reason'][0] !!}
-                                @endif
+                                {!! $item->reason->title !!}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                @if ($ordered_item->type == 'configurable')
-                                    @foreach ($customerRmaData['skus'] as $sku)
-                                        @if ($sku['parent_id'] == $ordered_item->id)
-                                            {!! $sku['sku'] !!}
-                                        @endif
-                                    @endforeach
-                                @else
-                                    {!! $ordered_item->sku !!}
-                                @endif
+                                {!! $item->orderItem->sku !!}
                             </td>
                         </tr>
                     @endforeach

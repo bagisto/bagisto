@@ -1623,7 +1623,7 @@ return [
                 'heading' => 'Dear :name,',
                 'message' => 'Message',
                 'process' => 'Your return request is under process.',
-                'quotes'  => 'There is a new message from Buyer',
+                'quotes'  => 'There is a new message from Admin',
                 'solved'  => 'RMA status has been changed to Solved by customer.',
             ],
 

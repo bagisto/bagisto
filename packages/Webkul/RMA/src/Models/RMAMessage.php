@@ -26,4 +26,12 @@ class RMAMessage extends Model implements RMAMessageContract
         'attachment_path',
         'attachment',
     ];
+
+    /**
+     * Get the RMA that owns the message.
+     */
+    public function rma()
+    {
+        return $this->belongsTo(RMA::class);
+    }
 }

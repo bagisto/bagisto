@@ -551,15 +551,9 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.save.reopen-status')"
+                                        :action="route('admin.sales.rma.save.reopen-status', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
-                                            <input
-                                                type="hidden"
-                                                name="rma_id"
-                                                value="{{ $rma->id }}"
-                                            />
-
                                             <div class="flex flex-col gap-2.5 mb-4">
                                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
                                                     <!-- Checkbox for closing RMA -->
