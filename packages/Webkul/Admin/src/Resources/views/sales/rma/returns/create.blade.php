@@ -407,7 +407,7 @@
 
                                             <option
                                                 v-if="product.order_status == 'pending' || product.order_status == 'processing'"
-                                                value="cancel-items"
+                                                value="cancel_items"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.cancel-items')
                                             </option>
@@ -447,7 +447,7 @@
 
                                             <option
                                                 v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
-                                                value="cancel-items"
+                                                value="cancel_items"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.cancel-items')
                                             </option>
@@ -465,7 +465,8 @@
                                         && product.currentQuantity > '0'
                                         && resolutionType[getProductId(product)]
                                         && resolutionReason[getProductId(product)]
-                                        && resolutionReason[getProductId(product)].length"
+                                        && resolutionReason[getProductId(product)].length
+                                    "
                                 >
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required text-sm flex">
@@ -867,7 +868,7 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
 
                             setTimeout(() => {
-                                window.location.reload();
+                                window.location.href = response.data.redirect_url;
                             }, 1000);
                         } catch (error) {
                             this.rmaFormSubmit = true;

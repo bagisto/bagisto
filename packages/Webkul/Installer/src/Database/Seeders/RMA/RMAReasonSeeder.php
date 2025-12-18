@@ -4,6 +4,7 @@ namespace Webkul\Installer\Database\Seeders\RMA;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\RMA\Enums\DefaultRMAResolution;
 
 class RMAReasonSeeder extends Seeder
 {
@@ -50,7 +51,7 @@ class RMAReasonSeeder extends Seeder
 
         $reasons = DB::table('rma_reasons')->get();
 
-        $resolutionTypes = ['return', 'cancel-items'];
+        $resolutionTypes = [DefaultRMAResolution::RETURN->value, DefaultRMAResolution::CANCEL_ITEMS->value];
 
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {

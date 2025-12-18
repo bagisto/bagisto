@@ -235,7 +235,7 @@
                                                     @lang('admin::app.configuration.index.sales.rma.return')
                                                 </option>
 
-                                                <option value="cancel-items">
+                                                <option value="cancel_items">
                                                     @lang('admin::app.configuration.index.sales.rma.cancel-items')
                                                 </option>
                                             </select>

@@ -14,6 +14,7 @@ use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Enums\DefaultRMAResolution;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -302,12 +303,14 @@ class RequestController extends Controller
             } catch (\Exception $e) {}
 
             return response()->json([
-                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
+                'messages'     => trans('admin::app.sales.rma.create-rma.create-success'),
+                'redirect_url' => route('admin.sales.rma.view', $rma->id),
             ]);
         }
 
         return response()->json([
-            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
+            'messages'     => trans('admin::app.sales.rma.create-rma.failed'),
+            'redirect_url' => route('admin.sales.rma.create'),
         ]);
     }
 
@@ -346,7 +349,7 @@ class RequestController extends Controller
                 ->toArray();
         }
 
-        $hasCancel = $rma->items->contains('resolution', 'cancel-items');
+        $hasCancel = $rma->items->contains('resolution', DefaultRMAResolution::CANCEL_ITEMS->value);
 
         $excludedStatuses = $hasCancel
             ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]

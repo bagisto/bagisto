@@ -378,7 +378,7 @@
                                 <!-- Input Validation -->
                                 <div v-if="attributeType == 'text'">
                                     <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.create.input-validation')
                                         </x-admin::form.control-group.label>
 
@@ -387,7 +387,6 @@
                                             id="input_validation"
                                             class="cursor-pointer"
                                             name="input_validation"
-                                            rules="required"
                                             :value="$rmaData->input_validation ?? old('input_validation')"
                                             :label="trans('admin::app.catalog.attributes.create.input-validation')"
                                         >

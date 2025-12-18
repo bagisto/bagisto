@@ -2,12 +2,23 @@
 
 namespace Webkul\RMA\Repositories;
 
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Collection;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\RMA\Contracts\RMAReason;
 
 class RMAReasonRepository extends Repository
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected RMAReasonResolutionRepository $rmaReasonResolutionRepository,
+        Container $container,
+    ) {
+        parent::__construct($container);
+    }
+
     /**
      * Specify model class name.
      */
@@ -21,7 +32,7 @@ class RMAReasonRepository extends Repository
      */
     public function getRMAReasonsByResolutionType(string $resolutionType): Collection
     {
-        $existResolutions = app(RMAReasonResolutionRepository::class)
+        $existResolutions = $this->rmaReasonResolutionRepository
             ->where('resolution_type', $resolutionType)
             ->pluck('rma_reason_id');
 

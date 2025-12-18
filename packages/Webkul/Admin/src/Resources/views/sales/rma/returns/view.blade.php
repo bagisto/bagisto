@@ -51,26 +51,24 @@
                         <div class="grid">
                             <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
                                 <div class="flex gap-2.5 w-full">
-                                    <div class="grid place-content-start gap-1.5 w-full">
+                                    <div class="grid gap-1 w-full">
                                         <!-- Created At -->
                                         <div class="flex justify-between gap-2.5 mt-2">
                                             <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.rma.all-rma.view.request-on')
                                             </div>
-
-                                            <div class="text-sm text-gray-600 dark:text-gray-300">
+                                            <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
                                                 {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
                                             </div>
                                         </div>
 
                                         <!-- Package Condition -->
                                         @if ($rma->package_condition)
-                                            <div class="flex gap-2.5 mt-2">
+                                            <div class="flex justify-between gap-2.5 mt-2">
                                                 <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.configuration.index.sales.rma.package-condition'):
                                                 </div>
-
-                                                <div class="text-sm text-gray-600 dark:text-gray-300">
+                                                <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
                                                     {{ ucwords($rma->package_condition) }}
                                                 </div>
                                             </div>
@@ -79,37 +77,34 @@
                                         <!-- Additional Fields -->
                                         @if (! empty($rma->additionalFields))
                                             @foreach ($rma->additionalFields as $key => $additionalField)
-                                                <div class="flex gap-2.5 mt-2">
+                                                <div class="flex justify-between gap-2.5 mt-2">
                                                     <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
                                                         {{ $additionalField?->customField?->label }} :
                                                     </div>
-
-                                                    <div class="text-sm text-gray-600 dark:text-gray-300">
-                                                        {{ $additionalField?->field_value }}
+                                                    <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
+                                                        {{ $additionalField?->value }}
                                                     </div>
                                                 </div>
                                             @endforeach
                                         @endif
 
                                         <!-- Additional Information -->
-                                        <div class="flex gap-2.5 mt-2 ">
+                                        <div class="flex justify-between gap-2.5 mt-2 ">
                                             <div class="text-sm font-semibold text-gray-600 dark:text-gray-300 min-w-[160px]">
                                                 @lang('admin::app.sales.rma.all-rma.view.additional-information')
                                             </div>
-
-                                            <p class="text-sm text-gray-600 dark:text-gray-300">
+                                            <p class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
                                                 {{ $rma?->information }}
                                             </p>
                                         </div>
 
                                         <!--RMA Image -->
                                         @if ($rma->images->isNotEmpty())
-                                            <div class="flex gap-2.5 mt-2">
+                                            <div class="flex justify-between gap-2.5 mt-2">
                                                 <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.all-rma.view.images')
                                                 </div>
-
-                                                <div class="flex justify-between flex-wrap gap-2">
+                                                <div class="flex justify-end flex-wrap gap-2 min-w-[180px]">
                                                     @foreach($rma->images as $image)
                                                         <img
                                                             class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
@@ -118,7 +113,7 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -160,45 +155,41 @@
                                             </p>
 
                                             <!-- Order Details -->
-                                            <div class="flex w-full gap-x-5">
+                                            <div class="flex w-full gap-x-5 justify-between">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.all-rma.view.price')
                                                 </p>
-
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
                                                     {{ core()->formatBasePrice($rmaItem->product->price) }}
                                                 </p>
                                             </div>
 
                                             <!-- Quantity -->
-                                            <div class="flex w-full gap-x-5">
+                                            <div class="flex w-full gap-x-5 justify-between">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.create-rma.quantity'):
                                                 </p>
-
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
                                                    {!! $rmaItem->quantity !!}
                                                 </p>
                                             </div>
 
                                             <!-- Resolution Type -->
-                                            <div class="flex w-full gap-x-5">
+                                            <div class="flex w-full gap-x-5 justify-between">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.all-rma.view.resolution-type')
                                                 </p>
-
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
                                                     {!! ucwords($rmaItem['resolution']) !!}
                                                 </p>
                                             </div>
 
                                             <!-- Reason -->
-                                            <div class="flex w-full gap-x-5">
+                                            <div class="flex w-full gap-x-5 justify-between">
                                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.rma.create-rma.reason'):
                                                 </p>
-
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
                                                     {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
                                                 </p>
                                             </div>
@@ -316,64 +307,92 @@
 
                             <div class="border rounded-lg p-3">
                                 <div
-                                    class="mb-3 overflow-x-auto p-5"
+                                    class="mb-3 overflow-x-auto p-5 bg-gray-50 dark:bg-gray-900"
                                     style="height: 300px;"
                                     @wheel="getNewMessage()"
-                                    :class="! messages.length ? 'flex justify-center items-center' : ''"
+                                    :class="!messages.length ? 'flex justify-center items-center' : ''"
                                 >
-                                    <div
-                                        v-if="messages.length"
-                                        v-for="message in messages"
-                                        :style="message.is_admin != 1 ? 'text-align:left; background-color: #a7a7a7' : 'text-align:right; background-color: #F0F0F0'"
-                                        style="word-break: break-all;"
-                                        class="mb-3 rounded-md p-4"
-                                    >
-                                        <div class="title">
-                                            @lang('admin::app.sales.rma.all-rma.view.by')
-
-                                            <strong v-if="message.is_admin == 1">
-                                                @lang('admin::app.sales.rma.all-rma.view.admin')
-                                            </strong>
-
-                                            <strong v-else>
-                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
-                                            </strong>
-
-                                            @lang('admin::app.sales.rma.all-rma.view.on')
-
-                                            @{{ dateFormat( message.created_at) }}
-                                        </div>
-
+                                    <template v-if="messages.length">
                                         <div
-                                            class="value dark:text-black-300 text-base font-medium"
-                                            style="margin-top:10px; word-break: break-all;"
-                                            v-html="message.message"
+                                            v-for="message in messages"
+                                            :class="[
+                                                'mb-3 flex',
+                                                message.is_admin == 1 ? 'justify-end' : 'justify-start'
+                                            ]"
                                         >
-                                        </div>
-
-                                        <hr v-if="message.attachment"/>
-
-                                        <a
-                                            @click="viewAttachmentModal(message.attachment_path)"
-                                            v-if="message.attachment"
-                                            :style="message.is_admin != 1 ? 'color: black;' : 'color: black;'"
-                                            class="icon-attribute dark:text-black-300 text-base font-normal cursor-pointer"
-                                        >
-                                            <span class="text-base hover:underline ml-2">
-                                                @{{ message.attachment }}
-                                            </span>
-                                        </a>
-                                    </div>
-
-                                    <div v-else>
-                                        <div
-                                            class="icon-sales"
-                                            style="font-size:150px; color:#d7d7d7;"
+                                            <div
+                                                :class="[
+                                                    'flex items-end gap-2 max-w-[80%]',
+                                                    message.is_admin == 1 ? 'flex-row-reverse' : 'flex-row'
+                                                ]"
                                             >
-                                        </div>
+                                                <!-- Avatar -->
+                                                <div class="flex-shrink-0">
+                                                    <div v-if="message.is_admin == 1" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                                                        <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 2c-2.21 0-6 1.119-6 3.333V19h12v-2.667C18 14.119 14.21 13 12 13z'/></svg>
+                                                    </div>
 
-                                        <p class="flex justify-center text-gray-300">@lang('admin::app.sales.rma.all-rma.view.no-record')</p>
-                                    </div>
+                                                    <div v-else class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
+                                                        <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z'/></svg>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Message Bubble -->
+                                                <div
+                                                    :class="[
+                                                        'rounded-lg p-4 shadow',
+                                                        message.is_admin == 1 ? 'bg-blue-100 dark:bg-blue-900 text-right' : 'bg-white dark:bg-gray-800 text-left'
+                                                    ]"
+                                                    style="word-break: break-all; min-width: 180px;"
+                                                >
+                                                    <div class="flex items-center gap-2 mb-1">
+                                                        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                                            @lang('admin::app.sales.rma.all-rma.view.by')
+
+                                                            <span v-if="message.is_admin == 1">
+                                                                @lang('admin::app.sales.rma.all-rma.view.admin')
+                                                            </span>
+
+                                                            <span v-else>
+                                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
+                                                            </span>
+
+                                                            @lang('admin::app.sales.rma.all-rma.view.on')
+
+                                                            <span>@{{ dateFormat(message.created_at) }}</span>
+                                                        </span>
+                                                    </div>
+
+                                                    <div
+                                                        class="value dark:text-black-300 text-base font-medium mb-2"
+                                                        style="margin-top:2px; word-break: break-all;"
+                                                        v-html="message.message"
+                                                    ></div>
+
+                                                    <div v-if="message.attachment" class="mt-2">
+                                                        <hr class="mb-2"/>
+
+                                                        <a
+                                                            @click="viewAttachmentModal(message.attachment_path)"
+                                                            class="icon-attribute dark:text-black-300 text-base font-normal cursor-pointer hover:underline"
+                                                        >
+                                                            <span class="text-base ml-2">
+                                                                @{{ message.attachment }}
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template v-else>
+                                        <div class="flex flex-col items-center justify-center w-full h-full">
+                                            <div class="icon-sales" style="font-size:100px; color:#d7d7d7;"></div>
+                                            
+                                            <p class="flex justify-center text-gray-300 mt-4">@lang('admin::app.sales.rma.all-rma.view.no-record')</p>
+                                        </div>
+                                    </template>
                                     <br>
                                 </div>
                             </div>
@@ -803,7 +822,6 @@
                         class="w-full h-auto max-h-[500px] rounded m-auto"
                     >
                         <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
-                        Your browser does not support the video tag.
                     </video>
 
                     {!! view_render_event('bagisto.admin.sales.rma.view.message.attachment.modal.content.after') !!}

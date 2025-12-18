@@ -541,7 +541,7 @@
 
                                             <option
                                                 v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
-                                                value="cancel-items"
+                                                value="cancel_items"
                                             >
                                                 @lang('shop::app.customers.account.rma.create.cancel-items')
                                             </option>
@@ -581,7 +581,7 @@
 
                                             <option
                                                 v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
-                                                value="cancel-items"
+                                                value="cancel_items"
                                             >
                                                 @lang('shop::app.customers.account.rma.create.cancel-items')
                                             </option>
@@ -658,7 +658,7 @@
                     <input v-else type="hidden" name="order_status" value="0" />
 
                     <template v-if="orderStatus == '1'">
-                        <!-- Delivery Status -->
+                        <!-- Package Condition -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
                                 @lang('shop::app.customers.account.rma.create.package-condition')
@@ -686,211 +686,211 @@
 
                             <x-shop::form.control-group.error name="package_condition" class="flex" />
                         </x-shop::form.control-group>
+                    </template>
 
-                        <!-- Additionally -->
-                        @foreach ($customAttributes as $attribute)
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="flex text-sm mt-4">
-                                    {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
-                                </x-shop::form.control-group.label>
+                    <!-- Additionally -->
+                    @foreach ($customAttributes as $attribute)
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="flex text-sm mt-4">
+                                {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
+                            </x-shop::form.control-group.label>
 
-                                @if ($attribute->is_required == '1')
-                                   @php
-                                        $attribute->is_required = 'required';
-                                    @endphp
-                                @elseif ($attribute->is_required == '0')
-                                    @php
-                                        $attribute->is_required = '';
-                                    @endphp
-                                @endif
+                            @if ($attribute->is_required == '1')
+                                @php
+                                    $attribute->is_required = 'required';
+                                @endphp
+                            @elseif ($attribute->is_required == '0')
+                                @php
+                                    $attribute->is_required = '';
+                                @endphp
+                            @endif
 
-                                @switch($attribute->type)
-                                    @case('text')
-                                        <x-shop::form.control-group.control
-                                            type="text"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                        />
+                            @switch($attribute->type)
+                                @case('text')
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="customAttributes[{{ $attribute->code }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->code)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                    />
 
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
-                                        @break
-
-                                    @case('textarea')
-                                        <x-shop::form.control-group.control
-                                            type="textarea"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                            rows="12"
-                                        />
-
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
-                                        @break
-
-                                    @case('date')
-                                        <x-shop::form.control-group.control
-                                            type="date"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                        />
-
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
-                                        @break
-
-                                    @case('select')
-                                        <x-shop::form.control-group.control
-                                            type="select"
-                                            id="{{ $attribute->code }}"
-                                            class="cursor-pointer"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                        >
-                                            <!-- Here! All Needed types are defined -->
-                                            @foreach($attribute->options ?? [] as $option)
-                                                <option
-                                                    value="{{ $option->value }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </x-shop::form.control-group.control>
-
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
-                                        @break
-
-                                    @case('multiselect')
-                                        <x-shop::form.control-group.control
-                                            type="multiselect"
-                                            id="{{ $attribute->code }}"
-                                            class="cursor-pointer"
-                                            name="{{ $attribute->code }}[]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                        >
-                                            <!-- Here! All Needed types are defined -->
-                                            @foreach($attribute->options ?? [] as $option)
-                                                <option
-                                                    value="{{ $option->value }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </x-shop::form.control-group.control>
-
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
-                                        @break
-
-                                    @case('checkbox')
-                                        @foreach($attribute->options ?? [] as $index => $option)
-                                            <label class="relative mb-2 flex cursor-pointer items-start">
-                                                <v-field
-                                                    type="checkbox"
-                                                    class="flex"
-                                                    name="customAttributes[{{ $attribute->code }}]"
-                                                    rules="{{ $attribute->is_required }}"
-                                                    v-slot="{ field }"
-                                                    value="{{ $option->value }}"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        class="peer sr-only"
-                                                        id="{{ $attribute->code }}-{{ $index }}"
-                                                        rules="required"
-                                                        name="customAttributes[{{ $attribute->code }}]"
-                                                        value="{{ $option->value }}"
-                                                        v-bind="field"
-                                                    />
-                                                </v-field>
-
-                                                <label
-                                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-base peer-checked:text-navyBlue"
-                                                    for="{{ $attribute->code }}-{{ $index }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </label>
-                                            </label>
-
-                                            <x-shop::form.control-group.error
-                                                control-name="customAttributes[{{ $attribute->code }}]"
-                                                class="flex"
-                                                />
-                                        @endforeach
-
-                                        @break
-
-                                    @case('radio')
-                                        @foreach($attribute->options ?? [] as $option)
-                                            <label class="relative mb-2 flex cursor-pointer items-start">
-                                                <v-field
-                                                    type="radio"
-                                                    class="flex"
-                                                    name="customAttributes[{{ $attribute->code }}]"
-                                                    rules="{{ $attribute->is_required }}"
-                                                    v-slot="{ field }"
-                                                    value="{{ $option->name }}"
-                                                >
-                                                    <input
-                                                        type="radio"
-                                                        class="sr-only peer"
-                                                        id="option_{{ $loop->index }}"
-                                                        rules="{{ $attribute->is_required }}"
-                                                        name="customAttributes[{{ $attribute->code }}]"
-                                                        value="{{ $option->name }}"
-                                                        v-bind="field"
-                                                    />
-                                                </v-field>
-
-                                                <label
-                                                    class="icon-radio-unselect text-base peer-checked:icon-radio-select peer-checked:text-navyBlue cursor-pointer"
-                                                    for="option_{{ $loop->index }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </label>
-                                            </label>
-                                        @endforeach
-
-                                        <x-shop::form.control-group.error
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                            class="flex"
-                                        />
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                    />
 
                                     @break
 
-                                @endswitch
-                            </x-shop::form.control-group>
-                        @endforeach
-                    </template>
+                                @case('textarea')
+                                    <x-shop::form.control-group.control
+                                        type="textarea"
+                                        name="customAttributes[{{ $attribute->code }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->code)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                        rows="12"
+                                    />
+
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                    />
+
+                                    @break
+
+                                @case('date')
+                                    <x-shop::form.control-group.control
+                                        type="date"
+                                        name="customAttributes[{{ $attribute->code }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->code)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                    />
+
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                    />
+
+                                    @break
+
+                                @case('select')
+                                    <x-shop::form.control-group.control
+                                        type="select"
+                                        id="{{ $attribute->code }}"
+                                        class="cursor-pointer"
+                                        name="customAttributes[{{ $attribute->code }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->code)"
+                                        label="{{ $attribute->label }}"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
+                                        @foreach($attribute->options ?? [] as $option)
+                                            <option
+                                                value="{{ $option->value }}"
+                                            >
+                                                {{ $option->name }}
+                                            </option>
+                                        @endforeach
+                                    </x-shop::form.control-group.control>
+
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                    />
+
+                                    @break
+
+                                @case('multiselect')
+                                    <x-shop::form.control-group.control
+                                        type="multiselect"
+                                        id="{{ $attribute->code }}"
+                                        class="cursor-pointer"
+                                        name="{{ $attribute->code }}[]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->code)"
+                                        label="{{ $attribute->label }}"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
+                                        @foreach($attribute->options ?? [] as $option)
+                                            <option
+                                                value="{{ $option->value }}"
+                                            >
+                                                {{ $option->name }}
+                                            </option>
+                                        @endforeach
+                                    </x-shop::form.control-group.control>
+
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                    />
+
+                                    @break
+
+                                @case('checkbox')
+                                    @foreach($attribute->options ?? [] as $index => $option)
+                                        <label class="relative mb-2 flex cursor-pointer items-start">
+                                            <v-field
+                                                type="checkbox"
+                                                class="flex"
+                                                name="customAttributes[{{ $attribute->code }}]"
+                                                rules="{{ $attribute->is_required }}"
+                                                v-slot="{ field }"
+                                                value="{{ $option->value }}"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    class="peer sr-only"
+                                                    id="{{ $attribute->code }}-{{ $index }}"
+                                                    rules="required"
+                                                    name="customAttributes[{{ $attribute->code }}]"
+                                                    value="{{ $option->value }}"
+                                                    v-bind="field"
+                                                />
+                                            </v-field>
+
+                                            <label
+                                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-base peer-checked:text-navyBlue"
+                                                for="{{ $attribute->code }}-{{ $index }}"
+                                            >
+                                                {{ $option->name }}
+                                            </label>
+                                        </label>
+
+                                        <x-shop::form.control-group.error
+                                            control-name="customAttributes[{{ $attribute->code }}]"
+                                            class="flex"
+                                            />
+                                    @endforeach
+
+                                    @break
+
+                                @case('radio')
+                                    @foreach($attribute->options ?? [] as $option)
+                                        <label class="relative mb-2 flex cursor-pointer items-start">
+                                            <v-field
+                                                type="radio"
+                                                class="flex"
+                                                name="customAttributes[{{ $attribute->code }}]"
+                                                rules="{{ $attribute->is_required }}"
+                                                v-slot="{ field }"
+                                                value="{{ $option->name }}"
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    class="sr-only peer"
+                                                    id="option_{{ $loop->index }}"
+                                                    rules="{{ $attribute->is_required }}"
+                                                    name="customAttributes[{{ $attribute->code }}]"
+                                                    value="{{ $option->name }}"
+                                                    v-bind="field"
+                                                />
+                                            </v-field>
+
+                                            <label
+                                                class="icon-radio-unselect text-base peer-checked:icon-radio-select peer-checked:text-navyBlue cursor-pointer"
+                                                for="option_{{ $loop->index }}"
+                                            >
+                                                {{ $option->name }}
+                                            </label>
+                                        </label>
+                                    @endforeach
+
+                                    <x-shop::form.control-group.error
+                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        class="flex"
+                                    />
+
+                                @break
+
+                            @endswitch
+                        </x-shop::form.control-group>
+                    @endforeach
 
                     <!-- Additional information -->
                     <x-shop::form.control-group>
@@ -1013,7 +1013,7 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
 
                             setTimeout(() => {
-                                window.location.reload();
+                                window.location.href = response.data.redirect;
                             }, 1000);
                         } catch (error) {
                             this.rmaFormSubmit = true;

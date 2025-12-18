@@ -63,7 +63,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                                 <span class="font-medium">{{ $field->customField->label }}</span>
 
-                                <span class="text-gray-600">{{ $field->field_value }}</span>
+                                <span class="text-gray-600">{{ $field->value }}</span>
                             </div>
                         @endforeach
                     @endif
@@ -475,51 +475,57 @@
                 <!-- View conversations -->
                 <div class="border rounded-lg mt-2 p-3 max-md:p-2">
                     <div
-                        class="h-80 max-md:h-60 overflow-x-auto p-5 max-md:p-3"
+                        class="h-80 max-md:h-60 overflow-x-auto p-5 max-md:p-3 bg-gray-50"
                         @wheel="getNewMessage()"
-                        :class="! messages.length ? 'flex justify-center items-center' : ''"
+                        :class="!messages.length ? 'flex justify-center items-center' : ''"
                     >
-                        <div
-                            v-if="messages.length"
-                            v-for="message in messages"
-                            class="rounded text-sm max-sm:text-xs"
-                            style="padding: 10px; margin: 10px; margin-top: 5px; margin-bottom: 5px;"
-                            :style="message.is_admin == 1 ? 'text-align:left; background-color: #a7a7a7' : 'text-align:right; background-color: #F0F0F0'"
-                        >
-                            <div class="title font-medium">
-                                @lang('shop::app.rma.conversation-texts.by')
-
-                                <strong v-if="message.is_admin == 1">@lang('shop::app.rma.view-customer-rma.admin')</strong>
-
-                                <strong v-else>{{ auth()->guard('customer')->user()->name }}</strong>
-
-                                @lang('shop::app.rma.conversation-texts.on')
-
-                                @{{ dateFormat(message.created_at) }}
-                            </div>
-
-                            <div class="value" style="margin-top:10px; word-break: break-all;" v-html="message.message"></div>
-
-                            <hr v-if="message.attachment"/>
-
-                            <a
-                                @click="viewAttachmentModal(message.attachment_path)"
-                                v-if="message.attachment"
-                                class="icon-hamburger text-sm font-normal cursor-pointer"
+                        <template v-if="messages.length">
+                            <div
+                                v-for="message in messages"
+                                :key="message.id"
+                                class="flex mb-4"
+                                :class="message.is_admin == 1 ? 'justify-start' : 'justify-end'"
                             >
-                                <span class="text-xs max-sm:text-xs hover:underline cursor-pointer ml-2">
-                                    @{{ message.attachment }}
-                                </span>
-                            </a>
-                        </div>
+                                <div
+                                    class="max-w-[70%] w-fit rounded-xl p-4 shadow-sm"
+                                    :class="message.is_admin == 1 ? 'bg-blue-100 text-left' : 'bg-green-100 text-right'"
+                                >
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="font-semibold text-xs text-gray-700">
+                                            <template v-if="message.is_admin == 1">
+                                                @lang('shop::app.rma.view-customer-rma.admin')
+                                            </template>
+                                            
+                                            <template v-else>
+                                                {{ auth()->guard('customer')->user()->name }}
+                                            </template>
+                                        </span>
 
-                        <div v-else>
-                            <div class="icon-listing" style="font-size:150px; color:#d7d7d7;"></div>
-                            
-                            <p class="flex justify-center text-gray-300">
+                                        <span class="text-xs text-gray-400">· @{{ dateFormat(message.created_at) }}</span>
+                                    </div>
+
+                                    <div class="value text-sm max-sm:text-xs break-words" v-html="message.message"></div>
+
+                                    <div v-if="message.attachment" class="mt-2 flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"/></svg>
+                                        <a
+                                            @click="viewAttachmentModal(message.attachment_path)"
+                                            class="text-xs max-sm:text-xs hover:underline cursor-pointer text-blue-700"
+                                        >
+                                            @{{ message.attachment }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template v-else>
+                            <div class="icon-listing" style="font-size:120px; color:#d7d7d7;"></div>
+
+                            <p class="flex justify-center text-gray-300 mt-2">
                                 @lang('shop::app.rma.conversation-texts.no-record')
                             </p>
-                        </div>
+                        </template>
                     </div>
                 </div>
 
@@ -550,7 +556,6 @@
                             class="w-full h-auto max-h-[500px] max-md:max-h-[300px] rounded m-auto"
                         >
                             <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
-                            Your browser does not support the video tag.
                         </video>
                     </x-slot>
 

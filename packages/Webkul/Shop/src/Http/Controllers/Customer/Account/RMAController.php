@@ -200,10 +200,12 @@ class RMAController extends Controller
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.create-success'),
+                'redirect' => route('shop.customers.account.rma.view', $rma->id),
             ]);
         } else {
             return new JsonResponse([
                 'messages' => trans('shop::app.customer.signup-form.failed'),
+                'redirect' => route('shop.customers.account.rma.create'),
             ]);
         }
     }
