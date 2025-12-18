@@ -38,7 +38,7 @@ class OrderDataGrid extends DataGrid
                 'orders.order_currency_code',
                 'order_payment.method_title',
                 DB::raw("SUM({$tablePrefix}order_items.qty_ordered) as total_qty_ordered"),
-                DB::raw("COALESCE(SUM(rma_items_agg.total_rma_qty), 0) as total_rma_qty")
+                DB::raw("COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0) as total_rma_qty")
             ])
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
@@ -121,7 +121,7 @@ class OrderDataGrid extends DataGrid
             }
         });
 
-        $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM(rma_items_agg.total_rma_qty), 0)");
+        $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');
         $this->addFilter('status', 'orders.status');

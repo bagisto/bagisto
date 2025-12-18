@@ -37,7 +37,7 @@ class OrderRMADataGrid extends DataGrid
                 DB::raw("CONCAT({$tablePrefix}orders.customer_first_name, ' ', {$tablePrefix}orders.customer_last_name) as customer_name"),
                 'order_payment.method_title',
                 DB::raw("SUM({$tablePrefix}order_items.qty_ordered) as total_qty_ordered"),
-                DB::raw("COALESCE(SUM(rma_items_agg.total_rma_qty), 0) as total_rma_qty"),
+                DB::raw("COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0) as total_rma_qty"),
                 'pav_allow_rma.boolean_value as allow_rma_value',
                 'pav_rma_rules.integer_value as rma_rule_id_value'
             ])

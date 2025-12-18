@@ -32,6 +32,6 @@ class RMAAdditionalField extends Model implements RMAAdditionalFieldContracts
      */
     public function customField()
     {
-        return $this->belongsTo(RMACustomFieldProxy::modelClass(), 'field_name', 'code');
+        return $this->belongsTo(RMACustomFieldProxy::modelClass(), 'name', 'code');
     }
 }
