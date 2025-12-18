@@ -774,7 +774,7 @@
                             name="images"
                             :label="trans('admin::app.catalog.products.edit.images.title')"
                             :is-multiple="false"
-                            accepted-types="{{core()->getConfigData('sales.rma.setting.allowed_file_extension')}}"
+                            accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />
 
                         <x-admin::form.control-group.error control-name="images[]" class="flex"/>

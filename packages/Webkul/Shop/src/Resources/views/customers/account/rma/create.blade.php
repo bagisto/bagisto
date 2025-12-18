@@ -924,7 +924,7 @@
                             class="!p-0 rounded-xl text-gray-700 mb-0"
                             name="images[]"
                             :label="trans('shop::app.customers.account.rma.create.images')"
-                            :is-multiple="false"
+                            :is-multiple="true"
                             accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />
 
