@@ -9,7 +9,6 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Repositories\RMAItemRepository;
 use Webkul\RMA\Repositories\RMARepository;
-use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Repositories\OrderItemRepository;
 
 class Helper
@@ -209,15 +208,15 @@ class Helper
             $returnWindow = $this->calculateReturnWindow($orderItem, $defaultReturnWindow);
 
             $returnLastDate = Carbon::parse($orderItem->created_at)->addDays($returnWindow);
-            
+
             return $returnLastDate->gte($today);
         })->map(function ($orderItem) use ($rmaQuantities) {
             $rmaQuantity = $rmaQuantities[$orderItem->order_item_id] ?? 0;
-            
-            $orderItem->rma_quantity    = $rmaQuantity;
-            $orderItem->attributes      = $orderItem->additional['attributes'] ?? '';
+
+            $orderItem->rma_quantity = $rmaQuantity;
+            $orderItem->attributes = $orderItem->additional['attributes'] ?? '';
             $orderItem->currentQuantity = $orderItem->qty_ordered - $rmaQuantity;
-            
+
             return $orderItem;
         })->values();
 

@@ -14,6 +14,4 @@ class RMAReasonResolutionRepository extends Repository
     {
         return RMAReasonResolution::class;
     }
-
-    
 }

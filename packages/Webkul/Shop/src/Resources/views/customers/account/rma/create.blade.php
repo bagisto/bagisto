@@ -1084,7 +1084,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("shop.customers.account.create.get-order-items", "") }}/' + this.orderId)
+                            this.$axios.get('{{ route("shop.customers.account.rma.get-order-items", "") }}/' + this.orderId)
                                 .then(response => {
                                     this.isLoading = false;
 

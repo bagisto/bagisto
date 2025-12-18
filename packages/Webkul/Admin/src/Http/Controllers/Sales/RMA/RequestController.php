@@ -13,8 +13,8 @@ use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
-use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Enums\DefaultRMAResolution;
+use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -79,40 +79,40 @@ class RequestController extends Controller
     }
 
     /**
-     * Save rma status by admin
+     * Save rma status by admin.
      */
-    public function saveRmaStatus(int $id): RedirectResponse
+    public function updateStatus(int $id): RedirectResponse
     {
         $data = request()->input();
 
         $rma = $this->rmaRepository->findOrFail($id);
         $order = $rma->order;
-        
+
         $ordersRma = $this->rmaRepository->findWhere(['order_id' => $order->id]);
 
         $totalCount = (int) $this->rmaItemRepository
             ->whereIn('rma_id', $ordersRma->pluck('id'))
             ->sum('quantity');
-        
+
         if (empty($totalCount)) {
             return $this->updateRmaAndRedirect($rma, $id, $data);
         }
-        
+
         $statusId = (int) $data['rma_status_id'];
-        
+
         if ($statusId === DefaultRMAStatusEnum::ITEM_CANCELED->value) {
             $this->handleItemCancellation($ordersRma, $order, $totalCount);
         }
-        
+
         if ($statusId === DefaultRMAStatusEnum::RECEIVED_PACKAGE->value) {
             return $this->handleReceivedPackage($rma, $data);
         }
-        
+
         return $this->updateRmaAndRedirect($rma, $id, $data);
     }
 
     /**
-     * Save rma status by customer
+     * Save rma status by customer.
      */
     public function saveReOpenStatus(int $id): RedirectResponse
     {
@@ -137,7 +137,8 @@ class RequestController extends Controller
 
             try {
                 Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
@@ -146,9 +147,9 @@ class RequestController extends Controller
     }
 
     /**
-     * Get all Messages
+     * Get all messages.
      */
-    public function getMessages() : JsonResponse
+    public function getMessages(): JsonResponse
     {
         $messages = $this->rmaMessageRepository->where('rma_id', request()->get('id'))
             ->orderBy('id', 'desc')
@@ -160,7 +161,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Send message from admin to customer
+     * Send message from admin to customer.
      */
     public function sendMessage(): JsonResponse
     {
@@ -188,7 +189,8 @@ class RequestController extends Controller
 
             try {
                 Mail::queue(new AdminToCustomerConversationNotification($storedMessage));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.all-rma.view.send-message-success'),
@@ -255,7 +257,7 @@ class RequestController extends Controller
         /**
          * Creation of RMA items for the newly created RMA record.
          */
-        foreach ($data['order_item_id'] as $key => $orderItemId) {  
+        foreach ($data['order_item_id'] as $key => $orderItemId) {
             $this->rmaItemRepository->create([
                 'rma_id'        => $rma->id,
                 'rma_reason_id' => $data['rma_reason_id'][$key],
@@ -279,7 +281,7 @@ class RequestController extends Controller
          * Creation of RMA images for the newly created RMA record.
          */
         if (
-            ! empty($data['images']) 
+            ! empty($data['images'])
             && ! empty(implode(',', $data['images']))
         ) {
             $this->rmaImageRepository->manageImages($data['images'], $rma);
@@ -300,7 +302,8 @@ class RequestController extends Controller
         if ($rma->items) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return response()->json([
                 'messages'     => trans('admin::app.sales.rma.create-rma.create-success'),
@@ -315,9 +318,9 @@ class RequestController extends Controller
     }
 
     /**
-     * Get order details
+     * Get order details.
      */
-    public function getOrderProduct(int $orderId) : Collection
+    public function getOrderItems(int $orderId): Collection
     {
         return $this->rmaHelper->getOrderProduct($orderId);
     }
@@ -325,7 +328,7 @@ class RequestController extends Controller
     /**
      * Get RMA reason by resolution type.
      */
-    public function getResolutionReason(string $resolutionType): RMAReasonResolution|Collection
+    public function getResolutionReasons(string $resolutionType): RMAReasonResolution|Collection
     {
         return $this->rmaReasonRepository->getRMAReasonsByResolutionType($resolutionType);
     }
@@ -466,28 +469,27 @@ class RequestController extends Controller
      */
     private function handleItemCancellation($ordersRma, $order, int $totalCount): void
     {
-        $orderItemIds = $ordersRma->flatMap(fn($orderRma) => 
-            $orderRma->items->pluck('order_item_id')
+        $orderItemIds = $ordersRma->flatMap(fn ($orderRma) => $orderRma->items->pluck('order_item_id')
         );
-        
+
         $orderItems = $this->orderItemRepository
             ->whereIn('id', $orderItemIds)
             ->orWhereIn('parent_id', $orderItemIds)
             ->get()
             ->keyBy('id');
-        
+
         foreach ($ordersRma as $orderRma) {
             foreach ($orderRma->items as $rmaItem) {
                 $orderItem = $orderItems->get($rmaItem->order_item_id);
-                
+
                 if (! $orderItem) {
                     continue;
                 }
-                
-                $itemToUpdate = $orderItem->parent_id 
-                    ? $orderItems->get($orderItem->parent_id) 
+
+                $itemToUpdate = $orderItem->parent_id
+                    ? $orderItems->get($orderItem->parent_id)
                     : $orderItem;
-                
+
                 if ($itemToUpdate) {
                     $itemToUpdate->update([
                         'qty_canceled' => $rmaItem->quantity,
@@ -495,13 +497,13 @@ class RequestController extends Controller
                 }
             }
         }
-        
+
         if ($order->total_qty_ordered == $totalCount) {
             $order->update(['status' => Order::STATUS_CANCELED]);
         } else {
             $this->updateOrderStatus($order);
         }
-        
+
         Event::dispatch('sales.order.cancel.after', $order);
     }
 
@@ -511,15 +513,15 @@ class RequestController extends Controller
     private function handleReceivedPackage($rma, array $data): RedirectResponse
     {
         $refund = $this->createRefund($rma);
-        
+
         if (! $refund) {
             session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-failed'));
 
             return redirect()->back();
         }
-        
+
         $rma->update($data);
-        
+
         session()->flash('success', trans('admin::app.sales.refunds.create.create-success'));
 
         return redirect()->route('admin.sales.refunds.index');
@@ -531,7 +533,7 @@ class RequestController extends Controller
     private function updateRmaAndRedirect($rma, int $id, array $data): RedirectResponse
     {
         $updateStatus = $rma->update($data);
-        
+
         $this->rmaMessageRepository->create([
             'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
                 'id'     => $id,
@@ -540,17 +542,18 @@ class RequestController extends Controller
             'rma_id'   => $id,
             'is_admin' => 1,
         ]);
-        
+
         if ($updateStatus) {
             try {
                 Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {}
-            
+            } catch (\Exception $e) {
+            }
+
             session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
         } else {
             session()->flash('error', trans('admin::app.sales.rma.all-rma.view.failed'));
         }
-        
+
         return redirect()->back();
     }
 }

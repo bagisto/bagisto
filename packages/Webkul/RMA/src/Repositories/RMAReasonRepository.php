@@ -10,7 +10,7 @@ use Webkul\RMA\Contracts\RMAReason;
 class RMAReasonRepository extends Repository
 {
     /**
-     * Constructor
+     * Create a new repository instance.
      */
     public function __construct(
         protected RMAReasonResolutionRepository $rmaReasonResolutionRepository,

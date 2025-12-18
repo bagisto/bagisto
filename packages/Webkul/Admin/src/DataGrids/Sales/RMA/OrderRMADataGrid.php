@@ -18,7 +18,7 @@ class OrderRMADataGrid extends DataGrid
         $globalReturnDays = core()->getConfigData('sales.rma.setting.default_allow_days');
         $allowedProductTypes = core()->getConfigData('sales.rma.setting.select_allowed_product_type');
         $allowedOrderStatus = core()->getConfigData('sales.rma.setting.select_allowed_order_status');
-        
+
         $tablePrefix = DB::getTablePrefix();
 
         $rmaItemsSubquery = DB::table('rma_items')
@@ -39,7 +39,7 @@ class OrderRMADataGrid extends DataGrid
                 DB::raw("SUM({$tablePrefix}order_items.qty_ordered) as total_qty_ordered"),
                 DB::raw("COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0) as total_rma_qty"),
                 'pav_allow_rma.boolean_value as allow_rma_value',
-                'pav_rma_rules.integer_value as rma_rule_id_value'
+                'pav_rma_rules.integer_value as rma_rule_id_value',
             ])
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
@@ -47,14 +47,14 @@ class OrderRMADataGrid extends DataGrid
             ->leftJoinSub($rmaItemsSubquery, 'rma_items_agg', 'order_items.id', '=', 'rma_items_agg.order_item_id');
 
         $queryBuilder->leftJoin('product_attribute_values as pav_allow_rma', function ($join) {
-                $join->on('products.id', '=', 'pav_allow_rma.product_id')
-                    ->whereExists(function ($query) {
-                        $query->select(DB::raw(1))
-                            ->from('attributes')
-                            ->whereColumn('attributes.id', 'pav_allow_rma.attribute_id')
-                            ->where('attributes.code', 'allow_rma');
-                    });
-            })
+            $join->on('products.id', '=', 'pav_allow_rma.product_id')
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('attributes')
+                        ->whereColumn('attributes.id', 'pav_allow_rma.attribute_id')
+                        ->where('attributes.code', 'allow_rma');
+                });
+        })
             ->leftJoin('product_attribute_values as pav_rma_rules', function ($join) {
                 $join->on('products.id', '=', 'pav_rma_rules.product_id')
                     ->whereExists(function ($query) {
@@ -77,12 +77,12 @@ class OrderRMADataGrid extends DataGrid
             $queryBuilder->where('orders.status', Order::STATUS_COMPLETED);
         }
 
-        if (!empty($allowedProductTypes)) {
+        if (! empty($allowedProductTypes)) {
             $productTypesArray = is_array($allowedProductTypes)
                 ? $allowedProductTypes
                 : explode(',', $allowedProductTypes);
 
-            if (!empty($productTypesArray)) {
+            if (! empty($productTypesArray)) {
                 $queryBuilder->whereIn('products.type', $productTypesArray);
             }
         }
@@ -110,7 +110,7 @@ class OrderRMADataGrid extends DataGrid
                             ->orWhere('pav_allow_rma.boolean_value', 0)
                             ->orWhere('rma_rules.status', 0);
                     })
-                    ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}orders.created_at) <= ?", [$globalReturnDays]);
+                        ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}orders.created_at) <= ?", [$globalReturnDays]);
                 });
             }
         });

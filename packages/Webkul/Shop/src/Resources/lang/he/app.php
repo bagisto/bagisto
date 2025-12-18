@@ -175,7 +175,7 @@ return [
                 'order'       => 'הזמנה',
                 'order-date'  => 'תאריך הזמנה',
                 'order-id'    => 'מספר הזמנה',
-                'pay-by'      => 'תשלום באמצעות - :method', 
+                'pay-by'      => 'תשלום באמצעות - :method',
                 'pay-via'     => 'תשלום דרך',
                 'subtotal'    => 'סכום חלקי',
                 'title'       => 'הזמנות',

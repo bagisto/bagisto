@@ -79,7 +79,7 @@ class RMAController extends Controller
      * Display the specified resource.
      */
     public function view(int $id): View|RedirectResponse
-    {            
+    {
         $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($id);
 
         $canCloseRma = $this->rmaRepository->canCloseRma($rma);
@@ -173,9 +173,8 @@ class RMAController extends Controller
         /**
          * Creation of RMA images for the newly created RMA record.
          */
-        
         if (
-            ! empty($data['images']) 
+            ! empty($data['images'])
             && ! empty(implode(',', $data['images']))
         ) {
             $this->rmaImageRepository->manageImages($data['images'], $rma);
@@ -183,7 +182,7 @@ class RMAController extends Controller
 
         /**
          * Creation of additional fields for the newly created RMA record.
-        */
+         */
         $customAttributes = request('customAttributes', []);
 
         if (! empty($customAttributes)) {
@@ -196,7 +195,8 @@ class RMAController extends Controller
         if ($rma->items) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.create-success'),
@@ -344,7 +344,8 @@ class RMAController extends Controller
 
             try {
                 Mail::queue(new CustomerToAdminConversationNotification($storedMessage));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.send-message', [

@@ -181,7 +181,7 @@ Route::prefix('customer')->group(function () {
 
                 Route::post('store', 'store')->name('shop.customers.account.rma.store');
 
-                Route::get('get-order-items/{orderId}', 'getOrderItems')->name('shop.customers.account.create.get-order-items');
+                Route::get('get-order-items/{orderId}', 'getOrderItems')->name('shop.customers.account.rma.get-order-items');
 
                 Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('shop.customers.account.rma.get-resolution-reasons');
 

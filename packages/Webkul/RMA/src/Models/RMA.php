@@ -32,7 +32,7 @@ class RMA extends Model implements RMAContract
     ];
 
     /**
-     * RMA Status
+     * Define a one-to-one relationship with the RMA status.
      */
     public function status(): BelongsTo
     {

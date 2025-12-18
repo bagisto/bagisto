@@ -493,7 +493,7 @@
                                             <x-slot:content>
                                                 <x-admin::form
                                                     method="POST"
-                                                    :action="route('admin.sales.rma.save.status', $rma->id)"
+                                                    :action="route('admin.sales.rma.update-status', $rma->id)"
                                                 >
                                                     <x-admin::form.control-group class="mb-2 w-full">
                                                         <x-admin::form.control-group.control
@@ -570,7 +570,7 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.save.reopen-status', $rma->id)"
+                                        :action="route('admin.sales.rma.re-open', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
@@ -625,7 +625,7 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.save.reopen-status', $rma->id)"
+                                        :action="route('admin.sales.rma.re-open', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">

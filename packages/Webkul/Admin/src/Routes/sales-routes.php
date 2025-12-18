@@ -131,21 +131,21 @@ Route::prefix('sales')->group(function () {
 
             Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
 
-            Route::post('save-rma-status/{id}', 'saveRmaStatus')->name('admin.sales.rma.save.status');
-
-            Route::post('save-rma-reopen-status/{id}', 'saveReOpenStatus')->name('admin.sales.rma.save.reopen-status');
-
-            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
-
-            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
-
             Route::get('create', 'create')->name('admin.sales.rma.create');
 
             Route::post('store', 'store')->name('admin.sales.rma.store');
 
-            Route::get('get-order-product/{orderId}', 'getOrderProduct')->name('admin.sales.rma.get-order-product');
+            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.get-order-items');
 
-            Route::get('get-resolution-reason/{resolutionType}', 'getResolutionReason')->name('admin.sales.rma.get-resolution-reason');
+            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.get-resolution-reasons');
+
+            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.update-status');
+
+            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.re-open');
+
+            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
+
+            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
         });
 
         /**
