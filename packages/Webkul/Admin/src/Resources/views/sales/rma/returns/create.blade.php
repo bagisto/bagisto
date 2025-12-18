@@ -764,18 +764,57 @@
 
                     <!-- Images -->
                     <x-admin::form.control-group class="mt-4">
-                        <x-admin::form.control-group.label class="text-sm flex">
+                        <x-admin::form.control-group.label class="text-sm flex text-gray-700 dark:text-gray-300">
                             @lang('admin::app.catalog.products.edit.images.title')
                         </x-admin::form.control-group.label>
 
-                        <x-admin::form.control-group.control
-                            type="image"
-                            class="!p-0 rounded-xl text-gray-700 mb-0"
-                            name="images"
-                            :label="trans('admin::app.catalog.products.edit.images.title')"
-                            :is-multiple="false"
-                            accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
-                        />
+                        <!-- Preview -->
+                        <div
+                            v-if="imagePreviews.length"
+                            class="my-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+                        >
+                            <div
+                                v-for="(image, index) in imagePreviews"
+                                :key="index"
+                                class="relative group w-24 h-24"
+                            >
+                                <!-- Image -->
+                                <img
+                                    :src="image"
+                                    class="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm"
+                                />
+
+                                <!-- Remove button -->
+                                <button
+                                    type="button"
+                                    class="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+                                    @click="removeImage(index)"
+                                >
+                                    <i class="icon-cancel-1 cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Upload box -->
+                        <label class="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition">
+                            <span class="gap-2 flex items-center">
+                                <span class="icon-image text-xl"></span>
+
+                                <span class="font-medium text-base">
+                                    @lang('admin::app.catalog.products.edit.images.title')
+                                </span>
+                            </span>
+
+                            <input
+                                type="file"
+                                name="images[]"
+                                multiple
+                                accept="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
+                                class="hidden"
+                                @change="previewImages"
+                                ref="imageInput"
+                            />
+                        </label>
 
                         <x-admin::form.control-group.error control-name="images[]" class="flex"/>
                     </x-admin::form.control-group>
@@ -832,6 +871,7 @@
                             }, 1000);
                         } catch (error) {
                             this.rmaFormSubmit = true;
+
                             if (error.response && error.response.data && error.response.data.errors) {
                                 this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             }
@@ -870,6 +910,10 @@
                         baseImageUrl: '{{ Storage::url('') }}',
 
                         returnWindowDays: parseInt('{{ core()->getConfigData('sales.rma.setting.default_allow_days') }}'),
+
+                        imageFiles: [],
+
+                        imagePreviews: [],
                     }
                 },
 
@@ -982,6 +1026,38 @@
                         }
 
                         return title;
+                    },
+
+                    previewImages(event) {
+                        const files = Array.from(event.target.files);
+
+                        this.imageFiles = files;
+                        this.imagePreviews = [];
+
+                        files.forEach(file => {
+                            if (!file.type.startsWith('image/')) return;
+
+                            const reader = new FileReader();
+
+                            reader.onload = e => {
+                                this.imagePreviews.push(e.target.result);
+                            };
+
+                            reader.readAsDataURL(file);
+                        });
+                    },
+
+                    removeImage(index) {
+                        this.imageFiles.splice(index, 1);
+                        this.imagePreviews.splice(index, 1);
+
+                        const dataTransfer = new DataTransfer();
+
+                        this.imageFiles.forEach(file => {
+                            dataTransfer.items.add(file);
+                        });
+
+                        this.$refs.imageInput.files = dataTransfer.files;
                     },
                 },
             });

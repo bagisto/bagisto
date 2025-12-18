@@ -136,7 +136,6 @@ class RMAController extends Controller
             'package_condition',
         ]);
 
-
         /**
          * Creation of a new RMA record.
          */
