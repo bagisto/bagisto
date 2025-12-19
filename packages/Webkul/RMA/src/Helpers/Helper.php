@@ -37,22 +37,6 @@ class Helper
     ) {}
 
     /**
-     * Get html for option details.
-     */
-    public function getOptionDetailHtml(array $attributes): string
-    {
-        $attributeValue = '';
-
-        foreach ($attributes as $attribute) {
-            if (! empty($attribute)) {
-                $attributeValue .= $attribute['attribute_name'].': '.$attribute['option_label'].' </br> ';
-            }
-        }
-
-        return $attributeValue != '' ? "($attributeValue)" : '';
-    }
-
-    /**
      * Get rma status
      */
     public function getRMAStatus(int $orderItemId): array

@@ -160,7 +160,19 @@
                                                 {{ $item->orderItem->name }}
                                             </a>
 
-                                            {!! app('Webkul\RMA\Helpers\Helper')->getOptionDetailHtml($item->orderItem->additional['attributes'] ?? []) !!}
+                                            @php
+                                                $attributes = $item->orderItem->additional['attributes'] ?? [];
+                                                $attributeValue = '';
+                                                foreach ($attributes as $attribute) {
+                                                    if (! empty($attribute)) {
+                                                        $attributeValue .= $attribute['attribute_name'] . ': ' . $attribute['option_label'] . ' </br> ';
+                                                    }
+                                                }
+                                            @endphp
+
+                                            @if ($attributeValue != '')
+                                                ( {!! $attributeValue !!} )
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -215,7 +227,19 @@
                                     {{ $item->orderItem->name }}
                                 </a>
 
-                                {!! app('Webkul\RMA\Helpers\Helper')->getOptionDetailHtml($item->orderItem->additional['attributes'] ?? []) !!}
+                                @php
+                                    $attributes = $item->orderItem->additional['attributes'] ?? [];
+                                    $attributeValue = '';
+                                    foreach ($attributes as $attribute) {
+                                        if (! empty($attribute)) {
+                                            $attributeValue .= $attribute['attribute_name'] . ': ' . $attribute['option_label'] . ' </br> ';
+                                        }
+                                    }
+                                @endphp
+
+                                @if ($attributeValue != '')
+                                    ( {!! $attributeValue !!} )
+                                @endif
                             </div>
                         </div>
 
