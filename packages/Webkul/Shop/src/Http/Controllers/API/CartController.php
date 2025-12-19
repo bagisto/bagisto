@@ -75,9 +75,18 @@ class CartController extends APIController
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
             ], $response));
         } catch (\Exception $exception) {
-            return response()->json([
-                'message'      => $exception->getMessage(),
-            ], Response::HTTP_BAD_REQUEST);
+
+            $noRedirectMessages = [
+                trans('product::app.checkout.cart.inventory-warning'),
+            ];
+
+            $response = ['message' => $exception->getMessage()];
+
+            if (! in_array($response['message'], $noRedirectMessages)) {
+                $response['redirect_uri'] = route('shop.product_or_category.index', $product->url_key);
+            }
+
+            return response()->json($response, Response::HTTP_BAD_REQUEST);
         }
     }
 
