@@ -115,7 +115,7 @@ class OrderRMADataGrid extends DataGrid
             }
         });
 
-        $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM(rma_items_agg.total_rma_qty), 0)");
+        $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');
         $this->addFilter('status', 'orders.status');

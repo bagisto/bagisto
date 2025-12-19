@@ -501,39 +501,13 @@
                     class="gap-5"
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
-                    <!-- Delivery Status -->
-                    <x-admin::form.control-group>
-                        <x-admin::form.control-group.label class="required text-sm mt-4 flex">
-                            @lang('admin::app.configuration.index.sales.rma.product-delivery-status')
-                        </x-admin::form.control-group.label>
+                    <template v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'">
+                        <input 
+                            type="hidden" 
+                            name="order_status" 
+                            value="1" 
+                        />
 
-                        <x-admin::form.control-group.control
-                            type="select"
-                            name="order_status"
-                            rules="required"
-                            v-model="orderStatus"
-                            :label="trans('admin::app.configuration.index.sales.rma.product-delivery-status')"
-                        >
-                            <option value="">
-                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                            </option>
-
-                            <option
-                                v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'"
-                                value="1"
-                            >
-                                @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
-                            </option>
-
-                            <option value="0">
-                                @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
-                            </option>
-                        </x-admin::form.control-group.control>
-
-                        <x-admin::form.control-group.error name="order_status" class="flex"/>
-                    </x-admin::form.control-group>
-
-                    <div v-if="orderStatus == '1'">
                         <!-- Delivery Status -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required text-sm mt-4 flex">
@@ -562,187 +536,194 @@
 
                             <x-admin::form.control-group.error name="package_condition" class="flex"/>
                         </x-admin::form.control-group>
+                    </template>
 
-                        <!-- Additionally -->
-                        @foreach ($customAttributes as $attribute)
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label class="flex text-sm mt-4">
-                                    {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
-                                </x-admin::form.control-group.label>
+                    <input 
+                        v-else 
+                        type="hidden" 
+                        name="order_status" 
+                        value="0" 
+                    />
 
-                                @if ($attribute->is_required == '1')
-                                   @php
-                                    $attribute->is_required = 'required';
-                                   @endphp
-                                @elseif ($attribute->is_required == '0')
-                                    @php
-                                    $attribute->is_required = '';
-                                   @endphp
-                                @endif
+                    <!-- Additionally -->
+                    @foreach ($customAttributes as $attribute)
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="flex text-sm mt-4">
+                                {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
+                            </x-admin::form.control-group.label>
 
-                                @switch($attribute->type)
-                                    @case('text')
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                        />
+                            @if ($attribute->is_required == '1')
+                                @php
+                                $attribute->is_required = 'required';
+                                @endphp
+                            @elseif ($attribute->is_required == '0')
+                                @php
+                                $attribute->is_required = '';
+                                @endphp
+                            @endif
 
-                                        <x-admin::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-                                        @break
+                            @switch($attribute->type)
+                                @case('text')
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="customAttributes[{{ $attribute->id }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->id)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                    />
 
-                                    @case('textarea')
-                                        <x-admin::form.control-group.control
-                                            type="textarea"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                            rows="12"
-                                        />
-
-                                        <x-admin::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-                                        @break
-
-                                    @case('date')
-                                        <x-admin::form.control-group.control
-                                            type="date"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                            placeholder="{{ $attribute->label }}"
-                                        />
-
-                                        <x-admin::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-
-                                                />
-
+                                    <x-admin::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
+                                    />
                                     @break
 
-                                    @case('select')
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            id="{{ $attribute->code }}"
-                                            class="cursor-pointer"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                        >
-                                            <!-- Here! All Needed types are defined -->
-                                            @foreach($attribute->options ?? [] as $option)
-                                                <option
-                                                    value="{{ $option->value }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </x-admin::form.control-group.control>
+                                @case('textarea')
+                                    <x-admin::form.control-group.control
+                                        type="textarea"
+                                        name="customAttributes[{{ $attribute->id }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->id)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                        rows="12"
+                                    />
 
-                                        <x-admin::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
-
+                                    <x-admin::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
+                                    />
                                     @break
 
-                                    @case('multiselect')
-                                        <x-admin::form.control-group.control
-                                            type="multiselect"
-                                            name="customAttributes[{{ $attribute->code }}]"
-                                            id="{{ $attribute->code }}"
-                                            class="cursor-pointer"
-                                            rules="{{ $attribute->is_required }}"
-                                            :value="old($attribute->code)"
-                                            label="{{ $attribute->label }}"
-                                        >
-                                            <!-- Here! All Needed types are defined -->
-                                            @foreach($attribute->options ?? [] as $option)
-                                                <option
-                                                    value="{{ $option->value }}"
-                                                >
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </x-admin::form.control-group.control>
+                                @case('date')
+                                    <x-admin::form.control-group.control
+                                        type="date"
+                                        name="customAttributes[{{ $attribute->id }}]"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->id)"
+                                        label="{{ $attribute->label }}"
+                                        placeholder="{{ $attribute->label }}"
+                                    />
 
-                                        <x-admin::form.control-group.error
-                                            class="flex"
-                                            control-name="customAttributes[{{ $attribute->code }}]"
-                                        />
+                                    <x-admin::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
 
-                                    @break
+                                            />
 
-                                    @case('checkbox')
+                                @break
+
+                                @case('select')
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="customAttributes[{{ $attribute->id }}]"
+                                        id="{{ $attribute->id }}"
+                                        class="cursor-pointer"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->id)"
+                                        label="{{ $attribute->label }}"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
                                         @foreach($attribute->options ?? [] as $option)
-                                            <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                            <option
+                                                value="{{ $option->value }}"
+                                            >
+                                                {{ $option->name }}
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
+                                    />
+
+                                @break
+
+                                @case('multiselect')
+                                    <x-admin::form.control-group.control
+                                        type="multiselect"
+                                        name="customAttributes[{{ $attribute->id }}]"
+                                        id="{{ $attribute->id }}"
+                                        class="cursor-pointer"
+                                        rules="{{ $attribute->is_required }}"
+                                        :value="old($attribute->id)"
+                                        label="{{ $attribute->label }}"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
+                                        @foreach($attribute->options ?? [] as $option)
+                                            <option
+                                                value="{{ $option->value }}"
+                                            >
+                                                {{ $option->name }}
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        class="flex"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
+                                    />
+
+                                @break
+
+                                @case('checkbox')
+                                    @foreach($attribute->options ?? [] as $option)
+                                        <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                            <x-admin::form.control-group.control
+                                                type="checkbox"
+                                                id="{{ $attribute->id }}"
+                                                name="customAttributes[{{ $attribute->id }}]"
+                                                value="{{ $option->value }}"
+                                                for="{{ $attribute->id }}"
+                                            />
+
+                                            <label
+                                                class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                for="{{ $option->name }}"
+                                            >
+                                                {{$option->name}}
+                                            </label>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group.error
+                                            class="flex"
+                                            control-name="customAttributes[{{ $attribute->id }}]"
+                                        />
+                                    @endforeach
+
+                                @break
+
+                                @case('radio')
+                                    @foreach($attribute->options ?? [] as $key => $option)
+                                        <div class="flex items-center gap-2.5">
+                                            <x-admin::form.control-group class="!mb-0">
                                                 <x-admin::form.control-group.control
-                                                    type="checkbox"
-                                                    id="{{ $attribute->code }}"
-                                                    name="customAttributes[{{ $attribute->code }}]"
+                                                    type="radio"
+                                                    name="customAttributes[{{ $attribute->id }}]"
+                                                    id="{{ $attribute->id }}_{{ $key }}"
                                                     value="{{ $option->value }}"
-                                                    for="{{ $attribute->code }}"
+                                                    rules="{{ $attribute->is_required }}"
+                                                    for="{{ $attribute->id }}_{{ $key }}"
                                                 />
 
                                                 <label
                                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                                    for="{{ $option->name }}"
+                                                    for="{{ $attribute->id }}_{{ $key }}"
                                                 >
-                                                    {{$option->name}}
+                                                    {{ $option->name }}
                                                 </label>
                                             </x-admin::form.control-group>
+                                        </div>
+                                    @endforeach
 
-                                            <x-admin::form.control-group.error
-                                                class="flex"
-                                                control-name="customAttributes[{{ $attribute->code }}]"
-                                            />
-                                        @endforeach
+                                    <x-admin::form.control-group.error control-name="customAttributes[{{ $attribute->id }}]"/>
+                                @break
 
-                                    @break
-
-                                    @case('radio')
-                                        @foreach($attribute->options ?? [] as $key => $option)
-                                            <div class="flex items-center gap-2.5">
-                                                <x-admin::form.control-group class="!mb-0">
-                                                    <x-admin::form.control-group.control
-                                                        type="radio"
-                                                        name="customAttributes[{{ $attribute->code }}]"
-                                                        id="{{ $attribute->code }}_{{ $key }}"
-                                                        value="{{ $option->value }}"
-                                                        rules="{{ $attribute->is_required }}"
-                                                        for="{{ $attribute->code }}_{{ $key }}"
-                                                    />
-
-                                                    <label
-                                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                                        for="{{ $attribute->code }}_{{ $key }}"
-                                                    >
-                                                        {{ $option->name }}
-                                                    </label>
-                                                </x-admin::form.control-group>
-                                            </div>
-                                        @endforeach
-
-                                        <x-admin::form.control-group.error control-name="customAttributes[{{ $attribute->code }}]"/>
-                                    @break
-
-                                @endswitch
-                            </x-admin::form.control-group>
-                        @endforeach
-                    </div>
+                            @endswitch
+                        </x-admin::form.control-group>
+                    @endforeach
 
                     <!-- Additional information -->
                     <x-admin::form.control-group>

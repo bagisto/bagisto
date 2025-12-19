@@ -21,7 +21,7 @@ class RMAAdditionalField extends Model implements RMAAdditionalFieldContracts
      */
     protected $fillable = [
         'rma_id',
-        'name',
+        'rma_custom_field_id',
         'value',
     ];
 
@@ -32,6 +32,6 @@ class RMAAdditionalField extends Model implements RMAAdditionalFieldContracts
      */
     public function customField()
     {
-        return $this->belongsTo(RMACustomFieldProxy::modelClass(), 'name', 'code');
+        return $this->belongsTo(RMACustomFieldProxy::modelClass(), 'rma_custom_field_id', 'id');
     }
 }

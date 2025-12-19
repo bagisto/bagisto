@@ -634,30 +634,13 @@
                     class="gap-5"
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
-                    <!-- Delivery Status -->
-                    <x-shop::form.control-group v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'">
-                        <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                            @lang('shop::app.customers.account.rma.create.product-delivery-status')
-                        </x-shop::form.control-group.label>
+                    <template v-if="products[0].order_status != 'pending' && products[0].order_status != 'processing'">
+                        <input 
+                            type="hidden" 
+                            name="order_status" 
+                            value="1" 
+                        />
 
-                        <x-shop::form.control-group.control
-                            type="select"
-                            name="order_status"
-                            rules="required"
-                            v-model="orderStatus"
-                            :label="trans('shop::app.customers.account.rma.create.product-delivery-status')"
-                        >
-                            <option value="1">
-                                @lang('shop::app.rma.customer.delivered')
-                            </option>
-                        </x-shop::form.control-group.control>
-
-                        <x-shop::form.control-group.error name="order_status" class="flex" />
-                    </x-shop::form.control-group>
-
-                    <input v-else type="hidden" name="order_status" value="0" />
-
-                    <template v-if="orderStatus == '1'">
                         <!-- Package Condition -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="required text-sm mt-4 flex">
@@ -688,6 +671,13 @@
                         </x-shop::form.control-group>
                     </template>
 
+                    <input 
+                        v-else 
+                        type="hidden" 
+                        name="order_status" 
+                        value="0" 
+                    />
+
                     <!-- Additionally -->
                     @foreach ($customAttributes as $attribute)
                         <x-shop::form.control-group>
@@ -709,16 +699,16 @@
                                 @case('text')
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        name="customAttributes[{{ $attribute->code }}]"
+                                        name="customAttributes[{{ $attribute->id }}]"
                                         rules="{{ $attribute->is_required }}"
-                                        :value="old($attribute->code)"
+                                        :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                         placeholder="{{ $attribute->label }}"
                                     />
 
                                     <x-shop::form.control-group.error
                                         class="flex"
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                     />
 
                                     @break
@@ -726,9 +716,9 @@
                                 @case('textarea')
                                     <x-shop::form.control-group.control
                                         type="textarea"
-                                        name="customAttributes[{{ $attribute->code }}]"
+                                        name="customAttributes[{{ $attribute->id }}]"
                                         rules="{{ $attribute->is_required }}"
-                                        :value="old($attribute->code)"
+                                        :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                         placeholder="{{ $attribute->label }}"
                                         rows="12"
@@ -736,7 +726,7 @@
 
                                     <x-shop::form.control-group.error
                                         class="flex"
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                     />
 
                                     @break
@@ -744,16 +734,16 @@
                                 @case('date')
                                     <x-shop::form.control-group.control
                                         type="date"
-                                        name="customAttributes[{{ $attribute->code }}]"
+                                        name="customAttributes[{{ $attribute->id }}]"
                                         rules="{{ $attribute->is_required }}"
-                                        :value="old($attribute->code)"
+                                        :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                         placeholder="{{ $attribute->label }}"
                                     />
 
                                     <x-shop::form.control-group.error
                                         class="flex"
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                     />
 
                                     @break
@@ -761,11 +751,11 @@
                                 @case('select')
                                     <x-shop::form.control-group.control
                                         type="select"
-                                        id="{{ $attribute->code }}"
+                                        id="{{ $attribute->id }}"
                                         class="cursor-pointer"
-                                        name="customAttributes[{{ $attribute->code }}]"
+                                        name="customAttributes[{{ $attribute->id }}]"
                                         rules="{{ $attribute->is_required }}"
-                                        :value="old($attribute->code)"
+                                        :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                     >
                                         <!-- Here! All Needed types are defined -->
@@ -780,7 +770,7 @@
 
                                     <x-shop::form.control-group.error
                                         class="flex"
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                     />
 
                                     @break
@@ -788,11 +778,11 @@
                                 @case('multiselect')
                                     <x-shop::form.control-group.control
                                         type="multiselect"
-                                        id="{{ $attribute->code }}"
+                                        id="{{ $attribute->id }}"
                                         class="cursor-pointer"
-                                        name="{{ $attribute->code }}[]"
+                                        name="{{ $attribute->id }}[]"
                                         rules="{{ $attribute->is_required }}"
-                                        :value="old($attribute->code)"
+                                        :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                     >
                                         <!-- Here! All Needed types are defined -->
@@ -807,7 +797,7 @@
 
                                     <x-shop::form.control-group.error
                                         class="flex"
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                     />
 
                                     @break
@@ -818,7 +808,7 @@
                                             <v-field
                                                 type="checkbox"
                                                 class="flex"
-                                                name="customAttributes[{{ $attribute->code }}]"
+                                                name="customAttributes[{{ $attribute->id }}]"
                                                 rules="{{ $attribute->is_required }}"
                                                 v-slot="{ field }"
                                                 value="{{ $option->value }}"
@@ -826,9 +816,9 @@
                                                 <input
                                                     type="checkbox"
                                                     class="peer sr-only"
-                                                    id="{{ $attribute->code }}-{{ $index }}"
+                                                    id="{{ $attribute->id }}-{{ $index }}"
                                                     rules="required"
-                                                    name="customAttributes[{{ $attribute->code }}]"
+                                                    name="customAttributes[{{ $attribute->id }}]"
                                                     value="{{ $option->value }}"
                                                     v-bind="field"
                                                 />
@@ -836,14 +826,14 @@
 
                                             <label
                                                 class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-base peer-checked:text-navyBlue"
-                                                for="{{ $attribute->code }}-{{ $index }}"
+                                                for="{{ $attribute->id }}-{{ $index }}"
                                             >
                                                 {{ $option->name }}
                                             </label>
                                         </label>
 
                                         <x-shop::form.control-group.error
-                                            control-name="customAttributes[{{ $attribute->code }}]"
+                                            control-name="customAttributes[{{ $attribute->id }}]"
                                             class="flex"
                                             />
                                     @endforeach
@@ -856,7 +846,7 @@
                                             <v-field
                                                 type="radio"
                                                 class="flex"
-                                                name="customAttributes[{{ $attribute->code }}]"
+                                                name="customAttributes[{{ $attribute->id }}]"
                                                 rules="{{ $attribute->is_required }}"
                                                 v-slot="{ field }"
                                                 value="{{ $option->name }}"
@@ -866,7 +856,7 @@
                                                     class="sr-only peer"
                                                     id="option_{{ $loop->index }}"
                                                     rules="{{ $attribute->is_required }}"
-                                                    name="customAttributes[{{ $attribute->code }}]"
+                                                    name="customAttributes[{{ $attribute->id }}]"
                                                     value="{{ $option->name }}"
                                                     v-bind="field"
                                                 />
@@ -882,7 +872,7 @@
                                     @endforeach
 
                                     <x-shop::form.control-group.error
-                                        control-name="customAttributes[{{ $attribute->code }}]"
+                                        control-name="customAttributes[{{ $attribute->id }}]"
                                         class="flex"
                                     />
 
