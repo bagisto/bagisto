@@ -190,7 +190,7 @@
                                 </td>
                                 
                                 <td class="px-4 py-4 text-sm text-gray-600">
-                                    {{ ucwords($item->resolution) }}
+                                    {{ ucwords(str_replace('_', ' ', $item->resolution)) }}
                                 </td>
                                 
                                 <td class="px-4 py-4 text-sm text-gray-600">

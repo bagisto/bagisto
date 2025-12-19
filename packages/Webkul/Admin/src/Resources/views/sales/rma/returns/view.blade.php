@@ -180,7 +180,7 @@
                                                     @lang('admin::app.sales.rma.all-rma.view.resolution-type')
                                                 </p>
                                                 <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
-                                                    {!! ucwords($rmaItem['resolution']) !!}
+                                                    {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
                                                 </p>
                                             </div>
 

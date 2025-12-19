@@ -90,7 +90,7 @@ class ReasonDataGrid extends DataGrid
             'sortable'   => false,
             'closure'    => function ($row) {
                 if ($row->resolution_types) {
-                    return ucwords($row->resolution_types);
+                    return ucwords(str_replace('_', ' ', $row->resolution_types));
                 }
             },
         ]);
