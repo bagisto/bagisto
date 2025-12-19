@@ -234,8 +234,9 @@
                                         :name="'isChecked[' + getProductId(product) + ']'"
                                         :id="'isChecked[' + getProductId(product) + ']'"
                                         class="mt-6"
-                                        v-model="isChecked[getProductId(product)]"
-                                    >
+                                        :checked="isChecked[getProductId(product)] === true"
+                                        @change="selectOnlyOne(getProductId(product))"
+                                    />
                                 </div>
 
                                 <div v-else>
@@ -406,7 +407,7 @@
                                             </option>
 
                                             <option
-                                                v-if="product.order_status == 'pending' || product.order_status == 'processing'"
+                                                v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
                                                 value="cancel_items"
                                             >
                                                 @lang('admin::app.configuration.index.sales.rma.cancel-items')
@@ -494,6 +495,60 @@
                                 </div>
                             </p>
                         </div>
+
+                        <template
+                            v-if="isChecked[getProductId(product)]
+                                && product.currentQuantity > '0'
+                                && resolutionType[getProductId(product)]
+                                && resolutionReason[getProductId(product)]
+                                && resolutionReason[getProductId(product)].length
+                            "
+                        >
+                            <template v-if="product.qty_ordered == product.qty_shipped">
+                                <input 
+                                    type="hidden" 
+                                    name="order_status" 
+                                    value="1" 
+                                />
+
+                                <!-- Delivery Status -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required text-sm mt-4 flex">
+                                        @lang('admin::app.configuration.index.sales.rma.package-condition')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="package_condition"
+                                        rules="required"
+                                        v-model="packageCondition"
+                                        :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
+                                    >
+                                        <option value="">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                        </option>
+
+                                        <option value="open">
+                                            @lang('admin::app.configuration.index.sales.rma.open')
+                                        </option>
+
+                                        <option value="packed">
+                                            @lang('admin::app.configuration.index.sales.rma.packed')
+                                        </option>
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error name="package_condition" class="flex"/>
+                                </x-admin::form.control-group>
+                            </template>
+
+                            <template v-else>
+                                <input
+                                    type="hidden" 
+                                    name="order_status" 
+                                    value="0" 
+                                />
+                            </template>
+                        </template>
                     </div>
                 </div>
 
@@ -501,50 +556,6 @@
                     class="gap-5"
                     v-if="isChecked.length == rma_reason_id.length && rma_reason_id.length && rma_qty.length"
                 >
-                    <template v-if="products['0'].order_status != 'pending' && products['0'].order_status != 'processing'">
-                        <input 
-                            type="hidden" 
-                            name="order_status" 
-                            value="1" 
-                        />
-
-                        <!-- Delivery Status -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required text-sm mt-4 flex">
-                                @lang('admin::app.configuration.index.sales.rma.package-condition')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="package_condition"
-                                rules="required"
-                                v-model="packageCondition"
-                                :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
-                            >
-                                <option value="">
-                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                </option>
-
-                                <option value="open">
-                                    @lang('admin::app.configuration.index.sales.rma.open')
-                                </option>
-
-                                <option value="packed">
-                                    @lang('admin::app.configuration.index.sales.rma.packed')
-                                </option>
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error name="package_condition" class="flex"/>
-                        </x-admin::form.control-group>
-                    </template>
-
-                    <input 
-                        v-else 
-                        type="hidden" 
-                        name="order_status" 
-                        value="0" 
-                    />
-
                     <!-- Additionally -->
                     @foreach ($customAttributes as $attribute)
                         <x-admin::form.control-group>
@@ -914,6 +925,22 @@
                 methods: {
                     formatPrice(price) {
                         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+                    },
+
+                    selectOnlyOne(productId) {
+                        for (const key in this.isChecked) {
+                            if (Object.prototype.hasOwnProperty.call(this.isChecked, key)) {
+                                this.isChecked[key] = false;
+                                if (key != productId) {
+                                    this.rma_qty[key] = null;
+                                    this.rma_reason_id[key] = null;
+                                    this.resolutionType[key] = null;
+                                    this.resolutionReason[key] = null;
+                                }
+                            }
+                        }
+
+                        this.isChecked[productId] = true;
                     },
 
                     getProductId(product) {

@@ -61,7 +61,7 @@
                     @if (! empty($rma->additionalFields))
                         @foreach ($rma->additionalFields as $field)
                             <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                                <span class="font-medium">{{ $field->customField->label }}</span>
+                                <span class="font-medium">{{ $field->customField->label }} :</span>
 
                                 <span class="text-gray-600">{{ $field->value }}</span>
                             </div>
