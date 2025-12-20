@@ -134,6 +134,8 @@ class Booking extends AbstractType
      * Return true if this product can be composite.
      *
      * @return bool
+     *
+     * @throws InsufficientProductInventoryException
      */
     public function isComposite()
     {
