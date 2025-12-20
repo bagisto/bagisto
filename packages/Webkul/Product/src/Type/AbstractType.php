@@ -770,6 +770,8 @@ abstract class AbstractType
      *
      * @param  array  $data
      * @return array
+     *
+     * @throws InsufficientProductInventoryException
      */
     public function prepareForCart($data)
     {
