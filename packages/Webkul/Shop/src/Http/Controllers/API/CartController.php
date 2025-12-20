@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
+use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
@@ -74,19 +75,15 @@ class CartController extends APIController
                 'data'    => new CartResource($cart),
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
             ], $response));
+        } catch (InsufficientProductInventoryException $exception) {
+            return response()->json([
+                'message'      => $exception->getMessage(),
+            ], Response::HTTP_BAD_REQUEST);
         } catch (\Exception $exception) {
-
-            $noRedirectMessages = [
-                trans('product::app.checkout.cart.inventory-warning'),
-            ];
-
-            $response = ['message' => $exception->getMessage()];
-
-            if (! in_array($response['message'], $noRedirectMessages)) {
-                $response['redirect_uri'] = route('shop.product_or_category.index', $product->url_key);
-            }
-
-            return response()->json($response, Response::HTTP_BAD_REQUEST);
+            return response()->json([
+                'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
+                'message'      => $exception->getMessage(),
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 

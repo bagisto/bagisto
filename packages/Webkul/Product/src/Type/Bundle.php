@@ -6,6 +6,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\BundleOption;
 use Webkul\Product\Helpers\Indexers\Price\Bundle as BundleIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -221,6 +222,8 @@ class Bundle extends AbstractType
      *
      * @param  array  $data
      * @return array|string
+     *
+     * @throws InsufficientProductInventoryException
      */
     public function prepareForCart($data)
     {
@@ -237,7 +240,7 @@ class Bundle extends AbstractType
         }
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('product::app.checkout.cart.inventory-warning');
+            throw new InsufficientProductInventoryException;
         }
 
         $products = parent::prepareForCart($data);
@@ -255,7 +258,7 @@ class Bundle extends AbstractType
 
             /* need to check each individual quantity as well if don't have then show error */
             if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
-                return trans('product::app.checkout.cart.inventory-warning');
+                throw new InsufficientProductInventoryException;
             }
 
             if (! $product->getTypeInstance()->isSaleable()) {
