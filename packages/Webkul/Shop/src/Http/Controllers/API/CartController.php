@@ -74,6 +74,10 @@ class CartController extends APIController
                 'data'    => new CartResource($cart),
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
             ], $response));
+        } catch (InsufficientProductInventoryException $exception) {
+            return response()->json([
+                'message'      => $exception->getMessage(),
+            ]);
         } catch (\Exception $exception) {
             return response()->json([
                 'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
