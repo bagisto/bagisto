@@ -57,7 +57,7 @@
                         <div class="grid p-4 !pt-0">
                             @foreach ($order->items as $item)
                                 @php
-                                    $canInvoiceQty = app('\Webkul\RMA\Helpers\Helper')->getRMAStatus($item->id);
+                                    $canInvoiceQty = app('\Webkul\RMA\Helpers\Helper')->canShipQtyAfterRMA($item->id);
                                 @endphp
 
                                 @if ($item->qty_to_invoice)

@@ -301,10 +301,10 @@
                         @lang('shop::app.rma.view-customer-rma-content.order-status')
                     </span>
                     
-                    <span class="px-3 py-1 text-xs rounded-full w-fit {{ $rma->order_status == '1' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                    <span class="px-3 py-1 text-xs rounded-full w-fit {{ $rma->delivery_status == '1' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
                         @if (strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
                             {{ $rma->order->status }}
-                        @elseif ($rma->order_status == '1')
+                        @elseif ($rma->delivery_status == '1')
                             @lang('shop::app.rma.customer.delivered')
                         @else
                             @lang('shop::app.rma.customer.undelivered')
@@ -465,7 +465,7 @@
                             </x-shop::form.control-group>
 
                             <div class="mb-4 max-md:mb-2">
-                                <button type="button" id="newFileInput" class="transparent-button text-sm max-sm:text-xs hover:bg-gray-200 relative">
+                                <button type="button" id="newFileInput" class="secondary-button text-sm max-sm:text-xs hover:bg-gray-200 relative">
                                     + @lang('shop::app.customers.account.rma.view.add-attachments')
 
                                     <input

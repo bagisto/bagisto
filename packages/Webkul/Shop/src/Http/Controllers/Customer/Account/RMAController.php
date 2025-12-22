@@ -126,7 +126,7 @@ class RMAController extends Controller
         $data = request()->only([
             'order_id',
             'order_item_id',
-            'order_status',
+            'delivery_status',
             'variant',
             'rma_qty',
             'resolution_type',
@@ -141,7 +141,7 @@ class RMAController extends Controller
          */
         $rma = $this->rmaRepository->create([
             'order_id'          => $data['order_id'],
-            'order_status'      => $data['order_status'] ?? null,
+            'delivery_status'   => $data['delivery_status'] ?? null,
             'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
             'information'       => $data['information'] ?? null,
             'package_condition' => $data['package_condition'] ?? null,
@@ -214,7 +214,7 @@ class RMAController extends Controller
      */
     public function getOrderItems(int $orderId)
     {
-        return $this->rmaHelper->getOrderProduct($orderId);
+        return $this->rmaHelper->getOrderItems($orderId);
     }
 
     /**

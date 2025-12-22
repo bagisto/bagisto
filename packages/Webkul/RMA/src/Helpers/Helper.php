@@ -39,7 +39,7 @@ class Helper
     /**
      * Get rma status
      */
-    public function getRMAStatus(int $orderItemId): array
+    public function canShipQtyAfterRMA(int $orderItemId): array
     {
         $orderItem = $this->orderItemRepository->find($orderItemId);
 
@@ -78,7 +78,7 @@ class Helper
     /**
      * Get refund status
      */
-    public function getRefundStatus(int $orderItemId): bool
+    public function canRefundAfterRMA(int $orderItemId): bool
     {
         $rmaItems = $this->rmaItemsRepository
             ->with('rma')
@@ -97,7 +97,7 @@ class Helper
     /**
      * Get order details
      */
-    public function getOrderProduct(int $orderId): Collection
+    public function getOrderItems(int $orderId): Collection
     {
         $allowedProductTypes = explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type'));
 

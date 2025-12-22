@@ -35,7 +35,7 @@ class RMADataGrid extends DataGrid
                 'orders.is_guest as is_guest',
                 DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
                 'rma_statuses.title',
-                'rma.order_status as rma_order_status',
+                'rma.delivery_status as rma_delivery_status',
                 'rma.created_at',
                 'orders.status as order_status',
                 'rma_statuses.color as rma_status_color',
@@ -45,7 +45,7 @@ class RMADataGrid extends DataGrid
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
         $this->addFilter('title', 'rma_statuses.title');
-        $this->addFilter('rma_order_status', 'rma.order_status');
+        $this->addFilter('rma_delivery_status', 'rma.delivery_status');
         $this->addFilter('created_at', 'rma.created_at');
         $this->addFilter('customer_name', DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name)'));
 
@@ -118,7 +118,7 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'rma_order_status',
+            'index'              => 'rma_delivery_status',
             'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.order-status'),
             'type'               => 'string',
             'filterable_type'    => 'dropdown',
@@ -140,7 +140,7 @@ class RMADataGrid extends DataGrid
                     || $row->order_status == Order::STATUS_CLOSED
                 ) {
                     return '<p class="label-'.$row->order_status.'">'.trans('admin::app.sales.rma.all-rma.index.datagrid.'.$row->order_status).'</p>';
-                } elseif ($row->rma_order_status) {
+                } elseif ($row->rma_delivery_status) {
                     return '<p class="label-active">'.trans('admin::app.sales.rma.all-rma.index.datagrid.delivered').'</p>';
                 }
 

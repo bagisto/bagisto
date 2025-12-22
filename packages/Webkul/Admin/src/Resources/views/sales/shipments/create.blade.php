@@ -128,7 +128,7 @@
                                         && $item->product
                                     )
 										@php
-											$canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRMAStatus($item->id);
+											$canShipQty = app('\Webkul\RMA\Helpers\Helper')->canShipQtyAfterRMA($item->id);
 										@endphp
 
                                         <div class="flex justify-between gap-2.5 py-4">

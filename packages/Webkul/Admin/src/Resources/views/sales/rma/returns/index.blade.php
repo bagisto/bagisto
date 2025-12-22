@@ -10,9 +10,6 @@
         </h1>
 
         <div class="flex items-center gap-x-2.5">
-            <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.rma.index') }}" />
-
             @if (bouncer()->hasPermission('sales.rma.create'))
                 <a
                     href="{{ route('admin.sales.rma.create') }}"

@@ -54,7 +54,7 @@
                 <p style="font-size: 13px; font-weight: 600; color: #718096; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px;">
                     @lang('shop::app.rma.mail.customer-rma-create.order-status')
                 </p>
-                @if ($rma->order_status == '1')
+                @if ($rma->delivery_status == '1')
                     <span style="display: inline-block; padding: 6px 12px; background-color: #d1fae5; color: #065f46; border-radius: 4px; font-size: 14px; font-weight: 600;">
                         @lang('shop::app.rma.customer.delivered')
                     </span>

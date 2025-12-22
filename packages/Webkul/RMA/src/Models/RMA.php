@@ -24,7 +24,7 @@ class RMA extends Model implements RMAContract
      */
     protected $fillable = [
         'information',
-        'order_status',
+        'delivery_status',
         'rma_status_id',
         'order_id',
         'status',

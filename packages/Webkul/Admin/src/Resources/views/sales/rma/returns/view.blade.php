@@ -51,60 +51,64 @@
                         <div class="grid">
                             <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
                                 <div class="flex gap-2.5 w-full">
-                                    <div class="grid gap-1 w-full">
-                                        <!-- Created At -->
-                                        <div class="flex justify-between gap-2.5 mt-2">
-                                            <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                                    <div class="flex w-full justify-start gap-5">
+                                        <div class="flex flex-col gap-y-1.5">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.rma.all-rma.view.request-on')
-                                            </div>
-                                            <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
-                                                {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
-                                            </div>
-                                        </div>
+                                            </p>
 
-                                        <!-- Package Condition -->
-                                        @if ($rma->package_condition)
-                                            <div class="flex justify-between gap-2.5 mt-2">
-                                                <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                                            @if ($rma->package_condition)
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.configuration.index.sales.rma.package-condition'):
-                                                </div>
-                                                <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
-                                                    {{ ucwords($rma->package_condition) }}
-                                                </div>
-                                            </div>
-                                        @endif
+                                                </p>
+                                            @endif
 
-                                        <!-- Additional Fields -->
-                                        @if (! empty($rma->additionalFields))
-                                            @foreach ($rma->additionalFields as $key => $additionalField)
-                                                <div class="flex justify-between gap-2.5 mt-2">
-                                                    <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                                            @if (! empty($rma->additionalFields))
+                                                @foreach ($rma->additionalFields as $key => $additionalField)
+                                                    <p class="text-gray-600 dark:text-gray-300">
                                                         {{ $additionalField?->customField?->label }} :
-                                                    </div>
-                                                    <div class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
-                                                        {{ $additionalField?->value }}
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                    </p>
+                                                @endforeach
+                                            @endif
 
-                                        <!-- Additional Information -->
-                                        <div class="flex justify-between gap-2.5 mt-2 ">
-                                            <div class="text-sm font-semibold text-gray-600 dark:text-gray-300 min-w-[160px]">
-                                                @lang('admin::app.sales.rma.all-rma.view.additional-information')
-                                            </div>
-                                            <p class="text-sm text-gray-600 dark:text-gray-300 text-right min-w-[180px]">
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                @lang('admin::app.sales.rma.all-rma.view.additional-information') :
+                                            </p>
+
+                                            @if ($rma->images->isNotEmpty())
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.all-rma.view.images')
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="flex w-full justify-start gap-5">
+                                        <div class="flex flex-col gap-y-1.5">
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
+                                            </p>
+
+                                            @if ($rma->package_condition)
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {{ ucwords($rma->package_condition) }}
+                                                </p>
+                                            @endif
+
+                                            @if (! empty($rma->additionalFields))
+                                                @foreach ($rma->additionalFields as $key => $additionalField)
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        {{ $additionalField?->value }}
+                                                    </p>
+                                                @endforeach
+                                            @endif
+
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 {{ $rma?->information }}
                                             </p>
-                                        </div>
 
-                                        <!--RMA Image -->
-                                        @if ($rma->images->isNotEmpty())
-                                            <div class="flex justify-between gap-2.5 mt-2">
-                                                <div class="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.all-rma.view.images')
-                                                </div>
-                                                <div class="flex justify-end flex-wrap gap-2 min-w-[180px]">
+                                            @if ($rma->images->isNotEmpty())
+                                                <div class="flex justify-start flex-wrap gap-2 min-w-[180px]">
                                                     @foreach($rma->images as $image)
                                                         <img
                                                             class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
@@ -112,8 +116,8 @@
                                                         />
                                                     @endforeach
                                                 </div>
-                                            </div>
-                                        @endif
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,14 +133,14 @@
                         </div>
 
                         <div class="grid">
-                            @foreach ($rma->items as $rmaItem)
-                                <div class="gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
+                            @foreach ($rma->items as $rmaItem) 
+                                <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
                                     <div class="flex gap-2.5">
                                         <div>
                                             @if ($rmaItem?->product?->base_image_url)
                                                 <img
                                                     class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
-                                                    src="{{$rmaItem?->product->base_image_url }}"
+                                                    src="{{ $rmaItem?->product->base_image_url }}"
                                                 />
                                             @else
                                                 <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
@@ -154,44 +158,42 @@
                                                 {{ $rmaItem->product->name }}
                                             </p>
 
-                                            <!-- Order Details -->
-                                            <div class="flex w-full gap-x-5 justify-between">
-                                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.all-rma.view.price')
-                                                </p>
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
-                                                    {{ core()->formatBasePrice($rmaItem->product->price) }}
-                                                </p>
-                                            </div>
+                                            <div class="flex w-full justify-start gap-5">
+                                                <div class="flex flex-col gap-y-1.5">
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.rma.all-rma.view.price')
+                                                    </p>
 
-                                            <!-- Quantity -->
-                                            <div class="flex w-full gap-x-5 justify-between">
-                                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.create-rma.quantity'):
-                                                </p>
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
-                                                   {!! $rmaItem->quantity !!}
-                                                </p>
-                                            </div>
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.rma.create-rma.quantity'):
+                                                    </p>
 
-                                            <!-- Resolution Type -->
-                                            <div class="flex w-full gap-x-5 justify-between">
-                                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.all-rma.view.resolution-type')
-                                                </p>
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
-                                                    {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
-                                                </p>
-                                            </div>
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.rma.all-rma.view.resolution-type')
+                                                    </p>
 
-                                            <!-- Reason -->
-                                            <div class="flex w-full gap-x-5 justify-between">
-                                                <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                                    @lang('admin::app.sales.rma.create-rma.reason'):
-                                                </p>
-                                                <p class="!leading-5 text-gray-600 dark:text-gray-300 text-right min-w-[120px]">
-                                                    {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
-                                                </p>
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.rma.create-rma.reason'):
+                                                    </p>
+                                                </div>
+
+                                                <div class="flex flex-col gap-y-1.5">
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        {{ core()->formatBasePrice($rmaItem->product->price) }}
+                                                    </p>
+                                                    
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        {!! $rmaItem->quantity !!}
+                                                    </p>
+
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
+                                                    </p>
+
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -450,7 +452,7 @@
                                         >
                                             @if ( strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.'. strtolower($rma->order->status))
-                                            @elseif ($rma->order_status == 1)
+                                            @elseif ($rma->delivery_status == 1)
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
                                             @else
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')

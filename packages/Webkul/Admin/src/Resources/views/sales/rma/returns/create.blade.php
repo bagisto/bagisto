@@ -507,7 +507,7 @@
                             <template v-if="product.qty_ordered == product.qty_shipped">
                                 <input 
                                     type="hidden" 
-                                    name="order_status" 
+                                    name="delivery_status" 
                                     value="1" 
                                 />
 
@@ -544,7 +544,7 @@
                             <template v-else>
                                 <input
                                     type="hidden" 
-                                    name="order_status" 
+                                    name="delivery_status" 
                                     value="0" 
                                 />
                             </template>
