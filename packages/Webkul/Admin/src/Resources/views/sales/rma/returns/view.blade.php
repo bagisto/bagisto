@@ -132,74 +132,77 @@
                             </p>
                         </div>
 
-                        <div class="grid">
-                            @foreach ($rma->items as $rmaItem) 
-                                <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
-                                    <div class="flex gap-2.5">
-                                        <div>
-                                            @if ($rmaItem?->product?->base_image_url)
-                                                <img
-                                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
-                                                    src="{{ $rmaItem?->product->base_image_url }}"
-                                                />
-                                            @else
-                                                <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
-                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                        @foreach ($rma->items as $rmaItem) 
+                        <div class="flex gap-2.5">
+                            <div class="p-4">
+                                @if ($rmaItem?->product?->base_image_url)
+                                    <img
+                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                        src="{{ $rmaItem?->product->base_image_url }}"
+                                    />
+                                @else
+                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
-                                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
-                                                        @lang('admin::app.sales.invoices.view.product-image')
-                                                    </p>
-                                                </div>
-                                            @endif
+                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                            @lang('admin::app.sales.invoices.view.product-image')
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <p class="py-4 break-all text-base font-semibold text-gray-800 dark:text-white">
+                                {{ $rmaItem->product->name }}
+                            </p>
+                        </div>
+                            
+
+                            <div class="grid">
+                                <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
+                                    <div class="flex gap-2.5 w-full">
+                                        <div class="flex w-full justify-start gap-5">
+                                            <div class="flex flex-col gap-y-1.5">
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.all-rma.view.price')
+                                                </p>
+                                                
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.create-rma.quantity'):
+                                                </p>
+
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.all-rma.view.resolution-type')
+                                                </p>
+
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.create-rma.reason'):
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div class="grid gap-1 w-full">
-                                            <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
-                                                {{ $rmaItem->product->name }}
-                                            </p>
+                                        <div class="flex w-full justify-start gap-5">
+                                            <div class="flex flex-col gap-y-1.5">
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {{ core()->formatBasePrice($rmaItem->product->price) }}
+                                                </p>
 
-                                            <div class="flex w-full justify-start gap-5">
-                                                <div class="flex flex-col gap-y-1.5">
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.rma.all-rma.view.price')
-                                                    </p>
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {!! $rmaItem->quantity !!}
+                                                </p>
 
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.rma.create-rma.quantity'):
-                                                    </p>
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
+                                                </p>
 
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.rma.all-rma.view.resolution-type')
-                                                    </p>
-
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.rma.create-rma.reason'):
-                                                    </p>
-                                                </div>
-
-                                                <div class="flex flex-col gap-y-1.5">
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        {{ core()->formatBasePrice($rmaItem->product->price) }}
-                                                    </p>
-                                                    
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        {!! $rmaItem->quantity !!}
-                                                    </p>
-
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
-                                                    </p>
-
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
-                                                    </p>
-                                                </div>
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
 
                     <!-- Conversation -->
