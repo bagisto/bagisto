@@ -15,7 +15,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
+    <div class="flex-auto mx-4 max-md:mx-6 max-sm:mx-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <!-- Back Button -->
@@ -23,7 +23,7 @@
                     class="grid md:hidden"
                     href="{{ route('shop.customers.account.index') }}"
                 >
-                    <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+                    <span class="text-2xl icon-arrow-left rtl:icon-arrow-right"></span>
                 </a>
 
                 <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
@@ -44,7 +44,7 @@
         </div>
 
         <!-- Profile Information -->
-        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-sm:gap-y-4">
+        <div class="grid grid-cols-1 mt-8 gap-y-6 max-md:mt-5 max-sm:gap-y-4">
             {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
             <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
@@ -52,8 +52,8 @@
                     @lang('shop::app.customers.account.profile.index.first-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500">
-                    {{ $customer->first_name }}
+                <p class="text-sm font-medium text-zinc-500"
+                    v-text="'{{ $customer->first_name }}'">
                 </p>
             </div>
 
@@ -66,8 +66,8 @@
                     @lang('shop::app.customers.account.profile.index.last-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500">
-                    {{ $customer->last_name }}
+                <p class="text-sm font-medium text-zinc-500"
+                    v-text="'{{ $customer->last_name }}'">
                 </p>
             </div>
 
@@ -108,7 +108,7 @@
                     @lang('shop::app.customers.account.profile.index.email')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500 no-underline">
+                <p class="text-sm font-medium no-underline text-zinc-500">
                     {{ $customer->email }}
                 </p>
             </div>
@@ -121,7 +121,7 @@
             <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-lg">
+                        <div class="py-3 primary-button rounded-2xl px-11 max-md:hidden max-md:rounded-lg">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
 
@@ -157,7 +157,7 @@
                     <x-slot:footer>
                         <button
                             type="submit"
-                            class="primary-button flex rounded-2xl px-11 py-3 max-md:rounded-lg max-md:px-6 max-md:text-sm"
+                            class="flex py-3 primary-button rounded-2xl px-11 max-md:rounded-lg max-md:px-6 max-md:text-sm"
                         >
                             @lang('shop::app.customers.account.profile.index.delete')
                         </button>
