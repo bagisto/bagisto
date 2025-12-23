@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a security issue in the customer order reorder functionality.
 
+- Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
+
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.
