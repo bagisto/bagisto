@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- Fixed a security issue in the customer order reorder functionality.
 
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
