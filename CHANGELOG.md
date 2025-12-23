@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
 
+- Fixed a Server-Side Template Injection (SSTI) vulnerability that allowed low-privileged users to inject template expressions during checkout or address creation, which were subsequently rendered in the admin order view.
+
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.
