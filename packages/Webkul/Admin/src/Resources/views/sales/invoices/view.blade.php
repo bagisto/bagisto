@@ -35,7 +35,7 @@
     </div>
 
     <!-- Filter row -->
-    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+    <div class="flex items-center justify-between gap-4 mt-7 max-md:flex-wrap">
         <div class="flex flex-wrap items-center gap-x-1 gap-y-2">
             {!! view_render_event('bagisto.admin.sales.invoice.page_action.before', ['order' => $order]) !!}
 
@@ -43,7 +43,7 @@
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
                 class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
             >
-                <span class="icon-printer text-2xl"></span>
+                <span class="text-2xl icon-printer"></span>
 
                 @lang('admin::app.sales.invoices.view.print')
             </a>
@@ -55,7 +55,7 @@
                     class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
                     @click="$refs.groupCreateModal.open()"
                 >
-                    <span class="icon-mail text-2xl"></span>
+                    <span class="text-2xl icon-mail"></span>
 
                     @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                 </button>
@@ -111,10 +111,10 @@
     <!-- body content -->
     <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
         <!-- Left sub-component -->
-        <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+        <div class="flex flex-col flex-1 gap-2 max-xl:flex-auto">
             <!-- Invoice Item Section -->
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                <p class="mb-4 p-4 text-base font-semibold text-gray-800 dark:text-white">
+            <div class="bg-white rounded box-shadow dark:bg-gray-900">
+                <p class="p-4 mb-4 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -141,7 +141,7 @@
 
                                 <div class="grid place-content-start gap-1.5">
                                     <!-- Item Name -->
-                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
+                                    <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
                                         {{ $item->name }}
                                     </p>
 
@@ -190,9 +190,9 @@
                                 </div>
                             </div>
 
-                            <div class="grid place-content-start gap-1">
+                            <div class="grid gap-1 place-content-start">
                                 <!-- Item Grand Total -->
-                                <p class="flex items-center justify-end gap-x-1 text-base font-semibold text-gray-800 dark:text-white">
+                                <p class="flex items-center justify-end text-base font-semibold text-gray-800 gap-x-1 dark:text-white">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                 </p>
 
@@ -370,8 +370,10 @@
 
                 <x-slot:content>
                     <div class="flex flex-col {{ $order->billing_address ? 'pb-4' : ''}}">
-                        <p class="font-semibold text-gray-800 dark:text-white">
-                            {{ $invoice->order->customer_full_name }}
+                        <p 
+                            class="font-semibold text-gray-800 dark:text-white"
+                            v-text="'{{ $invoice->order->customer_full_name }}'"
+                        >
                         </p>
 
                         {!! view_render_event('bagisto.admin.sales.invoice.customer_name.after', ['order' => $order]) !!}
@@ -428,7 +430,7 @@
                 </x-slot>
 
                 <x-slot:content>
-                    <div class="flex w-full justify-start gap-5">
+                    <div class="flex justify-start w-full gap-5">
                         <div class="flex flex-col gap-y-1.5">
                             @foreach (['order-id', 'order-date', 'order-status', 'invoice-status', 'channel'] as $item)
                                 <p class="text-gray-600 dark:text-gray-300">
