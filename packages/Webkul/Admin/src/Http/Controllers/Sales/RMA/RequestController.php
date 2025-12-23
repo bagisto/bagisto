@@ -106,7 +106,8 @@ class RequestController extends Controller
 
             try {
                 Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
@@ -332,7 +333,7 @@ class RequestController extends Controller
             ->toArray();
 
         if (
-            $hasCancel 
+            $hasCancel
             && ($rma->items[0]->orderItem->qty_invoiced > $rma->items[0]->orderItem->qty_refunded)
         ) {
             $rmaAdditionalStatus = $this->rmaStatusRepository
@@ -474,7 +475,7 @@ class RequestController extends Controller
             $orderItem->save();
 
             if (
-                $orderItem->parent 
+                $orderItem->parent
                 && $orderItem->parent->qty_ordered
             ) {
                 $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
@@ -599,7 +600,8 @@ class RequestController extends Controller
 
         try {
             Mail::queue(new CustomerRMAStatusNotification($rma));
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
