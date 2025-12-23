@@ -77,7 +77,7 @@ class CartController extends APIController
             ], $response));
         } catch (InsufficientProductInventoryException $exception) {
             return response()->json([
-                'message'      => $exception->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         } catch (\Exception $exception) {
             return response()->json([
