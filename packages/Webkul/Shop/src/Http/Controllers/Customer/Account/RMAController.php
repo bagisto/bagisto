@@ -195,7 +195,8 @@ class RMAController extends Controller
         if ($rma->items) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.create-success'),

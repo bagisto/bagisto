@@ -89,7 +89,6 @@ class RequestController extends Controller
         $rma = $this->rmaRepository->findOrFail($id);
         $order = $rma->order;
 
-
         $totalCount = (int) $this->rmaItemRepository
             ->where('rma_id', $id)
             ->sum('quantity');
@@ -137,7 +136,8 @@ class RequestController extends Controller
 
             try {
                 Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
@@ -411,7 +411,6 @@ class RequestController extends Controller
      * Handle received package status update.
      *
      * @param  \Webkul\RMA\Contracts\RMA  $rma
-     * @return \Webkul\Sales\Contracts\Refund
      */
     private function handleReceivedPackage($rma, $data): RedirectResponse
     {
@@ -470,7 +469,7 @@ class RequestController extends Controller
 
         if ($refundAmount > $maxRefundAmount) {
             session()->flash('error', trans('admin::app.sales.refunds.create.refund-limit-error', [
-                'amount' => core()->formatBasePrice($maxRefundAmount)
+                'amount' => core()->formatBasePrice($maxRefundAmount),
             ]));
 
             return redirect()->back();

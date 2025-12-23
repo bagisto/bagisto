@@ -14,7 +14,7 @@ use Webkul\Sales\Repositories\OrderItemRepository;
 class Helper
 {
     /**
-     * rma refund-related statuses
+     * Statuses that exclude refund after RMA.
      */
     public const REFUND_EXCLUDED_STATUSES = [
         DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
@@ -37,9 +37,9 @@ class Helper
     ) {}
 
     /**
-     * Get rma status
+     * Get remaining quantity after RMA.
      */
-    public function canShipQtyAfterRMA(int $orderItemId): array
+    public function getRemainingQtyAfterRMA(int $orderItemId): array
     {
         $orderItem = $this->orderItemRepository->find($orderItemId);
 
@@ -76,7 +76,7 @@ class Helper
     }
 
     /**
-     * Get refund status
+     * Check if can refund after RMA.
      */
     public function canRefundAfterRMA(int $orderItemId): bool
     {
@@ -95,7 +95,7 @@ class Helper
     }
 
     /**
-     * Get order details
+     * Get order items eligible for RMA.
      */
     public function getOrderItems(int $orderId): Collection
     {
@@ -208,7 +208,7 @@ class Helper
     }
 
     /**
-     * Calculate the return window for an order item
+     * Calculate return window for an order item.
      */
     private function calculateReturnWindow($orderItem, int $defaultReturnWindow): int
     {
