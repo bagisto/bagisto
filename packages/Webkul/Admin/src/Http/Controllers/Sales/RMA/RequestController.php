@@ -339,9 +339,9 @@ class RequestController extends Controller
     public function updateStatus(int $id): RedirectResponse
     {
         $data = request()->input();
-        
+
         $rma = $this->rmaRepository->findOrFail($id);
-        
+
         $totalCount = $this->rmaItemRepository
             ->where('rma_id', $id)
             ->sum('quantity');
@@ -354,8 +354,8 @@ class RequestController extends Controller
 
         return match ($statusId) {
             DefaultRMAStatusEnum::RECEIVED_PACKAGE->value => $this->handleReceivedPackage($rma, $data),
-            DefaultRMAStatusEnum::ITEM_CANCELED->value => $this->handleItemCancellation($rma, $data),
-            default => $this->finalizeRmaUpdate($rma, $data),
+            DefaultRMAStatusEnum::ITEM_CANCELED->value    => $this->handleItemCancellation($rma, $data),
+            default                                       => $this->finalizeRmaUpdate($rma, $data),
         };
     }
 
@@ -368,17 +368,16 @@ class RequestController extends Controller
             DB::beginTransaction();
 
             $refundData = $this->prepareRefundDataFromRmaItems($rma);
-            
+
             if (! $this->processOrderRefund($rma->order, $refundData)) {
                 throw new \Exception(trans('admin::app.sales.rma.all-rma.view.refund-failed'));
             }
 
             $result = $this->finalizeRmaUpdate($rma, $data);
-            
+
             DB::commit();
 
             return $result;
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -399,11 +398,10 @@ class RequestController extends Controller
             $this->cancelRmaItems($rma);
 
             $result = $this->finalizeRmaUpdate($rma, $data);
-            
+
             DB::commit();
 
             return $result;
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -432,7 +430,7 @@ class RequestController extends Controller
             if ($orderItem->qty_invoiced == $rmaItem->quantity) {
                 $this->refundInvoicedItem($rmaItem, $orderItem, $rma->order);
             } else {
-                $this->cancelUnvoicedItem($rmaItem, $orderItem);
+                $this->cancelNonInvoicedItem($rmaItem, $orderItem);
             }
         }
 
@@ -475,9 +473,9 @@ class RequestController extends Controller
     }
 
     /**
-     * Cancel an Unvoiced item and restore inventory.
+     * Cancel a Non-Invoiced item and restore inventory.
      */
-    private function cancelUnvoicedItem($rmaItem, $orderItem): void
+    private function cancelNonInvoicedItem($rmaItem, $orderItem): void
     {
         $this->orderItemRepository->returnQtyToProductInventory($orderItem);
 
@@ -508,7 +506,7 @@ class RequestController extends Controller
 
         try {
             $totals = $this->refundRepository->getOrderItemsRefundSummary(
-                $refundData['refund'], 
+                $refundData['refund'],
                 $order->id
             );
 
@@ -519,7 +517,7 @@ class RequestController extends Controller
             }
 
             $validation = $this->validateRefundAmount($order, $totals, $refundData['refund']);
-            
+
             if (! $validation['valid']) {
                 session()->flash('error', $validation['message']);
 
@@ -551,7 +549,7 @@ class RequestController extends Controller
         if (! $refundAmount) {
             return [
                 'valid'   => false,
-                'message' => trans('admin::app.sales.refunds.create.invalid-refund-amount-error')
+                'message' => trans('admin::app.sales.refunds.create.invalid-refund-amount-error'),
             ];
         }
 
@@ -560,7 +558,7 @@ class RequestController extends Controller
                 'valid'   => false,
                 'message' => trans('admin::app.sales.refunds.create.refund-limit-error', [
                     'amount' => core()->formatBasePrice($maxRefundAmount),
-                ])
+                ]),
             ];
         }
 
@@ -576,7 +574,7 @@ class RequestController extends Controller
             $orderItem = $rmaItem->orderItem;
 
             return [
-                $rmaItem->order_item_id => ($orderItem->qty_invoiced - $orderItem->qty_refunded)
+                $rmaItem->order_item_id => ($orderItem->qty_invoiced - $orderItem->qty_refunded),
             ];
         });
 
@@ -597,20 +595,6 @@ class RequestController extends Controller
     {
         $rma->update($data);
 
-        $this->createRmaStatusMessage($rma);
-
-        $this->sendStatusNotification($rma);
-
-        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
-
-        return redirect()->back();
-    }
-
-    /**
-     * Create status change message.
-     */
-    private function createRmaStatusMessage($rma): void
-    {
         $this->rmaMessageRepository->create([
             'message' => trans('admin::app.sales.rma.all-rma.view.status-message', [
                 'id'     => $rma->id,
@@ -619,15 +603,14 @@ class RequestController extends Controller
             'rma_id'   => $rma->id,
             'is_admin' => 1,
         ]);
-    }
 
-    /**
-     * Send status notification email to customer.
-     */
-    private function sendStatusNotification($rma): void
-    {
         try {
             Mail::queue(new CustomerRMAStatusNotification($rma));
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
+
+        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
+
+        return redirect()->back();
     }
 }

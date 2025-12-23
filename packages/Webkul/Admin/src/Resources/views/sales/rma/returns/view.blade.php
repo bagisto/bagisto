@@ -446,15 +446,13 @@
                                     <!-- RMA Order Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span
-                                            @if (strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
-                                                class="label-{{ strtolower($rma->order->status) }} py-1"
+                                            @if ($rma->delivery_status == 1)
+                                                class="label-completed py-1"
                                             @else
                                                 class="label-info py-1"
                                             @endif
                                         >
-                                            @if ( strtolower($rma->order->status) == 'canceled' || strtolower($rma->order->status) == 'closed')
-                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.'. strtolower($rma->order->status))
-                                            @elseif ($rma->delivery_status == 1)
+                                            @if ($rma->delivery_status == 1)
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
                                             @else
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')

@@ -135,12 +135,7 @@ class RMADataGrid extends DataGrid
                 ],
             ],
             'closure'            => function ($row) {
-                if (
-                    $row->order_status == Order::STATUS_CANCELED
-                    || $row->order_status == Order::STATUS_CLOSED
-                ) {
-                    return '<p class="label-'.$row->order_status.'">'.trans('admin::app.sales.rma.all-rma.index.datagrid.'.$row->order_status).'</p>';
-                } elseif ($row->rma_delivery_status) {
+                if ($row->rma_delivery_status) {
                     return '<p class="label-active">'.trans('admin::app.sales.rma.all-rma.index.datagrid.delivered').'</p>';
                 }
 
