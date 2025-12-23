@@ -52,8 +52,10 @@
                     @lang('shop::app.customers.account.profile.index.first-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500"
-                    v-text="'{{ $customer->first_name }}'">
+                <p 
+                    class="text-sm font-medium text-zinc-500"
+                    v-text="'{{ $customer->first_name }}'"
+                >
                 </p>
             </div>
 
@@ -66,8 +68,10 @@
                     @lang('shop::app.customers.account.profile.index.last-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500"
-                    v-text="'{{ $customer->last_name }}'">
+                <p 
+                    class="text-sm font-medium text-zinc-500"
+                    v-text="'{{ $customer->last_name }}'"
+                >
                 </p>
             </div>
 
