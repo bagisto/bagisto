@@ -62,7 +62,12 @@ class OrderController extends Controller
      */
     public function reorder(int $id)
     {
-        $order = $this->orderRepository->findOrFail($id);
+        $order = $this->orderRepository->findOneWhere([
+            'customer_id' => auth()->guard('customer')->id(),
+            'id'          => $id,
+        ]);
+
+        abort_if(! $order, 404);
 
         foreach ($order->items as $item) {
             try {
