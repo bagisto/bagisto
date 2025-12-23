@@ -106,8 +106,7 @@ class RequestController extends Controller
 
             try {
                 Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {
-            }
+            } catch (\Exception $e) {}
         }
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
@@ -327,10 +326,26 @@ class RequestController extends Controller
             ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
             : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
 
-        return $this->rmaStatusRepository
+        $rmaStatus = $this->rmaStatusRepository
             ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
             ->pluck('title', 'id')
             ->toArray();
+
+        if (
+            $hasCancel 
+            && ($rma->items[0]->orderItem->qty_invoiced > $rma->items[0]->orderItem->qty_refunded)
+        ) {
+            $rmaAdditionalStatus = $this->rmaStatusRepository
+                ->where('id', DefaultRMAStatusEnum::RECEIVED_PACKAGE->value)
+                ->pluck('title', 'id')
+                ->toArray();
+
+            $rmaStatus += $rmaAdditionalStatus;
+
+            unset($rmaStatus[DefaultRMAStatusEnum::ITEM_CANCELED->value]);
+        }
+
+        return $rmaStatus;
     }
 
     /**
@@ -427,11 +442,7 @@ class RequestController extends Controller
                 continue;
             }
 
-            if ($orderItem->qty_invoiced == $rmaItem->quantity) {
-                $this->refundInvoicedItem($rmaItem, $orderItem, $rma->order);
-            } else {
-                $this->cancelNonInvoicedItem($rmaItem, $orderItem);
-            }
+            $this->cancelNonInvoicedItem($rmaItem, $orderItem);
         }
 
         $this->orderRepository->updateOrderStatus($rma->order);
@@ -452,27 +463,6 @@ class RequestController extends Controller
     }
 
     /**
-     * Refund an invoiced item.
-     */
-    private function refundInvoicedItem($rmaItem, $orderItem, $order): void
-    {
-        $refundableQty = $orderItem->qty_invoiced - $orderItem->qty_refunded;
-
-        $refundData = [
-            'refund' => [
-                'shipping'          => request('shipping', 0),
-                'adjustment_refund' => 0,
-                'adjustment_fee'    => 0,
-                'items'             => [
-                    $rmaItem->order_item_id => $refundableQty,
-                ],
-            ],
-        ];
-
-        $this->processOrderRefund($order, $refundData);
-    }
-
-    /**
      * Cancel a Non-Invoiced item and restore inventory.
      */
     private function cancelNonInvoicedItem($rmaItem, $orderItem): void
@@ -483,7 +473,10 @@ class RequestController extends Controller
             $orderItem->qty_canceled += $rmaItem->quantity;
             $orderItem->save();
 
-            if ($orderItem->parent && $orderItem->parent->qty_ordered) {
+            if (
+                $orderItem->parent 
+                && $orderItem->parent->qty_ordered
+            ) {
                 $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
                 $orderItem->parent->save();
             }
@@ -606,8 +599,7 @@ class RequestController extends Controller
 
         try {
             Mail::queue(new CustomerRMAStatusNotification($rma));
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 

@@ -517,9 +517,17 @@
                                                         <x-admin::form.control-group.error control-name="rma_status_id" />
                                                     </x-admin::form.control-group>
 
+                                                    @php
+                                                        $rmaItemOrderId = $rma->items->pluck('order_item_id')->toArray();
+
+                                                        $rmaItemOrderId = $rmaItemOrderId[0];
+
+                                                        $orderItem = $rma->order->items->firstWhere('id', $rmaItemOrderId);
+                                                    @endphp
+
                                                     <!-- Refund Shipping -->
                                                     <x-admin::form.control-group
-                                                        v-if="rmaStatus == 5 || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 8)"
+                                                        v-if="rmaStatus == 5 || (Number({{ $orderItem->qty_invoiced - $orderItem->qty_refunded }}) > 0 && rmaStatus == 8)"
                                                         class="mb-2 w-full"
                                                     >
                                                         <x-admin::form.control-group.label class="required">
