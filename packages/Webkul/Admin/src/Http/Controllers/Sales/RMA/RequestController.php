@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -68,7 +69,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Show the view for the specified resource.
+     * Display the specified resource.
      */
     public function view(int $rmaId): View|RedirectResponse
     {
@@ -80,38 +81,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Save rma status by admin.
-     */
-    public function updateStatus(int $id): RedirectResponse
-    {
-        $data = request()->input();
-
-        $rma = $this->rmaRepository->findOrFail($id);
-        $order = $rma->order;
-
-        $totalCount = (int) $this->rmaItemRepository
-            ->where('rma_id', $id)
-            ->sum('quantity');
-
-        if (empty($totalCount)) {
-            return $this->updateRmaAndRedirect($rma, $id, $data);
-        }
-
-        $statusId = (int) $data['rma_status_id'];
-
-        if ($statusId === DefaultRMAStatusEnum::ITEM_CANCELED->value) {
-            $this->handleItemCancellation($rma, $order);
-        }
-
-        if ($statusId === DefaultRMAStatusEnum::RECEIVED_PACKAGE->value) {
-            return $this->handleReceivedPackage($rma, $data);
-        }
-
-        return $this->updateRmaAndRedirect($rma, $id, $data);
-    }
-
-    /**
-     * Save rma status by customer.
+     * Re-open RMA request.
      */
     public function reOpenRequest(int $id): RedirectResponse
     {
@@ -146,7 +116,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Get all messages.
+     * Get messages for RMA conversation.
      */
     public function getMessages(): JsonResponse
     {
@@ -160,7 +130,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Send message from admin to customer.
+     * Send message in RMA conversation.
      */
     public function sendMessage(): JsonResponse
     {
@@ -317,7 +287,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Get order details.
+     * Get order items for RMA creation.
      */
     public function getOrderItems(int $orderId): Collection
     {
@@ -364,17 +334,93 @@ class RequestController extends Controller
     }
 
     /**
-     * Handle item cancellation status update.
+     * Update RMA status by admin.
      */
-    private function handleItemCancellation($rma, $order): void
+    public function updateStatus(int $id): RedirectResponse
+    {
+        $data = request()->input();
+        
+        $rma = $this->rmaRepository->findOrFail($id);
+        
+        $totalCount = $this->rmaItemRepository
+            ->where('rma_id', $id)
+            ->sum('quantity');
+
+        if (empty($totalCount)) {
+            return $this->finalizeRmaUpdate($rma, $data);
+        }
+
+        $statusId = (int) $data['rma_status_id'];
+
+        return match ($statusId) {
+            DefaultRMAStatusEnum::RECEIVED_PACKAGE->value => $this->handleReceivedPackage($rma, $data),
+            DefaultRMAStatusEnum::ITEM_CANCELED->value => $this->handleItemCancellation($rma, $data),
+            default => $this->finalizeRmaUpdate($rma, $data),
+        };
+    }
+
+    /**
+     * Handle received package status.
+     */
+    private function handleReceivedPackage($rma, array $data): RedirectResponse
+    {
+        try {
+            DB::beginTransaction();
+
+            $refundData = $this->prepareRefundDataFromRmaItems($rma);
+            
+            if (! $this->processOrderRefund($rma->order, $refundData)) {
+                throw new \Exception(trans('admin::app.sales.rma.all-rma.view.refund-failed'));
+            }
+
+            $result = $this->finalizeRmaUpdate($rma, $data);
+            
+            DB::commit();
+
+            return $result;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            session()->flash('error', $e->getMessage());
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Handle item cancellation status.
+     */
+    private function handleItemCancellation($rma, array $data): RedirectResponse
+    {
+        try {
+            DB::beginTransaction();
+
+            $this->cancelRmaItems($rma);
+
+            $result = $this->finalizeRmaUpdate($rma, $data);
+            
+            DB::commit();
+
+            return $result;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            session()->flash('error', $e->getMessage());
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Cancel RMA items and update order.
+     */
+    private function cancelRmaItems($rma): void
     {
         $orderItemIds = $rma->items->pluck('order_item_id')->toArray();
 
-        $orderItems = $this->orderItemRepository
-            ->whereIn('id', $orderItemIds)
-            ->orWhereIn('parent_id', $orderItemIds)
-            ->get()
-            ->keyBy('id');
+        $orderItems = $this->fetchOrderItemsWithParents($orderItemIds);
 
         foreach ($rma->items as $rmaItem) {
             $orderItem = $orderItems->get($rmaItem->order_item_id);
@@ -383,138 +429,205 @@ class RequestController extends Controller
                 continue;
             }
 
-            $this->orderItemRepository->returnQtyToProductInventory($orderItem);
-
-            if ($orderItem->qty_ordered) {
-                $orderItem->qty_canceled += $rmaItem->quantity;
-                $orderItem->save();
-
-                if (
-                    $orderItem->parent
-                    && $orderItem->parent->qty_ordered
-                ) {
-                    $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
-                    $orderItem->parent->save();
-                }
+            if ($orderItem->qty_invoiced == $rmaItem->quantity) {
+                $this->refundInvoicedItem($rmaItem, $orderItem, $rma->order);
             } else {
-                $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
-                $orderItem->parent->save();
+                $this->cancelUnvoicedItem($rmaItem, $orderItem);
             }
         }
 
-        $this->orderRepository->updateOrderStatus($order);
+        $this->orderRepository->updateOrderStatus($rma->order);
 
-        Event::dispatch('sales.order.cancel.after', $order);
+        Event::dispatch('sales.order.cancel.after', $rma->order);
     }
 
     /**
-     * Handle received package status update.
-     *
-     * @param  \Webkul\RMA\Contracts\RMA  $rma
+     * Fetch order items with their parents.
      */
-    private function handleReceivedPackage($rma, $data): RedirectResponse
+    private function fetchOrderItemsWithParents(array $orderItemIds)
     {
-        $requestData = request()->all();
+        return $this->orderItemRepository
+            ->whereIn('id', $orderItemIds)
+            ->orWhereIn('parent_id', $orderItemIds)
+            ->get()
+            ->keyBy('id');
+    }
 
-        $orderId = $rma->order_id;
+    /**
+     * Refund an invoiced item.
+     */
+    private function refundInvoicedItem($rmaItem, $orderItem, $order): void
+    {
+        $refundableQty = $orderItem->qty_invoiced - $orderItem->qty_refunded;
 
-        $items = collect($rma->items)
-            ->mapWithKeys(function ($rmaItem) {
-                $orderItem = $rmaItem->orderItem;
-
-                return [$rmaItem->order_item_id => ($orderItem->qty_invoiced - $orderItem->qty_refunded)];
-            });
-
-        $data = [
+        $refundData = [
             'refund' => [
-                'shipping'          => $requestData['shipping'] ?? 0,
+                'shipping'          => request('shipping', 0),
                 'adjustment_refund' => 0,
                 'adjustment_fee'    => 0,
+                'items'             => [
+                    $rmaItem->order_item_id => $refundableQty,
+                ],
             ],
         ];
 
-        foreach ($items as $key => $value) {
-            $data['refund']['items'][$key] = $value;
-        }
-
-        $order = $this->orderRepository->findOrFail($orderId);
-
-        if (! $order->canRefund()) {
-            session()->flash('error', trans('admin::app.sales.refunds.create.creation-error'));
-
-            return redirect()->back();
-        }
-
-        try {
-            $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund'], $orderId);
-
-            if (! $totals) {
-                throw new InvalidRefundQuantityException(trans('admin::app.sales.refunds.create.invalid-qty'));
-            }
-        } catch (InvalidRefundQuantityException $invalidRefundQuantityException) {
-            session()->flash('error', $invalidRefundQuantityException->getMessage());
-
-            return redirect()->back();
-        }
-
-        $maxRefundAmount = $totals['grand_total']['price'] - $order->refunds()->sum('base_adjustment_refund');
-
-        $refundAmount = $totals['grand_total']['price'] - $totals['shipping']['price'] + $data['refund']['shipping'] + $data['refund']['adjustment_refund'] - $data['refund']['adjustment_fee'];
-
-        if (! $refundAmount) {
-            session()->flash('error', trans('admin::app.sales.refunds.create.invalid-refund-amount-error'));
-
-            return redirect()->back();
-        }
-
-        if ($refundAmount > $maxRefundAmount) {
-            session()->flash('error', trans('admin::app.sales.refunds.create.refund-limit-error', [
-                'amount' => core()->formatBasePrice($maxRefundAmount),
-            ]));
-
-            return redirect()->back();
-        }
-
-        $refund = $this->refundRepository->create(array_merge($data, ['order_id' => $orderId]));
-
-        if (! $refund) {
-            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.refund-failed'));
-
-            return redirect()->back();
-        }
-
-        $data['rma_status_id'] = DefaultRMAStatusEnum::RECEIVED_PACKAGE->value;
-
-        return $this->updateRmaAndRedirect($rma, $rma->id, $data);
+        $this->processOrderRefund($order, $refundData);
     }
 
     /**
-     * Update RMA and redirect with status message.
+     * Cancel an Unvoiced item and restore inventory.
      */
-    private function updateRmaAndRedirect($rma, int $id, array $data): RedirectResponse
+    private function cancelUnvoicedItem($rmaItem, $orderItem): void
     {
-        $updateStatus = $rma->update($data);
+        $this->orderItemRepository->returnQtyToProductInventory($orderItem);
 
-        $this->rmaMessageRepository->create([
-            'message'  => trans('admin::app.sales.rma.all-rma.view.status-message', [
-                'id'     => $id,
-                'status' => $rma->fresh()->status->title,
-            ]),
-            'rma_id'   => $id,
-            'is_admin' => 1,
-        ]);
+        if ($orderItem->qty_ordered) {
+            $orderItem->qty_canceled += $rmaItem->quantity;
+            $orderItem->save();
 
-        if ($updateStatus) {
-            try {
-                Mail::queue(new CustomerRMAStatusNotification($rma));
-            } catch (\Exception $e) {
+            if ($orderItem->parent && $orderItem->parent->qty_ordered) {
+                $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
+                $orderItem->parent->save();
             }
-
-            session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
         } else {
-            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.failed'));
+            $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
+            $orderItem->parent->save();
+        }
+    }
+
+    /**
+     * Process refund for an order.
+     */
+    private function processOrderRefund($order, array $refundData): bool
+    {
+        if (! $order->canRefund()) {
+            session()->flash('error', trans('admin::app.sales.refunds.create.creation-error'));
+
+            return false;
         }
 
+        try {
+            $totals = $this->refundRepository->getOrderItemsRefundSummary(
+                $refundData['refund'], 
+                $order->id
+            );
+
+            if (! $totals) {
+                throw new InvalidRefundQuantityException(
+                    trans('admin::app.sales.refunds.create.invalid-qty')
+                );
+            }
+
+            $validation = $this->validateRefundAmount($order, $totals, $refundData['refund']);
+            
+            if (! $validation['valid']) {
+                session()->flash('error', $validation['message']);
+
+                return false;
+            }
+
+            $refund = $this->refundRepository->create(
+                array_merge($refundData, ['order_id' => $order->id])
+            );
+
+            return (bool) $refund;
+
+        } catch (InvalidRefundQuantityException $e) {
+            session()->flash('error', $e->getMessage());
+
+            return false;
+        }
+    }
+
+    /**
+     * Validate refund amount against order limits.
+     */
+    private function validateRefundAmount($order, array $totals, array $refundData): array
+    {
+        $maxRefundAmount = $totals['grand_total']['price'] - $order->refunds()->sum('base_adjustment_refund');
+
+        $refundAmount = $totals['grand_total']['price'] - $totals['shipping']['price'] + $refundData['shipping'] + $refundData['adjustment_refund'] - $refundData['adjustment_fee'];
+
+        if (! $refundAmount) {
+            return [
+                'valid'   => false,
+                'message' => trans('admin::app.sales.refunds.create.invalid-refund-amount-error')
+            ];
+        }
+
+        if ($refundAmount > $maxRefundAmount) {
+            return [
+                'valid'   => false,
+                'message' => trans('admin::app.sales.refunds.create.refund-limit-error', [
+                    'amount' => core()->formatBasePrice($maxRefundAmount),
+                ])
+            ];
+        }
+
+        return ['valid' => true];
+    }
+
+    /**
+     * Prepare refund data from RMA items.
+     */
+    private function prepareRefundDataFromRmaItems($rma): array
+    {
+        $items = $rma->items->mapWithKeys(function ($rmaItem) {
+            $orderItem = $rmaItem->orderItem;
+
+            return [
+                $rmaItem->order_item_id => ($orderItem->qty_invoiced - $orderItem->qty_refunded)
+            ];
+        });
+
+        return [
+            'refund' => [
+                'shipping'          => request('shipping', 0),
+                'adjustment_refund' => 0,
+                'adjustment_fee'    => 0,
+                'items'             => $items->toArray(),
+            ],
+        ];
+    }
+
+    /**
+     * Finalize RMA update with message and notification.
+     */
+    private function finalizeRmaUpdate($rma, array $data): RedirectResponse
+    {
+        $rma->update($data);
+
+        $this->createRmaStatusMessage($rma);
+
+        $this->sendStatusNotification($rma);
+
+        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
+
         return redirect()->back();
+    }
+
+    /**
+     * Create status change message.
+     */
+    private function createRmaStatusMessage($rma): void
+    {
+        $this->rmaMessageRepository->create([
+            'message' => trans('admin::app.sales.rma.all-rma.view.status-message', [
+                'id'     => $rma->id,
+                'status' => $rma->fresh()->status->title,
+            ]),
+            'rma_id'   => $rma->id,
+            'is_admin' => 1,
+        ]);
+    }
+
+    /**
+     * Send status notification email to customer.
+     */
+    private function sendStatusNotification($rma): void
+    {
+        try {
+            Mail::queue(new CustomerRMAStatusNotification($rma));
+        } catch (\Exception $e) {}
     }
 }

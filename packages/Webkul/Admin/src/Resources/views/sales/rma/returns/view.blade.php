@@ -133,30 +133,29 @@
                         </div>
 
                         @foreach ($rma->items as $rmaItem) 
-                        <div class="flex gap-2.5">
-                            <div class="p-4">
-                                @if ($rmaItem?->product?->base_image_url)
-                                    <img
-                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
-                                        src="{{ $rmaItem?->product->base_image_url }}"
-                                    />
-                                @else
-                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                            <div class="flex gap-2.5">
+                                <div class="p-4">
+                                    @if ($rmaItem?->product?->base_image_url)
+                                        <img
+                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                            src="{{ $rmaItem?->product->base_image_url }}"
+                                        />
+                                    @else
+                                        <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
-                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
-                                            @lang('admin::app.sales.invoices.view.product-image')
-                                        </p>
-                                    </div>
-                                @endif
+                                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                @lang('admin::app.sales.invoices.view.product-image')
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <p class="py-4 break-all text-base font-semibold text-gray-800 dark:text-white">
+                                    {{ $rmaItem->product->name }}
+                                </p>
                             </div>
-
-                            <p class="py-4 break-all text-base font-semibold text-gray-800 dark:text-white">
-                                {{ $rmaItem->product->name }}
-                            </p>
-                        </div>
                             
-
                             <div class="grid">
                                 <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
                                     <div class="flex gap-2.5 w-full">
@@ -500,6 +499,7 @@
                                                     method="POST"
                                                     :action="route('admin.sales.rma.update-status', $rma->id)"
                                                 >
+                                                    <!-- RMA Status -->
                                                     <x-admin::form.control-group class="mb-2 w-full">
                                                         <x-admin::form.control-group.control
                                                             type="select"
@@ -519,6 +519,7 @@
                                                         <x-admin::form.control-group.error control-name="rma_status_id" />
                                                     </x-admin::form.control-group>
 
+                                                    <!-- Refund Shipping -->
                                                     <x-admin::form.control-group
                                                         v-if="rmaStatus == 5 || (Number({{ $rma->order->invoices->count() }}) > 0 && rmaStatus == 8)"
                                                         class="mb-2 w-full"
