@@ -10,8 +10,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
 
-- Fixed a Server-Side Template Injection (SSTI) vulnerability that allowed low-privileged users to inject template expressions during checkout or address creation, which were subsequently rendered in the admin order view
-
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.
