@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
 
+- Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
+
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.

@@ -23,7 +23,7 @@ class BladeCompiler extends BaseBladeCompiler
         ) {
             $finalPath = str_replace('/Providers/..', '', str_replace(base_path(), '', $this->getPath()));
 
-            $contents = '<div class="path-hint" data-toggle="tooltip" data-title="'.$finalPath.'" data-id="'.uniqid().'"><span class="testing"></span>'.$contents.'</div>';
+            $contents = '<!-- blade-tracer-start: '.$finalPath.' -->'.$contents.'<!-- blade-tracer-end -->';
         }
 
         if (
