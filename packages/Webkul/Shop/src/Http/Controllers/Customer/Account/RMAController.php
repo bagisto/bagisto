@@ -121,18 +121,6 @@ class RMAController extends Controller
      */
     public function store(): JsonResponse|RedirectResponse
     {
-        $order = $this->orderRepository->findOneWhere([
-            'id'          => request()->input('order_id'),
-            'customer_id' => auth()->guard('customer')->id(),
-        ]);
-        
-        if (! $order) {
-            return new JsonResponse([
-                'messages' => trans('shop::app.customer.signup-form.failed'),
-                'redirect' => route('shop.customers.account.rma.create'),
-            ]);
-        }
-
         $this->validate(request(), [
             'order_id'        => 'required|exists:orders,id',
             'order_item_id'   => 'required',
@@ -148,7 +136,6 @@ class RMAController extends Controller
         $data = request()->only([
             'order_id',
             'order_item_id',
-            'delivery_status',
             'variant',
             'rma_qty',
             'resolution_type',
@@ -158,14 +145,25 @@ class RMAController extends Controller
             'package_condition',
         ]);
 
-        Event::dispatch('rma.request.customer.create.before', $data);
+        $order = $this->orderRepository->findOneWhere([
+            'id'          => $data['order_id'],
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
+
+        if (! $order) {
+            return new JsonResponse([
+                'messages' => trans('shop::app.customer.signup-form.failed'),
+                'redirect' => route('shop.customers.account.rma.create'),
+            ]);
+        }
+
+        Event::dispatch('customer.rma.request.create.before', $data);
 
         /**
          * Creation of a new RMA record.
          */
         $rma = $this->rmaRepository->create([
-            'order_id'          => $data['order_id'],
-            'delivery_status'   => $data['delivery_status'] ?? null,
+            'order_id'          => $order->id,
             'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
             'information'       => $data['information'] ?? null,
             'package_condition' => $data['package_condition'] ?? null,
@@ -211,7 +209,7 @@ class RMAController extends Controller
             $this->rmaAdditionalFieldRepository->createManyForRma($rma->id, $customAttributes);
         }
 
-        Event::dispatch('rma.request.customer.create.after', $rma);
+        Event::dispatch('customer.rma.request.create.after', $rma);
 
         /**
          * Sending RMA creation email to the customer.
@@ -264,7 +262,11 @@ class RMAController extends Controller
         }
 
         if (! empty($data['close_rma'])) {
+            Event::dispatch('customer.rma.request.update.before', $id);
+
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::SOLVED->value]);
+
+            Event::dispatch('customer.rma.request.update.after', $rma);
 
             $this->rmaMessageRepository->create([
                 'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
@@ -296,7 +298,11 @@ class RMAController extends Controller
 
             $order->update(['status' => Order::STATUS_PENDING]);
 
+            Event::dispatch('customer.rma.request.update.before', $id);
+
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
+
+            Event::dispatch('customer.rma.request.update.after', $rma);
 
             $this->rmaMessageRepository->create([
                 'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
@@ -331,7 +337,11 @@ class RMAController extends Controller
             ]);
         }
 
+        Event::dispatch('customer.rma.request.update.before', $id);
+
         $rma->update(['rma_status_id' => DefaultRMAStatusEnum::CANCELED->value]);
+
+        Event::dispatch('customer.rma.request.update.after', $rma);
 
         return new JsonResponse([
             'message' => trans('shop::app.rma.response.cancel-success'),

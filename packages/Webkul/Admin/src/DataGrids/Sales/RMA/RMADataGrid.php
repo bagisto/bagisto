@@ -35,7 +35,6 @@ class RMADataGrid extends DataGrid
                 'orders.is_guest as is_guest',
                 DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name) as customer_name'),
                 'rma_statuses.title',
-                'rma.delivery_status as rma_delivery_status',
                 'rma.created_at',
                 'orders.status as order_status',
                 'rma_statuses.color as rma_status_color',
@@ -45,7 +44,6 @@ class RMADataGrid extends DataGrid
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');
         $this->addFilter('title', 'rma_statuses.title');
-        $this->addFilter('rma_delivery_status', 'rma.delivery_status');
         $this->addFilter('created_at', 'rma.created_at');
         $this->addFilter('customer_name', DB::raw('CONCAT('.$table_prefix.'orders.customer_first_name, " ", '.$table_prefix.'orders.customer_last_name)'));
 
@@ -114,32 +112,6 @@ class RMADataGrid extends DataGrid
                 $color = $row->rma_status_color ?? '';
 
                 return '<p class="label-active" style="background:'.$color.';">'.$row->title.'</p>';
-            },
-        ]);
-
-        $this->addColumn([
-            'index'              => 'rma_delivery_status',
-            'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.order-status'),
-            'type'               => 'string',
-            'filterable_type'    => 'dropdown',
-            'searchable'         => true,
-            'filterable'         => true,
-            'sortable'           => true,
-            'filterable_options' => [
-                [
-                    'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.delivered'),
-                    'value' => 1,
-                ], [
-                    'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.undelivered'),
-                    'value' => 0,
-                ],
-            ],
-            'closure'            => function ($row) {
-                if ($row->rma_delivery_status) {
-                    return '<p class="label-active">'.trans('admin::app.sales.rma.all-rma.index.datagrid.delivered').'</p>';
-                }
-
-                return '<p class="label-info">'.trans('admin::app.sales.rma.all-rma.index.datagrid.undelivered').'</p>';
             },
         ]);
 

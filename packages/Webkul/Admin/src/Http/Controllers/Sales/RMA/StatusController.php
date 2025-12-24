@@ -44,11 +44,11 @@ class StatusController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        Event::dispatch('rma.rma-status.create.before');
+        Event::dispatch('sales.rma.rma-status.create.before');
 
         $rmaStatus = $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
 
-        Event::dispatch('rma.rma-status.create.after', $rmaStatus);
+        Event::dispatch('sales.rma.rma-status.create.after', $rmaStatus);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.create.success'),
@@ -75,11 +75,11 @@ class StatusController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        Event::dispatch('rma.rma-status.update.before', $id);
+        Event::dispatch('sales.rma.rma-status.update.before', $id);
 
         $rmaStatus = $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), $id);
 
-        Event::dispatch('rma.rma-status.update.after', $rmaStatus);
+        Event::dispatch('sales.rma.rma-status.update.after', $rmaStatus);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.edit.success'),
@@ -94,11 +94,11 @@ class StatusController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Event::dispatch('rma.rma-status.delete.before', $id);
+            Event::dispatch('sales.rma.rma-status.delete.before', $id);
 
             $this->rmaStatusRepository->where('default', 0)->delete($id);
 
-            Event::dispatch('rma.rma-status.delete.after', $id);
+            Event::dispatch('sales.rma.rma-status.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete-success'),
@@ -118,13 +118,13 @@ class StatusController extends Controller
         $rmaStatusIds = request()->input('indices');
 
         foreach ($rmaStatusIds as $rmaStatusId) {
-            Event::dispatch('rma.rma-status.update.before', $rmaStatusId);
+            Event::dispatch('sales.rma.rma-status.update.before', $rmaStatusId);
 
             $rmaStatus = $this->rmaStatusRepository->update([
                 'status'  => request()->input('value'),
             ], $rmaStatusId, ['status']);
 
-            Event::dispatch('rma.rma-status.update.after', $rmaStatus);
+            Event::dispatch('sales.rma.rma-status.update.after', $rmaStatus);
         }
 
         return new JsonResponse([
@@ -141,11 +141,11 @@ class StatusController extends Controller
             $rmaStatusIds = request()->input('indices');
 
             foreach ($rmaStatusIds as $rmaStatusId) {
-                Event::dispatch('rma.rma-status.delete.before', $rmaStatusId);
+                Event::dispatch('sales.rma.rma-status.delete.before', $rmaStatusId);
 
                 $this->rmaStatusRepository->where('default', 0)->delete($rmaStatusId);
 
-                Event::dispatch('rma.rma-status.delete.after', $rmaStatusId);
+                Event::dispatch('sales.rma.rma-status.delete.after', $rmaStatusId);
             }
 
             return new JsonResponse([

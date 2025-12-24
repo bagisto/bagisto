@@ -485,13 +485,7 @@
                                     && resolutionReason[getProductId(product)].length
                                 "
                             >
-                                <template v-if="product.qty_ordered == product.qty_shipped">
-                                    <!-- Delivery Status --> 
-                                    <input 
-                                        type="hidden" 
-                                        name="delivery_status" 
-                                        value="1" 
-                                    />
+                                <template v-if="resolutionType[getProductId(product)] == 'return'">
                                     <div class="flex gap-3">
                                         <!-- RMA Quantity -->
                                         <p class="w-full">
@@ -516,14 +510,13 @@
                                         <!-- Package Condition -->
                                         <p class="w-full">
                                             <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label class="required text-sm mt-4 flex">
+                                                <x-admin::form.control-group.label class="text-sm mt-4 flex">
                                                     @lang('admin::app.configuration.index.sales.rma.package-condition')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="package_condition"
-                                                    rules="required"
                                                     v-model="packageCondition"
                                                     :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
                                                 >
@@ -547,12 +540,6 @@
                                 </template>
 
                                 <template v-else>
-                                    <input
-                                        type="hidden" 
-                                        name="delivery_status" 
-                                        value="0" 
-                                    />
-
                                     <!-- RMA Quantity -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required text-sm flex">

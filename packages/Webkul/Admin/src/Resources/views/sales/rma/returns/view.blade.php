@@ -435,10 +435,6 @@
                                         @lang('admin::app.sales.rma.all-rma.view.rma-status')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                       @lang('admin::app.sales.rma.all-rma.view.order-status')
-                                    </p>
-
                                     @if (in_array($rma->rma_status_id, [7, 8]))
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.close-rma')
@@ -454,23 +450,6 @@
                                             style="background: {{ $rma->status->color }};"
                                         >
                                             {{ $rma->status->title }}
-                                        </span>
-                                    </p>
-
-                                    <!-- RMA Order Status -->
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        <span
-                                            @if ($rma->delivery_status)
-                                                class="label-completed py-1"
-                                            @else
-                                                class="label-info py-1"
-                                            @endif
-                                        >
-                                            @if ($rma->delivery_status)
-                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
-                                            @else
-                                                @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
-                                            @endif
                                         </span>
                                     </p>
 

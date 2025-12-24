@@ -48,7 +48,7 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
-        Event::dispatch('rma.reason.create.before');
+        Event::dispatch('sales.rma.reason.create.before');
 
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
@@ -59,7 +59,7 @@ class ReasonController extends Controller
             ]);
         }
 
-        Event::dispatch('rma.reason.create.after', $rmaReason);
+        Event::dispatch('sales.rma.reason.create.after', $rmaReason);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.reasons.create.success'),
@@ -90,7 +90,7 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
-        Event::dispatch('rma.reason.update.before', $id);
+        Event::dispatch('sales.rma.reason.update.before', $id);
 
         $rmaReason = $this->rmaReasonRepository->update(request()->only('title', 'status', 'position'), $id);
 
@@ -111,7 +111,7 @@ class ReasonController extends Controller
             ]);
         }
 
-        Event::dispatch('rma.reason.update.after', $rmaReason);
+        Event::dispatch('sales.rma.reason.update.after', $rmaReason);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.reasons.edit.success'),
@@ -124,11 +124,11 @@ class ReasonController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Event::dispatch('rma.reason.delete.before', $id);
+            Event::dispatch('sales.rma.reason.delete.before', $id);
 
             $this->rmaReasonRepository->delete($id);
 
-            Event::dispatch('rma.reason.delete.after', $id);
+            Event::dispatch('sales.rma.reason.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.reasons.index.datagrid.delete-success'),
@@ -148,13 +148,13 @@ class ReasonController extends Controller
         $rmaReasonIds = request()->input('indices');
 
         foreach ($rmaReasonIds as $rmaReasonId) {
-            Event::dispatch('rma.reason.update.before', $rmaReasonId);
+            Event::dispatch('sales.rma.reason.update.before', $rmaReasonId);
 
             $rmaReason = $this->rmaReasonRepository->update([
                 'status'  => request()->input('value'),
             ], $rmaReasonId, ['status']);
 
-            Event::dispatch('rma.reason.update.after', $rmaReason);
+            Event::dispatch('sales.rma.reason.update.after', $rmaReason);
         }
 
         return new JsonResponse([
@@ -171,11 +171,11 @@ class ReasonController extends Controller
             $rmaReasonIds = request()->input('indices');
 
             foreach ($rmaReasonIds as $rmaReasonId) {
-                Event::dispatch('rma.reason.delete.before', $rmaReasonId);
+                Event::dispatch('sales.rma.reason.delete.before', $rmaReasonId);
 
                 $this->rmaReasonRepository->delete($rmaReasonId);
 
-                Event::dispatch('rma.reason.delete.after', $rmaReasonId);
+                Event::dispatch('sales.rma.reason.delete.after', $rmaReasonId);
             }
 
             return new JsonResponse([

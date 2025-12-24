@@ -45,7 +45,7 @@ class RulesController extends Controller
             'description' => 'required',
         ]);
 
-        Event::dispatch('rma.rules.create.before');
+        Event::dispatch('sales.rma.rules.create.before');
 
         $rmaRule = $this->rmaRulesRepository->create(request()->only(
             'name',
@@ -54,7 +54,7 @@ class RulesController extends Controller
             'return_period'
         ));
 
-        Event::dispatch('rma.rules.create.after', $rmaRule);
+        Event::dispatch('sales.rma.rules.create.after', $rmaRule);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.create.success'),
@@ -82,7 +82,7 @@ class RulesController extends Controller
             'description'      => 'required',
         ]);
 
-        Event::dispatch('rma.rules.update.before', $id);
+        Event::dispatch('sales.rma.rules.update.before', $id);
 
         $rmaRule = $this->rmaRulesRepository->update(request()->only(
             'name',
@@ -91,7 +91,7 @@ class RulesController extends Controller
             'return_period'
         ), $id);
 
-        Event::dispatch('rma.rules.update.after', $rmaRule);
+        Event::dispatch('sales.rma.rules.update.after', $rmaRule);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.edit.success'),
@@ -104,11 +104,11 @@ class RulesController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Event::dispatch('rma.rules.delete.before', $id);
+            Event::dispatch('sales.rma.rules.delete.before', $id);
 
             $this->rmaRulesRepository->delete($id);
 
-            Event::dispatch('rma.rules.delete.after', $id);
+            Event::dispatch('sales.rma.rules.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rules.index.datagrid.delete-success'),
@@ -128,13 +128,13 @@ class RulesController extends Controller
         $rmaRuleIds = request()->input('indices');
 
         foreach ($rmaRuleIds as $rmaRuleId) {
-            Event::dispatch('rma.rules.update.before', $rmaRuleId);
+            Event::dispatch('sales.rma.rules.update.before', $rmaRuleId);
 
             $rmaRule = $this->rmaRulesRepository->update([
                 'status'  => request()->input('value'),
             ], $rmaRuleId, ['status']);
 
-            Event::dispatch('rma.rules.update.after', $rmaRule);
+            Event::dispatch('sales.rma.rules.update.after', $rmaRule);
         }
 
         return new JsonResponse([
@@ -149,13 +149,13 @@ class RulesController extends Controller
     {
         try {
             $rmaRuleIds = request()->input('indices');
-            
+
             foreach ($rmaRuleIds as $rmaRuleId) {
-                Event::dispatch('rma.rules.delete.before', $rmaRuleId);
+                Event::dispatch('sales.rma.rules.delete.before', $rmaRuleId);
 
                 $this->rmaRulesRepository->delete($rmaRuleId);
 
-                Event::dispatch('rma.rules.delete.after', $rmaRuleId);
+                Event::dispatch('sales.rma.rules.delete.after', $rmaRuleId);
             }
 
             return new JsonResponse([

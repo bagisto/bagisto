@@ -302,21 +302,6 @@
                         </span>
                     </div>
                 </div>
-
-                <!-- Order Status -->
-                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                    <span class="font-medium">
-                        @lang('shop::app.rma.view-customer-rma-content.order-status')
-                    </span>
-                    
-                    <span class="px-3 py-1 text-xs rounded-full w-fit {{ $rma->delivery_status == '1' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
-                        @if ($rma->delivery_status == '1')
-                            @lang('shop::app.rma.customer.delivered')
-                        @else
-                            @lang('shop::app.rma.customer.undelivered')
-                        @endif
-                    </span>
-                </div>
             </div>
         </div>
 

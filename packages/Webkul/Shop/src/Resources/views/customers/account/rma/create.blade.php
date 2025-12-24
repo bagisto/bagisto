@@ -617,12 +617,6 @@
                                 "
                             >
                                 <template v-if="resolutionType[getProductId(product)] == 'return'">
-                                    <input 
-                                        type="hidden" 
-                                        name="delivery_status"
-                                        value="1" 
-                                    />
-                                    
                                     <div class="flex gap-3">
                                         <!-- RMA Quantity -->
                                         <p class="w-full">
@@ -647,14 +641,13 @@
                                         <!-- Package Condition -->
                                         <p class="w-full">
                                             <x-shop::form.control-group>
-                                                <x-shop::form.control-group.label class="required text-sm flex">
+                                                <x-shop::form.control-group.label class="text-sm flex">
                                                     @lang('shop::app.customers.account.rma.create.package-condition')
                                                 </x-shop::form.control-group.label>
                     
                                                 <x-shop::form.control-group.control
                                                     type="select"
                                                     name="package_condition"
-                                                    rules="required"
                                                     v-model="packageCondition"
                                                     :label="trans('shop::app.customers.account.rma.create.package-condition')"
                                                 >
@@ -678,12 +671,6 @@
                                 </template>
             
                                 <template v-else>
-                                    <input
-                                        type="hidden" 
-                                        name="delivery_status" 
-                                        value="0" 
-                                    />
-
                                     <!-- RMA Quantity -->
                                     <x-shop::form.control-group>
                                         <x-shop::form.control-group.label class="required text-sm flex">

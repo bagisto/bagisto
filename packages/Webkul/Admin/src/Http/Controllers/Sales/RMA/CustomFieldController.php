@@ -57,7 +57,7 @@ class CustomFieldController extends Controller
             'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
-        Event::dispatch('rma.custom-field.create.before');
+        Event::dispatch('sales.rma.custom-field.create.before');
 
         $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->only(
             'label',
@@ -79,7 +79,7 @@ class CustomFieldController extends Controller
             ], $rmaCustomField->id);
         }
 
-        Event::dispatch('rma.custom-field.create.after', $rmaCustomField);
+        Event::dispatch('sales.rma.custom-field.create.after', $rmaCustomField);
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.create.success'));
 
@@ -124,7 +124,7 @@ class CustomFieldController extends Controller
 
         $data['is_required'] = $data['is_required'] ?? 0;
 
-        Event::dispatch('rma.custom-field.update.before', $id);
+        Event::dispatch('sales.rma.custom-field.update.before', $id);
 
         $rmaCustomField = $this->rmaCustomFieldRepository->update($data, $id);
 
@@ -140,7 +140,7 @@ class CustomFieldController extends Controller
             ], $rmaCustomField->id);
         }
 
-        Event::dispatch('rma.custom-field.update.after', $rmaCustomField);
+        Event::dispatch('sales.rma.custom-field.update.after', $rmaCustomField);
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.edit.success'));
 
@@ -153,11 +153,11 @@ class CustomFieldController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Event::dispatch('rma.custom-field.delete.before', $id);
+            Event::dispatch('sales.rma.custom-field.delete.before', $id);
 
             $this->rmaCustomFieldRepository->delete($id);
 
-            Event::dispatch('rma.custom-field.delete.after', $id);
+            Event::dispatch('sales.rma.custom-field.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),
@@ -178,13 +178,13 @@ class CustomFieldController extends Controller
         $rmaCustomFieldIds = request()->input('indices');
 
         foreach ($rmaCustomFieldIds as $rmaCustomFieldId) {
-            Event::dispatch('rma.custom-field.update.before', $rmaCustomFieldId);
+            Event::dispatch('sales.rma.custom-field.update.before', $rmaCustomFieldId);
 
             $rmaCustomField = $this->rmaCustomFieldRepository->update([
                 'status'  => request()->input('value'),
             ], $rmaCustomFieldId, ['status']);
 
-            Event::dispatch('rma.custom-field.update.after', $rmaCustomField);
+            Event::dispatch('sales.rma.custom-field.update.after', $rmaCustomField);
         }
 
         return new JsonResponse([
@@ -201,11 +201,11 @@ class CustomFieldController extends Controller
             $rmaCustomFieldIds = request()->input('indices');
 
             foreach ($rmaCustomFieldIds as $rmaCustomFieldId) {
-                Event::dispatch('rma.custom-field.delete.before', $rmaCustomFieldId);
+                Event::dispatch('sales.rma.custom-field.delete.before', $rmaCustomFieldId);
 
                 $this->rmaCustomFieldRepository->delete($rmaCustomFieldId);
 
-                Event::dispatch('rma.custom-field.delete.after', $rmaCustomFieldId);
+                Event::dispatch('sales.rma.custom-field.delete.after', $rmaCustomFieldId);
             }
 
             return new JsonResponse([
