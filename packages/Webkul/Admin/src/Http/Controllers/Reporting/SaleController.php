@@ -41,9 +41,7 @@ class SaleController extends Controller
      */
     public function view()
     {
-        if (! array_key_exists(request()->query('type'), $this->typeFunctions)) {
-            abort(404);
-        }
+        $this->resolveTypeFunction();
 
         return view('admin::reporting.view')->with([
             'entity'    => 'sales',

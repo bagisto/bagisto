@@ -30,7 +30,7 @@ class Controller extends BaseController
      */
     public function stats()
     {
-        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}();
+        $stats = $this->reportingHelper->{$this->resolveTypeFunction()}();
 
         return response()->json([
             'statistics' => $stats,
@@ -45,7 +45,7 @@ class Controller extends BaseController
      */
     public function viewStats()
     {
-        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}('table');
+        $stats = $this->reportingHelper->{$this->resolveTypeFunction()}('table');
 
         return response()->json([
             'statistics' => $stats,
@@ -60,8 +60,22 @@ class Controller extends BaseController
      */
     public function export()
     {
-        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}('table');
+        $stats = $this->reportingHelper->{$this->resolveTypeFunction()}('table');
 
         return Excel::download(new ReportingExport($stats), request()->query('type').'.'.request()->query('format'));
+    }
+
+    /**
+     * Resolve the requested type into a valid function name.
+     *
+     * @return string
+     */
+    protected function resolveTypeFunction()
+    {
+        if (! array_key_exists(request()->query('type'), $this->typeFunctions)) {
+            abort(404);
+        }
+
+        return $this->typeFunctions[request()->query('type')];
     }
 }
