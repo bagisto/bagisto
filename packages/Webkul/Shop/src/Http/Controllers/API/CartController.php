@@ -78,7 +78,7 @@ class CartController extends APIController
         } catch (InsufficientProductInventoryException $exception) {
             return response()->json([
                 'message'      => $exception->getMessage(),
-            ]);
+            ], Response::HTTP_BAD_REQUEST);
         } catch (\Exception $exception) {
             return response()->json([
                 'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
