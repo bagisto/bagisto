@@ -1465,6 +1465,7 @@ return [
         ],
 
         'customer-rma-index' => [
+            'cancel'  => 'Cancelar',
             'create'  => 'Crear',
             'delete'  => 'Eliminar',
             'edit'    => 'Editar',

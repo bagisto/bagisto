@@ -6,7 +6,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\RMA\Repositories\RMAStatusRepository;
-use Webkul\Sales\Models\Order;
 
 class RMADataGrid extends DataGrid
 {
@@ -33,6 +32,7 @@ class RMADataGrid extends DataGrid
             ->select(
                 'rma.id',
                 'rma.order_id',
+                'rma.rma_status_id',
                 'rma.created_at',
                 'orders.customer_email',
                 'orders.status as order_status',
@@ -88,13 +88,6 @@ class RMADataGrid extends DataGrid
             'filterable'         => true,
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
             'closure'            => function ($row) {
-                // if (
-                //     $row->order_status == Order::STATUS_CANCELED
-                //     && $row->order_status == Order::STATUS_CLOSED
-                // ) {
-                //     return '<p class="label-canceled">'.trans('shop::app.rma.status.status-name.item-canceled').'</p>';
-                // }
-
                 $color = $row->rma_status_color ?? '';
 
                 return '<p class="label-active" style="background:'.$color.';">'.$row->title.'</p>';
@@ -136,7 +129,7 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'title'     => trans('shop::app.rma.customer-rma-index.view'),
+            'title'     => trans('shop::app.rma.customer-rma-index.cancel'),
             'icon'      => 'icon-cancel',
             'method'    => 'GET',
             'url'       => function ($row) {

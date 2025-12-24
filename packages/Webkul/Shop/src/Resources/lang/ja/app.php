@@ -1465,6 +1465,7 @@ return [
         ],
 
         'customer-rma-index' => [
+            'cancel'  => 'キャンセル',
             'create'  => '作成',
             'delete'  => '削除',
             'edit'    => '編集',

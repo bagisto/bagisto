@@ -1465,6 +1465,7 @@ return [
         ],
 
         'customer-rma-index' => [
+            'cancel'  => '取消',
             'create'  => '创建',
             'delete'  => '删除',
             'edit'    => '编辑',

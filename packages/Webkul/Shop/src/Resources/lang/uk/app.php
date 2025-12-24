@@ -1465,6 +1465,7 @@ return [
         ],
 
         'customer-rma-index' => [
+            'cancel'  => 'Скасувати RMA',
             'create'  => 'Створити',
             'delete'  => 'Видалити',
             'edit'    => 'Редагувати',

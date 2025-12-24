@@ -1465,6 +1465,7 @@ return [
         ],
 
         'customer-rma-index' => [
+            'cancel'  => 'בטל',
             'create'  => 'צור',
             'delete'  => 'מחק',
             'edit'    => 'ערוך',
