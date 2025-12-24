@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
 
+- Sanitized product review attachments to prevent stored XSS
+
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
 * #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
