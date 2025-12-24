@@ -35,7 +35,6 @@
             <!-- Reviews Shimmer Effect -->
             <x-shop::shimmer.customers.account.reviews :count="4" />
         </v-product-reviews>
-
     </div>
 
     @pushOnce('scripts')

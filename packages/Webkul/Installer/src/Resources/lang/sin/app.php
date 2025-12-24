@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'වෘක්ත',
                 'meta-description' => 'මැටා වෘක්ත',
                 'price'            => 'මිල',
+                'rma'              => 'RMA',
                 'settings'         => 'සැකසොක්ක',
                 'shipping'         => 'නාශීලන',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'RMA ඉඩ දෙන්න',
                 'brand'                => 'සීනික',
                 'color'                => 'වර්ණ',
                 'cost'                 => 'පිරතූ',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'නව',
                 'price'                => 'මිල',
                 'product-number'       => 'නිෂ්කල අංකය',
+                'rma-rules'            => 'RMA නියමයන්',
                 'short-description'    => 'කොදු විස්තර',
                 'size'                 => 'ප්රමාණක්',
                 'sku'                  => 'SKU කේඑ',

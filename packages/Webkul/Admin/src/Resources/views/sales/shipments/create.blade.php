@@ -127,6 +127,10 @@
                                         $item->qty_to_ship > 0
                                         && $item->product
                                     )
+										@php
+											$canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRemainingQtyAfterRMA($item->id);
+										@endphp
+
                                         <div class="flex justify-between gap-2.5 py-4">
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
@@ -243,10 +247,10 @@
                                                             class="!w-[100px]"
                                                             :id="$inputName"
                                                             :name="$inputName"
-                                                            :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
-                                                            :value="$item->qty_to_ship"
+                                                            :rules="'required|numeric|min_value:0|max_value:' . $canShipQty['qty']"
+                                                            :value="$canShipQty['qty']"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
-                                                            data-original-quantity="{{ $item->qty_to_ship }}"
+                                                            data-original-quantity="{{ $canShipQty['qty'] }}"
                                                             ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                             :ref="$inputName"
                                                         />
@@ -254,6 +258,10 @@
                                                         <x-admin::form.control-group.error :control-name="$inputName" />
                                                     </x-admin::form.control-group>
                                                 </div>
+
+												@if ($canShipQty['message'])
+													<p class="mt-1 text-xs italic text-green-600">{{ $canShipQty['message'] }}</p>
+												@endif
                                             </div>
                                         @endforeach
                                     @endif

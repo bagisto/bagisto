@@ -8,16 +8,18 @@ return [
             ],
 
             'attribute-groups' => [
-                'description'       => 'Description',
-                'general'           => 'General',
-                'inventories'       => 'Inventories',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'settings'          => 'Settings',
-                'shipping'          => 'Shipping',
+                'description'      => 'Description',
+                'general'          => 'General',
+                'inventories'      => 'Inventories',
+                'meta-description' => 'Meta Description',
+                'price'            => 'Price',
+                'rma'              => 'RMA',
+                'settings'         => 'Settings',
+                'shipping'         => 'Shipping',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'Allow RMA',
                 'brand'                => 'Brand',
                 'color'                => 'Color',
                 'cost'                 => 'Cost',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'New',
                 'price'                => 'Price',
                 'product-number'       => 'Product Number',
+                'rma-rules'            => 'RMA Rules',
                 'short-description'    => 'Short Description',
                 'size'                 => 'Size',
                 'sku'                  => 'SKU',

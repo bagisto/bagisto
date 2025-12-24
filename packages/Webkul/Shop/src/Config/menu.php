@@ -49,5 +49,11 @@ return [
         'route' => 'shop.customers.account.gdpr.index',
         'icon'  => 'icon-gdpr-safe',
         'sort'  => 7,
+    ], [
+        'key'   => 'account.rma',
+        'name'  => 'shop::app.layouts.rma',
+        'route' => 'shop.customers.account.rma.index',
+        'icon'  => 'icon-compare-1',
+        'sort'  => 8,
     ],
 ];

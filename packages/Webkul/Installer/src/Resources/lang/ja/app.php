@@ -8,16 +8,18 @@ return [
             ],
 
             'attribute-groups' => [
-                'description'       => '説明',
-                'general'           => '一般',
-                'inventories'       => '在庫',
-                'meta-description'  => 'メタ説明',
-                'price'             => '価格',
-                'settings'          => '設定',
-                'shipping'          => '配送',
+                'description'      => '説明',
+                'general'          => '一般',
+                'inventories'      => '在庫',
+                'meta-description' => 'メタ説明',
+                'price'            => '価格',
+                'rma'              => 'RMA',
+                'settings'         => '設定',
+                'shipping'         => '配送',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'RMAを許可',
                 'brand'                => 'ブランド',
                 'color'                => '色',
                 'cost'                 => 'コスト',
@@ -34,6 +36,7 @@ return [
                 'new'                  => '新規',
                 'price'                => '価格',
                 'product-number'       => '製品番号',
+                'rma-rules'            => 'RMA規則',
                 'short-description'    => '短い説明',
                 'size'                 => 'サイズ',
                 'sku'                  => 'SKU',

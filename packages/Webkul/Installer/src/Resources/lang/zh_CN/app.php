@@ -13,11 +13,13 @@ return [
                 'inventories'      => '庫存',
                 'meta-description' => '元描述',
                 'price'            => '價格',
+                'rma'              => 'RMA',
                 'settings'         => '設定',
                 'shipping'         => '運送',
             ],
 
             'attributes' => [
+                'allow-rma'            => '允许退货（RMA）',
                 'brand'                => '品牌',
                 'color'                => '顏色',
                 'cost'                 => '成本',
@@ -34,6 +36,7 @@ return [
                 'new'                  => '新品',
                 'price'                => '價格',
                 'product-number'       => '產品號',
+                'rma-rules'            => '退货规则 (RMA)',
                 'short-description'    => '簡短描述',
                 'size'                 => '尺寸',
                 'sku'                  => 'SKU',

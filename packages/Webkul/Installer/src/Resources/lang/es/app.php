@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'Inventarios',
                 'meta-description' => 'Meta Descripción',
                 'price'            => 'Precio',
+                'rma'              => 'RMA',
                 'settings'         => 'Configuraciones',
                 'shipping'         => 'Envío',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'Permitir RMA',
                 'brand'                => 'Marca',
                 'color'                => 'Color',
                 'cost'                 => 'Costo',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'Nuevo',
                 'price'                => 'Precio',
                 'product-number'       => 'Número de Producto',
+                'rma-rules'            => 'Reglas de RMA',
                 'short-description'    => 'Descripción Corta',
                 'size'                 => 'Tamaño',
                 'sku'                  => 'SKU',

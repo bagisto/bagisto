@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'Инвентарь',
                 'meta-description' => 'Мета-описание',
                 'price'            => 'Цена',
+                'rma'              => 'RMA',
                 'settings'         => 'Настройки',
                 'shipping'         => 'Доставка',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'Разрешить RMA',
                 'brand'                => 'Бренд',
                 'color'                => 'Цвет',
                 'cost'                 => 'Стоимость',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'Новый',
                 'price'                => 'Цена',
                 'product-number'       => 'Артикул',
+                'rma-rules'            => 'Правила RMA',
                 'short-description'    => 'Краткое описание',
                 'size'                 => 'Размер',
                 'sku'                  => 'Артикул товара (SKU)',

@@ -83,10 +83,12 @@
             @php
                 $selectedOption = old($attribute->code) ?: $product[$attribute->code];
 
-                if ($attribute->code != 'tax_category_id') {
-                    $options = $attribute->options()->orderBy('sort_order')->get();
-                } else {
+                if ($attribute->code === 'tax_category_id') {
                     $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
+                } else if ($attribute->code === 'rma_rule_id') {
+                    $options = app('Webkul\RMA\Repositories\RMARuleRepository')->all();
+                } else {
+                    $options = $attribute->options()->orderBy('sort_order')->get();
                 }
             @endphp
 

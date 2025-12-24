@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'المخزونات',
                 'meta-description' => 'الوصف الواجب',
                 'price'            => 'السعر',
+                'rma'              => 'RMA',
                 'settings'         => 'الإعدادات',
                 'shipping'         => 'الشحن',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'السماح بالإرجاع',
                 'brand'                => 'العلامة التجارية',
                 'color'                => 'اللون',
                 'cost'                 => 'التكلفة',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'جديد',
                 'price'                => 'السعر',
                 'product-number'       => 'رقم المنتج',
+                'rma-rules'            => 'قواعد الإرجاع',
                 'short-description'    => 'وصف مختصر',
                 'size'                 => 'الحجم',
                 'sku'                  => 'رمز المنتج',

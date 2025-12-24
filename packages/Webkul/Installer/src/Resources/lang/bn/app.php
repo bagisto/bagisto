@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'মালামালের মৌলিক বিশেষত্ব',
                 'meta-description' => 'মেটা বর্ণনা',
                 'price'            => 'মূল্য',
+                'rma'              => 'RMA',
                 'settings'         => 'সেটিংস',
                 'shipping'         => 'শিপিং',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'আরএমএ অনুমতি দিন',
                 'brand'                => 'ব্র্যান্ড',
                 'color'                => 'রঙ',
                 'cost'                 => 'মূল্য',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'নতুন',
                 'price'                => 'মূল্য',
                 'product-number'       => 'পণ্য নম্বর',
+                'rma-rules'            => 'আরএমএ নিয়ম',
                 'short-description'    => 'সংক্ষিপ্ত বর্ণনা',
                 'size'                 => 'আকার',
                 'sku'                  => 'SKU',

@@ -8,16 +8,18 @@ return [
             ],
 
             'attribute-groups' => [
-                'description'       => 'Deskripsi',
-                'general'           => 'Umum',
-                'inventories'       => 'Stok',
-                'meta-description'  => 'Meta Deskripsi',
-                'price'             => 'Harga',
-                'settings'          => 'Pengaturan',
-                'shipping'          => 'Pengiriman',
+                'description'      => 'Deskripsi',
+                'general'          => 'Umum',
+                'inventories'      => 'Stok',
+                'meta-description' => 'Meta Deskripsi',
+                'price'            => 'Harga',
+                'rma'              => 'RMA',
+                'settings'         => 'Pengaturan',
+                'shipping'         => 'Pengiriman',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'Izinkan RMA',
                 'brand'                => 'Merek',
                 'color'                => 'Warna',
                 'cost'                 => 'Biaya',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'Baru',
                 'price'                => 'Harga',
                 'product-number'       => 'Nomor Produk',
+                'rma-rules'            => 'Aturan RMA',
                 'short-description'    => 'Deskripsi Singkat',
                 'size'                 => 'Ukuran',
                 'sku'                  => 'SKU',

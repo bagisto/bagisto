@@ -3078,5 +3078,131 @@ return [
                 'validation' => 'max:200',
             ],
         ],
+    ], [
+        'key'  => 'sales.rma',
+        'name' => 'admin::app.configuration.index.sales.rma.title',
+        'info' => 'admin::app.configuration.index.sales.rma.info',
+        'icon' => 'settings/store-information.svg',
+        'sort' => 8,
+    ], [
+        'key'    => 'sales.rma.setting',
+        'name'   => 'admin::app.configuration.index.sales.rma.setting.title',
+        'info'   => 'admin::app.configuration.index.sales.rma.setting.info',
+        'fields' => [
+            [
+                'name'          => 'default_allow_days',
+                'title'         => 'admin::app.configuration.index.sales.rma.default-allow-days',
+                'info'          => 'admin::app.configuration.index.sales.rma.days-info',
+                'type'          => 'text',
+                'validation'    => 'required|numeric',
+                'default'       => '7',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'return_policy',
+                'title'         => 'admin::app.configuration.index.sales.rma.return-policy',
+                'type'          => 'textarea',
+                'validation'    => 'required',
+                'default'       => '7 days return policy.',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'allowed_file_extension',
+                'title'         => 'admin::app.configuration.index.sales.rma.allowed-file-extension',
+                'validation'    => 'required',
+                'default'       => 'image/jpg,image/jpeg,image/png,image/webp',
+                'type'          => 'multiselect',
+                'options'       => [
+                    [
+                        'title' => 'JPG',
+                        'value' => 'image/jpg',
+                    ], [
+                        'title' => 'JPEG',
+                        'value' => 'image/jpeg',
+                    ], [
+                        'title' => 'PNG',
+                        'value' => 'image/png',
+                    ], [
+                        'title' => 'WEBP',
+                        'value' => 'image/webp',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'allowed_new_rma_request_for_cancelled_request',
+                'title'         => 'admin::app.configuration.index.sales.rma.allowed-request-cancelled-request',
+                'type'          => 'select',
+                'validation'    => 'required',
+                'default'       => 'yes',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.rma.yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.rma.no',
+                        'value' => 'no',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'allowed_new_rma_request_for_declined_request',
+                'title'         => 'admin::app.configuration.index.sales.rma.allowed-request-declined-request',
+                'type'          => 'select',
+                'validation'    => 'required',
+                'default'       => 'yes',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.rma.yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.rma.no',
+                        'value' => 'no',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'select_allowed_order_status',
+                'title'         => 'admin::app.configuration.index.sales.rma.select-allowed-order-status',
+                'type'          => 'select',
+                'validation'    => 'required',
+                'default'       => 'all',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.rma.all-status',
+                        'value' => 'all',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.rma.complete',
+                        'value' => 'complete',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'select_allowed_product_type',
+                'title'         => 'admin::app.configuration.index.sales.rma.allow-product-type-for-rma',
+                'type'          => 'multiselect',
+                'default'       => 'simple,configurable,bundle,grouped',
+                'options'       => [
+                    [
+                        'title' => 'product::app.type.simple',
+                        'value' => 'simple',
+                    ], [
+                        'title' => 'product::app.type.configurable',
+                        'value' => 'configurable',
+                    ], [
+                        'title' => 'product::app.type.bundle',
+                        'value' => 'bundle',
+                    ], [
+                        'title' => 'product::app.type.grouped',
+                        'value' => 'grouped',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based'  => false,
+            ],
+        ],
     ],
 ];

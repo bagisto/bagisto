@@ -35,6 +35,7 @@ return [
         \Webkul\Paypal\Providers\ModuleServiceProvider::class,
         \Webkul\Product\Providers\ModuleServiceProvider::class,
         \Webkul\Razorpay\Providers\ModuleServiceProvider::class,
+        \Webkul\RMA\Providers\ModuleServiceProvider::class,
         \Webkul\Rule\Providers\ModuleServiceProvider::class,
         \Webkul\Sales\Providers\ModuleServiceProvider::class,
         \Webkul\Shipping\Providers\ModuleServiceProvider::class,
@@ -46,5 +47,4 @@ return [
         \Webkul\Theme\Providers\ModuleServiceProvider::class,
         \Webkul\User\Providers\ModuleServiceProvider::class,
     ],
-
 ];

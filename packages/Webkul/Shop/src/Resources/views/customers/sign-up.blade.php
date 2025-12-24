@@ -293,5 +293,5 @@
                 {!! core()->getConfigData('general.gdpr.agreement.agreement_content') !!}
             </div>
         </x-slot>
-    </x-admin::modal>
+    </x-shop::modal>
 </x-shop::layouts>

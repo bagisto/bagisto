@@ -25,7 +25,7 @@ class CanceledNotification extends Mailable
             to: [
                 new Address($this->order->customer_email, $this->order->customer_full_name),
             ],
-            subject: trans('admin::app.emails.orders.canceled.subject'),
+            subject: trans('shop::app.emails.orders.canceled.subject'),
         );
     }
 

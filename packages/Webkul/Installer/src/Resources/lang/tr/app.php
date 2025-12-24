@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'Envanterler',
                 'meta-description' => 'Meta Açıklama',
                 'price'            => 'Fiyat',
+                'rma'              => 'RMA',
                 'settings'         => 'Ayarlar',
                 'shipping'         => 'Nakliye',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'RMA\'ya izin ver',
                 'brand'                => 'Marka',
                 'color'                => 'Renk',
                 'cost'                 => 'Maliyet',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'Yeni',
                 'price'                => 'Fiyat',
                 'product-number'       => 'Ürün Numarası',
+                'rma-rules'            => 'RMA kuralları',
                 'short-description'    => 'Kısa Açıklama',
                 'size'                 => 'Boyut',
                 'sku'                  => 'Stok Kodu',

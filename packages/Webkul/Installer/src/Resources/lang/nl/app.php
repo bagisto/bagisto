@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'Voorraden',
                 'meta-description' => 'Meta Beschrijving',
                 'price'            => 'Prijs',
+                'rma'              => 'RMA',
                 'settings'         => 'Instellingen',
                 'shipping'         => 'Verzending',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'RMA toestaan',
                 'brand'                => 'Merk',
                 'color'                => 'Kleur',
                 'cost'                 => 'Kostprijs',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'Nieuw',
                 'price'                => 'Prijs',
                 'product-number'       => 'Productnummer',
+                'rma-rules'            => 'RMA-regels',
                 'short-description'    => 'Korte Beschrijving',
                 'size'                 => 'Maat',
                 'sku'                  => 'SKU',

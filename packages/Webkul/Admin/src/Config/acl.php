@@ -105,6 +105,86 @@ return [
         'name'  => 'admin::app.acl.view',
         'route' => 'admin.sales.transactions.view',
         'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma',
+        'name'  => 'admin::app.acl.rma.title',
+        'route' => 'admin.sales.rma.index',
+        'sort'  => 6,
+    ], [
+        'key'   => 'sales.rma.view',
+        'name'  => 'admin::app.acl.rma.view',
+        'route' => 'admin.sales.rma.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma.create',
+        'name'  => 'admin::app.acl.rma.create',
+        'route' => 'admin.sales.rma.create',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-reason',
+        'name'  => 'admin::app.acl.rma-reason.title',
+        'route' => 'admin.sales.rma.reason.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'sales.rma-reason.edit',
+        'name'  => 'admin::app.acl.rma-reason.edit',
+        'route' => 'admin.sales.rma.reason.edit',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma-reason.delete',
+        'name'  => 'admin::app.acl.rma-reason.delete',
+        'route' => 'admin.sales.rma.reason.delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-rules',
+        'name'  => 'admin::app.acl.rma-rules.title',
+        'route' => 'admin.sales.rma.rules.index',
+        'sort'  => 8,
+    ], [
+        'key'   => 'sales.rma-rules.edit',
+        'name'  => 'admin::app.acl.rma-rules.edit',
+        'route' => 'admin.sales.rma.rules.edit',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma-rules.delete',
+        'name'  => 'admin::app.acl.rma-rules.delete',
+        'route' => 'admin.sales.rma.rules.delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.rma-status',
+        'name'  => 'admin::app.acl.rma-status.title',
+        'route' => 'admin.sales.rma.rma-status.index',
+        'sort'  => 9,
+    ], [
+        'key'   => 'sales.rma-status.edit',
+        'name'  => 'admin::app.acl.rma-status.edit',
+        'route' => 'admin.sales.rma.rma-status.edit',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.rma-status.delete',
+        'name'  => 'admin::app.acl.rma-status.delete',
+        'route' => 'admin.sales.rma.rma-status.delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.custom-field',
+        'name'  => 'admin::app.acl.custom-field.title',
+        'route' => 'admin.sales.rma.custom-field.index',
+        'sort'  => 10,
+    ], [
+        'key'   => 'sales.custom-field.create',
+        'name'  => 'admin::app.acl.custom-field.create',
+        'route' => 'admin.sales.rma.custom-field.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.custom-field.edit',
+        'name'  => 'admin::app.acl.custom-field.edit',
+        'route' => 'admin.sales.rma.custom-field.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.custom-field.delete',
+        'name'  => 'admin::app.acl.custom-field.delete',
+        'route' => 'admin.sales.rma.custom-field.delete',
+        'sort'  => 3,
     ],
 
     /*

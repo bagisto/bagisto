@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'इन्वेंटरी',
                 'meta-description' => 'मेटा विवरण',
                 'price'            => 'मूल्य',
+                'rma'              => 'RMA',
                 'settings'         => 'सेटिंग्स',
                 'shipping'         => 'शिपिंग',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'RMA की अनुमति दें',
                 'brand'                => 'ब्रांड',
                 'color'                => 'रंग',
                 'cost'                 => 'लागत',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'नया',
                 'price'                => 'मूल्य',
                 'product-number'       => 'उत्पाद संख्या',
+                'rma-rules'            => 'RMA नियम',
                 'short-description'    => 'संक्षेप विवरण',
                 'size'                 => 'साइज़',
                 'sku'                  => 'SKU',

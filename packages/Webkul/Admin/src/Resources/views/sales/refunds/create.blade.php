@@ -53,10 +53,21 @@
                                             @lang('admin::app.sales.refunds.create.update-totals-btn')
                                         </div>
 
+										@foreach ($order->items as $item)
+                                            @php
+                                                $canRefundAfterRMA = app('\Webkul\RMA\Helpers\Helper')->canRefundAfterRMA($item->id);
+                                            @endphp
+
+                                            @if (! $canRefundAfterRMA)
+                                                @break
+                                            @endif
+                                        @endforeach
+
                                         <!-- Refund Submit Button -->
                                         <button
                                             type="submit"
                                             class="primary-button ltr:mr-11 rtl:ml-11"
+                                            @if ($canRefundAfterRMA) disabled @endif
                                         >
                                             @lang('admin::app.sales.refunds.create.refund-btn')
                                         </button>

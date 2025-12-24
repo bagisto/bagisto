@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'מלאי',
                 'meta-description' => 'תיאור מטא',
                 'price'            => 'מחיר',
+                'rma'              => 'RMA',
                 'settings'         => 'הגדרות',
                 'shipping'         => 'משלוח',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'אפשר RMA',
                 'brand'                => 'מותג',
                 'color'                => 'צבע',
                 'cost'                 => 'עלות',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'חדש',
                 'price'                => 'מחיר',
                 'product-number'       => 'מספר מוצר',
+                'rma-rules'            => 'כללי RMA',
                 'short-description'    => 'תיאור קצר',
                 'size'                 => 'גודל',
                 'sku'                  => 'קוד מוצר',

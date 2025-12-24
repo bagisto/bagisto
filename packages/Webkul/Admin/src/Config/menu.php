@@ -57,6 +57,42 @@ return [
         'route'      => 'admin.sales.bookings.index',
         'sort'       => 6,
         'icon'       => '',
+    ], [
+        'key'        => 'sales.rma',
+        'name'       => 'admin::app.components.layouts.sidebar.rma',
+        'route'      => 'admin.sales.rma.index',
+        'sort'       => 7,
+        'icon'       => '',
+    ], [
+        'key'        => 'sales.rma.index',
+        'name'       => 'admin::app.components.layouts.sidebar.requests',
+        'route'      => 'admin.sales.rma.index',
+        'sort'       => 1,
+        'icon'       => '',
+    ], [
+        'key'        => 'sales.rma.reason',
+        'name'       => 'admin::app.components.layouts.sidebar.reason',
+        'route'      => 'admin.sales.rma.reason.index',
+        'sort'       => 2,
+        'icon'       => '',
+    ], [
+        'key'        => 'sales.rma.rules',
+        'name'       => 'admin::app.components.layouts.sidebar.rules',
+        'route'      => 'admin.sales.rma.rules.index',
+        'sort'       => 3,
+        'icon'       => '',
+    ], [
+        'key'        => 'sales.rma.rma-status',
+        'name'       => 'admin::app.components.layouts.sidebar.rma-status',
+        'route'      => 'admin.sales.rma.rma-status.index',
+        'sort'       => 4,
+        'icon'       => '',
+    ], [
+        'key'        => 'sales.rma.custom-field',
+        'name'       => 'admin::app.components.layouts.sidebar.custom-field',
+        'route'      => 'admin.sales.rma.custom-field.index',
+        'sort'       => 5,
+        'icon'       => '',
     ],
 
     /**

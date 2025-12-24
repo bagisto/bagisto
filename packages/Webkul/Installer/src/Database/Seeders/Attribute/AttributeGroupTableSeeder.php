@@ -82,6 +82,14 @@ class AttributeGroupTableSeeder extends Seeder
                 'is_user_defined'     => 0,
                 'position'            => 4,
                 'attribute_family_id' => 1,
+            ], [
+                'id'                  => 8,
+                'code'                => 'rma',
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.rma', [], $defaultLocale),
+                'column'              => 2,
+                'is_user_defined'     => 0,
+                'position'            => 5,
+                'attribute_family_id' => 1,
             ],
         ]);
 
@@ -231,6 +239,19 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_id'        => 28,
                 'attribute_group_id'  => 7,
                 'position'            => 1,
+            ],
+
+            /**
+             * RMA Group Attributes
+             */
+            [
+                'attribute_id'        => 29,
+                'attribute_group_id'  => 8,
+                'position'            => 1,
+            ], [
+                'attribute_id'        => 30,
+                'attribute_group_id'  => 8,
+                'position'            => 2,
             ],
         ]);
 

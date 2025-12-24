@@ -13,11 +13,13 @@ return [
                 'inventories'      => 'موجودی‌ها',
                 'meta-description' => 'توضیحات متا',
                 'price'            => 'قیمت',
+                'rma'              => 'RMA',
                 'settings'         => 'تنظیمات',
                 'shipping'         => 'حمل و نقل',
             ],
 
             'attributes' => [
+                'allow-rma'            => 'اجازه‌ی مرجوعی',
                 'brand'                => 'برند',
                 'color'                => 'رنگ',
                 'cost'                 => 'هزینه',
@@ -34,6 +36,7 @@ return [
                 'new'                  => 'جدید',
                 'price'                => 'قیمت',
                 'product-number'       => 'شماره محصول',
+                'rma-rules'            => 'قوانین مرجوعی',
                 'short-description'    => 'توضیح کوتاه',
                 'size'                 => 'اندازه',
                 'sku'                  => 'SKU',
