@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
 
+* #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
+
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
 * Meta tag, comment and header added for Bagisto.

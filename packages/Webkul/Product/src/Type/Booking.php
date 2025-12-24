@@ -10,6 +10,7 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
@@ -145,6 +146,8 @@ class Booking extends AbstractType
      *
      * @param  array  $data
      * @return array
+     *
+     * @throws InsufficientProductInventoryException
      */
     public function prepareForCart($data)
     {
@@ -211,7 +214,7 @@ class Booking extends AbstractType
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
-            return trans('shop::app.products.booking.cart.integrity.inventory_warning');
+            throw new InsufficientProductInventoryException(trans('shop::app.products.booking.cart.integrity.inventory_warning'));
         }
 
         $products = $typeHelper->addAdditionalPrices($products);
