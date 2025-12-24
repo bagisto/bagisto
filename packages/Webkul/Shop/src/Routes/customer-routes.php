@@ -116,7 +116,7 @@ Route::prefix('customer')->group(function () {
 
                 Route::get('html-view', 'htmlView')->name('shop.customers.account.gdpr.html-view');
 
-                Route::get('revoke/{id}', 'revoke')->name('shop.customers.account.gdpr.revoke');
+                Route::post('revoke/{id}', 'revoke')->name('shop.customers.account.gdpr.revoke');
             });
 
             /**
