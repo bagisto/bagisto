@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection.
 
+- Sanitized product review attachments to prevent stored XSS.
+
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
 * #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
