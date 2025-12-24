@@ -73,7 +73,7 @@ class RequestController extends Controller
      */
     public function view(int $rmaId): View|RedirectResponse
     {
-        $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($rmaId);
+        $rma = $this->rmaRepository->with(['item', 'order'])->findOrFail($rmaId);
 
         $statusArray = $this->rmaStatusForRequest($rma);
 
@@ -190,10 +190,10 @@ class RequestController extends Controller
     {
         $this->validate(request(), [
             'order_id'        => 'required|exists:orders,id',
-            'order_item_id'   => 'required|array|min:1',
-            'rma_qty'         => 'required|array|min:1',
-            'resolution_type' => 'required|array|min:1',
-            'rma_reason_id'   => 'required|array|min:1',
+            'order_item_id'   => 'required',
+            'rma_qty'         => 'required',
+            'resolution_type' => 'required',
+            'rma_reason_id'   => 'required',
             'information'     => 'nullable|string',
             'images'          => 'nullable|array|min:1',
             'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
@@ -224,18 +224,16 @@ class RequestController extends Controller
         ]);
 
         /**
-         * Creation of RMA items for the newly created RMA record.
+         * Creation of RMA item for the newly created RMA record.
          */
-        foreach ($data['order_item_id'] as $key => $orderItemId) {
-            $this->rmaItemRepository->create([
-                'rma_id'        => $rma->id,
-                'rma_reason_id' => $data['rma_reason_id'][$key],
-                'order_item_id' => $orderItemId,
-                'variant_id'    => ! empty($data['variant'][$key]) ? $data['variant'][$key] : null,
-                'quantity'      => $data['rma_qty'][$key],
-                'resolution'    => $data['resolution_type'][$key],
-            ]);
-        }
+        $this->rmaItemRepository->create([
+            'rma_id'        => $rma->id,
+            'rma_reason_id' => $data['rma_reason_id'],
+            'order_item_id' => $data['order_item_id'],
+            'variant_id'    => ! empty($data['variant']) ? $data['variant'] : null,
+            'quantity'      => $data['rma_qty'],
+            'resolution'    => $data['resolution_type'],
+        ]);
 
         /**
          * Initial message indicating the processing of the RMA request.
@@ -268,7 +266,7 @@ class RequestController extends Controller
         /**
          * Sending RMA creation email to the customer.
          */
-        if ($rma->items) {
+        if ($rma->item) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
             } catch (\Exception $e) {
@@ -321,32 +319,16 @@ class RequestController extends Controller
                 ->toArray();
         }
 
-        $hasCancel = $rma->items->contains('resolution', DefaultRMAResolution::CANCEL_ITEMS->value);
+        $hasCancel = $rma->item->resolution === DefaultRMAResolution::CANCEL_ITEMS->value;
 
         $excludedStatuses = $hasCancel
             ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
             : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
 
-        $rmaStatus = $this->rmaStatusRepository
+        return $this->rmaStatusRepository
             ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
             ->pluck('title', 'id')
             ->toArray();
-
-        if (
-            $hasCancel
-            && ($rma->items[0]->orderItem->qty_invoiced > $rma->items[0]->orderItem->qty_refunded)
-        ) {
-            $rmaAdditionalStatus = $this->rmaStatusRepository
-                ->where('id', DefaultRMAStatusEnum::RECEIVED_PACKAGE->value)
-                ->pluck('title', 'id')
-                ->toArray();
-
-            $rmaStatus += $rmaAdditionalStatus;
-
-            unset($rmaStatus[DefaultRMAStatusEnum::ITEM_CANCELED->value]);
-        }
-
-        return $rmaStatus;
     }
 
     /**
@@ -383,7 +365,7 @@ class RequestController extends Controller
         try {
             DB::beginTransaction();
 
-            $refundData = $this->prepareRefundDataFromRmaItems($rma);
+            $refundData = $this->prepareRefundDataFromRmaItem($rma);
 
             if (! $this->processOrderRefund($rma->order, $refundData)) {
                 throw new \Exception(trans('admin::app.sales.rma.all-rma.view.refund-failed'));
@@ -411,7 +393,7 @@ class RequestController extends Controller
         try {
             DB::beginTransaction();
 
-            $this->cancelRmaItems($rma);
+            $this->cancelRmaItem($rma);
 
             $result = $this->finalizeRmaUpdate($rma, $data);
 
@@ -430,37 +412,21 @@ class RequestController extends Controller
     /**
      * Cancel RMA items and update order.
      */
-    private function cancelRmaItems($rma): void
+    private function cancelRmaItem($rma): void
     {
-        $orderItemIds = $rma->items->pluck('order_item_id')->toArray();
-
-        $orderItems = $this->fetchOrderItemsWithParents($orderItemIds);
-
-        foreach ($rma->items as $rmaItem) {
-            $orderItem = $orderItems->get($rmaItem->order_item_id);
+        if ($rma->item) {
+            $orderItem = $rma->item->orderItem;
 
             if (! $orderItem) {
-                continue;
+                return;
             }
 
-            $this->cancelNonInvoicedItem($rmaItem, $orderItem);
+            $this->cancelNonInvoicedItem($rma->item, $orderItem);
         }
 
         $this->orderRepository->updateOrderStatus($rma->order);
 
         Event::dispatch('sales.order.cancel.after', $rma->order);
-    }
-
-    /**
-     * Fetch order items with their parents.
-     */
-    private function fetchOrderItemsWithParents(array $orderItemIds)
-    {
-        return $this->orderItemRepository
-            ->whereIn('id', $orderItemIds)
-            ->orWhereIn('parent_id', $orderItemIds)
-            ->get()
-            ->keyBy('id');
     }
 
     /**
@@ -560,24 +526,20 @@ class RequestController extends Controller
     }
 
     /**
-     * Prepare refund data from RMA items.
+     * Prepare refund data from RMA item.
      */
-    private function prepareRefundDataFromRmaItems($rma): array
+    private function prepareRefundDataFromRmaItem($rma): array
     {
-        $items = $rma->items->mapWithKeys(function ($rmaItem) {
-            $orderItem = $rmaItem->orderItem;
-
-            return [
-                $rmaItem->order_item_id => ($orderItem->qty_invoiced - $orderItem->qty_refunded),
-            ];
-        });
+        $item = [
+            $rma->item->order_item_id => $rma->item->quantity,
+        ];
 
         return [
             'refund' => [
                 'shipping'          => request('shipping', 0),
                 'adjustment_refund' => 0,
                 'adjustment_fee'    => 0,
-                'items'             => $items->toArray(),
+                'items'             => $item,
             ],
         ];
     }

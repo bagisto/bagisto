@@ -372,7 +372,7 @@
                                 <div v-if="isChecked[getProductId(product)]">
                                     <x-shop::form.control-group.control
                                         type="hidden"
-                                        ::name="'order_item_id[' + getProductId(product) + ']'"
+                                        name="order_item_id"
                                         ::value="product.order_item_id"
                                     />
                                 </div>
@@ -485,26 +485,6 @@
                         <!-- RMA QTY -->
                         <template v-if="! notAllowed">
                             <p class="w-full">
-                                <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
-                                    <!-- RMA Quantity -->
-                                    <x-shop::form.control-group>
-                                        <x-shop::form.control-group.label class="required text-sm flex">
-                                            @lang('shop::app.rma.customer.rma-qty')
-                                        </x-shop::form.control-group.label>
-
-                                        <x-shop::form.control-group.control
-                                            type="text"
-                                            ::name="'rma_qty[' + getProductId(product) + ']'"
-                                            ::rules="'min_value:1|required|max_value:' + product.currentQuantity"
-                                            :label="trans('shop::app.rma.customer.rma-qty')"
-                                            :placeholder="trans('shop::app.rma.customer.rma-qty')"
-                                            v-model="rma_qty[getProductId(product)]"
-                                        />
-
-                                        <x-shop::form.control-group.error ::name="'rma_qty[' + getProductId(product) + ']'" class="flex" />
-                                    </x-shop::form.control-group>
-                                </div>
-
                                 <div
                                     v-if="product.currentQuantity <= '0'"
                                     class="text-sm text-red-600 flex mb-2"
@@ -519,12 +499,12 @@
                                     <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
-                                                @lang('shop::app.customers.account.rma.create.resolution-type')
+                                                @lang('shop::app.customers.account.rma.create.resolution-type') 
                                             </x-shop::form.control-group.label>
 
                                             <x-shop::form.control-group.control
                                                 type="select"
-                                                ::name="'resolution_type[' + getProductId(product) + ']'"
+                                                name="resolution_type"
                                                 rules="required"
                                                 v-model="resolutionType[getProductId(product)]"
                                                 @change="getResolutionReason(getProductId(product))"
@@ -535,21 +515,21 @@
                                                 </option>
 
                                                 <option
-                                                    v-if="product.qty_ordered == product.qty_shipped && product.rma_return_period"
+                                                    v-if="product.qty_invoiced > product.qty_refunded"
                                                     value="return"
                                                 >
                                                     @lang('shop::app.customers.account.rma.create.return')
                                                 </option>
 
                                                 <option
-                                                    v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
+                                                    v-if="(product.qty_ordered - product.qty_invoiced - (product.qty_canceled ?? 0)) > 0"
                                                     value="cancel_items"
                                                 >
                                                     @lang('shop::app.customers.account.rma.create.cancel-items')
                                                 </option>
                                             </x-shop::form.control-group.control>
 
-                                            <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex" />
+                                            <x-shop::form.control-group.error name="resolution_type" class="flex" />
                                         </x-shop::form.control-group>
                                     </div>
                                 </p>
@@ -564,7 +544,7 @@
 
                                             <x-shop::form.control-group.control
                                                 type="select"
-                                                ::name="'resolution_type[' + getProductId(product) + ']'"
+                                                name="resolution_type"
                                                 rules="required"
                                                 v-model="resolutionType[getProductId(product)]"
                                                 @change="getResolutionReason(getProductId(product))"
@@ -575,21 +555,21 @@
                                                 </option>
 
                                                 <option
-                                                    v-if="product.qty_ordered == product.qty_shipped"
+                                                    v-if="product.qty_invoiced > product.qty_refunded"
                                                     value="return"
                                                 >
                                                     @lang('shop::app.customers.account.rma.create.return')
                                                 </option>
 
                                                 <option
-                                                    v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
+                                                    v-if="(product.qty_ordered - product.qty_invoiced - (product.qty_canceled ?? 0)) > 0"
                                                     value="cancel_items"
                                                 >
                                                     @lang('shop::app.customers.account.rma.create.cancel-items')
                                                 </option>
                                             </x-shop::form.control-group.control>
 
-                                            <x-shop::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex" />
+                                            <x-shop::form.control-group.error name="resolution_type" class="flex" />
                                         </x-shop::form.control-group>
                                     </div>
                                 </p>
@@ -609,7 +589,7 @@
 
                                         <x-shop::form.control-group.control
                                             type="select"
-                                            ::name="'rma_reason_id[' + getProductId(product) + ']'"
+                                            name="rma_reason_id"
                                             v-model="rma_reason_id[getProductId(product)]"
                                             rules="required"
                                             :label="trans('shop::app.rma.customer.create.reason')"
@@ -623,7 +603,7 @@
                                             </option>
                                         </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error ::name="'rma_reason_id[' + getProductId(product) + ']'" class="flex" />
+                                        <x-shop::form.control-group.error name="rma_reason_id" class="flex" />
                                     </x-shop::form.control-group>
                                 </p>
                             </div>
@@ -636,41 +616,65 @@
                                     && resolutionReason[getProductId(product)].length
                                 "
                             >
-                                <template v-if="product.qty_ordered == product.qty_shipped">
+                                <template v-if="resolutionType[getProductId(product)] == 'return'">
                                     <input 
                                         type="hidden" 
-                                        name="delivery_status" 
+                                        name="delivery_status"
                                         value="1" 
                                     />
-            
-                                    <!-- Package Condition -->
-                                    <x-shop::form.control-group>
-                                        <x-shop::form.control-group.label class="required text-sm mt-4 flex">
-                                            @lang('shop::app.customers.account.rma.create.package-condition')
-                                        </x-shop::form.control-group.label>
-            
-                                        <x-shop::form.control-group.control
-                                            type="select"
-                                            name="package_condition"
-                                            rules="required"
-                                            v-model="packageCondition"
-                                            :label="trans('shop::app.customers.account.rma.create.package-condition')"
-                                        >
-                                            <option value="">
-                                                @lang('shop::app.customers.account.rma.create.select')
-                                            </option>
-            
-                                            <option value="open">
-                                                @lang('shop::app.customers.account.rma.create.open')
-                                            </option>
-            
-                                            <option value="packed">
-                                                @lang('shop::app.customers.account.rma.create.packed')
-                                            </option>
-                                        </x-shop::form.control-group.control>
-            
-                                        <x-shop::form.control-group.error name="package_condition" class="flex" />
-                                    </x-shop::form.control-group>
+                                    
+                                    <div class="flex gap-3">
+                                        <!-- RMA Quantity -->
+                                        <p class="w-full">
+                                            <x-shop::form.control-group>
+                                                <x-shop::form.control-group.label class="required text-sm flex">
+                                                    @lang('shop::app.rma.customer.rma-qty')
+                                                </x-shop::form.control-group.label>
+
+                                                <x-shop::form.control-group.control
+                                                    type="text"
+                                                    name="rma_qty"
+                                                    ::rules="'min_value:1|required|max_value:' + product.forReturnQuantity"
+                                                    :label="trans('shop::app.rma.customer.rma-qty')"
+                                                    :placeholder="trans('shop::app.rma.customer.rma-qty')"
+                                                    v-model="rma_qty[getProductId(product)]"
+                                                />
+
+                                                <x-shop::form.control-group.error name="rma_qty" class="flex" />
+                                            </x-shop::form.control-group>
+                                        </p>
+
+                                        <!-- Package Condition -->
+                                        <p class="w-full">
+                                            <x-shop::form.control-group>
+                                                <x-shop::form.control-group.label class="required text-sm flex">
+                                                    @lang('shop::app.customers.account.rma.create.package-condition')
+                                                </x-shop::form.control-group.label>
+                    
+                                                <x-shop::form.control-group.control
+                                                    type="select"
+                                                    name="package_condition"
+                                                    rules="required"
+                                                    v-model="packageCondition"
+                                                    :label="trans('shop::app.customers.account.rma.create.package-condition')"
+                                                >
+                                                    <option value="">
+                                                        @lang('shop::app.customers.account.rma.create.select')
+                                                    </option>
+                    
+                                                    <option value="open">
+                                                        @lang('shop::app.customers.account.rma.create.open')
+                                                    </option>
+                    
+                                                    <option value="packed">
+                                                        @lang('shop::app.customers.account.rma.create.packed')
+                                                    </option>
+                                                </x-shop::form.control-group.control>
+                    
+                                                <x-shop::form.control-group.error name="package_condition" class="flex" />
+                                            </x-shop::form.control-group>
+                                        </p>
+                                    </div>
                                 </template>
             
                                 <template v-else>
@@ -679,6 +683,24 @@
                                         name="delivery_status" 
                                         value="0" 
                                     />
+
+                                    <!-- RMA Quantity -->
+                                    <x-shop::form.control-group>
+                                        <x-shop::form.control-group.label class="required text-sm flex">
+                                            @lang('shop::app.rma.customer.rma-qty')
+                                        </x-shop::form.control-group.label>
+
+                                        <x-shop::form.control-group.control
+                                            type="text"
+                                            name="rma_qty"
+                                            ::rules="'min_value:1|required|max_value:' + product.forCancelQuantity"
+                                            :label="trans('shop::app.rma.customer.rma-qty')"
+                                            :placeholder="trans('shop::app.rma.customer.rma-qty')"
+                                            v-model="rma_qty[getProductId(product)]"
+                                        />
+
+                                        <x-shop::form.control-group.error name="rma_qty" class="flex" />
+                                    </x-shop::form.control-group>
                                 </template>
                             </template>
                         </template>
@@ -1069,6 +1091,7 @@
                     selectOnlyOne(productId) {
                         for (const key in this.isChecked) {
                             if (Object.prototype.hasOwnProperty.call(this.isChecked, key)) {
+                                
                                 this.isChecked[key] = false;
                                 if (key != productId) {
                                     this.rma_qty[key] = null;
@@ -1080,6 +1103,7 @@
                         }
 
                         this.isChecked[productId] = true;
+                        this.resolutionType[productId] = null;
                     },
 
                     getProductId(product) {
@@ -1161,6 +1185,8 @@
 
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
+
+                        this.rma_qty[product_id] = null;
 
                         let url = '{{ route("shop.customers.account.rma.get-resolution-reasons", ":resolutionType") }}';
 

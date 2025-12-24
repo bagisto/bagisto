@@ -5,6 +5,7 @@ namespace Webkul\RMA\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\RMA\Contracts\RMA as RMAContract;
 use Webkul\Sales\Models\OrderProxy;
 
@@ -50,9 +51,9 @@ class RMA extends Model implements RMAContract
     /**
      * Define a one-to-many relationship with the RMA items.
      */
-    public function items(): HasMany
+    public function item(): HasOne
     {
-        return $this->hasMany(RMAItemProxy::modelClass(), 'rma_id');
+        return $this->hasOne(RMAItemProxy::modelClass(), 'rma_id');
     }
 
     /**

@@ -125,7 +125,9 @@ class Helper
                 'order_items.order_id',
                 'order_items.id as order_item_id',
                 'order_items.qty_ordered',
+                'order_items.qty_canceled',
                 'order_items.qty_shipped',
+                'order_items.qty_refunded',
                 'order_items.qty_invoiced',
                 'order_items.created_at',
                 'order_items.additional',
@@ -200,6 +202,8 @@ class Helper
             $orderItem->rma_quantity = $rmaQuantity;
             $orderItem->attributes = $orderItem->additional['attributes'] ?? '';
             $orderItem->currentQuantity = $orderItem->qty_ordered - $rmaQuantity;
+            $orderItem->forReturnQuantity = $orderItem->qty_invoiced - $orderItem->qty_refunded;
+            $orderItem->forCancelQuantity = $orderItem->qty_ordered - $orderItem->qty_invoiced - $orderItem->qty_canceled;
 
             return $orderItem;
         })->values();

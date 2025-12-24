@@ -865,7 +865,7 @@ return [
                     'no-record'              => 'No Record Found !',
                     'on'                     => 'On',
                     'order-date'             => 'Order Date :',
-                    'order-details'          => 'Item(s) Requested for RMA',
+                    'order-details'          => 'Item Requested for RMA',
                     'order-id'               => 'Order ID :',
                     'order-status'           => 'Delivery Status :',
                     'order-total'            => 'Order Total :',

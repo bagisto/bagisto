@@ -71,9 +71,11 @@
                                                 @endforeach
                                             @endif
 
-                                            <p class="text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.sales.rma.all-rma.view.additional-information') :
-                                            </p>
+                                            @if ($rma?->information)
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    @lang('admin::app.sales.rma.all-rma.view.additional-information') :
+                                                </p>
+                                            @endif
 
                                             @if ($rma->images->isNotEmpty())
                                                 <p class="text-gray-600 dark:text-gray-300">
@@ -103,9 +105,11 @@
                                                 @endforeach
                                             @endif
 
-                                            <p class="text-gray-600 dark:text-gray-300">
-                                                {{ $rma?->information }}
-                                            </p>
+                                            @if ($rma?->information)
+                                                <p class="text-gray-600 dark:text-gray-300">
+                                                    {{ $rma?->information }}
+                                                </p>
+                                            @endif
 
                                             @if ($rma->images->isNotEmpty())
                                                 <div class="flex justify-start flex-wrap gap-2 min-w-[180px]">
@@ -132,7 +136,7 @@
                             </p>
                         </div>
 
-                        @foreach ($rma->items as $rmaItem) 
+                        @if ($rmaItem =$rma->item) 
                             <div class="flex gap-2.5">
                                 <div class="p-4">
                                     @if ($rmaItem?->product?->base_image_url)
@@ -201,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endif
                     </div>
 
                     <!-- Conversation -->
@@ -477,14 +481,11 @@
                     </x-admin::accordion>
 
                     <!-- RMA change status-->
-                     @if (
-                        $rma->rma_status_id != 6
-                        && ! in_array($rma->order->status, ['canceled', 'closed'])
-                    )
-                        @if ($rma->rma_status_id != 7) 
-                            @if ($rma->rma_status_id != 8) 
-                                @if ($rma->rma_status_id != 9) 
-                                    @if ($rma->order->status != 'closed') 
+                    @if ($rma->rma_status_id != 5)
+                        @if ($rma->rma_status_id != 6)
+                            @if ($rma->rma_status_id != 7) 
+                                @if ($rma->rma_status_id != 8) 
+                                    @if ($rma->rma_status_id != 9) 
                                         <x-admin::accordion>
                                             <x-slot:header>
                                                 <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
@@ -517,17 +518,9 @@
                                                         <x-admin::form.control-group.error control-name="rma_status_id" />
                                                     </x-admin::form.control-group>
 
-                                                    @php
-                                                        $rmaItemOrderId = $rma->items->pluck('order_item_id')->toArray();
-
-                                                        $rmaItemOrderId = $rmaItemOrderId[0];
-
-                                                        $orderItem = $rma->order->items->firstWhere('id', $rmaItemOrderId);
-                                                    @endphp
-
                                                     <!-- Refund Shipping -->
                                                     <x-admin::form.control-group
-                                                        v-if="rmaStatus == 5 || (Number({{ $orderItem->qty_invoiced - $orderItem->qty_refunded }}) > 0 && rmaStatus == 8)"
+                                                        v-if="rmaStatus == 5"
                                                         class="mb-2 w-full"
                                                     >
                                                         <x-admin::form.control-group.label class="required">

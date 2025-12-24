@@ -247,7 +247,7 @@
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.control
                                             type="hidden"
-                                            ::name="'order_item_id[' + getProductId(product) + ']'"
+                                            name="order_item_id"
                                             :label="trans('admin::app.sales.rma.create-rma.quantity')"
                                             :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
                                             ::value="product.order_item_id"
@@ -348,205 +348,228 @@
                             </p>
                         </div>
 
-                        <!-- RMA QTY -->
-                        <p class="w-full" v-if="! notAllowed">
-                            <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
-                                <!-- RMA Quantity -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required text-sm flex">
-                                        @lang('admin::app.sales.rma.create-rma.quantity')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        ::name="'rma_qty[' + getProductId(product) + ']'"
-                                        ::rules="'min_value:1|required|max_value:' + product.currentQuantity"
-                                        :label="trans('admin::app.sales.rma.create-rma.quantity')"
-                                        :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
-                                        v-model="rma_qty[getProductId(product)]"
-                                    />
-
-                                    <x-admin::form.control-group.error ::name="'rma_qty[' + getProductId(product) + ']'" class="flex"/>
-                                </x-admin::form.control-group>
-                            </div>
-
-                            <div
-                                v-if="product.currentQuantity <= '0'"
-                                class="text-sm text-red-600 flex mb-2"
-                            >
-                                @lang('admin::app.configuration.index.sales.rma.product-already-raw')
-                            </div>
-                        </p>
-
-                        <div class="flex gap-3" v-if="! notAllowed">
-                            <!-- Resolution Type for rules product -->
-                            <p class="w-full" v-if="product.rma_return_period">
-                                <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required text-sm flex">
-                                            @lang('admin::app.configuration.index.sales.rma.resolution-type')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            ::name="'resolution_type[' + getProductId(product) + ']'"
-                                            rules="required"
-                                            v-model="resolutionType[getProductId(product)]"
-                                            @change="getResolutionReason(getProductId(product))"
-                                            :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
-                                        >
-                                            <option value="">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped && product.rma_return_period"
-                                                value="return"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
-                                                value="cancel_items"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.cancel-items')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex"/>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </p>
-
-                            <!-- Resolution Type -->
-                            <p class="w-full" v-else>
-                                <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required text-sm flex">
-                                            @lang('admin::app.configuration.index.sales.rma.resolution-type')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            ::name="'resolution_type[' + getProductId(product) + ']'"
-                                            rules="required"
-                                            v-model="resolutionType[getProductId(product)]"
-                                            @change="getResolutionReason(getProductId(product))"
-                                            :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
-                                        >
-                                            <option value="">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                            </option>
-
-                                            <option
-                                                v-if="product.qty_ordered == product.qty_shipped"
-                                                value="return"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.return')
-                                            </option>
-
-                                            <option
-                                                v-if="(product.order_status == 'pending' || product.order_status == 'processing') && product.qty_ordered != product.qty_shipped"
-                                                value="cancel_items"
-                                            >
-                                                @lang('admin::app.configuration.index.sales.rma.cancel-items')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error ::name="'resolution_type[' + getProductId(product) + ']'" class="flex"/>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </p>
-
-                            <!-- Reasons -->
+                        <template v-if="! notAllowed">
                             <p class="w-full">
                                 <div
-                                    v-if="isChecked[getProductId(product)]
-                                        && product.currentQuantity > '0'
-                                        && resolutionType[getProductId(product)]
-                                        && resolutionReason[getProductId(product)]
-                                        && resolutionReason[getProductId(product)].length
-                                    "
+                                    v-if="product.currentQuantity <= '0'"
+                                    class="text-sm text-red-600 flex mb-2"
                                 >
+                                    @lang('admin::app.configuration.index.sales.rma.product-already-raw')
+                                </div>
+                            </p>
+
+                            <div class="flex gap-3">
+                                <!-- Resolution Type for rules product -->
+                                <p class="w-full" v-if="product.rma_return_period">
+                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required text-sm flex">
+                                                @lang('admin::app.configuration.index.sales.rma.resolution-type')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="resolution_type"
+                                                rules="required"
+                                                v-model="resolutionType[getProductId(product)]"
+                                                @change="getResolutionReason(getProductId(product))"
+                                                :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
+                                            >
+                                                <option value="">
+                                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                                </option>
+
+                                                <option
+                                                    v-if="product.qty_invoiced > product.qty_refunded"
+                                                    value="return"
+                                                >
+                                                    @lang('admin::app.configuration.index.sales.rma.return')
+                                                </option>
+
+                                                <option
+                                                    v-if="(product.qty_ordered - product.qty_invoiced - (product.qty_canceled ?? 0)) > 0"
+                                                    value="cancel_items"
+                                                >
+                                                    @lang('admin::app.configuration.index.sales.rma.cancel-items')
+                                                </option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error name="resolution_type" class="flex"/>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                </p>
+
+                                <!-- Resolution Type -->
+                                <p class="w-full" v-else>
+                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required text-sm flex">
+                                                @lang('admin::app.configuration.index.sales.rma.resolution-type')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="resolution_type"
+                                                rules="required"
+                                                v-model="resolutionType[getProductId(product)]"
+                                                @change="getResolutionReason(getProductId(product))"
+                                                :label="trans('admin::app.configuration.index.sales.rma.resolution-type')"
+                                            >
+                                                <option value="">
+                                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                                </option>
+
+                                                <option
+                                                    v-if="product.qty_invoiced > product.qty_refunded"
+                                                    value="return"
+                                                >
+                                                    @lang('admin::app.configuration.index.sales.rma.return')
+                                                </option>
+
+                                                <option
+                                                    v-if="(product.qty_ordered - product.qty_invoiced - (product.qty_canceled ?? 0)) > 0"
+                                                    value="cancel_items"
+                                                >
+                                                    @lang('admin::app.configuration.index.sales.rma.cancel-items')
+                                                </option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error name="resolution_type" class="flex"/>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                </p>
+
+                                <!-- Reasons -->
+                                <p class="w-full">
+                                    <div
+                                        v-if="isChecked[getProductId(product)]
+                                            && product.currentQuantity > '0'
+                                            && resolutionType[getProductId(product)]
+                                            && resolutionReason[getProductId(product)]
+                                            && resolutionReason[getProductId(product)].length
+                                        "
+                                    >
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required text-sm flex">
+                                                @lang('admin::app.sales.rma.create-rma.reason')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="rma_reason_id"
+                                                v-model="rma_reason_id[getProductId(product)]"
+                                                rules="required"
+                                                :label="trans('admin::app.sales.rma.create-rma.reason')"
+                                            >
+                                                <option
+                                                    v-for="reason in resolutionReason[getProductId(product)]"
+                                                    :value="reason.id"
+                                                    :key="reason.id"
+                                                >
+                                                    @{{ formatTitle(reason.title) }}
+                                                </option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error name="rma_reason_id" class="flex"/>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                </p>
+                            </div>
+
+                            <template
+                                v-if="isChecked[getProductId(product)]
+                                    && product.currentQuantity > '0'
+                                    && resolutionType[getProductId(product)]
+                                    && resolutionReason[getProductId(product)]
+                                    && resolutionReason[getProductId(product)].length
+                                "
+                            >
+                                <template v-if="product.qty_ordered == product.qty_shipped">
+                                    <!-- Delivery Status --> 
+                                    <input 
+                                        type="hidden" 
+                                        name="delivery_status" 
+                                        value="1" 
+                                    />
+                                    <div class="flex gap-3">
+                                        <!-- RMA Quantity -->
+                                        <p class="w-full">
+                                            <x-admin::form.control-group>
+                                                <x-admin::form.control-group.label class="required text-sm flex">
+                                                    @lang('admin::app.sales.rma.create-rma.quantity')
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="rma_qty"
+                                                    ::rules="'min_value:1|required|max_value:' + product.forReturnQuantity"
+                                                    :label="trans('admin::app.sales.rma.create-rma.quantity')"
+                                                    :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
+                                                    v-model="rma_qty[getProductId(product)]"
+                                                />
+
+                                                <x-admin::form.control-group.error name="rma_qty" class="flex"/>
+                                            </x-admin::form.control-group>
+                                        </p>
+
+                                        <!-- Package Condition -->
+                                        <p class="w-full">
+                                            <x-admin::form.control-group>
+                                                <x-admin::form.control-group.label class="required text-sm mt-4 flex">
+                                                    @lang('admin::app.configuration.index.sales.rma.package-condition')
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.control
+                                                    type="select"
+                                                    name="package_condition"
+                                                    rules="required"
+                                                    v-model="packageCondition"
+                                                    :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
+                                                >
+                                                    <option value="">
+                                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                                    </option>
+
+                                                    <option value="open">
+                                                        @lang('admin::app.configuration.index.sales.rma.open')
+                                                    </option>
+
+                                                    <option value="packed">
+                                                        @lang('admin::app.configuration.index.sales.rma.packed')
+                                                    </option>
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.error name="package_condition" class="flex"/>
+                                            </x-admin::form.control-group>
+                                        </p>
+                                    </div>
+                                </template>
+
+                                <template v-else>
+                                    <input
+                                        type="hidden" 
+                                        name="delivery_status" 
+                                        value="0" 
+                                    />
+
+                                    <!-- RMA Quantity -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required text-sm flex">
-                                            @lang('admin::app.sales.rma.create-rma.reason')
+                                            @lang('admin::app.sales.rma.create-rma.quantity')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
-                                            type="select"
-                                            ::name="'rma_reason_id[' + getProductId(product) + ']'"
-                                            v-model="rma_reason_id[getProductId(product)]"
-                                            rules="required"
-                                            :label="trans('admin::app.sales.rma.create-rma.reason')"
-                                        >
-                                            <option
-                                                v-for="reason in resolutionReason[getProductId(product)]"
-                                                :value="reason.id"
-                                                :key="reason.id"
-                                            >
-                                                @{{ formatTitle(reason.title) }}
-                                            </option>
-                                        </x-admin::form.control-group.control>
+                                            type="text"
+                                            name="rma_qty"
+                                            ::rules="'min_value:1|required|max_value:' + product.forCancelQuantity"
+                                            :label="trans('admin::app.sales.rma.create-rma.quantity')"
+                                            :placeholder="trans('admin::app.sales.rma.create-rma.quantity')"
+                                            v-model="rma_qty[getProductId(product)]"
+                                        />
 
-                                        <x-admin::form.control-group.error ::name="'rma_reason_id[' + getProductId(product) + ']'" class="flex"/>
+                                        <x-admin::form.control-group.error name="rma_qty" class="flex"/>
                                     </x-admin::form.control-group>
-                                </div>
-                            </p>
-                        </div>
-
-                        <template
-                            v-if="isChecked[getProductId(product)]
-                                && product.currentQuantity > '0'
-                                && resolutionType[getProductId(product)]
-                                && resolutionReason[getProductId(product)]
-                                && resolutionReason[getProductId(product)].length
-                            "
-                        >
-                            <template v-if="product.qty_ordered == product.qty_shipped">
-                                <input 
-                                    type="hidden" 
-                                    name="delivery_status" 
-                                    value="1" 
-                                />
-
-                                <!-- Delivery Status -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required text-sm mt-4 flex">
-                                        @lang('admin::app.configuration.index.sales.rma.package-condition')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="package_condition"
-                                        rules="required"
-                                        v-model="packageCondition"
-                                        :label="trans('admin::app.configuration.index.sales.rma.package-condition')"
-                                    >
-                                        <option value="">
-                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                        </option>
-
-                                        <option value="open">
-                                            @lang('admin::app.configuration.index.sales.rma.open')
-                                        </option>
-
-                                        <option value="packed">
-                                            @lang('admin::app.configuration.index.sales.rma.packed')
-                                        </option>
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error name="package_condition" class="flex"/>
-                                </x-admin::form.control-group>
-                            </template>
-
-                            <template v-else>
-                                <input
-                                    type="hidden" 
-                                    name="delivery_status" 
-                                    value="0" 
-                                />
+                                </template>
                             </template>
                         </template>
                     </div>
@@ -941,6 +964,7 @@
                         }
 
                         this.isChecked[productId] = true;
+                        this.resolutionType[productId] = null;
                     },
 
                     getProductId(product) {
@@ -1008,6 +1032,8 @@
 
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
+
+                        this.rma_qty[product_id] = null;
 
                         let url = '{{route("admin.sales.rma.get-resolution-reasons", ":resolutionType")}}';
 

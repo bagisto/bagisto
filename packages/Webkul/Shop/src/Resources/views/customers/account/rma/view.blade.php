@@ -136,7 +136,7 @@
                     </thead>
 
                     <tbody class="divide-y">
-                        @foreach($rma->items as $item)
+                        @if($item = $rma->item)
                             <tr>
                                 <td class="px-4 py-4">
                                     <div class="flex items-center gap-3">
@@ -197,14 +197,14 @@
                                     {{ $item->reason->title }}
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
 
             <!-- Mobile Card View -->
             <div class="md:hidden space-y-4">
-                @foreach($rma->items as $item)
+                @if($item = $rma->item)
                     <div class="rounded-xl border p-4 space-y-3">
                         <div class="flex items-center gap-3">
                             @if ($item->orderItem->product?->images?->first())
@@ -271,7 +271,7 @@
                             <p class="text-gray-600">{{ $item->reason->title }}</p>
                         </div>
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
 

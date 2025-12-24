@@ -80,7 +80,7 @@ class RMAController extends Controller
      */
     public function view(int $id): View|RedirectResponse
     {
-        $rma = $this->rmaRepository->with(['items', 'order'])->findOrFail($id);
+        $rma = $this->rmaRepository->with(['item', 'order'])->findOrFail($id);
 
         $canCloseRma = $this->rmaRepository->canCloseRma($rma);
 
@@ -113,10 +113,10 @@ class RMAController extends Controller
     {
         $this->validate(request(), [
             'order_id'        => 'required|exists:orders,id',
-            'order_item_id'   => 'required|array|min:1',
-            'rma_qty'         => 'required|array|min:1',
-            'resolution_type' => 'required|array|min:1',
-            'rma_reason_id'   => 'required|array|min:1',
+            'order_item_id'   => 'required',
+            'rma_qty'         => 'required',
+            'resolution_type' => 'required',
+            'rma_reason_id'   => 'required',
             'information'     => 'nullable|string',
             'images'          => 'nullable|array|min:1',
             'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
@@ -150,16 +150,14 @@ class RMAController extends Controller
         /**
          * Creation of RMA items for the newly created RMA record.
          */
-        foreach ($data['order_item_id'] as $key => $orderItemId) {
-            $this->rmaItemRepository->create([
-                'rma_id'        => $rma->id,
-                'rma_reason_id' => $data['rma_reason_id'][$key],
-                'order_item_id' => $orderItemId,
-                'variant_id'    => ! empty($data['variant'][$key]) ? $data['variant'][$key] : null,
-                'quantity'      => $data['rma_qty'][$key],
-                'resolution'    => $data['resolution_type'][$key],
-            ]);
-        }
+        $this->rmaItemRepository->create([
+            'rma_id'        => $rma->id,
+            'rma_reason_id' => $data['rma_reason_id'],
+            'order_item_id' => $data['order_item_id'],
+            'variant_id'    => ! empty($data['variant']) ? $data['variant'] : null,
+            'quantity'      => $data['rma_qty'],
+            'resolution'    => $data['resolution_type'],
+        ]);
 
         /**
          * Initial message indicating the processing of the RMA request.
@@ -192,7 +190,7 @@ class RMAController extends Controller
         /**
          * Sending RMA creation email to the customer.
          */
-        if ($rma->items) {
+        if ($rma->item) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
             } catch (\Exception $e) {
