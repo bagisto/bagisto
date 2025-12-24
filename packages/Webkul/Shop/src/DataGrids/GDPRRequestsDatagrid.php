@@ -181,7 +181,7 @@ class GDPRRequestsDatagrid extends DataGrid
                 $url = route('shop.customers.account.gdpr.revoke', $row->id);
 
                 return $isPending
-                    ? '<a href="'.$url.'" class="primary-button rounded-full px-6 py-1.5 max-sm:py-1">'.trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn').'</a>'
+                    ? '<form method="POST" action="'.$url.'" style="display:inline;">'.csrf_field().'<button type="submit" class="primary-button rounded-full px-6 py-1.5 max-sm:py-1">'.trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn').'</button></form>'
                     : '<button class="primary-button rounded-full px-6 py-1.5 max-sm:py-1" disabled>'.trans('shop::app.customers.account.gdpr.index.datagrid.revoke-btn').'</button>';
             },
         ]);
