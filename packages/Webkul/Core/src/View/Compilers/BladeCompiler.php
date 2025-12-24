@@ -18,12 +18,24 @@ class BladeCompiler extends BaseBladeCompiler
 
         if (
             config('view.tracer')
-            && strpos($this->getPath(), 'tracer/style.blade.php') == false
-            && strpos($this->getPath(), 'master.blade.php') == false
+            && strpos($this->getPath(), 'tracer/style.blade.php') === false
         ) {
             $finalPath = str_replace('/Providers/..', '', str_replace(base_path(), '', $this->getPath()));
 
-            $contents = '<!-- blade-tracer-start: '.$finalPath.' -->'.$contents.'<!-- blade-tracer-end -->';
+            $escapedPath = htmlspecialchars($finalPath, ENT_QUOTES, 'UTF-8');
+
+            $contents = preg_replace_callback(
+                '/^(\s*)<([a-zA-Z][a-zA-Z0-9-]*)([\s>])/m',
+                function ($matches) use ($escapedPath) {
+                    return $matches[1].'<'.$matches[2].' data-blade-path="'.$escapedPath.'"'.$matches[3];
+                },
+                $contents,
+                1
+            );
+
+            if (strpos($contents, 'data-blade-path=') === false) {
+                $contents = '<span data-blade-path="'.$escapedPath.'">'.$contents.'</span>';
+            }
         }
 
         if (
