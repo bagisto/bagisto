@@ -40,6 +40,10 @@ class ProductController extends Controller
      */
     public function view()
     {
+        if (! array_key_exists(request()->query('type'), $this->typeFunctions)) {
+            abort(404);
+        }
+        
         return view('admin::reporting.view')->with([
             'entity'    => 'products',
             'startDate' => $this->reportingHelper->getStartDate(),
