@@ -66,13 +66,23 @@ class Controller extends BaseController
     }
 
     /**
+     * Validate if the requested type is valid.
+     *
+     * @return void
+     */
+    protected function validateRequestedType()
+    {
+        return ! array_key_exists(request()->query('type'), $this->typeFunctions);
+    }
+
+    /**
      * Resolve the requested type into a valid function name.
      *
      * @return string
      */
     protected function resolveTypeFunction()
     {
-        if (! array_key_exists(request()->query('type'), $this->typeFunctions)) {
+        if ($this->validateRequestedType()) {
             abort(404);
         }
 

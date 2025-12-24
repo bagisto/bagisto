@@ -41,7 +41,9 @@ class SaleController extends Controller
      */
     public function view()
     {
-        $this->resolveTypeFunction();
+        if ($this->validateRequestedType()) {
+            abort(404);
+        }
 
         return view('admin::reporting.view')->with([
             'entity'    => 'sales',

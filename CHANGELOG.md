@@ -10,7 +10,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
 
-- Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection
+- Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection.
 
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
