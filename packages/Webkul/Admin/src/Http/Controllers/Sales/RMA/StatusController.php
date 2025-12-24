@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\StatusDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -43,7 +44,11 @@ class StatusController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
+        Event::dispatch('rma.rma-status.create.before');
+
+        $rmaStatus = $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
+
+        Event::dispatch('rma.rma-status.create.after', $rmaStatus);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.create.success'),
@@ -70,7 +75,11 @@ class StatusController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), $id);
+        Event::dispatch('rma.rma-status.update.before', $id);
+
+        $rmaStatus = $this->rmaStatusRepository->update(request()->only('title', 'status', 'color'), $id);
+
+        Event::dispatch('rma.rma-status.update.after', $rmaStatus);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.edit.success'),
@@ -85,7 +94,11 @@ class StatusController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            $this->rmaStatusRepository->delete($id);
+            Event::dispatch('rma.rma-status.delete.before', $id);
+
+            $this->rmaStatusRepository->where('default', 0)->delete($id);
+
+            Event::dispatch('rma.rma-status.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete-success'),
@@ -102,9 +115,17 @@ class StatusController extends Controller
      */
     public function massUpdate(MassUpdateRequest $request): JsonResponse
     {
-        $this->rmaStatusRepository
-            ->whereIn('id', $request->indices)
-            ->update(['status' => $request->value]);
+        $rmaStatusIds = request()->input('indices');
+
+        foreach ($rmaStatusIds as $rmaStatusId) {
+            Event::dispatch('rma.rma-status.update.before', $rmaStatusId);
+
+            $rmaStatus = $this->rmaStatusRepository->update([
+                'status'  => request()->input('value'),
+            ], $rmaStatusId, ['status']);
+
+            Event::dispatch('rma.rma-status.update.after', $rmaStatus);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rma-status.edit.mass-update-success'),
@@ -117,10 +138,15 @@ class StatusController extends Controller
     public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
         try {
-            $this->rmaStatusRepository
-                ->where('default', 0)
-                ->whereIn('id', $request->indices)
-                ->delete();
+            $rmaStatusIds = request()->input('indices');
+
+            foreach ($rmaStatusIds as $rmaStatusId) {
+                Event::dispatch('rma.rma-status.delete.before', $rmaStatusId);
+
+                $this->rmaStatusRepository->where('default', 0)->delete($rmaStatusId);
+
+                Event::dispatch('rma.rma-status.delete.after', $rmaStatusId);
+            }
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rma-status.index.datagrid.mass-delete-success'),

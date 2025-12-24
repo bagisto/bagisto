@@ -1,3 +1,7 @@
+@php
+    use Webkul\RMA\Enums\DefaultRMAResolution;
+@endphp
+
 <x-shop::layouts.account>
     <x-slot:title>
         @lang('shop::app.rma.customer.create.view')
@@ -190,7 +194,11 @@
                                 </td>
                                 
                                 <td class="px-4 py-4 text-sm text-gray-600">
-                                    {{ ucwords(str_replace('_', ' ', $item->resolution)) }}
+                                    @if ($item->resolution == DefaultRMAResolution::RETURN->value)
+                                        @lang('shop::app.customers.account.rma.create.return')
+                                    @else
+                                        {{ ucwords(str_replace('_', ' ', $item->resolution)) }}
+                                    @endif
                                 </td>
                                 
                                 <td class="px-4 py-4 text-sm text-gray-600">

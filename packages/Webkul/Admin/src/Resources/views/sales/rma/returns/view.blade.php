@@ -1,3 +1,8 @@
+@php
+    use Webkul\RMA\Enums\DefaultRMAResolution;
+    use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+@endphp
+
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
@@ -136,7 +141,7 @@
                             </p>
                         </div>
 
-                        @if ($rmaItem =$rma->item) 
+                        @if ($rmaItem = $rma->item) 
                             <div class="flex gap-2.5">
                                 <div class="p-4">
                                     @if ($rmaItem?->product?->base_image_url)
@@ -194,7 +199,11 @@
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
+                                                    @if ($rmaItem['resolution'] == DefaultRMAResolution::RETURN->value)
+                                                        @lang('admin::app.configuration.index.sales.rma.return')
+                                                    @else
+                                                        {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
+                                                    @endif
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
@@ -313,6 +322,7 @@
                                 </x-admin::form>
                             </div>
 
+                            <!-- Messages List -->
                             <div class="border rounded-lg p-3">
                                 <div
                                     class="mb-3 overflow-x-auto p-5 bg-gray-50 dark:bg-gray-900"
@@ -450,13 +460,13 @@
                                     <!-- RMA Order Status -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span
-                                            @if ($rma->delivery_status == 1)
+                                            @if ($rma->delivery_status)
                                                 class="label-completed py-1"
                                             @else
                                                 class="label-info py-1"
                                             @endif
                                         >
-                                            @if ($rma->delivery_status == 1)
+                                            @if ($rma->delivery_status)
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.delivered')
                                             @else
                                                 @lang('admin::app.sales.rma.all-rma.index.datagrid.undelivered')
@@ -464,13 +474,13 @@
                                         </span>
                                     </p>
 
-                                    @if ($rma->rma_status_id == 7)
+                                    @if ($rma->rma_status_id == DefaultRMAStatusEnum::DECLINED->value)
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.declined-admin')
                                         </p>
                                     @endif
 
-                                    @if ($rma->rma_status_id == 8)
+                                    @if ($rma->rma_status_id == DefaultRMAStatusEnum::ITEM_CANCELED->value)
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.rma.all-rma.view.solved-by-admin')
                                         </p>
@@ -481,76 +491,83 @@
                     </x-admin::accordion>
 
                     <!-- RMA change status-->
-                    @if ($rma->rma_status_id != 5)
-                        @if ($rma->rma_status_id != 6)
-                            @if ($rma->rma_status_id != 7) 
-                                @if ($rma->rma_status_id != 8) 
-                                    @if ($rma->rma_status_id != 9) 
-                                        <x-admin::accordion>
-                                            <x-slot:header>
-                                                <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
-                                                    @lang('admin::app.sales.rma.all-rma.view.change-status')
-                                                </p>
-                                            </x-slot:header>
+                    @if ($rma->rma_status_id != DefaultRMAStatusEnum::RECEIVED_PACKAGE->value)
+                        @if ($rma->rma_status_id != DefaultRMAStatusEnum::SOLVED->value)
+                            @if ($rma->rma_status_id != DefaultRMAStatusEnum::DECLINED->value) 
+                                @if ($rma->rma_status_id != DefaultRMAStatusEnum::ITEM_CANCELED->value) 
+                                    @if ($rma->rma_status_id != DefaultRMAStatusEnum::CANCELED->value) 
+                                        <x-admin::form
+                                            v-slot="{ meta, errors, handleSubmit }"
+                                            as="div"
+                                        >
+                                            <form @submit="handleSubmit($event, updateRMStatus)">
+                                                <x-admin::accordion>
+                                                    <x-slot:header>
+                                                        <p class="p-3 text-base font-semibold text-gray-600 dark:text-gray-300 required">
+                                                            @lang('admin::app.sales.rma.all-rma.view.change-status')
+                                                        </p>
+                                                    </x-slot:header>
 
-                                            <x-slot:content>
-                                                <x-admin::form
-                                                    method="POST"
-                                                    :action="route('admin.sales.rma.update-status', $rma->id)"
-                                                >
-                                                    <!-- RMA Status -->
-                                                    <x-admin::form.control-group class="mb-2 w-full">
-                                                        <x-admin::form.control-group.control
-                                                            type="select"
-                                                            name="rma_status_id"
-                                                            rules="required"
-                                                            v-model="rmaStatus"
-                                                            :label="trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status')"
-                                                            id="orderItem"
-                                                        >
-                                                            @foreach ($statusArray as $key => $status)
-                                                                <option value="{{ $key }}" {{ $rma->rma_status_id == $key ? 'selected' : '' }}>
-                                                                    {{ $status }}
-                                                                </option>   
-                                                            @endforeach
-                                                        </x-admin::form.control-group.control>
+                                                    <x-slot:content>
+                                                        {{-- <x-admin::form
+                                                            method="POST"
+                                                            :action="route('admin.sales.rma.update-status', $rma->id)"
+                                                        > --}}
+                                                            <!-- RMA Status -->
+                                                            <x-admin::form.control-group class="mb-2 w-full">
+                                                                <x-admin::form.control-group.control
+                                                                    type="select"
+                                                                    name="rma_status_id"
+                                                                    rules="required"
+                                                                    v-model="rmaStatus"
+                                                                    :label="trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status')"
+                                                                    id="orderItem"
+                                                                >
+                                                                    @foreach ($statusArray as $key => $status)
+                                                                        <option value="{{ $key }}" {{ $rma->rma_status_id == $key ? 'selected' : '' }}>
+                                                                            {{ $status }}
+                                                                        </option>   
+                                                                    @endforeach
+                                                                </x-admin::form.control-group.control>
 
-                                                        <x-admin::form.control-group.error control-name="rma_status_id" />
-                                                    </x-admin::form.control-group>
+                                                                <x-admin::form.control-group.error control-name="rma_status_id" />
+                                                            </x-admin::form.control-group>
 
-                                                    <!-- Refund Shipping -->
-                                                    <x-admin::form.control-group
-                                                        v-if="rmaStatus == 5"
-                                                        class="mb-2 w-full"
-                                                    >
-                                                        <x-admin::form.control-group.label class="required">
-                                                            @lang('admin::app.sales.refunds.create.refund-shipping')
-                                                        </x-admin::form.control-group.label>
+                                                            <!-- Refund Shipping -->
+                                                            <x-admin::form.control-group
+                                                                v-if="rmaStatus == 5"
+                                                                class="mb-2 w-full"
+                                                            >
+                                                                <x-admin::form.control-group.label class="required">
+                                                                    @lang('admin::app.sales.refunds.create.refund-shipping')
+                                                                </x-admin::form.control-group.label>
 
-                                                        <x-admin::form.control-group.control
-                                                            type="text"
-                                                            name="shipping"
-                                                            :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
-                                                            :value="$rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
-                                                            :label="trans('admin::app.sales.refunds.create.refund-shipping')"
-                                                            id="shipping"
-                                                        >
-                                                        </x-admin::form.control-group.control>
+                                                                <x-admin::form.control-group.control
+                                                                    type="text"
+                                                                    name="shipping"
+                                                                    :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
+                                                                    :value="$rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
+                                                                    :label="trans('admin::app.sales.refunds.create.refund-shipping')"
+                                                                    id="shipping"
+                                                                >
+                                                                </x-admin::form.control-group.control>
 
-                                                        <x-admin::form.control-group.error control-name="shipping" />
-                                                    </x-admin::form.control-group>
+                                                                <x-admin::form.control-group.error control-name="shipping" />
+                                                            </x-admin::form.control-group>
 
-                                                    <div class="account-action">
-                                                        <button
-                                                            type="submit"
-                                                            class="primary-button"
-                                                        >
-                                                            @lang('admin::app.sales.rma.all-rma.view.save-btn')
-                                                        </button>
-                                                    </div>
-                                                </x-admin::form>
-                                            </x-slot:content>
-                                        </x-admin::accordion>
+                                                            <div class="account-action">
+                                                                <button
+                                                                    type="submit"
+                                                                    class="primary-button"
+                                                                >
+                                                                    @lang('admin::app.sales.rma.all-rma.view.save-btn')
+                                                                </button>
+                                                            </div>
+                                                        {{-- </x-admin::form> --}}
+                                                    </x-slot:content>
+                                                </x-admin::accordion>
+                                            </form>
+                                        </x-admin::form>
                                     @endif
                                 @endif
                             @endif
@@ -560,7 +577,7 @@
                     <!-- Reopen Declined Request RMA -->
                     @if (
                         core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') == 'yes'
-                        && $rma->rma_status_id == 7
+                        && $rma->rma_status_id == DefaultRMAStatusEnum::DECLINED->value
                     )
                         <x-admin::accordion>
                             <x-slot:header>
@@ -615,7 +632,7 @@
 
                     @if (
                         core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes'
-                        && $rma->rma_status_id == 9
+                        && $rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value
                     )
                         <x-admin::accordion>
                             <x-slot:header>
@@ -866,8 +883,6 @@
                 },
 
                 mounted() {
-                    console.log(this.allowedFileTypes);
-
                     this.getMessage();
                 },
 
@@ -881,6 +896,41 @@
                 },
 
                 methods: {
+                    updateRMStatus(params, { resetForm, setErrors  }) {
+                        let messageToShow = "@lang('admin::app.components.modal.confirm.message')";
+
+                        if (this.rmaStatus == {{ DefaultRMAStatusEnum::ITEM_CANCELED->value}}) {
+                            messageToShow = "@lang('admin::app.sales.rma.all-rma.view.confirm-item-canceled')";
+                        } else if (this.rmaStatus == {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value}}) {    
+                            messageToShow = "@lang('admin::app.sales.rma.all-rma.view.confirm-item-refund')";
+                        }
+
+                        this.$emitter.emit('open-confirm-modal', {
+                            message: messageToShow,
+
+                            agree: () => {
+                                this.$axios.post(`{{ route('admin.sales.rma.update-status', $rma->id) }}`, {
+                                    rma_status_id: this.rmaStatus,
+                                    shipping: params.shipping,
+                                })
+                                .then((response) => {                                    
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
+
+                                    resetForm();
+
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1000);
+                                })
+                                .catch (error => {
+                                    if (error.response.status === 422) {
+                                        setErrors(error.response.data.errors);
+                                    }
+                                });
+                            },
+                        });
+                    },
+
                     getMessage() {
                         this.$axios.get(`{{ route('admin.sales.rma.get-messages') }}`, {
                             params: {

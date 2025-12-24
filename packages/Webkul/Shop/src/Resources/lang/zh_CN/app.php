@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => '该产品的所有商品已申请退货/取消',
                     'resolution-type'         => '解决类型',
                     'select'                  => '选择',
-                    'return'                  => '退货',
+                    'return'                  => '退货/退款',
                     'cancel-items'            => '取消商品',
                     'product-delivery-status' => '配送状态',
                     'package-condition'       => '包裹状态',

@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'All items from this product have already been requested for return/cancel',
                     'resolution-type'         => 'Resolution Type',
                     'select'                  => 'Select',
-                    'return'                  => 'Return',
+                    'return'                  => 'Return/Refund',
                     'cancel-items'            => 'Cancel Items',
                     'product-delivery-status' => 'Product Delivery Status',
                     'package-condition'       => 'Package Condition',

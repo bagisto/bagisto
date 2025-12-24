@@ -1,3 +1,8 @@
+@php
+    use Webkul\RMA\Enums\DefaultRMAResolution;
+    use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+@endphp
+
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
@@ -163,11 +168,11 @@
 
                                 <div class="flex flex-col gap-1.5">
                                     <p class="flex justify-end">
-                                        <span v-if="record.rma_status_id != 9">
-                                            <span v-if="record.rma_status_id != '8'">
-                                                <span v-if="record.rma_status_id != '7'">
-                                                    <span v-if="record.rma_status_id != '6'">
-                                                        <span v-if="record.rma_status_id != '5'">
+                                        <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::CANCELED->value }}">
+                                            <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::ITEM_CANCELED->value }}">
+                                                <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::DECLINED->value }}">
+                                                    <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::SOLVED->value }}">
+                                                        <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }}">
                                                             <a @click="cancelStatus(record.id)">
                                                                 <span title="@lang('shop::app.rma.customer-rma-index.cancel')" class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                                             </a>
@@ -300,11 +305,11 @@
                                             <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                         </a>
 
-                                        <span v-if="record.rmaStatus != 'Canceled'">
-                                            <span v-if="record.rmaStatus != 'Item Canceled'">
-                                                <span v-if="record.rmaStatus != 'Declined'">
-                                                    <span v-if="record.rmaStatus != 'Solved'">
-                                                        <span v-if="record.rmaStatus != 'Received Package'">
+                                        <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::CANCELED->value }}">
+                                            <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::ITEM_CANCELED->value }}">
+                                                <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::DECLINED->value }}">
+                                                    <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::SOLVED->value }}">
+                                                        <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }}">
                                                             <a @click="cancelStatus(record.id)">
                                                                 <span class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                                             </a>

@@ -333,10 +333,11 @@
                                         </span>
                                     </p>
                                 </template>
+
                                 <p
                                     v-else-if="! product.rma_return_period"
                                     class="flex text-sm justify-between gap-3 whitespace-nowrap"
-                                    >
+                                >
                                     <span>
                                         @lang('admin::app.sales.rma.all-rma.index.datagrid.return-window'):
                                     </span>

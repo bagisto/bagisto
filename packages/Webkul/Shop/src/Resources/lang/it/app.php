@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Tutti gli articoli di questo prodotto sono già stati richiesti per reso/annullamento',
                     'resolution-type'         => 'Tipo di risoluzione',
                     'select'                  => 'Seleziona',
-                    'return'                  => 'Reso',
+                    'return'                  => 'Reso/Rimborso',
                     'cancel-items'            => 'Annulla articoli',
                     'product-delivery-status' => 'Stato consegna prodotto',
                     'package-condition'       => 'Condizione del pacco',

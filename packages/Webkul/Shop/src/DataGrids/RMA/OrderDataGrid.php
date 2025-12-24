@@ -124,6 +124,7 @@ class OrderDataGrid extends DataGrid
         $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');
+        $this->addFilter('increment_id', 'orders.increment_id');
         $this->addFilter('status', 'orders.status');
         $this->addFilter('grand_total', 'orders.grand_total');
         $this->addFilter('method_title', 'order_payment.method_title');

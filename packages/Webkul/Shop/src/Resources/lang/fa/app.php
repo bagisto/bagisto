@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'تمام اقلام این محصول قبلاً برای بازگشت/لغو درخواست شده‌اند',
                     'resolution-type'         => 'نوع حل مشکل',
                     'select'                  => 'انتخاب',
-                    'return'                  => 'بازگشت',
+                    'return'                  => 'بازگشت/بازپرداخت',
                     'cancel-items'            => 'لغو اقلام',
                     'product-delivery-status' => 'وضعیت تحویل محصول',
                     'package-condition'       => 'وضعیت بسته‌بندی',

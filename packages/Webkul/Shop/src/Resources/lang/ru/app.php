@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Все товары этого продукта уже были запрошены для возврата/отмены',
                     'resolution-type'         => 'Тип решения',
                     'select'                  => 'Выбрать',
-                    'return'                  => 'Возврат',
+                    'return'                  => 'Возврат/Возмещение',
                     'cancel-items'            => 'Отменить товары',
                     'product-delivery-status' => 'Статус доставки товара',
                     'package-condition'       => 'Состояние упаковки',

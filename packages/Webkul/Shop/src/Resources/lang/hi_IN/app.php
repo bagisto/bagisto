@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'इस उत्पाद के सभी आइटम पहले ही रिटर्न/रद्द के लिए अनुरोधित हैं',
                     'resolution-type'         => 'समाधान प्रकार',
                     'select'                  => 'चयन करें',
-                    'return'                  => 'रिटर्न',
+                    'return'                  => 'वापसी/रिफंड',
                     'cancel-items'            => 'आइटम रद्द करें',
                     'product-delivery-status' => 'डिलीवरी स्थिति',
                     'package-condition'       => 'पैकेज की स्थिति',

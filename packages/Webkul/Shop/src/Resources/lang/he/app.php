@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'כל הפריטים של מוצר זה כבר התבקשו להחזרה/ביטול',
                     'resolution-type'         => 'סוג פתרון',
                     'select'                  => 'בחר',
-                    'return'                  => 'החזרה',
+                    'return'                  => 'החזרה/החזר',
                     'cancel-items'            => 'ביטול פריטים',
                     'product-delivery-status' => 'סטטוס משלוח',
                     'package-condition'       => 'מצב החבילה',

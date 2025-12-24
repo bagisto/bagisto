@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\Admin\Mail\Admin\RMA\CustomerToAdminConversationNotification;
@@ -80,7 +81,16 @@ class RMAController extends Controller
      */
     public function view(int $id): View|RedirectResponse
     {
-        $rma = $this->rmaRepository->with(['item', 'order'])->findOrFail($id);
+        $rma = $this->rmaRepository
+            ->with(['item', 'order'])
+            ->whereHas('order', function ($query) {
+                $query->where('customer_id', auth()->guard('customer')->id());
+            })
+            ->find($id);
+
+        if (! $rma) {
+            abort(404);
+        }
 
         $canCloseRma = $this->rmaRepository->canCloseRma($rma);
 
@@ -111,6 +121,18 @@ class RMAController extends Controller
      */
     public function store(): JsonResponse|RedirectResponse
     {
+        $order = $this->orderRepository->findOneWhere([
+            'id'          => request()->input('order_id'),
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
+        
+        if (! $order) {
+            return new JsonResponse([
+                'messages' => trans('shop::app.customer.signup-form.failed'),
+                'redirect' => route('shop.customers.account.rma.create'),
+            ]);
+        }
+
         $this->validate(request(), [
             'order_id'        => 'required|exists:orders,id',
             'order_item_id'   => 'required',
@@ -135,6 +157,8 @@ class RMAController extends Controller
             'images',
             'package_condition',
         ]);
+
+        Event::dispatch('rma.request.customer.create.before', $data);
 
         /**
          * Creation of a new RMA record.
@@ -187,6 +211,8 @@ class RMAController extends Controller
             $this->rmaAdditionalFieldRepository->createManyForRma($rma->id, $customAttributes);
         }
 
+        Event::dispatch('rma.request.customer.create.after', $rma);
+
         /**
          * Sending RMA creation email to the customer.
          */
@@ -233,6 +259,10 @@ class RMAController extends Controller
 
         $rma = $this->rmaRepository->findOrFail($id);
 
+        if ($rma->order->customer_id != auth()->guard('customer')->id()) {
+            abort(404);
+        }
+
         if (! empty($data['close_rma'])) {
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::SOLVED->value]);
 
@@ -256,6 +286,10 @@ class RMAController extends Controller
         $data = request()->only(['reopen_rma']);
 
         $rma = $this->rmaRepository->findOrFail($id);
+
+        if ($rma->order->customer_id != auth()->guard('customer')->id()) {
+            abort(404);
+        }
 
         if (! empty($data['reopen_rma'])) {
             $order = $this->orderRepository->findOrFail($rma->order_id);
@@ -285,6 +319,12 @@ class RMAController extends Controller
     {
         $rma = $this->rmaRepository->findOrFail($id);
 
+        if ($rma->order->customer_id != auth()->guard('customer')->id()) {
+            return new JsonResponse([
+                'message' => trans('shop::app.rma.response.already-cancel'),
+            ]);
+        }
+
         if ($rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value) {
             return new JsonResponse([
                 'message' => trans('shop::app.rma.response.already-cancel'),
@@ -303,6 +343,14 @@ class RMAController extends Controller
      */
     public function getMessages(): JsonResponse
     {
+        $rma = $this->rmaRepository->findOrFail(request()->get('id'));
+
+        if ($rma->order->customer_id != auth()->guard('customer')->id()) {
+            return new JsonResponse([
+                'messages' => [],
+            ]);
+        }
+
         $messages = $this->rmaMessageRepository
             ->where('rma_id', request()->get('id'))
             ->orderBy('id', 'desc')
@@ -319,6 +367,14 @@ class RMAController extends Controller
     public function sendMessage(): JsonResponse
     {
         $data = request()->all();
+
+        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+
+        if ($rma->order->customer_id != auth()->guard('customer')->id()) {
+            return new JsonResponse([
+                'messages' => trans('shop::app.customer.signup-form.failed'),
+            ]);
+        }
 
         $storedMessage = $this->rmaMessageRepository->create($data);
 

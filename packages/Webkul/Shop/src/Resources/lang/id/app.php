@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Semua item dari produk ini telah diminta untuk pengembalian/pembatalan',
                     'resolution-type'         => 'Jenis Resolusi',
                     'select'                  => 'Pilih',
-                    'return'                  => 'Pengembalian',
+                    'return'                  => 'Pengembalian/Dana',
                     'cancel-items'            => 'Batalkan Item',
                     'product-delivery-status' => 'Status Pengiriman Produk',
                     'package-condition'       => 'Kondisi Paket',

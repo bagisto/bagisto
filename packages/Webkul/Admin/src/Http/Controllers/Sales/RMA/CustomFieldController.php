@@ -57,6 +57,8 @@ class CustomFieldController extends Controller
             'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
+        Event::dispatch('rma.custom-field.create.before');
+
         $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->only(
             'label',
             'code',
@@ -76,6 +78,8 @@ class CustomFieldController extends Controller
                 'value'   => request()->input('value'),
             ], $rmaCustomField->id);
         }
+
+        Event::dispatch('rma.custom-field.create.after', $rmaCustomField);
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.create.success'));
 
@@ -120,6 +124,8 @@ class CustomFieldController extends Controller
 
         $data['is_required'] = $data['is_required'] ?? 0;
 
+        Event::dispatch('rma.custom-field.update.before', $id);
+
         $rmaCustomField = $this->rmaCustomFieldRepository->update($data, $id);
 
         $this->rmaCustomFieldOptionRepository->where('rma_custom_field_id', $rmaCustomField->id)->delete();
@@ -133,6 +139,8 @@ class CustomFieldController extends Controller
                 'value'   => request()->input('value'),
             ], $rmaCustomField->id);
         }
+
+        Event::dispatch('rma.custom-field.update.after', $rmaCustomField);
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.edit.success'));
 
@@ -163,13 +171,21 @@ class CustomFieldController extends Controller
     }
 
     /**
-     * Remove multiple resource from storage at a time.
+     * Update multiple resource status in storage at a time.
      */
     public function massUpdate(): JsonResponse
     {
-        $this->rmaCustomFieldRepository
-            ->whereIn('id', request()->indices)
-            ->update(['status' => request()->value]);
+        $rmaCustomFieldIds = request()->input('indices');
+
+        foreach ($rmaCustomFieldIds as $rmaCustomFieldId) {
+            Event::dispatch('rma.custom-field.update.before', $rmaCustomFieldId);
+
+            $rmaCustomField = $this->rmaCustomFieldRepository->update([
+                'status'  => request()->input('value'),
+            ], $rmaCustomFieldId, ['status']);
+
+            Event::dispatch('rma.custom-field.update.after', $rmaCustomField);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.custom-field.edit.success'),
@@ -177,12 +193,20 @@ class CustomFieldController extends Controller
     }
 
     /**
-     * Update multiple resource from storage at a time.
+     * Remove multiple resource from storage at a time.
      */
     public function massDestroy(): JsonResponse
     {
         try {
-            $this->rmaCustomFieldRepository->whereIn('id', request()->indices)->delete();
+            $rmaCustomFieldIds = request()->input('indices');
+
+            foreach ($rmaCustomFieldIds as $rmaCustomFieldId) {
+                Event::dispatch('rma.custom-field.delete.before', $rmaCustomFieldId);
+
+                $this->rmaCustomFieldRepository->delete($rmaCustomFieldId);
+
+                Event::dispatch('rma.custom-field.delete.after', $rmaCustomFieldId);
+            }
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),

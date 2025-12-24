@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\RulesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -44,12 +45,16 @@ class RulesController extends Controller
             'description' => 'required',
         ]);
 
-        $this->rmaRulesRepository->create(request()->only(
+        Event::dispatch('rma.rules.create.before');
+
+        $rmaRule = $this->rmaRulesRepository->create(request()->only(
             'name',
             'status',
             'description',
             'return_period'
         ));
+
+        Event::dispatch('rma.rules.create.after', $rmaRule);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.create.success'),
@@ -77,12 +82,16 @@ class RulesController extends Controller
             'description'      => 'required',
         ]);
 
-        $this->rmaRulesRepository->update(request()->only(
+        Event::dispatch('rma.rules.update.before', $id);
+
+        $rmaRule = $this->rmaRulesRepository->update(request()->only(
             'name',
             'status',
             'description',
             'return_period'
         ), $id);
+
+        Event::dispatch('rma.rules.update.after', $rmaRule);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.edit.success'),
@@ -95,7 +104,11 @@ class RulesController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
+            Event::dispatch('rma.rules.delete.before', $id);
+
             $this->rmaRulesRepository->delete($id);
+
+            Event::dispatch('rma.rules.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rules.index.datagrid.delete-success'),
@@ -112,9 +125,17 @@ class RulesController extends Controller
      */
     public function massUpdate(MassUpdateRequest $request): JsonResponse
     {
-        $this->rmaRulesRepository
-            ->whereIn('id', $request->indices)
-            ->update(['status' => $request->value]);
+        $rmaRuleIds = request()->input('indices');
+
+        foreach ($rmaRuleIds as $rmaRuleId) {
+            Event::dispatch('rma.rules.update.before', $rmaRuleId);
+
+            $rmaRule = $this->rmaRulesRepository->update([
+                'status'  => request()->input('value'),
+            ], $rmaRuleId, ['status']);
+
+            Event::dispatch('rma.rules.update.after', $rmaRule);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.rules.edit.mass-update-success'),
@@ -127,7 +148,15 @@ class RulesController extends Controller
     public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
         try {
-            $this->rmaRulesRepository->whereIn('id', $request->indices)->delete();
+            $rmaRuleIds = request()->input('indices');
+            
+            foreach ($rmaRuleIds as $rmaRuleId) {
+                Event::dispatch('rma.rules.delete.before', $rmaRuleId);
+
+                $this->rmaRulesRepository->delete($rmaRuleId);
+
+                Event::dispatch('rma.rules.delete.after', $rmaRuleId);
+            }
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rules.index.datagrid.mass-delete-success'),

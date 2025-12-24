@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Alle items van dit product zijn al aangevraagd voor retour/annulering',
                     'resolution-type'         => 'Oplossingstype',
                     'select'                  => 'Selecteren',
-                    'return'                  => 'Retour',
+                    'return'                  => 'Retour/Terugbetaling',
                     'cancel-items'            => 'Annuleer items',
                     'product-delivery-status' => 'Leveringsstatus',
                     'package-condition'       => 'Pakketconditie',

@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Tots els articles d’aquest producte ja han estat sol·licitats per devolució/cancel·lació',
                     'resolution-type'         => 'Tipus de resolució',
                     'select'                  => 'Selecciona',
-                    'return'                  => 'Devolució',
+                    'return'                  => 'Devolució/Reemborsament',
                     'cancel-items'            => 'Cancel·lar articles',
                     'product-delivery-status' => 'Estat de lliurament',
                     'package-condition'       => 'Estat del paquet',

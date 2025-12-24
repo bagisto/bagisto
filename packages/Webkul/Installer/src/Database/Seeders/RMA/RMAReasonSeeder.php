@@ -44,6 +44,12 @@ class RMAReasonSeeder extends Seeder
                 'position'   => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ], [
+                'title'      => 'Product Not Received Yet',
+                'status'     => 1,
+                'position'   => 5,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

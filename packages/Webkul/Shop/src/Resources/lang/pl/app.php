@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Wszystkie pozycje tego produktu zostały już zgłoszone do zwrotu/anulowania',
                     'resolution-type'         => 'Typ rozwiązania',
                     'select'                  => 'Wybierz',
-                    'return'                  => 'Zwrot',
+                    'return'                  => 'Zwrot/Refundacja',
                     'cancel-items'            => 'Anuluj pozycje',
                     'product-delivery-status' => 'Status dostawy produktu',
                     'package-condition'       => 'Stan paczki',

@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Todos os itens deste produto já foram solicitados para devolução/cancelamento',
                     'resolution-type'         => 'Tipo de resolução',
                     'select'                  => 'Selecionar',
-                    'return'                  => 'Devolução',
+                    'return'                  => 'Devolução/Reembolso',
                     'cancel-items'            => 'Cancelar itens',
                     'product-delivery-status' => 'Status de entrega do produto',
                     'package-condition'       => 'Condição da embalagem',

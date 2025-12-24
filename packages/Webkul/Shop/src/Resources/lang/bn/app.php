@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'এই পণ্যের সব আইটেম ইতিমধ্যেই রিটার্ন/বাতিলের জন্য অনুরোধ করা হয়েছে',
                     'resolution-type'         => 'সমাধানের ধরন',
                     'select'                  => 'নির্বাচন করুন',
-                    'return'                  => 'রিটার্ন',
+                    'return'                  => 'রিটার্ন/ফেরত',
                     'cancel-items'            => 'আইটেম বাতিল করুন',
                     'product-delivery-status' => 'ডেলিভারির অবস্থা',
                     'package-condition'       => 'প্যাকেজের অবস্থা',

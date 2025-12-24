@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'මෙම නිෂ්පාදනයේ සියලු අයිතම දැනටමත් ආපසු/අවලංගු කිරීම සඳහා ඉල්ලීම් කර ඇත',
                     'resolution-type'         => 'විසඳුම් වර්ගය',
                     'select'                  => 'තෝරන්න',
-                    'return'                  => 'ආපසු යවන්න',
+                    'return'                  => 'ආපසු/ආපසු මුදල්',
                     'cancel-items'            => 'අයිතම අවලංගු කරන්න',
                     'product-delivery-status' => 'භාරදීමේ තත්ත්වය',
                     'package-condition'       => 'පැකේජ් තත්ත්වය',

@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Bu ürüne ait tüm öğeler zaten iade/iptal için talep edilmiştir',
                     'resolution-type'         => 'Çözüm Türü',
                     'select'                  => 'Seç',
-                    'return'                  => 'İade',
+                    'return'                  => 'İade/Para İadesi',
                     'cancel-items'            => 'Ürünleri İptal Et',
                     'product-delivery-status' => 'Ürün Teslimat Durumu',
                     'package-condition'       => 'Paket Durumu',

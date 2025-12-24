@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Sales\RMA;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\ReasonDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -47,6 +48,8 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
+        Event::dispatch('rma.reason.create.before');
+
         $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
 
         foreach (request()->resolution_type as $resolutionType) {
@@ -55,6 +58,8 @@ class ReasonController extends Controller
                 'resolution_type' => $resolutionType,
             ]);
         }
+
+        Event::dispatch('rma.reason.create.after', $rmaReason);
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.reasons.create.success'),
@@ -85,6 +90,8 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
+        Event::dispatch('rma.reason.update.before', $id);
+
         $rmaReason = $this->rmaReasonRepository->update(request()->only('title', 'status', 'position'), $id);
 
         $resolutionTypes = request()->resolution_type ?? [];
@@ -104,6 +111,8 @@ class ReasonController extends Controller
             ]);
         }
 
+        Event::dispatch('rma.reason.update.after', $rmaReason);
+
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.reasons.edit.success'),
         ]);
@@ -115,7 +124,11 @@ class ReasonController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
+            Event::dispatch('rma.reason.delete.before', $id);
+
             $this->rmaReasonRepository->delete($id);
+
+            Event::dispatch('rma.reason.delete.after', $id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.reasons.index.datagrid.delete-success'),
@@ -128,13 +141,21 @@ class ReasonController extends Controller
     }
 
     /**
-     * Mass update reasons status.
+     * Update multiple resource from storage at a time.
      */
     public function massUpdate(MassUpdateRequest $request): JsonResponse
     {
-        $this->rmaReasonRepository
-            ->whereIn('id', $request->indices)
-            ->update(['status' => $request->value]);
+        $rmaReasonIds = request()->input('indices');
+
+        foreach ($rmaReasonIds as $rmaReasonId) {
+            Event::dispatch('rma.reason.update.before', $rmaReasonId);
+
+            $rmaReason = $this->rmaReasonRepository->update([
+                'status'  => request()->input('value'),
+            ], $rmaReasonId, ['status']);
+
+            Event::dispatch('rma.reason.update.after', $rmaReason);
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.sales.rma.reasons.edit.mass-update-success'),
@@ -142,12 +163,20 @@ class ReasonController extends Controller
     }
 
     /**
-     * Remove the specified resources from database.
+     * Remove multiple resource from storage at a time.
      */
     public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
         try {
-            $this->rmaReasonRepository->whereIn('id', $request->indices)->delete();
+            $rmaReasonIds = request()->input('indices');
+
+            foreach ($rmaReasonIds as $rmaReasonId) {
+                Event::dispatch('rma.reason.delete.before', $rmaReasonId);
+
+                $this->rmaReasonRepository->delete($rmaReasonId);
+
+                Event::dispatch('rma.reason.delete.after', $rmaReasonId);
+            }
 
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.reasons.index.datagrid.mass-delete-success'),

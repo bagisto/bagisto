@@ -212,6 +212,8 @@ class RequestController extends Controller
             'package_condition',
         ]);
 
+        Event::dispatch('rma.request.create.before', $data);
+
         /**
          * Creation of a new RMA record.
          */
@@ -262,6 +264,8 @@ class RequestController extends Controller
         if (! empty($customAttributes)) {
             $this->rmaAdditionalFieldRepository->createManyForRma($rma->id, $customAttributes);
         }
+        
+        Event::dispatch('rma.request.create.after', $rma);
 
         /**
          * Sending RMA creation email to the customer.
@@ -334,7 +338,7 @@ class RequestController extends Controller
     /**
      * Update RMA status by admin.
      */
-    public function updateStatus(int $id): RedirectResponse
+    public function updateStatus(int $id): JsonResponse
     {
         $data = request()->input();
 
@@ -360,7 +364,7 @@ class RequestController extends Controller
     /**
      * Handle received package status.
      */
-    private function handleReceivedPackage($rma, array $data): RedirectResponse
+    private function handleReceivedPackage($rma, array $data): JsonResponse
     {
         try {
             DB::beginTransaction();
@@ -379,16 +383,16 @@ class RequestController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            session()->flash('error', $e->getMessage());
-
-            return redirect()->back();
+            return new JsonResponse([
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 
     /**
      * Handle item cancellation status.
      */
-    private function handleItemCancellation($rma, array $data): RedirectResponse
+    private function handleItemCancellation($rma, array $data): JsonResponse
     {
         try {
             DB::beginTransaction();
@@ -403,9 +407,9 @@ class RequestController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            session()->flash('error', $e->getMessage());
-
-            return redirect()->back();
+            return new JsonResponse([
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 
@@ -547,7 +551,7 @@ class RequestController extends Controller
     /**
      * Finalize RMA update with message and notification.
      */
-    private function finalizeRmaUpdate($rma, array $data): RedirectResponse
+    private function finalizeRmaUpdate($rma, array $data): JsonResponse
     {
         $rma->update($data);
 
@@ -565,8 +569,8 @@ class RequestController extends Controller
         } catch (\Exception $e) {
         }
 
-        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
-
-        return redirect()->back();
+        return new JsonResponse([
+            'messages' => trans('admin::app.sales.rma.all-rma.view.update-success'),
+        ]);
     }
 }

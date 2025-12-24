@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'この商品のすべてのアイテムはすでに返品／キャンセルが申請されています',
                     'resolution-type'         => '解決タイプ',
                     'select'                  => '選択',
-                    'return'                  => '返品',
+                    'return'                  => '返品／返金',
                     'cancel-items'            => '商品をキャンセル',
                     'product-delivery-status' => '配送状況',
                     'package-condition'       => '梱包状態',

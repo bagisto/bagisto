@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'تم طلب إرجاع/إلغاء جميع عناصر هذا المنتج مسبقًا',
                     'resolution-type'         => 'نوع الحل',
                     'select'                  => 'اختر',
-                    'return'                  => 'إرجاع',
+                    'return'                  => 'إرجاع/استرداد',
                     'cancel-items'            => 'إلغاء العناصر',
                     'product-delivery-status' => 'حالة تسليم المنتج',
                     'package-condition'       => 'حالة الطرد',

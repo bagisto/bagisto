@@ -493,7 +493,7 @@ return [
                     'product-already-raw'     => 'Alle Artikel dieses Produkts wurden bereits zur Rückgabe/Stornierung angefragt',
                     'resolution-type'         => 'Lösungstyp',
                     'select'                  => 'Auswählen',
-                    'return'                  => 'Rückgabe',
+                    'return'                  => 'Rückgabe/Erstattung',
                     'cancel-items'            => 'Artikel stornieren',
                     'product-delivery-status' => 'Lieferstatus',
                     'package-condition'       => 'Paketzustand',
