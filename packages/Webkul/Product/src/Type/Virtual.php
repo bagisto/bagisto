@@ -219,7 +219,7 @@ class Virtual extends AbstractType
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('product::app.checkout.cart.inventory-warning');
+            throw new InsufficientProductInventoryException(trans('product::app.checkout.cart.inventory-warning'));
         }
 
         $price = $this->getFinalPrice();

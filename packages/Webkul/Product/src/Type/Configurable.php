@@ -377,7 +377,7 @@ class Configurable extends AbstractType
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
         if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
-            return trans('product::app.checkout.cart.inventory-warning');
+            throw new InsufficientProductInventoryException(trans('product::app.checkout.cart.inventory-warning'));
         }
 
         $price = $childProduct->getTypeInstance()->getFinalPrice();
