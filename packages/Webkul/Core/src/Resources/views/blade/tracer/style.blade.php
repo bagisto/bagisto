@@ -5,7 +5,6 @@
 
     [data-blade-path] {
         outline: 1px solid rgba(255, 0, 0, 0.6);
-        position: relative;
     }
 
     [data-blade-path]:hover {
@@ -13,88 +12,58 @@
     }
 
     .blade-path-label {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        background: #000;
-        color: #fff;
-        padding: 2px 6px;
-        font-size: 9px;
-        font-family: monospace;
-        z-index: 999999;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-        white-space: nowrap;
-        border-radius: 2px;
-        line-height: 1.3;
-        max-width: 90%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        pointer-events: auto;
+        position: fixed !important;
+        bottom: 10px !important;
+        left: 10px !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        color: #fff !important;
+        padding: 8px 12px !important;
+        font-size: 11px !important;
+        font-family: monospace !important;
+        z-index: 9999999 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+        border-radius: 4px !important;
+        line-height: 1.4 !important;
+        max-width: 90vw !important;
+        word-break: break-all !important;
+        display: none !important;
+        align-items: center !important;
+        gap: 8px !important;
+        pointer-events: none !important;
+        margin: 0 !important;
+        transform: none !important;
+        top: auto !important;
+        right: auto !important;
     }
 
     .blade-path-label .path-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
+        flex: 1 !important;
+        pointer-events: none !important;
     }
 
     .blade-path-label .copy-icon {
-        cursor: pointer;
-        padding: 2px 4px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 2px;
-        flex-shrink: 0;
-        font-size: 11px;
-        transition: all 0.2s;
-        pointer-events: auto;
-        user-select: none;
+        cursor: pointer !important;
+        padding: 4px 8px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 3px !important;
+        flex-shrink: 0 !important;
+        font-size: 12px !important;
+        transition: all 0.2s !important;
+        pointer-events: auto !important;
+        user-select: none !important;
     }
 
     .blade-path-label .copy-icon:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.3) !important;
     }
 
     .blade-path-label .copy-icon.copied {
-        background: #4caf50;
+        background: #4caf50 !important;
     }
 
-    [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 22px;
-    }
-
-    [data-blade-path] [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 42px;
-    }
-
-    [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 62px;
-    }
-
-    [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 82px;
-    }
-
-    [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 102px;
-    }
-
-    [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] [data-blade-path] .blade-path-label {
-        top: 122px;
-    }
-
-    [data-blade-path]:hover .blade-path-label {
-        max-width: 600px;
-        font-weight: bold;
-        z-index: 9999999;
-        font-size: 10px;
-        padding: 4px 8px;
-    }
-
-    [data-blade-path]:hover .blade-path-label .path-text {
-        white-space: normal;
-        word-break: break-all;
+    .blade-path-label.active {
+        display: flex !important;
+        pointer-events: auto !important;
     }
 
     .main-container-wrapper .product-card .product-image img {
@@ -105,32 +74,13 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    (function() {
         if (!document.body) return;
         
-        const walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_COMMENT,
-            null,
-            false
-        );
-
-        let comment;
-
-        const pathMap = new Map();
-
         /**
-         * First Pass: Collect all blade-tracer comments.
+         * Store processed elements to avoid duplicates.
          */
-        while (comment = walker.nextNode()) {
-            if (comment.nodeValue.includes('blade-tracer-start:')) {
-                const match = comment.nodeValue.match(/blade-tracer-start:\s*(.+)/);
-
-                if (match) {
-                    pathMap.set(comment, match[1].trim());
-                }
-            }
-        }
+        const processedElements = new WeakSet();
 
         /**
          * Copy text to clipboard.
@@ -192,27 +142,26 @@
         }, true);
 
         /**
+         * Store labels separately in a WeakMap for elements that can't have children.
+         */
+        const labels = new WeakMap();
+
+        /**
          * Create label element.
          */
-        function createLabel(element, path) {
+        function createLabel(path) {
             const label = document.createElement('div');
             label.className = 'blade-path-label';
-            label.style.pointerEvents = 'auto';
             
             const pathText = document.createElement('span');
             pathText.className = 'path-text';
             pathText.textContent = path;
-            pathText.style.pointerEvents = 'none';
             
             const copyIcon = document.createElement('span');
             copyIcon.className = 'copy-icon';
             copyIcon.textContent = '📋';
             copyIcon.title = 'Copy path';
             copyIcon.setAttribute('data-path', path);
-            copyIcon.style.pointerEvents = 'auto';
-            copyIcon.style.cursor = 'pointer';
-            copyIcon.style.zIndex = '9999999';
-            copyIcon.style.position = 'relative';
             
             label.appendChild(pathText);
             label.appendChild(copyIcon);
@@ -220,95 +169,229 @@
             return label;
         }
 
-        /** 
-         * Store all traced elements and their paths.
+        /**
+         * Check if element can have children.
          */
-        const tracedElements = new Map();
+        function canHaveChildren(element) {
+            const voidElements = ['IMG', 'INPUT', 'BR', 'HR', 'META', 'LINK', 'AREA', 'BASE', 'COL', 'EMBED', 'PARAM', 'SOURCE', 'TRACK', 'WBR'];
+
+            return !voidElements.includes(element.tagName);
+        }
 
         /**
-         * Ensure label exists for an element.
+         * Add label to element if it has data-blade-path attribute.
          */
-        function ensureLabel(element, path) {
-            if (!document.body.contains(element)) {
-                tracedElements.delete(element);
+        function addLabelToElement(element) {
+            if (processedElements.has(element) || !element.hasAttribute('data-blade-path')) {
+                return;
+            }
+            
+            const path = element.getAttribute('data-blade-path');
 
+            if (!path) return;
+            
+            processedElements.add(element);
+            
+            if (element.querySelector('.blade-path-label') || labels.has(element)) {
                 return;
             }
 
-            const existingLabel = element.querySelector('.blade-path-label');
-
-            if (!existingLabel) {
-                const label = createLabel(element, path);
-
-                element.appendChild(label);
+            const label = createLabel(path);
+            
+            if (canHaveChildren(element)) {
+                try {
+                    element.appendChild(label);
+                    labels.set(element, label);
+                } catch (e) {
+                    document.body.appendChild(label);
+                    labels.set(element, label);
+                }
+            } else {
+                document.body.appendChild(label);
+                labels.set(element, label);
             }
         }
 
         /**
-         * Ensure all traced elements have labels.
+         * Process all elements with data-blade-path attribute.
          */
-        function ensureAllLabels() {
+        function processAllElements() {
             const elements = document.querySelectorAll('[data-blade-path]');
 
-            elements.forEach(function(element) {
-                const path = element.getAttribute('data-blade-path');
-
-                if (path) {
-                    tracedElements.set(element, path);
-
-                    ensureLabel(element, path);
-                }
-            });
+            elements.forEach(addLabelToElement);
         }
 
         /**
-         * Second Pass: Assign data attributes and create labels.
+         * Initial processing.
          */
-        pathMap.forEach((path, startComment) => {
-            let nextNode = startComment.nextSibling;
-            
-            while (nextNode && nextNode.nodeType !== 1) {
-                if (nextNode.nodeType === 8 && nextNode.nodeValue.includes('blade-tracer-end')) {
-                    break;
-                }
-
-                nextNode = nextNode.nextSibling;
-            }
-            
-            if (nextNode && nextNode.nodeType === 1) {
-                nextNode.setAttribute('data-blade-path', path);
-                tracedElements.set(nextNode, path);
-
-                const label = createLabel(nextNode, path);
-                nextNode.appendChild(label);
-            }
-        });
+        processAllElements();
 
         /**
-         * Observe DOM changes to restore labels if removed.
+         * Watch for DOM changes with debounce.
          */
-        const observer = new MutationObserver(function(mutations) {
-            clearTimeout(observer.timeout);
+        let debounceTimer;
 
-            observer.timeout = setTimeout(ensureAllLabels, 50);
+        const observer = new MutationObserver(function(mutations) {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(processAllElements, 100);
         });
 
         observer.observe(document.body, {
             childList: true,
             subtree: true,
-            attributes: false
+            attributes: true,
+            attributeFilter: ['data-blade-path']
         });
 
         /**
-         * Periodically check and restore labels (for aggressive Vue.js replacements).
+         * Periodic check for Vue.js rendered content.
          */
-        setInterval(ensureAllLabels, 500);
+        setInterval(processAllElements, 1000);
 
         /**
-         * Also check on various events to ensure labels are present.
+         * Run on various events.
          */
-        window.addEventListener('load', ensureAllLabels);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', processAllElements);
+        }
         
-        document.addEventListener('DOMContentLoaded', ensureAllLabels);
-    });
+        window.addEventListener('load', processAllElements);
+
+        /**
+         * Handle hover to show only the directly hovered element's label.
+         */
+        let currentActiveLabel = null;
+
+        document.addEventListener('mouseover', function(e) {
+            const target = e.target.closest('[data-blade-path]');
+            
+            if (target) {
+                if (currentActiveLabel) {
+                    currentActiveLabel.classList.remove('active');
+                }
+                
+                let label = target.querySelector(':scope > .blade-path-label');
+                
+                if (!label) {
+                    label = labels.get(target);
+                }
+                
+                if (label) {
+                    if (label.parentElement === document.body) {
+                        const rect = target.getBoundingClientRect();
+                        label.style.top = (rect.top + window.scrollY) + 'px';
+                        label.style.left = (rect.left + window.scrollX) + 'px';
+                    }
+                    
+                    label.classList.add('active');
+                    currentActiveLabel = label;
+                }
+                
+                e.stopPropagation();
+            }
+        }, true);
+
+        document.addEventListener('mouseout', function(e) {
+            const target = e.target.closest('[data-blade-path]');
+            
+            if (target) {
+                let label = target.querySelector(':scope > .blade-path-label');
+
+                if (!label) {
+                    label = labels.get(target);
+                }
+                
+                if (label && currentActiveLabel === label) {
+                    label.classList.remove('active');
+                    currentActiveLabel = null;
+                }
+            }
+        }, true);
+
+        /**
+         * Keyboard shortcut to copy path (Ctrl+Shift+C or Cmd+Shift+C).
+         */
+        let currentHoveredElement = null;
+
+        document.addEventListener('mouseover', function(e) {
+            const target = e.target.closest('[data-blade-path]');
+
+            if (target) {
+                currentHoveredElement = target;
+            }
+        }, true);
+
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                
+                if (currentHoveredElement) {
+                    const path = currentHoveredElement.getAttribute('data-blade-path');
+                    
+                    if (path) {
+                        copyToClipboard(path).then(() => {
+                            showCopyNotification('✓ Path Copied!');
+                        }).catch(err => {
+                            showCopyNotification('✗ Copy Failed');
+                        });
+                    }
+                }
+            }
+        });
+
+        /**
+         * Show copy notification.
+         */
+        function showCopyNotification(message) {
+            const existing = document.querySelector('.blade-copy-notification');
+
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'blade-copy-notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4caf50;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 4px;
+                font-family: monospace;
+                font-size: 14px;
+                z-index: 99999999;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease-out;
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.3s';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        const style = document.createElement('style');
+
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+    })();
 </script>
