@@ -28,10 +28,10 @@
     <!-- Body Content -->
     <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
         <!-- Left sub-component -->
-        <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+        <div class="flex flex-col flex-1 gap-2 max-xl:flex-auto">
             <!-- General -->
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                <p class="mb-4 p-4 text-base font-semibold text-gray-800 dark:text-white">
+            <div class="bg-white rounded box-shadow dark:bg-gray-900">
+                <p class="p-4 mb-4 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
 
@@ -57,7 +57,7 @@
 
                                 <!-- Product Name -->
                                 <div class="grid place-content-start gap-1.5">
-                                    <p class="break-all text-base font-semibold text-gray-800 dark:text-white">
+                                    <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
                                         {{ $item->name }}
                                     </p>
 
@@ -100,9 +100,9 @@
                             </div>
 
                             <!-- Product Price Section -->
-                            <div class="grid place-content-start gap-1">
+                            <div class="grid gap-1 place-content-start">
                                 <div class="">
-                                    <p class="flex items-center justify-end gap-x-1 text-base font-semibold text-gray-800 dark:text-white">
+                                    <p class="flex items-center justify-end text-base font-semibold text-gray-800 gap-x-1 dark:text-white">
                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                     </p>
                                 </div>
@@ -311,8 +311,10 @@
                         <!-- Account Info -->
                         <div class="flex flex-col pb-4">
                             <!-- Customer Full Name -->
-                            <p class="font-semibold text-gray-800 dark:text-white">
-                                {{ $refund->order->customer_full_name }}
+                            <p 
+                                class="font-semibold text-gray-800 dark:text-white"
+                                v-text="'{{ $refund->order->customer_full_name }}'"
+                            >
                             </p>
 
                             <!-- Customer Email -->
@@ -337,7 +339,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="mt-4 block w-full border-b dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="py-4 text-base font-semibold text-gray-600 dark:text-gray-300">
