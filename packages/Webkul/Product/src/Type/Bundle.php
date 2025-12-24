@@ -240,7 +240,7 @@ class Bundle extends AbstractType
         }
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            throw new InsufficientProductInventoryException;
+            throw new InsufficientProductInventoryException(trans('product::app.checkout.cart.inventory-warning'));
         }
 
         $products = parent::prepareForCart($data);
@@ -258,7 +258,7 @@ class Bundle extends AbstractType
 
             /* need to check each individual quantity as well if don't have then show error */
             if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
-                throw new InsufficientProductInventoryException;
+                throw new InsufficientProductInventoryException(trans('product::app.checkout.cart.inventory-warning'));
             }
 
             if (! $product->getTypeInstance()->isSaleable()) {

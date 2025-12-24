@@ -3,16 +3,14 @@
 namespace Webkul\Product\Exceptions;
 
 use Exception;
-use Throwable;
 
-class InsufficientProductInventoryException extends Exception
-{
-    public function __construct(?string $message = null, ?Throwable $previous = null)
-    {
-        parent::__construct(
-            $message ?? trans('product::app.checkout.cart.inventory-warning'),
-            0,
-            $previous
-        );
-    }
-}
+/**
+ * Class InsufficientProductInventoryException
+ *
+ * Thrown when a product does not have sufficient inventory
+ * to fulfill the requested quantity during cart or order operations.
+ *
+ * This exception is typically raised while validating product
+ * availability before adding items to the cart or placing an order.
+ */
+class InsufficientProductInventoryException extends Exception {}
