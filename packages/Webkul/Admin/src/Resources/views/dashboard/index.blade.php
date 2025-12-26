@@ -4,9 +4,9 @@
     </x-slot>
 
     <!-- User Details Section -->
-    <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
+    <div class="flex items-center justify-between gap-4 mb-5 max-sm:flex-wrap">
         <div class="grid gap-1.5">
-            <p class="text-xl font-bold !leading-normal text-gray-800 dark:text-white">
+            <p class="text-xl font-bold !leading-normal text-gray-800 dark:text-white" v-pre>
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => auth()->guard('admin')->user()->name])
             </p>
 
@@ -29,7 +29,7 @@
     <!-- Body Component -->
     <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
         <!-- Left Section -->
-        <div class="flex flex-1 flex-col gap-8 max-xl:flex-auto">
+        <div class="flex flex-col flex-1 gap-8 max-xl:flex-auto">
             {!! view_render_event('bagisto.admin.dashboard.overall_details.before') !!}
 
             <!-- Overall Details -->
@@ -83,7 +83,7 @@
             {!! view_render_event('bagisto.admin.dashboard.store_stats.before') !!}
 
             <!-- Store Stats -->
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+            <div class="bg-white rounded box-shadow dark:bg-gray-900">
                 <!-- Total Sales Details -->
                 @include('admin::dashboard.total-sales')
 
@@ -122,7 +122,7 @@
                             >
                                 @{{ channels.find(channel => channel.code == filters.channel).name }}
                                 
-                                <span class="icon-sort-down text-2xl"></span>
+                                <span class="text-2xl icon-sort-down"></span>
                             </button>
                         </x-slot>
 

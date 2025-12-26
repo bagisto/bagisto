@@ -58,7 +58,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.page.create.before');
 
-        $page = $this->pageRepository->create(request()->only([
+        $data = request()->only([
             'page_title',
             'channels',
             'html_content',
@@ -66,7 +66,11 @@ class PageController extends Controller
             'url_key',
             'meta_keywords',
             'meta_description',
-        ]));
+        ]);
+
+        $data['html_content'] = clean_content($data['html_content']);
+
+        $page = $this->pageRepository->create($data);
 
         Event::dispatch('cms.page.create.after', $page);
 
@@ -109,8 +113,12 @@ class PageController extends Controller
 
         Event::dispatch('cms.page.update.before', $id);
 
+        $localeData = request()->input($locale);
+
+        $localeData['html_content'] = clean_content($localeData['html_content']);
+
         $page = $this->pageRepository->update([
-            $locale    => request()->input($locale),
+            $locale    => $localeData,
             'channels' => request()->input('channels'),
             'locale'   => $locale,
         ], $id);
