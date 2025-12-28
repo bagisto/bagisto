@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    darkMode: 'class',
+
     content: ["./src/Resources/**/*.blade.php", "./src/Resources/**/*.js"],
 
     theme: {
@@ -34,6 +36,24 @@ module.exports = {
                 darkGreen: '#40994A',
                 darkBlue: '#0044F2',
                 darkPink: '#F85156',
+                // RAM Plaza colors (aligned with RAM Visual Identity)
+                ram: {
+                    pink: "#ff3e9a",
+                    "pink-hover": "#ff66b6",
+                    blue: "#4A90E2",
+                    // Backgrounds (warm blue-gray tones)
+                    dark: "#1E252B",
+                    surface: "#262D34",
+                    card: "#262D34",
+                    input: "#2d353d",
+                    hover: "#323b44",
+                    // Text
+                    "text-primary": "#ffffff",
+                    "text-secondary": "#a0aab4",
+                    "text-muted": "#6b7280",
+                    // Borders
+                    border: "#3a4249",
+                },
             },
 
             fontFamily: {

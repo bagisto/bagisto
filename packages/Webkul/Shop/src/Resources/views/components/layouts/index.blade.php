@@ -5,8 +5,8 @@
 ])
 
 <!DOCTYPE html>
-
 <html
+    class="dark"
     lang="{{ app()->getLocale() }}"
     dir="{{ core()->getCurrentLocale()->direction }}"
 >
@@ -125,7 +125,7 @@
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             <!-- Page Content Blade Component -->
-            <main id="main" class="bg-white">
+            <main id="main" class="bg-white dark:bg-ram-dark">
                 {{ $slot }}
             </main>
 

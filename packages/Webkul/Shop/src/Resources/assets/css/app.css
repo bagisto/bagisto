@@ -2,6 +2,428 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   RAM Plaza Dark Theme - Complete Override
+   Aligned with RAM Visual Identity (branding-specs.md)
+   ========================================================================== */
+
+@layer base {
+    html.dark {
+        background-color: #1E252B;
+        color-scheme: dark;
+    }
+
+    html.dark body {
+        background-color: #1E252B !important;
+        color: #ffffff !important;
+    }
+}
+
+@layer components {
+    /* ======================================================================
+       GLOBAL BACKGROUND OVERRIDES
+       ====================================================================== */
+
+    /* ALL white/light backgrounds -> dark */
+    .dark .bg-white,
+    .dark .bg-zinc-50,
+    .dark .bg-gray-50,
+    .dark .bg-zinc-100,
+    .dark .bg-gray-100,
+    .dark .bg-zinc-200,
+    .dark .bg-gray-200,
+    .dark .bg-lightOrange,
+    .dark .bg-\[\#F1EADF\],
+    .dark .bg-\[\#f5f5f5\],
+    .dark [class*="rounded"][class*="bg-white"],
+    .dark [class*="rounded"][class*="bg-zinc"],
+    .dark .modal-content,
+    .dark [class*="shadow"][class*="bg-white"] {
+        background-color: #262D34;
+    }
+
+    /* Glassmorphism elements override (higher specificity) */
+    .dark .glass-header,
+    .dark .glass-dropdown,
+    .dark .glass-card,
+    .dark [class*="dark:bg-ram"] {
+        background-color: transparent;
+    }
+
+    /* ======================================================================
+       HOVER STATES - Critical fix for filters, toolbar, pagination
+       ====================================================================== */
+
+    .dark .hover\:bg-gray-100:hover,
+    .dark .hover\:bg-zinc-100:hover,
+    .dark .hover\:bg-gray-50:hover,
+    .dark .hover\:bg-zinc-50:hover {
+        background-color: #323b44 !important;
+    }
+
+    /* ======================================================================
+       TEXT COLORS - Complete override
+       ====================================================================== */
+
+    /* Primary text (was black/gray-900) */
+    .dark .text-black,
+    .dark .text-gray-900,
+    .dark .text-zinc-900,
+    .dark .text-gray-800,
+    .dark .text-zinc-800,
+    .dark .text-navyBlue,
+    .dark .text-\[\#060C3B\],
+    .dark [class*="text-navy"] {
+        color: #ffffff !important;
+    }
+
+    /* Secondary text */
+    .dark .text-gray-700,
+    .dark .text-zinc-700,
+    .dark .text-gray-600,
+    .dark .text-zinc-600 {
+        color: #a0aab4 !important;
+    }
+
+    /* Muted text */
+    .dark .text-gray-500,
+    .dark .text-zinc-500,
+    .dark .text-gray-400,
+    .dark .text-zinc-400 {
+        color: #6b7280 !important;
+    }
+
+    /* ======================================================================
+       BORDERS - Complete override
+       ====================================================================== */
+
+    .dark .border-zinc-200,
+    .dark .border-gray-200,
+    .dark .border-zinc-300,
+    .dark .border-gray-300,
+    .dark .border-\[\#e9decc\],
+    .dark [class*="border"][class*="zinc"],
+    .dark [class*="border"][class*="gray"] {
+        border-color: #3a4249 !important;
+    }
+
+    .dark .border-navyBlue,
+    .dark .hover\:border-navyBlue:hover,
+    .dark .\!border-navyBlue {
+        border-color: #ff3e9a !important;
+    }
+
+    /* ======================================================================
+       FORM INPUTS
+       ====================================================================== */
+
+    .dark input,
+    .dark select,
+    .dark textarea,
+    .dark .custom-select {
+        background-color: #2d353d !important;
+        border-color: #3a4249 !important;
+        color: #ffffff !important;
+    }
+
+    .dark input:focus,
+    .dark select:focus,
+    .dark textarea:focus {
+        border-color: #ff3e9a !important;
+        outline-color: #ff3e9a !important;
+    }
+
+    .dark input::placeholder,
+    .dark textarea::placeholder {
+        color: #6b7280 !important;
+    }
+
+    .dark .custom-select {
+        background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    }
+
+    .dark select option {
+        background-color: #262D34 !important;
+        color: #ffffff !important;
+    }
+
+    /* ======================================================================
+       BUTTONS - RAM Pink theme
+       ====================================================================== */
+
+    .dark .bg-navyBlue,
+    .dark button.bg-navyBlue,
+    .dark a.bg-navyBlue {
+        background-color: #ff3e9a !important;
+        color: #ffffff !important;
+    }
+
+    .dark .bg-navyBlue:hover {
+        background-color: #ff66b6 !important;
+    }
+
+    .dark .primary-button {
+        background-color: #ff3e9a !important;
+        border-color: #ff3e9a !important;
+    }
+
+    .dark .primary-button:hover {
+        background-color: #ff66b6 !important;
+    }
+
+    .dark .secondary-button {
+        background-color: transparent !important;
+        color: #ff3e9a !important;
+        border-color: #ff3e9a !important;
+    }
+
+    .dark .secondary-button:hover {
+        background-color: #ff3e9a !important;
+        color: #ffffff !important;
+    }
+
+    /* ======================================================================
+       SHIMMER / SKELETON LOADERS
+       ====================================================================== */
+
+    .dark .shimmer {
+        background: linear-gradient(to right, #262D34 8%, #323b44 18%, #262D34 33%) !important;
+        background-size: 1250px 100%;
+    }
+
+    /* ======================================================================
+       TABLES / DATAGRID
+       ====================================================================== */
+
+    .dark thead,
+    .dark thead.bg-gray-50,
+    .dark thead.bg-zinc-100,
+    .dark thead[class*="bg-"] {
+        background-color: #262D34 !important;
+    }
+
+    .dark tbody tr,
+    .dark tbody tr.bg-white {
+        background-color: #1E252B !important;
+    }
+
+    .dark tbody tr:hover {
+        background-color: #323b44 !important;
+    }
+
+    /* ======================================================================
+       RATINGS / STARS - Keep amber for visibility
+       ====================================================================== */
+
+    .dark .text-amber-500 {
+        color: #f59e0b !important;
+    }
+
+    .dark .bg-amber-500 {
+        background-color: #f59e0b !important;
+    }
+
+    /* ======================================================================
+       DROPDOWNS
+       ====================================================================== */
+
+    .dark .absolute[class*="bg-white"],
+    .dark [class*="dropdown"][class*="bg-white"],
+    .dark .pointer-events-none[class*="bg-white"] {
+        background-color: #262D34 !important;
+    }
+
+    /* ======================================================================
+       SCROLLBAR
+       ====================================================================== */
+
+    .dark ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dark ::-webkit-scrollbar-track {
+        background: #1E252B;
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+        background: #323b44;
+        border-radius: 4px;
+    }
+
+    .dark ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+    }
+
+    /* ======================================================================
+       SELECTION
+       ====================================================================== */
+
+    .dark ::selection {
+        background-color: rgba(255, 62, 154, 0.3);
+    }
+
+    /* ======================================================================
+       SHADOWS - Darker for dark theme
+       ====================================================================== */
+
+    .dark .shadow-sm,
+    .dark .shadow,
+    .dark .shadow-md,
+    .dark .shadow-lg {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* ======================================================================
+       ALERTS / LABELS
+       ====================================================================== */
+
+    .dark .bg-green-100 {
+        background-color: rgba(34, 197, 94, 0.15) !important;
+    }
+
+    .dark .bg-red-100 {
+        background-color: rgba(239, 68, 68, 0.15) !important;
+    }
+
+    .dark .bg-yellow-100 {
+        background-color: rgba(234, 179, 8, 0.15) !important;
+    }
+
+    /* ======================================================================
+       LINKS
+       ====================================================================== */
+
+    .dark a {
+        color: inherit;
+    }
+
+    .dark a:hover {
+        color: #ff3e9a !important;
+    }
+
+    /* ======================================================================
+       SPECIAL COMPONENTS
+       ====================================================================== */
+
+    /* Modal overlay */
+    .dark .bg-gray-500.bg-opacity-50,
+    .dark [class*="bg-opacity"][class*="bg-gray"] {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
+
+    /* Product card overlays */
+    .dark .bg-white\/80 {
+        background-color: rgba(38, 45, 52, 0.9) !important;
+    }
+
+    /* Icon colors for wishlist */
+    .dark .icon-heart-fill {
+        color: #ff3e9a !important;
+    }
+
+    /* ======================================================================
+       GLASSMORPHISM UTILITIES - Enhanced visibility
+       ====================================================================== */
+
+    .dark .glass-header {
+        background: rgba(255, 255, 255, 0.18) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .dark .glass-dropdown {
+        background: rgba(38, 45, 52, 0.75) !important;
+        backdrop-filter: blur(20px) saturate(160%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .dark .glass-card {
+        background: rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(14px) saturate(160%) !important;
+        -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Header wrapper - transparent to let glass-header show through */
+    .dark header.bg-white[class*="dark:bg-ram"] {
+        background: transparent !important;
+    }
+
+    /* ======================================================================
+       NEON EFFECTS - RAM Signature (Enhanced)
+       ====================================================================== */
+
+    /* Neon Buttons (Pink glow - double layer) */
+    .dark .primary-button,
+    .dark button[type="submit"]:not(.secondary-button) {
+        box-shadow:
+            0 0 20px rgba(255, 62, 154, 0.5),
+            0 0 40px rgba(255, 62, 154, 0.2) !important;
+        transition: box-shadow 0.2s ease, background-color 0.2s ease !important;
+    }
+
+    .dark .primary-button:hover,
+    .dark button[type="submit"]:not(.secondary-button):hover {
+        box-shadow:
+            0 0 25px rgba(255, 62, 154, 0.6),
+            0 0 50px rgba(255, 62, 154, 0.3) !important;
+    }
+
+    /* Neon Avatars (Blue glow - enhanced) */
+    .dark img[src*="avatar"],
+    .dark img[src*="customer"],
+    .dark img[src*="storage/"],
+    .dark .customer-image,
+    .dark .user-image {
+        box-shadow: 0 6px 24px rgba(74, 144, 226, 0.5);
+        transition: box-shadow 0.2s ease;
+    }
+
+    .dark img[src*="avatar"]:hover,
+    .dark img[src*="customer"]:hover,
+    .dark img[src*="storage/"]:hover {
+        box-shadow: 0 8px 32px rgba(74, 144, 226, 0.6);
+    }
+
+    /* ======================================================================
+       FOCUS RINGS - Accessibility
+       ====================================================================== */
+
+    .dark *:focus-visible {
+        outline: 2px solid #ff3e9a !important;
+        outline-offset: 2px !important;
+    }
+
+    .dark input:focus,
+    .dark select:focus,
+    .dark textarea:focus {
+        border-color: #ff3e9a !important;
+        box-shadow: 0 0 0 3px rgba(255, 62, 154, 0.2) !important;
+    }
+
+    /* ======================================================================
+       RAM GRADIENT BAR - Signature Element
+       ====================================================================== */
+
+    .ram-gradient-bar {
+        height: 4px;
+        background: linear-gradient(90deg, #ff3e9a 0%, #4A90E2 100%);
+        border-radius: 2px;
+    }
+
+    .ram-gradient-bar-vertical {
+        width: 4px;
+        background: linear-gradient(180deg, #ff3e9a 0%, #4A90E2 100%);
+        border-radius: 2px;
+    }
+}
+
 @font-face {
     font-family: "bagisto-shop";
     src: url("../fonts/bagisto-shop.woff") format("woff");

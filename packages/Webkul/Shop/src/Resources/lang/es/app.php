@@ -537,7 +537,7 @@ return [
                 'customer-service'       => 'Servicio al cliente',
                 'email'                  => 'Correo Electrónico',
                 'footer-content'         => 'Contenido del pie de página',
-                'footer-text'            => '© Derechos de autor 2010 - :current_year, Webkul Software (registrada en India). Todos los derechos reservados.',
+                'footer-text'            => '© :current_year RAM Plaza - <a href="https://redactivamexico.net/" target="_blank" class="text-zinc-600 hover:underline">RedActivaMéxico</a>',
                 'locale'                 => 'Idioma',
                 'newsletter-text'        => '¡Prepárate para nuestro divertido boletín!',
                 'order-return'           => 'Pedido y devolución',
