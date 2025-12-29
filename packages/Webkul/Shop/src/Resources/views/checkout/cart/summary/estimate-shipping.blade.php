@@ -133,25 +133,13 @@
                             class="relative select-none border-b border-zinc-200 last:border-b-0 max-md:max-w-full max-md:flex-auto"
                             v-for="rate in method.rates"
                         >
-                            <div class="absolute top-5 ltr:left-4 rtl:right-4">
-                                <x-shop::form.control-group.control
-                                    type="radio"
-                                    name="shipping_method"
-                                    ::for="rate.method"
-                                    ::id="rate.method"
-                                    ::value="rate.method"
-                                    ::label="rate.method"
-                                />
-                            </div>
-
-                            <label 
-                                class="block cursor-pointer p-4 pl-12"
-                                :for="rate.method"
+                            <label
+                                class="block p-4"
                             >
                                 <p class="text-2xl font-semibold max-md:text-lg">
                                     @{{ rate.base_formatted_price }}
                                 </p>
-                                
+
                                 <p class="mt-2.5 text-xs font-medium max-md:mt-0">
                                     <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                 </p>
