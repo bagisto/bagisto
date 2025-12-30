@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         Event::dispatch('catalog.category.create.before');
 
-        $category = $this->categoryRepository->create($categoryRequest->only([
+        $data = $categoryRequest->only([
             'locale',
             'name',
             'parent_id',
@@ -80,7 +80,13 @@ class CategoryController extends Controller
             'attributes',
             'logo_path',
             'banner_path',
-        ]));
+        ]);
+
+        if (! empty($data['description'])) {
+            $data['description'] = clean_content($data['description']);
+        }
+
+        $category = $this->categoryRepository->create($data);
 
         Event::dispatch('catalog.category.create.after', $category);
 
@@ -114,7 +120,15 @@ class CategoryController extends Controller
     {
         Event::dispatch('catalog.category.update.before', $id);
 
-        $category = $this->categoryRepository->update($categoryRequest->only(
+        $locale = $categoryRequest->input('locale');
+
+        $localeData = $categoryRequest->input($locale);
+
+        if (! empty($localeData['description'])) {
+            $localeData['description'] = clean_content($localeData['description']);
+        }
+
+        $data = $categoryRequest->only(
             'locale',
             'parent_id',
             'logo_path',
@@ -122,9 +136,12 @@ class CategoryController extends Controller
             'position',
             'display_mode',
             'status',
-            'attributes',
-            $categoryRequest->input('locale')
-        ), $id);
+            'attributes'
+        );
+
+        $data[$locale] = $localeData;
+
+        $category = $this->categoryRepository->update($data, $id);
 
         Event::dispatch('catalog.category.update.after', $category);
 
