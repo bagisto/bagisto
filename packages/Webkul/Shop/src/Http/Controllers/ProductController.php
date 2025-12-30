@@ -49,8 +49,8 @@ class ProductController extends Controller
         $parsed = parse_url($url);
 
         if (
-            ! $parsed 
-            || empty($parsed['host']) 
+            ! $parsed
+            || empty($parsed['host'])
             || empty($parsed['scheme'])
         ) {
             return false;
@@ -85,7 +85,7 @@ class ProductController extends Controller
      */
     private function isBlockedIp(string $ip): bool
     {
-        return !filter_var(
+        return ! filter_var(
             $ip,
             FILTER_VALIDATE_IP,
             FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
