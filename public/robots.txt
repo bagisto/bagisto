@@ -1,2 +1,44 @@
+# RAM Plaza - robots.txt
+# https://plaza.redactivamexico.net
+
 User-agent: *
-Disallow:
+
+# Allow public pages
+Allow: /
+
+# Disallow admin area
+Disallow: /admin
+Disallow: /admin/
+
+# Disallow customer private areas
+Disallow: /customer/
+Disallow: /checkout/
+Disallow: /onepage/
+
+# Disallow cart
+Disallow: /cart
+Disallow: /cart/
+
+# Disallow wishlist
+Disallow: /wishlist
+Disallow: /wishlist/
+
+# Disallow compare
+Disallow: /compare
+Disallow: /compare/
+
+# Disallow search (avoid duplicate content)
+Disallow: /search
+Disallow: /search/
+
+# Disallow API endpoints
+Disallow: /api/
+
+# Disallow storage internals
+Disallow: /storage/
+
+# Crawl delay (be nice to the server)
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://plaza.redactivamexico.net/sitemap.xml
