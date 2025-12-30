@@ -133,10 +133,10 @@
     <!-- RAM Signature Gradient Bar -->
     <div class="ram-gradient-bar w-full"></div>
 
-    <div class="flex justify-between bg-[#F1EADF] dark:bg-ram-dark px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
+    <div class="ram-gradient-bg flex justify-between px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
-        <p class="text-sm text-zinc-600 dark:text-ram-text-muted max-md:text-center">
+        <p class="text-sm max-md:text-center">
             @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
         </p>
 
