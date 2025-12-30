@@ -39,8 +39,8 @@
             name="currency"
             content="{{ core()->getCurrentCurrency()->toJson() }}"
         >
-        <meta 
-            name="generator" 
+        <meta
+            name="generator"
             content="Bagisto"
         >
 
@@ -94,6 +94,27 @@
 
     <body>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
+
+        {{-- Back to Muro Loco Banner - Cross-App Navigation #186 --}}
+        {{-- Standalone: hidden by default, shown via JS only when ?from=muro-loco --}}
+        <div id="back-to-muro-loco" style="display:none; position:fixed; top:0; left:0; right:0; height:44px; background:rgba(255,255,255,0.95); border-bottom:1px solid rgba(0,0,0,0.1); align-items:center; justify-content:space-between; padding:0 16px; z-index:9999; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+            <a href="https://redactivamexico.net/muro-loco" style="color:#1a1a1a; text-decoration:none; font-weight:500; font-size:13px; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:6px; transition:all 0.15s ease-out;" onmouseover="this.style.color='#3b82f6'; this.style.background='rgba(59,130,246,0.1)'" onmouseout="this.style.color='#1a1a1a'; this.style.background='transparent'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Volver a Muro Loco
+            </a>
+            <button onclick="document.getElementById('back-to-muro-loco').style.display='none'; document.body.classList.remove('from-muro-loco');" style="display:flex; align-items:center; justify-content:center; width:32px; height:32px; background:transparent; border:none; border-radius:6px; cursor:pointer; color:#666; transition:all 0.15s ease-out;" onmouseover="this.style.color='#3b82f6'; this.style.background='rgba(59,130,246,0.1)'" onmouseout="this.style.color='#666'; this.style.background='transparent'" aria-label="Cerrar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <script>
+        (function(){
+            if(new URLSearchParams(window.location.search).get('from')==='muro-loco'){
+                document.getElementById('back-to-muro-loco').style.display='flex';
+                document.body.classList.add('from-muro-loco');
+            }
+        })();
+        </script>
+        <style>.from-muro-loco header.sticky{top:44px!important}</style>
 
         <a
             href="#main"
