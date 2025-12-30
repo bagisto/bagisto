@@ -90,14 +90,14 @@ services:
     command: >
       redis-server
       --appendonly yes
-      --requirepass kGueiXjXvh2DSOjgHpjecdYr
+      --requirepass ${REDIS_PASSWORD}
     volumes:
       - redis-data:/data
     networks:
       - ramplaza
       - ram-network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 3s
       retries: 5
