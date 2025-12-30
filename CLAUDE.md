@@ -66,8 +66,10 @@ Estructura de un tema:
 ### Cambios en Vistas Blade (sin CSS/JS)
 ```bash
 # 1. Editar archivo .blade.php
-# 2. Limpiar cache
+
+# 2. Limpiar cache (incluir responsecache)
 docker exec ramplaza-app php artisan view:clear
+docker exec ramplaza-app php artisan responsecache:clear
 
 # 3. Probar cambios
 # 4. Commitear
@@ -76,23 +78,30 @@ git commit -m "feat(shop): descripción del cambio"
 ```
 
 ### Cambios en CSS/JS (requiere compilación)
+
 ```bash
 # 1. Editar fuentes en packages/*/src/Resources/assets/
 
-# 2. Instalar dependencias (si no existen)
-docker exec ramplaza-app bash -c "cd /var/www/html/packages/Webkul/Shop && npm install"
-
-# 3. Compilar assets
+# 2. Compilar assets
 docker exec ramplaza-app bash -c "cd /var/www/html/packages/Webkul/Shop && npm run build"
 
-# 4. Limpiar cache
-docker exec ramplaza-app php artisan cache:clear
+# 3. Limpiar TODOS los caches (CRÍTICO)
+docker exec ramplaza-app php artisan optimize:clear
+docker exec ramplaza-app php artisan responsecache:clear
+
+# 4. Verificar que carga el CSS correcto
+curl -s "http://127.0.0.1:8082/" -H "Host: plaza.redactivamexico.net" | grep -o 'app-[a-zA-Z0-9]*\.css' | head -1
 
 # 5. Commitear TODO junto (fuentes + compilados)
 git add packages/Webkul/Shop/src/Resources/assets/
 git add public/themes/shop/default/build/
 git commit -m "feat(shop): descripción del cambio"
 ```
+
+### ¿Por qué responsecache:clear?
+Bagisto usa `spatie/laravel-responsecache` que cachea respuestas HTTP completas.
+Aunque limpies view/config/route cache, el HTML cacheado sigue sirviendo referencias al CSS viejo.
+**SIEMPRE** ejecutar `php artisan responsecache:clear` después de compilar assets.
 
 ### Para Admin (similar pero diferente paquete)
 ```bash
@@ -179,12 +188,14 @@ docker exec ramplaza-app php artisan cache:clear
 docker exec ramplaza-app php artisan view:clear
 docker exec ramplaza-app php artisan config:clear
 docker exec ramplaza-app php artisan route:clear
+docker exec ramplaza-app php artisan responsecache:clear  # CRÍTICO para ver cambios
 
 # Optimizar (producción)
 docker exec ramplaza-app php artisan optimize
 
-# Limpiar todo
+# Limpiar todo (después de cambios CSS/JS/Blade)
 docker exec ramplaza-app php artisan optimize:clear
+docker exec ramplaza-app php artisan responsecache:clear
 
 # Logs
 docker logs ramplaza-app --tail 100
