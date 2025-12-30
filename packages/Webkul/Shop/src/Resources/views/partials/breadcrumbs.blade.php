@@ -1,6 +1,6 @@
 @unless ($breadcrumbs->isEmpty())
     <nav aria-label="">
-        <ol class="flex">
+        <ol class="flex" v-pre>
             @foreach ($breadcrumbs as $breadcrumb)
                 @if (
                     $breadcrumb->url 
@@ -11,7 +11,7 @@
                             {{ $breadcrumb->title }}
                         </a>
 
-                        <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
+                        <span class="text-2xl icon-arrow-right rtl:icon-arrow-left"></span>
                     </li>
                 @else
                     <li 
