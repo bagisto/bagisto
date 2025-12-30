@@ -85,11 +85,20 @@ docker exec ramplaza-app php artisan optimize
 
 **Causas posibles:**
 1. **Cache del navegador** - Hard refresh con Ctrl+F5
-2. **Assets no compilados** - Recompilar:
+2. **Response cache (más común)** - Bagisto cachea respuestas HTTP completas:
+```bash
+docker exec ramplaza-app php artisan responsecache:clear
+```
+3. **Assets no compilados** - Recompilar:
 ```bash
 docker exec ramplaza-app bash -c "cd /var/www/html/packages/Webkul/Shop && npm run build"
 ```
-3. **manifest.json desactualizado** - El hash de los archivos cambió
+4. **manifest.json desactualizado** - El hash de los archivos cambió
+
+**Solución completa:** Usar el script de rebuild:
+```bash
+./devops/scripts/rebuild-assets.sh
+```
 
 ### Error "Vite manifest not found"
 

@@ -39,6 +39,7 @@ devops/
 ├── scripts/
 │   ├── deploy.sh                       # Script de deployment
 │   ├── backup.sh                       # Script de backup
+│   ├── rebuild-assets.sh               # Recompilar CSS/JS y limpiar cache
 │   ├── sync-upstream.sh                # Sincronizar con Bagisto
 │   └── setup-network.sh                # Setup red Docker
 │
@@ -52,8 +53,12 @@ devops/
 ### Comandos más usados
 
 ```bash
-# Cache
+# Cache (IMPORTANTE: siempre incluir responsecache)
 docker exec ramplaza-app php artisan optimize:clear
+docker exec ramplaza-app php artisan responsecache:clear
+
+# Recompilar assets (CSS/JS)
+./devops/scripts/rebuild-assets.sh
 
 # Logs
 docker logs ramplaza-app --tail 100 -f
@@ -159,4 +164,4 @@ Para problemas o dudas:
 
 ---
 
-**Última actualización:** 2024-12-12
+**Última actualización:** 2025-12-30
