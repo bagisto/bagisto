@@ -4,7 +4,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Webkul\Installer\Http\Controllers\InstallerController;
 
-Route::middleware(['web', 'installer_locale'])->group(function () {
+Route::middleware(['web', 'install', 'installer_locale'])->group(function () {
     Route::controller(InstallerController::class)->group(function () {
         Route::get('install', 'index')->name('installer.index');
 

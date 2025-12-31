@@ -27,6 +27,9 @@ trait Sanitizer
             /* sanitizer instance */
             $sanitizer = new MainSanitizer;
 
+            /* Block remote references (external URLs) */
+            $sanitizer->removeRemoteReferences(true);
+
             /* grab svg file */
             $dirtySVG = Storage::get($path);
 
