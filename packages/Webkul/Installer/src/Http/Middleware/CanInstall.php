@@ -18,7 +18,11 @@ class CanInstall
     public function handle(Request $request, Closure $next)
     {
         if (Str::contains($request->getPathInfo(), '/install')) {
-            if ($this->isAlreadyInstalled() && ! $request->ajax()) {
+            if ($this->isAlreadyInstalled()) {
+                return redirect()->route('shop.home.index');
+            }
+
+            if (! $request->ajax()) {
                 return redirect()->route('shop.home.index');
             }
         } else {
