@@ -63,6 +63,10 @@ class ProductController extends Controller
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
+                    if (! $this->validateExternalUrl($productDownloadableLink->sample_url)) {
+                        abort(404);
+                    }
+
                     copy($productDownloadableLink->sample_url, $tempImage);
 
                     return response()->download($tempImage, $fileName);
@@ -83,6 +87,10 @@ class ProductController extends Controller
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
+                    if (! $this->validateExternalUrl($productDownloadableSample->url)) {
+                        abort(404);
+                    }
+
                     copy($productDownloadableSample->url, $tempImage);
 
                     return response()->download($tempImage, $fileName);
@@ -91,5 +99,56 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             abort(404);
         }
+    }
+
+    /**
+     * Validate URL before fetching external content.
+     */
+    private function validateExternalUrl(string $url): bool
+    {
+        $parsed = parse_url($url);
+
+        if (
+            ! $parsed
+            || empty($parsed['host'])
+            || empty($parsed['scheme'])
+        ) {
+            return false;
+        }
+
+        if (! in_array($parsed['scheme'], ['http', 'https'], true)) {
+            return false;
+        }
+
+        $records = dns_get_record($parsed['host'], DNS_A + DNS_AAAA);
+
+        if (! $records) {
+            return false;
+        }
+
+        foreach ($records as $record) {
+            $ip = $record['ip'] ?? $record['ipv6'] ?? null;
+
+            if (
+                ! $ip
+                || $this->isBlockedIp($ip)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if IP is private, reserved, or loopback.
+     */
+    private function isBlockedIp(string $ip): bool
+    {
+        return ! filter_var(
+            $ip,
+            FILTER_VALIDATE_IP,
+            FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+        );
     }
 }

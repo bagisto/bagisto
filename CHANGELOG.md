@@ -16,6 +16,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Sanitized CMS `html_content` during create and update operations to prevent stored XSS vulnerabilities.
 
+- Added validation for external URLs in downloadable product samples to block access to private and reserved IP ranges.
+
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
 * #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
