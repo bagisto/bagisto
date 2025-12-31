@@ -32,7 +32,11 @@ class ExchangeRateController extends Controller
             return datagrid(ExchangeRatesDataGrid::class)->process();
         }
 
-        $currencies = $this->currencyRepository->with('exchange_rate')->all();
+        $baseCurrency = core()->getBaseCurrency();
+
+        $currencies = $this->currencyRepository->with('exchange_rate')
+            ->where('id', '!=', $baseCurrency->id)
+            ->get();
 
         return view('admin::settings.exchange-rates.index', compact('currencies'));
     }
@@ -42,8 +46,10 @@ class ExchangeRateController extends Controller
      */
     public function store(): JsonResponse
     {
+        $baseCurrency = core()->getBaseCurrency();
+
         $this->validate(request(), [
-            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency'],
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency', 'not_in:'.$baseCurrency->id],
             'rate'            => 'required|numeric',
         ]);
 
@@ -66,7 +72,11 @@ class ExchangeRateController extends Controller
      */
     public function edit(int $id): JsonResponse
     {
-        $currencies = $this->currencyRepository->all();
+        $baseCurrency = core()->getBaseCurrency();
+
+        $currencies = $this->currencyRepository->with('exchange_rate')
+            ->where('id', '!=', $baseCurrency->id)
+            ->get();
 
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
@@ -83,8 +93,10 @@ class ExchangeRateController extends Controller
      */
     public function update(): JsonResponse
     {
+        $baseCurrency = core()->getBaseCurrency();
+
         $this->validate(request(), [
-            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,'.request()->id],
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,'.request()->id, 'not_in:'.$baseCurrency->id],
             'rate'            => 'required|numeric',
         ]);
 

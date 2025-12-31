@@ -20,7 +20,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
+* #11053 [fixed] - Fixed an issue where the custom field price was not converted according to the exchange rate on the product view page.
+
 * #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
+
+* #11028 [fixed] - Fixed an issue where horizontal scrolling caused misalignment of fixed-position elements (Cart/Profile buttons) on the search page.
+
+* #10975 [fixed] - Fixed validation to ensure the source and target currencies are different when creating exchange rates.
 
 ## **v2.3.9 (8th of December 2025)** - *Release*
 
