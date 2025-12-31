@@ -141,7 +141,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Check if IP is private, reserved, or loopback
+     * Check if IP is private, reserved, or loopback.
      */
     private function isBlockedIp(string $ip): bool
     {
