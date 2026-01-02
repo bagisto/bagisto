@@ -113,7 +113,7 @@
                     </p>
                 </x-slot>
 
-                <x-slot:content>
+                <x-slot:content v-pre>
                     <div class="flex flex-col pb-4">
                         <!-- Customer Full Name -->
                         <p 

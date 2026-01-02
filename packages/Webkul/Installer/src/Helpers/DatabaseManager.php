@@ -71,10 +71,11 @@ class DatabaseManager
     public function seeder($data)
     {
         $data['parameter'] = [
-            'default_locale'     => $data['parameter']['default_locales'],
-            'allowed_locales'    => $data['parameter']['allowed_locales'],
-            'default_currency'   => $data['parameter']['default_currency'],
-            'allowed_currencies' => $data['parameter']['allowed_currencies'],
+            'default_locale'      => $data['parameter']['default_locales'],
+            'allowed_locales'     => $data['parameter']['allowed_locales'],
+            'default_currency'    => $data['parameter']['default_currency'],
+            'allowed_currencies'  => $data['parameter']['allowed_currencies'],
+            'skip_admin_creation' => $data['parameter']['skip_admin_creation'],
         ];
 
         try {

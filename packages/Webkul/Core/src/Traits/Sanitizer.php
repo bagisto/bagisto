@@ -24,13 +24,12 @@ trait Sanitizer
     public function sanitizeSVG($path, $mimeType)
     {
         if ($this->checkMimeType($mimeType)) {
-            /* sanitizer instance */
             $sanitizer = new MainSanitizer;
 
-            /* grab svg file */
+            $sanitizer->removeRemoteReferences(true);
+
             $dirtySVG = Storage::get($path);
 
-            /* save sanitized svg */
             Storage::put($path, $sanitizer->sanitize($dirtySVG));
         }
     }

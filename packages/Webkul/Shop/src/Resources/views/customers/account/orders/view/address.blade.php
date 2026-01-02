@@ -1,4 +1,4 @@
-<div class="flex flex-col max-md:hidden">
+<div class="flex flex-col max-md:hidden" v-pre>
     <p class="font-semibold leading-6 text-gray-800">
         {{ $address->company_name ?? '' }}
     </p>
@@ -21,7 +21,7 @@
 </div>
 
 <!-- For Mobile View -->
-<div class="text-gray-800 md:hidden">
+<div class="text-gray-800 md:hidden" v-pre>
     <p class="font-semibold">
         {{ $address->company_name ?? '' }}
     </p>

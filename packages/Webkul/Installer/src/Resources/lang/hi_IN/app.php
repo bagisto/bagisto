@@ -620,6 +620,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'एप्लिकेशन पहले से ही इंस्टॉल है।',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => 'व्यवस्थापक',

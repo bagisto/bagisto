@@ -4,13 +4,23 @@
             'product',
             'customizable_option_prices',
         ])->get();
+
+        $options = $options->map(function ($option) {
+            $option->customizable_option_prices = $option->customizable_option_prices->map(function ($priceOption) {
+                $priceOption->price = core()->convertPrice($priceOption->price);
+                
+                return $priceOption;
+            });
+
+            return $option;
+        });
     @endphp
 
     @if ($options->isNotEmpty())
         {!! view_render_event('bagisto.shop.products.view.customizable-options.before', ['product' => $product]) !!}
 
         <v-product-customizable-options
-            :initial-price="{{ $product->getTypeInstance()->getMinimalPrice() }}"
+            :initial-price="{{ core()->convertPrice($product->getTypeInstance()->getMinimalPrice()) }}"
         >
         </v-product-customizable-options>
 

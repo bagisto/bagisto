@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.10 (2nd of January 2026)** - *Release*
 
 * Implemented two-factor authentication (2FA) for admin users to enhance account security.
 

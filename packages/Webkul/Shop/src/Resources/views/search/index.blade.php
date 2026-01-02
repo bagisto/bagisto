@@ -28,7 +28,7 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h2 class="text-2xl font-medium max-sm:text-base">
+            <h2 class="break-all text-2xl font-medium max-sm:text-base">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
             </h2>
         </div>

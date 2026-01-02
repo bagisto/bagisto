@@ -620,6 +620,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'Uygulama zaten yüklü.',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => 'Yönetici',

@@ -31,7 +31,10 @@ it('should fail the validation with errors when certain field not provided when 
 
 it('should store the newly created exchange rates', function () {
     // Arrange.
-    $currency = Currency::first();
+    $currency = Currency::factory()->create([
+        'code' => 'EUR',
+        'name' => 'Euro',
+    ]);
 
     // Act and Assert.
     $this->loginAsAdmin();

@@ -196,6 +196,7 @@
                                         v-for="currency in currencies"
                                         :value="currency.id"
                                         :selected="currency.id == selectedExchangeRate.target_currency"
+                                        v-show="currency.code !== '{{ core()->getBaseCurrencyCode() }}'"
                                     >
                                         @{{ currency.name }}
                                     </option>

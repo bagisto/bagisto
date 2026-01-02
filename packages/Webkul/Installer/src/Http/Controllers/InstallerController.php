@@ -21,7 +21,7 @@ class InstallerController extends Controller
      *
      * @var string
      */
-    const MIN_PHP_VERSION = '8.1.0';
+    const MIN_PHP_VERSION = '8.2.0';
 
     /**
      * Const Variable for Static Customer Id
@@ -108,10 +108,11 @@ class InstallerController extends Controller
 
         $parameter = [
             'parameter' => [
-                'default_locales'    => $appLocale,
-                'default_currency'   => $appCurrency,
-                'allowed_locales'    => $allowedLocales,
-                'allowed_currencies' => $allowedCurrencies,
+                'default_locales'     => $appLocale,
+                'default_currency'    => $appCurrency,
+                'allowed_locales'     => $allowedLocales,
+                'allowed_currencies'  => $allowedCurrencies,
+                'skip_admin_creation' => true,
             ],
         ];
 
@@ -161,21 +162,18 @@ class InstallerController extends Controller
         $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
-            DB::table('admins')->updateOrInsert(
-                [
-                    'id' => self::USER_ID,
-                ], [
-                    'name'     => request()->input('admin'),
-                    'email'    => request()->input('email'),
-                    'password' => $password,
-                    'role_id'  => 1,
-                    'status'   => 1,
-                ]
-            );
+            DB::table('admins')->insert([
+                'id'      => self::USER_ID,
+                'name'    => request()->input('admin'),
+                'email'   => request()->input('email'),
+                'password'=> $password,
+                'role_id' => 1,
+                'status'  => 1,
+            ]);
 
             return true;
         } catch (\Throwable $th) {
-            Log::error('Error in Admin installer config setup'.$th->getMessage());
+            Log::error('Error in Admin installer config setup: '.$th->getMessage());
 
             return false;
         }

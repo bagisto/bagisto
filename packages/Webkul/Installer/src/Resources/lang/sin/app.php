@@ -620,6 +620,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'අප්ලිකේෂනය පුවතිම ස්෠ාපිත වෙලා සිටි.',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => 'පරිපාලක',
