@@ -617,6 +617,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'アプリケーションは既にインストールされています。',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => '管理者',

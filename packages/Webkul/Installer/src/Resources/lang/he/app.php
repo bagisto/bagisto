@@ -617,6 +617,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'האפליקציה כבר מותקנת.',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => 'מנהל',

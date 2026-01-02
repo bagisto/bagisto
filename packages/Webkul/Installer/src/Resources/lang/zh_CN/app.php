@@ -617,6 +617,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => '应用程序已经安装。',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => '管理员',

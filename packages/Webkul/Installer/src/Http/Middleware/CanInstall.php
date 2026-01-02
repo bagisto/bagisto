@@ -18,8 +18,14 @@ class CanInstall
     public function handle(Request $request, Closure $next)
     {
         if (Str::contains($request->getPathInfo(), '/install')) {
-            if ($this->isAlreadyInstalled() && ! $request->ajax()) {
-                return redirect()->route('shop.home.index');
+            if ($this->isAlreadyInstalled()) {
+                if (! $request->ajax()) {
+                    return redirect()->route('shop.home.index');
+                }
+
+                return response()->json([
+                    'message'=> trans('installer::app.installer.middleware.already-installed'),
+                ], 403);
             }
         } else {
             if (! $this->isAlreadyInstalled()) {

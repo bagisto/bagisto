@@ -617,6 +617,10 @@ return [
     ],
 
     'installer' => [
+        'middleware' => [
+            'already-installed' => 'Anwendung ist bereits installiert.',
+        ],
+
         'index' => [
             'create-administrator' => [
                 'admin'            => 'Administrator',
