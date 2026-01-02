@@ -368,7 +368,7 @@
                     </p>
                 </x-slot>
 
-                <x-slot:content>
+                <x-slot:content v-pre>
                     <div class="flex flex-col {{ $order->billing_address ? 'pb-4' : ''}}">
                         <p 
                             class="font-semibold text-gray-800 dark:text-white"

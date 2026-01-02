@@ -569,7 +569,7 @@
                         </p>
                     </x-slot>
 
-                    <x-slot:content>
+                    <x-slot:content v-pre>
                         <div class="{{ $order->billing_address ? 'pb-4' : '' }}">
                             <div class="flex flex-col gap-1.5">
                                 <p 

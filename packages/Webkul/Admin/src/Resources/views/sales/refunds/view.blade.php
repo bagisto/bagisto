@@ -307,7 +307,7 @@
                         </p>
                     </x-slot>
 
-                    <x-slot:content>
+                    <x-slot:content v-pre>
                         <!-- Account Info -->
                         <div class="flex flex-col pb-4">
                             <!-- Customer Full Name -->
