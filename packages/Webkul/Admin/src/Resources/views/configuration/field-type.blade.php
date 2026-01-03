@@ -2,12 +2,6 @@
     $value = system_config()->getConfigData($field->getNameKey(), $currentChannel->code, $currentLocale->code);
 @endphp
 
-<input
-    type="hidden"
-    name="keys[]"
-    value="{{ json_encode($child) }}"
-/>
-
 <div class="mb-4 last:!mb-0">
     <v-configurable
         name="{{ $field->getNameField() }}"
