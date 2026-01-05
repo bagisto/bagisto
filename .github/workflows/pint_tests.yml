@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   pint_tests:
     runs-on: ${{ matrix.operating-systems }}
+    permissions:
+      contents: read
 
     strategy:
       matrix:
