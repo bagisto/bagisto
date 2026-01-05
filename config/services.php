@@ -79,4 +79,12 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect'      => env('GITHUB_CALLBACK_URL'),
     ],
+
+    'ram' => [
+        'client_id'     => env('RAM_CLIENT_ID'),
+        'client_secret' => env('RAM_CLIENT_SECRET'),
+        'redirect'      => env('RAM_CALLBACK_URL'),
+        'base_url'      => env('RAM_BASE_URL'),
+        'service_token' => env('RAM_SERVICE_TOKEN'),
+    ],
 ];
