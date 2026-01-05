@@ -9,6 +9,7 @@ use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\GoogleProvider;
 use Laravel\Socialite\Two\LinkedInOpenIdProvider;
 use League\OAuth1\Client\Server\Twitter as TwitterServer;
+use Webkul\SocialLogin\Providers\RamProvider;
 
 class SocialiteManager extends BaseSocialiteManager
 {
@@ -143,6 +144,39 @@ class SocialiteManager extends BaseSocialiteManager
 
         return new TwitterProvider(
             $this->container->make('request'), new TwitterServer($this->formatConfig($config))
+        );
+    }
+
+    /**
+     * Create an instance of the RAM driver.
+     *
+     * @return \Laravel\Socialite\Two\AbstractProvider
+     */
+    protected function createRamDriver()
+    {
+        $clientId = core()->getConfigData('customer.settings.social_login.ram_client_id');
+        $clientSecret = core()->getConfigData('customer.settings.social_login.ram_client_secret');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.ram_callback_url');
+        $baseUrl = core()->getConfigData('customer.settings.social_login.ram_base_url');
+
+        if ($clientId || $clientSecret || $callbackUrl || $baseUrl) {
+            $config = [
+                'client_id'     => $clientId,
+                'client_secret' => $clientSecret,
+                'redirect'      => $callbackUrl,
+                'base_url'      => $baseUrl,
+            ];
+        } else {
+            $config = $this->config->get('services.ram');
+        }
+
+        return new RamProvider(
+            $this->container->make('request'),
+            $config['client_id'],
+            $config['client_secret'],
+            $config['redirect'],
+            $config['base_url'],
+            $config['guzzle'] ?? []
         );
     }
 }
