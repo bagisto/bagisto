@@ -127,7 +127,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.after') !!}
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.before') !!}
-                
+
         </div>
     </div>
 </div>
@@ -276,6 +276,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div
+                    class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
+                >
+                    <span class="flex items-center gap-1 px-5 uppercase">
+                        <span class="text-xl"></span>
+                        Conocenos
+                    </span>
                 </div>
             </div>
 
