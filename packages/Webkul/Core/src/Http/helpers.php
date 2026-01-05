@@ -132,3 +132,24 @@ if (! function_exists('array_permutation')) {
         return $results;
     }
 }
+
+if (! function_exists('sanitize_html')) {
+    /**
+     * Sanitize user-provided HTML safely for theme static content.
+     */
+    function sanitize_html(string $html): string
+    {
+        $html = preg_replace(
+            '/<(script|iframe|object|embed|form|meta|link)[^>]*>.*?<\/\1>'
+            .'|<(script|iframe|object|embed|meta|link)[^>]*\/?>/is',
+            '',
+            $html
+        );
+
+        $html = preg_replace('/\son\w+=(["\']).*?\1/i', '', $html);
+
+        $html = preg_replace('/(javascript\s*:|data\s*:\s*text\/html)/i', '', $html);
+
+        return $html;
+    }
+}
