@@ -129,7 +129,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.before') !!}
 
             <!-- user profile -->
-            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+            <!-- <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
                         class="inline-block text-2xl cursor-pointer icon-users"
@@ -139,7 +139,6 @@
                     ></span>
                 </x-slot>
 
-                <!-- Guest Dropdown -->
                 @guest('customer')
                     <x-slot:content>
                         <div class="grid gap-2.5">
@@ -180,7 +179,6 @@
                     </x-slot>
                 @endguest
 
-                <!-- Customers Dropdown -->
                 @auth('customer')
                     <x-slot:content class="!p-0">
                         <div class="grid gap-2.5 p-5 pb-0">
@@ -222,7 +220,6 @@
                                 </a>
                             @endif
 
-                            <!--Customers logout-->
                             @auth('customer')
                                 <x-shop::form
                                     method="DELETE"
@@ -241,7 +238,7 @@
 
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.after') !!}
                         </div>
-                    </x-slot>
+                    </x-slot>-->
                 @endauth
             </x-shop::dropdown>
 
