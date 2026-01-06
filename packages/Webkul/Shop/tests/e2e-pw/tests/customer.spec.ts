@@ -147,9 +147,11 @@ test("should be able to cancel order", async ({ page }) => {
     await page.locator("div").locator("span.icon-eye").first().click();
     await page.getByRole("link", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
-    
+
     await page.waitForTimeout(5000);
-    await expect(page.locator('div').filter({ hasText: 'Your order has been canceled' }).nth(2)).toBeVisible();
+    await expect(page.locator('td[data-value="Item Status"]')).toContainText(
+        "Canceled"
+    );
 });
 
 test("should be able to print invoice", async ({ page }) => {
@@ -229,8 +231,8 @@ test("should able to download downloadable orders", async ({ shopPage }) => {
     await shopPage
         .getByRole("link", { name: " Downloadable Products " })
         .click();
-    const popupPromise = shopPage.waitForEvent('popup').catch(() => null);
-    const downloadPromise = shopPage.waitForEvent('download').catch(() => null);
+    const popupPromise = shopPage.waitForEvent("popup").catch(() => null);
+    const downloadPromise = shopPage.waitForEvent("download").catch(() => null);
     await shopPage.getByRole("link", { name: productName }).click();
     const result = await Promise.race([popupPromise, downloadPromise]);
 });
