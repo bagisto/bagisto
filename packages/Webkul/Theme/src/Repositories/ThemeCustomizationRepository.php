@@ -6,6 +6,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
+use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Theme\Contracts\ThemeCustomization;
 
@@ -30,8 +31,14 @@ class ThemeCustomizationRepository extends Repository
         $locale = core()->getRequestedLocaleCode();
 
         if ($data['type'] == 'static_content') {
-            $data[$locale]['options']['html'] = sanitize_html($data[$locale]['options']['html']);
-            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
+            $config = [
+                'HTML.Allowed'           => null,
+                'HTML.ForbiddenElements' => 'script,iframe,form',
+                'CSS.AllowedProperties'  => null,
+            ];
+
+            $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html']);
+            $data[$locale]['options']['css'] = Purify::config($config)->clean($data[$locale]['options']['css']);
         }
 
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {

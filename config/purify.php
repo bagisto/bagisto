@@ -1,6 +1,6 @@
 <?php
 
-use Stevebauman\Purify\Definitions\Html5Definition;
+use Webkul\Core\Helpers\ExtendedHtml5Definition;
 
 return [
 
@@ -48,7 +48,6 @@ return [
             'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty'   => false,
         ],
-
     ],
 
     /*
@@ -68,7 +67,7 @@ return [
     |
     */
 
-    'definitions' => Html5Definition::class,
+    'definitions' => ExtendedHtml5Definition::class,
 
     /*
     |--------------------------------------------------------------------------
