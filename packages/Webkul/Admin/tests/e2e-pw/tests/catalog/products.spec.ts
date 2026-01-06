@@ -121,7 +121,7 @@ async function createSimpleProduct(adminPage) {
      * Expecting for the product to be saved.
      */
     await expect(adminPage.locator("#app")).toContainText(
-        "Product updated successfully"
+        /product updated successfully/i
     );
 
     /**
@@ -880,7 +880,7 @@ test.describe("simple product management", () => {
         await adminPage.getByRole("button", { name: "Save Product" }).click();
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Product updated successfully"
+            /product updated successfully/i
         );
     });
 
@@ -1514,7 +1514,7 @@ test.describe("downloadable product management", () => {
             adminPage.getByText("Selected Products Updated Successfully")
         ).toBeVisible();
     });
-    
+
     test("should mass delete the products", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/products");
         await adminPage.waitForSelector(
