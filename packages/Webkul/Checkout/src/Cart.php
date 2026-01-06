@@ -347,7 +347,7 @@ class Cart
                 continue;
             }
 
-            if (! $this->cart->items->pluck('id')->contains($itemId)) {
+            if ($item->cart_id !== $this->cart->id) {
                 continue;
             }
 
