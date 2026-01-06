@@ -32,6 +32,7 @@ test.describe("exchange rate management", () => {
                 : values[Math.floor(Math.random() * values.length)];
 
         console.log("Selected currency:", selectedValue);
+        
         await currencySelect.selectOption(selectedValue);
 
         await adminPage.fill(
