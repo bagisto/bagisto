@@ -18,7 +18,10 @@ test.describe("exchange rate management", () => {
             const randomIndex =
                 Math.floor(Math.random() * (options.length - 1)) + 1;
 
+            const option =  options[randomIndex];
+            console.log(option);
             await select.selectOption(options[randomIndex]);
+
         } else {
             await select.selectOption(options[0]);
         }
@@ -29,6 +32,7 @@ test.describe("exchange rate management", () => {
         );
         await adminPage.press('input[name="rate"]', "Enter");
 
+        // await adminPage.waitForLoadState("networkidle");
         await expect(
             adminPage.getByText("Exchange Rate Created Successfully").first()
         ).toBeVisible();
@@ -38,6 +42,8 @@ test.describe("exchange rate management", () => {
         await adminPage.goto("admin/settings/exchange-rates");
 
         const editIcons = adminPage.locator("a:has(span.icon-edit)");
+        const check=  editIcons.isVisible();
+        console.log(check);
         await editIcons.nth(0).click();
 
         await adminPage.click('select[name="target_currency"]');
