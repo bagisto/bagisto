@@ -320,6 +320,10 @@ class Cart
             return false;
         }
 
+        if (! $this->cart->items->pluck('id')->contains($itemId)) {
+            return false;
+        }
+
         Event::dispatch('checkout.cart.delete.before', $itemId);
 
         Shipping::removeAllShippingRates();
@@ -340,6 +344,10 @@ class Cart
             $item = $this->cartItemRepository->find($itemId);
 
             if (! $item) {
+                continue;
+            }
+
+            if (! $this->cart->items->pluck('id')->contains($itemId)) {
                 continue;
             }
 

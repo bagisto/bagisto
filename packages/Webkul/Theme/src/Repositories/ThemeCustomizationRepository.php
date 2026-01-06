@@ -38,6 +38,7 @@ class ThemeCustomizationRepository extends Repository
             ];
 
             $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html']);
+
             $data[$locale]['options']['css'] = Purify::config($config)->clean($data[$locale]['options']['css']);
         }
 
