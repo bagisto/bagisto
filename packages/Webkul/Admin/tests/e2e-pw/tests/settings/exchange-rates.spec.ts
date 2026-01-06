@@ -10,35 +10,38 @@ test.describe("exchange rate management", () => {
             'select[name="target_currency"]'
         );
 
+        /**
+         * Wait for the select element
+         */
         await expect(currencySelect).toBeVisible();
+        console.log("Visible");
 
         /**
-         * Wait for at least one valid option to exist
+         *  Wait until options are visible
          */
-        await currencySelect
-            .locator('option[value]:not([value=""])')
-            .first()
-            .waitFor({ state: "attached", timeout: 10000 });
+        await adminPage.waitForFunction(
+            (select) => select.options.length > 1,
+            await currencySelect.elementHandle()
+        );
 
         /**
-         * Get all valid option values
+         * Get actual option count
          */
-        const values = await currencySelect
-            .locator('option[value]:not([value=""])')
-            .evaluateAll((opts) => opts.map((o) => o.value));
+        const optionCount = await currencySelect.locator("option").count();
+        console.log(optionCount);
 
-        if (values.length === 0) {
-            throw new Error("No valid currency options available");
+        if (optionCount <= 1) {
+            throw new Error("No selectable currency options available");
         }
 
-        const selectedValue =
-            values.length === 1
-                ? values[0]
-                : values[Math.floor(Math.random() * values.length)];
+        /**
+         * Random index
+         */
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        console.log("Selected currency:", selectedValue);
+        console.log("Selecting option index:", randomIndex);
 
-        await currencySelect.selectOption(selectedValue);
+        await currencySelect.selectOption({ index: randomIndex });
 
         await adminPage.fill(
             'input[name="rate"]',
@@ -62,34 +65,36 @@ test.describe("exchange rate management", () => {
             'select[name="target_currency"]'
         );
 
+        /**
+         * Wait for the select element
+         */
         await expect(currencySelect).toBeVisible();
 
         /**
-         * Wait for at least one valid option to exist
+         *  Wait until options are visible
          */
-        await currencySelect
-            .locator('option[value]:not([value=""])')
-            .first()
-            .waitFor({ state: "attached", timeout: 10000 });
-        /**
-         * Get all valid option values
-         */
-        const values = await currencySelect
-            .locator('option[value]:not([value=""])')
-            .evaluateAll((opts) => opts.map((o) => o.value));
+        await adminPage.waitForFunction(
+            (select) => select.options.length > 1,
+            await currencySelect.elementHandle()
+        );
 
-        if (values.length === 0) {
-            throw new Error("No valid currency options available");
+        /**
+         * Get actual option count
+         */
+        const optionCount = await currencySelect.locator("option").count();
+
+        if (optionCount <= 1) {
+            throw new Error("No selectable currency options available");
         }
 
-        const selectedValue =
-            values.length === 1
-                ? values[0]
-                : values[Math.floor(Math.random() * values.length)];
+        /**
+         * Random index
+         */
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        console.log("Selected currency:", selectedValue);
+        console.log("Selecting option index:", randomIndex);
 
-        await currencySelect.selectOption(selectedValue);
+        await currencySelect.selectOption({ index: randomIndex });
 
         await adminPage.fill(
             'input[name="rate"]',
