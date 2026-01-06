@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Helpers;
+namespace Webkul\Core\Purifier\Definitions;
 
 use HTMLPurifier_HTMLDefinition;
 use Stevebauman\Purify\Definitions\Definition;
