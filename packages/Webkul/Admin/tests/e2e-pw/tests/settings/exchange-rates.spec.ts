@@ -4,68 +4,84 @@ test.describe("exchange rate management", () => {
     test("create exchange rate", async ({ adminPage }) => {
         await adminPage.goto("admin/settings/exchange-rates");
 
-        await adminPage.click('button[type="button"].primary-button:visible');
+        await adminPage.getByRole("button", { name: /create/i }).click();
 
-        await adminPage.click('select[name="target_currency"]');
+        const currencySelect = adminPage.locator(
+            'select[name="target_currency"]'
+        );
 
-        const select = await adminPage.$('select[name="target_currency"]');
+        /**
+         *  Wait for the <select> element to be visible
+         */
+        await expect(currencySelect).toBeVisible();
 
-        const options = await select.$$eval("option", (options) => {
-            return options.map((option) => option.value);
-        });
+        const values = await currencySelect
+            .locator("option")
+            .evaluateAll((opts) => opts.map((o) => o.value).filter(Boolean));
 
-        if (options.length > 1) {
-            const randomIndex =
-                Math.floor(Math.random() * (options.length - 1)) + 1;
-
-            const option =  options[randomIndex];
-            console.log(option);
-            await select.selectOption(options[randomIndex]);
-
-        } else {
-            await select.selectOption(options[0]);
+        if (values.length === 0) {
+            throw new Error("No valid currency options available");
         }
+
+        /**
+         * Random Selection
+         */
+        const selectedValue =
+            values.length === 1
+                ? values[0]
+                : values[Math.floor(Math.random() * values.length)];
+
+        console.log("Selected currency:", selectedValue);
+        await currencySelect.selectOption(selectedValue);
 
         await adminPage.fill(
             'input[name="rate"]',
-            (Math.random() * 500).toString()
+            (Math.random() * 500).toFixed(2)
         );
-        await adminPage.press('input[name="rate"]', "Enter");
 
-        // await adminPage.waitForLoadState("networkidle");
-        await expect(
-            adminPage.getByText("Exchange Rate Created Successfully").first()
-        ).toBeVisible();
+        await adminPage.keyboard.press("Enter");
+        await expect(adminPage.locator("#app")).toContainText(
+            "Exchange Rate Created Successfully"
+        );
     });
 
     test("edit exchange rate", async ({ adminPage }) => {
         await adminPage.goto("admin/settings/exchange-rates");
 
         const editIcons = adminPage.locator("a:has(span.icon-edit)");
-        const check=  editIcons.isVisible();
-        console.log(check);
         await editIcons.nth(0).click();
 
-        await adminPage.click('select[name="target_currency"]');
+        const currencySelect = adminPage.locator(
+            'select[name="target_currency"]'
+        );
 
-        const select = await adminPage.$('select[name="target_currency"]');
+        /**
+         *  Wait for the <select> element to be visible
+         */
+        await expect(currencySelect).toBeVisible();
 
-        const options = await select.$$eval("option", (options) => {
-            return options.map((option) => option.value);
-        });
+        const values = await currencySelect
+            .locator("option")
+            .evaluateAll((opts) => opts.map((o) => o.value).filter(Boolean));
 
-        if (options.length > 1) {
-            const randomIndex =
-                Math.floor(Math.random() * (options.length - 1)) + 1;
-
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
+        if (values.length === 0) {
+            throw new Error("No valid currency options available");
         }
+
+        /**
+         * Random Selection
+         */
+        const selectedValue =
+            values.length === 1
+                ? values[0]
+                : values[Math.floor(Math.random() * values.length)];
+
+        console.log("Selected currency:", selectedValue);
+        await currencySelect.selectOption(selectedValue);
 
         await adminPage.fill(
             'input[name="rate"]',
-            (Math.random() * 500).toString()
+            (Math.random() * 500).toFixed(2)
         );
         await adminPage.press('input[name="rate"]', "Enter");
 
