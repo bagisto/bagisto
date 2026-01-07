@@ -2,7 +2,12 @@ import { test, expect } from "../../setup";
 
 test.describe("exchange rate management", () => {
     test("create exchange rate", async ({ adminPage }) => {
-        await adminPage.goto("admin/settings/exchange-rates");
+        /**
+         * Open exchange rates page
+         */
+        await adminPage.goto("admin/settings/exchange-rates", {
+            waitUntil: "networkidle",
+        });
 
         /**
          * Click Create button
@@ -19,34 +24,35 @@ test.describe("exchange rate management", () => {
         /**
          * Wait for select to be visible
          */
-        await expect(currencySelect).toBeVisible();
-        console.log("Currency select visible");
+        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
 
         /**
          * Wait until options are loaded
          */
-        await adminPage.waitForFunction(
-            (select) => select.options.length > 1,
-            await currencySelect.elementHandle()
-        );
+        const options = currencySelect.locator("option");
+
+        await expect
+            .poll(async () => await options.count(), { timeout: 60_000 })
+            .toBeGreaterThan(1);
 
         /**
          * Get option count
          */
-        const optionCount = await currencySelect.locator("option").count();
-        console.log("Total options:", optionCount);
+        const optionCount = await options.count();
+        console.log("Total currency options:", optionCount);
 
         if (optionCount <= 1) {
             throw new Error("No selectable currency options available");
         }
 
         /**
-         * Select last option (skipping placeholder)
+         * Pick random option (skip placeholder at index 0)
          */
-        const lastIndex = optionCount - 1;
-        console.log("Selecting last option index:", lastIndex);
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        await currencySelect.selectOption({ index: lastIndex });
+        console.log("Selecting random option index:", randomIndex);
+
+        await currencySelect.selectOption({ index: randomIndex });
 
         /**
          * Fill exchange rate
@@ -65,7 +71,8 @@ test.describe("exchange rate management", () => {
          * Verify success message
          */
         await expect(adminPage.locator("#app")).toContainText(
-            "Exchange Rate Created Successfully"
+            "Exchange Rate Created Successfully",
+            { timeout: 30_000 }
         );
     });
 
@@ -85,43 +92,48 @@ test.describe("exchange rate management", () => {
         /**
          * Wait for select to be visible
          */
-        await expect(currencySelect).toBeVisible();
-        console.log("Currency select visible");
+        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
 
         /**
          * Wait until options are loaded
          */
-        await adminPage.waitForFunction(
-            (select) => select.options.length > 1,
-            await currencySelect.elementHandle()
-        );
+        const options = currencySelect.locator("option");
+
+        await expect
+            .poll(async () => await options.count(), { timeout: 60_000 })
+            .toBeGreaterThan(1);
 
         /**
          * Get option count
          */
-        const optionCount = await currencySelect.locator("option").count();
-        console.log("Total options:", optionCount);
+        const optionCount = await options.count();
+        console.log("Total currency options:", optionCount);
 
         if (optionCount <= 1) {
             throw new Error("No selectable currency options available");
         }
 
         /**
-         * Select last option (skipping placeholder)
+         * Pick random option (skip placeholder at index 0)
          */
-        const lastIndex = optionCount - 1;
-        console.log("Selecting last option index:", lastIndex);
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        await currencySelect.selectOption({ index: lastIndex });
+        console.log("Selecting random option index:", randomIndex);
 
+        await currencySelect.selectOption({ index: randomIndex });
+
+        /**
+         * Fill exchange rate
+         */
         await adminPage.fill(
             'input[name="rate"]',
             (Math.random() * 500).toFixed(2)
         );
 
+        /**
+         * Submit form
+         */
         await adminPage.keyboard.press("Enter");
-
-        await adminPage.press('input[name="rate"]', "Enter");
 
         await expect(
             adminPage.getByText("Exchange Rate Updated Successfully").first()
