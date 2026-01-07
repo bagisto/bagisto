@@ -195,7 +195,10 @@
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
-                                        <p class="text-base text-black">
+                                        <p
+                                            class="text-base text-black"
+                                            v-pre
+                                        >
                                             {{ $customAttributeValue['label'] }}
                                         </p>
                                     </div>
@@ -220,7 +223,10 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-zinc-500">
+                                            <p
+                                                class="text-base text-zinc-500"
+                                                v-pre
+                                            >
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>

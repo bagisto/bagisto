@@ -17,13 +17,19 @@
                     :class="getPositionClasses(position)"
                 >
                     <div class="cookieTitle">
-                        <span class="mb-1.5 block font-sans text-xl leading-5 text-white">
+                        <span
+                            class="mb-1.5 block font-sans text-xl leading-5 text-white"
+                            v-pre
+                        >
                             {{ core()->getConfigData('general.gdpr.cookie.static_block_identifier') }}
                         </span>
                     </div>
 
                     <div class="cookieDesc cookie-consent__message">
-                        <p class="mt-2.5 block font-sans text-sm leading-5 text-white">
+                        <p
+                            class="mt-2.5 block font-sans text-sm leading-5 text-white"
+                            v-pre
+                        >
                             {{ core()->getConfigData('general.gdpr.cookie.description') }}
 
                             <a

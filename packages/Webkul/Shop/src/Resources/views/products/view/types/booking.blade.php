@@ -26,7 +26,12 @@
                             </p>
 
                             <div class="grid grid-cols-1 gap-3">
-                                <p class="text-[#6E6E6E]">{{ $bookingProduct->location }}</p>
+                                <p
+                                    class="text-[#6E6E6E]"
+                                    v-pre
+                                >
+                                    {{ $bookingProduct->location }}
+                                </p>
 
                                 <a
                                     href="https://maps.google.com/maps?q={{ $bookingProduct->location }}"

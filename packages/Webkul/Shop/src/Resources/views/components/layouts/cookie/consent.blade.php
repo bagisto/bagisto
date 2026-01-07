@@ -81,6 +81,7 @@
                                         name="{{ $key }}"
                                         value="0"
                                     />
+                                    
                                     <x-shop::form.control-group.control
                                         type="checkbox"
                                         name="{{ $key }}"

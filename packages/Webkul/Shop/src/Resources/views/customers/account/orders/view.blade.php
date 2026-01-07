@@ -92,7 +92,10 @@
                     :is-selected="true"
                 >
                     <!-- For Desktop -->
-                    <div class="max-md:hidden">
+                    <div
+                        class="max-md:hidden"
+                        v-pre
+                    >
                         <div class="text-base font-medium">
                             @lang('shop::app.customers.account.orders.view.information.placed-on')
 
@@ -412,7 +415,10 @@
                     </div>
 
                     <!-- For Mobile View -->
-                    <div class="grid gap-4 md:hidden">
+                    <div
+                        class="grid gap-4 md:hidden"
+                        v-pre
+                    >
                         <div class="rounded-lg border">
                             <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                 <div>
@@ -878,7 +884,10 @@
                         class="max-md:!px-0 max-md:pb-0 max-md:pt-2"
                         :title="trans('shop::app.customers.account.orders.view.invoices.invoices')"
                     >
-                        <div class="flex flex-col gap-10 max-md:gap-8">
+                        <div
+                            class="flex flex-col gap-10 max-md:gap-8"
+                            v-pre
+                        >
                             @foreach ($order->invoices as $invoice)
                                 <!-- For Mobile View -->
                                 <div class="grid gap-4 md:hidden">
@@ -1395,7 +1404,10 @@
                         class="max-md:!px-0 max-md:py-1.5"
                         title="{{ trans('shop::app.customers.account.orders.view.shipments.shipments') }}"
                     >
-                        <div class="flex flex-col gap-10 max-md:gap-8">
+                        <div
+                            class="flex flex-col gap-10 max-md:gap-8"
+                            v-pre
+                        >
                             @foreach ($order->shipments as $shipment)
                                 <!-- For Desktop View -->
                                 <div class="max-md:hidden">
@@ -1533,7 +1545,10 @@
                     >
                         @foreach ($order->refunds as $refund)
                             <!-- For Desktop View -->
-                            <div class="max-md:hidden">
+                            <div
+                                class="max-md:hidden"
+                                v-pre
+                            >
                                 <div class="text-base font-medium">
                                     <span>
                                         @lang('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id])
@@ -1644,7 +1659,10 @@
                             </div>
 
                             <!-- For Mobile View -->
-                            <div class="grid gap-4 md:hidden">
+                            <div
+                                class="grid gap-4 md:hidden"
+                                v-pre
+                            >
                                 <div class="rounded-lg border">
                                     <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                         @lang('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id])
@@ -1931,7 +1949,10 @@
                             </div>
 
                             <!-- Summary -->
-                            <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:hidden">
+                            <div
+                                class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:hidden"
+                                v-pre
+                            >
                                 <div class="flex flex-auto justify-end">
                                     <div class="grid max-w-max gap-2 text-sm">
 
@@ -2091,7 +2112,10 @@
             </x-shop::tabs>
 
             <!-- Shipping Address and Payment methods for mobile view -->
-            <div class="w-full rounded-md bg-gray-100 md:hidden">
+            <div
+                class="w-full rounded-md bg-gray-100 md:hidden"
+                v-pre
+            >
                 <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                     @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
@@ -2173,7 +2197,10 @@
             </div>
 
             <!-- Desktop View -->
-            <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7 max-md:hidden">
+            <div
+                class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7 max-md:hidden"
+                v-pre
+            >
                 <!-- Billing Address -->
                 @if ($order->billing_address)
                     <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
