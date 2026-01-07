@@ -25,6 +25,10 @@ test.describe("exchange rate management", () => {
          * Wait for select to be visible
          */
         await expect(currencySelect).toBeVisible({ timeout: 30_000 });
+        await currencySelect.click();
+        
+        const buffer = await adminPage.screenshot();
+        console.log(buffer.toString("base64"));
 
         /**
          * Wait until options are loaded
