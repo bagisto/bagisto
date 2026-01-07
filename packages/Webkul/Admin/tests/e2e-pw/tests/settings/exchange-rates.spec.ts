@@ -1,75 +1,215 @@
-import { test, expect } from '../../setup';
+import { test, expect } from "../../setup";
+import { generateCurrency } from "../../utils/faker";
 
-test.describe('exchange rate management', () => {
-    test('create exchange rate', async ({ adminPage }) => {
-        await adminPage.goto('admin/settings/exchange-rates');
+async function createCurrency(adminPage, currency) {
+    /**
+     * Reaching to the currency listing page.
+     */
+    await adminPage.goto("admin/settings/currencies");
 
-        await adminPage.click('button[type="button"].primary-button:visible');
+    /**
+     * Opening create currency form in modal.
+     */
+    await adminPage.getByRole("button", { name: "Create Currency" }).click();
+    await adminPage.locator('input[name="code"]').fill(currency.code);
+    await adminPage.locator('input[name="name"]').fill(currency.name);
+    await adminPage.locator('input[name="symbol"]').fill(currency.symbol);
+    await adminPage
+        .locator('input[name="decimal"]')
+        .fill(currency.decimalDigits);
+    await adminPage
+        .locator('input[name="group_separator"]')
+        .fill(currency.groupSeparator);
+    await adminPage
+        .locator('input[name="decimal_separator"]')
+        .fill(currency.decimalSeparator);
 
-        await adminPage.click('select[name="target_currency"]');
+    /**
+     * Saving currency and closing the modal.
+     */
+    await adminPage.getByRole("button", { name: "Save Currency" }).click();
 
-        const select = await adminPage.$('select[name="target_currency"]');
+    /**
+     * The USD currency code was already provided during installation in the test environment.
+     */
+    if (currency.code === "USD") {
+        await expect(
+            adminPage.getByText("The code has already been taken.")
+        ).toBeVisible();
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
+        return;
+    }
+
+    /**
+     * Verifying the success message.
+     */
+    await expect(
+        adminPage.getByText("Currency created successfully.")
+    ).toBeVisible();
+
+    /**
+     * Verifying the currency in the listing.
+     */
+    await expect(
+        adminPage.getByText(currency.name, { exact: true })
+    ).toBeVisible();
+
+    await expect(
+        adminPage.getByText(currency.code, { exact: true })
+    ).toBeVisible();
+}
+test.describe("exchange rate management", () => {
+    test("create exchange rate", async ({ adminPage }) => {
+        /**
+         * Create currency fro exchange rate
+         */
+        const currency = generateCurrency();
+        await createCurrency(adminPage, currency);
+
+        /**
+         * Open exchange rates page
+         */
+        await adminPage.goto("admin/settings/exchange-rates", {
+            waitUntil: "networkidle",
         });
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+        /**
+         * Click Create button
+         */
+        await adminPage.getByRole("button", { name: /create/i }).click();
 
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
+        /**
+         * Target currency select
+         */
+        const currencySelect = adminPage.locator(
+            'select[name="target_currency"]'
+        );
+
+        /**
+         * Wait for select to be visible
+         */
+        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
+
+        /**
+         * Wait until options are loaded
+         */
+        const options = currencySelect.locator("option");
+
+        await expect
+            .poll(async () => await options.count(), { timeout: 60_000 })
+            .toBeGreaterThan(0);
+
+        /**
+         * Get option count
+         */
+        const optionCount = await options.count();
+
+        if (optionCount <= 1) {
+            throw new Error("No selectable currency options available");
         }
 
-        await adminPage.fill('input[name="rate"]', (Math.random() * 500).toString());
-        await adminPage.press('input[name="rate"]', 'Enter');
+        /**
+         * Pick random option (skip placeholder at index 0)
+         */
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        await expect(adminPage.getByText('Exchange Rate Created Successfully')).toBeVisible();
+        await currencySelect.selectOption({ index: randomIndex });
+
+        /**
+         * Fill exchange rate
+         */
+        await adminPage.fill(
+            'input[name="rate"]',
+            (Math.random() * 500).toFixed(2)
+        );
+
+        /**
+         * Submit form
+         */
+        await adminPage.keyboard.press("Enter");
+
+        /**
+         * Verify success message
+         */
+        await expect(adminPage.locator("#app")).toContainText(
+            "Exchange Rate Created Successfully",
+            { timeout: 30_000 }
+        );
     });
 
-    test('edit exchange rate', async ({ adminPage }) => {
-        await adminPage.goto('admin/settings/exchange-rates');
+    test("edit exchange rate", async ({ adminPage }) => {
+        await adminPage.goto("admin/settings/exchange-rates");
 
-        await adminPage.waitForSelector('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        const editIcons = adminPage.locator("a:has(span.icon-edit)");
+        await editIcons.nth(0).click();
 
-        const iconEdit = await adminPage.$$('span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        /**
+         * Target currency select
+         */
+        const currencySelect = adminPage.locator(
+            'select[name="target_currency"]'
+        );
 
-        await iconEdit[0].click();
+        /**
+         * Wait for select to be visible
+         */
+        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
 
-        await adminPage.click('select[name="target_currency"]');
+        /**
+         * Wait until options are loaded
+         */
+        const options = currencySelect.locator("option");
 
-        const select = await adminPage.$('select[name="target_currency"]');
+        await expect
+            .poll(async () => await options.count(), { timeout: 60_000 })
+            .toBeGreaterThan(0);
 
-        const options = await select.$$eval('option', (options) => {
-            return options.map(option => option.value);
-        });
+        /**
+         * Get option count
+         */
+        const optionCount = await options.count();
 
-        if (options.length > 1) {
-            const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-
-            await select.selectOption(options[randomIndex]);
-        } else {
-            await select.selectOption(options[0]);
+        if (optionCount <= 1) {
+            throw new Error("No selectable currency options available");
         }
 
-        await adminPage.fill('input[name="rate"]', (Math.random() * 500).toString());
-        await adminPage.press('input[name="rate"]', 'Enter');
+        /**
+         * Pick random option (skip placeholder at index 0)
+         */
+        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
 
-        await expect(adminPage.getByText('Exchange Rate Updated Successfully')).toBeVisible();
+        await currencySelect.selectOption({ index: randomIndex });
+
+        /**
+         * Fill exchange rate
+         */
+        await adminPage.fill(
+            'input[name="rate"]',
+            (Math.random() * 500).toFixed(2)
+        );
+
+        /**
+         * Submit form
+         */
+        await adminPage.keyboard.press("Enter");
+
+        await expect(
+            adminPage.getByText("Exchange Rate Updated Successfully").first()
+        ).toBeVisible();
     });
 
-    test('delete exchange rate', async ({ adminPage }) => {
-        await adminPage.goto('admin/settings/exchange-rates');
+    test("delete exchange rate", async ({ adminPage }) => {
+        await adminPage.goto("admin/settings/exchange-rates");
 
-        await adminPage.waitForSelector('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        const iconDelete = adminPage.locator("a:has(span.icon-delete)");
+        await iconDelete.nth(0).click();
 
-        const iconDelete = await adminPage.$$('span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]');
+        await adminPage.click(
+            "button.transparent-button + button.primary-button:visible"
+        );
 
-        await iconDelete[0].click();
-
-        await adminPage.click('button.transparent-button + button.primary-button:visible');
-
-        await expect(adminPage.getByText('Exchange Rate Deleted Successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Exchange Rate Deleted Successfully").first()
+        ).toBeVisible();
     });
 });
