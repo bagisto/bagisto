@@ -1,7 +1,71 @@
 import { test, expect } from "../../setup";
+import { generateCurrency } from "../../utils/faker";
 
+async function createCurrency(adminPage, currency) {
+    /**
+     * Reaching to the currency listing page.
+     */
+    await adminPage.goto("admin/settings/currencies");
+
+    /**
+     * Opening create currency form in modal.
+     */
+    await adminPage.getByRole("button", { name: "Create Currency" }).click();
+    await adminPage.locator('input[name="code"]').fill(currency.code);
+    await adminPage.locator('input[name="name"]').fill(currency.name);
+    await adminPage.locator('input[name="symbol"]').fill(currency.symbol);
+    await adminPage
+        .locator('input[name="decimal"]')
+        .fill(currency.decimalDigits);
+    await adminPage
+        .locator('input[name="group_separator"]')
+        .fill(currency.groupSeparator);
+    await adminPage
+        .locator('input[name="decimal_separator"]')
+        .fill(currency.decimalSeparator);
+
+    /**
+     * Saving currency and closing the modal.
+     */
+    await adminPage.getByRole("button", { name: "Save Currency" }).click();
+
+    /**
+     * The USD currency code was already provided during installation in the test environment.
+     */
+    if (currency.code === "USD") {
+        await expect(
+            adminPage.getByText("The code has already been taken.")
+        ).toBeVisible();
+
+        return;
+    }
+
+    /**
+     * Verifying the success message.
+     */
+    await expect(
+        adminPage.getByText("Currency created successfully.")
+    ).toBeVisible();
+
+    /**
+     * Verifying the currency in the listing.
+     */
+    await expect(
+        adminPage.getByText(currency.name, { exact: true })
+    ).toBeVisible();
+
+    await expect(
+        adminPage.getByText(currency.code, { exact: true })
+    ).toBeVisible();
+}
 test.describe("exchange rate management", () => {
     test("create exchange rate", async ({ adminPage }) => {
+        /**
+         * Create currency fro exchange rate
+         */
+        const currency = generateCurrency();
+        await createCurrency(adminPage, currency);
+
         /**
          * Open exchange rates page
          */
@@ -25,10 +89,6 @@ test.describe("exchange rate management", () => {
          * Wait for select to be visible
          */
         await expect(currencySelect).toBeVisible({ timeout: 30_000 });
-        await currencySelect.click();
-        
-        const buffer = await adminPage.screenshot();
-        console.log(buffer.toString("base64"));
 
         /**
          * Wait until options are loaded
@@ -37,13 +97,12 @@ test.describe("exchange rate management", () => {
 
         await expect
             .poll(async () => await options.count(), { timeout: 60_000 })
-            .toBeGreaterThan(1);
+            .toBeGreaterThan(0);
 
         /**
          * Get option count
          */
         const optionCount = await options.count();
-        console.log("Total currency options:", optionCount);
 
         if (optionCount <= 1) {
             throw new Error("No selectable currency options available");
@@ -53,8 +112,6 @@ test.describe("exchange rate management", () => {
          * Pick random option (skip placeholder at index 0)
          */
         const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
-
-        console.log("Selecting random option index:", randomIndex);
 
         await currencySelect.selectOption({ index: randomIndex });
 
@@ -105,13 +162,12 @@ test.describe("exchange rate management", () => {
 
         await expect
             .poll(async () => await options.count(), { timeout: 60_000 })
-            .toBeGreaterThan(1);
+            .toBeGreaterThan(0);
 
         /**
          * Get option count
          */
         const optionCount = await options.count();
-        console.log("Total currency options:", optionCount);
 
         if (optionCount <= 1) {
             throw new Error("No selectable currency options available");
@@ -121,8 +177,6 @@ test.describe("exchange rate management", () => {
          * Pick random option (skip placeholder at index 0)
          */
         const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
-
-        console.log("Selecting random option index:", randomIndex);
 
         await currencySelect.selectOption({ index: randomIndex });
 
