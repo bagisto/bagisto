@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.1",
+    "@playwright/test": "^1.57.0",
     "@types/node": "^22.7.8",
     "autoprefixer": "^10.4.16",
     "axios": "^1.7.9",

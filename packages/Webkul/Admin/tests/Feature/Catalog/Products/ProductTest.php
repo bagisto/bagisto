@@ -23,16 +23,23 @@ it('should copy the existing product', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.products.copy', $product->id), [
-        'message' => trans('admin::app.catalog.products.product-copied'),
-    ]);
+    postJson(route('admin.catalog.products.copy', $product->id))
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.catalog.products.product-copied'));
 
-    $this->assertModelWise([
-        ProductFlat::class => [
-            [
-                'id' => $product->id + 1,
-            ],
-        ],
+    // Get the newly created product (last one).
+    $copiedProduct = \Webkul\Product\Models\Product::latest('id')->first();
+
+    // Assert the copied product has a different ID.
+    expect($copiedProduct->id)->not->toBe($product->id);
+
+    // Assert the copied product has a temporary SKU (as per copy functionality).
+    expect($copiedProduct->sku)->toStartWith('temporary-sku-');
+
+    // Assert the copied product exists in `product_flat`.
+    $this->assertDatabaseHas('product_flat', [
+        'product_id' => $copiedProduct->id,
+        'sku'        => $copiedProduct->sku,
     ]);
 });
 

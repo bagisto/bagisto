@@ -104,6 +104,7 @@
             "Webkul\\Admin\\Tests\\": "packages/Webkul/Admin/tests",
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
+            "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests"
         }
     },
