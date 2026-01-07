@@ -2,6 +2,9 @@ name: Pint Tests
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   pint_tests:
     runs-on: ${{ matrix.operating-systems }}

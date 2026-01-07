@@ -91,8 +91,8 @@ class CompareController extends APIController
         Event::dispatch('customer.compare.delete.before', $productId);
 
         $success = $this->compareItemRepository->deleteWhere([
-            'product_id'  => $productId,
             'customer_id' => auth()->guard('customer')->user()->id,
+            'product_id'  => $productId,
         ]);
 
         Event::dispatch('customer.compare.delete.after', $productId);

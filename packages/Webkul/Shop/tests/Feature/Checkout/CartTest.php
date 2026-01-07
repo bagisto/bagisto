@@ -473,20 +473,28 @@ it('should remove only one product item from the cart for the guest user', funct
     cart()->setCart($cart);
 
     // Act and Assert.
-    deleteJson(route('shop.api.checkout.cart.destroy', [
+    $response = deleteJson(route('shop.api.checkout.cart.destroy', [
         'cart_item_id' => $cartItem->id,
     ]))
         ->assertOk()
-        ->assertJsonPath('data', null)
+        ->assertJsonPath('data.id', $cart->id)
+        ->assertJsonPath('data.items_count', 0)
+        ->assertJsonPath('data.items_qty', 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
 
     $this->assertDatabaseMissing('cart_items', [
         'id' => $cartItem->id,
     ]);
 
-    $this->assertDatabaseMissing('cart', [
+    $this->assertDatabaseHas('cart', [
         'id' => $cart->id,
     ]);
+
+    $cart->refresh();
+
+    $this->assertEquals(0, $cart->items_count);
+    $this->assertEquals(0, $cart->items_qty);
+    $this->assertEquals(0, $cart->grand_total);
 });
 
 it('should remove only one product item from the cart for the customer', function () {
@@ -546,20 +554,28 @@ it('should remove only one product item from the cart for the customer', functio
     // Act and Assert.
     $this->loginAsCustomer($customer);
 
-    deleteJson(route('shop.api.checkout.cart.destroy', [
+    $response = deleteJson(route('shop.api.checkout.cart.destroy', [
         'cart_item_id' => $cartItem->id,
     ]))
         ->assertOk()
-        ->assertJsonPath('data', null)
+        ->assertJsonPath('data.id', $cart->id)
+        ->assertJsonPath('data.items_count', 0)
+        ->assertJsonPath('data.items_qty', 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
 
     $this->assertDatabaseMissing('cart_items', [
         'id' => $cartItem->id,
     ]);
 
-    $this->assertDatabaseMissing('cart', [
+    $this->assertDatabaseHas('cart', [
         'id' => $cart->id,
     ]);
+
+    $cart->refresh();
+
+    $this->assertEquals(0, $cart->items_count);
+    $this->assertEquals(0, $cart->items_qty);
+    $this->assertEquals(0, $cart->grand_total);
 });
 
 it('should only remove one product from the cart for now the cart will contains two products for a guest user', function () {
@@ -836,6 +852,343 @@ it('should only remove one product from the cart for now the cart will contains 
         CartItem::class => [
             $this->prepareCartItem($cartItem2),
         ],
+    ]);
+});
+
+it('should not allow a user to remove another user\'s cart item', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    // Create customer A with a cart A
+    $customerA = Customer::factory()->create();
+
+    $cartA = Cart::factory()->create([
+        'customer_id'         => $customerA->id,
+        'is_guest'            => 0,
+        'customer_first_name' => $customerA->first_name,
+        'customer_last_name'  => $customerA->last_name,
+        'customer_email'      => $customerA->email,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItemA = CartItem::factory()->create([
+        'cart_id'           => $cartA->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+
+    // Create customer B and login as customer B
+    $customerB = Customer::factory()->create();
+
+    $cartB = Cart::factory()->create([
+        'customer_id'         => $customerB->id,
+        'is_guest'            => 0,
+        'customer_first_name' => $customerB->first_name,
+        'customer_last_name'  => $customerB->last_name,
+        'customer_email'      => $customerB->email,
+    ]);
+
+    cart()->setCart($cartB);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customerB);
+
+    // Customer B tries to delete Customer A's cart item
+    deleteJson(route('shop.api.checkout.cart.destroy'), [
+        'cart_item_id' => $cartItemA->id,
+    ])
+        ->assertOk();
+
+    // Assert that Customer A's cart item still exists (was not deleted)
+    $this->assertDatabaseHas('cart_items', [
+        'id'      => $cartItemA->id,
+        'cart_id' => $cartA->id,
+    ]);
+
+    // Assert that Customer A's cart still exists
+    $this->assertDatabaseHas('cart', [
+        'id'          => $cartA->id,
+        'customer_id' => $customerA->id,
+    ]);
+});
+
+it('should not allow a guest user to remove another guest user\'s cart item', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    // Create Guest A's cart
+    $cartA = Cart::factory()->create([
+        'is_guest' => 1,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItemA = CartItem::factory()->create([
+        'cart_id'           => $cartA->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+
+    // Create Guest B's cart and set it as active session
+    $cartB = Cart::factory()->create([
+        'is_guest' => 1,
+    ]);
+
+    cart()->setCart($cartB);
+
+    // Act and Assert.
+    // Guest B tries to delete Guest A's cart item
+    deleteJson(route('shop.api.checkout.cart.destroy'), [
+        'cart_item_id' => $cartItemA->id,
+    ])
+        ->assertOk();
+
+    // Assert that Guest A's cart item still exists (was not deleted)
+    $this->assertDatabaseHas('cart_items', [
+        'id'      => $cartItemA->id,
+        'cart_id' => $cartA->id,
+    ]);
+
+    // Assert that Guest A's cart still exists
+    $this->assertDatabaseHas('cart', [
+        'id'       => $cartA->id,
+        'is_guest' => 1,
+    ]);
+});
+
+it('should not allow a guest user to remove a customer\'s cart item', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    // Create customer's cart
+    $customer = Customer::factory()->create();
+
+    $customerCart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'is_guest'            => 0,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $customerCartItem = CartItem::factory()->create([
+        'cart_id'           => $customerCart->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+
+    // Create guest cart and set it as active session
+    $guestCart = Cart::factory()->create([
+        'is_guest' => 1,
+    ]);
+
+    cart()->setCart($guestCart);
+
+    // Act and Assert.
+    // Guest tries to delete customer's cart item
+    deleteJson(route('shop.api.checkout.cart.destroy'), [
+        'cart_item_id' => $customerCartItem->id,
+    ])
+        ->assertOk();
+
+    // Assert that customer's cart item still exists (was not deleted)
+    $this->assertDatabaseHas('cart_items', [
+        'id'      => $customerCartItem->id,
+        'cart_id' => $customerCart->id,
+    ]);
+
+    // Assert that customer's cart still exists
+    $this->assertDatabaseHas('cart', [
+        'id'          => $customerCart->id,
+        'customer_id' => $customer->id,
+        'is_guest'    => 0,
+    ]);
+});
+
+it('should not allow a customer to remove a guest user\'s cart item', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    // Create guest cart
+    $guestCart = Cart::factory()->create([
+        'is_guest' => 1,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $guestCartItem = CartItem::factory()->create([
+        'cart_id'           => $guestCart->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+
+    // Create customer and login
+    $customer = Customer::factory()->create();
+
+    $customerCart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'is_guest'            => 0,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+    ]);
+
+    cart()->setCart($customerCart);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customer);
+
+    // Customer tries to delete guest's cart item
+    deleteJson(route('shop.api.checkout.cart.destroy'), [
+        'cart_item_id' => $guestCartItem->id,
+    ])
+        ->assertOk();
+
+    // Assert that guest's cart item still exists (was not deleted)
+    $this->assertDatabaseHas('cart_items', [
+        'id'      => $guestCartItem->id,
+        'cart_id' => $guestCart->id,
+    ]);
+
+    // Assert that guest's cart still exists
+    $this->assertDatabaseHas('cart', [
+        'id'       => $guestCart->id,
+        'is_guest' => 1,
     ]);
 });
 

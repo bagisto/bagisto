@@ -17,6 +17,7 @@ uses(Webkul\Admin\Tests\AdminTestCase::class)->in('../packages/Webkul/Admin/test
 uses(Webkul\Core\Tests\CoreTestCase::class)->in('../packages/Webkul/Core/tests');
 uses(Webkul\Customer\Tests\CustomerTestCase::class)->in('../packages/Webkul/Customer/tests');
 uses(Webkul\DataGrid\Tests\DataGridTestCase::class)->in('../packages/Webkul/DataGrid/tests');
+uses(Webkul\Installer\Tests\InstallerTestCase::class)->in('../packages/Webkul/Installer/tests');
 uses(Webkul\Payment\Tests\PaymentTestCase::class)->in('../packages/Webkul/Payment/tests');
 uses(Webkul\PayU\Tests\PayUTestCase::class)->in('../packages/Webkul/PayU/tests');
 uses(Webkul\Razorpay\Tests\RazorpayTestCase::class)->in('../packages/Webkul/Razorpay/tests');
