@@ -1,5 +1,5 @@
 {{-- RAM Plaza - Customer Login --}}
-{{-- Same design as Admin login (plaza.redactivamexico.net/admin/login) --}}
+{{-- Simplified OAuth-only login (like Google ecosystem) --}}
 {{-- Override: resources/views/vendor/shop/customers/sign-in.blade.php --}}
 
 @push('meta')
@@ -9,6 +9,41 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('ram-assets/css/login.css') }}">
+    <style>
+        .ram-oauth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #ff3e9a 0%, #ff66b6 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 154, 0.3);
+        }
+        .ram-oauth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 62, 154, 0.4);
+            color: white;
+        }
+        .ram-oauth-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        .ram-welcome-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+    </style>
 @endpush
 
 <x-shop::layouts
@@ -17,7 +52,7 @@
     :has-footer="false"
 >
     <x-slot:title>
-        RAM Plaza - Iniciar Sesión
+        RAM Plaza - Iniciar Sesion
     </x-slot>
 
     <div class="ram-login-wrapper">
@@ -28,7 +63,7 @@
                     <img src="https://redactivamexico.net/themes/sunshine/img/night-logo.png" alt="RAM Logo">
                 </a>
                 <h1><b>#</b>RAMPlaza</h1>
-                <p class="ram-tagline">La <b>plaza en línea</b> de <b>RedActivaMéxico</b></p>
+                <p class="ram-tagline">La <b>plaza en linea</b> de <b>RedActivaMexico</b></p>
 
                 {{-- Customer Features --}}
                 <div class="ram-features">
@@ -48,12 +83,12 @@
 
                 {{-- Mexican badge --}}
                 <div class="ram-badge">
-                    <span>🇲🇽</span> Hecho en México
+                    <span>MX</span> Hecho en Mexico
                 </div>
             </div>
         </div>
 
-        {{-- Right Side - Login Form --}}
+        {{-- Right Side - OAuth Login --}}
         <div class="ram-login-right">
             <div class="ram-login-form-container">
                 {{-- Plaza Icon --}}
@@ -61,99 +96,24 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                 </div>
 
-                {!! view_render_event('bagisto.shop.customers.login.before') !!}
+                <p class="ram-welcome-title">Bienvenido a RAM Plaza</p>
+                <p class="ram-welcome-subtitle">Inicia sesion con tu cuenta de RedActivaMexico</p>
 
-                <x-shop::form :action="route('shop.customer.session.create')">
-                    <p class="ram-welcome-title">Iniciar Sesión</p>
-                    <p class="ram-welcome-desc">Accede a tu cuenta en RAMPlaza</p>
+                {{-- Single OAuth Button --}}
+                <a href="{{ route('customer.social-login.index', 'ram') }}" class="ram-oauth-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    Iniciar sesion
+                </a>
 
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
-
-                    <div class="ram-form-fields">
-                        {{-- Email --}}
-                        <div class="ram-form-group">
-                            <label for="email">Correo electrónico</label>
-                            <x-shop::form.control-group.control
-                                type="email"
-                                class="ram-input"
-                                id="email"
-                                name="email"
-                                rules="required|email"
-                                :label="trans('shop::app.customers.login-form.email')"
-                                placeholder="tu@correo.com"
-                                aria-required="true"
-                            />
-                            <x-shop::form.control-group.error control-name="email" />
-                        </div>
-
-                        {{-- Password --}}
-                        <div class="ram-form-group">
-                            <label for="password">Contraseña</label>
-                            <div class="ram-password-wrapper">
-                                <x-shop::form.control-group.control
-                                    type="password"
-                                    class="ram-input"
-                                    id="password"
-                                    name="password"
-                                    rules="required|min:6"
-                                    :label="trans('shop::app.customers.login-form.password')"
-                                    placeholder="••••••••"
-                                    aria-required="true"
-                                />
-                                <span
-                                    class="icon-view ram-eye-icon"
-                                    onclick="switchVisibility()"
-                                    id="visibilityIcon"
-                                    role="presentation"
-                                    tabindex="0"
-                                ></span>
-                            </div>
-                            <x-shop::form.control-group.error control-name="password" />
-                        </div>
-                    </div>
-
-                    {{-- Captcha --}}
-                    @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <x-shop::form.control-group class="mt-5">
-                            {!! \Webkul\Customer\Facades\Captcha::render() !!}
-                            <x-shop::form.control-group.error control-name="g-recaptcha-response" />
-                        </x-shop::form.control-group>
-                    @endif
-
-                    <div class="ram-form-footer">
-                        <a href="{{ route('shop.customers.forgot_password.create') }}" class="ram-forgot-link">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </div>
-
-                    <button type="submit" class="ram-submit-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-                        Iniciar sesión
-                    </button>
-
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
-                </x-shop::form>
-
-                {!! view_render_event('bagisto.shop.customers.login.after') !!}
-
-                {{-- Footer --}}
-                <div class="ram-login-footer">
-                    ¿No tienes cuenta? <a href="{{ route('shop.customers.register.index') }}">Regístrate aquí</a>
-                </div>
+                {{-- Help text --}}
+                <p class="ram-welcome-subtitle" style="margin-top: 24px; margin-bottom: 0; font-size: 13px;">
+                    Si no tienes cuenta, podras crearla en el siguiente paso
+                </p>
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
-
-        <script>
-            function switchVisibility() {
-                let passwordField = document.getElementById("password");
-                let visibilityIcon = document.getElementById("visibilityIcon");
-                passwordField.type = passwordField.type === "password" ? "text" : "password";
-                visibilityIcon.classList.toggle("icon-view-close");
-            }
-        </script>
-    @endpush
 </x-shop::layouts>

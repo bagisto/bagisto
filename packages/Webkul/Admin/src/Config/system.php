@@ -1510,7 +1510,13 @@ return [
             ], [
                 'name'    => 'ram_base_url',
                 'title'   => 'RAM Base URL',
-                'info'    => 'RAM instance URL (e.g., https://redactivamexico.net or http://localhost:8080)',
+                'info'    => 'Browser-facing URL for OAuth redirects (e.g., https://redactivamexico.net or http://localhost:8080)',
+                'type'    => 'text',
+                'depends' => 'enable_ram:1',
+            ], [
+                'name'    => 'ram_internal_url',
+                'title'   => 'RAM Internal URL (Docker)',
+                'info'    => 'Server-to-server URL for token exchange. Leave empty to use Base URL. For Docker: http://ram-dev-app',
                 'type'    => 'text',
                 'depends' => 'enable_ram:1',
             ],

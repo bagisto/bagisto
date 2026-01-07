@@ -4,3 +4,4 @@
 !vendor/shop/
 !vendor/shop/customers/
 !vendor/shop/customers/sign-in.blade.php
+!vendor/shop/customers/sign-up.blade.php

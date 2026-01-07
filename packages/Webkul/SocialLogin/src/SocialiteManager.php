@@ -158,6 +158,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientSecret = core()->getConfigData('customer.settings.social_login.ram_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.ram_callback_url');
         $baseUrl = core()->getConfigData('customer.settings.social_login.ram_base_url');
+        $internalUrl = core()->getConfigData('customer.settings.social_login.ram_internal_url');
 
         if ($clientId || $clientSecret || $callbackUrl || $baseUrl) {
             $config = [
@@ -165,6 +166,7 @@ class SocialiteManager extends BaseSocialiteManager
                 'client_secret' => $clientSecret,
                 'redirect'      => $callbackUrl,
                 'base_url'      => $baseUrl,
+                'internal_url'  => $internalUrl,
             ];
         } else {
             $config = $this->config->get('services.ram');
@@ -176,6 +178,7 @@ class SocialiteManager extends BaseSocialiteManager
             $config['client_secret'],
             $config['redirect'],
             $config['base_url'],
+            $config['internal_url'] ?? null,
             $config['guzzle'] ?? []
         );
     }

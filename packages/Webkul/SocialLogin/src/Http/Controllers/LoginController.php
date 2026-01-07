@@ -29,8 +29,13 @@ class LoginController extends Controller
     public function redirectToProvider($provider)
     {
         try {
-            return Socialite::driver($provider)->redirect('shop.customers.account.profile.index');
+            return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
+            \Log::error('Social login redirect error: ' . $e->getMessage(), [
+                'provider' => $provider,
+                'exception' => $e
+            ]);
+
             session()->flash('error', $e->getMessage());
 
             return redirect()->route('shop.customer.session.index');
@@ -48,6 +53,13 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
+            \Log::error('Social login callback error: ' . $e->getMessage(), [
+                'provider' => $provider,
+                'exception' => $e,
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            session()->flash('error', 'Error during social login: ' . $e->getMessage());
             return redirect()->route('shop.customer.session.index');
         }
 

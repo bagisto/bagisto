@@ -16,6 +16,13 @@ use Laravel\Socialite\Two\User;
 class RamProvider extends AbstractProvider implements ProviderInterface
 {
     /**
+     * Indicates if the session state should be utilized.
+     *
+     * @var bool
+     */
+    protected $stateless = true;
+
+    /**
      * The scopes being requested.
      *
      * @var array
@@ -23,11 +30,18 @@ class RamProvider extends AbstractProvider implements ProviderInterface
     protected $scopes = [];
 
     /**
-     * The base URL for RAM instance.
+     * The base URL for RAM instance (browser-facing, for authorization redirects).
      *
      * @var string
      */
     protected $baseUrl;
+
+    /**
+     * The internal URL for RAM instance (Docker container-to-container, for API calls).
+     *
+     * @var string
+     */
+    protected $internalUrl;
 
     /**
      * Create a new provider instance.
@@ -37,14 +51,16 @@ class RamProvider extends AbstractProvider implements ProviderInterface
      * @param  string  $clientSecret
      * @param  string  $redirectUrl
      * @param  string  $baseUrl
+     * @param  string|null  $internalUrl
      * @param  array  $guzzle
      * @return void
      */
-    public function __construct($request, $clientId, $clientSecret, $redirectUrl, $baseUrl, $guzzle = [])
+    public function __construct($request, $clientId, $clientSecret, $redirectUrl, $baseUrl, $internalUrl = null, $guzzle = [])
     {
         parent::__construct($request, $clientId, $clientSecret, $redirectUrl, $guzzle);
 
         $this->baseUrl = rtrim($baseUrl, '/');
+        $this->internalUrl = $internalUrl ? rtrim($internalUrl, '/') : $this->baseUrl;
     }
 
     /**
@@ -77,12 +93,13 @@ class RamProvider extends AbstractProvider implements ProviderInterface
 
     /**
      * Get the token URL for the provider.
+     * Uses internalUrl for Docker container-to-container communication.
      *
      * @return string
      */
     protected function getTokenUrl()
     {
-        return $this->baseUrl . '/index.php?link1=authorize';
+        return $this->internalUrl . '/index.php?link1=authorize';
     }
 
     /**
@@ -93,11 +110,56 @@ class RamProvider extends AbstractProvider implements ProviderInterface
      */
     public function getAccessTokenResponse($code)
     {
-        $response = $this->getHttpClient()->get($this->getTokenUrl(), [
-            'query' => $this->getTokenFields($code),
+        $tokenUrl = $this->getTokenUrl();
+        $tokenFields = $this->getTokenFields($code);
+
+        \Log::info('RAM OAuth: Exchanging code for token', [
+            'url' => $tokenUrl,
+            'params' => $tokenFields,
         ]);
 
-        return json_decode($response->getBody(), true);
+        $response = $this->getHttpClient()->get($tokenUrl, [
+            'query' => $tokenFields,
+            'allow_redirects' => false, // Don't follow redirects - API should return JSON
+            'http_errors' => false, // Don't throw on 4xx/5xx
+        ]);
+
+        $statusCode = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        $data = json_decode($body, true);
+
+        \Log::info('RAM OAuth: Token response', [
+            'status' => $statusCode,
+            'body' => $body,
+            'data' => $data,
+        ]);
+
+        // Handle redirects (302) - means authentication failed
+        if ($statusCode >= 300 && $statusCode < 400) {
+            $location = $response->getHeader('Location')[0] ?? 'unknown';
+            throw new \Exception("RAM OAuth failed - redirected to: {$location}. The authorization code may have expired or been used already.");
+        }
+
+        // Check for WoWonder error response
+        if (isset($data['status']) && $data['status'] != 200) {
+            $errorMsg = $data['errors']['message'] ?? 'Unknown error';
+            $errorCode = $data['errors']['error_code'] ?? 'N/A';
+            throw new \Exception("RAM OAuth error [{$errorCode}]: {$errorMsg}");
+        }
+
+        // WoWonder returns: {"status": 200, "access_token": "..."}
+        // Laravel Socialite expects: {"access_token": "...", "token_type": "bearer"}
+        // Transform response to match Socialite expectations
+        if (isset($data['access_token'])) {
+            return [
+                'access_token' => $data['access_token'],
+                'token_type' => 'bearer',
+                'expires_in' => 3600, // WoWonder tokens expire in 1 hour
+            ];
+        }
+
+        // If response doesn't match expected format, throw exception
+        throw new \Exception('Invalid token response from RAM: ' . json_encode($data));
     }
 
     /**
@@ -117,13 +179,14 @@ class RamProvider extends AbstractProvider implements ProviderInterface
 
     /**
      * Get the raw user for the given access token.
+     * Uses internalUrl for Docker container-to-container communication.
      *
      * @param  string  $token
      * @return array
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->get($this->baseUrl . '/index.php', [
+        $response = $this->getHttpClient()->get($this->internalUrl . '/index.php', [
             'query' => [
                 'link1' => 'apps_api',
                 'access_token' => $token,
