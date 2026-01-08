@@ -80,7 +80,10 @@
                     @lang('shop::app.customers.account.profile.index.gender')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500">
+                <p
+                    class="text-sm font-medium text-zinc-500"
+                    v-pre
+                >
                     {{ $customer->gender ?? '-'}}
                 </p>
             </div>
@@ -94,7 +97,10 @@
                     @lang('shop::app.customers.account.profile.index.dob')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500">
+                <p
+                    class="text-sm font-medium text-zinc-500"
+                    v-pre
+                >
                     {{ $customer->date_of_birth ?? '-' }}
                 </p>
             </div>
@@ -108,7 +114,10 @@
                     @lang('shop::app.customers.account.profile.index.email')
                 </p>
 
-                <p class="text-sm font-medium no-underline text-zinc-500">
+                <p
+                    class="text-sm font-medium no-underline text-zinc-500"
+                    v-pre
+                >
                     {{ $customer->email }}
                 </p>
             </div>

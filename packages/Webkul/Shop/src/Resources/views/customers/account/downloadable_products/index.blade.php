@@ -32,7 +32,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.before') !!}
 
-            <!-- For Desktop View -->
+        <!-- For Desktop View -->
         <div class="max-md:hidden">
             <x-shop::datagrid :src="route('shop.customers.account.downloadable_products.index')" />
         </div>

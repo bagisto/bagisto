@@ -25,7 +25,7 @@
         @endphp
 
         <x-admin::form.control-group>
-            <x-admin::form.control-group.label>
+            <x-admin::form.control-group.label v-pre>
                 {{ $inventorySource->name }}
             </x-admin::form.control-group.label>
 

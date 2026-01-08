@@ -376,6 +376,7 @@
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="{{ $attribute->name ?? $attribute->admin_name }}"
+                                    v-pre
                                 >
                                     {{ $attribute->name ?? $attribute->admin_name }}
                                 </label>

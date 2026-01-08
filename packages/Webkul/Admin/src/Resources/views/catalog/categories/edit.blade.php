@@ -46,7 +46,6 @@
         <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
             <div class="flex items-center gap-x-1">
                 <!-- Locale Switcher -->
-
                 <x-admin::dropdown 
                     position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}" 
                     :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''"
@@ -59,7 +58,7 @@
                         >
                             <span class="icon-language text-2xl"></span>
 
-                            {{ $currentLocale->name }}
+                            <span v-pre>{{ $currentLocale->name }}</span>
 
                             <input
                                 type="hidden"
@@ -77,6 +76,7 @@
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
                                 class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                v-pre
                             >
                                 {{ $locale->name }}
                             </a>
@@ -442,6 +442,7 @@
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="{{ $attribute->name ?? $attribute->admin_name }}"
+                                    v-pre
                                 >
                                     {{ $attribute->name ?? $attribute->admin_name }}
                                 </label>

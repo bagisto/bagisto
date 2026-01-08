@@ -20,7 +20,10 @@
     >
         <!-- Save Inventory -->
         <div class="mt-3.5 flex items-center justify-between gap-4 max-sm:flex-wrap">
-            <p class="text-xl font-bold text-gray-800 dark:text-white">
+            <p 
+                class="text-xl font-bold text-gray-800 dark:text-white"
+                v-pre
+            >
                 {{ $name }}
             </p>
 
@@ -55,7 +58,7 @@
                         >
                             <span class="icon-store text-2xl"></span>
 
-                            {{ $currentChannel->name }}
+                            <span v-pre>{{ $currentChannel->name }}</span>
 
                             <input
                                 type="hidden"
@@ -73,6 +76,7 @@
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code]) }}"
                                 class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
+                                v-pre
                             >
                                 {{ $channel->name }}
                             </a>
@@ -90,7 +94,7 @@
                         >
                             <span class="icon-language text-2xl"></span>
 
-                            {{ $currentLocale->name }}
+                            <span v-pre>{{ $currentLocale->name }}</span>
                             
                             <input
                                 type="hidden"
@@ -108,6 +112,7 @@
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
                                 class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                v-pre
                             >
                                 {{ $locale->name }}
                             </a>

@@ -55,14 +55,20 @@
                                 @endif
 
                                 <div class="grid place-content-start gap-1.5">
-                                    <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
+                                    <p
+                                        class="text-base font-semibold text-gray-800 break-all dark:text-white"
+                                        v-pre
+                                    >
                                         {{ $item->name }}
                                     </p>
 
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     @if (
                                                         ! isset($attribute['attribute_type'])
                                                         || $attribute['attribute_type'] !== 'file'
@@ -207,7 +213,10 @@
                             </p>
 
                             <!-- Order Channel -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p 
+                                class="text-gray-600 dark:text-gray-300"
+                                v-pre
+                            >
                                 {{ $order->channel_name }}
                             </p>
                         </div>
@@ -249,7 +258,10 @@
 
                     <div class="pt-4">
                         <!-- Shipping Method -->
-                        <p class="font-semibold text-gray-800 dark:text-white">
+                        <p
+                            class="font-semibold text-gray-800 dark:text-white"
+                            v-pre
+                        >
                             {{ $order->shipping_title }}
                         </p>
 
@@ -270,7 +282,10 @@
                             $shipment->inventory_source
                             || $shipment->inventory_source_name
                         )
-                            <p class="pt-4 font-semibold text-gray-800 dark:text-white">
+                            <p
+                                class="pt-4 font-semibold text-gray-800 dark:text-white"
+                                v-pre
+                            >
                                 {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                             </p>
 
@@ -280,7 +295,10 @@
                         @endif
 
                         @if ($shipment->carrier_title)
-                            <p class="pt-4 font-semibold text-gray-800 dark:text-white">
+                            <p
+                                class="pt-4 font-semibold text-gray-800 dark:text-white"
+                                v-pre
+                            >
                                 {{ $shipment->carrier_title }}
                             </p>
 
@@ -290,7 +308,10 @@
                         @endif
 
                         @if ($shipment->track_number)
-                            <p class="pt-4 font-semibold text-gray-800 dark:text-white">
+                            <p
+                                class="pt-4 font-semibold text-gray-800 dark:text-white"
+                                v-pre
+                            >
                                 {{ $shipment->track_number }}
                             </p>
 

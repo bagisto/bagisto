@@ -68,7 +68,7 @@
                         tabindex="0"
                         @click="currencyToggler = ! currencyToggler"
                     >
-                        <span>
+                        <span v-pre>
                             {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                         </span>
 
@@ -76,7 +76,8 @@
                             class="text-2xl"
                             :class="{'icon-arrow-up': currencyToggler, 'icon-arrow-down': ! currencyToggler}"
                             role="presentation"
-                        ></span>
+                        >
+                        </span>
                     </div>
                 </x-slot>
 
@@ -88,7 +89,10 @@
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
 
-            <p class="py-3 text-xs font-medium">
+            <p
+                class="py-3 text-xs font-medium"
+                v-pre
+            >
                 {{ core()->getConfigData('general.content.header_offer.title') }}
                 
                 <a 
@@ -123,7 +127,7 @@
                             height="16"
                         />
                         
-                        <span>
+                        <span v-pre>
                             {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                         </span>
 

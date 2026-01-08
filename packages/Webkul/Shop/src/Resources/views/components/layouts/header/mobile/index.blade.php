@@ -279,7 +279,10 @@
                         @endguest
 
                         @auth('customer')
-                            <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
+                            <div
+                                class="flex flex-col justify-between gap-2.5 max-md:gap-0"
+                                v-pre
+                            >
                                 <p class="text-2xl break-all font-mediums max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="no-underline text-zinc-500 max-md:text-sm">{{ auth()->user()?->email }}</p>
@@ -310,6 +313,7 @@
                                 <div
                                     class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                     role="button"
+                                    v-pre
                                 >
                                     {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                 </div>
@@ -348,6 +352,7 @@
                                 <div
                                     class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                     role="button"
+                                    v-pre
                                 >
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)

@@ -287,7 +287,12 @@
                                     :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.locale')"
                                 >
                                     @foreach (core()->getAllLocales() as $locale)
-                                        <option value="{{ $locale->code }}">{{ $locale->name }}</option>
+                                        <option 
+                                            value="{{ $locale->code }}"
+                                            v-pre
+                                        >
+                                            {{ $locale->name }}
+                                        </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
 

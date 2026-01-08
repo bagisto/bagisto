@@ -149,7 +149,10 @@
                                     @endif
 
                                     <div class="grid place-content-start gap-1.5">
-                                        <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
+                                        <p
+                                            class="text-base font-semibold text-gray-800 break-all dark:text-white"
+                                            v-pre
+                                        >
                                             {{ $item->name }}
                                         </p>
 
@@ -163,7 +166,10 @@
 
                                             @if (isset($item->additional['attributes']))
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                    <p
+                                                        class="text-gray-600 dark:text-gray-300"
+                                                        v-pre
+                                                    >
                                                         @if (
                                                             ! isset($attribute['attribute_type'])
                                                             || $attribute['attribute_type'] !== 'file'
@@ -532,7 +538,10 @@
                     <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-1.5 p-4">
-                            <p class="text-base leading-6 text-gray-800 break-all dark:text-white">
+                            <p 
+                                class="text-base leading-6 text-gray-800 break-all dark:text-white"
+                                v-pre
+                            >
                                 {{ $comment->comment }}
                             </p>
 
@@ -574,19 +583,26 @@
                             <div class="flex flex-col gap-1.5">
                                 <p 
                                     class="font-semibold text-gray-800 dark:text-white"
-                                    v-text="'{{ $order->customer_full_name }}'"
+                                    v-pre
                                 >
+                                    {{ $order->customer_full_name }}
                                 </p>
 
                                 {!! view_render_event('bagisto.admin.sales.order.customer_full_name.after', ['order' => $order]) !!}
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-pre
+                                >
                                     {{ $order->customer_email }}
                                 </p>
 
                                 {!! view_render_event('bagisto.admin.sales.order.customer_email.after', ['order' => $order]) !!}
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p 
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-pre
+                                >
                                     @lang('admin::app.sales.orders.view.customer-group') : {{ $order->is_guest ? core()->getGuestCustomerGroup()?->name : ($order->customer->group->name ?? '') }}
                                 </p>
 
@@ -701,7 +717,10 @@
                             </p>
 
                             <!-- Currency -->
-                            <p class="pt-4 font-semibold text-gray-800 dark:text-white">
+                            <p 
+                                class="pt-4 font-semibold text-gray-800 dark:text-white"
+                                v-pre
+                            >
                                 {{ $order->order_currency_code }}
                             </p>
 
@@ -713,11 +732,17 @@
 
                             <!-- Additional details -->
                             @if (! empty($additionalDetails))
-                                <p class="pt-4 font-semibold text-gray-800 dark:text-white">
+                                <p 
+                                    class="pt-4 font-semibold text-gray-800 dark:text-white"
+                                    v-pre
+                                >
                                     {{ $additionalDetails['title'] }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p 
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-pre
+                                >
                                     {{ $additionalDetails['value'] }}
                                 </p>
                             @endif
@@ -730,7 +755,10 @@
                             <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="pt-4">
-                                <p class="font-semibold text-gray-800 dark:text-white">
+                                <p 
+                                    class="font-semibold text-gray-800 dark:text-white"
+                                    v-pre
+                                >
                                     {{ $order->shipping_title }}
                                 </p>
 
@@ -865,7 +893,10 @@
                                         @lang('admin::app.sales.orders.view.name')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p 
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-pre
+                                    >
                                         {{ $refund->order->customer_full_name }}
                                     </p>
 
