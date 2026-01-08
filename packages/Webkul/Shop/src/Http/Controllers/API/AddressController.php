@@ -77,6 +77,12 @@ class AddressController extends APIController
     {
         $customer = auth()->guard('customer')->user();
 
+        $addressToUpdate = $this->customerAddressRepository->findOrFail($request->input('id'));
+
+        if ($addressToUpdate->customer_id !== $customer->id) {
+            abort(403);
+        }
+
         Event::dispatch('customer.addresses.update.before');
 
         $customerAddress = $this->customerAddressRepository->update(array_merge($request->only([
