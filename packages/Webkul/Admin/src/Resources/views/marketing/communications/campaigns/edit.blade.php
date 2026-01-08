@@ -107,6 +107,7 @@
                                     <option
                                         value="{{ $event->id }}"
                                         {{ $selectedOption == $event->id ? 'selected' : '' }}
+                                        v-pre
                                     >
                                         {{ $event->name }}
                                     </option>
@@ -136,6 +137,7 @@
                                     <option
                                         value="{{ $template->id }}"
                                         {{ $selectedOption == $template->id ? 'selected' : '' }}
+                                        v-pre
                                     >
                                         {{ $template->name }}
                                     </option>
@@ -184,6 +186,7 @@
                                     <option
                                         value="{{ $channel->id }}"
                                         {{ $selectedOption == $channel->id ? 'selected' : '' }}
+                                        v-pre
                                     >
                                         {{ core()->getChannelName($channel) }}
                                     </option>
@@ -213,6 +216,7 @@
                                     <option
                                         value="{{ $customerGroup->id }}"
                                         {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}
+                                        v-pre
                                     >
                                         {{ $customerGroup->name }}
                                     </option>

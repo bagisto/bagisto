@@ -127,6 +127,7 @@
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="inventory_sources_{{ $inventorySource->id }}"
+                                    v-pre
                                 >
                                     {{ $inventorySource->name }}
                                 </label>
@@ -157,7 +158,11 @@
                             </option>
 
                             @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
-                                <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
+                                <option 
+                                    value="{{ $category->id }}"
+                                    {{ old('root_category_id') == $category->id ? 'selected' : '' }}
+                                    v-pre
+                                >
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -209,7 +214,11 @@
                             :label="trans('admin::app.settings.channels.create.theme')"
                         >
                             @foreach (config('themes.shop') as $themeCode => $theme)
-                                <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                <option
+                                    value="{{ $themeCode }}"
+                                    {{ old('theme') == $themeCode ? 'selected' : '' }}
+                                    v-pre
+                                >
                                     {{ $theme['name'] }}
                                 </option>
                             @endforeach
@@ -370,6 +379,7 @@
                                     <label
                                         class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="locales_{{ $locale->id }}"
+                                        v-pre
                                     >
                                         {{ $locale->name }} 
                                     </label>
@@ -399,7 +409,11 @@
                                 </option>
 
                                 @foreach (core()->getAllLocales() as $locale)
-                                    <option value="{{ $locale->id }}" {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}>
+                                    <option 
+                                        value="{{ $locale->id }}" 
+                                        {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}
+                                        v-pre
+                                    >
                                         {{ $locale->name }}
                                     </option>
                                 @endforeach
@@ -429,6 +443,7 @@
                                     <label
                                         class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="currencies_{{ $currency->id }}"
+                                        v-pre
                                     >
                                         {{ $currency->name }} 
                                     </label>
@@ -458,7 +473,11 @@
                                 </option>
 
                                 @foreach (core()->getAllCurrencies() as $currency)
-                                    <option value="{{ $currency->id }}" {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}>
+                                    <option
+                                        value="{{ $currency->id }}"
+                                        {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}
+                                        v-pre
+                                    >
                                         {{ $currency->name }}
                                     </option>
                                 @endforeach

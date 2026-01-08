@@ -469,7 +469,10 @@
                                             :label="trans('admin::app.catalog.products.index.create.family')"
                                         >
                                             @foreach($families as $family)
-                                                <option value="{{ $family->id }}">
+                                                <option 
+                                                    value="{{ $family->id }}"
+                                                    v-pre
+                                                >
                                                     {{ $family->name }}
                                                 </option>
                                             @endforeach

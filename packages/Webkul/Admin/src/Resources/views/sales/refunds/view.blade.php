@@ -57,7 +57,10 @@
 
                                 <!-- Product Name -->
                                 <div class="grid place-content-start gap-1.5">
-                                    <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
+                                    <p 
+                                        class="text-base font-semibold text-gray-800 break-all dark:text-white"
+                                        v-pre
+                                    >
                                         {{ $item->name }}
                                     </p>
 
@@ -65,7 +68,10 @@
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     @if (
                                                         ! isset($attribute['attribute_type'])
                                                         || $attribute['attribute_type'] !== 'file'
@@ -313,12 +319,16 @@
                             <!-- Customer Full Name -->
                             <p 
                                 class="font-semibold text-gray-800 dark:text-white"
-                                v-text="'{{ $refund->order->customer_full_name }}'"
+                                v-pre
                             >
+                                {{ $refund->order->customer_full_name }}
                             </p>
 
                             <!-- Customer Email -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p 
+                                class="text-gray-600 dark:text-gray-300"
+                                v-pre
+                            >
                                 {{ $refund->order->customer_email }}
                             </p>
                         </div>
@@ -391,7 +401,10 @@
                                 {{ $order->status_label }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p 
+                                class="text-gray-600 dark:text-gray-300"
+                                v-pre
+                            >
                                 {{ $order->channel_name }}
                             </p>
                         </div>
@@ -426,7 +439,10 @@
                                 </a>
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p 
+                                class="text-gray-600 dark:text-gray-300"
+                                v-pre
+                            >
                                 {{ $order->shipping_title ?? 'N/A' }}
                             </p>
 

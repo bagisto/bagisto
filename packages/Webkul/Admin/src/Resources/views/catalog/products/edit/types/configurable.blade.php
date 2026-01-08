@@ -298,7 +298,10 @@
                                                     </x-admin::form.control-group.label>
                         
                                                     <div class="relative">
-                                                        <span class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4">
+                                                        <span 
+                                                            class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4"
+                                                            v-pre
+                                                        >
                                                             {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
                                                         </span>
 
@@ -491,7 +494,10 @@
                                 <template v-if="selectedType == 'editPrices'">
                                     <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">
                                         <div class="relative">
-                                            <span class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4">
+                                            <span 
+                                                class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4"
+                                                v-pre
+                                            >
                                                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
                                             </span>
 

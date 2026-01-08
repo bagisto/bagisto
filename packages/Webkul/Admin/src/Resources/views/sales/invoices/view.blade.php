@@ -141,7 +141,10 @@
 
                                 <div class="grid place-content-start gap-1.5">
                                     <!-- Item Name -->
-                                    <p class="text-base font-semibold text-gray-800 break-all dark:text-white">
+                                    <p 
+                                        class="text-base font-semibold text-gray-800 break-all dark:text-white"
+                                        v-pre
+                                    >
                                         {{ $item->name }}
                                     </p>
 
@@ -156,7 +159,10 @@
                                         @if (isset($item->additional['attributes']))
                                             <!-- Item Additional Details -->
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     @if (
                                                         ! isset($attribute['attribute_type'])
                                                         || $attribute['attribute_type'] !== 'file'
@@ -467,7 +473,10 @@
                             </p>
 
                             <!-- Order Channel -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p 
+                                class="text-gray-600 dark:text-gray-300"
+                                v-pre
+                            >
                                 {{ $order->channel_name }}
                             </p>
 

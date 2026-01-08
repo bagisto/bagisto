@@ -66,7 +66,12 @@
                             :label="trans('admin::app.settings.data-transfer.imports.edit.type')"
                         >
                             @foreach (config('importers') as $code => $importer)
-                                <option value="{{ $code }}">@lang($importer['title'])</option>
+                                <option 
+                                    value="{{ $code }}"
+                                    v-pre
+                                >
+                                    @lang($importer['title'])
+                                </option>
                             @endforeach
                         </x-admin::form.control-group.control>
 
@@ -121,6 +126,7 @@
                                     href="{{ route('admin.settings.data_transfer.imports.download', $import->id) }}" 
                                     class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                                     target="_blank"
+                                    v-pre
                                 >
                                     {{ basename($import->file_path) }}
                                 </a>
