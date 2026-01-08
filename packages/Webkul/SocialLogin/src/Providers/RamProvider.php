@@ -99,7 +99,9 @@ class RamProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenUrl()
     {
-        return $this->internalUrl . '/index.php?link1=authorize';
+        // Note: Do NOT include query params here - Guzzle replaces existing params
+        // Instead, include link1 in getTokenFields()
+        return $this->internalUrl . '/index.php';
     }
 
     /**
@@ -113,53 +115,39 @@ class RamProvider extends AbstractProvider implements ProviderInterface
         $tokenUrl = $this->getTokenUrl();
         $tokenFields = $this->getTokenFields($code);
 
-        \Log::info('RAM OAuth: Exchanging code for token', [
-            'url' => $tokenUrl,
-            'params' => $tokenFields,
-        ]);
-
         $response = $this->getHttpClient()->get($tokenUrl, [
             'query' => $tokenFields,
-            'allow_redirects' => false, // Don't follow redirects - API should return JSON
-            'http_errors' => false, // Don't throw on 4xx/5xx
+            'allow_redirects' => false,
+            'http_errors' => false,
         ]);
 
         $statusCode = $response->getStatusCode();
         $body = (string) $response->getBody();
         $data = json_decode($body, true);
 
-        \Log::info('RAM OAuth: Token response', [
-            'status' => $statusCode,
-            'body' => $body,
-            'data' => $data,
-        ]);
-
-        // Handle redirects (302) - means authentication failed
+        // Handle redirects (302) - authentication failed or endpoint misconfigured
         if ($statusCode >= 300 && $statusCode < 400) {
             $location = $response->getHeader('Location')[0] ?? 'unknown';
-            throw new \Exception("RAM OAuth failed - redirected to: {$location}. The authorization code may have expired or been used already.");
+            throw new \Exception("RAM OAuth failed - redirected to: {$location}");
         }
 
-        // Check for WoWonder error response
+        // Handle WoWonder error response
         if (isset($data['status']) && $data['status'] != 200) {
             $errorMsg = $data['errors']['message'] ?? 'Unknown error';
             $errorCode = $data['errors']['error_code'] ?? 'N/A';
             throw new \Exception("RAM OAuth error [{$errorCode}]: {$errorMsg}");
         }
 
-        // WoWonder returns: {"status": 200, "access_token": "..."}
-        // Laravel Socialite expects: {"access_token": "...", "token_type": "bearer"}
-        // Transform response to match Socialite expectations
+        // Transform WoWonder response to Socialite format
         if (isset($data['access_token'])) {
             return [
                 'access_token' => $data['access_token'],
                 'token_type' => 'bearer',
-                'expires_in' => 3600, // WoWonder tokens expire in 1 hour
+                'expires_in' => 3600,
             ];
         }
 
-        // If response doesn't match expected format, throw exception
-        throw new \Exception('Invalid token response from RAM: ' . json_encode($data));
+        throw new \Exception('Invalid token response from RAM');
     }
 
     /**
@@ -171,6 +159,7 @@ class RamProvider extends AbstractProvider implements ProviderInterface
     protected function getTokenFields($code)
     {
         return [
+            'link1' => 'authorize',  // WoWonder routing parameter
             'app_id' => $this->clientId,
             'app_secret' => $this->clientSecret,
             'code' => $code,
@@ -188,7 +177,7 @@ class RamProvider extends AbstractProvider implements ProviderInterface
     {
         $response = $this->getHttpClient()->get($this->internalUrl . '/index.php', [
             'query' => [
-                'link1' => 'apps_api',
+                'link1' => 'app_api',  // Note: singular, not apps_api
                 'access_token' => $token,
                 'type' => 'get_user_data',
             ],
