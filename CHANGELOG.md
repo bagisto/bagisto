@@ -4,7 +4,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- Security updates.
+
+- Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
 
 ## **v2.3.10 (2nd of January 2026)** - *Release*
 
