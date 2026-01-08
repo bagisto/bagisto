@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "XSRF-TOKEN",
+      "value": "eyJpdiI6ImcyNEZjTTByTzV3VlF4Qll5ajlRelE9PSIsInZhbHVlIjoiSEZ3bUJTTVU3eXgzdm9XZ1lxT2d6NzJ4R0JkMzhiallMOUpnQ3FFZHBNR2tsb043Vk5NaVhRbE5uUW01U1dvNm8yVFdnRjVVSUo1ejZ5ZU1oWUVtcDZKYXdUd3NLKzBsWFZoZmx4TWpoallvYVMwQkxITUp2c0FxYmZkUldYN0EiLCJtYWMiOiIwZmY0Njk2Y2Q1MGU2YTZmODVkNDYwNDVmYWUxNDc2MjA2NGU2N2RhM2IzNTE2ODRmODNlNmRhZmM1NDI2NjVlIiwidGFnIjoiIn0%3D",
+      "domain": "192.168.15.71",
+      "path": "/",
+      "expires": 1767866052.789549,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "bagisto_session",
+      "value": "eyJpdiI6IkFNc3MydFNSTWJPRjF0K3hFY1ExYkE9PSIsInZhbHVlIjoiU29Bc2haT001TnNRL0RETHRXLzhGdzR3WmdwQ3dHb0d2ZWVFZ0tCY3hiaTg4VEQwQjdYL21YMW51ZUt6NG1vU0NXYVA4bm9LcXZST2Fld2c4YkdjcXU3Q2JtVlkvU0dwYjNmVExFQUdXakVWdmszY1ZHeUVoZjdWdHhtSmZGdDQiLCJtYWMiOiI3ZWI0YmI0MTVmM2EyZjY0M2E5YzI4MjA1YmUyY2U0OWE3OWYzMjFjZDdmZDU4M2Q5MzY5ZjYwYTBlMWMyMDk1IiwidGFnIjoiIn0%3D",
+      "domain": "192.168.15.71",
+      "path": "/",
+      "expires": 1767866052.789819,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://192.168.15.71",
+      "localStorage": [
+        {
+          "name": "phpdebugbar-height",
+          "value": "300"
+        }
+      ]
+    }
+  ]
+}
