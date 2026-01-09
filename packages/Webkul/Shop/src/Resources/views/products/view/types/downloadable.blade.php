@@ -14,6 +14,7 @@
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" 
                             class="text-blue-700"
                             target="_blank"
+                            v-pre
                         >
                             {{ $sample->title }}
                         </a>
@@ -51,6 +52,7 @@
                         <label
                             for="{{ $link->id }}"
                             class="cursor-pointer max-sm:text-sm ltr:ml-1 rtl:mr-1"
+                            v-pre
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>

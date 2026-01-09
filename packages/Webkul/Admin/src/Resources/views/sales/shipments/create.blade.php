@@ -111,7 +111,10 @@
                                     @change="onSourceChange"
                                 >
                                     @foreach ($order->channel->inventory_sources as $inventorySource)
-                                        <option value="{{ $inventorySource->id }}">
+                                        <option 
+                                            value="{{ $inventorySource->id }}"
+                                            v-pre
+                                        >
                                             {{ $inventorySource->name }}
                                         </option>
                                     @endforeach
@@ -150,7 +153,10 @@
 
                                                 <div class="grid place-content-start gap-1.5">
                                                     <!-- Item Name -->
-                                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                                    <p 
+                                                        class="text-base font-semibold text-gray-800 dark:text-white"
+                                                        v-pre
+                                                    >
                                                         {{ $item->name }}
                                                     </p>
 
@@ -165,7 +171,10 @@
                                                         <!--Additional Attributes -->
                                                         @if (isset($item->additional['attributes']))
                                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                                <p class="text-gray-600 dark:text-gray-300">
+                                                                <p 
+                                                                    class="text-gray-600 dark:text-gray-300"
+                                                                    v-pre
+                                                                >
                                                                     @if (
                                                                         ! isset($attribute['attribute_type'])
                                                                         || $attribute['attribute_type'] !== 'file'
@@ -213,7 +222,10 @@
                                             <div class="grid grid-cols-2 gap-2.5 border-b border-slate-300 py-2.5 dark:border-gray-800">
                                                 <div class="grid gap-1">
                                                     <!--Inventory Source -->
-                                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                                    <p
+                                                        class="text-base font-semibold text-gray-800 dark:text-white"
+                                                        v-pre
+                                                    >
                                                         {{ $inventorySource->name }}
                                                     </p>
 

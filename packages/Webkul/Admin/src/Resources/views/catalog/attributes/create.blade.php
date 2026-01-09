@@ -87,7 +87,7 @@
                         <!-- Locales Inputs -->
                         @foreach ($locales as $locale)
                             <x-admin::form.control-group class="last:!mb-0">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label v-pre>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                 </x-admin::form.control-group.label>
 
@@ -210,7 +210,7 @@
 
                                             <!-- Locales Tables Heading -->
                                             @foreach ($locales as $locale)
-                                                <x-admin::table.th>
+                                                <x-admin::table.th v-pre>
                                                     {{ $locale->name . ' (' . $locale->code . ')' }}
                                                 </x-admin::table.th>
                                             @endforeach
@@ -775,7 +775,10 @@
                                 <!-- Locales Input -->
                                 @foreach ($locales as $locale)
                                     <x-admin::form.control-group class="!mb-2.5 w-full">
-                                        <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
+                                        <x-admin::form.control-group.label 
+                                            ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }"
+                                            v-pre
+                                        >
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 

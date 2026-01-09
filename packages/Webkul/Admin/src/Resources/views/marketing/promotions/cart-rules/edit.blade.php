@@ -601,6 +601,7 @@
                                         <label
                                             class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                             for="{{ 'channel_' . '_' . $channel->id }}"
+                                            v-pre
                                         >
                                             {{ core()->getChannelName($channel) }}
                                         </label>
@@ -634,6 +635,7 @@
                                         <label
                                             class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                             for="{{ 'customer_group_' . '_' . $customerGroup->id }}"
+                                            v-pre
                                         >
                                             {{ $customerGroup->name }}
                                         </label>

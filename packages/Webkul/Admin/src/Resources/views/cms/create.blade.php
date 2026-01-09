@@ -214,7 +214,8 @@
 
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
-                                    for="channels_{{ $channel->id }}" 
+                                    for="channels_{{ $channel->id }}"
+                                    v-pre
                                 >
                                     {{ core()->getChannelName($channel) }}
                                 </label>

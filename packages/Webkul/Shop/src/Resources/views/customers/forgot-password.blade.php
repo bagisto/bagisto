@@ -99,7 +99,8 @@
                     <p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
                         @lang('shop::app.customers.forgot-password.back')
 
-                        <a class="text-navyBlue"
+                        <a 
+                            class="text-navyBlue"
                             href="{{ route('shop.customer.session.index') }}"
                         >
                             @lang('shop::app.customers.forgot-password.sign-in-button')

@@ -263,7 +263,12 @@
                                     :label="trans('admin::app.marketing.search-seo.search-terms.index.create.channel')"
                                 >
                                     @foreach (core()->getAllChannels() as $channel)
-                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        <option 
+                                            value="{{ $channel->id }}"
+                                            v-pre
+                                        >
+                                            {{ $channel->name }}
+                                        </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
 
@@ -283,7 +288,12 @@
                                     :label="trans('admin::app.marketing.search-seo.search-terms.index.create.locale')"
                                 >
                                     @foreach (core()->getAllLocales() as $locale)
-                                        <option value="{{ $locale->code }}">{{ $locale->name }}</option>
+                                        <option 
+                                            value="{{ $locale->code }}"
+                                            v-pre
+                                        >
+                                            {{ $locale->name }}
+                                        </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
 

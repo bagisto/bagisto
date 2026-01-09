@@ -96,6 +96,7 @@
                 <option
                     value="{{ $option->id }}"
                     {{ $selectedOption == $option->id ? 'selected' : '' }}
+                    v-pre
                 >
                     {{ $option->admin_name ?? $option->name }}
                 </option>
@@ -119,6 +120,7 @@
                 <option
                     value="{{ $option->id }}"
                     {{ in_array($option->id, $selectedOption) ? 'selected' : ''}}
+                    v-pre
                 >
                     {{ $option->admin_name }}
                 </option>
@@ -147,6 +149,7 @@
                 <label
                     class="cursor-pointer select-none text-xs font-medium text-gray-600 dark:text-gray-300"
                     for="{{ $attribute->code . '_' . $option->id }}"
+                    v-pre
                 >
                     {{ $option->admin_name }}
                 </label>

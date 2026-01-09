@@ -224,6 +224,7 @@
                             <label
                                 class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm"
                                 for="agreement"
+                                v-pre
                             >
                                 {{ core()->getConfigData('general.gdpr.agreement.agreement_label') }}
                             </label>

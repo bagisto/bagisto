@@ -56,7 +56,7 @@
                         >
                             <span class="icon-language text-2xl"></span>
 
-                            {{ $currentLocale->name }}
+                            <span v-pre>{{ $currentLocale->name }}</span>
 
                             <input
                                 type="hidden"
@@ -74,6 +74,7 @@
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
                                 class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                v-pre
                             >
                                 {{ $locale->name }}
                             </a>
@@ -176,7 +177,12 @@
                                     :value="$theme->channel_id"
                                 >
                                     @foreach($channels as $channel)
-                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        <option 
+                                            value="{{ $channel->id }}"
+                                            v-pre
+                                        >
+                                            {{ $channel->name }}
+                                        </option>
                                     @endforeach 
                                 </x-admin::form.control-group.control>
         

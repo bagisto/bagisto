@@ -77,8 +77,11 @@
                                             <div class="flex justify-between">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="text-xl font-medium">
-                                                    {{ $review->title}}
+                                                <p
+                                                    class="text-xl font-medium"
+                                                    v-pre
+                                                >
+                                                    {{ $review->title }}
                                                 </p>
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.title.after', ['reviews' => $reviews]) !!}
@@ -96,7 +99,10 @@
         
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="mt-2.5 text-sm font-medium">
+                                            <p
+                                                class="mt-2.5 text-sm font-medium"
+                                                v-pre
+                                            >
                                                 {{ $review->created_at }}
                                             </p>
         
@@ -104,7 +110,10 @@
 
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="mt-5 text-base text-zinc-500 max-md:mt-2">
+                                            <p
+                                                class="mt-5 text-base text-zinc-500 max-md:mt-2"
+                                                v-pre
+                                            >
                                                 {{ $review->comment }}
                                             </p>
 
@@ -129,7 +138,10 @@
                                             <div class="justify-between">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="text-xl font-medium max-md:text-base">
+                                                <p
+                                                    class="text-xl font-medium max-md:text-base"
+                                                    v-pre
+                                                >
                                                     {{ $review->title}}
                                                 </p>
 
@@ -137,7 +149,10 @@
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="mt-1.5 font-normal text-zinc-500 max-md:mt-0 max-md:text-xs">
+                                                <p
+                                                    class="mt-1.5 font-normal text-zinc-500 max-md:mt-0 max-md:text-xs"
+                                                    v-pre
+                                                >
                                                     {{ $review->created_at }}
                                                 </p>
             
@@ -159,7 +174,10 @@
                                         <div>
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="text-xs text-zinc-500">
+                                            <p
+                                                class="text-xs text-zinc-500"
+                                                v-pre
+                                            >
                                                 {{ $review->comment }}
                                             </p>
 

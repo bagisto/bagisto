@@ -137,7 +137,12 @@
                                         :value="1"
                                     >
                                         @foreach (core()->getAllChannels() as $channel)
-                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                            <option
+                                                value="{{ $channel->id }}"
+                                                v-pre
+                                            >
+                                                {{ $channel->name }}
+                                            </option>
                                         @endforeach 
                                     </x-admin::form.control-group.control>
 
@@ -158,7 +163,10 @@
                                         :label="trans('admin::app.settings.themes.create.themes')"
                                     >
                                         @foreach (config('themes.shop') as $themeCode => $theme)
-                                            <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                            <option
+                                                value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}
+                                                v-pre
+                                            >
                                                 {{ $theme['name'] }}
                                             </option>
                                         @endforeach

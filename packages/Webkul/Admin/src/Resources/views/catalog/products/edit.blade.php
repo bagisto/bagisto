@@ -73,7 +73,7 @@
                         >
                             <span class="icon-store text-2xl"></span>
                             
-                            {{ $currentChannel->name }}
+                            <span v-pre>{{ $currentChannel->name }}</span>
 
                             <input
                                 type="hidden"
@@ -91,6 +91,7 @@
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code ]) }}"
                                 class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
+                                v-pre
                             >
                                 {{ $channel->name }}
                             </a>
@@ -108,7 +109,7 @@
                         >
                             <span class="icon-language text-2xl"></span>
 
-                            {{ $currentLocale->name }}
+                            <span v-pre>{{ $currentLocale->name }}</span>
                             
                             <input
                                 type="hidden"
@@ -126,6 +127,7 @@
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
                                 class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                v-pre
                             >
                                 {{ $locale->name }}
                             </a>
@@ -181,7 +183,10 @@
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
                             <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
-                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
+                                <p 
+                                    class="mb-4 text-base font-semibold text-gray-800 dark:text-white"
+                                    v-pre
+                                >
                                     {{ $group->name }}
                                 </p>
 
@@ -200,13 +205,19 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
+                                                <span 
+                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                                    v-pre
+                                                >
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
+                                                <span
+                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                                    v-pre
+                                                >
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif

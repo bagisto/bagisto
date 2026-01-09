@@ -53,7 +53,10 @@
                     value="0"
                 >
 
-                <p class="mt-1 text-sm text-gray-600">
+                <p
+                    class="mt-1 text-sm text-gray-600"
+                    v-pre
+                >
                     {{ trans('shop::app.search.suggest') }}
 
                     <button
