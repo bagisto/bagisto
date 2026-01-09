@@ -4,17 +4,14 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===============================
+ * =============================
  * SIMPLE PRODUCT CHECKOUT FLOW
- * ===============================
+ * =============================
  * This test suite covers:
- * 1. Creating a simple product from the admin panel
- * 2. Completing checkout for the simple product as a customer
+ * 1. Creating a simple product from the admin panel.
+ * 2. Completing checkout for the simple product as a customer.
  */
-test.describe("should complete simple product checkout flow", () => {
-    /**
-     * Admin creates a Simple Product with basic details
-     */
+test.describe("simple product checkout flow", () => {
     test("should create simple product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
@@ -30,10 +27,6 @@ test.describe("should complete simple product checkout flow", () => {
         });
     });
 
-    /**
-     * Customer logs in and successfully completes checkout
-     * for the previously created Simple Product
-     */
     test("should allow customer to complete checkout for simple product successfully", async ({
         shopPage,
     }) => {
@@ -42,19 +35,22 @@ test.describe("should complete simple product checkout flow", () => {
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.customerCheckout();
     });
+
     test("should allow guest to complete checkout for simple product successfully", async ({
         shopPage,
     }) => {
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.guestCheckoutSimple();
     });
-    test("if use same address for shipping", async ({ shopPage }) => {
+
+    test("should use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.customerCheckout();
     });
-    test("if not use same address for shipping", async ({ shopPage }) => {
+
+    test("should not use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);

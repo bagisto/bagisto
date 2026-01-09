@@ -10,7 +10,7 @@ import { MultipleCheckout } from "../../pages/multiple-checkout";
  * This test suite covers:
  * 1. Checkout of multiple products
  */
-test.describe("should complete multiple product checkout flow", () => {
+test.describe("multiple types product combination checkout flow", () => {
     /**
      * Admin creates a Virtual Product
      */
@@ -28,6 +28,7 @@ test.describe("should complete multiple product checkout flow", () => {
             inventory: 100,
         });
     });
+
     /**
      * Admin creates a Grouped Product
      */
@@ -51,6 +52,7 @@ test.describe("should complete multiple product checkout flow", () => {
             inventory: 100,
         });
     });
+
     test("should create another simple product to add in group", async ({
         adminPage,
     }) => {
@@ -85,6 +87,7 @@ test.describe("should complete multiple product checkout flow", () => {
             inventory: 100,
         });
     });
+
     /**
      * completes checkout of multiple products successfully
      * Virtual and Group

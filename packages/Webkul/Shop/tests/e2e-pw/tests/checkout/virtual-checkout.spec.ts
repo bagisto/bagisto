@@ -4,17 +4,14 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===============================
+ * ==============================
  * VIRTUAL PRODUCT CHECKOUT FLOW
- * ===============================
+ * ==============================
  * This test suite covers:
- * 1. Creating a virtual product (no shipping required)
- * 2. Completing checkout for the virtual product
+ * 1. Creating a virtual product (no shipping required).
+ * 2. Completing checkout for the virtual product.
  */
-test.describe("should complete virtual product checkout flow", () => {
-    /**
-     * Admin creates a Virtual Product
-     */
+test.describe("virtual product checkout flow", () => {
     test("should create virtual product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
@@ -30,10 +27,6 @@ test.describe("should complete virtual product checkout flow", () => {
         });
     });
 
-    /**
-     * Customer completes checkout
-     * without shipping information
-     */
     test("should allow customer to complete checkout for virtual product successfully", async ({
         shopPage,
     }) => {

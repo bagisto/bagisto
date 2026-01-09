@@ -4,17 +4,14 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===============================
+ * ===================================
  * DOWNLOADABLE PRODUCT CHECKOUT FLOW
- * ===============================
+ * ===================================
  * This test suite covers:
- * 1. Creating a downloadable product
- * 2. Completing checkout for the downloadable product
+ * 1. Creating a downloadable product.
+ * 2. Completing checkout for the downloadable product.
  */
-test.describe("should complete downloadable product checkout flow", () => {
-    /**
-     * Admin creates a Downloadable Product
-     */
+test.describe("downloadable product checkout flow", () => {
     test("should create downloadable product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
@@ -30,10 +27,6 @@ test.describe("should complete downloadable product checkout flow", () => {
         });
     });
 
-    /**
-     * Customer completes checkout
-     * and gains access to downloadable content
-     */
     test("should allow customer to complete checkout for downloadable product successfully", async ({
         shopPage,
     }) => {

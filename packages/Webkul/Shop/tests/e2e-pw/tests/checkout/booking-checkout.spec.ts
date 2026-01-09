@@ -4,16 +4,16 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===============================
+ * ==============================
  * BOOKING PRODUCT CHECKOUT FLOW
- * ===============================
+ * ==============================
  * This test suite covers:
- * 1. Creating a booking product
- * 2. Selecting booking details and completing checkout
+ * 1. Creating a booking product.
+ * 2. Selecting booking details and completing checkout.
  */
-test.describe("should complete booking product checkout flow", () => {
+test.describe("booking product checkout flow", () => {
     /**
-     * Admin creates a Booking Product
+     * Admin creates a Booking Product.
      */
     test("should create booking product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
@@ -31,8 +31,7 @@ test.describe("should complete booking product checkout flow", () => {
     });
 
     /**
-     * Customer selects booking slot
-     * and completes checkout successfully
+     * Customer selects booking slot and completes checkout successfully.
      */
     test("should allow customer to complete checkout for booking product successfully", async ({
         shopPage,

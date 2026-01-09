@@ -19,6 +19,7 @@ export class ProductCheckout {
 
     constructor(page: Page) {
         this.page = page;
+        
         this.locators = new WebLocators(page);
     }
 
@@ -61,6 +62,7 @@ export class ProductCheckout {
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
     }
+
     async shippingChangeCheckoutSimple() {
         const productName = readProductData();
         await this.searchProduct(productName);
@@ -85,6 +87,7 @@ export class ProductCheckout {
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
     }
+
     async shippingChangeCheckoutConfig() {
         const productName = readProductData();
         await this.searchProduct(productName);
@@ -112,6 +115,7 @@ export class ProductCheckout {
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
     }
+
     async guestCheckoutCommon() {
         await this.locators.ShoppingCartIcon.click();
         await this.locators.ContinueButton.click();
@@ -130,6 +134,7 @@ export class ProductCheckout {
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
     }
+
     async guestCheckoutSimple() {
         const productName = readProductData();
         await this.searchProduct(productName);
@@ -163,6 +168,7 @@ export class ProductCheckout {
         await expect(this.locators.addCartSuccess.first()).toBeVisible();
         await this.guestCheckoutCommon();
     }
+
     async guestCheckoutGroup() {
         const productName = readProductData();
         await this.searchProduct(productName);

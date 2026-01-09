@@ -9,7 +9,9 @@ export class MultipleCheckout {
 
     constructor(page: Page) {
         this.page = page;
+
         this.locators = new WebLocators(page);
+        
         this.productCheckout = new ProductCheckout(page);
     }
 

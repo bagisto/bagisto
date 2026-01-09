@@ -11,7 +11,7 @@ import { MultipleCheckout } from "../../pages/multiple-checkout";
  * This test suite covers:
  * 1. Checkout of multiple products
  */
-test.describe("should complete multiple product checkout flow", () => {
+test.describe("multiple types product combination checkout flow", () => {
     /**
      * Admin creates a Simple Product with basic details
      */
@@ -29,6 +29,7 @@ test.describe("should complete multiple product checkout flow", () => {
             inventory: 100,
         });
     });
+
     /**
      * Admin creates a Downloadable Product
      */
