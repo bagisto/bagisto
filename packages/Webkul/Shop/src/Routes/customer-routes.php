@@ -43,6 +43,11 @@ Route::prefix('customer')->group(function () {
     });
 
     /**
+     * Cross-app logout sync (GET route for redirect-based logout) #191
+     */
+    Route::get('logout', [SessionController::class, 'destroy'])->name('shop.customer.session.sync-logout');
+
+    /**
      * Registration routes.
      */
     Route::controller(RegistrationController::class)->group(function () {

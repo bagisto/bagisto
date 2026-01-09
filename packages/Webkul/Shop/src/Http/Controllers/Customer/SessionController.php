@@ -75,11 +75,29 @@ class SessionController extends Controller
      */
     public function destroy()
     {
-        $id = auth()->guard('customer')->user()->id;
+        $id = auth()->guard('customer')->user()?->id;
 
-        auth()->guard('customer')->logout();
+        if ($id) {
+            auth()->guard('customer')->logout();
+            Event::dispatch('customer.after.logout', $id);
+        }
 
-        Event::dispatch('customer.after.logout', $id);
+        // Handle redirect parameter from cross-app logout sync #191
+        $redirect = request()->query('redirect');
+        if ($redirect && filter_var($redirect, FILTER_VALIDATE_URL)) {
+            $ramBaseUrl = core()->getConfigData('customer.settings.social_login.ram_base_url');
+            // Only allow redirects to configured RAM URL for security
+            if ($ramBaseUrl && str_contains($redirect, parse_url($ramBaseUrl, PHP_URL_HOST))) {
+                return redirect($redirect);
+            }
+        }
+
+        // Sync logout with RAM if configured and not already a sync request #191
+        $ramBaseUrl = core()->getConfigData('customer.settings.social_login.ram_base_url');
+        if ($ramBaseUrl && !$redirect) {
+            $returnUrl = route('shop.home.index');
+            return redirect($ramBaseUrl . '/logout?redirect=' . urlencode($returnUrl));
+        }
 
         return redirect()->route('shop.home.index');
     }
