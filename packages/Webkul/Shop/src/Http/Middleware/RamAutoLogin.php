@@ -12,6 +12,7 @@ use Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository;
  * Validates signed URLs from RAM and auto-logs in customers.
  * Uses HMAC-SHA256 signature validation with shared service token.
  * Looks up customers by provider_id (RAM user_id) in customer_social_accounts.
+ * If customer doesn't exist, redirects to OAuth flow for auto-provisioning.
  *
  * @see WI #191
  */
@@ -49,9 +50,10 @@ class RamAutoLogin
             'provider_id'   => $userId,
         ]);
 
-        // Customer not found - redirect without auto-login params
+        // Customer not found - redirect to OAuth for auto-provisioning #191
         if (! $socialAccount || ! $socialAccount->customer) {
-            return redirect($this->getCleanUrl($request));
+            session(['ram_auto_provision_redirect' => $this->getCleanUrl($request)]);
+            return redirect()->route('customer.social-login.index', 'ram');
         }
 
         auth()->guard('customer')->login($socialAccount->customer, true);

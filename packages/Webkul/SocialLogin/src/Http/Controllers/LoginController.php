@@ -69,6 +69,11 @@ class LoginController extends Controller
 
         Event::dispatch('customer.after.login', $customer);
 
+        // Check for auto-provision redirect from RamAutoLogin middleware #191
+        if ($redirectUrl = session()->pull('ram_auto_provision_redirect')) {
+            return redirect($redirectUrl);
+        }
+
         return redirect()->intended(route('shop.customers.account.profile.index'));
     }
 }
