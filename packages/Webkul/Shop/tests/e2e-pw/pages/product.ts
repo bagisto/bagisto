@@ -12,7 +12,9 @@ import {
 export class ProductCreation {
     constructor(
         private page: Page,
+
         private locators = new WebLocators(page),
+
         private editor = new CommonPage(page)
     ) {}
 
@@ -23,7 +25,6 @@ export class ProductCreation {
     /**
      * CORE FLOW
      */
-
     async createProduct(product: BaseProduct) {
         await this.gotoProductPage();
         await this.openCreateModal(product.type, product.sku);
@@ -32,6 +33,7 @@ export class ProductCreation {
         await this.saveAndVerify();
         this.saveProductToJson(product);
     }
+
     async createConfigProduct(product: BaseProduct) {
         await this.gotoProductPage();
         await this.locators.createProductButton.click();
@@ -57,11 +59,13 @@ export class ProductCreation {
         //         await expect(this.page.locator("#app")).toContainText(
         //     /product created successfully/i
         // );
-        await expect(this.page).toHaveURL(/\/admin\/catalog\/products\/edit\/\d+/);
-
+        await expect(this.page).toHaveURL(
+            /\/admin\/catalog\/products\/edit\/\d+/
+        );
     }
 
     private async fillCommonDetails(product: BaseProduct) {
+        await this.page.waitForTimeout(1000);
         await this.locators.productName.fill(product.name);
         await this.editor.fillInTinymce(
             this.locators.productShortDescription,
@@ -80,15 +84,7 @@ export class ProductCreation {
     private async handleProductType(product: BaseProduct) {
         switch (product.type) {
             case "simple":
-                await this.simpleLike(product);
-                break;
-
-            case "virtual":
-                await this.virtual(product);
-                break;
-
-            case "downloadable":
-                await this.downloadable(product);
+                await this.simple(product);
                 break;
 
             case "configurable":
@@ -97,6 +93,14 @@ export class ProductCreation {
 
             case "grouped":
                 await this.grouped(product);
+                break;
+
+            case "virtual":
+                await this.virtual(product);
+                break;
+
+            case "downloadable":
+                await this.downloadable(product);
                 break;
 
             case "booking":
@@ -108,15 +112,119 @@ export class ProductCreation {
         }
     }
 
-    private async simpleLike(product: BaseProduct) {
+    private async simple(product: BaseProduct) {
         if (product.price)
             await this.locators.productPrice.fill(product.price.toString());
+
         if (product.weight)
             await this.locators.productWeight.fill(product.weight.toString());
+
         if (product.inventory)
             await this.locators.productInventory
                 .first()
                 .fill(product.inventory.toString());
+    }
+
+    /**
+     * Configurable Product
+     */
+    private async configurable(product: BaseProduct) {
+        await this.locators.removeRed.click();
+        await this.locators.removeGreen.click();
+        await this.locators.removeYellow.click();
+        await this.locators.iconCross.click();
+        await this.locators.iconCross.click();
+        await this.locators.saveProduct.click();
+        await this.locators.addVariantButton.click();
+        await this.locators.variantColorSelect.selectOption("1");
+        await this.locators.variantSizeSelect.selectOption("6");
+        await this.locators.addVariantConfirmButton.click();
+        await this.locators.variantNameInput.fill(generateName());
+        await this.locators.variantPriceInput.fill("100");
+        await this.locators.variantWeightInput.fill("10");
+        await this.locators.variantInventoryInput.fill("10");
+        const skuValue = await this.locators.variantSkuInput.inputValue();
+        await this.locators.variantSaveButton.click();
+        await expect(this.page.getByText(skuValue)).toBeVisible();
+
+        /**
+         * edit config products
+         */
+        await this.locators.firstCheckbox.click();
+        await this.locators.selectActionButton.click();
+        await this.locators.editPricesOption.click();
+        await this.locators.confirmationText.click();
+        await this.locators.agreeButton.click();
+        await this.locators.editPricesPanel.click();
+        await this.locators.bulkPriceInput.click();
+        await this.locators.bulkPriceInput.fill("45");
+        await this.locators.applyToAllButton.click();
+        await this.locators.bulkSaveButton.click();
+        await this.locators.firstCheckbox.click();
+        await this.locators.selectActionButton.click();
+        await this.locators.editInventoriesOption.click();
+        await this.locators.confirmationText.click();
+        await this.locators.agreeButton.click();
+        await this.locators.inventoryInput.click();
+        await this.locators.inventoryInput.fill("100");
+        await this.locators.applyToAllButton.click();
+        await this.locators.saveButton.click();
+        await this.page.waitForTimeout(1000);
+        await this.locators.firstCheckbox.click();
+        await this.locators.selectActionButton.click();
+        await this.locators.editWeightOption.click();
+        await this.locators.confirmationText.click();
+        await this.locators.agreeButton.click();
+        await this.locators.weightInput.click();
+        await this.locators.weightInput.fill("2");
+        await this.locators.applyToAllButton.click();
+        await this.locators.saveButton.click();
+        await this.locators.saveProduct.click();
+    }
+
+    private async grouped(product: BaseProduct) {
+        /**
+         * Open product selector
+         */
+        await this.locators.addGroupedProductButton.click();
+        await expect(this.locators.selectProductsModalTitle).toBeVisible();
+
+        /**
+         * Search Product & Select
+         */
+        await this.locators.searchByNameInput.click();
+        await this.locators.searchByNameInput.fill("simple");
+        const productRow = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: /Simple-\d+/ })
+            .first();
+        await productRow.locator("input[type='checkbox']").evaluate((el) => {
+            (el as HTMLInputElement).checked = true;
+            el.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        const productRow2 = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: /Simple-\d+/ })
+            .nth(1);
+        await productRow2.locator("input[type='checkbox']").evaluate((el) => {
+            (el as HTMLInputElement).checked = true;
+            el.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        await this.locators.addSelectedProductButton.click();
+
+        await expect(
+            this.locators.groupedProductVisibleByName(/simple-\d+/i).first()
+        ).toBeVisible();
+    }
+
+    /**
+     * Virtual Product
+     */
+    private async virtual(product: BaseProduct) {
+        if (product.price)
+            await this.locators.productPrice.fill(product.price.toString());
+
+        await this.locators.productInventory.first().fill("100");
     }
 
     /**
@@ -159,107 +267,6 @@ export class ProductCreation {
             generateHostname()
         );
         await this.addDownloadableSample(generateName(), generateHostname());
-    }
-
-    /**
-     * Configurable Product
-     */
-    private async configurable(product: BaseProduct) {
-        await this.locators.removeRed.click();
-        await this.locators.removeGreen.click();
-        await this.locators.removeYellow.click();
-        await this.locators.iconCross.click();
-        await this.locators.iconCross.click();
-        await this.locators.saveProduct.click();
-        await this.locators.addVariantButton.click();
-        await this.locators.variantColorSelect.selectOption("1");
-        await this.locators.variantSizeSelect.selectOption("6");
-        await this.locators.addVariantConfirmButton.click();
-        await this.locators.variantNameInput.fill(generateName());
-        await this.locators.variantPriceInput.fill("100");
-        await this.locators.variantWeightInput.fill("10");
-        await this.locators.variantInventoryInput.fill("10");
-        const skuValue = await this.locators.variantSkuInput.inputValue();
-        await this.locators.variantSaveButton.click();
-        await expect(this.page.getByText(skuValue)).toBeVisible();
-        /**
-         * edit config products
-         */
-        await this.locators.firstCheckbox.click();
-        await this.locators.selectActionButton.click();
-        await this.locators.editPricesOption.click();
-        await this.locators.confirmationText.click();
-        await this.locators.agreeButton.click();
-        await this.locators.editPricesPanel.click();
-        await this.locators.bulkPriceInput.click();
-        await this.locators.bulkPriceInput.fill("45");
-        await this.locators.applyToAllButton.click();
-        await this.locators.bulkSaveButton.click();
-        await this.locators.firstCheckbox.click();
-        await this.locators.selectActionButton.click();
-        await this.locators.editInventoriesOption.click();
-        await this.locators.confirmationText.click();
-        await this.locators.agreeButton.click();
-        await this.locators.inventoryInput.click();
-        await this.locators.inventoryInput.fill("100");
-        await this.locators.applyToAllButton.click();
-        await this.locators.saveButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.locators.firstCheckbox.click();
-        await this.locators.selectActionButton.click();
-        await this.locators.editWeightOption.click();
-        await this.locators.confirmationText.click();
-        await this.locators.agreeButton.click();
-        await this.locators.weightInput.click();
-        await this.locators.weightInput.fill("2");
-        await this.locators.applyToAllButton.click();
-        await this.locators.saveButton.click();
-        await this.locators.saveProduct.click();
-    }
-
-    /**
-     * Virtual Product
-     */
-    private async virtual(product: BaseProduct) {
-        if (product.price)
-            await this.locators.productPrice.fill(product.price.toString());
-
-        await this.locators.productInventory.first().fill("100");
-    }
-
-    private async grouped(product: BaseProduct) {
-        /**
-         * Open product selector
-         */
-        await this.locators.addGroupedProductButton.click();
-        await expect(this.locators.selectProductsModalTitle).toBeVisible();
-
-        /**
-         * Search Product & Select
-         */
-        await this.locators.searchByNameInput.click();
-        await this.locators.searchByNameInput.fill("simple");
-        const productRow = this.page
-            .locator("div.flex.justify-between")
-            .filter({ hasText: /Simple-\d+/ })
-            .first();
-        await productRow.locator("input[type='checkbox']").evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        const productRow2 = this.page
-            .locator("div.flex.justify-between")
-            .filter({ hasText: /Simple-\d+/ })
-            .nth(1);
-        await productRow2.locator("input[type='checkbox']").evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.locators.addSelectedProductButton.click();
-
-        await expect(
-            this.locators.groupedProductVisibleByName(/simple-\d+/i).first()
-        ).toBeVisible();
     }
 
     /**
@@ -328,7 +335,7 @@ export class ProductCreation {
      * Save Product Data in JSON File
      */
     private saveProductToJson(product: BaseProduct) {
-        const filePath = "product-data.json";
+          const filePath = "product-data.json";
 
         const productData = {
             name: product.name,
