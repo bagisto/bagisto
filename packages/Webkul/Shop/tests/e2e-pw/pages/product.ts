@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import { expect, Page } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
 import { CommonPage } from "../utils/tinymce";
@@ -57,11 +58,13 @@ export class ProductCreation {
         //         await expect(this.page.locator("#app")).toContainText(
         //     /product created successfully/i
         // );
-        await expect(this.page).toHaveURL(/\/admin\/catalog\/products\/edit\/\d+/);
-
+        await expect(this.page).toHaveURL(
+            /\/admin\/catalog\/products\/edit\/\d+/
+        );
     }
 
     private async fillCommonDetails(product: BaseProduct) {
+        await this.page.waitForTimeout(1000);
         await this.locators.productName.fill(product.name);
         await this.editor.fillInTinymce(
             this.locators.productShortDescription,
@@ -328,7 +331,7 @@ export class ProductCreation {
      * Save Product Data in JSON File
      */
     private saveProductToJson(product: BaseProduct) {
-        const filePath = "product-data.json";
+          const filePath = "product-data.json";
 
         const productData = {
             name: product.name,
