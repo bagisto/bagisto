@@ -1,0 +1,23 @@
+/* RAM Plaza Global Styles #191 */
+
+/* Hide password section in profile edit - passwords managed by RAM */
+/* Target the form control groups containing password inputs */
+.flex.flex-col:has(input[name="current_password"]),
+.flex.flex-col:has(input[name="new_password"]),
+.flex.flex-col:has(input[name="new_password_confirmation"]) {
+    display: none !important;
+}
+
+/* Also hide labels that precede password inputs */
+label[for="current_password"],
+label[for="new_password"],
+label[for="new_password_confirmation"] {
+    display: none !important;
+}
+
+/* Direct input hiding as fallback */
+input[name="current_password"],
+input[name="new_password"],
+input[name="new_password_confirmation"] {
+    display: none !important;
+}
