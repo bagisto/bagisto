@@ -12,6 +12,7 @@ use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\CacheResponse;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Shop\Http\Middleware\RamAutoLogin;
 use Webkul\Shop\Http\Middleware\Theme;
 
 class ShopServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class ShopServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         $router->middlewareGroup('shop', [
+            RamAutoLogin::class,
             Theme::class,
             Locale::class,
             Currency::class,

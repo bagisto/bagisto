@@ -9,28 +9,20 @@ use Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository;
 /**
  * RAM Auto-Login Middleware
  *
- * Validates signed URLs from Muro Loco and auto-logs in customers.
- * Uses HMAC-SHA256 signature validation with service token.
+ * Validates signed URLs from RAM and auto-logs in customers.
+ * Uses HMAC-SHA256 signature validation with shared service token.
+ * Looks up customers by provider_id (RAM user_id) in customer_social_accounts.
  *
  * @see WI #191
  */
 class RamAutoLogin
 {
-    /**
-     * Create a new middleware instance.
-     *
-     * @return void
-     */
     public function __construct(
-        protected CustomerSocialAccountRepository $customerSocialAccountRepository
+        protected CustomerSocialAccountRepository $socialAccountRepository
     ) {}
 
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
@@ -38,49 +30,64 @@ class RamAutoLogin
             return $next($request);
         }
 
-        $email = $request->query('ram_email');
+        $userId = $request->query('ram_user_id');
         $timestamp = $request->query('ram_ts');
         $signature = $request->query('ram_sig');
 
-        if (! $this->isValidSignature($email, $timestamp, $signature)) {
-            return response('Invalid signature', 403);
+        // Invalid or expired signature - redirect without auto-login params
+        if (! $this->isValidSignature($userId, $timestamp, $signature)) {
+            return redirect($this->getCleanUrl($request));
         }
 
         if (! $this->isValidTimestamp($timestamp)) {
-            return response('Signature expired', 403);
+            return redirect($this->getCleanUrl($request));
         }
 
-        $customer = $this->findCustomerByEmail($email);
+        // Look up customer by provider_id in customer_social_accounts
+        $socialAccount = $this->socialAccountRepository->findOneWhere([
+            'provider_name' => 'ram',
+            'provider_id'   => $userId,
+        ]);
 
-        if (! $customer) {
-            return response('Customer not found', 404);
+        // Customer not found - redirect without auto-login params
+        if (! $socialAccount || ! $socialAccount->customer) {
+            return redirect($this->getCleanUrl($request));
         }
 
-        auth()->guard('customer')->login($customer, true);
+        auth()->guard('customer')->login($socialAccount->customer, true);
 
         return redirect($this->getCleanUrl($request));
     }
 
     /**
      * Check if request should trigger auto-login
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
      */
     protected function shouldAutoLogin(Request $request): bool
     {
-        return $request->has(['ram_email', 'ram_ts', 'ram_sig']);
+        if (! $request->has(['ram_user_id', 'ram_ts', 'ram_sig'])) {
+            return false;
+        }
+
+        // Skip if already logged in via same RAM user
+        if (auth()->guard('customer')->check()) {
+            $customerId = auth()->guard('customer')->user()->id;
+            $socialAccount = $this->socialAccountRepository->findOneWhere([
+                'customer_id'   => $customerId,
+                'provider_name' => 'ram',
+            ]);
+
+            if ($socialAccount && $socialAccount->provider_id === $request->query('ram_user_id')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
      * Validate HMAC signature
-     *
-     * @param  string  $email
-     * @param  string  $timestamp
-     * @param  string  $signature
-     * @return bool
      */
-    protected function isValidSignature(string $email, string $timestamp, string $signature): bool
+    protected function isValidSignature(string $userId, string $timestamp, string $signature): bool
     {
         $serviceToken = config('services.ram.service_token');
 
@@ -88,57 +95,28 @@ class RamAutoLogin
             return false;
         }
 
-        $expected = hash_hmac('sha256', "{$email}:{$timestamp}", $serviceToken);
+        $expected = hash_hmac('sha256', "{$userId}:{$timestamp}", $serviceToken);
 
         return hash_equals($expected, $signature);
     }
 
     /**
      * Validate timestamp (15 minutes expiration)
-     *
-     * @param  string  $timestamp
-     * @return bool
      */
     protected function isValidTimestamp(string $timestamp): bool
     {
-        $maxAge = 15 * 60; // 15 minutes
+        $maxAge = 15 * 60;
 
         return (time() - (int) $timestamp) <= $maxAge;
     }
 
     /**
-     * Find customer by email using repository
-     *
-     * @param  string  $email
-     * @return \Webkul\Customer\Contracts\Customer|null
-     */
-    protected function findCustomerByEmail(string $email)
-    {
-        $account = $this->customerSocialAccountRepository->findOneWhere([
-            'provider_name' => 'ram',
-        ]);
-
-        if (! $account) {
-            return null;
-        }
-
-        if ($account->customer->email !== $email) {
-            return null;
-        }
-
-        return $account->customer;
-    }
-
-    /**
      * Get URL without auto-login parameters
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string
      */
     protected function getCleanUrl(Request $request): string
     {
         $query = $request->query();
-        unset($query['ram_email'], $query['ram_ts'], $query['ram_sig']);
+        unset($query['ram_user_id'], $query['ram_ts'], $query['ram_sig']);
 
         $url = $request->url();
 
