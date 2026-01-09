@@ -8,3 +8,6 @@
 !vendor/shop/components/
 !vendor/shop/components/layouts/
 !vendor/shop/components/layouts/index.blade.php
+!vendor/shop/customers/account/
+!vendor/shop/customers/account/profile/
+!vendor/shop/customers/account/profile/index.blade.php
