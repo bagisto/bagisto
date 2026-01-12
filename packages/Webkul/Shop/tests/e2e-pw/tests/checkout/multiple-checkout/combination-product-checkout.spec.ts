@@ -127,7 +127,7 @@ test.describe("multiple types product combination checkout flow", () => {
 
     /**
      * completes checkout of multiple products successfully
-     * Simple, Config Virtual and Group
+     * Simple, Config, Booking, Virtual, Group and Bundle
      */
     test("should allow customer to complete checkout for simple, configurable and virtual product successfully", async ({
         shopPage,

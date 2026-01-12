@@ -10,7 +10,7 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * This test suite covers:
  * 1. Creating a simple product to be associated with a group product.
  * 2. Creating a grouped product.
- * 3. Completing checkout for the grouped product as a customer.
+ * 3. Completing checkout for the grouped product.
  */
 test.describe("group product checkout flow", () => {
     test("should create simple product to add in group", async ({
@@ -76,5 +76,23 @@ test.describe("group product checkout flow", () => {
     }) => {
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.guestCheckoutGroup();
+    });
+
+    test("should allow customer to complete checkout for group product via flat rate shipping successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.groupCheckoutFlatRate();
+    });
+
+    test("should allow customer to complete checkout for group product via case on delivery successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.groupCheckoutCOD();
     });
 });

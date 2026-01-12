@@ -9,7 +9,7 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * =============================
  * This test suite covers:
  * 1. Creating a simple product from the admin panel.
- * 2. Completing checkout for the simple product as a customer.
+ * 2. Completing checkout for the simple product.
  */
 test.describe("simple product checkout flow", () => {
     test("should create simple product", async ({ adminPage }) => {
@@ -55,5 +55,23 @@ test.describe("simple product checkout flow", () => {
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.shippingChangeCheckoutSimple();
+    });
+
+    test("should allow customer to complete checkout for simple product via flat rate shipping successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.simpleCheckoutFlatRate();
+    });
+
+        test("should allow customer to complete checkout for simple product via case on delivery successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.simpleCheckoutCOD();
     });
 });

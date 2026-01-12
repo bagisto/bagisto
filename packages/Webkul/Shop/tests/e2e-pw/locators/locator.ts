@@ -44,7 +44,9 @@ export class WebLocators {
     readonly addNewAddress: Locator;
     readonly clickProcessButton: Locator;
     readonly chooseShippingMethod: Locator;
+    readonly chooseFlatShippingMeathod: Locator;
     readonly choosePaymentMethod: Locator;
+    readonly choosePaymentMethodCOD: Locator;
     readonly clickPlaceOrderButton: Locator;
     readonly CheckoutsuccessPage: Locator;
     readonly searchInput: Locator;
@@ -210,7 +212,9 @@ export class WebLocators {
         });
         this.clickProcessButton = page.getByRole("button", { name: "Proceed" });
         this.chooseShippingMethod = page.getByText("Free Shipping").first();
+        this.chooseFlatShippingMeathod=page.getByText("Flat Rate").first();
         this.choosePaymentMethod = page.getByAltText("Money Transfer");
+        this.choosePaymentMethodCOD = page.getByAltText("Cash On Delivery");
 
         this.clickPlaceOrderButton = page.getByRole("button", {
             name: "Place Order",

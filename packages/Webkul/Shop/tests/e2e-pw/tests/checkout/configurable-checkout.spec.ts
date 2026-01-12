@@ -9,7 +9,7 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * ===================================
  * This test suite covers:
  * 1. Creating a configurable product with variations.
- * 2. Completing checkout for the configurable product as a customer.
+ * 2. Completing checkout for the configurable product.
  */
 test.describe("configurable product checkout flow", () => {
     test("should create configurable product", async ({ adminPage }) => {
@@ -55,5 +55,23 @@ test.describe("configurable product checkout flow", () => {
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.shippingChangeCheckoutConfig();
+    });
+    
+    test("should allow customer to complete checkout for configurable product via flat rate shipping successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.configCheckoutFlatRate();
+    });
+
+        test("should allow customer to complete checkout for configurable product via case on delivery successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.configCheckoutCOD();
     });
 });

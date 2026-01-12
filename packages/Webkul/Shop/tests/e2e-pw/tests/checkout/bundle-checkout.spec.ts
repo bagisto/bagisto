@@ -9,7 +9,7 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * ===================================
  * This test suite covers:
  * 1. Creating a bundle product with variations.
- * 2. Completing checkout for the bundle product as a customer.
+ * 2. Completing checkout for the bundle product.
  */
 test.describe("bundle product checkout flow", () => {
     test("should create bundle product", async ({ adminPage }) => {
@@ -55,5 +55,22 @@ test.describe("bundle product checkout flow", () => {
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.shippingChangeCheckoutBundle();
+    });
+    test("should allow customer to complete checkout for bundle product via flat rate shipping successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.bundleCheckoutFlatRate();
+    });
+
+    test("should allow customer to complete checkout for bundle product via case on delivery successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.bundleCheckoutCOD();
     });
 });
