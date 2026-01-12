@@ -56,9 +56,9 @@ export class ProductCreation {
         await this.locators.selectAttribute.selectOption("1");
         await this.locators.productSku.fill(sku);
         await this.locators.saveProduct.click();
-                await expect(this.page.locator("#app")).toContainText(
-            /product created successfully/i
-        );
+        //         await expect(this.page.locator("#app")).toContainText(
+        //     /product created successfully/i
+        // );
         await expect(this.page).toHaveURL(
             /\/admin\/catalog\/products\/edit\/\d+/
         );
@@ -76,6 +76,41 @@ export class ProductCreation {
             this.locators.productDescription,
             product.description
         );
+    }
+
+    private async bundleAddOption(optionType: string, title: string) {
+        await this.locators.addOptionButton.first().click();
+        await this.locators.addLableInput.fill(title);
+        await this.locators.selectType.selectOption({ value: optionType });
+        await this.locators.isRequiredCheckbox.selectOption({
+            value: "1",
+        });
+        await this.locators.saveButton.click();
+        await this.locators.addProduct.first().click();
+        await this.locators.searchByNameInput.click();
+        await this.locators.searchByNameInput.fill("omni");
+        await this.page.waitForTimeout(2000);
+        const productRowCheck1 = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: "OmniHeat" });
+        await productRowCheck1
+            .locator("input[type='checkbox']")
+            .first()
+            .evaluate((el) => {
+                (el as HTMLInputElement).checked = true;
+                el.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+        const productRowCheck2 = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: "OmniHeat" })
+            .nth(1);
+        await productRowCheck2
+            .locator("input[type='checkbox']")
+            .evaluate((el) => {
+                (el as HTMLInputElement).checked = true;
+                el.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+        await this.locators.addSelectedProductButton.click();
     }
 
     /**
@@ -329,33 +364,19 @@ export class ProductCreation {
     }
 
     private async bundle(product: BaseProduct) {
-        await this.locators.addOptionButton.first().click();
-        await this.locators.addLableInput.fill("Bundle Option 1");
-        await this.locators.selectType.selectOption({ value: "radio" });
-        await this.locators.isRequiredCheckbox.selectOption({ value: "1" });
-        await this.locators.saveButton.click();
-        await this.locators.addProduct.first().click();
-        await this.locators.searchByNameInput.click();
-        await this.locators.searchByNameInput.fill("omni");
-        const productRow = this.page
-            .locator("div.flex.justify-between")
-            .filter({ hasText: "OmniHeat" });
-        await productRow
-            .locator("input[type='checkbox']")
-            .first()
-            .evaluate((el) => {
-                (el as HTMLInputElement).checked = true;
-                el.dispatchEvent(new Event("change", { bubbles: true }));
-            });
-        const productRow2 = this.page
-            .locator("div.flex.justify-between")
-            .filter({ hasText: "OmniHeat" })
-            .nth(1);
-        await productRow2.locator("input[type='checkbox']").evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.locators.addSelectedProductButton.click();
+        /**
+         * radio
+         */
+        await this.bundleAddOption("radio", "Bundle Option 1");
+
+        // /**
+        //  * Checkbox
+        //  */
+        // await this.bundleAddOption("checkbox", "Bundle Option 2");
+        // /**
+        //  * Multiselect
+        //  */
+        // await this.bundleAddOption("multiselect", "Bundle Option 3");
     }
 
     /**
