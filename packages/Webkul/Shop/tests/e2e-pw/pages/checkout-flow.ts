@@ -1,4 +1,4 @@
-import { Page, expect, Locator } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
 import fs from "fs";
 
@@ -19,7 +19,7 @@ export class ProductCheckout {
 
     constructor(page: Page) {
         this.page = page;
-        
+
         this.locators = new WebLocators(page);
     }
 
@@ -52,6 +52,31 @@ export class ProductCheckout {
         await this.page.waitForTimeout(8000);
     }
 
+    /**
+     * Common guest checkout flow for all products
+     */
+    async guestCheckoutCommon() {
+        await this.locators.ShoppingCartIcon.click();
+        await this.locators.ContinueButton.click();
+        await this.locators.companyName.fill("Web");
+        await this.locators.firstName.fill("demo");
+        await this.locators.lastName.fill("guest");
+        await this.locators.shippingEmail.fill("demo@example.com");
+        await this.locators.streetAddress.fill("north street");
+        await this.locators.billingCountry.selectOption({ value: "IN" });
+        await this.locators.billingState.selectOption({ value: "UP" });
+        await this.locators.billingCity.fill("test city");
+        await this.locators.billingZip.fill("123456");
+        await this.locators.billingTelephone.fill("2365432789");
+        await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    /**
+     * Common checkout flow
+     */
     async customerCheckout() {
         const productName = readProductData();
         await this.searchProduct(productName);
@@ -60,6 +85,31 @@ export class ProductCheckout {
         await this.proceedToCheckout();
         await this.locators.chooseShippingMethod.click();
         await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    /**
+     * Simple product checkout flow
+     */
+    async simpleCheckoutFlatRate() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async simpleCheckoutCOD() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethodCOD.click();
         await this.placeOrder();
     }
 
@@ -83,6 +133,46 @@ export class ProductCheckout {
         await this.locators.billingTelephone.fill("2365432789");
         await this.locators.clickSaveAddressButton.click();
         await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async guestCheckoutSimple() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.locators.ShoppingCartIcon.click();
+        await this.locators.ContinueButton.click();
+        await this.locators.companyName.fill("Web");
+        await this.locators.firstName.fill("demo");
+        await this.locators.lastName.fill("guest");
+        await this.locators.shippingEmail.fill("demo@example.com");
+        await this.locators.streetAddress.fill("north street");
+        await this.locators.billingCountry.selectOption({ value: "IN" });
+        await this.locators.billingState.selectOption({ value: "UP" });
+        await this.locators.billingCity.fill("test city");
+        await this.locators.billingZip.fill("123456");
+        await this.locators.billingTelephone.fill("2365432789");
+        await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    /**
+     * Configurable product checkout flow
+     */
+    async configCheckout() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.getByLabel("Color").selectOption("4");
+        await this.page.getByLabel("Size").selectOption("8");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
         await this.locators.chooseShippingMethod.click();
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
@@ -116,48 +206,6 @@ export class ProductCheckout {
         await this.placeOrder();
     }
 
-    async guestCheckoutCommon() {
-        await this.locators.ShoppingCartIcon.click();
-        await this.locators.ContinueButton.click();
-        await this.locators.companyName.fill("Web");
-        await this.locators.firstName.fill("demo");
-        await this.locators.lastName.fill("guest");
-        await this.locators.shippingEmail.fill("demo@example.com");
-        await this.locators.streetAddress.fill("north street");
-        await this.locators.billingCountry.selectOption({ value: "IN" });
-        await this.locators.billingState.selectOption({ value: "UP" });
-        await this.locators.billingCity.fill("test city");
-        await this.locators.billingZip.fill("123456");
-        await this.locators.billingTelephone.fill("2365432789");
-        await this.locators.clickProcessButton.click();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async guestCheckoutSimple() {
-        const productName = readProductData();
-        await this.searchProduct(productName);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
-        await this.locators.ShoppingCartIcon.click();
-        await this.locators.ContinueButton.click();
-        await this.locators.companyName.fill("Web");
-        await this.locators.firstName.fill("demo");
-        await this.locators.lastName.fill("guest");
-        await this.locators.shippingEmail.fill("demo@example.com");
-        await this.locators.streetAddress.fill("north street");
-        await this.locators.billingCountry.selectOption({ value: "IN" });
-        await this.locators.billingState.selectOption({ value: "UP" });
-        await this.locators.billingCity.fill("test city");
-        await this.locators.billingZip.fill("123456");
-        await this.locators.billingTelephone.fill("2365432789");
-        await this.locators.clickProcessButton.click();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
     async guestCheckoutConfigurable() {
         const productName = readProductData();
         await this.searchProduct(productName);
@@ -169,20 +217,7 @@ export class ProductCheckout {
         await this.guestCheckoutCommon();
     }
 
-    async guestCheckoutGroup() {
-        const productName = readProductData();
-        await this.searchProduct(productName);
-        await this.locators.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
-        await this.guestCheckoutCommon();
-    }
-
-    /**
-     * Configurable product checkout flow
-     */
-    async configCheckout() {
+    async configCheckoutFlatRate() {
         const productName = readProductData();
         await this.searchProduct(productName);
         await this.locators.addToCartButton.click();
@@ -191,8 +226,22 @@ export class ProductCheckout {
         await this.locators.addToCartButton.click();
         await expect(this.locators.addCartSuccess.first()).toBeVisible();
         await this.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
+        await this.locators.chooseFlatShippingMeathod.click();
         await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async configCheckoutCOD() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.getByLabel("Color").selectOption("4");
+        await this.page.getByLabel("Size").selectOption("8");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethodCOD.click();
         await this.placeOrder();
     }
 
@@ -217,9 +266,6 @@ export class ProductCheckout {
          */
         const formattedSunday = nextSunday.toISOString().split("T")[0];
 
-        /**
-         * Type date directly
-         */
         const dateInput = this.page.locator('input[name="booking[date]"]');
         await dateInput.fill(formattedSunday);
         await dateInput.press("Enter");
@@ -255,7 +301,6 @@ export class ProductCheckout {
      * Group product checkout flow
      */
     async groupCheckout() {
-        const productName = readProductData();
         await this.searchProduct("group");
         await this.locators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
@@ -267,6 +312,40 @@ export class ProductCheckout {
         await this.placeOrder();
     }
 
+    async groupCheckoutFlatRate() {
+        await this.searchProduct("group");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async groupCheckoutCOD() {
+        await this.searchProduct("group");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethodCOD.click();
+        await this.placeOrder();
+    }
+
+    async guestCheckoutGroup() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.guestCheckoutCommon();
+    }
+
     /**
      * Virtual product checkout flow
      */
@@ -276,6 +355,85 @@ export class ProductCheckout {
         await this.locators.addToCartButton.click();
         await expect(this.locators.addCartSuccess.first()).toBeVisible();
         await this.proceedToCheckout();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    /**
+     * Bundle product checkout flow
+     */
+    async bundleCheckout() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async bundleCheckoutFlatRate() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.placeOrder();
+    }
+
+    async bundleCheckoutCOD() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.proceedToCheckout();
+        await this.locators.chooseFlatShippingMeathod.click();
+        await this.locators.choosePaymentMethodCOD.click();
+        await this.placeOrder();
+    }
+    
+    async guestCheckoutBundle() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.guestCheckoutCommon();
+    }
+
+    async shippingChangeCheckoutBundle() {
+        const productName = readProductData();
+        await this.searchProduct(productName);
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.locators.ShoppingCartIcon.click();
+        await this.locators.ContinueButton.click();
+        await this.locators.addNewAddress.click();
+        await this.locators.companyName.fill("Web");
+        await this.locators.firstName.fill("demo");
+        await this.locators.lastName.fill("guest");
+        await this.locators.shippingEmail.fill("demo@example.com");
+        await this.locators.streetAddress.fill("north street");
+        await this.locators.billingCountry.selectOption({ value: "IN" });
+        await this.locators.billingState.selectOption({ value: "UP" });
+        await this.locators.billingCity.fill("test city");
+        await this.locators.billingZip.fill("123456");
+        await this.locators.billingTelephone.fill("2365432789");
+        await this.locators.clickSaveAddressButton.click();
+        await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
         await this.locators.choosePaymentMethod.click();
         await this.placeOrder();
     }
