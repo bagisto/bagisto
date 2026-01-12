@@ -245,13 +245,14 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    $manager = new ImageManager;
+                    // Use Intervention Image v3 API
+                    $manager = ImageManager::gd();
 
-                    $image = $manager->make(request()->file($file))->encode('webp');
+                    $encoded = $manager->read(request()->file($file))->encodeByExtension('webp');
 
                     $category->{$type} = 'category/'.$category->id.'/'.Str::random(40).'.webp';
 
-                    Storage::put($category->{$type}, $image);
+                    Storage::put($category->{$type}, (string) $encoded);
 
                     $category->save();
                 }

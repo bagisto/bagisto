@@ -1399,7 +1399,8 @@ class Importer extends AbstractImporter
             foreach ($images as $key => $image) {
                 $file = new UploadedFile($image['path'], $image['name']);
 
-                $image = (new ImageManager)->make($file)->encode('webp');
+                // Use Intervention Image v3 API
+                $encoded = ImageManager::gd()->read($file)->encodeByExtension('webp');
 
                 $imageDirectory = $this->productImageRepository->getProductDirectory((object) $product);
 
@@ -1412,7 +1413,7 @@ class Importer extends AbstractImporter
                     'position'   => $key + 1,
                 ];
 
-                Storage::put($path, $image);
+                Storage::put($path, (string) $encoded);
             }
         }
 

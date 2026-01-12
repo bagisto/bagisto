@@ -55,13 +55,14 @@ class ProductMediaRepository extends Repository
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     if (Str::contains($file->getMimeType(), 'image')) {
-                        $manager = new ImageManager;
+                        // Use Intervention Image v3 API
+                        $manager = ImageManager::gd();
 
-                        $image = $manager->make($file)->encode('webp');
+                        $encoded = $manager->read($file)->encodeByExtension('webp');
 
                         $path = $this->getProductDirectory($product).'/'.Str::random(40).'.webp';
 
-                        Storage::put($path, $image);
+                        Storage::put($path, (string) $encoded);
                     } else {
                         $path = $file->store($this->getProductDirectory($product));
                     }

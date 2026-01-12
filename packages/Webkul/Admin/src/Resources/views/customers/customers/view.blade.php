@@ -365,7 +365,7 @@
                             message: '@lang('admin::app.customers.customers.view.address-delete-confirmation')',
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.customers.customers.addresses.delete', '') }}/${id}`)
+                                this.$axios.post('{{ route('admin.customers.customers.addresses.delete', ':id') }}'.replace(':id', id))
                                     .then((response) => {
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -379,7 +379,7 @@
                     setAsDefault(address, index) {
                         this.isUpdating[index] = true;
 
-                        this.$axios.post(`{{ route('admin.customers.customers.addresses.set_default', '') }}/${this.customer.id}`, {
+                        this.$axios.post('{{ route('admin.customers.customers.addresses.set_default', ':id') }}'.replace(':id', this.customer.id), {
                             set_as_default: address.id,
                         })
                             .then((response) => {

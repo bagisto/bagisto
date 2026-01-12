@@ -183,7 +183,7 @@
                                         </span>
 
                                         <!-- Arrow -->
-                                        <a :href="`{{{ route('shop.customers.account.rma.view', '') }}}/${record.id}`">
+                                        <a :href=\"'{{ route('shop.customers.account.rma.view', ':id') }}'.replace(':id', record.id)\">
                                             <span title="@lang('shop::app.rma.customer-rma-index.view')" class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                         </a>
                                     </p>
@@ -301,7 +301,7 @@
 
                                     <p class="flex justify-start">
                                         <!-- Arrow -->
-                                        <a :href="`{{{ route('shop.customers.account.rma.view', '') }}}/${record.id}`">
+                                        <a :href="'{{ route('shop.customers.account.rma.view', ':id') }}'.replace(':id', record.id)">
                                             <span class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
                                         </a>
 
@@ -342,7 +342,7 @@
                     cancelStatus(recordId) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
-                                this.$axios.get(`{{ route('shop.customers.account.rma.cancel', '') }}/${recordId}`)
+                                this.$axios.get('{{ route('shop.customers.account.rma.cancel', ':id') }}'.replace(':id', recordId))
                                     .then(response => {
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 

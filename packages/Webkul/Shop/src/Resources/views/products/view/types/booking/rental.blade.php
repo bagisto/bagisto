@@ -281,7 +281,7 @@
                 dateSelected(params) {
                     let date = params.target.value;
 
-                    this.$axios.get(`{{ route('shop.booking-product.slots.index', '') }}/${this.bookingProduct.id}`, {
+                    this.$axios.get('{{ route('shop.booking-product.slots.index', ':id') }}'.replace(':id', this.bookingProduct.id), {
                         params: { date }
                     })
                         .then((response) => {

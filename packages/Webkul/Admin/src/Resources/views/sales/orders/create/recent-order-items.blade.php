@@ -110,7 +110,7 @@
                             <!-- Item Actions -->
                             <div class="mt-2 flex items-center gap-2.5">
                                 <a
-                                    :href="'{{ route('admin.sales.orders.view', '') }}/' + item.order_id"
+                                    :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', item.order_id)"
                                     class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                                     target="_blank"
                                 >

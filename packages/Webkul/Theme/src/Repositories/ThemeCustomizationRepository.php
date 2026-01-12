@@ -99,11 +99,14 @@ class ThemeCustomizationRepository extends Repository
                 ];
             } elseif ($image['image'] instanceof UploadedFile) {
                 try {
-                    $manager = new ImageManager;
+                    // Use Intervention Image v3 API
+                    $manager = ImageManager::gd();
 
                     $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
-                    Storage::put($path, $manager->make($image['image'])->encode('webp'));
+                    // In v3: read() instead of make(), encodeByExtension() instead of encode()
+                    $encoded = $manager->read($image['image'])->encodeByExtension('webp');
+                    Storage::put($path, (string) $encoded);
                 } catch (\Exception $e) {
                     session()->flash('error', $e->getMessage());
 
