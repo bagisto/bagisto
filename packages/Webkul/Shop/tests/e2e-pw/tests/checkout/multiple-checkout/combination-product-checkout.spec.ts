@@ -8,7 +8,7 @@ import { MultipleCheckout } from "../../../pages/multiple-checkout";
  * MULTIPLE PRODUCT CHECKOUT FLOW
  * ===============================
  * This test suite covers:
- * 1. Checkout of multiple products
+ * 1. Checkout of multiple products combinations like Simple, Configurable, Group, Virtual, Booking and Bundle
  */
 test.describe("multiple types product combination checkout flow", () => {
     /**

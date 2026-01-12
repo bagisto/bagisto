@@ -4,9 +4,9 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===================================
+ * =============================
  * BUNDLE PRODUCT CHECKOUT FLOW
- * ===================================
+ * =============================
  * This test suite covers:
  * 1. Creating a bundle product with variations.
  * 2. Completing checkout for the bundle product.
