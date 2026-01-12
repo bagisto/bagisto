@@ -61,21 +61,35 @@ async function createCurrency(adminPage, currency) {
 test.describe("exchange rate management", () => {
     test("create exchange rate", async ({ adminPage }) => {
         /**
-         * Create currency fro exchange rate
-         */
-        const currency = generateCurrency();
-        await createCurrency(adminPage, currency);
-
-        /**
          * Open exchange rates page
          */
         await adminPage.goto("admin/settings/exchange-rates", {
             waitUntil: "networkidle",
         });
+        await adminPage.getByRole("button", { name: /create/i }).click();
 
         /**
-         * Click Create button
+         *  Get the input element
          */
+        const baseCurrencyInput = adminPage.locator(
+            'input[name="base_currency"]'
+        );
+        const baseCurrency = await baseCurrencyInput.inputValue();
+
+        /**
+         * Create currency for exchange rate
+         */
+        let currency;
+
+        do {
+            currency = generateCurrency();
+        } while (currency.code === baseCurrency);
+
+        await createCurrency(adminPage, currency);
+
+        await adminPage.goto("admin/settings/exchange-rates", {
+            waitUntil: "networkidle",
+        });
         await adminPage.getByRole("button", { name: /create/i }).click();
 
         /**
