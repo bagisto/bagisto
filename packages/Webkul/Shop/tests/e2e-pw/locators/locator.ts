@@ -36,6 +36,7 @@ export class WebLocators {
     readonly billingZip: Locator;
     readonly billingTelephone: Locator;
     readonly clickSaveAddressButton: Locator;
+    readonly addNewAddress:Locator;
     readonly clickProcessButton: Locator;
     readonly chooseShippingMethod: Locator;
     readonly choosePaymentMethod: Locator;
@@ -182,6 +183,7 @@ export class WebLocators {
         this.streetAddress = page.getByRole("textbox", {
             name: "Street Address",
         });
+        this.addNewAddress=page.getByText("Add new address");
         this.billingCountry = page.locator('select[name="billing\\.country"]');
         this.billingState = page.locator('select[name="billing\\.state"]');
         this.billingCity = page.getByRole("textbox", { name: "City" });
