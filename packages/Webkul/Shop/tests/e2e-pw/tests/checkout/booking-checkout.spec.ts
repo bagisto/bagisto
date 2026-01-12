@@ -12,9 +12,6 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * 2. Selecting booking details and completing checkout.
  */
 test.describe("booking product checkout flow", () => {
-    /**
-     * Admin creates a Booking Product.
-     */
     test("should create booking product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
@@ -30,9 +27,6 @@ test.describe("booking product checkout flow", () => {
         });
     });
 
-    /**
-     * Customer selects booking slot and completes checkout successfully.
-     */
     test("should allow customer to complete checkout for booking product successfully", async ({
         shopPage,
     }) => {

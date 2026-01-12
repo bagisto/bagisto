@@ -4,21 +4,21 @@ import { ProductCheckout } from "../../pages/checkout-flow";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
- * ===================================
- * CONFIGURABLE PRODUCT CHECKOUT FLOW
- * ===================================
+ * =============================
+ * BUNDLE PRODUCT CHECKOUT FLOW
+ * =============================
  * This test suite covers:
- * 1. Creating a configurable product with variations.
- * 2. Completing checkout for the configurable product.
+ * 1. Creating a bundle product with variations.
+ * 2. Completing checkout for the bundle product.
  */
-test.describe("configurable product checkout flow", () => {
-    test("should create configurable product", async ({ adminPage }) => {
+test.describe("bundle product checkout flow", () => {
+    test("should create bundle product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
-        await productCreation.createConfigProduct({
-            type: "configurable",
+        await productCreation.createProduct({
+            type: "bundle",
             sku: `SKU-${Date.now()}`,
-            name: `Config-${Date.now()}`,
+            name: `bundle-${Date.now()}`,
             shortDescription: "Short desc",
             description: "Full desc",
             price: 199,
@@ -27,51 +27,51 @@ test.describe("configurable product checkout flow", () => {
         });
     });
 
-    test("should allow customer to complete checkout for configurable product successfully", async ({
+    test("should allow customer to complete checkout for bundle product successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckout();
+        await productCheckout.bundleCheckout();
     });
 
-    test("should allow guest to complete checkout for configurable product successfully", async ({
+    test("should allow guest to complete checkout for bundle product successfully", async ({
         shopPage,
     }) => {
         const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.guestCheckoutConfigurable();
+        await productCheckout.guestCheckoutBundle();
     });
 
     test("should use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckout();
+        await productCheckout.bundleCheckout();
     });
 
     test("should not use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.shippingChangeCheckoutConfig();
-    });
-    
-    test("should allow customer to complete checkout for configurable product via flat rate shipping successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckoutFlatRate();
+        await productCheckout.shippingChangeCheckoutBundle();
     });
 
-    test("should allow customer to complete checkout for configurable product via cash on delivery successfully", async ({
+    test("should allow customer to complete checkout for bundle product via flat rate shipping successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
         const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckoutCOD();
+        await productCheckout.bundleCheckoutFlatRate();
+    });
+
+    test("should allow customer to complete checkout for bundle product via cash on delivery successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.bundleCheckoutCOD();
     });
 });

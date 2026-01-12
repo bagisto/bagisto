@@ -156,7 +156,7 @@ export async function downloadableOrder(page) {
     const linkTitle = await page.locator('input[name="title"]').inputValue();
     await page.locator('input[name="price"]').first().fill("100");
     await page.locator('input[name="downloads"]').fill("10");
-    await page.locator('select[name="type"]').selectOption('url');
+    await page.locator('select[name="type"]').selectOption("url");
     await page.waitForSelector('input[name="url"]');
     await page.locator('input[name="url"]').fill(generateHostname());
     await page.locator('select[name="sample_type"]').selectOption("url");
@@ -185,7 +185,9 @@ export async function downloadableOrder(page) {
      * Checking the product in the list.
      */
     await page.goto("admin/catalog/products");
-    await expect(page.locator('p.break-all.text-base').filter({ hasText: product.name })).toBeVisible();
+    await expect(
+        page.locator("p.break-all.text-base").filter({ hasText: product.name })
+    ).toBeVisible();
 
     /**
      * Customer login.
@@ -201,12 +203,17 @@ export async function downloadableOrder(page) {
      * customer to buy a product
      */
     await page.goto("");
+    await page.getByRole("textbox", { name: "Search products here" }).click();
     await page
-        .locator("#main div")
-        .filter({ hasText: "New Products View All New" })
-        .getByLabel(product.name)
-        .click();
-    await page.locator("#main label").nth(2).click();
+        .getByRole("textbox", { name: "Search products here" })
+        .fill(product.name);
+    await page
+        .getByRole("textbox", { name: "Search products here" })
+        .press("Enter");
+    await page.waitForTimeout(2000);
+    await page.getByRole("button", { name: "Add To Cart" }).click();
+    await page.waitForTimeout(2000)
+    await page.locator('#main label').nth(1).click();
     await page.getByRole("button", { name: "Add To Cart" }).click();
     await expect(
         page
@@ -224,12 +231,14 @@ export async function downloadableOrder(page) {
         .click();
     await page.getByRole("button", { name: "Proceed" }).click();
     await page.waitForTimeout(2000);
-    
+
     /**
      * Choose payment option.
      */
-    await expect(page.locator('label').filter({ hasText: 'Money Transfer' })).toBeVisible();
-    await page.locator('.relative > .icon-radio-unselect').first().click();
+    await expect(
+        page.locator("label").filter({ hasText: "Money Transfer" })
+    ).toBeVisible();
+    await page.locator(".relative > .icon-radio-unselect").first().click();
     await page.waitForTimeout(2000);
 
     /**
@@ -245,10 +254,12 @@ export async function downloadableOrder(page) {
      */
     await page.goto("admin/sales/orders");
     await page.locator(".row > div:nth-child(4) > a").first().click();
-    await page.getByText('Invoice', { exact: true }).click();
-    await page.locator('#can_create_transaction').nth(1).click();
-    await page.getByRole('button', { name: 'Create Invoice' }).click();
-    await expect(page.getByText('Invoice created successfully Close')).toBeVisible();
+    await page.getByText("Invoice", { exact: true }).click();
+    await page.locator("#can_create_transaction").nth(1).click();
+    await page.getByRole("button", { name: "Create Invoice" }).click();
+    await expect(
+        page.getByText("Invoice created successfully Close")
+    ).toBeVisible();
 
     return product.name;
 }
