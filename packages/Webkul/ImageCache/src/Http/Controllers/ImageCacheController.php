@@ -53,12 +53,13 @@ class ImageCacheController extends Controller
 
         try {
             $manager = app('image');
+
             $image = $manager->read($path);
 
             if (is_object($templateConfig) && method_exists($templateConfig, 'applyFilter')) {
                 $image = $templateConfig->applyFilter($image);
             } elseif (class_exists($templateConfig)) {
-                $filter = new $templateConfig();
+                $filter = new $templateConfig;
 
                 if (method_exists($filter, 'applyFilter')) {
                     $image = $filter->applyFilter($image);
@@ -109,6 +110,7 @@ class ImageCacheController extends Controller
         ];
 
         $context = stream_context_create($options);
+
         $data = @file_get_contents($url, false, $context);
 
         if ($data === false) {
@@ -148,6 +150,7 @@ class ImageCacheController extends Controller
         $content = file_get_contents($path);
 
         $response = $this->buildResponse($content);
+
         $response->header('Content-Disposition', 'attachment; filename="'.basename($filename).'"');
 
         return $response;
@@ -207,9 +210,11 @@ class ImageCacheController extends Controller
         $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
 
         $eTag = md5($content);
+
         $notModified = isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] === $eTag;
 
         $statusCode = $notModified ? 304 : 200;
+
         $responseContent = $notModified ? null : $content;
 
         $maxAge = ($this->template === 'logo' ? 10080 : config('imagecache.lifetime', 43200)) * 60;

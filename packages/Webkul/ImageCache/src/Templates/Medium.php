@@ -6,6 +6,7 @@ use Intervention\Image\Interfaces\ImageInterface;
 
 /**
  * Medium image template filter.
+ *
  * Creates images at 300x300 pixels.
  */
 class Medium

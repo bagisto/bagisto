@@ -6,6 +6,7 @@ use Intervention\Image\Interfaces\ImageInterface;
 
 /**
  * Large image template filter.
+ *
  * Creates images at 600x600 pixels.
  */
 class Large

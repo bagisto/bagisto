@@ -8,6 +8,7 @@ use ReflectionFunction;
 
 /**
  * Creates a hash from a closure for caching purposes.
+ *
  * This allows closures to be used in cache checksums.
  */
 class HashableClosure
@@ -33,17 +34,21 @@ class HashableClosure
         $reflection = new ReflectionFunction($this->closure);
 
         $filename = $reflection->getFileName();
+
         $startLine = $reflection->getStartLine();
+
         $endLine = $reflection->getEndLine();
 
         if ($filename && file_exists($filename)) {
             $lines = file($filename);
+
             $code = implode('', array_slice($lines, $startLine - 1, $endLine - $startLine + 1));
         } else {
             $code = '';
         }
 
         $staticVars = $reflection->getStaticVariables();
+
         $staticHash = $this->hashStaticVariables($staticVars);
 
         $hashData = [

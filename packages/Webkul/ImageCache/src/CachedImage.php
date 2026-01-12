@@ -7,6 +7,7 @@ use Intervention\Image\Interfaces\ImageInterface;
 
 /**
  * Wrapper class for cached images.
+ *
  * Provides proxy access to Intervention Image v3 methods.
  */
 class CachedImage
@@ -358,7 +359,9 @@ class CachedImage
     public function toDataUrl(?string $format = null, int $quality = 90): string
     {
         $encoded = $this->encode($format, $quality);
+
         $mediaType = $encoded->mediaType();
+
         $base64 = base64_encode((string) $encoded);
 
         return "data:{$mediaType};base64,{$base64}";

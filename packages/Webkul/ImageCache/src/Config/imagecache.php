@@ -7,6 +7,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Enter the route name to enable dynamic image cache manipulation.
+    |
     | This handle will define the first part of the URI:
     |
     | {route}/{template}/{filename}

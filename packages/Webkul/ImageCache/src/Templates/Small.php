@@ -6,6 +6,7 @@ use Intervention\Image\Interfaces\ImageInterface;
 
 /**
  * Small image template filter.
+ *
  * Creates thumbnails at 100x100 pixels.
  */
 class Small
