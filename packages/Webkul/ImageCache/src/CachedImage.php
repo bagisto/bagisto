@@ -28,6 +28,7 @@ class CachedImage
     public function __construct(ImageInterface $image, string $cacheKey = '')
     {
         $this->image = $image;
+
         $this->cacheKey = $cacheKey;
     }
 

@@ -52,9 +52,7 @@ class ImageCacheController extends Controller
         }
 
         try {
-            $manager = app('image');
-
-            $image = $manager->read($path);
+            $image = image_manager()->read($path);
 
             if (is_object($templateConfig) && method_exists($templateConfig, 'applyFilter')) {
                 $image = $templateConfig->applyFilter($image);

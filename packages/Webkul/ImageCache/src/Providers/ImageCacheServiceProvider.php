@@ -14,9 +14,11 @@ class ImageCacheServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        include __DIR__.'/../Http/helpers.php';
+
         $this->mergeConfigFrom(__DIR__.'/../Config/imagecache.php', 'imagecache');
 
-        $this->app->singleton('image', function ($app) {
+        $this->app->singleton('image_manager', function ($app) {
             $driver = $app['config']->get('image.driver', 'gd');
 
             return match ($driver) {
@@ -25,7 +27,7 @@ class ImageCacheServiceProvider extends ServiceProvider
             };
         });
 
-        $this->app->alias('image', ImageManager::class);
+        $this->app->alias('image_manager', ImageManager::class);
     }
 
     /**

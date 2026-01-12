@@ -5,7 +5,6 @@ namespace Webkul\Theme\Repositories;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Theme\Contracts\ThemeCustomization;
@@ -99,13 +98,10 @@ class ThemeCustomizationRepository extends Repository
                 ];
             } elseif ($image['image'] instanceof UploadedFile) {
                 try {
-                    // Use Intervention Image v3 API
-                    $manager = ImageManager::gd();
-
                     $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
-                    // In v3: read() instead of make(), encodeByExtension() instead of encode()
-                    $encoded = $manager->read($image['image'])->encodeByExtension('webp');
+                    $encoded = image_manager()->read($image['image'])->encodeByExtension('webp');
+
                     Storage::put($path, (string) $encoded);
                 } catch (\Exception $e) {
                     session()->flash('error', $e->getMessage());

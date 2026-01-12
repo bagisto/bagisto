@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductMediaRepository extends Repository
@@ -55,10 +54,7 @@ class ProductMediaRepository extends Repository
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     if (Str::contains($file->getMimeType(), 'image')) {
-                        // Use Intervention Image v3 API
-                        $manager = ImageManager::gd();
-
-                        $encoded = $manager->read($file)->encodeByExtension('webp');
+                        $encoded = image_manager()->read($file)->encodeByExtension('webp');
 
                         $path = $this->getProductDirectory($product).'/'.Str::random(40).'.webp';
 

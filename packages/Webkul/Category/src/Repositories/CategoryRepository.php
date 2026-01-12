@@ -5,7 +5,6 @@ namespace Webkul\Category\Repositories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use Webkul\Category\Contracts\Category;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Core\Eloquent\Repository;
@@ -245,10 +244,7 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    // Use Intervention Image v3 API
-                    $manager = ImageManager::gd();
-
-                    $encoded = $manager->read(request()->file($file))->encodeByExtension('webp');
+                    $encoded = image_manager()->read(request()->file($file))->encodeByExtension('webp');
 
                     $category->{$type} = 'category/'.$category->id.'/'.Str::random(40).'.webp';
 

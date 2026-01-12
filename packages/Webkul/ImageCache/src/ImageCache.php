@@ -83,13 +83,7 @@ class ImageCache
      */
     protected function createManager(): ImageManager
     {
-        $driverName = config('image.driver', 'gd');
-
-        if (strtolower($driverName) === 'imagick') {
-            return ImageManager::imagick();
-        }
-
-        return ImageManager::gd();
+        return image_manager();
     }
 
     /**
