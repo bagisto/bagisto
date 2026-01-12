@@ -5,7 +5,7 @@ import { MultipleCheckout } from "../../../pages/multiple-checkout";
 
 /**
  * ===============================
- * Multiple PRODUCT CHECKOUT FLOW
+ * MULTIPLE PRODUCT CHECKOUT FLOW
  * ===============================
  * This test suite covers:
  * 1. Checkout of multiple products
