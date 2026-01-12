@@ -5,7 +5,7 @@ import { MultipleCheckout } from "../../../pages/multiple-checkout";
 
 /**
  * ===============================
- * MULTIPLE PRODUCT CHECKOUT FLOW
+ * Multiple PRODUCT CHECKOUT FLOW
  * ===============================
  * This test suite covers:
  * 1. Checkout of multiple products
@@ -93,6 +93,21 @@ test.describe("multiple types product combination checkout flow", () => {
         });
     });
 
+    test("should create bundle product", async ({ adminPage }) => {
+        const productCreation = new ProductCreation(adminPage);
+
+        await productCreation.createProduct({
+            type: "bundle",
+            sku: `SKU-${Date.now()}`,
+            name: `bundle-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+    });
+
     test("should create downloadable product to checkout", async ({
         adminPage,
     }) => {
@@ -157,5 +172,29 @@ test.describe("multiple types product combination checkout flow", () => {
         await addAddress(shopPage);
         const multipleCheckout = new MultipleCheckout(shopPage);
         await multipleCheckout.customerCheckoutVirtualAndGroup();
+    });
+    test("should allow customer to complete checkout for simple and bundle product successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const multipleCheckout = new MultipleCheckout(shopPage);
+        await multipleCheckout.customerCheckoutSimpleAndBundle();
+    });
+    test("should allow customer to complete checkout for Downloadable and bundle product successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const multipleCheckout = new MultipleCheckout(shopPage);
+        await multipleCheckout.customerCheckoutDownloadableAndBundle();
+    });
+    test("should allow customer to complete checkout for Group and bundle product successfully", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+        const multipleCheckout = new MultipleCheckout(shopPage);
+        await multipleCheckout.customerCheckoutGroupAndBundle();
     });
 });

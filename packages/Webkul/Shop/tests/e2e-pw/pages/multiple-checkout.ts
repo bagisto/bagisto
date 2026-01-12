@@ -11,7 +11,7 @@ export class MultipleCheckout {
         this.page = page;
 
         this.locators = new WebLocators(page);
-        
+
         this.productCheckout = new ProductCheckout(page);
     }
 
@@ -52,6 +52,61 @@ export class MultipleCheckout {
         await this.productCheckout.searchProduct("group");
         await this.locators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.proceedToCheckout();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.productCheckout.placeOrder();
+    }
+
+    async customerCheckoutSimpleAndBundle() {
+        await this.page.goto("");
+        await this.page.waitForLoadState("networkidle");
+        await this.productCheckout.searchProduct("simple");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.searchProduct("bundle");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.proceedToCheckout();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.productCheckout.placeOrder();
+    }
+    async customerCheckoutGroupAndBundle() {
+        await this.page.goto("");
+        await this.page.waitForLoadState("networkidle");
+        await this.productCheckout.searchProduct("bundle");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.searchProduct("group");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.proceedToCheckout();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.productCheckout.placeOrder();
+    }
+
+    async customerCheckoutDownloadableAndBundle() {
+        await this.page.goto("");
+        await this.page.waitForLoadState("networkidle");
+        await this.productCheckout.searchProduct("group");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(3000);
+        await this.locators.addToCartButton.click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.productCheckout.searchProduct("down");
+        await this.locators.addToCartButton.click();
+        await this.page.waitForTimeout(2000);
+        await this.locators.clickLink.click();
         await this.locators.addToCartButton.click();
         await expect(this.locators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
