@@ -56,12 +56,13 @@ export class ProductCreation {
         await this.locators.selectAttribute.selectOption("1");
         await this.locators.productSku.fill(sku);
         await this.locators.saveProduct.click();
-        //         await expect(this.page.locator("#app")).toContainText(
-        //     /product created successfully/i
-        // );
+                await expect(this.page.locator("#app")).toContainText(
+            /product created successfully/i
+        );
         await expect(this.page).toHaveURL(
             /\/admin\/catalog\/products\/edit\/\d+/
         );
+        await this.page.waitForLoadState("networkidle");
     }
 
     private async fillCommonDetails(product: BaseProduct) {
@@ -105,6 +106,10 @@ export class ProductCreation {
 
             case "booking":
                 await this.booking(product);
+                break;
+
+            case "bundle":
+                await this.bundle(product);
                 break;
 
             default:
@@ -323,6 +328,36 @@ export class ProductCreation {
         await this.locators.productPrice.fill("199");
     }
 
+    private async bundle(product: BaseProduct) {
+        await this.locators.addOptionButton.first().click();
+        await this.locators.addLableInput.fill("Bundle Option 1");
+        await this.locators.selectType.selectOption({ value: "radio" });
+        await this.locators.isRequiredCheckbox.selectOption({ value: "1" });
+        await this.locators.saveButton.click();
+        await this.locators.addProduct.first().click();
+        await this.locators.searchByNameInput.click();
+        await this.locators.searchByNameInput.fill("omni");
+        const productRow = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: "OmniHeat" });
+        await productRow
+            .locator("input[type='checkbox']")
+            .first()
+            .evaluate((el) => {
+                (el as HTMLInputElement).checked = true;
+                el.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+        const productRow2 = this.page
+            .locator("div.flex.justify-between")
+            .filter({ hasText: "OmniHeat" })
+            .nth(1);
+        await productRow2.locator("input[type='checkbox']").evaluate((el) => {
+            (el as HTMLInputElement).checked = true;
+            el.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        await this.locators.addSelectedProductButton.click();
+    }
+
     /**
      * Save & Verify The Product Creation
      */
@@ -335,7 +370,7 @@ export class ProductCreation {
      * Save Product Data in JSON File
      */
     private saveProductToJson(product: BaseProduct) {
-          const filePath = "product-data.json";
+        const filePath = "product-data.json";
 
         const productData = {
             name: product.name,

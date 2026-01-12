@@ -21,6 +21,11 @@ export class WebLocators {
     readonly clickSaveProduct: Locator;
     readonly updateProductSuccessToast: Locator;
     readonly productDescription: string;
+    readonly addOptionButton: Locator;
+    readonly addLableInput: Locator;
+    readonly isRequiredCheckbox: Locator;
+    readonly selectType: Locator;
+    readonly addProduct: Locator;
 
     readonly addToCartButton: Locator;
     readonly ShoppingCartIcon: Locator;
@@ -36,7 +41,7 @@ export class WebLocators {
     readonly billingZip: Locator;
     readonly billingTelephone: Locator;
     readonly clickSaveAddressButton: Locator;
-    readonly addNewAddress:Locator;
+    readonly addNewAddress: Locator;
     readonly clickProcessButton: Locator;
     readonly chooseShippingMethod: Locator;
     readonly choosePaymentMethod: Locator;
@@ -108,7 +113,7 @@ export class WebLocators {
     readonly sampleTypeSelect: Locator;
     readonly sampleUrlInput: Locator;
     readonly linkSaveButton: Locator;
-    readonly clickLink:Locator;
+    readonly clickLink: Locator;
 
     /* -------- DOWNLOADABLE : SAMPLES -------- */
     readonly addSampleButton: Locator;
@@ -160,6 +165,15 @@ export class WebLocators {
         this.clickSaveProduct = page.locator(
             '//button[contains(.,"Save Product") ]'
         );
+        this.addOptionButton = page
+            .locator(".secondary-button")
+            .filter({ hasText: "Add Option" });
+        this.addLableInput = page.locator('input[name="label"]');
+        this.selectType = page.locator('select[name="type"]');
+        this.isRequiredCheckbox = page.locator('select[name="is_required"]');
+        this.addProduct = page
+            .locator(".secondary-button")
+            .filter({ hasText: "Add Product" });
         this.updateProductSuccessToast = page
             .locator("text =Product updated successfully")
             .first();
@@ -183,7 +197,7 @@ export class WebLocators {
         this.streetAddress = page.getByRole("textbox", {
             name: "Street Address",
         });
-        this.addNewAddress=page.getByText("Add new address");
+        this.addNewAddress = page.getByText("Add new address");
         this.billingCountry = page.locator('select[name="billing\\.country"]');
         this.billingState = page.locator('select[name="billing\\.state"]');
         this.billingCity = page.getByRole("textbox", { name: "City" });
@@ -318,7 +332,7 @@ export class WebLocators {
 
         this.linkTitleInput = page.locator('input[name="title"]').first();
 
-        this.clickLink=page.locator(".icon-uncheck").first();
+        this.clickLink = page.locator(".icon-uncheck").first();
         this.linkPriceInput = page.locator('input[name="price"]').first();
 
         this.linkDownloadsInput = page.locator('input[name="downloads"]');
