@@ -66,7 +66,7 @@ test.describe("configurable product checkout flow", () => {
         await productCheckout.configCheckoutFlatRate();
     });
 
-        test("should allow customer to complete checkout for configurable product via case on delivery successfully", async ({
+    test("should allow customer to complete checkout for configurable product via cash on delivery successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);

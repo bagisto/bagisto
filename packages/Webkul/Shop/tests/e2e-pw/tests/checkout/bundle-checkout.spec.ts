@@ -56,6 +56,7 @@ test.describe("bundle product checkout flow", () => {
         const productCheckout = new ProductCheckout(shopPage);
         await productCheckout.shippingChangeCheckoutBundle();
     });
+
     test("should allow customer to complete checkout for bundle product via flat rate shipping successfully", async ({
         shopPage,
     }) => {
@@ -65,7 +66,7 @@ test.describe("bundle product checkout flow", () => {
         await productCheckout.bundleCheckoutFlatRate();
     });
 
-    test("should allow customer to complete checkout for bundle product via case on delivery successfully", async ({
+    test("should allow customer to complete checkout for bundle product via cash on delivery successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);

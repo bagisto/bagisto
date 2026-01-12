@@ -1,7 +1,7 @@
-import { test } from "../../../setup";
-import { ProductCreation } from "../../../pages/product";
-import { loginAsCustomer, addAddress } from "../../../utils/customer";
-import { MultipleCheckout } from "../../../pages/multiple-checkout";
+import { test } from "../../setup";
+import { ProductCreation } from "../../pages/product";
+import { loginAsCustomer, addAddress } from "../../utils/customer";
+import { MultipleCheckout } from "../../pages/multiple-checkout";
 
 /**
  * ===============================
@@ -173,6 +173,7 @@ test.describe("multiple types product combination checkout flow", () => {
         const multipleCheckout = new MultipleCheckout(shopPage);
         await multipleCheckout.customerCheckoutVirtualAndGroup();
     });
+
     test("should allow customer to complete checkout for simple and bundle product successfully", async ({
         shopPage,
     }) => {
@@ -181,6 +182,7 @@ test.describe("multiple types product combination checkout flow", () => {
         const multipleCheckout = new MultipleCheckout(shopPage);
         await multipleCheckout.customerCheckoutSimpleAndBundle();
     });
+
     test("should allow customer to complete checkout for Downloadable and bundle product successfully", async ({
         shopPage,
     }) => {
@@ -189,6 +191,7 @@ test.describe("multiple types product combination checkout flow", () => {
         const multipleCheckout = new MultipleCheckout(shopPage);
         await multipleCheckout.customerCheckoutDownloadableAndBundle();
     });
+
     test("should allow customer to complete checkout for Group and bundle product successfully", async ({
         shopPage,
     }) => {

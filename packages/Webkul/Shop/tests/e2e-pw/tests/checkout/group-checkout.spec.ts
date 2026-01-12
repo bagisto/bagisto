@@ -87,7 +87,7 @@ test.describe("group product checkout flow", () => {
         await productCheckout.groupCheckoutFlatRate();
     });
 
-    test("should allow customer to complete checkout for group product via case on delivery successfully", async ({
+    test("should allow customer to complete checkout for group product via cash on delivery successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);

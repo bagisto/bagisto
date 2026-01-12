@@ -116,7 +116,6 @@ export class ProductCreation {
     /**
      * PRODUCT TYPE HANDLERS
      */
-
     private async handleProductType(product: BaseProduct) {
         switch (product.type) {
             case "simple":
