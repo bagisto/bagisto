@@ -212,8 +212,8 @@ export async function downloadableOrder(page) {
         .press("Enter");
     await page.waitForTimeout(2000);
     await page.getByRole("button", { name: "Add To Cart" }).click();
-    await page.waitForTimeout(2000)
-    await page.locator('#main label').nth(1).click();
+    await page.waitForTimeout(2000);
+    await page.locator("#main label").nth(1).click();
     await page.getByRole("button", { name: "Add To Cart" }).click();
     await expect(
         page
@@ -235,8 +235,7 @@ export async function downloadableOrder(page) {
     /**
      * Choose payment option.
      */
-    await page.getByText('Money Transfer', { exact: true }).first().click();
-    await page.locator(".relative > .icon-radio-unselect").first().click();
+    await page.locator('label[for="moneytransfer"]').click();
     await page.waitForTimeout(2000);
 
     /**
