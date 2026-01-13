@@ -380,6 +380,7 @@ export class ProductCreation {
         //  * Multiselect
         //  */
         // await this.bundleAddOption("multiselect", "Bundle Option 3");
+        await this.locators.rmaSelection.selectOption("1");
     }
 
     /**
