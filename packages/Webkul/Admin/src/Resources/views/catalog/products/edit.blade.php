@@ -195,6 +195,15 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
+                                    @if ($attribute->code == 'rma_rule_id')
+                                        @includeWhen($group->code === 'rma', 'admin::catalog.products.edit.rma-rules', [
+                                            'attribute' => $attribute,
+                                            'product'   => $product,
+                                        ])
+
+                                        @continue
+                                    @endif
+
                                     {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.before", ['product' => $product]) !!}
 
                                     <x-admin::form.control-group class="last:!mb-0">

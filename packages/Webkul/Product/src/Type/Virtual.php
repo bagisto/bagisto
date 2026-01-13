@@ -34,6 +34,8 @@ class Virtual extends AbstractType
         'height',
         'weight',
         'depth',
+        'allow_rma',
+        'rma_rule_id',
     ];
 
     /**
