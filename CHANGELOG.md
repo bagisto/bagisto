@@ -4,6 +4,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* **[Laravel 12 Upgrade]** Upgraded framework to Laravel 12 with comprehensive modernization:
+  - Fixed Carbon date/time type strictness issues (int/float parameters, non-null timezones).
+  - Modernized all legacy PHP date functions (`strtotime()`, `date()`, `date_default_timezone_set()`) to Carbon equivalents.
+  - Implemented timezone fallback logic using `config('app.timezone')` for channel-based operations.
+  - Updated PDF response headers to match Laravel 12 format (Content-Disposition).
+  - Enhanced date handling methods in Core helper with proper Carbon integration.
+
 * Implemented two-factor authentication (2FA) for admin users to enhance account security.
 
 * Migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise for enhanced bot protection.

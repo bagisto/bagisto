@@ -59,7 +59,7 @@ class RMARepository extends Repository
     {
         $expireDays = (int) core()->getConfigData('sales.rma.setting.default_allow_days');
 
-        $daysSinceCreation = now()->diffInDays($rma->created_at);
+        $daysSinceCreation = (int) abs(now()->diffInDays($rma->created_at));
 
         return $daysSinceCreation > $expireDays && $daysSinceCreation !== 0;
     }

@@ -285,7 +285,7 @@
                         url = `{{ route('admin.sales.rma.rules.store') }}`;
 
                         if (params.id) {
-                            url = `{{ route('admin.sales.rma.rules.update', '') }}/${params.id}`;
+                            url = '{{ route('admin.sales.rma.rules.update', ':id') }}'.replace(':id', params.id);
                             
                             formData.append('_method', 'put');
                         }

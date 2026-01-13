@@ -114,7 +114,7 @@
 
                         <!-- View Button -->
                         <a
-                            :href="`{{ route('admin.sales.invoices.view', '') }}/${record.id}`"
+                            :href="'{{ route('admin.sales.invoices.view', ':id') }}'.replace(':id', record.id)"
                             class="icon-sort-right rtl:icon-sort-left cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                         >
                         </a>

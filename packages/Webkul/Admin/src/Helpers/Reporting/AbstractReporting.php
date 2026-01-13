@@ -128,7 +128,7 @@ abstract class AbstractReporting
             $this->setEndDate(request()->date('end'));
         }
 
-        $this->lastStartDate = $this->startDate->clone()->subDays($this->startDate->diffInDays($this->endDate));
+        $this->lastStartDate = $this->startDate->clone()->subDays((int) abs($this->startDate->diffInDays($this->endDate)));
     }
 
     /**
@@ -185,7 +185,7 @@ abstract class AbstractReporting
     public function getTimeInterval($startDate, $endDate, $period)
     {
         if ($period == 'auto') {
-            $totalMonths = $startDate->diffInMonths($endDate) + 1;
+            $totalMonths = (int) abs($startDate->diffInMonths($endDate)) + 1;
 
             /**
              * If the difference between the start and end date is more than 5 months
@@ -260,7 +260,7 @@ abstract class AbstractReporting
     {
         $intervals = [];
 
-        $totalMonths = $startDate->diffInMonths($endDate) + 1;
+        $totalMonths = (int) abs($startDate->diffInMonths($endDate)) + 1;
 
         /**
          * If the difference between the start and end date is less than 5 months
@@ -305,7 +305,7 @@ abstract class AbstractReporting
 
         $endWeekDay = Carbon::createFromTimeString(core()->xWeekRange($endDate, 1).' 23:59:59');
 
-        $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
+        $totalWeeks = (int) abs($startWeekDay->diffInWeeks($endWeekDay));
 
         /**
          * If the difference between the start and end date is less than 6 weeks
@@ -348,7 +348,7 @@ abstract class AbstractReporting
     {
         $intervals = [];
 
-        $totalDays = $startDate->diffInDays($endDate) + 1;
+        $totalDays = (int) abs($startDate->diffInDays($endDate)) + 1;
 
         for ($i = 0; $i < $totalDays; $i++) {
             $intervalStartDate = clone $startDate;

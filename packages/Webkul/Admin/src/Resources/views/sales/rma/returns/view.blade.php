@@ -93,7 +93,7 @@
                                     <div class="flex w-full justify-start gap-5">
                                         <div class="flex flex-col gap-y-1.5">
                                             <p class="text-gray-600 dark:text-gray-300">
-                                                {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
+                                                {{ \Carbon\Carbon::parse($rma->created_at)->format('F j, Y, h:i:s A') }}
                                             </p>
 
                                             @if ($rma->package_condition)
@@ -713,7 +713,7 @@
 
                                     <!-- Order create date -->
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        {{ date("F j, Y, h:i:s A" ,strtotime($rma->order->created_at)) }}
+                                        {{ \Carbon\Carbon::parse($rma->order->created_at)->format('F j, Y, h:i:s A') }}
                                     </p>
 
                                      <!-- payment method -->

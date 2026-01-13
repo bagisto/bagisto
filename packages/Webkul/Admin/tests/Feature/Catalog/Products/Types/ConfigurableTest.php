@@ -125,6 +125,7 @@ it('should update the configurable product', function () {
         'name'              => fake()->words(3, true),
         'price'             => fake()->randomFloat(2, 1, 1000),
         'weight'            => fake()->numberBetween(0, 100),
+        'rma_rule_id'       => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -198,6 +199,7 @@ it('should update the configurable product variants', function () {
         'price'             => $product->price,
         'weight'            => $product->weight,
         'variants'          => $variants,
+        'rma_rule_id'       => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();

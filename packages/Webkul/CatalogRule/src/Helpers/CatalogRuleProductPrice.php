@@ -28,8 +28,8 @@ class CatalogRuleProductPrice
     {
         $dates = [
             'current'  => $currentDate = Carbon::now(),
-            'previous' => (clone $currentDate)->subDays('1')->setTime(23, 59, 59),
-            'next'     => (clone $currentDate)->addDays('1')->setTime(0, 0, 0),
+            'previous' => (clone $currentDate)->subDays(1)->setTime(23, 59, 59),
+            'next'     => (clone $currentDate)->addDays(1)->setTime(0, 0, 0),
         ];
 
         $prices = $endRuleFlags = [];

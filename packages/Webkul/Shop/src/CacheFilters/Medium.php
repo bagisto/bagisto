@@ -3,17 +3,17 @@
 namespace Webkul\Shop\CacheFilters;
 
 use Illuminate\Support\Str;
-use Intervention\Image\Filters\FilterInterface;
-use Intervention\Image\Image;
+use Intervention\Image\Interfaces\ImageInterface;
 
-class Medium implements FilterInterface
+class Medium
 {
     /**
      * Apply filter.
      *
-     * @return \Intervention\Image\Image
+     * @param  ImageInterface|\Intervention\Image\CachedImage  $image
+     * @return ImageInterface|\Intervention\Image\CachedImage
      */
-    public function applyFilter(Image $image)
+    public function applyFilter($image)
     {
         /**
          * If the current url is product image
@@ -27,16 +27,16 @@ class Medium implements FilterInterface
                 ? core()->getConfigData('catalog.products.cache_medium_image.height')
                 : 360;
 
-            return $image->fit($width, $height);
+            return $image->cover((int) $width, (int) $height);
         } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->fit(110, 110);
+            return $image->cover(110, 110);
         } elseif (Str::contains(url()->current(), '/attribute_option')) {
-            return $image->fit(210, 210);
+            return $image->cover(210, 210);
         }
 
         /**
          * Slider image dimensions
          */
-        return $image->fit(1024, 372);
+        return $image->cover(1024, 372);
     }
 }

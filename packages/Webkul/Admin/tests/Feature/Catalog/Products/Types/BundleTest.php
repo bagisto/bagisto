@@ -155,6 +155,7 @@ it('should update the bundle product', function () {
         'visible_individually' => '1',
         'status'               => '1',
         'guest_checkout'       => '1',
+        'rma_rule_id'          => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();

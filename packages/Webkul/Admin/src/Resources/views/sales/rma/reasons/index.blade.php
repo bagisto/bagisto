@@ -295,7 +295,7 @@
                         url = `{{ route('admin.sales.rma.reason.store') }}`;
 
                         if (params.id) {
-                            url = `{{ route('admin.sales.rma.reason.update', '') }}/${params.id}`;
+                            url = '{{ route('admin.sales.rma.reason.update', ':id') }}'.replace(':id', params.id);
 
                             formData.append('_method', 'put');
                         }

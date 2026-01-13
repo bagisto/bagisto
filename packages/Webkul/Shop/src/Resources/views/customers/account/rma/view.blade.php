@@ -45,7 +45,7 @@
                         </span>
                         
                         <span class="text-gray-600">
-                            {{ date("F j, Y, h:i:s A", strtotime($rma->created_at)) }}
+                            {{ \Carbon\Carbon::parse($rma->created_at)->format('F j, Y, h:i:s A') }}
                         </span>
                     </div>
 

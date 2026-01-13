@@ -3,31 +3,32 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Name of route
+    | Name of Route
     |--------------------------------------------------------------------------
     |
-    | Enter the routes name to enable dynamic imagecache manipulation.
+    | Enter the route name to enable dynamic image cache manipulation.
+    |
     | This handle will define the first part of the URI:
     |
     | {route}/{template}/{filename}
     |
     | Examples: "images", "img/cache"
     |
-     */
+    */
 
     'route' => 'cache',
 
     /*
     |--------------------------------------------------------------------------
-    | Storage paths
+    | Storage Paths
     |--------------------------------------------------------------------------
     |
-    | The following paths will be searched for the image filename, submited
-    | by URI.
+    | The following paths will be searched for the image filename submitted
+    | by the URI.
     |
     | Define as many directories as you like.
     |
-     */
+    */
 
     'paths' => [
         storage_path('app/public'),
@@ -36,24 +37,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Manipulation templates
+    | Manipulation Templates
     |--------------------------------------------------------------------------
     |
     | Here you may specify your own manipulation filter templates.
-    | The keys of this array will define which templates
-    | are available in the URI:
+    | The keys of this array will define which templates are available
+    | in the URI:
     |
     | {route}/{template}/{filename}
     |
-    | The values of this array will define which filter class
-    | will be applied, by its fully qualified name.
+    | The values of this array will define which filter class will be
+    | applied, by its fully qualified name.
     |
-     */
+    */
 
     'templates' => [
-        'small'  => 'Webkul\Shop\CacheFilters\Small',
-        'medium' => 'Webkul\Shop\CacheFilters\Medium',
-        'large'  => 'Webkul\Shop\CacheFilters\Large',
+        'small'  => \Webkul\Shop\CacheFilters\Small::class,
+        'medium' => \Webkul\Shop\CacheFilters\Medium::class,
+        'large'  => \Webkul\Shop\CacheFilters\Large::class,
     ],
 
     /*
@@ -61,9 +62,21 @@ return [
     | Image Cache Lifetime
     |--------------------------------------------------------------------------
     |
-    | Lifetime in minutes of the images handled by the imagecache route.
+    | Lifetime in minutes of the images handled by the image cache route.
     |
-     */
+    */
 
-    'lifetime' => 525600,
+    'lifetime' => 43200,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Driver
+    |--------------------------------------------------------------------------
+    |
+    | Optionally specify a custom cache driver to use for image caching.
+    | Set to null to use the default Laravel cache driver.
+    |
+    */
+
+    'cache_driver' => null,
 ];

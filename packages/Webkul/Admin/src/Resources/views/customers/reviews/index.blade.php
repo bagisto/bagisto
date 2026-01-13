@@ -421,7 +421,7 @@
 
                         formData.append('_method', 'put');
 
-                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, formData)
+                        this.$axios.post('{{ route('admin.customers.customers.review.update', ':id') }}'.replace(':id', params.id), formData)
                             .then((response) => {
                                 this.$refs.review.close();
 

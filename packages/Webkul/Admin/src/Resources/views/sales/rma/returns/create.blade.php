@@ -280,7 +280,7 @@
                                 <p class="flex text-sm justify-between">
                                     <template v-if="product.url_key && product.visible_individually">
                                         <a
-                                            :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
+                                            :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', product.url_key)"
                                             target='_blank'
                                             class="text-blue-500 text-lg"
                                         >
@@ -963,7 +963,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("admin.sales.rma.get-order-items", "") }}' + '/' + this.orderId)
+                            this.$axios.get('{{ route("admin.sales.rma.get-order-items", ":id") }}'.replace(':id', this.orderId))
                                 .then(response => {
                                     this.isLoading = false;
 

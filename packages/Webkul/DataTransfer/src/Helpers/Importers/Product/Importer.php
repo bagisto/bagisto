@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -1399,7 +1398,7 @@ class Importer extends AbstractImporter
             foreach ($images as $key => $image) {
                 $file = new UploadedFile($image['path'], $image['name']);
 
-                $image = (new ImageManager)->make($file)->encode('webp');
+                $encoded = image_manager()->read($file)->encodeByExtension('webp');
 
                 $imageDirectory = $this->productImageRepository->getProductDirectory((object) $product);
 
@@ -1412,7 +1411,7 @@ class Importer extends AbstractImporter
                     'position'   => $key + 1,
                 ];
 
-                Storage::put($path, $image);
+                Storage::put($path, (string) $encoded);
             }
         }
 

@@ -475,7 +475,7 @@ class Booking
                                 'qty'       => $qty,
                             ];
 
-                            usort($slots, fn ($first, $second) => strtotime($first['from']) <=> strtotime($second['from']));
+                            usort($slots, fn ($first, $second) => \Carbon\Carbon::parse($first['from'])->timestamp <=> \Carbon\Carbon::parse($second['from'])->timestamp);
                         }
                     }
                 } else {
