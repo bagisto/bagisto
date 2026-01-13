@@ -43,6 +43,7 @@ export class ProductCreation {
         await this.locators.saveProduct.click();
         await this.handleProductType(product);
         await this.fillCommonDetails(product);
+        await this.locators.rmaSelection.selectOption("1");
         await this.saveAndVerify();
         this.saveProductToJson(product);
     }
@@ -162,6 +163,7 @@ export class ProductCreation {
             await this.locators.productInventory
                 .first()
                 .fill(product.inventory.toString());
+        await this.locators.rmaSelection.selectOption("1");
     }
 
     /**
@@ -250,6 +252,8 @@ export class ProductCreation {
             el.dispatchEvent(new Event("change", { bubbles: true }));
         });
         await this.locators.addSelectedProductButton.click();
+
+        await this.locators.rmaSelection.selectOption("1");
 
         await expect(
             this.locators.groupedProductVisibleByName(/simple-\d+/i).first()
@@ -376,6 +380,7 @@ export class ProductCreation {
         //  * Multiselect
         //  */
         // await this.bundleAddOption("multiselect", "Bundle Option 3");
+        await this.locators.rmaSelection.selectOption("1");
     }
 
     /**
