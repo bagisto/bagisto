@@ -19,7 +19,7 @@ class ProductDownloadableLinkFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
+        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
 
         $filename = 'ProductImageExampleForUpload.jpg';
 

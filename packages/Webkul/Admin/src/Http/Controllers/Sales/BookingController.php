@@ -49,7 +49,7 @@ class BookingController extends Controller
             ? Carbon::createFromTimeString(request()->get('endDate').' 23:59:59')
             : Carbon::now()->endOfWeek()->format('Y-m-d H:i:s');
 
-        $bookings = $this->bookingRepository->getBookings([strtotime($startDate), strtotime($endDate)])
+        $bookings = $this->bookingRepository->getBookings([Carbon::parse($startDate)->timestamp, Carbon::parse($endDate)->timestamp])
             ->map(function ($booking) {
                 $booking['start'] = Carbon::createFromTimestamp($booking->start)->format('Y-m-d h:i A');
 

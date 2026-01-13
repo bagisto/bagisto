@@ -1539,7 +1539,7 @@ it('should print/download the invoice', function () {
     get(route('admin.sales.invoices.print', $invoice->id))
         ->assertOk()
         ->assertHeader('Content-Type', 'application/pdf')
-        ->assertHeader('Content-Disposition', 'attachment; filename="'.$fileName.'"');
+        ->assertHeader('Content-Disposition', 'attachment; filename='.$fileName);
 
     $cart->refresh();
 

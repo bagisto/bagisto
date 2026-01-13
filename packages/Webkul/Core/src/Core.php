@@ -571,52 +571,40 @@ class Core
     {
         $channel = $this->getCurrentChannel();
 
-        $channelTimeStamp = $this->channelTimeStamp($channel);
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
 
-        $fromTimeStamp = strtotime($dateFrom);
+        $now = Carbon::now($timezone);
 
-        $toTimeStamp = strtotime($dateTo);
+        if (! $this->is_empty_date($dateFrom)) {
+            $from = Carbon::parse($dateFrom, $timezone)->startOfDay();
 
-        if ($dateTo) {
-            $toTimeStamp += 86400;
+            if ($now->lt($from)) {
+                return false;
+            }
         }
 
-        if (
-            ! $this->is_empty_date($dateFrom)
-            && $channelTimeStamp < $fromTimeStamp
-        ) {
-            $result = false;
-        } elseif (
-            ! $this->is_empty_date($dateTo)
-            && $channelTimeStamp > $toTimeStamp
-        ) {
-            $result = false;
-        } else {
-            $result = true;
+        if (! $this->is_empty_date($dateTo)) {
+            $to = Carbon::parse($dateTo, $timezone)->endOfDay();
+
+            if ($now->gt($to)) {
+                return false;
+            }
         }
 
-        return $result;
+        return true;
     }
 
     /**
-     * Get channel timestamp, timestamp will be builded with channel timezone settings.
+     * Get channel timestamp using channel timezone or Laravel default timezone.
      *
      * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return int
      */
     public function channelTimeStamp($channel)
     {
-        $timezone = $channel->timezone;
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
 
-        $currentTimezone = @date_default_timezone_get();
-
-        @date_default_timezone_set($timezone);
-
-        $date = date('Y-m-d H:i:s');
-
-        @date_default_timezone_set($currentTimezone);
-
-        return strtotime($date);
+        return Carbon::now($timezone)->timestamp;
     }
 
     /**
@@ -631,7 +619,7 @@ class Core
     }
 
     /**
-     * Format date using current channel.
+     * Format date using current channel timezone or Laravel default timezone.
      *
      * @param  \Illuminate\Support\Carbon|string|null  $date
      * @param  string  $format
@@ -649,7 +637,9 @@ class Core
             $date = Carbon::parse($date);
         }
 
-        $date->setTimezone($channel->timezone);
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
+
+        $date->setTimezone($timezone);
 
         return $date->translatedFormat($format);
     }
@@ -783,16 +773,16 @@ class Core
      */
     public function xWeekRange($date, $day)
     {
-        $ts = strtotime($date);
+        $carbonDate = Carbon::parse($date);
 
         if (! $day) {
-            $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
+            $start = $carbonDate->isSunday() ? $carbonDate : $carbonDate->previous(Carbon::SUNDAY);
 
-            return date('Y-m-d', $start);
+            return $start->format('Y-m-d');
         } else {
-            $end = (date('D', $ts) == 'Sat') ? $ts : strtotime('next saturday', $ts);
+            $end = $carbonDate->isSaturday() ? $carbonDate : $carbonDate->next(Carbon::SATURDAY);
 
-            return date('Y-m-d', $end);
+            return $end->format('Y-m-d');
         }
     }
 

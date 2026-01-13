@@ -128,6 +128,7 @@ it('should update the simple product', function () {
         'weight'            => fake()->numberBetween(0, 100),
         'channel'           => core()->getCurrentChannelCode(),
         'locale'            => app()->getLocale(),
+        'rma_rule_id'       => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
