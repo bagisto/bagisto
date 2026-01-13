@@ -113,11 +113,6 @@ async function createSimpleProduct(adminPage) {
         .click();
 
     /**
-     * Select RMA
-     */
-    await adminPage.selectOption('select[name="rma_rule_id"]', "1");
-
-    /**
      * Saving the product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -307,11 +302,6 @@ async function createConfigurableProduct(adminPage) {
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
 
     /**
-     * Select RMA
-     */
-    await adminPage.selectOption('select[name="rma_rule_id"]', "1");
-
-    /**
      * Saving the configurable product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -457,11 +447,6 @@ async function createGroupedProduct(adminPage) {
     await adminPage.waitForSelector(
         'p:has-text("Arctic Bliss Stylish Winter")'
     );
-
-    /**
-     * Select RMA
-     */
-    await adminPage.selectOption('select[name="rma_rule_id"]', "1");
 
     /**
      * Saving the configurable product.
