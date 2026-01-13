@@ -235,9 +235,7 @@ export async function downloadableOrder(page) {
     /**
      * Choose payment option.
      */
-    await expect(
-        page.locator("label").filter({ hasText: "Money Transfer" })
-    ).toBeVisible();
+    await page.getByText('Money Transfer', { exact: true }).first().click();
     await page.locator(".relative > .icon-radio-unselect").first().click();
     await page.waitForTimeout(2000);
 
