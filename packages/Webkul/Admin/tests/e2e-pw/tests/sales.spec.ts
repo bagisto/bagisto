@@ -215,24 +215,12 @@ export async function generateOrder(adminPage) {
         await options[Math.floor(Math.random() * options.length)].click();
     }
 
-    const paymentMethods = await adminPage
-        .waitForSelector('input[name="payment_method"] + label', {
-            timeout: 10000,
-        })
-        .catch(() => null);
+    await adminPage.locator("label", { hasText: "Money Transfer" }).click();
 
-    if (paymentMethods) {
-        const radios = await adminPage.$$(
-            'input[name="payment_method"] + label'
-        );
-        await radios[1].click();
-
-        const nextBtn = await adminPage.$$(
-            "button.primary-button.w-max.px-11.py-3"
-        );
-        await nextBtn[nextBtn.length - 1].click();
-    }
-
+    const nextBtn = await adminPage.$$(
+        "button.primary-button.w-max.px-11.py-3"
+    );
+    await nextBtn[nextBtn.length - 1].click();
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
 
@@ -504,34 +492,45 @@ test.describe("sales management", () => {
          */
         await adminPage.goto("admin/sales/invoices");
 
-        const checkboxes = await adminPage.locator('.icon-uncheckbox')
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
         await checkboxes.first().click();
-        await adminPage.getByRole("button", { name: "Select Action " }).click();
-        await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
         await adminPage.getByRole("link", { name: "Paid" }).click();
-        await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
         await expect(adminPage.locator("#app")).toContainText("Paid");
-        await expect(adminPage.getByText('Selected invoice updated successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully")
+        ).toBeVisible();
     });
 
- test("support mass status Change to overdue for Invoices", async ({
+    test("support mass status Change to overdue for Invoices", async ({
         adminPage,
     }) => {
-
         /**
          * Go to invoice page
          */
         await adminPage.goto("admin/sales/invoices");
 
-        const checkboxes = await adminPage.locator('.icon-uncheckbox')
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
         await checkboxes.first().click();
-        await adminPage.getByRole("button", { name: "Select Action " }).click();
-        await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
         await adminPage.getByRole("link", { name: "Overdue" }).click();
-        await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
         await expect(adminPage.locator("#app")).toContainText("Overdue");
-        await expect(adminPage.getByText('Selected invoice updated successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully")
+        ).toBeVisible();
     });
 });

@@ -80,6 +80,7 @@ export class WebLocators {
     readonly bookingLocationInput: Locator;
     readonly bookingAvailableFromInput: Locator;
     readonly bookingAvailableToInput: Locator;
+    readonly rmaSelection: Locator;
 
     /**
      * Product Checkout
@@ -270,6 +271,8 @@ export class WebLocators {
             name: "Save",
             exact: true,
         });
+        this.rmaSelection = page
+            .locator('select[name="rma_rule_id"]');
         this.editInventoriesOption = page.getByText("Edit Inventories");
         this.inventoryInput = page.locator('input[name="inventories\\[1\\]"]');
         this.inventoryUpdatedText = page.getByText("10 Qty").first();
