@@ -2,6 +2,13 @@ import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
 import { generatePhoneNumber, generateEmail } from "../utils/faker";
 import { downloadableOrder, generateOrder } from "../utils/order";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const imagePath = path.resolve(__dirname, "../data/images/images.jpeg");
 
 function generateRandomDate() {
     const today = new Date();
@@ -49,11 +56,75 @@ test("should edit a profile", async ({ page }) => {
     await page
         .getByRole("textbox", { name: "Date of Birth" })
         .fill(generateRandomDate());
+    /**
+     * Upload profile image
+     */
+    const profileImageInput = page.getByLabel("Add Image/Video");
+    await profileImageInput.setInputFiles(imagePath);
     await page.getByRole("button", { name: "Save" }).click();
 
     await expect(
         page.getByText("Profile updated successfully").first()
     ).toBeVisible();
+});
+
+test("Should display profile photo after saving profile again without any changes", async ({
+    page,
+}) => {
+    const credentials = await loginAsCustomer(page);
+
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Profile" }).click();
+    await page.getByRole("link", { name: "Edit" }).click();
+    await page.getByRole("textbox", { name: "First Name" }).click();
+    await page
+        .getByRole("textbox", { name: "First Name" })
+        .fill(credentials.firstName);
+    await page.getByRole("textbox", { name: "Last Name" }).click();
+    await page
+        .getByRole("textbox", { name: "Last Name" })
+        .fill(credentials.lastName);
+    await page.getByPlaceholder("Email", { exact: true }).click();
+    await page
+        .getByPlaceholder("Email", { exact: true })
+        .fill(credentials.email);
+    await page.getByPlaceholder("Phone").click();
+    await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
+    await page.getByLabel("shop::app.customers.account.").selectOption("Male");
+    await page.getByRole("textbox", { name: "Date of Birth" }).click();
+    await page
+        .getByRole("textbox", { name: "Date of Birth" })
+        .fill(generateRandomDate());
+    /**
+     * Upload profile image
+     */
+    const profileImageInput = page.getByLabel("Add Image/Video");
+    await profileImageInput.setInputFiles(imagePath);
+
+    /**
+     * Save profile
+     */
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(
+        page.getByText("Profile updated successfully").first()
+    ).toBeVisible();
+
+    /**
+     * Again save profile without any changes
+     */
+    await page.getByRole("link", { name: "Edit" }).click();
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(
+        page.getByText("Profile updated successfully").first()
+    ).toBeVisible();
+
+    /**
+     * Verify profile photo should be visible
+     */
+    await page.getByRole("link", { name: "Edit" }).click();
+    const uploadedImage = page.locator('img[alt="Uploaded Image"]');
+
+    await expect(uploadedImage).toBeVisible();
 });
 
 test("should add an address", async ({ page }) => {
