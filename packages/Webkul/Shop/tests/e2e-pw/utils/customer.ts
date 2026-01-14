@@ -47,7 +47,11 @@ export async function register(page) {
         .click();
     await page.getByRole("button", { name: "Register" }).click();
 
-    await expect(page.getByText(/Account created successfully/i)).toBeVisible();
+    await expect(
+        page.getByText(
+            /Account created successfully(\.|, an e-mail has been sent for verification\.)?/i
+        )
+    ).toBeVisible();
 
     return credentials;
 }
