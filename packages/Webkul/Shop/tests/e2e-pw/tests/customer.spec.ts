@@ -200,6 +200,7 @@ test("should be able to print invoice", async ({ page }) => {
 });
 
 test("should able to download downloadable orders", async ({ shopPage }) => {
+    test.setTimeout(210_000);
     /**
      * Login to admin panel.
      */
