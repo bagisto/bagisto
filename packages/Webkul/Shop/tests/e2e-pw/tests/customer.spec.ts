@@ -1,7 +1,19 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
-import { generatePhoneNumber, generateEmail } from "../utils/faker";
+import {
+    generateFirstName,
+    generateLastName,
+    generatePhoneNumber,
+    generateEmail,
+} from "../utils/faker";
 import { downloadableOrder, generateOrder } from "../utils/order";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const imagePath = path.resolve(__dirname, "../data/images/images.jpeg");
 
 function generateRandomDate() {
     const today = new Date();
@@ -23,6 +35,111 @@ function generateRandomDate() {
 
     return `${year}-${month}-${day}`;
 }
+
+test("should display correct message when email verfication is off", async ({
+    page,
+}) => {
+    /**
+     * Customer registration
+     */
+    const credentials = {
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        password: "admin123",
+    };
+
+    await page.goto("");
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Sign Up" }).click();
+    await page.getByPlaceholder("First Name").fill(credentials.firstName);
+    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
+    await page.getByPlaceholder("email@example.com").fill(credentials.email);
+    await page
+        .getByPlaceholder("Password", { exact: true })
+        .fill(credentials.password);
+    await page.getByPlaceholder("Confirm Password").fill(credentials.password);
+
+    const agreementLocator = page.locator("#agreement").nth(1);
+
+    const isVisible = await agreementLocator.isVisible();
+
+    if (isVisible) {
+        await page.getByText("I agree with this statement.").click();
+    }
+
+    await page
+        .locator("#main form div")
+        .filter({ hasText: "Subscribe to newsletter" })
+        .locator("label")
+        .first()
+        .click();
+    await page.getByRole("button", { name: "Register" }).click();
+
+    await expect(
+        page.getByText("Account created successfully.").first()
+    ).toBeVisible();
+});
+
+test("should display correct message when email verfication is on", async ({
+    page,
+}) => {
+    await page.goto("admin/configuration/customer/settings");
+    await page
+        .getByRole("textbox", { name: "Email Address" })
+        .fill("admin@example.com");
+    await page.getByRole("textbox", { name: "Password" }).fill("admin123");
+    await page.getByRole("button", { name: "Sign In" }).click();
+    await page.waitForLoadState("networkidle");
+    await page
+        .locator("div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5")
+        .click();
+    await page.getByRole("button", { name: "Save Configuration" }).click();
+    await expect(
+        page.locator("#app").getByText("Configuration saved successfully")
+    ).toBeVisible();
+
+    /**
+     * Customer registration
+     */
+    const credentials = {
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        password: "admin123",
+    };
+
+    await page.goto("");
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Sign Up" }).click();
+    await page.getByPlaceholder("First Name").fill(credentials.firstName);
+    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
+    await page.getByPlaceholder("email@example.com").fill(credentials.email);
+    await page
+        .getByPlaceholder("Password", { exact: true })
+        .fill(credentials.password);
+    await page.getByPlaceholder("Confirm Password").fill(credentials.password);
+
+    const agreementLocator = page.locator("#agreement").nth(1);
+
+    const isVisible = await agreementLocator.isVisible();
+
+    if (isVisible) {
+        await page.getByText("I agree with this statement.").click();
+    }
+
+    await page
+        .locator("#main form div")
+        .filter({ hasText: "Subscribe to newsletter" })
+        .locator("label")
+        .first()
+        .click();
+    await page.getByRole("button", { name: "Register" }).click();
+
+    await expect(
+        page.getByText("Account created successfully, an e-mail has been sent for verification.").first()
+    ).toBeVisible();
+});
 
 test("should edit a profile", async ({ page }) => {
     const credentials = await loginAsCustomer(page);
@@ -49,11 +166,75 @@ test("should edit a profile", async ({ page }) => {
     await page
         .getByRole("textbox", { name: "Date of Birth" })
         .fill(generateRandomDate());
+    /**
+     * Upload profile image
+     */
+    const profileImageInput = page.getByLabel("Add Image/Video");
+    await profileImageInput.setInputFiles(imagePath);
     await page.getByRole("button", { name: "Save" }).click();
 
     await expect(
         page.getByText("Profile updated successfully").first()
     ).toBeVisible();
+});
+
+test("Should display profile photo after saving profile again without any changes", async ({
+    page,
+}) => {
+    const credentials = await loginAsCustomer(page);
+
+    await page.getByLabel("Profile").click();
+    await page.getByRole("link", { name: "Profile" }).click();
+    await page.getByRole("link", { name: "Edit" }).click();
+    await page.getByRole("textbox", { name: "First Name" }).click();
+    await page
+        .getByRole("textbox", { name: "First Name" })
+        .fill(credentials.firstName);
+    await page.getByRole("textbox", { name: "Last Name" }).click();
+    await page
+        .getByRole("textbox", { name: "Last Name" })
+        .fill(credentials.lastName);
+    await page.getByPlaceholder("Email", { exact: true }).click();
+    await page
+        .getByPlaceholder("Email", { exact: true })
+        .fill(credentials.email);
+    await page.getByPlaceholder("Phone").click();
+    await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
+    await page.getByLabel("shop::app.customers.account.").selectOption("Male");
+    await page.getByRole("textbox", { name: "Date of Birth" }).click();
+    await page
+        .getByRole("textbox", { name: "Date of Birth" })
+        .fill(generateRandomDate());
+    /**
+     * Upload profile image
+     */
+    const profileImageInput = page.getByLabel("Add Image/Video");
+    await profileImageInput.setInputFiles(imagePath);
+
+    /**
+     * Save profile
+     */
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(
+        page.getByText("Profile updated successfully").first()
+    ).toBeVisible();
+
+    /**
+     * Again save profile without any changes
+     */
+    await page.getByRole("link", { name: "Edit" }).click();
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(
+        page.getByText("Profile updated successfully").first()
+    ).toBeVisible();
+
+    /**
+     * Verify profile photo should be visible
+     */
+    await page.getByRole("link", { name: "Edit" }).click();
+    const uploadedImage = page.locator('img[alt="Uploaded Image"]');
+
+    await expect(uploadedImage).toBeVisible();
 });
 
 test("should add an address", async ({ page }) => {
