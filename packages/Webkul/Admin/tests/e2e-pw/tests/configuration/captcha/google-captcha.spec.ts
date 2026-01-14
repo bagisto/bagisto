@@ -203,6 +203,7 @@ test.describe("should verfiy google captcha verfication", () => {
         /**
          * Verify captcha
          */
+        await adminPage.waitForTimeout(3000);
         await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
         /**
          * off the captcha
