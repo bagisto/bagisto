@@ -199,11 +199,10 @@ test.describe("should verfiy google captcha verfication", () => {
             .locator('(//a[contains(., " Continue to Checkout ")])[1]')
             .click();
         await adminPage.getByRole("button", { name: "Sign In" }).click();
-        
+
         /**
          * Verify captcha
          */
-        await adminPage.goto("contact-us");
         await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
         /**
          * off the captcha
