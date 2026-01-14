@@ -31,12 +31,12 @@ export async function register(page) {
     await page.getByPlaceholder("Confirm Password").click();
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
 
-    const agreementLocator = page.locator('#agreement').nth(1);
-    
+    const agreementLocator = page.locator("#agreement").nth(1);
+
     const isVisible = await agreementLocator.isVisible();
 
     if (isVisible) {
-        await page.getByText('I agree with this statement.').click();
+        await page.getByText("I agree with this statement.").click();
     }
 
     await page
@@ -47,13 +47,7 @@ export async function register(page) {
         .click();
     await page.getByRole("button", { name: "Register" }).click();
 
-    await expect(
-        page
-            .getByText(
-                "Account created successfully."
-            )
-            .first()
-    ).toBeVisible();
+    await expect(page.getByText(/Account created successfully/i)).toBeVisible();
 
     return credentials;
 }
@@ -67,10 +61,11 @@ export async function loginAsCustomer(page) {
     await page.getByPlaceholder("email@example.com").click();
     await page.getByPlaceholder("email@example.com").fill(credentials.email);
     await page.getByPlaceholder("email@example.com").press("Tab");
-    await page.getByPlaceholder("Password").fill(credentials.password);    const agreementLocator = page.locator('#agreement').nth(1);
+    await page.getByPlaceholder("Password").fill(credentials.password);
+    const agreementLocator = page.locator("#agreement").nth(1);
     const isVisible = await agreementLocator.isVisible();
     if (isVisible) {
-        await page.getByText('I agree with this statement.').click();
+        await page.getByText("I agree with this statement.").click();
     }
     await page.getByRole("button", { name: "Sign In" }).click();
 
