@@ -22,6 +22,7 @@ export async function generateOrder(page) {
      * Go to the shop to buy a product.
      */
     await page.goto("");
+    await page.waitForLoadState("networkidle");
     await page
         .locator("#main div")
         .filter({ hasText: "New Products View All New" })
@@ -36,7 +37,7 @@ export async function generateOrder(page) {
         .first()
         .click();
     await expect(page.locator("#app")).toContainText("Item Added Successfully");
-    await page.locator(".icon-cancel").first().click();
+    await page.waitForTimeout(2000);
     await page.getByRole("button", { name: "Shopping Cart" }).click();
     await page.getByRole("link", { name: "Continue to Checkout" }).click();
     await page
