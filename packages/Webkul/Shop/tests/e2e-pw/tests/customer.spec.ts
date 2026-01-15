@@ -119,6 +119,7 @@ test("should display correct message when email verfication is on", async ({
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign Up" }).click();
+    await page.waitForLoadState("networkidle");
     await page.getByPlaceholder("First Name").fill(credentials.firstName);
     await page.getByPlaceholder("Last Name").fill(credentials.lastName);
     await page.getByPlaceholder("email@example.com").fill(credentials.email);
@@ -141,7 +142,7 @@ test("should display correct message when email verfication is on", async ({
         .locator("label")
         .first()
         .click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     await page.getByRole("button", { name: "Register" }).click();
 
     await expect(
