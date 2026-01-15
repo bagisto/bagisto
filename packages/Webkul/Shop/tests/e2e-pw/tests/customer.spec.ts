@@ -526,4 +526,4 @@ test("should edit a profile", async ({ page }) => {
 //     await expect(
 //         page.getByText("Customer deleted successfully").first()
 //     ).toBeVisible();
-});
+// });
