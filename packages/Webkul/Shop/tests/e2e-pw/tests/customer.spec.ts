@@ -52,6 +52,7 @@ test("should display correct message when email verfication is off", async ({
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign Up" }).click();
+    await page.waitForLoadState("networkidle");
     await page.getByPlaceholder("First Name").fill(credentials.firstName);
     await page.getByPlaceholder("Last Name").fill(credentials.lastName);
     await page.getByPlaceholder("email@example.com").fill(credentials.email);
@@ -74,6 +75,7 @@ test("should display correct message when email verfication is off", async ({
         .locator("label")
         .first()
         .click();
+    await page.waitForTimeout(1000);
     await page.getByRole("button", { name: "Register" }).click();
 
     await expect(
@@ -89,11 +91,16 @@ test("should display correct message when email verfication is on", async ({
         .getByRole("textbox", { name: "Email Address" })
         .fill("admin@example.com");
     await page.getByRole("textbox", { name: "Password" }).fill("admin123");
+    await page.waitForTimeout(1000);
     await page.getByRole("button", { name: "Sign In" }).click();
     await page.waitForLoadState("networkidle");
-    await page
-        .locator("div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5")
-        .click();
+    const toggle = page.locator(
+        "div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5"
+    );
+
+    if (!(await toggle.isChecked())) {
+        await toggle.click();
+    }
     await page.getByRole("button", { name: "Save Configuration" }).click();
     await expect(
         page.locator("#app").getByText("Configuration saved successfully")
@@ -134,10 +141,28 @@ test("should display correct message when email verfication is on", async ({
         .locator("label")
         .first()
         .click();
+    await page.waitForTimeout(1000);
     await page.getByRole("button", { name: "Register" }).click();
 
     await expect(
-        page.getByText("Account created successfully, an e-mail has been sent for verification.").first()
+        page
+            .getByText(
+                "Account created successfully, an e-mail has been sent for verification."
+            )
+            .first()
+    ).toBeVisible();
+
+    /**
+     * turn off again email verfication for further tests
+     */
+    await page.goto("admin/configuration/customer/settings");
+    await page.waitForLoadState("networkidle");
+    await page
+        .locator("div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5")
+        .click();
+    await page.getByRole("button", { name: "Save Configuration" }).click();
+    await expect(
+        page.locator("#app").getByText("Configuration saved successfully")
     ).toBeVisible();
 });
 
