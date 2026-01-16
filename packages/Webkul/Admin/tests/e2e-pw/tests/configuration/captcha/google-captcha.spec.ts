@@ -181,6 +181,17 @@ test.describe("should verfiy google captcha verfication", () => {
         if (!(await toggle.isChecked())) {
             await toggle.click();
         }
+        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
+        await adminPage
+            .getByRole("textbox", { name: "Secret Key" })
+            .fill("test");
+        await adminPage
+            .getByRole("button", { name: "Save Configuration" })
+            .click();
+        await adminPage
+            .locator("#app")
+            .getByText("Configuration saved successfully")
+            .click();
         await adminPage.goto("");
         await adminPage
             .getByRole("button", { name: "Add To Cart" })
@@ -210,6 +221,7 @@ test.describe("should verfiy google captcha verfication", () => {
          */
         await adminPage.goto("admin/configuration/customer/captcha");
         await toggle.click();
+        await adminPage.waitForTimeout(1000);
         await adminPage
             .getByRole("button", { name: "Save Configuration" })
             .click();
