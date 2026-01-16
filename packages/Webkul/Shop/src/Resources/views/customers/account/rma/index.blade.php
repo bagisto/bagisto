@@ -174,7 +174,11 @@
                                                     <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::SOLVED->value }}">
                                                         <span v-if="record.rma_status_id != {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }}">
                                                             <a @click="cancelStatus(record.id)">
-                                                                <span title="@lang('shop::app.rma.customer-rma-index.cancel')" class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
+                                                                <span 
+                                                                    title="@lang('shop::app.rma.customer-rma-index.cancel')"
+                                                                    class="icon-cancel text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"
+                                                                >
+                                                                </span>
                                                             </a>
                                                         </span>
                                                     </span>
@@ -183,8 +187,12 @@
                                         </span>
 
                                         <!-- Arrow -->
-                                        <a :href=\"'{{ route('shop.customers.account.rma.view', ':id') }}'.replace(':id', record.id)\">
-                                            <span title="@lang('shop::app.rma.customer-rma-index.view')" class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"></span>
+                                        <a :href="'{{ route('shop.customers.account.rma.view', ':id') }}'.replace(':id', record.id)">
+                                            <span
+                                                title="@lang('shop::app.rma.customer-rma-index.view')"
+                                                class="icon-eye text-2xl ltr:ml-1 rtl:mr-1 rounded-md cursor-pointer transition-all hover:bg-gray-200"
+                                            >
+                                            </span>
                                         </a>
                                     </p>
                                 </div>
