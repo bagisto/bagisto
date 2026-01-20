@@ -4,17 +4,11 @@
 
 ## High Impact Changes
 
+- [Laravel 12 Upgrade](#laravel-12-upgrade)
+
 - [Google reCAPTCHA Enterprise Integration](#google-recaptcha-enterprise-integration)
 
 - [PayPal SDK Upgrade](#paypal-sdk-upgrade)
-
-## Medium Impact Changes
-
-- Soon.
-
-## Low Impact Changes
-
-- Soon.
 
 ## Upgrading To v2.4 From v2.3
 
@@ -28,6 +22,68 @@
 #### PHP 8.3 Required
 
 Bagisto v2.4.x now requires PHP 8.3 or greater.
+
+### Laravel 12 Upgrade
+
+**Impact Probability: High**
+
+Bagisto v2.4 has been upgraded to Laravel 12, which introduces stricter type checking and modernized date/time handling.
+
+#### Carbon Type Strictness
+
+Laravel 12 enforces stricter type checking for Carbon date/time operations. If your custom code uses Carbon methods, ensure you're passing the correct parameter types:
+
+**Integer/Float Parameters Required**
+
+Carbon methods like `addDays()`, `subDays()`, etc., now require integer or float values, not strings:
+
+```diff
+- Carbon::now()->addDays('1')
++ Carbon::now()->addDays(1)
+
+- Carbon::now()->subDays('7')
++ Carbon::now()->subDays(7)
+```
+
+**Non-Null Timezones**
+
+Methods that accept timezone parameters no longer accept `null` values. Use a fallback:
+
+```diff
+- $date->setTimezone($channel->timezone)
++ $date->setTimezone($channel->timezone ?: config('app.timezone'))
+```
+
+#### Date Function Modernization
+
+If you're using legacy PHP date functions in your custom code, consider migrating to Carbon for better Laravel 12 compatibility:
+
+```diff
+- strtotime($date)
++ \Carbon\Carbon::parse($date)->timestamp
+
+- date('Y-m-d H:i:s')
++ \Carbon\Carbon::now()->format('Y-m-d H:i:s')
+
+- date('Y-m-d')
++ \Carbon\Carbon::now()->format('Y-m-d')
+
+- date_default_timezone_set($timezone)
++ \Carbon\Carbon::now($timezone) // Isolated to instance
+```
+
+#### PDF Response Headers
+
+Laravel 12 has updated the format for PDF response headers. If you're generating PDFs in your custom code, update the Content-Disposition header:
+
+```diff
+- 'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
++ 'Content-Disposition' => 'attachment; filename='.$fileName,
+```
+
+#### Testing Updates
+
+If you have custom test cases, ensure all test data includes required fields that may have been added in migrations. For example, if new foreign keys have been introduced, make sure your test factories and test data include these fields.
 
 ### Google reCAPTCHA Enterprise Integration
 
