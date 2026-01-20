@@ -1842,46 +1842,6 @@ test.describe("sales management", () => {
 
         await adminPage.getByRole("button", { name: "Submit Comment" }).click();
         await expect(adminPage.locator("#app")).toContainText(
-            "Comment added successfully."
-        );
-    });
-
-    test("should be able to reorder", async ({ adminPage }) => {
-        await adminPage.goto("admin/sales/orders");
-        await adminPage.waitForTimeout(3000);
-        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-        await adminPage.getByRole("link", { name: " Reorder" }).click();
-
-        await expect(adminPage.getByText("Cart Items")).toBeVisible();
-        await adminPage.locator("label.icon-radio-normal").first().click();
-        await adminPage.getByRole("button", { name: "Proceed" }).click();
-        await adminPage.getByText("Free Shipping$0.00Free").click();
-        await adminPage
-            .locator("label")
-            .filter({ hasText: "Cash On Delivery" })
-            .click();
-        await adminPage.getByRole("button", { name: "Place Order" }).click();
-        await expect(adminPage.locator("#app")).toContainText("Pending");
-    });
-
-test.describe("sales management", () => {
-    test("should be able to create orders", async ({ adminPage }) => {
-        await generateOrder(adminPage);
-    });
-
-    test("should be comment on order", async ({ adminPage }) => {
-        await adminPage.goto("admin/sales/orders");
-
-        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-
-        const lorem100 = generateDescription(200);
-        adminPage.fill('textarea[name="comment"]', lorem100);
-        await adminPage
-            .locator('span.icon-uncheckbox.cursor-pointer[role="button"]')
-            .click();
-
-        await adminPage.getByRole("button", { name: "Submit Comment" }).click();
-        await expect(adminPage.locator("#app")).toContainText(
             "Comment added successfully.",
         );
     });
