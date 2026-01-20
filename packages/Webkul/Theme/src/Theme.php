@@ -89,11 +89,17 @@ class Theme
      */
     public function url(string $url)
     {
-        $viteUrl = trim($this->vite['package_assets_directory'], '/').'/'.$url;
+        try {
+            $viteUrl = trim($this->vite['package_assets_directory'], '/').'/'.$url;
 
-        return Vite::useHotFile($this->vite['hot_file'])
-            ->useBuildDirectory($this->vite['build_directory'])
-            ->asset($viteUrl);
+            return Vite::useHotFile($this->vite['hot_file'])
+                ->useBuildDirectory($this->vite['build_directory'])
+                ->asset($viteUrl);
+        } catch (\Exception $e) {
+            report($e);
+
+            abort(404);
+        }
     }
 
     /**
