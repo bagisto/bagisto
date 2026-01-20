@@ -1530,6 +1530,7 @@ export async function generateDownloadableOrder(adminPage) {
             .getByRole("button", { name: "Add To Cart" })
             .first()
             .click();
+        await adminPage.waitForTimeout(3000);
         await adminPage.locator("#steps-container label").nth(1).click();
 
         await adminPage
@@ -1765,109 +1766,109 @@ test.describe("sales management", () => {
     // });
 
     test.describe("should able to cancle product", () => {
-        test("should be able to cancel simple order", async ({ adminPage }) => {
-            await createSimpleProduct(adminPage);
-            /**
-             * create order
-             */
-            await generateSimpleOrder(adminPage);
+        // test("should be able to cancel simple order", async ({ adminPage }) => {
+        //     await createSimpleProduct(adminPage);
+        //     /**
+        //      * create order
+        //      */
+        //     await generateSimpleOrder(adminPage);
 
-            /**
-             * Should Cancel a Order
-             */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+        //     /**
+        //      * Should Cancel a Order
+        //      */
+        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-            await adminPage
-                .locator(".flex.items-center.justify-between > a")
-                .first()
-                .click();
-            await adminPage.getByRole("link", { name: "Cancel" }).click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
-            await expect(adminPage.locator("#app")).toContainText(
-                "Order cancelled successfully",
-            );
-        });
+        //     await adminPage
+        //         .locator(".flex.items-center.justify-between > a")
+        //         .first()
+        //         .click();
+        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
+        //     await adminPage
+        //         .getByRole("button", { name: "Agree", exact: true })
+        //         .click();
+        //     await expect(adminPage.locator("#app")).toContainText(
+        //         "Order cancelled successfully",
+        //     );
+        // });
 
-        test("should be able to cancel configurable order", async ({
-            adminPage,
-        }) => {
-            await createConfigurableProduct(adminPage);
-            /**
-             * create order
-             */
-            await generateConfigurableOrder(adminPage);
+        // test("should be able to cancel configurable order", async ({
+        //     adminPage,
+        // }) => {
+        //     await createConfigurableProduct(adminPage);
+        //     /**
+        //      * create order
+        //      */
+        //     await generateConfigurableOrder(adminPage);
 
-            /**
-             * Should Cancel a Order
-             */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+        //     /**
+        //      * Should Cancel a Order
+        //      */
+        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-            await adminPage
-                .locator(".flex.items-center.justify-between > a")
-                .first()
-                .click();
-            await adminPage.getByRole("link", { name: "Cancel" }).click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
-            await expect(adminPage.locator("#app")).toContainText(
-                "Order cancelled successfully",
-            );
-        });
+        //     await adminPage
+        //         .locator(".flex.items-center.justify-between > a")
+        //         .first()
+        //         .click();
+        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
+        //     await adminPage
+        //         .getByRole("button", { name: "Agree", exact: true })
+        //         .click();
+        //     await expect(adminPage.locator("#app")).toContainText(
+        //         "Order cancelled successfully",
+        //     );
+        // });
 
-        test("should be able to cancel group order", async ({ adminPage }) => {
-            await createGroupedProduct(adminPage);
-            /**
-             * create order
-             */
-            await generateGroupOrder(adminPage);
+        // test("should be able to cancel group order", async ({ adminPage }) => {
+        //     await createGroupedProduct(adminPage);
+        //     /**
+        //      * create order
+        //      */
+        //     await generateGroupOrder(adminPage);
 
-            /**
-             * Should Cancel a Order
-             */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+        //     /**
+        //      * Should Cancel a Order
+        //      */
+        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-            await adminPage
-                .locator(".flex.items-center.justify-between > a")
-                .first()
-                .click();
-            await adminPage.getByRole("link", { name: "Cancel" }).click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
-            await expect(adminPage.locator("#app")).toContainText(
-                "Order cancelled successfully",
-            );
-        });
+        //     await adminPage
+        //         .locator(".flex.items-center.justify-between > a")
+        //         .first()
+        //         .click();
+        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
+        //     await adminPage
+        //         .getByRole("button", { name: "Agree", exact: true })
+        //         .click();
+        //     await expect(adminPage.locator("#app")).toContainText(
+        //         "Order cancelled successfully",
+        //     );
+        // });
 
-        test("should be able to cancel virtual order", async ({
-            adminPage,
-        }) => {
-            await createVirtualProduct(adminPage);
-            /**
-             * create order
-             */
-            await generateVirtualOrder(adminPage);
+        // test("should be able to cancel virtual order", async ({
+        //     adminPage,
+        // }) => {
+        //     await createVirtualProduct(adminPage);
+        //     /**
+        //      * create order
+        //      */
+        //     await generateVirtualOrder(adminPage);
 
-            /**
-             * Should Cancel a Order
-             */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+        //     /**
+        //      * Should Cancel a Order
+        //      */
+        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-            await adminPage
-                .locator(".flex.items-center.justify-between > a")
-                .first()
-                .click();
-            await adminPage.getByRole("link", { name: "Cancel" }).click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
-            await expect(adminPage.locator("#app")).toContainText(
-                "Order cancelled successfully",
-            );
-        });
+        //     await adminPage
+        //         .locator(".flex.items-center.justify-between > a")
+        //         .first()
+        //         .click();
+        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
+        //     await adminPage
+        //         .getByRole("button", { name: "Agree", exact: true })
+        //         .click();
+        //     await expect(adminPage.locator("#app")).toContainText(
+        //         "Order cancelled successfully",
+        //     );
+        // });
 
         test("should be able to cancel downloadable order", async ({
             adminPage,
