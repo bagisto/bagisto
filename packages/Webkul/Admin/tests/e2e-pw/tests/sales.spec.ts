@@ -50,8 +50,11 @@ export async function generateOrder(adminPage) {
         );
         await adminPage
             .getByRole("textbox", { name: "Search by name" })
-            .fill("arct");
+            .fill("omni");
 
+        /**
+         * Use for simple product selection
+         */
         const searchResult = await adminPage
             .waitForSelector(
                 "button.cursor-pointer.text-sm.text-blue-600.transition-all",
@@ -60,57 +63,90 @@ export async function generateOrder(adminPage) {
             .catch(() => null);
 
         if (searchResult) {
-            const cartBtns = await adminPage.$$(
-                ".grid.place-content-start.gap-2.text-right > button.text-blue-600"
-            );
-            const inputQty = await adminPage.$$('input[name="qty"]:visible');
-
-            for (let i = 0; i < cartBtns.length; i++) {
-                const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
-                if (shouldClick) {
-                    const qty = Math.floor(Math.random() * 9) + 2;
-                    await inputQty[i].scrollIntoViewIfNeeded();
-                    await inputQty[i].fill(qty.toString());
-                    await cartBtns[i].click();
-                    break;
-                }
-            }
+            await adminPage
+                .locator("//button[normalize-space()='Add To Cart']")
+                .first()
+                .click();
         }
     }
 
-    const toastSelector =
-        ".flex.items-center.break-all.text-sm > .icon-toast-done";
-    const iconExists = await adminPage
-        .waitForSelector(toastSelector, { timeout: 5000 })
-        .catch(() => null);
+    /**
+     * Use for random product selection in search list
+     */
+    // const cartBtns = await adminPage.$$(
+    //     ".grid.place-content-start.gap-2.text-right > button.text-blue-600"
+    // );
+    // const inputQty = await adminPage.$$('input[name="qty"]:visible');
+    // for (let i = 0; i < cartBtns.length; i++) {
+    //     const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
+    //     if (shouldClick) {
+    //         const qty = Math.floor(Math.random() * 9) + 2;
+    //         await inputQty[i].scrollIntoViewIfNeeded();
+    //         await inputQty[i].fill(qty.toString());
+    //         await cartBtns[i].click();
+    //         break;
+    //     }
+    // }
 
-    if (iconExists) {
-        const icons = await adminPage.$$(
-            ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-        );
-        await icons[0].click();
-    } else {
-        const uncheckedOptions = await adminPage.$$(
-            'input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label'
-        );
-        for (let checkbox of uncheckedOptions) {
-            await checkbox.click();
-        }
+    /**
+     * for bundle product selection
+     */
 
-        await adminPage.click(
-            ".flex.items-center.justify-between > button.primary-button:visible"
-        );
+    // const searchResult = await adminPage
+    //     .waitForSelector(
+    //         "button.cursor-pointer.text-sm.text-blue-600.transition-all",
+    //         { timeout: 5000 }
+    //     )
+    //     .catch(() => null);
+    // if (searchResult) {
+    //     const cartBtns = await adminPage.$$(
+    //         ".grid.place-content-start.gap-2.text-right > button.text-blue-600"
+    //     );
+    //     const inputQty = await adminPage.$$('input[name="qty"]:visible');
+    //     for (let i = 0; i < cartBtns.length; i++) {
+    //         const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
+    //         if (shouldClick) {
+    //             const qty = Math.floor(Math.random() * 9) + 2;
+    //             await inputQty[i].scrollIntoViewIfNeeded();
+    //             await inputQty[i].fill(qty.toString());
+    //             await cartBtns[i].click();
+    //             break;
+    //         }
+    //     }
+    // }
+    // const toastSelector =
+    //     ".flex.items-center.break-all.text-sm > .icon-toast-done";
+    // const iconExists = await adminPage
+    //     .waitForSelector(toastSelector, { timeout: 5000 })
+    //     .catch(() => null);
 
-        const iconAfterRetry = await adminPage
-            .waitForSelector(toastSelector, { timeout: 5000 })
-            .catch(() => null);
-        if (iconAfterRetry) {
-            const icons = await adminPage.$$(
-                ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-            );
-            await icons[0].click();
-        }
-    }
+    // if (iconExists) {
+    //     const icons = await adminPage.$$(
+    //         ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
+    //     );
+    //     await icons[0].click();
+    // } else {
+    //     const uncheckedOptions = await adminPage.$$(
+    //         'input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label'
+    //     );
+    //     for (let checkbox of uncheckedOptions) {
+    //         await checkbox.click();
+    //     }
+
+    //     await adminPage.click(
+    //         ".flex.items-center.justify-between > button.primary-button:visible"
+    //     );
+
+    //     const iconAfterRetry = await adminPage
+    //         .waitForSelector(toastSelector, { timeout: 5000 })
+    //         .catch(() => null);
+    //     if (iconAfterRetry) {
+    //         const icons = await adminPage.$$(
+    //             ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
+    //         );
+    //         await icons[0].click();
+    //     }
+    // }
 
     /**
      * Billing address selection or creation
@@ -431,13 +467,15 @@ test.describe("sales management", () => {
          * create order
          */
         await generateOrder(adminPage);
-        await adminPage.waitForTimeout(3000);
 
         /**
          * Should Cancel a Order
          */
-        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-        await adminPage.locator(".icon-cancel").click();
+        await adminPage
+            .locator('a[href*="/admin/sales/orders/view/"]')
+            .first()
+            .click();
+        await adminPage.getByRole("link", { name: "Cancel" }).click();
         await adminPage
             .getByRole("button", { name: "Agree", exact: true })
             .click();
@@ -504,34 +542,45 @@ test.describe("sales management", () => {
          */
         await adminPage.goto("admin/sales/invoices");
 
-        const checkboxes = await adminPage.locator('.icon-uncheckbox')
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
         await checkboxes.first().click();
-        await adminPage.getByRole("button", { name: "Select Action " }).click();
-        await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
         await adminPage.getByRole("link", { name: "Paid" }).click();
-        await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
         await expect(adminPage.locator("#app")).toContainText("Paid");
-        await expect(adminPage.getByText('Selected invoice updated successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully")
+        ).toBeVisible();
     });
 
- test("support mass status Change to overdue for Invoices", async ({
+    test("support mass status Change to overdue for Invoices", async ({
         adminPage,
     }) => {
-
         /**
          * Go to invoice page
          */
         await adminPage.goto("admin/sales/invoices");
 
-        const checkboxes = await adminPage.locator('.icon-uncheckbox')
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
         await checkboxes.first().click();
-        await adminPage.getByRole("button", { name: "Select Action " }).click();
-        await adminPage.getByRole('link', { name: 'Update Status ' }).hover();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
         await adminPage.getByRole("link", { name: "Overdue" }).click();
-        await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
         await expect(adminPage.locator("#app")).toContainText("Overdue");
-        await expect(adminPage.getByText('Selected invoice updated successfully')).toBeVisible();
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully")
+        ).toBeVisible();
     });
 });
