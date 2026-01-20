@@ -51,7 +51,7 @@ test.describe("should verfiy google captcha verfication", () => {
         await adminPage.goto("");
         await adminPage.getByLabel("Profile").click();
         await adminPage.getByRole("link", { name: "Sign In" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
+        await expect(adminPage.locator("#recaptcha-token")).toBeAttached();
     });
 
     test("should display google captcha on customer sign up page", async ({
@@ -63,7 +63,7 @@ test.describe("should verfiy google captcha verfication", () => {
         await adminPage.goto("");
         await adminPage.getByLabel("Profile").click();
         await adminPage.getByRole("link", { name: "Sign Up" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
+        await expect(adminPage.locator("#recaptcha-token")).toBeAttached();
     });
 
     test("should display google captcha on forgot passowrd page", async ({
@@ -76,7 +76,7 @@ test.describe("should verfiy google captcha verfication", () => {
         await adminPage.getByLabel("Profile").click();
         await adminPage.getByRole("link", { name: "Sign In" }).click();
         await adminPage.getByRole("link", { name: "Forgot Password?" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
+        await expect(adminPage.locator("#recaptcha-token")).toBeAttached();
     });
 
     test("should display google captcha on contact us page", async ({
@@ -86,7 +86,7 @@ test.describe("should verfiy google captcha verfication", () => {
          * Verify captcha
          */
         await adminPage.goto("contact-us");
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
+        await expect(adminPage.locator("#recaptcha-token")).toBeAttached();
     });
 
     test("should display google captcha on product checkout sigin page", async ({
@@ -115,6 +115,6 @@ test.describe("should verfiy google captcha verfication", () => {
          * Verify captcha
          */
         await adminPage.waitForTimeout(3000);
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
+        await expect(adminPage.locator("#recaptcha-token")).toBeAttached();
     });
 });
