@@ -1775,7 +1775,8 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.goto("admin/sales/orders");
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
+
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
                 .first()
@@ -1801,7 +1802,8 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.goto("admin/sales/orders");
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
+
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
                 .first()
@@ -1825,7 +1827,8 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.goto("admin/sales/orders");
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
+
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
                 .first()
@@ -1851,7 +1854,8 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.goto("admin/sales/orders");
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
+
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
                 .first()
@@ -1877,7 +1881,8 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.goto("admin/sales/orders");
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
+
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
                 .first()
