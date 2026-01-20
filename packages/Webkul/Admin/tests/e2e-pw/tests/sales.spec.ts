@@ -11,7 +11,6 @@ import {
     generateSKU,
     generateLocation,
     generateRandomDateTime,
-    generateHostname,
 } from "../utils/faker";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -1576,299 +1575,299 @@ export async function generateDownloadableOrder(adminPage) {
 }
 
 test.describe("sales management", () => {
-    // test("should be able to create orders", async ({ adminPage }) => {
-    //     await generateSimpleOrder(adminPage);
-    // });
+    test("should be able to create orders", async ({ adminPage }) => {
+        await generateSimpleOrder(adminPage);
+    });
 
-    // test("should be comment on order", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/orders");
+    test("should be comment on order", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/orders");
 
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
 
-    //     const lorem100 = generateDescription(200);
-    //     adminPage.fill('textarea[name="comment"]', lorem100);
-    //     await adminPage
-    //         .locator('span.icon-uncheckbox.cursor-pointer[role="button"]')
-    //         .click();
+        const lorem100 = generateDescription(200);
+        adminPage.fill('textarea[name="comment"]', lorem100);
+        await adminPage
+            .locator('span.icon-uncheckbox.cursor-pointer[role="button"]')
+            .click();
 
-    //     await adminPage.getByRole("button", { name: "Submit Comment" }).click();
-    //     await expect(adminPage.locator("#app")).toContainText(
-    //         "Comment added successfully.",
-    //     );
-    // });
+        await adminPage.getByRole("button", { name: "Submit Comment" }).click();
+        await expect(adminPage.locator("#app")).toContainText(
+            "Comment added successfully.",
+        );
+    });
 
-    // test("should be able to reorder", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/orders");
-    //     await adminPage.waitForTimeout(3000);
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     await adminPage.getByRole("link", { name: " Reorder" }).click();
+    test("should be able to reorder", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.waitForTimeout(3000);
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage.getByRole("link", { name: " Reorder" }).click();
 
-    //     await expect(adminPage.getByText("Cart Items")).toBeVisible();
-    //     await adminPage.locator("label.icon-radio-normal").first().click();
-    //     await adminPage.getByRole("button", { name: "Proceed" }).click();
-    //     await adminPage.getByText("Free Shipping$0.00Free").click();
-    //     await adminPage
-    //         .locator("label")
-    //         .filter({ hasText: "Cash On Delivery" })
-    //         .click();
-    //     await adminPage.getByRole("button", { name: "Place Order" }).click();
-    //     await expect(adminPage.locator("#app")).toContainText("Pending");
-    // });
+        await expect(adminPage.getByText("Cart Items")).toBeVisible();
+        await adminPage.locator("label.icon-radio-normal").first().click();
+        await adminPage.getByRole("button", { name: "Proceed" }).click();
+        await adminPage.getByText("Free Shipping$0.00Free").click();
+        await adminPage
+            .locator("label")
+            .filter({ hasText: "Cash On Delivery" })
+            .click();
+        await adminPage.getByRole("button", { name: "Place Order" }).click();
+        await expect(adminPage.locator("#app")).toContainText("Pending");
+    });
 
-    // test("should be able to create invoice", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/orders");
+    test("should be able to create invoice", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/orders");
 
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     await adminPage
-    //         .waitForSelector(
-    //             "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
-    //         )
-    //         .catch(() => null);
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage
+            .waitForSelector(
+                "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
+            )
+            .catch(() => null);
 
-    //     await adminPage.click(
-    //         "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
-    //     );
+        await adminPage.click(
+            "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
+        );
 
-    //     await adminPage.click('button[type="submit"].primary-button:visible');
-    //     await expect(adminPage.locator("#app")).toContainText(
-    //         "Invoice created successfully",
-    //     );
-    // });
+        await adminPage.click('button[type="submit"].primary-button:visible');
+        await expect(adminPage.locator("#app")).toContainText(
+            "Invoice created successfully",
+        );
+    });
 
-    // test("should be create shipment", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/orders");
+    test("should be create shipment", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/orders");
 
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     const exists = await adminPage
-    //         .waitForSelector(
-    //             "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
-    //             { timeout: 1000 },
-    //         )
-    //         .catch(() => null);
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        const exists = await adminPage
+            .waitForSelector(
+                "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
+                { timeout: 1000 },
+            )
+            .catch(() => null);
 
-    //     await adminPage.click(
-    //         "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
-    //     );
+        await adminPage.click(
+            "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
+        );
 
-    //     await adminPage.fill(
-    //         'input[name="shipment[carrier_title]"]',
-    //         generateName(),
-    //     );
-    //     await adminPage.fill(
-    //         'input[name="shipment[track_number]"]',
-    //         generateRandomNumericString(),
-    //     );
+        await adminPage.fill(
+            'input[name="shipment[carrier_title]"]',
+            generateName(),
+        );
+        await adminPage.fill(
+            'input[name="shipment[track_number]"]',
+            generateRandomNumericString(),
+        );
 
-    //     await adminPage
-    //         .locator('[id="shipment\\[source\\]"]')
-    //         .selectOption("1");
+        await adminPage
+            .locator('[id="shipment\\[source\\]"]')
+            .selectOption("1");
 
-    //     await adminPage.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-    //     await expect(adminPage.locator("#app")).toContainText(
-    //         "Shipment created successfully",
-    //     );
-    // });
+        await expect(adminPage.locator("#app")).toContainText(
+            "Shipment created successfully",
+        );
+    });
 
-    // test("should be able to create refund", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/orders");
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     await adminPage
-    //         .waitForSelector(
-    //             "div.transparent-button.px-1 > .icon-cancel.text-2xl:visible",
-    //             { timeout: 1000 },
-    //         )
-    //         .catch(() => null);
+    test("should be able to create refund", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage
+            .waitForSelector(
+                "div.transparent-button.px-1 > .icon-cancel.text-2xl:visible",
+                { timeout: 1000 },
+            )
+            .catch(() => null);
 
-    //     await adminPage
-    //         .locator("div.transparent-button.px-1 > .icon-cancel.text-2xl")
-    //         .click();
-    //     await adminPage
-    //         .waitForSelector(
-    //             'input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible',
-    //             { timeout: 1000 },
-    //         )
-    //         .catch(() => null);
+        await adminPage
+            .locator("div.transparent-button.px-1 > .icon-cancel.text-2xl")
+            .click();
+        await adminPage
+            .waitForSelector(
+                'input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible',
+                { timeout: 1000 },
+            )
+            .catch(() => null);
 
-    //     const itemQty = await adminPage.$$(
-    //         'input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible',
-    //     );
-    //     let i = 1;
-    //     for (let element of itemQty) {
-    //         await element.scrollIntoViewIfNeeded();
+        const itemQty = await adminPage.$$(
+            'input[type="text"].w-full.rounded-md.border.px-3.text-sm.text-gray-600.transition-all:visible',
+        );
+        let i = 1;
+        for (let element of itemQty) {
+            await element.scrollIntoViewIfNeeded();
 
-    //         if (i > itemQty.length - 2) {
-    //             let rand = Math.floor(Math.random() * 2000);
-    //             await element.fill(rand.toString());
-    //         }
+            if (i > itemQty.length - 2) {
+                let rand = Math.floor(Math.random() * 2000);
+                await element.fill(rand.toString());
+            }
 
-    //         if (i > itemQty.length - 3) {
-    //             continue;
-    //         }
+            if (i > itemQty.length - 3) {
+                continue;
+            }
 
-    //         const currentValue = await element.inputValue();
+            const currentValue = await element.inputValue();
 
-    //         const maxQty = parseInt(currentValue, 10);
-    //         const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
+            const maxQty = parseInt(currentValue, 10);
+            const qty = Math.floor(Math.random() * (maxQty - 1)) + 1;
 
-    //         await element.fill(qty.toString());
+            await element.fill(qty.toString());
 
-    //         i++;
-    //     }
+            i++;
+        }
 
-    //     await adminPage.click('button[type="submit"].primary-button:visible');
+        await adminPage.click('button[type="submit"].primary-button:visible');
 
-    //     await expect(
-    //         adminPage.locator("p", { hasText: "Refund created successfully" }),
-    //     ).toBeVisible();
-    // });
+        await expect(
+            adminPage.locator("p", { hasText: "Refund created successfully" }),
+        ).toBeVisible();
+    });
 
-    // test("should be create mail invoice", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/invoices");
+    test("should be create mail invoice", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/invoices");
 
-    //     await adminPage.waitForSelector(
-    //         ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
-    //     );
-    //     await adminPage
-    //         .locator(
-    //             ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
-    //         )
-    //         .first()
-    //         .click();
+        await adminPage.waitForSelector(
+            ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+        );
+        await adminPage
+            .locator(
+                ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+            )
+            .first()
+            .click();
 
-    //     await adminPage
-    //         .getByRole("button", { name: " Send Duplicate Invoice" })
-    //         .click();
-    //     await adminPage
-    //         .getByRole("button", { name: "Send", exact: true })
-    //         .click();
-    //     await expect(adminPage.locator("#app")).toContainText(
-    //         "Invoice sent successfully",
-    //     );
-    // });
+        await adminPage
+            .getByRole("button", { name: " Send Duplicate Invoice" })
+            .click();
+        await adminPage
+            .getByRole("button", { name: "Send", exact: true })
+            .click();
+        await expect(adminPage.locator("#app")).toContainText(
+            "Invoice sent successfully",
+        );
+    });
 
-    // test("should be able to print invoice", async ({ adminPage }) => {
-    //     await adminPage.goto("admin/sales/invoices");
+    test("should be able to print invoice", async ({ adminPage }) => {
+        await adminPage.goto("admin/sales/invoices");
 
-    //     await adminPage.waitForSelector(
-    //         ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
-    //     );
-    //     await adminPage
-    //         .locator(
-    //             ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
-    //         )
-    //         .first()
-    //         .click();
+        await adminPage.waitForSelector(
+            ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+        );
+        await adminPage
+            .locator(
+                ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+            )
+            .first()
+            .click();
 
-    //     const downloadPromise = adminPage.waitForEvent("download");
-    //     await adminPage.getByRole("link", { name: " Print" }).click();
-    //     const download = await downloadPromise;
-    // });
+        const downloadPromise = adminPage.waitForEvent("download");
+        await adminPage.getByRole("link", { name: " Print" }).click();
+        const download = await downloadPromise;
+    });
 
-    test.describe("should able to cancle product", () => {
-        // test("should be able to cancel simple order", async ({ adminPage }) => {
-        //     await createSimpleProduct(adminPage);
-        //     /**
-        //      * create order
-        //      */
-        //     await generateSimpleOrder(adminPage);
+    test.describe("should able to cancel product", () => {
+        test("should be able to cancel simple order", async ({ adminPage }) => {
+            await createSimpleProduct(adminPage);
+            /**
+             * create order
+             */
+            await generateSimpleOrder(adminPage);
 
-        //     /**
-        //      * Should Cancel a Order
-        //      */
-        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
+            /**
+             * Should Cancel a Order
+             */
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-        //     await adminPage
-        //         .locator(".flex.items-center.justify-between > a")
-        //         .first()
-        //         .click();
-        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
-        //     await adminPage
-        //         .getByRole("button", { name: "Agree", exact: true })
-        //         .click();
-        //     await expect(adminPage.locator("#app")).toContainText(
-        //         "Order cancelled successfully",
-        //     );
-        // });
+            await adminPage
+                .locator(".flex.items-center.justify-between > a")
+                .first()
+                .click();
+            await adminPage.getByRole("link", { name: "Cancel" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.locator("#app")).toContainText(
+                "Order cancelled successfully",
+            );
+        });
 
-        // test("should be able to cancel configurable order", async ({
-        //     adminPage,
-        // }) => {
-        //     await createConfigurableProduct(adminPage);
-        //     /**
-        //      * create order
-        //      */
-        //     await generateConfigurableOrder(adminPage);
+        test("should be able to cancel configurable order", async ({
+            adminPage,
+        }) => {
+            await createConfigurableProduct(adminPage);
+            /**
+             * create order
+             */
+            await generateConfigurableOrder(adminPage);
 
-        //     /**
-        //      * Should Cancel a Order
-        //      */
-        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
+            /**
+             * Should Cancel a Order
+             */
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-        //     await adminPage
-        //         .locator(".flex.items-center.justify-between > a")
-        //         .first()
-        //         .click();
-        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
-        //     await adminPage
-        //         .getByRole("button", { name: "Agree", exact: true })
-        //         .click();
-        //     await expect(adminPage.locator("#app")).toContainText(
-        //         "Order cancelled successfully",
-        //     );
-        // });
+            await adminPage
+                .locator(".flex.items-center.justify-between > a")
+                .first()
+                .click();
+            await adminPage.getByRole("link", { name: "Cancel" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.locator("#app")).toContainText(
+                "Order cancelled successfully",
+            );
+        });
 
-        // test("should be able to cancel group order", async ({ adminPage }) => {
-        //     await createGroupedProduct(adminPage);
-        //     /**
-        //      * create order
-        //      */
-        //     await generateGroupOrder(adminPage);
+        test("should be able to cancel group order", async ({ adminPage }) => {
+            await createGroupedProduct(adminPage);
+            /**
+             * create order
+             */
+            await generateGroupOrder(adminPage);
 
-        //     /**
-        //      * Should Cancel a Order
-        //      */
-        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
+            /**
+             * Should Cancel a Order
+             */
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-        //     await adminPage
-        //         .locator(".flex.items-center.justify-between > a")
-        //         .first()
-        //         .click();
-        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
-        //     await adminPage
-        //         .getByRole("button", { name: "Agree", exact: true })
-        //         .click();
-        //     await expect(adminPage.locator("#app")).toContainText(
-        //         "Order cancelled successfully",
-        //     );
-        // });
+            await adminPage
+                .locator(".flex.items-center.justify-between > a")
+                .first()
+                .click();
+            await adminPage.getByRole("link", { name: "Cancel" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.locator("#app")).toContainText(
+                "Order cancelled successfully",
+            );
+        });
 
-        // test("should be able to cancel virtual order", async ({
-        //     adminPage,
-        // }) => {
-        //     await createVirtualProduct(adminPage);
-        //     /**
-        //      * create order
-        //      */
-        //     await generateVirtualOrder(adminPage);
+        test("should be able to cancel virtual order", async ({
+            adminPage,
+        }) => {
+            await createVirtualProduct(adminPage);
+            /**
+             * create order
+             */
+            await generateVirtualOrder(adminPage);
 
-        //     /**
-        //      * Should Cancel a Order
-        //      */
-        //     await adminPage.getByRole('link', { name: 'Sales' }).click();
+            /**
+             * Should Cancel a Order
+             */
+            await adminPage.getByRole('link', { name: 'Sales' }).click();
 
-        //     await adminPage
-        //         .locator(".flex.items-center.justify-between > a")
-        //         .first()
-        //         .click();
-        //     await adminPage.getByRole("link", { name: "Cancel" }).click();
-        //     await adminPage
-        //         .getByRole("button", { name: "Agree", exact: true })
-        //         .click();
-        //     await expect(adminPage.locator("#app")).toContainText(
-        //         "Order cancelled successfully",
-        //     );
-        // });
+            await adminPage
+                .locator(".flex.items-center.justify-between > a")
+                .first()
+                .click();
+            await adminPage.getByRole("link", { name: "Cancel" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.locator("#app")).toContainText(
+                "Order cancelled successfully",
+            );
+        });
 
         test("should be able to cancel downloadable order", async ({
             adminPage,
@@ -1898,103 +1897,103 @@ test.describe("sales management", () => {
         });
     });
 
-    // test("should be able to create transaction", async ({ adminPage }) => {
-    //     /**
-    //      * create order
-    //      */
-    //     await generateSimpleOrder(adminPage);
-    //     await adminPage.waitForTimeout(3000);
+    test("should be able to create transaction", async ({ adminPage }) => {
+        /**
+         * create order
+         */
+        await generateSimpleOrder(adminPage);
+        await adminPage.waitForTimeout(3000);
 
-    //     /**
-    //      * Create Transaction
-    //      */
-    //     await adminPage.goto("admin/sales/orders");
-    //     await adminPage.waitForTimeout(3000);
-    //     await adminPage.reload();
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     await adminPage.locator(".transparent-button > .icon-sales").click();
-    //     await adminPage.locator("#can_create_transaction").nth(1).click();
-    //     await adminPage.getByRole("button", { name: "Create Invoice" }).click();
+        /**
+         * Create Transaction
+         */
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.waitForTimeout(3000);
+        await adminPage.reload();
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage.locator(".transparent-button > .icon-sales").click();
+        await adminPage.locator("#can_create_transaction").nth(1).click();
+        await adminPage.getByRole("button", { name: "Create Invoice" }).click();
 
-    //     /**
-    //      * Go to transaction page
-    //      */
-    //     await adminPage.goto("admin/sales/transactions");
-    //     await expect(adminPage.getByText("Paid").first()).toBeVisible();
-    // });
+        /**
+         * Go to transaction page
+         */
+        await adminPage.goto("admin/sales/transactions");
+        await expect(adminPage.getByText("Paid").first()).toBeVisible();
+    });
 
-    // test("support mass status Change  to Paid for Invoices", async ({
-    //     adminPage,
-    // }) => {
-    //     await generateSimpleOrder(adminPage);
-    //     await adminPage.waitForTimeout(5000);
+    test("support mass status Change  to Paid for Invoices", async ({
+        adminPage,
+    }) => {
+        await generateSimpleOrder(adminPage);
+        await adminPage.waitForTimeout(5000);
 
-    //     /**
-    //      * create invoice
-    //      */
-    //     await adminPage.goto("admin/sales/orders");
-    //     await adminPage.reload();
-    //     await adminPage.waitForTimeout(5000);
-    //     await adminPage.locator(".row > div:nth-child(4) > a").first().click();
-    //     await adminPage
-    //         .waitForSelector(
-    //             "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
-    //         )
-    //         .catch(() => null);
+        /**
+         * create invoice
+         */
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.reload();
+        await adminPage.waitForTimeout(5000);
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage
+            .waitForSelector(
+                "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
+            )
+            .catch(() => null);
 
-    //     await adminPage.click(
-    //         "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
-    //     );
+        await adminPage.click(
+            "div.transparent-button.px-1 > .icon-sales.text-2xl:visible",
+        );
 
-    //     await adminPage.click('button[type="submit"].primary-button:visible');
-    //     await expect(adminPage.locator("#app")).toContainText(
-    //         "Invoice created successfully",
-    //     );
+        await adminPage.click('button[type="submit"].primary-button:visible');
+        await expect(adminPage.locator("#app")).toContainText(
+            "Invoice created successfully",
+        );
 
-    //     /**
-    //      * Go to invoice page
-    //      */
-    //     await adminPage.goto("admin/sales/invoices");
+        /**
+         * Go to invoice page
+         */
+        await adminPage.goto("admin/sales/invoices");
 
-    //     const checkboxes = await adminPage.locator(".icon-uncheckbox");
-    //     await checkboxes.first().click();
-    //     await adminPage
-    //         .getByRole("button", { name: "Select Action " })
-    //         .click();
-    //     await adminPage.getByRole("link", { name: "Update Status " }).hover();
-    //     await adminPage.getByRole("link", { name: "Paid" }).click();
-    //     await adminPage
-    //         .getByRole("button", { name: "Agree", exact: true })
-    //         .click();
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
+        await checkboxes.first().click();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
+        await adminPage.getByRole("link", { name: "Paid" }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
-    //     await expect(adminPage.locator("#app")).toContainText("Paid");
-    //     await expect(
-    //         adminPage.getByText("Selected invoice updated successfully"),
-    //     ).toBeVisible();
-    // });
+        await expect(adminPage.locator("#app")).toContainText("Paid");
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully"),
+        ).toBeVisible();
+    });
 
-    // test("support mass status Change to overdue for Invoices", async ({
-    //     adminPage,
-    // }) => {
-    //     /**
-    //      * Go to invoice page
-    //      */
-    //     await adminPage.goto("admin/sales/invoices");
+    test("support mass status Change to overdue for Invoices", async ({
+        adminPage,
+    }) => {
+        /**
+         * Go to invoice page
+         */
+        await adminPage.goto("admin/sales/invoices");
 
-    //     const checkboxes = await adminPage.locator(".icon-uncheckbox");
-    //     await checkboxes.first().click();
-    //     await adminPage
-    //         .getByRole("button", { name: "Select Action " })
-    //         .click();
-    //     await adminPage.getByRole("link", { name: "Update Status " }).hover();
-    //     await adminPage.getByRole("link", { name: "Overdue" }).click();
-    //     await adminPage
-    //         .getByRole("button", { name: "Agree", exact: true })
-    //         .click();
+        const checkboxes = await adminPage.locator(".icon-uncheckbox");
+        await checkboxes.first().click();
+        await adminPage
+            .getByRole("button", { name: "Select Action " })
+            .click();
+        await adminPage.getByRole("link", { name: "Update Status " }).hover();
+        await adminPage.getByRole("link", { name: "Overdue" }).click();
+        await adminPage
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
 
-    //     await expect(adminPage.locator("#app")).toContainText("Overdue");
-    //     await expect(
-    //         adminPage.getByText("Selected invoice updated successfully"),
-    //     ).toBeVisible();
-    // });
+        await expect(adminPage.locator("#app")).toContainText("Overdue");
+        await expect(
+            adminPage.getByText("Selected invoice updated successfully"),
+        ).toBeVisible();
+    });
 });
