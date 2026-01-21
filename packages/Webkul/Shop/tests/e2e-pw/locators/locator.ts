@@ -109,6 +109,32 @@ export class WebLocators {
     readonly CheckoutsuccessPage: Locator;
     readonly searchInput: Locator;
     readonly addCartSuccess: Locator;
+    readonly successInvoice: Locator;
+    readonly Invoice: Locator;
+
+    readonly viewOrder: Locator;
+    readonly createInvoice: Locator;
+        readonly profileButton: Locator;
+    readonly email: Locator;
+    readonly password: Locator;
+    readonly signInButton: Locator;
+    readonly editIcon: Locator;
+    readonly checkBox: Locator;
+    readonly rmaQTY: Locator;
+    readonly resolution: Locator;
+    readonly reason: Locator;
+    readonly orderStatus: Locator;
+    readonly info: Locator;
+    readonly agreement: Locator;
+    readonly submit: Locator;
+    readonly rmaIcon: Locator;
+    readonly reqRMA: Locator;
+    readonly rmaLink: Locator;
+    readonly view: Locator;
+    readonly status: Locator;
+    readonly save: Locator;
+    readonly verify: Locator;
+    readonly successRMA:Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -122,7 +148,7 @@ export class WebLocators {
             .first();
         this.selectProductType = page.locator('select[name="type"]');
         this.selectAttribute = page.locator(
-            'select[name="attribute_family_id"]'
+            'select[name="attribute_family_id"]',
         );
         this.productSku = page.locator('input[name="sku"]');
         this.productName = page.locator("#name");
@@ -137,7 +163,7 @@ export class WebLocators {
 
         this.productInventory = page.locator('input[name^="inventories["]');
         this.clickSaveProduct = page.locator(
-            '//button[contains(.,"Save Product") ]'
+            '//button[contains(.,"Save Product") ]',
         );
         this.addOptionButton = page
             .locator(".secondary-button")
@@ -153,14 +179,14 @@ export class WebLocators {
             .first();
 
         this.addToCartButton = page.locator(
-            "(//button[contains(@class, 'secondary-button')])[2]"
+            "(//button[contains(@class, 'secondary-button')])[2]",
         );
         this.ShoppingCartIcon = page.locator(
-            "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]"
+            "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]",
         );
         this.addCartSuccess = page.getByText("Item Added Successfully");
         this.ContinueButton = page.locator(
-            '(//a[contains(., " Continue to Checkout ")])[1]'
+            '(//a[contains(., " Continue to Checkout ")])[1]',
         );
         this.companyName = page.getByRole("textbox", { name: "Company Name" });
         this.firstName = page.getByRole("textbox", { name: "First Name" });
@@ -191,7 +217,7 @@ export class WebLocators {
             name: "Place Order",
         });
         this.CheckoutsuccessPage = page.locator(
-            "text=Thank you for your order!"
+            "text=Thank you for your order!",
         );
         this.searchInput = page.getByRole("textbox", {
             name: "Search products here",
@@ -225,7 +251,7 @@ export class WebLocators {
         this.variantPriceInput = page.locator('input[name="price"]');
         this.variantWeightInput = page.locator('input[name="weight"]');
         this.variantInventoryInput = page.locator(
-            'input[name="inventories\\[1\\]"]'
+            'input[name="inventories\\[1\\]"]',
         );
         this.variantSkuInput = page.locator('input[name="sku"]').nth(1);
         this.variantSaveButton = page.getByRole("button", {
@@ -271,8 +297,7 @@ export class WebLocators {
             name: "Save",
             exact: true,
         });
-        this.rmaSelection = page
-            .locator('select[name="rma_rule_id"]');
+        this.rmaSelection = page.locator('select[name="rma_rule_id"]');
         this.editInventoriesOption = page.getByText("Edit Inventories");
         this.inventoryInput = page.locator('input[name="inventories\\[1\\]"]');
         this.inventoryUpdatedText = page.getByText("10 Qty").first();
@@ -300,7 +325,7 @@ export class WebLocators {
             .locator(".secondary-button")
             .first();
         this.selectProductsModalTitle = page.locator(
-            'p:has-text("Select Products")'
+            'p:has-text("Select Products")',
         );
         this.searchByNameInput = page.getByRole("textbox", {
             name: "Search by name",
@@ -312,14 +337,47 @@ export class WebLocators {
         this.appContainer = page.locator("#app");
         this.checkProduct = page.locator(".icon-uncheckbox").first();
         this.bookingLocationInput = page.locator(
-            'input[name="booking[location]"]'
+            'input[name="booking[location]"]',
         );
         this.bookingAvailableFromInput = page.locator(
-            'input[name="booking[available_from]"]'
+            'input[name="booking[available_from]"]',
         );
         this.bookingAvailableToInput = page.locator(
-            'input[name="booking[available_to]"]'
+            'input[name="booking[available_to]"]',
         );
+
+        this.viewOrder = page.locator(".row > div:nth-child(4) > a").first();
+        this.Invoice = page.getByText("Invoice", { exact: true });
+        this.createInvoice = page.getByRole("button", {
+            name: "Create Invoice",
+        });
+        this.successInvoice = page
+            .locator("#app")
+            .getByText("Invoice created successfully");
+
+                this.profileButton = page.locator(
+            'span[role="button"][aria-label="Profile"]'
+        );
+        this.email = page.locator('input[name="email"]');
+        this.password = page.locator('input[name="password"]');
+        this.signInButton = page.locator('button:has-text("Sign In")');
+        this.editIcon = page.locator('a.icon-edit');
+        this.checkBox = page.locator('input[name^="isChecked["]');
+        this.rmaQTY = page.locator('input[name^="rma_qty"]');
+        this.resolution = page.locator('select[name^="resolution_type"]');
+        this.reason = page.locator('select[name="rma_reason_id"]');
+        this.orderStatus = page.locator('select[name="package_condition"]');
+        this.info = page.locator('textarea[name="information"]');
+       this.agreement = page.locator('label:has(input#agreement)');
+        this.submit = page.locator('button:has-text("Submit request")');
+        this.rmaIcon = page.locator('span.rma-icon-shop');
+        this.reqRMA = page.locator('text=" New RMA Request "');
+        this.rmaLink = page.locator('text="RMA"');
+        this.view = page.locator('span.icon-view');
+        this.status = page.locator('select[name="rma_status"]');
+        this.save = page.locator('button:has-text("Save")');
+        this.verify = page.locator('span.label-active');
+        this.successRMA= page.getByRole('paragraph').filter({ hasText: 'Request created successfully.' })
     }
 
     /**
