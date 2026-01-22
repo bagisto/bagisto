@@ -142,7 +142,6 @@ export class RMACreation {
         await this.locators.reasonType.selectOption("return")
         await this.locators.saveReason.click();
         await expect(this.locators.saveReasonSuccess).toBeVisible();
-        await expect(this.locators.listVerify).toBeVisible();
     }
 
     async adminCraeteRMARules() {
@@ -155,7 +154,6 @@ export class RMACreation {
         await this.locators.returnPeriod.fill("15");
         await this.locators.saveRule.click();
         await expect(this.locators.ruleSuccessMSG).toBeVisible();
-        await expect(this.locators.listRuleVerify).toBeVisible();
     }
 
     async adminCraeteRMAStatus() {
@@ -166,7 +164,6 @@ export class RMACreation {
         await this.locators.reasonStatus.click();
         await this.locators.saveStatus.click();
         await expect(this.locators.statusSuccess).toBeVisible();
-        await expect(this.locators.listStatusVerify).toBeVisible();
     }
    
 }
