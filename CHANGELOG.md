@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
 
+- #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
+
 ## **v2.3.10 (2nd of January 2026)** - *Release*
 
 - Fixed a security issue in the customer order reorder functionality.
