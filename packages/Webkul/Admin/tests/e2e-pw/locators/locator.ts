@@ -134,12 +134,32 @@ export class WebLocators {
     readonly status: Locator;
     readonly save: Locator;
     readonly verify: Locator;
-    readonly successRMA:Locator;
-    readonly invalidRMAMessage:Locator;
-    readonly rmaAcceptmsg:Locator;
-    readonly rmaDeclined:Locator;
-    readonly acceptStatus:Locator
-    readonly receivedPack:Locator;
+    readonly successRMA: Locator;
+    readonly invalidRMAMessage: Locator;
+    readonly rmaAcceptmsg: Locator;
+    readonly rmaDeclined: Locator;
+    readonly acceptStatus: Locator;
+    readonly receivedPack: Locator;
+    readonly createRMAReason: Locator;
+    readonly reasonTitle: Locator;
+    readonly reasonStatus: Locator;
+    readonly position: Locator;
+    readonly reasonType: Locator;
+    readonly saveReason: Locator;
+    readonly saveReasonSuccess: Locator;
+    readonly listVerify: Locator;
+    readonly rmaRulesCreate: Locator;
+    readonly ruleTitle: Locator;
+    readonly ruleDescription: Locator;
+    readonly returnPeriod: Locator;
+    readonly saveRule: Locator;
+    readonly ruleSuccessMSG: Locator;
+    readonly listRuleVerify: Locator;
+    readonly createRMAStatus: Locator;
+    readonly rmaStatusTitle: Locator;
+    readonly saveStatus: Locator;
+    readonly statusSuccess: Locator;
+    readonly listStatusVerify: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -360,34 +380,61 @@ export class WebLocators {
             .locator("#app")
             .getByText("Invoice created successfully");
 
-                this.profileButton = page.locator(
-            'span[role="button"][aria-label="Profile"]'
+        this.profileButton = page.locator(
+            'span[role="button"][aria-label="Profile"]',
         );
         this.email = page.locator('input[name="email"]');
         this.password = page.locator('input[name="password"]');
         this.signInButton = page.locator('button:has-text("Sign In")');
-        this.editIcon = page.locator('a.icon-edit');
+        this.editIcon = page.locator("a.icon-edit");
         this.checkBox = page.locator('input[name^="isChecked["]');
         this.rmaQTY = page.locator('input[name^="rma_qty"]');
         this.resolution = page.locator('select[name^="resolution_type"]');
         this.reason = page.locator('select[name="rma_reason_id"]');
         this.orderStatus = page.locator('select[name="package_condition"]');
         this.info = page.locator('textarea[name="information"]');
-        this.agreement = page.locator('label:has(input#agreement)');
+        this.agreement = page.locator("label:has(input#agreement)");
         this.submit = page.locator('button:has-text("Submit request")');
-        this.rmaIcon = page.locator('span.rma-icon-shop');
+        this.rmaIcon = page.locator("span.rma-icon-shop");
         this.reqRMA = page.locator('text=" New RMA Request "');
         this.rmaLink = page.locator('text="RMA"');
-        this.view = page.locator('span.icon-view');
+        this.view = page.locator("span.icon-view");
         this.status = page.locator('select[name="rma_status_id"]');
         this.save = page.locator('button:has-text("Save")');
-        this.verify = page.locator('span.label-active');
-        this.successRMA= page.getByRole('paragraph').filter({ hasText: 'Request created successfully.' })
-        this.invalidRMAMessage=page.getByText("The RMA Qty field must be 1 or less");
-        this.rmaAcceptmsg= page.getByText('RMA Status updated').first();
-        this.acceptStatus= page.getByText('Accept', { exact: true });
-        this.receivedPack=page.getByText('Received Package', { exact: true });
-        this.rmaDeclined=page.getByText("Declined", { exact: true });
+        this.verify = page.locator("span.label-active");
+        this.successRMA = page
+            .getByRole("paragraph")
+            .filter({ hasText: "Request created successfully." });
+        this.invalidRMAMessage = page.getByText(
+            "The RMA Qty field must be 1 or less",
+        );
+        this.rmaAcceptmsg = page.getByText("RMA Status updated").first();
+        this.acceptStatus = page.getByText("Accept", { exact: true });
+        this.receivedPack = page.getByText("Received Package", { exact: true });
+        this.rmaDeclined = page.getByText("Declined", { exact: true });
+        this.createRMAReason = page.getByRole("button", {
+            name: " Create RMA Reason ",
+        });
+        this.reasonTitle = page.locator('input[name="title"]');
+        this.reasonStatus = page.locator('label[for="status"]');
+        this.position = page.locator('input[name="position"]');
+        this.reasonType = page.locator('select[name="resolution_type[]"]');
+        this.saveReason = page.getByRole("button", { name: "Save Reason" });
+        this.saveReasonSuccess = page.getByText("Reason created successfully.");
+        this.listVerify = page.getByText("tester");
+        this.rmaRulesCreate=page.getByRole('button', { name: 'Create RMA Rules' });
+        this.ruleTitle=page.getByRole('textbox', { name: 'Rules Title' });
+        this.ruleDescription=page.getByRole('textbox', { name: 'Rules Description' });
+        this.returnPeriod=page.getByPlaceholder('Return Period (Days)');
+        this.saveRule=page.getByRole('button', { name: 'Save RMA Rules' });
+        this.ruleSuccessMSG= page.getByText('RMA Rules created');
+        this.listRuleVerify=page.getByText('test rule');
+        this.createRMAStatus=page.getByRole('button', { name: 'Create RMA Status' });
+        this.rmaStatusTitle=page.getByRole('textbox', { name: 'Title' });
+        this.saveStatus=page.getByRole('button', { name: 'Save RMA Status' });
+        this.statusSuccess=page.getByText('RMA Status created');
+        this.listStatusVerify=page.getByRole('paragraph').filter({ hasText: /^Status$/ });
+
     }
 
     /**

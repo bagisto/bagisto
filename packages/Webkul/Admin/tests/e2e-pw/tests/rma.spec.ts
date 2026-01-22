@@ -60,3 +60,22 @@ test.describe("Should perform action for RMA by admin", () => {
         await rmaCreation.adminDeclinedRMA();
     });
 });
+
+test.describe("should perform normal rma workflow", () => {
+    test("should allow admin to create reason for rma", async ({
+        adminPage,
+    }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMAReason();
+    });
+
+    test("should allow admin to create rule for rma", async ({ adminPage }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMARules();
+    });
+
+    test("should allow admin to create status for rma", async ({ adminPage }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMAStatus();
+    });
+});

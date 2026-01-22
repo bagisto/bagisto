@@ -74,20 +74,17 @@ export class RMACreation {
         await this.locators.reqRMA.click();
         await this.locators.editIcon.first().click();
         await this.locators.checkBox.check();
-
         await this.page.waitForLoadState("networkidle");
         await this.locators.resolution.selectOption("return");
         await this.locators.resolution.selectOption("return");
         await this.page.waitForLoadState("networkidle");
         await this.locators.reason.selectOption("1");
         await this.locators.rmaQTY.fill("4");
-
         await expect(this.locators.invalidRMAMessage).toBeVisible();
     }
 
     private async verfiyRMADetails() {
         const productName = readProductData();
-
         await expect(
             this.page.getByText(productName, { exact: true }),
         ).toBeVisible();
@@ -135,4 +132,38 @@ export class RMACreation {
         await expect(this.locators.rmaAcceptmsg).toBeVisible();
         await expect(this.locators.rmaDeclined).toBeVisible();
     }
+
+    async adminCraeteRMAReason() {
+        await this.page.goto("admin/sales/rma/reasons");
+        await this.locators.createRMAReason.click();
+        await this.locators.reasonTitle.fill("Broken Product")
+        await this.locators.reasonStatus.check();
+        await this.locators.position.fill("1");
+        await this.locators.reasonType.selectOption("return")
+        await this.locators.saveReason.click();
+        await expect(this.locators.saveReasonSuccess).toBeVisible();
+        await expect(this.locators.listVerify).toBeVisible();
+    }
+
+    async adminCraeteRMARules() {
+        await this.page.goto("admin/sales/rma/rules");
+        await this.locators.rmaRulesCreate.click();
+        await this.locators.ruleTitle.fill("Test Rule");
+        await this.locators.reasonStatus.check();
+        await this.locators.ruleDescription.fill("Test Rule Description");
+        await this.locators.returnPeriod.fill("15");
+        await this.locators.saveRule.click();
+        await expect(this.locators.ruleSuccessMSG).toBeVisible();
+        await expect(this.locators.listRuleVerify).toBeVisible();
+    }
+
+    async adminCraeteRMAStatus() {
+        await this.page.goto("admin/sales/rma/rma-status");
+        await this.locators.createRMAStatus.click();
+        await this.locators.reasonStatus.click();
+        await this.locators.saveStatus.click();
+        await expect(this.locators.statusSuccess).toBeVisible();
+        await expect(this.locators.listStatusVerify).toBeVisible();
+    }
+   
 }
