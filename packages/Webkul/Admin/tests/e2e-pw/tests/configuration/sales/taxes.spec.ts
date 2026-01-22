@@ -1,7 +1,7 @@
 import { test, expect } from '../../../setup';
 import { generateRandomNumericString } from '../../../utils/faker';
 
-test.describe('Taxes Configuration', () => {
+test.describe('taxes configuration', () => {
     /**
      * Navigate to the configuration page.
      */

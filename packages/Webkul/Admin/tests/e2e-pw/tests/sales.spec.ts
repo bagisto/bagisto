@@ -1,4 +1,8 @@
 import { test, expect } from "../setup";
+import { ProductCreation } from "../pages/product";
+import { ProductCheckout } from "../pages/checkout-flow";
+import { loginAsCustomer, addAddress } from "../utils/customer";
+import { RMACreation } from "../pages/rma";
 import address from "../utils/address";
 import {
     generateFirstName,
@@ -1578,7 +1582,7 @@ export async function generateOrder(adminPage) {
     await adminPage.goto("admin/sales/orders");
     await adminPage.click("button.primary-button:visible");
     await adminPage.click(
-        "div.flex.flex-col.items-center > button.secondary-button:visible"
+        "div.flex.flex-col.items-center > button.secondary-button:visible",
     );
 
     /**
@@ -1586,7 +1590,7 @@ export async function generateOrder(adminPage) {
      */
     await adminPage.fill(
         'input[name="first_name"]:visible',
-        generateFirstName()
+        generateFirstName(),
     );
     await adminPage.fill('input[name="last_name"]:visible', generateLastName());
     await adminPage.fill('input[name="email"]:visible', generateEmail());
@@ -1610,7 +1614,7 @@ export async function generateOrder(adminPage) {
         await adminPage.click("button.primary-button:visible");
     } else {
         await adminPage.click(
-            "p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button"
+            "p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button",
         );
         await adminPage
             .getByRole("textbox", { name: "Search by name" })
@@ -1622,7 +1626,7 @@ export async function generateOrder(adminPage) {
         const searchResult = await adminPage
             .waitForSelector(
                 "button.cursor-pointer.text-sm.text-blue-600.transition-all",
-                { timeout: 5000 }
+                { timeout: 5000 },
             )
             .catch(() => null);
 
@@ -1635,102 +1639,24 @@ export async function generateOrder(adminPage) {
     }
 
     /**
-     * Use for random product selection in search list
-     */
-    // const cartBtns = await adminPage.$$(
-    //     ".grid.place-content-start.gap-2.text-right > button.text-blue-600"
-    // );
-    // const inputQty = await adminPage.$$('input[name="qty"]:visible');
-    // for (let i = 0; i < cartBtns.length; i++) {
-    //     const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
-    //     if (shouldClick) {
-    //         const qty = Math.floor(Math.random() * 9) + 2;
-    //         await inputQty[i].scrollIntoViewIfNeeded();
-    //         await inputQty[i].fill(qty.toString());
-    //         await cartBtns[i].click();
-    //         break;
-    //     }
-    // }
-
-    /**
-     * for bundle product selection
-     */
-
-    // const searchResult = await adminPage
-    //     .waitForSelector(
-    //         "button.cursor-pointer.text-sm.text-blue-600.transition-all",
-    //         { timeout: 5000 }
-    //     )
-    //     .catch(() => null);
-    // if (searchResult) {
-    //     const cartBtns = await adminPage.$$(
-    //         ".grid.place-content-start.gap-2.text-right > button.text-blue-600"
-    //     );
-    //     const inputQty = await adminPage.$$('input[name="qty"]:visible');
-    //     for (let i = 0; i < cartBtns.length; i++) {
-    //         const shouldClick = Math.random() < 0.5 || cartBtns.length < 2;
-    //         if (shouldClick) {
-    //             const qty = Math.floor(Math.random() * 9) + 2;
-    //             await inputQty[i].scrollIntoViewIfNeeded();
-    //             await inputQty[i].fill(qty.toString());
-    //             await cartBtns[i].click();
-    //             break;
-    //         }
-    //     }
-    // }
-    // const toastSelector =
-    //     ".flex.items-center.break-all.text-sm > .icon-toast-done";
-    // const iconExists = await adminPage
-    //     .waitForSelector(toastSelector, { timeout: 5000 })
-    //     .catch(() => null);
-
-    // if (iconExists) {
-    //     const icons = await adminPage.$$(
-    //         ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-    //     );
-    //     await icons[0].click();
-    // } else {
-    //     const uncheckedOptions = await adminPage.$$(
-    //         'input[type="checkbox"]:not(:checked) + label, input[type="radio"]:not(:checked) + label'
-    //     );
-    //     for (let checkbox of uncheckedOptions) {
-    //         await checkbox.click();
-    //     }
-
-    //     await adminPage.click(
-    //         ".flex.items-center.justify-between > button.primary-button:visible"
-    //     );
-
-    //     const iconAfterRetry = await adminPage
-    //         .waitForSelector(toastSelector, { timeout: 5000 })
-    //         .catch(() => null);
-    //     if (iconAfterRetry) {
-    //         const icons = await adminPage.$$(
-    //             ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-    //         );
-    //         await icons[0].click();
-    //     }
-    // }
-
-    /**
      * Billing address selection or creation
      */
     const billingRadios = await adminPage.$$('input[name="billing.id"]');
     if (billingRadios.length > 0) {
         const addressLabels = await adminPage.$$(
-            `input[name="billing.id"] + label`
+            `input[name="billing.id"] + label`,
         );
         const randomIndex = Math.floor(Math.random() * billingRadios.length);
         await addressLabels[randomIndex].click();
     } else {
         await adminPage.click(
-            "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all"
+            "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all",
         );
         if ((await address(adminPage)) !== "done") return;
     }
 
     const useForShipping = await adminPage.$(
-        'input[name="billing.use_for_shipping"]'
+        'input[name="billing.use_for_shipping"]',
     );
     const shouldUseBilling = Math.floor(Math.random() * 20) % 3 !== 1;
     const isShippingChecked = await useForShipping?.isChecked();
@@ -1746,50 +1672,50 @@ export async function generateOrder(adminPage) {
         const shippingRadios = await adminPage.$$('input[name="shipping.id"]');
         if (shippingRadios.length > 0) {
             const shippingLabels = await adminPage.$$(
-                `input[name="shipping.id"] + label`
+                `input[name="shipping.id"] + label`,
             );
             const randomIndex = Math.floor(
-                Math.random() * shippingRadios.length
+                Math.random() * shippingRadios.length,
             );
             await shippingLabels[randomIndex].click();
         } else {
             await adminPage.click(
-                "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible"
+                "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible",
             );
 
             await adminPage.fill(
                 'input[name="shipping.company_name"]',
-                generateLastName()
+                generateLastName(),
             );
             await adminPage.fill(
                 'input[name="shipping.first_name"]',
-                generateFirstName()
+                generateFirstName(),
             );
             await adminPage.fill(
                 'input[name="shipping.last_name"]',
-                generateLastName()
+                generateLastName(),
             );
             await adminPage.fill(
                 'input[name="shipping.email"]',
-                generateEmail()
+                generateEmail(),
             );
             await adminPage.fill(
                 'input[name="shipping.address.[0]"]',
-                generateFirstName()
+                generateFirstName(),
             );
             await adminPage.selectOption(
                 'select[name="shipping.country"]',
-                "IN"
+                "IN",
             );
             await adminPage.selectOption('select[name="shipping.state"]', "UP");
             await adminPage.fill(
                 'input[name="shipping.city"]',
-                generateLastName()
+                generateLastName(),
             );
             await adminPage.fill('input[name="shipping.postcode"]', "201301");
             await adminPage.fill(
                 'input[name="shipping.phone"]',
-                generatePhoneNumber()
+                generatePhoneNumber(),
             );
             await adminPage.press('input[name="shipping.phone"]', "Enter");
         }
@@ -1799,7 +1725,7 @@ export async function generateOrder(adminPage) {
      * shipping method
      */
     await adminPage.click(
-        ".mt-4.flex.justify-end > button.primary-button:visible"
+        ".mt-4.flex.justify-end > button.primary-button:visible",
     );
 
     const shippingMethods = await adminPage
@@ -1810,7 +1736,7 @@ export async function generateOrder(adminPage) {
 
     if (shippingMethods) {
         const options = await adminPage.$$(
-            'input[name="shipping_method"] + label'
+            'input[name="shipping_method"] + label',
         );
         await options[Math.floor(Math.random() * options.length)].click();
     }
@@ -1818,11 +1744,89 @@ export async function generateOrder(adminPage) {
     await adminPage.locator("label", { hasText: "Money Transfer" }).click();
 
     const nextBtn = await adminPage.$$(
-        "button.primary-button.w-max.px-11.py-3"
+        "button.primary-button.w-max.px-11.py-3",
     );
     await nextBtn[nextBtn.length - 1].click();
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
+
+test.describe("rma management", () => {
+    test.setTimeout(240000);
+    test.beforeEach(
+        "should create simple product for checkout to create rma",
+        async ({ adminPage }) => {
+            const productCreation = new ProductCreation(adminPage);
+
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${Date.now()}`,
+                name: `Simple-${Date.now()}`,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
+            });
+        },
+    );
+
+    test("should allow checkout and RMA creation so the admin can accept it", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.customerCheckout();
+
+        const rmaCreation = new RMACreation(shopPage);
+        await rmaCreation.rmaCreation();
+    });
+
+    test("should allow admin to accept rma", async ({ adminPage }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminAcceptRMA();
+    });
+
+    test("should allow checkout and RMA creation so the admin can decline it", async ({
+        shopPage,
+    }) => {
+        await loginAsCustomer(shopPage);
+        await addAddress(shopPage);
+
+        const productCheckout = new ProductCheckout(shopPage);
+        await productCheckout.customerCheckout();
+
+        const rmaCreation = new RMACreation(shopPage);
+        await rmaCreation.rmaCreation();
+    });
+
+    test("should allow admin to declined rma", async ({ adminPage }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminDeclinedRMA();
+    });
+});
+
+test.describe(" rma management ", () => {
+    test("should allow admin to create reason for rma", async ({
+        adminPage,
+    }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMAReason();
+    });
+
+    test("should allow admin to create rule for rma", async ({ adminPage }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMARules();
+    });
+
+    test("should allow admin to create status for rma", async ({
+        adminPage,
+    }) => {
+        const rmaCreation = new RMACreation(adminPage);
+        await rmaCreation.adminCraeteRMAStatus();
+    });
+});
 
 test.describe("sales management", () => {
     test("should be able to create orders", async ({ adminPage }) => {
@@ -2025,7 +2029,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+            await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2052,7 +2056,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+            await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2077,7 +2081,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+            await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2104,7 +2108,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+            await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2131,7 +2135,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
-            await adminPage.getByRole('link', { name: 'Sales' }).click();
+            await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
