@@ -114,7 +114,7 @@ export class WebLocators {
 
     readonly viewOrder: Locator;
     readonly createInvoice: Locator;
-        readonly profileButton: Locator;
+    readonly profileButton: Locator;
     readonly email: Locator;
     readonly password: Locator;
     readonly signInButton: Locator;
@@ -135,6 +135,7 @@ export class WebLocators {
     readonly save: Locator;
     readonly verify: Locator;
     readonly successRMA:Locator;
+    readonly invalidRMAMessage:Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -378,6 +379,7 @@ export class WebLocators {
         this.save = page.locator('button:has-text("Save")');
         this.verify = page.locator('span.label-active');
         this.successRMA= page.getByRole('paragraph').filter({ hasText: 'Request created successfully.' })
+        this.invalidRMAMessage=page.getByText("The RMA Qty field must be 1 or less");
     }
 
     /**
