@@ -73,7 +73,6 @@ class OrderController extends Controller
             try {
                 Cart::addProduct($item->product, $item->additional);
             } catch (\Exception $e) {
-                // do nothing
             }
         }
 
@@ -94,8 +93,10 @@ class OrderController extends Controller
             })
             ->firstOrFail();
 
+        $orderCurrencyCode = $invoice->order->order_currency_code;
+
         return $this->downloadPDF(
-            view('shop::customers.account.orders.pdf', compact('invoice'))->render(),
+            view('shop::customers.account.orders.pdf', compact('invoice', 'orderCurrencyCode'))->render(),
             'invoice-'.$invoice->created_at->format('d-m-Y')
         );
     }

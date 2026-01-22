@@ -140,8 +140,10 @@ class InvoiceController extends Controller
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
+        $orderCurrencyCode = $invoice->order->order_currency_code;
+
         return $this->downloadPDF(
-            view('admin::sales.invoices.pdf', compact('invoice'))->render(),
+            view('shop::customers.account.orders.pdf', compact('invoice', 'orderCurrencyCode'))->render(),
             'invoice-'.$invoice->created_at->format('d-m-Y')
         );
     }

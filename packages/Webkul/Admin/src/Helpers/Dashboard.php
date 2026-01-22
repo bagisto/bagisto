@@ -56,7 +56,7 @@ class Dashboard
                 'status_label'               => $order->status_label,
                 'payment_method'             => core()->getConfigData('sales.payment_methods.'.$order->payment->method.'.title'),
                 'base_grand_total'           => $order->base_grand_total,
-                'formatted_base_grand_total' => core()->formatPrice($order->base_grand_total),
+                'formatted_base_grand_total' => core()->formatBasePrice($order->base_grand_total),
                 'channel_name'               => $order->channel_name,
                 'customer_email'             => $order->customer_email,
                 'customer_name'              => $order->customer_full_name,
@@ -89,7 +89,7 @@ class Dashboard
                 'sku'             => $product->product->sku,
                 'name'            => $product->product->name,
                 'price'           => $product->product->price,
-                'formatted_price' => core()->formatPrice($product->product->price),
+                'formatted_price' => core()->formatBasePrice($product->product->price),
                 'total_qty'       => $product->total_qty,
                 'image'           => $product->product->base_image_url,
             ];
