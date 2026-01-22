@@ -148,6 +148,7 @@ export class RMACreation {
     async adminCraeteRMARules() {
         await this.page.goto("admin/sales/rma/rules");
         await this.locators.rmaRulesCreate.click();
+        await this.page.waitForLoadState("networkidle")
         await this.locators.ruleTitle.fill("Test Rule");
         await this.locators.reasonStatus.check();
         await this.locators.ruleDescription.fill("Test Rule Description");
@@ -160,6 +161,8 @@ export class RMACreation {
     async adminCraeteRMAStatus() {
         await this.page.goto("admin/sales/rma/rma-status");
         await this.locators.createRMAStatus.click();
+        await this.page.waitForLoadState("networkidle")
+        await this.locators.rmaStatusTitle.fill("RMA Status");
         await this.locators.reasonStatus.click();
         await this.locators.saveStatus.click();
         await expect(this.locators.statusSuccess).toBeVisible();
