@@ -4,17 +4,30 @@
     dir="{{ core()->getCurrentLocale()->direction }}"
 >
     <head>
-        <!-- meta tags -->
-        <meta http-equiv="Cache-control" content="no-cache">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+            http-equiv="Cache-control"
+            content="no-cache"
+        >
+
+        <meta
+            http-equiv="Content-Type"
+            content="text/html; charset=utf-8"
+        />
 
         @php
             $fontPath = [];
 
-            $fontFamily = [
-                'regular' => 'Arial, sans-serif',
-                'bold'    => 'Arial, sans-serif',
-            ];
+            if (app()->getLocale() == 'en' && $orderCurrencyCode == 'INR') {
+                $fontFamily = [
+                    'regular' => 'DejaVu Sans',
+                    'bold'    => 'DejaVu Sans',
+                ];
+            }  else {
+                $fontFamily = [
+                    'regular' => 'Arial, sans-serif',
+                    'bold'    => 'Arial, sans-serif',
+                ];
+            }
 
             if (in_array(app()->getLocale(), ['ar', 'he', 'fa', 'tr', 'ru', 'uk'])) {
                 $fontFamily = [
@@ -499,19 +512,19 @@
 
                                     <td>
                                         @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
-                                            {!! core()->formatBasePrice($item->base_price_incl_tax, true) !!}
+                                            {!! core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) !!}
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                            {!! core()->formatBasePrice($item->base_price_incl_tax, true) !!}
+                                            {!! core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) !!}
 
                                             <div class="small-text">
                                                 @lang('shop::app.customers.account.orders.invoice-pdf.excl-tax')
 
                                                 <span>
-                                                    {{ core()->formatPrice($item->base_price) }}
+                                                    {{ core()->formatPrice($item->price, $orderCurrencyCode) }}
                                                 </span>
                                             </div>
                                         @else
-                                            {!! core()->formatBasePrice($item->base_price, true) !!}
+                                            {!! core()->formatPrice($item->price, $orderCurrencyCode) !!}
                                         @endif
                                     </td>
 
@@ -521,19 +534,19 @@
 
                                     <td>
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
-                                            {!! core()->formatBasePrice($item->base_total_incl_tax, true) !!}
+                                            {!! core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) !!}
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
-                                            {!! core()->formatBasePrice($item->base_total_incl_tax, true) !!}
+                                            {!! core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) !!}
 
                                             <div class="small-text">
                                                 @lang('shop::app.customers.account.orders.invoice-pdf.excl-tax')
 
                                                 <span>
-                                                    {{ core()->formatPrice($item->base_total) }}
+                                                    {{ core()->formatPrice($item->total, $orderCurrencyCode) }}
                                                 </span>
                                             </div>
                                         @else
-                                            {!! core()->formatBasePrice($item->base_total, true) !!}
+                                            {!! core()->formatPrice($item->total, $orderCurrencyCode) !!}
                                         @endif
                                     </td>
                                 </tr>
@@ -550,25 +563,25 @@
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_sub_total_incl_tax, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal-incl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_sub_total_incl_tax, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) !!}</td>
                                 </tr>
 
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal-excl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_sub_total, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->sub_total, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @else
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_sub_total, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->sub_total, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @endif
 
@@ -576,38 +589,38 @@
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_shipping_amount_incl_tax, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling-incl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_shipping_amount_incl_tax, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) !!}</td>
                                 </tr>
 
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling-excl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_shipping_amount, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @else
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatBasePrice($invoice->base_shipping_amount, true) !!}</td>
+                                    <td>{!! core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) !!}</td>
                                 </tr>
                             @endif
 
                             <tr>
                                 <td>@lang('shop::app.customers.account.orders.invoice-pdf.tax')</td>
                                 <td>-</td>
-                                <td>{!! core()->formatBasePrice($invoice->base_tax_amount, true) !!}</td>
+                                <td>{!! core()->formatPrice($invoice->tax_amount, $orderCurrencyCode) !!}</td>
                             </tr>
 
                             <tr>
                                 <td>@lang('shop::app.customers.account.orders.invoice-pdf.discount')</td>
                                 <td>-</td>
-                                <td>{!! core()->formatBasePrice($invoice->base_discount_amount, true) !!}</td>
+                                <td>{!! core()->formatPrice($invoice->discount_amount, $orderCurrencyCode) !!}</td>
                             </tr>
 
                             <tr>
@@ -616,7 +629,7 @@
                                 </td>
                                 <td style="border-top: 1px solid #FFFFFF;">-</td>
                                 <td style="border-top: 1px solid #FFFFFF;">
-                                    <b>{!! core()->formatBasePrice($invoice->base_grand_total, true) !!}</b>
+                                    <b>{!! core()->formatPrice($invoice->grand_total, $orderCurrencyCode) !!}</b>
                                 </td>
                             </tr>
                         </tbody>
