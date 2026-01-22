@@ -34,7 +34,15 @@ export class ProductCreation {
         this.saveProductToJson(product);
     }
 
-
+    async createProductWithoutRMARule(product: BaseProduct) {
+        await this.gotoProductPage();
+        await this.openCreateModal(product.type, product.sku);
+        await this.fillCommonDetails(product);
+        await this.handleProductType(product);
+        await this.page.locator('label[for="allow_rma"]').click();
+        await this.saveAndVerify();
+        this.saveProductToJson(product);
+    }
 
     async createConfigProduct(product: BaseProduct) {
         await this.gotoProductPage();
