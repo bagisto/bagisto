@@ -1,7 +1,7 @@
 import { test, expect } from '../../../setup';
 import { generateName, generateDescription, generateRandomNumericString } from '../../../utils/faker';
 
-test.describe('Shipping Methods Configuration', () => {
+test.describe('shipping methods configuration', () => {
     /**
      * Navigate to the configuration page.
      */

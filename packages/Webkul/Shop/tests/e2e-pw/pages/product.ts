@@ -15,7 +15,7 @@ export class ProductCreation {
 
         private locators = new WebLocators(page),
 
-        private editor = new CommonPage(page)
+        private editor = new CommonPage(page),
     ) {}
 
     async gotoProductPage() {
@@ -30,6 +30,16 @@ export class ProductCreation {
         await this.openCreateModal(product.type, product.sku);
         await this.fillCommonDetails(product);
         await this.handleProductType(product);
+        await this.saveAndVerify();
+        this.saveProductToJson(product);
+    }
+
+    async createProductWithoutRMARule(product: BaseProduct) {
+        await this.gotoProductPage();
+        await this.openCreateModal(product.type, product.sku);
+        await this.fillCommonDetails(product);
+        await this.handleProductType(product);
+        await this.page.locator('label[for="allow_rma"]').click();
         await this.saveAndVerify();
         this.saveProductToJson(product);
     }
@@ -61,7 +71,7 @@ export class ProductCreation {
         //     /product created successfully/i
         // );
         await expect(this.page).toHaveURL(
-            /\/admin\/catalog\/products\/edit\/\d+/
+            /\/admin\/catalog\/products\/edit\/\d+/,
         );
         await this.page.waitForLoadState("networkidle");
     }
@@ -71,11 +81,11 @@ export class ProductCreation {
         await this.locators.productName.fill(product.name);
         await this.editor.fillInTinymce(
             this.locators.productShortDescription,
-            product.shortDescription
+            product.shortDescription,
         );
         await this.editor.fillInTinymce(
             this.locators.productDescription,
-            product.description
+            product.description,
         );
     }
 
@@ -256,7 +266,7 @@ export class ProductCreation {
         await this.locators.rmaSelection.selectOption("1");
 
         await expect(
-            this.locators.groupedProductVisibleByName(/simple-\d+/i).first()
+            this.locators.groupedProductVisibleByName(/simple-\d+/i).first(),
         ).toBeVisible();
     }
 
@@ -307,7 +317,7 @@ export class ProductCreation {
         await this.addDownloadableLink(
             "../data/images/1.webp",
             generateName(),
-            generateHostname()
+            generateHostname(),
         );
         await this.addDownloadableSample(generateName(), generateHostname());
     }
@@ -321,7 +331,7 @@ export class ProductCreation {
          * Select 15 days
          */
         const availableToDate = new Date(
-            availableFromDate.getTime() + 15 * 24 * 60 * 60 * 1000
+            availableFromDate.getTime() + 15 * 24 * 60 * 60 * 1000,
         );
         const formattedAvailableFromDate = availableFromDate
             .toISOString()
@@ -334,10 +344,10 @@ export class ProductCreation {
 
         await this.locators.bookingLocationInput.fill(generateLocation());
         await this.locators.bookingAvailableFromInput.fill(
-            formattedAvailableFromDate
+            formattedAvailableFromDate,
         );
         await this.locators.bookingAvailableToInput.fill(
-            formattedAvailableToDate
+            formattedAvailableToDate,
         );
         await this.page.locator('input[name="booking[qty]"]').fill("2");
         await this.page.getByText("Add Slots").first().click();

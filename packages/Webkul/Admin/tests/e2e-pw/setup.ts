@@ -7,11 +7,28 @@ interface AdminPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
-type AdminFixtures = {
+interface ShopPage extends Page {
+    fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
+}
+
+/**
+ * Fixtures Types
+ */
+
+type Fixtures = {
     adminPage: AdminPage;
+    shopPage: ShopPage;
 };
 
-export const test = base.extend<AdminFixtures>({
+/**
+ * Test with Fixtures
+ */
+
+export const test = base.extend<Fixtures>({
+    /**
+     *  AdminPage
+     */
+
     adminPage: async ({ browser }, use) => {
         const authExists = fs.existsSync(ADMIN_AUTH_STATE_PATH);
 
@@ -21,53 +38,68 @@ export const test = base.extend<AdminFixtures>({
 
         const page = await context.newPage();
 
+        // Login if needed
         if (!authExists) {
-            /**
-             * Authenticate the admin user.
-             */
             await loginAsAdmin(page);
-
-            /**
-             * Save authentication state to a file.
-             */
             await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
         } else {
-            /**
-             * Navigate to the dashboard.
-             */
             await page.goto("admin/dashboard");
         }
 
+        // Safety check (session expired)
         if (page.url().includes("admin/login")) {
-            /**
-             * Authenticate the admin user.
-             */
             await loginAsAdmin(page);
-
-            /**
-             * Save authentication state to a file.
-             */
             await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
         }
 
-        /**
-         * Extend the page object with custom methods.
-         */
-        (page as AdminPage).fillInTinymce = async function (
+        // Extend admin page
+        (page as AdminPage).fillInTinymce = async (
             iframeSelector: string,
             content: string
-        ) {
+        ) => {
             await page.waitForSelector(iframeSelector);
+
             const iframe = page.frameLocator(iframeSelector);
             const editorBody = iframe.locator("body");
-            await editorBody.click();
+
+            await expect(editorBody).toBeVisible();
+            await editorBody.focus();
             await editorBody.press("Control+a");
             await editorBody.press("Backspace");
+
             await editorBody.pressSequentially(content);
             await expect(editorBody).toHaveText(content);
         };
 
         await use(page as AdminPage);
+        await context.close();
+    },
+
+    /**
+     * Shop Page
+     */
+
+    shopPage: async ({ browser }, use) => {
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
+        /**
+         * Extend shop page with Tinymce helper
+         * (exact logic you provided)
+         */
+        (page as ShopPage).fillInTinymce = async (
+            iframeSelector: string,
+            content: string
+        ) => {
+            await page.waitForSelector(iframeSelector);
+            const iframe = page.frameLocator(iframeSelector);
+            const editorBody = iframe.locator("body");
+            await editorBody.click();
+            await editorBody.pressSequentially(content);
+            await expect(editorBody).toHaveText(content);
+        };
+
+        await use(page as ShopPage);
         await context.close();
     },
 });

@@ -1,7 +1,6 @@
 import { test, expect } from '../../../setup';
 import { generateRandomNumericString, generateDescription, generateLastName, generateFirstName, generatePhoneNumber } from '../../../utils/faker';
-
-test.describe('Shipping Settings Configuration', () => {
+test.describe('shipping settings configuration', () => {
     /**
      * Navigate to the configuration page.
      */
@@ -12,7 +11,7 @@ test.describe('Shipping Settings Configuration', () => {
     /**
      * Update the Shipping Origin Configuration.
      */
-    test('should add Shipping origin refers to the location where goods or products originate before being transported to their destination', async ({ adminPage }) => {
+    test('should add shipping origin refers to the location where goods or products originate before being transported to their destination', async ({ adminPage }) => {
         await adminPage.selectOption('select[name="sales[shipping][origin][country]"]', 'IN');
         const country = adminPage.locator('select[name="sales[shipping][origin][country]"]');
         await expect(country).toHaveValue('IN');
