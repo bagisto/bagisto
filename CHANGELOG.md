@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.11 (22nd of January 2026)** - *Release*
 
 - Security updates.
 
