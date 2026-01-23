@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Varsayılan',
-                'meta-title'       => 'Demo Mağaza',
-                'meta-keywords'    => 'Demo Mağaza Meta Anahtar Kelimeler',
                 'meta-description' => 'Demo Mağaza Meta Açıklama',
+                'meta-keywords'    => 'Demo Mağaza Meta Anahtar Kelimeler',
+                'meta-title'       => 'Demo Mağaza',
+                'name'             => 'Varsayılan',
             ],
 
             'currencies' => [
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Veritabanı tablosu oluştur',
+                'create-database-table'   => 'Veritabanı tablosu oluştur',
                 'install'                 => 'Yükleme',
                 'install-info'            => 'Kurulum için Bagisto',
                 'install-info-button'     => 'Aşağıdaki düğmeye tıklayın',

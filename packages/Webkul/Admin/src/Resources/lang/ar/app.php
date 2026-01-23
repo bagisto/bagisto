@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'رقم الطلب',
                     'pay-by'          => 'الدفع بواسطة - :method',
                     'pay-via'         => 'الدفع عبر',
-                    'pending-payment' => 'قيد الدفع',
                     'pending'         => 'قيد الانتظار',
+                    'pending-payment' => 'قيد الدفع',
                     'processing'      => 'جاري المعالجة',
                     'product-count'   => ':count + المزيد من المنتجات',
                     'status'          => 'الحالة',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'مكتمل',
                         'customer-name'   => 'اسم العميل',
                         'date'            => 'التاريخ',
-                        'empty-order'     => 'لا توجد طلبات',
                         'email'           => 'البريد الإلكتروني',
+                        'empty-order'     => 'لا توجد طلبات',
                         'fraud'           => 'احتيال',
                         'grand-total'     => 'الإجمالي الكلي',
                         'location'        => 'الموقع',
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'رجوع',
-                    'file-name'      => 'اسم الملف',
-                    'file-name-info' => 'مثال: sitemap.xml',
-                    'general'        => 'عام',
-                    'path'           => 'المسار',
-                    'path-info'      => 'مثال: "/sitemap/" أو "/" للمسار الأساسي',
-                    'save-btn'       => 'حفظ خريطة الموقع',
-                ],
-
                 'delete-failed' => ':name تم حذفها بنجاح',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'الفئة',
                         'cms-page'           => 'صفحة CMS',
-                        'delete-warning'     => 'هل أنت متأكد أنك تريد تنفيذ هذا الإجراء؟',
                         'for'                => 'لـ',
                         'locale'             => 'محلي',
                         'permanent-redirect' => 'دائم (301)',
@@ -2727,8 +2716,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'تم استخدام :name بالفعل.',
-            'create-btn'    => 'إنشاء صفحة',
             'channel'       => 'القناة',
+            'create-btn'    => 'إنشاء صفحة',
             'language'      => 'اللغة',
             'title'         => 'الصفحات',
 
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'الأدوار',
 
                 'datagrid' => [
-                    'custom'          => 'مخصص',
                     'all'             => 'الكل',
-                    'permission-type' => 'نوع الصلاحية',
-                    'name'            => 'الاسم',
-                    'id'              => 'المعرف',
-                    'edit'            => 'تعديل',
+                    'custom'          => 'مخصص',
                     'delete'          => 'حذف',
+                    'edit'            => 'تعديل',
+                    'id'              => 'المعرف',
+                    'name'            => 'الاسم',
+                    'permission-type' => 'نوع الصلاحية',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'رجوع',
                 'category-carousel'             => 'شريط الفئات',
                 'category-carousel-description' => 'عرض الفئات الديناميكية بشكل جذاب باستخدام شريط الفئات المتجاوب.',
+                'category-id'                   => 'معرف الفئة',
                 'channels'                      => 'القنوات',
                 'column'                        => 'عمود',
                 'create-filter'                 => 'إنشاء مرشح',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'لا',
                 'parent-id'                     => 'معرف الأصل',
                 'parent-id-hint'                => 'يمكن إدخال معرفات الأصل المتعددة باستخدام قيم مفصولة بفواصل (مثل: 12,15,34)',
-                'category-id'                   => 'معرف الفئة',
                 'preview'                       => 'معاينة',
                 'product-carousel'              => 'شريط المنتجات',
                 'product-carousel-description'  => 'قدم المنتجات بأناقة باستخدام شريط المنتجات الديناميكي والمتجاوب.',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'عنوان',
                     'update-service'     => 'خدمات التحديث',
                 ],
-                'yes'                           => 'نعم',
+
+                'yes' => 'نعم',
             ],
 
             'create-success' => 'تم إنشاء الموضوع بنجاح',

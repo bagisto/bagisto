@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'За замовчуванням',
-                'meta-title'       => 'Демонстраційний магазин',
-                'meta-keywords'    => 'Мета-ключові слова демонстраційного магазину',
                 'meta-description' => 'Мета-опис демонстраційного магазину',
+                'meta-keywords'    => 'Мета-ключові слова демонстраційного магазину',
+                'meta-title'       => 'Демонстраційний магазин',
+                'name'             => 'За замовчуванням',
             ],
 
             'currencies' => [
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Створення таблиці бази даних',
+                'create-database-table'   => 'Створення таблиці бази даних',
                 'install'                 => 'Встановлення',
                 'install-info'            => 'Bagisto для встановлення',
                 'install-info-button'     => 'Натисніть кнопку нижче, щоб',

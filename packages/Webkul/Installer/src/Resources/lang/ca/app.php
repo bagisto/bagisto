@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Predeterminat',
-                'meta-title'       => 'Botiga de Demostració',
-                'meta-keywords'    => 'Paraules Clau de Meta de la Botiga de Demostració',
                 'meta-description' => 'Descripció de Meta de la Botiga de Demostració',
+                'meta-keywords'    => 'Paraules Clau de Meta de la Botiga de Demostració',
+                'meta-title'       => 'Botiga de Demostració',
+                'name'             => 'Predeterminat',
             ],
 
             'currencies' => [
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Crear la taula de la base de dades',
+                'create-database-table'   => 'Crear la taula de la base de dades',
                 'install'                 => 'Instal·lació',
                 'install-info'            => 'Bagisto per a la instal·lació',
                 'install-info-button'     => 'Fes clic al botó de sota per',

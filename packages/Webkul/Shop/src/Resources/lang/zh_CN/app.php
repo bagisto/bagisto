@@ -335,8 +335,8 @@ return [
             ],
 
             'reviews' => [
-                'title'        => '评价',
                 'empty-review' => '您还没有对任何商品进行评价',
+                'title'        => '评价',
             ],
 
             'downloadable-products' => [
@@ -344,12 +344,12 @@ return [
                 'completed'           => '完全的',
                 'date'                => '日期',
                 'download-error'      => '下载链接已过期。',
-                'expired'             => '已过期',
                 'empty-product'       => '您没有可下载的商品',
+                'expired'             => '已过期',
                 'name'                => '可下载商品',
                 'orderId'             => '订单ID',
-                'pending'             => '待办的',
                 'payment-error'       => '该下载商品尚未付款。',
+                'pending'             => '待办的',
                 'records-found'       => '找到记录',
                 'remaining-downloads' => '剩余下载次数',
                 'status'              => '状态',
@@ -886,10 +886,10 @@ return [
 
         'images' => [
             'index' => [
-                'something-went-wrong' => '出了点问题，请稍后重试。',
-                'size-limit-error'     => '大小限制错误',
-                'search'               => '搜索',
                 'only-images-allowed'  => '只允许图像（.jpeg，.jpg，.png，..）。',
+                'search'               => '搜索',
+                'size-limit-error'     => '大小限制错误',
+                'something-went-wrong' => '出了点问题，请稍后重试。',
             ],
 
             'results' => [
@@ -921,8 +921,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => '继续结帐',
             'illegal'                   => '数量不能少于一。',
-            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
+            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',
             'minimum-order-message'     => '最低订单金额为',
@@ -979,16 +979,16 @@ return [
 
             'summary' => [
                 'cart-summary'              => '购物车摘要',
+                'delivery-charges'          => '运费',
                 'delivery-charges-excl-tax' => '运费（不含税）',
                 'delivery-charges-incl-tax' => '运费（含税）',
-                'delivery-charges'          => '运费',
                 'discount-amount'           => '折扣金额',
                 'grand-total'               => '总计',
                 'place-order'               => '下单',
                 'proceed-to-checkout'       => '继续结账',
+                'sub-total'                 => '小计',
                 'sub-total-excl-tax'        => '小计（不含税）',
                 'sub-total-incl-tax'        => '小计（含税）',
-                'sub-total'                 => '小计',
                 'tax'                       => '税费',
 
                 'estimate-shipping' => [
@@ -1048,18 +1048,18 @@ return [
 
             'summary' => [
                 'cart-summary'              => '购物车摘要',
+                'delivery-charges'          => '运费',
                 'delivery-charges-excl-tax' => '运费（不含税）',
                 'delivery-charges-incl-tax' => '运费（含税）',
-                'delivery-charges'          => '运费',
                 'discount-amount'           => '折扣金额',
                 'excl-tax'                  => '不含税：',
                 'grand-total'               => '总计',
                 'place-order'               => '下单',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => '处理中',
+                'sub-total'                 => '小计',
                 'sub-total-excl-tax'        => '小计（不含税）',
                 'sub-total-incl-tax'        => '小计（含税）',
-                'sub-total'                 => '小计',
                 'tax'                       => '税费',
             ],
         ],
@@ -1300,15 +1300,15 @@ return [
             'payment'                    => '支付',
             'price'                      => '价格',
             'qty'                        => '数量',
+            'shipping'                   => '运输',
             'shipping-address'           => '送货地址',
+            'shipping-handling'          => '运费',
             'shipping-handling-excl-tax' => '运费（不含税）',
             'shipping-handling-incl-tax' => '运费（含税）',
-            'shipping-handling'          => '运费',
-            'shipping'                   => '运输',
             'sku'                        => 'SKU',
+            'subtotal'                   => '小计',
             'subtotal-excl-tax'          => '小计（不含税）',
             'subtotal-incl-tax'          => '小计（含税）',
-            'subtotal'                   => '小计',
             'tax'                        => '税',
             'tracking-number'            => '跟踪号码：:tracking_number',
         ],

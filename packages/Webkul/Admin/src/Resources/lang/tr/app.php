@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'Sipariş Kimliği',
                     'pay-by'          => 'Şunu İle Ödeme Yap - :method',
                     'pay-via'         => 'Şunu İle Ödeme Yap - :method',
-                    'pending-payment' => 'Ödeme Bekliyor',
                     'pending'         => 'Bekliyor',
+                    'pending-payment' => 'Ödeme Bekliyor',
                     'processing'      => 'İşleniyor',
                     'product-count'   => ':count + Daha Fazla Ürün',
                     'status'          => 'Durum',
@@ -841,8 +841,8 @@ return [
 
                 'videos' => [
                     'error' => ':attribute :max kilobayttan büyük olamaz. Lütfen daha küçük bir dosya seçin.',
-                    'title' => 'Videolar',
                     'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
+                    'title' => 'Videolar',
                 ],
 
                 'links' => [
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'Şehir',
                         'company-name'       => 'Şirket Adı',
                         'country'            => 'Ülke',
-                        'create-btn'         => 'Oluştur',
                         'create-address-btn' => 'Yeni Adres Ekle',
+                        'create-btn'         => 'Oluştur',
                         'default-address'    => 'Varsayılan Adres',
                         'email'              => 'E-posta',
                         'first-name'         => 'Adı',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'Tamamlandı',
                         'customer-name'   => 'Müşteri Adı',
                         'date'            => 'Tarih',
-                        'empty-order'     => 'Sipariş Yok',
                         'email'           => 'E-posta',
+                        'empty-order'     => 'Sipariş Yok',
                         'fraud'           => 'Sahtekarlık',
                         'grand-total'     => 'Toplam Tutar',
                         'location'        => 'Konum',
@@ -2092,9 +2092,9 @@ return [
                     'update-success' => 'Başarıyla güncellendi',
                 ],
 
-                'email-template' => 'E-posta Şablonu',
-                'delete-success' => 'Şablon başarıyla silindi',
                 'delete-failed'  => ':name Silme Başarısız',
+                'delete-success' => 'Şablon başarıyla silindi',
+                'email-template' => 'E-posta Şablonu',
             ],
 
             'campaigns' => [
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Geri',
-                    'file-name'      => 'Dosya Adı',
-                    'file-name-info' => 'Örnek: sitemap.xml',
-                    'general'        => 'Genel',
-                    'path'           => 'Yol',
-                    'path-info'      => 'Örnek: "/sitemap/" veya "Ana yol için /"',
-                    'save-btn'       => 'Site Haritasını Kaydet',
-                ],
-
                 'delete-failed' => ':name Silme Başarısız',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'Kategori',
                         'cms-page'           => 'CMS Sayfası',
-                        'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                         'for'                => 'İçin',
                         'locale'             => 'Yerel',
                         'permanent-redirect' => 'Kalıcı (301)',
@@ -2827,9 +2816,9 @@ return [
 
         'currencies' => [
             'index' => [
-                'title'      => 'Para Birimleri',
                 'create-btn' => 'Para Birimi Oluştur',
                 'currency'   => 'Para Birimi',
+                'title'      => 'Para Birimleri',
 
                 'datagrid' => [
                     'actions'        => 'İşlemler',
@@ -2883,9 +2872,9 @@ return [
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',
-                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
-                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
                     'file'                => 'Dosya',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
                     'general'             => 'Genel',
                     'images-directory'    => 'Resim Klasör Yolu',
                     'process-in-queue'    => 'Sıra İşlemesi',
@@ -2908,9 +2897,9 @@ return [
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',
-                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
-                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
                     'file'                => 'Dosya',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
                     'general'             => 'Genel',
                     'images-directory'    => 'Resim Klasör Yolu',
                     'process-in-queue'    => 'Sıra İşlemesi',
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'Toplam Geçersiz Satırlar:',
                     'total-rows-processed'    => 'Toplam İşlenen Satırlar:',
                     'total-updated'           => 'Toplam Kayıt Güncellendi:',
-                    'validate-info'           => 'Doğrulama Verilerine Tıklayarak importunuzu kontrol edin.',
                     'validate'                => 'Doğrula',
+                    'validate-info'           => 'Doğrulama Verilerine Tıklayarak importunuzu kontrol edin.',
                     'validating-info'         => 'Veriler okundu ve Doğrulanıyor',
                     'validation-failed-info'  => 'Importunuz geçersiz. Aşağıdaki hataları düzeltin ve tekrar deneyin.',
                     'validation-success-info' => 'Importunuz geçerli. Import işlemini başlatmak için Tıklayın.',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'Roller',
 
                 'datagrid' => [
-                    'custom'          => 'Özel',
                     'all'             => 'Tümü',
-                    'permission-type' => 'İzin Türü',
-                    'name'            => 'Adı',
-                    'id'              => 'Id',
-                    'edit'            => 'Düzenle',
+                    'custom'          => 'Özel',
                     'delete'          => 'Sil',
+                    'edit'            => 'Düzenle',
+                    'id'              => 'Id',
+                    'name'            => 'Adı',
+                    'permission-type' => 'İzin Türü',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'Geri',
                 'category-carousel'             => 'Kategori Karuseli',
                 'category-carousel-description' => 'Dinamik kategorileri çekici bir şekilde göstermek için duyarlı bir kategori karuseli kullanın.',
+                'category-id'                   => 'Kategori Kimliği',
                 'channels'                      => 'Kanallar',
                 'column'                        => 'Sütun',
                 'create-filter'                 => 'Filtre Oluştur',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'Hayır',
                 'parent-id'                     => 'Üst Kimlik',
                 'parent-id-hint'                => 'Birden fazla üst kimlik girmek için virgülle ayırarak (örneğin: 12,15,34) değerlerini girin.',
-                'category-id'                   => 'Kategori Kimliği',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'Başlık',
                     'update-service'     => 'Hizmetleri Güncelle',
                 ],
-                'yes'                           => 'Evet',
+
+                'yes' => 'Evet',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
-                'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
                 'must-select-a-mass-action'        => 'Toplu işlem seçmelisiniz.',
+                'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
+                'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'Kampanyalar',
         'cancel'                   => 'İptal',
         'cart-rules'               => 'Sepet Kuralları',
-        'catalog-rules'            => 'Katalog Kuralları',
         'catalog'                  => 'Katalog',
+        'catalog-rules'            => 'Katalog Kuralları',
         'categories'               => 'Kategoriler',
         'channels'                 => 'Kanallar',
         'cms'                      => 'İçerik Yönetim Sistemi',

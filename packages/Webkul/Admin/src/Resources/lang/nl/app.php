@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'Bestelnummer',
                     'pay-by'          => 'Betaal Via - :method',
                     'pay-via'         => 'Betaal Via',
-                    'pending-payment' => 'In afwachting van betaling',
                     'pending'         => 'Wachtend',
+                    'pending-payment' => 'In afwachting van betaling',
                     'processing'      => 'Bezig met verwerken',
                     'product-count'   => ':count + Meer producten',
                     'status'          => 'Status',
@@ -1594,7 +1594,6 @@ return [
         ],
 
         'families' => [
-
             'index' => [
                 'add'   => 'Attribuutfamilie Aanmaken',
                 'title' => 'Families',
@@ -1650,6 +1649,7 @@ return [
                 'edit-group-info'                  => 'Dubbelklik om Groep te bewerken',
                 'enter-code'                       => 'Voer Code In',
                 'enter-name'                       => 'Voer Naam In',
+                'general'                          => 'Algemeen',
                 'group-code-already-exists'        => 'Een attribuutgroepcode bestaat al.',
                 'group-contains-system-attributes' => 'Deze groep bevat systeemattributen. Verplaats eerst systeemattributen naar een andere groep en probeer opnieuw.',
                 'group-name-already-exists'        => 'Er bestaat al een attribuutgroepnaam.',
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'Stad',
                         'company-name'       => 'Bedrijfsnaam',
                         'country'            => 'Land',
-                        'create-btn'         => 'Aanmaken',
                         'create-address-btn' => 'Nieuw Adres Toevoegen',
+                        'create-btn'         => 'Aanmaken',
                         'default-address'    => 'Standaard Adres',
                         'email'              => 'E-mail',
                         'first-name'         => 'Voornaam',
@@ -1808,7 +1808,7 @@ return [
 
                 'datagrid' => [
                     'invoices' => [
-                        'empty-reviews'  => 'Geen facturen beschikbaar',
+                        'empty-invoice'  => 'Geen facturen beschikbaar',
                         'increment-id'   => 'Factuurnummer',
                         'invoice-amount' => 'Bedrag',
                         'invoice-date'   => 'Factuurdatum',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'Voltooid',
                         'customer-name'   => 'Klantnaam',
                         'date'            => 'Datum',
-                        'empty-order'     => 'Geen bestellingen beschikbaar',
                         'email'           => 'E-mail',
+                        'empty-order'     => 'Geen bestellingen beschikbaar',
                         'fraud'           => 'Fraude',
                         'grand-total'     => 'Totaalbedrag',
                         'location'        => 'Locatie',
@@ -1842,7 +1842,7 @@ return [
                         'comment'       => 'Opmerking',
                         'created-at'    => 'Aangemaakt Op',
                         'disapproved'   => 'Afgekeurd',
-                        'empty-invoice' => 'Geen beoordelingen beschikbaar',
+                        'empty-reviews' => 'Geen beoordelingen beschikbaar',
                         'id'            => 'ID',
                         'invoice-date'  => 'Factuurdatum',
                         'pending'       => 'In afwachting',
@@ -2195,9 +2195,9 @@ return [
                     ],
                 ],
 
-                'edit-error'     => 'Evenement kan niet worden bewerkt',
-                'delete-success' => 'Evenementen succesvol verwijderd',
                 'delete-failed'  => ':name Verwijderen mislukt',
+                'delete-success' => 'Evenementen succesvol verwijderd',
+                'edit-error'     => 'Evenement kan niet worden bewerkt',
             ],
 
             'subscribers' => [
@@ -2551,7 +2551,6 @@ return [
                     'times-used'      => 'Aantal keren gebruikt',
                 ],
             ],
-
         ],
 
         'search-seo' => [
@@ -2633,6 +2632,7 @@ return [
                     'create-btn' => 'Maak Sitemap',
                     'sitemap'    => 'Sitemap',
                     'title'      => 'Sitemaps',
+
                     'datagrid'   => [
                         'actions'         => 'Acties',
                         'delete'          => 'Verwijderen',
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Terug',
-                    'file-name'      => 'Bestandsnaam',
-                    'file-name-info' => 'Voorbeeld: sitemap.xml',
-                    'general'        => 'Algemeen',
-                    'path'           => 'Pad',
-                    'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
-                    'save-btn'       => 'Sitemap Opslaan',
-                ],
-
                 'delete-failed' => ':name Verwijderen Mislukt',
             ],
 
@@ -2681,6 +2671,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Acties',
+                        'category'            => 'Categorie',
+                        'cms-page'            => 'CMS-pagina',
                         'delete'              => 'Verwijderen',
                         'edit'                => 'Bewerken',
                         'for'                 => 'Voor',
@@ -2688,19 +2680,16 @@ return [
                         'locale'              => 'Taal',
                         'mass-delete-success' => 'De geselecteerde URL-herschrijvingen zijn succesvol verwijderd.',
                         'permanent-redirect'  => 'Permanente doorstuur (301)',
+                        'product'             => 'Product',
                         'redirect-type'       => 'Doorstuurtype',
                         'request-path'        => 'Aanvraagpad',
                         'target-path'         => 'Doelpad',
                         'temporary-redirect'  => 'Tijdelijke doorstuur (302)',
-                        'product'             => 'Product',
-                        'cms-page'            => 'CMS-pagina',
-                        'category'            => 'Categorie',
                     ],
 
                     'create' => [
                         'category'           => 'Categorie',
                         'cms-page'           => 'CMS-pagina',
-                        'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
                         'for'                => 'Voor',
                         'locale'             => 'Taal',
                         'permanent-redirect' => 'Permanente doorstuur (301)',
@@ -2727,8 +2716,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'De :name is al in gebruik.',
-            'create-btn'    => 'Pagina aanmaken',
             'channel'       => 'Kanaal',
+            'create-btn'    => 'Pagina aanmaken',
             'language'      => 'Taal',
             'title'         => 'Pagina\'s',
 
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'Totaal ongeldige rijen:',
                     'total-rows-processed'    => 'Totaal verwerkte rijen:',
                     'total-updated'           => 'Totaal bijgewerkte records:',
-                    'validate-info'           => 'Klik op Valideer Gegevens om uw import te controleren.',
                     'validate'                => 'Valideren',
+                    'validate-info'           => 'Klik op Valideer Gegevens om uw import te controleren.',
                     'validating-info'         => 'Het lezen en valideren van gegevens is gestart',
                     'validation-failed-info'  => 'Uw import is ongeldig. Los de volgende fouten op en probeer het opnieuw.',
                     'validation-success-info' => 'Uw import is geldig. Klik op Importeren om het importproces te starten.',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'Rollen',
 
                 'datagrid' => [
-                    'custom'          => 'Aangepast',
                     'all'             => 'Alle',
-                    'permission-type' => 'Toestemmingstype',
-                    'name'            => 'Naam',
-                    'id'              => 'ID',
-                    'edit'            => 'Bewerken',
+                    'custom'          => 'Aangepast',
                     'delete'          => 'Verwijderen',
+                    'edit'            => 'Bewerken',
+                    'id'              => 'ID',
+                    'name'            => 'Naam',
+                    'permission-type' => 'Toestemmingstype',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'Terug',
                 'category-carousel'             => 'Categorie Carrousel',
                 'category-carousel-description' => 'Toon dynamische categorieën aantrekkelijk met een responsieve categoriecarrousel.',
+                'category-id'                   => 'Categorie-ID',
                 'channels'                      => 'Kanalen',
                 'column'                        => 'Kolom',
                 'create-filter'                 => 'Filter aanmaken',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'Nee',
                 'parent-id'                     => 'Ouder-ID',
                 'parent-id-hint'                => 'U kunt meerdere ouder-IDs als gescheiden waarden invoeren (bijvoorbeeld: 12,15,34)',
-                'category-id'                   => 'Categorie-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Diensten bijwerken',
                 ],
-                'yes'                           => 'Ja',
+
+                'yes' => 'Ja',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Er zijn geen records geselecteerd.',
-                'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
                 'must-select-a-mass-action'        => 'U moet een massale actie selecteren.',
+                'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
+                'no-records-selected'              => 'Er zijn geen records geselecteerd.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'Campagnes',
         'cancel'                   => 'Annuleren',
         'cart-rules'               => 'Winkelwagen Regels',
-        'catalog-rules'            => 'Catalogus Regels',
         'catalog'                  => 'Catalogus',
+        'catalog-rules'            => 'Catalogus Regels',
         'categories'               => 'Categorieën',
         'channels'                 => 'Kanalen',
         'cms'                      => 'CMS',

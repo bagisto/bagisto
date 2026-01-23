@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Domyślny',
-                'meta-title'       => 'Sklep demonstracyjny',
-                'meta-keywords'    => 'Słowa kluczowe sklepu demonstracyjnego',
                 'meta-description' => 'Opis meta sklepu demonstracyjnego',
+                'meta-keywords'    => 'Słowa kluczowe sklepu demonstracyjnego',
+                'meta-title'       => 'Sklep demonstracyjny',
+                'name'             => 'Domyślny',
             ],
 
             'currencies' => [
@@ -337,9 +337,9 @@ return [
                     'name' => 'Zawartość usług',
 
                     'title' => [
+                        'emi-available'   => 'EMI dostępne',
                         'free-shipping'   => 'Darmowa wysyłka',
                         'product-replace' => 'Zamiana produktu',
-                        'emi-available'   => 'EMI dostępne',
                         'time-support'    => 'Wsparcie 24/7',
                     ],
                 ],
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Maak de databasetabel aan',
+                'create-database-table'   => 'Maak de databasetabel aan',
                 'install'                 => 'Installatie',
                 'install-info'            => 'Bagisto Voor Installatie',
                 'install-info-button'     => 'Klik op de knop hieronder om',
