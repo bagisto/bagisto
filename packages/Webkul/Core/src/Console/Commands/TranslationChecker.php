@@ -452,7 +452,7 @@ class TranslationChecker extends Command
             } else {
                 $this->newLine();
 
-                $this->line('<fg=yellow>💡 Use --details flag to see specific missing/extra keys</>');
+                $this->line('<fg=yellow>💡 Use --details flag to see specific missing/extra keys.</>');
             }
         } else {
             $this->newLine();
