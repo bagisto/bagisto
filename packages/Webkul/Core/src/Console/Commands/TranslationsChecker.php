@@ -11,20 +11,20 @@ use Illuminate\Support\Str;
 use RuntimeException;
 use Throwable;
 
-class TranslationChecker extends Command
+class TranslationsChecker extends Command
 {
     /**
      * The name and signature of the console command.
      */
     protected $signature = 'bagisto:translations:check
-                            {--locale= : Check only a specific locale against EN}
-                            {--package= : Check only a specific package}
-                            {--details : Show detailed error information}';
+                            {--locale= : Check only a specific locale against EN.}
+                            {--package= : Check only a specific package.}
+                            {--details : Show detailed error information.}';
 
     /**
      * The console command description.
      */
-    protected $description = 'Check translation files consistency across all packages (EN is canonical)';
+    protected $description = 'Check translation files consistency across all packages (EN is canonical).';
 
     /**
      * Base locale for comparison.
@@ -143,7 +143,7 @@ class TranslationChecker extends Command
     {
         $this->newLine();
 
-        $this->info('🔍 Bagisto Translation Checker');
+        $this->info('🔍 Bagisto Translations Checker');
 
         $this->line('   Canonical Locale: <fg=cyan>'.Str::upper(self::BASE_LOCALE).'</>');
 
@@ -159,7 +159,7 @@ class TranslationChecker extends Command
     }
 
     /**
-     * Process all packages for translation checking.
+     * Process all packages for translations checking.
      */
     protected function processPackages(?string $targetPackage, ?string $targetLocale): void
     {
@@ -508,7 +508,7 @@ class TranslationChecker extends Command
         if ($this->hasError) {
             $this->newLine();
 
-            $this->error('Translation check failed!');
+            $this->error('Translations check failed!');
 
             if ($showDetails) {
                 $this->displayDetailedErrors();
