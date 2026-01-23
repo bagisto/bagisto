@@ -344,12 +344,12 @@ return [
                 'completed'           => 'Terminado',
                 'date'                => 'Fecha',
                 'download-error'      => 'El enlace de descarga ha expirado.',
-                'expired'             => 'Caducado',
                 'empty-product'       => 'No tienes productos para descargar',
+                'expired'             => 'Caducado',
                 'name'                => 'Productos Descargables',
                 'orderId'             => 'ID de Pedido',
-                'pending'             => 'Pendiente',
                 'payment-error'       => 'El pago no se ha realizado para esta descarga.',
+                'pending'             => 'Pendiente',
                 'records-found'       => 'Registro(s) encontrado(s)',
                 'remaining-downloads' => 'Descargas Restantes',
                 'status'              => 'Estado',
@@ -708,8 +708,8 @@ return [
 
                 'downloadable' => [
                     'links'   => 'Enlaces',
-                    'samples' => 'Muestras',
                     'sample'  => 'Muestra',
+                    'samples' => 'Muestras',
                 ],
 
                 'grouped' => [
@@ -921,8 +921,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar con el Pago',
             'illegal'                   => 'La cantidad no puede ser menor que uno.',
-            'inactive-add'              => 'El artículo inactivo no se puede agregar al carrito.',
             'inactive'                  => 'El artículo ha sido desactivado y posteriormente eliminado del carrito.',
+            'inactive-add'              => 'El artículo inactivo no se puede agregar al carrito.',
             'inventory-warning'         => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
             'item-add-to-cart'          => 'Producto Agregado Exitosamente',
             'minimum-order-message'     => 'El monto mínimo de la orden es',
@@ -1055,7 +1055,7 @@ return [
                 'excl-tax'                  => 'Excl. Impuestos:',
                 'grand-total'               => 'Total General',
                 'place-order'               => 'Realizar Pedido',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'Procesando',
                 'sub-total'                 => 'Subtotal',
                 'sub-total-excl-tax'        => 'Subtotal (Excl. Impuestos)',

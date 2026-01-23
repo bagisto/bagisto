@@ -348,8 +348,8 @@ return [
                 'expired'             => 'মেয়াদোত্তীর্ণ',
                 'name'                => 'ডাউনলোডযোগ্য পণ্য',
                 'orderId'             => 'অর্ডার আইডি',
-                'pending'             => 'বিচারাধীন',
                 'payment-error'       => 'এই ডাউনলোডের জন্য পেমেন্ট হয়নি।',
+                'pending'             => 'বিচারাধীন',
                 'records-found'       => 'রেকর্ড(গুলি) পাওয়া গিয়েছে',
                 'remaining-downloads' => 'অবশিষ্ট ডাউনলোড',
                 'status'              => 'স্থিতি',
@@ -620,15 +620,15 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'ডিফল্ট কন্টেন্ট',
+            'default-header'  => 'ডিফল্ট হেডার',
+
             'confirm' => [
                 'agree-btn'    => 'সম্মত',
                 'disagree-btn' => 'অসম্মত',
                 'message'      => 'আপনি কি নিশ্চিত যে আপনি এই কাজটি সম্পাদন করতে চান?',
                 'title'        => 'আপনি কি নিশ্চিত?',
             ],
-
-            'default-content' => 'ডিফল্ট কন্টেন্ট',
-            'default-header'  => 'ডিফল্ট হেডার',
         ],
 
         'products' => [
@@ -655,8 +655,8 @@ return [
         ],
 
         'range-slider' => [
-            'min-range' => 'ন্যূনতম পরিসীমা',
             'max-range' => 'সর্বাধিক পরিসীমা',
+            'min-range' => 'ন্যূনতম পরিসীমা',
             'range'     => 'পরিসীমা:',
         ],
 
@@ -708,8 +708,8 @@ return [
 
                 'downloadable' => [
                     'links'   => 'লিংকগুলি',
-                    'samples' => 'নমুনা',
                     'sample'  => 'নমুনা',
+                    'samples' => 'নমুনা',
                 ],
 
                 'grouped' => [
@@ -921,8 +921,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'চেকআউট চালিয়ে যান',
             'illegal'                   => 'পরিমাণ একের চেয়ে কম হতে পারে না।',
-            'inactive-add'              => 'নিষ্ক্রিয় আইটেমটি কার্টে যোগ করা যাবে না।',
             'inactive'                  => 'আইটেমটি নিষ্ক্রিয় হয়ে গিয়েছে এবং পরবর্তীকার কার্ট থেকে সরানো হয়েছে।',
+            'inactive-add'              => 'নিষ্ক্রিয় আইটেমটি কার্টে যোগ করা যাবে না।',
             'inventory-warning'         => 'অনুরোধকৃত পরিমাণ উপলব্ধ নেই, দয়া করে পরে আবার চেষ্টা করুন।',
             'item-add-to-cart'          => 'পণ্য সফলভাবে যোগ করা হয়েছে',
             'minimum-order-message'     => 'সর্বনিম্ন অর্ডার পরিমাণ হলো',
@@ -1055,7 +1055,7 @@ return [
                 'excl-tax'                  => 'কর বাদে:',
                 'grand-total'               => 'সর্বমোট',
                 'place-order'               => 'অর্ডার স্থাপন',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'প্রক্রিয়াধীন',
                 'sub-total'                 => 'সাবটোটাল',
                 'sub-total-excl-tax'        => 'সাবটোটাল (কর বাদে)',
@@ -1151,9 +1151,9 @@ return [
 
     'layouts' => [
         'address'               => 'ঠিকানা',
-        'my-account'            => 'আমার অ্যাকাউন্ট',
         'downloadable-products' => 'ডাউনলোড যোগ্য পণ্য',
         'gdpr-request'          => 'জিডিপিআর অনুরোধ',
+        'my-account'            => 'আমার অ্যাকাউন্ট',
         'orders'                => 'আদেশ',
         'profile'               => 'প্রোফাইল',
         'reviews'               => 'পর্যালোচনা',
@@ -1189,9 +1189,9 @@ return [
             ],
 
             'update-password' => [
-                'subject'     => 'পাসওয়ার্ড আপডেট করা হয়েছে',
-                'greeting'    => 'পাসওয়ার্ড আপডেট হয়েছে!',
                 'description' => 'আপনি এই ইমেইলটি পেয়েছেন কারণ আপনি আপনার পাসওয়ার্ড আপডেট করেছেন।',
+                'greeting'    => 'পাসওয়ার্ড আপডেট হয়েছে!',
+                'subject'     => 'পাসওয়ার্ড আপডেট করা হয়েছে',
             ],
 
             'verification' => [
@@ -1202,8 +1202,8 @@ return [
             ],
 
             'commented' => [
-                'subject'     => 'নতুন মন্তব্য যোগ করা হয়েছে',
                 'description' => 'নোট - :note',
+                'subject'     => 'নতুন মন্তব্য যোগ করা হয়েছে',
             ],
 
             'subscribed' => [

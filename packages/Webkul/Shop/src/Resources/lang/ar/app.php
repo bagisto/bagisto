@@ -344,8 +344,8 @@ return [
                 'completed'           => 'مكتمل',
                 'date'                => 'التاريخ',
                 'download-error'      => 'تم انتهاء صلاحية رابط التنزيل',
-                'expired'             => 'منتهي الصلاحية',
                 'empty-product'       => 'ليس لديك منتج لتنزيله',
+                'expired'             => 'منتهي الصلاحية',
                 'name'                => 'المنتجات قابلة للتنزيل',
                 'orderId'             => 'رقم الطلب',
                 'payment-error'       => 'لم يتم دفع هذا التنزيل بعد',
@@ -655,8 +655,8 @@ return [
         ],
 
         'range-slider' => [
-            'min-range' => 'الحد الأدنى',
             'max-range' => 'الحد الأقصى',
+            'min-range' => 'الحد الأدنى',
             'range'     => 'النطاق:',
         ],
 
@@ -685,7 +685,6 @@ return [
 
         'sort-by' => [
             'title'        => 'ترتيب حسب',
-            'total-amount' => 'إجمالي المبلغ',
         ],
 
         'view' => [
@@ -704,12 +703,13 @@ return [
 
                 'bundle' => [
                     'none' => 'لا شيء',
+                    'total-amount' => 'المبلغ الإجمالي',
                 ],
 
                 'downloadable' => [
                     'links'   => 'روابط',
-                    'samples' => 'عينات',
                     'sample'  => 'عينة',
+                    'samples' => 'عينات',
                 ],
 
                 'grouped' => [
@@ -853,8 +853,8 @@ return [
     'categories' => [
         'filters' => [
             'clear-all' => 'مسح الكل',
-            'filters'   => 'الفلاتر:',
             'filter'    => 'فلتر',
+            'filters'   => 'الفلاتر:',
 
             'search' => [
                 'load-more'            => 'تحميل المزيد',
@@ -921,8 +921,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'المتابعة إلى الدفع',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
-            'inactive-add'              => 'لا يمكن إضافة المنتج الغير نشط إلى السلة.',
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
+            'inactive-add'              => 'لا يمكن إضافة المنتج الغير نشط إلى السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
             'minimum-order-message'     => 'الحد الأدنى للطلب هو',
@@ -1055,7 +1055,7 @@ return [
                 'excl-tax'                  => 'بدون ضريبة:',
                 'grand-total'               => 'المجموع الكلي',
                 'place-order'               => 'تقديم الطلب',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'جارٍ المعالجة',
                 'sub-total'                 => 'المجموع الفرعي',
                 'sub-total-excl-tax'        => 'المجموع الفرعي (بدون ضريبة)',

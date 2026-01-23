@@ -845,7 +845,7 @@ class TranslationChecker extends Command
             $displayLine = $lineNum + 1;
 
             // Match array key definitions like 'key' => or "key" =>
-            if (preg_match('/^(\s*)[\'"]([\w\-\.]+)[\'"]\s*=>/', $line, $matches)) {
+            if (preg_match('/^(\s*)[\'"]([^\'"]+)[\'"]\s*=>/', $line, $matches)) {
                 $indent = Str::length($matches[1]);
 
                 $key = $matches[2];
