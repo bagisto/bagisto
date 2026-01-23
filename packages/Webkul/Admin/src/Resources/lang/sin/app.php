@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'ඇණවුමේ අංකය',
                     'pay-by'          => 'වෙනත් - :method',
                     'pay-via'         => 'මං හෝදය',
-                    'pending-payment' => 'මුද්‍රණය සහභාගී',
                     'pending'         => 'රටට සහභාගී',
+                    'pending-payment' => 'මුද්‍රණය සහභාගී',
                     'processing'      => 'ක්‍රියා කරන ලද',
                     'product-count'   => ':count + වැඩි නිෂ්පාදන',
                     'status'          => 'ස්ථානය',
@@ -841,8 +841,8 @@ return [
 
                 'videos' => [
                     'error' => ':attribute එක :max කිලෝබයිට් ට වඩා වැඩි නොවිය හැක. කරුණාකර කුඩා ගොනුවක් තෝරන්න.',
-                    'title' => 'වීඩියෝ',
                     'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
+                    'title' => 'වීඩියෝ',
                 ],
 
                 'links' => [
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'නගරය',
                         'company-name'       => 'ව්‍යාපාරයේ නම',
                         'country'            => 'රාජ්‍යය',
-                        'create-btn'         => 'එකතු කරන්න',
                         'create-address-btn' => 'නව ලිපිනයක් එක් කරන්න',
+                        'create-btn'         => 'එකතු කරන්න',
                         'default-address'    => 'ස්වයං ලිපිනය',
                         'email'              => '්මේල්',
                         'first-name'         => 'මුල් නම',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'සාරාංශ විය',
                         'customer-name'   => 'පාරිභෝගිකයාගේ නම',
                         'date'            => 'දිනය',
-                        'empty-order'     => 'ඇණවුම් නොමැත',
                         'email'           => '්මේල්',
+                        'empty-order'     => 'ඇණවුම් නොමැත',
                         'fraud'           => 'හඳුනා ගැනීම',
                         'grand-total'     => 'සාමාජික එකතුව',
                         'location'        => 'ස්ථානය',
@@ -2652,7 +2652,6 @@ return [
                         'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
                         'success'        => 'සයිට්‌මැප් සාර්ථකව සාදන ලදි',
                         'title'          => 'සයිට්‌මැප් සාදන්න',
-
                     ],
 
                     'edit' => [
@@ -2660,16 +2659,6 @@ return [
                         'success'        => 'සයිට්‌මැප් සාර්ථකව යාවත් කළ ලදි',
                         'title'          => 'සයිට්‌මැප් සංස්කරණය',
                     ],
-                ],
-
-                'edit' => [
-                    'back-btn'       => 'ආපසු',
-                    'file-name'      => 'ගොනුවේ නම',
-                    'file-name-info' => 'උදා: sitemap.xml',
-                    'general'        => 'සාමාන්‍ය',
-                    'path'           => 'මාර්ගය',
-                    'path-info'      => 'උදාරම: "/sitemap/" හෝ "/" ප්‍රමාණවත් සමූහය සඳහා',
-                    'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
                 ],
 
                 'delete-failed' => ':name මකාදම් කිරීම අසාර්ථකයි',
@@ -2701,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'වර්ගය',
                         'cms-page'           => 'CMS පිටුව',
-                        'delete-warning'     => 'ඔබට මෙම ක්‍රියාව සිදු කිරීමට අවශ්‍ය බව විශ්වාසද?',
                         'for'                => 'සදහා',
                         'locale'             => 'දේශීය',
                         'permanent-redirect' => 'ස්ථිර (301)',
@@ -2884,9 +2872,9 @@ return [
                     'delete'              => 'මකන්න',
                     'download-sample'     => 'උදව් පිටපත බාගන්න',
                     'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
-                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
-                    'file-info'           => '/project-root/storage/app/import වෙත ස්ථානය හැඳින්වීමෙන් පහත පෙන්වන අතර, product-images, import-images සින්හල භාවිතා කරන්න.',
                     'file'                => 'ගොනුව',
+                    'file-info'           => '/project-root/storage/app/import වෙත ස්ථානය හැඳින්වීමෙන් පහත පෙන්වන අතර, product-images, import-images සින්හල භාවිතා කරන්න.',
+                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
                     'general'             => 'සාමාන්‍ය',
                     'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
                     'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
@@ -2909,8 +2897,9 @@ return [
                     'delete'              => 'මකන්න',
                     'download-sample'     => 'උදව් පිටපත බාගන්න',
                     'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
-                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
                     'file'                => 'ගොනුව',
+                    'file-info'           => '/project-root/storage/app/import වෙත ස්ථානය හැඳින්වීමෙන් පහත පෙන්වන අතර, product-images, import-images සින්හල භාවිතා කරන්න.',
+                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
                     'general'             => 'සාමාන්‍ය',
                     'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
                     'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'මුළු අවලංගු පේළි:',
                     'total-rows-processed'    => 'මුළු ප්‍රතිපල කරන ලද පේළි:',
                     'total-updated'           => 'මුළු යාවත්කාලීන කළ ලද වාර්තා:',
-                    'validate-info'           => 'ඔබගේ ආනයනය පරීක්ෂා කිරීම සඳහා වලංගු කරන්න.',
                     'validate'                => 'වලංගු කරන්න',
+                    'validate-info'           => 'ඔබගේ ආනයනය පරීක්ෂා කිරීම සඳහා වලංගු කරන්න.',
                     'validating-info'         => 'දත්ත කියවීම සහ වලාකුළු කිරීම ආරම්භය කර ඇත',
                     'validation-failed-info'  => 'ඔබගේ ආනයනය වලංගු නොවේ. කරුණාකර පහත දෝෂ සදහා අවස්ථාව ලබා ගන්න.',
                     'validation-success-info' => 'ඔබගේ ආනයනය වලංගු වේ. ආනයනය ආරම්භ කිරීමට ක්ලික් කරන්න.',
@@ -3037,6 +3026,7 @@ return [
 
             'create' => [
                 'add-title'      => 'මානන ගණනයක් එකතු කරන්න',
+                'address'        => 'Source Address',
                 'back-btn'       => 'ආපසු',
                 'city'           => 'නගරය',
                 'code'           => 'කේතය',
@@ -3057,7 +3047,6 @@ return [
                 'select-country' => 'රට තෝරන්න',
                 'select-state'   => 'පළාත තෝරන්න',
                 'settings'       => 'සැකසුම්',
-                'source-address' => 'මුලඟ ලිපිනය',
                 'state'          => 'පළාත',
                 'status'         => 'තත්ත්වය',
                 'street'         => 'මාර්ගය',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'භූමිකා',
 
                 'datagrid' => [
-                    'custom'          => 'අභිරුචි',
                     'all'             => 'සියල්ල',
-                    'permission-type' => 'අවසන් පිරවීම වර්ගය',
-                    'name'            => 'නම',
-                    'id'              => 'අංකය',
-                    'edit'            => 'සංස්කරණය කරන්න',
+                    'custom'          => 'අභිරුචි',
                     'delete'          => 'මකාදමා',
+                    'edit'            => 'සංස්කරණය කරන්න',
+                    'id'              => 'අංකය',
+                    'name'            => 'නම',
+                    'permission-type' => 'අවසන් පිරවීම වර්ගය',
                 ],
             ],
 
@@ -3421,9 +3410,9 @@ return [
                     'name'          => 'නම',
                     'sort-order'    => 'සුප්‍රතා අනුකුරු',
                     'status'        => 'තත්ත්වය',
+                    'theme'         => 'තේමාව',
                     'type'          => 'ප්‍රමාණය',
                     'view'          => 'දැක්කාකරණය',
-                    'theme'         => 'තේමාව',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'ආපසු',
                 'category-carousel'             => 'ප්‍රවේශ කැරූසල්',
                 'category-carousel-description' => 'ප්‍රපුරේෂිත කැටගෙන් අනුකූලතාවක් සංකීර්ණ කිරීමට ප්‍රකාශකරනු ලැබේ.',
+                'category-id'                   => 'ප්‍රවර්ගය අංකය',
                 'channels'                      => 'චැනල්',
                 'column'                        => 'තීරුව',
                 'create-filter'                 => 'ශ්‍රිතකරන්න',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'නැත',
                 'parent-id'                     => 'මවුලක් අංකය',
                 'parent-id-hint'                => 'ඔබ ප්‍රතිපාදිත අංක එකතු කිරීමට අදාළ විය යුතුය (එනම්: 12,15,34)',
-                'category-id'                   => 'ප්‍රවර්ගය අංකය',
                 'preview'                       => 'පෙරදසුන',
                 'product-carousel'              => 'නිෂ්පාදන කැරූසල්',
                 'product-carousel-description'  => 'නිෂ්පාදනය සහිතවෙනි ස්ථානයට සුපිරි ආදරයක් පෙනවීමට ජලානන හා සංකීර්ණ නිෂ්පාදන කැරූසල් සැකසුම්.',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'ශීර්ෂය',
                     'update-service'     => 'සේවාවන් යාවත්කාල කරන්න',
                 ],
-                'yes'                           => 'ඔව්',
+
+                'yes' => 'ඔව්',
             ],
 
             'create-success' => 'තේමා සාර්ථකයි',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'කිසිද වාර්තාවක් තෝරාගෙන නැත.',
-                'must-select-a-mass-action-option' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ එකක් තෝරා යන්නේ.',
                 'must-select-a-mass-action'        => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ යොදා ගැනේ.',
+                'must-select-a-mass-action-option' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ එකක් තෝරා යන්නේ.',
+                'no-records-selected'              => 'කිසිද වාර්තාවක් තෝරාගෙන නැත.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'පෙට්ටිය',
         'cancel'                   => 'අවලංගු',
         'cart-rules'               => 'කර්ට් රූල්ස්',
-        'catalog-rules'            => 'කැටලොග් රූල්ස්',
         'catalog'                  => 'ප්‍රකටක',
+        'catalog-rules'            => 'කැටලොග් රූල්ස්',
         'categories'               => 'ප්‍රවර්ග',
         'channels'                 => 'චැනල්',
         'cms'                      => 'සිංහල',

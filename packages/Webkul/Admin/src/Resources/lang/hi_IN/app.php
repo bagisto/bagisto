@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'आदेश आईडी',
                     'pay-by'          => ':method के द्वारा भुगतान करें',
                     'pay-via'         => 'द्वारा भुगतान करें',
-                    'pending-payment' => 'बकाया भुगतान',
                     'pending'         => 'बेकारी',
+                    'pending-payment' => 'बकाया भुगतान',
                     'processing'      => 'प्रोसेसिंग',
                     'product-count'   => ':count + और अधिक उत्पाद',
                     'status'          => 'स्थिति',
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'शहर',
                         'company-name'       => 'कंपनी का नाम',
                         'country'            => 'देश',
-                        'create-btn'         => 'बनाएं',
                         'create-address-btn' => 'नया पता जोड़ें',
+                        'create-btn'         => 'बनाएं',
                         'default-address'    => 'डिफ़ॉल्ट पता',
                         'email'              => 'ईमेल',
                         'first-name'         => 'पहला नाम',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'पूर्ण',
                         'customer-name'   => 'ग्राहक का नाम',
                         'date'            => 'तिथि',
-                        'empty-order'     => 'कोई ऑर्डर उपलब्ध नहीं है',
                         'email'           => 'ईमेल',
+                        'empty-order'     => 'कोई ऑर्डर उपलब्ध नहीं है',
                         'fraud'           => 'धोखाधड़ी',
                         'grand-total'     => 'कुल योग',
                         'location'        => 'स्थान',
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'पीछे जाएँ',
-                    'file-name'      => 'फ़ाइल का नाम',
-                    'file-name-info' => 'उदाहरण: sitemap.xml',
-                    'general'        => 'सामान्य',
-                    'path'           => 'पथ',
-                    'path-info'      => 'उदाहरण: "/sitemap/" या बेस पथ के लिए "/"',
-                    'save-btn'       => 'साइटमैप सहेजें',
-                ],
-
                 'delete-failed' => ':name हटाने में विफल रहा',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'श्रेणी',
                         'cms-page'           => 'CMS पृष्ठ',
-                        'delete-warning'     => 'क्या आप इस कार्य को करना सुनिश्चित हैं?',
                         'for'                => 'के लिए',
                         'locale'             => 'भाषा क्षेत्र',
                         'permanent-redirect' => 'स्थायी (301)',
@@ -2804,12 +2793,12 @@ return [
 
                 'create' => [
                     'code'             => 'कोड',
-                    'name'             => 'नाम',
                     'direction'        => 'दिशा',
                     'locale-logo'      => 'स्थान लोगो',
-                    'title'            => 'स्थान बनाएं',
+                    'name'             => 'नाम',
                     'save-btn'         => 'स्थान सहेजें',
                     'select-direction' => 'दिशा चुनें',
+                    'title'            => 'स्थान बनाएं',
                 ],
 
                 'edit' => [
@@ -2883,9 +2872,9 @@ return [
                     'delete'              => 'मिटाए',
                     'download-sample'     => 'उदाहरण डाउनलोड करे',
                     'field-separator'     => 'फ़ील्ड अलगाव',
-                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें /project-root/storage/app/import/product-images फोल्डर में रखे जाएं।',
-                    'file-info'           => '/project-root/storage/app/import के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
                     'file'                => 'फ़ाइल',
+                    'file-info'           => '/project-root/storage/app/import के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
+                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें /project-root/storage/app/import/product-images फोल्डर में रखे जाएं।',
                     'general'             => 'सामान्य',
                     'images-directory'    => 'छवियों का डायरेक्टरी पथ',
                     'process-in-queue'    => 'क्वीज में प्रक्रिया करे',
@@ -2908,9 +2897,9 @@ return [
                     'delete'              => 'मिटाए',
                     'download-sample'     => 'उदाहरण डाउनलोड करे',
                     'field-separator'     => 'फ़ील्ड अलगाव',
-                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें /project-root/storage/app/import/product-images फोल्डर में रखे जाएं।',
-                    'file-info'           => '/project-root/storage/app/import के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
                     'file'                => 'फ़ाइल',
+                    'file-info'           => '/project-root/storage/app/import के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
+                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें /project-root/storage/app/import/product-images फोल्डर में रखे जाएं।',
                     'general'             => 'सामान्य',
                     'images-directory'    => 'छवियों का डायरेक्टरी पथ',
                     'process-in-queue'    => 'क्वीज में प्रक्रिया करे',
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'कुल अमान्य पंक्तियाँ:',
                     'total-rows-processed'    => 'कुल प्रक्रिया की गई पंक्तियाँ:',
                     'total-updated'           => 'कुल रिकॉर्ड अपडेट किए गए:',
-                    'validate-info'           => 'अपना आयात जांचने के लिए डेटा वेरिफाई क्लिक करें।',
                     'validate'                => 'वेरिफाई',
+                    'validate-info'           => 'अपना आयात जांचने के लिए डेटा वेरिफाई क्लिक करें।',
                     'validating-info'         => 'डेटा पढ़ना और वेरिफाई शुरू कर दिया गया है',
                     'validation-failed-info'  => 'आपका आयात अमान्य है। कृपया निम्नलिखित त्रुटियों को सुधारें और प्रयास करें।',
                     'validation-success-info' => 'आपका आयात सही है। आयात प्रक्रिया शुरू करने के लिए आयात क्लिक करें।',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'भूमिकाएँ',
 
                 'datagrid' => [
-                    'custom'          => 'कस्टम',
                     'all'             => 'सभी',
-                    'permission-type' => 'अनुमति प्रकार',
-                    'name'            => 'नाम',
-                    'id'              => 'आईडी',
-                    'edit'            => 'संपादित करें',
+                    'custom'          => 'कस्टम',
                     'delete'          => 'हटाएं',
+                    'edit'            => 'संपादित करें',
+                    'id'              => 'आईडी',
+                    'name'            => 'नाम',
+                    'permission-type' => 'अनुमति प्रकार',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'वापस',
                 'category-carousel'             => 'श्रेणी कैरोसल',
                 'category-carousel-description' => 'एक प्रतिस्थापनीय श्रेणी कैरोसल का उपयोग करके डायनामिक श्रेणियों को प्रासंगिक रूप से प्रदर्शित करें।',
+                'category-id'                   => 'श्रेणी आईडी',
                 'channels'                      => 'चैनल्स',
                 'column'                        => 'स्तंभ',
                 'create-filter'                 => 'फ़िल्टर बनाएं',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'नहीं',
                 'parent-id'                     => 'मूल आईडी',
                 'parent-id-hint'                => 'आप कुछ मूल आईडी को अलग-अलग मानों के रूप में उपयोग कर सकते हैं (जैसे: 12,15,34)',
-                'category-id'                   => 'श्रेणी आईडी',
                 'preview'                       => 'पूर्वावलोकन',
                 'product-carousel'              => 'उत्पाद कैरोसल',
                 'product-carousel-description'  => 'डायनामिक और प्रतिस्थापनीय उत्पाद कैरोसल के साथ उत्पादों का सुंदर प्रदर्शन करें।',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'शीर्षक',
                     'update-service'     => 'सेवाओं को अपडेट करें',
                 ],
-                'yes'                           => 'हाँ',
+
+                'yes' => 'हाँ',
             ],
 
             'create-success' => 'थीम सफलतापूर्वक बनाई गई',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'कोई रिकॉर्ड नहीं चुना गया है।',
-                'must-select-a-mass-action-option' => 'आपको एक सामूहिक क्रिया का चयन एक विकल्प करना चाहिए।',
                 'must-select-a-mass-action'        => 'आपको एक सामूहिक क्रिया का चयन करना चाहिए।',
+                'must-select-a-mass-action-option' => 'आपको एक सामूहिक क्रिया का चयन एक विकल्प करना चाहिए।',
+                'no-records-selected'              => 'कोई रिकॉर्ड नहीं चुना गया है।',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'कैंपेन्स',
         'cancel'                   => 'रद्द करें',
         'cart-rules'               => 'कार्ट नियम',
-        'catalog-rules'            => 'कैटलॉग नियम',
         'catalog'                  => 'कैटलॉग',
+        'catalog-rules'            => 'कैटलॉग नियम',
         'categories'               => 'श्रेणियाँ',
         'channels'                 => 'चैनल्स',
         'cms'                      => 'सीएमएस',

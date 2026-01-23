@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'Номер замовлення',
                     'pay-by'          => 'Сплачено через - :method',
                     'pay-via'         => 'Сплатити через',
-                    'pending-payment' => 'Очікується оплата',
                     'pending'         => 'В очікуванні',
+                    'pending-payment' => 'Очікується оплата',
                     'processing'      => 'Обробка',
                     'product-count'   => ':count + Ще більше продуктів',
                     'status'          => 'Статус',
@@ -841,8 +841,8 @@ return [
 
                 'videos' => [
                     'error' => 'Параметр :attribute не може перевищувати :max кілобайт. Виберіть менший файл.',
-                    'title' => 'Відео',
                     'info'  => 'Максимальний розмір відео повинен бути приблизно :size',
+                    'title' => 'Відео',
                 ],
 
                 'links' => [
@@ -1649,6 +1649,7 @@ return [
                 'edit-group-info'                  => 'Подвійний клік для редагування Групи',
                 'enter-code'                       => 'Введіть Код',
                 'enter-name'                       => 'Введіть Назву',
+                'general'                          => 'Загальні',
                 'group-code-already-exists'        => 'Код групи атрибутів вже існує.',
                 'group-contains-system-attributes' => 'Ця група містить системні атрибути. Спочатку перемістіть системні атрибути в іншу групу і спробуйте знову.',
                 'group-name-already-exists'        => 'Назва групи атрибутів вже існує.',
@@ -1675,7 +1676,6 @@ return [
             'update-success'          => 'Сімейство оновлено успішно.',
             'user-define-error'       => 'Неможливо видалити системне Сімейство Атрибутів',
         ],
-
     ],
 
     'customers' => [
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'Місто',
                         'company-name'       => 'Назва компанії',
                         'country'            => 'Країна',
-                        'create-btn'         => 'Створити',
                         'create-address-btn' => 'Додати нову адресу',
+                        'create-btn'         => 'Створити',
                         'default-address'    => 'Адреса за замовчуванням',
                         'email'              => 'Електронна пошта',
                         'first-name'         => "Ім'я",
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'Завершено',
                         'customer-name'   => 'Ім\'я клієнта',
                         'date'            => 'Дата',
-                        'empty-order'     => 'Немає доступних замовлень',
                         'email'           => 'Електронна пошта',
+                        'empty-order'     => 'Немає доступних замовлень',
                         'fraud'           => 'Шахрайство',
                         'grand-total'     => 'Загальна сума',
                         'location'        => 'Місце розташування',
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Назад',
-                    'file-name'      => 'Ім я файлу',
-                    'file-name-info' => 'Приклад: sitemap.xml',
-                    'general'        => 'Загальне',
-                    'path'           => 'Шлях',
-                    'path-info'      => 'Приклад: "/sitemap/" або "/" для базового шляху',
-                    'save-btn'       => 'Зберегти карту сайту',
-                ],
-
                 'delete-failed' => ':name Видалення не вдалося',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'Категорія',
                         'cms-page'           => 'Сторінка CMS',
-                        'delete-warning'     => 'Ви впевнені, що хочете виконати цю дію?',
                         'for'                => 'Для',
                         'locale'             => 'Локаль',
                         'permanent-redirect' => 'Постійна (301)',
@@ -2727,8 +2716,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Це ім\'я :name вже використовується.',
-            'create-btn'    => 'Створити сторінку',
             'channel'       => 'Канал',
+            'create-btn'    => 'Створити сторінку',
             'language'      => 'Мова',
             'title'         => 'Сторінки',
 
@@ -2883,9 +2872,9 @@ return [
                     'delete'              => 'Видалити',
                     'download-sample'     => 'Завантажити приклад',
                     'field-separator'     => 'Роздільник полів',
-                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
                     'file'                => 'Файл',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/app/import/product-images.',
                     'general'             => 'Загальні',
                     'images-directory'    => 'Шлях до папки з зображеннями',
                     'process-in-queue'    => 'Обробка в черзі',
@@ -2908,9 +2897,9 @@ return [
                     'delete'              => 'Видалити',
                     'download-sample'     => 'Завантажити приклад',
                     'field-separator'     => 'Роздільник полів',
-                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
                     'file'                => 'Файл',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
                     'general'             => 'Загальні',
                     'images-directory'    => 'Шлях до папки з зображеннями',
                     'process-in-queue'    => 'Обробка в черзі',
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'Всього недійсних рядків:',
                     'total-rows-processed'    => 'Всього опрацьовано рядків:',
                     'total-updated'           => 'Всього оновлено записів:',
-                    'validate-info'           => 'Натисніть „Перевірити дані“, щоб перевірити свій імпорт.',
                     'validate'                => 'Перевірити',
+                    'validate-info'           => 'Натисніть „Перевірити дані“, щоб перевірити свій імпорт.',
                     'validating-info'         => 'Дані почали читання та перевірку',
                     'validation-failed-info'  => 'Ваш імпорт недійсний. Будь ласка, виправте наступні помилки та спробуйте ще раз.',
                     'validation-success-info' => 'Ваш імпорт дійсний. Натисніть „Імпорт“, щоб розпочати процес імпорту.',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'Ролі',
 
                 'datagrid' => [
-                    'custom'          => 'Користувацькі',
                     'all'             => 'Всі',
-                    'permission-type' => 'Тип дозволу',
-                    'name'            => 'Назва',
-                    'id'              => 'ID',
-                    'edit'            => 'Редагувати',
+                    'custom'          => 'Користувацькі',
                     'delete'          => 'Видалити',
+                    'edit'            => 'Редагувати',
+                    'id'              => 'ID',
+                    'name'            => 'Назва',
+                    'permission-type' => 'Тип дозволу',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'Назад',
                 'category-carousel'             => 'Категорійна Карусель',
                 'category-carousel-description' => 'Показ категорій привабливим чином за допомогою відзивного каруселі категорій.',
+                'category-id'                   => 'Ідентифікатор категорії',
                 'channels'                      => 'Канали',
                 'column'                        => 'Колонка',
                 'create-filter'                 => 'Створити Фільтр',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'Ні',
                 'parent-id'                     => 'Батьківський ID',
                 'parent-id-hint'                => 'Ви можете ввести кілька батьківських ID як розділені комами значення (наприклад: 12,15,34)',
-                'category-id'                   => 'Ідентифікатор категорії',
                 'preview'                       => 'Попередній Перегляд',
                 'product-carousel'              => 'Карусель Товарів',
                 'product-carousel-description'  => 'Елегантно представляйте товари за допомогою динамічної та відзивної каруселі товарів.',
@@ -3525,7 +3514,8 @@ return [
                     'title'              => 'Заголовок',
                     'update-service'     => 'Оновити послуги',
                 ],
-                'yes'                           => 'Так',
+
+                'yes' => 'Так',
             ],
 
             'create-success' => 'Тему успішно створено',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Не вибрано жодного запису.',
-                'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
                 'must-select-a-mass-action'        => 'Ви повинні вибрати масову дію.',
+                'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
+                'no-records-selected'              => 'Не вибрано жодного запису.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'Кампанії',
         'cancel'                   => 'Скасувати',
         'cart-rules'               => 'Правила кошика',
-        'catalog-rules'            => 'Правила каталогу',
         'catalog'                  => 'Каталог',
+        'catalog-rules'            => 'Правила каталогу',
         'categories'               => 'Категорії',
         'channels'                 => 'Канали',
         'cms'                      => 'CMS',

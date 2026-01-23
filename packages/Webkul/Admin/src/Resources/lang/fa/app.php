@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'شماره سفارش',
                     'pay-by'          => 'پرداخت توسط - :method',
                     'pay-via'         => 'پرداخت توسط',
-                    'pending-payment' => 'در انتظار پرداخت',
                     'pending'         => 'در انتظار',
+                    'pending-payment' => 'در انتظار پرداخت',
                     'processing'      => 'در حال پردازش',
                     'product-count'   => ':count + محصولات بیشتر',
                     'status'          => 'وضعیت',
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'شهر',
                         'company-name'       => 'نام شرکت',
                         'country'            => 'کشور',
-                        'create-btn'         => 'ایجاد',
                         'create-address-btn' => 'افزودن آدرس جدید',
+                        'create-btn'         => 'ایجاد',
                         'default-address'    => 'آدرس پیش‌فرض',
                         'email'              => 'ایمیل',
                         'first-name'         => 'نام',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'تکمیل شده',
                         'customer-name'   => 'نام مشتری',
                         'date'            => 'تاریخ',
-                        'empty-order'     => 'هیچ سفارشی موجود نیست',
                         'email'           => 'ایمیل',
+                        'empty-order'     => 'هیچ سفارشی موجود نیست',
                         'fraud'           => 'تقلب',
                         'grand-total'     => 'مجموع کل',
                         'location'        => 'موقعیت',
@@ -2099,18 +2099,18 @@ return [
 
             'campaigns' => [
                 'index' => [
-                    'title'      => 'کمپین‌ها',
                     'create-btn' => 'ساخت کمپین',
+                    'title'      => 'کمپین‌ها',
 
                     'datagrid' => [
-                        'id'       => 'شناسه',
-                        'name'     => 'نام',
-                        'subject'  => 'موضوع',
-                        'status'   => 'وضعیت',
                         'active'   => 'فعال',
-                        'inactive' => 'غیرفعال',
-                        'edit'     => 'ویرایش',
                         'delete'   => 'حذف',
+                        'edit'     => 'ویرایش',
+                        'id'       => 'شناسه',
+                        'inactive' => 'غیرفعال',
+                        'name'     => 'نام',
+                        'status'   => 'وضعیت',
+                        'subject'  => 'موضوع',
                     ],
                 ],
 
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'بازگشت',
-                    'file-name'      => 'نام فایل',
-                    'file-name-info' => 'مثال: sitemap.xml',
-                    'general'        => 'عمومی',
-                    'path'           => 'مسیر',
-                    'path-info'      => 'مثال: "/sitemap/" یا "/" برای مسیر پایه',
-                    'save-btn'       => 'ذخیره نقشه‌ی سایت',
-                ],
-
                 'delete-failed' => ':name حذف نشد',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'دسته بندی',
                         'cms-page'           => 'صفحه CMS',
-                        'delete-warning'     => 'آیا مطمئن هستید که می خواهید این عمل را انجام دهید؟',
                         'for'                => 'برای',
                         'locale'             => 'منطقه',
                         'permanent-redirect' => 'دائمی (301)',
@@ -2727,8 +2716,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'این :name قبلاً استفاده شده است.',
-            'create-btn'    => 'ایجاد صفحه',
             'channel'       => 'کانال',
+            'create-btn'    => 'ایجاد صفحه',
             'language'      => 'زبان',
             'title'         => 'صفحات',
 
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'کل ردیف‌های نامعتبر:',
                     'total-rows-processed'    => 'کل ردیف‌های پردازش شده:',
                     'total-updated'           => 'کل رکوردهای به‌روزرسانی شده:',
-                    'validate-info'           => 'روی داده‌ها کلیک کنید تا ورودی خود را بررسی کنید.',
                     'validate'                => 'اعتبارسنجی',
+                    'validate-info'           => 'روی داده‌ها کلیک کنید تا ورودی خود را بررسی کنید.',
                     'validating-info'         => 'داده‌ها خوانده شده و در حال اعتبارسنجی هستند',
                     'validation-failed-info'  => 'ورودی شما نامعتبر است. لطفاً خطاهای زیر را اصلاح کرده و دوباره تلاش کنید.',
                     'validation-success-info' => 'ورودی شما معتبر است. برای شروع فرآیند ورود، بر روی وارد کردن کلیک کنید.',
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'بازگشت',
                 'category-carousel'             => 'کاروسل دسته‌بندی',
                 'category-carousel-description' => 'نمایش دسته‌بندی‌ها به شکل جذاب با استفاده از کاروسل دسته‌بندی واکنش‌گرا.',
+                'category-id'                   => 'شناسه دسته‌بندی',
                 'channels'                      => 'کانال‌ها',
                 'column'                        => 'ستون',
                 'create-filter'                 => 'ایجاد فیلتر',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'خیر',
                 'parent-id'                     => 'شناسه والد',
                 'parent-id-hint'                => 'شما می‌توانید چندین شناسه والد را به عنوان مقادیر جدا شده از کاما وارد کنید (مثل: 12,15,34)',
-                'category-id'                   => 'شناسه دسته‌بندی',
                 'preview'                       => 'پیش‌نمایش',
                 'product-carousel'              => 'کاروسل محصولات',
                 'product-carousel-description'  => 'نمایش محصولات به شیوه‌ای شیک با کاروسل محصولات پویا و واکنش‌گرا.',
@@ -3525,7 +3514,8 @@ return [
                     'title'                 => 'عنوان',
                     'update-service'        => 'به روزرسانی خدمات',
                 ],
-                'yes'                          => 'بله',
+
+                'yes' => 'بله',
             ],
 
             'create-success' => 'تم با موفقیت ایجاد شد',
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'هیچ سابقه‌ای انتخاب نشده است.',
-                'must-select-a-mass-action-option' => 'شما باید یک گزینه عمل جمعی انتخاب کنید.',
                 'must-select-a-mass-action'        => 'شما باید یک عمل جمعی انتخاب کنید.',
+                'must-select-a-mass-action-option' => 'شما باید یک گزینه عمل جمعی انتخاب کنید.',
+                'no-records-selected'              => 'هیچ سابقه‌ای انتخاب نشده است.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'کمپین‌ها',
         'cancel'                   => 'لغو',
         'cart-rules'               => 'قوانین سبد خرید',
-        'catalog-rules'            => 'قوانین کاتالوگ',
         'catalog'                  => 'کاتالوگ',
+        'catalog-rules'            => 'قوانین کاتالوگ',
         'categories'               => 'دسته‌بندی‌ها',
         'channels'                 => 'کانال‌ها',
         'cms'                      => 'مدیریت محتوا',

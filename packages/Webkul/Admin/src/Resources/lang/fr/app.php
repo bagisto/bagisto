@@ -159,8 +159,8 @@ return [
                     'order-id'        => 'ID de commande',
                     'pay-by'          => 'Payer par - :method',
                     'pay-via'         => 'Payer via',
-                    'pending-payment' => 'Paiement en attente',
                     'pending'         => 'En attente',
+                    'pending-payment' => 'Paiement en attente',
                     'processing'      => 'En traitement',
                     'product-count'   => ':count + Plus de produits',
                     'status'          => 'Statut',
@@ -1764,8 +1764,8 @@ return [
                         'city'               => 'Ville',
                         'company-name'       => 'Nom de l\'entreprise',
                         'country'            => 'Pays',
-                        'create-btn'         => 'Créer',
                         'create-address-btn' => 'Ajouter une nouvelle adresse',
+                        'create-btn'         => 'Créer',
                         'default-address'    => 'Adresse par défaut',
                         'email'              => 'E-mail',
                         'first-name'         => 'Prénom',
@@ -1823,8 +1823,8 @@ return [
                         'completed'       => 'Terminé',
                         'customer-name'   => 'Nom du client',
                         'date'            => 'Date',
-                        'empty-order'     => 'Aucune commande disponible',
                         'email'           => 'E-mail',
+                        'empty-order'     => 'Aucune commande disponible',
                         'fraud'           => 'Fraude',
                         'grand-total'     => 'Total général',
                         'location'        => 'Emplacement',
@@ -1926,11 +1926,11 @@ return [
                 'title' => 'Groupes',
 
                 'create' => [
-                    'create-btn' => 'Créer un groupe',
                     'code'       => 'Code',
-                    'success'    => 'Groupe créé avec succès',
+                    'create-btn' => 'Créer un groupe',
                     'name'       => 'Nom',
                     'save-btn'   => 'Enregistrer le groupe',
+                    'success'    => 'Groupe créé avec succès',
                     'title'      => 'Créer un nouveau groupe',
                 ],
 
@@ -2236,8 +2236,8 @@ return [
 
         'promotions' => [
             'index' => [
-                'catalog-rule-title' => 'Règles du catalogue',
                 'cart-rule-title'    => 'Règles du panier',
+                'catalog-rule-title' => 'Règles du catalogue',
             ],
 
             'cart-rules' => [
@@ -2661,16 +2661,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Retour',
-                    'file-name'      => 'Nom de fichier',
-                    'file-name-info' => 'Exemple : sitemap.xml',
-                    'general'        => 'Général',
-                    'path'           => 'Chemin',
-                    'path-info'      => 'Exemple : "/sitemap/" ou "/" pour le chemin de base',
-                    'save-btn'       => 'Enregistrer la carte du site',
-                ],
-
                 'delete-failed' => ':name Suppression Échouée',
             ],
 
@@ -2700,7 +2690,6 @@ return [
                     'create' => [
                         'category'           => 'Catégorie',
                         'cms-page'           => 'Page CMS',
-                        'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
                         'for'                => 'Pour',
                         'locale'             => 'Localisation',
                         'permanent-redirect' => 'Permanent (301)',
@@ -2727,8 +2716,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Le :name est déjà pris.',
-            'create-btn'    => 'Créer une page',
             'channel'       => 'Canal',
+            'create-btn'    => 'Créer une page',
             'language'      => 'Langue',
             'title'         => 'Pages',
 
@@ -2963,8 +2952,8 @@ return [
                     'total-invalid-rows'      => 'Total de Lignes Non Validées :',
                     'total-rows-processed'    => 'Total de Lignes Traitées :',
                     'total-updated'           => 'Total d\'Enregistrements Mis à Jour :',
-                    'validate-info'           => 'Cliquez sur Valider les Données pour vérifier votre importation.',
                     'validate'                => 'Valider',
+                    'validate-info'           => 'Cliquez sur Valider les Données pour vérifier votre importation.',
                     'validating-info'         => 'La lecture et la validation des données ont commencé',
                     'validation-failed-info'  => 'Votre importation est invalide. Veuillez corriger les erreurs suivantes et réessayer.',
                     'validation-success-info' => 'Votre importation est valide. Cliquez sur Importer pour démarrer le processus d\'importation.',
@@ -3362,13 +3351,13 @@ return [
                 'title'      => 'Rôles',
 
                 'datagrid' => [
-                    'custom'          => 'Personnalisé',
                     'all'             => 'Tous',
-                    'permission-type' => 'Type d\'autorisation',
-                    'name'            => 'Nom',
-                    'id'              => 'ID',
-                    'edit'            => 'Éditer',
+                    'custom'          => 'Personnalisé',
                     'delete'          => 'Supprimer',
+                    'edit'            => 'Éditer',
+                    'id'              => 'ID',
+                    'name'            => 'Nom',
+                    'permission-type' => 'Type d\'autorisation',
                 ],
             ],
 
@@ -3455,6 +3444,7 @@ return [
                 'back'                          => 'Retour',
                 'category-carousel'             => 'Carrousel de catégorie',
                 'category-carousel-description' => 'Affichez les catégories de manière attrayante à l\'aide d\'un carrousel de catégories réactif.',
+                'category-id'                   => 'ID de catégorie',
                 'channels'                      => 'Canaux',
                 'column'                        => 'Colonne',
                 'create-filter'                 => 'Créer un filtre',
@@ -3485,7 +3475,6 @@ return [
                 'no'                            => 'Non',
                 'parent-id'                     => 'ID Parent',
                 'parent-id-hint'                => 'Vous pouvez entrer plusieurs ID parents en tant que valeurs séparées par des virgules (par exemple: 12,15,34)',
-                'category-id'                   => 'ID de catégorie',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',
@@ -3525,7 +3514,8 @@ return [
                     'title'                 => 'Titre',
                     'update-service'        => 'Mettre à jour les services',
                 ],
-                'Yes'                          => 'Oui',
+
+                'yes' => 'Oui',
             ],
 
             'create-success' => 'Thème créé avec succès',
@@ -4074,7 +4064,7 @@ return [
                         'show-sku'        => 'Afficher le SKU',
                         'show-weight'     => 'Afficher le poids',
                         'title'           => 'Produits',
-                        'info'            => 'Configurer les options de stock du produit pour autoriser les commandes en attente, définir les quantités minimales et maximales dans le panier, et définir les seuils de rupture de stock.',
+                        'title-info'      => 'Configurer les options de stock du produit pour autoriser les commandes en attente, définir les quantités minimales et maximales dans le panier, et définir les seuils de rupture de stock.',
                     ],
 
                     'categories' => [
@@ -4685,9 +4675,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Aucun enregistrement sélectionné.',
-                'must-select-a-mass-action-option' => 'Vous devez sélectionner une option pour l\'action de masse.',
                 'must-select-a-mass-action'        => 'Vous devez sélectionner une action de masse.',
+                'must-select-a-mass-action-option' => 'Vous devez sélectionner une option pour l\'action de masse.',
+                'no-records-selected'              => 'Aucun enregistrement sélectionné.',
             ],
 
             'toolbar' => [
@@ -4890,8 +4880,8 @@ return [
         'campaigns'                => 'Campagnes',
         'cancel'                   => 'Annuler',
         'cart-rules'               => 'Règles du panier',
-        'catalog-rules'            => 'Règles du catalogue',
         'catalog'                  => 'Catalogue',
+        'catalog-rules'            => 'Règles du catalogue',
         'categories'               => 'Catégories',
         'channels'                 => 'Canaux',
         'cms'                      => 'CMS',
@@ -5037,10 +5027,10 @@ return [
 
         'orders' => [
             'created' => [
-                'subject'  => 'Confirmation de nouvelle commande',
-                'title'    => 'Confirmation de commande !',
                 'greeting' => 'Vous avez une nouvelle commande :order_id passée le :created_at',
+                'subject'  => 'Confirmation de nouvelle commande',
                 'summary'  => 'Résumé de la commande',
+                'title'    => 'Confirmation de commande !',
             ],
 
             'invoiced' => [
