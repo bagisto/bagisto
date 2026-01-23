@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Standaard',
-                'meta-title'       => 'Demo winkel',
-                'meta-keywords'    => 'Demo winkel meta trefwoorden',
                 'meta-description' => 'Demo winkel meta beschrijving',
+                'meta-keywords'    => 'Demo winkel meta trefwoorden',
+                'meta-title'       => 'Demo winkel',
+                'name'             => 'Standaard',
             ],
 
             'currencies' => [
@@ -293,13 +293,13 @@ return [
                 ],
 
                 'game-container' => [
-                    'name' => 'Spelcontainer',
-
                     'content' => [
                         'sub-title-1' => 'Onze Collecties',
                         'sub-title-2' => 'Onze Collecties',
                         'title'       => 'Het spel met onze nieuwe toevoegingen!',
                     ],
+
+                    'name' => 'Spelcontainer',
                 ],
 
                 'image-carousel' => [
@@ -319,11 +319,11 @@ return [
                 ],
 
                 'offer-information' => [
-                    'name' => 'Aanbiedingsinformatie',
-
                     'content' => [
                         'title' => 'KRIJG TOT 40% KORTING op je 1e bestelling NU WINKELEN',
                     ],
+
+                    'name' => 'Aanbiedingsinformatie',
                 ],
 
                 'services-content' => [
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Maak de databasetabel aan',
+                'create-database-table'   => 'Maak de databasetabel aan',
                 'install'                 => 'Installatie',
                 'install-info'            => 'Bagisto Voor Installatie',
                 'install-info-button'     => 'Klik op de knop hieronder om',

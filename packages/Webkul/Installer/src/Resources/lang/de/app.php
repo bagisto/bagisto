@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Standard',
-                'meta-title'       => 'Demo-Shop',
-                'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
                 'meta-description' => 'Demo-Shop Meta-Beschreibung',
+                'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
+                'meta-title'       => 'Demo-Shop',
+                'name'             => 'Standard',
             ],
 
             'currencies' => [
@@ -266,6 +266,14 @@ return [
                     'name' => 'Kategorienkollektionen',
                 ],
 
+                'featured-collections' => [
+                    'name' => 'Hervorgehobene Kollektionen',
+
+                    'options' => [
+                        'title' => 'Hervorgehobene Produkte',
+                    ],
+                ],
+
                 'footer-links' => [
                     'name' => 'Fußzeilenlinks',
 
@@ -281,14 +289,6 @@ return [
                         'terms-conditions' => 'Allgemeine Geschäftsbedingungen',
                         'terms-of-use'     => 'Nutzungsbedingungen',
                         'whats-new'        => 'Was gibt es Neues',
-                    ],
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Hervorgehobene Kollektionen',
-
-                    'options' => [
-                        'title' => 'Hervorgehobene Produkte',
                     ],
                 ],
 
@@ -397,9 +397,9 @@ return [
             'product-flat' => [
                 '1' => [
                     'description'       => 'Die Arctic Cozy Knit Beanie ist Ihre ideale Lösung, um in den kälteren Monaten warm, bequem und stilvoll zu bleiben. Hergestellt aus einer weichen und strapazierfähigen Mischung aus Acrylstrick, bietet diese Mütze eine gemütliche und eng anliegende Passform. Das klassische Design macht sie sowohl für Männer als auch für Frauen geeignet und bietet ein vielseitiges Accessoire, das zu verschiedenen Stilen passt. Egal, ob Sie einen lässigen Tag in der Stadt verbringen oder die Natur genießen, diese Mütze verleiht Ihrem Outfit einen Hauch von Komfort und Wärme. Das weiche und atmungsaktive Material sorgt dafür, dass Sie es gemütlich haben, ohne auf Stil verzichten zu müssen. Die Arctic Cozy Knit Beanie ist nicht nur ein Accessoire, sondern ein Statement der Wintermode. Ihre Schlichtheit macht es einfach, sie mit verschiedenen Outfits zu kombinieren, und sie ist ein Grundbestandteil Ihrer Wintergarderobe. Ideal als Geschenk oder als Belohnung für sich selbst, ist diese Mütze eine durchdachte Ergänzung für jedes Winteroutfit. Sie ist ein vielseitiges Accessoire, das über die Funktionalität hinausgeht und Ihrem Look einen Hauch von Wärme und Stil verleiht. Erleben Sie die Essenz des Winters mit der Arctic Cozy Knit Beanie. Egal, ob Sie einen lässigen Tag draußen genießen oder den Elementen trotzen, lassen Sie diese Mütze Ihr Begleiter für Komfort und Stil sein. Erhöhen Sie Ihre Wintergarderobe mit diesem klassischen Accessoire, das Wärme mit einem zeitlosen Sinn für Mode mühelos kombiniert.',
+                    'meta-description'  => 'Meta-Beschreibung',
                     'meta-keywords'     => 'meta1, meta2, meta3',
                     'meta-title'        => 'Meta-Titel',
-                    'meta-description'  => 'Meta-Beschreibung',
                     'name'              => 'Arctic Cozy Knit Unisex Beanie',
                     'short-description' => 'Genießen Sie die kalten Tage stilvoll mit unserer Arctic Cozy Knit Beanie. Hergestellt aus einer weichen und strapazierfähigen Acrylmischung, bietet diese klassische Mütze Wärme und Vielseitigkeit. Geeignet für Männer und Frauen, ist sie das ideale Accessoire für den Alltag oder Outdoor-Aktivitäten. Erhöhen Sie Ihre Wintergarderobe oder machen Sie jemandem eine Freude mit dieser unverzichtbaren Mütze.',
                 ],
@@ -732,9 +732,9 @@ return [
             ],
 
             'installation-processing' => [
-                'title'        => 'Installation',
-                'bagisto-info' => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
                 'bagisto'      => 'Installation Bagisto',
+                'bagisto-info' => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
+                'title'        => 'Installation',
             ],
 
             'installation-completed' => [
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Datenbanktabelle erstellen',
+                'create-database-table'   => 'Datenbanktabelle erstellen',
                 'install'                 => 'Installation',
                 'install-info'            => 'Bagisto zur Installation',
                 'install-info-button'     => 'Klicke auf die Schaltfläche unten, um',

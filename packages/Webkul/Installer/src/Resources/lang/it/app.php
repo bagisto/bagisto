@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Predefinito',
-                'meta-title'       => 'Negozio Dimostrativo',
-                'meta-keywords'    => 'Parole chiave meta del Negozio Dimostrativo',
                 'meta-description' => 'Descrizione meta del Negozio Dimostrativo',
+                'meta-keywords'    => 'Parole chiave meta del Negozio Dimostrativo',
+                'meta-title'       => 'Negozio Dimostrativo',
+                'name'             => 'Predefinito',
             ],
 
             'currencies' => [
@@ -588,6 +588,8 @@ return [
 
                 '11' => [
                     'description'      => 'Presentiamo la giacca OmniHeat con cappuccio per uomo, la soluzione ideale per rimanere al caldo e alla moda durante le stagioni più fredde. Questa giacca è realizzata con resistenza e calore in mente, garantendo che diventi il tuo compagno di fiducia. Il design con cappuccio non solo aggiunge un tocco di stile, ma offre anche calore aggiuntivo, proteggendoti dai venti freddi e dal maltempo. Le maniche lunghe offrono una copertura completa, assicurando che tu rimanga comodo dalla spalla al polso. Dotata di tasche inseribili, questa giacca piumino offre comodità per trasportare gli essenziali o mantenere le mani calde. Il riempimento sintetico isolante offre calore extra, rendendola ideale per affrontare giornate e notti fredde. Realizzata con un resistente guscio e fodera in poliestere, questa giacca è costruita per durare e resistere agli agenti atmosferici. Disponibile in 5 colori attraenti, puoi scegliere quello che si adatta al tuo stile e alle tue preferenze. Versatile e funzionale, la giacca OmniHeat con cappuccio per uomo è adatta a diverse occasioni, che tu stia andando al lavoro, facendo una gita informale o partecipando a un evento all\'aperto. Sperimenta la perfetta combinazione di stile, comfort e funzionalità con la giacca OmniHeat con cappuccio per uomo. Eleva il tuo guardaroba invernale e rimani al caldo mentre ti godi il ​​freddo. Sconfiggi il freddo con stile e fai una dichiarazione con questo capo essenziale.',
+                    'meta-description' => 'meta description',
+                    'meta-keywords'    => 'meta1, meta2, meta3',
                     'meta-title'       => 'Titolo Meta\',tion',
                     'name'             => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-L',
                     'sort-description' => 'Rimani al caldo e alla moda con la nostra giacca OmniHeat con cappuccio per uomo. Questa giacca è progettata per offrire calore estremo e dispone di tasche inseribili per una maggiore comodità. Il materiale isolante assicura che tu rimanga comodo in condizioni di freddo. Disponibile in 5 colori attraenti, rendendola una scelta versatile per varie occasioni.',
@@ -624,11 +626,9 @@ return [
                 'admin'            => 'Amministratore',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Conferma Password',
-                'download-sample'  => 'Scarica Esempio',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Password',
-                'sample-products'  => 'Prodotti di Esempio',
                 'title'            => 'Crea Amministratore',
             ],
 
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Crea la tabella del database',
+                'create-database-table'   => 'Crea la tabella del database',
                 'install'                 => 'Installazione',
                 'install-info'            => 'Bagisto per l\'installazione',
                 'install-info-button'     => 'Clicca il pulsante sottostante per',

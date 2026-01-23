@@ -16,7 +16,7 @@ class TranslationChecker extends Command
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'bagisto:translation:check
+    protected $signature = 'bagisto:translations:check
                             {--locale= : Check only a specific locale against EN}
                             {--package= : Check only a specific package}
                             {--details : Show detailed error information}';

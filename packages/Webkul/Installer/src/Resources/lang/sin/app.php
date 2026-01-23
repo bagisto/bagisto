@@ -129,10 +129,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'පෙරනිමවේ',
-                'meta-title'       => 'පෙරනිමවේ සෙදවොව',
-                'meta-keywords'    => 'පෙරනිමවේ සෙදවොව මෙටා මාලු',
                 'meta-description' => 'පෙරනිමවේ සෙදවොව මෙටා වෘක්ත',
+                'meta-keywords'    => 'පෙරනිමවේ සෙදවොව මෙටා මාලු',
+                'meta-title'       => 'පෙරනිමවේ සෙදවොව',
+                'name'             => 'පෙරනිමවේ',
             ],
 
             'currencies' => [
@@ -281,13 +281,13 @@ return [
                         'about-us'         => 'අප පිළිබදව',
                         'contact-us'       => 'සමස්ත කරනවා',
                         'customer-service' => 'ප්‍රකාශ සේවා',
-                        'privacy-policy'   => 'පෞද්ගලිකත්ව පෞද්ගලිකත්ව',
                         'payment-policy'   => 'ගොණ පෞද්ගලිකත්ව',
-                        'return-policy'    => 'ආපසුම පෞද්ගලිකත්ව.',
+                        'privacy-policy'   => 'පෞද්ගලිකත්ව පෞද්ගලිකත්ව',
                         'refund-policy'    => 'හරිනායකින් පෞද්ගලිකත්ව.',
+                        'return-policy'    => 'ආපසුම පෞද්ගලිකත්ව.',
                         'shipping-policy'  => 'පෞද්ගලිකත්වකයක්ෂපෙරක්ෂ',
-                        'terms-of-use'     => 'භාවිත භාවිත භාවිත',
                         'terms-conditions' => 'භාවිත සෞවිත',
+                        'terms-of-use'     => 'භාවිත භාවිත භාවිත',
                         'whats-new'        => 'අලුත් කුමුගුණපෙරක්ෂ',
                     ],
                 ],
@@ -345,8 +345,6 @@ return [
                 ],
 
                 'top-collections' => [
-                    'name' => 'ඉහල ආභර',
-
                     'content' => [
                         'sub-title-1' => 'අපේ ආභර',
                         'sub-title-2' => 'අපේ ආභර',
@@ -356,6 +354,8 @@ return [
                         'sub-title-6' => 'අපේ ආභර',
                         'title'       => 'අපේ නව එම්මොාසා සහා කරනවො',
                     ],
+
+                    'name' => 'ඉහල ආභර',
                 ],
             ],
         ],
@@ -747,7 +747,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'දත්ත වගකාගකක් තථා කරනවා',
+                'create-database-table'   => 'දත්ත වගකාගකක් තථා කරනවා',
                 'install'                 => 'ස්තුරාකුල',
                 'install-info'            => 'උත්සහාභාවයක් සඳහා Bagisto',
                 'install-info-button'     => 'පහත ඇතුලත් කිරීමට ක්රම කරන්න',
