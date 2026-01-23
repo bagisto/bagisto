@@ -57,6 +57,33 @@ class TranslationChecker extends Command
     ];
 
     /**
+     * Supported locales that must exist in all packages.
+     */
+    protected const SUPPORTED_LOCALES = [
+        'ar',
+        'bn',
+        'ca',
+        'de',
+        'en',
+        'es',
+        'fa',
+        'fr',
+        'he',
+        'hi_IN',
+        'id',
+        'it',
+        'ja',
+        'nl',
+        'pl',
+        'pt_BR',
+        'ru',
+        'sin',
+        'tr',
+        'uk',
+        'zh_CN',
+    ];
+
+    /**
      * Track if errors occurred.
      */
     protected bool $hasError = false;
@@ -175,9 +202,44 @@ class TranslationChecker extends Command
 
         $enFilesRel = $enFiles->map(fn ($f) => Str::after($f, $enPath.'/'));
 
-        // Get other locales
-        $locales = collect(File::directories($langRoot))
+        // Get existing locales in this lang folder
+        $existingLocales = collect(File::directories($langRoot))
             ->map(fn ($d) => basename($d))
+            ->sort()
+            ->values();
+
+        // Check for missing supported locales
+        $supportedLocales = collect(self::SUPPORTED_LOCALES);
+
+        $missingLocales = $supportedLocales
+            ->reject(fn ($locale) => $existingLocales->contains($locale))
+            ->when($targetLocale, fn ($collection) => $collection->filter(
+                fn ($l) => Str::lower($l) === Str::lower($targetLocale)
+            ))
+            ->sort()
+            ->values();
+
+        // Report missing locales as failures
+        $missingLocales->each(function ($locale) use ($name) {
+            $this->results->push([
+                'package' => $name,
+                'locale'  => $locale,
+                'status'  => 'fail',
+                'issues'  => 'Locale folder missing',
+            ]);
+
+            $this->errors->push([
+                'package' => $name,
+                'locale'  => $locale,
+                'type'    => 'missing_locale',
+                'message' => "Locale folder '{$locale}' does not exist",
+            ]);
+
+            $this->hasError = true;
+        });
+
+        // Get other locales to check (excluding base locale and filtered by target)
+        $locales = $existingLocales
             ->reject(fn ($d) => $d === self::BASE_LOCALE)
             ->when($targetLocale, fn ($collection) => $collection->filter(
                 fn ($l) => Str::lower($l) === Str::lower($targetLocale)
@@ -185,7 +247,7 @@ class TranslationChecker extends Command
             ->sort()
             ->values();
 
-        if ($locales->isEmpty()) {
+        if ($locales->isEmpty() && $missingLocales->isEmpty()) {
             return;
         }
 
@@ -220,6 +282,7 @@ class TranslationChecker extends Command
 
         if ($missingFiles->isNotEmpty()) {
             $issues['missing_files'] = $missingFiles->all();
+
             $this->errors->push([
                 'package' => $packageName,
                 'locale'  => $locale,
@@ -494,6 +557,7 @@ class TranslationChecker extends Command
     protected function displayError(array $error): void
     {
         match ($error['type']) {
+            'missing_locale'   => $this->displayMissingLocale($error['message']),
             'missing_files'    => $this->displayMissingFiles($error['files']),
             'extra_files'      => $this->displayExtraFiles($error['files']),
             'missing_keys'     => $this->displayMissingKeys($error['data']),
@@ -501,6 +565,16 @@ class TranslationChecker extends Command
             'structure_issues' => $this->displayStructureIssues($error['data']),
             default            => null,
         };
+    }
+
+    /**
+     * Display missing locale error.
+     */
+    protected function displayMissingLocale(string $message): void
+    {
+        $this->line("  <fg=red>⚠ {$message}</>");
+
+        $this->newLine();
     }
 
     /**
