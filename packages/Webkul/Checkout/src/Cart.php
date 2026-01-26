@@ -1073,9 +1073,13 @@ class Cart
 
                     $item->base_price = $item->base_total / $item->quantity;
                 } else {
-                    $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+                    $taxBase = max(0, $item->total - $item->discount_amount);
 
-                    $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
+                    $baseTaxBase = max(0, $item->base_total - $item->base_discount_amount);
+
+                    $item->tax_amount = round(($taxBase * $rate->tax_rate) / 100, 4);
+
+                    $item->base_tax_amount = round(($baseTaxBase * $rate->tax_rate) / 100, 4);
 
                     $item->total_incl_tax = $item->total + $item->tax_amount;
 
