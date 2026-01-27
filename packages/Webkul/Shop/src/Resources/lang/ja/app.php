@@ -1393,8 +1393,8 @@ return [
                 'cancel'                   => 'キャンセル',
                 'create-btn'               => '保存',
                 'enter-order-id'           => '注文IDを入力',
-                'heading'                  => '新しいRMAリクエスト',
                 'exchange-window'          => '交換ウィンドウ',
+                'heading'                  => '新しいRMAリクエスト',
                 'image'                    => '画像',
                 'images'                   => '画像',
                 'information'              => '追加情報',
@@ -1404,8 +1404,8 @@ return [
                 'order-status'             => '注文ステータス',
                 'orders'                   => '注文',
                 'price'                    => '価格',
-                'product-name'             => '製品名',
                 'product'                  => '製品',
+                'product-name'             => '製品名',
                 'quantity'                 => '数量',
                 'reason'                   => '理由',
                 'reopen-request'           => 'リクエストを再オープン',
@@ -1579,13 +1579,13 @@ return [
 
         'table-heading' => [
             'image'           => '画像',
-            'product-name'    => '商品名',
-            'sku'             => 'SKU',
-            'price'           => '価格',
-            'rma-qty'         => 'RMA数量',
             'order-qty'       => '注文数量',
-            'resolution-type' => '解決方法',
+            'price'           => '価格',
+            'product-name'    => '商品名',
             'reason'          => '理由',
+            'resolution-type' => '解決方法',
+            'rma-qty'         => 'RMA数量',
+            'sku'             => 'SKU',
         ],
 
         'guest-users' => [
@@ -1623,8 +1623,8 @@ return [
                 'subject' => '新しいメッセージ',
                 'heading' => '拝啓 :name 様',
                 'message' => 'メッセージ',
-                'quotes'  => 'バイヤーから新しいメッセージがあります',
                 'process' => '返金リクエストが処理中です。',
+                'quotes'  => 'バイヤーから新しいメッセージがあります',
                 'solved'  => 'RMAのステータスが顧客によって解決済みに変更されました。',
             ],
 

@@ -1393,8 +1393,8 @@ return [
                 'cancel'                   => 'Annuler',
                 'create-btn'               => 'Enregistrer',
                 'enter-order-id'           => 'Entrer l\'ID de la commande',
-                'heading'                  => 'Nouvelle demande RMA',
                 'exchange-window'          => 'Fenêtre d\'échange',
+                'heading'                  => 'Nouvelle demande RMA',
                 'image'                    => 'Image',
                 'images'                   => 'Images',
                 'information'              => 'Informations supplémentaires',
@@ -1404,8 +1404,8 @@ return [
                 'order-status'             => 'Statut de la commande',
                 'orders'                   => 'Commandes',
                 'price'                    => 'Prix',
-                'product-name'             => 'Nom du produit',
                 'product'                  => 'Produit',
+                'product-name'             => 'Nom du produit',
                 'quantity'                 => 'Quantité',
                 'reason'                   => 'Raison',
                 'reopen-request'           => 'Rouvrir la demande',
@@ -1579,13 +1579,13 @@ return [
 
         'table-heading' => [
             'image'           => 'Image',
-            'product-name'    => 'Nom du produit',
-            'sku'             => 'SKU',
-            'price'           => 'Prix',
-            'rma-qty'         => 'Quantité RMA',
             'order-qty'       => 'Quantité commandée',
-            'resolution-type' => 'Type de résolution',
+            'price'           => 'Prix',
+            'product-name'    => 'Nom du produit',
             'reason'          => 'Raison',
+            'resolution-type' => 'Type de résolution',
+            'rma-qty'         => 'Quantité RMA',
+            'sku'             => 'SKU',
         ],
 
         'guest-users' => [
@@ -1623,8 +1623,8 @@ return [
                 'subject' => 'Nouveau message',
                 'heading' => 'Cher :name',
                 'message' => 'Message',
-                'quotes'  => 'Il y a un nouveau message du client',
                 'process' => 'Votre demande de retour est en cours de traitement.',
+                'quotes'  => 'Il y a un nouveau message du client',
                 'solved'  => 'Le statut RMA a été changé en Résolu par le client.',
             ],
 

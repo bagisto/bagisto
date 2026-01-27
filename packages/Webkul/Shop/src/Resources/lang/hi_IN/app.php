@@ -1393,8 +1393,8 @@ return [
                 'cancel'                   => 'रद्द करें',
                 'create-btn'               => 'सहेजें',
                 'enter-order-id'           => 'आदेश आईडी दर्ज करें',
-                'heading'                  => 'नया आरएमए अनुरोध',
                 'exchange-window'          => 'विनिमय विंडो',
+                'heading'                  => 'नया आरएमए अनुरोध',
                 'image'                    => 'छवि',
                 'images'                   => 'छवियाँ',
                 'information'              => 'अतिरिक्त जानकारी',
@@ -1404,8 +1404,8 @@ return [
                 'order-status'             => 'ऑर्डर स्थिति',
                 'orders'                   => 'आदेश',
                 'price'                    => 'मूल्य',
-                'product-name'             => 'उत्पाद का नाम',
                 'product'                  => 'उत्पाद',
+                'product-name'             => 'उत्पाद का नाम',
                 'quantity'                 => 'मात्रा',
                 'reason'                   => 'कारण',
                 'reopen-request'           => 'अनुरोध फिर से खोलें',
@@ -1579,13 +1579,13 @@ return [
 
         'table-heading' => [
             'image'           => 'चित्र',
-            'product-name'    => 'उत्पाद का नाम',
-            'sku'             => 'एसकेयू',
-            'price'           => 'कीमत',
-            'rma-qty'         => 'RMA मात्रा',
             'order-qty'       => 'आदेश मात्रा',
-            'resolution-type' => 'समाधान प्रकार',
+            'price'           => 'कीमत',
+            'product-name'    => 'उत्पाद का नाम',
             'reason'          => 'कारण',
+            'resolution-type' => 'समाधान प्रकार',
+            'rma-qty'         => 'RMA मात्रा',
+            'sku'             => 'एसकेयू',
         ],
 
         'guest-users' => [
@@ -1623,8 +1623,8 @@ return [
                 'subject' => 'नया संदेश',
                 'heading' => 'प्रिय :name,',
                 'message' => 'संदेश',
-                'quotes'  => 'खरीदार से नई संदेश है',
                 'process' => 'आपकी रिटर्न अनुरोध प्रक्रिया में है।',
+                'quotes'  => 'खरीदार से नई संदेश है',
                 'solved'  => 'ग्राहक द्वारा RMA स्थिति को हल किया गया है।',
             ],
 

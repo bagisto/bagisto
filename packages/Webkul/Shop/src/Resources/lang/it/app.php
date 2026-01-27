@@ -1393,8 +1393,8 @@ return [
                 'cancel'                   => 'Annulla',
                 'create-btn'               => 'Salva',
                 'enter-order-id'           => 'Inserisci ID Ordine',
-                'heading'                  => 'Nuova Richiesta RMA',
                 'exchange-window'          => 'Finestra di scambio',
+                'heading'                  => 'Nuova Richiesta RMA',
                 'image'                    => 'Immagine',
                 'images'                   => 'Immagini',
                 'information'              => 'Informazioni Aggiuntive',
@@ -1404,8 +1404,8 @@ return [
                 'order-status'             => 'Stato Ordine',
                 'orders'                   => 'Ordini',
                 'price'                    => 'Prezzo',
-                'product-name'             => 'Nome Prodotto',
                 'product'                  => 'Prodotto',
+                'product-name'             => 'Nome Prodotto',
                 'quantity'                 => 'Quantità',
                 'reason'                   => 'Motivo',
                 'reopen-request'           => 'Riapri Richiesta',
@@ -1579,13 +1579,13 @@ return [
 
         'table-heading' => [
             'image'           => 'Immagine',
-            'product-name'    => 'Nome del prodotto',
-            'sku'             => 'SKU',
-            'price'           => 'Prezzo',
-            'rma-qty'         => 'Quantità RMA',
             'order-qty'       => 'Quantità dell\'ordine',
-            'resolution-type' => 'Tipo di risoluzione',
+            'price'           => 'Prezzo',
+            'product-name'    => 'Nome del prodotto',
             'reason'          => 'Motivo',
+            'resolution-type' => 'Tipo di risoluzione',
+            'rma-qty'         => 'Quantità RMA',
+            'sku'             => 'SKU',
         ],
 
         'guest-users' => [
@@ -1623,8 +1623,8 @@ return [
                 'subject' => 'Nuovo Messaggio',
                 'heading' => 'Gentile :name,',
                 'message' => 'Messaggio',
-                'quotes'  => 'C\'è un nuovo messaggio dall\'acquirente',
                 'process' => 'La tua richiesta di reso è in fase di elaborazione.',
+                'quotes'  => 'C\'è un nuovo messaggio dall\'acquirente',
                 'solved'  => 'Lo stato RMA è stato cambiato in Risolto dal cliente.',
             ],
 

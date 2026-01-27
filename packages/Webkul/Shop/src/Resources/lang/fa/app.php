@@ -1393,8 +1393,8 @@ return [
                 'cancel'                   => 'انصراف',
                 'create-btn'               => 'ذخیره',
                 'enter-order-id'           => 'شناسه سفارش را وارد کنید',
-                'heading'                  => 'درخواست جدید RMA',
                 'exchange-window'          => 'پنجره تبادل',
+                'heading'                  => 'درخواست جدید RMA',
                 'image'                    => 'تصویر',
                 'images'                   => 'تصاویر',
                 'information'              => 'اطلاعات اضافی',
@@ -1404,8 +1404,8 @@ return [
                 'order-status'             => 'وضعیت سفارش',
                 'orders'                   => 'سفارشات',
                 'price'                    => 'قیمت',
-                'product-name'             => 'نام محصول',
                 'product'                  => 'محصول',
+                'product-name'             => 'نام محصول',
                 'quantity'                 => 'تعداد',
                 'reason'                   => 'دلیل',
                 'reopen-request'           => 'باز کردن درخواست',
@@ -1579,13 +1579,13 @@ return [
 
         'table-heading' => [
             'image'           => 'تصویر',
-            'product-name'    => 'نام محصول',
-            'sku'             => 'کد محصول',
-            'price'           => 'قیمت',
-            'rma-qty'         => 'تعداد RMA',
             'order-qty'       => 'تعداد سفارش',
-            'resolution-type' => 'نوع راه حل',
+            'price'           => 'قیمت',
+            'product-name'    => 'نام محصول',
             'reason'          => 'دلیل',
+            'resolution-type' => 'نوع راه حل',
+            'rma-qty'         => 'تعداد RMA',
+            'sku'             => 'کد محصول',
         ],
 
         'guest-users' => [
@@ -1623,8 +1623,8 @@ return [
                 'subject' => 'پیام جدید',
                 'heading' => 'عزیز :name',
                 'message' => 'پیام',
-                'quotes'  => 'یک پیام جدید از خریدار وجود دارد',
                 'process' => 'درخواست بازگشت شما در حال پردازش است.',
+                'quotes'  => 'یک پیام جدید از خریدار وجود دارد',
                 'solved'  => 'وضعیت RMA توسط مشتری به حل شده تغییر یافته است.',
             ],
 
