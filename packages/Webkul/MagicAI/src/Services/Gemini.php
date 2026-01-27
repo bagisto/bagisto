@@ -29,11 +29,11 @@ class Gemini
 
         $result = $httpClient->request('POST', $endpoint, [
             'headers' => [
-                'Accept'       => 'application/json',
+                'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ],
             'json' => [
-                'contents'    => [
+                'contents' => [
                     ['parts' => [['text' => $this->prompt]]],
                 ],
             ],

@@ -40,8 +40,8 @@ it('should store the newly created locale', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), $data = [
-        'code'      => fake()->locale(),
-        'name'      => fake()->name(),
+        'code' => fake()->locale(),
+        'name' => fake()->name(),
         'direction' => fake()->randomElement(['ltr', 'rtl']),
         'logo_path' => [
             UploadedFile::fake()->image('logo.png'),
@@ -53,8 +53,8 @@ it('should store the newly created locale', function () {
     $this->assertModelWise([
         Locale::class => [
             [
-                'code'      => $data['code'],
-                'name'      => $data['name'],
+                'code' => $data['code'],
+                'name' => $data['name'],
                 'direction' => $data['direction'],
                 'logo_path' => 'locales/'.$data['code'].'.png',
             ],
@@ -69,8 +69,8 @@ it('should not store the new locale if the file has been tampered with', functio
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), $data = [
-        'code'      => fake()->locale(),
-        'name'      => fake()->name(),
+        'code' => fake()->locale(),
+        'name' => fake()->name(),
         'direction' => fake()->randomElement(['ltr', 'rtl']),
         'logo_path' => [
             UploadedFile::fake()->image('tampered.php'),
@@ -102,7 +102,7 @@ it('should fail the validation with errors when certain field not provided when 
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.locales.update'), [
-        'id'        => $locale->id,
+        'id' => $locale->id,
         'logo_path' => [
             UploadedFile::fake()->image(fake()->word().'.png'),
         ],
@@ -120,9 +120,9 @@ it('should update the specified locale', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.locales.update'), $data = [
-        'id'        => $locale->id,
-        'code'      => $locale->code,
-        'name'      => fake()->name(),
+        'id' => $locale->id,
+        'code' => $locale->code,
+        'name' => fake()->name(),
         'direction' => fake()->randomElement(['ltr', 'rtl']),
         'logo_path' => [
             UploadedFile::fake()->image('logo.png'),
@@ -134,8 +134,8 @@ it('should update the specified locale', function () {
     $this->assertModelWise([
         Locale::class => [
             [
-                'name'      => $data['name'],
-                'code'      => $data['code'],
+                'name' => $data['name'],
+                'code' => $data['code'],
                 'direction' => $data['direction'],
                 'logo_path' => 'locales/'.$locale->code.'.png',
             ],
@@ -153,8 +153,8 @@ it('should not update the specified locale if the file has been tampered with', 
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.locales.update'), [
-        'id'        => $locale->id,
-        'name'      => fake()->name(),
+        'id' => $locale->id,
+        'name' => fake()->name(),
         'logo_path' => [
             UploadedFile::fake()->image('tampered.php'),
         ],

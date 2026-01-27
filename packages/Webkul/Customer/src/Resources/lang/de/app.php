@@ -4,7 +4,7 @@ return [
     'validations' => [
         'captcha' => [
             'captcha' => 'Etwas ist schief gelaufen! Bitte versuche es erneut.',
-            'required'=> 'Bitte wählen Sie CAPTCHA',
+            'required' => 'Bitte wählen Sie CAPTCHA',
         ],
 
         'vat-id' => [

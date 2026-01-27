@@ -39,10 +39,10 @@ class SearchTermController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'term'         => 'required',
+            'term' => 'required',
             'redirect_url' => 'url:http,https',
-            'channel_id'   => 'required|exists:channels,id',
-            'locale'       => 'required|exists:locales,code',
+            'channel_id' => 'required|exists:channels,id',
+            'locale' => 'required|exists:locales,code',
         ]);
 
         Event::dispatch('marketing.search_seo.search_terms.create.before');
@@ -71,10 +71,10 @@ class SearchTermController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'term'         => 'required',
+            'term' => 'required',
             'redirect_url' => 'url:http,https',
-            'channel_id'   => 'required|exists:channels,id',
-            'locale'       => 'required|exists:locales,code',
+            'channel_id' => 'required|exists:channels,id',
+            'locale' => 'required|exists:locales,code',
         ]);
 
         Event::dispatch('marketing.search_seo.search_terms.update.before', $id);

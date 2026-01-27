@@ -36,7 +36,7 @@ class CartRuleCouponController extends Controller
     public function store($id): JsonResponse
     {
         $this->validate(request(), [
-            'coupon_qty'  => 'required|integer|min:1',
+            'coupon_qty' => 'required|integer|min:1',
             'code_length' => 'required|integer|min:10',
             'code_format' => 'required',
         ]);

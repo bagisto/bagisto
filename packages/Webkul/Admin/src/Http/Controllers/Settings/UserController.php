@@ -91,7 +91,7 @@ class UserController extends Controller
 
         return new JsonResponse([
             'roles' => $roles,
-            'user'  => $user,
+            'user' => $user,
         ]);
     }
 
@@ -220,7 +220,7 @@ class UserController extends Controller
 
                 return new JsonResponse([
                     'redirectUrl' => route('admin.session.create'),
-                    'message'     => trans('admin::app.settings.users.delete-success'),
+                    'message' => trans('admin::app.settings.users.delete-success'),
                 ]);
             }
         } else {

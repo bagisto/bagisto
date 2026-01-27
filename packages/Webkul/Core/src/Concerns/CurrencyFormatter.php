@@ -80,9 +80,9 @@ trait CurrencyFormatter
             : $currency->code;
 
         return match ($currency->currency_position) {
-            CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,
-            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol.' '.$formattedCurrency,
-            CurrencyPositionEnum::RIGHT->value            => $formattedCurrency.$symbol,
+            CurrencyPositionEnum::LEFT->value => $symbol.$formattedCurrency,
+            CurrencyPositionEnum::LEFT_WITH_SPACE->value => $symbol.' '.$formattedCurrency,
+            CurrencyPositionEnum::RIGHT->value => $formattedCurrency.$symbol,
             CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency.' '.$symbol,
         };
     }

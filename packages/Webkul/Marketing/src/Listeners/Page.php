@@ -37,9 +37,9 @@ class Page
          * Delete if url rewrite already exists for request path
          */
         $urlRewrites = $this->urlRewriteRepository->findWhere([
-            'entity_type'  => 'cms_page',
+            'entity_type' => 'cms_page',
             'request_path' => $page->url_key,
-            'locale'       => app()->getLocale(),
+            'locale' => app()->getLocale(),
         ]);
 
         foreach ($urlRewrites as $urlRewrite) {
@@ -84,16 +84,16 @@ class Page
         $this->urlRewriteRepository->deleteWhere([
             'entity_type' => 'cms_page',
             'target_path' => $translations['url_key'],
-            'locale'      => $locale,
+            'locale' => $locale,
         ]);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.before');
 
         $urlRewrite = $this->urlRewriteRepository->create([
-            'entity_type'   => 'cms_page',
-            'request_path'  => $translations['url_key'],
-            'target_path'   => $currentURLKey,
-            'locale'        => $locale,
+            'entity_type' => 'cms_page',
+            'request_path' => $translations['url_key'],
+            'target_path' => $currentURLKey,
+            'locale' => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
 
@@ -117,9 +117,9 @@ class Page
 
         foreach ($translations as $locale => $translation) {
             $urlRewrites = $this->urlRewriteRepository->findWhere([
-                'entity_type'  => 'cms_page',
+                'entity_type' => 'cms_page',
                 'request_path' => $translation['url_key'],
-                'locale'       => $locale,
+                'locale' => $locale,
             ]);
 
             foreach ($urlRewrites as $urlRewrite) {

@@ -217,12 +217,12 @@ class Import
         }
 
         $import = $this->importRepository->update([
-            'state'                => self::STATE_VALIDATED,
+            'state' => self::STATE_VALIDATED,
             'processed_rows_count' => $this->getProcessedRowsCount(),
-            'invalid_rows_count'   => $this->errorHelper->getInvalidRowsCount(),
-            'errors_count'         => $this->errorHelper->getErrorsCount(),
-            'errors'               => $this->getFormattedErrors(),
-            'error_file_path'      => $this->uploadErrorReport(),
+            'invalid_rows_count' => $this->errorHelper->getInvalidRowsCount(),
+            'errors_count' => $this->errorHelper->getErrorsCount(),
+            'errors' => $this->getFormattedErrors(),
+            'error_file_path' => $this->uploadErrorReport(),
         ], $this->import->id);
 
         $this->setImport($import);
@@ -351,9 +351,9 @@ class Import
     public function started(): void
     {
         $import = $this->importRepository->update([
-            'state'      => self::STATE_PROCESSING,
+            'state' => self::STATE_PROCESSING,
             'started_at' => now(),
-            'summary'    => [],
+            'summary' => [],
         ], $this->import->id);
 
         $this->setImport($import);
@@ -406,8 +406,8 @@ class Import
             ->toArray();
 
         $import = $this->importRepository->update([
-            'state'        => self::STATE_COMPLETED,
-            'summary'      => $summary,
+            'state' => self::STATE_COMPLETED,
+            'summary' => $summary,
             'completed_at' => now(),
         ], $this->import->id);
 
@@ -442,13 +442,13 @@ class Import
             ?->toArray();
 
         return [
-            'batches'  => [
-                'total'     => $total,
+            'batches' => [
+                'total' => $total,
                 'completed' => $completed,
                 'remaining' => $total - $completed,
             ],
             'progress' => $progress,
-            'summary'  => $summary ?? [
+            'summary' => $summary ?? [
                 'created' => 0,
                 'updated' => 0,
                 'deleted' => 0,

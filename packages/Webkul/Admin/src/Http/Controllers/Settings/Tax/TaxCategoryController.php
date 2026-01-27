@@ -44,10 +44,10 @@ class TaxCategoryController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code'        => 'required|string|unique:tax_categories,code',
-            'name'        => 'required|string',
+            'code' => 'required|string|unique:tax_categories,code',
+            'name' => 'required|string',
             'description' => 'required|string',
-            'taxrates'    => 'array|required',
+            'taxrates' => 'array|required',
         ]);
 
         Event::dispatch('tax.category.create.before');
@@ -88,10 +88,10 @@ class TaxCategoryController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'code'        => 'required|string|unique:tax_categories,code,'.$id,
-            'name'        => 'required|string',
+            'code' => 'required|string|unique:tax_categories,code,'.$id,
+            'name' => 'required|string',
             'description' => 'required|string',
-            'taxrates'    => 'array|required',
+            'taxrates' => 'array|required',
         ]);
 
         Event::dispatch('tax.category.update.before', $id);

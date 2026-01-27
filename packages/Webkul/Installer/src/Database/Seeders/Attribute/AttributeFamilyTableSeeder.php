@@ -23,10 +23,10 @@ class AttributeFamilyTableSeeder extends Seeder
 
         DB::table('attribute_families')->insert([
             [
-                'id'              => 1,
-                'code'            => 'default',
-                'name'            => trans('installer::app.seeders.attribute.attribute-families.default', [], $defaultLocale),
-                'status'          => 0,
+                'id' => 1,
+                'code' => 'default',
+                'name' => trans('installer::app.seeders.attribute.attribute-families.default', [], $defaultLocale),
+                'status' => 0,
                 'is_user_defined' => 1,
             ],
         ]);

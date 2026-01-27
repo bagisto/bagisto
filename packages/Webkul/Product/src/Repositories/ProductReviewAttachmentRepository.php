@@ -34,9 +34,9 @@ class ProductReviewAttachmentRepository extends Repository
             $this->sanitizeSVG($path, $mimeType);
 
             $this->create([
-                'path'      => $path,
+                'path' => $path,
                 'review_id' => $review->id,
-                'type'      => $fileType[0],
+                'type' => $fileType[0],
                 'mime_type' => $fileType[1] ?? null,
             ]);
         }

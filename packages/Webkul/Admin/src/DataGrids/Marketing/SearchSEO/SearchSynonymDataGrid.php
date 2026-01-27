@@ -30,29 +30,29 @@ class SearchSynonymDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.id'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'name',
-            'label'      => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.name'),
-            'type'       => 'string',
+            'index' => 'name',
+            'label' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.name'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'terms',
-            'label'      => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.terms'),
-            'type'       => 'string',
+            'index' => 'terms',
+            'label' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.terms'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
     }
 
@@ -65,12 +65,12 @@ class SearchSynonymDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.search_synonyms.edit')) {
             $this->addAction([
-                'index'  => 'edit',
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.edit'),
+                'index' => 'edit',
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.edit'),
                 'method' => 'GET',
-                'route'  => 'admin.marketing.search_seo.search_synonyms.update',
-                'url'    => function ($row) {
+                'route' => 'admin.marketing.search_seo.search_synonyms.update',
+                'url' => function ($row) {
                     return route('admin.marketing.search_seo.search_synonyms.update', $row->id);
                 },
             ]);
@@ -78,11 +78,11 @@ class SearchSynonymDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.search_synonyms.delete')) {
             $this->addAction([
-                'index'  => 'delete',
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
+                'index' => 'delete',
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.marketing.search_seo.search_synonyms.delete', $row->id);
                 },
             ]);
@@ -98,9 +98,9 @@ class SearchSynonymDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.search_synonyms.delete')) {
             $this->addMassAction([
-                'title'  => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
+                'title' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
                 'method' => 'POST',
-                'url'    => route('admin.marketing.search_seo.search_synonyms.mass_delete'),
+                'url' => route('admin.marketing.search_seo.search_synonyms.mass_delete'),
             ]);
         }
     }

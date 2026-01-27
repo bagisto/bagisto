@@ -10,23 +10,23 @@ use Webkul\Core\Menu\MenuItem;
 beforeEach(function () {
     config()->set('menu.admin', [
         [
-            'key'        => 'dashboard',
-            'name'       => 'admin::app.components.layouts.sidebar.dashboard',
-            'route'      => 'admin.dashboard.index',
-            'sort'       => 1,
-            'icon'       => 'icon-dashboard',
+            'key' => 'dashboard',
+            'name' => 'admin::app.components.layouts.sidebar.dashboard',
+            'route' => 'admin.dashboard.index',
+            'sort' => 1,
+            'icon' => 'icon-dashboard',
         ], [
-            'key'        => 'sales',
-            'name'       => 'admin::app.components.layouts.sidebar.sales',
-            'route'      => 'admin.sales.orders.index',
-            'sort'       => 2,
-            'icon'       => 'icon-sales',
+            'key' => 'sales',
+            'name' => 'admin::app.components.layouts.sidebar.sales',
+            'route' => 'admin.sales.orders.index',
+            'sort' => 2,
+            'icon' => 'icon-sales',
         ], [
-            'key'        => 'sales.orders',
-            'name'       => 'admin::app.components.layouts.sidebar.orders',
-            'route'      => 'admin.sales.orders.index',
-            'sort'       => 1,
-            'icon'       => '',
+            'key' => 'sales.orders',
+            'name' => 'admin::app.components.layouts.sidebar.orders',
+            'route' => 'admin.sales.orders.index',
+            'sort' => 1,
+            'icon' => '',
         ],
     ]);
 });

@@ -33,11 +33,11 @@ it('should store the newly created currencies', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.currencies.store'), $data = [
-        'code'              => fake()->randomElement(['EUR', 'GBP', 'JPY', 'AUD', 'CHF', 'CAD', 'CNY', 'BRL']),
-        'name'              => fake()->name(),
-        'symbol'            => fake()->randomElement(['€', '£', '¥', 'A$', 'CHF', 'C$', '¥', 'R$']),
-        'decimal'           => rand(1, 4),
-        'group_separator'   => '-',
+        'code' => fake()->randomElement(['EUR', 'GBP', 'JPY', 'AUD', 'CHF', 'CAD', 'CNY', 'BRL']),
+        'name' => fake()->name(),
+        'symbol' => fake()->randomElement(['€', '£', '¥', 'A$', 'CHF', 'C$', '¥', 'R$']),
+        'decimal' => rand(1, 4),
+        'group_separator' => '-',
         'decimal_separator' => '-',
         'currency_position' => fake()->randomElement(['left', 'left_with_space', 'right', 'right_with_space']),
     ])
@@ -85,7 +85,7 @@ it('should update the specified currency', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.currencies.update'), $data = [
-        'id'   => $currency->id,
+        'id' => $currency->id,
         'name' => fake()->name(),
     ])
         ->assertOk()

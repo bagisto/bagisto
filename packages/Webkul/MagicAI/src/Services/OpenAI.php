@@ -24,7 +24,7 @@ class OpenAI
     public function setConfig(): void
     {
         config([
-            'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
+            'openai.api_key' => core()->getConfigData('general.magic_ai.settings.api_key'),
             'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
         ]);
     }
@@ -35,11 +35,11 @@ class OpenAI
     public function ask(): string
     {
         $result = BaseOpenAI::chat()->create([
-            'model'       => $this->model,
+            'model' => $this->model,
             'temperature' => $this->temperature,
-            'messages'    => [
+            'messages' => [
                 [
-                    'role'    => 'user',
+                    'role' => 'user',
                     'content' => $this->prompt,
                 ],
             ],
@@ -54,11 +54,11 @@ class OpenAI
     public function images(array $options): array
     {
         $result = BaseOpenAI::images()->create([
-            'model'           => $this->model,
-            'prompt'          => $this->prompt,
-            'n'               => intval($options['n'] ?? 1),
-            'size'            => $options['size'],
-            'quality'         => $options['quality'] ?? 'standard',
+            'model' => $this->model,
+            'prompt' => $this->prompt,
+            'n' => intval($options['n'] ?? 1),
+            'size' => $options['size'],
+            'quality' => $options['quality'] ?? 'standard',
             'response_format' => 'b64_json',
         ]);
 

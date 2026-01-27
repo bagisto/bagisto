@@ -34,9 +34,9 @@ it('should return the create page of downloadable product', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
-        'type'                => 'downloadable',
+        'type' => 'downloadable',
         'attribute_family_id' => 1,
-        'sku'                 => $sku = fake()->slug(),
+        'sku' => $sku = fake()->slug(),
     ])
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
@@ -44,24 +44,24 @@ it('should return the create page of downloadable product', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'   => $productId,
+                'id' => $productId,
                 'type' => 'downloadable',
-                'sku'  => $sku,
+                'sku' => $sku,
             ],
         ],
 
         ProductFlat::class => [
             [
-                'url_key'           => $product->url_key,
-                'type'              => 'simple',
-                'name'              => $product->name,
+                'url_key' => $product->url_key,
+                'type' => 'simple',
+                'name' => $product->name,
                 'short_description' => $product->short_description,
-                'description'       => $product->description,
-                'price'             => $product->price,
-                'weight'            => $product->weight,
-                'locale'            => app()->getLocale(),
-                'product_id'        => $product->id,
-                'channel'           => core()->getCurrentChannelCode(),
+                'description' => $product->description,
+                'price' => $product->price,
+                'weight' => $product->weight,
+                'locale' => app()->getLocale(),
+                'product_id' => $product->id,
+                'channel' => core()->getCurrentChannelCode(),
             ],
         ],
     ]);
@@ -128,10 +128,10 @@ it('should fail the validation with errors if certain data is not provided corre
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'visible_individually' => $unProcessAble = fake()->word(),
-        'status'               => $unProcessAble,
-        'guest_checkout'       => $unProcessAble,
-        'new'                  => $unProcessAble,
-        'featured'             => $unProcessAble,
+        'status' => $unProcessAble,
+        'guest_checkout' => $unProcessAble,
+        'new' => $unProcessAble,
+        'featured' => $unProcessAble,
     ])
         ->assertJsonValidationErrorFor('sku')
         ->assertJsonValidationErrorFor('url_key')
@@ -204,7 +204,7 @@ it('should update the downloadable product', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -223,60 +223,60 @@ it('should update the downloadable product', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), $data = [
-        'sku'                => $product->sku,
-        'url_key'            => $product->url_key,
-        'short_description'  => fake()->sentence(),
-        'description'        => fake()->paragraph(),
-        'name'               => fake()->words(3, true),
-        'price'              => fake()->randomFloat(2, 1, 1000),
-        'weight'             => fake()->numberBetween(0, 100),
-        'channel'            => core()->getCurrentChannelCode(),
-        'locale'             => app()->getLocale(),
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'short_description' => fake()->sentence(),
+        'description' => fake()->paragraph(),
+        'name' => fake()->words(3, true),
+        'price' => fake()->randomFloat(2, 1, 1000),
+        'weight' => fake()->numberBetween(0, 100),
+        'channel' => core()->getCurrentChannelCode(),
+        'locale' => app()->getLocale(),
         'downloadable_links' => [
             'link_0' => [
                 'en' => [
                     'title' => fake()->title,
                 ],
-                'price'       => rand(10, 250),
-                'downloads'   => '1',
-                'sort_order'  => '0',
-                'type'        => 'file',
-                'file'        => $file1 = UploadedFile::fake()->image('ProductImageExampleForUpload1.jpg'),
-                'file_name'   => $file1->getClientOriginalName(),
+                'price' => rand(10, 250),
+                'downloads' => '1',
+                'sort_order' => '0',
+                'type' => 'file',
+                'file' => $file1 = UploadedFile::fake()->image('ProductImageExampleForUpload1.jpg'),
+                'file_name' => $file1->getClientOriginalName(),
                 'sample_type' => 'url',
-                'sample_url'  => fake()->url(),
+                'sample_url' => fake()->url(),
             ],
 
             'link_1' => [
                 'en' => [
                     'title' => fake()->title,
                 ],
-                'price'            => rand(10, 250),
-                'downloads'        => '1',
-                'sort_order'       => '1',
-                'type'             => 'file',
-                'file'             => $file2 = UploadedFile::fake()->image('ProductImageExampleForUpload2.jpg'),
-                'file_name'        => $file2->getClientOriginalName(),
-                'sample_type'      => 'file',
-                'sample_file'      => $file3 = UploadedFile::fake()->image('ProductImageExampleForUpload3.jpg'),
+                'price' => rand(10, 250),
+                'downloads' => '1',
+                'sort_order' => '1',
+                'type' => 'file',
+                'file' => $file2 = UploadedFile::fake()->image('ProductImageExampleForUpload2.jpg'),
+                'file_name' => $file2->getClientOriginalName(),
+                'sample_type' => 'file',
+                'sample_file' => $file3 = UploadedFile::fake()->image('ProductImageExampleForUpload3.jpg'),
                 'sample_file_name' => $file3->getClientOriginalName(),
             ],
         ],
 
         'downloadable_samples' => [
             'sample_0' => [
-                'title'      => fake()->title(),
+                'title' => fake()->title(),
                 'sort_order' => '0',
-                'type'       => 'file',
-                'file'       => $file4 = UploadedFile::fake()->image('ProductImageExampleForUpload4.jpg'),
-                'file_name'  => $file4->getClientOriginalName(),
+                'type' => 'file',
+                'file' => $file4 = UploadedFile::fake()->image('ProductImageExampleForUpload4.jpg'),
+                'file_name' => $file4->getClientOriginalName(),
             ],
 
             'sample_1' => [
-                'title'      => fake()->title(),
+                'title' => fake()->title(),
                 'sort_order' => '1',
-                'type'       => 'url',
-                'url'        => fake()->url(),
+                'type' => 'url',
+                'url' => fake()->url(),
             ],
         ],
     ])
@@ -286,25 +286,25 @@ it('should update the downloadable product', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'   => $product->id,
+                'id' => $product->id,
                 'type' => $product->type,
-                'sku'  => $product->sku,
+                'sku' => $product->sku,
             ],
         ],
 
         ProductFlat::class => [
             [
-                'product_id'        => $product->id,
-                'type'              => 'downloadable',
-                'sku'               => $product->sku,
-                'url_key'           => $product->url_key,
-                'name'              => $data['name'],
+                'product_id' => $product->id,
+                'type' => 'downloadable',
+                'sku' => $product->sku,
+                'url_key' => $product->url_key,
+                'name' => $data['name'],
                 'short_description' => $data['short_description'],
-                'description'       => $data['description'],
-                'price'             => $data['price'],
-                'weight'            => $data['weight'],
-                'locale'            => $data['locale'],
-                'channel'           => $data['channel'],
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'weight' => $data['weight'],
+                'locale' => $data['locale'],
+                'channel' => $data['channel'],
             ],
         ],
     ]);

@@ -181,7 +181,7 @@ class ElasticSearch extends AbstractIndexer
                         $refreshIndices['body'][] = [
                             'index' => [
                                 '_index' => $indexName,
-                                '_id'    => $product->id,
+                                '_id' => $product->id,
                             ],
                         ];
 
@@ -214,7 +214,7 @@ class ElasticSearch extends AbstractIndexer
             foreach ($productIds as $id) {
                 $params = [
                     'index' => $indexName,
-                    'id'    => $id,
+                    'id' => $id,
                 ];
 
                 try {
@@ -243,12 +243,12 @@ class ElasticSearch extends AbstractIndexer
     public function getIndices()
     {
         $properties = array_merge([
-            'id'                  => $this->product->id,
-            'type'                => $this->product->type,
-            'sku'                 => $this->product->sku,
+            'id' => $this->product->id,
+            'type' => $this->product->type,
+            'sku' => $this->product->sku,
             'attribute_family_id' => $this->product->attribute_family_id,
-            'category_ids'        => $this->product->categories->pluck('id')->toArray(),
-            'created_at'          => $this->product->created_at,
+            'category_ids' => $this->product->categories->pluck('id')->toArray(),
+            'created_at' => $this->product->created_at,
         ], $this->product->additional ?? []);
 
         $attributes = $this->getAttributes();

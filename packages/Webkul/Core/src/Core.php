@@ -878,7 +878,7 @@ class Core
         $senderEmail = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
 
         return [
-            'name'  => $senderName,
+            'name' => $senderName,
             'email' => $senderEmail,
         ];
     }
@@ -898,7 +898,7 @@ class Core
             ?: config('mail.admin.address');
 
         return [
-            'name'  => $adminName,
+            'name' => $adminName,
             'email' => $adminEmail,
         ];
     }
@@ -918,7 +918,7 @@ class Core
             ?: config('mail.contact.address');
 
         return [
-            'name'  => $contactName,
+            'name' => $contactName,
             'email' => $contactEmail,
         ];
     }
@@ -972,8 +972,8 @@ class Core
             }
 
             $rules['prerender'][] = [
-                'source'    => 'document',
-                'where'     => ['and' => $conditions],
+                'source' => 'document',
+                'where' => ['and' => $conditions],
                 'eagerness' => $prerenderEagerness,
             ];
         }
@@ -1006,11 +1006,11 @@ class Core
             }
 
             $rules['prefetch'][] = [
-                'source'          => 'document',
-                'where'           => ['and' => $conditions],
-                'requires'        => ['anonymous-client-ip-when-cross-origin'],
+                'source' => 'document',
+                'where' => ['and' => $conditions],
+                'requires' => ['anonymous-client-ip-when-cross-origin'],
                 'referrer_policy' => 'no-referrer',
-                'eagerness'       => $prefetchEagerness,
+                'eagerness' => $prefetchEagerness,
             ];
         }
 

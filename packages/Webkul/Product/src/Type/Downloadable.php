@@ -125,11 +125,11 @@ class Downloadable extends AbstractType
     public function getTypeValidationRules()
     {
         return [
-            'downloadable_links.*.type'       => 'required',
-            'downloadable_links.*.file'       => 'required_if:type,==,file',
-            'downloadable_links.*.file_name'  => 'required_if:type,==,file',
-            'downloadable_links.*.url'        => 'required_if:type,==,url',
-            'downloadable_links.*.downloads'  => 'required',
+            'downloadable_links.*.type' => 'required',
+            'downloadable_links.*.file' => 'required_if:type,==,file',
+            'downloadable_links.*.file_name' => 'required_if:type,==,file',
+            'downloadable_links.*.url' => 'required_if:type,==,url',
+            'downloadable_links.*.downloads' => 'required',
             'downloadable_links.*.sort_order' => 'required',
         ];
     }
@@ -212,8 +212,8 @@ class Downloadable extends AbstractType
 
         $data['attributes'][0] = [
             'attribute_name' => 'Downloads',
-            'option_id'      => 0,
-            'option_label'   => implode(', ', $labels),
+            'option_id' => 0,
+            'option_label' => implode(', ', $labels),
         ];
 
         return $data;

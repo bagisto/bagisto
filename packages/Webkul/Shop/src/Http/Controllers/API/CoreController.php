@@ -13,7 +13,7 @@ class CoreController extends APIController
     {
         return response()->json([
             'data' => core()->countries()->map(fn ($country) => [
-                'id'   => $country->id,
+                'id' => $country->id,
                 'code' => $country->code,
                 'name' => $country->name,
             ]),

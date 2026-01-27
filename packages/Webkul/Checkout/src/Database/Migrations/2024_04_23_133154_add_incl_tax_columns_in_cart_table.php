@@ -24,7 +24,7 @@ return new class extends Migration
         });
 
         DB::table('cart')->update([
-            'sub_total_incl_tax'      => DB::raw('sub_total + tax_total'),
+            'sub_total_incl_tax' => DB::raw('sub_total + tax_total'),
             'base_sub_total_incl_tax' => DB::raw('base_sub_total + base_tax_total'),
         ]);
     }

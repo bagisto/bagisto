@@ -223,15 +223,15 @@ class TranslationsChecker extends Command
         $missingLocales->each(function ($locale) use ($name) {
             $this->results->push([
                 'package' => $name,
-                'locale'  => $locale,
-                'status'  => 'fail',
-                'issues'  => 'Locale folder missing',
+                'locale' => $locale,
+                'status' => 'fail',
+                'issues' => 'Locale folder missing',
             ]);
 
             $this->errors->push([
                 'package' => $name,
-                'locale'  => $locale,
-                'type'    => 'missing_locale',
+                'locale' => $locale,
+                'type' => 'missing_locale',
                 'message' => "Locale folder '{$locale}' does not exist",
             ]);
 
@@ -285,9 +285,9 @@ class TranslationsChecker extends Command
 
             $this->errors->push([
                 'package' => $packageName,
-                'locale'  => $locale,
-                'type'    => 'missing_files',
-                'files'   => $missingFiles->all(),
+                'locale' => $locale,
+                'type' => 'missing_files',
+                'files' => $missingFiles->all(),
             ]);
         }
 
@@ -303,9 +303,9 @@ class TranslationsChecker extends Command
 
             $this->errors->push([
                 'package' => $packageName,
-                'locale'  => $locale,
-                'type'    => 'extra_files',
-                'files'   => $extraFiles->all(),
+                'locale' => $locale,
+                'type' => 'extra_files',
+                'files' => $extraFiles->all(),
             ]);
         }
 
@@ -370,9 +370,9 @@ class TranslationsChecker extends Command
 
             $this->errors->push([
                 'package' => $packageName,
-                'locale'  => $locale,
-                'type'    => 'missing_keys',
-                'data'    => $missingKeys,
+                'locale' => $locale,
+                'type' => 'missing_keys',
+                'data' => $missingKeys,
             ]);
         }
 
@@ -381,9 +381,9 @@ class TranslationsChecker extends Command
 
             $this->errors->push([
                 'package' => $packageName,
-                'locale'  => $locale,
-                'type'    => 'extra_keys',
-                'data'    => $extraKeys,
+                'locale' => $locale,
+                'type' => 'extra_keys',
+                'data' => $extraKeys,
             ]);
         }
 
@@ -392,17 +392,17 @@ class TranslationsChecker extends Command
 
             $this->errors->push([
                 'package' => $packageName,
-                'locale'  => $locale,
-                'type'    => 'structure_issues',
-                'data'    => $structureIssues,
+                'locale' => $locale,
+                'type' => 'structure_issues',
+                'data' => $structureIssues,
             ]);
         }
 
         return [
             'package' => $packageName,
-            'locale'  => $locale,
-            'status'  => empty($issues) ? 'pass' : 'fail',
-            'issues'  => $this->buildIssueSummary($issues),
+            'locale' => $locale,
+            'status' => empty($issues) ? 'pass' : 'fail',
+            'issues' => $this->buildIssueSummary($issues),
         ];
     }
 
@@ -557,13 +557,13 @@ class TranslationsChecker extends Command
     protected function displayError(array $error): void
     {
         match ($error['type']) {
-            'missing_locale'   => $this->displayMissingLocale($error['message']),
-            'missing_files'    => $this->displayMissingFiles($error['files']),
-            'extra_files'      => $this->displayExtraFiles($error['files']),
-            'missing_keys'     => $this->displayMissingKeys($error['data']),
-            'extra_keys'       => $this->displayExtraKeys($error['data']),
+            'missing_locale' => $this->displayMissingLocale($error['message']),
+            'missing_files' => $this->displayMissingFiles($error['files']),
+            'extra_files' => $this->displayExtraFiles($error['files']),
+            'missing_keys' => $this->displayMissingKeys($error['data']),
+            'extra_keys' => $this->displayExtraKeys($error['data']),
             'structure_issues' => $this->displayStructureIssues($error['data']),
-            default            => null,
+            default => null,
         };
     }
 
@@ -722,7 +722,7 @@ class TranslationsChecker extends Command
         // Different number of lines means structure mismatch
         if ($enLineCount !== $locLineCount) {
             $mismatches[] = [
-                'type'    => 'line_count',
+                'type' => 'line_count',
                 'message' => "Line count differs: EN has {$enLineCount} lines, locale has {$locLineCount} lines",
             ];
         }
@@ -741,9 +741,9 @@ class TranslationsChecker extends Command
 
             if ($enLine === null) {
                 $detailedMismatches->push([
-                    'line'           => $displayLineNum,
-                    'type'           => 'extra_line',
-                    'message'        => 'Extra line in locale',
+                    'line' => $displayLineNum,
+                    'type' => 'extra_line',
+                    'message' => 'Extra line in locale',
                     'locale_content' => $this->truncateLine($locLine),
                 ]);
 
@@ -752,9 +752,9 @@ class TranslationsChecker extends Command
 
             if ($locLine === null) {
                 $detailedMismatches->push([
-                    'line'       => $displayLineNum,
-                    'type'       => 'missing_line',
-                    'message'    => 'Missing line in locale',
+                    'line' => $displayLineNum,
+                    'type' => 'missing_line',
+                    'message' => 'Missing line in locale',
                     'en_content' => $this->truncateLine($enLine),
                 ]);
 
@@ -767,10 +767,10 @@ class TranslationsChecker extends Command
 
             if ($enStructure !== $locStructure) {
                 $detailedMismatches->push([
-                    'line'             => $displayLineNum,
-                    'type'             => 'structure_diff',
-                    'message'          => $this->describeStructureDifference($enStructure, $locStructure, $enLine, $locLine),
-                    'en_structure'     => $this->truncateLine($enStructure),
+                    'line' => $displayLineNum,
+                    'type' => 'structure_diff',
+                    'message' => $this->describeStructureDifference($enStructure, $locStructure, $enLine, $locLine),
+                    'en_structure' => $this->truncateLine($enStructure),
                     'locale_structure' => $this->truncateLine($locStructure),
                 ]);
             }
@@ -783,7 +783,7 @@ class TranslationsChecker extends Command
                 $remaining = $detailedMismatches->count() - self::MAX_DISPLAY_ITEMS;
 
                 $mismatches[] = [
-                    'type'    => 'truncated',
+                    'type' => 'truncated',
                     'message' => "... and {$remaining} more structure differences",
                 ];
             }

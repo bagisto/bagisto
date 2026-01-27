@@ -10,12 +10,12 @@ class CustomerController extends Controller
      * @var array
      */
     protected $typeFunctions = [
-        'total-customers'             => 'getTotalCustomersStats',
-        'customers-traffic'           => 'getCustomersTrafficStats',
-        'customers-with-most-sales'   => 'getCustomersWithMostSales',
-        'customers-with-most-orders'  => 'getCustomersWithMostOrders',
+        'total-customers' => 'getTotalCustomersStats',
+        'customers-traffic' => 'getCustomersTrafficStats',
+        'customers-with-most-sales' => 'getCustomersWithMostSales',
+        'customers-with-most-orders' => 'getCustomersWithMostOrders',
         'customers-with-most-reviews' => 'getCustomersWithMostReviews',
-        'top-customer-groups'         => 'getTopCustomerGroups',
+        'top-customer-groups' => 'getTopCustomerGroups',
     ];
 
     /**
@@ -27,7 +27,7 @@ class CustomerController extends Controller
     {
         return view('admin::reporting.customers.index')->with([
             'startDate' => $this->reportingHelper->getStartDate(),
-            'endDate'   => $this->reportingHelper->getEndDate(),
+            'endDate' => $this->reportingHelper->getEndDate(),
         ]);
     }
 
@@ -43,9 +43,9 @@ class CustomerController extends Controller
         }
 
         return view('admin::reporting.view')->with([
-            'entity'    => 'customers',
+            'entity' => 'customers',
             'startDate' => $this->reportingHelper->getStartDate(),
-            'endDate'   => $this->reportingHelper->getEndDate(),
+            'endDate' => $this->reportingHelper->getEndDate(),
         ]);
     }
 }

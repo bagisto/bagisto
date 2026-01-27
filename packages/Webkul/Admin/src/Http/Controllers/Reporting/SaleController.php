@@ -10,14 +10,14 @@ class SaleController extends Controller
      * @var array
      */
     protected $typeFunctions = [
-        'total-sales'         => 'getTotalSalesStats',
-        'average-sales'       => 'getAverageSalesStats',
-        'total-orders'        => 'getTotalOrdersStats',
-        'purchase-funnel'     => 'getPurchaseFunnelStats',
-        'abandoned-carts'     => 'getAbandonedCartsStats',
-        'refunds'             => 'getRefundsStats',
-        'tax-collected'       => 'getTaxCollectedStats',
-        'shipping-collected'  => 'getShippingCollectedStats',
+        'total-sales' => 'getTotalSalesStats',
+        'average-sales' => 'getAverageSalesStats',
+        'total-orders' => 'getTotalOrdersStats',
+        'purchase-funnel' => 'getPurchaseFunnelStats',
+        'abandoned-carts' => 'getAbandonedCartsStats',
+        'refunds' => 'getRefundsStats',
+        'tax-collected' => 'getTaxCollectedStats',
+        'shipping-collected' => 'getShippingCollectedStats',
         'top-payment-methods' => 'getTopPaymentMethods',
     ];
 
@@ -30,7 +30,7 @@ class SaleController extends Controller
     {
         return view('admin::reporting.sales.index')->with([
             'startDate' => $this->reportingHelper->getStartDate(),
-            'endDate'   => $this->reportingHelper->getEndDate(),
+            'endDate' => $this->reportingHelper->getEndDate(),
         ]);
     }
 
@@ -46,9 +46,9 @@ class SaleController extends Controller
         }
 
         return view('admin::reporting.view')->with([
-            'entity'    => 'sales',
+            'entity' => 'sales',
             'startDate' => $this->reportingHelper->getStartDate(),
-            'endDate'   => $this->reportingHelper->getEndDate(),
+            'endDate' => $this->reportingHelper->getEndDate(),
         ]);
     }
 }

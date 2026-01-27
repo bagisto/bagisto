@@ -39,11 +39,11 @@ class URLRewriteController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'entity_type'   => 'required:in:category,product,cms_page',
-            'request_path'  => 'required',
-            'target_path'   => 'required',
+            'entity_type' => 'required:in:category,product,cms_page',
+            'request_path' => 'required',
+            'target_path' => 'required',
             'redirect_type' => 'required|in:301,302',
-            'locale'        => 'required|exists:locales,code',
+            'locale' => 'required|exists:locales,code',
         ]);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.before');
@@ -73,11 +73,11 @@ class URLRewriteController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'entity_type'   => 'required:in:category,product,cms_page',
-            'request_path'  => 'required',
-            'target_path'   => 'required',
+            'entity_type' => 'required:in:category,product,cms_page',
+            'request_path' => 'required',
+            'target_path' => 'required',
             'redirect_type' => 'required|in:301,302',
-            'locale'        => 'required|exists:locales,code',
+            'locale' => 'required|exists:locales,code',
         ]);
 
         Event::dispatch('marketing.search_seo.url_rewrites.update.before', $id);

@@ -39,7 +39,7 @@ class CustomerSocialAccountRepository extends Repository
     {
         $account = $this->findOneWhere([
             'provider_name' => $provider,
-            'provider_id'   => $providerUser->getId(),
+            'provider_id' => $providerUser->getId(),
         ]);
 
         if ($account) {
@@ -51,18 +51,18 @@ class CustomerSocialAccountRepository extends Repository
                 $names = $this->getFirstLastName($providerUser->getName());
 
                 $customer = $this->customerRepository->create([
-                    'email'             => $providerUser->getEmail(),
-                    'first_name'        => $names['first_name'],
-                    'last_name'         => $names['last_name'],
-                    'status'            => 1,
-                    'is_verified'       => ! core()->getConfigData('customer.settings.email.verification'),
+                    'email' => $providerUser->getEmail(),
+                    'first_name' => $names['first_name'],
+                    'last_name' => $names['last_name'],
+                    'status' => 1,
+                    'is_verified' => ! core()->getConfigData('customer.settings.email.verification'),
                     'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
                 ]);
             }
 
             $this->create([
-                'customer_id'   => $customer->id,
-                'provider_id'   => $providerUser->getId(),
+                'customer_id' => $customer->id,
+                'provider_id' => $providerUser->getId(),
                 'provider_name' => $provider,
             ]);
 
@@ -86,7 +86,7 @@ class CustomerSocialAccountRepository extends Repository
 
         return [
             'first_name' => $firstName,
-            'last_name'  => $lastName,
+            'last_name' => $lastName,
         ];
     }
 }

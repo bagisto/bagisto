@@ -26,7 +26,7 @@ class ProductVideo
             }
 
             $videos[] = [
-                'type'      => $video->type,
+                'type' => $video->type,
                 'video_url' => Storage::url($video->path),
             ];
         }

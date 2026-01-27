@@ -58,64 +58,64 @@ class OrderShipmentDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'shipment_id',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'shipment_id',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.id'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'shipment_order_id',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.order-id'),
-            'type'       => 'string',
+            'index' => 'shipment_order_id',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.order-id'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'shipment_total_qty',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.total-qty'),
-            'type'       => 'integer',
+            'index' => 'shipment_total_qty',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.total-qty'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'inventory_source_name',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.inventory-source'),
-            'type'       => 'string',
+            'index' => 'inventory_source_name',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.inventory-source'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'shipped_to',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-to'),
-            'type'       => 'string',
+            'index' => 'shipped_to',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.shipment-to'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'           => 'order_date',
-            'label'           => trans('admin::app.sales.shipments.index.datagrid.order-date'),
-            'type'            => 'date',
-            'filterable'      => true,
+            'index' => 'order_date',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.order-date'),
+            'type' => 'date',
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'           => 'shipment_created_at',
-            'label'           => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
-            'type'            => 'date',
-            'filterable'      => true,
+            'index' => 'shipment_created_at',
+            'label' => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
+            'type' => 'date',
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
     }
 
@@ -128,10 +128,10 @@ class OrderShipmentDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.shipments.view')) {
             $this->addAction([
-                'icon'   => 'icon-view',
-                'title'  => trans('admin::app.sales.shipments.index.datagrid.view'),
+                'icon' => 'icon-view',
+                'title' => trans('admin::app.sales.shipments.index.datagrid.view'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.shipments.view', $row->shipment_id);
                 },
             ]);

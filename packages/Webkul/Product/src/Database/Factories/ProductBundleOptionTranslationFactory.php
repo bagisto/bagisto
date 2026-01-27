@@ -20,7 +20,7 @@ class ProductBundleOptionTranslationFactory extends Factory
     public function definition(): array
     {
         return [
-            'label'  => $this->faker->words(3, true),
+            'label' => $this->faker->words(3, true),
             'locale' => app()->getLocale(),
         ];
     }

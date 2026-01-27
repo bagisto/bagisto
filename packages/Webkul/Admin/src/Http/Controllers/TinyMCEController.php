@@ -78,11 +78,11 @@ class TinyMCEController extends Controller
         $extension = strtolower($file->getClientOriginalExtension());
 
         $validExtensions = [
-            'image/jpeg'    => ['jpg', 'jpeg'],
-            'image/jpg'     => ['jpg', 'jpeg'],
-            'image/png'     => ['png'],
-            'image/gif'     => ['gif'],
-            'image/webp'    => ['webp'],
+            'image/jpeg' => ['jpg', 'jpeg'],
+            'image/jpg' => ['jpg', 'jpeg'],
+            'image/png' => ['png'],
+            'image/gif' => ['gif'],
+            'image/webp' => ['webp'],
             'image/svg+xml' => ['svg'],
         ];
 
@@ -95,9 +95,9 @@ class TinyMCEController extends Controller
         $this->sanitizeSVG($path, $mimeType);
 
         return [
-            'file'      => $path,
+            'file' => $path,
             'file_name' => $file->getClientOriginalName(),
-            'file_url'  => Storage::url($path),
+            'file_url' => Storage::url($path),
         ];
     }
 }

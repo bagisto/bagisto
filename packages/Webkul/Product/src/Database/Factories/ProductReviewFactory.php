@@ -20,9 +20,9 @@ class ProductReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'   => $this->faker->words(5, true),
-            'rating'  => $this->faker->numberBetween(0, 10),
-            'status'  => 'pending',
+            'title' => $this->faker->words(5, true),
+            'rating' => $this->faker->numberBetween(0, 10),
+            'status' => 'pending',
             'comment' => $this->faker->sentence(20),
         ];
     }

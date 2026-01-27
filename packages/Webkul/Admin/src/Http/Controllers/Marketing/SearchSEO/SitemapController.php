@@ -39,7 +39,7 @@ class SitemapController extends Controller
     {
         $this->validate(request(), [
             'file_name' => 'required|regex:/^[\w\-\.]+$/|ends_with:.xml',
-            'path'      => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
+            'path' => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
         ]);
 
         Event::dispatch('marketing.search_seo.sitemap.create.before');
@@ -69,7 +69,7 @@ class SitemapController extends Controller
 
         $this->validate(request(), [
             'file_name' => 'required|regex:/^[\w\-\.]+$/|ends_with:.xml',
-            'path'      => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
+            'path' => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
         ]);
 
         Event::dispatch('marketing.search_seo.sitemap.update.before', $id);

@@ -53,9 +53,9 @@ class RoleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name'            => 'required',
+            'name' => 'required',
             'permission_type' => 'required|in:all,custom',
-            'description'     => 'required',
+            'description' => 'required',
         ]);
 
         if (request('permission_type') == 'custom') {
@@ -102,9 +102,9 @@ class RoleController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'name'            => 'required',
+            'name' => 'required',
             'permission_type' => 'required|in:all,custom',
-            'description'     => 'required',
+            'description' => 'required',
         ]);
 
         /**
@@ -149,7 +149,7 @@ class RoleController extends Controller
 
         if ($role->admins->count() >= 1) {
             return new JsonResponse(['message' => trans('admin::app.settings.roles.being-used', [
-                'name'   => 'admin::app.settings.roles.index.title',
+                'name' => 'admin::app.settings.roles.index.title',
                 'source' => 'admin::app.settings.roles.index.admin-user',
             ])], 400);
         }

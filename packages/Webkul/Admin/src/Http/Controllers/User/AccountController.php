@@ -31,11 +31,11 @@ class AccountController extends Controller
         $user = auth()->guard('admin')->user();
 
         $this->validate(request(), [
-            'name'             => 'required',
-            'email'            => 'email|unique:admins,email,'.$user->id,
-            'password'         => 'nullable|min:6|confirmed',
+            'name' => 'required',
+            'email' => 'email|unique:admins,email,'.$user->id,
+            'password' => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
-            'image.*'          => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'image.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         $data = request()->only([

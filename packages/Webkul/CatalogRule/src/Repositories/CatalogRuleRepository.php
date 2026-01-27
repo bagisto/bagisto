@@ -81,9 +81,9 @@ class CatalogRuleRepository extends Repository
         return [
             ...$data,
             'starts_from' => ! empty($data['starts_from']) ? $data['starts_from'] : null,
-            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till'] : null,
-            'status'      => isset($data['status']),
-            'conditions'  => $data['conditions'] ?? [],
+            'ends_till' => ! empty($data['ends_till']) ? $data['ends_till'] : null,
+            'status' => isset($data['status']),
+            'conditions' => $data['conditions'] ?? [],
         ];
     }
 
@@ -96,18 +96,18 @@ class CatalogRuleRepository extends Repository
     {
         $attributes = [
             [
-                'key'      => 'product',
-                'label'    => trans('admin::app.marketing.promotions.catalog-rules.create.product-attribute'),
+                'key' => 'product',
+                'label' => trans('admin::app.marketing.promotions.catalog-rules.create.product-attribute'),
                 'children' => [
                     [
-                        'key'     => 'product|category_ids',
-                        'type'    => 'multiselect',
-                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.categories'),
+                        'key' => 'product|category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.marketing.promotions.catalog-rules.create.categories'),
                         'options' => $this->categoryRepository->getCategoryTree(),
                     ], [
-                        'key'     => 'product|attribute_family_id',
-                        'type'    => 'select',
-                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.attribute-family'),
+                        'key' => 'product|attribute_family_id',
+                        'type' => 'select',
+                        'label' => trans('admin::app.marketing.promotions.catalog-rules.create.attribute-family'),
                         'options' => $this->getAttributeFamilies(),
                     ],
                 ],
@@ -136,9 +136,9 @@ class CatalogRuleRepository extends Repository
             }
 
             $attributes[0]['children'][] = [
-                'key'     => 'product|'.$attribute->code,
-                'type'    => $attribute->type,
-                'label'   => $attribute->name,
+                'key' => 'product|'.$attribute->code,
+                'type' => $attribute->type,
+                'label' => $attribute->name,
                 'options' => $options,
             ];
         }
@@ -157,7 +157,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->taxCategoryRepository->all() as $taxCategory) {
             $taxCategories[] = [
-                'id'         => $taxCategory->id,
+                'id' => $taxCategory->id,
                 'admin_name' => $taxCategory->name,
             ];
         }
@@ -176,7 +176,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
             $attributeFamilies[] = [
-                'id'         => $attributeFamily->id,
+                'id' => $attributeFamily->id,
                 'admin_name' => $attributeFamily->name,
             ];
         }

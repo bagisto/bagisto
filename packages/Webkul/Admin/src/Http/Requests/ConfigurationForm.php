@@ -54,10 +54,10 @@ class ConfigurationForm extends FormRequest
 
         return array_map(function ($rule) {
             return match ($rule) {
-                'phone'    => new PhoneNumber,
+                'phone' => new PhoneNumber,
                 'postcode' => new PostCode,
-                'decimal'  => new Decimal,
-                default    => $rule,
+                'decimal' => new Decimal,
+                default => $rule,
             };
         }, $validations);
     }

@@ -20,11 +20,11 @@ class CategoryTranslationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'        => $this->faker->word,
-            'slug'        => $this->faker->unique()->slug,
+            'name' => $this->faker->word,
+            'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->sentence(),
-            'locale'      => 'en',
-            'locale_id'   => 1,
+            'locale' => 'en',
+            'locale_id' => 1,
         ];
     }
 }

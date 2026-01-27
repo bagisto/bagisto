@@ -51,9 +51,9 @@ class TransactionController extends Controller
     public function store(Request $request): JsonResponse
     {
         $this->validate(request(), [
-            'invoice_id'     => 'required',
+            'invoice_id' => 'required',
             'payment_method' => 'required',
-            'amount'         => 'required|numeric',
+            'amount' => 'required|numeric',
         ]);
 
         $invoice = $this->invoiceRepository->where('id', $request->invoice_id)->first();
@@ -90,13 +90,13 @@ class TransactionController extends Controller
 
         $this->orderTransactionRepository->create([
             'transaction_id' => bin2hex(random_bytes(20)),
-            'type'           => $request->payment_method,
+            'type' => $request->payment_method,
             'payment_method' => $request->payment_method,
-            'invoice_id'     => $invoice->id,
-            'order_id'       => $invoice->order_id,
-            'amount'         => $request->amount,
-            'status'         => 'paid',
-            'data'           => json_encode([
+            'invoice_id' => $invoice->id,
+            'order_id' => $invoice->order_id,
+            'amount' => $request->amount,
+            'status' => 'paid',
+            'data' => json_encode([
                 'paidAmount' => $request->amount,
             ]),
         ]);

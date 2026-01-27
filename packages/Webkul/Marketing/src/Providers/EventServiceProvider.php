@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Product Events
          */
-        'catalog.product.update.before'  => [
+        'catalog.product.update.before' => [
             'Webkul\Marketing\Listeners\Product@beforeUpdate',
         ],
 

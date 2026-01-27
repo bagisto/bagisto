@@ -295,7 +295,7 @@ class CategoryController extends Controller
     public function search()
     {
         $categories = $this->categoryRepository->getAll([
-            'name'   => request()->input('query'),
+            'name' => request()->input('query'),
             'locale' => app()->getLocale(),
         ]);
 

@@ -28,11 +28,11 @@ class BookingProductController extends Controller
         protected TableSlotHelper $tableSlotHelper
     ) {
         $this->bookingHelpers = [
-            'default'     => $this->defaultSlotHelper,
+            'default' => $this->defaultSlotHelper,
             'appointment' => $this->appointmentSlotHelper,
-            'rental'      => $this->rentalSlotHelper,
-            'event'       => $this->eventTicketHelper,
-            'table'       => $this->tableSlotHelper,
+            'rental' => $this->rentalSlotHelper,
+            'event' => $this->eventTicketHelper,
+            'table' => $this->tableSlotHelper,
         ];
     }
 

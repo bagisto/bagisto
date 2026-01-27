@@ -28,7 +28,7 @@ return new class extends Migration
          * - Should be in the seeder.
          */
         DB::table('marketing_events')->insert([
-            'name'        => 'Birthday',
+            'name' => 'Birthday',
             'description' => 'Birthday',
         ]);
     }

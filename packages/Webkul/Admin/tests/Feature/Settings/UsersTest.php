@@ -50,12 +50,12 @@ it('should store the newly created admin', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), $data = [
-        'name'                  => fake()->name(),
-        'role_id'               => 1,
-        'email'                 => fake()->email,
-        'password'              => $password = fake()->password(),
+        'name' => fake()->name(),
+        'role_id' => 1,
+        'email' => fake()->email,
+        'password' => $password = fake()->password(),
         'password_confirmation' => $password,
-        'image'                 => [
+        'image' => [
             UploadedFile::fake()->image('avatar.jpg'),
         ],
     ])
@@ -65,8 +65,8 @@ it('should store the newly created admin', function () {
     $this->assertModelWise([
         Admin::class => [
             [
-                'name'    => $data['name'],
-                'email'   => $data['email'],
+                'name' => $data['name'],
+                'email' => $data['email'],
                 'role_id' => 1,
             ],
         ],
@@ -78,12 +78,12 @@ it('should fails the validation error with tempered avatar provided when store t
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), [
-        'name'                  => fake()->name(),
-        'role_id'               => 1,
-        'email'                 => fake()->email(),
-        'password'              => $password = fake()->password(),
+        'name' => fake()->name(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
         'password_confirmation' => $password,
-        'image'                 => [
+        'image' => [
             UploadedFile::fake()->image('avatar.php'),
         ],
     ])
@@ -114,7 +114,7 @@ it('should fail the validation with errors when certain field not provided when 
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
-        'id'       => $admin->id,
+        'id' => $admin->id,
         'password' => 'admin123',
     ])
         ->assertJsonValidationErrorFor('name')
@@ -132,14 +132,14 @@ it('should update the existing admin', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), $data = [
-        'id'                    => $admin->id,
-        'name'                  => $admin->name,
-        'image'                 => [
+        'id' => $admin->id,
+        'name' => $admin->name,
+        'image' => [
             UploadedFile::fake()->image('avatar.jpg'),
         ],
-        'role_id'               => 1,
-        'email'                 => fake()->email(),
-        'password'              => $password = fake()->password(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
         'password_confirmation' => $password,
     ])
         ->assertOk()
@@ -160,14 +160,14 @@ it('should fails the validation error with tempered avatar provided when update 
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
-        'id'                    => $admin->id,
-        'name'                  => $admin->name,
-        'image'                 => [
+        'id' => $admin->id,
+        'name' => $admin->name,
+        'image' => [
             UploadedFile::fake()->image('avatar.php'),
         ],
-        'role_id'               => 1,
-        'email'                 => fake()->email(),
-        'password'              => $password = fake()->password(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
         'password_confirmation' => $password,
     ])
         ->assertJsonValidationErrorFor('image.0')
@@ -186,20 +186,20 @@ it('can update the users without new image', function () {
     $this->loginAsAdmin($admin);
 
     putJson(route('admin.settings.users.update'), [
-        'id'                    => $admin->id,
-        'name'                  => $admin->name,
-        'image'                 => [
+        'id' => $admin->id,
+        'name' => $admin->name,
+        'image' => [
             'image' => '',
         ],
-        'role_id'               => 1,
-        'email'                 => fake()->email(),
-        'password'              => $password = fake()->password(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
         'password_confirmation' => $password,
     ])
         ->assertOk();
 
     $this->assertDatabaseHas('admins', [
-        'id'    => $admin->id,
+        'id' => $admin->id,
         'image' => $admin->image,
     ]);
 });

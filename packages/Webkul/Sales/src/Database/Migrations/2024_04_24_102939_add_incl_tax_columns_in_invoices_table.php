@@ -23,9 +23,9 @@ return new class extends Migration
         });
 
         DB::table('invoices')->update([
-            'sub_total_incl_tax'            => DB::raw('sub_total + tax_amount'),
-            'base_sub_total_incl_tax'       => DB::raw('base_sub_total + base_tax_amount'),
-            'shipping_amount_incl_tax'      => DB::raw('shipping_amount'),
+            'sub_total_incl_tax' => DB::raw('sub_total + tax_amount'),
+            'base_sub_total_incl_tax' => DB::raw('base_sub_total + base_tax_amount'),
+            'shipping_amount_incl_tax' => DB::raw('shipping_amount'),
             'base_shipping_amount_incl_tax' => DB::raw('base_shipping_amount'),
         ]);
     }

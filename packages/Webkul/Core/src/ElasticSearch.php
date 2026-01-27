@@ -14,7 +14,7 @@ class ElasticSearch
      * @var array
      */
     protected $configMappings = [
-        'retries'  => 'setRetries',
+        'retries' => 'setRetries',
         'caBundle' => 'setCABundle',
     ];
 

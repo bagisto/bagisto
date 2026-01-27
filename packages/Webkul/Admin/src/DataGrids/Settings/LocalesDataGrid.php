@@ -31,38 +31,38 @@ class LocalesDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.settings.locales.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.settings.locales.index.datagrid.id'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'code',
-            'label'      => trans('admin::app.settings.locales.index.datagrid.code'),
-            'type'       => 'string',
+            'index' => 'code',
+            'label' => trans('admin::app.settings.locales.index.datagrid.code'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'name',
-            'label'      => trans('admin::app.settings.locales.index.datagrid.name'),
-            'type'       => 'string',
+            'index' => 'name',
+            'label' => trans('admin::app.settings.locales.index.datagrid.name'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'              => 'direction',
-            'label'              => trans('admin::app.settings.locales.index.datagrid.direction'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'direction',
+            'label' => trans('admin::app.settings.locales.index.datagrid.direction'),
+            'type' => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.settings.locales.index.datagrid.ltr'),
@@ -73,8 +73,8 @@ class LocalesDataGrid extends DataGrid
                     'value' => 'rtl',
                 ],
             ],
-            'sortable'   => true,
-            'closure'    => function ($value) {
+            'sortable' => true,
+            'closure' => function ($value) {
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.settings.locales.index.datagrid.ltr');
                 }
@@ -93,11 +93,11 @@ class LocalesDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.locales.edit')) {
             $this->addAction([
-                'index'  => 'edit',
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.settings.locales.index.datagrid.edit'),
+                'index' => 'edit',
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.settings.locales.index.datagrid.edit'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.settings.locales.edit', $row->id);
                 },
             ]);
@@ -105,11 +105,11 @@ class LocalesDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('settings.locales.delete')) {
             $this->addAction([
-                'index'  => 'delete',
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.settings.locales.index.datagrid.delete'),
+                'index' => 'delete',
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.settings.locales.index.datagrid.delete'),
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.settings.locales.delete', $row->id);
                 },
             ]);

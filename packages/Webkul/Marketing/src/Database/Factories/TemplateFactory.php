@@ -22,8 +22,8 @@ class TemplateFactory extends Factory
         $statusType = ['active', 'inactive', 'draft'];
 
         return [
-            'name'    => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
-            'status'  => $statusType[array_rand($statusType)],
+            'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
+            'status' => $statusType[array_rand($statusType)],
             'content' => substr($this->faker->paragraph, 0, 50),
         ];
     }

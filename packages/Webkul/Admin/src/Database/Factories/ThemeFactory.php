@@ -24,8 +24,8 @@ class ThemeFactory extends Factory
         $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
 
         return [
-            'type'       => $this->faker->randomElement($types),
-            'name'       => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
+            'type' => $this->faker->randomElement($types),
+            'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'sort_order' => ($lastTheme ? $lastTheme->id : 0) + 1,
             'channel_id' => core()->getCurrentChannel()->id,
             'theme_code' => core()->getCurrentChannel()->theme,

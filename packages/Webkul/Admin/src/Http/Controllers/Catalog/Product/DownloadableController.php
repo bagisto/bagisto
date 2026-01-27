@@ -24,9 +24,9 @@ class DownloadableController extends Controller
 
         foreach ($product->downloadable_links as $link) {
             $links[] = [
-                'id'              => $link->id,
-                'title'           => $link->title,
-                'price'           => $link->price,
+                'id' => $link->id,
+                'title' => $link->title,
+                'price' => $link->price,
                 'formatted_price' => core()->formatPrice($link->price),
             ];
         }

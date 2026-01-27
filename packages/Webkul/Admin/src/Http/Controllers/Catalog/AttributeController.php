@@ -66,9 +66,9 @@ class AttributeController extends Controller
     public function store()
     {
         $rules = [
-            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
-            'admin_name'    => 'required',
-            'type'          => 'required',
+            'code' => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
+            'admin_name' => 'required',
+            'type' => 'required',
         ];
 
         if (request('type') === 'boolean') {
@@ -132,9 +132,9 @@ class AttributeController extends Controller
     public function update(int $id)
     {
         $rules = [
-            'code'          => ['required', 'unique:attributes,code,'.$id, new Code],
-            'admin_name'    => 'required',
-            'type'          => 'required',
+            'code' => ['required', 'unique:attributes,code,'.$id, new Code],
+            'admin_name' => 'required',
+            'type' => 'required',
         ];
 
         if (request('type') === 'boolean') {
@@ -237,7 +237,7 @@ class AttributeController extends Controller
         $superAttributes = $this->productRepository->getSuperAttributes($product);
 
         return response()->json([
-            'data'  => $superAttributes,
+            'data' => $superAttributes,
         ]);
     }
 }

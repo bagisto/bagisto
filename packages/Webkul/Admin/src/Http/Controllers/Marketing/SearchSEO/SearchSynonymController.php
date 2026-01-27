@@ -39,7 +39,7 @@ class SearchSynonymController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'name'  => 'required',
+            'name' => 'required',
             'terms' => 'required',
         ]);
 
@@ -67,7 +67,7 @@ class SearchSynonymController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'name'  => 'required',
+            'name' => 'required',
             'terms' => 'required',
         ]);
 

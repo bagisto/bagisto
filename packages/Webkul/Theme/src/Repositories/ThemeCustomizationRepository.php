@@ -32,9 +32,9 @@ class ThemeCustomizationRepository extends Repository
 
         if ($data['type'] == 'static_content') {
             $config = [
-                'HTML.Allowed'           => null,
+                'HTML.Allowed' => null,
                 'HTML.ForbiddenElements' => 'script,iframe,form',
-                'CSS.AllowedProperties'  => null,
+                'CSS.AllowedProperties' => null,
             ];
 
             $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html']);
@@ -94,8 +94,8 @@ class ThemeCustomizationRepository extends Repository
             if (isset($image['service_icon'])) {
                 $options['services'][] = [
                     'service_icon' => $image['service_icon'],
-                    'description'  => $image['description'],
-                    'title'        => $image['title'],
+                    'description' => $image['description'],
+                    'title' => $image['title'],
                 ];
             } elseif ($image['image'] instanceof UploadedFile) {
                 try {
@@ -116,7 +116,7 @@ class ThemeCustomizationRepository extends Repository
 
                 $options['images'][] = [
                     'image' => 'storage/'.$path,
-                    'link'  => $image['link'],
+                    'link' => $image['link'],
                     'title' => $image['title'],
                 ];
             } else {

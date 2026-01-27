@@ -49,8 +49,8 @@ class TemplateController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name'    => 'required',
-            'status'  => 'required|in:active,inactive,draft',
+            'name' => 'required',
+            'status' => 'required|in:active,inactive,draft',
             'content' => 'required',
         ]);
 
@@ -93,8 +93,8 @@ class TemplateController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'name'    => 'required',
-            'status'  => 'required|in:active,inactive,draft',
+            'name' => 'required',
+            'status' => 'required|in:active,inactive,draft',
             'content' => 'required',
         ]);
 

@@ -46,9 +46,9 @@ it('should store the newly created catalog rule', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.promotions.catalog_rules.store', [
-        'name'        => $name = fake()->name(),
+        'name' => $name = fake()->name(),
         'description' => $description = substr(fake()->paragraph(), 0, 50),
-        'channels'    => [
+        'channels' => [
             1,
         ],
 
@@ -58,11 +58,11 @@ it('should store the newly created catalog rule', function () {
             3,
         ],
 
-        'status'          => 1,
-        'action_type'     => 'by_percent',
+        'status' => 1,
+        'action_type' => 'by_percent',
         'discount_amount' => 0,
-        'starts_from'     => '',
-        'ends_till'       => '',
+        'starts_from' => '',
+        'ends_till' => '',
     ]))
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
@@ -70,11 +70,11 @@ it('should store the newly created catalog rule', function () {
     $this->assertModelWise([
         CatalogRule::class => [
             [
-                'action_type'     => 'by_percent',
-                'description'     => $description,
+                'action_type' => 'by_percent',
+                'description' => $description,
                 'discount_amount' => 0,
-                'name'            => $name,
-                'status'          => 1,
+                'name' => $name,
+                'status' => 1,
             ],
         ],
     ]);
@@ -126,9 +126,9 @@ it('should update the catalog rule', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
-        'name'        => $catalogRule->name,
+        'name' => $catalogRule->name,
         'description' => $catalogRule->description,
-        'channels'    => [
+        'channels' => [
             1,
         ],
 
@@ -138,10 +138,10 @@ it('should update the catalog rule', function () {
             3,
         ],
 
-        'action_type'     => 'by_percent',
+        'action_type' => 'by_percent',
         'discount_amount' => 0,
-        'starts_from'     => '',
-        'ends_till'       => '',
+        'starts_from' => '',
+        'ends_till' => '',
     ])
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
@@ -149,8 +149,8 @@ it('should update the catalog rule', function () {
     $this->assertModelWise([
         CatalogRule::class => [
             [
-                'id'          => $catalogRule->id,
-                'name'        => $catalogRule->name,
+                'id' => $catalogRule->id,
+                'name' => $catalogRule->name,
                 'description' => $catalogRule->description,
                 'action_type' => 'by_percent',
             ],

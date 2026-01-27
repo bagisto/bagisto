@@ -38,9 +38,9 @@ class ProductController extends APIController
         $products = $this->productRepository
             ->setSearchEngine($searchEngine)
             ->getAll(array_merge(request()->query(), [
-                'query'                => $query,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'status'               => 1,
+                'query' => $query,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'status' => 1,
                 'visible_individually' => 1,
             ]));
 
@@ -51,10 +51,10 @@ class ProductController extends APIController
              */
             if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
                 UpdateCreateSearchTermJob::dispatch([
-                    'term'       => $query,
-                    'results'    => $products->total(),
+                    'term' => $query,
+                    'results' => $products->total(),
                     'channel_id' => core()->getCurrentChannel()->id,
-                    'locale'     => app()->getLocale(),
+                    'locale' => app()->getLocale(),
                 ]);
             }
         }
@@ -69,7 +69,7 @@ class ProductController extends APIController
     {
         if (request()->query('suggest', '') === '0') {
             return [
-                'original_query'  => request()->query('query', ''),
+                'original_query' => request()->query('query', ''),
                 'effective_query' => null,
             ];
         }
@@ -77,7 +77,7 @@ class ProductController extends APIController
         $originalQuery = request()->query('query', '');
 
         return [
-            'original_query'  => $originalQuery,
+            'original_query' => $originalQuery,
             'effective_query' => $this->getEffectiveQuery($originalQuery, $searchEngine),
         ];
     }

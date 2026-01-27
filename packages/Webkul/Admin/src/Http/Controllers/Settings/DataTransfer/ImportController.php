@@ -65,12 +65,12 @@ class ImportController extends Controller
         $supportedFormats = implode(',', $this->supportedFormats);
 
         $this->validate(request(), [
-            'type'                => 'required|in:'.$importers,
-            'action'              => 'required|in:append,delete',
+            'type' => 'required|in:'.$importers,
+            'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
-            'allowed_errors'      => 'required|integer|min:0',
-            'field_separator'     => 'required',
-            'file'                => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
+            'allowed_errors' => 'required|integer|min:0',
+            'field_separator' => 'required',
+            'file' => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
@@ -124,7 +124,7 @@ class ImportController extends Controller
     public function edit(int $id)
     {
         return view('admin::settings.data-transfer.imports.edit', [
-            'import'           => $this->importRepository->findOrFail($id),
+            'import' => $this->importRepository->findOrFail($id),
             'supportedFormats' => $this->supportedFormats,
         ]);
     }
@@ -143,12 +143,12 @@ class ImportController extends Controller
         $import = $this->importRepository->findOrFail($id);
 
         $this->validate(request(), [
-            'type'                => 'required|in:'.$importers,
-            'action'              => 'required|in:append,delete',
+            'type' => 'required|in:'.$importers,
+            'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
-            'allowed_errors'      => 'required|integer|min:0',
-            'field_separator'     => 'required',
-            'file'                => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
+            'allowed_errors' => 'required|integer|min:0',
+            'field_separator' => 'required',
+            'file' => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');
@@ -165,15 +165,15 @@ class ImportController extends Controller
                 'images_directory_path',
             ]),
             [
-                'state'                => 'pending',
+                'state' => 'pending',
                 'processed_rows_count' => 0,
-                'invalid_rows_count'   => 0,
-                'errors_count'         => 0,
-                'errors'               => null,
-                'error_file_path'      => null,
-                'started_at'           => null,
-                'completed_at'         => null,
-                'summary'              => null,
+                'invalid_rows_count' => 0,
+                'errors_count' => 0,
+                'errors' => null,
+                'error_file_path' => null,
+                'started_at' => null,
+                'completed_at' => null,
+                'summary' => null,
             ]
         );
 
@@ -283,7 +283,7 @@ class ImportController extends Controller
 
         return new JsonResponse([
             'is_valid' => $isValid,
-            'import'   => $this->importHelper->getImport()->unsetRelations(),
+            'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
@@ -355,7 +355,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'stats'  => $this->importHelper->stats(Import::STATE_PROCESSED),
+            'stats' => $this->importHelper->stats(Import::STATE_PROCESSED),
             'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
@@ -416,7 +416,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'stats'  => $this->importHelper->stats(Import::STATE_LINKED),
+            'stats' => $this->importHelper->stats(Import::STATE_LINKED),
             'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
@@ -476,7 +476,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'stats'  => $this->importHelper->stats(Import::STATE_INDEXED),
+            'stats' => $this->importHelper->stats(Import::STATE_INDEXED),
             'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
@@ -493,7 +493,7 @@ class ImportController extends Controller
             ->stats($state);
 
         return new JsonResponse([
-            'stats'  => $stats,
+            'stats' => $stats,
             'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }

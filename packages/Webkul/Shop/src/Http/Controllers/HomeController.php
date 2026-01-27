@@ -33,7 +33,7 @@ class HomeController extends Controller
         visitor()->visit();
 
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
-            'status'     => self::STATUS,
+            'status' => self::STATUS,
             'channel_id' => core()->getCurrentChannel()->id,
             'theme_code' => core()->getCurrentChannel()->theme,
         ]);

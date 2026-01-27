@@ -30,7 +30,7 @@ class Cart extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalCarts($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalCarts($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalCarts($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -42,7 +42,7 @@ class Cart extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalCarts(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'  => $current = $this->getTotalCarts(now()->today(), now()->endOfDay()),
+            'current' => $current = $this->getTotalCarts(now()->today(), now()->endOfDay()),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -55,10 +55,10 @@ class Cart extends AbstractReporting
     public function getTotalAbandonedSalesProgress()
     {
         return [
-            'previous'        => $previous = $this->getTotalAbandonedSales($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getTotalAbandonedSales($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getTotalAbandonedSales($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getTotalAbandonedSales($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -71,7 +71,7 @@ class Cart extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalAbandonedCarts($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalAbandonedCarts($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalAbandonedCarts($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -85,7 +85,7 @@ class Cart extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalAbandonedCartRate($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalAbandonedCartRate($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalAbandonedCartRate($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }

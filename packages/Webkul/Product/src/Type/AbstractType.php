@@ -245,11 +245,11 @@ abstract class AbstractType
         $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         $copyAttributes = [
-            'name'           => trans('product::app.datagrid.copy-of', ['value' => $this->product->name]),
-            'url_key'        => trans('product::app.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
-            'sku'            => $product->sku,
+            'name' => trans('product::app.datagrid.copy-of', ['value' => $this->product->name]),
+            'url_key' => trans('product::app.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
+            'sku' => $product->sku,
             'product_number' => ! empty($this->product->product_number) ? trans('product::app.datagrid.copy-of-slug', ['value' => $this->product->product_number]) : null,
-            'status'         => 0,
+            'status' => 0,
         ];
 
         foreach ($this->product->attribute_values as $attributeValue) {
@@ -339,7 +339,7 @@ abstract class AbstractType
         if (! in_array('product_relations', $attributesToSkip)) {
             DB::table('product_relations')->insert([
                 'parent_id' => $this->product->id,
-                'child_id'  => $product->id,
+                'child_id' => $product->id,
             ]);
         }
     }
@@ -729,12 +729,12 @@ abstract class AbstractType
     {
         return [
             'regular' => [
-                'price'           => core()->convertPrice($this->product->price),
+                'price' => core()->convertPrice($this->product->price),
                 'formatted_price' => core()->currency($this->product->price),
             ],
 
-            'final'   => [
-                'price'           => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
+            'final' => [
+                'price' => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
                 'formatted_price' => core()->currency($minimalPrice),
             ],
         ];
@@ -749,7 +749,7 @@ abstract class AbstractType
     {
         return view('shop::products.prices.index', [
             'product' => $this->product,
-            'prices'  => $this->getProductPrices(),
+            'prices' => $this->getProductPrices(),
         ])->render();
     }
 
@@ -787,23 +787,23 @@ abstract class AbstractType
 
         $products = [
             [
-                'product_id'          => $this->product->id,
-                'sku'                 => $this->product->sku,
-                'quantity'            => $data['quantity'],
-                'name'                => $this->product->name,
-                'price'               => $convertedPrice = core()->convertPrice($price),
-                'price_incl_tax'      => $convertedPrice,
-                'base_price'          => $price,
+                'product_id' => $this->product->id,
+                'sku' => $this->product->sku,
+                'quantity' => $data['quantity'],
+                'name' => $this->product->name,
+                'price' => $convertedPrice = core()->convertPrice($price),
+                'price_incl_tax' => $convertedPrice,
+                'base_price' => $price,
                 'base_price_incl_tax' => $price,
-                'total'               => $convertedPrice * $data['quantity'],
-                'total_incl_tax'      => $convertedPrice * $data['quantity'],
-                'base_total'          => $price * $data['quantity'],
+                'total' => $convertedPrice * $data['quantity'],
+                'total_incl_tax' => $convertedPrice * $data['quantity'],
+                'base_total' => $price * $data['quantity'],
                 'base_total_incl_tax' => $price * $data['quantity'],
-                'weight'              => (float) ($this->product->weight ?? 0),
-                'total_weight'        => (float) ($this->product->weight ?? 0) * $data['quantity'],
-                'base_total_weight'   => (float) ($this->product->weight ?? 0) * $data['quantity'],
-                'type'                => $this->product->type,
-                'additional'          => $this->getAdditionalOptions($data),
+                'weight' => (float) ($this->product->weight ?? 0),
+                'total_weight' => (float) ($this->product->weight ?? 0) * $data['quantity'],
+                'base_total_weight' => (float) ($this->product->weight ?? 0) * $data['quantity'],
+                'type' => $this->product->type,
+                'additional' => $this->getAdditionalOptions($data),
             ],
         ];
 
@@ -1015,8 +1015,8 @@ abstract class AbstractType
         $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
 
         $offerLines = trans('product::app.type.abstract.offers', [
-            'qty'      => $customerGroupPrice->qty,
-            'price'    => core()->currency($price),
+            'qty' => $customerGroupPrice->qty,
+            'price' => core()->currency($price),
             'discount' => '<span>'.$discount.'%</span>',
         ]);
 

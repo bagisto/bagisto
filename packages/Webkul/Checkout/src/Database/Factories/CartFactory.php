@@ -20,16 +20,16 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
+            'channel_id' => core()->getCurrentChannel()->id,
+            'global_currency_code' => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code' => $baseCurrencyCode,
             'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'is_guest'              => 1,
-            'customer_email'        => $this->faker->safeEmail(),
-            'customer_first_name'   => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
-            'customer_last_name'    => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
+            'cart_currency_code' => core()->getCurrentCurrencyCode(),
+            'items_count' => 1,
+            'is_guest' => 1,
+            'customer_email' => $this->faker->safeEmail(),
+            'customer_first_name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
+            'customer_last_name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
         ];
     }
 }

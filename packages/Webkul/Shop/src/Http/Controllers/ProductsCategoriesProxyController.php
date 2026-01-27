@@ -45,7 +45,7 @@ class ProductsCategoriesProxyController extends Controller
             visitor()->visit();
 
             $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
-                'status'     => self::STATUS,
+                'status' => self::STATUS,
                 'channel_id' => core()->getCurrentChannel()->id,
             ]);
 
@@ -59,10 +59,10 @@ class ProductsCategoriesProxyController extends Controller
 
             return view('shop::categories.view', [
                 'category' => $category,
-                'params'   => [
-                    'sort'  => request()->query('sort'),
+                'params' => [
+                    'sort' => request()->query('sort'),
                     'limit' => request()->query('limit'),
-                    'mode'  => request()->query('mode'),
+                    'mode' => request()->query('mode'),
                 ],
             ]);
         }
@@ -106,9 +106,9 @@ class ProductsCategoriesProxyController extends Controller
          * try to find it by url rewrite for category.
          */
         $categoryURLRewrite = $this->urlRewriteRepository->findOneWhere([
-            'entity_type'  => 'category',
+            'entity_type' => 'category',
             'request_path' => $slugOrURLKey,
-            'locale'       => app()->getLocale(),
+            'locale' => app()->getLocale(),
         ]);
 
         if ($categoryURLRewrite) {
@@ -120,7 +120,7 @@ class ProductsCategoriesProxyController extends Controller
          * try to find it by url rewrite for product.
          */
         $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
-            'entity_type'  => 'product',
+            'entity_type' => 'product',
             'request_path' => $slugOrURLKey,
         ]);
 

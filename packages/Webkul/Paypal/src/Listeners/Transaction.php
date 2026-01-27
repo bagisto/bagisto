@@ -36,13 +36,13 @@ class Transaction
                 if ($transactionDetails['statusCode'] == 200) {
                     $this->orderTransactionRepository->create([
                         'transaction_id' => $transactionDetails['result']['id'],
-                        'status'         => $transactionDetails['result']['status'],
-                        'type'           => $transactionDetails['result']['intent'],
-                        'amount'         => $transactionDetails['result']['purchase_units'][0]['amount']['value'],
+                        'status' => $transactionDetails['result']['status'],
+                        'type' => $transactionDetails['result']['intent'],
+                        'amount' => $transactionDetails['result']['purchase_units'][0]['amount']['value'],
                         'payment_method' => $invoice->order->payment->method,
-                        'order_id'       => $invoice->order->id,
-                        'invoice_id'     => $invoice->id,
-                        'data'           => json_encode(
+                        'order_id' => $invoice->order->id,
+                        'invoice_id' => $invoice->id,
+                        'data' => json_encode(
                             array_merge(
                                 $transactionDetails['result']['purchase_units'],
                                 $transactionDetails['result']['payer']
@@ -54,12 +54,12 @@ class Transaction
         } elseif ($invoice->order->payment->method == 'paypal_standard') {
             $this->orderTransactionRepository->create([
                 'transaction_id' => $data['txn_id'],
-                'status'         => $data['payment_status'],
-                'type'           => $data['payment_type'],
+                'status' => $data['payment_status'],
+                'type' => $data['payment_type'],
                 'payment_method' => $invoice->order->payment->method,
-                'order_id'       => $invoice->order->id,
-                'invoice_id'     => $invoice->id,
-                'data'           => json_encode($data),
+                'order_id' => $invoice->order->id,
+                'invoice_id' => $invoice->id,
+                'data' => json_encode($data),
             ]);
         }
     }

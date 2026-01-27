@@ -88,12 +88,12 @@ abstract class AbstractType
     public function getIndices()
     {
         return [
-            'min_price'         => ($minPrice = $this->getMinimalPrice()) ?? 0,
+            'min_price' => ($minPrice = $this->getMinimalPrice()) ?? 0,
             'regular_min_price' => $this->product->price ?? 0,
-            'max_price'         => $minPrice ?? 0,
+            'max_price' => $minPrice ?? 0,
             'regular_max_price' => $this->product->price ?? 0,
-            'product_id'        => $this->product->id,
-            'channel_id'        => $this->channel->id,
+            'product_id' => $this->product->id,
+            'channel_id' => $this->channel->id,
             'customer_group_id' => $this->customerGroup->id,
         ];
     }

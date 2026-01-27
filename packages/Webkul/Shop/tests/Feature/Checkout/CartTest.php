@@ -20,7 +20,7 @@ it('should display the cart items for a guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -41,26 +41,26 @@ it('should display the cart items for a guest user', function () {
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     cart()->setCart($cart);
@@ -106,7 +106,7 @@ it('should display the cart items for a customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -121,35 +121,35 @@ it('should display the cart items for a customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     cart()->setCart($cart);
@@ -197,7 +197,7 @@ it('should fails the validation error when the cart item id not provided when re
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -218,26 +218,26 @@ it('should fails the validation error when the cart item id not provided when re
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Act and Assert.
@@ -250,7 +250,7 @@ it('should fails the validation error when the cart item id not provided when re
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -265,35 +265,35 @@ it('should fails the validation error when the cart item id not provided when re
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     cart()->setCart($cart);
@@ -310,7 +310,7 @@ it('should fails the validation error when the wrong cart item id provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -331,26 +331,26 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Act and Assert.
@@ -365,7 +365,7 @@ it('should fails the validation error when the wrong cart item id provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -380,35 +380,35 @@ it('should fails the validation error when the wrong cart item id provided when 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $this->loginAsCustomer($customer);
@@ -425,7 +425,7 @@ it('should remove only one product item from the cart for the guest user', funct
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -446,26 +446,26 @@ it('should remove only one product item from the cart for the guest user', funct
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     cart()->collectTotals();
@@ -501,7 +501,7 @@ it('should remove only one product item from the cart for the customer', functio
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -516,35 +516,35 @@ it('should remove only one product item from the cart for the customer', functio
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     cart()->collectTotals();
@@ -582,7 +582,7 @@ it('should only remove one product from the cart for now the cart will contains 
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -606,50 +606,50 @@ it('should only remove one product from the cart for now the cart will contains 
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->collectTotals();
@@ -718,7 +718,7 @@ it('should only remove one product from the cart for now the cart will contains 
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -736,59 +736,59 @@ it('should only remove one product from the cart for now the cart will contains 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->collectTotals();
@@ -859,7 +859,7 @@ it('should not allow a user to remove another user\'s cart item', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -880,46 +880,46 @@ it('should not allow a user to remove another user\'s cart item', function () {
     $customerA = Customer::factory()->create();
 
     $cartA = Cart::factory()->create([
-        'customer_id'         => $customerA->id,
-        'is_guest'            => 0,
+        'customer_id' => $customerA->id,
+        'is_guest' => 0,
         'customer_first_name' => $customerA->first_name,
-        'customer_last_name'  => $customerA->last_name,
-        'customer_email'      => $customerA->email,
+        'customer_last_name' => $customerA->last_name,
+        'customer_email' => $customerA->email,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItemA = CartItem::factory()->create([
-        'cart_id'           => $cartA->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cartA->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Create customer B and login as customer B
     $customerB = Customer::factory()->create();
 
     $cartB = Cart::factory()->create([
-        'customer_id'         => $customerB->id,
-        'is_guest'            => 0,
+        'customer_id' => $customerB->id,
+        'is_guest' => 0,
         'customer_first_name' => $customerB->first_name,
-        'customer_last_name'  => $customerB->last_name,
-        'customer_email'      => $customerB->email,
+        'customer_last_name' => $customerB->last_name,
+        'customer_email' => $customerB->email,
     ]);
 
     cart()->setCart($cartB);
@@ -935,13 +935,13 @@ it('should not allow a user to remove another user\'s cart item', function () {
 
     // Assert that Customer A's cart item still exists (was not deleted)
     $this->assertDatabaseHas('cart_items', [
-        'id'      => $cartItemA->id,
+        'id' => $cartItemA->id,
         'cart_id' => $cartA->id,
     ]);
 
     // Assert that Customer A's cart still exists
     $this->assertDatabaseHas('cart', [
-        'id'          => $cartA->id,
+        'id' => $cartA->id,
         'customer_id' => $customerA->id,
     ]);
 });
@@ -950,7 +950,7 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -974,26 +974,26 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItemA = CartItem::factory()->create([
-        'cart_id'           => $cartA->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cartA->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Create Guest B's cart and set it as active session
@@ -1012,13 +1012,13 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
 
     // Assert that Guest A's cart item still exists (was not deleted)
     $this->assertDatabaseHas('cart_items', [
-        'id'      => $cartItemA->id,
+        'id' => $cartItemA->id,
         'cart_id' => $cartA->id,
     ]);
 
     // Assert that Guest A's cart still exists
     $this->assertDatabaseHas('cart', [
-        'id'       => $cartA->id,
+        'id' => $cartA->id,
         'is_guest' => 1,
     ]);
 });
@@ -1027,7 +1027,7 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -1048,35 +1048,35 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
     $customer = Customer::factory()->create();
 
     $customerCart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'is_guest'            => 0,
+        'customer_id' => $customer->id,
+        'is_guest' => 0,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $customerCartItem = CartItem::factory()->create([
-        'cart_id'           => $customerCart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $customerCart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Create guest cart and set it as active session
@@ -1095,15 +1095,15 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
 
     // Assert that customer's cart item still exists (was not deleted)
     $this->assertDatabaseHas('cart_items', [
-        'id'      => $customerCartItem->id,
+        'id' => $customerCartItem->id,
         'cart_id' => $customerCart->id,
     ]);
 
     // Assert that customer's cart still exists
     $this->assertDatabaseHas('cart', [
-        'id'          => $customerCart->id,
+        'id' => $customerCart->id,
         'customer_id' => $customer->id,
-        'is_guest'    => 0,
+        'is_guest' => 0,
     ]);
 });
 
@@ -1111,7 +1111,7 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -1135,37 +1135,37 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $guestCartItem = CartItem::factory()->create([
-        'cart_id'           => $guestCart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $guestCart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     // Create customer and login
     $customer = Customer::factory()->create();
 
     $customerCart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'is_guest'            => 0,
+        'customer_id' => $customer->id,
+        'is_guest' => 0,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
     ]);
 
     cart()->setCart($customerCart);
@@ -1181,13 +1181,13 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
 
     // Assert that guest's cart item still exists (was not deleted)
     $this->assertDatabaseHas('cart_items', [
-        'id'      => $guestCartItem->id,
+        'id' => $guestCartItem->id,
         'cart_id' => $guestCart->id,
     ]);
 
     // Assert that guest's cart still exists
     $this->assertDatabaseHas('cart', [
-        'id'       => $guestCart->id,
+        'id' => $guestCart->id,
         'is_guest' => 1,
     ]);
 });
@@ -1196,7 +1196,7 @@ it('should remove all products from the cart for a guest user', function () {
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -1220,50 +1220,50 @@ it('should remove all products from the cart for a guest user', function () {
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->collectTotals();
@@ -1288,7 +1288,7 @@ it('should remove all products from the cart for a customer', function () {
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -1306,59 +1306,59 @@ it('should remove all products from the cart for a customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->collectTotals();
@@ -1385,7 +1385,7 @@ it('should update cart quantities for guest user', function () {
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
             26 => 'guest_checkout',
         ],
 
@@ -1409,50 +1409,50 @@ it('should update cart quantities for guest user', function () {
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->collectTotals();
@@ -1517,7 +1517,7 @@ it('should update cart quantities for customer', function () {
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
+            5 => 'new',
         ],
 
         'attribute_value' => [
@@ -1535,59 +1535,59 @@ it('should update cart quantities for customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional1 = [
         'product_id' => $product1->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $additional2 = [
         'product_id' => $product2->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem1 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product1->id,
-        'sku'               => $product1->sku,
-        'quantity'          => $additional1['quantity'],
-        'name'              => $product1->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional1['quantity'],
-        'base_total'        => $price * $additional1['quantity'],
-        'weight'            => $product1->weight ?? 0,
-        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product1->id,
+        'sku' => $product1->sku,
+        'quantity' => $additional1['quantity'],
+        'name' => $product1->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional1['quantity'],
+        'base_total' => $price * $additional1['quantity'],
+        'weight' => $product1->weight ?? 0,
+        'total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
         'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
-        'type'              => $product1->type,
-        'additional'        => $additional1,
+        'type' => $product1->type,
+        'additional' => $additional1,
     ]);
 
     $cartItem2 = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product2->id,
-        'sku'               => $product2->sku,
-        'quantity'          => $additional2['quantity'],
-        'name'              => $product2->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional2['quantity'],
-        'base_total'        => $price * $additional2['quantity'],
-        'weight'            => $product2->weight ?? 0,
-        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product2->id,
+        'sku' => $product2->sku,
+        'quantity' => $additional2['quantity'],
+        'name' => $product2->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional2['quantity'],
+        'base_total' => $price * $additional2['quantity'],
+        'weight' => $product2->weight ?? 0,
+        'total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
         'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
-        'type'              => $product2->type,
-        'additional'        => $additional2,
+        'type' => $product2->type,
+        'additional' => $additional2,
     ]);
 
     cart()->setCart($cart);
@@ -1648,8 +1648,8 @@ it('should fails the validation error when the product id not provided when add 
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1681,8 +1681,8 @@ it('should add a simple product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1705,7 +1705,7 @@ it('should add a simple product to the cart for guest user', function () {
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1735,8 +1735,8 @@ it('should add a simple product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1757,7 +1757,7 @@ it('should add a simple product to the cart for customer', function () {
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1787,8 +1787,8 @@ it('should fails the validation error when the product id not provided add a bun
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1810,7 +1810,7 @@ it('should fails the validation error when the product id not provided add a bun
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1827,11 +1827,11 @@ it('should fails the validation error when the product id not provided add a bun
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -1841,8 +1841,8 @@ it('should add a bundle product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1864,7 +1864,7 @@ it('should add a bundle product to the cart for guest user', function () {
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1881,12 +1881,12 @@ it('should add a bundle product to the cart for guest user', function () {
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -1915,8 +1915,8 @@ it('should add a bundle product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1934,7 +1934,7 @@ it('should add a bundle product to the cart for customer', function () {
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1953,12 +1953,12 @@ it('should add a bundle product to the cart for customer', function () {
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -1987,8 +1987,8 @@ it('should fails the validation when the product id not provided when add a conf
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2013,10 +2013,10 @@ it('should fails the validation when the product id not provided when add a conf
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
-        'is_buy_now'                   => '0',
-        'rating'                       => '0',
-        'quantity'                     => '1',
-        'super_attribute'              => [
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'quantity' => '1',
+        'super_attribute' => [
             23 => '1',
             24 => '7',
         ],
@@ -2029,8 +2029,8 @@ it('should add a configurable product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2055,11 +2055,11 @@ it('should add a configurable product to the cart for guest user', function () {
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
-        'product_id'                   => $product->id,
-        'is_buy_now'                   => '0',
-        'rating'                       => '0',
-        'quantity'                     => '1',
-        'super_attribute'              => [
+        'product_id' => $product->id,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'quantity' => '1',
+        'super_attribute' => [
             23 => '1',
             24 => '7',
         ],
@@ -2090,8 +2090,8 @@ it('should add a configurable product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2114,11 +2114,11 @@ it('should add a configurable product to the cart for customer', function () {
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
-        'product_id'                   => $product->id,
-        'is_buy_now'                   => '0',
-        'rating'                       => '0',
-        'quantity'                     => '1',
-        'super_attribute'              => [
+        'product_id' => $product->id,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'quantity' => '1',
+        'super_attribute' => [
             23 => '1',
             24 => '7',
         ],
@@ -2149,8 +2149,8 @@ it('should fails the validation error when the product id not provided when add 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2172,10 +2172,10 @@ it('should fails the validation error when the product id not provided when add 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+        'rating' => '0',
+        'links' => $product->downloadable_links()->pluck('id')->toArray(),
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2185,8 +2185,8 @@ it('should add a downloadable product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2209,10 +2209,10 @@ it('should add a downloadable product to the cart for guest user', function () {
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+        'rating' => '0',
+        'links' => $product->downloadable_links()->pluck('id')->toArray(),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2240,8 +2240,8 @@ it('should add a downloadable product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2262,10 +2262,10 @@ it('should add a downloadable product to the cart for customer', function () {
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+        'rating' => '0',
+        'links' => $product->downloadable_links()->pluck('id')->toArray(),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2293,8 +2293,8 @@ it('should fails the validation error when the product id not provided when add 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2317,8 +2317,8 @@ it('should fails the validation error when the product id not provided when add 
     $groupedProducts = $product->grouped_products()->with('associated_product')->get();
 
     $data = [
-        'quantities'  => [],
-        'prices'      => [],
+        'quantities' => [],
+        'prices' => [],
     ];
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -2329,10 +2329,10 @@ it('should fails the validation error when the product id not provided when add 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'qty'        => $data['quantities'],
+        'rating' => '0',
+        'qty' => $data['quantities'],
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2342,8 +2342,8 @@ it('should add a grouped product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2366,8 +2366,8 @@ it('should add a grouped product to the cart for guest user', function () {
     $groupedProducts = $product->grouped_products()->with('associated_product')->get();
 
     $data = [
-        'quantities'  => [],
-        'prices'      => [],
+        'quantities' => [],
+        'prices' => [],
     ];
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -2379,10 +2379,10 @@ it('should add a grouped product to the cart for guest user', function () {
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'qty'        => $data['quantities'],
+        'rating' => '0',
+        'qty' => $data['quantities'],
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2413,8 +2413,8 @@ it('should add a grouped product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2437,8 +2437,8 @@ it('should add a grouped product to the cart for customer', function () {
     $groupedProducts = $product->grouped_products()->with('associated_product')->get();
 
     $data = [
-        'quantities'  => [],
-        'prices'      => [],
+        'quantities' => [],
+        'prices' => [],
     ];
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -2452,10 +2452,10 @@ it('should add a grouped product to the cart for customer', function () {
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
         'is_buy_now' => '0',
-        'rating'     => '0',
-        'qty'        => $data['quantities'],
+        'rating' => '0',
+        'qty' => $data['quantities'],
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2486,8 +2486,8 @@ it('should fails the validation error when the product id not provided when add 
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2519,8 +2519,8 @@ it('should add a virtual product to the cart for guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2543,7 +2543,7 @@ it('should add a virtual product to the cart for guest user', function () {
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2571,8 +2571,8 @@ it('should add a virtual product to the cart for customer', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2593,7 +2593,7 @@ it('should add a virtual product to the cart for customer', function () {
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -2621,8 +2621,8 @@ it('should check including tax rate when add a product to the cart based on ship
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2640,44 +2640,44 @@ it('should check including tax rate when add a product to the cart based on ship
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.taxes.categories.shipping',
+        'code' => 'sales.taxes.categories.shipping',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.categories.product',
+        'code' => 'sales.taxes.categories.product',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.calculation.based_on',
+        'code' => 'sales.taxes.calculation.based_on',
         'value' => 'shipping_address',
     ])->create([
-        'code'  => 'sales.taxes.calculation.product_prices',
+        'code' => 'sales.taxes.calculation.product_prices',
         'value' => 'including_tax',
     ])->create([
-        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'code' => 'sales.taxes.calculation.shipping_prices',
         'value' => 'including_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     $inclTax = $product->price - ($product->price / (1 + ($taxRate->tax_rate / 100)));
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
-        'country'  => $taxRate->country,
-        'state'    => $taxRate->state,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
         'postcode' => fake()->postcode(),
     ])
         ->assertOk()
@@ -2707,8 +2707,8 @@ it('should check including tax rate when add a product to the cart based on bill
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2726,51 +2726,51 @@ it('should check including tax rate when add a product to the cart based on bill
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.taxes.categories.shipping',
+        'code' => 'sales.taxes.categories.shipping',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.categories.product',
+        'code' => 'sales.taxes.categories.product',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.calculation.based_on',
+        'code' => 'sales.taxes.calculation.based_on',
         'value' => 'billing_address',
     ])->create([
-        'code'  => 'sales.taxes.calculation.product_prices',
+        'code' => 'sales.taxes.calculation.product_prices',
         'value' => 'including_tax',
     ])->create([
-        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'code' => 'sales.taxes.calculation.shipping_prices',
         'value' => 'including_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     CartAddress::factory()->create([
-        'cart_id'          => $cart->id,
-        'country'          => $taxRate->country,
-        'state'            => $taxRate->state,
-        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'cart_id' => $cart->id,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         'use_for_shipping' => true,
     ]);
 
     CartAddress::factory()->create([
-        'cart_id'          => $cart->id,
-        'country'          => $taxRate->country,
-        'state'            => $taxRate->state,
-        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'cart_id' => $cart->id,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         'use_for_shipping' => true,
     ]);
 
@@ -2809,8 +2809,8 @@ it('should check including tax rate when add a product to the cart based on ship
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2828,78 +2828,78 @@ it('should check including tax rate when add a product to the cart based on ship
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.shipping.origin.country',
-        'value'        => $taxRate->country,
+        'code' => 'sales.shipping.origin.country',
+        'value' => $taxRate->country,
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ])->create([
-        'code'         => 'sales.shipping.origin.state',
-        'value'        => $taxRate->state,
+        'code' => 'sales.shipping.origin.state',
+        'value' => $taxRate->state,
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ])->create([
-        'code'         => 'sales.shipping.origin.city',
-        'value'        => fake()->city(),
-        'channel_code' => 'default',
-    ])->create([
-        'code'         => 'sales.shipping.origin.address',
-        'value'        => fake()->address(),
+        'code' => 'sales.shipping.origin.city',
+        'value' => fake()->city(),
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.store_name',
-        'value'        => 'DEMO STORE',
+        'code' => 'sales.shipping.origin.address',
+        'value' => fake()->address(),
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.contact',
-        'value'        => '1234567890',
+        'code' => 'sales.shipping.origin.store_name',
+        'value' => 'DEMO STORE',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.bank_details',
-        'value'        => 'TEST BANK',
+        'code' => 'sales.shipping.origin.contact',
+        'value' => '1234567890',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.zipcode',
-        'value'        => '123456',
+        'code' => 'sales.shipping.origin.bank_details',
+        'value' => 'TEST BANK',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.taxes.categories.shipping',
-        'value'        => $taxCategory->id,
+        'code' => 'sales.shipping.origin.zipcode',
+        'value' => '123456',
+        'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.taxes.categories.product',
-        'value'        => $taxCategory->id,
+        'code' => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
     ])->create([
-        'code'         => 'sales.taxes.calculation.based_on',
-        'value'        => 'shipping_origin',
+        'code' => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
     ])->create([
-        'code'         => 'sales.taxes.calculation.product_prices',
-        'value'        => 'including_tax',
+        'code' => 'sales.taxes.calculation.based_on',
+        'value' => 'shipping_origin',
     ])->create([
-        'code'         => 'sales.taxes.calculation.shipping_prices',
-        'value'        => 'including_tax',
+        'code' => 'sales.taxes.calculation.product_prices',
+        'value' => 'including_tax',
+    ])->create([
+        'code' => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'including_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     $inclTax = $product->price - ($product->price / (1 + ($taxRate->tax_rate / 100)));
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
-        'country'  => $taxRate->country,
-        'state'    => $taxRate->state,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
         'postcode' => '123456',
     ]);
 
@@ -2930,8 +2930,8 @@ it('should check excluding tax rate when add a product to the cart based on bill
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2949,51 +2949,51 @@ it('should check excluding tax rate when add a product to the cart based on bill
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.taxes.categories.shipping',
+        'code' => 'sales.taxes.categories.shipping',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.categories.product',
+        'code' => 'sales.taxes.categories.product',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.calculation.based_on',
+        'code' => 'sales.taxes.calculation.based_on',
         'value' => 'billing_address',
     ])->create([
-        'code'  => 'sales.taxes.calculation.product_prices',
+        'code' => 'sales.taxes.calculation.product_prices',
         'value' => 'excluding_tax',
     ])->create([
-        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'code' => 'sales.taxes.calculation.shipping_prices',
         'value' => 'excluding_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     CartAddress::factory()->create([
-        'cart_id'          => $cart->id,
-        'country'          => $taxRate->country,
-        'state'            => $taxRate->state,
-        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'cart_id' => $cart->id,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         'use_for_shipping' => true,
     ]);
 
     CartAddress::factory()->create([
-        'cart_id'          => $cart->id,
-        'country'          => $taxRate->country,
-        'state'            => $taxRate->state,
-        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'cart_id' => $cart->id,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         'use_for_shipping' => true,
     ]);
 
@@ -3032,8 +3032,8 @@ it('should check excluding tax rate when add a product to the cart based on ship
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3051,44 +3051,44 @@ it('should check excluding tax rate when add a product to the cart based on ship
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'  => 'sales.taxes.categories.shipping',
+        'code' => 'sales.taxes.categories.shipping',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.categories.product',
+        'code' => 'sales.taxes.categories.product',
         'value' => $taxCategory->id,
     ])->create([
-        'code'  => 'sales.taxes.calculation.based_on',
+        'code' => 'sales.taxes.calculation.based_on',
         'value' => 'shipping_address',
     ])->create([
-        'code'  => 'sales.taxes.calculation.product_prices',
+        'code' => 'sales.taxes.calculation.product_prices',
         'value' => 'excluding_tax',
     ])->create([
-        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'code' => 'sales.taxes.calculation.shipping_prices',
         'value' => 'excluding_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     $exclTax = ($taxRate->tax_rate / 100) * $product->price;
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
-        'country'  => $taxRate->country,
-        'state'    => $taxRate->state,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
         'postcode' => fake()->postcode(),
     ])
         ->assertOk()
@@ -3118,8 +3118,8 @@ it('should check excluding tax rate when add a product to the cart based on ship
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3137,78 +3137,78 @@ it('should check excluding tax rate when add a product to the cart based on ship
 
     $taxRate = TaxRate::factory()->create([
         'country' => 'IN',
-        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+        'state' => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
     ]);
 
     $taxCategory = TaxCategory::factory()->create();
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.shipping.origin.country',
-        'value'        => $taxRate->country,
+        'code' => 'sales.shipping.origin.country',
+        'value' => $taxRate->country,
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ])->create([
-        'code'         => 'sales.shipping.origin.state',
-        'value'        => $taxRate->state,
+        'code' => 'sales.shipping.origin.state',
+        'value' => $taxRate->state,
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ])->create([
-        'code'         => 'sales.shipping.origin.city',
-        'value'        => fake()->city(),
-        'channel_code' => 'default',
-    ])->create([
-        'code'         => 'sales.shipping.origin.address',
-        'value'        => fake()->address(),
+        'code' => 'sales.shipping.origin.city',
+        'value' => fake()->city(),
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.store_name',
-        'value'        => 'DEMO STORE',
+        'code' => 'sales.shipping.origin.address',
+        'value' => fake()->address(),
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.contact',
-        'value'        => '1234567890',
+        'code' => 'sales.shipping.origin.store_name',
+        'value' => 'DEMO STORE',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.bank_details',
-        'value'        => 'TEST BANK',
+        'code' => 'sales.shipping.origin.contact',
+        'value' => '1234567890',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.shipping.origin.zipcode',
-        'value'        => '123456',
+        'code' => 'sales.shipping.origin.bank_details',
+        'value' => 'TEST BANK',
         'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.taxes.categories.shipping',
-        'value'        => $taxCategory->id,
+        'code' => 'sales.shipping.origin.zipcode',
+        'value' => '123456',
+        'channel_code' => 'default',
     ])->create([
-        'code'         => 'sales.taxes.categories.product',
-        'value'        => $taxCategory->id,
+        'code' => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
     ])->create([
-        'code'         => 'sales.taxes.calculation.based_on',
-        'value'        => 'shipping_origin',
+        'code' => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
     ])->create([
-        'code'         => 'sales.taxes.calculation.product_prices',
-        'value'        => 'excluding_tax',
+        'code' => 'sales.taxes.calculation.based_on',
+        'value' => 'shipping_origin',
     ])->create([
-        'code'         => 'sales.taxes.calculation.shipping_prices',
-        'value'        => 'excluding_tax',
+        'code' => 'sales.taxes.calculation.product_prices',
+        'value' => 'excluding_tax',
+    ])->create([
+        'code' => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'excluding_tax',
     ]);
 
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
-        'quantity'   => 1,
+        'quantity' => 1,
     ]);
 
     $exclTax = ($taxRate->tax_rate / 100) * $product->price;
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
-        'country'  => $taxRate->country,
-        'state'    => $taxRate->state,
+        'country' => $taxRate->country,
+        'state' => $taxRate->state,
         'postcode' => '123456',
     ])
         ->assertOk()

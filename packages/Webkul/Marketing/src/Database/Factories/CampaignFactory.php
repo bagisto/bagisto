@@ -20,7 +20,7 @@ class CampaignFactory extends Factory
     public function definition()
     {
         return [
-            'name'    => fake()->name(),
+            'name' => fake()->name(),
             'subject' => fake()->title(),
         ];
     }

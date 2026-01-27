@@ -62,7 +62,7 @@ class ImageServiceProvider extends BaseImageServiceProvider
 
             $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
                 'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
-                'as'   => 'imagecache',
+                'as' => 'imagecache',
             ])->where(['filename' => $filenamePattern]);
         }
     }

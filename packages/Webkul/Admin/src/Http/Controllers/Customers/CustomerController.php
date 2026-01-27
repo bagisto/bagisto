@@ -74,12 +74,12 @@ class CustomerController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'first_name'    => 'string|required',
-            'last_name'     => 'string|required',
-            'gender'        => 'required',
-            'email'         => 'required|unique:customers,email',
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'gender' => 'required',
+            'email' => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today',
-            'phone'         => ['unique:customers,phone', new PhoneNumber],
+            'phone' => ['unique:customers,phone', new PhoneNumber],
         ]);
 
         $password = rand(100000, 10000000);
@@ -87,9 +87,9 @@ class CustomerController extends Controller
         Event::dispatch('customer.registration.before');
 
         $data = array_merge([
-            'password'    => bcrypt($password),
+            'password' => bcrypt($password),
             'is_verified' => 1,
-            'channel_id'  => core()->getCurrentChannel()->id,
+            'channel_id' => core()->getCurrentChannel()->id,
         ], request()->only([
             'first_name',
             'last_name',
@@ -122,7 +122,7 @@ class CustomerController extends Controller
         Event::dispatch('customer.registration.after', $customer);
 
         return new JsonResponse([
-            'data'    => $customer,
+            'data' => $customer,
             'message' => trans('admin::app.customers.customers.index.create.create-success'),
         ]);
     }
@@ -135,12 +135,12 @@ class CustomerController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'first_name'    => 'string|required',
-            'last_name'     => 'string|required',
-            'gender'        => 'required',
-            'email'         => 'required|unique:customers,email,'.$id,
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'gender' => 'required',
+            'email' => 'required|unique:customers,email,'.$id,
             'date_of_birth' => 'date|before:today',
-            'phone'         => ['unique:customers,phone,'.$id, new PhoneNumber],
+            'phone' => ['unique:customers,phone,'.$id, new PhoneNumber],
         ]);
 
         $data = request()->only([
@@ -167,9 +167,9 @@ class CustomerController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.update-success'),
-            'data'    => [
+            'data' => [
                 'customer' => $customer->fresh(),
-                'group'    => $customer->group,
+                'group' => $customer->group,
             ],
         ]);
     }
@@ -231,8 +231,8 @@ class CustomerController extends Controller
         Event::dispatch('customer.note.create.before', $id);
 
         $customerNote = $this->customerNoteRepository->create([
-            'customer_id'       => $id,
-            'note'              => request()->input('note'),
+            'customer_id' => $id,
+            'note' => request()->input('note'),
             'customer_notified' => request()->input('customer_notified', 0),
         ]);
 

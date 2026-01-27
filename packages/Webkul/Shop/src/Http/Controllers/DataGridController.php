@@ -16,8 +16,8 @@ class DataGridController extends Controller
          */
         $params = $this->validate(request(), [
             'datagrid_id' => ['required'],
-            'column'      => ['required'],
-            'search'      => ['required', 'min:2'],
+            'column' => ['required'],
+            'search' => ['required', 'min:2'],
         ]);
 
         /**
