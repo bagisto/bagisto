@@ -62,12 +62,12 @@ class Invoice extends Base
 
         $transactionData = [
             'transaction_id' => $transactionId,
-            'status'         => $invoice->state,
-            'type'           => $invoice->order->payment->method,
+            'status' => $invoice->state,
+            'type' => $invoice->order->payment->method,
             'payment_method' => $invoice->order->payment->method,
-            'order_id'       => $invoice->order->id,
-            'invoice_id'     => $invoice->id,
-            'amount'         => $invoice->grand_total,
+            'order_id' => $invoice->order->id,
+            'invoice_id' => $invoice->id,
+            'amount' => $invoice->grand_total,
         ];
 
         $this->orderTransactionRepository->create($transactionData);

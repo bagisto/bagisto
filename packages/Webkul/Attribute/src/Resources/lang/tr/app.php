@@ -3,7 +3,7 @@
 return [
     'boolean' => [
         'options' => [
-            'no'  => 'Hayır',
+            'no' => 'Hayır',
             'yes' => 'Evet',
         ],
     ],

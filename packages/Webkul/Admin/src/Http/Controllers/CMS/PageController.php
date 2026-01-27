@@ -50,10 +50,10 @@ class PageController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Rules\Slug],
-            'page_title'   => 'required',
+            'url_key' => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Rules\Slug],
+            'page_title' => 'required',
             'html_content' => 'required',
-            'channels'     => 'required|array|min:1',
+            'channels' => 'required|array|min:1',
         ]);
 
         Event::dispatch('cms.page.create.before');
@@ -101,14 +101,14 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale.'.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
+            $locale.'.url_key' => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
             }],
-            $locale.'.page_title'     => 'required',
-            $locale.'.html_content'   => 'required',
-            'channels'                => 'required|array|min:1',
+            $locale.'.page_title' => 'required',
+            $locale.'.html_content' => 'required',
+            'channels' => 'required|array|min:1',
         ]);
 
         Event::dispatch('cms.page.update.before', $id);
@@ -118,9 +118,9 @@ class PageController extends Controller
         $localeData['html_content'] = clean_content($localeData['html_content']);
 
         $page = $this->pageRepository->update([
-            $locale    => $localeData,
+            $locale => $localeData,
             'channels' => request()->input('channels'),
-            'locale'   => $locale,
+            'locale' => $locale,
         ], $id);
 
         Event::dispatch('cms.page.update.after', $page);

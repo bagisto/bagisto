@@ -44,8 +44,8 @@ it('should store the newly created tax rates', function () {
 
     postJson(route('admin.settings.taxes.rates.store'), $data = [
         'identifier' => strtolower(fake()->name()),
-        'country'    => fake()->country(),
-        'tax_rate'   => rand(1, 50),
+        'country' => fake()->country(),
+        'tax_rate' => rand(1, 50),
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
@@ -54,8 +54,8 @@ it('should store the newly created tax rates', function () {
         TaxRate::class => [
             [
                 'identifier' => $data['identifier'],
-                'country'    => $data['country'],
-                'tax_rate'   => $data['tax_rate'],
+                'country' => $data['country'],
+                'tax_rate' => $data['tax_rate'],
             ],
         ],
     ]);
@@ -97,8 +97,8 @@ it('should update the tax rate', function () {
 
     putJson(route('admin.settings.taxes.rates.update', $taxRate->id), $data = [
         'identifier' => fake()->name(),
-        'country'    => fake()->country(),
-        'tax_rate'   => $taxRate->tax_rate,
+        'country' => fake()->country(),
+        'tax_rate' => $taxRate->tax_rate,
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
@@ -107,8 +107,8 @@ it('should update the tax rate', function () {
         TaxRate::class => [
             [
                 'identifier' => $data['identifier'],
-                'country'    => $data['country'],
-                'tax_rate'   => $taxRate->tax_rate,
+                'country' => $data['country'],
+                'tax_rate' => $taxRate->tax_rate,
             ],
         ],
     ]);

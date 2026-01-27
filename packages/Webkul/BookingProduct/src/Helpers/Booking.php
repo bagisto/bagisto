@@ -30,11 +30,11 @@ class Booking
      * @var array
      */
     protected $typeHelpers = [
-        'default'     => DefaultSlot::class,
+        'default' => DefaultSlot::class,
         'appointment' => AppointmentSlot::class,
-        'event'       => EventTicket::class,
-        'rental'      => RentalSlot::class,
-        'table'       => TableSlot::class,
+        'event' => EventTicket::class,
+        'rental' => RentalSlot::class,
+        'table' => TableSlot::class,
     ];
 
     /**
@@ -67,11 +67,11 @@ class Booking
         protected BookingProductTableSlotRepository $bookingProductTableSlotRepository,
     ) {
         $this->typeRepositories = [
-            'default'     => $this->bookingProductDefaultSlotRepository,
-            'event'       => $this->bookingProductEventTicketRepository,
+            'default' => $this->bookingProductDefaultSlotRepository,
+            'event' => $this->bookingProductEventTicketRepository,
             'appointment' => $this->bookingProductAppointmentSlotRepository,
-            'table'       => $this->bookingProductTableSlotRepository,
-            'rental'      => $this->bookingProductRentalSlotRepository,
+            'table' => $this->bookingProductTableSlotRepository,
+            'rental' => $this->bookingProductRentalSlotRepository,
         ];
     }
 
@@ -104,7 +104,7 @@ class Booking
             }
 
             $slotsByDays[] = [
-                'name'  => trans($this->daysOfWeek[$index]),
+                'name' => trans($this->daysOfWeek[$index]),
                 'slots' => isset($availableDays[$index]) ? $this->convert24To12Hours($slots) : [],
             ];
         }
@@ -386,10 +386,10 @@ class Booking
                         && Carbon::now() <= $currentTime
                     ) {
                         $slots[] = [
-                            'from'      => $currentTime->format('h:i A'),
-                            'to'        => $to->format('h:i A'),
+                            'from' => $currentTime->format('h:i A'),
+                            'to' => $to->format('h:i A'),
                             'timestamp' => $currentTime->getTimestamp().'-'.$to->getTimestamp(),
-                            'qty'       => $timeDuration['qty'] ?? 1,
+                            'qty' => $timeDuration['qty'] ?? 1,
                         ];
                     }
 
@@ -461,18 +461,18 @@ class Booking
                             }
 
                             $slots[$index]['slots'][] = [
-                                'from'           => $from->format('h:i A'),
-                                'to'             => $to->format('h:i A'),
+                                'from' => $from->format('h:i A'),
+                                'to' => $to->format('h:i A'),
                                 'from_timestamp' => $from->getTimestamp(),
-                                'to_timestamp'   => $to->getTimestamp(),
-                                'qty'            => $qty,
+                                'to_timestamp' => $to->getTimestamp(),
+                                'qty' => $qty,
                             ];
                         } else {
                             $slots[] = [
-                                'from'      => $from->format('h:i A'),
-                                'to'        => $to->format('h:i A'),
+                                'from' => $from->format('h:i A'),
+                                'to' => $to->format('h:i A'),
                                 'timestamp' => $from->getTimestamp().'-'.$to->getTimestamp(),
-                                'qty'       => $qty,
+                                'qty' => $qty,
                             ];
 
                             usort($slots, fn ($first, $second) => strtotime($first['from']) <=> strtotime($second['from']));
@@ -495,7 +495,7 @@ class Booking
         return array_map(function ($slot) {
             return [
                 'from' => Carbon::createFromTimeString($slot['from'])->format('h:i a'),
-                'to'   => Carbon::createFromTimeString($slot['to'])->format('h:i a'),
+                'to' => Carbon::createFromTimeString($slot['to'])->format('h:i a'),
             ];
         }, $slots);
     }
@@ -572,16 +572,16 @@ class Booking
         return [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
-                'option_id'      => 0,
-                'option_label'   => $ticket->name,
+                'option_id' => 0,
+                'option_label' => $ticket->name,
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-from'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-till'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
             ],
         ];
     }
@@ -606,16 +606,16 @@ class Booking
         return [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
-                'option_id'      => 0,
-                'option_label'   => trans('shop::app.products.booking.cart.'.$rentingType),
+                'option_id' => 0,
+                'option_label' => trans('shop::app.products.booking.cart.'.$rentingType),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-from'),
-                'option_id'      => 0,
-                'option_label'   => $from,
+                'option_id' => 0,
+                'option_label' => $from,
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-till'),
-                'option_id'      => 0,
-                'option_label'   => $to,
+                'option_id' => 0,
+                'option_label' => $to,
             ],
         ];
     }
@@ -630,20 +630,20 @@ class Booking
         $attributes = [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
             ],
         ];
 
         if ($data['booking']['note'] !== '') {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.special-note'),
-                'option_id'      => 0,
-                'option_label'   => $data['booking']['note'],
+                'option_id' => 0,
+                'option_label' => $data['booking']['note'],
             ];
         }
 
@@ -660,12 +660,12 @@ class Booking
         return [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
-                'option_id'      => 0,
-                'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
+                'option_id' => 0,
+                'option_label' => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
             ],
         ];
     }

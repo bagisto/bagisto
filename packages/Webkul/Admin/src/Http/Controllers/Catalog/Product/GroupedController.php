@@ -30,10 +30,10 @@ class GroupedController extends Controller
             }
 
             $products[] = [
-                'id'              => $option->associated_product->id,
-                'name'            => $option->associated_product->name,
-                'qty'             => $option->qty,
-                'price'           => $price = $option->associated_product->getTypeInstance()->getFinalPrice(),
+                'id' => $option->associated_product->id,
+                'name' => $option->associated_product->name,
+                'qty' => $option->qty,
+                'price' => $price = $option->associated_product->getTypeInstance()->getFinalPrice(),
                 'formatted_price' => core()->formatPrice($price),
             ];
         }

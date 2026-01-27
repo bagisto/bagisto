@@ -54,14 +54,14 @@ enum ColumnTypeEnum: string
     public static function getClassName(string $type): string
     {
         return match ($type) {
-            self::STRING->value    => Text::class,
-            self::INTEGER->value   => Integer::class,
-            self::DECIMAL->value   => Decimal::class,
-            self::BOOLEAN->value   => Boolean::class,
-            self::DATE->value      => Date::class,
-            self::DATETIME->value  => Datetime::class,
+            self::STRING->value => Text::class,
+            self::INTEGER->value => Integer::class,
+            self::DECIMAL->value => Decimal::class,
+            self::BOOLEAN->value => Boolean::class,
+            self::DATE->value => Date::class,
+            self::DATETIME->value => Datetime::class,
             self::AGGREGATE->value => Aggregate::class,
-            default                => throw new InvalidColumnTypeException("Invalid column type: {$type}"),
+            default => throw new InvalidColumnTypeException("Invalid column type: {$type}"),
         };
     }
 }

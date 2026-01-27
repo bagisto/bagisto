@@ -16,8 +16,8 @@ return [
                 env('ELASTICSEARCH_HOST', 'http://localhost:9200'),
             ],
 
-            'user'   => env('ELASTICSEARCH_USER', null),
-            'pass'   => env('ELASTICSEARCH_PASS', null),
+            'user' => env('ELASTICSEARCH_USER', null),
+            'pass' => env('ELASTICSEARCH_PASS', null),
         ],
 
         /**
@@ -29,14 +29,14 @@ return [
                 env('ELASTICSEARCH_HOST', null),
             ],
 
-            'key'   => env('ELASTICSEARCH_API_KEY', null),
+            'key' => env('ELASTICSEARCH_API_KEY', null),
         ],
 
         /**
          * You can connect to Elastic Cloud with the Cloud ID using the `cloud` key.
          */
         'cloud' => [
-            'id'      => env('ELASTICSEARCH_CLOUD_ID', null),
+            'id' => env('ELASTICSEARCH_CLOUD_ID', null),
 
             /**
              * If you are authenticating with API KEY then set user and pass as null
@@ -46,8 +46,8 @@ return [
             /**
              * If you are authenticating with username and password then set api_key as null
              */
-            'user'    => env('ELASTICSEARCH_USER', null),
-            'pass'    => env('ELASTICSEARCH_PASS', null),
+            'user' => env('ELASTICSEARCH_USER', null),
+            'pass' => env('ELASTICSEARCH_PASS', null),
         ],
     ],
 

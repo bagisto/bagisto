@@ -59,53 +59,53 @@ class OrderTransactionDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.id'),
-            'type'       => 'integer',
-            'sortable'   => true,
+            'index' => 'id',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.id'),
+            'type' => 'integer',
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'transaction_id',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.transaction-id'),
-            'type'       => 'string',
+            'index' => 'transaction_id',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.transaction-id'),
+            'type' => 'string',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'amount',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.transaction-amount'),
-            'type'       => 'string',
+            'index' => 'amount',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.transaction-amount'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'invoice_id',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.invoice-id'),
-            'type'       => 'integer',
+            'index' => 'invoice_id',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.invoice-id'),
+            'type' => 'integer',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'order_id',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.order-id'),
-            'type'       => 'integer',
+            'index' => 'order_id',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.order-id'),
+            'type' => 'integer',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'              => 'status',
-            'label'              => trans('admin::app.sales.transactions.index.datagrid.status'),
-            'type'               => 'string',
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'status',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.status'),
+            'type' => 'string',
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.sales.transactions.index.datagrid.paid'),
@@ -120,8 +120,8 @@ class OrderTransactionDataGrid extends DataGrid
                     'value' => self::STATUS_COMPLETED,
                 ],
             ],
-            'sortable'   => true,
-            'closure'    => function ($row) {
+            'sortable' => true,
+            'closure' => function ($row) {
                 switch ($row->status) {
                     case self::STATUS_PAID:
                         return '<p class="label-active">'.trans('admin::app.sales.transactions.index.datagrid.paid').'</p>';
@@ -136,13 +136,13 @@ class OrderTransactionDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.transactions.index.datagrid.transaction-date'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.transactions.index.datagrid.transaction-date'),
+            'type' => 'date',
+            'searchable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
     }
 
@@ -155,10 +155,10 @@ class OrderTransactionDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.shipments.view')) {
             $this->addAction([
-                'icon'   => 'icon-view',
-                'title'  => trans('admin::app.sales.transactions.index.datagrid.view'),
+                'icon' => 'icon-view',
+                'title' => trans('admin::app.sales.transactions.index.datagrid.view'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.transactions.view', $row->id);
                 },
             ]);

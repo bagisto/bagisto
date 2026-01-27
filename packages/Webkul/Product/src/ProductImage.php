@@ -122,17 +122,17 @@ class ProductImage
     {
         if (! $this->isDriverLocal()) {
             return [
-                'small_image_url'    => Storage::url($path),
-                'medium_image_url'   => Storage::url($path),
-                'large_image_url'    => Storage::url($path),
+                'small_image_url' => Storage::url($path),
+                'medium_image_url' => Storage::url($path),
+                'large_image_url' => Storage::url($path),
                 'original_image_url' => Storage::url($path),
             ];
         }
 
         return [
-            'small_image_url'    => url('cache/small/'.$path),
-            'medium_image_url'   => url('cache/medium/'.$path),
-            'large_image_url'    => url('cache/large/'.$path),
+            'small_image_url' => url('cache/small/'.$path),
+            'medium_image_url' => url('cache/medium/'.$path),
+            'large_image_url' => url('cache/large/'.$path),
             'original_image_url' => url('cache/original/'.$path),
         ];
     }
@@ -155,9 +155,9 @@ class ProductImage
                         : bagisto_asset('images/large-product-placeholder.webp', 'shop');
 
         return [
-            'small_image_url'    => $smallImageUrl,
-            'medium_image_url'   => $mediumImageUrl,
-            'large_image_url'    => $largeImageUrl,
+            'small_image_url' => $smallImageUrl,
+            'medium_image_url' => $mediumImageUrl,
+            'large_image_url' => $largeImageUrl,
             'original_image_url' => bagisto_asset('images/large-product-placeholder.webp', 'shop'),
         ];
     }

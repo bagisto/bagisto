@@ -116,7 +116,7 @@ class Configurable extends AbstractType
         foreach (array_permutation($superAttributes) as $permutation) {
             $this->createVariant($product, $permutation, [
                 'channel' => $data['channel'] ?? core()->getDefaultChannelCode(),
-                'locale'  => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+                'locale' => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
             ]);
         }
 
@@ -157,7 +157,7 @@ class Configurable extends AbstractType
 
                 $this->createVariant($product, $superAttributes, array_merge($variantData, [
                     'channel' => $data['channel'] ?? core()->getDefaultChannelCode(),
-                    'locale'  => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+                    'locale' => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
                 ]));
             } else {
                 if (is_numeric($index = $previousVariantIds->search($variantId))) {
@@ -165,8 +165,8 @@ class Configurable extends AbstractType
                 }
 
                 $this->updateVariant(array_merge($variantData, [
-                    'channel'         => $data['channel'] ?? core()->getDefaultChannelCode(),
-                    'locale'          => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+                    'channel' => $data['channel'] ?? core()->getDefaultChannelCode(),
+                    'locale' => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
                     'tax_category_id' => $data['tax_category_id'] ?? null,
                 ]), $variantId);
             }
@@ -192,23 +192,23 @@ class Configurable extends AbstractType
         $sku = $product->sku.'-variant-'.implode('-', $superAttributes);
 
         $data = array_merge([
-            'sku'               => $sku,
-            'name'              => 'Variant '.implode(' ', $superAttributes),
-            'price'             => 0,
-            'weight'            => 0,
-            'status'            => 1,
-            'tax_category_id'   => '',
-            'url_key'           => $sku,
+            'sku' => $sku,
+            'name' => 'Variant '.implode(' ', $superAttributes),
+            'price' => 0,
+            'weight' => 0,
+            'status' => 1,
+            'tax_category_id' => '',
+            'url_key' => $sku,
             'short_description' => $sku,
-            'description'       => $sku,
-            'inventories'       => [],
+            'description' => $sku,
+            'inventories' => [],
         ], $data);
 
         $variant = parent::create([
-            'type'                => 'simple',
-            'sku'                 => $sku,
+            'type' => 'simple',
+            'sku' => $sku,
             'attribute_family_id' => $product->attribute_family_id,
-            'parent_id'           => $product->id,
+            'parent_id' => $product->id,
         ]);
 
         foreach ($superAttributes as $attributeCode => $optionId) {
@@ -308,12 +308,12 @@ class Configurable extends AbstractType
     public function getTypeValidationRules()
     {
         return [
-            'variants.*.name'   => 'required',
-            'variants.*.sku'    => [
+            'variants.*.name' => 'required',
+            'variants.*.sku' => [
                 'required',
                 new ConfigurableUniqueSku($this->getChildrenIds()),
             ],
-            'variants.*.price'  => 'required',
+            'variants.*.price' => 'required',
             'variants.*.weight' => 'required',
         ];
     }
@@ -340,7 +340,7 @@ class Configurable extends AbstractType
 
         return [
             'regular' => [
-                'price'           => $minPrice,
+                'price' => $minPrice,
                 'formatted_price' => core()->currency($minPrice),
             ],
         ];
@@ -355,7 +355,7 @@ class Configurable extends AbstractType
     {
         return view('shop::products.prices.configurable', [
             'product' => $this->product,
-            'prices'  => $this->getProductPrices(),
+            'prices' => $this->getProductPrices(),
         ])->render();
     }
 
@@ -387,32 +387,32 @@ class Configurable extends AbstractType
 
         return [
             [
-                'product_id'          => $this->product->id,
-                'sku'                 => $this->product->sku,
-                'name'                => $this->product->name,
-                'type'                => $this->product->type,
-                'quantity'            => $data['quantity'],
-                'price'               => $convertedPrice = core()->convertPrice($price),
-                'price_incl_tax'      => $convertedPrice,
-                'base_price'          => $price,
+                'product_id' => $this->product->id,
+                'sku' => $this->product->sku,
+                'name' => $this->product->name,
+                'type' => $this->product->type,
+                'quantity' => $data['quantity'],
+                'price' => $convertedPrice = core()->convertPrice($price),
+                'price_incl_tax' => $convertedPrice,
+                'base_price' => $price,
                 'base_price_incl_tax' => $price,
-                'total'               => $convertedPrice * $data['quantity'],
-                'total_incl_tax'      => $convertedPrice * $data['quantity'],
-                'base_total'          => $price * $data['quantity'],
+                'total' => $convertedPrice * $data['quantity'],
+                'total_incl_tax' => $convertedPrice * $data['quantity'],
+                'base_total' => $price * $data['quantity'],
                 'base_total_incl_tax' => $price * $data['quantity'],
-                'weight'              => $childProduct->weight,
-                'total_weight'        => $childProduct->weight * $data['quantity'],
-                'base_total_weight'   => $childProduct->weight * $data['quantity'],
-                'additional'          => $this->getAdditionalOptions($data),
+                'weight' => $childProduct->weight,
+                'total_weight' => $childProduct->weight * $data['quantity'],
+                'base_total_weight' => $childProduct->weight * $data['quantity'],
+                'additional' => $this->getAdditionalOptions($data),
             ], [
-                'parent_id'  => $this->product->id,
+                'parent_id' => $this->product->id,
                 'product_id' => (int) $data['selected_configurable_option'],
-                'sku'        => $childProduct->sku,
-                'name'       => $childProduct->name,
-                'type'       => $childProduct->type,
+                'sku' => $childProduct->sku,
+                'name' => $childProduct->name,
+                'type' => $childProduct->type,
                 'additional' => [
                     'product_id' => (int) $data['selected_configurable_option'],
-                    'parent_id'  => $this->product->id,
+                    'parent_id' => $this->product->id,
                 ],
             ],
         ];
@@ -462,8 +462,8 @@ class Configurable extends AbstractType
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name ? $attribute->name : $attribute->admin_name,
-                'option_id'      => $option->id,
-                'option_label'   => $option->label ? $option->label : $option->admin_name,
+                'option_id' => $option->id,
+                'option_label' => $option->label ? $option->label : $option->admin_name,
             ];
         }
 

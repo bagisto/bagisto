@@ -141,7 +141,7 @@ class ProductRepository extends Repository
         $attribute = $this->attributeRepository->findOneByField('code', $code);
 
         $attributeValues = $this->productAttributeValueRepository->findWhere([
-            'attribute_id'          => $attribute->id,
+            'attribute_id' => $attribute->id,
             $attribute->column_name => $value,
         ]);
 
@@ -186,10 +186,10 @@ class ProductRepository extends Repository
             $indices = $this->elasticSearchRepository->search([
                 'url_key' => $slug,
             ], [
-                'type'  => '',
-                'from'  => 0,
+                'type' => '',
+                'from' => 0,
                 'limit' => 1,
-                'sort'  => 'id',
+                'sort' => 'id',
                 'order' => 'desc',
             ]);
 
@@ -466,9 +466,9 @@ class ProductRepository extends Repository
         $sortOptions = $this->getSortOptions($params);
 
         $indices = $this->elasticSearchRepository->search($params, [
-            'from'  => ($currentPage * $limit) - $limit,
+            'from' => ($currentPage * $limit) - $limit,
             'limit' => $limit,
-            'sort'  => $sortOptions['sort'],
+            'sort' => $sortOptions['sort'],
             'order' => $sortOptions['order'],
         ]);
 
@@ -506,7 +506,7 @@ class ProductRepository extends Repository
         $items = $indices['total'] ? $query->get() : [];
 
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
-            'path'  => request()->url(),
+            'path' => request()->url(),
             'query' => $params,
         ]);
 
@@ -544,9 +544,9 @@ class ProductRepository extends Repository
 
             foreach ($attribute->options as $option) {
                 $superAttributes[$key]['options'][] = [
-                    'id'           => $option->id,
-                    'admin_name'   => $option->admin_name,
-                    'sort_order'   => $option->sort_order,
+                    'id' => $option->id,
+                    'admin_name' => $option->admin_name,
+                    'sort_order' => $option->sort_order,
                     'swatch_value' => $option->swatch_value,
                 ];
             }

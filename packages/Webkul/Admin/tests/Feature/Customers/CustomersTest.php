@@ -79,9 +79,9 @@ it('should create a new customer', function () {
 
     postJson(route('admin.customers.customers.store'), $data = [
         'first_name' => fake()->firstName(),
-        'last_name'  => fake()->lastName(),
-        'gender'     => fake()->randomElement(['male', 'female', 'other']),
-        'email'      => fake()->email(),
+        'last_name' => fake()->lastName(),
+        'gender' => fake()->randomElement(['male', 'female', 'other']),
+        'email' => fake()->email(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -90,9 +90,9 @@ it('should create a new customer', function () {
         Customer::class => [
             [
                 'first_name' => $data['first_name'],
-                'last_name'  => $data['last_name'],
-                'gender'     => $data['gender'],
-                'email'      => $data['email'],
+                'last_name' => $data['last_name'],
+                'gender' => $data['gender'],
+                'email' => $data['email'],
             ],
         ],
     ]);
@@ -103,7 +103,7 @@ it('should create a new customer and send notification to the customer', functio
     Mail::fake();
 
     CoreConfig::factory()->create([
-        'code'  => 'emails.general.notifications.emails.general.notifications.customer_account_credentials',
+        'code' => 'emails.general.notifications.emails.general.notifications.customer_account_credentials',
         'value' => 1,
     ]);
 
@@ -112,9 +112,9 @@ it('should create a new customer and send notification to the customer', functio
 
     postJson(route('admin.customers.customers.store'), $data = [
         'first_name' => fake()->firstName(),
-        'last_name'  => fake()->lastName(),
-        'gender'     => fake()->randomElement(['male', 'female', 'other']),
-        'email'      => fake()->email(),
+        'last_name' => fake()->lastName(),
+        'gender' => fake()->randomElement(['male', 'female', 'other']),
+        'email' => fake()->email(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -123,9 +123,9 @@ it('should create a new customer and send notification to the customer', functio
         Customer::class => [
             [
                 'first_name' => $data['first_name'],
-                'last_name'  => $data['last_name'],
-                'gender'     => $data['gender'],
-                'email'      => $data['email'],
+                'last_name' => $data['last_name'],
+                'gender' => $data['gender'],
+                'email' => $data['email'],
             ],
         ],
     ]);
@@ -215,7 +215,7 @@ it('should store the notes for the customer and send email to the customer', fun
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id), [
-        'note'              => $note = substr(fake()->paragraph(), 0, 50),
+        'note' => $note = substr(fake()->paragraph(), 0, 50),
         'customer_notified' => 1,
     ])
         ->assertRedirect(route('admin.customers.customers.view', $customer->id))
@@ -262,9 +262,9 @@ it('should update the the existing customer', function () {
 
     putJson(route('admin.customers.customers.update', $customer->id), $data = [
         'first_name' => fake()->firstName(),
-        'last_name'  => $customer->last_name,
-        'gender'     => $customer->gender,
-        'email'      => fake()->email(),
+        'last_name' => $customer->last_name,
+        'gender' => $customer->gender,
+        'email' => fake()->email(),
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.customers.update-success'));
@@ -273,9 +273,9 @@ it('should update the the existing customer', function () {
         Customer::class => [
             [
                 'first_name' => $data['first_name'],
-                'last_name'  => $customer->last_name,
-                'gender'     => $customer->gender,
-                'email'      => $data['email'],
+                'last_name' => $customer->last_name,
+                'gender' => $customer->gender,
+                'email' => $data['email'],
             ],
         ],
     ]);
@@ -314,7 +314,7 @@ it('should mass update the customers', function () {
 
     postJson(route('admin.customers.customers.mass_update'), [
         'indices' => $customers->pluck('id')->toArray(),
-        'value'   => 1,
+        'value' => 1,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.update-success'));
@@ -323,7 +323,7 @@ it('should mass update the customers', function () {
         $this->assertModelWise([
             Customer::class => [
                 [
-                    'id'     => $customer->id,
+                    'id' => $customer->id,
                     'status' => 1,
                 ],
             ],

@@ -45,42 +45,42 @@ class OrderInvoiceDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'increment_id',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.id'),
-            'type'       => 'string',
+            'index' => 'increment_id',
+            'label' => trans('admin::app.sales.invoices.index.datagrid.id'),
+            'type' => 'string',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'order_id',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.order-id'),
-            'type'       => 'string',
+            'index' => 'order_id',
+            'label' => trans('admin::app.sales.invoices.index.datagrid.order-id'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.grand-total'),
-            'type'       => 'string',
+            'index' => 'base_grand_total',
+            'label' => trans('admin::app.sales.invoices.index.datagrid.grand-total'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($row) {
+            'sortable' => true,
+            'closure' => function ($row) {
                 return core()->formatBasePrice($row->base_grand_total);
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'state',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.status'),
-            'type'       => 'string',
+            'index' => 'state',
+            'label' => trans('admin::app.sales.invoices.index.datagrid.status'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($row) {
+            'sortable' => true,
+            'closure' => function ($row) {
                 $dueDuration = core()->getConfigData('sales.invoice_settings.payment_terms.due_duration');
 
                 $todayDate = Carbon::now();
@@ -123,13 +123,13 @@ class OrderInvoiceDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
+            'type' => 'date',
+            'searchable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
     }
 
@@ -142,10 +142,10 @@ class OrderInvoiceDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.invoices.view')) {
             $this->addAction([
-                'icon'   => 'icon-view',
-                'title'  => trans('admin::app.sales.invoices.index.datagrid.view'),
+                'icon' => 'icon-view',
+                'title' => trans('admin::app.sales.invoices.index.datagrid.view'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.invoices.view', $row->id);
                 },
             ]);
@@ -160,9 +160,9 @@ class OrderInvoiceDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'   => trans('admin::app.sales.invoices.index.datagrid.update-status'),
-            'url'     => route('admin.sales.invoices.mass_update.state'),
-            'method'  => 'POST',
+            'title' => trans('admin::app.sales.invoices.index.datagrid.update-status'),
+            'url' => route('admin.sales.invoices.mass_update.state'),
+            'method' => 'POST',
             'options' => [
                 [
                     'label' => trans('admin::app.sales.invoices.index.datagrid.pending'),

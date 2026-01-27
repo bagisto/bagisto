@@ -29,9 +29,9 @@ class SearchController extends Controller
         ]);
 
         $searchTerm = $this->searchTermRepository->findOneWhere([
-            'term'       => request()->query('query'),
+            'term' => request()->query('query'),
             'channel_id' => core()->getCurrentChannel()->id,
-            'locale'     => app()->getLocale(),
+            'locale' => app()->getLocale(),
         ]);
 
         if ($searchTerm?->redirect_url) {
@@ -56,12 +56,12 @@ class SearchController extends Controller
         }
 
         return view('shop::search.index', [
-            'query'      => $query,
+            'query' => $query,
             'suggestion' => $suggestion,
-            'params'     => [
-                'sort'  => request()->query('sort'),
+            'params' => [
+                'sort' => request()->query('sort'),
                 'limit' => request()->query('limit'),
-                'mode'  => request()->query('mode'),
+                'mode' => request()->query('mode'),
             ],
         ]);
     }

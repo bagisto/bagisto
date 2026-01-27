@@ -39,9 +39,9 @@ class LocalesTableSeeder extends Seeder
 
             DB::table('locales')->insert([
                 [
-                    'id'        => $key + 1,
-                    'code'      => $locale,
-                    'name'      => trans('installer::app.seeders.core.locales.'.$locale, [], $defaultLocale),
+                    'id' => $key + 1,
+                    'code' => $locale,
+                    'name' => trans('installer::app.seeders.core.locales.'.$locale, [], $defaultLocale),
                     'direction' => in_array($locale, ['ar', 'fa', 'he']) ? 'rtl' : 'ltr',
                     'logo_path' => $logoPath,
                 ],

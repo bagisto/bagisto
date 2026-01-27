@@ -56,12 +56,12 @@ class BookingRepository extends Repository
             }
 
             $booking = parent::create([
-                'qty'                             => $item->qty_ordered,
-                'from'                            => $from,
-                'to'                              => $to,
-                'order_id'                        => $order->id,
-                'order_item_id'                   => $item->id,
-                'product_id'                      => $item->product_id,
+                'qty' => $item->qty_ordered,
+                'from' => $from,
+                'to' => $to,
+                'order_id' => $order->id,
+                'order_item_id' => $item->id,
+                'product_id' => $item->product_id,
                 'booking_product_event_ticket_id' => $bookingItem['ticket_id'] ?? null,
             ]);
 

@@ -143,12 +143,12 @@ class Flat extends AbstractIndexer
             if (in_array($channel->id, $channelIds)) {
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->updateOrCreate([
-                        'product_id'          => $product->id,
-                        'channel'             => $channel->code,
-                        'locale'              => $locale->code,
+                        'product_id' => $product->id,
+                        'channel' => $channel->code,
+                        'locale' => $locale->code,
                     ], [
-                        'type'                => $product->type,
-                        'sku'                 => $product->sku,
+                        'type' => $product->type,
+                        'sku' => $product->sku,
                         'attribute_family_id' => $product->attribute_family_id,
                     ]);
 
@@ -187,7 +187,7 @@ class Flat extends AbstractIndexer
                 if (request()->route()?->getName() == 'admin.catalog.products.update') {
                     $this->productFlatRepository->deleteWhere([
                         'product_id' => $product->id,
-                        'channel'    => $channel->code,
+                        'channel' => $channel->code,
                     ]);
                 }
             }

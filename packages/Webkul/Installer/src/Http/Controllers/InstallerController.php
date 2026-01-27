@@ -108,10 +108,10 @@ class InstallerController extends Controller
 
         $parameter = [
             'parameter' => [
-                'default_locales'     => $appLocale,
-                'default_currency'    => $appCurrency,
-                'allowed_locales'     => $allowedLocales,
-                'allowed_currencies'  => $allowedCurrencies,
+                'default_locales' => $appLocale,
+                'default_currency' => $appCurrency,
+                'allowed_locales' => $allowedLocales,
+                'allowed_currencies' => $allowedCurrencies,
                 'skip_admin_creation' => true,
             ],
         ];
@@ -141,9 +141,9 @@ class InstallerController extends Controller
         $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
 
         $this->databaseManager->seedSampleProducts([
-            'default_locale'     => $defaultLocale,
-            'allowed_locales'    => $allowedLocales,
-            'default_currency'   => $defaultCurrency,
+            'default_locale' => $defaultLocale,
+            'allowed_locales' => $allowedLocales,
+            'default_currency' => $defaultCurrency,
             'allowed_currencies' => $allowedCurrencies,
         ]);
 
@@ -163,12 +163,12 @@ class InstallerController extends Controller
 
         try {
             DB::table('admins')->insert([
-                'id'      => self::USER_ID,
-                'name'    => request()->input('admin'),
-                'email'   => request()->input('email'),
-                'password'=> $password,
+                'id' => self::USER_ID,
+                'name' => request()->input('admin'),
+                'email' => request()->input('email'),
+                'password' => $password,
                 'role_id' => 1,
-                'status'  => 1,
+                'status' => 1,
             ]);
 
             return true;

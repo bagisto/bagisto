@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'    => 'Webkul Bagisto DataGrid',
+    'name' => 'Webkul Bagisto DataGrid',
     'version' => core()->version(),
 ];

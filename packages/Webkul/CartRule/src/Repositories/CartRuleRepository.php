@@ -62,12 +62,12 @@ class CartRuleRepository extends Repository
             && ! $data['use_auto_generation']
         ) {
             $this->cartRuleCouponRepository->create([
-                'cart_rule_id'       => $cartRule->id,
-                'code'               => $data['coupon_code'],
-                'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                'cart_rule_id' => $cartRule->id,
+                'code' => $data['coupon_code'],
+                'usage_limit' => $data['uses_per_coupon'] ?? 0,
                 'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                'is_primary'         => 1,
-                'expired_at'         => $data['ends_till'] ?? null,
+                'is_primary' => 1,
+                'expired_at' => $data['ends_till'] ?? null,
             ]);
         }
 
@@ -82,9 +82,9 @@ class CartRuleRepository extends Repository
     {
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?: null,
-            'ends_till'   => $data['ends_till'] ?: null,
-            'status'      => isset($data['status']),
-            'conditions'  => $data['conditions'] ?? [],
+            'ends_till' => $data['ends_till'] ?: null,
+            'status' => isset($data['status']),
+            'conditions' => $data['conditions'] ?? [],
         ]);
 
         $cartRule = $this->find($id);
@@ -100,37 +100,37 @@ class CartRuleRepository extends Repository
         } else {
             if (! $data['use_auto_generation']) {
                 $cartRuleCoupon = $this->cartRuleCouponRepository->findOneWhere([
-                    'is_primary'   => 1,
+                    'is_primary' => 1,
                     'cart_rule_id' => $cartRule->id,
                 ]);
 
                 if ($cartRuleCoupon) {
                     $this->cartRuleCouponRepository->update([
-                        'code'               => $data['coupon_code'],
-                        'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                        'code' => $data['coupon_code'],
+                        'usage_limit' => $data['uses_per_coupon'] ?? 0,
                         'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                        'expired_at'         => $data['ends_till'] ?? null,
+                        'expired_at' => $data['ends_till'] ?? null,
                     ], $cartRuleCoupon->id);
                 } else {
                     $this->cartRuleCouponRepository->create([
-                        'cart_rule_id'       => $cartRule->id,
-                        'code'               => $data['coupon_code'],
-                        'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                        'cart_rule_id' => $cartRule->id,
+                        'code' => $data['coupon_code'],
+                        'usage_limit' => $data['uses_per_coupon'] ?? 0,
                         'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                        'is_primary'         => 1,
-                        'expired_at'         => $data['ends_till'] ?? null,
+                        'is_primary' => 1,
+                        'expired_at' => $data['ends_till'] ?? null,
                     ]);
                 }
             } else {
                 $this->cartRuleCouponRepository->deleteWhere([
-                    'is_primary'   => 1,
+                    'is_primary' => 1,
                     'cart_rule_id' => $cartRule->id,
                 ]);
 
                 $this->cartRuleCouponRepository->where('cart_rule_id', $cartRule->id)->update([
-                    'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                    'usage_limit' => $data['uses_per_coupon'] ?? 0,
                     'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                    'expired_at'         => $data['ends_till'] ?? null,
+                    'expired_at' => $data['ends_till'] ?? null,
                 ]);
             }
         }
@@ -147,92 +147,92 @@ class CartRuleRepository extends Repository
     {
         $attributes = [
             [
-                'key'      => 'cart',
-                'label'    => trans('admin::app.marketing.promotions.cart-rules.create.cart-attribute'),
+                'key' => 'cart',
+                'label' => trans('admin::app.marketing.promotions.cart-rules.create.cart-attribute'),
                 'children' => [
                     [
-                        'key'   => 'cart|base_sub_total',
-                        'type'  => 'price',
+                        'key' => 'cart|base_sub_total',
+                        'type' => 'price',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.subtotal'),
                     ], [
-                        'key'   => 'cart|items_qty',
-                        'type'  => 'integer',
+                        'key' => 'cart|items_qty',
+                        'type' => 'integer',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.total-items-qty'),
                     ], [
-                        'key'     => 'cart|payment_method',
-                        'type'    => 'select',
+                        'key' => 'cart|payment_method',
+                        'type' => 'select',
                         'options' => $this->getPaymentMethods(),
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.payment-method'),
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.payment-method'),
                     ], [
-                        'key'     => 'cart|shipping_method',
-                        'type'    => 'select',
+                        'key' => 'cart|shipping_method',
+                        'type' => 'select',
                         'options' => $this->getShippingMethods(),
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.shipping-method'),
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.shipping-method'),
                     ], [
-                        'key'   => 'cart|postcode',
-                        'type'  => 'text',
+                        'key' => 'cart|postcode',
+                        'type' => 'text',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.shipping-postcode'),
                     ], [
-                        'key'     => 'cart|state',
-                        'type'    => 'select',
+                        'key' => 'cart|state',
+                        'type' => 'select',
                         'options' => $this->groupedStatesByCountries(),
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.shipping-state'),
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.shipping-state'),
                     ], [
-                        'key'     => 'cart|country',
-                        'type'    => 'select',
+                        'key' => 'cart|country',
+                        'type' => 'select',
                         'options' => $this->getCountries(),
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.shipping-country'),
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.shipping-country'),
                     ],
                 ],
             ], [
-                'key'      => 'cart_item',
-                'label'    => trans('admin::app.marketing.promotions.cart-rules.create.cart-item-attribute'),
+                'key' => 'cart_item',
+                'label' => trans('admin::app.marketing.promotions.cart-rules.create.cart-item-attribute'),
                 'children' => [
                     [
-                        'key'   => 'cart_item|base_price',
-                        'type'  => 'price',
+                        'key' => 'cart_item|base_price',
+                        'type' => 'price',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.price-in-cart'),
                     ], [
-                        'key'   => 'cart_item|quantity',
-                        'type'  => 'integer',
+                        'key' => 'cart_item|quantity',
+                        'type' => 'integer',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.qty-in-cart'),
                     ], [
-                        'key'   => 'cart_item|base_total_weight',
-                        'type'  => 'decimal',
+                        'key' => 'cart_item|base_total_weight',
+                        'type' => 'decimal',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.total-weight'),
                     ], [
-                        'key'   => 'cart_item|base_total',
-                        'type'  => 'price',
+                        'key' => 'cart_item|base_total',
+                        'type' => 'price',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.subtotal'),
                     ], [
-                        'key'   => 'cart_item|additional',
-                        'type'  => 'text',
+                        'key' => 'cart_item|additional',
+                        'type' => 'text',
                         'label' => trans('admin::app.marketing.promotions.cart-rules.create.additional'),
                     ],
                 ],
             ], [
-                'key'      => 'product',
-                'label'    => trans('admin::app.marketing.promotions.cart-rules.create.product-attribute'),
+                'key' => 'product',
+                'label' => trans('admin::app.marketing.promotions.cart-rules.create.product-attribute'),
                 'children' => [
                     [
-                        'key'     => 'product|category_ids',
-                        'type'    => 'multiselect',
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.categories'),
+                        'key' => 'product|category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.categories'),
                         'options' => $categories = $this->categoryRepository->getCategoryTree(),
                     ], [
-                        'key'     => 'product|children::category_ids',
-                        'type'    => 'multiselect',
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.children-categories'),
+                        'key' => 'product|children::category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.children-categories'),
                         'options' => $categories,
                     ], [
-                        'key'     => 'product|parent::category_ids',
-                        'type'    => 'multiselect',
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.parent-categories'),
+                        'key' => 'product|parent::category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.parent-categories'),
                         'options' => $categories,
                     ], [
-                        'key'     => 'product|attribute_family_id',
-                        'type'    => 'select',
-                        'label'   => trans('admin::app.marketing.promotions.cart-rules.create.attribute-family'),
+                        'key' => 'product|attribute_family_id',
+                        'type' => 'select',
+                        'label' => trans('admin::app.marketing.promotions.cart-rules.create.attribute-family'),
                         'options' => $this->getAttributeFamilies(),
                     ],
                 ],
@@ -265,23 +265,23 @@ class CartRuleRepository extends Repository
             }
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|'.$attribute->code,
-                'type'    => $attribute->type,
-                'label'   => $attribute->name,
+                'key' => 'product|'.$attribute->code,
+                'type' => $attribute->type,
+                'label' => $attribute->name,
                 'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|children::'.$attribute->code,
-                'type'    => $attribute->type,
-                'label'   => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-children-only', ['attribute_name' => $attribute->name]),
+                'key' => 'product|children::'.$attribute->code,
+                'type' => $attribute->type,
+                'label' => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-children-only', ['attribute_name' => $attribute->name]),
                 'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|parent::'.$attribute->code,
-                'type'    => $attribute->type,
-                'label'   => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-parent-only', ['attribute_name' => $attribute->name]),
+                'key' => 'product|parent::'.$attribute->code,
+                'type' => $attribute->type,
+                'label' => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-parent-only', ['attribute_name' => $attribute->name]),
                 'options' => $options,
             ];
         }
@@ -302,7 +302,7 @@ class CartRuleRepository extends Repository
             $object = app($paymentMethod['class']);
 
             $methods[] = [
-                'id'         => $object->getCode(),
+                'id' => $object->getCode(),
                 'admin_name' => $object->getTitle(),
             ];
         }
@@ -323,7 +323,7 @@ class CartRuleRepository extends Repository
             $object = app($shippingMethod['class']);
 
             $methods[] = [
-                'id'         => $object->getCode(),
+                'id' => $object->getCode(),
                 'admin_name' => $object->getTitle(),
             ];
         }
@@ -342,7 +342,7 @@ class CartRuleRepository extends Repository
 
         foreach ($this->taxCategoryRepository->all() as $taxCategory) {
             $taxCategories[] = [
-                'id'         => $taxCategory->id,
+                'id' => $taxCategory->id,
                 'admin_name' => $taxCategory->name,
             ];
         }
@@ -361,7 +361,7 @@ class CartRuleRepository extends Repository
 
         foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
             $attributeFamilies[] = [
-                'id'         => $attributeFamily->id,
+                'id' => $attributeFamily->id,
                 'admin_name' => $attributeFamily->name,
             ];
         }
@@ -380,7 +380,7 @@ class CartRuleRepository extends Repository
 
         foreach (DB::table('countries')->get() as $country) {
             $countries[] = [
-                'id'         => $country->code,
+                'id' => $country->code,
                 'admin_name' => $country->name,
             ];
         }
@@ -409,9 +409,9 @@ class CartRuleRepository extends Repository
             }
 
             $collection[] = [
-                'id'         => $country->code,
+                'id' => $country->code,
                 'admin_name' => $country->name,
-                'states'     => $states,
+                'states' => $states,
             ];
         }
 

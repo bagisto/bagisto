@@ -58,10 +58,10 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'                      => ['required', 'unique:attribute_families,code', new Code],
-            'name'                      => 'required',
-            'attribute_groups.*.code'   => 'required',
-            'attribute_groups.*.name'   => 'required',
+            'code' => ['required', 'unique:attribute_families,code', new Code],
+            'name' => 'required',
+            'attribute_groups.*.code' => 'required',
+            'attribute_groups.*.name' => 'required',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
@@ -69,8 +69,8 @@ class AttributeFamilyController extends Controller
 
         $attributeFamily = $this->attributeFamilyRepository->create([
             'attribute_groups' => request('attribute_groups'),
-            'code'             => request('code'),
-            'name'             => request('name'),
+            'code' => request('code'),
+            'name' => request('name'),
         ]);
 
         Event::dispatch('catalog.attribute_family.create.after', $attributeFamily);
@@ -102,10 +102,10 @@ class AttributeFamilyController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'code'                      => ['required', 'unique:attribute_families,code,'.$id, new Code],
-            'name'                      => 'required',
-            'attribute_groups.*.code'   => 'required',
-            'attribute_groups.*.name'   => 'required',
+            'code' => ['required', 'unique:attribute_families,code,'.$id, new Code],
+            'name' => 'required',
+            'attribute_groups.*.code' => 'required',
+            'attribute_groups.*.name' => 'required',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
@@ -113,8 +113,8 @@ class AttributeFamilyController extends Controller
 
         $attributeFamily = $this->attributeFamilyRepository->update([
             'attribute_groups' => request('attribute_groups'),
-            'code'             => request('code'),
-            'name'             => request('name'),
+            'code' => request('code'),
+            'name' => request('name'),
         ], $id);
 
         Event::dispatch('catalog.attribute_family.update.after', $attributeFamily);

@@ -34,7 +34,7 @@ class Sale extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalOrders($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalOrders($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalOrders($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -101,7 +101,7 @@ class Sale extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalOrders(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'  => $current = $this->getTotalOrders(now()->today(), now()->endOfDay()),
+            'current' => $current = $this->getTotalOrders(now()->today(), now()->endOfDay()),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -127,10 +127,10 @@ class Sale extends AbstractReporting
     public function getTotalSalesProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getTotalSales($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getTotalSales($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getTotalSales($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getTotalSales($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -140,10 +140,10 @@ class Sale extends AbstractReporting
     public function getSubTotalSalesProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getSubTotalSales($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getSubTotalSales($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getSubTotalSales($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getSubTotalSales($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -153,10 +153,10 @@ class Sale extends AbstractReporting
     public function getTodaySalesProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'         => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
+            'previous' => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
+            'current' => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -236,10 +236,10 @@ class Sale extends AbstractReporting
     public function getAverageSalesProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getAverageSales($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getAverageSales($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getAverageSales($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getAverageSales($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -305,10 +305,10 @@ class Sale extends AbstractReporting
     public function getRefundsProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getRefunds($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getRefunds($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getRefunds($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getRefunds($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -374,10 +374,10 @@ class Sale extends AbstractReporting
     public function getTaxCollectedProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getTaxCollected($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getTaxCollected($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getTaxCollected($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getTaxCollected($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -467,10 +467,10 @@ class Sale extends AbstractReporting
     public function getShippingCollectedProgress(): array
     {
         return [
-            'previous'        => $previous = $this->getShippingCollected($this->lastStartDate, $this->lastEndDate),
-            'current'         => $current = $this->getShippingCollected($this->startDate, $this->endDate),
+            'previous' => $previous = $this->getShippingCollected($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getShippingCollected($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
-            'progress'        => $this->getPercentageChange($previous, $current),
+            'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
 

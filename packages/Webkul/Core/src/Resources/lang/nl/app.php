@@ -3,14 +3,14 @@
 return [
     'path-hint' => [
         'template' => 'Sjabloon',
-        'parents'  => 'Ouders',
+        'parents' => 'Ouders',
     ],
 
     'currency-position' => [
         'options' => [
-            'left'             => 'Links',
-            'left-with-space'  => 'Links met spatie',
-            'right'            => 'Rechts',
+            'left' => 'Links',
+            'left-with-space' => 'Links met spatie',
+            'right' => 'Rechts',
             'right-with-space' => 'Rechts met spatie',
         ],
     ],

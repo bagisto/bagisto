@@ -49,7 +49,7 @@ class GDPRController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.customers.gdpr.index.attribute-reason-error'),
-                'error'   => $e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -72,7 +72,7 @@ class GDPRController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => trans('admin::app.customers.gdpr.index.update-success-unsent-email'),
-                'error'   => $e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

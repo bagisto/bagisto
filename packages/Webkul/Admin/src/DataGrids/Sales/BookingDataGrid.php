@@ -35,65 +35,65 @@ class BookingDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.id'),
-            'type'       => 'string',
+            'index' => 'id',
+            'label' => trans('admin::app.sales.booking.index.datagrid.id'),
+            'type' => 'string',
             'searchable' => false,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'order_id',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.order-id'),
-            'type'       => 'string',
+            'index' => 'order_id',
+            'label' => trans('admin::app.sales.booking.index.datagrid.order-id'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'qty',
-            'label'      => trans('admin::app.sales.booking.index.datagrid.qty'),
-            'type'       => 'string',
+            'index' => 'qty',
+            'label' => trans('admin::app.sales.booking.index.datagrid.qty'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'           => 'from',
-            'label'           => trans('admin::app.sales.booking.index.datagrid.from'),
-            'type'            => 'datetime',
-            'searchable'      => true,
-            'sortable'        => true,
-            'filterable'      => true,
+            'index' => 'from',
+            'label' => trans('admin::app.sales.booking.index.datagrid.from'),
+            'type' => 'datetime',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_type' => 'datetime_range',
-            'closure'         => function ($value) {
+            'closure' => function ($value) {
                 return Carbon::createFromTimestamp($value->from)->format('d M, Y H:iA');
             },
         ]);
 
         $this->addColumn([
-            'index'           => 'to',
-            'label'           => trans('admin::app.sales.booking.index.datagrid.to'),
-            'type'            => 'datetime',
-            'searchable'      => true,
-            'sortable'        => true,
-            'filterable'      => true,
+            'index' => 'to',
+            'label' => trans('admin::app.sales.booking.index.datagrid.to'),
+            'type' => 'datetime',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_type' => 'datetime_range',
-            'closure'         => function ($value) {
+            'closure' => function ($value) {
                 return Carbon::createFromTimestamp($value->to)->format('d M, Y H:iA');
             },
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.booking.index.datagrid.created-date'),
-            'type'            => 'datetime',
-            'searchable'      => true,
-            'sortable'        => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.booking.index.datagrid.created-date'),
+            'type' => 'datetime',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_type' => 'datetime_range',
         ]);
     }
@@ -106,10 +106,10 @@ class BookingDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.booking.index.datagrid.view'),
+            'icon' => 'icon-view',
+            'title' => trans('admin::app.sales.booking.index.datagrid.view'),
             'method' => 'GET',
-            'url'    => function ($row) {
+            'url' => function ($row) {
                 return route('admin.sales.orders.view', $row->order_id);
             },
         ]);

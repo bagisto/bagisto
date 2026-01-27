@@ -29,9 +29,9 @@ it('should return the create page of configurable product', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.store'), [
-        'type'                => 'configurable',
+        'type' => 'configurable',
         'attribute_family_id' => $attributeFamily,
-        'sku'                 => fake()->slug(),
+        'sku' => fake()->slug(),
     ])
         ->assertOk();
 
@@ -90,10 +90,10 @@ it('should fail the validation with errors if certain data is not provided corre
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'visible_individually' => $unProcessAble = fake()->word(),
-        'status'               => $unProcessAble,
-        'guest_checkout'       => $unProcessAble,
-        'new'                  => $unProcessAble,
-        'featured'             => $unProcessAble,
+        'status' => $unProcessAble,
+        'guest_checkout' => $unProcessAble,
+        'new' => $unProcessAble,
+        'featured' => $unProcessAble,
     ])
         ->assertJsonValidationErrorFor('sku')
         ->assertJsonValidationErrorFor('url_key')
@@ -116,15 +116,15 @@ it('should update the configurable product', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), $data = [
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
-        'channel'           => core()->getCurrentChannelCode(),
-        'locale'            => app()->getLocale(),
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'channel' => core()->getCurrentChannelCode(),
+        'locale' => app()->getLocale(),
         'short_description' => fake()->sentence(),
-        'description'       => fake()->paragraph(),
-        'name'              => fake()->words(3, true),
-        'price'             => fake()->randomFloat(2, 1, 1000),
-        'weight'            => fake()->numberBetween(0, 100),
+        'description' => fake()->paragraph(),
+        'name' => fake()->words(3, true),
+        'price' => fake()->randomFloat(2, 1, 1000),
+        'weight' => fake()->numberBetween(0, 100),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -132,25 +132,25 @@ it('should update the configurable product', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'                  => $product->id,
-                'type'                => $product->type,
-                'sku'                 => $product->sku,
+                'id' => $product->id,
+                'type' => $product->type,
+                'sku' => $product->sku,
                 'attribute_family_id' => 1,
-                'parent_id'           => null,
-                'additional'          => null,
+                'parent_id' => null,
+                'additional' => null,
             ],
         ],
 
         ProductFlat::class => [
             [
-                'product_id'        => $product->id,
-                'type'              => 'configurable',
-                'sku'               => $product->sku,
+                'product_id' => $product->id,
+                'type' => 'configurable',
+                'sku' => $product->sku,
                 'short_description' => $data['short_description'],
-                'description'       => $data['description'],
-                'name'              => $data['name'],
-                'price'             => $data['price'],
-                'weight'            => $data['weight'],
+                'description' => $data['description'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'weight' => $data['weight'],
             ],
         ],
     ]);
@@ -171,13 +171,13 @@ it('should update the configurable product variants', function () {
 
     foreach ($product->variants as $variant) {
         $variants[$variant->id] = [
-            'sku'         => fake()->uuid(),
-            'name'        => fake()->words(3, true),
-            'price'       => fake()->randomFloat(2, 1, 1000),
-            'weight'      => fake()->numberBetween(0, 100),
-            'status'      => fake()->boolean(),
-            'color'       => fake()->randomElement($attributeOptions['color']),
-            'size'        => fake()->randomElement($attributeOptions['size']),
+            'sku' => fake()->uuid(),
+            'name' => fake()->words(3, true),
+            'price' => fake()->randomFloat(2, 1, 1000),
+            'weight' => fake()->numberBetween(0, 100),
+            'status' => fake()->boolean(),
+            'color' => fake()->randomElement($attributeOptions['color']),
+            'size' => fake()->randomElement($attributeOptions['size']),
             'inventories' => [
                 1 => rand(1111, 9999),
             ],
@@ -188,16 +188,16 @@ it('should update the configurable product variants', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
-        'channel'           => $channel = core()->getCurrentChannelCode(),
-        'locale'            => $locale = app()->getLocale(),
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'channel' => $channel = core()->getCurrentChannelCode(),
+        'locale' => $locale = app()->getLocale(),
         'short_description' => $product->short_description,
-        'description'       => $product->description,
-        'name'              => $product->name,
-        'price'             => $product->price,
-        'weight'            => $product->weight,
-        'variants'          => $variants,
+        'description' => $product->description,
+        'name' => $product->name,
+        'price' => $product->price,
+        'weight' => $product->weight,
+        'variants' => $variants,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -207,13 +207,13 @@ it('should update the configurable product variants', function () {
             ProductFlat::class => [
                 [
                     'product_id' => $productId,
-                    'type'       => 'simple',
-                    'sku'        => $variant['sku'],
-                    'name'       => $variant['name'],
-                    'price'      => $variant['price'],
-                    'weight'     => $variant['weight'],
-                    'locale'     => $locale,
-                    'channel'    => $channel,
+                    'type' => 'simple',
+                    'sku' => $variant['sku'],
+                    'name' => $variant['name'],
+                    'price' => $variant['price'],
+                    'weight' => $variant['weight'],
+                    'locale' => $locale,
+                    'channel' => $channel,
                 ],
             ],
         ]);

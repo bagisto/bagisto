@@ -53,7 +53,7 @@ it('should fail the validation with errors of logo path is not an array and imag
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
-        'logo_path'   => fake()->word(),
+        'logo_path' => fake()->word(),
         'banner_path' => [UploadedFile::fake()->create('banner.jpg')],
     ])
         ->assertJsonValidationErrorFor('logo_path')
@@ -71,12 +71,12 @@ it('should fails the image validation error when provided tempered logo and bann
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
-        'slug'        => fake()->slug(),
-        'name'        => fake()->name(),
-        'position'    => rand(1, 5),
+        'slug' => fake()->slug(),
+        'name' => fake()->name(),
+        'position' => rand(1, 5),
         'description' => substr(fake()->paragraph(), 0, 50),
-        'attributes'  => $attributes,
-        'logo_path'   => [
+        'attributes' => $attributes,
+        'logo_path' => [
             UploadedFile::fake()->image('logo.php'),
         ],
         'banner_path' => [
@@ -96,12 +96,12 @@ it('should create a category', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), $data = [
-        'slug'        => fake()->slug(),
-        'name'        => fake()->name(),
-        'position'    => rand(1, 5),
+        'slug' => fake()->slug(),
+        'name' => fake()->name(),
+        'position' => rand(1, 5),
         'description' => substr(fake()->paragraph(), 0, 50),
-        'attributes'  => $attributes,
-        'logo_path'   => [
+        'attributes' => $attributes,
+        'logo_path' => [
             UploadedFile::fake()->image('logo.png'),
         ],
         'banner_path' => [
@@ -114,8 +114,8 @@ it('should create a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'slug'        => $data['slug'],
-                'name'        => $data['name'],
+                'slug' => $data['slug'],
+                'name' => $data['name'],
                 'description' => $data['description'],
             ],
         ],
@@ -211,14 +211,14 @@ it('should fails the validation with certain provided inputs', function () {
 
     putJson(route('admin.catalog.categories.update', $category->id), [
         'en' => [
-            'name'        => $name = fake()->name(),
-            'slug'        => $category->slug,
+            'name' => $name = fake()->name(),
+            'slug' => $category->slug,
             'description' => $description = substr(fake()->paragraph(), 0, 50),
         ],
-        'locale'      => config('app.locale'),
-        'attributes'  => $attributes,
-        'position'    => rand(1, 5),
-        'logo_path'   => [
+        'locale' => config('app.locale'),
+        'attributes' => $attributes,
+        'position' => rand(1, 5),
+        'logo_path' => [
             UploadedFile::fake()->image('logo.py'),
         ],
         'banner_path' => [
@@ -241,14 +241,14 @@ it('should update a category', function () {
 
     putJson(route('admin.catalog.categories.update', $category->id), [
         'en' => $data = [
-            'name'        => fake()->name(),
+            'name' => fake()->name(),
             'description' => substr(fake()->paragraph(), 0, 50),
-            'slug'        => $category->slug,
+            'slug' => $category->slug,
         ],
-        'locale'      => config('app.locale'),
-        'attributes'  => $attributes,
-        'position'    => rand(1, 5),
-        'logo_path'   => [
+        'locale' => config('app.locale'),
+        'attributes' => $attributes,
+        'position' => rand(1, 5),
+        'logo_path' => [
             UploadedFile::fake()->image('logo.png'),
         ],
         'banner_path' => [
@@ -261,8 +261,8 @@ it('should update a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'name'        => $data['name'],
-                'slug'        => $category->slug,
+                'name' => $data['name'],
+                'slug' => $category->slug,
                 'description' => $data['description'],
             ],
         ],
@@ -314,7 +314,7 @@ it('should update mass categories', function () {
 
     postJson(route('admin.catalog.categories.mass_update', [
         'indices' => $categories->pluck('id')->toArray(),
-        'value'   => 1,
+        'value' => 1,
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.categories.update-success'));
@@ -323,7 +323,7 @@ it('should update mass categories', function () {
         $this->assertModelWise([
             Category::class => [
                 [
-                    'id'     => $category->id,
+                    'id' => $category->id,
                     'status' => 1,
                 ],
             ],

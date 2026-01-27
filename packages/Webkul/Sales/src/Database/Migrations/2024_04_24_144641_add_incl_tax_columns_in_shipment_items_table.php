@@ -17,7 +17,7 @@ return new class extends Migration
         });
 
         DB::table('shipment_items')->update([
-            'price_incl_tax'      => DB::raw('price'),
+            'price_incl_tax' => DB::raw('price'),
             'base_price_incl_tax' => DB::raw('base_price'),
         ]);
     }

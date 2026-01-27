@@ -63,7 +63,7 @@ class Handler extends BaseHandler
 
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'       => trans("{$namespace}::app.errors.{$errorCode}.title"),
+                    'error' => trans("{$namespace}::app.errors.{$errorCode}.title"),
                     'description' => trans("{$namespace}::app.errors.{$errorCode}.description"),
                 ], $errorCode);
             }
@@ -100,7 +100,7 @@ class Handler extends BaseHandler
 
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'       => trans("{$namespace}::app.errors.{$errorCode}.title"),
+                    'error' => trans("{$namespace}::app.errors.{$errorCode}.title"),
                     'description' => trans("{$namespace}::app.shop.errors.{$errorCode}.description"),
                 ], $errorCode);
             }

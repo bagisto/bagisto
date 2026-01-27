@@ -44,40 +44,40 @@ class InvoiceDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'increment_id',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.increment-id'),
-            'type'       => 'string',
+            'index' => 'increment_id',
+            'label' => trans('admin::app.customers.customers.view.datagrid.invoices.increment-id'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
+            'type' => 'date',
+            'searchable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-amount'),
-            'type'       => 'string',
+            'index' => 'base_grand_total',
+            'label' => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-amount'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'order_id',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.order-id'),
-            'type'       => 'string',
+            'index' => 'order_id',
+            'label' => trans('admin::app.customers.customers.view.datagrid.invoices.order-id'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
     }
 
@@ -89,10 +89,10 @@ class InvoiceDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.customers.customers.view.datagrid.invoices.view'),
+            'icon' => 'icon-view',
+            'title' => trans('admin::app.customers.customers.view.datagrid.invoices.view'),
             'method' => 'GET',
-            'url'    => function ($row) {
+            'url' => function ($row) {
                 return route('admin.sales.orders.view', $row->id);
             },
         ]);

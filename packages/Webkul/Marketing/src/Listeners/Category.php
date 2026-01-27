@@ -85,7 +85,7 @@ class Category
         $urlRewrites = $this->urlRewriteRepository->findWhere([
             ['entity_type', 'IN', ['category', 'product']],
             'target_path' => $translations['slug'],
-            'locale'      => $locale,
+            'locale' => $locale,
         ]);
 
         foreach ($urlRewrites as $urlRewrite) {
@@ -99,10 +99,10 @@ class Category
         Event::dispatch('marketing.search_seo.url_rewrites.create.before');
 
         $urlRewrite = $this->urlRewriteRepository->create([
-            'entity_type'   => 'category',
-            'request_path'  => $translations['slug'],
-            'target_path'   => $currentURLKey,
-            'locale'        => $locale,
+            'entity_type' => 'category',
+            'request_path' => $translations['slug'],
+            'target_path' => $currentURLKey,
+            'locale' => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
 
@@ -126,9 +126,9 @@ class Category
 
         foreach ($translations as $locale => $translation) {
             $urlRewrites = $this->urlRewriteRepository->findWhere([
-                'entity_type'  => 'category',
+                'entity_type' => 'category',
                 'request_path' => $translation['slug'],
-                'locale'       => $locale,
+                'locale' => $locale,
             ]);
 
             foreach ($urlRewrites as $urlRewrite) {

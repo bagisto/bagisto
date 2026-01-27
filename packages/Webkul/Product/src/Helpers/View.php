@@ -55,12 +55,12 @@ class View
             }
 
             $data[] = [
-                'id'         => $attribute->id,
-                'code'       => $attribute->code,
-                'label'      => $attribute->name,
-                'value'      => $value,
+                'id' => $attribute->id,
+                'code' => $attribute->code,
+                'label' => $attribute->name,
+                'value' => $value,
                 'admin_name' => $attribute->admin_name,
-                'type'       => $attribute->type,
+                'type' => $attribute->type,
             ];
         }
 

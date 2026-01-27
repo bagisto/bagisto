@@ -51,156 +51,156 @@ it('should show the dashboard over all stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
 
     // Act and Assert.
@@ -314,156 +314,156 @@ it('should show the dashboard today stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
 
     // Act and Assert.
@@ -580,156 +580,156 @@ it('should show the dashboard stock threshold products stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
 
     // Act and Assert.
@@ -843,156 +843,156 @@ it('should show the dashboard total sales stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
 
     // Act and Assert.
@@ -1120,156 +1120,156 @@ it('should show the dashboard top selling products stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
     // Act and Assert.
     $this->loginAsAdmin();
@@ -1380,156 +1380,156 @@ it('should show the dashboard top customers stats', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
     ]);
 
     $additional = [
         'product_id' => $product->id,
-        'rating'     => '0',
+        'rating' => '0',
         'is_buy_now' => '0',
-        'quantity'   => '1',
+        'quantity' => '1',
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price' => $price,
+        'total' => $convertedPrice * $additional['quantity'],
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'type' => $product->type,
+        'additional' => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $cartShippingAddress = CartAddress::factory()->create([
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
-        'cart_id'      => $cart->id,
-        'method'       => $paymentMethod = 'cashondelivery',
+        'cart_id' => $cart->id,
+        'method' => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
-        'carrier'            => 'free',
-        'carrier_title'      => 'Free shipping',
-        'method'             => 'free_free',
-        'method_title'       => 'Free Shipping',
+        'carrier' => 'free',
+        'carrier_title' => 'Free shipping',
+        'method' => 'free_free',
+        'method_title' => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_address_id' => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
-        'cart_id'                  => $cart->id,
-        'customer_id'              => $customer->id,
-        'customer_email'           => $customer->email,
-        'customer_first_name'      => $customer->first_name,
-        'customer_last_name'       => $customer->last_name,
-        'status'                   => 'processing',
-        'sub_total_invoiced'       => $product->price,
-        'base_sub_total_invoiced'  => $product->price,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'status' => 'processing',
+        'sub_total_invoiced' => $product->price,
+        'base_sub_total_invoiced' => $product->price,
     ]);
 
     $orderItem = OrderItem::factory()->create([
-        'product_id'           => $product->id,
-        'order_id'             => $order->id,
-        'sku'                  => $product->sku,
-        'type'                 => $product->type,
-        'name'                 => $product->name,
-        'qty_invoiced'         => 1,
-        'base_total_invoiced'  => $product->price,
+        'product_id' => $product->id,
+        'order_id' => $order->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'qty_invoiced' => 1,
+        'base_total_invoiced' => $product->price,
     ]);
 
     $orderBillingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartBillingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderShippingAddress = OrderAddress::factory()->create([
         ...Arr::except($cartShippingAddress->toArray(), ['id', 'created_at', 'updated_at']),
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
+        'cart_id' => $cart->id,
+        'customer_id' => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-        'order_id'     => $order->id,
+        'order_id' => $order->id,
     ]);
 
     $orderPayment = OrderPayment::factory()->create([
         'order_id' => $order->id,
-        'method'   => 'cashondelivery',
+        'method' => 'cashondelivery',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'order_id'              => $order->id,
-        'state'                 => 'paid',
-        'total_qty'             => 1,
-        'base_currency_code'    => $order->base_currency_code,
+        'order_id' => $order->id,
+        'state' => 'paid',
+        'total_qty' => 1,
+        'base_currency_code' => $order->base_currency_code,
         'channel_currency_code' => $order->channel_currency_code,
-        'order_currency_code'   => $order->order_currency_code,
-        'email_sent'            => 1,
-        'discount_amount'       => 0,
-        'base_discount_amount'  => 0,
-        'sub_total'             => $orderItem->base_price,
-        'base_sub_total'        => $orderItem->base_price,
-        'grand_total'           => $orderItem->price,
-        'base_grand_total'      => $orderItem->price,
+        'order_currency_code' => $order->order_currency_code,
+        'email_sent' => 1,
+        'discount_amount' => 0,
+        'base_discount_amount' => 0,
+        'sub_total' => $orderItem->base_price,
+        'base_sub_total' => $orderItem->base_price,
+        'grand_total' => $orderItem->price,
+        'base_grand_total' => $orderItem->price,
     ]);
 
     $invoiceItem = InvoiceItem::factory()->create([
-        'invoice_id'           => $invoice->id,
-        'order_item_id'        => $orderItem->id,
-        'name'                 => $orderItem->name,
-        'sku'                  => $orderItem->sku,
-        'qty'                  => 1,
-        'price'                => $orderItem->price,
-        'base_price'           => $orderItem->base_price,
-        'total'                => $orderItem->price,
-        'base_total'           => $orderItem->base_price,
-        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
-        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
-        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'name' => $orderItem->name,
+        'sku' => $orderItem->sku,
+        'qty' => 1,
+        'price' => $orderItem->price,
+        'base_price' => $orderItem->base_price,
+        'total' => $orderItem->price,
+        'base_total' => $orderItem->base_price,
+        'tax_amount' => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount' => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount' => (($orderItem->discount_amount / $orderItem->qty_ordered)),
         'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
-        'product_id'           => $orderItem->product_id,
-        'product_type'         => $orderItem->product_type,
-        'additional'           => $orderItem->additional,
+        'product_id' => $orderItem->product_id,
+        'product_type' => $orderItem->product_type,
+        'additional' => $orderItem->additional,
     ]);
 
     $orderTransaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
-        'type'           => 'cashondelivery',
+        'type' => 'cashondelivery',
         'payment_method' => 'cashondelivery',
-        'status'         => 'paid',
-        'status'         => $invoice->state,
-        'order_id'       => $invoice->order->id,
-        'invoice_id'     => $invoice->id,
-        'amount'         => $invoice->grand_total,
+        'status' => 'paid',
+        'status' => $invoice->state,
+        'order_id' => $invoice->order->id,
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->grand_total,
     ]);
 
     // Act and Assert.

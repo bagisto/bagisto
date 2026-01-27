@@ -19,8 +19,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -45,32 +45,32 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "50000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "50000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
         'uses_attribute_conditions' => 0,
     ]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -87,11 +87,11 @@ it('should fails the validation error when the certain inputs not provided when 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -111,8 +111,8 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -137,32 +137,32 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "50000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "50000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
         'uses_attribute_conditions' => 0,
     ]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -179,12 +179,12 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -212,8 +212,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -238,32 +238,32 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -280,11 +280,11 @@ it('should fails the validation error when the certain inputs not provided when 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -304,8 +304,8 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -330,32 +330,32 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -372,12 +372,12 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
@@ -403,8 +403,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -429,34 +429,34 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -475,11 +475,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -499,8 +499,8 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -525,34 +525,34 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -571,12 +571,12 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
@@ -602,8 +602,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -628,34 +628,34 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -674,11 +674,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -698,8 +698,8 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -724,34 +724,34 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -770,12 +770,12 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
@@ -801,8 +801,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -827,34 +827,34 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -870,11 +870,11 @@ it('should fails the validation error when the certain inputs not provided when 
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -903,8 +903,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -929,34 +929,34 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -972,11 +972,11 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1014,8 +1014,8 @@ it('should fails the validation error when certain inputs not provided when add 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1040,34 +1040,34 @@ it('should fails the validation error when certain inputs not provided when add 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1083,11 +1083,11 @@ it('should fails the validation error when certain inputs not provided when add 
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1116,8 +1116,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1142,34 +1142,34 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1185,11 +1185,11 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1227,8 +1227,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1253,34 +1253,34 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1296,11 +1296,11 @@ it('should fails the validation error when the certain inputs not provided when 
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1331,8 +1331,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1357,34 +1357,34 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1400,11 +1400,11 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1444,8 +1444,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1470,36 +1470,36 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1515,11 +1515,11 @@ it('should fails the validation error when the certain inputs not provided when 
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1550,8 +1550,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1576,36 +1576,36 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(20, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(20, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $bundleOptions = [];
@@ -1621,11 +1621,11 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     cart()->setCart($cart);
@@ -1667,19 +1667,19 @@ it('should check tax is applying for the bundle product into the cart for bundle
 
     $taxRate = TaxRate::factory()->create([
         'zip_code' => '',
-        'country'  => $countryCode = 'IN',
+        'country' => $countryCode = 'IN',
     ]);
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            4  => 'tax_category_id',
-            5  => 'new',
-            6  => 'featured',
+            4 => 'tax_category_id',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1717,24 +1717,24 @@ it('should check tax is applying for the bundle product into the cart for bundle
     }
 
     $cart = cart()->addProduct($product, [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]);
 
     CustomerAddress::factory()->create([
-        'email'        => $customer->email,
-        'country'      => $countryCode,
-        'cart_id'      => $cart->id,
+        'email' => $customer->email,
+        'country' => $countryCode,
+        'cart_id' => $cart->id,
         'address_type' => 'cart_billing',
     ]);
 
     CustomerAddress::factory()->create([
-        'email'        => $customer->email,
-        'country'      => $countryCode,
-        'cart_id'      => $cart->id,
+        'email' => $customer->email,
+        'country' => $countryCode,
+        'cart_id' => $cart->id,
         'address_type' => 'cart_shipping',
     ]);
 
@@ -1759,8 +1759,8 @@ it('should fails the validation error when the certain inputs not provided check
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1783,7 +1783,7 @@ it('should fails the validation error when the certain inputs not provided check
     $bundleOptions = [
         'bundle_option_quantities' => [],
 
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1792,10 +1792,10 @@ it('should fails the validation error when the certain inputs not provided check
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 2,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 1,
         ]);
 
@@ -1808,21 +1808,21 @@ it('should fails the validation error when the certain inputs not provided check
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -1832,8 +1832,8 @@ it('should check customer group price for guest customer with fixed price type f
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1856,7 +1856,7 @@ it('should check customer group price for guest customer with fixed price type f
     $bundleOptions = [
         'bundle_option_quantities' => [],
 
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1865,10 +1865,10 @@ it('should check customer group price for guest customer with fixed price type f
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 2,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 1,
         ]);
 
@@ -1881,12 +1881,12 @@ it('should check customer group price for guest customer with fixed price type f
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1897,10 +1897,10 @@ it('should check customer group price for guest customer with fixed price type f
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -1910,8 +1910,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1929,7 +1929,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -1938,10 +1938,10 @@ it('should fails the validation error when the certain inputs not provided when 
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 10,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 10,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 2,
         ]);
 
@@ -1958,21 +1958,21 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -1982,8 +1982,8 @@ it('should check customer group price for general customer with fixed price type
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2001,7 +2001,7 @@ it('should check customer group price for general customer with fixed price type
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -2010,10 +2010,10 @@ it('should check customer group price for general customer with fixed price type
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 10,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 10,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 2,
         ]);
 
@@ -2030,12 +2030,12 @@ it('should check customer group price for general customer with fixed price type
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2046,10 +2046,10 @@ it('should check customer group price for general customer with fixed price type
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2059,8 +2059,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2079,7 +2079,7 @@ it('should fails the validation error when the certain inputs not provided when 
     $bundleOptions = [
         'bundle_option_quantities' => [],
 
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -2088,10 +2088,10 @@ it('should fails the validation error when the certain inputs not provided when 
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 50,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 50,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 3,
         ]);
 
@@ -2108,21 +2108,21 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2132,8 +2132,8 @@ it('should check customer group price for wholesaler customer with fixed price t
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2152,7 +2152,7 @@ it('should check customer group price for wholesaler customer with fixed price t
     $bundleOptions = [
         'bundle_option_quantities' => [],
 
-        'bundle_options'           => [],
+        'bundle_options' => [],
     ];
 
     $grandTotal = 0;
@@ -2161,10 +2161,10 @@ it('should check customer group price for wholesaler customer with fixed price t
 
     foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 50,
-            'value_type'        => 'fixed',
-            'value'             => rand(20, 50),
-            'product_id'        => $option->bundle_option_products[0]->product_id,
+            'qty' => $quantity = 50,
+            'value_type' => 'fixed',
+            'value' => rand(20, 50),
+            'product_id' => $option->bundle_option_products[0]->product_id,
             'customer_group_id' => 3,
         ]);
 
@@ -2181,12 +2181,12 @@ it('should check customer group price for wholesaler customer with fixed price t
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2199,10 +2199,10 @@ it('should check customer group price for wholesaler customer with fixed price t
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2212,8 +2212,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2235,8 +2235,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $productCustomerGroupPrices = [];
@@ -2245,10 +2245,10 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 1,
         ]);
 
@@ -2261,21 +2261,21 @@ it('should fails the validation error when the certain inputs not provided when 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2285,8 +2285,8 @@ it('should check customer group price for guest customer with discount price typ
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2308,8 +2308,8 @@ it('should check customer group price for guest customer with discount price typ
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $productCustomerGroupPrices = [];
@@ -2318,10 +2318,10 @@ it('should check customer group price for guest customer with discount price typ
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 1,
         ]);
 
@@ -2334,12 +2334,12 @@ it('should check customer group price for guest customer with discount price typ
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2349,10 +2349,10 @@ it('should check customer group price for guest customer with discount price typ
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2362,8 +2362,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2381,8 +2381,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $customer = Customer::factory()->create();
@@ -2393,10 +2393,10 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 2,
         ]);
 
@@ -2411,21 +2411,21 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2435,8 +2435,8 @@ it('should check customer group price for general customer with discount price t
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2454,8 +2454,8 @@ it('should check customer group price for general customer with discount price t
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $customer = Customer::factory()->create();
@@ -2466,10 +2466,10 @@ it('should check customer group price for general customer with discount price t
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 2,
         ]);
 
@@ -2484,12 +2484,12 @@ it('should check customer group price for general customer with discount price t
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2501,10 +2501,10 @@ it('should check customer group price for general customer with discount price t
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2514,8 +2514,8 @@ it('should fails the validation error when the certain inputs not provided when 
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2533,8 +2533,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -2545,10 +2545,10 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 3,
         ]);
 
@@ -2563,21 +2563,21 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2587,8 +2587,8 @@ it('should check customer group price for wholesaler customer with discount pric
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2606,8 +2606,8 @@ it('should check customer group price for wholesaler customer with discount pric
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'grand_total'              => [],
+        'bundle_options' => [],
+        'grand_total' => [],
     ];
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -2618,10 +2618,10 @@ it('should check customer group price for wholesaler customer with discount pric
         $bundleProduct = $option->bundle_option_products[0]->product;
 
         $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => $quantity = 2,
-            'value_type'        => 'discount',
-            'value'             => rand(20, 50),
-            'product_id'        => $bundleProduct->id,
+            'qty' => $quantity = 2,
+            'value_type' => 'discount',
+            'value' => rand(20, 50),
+            'product_id' => $bundleProduct->id,
             'customer_group_id' => 3,
         ]);
 
@@ -2636,12 +2636,12 @@ it('should check customer group price for wholesaler customer with discount pric
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2653,10 +2653,10 @@ it('should check customer group price for wholesaler customer with discount pric
 
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
-            'qty'               => $productCustomerGroupPrice->qty,
-            'value_type'        => $productCustomerGroupPrice->value_type,
-            'value'             => $productCustomerGroupPrice->value,
-            'product_id'        => $productCustomerGroupPrice->product_id,
+            'qty' => $productCustomerGroupPrice->qty,
+            'value_type' => $productCustomerGroupPrice->value_type,
+            'value' => $productCustomerGroupPrice->value,
+            'product_id' => $productCustomerGroupPrice->product_id,
             'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
         ]);
     }
@@ -2669,14 +2669,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2698,8 +2698,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     $product->load('bundle_options.product');
@@ -2714,11 +2714,11 @@ it('should fails the validation error when the certain inputs not provided when 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2745,14 +2745,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2774,8 +2774,8 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     $product->load('bundle_options.product');
@@ -2790,12 +2790,12 @@ it('should check discount price if catalog rule applied for percentage price for
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2829,14 +2829,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2856,8 +2856,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -2872,11 +2872,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2905,14 +2905,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2932,8 +2932,8 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -2948,12 +2948,12 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2987,14 +2987,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3014,8 +3014,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3030,11 +3030,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -3063,14 +3063,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3090,8 +3090,8 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3106,12 +3106,12 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -3143,15 +3143,15 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3173,8 +3173,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3187,11 +3187,11 @@ it('should fails the validation error when the certain inputs not provided when 
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -3218,15 +3218,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3248,8 +3248,8 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3262,12 +3262,12 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -3301,15 +3301,15 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3331,8 +3331,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3347,11 +3347,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -3380,15 +3380,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3410,8 +3410,8 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3426,12 +3426,12 @@ it('should check discount price if catalog rule applied for fixed price for bund
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -3465,15 +3465,15 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3495,8 +3495,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3511,11 +3511,11 @@ it('should fails the validation error when the certain inputs not provided when 
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -3544,15 +3544,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3574,8 +3574,8 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
-        'bundle_options'           => [],
-        'prices'                   => [],
+        'bundle_options' => [],
+        'prices' => [],
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
@@ -3590,12 +3590,12 @@ it('should check discount price if catalog rule applied for fixed price for bund
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
-        'product_id'        => $product->id,
-        'quantity'          => 1,
-        'is_buy_now'        => '0',
-        'rating'            => '0',
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'is_buy_now' => '0',
+        'rating' => '0',
         'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
-        'bundle_options'    => $bundleOptions['bundle_options'],
+        'bundle_options' => $bundleOptions['bundle_options'],
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -3627,15 +3627,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3674,9 +3674,9 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 1,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);
@@ -3692,15 +3692,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3737,9 +3737,9 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 2,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);
@@ -3755,15 +3755,15 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3800,9 +3800,9 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 3,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);
@@ -3816,14 +3816,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -3862,9 +3862,9 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 1,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);
@@ -3880,14 +3880,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3923,9 +3923,9 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 2,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);
@@ -3941,14 +3941,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3985,9 +3985,9 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price'             => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 3,
-                    'catalog_rule_id'   => $catalogRule->id,
+                    'catalog_rule_id' => $catalogRule->id,
                 ],
             ],
         ]);

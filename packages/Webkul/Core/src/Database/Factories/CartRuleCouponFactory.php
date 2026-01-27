@@ -21,11 +21,11 @@ class CartRuleCouponFactory extends Factory
     public function definition(): array
     {
         return [
-            'code'               => Str::uuid(),
-            'usage_limit'        => 100,
+            'code' => Str::uuid(),
+            'usage_limit' => 100,
             'usage_per_customer' => 100,
-            'type'               => 0,
-            'is_primary'         => 1,
+            'type' => 0,
+            'is_primary' => 1,
         ];
     }
 }

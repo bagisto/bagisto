@@ -25,7 +25,7 @@ it('should fails validation errors when email and password not provided when log
 it('should fails validation errors when email is not valid', function () {
     // Act and Assert.
     postJson(route('shop.customer.session.create'), [
-        'email'    => fake()->word(),
+        'email' => fake()->word(),
         'password' => 'shop123',
     ])
         ->assertJsonValidationErrorFor('email')
@@ -35,7 +35,7 @@ it('should fails validation errors when email is not valid', function () {
 it('should fails validation errors when password length not valid', function () {
     // Act and Assert.
     postJson(route('shop.customer.session.create'), [
-        'email'    => fake()->email(),
+        'email' => fake()->email(),
         'password' => 'shop',
     ])
         ->assertJsonValidationErrorFor('password')
@@ -50,7 +50,7 @@ it('successfully logins a customer', function () {
 
     // Act and Assert.
     post(route('shop.customer.session.create'), [
-        'email'    => $customer->email,
+        'email' => $customer->email,
         'password' => $password,
     ])
         ->assertRedirectToRoute('shop.home.index')
@@ -67,7 +67,7 @@ it('fails to log in a customer if the email is invalid', function () {
 
     // Act and Assert.
     post(route('shop.customer.session.create'), [
-        'email'    => 'wrong@email.com',
+        'email' => 'wrong@email.com',
         'password' => $password,
     ])
         ->assertRedirectToRoute('shop.home.index')
@@ -80,7 +80,7 @@ it('fails to log in a customer if the password is invalid', function () {
 
     // Act and Assert.
     post(route('shop.customer.session.create'), [
-        'email'    => $customer->email,
+        'email' => $customer->email,
         'password' => 'WRONG_PASSWORD',
     ])
         ->assertRedirectToRoute('shop.home.index')

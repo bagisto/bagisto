@@ -67,10 +67,10 @@ class ProductMediaRepository extends Repository
                     }
 
                     $this->create([
-                        'type'       => $uploadFileType,
-                        'path'       => $path,
+                        'type' => $uploadFileType,
+                        'path' => $path,
                         'product_id' => $product->id,
-                        'position'   => ++$position,
+                        'position' => ++$position,
                     ]);
                 } else {
                     if (is_numeric($index = $previousIds->search($indexOrModelId))) {

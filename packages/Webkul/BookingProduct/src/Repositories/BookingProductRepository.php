@@ -30,11 +30,11 @@ class BookingProductRepository extends Repository
         parent::__construct($container);
 
         $this->typeRepositories = [
-            'default'     => $bookingProductDefaultSlotRepository,
+            'default' => $bookingProductDefaultSlotRepository,
             'appointment' => $bookingProductAppointmentSlotRepository,
-            'event'       => $bookingProductEventTicketRepository,
-            'rental'      => $bookingProductRentalSlotRepository,
-            'table'       => $bookingProductTableSlotRepository,
+            'event' => $bookingProductEventTicketRepository,
+            'rental' => $bookingProductRentalSlotRepository,
+            'table' => $bookingProductTableSlotRepository,
         ];
     }
 
@@ -238,7 +238,7 @@ class BookingProductRepository extends Repository
             if (! $isOverLapping) {
                 $tempSlots[] = [
                     'from' => $from,
-                    'to'   => $to,
+                    'to' => $to,
                 ];
 
                 $validSlots[] = $timeInterval;

@@ -20,7 +20,7 @@ class ProductGroupedProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'qty'        => rand(10, 50),
+            'qty' => rand(10, 50),
             'sort_order' => 0,
         ];
     }

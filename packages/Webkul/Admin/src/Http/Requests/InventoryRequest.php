@@ -24,7 +24,7 @@ class InventoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'inventories'   => 'required|array',
+            'inventories' => 'required|array',
             'inventories.*' => 'required|numeric|min:0',
         ];
     }
@@ -38,8 +38,8 @@ class InventoryRequest extends FormRequest
     {
         return [
             'inventories.*.required' => __('admin::app.catalog.products.validations.quantity-required'),
-            'inventories.*.integer'  => __('admin::app.catalog.products.validations.quantity-integer'),
-            'inventories.*.min'      => __('admin::app.catalog.products.validations.quantity-min-zero'),
+            'inventories.*.integer' => __('admin::app.catalog.products.validations.quantity-integer'),
+            'inventories.*.min' => __('admin::app.catalog.products.validations.quantity-min-zero'),
         ];
     }
 }

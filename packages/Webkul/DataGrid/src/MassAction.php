@@ -24,10 +24,10 @@ class MassAction
     public function toArray()
     {
         return [
-            'icon'    => $this->icon,
-            'title'   => $this->title,
-            'method'  => $this->method,
-            'url'     => $this->url,
+            'icon' => $this->icon,
+            'title' => $this->title,
+            'method' => $this->method,
+            'url' => $this->url,
             'options' => $this->options,
         ];
     }

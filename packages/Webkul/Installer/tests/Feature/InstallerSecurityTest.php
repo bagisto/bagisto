@@ -13,8 +13,8 @@ it('should block access to env file setup endpoint when application is already i
     // Act and Assert.
     $response = post(route('installer.env_file_setup'), [
         'db_hostname' => 'localhost',
-        'db_port'     => '3306',
-        'db_name'     => 'test_db',
+        'db_port' => '3306',
+        'db_name' => 'test_db',
         'db_username' => 'root',
         'db_password' => '',
     ]);
@@ -32,11 +32,11 @@ it('should block access to run seeder endpoint when application is already insta
     // Act and Assert.
     post(route('installer.run_seeder'), [
         'selectedParameters' => [
-            'allowed_locales'    => ['en'],
+            'allowed_locales' => ['en'],
             'allowed_currencies' => ['USD'],
         ],
         'allParameters' => [
-            'app_locale'   => 'en',
+            'app_locale' => 'en',
             'app_currency' => 'USD',
         ],
     ])
@@ -52,8 +52,8 @@ it('should block access to download sample endpoint when application is already 
 it('should block access to admin config setup endpoint when application is already installed', function () {
     // Act and Assert.
     post(route('installer.admin_config_setup'), [
-        'admin'    => 'Admin User',
-        'email'    => 'admin@example.com',
+        'admin' => 'Admin User',
+        'email' => 'admin@example.com',
         'password' => 'admin123',
     ])
         ->assertRedirect(route('shop.home.index'));
@@ -62,7 +62,7 @@ it('should block access to admin config setup endpoint when application is alrea
 it('should block access to sample products setup endpoint when application is already installed', function () {
     // Act and Assert.
     post(route('installer.sample_products_setup'), [
-        'selectedLocales'    => ['en'],
+        'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
     ])
         ->assertRedirect(route('shop.home.index'));
@@ -72,8 +72,8 @@ it('should return 403 for ajax request to env file setup endpoint when already i
     // Act and Assert.
     post(route('installer.env_file_setup'), [
         'db_hostname' => 'localhost',
-        'db_port'     => '3306',
-        'db_name'     => 'test_db',
+        'db_port' => '3306',
+        'db_name' => 'test_db',
         'db_username' => 'root',
         'db_password' => '',
     ], [
@@ -100,11 +100,11 @@ it('should return 403 for ajax request to run seeder endpoint when already insta
     // Act and Assert.
     post(route('installer.run_seeder'), [
         'selectedParameters' => [
-            'allowed_locales'    => ['en'],
+            'allowed_locales' => ['en'],
             'allowed_currencies' => ['USD'],
         ],
         'allParameters' => [
-            'app_locale'   => 'en',
+            'app_locale' => 'en',
             'app_currency' => 'USD',
         ],
     ], [
@@ -130,8 +130,8 @@ it('should return 403 for ajax request to download sample endpoint when already 
 it('should return 403 for ajax request to admin config setup endpoint when already installed', function () {
     // Act and Assert.
     post(route('installer.admin_config_setup'), [
-        'admin'    => 'Admin User',
-        'email'    => 'admin@example.com',
+        'admin' => 'Admin User',
+        'email' => 'admin@example.com',
         'password' => 'admin123',
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
@@ -145,7 +145,7 @@ it('should return 403 for ajax request to admin config setup endpoint when alrea
 it('should return 403 for ajax request to sample products setup endpoint when already installed', function () {
     // Act and Assert.
     post(route('installer.sample_products_setup'), [
-        'selectedLocales'    => ['en'],
+        'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
     ], [
         'X-Requested-With' => 'XMLHttpRequest',

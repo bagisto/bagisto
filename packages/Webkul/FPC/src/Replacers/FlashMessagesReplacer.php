@@ -42,7 +42,7 @@ class FlashMessagesReplacer implements Replacer
         foreach (['success', 'warning', 'error', 'info'] as $type) {
             if (session()->has($type)) {
                 $flashes[] = [
-                    'type'    => $type,
+                    'type' => $type,
                     'message' => session($type),
                 ];
             }

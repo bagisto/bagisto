@@ -50,20 +50,20 @@ class ElasticSearchRepository
 
         $results = Elasticsearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
-            'body'  => [
-                'from'          => $options['from'],
-                'size'          => $options['limit'],
+            'body' => [
+                'from' => $options['from'],
+                'size' => $options['limit'],
                 'stored_fields' => [],
-                'query'         => [
+                'query' => [
                     'bool' => $filters ?: new \stdClass,
                 ],
-                'sort'          => $this->getSortOptions($options),
+                'sort' => $this->getSortOptions($options),
             ],
         ]);
 
         return [
             'total' => $results['hits']['total']['value'],
-            'ids'   => collect($results['hits']['hits'])->pluck('_id')->toArray(),
+            'ids' => collect($results['hits']['hits'])->pluck('_id')->toArray(),
         ];
     }
 
@@ -78,12 +78,12 @@ class ElasticSearchRepository
 
         $results = Elasticsearch::search([
             'index' => $this->getIndexName(),
-            'body'  => [
+            'body' => [
                 'suggest' => [
                     'name_suggest' => [
                         'text' => $queryText,
                         'term' => [
-                            'field'        => 'name',
+                            'field' => 'name',
                             'suggest_mode' => 'always',
                         ],
                     ],
@@ -165,7 +165,7 @@ class ElasticSearchRepository
 
                 return [
                     'query_string' => [
-                        'query'         => implode(' OR ', $synonyms),
+                        'query' => implode(' OR ', $synonyms),
                         'default_field' => $attribute->code,
                     ],
                 ];
@@ -202,9 +202,9 @@ class ElasticSearchRepository
         if ($options['order'] == 'rand') {
             return [
                 '_script' => [
-                    'type'   => 'number',
+                    'type' => 'number',
                     'script' => 'Math.random()',
-                    'order'  => 'asc',
+                    'order' => 'asc',
                 ],
             ];
         }
@@ -246,9 +246,9 @@ class ElasticSearchRepository
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
         $results = Elasticsearch::search([
-            'index'         => $params['index'] ?? $this->getIndexName(),
-            'body'          => [
-                'size'  => 0,
+            'index' => $params['index'] ?? $this->getIndexName(),
+            'body' => [
+                'size' => 0,
                 'query' => [
                     'bool' => $filters ?: new \stdClass,
                 ],
@@ -283,9 +283,9 @@ class ElasticSearchRepository
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
         $results = Elasticsearch::search([
-            'index'         => $params['index'] ?? $this->getIndexName(),
-            'body'          => [
-                'size'  => 0,
+            'index' => $params['index'] ?? $this->getIndexName(),
+            'body' => [
+                'size' => 0,
                 'query' => [
                     'bool' => $filters ?: new \stdClass,
                 ],

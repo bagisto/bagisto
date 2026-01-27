@@ -12,22 +12,22 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'catalog.product.create.after'  => [
+        'catalog.product.create.after' => [
             'Webkul\Product\Listeners\Product@afterCreate',
         ],
-        'catalog.product.update.after'  => [
+        'catalog.product.update.after' => [
             'Webkul\Product\Listeners\Product@afterUpdate',
         ],
         'catalog.product.delete.before' => [
             'Webkul\Product\Listeners\Product@beforeDelete',
         ],
-        'checkout.order.save.after'     => [
+        'checkout.order.save.after' => [
             'Webkul\Product\Listeners\Order@afterCancelOrCreate',
         ],
-        'sales.order.cancel.after'      => [
+        'sales.order.cancel.after' => [
             'Webkul\Product\Listeners\Order@afterCancelOrCreate',
         ],
-        'sales.refund.save.after'       => [
+        'sales.refund.save.after' => [
             'Webkul\Product\Listeners\Refund@afterCreate',
         ],
     ];

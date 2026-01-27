@@ -77,8 +77,8 @@ class DefaultSlot extends Booking
             $endDate = Carbon::createFromTimeString($endDate->format('Y-m-d').' '.$timeDuration['to'].':00');
 
             $slots[] = [
-                'from'      => $startDate->format('h:i A'),
-                'to'        => $endDate->format('h:i A'),
+                'from' => $startDate->format('h:i A'),
+                'to' => $endDate->format('h:i A'),
                 'timestamp' => $startDate->getTimestamp().'-'.$endDate->getTimestamp(),
             ];
         }

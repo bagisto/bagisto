@@ -164,7 +164,7 @@ class Inventory extends AbstractIndexer
     public function getIndices()
     {
         return [
-            'qty'        => $this->getQuantity(),
+            'qty' => $this->getQuantity(),
             'product_id' => $this->product->id,
             'channel_id' => $this->channel->id,
         ];

@@ -25,9 +25,9 @@ class SocialiteManager extends BaseSocialiteManager
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
-                'client_id'     => $clientId,
+                'client_id' => $clientId,
                 'client_secret' => $clientSecret,
-                'redirect'      => $callbackUrl,
+                'redirect' => $callbackUrl,
             ];
         } else {
             $config = $this->config->get('services.github');
@@ -51,9 +51,9 @@ class SocialiteManager extends BaseSocialiteManager
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
-                'client_id'     => $clientId,
+                'client_id' => $clientId,
                 'client_secret' => $clientSecret,
-                'redirect'      => $callbackUrl,
+                'redirect' => $callbackUrl,
             ];
         } else {
             $config = $this->config->get('services.facebook');
@@ -77,9 +77,9 @@ class SocialiteManager extends BaseSocialiteManager
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
-                'client_id'     => $clientId,
+                'client_id' => $clientId,
                 'client_secret' => $clientSecret,
-                'redirect'      => $callbackUrl,
+                'redirect' => $callbackUrl,
             ];
         } else {
             $config = $this->config->get('services.google');
@@ -103,9 +103,9 @@ class SocialiteManager extends BaseSocialiteManager
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
-                'client_id'     => $clientId,
+                'client_id' => $clientId,
                 'client_secret' => $clientSecret,
-                'redirect'      => $callbackUrl,
+                'redirect' => $callbackUrl,
             ];
         } else {
             $config = $this->config->get('services.linkedin-openid');
@@ -129,9 +129,9 @@ class SocialiteManager extends BaseSocialiteManager
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
-                'client_id'     => $clientId,
+                'client_id' => $clientId,
                 'client_secret' => $clientSecret,
-                'redirect'      => $callbackUrl,
+                'redirect' => $callbackUrl,
             ];
         } else {
             $config = $this->config->get('services.twitter');

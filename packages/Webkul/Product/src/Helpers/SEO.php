@@ -15,11 +15,11 @@ class SEO
     public function getProductJsonLd($product)
     {
         $data = [
-            '@context'    => 'https://schema.org/',
-            '@type'       => 'Product',
-            'name'        => $product->name,
+            '@context' => 'https://schema.org/',
+            '@type' => 'Product',
+            'name' => $product->name,
             'description' => $product->description,
-            'url'         => route('shop.product_or_category.index', $product->url_key),
+            'url' => route('shop.product_or_category.index', $product->url_key),
         ];
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_sku')) {
@@ -105,15 +105,15 @@ class SEO
 
         foreach ($product->reviews()->where('status', 'approved')->get() as $review) {
             $reviews[] = [
-                '@type'        => 'Review',
+                '@type' => 'Review',
                 'reviewRating' => [
-                    '@type'       => 'Rating',
+                    '@type' => 'Rating',
                     'ratingValue' => $review->rating,
-                    'bestRating'  => '5',
+                    'bestRating' => '5',
                 ],
-                'author'       => [
+                'author' => [
                     '@type' => 'Person',
-                    'name'  => $review->name,
+                    'name' => $review->name,
                 ],
             ];
         }
@@ -132,7 +132,7 @@ class SEO
         $reviewHelper = app('Webkul\Product\Helpers\Review');
 
         return [
-            '@type'       => 'AggregateRating',
+            '@type' => 'AggregateRating',
             'ratingValue' => $reviewHelper->getAverageRating($product),
             'reviewCount' => $reviewHelper->getTotalReviews($product),
         ];
@@ -147,10 +147,10 @@ class SEO
     public function getProductOffers($product)
     {
         return [
-            '@type'         => 'Offer',
+            '@type' => 'Offer',
             'priceCurrency' => core()->getCurrentCurrencyCode(),
-            'price'         => $product->getTypeInstance()->getMinimalPrice(),
-            'availability'  => 'https://schema.org/InStock',
+            'price' => $product->getTypeInstance()->getMinimalPrice(),
+            'availability' => 'https://schema.org/InStock',
         ];
     }
 
@@ -163,15 +163,15 @@ class SEO
     public function getCategoryJsonLd($category)
     {
         $data = [
-            '@type'    => 'WebSite',
+            '@type' => 'WebSite',
             '@context' => 'http://schema.org',
-            'url'      => config('app.url'),
+            'url' => config('app.url'),
         ];
 
         if (core()->getConfigData('catalog.rich_snippets.categories.show_search_input_field')) {
             $data['potentialAction'] = [
-                '@type'       => 'SearchAction',
-                'target'      => config('app.url').'/search/?term={search_term_string}',
+                '@type' => 'SearchAction',
+                'target' => config('app.url').'/search/?term={search_term_string}',
                 'query-input' => 'required name=search_term_string',
             ];
         }

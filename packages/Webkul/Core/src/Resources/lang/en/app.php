@@ -3,14 +3,14 @@
 return [
     'path-hint' => [
         'template' => 'Template',
-        'parents'  => 'Parents',
+        'parents' => 'Parents',
     ],
 
-    'currency-position'  => [
+    'currency-position' => [
         'options' => [
-            'left'             => 'Left',
-            'left-with-space'  => 'Left With Space',
-            'right'            => 'Right',
+            'left' => 'Left',
+            'left-with-space' => 'Left With Space',
+            'right' => 'Right',
             'right-with-space' => 'Right With Space',
         ],
     ],

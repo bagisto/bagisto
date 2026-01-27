@@ -167,20 +167,20 @@ class SystemConfig
         if (! empty($fields['channel_based'])) {
             if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
+                    'code' => $field,
                     'channel_code' => $channel,
-                    'locale_code'  => $locale,
+                    'locale_code' => $locale,
                 ]);
             } else {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
+                    'code' => $field,
                     'channel_code' => $channel,
                 ]);
             }
         } else {
             if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'        => $field,
+                    'code' => $field,
                     'locale_code' => $locale,
                 ]);
             } else {

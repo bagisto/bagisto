@@ -282,7 +282,7 @@ class CategoryRepository extends Repository
         foreach ($categories as $key => $category) {
             if (! empty($category->name)) {
                 $trimmed[$key] = [
-                    'id'   => $category->id,
+                    'id' => $category->id,
                     'name' => $category->name,
                     'slug' => $category->slug,
                 ];

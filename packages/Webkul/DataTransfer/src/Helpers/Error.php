@@ -53,8 +53,8 @@ class Error
         $message = $this->getErrorMessage($code, $message, $columnName);
 
         $this->items[$rowNumber][] = [
-            'code'    => $code,
-            'column'  => $columnName,
+            'code' => $code,
+            'column' => $columnName,
             'message' => $message,
         ];
 

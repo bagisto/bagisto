@@ -20,9 +20,9 @@ class ProductBundleOptionsFactory extends Factory
     public function definition(): array
     {
         return [
-            'type'        => $this->faker->randomElement(['select', 'radio', 'checkbox', 'multiselect']),
+            'type' => $this->faker->randomElement(['select', 'radio', 'checkbox', 'multiselect']),
             'is_required' => 0,
-            'sort_order'  => 0,
+            'sort_order' => 0,
         ];
     }
 }

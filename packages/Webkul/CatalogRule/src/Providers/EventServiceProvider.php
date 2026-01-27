@@ -12,23 +12,23 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'promotions.catalog_rule.create.after'  => [
+        'promotions.catalog_rule.create.after' => [
             'Webkul\CatalogRule\Listeners\CatalogRule@afterUpdateCreate',
         ],
 
-        'promotions.catalog_rule.update.after'  => [
+        'promotions.catalog_rule.update.after' => [
             'Webkul\CatalogRule\Listeners\CatalogRule@afterUpdateCreate',
         ],
 
-        'promotions.catalog_rule.update.before'  => [
+        'promotions.catalog_rule.update.before' => [
             'Webkul\CatalogRule\Listeners\CatalogRule@beforeUpdate',
         ],
 
-        'promotions.catalog_rule.delete.before'  => [
+        'promotions.catalog_rule.delete.before' => [
             'Webkul\CatalogRule\Listeners\CatalogRule@beforeDelete',
         ],
 
-        'catalog.product.update.after'  => [
+        'catalog.product.update.after' => [
             'Webkul\CatalogRule\Listeners\Product@afterUpdate',
         ],
     ];

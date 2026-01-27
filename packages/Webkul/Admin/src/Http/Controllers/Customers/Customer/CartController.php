@@ -28,7 +28,7 @@ class CartController extends Controller
 
         try {
             $cart = Cart::createCart([
-                'customer'  => $customer,
+                'customer' => $customer,
                 'is_active' => false,
             ]);
 

@@ -30,10 +30,10 @@ class Ollama
             'headers' => [
                 'Accept' => 'application/json',
             ],
-            'json'    => [
-                'model'  => $this->model,
+            'json' => [
+                'model' => $this->model,
                 'prompt' => $this->prompt,
-                'raw'    => $this->raw,
+                'raw' => $this->raw,
                 'stream' => $this->stream,
             ],
         ]);

@@ -69,7 +69,7 @@ class ShipmentController extends Controller
         }
 
         $this->validate(request(), [
-            'shipment.source'    => 'required',
+            'shipment.source' => 'required',
             'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 

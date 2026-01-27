@@ -3,7 +3,7 @@
 return [
     'validations' => [
         'captcha' => [
-            'captcha'  => '¡Algo salió mal! Inténtalo de nuevo.',
+            'captcha' => '¡Algo salió mal! Inténtalo de nuevo.',
             'required' => 'Seleccione CAPTCHA',
         ],
 

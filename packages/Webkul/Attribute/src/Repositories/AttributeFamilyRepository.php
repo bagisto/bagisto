@@ -137,7 +137,7 @@ class AttributeFamilyRepository extends Repository
                 || $attributeFamily->name != ''
             ) {
                 $trimmed[$key] = [
-                    'id'   => $attributeFamily->id,
+                    'id' => $attributeFamily->id,
                     'code' => $attributeFamily->code,
                     'name' => $attributeFamily->name,
                 ];

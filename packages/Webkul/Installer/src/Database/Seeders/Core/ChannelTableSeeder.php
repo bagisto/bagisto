@@ -27,15 +27,15 @@ class ChannelTableSeeder extends Seeder
 
         DB::table('channels')->insert([
             [
-                'id'                => 1,
-                'code'              => 'default',
-                'theme'             => 'default',
-                'hostname'          => config('app.url'),
-                'root_category_id'  => 1,
+                'id' => 1,
+                'code' => 'default',
+                'theme' => 'default',
+                'hostname' => config('app.url'),
+                'root_category_id' => 1,
                 'default_locale_id' => 1,
-                'base_currency_id'  => 1,
-                'created_at'        => now(),
-                'updated_at'        => now(),
+                'base_currency_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 
@@ -47,12 +47,12 @@ class ChannelTableSeeder extends Seeder
             DB::table('channel_translations')->insert([
                 [
                     'channel_id' => 1,
-                    'locale'     => $locale,
-                    'name'       => trans('installer::app.seeders.core.channels.name', [], $locale),
-                    'home_seo'   => json_encode([
-                        'meta_title'       => trans('installer::app.seeders.core.channels.meta-title', [], $locale),
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.core.channels.name', [], $locale),
+                    'home_seo' => json_encode([
+                        'meta_title' => trans('installer::app.seeders.core.channels.meta-title', [], $locale),
                         'meta_description' => trans('installer::app.seeders.core.channels.meta-description', [], $locale),
-                        'meta_keywords'    => trans('installer::app.seeders.core.channels.meta-keywords', [], $locale),
+                        'meta_keywords' => trans('installer::app.seeders.core.channels.meta-keywords', [], $locale),
                     ]),
                 ],
             ]);
@@ -63,7 +63,7 @@ class ChannelTableSeeder extends Seeder
         foreach ($currencies as $currency) {
             DB::table('channel_currencies')->insert([
                 [
-                    'channel_id'  => 1,
+                    'channel_id' => 1,
                     'currency_id' => $currency->id,
                 ],
             ]);
@@ -75,13 +75,13 @@ class ChannelTableSeeder extends Seeder
             DB::table('channel_locales')->insert([
                 [
                     'channel_id' => 1,
-                    'locale_id'  => $locale->id,
+                    'locale_id' => $locale->id,
                 ],
             ]);
         }
 
         DB::table('channel_inventory_sources')->insert([
-            'channel_id'          => 1,
+            'channel_id' => 1,
             'inventory_source_id' => 1,
         ]);
     }

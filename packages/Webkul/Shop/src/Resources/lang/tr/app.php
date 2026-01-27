@@ -29,8 +29,8 @@ return [
         ],
 
         'login-form' => [
-            'bagisto'             => 'Bagisto',
-            'button-title'        => 'Oturum Aç',
+            'bagisto' => 'Bagisto',
+            'button-title' => 'Oturum Aç',
             'create-your-account' => 'Hesabınızı oluşturun',
             'email'               => 'E-posta',
             'footer'              => '© Telif Hakkı 2010 - :current_year, Webkul Software (Hindistan\'da kayıtlı). Tüm hakları saklıdır.',
@@ -169,7 +169,7 @@ return [
             ],
 
             'orders' => [
-                'action'      => 'İşlem',
+                'action' => 'İşlem',
                 'action-view' => 'Görüntüle',
                 'empty-order' => 'Henüz bir sipariş vermediniz.',
                 'order'       => 'Sipariş',
@@ -382,7 +382,7 @@ return [
                 'success-verify-email-unsent' => 'Doğrulama e-postası gönderilemedi.',
                 'unable-to-sent'              => 'E-posta gönderilemiyor.',
 
-                'index'   => [
+                'index' => [
                     'create-btn' => 'Talep Oluştur',
                     'html'       => 'HTML',
                     'pdf'        => 'PDF',
@@ -390,31 +390,31 @@ return [
 
                     'modal' => [
                         'message' => 'Mesaj',
-                        'save'    => 'Kaydet',
-                        'title'   => 'Yeni Talep Oluştur',
+                        'save' => 'Kaydet',
+                        'title' => 'Yeni Talep Oluştur',
 
-                        'type'    => [
+                        'type' => [
                             'choose' => 'Seçiniz',
                             'delete' => 'Sil',
-                            'title'  => 'Tür',
+                            'title' => 'Tür',
                             'update' => 'Güncelle',
                         ],
                     ],
 
                     'datagrid' => [
-                        'completed'  => 'Tamamlandı',
-                        'date'       => 'Tarih',
-                        'declined'   => 'Reddedildi',
-                        'delete'     => 'Sil',
-                        'id'         => 'ID',
-                        'message'    => 'Mesaj',
-                        'pending'    => 'Beklemede',
+                        'completed' => 'Tamamlandı',
+                        'date' => 'Tarih',
+                        'declined' => 'Reddedildi',
+                        'delete' => 'Sil',
+                        'id' => 'ID',
+                        'message' => 'Mesaj',
+                        'pending' => 'Beklemede',
                         'processing' => 'İşleniyor',
                         'revoke-btn' => 'İptal Et',
-                        'revoked'    => 'İptal Edildi',
-                        'status'     => 'Durum',
-                        'type'       => 'Tür',
-                        'update'     => 'Güncelle',
+                        'revoked' => 'İptal Edildi',
+                        'status' => 'Durum',
+                        'type' => 'Tür',
+                        'update' => 'Güncelle',
                     ],
                 ],
 
@@ -422,22 +422,22 @@ return [
                     'title' => 'Mağaza Görünümü',
 
                     'account-info' => [
-                        'dob'          => 'Doğum Tarihi',
-                        'email'        => 'E-posta',
-                        'first-name'   => 'Ad',
-                        'gender'       => 'Cinsiyet',
-                        'last-name'    => 'Soyad',
-                        'phone'        => 'Telefon',
-                        'title'        => 'Hesap Bilgileri',
+                        'dob' => 'Doğum Tarihi',
+                        'email' => 'E-posta',
+                        'first-name' => 'Ad',
+                        'gender' => 'Cinsiyet',
+                        'last-name' => 'Soyad',
+                        'phone' => 'Telefon',
+                        'title' => 'Hesap Bilgileri',
                     ],
 
                     'address-info' => [
-                        'address'    => 'Adres',
-                        'address1'   => 'Adres 1',
-                        'address2'   => 'Adres 2',
-                        'city'       => 'Şehir',
-                        'company'    => 'Şirket',
-                        'country'    => 'Ülke',
+                        'address' => 'Adres',
+                        'address1' => 'Adres 1',
+                        'address2' => 'Adres 2',
+                        'city' => 'Şehir',
+                        'company' => 'Şirket',
+                        'country' => 'Ülke',
                         'first-name' => 'Ad',
                         'last-name'  => 'Soyad',
                         'phone'      => 'Telefon',
@@ -451,12 +451,12 @@ return [
                         'amount'       => 'Tutar',
                         'order-id'     => 'Sipariş No',
                         'product-name' => 'Ürün Adı',
-                        'qty'          => 'Adet',
-                        'shipping'     => 'Kargo',
-                        'sku'          => 'SKU',
-                        'status'       => 'Durum',
-                        'title'        => 'Sipariş Bilgileri',
-                        'type'         => 'Tür',
+                        'qty' => 'Adet',
+                        'shipping' => 'Kargo',
+                        'sku' => 'SKU',
+                        'status' => 'Durum',
+                        'title' => 'Sipariş Bilgileri',
+                        'type' => 'Tür',
                     ],
                 ],
             ],
@@ -466,7 +466,7 @@ return [
     'components' => [
         'accordion' => [
             'default-content' => 'Varsayılan İçerik',
-            'default-header'  => 'Varsayılan Başlık',
+            'default-header' => 'Varsayılan Başlık',
         ],
 
         'drawer' => [
@@ -573,8 +573,8 @@ return [
         'datagrid' => [
             'toolbar' => [
                 'length-of' => ':length adet',
-                'results'   => ':total Sonuç',
-                'selected'  => ':total Seçildi',
+                'results' => ':total Sonuç',
+                'selected' => ':total Seçildi',
 
                 'mass-actions' => [
                     'must-select-a-mass-action'        => 'Bir toplu işlem seçmelisiniz.',
@@ -589,14 +589,14 @@ return [
 
                 'filter' => [
                     'apply-filter' => 'Filtreleri Uygula',
-                    'title'        => 'Filtrele',
+                    'title' => 'Filtrele',
 
                     'dropdown' => [
                         'select' => 'Seç',
 
                         'searchable' => [
                             'at-least-two-chars' => 'En az 2 karakter girin...',
-                            'no-results'         => 'Sonuç bulunamadı...',
+                            'no-results' => 'Sonuç bulunamadı...',
                         ],
                     ],
 
@@ -607,8 +607,8 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'İşlemler',
-                'next-page'            => 'Sonraki Sayfa',
+                'actions' => 'İşlemler',
+                'next-page' => 'Sonraki Sayfa',
                 'no-records-available' => 'Kayıt bulunamadı.',
                 'of'                   => 'toplam :total kayıt',
                 'page-navigation'      => 'Sayfa Gezinme',
@@ -621,7 +621,7 @@ return [
 
         'modal' => [
             'default-content' => 'Varsayılan İçerik',
-            'default-header'  => 'Varsayılan Başlık',
+            'default-header' => 'Varsayılan Başlık',
 
             'confirm' => [
                 'agree-btn'    => 'Onayla',
@@ -644,7 +644,7 @@ return [
             ],
 
             'carousel' => [
-                'next'     => 'Sonraki',
+                'next' => 'Sonraki',
                 'previous' => 'Önceki',
                 'view-all' => 'Tümünü Gör',
             ],
@@ -691,24 +691,24 @@ return [
             'type' => [
                 'simple' => [
                     'customizable-options' => [
-                        'none'         => 'Hiçbiri',
+                        'none' => 'Hiçbiri',
                         'total-amount' => 'Toplam Tutar',
                     ],
                 ],
 
                 'configurable' => [
-                    'select-options'       => 'Lütfen bir seçenek seçin',
+                    'select-options' => 'Lütfen bir seçenek seçin',
                     'select-above-options' => 'Lütfen yukarıdaki seçenekleri seçin',
                 ],
 
                 'bundle' => [
-                    'none'         => 'Hiçbiri',
+                    'none' => 'Hiçbiri',
                     'total-amount' => 'Toplam Tutar',
                 ],
 
                 'downloadable' => [
-                    'links'   => 'Bağlantılar',
-                    'sample'  => 'Örnek',
+                    'links' => 'Bağlantılar',
+                    'sample' => 'Örnek',
                     'samples' => 'Örnekler',
                 ],
 
@@ -730,7 +730,7 @@ return [
                         'see-details'              => 'Detayları Gör',
                         'slot-duration'            => 'Süre',
                         'slot-duration-in-minutes' => ':minutes Dakika',
-                        'today-availability'       => 'Bugünkü Uygunluk',
+                        'today-availability' => 'Bugünkü Uygunluk',
                     ],
 
                     'event' => [
@@ -774,7 +774,7 @@ return [
             ],
 
             'gallery' => [
-                'product-image'   => 'Ürün Resmi',
+                'product-image' => 'Ürün Resmi',
                 'thumbnail-image' => 'Küçük Resim',
             ],
 
@@ -826,11 +826,11 @@ return [
                 'daily'        => 'Günlük',
                 'event-from'   => 'Etkinlik Başlangıcı',
                 'event-ticket' => 'Etkinlik Bileti',
-                'event-till'   => 'Etkinlik Bitişi',
-                'hourly'       => 'Saatlik',
+                'event-till' => 'Etkinlik Bitişi',
+                'hourly' => 'Saatlik',
 
-                'integrity'    => [
-                    'event'                  => [
+                'integrity' => [
+                    'event' => [
                         'expired' => 'Bu etkinliğin süresi doldu.',
                     ],
 
@@ -839,9 +839,9 @@ return [
                     'select_hourly_duration' => 'Süre seçiniz.',
                 ],
 
-                'rent-from'    => 'Kiralama Başlangıcı',
-                'rent-till'    => 'Kiralama Bitişi',
-                'rent-type'    => 'Kiralama Türü',
+                'rent-from' => 'Kiralama Başlangıcı',
+                'rent-till' => 'Kiralama Bitişi',
+                'rent-type' => 'Kiralama Türü',
                 'renting_type' => 'Kiralama Türü',
                 'special-note' => 'Özel Not',
             ],
@@ -864,7 +864,7 @@ return [
                 'title'                => 'Arama',
             ],
 
-            'sort'      => 'Sırala',
+            'sort' => 'Sırala',
         ],
 
         'toolbar' => [
@@ -1035,7 +1035,7 @@ return [
 
             'index' => [
                 'checkout' => 'Ödeme',
-                'home'     => 'Anasayfa',
+                'home' => 'Anasayfa',
             ],
 
             'payment' => [
@@ -1081,9 +1081,9 @@ return [
         ],
 
         'login' => [
-            'email'    => 'E-posta',
+            'email' => 'E-posta',
             'password' => 'Şifre',
-            'title'    => 'Giriş Yap',
+            'title' => 'Giriş Yap',
         ],
     ],
 
@@ -1203,7 +1203,7 @@ return [
 
             'commented' => [
                 'description' => 'Not: :note',
-                'subject'     => 'Yeni yorum eklendi',
+                'subject' => 'Yeni yorum eklendi',
             ],
 
             'subscribed' => [

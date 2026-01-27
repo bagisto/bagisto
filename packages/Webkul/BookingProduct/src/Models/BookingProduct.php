@@ -41,7 +41,7 @@ class BookingProduct extends Model implements BookingProductContract
      */
     protected $casts = [
         'available_from' => 'datetime',
-        'available_to'   => 'datetime',
+        'available_to' => 'datetime',
     ];
 
     /**

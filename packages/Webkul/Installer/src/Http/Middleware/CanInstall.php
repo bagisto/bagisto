@@ -24,7 +24,7 @@ class CanInstall
                 }
 
                 return response()->json([
-                    'message'=> trans('installer::app.installer.middleware.already-installed'),
+                    'message' => trans('installer::app.installer.middleware.already-installed'),
                 ], 403);
             }
         } else {

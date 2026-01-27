@@ -21,8 +21,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -47,27 +47,27 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     // Act and Assert.
@@ -92,8 +92,8 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -118,33 +118,33 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -171,8 +171,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -197,27 +197,27 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     // Act and Assert.
@@ -242,8 +242,8 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -268,33 +268,33 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -321,8 +321,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -343,27 +343,27 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
@@ -392,8 +392,8 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -414,27 +414,27 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
@@ -444,7 +444,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -471,8 +471,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -493,27 +493,27 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -542,8 +542,8 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -564,27 +564,27 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 0,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 0,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -594,7 +594,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $quantity = rand(1, 10),
+        'quantity' => $quantity = rand(1, 10),
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
@@ -620,8 +620,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -646,51 +646,51 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -719,8 +719,8 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -745,51 +745,51 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -825,8 +825,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -851,48 +851,48 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $cart = Cart::factory()->create([
-        'customer_email'      => fake()->email(),
+        'customer_email' => fake()->email(),
         'customer_first_name' => fake()->firstName(),
-        'customer_last_name'  => fake()->lastName(),
+        'customer_last_name' => fake()->lastName(),
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     // Act and Assert.
@@ -917,8 +917,8 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -943,48 +943,48 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $cart = Cart::factory()->create([
-        'customer_email'      => fake()->email(),
+        'customer_email' => fake()->email(),
         'customer_first_name' => fake()->firstName(),
-        'customer_last_name'  => fake()->lastName(),
+        'customer_last_name' => fake()->lastName(),
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -1020,8 +1020,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1042,51 +1042,51 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     // Act and Assert.
@@ -1120,8 +1120,8 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1142,51 +1142,51 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     // Act and Assert.
@@ -1220,8 +1220,8 @@ it('should fails the validation error when the product id not provided add a sim
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1242,51 +1242,51 @@ it('should fails the validation error when the product id not provided add a sim
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     // Act and Assert.
@@ -1313,8 +1313,8 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1335,51 +1335,51 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
         $cartRule->cart_rule_channels()->sync([1]);
     })->create([
-        'name'                      => fake()->uuid(),
-        'description'               => fake()->sentence(),
-        'action_type'               => 'by_fixed',
-        'discount_amount'           => $discountAmount = rand(1, 50),
-        'usage_per_customer'        => rand(1, 50),
-        'uses_per_coupon'           => rand(1, 50),
-        'condition_type'            => 2,
-        'status'                    => 1,
-        'discount_quantity'         => 1,
-        'apply_to_shipping'         => 1,
-        'use_auto_generation'       => 0,
-        'times_used'                => 0,
-        'coupon_type'               => 1,
-        'end_other_rules'           => 0,
+        'name' => fake()->uuid(),
+        'description' => fake()->sentence(),
+        'action_type' => 'by_fixed',
+        'discount_amount' => $discountAmount = rand(1, 50),
+        'usage_per_customer' => rand(1, 50),
+        'uses_per_coupon' => rand(1, 50),
+        'condition_type' => 2,
+        'status' => 1,
+        'discount_quantity' => 1,
+        'apply_to_shipping' => 1,
+        'use_auto_generation' => 0,
+        'times_used' => 0,
+        'coupon_type' => 1,
+        'end_other_rules' => 0,
         'uses_attribute_conditions' => 0,
-        'discount_step'             => 0,
-        'free_shipping'             => 0,
-        'sort_order'                => 0,
-        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
-        'starts_from'               => null,
-        'ends_till'                 => null,
+        'discount_step' => 0,
+        'free_shipping' => 0,
+        'sort_order' => 0,
+        'conditions' => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from' => null,
+        'ends_till' => null,
     ]);
 
     $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
-        'type'         => 0,
-        'is_primary'   => 1,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+        'type' => 0,
+        'is_primary' => 1,
     ]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     // Act and Assert.
@@ -1415,19 +1415,19 @@ it('should check tax is applying for the simple product into the cart for simple
 
     $taxRate = TaxRate::factory()->create([
         'zip_code' => '',
-        'country'  => $countryCode = 'IN',
+        'country' => $countryCode = 'IN',
     ]);
 
     TaxMap::factory()->create([
         'tax_category_id' => $taxCategory->id,
-        'tax_rate_id'     => $taxRate->id,
+        'tax_rate_id' => $taxRate->id,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            4  => 'tax_category_id',
-            5  => 'new',
-            6  => 'featured',
+            4 => 'tax_category_id',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1453,31 +1453,31 @@ it('should check tax is applying for the simple product into the cart for simple
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'customer_last_name' => $customer->last_name,
     ]);
 
     CartItem::factory()->create([
         'product_id' => $product->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'cart_id'    => $cart->id,
+        'sku' => $product->sku,
+        'type' => $product->type,
+        'name' => $product->name,
+        'cart_id' => $cart->id,
     ]);
 
     CustomerAddress::factory()->create([
-        'email'        => $customer->email,
-        'country'      => $countryCode,
-        'cart_id'      => $cart->id,
+        'email' => $customer->email,
+        'country' => $countryCode,
+        'cart_id' => $cart->id,
         'address_type' => 'cart_billing',
     ]);
 
     CustomerAddress::factory()->create([
-        'email'        => $customer->email,
-        'country'      => $countryCode,
-        'cart_id'      => $cart->id,
+        'email' => $customer->email,
+        'country' => $countryCode,
+        'cart_id' => $cart->id,
         'address_type' => 'cart_shipping',
     ]);
 
@@ -1502,8 +1502,8 @@ it('should fails the validation error when the product id not provided check cus
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1524,25 +1524,25 @@ it('should fails the validation error when the product id not provided check cus
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1551,8 +1551,8 @@ it('should check customer group price for guest customer with fixed price type f
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1573,17 +1573,17 @@ it('should check customer group price for guest customer with fixed price type f
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1595,10 +1595,10 @@ it('should check customer group price for guest customer with fixed price type f
     $this->assertPrice($productCustomerGroupPrice->value * $productCustomerGroupPrice->qty, $response['data']['grand_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1607,8 +1607,8 @@ it('should fails the validation error when the product id not provided check cus
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1629,25 +1629,25 @@ it('should fails the validation error when the product id not provided check cus
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1656,8 +1656,8 @@ it('should check customer group price for guest customer with discount price typ
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -1678,10 +1678,10 @@ it('should check customer group price for guest customer with discount price typ
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
 
@@ -1692,7 +1692,7 @@ it('should check customer group price for guest customer with discount price typ
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1703,10 +1703,10 @@ it('should check customer group price for guest customer with discount price typ
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1715,8 +1715,8 @@ it('should fails the validation when product id not provided when check customer
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1733,10 +1733,10 @@ it('should fails the validation when product id not provided when check customer
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
 
@@ -1746,16 +1746,16 @@ it('should fails the validation when product id not provided when check customer
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1764,8 +1764,8 @@ it('should check customer group price for general customer with fixed price type
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1782,10 +1782,10 @@ it('should check customer group price for general customer with fixed price type
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
 
@@ -1796,7 +1796,7 @@ it('should check customer group price for general customer with fixed price type
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1808,10 +1808,10 @@ it('should check customer group price for general customer with fixed price type
     $this->assertPrice($productCustomerGroupPrice->value * $productCustomerGroupPrice->qty, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1820,8 +1820,8 @@ it('should fails the validation error when product id not provided when check cu
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1838,10 +1838,10 @@ it('should fails the validation error when product id not provided when check cu
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
 
@@ -1851,16 +1851,16 @@ it('should fails the validation error when product id not provided when check cu
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1869,8 +1869,8 @@ it('should check customer group price for general customer with discount price t
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1887,10 +1887,10 @@ it('should check customer group price for general customer with discount price t
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
 
@@ -1905,7 +1905,7 @@ it('should check customer group price for general customer with discount price t
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -1916,10 +1916,10 @@ it('should check customer group price for general customer with discount price t
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1928,8 +1928,8 @@ it('should fails the validation error when product id not provided check custome
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1946,10 +1946,10 @@ it('should fails the validation error when product id not provided check custome
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
 
@@ -1959,16 +1959,16 @@ it('should fails the validation error when product id not provided check custome
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -1977,8 +1977,8 @@ it('should check customer group price for wholesale customer with fixed price ty
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -1995,10 +1995,10 @@ it('should check customer group price for wholesale customer with fixed price ty
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'fixed',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'fixed',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
 
@@ -2009,7 +2009,7 @@ it('should check customer group price for wholesale customer with fixed price ty
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2021,10 +2021,10 @@ it('should check customer group price for wholesale customer with fixed price ty
     $this->assertPrice($productCustomerGroupPrice->value * $productCustomerGroupPrice->qty, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -2033,8 +2033,8 @@ it('should fails the validation error when product id not provided check custome
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2051,10 +2051,10 @@ it('should fails the validation error when product id not provided check custome
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
 
@@ -2064,16 +2064,16 @@ it('should fails the validation error when product id not provided check custome
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -2082,8 +2082,8 @@ it('should check customer group price for wholesale customer with discount price
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2100,10 +2100,10 @@ it('should check customer group price for wholesale customer with discount price
     ]))->getSimpleProductFactory()->create();
 
     $productCustomerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty'               => rand(2, 5),
-        'value_type'        => 'discount',
-        'value'             => rand(20, 50),
-        'product_id'        => $product->id,
+        'qty' => rand(2, 5),
+        'value_type' => 'discount',
+        'value' => rand(20, 50),
+        'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
 
@@ -2118,7 +2118,7 @@ it('should check customer group price for wholesale customer with discount price
 
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
-        'quantity'   => $productCustomerGroupPrice->qty,
+        'quantity' => $productCustomerGroupPrice->qty,
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2129,10 +2129,10 @@ it('should check customer group price for wholesale customer with discount price
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
-        'qty'               => $productCustomerGroupPrice->qty,
-        'value_type'        => $productCustomerGroupPrice->value_type,
-        'value'             => $productCustomerGroupPrice->value,
-        'product_id'        => $productCustomerGroupPrice->product_id,
+        'qty' => $productCustomerGroupPrice->qty,
+        'value_type' => $productCustomerGroupPrice->value_type,
+        'value' => $productCustomerGroupPrice->value,
+        'product_id' => $productCustomerGroupPrice->product_id,
         'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
     ]);
 });
@@ -2144,15 +2144,15 @@ it('should fails the validation error when product id not provided check discoun
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2165,14 +2165,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2198,8 +2198,8 @@ it('should check discount price if catalog rule applied for percentage price for
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2233,7 +2233,7 @@ it('should fails the validation error when product id not provided check discoun
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
@@ -2242,8 +2242,8 @@ it('should fails the validation error when product id not provided check discoun
 
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2272,14 +2272,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2303,8 +2303,8 @@ it('should check discount price if catalog rule applied for percentage price for
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2338,7 +2338,7 @@ it('should fails the validation error when the product id not provided check dis
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
@@ -2347,8 +2347,8 @@ it('should fails the validation error when the product id not provided check dis
 
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2377,14 +2377,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'     => 1,
+        'status' => 1,
         'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2408,8 +2408,8 @@ it('should check discount price if catalog rule applied for percentage price for
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2441,16 +2441,16 @@ it('should fails the validation error when the product id not provided check dis
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2477,15 +2477,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2509,8 +2509,8 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2544,8 +2544,8 @@ it('should fails the validation error when the product id not provided check dis
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
@@ -2554,8 +2554,8 @@ it('should fails the validation error when the product id not provided check dis
 
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2584,15 +2584,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2618,8 +2618,8 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2653,8 +2653,8 @@ it('should fails the validation error when the product id not provided check dis
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
@@ -2663,8 +2663,8 @@ it('should fails the validation error when the product id not provided check dis
 
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
@@ -2693,15 +2693,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2727,8 +2727,8 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
-        'quantity'   => '1',
-        'rating'     => '0',
+        'quantity' => '1',
+        'rating' => '0',
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
@@ -2760,15 +2760,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2792,10 +2792,10 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - $catalogRule->discount_amount,
+                'price' => $product->price - $catalogRule->discount_amount,
                 'customer_group_id' => 1,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);
@@ -2824,15 +2824,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2854,10 +2854,10 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - $catalogRule->discount_amount,
+                'price' => $product->price - $catalogRule->discount_amount,
                 'customer_group_id' => 2,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);
@@ -2886,15 +2886,15 @@ it('should check discount price if catalog rule applied for fixed price for simp
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
         'action_type' => 'by_fixed',
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -2916,10 +2916,10 @@ it('should check discount price if catalog rule applied for fixed price for simp
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - $catalogRule->discount_amount,
+                'price' => $product->price - $catalogRule->discount_amount,
                 'customer_group_id' => 3,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);
@@ -2932,14 +2932,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([1]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -2963,10 +2963,10 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
+                'price' => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
                 'customer_group_id' => 1,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);
@@ -2995,14 +2995,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([2]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3024,10 +3024,10 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
+                'price' => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
                 'customer_group_id' => 2,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);
@@ -3056,14 +3056,14 @@ it('should check discount price if catalog rule applied for percentage price for
 
         $catalogRule->customer_groups()->sync([3]);
     })->create([
-        'status'      => 1,
-        'sort_order'  => 1,
+        'status' => 1,
+        'sort_order' => 1,
     ]);
 
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
         ],
         'attribute_value' => [
@@ -3085,10 +3085,10 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
-                'price'             => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
+                'price' => $product->price - ($product->price * ($catalogRule->discount_amount / 100)),
                 'customer_group_id' => 3,
-                'catalog_rule_id'   => $catalogRule->id,
-                'product_id'        => $product->id,
+                'catalog_rule_id' => $catalogRule->id,
+                'product_id' => $product->id,
             ],
         ],
     ]);

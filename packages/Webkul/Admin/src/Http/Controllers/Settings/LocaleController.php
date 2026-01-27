@@ -36,10 +36,10 @@ class LocaleController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code'        => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
-            'name'        => 'required',
-            'direction'   => 'required|in:ltr,rtl',
-            'logo_path'   => 'array',
+            'code' => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
+            'name' => 'required',
+            'direction' => 'required|in:ltr,rtl',
+            'logo_path' => 'array',
             'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
         ]);
 
@@ -73,9 +73,9 @@ class LocaleController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'name'        => 'required',
-            'direction'   => 'required|in:ltr,rtl',
-            'logo_path'   => 'array',
+            'name' => 'required',
+            'direction' => 'required|in:ltr,rtl',
+            'logo_path' => 'array',
             'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
         ]);
 

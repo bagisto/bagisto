@@ -4,20 +4,20 @@ return [
     'checkout' => [
         'cart' => [
             'integrity' => [
-                'qty-missing'   => 'Mindestens ein Produkt sollte mehr als 1 Menge haben.',
+                'qty-missing' => 'Mindestens ein Produkt sollte mehr als 1 Menge haben.',
             ],
 
-            'invalid-file-extension'   => 'Ungültige Dateierweiterung gefunden.',
-            'inventory-warning'        => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
-            'missing-links'            => 'Download-Links fehlen für dieses Produkt.',
-            'missing-options'          => 'Optionen fehlen für dieses Produkt.',
+            'invalid-file-extension' => 'Ungültige Dateierweiterung gefunden.',
+            'inventory-warning' => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
+            'missing-links' => 'Download-Links fehlen für dieses Produkt.',
+            'missing-options' => 'Optionen fehlen für dieses Produkt.',
             'selected-products-simple' => 'Ausgewählte Produkte müssen vom einfachen Produkttyp sein.',
         ],
     ],
 
     'datagrid' => [
-        'copy-of-slug'                  => 'Kopie von :value',
-        'copy-of'                       => 'Kopie von :value',
+        'copy-of-slug' => 'Kopie von :value',
+        'copy-of' => 'Kopie von :value',
         'variant-already-exist-message' => 'Variante mit denselben Attributoptionen existiert bereits.',
     ],
 
@@ -25,28 +25,28 @@ return [
         'product-can-not-be-copied' => 'Produkte vom Typ :type können nicht kopiert werden',
     ],
 
-    'sort-by'  => [
+    'sort-by' => [
         'options' => [
-            'cheapest-first'  => 'Günstigste zuerst',
+            'cheapest-first' => 'Günstigste zuerst',
             'expensive-first' => 'Teuerste zuerst',
-            'from-a-z'        => 'Von A-Z',
-            'from-z-a'        => 'Von Z-A',
-            'latest-first'    => 'Neueste zuerst',
-            'oldest-first'    => 'Älteste zuerst',
+            'from-a-z' => 'Von A-Z',
+            'from-z-a' => 'Von Z-A',
+            'latest-first' => 'Neueste zuerst',
+            'oldest-first' => 'Älteste zuerst',
         ],
     ],
 
-    'type'     => [
-        'abstract'     => [
+    'type' => [
+        'abstract' => [
             'offers' => 'Kaufen Sie :qty für :price pro Stück und sparen Sie :discount',
         ],
 
-        'bundle'       => 'Bündel',
-        'booking'      => 'Buchung',
+        'bundle' => 'Bündel',
+        'booking' => 'Buchung',
         'configurable' => 'Konfigurierbar',
         'downloadable' => 'Downloadbar',
-        'grouped'      => 'Gruppiert',
-        'simple'       => 'Einfach',
-        'virtual'      => 'Virtuell',
+        'grouped' => 'Gruppiert',
+        'simple' => 'Einfach',
+        'virtual' => 'Virtuell',
     ],
 ];

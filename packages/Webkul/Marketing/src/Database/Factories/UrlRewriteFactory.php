@@ -23,11 +23,11 @@ class UrlRewriteFactory extends Factory
         $redirecType = [302, 301];
 
         return [
-            'entity_type'    => $entityTypes[array_rand($entityTypes)],
-            'request_path'   => $this->faker->url,
-            'target_path'    => $this->faker->url,
-            'redirect_type'  => $redirecType[array_rand($redirecType)],
-            'locale'         => core()->getCurrentLocale()->code,
+            'entity_type' => $entityTypes[array_rand($entityTypes)],
+            'request_path' => $this->faker->url,
+            'target_path' => $this->faker->url,
+            'redirect_type' => $redirecType[array_rand($redirecType)],
+            'locale' => core()->getCurrentLocale()->code,
         ];
     }
 }

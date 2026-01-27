@@ -33,7 +33,7 @@ it('should store the newly created sitemap', function () {
 
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
-        'path'      => $filePath = '/',
+        'path' => $filePath = '/',
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create.success'));
@@ -42,7 +42,7 @@ it('should store the newly created sitemap', function () {
         Sitemap::class => [
             [
                 'file_name' => $fileName,
-                'path'      => $filePath,
+                'path' => $filePath,
             ],
         ],
     ]);
@@ -69,9 +69,9 @@ it('should update the sitemap', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.sitemaps.update'), [
-        'id'        => $sitemap->id,
+        'id' => $sitemap->id,
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
-        'path'      => $sitemap->path,
+        'path' => $sitemap->path,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'));
@@ -79,9 +79,9 @@ it('should update the sitemap', function () {
     $this->assertModelWise([
         Sitemap::class => [
             [
-                'id'        => $sitemap->id,
+                'id' => $sitemap->id,
                 'file_name' => $fileName,
-                'path'      => $sitemap->path,
+                'path' => $sitemap->path,
             ],
         ],
     ]);

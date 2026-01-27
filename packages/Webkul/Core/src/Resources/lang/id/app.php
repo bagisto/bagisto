@@ -3,14 +3,14 @@
 return [
     'path-hint' => [
         'template' => 'Templat',
-        'parents'  => 'Induk',
+        'parents' => 'Induk',
     ],
 
-    'currency-position'  => [
+    'currency-position' => [
         'options' => [
-            'left'             => 'Kiri',
-            'left-with-space'  => 'Kiri dengan Spasi',
-            'right'            => 'Kanan',
+            'left' => 'Kiri',
+            'left-with-space' => 'Kiri dengan Spasi',
+            'right' => 'Kanan',
             'right-with-space' => 'Kanan dengan Spasi',
         ],
     ],

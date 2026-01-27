@@ -24,7 +24,7 @@ class MassDestroyRequest extends FormRequest
     public function rules()
     {
         return [
-            'indices'   => ['required', 'array'],
+            'indices' => ['required', 'array'],
             'indices.*' => ['integer'],
         ];
     }

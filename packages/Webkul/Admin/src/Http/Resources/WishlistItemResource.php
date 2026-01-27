@@ -15,9 +15,9 @@ class WishlistItemResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'         => $this->id,
+            'id' => $this->id,
             'additional' => (object) $this->resource->additional ?? [],
-            'product'    => new ProductResource($this->product),
+            'product' => new ProductResource($this->product),
         ];
     }
 }

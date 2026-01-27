@@ -33,10 +33,10 @@ it('should store the newly created search term', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_terms.store'), [
-        'term'         => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
+        'term' => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
         'redirect_url' => $url = fake()->url(),
-        'channel_id'   => $channelId = core()->getCurrentChannel()->id,
-        'locale'       => $locale = core()->getCurrentLocale()->code,
+        'channel_id' => $channelId = core()->getCurrentChannel()->id,
+        'locale' => $locale = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.create.success'));
@@ -44,10 +44,10 @@ it('should store the newly created search term', function () {
     $this->assertModelWise([
         SearchTerm::class => [
             [
-                'term'         => $term,
+                'term' => $term,
                 'redirect_url' => $url,
-                'channel_id'   => $channelId,
-                'locale'       => $locale,
+                'channel_id' => $channelId,
+                'locale' => $locale,
             ],
         ],
     ]);
@@ -75,10 +75,10 @@ it('should update the search term', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_terms.update'), [
-        'id'         => $searchTerm->id,
-        'term'       => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
+        'id' => $searchTerm->id,
+        'term' => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
         'channel_id' => $channelId = core()->getCurrentChannel()->id,
-        'locale'     => $locale = core()->getCurrentLocale()->code,
+        'locale' => $locale = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.edit.success'));
@@ -86,10 +86,10 @@ it('should update the search term', function () {
     $this->assertModelWise([
         SearchTerm::class => [
             [
-                'id'         => $searchTerm->id,
-                'term'       => $term,
+                'id' => $searchTerm->id,
+                'term' => $term,
                 'channel_id' => $channelId,
-                'locale'     => $locale,
+                'locale' => $locale,
             ],
         ],
     ]);

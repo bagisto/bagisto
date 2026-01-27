@@ -50,19 +50,19 @@ it('should store the newly created inventory sources', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.inventory_sources.store'), [
-        'code'           => $code = fake()->numerify('code#######'),
-        'name'           => $name = fake()->name(),
-        'priority'       => $priority = rand(1, 10),
+        'code' => $code = fake()->numerify('code#######'),
+        'name' => $name = fake()->name(),
+        'priority' => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),
-        'contact_email'  => $contactEmail = fake()->email(),
-        'latitude'       => fake()->latitude(),
-        'longitude'      => fake()->longitude(),
-        'contact_name'   => fake()->unique()->regexify('[A-Z0-9]{10}'),
-        'street'         => fake()->streetName(),
-        'country'        => preg_replace('/[^a-zA-Z0-9]+/', '', fake()->country()),
-        'state'          => fake()->state(),
-        'city'           => fake()->city(),
-        'postcode'       => fake()->postcode(),
+        'contact_email' => $contactEmail = fake()->email(),
+        'latitude' => fake()->latitude(),
+        'longitude' => fake()->longitude(),
+        'contact_name' => fake()->unique()->regexify('[A-Z0-9]{10}'),
+        'street' => fake()->streetName(),
+        'country' => preg_replace('/[^a-zA-Z0-9]+/', '', fake()->country()),
+        'state' => fake()->state(),
+        'city' => fake()->city(),
+        'postcode' => fake()->postcode(),
     ])
         ->assertRedirect(route('admin.settings.inventory_sources.index'))
         ->isRedirection();
@@ -70,10 +70,10 @@ it('should store the newly created inventory sources', function () {
     $this->assertModelWise([
         InventorySource::class => [
             [
-                'code'           => $code,
-                'name'           => $name,
-                'priority'       => $priority,
-                'contact_email'  => $contactEmail,
+                'code' => $code,
+                'name' => $name,
+                'priority' => $priority,
+                'contact_email' => $contactEmail,
                 'contact_number' => $contactNumber,
             ],
         ],
@@ -123,19 +123,19 @@ it('should update the inventory sources', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id), [
-        'code'           => $code = strtolower(fake()->numerify('code######')),
-        'name'           => $name = fake()->name(),
-        'priority'       => $priority = rand(1, 10),
+        'code' => $code = strtolower(fake()->numerify('code######')),
+        'name' => $name = fake()->name(),
+        'priority' => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),
-        'contact_email'  => $contactEmail = fake()->email(),
-        'latitude'       => fake()->latitude(),
-        'longitude'      => fake()->longitude(),
-        'contact_name'   => fake()->unique()->regexify('[A-Z0-9]{10}'),
-        'street'         => fake()->streetName(),
-        'country'        => preg_replace("/[^a-zA-Z0-9\s]/", '', fake()->country()),
-        'state'          => fake()->state(),
-        'city'           => fake()->city(),
-        'postcode'       => fake()->postcode(),
+        'contact_email' => $contactEmail = fake()->email(),
+        'latitude' => fake()->latitude(),
+        'longitude' => fake()->longitude(),
+        'contact_name' => fake()->unique()->regexify('[A-Z0-9]{10}'),
+        'street' => fake()->streetName(),
+        'country' => preg_replace("/[^a-zA-Z0-9\s]/", '', fake()->country()),
+        'state' => fake()->state(),
+        'city' => fake()->city(),
+        'postcode' => fake()->postcode(),
     ])
         ->assertRedirect(route('admin.settings.inventory_sources.index'))
         ->isRedirection();
@@ -143,10 +143,10 @@ it('should update the inventory sources', function () {
     $this->assertModelWise([
         InventorySource::class => [
             [
-                'code'           => $code,
-                'name'           => $name,
-                'priority'       => $priority,
-                'contact_email'  => $contactEmail,
+                'code' => $code,
+                'name' => $name,
+                'priority' => $priority,
+                'contact_email' => $contactEmail,
                 'contact_number' => $contactNumber,
             ],
         ],

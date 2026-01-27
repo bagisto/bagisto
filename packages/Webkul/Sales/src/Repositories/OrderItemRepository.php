@@ -118,7 +118,7 @@ class OrderItemRepository extends Repository
                     ]);
                 } else {
                     $item->product->ordered_inventories()->create([
-                        'qty'        => $qty,
+                        'qty' => $qty,
                         'product_id' => $item->product_id,
                         'channel_id' => $orderItem->order->channel->id,
                     ]);

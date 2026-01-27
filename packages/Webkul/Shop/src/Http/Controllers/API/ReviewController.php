@@ -62,10 +62,10 @@ class ReviewController extends APIController
     public function store(int $id): JsonResource
     {
         $this->validate(request(), [
-            'title'         => 'required',
-            'comment'       => 'required',
-            'rating'        => 'required|numeric|min:1|max:5',
-            'attachments'   => 'array',
+            'title' => 'required',
+            'comment' => 'required',
+            'rating' => 'required|numeric|min:1|max:5',
+            'attachments' => 'array',
             'attachments.*' => 'file|mimetypes:image/*,video/*',
         ]);
 
@@ -75,8 +75,8 @@ class ReviewController extends APIController
             'rating',
         ]), [
             'attachments' => request()->file('attachments') ?? [],
-            'status'      => self::STATUS_PENDING,
-            'product_id'  => $id,
+            'status' => self::STATUS_PENDING,
+            'product_id' => $id,
         ]);
 
         $data['name'] = auth()->guard('customer')->user()?->name ?? request()->input('name');

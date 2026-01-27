@@ -151,7 +151,7 @@ class CartRule
                 ) {
                     $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
                         'cart_rule_coupon_id' => $coupon->id,
-                        'customer_id'         => $this->cart->customer_id,
+                        'customer_id' => $this->cart->customer_id,
                     ]);
 
                     if (
@@ -169,7 +169,7 @@ class CartRule
         if ($rule->usage_per_customer) {
             $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
                 'cart_rule_id' => $rule->id,
-                'customer_id'  => $this->cart->customer_id,
+                'customer_id' => $this->cart->customer_id,
             ]);
 
             if (
@@ -483,7 +483,7 @@ class CartRule
 
             $this->itemTotals[$rule->id] = [
                 'base_total_price' => $totalBasePrice,
-                'total_items'      => $validCount,
+                'total_items' => $validCount,
             ];
         }
     }

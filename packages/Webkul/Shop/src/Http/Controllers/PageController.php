@@ -33,9 +33,9 @@ class PageController extends Controller
 
         if (! $page) {
             $urlRewrite = $this->urlRewriteRepository->findOneWhere([
-                'entity_type'  => 'cms_page',
+                'entity_type' => 'cms_page',
                 'request_path' => $urlKey,
-                'locale'       => app()->getLocale(),
+                'locale' => app()->getLocale(),
             ]);
 
             if ($urlRewrite) {

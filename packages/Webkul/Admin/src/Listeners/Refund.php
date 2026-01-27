@@ -51,7 +51,7 @@ class Refund extends Base
             /* now refunding order on the basis of capture id and refund data */
             $smartButton->refundOrder($captureID, [
                 'amount' => [
-                    'value'         => round($refund->grand_total, 2),
+                    'value' => round($refund->grand_total, 2),
                     'currency_code' => $refund->order_currency_code,
                 ],
             ]);

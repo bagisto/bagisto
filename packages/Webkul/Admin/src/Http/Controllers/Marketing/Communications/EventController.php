@@ -39,9 +39,9 @@ class EventController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name'        => 'required',
+            'name' => 'required',
             'description' => 'required',
-            'date'        => 'date|required',
+            'date' => 'date|required',
         ]);
 
         Event::dispatch('marketing.events.create.before');
@@ -85,9 +85,9 @@ class EventController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'name'        => 'required',
+            'name' => 'required',
             'description' => 'required',
-            'date'        => 'date|required',
+            'date' => 'date|required',
         ]);
 
         Event::dispatch('marketing.events.update.before', $id);
@@ -128,7 +128,7 @@ class EventController extends Controller
         }
 
         return response()->json([
-            'message' => trans('admin::app.marketing.communications.events.delete-failed', ['name'  =>  'admin::app.marketing.communications.events.index.event']),
+            'message' => trans('admin::app.marketing.communications.events.delete-failed', ['name' => 'admin::app.marketing.communications.events.index.event']),
         ], 500);
     }
 }

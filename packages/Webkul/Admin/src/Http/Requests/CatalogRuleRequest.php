@@ -24,12 +24,12 @@ class CatalogRuleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'            => 'required',
-            'channels'        => 'required|array|min:1',
+            'name' => 'required',
+            'channels' => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
-            'starts_from'     => 'nullable|date',
-            'ends_till'       => 'nullable|date|after_or_equal:starts_from',
-            'action_type'     => 'required',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
+            'action_type' => 'required',
             'discount_amount' => 'required|numeric',
         ];
 

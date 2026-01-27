@@ -48,20 +48,20 @@ class AttributeFactory extends Factory
         ];
 
         return [
-            'admin_name'          => $this->faker->word,
-            'code'                => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
-            'type'                => array_rand($types),
-            'validation'          => '',
-            'position'            => $this->faker->randomDigit,
-            'is_required'         => false,
-            'is_unique'           => false,
-            'value_per_locale'    => false,
-            'value_per_channel'   => false,
-            'is_filterable'       => false,
-            'is_configurable'     => false,
-            'is_user_defined'     => true,
+            'admin_name' => $this->faker->word,
+            'code' => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
+            'type' => array_rand($types),
+            'validation' => '',
+            'position' => $this->faker->randomDigit,
+            'is_required' => false,
+            'is_unique' => false,
+            'value_per_locale' => false,
+            'value_per_channel' => false,
+            'is_filterable' => false,
+            'is_configurable' => false,
+            'is_user_defined' => true,
             'is_visible_on_front' => true,
-            'swatch_type'         => null,
+            'swatch_type' => null,
         ];
     }
 

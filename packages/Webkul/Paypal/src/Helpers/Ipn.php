@@ -123,11 +123,11 @@ class Ipn
         $request = curl_init();
 
         curl_setopt_array($request, [
-            CURLOPT_URL            => $url,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => http_build_query(['cmd' => '_notify-validate'] + $this->post),
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query(['cmd' => '_notify-validate'] + $this->post),
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
+            CURLOPT_HEADER => false,
         ]);
 
         $response = curl_exec($request);
