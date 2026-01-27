@@ -193,7 +193,7 @@ class RazorpayPayment extends Payment
 
         if (! $this->isCurrencySupported($currency)) {
             throw new \Exception(trans('razorpay::app.response.supported-currency-error', [
-                'currency'            => $currency,
+                'currency' => $currency,
                 'supportedCurrencies' => implode(', ', $this->supportedCurrencies),
             ]));
         }
@@ -201,11 +201,11 @@ class RazorpayPayment extends Payment
         $api = $this->getApi();
 
         return $api->order->create([
-            'amount'          => (int) ($cart->base_grand_total * 100),
-            'currency'        => $currency,
-            'receipt'         => self::RECEIPT_PREFIX.$cart->id,
+            'amount' => (int) ($cart->base_grand_total * 100),
+            'currency' => $currency,
+            'receipt' => self::RECEIPT_PREFIX.$cart->id,
             'payment_capture' => 1,
-            'notes'           => [
+            'notes' => [
                 'cart_id' => $cart->id,
             ],
         ]);
@@ -221,17 +221,17 @@ class RazorpayPayment extends Payment
     public function preparePaymentData($cart, $razorpayOrder)
     {
         return [
-            'key'         => $this->getApiKey(),
-            'amount'      => (int) ($cart->base_grand_total * 100),
-            'currency'    => strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode()),
-            'name'        => $this->getMerchantName(),
+            'key' => $this->getApiKey(),
+            'amount' => (int) ($cart->base_grand_total * 100),
+            'currency' => strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode()),
+            'name' => $this->getMerchantName(),
             'description' => $this->getMerchantDescription(),
-            'image'       => $this->getImage(),
-            'order_id'    => $razorpayOrder['id'],
+            'image' => $this->getImage(),
+            'order_id' => $razorpayOrder['id'],
             'theme_color' => '#0041FF',
-            'prefill'     => [
-                'name'    => $cart->billing_address->name,
-                'email'   => $cart->billing_address->email,
+            'prefill' => [
+                'name' => $cart->billing_address->name,
+                'email' => $cart->billing_address->email,
                 'contact' => $cart->billing_address->phone,
             ],
         ];

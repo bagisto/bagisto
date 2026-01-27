@@ -288,7 +288,7 @@ it('returns true when validation succeeds with score above threshold', function 
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
-            'riskAnalysis'    => ['score' => 0.9],
+            'riskAnalysis' => ['score' => 0.9],
         ], 200),
     ]);
 
@@ -305,7 +305,7 @@ it('returns false when validation fails with score below threshold', function ()
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
-            'riskAnalysis'    => ['score' => 0.3],
+            'riskAnalysis' => ['score' => 0.3],
         ], 200),
     ]);
 
@@ -322,7 +322,7 @@ it('returns false when token is invalid', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => false],
-            'riskAnalysis'    => ['score' => 0.9],
+            'riskAnalysis' => ['score' => 0.9],
         ], 200),
     ]);
 
@@ -462,7 +462,7 @@ it('sends correct payload to google api', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
-            'riskAnalysis'    => ['score' => 0.9],
+            'riskAnalysis' => ['score' => 0.9],
         ], 200),
     ]);
 
@@ -490,7 +490,7 @@ it('validates with exact threshold score', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
-            'riskAnalysis'    => ['score' => 0.5],
+            'riskAnalysis' => ['score' => 0.5],
         ], 200),
     ]);
 

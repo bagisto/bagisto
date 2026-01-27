@@ -96,11 +96,11 @@ class ProductAttributeValueRepository extends Repository
 
             if (! $attributeValue) {
                 $attributeValuesToInsert[] = array_merge($this->getAttributeTypeColumnValues($attribute, $data[$attribute->code]), [
-                    'product_id'   => $product->id,
+                    'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
-                    'channel'      => $channel,
-                    'locale'       => $locale,
-                    'unique_id'    => $uniqueId,
+                    'channel' => $channel,
+                    'locale' => $locale,
+                    'unique_id' => $uniqueId,
                 ]);
             } else {
                 $previousTextValue = $attributeValue->text_value;
@@ -128,7 +128,7 @@ class ProductAttributeValueRepository extends Repository
 
                 $attributeValue = $this->update([
                     $attribute->column_name => $data[$attribute->code],
-                    'unique_id'             => $uniqueId,
+                    'unique_id' => $uniqueId,
                 ], $attributeValue->id);
             }
         }

@@ -444,11 +444,11 @@ abstract class DataGrid
     protected function validatedRequest(): array
     {
         request()->validate([
-            'filters'     => ['sometimes', 'required', 'array'],
-            'sort'        => ['sometimes', 'required', 'array'],
-            'pagination'  => ['sometimes', 'required', 'array'],
-            'export'      => ['sometimes', 'required', 'boolean'],
-            'format'      => ['sometimes', 'required', 'in:csv,xls,xlsx'],
+            'filters' => ['sometimes', 'required', 'array'],
+            'sort' => ['sometimes', 'required', 'array'],
+            'pagination' => ['sometimes', 'required', 'array'],
+            'export' => ['sometimes', 'required', 'boolean'],
+            'format' => ['sometimes', 'required', 'in:csv,xls,xlsx'],
         ]);
 
         return request()->only(['filters', 'sort', 'pagination', 'export', 'format']);
@@ -638,11 +638,11 @@ abstract class DataGrid
                 $getUrl = $action->url;
 
                 $record->actions[] = [
-                    'index'  => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
-                    'icon'   => $action->icon,
-                    'title'  => $action->title,
+                    'index' => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
+                    'icon' => $action->icon,
+                    'title' => $action->title,
                     'method' => $action->method,
-                    'url'    => $getUrl($record),
+                    'url' => $getUrl($record),
                 ];
             }
         }
@@ -658,20 +658,20 @@ abstract class DataGrid
         $paginator = $this->paginator->toArray();
 
         return [
-            'id'           => Crypt::encryptString(get_called_class()),
-            'columns'      => $this->formatColumns(),
-            'actions'      => $this->formatActions(),
+            'id' => Crypt::encryptString(get_called_class()),
+            'columns' => $this->formatColumns(),
+            'actions' => $this->formatActions(),
             'mass_actions' => $this->formatMassActions(),
-            'records'      => $this->formatRecords($paginator['data']),
-            'meta'         => [
-                'primary_column'   => $this->primaryColumn,
-                'from'             => $paginator['from'],
-                'to'               => $paginator['to'],
-                'total'            => $paginator['total'],
+            'records' => $this->formatRecords($paginator['data']),
+            'meta' => [
+                'primary_column' => $this->primaryColumn,
+                'from' => $paginator['from'],
+                'to' => $paginator['to'],
+                'total' => $paginator['total'],
                 'per_page_options' => $this->perPageOptions,
-                'per_page'         => $paginator['per_page'],
-                'current_page'     => $paginator['current_page'],
-                'last_page'        => $paginator['last_page'],
+                'per_page' => $paginator['per_page'],
+                'current_page' => $paginator['current_page'],
+                'last_page' => $paginator['last_page'],
             ],
         ];
     }

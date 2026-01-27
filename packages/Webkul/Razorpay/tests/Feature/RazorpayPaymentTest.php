@@ -10,26 +10,26 @@ use Webkul\Sales\Models\OrderTransaction;
 
 beforeEach(function () {
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => 'rzp_test_fake_key',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => 'rzp_test_fake_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'fake_test_secret',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => 'fake_test_secret',
         'channel_code' => 'default',
     ]);
 });
@@ -37,14 +37,14 @@ beforeEach(function () {
 it('redirects back when razorpay credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => '',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => '',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -78,15 +78,15 @@ it('creates razorpay order and returns drop-in UI view', function () {
     $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
 
     $mockRazorpay->shouldReceive('createOrder')->andReturn([
-        'id'       => 'order_test123',
-        'amount'   => 33415,
+        'id' => 'order_test123',
+        'amount' => 33415,
         'currency' => 'INR',
-        'receipt'  => 'receipt_'.$cart->id,
+        'receipt' => 'receipt_'.$cart->id,
     ]);
 
     $mockRazorpay->shouldReceive('preparePaymentData')->andReturn([
-        'key'      => 'test_key',
-        'amount'   => 33415,
+        'key' => 'test_key',
+        'amount' => 33415,
         'currency' => 'INR',
         'order_id' => 'order_test123',
     ]);
@@ -118,8 +118,8 @@ it('successfully processes razorpay payment and creates order with invoice', fun
     // Act
     $response = $this->get(route('razorpay.payment.success', [
         'razorpay_payment_id' => 'pay_test123',
-        'razorpay_order_id'   => 'order_test123',
-        'razorpay_signature'  => 'test_signature',
+        'razorpay_order_id' => 'order_test123',
+        'razorpay_signature' => 'test_signature',
     ]));
 
     // Assert
@@ -151,7 +151,7 @@ it('handles payment failure gracefully', function () {
     // Act
     $response = $this->get(route('razorpay.payment.success', [
         'razorpay_order_id' => 'order_fail_123',
-        'error'             => 'payment_failed',
+        'error' => 'payment_failed',
     ]));
 
     // Assert
@@ -176,8 +176,8 @@ it('redirects to cart when signature verification fails', function () {
     // Act
     $response = $this->get(route('razorpay.payment.success', [
         'razorpay_payment_id' => 'pay_test_456',
-        'razorpay_order_id'   => 'order_test_456',
-        'razorpay_signature'  => 'invalid_signature',
+        'razorpay_order_id' => 'order_test_456',
+        'razorpay_signature' => 'invalid_signature',
     ]));
 
     // Assert

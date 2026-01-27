@@ -52,25 +52,25 @@ it('should store the newly created channels', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.channels.store'), $data = [
-        'code'              => $code = fake()->numerify('code######'),
-        'theme'             => $code,
-        'hostname'          => 'http://'.fake()->ipv4(),
-        'root_category_id'  => 1,
+        'code' => $code = fake()->numerify('code######'),
+        'theme' => $code,
+        'hostname' => 'http://'.fake()->ipv4(),
+        'root_category_id' => 1,
         'default_locale_id' => 1,
-        'base_currency_id'  => 1,
-        'name'              => fake()->name(),
-        'description'       => substr(fake()->paragraph, 0, 50),
+        'base_currency_id' => 1,
+        'name' => fake()->name(),
+        'description' => substr(fake()->paragraph, 0, 50),
         'inventory_sources' => [1],
-        'locales'           => [1],
-        'currencies'        => [1],
-        'seo_title'         => fake()->title(),
-        'seo_description'   => substr(fake()->paragraph(), 0, 50),
-        'seo_keywords'      => fake()->name(),
+        'locales' => [1],
+        'currencies' => [1],
+        'seo_title' => fake()->title(),
+        'seo_description' => substr(fake()->paragraph(), 0, 50),
+        'seo_keywords' => fake()->name(),
         'is_maintenance_on' => fake()->boolean(),
-        'logo'              => [
+        'logo' => [
             UploadedFile::fake()->image('logo.png'),
         ],
-        'favicon'           => [
+        'favicon' => [
             UploadedFile::fake()->image('favicon.png'),
         ],
     ])
@@ -80,12 +80,12 @@ it('should store the newly created channels', function () {
     $this->assertModelWise([
         Channel::class => [
             [
-                'code'              => $data['code'],
-                'theme'             => $data['theme'],
-                'hostname'          => $data['hostname'],
-                'root_category_id'  => $data['root_category_id'],
+                'code' => $data['code'],
+                'theme' => $data['theme'],
+                'hostname' => $data['hostname'],
+                'root_category_id' => $data['root_category_id'],
                 'default_locale_id' => $data['default_locale_id'],
-                'base_currency_id'  => $data['base_currency_id'],
+                'base_currency_id' => $data['base_currency_id'],
             ],
         ],
     ]);
@@ -134,23 +134,23 @@ it('should update the existing channel', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.channels.update', $channel->id), $data = [
-        'code'              => $channel->code,
+        'code' => $channel->code,
 
-        app()->getLocale()  => [
-            'name'            => fake()->name(),
-            'seo_title'       => fake()->title(),
+        app()->getLocale() => [
+            'name' => fake()->name(),
+            'seo_title' => fake()->title(),
             'seo_description' => substr(fake()->paragraph(), 0, 50),
-            'seo_keywords'    => fake()->name(),
-            'description'     => substr(fake()->paragraph, 0, 50),
+            'seo_keywords' => fake()->name(),
+            'description' => substr(fake()->paragraph, 0, 50),
         ],
 
-        'hostname'          => 'http://'.fake()->ipv4(),
-        'root_category_id'  => 1,
+        'hostname' => 'http://'.fake()->ipv4(),
+        'root_category_id' => 1,
         'default_locale_id' => 1,
-        'base_currency_id'  => 1,
+        'base_currency_id' => 1,
         'inventory_sources' => [1],
-        'locales'           => [1],
-        'currencies'        => [1],
+        'locales' => [1],
+        'currencies' => [1],
         'is_maintenance_on' => fake()->boolean(),
     ])
         ->assertRedirect(route('admin.settings.channels.index'))
@@ -159,11 +159,11 @@ it('should update the existing channel', function () {
     $this->assertModelWise([
         Channel::class => [
             [
-                'code'              => $data['code'],
-                'hostname'          => $data['hostname'],
+                'code' => $data['code'],
+                'hostname' => $data['hostname'],
                 'is_maintenance_on' => $data['is_maintenance_on'],
-                'base_currency_id'  => 1,
-                'root_category_id'  => 1,
+                'base_currency_id' => 1,
+                'root_category_id' => 1,
                 'default_locale_id' => 1,
             ],
         ],

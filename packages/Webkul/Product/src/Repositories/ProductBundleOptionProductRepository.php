@@ -37,7 +37,7 @@ class ProductBundleOptionProductRepository extends Repository
                      * existing option product otherwise we will create a new option product.
                      */
                     $bundleOptionProduct = $this->firstWhere([
-                        'product_id'               => $bundleOptionProductInputs['product_id'],
+                        'product_id' => $bundleOptionProductInputs['product_id'],
                         'product_bundle_option_id' => $productBundleOption->id,
                     ]);
 

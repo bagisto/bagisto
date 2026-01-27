@@ -14,7 +14,7 @@ class Payment
     public function getSupportedPaymentMethods()
     {
         return [
-            'payment_methods'  => $this->getPaymentMethods(),
+            'payment_methods' => $this->getPaymentMethods(),
         ];
     }
 
@@ -32,11 +32,11 @@ class Payment
 
             if ($paymentMethod->isAvailable()) {
                 $paymentMethods[] = [
-                    'method'       => $paymentMethod->getCode(),
+                    'method' => $paymentMethod->getCode(),
                     'method_title' => $paymentMethod->getTitle(),
-                    'description'  => $paymentMethod->getDescription(),
-                    'sort'         => $paymentMethod->getSortOrder(),
-                    'image'        => $paymentMethod->getImage(),
+                    'description' => $paymentMethod->getDescription(),
+                    'sort' => $paymentMethod->getSortOrder(),
+                    'image' => $paymentMethod->getImage(),
                 ];
             }
         }

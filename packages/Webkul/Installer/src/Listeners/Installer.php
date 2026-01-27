@@ -37,10 +37,10 @@ class Installer
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
-                'json'    => [
-                    'domain'       => config('app.url'),
-                    'email'        => $admin?->email,
-                    'name'         => $admin?->name,
+                'json' => [
+                    'domain' => config('app.url'),
+                    'email' => $admin?->email,
+                    'name' => $admin?->name,
                     'country_code' => config('app.default_country') ?? 'IN',
                 ],
             ]);

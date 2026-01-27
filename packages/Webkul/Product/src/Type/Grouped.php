@@ -180,7 +180,7 @@ class Grouped extends AbstractType
     {
         return view('shop::products.prices.grouped', [
             'product' => $this->product,
-            'prices'  => $this->getProductPrices(),
+            'prices' => $this->getProductPrices(),
         ])->render();
     }
 
@@ -214,7 +214,7 @@ class Grouped extends AbstractType
 
             $cartProducts = $product->getTypeInstance()->prepareForCart([
                 'product_id' => $productId,
-                'quantity'   => $qty,
+                'quantity' => $qty,
             ]);
 
             if (is_string($cartProducts)) {

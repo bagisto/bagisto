@@ -18,10 +18,10 @@ it('returns the correct payment method code', function () {
 it('returns the payment method title from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.title',
-        'value'        => 'Stripe Payment Gateway',
+        'code' => 'sales.payment_methods.stripe.title',
+        'value' => 'Stripe Payment Gateway',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -34,10 +34,10 @@ it('returns the payment method title from configuration', function () {
 it('returns the payment method description from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.description',
-        'value'        => 'Pay securely using Stripe',
+        'code' => 'sales.payment_methods.stripe.description',
+        'value' => 'Pay securely using Stripe',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -50,20 +50,20 @@ it('returns the payment method description from configuration', function () {
 it('returns the API key based on sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => 'test_key',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => 'test_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_key',
-        'value'        => 'live_key',
+        'code' => 'sales.payment_methods.stripe.api_key',
+        'value' => 'live_key',
         'channel_code' => 'default',
     ]);
 
@@ -77,20 +77,20 @@ it('returns the API key based on sandbox mode', function () {
 it('returns the live API key when sandbox mode is disabled', function () {
     // Arrange - Production mode
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => 'test_key',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => 'test_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_key',
-        'value'        => 'live_key',
+        'code' => 'sales.payment_methods.stripe.api_key',
+        'value' => 'live_key',
         'channel_code' => 'default',
     ]);
 
@@ -104,20 +104,20 @@ it('returns the live API key when sandbox mode is disabled', function () {
 it('returns the publishable key based on sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => 'test_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => 'test_pub_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_publishable_key',
-        'value'        => 'live_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_publishable_key',
+        'value' => 'live_pub_key',
         'channel_code' => 'default',
     ]);
 
@@ -131,20 +131,20 @@ it('returns the publishable key based on sandbox mode', function () {
 it('returns the live publishable key when sandbox mode is disabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => 'test_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => 'test_pub_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_publishable_key',
-        'value'        => 'live_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_publishable_key',
+        'value' => 'live_pub_key',
         'channel_code' => 'default',
     ]);
 
@@ -158,20 +158,20 @@ it('returns the live publishable key when sandbox mode is disabled', function ()
 it('checks if credentials are valid in sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => 'test_key',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => 'test_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => 'test_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => 'test_pub_key',
         'channel_code' => 'default',
     ]);
 
@@ -185,20 +185,20 @@ it('checks if credentials are valid in sandbox mode', function () {
 it('checks if credentials are valid in production mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_key',
-        'value'        => 'live_key',
+        'code' => 'sales.payment_methods.stripe.api_key',
+        'value' => 'live_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_publishable_key',
-        'value'        => 'live_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_publishable_key',
+        'value' => 'live_pub_key',
         'channel_code' => 'default',
     ]);
 
@@ -212,20 +212,20 @@ it('checks if credentials are valid in production mode', function () {
 it('returns false if sandbox credentials are missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => 'test_pub_key',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => 'test_pub_key',
         'channel_code' => 'default',
     ]);
 
@@ -239,20 +239,20 @@ it('returns false if sandbox credentials are missing', function () {
 it('returns false if production credentials are missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_key',
-        'value'        => 'live_key',
+        'code' => 'sales.payment_methods.stripe.api_key',
+        'value' => 'live_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_publishable_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_publishable_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -266,26 +266,26 @@ it('returns false if production credentials are missing', function () {
 it('is not available when credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -299,8 +299,8 @@ it('is not available when credentials are invalid', function () {
 it('returns payment method image from config', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.image',
-        'value'        => 'stripe/custom-logo.png',
+        'code' => 'sales.payment_methods.stripe.image',
+        'value' => 'stripe/custom-logo.png',
         'channel_code' => 'default',
     ]);
 

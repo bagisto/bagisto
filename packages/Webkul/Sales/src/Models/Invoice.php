@@ -59,11 +59,11 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabel = [
-        self::STATUS_PENDING         => 'Pending',
+        self::STATUS_PENDING => 'Pending',
         self::STATUS_PENDING_PAYMENT => 'Pending Payment',
-        self::STATUS_PAID            => 'Paid',
-        self::STATUS_OVERDUE         => 'Overdue',
-        self::STATUS_REFUNDED        => 'Refunded',
+        self::STATUS_PAID => 'Paid',
+        self::STATUS_OVERDUE => 'Overdue',
+        self::STATUS_REFUNDED => 'Refunded',
     ];
 
     /**
@@ -72,11 +72,11 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabelClass = [
-        self::STATUS_PENDING         => 'label-pending',
+        self::STATUS_PENDING => 'label-pending',
         self::STATUS_PENDING_PAYMENT => 'label-pending',
-        self::STATUS_PAID            => 'label-active',
-        self::STATUS_OVERDUE         => 'label-canceled',
-        self::STATUS_REFUNDED        => 'label-canceled',
+        self::STATUS_PAID => 'label-active',
+        self::STATUS_OVERDUE => 'label-canceled',
+        self::STATUS_REFUNDED => 'label-canceled',
     ];
 
     /**

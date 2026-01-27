@@ -18,12 +18,12 @@ class RMARulesSeeder extends Seeder
 
         $defaultRules = [
             [
-                'name'            => 'Basic',
-                'description'     => 1,
-                'status'          => 1,
-                'return_period'   => 10,
-                'created_at'      => now(),
-                'updated_at'      => now(),
+                'name' => 'Basic',
+                'description' => 1,
+                'status' => 1,
+                'return_period' => 10,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

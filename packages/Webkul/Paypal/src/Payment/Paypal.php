@@ -54,14 +54,14 @@ abstract class Paypal extends Payment
         $billingAddress = $cart->billing_address;
 
         $fields = array_merge($fields, [
-            'city'             => $billingAddress->city,
-            'country'          => $billingAddress->country,
-            'email'            => $billingAddress->email,
-            'first_name'       => $billingAddress->first_name,
-            'last_name'        => $billingAddress->last_name,
-            'zip'              => $billingAddress->postcode,
-            'state'            => $billingAddress->state,
-            'address1'         => $billingAddress->address,
+            'city' => $billingAddress->city,
+            'country' => $billingAddress->country,
+            'email' => $billingAddress->email,
+            'first_name' => $billingAddress->first_name,
+            'last_name' => $billingAddress->last_name,
+            'zip' => $billingAddress->postcode,
+            'state' => $billingAddress->state,
+            'address1' => $billingAddress->address,
             'address_override' => 1,
         ]);
     }

@@ -130,11 +130,11 @@ class Stripe extends Payment
 
         return Session::create([
             'payment_method_types' => ['card'],
-            'line_items'           => $lineItems,
-            'mode'                 => 'payment',
-            'success_url'          => route('stripe.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url'           => route('stripe.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
-            'metadata'             => [
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => route('stripe.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('stripe.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+            'metadata' => [
                 'cart_id' => $cart->id,
             ],
         ]);
@@ -172,7 +172,7 @@ class Stripe extends Payment
         foreach ($cart->items as $item) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency'     => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => strtolower(core()->getBaseCurrencyCode()),
 
                     'product_data' => [
                         'name' => $item->product->name,
@@ -188,7 +188,7 @@ class Stripe extends Payment
         if ($cart->base_shipping_amount > 0) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency'     => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => strtolower(core()->getBaseCurrencyCode()),
 
                     'product_data' => [
                         'name' => 'Shipping',
@@ -204,7 +204,7 @@ class Stripe extends Payment
         if ($cart->base_tax_total > 0) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency'     => strtolower(core()->getBaseCurrencyCode()),
+                    'currency' => strtolower(core()->getBaseCurrencyCode()),
 
                     'product_data' => [
                         'name' => 'Tax',

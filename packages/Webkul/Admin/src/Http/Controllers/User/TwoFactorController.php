@@ -65,7 +65,7 @@ class TwoFactorController extends Controller
         }
 
         $admin->forceFill([
-            'two_factor_enabled'     => true,
+            'two_factor_enabled' => true,
             'two_factor_verified_at' => now(),
         ])->save();
 

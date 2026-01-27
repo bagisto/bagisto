@@ -21,33 +21,33 @@ class RMAReasonSeeder extends Seeder
 
         $defaultReasons = [
             [
-                'title'      => 'Manufacturer Defect',
-                'status'     => 1,
-                'position'   => 1,
+                'title' => 'Manufacturer Defect',
+                'status' => 1,
+                'position' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
-                'title'      => 'Damaged During Shipping',
-                'status'     => 1,
-                'position'   => 2,
+                'title' => 'Damaged During Shipping',
+                'status' => 1,
+                'position' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
-                'title'      => 'Wrong Description Online',
-                'status'     => 1,
-                'position'   => 3,
+                'title' => 'Wrong Description Online',
+                'status' => 1,
+                'position' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
-                'title'      => 'Dead On Arrival',
-                'status'     => 1,
-                'position'   => 4,
+                'title' => 'Dead On Arrival',
+                'status' => 1,
+                'position' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
-                'title'      => 'Product Not Received Yet',
-                'status'     => 1,
-                'position'   => 5,
+                'title' => 'Product Not Received Yet',
+                'status' => 1,
+                'position' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -65,10 +65,10 @@ class RMAReasonSeeder extends Seeder
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {
                 DB::table('rma_reason_resolutions')->insert([
-                    'rma_reason_id'   => $reason->id,
+                    'rma_reason_id' => $reason->id,
                     'resolution_type' => $resolutionType,
-                    'created_at'      => now(),
-                    'updated_at'      => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
         }

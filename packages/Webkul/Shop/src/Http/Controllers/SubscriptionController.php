@@ -40,11 +40,11 @@ class SubscriptionController extends Controller
         $customer = auth()->user();
 
         $subscription = $this->subscriptionRepository->create([
-            'email'         => $email,
-            'channel_id'    => core()->getCurrentChannel()->id,
+            'email' => $email,
+            'channel_id' => core()->getCurrentChannel()->id,
             'is_subscribed' => 1,
-            'token'         => uniqid(),
-            'customer_id'   => $customer?->id,
+            'token' => uniqid(),
+            'customer_id' => $customer?->id,
         ]);
 
         if ($customer) {

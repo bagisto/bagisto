@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         return new JsonResponse([
-            'data'  => $subscriber,
+            'data' => $subscriber,
         ]);
     }
 
@@ -50,7 +50,7 @@ class SubscriptionController extends Controller
     public function update()
     {
         $validatedData = $this->validate(request(), [
-            'id'            => 'required',
+            'id' => 'required',
             'is_subscribed' => 'required|in:0,1',
         ]);
 

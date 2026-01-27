@@ -55,7 +55,7 @@ class PayUController extends Controller
         $paymentData = $this->payU->getPaymentData($cart);
 
         return view('payu::checkout.redirect', [
-            'paymentUrl'  => $this->payU->getPaymentUrl(),
+            'paymentUrl' => $this->payU->getPaymentUrl(),
             'paymentData' => $paymentData,
         ]);
     }
@@ -99,10 +99,10 @@ class PayUController extends Controller
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [
-                'payu_txnid'     => $response['txnid'] ?? '',
-                'payu_mihpayid'  => $response['mihpayid'] ?? '',
-                'payu_mode'      => $response['mode'] ?? '',
-                'payu_status'    => $response['status'] ?? '',
+                'payu_txnid' => $response['txnid'] ?? '',
+                'payu_mihpayid' => $response['mihpayid'] ?? '',
+                'payu_mode' => $response['mode'] ?? '',
+                'payu_status' => $response['status'] ?? '',
             ];
 
             $order = $this->orderRepository->create($data);
@@ -114,13 +114,13 @@ class PayUController extends Controller
 
                 $this->orderTransactionRepository->create([
                     'transaction_id' => $response['txnid'] ?? '',
-                    'status'         => self::PAYMENT_SUCCESS,
-                    'type'           => $order->payment->method,
+                    'status' => self::PAYMENT_SUCCESS,
+                    'type' => $order->payment->method,
                     'payment_method' => $order->payment->method,
-                    'order_id'       => $order->id,
-                    'invoice_id'     => $invoice->id,
-                    'amount'         => $response['amount'] ?? $order->base_grand_total,
-                    'data'           => json_encode($response),
+                    'order_id' => $order->id,
+                    'invoice_id' => $invoice->id,
+                    'amount' => $response['amount'] ?? $order->base_grand_total,
+                    'data' => json_encode($response),
                 ]);
             }
 

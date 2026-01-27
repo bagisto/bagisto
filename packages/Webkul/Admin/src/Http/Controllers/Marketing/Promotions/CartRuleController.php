@@ -56,7 +56,7 @@ class CartRuleController extends Controller
 
         $copiedCartRule = $cartRule->replicate()->fill([
             'status' => 0,
-            'name'   => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
+            'name' => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
         ]);
 
         $copiedCartRule->save();

@@ -97,9 +97,9 @@ class RequestController extends Controller
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
 
             $this->rmaMessageRepository->create([
-                'message'    => trans('admin::app.sales.rma.all-rma.view.conversation-process'),
-                'rma_id'     => $id,
-                'is_admin'   => 1,
+                'message' => trans('admin::app.sales.rma.all-rma.view.conversation-process'),
+                'rma_id' => $id,
+                'is_admin' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -152,7 +152,7 @@ class RequestController extends Controller
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
-                    'attachment'      => $filename,
+                    'attachment' => $filename,
                 ], $storedMessage->id);
             }
 
@@ -189,14 +189,14 @@ class RequestController extends Controller
     public function store(): RedirectResponse|JsonResponse
     {
         $this->validate(request(), [
-            'order_id'        => 'required|exists:orders,id',
-            'order_item_id'   => 'required',
-            'rma_qty'         => 'required',
+            'order_id' => 'required|exists:orders,id',
+            'order_item_id' => 'required',
+            'rma_qty' => 'required',
             'resolution_type' => 'required',
-            'rma_reason_id'   => 'required',
-            'information'     => 'nullable|string',
-            'images'          => 'nullable|array|min:1',
-            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'rma_reason_id' => 'required',
+            'information' => 'nullable|string',
+            'images' => 'nullable|array|min:1',
+            'images.*' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
         ]);
 
         $data = request()->only([
@@ -217,9 +217,9 @@ class RequestController extends Controller
          * Creation of a new RMA record.
          */
         $rma = $this->rmaRepository->create([
-            'order_id'          => $data['order_id'],
-            'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
-            'information'       => $data['information'] ?? null,
+            'order_id' => $data['order_id'],
+            'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
+            'information' => $data['information'] ?? null,
             'package_condition' => $data['package_condition'] ?? null,
         ]);
 
@@ -227,21 +227,21 @@ class RequestController extends Controller
          * Creation of RMA item for the newly created RMA record.
          */
         $this->rmaItemRepository->create([
-            'rma_id'        => $rma->id,
+            'rma_id' => $rma->id,
             'rma_reason_id' => $data['rma_reason_id'],
             'order_item_id' => $data['order_item_id'],
-            'variant_id'    => ! empty($data['variant']) ? $data['variant'] : null,
-            'quantity'      => $data['rma_qty'],
-            'resolution'    => $data['resolution_type'],
+            'variant_id' => ! empty($data['variant']) ? $data['variant'] : null,
+            'quantity' => $data['rma_qty'],
+            'resolution' => $data['resolution_type'],
         ]);
 
         /**
          * Initial message indicating the processing of the RMA request.
          */
         $this->rmaMessageRepository->create([
-            'rma_id'     => $rma->id,
-            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
-            'is_admin'   => 1,
+            'rma_id' => $rma->id,
+            'message' => trans('shop::app.rma.mail.customer-conversation.process'),
+            'is_admin' => 1,
         ]);
 
         /**
@@ -275,13 +275,13 @@ class RequestController extends Controller
             }
 
             return response()->json([
-                'messages'     => trans('admin::app.sales.rma.create-rma.create-success'),
+                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
                 'redirect_url' => route('admin.sales.rma.view', $rma->id),
             ]);
         }
 
         return response()->json([
-            'messages'     => trans('admin::app.sales.rma.create-rma.failed'),
+            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
             'redirect_url' => route('admin.sales.rma.create'),
         ]);
     }
@@ -354,8 +354,8 @@ class RequestController extends Controller
 
         return match ($statusId) {
             DefaultRMAStatusEnum::RECEIVED_PACKAGE->value => $this->handleReceivedPackage($rma, $data),
-            DefaultRMAStatusEnum::ITEM_CANCELED->value    => $this->handleItemCancellation($rma, $data),
-            default                                       => $this->finalizeRmaUpdate($rma, $data),
+            DefaultRMAStatusEnum::ITEM_CANCELED->value => $this->handleItemCancellation($rma, $data),
+            default => $this->finalizeRmaUpdate($rma, $data),
         };
     }
 
@@ -510,14 +510,14 @@ class RequestController extends Controller
 
         if (! $refundAmount) {
             return [
-                'valid'   => false,
+                'valid' => false,
                 'message' => trans('admin::app.sales.refunds.create.invalid-refund-amount-error'),
             ];
         }
 
         if ($refundAmount > $maxRefundAmount) {
             return [
-                'valid'   => false,
+                'valid' => false,
                 'message' => trans('admin::app.sales.refunds.create.refund-limit-error', [
                     'amount' => core()->formatBasePrice($maxRefundAmount),
                 ]),
@@ -538,10 +538,10 @@ class RequestController extends Controller
 
         return [
             'refund' => [
-                'shipping'          => request('shipping', 0),
+                'shipping' => request('shipping', 0),
                 'adjustment_refund' => 0,
-                'adjustment_fee'    => 0,
-                'items'             => $item,
+                'adjustment_fee' => 0,
+                'items' => $item,
             ],
         ];
     }
@@ -555,10 +555,10 @@ class RequestController extends Controller
 
         $this->rmaMessageRepository->create([
             'message' => trans('admin::app.sales.rma.all-rma.view.status-message', [
-                'id'     => $rma->id,
+                'id' => $rma->id,
                 'status' => $rma->fresh()->status->title,
             ]),
-            'rma_id'   => $rma->id,
+            'rma_id' => $rma->id,
             'is_admin' => 1,
         ]);
 

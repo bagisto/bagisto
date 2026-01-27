@@ -52,9 +52,9 @@ return [
     */
 
     'templates' => [
-        'small'  => Webkul\ImageCache\Templates\Small::class,
+        'small' => Webkul\ImageCache\Templates\Small::class,
         'medium' => Webkul\ImageCache\Templates\Medium::class,
-        'large'  => Webkul\ImageCache\Templates\Large::class,
+        'large' => Webkul\ImageCache\Templates\Large::class,
     ],
 
     /*

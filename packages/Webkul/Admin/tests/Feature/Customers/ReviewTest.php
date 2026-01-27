@@ -41,9 +41,9 @@ it('should return the edit page of the review', function () {
     $customer = Customer::factory()->create();
 
     $productReview = ProductReview::factory()->create([
-        'product_id'  => $product->id,
+        'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'name'        => $customer->name,
+        'name' => $customer->name,
     ]);
 
     $attachment = UploadedFile::fake()->image('test.png');
@@ -51,9 +51,9 @@ it('should return the edit page of the review', function () {
     $fileType = explode('/', $attachment->getMimeType());
 
     $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path'      => $attachment->store('review/'.$productReview->id),
+        'path' => $attachment->store('review/'.$productReview->id),
         'review_id' => $productReview->id,
-        'type'      => $fileType[0],
+        'type' => $fileType[0],
         'mime_type' => $fileType[1],
     ]);
 
@@ -70,20 +70,20 @@ it('should return the edit page of the review', function () {
         ProductReviewAttachment::class => [
             [
                 'review_id' => $productReview->id,
-                'path'      => $productReviewAttachment->path,
-                'type'      => $productReviewAttachment->type,
+                'path' => $productReviewAttachment->path,
+                'type' => $productReviewAttachment->type,
                 'mime_type' => $productReviewAttachment->mime_type,
             ],
         ],
 
         ProductReview::class => [
             [
-                'name'        => $productReview->name,
-                'title'       => $productReview->title,
-                'rating'      => $productReview->rating,
-                'comment'     => $productReview->comment,
-                'status'      => $productReview->status,
-                'product_id'  => $productReview->product_id,
+                'name' => $productReview->name,
+                'title' => $productReview->title,
+                'rating' => $productReview->rating,
+                'comment' => $productReview->comment,
+                'status' => $productReview->status,
+                'product_id' => $productReview->product_id,
                 'customer_id' => $productReview->customer_id,
             ],
         ],
@@ -111,9 +111,9 @@ it('should fail the validation with errors for status for review update', functi
     $customer = Customer::factory()->create();
 
     $productReview = ProductReview::factory()->create([
-        'product_id'  => $product->id,
+        'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'name'        => $customer->name,
+        'name' => $customer->name,
     ]);
 
     $attachment = UploadedFile::fake()->image('test.png');
@@ -121,9 +121,9 @@ it('should fail the validation with errors for status for review update', functi
     $fileType = explode('/', $attachment->getMimeType());
 
     $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path'      => $attachment->store('review/'.$productReview->id),
+        'path' => $attachment->store('review/'.$productReview->id),
         'review_id' => $productReview->id,
-        'type'      => $fileType[0],
+        'type' => $fileType[0],
         'mime_type' => $fileType[1],
     ]);
 
@@ -138,20 +138,20 @@ it('should fail the validation with errors for status for review update', functi
         ProductReviewAttachment::class => [
             [
                 'review_id' => $productReview->id,
-                'path'      => $productReviewAttachment->path,
-                'type'      => $productReviewAttachment->type,
+                'path' => $productReviewAttachment->path,
+                'type' => $productReviewAttachment->type,
                 'mime_type' => $productReviewAttachment->mime_type,
             ],
         ],
 
         ProductReview::class => [
             [
-                'name'        => $productReview->name,
-                'title'       => $productReview->title,
-                'rating'      => $productReview->rating,
-                'comment'     => $productReview->comment,
-                'status'      => $productReview->status,
-                'product_id'  => $productReview->product_id,
+                'name' => $productReview->name,
+                'title' => $productReview->title,
+                'rating' => $productReview->rating,
+                'comment' => $productReview->comment,
+                'status' => $productReview->status,
+                'product_id' => $productReview->product_id,
                 'customer_id' => $productReview->customer_id,
             ],
         ],
@@ -179,9 +179,9 @@ it('should update the status of the review', function () {
     $customer = Customer::factory()->create();
 
     $productReview = ProductReview::factory()->create([
-        'product_id'  => $product->id,
+        'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'name'        => $customer->name,
+        'name' => $customer->name,
     ]);
 
     $attachment = UploadedFile::fake()->image('test.png');
@@ -189,9 +189,9 @@ it('should update the status of the review', function () {
     $fileType = explode('/', $attachment->getMimeType());
 
     $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path'      => $attachment->store('review/'.$productReview->id),
+        'path' => $attachment->store('review/'.$productReview->id),
         'review_id' => $productReview->id,
-        'type'      => $fileType[0],
+        'type' => $fileType[0],
         'mime_type' => $fileType[1],
     ]);
 
@@ -208,20 +208,20 @@ it('should update the status of the review', function () {
         ProductReviewAttachment::class => [
             [
                 'review_id' => $productReview->id,
-                'path'      => $productReviewAttachment->path,
-                'type'      => $productReviewAttachment->type,
+                'path' => $productReviewAttachment->path,
+                'type' => $productReviewAttachment->type,
                 'mime_type' => $productReviewAttachment->mime_type,
             ],
         ],
 
         ProductReview::class => [
             [
-                'name'        => $productReview->name,
-                'title'       => $productReview->title,
-                'rating'      => $productReview->rating,
-                'comment'     => $productReview->comment,
-                'status'      => $status,
-                'product_id'  => $productReview->product_id,
+                'name' => $productReview->name,
+                'title' => $productReview->title,
+                'rating' => $productReview->rating,
+                'comment' => $productReview->comment,
+                'status' => $status,
+                'product_id' => $productReview->product_id,
                 'customer_id' => $productReview->customer_id,
             ],
         ],
@@ -249,9 +249,9 @@ it('should delete the review', function () {
     $customer = Customer::factory()->create();
 
     $productReview = ProductReview::factory()->create([
-        'product_id'  => $product->id,
+        'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'name'        => $customer->name,
+        'name' => $customer->name,
     ]);
 
     $attachment = UploadedFile::fake()->image('test.png');
@@ -259,9 +259,9 @@ it('should delete the review', function () {
     $fileType = explode('/', $attachment->getMimeType());
 
     $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path'      => $attachment->store('review/'.$productReview->id),
+        'path' => $attachment->store('review/'.$productReview->id),
         'review_id' => $productReview->id,
-        'type'      => $fileType[0],
+        'type' => $fileType[0],
         'mime_type' => $fileType[1],
     ]);
 
@@ -302,9 +302,9 @@ it('should mass delete the product review', function () {
     $customer = Customer::factory()->create();
 
     $productReviews = ProductReview::factory()->count(5)->create([
-        'product_id'  => $product->id,
+        'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'name'        => $customer->name,
+        'name' => $customer->name,
     ]);
 
     $productReviewAttachments = [];
@@ -315,9 +315,9 @@ it('should mass delete the product review', function () {
         $fileType = explode('/', $attachment->getMimeType());
 
         $productReviewAttachments[] = ProductReviewAttachment::factory()->create([
-            'path'      => $attachment->store('review/'.$productReview->id),
+            'path' => $attachment->store('review/'.$productReview->id),
             'review_id' => $productReview->id,
-            'type'      => $fileType[0],
+            'type' => $fileType[0],
             'mime_type' => $fileType[1],
         ]);
     }
@@ -365,7 +365,7 @@ it('should mass update the product review', function () {
         ->create();
 
     $productReviews = ProductReview::factory()->count(2)->create([
-        'status'     => $status,
+        'status' => $status,
         'product_id' => $product->id,
     ]);
 
@@ -374,7 +374,7 @@ it('should mass update the product review', function () {
 
     postJson(route('admin.customers.customers.review.mass_update', [
         'indices' => $productReviews->pluck('id')->toArray(),
-        'value'   => $status,
+        'value' => $status,
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
@@ -383,7 +383,7 @@ it('should mass update the product review', function () {
         $this->assertModelWise([
             ProductReview::class => [
                 [
-                    'id'     => $productReview->id,
+                    'id' => $productReview->id,
                     'status' => $productReview->status,
                 ],
             ],

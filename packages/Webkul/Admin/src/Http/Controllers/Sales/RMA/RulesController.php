@@ -40,8 +40,8 @@ class RulesController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'name'        => 'required',
-            'status'      => 'required|boolean',
+            'name' => 'required',
+            'status' => 'required|boolean',
             'description' => 'required',
         ]);
 
@@ -77,9 +77,9 @@ class RulesController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'name'             => 'required',
-            'status'           => 'required|boolean',
-            'description'      => 'required',
+            'name' => 'required',
+            'status' => 'required|boolean',
+            'description' => 'required',
         ]);
 
         Event::dispatch('sales.rma.rules.update.before', $id);
@@ -131,7 +131,7 @@ class RulesController extends Controller
             Event::dispatch('sales.rma.rules.update.before', $rmaRuleId);
 
             $rmaRule = $this->rmaRulesRepository->update([
-                'status'  => request()->input('value'),
+                'status' => request()->input('value'),
             ], $rmaRuleId, ['status']);
 
             Event::dispatch('sales.rma.rules.update.after', $rmaRule);

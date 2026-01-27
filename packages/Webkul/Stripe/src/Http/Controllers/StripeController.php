@@ -105,9 +105,9 @@ class StripeController extends Controller
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [
-                'stripe_session_id'        => $sessionId,
+                'stripe_session_id' => $sessionId,
                 'stripe_payment_intent_id' => $session->payment_intent,
-                'stripe_payment_status'    => $session->payment_status,
+                'stripe_payment_status' => $session->payment_status,
             ];
 
             $order = $this->orderRepository->create($data);
@@ -127,16 +127,16 @@ class StripeController extends Controller
 
                 $this->orderTransactionRepository->create([
                     'transaction_id' => $session->payment_intent,
-                    'status'         => $session->payment_status,
-                    'type'           => $order->payment->method,
+                    'status' => $session->payment_status,
+                    'type' => $order->payment->method,
                     'payment_method' => $order->payment->method,
-                    'order_id'       => $order->id,
-                    'invoice_id'     => $invoice->id,
-                    'amount'         => $order->base_grand_total,
-                    'data'           => json_encode([
-                        'stripe_session_id'        => $sessionId,
+                    'order_id' => $order->id,
+                    'invoice_id' => $invoice->id,
+                    'amount' => $order->base_grand_total,
+                    'data' => json_encode([
+                        'stripe_session_id' => $sessionId,
                         'stripe_payment_intent_id' => $session->payment_intent,
-                        'stripe_payment_status'    => $session->payment_status,
+                        'stripe_payment_status' => $session->payment_status,
                     ]),
                 ]);
             }

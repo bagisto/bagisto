@@ -66,7 +66,7 @@ class FixerExchange extends ExchangeRate
                 ], $exchangeRate->id);
             } else {
                 $this->exchangeRateRepository->create([
-                    'rate'            => $result['rates'][$currency->code],
+                    'rate' => $result['rates'][$currency->code],
                     'target_currency' => $currency->id,
                 ]);
             }

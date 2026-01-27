@@ -40,7 +40,7 @@ class StatusController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:rma_statuses,title',
+            'title' => 'required|unique:rma_statuses,title',
             'status' => 'required|boolean',
         ]);
 
@@ -71,7 +71,7 @@ class StatusController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'title'  => 'required|unique:rma_statuses,title,'.$id,
+            'title' => 'required|unique:rma_statuses,title,'.$id,
             'status' => 'required|boolean',
         ]);
 
@@ -121,7 +121,7 @@ class StatusController extends Controller
             Event::dispatch('sales.rma.rma-status.update.before', $rmaStatusId);
 
             $rmaStatus = $this->rmaStatusRepository->update([
-                'status'  => request()->input('value'),
+                'status' => request()->input('value'),
             ], $rmaStatusId, ['status']);
 
             Event::dispatch('sales.rma.rma-status.update.after', $rmaStatus);

@@ -53,14 +53,14 @@ it('should store the newly created theme', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'), [
-        'type'       => $type = fake()->randomElement([
+        'type' => $type = fake()->randomElement([
             'product_carousel',
             'category_carousel',
             'image_carousel',
             'footer_links',
             'services_content',
         ]),
-        'name'       => $name = fake()->name(),
+        'name' => $name = fake()->name(),
         'sort_order' => $lastThemeId,
         'channel_id' => $channelId = core()->getCurrentChannel()->id,
         'theme_code' => $themeCode = core()->getCurrentChannel()->theme,
@@ -71,9 +71,9 @@ it('should store the newly created theme', function () {
     $this->assertModelWise([
         ThemeCustomization::class => [
             [
-                'id'         => $lastThemeId,
-                'type'       => $type,
-                'name'       => $name,
+                'id' => $lastThemeId,
+                'type' => $type,
+                'name' => $name,
                 'channel_id' => $channelId,
                 'theme_code' => $themeCode,
             ],
@@ -106,11 +106,11 @@ it('should update the theme customizations', function () {
         case ThemeCustomization::PRODUCT_CAROUSEL:
             $data[app()->getLocale()] = [
                 'options' => [
-                    'title'   => fake()->title(),
+                    'title' => fake()->title(),
                     'filters' => [
-                        'sort'  => 'name-desc',
+                        'sort' => 'name-desc',
                         'limit' => '12',
-                        'new'   => '1',
+                        'new' => '1',
                     ],
                 ],
             ];
@@ -120,10 +120,10 @@ it('should update the theme customizations', function () {
         case ThemeCustomization::CATEGORY_CAROUSEL:
             $data[app()->getLocale()] = [
                 'options' => [
-                    'title'   => fake()->title(),
+                    'title' => fake()->title(),
                     'filters' => [
-                        'sort'      => 'desc',
-                        'limit'     => '10',
+                        'sort' => 'desc',
+                        'limit' => '10',
                         'parent_id' => '1',
                     ],
                 ],
@@ -136,7 +136,7 @@ it('should update the theme customizations', function () {
                 'options' => [
                     [
                         'title' => fake()->title(),
-                        'link'  => fake()->url(),
+                        'link' => fake()->url(),
                         'image' => UploadedFile::fake()->image(fake()->word().'.png', 640, 480, 'png'),
                     ],
                 ],
@@ -149,8 +149,8 @@ it('should update the theme customizations', function () {
                 'options' => [
                     'column_1' => [
                         [
-                            'url'        => fake()->url(),
-                            'title'      => fake()->title(),
+                            'url' => fake()->url(),
+                            'title' => fake()->title(),
                             'sort_order' => '1',
                         ],
                     ],
@@ -163,8 +163,8 @@ it('should update the theme customizations', function () {
             $data[app()->getLocale()] = [
                 'options' => [
                     [
-                        'title'        => fake()->title(),
-                        'description'  => fake()->paragraph(),
+                        'title' => fake()->title(),
+                        'description' => fake()->paragraph(),
                         'service_icon' => 'icon-truck',
                     ],
                 ],
@@ -191,7 +191,7 @@ it('should update the theme customizations', function () {
     $this->assertModelWise([
         ThemeCustomization::class => [
             [
-                'id'   => $theme->id,
+                'id' => $theme->id,
                 'type' => $theme->type,
                 'name' => $name,
             ],
@@ -213,16 +213,16 @@ it('should sanitize malicious script tags from static content HTML when updating
         app()->getLocale() => [
             'options' => [
                 'html' => $maliciousHtml,
-                'css'  => $safeCss,
+                'css' => $safeCss,
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'static_content',
-        'name'        => $name = fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'static_content',
+        'name' => $name = fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -254,16 +254,16 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
         app()->getLocale() => [
             'options' => [
                 'html' => $maliciousHtml,
-                'css'  => '',
+                'css' => '',
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'static_content',
-        'name'        => fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'static_content',
+        'name' => fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -295,16 +295,16 @@ it('should sanitize form tags from static content HTML when updating theme', fun
         app()->getLocale() => [
             'options' => [
                 'html' => $maliciousHtml,
-                'css'  => '',
+                'css' => '',
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'static_content',
-        'name'        => fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'static_content',
+        'name' => fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -338,16 +338,16 @@ it('should preserve safe HTML content in static content when updating theme', fu
         app()->getLocale() => [
             'options' => [
                 'html' => $safeHtml,
-                'css'  => $safeCss,
+                'css' => $safeCss,
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'static_content',
-        'name'        => fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'static_content',
+        'name' => fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -382,16 +382,16 @@ it('should sanitize malicious event handlers from static content HTML when updat
         app()->getLocale() => [
             'options' => [
                 'html' => $maliciousHtml,
-                'css'  => '',
+                'css' => '',
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'static_content',
-        'name'        => fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'static_content',
+        'name' => fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -420,21 +420,21 @@ it('should not sanitize HTML for non-static content theme types', function () {
     $data = [
         app()->getLocale() => [
             'options' => [
-                'title'   => 'Test Title',
+                'title' => 'Test Title',
                 'filters' => [
-                    'sort'  => 'name-desc',
+                    'sort' => 'name-desc',
                     'limit' => '12',
-                    'new'   => '1',
+                    'new' => '1',
                 ],
             ],
         ],
-        'locale'      => app()->getLocale(),
-        'type'        => 'product_carousel',
-        'name'        => $name = fake()->name(),
-        'sort_order'  => '1',
-        'channel_id'  => core()->getCurrentChannel()->id,
-        'theme_code'  => core()->getCurrentChannel()->theme,
-        'status'      => 'on',
+        'locale' => app()->getLocale(),
+        'type' => 'product_carousel',
+        'name' => $name = fake()->name(),
+        'sort_order' => '1',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'theme_code' => core()->getCurrentChannel()->theme,
+        'status' => 'on',
     ];
 
     // Act and Assert.
@@ -450,7 +450,7 @@ it('should not sanitize HTML for non-static content theme types', function () {
     $this->assertModelWise([
         ThemeCustomization::class => [
             [
-                'id'   => $theme->id,
+                'id' => $theme->id,
                 'type' => 'product_carousel',
                 'name' => $name,
             ],

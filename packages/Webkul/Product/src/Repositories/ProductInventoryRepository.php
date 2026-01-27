@@ -26,9 +26,9 @@ class ProductInventoryRepository extends Repository
 
         foreach ($data['inventories'] as $inventorySourceId => $qty) {
             $this->updateOrCreate([
-                'product_id'          => $product->id,
+                'product_id' => $product->id,
                 'inventory_source_id' => $inventorySourceId,
-                'vendor_id'           => $data['vendor_id'] ?? 0,
+                'vendor_id' => $data['vendor_id'] ?? 0,
             ], [
                 'qty' => $qty ?? 0,
             ]);

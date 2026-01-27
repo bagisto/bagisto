@@ -92,8 +92,8 @@ it('should returns the search page of the products', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -139,7 +139,7 @@ it('should store the subscription of the shop', function () {
     $this->assertModelWise([
         SubscribersList::class => [
             [
-                'email'         => $email,
+                'email' => $email,
                 'is_subscribed' => 1,
             ],
         ],
@@ -158,7 +158,7 @@ it('should store the subscription of the shop and send the mail to the admin', f
     $this->assertModelWise([
         SubscribersList::class => [
             [
-                'email'         => $email,
+                'email' => $email,
                 'is_subscribed' => 1,
             ],
         ],
@@ -188,8 +188,8 @@ it('should store the products to the compare list', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -232,8 +232,8 @@ it('should remove product from compare list', function () {
     // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -257,8 +257,8 @@ it('should remove product from compare list', function () {
     $this->loginAsCustomer();
 
     CompareItem::factory()->create([
-        'customer_id'  => auth()->guard('customer')->user()->id,
-        'product_id'   => $product->id,
+        'customer_id' => auth()->guard('customer')->user()->id,
+        'product_id' => $product->id,
     ]);
 
     deleteJson(route('shop.api.compare.destroy'), [
@@ -272,8 +272,8 @@ it('should remove all the products from compare list', function () {
     // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
-            5  => 'new',
-            6  => 'featured',
+            5 => 'new',
+            6 => 'featured',
             11 => 'price',
             26 => 'guest_checkout',
         ],
@@ -298,8 +298,8 @@ it('should remove all the products from compare list', function () {
 
     foreach ($products as $product) {
         CompareItem::factory()->create([
-            'customer_id'  => auth()->guard('customer')->user()->id,
-            'product_id'   => $product->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'product_id' => $product->id,
         ]);
     }
 

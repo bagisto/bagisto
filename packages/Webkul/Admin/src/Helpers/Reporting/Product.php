@@ -39,7 +39,7 @@ class Product extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalSoldQuantities($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalSoldQuantities($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalSoldQuantities($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -91,7 +91,7 @@ class Product extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalProductsAddedToWishlist($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalProductsAddedToWishlist($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalProductsAddedToWishlist($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -140,7 +140,7 @@ class Product extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalReviews($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalReviews($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalReviews($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -204,13 +204,13 @@ class Product extends AbstractReporting
 
         $items = $items->map(function ($item) {
             return [
-                'id'                => $item->product_id,
-                'name'              => $item->name,
-                'price'             => $item->product?->price,
-                'formatted_price'   => core()->formatBasePrice($item->price),
-                'revenue'           => $item->revenue,
+                'id' => $item->product_id,
+                'name' => $item->name,
+                'price' => $item->product?->price,
+                'formatted_price' => core()->formatBasePrice($item->price),
+                'revenue' => $item->revenue,
                 'formatted_revenue' => core()->formatBasePrice($item->revenue),
-                'images'            => $item->product?->images,
+                'images' => $item->product?->images,
             ];
         });
 
@@ -240,12 +240,12 @@ class Product extends AbstractReporting
 
         $items = $items->map(function ($item) {
             return [
-                'id'                => $item->product_id,
-                'name'              => $item->name,
-                'price'             => $item->product?->price,
-                'formatted_price'   => core()->formatBasePrice($item->price),
+                'id' => $item->product_id,
+                'name' => $item->name,
+                'price' => $item->product?->price,
+                'formatted_price' => core()->formatBasePrice($item->price),
                 'total_qty_ordered' => $item->total_qty_ordered,
-                'images'            => $item->product?->images,
+                'images' => $item->product?->images,
             ];
         });
 

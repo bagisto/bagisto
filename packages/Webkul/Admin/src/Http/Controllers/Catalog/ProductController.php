@@ -88,11 +88,11 @@ class ProductController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'type'                => 'required',
+            'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku'                 => ['required', 'unique:products,sku', new Slug],
-            'super_attributes'    => 'array|min:1',
-            'super_attributes.*'  => 'array|min:1',
+            'sku' => ['required', 'unique:products,sku', new Slug],
+            'super_attributes' => 'array|min:1',
+            'super_attributes.*' => 'array|min:1',
         ]);
 
         if (
@@ -176,7 +176,7 @@ class ProductController extends Controller
         Event::dispatch('catalog.product.update.after', $product);
 
         return response()->json([
-            'message'      => __('admin::app.catalog.products.saved-inventory-message'),
+            'message' => __('admin::app.catalog.products.saved-inventory-message'),
             'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty'),
         ]);
     }
@@ -294,7 +294,7 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
-                'status'  => $massUpdateRequest->input('value'),
+                'status' => $massUpdateRequest->input('value'),
             ], $productId, ['status']);
 
             Event::dispatch('catalog.product.update.after', $product);
@@ -348,10 +348,10 @@ class ProductController extends Controller
         $channelId = $this->customerRepository->find(request('customer_id'))->channel_id ?? null;
 
         $params = [
-            'index'      => $indexNames ?? null,
-            'name'       => request('query'),
-            'sort'       => 'created_at',
-            'order'      => 'desc',
+            'index' => $indexNames ?? null,
+            'name' => request('query'),
+            'sort' => 'created_at',
+            'order' => 'desc',
             'channel_id' => $channelId,
         ];
 
@@ -380,7 +380,7 @@ class ProductController extends Controller
     public function download($productId, $attributeId)
     {
         $productAttribute = $this->productAttributeValueRepository->findOneWhere([
-            'product_id'   => $productId,
+            'product_id' => $productId,
             'attribute_id' => $attributeId,
         ]);
 

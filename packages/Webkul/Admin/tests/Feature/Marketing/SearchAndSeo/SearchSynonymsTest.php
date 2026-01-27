@@ -33,7 +33,7 @@ it('should store the newly created search synonyms', function () {
 
     postJson(route('admin.marketing.search_seo.search_synonyms.store'), [
         'terms' => $term = fake()->randomElement(['jackets', 'shoes', 'footwear',  'phone', 'computers', 'electronics']),
-        'name'  => $name = fake()->name(),
+        'name' => $name = fake()->name(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.create.success'));
@@ -42,7 +42,7 @@ it('should store the newly created search synonyms', function () {
         SearchSynonym::class => [
             [
                 'terms' => $term,
-                'name'  => $name,
+                'name' => $name,
             ],
         ],
     ]);
@@ -69,9 +69,9 @@ it('should update the search synonyms', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
-        'id'    => $searchSynonym->id,
+        'id' => $searchSynonym->id,
         'terms' => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
-        'name'  => $searchSynonym->name,
+        'name' => $searchSynonym->name,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.success'));
@@ -79,9 +79,9 @@ it('should update the search synonyms', function () {
     $this->assertModelWise([
         SearchSynonym::class => [
             [
-                'id'    => $searchSynonym->id,
+                'id' => $searchSynonym->id,
                 'terms' => $term,
-                'name'  => $searchSynonym->name,
+                'name' => $searchSynonym->name,
             ],
         ],
     ]);

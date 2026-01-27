@@ -148,8 +148,8 @@ class Captcha implements CaptchaContract
 
         $payload = [
             'event' => [
-                'token'          => $response,
-                'siteKey'        => $this->siteKey,
+                'token' => $response,
+                'siteKey' => $this->siteKey,
                 'expectedAction' => 'submit',
             ],
         ];
@@ -182,9 +182,9 @@ class Captcha implements CaptchaContract
                 $isValid = $score >= $this->scoreThreshold;
 
                 logger()->info('reCAPTCHA: Validation result.', [
-                    'score'     => $score,
+                    'score' => $score,
                     'threshold' => $this->scoreThreshold,
-                    'success'   => $isValid,
+                    'success' => $isValid,
                 ]);
 
                 return $isValid;
@@ -196,7 +196,7 @@ class Captcha implements CaptchaContract
         } catch (\Exception $e) {
             logger()->error('reCAPTCHA: Exception during validation request.', [
                 'message' => $e->getMessage(),
-                'trace'   => $e->getTraceAsString(),
+                'trace' => $e->getTraceAsString(),
             ]);
 
             return false;
@@ -221,7 +221,7 @@ class Captcha implements CaptchaContract
         return $this->isActive()
             ? array_merge($messages, [
                 'recaptcha_token.required' => trans('customer::app.validations.captcha.required'),
-                'recaptcha_token.captcha'  => trans('customer::app.validations.captcha.captcha'),
+                'recaptcha_token.captcha' => trans('customer::app.validations.captcha.captcha'),
             ])
             : $messages;
     }
@@ -246,7 +246,7 @@ class Captcha implements CaptchaContract
     protected function getAttributes(): array
     {
         return [
-            'id'   => 'recaptcha-token',
+            'id' => 'recaptcha-token',
             'name' => 'recaptcha_token',
             'type' => 'hidden',
         ];
@@ -291,7 +291,7 @@ class Captcha implements CaptchaContract
     {
         return view('customer::captcha.scripts', [
             'clientEndPoint' => $this->getClientEndpoint(),
-            'siteKey'        => $this->siteKey,
+            'siteKey' => $this->siteKey,
         ])->render();
     }
 }

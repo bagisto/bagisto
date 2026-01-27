@@ -12,9 +12,9 @@ class Indexer extends Command
 {
     protected $indexers = [
         'inventory' => Inventory::class,
-        'price'     => Price::class,
-        'flat'      => Flat::class,
-        'elastic'   => ElasticSearch::class,
+        'price' => Price::class,
+        'flat' => Flat::class,
+        'elastic' => ElasticSearch::class,
     ];
 
     /**

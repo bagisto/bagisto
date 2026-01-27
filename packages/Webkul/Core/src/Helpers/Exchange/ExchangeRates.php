@@ -54,11 +54,11 @@ class ExchangeRates extends ExchangeRate
                 $this->apiEndPoint, [
                     'headers' => [
                         'Content-Type' => 'text/plain',
-                        'apikey'       => $this->apiKey,
+                        'apikey' => $this->apiKey,
                     ],
                     'query' => [
-                        'to'     => $currency->code,
-                        'from'   => config('app.currency'),
+                        'to' => $currency->code,
+                        'from' => config('app.currency'),
                         'amount' => 1,
                     ],
                 ]
@@ -79,7 +79,7 @@ class ExchangeRates extends ExchangeRate
                 ], $exchangeRate->id);
             } else {
                 $this->exchangeRateRepository->create([
-                    'rate'            => $result['result'],
+                    'rate' => $result['result'],
                     'target_currency' => $currency->id,
                 ]);
             }

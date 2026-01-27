@@ -155,7 +155,7 @@ class ImageCache
     protected function registerCall(string $name, array $arguments): void
     {
         $this->calls[] = [
-            'name'      => $name,
+            'name' => $name,
             'arguments' => $arguments,
         ];
     }

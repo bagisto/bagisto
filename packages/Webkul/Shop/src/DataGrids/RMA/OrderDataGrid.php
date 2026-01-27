@@ -139,25 +139,25 @@ class OrderDataGrid extends DataGrid
     public function prepareColumns(): void
     {
         $this->addColumn([
-            'index'      => 'increment_id',
-            'label'      => trans('shop::app.customers.account.orders.order-id'),
-            'type'       => 'string',
+            'index' => 'increment_id',
+            'label' => trans('shop::app.customers.account.orders.order-id'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->increment_id]).'">'.'#'.$row->increment_id.'</a></span>';
             },
         ]);
 
         $this->addColumn([
-            'index'              => 'status',
-            'label'              => trans('shop::app.customers.account.orders.status.title'),
-            'type'               => 'string',
-            'filterable_type'    => 'dropdown',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
+            'index' => 'status',
+            'label' => trans('shop::app.customers.account.orders.status.title'),
+            'type' => 'string',
+            'filterable_type' => 'dropdown',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_options' => [
                 [
                     'label' => trans('shop::app.customers.account.orders.status.processing'),
@@ -182,7 +182,7 @@ class OrderDataGrid extends DataGrid
                     'value' => Order::STATUS_FRAUD,
                 ],
             ],
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 switch ($row->status) {
                     case Order::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('shop::app.customers.account.orders.status.processing').'</p>';
@@ -209,43 +209,43 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'grand_total',
-            'label'      => trans('shop::app.customers.account.orders.total'),
-            'type'       => 'string',
+            'index' => 'grand_total',
+            'label' => trans('shop::app.customers.account.orders.total'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.core()->formatPrice($row->grand_total, $row->order_currency_code).'</span>';
             },
         ]);
 
         $this->addColumn([
-            'index'              => 'method_title',
-            'label'              => trans('shop::app.customers.account.orders.pay-via'),
-            'type'               => 'string',
-            'filterable_type'    => 'dropdown',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
+            'index' => 'method_title',
+            'label' => trans('shop::app.customers.account.orders.pay-via'),
+            'type' => 'string',
+            'filterable_type' => 'dropdown',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_options' => collect(config('payment_methods'))
                 ->map(fn ($type) => ['label' => trans($type['title']), 'value' => $type['title']])
                 ->values()
                 ->toArray(),
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.trans('shop::app.customers.account.orders.pay-by', ['method' => '']).$row->method_title.'</span>';
             },
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('shop::app.customers.account.orders.order-date'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'sortable'        => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('shop::app.customers.account.orders.order-date'),
+            'type' => 'date',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'closure'         => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.$row->created_at.'</span>';
             },
         ]);
@@ -257,10 +257,10 @@ class OrderDataGrid extends DataGrid
     public function prepareActions(): void
     {
         $this->addAction([
-            'icon'   => 'icon-eye',
-            'title'  => trans('shop::app.customers.account.orders.action-view'),
+            'icon' => 'icon-eye',
+            'title' => trans('shop::app.customers.account.orders.action-view'),
             'method' => 'GET',
-            'url'    => function ($row) {
+            'url' => function ($row) {
                 return route('shop.customers.account.orders.view', $row->id);
             },
         ]);

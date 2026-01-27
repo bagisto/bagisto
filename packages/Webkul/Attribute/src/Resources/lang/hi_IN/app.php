@@ -3,7 +3,7 @@
 return [
     'boolean' => [
         'options' => [
-            'no'  => 'नहीं',
+            'no' => 'नहीं',
             'yes' => 'हाँ',
         ],
     ],

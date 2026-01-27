@@ -94,16 +94,16 @@ class CustomerController extends Controller
 
                 if ($subscription) {
                     $this->subscriptionRepository->update([
-                        'customer_id'   => $customer->id,
+                        'customer_id' => $customer->id,
                         'is_subscribed' => 1,
                     ], $subscription->id);
                 } else {
                     $this->subscriptionRepository->create([
-                        'email'         => $data['email'],
-                        'customer_id'   => $customer->id,
-                        'channel_id'    => core()->getCurrentChannel()->id,
+                        'email' => $data['email'],
+                        'customer_id' => $customer->id,
+                        'channel_id' => core()->getCurrentChannel()->id,
                         'is_subscribed' => 1,
-                        'token'         => $token = uniqid(),
+                        'token' => $token = uniqid(),
                     ]);
                 }
             } else {
@@ -111,7 +111,7 @@ class CustomerController extends Controller
 
                 if ($subscription) {
                     $this->subscriptionRepository->update([
-                        'customer_id'   => $customer->id,
+                        'customer_id' => $customer->id,
                         'is_subscribed' => 0,
                     ], $subscription->id);
                 }

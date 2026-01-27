@@ -22,10 +22,10 @@ class AttributeFamilyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'            => $this->faker->word(),
-            'code'            => $this->faker->word(),
+            'name' => $this->faker->word(),
+            'code' => $this->faker->word(),
             'is_user_defined' => random_int(0, 1),
-            'status'          => 0,
+            'status' => 0,
         ];
     }
 }

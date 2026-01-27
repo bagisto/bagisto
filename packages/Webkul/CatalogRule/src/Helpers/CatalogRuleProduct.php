@@ -51,16 +51,16 @@ class CatalogRuleProduct
             foreach ($channelIds as $channelId) {
                 foreach ($customerGroupIds as $customerGroupId) {
                     $rows[] = [
-                        'starts_from'       => $startsFrom,
-                        'ends_till'         => $endsTill,
-                        'catalog_rule_id'   => $rule->id,
-                        'channel_id'        => $channelId,
+                        'starts_from' => $startsFrom,
+                        'ends_till' => $endsTill,
+                        'catalog_rule_id' => $rule->id,
+                        'channel_id' => $channelId,
                         'customer_group_id' => $customerGroupId,
-                        'product_id'        => $productId,
-                        'discount_amount'   => $rule->discount_amount,
-                        'action_type'       => $rule->action_type,
-                        'end_other_rules'   => $rule->end_other_rules,
-                        'sort_order'        => $rule->sort_order,
+                        'product_id' => $productId,
+                        'discount_amount' => $rule->discount_amount,
+                        'action_type' => $rule->action_type,
+                        'end_other_rules' => $rule->end_other_rules,
+                        'sort_order' => $rule->sort_order,
                     ];
 
                     if (count($rows) == $batchCount) {

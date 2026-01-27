@@ -49,12 +49,12 @@ class CustomFieldController extends Controller
     public function store(): RedirectResponse
     {
         $this->validate(request(), [
-            'label'    => 'required',
-            'code'     => 'required|unique:rma_custom_fields,code',
+            'label' => 'required',
+            'code' => 'required|unique:rma_custom_fields,code',
             'position' => 'required',
-            'type'     => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
-            'options'  => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
-            'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'type' => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
+            'options' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'value' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
         Event::dispatch('sales.rma.custom-field.create.before');
@@ -75,7 +75,7 @@ class CustomFieldController extends Controller
         ) {
             $this->rmaCustomFieldOptionRepository->createOption([
                 'options' => request()->input('options'),
-                'value'   => request()->input('value'),
+                'value' => request()->input('value'),
             ], $rmaCustomField->id);
         }
 
@@ -102,12 +102,12 @@ class CustomFieldController extends Controller
     public function update(int $id): RedirectResponse
     {
         $this->validate(request(), [
-            'label'    => 'required',
-            'code'     => ['required', 'unique:rma_custom_fields,code,'.$id],
+            'label' => 'required',
+            'code' => ['required', 'unique:rma_custom_fields,code,'.$id],
             'position' => 'required',
-            'type'     => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
-            'options'  => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
-            'value'    => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'type' => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
+            'options' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
+            'value' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
         $data = request()->only(
@@ -136,7 +136,7 @@ class CustomFieldController extends Controller
         ) {
             $this->rmaCustomFieldOptionRepository->createOption([
                 'options' => request()->input('options'),
-                'value'   => request()->input('value'),
+                'value' => request()->input('value'),
             ], $rmaCustomField->id);
         }
 
@@ -181,7 +181,7 @@ class CustomFieldController extends Controller
             Event::dispatch('sales.rma.custom-field.update.before', $rmaCustomFieldId);
 
             $rmaCustomField = $this->rmaCustomFieldRepository->update([
-                'status'  => request()->input('value'),
+                'status' => request()->input('value'),
             ], $rmaCustomFieldId, ['status']);
 
             Event::dispatch('sales.rma.custom-field.update.after', $rmaCustomField);

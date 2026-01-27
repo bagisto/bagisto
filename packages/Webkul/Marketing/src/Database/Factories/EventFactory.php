@@ -20,9 +20,9 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-            'name'        => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
+            'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'description' => substr($this->faker->paragraph, 0, 50),
-            'date'        => $this->faker->date,
+            'date' => $this->faker->date,
         ];
     }
 }

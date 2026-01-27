@@ -72,9 +72,9 @@ it('should store newly created attribute', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.attributes.store'), $data = [
-        'admin_name'    => fake()->name(),
-        'code'          => fake()->numerify('code########'),
-        'type'          => 'text',
+        'admin_name' => fake()->name(),
+        'code' => fake()->numerify('code########'),
+        'type' => 'text',
         'default_value' => 1,
     ])
         ->assertRedirectToRoute('admin.catalog.attributes.index')
@@ -119,9 +119,9 @@ it('should update an attribute', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.attributes.update', $attribute->id), $data = [
-        'admin_name'    => fake()->name(),
-        'code'          => $attribute->code,
-        'type'          => $attribute->type,
+        'admin_name' => fake()->name(),
+        'code' => $attribute->code,
+        'type' => $attribute->type,
         'default_value' => 1,
     ])
         ->assertRedirectToRoute('admin.catalog.attributes.index')

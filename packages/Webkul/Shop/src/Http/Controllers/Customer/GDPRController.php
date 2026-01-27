@@ -52,11 +52,11 @@ class GDPRController extends Controller
         $customer = auth()->guard('customer')->user();
 
         $params = request()->all() + [
-            'status'        => 'pending',
-            'customer_id'   => $customer->id,
+            'status' => 'pending',
+            'customer_id' => $customer->id,
             'customer_name' => $customer->first_name.' '.$customer->last_name,
-            'email'         => $customer->email,
-            'message'       => request()->get(request()->message),
+            'email' => $customer->email,
+            'message' => request()->get(request()->message),
         ];
 
         Event::dispatch('customer.account.gdpr-request.create.before');
@@ -86,8 +86,8 @@ class GDPRController extends Controller
 
             $param = [
                 'customerInformation' => $customer,
-                'order'               => ! empty($orders) ? $orders : null,
-                'address'             => ! empty($address) ? $address : null,
+                'order' => ! empty($orders) ? $orders : null,
+                'address' => ! empty($address) ? $address : null,
             ];
 
             if (is_null($param['order'])) {
@@ -122,8 +122,8 @@ class GDPRController extends Controller
 
             $param = [
                 'customerInformation' => $customer,
-                'order'               => ! empty($orders) ? $orders : null,
-                'address'             => ! empty($address) ? $address : null,
+                'order' => ! empty($orders) ? $orders : null,
+                'address' => ! empty($address) ? $address : null,
             ];
 
             if (is_null($param['order'])) {
@@ -135,7 +135,7 @@ class GDPRController extends Controller
             }
 
         } catch (\Exception $e) {
-            $param = ['customerInformation'=>$customer];
+            $param = ['customerInformation' => $customer];
         }
 
         return view('shop::customers.account.gdpr.pdf', compact('param'));
@@ -157,9 +157,9 @@ class GDPRController extends Controller
         $customer = auth()->guard('customer')->user();
 
         $data = $this->gdprDataRequestRepository->findWhere([
-            'id'          => $id,
+            'id' => $id,
             'customer_id' => $customer->id,
-            'status'      => 'pending',
+            'status' => 'pending',
         ])->first();
 
         if (! $data) {
@@ -171,7 +171,7 @@ class GDPRController extends Controller
         Event::dispatch('customer.account.gdpr-request.update.before');
 
         $gdprRequest = $this->gdprDataRequestRepository->update([
-            'status'     => 'revoked',
+            'status' => 'revoked',
             'revoked_at' => Carbon::now(),
         ], $id);
 

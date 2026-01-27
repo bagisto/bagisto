@@ -48,7 +48,7 @@ class RazorpayController extends Controller
 
             if (! $this->razorpayPayment->isCurrencySupported($currency)) {
                 session()->flash('error', trans('razorpay::app.response.supported-currency-error', [
-                    'currency'            => $currency,
+                    'currency' => $currency,
                     'supportedCurrencies' => implode(', ', $this->razorpayPayment->getSupportedCurrencies()),
                 ]));
 
@@ -150,8 +150,8 @@ class RazorpayController extends Controller
             if ($order->payment) {
                 $order->payment->update([
                     'additional' => [
-                        'status'              => Invoice::STATUS_PAID,
-                        'razorpay_order_id'   => $request->input('razorpay_order_id'),
+                        'status' => Invoice::STATUS_PAID,
+                        'razorpay_order_id' => $request->input('razorpay_order_id'),
                         'razorpay_payment_id' => $request->input('razorpay_payment_id'),
                     ],
                 ]);
@@ -163,16 +163,16 @@ class RazorpayController extends Controller
 
             $this->orderTransactionRepository->create([
                 'transaction_id' => $request->input('razorpay_payment_id'),
-                'status'         => self::PAYMENT_CAPTURED,
-                'type'           => $order->payment->method,
+                'status' => self::PAYMENT_CAPTURED,
+                'type' => $order->payment->method,
                 'payment_method' => $order->payment->method,
-                'order_id'       => $order->id,
-                'invoice_id'     => $invoice->id,
-                'amount'         => $orderData['base_grand_total'] ?? 0,
-                'data'           => json_encode([
-                    'razorpay_order_id'   => $request->input('razorpay_order_id'),
+                'order_id' => $order->id,
+                'invoice_id' => $invoice->id,
+                'amount' => $orderData['base_grand_total'] ?? 0,
+                'data' => json_encode([
+                    'razorpay_order_id' => $request->input('razorpay_order_id'),
                     'razorpay_payment_id' => $request->input('razorpay_payment_id'),
-                    'razorpay_signature'  => $request->input('razorpay_signature'),
+                    'razorpay_signature' => $request->input('razorpay_signature'),
                 ]),
             ]);
 
@@ -218,7 +218,7 @@ class RazorpayController extends Controller
 
             return [
                 'order_id' => $order->id,
-                'invoice'  => [
+                'invoice' => [
                     'items' => $invoiceItems,
                 ],
             ];

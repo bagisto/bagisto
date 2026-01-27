@@ -42,7 +42,7 @@ class Importer extends AbstractImporter
      */
     protected array $messages = [
         self::ERROR_IDENTIFIER_NOT_FOUND_FOR_DELETE => 'data_transfer::app.importers.tax-rates.validation.errors.identifier-not-found',
-        self::ERROR_DUPLICATE_IDENTIFIER            => 'data_transfer::app.importers.tax-rates.validation.errors.duplicate-identifier',
+        self::ERROR_DUPLICATE_IDENTIFIER => 'data_transfer::app.importers.tax-rates.validation.errors.duplicate-identifier',
     ];
 
     /**
@@ -128,13 +128,13 @@ class Importer extends AbstractImporter
          * Validate product attributes
          */
         $validator = Validator::make($rowData, [
-            'identifier'   => 'required|string',
+            'identifier' => 'required|string',
             'is_zip_range' => 'sometimes|boolean',
-            'zip_code'     => 'nullable|required_if:is_zip_range,0',
-            'zip_from'     => 'nullable|required_if:is_zip_range,1',
-            'zip_to'       => 'nullable|required_if:is_zip_range,1',
-            'country'      => 'required|string',
-            'tax_rate'     => 'required|numeric|min:0.0001',
+            'zip_code' => 'nullable|required_if:is_zip_range,0',
+            'zip_from' => 'nullable|required_if:is_zip_range,1',
+            'zip_to' => 'nullable|required_if:is_zip_range,1',
+            'country' => 'required|string',
+            'tax_rate' => 'required|numeric|min:0.0001',
         ]);
 
         if ($validator->fails()) {
@@ -183,7 +183,7 @@ class Importer extends AbstractImporter
         $batch = $this->importBatchRepository->update([
             'state' => Import::STATE_PROCESSED,
 
-            'summary'      => [
+            'summary' => [
                 'created' => $this->getCreatedItemsCount(),
                 'updated' => $this->getUpdatedItemsCount(),
                 'deleted' => $this->getDeletedItemsCount(),

@@ -122,15 +122,15 @@ class RMAController extends Controller
     public function store(): JsonResponse|RedirectResponse
     {
         $this->validate(request(), [
-            'order_id'        => 'required|exists:orders,id',
-            'order_item_id'   => 'required',
-            'rma_qty'         => 'required',
+            'order_id' => 'required|exists:orders,id',
+            'order_item_id' => 'required',
+            'rma_qty' => 'required',
             'resolution_type' => 'required',
-            'rma_reason_id'   => 'required',
-            'information'     => 'nullable|string',
-            'images'          => 'nullable|array|min:1',
-            'images.*'        => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
-            'agreement'       => 'accepted',
+            'rma_reason_id' => 'required',
+            'information' => 'nullable|string',
+            'images' => 'nullable|array|min:1',
+            'images.*' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+            'agreement' => 'accepted',
         ]);
 
         $data = request()->only([
@@ -146,7 +146,7 @@ class RMAController extends Controller
         ]);
 
         $order = $this->orderRepository->findOneWhere([
-            'id'          => $data['order_id'],
+            'id' => $data['order_id'],
             'customer_id' => auth()->guard('customer')->id(),
         ]);
 
@@ -163,9 +163,9 @@ class RMAController extends Controller
          * Creation of a new RMA record.
          */
         $rma = $this->rmaRepository->create([
-            'order_id'          => $order->id,
-            'rma_status_id'     => DefaultRMAStatusEnum::PENDING->value,
-            'information'       => $data['information'] ?? null,
+            'order_id' => $order->id,
+            'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
+            'information' => $data['information'] ?? null,
             'package_condition' => $data['package_condition'] ?? null,
         ]);
 
@@ -173,21 +173,21 @@ class RMAController extends Controller
          * Creation of RMA items for the newly created RMA record.
          */
         $this->rmaItemRepository->create([
-            'rma_id'        => $rma->id,
+            'rma_id' => $rma->id,
             'rma_reason_id' => $data['rma_reason_id'],
             'order_item_id' => $data['order_item_id'],
-            'variant_id'    => ! empty($data['variant']) ? $data['variant'] : null,
-            'quantity'      => $data['rma_qty'],
-            'resolution'    => $data['resolution_type'],
+            'variant_id' => ! empty($data['variant']) ? $data['variant'] : null,
+            'quantity' => $data['rma_qty'],
+            'resolution' => $data['resolution_type'],
         ]);
 
         /**
          * Initial message indicating the processing of the RMA request.
          */
         $this->rmaMessageRepository->create([
-            'rma_id'     => $rma->id,
-            'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
-            'is_admin'   => 1,
+            'rma_id' => $rma->id,
+            'message' => trans('shop::app.rma.mail.customer-conversation.process'),
+            'is_admin' => 1,
         ]);
 
         /**
@@ -269,8 +269,8 @@ class RMAController extends Controller
             Event::dispatch('customer.rma.request.update.after', $rma);
 
             $this->rmaMessageRepository->create([
-                'message'  => trans('shop::app.rma.mail.customer-conversation.solved'),
-                'rma_id'   => $id,
+                'message' => trans('shop::app.rma.mail.customer-conversation.solved'),
+                'rma_id' => $id,
                 'is_admin' => 1,
             ]);
         }
@@ -305,9 +305,9 @@ class RMAController extends Controller
             Event::dispatch('customer.rma.request.update.after', $rma);
 
             $this->rmaMessageRepository->create([
-                'message'    => trans('shop::app.rma.mail.customer-conversation.process'),
-                'rma_id'     => $id,
-                'is_admin'   => 1,
+                'message' => trans('shop::app.rma.mail.customer-conversation.process'),
+                'rma_id' => $id,
+                'is_admin' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -402,7 +402,7 @@ class RMAController extends Controller
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
-                    'attachment'      => $filename,
+                    'attachment' => $filename,
                 ], $storedMessage->id);
             }
 

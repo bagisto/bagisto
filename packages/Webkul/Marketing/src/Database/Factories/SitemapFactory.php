@@ -21,7 +21,7 @@ class SitemapFactory extends Factory
     {
         return [
             'file_name' => strtolower(fake()->word()).'.xml',
-            'path'      => '/',
+            'path' => '/',
         ];
     }
 }

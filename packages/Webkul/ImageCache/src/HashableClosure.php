@@ -52,10 +52,10 @@ class HashableClosure
         $staticHash = $this->hashStaticVariables($staticVars);
 
         $hashData = [
-            'file'   => $filename,
-            'start'  => $startLine,
-            'end'    => $endLine,
-            'code'   => $code,
+            'file' => $filename,
+            'start' => $startLine,
+            'end' => $endLine,
+            'code' => $code,
             'static' => $staticHash,
         ];
 

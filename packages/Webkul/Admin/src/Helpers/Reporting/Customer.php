@@ -30,7 +30,7 @@ class Customer extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalCustomers($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalCustomers($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalCustomers($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -64,7 +64,7 @@ class Customer extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalCustomers(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'  => $current = $this->getTotalCustomers(now()->today(), now()->endOfDay()),
+            'current' => $current = $this->getTotalCustomers(now()->today(), now()->endOfDay()),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -91,7 +91,7 @@ class Customer extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalReviews($this->lastStartDate, $this->lastEndDate),
-            'current'  => $current = $this->getTotalReviews($this->startDate, $this->endDate),
+            'current' => $current = $this->getTotalReviews($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }

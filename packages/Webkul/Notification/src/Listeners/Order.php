@@ -35,7 +35,7 @@ class Order
     public function updateOrder($order)
     {
         event(new UpdateOrderNotification([
-            'id'     => $order->id,
+            'id' => $order->id,
             'status' => $order->status,
         ]));
     }

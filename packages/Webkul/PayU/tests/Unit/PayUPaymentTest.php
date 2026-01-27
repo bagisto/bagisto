@@ -18,10 +18,10 @@ it('returns the correct payment method code', function () {
 it('returns the payment method title from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.title',
-        'value'        => 'PayU Payment Gateway',
+        'code' => 'sales.payment_methods.payu.title',
+        'value' => 'PayU Payment Gateway',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -34,10 +34,10 @@ it('returns the payment method title from configuration', function () {
 it('returns the payment method description from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.description',
-        'value'        => 'Pay securely using PayU',
+        'code' => 'sales.payment_methods.payu.description',
+        'value' => 'Pay securely using PayU',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -50,8 +50,8 @@ it('returns the payment method description from configuration', function () {
 it('returns the merchant key from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'test_merchant_key_123',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'test_merchant_key_123',
         'channel_code' => 'default',
     ]);
 
@@ -65,8 +65,8 @@ it('returns the merchant key from configuration', function () {
 it('returns the merchant salt from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'test_merchant_salt_456',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'test_merchant_salt_456',
         'channel_code' => 'default',
     ]);
 
@@ -80,8 +80,8 @@ it('returns the merchant salt from configuration', function () {
 it('checks if sandbox mode is enabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.payu.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
@@ -95,8 +95,8 @@ it('checks if sandbox mode is enabled', function () {
 it('checks if sandbox mode is disabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.payu.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
@@ -110,8 +110,8 @@ it('checks if sandbox mode is disabled', function () {
 it('returns sandbox payment URL when sandbox is enabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.payu.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
@@ -125,8 +125,8 @@ it('returns sandbox payment URL when sandbox is enabled', function () {
 it('returns production payment URL when sandbox is disabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.payu.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
@@ -140,14 +140,14 @@ it('returns production payment URL when sandbox is disabled', function () {
 it('checks if credentials are valid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'test_key',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'test_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'test_salt',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'test_salt',
         'channel_code' => 'default',
     ]);
 
@@ -161,14 +161,14 @@ it('checks if credentials are valid', function () {
 it('returns false if merchant key is missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'test_salt',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'test_salt',
         'channel_code' => 'default',
     ]);
 
@@ -182,14 +182,14 @@ it('returns false if merchant key is missing', function () {
 it('returns false if merchant salt is missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'test_key',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'test_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => '',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -203,14 +203,14 @@ it('returns false if merchant salt is missing', function () {
 it('is not available when credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.payu.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -224,8 +224,8 @@ it('is not available when credentials are invalid', function () {
 it('returns payment method image from config', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.image',
-        'value'        => 'payu/custom-logo.png',
+        'code' => 'sales.payment_methods.payu.image',
+        'value' => 'payu/custom-logo.png',
         'channel_code' => 'default',
     ]);
 
@@ -248,14 +248,14 @@ it('returns default payment method image when not configured', function () {
 it('generates correct payment hash', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'TEST_KEY',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'TEST_KEY',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'TEST_SALT',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'TEST_SALT',
         'channel_code' => 'default',
     ]);
 
@@ -280,26 +280,26 @@ it('generates correct payment hash', function () {
 it('verifies hash from PayU response correctly', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'TEST_KEY',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'TEST_KEY',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'TEST_SALT',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'TEST_SALT',
         'channel_code' => 'default',
     ]);
 
     $response = [
-        'status'      => 'success',
-        'firstname'   => 'John',
-        'amount'      => '100.50',
-        'txnid'       => 'TXN123',
-        'key'         => 'TEST_KEY',
+        'status' => 'success',
+        'firstname' => 'John',
+        'amount' => '100.50',
+        'txnid' => 'TXN123',
+        'key' => 'TEST_KEY',
         'productinfo' => 'Test Product',
-        'email'       => 'john@example.com',
-        'udf1'        => '456',
+        'email' => 'john@example.com',
+        'udf1' => '456',
     ];
 
     $hashString = 'TEST_SALT|success||||||||||456|john@example.com|John|Test Product|100.50|TXN123|TEST_KEY';
@@ -316,27 +316,27 @@ it('verifies hash from PayU response correctly', function () {
 it('rejects invalid hash from PayU response', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'TEST_KEY',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'TEST_KEY',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'TEST_SALT',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'TEST_SALT',
         'channel_code' => 'default',
     ]);
 
     $response = [
-        'status'      => 'success',
-        'firstname'   => 'John',
-        'amount'      => '100.50',
-        'txnid'       => 'TXN123',
-        'key'         => 'TEST_KEY',
+        'status' => 'success',
+        'firstname' => 'John',
+        'amount' => '100.50',
+        'txnid' => 'TXN123',
+        'key' => 'TEST_KEY',
         'productinfo' => 'Test Product',
-        'email'       => 'john@example.com',
-        'udf1'        => '456',
-        'hash'        => 'invalid_hash_value',
+        'email' => 'john@example.com',
+        'udf1' => '456',
+        'hash' => 'invalid_hash_value',
     ];
 
     // Act

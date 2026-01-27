@@ -15,11 +15,11 @@ class TaxCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'          => $this->id,
-            'code'        => $this->code,
-            'name'        => $this->name,
+            'id' => $this->id,
+            'code' => $this->code,
+            'name' => $this->name,
             'description' => $this->description,
-            'tax_rates'   => $this->tax_rates->pluck('id')->toArray(),
+            'tax_rates' => $this->tax_rates->pluck('id')->toArray(),
         ];
     }
 }

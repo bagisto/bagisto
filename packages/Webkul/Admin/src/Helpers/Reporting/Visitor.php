@@ -27,7 +27,7 @@ class Visitor extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalVisitors($this->lastStartDate, $this->lastEndDate, $visitableType),
-            'current'  => $current = $this->getTotalVisitors($this->startDate, $this->endDate, $visitableType),
+            'current' => $current = $this->getTotalVisitors($this->startDate, $this->endDate, $visitableType),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }
@@ -70,7 +70,7 @@ class Visitor extends AbstractReporting
     {
         return [
             'previous' => $previous = $this->getTotalUniqueVisitors($this->lastStartDate, $this->lastEndDate, $visitableType),
-            'current'  => $current = $this->getTotalUniqueVisitors($this->startDate, $this->endDate, $visitableType),
+            'current' => $current = $this->getTotalUniqueVisitors($this->startDate, $this->endDate, $visitableType),
             'progress' => $this->getPercentageChange($previous, $current),
         ];
     }

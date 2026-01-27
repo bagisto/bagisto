@@ -12,7 +12,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'checkout.order.save.after'           => [
+        'checkout.order.save.after' => [
             'Webkul\CartRule\Listeners\Order@manageCartRule',
         ],
 

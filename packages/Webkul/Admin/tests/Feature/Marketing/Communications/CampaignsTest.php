@@ -70,12 +70,12 @@ it('should store the newly created campaigns', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.campaigns.store'), $data = [
-        'name'                  => fake()->name(),
-        'subject'               => fake()->title(),
+        'name' => fake()->name(),
+        'subject' => fake()->title(),
         'marketing_template_id' => $marketingTemplate->id,
-        'marketing_event_id'    => $event->id,
-        'channel_id'            => 1,
-        'customer_group_id'     => rand(1, 3),
+        'marketing_event_id' => $event->id,
+        'channel_id' => 1,
+        'customer_group_id' => rand(1, 3),
     ])
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
@@ -83,12 +83,12 @@ it('should store the newly created campaigns', function () {
     $this->assertModelWise([
         Campaign::class => [
             [
-                'name'                  => $data['name'],
-                'subject'               => $data['subject'],
+                'name' => $data['name'],
+                'subject' => $data['subject'],
                 'marketing_template_id' => $marketingTemplate->id,
-                'marketing_event_id'    => $event->id,
-                'channel_id'            => 1,
-                'customer_group_id'     => $data['customer_group_id'],
+                'marketing_event_id' => $event->id,
+                'channel_id' => 1,
+                'customer_group_id' => $data['customer_group_id'],
             ],
         ],
     ]);
@@ -153,12 +153,12 @@ it('should update specified the campaigns', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.campaigns.edit', $campaign->id), $data = [
-        'name'                  => $campaign->name,
-        'subject'               => fake()->title(),
+        'name' => $campaign->name,
+        'subject' => fake()->title(),
         'marketing_template_id' => $campaign->marketing_template_id,
-        'marketing_event_id'    => $event->id,
-        'channel_id'            => 1,
-        'customer_group_id'     => $customerGroupId = rand(1, 3),
+        'marketing_event_id' => $event->id,
+        'channel_id' => 1,
+        'customer_group_id' => $customerGroupId = rand(1, 3),
     ])
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
@@ -166,13 +166,13 @@ it('should update specified the campaigns', function () {
     $this->assertModelWise([
         Campaign::class => [
             [
-                'id'                    => $campaign->id,
-                'name'                  => $campaign->name,
-                'subject'               => $data['subject'],
+                'id' => $campaign->id,
+                'name' => $campaign->name,
+                'subject' => $data['subject'],
                 'marketing_template_id' => $campaign->marketing_template_id,
-                'marketing_event_id'    => $event->id,
-                'channel_id'            => 1,
-                'customer_group_id'     => $customerGroupId,
+                'marketing_event_id' => $event->id,
+                'channel_id' => 1,
+                'customer_group_id' => $customerGroupId,
             ],
         ],
     ]);

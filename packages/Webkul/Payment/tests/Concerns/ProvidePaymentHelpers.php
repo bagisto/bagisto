@@ -34,67 +34,67 @@ trait ProvidePaymentHelpers
         $customer = Customer::factory()->create();
 
         $cart = Cart::factory()->create(array_merge([
-            'customer_id'         => $customer->id,
+            'customer_id' => $customer->id,
             'customer_first_name' => $customer->first_name,
-            'customer_last_name'  => $customer->last_name,
-            'customer_email'      => $customer->email,
-            'is_guest'            => 0,
-            'shipping_method'     => 'free_free',
+            'customer_last_name' => $customer->last_name,
+            'customer_email' => $customer->email,
+            'is_guest' => 0,
+            'shipping_method' => 'free_free',
         ], $overrides));
 
         $additional = [
             'product_id' => $product->id,
-            'rating'     => '0',
+            'rating' => '0',
             'is_buy_now' => '0',
-            'quantity'   => '1',
+            'quantity' => '1',
         ];
 
         CartItem::factory()->create([
-            'cart_id'             => $cart->id,
-            'product_id'          => $product->id,
-            'sku'                 => $product->sku,
-            'quantity'            => $additional['quantity'],
-            'name'                => $product->name,
-            'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
-            'price_incl_tax'      => $convertedPrice,
-            'base_price'          => $price,
+            'cart_id' => $cart->id,
+            'product_id' => $product->id,
+            'sku' => $product->sku,
+            'quantity' => $additional['quantity'],
+            'name' => $product->name,
+            'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+            'price_incl_tax' => $convertedPrice,
+            'base_price' => $price,
             'base_price_incl_tax' => $price,
-            'total'               => $total = $convertedPrice * $additional['quantity'],
-            'total_incl_tax'      => $total,
-            'base_total'          => $price * $additional['quantity'],
-            'weight'              => $product->weight ?? 0,
-            'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
-            'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
-            'type'                => $product->type,
-            'additional'          => $additional,
+            'total' => $total = $convertedPrice * $additional['quantity'],
+            'total_incl_tax' => $total,
+            'base_total' => $price * $additional['quantity'],
+            'weight' => $product->weight ?? 0,
+            'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+            'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+            'type' => $product->type,
+            'additional' => $additional,
         ]);
 
         $cartBillingAddress = CartAddress::factory()->create([
-            'cart_id'      => $cart->id,
-            'customer_id'  => $customer->id,
+            'cart_id' => $cart->id,
+            'customer_id' => $customer->id,
             'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         ]);
 
         $cartShippingAddress = CartAddress::factory()->create([
-            'cart_id'      => $cart->id,
-            'customer_id'  => $customer->id,
+            'cart_id' => $cart->id,
+            'customer_id' => $customer->id,
             'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
         ]);
 
         CartPayment::factory()->create([
-            'cart_id'      => $cart->id,
-            'method'       => $paymentMethod,
+            'cart_id' => $cart->id,
+            'method' => $paymentMethod,
             'method_title' => ucfirst($paymentMethod),
         ]);
 
         CartShippingRate::factory()->create([
-            'carrier'            => 'free',
-            'carrier_title'      => 'Free shipping',
-            'method'             => 'free_free',
-            'method_title'       => 'Free Shipping',
+            'carrier' => 'free',
+            'carrier_title' => 'Free shipping',
+            'method' => 'free_free',
+            'method_title' => 'Free Shipping',
             'method_description' => 'Free Shipping',
-            'cart_address_id'    => $cartShippingAddress->id,
-            'cart_id'            => $cart->id,
+            'cart_address_id' => $cartShippingAddress->id,
+            'cart_id' => $cart->id,
         ]);
 
         CartFacade::setCart($cart);

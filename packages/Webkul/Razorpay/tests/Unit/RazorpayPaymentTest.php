@@ -18,10 +18,10 @@ it('returns the correct payment method code', function () {
 it('returns the payment method title from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.title',
-        'value'        => 'Razorpay Payment Gateway',
+        'code' => 'sales.payment_methods.razorpay.title',
+        'value' => 'Razorpay Payment Gateway',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -34,10 +34,10 @@ it('returns the payment method title from configuration', function () {
 it('returns the payment method description from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.description',
-        'value'        => 'Pay securely using Razorpay',
+        'code' => 'sales.payment_methods.razorpay.description',
+        'value' => 'Pay securely using Razorpay',
         'channel_code' => 'default',
-        'locale_code'  => 'en',
+        'locale_code' => 'en',
     ]);
 
     // Act
@@ -50,20 +50,20 @@ it('returns the payment method description from configuration', function () {
 it('returns the client ID based on sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => 'test_key_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => 'test_key_123',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_id',
-        'value'        => 'live_key_456',
+        'code' => 'sales.payment_methods.razorpay.client_id',
+        'value' => 'live_key_456',
         'channel_code' => 'default',
     ]);
 
@@ -77,20 +77,20 @@ it('returns the client ID based on sandbox mode', function () {
 it('returns the live client ID when sandbox mode is disabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => 'test_key_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => 'test_key_123',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_id',
-        'value'        => 'live_key_456',
+        'code' => 'sales.payment_methods.razorpay.client_id',
+        'value' => 'live_key_456',
         'channel_code' => 'default',
     ]);
 
@@ -104,20 +104,20 @@ it('returns the live client ID when sandbox mode is disabled', function () {
 it('returns the client secret based on sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'test_secret_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => 'test_secret_123',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_secret',
-        'value'        => 'live_secret_456',
+        'code' => 'sales.payment_methods.razorpay.client_secret',
+        'value' => 'live_secret_456',
         'channel_code' => 'default',
     ]);
 
@@ -131,20 +131,20 @@ it('returns the client secret based on sandbox mode', function () {
 it('returns the live client secret when sandbox mode is disabled', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'test_secret_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => 'test_secret_123',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_secret',
-        'value'        => 'live_secret_456',
+        'code' => 'sales.payment_methods.razorpay.client_secret',
+        'value' => 'live_secret_456',
         'channel_code' => 'default',
     ]);
 
@@ -158,20 +158,20 @@ it('returns the live client secret when sandbox mode is disabled', function () {
 it('checks if credentials are valid in sandbox mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => 'test_key_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => 'test_key_123',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'test_secret_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => 'test_secret_123',
         'channel_code' => 'default',
     ]);
 
@@ -185,20 +185,20 @@ it('checks if credentials are valid in sandbox mode', function () {
 it('checks if credentials are valid in production mode', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_id',
-        'value'        => 'live_key_456',
+        'code' => 'sales.payment_methods.razorpay.client_id',
+        'value' => 'live_key_456',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_secret',
-        'value'        => 'live_secret_456',
+        'code' => 'sales.payment_methods.razorpay.client_secret',
+        'value' => 'live_secret_456',
         'channel_code' => 'default',
     ]);
 
@@ -212,20 +212,20 @@ it('checks if credentials are valid in production mode', function () {
 it('returns false if sandbox credentials are missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => '',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_secret',
-        'value'        => 'test_secret_123',
+        'code' => 'sales.payment_methods.razorpay.test_client_secret',
+        'value' => 'test_secret_123',
         'channel_code' => 'default',
     ]);
 
@@ -239,20 +239,20 @@ it('returns false if sandbox credentials are missing', function () {
 it('returns false if production credentials are missing', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '0',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '0',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_id',
-        'value'        => 'live_key_456',
+        'code' => 'sales.payment_methods.razorpay.client_id',
+        'value' => 'live_key_456',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.client_secret',
-        'value'        => '',
+        'code' => 'sales.payment_methods.razorpay.client_secret',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -266,20 +266,20 @@ it('returns false if production credentials are missing', function () {
 it('is not available when credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.razorpay.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.test_client_id',
-        'value'        => '',
+        'code' => 'sales.payment_methods.razorpay.test_client_id',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -293,8 +293,8 @@ it('is not available when credentials are invalid', function () {
 it('returns payment method image from config', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.image',
-        'value'        => 'razorpay/custom-logo.png',
+        'code' => 'sales.payment_methods.razorpay.image',
+        'value' => 'razorpay/custom-logo.png',
         'channel_code' => 'default',
     ]);
 
@@ -338,8 +338,8 @@ it('returns supported currencies list', function () {
 it('returns merchant name from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.merchant_name',
-        'value'        => 'Test Merchant',
+        'code' => 'sales.payment_methods.razorpay.merchant_name',
+        'value' => 'Test Merchant',
         'channel_code' => 'default',
     ]);
 
@@ -353,8 +353,8 @@ it('returns merchant name from configuration', function () {
 it('returns merchant description from configuration', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.razorpay.merchant_desc',
-        'value'        => 'Test Description',
+        'code' => 'sales.payment_methods.razorpay.merchant_desc',
+        'value' => 'Test Description',
         'channel_code' => 'default',
     ]);
 

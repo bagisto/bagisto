@@ -150,10 +150,10 @@ describe('two factor authentication disable', function () {
     beforeEach(function () {
         // Arrange
         $this->admin->update([
-            'two_factor_secret'       => encrypt($this->google2fa->generateSecretKey()),
-            'two_factor_enabled'      => true,
+            'two_factor_secret' => encrypt($this->google2fa->generateSecretKey()),
+            'two_factor_enabled' => true,
             'two_factor_backup_codes' => ['123456', '789012'],
-            'two_factor_verified_at'  => now(),
+            'two_factor_verified_at' => now(),
         ]);
     });
 
@@ -194,10 +194,10 @@ describe('two factor authentication login verification', function () {
         $this->secret = $this->google2fa->generateSecretKey();
 
         $this->admin->update([
-            'two_factor_secret'       => encrypt($this->secret),
-            'two_factor_enabled'      => true,
+            'two_factor_secret' => encrypt($this->secret),
+            'two_factor_enabled' => true,
             'two_factor_backup_codes' => ['670089', '569097'],
-            'two_factor_verified_at'  => now(),
+            'two_factor_verified_at' => now(),
         ]);
     });
 

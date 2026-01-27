@@ -47,7 +47,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->id(),
-            'id'          => $id,
+            'id' => $id,
         ]);
 
         abort_if(! $order, 404);
@@ -64,7 +64,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->id(),
-            'id'          => $id,
+            'id' => $id,
         ]);
 
         abort_if(! $order, 404);

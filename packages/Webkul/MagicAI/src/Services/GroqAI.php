@@ -45,13 +45,13 @@ class GroqAI
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.config('groq.api_key'),
-            'Content-Type'  => 'application/json',
+            'Content-Type' => 'application/json',
         ])->post(self::API_URL, [
-            'model'       => $this->model,
+            'model' => $this->model,
             'temperature' => $this->temperature,
-            'messages'    => [
+            'messages' => [
                 [
-                    'role'    => 'user',
+                    'role' => 'user',
                     'content' => $this->prompt,
                 ],
             ],

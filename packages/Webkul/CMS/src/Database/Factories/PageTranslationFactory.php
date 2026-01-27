@@ -20,12 +20,12 @@ class PageTranslationFactory extends Factory
     public function definition(): array
     {
         return [
-            'html_content'     => substr($this->faker->paragraph, 0, 50),
-            'locale'           => core()->getCurrentLocale()->code,
+            'html_content' => substr($this->faker->paragraph, 0, 50),
+            'locale' => core()->getCurrentLocale()->code,
             'meta_description' => $this->faker->title(),
-            'meta_title'       => $this->faker->title(),
-            'page_title'       => $this->faker->title(),
-            'url_key'          => $this->faker->slug(),
+            'meta_title' => $this->faker->title(),
+            'page_title' => $this->faker->title(),
+            'url_key' => $this->faker->slug(),
         ];
     }
 }

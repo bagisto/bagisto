@@ -102,9 +102,9 @@ class CurrencyTableSeeder extends Seeder
         foreach ($currencies as $key => $currency) {
             DB::table('currencies')->insert([
                 [
-                    'id'     => $key + 1,
-                    'code'   => $currency,
-                    'name'   => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
+                    'id' => $key + 1,
+                    'code' => $currency,
+                    'name' => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
                     'symbol' => $this->currencySymbols[$currency] ?? '',
                 ],
             ]);

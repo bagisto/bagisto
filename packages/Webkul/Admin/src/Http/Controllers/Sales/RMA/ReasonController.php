@@ -42,9 +42,9 @@ class ReasonController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title'           => 'required',
-            'status'          => 'required|boolean',
-            'position'        => 'required',
+            'title' => 'required',
+            'status' => 'required|boolean',
+            'position' => 'required',
             'resolution_type' => 'required|array|min:1',
         ]);
 
@@ -54,7 +54,7 @@ class ReasonController extends Controller
 
         foreach (request()->resolution_type as $resolutionType) {
             $this->rmaReasonResolutionsRepository->create([
-                'rma_reason_id'   => $rmaReason->id,
+                'rma_reason_id' => $rmaReason->id,
                 'resolution_type' => $resolutionType,
             ]);
         }
@@ -84,9 +84,9 @@ class ReasonController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'title'           => 'required',
-            'status'          => 'required|boolean',
-            'position'        => 'required',
+            'title' => 'required',
+            'status' => 'required|boolean',
+            'position' => 'required',
             'resolution_type' => 'required|array|min:1',
         ]);
 
@@ -106,7 +106,7 @@ class ReasonController extends Controller
 
         foreach ($resolutionTypes as $resolutionType) {
             $this->rmaReasonResolutionsRepository->updateOrCreate([
-                'rma_reason_id'   => $rmaReason->id,
+                'rma_reason_id' => $rmaReason->id,
                 'resolution_type' => $resolutionType,
             ]);
         }
@@ -151,7 +151,7 @@ class ReasonController extends Controller
             Event::dispatch('sales.rma.reason.update.before', $rmaReasonId);
 
             $rmaReason = $this->rmaReasonRepository->update([
-                'status'  => request()->input('value'),
+                'status' => request()->input('value'),
             ], $rmaReasonId, ['status']);
 
             Event::dispatch('sales.rma.reason.update.after', $rmaReason);

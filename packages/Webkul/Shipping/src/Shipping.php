@@ -106,7 +106,7 @@ class Shipping
             if (! isset($rates[$rate->carrier])) {
                 $rates[$rate->carrier] = [
                     'carrier_title' => $rate->carrier_title,
-                    'rates'         => [],
+                    'rates' => [],
                 ];
             }
 
@@ -135,10 +135,10 @@ class Shipping
             }
 
             $methods[] = [
-                'code'         => $object->getCode(),
-                'method'       => $object->getMethod(),
+                'code' => $object->getCode(),
+                'method' => $object->getMethod(),
                 'method_title' => $object->getTitle(),
-                'description'  => $object->getDescription(),
+                'description' => $object->getDescription(),
             ];
         }
 

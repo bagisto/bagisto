@@ -14,15 +14,15 @@ return new class extends Migration
     {
         DB::table('attributes')
             ->insert([
-                'code'              => 'manage_stock',
-                'admin_name'        => 'Manage Stock',
-                'type'              => 'boolean',
-                'position'          => 1,
+                'code' => 'manage_stock',
+                'admin_name' => 'Manage Stock',
+                'type' => 'boolean',
+                'position' => 1,
                 'value_per_channel' => 1,
-                'default_value'     => 1,
-                'is_user_defined'   => 0,
-                'created_at'        => Carbon::now(),
-                'updated_at'        => Carbon::now(),
+                'default_value' => 1,
+                'is_user_defined' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
         Schema::table('attribute_groups', function (Blueprint $table) {
@@ -30,10 +30,10 @@ return new class extends Migration
 
             foreach ($families as $family) {
                 DB::table('attribute_groups')->insert([
-                    'name'                => 'Inventories',
-                    'column'              => 2,
-                    'is_user_defined'     => 0,
-                    'position'            => 4,
+                    'name' => 'Inventories',
+                    'column' => 2,
+                    'is_user_defined' => 0,
+                    'position' => 4,
                     'attribute_family_id' => $family->id,
                 ]);
 
@@ -49,8 +49,8 @@ return new class extends Migration
                 DB::table('attribute_group_mappings')
                     ->insert([
                         'attribute_group_id' => $inventoryGroup->id,
-                        'attribute_id'       => $manageStockAttribute->id,
-                        'position'           => 1,
+                        'attribute_id' => $manageStockAttribute->id,
+                        'position' => 1,
                     ]);
             }
         });

@@ -10,7 +10,7 @@ return [
             'cancelled' => 'Razorpay भुगतान रद्द कर दिया गया है।',
         ],
 
-        'something-went-wrong'     => 'कुछ गलत हो गया।',
+        'something-went-wrong' => 'कुछ गलत हो गया।',
         'supported-currency-error' => 'मुद्रा :currency समर्थित नहीं है। समर्थित मुद्राएँ: :supportedCurrencies.',
     ],
 ];

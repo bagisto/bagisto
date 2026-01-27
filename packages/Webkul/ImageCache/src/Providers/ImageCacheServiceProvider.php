@@ -23,7 +23,7 @@ class ImageCacheServiceProvider extends ServiceProvider
 
             return match ($driver) {
                 'imagick' => new ImageManager(new ImagickDriver),
-                default   => new ImageManager(new GdDriver),
+                default => new ImageManager(new GdDriver),
             };
         });
 
@@ -48,7 +48,7 @@ class ImageCacheServiceProvider extends ServiceProvider
 
             $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
                 'uses' => 'Webkul\ImageCache\Http\Controllers\ImageCacheController@getResponse',
-                'as'   => 'imagecache',
+                'as' => 'imagecache',
             ])->where(['filename' => $filenamePattern]);
         }
     }

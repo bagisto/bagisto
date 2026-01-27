@@ -20,7 +20,7 @@ class ProductOrderedInventoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'qty'        => $this->faker->numberBetween(100, 200),
+            'qty' => $this->faker->numberBetween(100, 200),
             'channel_id' => 1,
         ];
     }

@@ -58,10 +58,10 @@ it('successfully registers a customer', function () {
 
     // Arrange.
     $requestedCustomer = [
-        'first_name'            => fake()->firstName(),
-        'last_name'             => fake()->lastName(),
-        'email'                 => fake()->email(),
-        'password'              => 'admin123',
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->email(),
+        'password' => 'admin123',
         'password_confirmation' => 'admin123',
     ];
 
@@ -76,15 +76,15 @@ it('successfully registers a customer and send mail to the customer verify the a
     Mail::fake();
 
     CoreConfig::factory()->create([
-        'code'  => 'customer.settings.email.verification',
+        'code' => 'customer.settings.email.verification',
         'value' => 1,
     ]);
 
     $requestedCustomer = [
-        'first_name'            => fake()->firstName(),
-        'last_name'             => fake()->lastName(),
-        'email'                 => fake()->email(),
-        'password'              => 'admin123',
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->email(),
+        'password' => 'admin123',
         'password_confirmation' => 'admin123',
     ];
 
@@ -115,10 +115,10 @@ it('registers a customer successfully and sends a registration email to customer
     ]);
 
     $requestedCustomer = [
-        'first_name'            => fake()->firstName(),
-        'last_name'             => fake()->lastName(),
-        'email'                 => fake()->email(),
-        'password'              => 'admin123',
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->email(),
+        'password' => 'admin123',
         'password_confirmation' => 'admin123',
     ];
 

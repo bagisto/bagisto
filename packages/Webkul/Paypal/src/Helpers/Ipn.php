@@ -104,12 +104,12 @@ class Ipn
 
                 $this->orderTransactionRepository->create([
                     'transaction_id' => $this->post['txn_id'],
-                    'status'         => $this->post['payment_status'],
-                    'type'           => $this->post['payment_type'] ?? 'instant',
+                    'status' => $this->post['payment_status'],
+                    'type' => $this->post['payment_type'] ?? 'instant',
                     'payment_method' => $this->order->payment->method,
-                    'order_id'       => $this->order->id,
-                    'invoice_id'     => $invoice->id,
-                    'data'           => json_encode($this->post),
+                    'order_id' => $this->order->id,
+                    'invoice_id' => $invoice->id,
+                    'data' => json_encode($this->post),
                 ]);
             }
         }

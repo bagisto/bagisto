@@ -109,7 +109,7 @@ class OrderController extends Controller
         session()->flash('order', trans('admin::app.sales.orders.create.order-placed-success'));
 
         return new JsonResource([
-            'redirect'     => true,
+            'redirect' => true,
             'redirect_url' => route('admin.sales.orders.view', $order->id),
         ]);
     }
@@ -136,7 +136,7 @@ class OrderController extends Controller
         $order = $this->orderRepository->findOrFail($id);
 
         $cart = Cart::createCart([
-            'customer'  => $order->customer,
+            'customer' => $order->customer,
             'is_active' => false,
         ]);
 
@@ -179,7 +179,7 @@ class OrderController extends Controller
     public function comment(int $id)
     {
         $validatedData = $this->validate(request(), [
-            'comment'           => 'required',
+            'comment' => 'required',
             'customer_notified' => 'sometimes|sometimes',
         ]);
 

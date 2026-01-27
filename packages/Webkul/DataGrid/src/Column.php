@@ -331,17 +331,17 @@ class Column
     public function toArray(): array
     {
         return [
-            'index'                 => $this->index,
-            'label'                 => $this->label,
-            'type'                  => $this->type,
-            'searchable'            => $this->searchable,
-            'filterable'            => $this->filterable,
-            'filterable_type'       => $this->filterableType,
-            'filterable_options'    => $this->filterableOptions,
+            'index' => $this->index,
+            'label' => $this->label,
+            'type' => $this->type,
+            'searchable' => $this->searchable,
+            'filterable' => $this->filterable,
+            'filterable_type' => $this->filterableType,
+            'filterable_options' => $this->filterableOptions,
             'allow_multiple_values' => $this->allowMultipleValues,
-            'sortable'              => $this->sortable,
-            'exportable'            => $this->exportable,
-            'visibility'            => $this->visibility,
+            'sortable' => $this->sortable,
+            'exportable' => $this->exportable,
+            'visibility' => $this->visibility,
         ];
     }
 

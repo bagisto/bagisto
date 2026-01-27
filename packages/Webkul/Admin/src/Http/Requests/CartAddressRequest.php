@@ -48,15 +48,15 @@ class CartAddressRequest extends FormRequest
     {
         $this->mergeWithRules([
             "{$addressType}.company_name" => ['nullable'],
-            "{$addressType}.first_name"   => ['required'],
-            "{$addressType}.last_name"    => ['required'],
-            "{$addressType}.email"        => ['required'],
-            "{$addressType}.address"      => ['required', 'array', 'min:1'],
-            "{$addressType}.city"         => ['required'],
-            "{$addressType}.country"      => ['required'],
-            "{$addressType}.state"        => ['required'],
-            "{$addressType}.postcode"     => ['required', new PostCode],
-            "{$addressType}.phone"        => ['required', new PhoneNumber],
+            "{$addressType}.first_name" => ['required'],
+            "{$addressType}.last_name" => ['required'],
+            "{$addressType}.email" => ['required'],
+            "{$addressType}.address" => ['required', 'array', 'min:1'],
+            "{$addressType}.city" => ['required'],
+            "{$addressType}.country" => ['required'],
+            "{$addressType}.state" => ['required'],
+            "{$addressType}.postcode" => ['required', new PostCode],
+            "{$addressType}.phone" => ['required', new PhoneNumber],
         ]);
     }
 

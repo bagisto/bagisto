@@ -236,10 +236,10 @@ class AttributeRepository extends Repository
                 )
             ) {
                 array_push($trimmed, [
-                    'id'      => $attribute->id,
-                    'name'    => $attribute->admin_name,
-                    'type'    => $attribute->type,
-                    'code'    => $attribute->code,
+                    'id' => $attribute->id,
+                    'name' => $attribute->admin_name,
+                    'type' => $attribute->type,
+                    'code' => $attribute->code,
                     'options' => $attribute->options,
                 ]);
             }

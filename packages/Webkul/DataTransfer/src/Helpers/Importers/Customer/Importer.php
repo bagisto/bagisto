@@ -64,9 +64,9 @@ class Importer extends AbstractImporter
      * @var string[]
      */
     protected array $messages = [
-        self::ERROR_EMAIL_NOT_FOUND_FOR_DELETE  => 'data_transfer::app.importers.customers.validation.errors.email-not-found',
-        self::ERROR_DUPLICATE_EMAIL             => 'data_transfer::app.importers.customers.validation.errors.duplicate-email',
-        self::ERROR_DUPLICATE_PHONE             => 'data_transfer::app.importers.customers.validation.errors.duplicate-phone',
+        self::ERROR_EMAIL_NOT_FOUND_FOR_DELETE => 'data_transfer::app.importers.customers.validation.errors.email-not-found',
+        self::ERROR_DUPLICATE_EMAIL => 'data_transfer::app.importers.customers.validation.errors.duplicate-email',
+        self::ERROR_DUPLICATE_PHONE => 'data_transfer::app.importers.customers.validation.errors.duplicate-phone',
         self::ERROR_INVALID_CUSTOMER_GROUP_CODE => 'data_transfer::app.importers.customers.validation.errors.invalid-customer-group',
     ];
 
@@ -184,17 +184,17 @@ class Importer extends AbstractImporter
          */
         $validator = Validator::make($rowData, [
             'customer_group_code' => 'required',
-            'first_name'          => 'required|string',
-            'last_name'           => 'required|string',
-            'gender'              => 'required:in,Male,Female,Other',
-            'email'               => 'required|email',
-            'date_of_birth'       => [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'gender' => 'required:in,Male,Female,Other',
+            'email' => 'required|email',
+            'date_of_birth' => [
                 'required',
                 'date_format:Y-m-d',
                 'before:today',
                 'regex:/^\d{4}-\d{2}-\d{2}$/',
             ],
-            'phone'               => ['nullable', new PhoneNumber],
+            'phone' => ['nullable', new PhoneNumber],
         ]);
 
         if ($validator->fails()) {
@@ -259,7 +259,7 @@ class Importer extends AbstractImporter
         $batch = $this->importBatchRepository->update([
             'state' => Import::STATE_PROCESSED,
 
-            'summary'      => [
+            'summary' => [
                 'created' => $this->getCreatedItemsCount(),
                 'updated' => $this->getUpdatedItemsCount(),
                 'deleted' => $this->getDeletedItemsCount(),
@@ -342,8 +342,8 @@ class Importer extends AbstractImporter
         } else {
             $customers['insert'][$rowData['email']] = array_merge($attributes, [
                 'customer_group_id' => $customerGroupId,
-                'created_at'        => $rowData['created_at'] ?? now(),
-                'updated_at'        => $rowData['updated_at'] ?? now(),
+                'created_at' => $rowData['created_at'] ?? now(),
+                'updated_at' => $rowData['updated_at'] ?? now(),
             ]);
         }
     }

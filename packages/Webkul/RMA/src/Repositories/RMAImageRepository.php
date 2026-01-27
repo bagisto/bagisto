@@ -24,7 +24,7 @@ class RMAImageRepository extends Repository
         foreach ($requestImages as $itemImage) {
             $this->create([
                 'rma_id' => $rma->id,
-                'path'   => $itemImage->getClientOriginalName(),
+                'path' => $itemImage->getClientOriginalName(),
             ]);
         }
 
@@ -46,7 +46,7 @@ class RMAImageRepository extends Repository
                 if (str_contains($imageId, '')) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                            'path'   => request()->file($file)->store($dir),
+                            'path' => request()->file($file)->store($dir),
                             'rma_id' => $rma->id,
                         ]);
                     }

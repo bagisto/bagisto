@@ -20,7 +20,7 @@ class CartItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'quantity'   => 1,
+            'quantity' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -35,13 +35,13 @@ class CartItemFactory extends Factory
             $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
             return [
-                'price'               => $fallbackPrice,
-                'price_incl_tax'      => $fallbackPrice,
-                'base_price'          => $fallbackPrice,
+                'price' => $fallbackPrice,
+                'price_incl_tax' => $fallbackPrice,
+                'base_price' => $fallbackPrice,
                 'base_price_incl_tax' => $fallbackPrice,
-                'total'               => $fallbackPrice,
-                'total_incl_tax'      => $fallbackPrice,
-                'base_total'          => $fallbackPrice,
+                'total' => $fallbackPrice,
+                'total_incl_tax' => $fallbackPrice,
+                'base_total' => $fallbackPrice,
                 'base_total_incl_tax' => $fallbackPrice,
             ];
         });

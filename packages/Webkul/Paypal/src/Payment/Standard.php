@@ -17,10 +17,10 @@ class Standard extends Paypal
      * @var array
      */
     protected $itemFieldsFormat = [
-        'id'       => 'item_number_%d',
-        'name'     => 'item_name_%d',
+        'id' => 'item_number_%d',
+        'name' => 'item_name_%d',
         'quantity' => 'quantity_%d',
-        'price'    => 'amount_%d',
+        'price' => 'amount_%d',
     ];
 
     /**
@@ -55,24 +55,24 @@ class Standard extends Paypal
         $cart = $this->getCart();
 
         $fields = [
-            'business'        => $this->getConfigData('business_account'),
-            'invoice'         => $cart->id,
-            'currency_code'   => $cart->cart_currency_code,
-            'paymentaction'   => 'sale',
-            'return'          => route('paypal.standard.success'),
-            'cancel_return'   => route('paypal.standard.cancel'),
-            'notify_url'      => route('paypal.standard.ipn'),
-            'charset'         => 'utf-8',
-            'item_name'       => core()->getCurrentChannel()->name,
-            'amount'          => $cart->sub_total,
-            'tax'             => $cart->tax_total,
-            'shipping'        => $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0,
+            'business' => $this->getConfigData('business_account'),
+            'invoice' => $cart->id,
+            'currency_code' => $cart->cart_currency_code,
+            'paymentaction' => 'sale',
+            'return' => route('paypal.standard.success'),
+            'cancel_return' => route('paypal.standard.cancel'),
+            'notify_url' => route('paypal.standard.ipn'),
+            'charset' => 'utf-8',
+            'item_name' => core()->getCurrentChannel()->name,
+            'amount' => $cart->sub_total,
+            'tax' => $cart->tax_total,
+            'shipping' => $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0,
             'discount_amount' => $cart->discount_amount,
         ];
 
         if ($this->getIsLineItemsEnabled()) {
             $fields = array_merge($fields, [
-                'cmd'    => '_cart',
+                'cmd' => '_cart',
                 'upload' => 1,
             ]);
 
@@ -91,8 +91,8 @@ class Standard extends Paypal
             }
         } else {
             $fields = array_merge($fields, [
-                'cmd'           => '_ext-enter',
-                'redirect_cmd'  => '_xclick',
+                'cmd' => '_ext-enter',
+                'redirect_cmd' => '_xclick',
             ]);
         }
 

@@ -62,7 +62,7 @@ class AddressController extends Controller
             'default_address',
         ]), [
             'customer_id' => $customer->id,
-            'address'     => implode(PHP_EOL, array_filter($request->input('address'))),
+            'address' => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
         if (! empty($data['default_address'])) {
@@ -88,7 +88,7 @@ class AddressController extends Controller
     public function edit(int $id)
     {
         $address = $this->customerAddressRepository->findOneWhere([
-            'id'          => $id,
+            'id' => $id,
             'customer_id' => auth()->guard('customer')->id(),
         ]);
 
@@ -130,7 +130,7 @@ class AddressController extends Controller
             'email',
         ]), [
             'customer_id' => $customer->id,
-            'address'     => implode(PHP_EOL, array_filter($request->input('address'))),
+            'address' => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->update($data, $id);
@@ -177,7 +177,7 @@ class AddressController extends Controller
     public function destroy(int $id)
     {
         $address = $this->customerAddressRepository->findOneWhere([
-            'id'          => $id,
+            'id' => $id,
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 

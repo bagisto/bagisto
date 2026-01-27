@@ -144,7 +144,7 @@ it('returns category products sorted by price descending', function () {
     $expectedPricesInDescOrder = $products
         ->map(fn ($product) => $product->getTypeInstance()->getMinimalPrice())
         ->sortDesc()
-        ->map(fn ($price) =>  core()->formatPrice($price))
+        ->map(fn ($price) => core()->formatPrice($price))
         ->toArray();
 
     // Act and Assert.
@@ -166,7 +166,7 @@ it('returns category products sorted by price ascending', function () {
     $expectedPricesInAscOrder = $products
         ->map(fn ($product) => $product->getTypeInstance()->getMinimalPrice())
         ->sort()
-        ->map(fn ($price) =>  core()->formatPrice($price))
+        ->map(fn ($price) => core()->formatPrice($price))
         ->toArray();
 
     // Act and Assert.

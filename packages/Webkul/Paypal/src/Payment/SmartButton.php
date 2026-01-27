@@ -100,9 +100,9 @@ class SmartButton extends Paypal
         $ordersController = $this->getClient()->getOrdersController();
 
         $options = [
-            'body'                       => $body,
+            'body' => $body,
             'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
-            'prefer'                     => 'return=representation',
+            'prefer' => 'return=representation',
         ];
 
         $response = $ordersController->createOrder($options);
@@ -121,9 +121,9 @@ class SmartButton extends Paypal
         $ordersController = $this->getClient()->getOrdersController();
 
         $options = [
-            'id'                         => $orderId,
+            'id' => $orderId,
             'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
-            'prefer'                     => 'return=representation',
+            'prefer' => 'return=representation',
         ];
 
         $response = $ordersController->captureOrder($options);
@@ -171,9 +171,9 @@ class SmartButton extends Paypal
         $paymentsController = $this->getClient()->getPaymentsController();
 
         $options = [
-            'captureId'                  => $captureId,
+            'captureId' => $captureId,
             'paypalPartnerAttributionId' => $this->paypalPartnerAttributionId,
-            'prefer'                     => 'return=representation',
+            'prefer' => 'return=representation',
         ];
 
         if (! empty($body)) {

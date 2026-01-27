@@ -24,9 +24,9 @@ class MassUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'indices'      => ['required', 'array'],
-            'indices.*'    => ['integer'],
-            'value'        => ['required'],
+            'indices' => ['required', 'array'],
+            'indices.*' => ['integer'],
+            'value' => ['required'],
         ];
     }
 }

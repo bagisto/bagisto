@@ -23,8 +23,8 @@ class RMACustomFieldOptionRepository extends Repository
         foreach ($dataOptions['options'] as $key => $option) {
             $this->model->create([
                 'rma_custom_field_id' => $rmaCustomFieldId,
-                'name'                => $option,
-                'value'               => $dataOptions['value'][$key],
+                'name' => $option,
+                'value' => $dataOptions['value'][$key],
             ]);
         }
     }

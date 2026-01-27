@@ -15,9 +15,9 @@ class OrderPaymentResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'method'       => $this->method,
+            'method' => $this->method,
             'method_title' => $this->method_title,
-            'additional'   => $request->input('orderData'),
+            'additional' => $request->input('orderData'),
         ];
     }
 }

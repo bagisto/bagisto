@@ -52,9 +52,9 @@ return [
     */
 
     'templates' => [
-        'small'  => \Webkul\Shop\CacheFilters\Small::class,
+        'small' => \Webkul\Shop\CacheFilters\Small::class,
         'medium' => \Webkul\Shop\CacheFilters\Medium::class,
-        'large'  => \Webkul\Shop\CacheFilters\Large::class,
+        'large' => \Webkul\Shop\CacheFilters\Large::class,
     ],
 
     /*

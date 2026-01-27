@@ -55,13 +55,13 @@ class CampaignController extends Controller
     public function store()
     {
         $validatedData = $this->validate(request(), [
-            'name'                  => 'required',
-            'subject'               => 'required',
+            'name' => 'required',
+            'subject' => 'required',
             'marketing_template_id' => 'required',
-            'marketing_event_id'    => 'required',
-            'channel_id'            => 'required',
-            'customer_group_id'     => 'required',
-            'status'                => 'sometimes|required|in:0,1',
+            'marketing_event_id' => 'required',
+            'channel_id' => 'required',
+            'customer_group_id' => 'required',
+            'status' => 'sometimes|required|in:0,1',
         ]);
 
         Event::dispatch('marketing.campaigns.create.before');
@@ -97,12 +97,12 @@ class CampaignController extends Controller
     public function update(int $id)
     {
         $validatedData = $this->validate(request(), [
-            'name'                  => 'required',
-            'subject'               => 'required',
+            'name' => 'required',
+            'subject' => 'required',
             'marketing_template_id' => 'required',
-            'marketing_event_id'    => 'required',
-            'channel_id'            => 'required',
-            'customer_group_id'     => 'required',
+            'marketing_event_id' => 'required',
+            'channel_id' => 'required',
+            'customer_group_id' => 'required',
         ]);
 
         Event::dispatch('marketing.campaigns.update.before', $id);

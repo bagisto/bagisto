@@ -17,12 +17,12 @@ class ExtendedHtml5Definition implements Definition
 
         $definition->addElement('div', 'Block', 'Flow', 'Common', [
             'class' => 'Class',
-            'id'    => 'Text',
+            'id' => 'Text',
         ]);
 
         $definition->addElement('button', 'Inline', 'Flow', 'Common', [
             'class' => 'Class',
-            'type'  => 'Enum#button,submit,reset',
+            'type' => 'Enum#button,submit,reset',
         ]);
 
         $definition->addAttribute('img', 'data-src', 'URI');

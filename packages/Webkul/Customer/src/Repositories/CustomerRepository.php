@@ -89,8 +89,8 @@ class CustomerRepository extends Repository
          * Setting registered customer to orders.
          */
         Order::where('customer_email', $customer->email)->update([
-            'is_guest'      => 0,
-            'customer_id'   => $customer->id,
+            'is_guest' => 0,
+            'customer_id' => $customer->id,
             'customer_type' => \Webkul\Customer\Models\Customer::class,
         ]);
 
@@ -108,7 +108,7 @@ class CustomerRepository extends Repository
             ]);
 
             $order->shipments()->update([
-                'customer_id'   => $customer->id,
+                'customer_id' => $customer->id,
                 'customer_type' => \Webkul\Customer\Models\Customer::class,
             ]);
 

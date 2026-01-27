@@ -48,13 +48,13 @@ class OnepageController extends APIController
         ) {
             return new JsonResource([
                 'redirect' => true,
-                'data'     => route('shop.customer.session.index'),
+                'data' => route('shop.customer.session.index'),
             ]);
         }
 
         if (Cart::hasError()) {
             return new JsonResource([
-                'redirect'     => true,
+                'redirect' => true,
                 'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
@@ -68,20 +68,20 @@ class OnepageController extends APIController
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
-                    'redirect'     => true,
+                    'redirect' => true,
                     'redirect_url' => route('shop.checkout.cart.index'),
                 ]);
             }
 
             return new JsonResource([
                 'redirect' => false,
-                'data'     => $rates,
+                'data' => $rates,
             ]);
         }
 
         return new JsonResource([
             'redirect' => false,
-            'data'     => Payment::getSupportedPaymentMethods(),
+            'data' => Payment::getSupportedPaymentMethods(),
         ]);
     }
 
@@ -148,7 +148,7 @@ class OnepageController extends APIController
     {
         if (Cart::hasError()) {
             return new JsonResource([
-                'redirect'     => true,
+                'redirect' => true,
                 'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
@@ -167,7 +167,7 @@ class OnepageController extends APIController
 
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return new JsonResource([
-                'redirect'     => true,
+                'redirect' => true,
                 'redirect_url' => $redirectUrl,
             ]);
         }
@@ -181,7 +181,7 @@ class OnepageController extends APIController
         session()->flash('order_id', $order->id);
 
         return new JsonResource([
-            'redirect'     => true,
+            'redirect' => true,
             'redirect_url' => route('shop.checkout.onepage.success'),
         ]);
     }

@@ -64,8 +64,8 @@ class ConfigurableOption
         $options = $this->getOptions($product, $this->getAllowedVariants($product));
 
         $config = [
-            'attributes'     => $this->getAttributesData($product, $options),
-            'index'          => $options['index'] ?? [],
+            'attributes' => $this->getAttributesData($product, $options),
+            'index' => $options['index'] ?? [],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'variant_videos' => $this->getVariantVideos($product),
@@ -133,11 +133,11 @@ class ConfigurableOption
 
         foreach ($allowAttributes as $attribute) {
             $attributes[] = [
-                'id'          => $attribute->id,
-                'code'        => $attribute->code,
-                'label'       => $attribute->name ? $attribute->name : $attribute->admin_name,
+                'id' => $attribute->id,
+                'code' => $attribute->code,
+                'label' => $attribute->name ? $attribute->name : $attribute->admin_name,
                 'swatch_type' => $attribute->swatch_type,
-                'options'     => $this->getAttributeOptionsData($attribute, $options),
+                'options' => $this->getAttributeOptionsData($attribute, $options),
             ];
         }
 
@@ -163,10 +163,10 @@ class ConfigurableOption
             }
 
             $attributeOptionsData[] = [
-                'id'           => $optionId,
-                'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
+                'id' => $optionId,
+                'label' => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
                 'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
-                'products'     => $options[$attribute->id][$optionId],
+                'products' => $options[$attribute->id][$optionId],
             ];
         }
 

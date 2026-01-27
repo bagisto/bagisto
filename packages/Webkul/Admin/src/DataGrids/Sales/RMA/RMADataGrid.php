@@ -56,34 +56,34 @@ class RMADataGrid extends DataGrid
     public function prepareColumns(): void
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.id'),
+            'type' => 'integer',
             'searchable' => false,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'order_id',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.order-ref'),
-            'type'       => 'integer',
+            'index' => 'order_id',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.order-ref'),
+            'type' => 'integer',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 return '<a href="'.route('admin.sales.orders.view', ['id' => $row->order_id]).'">'."<span class='text-blue-600'>#".$row->order_id.'</span></a>';
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'customer_name',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.customer-name'),
-            'type'       => 'string',
+            'index' => 'customer_name',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.customer-name'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 if (! empty($row->is_guest)) {
                     return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
                 }
@@ -93,15 +93,15 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'title',
-            'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'title',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.rma-status'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => $this->rmaStatusRepository->all(['title as label', 'title as value'])->toArray(),
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 if (
                     $row->order_status == Order::STATUS_CANCELED
                     && $row->order_status == Order::STATUS_CLOSED
@@ -116,12 +116,12 @@ class RMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.rma.all-rma.index.datagrid.create'),
-            'type'            => 'date',
-            'sortable'        => true,
-            'searchable'      => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.create'),
+            'type' => 'date',
+            'sortable' => true,
+            'searchable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
         ]);
     }
@@ -133,10 +133,10 @@ class RMADataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma.create')) {
             $this->addAction([
-                'title'  => trans('admin::app.sales.rma.all-rma.index.datagrid.view'),
-                'icon'   => 'icon-view',
+                'title' => trans('admin::app.sales.rma.all-rma.index.datagrid.view'),
+                'icon' => 'icon-view',
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.rma.view', $row->id);
                 },
             ]);

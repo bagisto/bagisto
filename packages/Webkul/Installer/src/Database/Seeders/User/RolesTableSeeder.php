@@ -22,9 +22,9 @@ class RolesTableSeeder extends Seeder
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
         DB::table('roles')->insert([
-            'id'              => 1,
-            'name'            => trans('installer::app.seeders.user.roles.name', [], $defaultLocale),
-            'description'     => trans('installer::app.seeders.user.roles.description', [], $defaultLocale),
+            'id' => 1,
+            'name' => trans('installer::app.seeders.user.roles.name', [], $defaultLocale),
+            'description' => trans('installer::app.seeders.user.roles.description', [], $defaultLocale),
             'permission_type' => 'all',
         ]);
     }

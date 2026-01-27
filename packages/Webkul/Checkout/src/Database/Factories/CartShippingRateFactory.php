@@ -20,11 +20,11 @@ class CartShippingRateFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_calculate_tax'     => 1,
-            'discount_amount'      => 0.0000,
+            'is_calculate_tax' => 1,
+            'discount_amount' => 0.0000,
             'base_discount_amount' => 0.0000,
-            'created_at'           => now(),
-            'updated_at'           => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

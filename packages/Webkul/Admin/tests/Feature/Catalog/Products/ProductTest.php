@@ -39,7 +39,7 @@ it('should copy the existing product', function () {
     // Assert the copied product exists in `product_flat`.
     $this->assertDatabaseHas('product_flat', [
         'product_id' => $copiedProduct->id,
-        'sku'        => $copiedProduct->sku,
+        'sku' => $copiedProduct->sku,
     ]);
 });
 
@@ -52,7 +52,7 @@ it('should perform the mass action from update status for products', function ()
 
     postJson(route('admin.catalog.products.mass_update'), [
         'indices' => $products->pluck('id')->toArray(),
-        'value'   => 1,
+        'value' => 1,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-update-success'));
@@ -62,8 +62,8 @@ it('should perform the mass action from update status for products', function ()
             ProductFlat::class => [
                 [
                     'product_id' => $product->id,
-                    'sku'        => $product->sku,
-                    'status'     => 1,
+                    'sku' => $product->sku,
+                    'status' => 1,
                 ],
             ],
         ]);
@@ -79,14 +79,14 @@ it('should perform the mass action for delete for products', function () {
 
     postJson(route('admin.catalog.products.mass_delete'), [
         'indices' => $products->pluck('id')->toArray(),
-        'value'   => 1,
+        'value' => 1,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-delete-success'));
 
     foreach ($products as $product) {
         $this->assertDatabaseMissing('product_flat', [
-            'status'     => 1,
+            'status' => 1,
             'product_id' => $product->id,
         ]);
     }

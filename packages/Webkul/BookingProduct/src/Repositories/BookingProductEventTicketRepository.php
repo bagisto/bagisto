@@ -24,7 +24,7 @@ class BookingProductEventTicketRepository extends Repository
     public function saveEventTickets(array $data, BookingProduct $bookingProduct): void
     {
         Event::dispatch('booking_product.booking.event-ticket.save.before', [
-            'data'           => $data,
+            'data' => $data,
             'bookingProduct' => $bookingProduct,
         ]);
 
@@ -53,7 +53,7 @@ class BookingProductEventTicketRepository extends Repository
                 }
 
                 $savedTickets[$ticketId] = [
-                    'ticket'       => $ticket,
+                    'ticket' => $ticket,
                     'ticketInputs' => $ticketInputs,
                 ];
             }

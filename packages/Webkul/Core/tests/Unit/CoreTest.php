@@ -175,7 +175,7 @@ it('should format the price with default symbol based on the current currency an
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => null,
+        'symbol' => null,
         'currency_position' => null,
     ]);
 
@@ -197,7 +197,7 @@ it('should format the price with custom symbol based on the current currency and
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => $expectedSymbol,
+        'symbol' => $expectedSymbol,
         'currency_position' => null,
     ]);
 
@@ -293,7 +293,7 @@ it('should format the price based on the current currency and place the code on 
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => '',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
 
@@ -313,7 +313,7 @@ it('should format the price based on the current currency and place the code on 
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => '',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
 
@@ -333,7 +333,7 @@ it('should format the price based on the current currency and place the code on 
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => '',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT->value,
     ]);
 
@@ -353,7 +353,7 @@ it('should format the price based on the current currency and place the code on 
     $channel = Channel::factory()->create();
 
     $channel->base_currency->update([
-        'symbol'            => '',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
 
@@ -371,9 +371,9 @@ it('should format the price based on the current currency and place the code on 
 it('should format the price based on the mentioned currency and place the symbol on the left side', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
 
@@ -395,9 +395,9 @@ it('should format the price based on the mentioned currency and place the symbol
 it('should format the price based on the mentioned currency and place the symbol on the left side with space', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
 
@@ -419,9 +419,9 @@ it('should format the price based on the mentioned currency and place the symbol
 it('should format the price based on the mentioned currency and place the symbol on the right side', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::RIGHT->value,
     ]);
 
@@ -443,9 +443,9 @@ it('should format the price based on the mentioned currency and place the symbol
 it('should format the price based on the mentioned currency and place the symbol on the right side with space', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
 
@@ -467,9 +467,9 @@ it('should format the price based on the mentioned currency and place the symbol
 it('should format the price based on the mentioned currency and place the code on the left side if the symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
 
@@ -491,9 +491,9 @@ it('should format the price based on the mentioned currency and place the code o
 it('should format the price based on the mentioned currency and place the code on the left side with space if the symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
 
@@ -515,9 +515,9 @@ it('should format the price based on the mentioned currency and place the code o
 it('should format the price based on the mentioned currency and place the code on the right side if the symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT->value,
     ]);
 
@@ -539,9 +539,9 @@ it('should format the price based on the mentioned currency and place the code o
 it('should format the price based on the mentioned currency and place the code on the right side with space if the symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
 
@@ -563,9 +563,9 @@ it('should format the price based on the mentioned currency and place the code o
 it('should format the base price and place the symbol on the left side', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
 
@@ -583,9 +583,9 @@ it('should format the base price and place the symbol on the left side', functio
 it('should format the base price and place the symbol on the left side with space', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
 
@@ -603,9 +603,9 @@ it('should format the base price and place the symbol on the left side with spac
 it('should format the base price and place the symbol on the right side', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::RIGHT->value,
     ]);
 
@@ -623,9 +623,9 @@ it('should format the base price and place the symbol on the right side', functi
 it('should format the base price and place the symbol on the right side with space', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '₹',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
 
@@ -643,9 +643,9 @@ it('should format the base price and place the symbol on the right side with spa
 it('should format the base price and place the code on the left side if symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
 
@@ -663,9 +663,9 @@ it('should format the base price and place the code on the left side if symbol i
 it('should format the base price and place the code on the left side with space if symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
 
@@ -683,9 +683,9 @@ it('should format the base price and place the code on the left side with space 
 it('should format the base price and place the code on the right side if symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT->value,
     ]);
 
@@ -703,9 +703,9 @@ it('should format the base price and place the code on the right side if symbol 
 it('should format the base price and place the code on the right side with space if symbol is not present', function () {
     // Arrange
     $indianCurrency = Currency::factory()->create([
-        'code'              => 'INR',
-        'name'              => 'Indian Rupee',
-        'symbol'            => '',
+        'code' => 'INR',
+        'name' => 'Indian Rupee',
+        'symbol' => '',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
 

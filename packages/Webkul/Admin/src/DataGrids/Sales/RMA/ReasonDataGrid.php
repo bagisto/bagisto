@@ -38,31 +38,31 @@ class ReasonDataGrid extends DataGrid
     public function prepareColumns(): void
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.sales.rma.reasons.index.datagrid.id'),
+            'type' => 'integer',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'title',
-            'label'      => trans('admin::app.sales.rma.reasons.index.datagrid.reason'),
-            'type'       => 'string',
+            'index' => 'title',
+            'label' => trans('admin::app.sales.rma.reasons.index.datagrid.reason'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'              => 'status',
-            'label'              => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
-            'type'               => 'string',
-            'searchable'         => false,
-            'filterable'         => true,
-            'sortable'           => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'status',
+            'label' => trans('admin::app.sales.rma.reasons.index.datagrid.status'),
+            'type' => 'string',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
@@ -72,7 +72,7 @@ class ReasonDataGrid extends DataGrid
                     'value' => 0,
                 ],
             ],
-            'closure'           => function ($row) {
+            'closure' => function ($row) {
                 if ($row->status) {
                     return '<p class="label-active">'.trans('admin::app.sales.rma.reasons.index.datagrid.enabled').'</p>';
                 }
@@ -82,13 +82,13 @@ class ReasonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'resolution_types',
-            'label'      => trans('admin::app.configuration.index.sales.rma.resolution-type'),
-            'type'       => 'string',
+            'index' => 'resolution_types',
+            'label' => trans('admin::app.configuration.index.sales.rma.resolution-type'),
+            'type' => 'string',
             'searchable' => false,
             'filterable' => false,
-            'sortable'   => false,
-            'closure'    => function ($row) {
+            'sortable' => false,
+            'closure' => function ($row) {
                 if ($row->resolution_types) {
                     return ucwords(str_replace('_', ' ', $row->resolution_types));
                 }
@@ -96,21 +96,21 @@ class ReasonDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'position',
-            'label'      => trans('admin::app.catalog.categories.create.position'),
-            'type'       => 'string',
+            'index' => 'position',
+            'label' => trans('admin::app.catalog.categories.create.position'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.rma.reasons.index.datagrid.created-at'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'filterable'      => true,
-            'sortable'        => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.rma.reasons.index.datagrid.created-at'),
+            'type' => 'date',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable' => true,
             'filterable_type' => 'date_range',
         ]);
     }
@@ -122,11 +122,11 @@ class ReasonDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma-reason.edit')) {
             $this->addAction([
-                'index'  => 'edit',
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.edit'),
+                'index' => 'edit',
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.sales.rma.reasons.index.datagrid.edit'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.rma.reason.edit', $row->id);
                 },
             ]);
@@ -134,11 +134,11 @@ class ReasonDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addAction([
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
-                'type'   => 'Delete',
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
+                'type' => 'Delete',
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.rma.reason.delete', $row->id);
                 },
             ]);
@@ -152,9 +152,9 @@ class ReasonDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.rma-reason.edit')) {
             $this->addMassAction([
-                'title'   => trans('admin::app.sales.rma.reasons.index.datagrid.update'),
-                'method'  => 'POST',
-                'url'     => route('admin.sales.rma.reason.mass-update'),
+                'title' => trans('admin::app.sales.rma.reasons.index.datagrid.update'),
+                'method' => 'POST',
+                'url' => route('admin.sales.rma.reason.mass-update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
@@ -169,9 +169,9 @@ class ReasonDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.rma-reason.delete')) {
             $this->addMassAction([
-                'title'  => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
+                'title' => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'method' => 'POST',
-                'url'    => route('admin.sales.rma.reason.mass-delete'),
+                'url' => route('admin.sales.rma.reason.mass-delete'),
             ]);
         }
     }

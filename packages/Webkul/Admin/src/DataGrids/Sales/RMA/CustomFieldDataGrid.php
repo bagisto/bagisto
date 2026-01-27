@@ -33,49 +33,49 @@ class CustomFieldDataGrid extends DataGrid
     public function prepareColumns(): void
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.sales.rma.custom-field.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.id'),
+            'type' => 'integer',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'code',
-            'label'      => trans('admin::app.sales.rma.custom-field.index.datagrid.code'),
-            'type'       => 'string',
+            'index' => 'code',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.code'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'label',
-            'label'      => trans('admin::app.sales.rma.custom-field.index.datagrid.label'),
-            'type'       => 'string',
+            'index' => 'label',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.label'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'type',
-            'label'      => trans('admin::app.sales.rma.custom-field.index.datagrid.type'),
-            'type'       => 'string',
+            'index' => 'type',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.type'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index'              => 'is_required',
-            'label'              => trans('admin::app.sales.rma.custom-field.index.datagrid.required'),
-            'type'               => 'string',
-            'searchable'         => false,
-            'sortable'           => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'is_required',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.required'),
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.yes'),
@@ -85,7 +85,7 @@ class CustomFieldDataGrid extends DataGrid
                     'value' => 0,
                 ],
             ],
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 if ($row->is_required) {
                     return '<span class="label-active">'.trans('admin::app.sales.rma.custom-field.index.datagrid.yes').'</span>';
                 }
@@ -95,13 +95,13 @@ class CustomFieldDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'status',
-            'label'              => trans('admin::app.sales.rma.custom-field.index.datagrid.status'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'status',
+            'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.status'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.enabled'),
@@ -111,7 +111,7 @@ class CustomFieldDataGrid extends DataGrid
                     'value' => 0,
                 ],
             ],
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 if ($row->status) {
                     return '<span class="label-active">'.trans('admin::app.sales.rma.custom-field.index.datagrid.enabled').'</span>';
                 }
@@ -128,10 +128,10 @@ class CustomFieldDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.custom-field.edit')) {
             $this->addAction([
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.sales.rma.custom-field.index.datagrid.edit'),
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.edit'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.rma.custom-field.edit', $row->id);
                 },
             ]);
@@ -139,10 +139,10 @@ class CustomFieldDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.custom-field.delete')) {
             $this->addAction([
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.sales.rma.custom-field.delete', $row->id);
                 },
             ]);
@@ -156,9 +156,9 @@ class CustomFieldDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('sales.custom-field.edit')) {
             $this->addMassAction([
-                'title'   => trans('admin::app.sales.rma.custom-field.index.datagrid.update'),
-                'method'  => 'POST',
-                'url'     => route('admin.sales.rma.custom-field.mass-update'),
+                'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.update'),
+                'method' => 'POST',
+                'url' => route('admin.sales.rma.custom-field.mass-update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.enabled'),
@@ -173,9 +173,9 @@ class CustomFieldDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('sales.custom-field.delete')) {
             $this->addMassAction([
-                'title'  => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
+                'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
                 'method' => 'POST',
-                'url'    => route('admin.sales.rma.custom-field.mass-delete'),
+                'url' => route('admin.sales.rma.custom-field.mass-delete'),
             ]);
         }
     }

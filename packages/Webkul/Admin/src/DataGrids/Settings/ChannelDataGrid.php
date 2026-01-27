@@ -38,38 +38,38 @@ class ChannelDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.settings.channels.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'id',
+            'label' => trans('admin::app.settings.channels.index.datagrid.id'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'code',
-            'label'      => trans('admin::app.settings.channels.index.datagrid.code'),
-            'type'       => 'string',
+            'index' => 'code',
+            'label' => trans('admin::app.settings.channels.index.datagrid.code'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'translated_name',
-            'label'      => trans('admin::app.settings.channels.index.datagrid.name'),
-            'type'       => 'string',
+            'index' => 'translated_name',
+            'label' => trans('admin::app.settings.channels.index.datagrid.name'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'hostname',
-            'label'      => trans('admin::app.settings.channels.index.datagrid.host-name'),
-            'type'       => 'string',
+            'index' => 'hostname',
+            'label' => trans('admin::app.settings.channels.index.datagrid.host-name'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
     }
 
@@ -77,10 +77,10 @@ class ChannelDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.channels.edit')) {
             $this->addAction([
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.settings.channels.index.datagrid.edit'),
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.settings.channels.index.datagrid.edit'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.settings.channels.edit', $row->id);
                 },
             ]);
@@ -88,10 +88,10 @@ class ChannelDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('settings.channels.delete')) {
             $this->addAction([
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.settings.channels.index.datagrid.delete'),
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.settings.channels.index.datagrid.delete'),
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.settings.channels.delete', $row->id);
                 },
             ]);

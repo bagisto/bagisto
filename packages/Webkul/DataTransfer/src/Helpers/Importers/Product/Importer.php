@@ -101,10 +101,10 @@ class Importer extends AbstractImporter
      * Error message templates
      */
     protected array $messages = [
-        self::ERROR_INVALID_TYPE                   => 'data_transfer::app.importers.products.validation.errors.invalid-type',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE       => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
-        self::ERROR_DUPLICATE_URL_KEY              => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE  => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
+        self::ERROR_INVALID_TYPE => 'data_transfer::app.importers.products.validation.errors.invalid-type',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
+        self::ERROR_DUPLICATE_URL_KEY => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
         self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND => 'data_transfer::app.importers.products.validation.errors.super-attribute-not-found',
     ];
 
@@ -357,7 +357,7 @@ class Importer extends AbstractImporter
             || ($this->urlKeys[$rowData['url_key']]['sku'] == $rowData['sku'])
         ) {
             $this->urlKeys[$rowData['url_key']] = [
-                'sku'        => $rowData['sku'],
+                'sku' => $rowData['sku'],
                 'row_number' => $rowNumber,
             ];
         } else {
@@ -384,13 +384,13 @@ class Importer extends AbstractImporter
 
         if ($rowData['type'] == self::PRODUCT_TYPE_BUNDLE) {
             $validationRules = [
-                'bundle_options.*.name'     => 'sometimes|required',
-                'bundle_options.*.type'     => 'sometimes|required|in:select,radio,checkbox,multiselect',
+                'bundle_options.*.name' => 'sometimes|required',
+                'bundle_options.*.type' => 'sometimes|required|in:select,radio,checkbox,multiselect',
                 'bundle_options.*.required' => 'sometimes|required|boolean',
-                'bundle_options.*.sku'      => 'sometimes|required',
-                'bundle_options.*.price'    => ['sometimes', 'required', new Decimal],
-                'bundle_options.*.qty'      => 'sometimes|required|integer',
-                'bundle_options.*.default'  => 'sometimes|required|boolean',
+                'bundle_options.*.sku' => 'sometimes|required',
+                'bundle_options.*.price' => ['sometimes', 'required', new Decimal],
+                'bundle_options.*.qty' => 'sometimes|required|integer',
+                'bundle_options.*.default' => 'sometimes|required|boolean',
             ];
 
             $options = explode('|', $rowData['bundle_options'] ?? '');
@@ -434,8 +434,8 @@ class Importer extends AbstractImporter
              */
             $validationRules = [
                 'customer_group_prices.*.group' => 'sometimes|required',
-                'customer_group_prices.*.qty'   => 'sometimes|required|integer',
-                'customer_group_prices.*.type'  => 'sometimes|required|in:fixed,discount',
+                'customer_group_prices.*.qty' => 'sometimes|required|integer',
+                'customer_group_prices.*.type' => 'sometimes|required|in:fixed,discount',
                 'customer_group_prices.*.price' => ['sometimes', 'required', new Decimal],
             ];
 
@@ -505,11 +505,11 @@ class Importer extends AbstractImporter
     public function getValidationRules(array $rowData): array
     {
         $rules = [
-            'sku'                => ['required', new Slug],
-            'url_key'            => ['required'],
+            'sku' => ['required', new Slug],
+            'url_key' => ['required'],
             'special_price_from' => ['nullable', 'date'],
-            'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
-            'special_price'      => ['nullable', new Decimal, 'lt:price'],
+            'special_price_to' => ['nullable', 'date', 'after_or_equal:special_price_from'],
+            'special_price' => ['nullable', new Decimal, 'lt:price'],
         ];
 
         $attributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
@@ -618,7 +618,7 @@ class Importer extends AbstractImporter
         $batch = $this->importBatchRepository->update([
             'state' => Import::STATE_PROCESSED,
 
-            'summary'      => [
+            'summary' => [
                 'created' => $this->getCreatedItemsCount(),
                 'updated' => $this->getUpdatedItemsCount(),
                 'deleted' => $this->getDeletedItemsCount(),
@@ -1000,17 +1000,17 @@ class Importer extends AbstractImporter
 
         if ($this->isSKUExist($rowData['sku'])) {
             $products['update'][$rowData['sku']] = [
-                'type'                => $rowData['type'],
-                'sku'                 => $rowData['sku'],
+                'type' => $rowData['type'],
+                'sku' => $rowData['sku'],
                 'attribute_family_id' => $attributeFamilyId,
             ];
         } else {
             $products['insert'][$rowData['sku']] = [
-                'type'                => $rowData['type'],
-                'sku'                 => $rowData['sku'],
+                'type' => $rowData['type'],
+                'sku' => $rowData['sku'],
                 'attribute_family_id' => $attributeFamilyId,
-                'created_at'          => $rowData['created_at'] ?? now(),
-                'updated_at'          => $rowData['updated_at'] ?? now(),
+                'created_at' => $rowData['created_at'] ?? now(),
+                'updated_at' => $rowData['updated_at'] ?? now(),
             ];
         }
     }
@@ -1050,8 +1050,8 @@ class Importer extends AbstractImporter
 
             foreach ($newProducts as $product) {
                 $this->skuStorage->set($product->sku, [
-                    'id'                  => $product->id,
-                    'type'                => $product->type,
+                    'id' => $product->id,
+                    'type' => $product->type,
                     'attribute_family_id' => $product->attribute_family_id,
                 ]);
             }
@@ -1075,9 +1075,9 @@ class Importer extends AbstractImporter
             parse_str(str_replace(',', '&', $price), $attributes);
 
             $customerGroupPrices[$rowData['sku']][] = [
-                'qty'               => $attributes['qty'],
-                'value_type'        => $attributes['type'],
-                'value'             => $attributes['price'],
+                'qty' => $attributes['qty'],
+                'value_type' => $attributes['type'],
+                'value' => $attributes['price'],
                 'customer_group_id' => $customerGroups->where('code', $attributes['group'])->first()?->id,
             ];
         }
@@ -1162,7 +1162,7 @@ class Importer extends AbstractImporter
 
             foreach ($categoryIds as $categoryId) {
                 $productCategories[] = [
-                    'product_id'  => $product['id'],
+                    'product_id' => $product['id'],
                     'category_id' => $categoryId,
                 ];
             }
@@ -1238,10 +1238,10 @@ class Importer extends AbstractImporter
             $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
             $attributeValues[$rowData['sku']][] = array_merge($attributeTypeValues, [
-                'attribute_id'          => $attribute->id,
+                'attribute_id' => $attribute->id,
                 $attribute->column_name => $value,
-                'channel'               => $attribute->value_per_channel ? $rowData['channel'] : null,
-                'locale'                => $attribute->value_per_locale ? $rowData['locale'] : null,
+                'channel' => $attribute->value_per_channel ? $rowData['channel'] : null,
+                'locale' => $attribute->value_per_locale ? $rowData['locale'] : null,
             ]);
         }
     }
@@ -1295,7 +1295,7 @@ class Importer extends AbstractImporter
 
             $inventories[$rowData['sku']][] = [
                 'source' => $inventorySource,
-                'qty'    => $qty,
+                'qty' => $qty,
             ];
         }
     }
@@ -1326,9 +1326,9 @@ class Importer extends AbstractImporter
 
                 $productInventories[] = [
                     'inventory_source_id' => $inventorySource->id,
-                    'product_id'          => $product['id'],
-                    'qty'                 => $inventory['qty'],
-                    'vendor_id'           => 0,
+                    'product_id' => $product['id'],
+                    'qty' => $inventory['qty'],
+                    'vendor_id' => 0,
                 ];
             }
         }
@@ -1405,10 +1405,10 @@ class Importer extends AbstractImporter
                 $path = $imageDirectory.'/'.Str::random(40).'.webp';
 
                 $productImages[] = [
-                    'type'       => 'images',
-                    'path'       => $path,
+                    'type' => 'images',
+                    'path' => $path,
                     'product_id' => $product['id'],
-                    'position'   => $key + 1,
+                    'position' => $key + 1,
                 ];
 
                 Storage::put($path, (string) $encoded);
@@ -1438,7 +1438,7 @@ class Importer extends AbstractImporter
         }
 
         $data = array_merge($data, [
-            'locale'  => $rowData['locale'],
+            'locale' => $rowData['locale'],
             'channel' => $rowData['channel'],
         ]);
 
@@ -1456,7 +1456,7 @@ class Importer extends AbstractImporter
             $product = $this->skuStorage->get($attributes['sku']);
 
             $products[] = array_merge($attributes, [
-                'product_id'          => $product['id'],
+                'product_id' => $product['id'],
                 'attribute_family_id' => $product['attribute_family_id'],
             ]);
         }
@@ -1523,7 +1523,7 @@ class Importer extends AbstractImporter
                 $variant = $this->skuStorage->get($variantSku);
 
                 $parentAssociations[] = [
-                    'sku'       => $variantSku,
+                    'sku' => $variantSku,
                     'parent_id' => $product['id'],
                 ];
 
@@ -1537,11 +1537,11 @@ class Importer extends AbstractImporter
                     $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
                     $attributeTypeValues = array_merge($attributeTypeValues, [
-                        'product_id'            => $variant['id'],
-                        'attribute_id'          => $attribute->id,
+                        'product_id' => $variant['id'],
+                        'attribute_id' => $attribute->id,
                         $attribute->column_name => $attributeOption->id,
-                        'channel'               => null,
-                        'locale'                => null,
+                        'channel' => null,
+                        'locale' => null,
                     ]);
 
                     $attributeTypeValues['unique_id'] = implode('|', array_filter([
@@ -1561,7 +1561,7 @@ class Importer extends AbstractImporter
                 $attribute = $this->attributes->where('code', $attributeCode)->first();
 
                 $superAttributes[] = [
-                    'product_id'   => $product['id'],
+                    'product_id' => $product['id'],
                     'attribute_id' => $attribute->id,
                 ];
             }
@@ -1641,9 +1641,9 @@ class Importer extends AbstractImporter
                 }
 
                 $associatedProducts[] = [
-                    'qty'                   => $qty,
-                    'sort_order'            => $sortOrder++,
-                    'product_id'            => $product['id'],
+                    'qty' => $qty,
+                    'sort_order' => $sortOrder++,
+                    'product_id' => $product['id'],
                     'associated_product_id' => $associatedProduct['id'],
                 ];
             }
@@ -1681,14 +1681,14 @@ class Importer extends AbstractImporter
                 $productSortOrder = 0;
 
                 $bundleOptions[$rowData['sku']][$rowData['locale']][$attributes['name']]['attributes'] = [
-                    'type'        => $attributes['type'],
+                    'type' => $attributes['type'],
                     'is_required' => $attributes['required'],
-                    'sort_order'  => $optionSortOrder++,
+                    'sort_order' => $optionSortOrder++,
                 ];
             }
 
             $bundleOptions[$rowData['sku']][$rowData['locale']][$attributes['name']]['skus'][$attributes['sku']] = [
-                'qty'        => $attributes['qty'],
+                'qty' => $attributes['qty'],
                 'is_default' => $attributes['default'],
                 'sort_order' => $productSortOrder++,
             ];
@@ -1733,18 +1733,18 @@ class Importer extends AbstractImporter
 
                 if (! $bundleOption) {
                     $bundleOption = $this->productBundleOptionRepository->create([
-                        'product_id'  => $product['id'],
-                        'type'        => $option['attributes']['type'],
+                        'product_id' => $product['id'],
+                        'type' => $option['attributes']['type'],
                         'is_required' => $option['attributes']['is_required'],
-                        'sort_order'  => $option['attributes']['sort_order'],
+                        'sort_order' => $option['attributes']['sort_order'],
                     ]);
                 } else {
                     $upsertData['options'][] = [
-                        'id'          => $bundleOption->id,
-                        'product_id'  => $product['id'],
-                        'type'        => $option['attributes']['type'],
+                        'id' => $bundleOption->id,
+                        'product_id' => $product['id'],
+                        'type' => $option['attributes']['type'],
                         'is_required' => $option['attributes']['is_required'],
-                        'sort_order'  => $option['attributes']['sort_order'],
+                        'sort_order' => $option['attributes']['sort_order'],
                     ];
                 }
 
@@ -1755,10 +1755,10 @@ class Importer extends AbstractImporter
 
                     $upsertData['products'][] = [
                         'product_bundle_option_id' => $bundleOption->id,
-                        'product_id'               => $associatedProduct['id'],
-                        'qty'                      => $optionProduct['qty'],
-                        'is_default'               => $optionProduct['is_default'],
-                        'sort_order'               => $optionProduct['sort_order'],
+                        'product_id' => $associatedProduct['id'],
+                        'qty' => $optionProduct['qty'],
+                        'is_default' => $optionProduct['is_default'],
+                        'sort_order' => $optionProduct['sort_order'],
                     ];
                 }
             }
@@ -1778,8 +1778,8 @@ class Importer extends AbstractImporter
 
                     $upsertData['translations'][] = [
                         'product_bundle_option_id' => $bundleOptionId,
-                        'label'                    => $optionName,
-                        'locale'                   => $locale,
+                        'label' => $optionName,
+                        'locale' => $locale,
                     ];
                 }
             }
@@ -1817,9 +1817,9 @@ class Importer extends AbstractImporter
     public function prepareLinks(array $rowData, array &$links): void
     {
         $linkTableMapping = [
-            'related'    => 'product_relations',
+            'related' => 'product_relations',
             'cross_sell' => 'product_cross_sells',
-            'up_sell'    => 'product_up_sells',
+            'up_sell' => 'product_up_sells',
         ];
 
         foreach ($linkTableMapping as $type => $table) {
@@ -1864,7 +1864,7 @@ class Importer extends AbstractImporter
 
                     $productLinks[] = [
                         'parent_id' => $product['id'],
-                        'child_id'  => $linkedProduct['id'],
+                        'child_id' => $linkedProduct['id'],
                     ];
                 }
             }
@@ -1950,7 +1950,7 @@ class Importer extends AbstractImporter
         $attributeFamily = $this->attributeFamilies->where('code', $attributeFamilyCode)->first();
 
         $product = ProductModel::make([
-            'type'                => $type,
+            'type' => $type,
             'attribute_family_id' => $attributeFamily->id,
         ]);
 

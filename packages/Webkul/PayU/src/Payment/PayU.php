@@ -128,18 +128,18 @@ class PayU extends Payment
         $email = $cart->customer_email;
 
         return [
-            'key'          => $this->getMerchantKey(),
-            'txnid'        => $txnid,
-            'amount'       => $amount,
-            'productinfo'  => $productInfo,
-            'firstname'    => $firstname,
-            'email'        => $email,
-            'phone'        => $cart->billing_address->phone ?? '',
-            'surl'         => route('payu.success'),
-            'furl'         => route('payu.failure'),
-            'curl'         => route('payu.cancel'),
-            'hash'         => $this->generateHash($txnid, $amount, $productInfo, $firstname, $email, $cart->id),
-            'udf1'         => $cart->id,
+            'key' => $this->getMerchantKey(),
+            'txnid' => $txnid,
+            'amount' => $amount,
+            'productinfo' => $productInfo,
+            'firstname' => $firstname,
+            'email' => $email,
+            'phone' => $cart->billing_address->phone ?? '',
+            'surl' => route('payu.success'),
+            'furl' => route('payu.failure'),
+            'curl' => route('payu.cancel'),
+            'hash' => $this->generateHash($txnid, $amount, $productInfo, $firstname, $email, $cart->id),
+            'udf1' => $cart->id,
         ];
     }
 

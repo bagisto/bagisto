@@ -24,11 +24,11 @@ class Action
     public function toArray()
     {
         return [
-            'index'  => $this->index,
-            'icon'   => $this->icon,
-            'title'  => $this->title,
+            'index' => $this->index,
+            'icon' => $this->icon,
+            'title' => $this->title,
             'method' => $this->method,
-            'url'    => $this->url,
+            'url' => $this->url,
         ];
     }
 }

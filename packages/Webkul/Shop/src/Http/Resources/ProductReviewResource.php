@@ -16,13 +16,13 @@ class ProductReviewResource extends JsonResource
     {
 
         return [
-            'id'         => $this->id,
-            'name'       => $this->name,
-            'title'      => $this->title,
-            'comment'    => $this->comment,
-            'rating'     => $this->rating,
-            'images'     => $this->images,
-            'profile'    => $this->customer?->image_url,
+            'id' => $this->id,
+            'name' => $this->name,
+            'title' => $this->title,
+            'comment' => $this->comment,
+            'rating' => $this->rating,
+            'images' => $this->images,
+            'profile' => $this->customer?->image_url,
             'created_at' => $this->created_at->format('M d, Y'),
         ];
     }

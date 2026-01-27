@@ -57,8 +57,8 @@ class SKUStorage
 
         foreach ($products as $product) {
             $this->set($product->sku, [
-                'id'                  => $product->id,
-                'type'                => $product->type,
+                'id' => $product->id,
+                'type' => $product->type,
                 'attribute_family_id' => $product->attribute_family_id,
             ]);
         }
@@ -98,8 +98,8 @@ class SKUStorage
         $data = explode(self::DELIMITER, $this->items[$sku]);
 
         return [
-            'id'                  => $data[0],
-            'type'                => $data[1],
+            'id' => $data[0],
+            'type' => $data[1],
             'attribute_family_id' => $data[2],
         ];
     }

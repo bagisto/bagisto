@@ -12,26 +12,26 @@ use Webkul\Sales\Models\OrderTransaction;
 
 beforeEach(function () {
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.payu.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.payu.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => 'test_merchant_key',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => 'test_merchant_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => 'test_merchant_salt',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => 'test_merchant_salt',
         'channel_code' => 'default',
     ]);
 });
@@ -39,14 +39,14 @@ beforeEach(function () {
 it('redirects back when payu credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.payu.merchant_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.payu.merchant_salt',
-        'value'        => '',
+        'code' => 'sales.payment_methods.payu.merchant_salt',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -110,17 +110,17 @@ it('successfully processes payu payment and creates order with invoice', functio
 
     // Prepare success response data
     $paymentData = [
-        'txnid'       => $txnid,
-        'mihpayid'    => 'MIHPAY_TEST_456',
-        'mode'        => 'CC',
-        'status'      => 'success',
-        'key'         => 'test_merchant_key',
-        'amount'      => round($cart->base_grand_total, 2),
+        'txnid' => $txnid,
+        'mihpayid' => 'MIHPAY_TEST_456',
+        'mode' => 'CC',
+        'status' => 'success',
+        'key' => 'test_merchant_key',
+        'amount' => round($cart->base_grand_total, 2),
         'productinfo' => 'Order #'.$cart->id,
-        'firstname'   => $cart->customer_first_name,
-        'email'       => $cart->customer_email,
-        'hash'        => 'valid_hash_value',
-        'udf1'        => $cart->id,
+        'firstname' => $cart->customer_first_name,
+        'email' => $cart->customer_email,
+        'hash' => 'valid_hash_value',
+        'udf1' => $cart->id,
     ];
 
     // Act
@@ -158,22 +158,22 @@ it('handles payment failure gracefully', function () {
     $customer = Customer::factory()->create();
 
     $cart = CartModel::factory()->create([
-        'customer_id'         => $customer->id,
+        'customer_id' => $customer->id,
         'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
-        'customer_email'      => $customer->email,
-        'is_guest'            => 0,
-        'base_grand_total'    => 100.00,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
+        'base_grand_total' => 100.00,
     ]);
 
     $txnid = 'PAYU_FAIL_789';
 
     // Act
     $response = $this->post(route('payu.failure'), [
-        'txnid'  => $txnid,
+        'txnid' => $txnid,
         'status' => 'failure',
-        'error'  => 'Payment declined',
-        'udf1'   => $cart->id,
+        'error' => 'Payment declined',
+        'udf1' => $cart->id,
     ]);
 
     // Assert
@@ -204,10 +204,10 @@ it('redirects to cart when hash verification fails', function () {
 
     // Act
     $response = $this->post(route('payu.success'), [
-        'txnid'  => $txnid,
+        'txnid' => $txnid,
         'status' => 'success',
-        'hash'   => 'invalid_hash',
-        'udf1'   => $cart->id,
+        'hash' => 'invalid_hash',
+        'udf1' => $cart->id,
     ]);
 
     // Assert
@@ -226,9 +226,9 @@ it('handles payment cancellation', function () {
 
     // Act
     $response = $this->post(route('payu.cancel'), [
-        'txnid'  => $txnid,
+        'txnid' => $txnid,
         'status' => 'userCancelled',
-        'udf1'   => $cart->id,
+        'udf1' => $cart->id,
     ]);
 
     // Assert

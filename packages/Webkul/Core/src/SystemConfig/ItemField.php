@@ -13,12 +13,12 @@ class ItemField
      */
     protected $veeValidateMappings = [
         'max' => [
-            'text'   => 'max',
+            'text' => 'max',
             'number' => 'max_value',
         ],
 
         'min' => [
-            'text'   => 'min',
+            'text' => 'min',
             'number' => 'min_value',
         ],
     ];
@@ -184,18 +184,18 @@ class ItemField
     public function toArray()
     {
         return [
-            'name'          => $this->getName(),
-            'title'         => $this->getTitle(),
-            'info'          => $this->getInfo(),
-            'type'          => $this->getType(),
-            'path'          => $this->getPath(),
-            'depends'       => $this->getDepends(),
-            'validation'    => $this->getValidations(),
-            'default'       => $this->getDefault(),
+            'name' => $this->getName(),
+            'title' => $this->getTitle(),
+            'info' => $this->getInfo(),
+            'type' => $this->getType(),
+            'path' => $this->getPath(),
+            'depends' => $this->getDepends(),
+            'validation' => $this->getValidations(),
+            'default' => $this->getDefault(),
             'channel_based' => $this->getChannelBased(),
-            'locale_based'  => $this->getLocaleBased(),
-            'options'       => $this->getOptions(),
-            'item_key'      => $this->getItemKey(),
+            'locale_based' => $this->getLocaleBased(),
+            'options' => $this->getOptions(),
+            'item_key' => $this->getItemKey(),
         ];
     }
 

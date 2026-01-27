@@ -98,8 +98,8 @@ class ProcessSitemap implements ShouldQueue
         $this->sitemap->update([
             'generated_at' => now(),
 
-            'additional'   => array_merge($this->sitemap->additional ?? [], [
-                'index'    => $this->sitemap->index_file_name,
+            'additional' => array_merge($this->sitemap->additional ?? [], [
+                'index' => $this->sitemap->index_file_name,
                 'sitemaps' => $this->generatedSitemaps,
             ]),
         ]);

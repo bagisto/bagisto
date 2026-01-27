@@ -27,9 +27,9 @@ class CatalogRuleProductPrice
     public function indexRuleProductPrice($batchCount, $product = null)
     {
         $dates = [
-            'current'  => $currentDate = Carbon::now(),
+            'current' => $currentDate = Carbon::now(),
             'previous' => (clone $currentDate)->subDays(1)->setTime(23, 59, 59),
-            'next'     => (clone $currentDate)->addDays(1)->setTime(0, 0, 0),
+            'next' => (clone $currentDate)->addDays(1)->setTime(0, 0, 0),
         ];
 
         $prices = $endRuleFlags = [];
@@ -73,14 +73,14 @@ class CatalogRuleProductPrice
 
                     if (! isset($prices[$priceKey])) {
                         $prices[$priceKey] = [
-                            'rule_date'         => $date,
-                            'catalog_rule_id'   => $row->catalog_rule_id,
-                            'channel_id'        => $row->channel_id,
+                            'rule_date' => $date,
+                            'catalog_rule_id' => $row->catalog_rule_id,
+                            'channel_id' => $row->channel_id,
                             'customer_group_id' => $row->customer_group_id,
-                            'product_id'        => $row->product_id,
-                            'price'             => $this->calculate($row),
-                            'starts_from'       => $row->starts_from,
-                            'ends_till'         => $row->ends_till,
+                            'product_id' => $row->product_id,
+                            'price' => $this->calculate($row),
+                            'starts_from' => $row->starts_from,
+                            'ends_till' => $row->ends_till,
                         ];
                     } else {
                         $prices[$priceKey]['price'] = $this->calculate($row, $prices[$priceKey]);

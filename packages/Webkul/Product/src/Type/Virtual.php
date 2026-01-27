@@ -283,23 +283,23 @@ class Virtual extends AbstractType
 
         return [
             [
-                'product_id'          => $this->product->id,
-                'sku'                 => $this->product->sku,
-                'quantity'            => $data['quantity'],
-                'name'                => $this->product->name,
-                'price'               => $convertedPrice = core()->convertPrice($price),
-                'price_incl_tax'      => $convertedPrice,
-                'base_price'          => $price,
+                'product_id' => $this->product->id,
+                'sku' => $this->product->sku,
+                'quantity' => $data['quantity'],
+                'name' => $this->product->name,
+                'price' => $convertedPrice = core()->convertPrice($price),
+                'price_incl_tax' => $convertedPrice,
+                'base_price' => $price,
                 'base_price_incl_tax' => $price,
-                'total'               => $convertedPrice * $data['quantity'],
-                'total_incl_tax'      => $convertedPrice * $data['quantity'],
-                'base_total'          => $price * $data['quantity'],
+                'total' => $convertedPrice * $data['quantity'],
+                'total_incl_tax' => $convertedPrice * $data['quantity'],
+                'base_total' => $price * $data['quantity'],
                 'base_total_incl_tax' => $price * $data['quantity'],
-                'weight'              => (float) ($this->product->weight ?? 0),
-                'total_weight'        => (float) ($this->product->weight ?? 0) * $data['quantity'],
-                'base_total_weight'   => (float) ($this->product->weight ?? 0) * $data['quantity'],
-                'type'                => $this->product->type,
-                'additional'          => $this->getAdditionalOptions($data),
+                'weight' => (float) ($this->product->weight ?? 0),
+                'total_weight' => (float) ($this->product->weight ?? 0) * $data['quantity'],
+                'base_total_weight' => (float) ($this->product->weight ?? 0) * $data['quantity'],
+                'type' => $this->product->type,
+                'additional' => $this->getAdditionalOptions($data),
             ],
         ];
     }
@@ -385,13 +385,13 @@ class Virtual extends AbstractType
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
                         'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
-                        'option_label'   => collect($option['prices'])->pluck('label')->join(', ', ' and '),
+                        'option_label' => collect($option['prices'])->pluck('label')->join(', ', ' and '),
                     ];
                 } else {
                     $data['attributes'][] = [
                         'attribute_type' => $option['type'],
                         'attribute_name' => $option['label'][app()->getLocale()] ?? $option['label'][app()->getFallbackLocale()],
-                        'option_label'   => $option['prices'][0]['label'],
+                        'option_label' => $option['prices'][0]['label'],
                     ];
                 }
             }
@@ -467,11 +467,11 @@ class Virtual extends AbstractType
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     $formattedCustomizableOptions[] = [
-                        'id'          => $customizableOption->id,
-                        'type'        => $customizableOption->type,
-                        'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => [[
-                            'id'    => $optionPrice->id,
+                        'id' => $customizableOption->id,
+                        'type' => $customizableOption->type,
+                        'label' => $customizableOption->translations->pluck('label', 'locale')->toArray(),
+                        'prices' => [[
+                            'id' => $optionPrice->id,
                             'label' => $requestedCustomizableOptions[$customizableOption->id][0],
                             'price' => $optionPrice->price,
                         ]],
@@ -499,11 +499,11 @@ class Virtual extends AbstractType
                         ->whereIn('id', $requestedCustomizableOptions[$customizableOption->id]);
 
                     $formattedCustomizableOptions[] = [
-                        'id'          => $customizableOption->id,
-                        'type'        => $customizableOption->type,
-                        'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => $optionPrices->map(fn ($price) => [
-                            'id'    => $price->id,
+                        'id' => $customizableOption->id,
+                        'type' => $customizableOption->type,
+                        'label' => $customizableOption->translations->pluck('label', 'locale')->toArray(),
+                        'prices' => $optionPrices->map(fn ($price) => [
+                            'id' => $price->id,
                             'label' => $price->label,
                             'price' => $price->price,
                         ])->values()->toArray(),
@@ -525,15 +525,15 @@ class Virtual extends AbstractType
                      * file path.
                      */
                     $formattedCustomizableOptions[] = [
-                        'id'                        => $customizableOption->id,
-                        'type'                      => $customizableOption->type,
-                        'label'                     => $customizableOption->translations->pluck('label', 'locale')->toArray(),
+                        'id' => $customizableOption->id,
+                        'type' => $customizableOption->type,
+                        'label' => $customizableOption->translations->pluck('label', 'locale')->toArray(),
                         'supported_file_extensions' => collect(explode(',', $customizableOption->supported_file_extensions))
                             ->map(fn ($extension) => trim($extension))
                             ->filter(fn ($extension) => ! empty($extension))
                             ->toArray(),
-                        'prices'                    => [[
-                            'id'    => $optionPrice->id,
+                        'prices' => [[
+                            'id' => $optionPrice->id,
                             'label' => $requestedCustomizableOptions[$customizableOption->id][0],
                             'price' => $optionPrice->price,
                         ]],

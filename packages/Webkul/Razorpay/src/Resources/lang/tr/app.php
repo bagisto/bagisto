@@ -10,7 +10,7 @@ return [
             'cancelled' => 'Razorpay ödemesi iptal edildi.',
         ],
 
-        'something-went-wrong'     => 'Bir şeyler ters gitti.',
+        'something-went-wrong' => 'Bir şeyler ters gitti.',
         'supported-currency-error' => 'Para birimi :currency desteklenmiyor. Desteklenen para birimleri: :supportedCurrencies.',
     ],
 ];

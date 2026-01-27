@@ -22,9 +22,9 @@ class RMAAdditionalFieldRepository extends Repository
     {
         foreach ($customAttributes as $key => $customAttribute) {
             $customAttributesData = [
-                'rma_id'                => $rmaId,
-                'rma_custom_field_id'   => $key,
-                'value'                 => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
+                'rma_id' => $rmaId,
+                'rma_custom_field_id' => $key,
+                'value' => is_array($customAttribute) ? implode(',', $customAttribute) : $customAttribute,
             ];
 
             $this->create($customAttributesData);

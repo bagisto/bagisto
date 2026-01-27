@@ -45,7 +45,7 @@ class Helper
 
         if (! $orderItem) {
             return [
-                'qty'     => 0,
+                'qty' => 0,
                 'message' => trans('admin::app.sales.rma.invoice.create.order-item-not-found'),
             ];
         }
@@ -68,7 +68,7 @@ class Helper
         $remainingQty = $orderItem->qty_ordered - $rmaQty;
 
         return [
-            'qty'     => $remainingQty,
+            'qty' => $remainingQty,
             'message' => $rmaQty > 0
                 ? trans('admin::app.sales.rma.invoice.create.rma-created-message', ['qty' => $rmaQty])
                 : '',

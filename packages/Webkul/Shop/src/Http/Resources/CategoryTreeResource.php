@@ -15,13 +15,13 @@ class CategoryTreeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
+            'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'name'      => $this->name,
-            'slug'      => $this->slug,
-            'url'       => $this->url,
-            'status'    => $this->status,
-            'children'  => self::collection($this->children),
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'url' => $this->url,
+            'status' => $this->status,
+            'children' => self::collection($this->children),
         ];
     }
 }

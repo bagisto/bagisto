@@ -21,7 +21,7 @@ class ProductDownloadableLinkTranslationFactory extends Factory
     {
         return [
             'locale' => 'en',
-            'title'  => $this->faker->word,
+            'title' => $this->faker->word,
         ];
     }
 }

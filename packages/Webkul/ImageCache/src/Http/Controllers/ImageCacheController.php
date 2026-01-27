@@ -29,8 +29,8 @@ class ImageCacheController extends Controller
         return match (strtolower($template)) {
             'original' => $this->getOriginal($filename),
             'download' => $this->getDownload($filename),
-            'logo'     => $this->getLogo(),
-            default    => $this->getImage($template, $filename),
+            'logo' => $this->getLogo(),
+            default => $this->getImage($template, $filename),
         };
     }
 
@@ -99,9 +99,9 @@ class ImageCacheController extends Controller
 
         $options = [
             'http' => [
-                'method'           => 'GET',
+                'method' => 'GET',
                 'protocol_version' => 1.1,
-                'header'           => "Accept-language: en\r\n".
+                'header' => "Accept-language: en\r\n".
                     "Domain: $domain\r\n".
                     "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\r\n",
             ],
@@ -218,10 +218,10 @@ class ImageCacheController extends Controller
         $maxAge = ($this->template === 'logo' ? 10080 : config('imagecache.lifetime', 43200)) * 60;
 
         return new Response($responseContent, $statusCode, [
-            'Content-Type'   => $mime,
-            'Cache-Control'  => 'max-age='.$maxAge.', public',
+            'Content-Type' => $mime,
+            'Cache-Control' => 'max-age='.$maxAge.', public',
             'Content-Length' => strlen($content),
-            'Etag'           => $eTag,
+            'Etag' => $eTag,
         ]);
     }
 }

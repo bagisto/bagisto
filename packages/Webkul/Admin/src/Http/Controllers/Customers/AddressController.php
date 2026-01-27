@@ -85,7 +85,7 @@ class AddressController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.view.address.create-success'),
-            'data'    => new AddressResource($address),
+            'data' => new AddressResource($address),
         ]);
     }
 
@@ -138,7 +138,7 @@ class AddressController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.view.address.update-success'),
-            'data'    => new AddressResource($address),
+            'data' => new AddressResource($address),
         ]);
     }
 
@@ -155,15 +155,15 @@ class AddressController extends Controller
         }
 
         $address = $this->customerAddressRepository->findOneWhere([
-            'id'              => request('set_as_default'),
-            'customer_id'     => $id,
+            'id' => request('set_as_default'),
+            'customer_id' => $id,
         ]);
 
         $address->update(['default_address' => 1]);
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.view.address.set-default-success'),
-            'data'    => $address,
+            'data' => $address,
         ]);
     }
 

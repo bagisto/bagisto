@@ -9,26 +9,26 @@ use Webkul\Stripe\Payment\Stripe;
 
 beforeEach(function () {
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.active',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.active',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.sandbox',
-        'value'        => '1',
+        'code' => 'sales.payment_methods.stripe.sandbox',
+        'value' => '1',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => 'sk_test_fake_key',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => 'sk_test_fake_key',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => 'pk_test_fake_key',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => 'pk_test_fake_key',
         'channel_code' => 'default',
     ]);
 });
@@ -36,14 +36,14 @@ beforeEach(function () {
 it('redirects to cart when stripe credentials are invalid', function () {
     // Arrange
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_test_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
     CoreConfig::factory()->create([
-        'code'         => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value'        => '',
+        'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
+        'value' => '',
         'channel_code' => 'default',
     ]);
 
@@ -111,17 +111,17 @@ it('shows error message on payment cancellation', function () {
 it('redirects to cart when cart is already processed', function () {
     // Arrange
     $cart = $this->createCartWithItems('stripe', [
-        'is_active'        => 0,
+        'is_active' => 0,
         'base_grand_total' => 100.00,
-        'grand_total'      => 100.00,
+        'grand_total' => 100.00,
     ]);
 
     $mockSession = (object) [
-        'id'             => 'cs_test_already_processed',
+        'id' => 'cs_test_already_processed',
         'payment_intent' => 'pi_test_123',
         'payment_status' => 'paid',
-        'status'         => 'complete',
-        'metadata'       => (object) ['cart_id' => $cart->id],
+        'status' => 'complete',
+        'metadata' => (object) ['cart_id' => $cart->id],
     ];
 
     $stripeMock = $this->mock(Stripe::class)->makePartial();
@@ -148,11 +148,11 @@ it('successfully processes stripe payment and creates order with invoice', funct
     $cart = $this->createCartWithItems('stripe');
 
     $mockSession = (object) [
-        'id'             => 'cs_test_success_123',
+        'id' => 'cs_test_success_123',
         'payment_intent' => 'pi_test_123',
         'payment_status' => 'paid',
-        'status'         => 'complete',
-        'metadata'       => (object) ['cart_id' => $cart->id],
+        'status' => 'complete',
+        'metadata' => (object) ['cart_id' => $cart->id],
     ];
 
     $stripeMock = $this->mock(Stripe::class)->makePartial();

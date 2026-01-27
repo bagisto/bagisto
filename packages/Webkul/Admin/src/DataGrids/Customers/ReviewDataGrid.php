@@ -68,26 +68,26 @@ class ReviewDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'customer_full_name',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.customer-names'),
-            'type'       => 'string',
-            'sortable'   => true,
+            'index' => 'customer_full_name',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.customer-names'),
+            'type' => 'string',
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'product_name',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.product'),
-            'type'       => 'string',
+            'index' => 'product_name',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.product'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'              => 'product_review_status',
-            'label'              => trans('admin::app.customers.reviews.index.datagrid.status'),
-            'type'               => 'string',
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'product_review_status',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.status'),
+            'type' => 'string',
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.customers.reviews.index.datagrid.approved'),
@@ -102,8 +102,8 @@ class ReviewDataGrid extends DataGrid
                     'value' => self::STATUS_DISAPPROVED,
                 ],
             ],
-            'sortable'   => true,
-            'closure'    => function ($row) {
+            'sortable' => true,
+            'closure' => function ($row) {
                 switch ($row->product_review_status) {
                     case self::STATUS_APPROVED:
                         return '<p class="label-active">'.trans('admin::app.customers.reviews.index.datagrid.approved').'</p>';
@@ -118,51 +118,51 @@ class ReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'rating',
-            'label'              => trans('admin::app.customers.reviews.index.datagrid.rating'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'rating',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.rating'),
+            'type' => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => array_map(function ($value) {
                 return [
                     'label' => $value,
                     'value' => (string) $value,
                 ];
             }, range(1, 5)),
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'product_review_id',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.id'),
-            'type'       => 'integer',
+            'index' => 'product_review_id',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.id'),
+            'type' => 'integer',
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'title',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.title'),
-            'type'       => 'string',
+            'index' => 'title',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.title'),
+            'type' => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'comment',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.comment'),
-            'type'       => 'string',
+            'index' => 'comment',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.comment'),
+            'type' => 'string',
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.customers.reviews.index.datagrid.date'),
-            'type'            => 'date',
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.customers.reviews.index.datagrid.date'),
+            'type' => 'date',
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'sortable'        => true,
+            'sortable' => true,
         ]);
     }
 
@@ -175,11 +175,11 @@ class ReviewDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('customers.reviews.edit')) {
             $this->addAction([
-                'index'  => 'edit',
-                'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
+                'index' => 'edit',
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.customers.reviews.index.datagrid.edit'),
                 'method' => 'GET',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.customers.customers.review.edit', $row->product_review_id);
                 },
             ]);
@@ -187,11 +187,11 @@ class ReviewDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('customers.reviews.delete')) {
             $this->addAction([
-                'index'  => 'delete',
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
+                'index' => 'delete',
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.customers.reviews.index.datagrid.delete'),
                 'method' => 'DELETE',
-                'url'    => function ($row) {
+                'url' => function ($row) {
                     return route('admin.customers.customers.review.delete', $row->product_review_id);
                 },
             ]);
@@ -207,17 +207,17 @@ class ReviewDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('customers.reviews.delete')) {
             $this->addMassAction([
-                'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
-                'url'    => route('admin.customers.customers.review.mass_delete'),
+                'title' => trans('admin::app.customers.reviews.index.datagrid.delete'),
+                'url' => route('admin.customers.customers.review.mass_delete'),
                 'method' => 'POST',
             ]);
         }
 
         if (bouncer()->hasPermission('customers.reviews.edit')) {
             $this->addMassAction([
-                'title'   => trans('admin::app.customers.reviews.index.datagrid.update-status'),
-                'method'  => 'POST',
-                'url'     => route('admin.customers.customers.review.mass_update'),
+                'title' => trans('admin::app.customers.reviews.index.datagrid.update-status'),
+                'method' => 'POST',
+                'url' => route('admin.customers.customers.review.mass_update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.customers.reviews.index.datagrid.pending'),

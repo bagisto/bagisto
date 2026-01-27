@@ -53,12 +53,12 @@ it('should fail validation with invalid file type when storing import', function
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertJsonValidationErrorFor('file')
         ->assertUnprocessable();
@@ -75,20 +75,20 @@ it('should successfully store import with CSV file', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'customers',
-        'action'              => 'append',
+        'type' => 'customers',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
 
     $this->assertDatabaseHas('imports', [
-        'type'   => 'customers',
+        'type' => 'customers',
         'action' => 'append',
-        'state'  => 'pending',
+        'state' => 'pending',
     ]);
 });
 
@@ -103,12 +103,12 @@ it('should accept CSV file with text/plain MIME type (small files)', function ()
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 0,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 0,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
@@ -125,18 +125,18 @@ it('should successfully store import with XML file', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'customers',
-        'action'              => 'delete',
+        'type' => 'customers',
+        'action' => 'delete',
         'validation_strategy' => 'skip-errors',
-        'allowed_errors'      => 5,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 5,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
 
     $this->assertDatabaseHas('imports', [
-        'type'   => 'customers',
+        'type' => 'customers',
         'action' => 'delete',
     ]);
 });
@@ -144,13 +144,13 @@ it('should successfully store import with XML file', function () {
 it('should return the edit page for an existing import', function () {
     // Arrange
     $import = Import::create([
-        'type'                => 'products',
-        'state'               => 'pending',
-        'file_path'           => 'imports/test.csv',
-        'action'              => 'append',
+        'type' => 'products',
+        'state' => 'pending',
+        'file_path' => 'imports/test.csv',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
     ]);
 
     // Act and Assert.
@@ -166,13 +166,13 @@ it('should successfully update an existing import', function () {
     Storage::fake('private');
 
     $import = Import::create([
-        'type'                => 'products',
-        'state'               => 'pending',
-        'file_path'           => 'imports/old.csv',
-        'action'              => 'append',
+        'type' => 'products',
+        'state' => 'pending',
+        'file_path' => 'imports/old.csv',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
     ]);
 
     $csvContent = "sku,name\nSKU-001,Product 1";
@@ -183,12 +183,12 @@ it('should successfully update an existing import', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.data_transfer.imports.update', $import->id), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 15,
-        'field_separator'     => ',',
-        'file'                => $newFile,
+        'allowed_errors' => 15,
+        'field_separator' => ',',
+        'file' => $newFile,
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
@@ -204,24 +204,24 @@ it('should allow updating import without providing a new file', function () {
     Storage::fake('private');
 
     $import = Import::create([
-        'type'                => 'customers',
-        'state'               => 'pending',
-        'file_path'           => 'imports/existing.csv',
-        'allowed_errors'      => 10,
-        'action'              => 'append',
+        'type' => 'customers',
+        'state' => 'pending',
+        'file_path' => 'imports/existing.csv',
+        'allowed_errors' => 10,
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'field_separator'     => ',',
+        'field_separator' => ',',
     ]);
 
     // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.data_transfer.imports.update', $import->id), [
-        'type'                => 'customers',
-        'action'              => 'append',
+        'type' => 'customers',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 20,
-        'field_separator'     => ',',
+        'allowed_errors' => 20,
+        'field_separator' => ',',
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
@@ -237,13 +237,13 @@ it('should successfully delete an import', function () {
     Storage::fake('private');
 
     $import = Import::create([
-        'type'                => 'products',
-        'file_path'           => 'imports/test.csv',
-        'state'               => 'pending',
-        'action'              => 'append',
+        'type' => 'products',
+        'file_path' => 'imports/test.csv',
+        'state' => 'pending',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
     ]);
 
     Storage::disk('private')->put($import->file_path, 'test content');
@@ -263,14 +263,14 @@ it('should successfully delete an import', function () {
 it('should return import page with stats', function () {
     // Arrange
     $import = Import::create([
-        'type'                 => 'customers',
-        'state'                => 'pending',
-        'file_path'            => 'imports/customers.csv',
+        'type' => 'customers',
+        'state' => 'pending',
+        'file_path' => 'imports/customers.csv',
         'processed_rows_count' => 0,
-        'action'               => 'append',
-        'validation_strategy'  => 'stop-on-errors',
-        'allowed_errors'       => 10,
-        'field_separator'      => ',',
+        'action' => 'append',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
     ]);
 
     // Act and Assert.
@@ -292,23 +292,23 @@ it('should validate action field with correct syntax', function () {
 
     // Valid action values should pass
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertRedirect();
 
     // Invalid action value should fail
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'invalid_action',
+        'type' => 'products',
+        'action' => 'invalid_action',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertJsonValidationErrorFor('action')
         ->assertUnprocessable();
@@ -326,24 +326,24 @@ it('should validate validation_strategy field with correct syntax', function () 
     // Valid validation_strategy values should pass
     foreach (['stop-on-errors', 'skip-errors'] as $strategy) {
         postJson(route('admin.settings.data_transfer.imports.store'), [
-            'type'                => 'products',
-            'action'              => 'append',
+            'type' => 'products',
+            'action' => 'append',
             'validation_strategy' => $strategy,
-            'allowed_errors'      => 10,
-            'field_separator'     => ',',
-            'file'                => $file,
+            'allowed_errors' => 10,
+            'field_separator' => ',',
+            'file' => $file,
         ])
             ->assertRedirect();
     }
 
     // Invalid validation_strategy value should fail
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'invalid_strategy',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertJsonValidationErrorFor('validation_strategy')
         ->assertUnprocessable();
@@ -356,9 +356,9 @@ it('should accept all supported file formats', function () {
     $this->loginAsAdmin();
 
     $formats = [
-        'csv'  => 'text/csv',
-        'xml'  => 'text/xml',
-        'xls'  => 'application/vnd.ms-excel',
+        'csv' => 'text/csv',
+        'xml' => 'text/xml',
+        'xls' => 'application/vnd.ms-excel',
         'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ];
 
@@ -366,12 +366,12 @@ it('should accept all supported file formats', function () {
         $file = UploadedFile::fake()->create("test.{$extension}", 100, $mimeType);
 
         postJson(route('admin.settings.data_transfer.imports.store'), [
-            'type'                => 'products',
-            'action'              => 'append',
+            'type' => 'products',
+            'action' => 'append',
             'validation_strategy' => 'stop-on-errors',
-            'allowed_errors'      => 10,
-            'field_separator'     => ',',
-            'file'                => $file,
+            'allowed_errors' => 10,
+            'field_separator' => ',',
+            'file' => $file,
         ])
             ->assertRedirect();
     }
@@ -387,13 +387,13 @@ it('should handle process_in_queue option correctly', function () {
     $file = UploadedFile::fake()->createWithContent('queue_test.csv', 'test data content');
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'customers',
-        'action'              => 'append',
+        'type' => 'customers',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
-        'process_in_queue'    => 1,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
+        'process_in_queue' => 1,
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
@@ -411,12 +411,12 @@ it('should handle process_in_queue option correctly', function () {
     $file2 = UploadedFile::fake()->createWithContent('no_queue_test.csv', 'different test data');
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'delete',
+        'type' => 'products',
+        'action' => 'delete',
         'validation_strategy' => 'skip-errors',
-        'allowed_errors'      => 5,
-        'field_separator'     => ';',
-        'file'                => $file2,
+        'allowed_errors' => 5,
+        'field_separator' => ';',
+        'file' => $file2,
     ])
         ->assertRedirect();
 
@@ -442,12 +442,12 @@ it('should sanitize filename when storing import', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type'                => 'products',
-        'action'              => 'append',
+        'type' => 'products',
+        'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
-        'allowed_errors'      => 10,
-        'field_separator'     => ',',
-        'file'                => $file,
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
     ])
         ->assertRedirect();
 

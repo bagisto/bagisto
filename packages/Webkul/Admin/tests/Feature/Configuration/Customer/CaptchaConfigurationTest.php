@@ -37,10 +37,10 @@ it('should save captcha configuration with all required fields', function () {
     $locale = Locale::factory()->create();
 
     $credentials = [
-        'status'          => '1',
-        'project_id'      => 'test-project-123',
-        'api_key'         => 'AIzaSyD-test-api-key-123',
-        'site_key'        => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+        'status' => '1',
+        'project_id' => 'test-project-123',
+        'api_key' => 'AIzaSyD-test-api-key-123',
+        'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
         'score_threshold' => '0.7',
     ];
 
@@ -48,8 +48,8 @@ it('should save captcha configuration with all required fields', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => $credentials,
@@ -61,27 +61,27 @@ it('should save captcha configuration with all required fields', function () {
 
     // Verify data is saved in database
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => $credentials['status'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.project_id',
+        'code' => 'customer.captcha.credentials.project_id',
         'value' => $credentials['project_id'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.api_key',
+        'code' => 'customer.captcha.credentials.api_key',
         'value' => $credentials['api_key'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.site_key',
+        'code' => 'customer.captcha.credentials.site_key',
         'value' => $credentials['site_key'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.score_threshold',
+        'code' => 'customer.captcha.credentials.score_threshold',
         'value' => $credentials['score_threshold'],
     ]);
 });
@@ -93,26 +93,26 @@ it('should update existing captcha configuration', function () {
     $locale = Locale::factory()->create();
 
     $oldCredentials = [
-        'status'          => '0',
-        'project_id'      => 'old-project-id',
+        'status' => '0',
+        'project_id' => 'old-project-id',
     ];
 
     $newCredentials = [
-        'status'          => '1',
-        'project_id'      => 'new-project-456',
-        'api_key'         => 'AIzaSyD-new-api-key',
-        'site_key'        => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_NEW',
+        'status' => '1',
+        'project_id' => 'new-project-456',
+        'api_key' => 'AIzaSyD-new-api-key',
+        'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_NEW',
         'score_threshold' => '0.8',
     ];
 
     // Create existing config
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => $oldCredentials['status'],
     ]);
 
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.project_id',
+        'code' => 'customer.captcha.credentials.project_id',
         'value' => $oldCredentials['project_id'],
     ]);
 
@@ -120,8 +120,8 @@ it('should update existing captcha configuration', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => $newCredentials,
@@ -133,12 +133,12 @@ it('should update existing captcha configuration', function () {
 
     // Verify updated values
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => $newCredentials['status'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.project_id',
+        'code' => 'customer.captcha.credentials.project_id',
         'value' => $newCredentials['project_id'],
     ]);
 });
@@ -150,7 +150,7 @@ it('should save captcha configuration with status disabled', function () {
     $locale = Locale::factory()->create();
 
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => '1',
     ]);
 
@@ -158,8 +158,8 @@ it('should save captcha configuration with status disabled', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => [
@@ -171,7 +171,7 @@ it('should save captcha configuration with status disabled', function () {
         ->assertRedirect();
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => '0',
     ]);
 });
@@ -187,8 +187,8 @@ it('should save captcha configuration with different score thresholds', function
     $threshold = '0.7';
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => [
@@ -200,7 +200,7 @@ it('should save captcha configuration with different score thresholds', function
         ->assertRedirect();
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.score_threshold',
+        'code' => 'customer.captcha.credentials.score_threshold',
         'value' => $threshold,
     ]);
 
@@ -208,8 +208,8 @@ it('should save captcha configuration with different score thresholds', function
     $threshold = '0.9';
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => [
@@ -221,7 +221,7 @@ it('should save captcha configuration with different score thresholds', function
         ->assertRedirect();
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.score_threshold',
+        'code' => 'customer.captcha.credentials.score_threshold',
         'value' => $threshold,
     ]);
 });
@@ -229,23 +229,23 @@ it('should save captcha configuration with different score thresholds', function
 it('should display existing captcha configuration values', function () {
     // Arrange
     $credentials = [
-        'status'     => '1',
+        'status' => '1',
         'project_id' => 'display-test-project',
-        'site_key'   => '6LeIxAcTAAAAAJcZVRqyHh71DISPLAY',
+        'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71DISPLAY',
     ];
 
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.status',
+        'code' => 'customer.captcha.credentials.status',
         'value' => $credentials['status'],
     ]);
 
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.project_id',
+        'code' => 'customer.captcha.credentials.project_id',
         'value' => $credentials['project_id'],
     ]);
 
     CoreConfig::create([
-        'code'  => 'customer.captcha.credentials.site_key',
+        'code' => 'customer.captcha.credentials.site_key',
         'value' => $credentials['site_key'],
     ]);
 
@@ -257,12 +257,12 @@ it('should display existing captcha configuration values', function () {
 
     // Verify data exists in database
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.project_id',
+        'code' => 'customer.captcha.credentials.project_id',
         'value' => $credentials['project_id'],
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.site_key',
+        'code' => 'customer.captcha.credentials.site_key',
         'value' => $credentials['site_key'],
     ]);
 });
@@ -281,12 +281,12 @@ it('should handle special characters in API keys and site keys', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.store', ['customer', 'captcha']), [
-        'locale'   => $locale->code,
-        'channel'  => $channel->code,
+        'locale' => $locale->code,
+        'channel' => $channel->code,
         'customer' => [
             'captcha' => [
                 'credentials' => [
-                    'api_key'  => $specialApiKey,
+                    'api_key' => $specialApiKey,
                     'site_key' => $specialSiteKey,
                 ],
             ],
@@ -295,12 +295,12 @@ it('should handle special characters in API keys and site keys', function () {
         ->assertRedirect();
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.api_key',
+        'code' => 'customer.captcha.credentials.api_key',
         'value' => $specialApiKey,
     ]);
 
     $this->assertDatabaseHas('core_config', [
-        'code'  => 'customer.captcha.credentials.site_key',
+        'code' => 'customer.captcha.credentials.site_key',
         'value' => $specialSiteKey,
     ]);
 });

@@ -31,9 +31,9 @@ it('should return the create page of grouped product', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
-        'type'                => 'grouped',
+        'type' => 'grouped',
         'attribute_family_id' => 1,
-        'sku'                 => $sku = fake()->slug(),
+        'sku' => $sku = fake()->slug(),
     ])
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
@@ -41,9 +41,9 @@ it('should return the create page of grouped product', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'   => $productId,
+                'id' => $productId,
                 'type' => 'grouped',
-                'sku'  => $sku,
+                'sku' => $sku,
             ],
         ],
     ]);
@@ -57,15 +57,15 @@ it('should return the grouped edit page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id), [
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
         'short_description' => fake()->sentence(),
-        'description'       => fake()->paragraph(),
-        'name'              => fake()->words(3, true),
-        'price'             => fake()->randomFloat(2, 1, 1000),
-        'weight'            => fake()->numberBetween(0, 100),
-        'channel'           => core()->getCurrentChannelCode(),
-        'locale'            => app()->getLocale(),
+        'description' => fake()->paragraph(),
+        'name' => fake()->words(3, true),
+        'price' => fake()->randomFloat(2, 1, 1000),
+        'weight' => fake()->numberBetween(0, 100),
+        'channel' => core()->getCurrentChannelCode(),
+        'locale' => app()->getLocale(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
@@ -101,10 +101,10 @@ it('should fail the validation with errors if certain data is not provided corre
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'visible_individually' => $unProcessAble = fake()->word(),
-        'status'               => $unProcessAble,
-        'guest_checkout'       => $unProcessAble,
-        'new'                  => $unProcessAble,
-        'featured'             => $unProcessAble,
+        'status' => $unProcessAble,
+        'guest_checkout' => $unProcessAble,
+        'new' => $unProcessAble,
+        'featured' => $unProcessAble,
     ])
         ->assertJsonValidationErrorFor('sku')
         ->assertJsonValidationErrorFor('url_key')
@@ -127,16 +127,16 @@ it('should update the grouped product', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), $data = [
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
         'short_description' => fake()->sentence(),
-        'description'       => fake()->paragraph(),
-        'name'              => fake()->words(3, true),
-        'price'             => fake()->randomFloat(2, 1, 1000),
-        'weight'            => fake()->numberBetween(0, 100),
-        'channel'           => core()->getCurrentChannelCode(),
-        'locale'            => app()->getLocale(),
-        'rma_rule_id'       => 1,
+        'description' => fake()->paragraph(),
+        'name' => fake()->words(3, true),
+        'price' => fake()->randomFloat(2, 1, 1000),
+        'weight' => fake()->numberBetween(0, 100),
+        'channel' => core()->getCurrentChannelCode(),
+        'locale' => app()->getLocale(),
+        'rma_rule_id' => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -144,28 +144,28 @@ it('should update the grouped product', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'                  => $product->id,
-                'type'                => $product->type,
-                'sku'                 => $product->sku,
+                'id' => $product->id,
+                'type' => $product->type,
+                'sku' => $product->sku,
                 'attribute_family_id' => 1,
-                'parent_id'           => null,
-                'additional'          => null,
+                'parent_id' => null,
+                'additional' => null,
             ],
         ],
 
         ProductFlat::class => [
             [
-                'product_id'        => $product->id,
-                'type'              => 'grouped',
-                'sku'               => $product->sku,
-                'url_key'           => $product->url_key,
-                'name'              => $data['name'],
+                'product_id' => $product->id,
+                'type' => 'grouped',
+                'sku' => $product->sku,
+                'url_key' => $product->url_key,
+                'name' => $data['name'],
                 'short_description' => $data['short_description'],
-                'description'       => $data['description'],
-                'price'             => $data['price'],
-                'weight'            => $data['weight'],
-                'locale'            => $data['locale'],
-                'channel'           => $data['channel'],
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'weight' => $data['weight'],
+                'locale' => $data['locale'],
+                'channel' => $data['channel'],
             ],
         ],
     ]);
@@ -187,17 +187,17 @@ it('should update the grouped product options', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
         'short_description' => $product->short_description,
-        'description'       => $product->description,
-        'name'              => $product->name,
-        'price'             => $product->price,
-        'weight'            => $product->weight,
-        'channel'           => $product->channel,
-        'links'             => $links,
-        'locale'            => app()->getLocale(),
-        'rma_rule_id'       => 1,
+        'description' => $product->description,
+        'name' => $product->name,
+        'price' => $product->price,
+        'weight' => $product->weight,
+        'channel' => $product->channel,
+        'links' => $links,
+        'locale' => app()->getLocale(),
+        'rma_rule_id' => 1,
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -205,12 +205,12 @@ it('should update the grouped product options', function () {
     $this->assertModelWise([
         Product::class => [
             [
-                'id'                  => $product->id,
-                'type'                => $product->type,
-                'sku'                 => $product->sku,
+                'id' => $product->id,
+                'type' => $product->type,
+                'sku' => $product->sku,
                 'attribute_family_id' => 1,
-                'parent_id'           => null,
-                'additional'          => null,
+                'parent_id' => null,
+                'additional' => null,
             ],
         ],
     ]);
@@ -219,10 +219,10 @@ it('should update the grouped product options', function () {
         $this->assertModelWise([
             ProductGroupedProduct::class => [
                 [
-                    'product_id'            => $product->id,
+                    'product_id' => $product->id,
                     'associated_product_id' => $link['associated_product_id'],
-                    'qty'                   => $link['qty'],
-                    'sort_order'            => $link['sort_order'],
+                    'qty' => $link['qty'],
+                    'sort_order' => $link['sort_order'],
                 ],
             ],
         ]);
@@ -246,7 +246,7 @@ it('should delete a grouped product', function () {
 
     foreach ($product->grouped_products()->get() as $simpleProduct) {
         $this->assertDatabaseMissing('product_grouped_products', [
-            'product_id'            => $product->id,
+            'product_id' => $product->id,
             'associated_product_id' => $simpleProduct->associated_product_id,
         ]);
     }

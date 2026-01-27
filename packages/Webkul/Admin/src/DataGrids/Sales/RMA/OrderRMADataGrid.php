@@ -133,25 +133,25 @@ class OrderRMADataGrid extends DataGrid
     public function prepareColumns(): void
     {
         $this->addColumn([
-            'index'      => 'increment_id',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.order-id'),
-            'type'       => 'string',
+            'index' => 'increment_id',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.order-id'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm text-blue-500"><a href="'.route('admin.sales.orders.view', ['id' => $row->increment_id]).'">'.'#'.$row->increment_id.'</a></span>';
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'customer_name',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.customer-name'),
-            'type'       => 'string',
+            'index' => 'customer_name',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.customer-name'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 if (! empty($row->is_guest)) {
                     return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
                 }
@@ -161,38 +161,38 @@ class OrderRMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'           => 'created_at',
-            'label'           => trans('admin::app.sales.rma.all-rma.index.datagrid.order-date'),
-            'type'            => 'date',
-            'searchable'      => true,
-            'sortable'        => true,
-            'filterable'      => true,
+            'index' => 'created_at',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.order-date'),
+            'type' => 'date',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
             'filterable_type' => 'date_range',
-            'closure'         => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.$row->created_at.'</span>';
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'grand_total',
-            'label'      => trans('admin::app.sales.rma.all-rma.index.datagrid.total'),
-            'type'       => 'string',
+            'index' => 'grand_total',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.total'),
+            'type' => 'string',
             'searchable' => true,
-            'sortable'   => true,
+            'sortable' => true,
             'filterable' => true,
-            'closure'    => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.core()->formatPrice($row->grand_total, $row->order_currency_code).'</span>';
             },
         ]);
 
         $this->addColumn([
-            'index'              => 'method_title',
-            'label'              => trans('admin::app.sales.orders.index.datagrid.pay-via'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'method_title',
+            'label' => trans('admin::app.sales.orders.index.datagrid.pay-via'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => OrderPayment::distinct()
                 ->get(['method_title'])
                 ->map(function ($item) {
@@ -202,19 +202,19 @@ class OrderRMADataGrid extends DataGrid
                     ];
                 })
                 ->toArray(),
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 return '<span class="text-sm">'.trans('admin::app.sales.orders.index.datagrid.pay-by', ['method' => '']).$row->method_title.'</span>';
             },
         ]);
 
         $this->addColumn([
-            'index'              => 'status',
-            'label'              => trans('admin::app.sales.rma.all-rma.index.datagrid.status'),
-            'type'               => 'string',
-            'searchable'         => true,
-            'sortable'           => true,
-            'filterable'         => true,
-            'filterable_type'    => 'dropdown',
+            'index' => 'status',
+            'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.status'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
             'filterable_options' => [
                 [
                     'label' => trans('admin::app.sales.orders.index.datagrid.processing'),
@@ -239,7 +239,7 @@ class OrderRMADataGrid extends DataGrid
                     'value' => Order::STATUS_FRAUD,
                 ],
             ],
-            'closure'            => function ($row) {
+            'closure' => function ($row) {
                 switch ($row->status) {
                     case Order::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('admin::app.sales.orders.index.datagrid.processing').'</p>';
@@ -272,10 +272,10 @@ class OrderRMADataGrid extends DataGrid
     public function prepareActions(): void
     {
         $this->addAction([
-            'icon'   => 'icon-eye',
-            'title'  => trans('admin::app.sales.rma.all-rma.index.datagrid.action-view'),
+            'icon' => 'icon-eye',
+            'title' => trans('admin::app.sales.rma.all-rma.index.datagrid.action-view'),
             'method' => 'GET',
-            'url'    => function ($row) {
+            'url' => function ($row) {
                 return route('shop.customers.account.orders.view', $row->id);
             },
         ]);

@@ -86,10 +86,10 @@ class Product
         Event::dispatch('marketing.search_seo.url_rewrites.create.before');
 
         $urlRewrite = $this->urlRewriteRepository->create([
-            'entity_type'   => 'product',
-            'request_path'  => $product->url_key,
-            'target_path'   => $currentURLKey ?? '',
-            'locale'        => app()->getLocale(),
+            'entity_type' => 'product',
+            'request_path' => $product->url_key,
+            'target_path' => $currentURLKey ?? '',
+            'locale' => app()->getLocale(),
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
 
@@ -111,7 +111,7 @@ class Product
          * if already exists for the request path
          */
         $urlRewrites = $this->urlRewriteRepository->findWhere([
-            'entity_type'  => 'product',
+            'entity_type' => 'product',
             'request_path' => $product->url_key,
         ]);
 

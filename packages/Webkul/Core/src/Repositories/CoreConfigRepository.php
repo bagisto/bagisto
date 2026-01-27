@@ -86,9 +86,9 @@ class CoreConfigRepository extends Repository
 
                 if (! count($coreConfigValue)) {
                     parent::create([
-                        'code'         => $fieldName,
-                        'value'        => $value,
-                        'locale_code'  => $localeBased ? $locale : null,
+                        'code' => $fieldName,
+                        'value' => $value,
+                        'locale_code' => $localeBased ? $locale : null,
                         'channel_code' => $channelBased ? $channel : null,
                     ]);
                 } else {
@@ -101,9 +101,9 @@ class CoreConfigRepository extends Repository
                             parent::delete($coreConfig['id']);
                         } else {
                             parent::update([
-                                'code'         => $fieldName,
-                                'value'        => $value,
-                                'locale_code'  => $localeBased ? $locale : null,
+                                'code' => $fieldName,
+                                'value' => $value,
+                                'locale_code' => $localeBased ? $locale : null,
                                 'channel_code' => $channelBased ? $channel : null,
                             ], $coreConfig->id);
                         }
@@ -151,7 +151,7 @@ class CoreConfigRepository extends Repository
                 : $configuration->getFields();
 
             $tempPath = array_merge($path, [[
-                'key'   => $configuration->getKey() ?? null,
+                'key' => $configuration->getKey() ?? null,
                 'title' => $this->getTranslatedTitle($configuration),
             ]]);
 
@@ -179,7 +179,7 @@ class CoreConfigRepository extends Repository
 
                 $results[] = [
                     'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
-                    'url'   => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
+                    'url' => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
                 ];
             }
 

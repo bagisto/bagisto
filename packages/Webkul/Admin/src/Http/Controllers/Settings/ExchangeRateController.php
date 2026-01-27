@@ -50,7 +50,7 @@ class ExchangeRateController extends Controller
 
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency', 'not_in:'.$baseCurrency->id],
-            'rate'            => 'required|numeric',
+            'rate' => 'required|numeric',
         ]);
 
         Event::dispatch('core.exchange_rate.create.before');
@@ -82,7 +82,7 @@ class ExchangeRateController extends Controller
 
         return new JsonResponse([
             'data' => [
-                'currencies'   => $currencies,
+                'currencies' => $currencies,
                 'exchangeRate' => $exchangeRate,
             ],
         ]);
@@ -97,7 +97,7 @@ class ExchangeRateController extends Controller
 
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,'.request()->id, 'not_in:'.$baseCurrency->id],
-            'rate'            => 'required|numeric',
+            'rate' => 'required|numeric',
         ]);
 
         Event::dispatch('core.exchange_rate.update.before', request()->id);

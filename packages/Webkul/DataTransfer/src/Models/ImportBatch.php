@@ -33,7 +33,7 @@ class ImportBatch extends Model implements ImportBatchContract
      */
     protected $casts = [
         'summary' => 'array',
-        'data'    => 'array',
+        'data' => 'array',
     ];
 
     /**

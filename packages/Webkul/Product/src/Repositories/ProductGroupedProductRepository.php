@@ -37,7 +37,7 @@ class ProductGroupedProductRepository extends Repository
                      * existing grouped product otherwise we will create a new grouped product.
                      */
                     $groupedProduct = $this->firstWhere([
-                        'product_id'            => $product->id,
+                        'product_id' => $product->id,
                         'associated_product_id' => $linkInputs['associated_product_id'],
                     ]);
 
