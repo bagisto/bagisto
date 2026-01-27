@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'ברירת מחדל',
-                'meta-title'       => 'חנות הדגמה',
-                'meta-keywords'    => 'מילות מפתח לחנות הדגמה',
                 'meta-description' => 'תיאור מטא לחנות הדגמה',
+                'meta-keywords'    => 'מילות מפתח לחנות הדגמה',
+                'meta-title'       => 'חנות הדגמה',
+                'name'             => 'ברירת מחדל',
             ],
 
             'currencies' => [
@@ -340,9 +340,9 @@ return [
                     'name' => 'תוכן שירותים',
 
                     'title' => [
+                        'emi-available'   => 'EMI זמין',
                         'free-shipping'   => 'משלוח חינם',
                         'product-replace' => 'החלפת מוצר',
-                        'emi-available'   => 'EMI זמין',
                         'time-support'    => 'תמיכה 24/7',
                     ],
                 ],

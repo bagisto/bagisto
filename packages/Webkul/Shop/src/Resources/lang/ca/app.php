@@ -355,12 +355,12 @@ return [
                 'completed'           => 'Finalitzat',
                 'date'                => 'Data',
                 'download-error'      => 'L\'enllaç de descàrrega ha caducat.',
-                'expired'             => 'Caducat',
                 'empty-product'       => 'No tens productes per descarregar',
+                'expired'             => 'Caducat',
                 'name'                => 'Productes Descarregables',
                 'orderId'             => 'ID de Comanda',
-                'pending'             => 'Pendent',
                 'payment-error'       => 'El pagament no s\'ha realitzat per aquesta descàrrega.',
+                'pending'             => 'Pendent',
                 'records-found'       => 'Registre(s) trobat(s)',
                 'remaining-downloads' => 'Descàrregues Restants',
                 'status'              => 'Estat',
@@ -771,8 +771,8 @@ return [
 
                 'downloadable' => [
                     'links'   => 'Enllaços',
-                    'samples' => 'Mostres',
                     'sample'  => 'Mostra',
+                    'samples' => 'Mostres',
                 ],
 
                 'grouped' => [
@@ -984,8 +984,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar amb el Pagament',
             'illegal'                   => 'La quantitat no pot ser inferior a un.',
-            'inactive-add'              => 'L\'article inactiu no es pot afegir a la cistella.',
             'inactive'                  => 'L\'article ha estat desactivat i posteriorment eliminat de la cistella.',
+            'inactive-add'              => 'L\'article inactiu no es pot afegir a la cistella.',
             'inventory-warning'         => 'La quantitat sol·licitada no està disponible, si us plau intenta-ho de nou més tard.',
             'item-add-to-cart'          => 'Producte afegit correctament',
             'minimum-order-message'     => 'L\'import mínim de la comanda és',
@@ -1118,7 +1118,7 @@ return [
                 'excl-tax'                  => 'Excl. Impostos:',
                 'grand-total'               => 'Total General',
                 'place-order'               => 'Fer comanda',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'Processant',
                 'sub-total'                 => 'Subtotal',
                 'sub-total-excl-tax'        => 'Subtotal (Excl. Impostos)',

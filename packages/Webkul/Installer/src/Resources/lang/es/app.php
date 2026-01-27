@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Predeterminado',
-                'meta-title'       => 'Tienda de Demostración',
-                'meta-keywords'    => 'Palabras Clave de Meta de la Tienda de Demostración',
                 'meta-description' => 'Descripción de Meta de la Tienda de Demostración',
+                'meta-keywords'    => 'Palabras Clave de Meta de la Tienda de Demostración',
+                'meta-title'       => 'Tienda de Demostración',
+                'name'             => 'Predeterminado',
             ],
 
             'currencies' => [
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Crear la tabla de la base de datos',
+                'create-database-table'   => 'Crear la tabla de la base de datos',
                 'install'                 => 'Instalación',
                 'install-info'            => 'Bagisto para instalación',
                 'install-info-button'     => 'Haz clic en el botón de abajo para',

@@ -58,6 +58,7 @@ class CoreServiceProvider extends ServiceProvider
                 \Webkul\Core\Console\Commands\BagistoVersion::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
                 \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
+                \Webkul\Core\Console\Commands\TranslationsChecker::class,
             ]);
         }
     }

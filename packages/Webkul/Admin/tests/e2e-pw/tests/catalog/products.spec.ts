@@ -880,14 +880,9 @@ test.describe("simple product management", () => {
             .selectOption("1");
         await adminPage.locator('input[name="sku"]').fill(generateSKU());
         await adminPage.getByRole("button", { name: "Save Product" }).click();
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Save Product")',
-        );
-
-        /**
-         * Waiting for the main form to be visible.
-         */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+        await expect(
+            adminPage.locator("text =Product created successfully").first(),
+        ).toBeVisible();
 
         /**
          * create group price
@@ -1710,7 +1705,7 @@ test.describe("booking product management", () => {
                     .getByRole("spinbutton", { name: "Minute" })
                     .click();
                 await adminPage.waitForTimeout(500);
-
+                await adminPage.locator("body").press("Escape");
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
                     .click();
@@ -1863,6 +1858,7 @@ test.describe("booking product management", () => {
                 /**
                  * Saving the slot.
                  */
+                await adminPage.locator("body").press("Escape");
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
                     .click();
@@ -2040,6 +2036,7 @@ test.describe("booking product management", () => {
             /**
              * Saving the slots.
              */
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -2218,6 +2215,7 @@ test.describe("booking product management", () => {
                 /**
                  * Saving the Added time slots.
                  */
+                await adminPage.locator("body").press("Escape");
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
                     .click();
@@ -2403,6 +2401,7 @@ test.describe("booking product management", () => {
                 /**
                  * Saving the Added time slots.
                  */
+                await adminPage.locator("body").press("Escape");
                 await adminPage
                     .getByRole("button", { name: "Save", exact: true })
                     .click();
@@ -2580,6 +2579,7 @@ test.describe("booking product management", () => {
             /**
              * Saving the slots.
              */
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -2752,6 +2752,7 @@ test.describe("booking product management", () => {
             /**
              * Saving the booking product.
              */
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save Product" })
                 .click();
@@ -2878,6 +2879,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3029,6 +3031,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3120,6 +3123,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3212,6 +3216,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3244,6 +3249,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3274,6 +3280,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3379,6 +3386,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3550,6 +3558,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3656,6 +3665,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("35");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3768,6 +3778,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
@@ -3830,6 +3841,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .press("Enter");
+            await adminPage.locator("body").press("Escape");
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();

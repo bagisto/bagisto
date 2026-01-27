@@ -1,9 +1,10 @@
+<?php
 
 return [
     'boolean' => [
         'options' => [
-            'yes' => 'Evet',
             'no'  => 'Hayır',
+            'yes' => 'Evet',
         ],
     ],
 ];

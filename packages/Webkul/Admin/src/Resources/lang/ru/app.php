@@ -203,8 +203,8 @@ return [
                     'order-id'        => 'Номер заказа',
                     'pay-by'          => 'Оплата через - :method',
                     'pay-via'         => 'Оплачено через',
-                    'pending-payment' => 'Ожидание оплаты',
                     'pending'         => 'В ожидании',
+                    'pending-payment' => 'Ожидание оплаты',
                     'processing'      => 'Обработка',
                     'product-count'   => ':count + Еще продукты',
                     'status'          => 'Статус',
@@ -1163,8 +1163,8 @@ return [
 
                 'videos' => [
                     'error' => 'Размер :attribute не должен превышать :max килобайт. Пожалуйста, выберите файл меньшего размера.',
-                    'title' => 'Видео',
                     'info'  => 'Максимальный размер видео должен быть :size',
+                    'title' => 'Видео',
                 ],
 
                 'links' => [
@@ -1645,8 +1645,8 @@ return [
             ],
 
             'create-success'          => 'Продукт успешно создан',
-            'delete-success'          => 'Продукт успешно удален',
             'delete-failed'           => 'Не удалось удалить продукт',
+            'delete-success'          => 'Продукт успешно удален',
             'product-copied'          => 'Продукт успешно скопирован',
             'saved-inventory-message' => 'Продукт успешно сохранен',
             'update-success'          => 'Продукт успешно обновлен',
@@ -2086,8 +2086,8 @@ return [
                         'city'               => 'Город',
                         'company-name'       => 'Название компании',
                         'country'            => 'Страна',
-                        'create-btn'         => 'Создать',
                         'create-address-btn' => 'Добавить новый адрес',
+                        'create-btn'         => 'Создать',
                         'default-address'    => 'Адрес по умолчанию',
                         'email'              => 'Эл. почта',
                         'first-name'         => 'Имя',
@@ -2130,12 +2130,12 @@ return [
 
                 'datagrid' => [
                     'invoices' => [
+                        'empty-invoice'  => 'Нет отзывов',
                         'increment-id'   => 'ID счета',
                         'invoice-amount' => 'Сумма счета',
                         'invoice-date'   => 'Дата счета',
                         'order-id'       => 'ID заказа',
                         'view'           => 'Просмотр',
-                        'empty-invoice'  => 'Нет отзывов',
                     ],
 
                     'orders' => [
@@ -2144,9 +2144,9 @@ return [
                         'closed'          => 'Закрыт',
                         'completed'       => 'Завершен',
                         'customer-name'   => 'Имя клиента',
-                        'empty-order'     => 'Нет доступных заказов',
                         'date'            => 'Дата',
                         'email'           => 'Эл. почта',
+                        'empty-order'     => 'Нет доступных заказов',
                         'fraud'           => 'Мошенничество',
                         'grand-total'     => 'Общая сумма',
                         'location'        => 'Местоположение',
@@ -2983,16 +2983,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Назад',
-                    'file-name'      => 'Имя файла',
-                    'file-name-info' => 'Пример: sitemap.xml',
-                    'general'        => 'Общие',
-                    'path'           => 'Путь',
-                    'path-info'      => 'Пример: "/sitemap/" или "/" для базового пути',
-                    'save-btn'       => 'Сохранить карту сайта',
-                ],
-
                 'delete-failed' => ':name удаление не удалось',
             ],
 
@@ -3022,7 +3012,6 @@ return [
                     'create' => [
                         'category'           => 'Категория',
                         'cms-page'           => 'Страница CMS',
-                        'delete-warning'     => 'Вы уверены, что хотите выполнить это действие?',
                         'for'                => 'Для',
                         'locale'             => 'Локаль',
                         'permanent-redirect' => 'Постоянное (301)',
@@ -3049,8 +3038,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Это имя :name уже занято.',
-            'create-btn'    => 'Создать страницу',
             'channel'       => 'Канал',
+            'create-btn'    => 'Создать страницу',
             'language'      => 'Язык',
             'title'         => 'Страницы',
 
@@ -3285,8 +3274,8 @@ return [
                     'total-invalid-rows'      => 'Общее Количество Недопустимых Строк:',
                     'total-rows-processed'    => 'Общее Количество Обработанных Строк:',
                     'total-updated'           => 'Общее Количество Обновленных Записей:',
-                    'validate-info'           => 'Нажмите на Проверить Данные, чтобы проверить ваш импорт.',
                     'validate'                => 'Проверить',
+                    'validate-info'           => 'Нажмите на Проверить Данные, чтобы проверить ваш импорт.',
                     'validating-info'         => 'Данные начали чтение и Валидацию',
                     'validation-failed-info'  => 'Ваш импорт невалиден. Пожалуйста, исправьте следующие ошибки и попробуйте снова.',
                     'validation-success-info' => 'Ваш импорт валиден. Нажмите на Импорт, чтобы начать процесс импорта.',
@@ -3684,13 +3673,13 @@ return [
                 'title'      => 'Роли',
 
                 'datagrid' => [
-                    'custom'          => 'Пользовательские',
                     'all'             => 'Все',
-                    'permission-type' => 'Тип разрешения',
-                    'name'            => 'Название',
-                    'id'              => 'ID',
-                    'edit'            => 'Редактировать',
+                    'custom'          => 'Пользовательские',
                     'delete'          => 'Удалить',
+                    'edit'            => 'Редактировать',
+                    'id'              => 'ID',
+                    'name'            => 'Название',
+                    'permission-type' => 'Тип разрешения',
                 ],
             ],
 
@@ -3777,6 +3766,7 @@ return [
                 'back'                          => 'Назад',
                 'category-carousel'             => 'Карусель Категорий',
                 'category-carousel-description' => 'Показ динамических категорий привлекательным образом с использованием адаптивной карусели категорий.',
+                'category-id'                   => 'ID категории',
                 'channels'                      => 'Каналы',
                 'column'                        => 'Колонка',
                 'create-filter'                 => 'Создать Фильтр',
@@ -3807,7 +3797,6 @@ return [
                 'no'                            => 'Нет',
                 'parent-id'                     => 'Родительский ID',
                 'parent-id-hint'                => 'Вы можете ввести несколько родительских ID в качестве разделенных запятыми значений (например: 12,15,34)',
-                'category-id'                   => 'ID категории',
                 'preview'                       => 'Просмотр',
                 'product-carousel'              => 'Карусель Продуктов',
                 'product-carousel-description'  => 'Презентация продуктов элегантным образом с использованием динамической и адаптивной карусели продуктов.',
@@ -3847,7 +3836,8 @@ return [
                     'title'              => 'Заголовок',
                     'update-service'     => 'Обновить услуги',
                 ],
-                'yes'                           => 'Да',
+
+                'yes' => 'Да',
             ],
 
             'create-success' => 'Тема успешно создана',
@@ -5095,9 +5085,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Не выбрано ни одной записи.',
-                'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
                 'must-select-a-mass-action'        => 'Вы должны выбрать массовое действие.',
+                'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
+                'no-records-selected'              => 'Не выбрано ни одной записи.',
             ],
 
             'toolbar' => [
@@ -5150,14 +5140,14 @@ return [
                     ],
                 ],
 
-                'boolean-options' => [
-                    'false' => 'Ложь',
-                    'true'  => 'Истина',
-                ],
-
                 'custom-filters' => [
                     'clear-all' => 'Очистить все',
                     'title'     => 'Пользовательские фильтры',
+                ],
+
+                'boolean-options' => [
+                    'false' => 'Ложь',
+                    'true'  => 'Истина',
                 ],
 
                 'date-options' => [
@@ -5300,8 +5290,8 @@ return [
         'campaigns'                => 'Кампании',
         'cancel'                   => 'Отмена',
         'cart-rules'               => 'Правила корзины',
-        'catalog-rules'            => 'Правила каталога',
         'catalog'                  => 'Каталог',
+        'catalog-rules'            => 'Правила каталога',
         'categories'               => 'Категории',
         'channels'                 => 'Каналы',
         'cms'                      => 'CMS',

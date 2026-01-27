@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Toko demo',
-                'meta-keywords'    => 'Kata kunci meta toko demo',
                 'meta-description' => 'Deskripsi meta toko demo',
+                'meta-keywords'    => 'Kata kunci meta toko demo',
+                'meta-title'       => 'Toko demo',
+                'name'             => 'Default',
             ],
 
             'currencies' => [
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Buat tabel database',
+                'create-database-table'   => 'Buat tabel database',
                 'install'                 => 'Instalasi',
                 'install-info'            => 'Bagisto untuk Instalasi',
                 'install-info-button'     => 'Klik tombol di bawah untuk',

@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
                 'meta-description' => 'Demo store meta description',
+                'meta-keywords'    => 'Demo store meta keyword',
+                'meta-title'       => 'Demo store',
+                'name'             => 'Default',
             ],
 
             'currencies' => [
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Create the database table',
+                'create-database-table'   => 'Create the database table',
                 'install'                 => 'Installation',
                 'install-info'            => 'Bagisto For Installation',
                 'install-info-button'     => 'Click the button below to',

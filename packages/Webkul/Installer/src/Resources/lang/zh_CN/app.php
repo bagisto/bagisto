@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => '默認',
-                'meta-title'       => '演示商店',
-                'meta-keywords'    => '演示商店元關鍵詞',
                 'meta-description' => '演示商店元描述',
+                'meta-keywords'    => '演示商店元關鍵詞',
+                'meta-title'       => '演示商店',
+                'name'             => '默認',
             ],
 
             'currencies' => [
@@ -735,8 +735,8 @@ return [
             ],
 
             'installation-processing' => [
-                'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
                 'bagisto'      => 'Bagisto 安装',
+                'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
                 'title'        => '安装',
             ],
 
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => '创建数据库表',
+                'create-database-table'   => '创建数据库表',
                 'install'                 => '安装',
                 'install-info'            => 'Bagisto 安装信息',
                 'install-info-button'     => '点击下面的按钮',

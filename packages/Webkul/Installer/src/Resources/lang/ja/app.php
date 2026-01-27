@@ -330,6 +330,13 @@ return [
                 ],
 
                 'services-content' => [
+                    'description' => [
+                        'emi-available-info'   => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
+                        'free-shipping-info'   => 'すべての注文で送料無料をお楽しみください',
+                        'product-replace-info' => '簡単な製品交換が可能です！',
+                        'time-support-info'    => 'チャットやメールでの専用24/7サポート',
+                    ],
+
                     'name' => 'サービスコンテンツ',
 
                     'title' => [
@@ -337,13 +344,6 @@ return [
                         'free-shipping'   => '送料無料',
                         'product-replace' => '製品の交換',
                         'time-support'    => '24/7サポート',
-                    ],
-
-                    'description' => [
-                        'emi-available-info'   => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
-                        'free-shipping-info'   => 'すべての注文で送料無料をお楽しみください',
-                        'product-replace-info' => '簡単な製品交換が可能です！',
-                        'time-support-info'    => 'チャットやメールでの専用24/7サポート',
                     ],
                 ],
 
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'データベーステーブルを作成する',
+                'create-database-table'   => 'データベーステーブルを作成する',
                 'install'                 => 'インストール',
                 'install-info'            => 'インストール用のBagisto',
                 'install-info-button'     => '以下のボタンをクリックしてください',

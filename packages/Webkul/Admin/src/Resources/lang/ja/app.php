@@ -203,8 +203,8 @@ return [
                     'order-id'        => '注文ID',
                     'pay-by'          => ':method で支払う',
                     'pay-via'         => '支払い方法',
-                    'pending-payment' => '支払い保留中',
                     'pending'         => '保留中',
+                    'pending-payment' => '支払い保留中',
                     'processing'      => '処理中',
                     'product-count'   => ':count + 他の製品',
                     'status'          => 'ステータス',
@@ -1632,12 +1632,12 @@ return [
                             'url'         => 'URL：',
 
                             'update-create' => [
-                                'url'       => 'URL',
-                                'title'     => 'リンク',
-                                'save-btn'  => '保存',
-                                'name'      => 'タイトル',
-                                'file-type' => 'ファイルタイプ',
                                 'file'      => 'ファイル',
+                                'file-type' => 'ファイルタイプ',
+                                'name'      => 'タイトル',
+                                'save-btn'  => '保存',
+                                'title'     => 'リンク',
+                                'url'       => 'URL',
                             ],
                         ],
                     ],
@@ -2086,8 +2086,8 @@ return [
                         'city'               => '市町村',
                         'company-name'       => '会社名',
                         'country'            => '国',
-                        'create-btn'         => '作成',
                         'create-address-btn' => '新しい住所を追加',
+                        'create-btn'         => '作成',
                         'default-address'    => 'デフォルトアドレス',
                         'email'              => 'メール',
                         'first-name'         => '名',
@@ -2145,8 +2145,8 @@ return [
                         'completed'       => '完了済み',
                         'customer-name'   => '顧客名',
                         'date'            => '日付',
-                        'empty-order'     => '注文は利用できません',
                         'email'           => 'メール',
+                        'empty-order'     => '注文は利用できません',
                         'fraud'           => '詐欺',
                         'grand-total'     => '総計',
                         'location'        => '場所',
@@ -2983,16 +2983,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => '戻る',
-                    'file-name'      => 'ファイル名',
-                    'file-name-info' => '例: sitemap.xml',
-                    'general'        => '一般',
-                    'path'           => 'パス',
-                    'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
-                    'save-btn'       => 'サイトマップを保存',
-                ],
-
                 'delete-failed' => ':name 削除に失敗しました',
             ],
 
@@ -3003,6 +2993,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'アクション',
+                        'category'            => 'カテゴリ',
+                        'cms-page'            => 'CMSページ',
                         'delete'              => '削除',
                         'edit'                => '編集',
                         'for'                 => '対象',
@@ -3010,19 +3002,16 @@ return [
                         'locale'              => 'ロケール',
                         'mass-delete-success' => '選択したURLリライトが正常に削除されました',
                         'permanent-redirect'  => '恒久的なリダイレクト(301)',
+                        'product'             => '製品',
                         'redirect-type'       => 'リダイレクトタイプ',
                         'request-path'        => 'リクエストパス',
                         'target-path'         => 'ターゲットパス',
                         'temporary-redirect'  => '一時的なリダイレクト(302)',
-                        'category'            => 'カテゴリ',
-                        'cms-page'            => 'CMSページ',
-                        'product'             => '製品',
                     ],
 
                     'create' => [
                         'category'           => 'カテゴリ',
                         'cms-page'           => 'CMSページ',
-                        'delete-warning'     => 'このアクションを実行してもよろしいですか？',
                         'for'                => '対象',
                         'locale'             => 'ロケール',
                         'permanent-redirect' => '恒久的なリダイレクト(301)',
@@ -3049,8 +3038,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => ':name は既に使用されています。',
-            'create-btn'    => 'ページを作成',
             'channel'       => 'チャンネル',
+            'create-btn'    => 'ページを作成',
             'language'      => '言語',
             'title'         => 'ページ',
 
@@ -3205,9 +3194,9 @@ return [
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
-                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
-                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
                     'file'                => 'ファイル',
+                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
                     'general'             => '一般',
                     'images-directory'    => '画像ディレクトリーパス',
                     'process-in-queue'    => 'キューで処理',
@@ -3230,9 +3219,9 @@ return [
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
-                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
-                    'file-info'           => '/project-root/storage/app/importへの相対パスを使用してください、例: product-images, import-images.',
                     'file'                => 'ファイル',
+                    'file-info'           => '/project-root/storage/app/importへの相対パスを使用してください、例: product-images, import-images.',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
                     'general'             => '一般',
                     'images-directory'    => '画像ディレクトリーパス',
                     'process-in-queue'    => 'キューで処理',
@@ -3285,8 +3274,8 @@ return [
                     'total-invalid-rows'      => '無効な行の合計:',
                     'total-rows-processed'    => '処理された合計行数:',
                     'total-updated'           => '更新された合計レコード:',
-                    'validate-info'           => '「データの検証」をクリックしてインポートを確認します。',
                     'validate'                => '検証',
+                    'validate-info'           => '「データの検証」をクリックしてインポートを確認します。',
                     'validating-info'         => 'データの読み取りと検証が開始されました',
                     'validation-failed-info'  => 'インポートは無効です。次のエラーを修正して再試行してください。',
                     'validation-success-info' => 'インポートは有効です。 「インポート」をクリックしてインポートプロセスを開始します。',
@@ -3684,13 +3673,13 @@ return [
                 'title'      => '役割',
 
                 'datagrid' => [
-                    'custom'          => 'カスタム',
                     'all'             => 'すべて',
-                    'permission-type' => '権限タイプ',
-                    'name'            => '名前',
-                    'id'              => 'ID',
-                    'edit'            => '編集',
+                    'custom'          => 'カスタム',
                     'delete'          => '削除',
+                    'edit'            => '編集',
+                    'id'              => 'ID',
+                    'name'            => '名前',
+                    'permission-type' => '権限タイプ',
                 ],
             ],
 
@@ -3777,6 +3766,7 @@ return [
                 'back'                          => '戻る',
                 'category-carousel'             => 'カテゴリーカルーセル',
                 'category-carousel-description' => 'レスポンシブなカテゴリーカルーセルを使用して、動的なカテゴリーを魅力的に表示します。',
+                'category-id'                   => 'カテゴリID',
                 'channels'                      => 'チャンネル',
                 'column'                        => 'カラム',
                 'create-filter'                 => 'フィルターを作成',
@@ -3807,7 +3797,6 @@ return [
                 'no'                            => 'いいえ',
                 'parent-id'                     => '親ID',
                 'parent-id-hint'                => '複数の親IDをカンマ区切りの値として入力できます（例：12,15,34）',
-                'category-id'                   => 'カテゴリID',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
@@ -3847,7 +3836,8 @@ return [
                     'title'              => 'タイトル',
                     'update-service'     => 'サービスを更新',
                 ],
-                'yes'                           => 'はい',
+
+                'yes' => 'はい',
             ],
 
             'create-success' => 'テーマが正常に作成されました',
@@ -5094,6 +5084,12 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'must-select-a-mass-action'        => '一括操作を選択する必要があります。',
+                'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
+                'no-records-selected'              => 'レコードは選択されていません。',
+            ],
+
             'toolbar' => [
                 'length-of' => ':length の',
                 'of'        => 'の',
@@ -5101,16 +5097,10 @@ return [
                 'results'   => ':total 結果',
                 'selected'  => ':total 選択されました',
 
-                'index' => [
-                    'no-records-selected'              => 'レコードは選択されていません。',
-                    'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
-                    'must-select-a-mass-action'        => '一括操作を選択する必要があります。',
-                ],
-
                 'mass-actions' => [
-                    'submit'        => '送信',
-                    'select-option' => 'オプションを選択',
                     'select-action' => 'アクションを選択',
+                    'select-option' => 'オプションを選択',
+                    'submit'        => '送信',
                 ],
 
                 'filter' => [
@@ -5300,8 +5290,8 @@ return [
         'campaigns'                => 'キャンペーン',
         'cancel'                   => 'キャンセル',
         'cart-rules'               => 'カートルール',
-        'catalog-rules'            => 'カタログルール',
         'catalog'                  => 'カタログ',
+        'catalog-rules'            => 'カタログルール',
         'categories'               => 'カテゴリー',
         'channels'                 => 'チャネル',
         'cms'                      => 'CMS',

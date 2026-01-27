@@ -1,0 +1,35 @@
+name: Translation Tests
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  translation_tests:
+    runs-on: ${{ matrix.operating-systems }}
+
+    strategy:
+      matrix:
+        operating-systems: [ubuntu-latest]
+        php-versions: ['8.3']
+
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+
+      - name: Install Composer Dependencies
+        run: composer install
+
+      - name: Run Translation Checker
+        run: php artisan bagisto:translations:check

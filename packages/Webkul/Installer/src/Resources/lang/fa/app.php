@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'پیش‌فرض',
-                'meta-title'       => 'فروشگاه نمونه',
-                'meta-keywords'    => 'فروشگاه نمونه کلمات کلیدی متا',
                 'meta-description' => 'فروشگاه نمونه توضیحات متا',
+                'meta-keywords'    => 'فروشگاه نمونه کلمات کلیدی متا',
+                'meta-title'       => 'فروشگاه نمونه',
+                'name'             => 'پیش‌فرض',
             ],
 
             'currencies' => [
@@ -269,6 +269,14 @@ return [
                     'name' => 'مجموعه‌های دسته‌بندی',
                 ],
 
+                'featured-collections' => [
+                    'name' => 'مجموعه‌های ویژه',
+
+                    'options' => [
+                        'title' => 'محصولات ویژه',
+                    ],
+                ],
+
                 'footer-links'           => [
                     'name' => 'پیوندهای فوتر',
 
@@ -287,22 +295,14 @@ return [
                     ],
                 ],
 
-                'featured-collections' => [
-                    'name' => 'مجموعه‌های ویژه',
-
-                    'options' => [
-                        'title' => 'محصولات ویژه',
-                    ],
-                ],
-
                 'game-container' => [
-                    'name' => 'ظروف بازی',
-
                     'content' => [
                         'sub-title-1' => 'مجموعه‌های ما',
                         'sub-title-2' => 'مجموعه‌های ما',
                         'title'       => 'با افزودن‌های جدیدمان بازی کنید!',
                     ],
+
+                    'name' => 'ظروف بازی',
                 ],
 
                 'image-carousel' => [

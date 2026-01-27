@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Создать таблицу базы данных',
+                'create-database-table'   => 'Создать таблицу базы данных',
                 'install'                 => 'Установка',
                 'install-info'            => 'Bagisto для установки',
                 'install-info-button'     => 'Нажмите кнопку ниже, чтобы',

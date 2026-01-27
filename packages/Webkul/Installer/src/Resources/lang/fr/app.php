@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Défaut',
-                'meta-title'       => 'Boutique de démonstration',
-                'meta-keywords'    => 'Mots-clés méta de la boutique de démonstration',
                 'meta-description' => 'Méta-description de la boutique de démonstration',
+                'meta-keywords'    => 'Mots-clés méta de la boutique de démonstration',
+                'meta-title'       => 'Boutique de démonstration',
+                'name'             => 'Défaut',
             ],
 
             'currencies' => [

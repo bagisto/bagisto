@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'डिफ़ॉल्ट',
-                'meta-title'       => 'डेमो स्टोर',
-                'meta-keywords'    => 'डेमो स्टोर मेटा कीवर्ड',
                 'meta-description' => 'डेमो स्टोर मेटा विवरण',
+                'meta-keywords'    => 'डेमो स्टोर मेटा कीवर्ड',
+                'meta-title'       => 'डेमो स्टोर',
+                'name'             => 'डिफ़ॉल्ट',
             ],
 
             'currencies' => [
@@ -790,8 +790,8 @@ return [
                 'xml'         => 'एक्सएमएल',
             ],
 
-            'back'                     => 'वापस',
             'arabic'                   => 'अरबी',
+            'back'                     => 'वापस',
             'bagisto'                  => 'बैगिस्टो',
             'bagisto-info'             => 'एक सामुदायिक परियोजना द्वारा',
             'bagisto-logo'             => 'बैगिस्टो लोगो',

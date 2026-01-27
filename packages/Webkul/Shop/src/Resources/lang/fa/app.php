@@ -355,12 +355,12 @@ return [
                 'completed'           => 'تکمیل شد',
                 'date'                => 'تاریخ',
                 'download-error'      => 'لینک دانلود منقضی شده است.',
-                'expired'             => 'منقضی شده',
                 'empty-product'       => 'محصولی برای دانلود ندارید',
+                'expired'             => 'منقضی شده',
                 'name'                => 'محصولات قابل دانلود',
                 'orderId'             => 'شناسه سفارش',
-                'pending'             => 'انتظار',
                 'payment-error'       => 'پرداخت برای این دانلود انجام نشده است.',
+                'pending'             => 'انتظار',
                 'records-found'       => 'رکورد(های) پیدا شده',
                 'remaining-downloads' => 'دانلودهای باقیمانده',
                 'status'              => 'وضعیت',
@@ -718,8 +718,8 @@ return [
         ],
 
         'range-slider' => [
-            'min-range' => 'حداقل محدوده',
             'max-range' => 'حداکثر محدوده',
+            'min-range' => 'حداقل محدوده',
             'range'     => 'محدوده:',
         ],
 
@@ -771,8 +771,8 @@ return [
 
                 'downloadable' => [
                     'links'   => 'پیوندها',
-                    'samples' => 'نمونه‌ها',
                     'sample'  => 'نمونه',
+                    'samples' => 'نمونه‌ها',
                 ],
 
                 'grouped' => [
@@ -984,8 +984,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'ادامه به تسویه حساب',
             'illegal'                   => 'تعداد نمی‌تواند کمتر از یک باشد.',
-            'inactive-add'              => 'مورد غیرفعال نمی‌تواند به سبد خرید اضافه شود.',
             'inactive'                  => 'این مورد غیرفعال شده و بعداً از سبد خرید حذف می‌شود.',
+            'inactive-add'              => 'مورد غیرفعال نمی‌تواند به سبد خرید اضافه شود.',
             'inventory-warning'         => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
             'item-add-to-cart'          => 'کالا با موفقیت اضافه شد',
             'minimum-order-message'     => 'حداقل مبلغ سفارش است',
@@ -1118,7 +1118,7 @@ return [
                 'excl-tax'                  => 'بدون مالیات:',
                 'grand-total'               => 'مجموع کل',
                 'place-order'               => 'ثبت سفارش',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'در حال پردازش',
                 'sub-total'                 => 'جمع جزئی',
                 'sub-total-excl-tax'        => 'جمع جزئی (بدون مالیات)',
@@ -1343,10 +1343,10 @@ return [
             ],
 
             'canceled' => [
-                'subject'  => 'لغو سفارش جدید',
-                'title'    => 'لغو سفارش!',
                 'greeting' => 'سفارش شما :order_id که در تاریخ :created_at ثبت شده است لغو شده است',
+                'subject'  => 'لغو سفارش جدید',
                 'summary'  => 'خلاصه سفارش',
+                'title'    => 'لغو سفارش!',
             ],
 
             'commented' => [

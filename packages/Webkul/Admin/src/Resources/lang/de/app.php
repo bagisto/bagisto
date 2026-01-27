@@ -203,8 +203,8 @@ return [
                     'order-id'        => 'Bestellnummer',
                     'pay-by'          => 'Bezahlen mit - :method',
                     'pay-via'         => 'Zahlung via',
-                    'pending-payment' => 'Zahlung ausstehend',
                     'pending'         => 'Ausstehend',
+                    'pending-payment' => 'Zahlung ausstehend',
                     'processing'      => 'Bearbeitung',
                     'product-count'   => ':count + Mehr Produkte',
                     'status'          => 'Status',
@@ -2086,8 +2086,8 @@ return [
                         'city'               => 'Stadt',
                         'company-name'       => 'Firmenname',
                         'country'            => 'Land',
-                        'create-btn'         => 'Erstellen',
                         'create-address-btn' => 'Neue Adresse hinzufügen',
+                        'create-btn'         => 'Erstellen',
                         'default-address'    => 'Standardadresse',
                         'email'              => 'E-Mail',
                         'first-name'         => 'Vorname',
@@ -2145,8 +2145,8 @@ return [
                         'completed'       => 'Abgeschlossen',
                         'customer-name'   => 'Kundenname',
                         'date'            => 'Datum',
-                        'empty-order'     => 'Keine Bestellungen verfügbar',
                         'email'           => 'E-Mail',
+                        'empty-order'     => 'Keine Bestellungen verfügbar',
                         'fraud'           => 'Betrug',
                         'grand-total'     => 'Gesamtsumme',
                         'location'        => 'Ort',
@@ -2983,16 +2983,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Zurück',
-                    'file-name'      => 'Dateiname',
-                    'file-name-info' => 'Beispiel: sitemap.xml',
-                    'general'        => 'Allgemein',
-                    'path'           => 'Pfad',
-                    'path-info'      => 'Beispiel: "/sitemap/" oder "/" für den Basispfad',
-                    'save-btn'       => 'Sitemap speichern',
-                ],
-
                 'delete-failed' => ':name Löschen fehlgeschlagen',
             ],
 
@@ -3022,7 +3012,6 @@ return [
                     'create' => [
                         'category'           => 'Kategorie',
                         'cms-page'           => 'CMS-Seite',
-                        'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                         'for'                => 'Für',
                         'locale'             => 'Lokalisierung',
                         'permanent-redirect' => 'Permanent (301)',
@@ -3777,6 +3766,7 @@ return [
                 'back'                          => 'Zurück',
                 'category-carousel'             => 'Kategorie Karussell',
                 'category-carousel-description' => 'Dynamische Kategorien attraktiv mit einem responsiven Kategorie-Karussell anzeigen.',
+                'category-id'                   => 'Kategorien-ID',
                 'channels'                      => 'Kanäle',
                 'column'                        => 'Spalte',
                 'create-filter'                 => 'Filter erstellen',
@@ -3807,7 +3797,6 @@ return [
                 'no'                            => 'Nein',
                 'parent-id'                     => 'Eltern-ID',
                 'parent-id-hint'                => 'Sie können mehrere Eltern-IDs als durch Kommas getrennte Werte eingeben (z.B.: 12,15,34)',
-                'category-id'                   => 'Kategorien-ID',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3847,7 +3836,8 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Dienstleistungen aktualisieren',
                 ],
-                'yes'                           => 'Ja',
+
+                'yes' => 'Ja',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',
@@ -4396,7 +4386,7 @@ return [
                         'show-sku'        => 'SKU anzeigen',
                         'show-weight'     => 'Gewicht anzeigen',
                         'title'           => 'Produkte',
-                        'info'            => 'Konfigurieren Sie die Produktbestandsoptionen, um Rückstände zu ermöglichen, setzen Sie Mindest- und Höchstwerte für den Warenkorb und definieren Sie Ausverkaufsgrenzen.',
+                        'title-info'      => 'Konfigurieren Sie die Produktbestandsoptionen, um Rückstände zu ermöglichen, setzen Sie Mindest- und Höchstwerte für den Warenkorb und definieren Sie Ausverkaufsgrenzen.',
                     ],
 
                     'categories' => [
@@ -5094,18 +5084,18 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
+                'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
+                'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
+            ],
+
             'toolbar' => [
                 'length-of' => ':length von',
                 'of'        => 'von',
                 'per-page'  => 'Pro Seite',
                 'results'   => ':total Ergebnisse',
                 'selected'  => ':total Ausgewählt',
-
-                'index' => [
-                    'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
-                    'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
-                    'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
-                ],
 
                 'mass-actions' => [
                     'select-action' => 'Aktion auswählen',
@@ -5300,8 +5290,8 @@ return [
         'campaigns'                => 'Kampagnen',
         'cancel'                   => 'Abbrechen',
         'cart-rules'               => 'Warenkorbregeln',
-        'catalog-rules'            => 'Katalogregeln',
         'catalog'                  => 'Katalog',
+        'catalog-rules'            => 'Katalogregeln',
         'categories'               => 'Kategorien',
         'channels'                 => 'Kanäle',
         'cms'                      => 'CMS',

@@ -203,8 +203,8 @@ return [
                     'order-id'        => 'ID do Pedido',
                     'pay-by'          => 'Pagar Por - :method',
                     'pay-via'         => 'Pagar Via',
-                    'pending-payment' => 'Pagamento Pendente',
                     'pending'         => 'Pendente',
+                    'pending-payment' => 'Pagamento Pendente',
                     'processing'      => 'Processando',
                     'product-count'   => ':count + Mais produtos',
                     'status'          => 'Status',
@@ -1163,8 +1163,8 @@ return [
 
                 'videos' => [
                     'error' => 'O :attribute não pode ser maior que :max kilobytes. Por favor, escolha um arquivo menor.',
-                    'title' => 'Vídeos',
                     'info'  => 'O tamanho máximo do vídeo deve ser como :size',
+                    'title' => 'Vídeos',
                 ],
 
                 'links' => [
@@ -2086,8 +2086,8 @@ return [
                         'city'               => 'Cidade',
                         'company-name'       => 'Nome da Empresa',
                         'country'            => 'País',
-                        'create-btn'         => 'Criar',
                         'create-address-btn' => 'Adicionar Novo Endereço',
+                        'create-btn'         => 'Criar',
                         'default-address'    => 'Endereço Padrão',
                         'email'              => 'E-mail',
                         'first-name'         => 'Primeiro Nome',
@@ -2144,9 +2144,9 @@ return [
                         'closed'          => 'Fechado',
                         'completed'       => 'Concluído',
                         'customer-name'   => 'Nome do Cliente',
-                        'empty-order'     => 'Nenhum pedido disponível',
                         'date'            => 'Data',
                         'email'           => 'E-mail',
+                        'empty-order'     => 'Nenhum pedido disponível',
                         'fraud'           => 'Fraude',
                         'grand-total'     => 'Total Geral',
                         'location'        => 'Localização',
@@ -2983,16 +2983,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'save-btn'       => 'Salvar Mapa do Site',
-                    'path-info'      => 'Exemplo: "/sitemap/" ou "/" para o caminho base',
-                    'path'           => 'Caminho',
-                    'general'        => 'Geral',
-                    'file-name-info' => 'Exemplo: sitemap.xml',
-                    'file-name'      => 'Nome do Arquivo',
-                    'back-btn'       => 'Voltar',
-                ],
-
                 'delete-failed' => ':name Exclusão Falhou',
             ],
 
@@ -3022,7 +3012,6 @@ return [
                     'create' => [
                         'category'           => 'Categoria',
                         'cms-page'           => 'Página CMS',
-                        'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
                         'for'                => 'Para',
                         'locale'             => 'Localidade',
                         'permanent-redirect' => 'Redirecionamento permanente (301)',
@@ -3049,8 +3038,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'O :name já foi utilizado.',
-            'create-btn'    => 'Criar Página',
             'channel'       => 'Canal',
+            'create-btn'    => 'Criar Página',
             'language'      => 'Idioma',
             'title'         => 'Páginas',
 
@@ -3205,9 +3194,9 @@ return [
                     'delete'              => 'Excluir',
                     'download-sample'     => 'Baixar Exemplo',
                     'field-separator'     => 'Separador de Campos',
-                    'file-info-example'   => 'Por exemplo, em caso de product-images, os arquivos devem ser colocados na pasta /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Use a referência de caminho para /project-root/storage/app/import, por exemplo, product-images, import-images.',
                     'file'                => 'Arquivo',
+                    'file-info'           => 'Use a referência de caminho para /project-root/storage/app/import, por exemplo, product-images, import-images.',
+                    'file-info-example'   => 'Por exemplo, em caso de product-images, os arquivos devem ser colocados na pasta /project-root/storage/app/import/product-images.',
                     'general'             => 'Geral',
                     'images-directory'    => 'Caminho da Pasta de Imagens',
                     'process-in-queue'    => 'Processar na Fila',
@@ -3230,9 +3219,9 @@ return [
                     'delete'              => 'Excluir',
                     'download-sample'     => 'Baixar Exemplo',
                     'field-separator'     => 'Separador de Campos',
-                    'file-info-example'   => 'Por exemplo, em caso de product-images, os arquivos devem ser colocados na pasta /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Use a referência de caminho para /project-root/storage/app/import, por exemplo, product-images, import-images.',
                     'file'                => 'Arquivo',
+                    'file-info'           => 'Use a referência de caminho para /project-root/storage/app/import, por exemplo, product-images, import-images.',
+                    'file-info-example'   => 'Por exemplo, em caso de product-images, os arquivos devem ser colocados na pasta /project-root/storage/app/import/product-images.',
                     'general'             => 'Geral',
                     'images-directory'    => 'Caminho da Pasta de Imagens',
                     'process-in-queue'    => 'Processar na Fila',
@@ -3285,8 +3274,8 @@ return [
                     'total-invalid-rows'      => 'Linhas Inválidas Totais:',
                     'total-rows-processed'    => 'Linhas Processadas Totais:',
                     'total-updated'           => 'Registros Atualizados Totais:',
-                    'validate-info'           => 'Clique em Validar Dados para verificar sua importação.',
                     'validate'                => 'Validar',
+                    'validate-info'           => 'Clique em Validar Dados para verificar sua importação.',
                     'validating-info'         => 'Os dados começaram a ser lidos e validados',
                     'validation-failed-info'  => 'Sua importação é inválida. Por favor, corrija os seguintes erros e tente novamente.',
                     'validation-success-info' => 'Sua importação é válida. Clique em Importar para iniciar o processo de importação.',
@@ -3516,10 +3505,10 @@ return [
                     'zip-to'         => 'Para Código Postal',
                 ],
 
-                'update-success' => 'Taxa de Imposto atualizada com sucesso',
-                'delete-success' => 'Taxa de imposto excluída com sucesso',
-                'delete-failed'  => 'Falha na exclusão da taxa de imposto',
                 'create-success' => 'Taxa de imposto criada com sucesso.',
+                'delete-failed'  => 'Falha na exclusão da taxa de imposto',
+                'delete-success' => 'Taxa de imposto excluída com sucesso',
+                'update-success' => 'Taxa de Imposto atualizada com sucesso',
             ],
         ],
 
@@ -3684,13 +3673,13 @@ return [
                 'title'      => 'Funções',
 
                 'datagrid' => [
-                    'custom'          => 'Customizado',
                     'all'             => 'Tudo',
-                    'permission-type' => 'Tipo de Permissão',
-                    'name'            => 'Nome',
-                    'id'              => 'Id',
-                    'edit'            => 'Editar',
+                    'custom'          => 'Customizado',
                     'delete'          => 'Excluir',
+                    'edit'            => 'Editar',
+                    'id'              => 'Id',
+                    'name'            => 'Nome',
+                    'permission-type' => 'Tipo de Permissão',
                 ],
             ],
 
@@ -3777,6 +3766,7 @@ return [
                 'back'                          => 'Voltar',
                 'category-carousel'             => 'Carrossel de Categoria',
                 'category-carousel-description' => 'Exiba categorias dinâmicas de forma atraente usando um carrossel de categoria responsivo.',
+                'category-id'                   => 'ID de categoria',
                 'channels'                      => 'Canais',
                 'column'                        => 'Coluna',
                 'create-filter'                 => 'Criar Filtro',
@@ -3807,7 +3797,6 @@ return [
                 'no'                            => 'Não',
                 'parent-id'                     => 'ID do Pai',
                 'parent-id-hint'                => 'Você pode inserir vários IDs pai como valores separados por vírgula (ex.: 12,15,34)',
-                'category-id'                   => 'ID de categoria',
                 'preview'                       => 'Visualização',
                 'product-carousel'              => 'Carrossel de Produtos',
                 'product-carousel-description'  => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',
@@ -3847,7 +3836,8 @@ return [
                     'title'              => 'Título',
                     'update-service'     => 'Atualizar Serviços',
                 ],
-                'yes'                           => 'Sim',
+
+                'yes' => 'Sim',
             ],
 
             'create-success' => 'Tema criado com sucesso',
@@ -5095,9 +5085,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Nenhum registro foi selecionado.',
-                'must-select-a-mass-action-option' => 'Você deve selecionar uma opção de ação em massa.',
                 'must-select-a-mass-action'        => 'Você deve selecionar uma ação em massa.',
+                'must-select-a-mass-action-option' => 'Você deve selecionar uma opção de ação em massa.',
+                'no-records-selected'              => 'Nenhum registro foi selecionado.',
             ],
 
             'toolbar' => [
@@ -5108,9 +5098,9 @@ return [
                 'selected'  => ':total Selecionados',
 
                 'mass-actions' => [
-                    'submit'        => 'Enviar',
-                    'select-option' => 'Selecionar uma opção',
                     'select-action' => 'Selecionar uma ação',
+                    'select-option' => 'Selecionar uma opção',
+                    'submit'        => 'Enviar',
                 ],
 
                 'filter' => [
@@ -5300,8 +5290,8 @@ return [
         'campaigns'                => 'Campanhas',
         'cancel'                   => 'Cancelar',
         'cart-rules'               => 'Regras do Carrinho',
-        'catalog-rules'            => 'Regras do Catálogo',
         'catalog'                  => 'Catálogo',
+        'catalog-rules'            => 'Regras do Catálogo',
         'categories'               => 'Categorias',
         'channels'                 => 'Canais',
         'cms'                      => 'CMS',

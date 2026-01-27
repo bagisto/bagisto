@@ -132,10 +132,10 @@ return [
 
         'core' => [
             'channels' => [
-                'name'             => 'Padrão',
-                'meta-title'       => 'Loja de Demonstração',
-                'meta-keywords'    => 'Palavras-chave de Meta da Loja de Demonstração',
                 'meta-description' => 'Descrição de Meta da Loja de Demonstração',
+                'meta-keywords'    => 'Palavras-chave de Meta da Loja de Demonstração',
+                'meta-title'       => 'Loja de Demonstração',
+                'name'             => 'Padrão',
             ],
 
             'currencies' => [
@@ -340,9 +340,9 @@ return [
                     'name' => 'Conteúdo de serviços',
 
                     'title' => [
+                        'emi-available'   => 'EMI disponível',
                         'free-shipping'   => 'Frete grátis',
                         'product-replace' => 'Substituição de produto',
-                        'emi-available'   => 'EMI disponível',
                         'time-support'    => 'Suporte 24/7',
                     ],
                 ],
@@ -750,7 +750,7 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Maak de databasetabel aan',
+                'create-database-table'   => 'Maak de databasetabel aan',
                 'install'                 => 'Installatie',
                 'install-info'            => 'Bagisto Voor Installatie',
                 'install-info-button'     => 'Klik op de knop hieronder om',

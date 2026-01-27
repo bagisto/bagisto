@@ -203,8 +203,8 @@ return [
                     'order-id'        => 'ID Ordine',
                     'pay-by'          => 'Paga con - :method',
                     'pay-via'         => 'Paga tramite',
-                    'pending-payment' => 'Pagamento in Sospeso',
                     'pending'         => 'In Attesa',
+                    'pending-payment' => 'Pagamento in Sospeso',
                     'processing'      => 'In Elaborazione',
                     'product-count'   => ':count + Altri Prodotti',
                     'status'          => 'Stato',
@@ -2086,8 +2086,8 @@ return [
                         'city'               => 'Città',
                         'company-name'       => 'Nome Azienda',
                         'country'            => 'Paese',
-                        'create-btn'         => 'Crea',
                         'create-address-btn' => 'Aggiungi Nuovo Indirizzo',
+                        'create-btn'         => 'Crea',
                         'default-address'    => 'Indirizzo Predefinito',
                         'email'              => 'Email',
                         'first-name'         => 'Nome',
@@ -2145,8 +2145,8 @@ return [
                         'completed'       => 'Completato',
                         'customer-name'   => 'Nome Cliente',
                         'date'            => 'Data',
-                        'empty-order'     => 'Nessun ordine disponibile',
                         'email'           => 'Email',
+                        'empty-order'     => 'Nessun ordine disponibile',
                         'fraud'           => 'Frode',
                         'grand-total'     => 'Totale Generale',
                         'location'        => 'Posizione',
@@ -2983,16 +2983,6 @@ return [
                     ],
                 ],
 
-                'edit' => [
-                    'back-btn'       => 'Indietro',
-                    'file-name'      => 'Nome File',
-                    'file-name-info' => 'Esempio: sitemap.xml',
-                    'general'        => 'Generale',
-                    'path'           => 'Percorso',
-                    'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
-                    'save-btn'       => 'Salva Mappa del Sito',
-                ],
-
                 'delete-failed' => ':name Eliminato Fallito',
             ],
 
@@ -3022,7 +3012,6 @@ return [
                     'create' => [
                         'category'           => 'Categoria',
                         'cms-page'           => 'Pagina CMS',
-                        'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
                         'for'                => 'Per',
                         'locale'             => 'Località',
                         'permanent-redirect' => 'Permanente (301)',
@@ -3285,8 +3274,8 @@ return [
                     'total-invalid-rows'      => 'Totale Righe Non Valide:',
                     'total-rows-processed'    => 'Totale Righe Elaborate:',
                     'total-updated'           => 'Totale Record Aggiornati:',
-                    'validate-info'           => 'Clicca su "Valida Dati" per verificare la tua importazione.',
                     'validate'                => 'Valida',
+                    'validate-info'           => 'Clicca su "Valida Dati" per verificare la tua importazione.',
                     'validating-info'         => 'Lettura e Validazione dei Dati in Corso',
                     'validation-failed-info'  => 'La tua importazione non è valida. Correggi gli errori seguenti e riprova.',
                     'validation-success-info' => 'La tua importazione è valida. Clicca su "Importa" per avviare il processo di importazione.',
@@ -3684,13 +3673,13 @@ return [
                 'title'      => 'Ruoli',
 
                 'datagrid' => [
-                    'custom'          => 'Personalizzato',
                     'all'             => 'Tutti',
-                    'permission-type' => 'Tipo di Autorizzazione',
-                    'name'            => 'Nome',
-                    'id'              => 'Id',
-                    'edit'            => 'Modifica',
+                    'custom'          => 'Personalizzato',
                     'delete'          => 'Elimina',
+                    'edit'            => 'Modifica',
+                    'id'              => 'Id',
+                    'name'            => 'Nome',
+                    'permission-type' => 'Tipo di Autorizzazione',
                 ],
             ],
 
@@ -3777,6 +3766,7 @@ return [
                 'back'                          => 'Indietro',
                 'category-carousel'             => 'Carosello Categoria',
                 'category-carousel-description' => 'Visualizza le categorie dinamiche in modo accattivante utilizzando un carosello di categorie responsivo.',
+                'category-id'                   => 'ID categoria',
                 'channels'                      => 'Canali',
                 'column'                        => 'Colonna',
                 'create-filter'                 => 'Crea Filtro',
@@ -3807,7 +3797,6 @@ return [
                 'no'                            => 'No',
                 'parent-id'                     => 'ID Genitore',
                 'parent-id-hint'                => 'Puoi inserire più ID genitori come valori separati da virgole (ad esempio: 12,15,34)',
-                'category-id'                   => 'ID categoria',
                 'preview'                       => 'Anteprima',
                 'product-carousel'              => 'Carosello Prodotti',
                 'product-carousel-description'  => 'Mostra i prodotti in modo elegante con un carosello di prodotti dinamico e responsivo.',
@@ -3847,7 +3836,8 @@ return [
                     'title'              => 'Titolo',
                     'update-service'     => 'Aggiorna Servizi',
                 ],
-                'yes'                           => 'Sì',
+
+                'yes' => 'Sì',
             ],
 
             'create-success' => 'Tema creato con successo',
@@ -4134,7 +4124,7 @@ return [
                     'review-translation' => [
                         'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
                         'enabled'             => 'Abilitato',
-                        'gemini-1-5-flash'    => 'Gemini 1.5 Flash',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
                         'gpt-4-turbo'         => 'OpenAI gpt-4 Turbo',
                         'gpt-4o'              => 'OpenAI gpt-4o',
                         'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
@@ -4163,7 +4153,7 @@ return [
                     'checkout-message' => [
                         'deepseek-r1-8b'      => 'DeepSeek R1 (8b)',
                         'enabled'             => 'Abilitato',
-                        'gemini-1-5-flash'    => 'Gemini 1.5 Flash',
+                        'gemini-2-0-flash'    => 'Gemini 2.0 Flash',
                         'gpt-4-turbo'         => 'OpenAI gpt 4 Turbo',
                         'gpt-4o'              => 'OpenAI gpt-4o',
                         'gpt-4o-mini'         => 'OpenAI gpt-4o mini',
@@ -5095,9 +5085,9 @@ return [
 
         'datagrid' => [
             'index' => [
-                'no-records-selected'              => 'Nessun record selezionato.',
-                'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione per l\'azione di massa.',
                 'must-select-a-mass-action'        => 'Devi selezionare un\'azione di massa.',
+                'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione per l\'azione di massa.',
+                'no-records-selected'              => 'Nessun record selezionato.',
             ],
 
             'toolbar' => [
@@ -5201,11 +5191,11 @@ return [
 
         'media' => [
             'images' => [
-                'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
-                'allowed-types'     => 'png, jpeg, jpg',
-                'ai-btn-info'       => 'Genera Immagine',
-                'ai-add-image-btn'  => 'Intelligenza Artificiale',
                 'add-image-btn'     => 'Aggiungi Immagine',
+                'ai-add-image-btn'  => 'Intelligenza Artificiale',
+                'ai-btn-info'       => 'Genera Immagine',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
@@ -5300,8 +5290,8 @@ return [
         'campaigns'                => 'Campagne',
         'cancel'                   => 'Annulla',
         'cart-rules'               => 'Regole del Carrello',
-        'catalog-rules'            => 'Regole del Catalogo',
         'catalog'                  => 'Catalogo',
+        'catalog-rules'            => 'Regole del Catalogo',
         'categories'               => 'Categorie',
         'channels'                 => 'Canali',
         'cms'                      => 'CMS',
@@ -5462,11 +5452,11 @@ return [
 
                 'new-request' => [
                     'customer-name'  => 'Nome del cliente : ',
-                    'update-summary' => 'Riepilogo della richiesta di aggiornamento',
                     'delete-summary' => 'Riepilogo della richiesta di eliminazione',
                     'message'        => 'Messaggio : ',
                     'request-status' => 'Stato della richiesta : ',
                     'request-type'   => 'Tipo di richiesta : ',
+                    'update-summary' => 'Riepilogo della richiesta di aggiornamento',
                 ],
 
                 'status-update' => [
@@ -5488,10 +5478,10 @@ return [
             ],
 
             'invoiced' => [
-                'subject'  => 'Nuova Conferma Fattura',
-                'title'    => 'Conferma Fattura!',
                 'greeting' => 'La tua fattura #:invoice_id per l\'ordine :order_id è stata creata il :created_at',
+                'subject'  => 'Nuova Conferma Fattura',
                 'summary'  => 'Riepilogo della Fattura',
+                'title'    => 'Conferma Fattura!',
             ],
 
             'shipped' => [

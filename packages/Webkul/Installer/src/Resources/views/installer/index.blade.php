@@ -673,7 +673,7 @@
                                             <div class="flex items-center gap-1 text-sm text-gray-600">
                                                 <span class="icon-right text-xl"></span>
 
-                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-databsae-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-database-table')</p>
                                             </div>
 
                                             <div class="flex items-center gap-1 text-sm text-gray-600">

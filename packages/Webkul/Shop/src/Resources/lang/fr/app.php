@@ -355,12 +355,12 @@ return [
                 'completed'           => 'Complété',
                 'date'                => 'Date',
                 'download-error'      => 'Le lien de téléchargement a expiré.',
-                'expired'             => 'Expiré',
                 'empty-product'       => 'Vous n\'avez pas de produit à télécharger',
+                'expired'             => 'Expiré',
                 'name'                => 'Produits téléchargeables',
                 'orderId'             => 'ID de commande',
-                'pending'             => 'En attente',
                 'payment-error'       => 'Le paiement n\'a pas été effectué pour ce téléchargement.',
+                'pending'             => 'En attente',
                 'records-found'       => 'Enregistrement(s) trouvé(s)',
                 'remaining-downloads' => 'Téléchargements restants',
                 'status'              => 'Statut',
@@ -718,8 +718,8 @@ return [
         ],
 
         'range-slider' => [
-            'min-range' => 'Plage minimale',
             'max-range' => 'Plage maximale',
+            'min-range' => 'Plage minimale',
             'range'     => 'Plage :',
         ],
 
@@ -984,8 +984,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuer vers la caisse',
             'illegal'                   => 'La quantité ne peut pas être inférieure à un.',
-            'inactive-add'              => 'L\'article inactif ne peut pas être ajouté au panier.',
             'inactive'                  => 'L\'article a été désactivé et retiré du panier.',
+            'inactive-add'              => 'L\'article inactif ne peut pas être ajouté au panier.',
             'inventory-warning'         => 'La quantité demandée n\'est pas disponible, veuillez réessayer ultérieurement.',
             'item-add-to-cart'          => 'Article ajouté avec succès',
             'minimum-order-message'     => 'Le montant minimum de commande est de',
@@ -1118,7 +1118,7 @@ return [
                 'excl-tax'                  => 'Hors taxes :',
                 'grand-total'               => 'Total général',
                 'place-order'               => 'Passer la commande',
-                'price_&_qty'               => ':price × :qty',
+                'price_and_qty'             => ':price × :qty',
                 'processing'                => 'En cours de traitement',
                 'sub-total'                 => 'Sous-total',
                 'sub-total-excl-tax'        => 'Sous-total (Hors taxes)',
