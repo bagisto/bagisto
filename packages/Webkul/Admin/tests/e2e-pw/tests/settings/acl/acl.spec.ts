@@ -17,6 +17,7 @@ test.describe("acl management", () => {
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["dashboard"]);
     });
+
     test.describe("sales acl", () => {
         test("should create custome role with sales permission", async ({
             adminPage,
@@ -25,6 +26,81 @@ test.describe("acl management", () => {
             await aclManagement.createRole("custom", ["sales"]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["sales"]);
+        });
+
+        test("should create custome role with sales (order) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales"]);
+            await aclManagement.editRolePermission([
+                "sales.transactions",
+                "sales.refunds",
+                "sales.shipments",
+                "sales.invoices",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->order"]);
+        });
+
+        test("should create custome role with sales (transaction) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales"]);
+            await aclManagement.editRolePermission([
+                "sales.orders",
+                "sales.refunds",
+                "sales.shipments",
+                "sales.invoices",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->transactions"]);
+        });
+
+        test("should create custome role with sales (shipments) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales"]);
+            await aclManagement.editRolePermission([
+                "sales.orders",
+                "sales.refunds",
+                "sales.transactions",
+                "sales.invoices",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->shipments"]);
+        });
+
+        test("should create custome role with sales (invoices) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales"]);
+            await aclManagement.editRolePermission([
+                "sales.orders",
+                "sales.refunds",
+                "sales.transactions",
+                "sales.shipments",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->invoices"]);
+        });
+
+        test("should create custome role with sales (refunds) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales"]);
+            await aclManagement.editRolePermission([
+                "sales.orders",
+                "sales.invoices",
+                "sales.transactions",
+                "sales.shipments",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->refunds"]);
         });
     });
 
@@ -49,6 +125,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["customers"]);
         });
     });
+
     test.describe("cms acl", () => {
         test("should create custome role with cms permission", async ({
             adminPage,
@@ -59,6 +136,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["cms"]);
         });
     });
+
     test.describe("marketing acl", () => {
         test("should create custome role with marketing permission", async ({
             adminPage,
@@ -69,6 +147,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["marketing"]);
         });
     });
+
     test.describe("reporting acl", () => {
         test("should create custome role with reporting permission", async ({
             adminPage,

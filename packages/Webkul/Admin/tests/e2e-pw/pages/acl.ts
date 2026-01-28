@@ -37,6 +37,24 @@ export class ACLManagement {
         }
     }
 
+    async editRolePermission(permissionValues: string[]) {
+        await this.page.goto("admin/settings/roles");
+        await this.locators.iconEdit.click();
+        await this.page.waitForLoadState("networkidle");
+        for (const value of permissionValues) {
+            const input = this.page.locator(
+                `input[name="permissions[]"][value="${value}"]`,
+            );
+            await expect(input).toBeAttached({ timeout: 10000 });
+            const label = input.locator("..");
+            if (await input.isChecked()) {
+                await label.locator("span").click();
+            }
+        }
+        await this.locators.saveRole.click();
+        await expect(this.locators.successEditRole).toBeVisible();
+    }
+
     async createRole(permissionType: string, permissions?: string[]) {
         await this.page.goto("admin/settings/roles");
         await this.locators.createRole.click();
@@ -105,8 +123,141 @@ export class ACLManagement {
                 sidebarLinks.push("/admin/sales/orders");
             }
 
+            if (permissions.includes("sales->order")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/transactions");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/orders");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/sales/orders");
+            }
+
+            if (permissions.includes("sales->transactions")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/orders");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/transactions");
+
+                sidebarLinks.push("/admin/sales/transactions");
+            }
+
+            if (permissions.includes("sales->shipments")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/orders");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/shipments");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/sales/shipments");
+            }
+
+            if (permissions.includes("sales->invoices")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/orders");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/invoices");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/sales/invoices");
+            }
+
+            if (permissions.includes("sales->refunds")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/orders");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/sales/refunds");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/sales/refunds");
+            }
             if (permissions.includes("catalog")) {
-                sidebarLinks.push("/admin/catalog/products");
+                sidebarLinks.push("/admin/catalog/categories");
             }
 
             if (permissions.includes("customers")) {

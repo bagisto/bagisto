@@ -50,8 +50,6 @@ export class AdminDataTransfer {
         // Upload CSV
         await fileChooser.setFiles(filePath);
 
-        console.log("File selected:", filePath);
-
         /*
         // * Here you can change the Product image zip path as per your requirement
         // */

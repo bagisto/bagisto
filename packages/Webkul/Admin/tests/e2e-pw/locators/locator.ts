@@ -11,6 +11,8 @@ export class WebLocators {
     readonly saveRole: Locator;
     readonly successRole: Locator;
     readonly name: Locator;
+    readonly iconEdit: Locator;
+    readonly successEditRole: Locator;
 
     /**
      * user create
@@ -29,6 +31,8 @@ export class WebLocators {
     readonly logout: Locator;
     readonly userEmail: Locator;
     readonly userPassword: Locator;
+    
+    readonly unauthorized:Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -44,6 +48,10 @@ export class WebLocators {
             'button.primary-button:visible:has-text("Save Role")',
         );
         this.successRole = page.getByText("Roles Created Successfully");
+        this.iconEdit = page.locator("p .icon-edit").first();
+        this.successEditRole = page
+            .locator("#app")
+            .getByText("Roles is updated successfully");
 
         /**
          * user create
@@ -64,5 +72,7 @@ export class WebLocators {
         this.logout = page.getByRole("link", { name: "Logout" });
         this.userEmail = page.locator('input[name="email"]');
         this.userPassword = page.locator('input[name="password"]');
+
+        this.unauthorized=page.getByText("Unauthorized").first();
     }
 }
