@@ -13,7 +13,7 @@ class Slug implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! preg_match('/^[\p{L}\p{M}\p{N}]+(?:-[\p{L}\p{M}\p{N}]+)*$/u', $value)) {
-            $fail(__('core::validation.slug'));
+            $fail('core::validation.slug')->translate();
         }
     }
 }

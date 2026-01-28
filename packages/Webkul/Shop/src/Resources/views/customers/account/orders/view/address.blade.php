@@ -16,7 +16,7 @@
 
         {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
 
-        {{ __('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
+        {{ trans('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
     </p>
 </div>
 
@@ -38,7 +38,7 @@
         {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif <br>
 
         <span class="no-underline">
-            {{ __('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
+            {{ trans('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
         </span>
     </p>
 </div>
