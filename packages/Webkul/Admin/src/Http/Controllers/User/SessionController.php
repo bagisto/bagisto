@@ -57,11 +57,26 @@ class SessionController extends Controller
         }
 
         if (! bouncer()->hasPermission('dashboard')) {
+            $allPermissions = collect(config('acl'));
+
             $permissions = auth()->guard('admin')->user()->role->permissions;
 
             foreach ($permissions as $permission) {
                 if (bouncer()->hasPermission($permission)) {
-                    $permissionDetails = collect(config('acl'))->firstWhere('key', $permission);
+                    $permissionDetails = $allPermissions->firstWhere('key', $permission);
+
+                    // If key is single level (no dots), find the first child entry
+                    if (! str_contains($permission, '.')) {
+                        $childPermission = $allPermissions->first(function ($item) use ($permission) {
+                            return str_starts_with($item['key'], $permission.'.')
+                                && substr_count($item['key'], '.') === 1
+                                && bouncer()->hasPermission($item['key']);
+                        });
+
+                        if ($childPermission) {
+                            return redirect()->route($childPermission['route']);
+                        }
+                    }
 
                     return redirect()->route($permissionDetails['route']);
                 }

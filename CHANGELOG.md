@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
 
 ## **v2.3.11 (22nd of January 2026)** - *Release*
 
