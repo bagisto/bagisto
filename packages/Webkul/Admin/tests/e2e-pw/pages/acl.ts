@@ -370,8 +370,6 @@ export class ACLManagement {
             if (permissions.includes("customers->customers")) {
                 await this.page.goto("admin/dashboard");
                 await expect(this.locators.unauthorized).toBeVisible();
-                await this.page.goto("admin/customers");
-                await expect(this.locators.unauthorized).toBeVisible();
                 await this.page.goto("admin/cms");
                 await expect(this.locators.unauthorized).toBeVisible();
                 await this.page.goto(
@@ -483,8 +481,103 @@ export class ACLManagement {
                 sidebarLinks.push("/admin/marketing/promotions/catalog-rules");
             }
 
+            if (permissions.includes("marketing->promotions")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/marketing/promotions/catalog-rules");
+            }
+
+            if (permissions.includes("marketing->communications")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/communications/email-templates",
+                );
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push(
+                    "/admin/marketing/communications/email-templates",
+                );
+            }
+
+            if (permissions.includes("marketing->search_seo")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/communications/email-templates",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/marketing/search-seo/url-rewrites");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/marketing/search-seo/url-rewrites");
+            }
+
             if (permissions.includes("reporting")) {
                 sidebarLinks.push("/admin/reporting/sales");
+                sidebarLinks.push("/admin/reporting/customers");
+                sidebarLinks.push("/admin/reporting/products");
             }
 
             if (permissions.includes("settings")) {

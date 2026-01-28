@@ -234,7 +234,7 @@ test.describe("acl management", () => {
             await aclManagement.editRolePermission([
                 "customers.reviews",
                 "customers.customers",
-                "customers.group",
+                "customers.groups",
                 "customers.note",
                 "customers.addresses",
             ]);
@@ -262,6 +262,46 @@ test.describe("acl management", () => {
             await aclManagement.createRole("custom", ["marketing"]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["marketing"]);
+        });
+        test("should create custome role with marketing (promotions) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["marketing"]);
+            await aclManagement.editRolePermission([
+                "marketing.search_seo",
+                "marketing.communications",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["marketing->promotions"]);
+        });
+
+        test("should create custome role with marketing (communications) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["marketing"]);
+            await aclManagement.editRolePermission([
+                "marketing.search_seo",
+                "marketing.promotions",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole([
+                "marketing->communications",
+            ]);
+        });
+
+        test("should create custome role with marketing (search_seo) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["marketing"]);
+            await aclManagement.editRolePermission([
+                "marketing.communications",
+                "marketing.promotions",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["marketing->search_seo"]);
         });
     });
 
