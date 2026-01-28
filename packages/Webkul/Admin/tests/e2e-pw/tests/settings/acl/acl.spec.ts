@@ -180,6 +180,67 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["customers"]);
         });
+
+        test("should create custome role with customers (customers) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["customers"]);
+            await aclManagement.editRolePermission([
+                "customers.gdpr_requests",
+                "customers.groups",
+                "customers.reviews",
+                "customers.note",
+                "customers.addresses",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["customers->customers"]);
+        });
+        test("should create custome role with customers (groups) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["customers"]);
+            await aclManagement.editRolePermission([
+                "customers.gdpr_requests",
+                "customers.customers",
+                "customers.reviews",
+                "customers.note",
+                "customers.addresses",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["customers->groups"]);
+        });
+        test("should create custome role with customers (reviews) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["customers"]);
+            await aclManagement.editRolePermission([
+                "customers.gdpr_requests",
+                "customers.customers",
+                "customers.groups",
+                "customers.note",
+                "customers.addresses",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["customers->reviews"]);
+        });
+        test("should create custome role with customers (gdpr) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["customers"]);
+            await aclManagement.editRolePermission([
+                "customers.reviews",
+                "customers.customers",
+                "customers.group",
+                "customers.note",
+                "customers.addresses",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["customers->gdpr"]);
+        });
     });
 
     test.describe("cms acl", () => {
