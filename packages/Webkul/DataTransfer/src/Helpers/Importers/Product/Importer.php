@@ -555,7 +555,7 @@ class Importer extends AbstractImporter
                         ->count('product_attribute_values.id');
 
                     if ($count) {
-                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
+                        $fail(trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
                     }
                 });
             }

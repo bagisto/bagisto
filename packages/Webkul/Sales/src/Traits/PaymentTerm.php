@@ -34,11 +34,11 @@ trait PaymentTerm
         $dueDuration = $this->getPaymentTerm();
 
         if ($dueDuration > 1) {
-            return __('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-days', ['due-duration' => $dueDuration]);
+            return trans('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-days', ['due-duration' => $dueDuration]);
         }
 
         return $dueDuration
-            ? __('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-day', ['due-duration' => $dueDuration])
-            : __('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-day', ['due-duration' => 0]);
+            ? trans('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-day', ['due-duration' => $dueDuration])
+            : trans('admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration-day', ['due-duration' => 0]);
     }
 }

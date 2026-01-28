@@ -352,19 +352,19 @@ class Cart
             }
 
             if (! $item->product->status) {
-                throw new \Exception(__('shop::app.checkout.cart.inactive'));
+                throw new \Exception(trans('shop::app.checkout.cart.inactive'));
             }
 
             if ($quantity <= 0) {
                 $this->removeItem($itemId);
 
-                throw new \Exception(__('shop::app.checkout.cart.illegal'));
+                throw new \Exception(trans('shop::app.checkout.cart.illegal'));
             }
 
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {
-                throw new \Exception(__('shop::app.checkout.cart.inventory-warning'));
+                throw new \Exception(trans('shop::app.checkout.cart.inventory-warning'));
             }
 
             Event::dispatch('checkout.cart.update.before', $item);
@@ -950,7 +950,7 @@ class Cart
 
                 $isInvalid = true;
 
-                session()->flash('info', __('shop::app.checkout.cart.inactive'));
+                session()->flash('info', trans('shop::app.checkout.cart.inactive'));
             } else {
                 if (Tax::isInclusiveTaxProductPrices()) {
                     $itemBasePrice = $item->base_price_incl_tax;
