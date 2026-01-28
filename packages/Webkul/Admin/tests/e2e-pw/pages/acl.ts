@@ -367,6 +367,114 @@ export class ACLManagement {
                 sidebarLinks.push("/admin/customers");
             }
 
+            if (permissions.includes("customers->customers")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/customers");
+            }
+
+            if (permissions.includes("customers->groups")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/customers/groups");
+            }
+
+            if (permissions.includes("customers->reviews")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/reviews");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/customers/reviews");
+            }
+
+            if (permissions.includes("customers->gdpr")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/customers/gdpr");
+            }
+
             if (permissions.includes("cms")) {
                 sidebarLinks.push("/admin/cms");
             }
