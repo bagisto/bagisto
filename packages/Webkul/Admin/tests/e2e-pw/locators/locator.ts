@@ -25,8 +25,8 @@ export class WebLocators {
     /**
      * user login
      */
-    readonly profile:Locator;
-    readonly logout:Locator;
+    readonly profile: Locator;
+    readonly logout: Locator;
     readonly userEmail: Locator;
     readonly userPassword: Locator;
 
@@ -60,8 +60,8 @@ export class WebLocators {
         /**
          * user login
          */
-        this.profile=page.locator('div.flex.select-none >> button');
-        this.logout= page.getByRole('link', { name: 'Logout' });
+        this.profile = page.locator("div.flex.select-none >> button");
+        this.logout = page.getByRole("link", { name: "Logout" });
         this.userEmail = page.locator('input[name="email"]');
         this.userPassword = page.locator('input[name="password"]');
     }

@@ -4,29 +4,33 @@ import { generateEmail } from "../utils/faker";
 
 const roleName = `role-${Date.now()}`.toString();
 const userName = `user-${Date.now()}`.toString();
-const userEmail = generateEmail();
+const userEmail =
+    `user_${Date.now()}_${Math.floor(Math.random() * 10000)}` + generateEmail();
 export class ACLManagement {
     readonly page: Page;
     readonly locators: WebLocators;
+    readonly roleName: string;
+    readonly userName: string;
+    readonly userEmail: string;
 
     constructor(page: Page) {
         this.page = page;
-
         this.locators = new WebLocators(page);
+        this.roleName = `role-${Date.now()}`.toString();
+        this.userName = `user-${Date.now()}`.toString();
+        this.userEmail =
+            `user_${Date.now()}_${Math.floor(Math.random() * 10000)}` +
+            generateEmail();
     }
 
     async rolePermission(permissionValues: string[]) {
         await this.page.waitForLoadState("networkidle");
-
         for (const value of permissionValues) {
             const input = this.page.locator(
                 `input[name="permissions[]"][value="${value}"]`,
             );
-
             await expect(input).toBeAttached({ timeout: 10000 });
-
             const label = input.locator("..");
-
             if (!(await input.isChecked())) {
                 await label.locator("span").click();
             }
@@ -36,7 +40,7 @@ export class ACLManagement {
     async createRole(permissionType: string, permissions?: string[]) {
         await this.page.goto("admin/settings/roles");
         await this.locators.createRole.click();
-        await this.locators.name.fill(roleName);
+        await this.locators.name.fill(this.roleName);
         await this.locators.selectType.selectOption(permissionType);
         if (
             permissionType === "custom" &&
@@ -53,9 +57,9 @@ export class ACLManagement {
     async createUser() {
         await this.page.goto("admin/settings/users");
         await this.locators.createUser.click();
-        await this.locators.name.fill(userName);
-        await this.locators.selectRole.selectOption({ label: roleName });
-        await this.locators.userEmail.fill(userEmail);
+        await this.locators.name.fill(this.userName);
+        await this.locators.selectRole.selectOption({ label: this.roleName });
+        await this.locators.userEmail.fill(this.userEmail);
         await this.locators.userPassword.fill("user123");
         await this.locators.confirmPassword.fill("user123");
         await this.locators.statusToggle.click();
@@ -65,14 +69,14 @@ export class ACLManagement {
         await expect(this.locators.successUser.first()).toBeVisible();
     }
 
-    async verfiyAssignedRole(permissions?: string[]) {
+    async verfiyAssignedRole(permissions: string[] = []) {
         await this.page.goto("admin/dashboard");
         await this.page.waitForLoadState("networkidle");
         await this.locators.profile.click();
         await this.locators.logout.click();
         await this.page.waitForURL("**/admin/login");
         await this.page.waitForLoadState("networkidle");
-        await this.locators.userEmail.fill(userEmail);
+        await this.locators.userEmail.fill(this.userEmail);
         await this.locators.userPassword.fill("user123");
         await this.locators.userPassword.press("Enter");
         await this.page.waitForLoadState("networkidle");
@@ -80,44 +84,8 @@ export class ACLManagement {
         const sidebar = this.page.locator("div.fixed.top-14 nav");
         let sidebarLinks: string[] = [];
 
-        if (permissions && permissions.includes("dashboard")) {
-            const sidebarLinks = ["/admin/dashboard"];
-        }
-
-        if (permissions && permissions.includes("sales")) {
-            const sidebarLinks = ["/admin/sales/orders"];
-        }
-
-        if (permissions && permissions.includes("catalog")) {
-            const sidebarLinks = ["/admin/catalog/products"];
-        }
-
-        if (permissions && permissions.includes("customers")) {
-            const sidebarLinks = ["/admin/customers"];
-        }
-
-        if (permissions && permissions.includes("cms")) {
-            const sidebarLinks = ["/admin/cms"];
-        }
-
-        if (permissions && permissions.includes("marketing")) {
-            const sidebarLinks = ["/admin/marketing/promotions/catalog-rules"];
-        }
-
-        if (permissions && permissions.includes("reporting")) {
-            const sidebarLinks = ["/admin/reporting/sales"];
-        }
-
-        if (permissions && permissions.includes("settings")) {
-            const sidebarLinks = ["/admin/settings/locales"];
-        }
-
-        if (permissions && permissions.includes("configuration")) {
-            const sidebarLinks = ["/admin/configuration"];
-        }
-
-        if (permissions && permissions.includes("all")) {
-            const sidebarLinks = [
+        if (permissions.includes("all")) {
+            sidebarLinks = [
                 "/admin/dashboard",
                 "/admin/sales/orders",
                 "/admin/catalog/products",
@@ -128,6 +96,42 @@ export class ACLManagement {
                 "/admin/settings/locales",
                 "/admin/configuration",
             ];
+        } else {
+            if (permissions.includes("dashboard")) {
+                sidebarLinks.push("/admin/dashboard");
+            }
+
+            if (permissions.includes("sales")) {
+                sidebarLinks.push("/admin/sales/orders");
+            }
+
+            if (permissions.includes("catalog")) {
+                sidebarLinks.push("/admin/catalog/products");
+            }
+
+            if (permissions.includes("customers")) {
+                sidebarLinks.push("/admin/customers");
+            }
+
+            if (permissions.includes("cms")) {
+                sidebarLinks.push("/admin/cms");
+            }
+
+            if (permissions.includes("marketing")) {
+                sidebarLinks.push("/admin/marketing/promotions/catalog-rules");
+            }
+
+            if (permissions.includes("reporting")) {
+                sidebarLinks.push("/admin/reporting/sales");
+            }
+
+            if (permissions.includes("settings")) {
+                sidebarLinks.push("/admin/settings/locales");
+            }
+
+            if (permissions.includes("configuration")) {
+                sidebarLinks.push("/admin/configuration");
+            }
         }
 
         for (const href of sidebarLinks) {
