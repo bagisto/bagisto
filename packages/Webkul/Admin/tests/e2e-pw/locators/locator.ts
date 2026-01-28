@@ -73,6 +73,6 @@ export class WebLocators {
         this.userEmail = page.locator('input[name="email"]');
         this.userPassword = page.locator('input[name="password"]');
 
-        this.unauthorized=page.getByText("Unauthorized").first();
+        this.unauthorized=page.getByText("401").first();
     }
 }
