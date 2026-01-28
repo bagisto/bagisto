@@ -2,10 +2,11 @@
 
 namespace Webkul\Admin\Validations;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Webkul\Product\Repositories\ProductRepository;
 
-class ConfigurableUniqueSku implements Rule
+class ConfigurableUniqueSku implements ValidationRule
 {
     /**
      * Constructor.
@@ -17,25 +18,13 @@ class ConfigurableUniqueSku implements Rule
     ) {}
 
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
+     * Run the validation rule.
      */
-    public function passes($attribute, $value)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        return $this->isSkuExistsInProduct();
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']);
+        if (! $this->isSkuExistsInProduct()) {
+            $fail('admin::app.catalog.products.index.already-taken')->translate(['name' => $attribute]);
+        }
     }
 
     /**

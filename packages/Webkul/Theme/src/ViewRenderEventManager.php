@@ -90,7 +90,7 @@ class ViewRenderEventManager
     public function addTemplate($template, $params = [])
     {
         array_push($this->templates, $template);
-        
+
         $this->params = array_merge($this->params, $params);
     }
 
