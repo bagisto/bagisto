@@ -584,6 +584,366 @@ export class ACLManagement {
                 sidebarLinks.push("/admin/settings/locales");
             }
 
+            if (permissions.includes("settings->locales")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/locales");
+            }
+
+            if (permissions.includes("settings->currencies")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/currencies");
+            }
+
+            if (permissions.includes("settings->exchange_rates")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/exchange-rates");
+            }
+
+            if (permissions.includes("settings->inventory_sources")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/inventory-sources");
+            }
+
+            if (permissions.includes("settings->inventory_sources")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/channels");
+            }
+
+            if (permissions.includes("settings->users")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/users");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/users");
+            }
+
+            if (permissions.includes("settings->roles")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/users");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/roles");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/roles");
+            }
+
+            if (permissions.includes("settings->themes")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/users");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/roles");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/themes");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/themes");
+            }
+
+            if (permissions.includes("settings->taxes")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/users");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/roles");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/themes");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/taxes/categories");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/taxes/categories");
+            }
+
+            if (permissions.includes("settings->taxes")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/groups");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers/gdpr");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/currencies");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/exchange-rates");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/inventory-sources");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/channels");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/users");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/roles");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/themes");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/taxes/categories");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+                await this.page.goto("admin/settings/data-transfer/imports");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/settings/data-transfer/imports");
+            }
+
             if (permissions.includes("configuration")) {
                 sidebarLinks.push("/admin/configuration");
             }
