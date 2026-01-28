@@ -92,6 +92,7 @@ export class ACLManagement {
         await this.page.waitForLoadState("networkidle");
         await this.locators.profile.click();
         await this.locators.logout.click();
+        await this.page.goto("admin/login");
         await this.page.waitForURL("**/admin/login");
         await this.page.waitForLoadState("networkidle");
         await this.locators.userEmail.fill(this.userEmail);
@@ -260,6 +261,108 @@ export class ACLManagement {
                 sidebarLinks.push("/admin/catalog/categories");
             }
 
+            if (permissions.includes("catalog->products")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/catalog/products");
+            }
+
+            if (permissions.includes("catalog->categories")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/categories");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/catalog/categories");
+            }
+
+            if (permissions.includes("catalog->attributes")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/categories");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/attributes");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/catalog/attributes");
+            }
+
+            if (permissions.includes("catalog->families")) {
+                await this.page.goto("admin/dashboard");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/customers");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/cms");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto(
+                    "admin/marketing/promotions/catalog-rules",
+                );
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/reporting/sales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/settings/locales");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/configuration");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/products");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/categories");
+                await expect(this.locators.unauthorized).toBeVisible();
+                await this.page.goto("admin/catalog/families");
+                await expect(this.locators.unauthorized).not.toBeVisible();
+
+                sidebarLinks.push("/admin/catalog/families");
+            }
             if (permissions.includes("customers")) {
                 sidebarLinks.push("/admin/customers");
             }

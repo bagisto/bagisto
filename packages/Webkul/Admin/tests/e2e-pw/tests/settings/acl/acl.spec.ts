@@ -113,6 +113,62 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["catalog"]);
         });
+
+        test("should create custome role with catalog (products) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog"]);
+            await aclManagement.editRolePermission([
+                "catalog.families",
+                "catalog.attributes",
+                "catalog.categories",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->products"]);
+        });
+
+        test("should create custome role with catalog (categories) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog"]);
+            await aclManagement.editRolePermission([
+                "catalog.families",
+                "catalog.attributes",
+                "catalog.products",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->categories"]);
+        });
+
+        test("should create custome role with catalog (attributes) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog"]);
+            await aclManagement.editRolePermission([
+                "catalog.families",
+                "catalog.categories",
+                "catalog.products",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
+        });
+
+        test("should create custome role with catalog (families) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog"]);
+            await aclManagement.editRolePermission([
+                "catalog.attributes",
+                "catalog.categories",
+                "catalog.products",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->families"]);
+        });
     });
 
     test.describe("customers acl", () => {
