@@ -8,6 +8,7 @@ use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\CMS\Repositories\PageRepository;
+use Webkul\Core\Rules\Slug;
 
 class PageController extends Controller
 {
@@ -101,7 +102,7 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale.'.url_key' => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
+            $locale.'.url_key' => ['required', new Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
