@@ -1,5 +1,6 @@
 import { test, expect } from "../../../setup";
 import { ACLManagement } from "../../../pages/acl";
+import { WebLocators } from "../../../locators/locator";
 
 test.describe("acl management", () => {
     test("should create role for all permission", async ({ adminPage }) => {
@@ -219,6 +220,32 @@ test.describe("acl management", () => {
             );
         });
 
+        test("should create custom role with catalog (products -> copy) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog.products.copy"]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->products"]);
+            await adminPage.waitForLoadState("networkidle");
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.cursor-pointer.icon-sort-right").nth(1),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await adminPage.locator("span.icon-copy").nth(1).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(
+                adminPage.getByText("Product copied successfully").first(),
+            ).toBeVisible();
+        });
+
         test("should create custom role with catalog (products-> delete) permission", async ({
             adminPage,
         }) => {
@@ -237,10 +264,7 @@ test.describe("acl management", () => {
             await expect(
                 adminPage.locator("button.primary-button"),
             ).not.toBeVisible();
-            await adminPage
-                .locator(".hidden > .flex.gap-2\\.5 > .icon-uncheckbox")
-                .first()
-                .click();
+            await adminPage.locator(".icon-uncheckbox").nth(2).click();
             await adminPage
                 .getByRole("button", { name: "Select Action" })
                 .click();
@@ -248,32 +272,11 @@ test.describe("acl management", () => {
             await adminPage
                 .getByRole("button", { name: "Agree", exact: true })
                 .click();
-            await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
-        });
-
-          test("should create custom role with catalog (products -> copy) permission", async ({
-            adminPage,
-        }) => {
-            const aclManagement = new ACLManagement(adminPage);
-            await aclManagement.createRole("custom", [
-                "catalog.products.copy",
-            ]);
-            await aclManagement.createUser();
-            await aclManagement.verfiyAssignedRole(["catalog->products"]);
             await expect(
-                adminPage.locator("button.primary-button"),
-            ).not.toBeVisible();
-            await expect(
-                adminPage.locator("span.cursor-pointer.icon-sort-right").nth(1),
-            ).not.toBeVisible();
-            await expect(
-                adminPage.locator("button.primary-button"),
-            ).not.toBeVisible();
-            await adminPage.locator("span.icon-copy").nth(1).click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
-            await expect(adminPage.getByText("Product copied successfully").first()).toBeVisible();
+                adminPage
+                    .getByText("Selected Products Deleted Successfully")
+                    .first(),
+            ).toBeVisible();
         });
 
         test("should create custom role with catalog (categories) permission", async ({
@@ -290,6 +293,75 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog->categories"]);
         });
 
+        test("should create custom role with catalog (categories -> create) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.categories.create",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->categories"]);
+            await expect(
+                adminPage.locator(".primary-button").first(),
+            ).toBeVisible();
+        });
+
+        test("should create custom role with catalog (categories -> edit) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.categories.edit",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->categories"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.icon-edit").first(),
+            ).toBeVisible();
+            await adminPage.locator("span.icon-edit").first().click();
+            await adminPage.waitForLoadState("networkidle");
+            await adminPage
+                .getByRole("button", { name: "Save Category" })
+                .click();
+            await expect(
+                adminPage.getByText("Category updated successfully.").first(),
+            ).toBeVisible();
+        });
+
+        test("should create custom role with catalog (categories -> delete) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.categories.delete",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->categories"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.icon-edit").first(),
+            ).not.toBeVisible();
+            await adminPage.locator(".icon-uncheckbox").nth(1).click();
+            await adminPage
+                .getByRole("button", { name: "Select Action" })
+                .click();
+            await adminPage.getByRole("link", { name: "Delete" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(
+                adminPage
+                    .getByText("The category has been successfully deleted.")
+                    .first(),
+            ).toBeVisible();
+        });
+
         test("should create custom role with catalog (attributes) permission", async ({
             adminPage,
         }) => {
@@ -304,6 +376,80 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
         });
 
+        test("should create custom role with catalog (attributes-> create) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.attributes.create",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
+            await expect(
+                adminPage.getByRole("link", { name: "Create Attributes" }),
+            ).toBeVisible();
+            await adminPage
+                .getByRole("link", { name: "Create Attributes" })
+                .click();
+            await adminPage
+                .locator('input[name="admin_name"]')
+                .fill("test attribute");
+            await adminPage.locator('input[name="code"]').fill("admin123");
+            await adminPage.locator('select[name="type"]').selectOption("text");
+            await adminPage.locator("button.primary-button").click();
+            await expect(
+                adminPage.getByText("Attribute Created Successfully"),
+            ).toBeVisible();
+        });
+
+        test("should create custom role with catalog (attributes-> edit) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.attributes.edit",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
+            await expect(
+                adminPage.getByRole("link", { name: "Create Attributes" }),
+            ).not.toBeVisible();
+            await adminPage.locator("span.icon-edit").first().click();
+            await adminPage.waitForLoadState("networkidle");
+            await adminPage
+                .getByRole("button", { name: "Save Attribute" })
+                .click();
+            await expect(
+                adminPage.getByText("Attribute updated successfully").first(),
+            ).toBeVisible();
+        });
+
+        test("should create custom role with catalog (attributes-> delete) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.attributes.delete",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
+            await expect(
+                adminPage.getByRole("link", { name: "Create Attributes" }),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.icon-edit").first(),
+            ).not.toBeVisible();
+            await adminPage.locator(".icon-delete").first().click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(
+                adminPage.getByText(
+                    /Attribute Deleted Successfully|Attribute Deleted Failed/,
+                ),
+            ).toBeVisible();
+        });
+
         test("should create custom role with catalog (families) permission", async ({
             adminPage,
         }) => {
@@ -316,6 +462,51 @@ test.describe("acl management", () => {
             ]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["catalog->families"]);
+        });
+
+        test("should create custom role with catalog (families->create) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.families.create",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->families"]);
+            await adminPage
+                .getByRole("link", { name: "Create Attribute Family" })
+                .click();
+            await adminPage.waitForLoadState("networkidle");
+            await adminPage.locator('input[name="code"]').fill("testcode");
+            await adminPage.locator('input[name="name"]').fill("test name");
+            await adminPage.locator("button.primary-button").click();
+            await expect(
+                adminPage.getByText("Family created successfully.").first(),
+            ).toBeVisible();
+        });
+
+        test("should create custom role with catalog (families->edit) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.families.edit",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->families"]);
+            await expect(
+                adminPage.getByRole("link", {
+                    name: "Create Attribute Family",
+                }),
+            ).not.toBeVisible();
+            await adminPage.locator("span.icon-edit").first().click();
+            await adminPage.waitForLoadState("networkidle");
+            await adminPage
+                .getByRole("button", { name: " Save Attribute Family" })
+                .click();
+            await expect(
+                adminPage.getByText("Family updated successfully.").first(),
+            ).toBeVisible();
         });
     });
 
