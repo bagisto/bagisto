@@ -9,7 +9,7 @@ test.describe("acl management", () => {
         await aclManagement.verfiyAssignedRole(["all"]);
     });
 
-    test("should create custome role with dashboard permission", async ({
+    test("should create custom role with dashboard permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -19,7 +19,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("sales acl", () => {
-        test("should create custome role with sales permission", async ({
+        test("should create custom role with sales permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -28,7 +28,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales"]);
         });
 
-        test("should create custome role with sales (order) permission", async ({
+        test("should create custom role with sales (order) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -43,7 +43,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->order"]);
         });
 
-        test("should create custome role with sales (transaction) permission", async ({
+        test("should create custom role with sales (transaction) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -58,7 +58,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->transactions"]);
         });
 
-        test("should create custome role with sales (shipments) permission", async ({
+        test("should create custom role with sales (shipments) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -73,7 +73,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->shipments"]);
         });
 
-        test("should create custome role with sales (invoices) permission", async ({
+        test("should create custom role with sales (invoices) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -88,7 +88,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->invoices"]);
         });
 
-        test("should create custome role with sales (refunds) permission", async ({
+        test("should create custom role with sales (refunds) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -105,7 +105,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("catalog acl", () => {
-        test("should create custome role with catalog permission", async ({
+        test("should create custom role with catalog permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -114,7 +114,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog"]);
         });
 
-        test("should create custome role with catalog (products) permission", async ({
+        test("should create custom role with catalog (products) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -128,7 +128,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog->products"]);
         });
 
-        test("should create custome role with catalog (categories) permission", async ({
+        test("should create custom role with catalog (categories) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -142,7 +142,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog->categories"]);
         });
 
-        test("should create custome role with catalog (attributes) permission", async ({
+        test("should create custom role with catalog (attributes) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -156,7 +156,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
         });
 
-        test("should create custome role with catalog (families) permission", async ({
+        test("should create custom role with catalog (families) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -172,7 +172,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("customers acl", () => {
-        test("should create custome role with customers permission", async ({
+        test("should create custom role with customers permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -181,7 +181,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["customers"]);
         });
 
-        test("should create custome role with customers (customers) permission", async ({
+        test("should create custom role with customers (customers) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -196,7 +196,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["customers->customers"]);
         });
-        test("should create custome role with customers (groups) permission", async ({
+        test("should create custom role with customers (groups) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -211,7 +211,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["customers->groups"]);
         });
-        test("should create custome role with customers (reviews) permission", async ({
+        test("should create custom role with customers (reviews) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -226,7 +226,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["customers->reviews"]);
         });
-        test("should create custome role with customers (gdpr) permission", async ({
+        test("should create custom role with customers (gdpr) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -244,7 +244,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("cms acl", () => {
-        test("should create custome role with cms permission", async ({
+        test("should create custom role with cms permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -255,7 +255,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("marketing acl", () => {
-        test("should create custome role with marketing permission", async ({
+        test("should create custom role with marketing permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -263,7 +263,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["marketing"]);
         });
-        test("should create custome role with marketing (promotions) permission", async ({
+        test("should create custom role with marketing (promotions) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -276,7 +276,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["marketing->promotions"]);
         });
 
-        test("should create custome role with marketing (communications) permission", async ({
+        test("should create custom role with marketing (communications) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -291,7 +291,7 @@ test.describe("acl management", () => {
             ]);
         });
 
-        test("should create custome role with marketing (search_seo) permission", async ({
+        test("should create custom role with marketing (search_seo) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -306,7 +306,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("reporting acl", () => {
-        test("should create custome role with reporting permission", async ({
+        test("should create custom role with reporting permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -317,7 +317,7 @@ test.describe("acl management", () => {
     });
 
     test.describe("settings acl", () => {
-        test("should create custome role with settings permission", async ({
+        test("should create custom role with settings permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -326,7 +326,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings"]);
         });
 
-        test("should create custome role with settings (locale) permission", async ({
+        test("should create custom role with settings (locale) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -346,7 +346,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->locales"]);
         });
 
-        test("should create custome role with settings (currencies) permission", async ({
+        test("should create custom role with settings (currencies) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -366,7 +366,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->currencies"]);
         });
 
-        test("should create custome role with settings (exchange_rates) permission", async ({
+        test("should create custom role with settings (exchange_rates) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -388,7 +388,7 @@ test.describe("acl management", () => {
             ]);
         });
 
-        test("should create custome role with settings (inventory_sources) permission", async ({
+        test("should create custom role with settings (inventory_sources) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -410,7 +410,7 @@ test.describe("acl management", () => {
             ]);
         });
 
-        test("should create custome role with settings (channels) permission", async ({
+        test("should create custom role with settings (channels) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -430,7 +430,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->channels"]);
            });
 
-        test("should create custome role with settings (users) permission", async ({
+        test("should create custom role with settings (users) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -450,7 +450,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->users"]);
         });
 
-        test("should create custome role with settings (roles) permission", async ({
+        test("should create custom role with settings (roles) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -470,7 +470,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->roles"]);
         });
 
-        test("should create custome role with settings (themes) permission", async ({
+        test("should create custom role with settings (themes) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -490,7 +490,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->themes"]);
         });
 
-        test("should create custome role with settings (taxes) permission", async ({
+        test("should create custom role with settings (taxes) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -510,7 +510,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["settings->taxes"]);
         });
         
-        test("should create custome role with settings (data_transfer) permission", async ({
+        test("should create custom role with settings (data_transfer) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -527,12 +527,12 @@ test.describe("acl management", () => {
                 "settings.locales",
             ]);
             await aclManagement.createUser();
-            await aclManagement.verfiyAssignedRole(["settings->themes"]);
+            await aclManagement.verfiyAssignedRole(["settings->data_transfer"]);
         });
     });
 
     test.describe("configuration acl", () => {
-        test("should create custome role with configuration permission", async ({
+        test("should create custom role with configuration permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
