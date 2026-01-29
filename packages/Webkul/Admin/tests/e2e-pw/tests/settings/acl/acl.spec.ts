@@ -1,4 +1,4 @@
-import { test } from "../../../setup";
+import { test, expect } from "../../../setup";
 import { ACLManagement } from "../../../pages/acl";
 
 test.describe("acl management", () => {
@@ -43,6 +43,22 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->order"]);
         });
 
+        test("should create custom role with sales (order-> create) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["sales.orders.create"]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->order"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).toBeVisible();
+            await adminPage.locator("button.primary-button").click();
+            await expect(
+                adminPage.locator("button.secondary-button"),
+            ).toBeVisible();
+        });
+
         test("should create custom role with sales (transaction) permission", async ({
             adminPage,
         }) => {
@@ -58,6 +74,20 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->transactions"]);
         });
 
+        test("should create custom role with sales (transaction->view) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "sales.transactions.view",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->transactions"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).toBeVisible();
+        });
+
         test("should create custom role with sales (shipments) permission", async ({
             adminPage,
         }) => {
@@ -71,6 +101,22 @@ test.describe("acl management", () => {
             ]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["sales->shipments"]);
+        });
+
+        test("should create custom role with sales (shipments->view & create) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "sales.shipments.create",
+                "sales.shipments.view",
+            ]);
+
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["sales->shipments"]);
+            await expect(
+                adminPage.locator(".table-responsive").first(),
+            ).toBeVisible();
         });
 
         test("should create custom role with sales (invoices) permission", async ({
@@ -104,6 +150,30 @@ test.describe("acl management", () => {
         });
     });
 
+    test("should create custom role with sales (refunds->view) permission", async ({
+        adminPage,
+    }) => {
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", ["sales.refunds.view"]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->refund"]);
+        await expect(
+            adminPage.locator(".table-responsive").first(),
+        ).toBeVisible();
+    });
+
+    test("should create custom role with sales (refunds->create) permission", async ({
+        adminPage,
+    }) => {
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", ["sales.refunds.create"]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->refund"]);
+        await expect(
+            adminPage.locator(".table-responsive").first(),
+        ).toBeVisible();
+    });
+
     test.describe("catalog acl", () => {
         test("should create custom role with catalog permission", async ({
             adminPage,
@@ -126,6 +196,84 @@ test.describe("acl management", () => {
             ]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["catalog->products"]);
+        });
+
+        test("should create custom role with catalog (products-> edit) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", ["catalog.products.edit"]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->products"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await adminPage
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await adminPage.waitForLoadState("networkidle");
+            await adminPage.locator("button.primary-button").click();
+            await expect(adminPage.locator("#app")).toContainText(
+                "Product updated successfully",
+            );
+        });
+
+        test("should create custom role with catalog (products-> delete) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.products.delete",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->products"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.cursor-pointer.icon-sort-right").nth(1),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await adminPage
+                .locator(".hidden > .flex.gap-2\\.5 > .icon-uncheckbox")
+                .first()
+                .click();
+            await adminPage
+                .getByRole("button", { name: "Select Action" })
+                .click();
+            await adminPage.getByRole("link", { name: "Delete" }).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
+        });
+
+          test("should create custom role with catalog (products -> copy) permission", async ({
+            adminPage,
+        }) => {
+            const aclManagement = new ACLManagement(adminPage);
+            await aclManagement.createRole("custom", [
+                "catalog.products.copy",
+            ]);
+            await aclManagement.createUser();
+            await aclManagement.verfiyAssignedRole(["catalog->products"]);
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("span.cursor-pointer.icon-sort-right").nth(1),
+            ).not.toBeVisible();
+            await expect(
+                adminPage.locator("button.primary-button"),
+            ).not.toBeVisible();
+            await adminPage.locator("span.icon-copy").nth(1).click();
+            await adminPage
+                .getByRole("button", { name: "Agree", exact: true })
+                .click();
+            await expect(adminPage.getByText("Product copied successfully").first()).toBeVisible();
         });
 
         test("should create custom role with catalog (categories) permission", async ({
@@ -428,7 +576,7 @@ test.describe("acl management", () => {
             ]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["settings->channels"]);
-           });
+        });
 
         test("should create custom role with settings (users) permission", async ({
             adminPage,
@@ -509,7 +657,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["settings->taxes"]);
         });
-        
+
         test("should create custom role with settings (data_transfer) permission", async ({
             adminPage,
         }) => {

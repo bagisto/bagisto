@@ -234,7 +234,6 @@ const ACL_Routes: Record<
             "admin/catalog/products",
             "admin/customers",
             "admin/cms",
-            "admin/marketing/promotions/catalog-rules",
             "admin/reporting/sales",
             "admin/settings/locales",
             "admin/configuration",
@@ -257,7 +256,6 @@ const ACL_Routes: Record<
             "admin/configuration",
             "admin/sales/orders",
             "admin/sales/transactions",
-            "admin/marketing/promotions/catalog-rules",
         ],
     },
 
@@ -275,7 +273,6 @@ const ACL_Routes: Record<
             "admin/configuration",
             "admin/sales/orders",
             "admin/sales/transactions",
-            "admin/marketing/promotions/catalog-rules",
             "admin/marketing/communications/email-templates",
         ],
     },
