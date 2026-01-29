@@ -176,7 +176,7 @@ class ProductController extends Controller
         Event::dispatch('catalog.product.update.after', $product);
 
         return response()->json([
-            'message' => __('admin::app.catalog.products.saved-inventory-message'),
+            'message' => trans('admin::app.catalog.products.saved-inventory-message'),
             'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty'),
         ]);
     }

@@ -7,7 +7,7 @@
 
     <div style="font-size: 20px; color: #242424; line-height: 30px; margin-bottom: 34px;">
         <div style="font-weight: bold; font-size: 20px; color: #242424; line-height: 30px; margin-bottom: 20px !important;">
-            {{ __('shop::app.emails.customers.gdpr.status-update.summary') }}
+            {{ trans('shop::app.emails.customers.gdpr.status-update.summary') }}
         </div>
     </div>
 
