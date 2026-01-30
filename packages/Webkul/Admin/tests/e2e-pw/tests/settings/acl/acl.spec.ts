@@ -400,9 +400,10 @@ test.describe("acl management", () => {
             await adminPage
                 .getByRole("link", { name: "Create Attributes" })
                 .click();
+            await adminPage.waitForLoadState("networkidle");
             await adminPage
                 .locator('input[name="admin_name"]')
-                .fill("test attribute");
+                .fill("attribute");
             await adminPage.locator('input[name="code"]').fill("admin123");
             await adminPage.locator('select[name="type"]').selectOption("text");
             await adminPage.locator("button.primary-button").click();
@@ -789,11 +790,7 @@ test.describe("acl management", () => {
                 slug: generateSlug(),
                 shortDescription: generateDescription(),
             };
-            await adminPage.waitForSelector(
-                'a.primary-button:has-text("Create Page")',
-                { state: "visible" },
-            );
-            await adminPage.click('a.primary-button:has-text("Create Page")');
+            await adminPage.waitForLoadState("networkidle");
             await adminPage.fillInTinymce("#content_ifr", cms.shortDescription);
             await adminPage.fill("#page_title", cms.name);
             await adminPage.click('label[for="channels_1"]');
@@ -819,6 +816,7 @@ test.describe("acl management", () => {
             await aclManagement.createRole("custom", ["cms.edit"]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["cms"]);
+            await adminPage.goto("admin/cms");
             await expect(
                 adminPage.locator('a.primary-button:has-text("Create Page")'),
             ).not.toBeVisible();
@@ -841,6 +839,7 @@ test.describe("acl management", () => {
             await aclManagement.createRole("custom", ["cms.delete"]);
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["cms"]);
+            await adminPage.goto("admin/cms");
             await expect(
                 adminPage.locator('a.primary-button:has-text("Create Page")'),
             ).not.toBeVisible();
@@ -1302,7 +1301,7 @@ test.describe("acl management", () => {
                 "marketing->communications->events",
             ]);
             await expect(
-                adminPage.locator("div.primary-button:visible"),
+                adminPage.locator("div.primary-button"),
             ).not.toBeVisible();
             await adminPage.waitForLoadState("networkidle");
             await expect(
