@@ -16,7 +16,7 @@ export const test = base.extend<AdminFixtures>({
         const authExists = fs.existsSync(ADMIN_AUTH_STATE_PATH);
 
         const context = await browser.newContext(
-            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {}
+            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {},
         );
 
         const page = await context.newPage();
@@ -55,7 +55,7 @@ export const test = base.extend<AdminFixtures>({
          */
         (page as AdminPage).fillInTinymce = async function (
             iframeSelector: string,
-            content: string
+            content: string,
         ) {
             await page.waitForSelector(iframeSelector);
             const iframe = page.frameLocator(iframeSelector);

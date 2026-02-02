@@ -1,6 +1,15 @@
 import { Page, expect } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
-import { generateEmail } from "../utils/faker";
+import {
+    generateFirstName,
+    generateLastName,
+    generateEmail,
+    randomElement,
+    generateName,
+    generateSlug,
+    generateDescription,
+    generateRandomDate,
+} from "../utils/faker";
 
 const ACL_Routes: Record<
     string,
@@ -259,6 +268,24 @@ const ACL_Routes: Record<
         ],
     },
 
+    "marketing->communications->event": {
+        allowed: "admin/marketing/communications/events",
+        sidebar: "/admin/marketing/communications/events",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/marketing/communications/email-templates",
+        ],
+    },
+
     "marketing->search_seo": {
         allowed: "admin/marketing/search-seo/url-rewrites",
         sidebar: "/admin/marketing/search-seo/url-rewrites",
@@ -397,7 +424,7 @@ const ACL_Routes: Record<
         ],
     },
 
-        "settings->data_transfer": {
+    "settings->data_transfer": {
         allowed: "admin/settings/data-transfer/imports",
         sidebar: "/admin/settings/data-transfer/imports",
         notAllowed: [
@@ -575,5 +602,201 @@ export class ACLManagement {
                 sidebar.locator(`a[href*="${href}"]`).first(),
             ).toBeVisible();
         }
+    }
+
+    async orderCreateVerify() {
+        await expect(this.locators.createBtn).toBeVisible();
+        await this.locators.createBtn.click();
+        await expect(this.locators.saveBtn).toBeVisible();
+    }
+
+    async productEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.editBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.successMSG.first()).toBeVisible();
+    }
+
+    async productCopyVerify() {
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.viewBtn.nth(1)).not.toBeVisible();
+        await this.locators.copyBtn.nth(1).click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.copySuccess.first()).toBeVisible();
+    }
+
+    async productDeleteVerify() {
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.viewBtn.nth(1)).not.toBeVisible();
+        await this.locators.selectRowBtn.nth(2).click();
+        await this.locators.selectAction.click();
+        await this.locators.selectDelete.click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.productDeleteSuccess.first()).toBeVisible();
+    }
+
+    async categoryEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.saveCategoryBtn.click();
+        await expect(this.locators.categorySuccess.first()).toBeVisible();
+    }
+
+    async categoryDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.selectRowBtn.nth(1).click();
+        await this.locators.selectAction.click();
+        await this.locators.deleteBtn.click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.categoryDeleteSuccess.first()).toBeVisible();
+    }
+
+    async attributeCreateVerify() {
+        await expect(this.locators.createBtn).toBeVisible();
+        await expect(this.locators.editBtn.first()).not.toBeVisible();
+        await this.locators.createBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.fillname.fill("Test Attribute");
+        await this.locators.fillCode.fill("testattribute");
+        await this.locators.selectTypeAttribute.selectOption("text");
+        await this.locators.saveAttributeBtn.click();
+        await expect(this.locators.attributeSuccess.first()).toBeVisible();
+    }
+
+    async attributeEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.saveAttributeBtn.click();
+        await expect(
+            this.locators.attributeUpdateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async attributeDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(
+            this.locators.attributeDeleteSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async familyCreateVerify() {
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.locators.editBtn.first()).not.toBeVisible();
+        await this.locators.createBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.familyName.fill("Test Family");
+        await this.locators.fillCode.fill("family");
+        await this.locators.createBtn.click();
+        await expect(this.locators.familySuccess.first()).toBeVisible();
+    }
+
+    async familyEditVerify() {
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.familyUpdateSuccess.first()).toBeVisible();
+    }
+
+    async familyDeleteVerify() {
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.editBtn.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.familyDeleteSuccess.first()).toBeVisible();
+    }
+
+    async customerCreateVerify() {
+        await this.page.goto("admin/customers");
+        await this.locators.createBtn.click();
+        await this.locators.customerfirstname.fill(generateFirstName());
+        await this.locators.customerlastname.fill(generateLastName());
+        await this.locators.customeremail.fill(generateEmail());
+        await this.locators.customergender.selectOption(
+            randomElement(["Male", "Female", "Other"]),
+        );
+        await this.locators.customerNumber.fill("1234567890");
+        await this.locators.customerNumber.press("Enter");
+        await expect(
+            this.locators.customercreatedsuccess.first(),
+        ).toBeVisible();
+    }
+
+    async customerEditVerify() {
+        await this.page.goto("admin/customers");
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.viewIcon.first()).toBeVisible();
+    }
+
+    async customerDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.selectRowBtn.first().click();
+        await this.locators.selectAction.click();
+        await this.locators.deleteBtn.click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.customerDeleteSuccess.first()).toBeVisible();
+    }
+
+    async groupCreateVerify() {
+        await this.locators.createBtn.click();
+        await this.locators.fillname.fill(generateName());
+        await this.locators.fillCode.fill("code");
+        await this.locators.createBtn.nth(1).click();
+        await expect(this.locators.successGroupMSG.first()).toBeVisible();
+    }
+
+    async groupEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.nth(1).click();
+        await expect(this.locators.successGroupMSG.first()).toBeVisible();
+    }
+
+    async groupDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).toBeVisible();
+        await this.locators.deleteBtn.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.successGroupDeleteMSG.first()).toBeVisible();
+    }
+
+    async cmsCreateVerify() {
+        await this.locators.pagetitle.fill(generateName());
+        await this.locators.urlKey.fill(generateSlug());
+        await this.locators.metaTitle.fill(generateName());
+        await this.locators.metaKeywords.fill("keywords");
+        await this.locators.metaDescription.fill(generateDescription());
+        await this.locators.status.first().click();
+        await this.locators.createBtn.click();
+        await expect(this.locators.successPageCreate).toBeVisible();
+    }
+
+    async cmsEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.successPageUpdate).toBeVisible();
+    }
+
+    async cmsDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.successPageDelete).toBeVisible();
     }
 }
