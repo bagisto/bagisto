@@ -1,5 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
+
 import {
     generateFirstName,
     generateLastName,
@@ -9,7 +10,9 @@ import {
     generateSlug,
     generateDescription,
     generateRandomDate,
+    generateHostname,
 } from "../utils/faker";
+import { fillInTinymce } from "../utils/tinymce";
 
 const ACL_Routes: Record<
     string,
@@ -251,6 +254,40 @@ const ACL_Routes: Record<
         ],
     },
 
+    "marketing->promotions->catalog_rules": {
+        allowed: "admin/marketing/promotions/catalog-rules",
+        sidebar: "/admin/marketing/promotions/catalog-rules",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/marketing/promotions/cart-rules",
+        ],
+    },
+
+    "marketing->promotions->cart_rules": {
+        allowed: "admin/marketing/promotions/cart-rules",
+        sidebar: "/admin/marketing/promotions/cart-rules",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/marketing/promotions/catalog-rules",
+        ],
+    },
+
     "marketing->communications": {
         allowed: "admin/marketing/communications/email-templates",
         sidebar: "/admin/marketing/communications/email-templates",
@@ -265,6 +302,25 @@ const ACL_Routes: Record<
             "admin/configuration",
             "admin/sales/orders",
             "admin/sales/transactions",
+        ],
+    },
+
+    "marketing->communications->email": {
+        allowed: "admin/marketing/communications/email-templates",
+        sidebar: "/admin/marketing/communications/email-templates",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/marketing/promotions/cart-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/marketing/communications/events",
         ],
     },
 
@@ -286,6 +342,25 @@ const ACL_Routes: Record<
         ],
     },
 
+    "marketing->communications->campaign": {
+        allowed: "admin/marketing/communications/campaigns",
+        sidebar: "/admin/marketing/communications/campaigns",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/marketing/communications/email-templates",
+            "admin/marketing/communications/events",
+        ],
+    },
+
     "marketing->search_seo": {
         allowed: "admin/marketing/search-seo/url-rewrites",
         sidebar: "/admin/marketing/search-seo/url-rewrites",
@@ -301,6 +376,78 @@ const ACL_Routes: Record<
             "admin/sales/orders",
             "admin/sales/transactions",
             "admin/marketing/communications/email-templates",
+        ],
+    },
+
+    "marketing->search_seo->url_rewrites": {
+        allowed: "admin/marketing/search-seo/url-rewrites",
+        sidebar: "/admin/marketing/search-seo/url-rewrites",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/marketing/search-seo/search-terms",
+            "admin/marketing/search-seo/search-synonyms",
+            "admin/marketing/search-seo/sitemaps",
+        ],
+    },
+
+    "marketing->search_seo->search_terms": {
+        allowed: "admin/marketing/search-seo/search-terms",
+        sidebar: "/admin/marketing/search-seo/search-terms",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/marketing/search-seo/url-rewrites",
+            "admin/marketing/search-seo/search-synonyms",
+            "admin/marketing/search-seo/sitemaps",
+        ],
+    },
+
+    "marketing->search_seo->search_synonyms": {
+        allowed: "admin/marketing/search-seo/search-synonyms",
+        sidebar: "/admin/marketing/search-seo/search-synonyms",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/marketing/search-seo/url-rewrites",
+            "admin/marketing/search-seo/search-terms",
+            "admin/marketing/search-seo/sitemaps",
+        ],
+    },
+
+    "marketing->search_seo->sitemaps": {
+        allowed: "admin/marketing/search-seo/sitemaps",
+        sidebar: "/admin/marketing/search-seo/sitemaps",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/marketing/search-seo/url-rewrites",
+            "admin/marketing/search-seo/search-terms",
+            "admin/marketing/search-seo/search-synonyms",
         ],
     },
 
@@ -798,5 +945,303 @@ export class ACLManagement {
         await this.locators.deleteIcon.first().click();
         await this.locators.agreeBtn.click();
         await expect(this.locators.successPageDelete).toBeVisible();
+    }
+
+    async cartRuleCreateVerify() {
+        await this.locators.createBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.ruleName.fill(generateName());
+        await this.locators.ruleDescription.fill(generateDescription());
+        await this.locators.addConditionBtn.click();
+        await this.locators.selectCondition.selectOption("product|name");
+        await this.locators.conditionName.fill(generateName());
+        await this.locators.discountAmmount.fill("10");
+        await this.locators.sortOrder.fill("1");
+        await this.locators.channelSelect.first().click();
+        await expect(this.locators.channelSelect.first()).toBeChecked();
+        await this.locators.customerGroupSelect.first().click();
+        await expect(this.locators.customerGroupSelect.first()).toBeChecked();
+        await this.locators.statusToggle.click();
+        await expect(this.locators.toggleInput).toBeChecked();
+        await this.locators.createBtn.click();
+        await expect(this.locators.cartRuleSuccess.first()).toBeVisible();
+    }
+
+    async cartRuleCopyVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.copyBtn.first().click();
+        await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
+    }
+
+    async cartRuleEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.copyBtn.first()).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.cartRuleEditSuccess.first()).toBeVisible();
+    }
+
+    async cartRuleDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.copyBtn.first()).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.cartRuleDeleteSuccess.first()).toBeVisible();
+    }
+
+    async catalogRuleCreateVerify() {
+        await this.locators.createBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.ruleName.fill(generateName());
+        await this.locators.ruleDescription.fill(generateDescription());
+        await this.locators.addConditionBtn.click();
+        await this.locators.selectCondition.selectOption("product|name");
+        await this.locators.conditionName.fill(generateName());
+        await this.locators.discountAmmount.fill("10");
+        await this.locators.sortOrder.fill("1");
+        await this.locators.channelSelect.first().click();
+        await expect(this.locators.channelSelect.first()).toBeChecked();
+        await this.locators.customerGroupSelect.first().click();
+        await expect(this.locators.customerGroupSelect.first()).toBeChecked();
+        await this.locators.statusToggle.click();
+        await expect(this.locators.toggleInput).toBeChecked();
+        await this.locators.createBtn.click();
+        await expect(
+            this.locators.catalogRuleCreateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async catalogRuleEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(
+            this.locators.catalogRuleUpdateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async catalogRuleDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(
+            this.locators.catalogRuleDeleteSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async communicationEmailTemplateCreateVerify() {
+        await this.locators.createBtn.click();
+        const name = generateName();
+        const description = generateDescription();
+        await this.locators.name.fill(name);
+        await fillInTinymce(this.page, "#content_ifr", description);
+        await this.locators.emailStatusSeletct.selectOption("active");
+        await this.locators.createBtn.click();
+        await expect(this.locators.emailSuccessMSG.first()).toBeVisible();
+    }
+
+    async communicationEmailTemplateEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.emailUpdateSuccessMSG.first()).toBeVisible();
+    }
+
+    async communicationEmailTemplateDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await this.locators.createBtn.click();
+        await expect(this.locators.emailDeleteSuccessMSG.first()).toBeVisible();
+    }
+
+    async eventCreateVerify() {
+        await this.locators.createBtn.click();
+        await this.page.hover('input[name="name"]');
+        const inputs = await this.page.$$(
+            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible',
+        );
+
+        for (let input of inputs) {
+            await input.fill(generateName());
+        }
+        await this.locators.date.fill(generateRandomDate());
+        await this.locators.createBtn.nth(1).click();
+        await expect(this.locators.eventCreateSuccess.first()).toBeVisible();
+    }
+
+    async eventEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.nth(1).click();
+        await expect(this.locators.eventUpdateSuccess.first()).toBeVisible();
+    }
+
+    async eventDeleteVerify() {
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await expect(this.locators.createBtn.nth(1)).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.eventDeleteSuccess.first()).toBeVisible();
+    }
+
+    async campaignCreateVerify() {
+        await this.locators.createBtn.click();
+        await this.locators.name.fill(generateName());
+        await this.locators.subject.fill(generateName());
+        await this.locators.event.selectOption({ label: "Birthday" });
+        await this.locators.emailTemplate.selectOption({
+            label: "Mystic Element",
+        });
+        await this.locators.selectChannel.selectOption("1");
+        await this.locators.customerGroup.selectOption("1");
+        await this.locators.campaignStatus.click();
+        await this.locators.createBtn.click();
+        await expect(this.locators.campaignCreateSuccess.first()).toBeVisible();
+    }
+
+    async campaignEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.campaignUpdateSuccess.first()).toBeVisible();
+    }
+
+    async campaignDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.campaignDeleteSuccess.first()).toBeVisible();
+    }
+
+    async urlRewriteCreateVerify() {
+        const seo = {
+            url: generateHostname(),
+            product: "product",
+        };
+        await this.locators.createBtn.click();
+        await this.locators.entityType.selectOption(seo.product);
+        await this.locators.requestPath.fill(seo.url);
+        await this.locators.targetPath.fill(seo.url);
+        await this.locators.redirectPath.selectOption("301");
+        await this.locators.locale.selectOption("en");
+        await this.locators.createBtn.click();
+        await expect(this.locators.saveRedirectSuccess).toBeVisible();
+    }
+
+    async urlRewriteEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.click();
+        await expect(this.locators.saveRedirectUpdatedSuccess).toBeVisible();
+    }
+
+    async urlRewriteDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.deleteRedirectSuccess).toBeVisible();
+    }
+
+    async searchTermsCreateVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.createBtn.click();
+        await this.locators.searchQuery.fill(generateName());
+        await this.locators.redirectURL.fill("1");
+        await this.locators.createBtn.click();
+        await expect(
+            this.locators.searchTermCreateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async searchTermsEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.nth(1).click();
+        await expect(
+            this.locators.searchTermUpdateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async searchTermsDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(
+            this.locators.searchTermDeleteSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async searchSynonymsCreateVerify() {
+        await this.locators.createBtn.click();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.name.fill(generateName());
+        await this.locators.terms.fill("test, synonym");
+        await this.locators.createBtn.click();
+        await expect(
+            this.locators.searchSynonymCreateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async searchSynonymsEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.nth(1).click();
+        await expect(
+            this.locators.searchSynonymUpdateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async searchSynonymsDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(
+            this.locators.searchSynonymDeleteSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async sitemapCreateVerify() {
+        await this.locators.createBtn.click();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
+        await this.locators.fileName.fill("sitemap.xml");
+        await this.locators.path.fill("/sitemapxml/test/example/");
+        await expect(this.locators.sitemapCreateSuccess.first()).toBeVisible();
+    }
+
+    async sitemapEditVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
+        await this.locators.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.createBtn.nth(1).click();
+        await expect(this.locators.sitemapUpdateSuccess.first()).toBeVisible();
+    }
+
+    async sitemapDeleteVerify() {
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.sitemapDeleteSuccess.first()).toBeVisible();
     }
 }
