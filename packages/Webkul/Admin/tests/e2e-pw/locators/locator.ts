@@ -131,14 +131,71 @@ export class WebLocators {
     readonly searchTermUpdateSuccess: Locator;
     readonly searchTermDeleteSuccess: Locator;
     readonly terms: Locator;
-    readonly searchSynonymCreateSuccess: Locator;   
-    readonly searchSynonymUpdateSuccess: Locator;   
+    readonly searchSynonymCreateSuccess: Locator;
+    readonly searchSynonymUpdateSuccess: Locator;
     readonly searchSynonymDeleteSuccess: Locator;
     readonly fileName: Locator;
     readonly path: Locator;
     readonly sitemapCreateSuccess: Locator;
     readonly sitemapUpdateSuccess: Locator;
     readonly sitemapDeleteSuccess: Locator;
+    readonly direction: Locator;
+    readonly successLocaleCreate: Locator;
+    readonly successLocaleUpdate: Locator;
+    readonly successLocaleDelete: Locator;
+    readonly successCurrencyCreate: Locator;
+    readonly successCurrencyUpdate: Locator;
+    readonly successCurrencyDelete: Locator;
+    readonly targetCurrency: Locator;
+    readonly rate: Locator;
+    readonly successExchangeRateCreate: Locator;
+    readonly successExchangeRateUpdate: Locator;
+    readonly successExchangeRateDelete: Locator;
+    readonly description: Locator;
+    readonly contactNumber: Locator;
+    readonly contactName: Locator;
+    readonly email: Locator;
+    readonly fax: Locator;
+    readonly city: Locator;
+    readonly street: Locator;
+    readonly postcode: Locator;
+    readonly country: Locator;
+    readonly state: Locator;
+    readonly successInventorySourceCreate: Locator;
+    readonly successInventorySourceUpdate: Locator;
+    readonly successInventorySourceDelete: Locator;
+    readonly inventoryToggle: Locator;
+    readonly categoryID: Locator;
+    readonly hostname: Locator;
+    readonly selectLocale: Locator;
+    readonly defaultLocaleID: Locator;
+    readonly selectCurrency: Locator;
+    readonly baseCurrencyID: Locator;
+    readonly metaTitleChannel: Locator;
+    readonly seoKeywords: Locator;
+    readonly channleCreateSuccess: Locator;
+    readonly metaDescriptionChannel: Locator;
+    readonly channlUpdateSuccess: Locator;
+    readonly channelDeleteSuccess: Locator;
+    readonly successUserUpdate: Locator;
+    readonly successUserDelete: Locator;
+    readonly successUpdateRole: Locator;
+    readonly successDeleteRole: Locator;
+    readonly theme: Locator;
+    readonly themeCreateSuccess: Locator;
+    readonly successEditTheme: Locator;
+    readonly successDeleteTheme: Locator;
+    readonly athorization: Locator;
+    readonly successCreateTaxRate: Locator;
+    readonly successUpdateTaxRate: Locator;
+    readonly identifier: Locator;
+    readonly taxRate: Locator;
+    readonly successDeleteTaxRate: Locator;
+    readonly selectTaxRate: Locator;
+    readonly successCreateTaxCategory: Locator;
+    readonly successUpdateTaxCategory: Locator;
+    readonly successDeleteTaxCategory: Locator;
+    readonly selectCountry: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -154,7 +211,7 @@ export class WebLocators {
             'button.primary-button:visible:has-text("Save Role")',
         );
         this.successRole = page.getByText("Roles Created Successfully");
-        this.iconEdit = page.locator(".icon-edit").first();
+        this.iconEdit = page.locator(".icon-edit");
         this.successEditRole = page
             .locator("#app")
             .getByText("Roles is updated successfully");
@@ -354,17 +411,17 @@ export class WebLocators {
             "Search Term deleted successfully",
         );
         this.terms = page.getByRole("textbox", { name: "Terms" });
-        this.searchSynonymCreateSuccess= page.getByText(
+        this.searchSynonymCreateSuccess = page.getByText(
             "Search Synonym created successfully",
         );
-        this.searchSynonymUpdateSuccess= page.getByText(
+        this.searchSynonymUpdateSuccess = page.getByText(
             "Search Synonym updated successfully",
         );
-        this.searchSynonymDeleteSuccess= page.getByText(
+        this.searchSynonymDeleteSuccess = page.getByText(
             "Search Synonym deleted successfully",
         );
         this.fileName = page.locator('input[name="file_name"]');
-        this.path= page.locator('input[name="path"]');
+        this.path = page.locator('input[name="path"]');
         this.sitemapCreateSuccess = page.getByText(
             "Sitemap created successfully",
         );
@@ -374,5 +431,110 @@ export class WebLocators {
         this.sitemapDeleteSuccess = page.getByText(
             "Sitemap deleted successfully",
         );
+        this.direction = page.locator('select[name="direction"]');
+        this.successLocaleCreate = page.getByText(
+            "Locale created successfully",
+        );
+        this.successLocaleUpdate = page.getByText(
+            "Locale updated successfully",
+        );
+        this.successLocaleDelete = page.getByText(
+            "Locale deleted successfully",
+        );
+        this.successCurrencyCreate = page.getByText(
+            "Currency created successfully",
+        );
+        this.successCurrencyUpdate = page.getByText(
+            "Currency updated successfully",
+        );
+        this.successCurrencyDelete = page.getByText(
+            "Currency deleted successfully",
+        );
+        this.targetCurrency = page.locator('select[name="target_currency"]');
+        this.rate = page.locator('input[name="rate"]');
+        this.successExchangeRateCreate = page.getByText(
+            "Exchange Rate created successfully",
+        );
+        this.successExchangeRateUpdate = page.getByText(
+            "Exchange Rate updated successfully",
+        );
+        this.successExchangeRateDelete = page.getByText(
+            "Exchange Rate deleted successfully",
+        );
+        this.description = page.getByRole("textbox", { name: "Description" });
+        this.contactNumber = page.getByRole("textbox", {
+            name: "Contact Number",
+        });
+        this.contactName = page.locator("#contact_name");
+        this.email = page.getByRole("textbox", { name: "Email" });
+        this.fax = page.getByRole("textbox", { name: "Fax" });
+        this.city = page.getByRole("textbox", { name: "City" });
+        this.street = page.getByRole("textbox", { name: "Street" });
+        this.postcode = page.getByRole("textbox", { name: "Postcode" });
+        this.country = page.locator("#country");
+        this.state = page.locator("#state");
+        this.successInventorySourceCreate = page.getByText(
+            "Inventory Source Created Successfully",
+        );
+        this.successInventorySourceUpdate = page.getByText(
+            "Inventory Sources Updated Successfully",
+        );
+        this.successInventorySourceDelete = page.getByText(
+            "Inventory Sources Deleted Successfully",
+        );
+        this.inventoryToggle = page.locator('label[for="inventory_sources_1"]');
+        this.categoryID = page.locator("#root_category_id");
+        this.hostname = page.locator("#hostname");
+        this.selectLocale = page.locator('label[for="locales_1"]');
+        this.defaultLocaleID = page.locator("#default_locale_id");
+        this.selectCurrency = page.locator('label[for="currencies_1"]');
+        this.baseCurrencyID = page.locator("#base_currency_id");
+        this.metaTitleChannel = page.locator("#meta_title");
+        this.metaDescriptionChannel = page.locator("#meta_description");
+        this.seoKeywords = page.locator("#seo_keywords");
+        this.channleCreateSuccess = page.getByText(
+            "Channel created successfully.",
+        );
+        this.channlUpdateSuccess = page.getByText(
+            "Update Channel Successfully",
+        );
+        this.channelDeleteSuccess = page.getByText(
+            "Channel deleted successfully.",
+        );
+        this.successUserUpdate = page.getByText("User updated successfully.");
+        this.successUserDelete = page.getByText("User deleted successfully.");
+        this.successUpdateRole = page.getByText(
+            "Roles is updated successfully",
+        );
+        this.successDeleteRole = page.getByText(
+            "Roles is deleted successfully",
+        );
+        this.theme = page.locator('select[name="theme_code"]');
+        this.themeCreateSuccess = page.getByText("Theme created successfully");
+        this.successEditTheme = page.getByText("Theme updated successfully");
+        this.successDeleteTheme = page.getByText("Theme deleted successfully");
+        this.athorization = page.getByText("401");
+        this.successCreateTaxRate = page.getByText(
+            "Tax Rate created successfully.",
+        );
+        this.identifier = page.locator('input[name="identifier"]');
+        this.taxRate = page.locator('input[name="tax_rate"]');
+        this.successUpdateTaxRate = page
+            .locator("#app")
+            .getByText("Tax Rate Update Successfully");
+        this.successDeleteTaxRate = page
+            .locator("#app")
+            .getByText("Tax Rate delete successfully");
+        this.selectTaxRate = page.locator('select[name="taxrates[]"]');
+        this.successCreateTaxCategory = page.getByText(
+            "New Tax Category created",
+        );
+        this.successUpdateTaxCategory = page.getByText(
+            "Tax Category Successfully Updated.",
+        );
+        this.successDeleteTaxCategory = page.getByText(
+            "Tax Rates Assigned Categories cannot be deleted.",
+        );
+        this.selectCountry = page.locator('select[name="country"]');
     }
 }

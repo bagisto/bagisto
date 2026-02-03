@@ -1,10 +1,5 @@
-import { test, expect } from "../../../setup";
+import { test } from "../../../setup";
 import { ACLManagement } from "../../../pages/acl";
-import {
-    generateName,
-    generateDescription,
-    generateRandomDate,
-} from "../../../utils/faker";
 
 test.describe("marketing acl", () => {
     test("should create custom role with marketing permission", async ({

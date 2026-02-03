@@ -28,6 +28,7 @@ test.describe("cms acl", () => {
             slug: generateSlug(),
             shortDescription: generateDescription(),
         };
+        await adminPage.goto("admin/cms");
         await adminPage.click('a.primary-button:has-text("Create Page")');
         await adminPage.waitForLoadState("networkidle");
         await adminPage.fillInTinymce("#content_ifr", cms.shortDescription);

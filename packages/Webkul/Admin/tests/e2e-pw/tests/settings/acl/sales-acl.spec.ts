@@ -40,7 +40,7 @@ test.describe("acl management", () => {
                 "sales.invoices",
             ]);
             await aclManagement.createUser();
-            await aclManagement.verfiyAssignedRole(["sales->order"]);
+            await aclManagement.verfiyAssignedRole(["sales->orders"]);
         });
 
         test("should create custom role with sales (order-> create) permission", async ({
@@ -49,7 +49,7 @@ test.describe("acl management", () => {
             const aclManagement = new ACLManagement(adminPage);
             await aclManagement.createRole("custom", ["sales.orders.create"]);
             await aclManagement.createUser();
-            await aclManagement.verfiyAssignedRole(["sales->order"]);
+            await aclManagement.verfiyAssignedRole(["sales->orders"]);
             await aclManagement.orderCreateVerify();
         });
 
