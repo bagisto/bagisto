@@ -972,7 +972,7 @@ export class ACLManagement {
 
     async groupCreateVerify() {
         await this.locators.createBtn.click();
-        await this.locators.fillname.fill(generateName());
+        await this.locators.name.fill(generateName());
         await this.locators.fillCode.fill("code");
         await this.locators.createBtn.nth(1).click();
         await expect(this.locators.successGroupMSG.first()).toBeVisible();
@@ -982,14 +982,14 @@ export class ACLManagement {
         await expect(this.locators.createBtn).not.toBeVisible();
         await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.successGroupMSG.first()).toBeVisible();
+        await this.locators.createBtn.click();
+        await expect(this.locators.successUpdateMSG.first()).toBeVisible();
     }
 
     async groupDeleteVerify() {
         await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).toBeVisible();
-        await this.locators.deleteBtn.first().click();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
         await this.locators.agreeBtn.click();
         await expect(this.locators.successGroupDeleteMSG.first()).toBeVisible();
     }
@@ -1172,10 +1172,8 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.locators.name.fill(generateName());
         await this.locators.subject.fill(generateName());
-        await this.locators.event.selectOption({ label: "Birthday" });
-        await this.locators.emailTemplate.selectOption({
-            label: "Mystic Element",
-        });
+        await this.locators.event.selectOption("1");
+        await this.locators.emailTemplate.selectOption("1")
         await this.locators.selectChannel.selectOption("1");
         await this.locators.customerGroup.selectOption("1");
         await this.locators.campaignStatus.click();
@@ -1210,7 +1208,7 @@ export class ACLManagement {
         await this.locators.targetPath.fill(seo.url);
         await this.locators.redirectPath.selectOption("301");
         await this.locators.locale.selectOption("en");
-        await this.locators.createBtn.click();
+        await this.locators.createBtn.nth(1).click();
         await expect(this.locators.saveRedirectSuccess).toBeVisible();
     }
 
@@ -1231,12 +1229,14 @@ export class ACLManagement {
     }
 
     async searchTermsCreateVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
         await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.createBtn.click();
         await this.locators.searchQuery.fill(generateName());
-        await this.locators.redirectURL.fill("1");
-        await this.locators.createBtn.click();
+        await this.locators.redirectURL.fill("https://example.com");
+        await this.locators.selectChannel.selectOption("1");
+        await this.locators.locale.selectOption("en");
+        await this.locators.createBtn.nth(1).click();
         await expect(
             this.locators.searchTermCreateSuccess.first(),
         ).toBeVisible();
@@ -1267,7 +1267,7 @@ export class ACLManagement {
         await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.name.fill(generateName());
         await this.locators.terms.fill("test, synonym");
-        await this.locators.createBtn.click();
+        await this.locators.createBtn.nth(1).click();
         await expect(
             this.locators.searchSynonymCreateSuccess.first(),
         ).toBeVisible();
@@ -1299,6 +1299,7 @@ export class ACLManagement {
         await expect(this.locators.deleteIcon.first()).not.toBeVisible();
         await this.locators.fileName.fill("sitemap.xml");
         await this.locators.path.fill("/sitemapxml/test/example/");
+        await this.locators.createBtn.nth(1).click();
         await expect(this.locators.sitemapCreateSuccess.first()).toBeVisible();
     }
 

@@ -238,7 +238,7 @@ export class WebLocators {
         this.customergender = page.locator('select[name="gender"]');
         this.customerNumber = page.locator('input[name="phone"]');
         this.customercreatedsuccess = page.getByText(
-            "Customer created successfully.",
+            "Customer created successfully",
         );
         this.viewIcon = page.locator("a.icon-sort-right.cursor-pointer");
         this.customerDeleteSuccess = page.getByText(
@@ -345,13 +345,13 @@ export class WebLocators {
         this.redirectURL = page.getByRole("textbox", { name: "Redirect Url" });
         this.locale = page.locator('select[name="locale"]');
         this.searchTermCreateSuccess = page.getByText(
-            "Search Term created successfully.",
+            "Search Term created successfully",
         );
         this.searchTermUpdateSuccess = page.getByText(
-            "Search Term updated successfully.",
+            "Search Term updated successfully",
         );
         this.searchTermDeleteSuccess = page.getByText(
-            "Search Term deleted successfully.",
+            "Search Term deleted successfully",
         );
         this.terms = page.getByRole("textbox", { name: "Terms" });
         this.searchSynonymCreateSuccess= page.getByText(

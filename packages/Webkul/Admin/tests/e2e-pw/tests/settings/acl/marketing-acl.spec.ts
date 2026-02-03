@@ -236,7 +236,6 @@ test.describe("marketing acl", () => {
         await aclManagement.verfiyAssignedRole([
             "marketing->communications->campaign",
         ]);
-        await adminPage.goto("admin/marketing/communications/campaigns");
         await aclManagement.campaignCreateVerify();
     });
 

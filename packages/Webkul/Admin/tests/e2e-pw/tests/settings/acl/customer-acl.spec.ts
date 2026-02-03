@@ -36,6 +36,7 @@ test.describe("customers acl", () => {
         ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["customers->customers"]);
+        await adminPage.goto("admin/customers");
         await aclManagement.customerCreateVerify();
     });
 
@@ -83,6 +84,7 @@ test.describe("customers acl", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["customers.groups.create"]);
         await aclManagement.createUser();
+         await aclManagement.verfiyAssignedRole(["customers->groups"]);;
         await aclManagement.groupCreateVerify();
     });
 
