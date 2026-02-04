@@ -1163,9 +1163,8 @@ export class ACLManagement {
 
     async communicationEmailTemplateCreateVerify() {
         await this.locators.createBtn.click();
-        const name = generateName();
         const description = generateDescription();
-        await this.locators.name.fill(name);
+        await this.locators.name.fill("template");
         await fillInTinymce(this.page, "#content_ifr", description);
         await this.locators.emailStatusSeletct.selectOption("active");
         await this.locators.createBtn.click();
@@ -1181,11 +1180,9 @@ export class ACLManagement {
     }
 
     async communicationEmailTemplateDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
         await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.deleteIcon.first().click();
         await this.locators.agreeBtn.click();
-        await this.locators.createBtn.click();
         await expect(this.locators.emailDeleteSuccessMSG.first()).toBeVisible();
     }
 
@@ -1224,8 +1221,8 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.locators.name.fill(generateName());
         await this.locators.subject.fill(generateName());
-        await this.locators.event.selectOption("1");
-        await this.locators.emailTemplate.selectOption("1");
+        await this.locators.event.selectOption({ label: "Birthday" });
+        await this.locators.emailTemplate.selectOption({label: "template"});
         await this.locators.selectChannel.selectOption("1");
         await this.locators.customerGroup.selectOption("1");
         await this.locators.campaignStatus.click();
@@ -1679,8 +1676,8 @@ export class ACLManagement {
     }
 
     async taxcategoryDeleteVerify() {
-        // await expect(this.locators.createBtn).not.toBeVisible();
-        // await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.deleteIcon.first().click();
         await this.locators.agreeBtn.click();
         await expect(

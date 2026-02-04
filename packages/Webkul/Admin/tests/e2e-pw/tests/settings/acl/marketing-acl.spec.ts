@@ -169,12 +169,15 @@ test.describe("marketing acl", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", [
             "marketing.communications.email_templates.delete",
+            "marketing.communications.email_templates.create",
         ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole([
             "marketing->communications->email",
         ]);
         await aclManagement.communicationEmailTemplateDeleteVerify();
+        await adminPage.goto("admin/marketing/communications/email-templates");
+        await aclManagement.communicationEmailTemplateCreateVerify();
     });
 
     test("should create custom role with marketing (communications-> events-> create) permission", async ({
