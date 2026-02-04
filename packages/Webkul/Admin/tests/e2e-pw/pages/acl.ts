@@ -525,7 +525,7 @@ const ACL_Routes: Record<
 
     "reporting->products": {
         allowed: "admin/reporting/products",
-        sidebar: "/admin/reporting/products`",
+        sidebar: "/admin/reporting/products",
         notAllowed: [
             "admin/dashboard",
             "admin/catalog/products",
@@ -1015,7 +1015,7 @@ export class ACLManagement {
 
     async customerDeleteVerify() {
         await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.selectRowBtn.first().click();
+        await this.locators.selectRowBtn.nth(1).click();
         await this.locators.selectAction.click();
         await this.locators.deleteBtn.click();
         await this.locators.agreeBtn.click();
