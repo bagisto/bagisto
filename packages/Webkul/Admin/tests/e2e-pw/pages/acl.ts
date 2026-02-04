@@ -1219,6 +1219,7 @@ export class ACLManagement {
 
     async campaignCreateVerify() {
         await this.locators.createBtn.click();
+        await this.page.waitForLoadState("networkidle");
         await this.locators.name.fill(generateName());
         await this.locators.subject.fill(generateName());
         await this.locators.event.selectOption({ label: "Birthday" });
