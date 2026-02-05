@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'response' => [
+        'provide-credentials' => 'कृपया मान्य PhonePe क्रेडेंशियल प्रदान करें।',
+        'cart-not-found' => 'कोई सक्रिय कार्ट नहीं मिला। कृपया भुगतान के लिए आगे बढ़ने से पहले अपनी कार्ट में आइटम जोड़ें।',
+        'phonepe-payment-reference-missing' => 'PhonePe भुगतान संदर्भ गायब है।',
+        'phonepe-payment-pending' => 'आपका PhonePe भुगतान अभी भी लंबित है। कृपया इसे पूरा करें या एक पल प्रतीक्षा करें और फिर से जांचें।',
+        'phonepe-payment-failed' => 'आपका PhonePe भुगतान विफल रहा है। कृपया पुनः प्रयास करें।',
+        'invalid-transaction' => 'अमान्य लेनदेन। कृपया पुनः प्रयास करें।',
+    ],
+];
