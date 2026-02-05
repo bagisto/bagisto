@@ -63,7 +63,7 @@ class PhonePeController extends Controller
      */
     public function callback()
     {
-        $merchantOrderId = request()->input('orderId');
+        $merchantOrderId = request()->input('merchantOrderId');
 
         if (! $merchantOrderId) {
             session()->flash('error', trans('phonepe::app.response.phonepe-payment-reference-missing'));
@@ -71,93 +71,101 @@ class PhonePeController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        /**
-         * Check payment status with PhonePe API using the merchant order ID received in the callback request.
-         */
-        $response = $this->phonePe->checkPaymentStatus($merchantOrderId);
+        try {
+            /**
+             * Check payment status with PhonePe API using the merchant order ID received in the callback request.
+             */
+            $response = $this->phonePe->checkPaymentStatus($merchantOrderId);
 
-        $state = strtoupper($response['data']['state'] ?? '');
+            $state = strtoupper($response['data']['state'] ?? '');
 
-        if ($state === 'PENDING') {
-            session()->flash('info', trans('phonepe::app.response.phonepe-payment-pending'));
-            
-            session()->put('phonepe.pending_order_id', $merchantOrderId);
+            if ($state === 'PENDING') {
+                session()->flash('info', trans('phonepe::app.response.phonepe-payment-pending'));
+                
+                session()->put('phonepe.pending_order_id', $merchantOrderId);
 
-            return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
-        }
+                return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+            }
 
-        if ($state === 'FAILED') {
-            session()->flash('warning', trans('phonepe::app.response.phonepe-payment-failed'));
+            if ($state === 'FAILED') {
+                session()->flash('warning', trans('phonepe::app.response.phonepe-payment-failed'));
 
-            return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
-        }
-
-        $cached = Cache::get($this->phonePe->cacheKey($merchantOrderId));
-        $cartId = $cached['cart_id'] ?? null;
-
-        if (! $cartId) {
-            session()->flash('info', trans('phonepe::app.response.cart-not-found'));
-
-            return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
-        }
-
-        $cart = $this->cartRepository->findOrFail($cartId);
- 
-        if (! $cart
-            || ! $cart->is_active) {
-            session()->flash('info', trans('phonepe::app.response.cart-not-found'));
-
-            return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
-        }
-
-        Cart::setCart($cart);
-
-        $data = (new OrderResource($cart))->jsonSerialize();
-
-        /**
-         * Prepare additional payment data for order creation, including PhonePe transaction details.
-         */
-        $data['payment']['additional'] = [
-            'phonePe_merchant_order_id' => $merchantOrderId ?? '',
-            'phonePe_token' => $response['data']['token'] ?? '',
-            'phonePe_status' => $state ?? '',
-        ];
-
-        $order = $this->orderRepository->create($data);
-
-        $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-        if ($order->canInvoice()) {
-            $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+            }
 
             /**
-             * Record the order transaction with PhonePe payment details, including transaction ID and status.
+             * Retrieve the cart ID from the payment status response's meta information,
+             * which was stored during payment initiation. 
+             * This cart ID will be used to create the order if the payment was successful.
              */
-            $this->orderTransactionRepository->create([
-                'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
-                'status' => self::PAYMENT_SUCCESS,
-                'type' => $order->payment->method,
-                'payment_method' => $order->payment->method,
-                'order_id' => $order->id,
-                'invoice_id' => $invoice->id,
-                'amount' => $order->base_grand_total,
-                'data' => json_encode($response['raw']),
-            ]);
+            $cartId = $response['data']['metaInfo']['udf1'] ?? null;
+
+            if (! $cartId) {
+                session()->flash('info', trans('phonepe::app.response.cart-not-found'));
+
+                return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+            }
+
+            $cart = $this->cartRepository->findOrFail($cartId);
+
+            if (! $cart
+                || ! $cart->is_active) {
+                session()->flash('info', trans('phonepe::app.response.cart-not-found'));
+
+                return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+            }
+
+            Cart::setCart($cart);
+
+            Cart::collectTotals();
+
+            $data = (new OrderResource($cart))->jsonSerialize();
+
+            /**
+             * Prepare additional payment data for order creation, including PhonePe transaction details.
+             */
+            $data['payment']['additional'] = [
+                'phonePe_merchant_order_id' => $merchantOrderId ?? '',
+                'phonePe_token' => $response['data']['token'] ?? '',
+                'phonePe_status' => $state ?? '',
+            ];
+
+            $order = $this->orderRepository->create($data);
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+
+                /**
+                 * Record the order transaction with PhonePe payment details, including transaction ID and status.
+                 */
+                $this->orderTransactionRepository->create([
+                    'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
+                    'status' => self::PAYMENT_SUCCESS,
+                    'type' => $order->payment->method,
+                    'payment_method' => $order->payment->method,
+                    'order_id' => $order->id,
+                    'invoice_id' => $invoice->id,
+                    'amount' => $order->base_grand_total,
+                    'data' => json_encode($response['raw']),
+                ]);
+            }
+
+            Cart::deActivateCart();
+
+            session()->flash('order_id', $order->id);
+
+            session()->flash('success', trans('phonepe::app.response.payment-success'));
+
+            return redirect()->route('shop.checkout.onepage.success');
+        } catch (\Exception $e) {
+            report($e);
+
+            session()->flash('error', trans('phonepe::app.response.order-creation-failed'));
+
+            return redirect()->route('shop.checkout.cart.index');
         }
-
-        Cart::deActivateCart();
-
-        /**
-         * Clear the cached cart data for this merchant order ID and remove it from session,
-         * as the order has been successfully processed.
-         */
-        Cache::forget($this->phonePe->cacheKey($merchantOrderId));
-
-        session()->forget('phonepe.merchant_order_id');
-
-        session()->flash('order_id', $order->id);
-
-        return redirect()->route('shop.checkout.onepage.success');
     }
 
     /**
@@ -167,15 +175,6 @@ class PhonePeController extends Controller
      */
     public function cancel()
     {
-        $merchantOrderId = request()->input('merchantOrderId')
-            ?? session('phonepe.merchant_order_id');
-
-        if ($merchantOrderId) {
-            Cache::forget($this->phonePe->cacheKey($merchantOrderId));
-
-            session()->forget('phonepe.merchant_order_id');
-        }
-
         return redirect()->route('shop.checkout.cart.index');
     }
 

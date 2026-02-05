@@ -143,8 +143,6 @@ class PhonePe extends Payment
         $data = $response->json() ?? [];
         $data['token'] = $this->getAccessToken() ?? null;
 
-        $state = strtoupper($data['state'] ?? $data['status'] ?? '');
-
         return [
             'data' => $data,
             'raw' => $response->json(),
@@ -160,23 +158,11 @@ class PhonePe extends Payment
     }
 
     /**
-     * Generate cache key for a given merchant order ID.
-     */
-    public function cacheKey(string $merchantOrderId): string
-    {
-        return 'phonepe:order:' . $merchantOrderId;
-    }
-
-    /**
      * Generate payment data payload for PhonePe API.
      */
     private function getPaymentData($cart): array
     {
         $merchantOrderId = $this->generateMerchantOrderId($cart->id);
-
-        Cache::put($this->cacheKey($merchantOrderId), ['cart_id' => $cart->id], now()->addMinutes(60));
-
-        session()->put('phonepe.merchant_order_id', $merchantOrderId);
 
         return [
             'merchantOrderId' => $merchantOrderId,
@@ -187,12 +173,12 @@ class PhonePe extends Payment
                 'type' => 'PG_CHECKOUT',
                 "message" => "Payment message used for collect requests",
                 "merchantUrls" => [
-                    "redirectUrl" => route('phonepe.callback', ['orderId' => $merchantOrderId]),
+                    "redirectUrl" => route('phonepe.callback', ['merchantOrderId' => $merchantOrderId]),
                 ],
             ],
 
             'metaInfo' => [
-                'udf1' => (string) $cart->id,
+                'udf1' => $cart->id,
                 'udf2' => $cart->customer_email ?? null,
             ],
         ];

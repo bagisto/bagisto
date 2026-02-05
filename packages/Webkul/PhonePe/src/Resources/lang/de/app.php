@@ -8,5 +8,7 @@ return [
         'phonepe-payment-pending' => 'Ihre PhonePe-Zahlung ist noch ausstehend. Bitte schließen Sie diese ab oder warten Sie kurz und versuchen Sie es erneut.',
         'phonepe-payment-failed' => 'Ihre PhonePe-Zahlung ist fehlgeschlagen. Bitte versuchen Sie es erneut.',
         'invalid-transaction' => 'Ungültige Transaktion. Bitte versuchen Sie es erneut.',
+        'payment-success' => 'Ihre Zahlung war erfolgreich. Ihre Bestellung wurde aufgegeben.',
+        'order-creation-failed' => 'Es gab ein Problem beim Erstellen Ihrer Bestellung nach der Zahlung. Bitte kontaktieren Sie den Support.',
     ],
 ];

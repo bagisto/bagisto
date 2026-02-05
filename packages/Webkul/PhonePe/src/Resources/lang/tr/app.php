@@ -8,5 +8,7 @@ return [
         'phonepe-payment-pending' => 'PhonePe ödemeniz hala beklemeye alınmıştır. Lütfen tamamlayın veya bir an bekleyip tekrar kontrol edin.',
         'phonepe-payment-failed' => 'PhonePe ödemeniz başarısız olmuştur. Lütfen tekrar deneyin.',
         'invalid-transaction' => 'Geçersiz işlem. Lütfen tekrar deneyin.',
+        'payment-success' => 'Ödemeniz başarılı olmuştur. Siparişiniz verilmiştir.',
+        'order-creation-failed' => 'Ödeme sonrasında siparişiniz oluşturulurken bir sorun oluştu. Lütfen destek ile iletişime geçin.',
     ],
 ];

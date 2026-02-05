@@ -8,5 +8,7 @@ return [
         'phonepe-payment-pending' => '您的 PhonePe 付款仍在处理中。 请完成或稍等一下，然后重新检查。',
         'phonepe-payment-failed' => '您的 PhonePe 付款失败。 请重试。',
         'invalid-transaction' => '无效的交易。 请重试。',
+        'payment-success' => '您的付款成功。 您的订单已下达。',
+        'order-creation-failed' => '付款后创建您的订单时出现问题。 请联系支持。',
     ],
 ];

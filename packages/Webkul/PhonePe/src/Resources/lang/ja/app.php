@@ -8,5 +8,7 @@ return [
         'phonepe-payment-pending' => 'PhonePeの支払いはまだ保留中です。 完了するか、少し待ってもう一度確認してください。',
         'phonepe-payment-failed' => 'PhonePeの支払いに失敗しました。 もう一度やり直してください。',
         'invalid-transaction' => '無効なトランザクション。 もう一度やり直してください。',
+        'payment-success' => 'お支払いが正常に完了しました。 ご注文が確定しました。',
+        'order-creation-failed' => 'お支払い後のご注文作成に問題が発生しました。 サポートにお問い合わせください。',
     ],
 ];

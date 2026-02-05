@@ -8,5 +8,7 @@ return [
         'phonepe-payment-pending' => 'Uw PhonePe-betaling is nog in behandeling. Voltooi deze alstublieft of wacht een moment en controleer opnieuw.',
         'phonepe-payment-failed' => 'Uw PhonePe-betaling is mislukt. Probeer alstublieft opnieuw.',
         'invalid-transaction' => 'Ongeldige transactie. Probeer alstublieft opnieuw.',
+        'payment-success' => 'Uw betaling is succesvol geweest. Uw bestelling is geplaatst.',
+        'order-creation-failed' => 'Er is een probleem opgetreden bij het maken van uw bestelling na betaling. Neem alstublieft contact op met de ondersteuning.',
     ],
 ];
