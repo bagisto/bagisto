@@ -43,7 +43,7 @@
         type="text/x-template"
         id="v-rma-rules-template"
     >
-        <div v-show="allowRMA">
+        <div v-if="allowRMA">
             <slot></slot>
         </div>
     </script>
@@ -55,7 +55,7 @@
             data() {
                 return {
                     allowRMA: "{{ (boolean) $product->allow_rma }}",
-                }
+                };
             },
 
             mounted: function() {
@@ -64,7 +64,7 @@
                 document.getElementById('allow_rma').addEventListener('change', function(e) {
                     self.allowRMA = e.target.checked;
                 });
-            }
+            },
         });
     </script>
 @endpushOnce
