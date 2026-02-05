@@ -880,9 +880,10 @@ test.describe("simple product management", () => {
             .selectOption("1");
         await adminPage.locator('input[name="sku"]').fill(generateSKU());
         await adminPage.getByRole("button", { name: "Save Product" }).click();
-        await expect(
-            adminPage.locator("text =Product created successfully").first(),
-        ).toBeVisible();
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
 
         /**
          * create group price

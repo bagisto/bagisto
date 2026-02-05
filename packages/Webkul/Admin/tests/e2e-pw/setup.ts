@@ -33,7 +33,7 @@ export const test = base.extend<Fixtures>({
         const authExists = fs.existsSync(ADMIN_AUTH_STATE_PATH);
 
         const context = await browser.newContext(
-            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {}
+            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {},
         );
 
         const page = await context.newPage();
