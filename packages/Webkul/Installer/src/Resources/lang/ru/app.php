@@ -265,6 +265,24 @@ return [
                     'name' => 'Смелые коллекции',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Просмотреть Коллекции',
+                        'description' => 'Наши Смелые Коллекции здесь, чтобы переопределить ваш гардероб бесстрашными дизайнами и яркими, насыщенными цветами. От смелых узоров до мощных оттенков — это ваш шанс вырваться из обыденности и шагнуть в необыкновенное.',
+                        'title' => 'Раскройте Свою Смелость с Нашей Новой Коллекцией!',
+                    ],
+
+                    'name' => 'Смелые Коллекции',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Продукты Бронирования',
+
+                    'options' => [
+                        'title' => 'Забронировать Билеты',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Категории и коллекции',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Описание категории Мужчины',
-                    'meta-description' => 'Мета-описание категории Мужчины',
-                    'meta-keywords' => 'Мета-ключевые слова категории Мужчины',
-                    'meta-title' => 'Мета-заголовок категории Мужчины',
-                    'name' => 'Люди',
-                    'slug' => 'Мужчины',
+                    'description' => '<p>Мужчины</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Мужчины',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Описание категории Зимняя одежда',
-                    'meta-description' => 'Мета-описание категории Зимняя одежда',
-                    'meta-keywords' => 'Мета-ключевые слова категории Зимняя одежда',
-                    'meta-title' => 'Мета-заголовок категории Зимняя одежда',
-                    'name' => 'Зимняя одежда',
-                    'slug' => 'зимняя одежда',
+                    'description' => '<p>Дети</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Дети',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>Женщины</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Женщины',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>Деловая Одежда</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Деловая Одежда',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>Повседневная Одежда</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Повседневная Одежда',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>Спортивная Одежда</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Спортивная Одежда',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>Обувь</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Обувь',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p><span>Деловая Одежда</span></p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Деловая Одежда',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>Повседневная Одежда</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Повседневная Одежда',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>Спортивная Одежда</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Спортивная Одежда',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>Обувь</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Обувь',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>Одежда для Девочек</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Одежда для Девочек',
+                    'name' => 'Одежда для Девочек',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>Одежда для Мальчиков</p>',
+                    'meta-description' => 'Мода для Мальчиков',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Одежда для Мальчиков',
+                    'name' => 'Одежда для Мальчиков',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>Обувь для Девочек</p>',
+                    'meta-description' => 'Коллекция Модной Обуви для Девочек',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Обувь для Девочек',
+                    'name' => 'Обувь для Девочек',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>Обувь для Мальчиков</p>',
+                    'meta-description' => 'Коллекция Стильной Обуви для Мальчиков',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Обувь для Мальчиков',
+                    'name' => 'Обувь для Мальчиков',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>Здоровье</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Здоровье',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>Загружаемый Урок по Йоге</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Загружаемый Урок по Йоге',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>Коллекция Электронных Книг</p>',
+                    'meta-description' => 'Коллекция Электронных Книг',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Коллекция Электронных Книг',
+                    'name' => 'Электронные Книги',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>Кинопропуск</p>',
+                    'meta-description' => 'Погрузитесь в магию 10 фильмов ежемесячно без дополнительной платы.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Ежемесячный Кинопропуск CineXperience',
+                    'name' => 'Кинопропуск',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>Легко управляйте и продавайте свои продукты на основе бронирования с нашей безупречной системой бронирования.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирования',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>Бронирование приемов позволяет клиентам планировать временные слоты для услуг или консультаций с предприятиями или профессионалами.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирование Приемов',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>Бронирование мероприятий позволяет физическим лицам или группам регистрироваться или бронировать места на публичные или частные мероприятия.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирование Мероприятий',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>Бронирование залов позволяет физическим лицам, организациям или группам резервировать общественные пространства для различных мероприятий.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирование Залов',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Бронирование столиков позволяет клиентам заранее резервировать столики в ресторанах, кафе или заведениях общественного питания.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирование Столиков',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Бронирование аренды облегчает резервирование предметов или недвижимости для временного использования.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Бронирование Аренды',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Откройте для себя новейшую потребительскую электронику, созданную для того, чтобы держать вас на связи, продуктивным и развлеченным.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Электроника',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Откройте для себя смартфоны, зарядные устройства, чехлы и другие необходимые вещи для связи в дороге.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Мобильные Телефоны и Аксессуары',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Найдите мощные ноутбуки и портативные планшеты для работы, учебы и развлечений.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ноутбуки и Планшеты',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Покупайте наушники, вкладыши и колонки для кристально чистого звука.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Аудиоустройства',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Упростите жизнь с умным освещением, термостатами, системами безопасности и многим другим.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Умный Дом и Автоматизация',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Улучшите свое жилое пространство функциональными и стильными товарами для дома и кухни.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Товары для Дома',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Просматривайте блендеры, аэрофритюрницы, кофеварки и многое другое для упрощения приготовления пищи.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Кухонная Техника',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Исследуйте наборы посуды, приборы, столовую посуду и сервировку для ваших кулинарных потребностей.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Посуда и Столовая',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Добавьте комфорт и очарование с диванами, столами, настенным искусством и домашним декором.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Мебель и Декор',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Держите свое пространство в чистоте с пылесосами, чистящими средствами, метлами и органайзерами.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Чистящие Средства',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Разожгите свое воображение или организуйте рабочее пространство с широким выбором книг и канцтоваров.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Книги и Канцтовары',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Погрузитесь в бестселлеры, биографии, книги по саморазвитию и многое другое.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Художественные и Нехудожественные Книги',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Найдите учебники, справочные материалы и пособия для всех возрастов.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Образовательные и Академические',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Покупайте ручки, блокноты, планировщики и офисные принадлежности для продуктивности.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Офисные Принадлежности',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Исследуйте краски, кисти, скетчбуки и наборы для творчества своими руками для креативных людей.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Товары для Творчества и Рукоделия',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

@@ -265,6 +265,24 @@ return [
                     'name' => 'විකාශකභාපකභාපක.',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'එකතු බලන්න',
+                        'description' => 'අපගෙ Bold එකතුව නිර්භීත සැලසුම් සහ කැපී පෙනෙන, ජීවමාන වර්ණ සමඟ ඔබේ ඇඳුම් ගබඩාව නැවත අර්ථ දැක්වීමට මෙහි ඇත. නිර්භීත රටා වලින් බලවත් වර්ණ තෙක්, සාමාන්‍ය දෙවලින් බැහැරව අසාමාන්‍ය දෙයට පිවිසීමට මෙය ඔබේ අවස්ථාවයි.',
+                        'title' => 'අපගෙ නව එකතුව සමඟ ඔබේ නිර්භීතභාවය මුදා හරින්න!',
+                    ],
+
+                    'name' => 'Bold එකතුව',
+                ],
+
+                'booking-products' => [
+                    'name' => 'වෙන්කරවා ගැනීමේ නිෂ්පාදන',
+
+                    'options' => [
+                        'title' => 'ටිකට් වෙන්කරවා ගන්න',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'ප්රෘදාආභර',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'පිරිමි ප්‍රවාහන විස්තරය',
-                    'meta-description' => 'පිරිමි ප්‍රවාහන මාතෘකාව',
-                    'meta-keywords' => 'පිරිමි ප්‍රවාහන මාතෘකාව',
-                    'meta-title' => 'පිරිමි ප්‍රවාහන මාතෘකාව',
-                    'name' => 'මිනිසුන්',
-                    'slug' => 'මිනිසුන්',
+                    'description' => '<p>පිරිමි</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පිරිමි',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'වින්ටර් ඇඳුම් ප්‍රවාහන විස්තරය',
-                    'meta-description' => 'වින්ටර් ඇඳුම් ප්‍රවාහන මාතෘකාව',
-                    'meta-keywords' => 'වින්ටර් ඇඳුම් ප්‍රවාහන මාතෘකාව',
-                    'meta-title' => 'වින්ටර් ඇඳුම් ප්‍රවාහන මාතෘකාව',
-                    'name' => 'ශීත ඇඳුම්',
-                    'slug' => 'ශීත-ඇඳුම්',
+                    'description' => '<p>දරුවන්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'දරුවන්',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>කාන්තා</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'කාන්තා',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>විධිමත් ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'විධිමත් ඇඳුම්',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>අනියම් ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'අනියම් ඇඳුම්',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>ක්‍රියාකාරී ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ක්‍රියාකාරී ඇඳුම්',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>පාවහන්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පාවහන්',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p>ගැහැණු ලමා ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ගැහැණු ලමා ඇඳුම්',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>පිරිමි ලමා ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පිරිමි ලමා ඇඳුම්',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>ගැහැණු ලමා පාවහන්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ගැහැණු ලමා පාවහන්',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>පිරිමි ලමා පාවහන්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පිරිමි ලමා පාවහන්',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>විධිමත් ඇඳුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Clothing',
+                    'name' => 'විධිමත් ඇඳුම්',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>අනියම් ඇඳුම්</p>',
+                    'meta-description' => 'Boys Fashion',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Clothing',
+                    'name' => 'අනියම් ඇඳුම්',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>ක්‍රියාකාරී ඇඳුම්</p>',
+                    'meta-description' => 'Girls Fashionable Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Footwear',
+                    'name' => 'ක්‍රියාකාරී ඇඳුම්',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>පාවහන්</p>',
+                    'meta-description' => 'Boys Stylish Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Footwear',
+                    'name' => 'පාවහන්',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>සුවතාව</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'සුවතාව',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>බාගත කළ හැකි යෝග පාඩම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'බාගත කළ හැකි යෝග පාඩම්',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>ඊ-පොත්</p>',
+                    'meta-description' => 'Books Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Books Collection',
+                    'name' => 'ඊ-පොත්',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>චිත්‍රපට පාස්</p>',
+                    'meta-description' => 'Immerse yourself in the magic of 10 movies each month without extra charges. Valid nationwide with no blackout dates, this pass offers exclusive perks and concession discounts, making it a must-have for movie enthusiasts.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Monthly Movie Pass',
+                    'name' => 'චිත්‍රපට පාස්',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>වෙන්කිරීම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'වෙන්කිරීම්',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>හමුවීම් වෙන්කිරීම</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'හමුවීම් වෙන්කිරීම',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>උත්සව වෙන්කිරීම</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'උත්සව වෙන්කිරීම',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>ප්‍රජා ශාලා වෙන්කිරීම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ප්‍රජා ශාලා වෙන්කිරීම්',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>මේස වෙන්කිරීම</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'මේස වෙන්කිරීම',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>කුලී වෙන්කිරීම</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'කුලී වෙන්කිරීම',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>ඉලෙක්ට්‍රොනික්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ඉලෙක්ට්‍රොනික්',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>ජංගම දුරකතන සහ උපාංග</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ජංගම දුරකතන සහ උපාංග',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>ලැප්ටොප් සහ ටැබ්ලට්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ලැප්ටොප් සහ ටැබ්ලට්',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>ශ්‍රව්‍ය උපාංග</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ශ්‍රව්‍ය උපාංග',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>ස්මාර්ට් හෝම් සහ ස්වයංක්‍රීයකරණය</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ස්මාර්ට් හෝම් සහ ස්වයංක්‍රීයකරණය',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>ගෘහ භාණ්ඩ</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ගෘහ භාණ්ඩ',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>කුස්සියට උපකරණ</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'කුස්සියට උපකරණ',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>පිසීම් බඩුන් සහ ආහාර</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පිසීම් බඩුන් සහ ආහාර',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>ගෘහ භාණ්ඩ සහ සැරසිලි</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ගෘහ භාණ්ඩ සහ සැරසිලි',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>පිරිසිදු කිරීමේ ද්‍රව්‍ය</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පිරිසිදු කිරීමේ ද්‍රව්‍ය',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>පොත් සහ ලිපි ද්‍රව්‍ය</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'පොත් සහ ලිපි ද්‍රව්‍ය',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>ප්‍රබන්ධ සහ ප්‍රබන්ධ නොවන පොත්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ප්‍රබන්ධ සහ ප්‍රබන්ධ නොවන පොත්',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>අධ්‍යාපනික සහ විද්‍යාත්මක</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'අධ්‍යාපනික සහ විද්‍යාත්මක',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>කාර්යාල සැපයුම්</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'කාර්යාල සැපයුම්',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>කලා සහ අත්කම් ද්‍රව්‍ය</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'කලා සහ අත්කම් ද්‍රව්‍ය',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

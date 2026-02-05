@@ -265,6 +265,24 @@ return [
                     'name' => 'Cesur Koleksiyonlar',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Koleksiyonları Görüntüle',
+                        'description' => 'Cesur Koleksiyonlarımız, gardırobunuzu korkusuz tasarımlar ve çarpıcı, canlı renklerle yeniden tanımlamak için burada. Cesur desenlerden güçlü tonlara, bu sıradanlıktan kopup olağanüstü olana adım atma şansınız.',
+                        'title' => 'Yeni Koleksiyonumuzla Cesaretinizi Ortaya Çıkarın!',
+                    ],
+
+                    'name' => 'Cesur Koleksiyonlar',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Rezervasyon Ürünleri',
+
+                    'options' => [
+                        'title' => 'Bilet Rezervasyonu',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Kategori Koleksiyonları',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Erkek Kategori Açıklaması',
-                    'meta-description' => 'Erkek Kategori Meta Açıklaması',
-                    'meta-keywords' => 'Erkek Kategori Meta Anahtar Kelimeleri',
-                    'meta-title' => 'Erkek Kategori Meta Başlığı',
-                    'name' => 'Erkekler',
-                    'slug' => 'erkekler',
+                    'description' => '<p>Erkek</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Erkek',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Kış Giyim Kategori Açıklaması',
-                    'meta-description' => 'Kış Giyim Kategori Meta Açıklaması',
-                    'meta-keywords' => 'Kış Giyim Kategori Meta Anahtar Kelimeleri',
-                    'meta-title' => 'Kış Giyim Kategori Meta Başlığı',
-                    'name' => 'Kış giysisi',
-                    'slug' => 'kış giysisi',
+                    'description' => '<p>Çocuk</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Çocuk',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>Kadın</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kadın',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>Resmi Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Resmi Giyim',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>Günlük Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Günlük Giyim',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>Spor Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Spor Giyim',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>Ayakkabı</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ayakkabı',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p><span>Resmi Giyim</span></p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Resmi Giyim',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>Günlük Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Günlük Giyim',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>Spor Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Spor Giyim',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>Ayakkabı</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ayakkabı',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>Kız Giyim</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Kız Giyim',
+                    'name' => 'Kız Giyim',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>Erkek Çocuk Giyim</p>',
+                    'meta-description' => 'Erkek Çocuk Modası',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Erkek Çocuk Giyim',
+                    'name' => 'Erkek Çocuk Giyim',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>Kız Ayakkabı</p>',
+                    'meta-description' => 'Kız Modası Ayakkabı Koleksiyonu',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Kız Ayakkabı',
+                    'name' => 'Kız Ayakkabı',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>Erkek Çocuk Ayakkabı</p>',
+                    'meta-description' => 'Erkek Çocuk Şık Ayakkabı Koleksiyonu',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Erkek Çocuk Ayakkabı',
+                    'name' => 'Erkek Çocuk Ayakkabı',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>Sağlık</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sağlık',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>İndirilebilir Yoga Eğitimi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'İndirilebilir Yoga Eğitimi',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>E-Kitap Koleksiyonu</p>',
+                    'meta-description' => 'E-Kitap Koleksiyonu',
+                    'meta-keywords' => '',
+                    'meta-title' => 'E-Kitap Koleksiyonu',
+                    'name' => 'E-Kitaplar',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>Sinema Kartı</p>',
+                    'meta-description' => 'Ek ücret olmadan ayda 10 filmin büyüsüne dalın.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Aylık Sinema Kartı',
+                    'name' => 'Sinema Kartı',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>Sorunsuz rezervasyon sistemimizle rezervasyona dayalı ürünlerinizi kolayca yönetin ve satın.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rezervasyonlar',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>Randevu rezervasyonu müşterilerin işletmeler veya profesyonellerle hizmetler veya danışmanlıklar için zaman dilimleri planlamasını sağlar.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Randevu Rezervasyonu',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>Etkinlik rezervasyonu bireylerin veya grupların halka açık veya özel etkinlikler için kayıt olmasını veya yer ayırtmasını sağlar.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Etkinlik Rezervasyonu',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>Toplantı salonu rezervasyonu bireylerin, kuruluşların veya grupların çeşitli etkinlikler için toplum alanlarını ayırtmasını sağlar.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Toplantı Salonu Rezervasyonları',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Masa rezervasyonu müşterilerin restoranlarda, kafelerde veya yeme-içme mekanlarında önceden masa ayırtmasını sağlar.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Masa Rezervasyonu',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Kiralama rezervasyonu geçici kullanım için eşya veya mülk ayırtmayı kolaylaştırır.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kiralama Rezervasyonu',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Sizi bağlı, üretken ve eğlenceli tutmak için tasarlanmış en son tüketici elektroniğini keşfedin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Elektronik',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Hareket halindeyken bağlı kalmak için akıllı telefonları, şarj cihazlarını, kılıfları ve diğer temel ürünleri keşfedin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Cep Telefonları ve Aksesuarlar',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>İş, eğitim ve eğlence için güçlü dizüstü bilgisayarlar ve taşınabilir tabletler bulun.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Dizüstü Bilgisayarlar ve Tabletler',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Kristal netliğinde ses için kulaklıklar, kulak içi kulaklıklar ve hoparlörler satın alın.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ses Cihazları',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Akıllı aydınlatma, termostatlar, güvenlik sistemleri ve daha fazlasıyla hayatı kolaylaştırın.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Akıllı Ev ve Otomasyon',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Yaşam alanınızı işlevsel ve şık ev ve mutfak ürünleriyle geliştirin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ev Eşyaları',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Yemek hazırlamayı basitleştirmek için blenderları, airfryerları, kahve makinelerini ve daha fazlasını inceleyin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Mutfak Aletleri',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Mutfak ihtiyaçlarınız için pişirme setleri, mutfak gereçleri, yemek takımları ve servis ürünlerini keşfedin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pişirme ve Yemek',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Kanepeler, masalar, duvar sanatı ve ev aksesuarlarıyla konfor ve cazibe ekleyin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Mobilya ve Dekorasyon',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Elektrikli süpürgeler, temizlik spreyleri, süpürgeler ve düzenleyicilerle alanınızı tertemiz tutun.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Temizlik Malzemeleri',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Geniş bir kitap ve kırtasiye seçkisiyle hayal gücünüzü ateşleyin veya çalışma alanınızı düzenleyin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kitaplar ve Kırtasiye',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Çok satan romanlar, biyografiler, kişisel gelişim ve daha fazlasına dalın.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kurgu ve Kurgu Dışı Kitaplar',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Tüm yaşlar için ders kitapları, referans materyalleri ve çalışma kılavuzları bulun.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Eğitim ve Akademik',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Verimlilik için kalemler, defterler, planlamacılar ve ofis malzemeleri satın alın.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ofis Malzemeleri',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Yaratıcılar için boyalar, fırçalar, eskiz defterleri ve DIY el sanatları kitleri keşfedin.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sanat ve El Sanatları Malzemeleri',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

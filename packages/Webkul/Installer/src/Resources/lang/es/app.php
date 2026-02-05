@@ -265,6 +265,24 @@ return [
                     'name' => 'Colecciones Audaces',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Ver Colecciones',
+                        'description' => 'Nuestras Colecciones Audaces están aquí para redefinir tu guardarropa con diseños atrevidos y colores vibrantes e impactantes. Desde patrones audaces hasta tonos poderosos, esta es tu oportunidad de romper con lo ordinario y entrar en lo extraordinario.',
+                        'title' => '¡Libera tu Audacia con Nuestra Nueva Colección!',
+                    ],
+
+                    'name' => 'Colecciones Audaces',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Productos de Reserva',
+
+                    'options' => [
+                        'title' => 'Reservar Entradas',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Colecciones de Categorías',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Descripción de la categoría de hombres',
-                    'meta-description' => 'Meta descripción de la categoría de hombres',
-                    'meta-keywords' => 'Meta palabras clave de la categoría de hombres',
-                    'meta-title' => 'Meta título de la categoría de hombres',
+                    'description' => '<p>Hombres</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
                     'name' => 'Hombres',
-                    'slug' => 'hombres',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Descripción de la categoría de ropa de invierno',
-                    'meta-description' => 'Meta descripción de la categoría de ropa de invierno',
-                    'meta-keywords' => 'Meta palabras clave de la categoría de ropa de invierno',
-                    'meta-title' => 'Meta título de la categoría de ropa de invierno',
-                    'name' => 'Ropa de invierno',
-                    'slug' => 'ropa-de-invierno',
+                    'description' => '<p>Niños</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Niños',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>Mujeres</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Mujeres',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>Ropa Formal</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Formal',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>Ropa Casual</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Casual',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>Ropa Deportiva</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Deportiva',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>Calzado</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Calzado',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p><span>Ropa Formal</span></p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Formal',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>Ropa Casual</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Casual',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>Ropa Deportiva</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ropa Deportiva',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>Calzado</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Calzado',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>Ropa de Niñas</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Ropa de Niñas',
+                    'name' => 'Ropa de Niñas',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>Ropa de Niños</p>',
+                    'meta-description' => 'Moda para Niños',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Ropa de Niños',
+                    'name' => 'Ropa de Niños',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>Calzado de Niñas</p>',
+                    'meta-description' => 'Colección de Calzado de Moda para Niñas',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Calzado de Niñas',
+                    'name' => 'Calzado de Niñas',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>Calzado de Niños</p>',
+                    'meta-description' => 'Colección de Calzado con Estilo para Niños',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Calzado de Niños',
+                    'name' => 'Calzado de Niños',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>Bienestar</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Bienestar',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>Tutorial de Yoga Descargable</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Tutorial de Yoga Descargable',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>Colección de Libros Electrónicos</p>',
+                    'meta-description' => 'Colección de Libros Electrónicos',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Colección de Libros Electrónicos',
+                    'name' => 'Libros Electrónicos',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>Pase de Cine</p>',
+                    'meta-description' => 'Sumérgete en la magia de 10 películas cada mes sin cargos adicionales.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Pase Mensual de Cine CineXperience',
+                    'name' => 'Pase de Cine',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>Gestione y venda fácilmente sus productos basados en reservas con nuestro sistema de reservas integrado.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reservas',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>La reserva de citas permite a los clientes programar franjas horarias para servicios o consultas con empresas o profesionales.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reserva de Citas',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>La reserva de eventos permite a individuos o grupos registrarse o reservar plazas para eventos públicos o privados.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reserva de Eventos',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>La reserva de salones comunitarios permite a individuos, organizaciones o grupos reservar espacios comunitarios para diversos eventos.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reservas de Salones Comunitarios',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>La reserva de mesas permite a los clientes reservar mesas en restaurantes, cafeterías o locales de comida con antelación.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reserva de Mesa',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>La reserva de alquiler facilita la reserva de artículos o propiedades para uso temporal.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reserva de Alquiler',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Explore lo último en electrónica de consumo, diseñada para mantenerle conectado, productivo y entretenido.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Electrónica',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Descubra smartphones, cargadores, fundas y otros elementos esenciales para estar conectado en movimiento.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Teléfonos Móviles y Accesorios',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Encuentre portátiles potentes y tablets portátiles para trabajo, estudio y ocio.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Portátiles y Tablets',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Compre auriculares, auriculares inalámbricos y altavoces para disfrutar de un sonido cristalino.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Dispositivos de Audio',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Facilite la vida con iluminación inteligente, termostatos, sistemas de seguridad y más.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Hogar Inteligente y Automatización',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Mejore su espacio vital con elementos esenciales funcionales y elegantes para el hogar y la cocina.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Hogar',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Explore licuadoras, freidoras de aire, cafeteras y más para simplificar la preparación de comidas.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Electrodomésticos de Cocina',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Explore juegos de utensilios de cocina, utensilios, vajilla y servicio para sus necesidades culinarias.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Utensilios de Cocina y Comedor',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Añada comodidad y encanto con sofás, mesas, arte mural y acentos del hogar.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Muebles y Decoración',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Mantenga su espacio impecable con aspiradoras, sprays de limpieza, escobas y organizadores.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Artículos de Limpieza',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Encienda su imaginación u organice su espacio de trabajo con una amplia selección de libros y papelería.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Libros y Papelería',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Sumérjase en novelas de éxito, biografías, autoayuda y más.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Libros de Ficción y No Ficción',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Encuentre libros de texto, materiales de referencia y guías de estudio para todas las edades.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Educativo y Académico',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Compre bolígrafos, cuadernos, agendas y elementos esenciales de oficina para la productividad.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Material de Oficina',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Explore pinturas, pinceles, cuadernos de dibujo y kits de manualidades DIY para creativos.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Materiales de Arte y Manualidades',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

@@ -265,6 +265,24 @@ return [
                     'name' => 'Gedurfde Collecties',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Collecties Bekijken',
+                        'description' => 'Onze Gedurfde Collecties zijn hier om je garderobe opnieuw te definiëren met onverschrokken ontwerpen en opvallende, levendige kleuren. Van gedurfde patronen tot krachtige tinten, dit is je kans om los te breken van het gewone en het buitengewone binnen te stappen.',
+                        'title' => 'Ontgrendel Je Durf met Onze Nieuwe Collectie!',
+                    ],
+
+                    'name' => 'Gedurfde Collecties',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Boekingsproducten',
+
+                    'options' => [
+                        'title' => 'Tickets Boeken',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Categorieën Collecties',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Mannen Categorie Beschrijving',
-                    'meta-description' => 'Mannen Categorie Meta Beschrijving',
-                    'meta-keywords' => 'Mannen Categorie Meta Trefwoorden',
-                    'meta-title' => 'Mannen Categorie Meta Titel',
+                    'description' => '<p>Heren</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
                     'name' => 'Heren',
-                    'slug' => 'heren',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Winterkleding Categorie Beschrijving',
-                    'meta-description' => 'Winterkleding Categorie Meta Beschrijving',
-                    'meta-keywords' => 'Winterkleding Categorie Meta Trefwoorden',
-                    'meta-title' => 'Winterkleding Categorie Meta Titel',
-                    'name' => 'Winterkleding',
-                    'slug' => 'winterkleding',
+                    'description' => '<p>Kinderen</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kinderen',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>Dames</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Dames',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>Formele Kleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Formele Kleding',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>Casual Kleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Casual Kleding',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>Sportkleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sportkleding',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>Schoenen</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Schoenen',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p><span>Formele Kleding</span></p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Formele Kleding',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>Casual Kleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Casual Kleding',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>Sportkleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sportkleding',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>Schoenen</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Schoenen',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>Meisjeskleding</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Meisjeskleding',
+                    'name' => 'Meisjeskleding',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>Jongenskleding</p>',
+                    'meta-description' => 'Jongensmode',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Jongenskleding',
+                    'name' => 'Jongenskleding',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>Meisjesschoenen</p>',
+                    'meta-description' => 'Modieuze Schoenen Collectie voor Meisjes',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Meisjesschoenen',
+                    'name' => 'Meisjesschoenen',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>Jongensschoenen</p>',
+                    'meta-description' => 'Stijlvolle Schoenen Collectie voor Jongens',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Jongensschoenen',
+                    'name' => 'Jongensschoenen',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>Welzijn</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Welzijn',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>Downloadbare Yoga Tutorial</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Downloadbare Yoga Tutorial',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>E-Boeken Collectie</p>',
+                    'meta-description' => 'E-Boeken Collectie',
+                    'meta-keywords' => '',
+                    'meta-title' => 'E-Boeken Collectie',
+                    'name' => 'E-Boeken',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>Bioscoop Pas</p>',
+                    'meta-description' => 'Dompel je onder in de magie van 10 films per maand zonder extra kosten.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Maandelijkse Bioscoop Pas',
+                    'name' => 'Bioscoop Pas',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>Beheer en verkoop eenvoudig uw reserveringsproducten met ons naadloze boekingssysteem.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Reserveringen',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>Afspraakboekingen stellen klanten in staat om tijdslots te plannen voor diensten of consultaties met bedrijven of professionals.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Afspraakboeking',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>Evenementboekingen stellen individuen of groepen in staat om zich te registreren of plaatsen te reserveren voor openbare of privé-evenementen.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Evenementboeking',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>Gemeenschapszaal reserveringen stellen individuen, organisaties of groepen in staat om gemeenschappelijke ruimtes te reserveren voor verschillende evenementen.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Gemeenschapszaal Reserveringen',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Tafelreserveringen stellen klanten in staat om vooraf tafels te reserveren in restaurants, cafés of eetgelegenheden.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Tafelreservering',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Huurboeking faciliteert de reservering van artikelen of eigendommen voor tijdelijk gebruik.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Huurboeking',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Ontdek de nieuwste consumentenelektronica, ontworpen om u verbonden, productief en vermaakt te houden.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Elektronica',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Ontdek smartphones, opladers, hoesjes en andere essentiële zaken om onderweg verbonden te blijven.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Mobiele Telefoons & Accessoires',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Vind krachtige laptops en draagbare tablets voor werk, studie en ontspanning.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Laptops & Tablets',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Shop koptelefoons, oordopjes en speakers voor kristalhelder geluid.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Audio Apparaten',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Maak het leven gemakkelijker met slimme verlichting, thermostaten, beveiligingssystemen en meer.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Smart Home & Automatisering',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Upgrade uw leefruimte met functionele en stijlvolle huis- en keukenbenodigdheden.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Huishouden',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Blader door blenders, airfryers, koffiezetapparaten en meer om maaltijdbereiding te vereenvoudigen.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Keukenapparatuur',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Ontdek kookgerei sets, keukengerei, serviesgoed en tafelgerei voor uw culinaire behoeften.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kookgerei & Tafelen',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Voeg comfort en charme toe met banken, tafels, wandkunst en woondecoratie.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Meubels & Decoratie',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Houd uw ruimte schoon met stofzuigers, schoonmaaksprays, bezems en organizers.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Schoonmaakbenodigdheden',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Ontsteek uw verbeelding of organiseer uw werkruimte met een brede selectie boeken en kantoorartikelen.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Boeken & Kantoorartikelen',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Duik in bestsellers, biografieën, zelfhulp en meer.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Fictie & Non-Fictie Boeken',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Vind studieboeken, naslagmateriaal en studiegidsen voor alle leeftijden.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Educatief & Academisch',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Shop pennen, notitieboekjes, planners en kantoorbenodigdheden voor productiviteit.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kantoorbenodigdheden',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Ontdek verf, penselen, schetsboeken en DIY knutselpakketten voor creatievelingen.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kunst & Knutselmateriaal',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],
