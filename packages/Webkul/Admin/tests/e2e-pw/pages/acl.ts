@@ -788,7 +788,7 @@ export class ACLManagement {
         await this.page.goto("admin/settings/roles");
         await this.locators.createRole.click();
         await this.locators.name.fill(this.roleName);
-        await this.locators.selectType.selectOption(permissionType);
+        await this.locators.selectRoleType.selectOption(permissionType);
         if (
             permissionType === "custom" &&
             permissions &&
@@ -1052,7 +1052,7 @@ export class ACLManagement {
         await this.locators.metaTitle.fill(generateName());
         await this.locators.metaKeywords.fill("keywords");
         await this.locators.metaDescription.fill(generateDescription());
-        await this.locators.status.first().click();
+        await this.locators.statusBTN.first().click();
         await this.locators.createBtn.click();
         await expect(this.locators.successPageCreate).toBeVisible();
     }
@@ -1077,7 +1077,7 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.ruleName.fill(generateName());
-        await this.locators.ruleDescription.fill(generateDescription());
+        await this.locators.promotionRuleDescription.fill(generateDescription());
         await this.locators.addConditionBtn.click();
         await this.locators.selectCondition.selectOption("product|name");
         await this.locators.conditionName.fill(generateName());
@@ -1122,7 +1122,7 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.ruleName.fill(generateName());
-        await this.locators.ruleDescription.fill(generateDescription());
+        await this.locators.promotionRuleDescription.fill(generateDescription());
         await this.locators.addConditionBtn.click();
         await this.locators.selectCondition.selectOption("product|name");
         await this.locators.conditionName.fill(generateName());
@@ -1470,7 +1470,7 @@ export class ACLManagement {
         await this.locators.name.fill(generateName());
         await this.locators.description.fill(generateDescription());
         await this.locators.contactName.fill(generateName());
-        await this.locators.email.fill(generateEmail());
+        await this.locators.enterEmail.fill(generateEmail());
         await this.locators.contactNumber.fill(generatePhoneNumber());
         await this.locators.fax.fill(generatePhoneNumber());
         await this.locators.country.selectOption("IN");
@@ -1513,7 +1513,7 @@ export class ACLManagement {
         const name = generateName();
         const description = generateDescription();
         await this.locators.fillCode.fill(code);
-        await this.locators.ruleDescription.fill(description);
+        await this.locators.promotionRuleDescription.fill(description);
         await this.locators.inventoryToggle.first().click();
         await this.locators.categoryID.selectOption("1");
         await this.locators.hostname.fill(generateHostname());
@@ -1576,7 +1576,7 @@ export class ACLManagement {
     async roleCreateVerify() {
         await this.locators.createRole.click();
         await this.locators.name.fill(this.roleName);
-        await this.locators.selectType.selectOption("all");
+        await this.locators.selectRoleType.selectOption("all");
         await this.locators.roleDescription.fill("test description");
         await this.locators.saveRole.click();
         await expect(this.locators.successRole.first()).toBeVisible();
