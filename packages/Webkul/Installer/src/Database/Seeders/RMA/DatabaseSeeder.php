@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run($parameters = [])
     {
         $this->call(RMAReasonSeeder::class, false, ['parameters' => $parameters]);
+
         $this->call(RMAStatusSeeder::class, false, ['parameters' => $parameters]);
+
         $this->call(RMARulesSeeder::class, false, ['parameters' => $parameters]);
     }
 }
