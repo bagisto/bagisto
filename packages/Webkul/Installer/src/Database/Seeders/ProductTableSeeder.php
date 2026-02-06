@@ -118,6 +118,11 @@ class ProductTableSeeder extends Seeder
      */
     protected array $locales;
 
+    /**
+     * Default locale for this seeding run.
+     */
+    protected string $defaultLocale;
+
     // =========================================================================
     // Entry Point
     // =========================================================================
@@ -135,14 +140,14 @@ class ProductTableSeeder extends Seeder
         $this->now = Carbon::now();
         $this->timestamp = $this->now->format('Y-m-d H:i:s');
 
-        $defaultLocale = data_get($parameters, 'default_locale', config('app.locale'));
-        $this->locales = data_get($parameters, 'allowed_locales', [$defaultLocale]);
+        $this->defaultLocale = data_get($parameters, 'default_locale', config('app.locale'));
+        $this->locales = data_get($parameters, 'allowed_locales', [$this->defaultLocale]);
 
         $this->seedAttributeInfrastructure();
 
         (new CategoryTableSeeder)->sampleCategories($parameters);
 
-        $this->seedProducts($defaultLocale);
+        $this->seedProducts($this->defaultLocale);
 
         $this->seedProductRelations();
     }
@@ -192,7 +197,7 @@ class ProductTableSeeder extends Seeder
      */
     protected function buildSingleProductData(array $product, string $locale): array
     {
-        $translations = data_get($product, 'translations', []);
+        $translations = data_get($product, "translations.$locale", data_get($product, 'translations.en', []));
 
         $result = [
             'sku' => $product['sku'],
@@ -505,8 +510,7 @@ class ProductTableSeeder extends Seeder
         $this->seedAttributeTranslations($data);
         $this->seedAttributeGroups($data);
         $this->seedAttributeGroupMappings($data);
-        $this->seedAttributeOptions($data, 'core_attribute_options');
-        $this->seedAttributeOptions($data, 'additional_attribute_options');
+        $this->seedAttributeOptions($data);
     }
 
     /**
@@ -514,7 +518,24 @@ class ProductTableSeeder extends Seeder
      */
     protected function seedAttributeFamilies(array $data): void
     {
-        $this->insertIfNotExists($data, 'attribute_families', 'attribute_families');
+        if (blank($data['attribute_families'] ?? [])) {
+            return;
+        }
+
+        $rows = collect($data['attribute_families'])
+            ->filter(fn ($item) => ! DB::table('attribute_families')->where('id', $item['id'])->exists())
+            ->map(function ($item) {
+                $row = Arr::except($item, ['translations']);
+                $row['name'] = data_get($item, "translations.{$this->defaultLocale}.name", $row['name'] ?? '');
+
+                return $row;
+            })
+            ->values()
+            ->all();
+
+        if (filled($rows)) {
+            DB::table('attribute_families')->insert($rows);
+        }
     }
 
     /**
@@ -528,7 +549,14 @@ class ProductTableSeeder extends Seeder
 
         $attributes = collect($data['custom_attributes'])
             ->filter(fn ($a) => ! DB::table('attributes')->where('id', $a['id'])->exists())
-            ->map(fn ($a) => array_merge($a, ['created_at' => $this->now, 'updated_at' => $this->now]))
+            ->map(function ($a) {
+                $row = Arr::except($a, ['translations']);
+                $row['admin_name'] = data_get($a, "translations.{$this->defaultLocale}.admin_name", $row['admin_name'] ?? '');
+                $row['created_at'] = $this->now;
+                $row['updated_at'] = $this->now;
+
+                return $row;
+            })
             ->values()
             ->all();
 
@@ -542,24 +570,26 @@ class ProductTableSeeder extends Seeder
      */
     protected function seedAttributeTranslations(array $data): void
     {
-        if (blank($data['attribute_translations'] ?? [])) {
+        if (blank($data['custom_attribute_translations'] ?? [])) {
             return;
         }
 
         $existing = DB::table('attribute_translations')
-            ->whereIn('attribute_id', collect($data['attribute_translations'])->pluck('attribute_id'))
+            ->whereIn('attribute_id', collect($data['custom_attribute_translations'])->pluck('attribute_id'))
             ->get()
             ->groupBy('attribute_id');
 
         $rows = [];
 
-        foreach ($data['attribute_translations'] as $t) {
+        foreach ($data['custom_attribute_translations'] as $t) {
             foreach ($this->locales as $locale) {
                 if (! $existing->get($t['attribute_id'], collect())->where('locale', $locale)->count()) {
+                    $name = data_get($t, "translations.$locale.name", data_get($t, 'translations.en.name', ''));
+
                     $rows[] = [
                         'attribute_id' => $t['attribute_id'],
                         'locale' => $locale,
-                        'name' => $t['name'],
+                        'name' => $name,
                     ];
                 }
             }
@@ -575,7 +605,24 @@ class ProductTableSeeder extends Seeder
      */
     protected function seedAttributeGroups(array $data): void
     {
-        $this->insertIfNotExists($data, 'attribute_groups', 'attribute_groups');
+        if (blank($data['attribute_groups'] ?? [])) {
+            return;
+        }
+
+        $rows = collect($data['attribute_groups'])
+            ->filter(fn ($item) => ! DB::table('attribute_groups')->where('id', $item['id'])->exists())
+            ->map(function ($item) {
+                $row = Arr::except($item, ['translations']);
+                $row['name'] = data_get($item, "translations.{$this->defaultLocale}.name", $row['name'] ?? '');
+
+                return $row;
+            })
+            ->values()
+            ->all();
+
+        if (filled($rows)) {
+            DB::table('attribute_groups')->insert($rows);
+        }
     }
 
     /**
@@ -603,17 +650,23 @@ class ProductTableSeeder extends Seeder
     }
 
     /**
-     * Seed attribute options (core or additional) and their translations.
+     * Seed custom attribute options and their translations.
      * Avoids inserting duplicates by checking for existing option IDs.
      */
-    protected function seedAttributeOptions(array $data, string $jsonKey): void
+    protected function seedAttributeOptions(array $data): void
     {
-        if (blank($data[$jsonKey] ?? [])) {
+        if (blank($data['custom_attribute_options'] ?? [])) {
             return;
         }
 
-        $options = collect($data[$jsonKey])
+        $options = collect($data['custom_attribute_options'])
             ->filter(fn ($o) => ! DB::table('attribute_options')->where('id', $o['id'])->exists())
+            ->map(function ($o) {
+                $row = Arr::except($o, ['translations']);
+                $row['admin_name'] = data_get($o, "translations.{$this->defaultLocale}.admin_name", $row['admin_name'] ?? '');
+
+                return $row;
+            })
             ->values()
             ->all();
 
@@ -621,14 +674,14 @@ class ProductTableSeeder extends Seeder
             DB::table('attribute_options')->insert($options);
         }
 
-        $optionIds = collect($data[$jsonKey])->pluck('id')->all();
+        $translations = $data['custom_attribute_option_translations'] ?? [];
 
-        $relevantTranslations = collect($data['attribute_option_translations'] ?? [])
-            ->filter(fn ($t) => in_array($t['attribute_option_id'], $optionIds))
-            ->all();
+        if (blank($translations)) {
+            return;
+        }
 
         foreach ($this->locales as $locale) {
-            $rows = collect($relevantTranslations)
+            $rows = collect($translations)
                 ->filter(fn ($t) => ! DB::table('attribute_option_translations')
                     ->where('attribute_option_id', $t['attribute_option_id'])
                     ->where('locale', $locale)
@@ -636,7 +689,7 @@ class ProductTableSeeder extends Seeder
                 ->map(fn ($t) => [
                     'attribute_option_id' => $t['attribute_option_id'],
                     'locale' => $locale,
-                    'label' => $t['label'],
+                    'label' => data_get($t, "translations.$locale.label", data_get($t, 'translations.en.label', '')),
                 ])
                 ->values()
                 ->all();
@@ -730,7 +783,9 @@ class ProductTableSeeder extends Seeder
                 ];
 
                 foreach ($fieldMap as $column => $path) {
-                    $row[$column] = data_get($item, $path, '');
+                    $localePath = Str::replaceFirst('translations.', "translations.$locale.", $path);
+
+                    $row[$column] = data_get($item, $localePath, data_get($item, Str::replaceFirst('translations.', 'translations.en.', $path), ''));
                 }
 
                 return $row;

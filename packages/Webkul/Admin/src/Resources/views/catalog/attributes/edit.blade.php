@@ -208,9 +208,8 @@
                                                 <!-- Locales Tables Heading -->
                                                 <x-admin::table.th 
                                                     v-for="locale in locales"
-                                                    v-pre
+                                                    v-text="locale.name + '(' + [locale.code] + ')'"
                                                 >
-                                                    @{{ locale.name + '(' + [locale.code] + ')' }}
                                                 </x-admin::table.th>
 
                                                 <!-- Action Tables Heading -->
