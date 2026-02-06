@@ -1470,7 +1470,7 @@ export class ACLManagement {
         await this.locators.name.fill(generateName());
         await this.locators.description.fill(generateDescription());
         await this.locators.contactName.fill(generateName());
-        await this.locators.email.fill(generateEmail());
+        await this.locators.enterEmail.fill(generateEmail());
         await this.locators.contactNumber.fill(generatePhoneNumber());
         await this.locators.fax.fill(generatePhoneNumber());
         await this.locators.country.selectOption("IN");
