@@ -265,6 +265,24 @@ return [
                     'name' => 'बोल्ड संग्रह',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'कलेक्शन देखें',
+                        'description' => 'हमारे बोल्ड कलेक्शन निडर डिज़ाइन और आकर्षक, जीवंत रंगों के साथ आपकी वार्डरोब को फिर से परिभाषित करने के लिए यहाँ हैं। बोल्ड पैटर्न से लेकर शक्तिशाली रंगों तक, यह साधारण से बाहर निकलकर असाधारण में कदम रखने का आपका मौका है।',
+                        'title' => 'हमारे नए कलेक्शन के साथ अपनी बोल्डनेस को उजागर करें!',
+                    ],
+
+                    'name' => 'बोल्ड कलेक्शन',
+                ],
+
+                'booking-products' => [
+                    'name' => 'बुकिंग उत्पाद',
+
+                    'options' => [
+                        'title' => 'टिकट बुक करें',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'श्रेणियाँ संग्रह',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'पुरुषों का श्रेणी विवरण',
-                    'meta-description' => 'पुरुषों का श्रेणी मेटा विवरण',
-                    'meta-keywords' => 'पुरुषों का श्रेणी मेटा कीवर्ड्स',
-                    'meta-title' => 'पुरुषों का श्रेणी मेटा टाइटल',
+                    'description' => '<p>पुरुष</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
                     'name' => 'पुरुष',
-                    'slug' => 'पुरुष',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'सर्दियों में पहनने के लिए श्रेणी विवरण',
-                    'meta-description' => 'सर्दियों में पहनने के लिए श्रेणी मेटा विवरण',
-                    'meta-keywords' => 'सर्दियों में पहनने के लिए श्रेणी मेटा कीवर्ड्स',
-                    'meta-title' => 'सर्दियों में पहनने के लिए श्रेणी मेटा टाइटल',
-                    'name' => 'शीतकालीन पहनावा',
-                    'slug' => 'शीतकालीन पहनावा',
+                    'description' => '<p>बच्चे</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'बच्चे',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>महिला</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'महिला',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>औपचारिक पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'औपचारिक पोशाक',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>आरामदायक पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'आरामदायक पोशाक',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>सक्रिय पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'सक्रिय पोशाक',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>जूते</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'जूते',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p>महिला औपचारिक पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'महिला औपचारिक पोशाक',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>महिला आरामदायक पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'महिला आरामदायक पोशाक',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>महिला सक्रिय पोशाक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'महिला सक्रिय पोशाक',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>महिला जूते</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'महिला जूते',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>लड़कियों के कपड़े</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Clothing',
+                    'name' => 'लड़कियों के कपड़े',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>लड़कों के कपड़े</p>',
+                    'meta-description' => 'Boys Fashion',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Clothing',
+                    'name' => 'लड़कों के कपड़े',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>लड़कियों के जूते</p>',
+                    'meta-description' => 'Girls Fashionable Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Footwear',
+                    'name' => 'लड़कियों के जूते',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>लड़कों के जूते</p>',
+                    'meta-description' => 'Boys Stylish Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Footwear',
+                    'name' => 'लड़कों के जूते',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>स्वास्थ्य</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'स्वास्थ्य',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>डाउनलोड करने योग्य योग ट्यूटोरियल</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'डाउनलोड करने योग्य योग ट्यूटोरियल',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>ई-पुस्तकें</p>',
+                    'meta-description' => 'Books Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Books Collection',
+                    'name' => 'ई-पुस्तकें',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>मूवी पास</p>',
+                    'meta-description' => 'Immerse yourself in the magic of 10 movies each month without extra charges. Valid nationwide with no blackout dates, this pass offers exclusive perks and concession discounts, making it a must-have for movie enthusiasts.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Monthly Movie Pass',
+                    'name' => 'मूवी पास',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'बुकिंग',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>अपॉइंटमेंट बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'अपॉइंटमेंट बुकिंग',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>इवेंट बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'इवेंट बुकिंग',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>सामुदायिक हॉल बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'सामुदायिक हॉल बुकिंग',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>टेबल बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'टेबल बुकिंग',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>किराया बुकिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'किराया बुकिंग',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>इलेक्ट्रॉनिक्स</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'इलेक्ट्रॉनिक्स',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>मोबाइल फोन और सहायक उपकरण</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'मोबाइल फोन और सहायक उपकरण',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>लैपटॉप और टैबलेट</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'लैपटॉप और टैबलेट',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>ऑडियो डिवाइस</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ऑडियो डिवाइस',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>स्मार्ट होम और ऑटोमेशन</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'स्मार्ट होम और ऑटोमेशन',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>घरेलू सामान</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'घरेलू सामान',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>रसोई के उपकरण</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'रसोई के उपकरण',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>खाना पकाने के बर्तन और डाइनिंग</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'खाना पकाने के बर्तन और डाइनिंग',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>फर्नीचर और सजावट</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'फर्नीचर और सजावट',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>सफाई सामग्री</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'सफाई सामग्री',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>पुस्तकें और स्टेशनरी</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'पुस्तकें और स्टेशनरी',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>काल्पनिक और गैर-काल्पनिक पुस्तकें</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'काल्पनिक और गैर-काल्पनिक पुस्तकें',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>शैक्षिक और अकादमिक</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'शैक्षिक और अकादमिक',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>कार्यालय सामग्री</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'कार्यालय सामग्री',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>कला और शिल्प सामग्री</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'कला और शिल्प सामग्री',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

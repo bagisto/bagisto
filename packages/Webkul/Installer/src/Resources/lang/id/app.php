@@ -265,6 +265,24 @@ return [
                     'name' => 'Koleksi Berani',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Lihat Koleksi',
+                        'description' => 'Koleksi Berani kami hadir untuk mendefinisikan ulang lemari pakaian Anda dengan desain tak kenal takut dan warna-warna cerah yang mencolok. Dari pola berani hingga nuansa kuat, ini adalah kesempatan Anda untuk keluar dari kebiasaan dan masuk ke luar biasa.',
+                        'title' => 'Keluarkan Keberanian Anda dengan Koleksi Baru Kami!',
+                    ],
+
+                    'name' => 'Koleksi Berani',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Produk Pemesanan',
+
+                    'options' => [
+                        'title' => 'Pesan Tiket',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Koleksi Kategori',
                 ],
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Deskripsi Kategori Pria',
-                    'meta-description' => 'Meta Deskripsi Kategori Pria',
-                    'meta-keywords' => 'Meta Keyword Kategori Pria',
-                    'meta-title' => 'Meta Judul Kategori Pria',
+                    'description' => '<p>Pria</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
                     'name' => 'Pria',
-                    'slug' => 'pria',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Deskripsi Kategori Pakaian Musim Dingin',
-                    'meta-description' => 'Meta Deskripsi Kategori Pakaian Musim Dingin',
-                    'meta-keywords' => 'Meta Keyword Kategori Pakaian Musim Dingin',
-                    'meta-title' => 'Meta Judul Kategori Pakaian Musim Dingin',
-                    'name' => 'Pakaian Musim Dingin',
-                    'slug' => 'pakaian-musim-dingin',
+                    'description' => '<p>Anak-anak</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Anak-anak',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
+                ],
+
+                '4' => [
+                    'description' => '<p>Wanita</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Wanita',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
+                ],
+
+                '5' => [
+                    'description' => '<p>Pakaian Formal</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Formal',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
+                ],
+
+                '6' => [
+                    'description' => '<p>Pakaian Kasual</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Kasual',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
+                ],
+
+                '7' => [
+                    'description' => '<p>Pakaian Olahraga</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Olahraga',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
+                ],
+
+                '8' => [
+                    'description' => '<p>Alas Kaki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Alas Kaki',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
+                ],
+
+                '9' => [
+                    'description' => '<p>Pakaian Anak Perempuan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Anak Perempuan',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
+                ],
+
+                '10' => [
+                    'description' => '<p>Pakaian Anak Laki-laki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Anak Laki-laki',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
+                ],
+
+                '11' => [
+                    'description' => '<p>Sepatu Anak Perempuan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sepatu Anak Perempuan',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
+                ],
+
+                '12' => [
+                    'description' => '<p>Sepatu Anak Laki-laki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sepatu Anak Laki-laki',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
+                ],
+
+                '13' => [
+                    'description' => '<p>Pakaian Formal</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Clothing',
+                    'name' => 'Pakaian Formal',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
+                ],
+
+                '14' => [
+                    'description' => '<p>Pakaian Kasual</p>',
+                    'meta-description' => 'Boys Fashion',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Clothing',
+                    'name' => 'Pakaian Kasual',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
+                ],
+
+                '15' => [
+                    'description' => '<p>Pakaian Olahraga</p>',
+                    'meta-description' => 'Girls Fashionable Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Footwear',
+                    'name' => 'Pakaian Olahraga',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
+                ],
+
+                '16' => [
+                    'description' => '<p>Alas Kaki</p>',
+                    'meta-description' => 'Boys Stylish Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Footwear',
+                    'name' => 'Alas Kaki',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
+                ],
+
+                '17' => [
+                    'description' => '<p>Kesehatan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kesehatan',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
+                ],
+
+                '18' => [
+                    'description' => '<p>Tutorial Yoga yang Dapat Diunduh</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Tutorial Yoga yang Dapat Diunduh',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
+                ],
+
+                '19' => [
+                    'description' => '<p>E-Book</p>',
+                    'meta-description' => 'Books Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Books Collection',
+                    'name' => 'E-Book',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
+                ],
+
+                '20' => [
+                    'description' => '<p>Tiket Film</p>',
+                    'meta-description' => 'Immerse yourself in the magic of 10 movies each month without extra charges. Valid nationwide with no blackout dates, this pass offers exclusive perks and concession discounts, making it a must-have for movie enthusiasts.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Monthly Movie Pass',
+                    'name' => 'Tiket Film',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
+                ],
+
+                '21' => [
+                    'description' => '<p>Pemesanan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>Pemesanan Janji</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Janji',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>Pemesanan Acara</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Acara',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>Pemesanan Balai Komunitas</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Balai Komunitas',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Pemesanan Meja</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Meja',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Pemesanan Sewa</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Sewa',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Elektronik</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Elektronik',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Ponsel & Aksesori</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ponsel & Aksesori',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Laptop & Tablet</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Laptop & Tablet',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Perangkat Audio</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perangkat Audio',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Rumah Pintar & Otomatisasi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rumah Pintar & Otomatisasi',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Rumah Tangga</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rumah Tangga',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Peralatan Dapur</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Peralatan Dapur',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Peralatan Masak & Makan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Peralatan Masak & Makan',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Furnitur & Dekorasi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Furnitur & Dekorasi',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Perlengkapan Kebersihan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perlengkapan Kebersihan',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Buku & Alat Tulis</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Buku & Alat Tulis',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Fiksi & Non-Fiksi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Fiksi & Non-Fiksi',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Pendidikan & Akademik</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pendidikan & Akademik',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Perlengkapan Kantor</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perlengkapan Kantor',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Bahan Seni & Kerajinan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Bahan Seni & Kerajinan',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

@@ -251,7 +251,7 @@ return [
                     'name' => 'جميع المنتجات',
 
                     'options' => [
-                        'title' => 'جميع المنتجات',
+                        'title' => 'مجموعة الأطفال',
                     ],
                 ],
 
@@ -265,6 +265,24 @@ return [
                     'name' => 'مجموعات بارزة',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'عرض المجموعات',
+                        'description' => 'مجموعاتنا الجريئة موجودة هنا لإعادة تعريف خزانتك بتصميمات شجاعة وألوان نابضة بالحياة. من الأنماط الجريئة إلى الألوان القوية، هذه فرصتك للابتعاد عن المألوف والدخول إلى الاستثنائي.',
+                        'title' => 'أطلق جرأتك مع مجموعتنا الجديدة!',
+                    ],
+
+                    'name' => 'مجموعات بارزة',
+                ],
+
+                'booking-products' => [
+                    'name' => 'منتجات الحجز',
+
+                    'options' => [
+                        'title' => 'حجز التذاكر',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'تصنيفات المجموعات',
                 ],
@@ -273,7 +291,7 @@ return [
                     'name' => 'مجموعات مميزة',
 
                     'options' => [
-                        'title' => 'منتجات مميزة',
+                        'title' => 'مجموعات الرجال',
                     ],
                 ],
 
@@ -317,7 +335,7 @@ return [
                     'name' => 'منتجات جديدة',
 
                     'options' => [
-                        'title' => 'منتجات جديدة',
+                        'title' => 'مجموعات النساء',
                     ],
                 ],
 
@@ -377,21 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'وصف فئة الرجال',
-                    'meta-description' => 'وصف فئة الرجال',
-                    'meta-keywords' => 'كلمات دلالية لفئة الرجال',
-                    'meta-title' => 'عنوان فئة الرجال',
-                    'name' => 'الرجال',
-                    'slug' => 'الرجال',
+                    'description' => '<p>رجال</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'رجال',
+                    'slug' => 'رجال',
+                    'url-path' => '',
                 ],
 
                 '3' => [
-                    'description' => 'وصف فئة ملابس الشتاء',
-                    'meta-description' => 'وصف فئة ملابس الشتاء',
-                    'meta-keywords' => 'كلمات دلالية لفئة ملابس الشتاء',
-                    'meta-title' => 'عنوان فئة ملابس الشتاء',
-                    'name' => 'ملابس الشتاء',
-                    'slug' => 'ملابس-الشتاء',
+                    'description' => '<p>أطفال</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'أطفال',
+                    'slug' => 'اطفال',
+                    'url-path' => '',
+                ],
+
+                '4' => [
+                    'description' => '<p>امرأة</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'امرأة',
+                    'slug' => 'امراة',
+                    'url-path' => '',
+                ],
+
+                '5' => [
+                    'description' => '<p>ملابس رسمية</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ملابس رسمية',
+                    'slug' => 'ملابس رسمية للرجال',
+                    'url-path' => '',
+                ],
+
+                '6' => [
+                    'description' => '<p>لباس غير رسمي</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'لباس غير رسمي',
+                    'slug' => 'ملابس كاجوال للرجال',
+                    'url-path' => '',
+                ],
+
+                '7' => [
+                    'description' => '<p>ارتداء نشط</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ارتداء نشط',
+                    'slug' => 'ارتداء-نشط',
+                    'url-path' => '',
+                ],
+
+                '8' => [
+                    'description' => '<p>ارتداء القدم</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ارتداء القدم',
+                    'slug' => 'ارتداء-القدم',
+                    'url-path' => '',
+                ],
+
+                '9' => [
+                    'description' => '<p>ملابس رسمية</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ملابس رسمية',
+                    'slug' => 'ملابس رسمية نسائية',
+                    'url-path' => '',
+                ],
+
+                '10' => [
+                    'description' => '<p>لباس غير رسمي</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'لباس غير رسمي',
+                    'slug' => 'ملابس كاجوال نسائية',
+                    'url-path' => '',
+                ],
+
+                '11' => [
+                    'description' => '<p>ملابس نشطة</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ملابس نشطة',
+                    'slug' => 'ملابس نشطة أنثى',
+                    'url-path' => '',
+                ],
+
+                '12' => [
+                    'description' => '<p>ارتداء القدم</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ارتداء القدم',
+                    'slug' => 'ارتداء الأحذية-أنثى',
+                    'url-path' => '',
+                ],
+
+                '13' => [
+                    'description' => '<p>ملابس بنات</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'ملابس بنات',
+                    'slug' => 'ملابس الفتيات',
+                    'url-path' => '',
+                ],
+
+                '14' => [
+                    'description' => '<p>ملابس الأولاد</p>',
+                    'meta-description' => 'أزياء الأولاد',
+                    'meta-keywords' => '',
+                    'meta-title' => 'ملابس الأولاد',
+                    'name' => 'ملابس الأولاد',
+                    'slug' => 'ملابس-الاولاد',
+                    'url-path' => '',
+                ],
+
+                '15' => [
+                    'description' => '<p>أحذية بنات</p>',
+                    'meta-description' => 'مجموعة أحذية الفتيات العصرية',
+                    'meta-keywords' => '',
+                    'meta-title' => 'أحذية بنات',
+                    'name' => 'أحذية بنات',
+                    'slug' => 'احذية-بنات',
+                    'url-path' => '',
+                ],
+
+                '16' => [
+                    'description' => '<p>أحذية الأولاد</p>',
+                    'meta-description' => 'مجموعة الأحذية الأنيقة للأولاد',
+                    'meta-keywords' => '',
+                    'meta-title' => 'أحذية الأولاد',
+                    'name' => 'أحذية الأولاد',
+                    'slug' => 'احذية-الاولاد',
+                    'url-path' => '',
+                ],
+
+                '17' => [
+                    'description' => '<p>صحة</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'صحة',
+                    'slug' => 'صحة',
+                    'url-path' => '',
+                ],
+
+                '18' => [
+                    'description' => '<p>دروس اليوغا للتحميل</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'دروس اليوغا للتحميل',
+                    'slug' => 'دروس-اليوغا-للتحميل',
+                    'url-path' => '',
+                ],
+
+                '19' => [
+                    'description' => '<p>مجموعة كتب</p>',
+                    'meta-description' => 'مجموعة كتب',
+                    'meta-keywords' => '',
+                    'meta-title' => 'مجموعة كتب',
+                    'name' => 'الكتب الإلكترونية',
+                    'slug' => 'الكتب-الالكترونية',
+                    'url-path' => '',
+                ],
+
+                '20' => [
+                    'description' => '<p>ممر الفيلم</p>',
+                    'meta-description' => 'انغمس في سحر 10 أفلام كل شهر دون رسوم إضافية. صالحة في جميع أنحاء البلاد بدون تواريخ حجب، وتوفر هذه البطاقة امتيازات حصرية وخصومات امتياز، مما يجعلها ضرورية لعشاق الأفلام.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'تذكرة مشاهدة الأفلام الشهرية من CineXperience',
+                    'name' => 'ممر الفيلم',
+                    'slug' => 'ممر-الفيلم',
+                    'url-path' => '',
+                ],
+
+                '21' => [
+                    'description' => '<p>Easily manage and sell your booking-based products with our seamless booking system. Whether you offer appointments, rentals, events, or reservations, our solution ensures a smooth experience for both businesses and customers. With real-time availability, flexible scheduling, and automated notifications, you can streamline your booking process effortlessly. Enhance customer convenience and maximize your sales with our powerful booking product solution!</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Bookings',
+                    'slug' => 'bookings',
+                    'url-path' => '',
+                ],
+
+                '22' => [
+                    'description' => '<p>Appointment booking allows customers to schedule time slots for services or consultations with businesses or professionals. This system is commonly used in industries such as healthcare, beauty, education, and personal services. It helps streamline scheduling, reduce wait times, and improve customer satisfaction by offering convenient, time-based reservations.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Appointment Booking',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
+                ],
+
+                '23' => [
+                    'description' => '<p>Event booking allows individuals or groups to register or reserve spots for public or private events such as concerts, workshops, conferences, or parties. It typically includes options for selecting dates, seating types, and ticket categories, providing organizers with efficient attendee management and ensuring a smooth entry process.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Event Booking',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
+                ],
+
+                '24' => [
+                    'description' => '<p>Community hall booking enables individuals, organizations, or groups to reserve community spaces for various events such as weddings, meetings, cultural programs, or social gatherings. This system helps manage availability, schedule bookings, and handle logistics like capacity, amenities, and rental duration. It ensures efficient use of public or private halls while offering a convenient way for users to organize their events.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Community Hall Bookings',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Table booking enables customers to reserve tables at restaurants, cafes, or dining venues in advance. It helps manage seating capacity, reduce wait times, and provide a better dining experience. This system is especially useful during peak hours, special events, or for accommodating large groups with specific preferences.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Table Booking',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Rental booking facilitates the reservation of items or properties for temporary use, such as vehicles, equipment, vacation homes, or meeting spaces. It includes features for selecting rental periods, checking availability, and managing payments. This system supports both short-term and long-term rentals, enhancing convenience for both providers and renters.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rental Booking',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Explore the latest in consumer electronics, designed to keep you connected, productive, and entertained. Whether you\'re upgrading your devices or looking for smart solutions, we have everything you need.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Electronics',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Discover smartphones, chargers, cases, and other essentials for staying connected on the go.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Mobile Phones & Accessories',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Find powerful laptops and portable tablets for work, study, and play.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Laptops & Tablets',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Shop headphones, earbuds, and speakers to enjoy crystal-clear sound and immersive audio experiences.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Audio Devices',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Make life easier with smart lighting, thermostats, security systems, and more.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Smart Home & Automation',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Upgrade your living space with functional and stylish home and kitchen essentials. From cooking to cleaning, find products that enhance comfort and efficiency.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Household',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Browse blenders, air fryers, coffee makers, and more to simplify meal prep.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kitchen Appliances',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Explore cookware sets, utensils, dinnerware, and serveware for your culinary needs.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Cookware & Dining',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Add comfort and charm with sofas, tables, wall art, and home accents.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Furniture & Decor',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Keep your space spotless with vacuums, cleaning sprays, brooms, and organizers.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Cleaning Supplies',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Ignite your imagination or organize your workspace with a wide selection of books and stationery. Perfect for readers, students, professionals, and artists.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Books & Stationery',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Dive into bestselling novels, biographies, self-help, and more.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Fiction & Non-Fiction Books',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Find textbooks, reference materials, and study guides for all ages.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Educational & Academic',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Shop pens, notebooks, planners, and office essentials for productivity.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Office Supplies',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Explore paints, brushes, sketchbooks, and DIY craft kits for creatives.</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Art & Craft Materials',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],

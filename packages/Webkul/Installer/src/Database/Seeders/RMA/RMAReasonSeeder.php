@@ -62,15 +62,19 @@ class RMAReasonSeeder extends Seeder
             DefaultRMAResolution::CANCEL_ITEMS->value,
         ];
 
+        $reasonResolutions = [];
+
         foreach ($reasons as $reason) {
             foreach ($resolutionTypes as $resolutionType) {
-                DB::table('rma_reason_resolutions')->insert([
+                $reasonResolutions[] = [
                     'rma_reason_id' => $reason->id,
                     'resolution_type' => $resolutionType,
                     'created_at' => now(),
                     'updated_at' => now(),
-                ]);
+                ];
             }
         }
+
+        DB::table('rma_reason_resolutions')->insert($reasonResolutions);
     }
 }
