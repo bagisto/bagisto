@@ -25,6 +25,30 @@ class CartAddressRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $trimFields = ['company_name', 'first_name', 'last_name', 'email', 'city', 'postcode', 'phone', 'vat_id'];
+
+        foreach (['billing', 'shipping'] as $addressType) {
+            if (! $this->has($addressType)) {
+                continue;
+            }
+
+            $addressData = $this->input($addressType, []);
+
+            foreach ($trimFields as $field) {
+                if (isset($addressData[$field]) && is_string($addressData[$field])) {
+                    $addressData[$field] = trim($addressData[$field]);
+                }
+            }
+
+            $this->merge([$addressType => $addressData]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      */
     public function rules(): array

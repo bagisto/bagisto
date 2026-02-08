@@ -18,6 +18,28 @@ class ProfileRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $trimFields = ['first_name', 'last_name', 'email', 'phone'];
+
+        $data = [];
+
+        foreach ($trimFields as $field) {
+            if ($this->has($field)) {
+                $data[$field] = trim($this->input($field));
+            }
+        }
+
+        if (! empty($data)) {
+            $this->merge($data);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

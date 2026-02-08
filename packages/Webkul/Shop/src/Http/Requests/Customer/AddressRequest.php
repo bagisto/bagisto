@@ -20,6 +20,28 @@ class AddressRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $trimFields = ['company_name', 'first_name', 'last_name', 'city', 'postcode', 'phone', 'email', 'vat_id'];
+
+        $data = [];
+
+        foreach ($trimFields as $field) {
+            if ($this->has($field)) {
+                $data[$field] = is_string($this->input($field)) ? trim($this->input($field)) : $this->input($field);
+            }
+        }
+
+        if (! empty($data)) {
+            $this->merge($data);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
