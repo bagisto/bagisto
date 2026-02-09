@@ -1037,15 +1037,6 @@
                                         @lang('installer::app.installer.index.sample-products.no')
                                     </option>
                                 </x-installer::form.control-group.control>
-
-                                <a
-                                    href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
-                                    download="products.csv"
-                                    id="source-sample-link"
-                                    class="mt-1 cursor-pointer text-right text-sm text-blue-600 transition-all hover:underline"
-                                >
-                                    @lang('installer::app.installer.index.sample-products.download-sample')
-                                </a>
                             </div>
 
                             <div class="flex items-center justify-end px-4 py-2.5">

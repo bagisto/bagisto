@@ -905,7 +905,6 @@ return [
             ],
 
             'sample-products' => [
-                'download-sample' => 'descarregar mostra',
                 'no' => 'No',
                 'sample-products' => 'Productes de mostra',
                 'title' => 'Productes de mostra',

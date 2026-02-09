@@ -6,8 +6,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
@@ -177,21 +175,5 @@ class InstallerController extends Controller
 
             return false;
         }
-    }
-
-    /**
-     * SMTP connection setup for Mail
-     */
-    public function smtpConfigSetup()
-    {
-        $this->environmentManager->setEnvConfiguration(request()->input());
-
-        $filePath = storage_path('installed');
-
-        File::put($filePath, 'Your Bagisto App is Successfully Installed');
-
-        Event::dispatch('bagisto.installed');
-
-        return $filePath;
     }
 }

@@ -905,7 +905,6 @@ return [
             ],
 
             'sample-products' => [
-                'download-sample' => 'සාම්පලය බාගන්න',
                 'no' => 'නැහැ',
                 'sample-products' => 'සාම්පල නිෂ්පාදන',
                 'title' => 'සාම්පල නිෂ්පාදන',

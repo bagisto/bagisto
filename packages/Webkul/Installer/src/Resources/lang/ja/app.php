@@ -905,7 +905,6 @@ return [
             ],
 
             'sample-products' => [
-                'download-sample' => 'サンプルをダウンロード',
                 'no' => 'いいえ',
                 'sample-products' => 'サンプル製品',
                 'title' => 'サンプル製品',
