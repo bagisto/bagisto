@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.4.0-beta1 (21st of January 2026)** - **Release**
+## **v2.4.0-beta1 (9th of February 2026)** - **Release**
 
 * **[Laravel 12 Upgrade]** Upgraded framework to Laravel 12 with comprehensive modernization:
   - Fixed Carbon date/time type strictness issues (int/float parameters, non-null timezones).

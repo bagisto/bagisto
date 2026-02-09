@@ -426,7 +426,7 @@ class Installer extends Command
 
                 app(DatabaseManager::class)->seedSampleProducts($this->getSeederConfiguration());
 
-                $this->warn('Step: Reindexing data...');
+                $this->warn('Step: Indexing data...');
 
                 $this->call('indexer:index', ['--mode' => ['full']]);
 
