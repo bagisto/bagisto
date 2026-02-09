@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'RMA සඳහා නිෂ්පාදන වර්ගය අවසර දීම',
                     'allow-rma-for-digital-product' => 'ඩිජිටල් නිෂ්පාදනයකට RMA වලට අවසර දීම',
                     'allowed-file-extension' => 'අනුමත කළ ගොනු විස්තාරණය',
-                    'allowed-file-types' => 'කරුණාකර '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' පමණක් තෝරන්න',
+                    'allowed-file-types' => 'කරුණාකර :allowed_types පමණක් තෝරන්න',
                     'allowed-info' => 'අලංකාරක සලකුණු එක්ක වෙන් කළා. උදාහරණයක්: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'අවලංගු කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
                     'allowed-request-declined-request' => 'ප්‍රතික්ෂේප කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',

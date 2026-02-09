@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => '允许产品类型用于RMA',
                     'allow-rma-for-digital-product' => '允许数字产品的RMA',
                     'allowed-file-extension' => '允许的文件扩展名',
-                    'allowed-file-types' => '请选择仅文件类型 '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => '请选择仅文件类型 :allowed_types',
                     'allowed-info' => '用逗号分隔。例如：jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => '允许取消请求的新RMA请求',
                     'allowed-request-declined-request' => '允许被拒请求的新RMA请求',

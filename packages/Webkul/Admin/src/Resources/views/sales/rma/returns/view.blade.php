@@ -1032,7 +1032,7 @@
                             if (! hasAllowedFileType) {
                                 this.$emitter.emit('add-flash', {
                                     type: 'warning',
-                                    message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types')"
+                                    message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types', ['allowed_types' => core()->getConfigData('sales.rma.setting.allowed_file_extension')])"
                                 });
 
                                 event.target.value = '';

@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'Permetre tipus de producte per a RMA',
                     'allow-rma-for-digital-product' => 'Permetre RMA per producte digital',
                     'allowed-file-extension' => 'Extensions de fitxer permeses',
-                    'allowed-file-types' => 'Seleccioneu només els tipus de fitxer '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Seleccioneu només els tipus de fitxer :allowed_types',
                     'allowed-info' => 'Separat per comes. Exemple: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Permetre nova sol·licitud RMA per sol·licitud cancel·lada',
                     'allowed-request-declined-request' => 'Permetre nova sol·licitud RMA per sol·licitud rebutjada',

@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'Разрешить тип продукта для RMA',
                     'allow-rma-for-digital-product' => 'Разрешить RMA для цифрового продукта',
                     'allowed-file-extension' => 'Разрешённое расширение файла',
-                    'allowed-file-types' => 'Пожалуйста, выберите только типы файлов '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Пожалуйста, выберите только типы файлов :allowed_types',
                     'allowed-info' => 'Разделено запятыми. Например: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Разрешить новый запрос RMA для отменённого запроса',
                     'allowed-request-declined-request' => 'Разрешить новый запрос RMA для отклонённого запроса',

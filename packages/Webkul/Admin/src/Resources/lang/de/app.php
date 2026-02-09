@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'Erlaube Produkttyp für RMA',
                     'allow-rma-for-digital-product' => 'RMA für digitales Produkt zulassen',
                     'allowed-file-extension' => 'Erlaubte Dateierweiterung',
-                    'allowed-file-types' => 'Bitte wählen Sie nur die Dateitypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Bitte wählen Sie nur die Dateitypen :allowed_types',
                     'allowed-info' => 'Durch Kommas getrennt. Zum Beispiel: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Neuen RMA-Antrag für stornierte Anfragen zulassen',
                     'allowed-request-declined-request' => 'Neuen RMA-Antrag für abgelehnte Anfragen zulassen',

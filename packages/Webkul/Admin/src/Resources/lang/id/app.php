@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'Izinkan Jenis Produk untuk RMA',
                     'allow-rma-for-digital-product' => 'Izinkan RMA untuk produk digital',
                     'allowed-file-extension' => 'Ekstensi File yang Diizinkan',
-                    'allowed-file-types' => 'Silakan pilih tipe file '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' saja',
+                    'allowed-file-types' => 'Silakan pilih tipe file :allowed_types saja',
                     'allowed-info' => 'Pisahkan dengan koma. Contoh: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Dibatalkan',
                     'allowed-request-declined-request' => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Ditolak',

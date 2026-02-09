@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'אפשר סוג מוצר עבור RMA',
                     'allow-rma-for-digital-product' => 'אפשר RMA עבור מוצר דיגיטלי',
                     'allowed-file-extension' => 'סיומת קובץ מותרת',
-                    'allowed-file-types' => 'אנא בחר סוגי קבצים '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' בלבד',
+                    'allowed-file-types' => 'אנא בחר סוגי קבצים :allowed_types בלבד',
                     'allowed-info' => 'מופרד באמצעות פסיקים. לדוגמה: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'אפשר בקשת RMA חדשה עבור בקשה מבוטלת',
                     'allowed-request-declined-request' => 'אפשר בקשת RMA חדשה עבור בקשה נדחתה',

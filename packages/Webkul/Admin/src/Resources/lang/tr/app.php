@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'RMA için ürün türüne izin ver',
                     'allow-rma-for-digital-product' => 'Dijital ürün için RMA\'ya izin ver',
                     'allowed-file-extension' => 'İzin verilen dosya uzantısı',
-                    'allowed-file-types' => 'Lütfen yalnızca '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' dosya türlerini seçin',
+                    'allowed-file-types' => 'Lütfen yalnızca :allowed_types dosya türlerini seçin',
                     'allowed-info' => 'Virgülle ayrılmış. Örneğin: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'İptal edilen talep için yeni RMA talebine izin ver',
                     'allowed-request-declined-request' => 'Reddedilen talep için yeni RMA talebine izin ver',

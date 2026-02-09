@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'اجازه نوع محصول برای RMA',
                     'allow-rma-for-digital-product' => 'اجازه RMA برای محصول دیجیتال',
                     'allowed-file-extension' => 'پسوند فایل مجاز',
-                    'allowed-file-types' => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',
+                    'allowed-file-types' => 'لطفاً فقط نوع فایل‌های :allowed_types را انتخاب کنید',
                     'allowed-info' => 'با کاما جدا شده. به عنوان مثال: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'اجازه درخواست جدید RMA برای درخواست لغو شده',
                     'allowed-request-declined-request' => 'اجازه درخواست جدید RMA برای درخواست رد شده',

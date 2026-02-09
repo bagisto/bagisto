@@ -4947,7 +4947,7 @@ return [
                     'allow-product-type-for-rma' => 'Sta producttype toe voor RMA',
                     'allow-rma-for-digital-product' => 'Sta RMA toe voor digitaal product',
                     'allowed-file-extension' => 'Toegestane bestandsextensie',
-                    'allowed-file-types' => 'Selecteer alleen de bestandstypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Selecteer alleen de bestandstypen :allowed_types',
                     'allowed-info' => 'Gescheiden door komma’s. Bijvoorbeeld: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Sta een nieuw RMA-verzoek toe voor geannuleerd verzoek',
                     'allowed-request-declined-request' => 'Sta een nieuw RMA-verzoek toe voor afgewezen verzoek',
