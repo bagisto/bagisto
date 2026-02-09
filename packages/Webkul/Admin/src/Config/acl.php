@@ -448,7 +448,7 @@ return [
     ], [
         'key' => 'marketing.promotions.catalog_rules.create',
         'name' => 'admin::app.acl.create',
-        'route' => 'admin.marketing.promotions.catalog_rules.index',
+        'route' => 'admin.marketing.promotions.catalog_rules.create',
         'sort' => 1,
     ], [
         'key' => 'marketing.promotions.catalog_rules.edit',
@@ -573,7 +573,7 @@ return [
     ], [
         'key' => 'marketing.search_seo.search_terms.create',
         'name' => 'admin::app.acl.create',
-        'route' => 'admin.marketing.search_seo.search_terms.update',
+        'route' => 'admin.marketing.search_seo.search_terms.store',
         'sort' => 1,
     ], [
         'key' => 'marketing.search_seo.search_terms.edit',
@@ -806,22 +806,17 @@ return [
         'route' => 'admin.settings.users.index',
         'sort' => 6,
     ], [
-        'key' => 'settings.users.users',
-        'name' => 'admin::app.acl.users',
-        'route' => 'admin.settings.users.index',
-        'sort' => 1,
-    ], [
-        'key' => 'settings.users.users.create',
+        'key' => 'settings.users.create',
         'name' => 'admin::app.acl.create',
         'route' => 'admin.settings.users.store',
         'sort' => 1,
     ], [
-        'key' => 'settings.users.users.edit',
+        'key' => 'settings.users.edit',
         'name' => 'admin::app.acl.edit',
         'route' => 'admin.settings.users.edit',
         'sort' => 2,
     ], [
-        'key' => 'settings.users.users.delete',
+        'key' => 'settings.users.delete',
         'name' => 'admin::app.acl.delete',
         'route' => 'admin.settings.users.delete',
         'sort' => 3,

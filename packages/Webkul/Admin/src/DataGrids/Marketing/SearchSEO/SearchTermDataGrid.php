@@ -118,7 +118,7 @@ class SearchTermDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.search_terms.edit')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_terms.edit')) {
             $this->addAction([
                 'index' => 'edit',
                 'icon' => 'icon-edit',
@@ -131,7 +131,7 @@ class SearchTermDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_terms.delete')) {
             $this->addAction([
                 'index' => 'delete',
                 'icon' => 'icon-delete',
