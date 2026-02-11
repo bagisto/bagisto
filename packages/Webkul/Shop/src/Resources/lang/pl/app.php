@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'Status RMA nie może zostać zaktualizowany, ponieważ faktura za to zamówienie nie została wystawiona.',
             'permission-denied' => 'Jesteś zalogowany',
             'rma-disabled' => 'RMA jest wyłączone dla tego produktu',
+            'reopen-not-allowed' => 'Ponowne otwarcie tego żądania RMA nie jest dozwolone.',
             'send-message' => ':name zostało pomyślnie wysłane.',
             'update-success' => ':name zostało pomyślnie zaktualizowane.',
         ],

@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'לא ניתן לעדכן את סטטוס ה-RMA מכיוון שהחשבונית להזמנה זו לא נוצרה.',
             'permission-denied' => 'אתה מחובר',
             'rma-disabled' => 'RMA מנוטרל עבור מוצר זה',
+            'reopen-not-allowed' => 'פתיחה מחדש של בקשת RMA זו אינה מותרת.',
             'send-message' => ':name נשלח בהצלחה.',
             'update-success' => ':name עודכן בהצלחה.',
         ],

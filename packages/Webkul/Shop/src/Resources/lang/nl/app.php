@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'De RMA-status kan niet worden bijgewerkt omdat de factuur voor deze bestelling niet is aangemaakt.',
             'permission-denied' => 'U bent ingelogd',
             'rma-disabled' => 'RMA is uitgeschakeld voor dit product',
+            'reopen-not-allowed' => 'Het heropenen van dit RMA-verzoek is niet toegestaan.',
             'send-message' => ':name succesvol verzonden.',
             'update-success' => ':name succesvol bijgewerkt.',
         ],

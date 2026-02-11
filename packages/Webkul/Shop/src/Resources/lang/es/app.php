@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'El estado de RMA no se puede actualizar porque no se ha creado la factura para este pedido.',
             'permission-denied' => 'Ha iniciado sesión',
             'rma-disabled' => 'RMA está deshabilitado para este producto',
+            'reopen-not-allowed' => 'No se permite reabrir esta solicitud de RMA.',
             'send-message' => ':name enviado/a exitosamente.',
             'update-success' => ':name actualizado/a exitosamente.',
         ],

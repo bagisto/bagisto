@@ -2,6 +2,14 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.4.0-beta2 (13th of February 2026)** - **Release**
+
+* Updated the translations for all the dummy products.
+
+* Optimized RMA-related queries and introduced a return period column in the order items table.
+
+* #11100 [fixed] - Fixed an issue where updating the return window rule affected previously placed orders.
+
 ## **v2.4.0-beta1 (9th of February 2026)** - **Release**
 
 * **[Laravel 12 Upgrade]** Upgraded framework to Laravel 12 with comprehensive modernization:

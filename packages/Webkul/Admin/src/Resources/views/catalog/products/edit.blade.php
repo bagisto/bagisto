@@ -150,7 +150,6 @@
             @endphp
 
             @foreach ($groupedColumns as $column => $groups)
-
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.before", ['product' => $product]) !!}
 
                 <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
@@ -195,15 +194,6 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    @if ($attribute->code == 'rma_rule_id')
-                                        @includeWhen($group->code === 'rma', 'admin::catalog.products.edit.rma-rules', [
-                                            'attribute' => $attribute,
-                                            'product'   => $product,
-                                        ])
-
-                                        @continue
-                                    @endif
-
                                     {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.before", ['product' => $product]) !!}
 
                                     <x-admin::form.control-group class="last:!mb-0">
@@ -308,7 +298,6 @@
                 @endif
 
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
-
             @endforeach
         </div>
 

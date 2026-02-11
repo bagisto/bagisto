@@ -553,11 +553,8 @@
                         @endif
                     @endif
 
-                    <!-- Reopen Declined Request RMA -->
-                    @if (
-                        core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') == 'yes'
-                        && $rma->rma_status_id == DefaultRMAStatusEnum::DECLINED->value
-                    )
+                    <!-- Reopen RMA Request -->
+                    @if ($canReopenRma)
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
@@ -576,62 +573,6 @@
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
                                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
-                                                    <!-- Checkbox for closing RMA -->
-                                                    <x-admin::form.control-group.control
-                                                        type="checkbox"
-                                                        id="close_rma"
-                                                        name="close_rma"
-                                                        value="1"
-                                                        for="close_rma"
-                                                        @change="closeRmaChecked = !closeRmaChecked"
-                                                    />
-
-                                                    <label
-                                                        class="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                                        for="close_rma"
-                                                    >
-                                                        @lang('admin::app.sales.rma.all-rma.view.status-reopen')
-                                                    </label>
-                                                </x-admin::form.control-group>
-
-                                                <button
-                                                    type="submit"
-                                                    class="primary-button"
-                                                    v-if="closeRmaChecked"
-                                                >
-                                                    @lang('admin::app.sales.rma.all-rma.view.save-btn')
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </x-admin::form>
-                                </div>
-                            </x-slot>
-                        </x-admin::accordion>
-                    @endif
-
-                    @if (
-                        core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') == 'yes'
-                        && $rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value
-                    )
-                        <x-admin::accordion>
-                            <x-slot:header>
-                                <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.rma.all-rma.view.status-reopen')
-                                </p>
-                            </x-slot>
-
-                            <x-slot:content>
-                                <div class="grid w-full py-3">
-                                    <x-admin::form
-                                        @submit="validateForm"
-                                        id="check-form"
-                                        enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.re-open', $rma->id)"
-                                    >
-                                        <div class="w-full gap-4">
-                                            <div class="flex flex-col gap-2.5 mb-4">
-                                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
-                                                    <!-- Checkbox for closing RMA -->
                                                     <x-admin::form.control-group.control
                                                         type="checkbox"
                                                         id="close_rma"

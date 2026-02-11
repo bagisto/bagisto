@@ -1677,6 +1677,7 @@ return [
             'creation-error' => '无法更新 RMA 状态，因为尚未为此订单创建发票。',
             'permission-denied' => '您已登录',
             'rma-disabled' => '该产品的 RMA 功能已禁用',
+            'reopen-not-allowed' => '不允许重新打开此RMA请求。',
             'send-message' => ':name 发送成功。',
             'update-success' => ':name 更新成功。',
         ],

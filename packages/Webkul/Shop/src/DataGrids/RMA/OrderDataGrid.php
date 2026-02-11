@@ -14,12 +14,6 @@ class OrderDataGrid extends DataGrid
      */
     public function prepareQueryBuilder(): Builder
     {
-        $globalReturnDays = core()->getConfigData('sales.rma.setting.default_allow_days') ?? 0;
-
-        $allowedProductTypes = core()->getConfigData('sales.rma.setting.select_allowed_product_type');
-
-        $allowedOrderStatus = core()->getConfigData('sales.rma.setting.select_allowed_order_status');
-
         $customerId = auth()->guard('customer')->user()->id;
 
         $tablePrefix = DB::getTablePrefix();
@@ -42,28 +36,7 @@ class OrderDataGrid extends DataGrid
             ])
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
-            ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
             ->leftJoinSub($rmaItemsSubquery, 'rma_items_agg', 'order_items.id', '=', 'rma_items_agg.order_item_id');
-
-        $queryBuilder->leftJoin('product_attribute_values as pav_allow_rma', function ($join) {
-            $join->on('products.id', '=', 'pav_allow_rma.product_id')
-                ->whereExists(function ($query) {
-                    $query->select(DB::raw(1))
-                        ->from('attributes')
-                        ->whereColumn('attributes.id', 'pav_allow_rma.attribute_id')
-                        ->where('attributes.code', 'allow_rma');
-                });
-        })
-            ->leftJoin('product_attribute_values as pav_rma_rules', function ($join) {
-                $join->on('products.id', '=', 'pav_rma_rules.product_id')
-                    ->whereExists(function ($query) {
-                        $query->select(DB::raw(1))
-                            ->from('attributes')
-                            ->whereColumn('attributes.id', 'pav_rma_rules.attribute_id')
-                            ->where('attributes.code', 'rma_rule_id');
-                    });
-            })
-            ->leftJoin('rma_rules', 'pav_rma_rules.integer_value', '=', 'rma_rules.id');
 
         $queryBuilder->where('orders.customer_id', $customerId)
             ->whereNotIn('orders.status', [
@@ -74,54 +47,16 @@ class OrderDataGrid extends DataGrid
             ]);
 
         /**
-         * If the allowed order status is set to 'completed', we filter the orders to include only those with the 'completed' status.
+         * Only include items where allow_rma was explicitly enabled at order
+         * placement (rma_return_period is not null) and the return window
+         * has not expired. Product type eligibility is also captured at order
+         * placement in rma_return_period.
          */
-        if ($allowedOrderStatus == Order::STATUS_COMPLETED) {
-            $queryBuilder->where('orders.status', Order::STATUS_COMPLETED);
-        }
+        $queryBuilder->whereNotNull('order_items.rma_return_period')
+            ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}order_items.created_at) <= {$tablePrefix}order_items.rma_return_period");
 
-        /**
-         * If specific product types are configured for RMA eligibility, we filter the orders to include only those containing products of the specified types.
-         */
-        if (! empty($allowedProductTypes)) {
-            $productTypesArray = array_filter(
-                array_map('trim', explode(',', $allowedProductTypes))
-            );
-
-            if (! empty($productTypesArray)) {
-                $queryBuilder->whereIn('products.type', $productTypesArray);
-            }
-        }
-
-        /**
-         * Check for RMA eligibility based on product types and RMA rules.
-         */
-        $queryBuilder->where(function ($query) use ($globalReturnDays, $tablePrefix) {
-            /**
-             * Products that have RMA explicitly allowed and are governed by active RMA rules,
-             */
-            $query->where(function ($q) use ($tablePrefix) {
-                $q->where('pav_allow_rma.boolean_value', 1)
-                    ->where('rma_rules.status', 1)
-                    ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}orders.created_at) <= {$tablePrefix}rma_rules.return_period");
-            });
-
-            /**
-             * Products that do not have RMA explicitly allowed or are governed by inactive RMA rules (fallback to global setting).,
-             */
-            if ($globalReturnDays > 0) {
-                $query->orWhere(function ($q) use ($globalReturnDays, $tablePrefix) {
-                    $q->where(function ($sub) {
-                        $sub->whereNull('pav_allow_rma.boolean_value')
-                            ->orWhere('pav_allow_rma.boolean_value', 0)
-                            ->orWhere('rma_rules.status', 0);
-                    })
-                        ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}orders.created_at) <= ?", [$globalReturnDays]);
-                });
-            }
-        });
-
-        $queryBuilder->groupBy('orders.id')->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
+        $queryBuilder->groupBy('orders.id')
+            ->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');
         $this->addFilter('increment_id', 'orders.increment_id');

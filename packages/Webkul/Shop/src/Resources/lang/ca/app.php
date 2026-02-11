@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'No es pot actualitzar l\'estat de la RMA perquè la factura d\'aquesta comanda no s\'ha creat.',
             'permission-denied' => 'Estàs connectat',
             'rma-disabled' => 'La RMA està desactivada per aquest producte',
+            'reopen-not-allowed' => 'No es permet reobrir aquesta sol·licitud RMA.',
             'send-message' => ':name enviat correctament.',
             'update-success' => ':name actualitzat correctament.',
         ],

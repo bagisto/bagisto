@@ -293,6 +293,12 @@ class RMAController extends Controller
             abort(404);
         }
 
+        if (! $this->rmaRepository->canReopenRma($rma)) {
+            session()->flash('error', trans('shop::app.rma.response.reopen-not-allowed'));
+
+            return back();
+        }
+
         if (! empty($data['reopen_rma'])) {
             $order = $this->orderRepository->findOrFail($rma->order_id);
 

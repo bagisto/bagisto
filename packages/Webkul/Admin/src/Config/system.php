@@ -3164,23 +3164,6 @@ return [
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
-                'name' => 'select_allowed_order_status',
-                'title' => 'admin::app.configuration.index.sales.rma.select-allowed-order-status',
-                'type' => 'select',
-                'validation' => 'required',
-                'default' => 'all',
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.sales.rma.all-status',
-                        'value' => 'all',
-                    ], [
-                        'title' => 'admin::app.configuration.index.sales.rma.complete',
-                        'value' => 'complete',
-                    ],
-                ],
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
                 'name' => 'select_allowed_product_type',
                 'title' => 'admin::app.configuration.index.sales.rma.allow-product-type-for-rma',
                 'type' => 'multiselect',

@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'この注文の請求書が作成されていないため、RMA ステータスを更新できません。',
             'permission-denied' => 'ログインしています',
             'rma-disabled' => 'この製品のRMAは無効です',
+            'reopen-not-allowed' => 'このRMAリクエストを再開することは許可されていません。',
             'send-message' => ':name が正常に送信されました。',
             'update-success' => ':name が正常に更新されました。',
         ],

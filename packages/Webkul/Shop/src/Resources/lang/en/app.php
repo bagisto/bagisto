@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
             'permission-denied' => 'You are logged in',
             'rma-disabled' => 'RMA is disabled for this product',
+            'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',
             'send-message' => ':name sent successfully.',
             'update-success' => 'Status updated successfully.',
         ],

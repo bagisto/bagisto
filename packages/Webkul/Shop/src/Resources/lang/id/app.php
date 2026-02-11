@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'Status RMA tidak dapat diperbarui karena faktur untuk pesanan ini belum dibuat.',
             'permission-denied' => 'Anda sudah masuk',
             'rma-disabled' => 'RMA dinonaktifkan untuk produk ini',
+            'reopen-not-allowed' => 'Membuka kembali permintaan RMA ini tidak diizinkan.',
             'send-message' => ':name berhasil dikirim.',
             'update-success' => ':name berhasil diperbarui.',
         ],

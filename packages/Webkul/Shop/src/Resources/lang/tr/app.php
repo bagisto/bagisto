@@ -1677,6 +1677,7 @@ return [
             'creation-error' => 'RMA durumu güncellenemiyor çünkü bu sipariş için fatura oluşturulmamış.',
             'permission-denied' => 'Giriş yaptınız',
             'rma-disabled' => 'Bu ürün için RMA devre dışı bırakıldı',
+            'reopen-not-allowed' => 'Bu RMA talebini yeniden açmaya izin verilmiyor.',
             'send-message' => ':name başarıyla gönderildi.',
             'update-success' => ':name başarıyla güncellendi.',
         ],

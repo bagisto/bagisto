@@ -453,30 +453,16 @@
                                     </span>
                                 </p>
 
-                                <template v-if="product.rma_rules">
-                                    <p
-                                        v-if="resolutionType[getProductId(product)] == 'return'"
-                                        class="flex text-sm justify-between whitespace-nowrap"
-                                    >
-                                        <span>
-                                            @lang('shop::app.rma.customer.create.return-window'):
-                                        </span>
-
-                                        <span>
-                                            @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_return_period) }}
-                                        </span>
-                                    </p>
-                                </template>
                                 <p
-                                    v-else-if="! product.rma_return_period"
-                                    class="flex text-sm justify-between gap-3 whitespace-nowrap"
-                                    >
+                                    v-if="resolutionType[getProductId(product)] == 'return'"
+                                    class="flex text-sm justify-between whitespace-nowrap"
+                                >
                                     <span>
                                         @lang('shop::app.rma.customer.create.return-window'):
                                     </span>
 
                                     <span>
-                                        @{{ calculateReturnWindow(product.created_at) }}
+                                        @{{ calculateReturnWindow(product.created_at, product.rma_return_period) }}
                                     </span>
                                 </p>
                             </p>
@@ -1127,10 +1113,11 @@
                             .replace(/'/g, '&#39;');
                     },
 
-                    calculateReturnWindow(createdAt) {
+                    calculateReturnWindow(createdAt, returnDays = null) {
+                        const days = returnDays ?? this.returnWindowDays;
                         const createdDate = new Date(createdAt);
                         const returnDate = new Date(createdDate);
-                        returnDate.setDate(createdDate.getDate() + this.returnWindowDays);
+                        returnDate.setDate(createdDate.getDate() + days);
 
                         const currentDate = new Date();
 
@@ -1144,29 +1131,6 @@
                             day: 'numeric',
                             month: 'long',
                             year: 'numeric'
-                        }).format(returnDate);
-                    },
-
-                    calculateDeliveredReturnWindow(created_At, rulesDays) {
-                        const createdAt = new Date(created_At);
-                        const returnDate = new Date(
-                            createdAt.getTime() + rulesDays * 24 * 60 * 60 * 1000
-                        );
-
-                        returnDate.setUTCDate(returnDate.getDate());
-
-                        const currentDate = new Date();
-
-                        if (returnDate < currentDate) {
-                            this.notAllowed = true;
-
-                            return 'Not Allowed';
-                        }
-
-                        return new Intl.DateTimeFormat('en-GB', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
                         }).format(returnDate);
                     },
 
