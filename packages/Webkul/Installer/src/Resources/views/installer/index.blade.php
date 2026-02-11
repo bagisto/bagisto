@@ -405,7 +405,7 @@
                             <span class="{{ $phpVersion['supported'] ? 'icon-tick text-xl text-green-500' : '' }}"></span>
 
                             <p class="text-sm font-semibold text-gray-600">
-                                @lang('installer::app.installer.index.server-requirements.php') <span class="font-normal">(@lang('installer::app.installer.index.server-requirements.php-version'))</span>
+                                @lang('installer::app.installer.index.server-requirements.php') <span class="font-normal">(@lang('installer::app.installer.index.server-requirements.php-version', ['version' => $phpVersion['minimum']]))</span>
                             </p>
                         </div>
 
@@ -673,13 +673,19 @@
                                             <div class="flex items-center gap-1 text-sm text-gray-600">
                                                 <span class="icon-right text-xl"></span>
 
-                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-database-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.drop-existing-tables')</p>
                                             </div>
 
                                             <div class="flex items-center gap-1 text-sm text-gray-600">
                                                 <span class="icon-right text-xl"></span>
 
-                                                <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-database-tables')</p>
+                                            </div>
+
+                                            <div class="flex items-center gap-1 text-sm text-gray-600">
+                                                <span class="icon-right text-xl"></span>
+
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-tables')</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1037,6 +1043,11 @@
                                         @lang('installer::app.installer.index.sample-products.no')
                                     </option>
                                 </x-installer::form.control-group.control>
+
+                                <!-- Indexing Note -->
+                                <p class="text-xs text-blue-600 mt-2">
+                                    @lang('installer::app.installer.index.sample-products.note')
+                                </p>
                             </div>
 
                             <div class="flex items-center justify-end px-4 py-2.5">

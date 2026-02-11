@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Nee',
+                'note' => 'Opmerking: De indexeringstijd is afhankelijk van het aantal geselecteerde talen. Dit proces kan tot 2 minuten duren.',
                 'sample-products' => 'Voorbeeldproducten',
                 'title' => 'Voorbeeldproducten',
                 'yes' => 'Ja',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Maak de databasetabel aan',
+                'create-database-tables' => 'Database tabellen aanmaken',
+                'drop-existing-tables' => 'Verwijder bestaande tabellen',
                 'install' => 'Installatie',
                 'install-info' => 'Bagisto Voor Installatie',
                 'install-info-button' => 'Klik op de knop hieronder om',
-                'populate-database-table' => 'Vul de databasetabellen',
+                'populate-database-tables' => 'Vul de databasetabellen',
                 'start-installation' => 'Start Installatie',
                 'title' => 'Klaar voor Installatie',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => '8.1 of hoger',
+                'php-version' => ':version of hoger',
                 'session' => 'Sessie',
                 'title' => 'Serververeisten',
                 'tokenizer' => 'Tokenizer',

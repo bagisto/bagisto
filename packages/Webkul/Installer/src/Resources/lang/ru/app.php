@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Нет',
+                'note' => 'Примечание: Время индексации зависит от количества выбранных локалей. Этот процесс может занять до 2 минут.',
                 'sample-products' => 'Образцы продукции',
                 'title' => 'Образцы продукции',
                 'yes' => 'Да',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Создать таблицу базы данных',
+                'create-database-tables' => 'Создать таблицы баз данных',
+                'drop-existing-tables' => 'Удалить существующие таблицы',
                 'install' => 'Установка',
                 'install-info' => 'Bagisto для установки',
                 'install-info-button' => 'Нажмите кнопку ниже, чтобы',
-                'populate-database-table' => 'Заполнить таблицы базы данных',
+                'populate-database-tables' => 'Заполнить таблицы базы данных',
                 'start-installation' => 'Начать установку',
                 'title' => 'Готово к установке',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => '8.1 или выше',
+                'php-version' => ':version или выше',
                 'session' => 'Сессия',
                 'title' => 'Требования к серверу',
                 'tokenizer' => 'tokenizer',

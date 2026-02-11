@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Não',
+                'note' => 'Nota: O tempo de indexação depende do número de localidades selecionadas. Este processo pode levar até 2 minutos para ser concluído.',
                 'sample-products' => 'Produtos de amostra',
                 'title' => 'Produtos de amostra',
                 'yes' => 'Sim',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Maak de databasetabel aan',
+                'create-database-tables' => 'Criar as tabelas do banco de dados',
+                'drop-existing-tables' => 'Remover quaisquer tabelas existentes',
                 'install' => 'Installatie',
                 'install-info' => 'Bagisto Voor Installatie',
                 'install-info-button' => 'Klik op de knop hieronder om',
-                'populate-database-table' => 'Vul de databasetabellen',
+                'populate-database-tables' => 'Vul de databasetabellen',
                 'start-installation' => 'Start Installatie',
                 'title' => 'Klaar voor Installatie',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => '8.1 of hoger',
+                'php-version' => ':version of hoger',
                 'session' => 'Sessie',
                 'title' => 'Serververeisten',
                 'tokenizer' => 'tokenizer',

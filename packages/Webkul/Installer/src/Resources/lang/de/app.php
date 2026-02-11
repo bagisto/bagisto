@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Nein',
+                'note' => 'Hinweis: Die Indizierungszeit hängt von der Anzahl der ausgewählten Gebietsschemas ab. Dieser Vorgang kann bis zu 2 Minuten dauern.',
                 'sample-products' => 'Beispielfprodukte',
                 'title' => 'Beispielfprodukte',
                 'yes' => 'Ja',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Datenbanktabelle erstellen',
+                'create-database-tables' => 'Datenbanktabellen erstellen',
+                'drop-existing-tables' => 'Vorhandene Tabellen löschen',
                 'install' => 'Installation',
                 'install-info' => 'Bagisto zur Installation',
                 'install-info-button' => 'Klicke auf die Schaltfläche unten, um',
-                'populate-database-table' => 'Datenbanktabellen füllen',
+                'populate-database-tables' => 'Datenbanktabellen füllen',
                 'start-installation' => 'Installation starten',
                 'title' => 'Bereit zur Installation',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 oder höher',
+                'php-version' => ':version oder höher',
                 'session' => 'Sitzung',
                 'title' => 'Serveranforderungen',
                 'tokenizer' => 'Tokenizer',

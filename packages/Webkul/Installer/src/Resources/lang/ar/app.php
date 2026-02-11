@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'لا',
+                'note' => 'ملاحظة: يعتمد وقت الفهرسة على عدد اللغات المحددة. قد تستغرق هذه العملية ما يصل إلى دقيقتين حتى تكتمل.',
                 'sample-products' => 'منتجات العينة',
                 'title' => 'منتجات العينة',
                 'yes' => 'نعم',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'إنشاء جدول قاعدة البيانات',
+                'create-database-tables' => 'إنشاء جداول قاعدة البيا',
+                'drop-existing-tables' => 'حذف أي جداول موجودة',
                 'install' => 'التثبيت',
                 'install-info' => 'Bagisto للتثبيت',
                 'install-info-button' => 'انقر على الزر أدناه ل',
-                'populate-database-table' => 'ملء جداول قاعدة البيانات',
+                'populate-database-tables' => 'ملء جداول قاعدة البيانات',
                 'start-installation' => 'بدء التثبيت',
                 'title' => 'جاهز للتثبيت',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 أو أعلى',
+                'php-version' => ':version أو أعلى',
                 'session' => 'الجلسة',
                 'title' => 'متطلبات الخادم',
                 'tokenizer' => 'tokenizer',

@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'නැහැ',
+                'note' => 'සටහන: සුචිගත කිරීමේ කාලය තෝරාගත් ස්ථාන සංඛ්‍යාව මත රඳා පවතී. මෙම ක්‍රියාවලිය සම්පූර්ණ කිරීමට මිනිත්තු 2ක් දක්වා ගත විය හැක.',
                 'sample-products' => 'සාම්පල නිෂ්පාදන',
                 'title' => 'සාම්පල නිෂ්පාදන',
                 'yes' => 'ඔව්',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'දත්ත වගකාගකක් තථා කරනවා',
+                'create-database-tables' => 'දත්ත ගබඩා වගු නිර්මාණය කරන්',
+                'drop-existing-tables' => 'පවතින වගු මකන්න',
                 'install' => 'ස්තුරාකුල',
                 'install-info' => 'උත්සහාභාවයක් සඳහා Bagisto',
                 'install-info-button' => 'පහත ඇතුලත් කිරීමට ක්රම කරන්න',
-                'populate-database-table' => 'දත්ත වගකාගකක් සිටුවනවා',
+                'populate-database-tables' => 'දත්ත වගකාගකක් සිටුවනවා',
                 'start-installation' => 'ස්තුරාකුල ආරම්භය',
                 'title' => 'ස්තුරාකුල සූදාංශයට',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 හෝ ඉහළ',
+                'php-version' => ':version හෝ ඉහළ',
                 'session' => 'සැසුවේ',
                 'title' => 'සේවාකාරී අැතශීරී',
                 'tokenizer' => 'Tokenizer',

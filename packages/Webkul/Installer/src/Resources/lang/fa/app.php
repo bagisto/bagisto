@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'خیر',
+                'note' => 'توجه: زمان نمایه‌سازی به تعداد زبان‌های انتخاب شده بستگی دارد. این فرآیند ممکن است تا ۲ دقیقه طول بکشد.',
                 'sample-products' => 'محصولات نمونه',
                 'title' => 'محصولات نمونه',
                 'yes' => 'بله',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'ایجاد جدول پایگاه‌داده',
+                'create-database-tables' => 'ایجاد جداول پایگاه د',
+                'drop-existing-tables' => 'حذف جداول موجود',
                 'install' => 'نصب',
                 'install-info' => 'Bagisto برای نصب',
                 'install-info-button' => 'برای شروع کلیک کنید',
-                'populate-database-table' => 'پر کردن جدول‌های پایگاه‌داده',
+                'populate-database-tables' => 'پر کردن جدول‌های پایگاه‌داده',
                 'start-installation' => 'شروع نصب',
                 'title' => 'آماده نصب',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 یا بالاتر',
+                'php-version' => ':version یا بالاتر',
                 'session' => 'نشست',
                 'title' => 'نیازمندی‌های سرور',
                 'tokenizer' => 'Tokenizer',

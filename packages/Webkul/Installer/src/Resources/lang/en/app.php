@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
+                'note' => 'Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.',
                 'sample-products' => 'Sample Products',
                 'title' => 'Sample Products',
                 'yes' => 'Yes',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Create the database table',
+                'create-database-tables' => 'Create the database tables',
+                'drop-existing-tables' => 'Drop any existing tables present',
                 'install' => 'Installation',
                 'install-info' => 'Bagisto For Installation',
                 'install-info-button' => 'Click the button below to',
-                'populate-database-table' => 'Populate the database tables',
+                'populate-database-tables' => 'Populate the database tables',
                 'start-installation' => 'Start Installation',
                 'title' => 'Ready for Installation',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 or higher',
+                'php-version' => ':version or higher',
                 'session' => 'session',
                 'title' => 'System Requirements',
                 'tokenizer' => 'tokenizer',

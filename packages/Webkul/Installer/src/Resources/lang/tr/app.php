@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Hayır',
+                'note' => 'Not: İndeksleme süresi seçilen yerel ayar sayısına bağlıdır. Bu işlem tamamlanması 2 dakikaya kadar sürebilir.',
                 'sample-products' => 'Örnek Ürünler',
                 'title' => 'Örnek Ürünler',
                 'yes' => 'Evet',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Veritabanı tablosu oluştur',
+                'create-database-tables' => 'Veritabanı tablolarını oluştur',
+                'drop-existing-tables' => 'Mevcut tabloları sil',
                 'install' => 'Yükleme',
                 'install-info' => 'Kurulum için Bagisto',
                 'install-info-button' => 'Aşağıdaki düğmeye tıklayın',
-                'populate-database-table' => 'Veritabanı tablolarını doldur',
+                'populate-database-tables' => 'Veritabanı tablolarını doldur',
                 'start-installation' => 'Kurulumu Başlat',
                 'title' => 'Kurulum için Hazır',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 veya üstü',
+                'php-version' => ':version veya üstü',
                 'session' => 'oturum',
                 'title' => 'Sunucu Gereksinimleri',
                 'tokenizer' => 'tokenizer',

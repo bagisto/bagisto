@@ -48,7 +48,7 @@ class DatabaseManager
     }
 
     /**
-     * Drop all the tables and migrate in the database
+     * Drop all the tables and migrate in the database.
      *
      * @return void|string
      */

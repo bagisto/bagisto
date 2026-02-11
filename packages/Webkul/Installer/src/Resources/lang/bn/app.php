@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'না',
+                'note' => 'নোট: নির্বাচিত লোকেলের সংখ্যার উপর নির্ভর করে ইন্ডেক্সিং সময়। এই প্রক্রিয়াটি সম্পূর্ণ হতে ২ মিনিট পর্যন্ত সময় লাগতে পারে।',
                 'sample-products' => 'নমুনা পণ্য',
                 'title' => 'নমুনা পণ্য',
                 'yes' => 'হ্যাঁ',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'ডাটাবেস টেবিল তৈরি করুন',
+                'create-database-tables' => 'ডাটাবেস টেবিলগুলি তৈরি করুন',
+                'drop-existing-tables' => 'বিদ্যমান কোনো টেবিল মুছে ফেলুন',
                 'install' => 'ইনস্টলেশন',
                 'install-info' => 'ইনস্টলেশনের জন্য Bagisto',
                 'install-info-button' => 'নীচের বাটনে ক্লিক করুন',
-                'populate-database-table' => 'ডাটাবেস টেবিল পূর্ণ করুন',
+                'populate-database-tables' => 'ডাটাবেস টেবিল পূর্ণ করুন',
                 'start-installation' => 'ইনস্টলেশন শুরু করুন',
                 'title' => 'ইনস্টলেশনের জন্য প্রস্তুত',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 বা তার উচ্চতর সংস্করণ',
+                'php-version' => ':version বা তার উচ্চতর সংস্করণ',
                 'session' => 'সেশন',
                 'title' => 'সার্ভারের প্রয়োজনীয়তা',
                 'tokenizer' => 'টোকেনাইজার',

@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'いいえ',
+                'note' => '注意：インデックス作成時間は選択されたロケールの数によって異なります。このプロセスは完了するまでに最大2分かかる場合があります。',
                 'sample-products' => 'サンプル製品',
                 'title' => 'サンプル製品',
                 'yes' => 'はい',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'データベーステーブルを作成する',
+                'create-database-tables' => 'データベーステーブルを作成',
+                'drop-existing-tables' => '既存のテーブルを削除',
                 'install' => 'インストール',
                 'install-info' => 'インストール用のBagisto',
                 'install-info-button' => '以下のボタンをクリックしてください',
-                'populate-database-table' => 'データベーステーブルを作成する',
+                'populate-database-tables' => 'データベーステーブルを作成する',
                 'start-installation' => 'インストールを開始',
                 'title' => 'インストール準備完了',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1以上',
+                'php-version' => ':version 以上',
                 'session' => 'セッション',
                 'title' => 'サーバーの要件',
                 'tokenizer' => 'トークン生成',

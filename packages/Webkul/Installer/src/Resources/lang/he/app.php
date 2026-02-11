@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'לא',
+                'note' => 'הערה: זמן האינדקס תלוי במספר השפות שנבחרו. תהליך זה עשוי לקחת עד 2 דקות להשלמה.',
                 'sample-products' => 'מוצרי דוגמה',
                 'title' => 'מוצרי דוגמה',
                 'yes' => 'כן',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'יצירת טבלת מסד הנתונים',
+                'create-database-tables' => 'צור טבלאות מסד נתונים',
+                'drop-existing-tables' => 'מחק כל טבלאות קיימות',
                 'install' => 'התקנה',
                 'install-info' => 'Bagisto להתקנה',
                 'install-info-button' => 'לחץ על הכפתור למטה כדי',
-                'populate-database-table' => 'מילוי הטבלאות במסד הנתונים',
+                'populate-database-tables' => 'מילוי הטבלאות במסד הנתונים',
                 'start-installation' => 'התחל התקנה',
                 'title' => 'מוכן להתקנה',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => '8.1 או גבוהה יותר',
+                'php-version' => ':version או גבוהה יותר',
                 'session' => 'Session',
                 'title' => 'דרישות השרת',
                 'tokenizer' => 'מפרק מחרוזת',

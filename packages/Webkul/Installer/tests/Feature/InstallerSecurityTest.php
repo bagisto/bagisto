@@ -43,12 +43,6 @@ it('should block access to run seeder endpoint when application is already insta
         ->assertRedirect(route('shop.home.index'));
 });
 
-it('should block access to download sample endpoint when application is already installed', function () {
-    // Act and Assert.
-    get(route('installer.download_sample'))
-        ->assertRedirect(route('shop.home.index'));
-});
-
 it('should block access to admin config setup endpoint when application is already installed', function () {
     // Act and Assert.
     post(route('installer.admin_config_setup'), [
@@ -108,17 +102,6 @@ it('should return 403 for ajax request to run seeder endpoint when already insta
             'app_currency' => 'USD',
         ],
     ], [
-        'X-Requested-With' => 'XMLHttpRequest',
-    ])
-        ->assertStatus(403)
-        ->assertJson([
-            'message' => trans('installer::app.installer.middleware.already-installed'),
-        ]);
-});
-
-it('should return 403 for ajax request to download sample endpoint when already installed', function () {
-    // Act and Assert.
-    get(route('installer.download_sample'), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertStatus(403)

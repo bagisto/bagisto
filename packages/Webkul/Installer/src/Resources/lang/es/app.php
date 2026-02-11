@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
+                'note' => 'Nota: El tiempo de indexación depende del número de configuraciones regionales seleccionadas. Este proceso puede tardar hasta 2 minutos en completarse.',
                 'sample-products' => 'Productos de muestra',
                 'title' => 'Productos de muestra',
                 'yes' => 'Sí',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Crear la tabla de la base de datos',
+                'create-database-tables' => 'Crear las tablas de la base de datos',
+                'drop-existing-tables' => 'Eliminar cualquier tabla existente',
                 'install' => 'Instalación',
                 'install-info' => 'Bagisto para instalación',
                 'install-info-button' => 'Haz clic en el botón de abajo para',
-                'populate-database-table' => 'Rellenar las tablas de la base de datos',
+                'populate-database-tables' => 'Rellenar las tablas de la base de datos',
                 'start-installation' => 'Iniciar instalación',
                 'title' => 'Listo para la instalación',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 o superior',
+                'php-version' => ':version o superior',
                 'session' => 'Sesión',
                 'title' => 'Requisitos del servidor',
                 'tokenizer' => 'Tokenizer',

@@ -424,9 +424,13 @@ class Installer extends Command
             if ($sampleProduct === 'true') {
                 $this->warn('Step: Seeding sample product data. Please Wait...');
 
+                $this->components->info('Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
+
                 app(DatabaseManager::class)->seedSampleProducts($this->getSeederConfiguration());
 
                 $this->warn('Step: Indexing data...');
+
+                $this->components->info('Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
 
                 $this->call('indexer:index', ['--mode' => ['full']]);
 
@@ -675,7 +679,7 @@ class Installer extends Command
      */
     protected function askForGithubStar(): void
     {
-        if (! $this->confirm('Would you like to star our repo on GitHub?')) {
+        if (! $this->confirm('Would you like to star our repo on GitHub?', true)) {
             return;
         }
 

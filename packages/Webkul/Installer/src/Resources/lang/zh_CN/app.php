@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => '否',
+                'note' => '注意：索引时间取决于所选语言环境的数量。此过程可能需要长达2分钟才能完成。',
                 'sample-products' => '样品产品',
                 'title' => '样品产品',
                 'yes' => '是',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => '创建数据库表',
+                'create-database-tables' => '创建数据库表',
+                'drop-existing-tables' => '删除任何现有表',
                 'install' => '安装',
                 'install-info' => 'Bagisto 安装信息',
                 'install-info-button' => '点击下面的按钮',
-                'populate-database-table' => '填充数据库表',
+                'populate-database-tables' => '填充数据库表',
                 'start-installation' => '开始安装',
                 'title' => '准备安装',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => '8.1 或更高版本',
+                'php-version' => ':version 或更高版本',
                 'session' => '会话',
                 'title' => '服务器要求',
                 'tokenizer' => '标记器',

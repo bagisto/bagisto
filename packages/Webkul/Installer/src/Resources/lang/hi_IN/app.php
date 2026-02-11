@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'नहीं',
+                'note' => 'नोट: अनुक्रमण समय चयनित स्थानों की संख्या पर निर्भर करता है। इस प्रक्रिया को पूरा होने में 2 मिनट तक का समय लग सकता है।',
                 'sample-products' => 'नमूना उत्पाद',
                 'title' => 'नमूना उत्पाद',
                 'yes' => 'हाँ',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'डेटाबेस तालिका बनाएं',
+                'create-database-tables' => 'डेटाबेस तालिकाएँ बनाएँ',
+                'drop-existing-tables' => 'मौजूदा किसी भी त को हटाएं',
                 'install' => 'स्थापना',
                 'install-info' => 'स्थापना के लिए Bagisto',
                 'install-info-button' => 'नीचे दिए गए बटन पर क्लिक करें',
-                'populate-database-table' => 'डेटाबेस तालिकाओं को पॉप्युलेट करें',
+                'populate-database-tables' => 'डेटाबेस तालिकाओं को पॉप्युलेट करें',
                 'start-installation' => 'स्थापना शुरू करें',
                 'title' => 'स्थापना के लिए तैयार',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'पीसीआरई',
                 'pdo' => 'पीडीओ',
                 'php' => 'पीएचपी',
-                'php-version' => '8.1 या उच्च',
+                'php-version' => ':version या उच्च',
                 'session' => 'सत्र',
                 'title' => 'सर्वर आवश्यकताएँ',
                 'tokenizer' => 'टोकनाइज़र',

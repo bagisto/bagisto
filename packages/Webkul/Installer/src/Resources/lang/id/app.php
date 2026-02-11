@@ -906,6 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Tidak',
+                'note' => 'Catatan: Waktu pengindeksan tergantung pada jumlah lokal yang dipilih. Proses ini dapat memakan waktu hingga 2 menit untuk diselesaikan.',
                 'sample-products' => 'Produk Sampel',
                 'title' => 'Produk Sampel',
                 'yes' => 'Ya',
@@ -927,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Buat tabel database',
+                'create-database-tables' => 'Buat tabel database',
+                'drop-existing-tables' => 'Hapus tabel yang ada',
                 'install' => 'Instalasi',
                 'install-info' => 'Bagisto untuk Instalasi',
                 'install-info-button' => 'Klik tombol di bawah untuk',
-                'populate-database-table' => 'Isi tabel database',
+                'populate-database-tables' => 'Isi tabel database',
                 'start-installation' => 'Mulai Instalasi',
                 'title' => 'Siap untuk Instalasi',
             ],
@@ -960,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 atau yang lebih tinggi',
+                'php-version' => ':version atau yang lebih tinggi',
                 'session' => 'session',
                 'title' => 'Persyaratan Sistem',
                 'tokenizer' => 'tokenizer',

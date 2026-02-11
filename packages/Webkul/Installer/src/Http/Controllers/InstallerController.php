@@ -19,7 +19,7 @@ class InstallerController extends Controller
      *
      * @var string
      */
-    const MIN_PHP_VERSION = '8.2.0';
+    const MIN_PHP_VERSION = '8.3.0';
 
     /**
      * Const Variable for Static Customer Id
