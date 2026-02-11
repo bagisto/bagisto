@@ -18,6 +18,8 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
+                @input="field.onChange($event.target.value.trimStart())"
+                @blur="field.onChange($event.target.value.trim())"
                 :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm']) }}
             >
@@ -70,7 +72,7 @@
             </textarea>
 
             @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
-                <x-shop::tinymce 
+                <x-shop::tinymce
                     :selector="'textarea#' . $attributes->get('id')"
                     :prompt="stripcslashes($attributes->get('prompt', ''))"
                     ::field="field"
