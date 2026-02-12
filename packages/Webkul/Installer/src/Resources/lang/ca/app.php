@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
-                'note' => 'Nota: El temps d\'indexació depèn del nombre de configuracions regionals seleccionades. Aquest procés pot trigar fins a 2 minuts a completar-se.',
+                'note' => "Nota: El temps d'indexació depèn del nombre de locals seleccionats. Aquest procés pot trigar fins a 2 minuts a completar-se. Si afegeixes més locals, intenta augmentar el temps màxim d'execució en la configuració del servidor i de PHP, o pots utilitzar el nostre instal·lador CLI per evitar el temps d'espera de la sol·licitud.",
                 'sample-products' => 'Productes de mostra',
                 'title' => 'Productes de mostra',
                 'yes' => 'Sí',

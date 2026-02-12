@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
-                'note' => 'Nota: Il tempo di indicizzazione dipende dal numero di impostazioni locali selezionate. Questo processo può richiedere fino a 2 minuti per essere completato.',
+                'note' => 'Nota: il tempo di indicizzazione dipende dal numero di lingue selezionate. Questo processo può richiedere fino a 2 minuti per essere completato. Se aggiungi altre lingue, prova ad aumentare il tempo massimo di esecuzione nelle impostazioni del server e di PHP, oppure puoi utilizzare il nostro programma di installazione CLI per evitare il timeout della richiesta.',
                 'sample-products' => 'Prodotti campione',
                 'title' => 'Prodotti campione',
                 'yes' => 'Sì',

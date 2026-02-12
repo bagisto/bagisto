@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Tidak',
-                'note' => 'Catatan: Waktu pengindeksan tergantung pada jumlah lokal yang dipilih. Proses ini dapat memakan waktu hingga 2 menit untuk diselesaikan.',
+                'note' => 'Catatan: Waktu pengindeksan tergantung pada jumlah lokal yang dipilih. Proses ini dapat memakan waktu hingga 2 menit untuk diselesaikan. Jika Anda menambahkan lebih banyak lokal, cobalah untuk meningkatkan waktu eksekusi maksimum di pengaturan server dan PHP Anda, atau Anda dapat menggunakan penginstal CLI kami untuk menghindari batas waktu permintaan.',
                 'sample-products' => 'Produk Sampel',
                 'title' => 'Produk Sampel',
                 'yes' => 'Ya',
