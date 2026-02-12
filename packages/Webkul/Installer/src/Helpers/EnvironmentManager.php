@@ -163,4 +163,12 @@ class EnvironmentManager
     {
         Artisan::call('storage:link');
     }
+
+    /**
+     * Optimize clear.
+     */
+    public function optimizeClear(): void
+    {
+        Artisan::call('optimize:clear');
+    }
 }

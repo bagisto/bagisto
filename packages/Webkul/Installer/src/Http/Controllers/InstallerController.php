@@ -108,6 +108,8 @@ class InstallerController extends Controller
 
             $this->environmentManager->storageLink();
 
+            $this->environmentManager->optimizeClear();
+
             return $isSeeded
                 ? response()->json(['seeded' => true])
                 : response()->json(['seeded' => false], 500);
@@ -148,9 +150,15 @@ class InstallerController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createAdminUser()
+    public function createAdminUser(Request $request)
     {
-        $data = request()->only(['name', 'email', 'password']);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $data = $request->only(['name', 'email', 'password']);
 
         return $this->databaseManager->createAdminUser($data)
             ? response()->json(['admin_user_created' => true])
