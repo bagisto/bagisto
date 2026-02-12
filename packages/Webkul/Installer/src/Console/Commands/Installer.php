@@ -4,7 +4,6 @@ namespace Webkul\Installer\Console\Commands;
 
 use DateTimeZone;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -421,16 +420,11 @@ class Installer extends Command
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
-            DB::table('admins')->updateOrInsert(
-                ['id' => 1],
-                [
-                    'name' => $adminName,
-                    'email' => $adminEmail,
-                    'password' => $password,
-                    'role_id' => 1,
-                    'status' => 1,
-                ]
-            );
+            $this->databaseManager->createAdminUser([
+                'name' => $adminName,
+                'email' => $adminEmail,
+                'password' => $adminPassword,
+            ]);
 
             if ($sampleProduct === 'true') {
                 $this->warn('Step: Seeding sample product data. Please Wait...');
