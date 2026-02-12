@@ -3,22 +3,15 @@
 namespace Webkul\Installer\Helpers;
 
 use Exception;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class EnvironmentManager
 {
     /**
-     * Create a helper instance.
-     *
-     * @return void
+     * Generate `.env` file for installation.
      */
-    public function __construct(protected DatabaseManager $databaseManager) {}
-
-    /**
-     * Generate ENV File and Installation.
-     *
-     * @param [object] $request
-     */
-    public function generateEnv($request)
+    public function generateEnv(array $data): bool|Exception
     {
         $envExamplePath = base_path('.env.example');
 
@@ -32,63 +25,150 @@ class EnvironmentManager
             }
         }
 
+        return $this->updateEnvVariables($data);
+    }
+
+    /**
+     * Get environment variable value from `.env` file.
+     *
+     * @param  mixed  $default
+     */
+    public function getEnvVariable(string $key, $default = null): string|bool
+    {
+        if ($data = file(base_path('.env'))) {
+            foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
+
+                $rowValues = explode('=', $line);
+
+                if (strlen($line) !== 0) {
+                    if (strpos($key, $rowValues[0]) !== false) {
+                        return trim($rowValues[1], '"');
+                    }
+                }
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * Update a single environment variable in `.env` file.
+     */
+    public function updateEnvVariable(string $key, string $value, bool $addQuotes = false): void
+    {
+        $data = file_get_contents(base_path('.env'));
+
+        // Check if $value contains spaces, and if so, add double quotes, or if $addQuotes is true.
+        if ($addQuotes || preg_match('/\s/', $value)) {
+            $value = '"'.$value.'"';
+        }
+
+        $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
+
+        file_put_contents(base_path('.env'), $data);
+    }
+
+    /**
+     * Update multiple environment variables in `.env` file.
+     */
+    public function updateEnvVariables(array $data): bool
+    {
+        $envParams = [];
+
+        if (isset($data['app_name'])) {
+            $envParams['APP_NAME'] = $data['app_name'] ?? null;
+            $envParams['APP_URL'] = $data['app_url'];
+            $envParams['APP_CURRENCY'] = $data['app_currency'];
+            $envParams['APP_LOCALE'] = $data['app_locale'];
+            $envParams['APP_TIMEZONE'] = $data['app_timezone'];
+        }
+
+        if (isset($data['db_hostname'])) {
+            $envParams['DB_HOST'] = $data['db_hostname'];
+            $envParams['DB_DATABASE'] = $data['db_name'];
+            $envParams['DB_PREFIX'] = $data['db_prefix'] ?? '';
+            $envParams['DB_USERNAME'] = $data['db_username'];
+            $envParams['DB_PASSWORD'] = $data['db_password'];
+            $envParams['DB_CONNECTION'] = $data['db_connection'];
+            $envParams['DB_PORT'] = (int) $data['db_port'];
+        }
+
         try {
-            $response = $this->setEnvConfiguration($request->all());
+            foreach ($envParams as $key => $value) {
+                $this->updateEnvVariable($key, (string) $value);
+            }
 
-            $this->databaseManager->generateKey();
-
-            return $response;
+            return true;
         } catch (Exception $e) {
-            return $e;
+            report($e);
+
+            return false;
         }
     }
 
     /**
-     * Set the ENV file configuration.
-     *
-     * @return string
+     * Load environment configurations and set up database connection for installation.
      */
-    public function setEnvConfiguration($request)
+    public function loadEnvConfigs(): void
     {
-        $envDBParams = [];
+        /**
+         * Setting application environment.
+         */
+        app()['env'] = $this->getEnvVariable('APP_ENV');
 
         /**
-         * Update params with form-data
+         * Setting application configuration.
          */
-        if (isset($request['db_hostname'])) {
-            $envDBParams['DB_HOST'] = $request['db_hostname'];
-            $envDBParams['DB_DATABASE'] = $request['db_name'];
-            $envDBParams['DB_PREFIX'] = $request['db_prefix'] ?? '';
-            $envDBParams['DB_USERNAME'] = $request['db_username'];
-            $envDBParams['DB_PASSWORD'] = $request['db_password'];
-            $envDBParams['DB_CONNECTION'] = $request['db_connection'];
-            $envDBParams['DB_PORT'] = (int) $request['db_port'];
-        }
+        config([
+            'app.env' => $this->getEnvVariable('APP_ENV'),
+            'app.name' => $this->getEnvVariable('APP_NAME'),
+            'app.url' => $this->getEnvVariable('APP_URL'),
+            'app.timezone' => $this->getEnvVariable('APP_TIMEZONE'),
+            'app.locale' => $this->getEnvVariable('APP_LOCALE'),
+            'app.currency' => $this->getEnvVariable('APP_CURRENCY'),
+        ]);
 
-        if (isset($request['app_name'])) {
-            $envDBParams['APP_NAME'] = $request['app_name'] ?? null;
-            $envDBParams['APP_URL'] = $request['app_url'];
-            $envDBParams['APP_CURRENCY'] = $request['app_currency'];
-            $envDBParams['APP_LOCALE'] = $request['app_locale'];
-            $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
-        }
+        /**
+         * Setting database configurations.
+         */
+        $databaseConnection = $this->getEnvVariable('DB_CONNECTION');
 
-        $data = file_get_contents(base_path('.env'));
+        DB::purge();
 
-        foreach ($envDBParams as $key => $value) {
-            if (preg_match('/\s/', $value)) {
-                $value = '"'.$value.'"';
-            }
+        config([
+            "database.connections.{$databaseConnection}.host" => $this->getEnvVariable('DB_HOST'),
+            "database.connections.{$databaseConnection}.port" => $this->getEnvVariable('DB_PORT'),
+            "database.connections.{$databaseConnection}.database" => $this->getEnvVariable('DB_DATABASE'),
+            "database.connections.{$databaseConnection}.username" => $this->getEnvVariable('DB_USERNAME'),
+            "database.connections.{$databaseConnection}.password" => $this->getEnvVariable('DB_PASSWORD'),
+            "database.connections.{$databaseConnection}.prefix" => $this->getEnvVariable('DB_PREFIX'),
+        ]);
 
-            $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
-        }
+        DB::reconnect();
 
         try {
-            file_put_contents(base_path('.env'), $data);
-        } catch (Exception $e) {
-            return false;
-        }
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            report($e);
 
-        return true;
+            abort(400);
+        }
+    }
+
+    /**
+     * Generate application key.
+     */
+    public function generateKey()
+    {
+        Artisan::call('key:generate');
+    }
+
+    /**
+     * Storage link.
+     */
+    public function storageLink(): void
+    {
+        Artisan::call('storage:link');
     }
 }

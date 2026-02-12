@@ -341,7 +341,7 @@
                                     </div>
 
                                     <div class="flex h-72 flex-col justify-center gap-3 overflow-y-auto px-7 py-4">
-                                        <!-- Application Name -->
+                                        <!-- Installer Language -->
                                         <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
                                                 @lang('Installation Wizard language')
@@ -1093,14 +1093,14 @@
 
                                     <x-installer::form.control-group.control
                                         type="text"
-                                        name="admin"
+                                        name="name"
                                         rules="required"
                                         value="Admin"
                                         :label="trans('installer::app.installer.index.create-administrator.admin')"
                                         :placeholder="trans('installer::app.installer.index.create-administrator.bagisto')"
                                     />
 
-                                    <x-installer::form.control-group.error control-name="admin" />
+                                    <x-installer::form.control-group.error control-name="name" />
                                 </x-installer::form.control-group>
 
                                 <!-- Email -->
@@ -1403,17 +1403,7 @@
                         startMigration(setErrors) {
                             this.currentStep = 'installProgress';
 
-                            this.$axios.post("{{ route('installer.env_file_setup') }}", this.envData)
-                                .then((response) => {
-                                    this.runMigartion(setErrors);
-                            })
-                            .catch(error => {
-                                setErrors(error.response.data.errors);
-                            });
-                        },
-
-                        runMigartion(setErrors) {
-                            this.$axios.post("{{ route('installer.run_migration') }}")
+                            this.$axios.post("{{ route('installer.run_migration') }}", this.envData)
                                 .then((response) => {
                                     this.completeStep('readyForInstallation', 'envConfiguration', 'active', 'complete');
 
@@ -1445,7 +1435,7 @@
                             if (params.sample_products == 1){
                                 this.isLoading = true;
 
-                                this.$axios.post("{{ route('installer.sample_products_setup') }}",{
+                                this.$axios.post("{{ route('installer.seed_sample_products') }}",{
                                     'selectedLocales': this.locales.allowed,
                                     'selectedCurrencies': this.currencies.allowed,
                                 })
@@ -1467,7 +1457,7 @@
                         },
 
                         saveAdmin(params, setErrors) {
-                            this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
+                            this.$axios.post("{{ route('installer.create_admin_user') }}", params)
                                 .then((response) => {
                                     this.isLoading = false;
 

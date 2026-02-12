@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\EnvironmentManager;
 
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
@@ -541,25 +542,8 @@ class Installer extends Command
 
             $value = trim($value, '"');
 
-            $this->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
+            app(EnvironmentManager::class)->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
         }
-    }
-
-    /**
-     * Update the single `.env` value.
-     */
-    protected function updateEnvVariable(string $key, string $value, bool $addQuotes = false): void
-    {
-        $data = file_get_contents(base_path('.env'));
-
-        // Check if $value contains spaces, and if so, add double quotes, or if $addQuotes is true.
-        if ($addQuotes || preg_match('/\s/', $value)) {
-            $value = '"'.$value.'"';
-        }
-
-        $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
-
-        file_put_contents(base_path('.env'), $data);
     }
 
     /**
@@ -569,51 +553,9 @@ class Installer extends Command
     {
         $this->warn('Step: Loading configurations...');
 
-        /**
-         * Setting application environment.
-         */
-        app()['env'] = $this->getEnvVariable('APP_ENV');
+        app(EnvironmentManager::class)->loadEnvConfigs();
 
-        /**
-         * Setting application configuration.
-         */
-        config([
-            'app.env' => $this->getEnvVariable('APP_ENV'),
-            'app.name' => $this->getEnvVariable('APP_NAME'),
-            'app.url' => $this->getEnvVariable('APP_URL'),
-            'app.timezone' => $this->getEnvVariable('APP_TIMEZONE'),
-            'app.locale' => $this->getEnvVariable('APP_LOCALE'),
-            'app.currency' => $this->getEnvVariable('APP_CURRENCY'),
-        ]);
-
-        /**
-         * Setting database configurations.
-         */
-        $databaseConnection = $this->getEnvVariable('DB_CONNECTION');
-
-        DB::purge();
-
-        config([
-            "database.connections.{$databaseConnection}.host" => $this->getEnvVariable('DB_HOST'),
-            "database.connections.{$databaseConnection}.port" => $this->getEnvVariable('DB_PORT'),
-            "database.connections.{$databaseConnection}.database" => $this->getEnvVariable('DB_DATABASE'),
-            "database.connections.{$databaseConnection}.username" => $this->getEnvVariable('DB_USERNAME'),
-            "database.connections.{$databaseConnection}.password" => $this->getEnvVariable('DB_PASSWORD'),
-            "database.connections.{$databaseConnection}.prefix" => $this->getEnvVariable('DB_PREFIX'),
-        ]);
-
-        DB::reconnect();
-
-        try {
-            DB::connection()->getPdo();
-
-            $this->components->info('Database connection established successfully.');
-        } catch (\Exception $e) {
-            $this->error('Database connection failed. Please check your credentials.');
-
-            abort(400);
-        }
-
+        $this->components->info('Database connection established successfully.');
         $this->components->info('Configuration loaded successfully.');
     }
 
@@ -622,21 +564,7 @@ class Installer extends Command
      */
     protected function getEnvVariable(string $key, $default = null): string|bool
     {
-        if ($data = file(base_path('.env'))) {
-            foreach ($data as $line) {
-                $line = preg_replace('/\s+/', '', $line);
-
-                $rowValues = explode('=', $line);
-
-                if (strlen($line) !== 0) {
-                    if (strpos($key, $rowValues[0]) !== false) {
-                        return trim($rowValues[1], '"');
-                    }
-                }
-            }
-        }
-
-        return $default;
+        return app(EnvironmentManager::class)->getEnvVariable($key, $default);
     }
 
     /**

@@ -8,13 +8,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Database\Seeders\ProductTableSeeder;
+use Webkul\Product\Console\Commands\Indexer;
 
 class DatabaseManager
 {
     /**
-     * Check Database Connection.
+     * Admin User ID for which the admin user will be created during installation.
+     *
+     * @var int
      */
-    public function isInstalled()
+    const USER_ID = 1;
+
+    /**
+     * Check if the application is installed.
+     */
+    public function isInstalled(): bool
     {
         if (! file_exists(base_path('.env'))) {
             return false;
@@ -49,26 +57,24 @@ class DatabaseManager
 
     /**
      * Drop all the tables and migrate in the database.
-     *
-     * @return void|string
      */
-    public function migration()
+    public function migrateFresh(): bool
     {
         try {
             Artisan::call('migrate:fresh');
+
+            return true;
         } catch (Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-            ], 500);
+            report($e);
+
+            return false;
         }
     }
 
     /**
      * Seed the database.
-     *
-     * @return void|string
      */
-    public function seeder($data)
+    public function seed($data): bool
     {
         $data['parameter'] = [
             'default_locale' => $data['parameter']['default_locales'],
@@ -81,28 +87,11 @@ class DatabaseManager
         try {
             app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
-            $this->storageLink();
+            return true;
         } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+            report($e);
 
-    /**
-     * Storage Link.
-     */
-    private function storageLink()
-    {
-        Artisan::call('storage:link');
-    }
-
-    /**
-     * Generate New Application Key
-     */
-    public function generateKey()
-    {
-        try {
-            Artisan::call('key:generate');
-        } catch (Exception $e) {
+            return false;
         }
     }
 
@@ -111,14 +100,48 @@ class DatabaseManager
      *
      * @return void|string
      */
-    public function seedSampleProducts($parameters)
+    public function seedSampleProducts($parameters): bool
     {
         try {
             app(ProductTableSeeder::class)->run($parameters);
+
+            Artisan::registerCommand(app(Indexer::class));
+
+            Artisan::call('indexer:index', [
+                '--mode' => ['full'],
+                '--quiet' => true,
+            ]);
+
+            return true;
         } catch (Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-            ], 500);
+            report($e);
+
+            return false;
+        }
+    }
+
+    /**
+     * Create admin user.
+     */
+    public function createAdminUser($data): bool
+    {
+        try {
+            DB::table('admins')->insert([
+                'id' => self::USER_ID,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'role_id' => 1,
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            report($e);
+
+            return false;
         }
     }
 }

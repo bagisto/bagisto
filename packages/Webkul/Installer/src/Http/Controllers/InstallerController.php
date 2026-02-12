@@ -2,51 +2,32 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
 use Webkul\Installer\Helpers\ServerRequirements;
-use Webkul\Product\Console\Commands\Indexer;
 
 class InstallerController extends Controller
 {
     /**
-     * Const Variable For Min PHP Version
-     *
-     * @var string
-     */
-    const MIN_PHP_VERSION = '8.3.0';
-
-    /**
-     * Const Variable for Static Customer Id
-     *
-     * @var int
-     */
-    const USER_ID = 1;
-
-    /**
-     * Create a new controller instance
+     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(
         protected ServerRequirements $serverRequirements,
         protected EnvironmentManager $environmentManager,
-        protected DatabaseManager $databaseManager
+        protected DatabaseManager $databaseManager,
     ) {}
 
     /**
-     * Installer View Root Page
+     * Display the installer welcome page.
      *
      * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $phpVersion = $this->serverRequirements->checkPHPversion(self::MIN_PHP_VERSION);
+        $phpVersion = $this->serverRequirements->checkPHPversion();
 
         $requirements = $this->serverRequirements->validate();
 
@@ -58,36 +39,34 @@ class InstallerController extends Controller
     }
 
     /**
-     * ENV File Setup
-     */
-    public function envFileSetup(Request $request): JsonResponse
-    {
-        $message = $this->environmentManager->generateEnv($request);
-
-        return new JsonResponse(['data' => $message]);
-    }
-
-    /**
-     * Run Migration
-     */
-    public function runMigration()
-    {
-        $migration = $this->databaseManager->migration();
-
-        return $migration;
-    }
-
-    /**
-     * Run Seeder
+     * Run migration.
      *
-     * @return void|string
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function runMigration(Request $request)
+    {
+        $this->environmentManager->generateEnv($request->all());
+
+        $this->environmentManager->loadEnvConfigs();
+
+        return $this->databaseManager->migrateFresh()
+            ? response()->json(['migrated' => true])
+            : response()->json(['migrated' => false], 500);
+    }
+
+    /**
+     * Run seeder.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function runSeeder()
     {
-        $selectedParameters = request()->selectedParameters;
-        $allParameters = request()->allParameters;
+        $selectedParameters = request('selectedParameters');
+
+        $allParameters = request('allParameters');
 
         $appLocale = $allParameters['app_locale'] ?? null;
+
         $appCurrency = $allParameters['app_currency'] ?? null;
 
         $allowedLocales = array_unique(
@@ -114,21 +93,27 @@ class InstallerController extends Controller
             ],
         ];
 
-        $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
+        $isEnvVariablesUpdated = $this->environmentManager->updateEnvVariables($allParameters);
 
-        if ($response) {
-            $seeder = $this->databaseManager->seeder($parameter);
+        if ($isEnvVariablesUpdated) {
+            $isSeeded = $this->databaseManager->seed($parameter);
 
-            return $seeder;
+            $this->environmentManager->storageLink();
+
+            return $isSeeded
+                ? response()->json(['seeded' => true])
+                : response()->json(['seeded' => false], 500);
         }
+
+        return response()->json(['seeded' => false], 500);
     }
 
     /**
-     * Create Sample Products.
+     * Seed sample products.
      *
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function createSampleProducts()
+    public function seedSampleProducts()
     {
         $defaultLocale = config('app.locale');
 
@@ -138,42 +123,29 @@ class InstallerController extends Controller
 
         $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
 
-        $this->databaseManager->seedSampleProducts([
+        $isSeeded = $this->databaseManager->seedSampleProducts([
             'default_locale' => $defaultLocale,
             'allowed_locales' => $allowedLocales,
             'default_currency' => $defaultCurrency,
             'allowed_currencies' => $allowedCurrencies,
         ]);
 
-        Artisan::registerCommand(app(Indexer::class));
-
-        Artisan::call('indexer:index', ['--mode' => ['full']]);
+        return $isSeeded
+            ? response()->json(['sample_products_seeded' => true])
+            : response()->json(['sample_products_seeded' => false], 500);
     }
 
     /**
-     * Admin Configuration Setup.
+     * Create admin user.
      *
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function adminConfigSetup()
+    public function createAdminUser()
     {
-        $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
+        $data = request()->only(['name', 'email', 'password']);
 
-        try {
-            DB::table('admins')->insert([
-                'id' => self::USER_ID,
-                'name' => request()->input('admin'),
-                'email' => request()->input('email'),
-                'password' => $password,
-                'role_id' => 1,
-                'status' => 1,
-            ]);
-
-            return true;
-        } catch (\Throwable $th) {
-            Log::error('Error in Admin installer config setup: '.$th->getMessage());
-
-            return false;
-        }
+        return $this->databaseManager->createAdminUser($data)
+            ? response()->json(['admin_user_created' => true])
+            : response()->json(['admin_user_created' => false], 500);
     }
 }
