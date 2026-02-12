@@ -1097,7 +1097,8 @@ export class ACLManagement {
         await expect(this.locators.createBtn).not.toBeVisible();
         await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.copyBtn.first().click();
-        await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
+        // await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
+        await expect(this.locators.saveCartRuleBTN).toBeVisible();
     }
 
     async cartRuleEditVerify() {
