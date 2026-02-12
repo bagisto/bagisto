@@ -49,6 +49,14 @@ class InstallerController extends Controller
 
         $this->environmentManager->loadEnvConfigs();
 
+        $isDatabaseConnected = $this->databaseManager->checkDatabaseConnection();
+
+        if (! $isDatabaseConnected) {
+            return response()->json([
+                'migrated' => false,
+            ], 500);
+        }
+
         return $this->databaseManager->migrateFresh()
             ? response()->json(['migrated' => true])
             : response()->json(['migrated' => false], 500);

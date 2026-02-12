@@ -56,6 +56,22 @@ class DatabaseManager
     }
 
     /**
+     * Check database connection.
+     */
+    public function checkDatabaseConnection(): bool
+    {
+        try {
+            DB::connection()->getPdo();
+
+            return true;
+        } catch (\Exception $e) {
+            report($e);
+
+            return false;
+        }
+    }
+
+    /**
      * Drop all the tables and migrate in the database.
      */
     public function migrateFresh(): bool

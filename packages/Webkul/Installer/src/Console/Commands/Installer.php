@@ -169,6 +169,16 @@ class Installer extends Command
     ];
 
     /**
+     * Create a new command instance.
+     */
+    public function __construct(
+        public EnvironmentManager $environmentManager,
+        public DatabaseManager $databaseManager
+    ) {
+        parent::__construct();
+    }
+
+    /**
      * Install and configure bagisto.
      */
     public function handle(): void
@@ -425,17 +435,15 @@ class Installer extends Command
             if ($sampleProduct === 'true') {
                 $this->warn('Step: Seeding sample product data. Please Wait...');
 
-                $this->components->info('Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
+                $this->components->info('Seeding time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
 
-                app(DatabaseManager::class)->seedSampleProducts($this->getSeederConfiguration());
+                $this->databaseManager->seedSampleProducts($this->getSeederConfiguration());
 
-                $this->warn('Step: Indexing data...');
-
-                $this->components->info('Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
+                $this->components->info('Now Indexing data...');
 
                 $this->call('indexer:index', ['--mode' => ['full']]);
 
-                $this->components->info('Sample product data seeded successfully.');
+                $this->components->success('Sample product data seeded successfully.');
             }
 
             $filePath = storage_path('installed');
@@ -542,7 +550,7 @@ class Installer extends Command
 
             $value = trim($value, '"');
 
-            app(EnvironmentManager::class)->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
+            $this->environmentManager->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
         }
     }
 
@@ -553,10 +561,13 @@ class Installer extends Command
     {
         $this->warn('Step: Loading configurations...');
 
-        app(EnvironmentManager::class)->loadEnvConfigs();
+        $this->environmentManager->loadEnvConfigs();
 
-        $this->components->info('Database connection established successfully.');
-        $this->components->info('Configuration loaded successfully.');
+        if ($this->databaseManager->checkDatabaseConnection()) {
+            $this->components->info('Database connection established successfully.');
+
+            $this->components->info('Configuration loaded successfully.');
+        }
     }
 
     /**
@@ -564,7 +575,7 @@ class Installer extends Command
      */
     protected function getEnvVariable(string $key, $default = null): string|bool
     {
-        return app(EnvironmentManager::class)->getEnvVariable($key, $default);
+        return $this->environmentManager->getEnvVariable($key, $default);
     }
 
     /**

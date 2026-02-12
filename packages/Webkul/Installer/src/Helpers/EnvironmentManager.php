@@ -108,7 +108,7 @@ class EnvironmentManager
     }
 
     /**
-     * Load environment configurations and set up database connection for installation.
+     * Load temporary environment configurations and set up database connection for installation.
      */
     public function loadEnvConfigs(): void
     {
@@ -146,14 +146,6 @@ class EnvironmentManager
         ]);
 
         DB::reconnect();
-
-        try {
-            DB::connection()->getPdo();
-        } catch (\Exception $e) {
-            report($e);
-
-            abort(400);
-        }
     }
 
     /**
