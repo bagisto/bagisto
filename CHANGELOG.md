@@ -10,6 +10,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed issues with language switching in the installation wizard and corrected PHP configuration texts.
 
+* Fixed automatic application URL detection and automatic timezone selection during installation.
+
+* Fixed backend validation and VeeValidate error handling to ensure proper integration with Laravel backend validation in the installer package.
+
 * #11100 [fixed] - Fixed an issue where updating the return window rule affected previously placed orders.
 
 ## **v2.4.0-beta1 (9th of February 2026)** - **Release**
