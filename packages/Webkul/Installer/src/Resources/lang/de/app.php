@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Nein',
-                'note' => 'Hinweis: Die Indizierungszeit hängt von der Anzahl der ausgewählten Gebietsschemas ab. Dieser Vorgang kann bis zu 2 Minuten dauern.',
+                'note' => 'Hinweis: Die Indexierungszeit hängt von der Anzahl der ausgewählten Sprachversionen ab. Dieser Vorgang kann bis zu 2 Minuten dauern. Wenn Sie weitere Sprachversionen hinzufügen, versuchen Sie, die maximale Ausführungszeit in Ihren Server- und PHP-Einstellungen zu erhöhen, oder Sie können unseren CLI-Installer verwenden, um einen Timeout der Anfrage zu vermeiden.',
                 'sample-products' => 'Beispielfprodukte',
                 'title' => 'Beispielfprodukte',
                 'yes' => 'Ja',

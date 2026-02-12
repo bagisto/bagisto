@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
-                'note' => 'Nota: El tiempo de indexación depende del número de configuraciones regionales seleccionadas. Este proceso puede tardar hasta 2 minutos en completarse.',
+                'note' => 'Nota: El tiempo de indexación depende del número de idiomas seleccionados. Este proceso puede tardar hasta 2 minutos en completarse. Si añades más idiomas, intenta aumentar el tiempo máximo de ejecución en la configuración de tu servidor y PHP, o puedes usar nuestro instalador CLI para evitar el tiempo de espera de la solicitud.',
                 'sample-products' => 'Productos de muestra',
                 'title' => 'Productos de muestra',
                 'yes' => 'Sí',

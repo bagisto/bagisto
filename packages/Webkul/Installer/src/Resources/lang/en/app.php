@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'No',
-                'note' => 'Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete.',
+                'note' => 'Note: Indexing time depends on the number of locales selected. This process may take up to 2 minutes to complete. If you add more locales, try to increase the max execution time in your server and PHP settings, or you can use our CLI installer to avoid request timeout.',
                 'sample-products' => 'Sample Products',
                 'title' => 'Sample Products',
                 'yes' => 'Yes',

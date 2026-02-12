@@ -18,15 +18,13 @@ Route::middleware([
                     VerifyCsrfToken::class,
                 ])
                 ->group(function () {
-                    Route::post('env-file-setup', 'envFileSetup')->name('installer.env_file_setup');
-
                     Route::post('run-migration', 'runMigration')->name('installer.run_migration');
 
                     Route::post('run-seeder', 'runSeeder')->name('installer.run_seeder');
 
-                    Route::post('sample-products-setup', 'createSampleProducts')->name('installer.sample_products_setup');
+                    Route::post('seed-sample-products', 'seedSampleProducts')->name('installer.seed_sample_products');
 
-                    Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.admin_config_setup');
+                    Route::post('create-admin-user', 'createAdminUser')->name('installer.create_admin_user');
                 });
         });
     });

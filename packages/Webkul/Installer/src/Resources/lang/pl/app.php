@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Nie',
-                'note' => 'Uwaga: Czas indeksowania zależy od liczby wybranych lokalizacji. Ten proces może potrwać do 2 minut.',
+                'note' => 'Uwaga: czas indeksowania zależy od liczby wybranych języków. Proces ten może potrwać do 2 minut. Jeśli dodasz więcej języków, spróbuj zwiększyć maksymalny czas wykonywania w ustawieniach serwera i PHP lub skorzystaj z naszego instalatora CLI, aby uniknąć przekroczenia limitu czasu żądania.',
                 'sample-products' => 'Produkty próbne',
                 'title' => 'Produkty próbne',
                 'yes' => 'Tak',

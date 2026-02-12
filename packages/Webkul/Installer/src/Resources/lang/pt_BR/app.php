@@ -906,7 +906,7 @@ return [
 
             'sample-products' => [
                 'no' => 'Não',
-                'note' => 'Nota: O tempo de indexação depende do número de localidades selecionadas. Este processo pode levar até 2 minutos para ser concluído.',
+                'note' => 'Nota: O tempo de indexação depende do número de localidades selecionadas. Este processo pode levar até 2 minutos para ser concluído. Se você adicionar mais localidades, tente aumentar o tempo máximo de execução nas configurações do seu servidor e PHP, ou utilize nosso instalador CLI para evitar o tempo limite da requisição.',
                 'sample-products' => 'Produtos de amostra',
                 'title' => 'Produtos de amostra',
                 'yes' => 'Sim',

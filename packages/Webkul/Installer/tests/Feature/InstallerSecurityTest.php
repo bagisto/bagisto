@@ -9,22 +9,15 @@ it('should block access to installer index page when application is already inst
         ->assertRedirect(route('shop.home.index'));
 });
 
-it('should block access to env file setup endpoint when application is already installed', function () {
+it('should block access to run migration endpoint when application is already installed', function () {
     // Act and Assert.
-    $response = post(route('installer.env_file_setup'), [
+    post(route('installer.run_migration'), [
         'db_hostname' => 'localhost',
         'db_port' => '3306',
         'db_name' => 'test_db',
         'db_username' => 'root',
         'db_password' => '',
-    ]);
-
-    $response->assertRedirect(route('shop.home.index'));
-});
-
-it('should block access to run migration endpoint when application is already installed', function () {
-    // Act and Assert.
-    post(route('installer.run_migration'))
+    ])
         ->assertRedirect(route('shop.home.index'));
 });
 
@@ -43,9 +36,9 @@ it('should block access to run seeder endpoint when application is already insta
         ->assertRedirect(route('shop.home.index'));
 });
 
-it('should block access to admin config setup endpoint when application is already installed', function () {
+it('should block access to create admin user endpoint when application is already installed', function () {
     // Act and Assert.
-    post(route('installer.admin_config_setup'), [
+    post(route('installer.create_admin_user'), [
         'admin' => 'Admin User',
         'email' => 'admin@example.com',
         'password' => 'admin123',
@@ -53,35 +46,24 @@ it('should block access to admin config setup endpoint when application is alrea
         ->assertRedirect(route('shop.home.index'));
 });
 
-it('should block access to sample products setup endpoint when application is already installed', function () {
+it('should block access to seed sample products endpoint when application is already installed', function () {
     // Act and Assert.
-    post(route('installer.sample_products_setup'), [
+    post(route('installer.seed_sample_products'), [
         'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
     ])
         ->assertRedirect(route('shop.home.index'));
 });
 
-it('should return 403 for ajax request to env file setup endpoint when already installed', function () {
+it('should return 403 for ajax request to run migration endpoint when already installed', function () {
     // Act and Assert.
-    post(route('installer.env_file_setup'), [
+    post(route('installer.run_migration'), [
         'db_hostname' => 'localhost',
         'db_port' => '3306',
         'db_name' => 'test_db',
         'db_username' => 'root',
         'db_password' => '',
     ], [
-        'X-Requested-With' => 'XMLHttpRequest',
-    ])
-        ->assertStatus(403)
-        ->assertJson([
-            'message' => trans('installer::app.installer.middleware.already-installed'),
-        ]);
-});
-
-it('should return 403 for ajax request to run migration endpoint when already installed', function () {
-    // Act and Assert.
-    post(route('installer.run_migration'), [], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertStatus(403)
@@ -110,9 +92,9 @@ it('should return 403 for ajax request to run seeder endpoint when already insta
         ]);
 });
 
-it('should return 403 for ajax request to admin config setup endpoint when already installed', function () {
+it('should return 403 for ajax request to create admin user endpoint when already installed', function () {
     // Act and Assert.
-    post(route('installer.admin_config_setup'), [
+    post(route('installer.create_admin_user'), [
         'admin' => 'Admin User',
         'email' => 'admin@example.com',
         'password' => 'admin123',
@@ -125,9 +107,9 @@ it('should return 403 for ajax request to admin config setup endpoint when alrea
         ]);
 });
 
-it('should return 403 for ajax request to sample products setup endpoint when already installed', function () {
+it('should return 403 for ajax request to seed sample products endpoint when already installed', function () {
     // Act and Assert.
-    post(route('installer.sample_products_setup'), [
+    post(route('installer.seed_sample_products'), [
         'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
     ], [
