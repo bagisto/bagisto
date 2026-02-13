@@ -42,7 +42,7 @@ async function createSimpleProduct(adminPage) {
      * Main product data which we will use to create the product.
      */
     const product = {
-        name: generateName(),
+        name: `simple-${Date.now()}`,
         sku: generateSKU(),
         productNumber: generateSKU(),
         shortDescription: generateDescription(),
@@ -133,15 +133,6 @@ async function createSimpleProduct(adminPage) {
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
 
     /**
-     * Categories Section.
-     */
-    await adminPage
-        .locator("label", { hasText: /^Men$/ })
-        .locator("span.icon-uncheckbox")
-        .first()
-        .click();
-
-    /**
      * Saving the product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -218,6 +209,36 @@ async function createConfigurableProduct(adminPage) {
         .click();
     await adminPage
         .getByRole("paragraph")
+        .filter({ hasText: "Black" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "White" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Orange" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Blue" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Pink" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Purple" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
         .filter({ hasText: "Green" })
         .locator("span")
         .click();
@@ -225,6 +246,14 @@ async function createConfigurableProduct(adminPage) {
         .getByRole("paragraph")
         .filter({ hasText: "Yellow" })
         .locator("span")
+        .click();
+    await adminPage
+        .locator("div:nth-child(2) > div > p > .icon-cross")
+        .first()
+        .click();
+    await adminPage
+        .locator("div:nth-child(2) > div > p > .icon-cross")
+        .first()
         .click();
     await adminPage
         .locator("div:nth-child(2) > div > p > .icon-cross")
@@ -443,25 +472,17 @@ async function createGroupedProduct(adminPage) {
     await adminPage.getByRole("textbox", { name: "Search by name" }).click();
     await adminPage
         .getByRole("textbox", { name: "Search by name" })
-        .fill("arc");
+        .fill("simple");
 
-    await adminPage
-        .locator("div.flex.justify-between.gap-2\\.5.border-b", {
-            has: adminPage.locator("p", {
-                hasText: "Arctic Bliss Stylish Winter Scarf",
-            }),
-        })
-        .locator('input[type="checkbox"]')
-        .check({ force: true });
-
-    await adminPage
-        .locator("div.flex.justify-between.gap-2\\.5.border-b", {
-            has: adminPage.locator("p", {
-                hasText: "Arctic Touchscreen Winter Gloves",
-            }),
-        })
-        .locator('input[type="checkbox"]')
-        .check({ force: true });
+   await adminPage
+    .locator("div.flex.justify-between.gap-2\\.5.border-b", {
+        has: adminPage.locator("p", {
+            hasText: "simple-",
+        }),
+    })
+    .first()
+    .locator('input[type="checkbox"]')
+    .check({ force: true });
 
     /**
      * Saving the added product.
@@ -472,13 +493,7 @@ async function createGroupedProduct(adminPage) {
      * Waiting for the products to be added.
      */
     await adminPage.waitForSelector(
-        'p:has-text("Arctic Touchscreen Winter Gloves")',
-    );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Warmth Wool Blend Socks")',
-    );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Bliss Stylish Winter")',
+        'p:has-text("simple")',
     );
 
     /**
@@ -591,15 +606,6 @@ async function createVirtualProduct(adminPage) {
      */
     await adminPage.locator('input[name="inventories\\[1\\]"]').click();
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
-
-    /**
-     * Categories Section.
-     */
-    await adminPage
-        .locator("label", { hasText: /^Men$/ })
-        .locator("span.icon-uncheckbox")
-        .first()
-        .click();
 
     /**
      * Saving the product.
@@ -1206,6 +1212,7 @@ export async function generateConfigurableOrder(adminPage) {
         "button.primary-button.w-max.px-11.py-3",
     );
     await nextBtn[nextBtn.length - 1].click();
+    await adminPage.waitForLoadState("networkidle");
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
 
@@ -1377,6 +1384,10 @@ export async function generateGroupOrder(adminPage) {
         "button.primary-button.w-max.px-11.py-3",
     );
     await nextBtn[nextBtn.length - 1].click();
+<<<<<<< HEAD
+=======
+    await adminPage.waitForLoadState("networkidle");
+>>>>>>> 0187eca2c6 (Fixed sales section file issue)
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
 
@@ -1815,7 +1826,12 @@ test.describe(" rma management ", () => {
 
 test.describe("sales management", () => {
     test("should be able to create orders", async ({ adminPage }) => {
+<<<<<<< HEAD
         await generateOrder(adminPage);
+=======
+        await createSimpleProduct(adminPage);
+        await generateSimpleOrder(adminPage);
+>>>>>>> 0187eca2c6 (Fixed sales section file issue)
     });
 
     test("should be comment on order", async ({ adminPage }) => {
@@ -2041,6 +2057,7 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
+            await adminPage.waitForTimeout(2000);
             await adminPage.getByRole("link", { name: "Sales" }).click();
 
             await adminPage
@@ -2057,6 +2074,7 @@ test.describe("sales management", () => {
         });
 
         test("should be able to cancel group order", async ({ adminPage }) => {
+            await createSimpleProduct(adminPage);
             await createGroupedProduct(adminPage);
             /**
              * create order
@@ -2066,7 +2084,9 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
+            await adminPage.waitForLoadState("networkidle");
             await adminPage.getByRole("link", { name: "Sales" }).click();
+            await adminPage.goto("admin/sales/orders");
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2093,7 +2113,9 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
+            await adminPage.waitForLoadState("networkidle");
             await adminPage.getByRole("link", { name: "Sales" }).click();
+            await adminPage.goto("admin/sales/orders");
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2140,7 +2162,8 @@ test.describe("sales management", () => {
         /**
          * create order
          */
-        await generateOrder(adminPage);
+        await createSimpleProduct(adminPage);
+        await generateSimpleOrder(adminPage);
         await adminPage.waitForTimeout(3000);
 
         /**
@@ -2164,7 +2187,8 @@ test.describe("sales management", () => {
     test("support mass status Change  to Paid for Invoices", async ({
         adminPage,
     }) => {
-        await generateOrder(adminPage);
+        await createSimpleProduct(adminPage);
+        await generateSimpleOrder(adminPage);
         await adminPage.waitForTimeout(5000);
 
         /**
