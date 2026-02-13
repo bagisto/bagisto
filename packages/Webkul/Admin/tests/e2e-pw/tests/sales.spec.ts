@@ -1384,10 +1384,7 @@ export async function generateGroupOrder(adminPage) {
         "button.primary-button.w-max.px-11.py-3",
     );
     await nextBtn[nextBtn.length - 1].click();
-<<<<<<< HEAD
-=======
     await adminPage.waitForLoadState("networkidle");
->>>>>>> 0187eca2c6 (Fixed sales section file issue)
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
 
@@ -1826,12 +1823,8 @@ test.describe(" rma management ", () => {
 
 test.describe("sales management", () => {
     test("should be able to create orders", async ({ adminPage }) => {
-<<<<<<< HEAD
-        await generateOrder(adminPage);
-=======
         await createSimpleProduct(adminPage);
         await generateSimpleOrder(adminPage);
->>>>>>> 0187eca2c6 (Fixed sales section file issue)
     });
 
     test("should be comment on order", async ({ adminPage }) => {

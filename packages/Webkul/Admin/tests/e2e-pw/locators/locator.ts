@@ -356,6 +356,7 @@ export class WebLocators {
     readonly successDeleteTaxCategory: Locator;
     readonly selectCountry: Locator;
     readonly saveCartRuleBTN: Locator;
+    readonly searchBar: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -967,7 +968,8 @@ export class WebLocators {
             "Tax Rates Assigned Categories cannot be deleted.",
         );
         this.selectCountry = page.locator('select[name="country"]');
-        this.saveCartRuleBTN = page.getByRole("button", {
+        this.searchBar=page.locator('input[name="query"]');
+         this.saveCartRuleBTN = page.getByRole("button", {
             name: " Save Cart Rule ",
         });
     }
