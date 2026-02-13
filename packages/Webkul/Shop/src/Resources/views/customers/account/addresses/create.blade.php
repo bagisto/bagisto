@@ -112,7 +112,7 @@
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
-                            type="text"
+                            type="email"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
