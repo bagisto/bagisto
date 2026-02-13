@@ -43,7 +43,13 @@ export default {
         /**
          * Registration of all global validators.
          */
-        Object.entries(all).forEach(([name, rule]) => defineRule(name, rule));
+        Object.entries(all).forEach(([name, rule]) => {
+            defineRule(name, (value, params, ctx) => {
+                const processedValue = typeof value === 'string' ? value.trim() : value;
+                
+                return rule(processedValue, params, ctx);
+            });
+        });
 
         defineRule("", () => true);
 
