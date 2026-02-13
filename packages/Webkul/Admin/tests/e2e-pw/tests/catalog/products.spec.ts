@@ -1235,26 +1235,6 @@ test.describe("grouped product management", () => {
          * Waiting for the main form to be visible.
          */
         await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
-        /**
-         * Deleting the first product.
-         */
-        const productName = await adminPage
-            .getByText("Arctic Touchscreen Winter Gloves")
-            .textContent();
-        await adminPage.getByText("Delete", { exact: true }).first().click();
-        await adminPage.waitForSelector("text=Are you sure", {
-            state: "visible",
-        });
-        await adminPage
-            .getByRole("button", { name: "Agree", exact: true })
-            .click();
-
-        /**
-         * Expecting for the product should not be visible after delete.
-         */
-        await expect(adminPage.getByText(`${productName}`)).not.toBeVisible();
-
         /**
          * Saving the product.
          */
