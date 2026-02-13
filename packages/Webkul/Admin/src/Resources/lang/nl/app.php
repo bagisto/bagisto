@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Omleidingslink',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Auteursrechtinhoud',
+                        'info' => 'Configureer de auteursrechtinhoud die in de voettekst van uw website wordt weergegeven om uw intellectuele eigendom te beschermen en de merkherkenning te verbeteren.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Speculatieregels inschakelen',
                         'info' => 'Stel instellingen in voor het in- of uitschakelen van geautomatiseerde speculatie-logica.',
