@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Tautan Pengalihan',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contenuto del copyright',
+                        'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Aktifkan Aturan Spekulasi',
                         'info' => 'Atur preferensi untuk mengaktifkan atau menonaktifkan logika spekulasi otomatis.',

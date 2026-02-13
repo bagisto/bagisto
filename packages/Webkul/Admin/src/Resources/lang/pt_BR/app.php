@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Link de Redirecionamento',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Conteúdo de direitos autorais',
+                        'info' => 'Configure o conteúdo de direitos autorais exibido no rodapé do seu site para proteger sua propriedade intelectual e aumentar o reconhecimento da marca.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Ativar regras de especulação',
                         'info' => 'Configure as definições para ativar ou desativar a lógica automática de especulação.',

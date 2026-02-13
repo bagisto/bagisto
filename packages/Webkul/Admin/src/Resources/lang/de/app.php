@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Umleitungslink',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Urheberrechtsinhalt',
+                        'info' => 'Konfigurieren Sie den im Footer Ihrer Website angezeigten Urheberrechtsinhalt, um Ihr geistiges Eigentum zu schützen und die Markenbekanntheit zu stärken.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekulationsregeln aktivieren',
                         'info' => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',

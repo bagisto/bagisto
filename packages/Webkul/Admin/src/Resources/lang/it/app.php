@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Link Reindirizzamento',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contenuto del copyright',
+                        'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Abilita regole di speculazione',
                         'info' => 'Configura le impostazioni per abilitare o disabilitare la logica di speculazione automatica.',
