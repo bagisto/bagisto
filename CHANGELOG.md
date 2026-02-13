@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
 
+- #10973 [fixed] - Fixed an unnecessary validation error triggered by VeeValidate on input fields containing spaces.
+
 ## **v2.3.10 (2nd of January 2026)** - *Release*
 
 - Fixed a security issue in the customer order reorder functionality.
