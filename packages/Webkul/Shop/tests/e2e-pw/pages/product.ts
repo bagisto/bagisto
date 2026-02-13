@@ -99,11 +99,11 @@ export class ProductCreation {
         await this.locators.saveButton.click();
         await this.locators.addProduct.first().click();
         await this.locators.searchByNameInput.click();
-        await this.locators.searchByNameInput.fill("omni");
+        await this.locators.searchByNameInput.fill("simple");
         await this.page.waitForTimeout(2000);
         const productRowCheck1 = this.page
             .locator("div.flex.justify-between")
-            .filter({ hasText: "OmniHeat" });
+            .filter({ hasText: "simple" }).first();
         await productRowCheck1
             .locator("input[type='checkbox']")
             .first()
@@ -113,7 +113,7 @@ export class ProductCreation {
             });
         const productRowCheck2 = this.page
             .locator("div.flex.justify-between")
-            .filter({ hasText: "OmniHeat" })
+            .filter({ hasText: "simple" })
             .nth(1);
         await productRowCheck2
             .locator("input[type='checkbox']")
