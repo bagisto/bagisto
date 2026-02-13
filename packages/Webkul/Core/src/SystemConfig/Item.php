@@ -55,6 +55,7 @@ class Item
                 default: $field['default'] ?? null,
                 channel_based: $field['channel_based'] ?? null,
                 locale_based: $field['locale_based'] ?? null,
+                placeholder: $field['placeholder'] ?? null,
                 options: $this->formatOptions($field['options'] ?? null),
                 is_visible: true,
             );

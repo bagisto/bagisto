@@ -4202,7 +4202,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Google. Moet overeenkomen met de URL in de Google-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Google. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de Google-console.',
                             ],
                         ],
 
@@ -4221,7 +4221,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Facebook. Moet overeenkomen met de URL in de app-instellingen van Facebook.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Facebook. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de app-instellingen van Facebook.',
                             ],
                         ],
 
@@ -4240,7 +4240,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via GitHub. Moet overeenkomen met de URL in de GitHub-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via GitHub. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de GitHub-console.',
                             ],
                         ],
 
@@ -4259,7 +4259,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via LinkedIn. Moet overeenkomen met de URL in de LinkedIn-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via LinkedIn. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de LinkedIn-console.',
                             ],
                         ],
 
@@ -4278,7 +4278,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Twitter. Moet overeenkomen met de URL in de Twitter-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Twitter. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de Twitter-console.',
                             ],
                         ],
                     ],

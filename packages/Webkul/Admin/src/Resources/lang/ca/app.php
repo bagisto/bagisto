@@ -4202,7 +4202,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Ha de coincidir amb la URL configurada a la teva consola de Google.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Google.',
                             ],
                         ],
 
@@ -4221,7 +4221,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
                             ],
                         ],
 
@@ -4240,7 +4240,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
                             ],
                         ],
 
@@ -4259,7 +4259,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
                             ],
                         ],
 
@@ -4278,7 +4278,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
                             ],
                         ],
                     ],
