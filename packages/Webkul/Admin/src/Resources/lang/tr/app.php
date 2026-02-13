@@ -4202,7 +4202,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Google ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Google konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Google ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Google konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4221,7 +4221,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Facebook ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Facebook uygulama ayarlarınızda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Facebook ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Facebook uygulama ayarlarınızda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4240,7 +4240,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar GitHub ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. GitHub konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar GitHub ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). GitHub konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4259,7 +4259,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar LinkedIn ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. LinkedIn konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar LinkedIn ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). LinkedIn konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4278,7 +4278,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Twitter ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Twitter konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Twitter ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Twitter konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
                     ],

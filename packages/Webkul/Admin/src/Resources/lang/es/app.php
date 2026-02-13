@@ -4202,7 +4202,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Debe coincidir con la URL configurada en tu consola de Google.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de Google.',
                             ],
                         ],
 
@@ -4221,7 +4221,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
                             ],
                         ],
 
@@ -4240,7 +4240,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Debe coincidir con la URL configurada en tu consola de GitHub.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de GitHub.',
                             ],
                         ],
 
@@ -4259,7 +4259,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Debe coincidir con la URL configurada en tu consola de LinkedIn.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de LinkedIn.',
                             ],
                         ],
 
@@ -4278,7 +4278,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Debe coincidir con la URL configurada en tu consola de Twitter.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de Twitter.',
                             ],
                         ],
                     ],
