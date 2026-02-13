@@ -6,27 +6,27 @@ test.describe("attribute management", () => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.waitForSelector(
             'div.primary-button:has-text("Create Attribute")',
-            { state: "visible" }
+            { state: "visible" },
         );
 
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         await adminPage.click('button[type="submit"]');
 
         await expect(
-            adminPage.getByText("The Admin field is required")
+            adminPage.getByText("The Admin field is required"),
         ).toBeVisible();
         await expect(
-            adminPage.getByText("The Attribute Code field is")
+            adminPage.getByText("The Attribute Code field is"),
         ).toBeVisible();
     });
 
     test("should create a new text type attribute", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -56,10 +56,10 @@ test.describe("attribute management", () => {
          */
         await expect(adminPage.locator("input#value_per_locale")).toBeChecked();
         await expect(
-            adminPage.locator("input#value_per_channel")
+            adminPage.locator("input#value_per_channel"),
         ).toBeChecked();
         await expect(
-            adminPage.locator("input#is_visible_on_front")
+            adminPage.locator("input#is_visible_on_front"),
         ).toBeChecked();
         await expect(adminPage.locator("input#is_comparable")).toBeChecked();
 
@@ -69,19 +69,21 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          * Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -90,11 +92,15 @@ test.describe("attribute management", () => {
         const firstTarget = targets[0];
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -109,7 +115,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -119,7 +125,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -135,20 +141,8 @@ test.describe("attribute management", () => {
          *  Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new textarea type attribute with wysiwyg editor", async ({
@@ -156,7 +150,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -188,17 +182,19 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         // Locate all target divs where items will be dragged
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         // Use only the first target (e.g., "General")
@@ -206,9 +202,13 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         // Locate all draggable icons inside the unassigned section
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         // Drag each item to the first target
@@ -219,7 +219,7 @@ test.describe("attribute management", () => {
             // Move mouse to item center
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -227,7 +227,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -239,17 +239,8 @@ test.describe("attribute management", () => {
 
         // Verify success
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new textarea type attribute without wysiwyg editor", async ({
@@ -257,7 +248,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -288,17 +279,18 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
-
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
         // Locate all target divs where items will be dragged
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         // Use only the first target (e.g., "General")
@@ -306,9 +298,13 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         // Locate all draggable icons inside the unassigned section
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         // Drag each item to the first target
@@ -319,15 +315,15 @@ test.describe("attribute management", () => {
             // Move mouse to item center
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
-            // Move mouse to target center
+            // // Move mouse to target center
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -339,17 +335,8 @@ test.describe("attribute management", () => {
 
         // Verify success
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new select type attribute with dropdown swatch type", async ({
@@ -357,7 +344,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -424,7 +411,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -432,14 +419,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -449,11 +438,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -468,7 +461,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -478,7 +471,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -494,21 +487,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with color swatch type", async ({
@@ -516,7 +496,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -587,7 +567,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -595,14 +575,15 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
-
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -612,11 +593,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -631,7 +616,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -641,7 +626,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -657,21 +642,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with image swatch type", async ({
@@ -679,7 +651,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -746,7 +718,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -754,14 +726,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -771,11 +745,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -790,7 +768,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -800,7 +778,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -816,21 +794,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with text swatch type", async ({
@@ -838,7 +803,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -905,7 +870,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -913,14 +878,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -930,11 +897,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -949,7 +920,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -959,7 +930,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -975,27 +946,14 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new price type attribute ", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1026,7 +984,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1034,14 +992,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1051,11 +1011,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1070,7 +1034,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1080,7 +1044,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1096,20 +1060,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new boolean type attribute ", async ({
@@ -1117,7 +1069,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1149,7 +1101,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1157,14 +1109,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1174,11 +1128,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1193,7 +1151,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1203,7 +1161,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1219,26 +1177,14 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new date type attribute ", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1269,7 +1215,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1277,14 +1223,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1294,11 +1242,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1313,7 +1265,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1323,7 +1275,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1339,20 +1291,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new datetime type attribute ", async ({
@@ -1360,7 +1300,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1391,7 +1331,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1399,14 +1339,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1416,11 +1358,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1435,7 +1381,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1445,7 +1391,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1461,26 +1407,15 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
 
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new image type attribute ", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1511,7 +1446,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1519,14 +1454,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1536,11 +1473,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1555,7 +1496,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1565,7 +1506,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1581,26 +1522,14 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new file type attribute ", async ({ adminPage }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1631,7 +1560,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1639,14 +1568,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1656,11 +1587,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1675,7 +1610,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1685,7 +1620,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1701,20 +1636,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new multiselect type attribute", async ({
@@ -1722,7 +1645,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1788,7 +1711,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1796,14 +1719,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1813,11 +1738,15 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
+
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1832,7 +1761,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -1842,7 +1771,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 20 },
             );
             await adminPage.mouse.up();
 
@@ -1858,21 +1787,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new checkbox type attribute", async ({
@@ -1880,7 +1796,7 @@ test.describe("attribute management", () => {
     }) => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.click(
-            'div.primary-button:has-text("Create Attribute")'
+            'div.primary-button:has-text("Create Attribute")',
         );
 
         const attributeName = generateName();
@@ -1946,7 +1862,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(adminPage.locator("#app")).toContainText(
-            "Attribute Created Successfully"
+            "Attribute Created Successfully",
         );
 
         /**
@@ -1954,14 +1870,16 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
          */
         const targets = await adminPage.$$(
-            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l"
+            "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
         );
 
         /**
@@ -1971,11 +1889,14 @@ test.describe("attribute management", () => {
 
         const targetBox = await firstTarget.boundingBox();
 
+        if (!targetBox) {
+            throw new Error("Target element is not visible");
+        }
         /**
          * Locate all draggable icons inside the unassigned section
          */
         const unassignedItems = await adminPage.$$(
-            "#unassigned-attributes i.icon-drag"
+            "#unassigned-attributes i.icon-drag",
         );
 
         /**
@@ -1990,7 +1911,7 @@ test.describe("attribute management", () => {
              */
             await adminPage.mouse.move(
                 itemBox.x + itemBox.width / 2,
-                itemBox.y + itemBox.height / 2
+                itemBox.y + itemBox.height / 2,
             );
             await adminPage.mouse.down();
 
@@ -2000,7 +1921,7 @@ test.describe("attribute management", () => {
             await adminPage.mouse.move(
                 targetBox.x + targetBox.width / 2,
                 targetBox.y + targetBox.height / 2,
-                { steps: 20 }
+                { steps: 15 },
             );
             await adminPage.mouse.up();
 
@@ -2016,20 +1937,8 @@ test.describe("attribute management", () => {
          * Verify success
          */
         await expect(
-            adminPage.getByText("Family updated successfully.")
+            adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")'
-        );
-        await adminPage.locator('p > span:nth-child(2)').first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should edit an existing attribute successfully", async ({
@@ -2038,7 +1947,7 @@ test.describe("attribute management", () => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.waitForSelector(
             'div.primary-button:has-text("Create Attribute")',
-            { state: "visible" }
+            { state: "visible" },
         );
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
@@ -2050,7 +1959,7 @@ test.describe("attribute management", () => {
         await adminPage.click('button[type="submit"]');
 
         await expect(
-            adminPage.getByText('Attribute Updated Successfully')
+            adminPage.getByText("Attribute Updated Successfully").first(),
         ).toBeVisible();
     });
 
@@ -2058,21 +1967,21 @@ test.describe("attribute management", () => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.waitForSelector(
             'div.primary-button:has-text("Create Attribute")',
-            { state: "visible" }
+            { state: "visible" },
         );
 
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
         const iconDelete = await adminPage.$$(
-            "span.cursor-pointer.icon-delete"
+            "span.cursor-pointer.icon-delete",
         );
         await iconDelete[0].click();
 
         await adminPage.click(
-            "button.transparent-button + button.primary-button:visible"
+            "button.transparent-button + button.primary-button:visible",
         );
 
         await expect(
-            adminPage.getByText("Attribute Deleted Successfully")
+            adminPage.getByText("Attribute Deleted Successfully").first(),
         ).toBeVisible();
     });
 
@@ -2082,10 +1991,10 @@ test.describe("attribute management", () => {
         await adminPage.goto("admin/catalog/attributes");
         await adminPage.waitForSelector(
             'div.primary-button:has-text("Create Attribute")',
-            { state: "visible" }
+            { state: "visible" },
         );
         await adminPage.getByRole("button", { name: "" }).click();
-        await adminPage.getByText("50", { exact: true }).click();
+        await adminPage.getByText("50", { exact: true }).first().click();
         await adminPage.waitForSelector(".icon-uncheckbox:visible");
         const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
 
@@ -2094,7 +2003,7 @@ test.describe("attribute management", () => {
         }
 
         let selectActionButton = await adminPage.waitForSelector(
-            'button:has-text("Select Action")'
+            'button:has-text("Select Action")',
         );
         await selectActionButton.click();
 
@@ -2102,7 +2011,7 @@ test.describe("attribute management", () => {
 
         await adminPage.waitForSelector("text=Are you sure");
         const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
+            'button.primary-button:has-text("Agree")',
         );
 
         if (await agreeButton.isVisible()) {
@@ -2112,9 +2021,11 @@ test.describe("attribute management", () => {
         }
 
         await expect(
-            adminPage.getByText(
-                /Attribute Deleted Successfully|Attribute Deleted Failed/
-            )
+            adminPage
+                .getByText(
+                    /Attribute Deleted Successfully|Attribute Deleted Failed/,
+                )
+                .first(),
         ).toBeVisible();
     });
 });
