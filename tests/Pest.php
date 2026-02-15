@@ -18,6 +18,7 @@ uses(Webkul\Core\Tests\CoreTestCase::class)->in('../packages/Webkul/Core/tests')
 uses(Webkul\DataGrid\Tests\DataGridTestCase::class)->in('../packages/Webkul/DataGrid/tests');
 uses(Webkul\Installer\Tests\InstallerTestCase::class)->in('../packages/Webkul/Installer/tests');
 uses(Webkul\Shop\Tests\ShopTestCase::class)->in('../packages/Webkul/Shop/tests');
+uses(Webkul\Marketplace\Tests\MarketplaceTestCase::class)->in('../packages/Webkul/Marketplace/tests');
 
 /*
 |--------------------------------------------------------------------------

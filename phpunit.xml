@@ -30,6 +30,15 @@
         <testsuite name="Shop Feature Test">
             <directory suffix="Test.php">packages/Webkul/Shop/tests/Feature</directory>
         </testsuite>
+
+        <!-- Marketplace package testsuites. -->
+        <testsuite name="Marketplace Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Marketplace/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Marketplace Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Marketplace/tests/Feature</directory>
+        </testsuite>
     </testsuites>
 
     <source>
